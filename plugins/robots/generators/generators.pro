@@ -20,6 +20,9 @@ SUBDIRS = \
 	trikQtsGeneratorLibrary \
 	trikV6QtsGenerator \
 	trikV62QtsGenerator \
+	trikCppGeneratorLibrary \
+	trikV6CppGenerator \
+	trikV62CppGenerator \
 	trikFSharpGeneratorLibrary \
 	trikV6FSharpGenerator \
 	trikV62FSharpGenerator \
@@ -35,12 +38,15 @@ SUBDIRS = \
 	nxtOsekCGenerator \
 	nxtRussianCGenerator \
 	ev3GeneratorBase \
-	ev3RbfGenerator \
+	ev3RbfGenerator
 
 trikGeneratorBase.subdir = $$PWD/trik/trikGeneratorBase
 trikQtsGeneratorLibrary.subdir = $$PWD/trik/trikQtsGeneratorLibrary
 trikV6QtsGenerator.subdir = $$PWD/trik/trikV6QtsGenerator
 trikV62QtsGenerator.subdir = $$PWD/trik/trikV62QtsGenerator
+trikCppGeneratorLibrary.subdir = $$PWD/trik/trikCppGeneratorLibrary
+trikV6CppGenerator.subdir = $$PWD/trik/trikV6CppGenerator
+trikV62CppGenerator.subdir = $$PWD/trik/trikV62CppGenerator
 trikFSharpGeneratorLibrary.subdir = $$PWD/trik/trikFSharpGeneratorLibrary
 trikV6FSharpGenerator.subdir = $$PWD/trik/trikV6FSharpGenerator
 trikV62FSharpGenerator.subdir = $$PWD/trik/trikV62FSharpGenerator
@@ -62,6 +68,9 @@ trikGeneratorBase.depends = generatorBase
 trikQtsGeneratorLibrary.depends = trikGeneratorBase
 trikV6QtsGenerator.depends = trikQtsGeneratorLibrary
 trikV62QtsGenerator.depends = trikQtsGeneratorLibrary
+trikCppGeneratorLibrary.depends = trikGeneratorBase
+trikV6CppGenerator.depends = trikCppGeneratorLibrary
+trikV62CppGenerator.depends = trikCppGeneratorLibrary
 trikFSharpGeneratorLibrary.depends = trikGeneratorBase
 trikV6FSharpGenerator.depends = trikFSharpGeneratorLibrary
 trikV62FSharpGenerator.depends = trikFSharpGeneratorLibrary
