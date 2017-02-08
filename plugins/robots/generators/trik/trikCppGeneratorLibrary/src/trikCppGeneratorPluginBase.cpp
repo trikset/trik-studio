@@ -19,6 +19,8 @@
 #include <QtCore/QStateMachine>
 #include <QtCore/QState>
 #include <QtCore/QFinalState>
+#include <QtCore/QDir>
+#include <QtCore/QProcess>
 
 #include <qrkernel/logging.h>
 #include <trikGeneratorBase/trikGeneratorPluginBase.h>
@@ -165,12 +167,12 @@ generatorBase::MasterGeneratorBase *TrikCppGeneratorPluginBase::masterGenerator(
 
 QString TrikCppGeneratorPluginBase::defaultFilePath(const QString &projectName) const
 {
-	return QString("trik/%1/%1.js").arg(projectName);
+	return QString("trik/%1/%1.cpp").arg(projectName);
 }
 
 text::LanguageInfo TrikCppGeneratorPluginBase::language() const
 {
-	return qReal::text::Languages::javaScript({"brick"});
+	return qReal::text::Languages::c({"brick"});
 }
 
 QString TrikCppGeneratorPluginBase::generatorName() const
@@ -188,29 +190,56 @@ void TrikCppGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExtens
 
 void TrikCppGeneratorPluginBase::uploadProgram()
 {
+	QProcess compileProcess;
 	const QFileInfo fileInfo = generateCodeForProcessing();
 
-	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
-		disableButtons();
-		mUploadProgramProtocol->run(fileInfo);
-	} else {
-		QLOG_ERROR() << "Code generation failed, aborting";
+	const QString compileBatch = "C:\\RTK\\STM32F4\\mybuild\\compileAndUpload.bat";
+
+	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
+
+    #ifdef Q_OS_WIN
+	    compileProcess.start("cmd", {"/C", compileBatch});
+    #endif
+
+	compileProcess.waitForStarted();
+	if (compileProcess.state() != QProcess::Running) {
+		mMainWindowInterface->errorReporter()->addError(tr("Unable to launch assembly"));
+		return;
 	}
+
+	compileProcess.waitForFinished();
+
+	/// @todo: will not work since PascalABC uses console device instead of stdout or stderr for error output, so
+	///        it will always return exit code 0 (even when using console command that actually captures exit code,
+	///        start cmd /c "pabcnetc.exe <file name>.pas || call echo %errorLevel% > exitcode.txt"
+	///        Need to patch PascalABC.NET compiler to fix that. Or maybe it already can do it, but more investigation
+	///        is needed.
+	//if (compileProcess.exitCode() != 0) {
+	    //mMainWindowInterface->errorReporter()->addError(tr("Assembly failed"));
+	    QStringList errors = QString(compileProcess.readAllStandardError()).split("\n", QString::SkipEmptyParts);
+		errors << QString(compileProcess.readAllStandardOutput()).split("\n", QString::SkipEmptyParts);
+		for (const auto &error : errors) {
+			mMainWindowInterface->errorReporter()->addInformation(error);
+		}
+
+		return;
+	// }
 }
 
 void TrikCppGeneratorPluginBase::runProgram()
 {
-	const QFileInfo fileInfo = generateCodeForProcessing();
-	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
-		if (mRunProgramProtocol) {
-			disableButtons();
-			mRunProgramProtocol->run(fileInfo);
-		} else {
-			QLOG_ERROR() << "Run program protocol is not initialized";
-		}
-	} else {
-		QLOG_ERROR() << "Code generation failed, aborting";
-	}
+	uploadProgram();
+//	const QFileInfo fileInfo = generateCodeForProcessing();
+//	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
+//		if (mRunProgramProtocol) {
+//			disableButtons();
+//			mRunProgramProtocol->run(fileInfo);
+//		} else {
+//			QLOG_ERROR() << "Run program protocol is not initialized";
+//		}
+//	} else {
+//		QLOG_ERROR() << "Code generation failed, aborting";
+//	}
 }
 
 void TrikCppGeneratorPluginBase::stopRobot()

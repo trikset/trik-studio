@@ -32,7 +32,7 @@ TrikCppMasterGenerator::TrikCppMasterGenerator(const qrRepo::RepoApi &repo
 
 QString TrikCppMasterGenerator::targetPath()
 {
-	return QString("%1/%2.js").arg(mProjectDir, mProjectName);
+	return QString("%1/%2.cpp").arg(mProjectDir, mProjectName);
 }
 
 bool TrikCppMasterGenerator::supportsGotoGeneration() const

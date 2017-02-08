@@ -1,2 +1,1 @@
-brick.display().setBackground("@@COLOR@@");
-@@REDRAW@@
+brick.set_display_background_color("@@COLOR@@");

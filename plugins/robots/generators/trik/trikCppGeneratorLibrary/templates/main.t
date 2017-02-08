@@ -1,5 +1,7 @@
-var __interpretation_started_timestamp__;
+#include "brick.h"
+
 @@VARIABLES@@
+Brick brick;
 
 @@SUBPROGRAMS_FORWARDING@@
 
@@ -9,8 +11,13 @@ var __interpretation_started_timestamp__;
 
 @@THREADS@@
 
-var main = function()
+void genMain(void)
 {
-	__interpretation_started_timestamp__ = Date.now();
 @@MAIN_CODE@@
+}
+
+int main(void)
+{
+    genMain();
+    return 0;
 }

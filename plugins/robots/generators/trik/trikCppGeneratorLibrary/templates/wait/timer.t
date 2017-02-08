@@ -1,1 +1,1 @@
-script.wait(@@DELAY@@);
+brick.wait(@@DELAY@@);

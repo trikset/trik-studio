@@ -1,1 +1,1 @@
-brick.display().redraw();
+brick.display_redraw();

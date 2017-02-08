@@ -1,2 +1,2 @@
-brick.display().drawPoint(@@XCoordinatePix@@, @@YCoordinatePix@@);
+brick.display_drawPoint(@@XCoordinatePix@@, @@YCoordinatePix@@);
 @@REDRAW@@

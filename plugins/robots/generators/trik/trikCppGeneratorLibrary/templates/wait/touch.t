@@ -1,3 +1,3 @@
 while (brick.sensor(@@PORT@@).read() <= 0) {
-	script.wait(10);
+	brick.wait(10);
 }
