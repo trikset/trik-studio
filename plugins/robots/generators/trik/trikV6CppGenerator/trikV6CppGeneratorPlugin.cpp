@@ -26,7 +26,7 @@ TrikV6CppGeneratorPlugin::TrikV6CppGeneratorPlugin()
 					"trikKit"
 					, "trikKitRobot"
                     , "TrikCppGeneratorRobotModel"
-					, tr("Generation (Java Script)")
+                    , tr("Generation (C++)")
 					, 9 /* After 2D model */)
 			, new blocks::TrikV6BlocksFactory()
             , {":/trikV6Cpp/templates", ":/trikCpp/templates"})
