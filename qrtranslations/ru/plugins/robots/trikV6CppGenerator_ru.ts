@@ -2,11 +2,11 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
-    <name>trik::qts::TrikV6QtsGeneratorPlugin</name>
+    <name>trik::cpp::TrikV6CppGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikV6QtsGenerator/trikV6QtsGeneratorPlugin.cpp" line="30"/>
-        <source>Generation (Java Script)</source>
-        <translation>Генерация (JavaScript)</translation>
+        <location filename="../../../../plugins/robots/generators/trik/trikV6CppGenerator/trikV6CppGeneratorPlugin.cpp" line="30"/>
+        <source>Generation (C++)</source>
+        <translation>Генерация (C++)</translation>
     </message>
 </context>
 </TS>

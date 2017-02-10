@@ -96,10 +96,10 @@
     </message>
 </context>
 <context>
-    <name>trik::qts::TrikV6QtsGeneratorPlugin</name>
+    <name>trik::cpp::TrikV6CppGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikV6QtsGenerator/trikV6QtsGeneratorPlugin.cpp" line="30"/>
-        <source>Generation (Java Script)</source>
+        <location filename="../../../../plugins/robots/generators/trik/trikV6CppGenerator/trikV6CppGeneratorPlugin.cpp" line="30"/>
+        <source>Generation (C++)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

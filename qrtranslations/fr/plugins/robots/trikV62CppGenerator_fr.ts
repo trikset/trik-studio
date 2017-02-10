@@ -53,10 +53,10 @@
     </message>
 </context>
 <context>
-    <name>trik::qts::TrikQtsGeneratorPlugin</name>
+    <name>trik::cpp::TrikCppGeneratorPlugin</name>
     <message>
-        <source>Generation (QtScript)</source>
-        <translation type="vanished">Génération (QtScript)</translation>
+        <source>Generation (C++)</source>
+        <translation type="vanished">Génération (C++)</translation>
     </message>
     <message>
         <source>Generate TRIK code</source>
@@ -96,10 +96,10 @@
     </message>
 </context>
 <context>
-    <name>trik::qts::TrikV62QtsGeneratorPlugin</name>
+    <name>trik::cpp::TrikV62CppGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikV62QtsGenerator/trikV62QtsGeneratorPlugin.cpp" line="30"/>
-        <source>Generation (Java Script)</source>
+        <location filename="../../../../plugins/robots/generators/trik/trikV62CppGenerator/trikV62CppGeneratorPlugin.cpp" line="30"/>
+        <source>Generation (C++)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

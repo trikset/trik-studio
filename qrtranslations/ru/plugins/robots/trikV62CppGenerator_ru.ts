@@ -57,18 +57,18 @@
     </message>
 </context>
 <context>
-    <name>trik::qts::TrikQtsGeneratorPlugin</name>
+    <name>trik::cpp::TrikCppGeneratorPlugin</name>
     <message>
-        <source>Generation (QtScript)</source>
-        <translation type="vanished">Генерация (QtScript)</translation>
+        <source>Generation (C++)</source>
+        <translation type="vanished">Генерация (C++)</translation>
     </message>
     <message>
-        <source>Generation (Java Script)</source>
-        <translation type="vanished">Генерация (Java Script)</translation>
+        <source>Generation (Cpp)</source>
+        <translation type="vanished">Генерация (C++)</translation>
     </message>
     <message>
         <source>Generate TRIK code</source>
-        <translation type="vanished">Генерировать код на QtScript</translation>
+        <translation type="vanished">Генерировать код на C++</translation>
     </message>
     <message>
         <source>Upload program</source>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Generate TRIK Code</source>
-        <translation type="vanished">Сгенерированть код для ТРИК на QtScript</translation>
+        <translation type="vanished">Сгенерированть код для ТРИК на C++</translation>
     </message>
     <message>
         <source>Upload TRIK Program</source>
@@ -99,8 +99,8 @@
         <translation type="vanished">Остановить выполнение программы для TRIK</translation>
     </message>
     <message>
-        <source>QtScript Source File</source>
-        <translation type="vanished">Файл с исходным кодом на QtScript</translation>
+        <source>C++ Source File</source>
+        <translation type="vanished">Файл с исходным кодом на C++</translation>
     </message>
     <message>
         <source>No connection to robot</source>
@@ -108,11 +108,11 @@
     </message>
 </context>
 <context>
-    <name>trik::qts::TrikV62QtsGeneratorPlugin</name>
+    <name>trik::cpp::TrikV62CppGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikV62QtsGenerator/trikV62QtsGeneratorPlugin.cpp" line="30"/>
-        <source>Generation (Java Script)</source>
-        <translation>Генерация (JavaScript)</translation>
+        <location filename="../../../../plugins/robots/generators/trik/trikV62CppGenerator/trikV62CppGeneratorPlugin.cpp" line="30"/>
+        <source>Generation (C++)</source>
+        <translation>Генерация (C++)</translation>
     </message>
 </context>
 </TS>

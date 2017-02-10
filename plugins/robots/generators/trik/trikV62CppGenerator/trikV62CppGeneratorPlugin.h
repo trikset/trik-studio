@@ -24,7 +24,7 @@ class TrikV62GeneratorRobotModel;
 
 namespace cpp {
 
-/// Javascript generator specialization for TRIK 6.2 ("new case", with encoders marked as E1 - E4).
+/// С++ generator specialization for TRIK 6.2 ("new case", with encoders marked as E1 - E4).
 class TrikV62CppGeneratorPlugin : public TrikCppGeneratorPluginBase
 {
 	Q_OBJECT
