@@ -223,5 +223,7 @@
         <file>templates/buttons/RightButton.t</file>
         <file>templates/buttons/UpButton.t</file>
         <file>templates/subprograms/subprogramArgument.t</file>
+        <file>templates/label.t</file>
+        <file>templates/goto.t</file>
     </qresource>
 </RCC>

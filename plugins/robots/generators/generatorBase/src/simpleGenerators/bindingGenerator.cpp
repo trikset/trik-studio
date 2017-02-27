@@ -29,6 +29,7 @@ BindingGenerator::BindingGenerator(const qrRepo::RepoApi &repo
 	, mPathToTemplate(pathToTemplate)
 	, mBindings(bindings)
 {
+//	mBindings.append(Binding::createStaticConverting("@@ID@@", id.id(), customizer.factory()->nameNormalizerConverter()));
 }
 
 BindingGenerator::~BindingGenerator()

@@ -37,7 +37,7 @@ QString TrikQtsMasterGenerator::targetPath()
 
 bool TrikQtsMasterGenerator::supportsGotoGeneration() const
 {
-	return false;
+	return true;
 }
 
 generatorBase::PrimaryControlFlowValidator *TrikQtsMasterGenerator::createValidator()

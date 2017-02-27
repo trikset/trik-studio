@@ -50,12 +50,16 @@ void GotoControlFlowGenerator::visitRegular(const Id &id, const QList<LinkInfo> 
 	SemanticNode *nextNode = nullptr;
 	if (mSemanticTree->findNodeFor(links[0].target)) {
 		nextNode = produceGotoNode(links[0].target);
+		thisNode->insertSiblingAfterThis(nextNode);
 	} else {
 		nextNode = mSemanticTree->produceNodeFor(links[0].target);
 		nextNode->addLabel();
+//		if (fancyOption) {
+		SemanticNode *gotoNode = produceGotoNode(links[0].target);
+		thisNode->insertSiblingAfterThis(gotoNode);
+		dynamic_cast<NonZoneNode *>(gotoNode)->insertSiblingAfterThis(nextNode);
+//		}
 	}
-
-	thisNode->insertSiblingAfterThis(nextNode);
 }
 
 void GotoControlFlowGenerator::visitConditional(const Id &id, const QList<LinkInfo> &links)

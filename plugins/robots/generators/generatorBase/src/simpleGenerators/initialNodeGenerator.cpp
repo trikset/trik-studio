@@ -14,6 +14,8 @@
 
 #include "initialNodeGenerator.h"
 
+#include "generatorBase/generatorCustomizer.h"
+
 using namespace generatorBase::simple;
 using namespace qReal;
 
@@ -21,6 +23,7 @@ InitialNodeGenerator::InitialNodeGenerator(const qrRepo::RepoApi &repo
 		, GeneratorCustomizer &customizer
 		, const Id &id
 		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, "initialNode.t", QList<Binding *>(), parent)
+	: BindingGenerator(repo, customizer, id, "initialNode.t", { Binding::createStaticConverting("@@ID@@", id.id()
+																								, customizer.factory()->nameNormalizerConverter()) }, parent)
 {
 }

@@ -91,25 +91,25 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 	}
 
 	QString mainCode;
-	const semantics::SemanticTree *mainControlFlow = mReadableControlFlowGenerator->generate();
-	if (mainControlFlow && !mReadableControlFlowGenerator->cantBeGeneratedIntoStructuredCode()) {
-		mainCode = mainControlFlow->toString(1, indentString);
-		const parts::Subprograms::GenerationResult subprogramsResult = mCustomizer->factory()->subprograms()->generate(
-				mReadableControlFlowGenerator, indentString);
-		switch (subprogramsResult) {
-		case parts::Subprograms::GenerationResult::success:
-			break;
-		case parts::Subprograms::GenerationResult::error:
-			mainCode = QString();
-			break;
-		case parts::Subprograms::GenerationResult::fatalError:
-			return QString();
-		}
-	} else {
-		if (mReadableControlFlowGenerator->errorsOccured()) {
-			return QString();
-		}
-	}
+//	const semantics::SemanticTree *mainControlFlow = mReadableControlFlowGenerator->generate();
+//	if (mainControlFlow && !mReadableControlFlowGenerator->cantBeGeneratedIntoStructuredCode()) {
+//		mainCode = mainControlFlow->toString(1, indentString);
+//		const parts::Subprograms::GenerationResult subprogramsResult = mCustomizer->factory()->subprograms()->generate(
+//				mReadableControlFlowGenerator, indentString);
+//		switch (subprogramsResult) {
+//		case parts::Subprograms::GenerationResult::success:
+//			break;
+//		case parts::Subprograms::GenerationResult::error:
+//			mainCode = QString();
+//			break;
+//		case parts::Subprograms::GenerationResult::fatalError:
+//			return QString();
+//		}
+//	} else {
+//		if (mReadableControlFlowGenerator->errorsOccured()) {
+//			return QString();
+//		}
+//	}
 
 	if (mainCode.isEmpty() && supportsGotoGeneration()) {
 		mErrorReporter.addInformation(tr("This diagram cannot be generated into the structured code."\
