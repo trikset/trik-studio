@@ -193,7 +193,8 @@ void TrikCppGeneratorPluginBase::uploadProgram()
 	QProcess compileProcess;
 	const QFileInfo fileInfo = generateCodeForProcessing();
 
-	const QString compileBatch = "C:\\RTK\\STM32F4\\mybuild\\compileAndUpload.bat";
+//	const QString compileBatch = "C:\\RTK\\STM32F4\\mybuild\\compileAndUpload.bat";
+	const QString compileBatch = "C:\\STM32_Diploma\\STM32-template\\STM32-template-project\\compileAndUpload.bat";
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 

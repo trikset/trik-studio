@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/stm32/cpp">
+        <file>images/uploadAndExecuteProgram.svg</file>
+        <file>images/uploadProgram.svg</file>
+        <file>images/stopRobot.svg</file>
+        <file>images/run.png</file>
+        <file>images/stop.png</file>
+        <file>images/generateCppCode.svg</file>
+        <file>images/switch-to-stm32-cpp.svg</file>
+    </qresource>
+</RCC>

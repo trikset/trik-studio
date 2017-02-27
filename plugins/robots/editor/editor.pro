@@ -23,12 +23,15 @@ SUBDIRS = \
 	nxt \
 	ev3 \
 	trik \
+	stm32 \
 
 common.file = $$PWD/common/robotsMetamodel.pro
 nxt.file = $$PWD/nxt/nxtMetamodel.pro
 ev3.file = $$PWD/ev3/ev3Metamodel.pro
 trik.file = $$PWD/trik/trikMetamodel.pro
+stm32.file = $$PWD/stm32/stm32Metamodel.pro
 
 nxt.depends = common
 ev3.depends = common
 trik.depends = common
+stm32.depends = common

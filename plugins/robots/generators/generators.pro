@@ -38,7 +38,13 @@ SUBDIRS = \
 	nxtOsekCGenerator \
 	nxtRussianCGenerator \
 	ev3GeneratorBase \
-	ev3RbfGenerator
+	ev3RbfGenerator \
+#	stm32GeneratorBase \
+#	stm32CppGenerator \
+	stm32GeneratorBase \
+	stm32CppGeneratorLibrary \
+	stm32V6CppGenerator \
+	stm32V62CppGenerator \
 
 trikGeneratorBase.subdir = $$PWD/trik/trikGeneratorBase
 trikQtsGeneratorLibrary.subdir = $$PWD/trik/trikQtsGeneratorLibrary
@@ -63,6 +69,12 @@ nxtOsekCGenerator.subdir = $$PWD/nxt/nxtOsekCGenerator
 nxtRussianCGenerator.subdir = $$PWD/nxt/nxtRussianCGenerator
 ev3GeneratorBase.subdir = $$PWD/ev3/ev3GeneratorBase
 ev3RbfGenerator.subdir = $$PWD/ev3/ev3RbfGenerator
+#stm32GeneratorBase.subdir = $$PWD/stm32/stm32GeneratorBase
+#stm32CppGenerator.subdir = $$PWD/stm32/stm32CppGenerator
+stm32GeneratorBase.subdir = $$PWD/stm32/stm32GeneratorBase
+stm32CppGeneratorLibrary.subdir = $$PWD/stm32/stm32CppGeneratorLibrary
+stm32V6CppGenerator.subdir = $$PWD/stm32/stm32V6CppGenerator
+stm32V62CppGenerator.subdir = $$PWD/stm32/stm32V62CppGenerator
 
 trikGeneratorBase.depends = generatorBase
 trikQtsGeneratorLibrary.depends = trikGeneratorBase
@@ -84,3 +96,9 @@ nxtOsekCGenerator.depends = nxtGeneratorBase
 nxtRussianCGenerator.depends = nxtGeneratorBase
 ev3GeneratorBase.depends = generatorBase
 ev3RbfGenerator.depends = ev3GeneratorBase
+#stm32GeneratorBase.depends = generatorBase
+#stm32CppGenerator.depends = stm32GeneratorBase
+stm32GeneratorBase.depends = generatorBase
+stm32CppGeneratorLibrary.depends = stm32GeneratorBase
+stm32V6CppGenerator.depends = stm32CppGeneratorLibrary
+stm32V62CppGenerator.depends = stm32CppGeneratorLibrary

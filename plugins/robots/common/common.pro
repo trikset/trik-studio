@@ -20,8 +20,10 @@ SUBDIRS = \
 	nxtKit \
 	trikKit \
 	ev3Kit \
+	stm32Kit \
 
 twoDModel.depends = kitBase
 nxtKit.depends = twoDModel
 trikKit.depends = twoDModel
 ev3Kit.depends = twoDModel
+stm32Kit.depends = twoDModel
