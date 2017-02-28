@@ -41,7 +41,6 @@ HEADERS += \
 	$$PWD/include/stm32GeneratorBase/stm32MasterGeneratorBase.h \
 	$$PWD/include/stm32GeneratorBase/robotModel/generatorModelExtensionInterface.h \
 	$$PWD/include/stm32GeneratorBase/robotModel/stm32V62GeneratorRobotModel.h \
-	$$PWD/include/stm32GeneratorBase/robotModel/stm32V6GeneratorRobotModel.h \
 	$$PWD/src/stm32GeneratorCustomizer.h \
 	$$PWD/src/stm32GeneratorFactory.h \
 	$$PWD/src/parts/stm32DeviceVariables.h \
@@ -84,7 +83,6 @@ SOURCES += \
 	$$PWD/src/stm32GeneratorCustomizer.cpp \
 	$$PWD/src/stm32GeneratorFactory.cpp \
 	$$PWD/src/robotModel/stm32V62GeneratorRobotModel.cpp \
-	$$PWD/src/robotModel/stm32V6GeneratorRobotModel.cpp \
 	$$PWD/src/parts/stm32DeviceVariables.cpp \
 	$$PWD/src/converters/backgroundColorConverter.cpp \
 	$$PWD/src/converters/ledColorConverter.cpp \

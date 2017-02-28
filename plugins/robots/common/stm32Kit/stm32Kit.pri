@@ -26,7 +26,6 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 
 HEADERS += \
 	$$PWD/include/stm32Kit/robotModel/stm32RobotModelBase.h \
-	$$PWD/include/stm32Kit/robotModel/stm32RobotModelV6.h \
 	$$PWD/include/stm32Kit/robotModel/stm32RobotModelV62.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32ColorSensor.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32Display.h \
@@ -47,7 +46,6 @@ HEADERS += \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32Shell.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32MotorsAggregator.h \
 	$$PWD/include/stm32Kit/blocks/stm32BlocksFactoryBase.h \
-	$$PWD/include/stm32Kit/blocks/stm32V6BlocksFactory.h \
 	$$PWD/include/stm32Kit/blocks/stm32V62BlocksFactory.h \
 	$$PWD/src/blocks/details/setBackgroundBlock.h \
 	$$PWD/src/blocks/details/smileBlock.h \
@@ -79,7 +77,6 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/src/robotModel/stm32RobotModelBase.cpp \
-	$$PWD/src/robotModel/stm32RobotModelV6.cpp \
 	$$PWD/src/robotModel/stm32RobotModelV62.cpp \
 	$$PWD/src/robotModel/parts/stm32ColorSensor.cpp \
 	$$PWD/src/robotModel/parts/stm32Display.cpp \
@@ -100,7 +97,6 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/stm32Shell.cpp \
 	$$PWD/src/robotModel/parts/stm32MotorsAggregator.cpp \
 	$$PWD/src/blocks/stm32BlocksFactoryBase.cpp \
-	$$PWD/src/blocks/stm32V6BlocksFactory.cpp \
 	$$PWD/src/blocks/stm32V62BlocksFactory.cpp \
 	$$PWD/src/blocks/details/setBackgroundBlock.cpp \
 	$$PWD/src/blocks/details/smileBlock.cpp \

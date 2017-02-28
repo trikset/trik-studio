@@ -43,7 +43,6 @@ SUBDIRS = \
 #	stm32CppGenerator \
 	stm32GeneratorBase \
 	stm32CppGeneratorLibrary \
-	stm32V6CppGenerator \
 	stm32V62CppGenerator \
 
 trikGeneratorBase.subdir = $$PWD/trik/trikGeneratorBase
@@ -73,7 +72,6 @@ ev3RbfGenerator.subdir = $$PWD/ev3/ev3RbfGenerator
 #stm32CppGenerator.subdir = $$PWD/stm32/stm32CppGenerator
 stm32GeneratorBase.subdir = $$PWD/stm32/stm32GeneratorBase
 stm32CppGeneratorLibrary.subdir = $$PWD/stm32/stm32CppGeneratorLibrary
-stm32V6CppGenerator.subdir = $$PWD/stm32/stm32V6CppGenerator
 stm32V62CppGenerator.subdir = $$PWD/stm32/stm32V62CppGenerator
 
 trikGeneratorBase.depends = generatorBase
@@ -100,5 +98,4 @@ ev3RbfGenerator.depends = ev3GeneratorBase
 #stm32CppGenerator.depends = stm32GeneratorBase
 stm32GeneratorBase.depends = generatorBase
 stm32CppGeneratorLibrary.depends = stm32GeneratorBase
-stm32V6CppGenerator.depends = stm32CppGeneratorLibrary
 stm32V62CppGenerator.depends = stm32CppGeneratorLibrary

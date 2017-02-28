@@ -22,7 +22,6 @@ SUBDIRS = \
 	trikV6KitInterpreter \
 	trikV62KitInterpreter \
 	stm32KitInterpreterCommon \
-	stm32V6KitInterpreter \
 	stm32V62KitInterpreter \
 	ev3KitInterpreter \
 	robotsPlugin \
@@ -31,5 +30,4 @@ robotsPlugin.depends = interpreterCore
 twoDModelRunner.depends = interpreterCore
 trikV6KitInterpreter.depends = trikKitInterpreterCommon
 trikV62KitInterpreter.depends = trikKitInterpreterCommon
-stm32V6KitInterpreter.depends = stm32KitInterpreterCommon
 stm32V62KitInterpreter.depends = stm32KitInterpreterCommon
