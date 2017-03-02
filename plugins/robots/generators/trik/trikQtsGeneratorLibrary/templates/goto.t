@@ -1,1 +1,1 @@
-curr_state = @@ID@@ end
+curr_state = "@@ID@@" end,
