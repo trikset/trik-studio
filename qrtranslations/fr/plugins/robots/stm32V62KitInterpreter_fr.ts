@@ -5,8 +5,8 @@
     <name>stm32::Stm32V62KitInterpreterPlugin</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/stm32V62KitInterpreter/src/stm32V62KitInterpreterPlugin.cpp" line="42"/>
-        <source>STM32 (new case)</source>
-        <translation type="unfinished"></translation>
+        <source>STM32</source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/stm32V62KitInterpreter/src/robotModel/real/stm32V62RealRobotModel.cpp" line="65"/>
         <source>Interpretation (Wi-Fi)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

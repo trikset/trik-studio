@@ -4,13 +4,8 @@
 <context>
     <name>stm32::Stm32V62KitInterpreterPlugin</name>
     <message>
-        <source>STM32 (new case)</source>
-        <translation type="vanished">STM32 (новый корпус)</translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/interpreters/stm32V62KitInterpreter/src/stm32V62KitInterpreterPlugin.cpp" line="42"/>
-        <source>STM32 (model-2015)</source>
-        <translation>STM32 (модель 2015)</translation>
+        <source>STM32</source>
+        <translation type="vanished">STM32</translation>
     </message>
 </context>
 <context>

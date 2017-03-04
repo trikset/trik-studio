@@ -39,5 +39,5 @@ QString Stm32V62KitInterpreterPlugin::kitId() const
 
 QString Stm32V62KitInterpreterPlugin::friendlyKitName() const
 {
-	return tr("STM32 (model-2015)");
+	return tr("STM32");
 }
