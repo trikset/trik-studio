@@ -86,6 +86,15 @@
 						<property displayedName="Ports" type="string" name="Ports" >
 							<default>M3, M4</default>
 						</property>
+                                                <property displayedName="Latitude" type="string" name="Latitude">
+                                                        <default>0</default>
+                                                </property>
+                                                <property displayedName="Longitude" type="string" name="Longitude">
+                                                        <default>0</default>
+                                                </property>
+                                                <property displayedName="Altitude" type="string" name="Altitude">
+                                                        <default>0</default>
+                                                </property>
 					</properties>
 					<generalizations>
 						<parent parentName="EngineMovementCommand"/>
@@ -116,15 +125,29 @@
 						<image y1="0" name="images/enginesForwardBlock.png" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
-						<label x="25" y="-35" textBinded="Ports" hard="true" background="white" prefix="Ports:" />
-						<label x="35" y="60" textBinded="Power" background="white" prefix="Power:" suffix="%" />
+                                           <!-- <label x="25" y="-35" textBinded="Ports" hard="true" background="white" prefix="Ports:" />
+                                                <label x="35" y="60" textBinded="Power" background="white" prefix="Power:" suffix="%" />-->
+                                                <label x="35" y="60" textBinded="Latitude" background="white" prefix="Latitude:" suffix="%" />
+                                                <label x="35" y="80" textBinded="Longitude" background="white" prefix="Longitude:" suffix="%" />
+                                                <label x="35" y="100" textBinded="Altitude" background="white" prefix="Altitude:" suffix="%" />
 					</labels>
 					<nonResizeable/>
 				</graphics>
 				<logic>
 					<container/>
+                                        <properties>
+                                            <property displayedName="Latitude" type="string" name="Latitude">
+                                                    <default>0</default>
+                                            </property>
+                                            <property displayedName="Longitude" type="string" name="Longitude">
+                                                    <default>0</default>
+                                            </property>
+                                            <property displayedName="Altitude" type="string" name="Altitude">
+                                                    <default>0</default>
+                                            </property>
+                                        </properties>
 					<generalizations>
-						<parent parentName="TrikV6EngineMovementCommand"/>
+                                                <parent parentName="AbstractNode"/>
 					</generalizations>
 				</logic>
 			</node>

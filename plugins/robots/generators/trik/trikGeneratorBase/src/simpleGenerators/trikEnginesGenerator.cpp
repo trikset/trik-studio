@@ -27,12 +27,16 @@ TrikEnginesGenerator::TrikEnginesGenerator(const qrRepo::RepoApi &repo
 		, QObject *parent)
 	: BindingGenerator(repo, customizer, id
 			, engineType.contains("EnginesBackward") ? "engines/backward.t" : "engines/forward.t"
-			, { Binding::createMultiTarget("@@PORT@@", "Ports", customizer.factory()->enginesConverter())
-					, Binding::createConverting("@@POWER@@", "Power"
-							, customizer.factory()->intPropertyConverter(id, "Power"))
+            , {
+//                      Binding::createMultiTarget("@@PORT@@", "Ports", customizer.factory()->enginesConverter())
+//					, Binding::createConverting("@@POWER@@", "Power"
+//							, customizer.factory()->intPropertyConverter(id, "Power"))
+                         Binding::createConverting("@@LATITUDE@@", "Latitude", customizer.factory()->intPropertyConverter(id, "Latitude"))
+                       , Binding::createConverting("@@LONGITUDE@@", "Longitude", customizer.factory()->intPropertyConverter(id, "Longitude"))
+                       , Binding::createConverting("@@ALTITUDE@@", "Altitude", customizer.factory()->intPropertyConverter(id, "Altitude"))
 			}, parent)
 {
 	// AngularServo is just another block for EnginesForward, since it is controlled the same way as radial servo
 	// or power motor.
-	mCustomizer.factory()->engines()->registerUsageOnPorts(repo.property(id, "Ports").toString());
+    //mCustomizer.factory()->engines()->registerUsageOnPorts(repo.property(id, "Ports").toString());
 }

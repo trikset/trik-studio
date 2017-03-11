@@ -1,1 +1,1 @@
-brick.motor(@@PORT@@).setPower(@@POWER@@);
+ap.goToPoint({latitude=@@LATITUDE@@, longitude=@@LONGITUDE@@, altitude=@@ALTITUDE@@})
