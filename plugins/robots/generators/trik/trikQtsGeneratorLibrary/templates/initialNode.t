@@ -1,1 +1,3 @@
-curr_state = @@ID@@
+curr_state = "@@ID@@"
+
+["@@ID@@"] = function(x)
