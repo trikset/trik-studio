@@ -25,6 +25,7 @@ class TrikV6BlocksFactory : public TrikBlocksFactoryBase
 public:
 	qReal::interpretation::Block *produceBlock(const qReal::Id &element) override;
 	qReal::IdList providedBlocks() const override;
+    qReal::IdList blocksToDisable() const override;
 };
 
 }

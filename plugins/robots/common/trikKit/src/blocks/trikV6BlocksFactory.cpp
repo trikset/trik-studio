@@ -52,5 +52,59 @@ qReal::IdList TrikV6BlocksFactory::providedBlocks() const
 			<< id("TrikWaitForEncoder")
 	;
 
-	return result;
+    return result;
+}
+
+qReal::IdList TrikV6BlocksFactory::blocksToDisable() const
+{
+    qReal::IdList result;
+
+    result << TrikBlocksFactoryBase::blocksToDisable();
+    result
+            << id("TrikV6ClearEncoder")
+            << id("TrikAngularServo")
+            << id("TrikWaitForEncoder")
+            << id("TrikV6EnginesBackward")
+            << id("TrikAngularServo")
+            << id("TrikV6EnginesStop")
+            << id("TrikPlayTone")
+            << id("TrikV6ClearEncoder")
+            << id("TrikSystem")
+            << id("TrikWriteToFile")
+            << id("TrikRemoveFile")
+            << id("TrikInitVideoStreaming")
+            << id("TrikInitCamera")
+            << id("TrikDetect")
+            << id("TrikDetectorToVariable")
+            << id("TrikLed")
+            << id("TrikWaitForLight")
+            << id("TrikWaitForSonarDistance")
+            << id("TrikWaitForIRDistance")
+            << id("TrikWaitForTouchSensor")
+            << id("TrikWaitForGyroscope")
+            << id("TrikWaitForAccelerometer")
+            << id("TrikWaitForMotion")
+            << id("TrikWaitForEncoder")
+            << id("TrikWaitForButton")
+            << id("TrikWaitGamepadButton")
+            << id("TrikWaitPadPress")
+            << id("TrikWaitGamepadWheel")
+            << id("TrikWaitGamepadDisconnect")
+            << id("TrikWaitGamepadConnect")
+            << id("TrikSetPainterColor")
+            << id("TrikSetPainterWidth")
+            << id("TrikDrawPixel")
+            << id("TrikDrawLine")
+            << id("TrikDrawRect")
+            << id("TrikDrawEllipse")
+            << id("TrikDrawArc")
+            << id("TrikSmile")
+            << id("TrikSadSmile")
+            << id("TrikSetBackground")
+            << id("TrikSay")
+            << id("TrikSendMessage")
+            << id("TrikWaitForMessage")
+    ;
+
+    return result;
 }

@@ -1,3 +1,4 @@
 curr_state = "@@ID@@"
 
-["@@ID@@"] = function(x)
+action = {
+["@@ID@@"] = function(x) 
