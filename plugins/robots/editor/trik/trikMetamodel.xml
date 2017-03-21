@@ -119,17 +119,17 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Motors Forward" name="TrikV6EnginesForward" path="185, 207 : 287, 105 :  | 287, 105 : 182, 0 :  | 0, 105 : 287, 105 : " description="Enables motors on the given ports with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.">
+                        <node displayedName="Go to point" name="TrikV6EnginesForward" path="185, 207 : 287, 105 :  | 287, 105 : 182, 0 :  | 0, 105 : 287, 105 : " description="">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/enginesForwardBlock.png" x1="0" y2="50" x2="50"/>
+					                            <image y1="0" name="images/GoToPointBlock.png" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
                                            <!-- <label x="25" y="-35" textBinded="Ports" hard="true" background="white" prefix="Ports:" />
                                                 <label x="35" y="60" textBinded="Power" background="white" prefix="Power:" suffix="%" />-->
-                                                <label x="35" y="60" textBinded="Latitude" background="white" prefix="Latitude:" suffix="%" />
-                                                <label x="35" y="80" textBinded="Longitude" background="white" prefix="Longitude:" suffix="%" />
-                                                <label x="35" y="100" textBinded="Altitude" background="white" prefix="Altitude:" suffix="%" />
+												<label x="35" y="60" textBinded="Latitude" background="white" prefix="Latitude:"/>
+												<label x="35" y="80" textBinded="Longitude" background="white" prefix="Longitude:"/>
+												<label x="35" y="100" textBinded="Altitude" background="white" prefix="Altitude:"/>
 					</labels>
 					<nonResizeable/>
 				</graphics>
@@ -412,7 +412,7 @@
 			<node displayedName="Led" name="TrikLed" path="70, 79 : 70, 121 :  | 25, 78 : 25, 122 :  | 12, 12 : 86, 12 : 86, 78 : 12, 78 : 12, 12 : " description="Sets the color of the LED on the robot`s front panel.">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/ledBlock.png" x1="0" y2="50" x2="50"/>
+					    <image y1="0" name="images/LedBlock.png" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="-35" textBinded="Color" hard="true" background="white" prefix="Color:"/>
@@ -429,6 +429,38 @@
 					<generalizations>
 						<parent parentName="AbstractNode"/>
 					</generalizations>
+				</logic>
+			</node>
+
+            <node displayedName="Takeoff" name="GeoTakeoff">
+			    <graphics>
+				    <picture sizex="50" sizey="50">
+					    <image y1="0" name="images/TakeoffBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+				        <container/>
+						<properties/>
+						<generalizations>
+						        <parent parentName="AbstractNode"/>
+						</generalizations>
+				</logic>
+			</node>
+
+            <node displayedName="Landing" name="GeoLanding">
+			    <graphics>
+				    <picture sizex="50" sizey="50">
+					    <image y1="0" name="images/LandingBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+				        <container/>
+						<properties/>
+						<generalizations>
+						        <parent parentName="AbstractNode"/>
+						</generalizations>
 				</logic>
 			</node>
 
@@ -1241,6 +1273,8 @@
 
 		<palette sorted="false">
 			<group name="Actions">
+			    <element name="GeoTakeoff"/>
+				<element name="GeoLanding"/>
 				<element name="TrikPlayTone"/>
 				<element name="TrikV6EnginesForward"/>
 				<element name="TrikV6EnginesBackward"/>

@@ -76,7 +76,6 @@ qReal::IdList TrikV6BlocksFactory::blocksToDisable() const
             << id("TrikInitCamera")
             << id("TrikDetect")
             << id("TrikDetectorToVariable")
-            << id("TrikLed")
             << id("TrikWaitForLight")
             << id("TrikWaitForSonarDistance")
             << id("TrikWaitForIRDistance")
@@ -104,6 +103,16 @@ qReal::IdList TrikV6BlocksFactory::blocksToDisable() const
             << id("TrikSay")
             << id("TrikSendMessage")
             << id("TrikWaitForMessage")
+            << id("CommentBlock")
+            << id("Subprogram")
+            << id("PrintText")
+            << id("ClearScreen")
+            << id("Fork")
+            << id("Join")
+            << id("KillThread")
+            << id("SendMessageThreads")
+            << id("ReceiveMessageThreads")
+            << id("Timer")
     ;
 
     return result;

@@ -222,6 +222,8 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 			;
 
 	result << id("GetButtonCode");
+	result << id("GeoTakeoff");
+	result << id("GeoLanding");
 
 	return result;
 }
