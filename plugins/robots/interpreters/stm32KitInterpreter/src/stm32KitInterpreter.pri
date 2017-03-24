@@ -12,20 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TEMPLATE = subdirs
+QT += widgets
 
-SUBDIRS = \
-	interpreterCore \
-	nullKitInterpreter \
-	nxtKitInterpreter \
-	trikKitInterpreterCommon \
-	trikV6KitInterpreter \
-	trikV62KitInterpreter \
-	stm32KitInterpreter \
-	ev3KitInterpreter \
-	robotsPlugin \
+links(qrtext robots-kit-base)
+includes(plugins/robots/common/kitBase plugins/robots/utils qrtext)
 
-robotsPlugin.depends = interpreterCore
-twoDModelRunner.depends = interpreterCore
-trikV6KitInterpreter.depends = trikKitInterpreterCommon
-trikV62KitInterpreter.depends = trikKitInterpreterCommon
+HEADERS += \
+	$$PWD/stm32KitInterpreterPlugin.h \
+	$$PWD/stm32RobotModel.h \
+
+SOURCES += \
+	$$PWD/stm32KitInterpreterPlugin.cpp \
+	$$PWD/stm32RobotModel.cpp \
+
+TRANSLATIONS = \
+	$$PWD/../../../../../qrtranslations/ru/plugins/robots/stm32KitInterpreter_ru.ts \
+	$$PWD/../../../../../qrtranslations/fr/plugins/robots/stm32KitInterpreter_fr.ts \

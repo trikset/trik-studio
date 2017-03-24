@@ -24,9 +24,23 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 		robots-utils robots-kit-base qextserialport qslog \
 )
 
+#win32 {
+#	LIBS += -llibusb-1.0
+#}
+
+#unix {
+#	LIBS += -lusb-1.0
+#}
+
+## libusb headers contain dirty code
+#CONFIG(clang) {
+#	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
+#} else {
+#	QMAKE_CXXFLAGS += -Wno-error=vla -Wno-error=pedantic
+#}
+
 HEADERS += \
 	$$PWD/include/stm32Kit/robotModel/stm32RobotModelBase.h \
-	$$PWD/include/stm32Kit/robotModel/stm32RobotModelV62.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32ColorSensor.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32Display.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32GamepadButton.h \
@@ -45,8 +59,7 @@ HEADERS += \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32ObjectSensor.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32Shell.h \
 	$$PWD/include/stm32Kit/robotModel/parts/stm32MotorsAggregator.h \
-	$$PWD/include/stm32Kit/blocks/stm32BlocksFactoryBase.h \
-	$$PWD/include/stm32Kit/blocks/stm32V62BlocksFactory.h \
+	$$PWD/include/stm32Kit/blocks/stm32BlocksFactory.h \
 	$$PWD/src/blocks/details/setBackgroundBlock.h \
 	$$PWD/src/blocks/details/smileBlock.h \
 	$$PWD/src/blocks/details/stm32EnginesForwardBlock.h \
@@ -77,7 +90,6 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/src/robotModel/stm32RobotModelBase.cpp \
-	$$PWD/src/robotModel/stm32RobotModelV62.cpp \
 	$$PWD/src/robotModel/parts/stm32ColorSensor.cpp \
 	$$PWD/src/robotModel/parts/stm32Display.cpp \
 	$$PWD/src/robotModel/parts/stm32GamepadButton.cpp \
@@ -96,8 +108,7 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/stm32Speaker.cpp \
 	$$PWD/src/robotModel/parts/stm32Shell.cpp \
 	$$PWD/src/robotModel/parts/stm32MotorsAggregator.cpp \
-	$$PWD/src/blocks/stm32BlocksFactoryBase.cpp \
-	$$PWD/src/blocks/stm32V62BlocksFactory.cpp \
+	$$PWD/src/blocks/stm32BlocksFactory.cpp \
 	$$PWD/src/blocks/details/setBackgroundBlock.cpp \
 	$$PWD/src/blocks/details/smileBlock.cpp \
 	$$PWD/src/blocks/details/stm32EnginesForwardBlock.cpp \

@@ -16,17 +16,34 @@
 
 #include <qrutils/inFile.h>
 
+#include <stm32Kit/blocks/stm32BlocksFactory.h>
+
+#include "include/stm32GeneratorBase/robotModel/stm32GeneratorRobotModel.h"
+
 using namespace stm32;
 
-Stm32GeneratorPluginBase::Stm32GeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-		, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory)
-	: mRobotModel(robotModel)
-	, mBlocksFactory(blocksFactory)
+//Stm32GeneratorPluginBase::Stm32GeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
+//        , kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory)
+//    : mRobotModel(robotModel)
+//    , mBlocksFactory(blocksFactory)
+//{
+//}
+
+Stm32GeneratorPluginBase::Stm32GeneratorPluginBase(const QString &robotName, const QString &robotFriendlyName
+        , int priority)
+    : mRobotModel(new robotModel::Stm32V62GeneratorRobotModel(kitId()
+            , "stm32KitRobot", robotName, robotFriendlyName, priority))
+    , mBlocksFactory(new blocks::Stm32BlocksFactory)
 {
 }
 
 Stm32GeneratorPluginBase::~Stm32GeneratorPluginBase()
 {
+}
+
+QString Stm32GeneratorPluginBase::kitId() const
+{
+	return "stm32Kit";
 }
 
 QList<kitBase::robotModel::RobotModelInterface *> Stm32GeneratorPluginBase::robotModels()

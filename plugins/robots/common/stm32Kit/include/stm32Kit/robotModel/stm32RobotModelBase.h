@@ -36,7 +36,7 @@ public:
 	virtual void setErrorReporter(qReal::ErrorReporterInterface &errorReporter) = 0;
 
 	/// Returns config file version that shall be on a robot to be able to use this model.
-	virtual QString robotConfigFileVersion() const = 0;
+	QString robotConfigFileVersion() const;
 
 protected:
 	virtual kitBase::robotModel::DeviceInfo displayInfo() const;
