@@ -38,7 +38,7 @@ namespace stm32 {
 
 namespace robotModel {
 class Stm32RobotModelBase;
-class Stm32V62GeneratorRobotModel;
+class Stm32GeneratorRobotModel;
 }
 
 namespace cpp {
@@ -123,7 +123,7 @@ private:
 
 	/// Temporary storage for robot model to be able to correctly initialize it.
 	/// Does not have ownership.
-//	robotModel::Stm32V62GeneratorRobotModel *mModel;
+//	robotModel::Stm32GeneratorRobotModel *mModel;
 };
 
 }

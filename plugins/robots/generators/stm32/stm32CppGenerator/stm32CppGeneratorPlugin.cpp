@@ -52,7 +52,7 @@ Stm32CppGeneratorPlugin::Stm32CppGeneratorPlugin()
 	, mStopRobotAction(new QAction(nullptr))
 //    , mRobotModel(*robotModel)
     , mPathsToTemplates({":/stm32Cpp/templates"})
-//    , mModel(static_cast<robotModel::Stm32V62GeneratorRobotModel *>(robotModels().first()))
+//    , mModel(static_cast<robotModel::Stm32GeneratorRobotModel *>(robotModels().first()))
 {
 }
 
@@ -106,7 +106,7 @@ void Stm32CppGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configu
 	);
 
 
-//	addShellDevice(static_cast<robotModel::Stm32V62GeneratorRobotModel *>(robotModels().first()));
+//	addShellDevice(static_cast<robotModel::Stm32GeneratorRobotModel *>(robotModels().first()));
 }
 
 QList<ActionInfo> Stm32CppGeneratorPlugin::customActions()

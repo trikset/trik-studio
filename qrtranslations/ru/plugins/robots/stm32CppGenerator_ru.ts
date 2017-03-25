@@ -61,47 +61,47 @@
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="48"/>
         <source>Generation (C++)</source>
-        <translation type="vanished">Генерация (C++)</translation>
+        <translation>Генерация (C++)</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="115"/>
         <source>Generate STM32 code</source>
-        <translation type="vanished">Генерировать код на C++</translation>
+        <translation>Генерировать код на C++</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="121"/>
         <source>Upload program</source>
-        <translation type="vanished">Загрузить программу</translation>
+        <translation>Загрузить программу</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="127"/>
         <source>Run program</source>
-        <translation type="vanished">Загрузить и выполнить программу</translation>
+        <translation>Загрузить и выполнить программу</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="133"/>
         <source>Stop robot</source>
-        <translation type="vanished">Остановить робота</translation>
+        <translation>Остановить робота</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="148"/>
         <source>Generate STM32 Code</source>
-        <translation type="vanished">Сгенерированть код для STM32 на C++</translation>
+        <translation>Сгенерированть код для STM32 на C++</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="149"/>
         <source>Upload STM32 Program</source>
-        <translation type="vanished">Загрузить программу</translation>
+        <translation>Загрузить программу</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="150"/>
         <source>Run STM32 Program</source>
-        <translation type="vanished">Исполнить программу</translation>
+        <translation>Исполнить программу</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/stm32/stm32CppGenerator/stm32CppGeneratorPlugin.cpp" line="151"/>
         <source>Stop STM32 Robot</source>
-        <translation type="vanished">Остановить выполнение программы для STM32</translation>
+        <translation>Остановить выполнение программы для STM32</translation>
     </message>
     <message>
         <source>C++ Source File</source>

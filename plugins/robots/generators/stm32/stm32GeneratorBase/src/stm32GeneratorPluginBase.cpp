@@ -31,7 +31,7 @@ using namespace stm32;
 
 Stm32GeneratorPluginBase::Stm32GeneratorPluginBase(const QString &robotName, const QString &robotFriendlyName
         , int priority)
-    : mRobotModel(new robotModel::Stm32V62GeneratorRobotModel(kitId()
+    : mRobotModel(new robotModel::Stm32GeneratorRobotModel(kitId()
             , "stm32KitRobot", robotName, robotFriendlyName, priority))
     , mBlocksFactory(new blocks::Stm32BlocksFactory)
 {

@@ -24,7 +24,7 @@
 namespace stm32 {
 namespace robotModel {
 
-class ROBOTS_STM32_GENERATOR_BASE_EXPORT Stm32V62GeneratorRobotModel
+class ROBOTS_STM32_GENERATOR_BASE_EXPORT Stm32GeneratorRobotModel
 //		: public Stm32RobotModelV62
         : public Stm32RobotModelBase
 		, public GeneratorModelExtensionInterface
@@ -32,7 +32,7 @@ class ROBOTS_STM32_GENERATOR_BASE_EXPORT Stm32V62GeneratorRobotModel
 	Q_OBJECT
 
 public:
-	Stm32V62GeneratorRobotModel(const QString &kitId, const QString &robotId
+	Stm32GeneratorRobotModel(const QString &kitId, const QString &robotId
 			, const QString &name, const QString &friendlyName, int priority);
 
 	QString name() const override;

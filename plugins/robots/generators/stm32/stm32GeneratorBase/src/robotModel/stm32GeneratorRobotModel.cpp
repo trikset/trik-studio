@@ -16,7 +16,7 @@
 
 using namespace stm32::robotModel;
 
-Stm32V62GeneratorRobotModel::Stm32V62GeneratorRobotModel(const QString &kitId
+Stm32GeneratorRobotModel::Stm32GeneratorRobotModel(const QString &kitId
 		, const QString &robotId
 		, const QString &name
 		, const QString &friendlyName
@@ -29,37 +29,37 @@ Stm32V62GeneratorRobotModel::Stm32V62GeneratorRobotModel(const QString &kitId
 {
 }
 
-void Stm32V62GeneratorRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
+void Stm32GeneratorRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
 {
 	Q_UNUSED(errorReporter)
 }
 
-QString Stm32V62GeneratorRobotModel::name() const
+QString Stm32GeneratorRobotModel::name() const
 {
 	return mName;
 }
 
-QString Stm32V62GeneratorRobotModel::friendlyName() const
+QString Stm32GeneratorRobotModel::friendlyName() const
 {
 	return mFriendlyName;
 }
 
-bool Stm32V62GeneratorRobotModel::needsConnection() const
+bool Stm32GeneratorRobotModel::needsConnection() const
 {
 	return false;
 }
 
-bool Stm32V62GeneratorRobotModel::interpretedModel() const
+bool Stm32GeneratorRobotModel::interpretedModel() const
 {
 	return false;
 }
 
-int Stm32V62GeneratorRobotModel::priority() const
+int Stm32GeneratorRobotModel::priority() const
 {
 	return mPriority;
 }
 
-void Stm32V62GeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &port
+void Stm32GeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &port
 		, kitBase::robotModel::robotParts::Device *device)
 {
 	mPreConfiguredDevices[port] = device;
@@ -67,7 +67,7 @@ void Stm32V62GeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo 
 	applyConfiguration();
 }
 
-kitBase::robotModel::robotParts::Device *Stm32V62GeneratorRobotModel::createDevice(
+kitBase::robotModel::robotParts::Device *Stm32GeneratorRobotModel::createDevice(
 		const kitBase::robotModel::PortInfo &port
 		, const kitBase::robotModel::DeviceInfo &deviceInfo)
 {

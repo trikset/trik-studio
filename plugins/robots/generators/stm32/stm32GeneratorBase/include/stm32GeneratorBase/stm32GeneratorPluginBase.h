@@ -23,7 +23,7 @@
 namespace stm32 {
 
 //namespace robotModel {
-//class Stm32V62GeneratorRobotModel;
+//class Stm32GeneratorRobotModel;
 //}
 
 //namespace blocks {
