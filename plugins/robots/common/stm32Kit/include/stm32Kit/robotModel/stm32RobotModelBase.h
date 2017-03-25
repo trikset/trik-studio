@@ -35,9 +35,6 @@ public:
 	/// Registers error reporter in a model.
 	virtual void setErrorReporter(qReal::ErrorReporterInterface &errorReporter) = 0;
 
-	/// Returns config file version that shall be on a robot to be able to use this model.
-	QString robotConfigFileVersion() const;
-
 protected:
 	virtual kitBase::robotModel::DeviceInfo displayInfo() const;
 	virtual kitBase::robotModel::DeviceInfo speakerInfo() const;

@@ -21,7 +21,6 @@ Stm32GeneratorRobotModel::Stm32GeneratorRobotModel(const QString &kitId
 		, const QString &name
 		, const QString &friendlyName
 		, int priority)
-//	: Stm32RobotModelV62(kitId, robotId)
     : Stm32RobotModelBase(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)

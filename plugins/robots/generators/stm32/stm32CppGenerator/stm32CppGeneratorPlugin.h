@@ -52,9 +52,6 @@ class Stm32CppGeneratorPlugin : public Stm32GeneratorPluginBase
 
 public:
 	Stm32CppGeneratorPlugin();
-//	Stm32CppGeneratorPlugin(stm32::robotModel::Stm32RobotModelBase * const robotModel
-//			, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
-//			, const QStringList &pathsToTemplates);
 
 	~Stm32CppGeneratorPlugin() override;
 

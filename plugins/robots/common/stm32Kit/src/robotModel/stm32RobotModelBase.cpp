@@ -290,8 +290,3 @@ QHash<QString, int> Stm32RobotModelBase::buttonCodes() const
 	result["EscButton"] = 1;
 	return result;
 }
-
-QString Stm32RobotModelBase::robotConfigFileVersion() const
-{
-	return "model-2015";
-}

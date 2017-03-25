@@ -25,7 +25,6 @@ namespace stm32 {
 namespace robotModel {
 
 class ROBOTS_STM32_GENERATOR_BASE_EXPORT Stm32GeneratorRobotModel
-//		: public Stm32RobotModelV62
         : public Stm32RobotModelBase
 		, public GeneratorModelExtensionInterface
 {

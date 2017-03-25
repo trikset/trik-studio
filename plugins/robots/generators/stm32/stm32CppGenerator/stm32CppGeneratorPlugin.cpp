@@ -41,18 +41,12 @@ using namespace qReal;
 using namespace utils::robotCommunication;
 
 Stm32CppGeneratorPlugin::Stm32CppGeneratorPlugin()
-//		stm32::robotModel::Stm32RobotModelBase * const robotModel
-//		, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
-//		, const QStringList &pathsToTemplates)
-//	: Stm32GeneratorPluginBase(robotModel, blocksFactory)
     : Stm32GeneratorPluginBase("Stm32CppGeneratorRobotModel", tr("Generation (C++)"), 9 /* After 2D model */)
 	, mGenerateCodeAction(new QAction(nullptr))
 	, mUploadProgramAction(new QAction(nullptr))
 	, mRunProgramAction(new QAction(nullptr))
 	, mStopRobotAction(new QAction(nullptr))
-//    , mRobotModel(*robotModel)
     , mPathsToTemplates({":/stm32Cpp/templates"})
-//    , mModel(static_cast<robotModel::Stm32GeneratorRobotModel *>(robotModels().first()))
 {
 }
 
@@ -68,8 +62,7 @@ void Stm32CppGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configu
 	NetworkCommunicationErrorReporter::connectErrorReporter(*mCommunicator, *errorReporter);
 
 	mUploadProgramProtocol.reset(new UploadProgramProtocol(*mCommunicator));
-//	mRunProgramProtocol.reset(new RunProgramProtocol(*mCommunicator, mRobotModel.robotConfigFileVersion()));
-	mRunProgramProtocol.reset(new RunProgramProtocol(*mCommunicator, "model-2015"));
+	mRunProgramProtocol.reset(new RunProgramProtocol(*mCommunicator, "model"));
 	mStopRobotProtocol.reset(new StopRobotProtocol(*mCommunicator));
 
 	const auto timeout = [this, errorReporter]() {
