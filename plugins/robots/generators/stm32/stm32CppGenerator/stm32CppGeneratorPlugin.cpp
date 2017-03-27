@@ -193,7 +193,11 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 	const QFileInfo fileInfo = generateCodeForProcessing();
 
 //	const QString compileBatch = "C:\\RTK\\STM32F4\\mybuild\\compileAndUpload.bat";
-	const QString compileBatch = "C:\\STM32_Diploma\\STM32-template\\STM32-template-project\\compileAndUpload.bat";
+//	const QString compileBatch = "C:\\STM32_Diploma\\STM32-template\\STM32-template-project\\compileAndUpload.bat";
+	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.bat");
+	const QString compileBatch = compileFile.absoluteFilePath();
+
+//	qDebug() << compileBatch;
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
