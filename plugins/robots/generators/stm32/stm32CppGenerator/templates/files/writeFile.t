@@ -1,1 +1,1 @@
-script.writeToFile("@@FILE@@", @@TEXT@@);
+brick.writeToFile("@@FILE@@", @@TEXT@@);

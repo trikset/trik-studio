@@ -1,1 +1,1 @@
-script.removeFile("@@FILE@@");
+brick.removeFile("@@FILE@@");

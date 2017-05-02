@@ -1,3 +1,3 @@
 while (gamepad.isConnected()) {
-	script.wait(10);
+	brick.wait(10);
 }
