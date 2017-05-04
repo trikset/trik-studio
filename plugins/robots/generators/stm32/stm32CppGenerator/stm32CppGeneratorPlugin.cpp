@@ -248,15 +248,15 @@ void Stm32CppGeneratorPlugin::runProgram()
 
 void Stm32CppGeneratorPlugin::stopRobot()
 {
-	if (mStopRobotProtocol) {
-		disableButtons();
-		mStopRobotProtocol->run(
-				"script.system(\"killall aplay\"); \n"
-				"script.system(\"killall vlc\");"
-				);
-	} else {
-		QLOG_ERROR() << "Stop robot protocol is not initialized";
-	}
+//	if (mStopRobotProtocol) {
+//		disableButtons();
+//		mStopRobotProtocol->run(
+//				"script.system(\"killall aplay\"); \n"
+//				"script.system(\"killall vlc\");"
+//				);
+//	} else {
+//		QLOG_ERROR() << "Stop robot protocol is not initialized";
+//	}
 }
 
 void Stm32CppGeneratorPlugin::onProtocolFinished()
