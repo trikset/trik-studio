@@ -215,7 +215,7 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
-	compileProcess.start("/bin/sh", {compileBatch});
+	compileProcess.start("bash", {"-c", compileBatch});
 #endif
 
 #ifdef Q_OS_MAC
