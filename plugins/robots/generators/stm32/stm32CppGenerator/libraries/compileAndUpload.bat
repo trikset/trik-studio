@@ -11,9 +11,9 @@ rem TODO floods path, fix me!
 set PATH=%PATH%;%CYGWIN_DIR%;%OPENOCD_BIN_DIR%;%COMPILERS_DIR%
 rem set LIBRARIES="%~dp0"
 
-rem small hack to receive ouyput of cygpath
+rem small hack to receive output of cygpath
 for /f %%i in ('cygpath -m "%~dp0"') do set LIBRARIES=%%i
-rem echo %LIBRARIES%
+echo Libraries: %LIBRARIES%
 
 set MAKEFILE="%LIBRARIES%"/Makefile
 
