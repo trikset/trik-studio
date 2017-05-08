@@ -194,6 +194,9 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 
 //	const QString compileBatch = "C:\\RTK\\STM32F4\\mybuild\\compileAndUpload.bat";
 //	const QString compileBatch = "C:\\STM32_Diploma\\STM32-template\\STM32-template-project\\compileAndUpload.bat";
+
+#ifdef Q_OS_WIN
+
 	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.bat");
 	const QString compileBatch = compileFile.absoluteFilePath();
 
@@ -201,9 +204,30 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
-    #ifdef Q_OS_WIN
-	    compileProcess.start("cmd", {"/C", compileBatch});
-    #endif
+	compileProcess.start("cmd", {"/C", compileBatch});
+#endif
+
+#ifdef Q_OS_LINUX
+	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.sh");
+	const QString compileBatch = compileFile.absoluteFilePath();
+
+//	qDebug() << compileBatch;
+
+	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
+
+	compileProcess.start("/bin/sh", {compileBatch});
+#endif
+
+#ifdef Q_OS_MAC
+	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.sh");
+	const QString compileBatch = compileFile.absoluteFilePath();
+
+//	qDebug() << compileBatch;
+
+	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
+
+	compileProcess.start("/bin/sh", {compileBatch});
+#endif
 
 	compileProcess.waitForStarted();
 	if (compileProcess.state() != QProcess::Running) {
