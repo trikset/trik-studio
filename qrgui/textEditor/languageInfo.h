@@ -101,6 +101,18 @@ public:
 		};
 	}
 
+	/// Returns the information about the c++ language.
+	static LanguageInfo cpp(const QStringList &additionalTokens = QStringList())
+	{
+		return LanguageInfo{"cpp"                                            /* extension */
+				, QObject::tr("C++ Language Source File")                    /* extension description */
+				, true                                                       /* tabs indentation */
+				, 8                                                          /* tab size */
+				, new QsciLexerCPP()                                         /* lexer */
+				, additionalTokens                                           /* additional autocompletion tokens */
+		};
+	}
+
 	/// The information about the russian algorithmic language.
 	static LanguageInfo russianC(const QStringList &additionalTokens = QStringList())
 	{

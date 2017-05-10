@@ -171,7 +171,7 @@ QString Stm32CppGeneratorPlugin::defaultFilePath(const QString &projectName) con
 
 text::LanguageInfo Stm32CppGeneratorPlugin::language() const
 {
-	return qReal::text::Languages::c({"brick"});
+	return qReal::text::Languages::cpp({"brick"});
 }
 
 QString Stm32CppGeneratorPlugin::generatorName() const
@@ -215,7 +215,18 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
-	compileProcess.start("bash", {"-c", compileBatch});
+	QProcess makeScriptExecutable;
+	makeScriptExecutable.start("chmod", {"u+x", compileBatch});
+
+	makeScriptExecutable.waitForStarted();
+	if (makeScriptExecutable.state() != QProcess::Running) {
+		mMainWindowInterface->errorReporter()->addError(tr("Script is wrong!"));
+		return;
+	}
+
+	makeScriptExecutable.waitForFinished();
+
+	compileProcess.start("sh", {"-c", compileBatch});
 #endif
 
 #ifdef Q_OS_MAC
@@ -226,7 +237,7 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
-	compileProcess.start("/bin/sh", {compileBatch});
+	compileProcess.start("bash", {"-c", compileBatch});
 #endif
 
 	compileProcess.waitForStarted();
