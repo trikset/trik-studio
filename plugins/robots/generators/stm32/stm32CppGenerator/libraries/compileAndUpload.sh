@@ -38,6 +38,7 @@ export MAKE_ARGS="LIBRARIES=${LIBRARIES}"
 export GOAL="all program"
 
 make -f ${MAKEFILE} ${MAKE_ARGS} ${GOAL}
+echo "make -f ${MAKEFILE} ${MAKE_ARGS} ${GOAL}"
 
 # set ERROR_LEVEL
 

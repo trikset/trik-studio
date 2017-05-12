@@ -216,7 +216,7 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
 	QProcess makeScriptExecutable;
-	makeScriptExecutable.start("chmod", {"u+x", compileBatch});
+	makeScriptExecutable.start("chmod", {"a+x", compileBatch});
 
 	makeScriptExecutable.waitForStarted();
 	if (makeScriptExecutable.state() != QProcess::Running) {
