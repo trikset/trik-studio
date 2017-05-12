@@ -23,8 +23,8 @@ Directory to install compilers:
 Windows:
 "C:\Program Files (x86)\GNU Tools ARM Embedded\5.4 2016q3\bin"
 
-Linux & MacOS:
-"/home/osboxes/Downloads/gcc-arm-none-eabi-5_4-2016q3/bin"
+Linux:
+sudo apt-get install gcc-arm-none-eabi
 
 3. Drivers (for Windows)
 
@@ -43,6 +43,6 @@ Windows:
 "C:\cygwin64\install\"
 
 Linux:
-"/home/osboxes/Downloads/openocd-0.10.0"
+sudo apt-get install openocd
 
 5. Run
