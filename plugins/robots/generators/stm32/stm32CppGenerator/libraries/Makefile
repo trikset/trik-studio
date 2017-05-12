@@ -187,11 +187,11 @@ Dep Obj src:
 
 $(OBJECTS_DIR)/%.o : %.c | dirs
 	@echo "[CC]      $(notdir $<)"
-	$(CC) $(CFLAGS) -c -o $@ $< -MMD -MF dep/$(*F).d
+	$(CC) $(CFLAGS) -c -o $@ $< -MMD -MF Dep/$(*F).d
 
 $(OBJECTS_DIR)/%.o : %.cpp | dirs
 	@echo "[CC]      $(notdir $<)"
-	$(CXX) $(CXXFLAGS) -c -o $@ $< -MMD -MF dep/$(*F).d
+	$(CXX) $(CXXFLAGS) -c -o $@ $< -MMD -MF Dep/$(*F).d
 
 $(TARGET).elf: $(OBJECTS) 
 	@echo "[LD]      $(TARGET).elf"

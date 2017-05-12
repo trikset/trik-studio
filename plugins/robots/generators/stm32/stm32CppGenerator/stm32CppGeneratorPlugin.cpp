@@ -93,8 +93,8 @@ void Stm32CppGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configu
 				Q_UNUSED(expected)
 				Q_UNUSED(actual)
 				errorReporter->addError(
-						QString(tr("Casing model mismatch, check STM32 Studio settings, \"Robots\" page. It seems that "
-								"STM32 casing version selected in STM32 Studio differs from version on robot.")));
+						QString(tr("Casing model mismatch, check TRIK Studio settings, \"Robots\" page. It seems that "
+								"STM32 casing version selected in TRIK Studio differs from version on robot.")));
 			}
 	);
 
@@ -192,15 +192,10 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 	QProcess compileProcess;
 	const QFileInfo fileInfo = generateCodeForProcessing();
 
-//	const QString compileBatch = "C:\\RTK\\STM32F4\\mybuild\\compileAndUpload.bat";
-//	const QString compileBatch = "C:\\STM32_Diploma\\STM32-template\\STM32-template-project\\compileAndUpload.bat";
-
 #ifdef Q_OS_WIN
 
 	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.bat");
 	const QString compileBatch = compileFile.absoluteFilePath();
-
-//	qDebug() << compileBatch;
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
@@ -210,8 +205,6 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 #ifdef Q_OS_LINUX
 	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.sh");
 	const QString compileBatch = compileFile.absoluteFilePath();
-
-//	qDebug() << compileBatch;
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
@@ -233,11 +226,20 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.sh");
 	const QString compileBatch = compileFile.absoluteFilePath();
 
-//	qDebug() << compileBatch;
-
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
 
-	compileProcess.start("bash", {"-c", compileBatch});
+	QProcess makeScriptExecutable;
+	makeScriptExecutable.start("chmod", {"a+x", compileBatch});
+
+	makeScriptExecutable.waitForStarted();
+	if (makeScriptExecutable.state() != QProcess::Running) {
+		mMainWindowInterface->errorReporter()->addError(tr("Script is wrong!"));
+		return;
+	}
+
+	makeScriptExecutable.waitForFinished();
+
+	compileProcess.start("sh", {"-c", compileBatch});
 #endif
 
 	compileProcess.waitForStarted();
