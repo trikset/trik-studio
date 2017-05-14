@@ -21,7 +21,7 @@ public:
 	void led_green();
 	void led_red();
 	void wait(unsigned int milliseconds);
-	unsigned int read_analog_sensor();
+	unsigned int read_analog_sensor(char *port);
 	void set_display_background_color(char *color);
 	void display_redraw() {}
 	void display_clear() {}
