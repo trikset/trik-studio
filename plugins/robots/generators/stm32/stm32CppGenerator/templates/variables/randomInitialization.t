@@ -1,1 +1,1 @@
-@@VARIABLE@@ = script.random(@@FROM@@, @@TO@@);
+@@VARIABLE@@ = brick.random(@@FROM@@, @@TO@@);

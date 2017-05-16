@@ -1,1 +1,1 @@
-brick.sensor(F1).read()
+brick.read_analog_sensor("F1")

@@ -194,7 +194,7 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 
 #ifdef Q_OS_WIN
 
-	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.bat");
+	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUploadWin.bat");
 	const QString compileBatch = compileFile.absoluteFilePath();
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
@@ -203,7 +203,7 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 #endif
 
 #ifdef Q_OS_LINUX
-	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.sh");
+	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUploadLinux.sh");
 	const QString compileBatch = compileFile.absoluteFilePath();
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());
@@ -223,7 +223,7 @@ void Stm32CppGeneratorPlugin::uploadProgram()
 #endif
 
 #ifdef Q_OS_MAC
-	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUpload.sh");
+	const QFileInfo compileFile = QFileInfo("../../plugins/robots/generators/stm32/stm32CppGenerator/libraries/compileAndUploadMacOS.sh");
 	const QString compileBatch = compileFile.absoluteFilePath();
 
 	compileProcess.setWorkingDirectory(fileInfo.absoluteDir().path());

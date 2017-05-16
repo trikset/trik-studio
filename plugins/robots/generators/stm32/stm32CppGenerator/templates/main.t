@@ -11,13 +11,8 @@ Brick brick;
 
 @@THREADS@@
 
-void genMain(void)
-{
-@@MAIN_CODE@@
-}
-
 int main(void)
 {
-    genMain();
-    return 0;
+@@MAIN_CODE@@
+	return 0;
 }

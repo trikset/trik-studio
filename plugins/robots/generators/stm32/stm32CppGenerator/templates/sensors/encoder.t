@@ -1,1 +1,1 @@
-brick.encoder(@@PORT@@).read()
+brick.read_analog_sensor("@@PORT@@")

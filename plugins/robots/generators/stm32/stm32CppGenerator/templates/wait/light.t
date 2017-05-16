@@ -1,3 +1,3 @@
-while (!(brick.sensor(@@PORT@@).read() @@SIGN@@ @@PERCENTS@@)) {
+while (!(brick.read_analog_sensor("@@PORT@@") @@SIGN@@ @@PERCENTS@@)) {
 	brick.wait(10);
 }

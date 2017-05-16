@@ -26,7 +26,7 @@ BOARD_UC   = STM32F429I-Discovery
 BOARD_LC   = stm32f429i_discovery
 BSP_BASE   = $(BOARD_LC)
 
-OPENOCD_FLAGS = -f board/stm32f429discovery.cfg
+OPENOCD_FLAGS = -f interface/stlink-v2-1.cfg -f board/stm32f429discovery.cfg
 GDBFLAGS   =
 
 EXAMPLE    = Examples/GPIO/GPIO_EXTI
@@ -82,11 +82,7 @@ SOURCES += $(notdir $(call rwildcard,$(TM_LIBRARIES_SRC),*.cpp))
 SOURCES += $(notdir $(call rwildcard,$(TM_LIBRARIES_Peripherals)/Src,*.cpp))
 # Directories
 
-# TODO hardcode
-OPENOCD_DIR         ?= ~/install/openocd-0.10.0
-OPENOCD_BIN_DIR     ?= $(OPENOCD_DIR)/bin
-OPENOCD_SCRIPTS_DIR  = $(OPENOCD_DIR)/scripts
-OPENOCD             ?= $(OPENOCD_BIN_DIR)/openocd.exe
+OPENOCD ?= openocd
 
 #CUBE_DIR   = cube
 #BSP_DIR    = $(CUBE_DIR)/Drivers/BSP/$(BOARD_UC)
@@ -236,4 +232,3 @@ clean:
 	@echo "[RM]      $(TARGET).lst"; rm -f $(TARGET).lst
 	@echo "[RMDIR]   dep"          ; rm -rf $(DEP_DIR)
 	@echo "[RMDIR]   obj"          ; rm -rf $(OBJECTS_DIR)
-

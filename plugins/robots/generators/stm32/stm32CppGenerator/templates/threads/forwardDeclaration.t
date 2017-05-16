@@ -1,1 +1,1 @@
-var TASK_@@NAME@@;
+auto TASK_@@NAME@@;

@@ -1,3 +1,3 @@
-while (brick.sensor(F1).read() == 0) {
+while (brick.read_analog_sensor("F1") == 0) {
 	brick.wait(10);
 }
