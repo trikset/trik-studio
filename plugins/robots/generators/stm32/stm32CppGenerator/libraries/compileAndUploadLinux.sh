@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export OPENOCD_DIR="/home/osboxes/Downloads/openocd-0.10.0/"
+export OPENOCD_DIR="/home/osboxes/Downloads/openocd-0.10.0"
 export OPENOCD_BIN_DIR="${OPENOCD_DIR}/bin"
 export OPENOCD_SCRIPTS_DIR="${OPENOCD_DIR}/scripts"
 export OPENOCD="openocd"
