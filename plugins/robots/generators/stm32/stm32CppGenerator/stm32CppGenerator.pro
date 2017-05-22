@@ -27,11 +27,11 @@ win32 {
 }
 
 unix:!macx {
-	system(mkdir -p $$DESTDIR/libraries/; find ./libraries/ -name * -exec cp --parents {} $$DESTDIR/libraries \\;)
+	system(find ./libraries -exec cp --parents {} $$DESTDIR \\;)
 }
 
 macx {
-	system(mkdir -p $$DESTDIR/libraries/; find ./libraries/ -name * -exec rsync -R {} $$DESTDIR/libraries \\;)
+	system(find ./libraries -exec rsync -R {} $$DESTDIR \\;)
 }
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
