@@ -135,7 +135,7 @@ INCS      += -I$(TM_LIBRARIES_Peripherals)/Include
 LIBS       = -L$(CMSIS_DIR)/Lib
 
 # Compiler flags
-CFLAGS     = -Wall -g -std=c99 -Os
+CFLAGS     = -Wall -g -std=c98 -Os
 CFLAGS    += -mcpu=cortex-m4 -mthumb
 CFLAGS    += -mfpu=fpv4-sp-d16 -mfloat-abi=softfp
 CFLAGS    += -ffunction-sections -fdata-sections

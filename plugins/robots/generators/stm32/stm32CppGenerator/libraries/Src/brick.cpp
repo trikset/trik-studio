@@ -34,7 +34,33 @@ void Brick::wait(unsigned int milliseconds)
 
 unsigned int Brick::read_analog_sensor(char *port)
 {
-	return TM_ADC_Read(ADC1, ADC_Channel_0);
+    unsigned int result = 0;
+    if (strcmp(port, "PA0") == 0)
+	{
+        result = TM_ADC_Read(ADC1, ADC_Channel_0);
+	} else if (strcmp(port, "PA1") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_1);
+	} else if (strcmp(port, "PA2") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_2);
+	} else if (strcmp(port, "PA3") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_3);
+	} else if (strcmp(port, "PA4") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_4);
+	} else if (strcmp(port, "PA5") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_5);
+	} else if (strcmp(port, "PA6") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_6);
+	} else if (strcmp(port, "PA7") == 0)
+	{
+		result = TM_ADC_Read(ADC1, ADC_Channel_7);
+	}
+    return result;
 }
 
 void Brick::set_display_background_color(char *color)
@@ -46,7 +72,6 @@ void Brick::set_display_background_color(char *color)
 	{
 		TM_ILI9341_Fill(ILI9341_COLOR_GREEN);
 	}
-	//TM_ILI9341_Fill(ILI9341_COLOR_RED);
 }
 
 void Brick::init()

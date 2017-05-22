@@ -70,15 +70,24 @@ Stm32RobotModelBase::Stm32RobotModelBase(const QString &kitId, const QString &ro
 	addAllowedConnection(PortInfo("M4", output, { "М4" }), { powerMotorInfo() });
 	addAllowedConnection(PortInfo("MAll", output, { "MAll" }), { powerMotorsAggregatorInfo() });
 
-	addAllowedConnection(PortInfo("A1", input, { "А1" }, "sensorA1"), analogPortConnections);
-	addAllowedConnection(PortInfo("A2", input, { "А2" }, "sensorA2"), analogPortConnections);
-	addAllowedConnection(PortInfo("A3", input, { "А3" }, "sensorA3"), analogPortConnections);
-	addAllowedConnection(PortInfo("A4", input, { "А4" }, "sensorA4"), analogPortConnections);
-	addAllowedConnection(PortInfo("A5", input, { "А5" }, "sensorA5"), analogPortConnections);
-	addAllowedConnection(PortInfo("A6", input, { "А6" }, "sensorA6"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA0", input, { "PA0" }, "sensorPA0"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA1", input, { "PA1" }, "sensorPA1"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA2", input, { "PA2" }, "sensorPA2"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA3", input, { "PA3" }, "sensorPA3"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA4", input, { "PA4" }, "sensorPA4"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA5", input, { "PA5" }, "sensorPA5"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA6", input, { "PA6" }, "sensorPA6"), analogPortConnections);
+	addAllowedConnection(PortInfo("PA7", input, { "PA7" }, "sensorPA7"), analogPortConnections);
 
-	addAllowedConnection(PortInfo("D1", input, {}, "sensorD1"), { sonarSensorInfo() });
-	addAllowedConnection(PortInfo("D2", input, {}, "sensorD2"), { sonarSensorInfo() });
+//	addAllowedConnection(PortInfo("A1", input, { "А1" }, "sensorA1"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A2", input, { "А2" }, "sensorA2"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A3", input, { "А3" }, "sensorA3"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A4", input, { "А4" }, "sensorA4"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A5", input, { "А5" }, "sensorA5"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A6", input, { "А6" }, "sensorA6"), analogPortConnections);
+
+//	addAllowedConnection(PortInfo("D1", input, {}, "sensorD1"), { sonarSensorInfo() });
+//	addAllowedConnection(PortInfo("D2", input, {}, "sensorD2"), { sonarSensorInfo() });
 
 	addAllowedConnection(PortInfo("GyroscopePort", input, {}, "gyroscope", PortInfo::ReservedVariableType::vector)
 			, { gyroscopeInfo() });

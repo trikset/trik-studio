@@ -21,6 +21,19 @@ QT += widgets network
 TEMPLATE = lib
 CONFIG += plugin
 
+win32 {
+	DESTDIR ~= s,/,\\,g
+	system(cmd /C "xcopy .\\libraries\\* $$DESTDIR\\libraries\\ /s /e /y")
+}
+
+unix:!macx {
+	system(mkdir -p $$DESTDIR/libraries/; find ./libraries/ -name * -exec cp --parents {} $$DESTDIR/libraries \\;)
+}
+
+macx {
+	system(mkdir -p $$DESTDIR/libraries/; find ./libraries/ -name * -exec rsync -R {} $$DESTDIR/libraries \\;)
+}
+
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 
 includes(plugins/robots/generators/stm32/stm32GeneratorBase \
