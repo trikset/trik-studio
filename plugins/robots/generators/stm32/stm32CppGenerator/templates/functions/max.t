@@ -1,1 +1,1 @@
-Math.max(@@ARGUMENT1@@, @@ARGUMENT2@@)
+max(@@ARGUMENT1@@, @@ARGUMENT2@@)

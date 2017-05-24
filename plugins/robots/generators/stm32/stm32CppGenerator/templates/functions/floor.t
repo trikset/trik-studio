@@ -1,1 +1,1 @@
-Math.floor(@@ARGUMENT@@)
+floor(@@ARGUMENT@@)

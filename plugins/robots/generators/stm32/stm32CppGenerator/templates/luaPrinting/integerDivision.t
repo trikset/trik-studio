@@ -1,1 +1,1 @@
-Math.floor(@@LEFT@@ / @@RIGHT@@)
+floor(@@LEFT@@ / @@RIGHT@@)

@@ -1,1 +1,1 @@
-print(@@ARGUMENT@@)
+printf(@@ARGUMENT@@)

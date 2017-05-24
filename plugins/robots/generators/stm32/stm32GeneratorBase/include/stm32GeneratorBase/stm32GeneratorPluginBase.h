@@ -22,14 +22,6 @@
 
 namespace stm32 {
 
-//namespace robotModel {
-//class Stm32GeneratorRobotModel;
-//}
-
-//namespace blocks {
-//class Stm32V62BlocksFactory;
-//}
-
 /// A base class for every generator from the STM32 kit.
 class ROBOTS_STM32_GENERATOR_BASE_EXPORT Stm32GeneratorPluginBase : public generatorBase::RobotsGeneratorPluginBase
 {
@@ -37,9 +29,6 @@ class ROBOTS_STM32_GENERATOR_BASE_EXPORT Stm32GeneratorPluginBase : public gener
 
 public:
 	Stm32GeneratorPluginBase(const QString &robotName, const QString &robotFriendlyName, int priority);
-//	Stm32GeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-//			, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
-//			);
 
 	~Stm32GeneratorPluginBase();
 

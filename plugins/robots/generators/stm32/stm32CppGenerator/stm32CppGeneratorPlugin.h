@@ -23,17 +23,6 @@ namespace qReal {
 class ErrorReporterInterface;
 }
 
-namespace utils {
-namespace robotCommunication {
-
-class TcpRobotCommunicator;
-class RunProgramProtocol;
-class StopRobotProtocol;
-class UploadProgramProtocol;
-
-}
-}
-
 namespace stm32 {
 
 namespace robotModel {
@@ -44,7 +33,6 @@ class Stm32GeneratorRobotModel;
 namespace cpp {
 
 /// Generation of C++ program for STM32, uploading and execution of a program.
-/// Uses setting "tcpServer" from RobotsInterpreter.
 class Stm32CppGeneratorPlugin : public Stm32GeneratorPluginBase
 {
 	Q_OBJECT
@@ -66,8 +54,6 @@ protected:
 	QString defaultFilePath(const QString &projectName) const override;
 	qReal::text::LanguageInfo language() const override;
 	QString generatorName() const override;
-
-	void addShellDevice(robotModel::GeneratorModelExtensionInterface &robotModel) const;
 
 private slots:
 	/// Generates and uploads script to a robot. Program then can be launched manually or remotely
@@ -100,27 +86,7 @@ private:
 	/// Action that stops script execution and turns off motors.
 	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
 
-	/// Communicator object used to send commands to robot.
-	QScopedPointer<utils::robotCommunication::TcpRobotCommunicator> mCommunicator;
-
-//	/// Robot model that is used by generator to check config file version on a robot.
-//	stm32::robotModel::Stm32RobotModelBase &mRobotModel;
-
 	QStringList mPathsToTemplates;
-
-	/// Protocol that is used to upload program to robot.
-	QScopedPointer<utils::robotCommunication::UploadProgramProtocol> mUploadProgramProtocol;
-
-	/// Protocol that is used to upload and run program.
-	QScopedPointer<utils::robotCommunication::RunProgramProtocol> mRunProgramProtocol;
-
-	/// Protocol that is used to stop robot.
-	QScopedPointer<utils::robotCommunication::StopRobotProtocol> mStopRobotProtocol;
-
-
-	/// Temporary storage for robot model to be able to correctly initialize it.
-	/// Does not have ownership.
-//	robotModel::Stm32GeneratorRobotModel *mModel;
 };
 
 }

@@ -1,1 +1,1 @@
-brick.display().setPainterColor("@@Color@@");
+brick.display_setPainterColor("@@Color@@");

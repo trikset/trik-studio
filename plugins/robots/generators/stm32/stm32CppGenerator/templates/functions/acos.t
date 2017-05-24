@@ -1,1 +1,1 @@
-Math.acos(@@ARGUMENT@@)
+acos(@@ARGUMENT@@)

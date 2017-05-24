@@ -22,13 +22,6 @@
 
 using namespace stm32;
 
-//Stm32GeneratorPluginBase::Stm32GeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-//        , kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory)
-//    : mRobotModel(robotModel)
-//    , mBlocksFactory(blocksFactory)
-//{
-//}
-
 Stm32GeneratorPluginBase::Stm32GeneratorPluginBase(const QString &robotName, const QString &robotFriendlyName
         , int priority)
     : mRobotModel(new robotModel::Stm32GeneratorRobotModel(kitId()

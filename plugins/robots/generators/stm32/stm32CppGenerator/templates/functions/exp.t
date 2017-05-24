@@ -1,1 +1,1 @@
-Math.exp(@@ARGUMENT@@)
+exp(@@ARGUMENT@@)

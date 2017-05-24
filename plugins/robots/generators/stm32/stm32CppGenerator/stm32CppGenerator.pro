@@ -57,14 +57,12 @@ HEADERS += \
 	$$PWD/stm32CppMasterGenerator.h \
 	$$PWD/stm32CppControlFlowValidator.h \
 	$$PWD/threadsValidator.h \
-	$$PWD/emptyShell.h \
 
 SOURCES += \
 	$$PWD/stm32CppGeneratorPlugin.cpp \
 	$$PWD/stm32CppMasterGenerator.cpp \
 	$$PWD/stm32CppControlFlowValidator.cpp \
 	$$PWD/threadsValidator.cpp \
-	$$PWD/emptyShell.cpp \
 
 RESOURCES = \
 	$$PWD/stm32CppGenerator.qrc \

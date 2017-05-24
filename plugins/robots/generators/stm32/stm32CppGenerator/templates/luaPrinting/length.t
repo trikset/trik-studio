@@ -1,1 +1,1 @@
-@@OPERAND@@.Length
+@@OPERAND@@.length

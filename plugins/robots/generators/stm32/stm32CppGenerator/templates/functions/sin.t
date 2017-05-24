@@ -1,1 +1,1 @@
-Math.sin(@@ARGUMENT@@)
+sin(@@ARGUMENT@@)
