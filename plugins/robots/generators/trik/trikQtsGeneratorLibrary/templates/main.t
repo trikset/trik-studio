@@ -24,6 +24,10 @@ function callback(event)
 		action[curr_state]()
 	end
 
+	if(event == Ev.COPTER_LANDED) then
+		action[curr_state]()
+	end
+
 end
 
 function loop()
