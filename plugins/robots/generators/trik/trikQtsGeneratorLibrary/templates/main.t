@@ -30,5 +30,4 @@ function loop()
 end
 
 ap.push(Ev.ENGINES_ARM)
-sleep(1)
-ap.push(Ev.MCE_TAKEOFF)
+action[curr_state]()

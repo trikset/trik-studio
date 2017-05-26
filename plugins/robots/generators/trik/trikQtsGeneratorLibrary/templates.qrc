@@ -226,5 +226,6 @@
         <file>templates/label.t</file>
         <file>templates/goto.t</file>
         <file>templates/takeoff.t</file>
+        <file>templates/landing.t</file>
     </qresource>
 </RCC>

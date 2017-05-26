@@ -50,6 +50,7 @@
 #include "simpleGenerators/removeFileGenerator.h"
 #include "parts/trikDeviceVariables.h"
 #include "simpleGenerators/geoTakeoffGenerator.h"
+#include "simpleGenerators/geoLandingGenerator.h"
 
 using namespace trik;
 using namespace trik::simple;
@@ -139,6 +140,8 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 		return new RemoveFileGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "GeoTakeoff") {
 		return new GeoTakeoffGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "GeoLanding") {
+		return new GeoLandingGenerator(mRepo, customizer, id, this);
 	}
 
 	return GeneratorFactoryBase::simpleGenerator(id, customizer);
