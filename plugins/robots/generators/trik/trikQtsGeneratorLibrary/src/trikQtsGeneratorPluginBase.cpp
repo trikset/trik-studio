@@ -21,8 +21,10 @@
 #include <QtCore/QFinalState>
 #include <QtCore/QDir>
 #include <QtCore/QProcess>
+#include <QDebug>
 
 #include <qrkernel/logging.h>
+#include <qrkernel/settingsManager.h>
 #include <trikGeneratorBase/trikGeneratorPluginBase.h>
 #include <trikGeneratorBase/robotModel/generatorModelExtensionInterface.h>
 #include <trikKit/robotModel/trikRobotModelBase.h>
@@ -190,14 +192,16 @@ void TrikQtsGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExtens
 
 void TrikQtsGeneratorPluginBase::uploadProgram()
 {
+    const QString server = qReal::SettingsManager::value("TrikTcpServer").toString();
 	QProcess process;
 	const QFileInfo fileInfo = generateCodeForProcessing();
 
+    qDebug() << server;
 //	process.setWorkingDirectory(fileInfo.absoluteDir().path());
 
     #ifdef Q_OS_LINUX
 //        process.start("bash", {"-c", "./upload.sh", fileInfo.absoluteFilePath()});
-        process.start("./upload.sh", {fileInfo.absoluteFilePath()});
+        process.start("./upload.sh", {fileInfo.absoluteFilePath(), server});
     #endif
 
 	process.waitForStarted();
@@ -218,12 +222,13 @@ void TrikQtsGeneratorPluginBase::uploadProgram()
 
 void TrikQtsGeneratorPluginBase::runProgram()
 {
-	uploadProgram();
+    //uploadProgram();
 
+    const QString server = qReal::SettingsManager::value("TrikTcpServer").toString();
 	QProcess process;
 
     #ifdef Q_OS_LINUX
-        process.start("./start.sh");
+    process.start("./start.sh", {server});
     #endif
 
 	process.waitForStarted();
