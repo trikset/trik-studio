@@ -225,5 +225,6 @@
         <file>templates/subprograms/subprogramArgument.t</file>
         <file>templates/label.t</file>
         <file>templates/goto.t</file>
+        <file>templates/takeoff.t</file>
     </qresource>
 </RCC>

@@ -19,6 +19,8 @@
 #include <QtCore/QStateMachine>
 #include <QtCore/QState>
 #include <QtCore/QFinalState>
+#include <QtCore/QDir>
+#include <QtCore/QProcess>
 
 #include <qrkernel/logging.h>
 #include <trikGeneratorBase/trikGeneratorPluginBase.h>
@@ -165,7 +167,7 @@ generatorBase::MasterGeneratorBase *TrikQtsGeneratorPluginBase::masterGenerator(
 
 QString TrikQtsGeneratorPluginBase::defaultFilePath(const QString &projectName) const
 {
-	return QString("trik/%1/%1.js").arg(projectName);
+	return QString("trik/%1/%1.lua").arg(projectName);
 }
 
 text::LanguageInfo TrikQtsGeneratorPluginBase::language() const
@@ -188,42 +190,95 @@ void TrikQtsGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExtens
 
 void TrikQtsGeneratorPluginBase::uploadProgram()
 {
+	QProcess process;
 	const QFileInfo fileInfo = generateCodeForProcessing();
 
-	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
-		disableButtons();
-		mUploadProgramProtocol->run(fileInfo);
-	} else {
-		QLOG_ERROR() << "Code generation failed, aborting";
+//	process.setWorkingDirectory(fileInfo.absoluteDir().path());
+
+    #ifdef Q_OS_LINUX
+	    process.start("bash", {"-c", "./upload.sh", fileInfo.absoluteFilePath()});
+    #endif
+
+	process.waitForStarted();
+	if (process.state() != QProcess::Running) {
+		mMainWindowInterface->errorReporter()->addError(tr("Unable to execute script"));
+		return;
 	}
+	process.waitForFinished();
+
+	QStringList errors = QString(process.readAllStandardError()).split("\n", QString::SkipEmptyParts);
+	errors << QString(process.readAllStandardOutput()).split("\n", QString::SkipEmptyParts);
+	for (const auto &error : errors) {
+		mMainWindowInterface->errorReporter()->addInformation(error);
+	}
+
+	return;
 }
 
 void TrikQtsGeneratorPluginBase::runProgram()
 {
-	const QFileInfo fileInfo = generateCodeForProcessing();
-	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
-		if (mRunProgramProtocol) {
-			disableButtons();
-			mRunProgramProtocol->run(fileInfo);
-		} else {
-			QLOG_ERROR() << "Run program protocol is not initialized";
-		}
-	} else {
-		QLOG_ERROR() << "Code generation failed, aborting";
+	uploadProgram();
+
+	QProcess process;
+
+    #ifdef Q_OS_LINUX
+	    process.start("bash", {"-c", "./start.sh"});
+    #endif
+
+	process.waitForStarted();
+	if (process.state() != QProcess::Running) {
+		mMainWindowInterface->errorReporter()->addError(tr("Unable to execute script"));
+		return;
 	}
+	process.waitForFinished();
+
+	QStringList errors = QString(process.readAllStandardError()).split("\n", QString::SkipEmptyParts);
+	errors << QString(process.readAllStandardOutput()).split("\n", QString::SkipEmptyParts);
+	for (const auto &error : errors) {
+		mMainWindowInterface->errorReporter()->addInformation(error);
+	}
+
+	return;
+}
+
+void TrikQtsGeneratorPluginBase::runScript(QString scriptName)
+{
+//	QProcess process;
+//	const QFileInfo fileInfo = generateCodeForProcessing();
+
+////	process.setWorkingDirectory(fileInfo.absoluteDir().path());
+
+//    #ifdef Q_OS_LINUX
+//	    process.start("bash", {"-c", scriptName, fileInfo.absoluteFilePath()});
+//    #endif
+
+//	process.waitForStarted();
+//	if (process.state() != QProcess::Running) {
+//		mMainWindowInterface->errorReporter()->addError(tr("Unable to execute script"));
+//		return;
+//	}
+//	process.waitForFinished();
+
+//	QStringList errors = QString(process.readAllStandardError()).split("\n", QString::SkipEmptyParts);
+//	errors << QString(process.readAllStandardOutput()).split("\n", QString::SkipEmptyParts);
+//	for (const auto &error : errors) {
+//		mMainWindowInterface->errorReporter()->addInformation(error);
+//	}
+
+//	return;
 }
 
 void TrikQtsGeneratorPluginBase::stopRobot()
 {
-	if (mStopRobotProtocol) {
-		disableButtons();
-		mStopRobotProtocol->run(
-				"script.system(\"killall aplay\"); \n"
-				"script.system(\"killall vlc\");"
-				);
-	} else {
-		QLOG_ERROR() << "Stop robot protocol is not initialized";
-	}
+//	if (mStopRobotProtocol) {
+//		disableButtons();
+//		mStopRobotProtocol->run(
+//				"script.system(\"killall aplay\"); \n"
+//				"script.system(\"killall vlc\");"
+//				);
+//	} else {
+//		QLOG_ERROR() << "Stop robot protocol is not initialized";
+//	}
 }
 
 void TrikQtsGeneratorPluginBase::onProtocolFinished()

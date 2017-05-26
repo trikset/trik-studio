@@ -88,6 +88,8 @@ private:
 	/// Disables "run", "upload" and "stop" buttons when there is pending command to a robot.
 	void disableButtons();
 
+	void runScript(QString scriptName);
+
 	/// Action that launches code generator
 	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
 

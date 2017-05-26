@@ -32,7 +32,7 @@ TrikQtsMasterGenerator::TrikQtsMasterGenerator(const qrRepo::RepoApi &repo
 
 QString TrikQtsMasterGenerator::targetPath()
 {
-	return QString("%1/%2.js").arg(mProjectDir, mProjectName);
+    return QString("%1/%2.lua").arg(mProjectDir, mProjectName);
 }
 
 bool TrikQtsMasterGenerator::supportsGotoGeneration() const

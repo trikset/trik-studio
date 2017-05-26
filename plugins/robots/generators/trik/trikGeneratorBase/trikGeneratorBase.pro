@@ -77,6 +77,7 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/waitPadPressGenerator.h \
 	$$PWD/src/simpleGenerators/fileWriteGenerator.h \
 	$$PWD/src/simpleGenerators/removeFileGenerator.h \
+    src/simpleGenerators/geoTakeoffGenerator.h
 
 SOURCES += \
 	$$PWD/src/trikGeneratorPluginBase.cpp \
@@ -118,3 +119,4 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/waitPadPressGenerator.cpp \
 	$$PWD/src/simpleGenerators/fileWriteGenerator.cpp \
 	$$PWD/src/simpleGenerators/removeFileGenerator.cpp \
+    src/simpleGenerators/geoTakeoffGenerator.cpp
