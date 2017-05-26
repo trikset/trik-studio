@@ -1,5 +1,5 @@
 -- var __interpretation_started_timestamp__;
-@@VARIABLES@@
+-- @@VARIABLES@@
 
 @@SUBPROGRAMS_FORWARDING@@
 
@@ -10,7 +10,7 @@
 @@THREADS@@
 
 
-__interpretation_started_timestamp__ = Date.now();
+-- __interpretation_started_timestamp__ = Date.now();
 
 @@MAIN_CODE@@
 
