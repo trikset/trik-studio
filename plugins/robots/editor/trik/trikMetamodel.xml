@@ -1273,33 +1273,33 @@
 
 		<palette sorted="false">
 			<group name="Actions">
-			    <element name="GeoTakeoff"/>
+                            <element name="GeoTakeoff"/>
 				<element name="GeoLanding"/>
-				<element name="TrikPlayTone"/>
+<!--				<element name="TrikPlayTone"/>-->
 				<element name="TrikV6EnginesForward"/>
-				<element name="TrikV6EnginesBackward"/>
-				<element name="TrikV6EnginesStop"/>
-				<element name="TrikV6ClearEncoder"/>
+<!--				<element name="TrikV6EnginesBackward"/>-->
+<!--				<element name="TrikV6EnginesStop"/>-->
+<!--				<element name="TrikV6ClearEncoder"/>
 				<element name="TrikV62ClearEncoder"/>
 				<element name="TrikAngularServo"/>
 				<element name="TrikV62AngularServo"/>
-				<element name="TrikSay"/>
+                                <element name="TrikSay"/>-->
 				<element name="TrikLed" />
-				<element name="TrikSystem" />
+<!--				<element name="TrikSystem" />
 				<element name="TrikInitCamera" />
 				<element name="TrikDetect" />
 				<element name="TrikDetectorToVariable" />
 				<element name="TrikInitVideoStreaming" />
 				<element name="TrikSendMessage" />
 				<element name="TrikWriteToFile"/>
-				<element name="TrikRemoveFile"/>
+                                <element name="TrikRemoveFile"/>-->
 			</group>
-			<group name="Wait">
+<!--			<group name="Wait">
 				<element name="TrikWaitForTouchSensor"/>
 				<element name="TrikWaitForLight"/>
 				<element name="TrikWaitForSonarDistance"/>
 				<element name="TrikWaitForIRDistance"/>
-				<!-- <element name="TrikWaitForMotion"/> -->
+                                <element name="TrikWaitForMotion"/> was commented out
 				<element name="TrikWaitForEncoder"/>
 				<element name="TrikV62WaitForEncoder"/>
 				<element name="TrikWaitForButton"/>
@@ -1309,9 +1309,9 @@
 				<element name="TrikWaitGamepadWheel" />
 				<element name="TrikWaitGamepadDisconnect" />
 				<element name="TrikWaitGamepadConnect" />
-			</group>
-			<group name="Drawing">
-				<element name="TrikSetPainterColor"/>
+                        </group>-->
+<!--			<group name="Drawing">
+                                <element name="TrikSetPainterColor"/>
 				<element name="TrikSetPainterWidth"/>
 				<element name="TrikDrawPixel"/>
 				<element name="TrikDrawLine"/>
@@ -1320,8 +1320,8 @@
 				<element name="TrikDrawArc"/>
 				<element name="TrikSmile"/>
 				<element name="TrikSadSmile"/>
-				<element name="TrikSetBackground"/>
-			</group>
+                                <element name="TrikSetBackground"/>
+                        </group>-->
 		</palette>
 	</diagram>
 </metamodel>

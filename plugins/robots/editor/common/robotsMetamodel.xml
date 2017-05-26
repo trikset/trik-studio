@@ -704,19 +704,19 @@
 				<element name="CommentBlock"/>
 			</group>
 			<group name="Actions">
-				<element name="SendMessageThreads"/>
-				<element name="GetButtonCode"/>
+<!--				<element name="SendMessageThreads"/>
+                                <element name="GetButtonCode"/>-->
 			</group>
-			<group name="Wait">
+<!--			<group name="Wait">
 				<element name="Timer"/>
 				<element name="ReceiveMessageThreads"/>
-			</group>
-			<group name="Drawing">
+                        </group>-->
+<!--			<group name="Drawing">
 				<element name="PrintText"/>
 				<element name="ClearScreen"/>
 				<element name="MarkerDown"/>
 				<element name="MarkerUp"/>
-			</group>
+                        </group>-->
 		</palette>
 	</diagram>
 </metamodel>

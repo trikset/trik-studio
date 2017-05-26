@@ -103,16 +103,35 @@ qReal::IdList TrikV6BlocksFactory::blocksToDisable() const
             << id("TrikSay")
             << id("TrikSendMessage")
             << id("TrikWaitForMessage")
+
             << id("CommentBlock")
             << id("Subprogram")
             << id("PrintText")
             << id("ClearScreen")
+            << id("Function")
             << id("Fork")
             << id("Join")
             << id("KillThread")
             << id("SendMessageThreads")
             << id("ReceiveMessageThreads")
             << id("Timer")
+
+            << id("TrikLed")
+
+//               <element name="InitialNode"/>
+//               <element name="FinalNode"/>
+//               <element name="Function"/>
+//               <element name="IfBlock"/>
+//               <element name="FiBlock"/>
+//               <element name="SwitchBlock"/>
+//               <element name="Loop"/>
+//               <element name="Subprogram"/>
+//               <element name="Fork"/>
+//               <element name="Join"/>
+//               <element name="KillThread"/>
+//               <element name="VariableInit"/>
+//               <element name="Randomizer"/>
+//               <element name="CommentBlock"/>
     ;
 
     return result;
