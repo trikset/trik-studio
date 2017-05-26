@@ -196,7 +196,8 @@ void TrikQtsGeneratorPluginBase::uploadProgram()
 //	process.setWorkingDirectory(fileInfo.absoluteDir().path());
 
     #ifdef Q_OS_LINUX
-	    process.start("bash", {"-c", "./upload.sh", fileInfo.absoluteFilePath()});
+//        process.start("bash", {"-c", "./upload.sh", fileInfo.absoluteFilePath()});
+        process.start("./upload.sh", {fileInfo.absoluteFilePath()});
     #endif
 
 	process.waitForStarted();
@@ -222,7 +223,7 @@ void TrikQtsGeneratorPluginBase::runProgram()
 	QProcess process;
 
     #ifdef Q_OS_LINUX
-	    process.start("bash", {"-c", "./start.sh"});
+        process.start("./start.sh");
     #endif
 
 	process.waitForStarted();
