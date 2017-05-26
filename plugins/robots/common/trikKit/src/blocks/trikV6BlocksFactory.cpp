@@ -118,6 +118,13 @@ qReal::IdList TrikV6BlocksFactory::blocksToDisable() const
 
             << id("TrikLed")
 
+	        << id("IfBlock")
+	        << id("FiBlock")
+	        << id("SwitchBlock")
+	        << id("Loop")
+	        << id("VariableInit")
+	        << id("Randomizer")
+
 //               <element name="InitialNode"/>
 //               <element name="FinalNode"/>
 //               <element name="Function"/>

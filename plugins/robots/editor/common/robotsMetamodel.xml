@@ -695,10 +695,10 @@
 				<element name="FiBlock"/>
 				<element name="SwitchBlock"/>
 				<element name="Loop"/>
-				<element name="Subprogram"/>
+<!--				<element name="Subprogram"/>
 				<element name="Fork"/>
 				<element name="Join"/>
-				<element name="KillThread"/>
+				<element name="KillThread"/>-->
 				<element name="VariableInit"/>
 				<element name="Randomizer"/>
 				<element name="CommentBlock"/>
