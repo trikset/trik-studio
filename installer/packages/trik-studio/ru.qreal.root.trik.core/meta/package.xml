@@ -10,6 +10,4 @@
         <License name="WinScp Component License" file="WinScp-license.txt" />
     </Licenses>
     <SortingPriority>10</SortingPriority>
-    <Default>true</Default>
-    <ForcedInstallation>false</ForcedInstallation>
 </Package>

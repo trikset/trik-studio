@@ -7,5 +7,4 @@
     <Version>3.1.4-4</Version>
     <ReleaseDate>2016-06-07</ReleaseDate>
     <SortingPriority>19</SortingPriority>
-    <ForcedInstallation>false</ForcedInstallation>
 </Package>

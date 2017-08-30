@@ -10,6 +10,4 @@
         <!-- TODO -->
     </Licenses>
     <SortingPriority>7</SortingPriority>
-    <Default>true</Default>
-    <ForcedInstallation>false</ForcedInstallation>
 </Package>
