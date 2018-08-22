@@ -111,8 +111,6 @@ private:
 	TrikDisplayEmu mDisplay;
 	TrikKeysInterfaceStub mKeys;
 
-	bool mIsWaitingEnabled;
-
 	QScopedPointer<utils::AbstractTimer> mSensorUpdater;
 
 	QHash<QString, TrikMotorEmu *> mMotors;

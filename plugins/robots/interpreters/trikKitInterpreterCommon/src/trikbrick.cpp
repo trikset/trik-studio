@@ -37,7 +37,6 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 	: mTwoDRobotModel(model)
 	, mDisplay(model)
 	, mKeys(model)
-	, mIsWaitingEnabled(true)
 	, mSensorUpdater(model->timeline().produceTimer())
 {
 	connect(this, &TrikBrick::log, this, &TrikBrick::printToShell);
@@ -46,8 +45,6 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 	connect(mSensorUpdater.data(), &utils::AbstractTimer::timeout, [model](){
 		model->updateSensorsValues(); /// @todo: maybe connect to model directly?
 	});
-
-	connect(this, &TrikBrick::stopWaiting, [this]() { mIsWaitingEnabled = false; });
 }
 
 TrikBrick::~TrikBrick()
@@ -110,7 +107,6 @@ void TrikBrick::init()
 	mGyroscope.reset(); // for some reason it won't reconnect to the robot parts otherwise.
 	QMetaObject::invokeMethod(mSensorUpdater.data(), "start"); // failproof against timer manipulation in another thread
 	//mSensorUpdater.start();
-	mIsWaitingEnabled = true;
 }
 
 void TrikBrick::setCurrentDir(const QString &dir)
@@ -340,19 +336,19 @@ int TrikBrick::random(int from, int to)
 
 void TrikBrick::wait(int milliseconds)
 {
-	if (!mIsWaitingEnabled)
-		return;
 	QEventLoop loop;
-	QObject::connect(this, SIGNAL(stopWaiting()), &loop, SLOT(quit())/*, Qt::DirectConnection*/);
 	QScopedPointer<utils::AbstractTimer> t(mTwoDRobotModel->timeline().produceTimer());
-	//t->moveToThread(QThread::currentThread());
-	t->setRepeatable(true);
-	connect(t.data(), SIGNAL(timeout()), &loop, SLOT(quit()), Qt::DirectConnection);
-	t->start(milliseconds);
-	if (!mIsWaitingEnabled) {
-		return; // to be safe;
-	}
 
+	auto handler = [this, &t, &loop]() {
+		disconnect(t.data(), &utils::AbstractTimer::timeout, 0, 0);
+		disconnect(this, &TrikBrick::stopWaiting, 0, 0);
+		loop.quit();
+	};
+
+	connect(t.data(), &utils::AbstractTimer::timeout, handler);
+	connect(this,  &TrikBrick::stopWaiting, handler);
+
+	t->start(milliseconds);
 	loop.exec();
 }
 
