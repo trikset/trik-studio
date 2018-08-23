@@ -57,7 +57,7 @@ isEmpty(TARGET) {
 equals(TEMPLATE, app) {
 	unix:!macx {
 		QMAKE_LFLAGS += -Wl,-rpath-link,$$DESTDIR
-		!CONFIG(no_rpath) QMAKE_LFLAGS += -Wl,-O1,-rpath,.
+		!CONFIG(no_rpath) QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN\'
 	}
 	macx:!CONFIG(no_rpath) {
 		QMAKE_LFLAGS += -rpath . -rpath @executable_path/../Lib -rpath @executable_path/../Frameworks -rpath @executable_path/../../../
@@ -69,13 +69,17 @@ macx-clang {
 	QMAKE_LFLAGS_SONAME = -Wl,-install_name,@rpath/
 }
 
-!gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<5\\.[0-9]+\\."' ){ CONFIG += gcc5 }
+!gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<[5-9]\\.[0-9]+\\."' ){ CONFIG += gcc5 }
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<4\\.[0-9]+\\."' ){ CONFIG += gcc4 }
 
 
 !CONFIG(nosanitizers):!clang:gcc:*-g++*:gcc4{
 	warning("Disabled sanitizers, failed to detect compiler version or too old compiler: $$QMAKE_CXX")
 	CONFIG += nosanitizers
+}
+
+!CONFIG(nosanitizers) {
+	CONFIG += sanitizer
 }
 
 unix:!CONFIG(nosanitizers) {
@@ -86,7 +90,7 @@ unix:!CONFIG(nosanitizers) {
 		CONFIG += sanitizer sanitize_undefined
 	}
 
-	CONFIG(debug, debug | release):!CONFIG(sanitize_address):!macx-clang { CONFIG += sanitize_leak }
+	CONFIG(debug, debug | release):!CONFIG(sanitize_address):!CONFIG(sanitize_thread):!macx-clang { CONFIG += sanitize_leak }
 
 	CONFIG(sanitize_leak) {
 		#LSan can be used without performance degrade even in release build
@@ -127,6 +131,9 @@ unix:!CONFIG(nosanitizers) {
 	}
 
 }
+
+#Workaround for a known gcc/ld (before 7.3/bionic) issue
+CONFIG(sanitizer):!clang: QMAKE_LFLAGS += -fuse-ld=gold -Wl,--disable-new-dtags
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
 MOC_DIR = .build/$$CONFIGURATION/moc
