@@ -31,6 +31,7 @@ QList<ProjectConverter> SaveConvertionManager::converters()
 		, from301to302Converter()
 		, from302to310Converter()
 		, from312to313Converter()
+		, from320to330Converter()
 	};
 }
 
@@ -212,6 +213,18 @@ ProjectConverter SaveConvertionManager::from312to313Converter()
 	};
 
 	return constructConverter("3.1.2", "3.1.3", { replace(replacementRules) });
+}
+
+ProjectConverter SaveConvertionManager::from320to330Converter()
+{
+	return ProjectConverter(editor(), Version::fromString("3.2.0"), Version::fromString("3.3.0")
+			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
+	{
+		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+		worldModel.replace("trikV62KitRobot", "trikKitRobot");
+		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
+		return ProjectConverter::Success;
+	});
 }
 
 bool SaveConvertionManager::isRobotsDiagram(const Id &element)
