@@ -1,4 +1,5 @@
 buildScripts/vera++/params
+buildScripts/.pyenv-*/
 .qmake.cache
 *~
 *.autosave
