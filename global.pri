@@ -218,7 +218,7 @@ defineTest(copyToDestdir) {
 		isDir($$FILE) {
 			ABSOLUTE_PATH = $$absolute_path($$FILE, $$GLOBAL_PWD)
 			BASE_NAME = $$section(ABSOLUTE_PATH, "/", -1, -1)
-			DESTDIR_SUFFIX = /$$BASE_NAME
+			DESTDIR_SUFFIX = $$BASE_NAME/
 			FILE = $$FILE/*
 		}
 
@@ -229,15 +229,16 @@ defineTest(copyToDestdir) {
 
 		win32 {
 			# probably, xcopy needs /s and /e for directories
-			COPY_DIR = "cmd.exe /C xcopy /f /y /i "
+			COPY_DIR = "cmd.exe /C xcopy /f /y /i /s /e "
 		} else {
 			COPY_DIR = rsync -a
 			!silent: COPY_DIR += -v
 		}
-		COPY_COMMAND = $$COPY_DIR $$quote($$FILE) $$quote($$DDIR/)
+		COPY_COMMAND = $$COPY_DIR $$quote($$FILE) $$quote($$DDIR)
 		isEmpty(NOW) {
 			QMAKE_POST_LINK += $$COPY_COMMAND $$escape_expand(\\n\\t)
 		} else {
+			system(echo $$COPY_COMMAND)
 			system($$COPY_COMMAND)
 		}
 	}
