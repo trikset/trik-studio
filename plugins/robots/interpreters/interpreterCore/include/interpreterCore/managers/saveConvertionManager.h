@@ -59,6 +59,9 @@ private:
 	/// Replaces scalar gyroscope and accelerometer variables to vector ones.
 	static qReal::ProjectConverter from312to313Converter();
 
+	/// Replaces "trikV62KitRobot" with "trikKitRobot"
+	static qReal::ProjectConverter from320to330Converter();
+
 	static bool isRobotsDiagram(const qReal::Id &element);
 	static bool isDiagramType(const qReal::Id &element);
 	static bool isEdgeType(const qReal::Id &element);

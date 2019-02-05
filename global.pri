@@ -180,13 +180,24 @@ INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 
 CONFIG += c++11
 
-QMAKE_CXXFLAGS += -pedantic-errors -ansi -Wextra
+QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
+
+!clang: QMAKE_CXXFLAGS += -ansi
 
 gcc5 | clang {
 	QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 }
 
-clang {
+#treat git submodules as system path
+SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))
+
+#treat Qt includes as system headers
+SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=$$[QT_INSTALL_HEADERS]
+
+
+clang:QMAKE_CXXFLAGS += $$SYSTEM_INCLUDE_PREFIX_OPTION
+
+false:clang {
 # Problem from Qt system headers
 	QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
 }
@@ -218,7 +229,7 @@ defineTest(copyToDestdir) {
 		isDir($$FILE) {
 			ABSOLUTE_PATH = $$absolute_path($$FILE, $$GLOBAL_PWD)
 			BASE_NAME = $$section(ABSOLUTE_PATH, "/", -1, -1)
-			DESTDIR_SUFFIX = /$$BASE_NAME
+			DESTDIR_SUFFIX = $$BASE_NAME/
 			FILE = $$FILE/*
 		}
 
@@ -229,12 +240,12 @@ defineTest(copyToDestdir) {
 
 		win32 {
 			# probably, xcopy needs /s and /e for directories
-			COPY_DIR = "cmd.exe /C xcopy /f /y /i "
+			COPY_DIR = "cmd.exe /C xcopy /f /y /i /s /e "
 		} else {
 			COPY_DIR = rsync -a
 			!silent: COPY_DIR += -v
 		}
-		COPY_COMMAND = $$COPY_DIR $$quote($$FILE) $$quote($$DDIR/)
+		COPY_COMMAND = $$COPY_DIR $$quote($$FILE) $$quote($$DDIR)
 		isEmpty(NOW) {
 			QMAKE_POST_LINK += $$COPY_COMMAND $$escape_expand(\\n\\t)
 		} else {
@@ -274,6 +285,14 @@ defineTest(noPch) {
 	export(PRECOMPILED_HEADER)
 }
 
+defineTest(enableFlagIfCan) {
+  system(echo $$shell_quote(int main(){return 0;}) | $$QMAKE_CXX $$QMAKE_CXXFLAGS $$1 -x c++ -c - -o $$system(mktemp) ) {
+    QMAKE_CXXFLAGS += $$1
+  export(QMAKE_CXXFLAGS)
+  } else {
+    message(Cannot enable $$1)
+  }
+}
 
 CONFIG(noPch) {
 	noPch()
