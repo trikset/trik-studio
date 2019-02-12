@@ -1,10 +1,12 @@
 #!/bin/bash
 set -euxo pipefail
+
+CODECOV=true
 case $TRAVIS_OS_NAME in
   osx)
      export PATH="/usr/local/opt/qt/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+     export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
      export PATH="$(pyenv root)/bin:$PATH"
      eval "$(pyenv init -)"
      export PKG_CONFIG_PATH="$(python3-config --prefix)/lib/pkgconfig"
@@ -12,7 +14,7 @@ case $TRAVIS_OS_NAME in
     ;;
   linux)
      EXECUTOR="time docker exec builder "
-     QMAKE_EXTRA=
+     if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR python -m codecov" ; fi
    ;;
   *) exit 1 ;;
 esac
@@ -41,4 +43,4 @@ $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c \"cd bin/$CONFIG && ls\" \
 && sh -c \"export DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
-if [ "$TESTS" != "true" ]; then $EXECUTOR bash -lc codecov ; fi
+$CODECOV
