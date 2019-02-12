@@ -9,7 +9,6 @@ case $TRAVIS_OS_NAME in
      eval "$(pyenv init -)"
      export PKG_CONFIG_PATH="$(python3-config --prefix)/lib/pkgconfig"
      EXECUTOR="buildScripts/with_pyenv "
-     QMAKE_EXTRA="CONFIG+=no-sanitizers"
     ;;
   linux)
      EXECUTOR="time docker exec builder "
@@ -41,3 +40,5 @@ $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && ccache -s \
 && sh -c \"cd bin/$CONFIG && ls\" \
 && sh -c \"export DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+
+if [ "$TESTS" != "true" ]; then $EXECUTOR bash -lc codecov ; fi

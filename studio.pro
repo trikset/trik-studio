@@ -20,3 +20,35 @@ RESOURCES += \
 	qrgui/mainwindow/qrgui.qrc
 
 include (installer/platform/install-trik-studio.pri)
+
+tests {
+
+	SUBDIRS += \
+		googletest \
+		testUtils \
+		robotsTests \
+		trikStudioSimulatorTests \
+
+	googletest.file = $$PWD/qrtest/thirdparty/googletest/googletest.pro
+	testUtils.subdir = $$PWD/qrtest/unitTests/testUtils
+	robotsTests.subdir = $$PWD/qrtest/unitTests/pluginsTests/robotsTests
+	trikStudioSimulatorTests.subdir = $$PWD/qrtest/trikStudioSimulatorTests
+
+	googletest.depends = initvars
+	robotsTests.depends = \
+		qrxc \
+		qrgui \
+		qrrepo \
+		plugins \
+		qrkernel \
+		qrutils \
+		thirdparty \
+		testUtils \
+
+	testUtils.depends = \
+		googletest \
+		qrgui \
+
+	trikStudioSimulatorTests.depends =  qrgui
+}
+

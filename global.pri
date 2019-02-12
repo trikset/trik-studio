@@ -286,7 +286,7 @@ defineTest(noPch) {
 }
 
 defineTest(enableFlagIfCan) {
-  system(echo $$shell_quote(int main(){return 0;}) | $$QMAKE_CXX $$QMAKE_CXXFLAGS $$1 -x c++ -c - -o $$system(mktemp) ) {
+  system(echo $$shell_quote(int main(){return 0;}) | $$QMAKE_CXX $$QMAKE_CXXFLAGS $$1 -x c++ -c - -o $$system(mktemp) 2>/dev/null ) {
     QMAKE_CXXFLAGS += $$1
   export(QMAKE_CXXFLAGS)
   } else {
