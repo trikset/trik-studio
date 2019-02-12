@@ -1,5 +1,5 @@
 #version: 999.{branch}-{build}
-clone_folder: c:\qreal
+clone_folder: c:\studio
 #test: off
 
 clone_depth: 1
@@ -23,11 +23,10 @@ environment:
     PYTHON_LIB: '%PYTHON_PATH%\libs'
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
-    PROJECT_FILE: qrealRobotsTest
+    PROJECT_FILE: studio
     TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
   matrix:
-#    - PROJECT_FILE: qreal
       - MINGW: C:\Qt\Tools\mingw530_32
         QTDIR: C:\Qt\5.11\mingw53_32
       - MINGW: C:\Qt\Tools\mingw492_32
@@ -82,7 +81,7 @@ before_build:
 
 build_script:
   - cd %BUILD_DIR%
-  - qmake %APPVEYOR_BUILD_FOLDER%\%PROJECT_FILE%.pro -spec win32-g++ CONFIG+=%CONFIGURATION% CONFIG+=silent # QMAKE_CXX="ccache g++"
+  - qmake %APPVEYOR_BUILD_FOLDER%\%PROJECT_FILE%.pro -spec win32-g++ CONFIG+=%CONFIGURATION% CONFIG+=tests CONFIG+=silent # QMAKE_CXX="ccache g++"
   - mingw32-make -j2 qmake_all
   - mingw32-make -j2 -k all
 
@@ -98,4 +97,4 @@ on_finish:
 
 artifacts:
  - path: bin\$(configuration)
-   name: qreal-$(configuration)-$(PROJECT_FILE)
+   name: studio-$(configuration)-$(PROJECT_FILE)

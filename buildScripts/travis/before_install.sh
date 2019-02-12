@@ -6,11 +6,6 @@ case $TRAVIS_OS_NAME in
     ;;
   linux)
     docker pull trikset/linux-builder
-    if [[ "$CONFIG" == "debug" ]]
-    then
-      pip install --user --upgrade pip
-      pip install --user codecov
-    fi
-    ;;
+   ;;
   *) exit 1 ;;
 esac

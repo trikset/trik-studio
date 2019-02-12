@@ -8,17 +8,18 @@ env:
     - PYENV_ROOT="$HOME/pyenv.root"
     - CONFIG=release
     - VERA=false
-    - PROJECT=qrealRobots
+    - PROJECT=studio
     - TESTS=true
     - CELLAR_CACHE_DIR=$([ $TRAVIS_OS_NAME = 'osx' ] && echo "/usr/local/Cellar" || { mkdir -p .empty/{qt,ccache,python@3,pyenv} ; echo .empty ; } )
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then docker pull trikset/linux-builder ; else true ; fi & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
     - ALL_TESTS="./robots_kitBase_unittests-d && ./robots_interpreterCore_unittests-d && ./robots_twoDModel_unittests-d && ./trik-v62-qts-generator-tests-d && ./robots_utils_unittests-d && ./run-simulator-tests.sh"
+    - QMAKE_EXTRA="CONFIG+=tests CONFIG+=silent"
 cache:
   timeout: 1000
   apt: true
   ccache: true
-  pip: true
+#  pip: true
   directories:
     - $CELLAR_CACHE_DIR/qt
     - $CELLAR_CACHE_DIR/ccache
@@ -31,12 +32,12 @@ cache:
 #    - $HOME/.cache
 
 addons:
-  apt:
-    update: true
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - python-pip
+#  apt:
+#    update: true
+#    sources:
+#      - ubuntu-toolchain-r-test
+#    packages:
+#      - python-pip
   artifacts:
     paths:
       - build.log
@@ -52,15 +53,17 @@ matrix:
       dist: trusty
       sudo: required
       services: docker
-      env: CONFIG=debug  VERA=true PROJECT=qrealRobotsTest TESTS=$ALL_TESTS
+      env: CONFIG=debug  VERA=true PROJECT=studio TESTS=$ALL_TESTS
       name: "Linux debug + vera + tests"
     - os: osx
       language: cpp
       name: "macOS release"
+      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
     - os: osx
       language: cpp
       name: "macOS debug + tests"
-      env: CONFIG=debug  VERA=false PROJECT=qrealRobotsTest TESTS=$ALL_TESTS
+      env: CONFIG=debug  VERA=false PROJECT=studio TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
+
 
 before_install:
   - wait $EARLY_START_DOCKER_PULL_PID || true
