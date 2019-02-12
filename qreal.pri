@@ -19,7 +19,7 @@ contains(QT_VERSION, ^4\\.[0-9]\\..*){
 
 TEMPLATE = subdirs
 SUBDIRS = \
-	initvars.pro \
+	initvars \
 	qrmc \
 	qrxc \
 	qrgui \
@@ -32,7 +32,7 @@ SUBDIRS = \
 	thirdparty \
 	qrtranslations \
 
-thirdparty.depends = initvars.pro
+thirdparty.depends = initvars
 qrkernel.depends = thirdparty
 qrgraph.depends = qrkernel
 qrutils.depends = qrkernel qrtext
@@ -40,6 +40,7 @@ qrrepo.depends = qrkernel qrutils
 qrxc.depends = qrutils
 qrmc.depends = qrrepo
 qrmc.file = $$PWD/qrmc/qrmc-lib.pro
+initvars.file = initvars.qmake
 
 qrgui.depends = \
 	qrxc \
@@ -62,7 +63,7 @@ plugins.depends = \
 
 qrtext.depends = qrkernel
 
-qrtranslations.depends = initvars.pro
+qrtranslations.depends = initvars
 
 OTHER_FILES += \
 	$$PWD/.travis.yml \
