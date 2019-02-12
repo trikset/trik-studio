@@ -14,6 +14,7 @@
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDateTime>
+#include <QThread>
 
 #include "twoDModel/engine/model/timeline.h"
 #include "modelTimer.h"
@@ -93,6 +94,11 @@ void Timeline::gotoNextFrame()
 	}
 }
 
+utils::AbstractTimer *Timeline::produceTimerImpl()
+{
+	return new ModelTimer(this);
+}
+
 int Timeline::speedFactor() const
 {
 	return mSpeedFactor;
@@ -110,7 +116,11 @@ quint64 Timeline::timestamp() const
 
 utils::AbstractTimer *Timeline::produceTimer()
 {
-	return new ModelTimer(this);
+	auto &&connection = (QThread::currentThread() != this->thread()) ?
+				Qt::BlockingQueuedConnection : Qt::DirectConnection;
+	utils::AbstractTimer *t = nullptr;
+	QMetaObject::invokeMethod(this, "produceTimerImpl", connection, Q_RETURN_ARG(utils::AbstractTimer *, t));
+	return t;
 }
 
 void Timeline::setImmediateMode(bool immediateMode)

@@ -28,6 +28,7 @@ class ModelTimer : public utils::AbstractTimer
 
 public:
 	explicit ModelTimer(const Timeline *timeline /* Doesn`t take ownership */);
+	~ModelTimer() override;
 
 	bool isTicking() const override;
 	int interval() const override;

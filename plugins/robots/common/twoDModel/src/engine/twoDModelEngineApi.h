@@ -30,9 +30,10 @@ class FakeScene;
 
 class TwoDModelEngineApi : public engine::TwoDModelEngineInterface
 {
+
 public:
 	TwoDModelEngineApi(model::Model &model, view::TwoDModelWidget &view);
-	~TwoDModelEngineApi();
+	~TwoDModelEngineApi() override;
 
 	void setNewMotor(int speed, uint degrees
 			, const kitBase::robotModel::PortInfo &port, bool breakMode) override;

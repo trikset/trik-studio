@@ -58,7 +58,7 @@ public:
 	qreal pixelsInCm() const;
 
 	/// Measures the distance between robot and wall
-	int sonarReading(const QPointF &position, qreal direction) const;
+	Q_INVOKABLE int sonarReading(const QPointF &position, qreal direction) const;
 
 	/// Returns area which is seen by sonar sensor.
 	QPainterPath sonarScanningRegion(const QPointF &position, qreal direction, int range = 255) const;

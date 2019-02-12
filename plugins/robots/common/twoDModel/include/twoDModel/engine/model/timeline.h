@@ -81,6 +81,7 @@ signals:
 private slots:
 	void onTimer();
 	void gotoNextFrame();
+	utils::AbstractTimer *produceTimerImpl();
 
 private:
 	static const int defaultRealTimeInterval = 0;
