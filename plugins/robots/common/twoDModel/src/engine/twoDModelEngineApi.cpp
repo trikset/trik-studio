@@ -15,6 +15,7 @@
 #include "twoDModelEngineApi.h"
 
 #include <QtCore/qmath.h>
+#include <QThread>
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/logging.h>
@@ -65,17 +66,28 @@ TwoDModelEngineApi::~TwoDModelEngineApi()
 
 void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
 {
-	mModel.robotModels()[0]->setNewMotor(speed, degrees, port, breakMode);
+	auto && target = mModel.robotModels()[0];
+	QMetaObject::invokeMethod(target, "setNewMotor"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_ARG(int, speed), Q_ARG(uint, degrees), Q_ARG(kitBase::robotModel::PortInfo, port), Q_ARG(bool, breakMode));
 }
 
 int TwoDModelEngineApi::readEncoder(const PortInfo &port) const
 {
-	return mModel.robotModels()[0]->readEncoder(port);
+	int t;
+	auto && target = mModel.robotModels()[0];
+	QMetaObject::invokeMethod(target, "readEncoder"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_RETURN_ARG(int, t), Q_ARG(kitBase::robotModel::PortInfo, port));
+	return t;
 }
 
 void TwoDModelEngineApi::resetEncoder(const PortInfo &port)
 {
-	mModel.robotModels()[0]->resetEncoder(port);
+	auto && target = mModel.robotModels()[0];
+	QMetaObject::invokeMethod(target, "resetEncoder"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_ARG(kitBase::robotModel::PortInfo, port));
 }
 
 int TwoDModelEngineApi::readTouchSensor(const PortInfo &port) const
@@ -103,19 +115,34 @@ int TwoDModelEngineApi::readTouchSensor(const PortInfo &port) const
 int TwoDModelEngineApi::readSonarSensor(const PortInfo &port) const
 {
 	QPair<QPointF, qreal> neededPosDir = countPositionAndDirection(port);
-	const int res = mModel.worldModel().sonarReading(neededPosDir.first, neededPosDir.second);
+
+	int res;
+	auto && target = &mModel.worldModel();
+	QMetaObject::invokeMethod(target, "sonarReading"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_RETURN_ARG(int, res), Q_ARG(QPointF, neededPosDir.first), Q_ARG(qreal, neededPosDir.second));
 
 	return mModel.settings().realisticSensors() ? spoilSonarReading(res) : res;
 }
 
 QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 {
-	return mModel.robotModels()[0]->accelerometerReading();
+	QVector<int> t;
+	auto && target = mModel.robotModels()[0];
+	QMetaObject::invokeMethod(target, "accelerometerReading"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_RETURN_ARG(QVector<int>, t));
+	return t;
 }
 
 QVector<int> TwoDModelEngineApi::readGyroscopeSensor() const
 {
-	return mModel.robotModels()[0]->gyroscopeReading();
+	QVector<int> t;
+	auto && target = mModel.robotModels()[0];
+	QMetaObject::invokeMethod(target, "gyroscopeReading"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_RETURN_ARG(QVector<int>, t));
+	return t;
 }
 
 int TwoDModelEngineApi::spoilSonarReading(const int distance) const

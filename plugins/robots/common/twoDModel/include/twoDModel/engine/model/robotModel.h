@@ -79,7 +79,7 @@ public:
 	void stopRobot();
 	void playSound(int timeInMs);
 
-	void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
+	Q_INVOKABLE void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
 
 	SensorsConfiguration &configuration();
 
@@ -92,8 +92,8 @@ public:
 	/// Returns a reference to external robot description.
 	robotModel::TwoDRobotModel &info() const;
 
-	int readEncoder(const kitBase::robotModel::PortInfo &port) const;
-	void resetEncoder(const kitBase::robotModel::PortInfo &port);
+	Q_INVOKABLE int readEncoder(const kitBase::robotModel::PortInfo &port) const;
+	Q_INVOKABLE void resetEncoder(const kitBase::robotModel::PortInfo &port);
 
 	QPointF position() const;
 	void setPosition(const QPointF &newPos);
@@ -135,10 +135,10 @@ public:
 	QGraphicsItem *startPositionMarker() const;
 
 	/// Returns accelerometer sensor data.
-	QVector<int> accelerometerReading() const;
+	Q_INVOKABLE QVector<int> accelerometerReading() const;
 
 	/// Returns gyroscope sensor data.
-	QVector<int> gyroscopeReading() const;
+	Q_INVOKABLE QVector<int> gyroscopeReading() const;
 
 	/// Returns a bounding path of robot and its sensors in scene coordinates.
 	QPainterPath robotBoundingPath() const;

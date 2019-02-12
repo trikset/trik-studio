@@ -1,3 +1,4 @@
+**/object_script.*
 buildScripts/vera++/params
 buildScripts/.pyenv-*/
 .qmake.cache

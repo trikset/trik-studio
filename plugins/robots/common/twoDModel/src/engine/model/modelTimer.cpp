@@ -27,6 +27,10 @@ ModelTimer::ModelTimer(const Timeline *timeline)
 	connect(timeline, SIGNAL(tick()), this, SLOT(onTick()));
 }
 
+ModelTimer::~ModelTimer()
+{
+}
+
 bool ModelTimer::isTicking() const
 {
 	return mListening;
