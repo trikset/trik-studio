@@ -146,9 +146,9 @@ unix:!nosanitizers {
 		# They can change in some version of Qt, keep track of it.
 		# By the way, simply setting QMAKE_CFLAGS, QMAKE_CXXFLAGS and QMAKE_LFLAGS instead of those used below
 		# will not work due to arguments order ("-fsanitize=undefined" must be declared before "-fno-sanitize=vptr").
-#			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
-#			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
-#			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
+			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
+			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
+			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
 		}
 	}
 
