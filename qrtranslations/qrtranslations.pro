@@ -18,14 +18,13 @@ include(../global.pri)
 
 
 win32 {
-	DESTDIR ~= s,/,\\,g
 	system(cmd /C "DEL /s *.qm")
 	system(cmd /C "for /R %G in (*.ts) do lrelease -nounfinished -removeidentical %G")
-	system(cmd /C "xcopy *.qm $$DESTDIR\\translations\\ /s /e /y")
+	system(cmd /C "xcopy *.qm $$GLOBAL_DESTDIR\\translations\\ /s /e /y")
 }
 
 unix {
-	system(mkdir -p $$DESTDIR/translations/; find $$PWD/ -name '*.qm' -delete)
-	system(find ./ -name '*.ts' -exec $$[QT_INSTALL_BINS]/lrelease -nounfinished -removeidentical {} \\;)
-	system(find ./ -name '*.qm' -print0 | rsync -a --files-from=- --from0 ./ $$DESTDIR/translations/)
+	system(mkdir -p $$GLOBAL_DESTDIR/translations/; find $$PWD/ -name '*.qm' -delete)
+	system(find $$PWD -name '*.ts' -print0 | xargs -0 $$[QT_INSTALL_BINS]/lrelease -nounfinished -removeidentical)
+	system(find $$PWD/./ -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$GLOBAL_DESTDIR/translations/)
 }

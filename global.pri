@@ -40,6 +40,7 @@ release:CONFIG -= debug
 no-sanitizers: CONFIG *= nosanitizers
 CONFIG = $$unique(CONFIG)
 
+CONFIG *= object_parallel_to_source
 
 CONFIG(debug) {
 	CONFIGURATION = debug
@@ -53,19 +54,15 @@ CONFIG(debug) {
 	CONFIGURATION_SUFFIX =
 }
 
-#	CHECK_GCC_VERSION_5="test \"x$$CHECK_GCC_VERSION\" != x && echo \"$$CHECK_GCC_VERSION\" | grep -qe \'\\<5\\.[0-9]\\+\\.\'"
-#	!clang:gcc:*-g++*:system($$CHECK_GCC_VERSION_5){
-
-#CHECK_GCC_VERSION=$$system("$$QMAKE_CXX --version")
-#!CONFIG(nosanitizers):!clang:gcc:*-g++*:system(test \"x$${CHECK_GCC_VERSION}\" = x  || echo \"$$CHECK_GCC_VERSION\" | grep -qe \'\\<4\\.[0-9]\\+\\.\')
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<5\\.[0-9]+\\."' ){ CONFIG += gcc5 }
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<4\\.[0-9]+\\."' ){ CONFIG += gcc4 }
 
 GLOBAL_PWD = $$absolute_path($$PWD)
+GLOBAL_OUTPWD = $$absolute_path($$OUT_PWD)
 
 
 isEmpty(GLOBAL_DESTDIR) {
-	GLOBAL_DESTDIR = $$GLOBAL_PWD/bin/$$CONFIGURATION
+	GLOBAL_DESTDIR = $$GLOBAL_OUTPWD/bin/$$CONFIGURATION
 }
 
 isEmpty(DESTDIR) {
@@ -78,7 +75,8 @@ PROJECT_NAME = $$section(PROJECT_BASENAME, ".", 0, 0)
 isEmpty(TARGET) {
 	TARGET = $$PROJECT_NAME$$CONFIGURATION_SUFFIX
 } else {
-	TARGET = $$TARGET$$CONFIGURATION_SUFFIX
+	R=$$find( TARGET, "$$CONFIGURATION_SUFFIX$" )
+	isEmpty(R):TARGET = $$TARGET$$CONFIGURATION_SUFFIX
 }
 
 equals(TEMPLATE, app) {
@@ -146,9 +144,9 @@ unix:!nosanitizers {
 		# They can change in some version of Qt, keep track of it.
 		# By the way, simply setting QMAKE_CFLAGS, QMAKE_CXXFLAGS and QMAKE_LFLAGS instead of those used below
 		# will not work due to arguments order ("-fsanitize=undefined" must be declared before "-fno-sanitize=vptr").
-#			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
-#			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
-#			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
+			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
+			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
+			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
 		}
 	}
 
@@ -169,7 +167,6 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-#PRECOMPILED_SOURCE = $$_PRO_FILE_PWD_/precompile_header_dummy.cpp
 QMAKE_CXX_FLAGS *= -Winvalid-pch
 
 
