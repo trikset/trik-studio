@@ -33,8 +33,8 @@ CalibratePIDGenerator::CalibratePIDGenerator(const qrRepo::RepoApi &repo
 					, customizer.factory()->intPropertyConverter(id, "SetPoint"))
 			<< Binding::createConverting("@@P@@", "P"
 					, customizer.factory()->intPropertyConverter(id, "P"))
-			<< Binding::createConverting("@@K@@", "K"
-					, customizer.factory()->intPropertyConverter(id, "K"))
+			<< Binding::createConverting("@@K@@", "I"
+					, customizer.factory()->intPropertyConverter(id, "I"))
 			<< Binding::createConverting("@@D@@", "D"
 					, customizer.factory()->intPropertyConverter(id, "D"))
 			<< Binding::createConverting("@@KPF@@", "PFactor"

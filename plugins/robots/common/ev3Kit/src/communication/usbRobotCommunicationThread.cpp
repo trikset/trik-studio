@@ -19,6 +19,8 @@
 
 #include <libusb.h>
 
+#include <qrkernel/logging.h>
+
 #include "ev3Kit/communication/ev3DirectCommand.h"
 #include "ev3Kit/communication/commandConstants.h"
 
@@ -70,25 +72,50 @@ bool UsbRobotCommunicationThread::connect()
 		return true;
 	}
 
-	libusb_init(nullptr);
-	// Uncomment it to debug usb communication: libusb_set_debug(nullptr, MAX_DEBUG_LEVEL);
+	int result = libusb_init(nullptr);
+	// Uncomment it to debug usb communication:
+	libusb_set_debug(nullptr, MAX_DEBUG_LEVEL);
+	if (result != 0) {
+		QLOG_ERROR() << QString("libusb init failed, LIBUSB_ERROR: %1").arg(result);
+		return false;
+	}
+
+	// it is not necessary but logs are extremely useful
+	libusb_device** list = nullptr;
+	ssize_t devicesCount = libusb_get_device_list(nullptr, &list);
+	QLOG_INFO() << "founded devices by libusb";
+	for (auto i = 0; i < devicesCount; ++i) {
+		struct libusb_device_descriptor desc;
+		libusb_get_device_descriptor(list[i], &desc);
+		QLOG_INFO() << hex << desc.iProduct << desc.idVendor;
+	}
+
+	libusb_free_device_list(list, 1);
+
 	mHandle = libusb_open_device_with_vid_pid(nullptr, EV3_VID, EV3_PID);
 	if (!mHandle) {
+		QLOG_ERROR() << "libusb_open_device_with_vid_pid failed "
+				<< QString::number(EV3_VID) << QString::number(EV3_PID);
 		emit connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
 		return false;
 	}
 
+	// This functionality is not available on Windows/darwin
+#ifndef Q_OS_WIN
 	if (libusb_kernel_driver_active(mHandle, EV3_INTERFACE_NUMBER)) {
 		libusb_detach_kernel_driver(mHandle, EV3_INTERFACE_NUMBER);
 	}
+#endif
 
 	if (libusb_set_configuration(mHandle, EV3_CONFIGURATION_NB) < 0) {
+		QLOG_ERROR() << "libusb_set_configuration failed ";
 		emit connected(false, tr("USB device configuration problem. Please contact developers."));
 		mHandle = nullptr;
 		return false;
 	}
 
 	if (libusb_claim_interface(mHandle, EV3_INTERFACE_NUMBER) < 0) {
+		QLOG_ERROR() << "libusb_claim_interface failed ";
 		emit connected(false, tr("USB device interface problem. Please contact developers."));
 		mHandle = nullptr;
 		return false;
