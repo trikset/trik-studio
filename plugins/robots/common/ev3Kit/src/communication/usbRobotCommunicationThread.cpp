@@ -83,7 +83,7 @@ bool UsbRobotCommunicationThread::connect()
 	// it is not necessary but logs are extremely useful
 	libusb_device** list = nullptr;
 	ssize_t devicesCount = libusb_get_device_list(nullptr, &list);
-	QLOG_INFO() << "founded devices by libusb";
+	QLOG_INFO() << "libusb devices:";
 	for (auto i = 0; i < devicesCount; ++i) {
 		struct libusb_device_descriptor desc;
 		libusb_get_device_descriptor(list[i], &desc);
