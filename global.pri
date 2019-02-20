@@ -183,14 +183,15 @@ gcc5 | clang {
 	QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 }
 
-#treat git submodules as system path
-SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))
+clang {
+	#treat git submodules as system path
+	SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))
 
-#treat Qt includes as system headers
-SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=$$[QT_INSTALL_HEADERS]
+	#treat Qt includes as system headers
+	SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=$$[QT_INSTALL_HEADERS]
 
-
-clang:QMAKE_CXXFLAGS += $$SYSTEM_INCLUDE_PREFIX_OPTION
+	QMAKE_CXXFLAGS += $$SYSTEM_INCLUDE_PREFIX_OPTION
+}
 
 false:clang {
 # Problem from Qt system headers
