@@ -51,26 +51,28 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	QByteArray data = file.readAll();
 	file.close();
-	const int chunkSize = 960;
+	const int chunkSize = 960; // have no idea why 960...
 
-	// try to delete existing
-	const int cmdDeleteSize = 6 + devicePath.size();
-	QByteArray commandDelete(cmdDeleteSize, 0);
-	commandDelete[0] = cmdDeleteSize & 0xFF;
-	commandDelete[1] = (cmdDeleteSize >> 8) & 0xFF ;
-	commandDelete[2] = 0x02;
-	commandDelete[3] = 0x00;
-	commandDelete[4] = SYSTEM_COMMAND_REPLY;
-	commandDelete[5] = DELETE_FILE;
-	int index = 6;
-	for (int i = 0; i < devicePath.size(); ++i) {
-		commandDelete[index++] = devicePath.at(i).toLatin1();
-	}
 
-	commandDelete[index] = 0x00;
+// uncomment it if it will be needed
+// remove previous file
+//	const int cmdDeleteSize = 6 + devicePath.size();
+//	QByteArray commandDelete(cmdDeleteSize, 0);
+//	commandDelete[0] = cmdDeleteSize & 0xFF;
+//	commandDelete[1] = (cmdDeleteSize >> 8) & 0xFF ;
+//	commandDelete[2] = 0x02;
+//	commandDelete[3] = 0x00;
+//	commandDelete[4] = SYSTEM_COMMAND_REPLY;
+//	commandDelete[5] = DELETE_FILE;
+//	int index0 = 6;
+//	for (int i = 0; i < devicePath.size(); ++i) {
+//		commandDelete[index0++] = devicePath.at(i).toLatin1();
+//	}
 
-	send1(commandDelete);
-	QByteArray commandDeleteResponse = receive(DELETE_FILE_RESPONSE_SIZE);
+//	commandDelete[index0] = 0x00;
+
+//	send1(commandDelete);
+//	QByteArray commandDeleteResponse = receive(DELETE_FILE_RESPONSE_SIZE);
 
 	// start downloading
 	const int cmdBeginSize = 11 + devicePath.size();
@@ -85,7 +87,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	commandBegin[7] = (data.size() >> 8) & 0xFF;
 	commandBegin[8] = (data.size() >> 16) & 0xFF;
 	commandBegin[9] = (data.size() >> 24) & 0xFF;
-	index = 10;
+	int index = 10;
 	for (int i = 0; i < devicePath.size(); ++i) {
 		commandBegin[index++] = devicePath.at(i).toLatin1();
 	}
