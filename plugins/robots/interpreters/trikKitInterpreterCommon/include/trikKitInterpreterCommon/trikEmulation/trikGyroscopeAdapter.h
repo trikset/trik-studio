@@ -63,4 +63,5 @@ private:
 	QQuaternion mQuaternion;
 	quint64 mStartTime;
 	quint64 mLastUpdateTimeStamp;
+	int mInitialTilt;
 };
