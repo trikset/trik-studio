@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Enable Video Streaming</source>
-        <translation>Запустить видео-трансляцию</translation>
+        <translation>Запустить видеотрансляцию</translation>
     </message>
     <message>
         <source>File:</source>

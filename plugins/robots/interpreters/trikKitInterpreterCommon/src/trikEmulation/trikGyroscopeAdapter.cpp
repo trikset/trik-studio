@@ -87,38 +87,15 @@ void TrikGyroscopeAdapter::countTilt(const QVector<int> &oldFormat)
 	if (!mTimeInited) {
 		mTimeInited = true;
 		mLastUpdateTimeStamp = timeStamp;
+		mInitialTilt = oldFormat[3];
 	} else {
 		mResult[0] = oldFormat[0];
 		mResult[1] = oldFormat[1];
 		mResult[2] = oldFormat[2];
 		mResult[3] = convertToTrikRuntimeTime(timeStamp);
-
-		const qreal scale = static_cast<qreal>(timeStamp - mLastUpdateTimeStamp) / twoDModel::timeQuant;
-		const qreal x = static_cast<qreal>(mResult[0]) / twoDModel::gyroscopeConstant * scale;
-		const qreal y = static_cast<qreal>(mResult[1]) / twoDModel::gyroscopeConstant * scale;
-		const qreal z = static_cast<qreal>(mResult[2]) / twoDModel::gyroscopeConstant * scale;
-
-		mLastUpdateTimeStamp = timeStamp;
-
-		const float c1 = static_cast<float>(qCos(x / 2));
-		const float s1 = static_cast<float>(qSin(x / 2));
-		const float c2 = static_cast<float>(qCos(y / 2));
-		const float s2 = static_cast<float>(qSin(y / 2));
-		const float c3 = static_cast<float>(qCos(z / 2));
-		const float s3 = static_cast<float>(qSin(z / 2));
-
-		QQuaternion deltaQuaternion;
-		deltaQuaternion.setScalar(c1 * c2 * c3 + s1 * s2 * s3);
-		deltaQuaternion.setX(s1 * c2 * c3 - c1 * s2 * s3);
-		deltaQuaternion.setY(c1 * s2 * c3 + s1 * c2 * s3);
-		deltaQuaternion.setZ(c1 * c2 * s3 - s1 * s2 * c3);
-
-		mQuaternion *= deltaQuaternion;
-		mQuaternion.normalize();
-
-		mResult[4] = static_cast<int>(degreeToMilidegree(qRadiansToDegrees(getPitch<qreal>(mQuaternion))));
-		mResult[5] = static_cast<int>(degreeToMilidegree(qRadiansToDegrees(getRoll<qreal>(mQuaternion))));
-		mResult[6] = static_cast<int>(degreeToMilidegree(qRadiansToDegrees(getYaw<qreal>(mQuaternion))));
+		mResult[4] = 0;
+		mResult[5] = 0;
+		mResult[6] = oldFormat[3] - mInitialTilt;
 	}
 }
 
