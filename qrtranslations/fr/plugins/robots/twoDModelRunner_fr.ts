@@ -11,29 +11,39 @@ In background mode the session will be terminated just after the execution ended
         <translation>Émule le comportement du robot sur le modèle 2D TRIK Studio séparément de l&apos;environnement de programmation. Le fichier .qrs sera interprété comme si le bouton &apos;Executer&apos; était appuyé dans TRIK Studio.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="79"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="81"/>
         <source>Save file to be interpreted.</source>
         <translation>Le fichier de sauvegarde à interpréter.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="80"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="82"/>
         <source>Run emulation in background.</source>
         <translation>Executer l&apos;émulation en tache de fond.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="82"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="84"/>
         <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
         <translation>Mettez &quot;minimal&quot; dans cette option pour désactiver la connexion au serveur X</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="83"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="85"/>
         <source>A path to file where checker results will be written (JSON)</source>
         <translation>Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="85"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="87"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Le chemin au ficher ou la trajectoire du robot sera enregistrée. L&apos;enregistrement ne sera pas fait immediatement, chaque point de trajectoire sera écrit dès lors qu&apos;il est obteneur par le checker, donc FIFO sont récommandés pour cette option.</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="91"/>
+        <source>Inputs for JavaScript solution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="93"/>
+        <source>Interpret mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

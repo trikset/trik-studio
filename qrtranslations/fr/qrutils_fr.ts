@@ -407,6 +407,20 @@
     </message>
 </context>
 <context>
+    <name>qReal::ui::SearchLinePanel</name>
+    <message>
+        <location filename="../../qrutils/widgets/searchLinePanel.cpp" line="134"/>
+        <location filename="../../qrutils/widgets/searchLinePanel.cpp" line="144"/>
+        <source>Enter search text...</source>
+        <translation type="unfinished">Tapez le texte à rechercher...</translation>
+    </message>
+    <message>
+        <location filename="../../qrutils/widgets/searchLinePanel.cpp" line="155"/>
+        <source>&lt;line&gt;:&lt;column&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>utils::MetamodelGeneratorSupport</name>
     <message>
         <location filename="../../qrutils/metamodelGeneratorSupport.cpp" line="72"/>

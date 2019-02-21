@@ -2,54 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="85"/>
-        <source>Text File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="97"/>
-        <source>C Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="109"/>
-        <source>Russian Algorithmic Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="122"/>
-        <source>Python Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="134"/>
-        <source>Java Script Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="146"/>
-        <source>QtScript Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="158"/>
-        <source>F# Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="171"/>
-        <source>PascalABC Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="183"/>
-        <source>Lua Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>qReal::text::TextManager</name>
     <message>
         <location filename="../../qrgui/textEditor/textManager.cpp" line="87"/>

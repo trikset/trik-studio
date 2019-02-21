@@ -163,12 +163,12 @@
 <context>
     <name>qReal::gui::editor::EdgeElement</name>
     <message>
-        <location filename="../../qrgui/editor/edgeElement.cpp" line="59"/>
+        <location filename="../../qrgui/editor/edgeElement.cpp" line="61"/>
         <source>Reverse</source>
         <translation type="unfinished">Retourner</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/edgeElement.cpp" line="60"/>
+        <location filename="../../qrgui/editor/edgeElement.cpp" line="62"/>
         <source>Change shape type</source>
         <translation type="unfinished">Modifier le type de ligne</translation>
     </message>
@@ -176,23 +176,28 @@
 <context>
     <name>qReal::gui::editor::EditorViewScene</name>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="291"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="294"/>
         <source>Create new element</source>
         <translation type="unfinished">Créer un nouvel élement</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="353"/>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="362"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="357"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="366"/>
         <source>Connect with the current item</source>
         <translation type="unfinished">Relier avec l&apos;élement courant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="866"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="677"/>
+        <source>Replace by...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="909"/>
         <source>Add child</source>
         <translation type="unfinished">Rajouter un élement</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1322"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1404"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>
@@ -234,7 +239,7 @@
 <context>
     <name>qReal::gui::editor::NodeElement</name>
     <message>
-        <location filename="../../qrgui/editor/nodeElement.cpp" line="54"/>
+        <location filename="../../qrgui/editor/nodeElement.cpp" line="53"/>
         <source>Switch on grid</source>
         <translation type="unfinished">Afficher la grille</translation>
     </message>
@@ -242,12 +247,12 @@
 <context>
     <name>qReal::gui::editor::PropertyEditorView</name>
     <message>
-        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="220"/>
+        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="310"/>
         <source>Specify directory:</source>
         <translation type="unfinished">Choisissez le répertoire :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="227"/>
+        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="317"/>
         <source>Select file:</source>
         <translation type="unfinished">Choisissez le fichier :</translation>
     </message>

@@ -12,17 +12,17 @@
 <context>
     <name>kitBase::DevicesConfigurationWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="101"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="108"/>
         <source>%1:</source>
         <translation>%1:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="101"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="108"/>
         <source>Port %1:</source>
         <translation>Порт %1:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="112"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="119"/>
         <source>Unused</source>
         <translation>Не используется</translation>
     </message>
@@ -38,34 +38,28 @@
 <context>
     <name>kitBase::blocksBase::common::WaitForColorBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForColorBlock.cpp" line="32"/>
         <source>Black</source>
-        <translation>Черный</translation>
+        <translation type="vanished">Черный</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForColorBlock.cpp" line="34"/>
         <source>Blue</source>
-        <translation>Синий</translation>
+        <translation type="vanished">Синий</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForColorBlock.cpp" line="36"/>
         <source>Green</source>
-        <translation>Зеленый</translation>
+        <translation type="vanished">Зеленый</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForColorBlock.cpp" line="38"/>
         <source>Yellow</source>
-        <translation>Желтый</translation>
+        <translation type="vanished">Желтый</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForColorBlock.cpp" line="40"/>
         <source>Red</source>
-        <translation>Красный</translation>
+        <translation type="vanished">Красный</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForColorBlock.cpp" line="42"/>
         <source>White</source>
-        <translation>Белый</translation>
+        <translation type="vanished">Белый</translation>
     </message>
 </context>
 <context>
@@ -79,7 +73,7 @@
 <context>
     <name>kitBase::robotModel::robotParts::AccelerometerSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/accelerometerSensor.h" line="30"/>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/accelerometerSensor.h" line="29"/>
         <source>Accelerometer</source>
         <translation>Акселерометр</translation>
     </message>
@@ -178,6 +172,14 @@
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/motor.h" line="29"/>
         <source>Motor</source>
         <translation>Мотор</translation>
+    </message>
+</context>
+<context>
+    <name>kitBase::robotModel::robotParts::MotorsAggregator</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/motorsAggregator.h" line="29"/>
+        <source>Motors aggregator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

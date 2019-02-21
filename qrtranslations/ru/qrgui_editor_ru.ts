@@ -180,28 +180,28 @@
 <context>
     <name>qReal::gui::editor::EditorViewScene</name>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="293"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="294"/>
         <source>Create new element</source>
         <translation>Создать новый элемент</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="356"/>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="365"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="357"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="366"/>
         <source>Connect with the current item</source>
         <translation>Соединить с данным элементом</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="664"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="677"/>
         <source>Replace by...</source>
         <translation>Заменить на...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="878"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="909"/>
         <source>Add child</source>
         <translation>Добавить элемент</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1371"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1404"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

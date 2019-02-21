@@ -4,18 +4,18 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="26"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="27"/>
         <source>Current TRIK runtime version can not be received</source>
         <translation type="unfinished">Échec de récupération de la version courante du runtime TRIK</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="30"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="32"/>
         <source>TRIK runtime version is too old, please update it by pressing &apos;Upload Runtime&apos; button on toolbar</source>
         <translation type="unfinished">La version du runtime TRIK est trop ancienne, s&apos;il vous plaît mettez-la à jour en appuyant sur le bouton &apos;Téléverser le runtime&apos; sur la barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="35"/>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="39"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="38"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="43"/>
         <source>From robot: </source>
         <translation type="unfinished">Depuis le robot :</translation>
     </message>
@@ -47,7 +47,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/uploaderTool.cpp" line="177"/>
+        <location filename="../../../../plugins/robots/utils/src/uploaderTool.cpp" line="180"/>
         <source>%1 is not installed. Please install %1 first.</source>
         <translation type="unfinished"></translation>
     </message>

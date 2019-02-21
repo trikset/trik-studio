@@ -108,7 +108,7 @@
         <source>PascalABC compiler finished with error.</source>
         <translation>Компиляция программы завершилась с ошибкой.</translation>
     </message>
-	    <message>
+    <message>
         <location filename="../../../../plugins/robots/generators/trik/trikPascalABCGeneratorLibrary/src/trikPascalABCGeneratorPluginBase.cpp" line="243"/>
         <source>Compile completed</source>
         <translation>Компиляция программы завершилась успешно</translation>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/generators/trik/trikPascalABCGeneratorLibrary/src/trikPascalABCGeneratorPluginBase.cpp" line="299"/>
-        <source>Cant't start download process</source>
+        <source>Cant&apos;t start download process</source>
         <translation>Не удалось начать загрузку</translation>
     </message>
     <message>
@@ -133,12 +133,12 @@
         <source>After downloading the program, enter &apos;exit&apos; or close the window</source>
         <translation>После окончания загрузки программы просто закройте окно</translation>
     </message>
-	<message>
+    <message>
         <location filename="../../../../plugins/robots/generators/trik/trikPascalABCGeneratorLibrary/src/trikPascalABCGeneratorPluginBase.cpp" line="310"/>
         <source>Failed to download program. Check connection</source>
         <translation>Не удалось загрузить программу. Проверьте соединение с роботом</translation>
     </message>
-	<message>
+    <message>
         <location filename="../../../../plugins/robots/generators/trik/trikPascalABCGeneratorLibrary/src/trikPascalABCGeneratorPluginBase.cpp" line="315"/>
         <source>Download completed</source>
         <translation>Загрузка программы завершена</translation>

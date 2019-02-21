@@ -4,18 +4,18 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="26"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="27"/>
         <source>Current TRIK runtime version can not be received</source>
         <translation>Не удаётся получить текущую версию прошивки ТРИК</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="30"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="32"/>
         <source>TRIK runtime version is too old, please update it by pressing &apos;Upload Runtime&apos; button on toolbar</source>
         <translation>ПО робота устарело, обновите его, нажав на кнопку &quot;Загрузить ПО на робот&quot; на панели инструментов</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="35"/>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="39"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="38"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/networkCommunicationErrorReporter.cpp" line="43"/>
         <source>From robot: </source>
         <translation>На роботе: </translation>
     </message>
@@ -28,64 +28,73 @@
         <translation>Сенсоры</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="149"/>
         <source>Stop tracking</source>
-        <translation>Остановить отслеживание</translation>
+        <translation type="vanished">Остановить отслеживание</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="153"/>
         <source>Start tracking</source>
-        <translation>Начать отслеживание</translation>
+        <translation type="vanished">Начать отслеживание</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="157"/>
         <source>Reset plot</source>
-        <translation>Очистить график</translation>
+        <translation type="vanished">Очистить график</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="161"/>
         <source>Zoom In</source>
-        <translation>Увеличить</translation>
+        <translation type="vanished">Увеличить</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="165"/>
         <source>Zoom Out</source>
-        <translation>Уменьшить</translation>
+        <translation type="vanished">Уменьшить</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="169"/>
         <source>Export values...</source>
-        <translation>Экспорт показаний...</translation>
+        <translation type="vanished">Экспорт показаний...</translation>
     </message>
 </context>
 <context>
     <name>TcpRobotCommunicator</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicator.cpp" line="83"/>
         <source>Empty program name, can not upload</source>
-        <translation>Пустое имя программы, загрузка на робот невозможна</translation>
+        <translation type="vanished">Пустое имя программы, загрузка на робот невозможна</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicator.cpp" line="91"/>
         <source>Can not read generated file, uploading aborted</source>
-        <translation>Невозможно прочитать сгенерированный файл, загрузка отменена</translation>
+        <translation type="vanished">Невозможно прочитать сгенерированный файл, загрузка отменена</translation>
     </message>
 </context>
 <context>
     <name>TcpRobotCommunicatorWorker</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="229"/>
         <source>Unable to resolve host.</source>
-        <translation>Указанное имя робота неизвестно.</translation>
+        <translation type="vanished">Указанное имя робота неизвестно.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="247"/>
         <source>Connection failed. IP: %1</source>
-        <translation>Не удалось установить соединение с роботом. IP адрес: %1</translation>
+        <translation type="vanished">Не удалось установить соединение с роботом. IP адрес: %1</translation>
     </message>
 </context>
 <context>
     <name>UploaderTool</name>
+    <message>
+        <source>WinSCP process failed to launch, check path in settings.</source>
+        <translation type="vanished">Не удалось запустить WinSCP, проверьте, что папка winscp есть в папке с TRIK Studio и в ней есть WinSCP.exe.</translation>
+    </message>
+    <message>
+        <source>Uploading failed, check connection and try again.</source>
+        <translation type="vanished">Загрузка ПО не удалась, проверьте соединение и попробуйте еще раз.</translation>
+    </message>
+    <message>
+        <source>Uploaded successfully!</source>
+        <translation type="vanished">Загрузка успешно завершена!</translation>
+    </message>
+    <message>
+        <source>%1 is not installed. Please install %1 first.</source>
+        <translation type="vanished">%1 не установлен. Пожалуйста, сначала установите %1.</translation>
+    </message>
+</context>
+<context>
+    <name>trik::UploaderTool</name>
     <message>
         <location filename="../../../../plugins/robots/utils/src/uploaderTool.cpp" line="131"/>
         <source>WinSCP process failed to launch, check path in settings.</source>
@@ -103,28 +112,9 @@
         <translation>Загрузка успешно завершена!</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/uploaderTool.cpp" line="177"/>
+        <location filename="../../../../plugins/robots/utils/src/uploaderTool.cpp" line="180"/>
         <source>%1 is not installed. Please install %1 first.</source>
         <translation>%1 не установлен. Пожалуйста, сначала установите %1.</translation>
-    </message>
-</context>
-<context>
-    <name>trik::UploaderTool</name>
-    <message>
-        <source>WinSCP process failed to launch, check path in settings.</source>
-        <translation type="vanished">Не удалось запустить WinSCP, проверьте, что папка winscp есть в папке с TRIK Studio и в ней есть WinSCP.exe.</translation>
-    </message>
-    <message>
-        <source>Uploading failed, check connection and try again.</source>
-        <translation type="vanished">Загрузка ПО не удалась, проверьте соединение и попробуйте еще раз.</translation>
-    </message>
-    <message>
-        <source>Uploaded successfully!</source>
-        <translation type="vanished">Загрузка успешно завершена!</translation>
-    </message>
-    <message>
-        <source>%1 is not installed. Please install %1 first.</source>
-        <translation type="vanished">%1 не установлен. Пожалуйста, сначала установите %1.</translation>
     </message>
 </context>
 <context>
@@ -153,23 +143,27 @@
 <context>
     <name>utils::robotCommunication::TcpRobotCommunicator</name>
     <message>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicator.cpp" line="83"/>
         <source>Empty program name, can not upload</source>
-        <translation type="vanished">Пустое имя программы, загрузка на робот невозможна</translation>
+        <translation>Пустое имя программы, загрузка на робот невозможна</translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicator.cpp" line="91"/>
         <source>Can not read generated file, uploading aborted</source>
-        <translation type="vanished">Невозможно прочитать сгенерированный файл, загрузка отменена</translation>
+        <translation>Невозможно прочитать сгенерированный файл, загрузка отменена</translation>
     </message>
 </context>
 <context>
     <name>utils::robotCommunication::TcpRobotCommunicatorWorker</name>
     <message>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="229"/>
         <source>Unable to resolve host.</source>
-        <translation type="vanished">Указанное имя робота неизвестно.</translation>
+        <translation>Указанное имя робота неизвестно.</translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="247"/>
         <source>Connection failed. IP: %1</source>
-        <translation type="vanished">Не удалось установить соединение с роботом. IP адрес: %1</translation>
+        <translation>Не удалось установить соединение с роботом. IP адрес: %1</translation>
     </message>
     <message>
         <source>Connection failed</source>
@@ -192,6 +186,39 @@
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorViewer.cpp" line="238"/>
         <source>value: </source>
         <translation>значение: </translation>
+    </message>
+</context>
+<context>
+    <name>utils::sensorsGraph::SensorsGraph</name>
+    <message>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="149"/>
+        <source>Stop tracking</source>
+        <translation type="unfinished">Остановить отслеживание</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="153"/>
+        <source>Start tracking</source>
+        <translation type="unfinished">Начать отслеживание</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="157"/>
+        <source>Reset plot</source>
+        <translation type="unfinished">Очистить график</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="161"/>
+        <source>Zoom In</source>
+        <translation type="unfinished">Увеличить</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="165"/>
+        <source>Zoom Out</source>
+        <translation type="unfinished">Уменьшить</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="169"/>
+        <source>Export values...</source>
+        <translation type="unfinished">Экспорт показаний...</translation>
     </message>
 </context>
 </TS>

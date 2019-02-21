@@ -25,23 +25,43 @@
         <translation type="vanished">Wi-Fi</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="36"/>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="37"/>
+        <source>Robot&apos;s Folders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="52"/>
+        <source>ts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="65"/>
+        <source>Common folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="72"/>
+        <source>Use common folder for all projects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="82"/>
         <source>Bluetooth Settings</source>
         <translation>Paramètres Bluetooth</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="42"/>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="59"/>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="88"/>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="105"/>
         <source>COM Port:</source>
         <translation>Port série:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="66"/>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="95"/>
         <source>No COM ports found. If you have a Bluetooth connection with active virtual COM port, please enter its name. Example: COM3</source>
         <translation>Port série n&apos;est pas détecté. Si vous avez une connexion Bluetooth avec un port série virtuel actif, tapez son nom. Par exemple &quot;COM3&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="79"/>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="125"/>
         <source>Specify COM port manually</source>
         <translation>Spécifier le port série manuellement</translation>
     </message>
