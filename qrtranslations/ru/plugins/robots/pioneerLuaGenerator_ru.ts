@@ -290,12 +290,12 @@
         <translation>Язык Lua</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="113"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="117"/>
         <source>Generate Lua script for Pioneer Quadcopter</source>
         <translation>Генерировать скрипт на Lua для квадрокоптера &quot;Пионер&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="118"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="122"/>
         <source>Upload Pioneer program</source>
         <translation>Загрузить программу на квадрокоптер &quot;Пионер&quot;</translation>
     </message>

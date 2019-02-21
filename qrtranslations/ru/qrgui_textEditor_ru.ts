@@ -4,49 +4,32 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="85"/>
         <source>Text File</source>
-        <translation>Текстовый файл</translation>
+        <translation type="vanished">Текстовый файл</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="97"/>
         <source>C Language Source File</source>
-        <translation>Файл с исходным кодом на C</translation>
+        <translation type="vanished">Файл с исходным кодом на C</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="109"/>
         <source>Russian Algorithmic Language Source File</source>
-        <translation>Файл с исходным кодом на ШАЯ</translation>
+        <translation type="vanished">Файл с исходным кодом на ШАЯ</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="122"/>
         <source>Python Source File</source>
-        <translation>Файл с исходным кодом на Python</translation>
+        <translation type="vanished">Файл с исходным кодом на Python</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="134"/>
         <source>Java Script Language Source File</source>
-        <translation>Файл с исходным кодом на Java Script</translation>
+        <translation type="vanished">Файл с исходным кодом на Java Script</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="146"/>
         <source>QtScript Language Source File</source>
-        <translation>Файл с исходным кодом на QtScript</translation>
+        <translation type="vanished">Файл с исходным кодом на QtScript</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="158"/>
         <source>F# Language Source File</source>
-        <translation>Файл с исходным кодом на F#</translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="171"/>
-        <source>PascalABC Language Source File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/textEditor/languageInfo.h" line="183"/>
-        <source>Lua Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Файл с исходным кодом на F#</translation>
     </message>
 </context>
 <context>

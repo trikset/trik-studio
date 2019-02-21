@@ -241,46 +241,43 @@
         <translation>Отступ</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="498"/>
         <source>Labels</source>
-        <translation>Надписи на элементах</translation>
+        <translation type="vanished">Надписи на элементах</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="520"/>
         <source>Enable move</source>
-        <translation>Разрешить перемещать</translation>
+        <translation type="vanished">Разрешить перемещать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="530"/>
         <source>Enable resize</source>
-        <translation>Разрешить изменять размер</translation>
+        <translation type="vanished">Разрешить изменять размер</translation>
     </message>
     <message>
         <source>Label distance</source>
         <translation type="vanished">Расстояние от надписей до элемента</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="543"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="498"/>
         <source>Palette</source>
         <translation>Палитра</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="559"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="514"/>
         <source>   Representation   </source>
         <translation>Представление</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="566"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="521"/>
         <source>   Count of items in a row </source>
         <translation>Количество иконок в строке</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="586"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="541"/>
         <source>Icons  and names</source>
         <translation>Иконки и названия</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="591"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="546"/>
         <source>Icons</source>
         <translation>Иконки</translation>
     </message>

@@ -2,21 +2,77 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="598"/>
+        <source>Root node for diagram %1 (which is %2) does not exist!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="612"/>
+        <source>Name should contain only latin letters, digits, spaces and underscores and should start with latin letter or underscore</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>qReal::InterpreterEditorManager</name>
     <message>
-        <location filename="../../qrgui/plugins/pluginManager/interpreterEditorManager.cpp" line="924"/>
         <source>Deleted</source>
-        <translation>Удалено</translation>
+        <translation type="vanished">Удалено</translation>
     </message>
     <message>
-        <location filename="../../qrgui/plugins/pluginManager/interpreterEditorManager.cpp" line="930"/>
         <source>Existed</source>
-        <translation>Используется</translation>
+        <translation type="vanished">Используется</translation>
     </message>
     <message>
-        <location filename="../../qrgui/plugins/pluginManager/interpreterEditorManager.cpp" line="932"/>
         <source>Renamed to </source>
-        <translation>Переименовано в </translation>
+        <translation type="vanished">Переименовано в </translation>
+    </message>
+</context>
+<context>
+    <name>qReal::QrsMetamodelLoader</name>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="174"/>
+        <source>Incorrect label type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="607"/>
+        <source>Name should not be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="631"/>
+        <source>Port type %1 not declared in metamodel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="665"/>
+        <source>Unknown link style type %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="679"/>
+        <source>Unknown link shape type %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="688"/>
+        <source>%1 is not a valid integer number</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>qReal::QrsMetamodelSaver</name>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="388"/>
+        <source>Unknown link style type %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="404"/>
+        <source>Unknown link shape type %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

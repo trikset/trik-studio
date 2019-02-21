@@ -4,12 +4,12 @@
 <context>
     <name>PreferencesHotKeyManagerPage</name>
     <message>
-        <location filename="../../qrgui/hotKeyManager/hotKeyManagerPage.cpp" line="98"/>
+        <location filename="../../qrgui/hotKeyManager/hotKeyManagerPage.cpp" line="99"/>
         <source>Question</source>
         <translation>Question</translation>
     </message>
     <message>
-        <location filename="../../qrgui/hotKeyManager/hotKeyManagerPage.cpp" line="98"/>
+        <location filename="../../qrgui/hotKeyManager/hotKeyManagerPage.cpp" line="99"/>
         <source>This will clear all current shortcuts. Are you sure?</source>
         <translation>Tous les raccourcis clavier seront supprimés. En êtes-vous sûr ?</translation>
     </message>

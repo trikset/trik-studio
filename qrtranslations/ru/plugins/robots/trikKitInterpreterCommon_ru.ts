@@ -4,12 +4,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="172"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="175"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="194"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="197"/>
         <source>Error: File %1 couldn&apos;t be opened!</source>
         <translation>Ошибка: Не удаётся открыть файл %1!</translation>
     </message>
@@ -100,7 +100,7 @@
     <name>trik::TrikBrick</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="128"/>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="427"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="423"/>
         <source>Trying to read from file %1 failed</source>
         <translation>Не удалось открыть файл %1</translation>
     </message>
@@ -196,7 +196,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="427"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="435"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>

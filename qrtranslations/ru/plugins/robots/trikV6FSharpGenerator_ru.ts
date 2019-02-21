@@ -97,7 +97,7 @@
 <context>
     <name>trik::fSharp::TrikV6FSharpGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikV6FSharpGenerator/trikV6FSharpGeneratorPlugin.cpp" line="30"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikV6FSharpGenerator/trikV6FSharpGeneratorPlugin.cpp" line="29"/>
         <source>Generation (F#)</source>
         <translation>Генерация (F#)</translation>
     </message>

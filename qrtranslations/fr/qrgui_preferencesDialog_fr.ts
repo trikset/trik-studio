@@ -233,42 +233,39 @@
         <translation>Indentation</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="498"/>
         <source>Labels</source>
-        <translation>Étiquettes</translation>
+        <translation type="vanished">Étiquettes</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="520"/>
         <source>Enable move</source>
-        <translation>Permettre le déplacement</translation>
+        <translation type="vanished">Permettre le déplacement</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="530"/>
         <source>Enable resize</source>
-        <translation>Permettre le redimensionnement</translation>
+        <translation type="vanished">Permettre le redimensionnement</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="543"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="498"/>
         <source>Palette</source>
         <translation>Palette</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="559"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="514"/>
         <source>   Representation   </source>
         <translation>   Représentation </translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="566"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="521"/>
         <source>   Count of items in a row </source>
         <translation>   Nombre d&apos;éléments en ligne </translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="586"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="541"/>
         <source>Icons  and names</source>
         <translation>Icônes et les noms</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="591"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="546"/>
         <source>Icons</source>
         <translation>icônes</translation>
     </message>

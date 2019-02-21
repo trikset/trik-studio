@@ -53,6 +53,14 @@
     </message>
 </context>
 <context>
+    <name>qrTest::TestRobotModel</name>
+    <message>
+        <location filename="../../../../qrtest/unitTests/pluginsTests/robotsTests/support/testRobotModel.h" line="39"/>
+        <source>Test model</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trik::qts::TrikQtsGeneratorPlugin</name>
     <message>
         <source>Generation (QtScript)</source>
@@ -98,7 +106,7 @@
 <context>
     <name>trik::qts::TrikV62QtsGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikV62QtsGenerator/trikV62QtsGeneratorPlugin.cpp" line="30"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikV62QtsGenerator/trikV62QtsGeneratorPlugin.cpp" line="29"/>
         <source>Generation (Java Script)</source>
         <translation type="unfinished"></translation>
     </message>
