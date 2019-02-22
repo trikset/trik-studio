@@ -95,7 +95,7 @@ void TrikGyroscopeAdapter::countTilt(const QVector<int> &oldFormat)
 		mResult[3] = convertToTrikRuntimeTime(timeStamp);
 		mResult[4] = 0;
 		mResult[5] = 0;
-		mResult[6] = oldFormat[3] - mInitialTilt;
+		mResult[6] = (oldFormat[3] - mInitialTilt + 180000) % 360000 - 180000;
 	}
 }
 
