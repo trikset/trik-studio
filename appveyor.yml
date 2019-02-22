@@ -87,7 +87,7 @@ build_script:
 
 test_script:
   - echo %cd%
-  - cd %APPVEYOR_BUILD_FOLDER%\bin\%CONFIGURATION%
+  - cd %BUILD_DIR%\bin\%CONFIGURATION%
   - dir
   - cmd /c %TEST_SUITE%
 
