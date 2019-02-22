@@ -40,7 +40,6 @@ release:CONFIG -= debug
 no-sanitizers: CONFIG *= nosanitizers
 CONFIG = $$unique(CONFIG)
 
-
 CONFIG(debug) {
 	CONFIGURATION = debug
 	CONFIGURATION_SUFFIX = -d
@@ -53,19 +52,15 @@ CONFIG(debug) {
 	CONFIGURATION_SUFFIX =
 }
 
-#	CHECK_GCC_VERSION_5="test \"x$$CHECK_GCC_VERSION\" != x && echo \"$$CHECK_GCC_VERSION\" | grep -qe \'\\<5\\.[0-9]\\+\\.\'"
-#	!clang:gcc:*-g++*:system($$CHECK_GCC_VERSION_5){
-
-#CHECK_GCC_VERSION=$$system("$$QMAKE_CXX --version")
-#!CONFIG(nosanitizers):!clang:gcc:*-g++*:system(test \"x$${CHECK_GCC_VERSION}\" = x  || echo \"$$CHECK_GCC_VERSION\" | grep -qe \'\\<4\\.[0-9]\\+\\.\')
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<5\\.[0-9]+\\."' ){ CONFIG += gcc5 }
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<4\\.[0-9]+\\."' ){ CONFIG += gcc4 }
 
 GLOBAL_PWD = $$absolute_path($$PWD)
+GLOBAL_OUTPWD = $$absolute_path($$OUT_PWD)
 
 
 isEmpty(GLOBAL_DESTDIR) {
-	GLOBAL_DESTDIR = $$GLOBAL_PWD/bin/$$CONFIGURATION
+	GLOBAL_DESTDIR = $$GLOBAL_OUTPWD/bin/$$CONFIGURATION
 }
 
 isEmpty(DESTDIR) {
@@ -78,7 +73,8 @@ PROJECT_NAME = $$section(PROJECT_BASENAME, ".", 0, 0)
 isEmpty(TARGET) {
 	TARGET = $$PROJECT_NAME$$CONFIGURATION_SUFFIX
 } else {
-	TARGET = $$TARGET$$CONFIGURATION_SUFFIX
+	R=$$find( TARGET, "$$CONFIGURATION_SUFFIX$" )
+	isEmpty(R):TARGET = $$TARGET$$CONFIGURATION_SUFFIX
 }
 
 equals(TEMPLATE, app) {
@@ -169,7 +165,6 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-#PRECOMPILED_SOURCE = $$_PRO_FILE_PWD_/precompile_header_dummy.cpp
 QMAKE_CXX_FLAGS *= -Winvalid-pch
 
 
@@ -188,14 +183,15 @@ gcc5 | clang {
 	QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 }
 
-#treat git submodules as system path
-SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))
+clang {
+	#treat git submodules as system path
+	SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))
 
-#treat Qt includes as system headers
-SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=$$[QT_INSTALL_HEADERS]
+	#treat Qt includes as system headers
+	SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=$$[QT_INSTALL_HEADERS]
 
-
-clang:QMAKE_CXXFLAGS += $$SYSTEM_INCLUDE_PREFIX_OPTION
+	QMAKE_CXXFLAGS += $$SYSTEM_INCLUDE_PREFIX_OPTION
+}
 
 false:clang {
 # Problem from Qt system headers
