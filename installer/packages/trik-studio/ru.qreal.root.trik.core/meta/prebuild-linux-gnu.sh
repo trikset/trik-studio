@@ -11,7 +11,7 @@ cp -pr $BIN_DIR/librobots-trik-qts-generator-library.so*                        
 cp -pr $BIN_DIR/librobots-trik-generator-base.so*                                  $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-trik-kit.so*                                             $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-trik-kit-interpreter-common.so*                          $PWD/../data/lib/
-cp -pr $BIN_DIR/libPythonQt-Qt*-Python*.so*                                        $PWD/../data/lib/
+cp -pr $BIN_DIR/libPythonQt{,_QtAll}-Qt*-Python*.so*                                        $PWD/../data/lib/
 cp -pr $BIN_DIR/libtrik*.so*                                                         $PWD/../data/lib/
 
 cp     $BIN_DIR/system.{py,js}                                                		 $PWD/../data/bin/
