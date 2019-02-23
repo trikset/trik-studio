@@ -20,7 +20,7 @@ include(../global.pri)
 win32 {
 	system(cmd /C "DEL /s *.qm")
 	system(cmd /C "for /R %G in (*.ts) do lrelease -nounfinished -removeidentical %G")
-	system(cmd /C "xcopy *.qm $$GLOBAL_DESTDIR\\translations\\ /s /e /y")
+	system(cmd /C "xcopy *.qm \"$$GLOBAL_DESTDIR\\translations\\\" /s /e /y")
 }
 
 unix {
