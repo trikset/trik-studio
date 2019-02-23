@@ -14,6 +14,6 @@ $QT_DIR/bin/qmake -nocache CONFIG+=release
 make -j4
 
 cd ..
-mkdir bin
+mkdir -p bin
 mv gamepad-build/gamepad bin/gamepad
 rm -rf gamepad-build
