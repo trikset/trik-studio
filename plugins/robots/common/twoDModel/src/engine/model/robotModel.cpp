@@ -386,6 +386,16 @@ void RobotModel::setRotation(qreal angle)
 	}
 }
 
+qreal RobotModel::x() const
+{
+	return mPos.x();
+}
+
+qreal RobotModel::y() const
+{
+	return mPos.y();
+}
+
 bool RobotModel::onTheGround() const
 {
 	return mIsOnTheGround;
