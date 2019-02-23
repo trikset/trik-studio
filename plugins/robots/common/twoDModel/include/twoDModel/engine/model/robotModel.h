@@ -45,6 +45,10 @@ class TWO_D_MODEL_EXPORT RobotModel : public QObject
 {
 	Q_OBJECT
 
+	Q_PROPERTY(qreal rotation READ rotation WRITE setRotation)
+	Q_PROPERTY(qreal x READ x)
+	Q_PROPERTY(qreal y READ y)
+
 public:
 	enum ATime {
 		DoInf,
@@ -100,6 +104,9 @@ public:
 
 	qreal rotation() const;
 	void setRotation(qreal angle);
+
+	qreal x() const;
+	qreal y() const;
 
 	/// Returns false if robot item is dragged by user at the moment.
 	bool onTheGround() const;
