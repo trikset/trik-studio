@@ -229,8 +229,8 @@ defineTest(copyToDestdir) {
 			FILE = $$FILE/*
 		}
 
-		DDIR = $$system_path($$DESTDIR/$$3$$DESTDIR_SUFFIX)
-		FILE = $$system_path($$FILE)
+		DDIR = $$quote($$system_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
+		FILE = $$quote($$system_path($$FILE))
 
 		mkpath($$DDIR)
 
@@ -243,10 +243,11 @@ defineTest(copyToDestdir) {
 			!silent: COPY_DIR += -v
 		}
 
+		COPY_COMMAND = $$COPY_DIR $$FILE $$DDIR
 		isEmpty(NOW) {
-			QMAKE_POST_LINK += $$COPY_DIR $$quote($$shell_path($$FILE)) $$quote($$shell_path($$DDIR)) $$escape_expand(\\n\\t)
+			QMAKE_POST_LINK += $$COPY_COMMAND $$escape_expand(\\n\\t)
 		} else {
-			system($$COPY_DIR $$quote($$FILE) $$quote($$DDIR))
+			system($$COPY_COMMAND)
 		}
 	}
 

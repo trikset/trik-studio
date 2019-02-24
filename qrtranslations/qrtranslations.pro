@@ -20,7 +20,7 @@ win32 {
 	system(cmd /C "DEL /s *.qm")
 	system(cmd /C "for /R %G in (*.ts) do lrelease -nounfinished -removeidentical %G")
         !silent:verboseXCOPY=/f
-        system(xcopy $$system_quote(*.qm) $$system_quote($$system_path($$GLOBAL_DESTDIR/translations/)) /s /e /y /i $$verboseXCOPY)
+        system(cmd.exe /C "xcopy $$system_quote(*.qm) $$system_quote($$system_path($$GLOBAL_DESTDIR/translations/)) /s /e /y /i $$verboseXCOPY")
 }
 
 unix {
