@@ -16,15 +16,15 @@ TEMPLATE = subdirs
 
 include(../global.pri)
 
-
 win32 {
 	system(cmd /C "DEL /s *.qm")
 	system(cmd /C "for /R %G in (*.ts) do lrelease -nounfinished -removeidentical %G")
-	system(cmd /C "xcopy *.qm $$GLOBAL_DESTDIR\\translations\\ /s /e /y")
+        !silent:verboseXCOPY=/f
+        system(cmd.exe /C "xcopy $$system_quote(*.qm) $$system_quote($$system_path($$GLOBAL_DESTDIR/translations/)) /s /e /y /i $$verboseXCOPY")
 }
 
 unix {
-	system(mkdir -p $$GLOBAL_DESTDIR/translations/; find $$PWD/ -name '*.qm' -delete)
-	system(find $$PWD -name '*.ts' -print0 | xargs -0 $$[QT_INSTALL_BINS]/lrelease -nounfinished -removeidentical)
-	system(find $$PWD/./ -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$GLOBAL_DESTDIR/translations/)
+        system(mkdir -p $$system_quote($$GLOBAL_DESTDIR/translations/); find $$system_quote($$PWD/) -name '*.qm' -delete)
+        system(find $$system_quote($$PWD) -name '*.ts' -print0 | xargs -0 $$[QT_INSTALL_BINS]/lrelease -nounfinished -removeidentical)
+        system(find $$system_quote($$PWD/./) -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$system_quote($$GLOBAL_DESTDIR/translations/))
 }
