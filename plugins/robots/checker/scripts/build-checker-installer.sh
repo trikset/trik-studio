@@ -153,7 +153,6 @@ cp -fP $qRealDir/bin/release/translations/ru/qrgui_thirdparty_ru.qm ./translatio
 cp -fP $qRealDir/bin/release/translations/ru/qrgui_toolPluginInterface_ru.qm ./translations/ru/
 cp -fP $qRealDir/bin/release/translations/ru/qrtext_ru.qm ./translations/ru/
 cp -fP $qRealDir/bin/release/translations/ru/qrutils_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qt_ru.qm ./translations/ru/
 
 # Copying TRIKStudio plugins
 cp -fP $qRealDir/bin/release/libqextserialport.so* .
@@ -163,6 +162,8 @@ cp -fP $qRealDir/bin/release/librobots-trik-kit-interpreter-common.so* .
 cp -fP $qRealDir/bin/release/librobots-kit-base.so* .
 cp -fP $qRealDir/bin/release/librobots-trik-kit.so* .
 cp -fP $qRealDir/bin/release/librobots-utils.so* .
+cp -fP $qRealDir/bin/release/libPythonQt*.so* .
+cp -fP $qRealDir/bin/release/libBox2D.so* .
 
 mkdir -p plugins/editors
 cp -fP $qRealDir/bin/release/plugins/editors/* ./plugins/editors/
