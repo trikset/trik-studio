@@ -17,6 +17,8 @@
 
 TARGET_NAME = trik-studio
 
+TRIK_STUDIO_VERSION = 3.3.0-beta2
+
 win32 {
 	PLATFORM = windows
 }
