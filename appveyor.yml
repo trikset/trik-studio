@@ -96,5 +96,8 @@ on_finish:
 
 
 artifacts:
- - path: bin\$(configuration)
+ - path: .build\bin\$(configuration)
    name: studio-$(configuration)-$(PROJECT_FILE)
+notifications:
+ - provider: GitHubPullRequest
+   template: "{{#passed}}{{#jobs}}{{name}}\n{{#artifacts}} {{fileName}} {{permalink}} \n {{/artifacts}}{{/jobs}}{{/passed}}"
