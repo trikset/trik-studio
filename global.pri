@@ -15,6 +15,8 @@
 !isEmpty(_PRO_FILE_):!isEmpty(CONFIG):isEmpty(GLOBAL_PRI_INCLUDED){
 #GLOBAL_PRI_INCLUDED = $$PWD
 
+TRIK_STUDIO_VERSION = 3.3.0-beta2
+
 win32 {
 	PLATFORM = windows
 }
