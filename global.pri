@@ -18,6 +18,7 @@
 TARGET_NAME = trik-studio
 
 TRIK_STUDIO_VERSION = 3.3.0-beta2
+TRIK_STUDIO_YEAR = 2019
 
 win32 {
 	PLATFORM = windows
@@ -294,6 +295,10 @@ defineTest(enableFlagIfCan) {
   } else {
     message(Cannot enable $$1)
   }
+}
+
+defineReplace(fullSystemPath) {
+        return($$system_path($$clean_path($$absolute_path($$1))))
 }
 
 CONFIG(noPch) {
