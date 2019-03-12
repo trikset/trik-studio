@@ -93,7 +93,7 @@ mkdir -p trikStudio-checker/bin
 pushd trikStudio-checker/bin
 
 if $NEED_QT_LIBS ; then
-    LIBS=$(ldd ./qreal | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | sort -u | grep -Ev '^\.|^/lib')
+    LIBS=$(ldd ./trik-studio | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | sort -u | grep -Ev '^\.|^/lib')
 
 # Copying required Qt libraries
     ${COPY} $qtDirForPlugins/iconengines .

@@ -27,7 +27,7 @@ unix:!macx {
 	#MAKE INSTALL
 
 	res.path = $$PROGRAMDIR
-	res.extra = install -Dp -m0755 bin/release/qreal $(INSTALL_ROOT)$$BINDIR/qreal;\
+	res.extra = install -Dp -m0755 bin/release/$${TARGET_NAME} $(INSTALL_ROOT)$$BINDIR/$${TARGET_NAME};\
 	install -Dp -m0755 installer/platform/trikStudio.sh $(INSTALL_ROOT)$$BINDIR/trikStudio;\
 	test -d $(INSTALL_ROOT)$$LIBDIR/ || mkdir -p $(INSTALL_ROOT)$$LIBDIR/;\
 	cp -a bin/release/*.so* $(INSTALL_ROOT)$$LIBDIR;\
