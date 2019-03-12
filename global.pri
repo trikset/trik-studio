@@ -15,6 +15,8 @@
 !isEmpty(_PRO_FILE_):!isEmpty(CONFIG):isEmpty(GLOBAL_PRI_INCLUDED){
 #GLOBAL_PRI_INCLUDED = $$PWD
 
+TARGET_NAME = trik-studio
+
 win32 {
 	PLATFORM = windows
 }

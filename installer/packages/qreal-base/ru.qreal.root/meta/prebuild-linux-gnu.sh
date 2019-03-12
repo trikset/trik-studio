@@ -35,7 +35,7 @@ cp -pr $BIN_DIR/libqrgui-text-editor.so*                                $PWD/../
 cp -pr $BIN_DIR/libqrgui-thirdparty.so*                                 $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-tool-plugin-interface.so*                      $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-facade.so*                                     $PWD/../data/lib/
-cp     $BIN_DIR/qreal                                                   $PWD/../data/bin/$PRODUCT
+cp     $BIN_DIR/trik-studio                                             $PWD/../data/bin/$PRODUCT
 cp     $BIN_DIR/plugins/tools/libupdatesChecker.so                      $PWD/../data/lib/plugins/tools/
 cp     $BIN_DIR/plugins/tools/subprogramsImporterExporter.so            $PWD/../data/lib/plugins/tools/
 

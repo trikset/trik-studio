@@ -1,3 +1,3 @@
 #!/bin/sh
 cd $HOME
-qreal --config /etc/trikStudio.config
+trik-studio --config /etc/trikStudio.config

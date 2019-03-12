@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TARGET = qreal
-
 include(../../global.pri)
+
+TARGET = $${TARGET_NAME}
 
 TEMPLATE = app
 
