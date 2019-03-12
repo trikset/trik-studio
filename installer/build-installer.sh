@@ -38,20 +38,20 @@ find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash
 
 find . -type d -empty -delete
 
-echo "Building online installer..."
-$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
+#echo "Building online installer..."
+#$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
 $QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-offline-$OS_EXT-installer
 
 [ -f $SSH_DIR/id_rsa ] && : || { echo "Done"; exit 0; }
 
-echo "Building updates repository... This step can be safely skipped, the offline installer is already ready, press Ctrl+C if you are not sure what to do next."
-rm -rf $PRODUCT-repository
-$QTIFW_DIR/repogen -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-repository
+#echo "Building updates repository... This step can be safely skipped, the offline installer is already ready, press Ctrl+C if you are not sure what to do next."
+#rm -rf $PRODUCT-repository
+#$QTIFW_DIR/repogen -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-repository
 
-echo "Uploading repository to server... This step can be also safely skipped, the offine installer is already ready, press Ctrl+C if you are not sure what to do next."
-scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -r $PRODUCT-repository/* qrealproject@195.19.241.150:/home/qrealproject/public/packages/$PRODUCT-repo-$OS_EXT
+#echo "Uploading repository to server... This step can be also safely skipped, the offine installer is already ready, press Ctrl+C if you are not sure what to do next."
+#scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -r $PRODUCT-repository/* qrealproject@195.19.241.150:/home/qrealproject/public/packages/$PRODUCT-repo-$OS_EXT
 
 echo "Removing temporary files..."
 rm -rf $PRODUCT-repository
