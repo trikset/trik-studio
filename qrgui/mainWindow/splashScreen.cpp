@@ -35,8 +35,10 @@ SplashScreen::SplashScreen(bool isVisible)
 	setWindowFlags(windowFlags());
 
 	mProgressBar->move(20, height() - 30);
-	mProgressBar->setFixedSize(width() - 40, 15);
+	mProgressBar->setFixedSize(width() - 40, 3);
 	mProgressBar->setRange(0, 100);
+	mProgressBar->setTextVisible(false);
+	mProgressBar->setStyleSheet("QProgressBar::chunk {background-color: #001A42}");
 
 	setVisible(isVisible);
 	QApplication::processEvents();
