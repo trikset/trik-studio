@@ -17,7 +17,8 @@ export QTIFW_DIR=$2
 export PRODUCT=$3 
 export OS=$OSTYPE
 
-VERSION=3.3.0-beta2
+PATH=$QT_DIR/bin:$PATH
+VERSION=$($BIN_DIR/trik-studio --version | grep -Eo '[^ ]+$' | sed 's/[^0-9.-]//g')
 grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
 
 grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
