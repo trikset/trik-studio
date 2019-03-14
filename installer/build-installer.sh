@@ -17,6 +17,14 @@ export QTIFW_DIR=$2
 export PRODUCT=$3 
 export OS=$OSTYPE
 
+PATH=$QT_DIR/bin:$PATH
+FULL_VERSION=$($BIN_DIR/trik-studio --version | grep -Eo '[^ ]+$')
+VERSION=$(echo $FULL_VERSION | sed 's/[^0-9.-]//g')
+grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
+cd config
+grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$FULL_VERSION<\/Version>/"
+cd ..
+
 grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
 # All windows platforms can be enumerated below
 [ $OSTYPE == "msys" ] && export OS="win32" || :
@@ -43,6 +51,8 @@ find . -type d -empty -delete
 
 echo "Building offline installer..."
 $QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-offline-$OS_EXT-installer
+
+grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
 [ -f $SSH_DIR/id_rsa ] && : || { echo "Done"; exit 0; }
 
