@@ -16,7 +16,11 @@ include(../../global.pri)
 
 TARGET = $${TARGET_NAME}
 
+DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
+
 TEMPLATE = app
+
+CONFIG += console
 
 QT += widgets printsupport xml svg
 
