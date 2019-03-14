@@ -17,6 +17,9 @@ export QTIFW_DIR=$2
 export PRODUCT=$3 
 export OS=$OSTYPE
 
+VERSION=3.3.0-beta2
+grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
+
 grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
 # All windows platforms can be enumerated below
 [ $OSTYPE == "msys" ] && export OS="win32" || :
