@@ -16,6 +16,11 @@ TEMPLATE = subdirs
 
 include(../../../../global.pri)
 
+VERSION_FILE = version.js
+$${VERSION_FILE}.in.input=$$fullSystemPath($$PWD/$${VERSION_FILE}.in)
+$${VERSION_FILE}.in.output=$$fullSystemPath($${GLOBAL_DESTDIR}/help/$${VERSION_FILE})
+QMAKE_SUBSTITUTES += $${VERSION_FILE}.in
+
 copyToDestdir(help changelog.txt, now)
 
 OTHER_FILES += \
@@ -31,4 +36,4 @@ OTHER_FILES += \
 	help/style.css \
 	help/trik.html \
 	help/pioneer.html \
-	help/version.js \
+	version.js.in \

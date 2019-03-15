@@ -12,11 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TARGET = qreal
+TARGET = trik-studio
 
 include(../../global.pri)
 
+DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
+
 TEMPLATE = app
+
+CONFIG += console
 
 QT += widgets printsupport xml svg
 
