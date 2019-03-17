@@ -18,7 +18,10 @@ case $TRAVIS_OS_NAME in
    ;;
   *) exit 1 ;;
 esac
+
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
+if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro ; fi
+
 $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
    export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG \
 && export CCACHE_CPP2=yes \

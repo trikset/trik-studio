@@ -10,6 +10,7 @@ env:
     - VERA=false
     - PROJECT=studio
     - TESTS=true
+    - TRANSLATIONS=false
     - CELLAR_CACHE_DIR=$([ $TRAVIS_OS_NAME = 'osx' ] && echo "/usr/local/Cellar" || { mkdir -p .empty/{qt,ccache,python@3,pyenv} ; echo .empty ; } )
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then docker pull trikset/linux-builder ; else true ; fi & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
@@ -54,8 +55,8 @@ matrix:
       dist: trusty
       sudo: required
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS
-      name: "Linux debug + vera + tests"
+      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true
+      name: "Linux debug + vera + tests + translations"
     - os: osx
       language: cpp
       name: "macOS release"
