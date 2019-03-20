@@ -1,5 +1,5 @@
 #!/bin/bash
-gitDiff=$(git diff --ignore-submodules --name-only)
+gitDiff=$(git diff --name-only)
 if [ ! -z "$gitDiff" ]
 then	
 	echo diff is $gitDiff
