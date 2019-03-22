@@ -1,21 +1,26 @@
 #!/bin/bash
-# Usage: build-installer.sh <path-to-qt> <path-to-qt-ifw> <product-name> [<additional builder args>]
+# Usage: build-installer.sh <path-to-qt> <path-to-qt-ifw> <product-name> [<path-to-build-dir>]
 # Path to Qt and Qt Installer Framework must be to bin folder (for example ~/Qt/5.3/gcc_64/bin or ~/Qt/QtIFW-1.5.0/bin/).
 # This script will build the installer using the config in './config/$3-config.xml',
 # and all components in 'packages/qreal-base' and 'packages/$3'. 'trik-studio' will be renamed to $3.
-# If QREAL_BUILD_TAG is nonempty then the version will be built using dependencies tagged with its value.
+# If $4 is empty then <path-to-build-dir> = ../
 
 set -o nounset
 set -o errexit
-#[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
-[ -e $(basename $0) ] || {  pushd $(dirname $(readlink -f $0)); ./$(basename $0) $* ; popd ; }
 
-export INSTALLER_ROOT=$PWD/
-export BIN_DIR=$PWD/../bin/release/
+#[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
+
 export QT_DIR=$1/../
 export QTIFW_DIR=$2
-export PRODUCT=$3 
+export PRODUCT=$3
 export OS=$OSTYPE
+
+[ -z ${4} ] && BUILD_DIR=$(dirname $(readlink -f $0))/.. || BUILD_DIR=$(readlink -f $4)
+[ -z $BUILD_DIR ] && exit 1 || export BIN_DIR=$BUILD_DIR/bin/release
+echo $BIN_DIR
+[ -e $BIN_DIR/trik-studio ] || exit 1
+[ -e $(basename $0) ] || cd $(dirname $(readlink -f $0))
+export INSTALLER_ROOT=$PWD/
 
 PATH=$QT_DIR/bin:$PATH
 FULL_VERSION=$($BIN_DIR/trik-studio --version | grep -Eo '[^ ]+$')
@@ -50,7 +55,7 @@ find . -type d -empty -delete
 #$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
-$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-offline-$OS_EXT-installer
+$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer
 
 grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
