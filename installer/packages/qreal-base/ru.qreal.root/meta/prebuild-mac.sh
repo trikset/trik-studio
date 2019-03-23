@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 source $INSTALLER_ROOT/utils/mac_utils.sh
 
 rm -rf "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app"
-rsync -a $BIN_DIR/qreal.app/                                              "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/"
+rsync -a $BIN_DIR/trik-studio.app/                                        "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/"
 cp    $INSTALLER_ROOT/platform/$PRODUCT-mac-platform.config               "$BUNDLE_CONTENTS/MacOS/platform.config"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
@@ -56,7 +56,7 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqrgui-facade.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libupdatesChecker.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libsubprogramsImporterExporter.dylib"
 
-mv "$BUNDLE_CONTENTS/MacOS/qreal" "$BUNDLE_CONTENTS/MacOS/$PRODUCT"
+mv "$BUNDLE_CONTENTS/MacOS/trik-studio" "$BUNDLE_CONTENTS/MacOS/$PRODUCT"
 sed -i.bak s/qreal/trik-studio/g "$BUNDLE_CONTENTS/Info.plist"
 sed -i.bak s/yourcompany/cybertech/g "$BUNDLE_CONTENTS/Info.plist"
 rm -f "$BUNDLE_CONTENTS/Info.plist.bak"

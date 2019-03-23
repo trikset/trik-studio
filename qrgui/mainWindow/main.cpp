@@ -83,6 +83,13 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
+	if (app.arguments().contains("--version"))
+	{
+		QTextStream(stdout) << "TRIK Studio (" << PlatformInfo::prettyOsVersion() << ") " <<
+			TRIK_STUDIO_VERSION << endl;
+		return 0;
+	}
+
 	qsrand(time(0));
 	setDefaultLocale(app.arguments().contains("--no-locale"));
 

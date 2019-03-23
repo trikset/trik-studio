@@ -29,6 +29,8 @@ links(qrkernel qrrepo qrutils qrtext qrgui-models qrgui-controller qrgui-prefere
 		qrgui-tool-plugin-interface qrgui-text-editor robots-kit-base robots-utils robots-2d-model qslog \
 )
 
+DEFINES += TRIK_STUDIO_VERSION=$$shell_quote('"'$$TRIK_STUDIO_VERSION'"')
+
 HEADERS += \
 	$$PWD/include/interpreterCore/robotsPluginFacade.h \
 	$$PWD/include/interpreterCore/managers/actionsManager.h \
