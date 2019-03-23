@@ -20,7 +20,7 @@ case $TRAVIS_OS_NAME in
 esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
-if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro && $EXECUTOR buildScripts/travis/checkDiff.sh ; fi
+if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 
 
 $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
@@ -47,6 +47,6 @@ $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c \"cd bin/$CONFIG && ls\" \
 && sh -c \"export DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
-$EXECUTOR buildScripts/travis/checkDiff.sh
+$EXECUTOR buildScripts/travis/checkStatus.sh
 
 $CODECOV
