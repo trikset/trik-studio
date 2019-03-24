@@ -91,13 +91,19 @@ test_script:
   - dir
   - cmd /c %TEST_SUITE%
 
+after_test:
+#  - bash %APPVEYOR_BUILD_FOLDER%\installer\build-trik-studio.sh %QTDIR%\bin %QTIFWDIR%\bin %BUILD_DIR%
+  - windeployqt --%configuration% %BUILD_DIR%\bin\%CONFIGURATION%\trik-studio.exe
+  
 on_finish:
   - ccache -s
 
 
 artifacts:
+ - path: installer\trik-studio-offline-win32-installer.exe
+   name: win32_installer.$CI_JOB_ID.exe
  - path: .build\bin\$(configuration)
-   name: studio-$(configuration)-$(PROJECT_FILE)
+   name: $(configuration)_bin
 notifications:
  - provider: GitHubPullRequest
-   template: "{{#passed}}{{#jobs}}{{name}}\n{{#artifacts}} {{fileName}} {{permalink}} \n {{/artifacts}}{{/jobs}}{{/passed}}"
+   template: "Download:\n{{#passed}}{{#jobs}}{{name}}\n{{#artifacts}} [{{fileName}}]({{permalink}}) \n {{/artifacts}}{{/jobs}}{{/passed}}"
