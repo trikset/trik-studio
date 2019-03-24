@@ -28,6 +28,7 @@ bin/*
 usabilityFiles/*
 **/.build/*
 **/uic_wrapper.sh
+*.log
 
 # Generated editors
 **/generated/elements.h
