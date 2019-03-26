@@ -15,7 +15,7 @@ export QTIFW_DIR=$2
 export PRODUCT=$3
 export OS=$OSTYPE
 
-[ -z ${4} ] && BUILD_DIR=$(dirname $(readlink -f $0))/.. || BUILD_DIR=$(readlink -f $4)
+[ -z ${4+x} ] && BUILD_DIR=$(dirname $(readlink -f $0))/.. || BUILD_DIR=$(readlink -f $4)
 [ -z $BUILD_DIR ] && exit 1 || export BIN_DIR=$BUILD_DIR/bin/release
 echo $BIN_DIR
 [ -e $BIN_DIR/trik-studio ] || exit 1
