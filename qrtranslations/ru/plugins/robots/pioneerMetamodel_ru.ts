@@ -498,8 +498,8 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="569"/>
-        <source>Angle</source>
-        <translation>Угол</translation>
+        <source>Angle (degrees)</source>
+        <translation>Угол (градусы)</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="292"/>
