@@ -70,7 +70,7 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="104"/>
         <source>Lego NXT</source>
-        <translation>Лего NXT</translation>
+        <translation>Lego NXT</translation>
     </message>
     <message>
         <source>Show 2d model</source>
