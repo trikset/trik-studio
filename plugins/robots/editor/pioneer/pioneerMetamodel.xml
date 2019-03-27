@@ -209,7 +209,7 @@
 				</graphics>
 				<logic>
 					<properties>
-						<property displayedName="Angle" type="string" name="Angle">
+						<property displayedName="Angle (degrees)" type="string" name="Angle">
 							<default>0.0</default>
 						</property>
 					</properties>
