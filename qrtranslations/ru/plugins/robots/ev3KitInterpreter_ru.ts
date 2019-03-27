@@ -71,7 +71,7 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3KitInterpreterPlugin.cpp" line="105"/>
         <source>Lego EV3</source>
-        <translation>Лего EV3</translation>
+        <translation>Lego EV3</translation>
     </message>
 </context>
 <context>
