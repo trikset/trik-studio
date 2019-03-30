@@ -1,1 +1,8 @@
-background-color: rgb(110, 70, 156);
+* {
+	background-color: rgb(255, 255, 255);
+}
+
+QWidget#header {
+	border-bottom: 3px solid;
+	border-bottom-color: rgb(236, 236, 236);
+}

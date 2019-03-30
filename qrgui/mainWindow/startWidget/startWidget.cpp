@@ -84,7 +84,7 @@ QWidget *StartWidget::createHeader()
 	appName->setStyleSheet(BrandManager::styles()->startTabLabelLevel1Style());
 
 	QLabel * const appLogo = new QLabel;
-	appLogo->setFixedSize(200, 100);
+	appLogo->setFixedSize(300, 150);
 	appLogo->setScaledContents(false);
 	appLogo->setPixmap(QPixmap::fromImage(BrandManager::applicationLogo()).scaled(appLogo->size()
 			, Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -95,6 +95,7 @@ QWidget *StartWidget::createHeader()
 	headerLayout->addWidget(appLogo);
 
 	QWidget * const header = new QWidget;
+	header->setObjectName("header");
 	header->setStyleSheet(BrandManager::styles()->startTabHeaderBackgroundStyle());
 	header->setLayout(headerLayout);
 
