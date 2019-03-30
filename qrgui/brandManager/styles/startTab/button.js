@@ -6,8 +6,12 @@
     text-align: left;
 }
 
+QLabel {
+	margin-left: 10px;
+}
+
 QPushButton {
-    border-radius: 5px;
+    border-radius: 0px;
     border-color: white;
 }
 
