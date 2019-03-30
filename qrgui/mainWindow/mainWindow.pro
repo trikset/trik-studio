@@ -20,8 +20,6 @@ DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
 
 TEMPLATE = app
 
-CONFIG += console
-
 QT += widgets printsupport xml svg
 
 links(qrkernel qslog qrutils qrtext qrrepo qscintilla2 qrgui-models qrgui-editor qrgui-controller qrgui-dialogs qrgui-preferences-dialog \
