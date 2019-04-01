@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/pioneerKitInterpreter/src/pioneerKitInterpreterPlugin.cpp" line="33"/>
         <source>Pioneer Kit</source>
-        <translation>Квадрокоптер &laquo;Пионер&raquo;</translation>
+        <translation>Квадрокоптер «Пионер»</translation>
     </message>
 </context>
 <context>
