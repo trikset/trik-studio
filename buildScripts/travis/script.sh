@@ -45,7 +45,7 @@ $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && ccache -s \
 && sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -c \"export DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& sh -c \"export ASAN_OPTIONS=detect_leaks=0 LSAN_OPTIONS=detect_leaks=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
 $EXECUTOR buildScripts/travis/checkStatus.sh
 
