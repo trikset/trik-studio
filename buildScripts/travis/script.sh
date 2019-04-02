@@ -23,7 +23,7 @@ if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 
 
-$EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
+$EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
    export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG \
 && export CCACHE_CPP2=yes \
 && export CCACHE_SLOPPINESS=time_macros \
@@ -47,6 +47,6 @@ $EXECUTOR bash -lc "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c \"cd bin/$CONFIG && ls\" \
 && sh -c \"export ASAN_OPTIONS=detect_leaks=0 LSAN_OPTIONS=detect_leaks=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
-$EXECUTOR buildScripts/travis/checkStatus.sh
+$EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 
 $CODECOV
