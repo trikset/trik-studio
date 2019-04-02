@@ -37,6 +37,7 @@ StyledButton::StyledButton(const QString &text, const QString &icon
 	}
 
 	QLabel * const textLabel = new QLabel(text);
+	textLabel->setObjectName("text");
 	textLabel->setWordWrap(true);
 	textLabel->setAttribute(Qt::WA_Hover);
 

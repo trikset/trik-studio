@@ -1,3 +1,3 @@
 font-family: url(@@FONT@@);
-font: 28px;
+font: bold 28px;
 color: black;

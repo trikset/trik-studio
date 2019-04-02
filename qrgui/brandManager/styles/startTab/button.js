@@ -6,7 +6,7 @@
     text-align: left;
 }
 
-QLabel {
+QLabel#text {
 	margin-left: 10px;
 }
 
