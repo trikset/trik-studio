@@ -76,7 +76,7 @@ install:
 
 script:
   - ./buildScripts/travis/script.sh & WPID=$!
-  - sleep 2400 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
+  - sleep 2800 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - wait $WPID ; RES=$?; kill $KPID > /dev/null ; ( exit $RES )
 after_script:
   - ./buildScripts/travis/after_script.sh
