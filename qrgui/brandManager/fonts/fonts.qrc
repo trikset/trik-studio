@@ -2,7 +2,5 @@
     <qresource prefix="/fonts">
         <file>Pfennig.ttf</file>
         <file>DejaVuSansMono.ttf</file>
-        <file>segoeui.ttf</file>
-        <file>segoeuib.ttf</file>
     </qresource>
 </RCC>
