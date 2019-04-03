@@ -98,8 +98,8 @@ test_script:
   - cmd /c %TEST_SUITE%
 
 after_test:
-#  - bash %APPVEYOR_BUILD_FOLDER%\installer\build-trik-studio.sh %QTDIR%\bin %QTIFWDIR%\bin %BUILD_DIR%
-  - windeployqt --%configuration% %BUILD_DIR%\bin\%CONFIGURATION%\trik-studio.exe
+  - cd %BUILD_DIR%/bin/release
+  - for %%f in (dir *.exe) do windeployqt --release %%f
 
 # zip and upload trik-studio's binaries
   - IF "%APPVEYOR_ACCOUNT_NAME%"=="IKhonakhbeeva" IF "%APPVEYOR_REPO_BRANCH%"=="upload" %APPVEYOR_BUILD_FOLDER%\upload_bin.sh
