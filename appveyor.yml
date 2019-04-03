@@ -102,13 +102,7 @@ after_test:
   - windeployqt --%configuration% %BUILD_DIR%\bin\%CONFIGURATION%\trik-studio.exe
 
 # zip and upload trik-studio's binaries
-  - set PATH=%MSYS_DIR%/usr/bin/;%PATH%
-  - pacman -Su --noconfirm sshpass zip
-  - cd %BUILD_DIR%/
-  - zip -r tsbin-%APPVEYOR_ACCOUNT_NAME%-qt%QT%.zip bin
-  - sshpass -p "%password%" ssh -q -o StrictHostKeyChecking=no "%server%"
-  - sshpass -p "%password%" scp tsbin-%APPVEYOR_ACCOUNT_NAME%-qt%QT%.zip %server%:/home/devops/dl/ts/fresh/
-
+  - IF "%APPVEYOR_ACCOUNT_NAME%"=="IKhonakhbeeva" IF "%APPVEYOR_REPO_BRANCH%"=="upload" %APPVEYOR_BUILD_FOLDER%\upload_bin.sh
   
 on_finish:
   - ccache -s
