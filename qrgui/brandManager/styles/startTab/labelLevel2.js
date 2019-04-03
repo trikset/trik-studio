@@ -1,3 +1,4 @@
-font-family: url(@@FONT@@);
-font: bold 28px;
+font-family: "Segoi UI";
+font: bold 24px;
+text-transform: uppercase;
 color: black;
