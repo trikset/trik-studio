@@ -14,7 +14,7 @@ case $TRAVIS_OS_NAME in
     ;;
   linux)
      EXECUTOR="time docker exec builder "
-     if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic 'python -m codecov'" ; fi
+     if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
    ;;
   *) exit 1 ;;
 esac
