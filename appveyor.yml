@@ -26,11 +26,15 @@ environment:
     PROJECT_FILE: studio
     TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
+    master_ci:
+      secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
       - MINGW: C:\Qt\Tools\mingw530_32
         QTDIR: C:\Qt\5.11\mingw53_32
+        QT: 5.11
       - MINGW: C:\Qt\Tools\mingw492_32
         QTDIR: C:\Qt\5.6\mingw49_32
+        QT: 5.6
 
 configuration:
 #  - debug
@@ -94,16 +98,26 @@ test_script:
 after_test:
   - cd %BUILD_DIR%/bin/release
   - for %%f in (dir *.exe) do windeployqt --release %%f
-  
+  - set ZIP_NAME=trik-studio
+  - if %APPVEYOR_REPO_TAG%==true set ZIP_NAME=%ZIP_NAME%_%APPVEYOR_REPO_TAG_NAME% else ZIP_NAME=%ZIP_NAME%-%APPVEYOR_REPO_BRANCH%
+  - set ZIP_NAME=%ZIP_NAME%_qt%QT%.zip
+  - 7z a %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
+
+artifacts:
+# - path: installer\trik-studio-offline-win32-installer.exe
+#   name: win32_installer.$CI_JOB_ID.exe
+ - path: $(ZIP_NAME).zip
+
+deploy:
+  - provider: Environment
+    name: trik-studio-fresh
+    on:
+      APPVEYOR_PROJECT_SLUG: $(master_ci)
+      
 on_finish:
   - ccache -s
 
 
-artifacts:
- - path: installer\trik-studio-offline-win32-installer.exe
-   name: win32_installer.$CI_JOB_ID.exe
- - path: .build\bin\$(configuration)
-   name: $(configuration)_bin
 notifications:
  - provider: GitHubPullRequest
    on_build_failure: false
