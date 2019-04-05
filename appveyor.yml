@@ -102,7 +102,7 @@ after_test:
   - for %%f in (dir *.exe) do windeployqt --release %%f
 
 # zip and upload trik-studio's binaries
-  - IF "%APPVEYOR_ACCOUNT_NAME%"=="IKhonakhbeeva" IF "%APPVEYOR_REPO_BRANCH%"=="upload" %APPVEYOR_BUILD_FOLDER%\upload_bin.sh
+  - IF "%APPVEYOR_ACCOUNT_NAME%"=="IKhonakhbeeva" IF "%APPVEYOR_REPO_BRANCH%"=="upload" %APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor\upload_bin.sh
   
 on_finish:
   - ccache -s
