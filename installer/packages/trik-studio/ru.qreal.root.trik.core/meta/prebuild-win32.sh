@@ -25,7 +25,17 @@ cp    $BIN_DIR/system.js                                                        
 cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
 
 cd "$(dirname "$0")"/../data
-rm -rf trik-runtime-builds
-git clone  --depth 1 https://github.com/qreal/trik-runtime-builds
-mv trik-runtime-builds/winscp .
-rm -rf trik-runtime-builds
+putty_server="https://the.earth.li/~sgtatham/putty/latest"
+mkdir -p winscp/PuTTY
+
+for file in putty puttygen pageant
+do
+  curl -L -s -o winscp/PuTTY/$file.exe $putty_server/w64/$file.exe &
+done
+curl -L -s -o winscp/PuTTY/putty.chm $putty_server/putty.chm &
+
+curl -L -s -o winscp.zip https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip
+unzip winscp.zip -d winscp
+rm -f winscp.zip
+
+wait
