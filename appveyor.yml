@@ -106,4 +106,5 @@ artifacts:
    name: $(configuration)_bin
 notifications:
  - provider: GitHubPullRequest
-   template: "Download:\n{{#passed}}{{#jobs}}{{name}}\n{{#artifacts}} [{{fileName}}]({{permalink}}) \n {{/artifacts}}{{/jobs}}{{/passed}}"
+   on_build_failure: false
+   template: "{{#passed}}Download:\n{{#jobs}}{{name}}\n{{#artifacts}} [{{fileName}}]({{permalink}}) \n {{/artifacts}}{{/jobs}}{{/passed}}"
