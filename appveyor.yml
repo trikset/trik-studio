@@ -108,6 +108,9 @@ artifacts:
 #   name: win32_installer.$CI_JOB_ID.exe
  - path: $(ZIP_NAME)
 
+before_deploy:
+  - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+
 deploy:
   - provider: Environment
     name: trik-studio-fresh
