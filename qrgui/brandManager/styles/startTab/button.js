@@ -1,6 +1,6 @@
 * {
     background-color: transparent;
-    font-family:url(@@FONT@@);
+    font-family: "Segoe UI";
     color: black;
     font: 20px;
     text-align: left;
