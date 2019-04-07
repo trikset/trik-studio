@@ -60,6 +60,7 @@ QWidget *StartWidget::createMainWidget()
 	QWidget * const projectsManagement = createProjectsManagementWidget();
 
 	QVBoxLayout * mainLayout = new QVBoxLayout;
+	mainLayout->setSpacing(20);
 	QHBoxLayout * contentsLayout = new QHBoxLayout;
 
 	mainLayout->addWidget(header);
