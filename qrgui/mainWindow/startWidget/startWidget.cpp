@@ -128,13 +128,20 @@ QWidget *StartWidget::createRecentProjectsWidget()
 QWidget *StartWidget::createProjectsManagementWidget()
 {
 	mProjectsManagementLayout = new QBoxLayout(QBoxLayout::TopToBottom);
-//	mProjectsManagementLayout->addStretch();
+	mProjectsManagementLayout->setSpacing(20);
+	mProjectsManagementLayout->setMargin(0);
+	QWidget * const widget1 = new QWidget;
+	widget1->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
+	QWidget * const widget2 = new QWidget;
+	widget2->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
+	mProjectsManagementLayout->addWidget(widget1);
+	mProjectsManagementLayout->addWidget(widget2);
 
 	mOpenProjectButton = new StyledButton(tr("Open existing project")
 			, ":/mainWindow/images/startTab/open.svg"
 			, QBoxLayout::TopToBottom);
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
-	mProjectsManagementLayout->addWidget(mOpenProjectButton);
+//			mProjectsManagementLayout->addWidget(mOpenProjectButton);
 
 	const Id theOnlyDiagram = mMainWindow->editorManager().theOnlyDiagram();
 	if (!theOnlyDiagram.isNull()) {
@@ -143,7 +150,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 
 		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg"
 				, QBoxLayout::TopToBottom);
-		mProjectsManagementLayout->addWidget(mNewProjectButton);
+//		mProjectsManagementLayout->addWidget(mNewProjectButton);
 
 		QSignalMapper *newProjectMapper = new QSignalMapper(this);
 		newProjectMapper->setMapping(mNewProjectButton, diagramIdString);
@@ -158,20 +165,18 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		}
 	}
 
-	mOpenInterpreterButton = new StyledButton(tr("Open interpreted diagram")
-			, ":/mainWindow/images/startTab/openInterpreted.svg");
-	mCreateInterpreterButton = new StyledButton(tr("Create interpreted diagram")
-			, ":/mainWindow/images/startTab/createInterpreted.svg");
-	connect(mOpenInterpreterButton, SIGNAL(clicked()), this, SLOT(openInterpretedDiagram()));
-	connect(mCreateInterpreterButton, SIGNAL(clicked()), this, SLOT(createInterpretedDiagram()));
 
-//	mProjectsManagementLayout->addWidget(mCreateInterpreterButton);
-//	mProjectsManagementLayout->addWidget(mOpenInterpreterButton);
-//	mProjectsManagementLayout->addStretch();
+	QBoxLayout * const layout1 = new QBoxLayout(QBoxLayout::TopToBottom);
+	layout1->addWidget(mOpenProjectButton);
+	widget1->setLayout(layout1);
+
+	QBoxLayout * const layout2 = new QBoxLayout(QBoxLayout::TopToBottom);
+	layout2->addWidget(mNewProjectButton);
+	widget2->setLayout(layout2);
 
 	QWidget * const result = new QWidget;
 	result->setLayout(mProjectsManagementLayout);
-	result->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
+//	result->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
 	return result;
 }
 
