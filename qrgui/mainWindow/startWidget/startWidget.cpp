@@ -70,8 +70,9 @@ QWidget *StartWidget::createMainWidget()
 	}
 
 	contentsLayout->addWidget(projectsManagement);
+	contentsLayout->addSpacing(700);
 	contentsLayout->setStretch(0, 10);
-	contentsLayout->setStretch(1, 20);
+	contentsLayout->setStretch(1, 10);
 
 	result->setLayout(mainLayout);
 	result->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
@@ -89,8 +90,12 @@ QWidget *StartWidget::createHeader()
 	appLogo->setPixmap(QPixmap::fromImage(BrandManager::applicationLogo()).scaled(appLogo->size()
 			, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
+	QVBoxLayout * const logoLayout = new QVBoxLayout;
+	logoLayout->addWidget(appName);
+	logoLayout->addStretch();
+
 	QHBoxLayout * const headerLayout = new QHBoxLayout;
-	headerLayout->addWidget(appName);
+	headerLayout->addLayout(logoLayout);
 	headerLayout->addStretch();
 	headerLayout->addWidget(appLogo);
 
@@ -122,10 +127,11 @@ QWidget *StartWidget::createRecentProjectsWidget()
 QWidget *StartWidget::createProjectsManagementWidget()
 {
 	mProjectsManagementLayout = new QBoxLayout(QBoxLayout::TopToBottom);
-	mProjectsManagementLayout->addStretch();
+//	mProjectsManagementLayout->addStretch();
 
 	mOpenProjectButton = new StyledButton(tr("Open existing project")
-			, ":/mainWindow/images/startTab/open.svg");
+			, ":/mainWindow/images/startTab/open.svg"
+			, QBoxLayout::TopToBottom);
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
 	mProjectsManagementLayout->addWidget(mOpenProjectButton);
 
@@ -134,7 +140,8 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		const Id editor = mMainWindow->editorManager().editors()[0];
 		const QString diagramIdString = mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram);
 
-		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg");
+		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg"
+				, QBoxLayout::TopToBottom);
 		mProjectsManagementLayout->addWidget(mNewProjectButton);
 
 		QSignalMapper *newProjectMapper = new QSignalMapper(this);
@@ -157,9 +164,9 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	connect(mOpenInterpreterButton, SIGNAL(clicked()), this, SLOT(openInterpretedDiagram()));
 	connect(mCreateInterpreterButton, SIGNAL(clicked()), this, SLOT(createInterpretedDiagram()));
 
-	mProjectsManagementLayout->addWidget(mCreateInterpreterButton);
-	mProjectsManagementLayout->addWidget(mOpenInterpreterButton);
-	mProjectsManagementLayout->addStretch();
+//	mProjectsManagementLayout->addWidget(mCreateInterpreterButton);
+//	mProjectsManagementLayout->addWidget(mOpenInterpreterButton);
+//	mProjectsManagementLayout->addStretch();
 
 	QWidget * const result = new QWidget;
 	result->setLayout(mProjectsManagementLayout);

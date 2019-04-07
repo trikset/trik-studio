@@ -30,9 +30,15 @@ StyledButton::StyledButton(const QString &text, const QString &icon
 
 	QBoxLayout * const layout = new QBoxLayout(direction);
 	layout->setMargin(2);
+
+	if (direction == QBoxLayout::TopToBottom) {
+		layout->addStretch();
+	}
+
 	if (!icon.isEmpty()) {
-		QWidget * const circleWidget = new CircleWidget(QSize(70, 70), icon);
+		QWidget * const circleWidget = new CircleWidget(QSize(100, 100), icon);
 		layout->addWidget(circleWidget);
+		layout->setAlignment(circleWidget, Qt::AlignHCenter);
 		bindHighlightedOnHover(circleWidget);
 	}
 
@@ -48,7 +54,12 @@ StyledButton::StyledButton(const QString &text, const QString &icon
 	textLabel->setMinimumHeight(55);
 
 	layout->addWidget(textLabel);
+
 	bindHighlightedOnHover(textLabel);
+	if (direction == QBoxLayout::TopToBottom) {
+		layout->setAlignment(textLabel, Qt::AlignHCenter);
+		layout->addStretch();
+	}
 
 	setFlat(true);
 	setStyleSheet(BrandManager::styles()->startTabButtonStyle());
