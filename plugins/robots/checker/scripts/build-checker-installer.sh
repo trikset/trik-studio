@@ -60,9 +60,10 @@ qtDirForPlugins=$(readlink -f $QT_INSTALL_PLUGINS)
 qtDirLib=$(readlink -f $QT_INSTALL_LIBS)
 hostDirLib=$(readlink -f $QT_HOST_LIBS)
 
+export LD_LIBRARY_PATH=$hostDirLib:$qtDirLib:${LD_LIBRARY_PATH:-}
 
 COPY="cp -rfP"
-NEED_QT_LIBS=false
+NEED_QT_LIBS=true
 
 if [ "$#" -ge 2 ]; then
 	fieldsDir=$(readlink -f $2)
@@ -92,10 +93,23 @@ rm -rf trikStudio-checker
 mkdir -p trikStudio-checker/bin
 pushd trikStudio-checker/bin
 
-if $NEED_QT_LIBS ; then
-    LIBS=$(ldd ./trik-studio | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | sort -u | grep -Ev '^\.|^/lib')
+copy_required_libs() {
+	# simple function to copy all "libXXX.so*" dependencies for ELF executable
+	set -ueo pipefail
+	set +x
+	local targetLibsDir=$1
+	shift
+	local binaries="$@"
+	local libs=$(env LD_LIBRARY_PATH=$targetLibsDir:$LD_LIBRARY_PATH ldd $binaries \
+		| grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' \
+		| xargs realpath -L -s | sort -u | grep -Ev "^$(realpath -e $targetLibsDir)|linux-vdso|^/lib/|^/lib64/")
+	local rsync="rsync -av"
+	
+	for lib in ${libs}; do rsync="$rsync ${lib}*" ; done
+	$rsync ${targetLibsDir}
+}
 
-# Copying required Qt libraries
+if $NEED_QT_LIBS ; then
     ${COPY} $qtDirForPlugins/iconengines .
 
     mkdir -p imageformats
@@ -103,15 +117,6 @@ if $NEED_QT_LIBS ; then
 
     mkdir -p platforms
     ${COPY} $qtDirForPlugins/platforms/libqminimal.so platforms/
-
-
-    for lib in ${LIBS}; do ${COPY} $lib* .; done
-
-# Seems like this code is obsolete, but ...
-    ${COPY} $qtDirLib/libQt5Core.so* $qtDirLib/libQt5Gui.so* $qtDirLib/libQt5Network.so* \
-        $qtDirLib/libQt5PrintSupport.so* $qtDirLib/libQt5Script.so* $qtDirLib/libQt5Svg.so* \
-        $qtDirLib/libQt5Widgets.so* $qtDirLib/libQt5Xml.so* $qtDirLib/libQt5DBus.so* .
-
 fi
 
 # Copying QReal libraries
@@ -197,6 +202,9 @@ cp -fP $qRealDir/bin/release/2D-model .
 cp -fP $qRealDir/bin/release/patcher .
 cp -fP $qRealDir/bin/release/check-solution.sh .
 
+#Now copy all the denendencies for all the executables into single target folder
+copy_required_libs . $(find . -type f -executable)
+
 cd ..
 cp -fP $qRealDir/bin/release/checker.sh .
 
@@ -205,8 +213,11 @@ cp -r $fieldsDir ./fields
 cp -r $examplesDir ./examples
 cp -r $tasksDir ./tasks
 
+#It saves few megabytes.
+find . -type f -executable | xargs strip -sv || :
+
 # Packing
 popd
 
 rm -f trik_checker.tar.xz
-time { tar c trikStudio-checker | xz -z9cv > trik_checker.tar.xz ; }
+time { tar c trikStudio-checker | xz -z9cvT 0 > trik_checker.tar.xz ; }
