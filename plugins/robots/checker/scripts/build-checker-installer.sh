@@ -27,13 +27,13 @@ function show_help {
 	echo -e "QREAL_DIR\t-\tPath to QReal sources root"
 	echo "                    Defaults to \"../..\""
 	echo -e "FIELDS_DIR\t-\tPath to directory with prepared fields."
-	echo "                                   Defaults to \"$$QREAL_DIR/qrtest/trikStudioSimulatorTests/fields/fields\""
+	echo "                                   Defaults to \"$$PWD/fields/fields\""
 	echo -e "EXAMPLES_DIR\t-\tPath to examples dir"
-	echo "                                     Defaults to \"$$QREAL_DIR/qrtest/trikStudioSimulatorTests/solutions\""
+	echo "                                     Defaults to \"$$PWD/solutions\""
 	echo -e "TASKS_DIR\t-\tPath to folder with saves with tasks."
-	echo "                                  Defaults to \"$$QREAL_DIR/qrtest/trikStudioSimulatorTests/tasks\""
+	echo "                                  Defaults to \"$$PWD/tasks\""
 	echo -e "INPUTS_DIR\t-\tPath to directory with with inputs."
-	echo "                                  Defaults to \"$$QREAL_DIR/qrtest/trikStudioSimulatorTests/inputs>.\""
+	echo "                                  Defaults to \"$$PWD/inputs>.\""
 	echo "Example: ./$(basename $0) ~/Qt/5.7 ~/stepic-examples"
 	exit 0
 }
@@ -65,29 +65,10 @@ export LD_LIBRARY_PATH=$hostDirLib:$qtDirLib:${LD_LIBRARY_PATH:-}
 COPY="cp -rfP"
 NEED_QT_LIBS=true
 
-if [ "$#" -ge 2 ]; then
-	fieldsDir=$(readlink -f $2)
-else
-	fieldsDir=$(readlink -f $qRealDir/qrtest/trikStudioSimulatorTests/fields/fields)
-fi
-
-if [ "$#" -ge 3 ]; then
-	examplesDir=$(readlink -f $3)
-else
-	examplesDir=$(readlink -f $qRealDir/qrtest/trikStudioSimulatorTests/solutions)
-fi
-
-if [ "$#" -ge 4 ]; then
-	tasksDir=$(readlink -f $4)
-else
-	tasksDir=$(readlink -f $qRealDir/qrtest/trikStudioSimulatorTests/tasks)
-fi
-
-if [ "$#" -ge 5 ]; then
-	inputsDir=$(readlink -f $5)
-else
-	inputsDir=$(readlink -f $qRealDir/qrtest/trikStudioSimulatorTests/inputs)
-fi
+fieldsDir=$(readlink -f ${2:-$PWD/fields})
+examplesDir=$(readlink -f ${3:-$PWD/solutions})
+tasksDir=$(readlink -f ${4:-$PWD/tasks})
+inputsDir=$(readlink -f ${5:-$PWD/inputs})
 
 rm -rf trikStudio-checker
 mkdir -p trikStudio-checker/bin
