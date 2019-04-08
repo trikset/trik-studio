@@ -101,82 +101,53 @@ if $NEED_QT_LIBS ; then
 fi
 
 # Copying QReal libraries
-cp -fP $qRealDir/bin/release/changelog.txt .
-cp -fP $qRealDir/bin/release/libqrgraph.so* .
-cp -fP $qRealDir/bin/release/libqrgui-brand-manager.so* .
-cp -fP $qRealDir/bin/release/libqrgui-controller.so* .
-cp -fP $qRealDir/bin/release/libqrgui-dialogs.so* .
-cp -fP $qRealDir/bin/release/libqrgui-editor.so* .
-cp -fP $qRealDir/bin/release/libqrgui-facade.so* .
-cp -fP $qRealDir/bin/release/libqrgui-meta-meta-model.so* .
-cp -fP $qRealDir/bin/release/libqrgui-models.so* .
-cp -fP $qRealDir/bin/release/libqrgui-mouse-gestures.so* .
-cp -fP $qRealDir/bin/release/libqrgui-plugin-manager.so* .
-cp -fP $qRealDir/bin/release/libqrgui-preferences-dialog.so* .
-cp -fP $qRealDir/bin/release/libqrgui-text-editor.so* .
-cp -fP $qRealDir/bin/release/libqrgui-thirdparty.so* .
-cp -fP $qRealDir/bin/release/libqrgui-tool-plugin-interface.so* .
-cp -fP $qRealDir/bin/release/libqrkernel.so* .
-cp -fP $qRealDir/bin/release/libqrrepo.so* .
-cp -fP $qRealDir/bin/release/libqrtext.so* .
-cp -fP $qRealDir/bin/release/libqrutils.so* .
-cp -fP $qRealDir/bin/release/libqscintilla2.so* .
-cp -fP $qRealDir/bin/release/libqslog.so* .
-cp -fP $qRealDir/bin/release/libqrtext.so* .
-
-mkdir -p translations/ru
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_dialogs_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_editor_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_hotKeyManager_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_mainWindow_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_models_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_mouseGestures_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_pluginsManager_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_preferencesDialog_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_system_facade_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_textEditor_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_thirdparty_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrgui_toolPluginInterface_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrtext_ru.qm ./translations/ru/
-cp -fP $qRealDir/bin/release/translations/ru/qrutils_ru.qm ./translations/ru/
+rsync -av $qRealDir/bin/release/changelog.txt \
+$qRealDir/bin/release/libqrgraph.so* \
+$qRealDir/bin/release/libqrgui-brand-manager.so* \
+$qRealDir/bin/release/libqrgui-controller.so* \
+$qRealDir/bin/release/libqrgui-dialogs.so* \
+$qRealDir/bin/release/libqrgui-editor.so* \
+$qRealDir/bin/release/libqrgui-facade.so* \
+$qRealDir/bin/release/libqrgui-meta-meta-model.so* \
+$qRealDir/bin/release/libqrgui-models.so* \
+$qRealDir/bin/release/libqrgui-mouse-gestures.so* \
+$qRealDir/bin/release/libqrgui-plugin-manager.so* \
+$qRealDir/bin/release/libqrgui-preferences-dialog.so* \
+$qRealDir/bin/release/libqrgui-text-editor.so* \
+$qRealDir/bin/release/libqrgui-thirdparty.so* \
+$qRealDir/bin/release/libqrgui-tool-plugin-interface.so* \
+$qRealDir/bin/release/libqrkernel.so* \
+$qRealDir/bin/release/libqrrepo.so* \
+$qRealDir/bin/release/libqrtext.so* \
+$qRealDir/bin/release/libqrutils.so* \
+$qRealDir/bin/release/libqscintilla2.so* \
+$qRealDir/bin/release/libqslog.so* \
+$qRealDir/bin/release/libqrtext.so* .
 
 # Copying TRIKStudio plugins
-cp -fP $qRealDir/bin/release/libqextserialport.so* .
-cp -fP $qRealDir/bin/release/librobots-2d-model.so* .
-cp -fP $qRealDir/bin/release/librobots-interpreter-core.so* .
-cp -fP $qRealDir/bin/release/librobots-trik-kit-interpreter-common.so* .
-cp -fP $qRealDir/bin/release/librobots-kit-base.so* .
-cp -fP $qRealDir/bin/release/librobots-trik-kit.so* .
-cp -fP $qRealDir/bin/release/librobots-utils.so* .
-cp -fP $qRealDir/bin/release/libPythonQt*.so* .
-cp -fP $qRealDir/bin/release/libBox2D.so* .
+rsync -av $qRealDir/bin/release/libqextserialport.so* \
+$qRealDir/bin/release/librobots-2d-model.so* \
+$qRealDir/bin/release/librobots-interpreter-core.so* \
+$qRealDir/bin/release/librobots-trik-kit-interpreter-common.so* \
+$qRealDir/bin/release/librobots-kit-base.so* \
+$qRealDir/bin/release/librobots-trik-kit.so* \
+$qRealDir/bin/release/librobots-utils.so* \
+$qRealDir/bin/release/libPythonQt*.so* \
+$qRealDir/bin/release/libBox2D.so* .
 
-mkdir -p plugins/editors
-cp -fP $qRealDir/bin/release/plugins/editors/* ./plugins/editors/
 
-mkdir -p plugins/tools
-cp -fP $qRealDir/bin/release/plugins/tools/librobots-plugin.so ./plugins/tools/
+rsync -avR $qRealDir/bin/release/./translations/ru/* ./ 
 
-mkdir -p plugins/tools/kitPlugins
-cp -fP $qRealDir/bin/release/plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so ./plugins/tools/kitPlugins/
-cp -fP $qRealDir/bin/release/plugins/tools/kitPlugins/librobots-trik-v62-interpreter.so ./plugins/tools/kitPlugins/
-
-mkdir -p translations/ru/plugins/robots
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/interpreterCore_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/kitBase_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/robotsMetamodel_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/robotsPlugin_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/robots_utils_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/trikKitInterpreterCommon_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/trikV6KitInterpreter_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/trikV62KitInterpreter_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/twoDModel_ru.qm ./translations/ru/plugins/robots/
-cp -fP $qRealDir/bin/release/translations/ru/plugins/robots/twoDModelRunner_ru.qm ./translations/ru/plugins/robots/
+rsync -avR $qRealDir/bin/release/./plugins/editors/* $qRealDir/bin/release/./plugins/tools/librobots-plugin.so \
+	$qRealDir/bin/release/./plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so \
+	$qRealDir/bin/release/./plugins/tools/kitPlugins/librobots-trik-v62-interpreter.so \
+	./
 
 # Copying TRIKRuntime dependencies
-cp -fP $qRealDir/bin/release/libtrik*.so* .
-cp -fP $qRealDir/bin/release/*.js .
-cp -fP $qRealDir/bin/release/*.py .
+rsync -avR $qRealDir/bin/release/libtrik*.so* \
+	$qRealDir/bin/release/*.js \
+	$qRealDir/bin/release/*.py \
+	./
 
 # Copying checker itself
 cp -fP $qRealDir/bin/release/2D-model .
