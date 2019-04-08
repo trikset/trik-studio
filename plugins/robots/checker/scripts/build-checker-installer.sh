@@ -157,7 +157,7 @@ cp -fP $qRealDir/bin/release/patcher .
 cp -fP $qRealDir/bin/release/check-solution.sh .
 
 #Now copy all the denendencies for all the executables into single target folder
-copy_required_libs . $(find . -type f -executable)
+copy_required_libs . $(find . -type f -executable -o -name '*.so' )
 
 cd ..
 cp -fP $qRealDir/bin/release/checker.sh .
