@@ -136,7 +136,9 @@ $qRealDir/bin/release/libPythonQt*.so* \
 $qRealDir/bin/release/libBox2D.so* .
 
 
-rsync -avR $qRealDir/bin/release/./translations/ru/* ./ 
+rsync -avR $qRealDir/bin/release/./translations/ru/*.qm \
+	$qRealDir/bin/release/./translations/ru/plugins/robots/	\
+	./
 
 rsync -avR $qRealDir/bin/release/./plugins/editors/* $qRealDir/bin/release/./plugins/tools/librobots-plugin.so \
 	$qRealDir/bin/release/./plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so \
@@ -144,9 +146,9 @@ rsync -avR $qRealDir/bin/release/./plugins/editors/* $qRealDir/bin/release/./plu
 	./
 
 # Copying TRIKRuntime dependencies
-rsync -avR $qRealDir/bin/release/libtrik*.so* \
-	$qRealDir/bin/release/*.js \
-	$qRealDir/bin/release/*.py \
+rsync -avR $qRealDir/bin/release/./libtrik*.so* \
+	$qRealDir/bin/release/./*.js \
+	$qRealDir/bin/release/./*.py \
 	./
 
 # Copying checker itself
