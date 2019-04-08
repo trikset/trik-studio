@@ -166,10 +166,10 @@ cp -r $examplesDir ./examples
 cp -r $tasksDir ./tasks
 
 #It saves few megabytes.
-find . -type f -executable | xargs strip -sv || :
+find . -type f -executable | xargs strip -sv || : 
 
 # Packing
 popd
 
 rm -f trik_checker.tar.xz
-time { tar c trikStudio-checker | xz -z9cvT 0 > trik_checker.tar.xz ; }
+time { tar c trikStudio-checker | xz -z3ecvT 0 > trik_checker.tar.xz ; }
