@@ -94,7 +94,7 @@ if $NEED_QT_LIBS ; then
     ${COPY} $qtDirForPlugins/iconengines .
 
     mkdir -p imageformats
-    ${COPY} $qtDirForPlugins/imageformats/libqsvg.so imageformats/
+    ${COPY} $qtDirForPlugins/imageformats/libq{svg,jpeg}.so imageformats/
 
     mkdir -p platforms
     ${COPY} $qtDirForPlugins/platforms/libqminimal.so platforms/
