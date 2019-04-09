@@ -280,7 +280,7 @@
 					<container/>
 					<properties>
 						<property displayedName="Variable" type="string" name="Variable">
-							<default>range</default>
+							<default>dist</default>
 						</property>
 					</properties>
 					<generalizations>
