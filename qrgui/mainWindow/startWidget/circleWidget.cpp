@@ -24,7 +24,7 @@ using namespace qReal;
 CircleWidget::CircleWidget(const QSize &size, const QString &icon, QWidget *parent)
 	: QWidget(parent)
 {
-	const QSize iconSize = size - QSize(25, 25);
+	const QSize iconSize = size - QSize(45, 45);
 
 	const QPixmap pixmap(icon);
 	const int targetHeight = iconSize.height();
