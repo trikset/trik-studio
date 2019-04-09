@@ -19,6 +19,7 @@ SUBDIRS = \
 
 include(../../global.pri)
 
+copyToDestdir(tasks, now)
 copyToDestdir(solutions, now)
 
 OTHER_FILES += \
