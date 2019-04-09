@@ -110,14 +110,7 @@ QWidget *StartWidget::createHeader()
 
 QWidget *StartWidget::createRecentProjectsWidget()
 {
-	if (mProjectListSize == 0) {
-		return nullptr;
-	}
-
 	const QString recentProjects = SettingsManager::value("recentProjects").toString();
-	if (recentProjects.isEmpty() || mMainWindow->editorManager().editors().isEmpty()) {
-		return nullptr;
-	}
 
 	QWidget * const result = new QWidget;
 	result->setStyleSheet(BrandManager::styles()->startTabRecentProjectsBackgroundStyle());
