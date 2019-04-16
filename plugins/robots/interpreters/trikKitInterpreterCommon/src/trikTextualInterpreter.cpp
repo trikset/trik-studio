@@ -23,6 +23,7 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
 #include <twoDModel/engine/model/timeline.h>
+#include <qrgui/textEditor/languageInfo.h>
 
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
@@ -73,6 +74,13 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 		qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
 	});
 	connect(&mScriptRunner, SIGNAL(completed(QString,int)), this, SLOT(scriptFinished(QString,int)));
+
+	using qReal::text::Languages;
+	using trikScriptRunner::ScriptType;
+	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
+	Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+
+
 }
 
 trik::TrikTextualInterpreter::~TrikTextualInterpreter()
