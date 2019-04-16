@@ -8,5 +8,6 @@
         <file>startTab/projectsManagementBackground.js</file>
         <file>startTab/recentProjectsBackground.js</file>
         <file>startTab/substrate.js</file>
+        <file>splashscreen/splashscreen.js</file>
     </qresource>
 </RCC>

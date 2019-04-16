@@ -20,6 +20,8 @@
 
 #include <qrkernel/platformInfo.h>
 
+#include "brandManager/brandManager.h"
+
 using namespace qReal;
 
 const QString defaultImage = ":/mainWindow/images/kroki3.PNG";
@@ -38,7 +40,7 @@ SplashScreen::SplashScreen(bool isVisible)
 	mProgressBar->setFixedSize(width() - 40, 3);
 	mProgressBar->setRange(0, 100);
 	mProgressBar->setTextVisible(false);
-	mProgressBar->setStyleSheet("QProgressBar::chunk {background-color: #001A42}");
+	mProgressBar->setStyleSheet(BrandManager::styles()->splashsreenStyle());
 
 	setVisible(isVisible);
 	QApplication::processEvents();

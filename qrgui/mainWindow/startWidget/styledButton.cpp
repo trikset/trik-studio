@@ -54,8 +54,8 @@ StyledButton::StyledButton(const QString &text, const QString &icon
 	textLabel->setMinimumHeight(55);
 
 	layout->addWidget(textLabel);
-
 	bindHighlightedOnHover(textLabel);
+
 	if (direction == QBoxLayout::TopToBottom) {
 		layout->setAlignment(textLabel, Qt::AlignHCenter);
 		layout->addStretch();

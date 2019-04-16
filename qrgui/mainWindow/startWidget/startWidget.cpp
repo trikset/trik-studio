@@ -134,7 +134,6 @@ QWidget *StartWidget::createProjectsManagementWidget()
 			, ":/mainWindow/images/startTab/open.svg"
 			, QBoxLayout::TopToBottom);
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
-//			mProjectsManagementLayout->addWidget(mOpenProjectButton);
 
 	const Id theOnlyDiagram = mMainWindow->editorManager().theOnlyDiagram();
 	if (!theOnlyDiagram.isNull()) {

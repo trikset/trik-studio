@@ -85,6 +85,11 @@ public:
 				.replace("@@FONT@@", mFonts.styledTextFont());
 	}
 
+	virtual QString splashsreenStyle() const
+	{
+		return utils::InFile::readAll(splashscreenStylePath());
+	}
+
 protected:
 	/// Returns a path to a file with json stylesheet for start tab background
 	virtual QString startTabBackgroundStylePath() const
@@ -132,6 +137,11 @@ protected:
 	virtual QString startTabLabelLevel2StylePath() const
 	{
 		return processUrl(":/styles/startTab/labelLevel2.js");
+	}
+
+	virtual QString splashscreenStylePath() const
+	{
+		return processUrl(":/styles/splashscreen/splashscreen.js");
 	}
 
 	/// Returns either given url without modifications or transforms it into absolute disk location

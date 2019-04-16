@@ -7,7 +7,7 @@
 }
 
 QLabel#text {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 QPushButton {
@@ -17,7 +17,4 @@ QPushButton {
 
 QPushButton:hover, QPushButton:pressed {
     background-color: rgb(216, 216, 216);
-}
-
-QWidget[enabled="true"] {
 }
