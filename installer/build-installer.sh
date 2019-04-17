@@ -35,6 +35,11 @@ grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
 [ $OSTYPE == "msys" ] && export OS="win32" || :
 [ $OSTYPE == "linux-gnu" ] && OS_EXT=$OS`getconf LONG_BIT` || OS_EXT=$OS
 
+if [ $OS == "win32" ] ; then
+  if [ -z $(file -b $BIN_DIR/trik-studio | grep -Eo "^PE32 ") ] ; then ADD_BIT=-x64 ; else ADD_BIT=-x86 ; fi
+else
+  ADD_BIT=
+fi
 [ $OS == "win32" ] && SSH_DIR=/.ssh || SSH_DIR=~/.ssh
 
 # $2 will be passed to all prebuild.sh scripts
@@ -55,7 +60,7 @@ find . -type d -empty -delete
 #$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
-$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer
+$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-$FULL_VERSION
 
 grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
