@@ -3,5 +3,8 @@ TEMPLATE=subdirs
 SUBDIRS=
 #DESTDIR = $$absolute_path($$DESTDIR)
 
+TRIK_STUDIO_VERSION = $$system(git describe --always --broken --dirty --abbrev=6)
+TRIK_STUDIO_YEAR = 2019
+
 #message($$DESTDIR)
 QMAKE_SUBSTITUTES += .qmake.cache.in

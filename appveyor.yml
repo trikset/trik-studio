@@ -107,8 +107,8 @@ after_test:
   - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%ARCH%.zip
   - 7z a %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
 # build installer
-#  - cd %APPVEYOR_BUILD_FOLDER%/installer
-#  - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
+  - cd %APPVEYOR_BUILD_FOLDER%/installer
+  - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
 
 artifacts:
  - path: installer\trik-studio-offline-*-installer*.exe
