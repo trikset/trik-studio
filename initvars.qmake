@@ -3,6 +3,7 @@ TEMPLATE=subdirs
 SUBDIRS=
 #DESTDIR = $$absolute_path($$DESTDIR)
 
+#need to update index because of https://stackoverflow.com/questions/16035240/
 system(git update-index --refresh)
 TRIK_STUDIO_VERSION = $$system(git describe --always --broken --dirty --abbrev=6)
 TRIK_STUDIO_YEAR = 2019
