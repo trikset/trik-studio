@@ -125,8 +125,8 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	mProjectsManagementLayout->setMargin(0);
 
 	mOpenProjectButton = new StyledButton(tr("Open existing project")
-			, ":/mainWindow/images/startTab/open.svg"
-			, QBoxLayout::TopToBottom);
+			, ":/mainWindow/images/startTab/open.svg");
+
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
 
 	const Id theOnlyDiagram = mMainWindow->editorManager().theOnlyDiagram();
@@ -134,8 +134,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		const Id editor = mMainWindow->editorManager().editors()[0];
 		const QString diagramIdString = mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram);
 
-		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg"
-				, QBoxLayout::TopToBottom);
+		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg");
 
 		QSignalMapper *newProjectMapper = new QSignalMapper(this);
 		newProjectMapper->setMapping(mNewProjectButton, diagramIdString);
