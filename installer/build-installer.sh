@@ -23,8 +23,10 @@ echo $BIN_DIR
 export INSTALLER_ROOT=$PWD/
 
 PATH=$QT_DIR/bin:$PATH
+# FULL_VERSION is like v3.3.0[-rc9][-20-abc123][-dirty]
 FULL_VERSION=$($BIN_DIR/trik-studio --version | grep -Eo '[^ ]+$')
-VERSION=$(echo $FULL_VERSION | sed 's/[^0-9.-]//g')
+#QT IFW want version like [0-9]+((.|-)[0-9]+)*
+VERSION=$(echo $FULL_VERSION | sed 's/[^0-9.-]//g' | sed 's/[^0-9]$//g' )
 grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
 cd config
 grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$FULL_VERSION<\/Version>/"
@@ -35,6 +37,11 @@ grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
 [ $OSTYPE == "msys" ] && export OS="win32" || :
 [ $OSTYPE == "linux-gnu" ] && OS_EXT=$OS`getconf LONG_BIT` || OS_EXT=$OS
 
+if [ $OS == "win32" ] ; then
+  if [ -z $(file -b $BIN_DIR/trik-studio | grep -Eo "^PE32 ") ] ; then ADD_BIT=-x64 ; else ADD_BIT=-x86 ; fi
+else
+  ADD_BIT=
+fi
 [ $OS == "win32" ] && SSH_DIR=/.ssh || SSH_DIR=~/.ssh
 
 # $2 will be passed to all prebuild.sh scripts
@@ -55,7 +62,7 @@ find . -type d -empty -delete
 #$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
-$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer
+$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-$FULL_VERSION
 
 grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
