@@ -11,8 +11,17 @@ QLabel#text {
 }
 
 QPushButton {
-    border-radius: 0px;
-    border-color: white;
+    border-style: solid;
+    border-color: rgb(236, 236, 236);
+    background-color: rgb(236, 236, 236);
+}
+
+QPushButton#withIcon {
+    border-width: 10px;
+}
+
+QPushButton:hover, QPushButton:!pressed {
+    background-color: rgb(236, 236, 236);
 }
 
 QPushButton:hover, QPushButton:pressed {

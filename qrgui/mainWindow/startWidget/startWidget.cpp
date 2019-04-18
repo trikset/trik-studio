@@ -123,12 +123,6 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	mProjectsManagementLayout = new QBoxLayout(QBoxLayout::TopToBottom);
 	mProjectsManagementLayout->setSpacing(20);
 	mProjectsManagementLayout->setMargin(0);
-	QWidget * const widget1 = new QWidget;
-	widget1->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
-	QWidget * const widget2 = new QWidget;
-	widget2->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
-	mProjectsManagementLayout->addWidget(widget1);
-	mProjectsManagementLayout->addWidget(widget2);
 
 	mOpenProjectButton = new StyledButton(tr("Open existing project")
 			, ":/mainWindow/images/startTab/open.svg"
@@ -142,7 +136,6 @@ QWidget *StartWidget::createProjectsManagementWidget()
 
 		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg"
 				, QBoxLayout::TopToBottom);
-//		mProjectsManagementLayout->addWidget(mNewProjectButton);
 
 		QSignalMapper *newProjectMapper = new QSignalMapper(this);
 		newProjectMapper->setMapping(mNewProjectButton, diagramIdString);
@@ -157,18 +150,13 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		}
 	}
 
-
-	QBoxLayout * const layout1 = new QBoxLayout(QBoxLayout::TopToBottom);
-	layout1->addWidget(mOpenProjectButton);
-	widget1->setLayout(layout1);
-
-	QBoxLayout * const layout2 = new QBoxLayout(QBoxLayout::TopToBottom);
-	layout2->addWidget(mNewProjectButton);
-	widget2->setLayout(layout2);
+	mOpenProjectButton->setObjectName("withIcon");
+	mNewProjectButton->setObjectName("withIcon");
+	mProjectsManagementLayout->addWidget(mOpenProjectButton);
+	mProjectsManagementLayout->addWidget(mNewProjectButton);
 
 	QWidget * const result = new QWidget;
 	result->setLayout(mProjectsManagementLayout);
-//	result->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
 	return result;
 }
 

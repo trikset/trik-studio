@@ -40,7 +40,7 @@ SplashScreen::SplashScreen(bool isVisible)
 	mProgressBar->setFixedSize(width() - 40, 3);
 	mProgressBar->setRange(0, 100);
 	mProgressBar->setTextVisible(false);
-	mProgressBar->setStyleSheet(BrandManager::styles()->splashsreenStyle());
+	mProgressBar->setStyleSheet(BrandManager::styles()->splashscreenStyle());
 
 	setVisible(isVisible);
 	QApplication::processEvents();
