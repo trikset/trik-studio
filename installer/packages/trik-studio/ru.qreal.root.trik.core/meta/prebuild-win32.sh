@@ -24,8 +24,11 @@ cp    $BIN_DIR/vcruntime*.dll                                                   
 cp    $BIN_DIR/system.js                                                          $PWD/../data/bin/
 cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
 
-# download putty and winscp
 cache_dir=$(cygpath -m $APPDATA | xargs cygpath)/$PRODUCT/installer_cache
+# may be need anouther check about all winscp/putty files
+if [ ! -d $cache_dir/winscp ]
+then
+# download putty and winscp
 putty_server="https://the.earth.li/~sgtatham/putty/0.71/"
 winscp_file="https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip"
 mkdir -p $cache_dir/winscp/PuTTY
@@ -41,6 +44,7 @@ unzip -o $cache_dir/winscp.zip -d $cache_dir/winscp
 rm -f $cache_dir/winscp.zip
 wait
 # end of download
+fi
 
 cd "$(dirname "$0")"/../data
 cp -r $cache_dir/winscp .
