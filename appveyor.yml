@@ -109,9 +109,13 @@ after_test:
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
+  - set INSTALLER_NAME=trik-studio-installer
+  - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH%)
+  - set INSTALLER_NAME=%INSTALLER_NAME%-%ARCH%.exe
+  - mv installer\trik-studio*installer*.exe installer\%INSTALLER_NAME%
 
 artifacts:
- - path: installer\trik-studio-offline-*-installer*.exe
+ - path: installer\$(INSTALLER_NAME)
  - path: $(ZIP_NAME)
 
 before_deploy:
