@@ -10,3 +10,6 @@
 [submodule "thirdparty/gamepad/gamepad"]
 	path = thirdparty/gamepad/gamepad
 	url = https://github.com/trikset/trik-desktop-gamepad
+[submodule "installer/nxt-tools"]
+	path = installer/nxt-tools
+	url = https://github.com/qreal/nxt-tools
