@@ -24,28 +24,37 @@ cp    $BIN_DIR/vcruntime*.dll                                                   
 cp    $BIN_DIR/system.js                                                          $PWD/../data/bin/
 cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
 
-cache_dir=$(cygpath -m $APPDATA | xargs cygpath)/$PRODUCT/installer_cache
+winscp_ver=5.15
+putty_ver=0.71
+cache_dir=$(cygpath $APPDATA)/$PRODUCT/installer_cache
 # may be need anouther check about all winscp/putty files
-if [ ! -d $cache_dir/winscp ]
+if [ ! -d $cache_dir/PuTTY_$putty_ver ]
 then
-# download putty and winscp
-putty_server="https://the.earth.li/~sgtatham/putty/0.71/"
-winscp_file="https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip"
-mkdir -p $cache_dir/winscp/PuTTY
+# download putty
+putty_server="https://the.earth.li/~sgtatham/putty/$putty_ver/"
+mkdir -p $cache_dir/PuTTY_$putty_ver
 
 for file in putty puttygen pageant
 do
-  curl -L -s -o $cache_dir/winscp/PuTTY/$file.exe $putty_server/w32/$file.exe &
+  curl -L -s -o $cache_dir/PuTTY_$putty_ver/$file.exe $putty_server/w32/$file.exe &
 done
-curl -L -s -o $cache_dir/winscp/PuTTY/putty.chm $putty_server/putty.chm &
-
-curl -L -s -o $cache_dir/winscp.zip https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip
-unzip -o $cache_dir/winscp.zip -d $cache_dir/winscp
-rm -f $cache_dir/winscp.zip
-wait
-# end of download
+curl -L -s -o $cache_dir/PuTTY_$putty_ver/putty.chm $putty_server/putty.chm &
+# end of download winscp
 fi
 
+if [ ! -d $cache_dir/winscp_$winscp_ver ]
+then
+# download winscp
+winscp_zip="https://sourceforge.net/projects/winscp/files/WinSCP/$winscp_ver/WinSCP-$winscp_ver-Portable.zip"
+curl -L -s -o $cache_dir/winscp.zip $winscp_zip
+unzip -o $cache_dir/winscp.zip -d $cache_dir/winscp_$winscp_ver
+rm -f $cache_dir/winscp.zip
+# end of download winscp
+fi
+
+wait
+
 cd "$(dirname "$0")"/../data
-cp -r $cache_dir/winscp .
+cp -r $cache_dir/winscp_$winscp_ver winscp
+cp -r $cache_dir/PuTTY_$putty_ver winscp/PuTTY
 cp -f winscp/license.txt "$(dirname "$0")"/WinScp-license.txt
