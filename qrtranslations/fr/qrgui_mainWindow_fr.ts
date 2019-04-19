@@ -977,47 +977,45 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Nouveau projet</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="153"/>
         <source>Open interpreted diagram</source>
-        <translation>Ouvrir un diagramme intérprété</translation>
+        <translation type="vanished">Ouvrir un diagramme intérprété</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="155"/>
         <source>Create interpreted diagram</source>
-        <translation>Créer un diagramme intérprété</translation>
+        <translation type="vanished">Créer un diagramme intérprété</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="191"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="183"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="280"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="272"/>
         <source>Create </source>
         <translation>Créer</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="284"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="276"/>
         <source>Editor: </source>
         <translation>Editeur :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="284"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="276"/>
         <source>; Diagram: </source>
         <translation>; Diagramme :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="296"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="288"/>
         <source>Select file with metamodel to open</source>
         <translation>Chosir un fichier avec le metamodèle pour l&apos;ouvrir</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="345"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="337"/>
         <source>Enter the diagram name:</source>
         <translation>Entrez le nom du diagramme :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="345"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="337"/>
         <source>diagram name:</source>
         <translation>Nom du diagramme :</translation>
     </message>
