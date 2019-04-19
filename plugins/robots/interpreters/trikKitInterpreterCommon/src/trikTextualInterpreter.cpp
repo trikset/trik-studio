@@ -79,8 +79,6 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	using trikScriptRunner::ScriptType;
 	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
 	Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
-
-
 }
 
 trik::TrikTextualInterpreter::~TrikTextualInterpreter()
