@@ -204,7 +204,7 @@ void QScintillaTextEdit::setDefaultSettings()
 	setUtf8(true);
 
 	// Ctrl + Space Autocomplete
-	QShortcut * const ctrlSpace = new QShortcut(QKeySequence("Ctrl+Space"), this);
+	QShortcut * const ctrlSpace = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Space), this);
 	connect(ctrlSpace, &QShortcut::activated, this, &QScintillaTextEdit::autoCompleteFromAll);
 
 	// Ctrl + / comment/uncomment
