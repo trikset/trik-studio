@@ -85,53 +85,63 @@ public:
 				.replace("@@FONT@@", mFonts.styledTextFont());
 	}
 
+	virtual QString splashscreenStyle() const
+	{
+		return utils::InFile::readAll(splashscreenStylePath());
+	}
+
 protected:
 	/// Returns a path to a file with json stylesheet for start tab background
 	virtual QString startTabBackgroundStylePath() const
 	{
-		return processUrl(":/styles/startTab/background.js");
+		return processUrl(":/styles/startTab/background.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for start tab substrate background
 	virtual QString startTabSubstrateBackgroundStylePath() const
 	{
-		return processUrl(":/styles/startTab/substrate.js");
+		return processUrl(":/styles/startTab/substrate.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for start tab header background
 	virtual QString startTabHeaderBackgroundStylePath() const
 	{
-		return processUrl(":/styles/startTab/header.js");
+		return processUrl(":/styles/startTab/header.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for recent projects section background on start tab
 	virtual QString startTabRecentProjectsBackgroundStylePath() const
 	{
-		return processUrl(":/styles/startTab/recentProjectsBackground.js");
+		return processUrl(":/styles/startTab/recentProjectsBackground.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for projects management section background on start tab
 	virtual QString startTabProjectsManagementBackgroundStylePath() const
 	{
-		return processUrl(":/styles/startTab/projectsManagementBackground.js");
+		return processUrl(":/styles/startTab/projectsManagementBackground.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for command buttons on start tab
 	virtual QString startTabButtonStylePath() const
 	{
-		return processUrl(":/styles/startTab/button.js");
+		return processUrl(":/styles/startTab/button.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for styled text on start tab  of level 1 heading
 	virtual QString startTabLabelLevel1StylePath() const
 	{
-		return processUrl(":/styles/startTab/labelLevel1.js");
+		return processUrl(":/styles/startTab/labelLevel1.css");
 	}
 
 	/// Returns a path to a file with json stylesheet for styled text on start tab  of level 2 heading
 	virtual QString startTabLabelLevel2StylePath() const
 	{
-		return processUrl(":/styles/startTab/labelLevel2.js");
+		return processUrl(":/styles/startTab/labelLevel2.css");
+	}
+
+	virtual QString splashscreenStylePath() const
+	{
+		return processUrl(":/styles/splashscreen/splashscreen.css");
 	}
 
 	/// Returns either given url without modifications or transforms it into absolute disk location

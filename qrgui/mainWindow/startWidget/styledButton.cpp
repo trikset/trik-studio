@@ -22,23 +22,29 @@
 
 using namespace qReal;
 
-StyledButton::StyledButton(const QString &text, const QString &icon
-		, QBoxLayout::Direction direction, QWidget *parent)
+StyledButton::StyledButton(const QString &text, const QString &icon, QWidget *parent)
 	: QPushButton(parent)
 {
 	setMouseTracking(true);
 
+	auto direction = icon.isEmpty() ? QBoxLayout::LeftToRight : QBoxLayout::TopToBottom;
 	QBoxLayout * const layout = new QBoxLayout(direction);
-	layout->setMargin(2);
+
 	if (!icon.isEmpty()) {
-		QWidget * const circleWidget = new CircleWidget(QSize(70, 70), icon);
+		setObjectName("withIcon");
+		layout->addStretch();
+		QWidget * const circleWidget = new CircleWidget(QSize(100, 100), icon);
 		layout->addWidget(circleWidget);
+		layout->setAlignment(circleWidget, Qt::AlignHCenter);
 		bindHighlightedOnHover(circleWidget);
 	}
 
 	QLabel * const textLabel = new QLabel(text);
 	textLabel->setWordWrap(true);
 	textLabel->setAttribute(Qt::WA_Hover);
+	if (!icon.isEmpty()) {
+		textLabel->setObjectName("withoutIcon");
+	}
 
 	// Beginning from some version of Qt >= 5.5 QLabel does not take into account word wrap when calculating size hint,
 	// so second line becomes clipped off. We use two lines for some buttons, so we manually set minimum height of a
@@ -48,6 +54,11 @@ StyledButton::StyledButton(const QString &text, const QString &icon
 
 	layout->addWidget(textLabel);
 	bindHighlightedOnHover(textLabel);
+
+	if (!icon.isEmpty()) {
+		layout->setAlignment(textLabel, Qt::AlignHCenter);
+		layout->addStretch();
+	}
 
 	setFlat(true);
 	setStyleSheet(BrandManager::styles()->startTabButtonStyle());

@@ -1081,57 +1081,55 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::StartWidget</name>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="126"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="127"/>
         <source>Open existing project</source>
         <translation>Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="136"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="137"/>
         <source>New project</source>
         <translation>Создать проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="152"/>
         <source>Open interpreted diagram</source>
-        <translation>Открыть интерпретируемую диаграмму</translation>
+        <translation type="vanished">Открыть интерпретируемую диаграмму</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="154"/>
         <source>Create interpreted diagram</source>
-        <translation>Создать интерпретируемую диаграмму</translation>
+        <translation type="vanished">Создать интерпретируемую диаграмму</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="190"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="183"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="279"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="272"/>
         <source>Create </source>
         <translation>Создать </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="283"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="276"/>
         <source>Editor: </source>
         <translation>Редактор: </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="283"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="276"/>
         <source>; Diagram: </source>
         <translation>; Диаграмма: </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="295"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="288"/>
         <source>Select file with metamodel to open</source>
         <translation>Выберите файл метамодели для интерпретации</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="344"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="337"/>
         <source>Enter the diagram name:</source>
         <translation>Введите имя диаграммы:</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="344"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="337"/>
         <source>diagram name:</source>
         <translation>имя диаграммы:</translation>
     </message>

@@ -1,1 +1,0 @@
-background-color: rgb(246, 246, 242);

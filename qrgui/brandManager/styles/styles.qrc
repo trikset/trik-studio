@@ -1,12 +1,13 @@
 <RCC>
     <qresource prefix="/styles">
-        <file>startTab/background.js</file>
-        <file>startTab/button.js</file>
-        <file>startTab/header.js</file>
-        <file>startTab/labelLevel1.js</file>
-        <file>startTab/labelLevel2.js</file>
-        <file>startTab/projectsManagementBackground.js</file>
-        <file>startTab/recentProjectsBackground.js</file>
-        <file>startTab/substrate.js</file>
+        <file>splashscreen/splashscreen.css</file>
+        <file>startTab/background.css</file>
+        <file>startTab/button.css</file>
+        <file>startTab/header.css</file>
+        <file>startTab/labelLevel1.css</file>
+        <file>startTab/labelLevel2.css</file>
+        <file>startTab/projectsManagementBackground.css</file>
+        <file>startTab/recentProjectsBackground.css</file>
+        <file>startTab/substrate.css</file>
     </qresource>
 </RCC>

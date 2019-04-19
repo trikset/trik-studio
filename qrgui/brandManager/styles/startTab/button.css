@@ -1,0 +1,25 @@
+* {
+    background-color: transparent;
+    font-family: "Segoe UI";
+    color: black;
+    font: 20px;
+    text-align: left;
+}
+
+QLabel#withoutIcon {
+    margin-left: 10px;
+}
+
+QPushButton {
+    border-style: solid;
+    border-color: rgb(236, 236, 236);
+    background-color: rgb(236, 236, 236);
+}
+
+QPushButton#withIcon {
+    border-width: 10px;
+}
+
+QPushButton:hover, QPushButton:pressed {
+    background-color: rgb(216, 216, 216);
+}

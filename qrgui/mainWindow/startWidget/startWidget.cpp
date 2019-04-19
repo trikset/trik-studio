@@ -60,6 +60,7 @@ QWidget *StartWidget::createMainWidget()
 	QWidget * const projectsManagement = createProjectsManagementWidget();
 
 	QVBoxLayout * mainLayout = new QVBoxLayout;
+	mainLayout->setSpacing(20);
 	QHBoxLayout * contentsLayout = new QHBoxLayout;
 
 	mainLayout->addWidget(header);
@@ -70,8 +71,9 @@ QWidget *StartWidget::createMainWidget()
 	}
 
 	contentsLayout->addWidget(projectsManagement);
+	contentsLayout->addSpacing(700);
 	contentsLayout->setStretch(0, 10);
-	contentsLayout->setStretch(1, 20);
+	contentsLayout->setStretch(1, 10);
 
 	result->setLayout(mainLayout);
 	result->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
@@ -84,17 +86,22 @@ QWidget *StartWidget::createHeader()
 	appName->setStyleSheet(BrandManager::styles()->startTabLabelLevel1Style());
 
 	QLabel * const appLogo = new QLabel;
-	appLogo->setFixedSize(200, 100);
+	appLogo->setFixedSize(300, 150);
 	appLogo->setScaledContents(false);
 	appLogo->setPixmap(QPixmap::fromImage(BrandManager::applicationLogo()).scaled(appLogo->size()
 			, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 
+	QVBoxLayout * const logoLayout = new QVBoxLayout;
+	logoLayout->addWidget(appName);
+	logoLayout->addStretch();
+
 	QHBoxLayout * const headerLayout = new QHBoxLayout;
-	headerLayout->addWidget(appName);
+	headerLayout->addLayout(logoLayout);
 	headerLayout->addStretch();
 	headerLayout->addWidget(appLogo);
 
 	QWidget * const header = new QWidget;
+	header->setObjectName("header");
 	header->setStyleSheet(BrandManager::styles()->startTabHeaderBackgroundStyle());
 	header->setLayout(headerLayout);
 
@@ -103,14 +110,7 @@ QWidget *StartWidget::createHeader()
 
 QWidget *StartWidget::createRecentProjectsWidget()
 {
-	if (mProjectListSize == 0) {
-		return nullptr;
-	}
-
 	const QString recentProjects = SettingsManager::value("recentProjects").toString();
-	if (recentProjects.isEmpty() || mMainWindow->editorManager().editors().isEmpty()) {
-		return nullptr;
-	}
 
 	QWidget * const result = new QWidget;
 	result->setStyleSheet(BrandManager::styles()->startTabRecentProjectsBackgroundStyle());
@@ -121,12 +121,13 @@ QWidget *StartWidget::createRecentProjectsWidget()
 QWidget *StartWidget::createProjectsManagementWidget()
 {
 	mProjectsManagementLayout = new QBoxLayout(QBoxLayout::TopToBottom);
-	mProjectsManagementLayout->addStretch();
+	mProjectsManagementLayout->setSpacing(20);
+	mProjectsManagementLayout->setMargin(0);
 
 	mOpenProjectButton = new StyledButton(tr("Open existing project")
 			, ":/mainWindow/images/startTab/open.svg");
+
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
-	mProjectsManagementLayout->addWidget(mOpenProjectButton);
 
 	const Id theOnlyDiagram = mMainWindow->editorManager().theOnlyDiagram();
 	if (!theOnlyDiagram.isNull()) {
@@ -134,7 +135,6 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		const QString diagramIdString = mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram);
 
 		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg");
-		mProjectsManagementLayout->addWidget(mNewProjectButton);
 
 		QSignalMapper *newProjectMapper = new QSignalMapper(this);
 		newProjectMapper->setMapping(mNewProjectButton, diagramIdString);
@@ -149,20 +149,13 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		}
 	}
 
-	mOpenInterpreterButton = new StyledButton(tr("Open interpreted diagram")
-			, ":/mainWindow/images/startTab/openInterpreted.svg");
-	mCreateInterpreterButton = new StyledButton(tr("Create interpreted diagram")
-			, ":/mainWindow/images/startTab/createInterpreted.svg");
-	connect(mOpenInterpreterButton, SIGNAL(clicked()), this, SLOT(openInterpretedDiagram()));
-	connect(mCreateInterpreterButton, SIGNAL(clicked()), this, SLOT(createInterpretedDiagram()));
-
-	mProjectsManagementLayout->addWidget(mCreateInterpreterButton);
-	mProjectsManagementLayout->addWidget(mOpenInterpreterButton);
-	mProjectsManagementLayout->addStretch();
+	mOpenProjectButton->setObjectName("withIcon");
+	mNewProjectButton->setObjectName("withIcon");
+	mProjectsManagementLayout->addWidget(mOpenProjectButton);
+	mProjectsManagementLayout->addWidget(mNewProjectButton);
 
 	QWidget * const result = new QWidget;
 	result->setLayout(mProjectsManagementLayout);
-	result->setStyleSheet(BrandManager::styles()->startTabProjectsManagementBackgroundStyle());
 	return result;
 }
 

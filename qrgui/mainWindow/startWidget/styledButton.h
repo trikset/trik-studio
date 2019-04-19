@@ -26,8 +26,7 @@ class StyledButton : public QPushButton
 	Q_OBJECT
 
 public:
-	StyledButton(const QString &text, const QString &icon = QString()
-			, QBoxLayout::Direction direction = QBoxLayout::LeftToRight, QWidget *parent = nullptr);
+	StyledButton(const QString &text, const QString &icon = QString(), QWidget *parent = nullptr);
 
 	/// Widget passed to this method will be highlighted on mouse hover over this button
 	void bindHighlightedOnHover(QWidget * const widget);
