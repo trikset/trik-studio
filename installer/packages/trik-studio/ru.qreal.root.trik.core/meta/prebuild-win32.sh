@@ -24,18 +24,24 @@ cp    $BIN_DIR/vcruntime*.dll                                                   
 cp    $BIN_DIR/system.js                                                          $PWD/../data/bin/
 cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
 
-cd "$(dirname "$0")"/../data
-putty_server="https://the.earth.li/~sgtatham/putty/latest"
-mkdir -p winscp/PuTTY
+# download putty and winscp
+cache_dir=$(cygpath -m $APPDATA | xargs cygpath)/$PRODUCT/installer_cache
+putty_server="https://the.earth.li/~sgtatham/putty/0.71/"
+winscp_file="https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip"
+mkdir -p $cache_dir/winscp/PuTTY
 
 for file in putty puttygen pageant
 do
-  curl -L -s -o winscp/PuTTY/$file.exe $putty_server/w64/$file.exe &
+  curl -L -s -o $cache_dir/winscp/PuTTY/$file.exe $putty_server/w32/$file.exe &
 done
-curl -L -s -o winscp/PuTTY/putty.chm $putty_server/putty.chm &
+curl -L -s -o $cache_dir/winscp/PuTTY/putty.chm $putty_server/putty.chm &
 
-curl -L -s -o winscp.zip https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip
-unzip winscp.zip -d winscp
-rm -f winscp.zip
-
+curl -L -s -o $cache_dir/winscp.zip https://sourceforge.net/projects/winscp/files/WinSCP/5.15/WinSCP-5.15-Portable.zip
+unzip -o $cache_dir/winscp.zip -d $cache_dir/winscp
+rm -f $cache_dir/winscp.zip
 wait
+# end of download
+
+cd "$(dirname "$0")"/../data
+cp -r $cache_dir/winscp .
+cp -f winscp/license.txt "$(dirname "$0")"/WinScp-license.txt
