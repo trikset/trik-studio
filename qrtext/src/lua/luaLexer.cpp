@@ -96,8 +96,7 @@ TokenPatterns<LuaTokenTypes> LuaLexer::initPatterns()
 	tokenDefinitions.defineToken(LuaTokenTypes::tripleDot, QRegularExpression("\\.\\.\\."), "...");
 
 	tokenDefinitions.defineToken(LuaTokenTypes::string
-			, QRegularExpression(R"(("[^"\\]*(\\(.|\n)[^"\\]*)*"))"
-					R"(|('[^'\\]*(\\(.|\n)[^'\\]*)*'))")
+			, QRegularExpression(R"~(("[^"\\]*(\\(.|\n)[^"\\]*)*")|('[^'\\]*(\\(.|\n)[^'\\]*)*'))~")
 			, QObject::tr("string")
 			);
 

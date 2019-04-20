@@ -22,6 +22,7 @@ namespace fSharp {
 /// Ensures that a diagram may be correctly generated into F# code.
 class TrikFSharpControlFlowValidator : public generatorBase::PrimaryControlFlowValidator
 {
+	Q_OBJECT
 public:
 	TrikFSharpControlFlowValidator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter
