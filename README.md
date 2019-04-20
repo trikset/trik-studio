@@ -4,8 +4,8 @@
 
 
 
-# TRIK Studio
-_____________
+# [![TRIK Studio logo from master branch](https://github.com/trikset/trik-studio/raw/master/installer/images/trik-studio-32x32.png)TRIK Studio](https://dl.trikset.com/ts/fresh)
+
 
 An opensource cross-platform educational programming environment for future robotics: TRIK, Lego EV3, and other kits are supported.
 
