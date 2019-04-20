@@ -18,6 +18,7 @@
 #include <QtCore/QTranslator>
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
+#include <QStyleFactory>
 
 #include <qrkernel/logging.h>
 #include <qrkernel/platformInfo.h>
@@ -121,9 +122,7 @@ int main(int argc, char *argv[])
 	QLOG_INFO() << "Arguments:" << app.arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 
-#ifndef NO_STYLE_WINDOWSMODERN
-	app.setStyle(new WindowsModernStyle());
-#endif
+	QApplication::setStyle(QStyleFactory::create("Fusion"));
 
 	MainWindow window(fileToOpen);
 	int exitCode = 0; // The window decided to not show itself, exiting now.
