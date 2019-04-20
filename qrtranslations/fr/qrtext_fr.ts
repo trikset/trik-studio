@@ -143,22 +143,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="101"/>
+        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="100"/>
         <source>string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="106"/>
+        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="105"/>
         <source>integer literal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="120"/>
+        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="119"/>
         <source>float literal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="123"/>
+        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="122"/>
         <source>comment</source>
         <translation type="unfinished"></translation>
     </message>

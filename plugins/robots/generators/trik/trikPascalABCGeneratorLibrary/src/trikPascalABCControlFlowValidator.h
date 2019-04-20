@@ -22,6 +22,7 @@ namespace pascalABC {
 /// Ensures that a diagram may be correctly generated into PascalABC code.
 class TrikPascalABCControlFlowValidator : public generatorBase::PrimaryControlFlowValidator
 {
+	Q_OBJECT
 public:
 	TrikPascalABCControlFlowValidator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

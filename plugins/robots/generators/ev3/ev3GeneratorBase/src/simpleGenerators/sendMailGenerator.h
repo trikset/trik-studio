@@ -25,6 +25,7 @@ namespace simple {
 /// Generator for 'Ev3SendMail' block
 class SendMailGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	SendMailGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

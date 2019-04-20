@@ -24,6 +24,7 @@ namespace simple {
 /// Generator for 'Ev3WaitForReceivingMail' block
 class ReceiveMailGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReceiveMailGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer
