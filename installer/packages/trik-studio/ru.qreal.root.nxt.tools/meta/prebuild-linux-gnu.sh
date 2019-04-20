@@ -4,7 +4,6 @@ set -o errexit
 
 cd "$(dirname "$0")"
 source $INSTALLER_ROOT/utils/common_utils.sh
+mkdir $PWD/../data/bin
 cd $PWD/../data/bin
-mv nxt-tools tmp
-mv tmp/linux/nxt-tools -t .
-rm -rf tmp
+cp -rf $INSTALLER_ROOT/nxt-tools/linux/nxt-tools -t .
