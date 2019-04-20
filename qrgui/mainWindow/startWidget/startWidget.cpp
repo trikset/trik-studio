@@ -126,6 +126,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 
 	mOpenProjectButton = new StyledButton(tr("Open existing project")
 			, ":/mainWindow/images/startTab/open.svg");
+	mOpenProjectButton->setObjectName("withIcon");
 
 	connect(mOpenProjectButton, &QPushButton::clicked, this, &StartWidget::openExistingProject);
 
@@ -135,6 +136,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		const QString diagramIdString = mMainWindow->editorManager().diagramNodeNameString(editor, theOnlyDiagram);
 
 		mNewProjectButton = new StyledButton(tr("New project"), ":/mainWindow/images/startTab/new.svg");
+		mNewProjectButton->setObjectName("withIcon");
 
 		QSignalMapper *newProjectMapper = new QSignalMapper(this);
 		newProjectMapper->setMapping(mNewProjectButton, diagramIdString);
@@ -149,8 +151,6 @@ QWidget *StartWidget::createProjectsManagementWidget()
 		}
 	}
 
-	mOpenProjectButton->setObjectName("withIcon");
-	mNewProjectButton->setObjectName("withIcon");
 	mProjectsManagementLayout->addWidget(mOpenProjectButton);
 	mProjectsManagementLayout->addWidget(mNewProjectButton);
 
