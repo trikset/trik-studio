@@ -28,7 +28,8 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	: QDockWidget(title, parent)
 	, mOutput(new QPlainTextEdit(this))
 {
-	const QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+	QFont font("Monospace");
+	font.setStyleHint(QFont::Monospace);
 	mOutput->setFont(font);
 	setWidget(mOutput);
 	mOutput->setReadOnly(false);
