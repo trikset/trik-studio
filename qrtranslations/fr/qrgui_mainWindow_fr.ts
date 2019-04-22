@@ -972,7 +972,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="137"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="138"/>
         <source>New project</source>
         <translation>Nouveau projet</translation>
     </message>
