@@ -31,6 +31,9 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	QFont font("Monospace");
 	font.setStyleHint(QFont::Monospace);
 	mOutput->setFont(font);
+	if (!font.fixedPitch()) {
+		QLOG_ERROR() << "Monospace font can not be choosed";
+	}
 	setWidget(mOutput);
 	mOutput->setReadOnly(false);
 	mOutput->setContextMenuPolicy(Qt::CustomContextMenu);
