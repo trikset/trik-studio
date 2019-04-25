@@ -34,7 +34,7 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	font.setStyleHint(QFont::Monospace);
 	mOutput->setFont(font);
 	if (!font.fixedPitch()) {
-		QLOG_ERROR() << "Monospace font can not be choosed";
+		QLOG_ERROR() << "Not monospaced font was choosen " << font.toString();
 	}
 	setWidget(mOutput);
 	mOutput->setReadOnly(false);
