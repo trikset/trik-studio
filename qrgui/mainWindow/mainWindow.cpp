@@ -1811,10 +1811,11 @@ void MainWindow::addExternalToolActions()
 							QProcess::startDetached(program);
 						} else {
 							QStringList processedArguments = arguments;
+							QRegularExpression re = QRegularExpression("@@([^@]*)@@");
+							QRegularExpressionMatch match = QRegularExpressionMatch();
 							for (QString &arg : processedArguments) {
-								if (arg.startsWith("@@")) {
-									arg = SettingsManager::value(arg.remove("@@")).toString();
-								}
+								while (arg.contains(re, &match))
+									arg.replace(match.captured(0), SettingsManager::value(match.captured(1)).toString());
 							}
 
 							QProcess::startDetached(program, processedArguments);
