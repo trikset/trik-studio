@@ -1815,7 +1815,8 @@ void MainWindow::addExternalToolActions()
 							QRegularExpressionMatch match = QRegularExpressionMatch();
 							for (QString &arg : processedArguments) {
 								while (arg.contains(re, &match))
-									arg.replace(match.captured(0), SettingsManager::value(match.captured(1)).toString());
+									arg.replace(match.captured(0),
+											SettingsManager::value(match.captured(1)).toString());
 							}
 
 							QProcess::startDetached(program, processedArguments);
