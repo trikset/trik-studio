@@ -19,6 +19,8 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QAction>
 
+#include <thirdparty/qslog/QsLog.h>
+
 using namespace qReal::ui;
 
 static const int updateBatchSize = 200;
