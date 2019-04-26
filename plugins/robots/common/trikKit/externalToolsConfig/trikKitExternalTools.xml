@@ -2,7 +2,7 @@
 <tools>
 	<platform name="Windows">
 	<!--<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh @@TrikTcpServer"/>-->
-		<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments=""/>
+		<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh root@@@TrikTcpServer@@"/>
 		<tool name="TRIK gamepad" program="./gamepad.exe" arguments="@@TrikTcpServer@@"/>
 		<tool name="WinSCP" program="./winscp/WinSCP.exe" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
