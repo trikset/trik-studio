@@ -19,6 +19,8 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QAction>
 
+#include <thirdparty/qslog/QsLog.h>
+
 using namespace qReal::ui;
 
 static const int updateBatchSize = 200;
@@ -28,6 +30,12 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	: QDockWidget(title, parent)
 	, mOutput(new QPlainTextEdit(this))
 {
+	QFont font("Monospace");
+	font.setStyleHint(QFont::Monospace);
+	mOutput->setFont(font);
+	if (!font.fixedPitch()) {
+		QLOG_ERROR() << "Not monospaced font was choosen " << font.toString();
+	}
 	setWidget(mOutput);
 	mOutput->setReadOnly(false);
 	mOutput->setContextMenuPolicy(Qt::CustomContextMenu);
