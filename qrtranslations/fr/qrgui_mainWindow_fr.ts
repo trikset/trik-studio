@@ -878,22 +878,22 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2020"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2022"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2051"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2053"/>
         <source>Save File</source>
         <translation>Enregister le fichier</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2051"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2053"/>
         <source>Images (*.png *.jpg)</source>
         <translation>Images (*.png *.jpg)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2210"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2212"/>
         <source>Getting Started</source>
         <translation>Commencer</translation>
     </message>
