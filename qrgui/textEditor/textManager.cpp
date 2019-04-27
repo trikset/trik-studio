@@ -81,14 +81,22 @@ bool TextManager::unbindCode(const QString &filePath)
 
 bool TextManager::unbindCode(text::QScintillaTextEdit *code)
 {
-	if (mModified[mPath.value(code)].second
-			&& utils::QRealMessageBox::question(
+	if (mModified[mPath.value(code)].second) {
+		switch (utils::QRealMessageBox::question(
 				mMainWindow.currentTab()
 				, tr("Confirmation")
-				, tr("Close without saving?")) == QMessageBox::No) {
+				, tr("Save before closing?")
+				, QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel)))
+		{
+		case QMessageBox::Yes:
 			saveText(false);
+			break;
+		case QMessageBox::No:
+			break;
+		default:
+			return false;
+		}
 	}
-
 	return unbindCode(mPath.value(code));
 }
 

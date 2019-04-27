@@ -401,9 +401,17 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 	mScriptAPI.abortEvaluation();
 
+	//TODO @IKhonakhbeeva need to move this to 'closeTab'
 	if (!mProjectManager->suggestToSaveChangesOrCancel()) {
 		event->ignore();
 		mErrorReporter->addWarning(tr("Could not save file, try to save it to another place"));
+		return;
+	}
+
+	closeAllTabs();
+
+	if (mUi->tabs->count() > 0)	{
+		event->ignore();
 		return;
 	}
 
@@ -606,10 +614,12 @@ void MainWindow::tryToSave()
 void MainWindow::closeAllTabs()
 {
 	const int tabCount = mUi->tabs->count();
-
+	QList<QWidget *> tabs = QList<QWidget *>();
 	for (int i = 0; i < tabCount; i++) {
-		closeTab(0);
+		tabs.append(mUi->tabs->widget(i));
 	}
+	for (QWidget * const tab : tabs)
+		closeTab(tab);
 }
 
 void MainWindow::setReference(const QStringList &data, const QPersistentModelIndex &index, const int &role)
@@ -702,7 +712,7 @@ void MainWindow::openTab(QWidget *tab, const QString &title)
 
 void MainWindow::closeTab(QWidget *tab)
 {
-	mUi->tabs->removeTab(mUi->tabs->indexOf(tab));
+	closeTab(mUi->tabs->indexOf(tab));
 }
 
 QMap<QString, gui::PreferencesPage *> MainWindow::preferencesPages() const
@@ -880,6 +890,7 @@ void MainWindow::closeTab(int index)
 	QWidget * const widget = mUi->tabs->widget(index);
 	EditorView * const diagram = dynamic_cast<EditorView *>(widget);
 	text::QScintillaTextEdit * const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget);
+	bool isClosed = false;
 
 	const QString path = mTextManager->path(possibleCodeTab);
 
@@ -887,14 +898,20 @@ void MainWindow::closeTab(int index)
 		const Id diagramId = diagram->editorViewScene().rootItemId();
 		mController->moduleClosed(diagramId.toString());
 		emit mFacade->events().diagramClosed(diagramId);
+		//TODO @IKhonakhbeeva add suggested save
+		isClosed = true;
 	} else if (mTextManager->unbindCode(possibleCodeTab)) {
 		emit mFacade->events().codeTabClosed(QFileInfo(path));
+		isClosed = true;
 	} else {
 		// TODO: process other tabs (for example, start tab)
 	}
 
-	mUi->tabs->removeTab(index);
-	delete widget;
+	if (isClosed)
+	{
+		mUi->tabs->removeTab(index);
+		delete widget;
+	}
 }
 
 void MainWindow::showPreferencesDialog()
