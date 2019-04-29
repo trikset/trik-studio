@@ -614,11 +614,11 @@ void MainWindow::tryToSave()
 void MainWindow::closeAllTabs()
 {
 	const int tabCount = mUi->tabs->count();
-	QList<QWidget *> tabs = QList<QWidget *>();
+	QList<QWidget *> tabs;
 	for (int i = 0; i < tabCount; i++) {
 		tabs.append(mUi->tabs->widget(i));
 	}
-	for (QWidget * const tab : tabs)
+	for (auto && tab : tabs)
 		closeTab(tab);
 }
 
