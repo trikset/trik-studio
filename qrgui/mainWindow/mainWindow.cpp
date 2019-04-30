@@ -889,6 +889,7 @@ void MainWindow::closeTab(int index)
 {
 	QWidget * const widget = mUi->tabs->widget(index);
 	EditorView * const diagram = dynamic_cast<EditorView *>(widget);
+	StartWidget * const start = dynamic_cast<StartWidget *>(widget);
 	text::QScintillaTextEdit * const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget);
 	bool isClosed = false;
 
@@ -900,11 +901,14 @@ void MainWindow::closeTab(int index)
 		emit mFacade->events().diagramClosed(diagramId);
 		//TODO @IKhonakhbeeva add suggested save
 		isClosed = true;
+	} else if (start) {
+		isClosed = true;
 	} else if (mTextManager->unbindCode(possibleCodeTab)) {
 		emit mFacade->events().codeTabClosed(QFileInfo(path));
 		isClosed = true;
 	} else {
-		// TODO: process other tabs (for example, start tab)
+		// TODO: process other tabs
+		// TODO: Are there any other tabs?
 	}
 
 	if (isClosed)
