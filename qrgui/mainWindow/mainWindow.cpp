@@ -401,13 +401,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 	mScriptAPI.abortEvaluation();
 
-	//TODO @IKhonakhbeeva need to move this to 'closeTab'
-	if (!mProjectManager->suggestToSaveChangesOrCancel()) {
-		event->ignore();
-		mErrorReporter->addWarning(tr("Could not save file, try to save it to another place"));
-		return;
-	}
-
 	closeAllTabs();
 
 	if (mUi->tabs->count() > 0)	{
@@ -897,10 +890,16 @@ void MainWindow::closeTab(int index)
 
 	if (diagram) {
 		const Id diagramId = diagram->editorViewScene().rootItemId();
-		mController->moduleClosed(diagramId.toString());
-		emit mFacade->events().diagramClosed(diagramId);
-		//TODO @IKhonakhbeeva add suggested save
-		isClosed = true;
+		if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
+			isClosed = mProjectManager->suggestToSaveChangesOrCancel();
+		} else {
+			isClosed = true;
+		}
+
+		if (isClosed) {
+			mController->moduleClosed(diagramId.toString());
+			emit mFacade->events().diagramClosed(diagramId);
+		}
 	} else if (start) {
 		isClosed = true;
 	} else if (mTextManager->unbindCode(possibleCodeTab)) {
