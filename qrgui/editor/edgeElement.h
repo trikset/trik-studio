@@ -117,7 +117,7 @@ public:
 	/// Resort edges connected to linear ports of adjacent nodes
 	void arrangeLinearPorts();
 
-	void connectToPort() override;
+	void connectToPort(Element * src = nullptr, Element * = nullptr) override;
 
 	void setColorRect(bool bl) override;
 

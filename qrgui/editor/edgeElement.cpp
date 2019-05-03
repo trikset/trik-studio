@@ -312,12 +312,12 @@ void EdgeElement::updateLongestPart()
 	}
 }
 
-void EdgeElement::connectToPort()
+void EdgeElement::connectToPort(Element * src, Element * dst)
 {
 	mMoving = true;
 
-	NodeElement *newSrc = getNodeAt(mLine.first(), true);
-	NodeElement *newDst = getNodeAt(mLine.last(), false);
+	NodeElement *newSrc = src ? dynamic_cast<NodeElement *>(src) : getNodeAt(mLine.first(), true);
+	NodeElement *newDst = dst ? dynamic_cast<NodeElement *>(dst) : getNodeAt(mLine.last(), false);
 
 	mIsLoop = ((newSrc == newDst) && newSrc);
 

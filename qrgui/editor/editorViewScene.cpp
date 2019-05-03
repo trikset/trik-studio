@@ -566,9 +566,9 @@ void EditorViewScene::returnElementsToOldPositions(const QMap<Id, QPointF> &shif
 	}
 }
 
-void EditorViewScene::reConnectLink(EdgeElement * edgeElem)
+void EditorViewScene::reConnectLink(EdgeElement * edgeElem, Element * src, Element * dst)
 {
-	edgeElem->connectToPort();
+	edgeElem->connectToPort(src, dst);
 	QPolygonF line;
 	line << edgeElem->line()[0] << edgeElem->line().last();
 	edgeElem->setLine(line);
@@ -653,27 +653,26 @@ void EditorViewScene::paste(bool isGraphicalCopy)
 
 void EditorViewScene::replaceBy()
 {
-	QList<NodeElement *> nodes;
-	QList<EdgeElement *> edges;
+	QList<NodeElement *> replaceNodes;
+	QList<EdgeElement *> replaceEdges;
 
 	// it may be node or edge, node is replaced by new node,
 	// edge is replaced by two edges and node (if it connected and it's not cycled link)
 	for (auto *item : selectedItems()) {
 		if (auto node = dynamic_cast<NodeElement *>(item)) {
-			nodes << node;
+			replaceNodes << node;
 		}
 
 		if (auto edge = dynamic_cast<EdgeElement *>(item)) {
-			edges << edge;
+			replaceEdges << edge;
 		}
 	}
-
 	/// @todo: allow multiple replacing
-	if (nodes.size() + edges.size() != 1) {
+	if (replaceNodes.size() + replaceEdges.size() != 1) {
 		return;
 	}
 
-	Element *elem = edges.isEmpty() ? dynamic_cast<Element *>(nodes.first()) : edges.first();
+	Element *elem = replaceEdges.isEmpty() ? dynamic_cast<Element *>(replaceNodes.first()) : replaceEdges.first();
 	QMenu menu(tr("Replace by..."));
 	auto currentDiagramsAllowedElementsSet = mEditorManager.elements(elem->id()).toSet();
 	const QStringList groups = mEditorManager.paletteGroups(elem->id(), elem->id());
@@ -694,22 +693,29 @@ void EditorViewScene::replaceBy()
 		}
 	}
 
-	if (nodes.size() == 1) {
-		NodeElement *node = nodes.first();
-		const QList<EdgeElement *> edges = node->edgeList();
+	if (replaceNodes.size() == 1) {
+		NodeElement *node = replaceNodes.first();
 		QAction *action = menu.exec(QCursor::pos());
 		if (action) {
 			QString string = action->data().toString();
 			mCreatePoint = node->pos();
-			createElement(string);
+			Id newElemId = createElement(string);
+			NodeElement * newElem = dynamic_cast<NodeElement *>(getElem(newElemId));
+			if (newElem == nullptr) {
+				QLOG_INFO() << "Can't replace by nonexistance element. Id = " << newElemId;
+				return;
+			}
+
+			const QList<EdgeElement *> edges = node->edgeList();
+			for (auto edge : edges) {
+				auto srcElem = node == edge->src() ? newElem : edge->src();
+				auto dstElem = node == edge->dst() ? newElem : edge->dst();
+				reConnectLink(edge, srcElem, dstElem);
+			}
 			mController.execute((new RemoveAndUpdateCommand(*this, mModels))->withItemsToDelete({ node->id() }));
 		}
-
-		for (auto edge : edges) {
-			reConnectLink(edge);
-		}
 	} else {
-		EdgeElement *edge = edges.first();
+		EdgeElement *edge = replaceEdges.first();
 		if (edge->isHanging()) {
 			return;
 		}

@@ -124,7 +124,7 @@ public:
 
 	QList<NodeElement*> getCloseNodes(NodeElement* node) const;
 
-	void reConnectLink(EdgeElement * edgeElem);
+	void reConnectLink(EdgeElement * edgeElem,  Element * src = nullptr, Element * dst = nullptr);
 	void arrangeNodeLinks(NodeElement* node) const;
 
 	NodeElement* getNodeById(const Id &itemId) const;
