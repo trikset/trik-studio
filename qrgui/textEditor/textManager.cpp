@@ -244,6 +244,10 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 
 	area->show();
 
+	// Need to bind diagram and code file only if code is just generated
+//	bindCode(mMainWindow.activeDiagram(), filePath);
+//	emit mSystemEvents.newCodeAppeared(mMainWindow.activeDiagram(), QFileInfo(filePath));
+
 	mMainWindow.openTab(area, fileInfo.fileName());
 }
 

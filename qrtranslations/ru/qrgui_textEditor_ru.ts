@@ -47,17 +47,21 @@
         <translation>Подтвердите</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="88"/>
         <source>Close without saving?</source>
-        <translation>Закрыть без сохранения?</translation>
+        <translation type="vanished">Закрыть без сохранения?</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="257"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="88"/>
+        <source>Save before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="269"/>
         <source>All files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="263"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="275"/>
         <source>Save generated code</source>
         <translation>Сохранение кода</translation>
     </message>

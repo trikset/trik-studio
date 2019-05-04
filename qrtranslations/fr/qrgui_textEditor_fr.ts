@@ -10,16 +10,16 @@
     </message>
     <message>
         <location filename="../../qrgui/textEditor/textManager.cpp" line="88"/>
-        <source>Close without saving?</source>
+        <source>Save before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="257"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="269"/>
         <source>All files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="263"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="275"/>
         <source>Save generated code</source>
         <translation>Enregister le code généré</translation>
     </message>
