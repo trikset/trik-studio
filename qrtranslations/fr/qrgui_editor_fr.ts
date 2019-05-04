@@ -187,17 +187,17 @@
         <translation type="unfinished">Relier avec l&apos;élement courant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="677"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="676"/>
         <source>Replace by...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="909"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="916"/>
         <source>Add child</source>
         <translation type="unfinished">Rajouter un élement</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1404"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1411"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>

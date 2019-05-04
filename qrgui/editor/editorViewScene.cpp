@@ -717,6 +717,7 @@ void EditorViewScene::replaceBy()
 	} else {
 		EdgeElement *edge = replaceEdges.first();
 		if (edge->isHanging()) {
+			// Don't need to 'Replace by' hangling ("red") edge
 			return;
 		}
 
