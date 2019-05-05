@@ -902,9 +902,11 @@ void MainWindow::closeTab(int index)
 		}
 	} else if (start) {
 		isClosed = true;
-	} else if (mTextManager->unbindCode(possibleCodeTab)) {
-		emit mFacade->events().codeTabClosed(QFileInfo(path));
-		isClosed = true;
+	} else if (possibleCodeTab) {
+		isClosed = mTextManager->unbindCode(possibleCodeTab);
+		if (isClosed) {
+			emit mFacade->events().codeTabClosed(QFileInfo(path));
+		}
 	} else {
 		// TODO: process other tabs
 		// TODO: Are there any other tabs?

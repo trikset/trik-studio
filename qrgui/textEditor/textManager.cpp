@@ -76,11 +76,20 @@ bool TextManager::bindCode(const Id &diagram, const QString &filePath)
 
 bool TextManager::unbindCode(const QString &filePath)
 {
+	if (mDiagramCodeManager.key(filePath) == Id()) {
+		// Unbind is successful because this code doesn't bind to any diagram
+		return true;
+	}
 	return mDiagramCodeManager.remove(mDiagramCodeManager.key(filePath), filePath) != 0;
 }
 
 bool TextManager::unbindCode(text::QScintillaTextEdit *code)
 {
+	QString str = mPath.value(code);
+	if (mDiagramCodeManager.key(mPath.value(code)) == Id()) {
+		// Unbind is successful because this code doesn't bind to any diagram
+		return true;
+	}
 	if (mModified[mPath.value(code)].second) {
 		switch (utils::QRealMessageBox::question(
 				mMainWindow.currentTab()
