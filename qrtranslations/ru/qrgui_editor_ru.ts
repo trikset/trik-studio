@@ -191,17 +191,17 @@
         <translation>Соединить с данным элементом</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="677"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="676"/>
         <source>Replace by...</source>
         <translation>Заменить на...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="909"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="916"/>
         <source>Add child</source>
         <translation>Добавить элемент</translation>
     </message>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1404"/>
+        <location filename="../../qrgui/editor/editorViewScene.cpp" line="1411"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

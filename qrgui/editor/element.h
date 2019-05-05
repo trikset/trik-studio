@@ -61,7 +61,7 @@ public:
 	virtual Id logicalId() const;
 	virtual QString name() const;
 
-	virtual void connectToPort() {}  // for edge
+	virtual void connectToPort(Element * src = nullptr, Element * dst = nullptr) {}  // for edge
 	virtual void checkConnectionsToPort() {}  // for node
 
 	virtual void initTitles();
