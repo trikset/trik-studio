@@ -47,6 +47,7 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c \"cd bin/$CONFIG && ls\" \
 && sh -c \"export ASAN_OPTIONS=detect_leaks=0 LSAN_OPTIONS=detect_leaks=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
+if $TRANSLATIONS ; then $EXECUTOR bash -ic "cd plugins/robots/editor && find . -name 'translations.pro' | lupdate" ; fi
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 
 $CODECOV
