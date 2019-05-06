@@ -33,7 +33,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="51"/>
-        <source>Multimedia Settings</source>
+        <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
