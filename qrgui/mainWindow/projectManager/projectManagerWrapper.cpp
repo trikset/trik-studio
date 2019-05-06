@@ -103,7 +103,7 @@ bool ProjectManagerWrapper::open(const QString &fileName)
 		Id localActiveDiagram = mMainWindow->activeDiagram();
 		mMainWindow->closeStartTab();
 		mTextManager->showInTextEditor(fileInfo, text::Languages::pickByExtension(fileInfo.suffix()));
-		if (localActiveDiagram.isNull()) {
+		if (localActiveDiagram.isNull() && !mMainWindow->activeDiagram().isNull()) {
 			emit afterOpen(fileName);
 		}
 	}
