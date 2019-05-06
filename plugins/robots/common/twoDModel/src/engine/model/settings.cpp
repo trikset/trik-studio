@@ -41,11 +41,11 @@ bool Settings::realisticMotors() const
 void Settings::rereadNoiseSettings()
 {
 	const bool oldPhysics = mRealisticPhysics;
-	mRealisticPhysics = qReal::SettingsManager::value("2dModelRealisticPhysics", true).toBool();
+	mRealisticPhysics = qReal::SettingsManager::value("2dModelRealisticPhysics", false).toBool();
 	if (oldPhysics != mRealisticPhysics) {
 		emit physicsChanged(mRealisticPhysics);
 	}
 
-	mRealisticSensors = qReal::SettingsManager::value("enableNoiseOfSensors").toBool();
-	mRealisticMotors = qReal::SettingsManager::value("enableNoiseOfMotors").toBool();
+	mRealisticSensors = qReal::SettingsManager::value("enableNoiseOfSensors", false).toBool();
+	mRealisticMotors = qReal::SettingsManager::value("enableNoiseOfMotors", false).toBool();
 }
