@@ -733,8 +733,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="406"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="602"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="603"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -755,145 +754,145 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="833"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="844"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="836"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="847"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="833"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="836"/>
         <source>Plugin unloading failed: </source>
         <translation>Le déchargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="844"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="847"/>
         <source>Plugin loading failed: </source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="935"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="951"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="975"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="957"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="973"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="997"/>
         <source>Shape Editor</source>
         <translation>Editeur de formes</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="968"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="990"/>
         <source>Text Editor</source>
         <translation>Editeur de texte</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1190"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1212"/>
         <source>New diagram</source>
         <translation>Nouveau diagramme</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1194"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1216"/>
         <source>Open project</source>
         <translation>Ouvrir un projet</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1195"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1217"/>
         <source>Save project</source>
         <translation>Enregister le projet</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1196"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1218"/>
         <source>Save project as</source>
         <translation>Enregister le projet sous</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1197"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1219"/>
         <source>New project</source>
         <translation>Nouveau projet</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1198"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1220"/>
         <source>Undo</source>
         <translation>Défaire</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1199"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1221"/>
         <source>Redo</source>
         <translation>Refaire</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1200"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1222"/>
         <source>Zoom In</source>
         <translation>Zoom avant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1201"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1223"/>
         <source>Zoom Out</source>
         <translation>Zoom arrière</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1202"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1224"/>
         <source>Close current tab</source>
         <translation>Fermer l&apos;onglet courant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1203"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1225"/>
         <source>Close all tabs</source>
         <translation>Fermer tous les onglets</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1204"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1226"/>
         <source>Print</source>
         <translation>Imprimer</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1205"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1227"/>
         <source>Find</source>
         <translation>Rechercher</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1206"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1228"/>
         <source>Find and replace</source>
         <translation type="unfinished">Rechercher et remplacer</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1207"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1229"/>
         <source>Show all text</source>
         <translation>Afficher tout le texte</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1208"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1230"/>
         <source>Toggle errors panel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1407"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1429"/>
         <source>Gestures Show</source>
         <translation>Afficher les gestes</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1714"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1736"/>
         <source>Shortcuts</source>
         <translation>Raccourcis</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1784"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1806"/>
         <source>External tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2022"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2044"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2053"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2075"/>
         <source>Save File</source>
         <translation>Enregister le fichier</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2053"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2075"/>
         <source>Images (*.png *.jpg)</source>
         <translation>Images (*.png *.jpg)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2212"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2234"/>
         <source>Getting Started</source>
         <translation>Commencer</translation>
     </message>

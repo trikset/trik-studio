@@ -76,19 +76,36 @@ bool TextManager::bindCode(const Id &diagram, const QString &filePath)
 
 bool TextManager::unbindCode(const QString &filePath)
 {
+	if (mDiagramCodeManager.key(filePath) == Id()) {
+		// Unbind is successful because this code doesn't bind to any diagram
+		return true;
+	}
 	return mDiagramCodeManager.remove(mDiagramCodeManager.key(filePath), filePath) != 0;
 }
 
 bool TextManager::unbindCode(text::QScintillaTextEdit *code)
 {
-	if (mModified[mPath.value(code)].second
-			&& utils::QRealMessageBox::question(
+	QString str = mPath.value(code);
+	if (mDiagramCodeManager.key(mPath.value(code)) == Id()) {
+		// Unbind is successful because this code doesn't bind to any diagram
+		return true;
+	}
+	if (mModified[mPath.value(code)].second) {
+		switch (utils::QRealMessageBox::question(
 				mMainWindow.currentTab()
 				, tr("Confirmation")
-				, tr("Close without saving?")) == QMessageBox::No) {
+				, tr("Save before closing?")
+				, QMessageBox::StandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel)))
+		{
+		case QMessageBox::Yes:
 			saveText(false);
+			break;
+		case QMessageBox::No:
+			break;
+		default:
+			return false;
+		}
 	}
-
 	return unbindCode(mPath.value(code));
 }
 
@@ -235,6 +252,10 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 	}
 
 	area->show();
+
+	// Need to bind diagram and code file only if code is just generated
+//	bindCode(mMainWindow.activeDiagram(), filePath);
+//	emit mSystemEvents.newCodeAppeared(mMainWindow.activeDiagram(), QFileInfo(filePath));
 
 	mMainWindow.openTab(area, fileInfo.fileName());
 }

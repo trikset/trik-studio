@@ -42,22 +42,26 @@
 <context>
     <name>qReal::text::TextManager</name>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="87"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="96"/>
         <source>Confirmation</source>
         <translation>Подтвердите</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="88"/>
         <source>Close without saving?</source>
-        <translation>Закрыть без сохранения?</translation>
+        <translation type="vanished">Закрыть без сохранения?</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="257"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="97"/>
+        <source>Save before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="278"/>
         <source>All files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="263"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="284"/>
         <source>Save generated code</source>
         <translation>Сохранение кода</translation>
     </message>

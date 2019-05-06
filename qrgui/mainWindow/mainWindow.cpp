@@ -401,9 +401,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 	mScriptAPI.abortEvaluation();
 
-	if (!mProjectManager->suggestToSaveChangesOrCancel()) {
+	closeAllTabs();
+
+	if (mUi->tabs->count() > 0)	{
 		event->ignore();
-		mErrorReporter->addWarning(tr("Could not save file, try to save it to another place"));
 		return;
 	}
 
@@ -606,10 +607,12 @@ void MainWindow::tryToSave()
 void MainWindow::closeAllTabs()
 {
 	const int tabCount = mUi->tabs->count();
-
+	QList<QWidget *> tabs;
 	for (int i = 0; i < tabCount; i++) {
-		closeTab(0);
+		tabs.append(mUi->tabs->widget(i));
 	}
+	for (auto && tab : tabs)
+		closeTab(tab);
 }
 
 void MainWindow::setReference(const QStringList &data, const QPersistentModelIndex &index, const int &role)
@@ -702,7 +705,7 @@ void MainWindow::openTab(QWidget *tab, const QString &title)
 
 void MainWindow::closeTab(QWidget *tab)
 {
-	mUi->tabs->removeTab(mUi->tabs->indexOf(tab));
+	closeTab(mUi->tabs->indexOf(tab));
 }
 
 QMap<QString, gui::PreferencesPage *> MainWindow::preferencesPages() const
@@ -879,22 +882,41 @@ void MainWindow::closeTab(int index)
 {
 	QWidget * const widget = mUi->tabs->widget(index);
 	EditorView * const diagram = dynamic_cast<EditorView *>(widget);
+	StartWidget * const start = dynamic_cast<StartWidget *>(widget);
 	text::QScintillaTextEdit * const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget);
+	bool isClosed = false;
 
 	const QString path = mTextManager->path(possibleCodeTab);
 
 	if (diagram) {
 		const Id diagramId = diagram->editorViewScene().rootItemId();
-		mController->moduleClosed(diagramId.toString());
-		emit mFacade->events().diagramClosed(diagramId);
-	} else if (mTextManager->unbindCode(possibleCodeTab)) {
-		emit mFacade->events().codeTabClosed(QFileInfo(path));
+		if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
+			isClosed = mProjectManager->suggestToSaveChangesOrCancel();
+		} else {
+			isClosed = true;
+		}
+
+		if (isClosed) {
+			mController->moduleClosed(diagramId.toString());
+			emit mFacade->events().diagramClosed(diagramId);
+		}
+	} else if (start) {
+		isClosed = true;
+	} else if (possibleCodeTab) {
+		isClosed = mTextManager->unbindCode(possibleCodeTab);
+		if (isClosed) {
+			emit mFacade->events().codeTabClosed(QFileInfo(path));
+		}
 	} else {
-		// TODO: process other tabs (for example, start tab)
+		// TODO: process other tabs
+		// TODO: Are there any other tabs?
 	}
 
-	mUi->tabs->removeTab(index);
-	delete widget;
+	if (isClosed)
+	{
+		mUi->tabs->removeTab(index);
+		delete widget;
+	}
 }
 
 void MainWindow::showPreferencesDialog()
