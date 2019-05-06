@@ -5,7 +5,7 @@
     <name>QObject</name>
     <message>
         <source>Wait for Completion:</source>
-        <translation>Attendez la fin :</translation>
+        <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
         <source>X:</source>
@@ -17,63 +17,63 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>Rayon :</translation>
+        <translation type="vanished">Rayon :</translation>
     </message>
     <message>
         <source>Filled:</source>
-        <translation>Rempli :</translation>
+        <translation type="vanished">Rempli :</translation>
     </message>
     <message>
         <source>X1:</source>
-        <translation>X1 :</translation>
+        <translation type="vanished">X1 :</translation>
     </message>
     <message>
         <source>Y1:</source>
-        <translation>Y1 :</translation>
+        <translation type="vanished">Y1 :</translation>
     </message>
     <message>
         <source>X2:</source>
-        <translation>X2 :</translation>
+        <translation type="vanished">X2 :</translation>
     </message>
     <message>
         <source>Y2:</source>
-        <translation>Y2 :</translation>
+        <translation type="vanished">Y2 :</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation type="vanished">Largeur :</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Hauteur :</translation>
+        <translation type="vanished">Hauteur :</translation>
     </message>
     <message>
         <source>Ports:</source>
-        <translation>Ports :</translation>
+        <translation type="vanished">Ports :</translation>
     </message>
     <message>
         <source>Power:</source>
-        <translation>Puissance :</translation>
+        <translation type="vanished">Puissance :</translation>
     </message>
     <message>
         <source>Frequency:</source>
-        <translation>Frequence :</translation>
+        <translation type="vanished">Frequence :</translation>
     </message>
     <message>
         <source>Hz</source>
-        <translation>Hz</translation>
+        <translation type="vanished">Hz</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation>Volume :</translation>
+        <translation type="vanished">Volume :</translation>
     </message>
     <message>
         <source>%</source>
-        <translation>%</translation>
+        <translation type="vanished">%</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Durée</translation>
+        <translation type="vanished">Durée</translation>
     </message>
     <message>
         <source>ms</source>
@@ -81,11 +81,11 @@
     </message>
     <message>
         <source>Button:</source>
-        <translation>Bouton :</translation>
+        <translation type="vanished">Bouton :</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation>Port :</translation>
+        <translation type="vanished">Port :</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -93,19 +93,19 @@
     </message>
     <message>
         <source>Percents:</source>
-        <translation>Pourcentage :</translation>
+        <translation type="vanished">Pourcentage :</translation>
     </message>
     <message>
         <source>Sign:</source>
-        <translation>Signe :</translation>
+        <translation type="vanished">Signe :</translation>
     </message>
     <message>
         <source>Distance:</source>
-        <translation>Distance :</translation>
+        <translation type="vanished">Distance :</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
         <source>Body:</source>
@@ -129,11 +129,11 @@
     </message>
     <message>
         <source>Intensity:</source>
-        <translation>Intensité :</translation>
+        <translation type="vanished">Intensité :</translation>
     </message>
     <message>
         <source>Tacho Limit:</source>
-        <translation>Limite de compte tours :</translation>
+        <translation type="vanished">Limite de compte tours :</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -165,91 +165,91 @@
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Angle :</translation>
+        <translation type="vanished">Angle :</translation>
     </message>
     <message>
         <source>°</source>
-        <translation>°</translation>
+        <translation type="vanished">°</translation>
     </message>
     <message>
         <source>Mode:</source>
-        <translation>Mode :</translation>
+        <translation type="vanished">Mode :</translation>
     </message>
     <message>
         <source>Detect by Videocamera</source>
-        <translation>Détecter par une camera</translation>
+        <translation type="vanished">Détecter par une camera</translation>
     </message>
     <message>
         <source>Line Detector into Variable</source>
-        <translation>Detecteur de ligne dans une variable</translation>
+        <translation type="vanished">Detecteur de ligne dans une variable</translation>
     </message>
     <message>
         <source>Start Angle:</source>
-        <translation>Angle de debut :</translation>
+        <translation type="vanished">Angle de debut :</translation>
     </message>
     <message>
         <source>Span Angle:</source>
-        <translation>Secteur :</translation>
+        <translation type="vanished">Secteur :</translation>
     </message>
     <message>
         <source>Initialize Videocamera</source>
-        <translation>Initialiser la caméra </translation>
+        <translation type="vanished">Initialiser la caméra </translation>
     </message>
     <message>
         <source>File name:</source>
-        <translation>Nom du fichier :</translation>
+        <translation type="vanished">Nom du fichier :</translation>
     </message>
     <message>
         <source>File:</source>
-        <translation>Fichier :</translation>
+        <translation type="vanished">Fichier :</translation>
     </message>
     <message>
         <source>Hull number:</source>
-        <translation>Numéro d&apos;immatriculation :</translation>
+        <translation type="vanished">Numéro d&apos;immatriculation :</translation>
     </message>
     <message>
         <source>Command:</source>
-        <translation>Commande :</translation>
+        <translation type="vanished">Commande :</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation>Acceleration :</translation>
+        <translation type="vanished">Acceleration :</translation>
     </message>
     <message>
         <source>Axis:</source>
-        <translation>Axe :</translation>
+        <translation type="vanished">Axe :</translation>
     </message>
     <message>
         <source>Degrees/sec:</source>
-        <translation>Degrés/sec</translation>
+        <translation type="vanished">Degrés/sec</translation>
     </message>
     <message>
         <source>F1</source>
-        <translation>F1</translation>
+        <translation type="vanished">F1</translation>
     </message>
     <message>
         <source>Wait gamepad button</source>
-        <translation>Attendre une touche de la manette</translation>
+        <translation type="vanished">Attendre une touche de la manette</translation>
     </message>
     <message>
         <source>Wait for Gamepad Connect</source>
-        <translation>Attendre pour que la manette se connecte </translation>
+        <translation type="vanished">Attendre pour que la manette se connecte </translation>
     </message>
     <message>
         <source>Wait for Gamepad Disconnect</source>
-        <translation>Attendre la déconnexion de la manette</translation>
+        <translation type="vanished">Attendre la déconnexion de la manette</translation>
     </message>
     <message>
         <source>Wait for Gamepad Wheel</source>
-        <translation>Attendre le volant sur la mannete</translation>
+        <translation type="vanished">Attendre le volant sur la mannete</translation>
     </message>
     <message>
         <source>Wait pad press</source>
-        <translation>Attendre l&apos;appui sur le bouton de la manette</translation>
+        <translation type="vanished">Attendre l&apos;appui sur le bouton de la manette</translation>
     </message>
     <message>
         <source>Pad:</source>
-        <translation>Manette :</translation>
+        <translation type="vanished">Manette :</translation>
     </message>
     <message>
         <source>Value:</source>
@@ -305,55 +305,43 @@
     </message>
     <message>
         <source>Beep</source>
-        <translation>Bip</translation>
-    </message>
-    <message>
-        <source>Plays on the robot a sound with the fixed frequency. There are two parameters. The first one is a loudness of the sound, the second means if program should wait for sound completion or go to next block right away.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Bip</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation>Volume</translation>
+        <translation type="vanished">Volume</translation>
     </message>
     <message>
         <source>Wait for Completion</source>
-        <translation>Attendre la complétion</translation>
+        <translation type="vanished">Attendre la complétion</translation>
     </message>
     <message>
         <source>50</source>
-        <translation>50</translation>
+        <translation type="vanished">50</translation>
     </message>
     <message>
         <source>Clear Encoder</source>
-        <translation>Effacer l&apos;encodeur</translation>
-    </message>
-    <message>
-        <source>Nullifies tacho limit of the motors on the given ports.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Effacer l&apos;encodeur</translation>
     </message>
     <message>
         <source>Ports</source>
-        <translation>Ports</translation>
+        <translation type="vanished">Ports</translation>
     </message>
     <message>
         <source>A, B, C, D</source>
-        <translation>A, B, C, D</translation>
+        <translation type="vanished">A, B, C, D</translation>
     </message>
     <message>
         <source>Draw Circle</source>
-        <translation>Dessiner un cercle</translation>
-    </message>
-    <message>
-        <source>Draws on the robot screen a circle with the given center and radius.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dessiner un cercle</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Rayon</translation>
+        <translation type="vanished">Rayon</translation>
     </message>
     <message>
         <source>Filled</source>
-        <translation>Rempli</translation>
+        <translation type="vanished">Rempli</translation>
     </message>
     <message>
         <source>X</source>
@@ -365,67 +353,51 @@
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Dessigner une ligne</translation>
-    </message>
-    <message>
-        <source>Draws a segment on the robot screen. The parameters specify the ends of the segment.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dessigner une ligne</translation>
     </message>
     <message>
         <source>X1</source>
-        <translation>X1</translation>
+        <translation type="vanished">X1</translation>
     </message>
     <message>
         <source>X2</source>
-        <translation>X2</translation>
+        <translation type="vanished">X2</translation>
     </message>
     <message>
         <source>Y1</source>
-        <translation>Y1</translation>
+        <translation type="vanished">Y1</translation>
     </message>
     <message>
         <source>Y2</source>
-        <translation>Y2</translation>
+        <translation type="vanished">Y2</translation>
     </message>
     <message>
         <source>Draw Pixel</source>
-        <translation>Dessiner un pixel</translation>
-    </message>
-    <message>
-        <source>Draws one pixel in the specified coordinates on the robot screen.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dessiner un pixel</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Dessiner un rectangle</translation>
-    </message>
-    <message>
-        <source>Draws a rectangle on the robot screen. The parameters specify the coordinates of top-left corner, the width and the height of the rectangle.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dessiner un rectangle</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Hauteur</translation>
+        <translation type="vanished">Hauteur</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Largeur</translation>
+        <translation type="vanished">Largeur</translation>
     </message>
     <message>
         <source>Ev3EngineMovementCommand</source>
-        <translation>Ev3EngineMovementCommand</translation>
+        <translation type="vanished">Ev3EngineMovementCommand</translation>
     </message>
     <message>
         <source>Motors Backward</source>
-        <translation>Moteurs en arrière</translation>
-    </message>
-    <message>
-        <source>Enables motors on the given ports in reverse mode with the given power. Ports are specified with A, B or C letters divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Moteurs en arrière</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation>Mode</translation>
+        <translation type="vanished">Mode</translation>
     </message>
     <message>
         <source>Power (%)</source>
@@ -433,7 +405,7 @@
     </message>
     <message>
         <source>B, C</source>
-        <translation>B, C</translation>
+        <translation type="vanished">B, C</translation>
     </message>
     <message>
         <source>100</source>
@@ -441,27 +413,19 @@
     </message>
     <message>
         <source>Motors Forward</source>
-        <translation>Moteurs en arrière</translation>
-    </message>
-    <message>
-        <source>Enables motors on the given ports with the given power. Ports are specified with A, B or C letters divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Moteurs en arrière</translation>
     </message>
     <message>
         <source>Stop Motors</source>
-        <translation>Arrêter les moteurs</translation>
+        <translation type="vanished">Arrêter les moteurs</translation>
     </message>
     <message>
         <source>Disables motors on the given ports.</source>
-        <translation>Désactive les moteurs sur les ports spécifiés.</translation>
+        <translation type="vanished">Désactive les moteurs sur les ports spécifiés.</translation>
     </message>
     <message>
         <source>Led</source>
-        <translation>LED</translation>
-    </message>
-    <message>
-        <source>Sets the color of the LED on the robot`s front panel.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">LED</translation>
     </message>
     <message>
         <source>Color</source>
@@ -469,15 +433,11 @@
     </message>
     <message>
         <source>Play Tone</source>
-        <translation>Jouer un ton</translation>
-    </message>
-    <message>
-        <source>Plays on the robot a sound with the given frequency and duration. This block is similar to the &apos;Beep&apos; block wuth the only difference that here you can specify sound parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Jouer un ton</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation>Frequence</translation>
+        <translation type="vanished">Frequence</translation>
     </message>
     <message>
         <source>1000</source>
@@ -485,47 +445,35 @@
     </message>
     <message>
         <source>Ev3SensorBlock</source>
-        <translation>Ev3SensorBlock</translation>
+        <translation type="vanished">Ev3SensorBlock</translation>
     </message>
     <message>
         <source>Wait for button</source>
-        <translation>Attendre un appui de bouton</translation>
-    </message>
-    <message>
-        <source>Waits for press of a button on a brick.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un appui de bouton</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation>Bouton</translation>
+        <translation type="vanished">Bouton</translation>
     </message>
     <message>
         <source>Wait for Color</source>
-        <translation>Attendre une couleur</translation>
-    </message>
-    <message>
-        <source>Waits till the color sensor on the given port will recognize the given color.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre une couleur</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Port</translation>
+        <translation type="vanished">Port</translation>
     </message>
     <message>
         <source>Wait for Color Intensity</source>
-        <translation>Attendre une intensité de couleur</translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the color sensor on the given port will be greater or less than the given in the &apos;Intensity&apos; parameter value (the intensity is specified in percents, 0 to 100).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre une intensité de couleur</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation>Intensité</translation>
+        <translation type="vanished">Intensité</translation>
     </message>
     <message>
         <source>Sign</source>
-        <translation>Signe</translation>
+        <translation type="vanished">Signe</translation>
     </message>
     <message>
         <source>0</source>
@@ -533,55 +481,35 @@
     </message>
     <message>
         <source>Wait for Encoder</source>
-        <translation>Attendre un encodeur</translation>
-    </message>
-    <message>
-        <source>Waits till the tacho limit of the motor on the given port will reach the value of the &apos;Tacho Limit&apos; parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un encodeur</translation>
     </message>
     <message>
         <source>Tacho Limit</source>
-        <translation>Limite de compte-tours</translation>
+        <translation type="vanished">Limite de compte-tours</translation>
     </message>
     <message>
         <source>Wait for Light</source>
-        <translation>Attendre la lumière</translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the light sensor on the given port will be greater or less than the given in the &apos;Percents&apos; parameter value (0 to 100).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre la lumière</translation>
     </message>
     <message>
         <source>Percents</source>
-        <translation>Pourcentage</translation>
+        <translation type="vanished">Pourcentage</translation>
     </message>
     <message>
         <source>Wait for Range Sensor</source>
-        <translation>Attendre un capteur de distance</translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the ultrasonic or infrared range sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, 0 to 255).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un capteur de distance</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation>Distance</translation>
+        <translation type="vanished">Distance</translation>
     </message>
     <message>
         <source>Wait for Sound Sensor</source>
-        <translation>Attendre un capteur sonore</translation>
-    </message>
-    <message>
-        <source>Waits till the loudness obtained by the sound sensor on the given port will be greater or less than the given value.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un capteur sonore</translation>
     </message>
     <message>
         <source>Wait for Touch Sensor</source>
-        <translation>Attendre un capteur tactile</translation>
-    </message>
-    <message>
-        <source>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (1, 2, 3 or 4).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un capteur tactile</translation>
     </message>
     <message>
         <source>End if</source>
@@ -617,7 +545,7 @@
     </message>
     <message>
         <source>Body</source>
-        <translation>Corps</translation>
+        <translation type="vanished">Corps</translation>
     </message>
     <message>
         <source>Get Button Code</source>
@@ -721,31 +649,27 @@
     </message>
     <message>
         <source>A, B, C</source>
-        <translation>A, B, C</translation>
+        <translation type="vanished">A, B, C</translation>
     </message>
     <message>
         <source>NxtEngineMovementCommand</source>
-        <translation>NxtEngineMovementCommand</translation>
+        <translation type="vanished">NxtEngineMovementCommand</translation>
     </message>
     <message>
         <source>NxtSensorBlock</source>
-        <translation>NxtSensorBlock</translation>
+        <translation type="vanished">NxtSensorBlock</translation>
     </message>
     <message>
         <source>Wait for Button</source>
-        <translation>Attendre un appui de bouton</translation>
+        <translation type="vanished">Attendre un appui de bouton</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="vanished">B</translation>
     </message>
     <message>
         <source>Wait for Sonar Distance</source>
-        <translation>Attendre une distance de sonar</translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, 0 to 255).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre une distance de sonar</translation>
     </message>
     <message>
         <source>Print Text</source>
@@ -809,7 +733,7 @@
     </message>
     <message>
         <source>Devices configuration</source>
-        <translation>Paramétrage des périfériques</translation>
+        <translation type="vanished">Paramétrage des périfériques</translation>
     </message>
     <message>
         <source>Send Message To Thread</source>
@@ -821,7 +745,7 @@
     </message>
     <message>
         <source>Message</source>
-        <translation>Message</translation>
+        <translation type="vanished">Message</translation>
     </message>
     <message>
         <source>Subprogram</source>
@@ -865,327 +789,223 @@
     </message>
     <message>
         <source>TrikAnalogSensorBlock</source>
-        <translation>TrikAnalogSensorBlock</translation>
+        <translation type="vanished">TrikAnalogSensorBlock</translation>
     </message>
     <message>
         <source>Angular Servo</source>
-        <translation>Servomoteur angulaire</translation>
-    </message>
-    <message>
-        <source>Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Servomoteur angulaire</translation>
     </message>
     <message>
         <source>Angle (degrees)</source>
-        <translation>Angle (degré)</translation>
+        <translation type="vanished">Angle (degré)</translation>
     </message>
     <message>
         <source>E1</source>
-        <translation>E1</translation>
-    </message>
-    <message>
-        <source>Initializes videocamera line or object detector with the color of the object in the middle of the camera`s sight.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stores videocamera line detector`s value into a given variable.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">E1</translation>
     </message>
     <message>
         <source>err</source>
-        <translation>err</translation>
+        <translation type="vanished">err</translation>
     </message>
     <message>
         <source>TrikDigitalSensorBlock</source>
-        <translation>TrikDigitanSensorBlock</translation>
+        <translation type="vanished">TrikDigitanSensorBlock</translation>
     </message>
     <message>
         <source>Draw Arc</source>
-        <translation>Dessiner un arc de cercle</translation>
-    </message>
-    <message>
-        <source>Draws the arc defined by the rectangle beginning at (x, y) with the specified width and height, and the given startAngle and spanAngle.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dessiner un arc de cercle</translation>
     </message>
     <message>
         <source>SpanAngle</source>
-        <translation>Secteur</translation>
+        <translation type="vanished">Secteur</translation>
     </message>
     <message>
         <source>StartAngle</source>
-        <translation>Angle de début</translation>
+        <translation type="vanished">Angle de début</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="vanished">5</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Dessiner une ellipse</translation>
-    </message>
-    <message>
-        <source>Draws the ellipse defined by the rectangle beginning at (x, y) with the given width and height.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enables line or object or color detector by videocamera and draws videostream on the robot`s screen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enable Video Streaming</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enables video stream on robot. Video then can be watched on TRIK gamepad or in browser using URL http://ROBOT.IP.ADDRESS:8080/?action=stream</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Plays on the robot a sound file (.wav or .mp3) previously uploaded to it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dessiner une ellipse</translation>
     </message>
     <message>
         <source>File Name</source>
-        <translation>Nom de fichier</translation>
+        <translation type="vanished">Nom de fichier</translation>
     </message>
     <message>
         <source>media/beep.wav</source>
-        <translation>media/beep.wav</translation>
+        <translation type="vanished">media/beep.wav</translation>
     </message>
     <message>
         <source>Remove File</source>
-        <translation>Supprimer un fichier</translation>
-    </message>
-    <message>
-        <source>Removes a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Supprimer un fichier</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Fichier</translation>
+        <translation type="vanished">Fichier</translation>
     </message>
     <message>
         <source>output.txt</source>
-        <translation>output.txt</translation>
+        <translation type="vanished">output.txt</translation>
     </message>
     <message>
         <source>Sad Smile</source>
-        <translation>Smiley triste</translation>
-    </message>
-    <message>
-        <source>Draws a sad smile on the robot`s screen :(</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Smiley triste</translation>
     </message>
     <message>
         <source>Say</source>
-        <translation>Dire</translation>
-    </message>
-    <message>
-        <source>Synthesizes the given phrase and plays it on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Text&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hi!</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Dire</translation>
     </message>
     <message>
         <source>Send message</source>
-        <translation>Envoyer un message</translation>
+        <translation type="vanished">Envoyer un message</translation>
     </message>
     <message>
         <source>Sends message to another robot.</source>
-        <translation>Envoie un message à un autre robot.</translation>
+        <translation type="vanished">Envoie un message à un autre robot.</translation>
     </message>
     <message>
         <source>Hull Number</source>
-        <translation>Numéro d&apos;immatriculation</translation>
+        <translation type="vanished">Numéro d&apos;immatriculation</translation>
     </message>
     <message>
         <source>TrikSensorBlock</source>
-        <translation>TrikSensorBlock</translation>
+        <translation type="vanished">TrikSensorBlock</translation>
     </message>
     <message>
         <source>Background Color</source>
-        <translation>Couleur de fond</translation>
+        <translation type="vanished">Couleur de fond</translation>
     </message>
     <message>
         <source>Sets the background color of the current picture on the robot`s screen.</source>
-        <translation>Définit la couleur de fond sans effacer l&apos;image courante d&apos;écran du robot.</translation>
+        <translation type="vanished">Définit la couleur de fond sans effacer l&apos;image courante d&apos;écran du robot.</translation>
     </message>
     <message>
         <source>Painter Color</source>
-        <translation>Couleur de brosse</translation>
+        <translation type="vanished">Couleur de brosse</translation>
     </message>
     <message>
         <source>Sets the painter color.</source>
-        <translation>Définit la couleur de brosse.</translation>
+        <translation type="vanished">Définit la couleur de brosse.</translation>
     </message>
     <message>
         <source>Painter Width</source>
-        <translation>Taille de brosse</translation>
+        <translation type="vanished">Taille de brosse</translation>
     </message>
     <message>
         <source>Sets the painter width.</source>
-        <translation>Définit la taille de brosse.</translation>
+        <translation type="vanished">Définit la taille de brosse.</translation>
     </message>
     <message>
         <source>Smile</source>
-        <translation>Sourire</translation>
+        <translation type="vanished">Sourire</translation>
     </message>
     <message>
         <source>Draws a smile on the robot`s screen :)</source>
-        <translation>Dessine un sourire sur l&apos;écran du robot :)</translation>
+        <translation type="vanished">Dessine un sourire sur l&apos;écran du robot :)</translation>
     </message>
     <message>
         <source>System Call</source>
-        <translation>Appel système</translation>
-    </message>
-    <message>
-        <source>Invokes bash script-style command on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Command&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Appel système</translation>
     </message>
     <message>
         <source>Code</source>
-        <translation>Code</translation>
+        <translation type="vanished">Code</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation>Commande</translation>
+        <translation type="vanished">Commande</translation>
     </message>
     <message>
         <source>echo 123</source>
-        <translation>echo 123</translation>
+        <translation type="vanished">echo 123</translation>
     </message>
     <message>
         <source>S1</source>
-        <translation>S1</translation>
+        <translation type="vanished">S1</translation>
     </message>
     <message>
         <source>E1, E2, E3, E4</source>
-        <translation>E1, E2, E3, E4</translation>
+        <translation type="vanished">E1, E2, E3, E4</translation>
     </message>
     <message>
         <source>B1, B2, B3, B4</source>
-        <translation>B1, B2, B3, B4</translation>
+        <translation type="vanished">B1, B2, B3, B4</translation>
     </message>
     <message>
         <source>TrikV6EngineMovementCommand</source>
-        <translation>TrikV6EngineMovementCommand</translation>
-    </message>
-    <message>
-        <source>Enables motors on the given ports in reverse mode with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">TrikV6EngineMovementCommand</translation>
     </message>
     <message>
         <source>M3, M4</source>
-        <translation>M3, M4</translation>
+        <translation type="vanished">M3, M4</translation>
     </message>
     <message>
         <source>Enables motors on the given ports with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.</source>
-        <translation>Active les moteurs sur les ports spécifiés avec la puissance spécifiée. Les ports sont donnés dans la notation du controlleur TRIK (par ex. M1, E2) et sont éspacés par virgules. La puissance est donnée en pourcentage et varie entre -100 et 100, le signe donne la direction de rotation.</translation>
+        <translation type="vanished">Active les moteurs sur les ports spécifiés avec la puissance spécifiée. Les ports sont donnés dans la notation du controlleur TRIK (par ex. M1, E2) et sont éspacés par virgules. La puissance est donnée en pourcentage et varie entre -100 et 100, le signe donne la direction de rotation.</translation>
     </message>
     <message>
         <source>M1, M2, M3, M4</source>
-        <translation>M1, M2, M3, M4</translation>
+        <translation type="vanished">M1, M2, M3, M4</translation>
     </message>
     <message>
         <source>Wait for Accelerometer</source>
-        <translation>Attendre l&apos;accéléromètre</translation>
+        <translation type="vanished">Attendre l&apos;accéléromètre</translation>
     </message>
     <message>
         <source>Acceleration</source>
-        <translation>Accéleration</translation>
+        <translation type="vanished">Accéleration</translation>
     </message>
     <message>
         <source>Acceleration Axis</source>
-        <translation>L&apos;axe d&apos;accéleration</translation>
+        <translation type="vanished">L&apos;axe d&apos;accéleration</translation>
     </message>
     <message>
         <source>Wait for Gyroscope</source>
-        <translation>Attendre le gyroscope</translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees/sec&apos; parameter value.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre le gyroscope</translation>
     </message>
     <message>
         <source>Degrees/sec</source>
-        <translation>Degrés/sec</translation>
+        <translation type="vanished">Degrés/sec</translation>
     </message>
     <message>
         <source>Wait for Infrared Distance</source>
-        <translation>Attendre une distance de capteur infrarouge</translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the infrared sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value. By default on ports A1 and A2 the distance is specified in centimeters (from 0 to 100). It is not recommended to plug IR sensor into other ports because its raw value will be processed by software on robot with expectation of another sensor type.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre une distance de capteur infrarouge</translation>
     </message>
     <message>
         <source>Wait for Message</source>
-        <translation>Attendre un message</translation>
-    </message>
-    <message>
-        <source>Stores a message from another robot into a given variable. When no incoming messages are present at the moment, a robot will wait for incoming message if &apos;Synchronized&apos; property is true, and empty string will be assigned to a variable otherwise.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un message</translation>
     </message>
     <message>
         <source>Wait for Motion</source>
-        <translation>Attendre un mouvement</translation>
-    </message>
-    <message>
-        <source>Waits till the motion sensor on the given port is triggered.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un mouvement</translation>
     </message>
     <message>
         <source>Wait for Ultrasonic Distance</source>
-        <translation>Attendre une distance du capteur ultrason </translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, from 0 to 300).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre une distance du capteur ultrason </translation>
     </message>
     <message>
         <source>Wait Gamepad Button</source>
-        <translation>Attendre un bouton de manette</translation>
-    </message>
-    <message>
-        <source>Waits for Android gamepad &apos;magic button&apos; press. Buttons are identified by numbers from 1 to 5 (from left to right)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waits until Android gamepad is connected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waits until Android gamepad is disconnected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Waits till the value returned by gamepad wheel be greater or less than the given in the &apos;Angle&apos; parameter value. Angle is measured from -100 (max left) to 100 (max right).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre un bouton de manette</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation type="vanished">Angle</translation>
     </message>
     <message>
         <source>Wait Pad Press</source>
-        <translation>Attendre l&apos;appui bouton de la mannete</translation>
-    </message>
-    <message>
-        <source>Waits for Android gamepad pad press (left pad has number 1, right pad - number 2).</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Attendre l&apos;appui bouton de la mannete</translation>
     </message>
     <message>
         <source>Pad</source>
-        <translation>Manette</translation>
+        <translation type="vanished">Manette</translation>
     </message>
     <message>
         <source>Write To File</source>
-        <translation>Enregister dans un fichier</translation>
-    </message>
-    <message>
-        <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Enregister dans un fichier</translation>
     </message>
     <message>
         <source>Variable Initialization</source>
@@ -1210,6 +1030,29 @@
     <message>
         <source>Drawing</source>
         <translation>Dessin</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Body</source>
+        <translation type="unfinished">Corps</translation>
+    </message>
+    <message>
+        <source>Variable</source>
+        <translation type="unfinished">Variable</translation>
+    </message>
+    <message>
+        <source>Devices configuration</source>
+        <translation type="unfinished">Paramétrage des périfériques</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished">Message</translation>
+    </message>
+    <message>
+        <source>Thread</source>
+        <translation type="unfinished">Fil</translation>
     </message>
 </context>
 <context>
@@ -1724,15 +1567,15 @@
     </message>
     <message>
         <source>B2</source>
-        <translation>B2</translation>
+        <translation type="vanished">B2</translation>
     </message>
     <message>
         <source>B3</source>
-        <translation>B3</translation>
+        <translation type="vanished">B3</translation>
     </message>
     <message>
         <source>B4</source>
-        <translation>B4</translation>
+        <translation type="vanished">B4</translation>
     </message>
     <message>
         <source>Wait</source>
@@ -1788,7 +1631,7 @@
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="vanished">B</translation>
     </message>
     <message>
         <source>&apos;Enter some text here&apos;</source>
@@ -1796,11 +1639,11 @@
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="vanished">1</translation>
     </message>
     <message>
         <source>E1</source>
-        <translation>E1</translation>
+        <translation type="vanished">E1</translation>
     </message>
     <message>
         <source>err</source>
@@ -1840,7 +1683,7 @@
     </message>
     <message>
         <source>B1</source>
-        <translation>B1</translation>
+        <translation type="vanished">B1</translation>
     </message>
     <message>
         <source>Clears everything drawn on the robot`s screen.</source>
@@ -1892,59 +1735,59 @@
     </message>
     <message>
         <source>Color sensor</source>
-        <translation>Capteur de couleur</translation>
+        <translation type="vanished">Capteur de couleur</translation>
     </message>
     <message>
         <source>Line sensor</source>
-        <translation>Capteur de ligne</translation>
+        <translation type="vanished">Capteur de ligne</translation>
     </message>
     <message>
         <source>Object sensor</source>
-        <translation>Capteur de presence</translation>
+        <translation type="vanished">Capteur de presence</translation>
     </message>
     <message>
         <source>A1</source>
-        <translation>A1</translation>
+        <translation type="vanished">A1</translation>
     </message>
     <message>
         <source>A2</source>
-        <translation>A2</translation>
+        <translation type="vanished">A2</translation>
     </message>
     <message>
         <source>A3</source>
-        <translation>A3</translation>
+        <translation type="vanished">A3</translation>
     </message>
     <message>
         <source>A4</source>
-        <translation>A4</translation>
+        <translation type="vanished">A4</translation>
     </message>
     <message>
         <source>A5</source>
-        <translation>A5</translation>
+        <translation type="vanished">A5</translation>
     </message>
     <message>
         <source>A6</source>
-        <translation>A6</translation>
+        <translation type="vanished">A6</translation>
     </message>
     <message>
         <source>D1</source>
-        <translation>D1</translation>
+        <translation type="vanished">D1</translation>
     </message>
     <message>
         <source>D2</source>
-        <translation>D2</translation>
+        <translation type="vanished">D2</translation>
     </message>
     <message>
         <source>2</source>
-        <translation>2</translation>
+        <translation type="vanished">2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation>3</translation>
+        <translation type="vanished">3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation>4</translation>
+        <translation type="vanished">4</translation>
     </message>
     <message>
         <source>black</source>
@@ -1956,39 +1799,39 @@
     </message>
     <message>
         <source>cyan</source>
-        <translation>bleu-vert</translation>
+        <translation type="vanished">bleu-vert</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>bleu foncé</translation>
+        <translation type="vanished">bleu foncé</translation>
     </message>
     <message>
         <source>dark cyan</source>
-        <translation>bleu-vert foncé</translation>
+        <translation type="vanished">bleu-vert foncé</translation>
     </message>
     <message>
         <source>dark gray</source>
-        <translation>gris foncé</translation>
+        <translation type="vanished">gris foncé</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation>vert foncé</translation>
+        <translation type="vanished">vert foncé</translation>
     </message>
     <message>
         <source>dark magenta</source>
-        <translation>pourpre foncé</translation>
+        <translation type="vanished">pourpre foncé</translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation>rouge foncé</translation>
+        <translation type="vanished">rouge foncé</translation>
     </message>
     <message>
         <source>dark yellow</source>
-        <translation>jaune foncé</translation>
+        <translation type="vanished">jaune foncé</translation>
     </message>
     <message>
         <source>gray</source>
-        <translation>girs</translation>
+        <translation type="vanished">girs</translation>
     </message>
     <message>
         <source>green</source>
@@ -1996,11 +1839,11 @@
     </message>
     <message>
         <source>light gray</source>
-        <translation>gris clair</translation>
+        <translation type="vanished">gris clair</translation>
     </message>
     <message>
         <source>magenta</source>
-        <translation>pourpre</translation>
+        <translation type="vanished">pourpre</translation>
     </message>
     <message>
         <source>red</source>
@@ -2008,15 +1851,15 @@
     </message>
     <message>
         <source>E2</source>
-        <translation>E2</translation>
+        <translation type="vanished">E2</translation>
     </message>
     <message>
         <source>E3</source>
-        <translation>E3</translation>
+        <translation type="vanished">E3</translation>
     </message>
     <message>
         <source>E4</source>
-        <translation>E4</translation>
+        <translation type="vanished">E4</translation>
     </message>
     <message>
         <source>white</source>
@@ -2044,11 +1887,11 @@
     </message>
     <message>
         <source>off</source>
-        <translation>éteint</translation>
+        <translation type="vanished">éteint</translation>
     </message>
     <message>
         <source>orange</source>
-        <translation>orange</translation>
+        <translation type="vanished">orange</translation>
     </message>
     <message>
         <source>break</source>
@@ -2104,35 +1947,35 @@
     </message>
     <message>
         <source>Down</source>
-        <translation>Vers le bas</translation>
+        <translation type="vanished">Vers le bas</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation>Entrer</translation>
+        <translation type="vanished">Entrer</translation>
     </message>
     <message>
         <source>Esc</source>
-        <translation>Esc</translation>
+        <translation type="vanished">Esc</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Gauche</translation>
+        <translation type="vanished">Gauche</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Droite</translation>
+        <translation type="vanished">Droite</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Vers le haut</translation>
+        <translation type="vanished">Vers le haut</translation>
     </message>
     <message>
         <source>False</source>
-        <translation>Faux</translation>
+        <translation type="vanished">Faux</translation>
     </message>
     <message>
         <source>True</source>
-        <translation>Vrai</translation>
+        <translation type="vanished">Vrai</translation>
     </message>
     <message>
         <source>Concurrent</source>
@@ -2152,7 +1995,7 @@
     </message>
     <message>
         <source>Escape</source>
-        <translation>Echapper</translation>
+        <translation type="vanished">Echapper</translation>
     </message>
     <message>
         <source>false</source>
@@ -2184,43 +2027,19 @@
     </message>
     <message>
         <source>Back</source>
-        <translation>Retour</translation>
+        <translation type="vanished">Retour</translation>
     </message>
     <message>
         <source>A</source>
-        <translation>A</translation>
+        <translation type="vanished">A</translation>
     </message>
     <message>
         <source>C</source>
-        <translation>C</translation>
+        <translation type="vanished">C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>green flash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>green pulse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>orange flash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>orange pulse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>red flash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>red pulse</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">D</translation>
     </message>
 </context>
 </TS>
