@@ -54,12 +54,13 @@ CircleWidget::CircleWidget(const QSize &size, const QString &icon, QWidget *pare
 	iconLabel->setScaledContents(true);
 	iconLabel->setPixmap(pixmap);
 
+
 	QVBoxLayout * const circleLayout = new QVBoxLayout;
 	circleLayout->setContentsMargins(0, 0, 0, 0);
 	circleLayout->setSpacing(0);
 	circleLayout->setMargin(0);
 	circleLayout->addWidget(iconLabel, 0, Qt::AlignCenter);
-
+	setStyleSheet("background-color: transparent;");
 	setFixedSize(size);
 	setLayout(circleLayout);
 }
