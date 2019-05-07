@@ -56,7 +56,6 @@ void DetailsTab::initWidget()
 	setSelectionMode(NoSelection);
 	setIndentation(10);
 	QPalette palette;
-	palette.setColor(QPalette::Window, Qt::transparent);
 	palette.setColor(QPalette::Base, Qt::transparent);
 	setPalette(palette);
 	setAnimated(true);
