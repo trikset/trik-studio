@@ -108,9 +108,6 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 	const QString labelText = mCompactMode ? tr("%1:") : tr("Port %1:");
 	QLabel * const portLabel = new QLabel(labelText.arg(port.userFriendlyName()), this);
 	QComboBox * const comboBox = new QComboBox(this);
-	QPalette palette = comboBox->palette();
-	palette.setColor(QPalette::Base, Qt::white);
-	comboBox->setPalette(Qt::white);
 	comboBox->setObjectName("Port " + port.name() + " DeviceConfig");
 	comboBox->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
 	comboBox->setProperty("robotModelName", robotModelName);
