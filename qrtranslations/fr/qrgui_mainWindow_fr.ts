@@ -966,9 +966,8 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::StartWidget</name>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="127"/>
         <source>Open existing project</source>
-        <translation>Ouvrir un projet existant</translation>
+        <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
         <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="138"/>
@@ -982,6 +981,11 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <source>Create interpreted diagram</source>
         <translation type="vanished">Créer un diagramme intérprété</translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="127"/>
+        <source>Open project</source>
+        <translation type="unfinished">Ouvrir un projet</translation>
     </message>
     <message>
         <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="183"/>

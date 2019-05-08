@@ -417,47 +417,47 @@
         <translation>Увеличить скорость</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="534"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="595"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="544"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="605"/>
         <source>Right wheel:</source>
         <translation>Правое колесо:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="566"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="627"/>
         <source>Realistic physics</source>
         <translation>Реалистичная физика</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="573"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="634"/>
         <source>Realistic sensors</source>
         <translation>Реалистичные сенсоры</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="580"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="641"/>
         <source>Realistic engines</source>
         <translation>Реалистичные моторы</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="614"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="675"/>
         <source>Wheel diameter:</source>
         <translation>Диаметр колеса:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="634"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="695"/>
         <source>Robot height:</source>
         <translation>Высота робота:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="647"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="708"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Robot mass:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>Масса робота:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="660"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="721"/>
         <source>Robot width:</source>
         <translation>Ширина робота:</translation>
     </message>
@@ -814,27 +814,27 @@
 <context>
     <name>twoDModel::view::DetailsTab</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="42"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="40"/>
         <source>Display</source>
         <translation>Дисплей</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="43"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="41"/>
         <source>Ports configuration</source>
         <translation>Порты</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="44"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="42"/>
         <source>Motors</source>
         <translation>Моторы</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="45"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="43"/>
         <source>Physics</source>
         <translation>Физика</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="46"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="44"/>
         <source>Model parameters</source>
         <translation>Параметры модели</translation>
     </message>

@@ -12,17 +12,17 @@
 <context>
     <name>kitBase::DevicesConfigurationWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="108"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="102"/>
         <source>%1:</source>
         <translation>%1:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="108"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="102"/>
         <source>Port %1:</source>
         <translation>Порт %1:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="119"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="110"/>
         <source>Unused</source>
         <translation>Не используется</translation>
     </message>

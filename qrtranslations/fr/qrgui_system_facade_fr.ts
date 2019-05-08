@@ -31,9 +31,13 @@
 <context>
     <name>qReal::ProjectManager</name>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="74"/>
         <source>Open existing project</source>
-        <translation>Ouvrir un projet existant</translation>
+        <translation type="vanished">Ouvrir un projet existant</translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="74"/>
+        <source>Open project</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="134"/>
