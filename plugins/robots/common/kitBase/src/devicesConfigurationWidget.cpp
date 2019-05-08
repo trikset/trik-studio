@@ -30,15 +30,12 @@ DevicesConfigurationWidget::DevicesConfigurationWidget(QWidget *parent, bool aut
 	, mSaving(false)
 	, mRefreshing(false)
 {
-	setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setMinimumHeight(125);
 	setFrameShape(QFrame::NoFrame);
 
 	setWidgetResizable(true);
-	QPalette palette = this->palette();
-	palette.setColor(QPalette::Background, Qt::transparent);
-	setPalette(palette);
 }
 
 DevicesConfigurationWidget::~DevicesConfigurationWidget()
@@ -89,9 +86,6 @@ QWidget *DevicesConfigurationWidget::configurerForRobotModel(RobotModelInterface
 {
 	/// @todo: What if robot model has no configurable sensors?
 	QWidget *result = new QWidget;
-	QPalette palette = result->palette();
-	palette.setColor(QPalette::Background, Qt::transparent);
-	result->setPalette(palette);
 	QVBoxLayout * const layout = new QVBoxLayout(result);
 	layout->setContentsMargins(0, 0, 0, 0);
 	QList<PortInfo> const configurablePorts = robotModel.configurablePorts();
