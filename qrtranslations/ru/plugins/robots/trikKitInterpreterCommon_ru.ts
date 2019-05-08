@@ -32,9 +32,13 @@
         <translation>Введите IP-адрес робота</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="51"/>
         <source>Multimedia Settings</source>
-        <translation>Настройки мультимедия</translation>
+        <translation type="vanished">Настройки мультимедия</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="51"/>
+        <source>Camera Settings</source>
+        <translation>Настройки камеры</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="57"/>

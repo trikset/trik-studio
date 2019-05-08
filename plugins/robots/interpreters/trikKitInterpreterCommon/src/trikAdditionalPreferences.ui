@@ -48,7 +48,7 @@
    <item>
     <widget class="QGroupBox" name="multimediaSettingsGroupBox">
      <property name="title">
-      <string>Multimedia Settings</string>
+      <string>Camera Settings</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="1">
