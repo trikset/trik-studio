@@ -14,12 +14,12 @@
 
 TARGET = robots-trik-v6-f-sharp-generator
 
+TEMPLATE = lib
+CONFIG += plugin
+
 include(../../../../../global.pri)
 
 QT += widgets network
-
-TEMPLATE = lib
-CONFIG += plugin
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

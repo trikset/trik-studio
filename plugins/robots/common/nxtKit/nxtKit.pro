@@ -14,8 +14,8 @@
 
 TARGET = robots-nxt-kit
 
-include(../../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../../global.pri)
 
 include(nxtKit.pri)

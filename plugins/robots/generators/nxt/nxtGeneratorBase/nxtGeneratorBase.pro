@@ -14,11 +14,11 @@
 
 TARGET = robots-nxt-generator-base
 
+TEMPLATE = lib
+
 include(../../../../../global.pri)
 
 QT += widgets
-
-TEMPLATE = lib
 
 includes(plugins/robots/generators/nxt/nxtGeneratorBase \
 		plugins/robots/generators/generatorBase \

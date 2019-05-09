@@ -14,11 +14,11 @@
 
 TARGET = robots-trik-qts-generator-library
 
+TEMPLATE = lib
+
 include(../../../../../global.pri)
 
 QT += widgets network
-
-TEMPLATE = lib
 
 includes(plugins/robots/generators/trik/trikGeneratorBase \
 		plugins/robots/generators/generatorBase \

@@ -14,12 +14,12 @@
 
 TARGET = robots-nxt-russian-c-generator
 
+TEMPLATE = lib
+CONFIG += plugin
+
 include(../../../../../global.pri)
 
 QT += widgets
-
-TEMPLATE = lib
-CONFIG += plugin
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

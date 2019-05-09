@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+TEMPLATE = lib
+CONFIG += plugin
+
 include($$PWD/../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/editors
-
-TEMPLATE = lib
-CONFIG += plugin
 
 isEmpty(QREAL_EDITOR_NAME) {
 	error(Please set QREAL_EDITOR_NAME variable in a .pro file of your editor as a folder name of that editor)

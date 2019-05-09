@@ -14,9 +14,9 @@
 
 TARGET = qrgui-facade
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 QT += widgets
 

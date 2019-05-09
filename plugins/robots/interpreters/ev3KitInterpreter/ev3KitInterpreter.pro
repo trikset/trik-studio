@@ -14,10 +14,10 @@
 
 TARGET = robots-ev3-interpreter
 
-include(../../../../global.pri)
-
 TEMPLATE = lib
 CONFIG += plugin
+
+include(../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

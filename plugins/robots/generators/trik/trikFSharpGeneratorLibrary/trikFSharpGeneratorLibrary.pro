@@ -14,11 +14,11 @@
 
 TARGET = robots-trik-f-sharp-generator-library
 
+TEMPLATE = lib
+
 include(../../../../../global.pri)
 
 QT += widgets network
-
-TEMPLATE = lib
 
 DEFINES += ROBOTS_TRIK_FSHARP_GENERATOR_LIBRARY
 
