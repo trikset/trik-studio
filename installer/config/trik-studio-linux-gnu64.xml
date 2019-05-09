@@ -24,10 +24,4 @@
     <RunProgramArguments>
         <Argument>@TargetDir@/trik-studio</Argument>
     </RunProgramArguments>
-
-    <RemoteRepositories>
-        <Repository>
-            <Url>http://195.19.241.150/packages/trik-studio-repo-linux-gnu64/</Url>
-        </Repository>
-    </RemoteRepositories>
 </Installer>

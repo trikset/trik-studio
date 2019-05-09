@@ -25,10 +25,4 @@
         <Argument>-c</Argument>
         <Argument>export LD_LIBRARY_PATH=@TargetDir@ &amp;&amp; @TargetDir@/trik-studio</Argument>
     </RunProgramArguments>
-
-    <RemoteRepositories>
-        <Repository>
-            <Url>http://195.19.241.150/packages/trik-studio-repo-linux-gnu32/</Url>
-        </Repository>
-    </RemoteRepositories>
 </Installer>
