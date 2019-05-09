@@ -24,10 +24,4 @@
     <RunProgramArguments>
         <Argument>@TargetDir@/TRIK Studio.app</Argument>
     </RunProgramArguments>
-
-    <RemoteRepositories>
-        <Repository>
-            <Url>http://195.19.241.150/packages/trik-studio-repo-mac/</Url>
-        </Repository>
-    </RemoteRepositories>
 </Installer>
