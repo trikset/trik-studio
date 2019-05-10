@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TEMPLATE = app
+isEmpty(TEMPLATE): TEMPLATE = app
+
 CONFIG += console
-CONFIG -= app_bundle
+macx:CONFIG -= app_bundle
 
 include(../../global.pri)
 
