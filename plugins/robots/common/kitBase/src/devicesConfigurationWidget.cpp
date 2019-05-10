@@ -30,15 +30,12 @@ DevicesConfigurationWidget::DevicesConfigurationWidget(QWidget *parent, bool aut
 	, mSaving(false)
 	, mRefreshing(false)
 {
-	setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setMinimumHeight(125);
 	setFrameShape(QFrame::NoFrame);
 
 	setWidgetResizable(true);
-	QPalette palette = this->palette();
-	palette.setColor(QPalette::Background, Qt::transparent);
-	setPalette(palette);
 }
 
 DevicesConfigurationWidget::~DevicesConfigurationWidget()
@@ -89,9 +86,6 @@ QWidget *DevicesConfigurationWidget::configurerForRobotModel(RobotModelInterface
 {
 	/// @todo: What if robot model has no configurable sensors?
 	QWidget *result = new QWidget;
-	QPalette palette = result->palette();
-	palette.setColor(QPalette::Background, Qt::transparent);
-	result->setPalette(palette);
 	QVBoxLayout * const layout = new QVBoxLayout(result);
 	layout->setContentsMargins(0, 0, 0, 0);
 	QList<PortInfo> const configurablePorts = robotModel.configurablePorts();
@@ -108,9 +102,6 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 	const QString labelText = mCompactMode ? tr("%1:") : tr("Port %1:");
 	QLabel * const portLabel = new QLabel(labelText.arg(port.userFriendlyName()), this);
 	QComboBox * const comboBox = new QComboBox(this);
-	QPalette palette = comboBox->palette();
-	palette.setColor(QPalette::Base, Qt::white);
-	comboBox->setPalette(Qt::white);
 	comboBox->setObjectName("Port " + port.name() + " DeviceConfig");
 	comboBox->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
 	comboBox->setProperty("robotModelName", robotModelName);

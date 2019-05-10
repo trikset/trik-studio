@@ -60,6 +60,7 @@ CircleWidget::CircleWidget(const QSize &size, const QString &icon, QWidget *pare
 	circleLayout->setMargin(0);
 	circleLayout->addWidget(iconLabel, 0, Qt::AlignCenter);
 
+	setStyleSheet("background-color: transparent;");
 	setFixedSize(size);
 	setLayout(circleLayout);
 }

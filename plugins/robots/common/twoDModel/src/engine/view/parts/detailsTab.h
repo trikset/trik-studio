@@ -54,7 +54,6 @@ public slots:
 	void setPhysicsSectionsVisible(bool visible);
 
 private:
-	void initWidget();
 	void initItem(QTreeWidgetItem *item, const QString &text, bool expanded);
 
 	QTreeWidgetItem *mDisplayRoot;  // Takes ownership

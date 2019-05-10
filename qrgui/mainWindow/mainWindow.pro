@@ -13,12 +13,11 @@
 # limitations under the License.
 
 TARGET = trik-studio
+TEMPLATE = app
 
 include(../../global.pri)
 
 DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
-
-TEMPLATE = app
 
 QT += widgets printsupport xml svg
 

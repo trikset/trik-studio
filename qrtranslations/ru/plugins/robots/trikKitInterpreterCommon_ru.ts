@@ -76,6 +76,61 @@
     </message>
 </context>
 <context>
+    <name>TrikBrick</name>
+    <message>
+        <source>Trying to read from file %1 failed</source>
+        <translation type="obsolete">Не удалось открыть файл %1</translation>
+    </message>
+    <message>
+        <source>No configured motor on port: %1</source>
+        <translation type="obsolete">Не найден сконфигурированный  мотор на порту: %1</translation>
+    </message>
+    <message>
+        <source>No configured sensor on port: %1</source>
+        <translation type="obsolete">Не найден сконфигурированный  сенсор на порту: %1</translation>
+    </message>
+    <message>
+        <source>No configured accelerometer</source>
+        <translation type="obsolete">Акселерометр не сконфигурирован</translation>
+    </message>
+    <message>
+        <source>No configured gyroscope</source>
+        <translation type="obsolete">Гиродатчик не сконфигурирован</translation>
+    </message>
+    <message>
+        <source>No configured LineSensor on port: %1</source>
+        <translation type="obsolete">Не найден сконфигурированный сенсор линии на порту: %1</translation>
+    </message>
+    <message>
+        <source>No configured encoder on port: %1</source>
+        <translation type="obsolete">Не найден сконфигурированный енкодер на порту: %1</translation>
+    </message>
+    <message>
+        <source>No configured led</source>
+        <translation type="obsolete">LED не сконфигурирован</translation>
+    </message>
+    <message>
+        <source>Get photo with camera started</source>
+        <translation type="obsolete">Процесс получения снимка начат</translation>
+    </message>
+    <message>
+        <source>Get photo with camera finished</source>
+        <translation type="obsolete">Процесс получения снимка завершен</translation>
+    </message>
+    <message>
+        <source>Cannot get a photo from camera (possibly because of wrong camera name)</source>
+        <translation type="obsolete">Получить снимок с помощью камеры не удалось (возможно из-за неправильного имени камеры)</translation>
+    </message>
+    <message>
+        <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
+        <translation type="obsolete">Получить снимок из папки/проекта не удалось (возможно из-за неправильного пути/отстуствия снимков в проекте)</translation>
+    </message>
+    <message>
+        <source>No cofigured random device</source>
+        <translation type="obsolete">Генератор случайных чисел не сконфигурирован</translation>
+    </message>
+</context>
+<context>
     <name>TrikDisplayWidget</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikDisplayWidget.ui" line="14"/>

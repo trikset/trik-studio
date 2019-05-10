@@ -37,8 +37,6 @@ DetailsTab::DetailsTab(QWidget *parent)
 	, mMotors(nullptr)
 	, mPhysics(nullptr)
 {
-	initWidget();
-
 	initItem(mDisplayRoot, tr("Display"), true);
 	initItem(mDevicesRoot, tr("Ports configuration"), true);
 	initItem(mMotorsRoot, tr("Motors"), false);
@@ -50,24 +48,11 @@ DetailsTab::~DetailsTab()
 {
 }
 
-void DetailsTab::initWidget()
-{
-	setHeaderHidden(true);
-	setSelectionMode(NoSelection);
-	setIndentation(10);
-	QPalette palette;
-	palette.setColor(QPalette::Window, Qt::transparent);
-	palette.setColor(QPalette::Base, Qt::transparent);
-	setPalette(palette);
-	setAnimated(true);
-}
-
 void DetailsTab::initItem(QTreeWidgetItem *item, const QString &text, bool expanded)
 {
 	QWidget * const widget = new QWidget(this);
 	QVBoxLayout * const layout = new QVBoxLayout(widget);
 	QLabel * const label = new QLabel(text, widget);
-	label->setFrameStyle(QFrame::NoFrame);
 	layout->addStretch();
 	layout->addWidget(label);
 	layout->addStretch();
@@ -94,11 +79,6 @@ void DetailsTab::setMotorsConfigurer(QWidget *widget)
 {
 	mMotors = widget;
 	setItemWidget(mMotorsItem, 0, widget);
-	for (QWidget * const child : widget->findChildren<QComboBox *>()) {
-		QPalette palette;
-		palette.setColor(QPalette::Base, Qt::white);
-		child->setPalette(palette);
-	}
 }
 
 void DetailsTab::setPhysicsSettings(QWidget *widget)

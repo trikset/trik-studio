@@ -124,7 +124,7 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	mProjectsManagementLayout->setSpacing(20);
 	mProjectsManagementLayout->setMargin(0);
 
-	mOpenProjectButton = new StyledButton(tr("Open existing project")
+	mOpenProjectButton = new StyledButton(tr("Open project")
 			, ":/mainWindow/images/startTab/open.svg");
 	mOpenProjectButton->setObjectName("withIcon");
 

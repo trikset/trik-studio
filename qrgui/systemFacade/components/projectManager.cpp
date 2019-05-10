@@ -71,7 +71,7 @@ bool ProjectManager::suggestToOpenExisting()
 		return false;
 	}
 
-	const QString fileName = openFileName(tr("Open existing project"));
+	const QString fileName = openFileName(tr("Open project"));
 	if (fileName.isEmpty()) {
 		return false;
 	}
