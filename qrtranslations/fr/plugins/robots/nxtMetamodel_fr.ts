@@ -4,59 +4,59 @@
 <context>
     <name>NxtMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
         <source>Inout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
         <source>Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
         <source>Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="142"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
         <source>body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="138"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="142"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="132"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="136"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -96,117 +96,117 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
         <source>blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
         <source>green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
         <source>red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
         <source>white</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
         <source>yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
         <source>Composite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
         <source>Shared</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
         <source>greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
         <source>less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
         <source>not greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="122"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
         <source>not less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
         <source>Package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
         <source>Private</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
         <source>Protected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
         <source>Public</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>break</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>float</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
         <source>norm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
         <source>x-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
         <source>y-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="128"/>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>
         <source>z-axis</source>
         <translation type="unfinished"></translation>
     </message>

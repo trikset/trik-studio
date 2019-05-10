@@ -428,9 +428,9 @@ void XmlCompiler::generateEnumValues(OutFile &out)
 	out() << "void " << mPluginName << "Plugin::initEnums()\n{\n";
 
 	auto enumTypes = mEditors[mCurrentEditor]->getAllEnumTypes().toList();
-	qSort(enumTypes.begin()
+	std::sort(enumTypes.begin()
 			  , enumTypes.end()
-			  , [=](EnumType *a, EnumType *b) { return QString::compare(a->name(), b->name()); }
+			  , [=](EnumType *a, EnumType *b) { return a->name() < b->name(); }
 	);
 
 	for (auto && type : enumTypes) {

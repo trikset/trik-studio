@@ -117,28 +117,28 @@ void NxtMetamodelPlugin::initShallPaletteBeSortedMap()
 
 void NxtMetamodelPlugin::initEnums()
 {
-	mMetamodel->addEnum("VisibilityKind", { qMakePair(QString("package"), tr("Package")), qMakePair(QString("private"), tr("Private")), qMakePair(QString("protected"), tr("Protected")), qMakePair(QString("public"), tr("Public")) });
-	mMetamodel->setEnumEditable("VisibilityKind", false);
-	mMetamodel->addEnum("DistanceSign", { qMakePair(QString("greater"), tr("greater")), qMakePair(QString("less"), tr("less")), qMakePair(QString("notGreater"), tr("not greater")), qMakePair(QString("notLess"), tr("not less")) });
-	mMetamodel->setEnumEditable("DistanceSign", false);
-	mMetamodel->addEnum("AggregationKind", { qMakePair(QString("composite"), tr("Composite")), qMakePair(QString("none"), tr("None")), qMakePair(QString("shared"), tr("Shared")) });
-	mMetamodel->setEnumEditable("AggregationKind", false);
-	mMetamodel->addEnum("CallConcurrencyKind", { qMakePair(QString("concurrent"), tr("Concurrent")), qMakePair(QString("guarded"), tr("Guarded")), qMakePair(QString("sequential"), tr("Sequential")) });
-	mMetamodel->setEnumEditable("CallConcurrencyKind", false);
 	mMetamodel->addEnum("Accelerations", { qMakePair(QString("normal"), tr("norm")), qMakePair(QString("xAxis"), tr("x-axis")), qMakePair(QString("yAxis"), tr("y-axis")), qMakePair(QString("zAxis"), tr("z-axis")) });
 	mMetamodel->setEnumEditable("Accelerations", false);
+	mMetamodel->addEnum("AggregationKind", { qMakePair(QString("composite"), tr("Composite")), qMakePair(QString("none"), tr("None")), qMakePair(QString("shared"), tr("Shared")) });
+	mMetamodel->setEnumEditable("AggregationKind", false);
 	mMetamodel->addEnum("BreakEngineMode", { qMakePair(QString("break"), tr("break")), qMakePair(QString("float"), tr("float")) });
 	mMetamodel->setEnumEditable("BreakEngineMode", false);
-	mMetamodel->addEnum("NxtSensorPort", { qMakePair(QString("1"), tr("1")), qMakePair(QString("2"), tr("2")), qMakePair(QString("3"), tr("3")), qMakePair(QString("4"), tr("4")) });
-	mMetamodel->setEnumEditable("NxtSensorPort", false);
-	mMetamodel->addEnum("NxtButtons", { qMakePair(QString("Enter"), tr("Enter")), qMakePair(QString("Escape"), tr("Escape")), qMakePair(QString("Left"), tr("Left")), qMakePair(QString("Right"), tr("Right")) });
-	mMetamodel->setEnumEditable("NxtButtons", false);
-	mMetamodel->addEnum("ParameterDirectionKind", { qMakePair(QString("in"), tr("In")), qMakePair(QString("inout"), tr("Inout")), qMakePair(QString("out"), tr("Out")), qMakePair(QString("return"), tr("Return")) });
-	mMetamodel->setEnumEditable("ParameterDirectionKind", false);
-	mMetamodel->addEnum("GuardType", { qMakePair(QString("false"), tr("false")), qMakePair(QString("iteration"), tr("body")), qMakePair(QString("true"), tr("true")) });
-	mMetamodel->setEnumEditable("GuardType", true);
+	mMetamodel->addEnum("CallConcurrencyKind", { qMakePair(QString("concurrent"), tr("Concurrent")), qMakePair(QString("guarded"), tr("Guarded")), qMakePair(QString("sequential"), tr("Sequential")) });
+	mMetamodel->setEnumEditable("CallConcurrencyKind", false);
 	mMetamodel->addEnum("Color", { qMakePair(QString("black"), tr("black")), qMakePair(QString("blue"), tr("blue")), qMakePair(QString("green"), tr("green")), qMakePair(QString("red"), tr("red")), qMakePair(QString("white"), tr("white")), qMakePair(QString("yellow"), tr("yellow")) });
 	mMetamodel->setEnumEditable("Color", false);
+	mMetamodel->addEnum("DistanceSign", { qMakePair(QString("greater"), tr("greater")), qMakePair(QString("less"), tr("less")), qMakePair(QString("notGreater"), tr("not greater")), qMakePair(QString("notLess"), tr("not less")) });
+	mMetamodel->setEnumEditable("DistanceSign", false);
+	mMetamodel->addEnum("GuardType", { qMakePair(QString("false"), tr("false")), qMakePair(QString("iteration"), tr("body")), qMakePair(QString("true"), tr("true")) });
+	mMetamodel->setEnumEditable("GuardType", true);
+	mMetamodel->addEnum("NxtButtons", { qMakePair(QString("Enter"), tr("Enter")), qMakePair(QString("Escape"), tr("Escape")), qMakePair(QString("Left"), tr("Left")), qMakePair(QString("Right"), tr("Right")) });
+	mMetamodel->setEnumEditable("NxtButtons", false);
+	mMetamodel->addEnum("NxtSensorPort", { qMakePair(QString("1"), tr("1")), qMakePair(QString("2"), tr("2")), qMakePair(QString("3"), tr("3")), qMakePair(QString("4"), tr("4")) });
+	mMetamodel->setEnumEditable("NxtSensorPort", false);
+	mMetamodel->addEnum("ParameterDirectionKind", { qMakePair(QString("in"), tr("In")), qMakePair(QString("inout"), tr("Inout")), qMakePair(QString("out"), tr("Out")), qMakePair(QString("return"), tr("Return")) });
+	mMetamodel->setEnumEditable("ParameterDirectionKind", false);
+	mMetamodel->addEnum("VisibilityKind", { qMakePair(QString("package"), tr("Package")), qMakePair(QString("private"), tr("Private")), qMakePair(QString("protected"), tr("Protected")), qMakePair(QString("public"), tr("Public")) });
+	mMetamodel->setEnumEditable("VisibilityKind", false);
 	mMetamodel->addEnum("bool", { qMakePair(QString("false"), tr("false")), qMakePair(QString("true"), tr("true")) });
 	mMetamodel->setEnumEditable("bool", false);
 }

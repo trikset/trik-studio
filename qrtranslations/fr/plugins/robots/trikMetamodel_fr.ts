@@ -1188,187 +1188,187 @@
 <context>
     <name>TrikMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
         <source>E1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
         <source>E2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
         <source>E3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
         <source>E4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
         <source>greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
         <source>less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
         <source>not greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
         <source>not less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
         <source>blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
         <source>green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
         <source>red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
         <source>white</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
         <source>yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
         <source>Color sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="249"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
         <source>Line sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="249"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
         <source>Object sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
         <source>norm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
         <source>x-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
         <source>y-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
         <source>z-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
         <source>Inout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
         <source>Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
         <source>Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
         <source>Composite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
         <source>Shared</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
         <source>Concurrent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
         <source>Guarded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
         <source>Sequential</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
         <source>B1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
         <source>B2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
         <source>B3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
         <source>B4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1403,22 +1403,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
         <source>orange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="249"/>
         <source>D1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="249"/>
         <source>D2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1433,144 +1433,144 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
         <source>Package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
         <source>Private</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
         <source>Protected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
         <source>Public</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
         <source>15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
         <source>30</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
         <source>50</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
         <source>80</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
         <source>Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
         <source>Esc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark magenta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>dark yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>light gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>magenta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
         <source>body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
