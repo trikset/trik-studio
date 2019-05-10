@@ -427,13 +427,19 @@ void XmlCompiler::generateEnumValues(OutFile &out)
 {
 	out() << "void " << mPluginName << "Plugin::initEnums()\n{\n";
 
-	for (const EnumType * const type : mEditors[mCurrentEditor]->getAllEnumTypes()) {
+	auto enumTypes = mEditors[mCurrentEditor]->getAllEnumTypes().toList();
+	qSort(enumTypes.begin()
+			  , enumTypes.end()
+			  , [=](EnumType *a, EnumType *b) { return QString::compare(a->name(), b->name()); }
+	);
+
+	for (auto && type : enumTypes) {
 		const QString name = type->name();
 		out() << "\tmMetamodel->addEnum(\"" << name << "\", { ";
 		QStringList pairs;
 		const QMap<QString, QString> values = type->values();
-		for (const QString &name : values.keys()) {
-			pairs << QString("qMakePair(QString(\"%1\"), tr(\"%2\"))").arg(name, values[name]);
+		for (auto &&key : values.keys()) {
+			pairs << QString("qMakePair(QString(\"%1\"), tr(\"%2\"))").arg(key, values[key]);
 		}
 
 		out() << pairs.join(", ");
