@@ -1,0 +1,22 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>generated/shapes/NxtBeepClass.sdf</file>
+	<file>generated/shapes/NxtClearEncoderClass.sdf</file>
+	<file>generated/shapes/NxtDrawCircleClass.sdf</file>
+	<file>generated/shapes/NxtDrawLineClass.sdf</file>
+	<file>generated/shapes/NxtDrawPixelClass.sdf</file>
+	<file>generated/shapes/NxtDrawRectClass.sdf</file>
+	<file>generated/shapes/NxtEnginesBackwardClass.sdf</file>
+	<file>generated/shapes/NxtEnginesForwardClass.sdf</file>
+	<file>generated/shapes/NxtEnginesStopClass.sdf</file>
+	<file>generated/shapes/NxtPlayToneClass.sdf</file>
+	<file>generated/shapes/NxtWaitForButtonClass.sdf</file>
+	<file>generated/shapes/NxtWaitForColorClass.sdf</file>
+	<file>generated/shapes/NxtWaitForColorIntensityClass.sdf</file>
+	<file>generated/shapes/NxtWaitForEncoderClass.sdf</file>
+	<file>generated/shapes/NxtWaitForLightClass.sdf</file>
+	<file>generated/shapes/NxtWaitForSonarDistanceClass.sdf</file>
+	<file>generated/shapes/NxtWaitForSoundClass.sdf</file>
+	<file>generated/shapes/NxtWaitForTouchSensorClass.sdf</file>
+</qresource>
+</RCC>

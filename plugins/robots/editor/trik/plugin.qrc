@@ -1,0 +1,51 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>generated/shapes/TrikAngularServoClass.sdf</file>
+	<file>generated/shapes/TrikDetectClass.sdf</file>
+	<file>generated/shapes/TrikDetectorToVariableClass.sdf</file>
+	<file>generated/shapes/TrikDrawArcClass.sdf</file>
+	<file>generated/shapes/TrikDrawEllipseClass.sdf</file>
+	<file>generated/shapes/TrikDrawLineClass.sdf</file>
+	<file>generated/shapes/TrikDrawPixelClass.sdf</file>
+	<file>generated/shapes/TrikDrawRectClass.sdf</file>
+	<file>generated/shapes/TrikInitCameraClass.sdf</file>
+	<file>generated/shapes/TrikInitVideoStreamingClass.sdf</file>
+	<file>generated/shapes/TrikLedClass.sdf</file>
+	<file>generated/shapes/TrikPlayToneClass.sdf</file>
+	<file>generated/shapes/TrikPlayToneHzClass.sdf</file>
+	<file>generated/shapes/TrikRemoveFileClass.sdf</file>
+	<file>generated/shapes/TrikSadSmileClass.sdf</file>
+	<file>generated/shapes/TrikSayClass.sdf</file>
+	<file>generated/shapes/TrikSendMessageClass.sdf</file>
+	<file>generated/shapes/TrikSetBackgroundClass.sdf</file>
+	<file>generated/shapes/TrikSetPainterColorClass.sdf</file>
+	<file>generated/shapes/TrikSetPainterWidthClass.sdf</file>
+	<file>generated/shapes/TrikSmileClass.sdf</file>
+	<file>generated/shapes/TrikStopCameraClass.sdf</file>
+	<file>generated/shapes/TrikStopVideoStreamingClass.sdf</file>
+	<file>generated/shapes/TrikSystemClass.sdf</file>
+	<file>generated/shapes/TrikV62AngularServoClass.sdf</file>
+	<file>generated/shapes/TrikV62ClearEncoderClass.sdf</file>
+	<file>generated/shapes/TrikV62WaitForEncoderClass.sdf</file>
+	<file>generated/shapes/TrikV6ClearEncoderClass.sdf</file>
+	<file>generated/shapes/TrikV6EnginesBackwardClass.sdf</file>
+	<file>generated/shapes/TrikV6EnginesForwardClass.sdf</file>
+	<file>generated/shapes/TrikV6EnginesStopClass.sdf</file>
+	<file>generated/shapes/TrikWaitForAccelerometerClass.sdf</file>
+	<file>generated/shapes/TrikWaitForButtonClass.sdf</file>
+	<file>generated/shapes/TrikWaitForEncoderClass.sdf</file>
+	<file>generated/shapes/TrikWaitForGyroscopeClass.sdf</file>
+	<file>generated/shapes/TrikWaitForIRDistanceClass.sdf</file>
+	<file>generated/shapes/TrikWaitForLightClass.sdf</file>
+	<file>generated/shapes/TrikWaitForMessageClass.sdf</file>
+	<file>generated/shapes/TrikWaitForMotionClass.sdf</file>
+	<file>generated/shapes/TrikWaitForSonarDistanceClass.sdf</file>
+	<file>generated/shapes/TrikWaitForTouchSensorClass.sdf</file>
+	<file>generated/shapes/TrikWaitGamepadButtonClass.sdf</file>
+	<file>generated/shapes/TrikWaitGamepadConnectClass.sdf</file>
+	<file>generated/shapes/TrikWaitGamepadDisconnectClass.sdf</file>
+	<file>generated/shapes/TrikWaitGamepadWheelClass.sdf</file>
+	<file>generated/shapes/TrikWaitPadPressClass.sdf</file>
+	<file>generated/shapes/TrikWriteToFileClass.sdf</file>
+</qresource>
+</RCC>

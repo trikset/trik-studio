@@ -1,0 +1,38 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>generated/shapes/Ev3BeepClass.sdf</file>
+	<file>generated/shapes/Ev3CalibrateBlackLLClass.sdf</file>
+	<file>generated/shapes/Ev3CalibrateGyroscopeClass.sdf</file>
+	<file>generated/shapes/Ev3CalibratePIDLLClass.sdf</file>
+	<file>generated/shapes/Ev3CalibrateWhiteLLClass.sdf</file>
+	<file>generated/shapes/Ev3ClearEncoderClass.sdf</file>
+	<file>generated/shapes/Ev3DrawCircleClass.sdf</file>
+	<file>generated/shapes/Ev3DrawLineClass.sdf</file>
+	<file>generated/shapes/Ev3DrawPixelClass.sdf</file>
+	<file>generated/shapes/Ev3DrawRectClass.sdf</file>
+	<file>generated/shapes/Ev3EnginesBackwardClass.sdf</file>
+	<file>generated/shapes/Ev3EnginesForwardClass.sdf</file>
+	<file>generated/shapes/Ev3EnginesStopClass.sdf</file>
+	<file>generated/shapes/Ev3LedClass.sdf</file>
+	<file>generated/shapes/Ev3PlayToneClass.sdf</file>
+	<file>generated/shapes/Ev3ReadAllLLClass.sdf</file>
+	<file>generated/shapes/Ev3ReadAvrLLClass.sdf</file>
+	<file>generated/shapes/Ev3ReadRGBClass.sdf</file>
+	<file>generated/shapes/Ev3ReadSteeringLLClass.sdf</file>
+	<file>generated/shapes/Ev3SendMailClass.sdf</file>
+	<file>generated/shapes/Ev3SleepLLClass.sdf</file>
+	<file>generated/shapes/Ev3StartCompassCalibrationClass.sdf</file>
+	<file>generated/shapes/Ev3StopCompassCalibrationClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForButtonClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForColorClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForColorIntensityClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForEncoderClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForGyroscopeClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForLightClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForReceivingMailClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForSonarDistanceClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForSoundClass.sdf</file>
+	<file>generated/shapes/Ev3WaitForTouchSensorClass.sdf</file>
+	<file>generated/shapes/Ev3WakeUpLLClass.sdf</file>
+</qresource>
+</RCC>
