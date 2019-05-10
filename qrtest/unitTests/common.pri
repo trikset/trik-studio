@@ -23,12 +23,6 @@ QT += widgets
 
 SOURCES += $$PWD/mainTest.cpp
 
-if (equals(QMAKE_CXX, "g++") : !macx) {
-	QMAKE_LFLAGS += -Wl,-E
-	# For googletest
-#	QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
-}
-
 INCLUDEPATH += \
 	$$PWD/ \
 	$$PWD/../../ \
