@@ -4,297 +4,297 @@
 <context>
     <name>Ev3MetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
         <source>Inout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
         <source>Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
         <source>Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>white</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
         <source>bool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
         <source>int</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
         <source>string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="180"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
         <source>A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="180"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="180"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="180"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
         <source>norm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
         <source>x-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
         <source>y-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="188"/>
         <source>z-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
         <source>Concurrent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
         <source>Guarded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
         <source>Sequential</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
         <source>greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
         <source>less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
         <source>not greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
         <source>not less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="194"/>
         <source>Package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="194"/>
         <source>Private</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="194"/>
         <source>Protected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="194"/>
         <source>Public</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="192"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="204"/>
         <source>break</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="192"/>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="182"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="204"/>
         <source>float</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
         <source>Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="202"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="198"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>green flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>green pulse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>orange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>orange flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>orange pulse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>red flash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="200"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="196"/>
         <source>red pulse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="194"/>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="180"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
         <source>body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="194"/>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="208"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="180"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="190"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="204"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="192"/>
         <source>Composite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="204"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="192"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="204"/>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="192"/>
         <source>Shared</source>
         <translation type="unfinished"></translation>
     </message>
