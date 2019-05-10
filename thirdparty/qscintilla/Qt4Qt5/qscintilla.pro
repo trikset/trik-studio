@@ -25,8 +25,9 @@
 
 TARGET = qscintilla2
 
-include(../../../global.pri)
 TEMPLATE = lib
+
+include(../../../global.pri)
 
 CONFIG += qt warn_off thread
 

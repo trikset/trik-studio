@@ -14,10 +14,10 @@
 
 TARGET = robots-trik-v62-qts-generator
 
-include(../../../../../global.pri)
-
 TEMPLATE = lib
 CONFIG += plugin
+
+include(../../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

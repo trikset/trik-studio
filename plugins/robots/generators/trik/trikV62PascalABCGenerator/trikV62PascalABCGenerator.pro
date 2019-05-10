@@ -14,12 +14,12 @@
 
 TARGET = robots-trik-v62-pascal-abc-generator
 
+TEMPLATE = lib
+CONFIG += plugin
+
 include(../../../../../global.pri)
 
 QT += widgets network
-
-TEMPLATE = lib
-CONFIG += plugin
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

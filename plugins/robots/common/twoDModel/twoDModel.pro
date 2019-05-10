@@ -14,9 +14,9 @@
 
 TARGET = robots-2d-model
 
-include(../../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../../global.pri)
 
 include(twoDModel.pri)
 

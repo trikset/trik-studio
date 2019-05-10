@@ -14,9 +14,9 @@
 
 TARGET = qrgui-editor
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 links(qrkernel qslog qrutils \
 		qrgui-mouse-gestures qrgui-thirdparty qrgui-models qrgui-meta-meta-model \

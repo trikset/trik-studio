@@ -14,9 +14,9 @@
 
 TARGET = qrgui-controller
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 includes(qrgui)
 

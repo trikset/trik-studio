@@ -14,9 +14,9 @@
 
 TARGET = qrgui-mouse-gestures
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 links(qrkernel qslog qrutils)
 includes(qrgui qrgraph)

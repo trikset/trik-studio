@@ -14,9 +14,9 @@
 
 TARGET = qrgui-hotkey-manager
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 links(qrgui-preferences-dialog qrutils)
 includes(qrgui)

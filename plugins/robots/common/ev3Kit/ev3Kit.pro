@@ -14,8 +14,8 @@
 
 TARGET = robots-ev3-kit
 
-include(../../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../../global.pri)
 
 include(ev3Kit.pri)

@@ -14,9 +14,9 @@
 
 TARGET = qrgui-tool-plugin-interface
 
-include(../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../global.pri)
 
 links(qrkernel)
 includes(qrgui)

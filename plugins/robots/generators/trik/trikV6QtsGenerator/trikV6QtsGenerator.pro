@@ -14,12 +14,12 @@
 
 TARGET = robots-trik-v6-qts-generator
 
+TEMPLATE = lib
+CONFIG += plugin
+
 include(../../../../../global.pri)
 
 QT += widgets network
-
-TEMPLATE = lib
-CONFIG += plugin
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 
