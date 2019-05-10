@@ -44,6 +44,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 int main(int argc, char *argv[])
 {
 	qInstallMessageHandler(myMessageOutput);
+	qSetGlobalQHashSeed(0); // For XML attributes stable order
 	QCoreApplication app(argc, argv);
 	QStringList args = app.arguments();
 
