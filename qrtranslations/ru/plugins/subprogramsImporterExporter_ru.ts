@@ -41,33 +41,9 @@
         <source>WARNING: existing subprograms will be overwritten!</source>
         <translation>ПРЕДУПРЕЖДЕНИЕ: существующие подпрограммы будут перезаписаны!</translation>
     </message>
-    <message>
-        <source>WARNING: existed subprograms will be overwritten!</source>
-        <translation type="vanished">ОСТОРОЖНО: существующие подпрограммы будут перезаписаны!</translation>
-    </message>
 </context>
 <context>
     <name>subprogramsImporterExporter::SubprogramsImporterExporterPlugin</name>
-    <message>
-        <source>Subprograms collection</source>
-        <translation type="vanished">Коллекция подпрограмм</translation>
-    </message>
-    <message>
-        <source>Import subprograms to current project</source>
-        <translation type="vanished">Импортировать подпрограммы в текущий проект</translation>
-    </message>
-    <message>
-        <source>Export subprograms to file</source>
-        <translation type="vanished">Экспортировать подпрограммы в файл</translation>
-    </message>
-    <message>
-        <source>Save subprograms to collection</source>
-        <translation type="vanished">Сохранить подпрограммы в коллекцию</translation>
-    </message>
-    <message>
-        <source>Import subprograms from collection</source>
-        <translation type="vanished">Импортировать подпрограммы из коллекции</translation>
-    </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="37"/>
         <source>Subprograms</source>
@@ -82,10 +58,6 @@
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="41"/>
         <source>Export all to file...</source>
         <translation>Сохранить все в файл...</translation>
-    </message>
-    <message>
-        <source>Save to collection...</source>
-        <translation type="vanished">Сохранить в коллекцию...</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="42"/>
@@ -116,7 +88,7 @@
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="120"/>
         <source>There are no subprograms in your project.</source>
-        <translation type="unfinished"></translation>
+        <translation>В проекте нет подпрограмм.</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="188"/>
@@ -126,16 +98,12 @@
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="229"/>
         <source>There are no subprograms in your collection for %1 robot.</source>
-        <translation type="unfinished"></translation>
+        <translation>В коллекции нет подпрограмм для робота %1</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="142"/>
         <source>Select subprograms file</source>
         <translation>Выберите файл с подпрограммами</translation>
-    </message>
-    <message>
-        <source>There are not subprograms in your collection for %1 robot</source>
-        <translation type="vanished">Нет подпрограмм в коллекции для %1 робота</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="271"/>
