@@ -68,6 +68,7 @@ QList<qReal::ActionInfo> SubprogramsImporterExporterPlugin::actions()
 	mSecondSeparatorAction.setSeparator(true);
 	mMenu.addAction(&mExportAction);
 	mMenu.addAction(&mImportToProjectAction);
+	mMenu.addSeparator();
 	mMenu.addAction(&mSaveToCollection);
 	mMenu.addAction(&mImportFromCollection);
 	mMenu.addAction(&mClearCollection);
