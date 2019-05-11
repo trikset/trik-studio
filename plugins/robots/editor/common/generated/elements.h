@@ -948,7 +948,7 @@
 			setFriendlyName(QObject::tr("RobotsDiagramGroup"));
 			setDiagram("RobotsDiagram");
 			setDescription(QObject::tr(""));
-			setXml(QString::fromUtf8(" <group rootNode=\"diagram\" name=\"RobotsDiagramGroup\">\n  <groupNode yPosition=\"0\" xPosition=\"0\" name=\"diagram\" type=\"RobotsDiagramNode\"/>\n  <groupNode yPosition=\"300\" xPosition=\"50\" name=\"initialNode\" parent=\"diagram\" type=\"InitialNode\"/>\n </group>\n"));
+			setXml(QString::fromUtf8(" <group rootNode=\"diagram\" name=\"RobotsDiagramGroup\">\n  <groupNode type=\"RobotsDiagramNode\" name=\"diagram\" xPosition=\"0\" yPosition=\"0\"/>\n  <groupNode type=\"InitialNode\" parent=\"diagram\" name=\"initialNode\" xPosition=\"50\" yPosition=\"300\"/>\n </group>\n"));
 		}
 
 	};
@@ -1143,7 +1143,7 @@
 			setFriendlyName(QObject::tr("SubprogramDiagramGroup"));
 			setDiagram("RobotsDiagram");
 			setDescription(QObject::tr(""));
-			setXml(QString::fromUtf8(" <group rootNode=\"diagram\" name=\"SubprogramDiagramGroup\">\n  <groupNode yPosition=\"0\" xPosition=\"0\" name=\"diagram\" type=\"SubprogramDiagram\"/>\n  <groupNode yPosition=\"300\" xPosition=\"50\" name=\"initialNode\" parent=\"diagram\" type=\"InitialNode\"/>\n </group>\n"));
+			setXml(QString::fromUtf8(" <group rootNode=\"diagram\" name=\"SubprogramDiagramGroup\">\n  <groupNode type=\"SubprogramDiagram\" name=\"diagram\" xPosition=\"0\" yPosition=\"0\"/>\n  <groupNode type=\"InitialNode\" parent=\"diagram\" name=\"initialNode\" xPosition=\"50\" yPosition=\"300\"/>\n </group>\n"));
 		}
 
 	};
