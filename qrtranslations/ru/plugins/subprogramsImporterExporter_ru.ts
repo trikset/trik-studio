@@ -45,29 +45,49 @@
 <context>
     <name>subprogramsImporterExporter::SubprogramsImporterExporterPlugin</name>
     <message>
-        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="37"/>
         <source>Subprograms collection</source>
-        <translation>Коллекция подпрограмм</translation>
+        <translation type="vanished">Коллекция подпрограмм</translation>
+    </message>
+    <message>
+        <source>Import subprograms to current project</source>
+        <translation type="vanished">Импортировать подпрограммы в текущий проект</translation>
+    </message>
+    <message>
+        <source>Export subprograms to file</source>
+        <translation type="vanished">Экспортировать подпрограммы в файл</translation>
+    </message>
+    <message>
+        <source>Save subprograms to collection</source>
+        <translation type="vanished">Сохранить подпрограммы в коллекцию</translation>
+    </message>
+    <message>
+        <source>Import subprograms from collection</source>
+        <translation type="vanished">Импортировать подпрограммы из коллекции</translation>
+    </message>
+    <message>
+        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="37"/>
+        <source>Subprograms</source>
+        <translation>Подпрограммы</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="40"/>
-        <source>Import subprograms to current project</source>
-        <translation>Импортировать подпрограммы в текущий проект</translation>
+        <source>Import all from file...</source>
+        <translation>Загрузить все из файла...</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="41"/>
-        <source>Export subprograms to file</source>
-        <translation>Экспортировать подпрограммы в файл</translation>
+        <source>Export all to file...</source>
+        <translation>Сохранить все в файл...</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="42"/>
-        <source>Save subprograms to collection</source>
-        <translation>Сохранить подпрограммы в коллекцию</translation>
+        <source>Save to collection...</source>
+        <translation>Сохранить в коллекцию...</translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="43"/>
-        <source>Import subprograms from collection</source>
-        <translation>Импортировать подпрограммы из коллекции</translation>
+        <source>Загрузить из коллекции...</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="44"/>

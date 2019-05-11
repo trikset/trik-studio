@@ -34,13 +34,13 @@ const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
 using namespace subprogramsImporterExporter;
 
 SubprogramsImporterExporterPlugin::SubprogramsImporterExporterPlugin()
-	: mMenu(tr("Subprograms collection"))
+	: mMenu(tr("Subprograms"))
 	, mFirstSeparatorAction(nullptr)
 	, mSecondSeparatorAction(nullptr)
-	, mImportToProjectAction(tr("Import subprograms to current project"), &mMenu)
-	, mExportAction(tr("Export subprograms to file"), &mMenu)
-	, mSaveToCollection(tr("Save subprograms to collection"), &mMenu)
-	, mImportFromCollection(tr("Import subprograms from collection"), &mMenu)
+	, mImportToProjectAction(tr("Import all from file..."), &mMenu)
+	, mExportAction(tr("Export all to file..."), &mMenu)
+	, mSaveToCollection(tr("Import to collection..."), &mMenu)
+	, mImportFromCollection(tr("Export from collection..."), &mMenu)
 	, mClearCollection(tr("Clear collection"), &mMenu)
 	, mRepo(nullptr)
 	, mMainWindowInterpretersInterface(nullptr)
