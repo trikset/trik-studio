@@ -20,7 +20,7 @@ case $TRAVIS_OS_NAME in
 esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
-if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
+if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 
 
 $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
