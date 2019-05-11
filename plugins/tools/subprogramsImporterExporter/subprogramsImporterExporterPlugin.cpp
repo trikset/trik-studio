@@ -117,8 +117,8 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 
 	uniqueNames.remove("");
 	if (uniqueNames.isEmpty()) {
-		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are not subprograms"
-				" in your project"));
+		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are no subprograms"
+				" in your project."));
 		return;
 	}
 
@@ -226,8 +226,8 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 	QStringList currentlySavedSPs= currentlySavedSubprograms();
 	if (currentlySavedSPs.isEmpty()) {
 		QString kitId = mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString();
-		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are not subprograms"
-				" in your collection for %1 robot").arg(KIT_ID_TO_FRIENDLY_NAME.value(kitId, QString())));
+		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are no subprograms"
+				" in your collection for %1 robot.").arg(KIT_ID_TO_FRIENDLY_NAME.value(kitId, QString())));
 		return;
 	}
 
