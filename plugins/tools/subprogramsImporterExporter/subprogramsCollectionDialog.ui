@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>476</width>
+    <width>491</width>
     <height>481</height>
    </rect>
   </property>
@@ -63,7 +63,7 @@
       </font>
      </property>
      <property name="text">
-      <string>WARNING: existed subprograms will be overwritten!</string>
+      <string>WARNING: existing subprograms will be overwritten!</string>
      </property>
     </widget>
    </item>
