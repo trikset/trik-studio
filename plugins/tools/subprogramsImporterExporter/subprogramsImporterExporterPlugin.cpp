@@ -17,6 +17,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QEventLoop>
 #include <QtCore/QString>
+#include <QMessageBox>
 
 #include <algorithm>
 
@@ -34,14 +35,14 @@ const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
 using namespace subprogramsImporterExporter;
 
 SubprogramsImporterExporterPlugin::SubprogramsImporterExporterPlugin()
-	: mMenu(tr("Subprograms collection"))
+	: mMenu("&" + tr("Subprograms"))
 	, mFirstSeparatorAction(nullptr)
 	, mSecondSeparatorAction(nullptr)
-	, mImportToProjectAction(tr("Import subprograms to current project"), &mMenu)
-	, mExportAction(tr("Export subprograms to file"), &mMenu)
-	, mSaveToCollection(tr("Save subprograms to collection"), &mMenu)
-	, mImportFromCollection(tr("Import subprograms from collection"), &mMenu)
-	, mClearCollection(tr("Clear collection"), &mMenu)
+	, mImportToProjectAction("&" + tr("Import from file..."), &mMenu)
+	, mExportAction("&" + tr("Export to file..."), &mMenu)
+	, mSaveToCollection("&" + tr("Save to collection..."), &mMenu)
+	, mImportFromCollection("&" + tr("Load from collection"), &mMenu)
+	, mClearCollection("&" + tr("Clear collection"), &mMenu)
 	, mRepo(nullptr)
 	, mMainWindowInterpretersInterface(nullptr)
 	, mGraphicalModel(nullptr)
@@ -68,8 +69,10 @@ QList<qReal::ActionInfo> SubprogramsImporterExporterPlugin::actions()
 	mSecondSeparatorAction.setSeparator(true);
 	mMenu.addAction(&mExportAction);
 	mMenu.addAction(&mImportToProjectAction);
+	mMenu.addSeparator();
 	mMenu.addAction(&mSaveToCollection);
 	mMenu.addAction(&mImportFromCollection);
+	mMenu.addSeparator();
 	mMenu.addAction(&mClearCollection);
 	return { qReal::ActionInfo(&mFirstSeparatorAction, "", "tools")
 			, qReal::ActionInfo(&mMenu, "tools")
@@ -116,8 +119,8 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 
 	uniqueNames.remove("");
 	if (uniqueNames.isEmpty()) {
-		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are not subprograms"
-				" in your project"));
+		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are no subprograms"
+				" in your project."));
 		return;
 	}
 
@@ -225,8 +228,8 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 	QStringList currentlySavedSPs= currentlySavedSubprograms();
 	if (currentlySavedSPs.isEmpty()) {
 		QString kitId = mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString();
-		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are not subprograms"
-				" in your collection for %1 robot").arg(KIT_ID_TO_FRIENDLY_NAME.value(kitId, QString())));
+		mMainWindowInterpretersInterface->errorReporter()->addInformation(tr("There are no subprograms"
+				" in your collection for %1 robot.").arg(KIT_ID_TO_FRIENDLY_NAME.value(kitId, QString())));
 		return;
 	}
 
@@ -258,9 +261,15 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 void SubprogramsImporterExporterPlugin::clearCollectionTriggered() const
 {
-	const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY;
-	if (QDir(directoryPath).exists()) {
-		QDir(directoryPath).removeRecursively();
+	QDir dir = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY;
+	if (dir.exists()
+			&& QMessageBox::No != QMessageBox::warning(nullptr
+													   , tr("Clear the collection")
+													   , tr("Remove all subprograms for all kits from the collection?")
+													   , QMessageBox::Yes | QMessageBox::No
+													   , QMessageBox::No)
+			) {
+		dir.removeRecursively();
 	}
 }
 
