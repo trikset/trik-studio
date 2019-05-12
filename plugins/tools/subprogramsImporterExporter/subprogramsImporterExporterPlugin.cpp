@@ -35,14 +35,14 @@ const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
 using namespace subprogramsImporterExporter;
 
 SubprogramsImporterExporterPlugin::SubprogramsImporterExporterPlugin()
-	: mMenu(tr("&Subprograms"))
+	: mMenu("&" + tr("Subprograms"))
 	, mFirstSeparatorAction(nullptr)
 	, mSecondSeparatorAction(nullptr)
-	, mImportToProjectAction(tr("&Import from file..."), &mMenu)
-	, mExportAction(tr("&Export to file..."), &mMenu)
-	, mSaveToCollection(tr("&Save to the collection..."), &mMenu)
-	, mImportFromCollection(tr("&Load from the collection"), &mMenu)
-	, mClearCollection(tr("&Clear the collection"), &mMenu)
+	, mImportToProjectAction("&" + tr("Import from file..."), &mMenu)
+	, mExportAction("&" + tr("Export to file..."), &mMenu)
+	, mSaveToCollection("&" + tr("Save to collection..."), &mMenu)
+	, mImportFromCollection("&" + tr("Load from collection"), &mMenu)
+	, mClearCollection("&" + tr("Clear collection"), &mMenu)
 	, mRepo(nullptr)
 	, mMainWindowInterpretersInterface(nullptr)
 	, mGraphicalModel(nullptr)
@@ -264,7 +264,7 @@ void SubprogramsImporterExporterPlugin::clearCollectionTriggered() const
 	QDir dir = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY;
 	if (dir.exists()
 			&& QMessageBox::No != QMessageBox::warning(nullptr
-													   , tr("Clear collection")
+													   , tr("Clear the collection")
 													   , tr("Remove all subprograms for all kits from the collection?")
 													   , QMessageBox::Yes | QMessageBox::No
 													   , QMessageBox::No)
