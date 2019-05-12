@@ -14,12 +14,15 @@
 
 EDITOR_PATH = $$PWD/../$$QREAL_EDITOR_PATH
 
+# https://bugreports.qt.io/browse/QTBUG-47566
+# QT_NO_CPU_FEATURE=sse4.2 and QT_HASH_SEED=0 as an attempt ot get predictable qHash
+
 win32 {
-	QRXC_COMMAND = cd $$EDITOR_PATH && $$QRXC
+	QRXC_COMMAND = cd $$EDITOR_PATH && set QT_NO_CPU_FEATURE=sse4.2 && set QT_HASH_SEED=0 && $$QRXC
 } else:!macx {
-	QRXC_COMMAND = export LD_LIBRARY_PATH=$$QRXC_DIR && cd $$EDITOR_PATH && $$QRXC
+	QRXC_COMMAND = cd $$EDITOR_PATH && env LD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
 } else {
-	QRXC_COMMAND = export DYLD_LIBRARY_PATH=$$QRXC_DIR && cd $$EDITOR_PATH && $$QRXC
+	QRXC_COMMAND = cd $$EDITOR_PATH && env DYLD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
 }
 
 qrxc_source.commands = $$QRXC_COMMAND $$QREAL_XML $$ROOT

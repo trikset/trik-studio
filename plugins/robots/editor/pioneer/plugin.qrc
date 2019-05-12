@@ -1,0 +1,15 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>generated/shapes/GeoLandingClass.sdf</file>
+	<file>generated/shapes/GeoTakeoffClass.sdf</file>
+	<file>generated/shapes/GoToGPSPointClass.sdf</file>
+	<file>generated/shapes/GoToPointClass.sdf</file>
+	<file>generated/shapes/PioneerGetLPSPositionClass.sdf</file>
+	<file>generated/shapes/PioneerLedClass.sdf</file>
+	<file>generated/shapes/PioneerMagnetClass.sdf</file>
+	<file>generated/shapes/PioneerPrintClass.sdf</file>
+	<file>generated/shapes/PioneerReadRangeSensorClass.sdf</file>
+	<file>generated/shapes/PioneerSystemClass.sdf</file>
+	<file>generated/shapes/PioneerYawClass.sdf</file>
+</qresource>
+</RCC>

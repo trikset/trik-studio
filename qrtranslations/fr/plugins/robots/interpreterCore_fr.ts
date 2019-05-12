@@ -309,12 +309,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="294"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="295"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="389"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="390"/>
         <source>Toggle robot console panel</source>
         <translation type="unfinished"></translation>
     </message>
