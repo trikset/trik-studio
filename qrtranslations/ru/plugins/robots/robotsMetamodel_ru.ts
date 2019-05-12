@@ -21,11 +21,11 @@
     </message>
     <message>
         <source>Wait for Completion:</source>
-        <translation>Ждать завершения:</translation>
+        <translation type="vanished">Ждать завершения:</translation>
     </message>
     <message>
         <source>Ports:</source>
-        <translation>Порты:</translation>
+        <translation type="vanished">Порты:</translation>
     </message>
     <message>
         <source>X: </source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Port:</source>
-        <translation>Порт:</translation>
+        <translation type="vanished">Порт:</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -117,15 +117,15 @@
     </message>
     <message>
         <source>Intensity:</source>
-        <translation>Интенсивность:</translation>
+        <translation type="vanished">Интенсивность:</translation>
     </message>
     <message>
         <source>Sign:</source>
-        <translation>Считанное значение:</translation>
+        <translation type="vanished">Считанное значение:</translation>
     </message>
     <message>
         <source>Tacho Limit:</source>
-        <translation>Предел оборотов:</translation>
+        <translation type="vanished">Предел оборотов:</translation>
     </message>
     <message>
         <source>Wait for Escape</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Percents:</source>
-        <translation>Проценты:</translation>
+        <translation type="vanished">Проценты:</translation>
     </message>
     <message>
         <source>Distance (cm):</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Volume:</source>
-        <translation>Громкость:</translation>
+        <translation type="vanished">Громкость:</translation>
     </message>
     <message>
         <source>Expression:</source>
@@ -169,11 +169,11 @@
     </message>
     <message>
         <source>Initialize Videocamera</source>
-        <translation>Включить видеокамеру</translation>
+        <translation type="vanished">Включить видеокамеру</translation>
     </message>
     <message>
         <source>Line Detector into Variable</source>
-        <translation>Датчик линии в переменную</translation>
+        <translation type="vanished">Датчик линии в переменную</translation>
     </message>
     <message>
         <source>Variable:</source>
@@ -181,7 +181,7 @@
     </message>
     <message>
         <source>File name:</source>
-        <translation>Имя файла:</translation>
+        <translation type="vanished">Имя файла:</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -193,19 +193,19 @@
     </message>
     <message>
         <source>Hull number:</source>
-        <translation>Бортномер:</translation>
+        <translation type="vanished">Бортномер:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Ширина:</translation>
+        <translation type="vanished">Ширина:</translation>
     </message>
     <message>
         <source>Command:</source>
-        <translation>Команда:</translation>
+        <translation type="vanished">Команда:</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation>Ускорение:</translation>
+        <translation type="vanished">Ускорение:</translation>
     </message>
     <message>
         <source>Acceleration Axis:</source>
@@ -221,11 +221,11 @@
     </message>
     <message>
         <source>Degrees/sec:</source>
-        <translation>Градусы/сек:</translation>
+        <translation type="vanished">Градусы/сек:</translation>
     </message>
     <message>
         <source>Distance:</source>
-        <translation>Расстояние:</translation>
+        <translation type="vanished">Расстояние:</translation>
     </message>
     <message>
         <source>Wait for Left</source>
@@ -245,11 +245,11 @@
     </message>
     <message>
         <source>Mode</source>
-        <translation>Режим</translation>
+        <translation type="vanished">Режим</translation>
     </message>
     <message>
         <source>Detect by Videocamera</source>
-        <translation>Детектировать по камере</translation>
+        <translation type="vanished">Детектировать по камере</translation>
     </message>
     <message>
         <source>Detector into Variable</source>
@@ -257,7 +257,7 @@
     </message>
     <message>
         <source>F1</source>
-        <translation>F1</translation>
+        <translation type="vanished">F1</translation>
     </message>
     <message>
         <source>Wait for Up</source>
@@ -265,11 +265,11 @@
     </message>
     <message>
         <source>Wait gamepad button</source>
-        <translation>Ждать кнопки на пульте</translation>
+        <translation type="vanished">Ждать кнопки на пульте</translation>
     </message>
     <message>
         <source>Button:</source>
-        <translation>Кнопка:</translation>
+        <translation type="vanished">Кнопка:</translation>
     </message>
     <message>
         <source>X:</source>
@@ -281,51 +281,51 @@
     </message>
     <message>
         <source>Radius:</source>
-        <translation>Радиус:</translation>
+        <translation type="vanished">Радиус:</translation>
     </message>
     <message>
         <source>Filled:</source>
-        <translation>Заполнен:</translation>
+        <translation type="vanished">Заполнен:</translation>
     </message>
     <message>
         <source>X1:</source>
-        <translation>X1:</translation>
+        <translation type="vanished">X1:</translation>
     </message>
     <message>
         <source>Y1:</source>
-        <translation>Y1:</translation>
+        <translation type="vanished">Y1:</translation>
     </message>
     <message>
         <source>X2:</source>
-        <translation>X2:</translation>
+        <translation type="vanished">X2:</translation>
     </message>
     <message>
         <source>Y2:</source>
-        <translation>Y2:</translation>
+        <translation type="vanished">Y2:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation type="vanished">Высота:</translation>
     </message>
     <message>
         <source>Power:</source>
-        <translation>Мощность:</translation>
+        <translation type="vanished">Мощность:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation>Частота</translation>
+        <translation type="vanished">Частота</translation>
     </message>
     <message>
         <source>Hz</source>
-        <translation>Гц</translation>
+        <translation type="vanished">Гц</translation>
     </message>
     <message>
         <source>%</source>
-        <translation>%</translation>
+        <translation type="vanished">%</translation>
     </message>
     <message>
         <source>Duration</source>
-        <translation>Длительность</translation>
+        <translation type="vanished">Длительность</translation>
     </message>
     <message>
         <source>ms</source>
@@ -333,7 +333,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
         <source>Wait:</source>
@@ -361,59 +361,59 @@
     </message>
     <message>
         <source>°</source>
-        <translation>°</translation>
+        <translation type="vanished">°</translation>
     </message>
     <message>
         <source>Mode:</source>
-        <translation>Режим:</translation>
+        <translation type="vanished">Режим:</translation>
     </message>
     <message>
         <source>Start Angle:</source>
-        <translation>Начальный угол:</translation>
+        <translation type="vanished">Начальный угол:</translation>
     </message>
     <message>
         <source>Span Angle:</source>
-        <translation>Размах:</translation>
+        <translation type="vanished">Размах:</translation>
     </message>
     <message>
         <source>Enable Video Streaming</source>
-        <translation>Запустить видеотрансляцию</translation>
+        <translation type="vanished">Запустить видеотрансляцию</translation>
     </message>
     <message>
         <source>File:</source>
-        <translation>Файл:</translation>
+        <translation type="vanished">Файл:</translation>
     </message>
     <message>
         <source>Axis:</source>
-        <translation>Ось:</translation>
+        <translation type="vanished">Ось:</translation>
     </message>
     <message>
         <source>Wait for Gamepad Connect</source>
-        <translation>Ждать подключения пульта</translation>
+        <translation type="vanished">Ждать подключения пульта</translation>
     </message>
     <message>
         <source>Wait for Gamepad Disconnect</source>
-        <translation>Ждать отключения пульта</translation>
+        <translation type="vanished">Ждать отключения пульта</translation>
     </message>
     <message>
         <source>Wait for Gamepad Wheel</source>
-        <translation>Ждать &quot;руля&quot; на пульте</translation>
+        <translation type="vanished">Ждать &quot;руля&quot; на пульте</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation>Угол:</translation>
+        <translation type="vanished">Угол:</translation>
     </message>
     <message>
         <source>Frequency:</source>
-        <translation>Частота:</translation>
+        <translation type="vanished">Частота:</translation>
     </message>
     <message>
         <source>Wait pad press</source>
-        <translation>Ждать нажатия пульта</translation>
+        <translation type="vanished">Ждать нажатия пульта</translation>
     </message>
     <message>
         <source>Pad:</source>
-        <translation>Пульт:</translation>
+        <translation type="vanished">Пульт:</translation>
     </message>
     <message>
         <source>Value:</source>
@@ -469,55 +469,55 @@
     </message>
     <message>
         <source>Beep</source>
-        <translation>Гудок</translation>
+        <translation type="vanished">Гудок</translation>
     </message>
     <message>
         <source>Plays on the robot a sound with the fixed frequency. There are two parameters. The first one is a loudness of the sound, the second means if program should wait for sound completion or go to next block right away.</source>
-        <translation>Проиграть на роботе звук с фиксированной частотой. Имеется два параметра. Первый - это громкость звука, второй означает ждать ли завершения проигрывания звука или сразу же перейти к следующему блоку. Допустимые значения — истина и ложь.</translation>
+        <translation type="vanished">Проиграть на роботе звук с фиксированной частотой. Имеется два параметра. Первый - это громкость звука, второй означает ждать ли завершения проигрывания звука или сразу же перейти к следующему блоку. Допустимые значения — истина и ложь.</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation>Громкость</translation>
+        <translation type="vanished">Громкость</translation>
     </message>
     <message>
         <source>Wait for Completion</source>
-        <translation>Ждать завершения</translation>
+        <translation type="vanished">Ждать завершения</translation>
     </message>
     <message>
         <source>50</source>
-        <translation>50</translation>
+        <translation type="vanished">50</translation>
     </message>
     <message>
         <source>Clear Encoder</source>
-        <translation>Сбросить показания энкодера</translation>
+        <translation type="vanished">Сбросить показания энкодера</translation>
     </message>
     <message>
         <source>Nullifies tacho limit of the motors on the given ports.</source>
-        <translation>Сбросить показания количества оборотов моторов по заданным портам.</translation>
+        <translation type="vanished">Сбросить показания количества оборотов моторов по заданным портам.</translation>
     </message>
     <message>
         <source>Ports</source>
-        <translation>Порты</translation>
+        <translation type="vanished">Порты</translation>
     </message>
     <message>
         <source>A, B, C, D</source>
-        <translation>A, B, C, D</translation>
+        <translation type="vanished">A, B, C, D</translation>
     </message>
     <message>
         <source>Draw Circle</source>
-        <translation>Нарисовать круг</translation>
+        <translation type="vanished">Нарисовать круг</translation>
     </message>
     <message>
         <source>Draws on the robot screen a circle with the given center and radius.</source>
-        <translation>Нарисовать на экране круг с заданным центром и заданным радиусом.</translation>
+        <translation type="vanished">Нарисовать на экране круг с заданным центром и заданным радиусом.</translation>
     </message>
     <message>
         <source>Radius</source>
-        <translation>Радиус</translation>
+        <translation type="vanished">Радиус</translation>
     </message>
     <message>
         <source>Filled</source>
-        <translation>Заполнен</translation>
+        <translation type="vanished">Заполнен</translation>
     </message>
     <message>
         <source>X</source>
@@ -529,63 +529,63 @@
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Нарисовать линию</translation>
+        <translation type="vanished">Нарисовать линию</translation>
     </message>
     <message>
         <source>Draws a segment on the robot screen. The parameters specify the ends of the segment.</source>
-        <translation>Нарисовать на экране отрезок. В качестве параметров блоку указываются концы отрезка.</translation>
+        <translation type="vanished">Нарисовать на экране отрезок. В качестве параметров блоку указываются концы отрезка.</translation>
     </message>
     <message>
         <source>X1</source>
-        <translation>X1</translation>
+        <translation type="vanished">X1</translation>
     </message>
     <message>
         <source>X2</source>
-        <translation>X2</translation>
+        <translation type="vanished">X2</translation>
     </message>
     <message>
         <source>Y1</source>
-        <translation>Y1</translation>
+        <translation type="vanished">Y1</translation>
     </message>
     <message>
         <source>Y2</source>
-        <translation>Y2</translation>
+        <translation type="vanished">Y2</translation>
     </message>
     <message>
         <source>Draw Pixel</source>
-        <translation>Нарисовать точку</translation>
+        <translation type="vanished">Нарисовать точку</translation>
     </message>
     <message>
         <source>Draws one pixel in the specified coordinates on the robot screen.</source>
-        <translation>Нарисовать на экране точку в указанных координатах.</translation>
+        <translation type="vanished">Нарисовать на экране точку в указанных координатах.</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Нарисовать прямоугольник</translation>
+        <translation type="vanished">Нарисовать прямоугольник</translation>
     </message>
     <message>
         <source>Draws a rectangle on the robot screen. The parameters specify the coordinates of top-left corner, the width and the height of the rectangle.</source>
-        <translation>Нарисовать на экране прямоугольник. В качестве параметров указываются координаты левого верхнего угла, ширина и высота прямоугольника.</translation>
+        <translation type="vanished">Нарисовать на экране прямоугольник. В качестве параметров указываются координаты левого верхнего угла, ширина и высота прямоугольника.</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Высота</translation>
+        <translation type="vanished">Высота</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation type="vanished">Ширина</translation>
     </message>
     <message>
         <source>Ev3EngineMovementCommand</source>
-        <translation>Базовый блок моторов EV3</translation>
+        <translation type="vanished">Базовый блок моторов EV3</translation>
     </message>
     <message>
         <source>Motors Backward</source>
-        <translation>Моторы назад</translation>
+        <translation type="vanished">Моторы назад</translation>
     </message>
     <message>
         <source>Enables motors on the given ports in reverse mode with the given power. Ports are specified with A, B or C letters divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.</source>
-        <translation>Включить моторы в режиме реверса по заданным портам с заданной мощностью. Порты задаются буквами A, B или C, разделенными запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в обычном режиме.</translation>
+        <translation type="vanished">Включить моторы в режиме реверса по заданным портам с заданной мощностью. Порты задаются буквами A, B или C, разделенными запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в обычном режиме.</translation>
     </message>
     <message>
         <source>Power (%)</source>
@@ -593,7 +593,7 @@
     </message>
     <message>
         <source>B, C</source>
-        <translation>B, C</translation>
+        <translation type="vanished">B, C</translation>
     </message>
     <message>
         <source>100</source>
@@ -601,27 +601,27 @@
     </message>
     <message>
         <source>Motors Forward</source>
-        <translation>Моторы вперёд</translation>
+        <translation type="vanished">Моторы вперёд</translation>
     </message>
     <message>
         <source>Enables motors on the given ports with the given power. Ports are specified with A, B or C letters divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.</source>
-        <translation>Включить моторы по заданным портам с заданной мощностью. Порты задаются буквами A, B или C, разделенными запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в режиме реверса.</translation>
+        <translation type="vanished">Включить моторы по заданным портам с заданной мощностью. Порты задаются буквами A, B или C, разделенными запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в режиме реверса.</translation>
     </message>
     <message>
         <source>Stop Motors</source>
-        <translation>Моторы стоп</translation>
+        <translation type="vanished">Моторы стоп</translation>
     </message>
     <message>
         <source>Disables motors on the given ports.</source>
-        <translation>Выключить моторы по заданным портам.</translation>
+        <translation type="vanished">Выключить моторы по заданным портам.</translation>
     </message>
     <message>
         <source>Led</source>
-        <translation>Светодиод</translation>
+        <translation type="vanished">Светодиод</translation>
     </message>
     <message>
         <source>Sets the color of the LED on the robot`s front panel.</source>
-        <translation>Установить цвет светодиода на передней панели робота.</translation>
+        <translation type="vanished">Установить цвет светодиода на передней панели робота.</translation>
     </message>
     <message>
         <source>Color</source>
@@ -629,11 +629,11 @@
     </message>
     <message>
         <source>Play Tone</source>
-        <translation>Играть звук</translation>
+        <translation type="vanished">Играть звук</translation>
     </message>
     <message>
         <source>Plays on the robot a sound with the given frequency and duration. This block is similar to the &apos;Beep&apos; block wuth the only difference that here you can specify sound parameters.</source>
-        <translation>Проиграть на роботе звук с заданной частотой и длительностью. Аналогичен блоку &apos;Гудок&apos;, но позволяет задавать параметры звука. Имеется параметр, определяющий, ждать ли завершения проигрывания звука или сразу же перейти к следующему блоку.</translation>
+        <translation type="vanished">Проиграть на роботе звук с заданной частотой и длительностью. Аналогичен блоку &apos;Гудок&apos;, но позволяет задавать параметры звука. Имеется параметр, определяющий, ждать ли завершения проигрывания звука или сразу же перейти к следующему блоку.</translation>
     </message>
     <message>
         <source>1000</source>
@@ -641,47 +641,47 @@
     </message>
     <message>
         <source>Ev3SensorBlock</source>
-        <translation>Базовый сенсорный блок EV3</translation>
+        <translation type="vanished">Базовый сенсорный блок EV3</translation>
     </message>
     <message>
         <source>Wait for button</source>
-        <translation>Ждать нажатия кнопки</translation>
+        <translation type="vanished">Ждать нажатия кнопки</translation>
     </message>
     <message>
         <source>Waits for press of a button on a brick.</source>
-        <translation>Ждать нажатия на кнопку на корпусе робота.</translation>
+        <translation type="vanished">Ждать нажатия на кнопку на корпусе робота.</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation>Кнопка</translation>
+        <translation type="vanished">Кнопка</translation>
     </message>
     <message>
         <source>Wait for Color</source>
-        <translation>Ждать цвет</translation>
+        <translation type="vanished">Ждать цвет</translation>
     </message>
     <message>
         <source>Waits till the color sensor on the given port will recognize the given color.</source>
-        <translation>Ждать, пока датчик цвета в режиме распознавания цветов не вернет указанный цвет.</translation>
+        <translation type="vanished">Ждать, пока датчик цвета в режиме распознавания цветов не вернет указанный цвет.</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation>Порт</translation>
+        <translation type="vanished">Порт</translation>
     </message>
     <message>
         <source>Wait for Color Intensity</source>
-        <translation>Ждать интенсивность цвета</translation>
+        <translation type="vanished">Ждать интенсивность цвета</translation>
     </message>
     <message>
         <source>Waits till the value returned by the color sensor on the given port will be greater or less than the given in the &apos;Intensity&apos; parameter value (the intensity is specified in percents, 0 to 100).</source>
-        <translation>Ждать, пока значение, возвращаемое датчиком цвета на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Интенсивность&apos; (задается в процентах). Еще один парамер — номер порта, к которому подключен датчик цвета. Также параметром указывается операция, которая будет использоваться для сравнения с введенной интенсивностью.</translation>
+        <translation type="vanished">Ждать, пока значение, возвращаемое датчиком цвета на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Интенсивность&apos; (задается в процентах). Еще один парамер — номер порта, к которому подключен датчик цвета. Также параметром указывается операция, которая будет использоваться для сравнения с введенной интенсивностью.</translation>
     </message>
     <message>
         <source>Intensity</source>
-        <translation>Интенсивность</translation>
+        <translation type="vanished">Интенсивность</translation>
     </message>
     <message>
         <source>Sign</source>
-        <translation>Считанное значение</translation>
+        <translation type="vanished">Считанное значение</translation>
     </message>
     <message>
         <source>0</source>
@@ -689,55 +689,55 @@
     </message>
     <message>
         <source>Wait for Encoder</source>
-        <translation>Ждать энкодер</translation>
+        <translation type="vanished">Ждать энкодер</translation>
     </message>
     <message>
         <source>Waits till the tacho limit of the motor on the given port will reach the value of the &apos;Tacho Limit&apos; parameter.</source>
-        <translation>Ждать, пока показания счетчика количества оборотов на заданном моторе не достинут указанного в значении параметра &apos;Предел оборотов&apos;.</translation>
+        <translation type="vanished">Ждать, пока показания счетчика количества оборотов на заданном моторе не достинут указанного в значении параметра &apos;Предел оборотов&apos;.</translation>
     </message>
     <message>
         <source>Tacho Limit</source>
-        <translation>Предел оборотов</translation>
+        <translation type="vanished">Предел оборотов</translation>
     </message>
     <message>
         <source>Wait for Light</source>
-        <translation>Ждать свет</translation>
+        <translation type="vanished">Ждать свет</translation>
     </message>
     <message>
         <source>Waits till the value returned by the light sensor on the given port will be greater or less than the given in the &apos;Percents&apos; parameter value (0 to 100).</source>
-        <translation>Ждать, пока значение, возвращаемое датчиком света на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Проценты&apos;. Еще один парамер — номер порта, к которому подключен датчик цвета. Также параметром указывается операция, которая будет использоваться для сравнения со значением параметра &apos;Проценты&apos;.</translation>
+        <translation type="vanished">Ждать, пока значение, возвращаемое датчиком света на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Проценты&apos;. Еще один парамер — номер порта, к которому подключен датчик цвета. Также параметром указывается операция, которая будет использоваться для сравнения со значением параметра &apos;Проценты&apos;.</translation>
     </message>
     <message>
         <source>Percents</source>
-        <translation>Проценты</translation>
+        <translation type="vanished">Проценты</translation>
     </message>
     <message>
         <source>Wait for Range Sensor</source>
-        <translation>Ждать сенсор расстояния</translation>
+        <translation type="vanished">Ждать сенсор расстояния</translation>
     </message>
     <message>
         <source>Waits till the value returned by the ultrasonic or infrared range sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, 0 to 255).</source>
-        <translation>Ждать, пока расстояние, возвращаемое ультразвуковым или инфракрасным датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 255). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
+        <translation type="vanished">Ждать, пока расстояние, возвращаемое ультразвуковым или инфракрасным датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 255). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation>Расстояние</translation>
+        <translation type="vanished">Расстояние</translation>
     </message>
     <message>
         <source>Wait for Sound Sensor</source>
-        <translation>Ждать датчик звука</translation>
+        <translation type="vanished">Ждать датчик звука</translation>
     </message>
     <message>
         <source>Waits till the loudness obtained by the sound sensor on the given port will be greater or less than the given value.</source>
-        <translation>Ждать, пока громкость, считанная микрофоном на заданном порту, не будет выше или ниже заданного значения.</translation>
+        <translation type="vanished">Ждать, пока громкость, считанная микрофоном на заданном порту, не будет выше или ниже заданного значения.</translation>
     </message>
     <message>
         <source>Wait for Touch Sensor</source>
-        <translation>Ждать датчик касания</translation>
+        <translation type="vanished">Ждать датчик касания</translation>
     </message>
     <message>
         <source>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (1, 2, 3 or 4).</source>
-        <translation>Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
+        <translation type="vanished">Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
         <source>End if</source>
@@ -773,7 +773,7 @@
     </message>
     <message>
         <source>Body</source>
-        <translation>Тело функции</translation>
+        <translation type="vanished">Тело функции</translation>
     </message>
     <message>
         <source>Get Button Code</source>
@@ -873,31 +873,31 @@
     </message>
     <message>
         <source>A, B, C</source>
-        <translation>A, B, C</translation>
+        <translation type="vanished">A, B, C</translation>
     </message>
     <message>
         <source>NxtEngineMovementCommand</source>
-        <translation>Базовый блок моторов NXT</translation>
+        <translation type="vanished">Базовый блок моторов NXT</translation>
     </message>
     <message>
         <source>NxtSensorBlock</source>
-        <translation>Базовый сенсорный блок NXT</translation>
+        <translation type="vanished">Базовый сенсорный блок NXT</translation>
     </message>
     <message>
         <source>Wait for Button</source>
-        <translation>Ждать нажатия кнопки</translation>
+        <translation type="vanished">Ждать нажатия кнопки</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="vanished">B</translation>
     </message>
     <message>
         <source>Wait for Sonar Distance</source>
-        <translation>Ждать сонар</translation>
+        <translation type="vanished">Ждать сонар</translation>
     </message>
     <message>
         <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, 0 to 255).</source>
-        <translation>Ждать, пока расстояние, возвращаемое ультразвуковым датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 255). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
+        <translation type="vanished">Ждать, пока расстояние, возвращаемое ультразвуковым датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 255). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
     </message>
     <message>
         <source>Print Text</source>
@@ -961,7 +961,7 @@
     </message>
     <message>
         <source>Devices configuration</source>
-        <translation>Конфигурация устройств</translation>
+        <translation type="vanished">Конфигурация устройств</translation>
     </message>
     <message>
         <source>Send Message To Thread</source>
@@ -973,7 +973,7 @@
     </message>
     <message>
         <source>Message</source>
-        <translation>Сообщение</translation>
+        <translation type="vanished">Сообщение</translation>
     </message>
     <message>
         <source>Subprogram</source>
@@ -1017,323 +1017,323 @@
     </message>
     <message>
         <source>TrikAnalogSensorBlock</source>
-        <translation>Базовый блок аналоговых сенсоров TRIK</translation>
+        <translation type="vanished">Базовый блок аналоговых сенсоров TRIK</translation>
     </message>
     <message>
         <source>Angular Servo</source>
-        <translation>Угловой сервомотор</translation>
+        <translation type="vanished">Угловой сервомотор</translation>
     </message>
     <message>
         <source>Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.</source>
-        <translation>Управление угловым сервомотором. Устанавливает угол поворота вала мотора на данном порту (в градусах). Значения от 0 до 90 соотвествуют повороту по часовой, значения от -90 до 0 --- повороту против часовой.</translation>
+        <translation type="vanished">Управление угловым сервомотором. Устанавливает угол поворота вала мотора на данном порту (в градусах). Значения от 0 до 90 соотвествуют повороту по часовой, значения от -90 до 0 --- повороту против часовой.</translation>
     </message>
     <message>
         <source>Angle (degrees)</source>
-        <translation>Угол (в градусах)</translation>
+        <translation type="vanished">Угол (в градусах)</translation>
     </message>
     <message>
         <source>E1</source>
-        <translation>E1</translation>
+        <translation type="vanished">E1</translation>
     </message>
     <message>
         <source>Initializes videocamera line or object detector with the color of the object in the middle of the camera`s sight.</source>
-        <translation>Инициализировать датчик линии или объектов по видеокамере цветом объекта в центре поля зрения камеры.</translation>
+        <translation type="vanished">Инициализировать датчик линии или объектов по видеокамере цветом объекта в центре поля зрения камеры.</translation>
     </message>
     <message>
         <source>Stores videocamera line detector`s value into a given variable.</source>
-        <translation>Сохранить текущее значение датчика линии по видеокамере в заданную переменную.</translation>
+        <translation type="vanished">Сохранить текущее значение датчика линии по видеокамере в заданную переменную.</translation>
     </message>
     <message>
         <source>err</source>
-        <translation>err</translation>
+        <translation type="vanished">err</translation>
     </message>
     <message>
         <source>TrikDigitalSensorBlock</source>
-        <translation>Базовый блок цифровых сенсоров TRIK</translation>
+        <translation type="vanished">Базовый блок цифровых сенсоров TRIK</translation>
     </message>
     <message>
         <source>Draw Arc</source>
-        <translation>Нарисовать дугу</translation>
+        <translation type="vanished">Нарисовать дугу</translation>
     </message>
     <message>
         <source>Draws the arc defined by the rectangle beginning at (x, y) with the specified width and height, and the given startAngle and spanAngle.</source>
-        <translation>Рисует на экране дугу, ограниченную прямоугольником с началом в (x, y) и заданными шириной и высотой, также задаётся начальный и конечный угол дуги.</translation>
+        <translation type="vanished">Рисует на экране дугу, ограниченную прямоугольником с началом в (x, y) и заданными шириной и высотой, также задаётся начальный и конечный угол дуги.</translation>
     </message>
     <message>
         <source>SpanAngle</source>
-        <translation>Размах</translation>
+        <translation type="vanished">Размах</translation>
     </message>
     <message>
         <source>StartAngle</source>
-        <translation>Начальный угол</translation>
+        <translation type="vanished">Начальный угол</translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation type="vanished">5</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Нарисовать эллипс</translation>
+        <translation type="vanished">Нарисовать эллипс</translation>
     </message>
     <message>
         <source>Draws the ellipse defined by the rectangle beginning at (x, y) with the given width and height.</source>
-        <translation>Рисует на экране эллипс, ограниченный прямоугольником с началом в (x, y) и заданными шириной и высотой.</translation>
+        <translation type="vanished">Рисует на экране эллипс, ограниченный прямоугольником с началом в (x, y) и заданными шириной и высотой.</translation>
     </message>
     <message>
         <source>Enables line or object or color detector by videocamera and draws videostream on the robot`s screen.</source>
-        <translation>Включить датчик линии или объекта или цвета по видеокамере, вывести на экран картинку.</translation>
+        <translation type="vanished">Включить датчик линии или объекта или цвета по видеокамере, вывести на экран картинку.</translation>
     </message>
     <message>
         <source>Enables video stream on robot. Video then can be watched on TRIK gamepad or in browser using URL http://ROBOT.IP.ADDRESS:8080/?action=stream</source>
-        <translation>Включает видео-трансляцию на роботе. Видео может быть просмотрено, например, на пульте управления ТРИК или в браузере по адресу http://IP.АДРЕС.РОБОТА:8080/?action=stream</translation>
+        <translation type="vanished">Включает видео-трансляцию на роботе. Видео может быть просмотрено, например, на пульте управления ТРИК или в браузере по адресу http://IP.АДРЕС.РОБОТА:8080/?action=stream</translation>
     </message>
     <message>
         <source>Plays on the robot a sound file (.wav or .mp3) previously uploaded to it.</source>
-        <translation>Проигрывает на роботе указанный звуковой файл (в формате .wav или .mp3), который должен быть на него предварительно загружен.</translation>
+        <translation type="vanished">Проигрывает на роботе указанный звуковой файл (в формате .wav или .mp3), который должен быть на него предварительно загружен.</translation>
     </message>
     <message>
         <source>File Name</source>
-        <translation>Имя файла</translation>
+        <translation type="vanished">Имя файла</translation>
     </message>
     <message>
         <source>media/beep.wav</source>
-        <translation>media/beep.wav</translation>
+        <translation type="vanished">media/beep.wav</translation>
     </message>
     <message>
         <source>Remove File</source>
-        <translation>Удалить файл</translation>
+        <translation type="vanished">Удалить файл</translation>
     </message>
     <message>
         <source>Removes a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation>Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation type="vanished">Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="vanished">Файл</translation>
     </message>
     <message>
         <source>output.txt</source>
-        <translation>output.txt</translation>
+        <translation type="vanished">output.txt</translation>
     </message>
     <message>
         <source>Sad Smile</source>
-        <translation>Грустный смайлик</translation>
+        <translation type="vanished">Грустный смайлик</translation>
     </message>
     <message>
         <source>Draws a sad smile on the robot`s screen :(</source>
-        <translation>Рисует на экране грустный смайлик :(</translation>
+        <translation type="vanished">Рисует на экране грустный смайлик :(</translation>
     </message>
     <message>
         <source>Say</source>
-        <translation>Сказать</translation>
+        <translation type="vanished">Сказать</translation>
     </message>
     <message>
         <source>Synthesizes the given phrase and plays it on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Text&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
-        <translation>Воспроизводит заданную фразу на роботе. Если свойство &amp;quot;Вычислять&amp;quot; имеет значение &amp;quot;Истина&amp;quot;, значение свойства &amp;quot;Текст&amp;quot; будет вычислено как формула, иначе оно воспроизводится как есть.</translation>
+        <translation type="vanished">Воспроизводит заданную фразу на роботе. Если свойство &amp;quot;Вычислять&amp;quot; имеет значение &amp;quot;Истина&amp;quot;, значение свойства &amp;quot;Текст&amp;quot; будет вычислено как формула, иначе оно воспроизводится как есть.</translation>
     </message>
     <message>
         <source>Hi!</source>
-        <translation>Привет!</translation>
+        <translation type="vanished">Привет!</translation>
     </message>
     <message>
         <source>Send message</source>
-        <translation>Послать сообщение</translation>
+        <translation type="vanished">Послать сообщение</translation>
     </message>
     <message>
         <source>Sends message to another robot.</source>
-        <translation>Посылает сообщение на другого робота.</translation>
+        <translation type="vanished">Посылает сообщение на другого робота.</translation>
     </message>
     <message>
         <source>Hull Number</source>
-        <translation>Бортномер</translation>
+        <translation type="vanished">Бортномер</translation>
     </message>
     <message>
         <source>TrikSensorBlock</source>
-        <translation>Базовый блок сенсоров TRIK</translation>
+        <translation type="vanished">Базовый блок сенсоров TRIK</translation>
     </message>
     <message>
         <source>Background Color</source>
-        <translation>Цвет фона</translation>
+        <translation type="vanished">Цвет фона</translation>
     </message>
     <message>
         <source>Sets the background color of the current picture on the robot`s screen.</source>
-        <translation>Устанавливает цвет фона активной картинки на экране робота.</translation>
+        <translation type="vanished">Устанавливает цвет фона активной картинки на экране робота.</translation>
     </message>
     <message>
         <source>Painter Color</source>
-        <translation>Цвет кисти</translation>
+        <translation type="vanished">Цвет кисти</translation>
     </message>
     <message>
         <source>Sets the painter color.</source>
-        <translation>Устанавливает цвет кисти.</translation>
+        <translation type="vanished">Устанавливает цвет кисти.</translation>
     </message>
     <message>
         <source>Painter Width</source>
-        <translation>Толщина кисти</translation>
+        <translation type="vanished">Толщина кисти</translation>
     </message>
     <message>
         <source>Sets the painter width.</source>
-        <translation>Устанавливает толщину кисти.</translation>
+        <translation type="vanished">Устанавливает толщину кисти.</translation>
     </message>
     <message>
         <source>Smile</source>
-        <translation>Смайлик</translation>
+        <translation type="vanished">Смайлик</translation>
     </message>
     <message>
         <source>Draws a smile on the robot`s screen :)</source>
-        <translation>Рисует на экране смайлик :)</translation>
+        <translation type="vanished">Рисует на экране смайлик :)</translation>
     </message>
     <message>
         <source>System Call</source>
-        <translation>Системный вызов</translation>
+        <translation type="vanished">Системный вызов</translation>
     </message>
     <message>
         <source>Invokes bash script-style command on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Command&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
-        <translation>Выполняет заданную bash-команду на роботе. Если свойство &amp;quot;Вычислять&amp;quot; имеет значение &amp;quot;Истина&amp;quot;, значение свойства &amp;quot;Команда&amp;quot; будет вычислено как формула, иначе оно будет исполнено как есть.</translation>
+        <translation type="vanished">Выполняет заданную bash-команду на роботе. Если свойство &amp;quot;Вычислять&amp;quot; имеет значение &amp;quot;Истина&amp;quot;, значение свойства &amp;quot;Команда&amp;quot; будет вычислено как формула, иначе оно будет исполнено как есть.</translation>
     </message>
     <message>
         <source>Code</source>
-        <translation>Код</translation>
+        <translation type="vanished">Код</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation>Команда</translation>
+        <translation type="vanished">Команда</translation>
     </message>
     <message>
         <source>echo 123</source>
-        <translation>echo 123</translation>
+        <translation type="vanished">echo 123</translation>
     </message>
     <message>
         <source>S1</source>
-        <translation>S1</translation>
+        <translation type="vanished">S1</translation>
     </message>
     <message>
         <source>E1, E2, E3, E4</source>
-        <translation>E1, E2, E3, E4</translation>
+        <translation type="vanished">E1, E2, E3, E4</translation>
     </message>
     <message>
         <source>B1, B2, B3, B4</source>
-        <translation>B1, B2, B3, B4</translation>
+        <translation type="vanished">B1, B2, B3, B4</translation>
     </message>
     <message>
         <source>TrikV6EngineMovementCommand</source>
-        <translation>Базовый блок моторов TRIK v6</translation>
+        <translation type="vanished">Базовый блок моторов TRIK v6</translation>
     </message>
     <message>
         <source>Enables motors on the given ports in reverse mode with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.</source>
-        <translation>Включить моторы в режиме реверса по заданным портам с заданной мощностью. Порты задаются так, как они обозначены на плате (например, M1, E2) и разделяются запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в обычном режиме.</translation>
+        <translation type="vanished">Включить моторы в режиме реверса по заданным портам с заданной мощностью. Порты задаются так, как они обозначены на плате (например, M1, E2) и разделяются запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в обычном режиме.</translation>
     </message>
     <message>
         <source>M3, M4</source>
-        <translation>M3, M4</translation>
+        <translation type="vanished">M3, M4</translation>
     </message>
     <message>
         <source>Enables motors on the given ports with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.</source>
-        <translation>Включить моторы по заданным портам с заданной мощностью. Порты задаются так, как они обозначены на плате (например, M1, E2) и разделяются запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в режиме реверса.</translation>
+        <translation type="vanished">Включить моторы по заданным портам с заданной мощностью. Порты задаются так, как они обозначены на плате (например, M1, E2) и разделяются запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в режиме реверса.</translation>
     </message>
     <message>
         <source>M1, M2, M3, M4</source>
-        <translation>M1, M2, M3, M4</translation>
+        <translation type="vanished">M1, M2, M3, M4</translation>
     </message>
     <message>
         <source>Wait for Accelerometer</source>
-        <translation>Ждать акселерометр</translation>
+        <translation type="vanished">Ждать акселерометр</translation>
     </message>
     <message>
         <source>Acceleration</source>
-        <translation>Ускорение</translation>
+        <translation type="vanished">Ускорение</translation>
     </message>
     <message>
         <source>Acceleration Axis</source>
-        <translation>Ускорение по оси</translation>
+        <translation type="vanished">Ускорение по оси</translation>
     </message>
     <message>
         <source>Wait for Gyroscope</source>
-        <translation>Ждать гиродатчик</translation>
+        <translation type="vanished">Ждать гиродатчик</translation>
     </message>
     <message>
         <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees/sec&apos; parameter value.</source>
-        <translation>Ждать, пока значение, возвращаемое гироскопом на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы/сек&apos;.</translation>
+        <translation type="vanished">Ждать, пока значение, возвращаемое гироскопом на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы/сек&apos;.</translation>
     </message>
     <message>
         <source>Degrees/sec</source>
-        <translation>Градусы/сек</translation>
+        <translation type="vanished">Градусы/сек</translation>
     </message>
     <message>
         <source>Wait for Infrared Distance</source>
-        <translation>Ждать ИК датчик расстояния</translation>
+        <translation type="vanished">Ждать ИК датчик расстояния</translation>
     </message>
     <message>
         <source>Waits till the value returned by the infrared sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value. By default on ports A1 and A2 the distance is specified in centimeters (from 0 to 100). It is not recommended to plug IR sensor into other ports because its raw value will be processed by software on robot with expectation of another sensor type.</source>
-        <translation>Ждать, пока расстояние, возвращаемое инфракрасным датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos;. Еще один парамер — номер порта, к которому подключен датчик. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием. По умолчанию на портах A1 и A2 расстояние указывается в сантиметрах (от 0 до 100), к остальным подключение не рекомендуется, так как чистое значение с датчика будет обработано с ожиданием другого подключенного датчика.</translation>
+        <translation type="vanished">Ждать, пока расстояние, возвращаемое инфракрасным датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos;. Еще один парамер — номер порта, к которому подключен датчик. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием. По умолчанию на портах A1 и A2 расстояние указывается в сантиметрах (от 0 до 100), к остальным подключение не рекомендуется, так как чистое значение с датчика будет обработано с ожиданием другого подключенного датчика.</translation>
     </message>
     <message>
         <source>Wait for Message</source>
-        <translation>Получить сообщение</translation>
+        <translation type="vanished">Получить сообщение</translation>
     </message>
     <message>
         <source>Stores a message from another robot into a given variable. When no incoming messages are present at the moment, a robot will wait for incoming message if &apos;Synchronized&apos; property is true, and empty string will be assigned to a variable otherwise.</source>
-        <translation>Сохраняет сообщение от другого робота в переменной. Если свойство &quot;Дождаться сообщения&quot; установлено, робот будет ждать, когда входящих сообщений нет, иначе переменной присваивается пустая строка.</translation>
+        <translation type="vanished">Сохраняет сообщение от другого робота в переменной. Если свойство &quot;Дождаться сообщения&quot; установлено, робот будет ждать, когда входящих сообщений нет, иначе переменной присваивается пустая строка.</translation>
     </message>
     <message>
         <source>Wait for Motion</source>
-        <translation>Ждать движения</translation>
+        <translation type="vanished">Ждать движения</translation>
     </message>
     <message>
         <source>Waits till the motion sensor on the given port is triggered.</source>
-        <translation>Ждет, пока не сработает датчик движения.</translation>
+        <translation type="vanished">Ждет, пока не сработает датчик движения.</translation>
     </message>
     <message>
         <source>Wait for Ultrasonic Distance</source>
-        <translation>Ждать УЗ датчик расстояния</translation>
+        <translation type="vanished">Ждать УЗ датчик расстояния</translation>
     </message>
     <message>
         <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, from 0 to 300).</source>
-        <translation>Ждать, пока расстояние, возвращаемое ультразвуковым датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 300). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
+        <translation type="vanished">Ждать, пока расстояние, возвращаемое ультразвуковым датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 300). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
     </message>
     <message>
         <source>Wait Gamepad Button</source>
-        <translation>Ждать кнопки на пульте</translation>
+        <translation type="vanished">Ждать кнопки на пульте</translation>
     </message>
     <message>
         <source>Waits for Android gamepad &apos;magic button&apos; press. Buttons are identified by numbers from 1 to 5 (from left to right)</source>
-        <translation>Ждёт нажатия на одну из &apos;магических кнопок&apos; Android-пульта. Кнопки идентифицируются номерами с 1 по 5 (слева направо)</translation>
+        <translation type="vanished">Ждёт нажатия на одну из &apos;магических кнопок&apos; Android-пульта. Кнопки идентифицируются номерами с 1 по 5 (слева направо)</translation>
     </message>
     <message>
         <source>Waits until Android gamepad is connected.</source>
-        <translation>Ждать, пока не будет подключен Android-пульт.</translation>
+        <translation type="vanished">Ждать, пока не будет подключен Android-пульт.</translation>
     </message>
     <message>
         <source>Waits until Android gamepad is disconnected.</source>
-        <translation>Ждать, пока Android-пульт не отключится.</translation>
+        <translation type="vanished">Ждать, пока Android-пульт не отключится.</translation>
     </message>
     <message>
         <source>Waits till the value returned by gamepad wheel be greater or less than the given in the &apos;Angle&apos; parameter value. Angle is measured from -100 (max left) to 100 (max right).</source>
-        <translation>Ждёт, пока значение, возвращаемое &apos;рулём&apos; Android-пульта не будет больше (или меньше) заданного значения. Угол измеряется от -100 (максимально влево) до 100 (максимально вправо).</translation>
+        <translation type="vanished">Ждёт, пока значение, возвращаемое &apos;рулём&apos; Android-пульта не будет больше (или меньше) заданного значения. Угол измеряется от -100 (максимально влево) до 100 (максимально вправо).</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Угол</translation>
+        <translation type="vanished">Угол</translation>
     </message>
     <message>
         <source>Wait Pad Press</source>
-        <translation>Ждать нажатия на пульт</translation>
+        <translation type="vanished">Ждать нажатия на пульт</translation>
     </message>
     <message>
         <source>Waits for Android gamepad pad press (left pad has number 1, right pad - number 2).</source>
-        <translation>Ждёт нажатия на одну из активных областей Android-пульта. Левая область имеет номер 1, правая - номер 2.</translation>
+        <translation type="vanished">Ждёт нажатия на одну из активных областей Android-пульта. Левая область имеет номер 1, правая - номер 2.</translation>
     </message>
     <message>
         <source>Pad</source>
-        <translation>Пульт</translation>
+        <translation type="vanished">Пульт</translation>
     </message>
     <message>
         <source>Write To File</source>
-        <translation>Записать в файл</translation>
+        <translation type="vanished">Записать в файл</translation>
     </message>
     <message>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation type="vanished">Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
     <message>
         <source>Variable Initialization</source>
@@ -1358,6 +1358,29 @@
     <message>
         <source>Drawing</source>
         <translation>Рисование</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Body</source>
+        <translation type="unfinished">Тело функции</translation>
+    </message>
+    <message>
+        <source>Variable</source>
+        <translation type="unfinished">Переменная</translation>
+    </message>
+    <message>
+        <source>Devices configuration</source>
+        <translation type="unfinished">Конфигурация устройств</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished">Сообщение</translation>
+    </message>
+    <message>
+        <source>Thread</source>
+        <translation type="unfinished">Задача</translation>
     </message>
 </context>
 <context>
@@ -1928,11 +1951,11 @@
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="vanished">1</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation type="vanished">B</translation>
     </message>
     <message>
         <source>JE1</source>
@@ -2208,11 +2231,11 @@
     </message>
     <message>
         <source>False</source>
-        <translation>Ложь</translation>
+        <translation type="vanished">Ложь</translation>
     </message>
     <message>
         <source>True</source>
-        <translation>Истина</translation>
+        <translation type="vanished">Истина</translation>
     </message>
     <message>
         <source>greater</source>
@@ -2236,7 +2259,7 @@
     </message>
     <message>
         <source>E1</source>
-        <translation>E1</translation>
+        <translation type="vanished">E1</translation>
     </message>
     <message>
         <source>M1, M2, M3, M4</source>
@@ -2256,7 +2279,7 @@
     </message>
     <message>
         <source>B1</source>
-        <translation>B1</translation>
+        <translation type="vanished">B1</translation>
     </message>
     <message>
         <source>Waits for &quot;Back&quot;. button press.</source>
@@ -2320,7 +2343,7 @@
     </message>
     <message>
         <source>A1</source>
-        <translation>A1</translation>
+        <translation type="vanished">A1</translation>
     </message>
     <message>
         <source>Assigns a given variable a value of pressed button. If no button is pressed at the moment and &apos;Wait&apos; property is false when variable is set to -1.</source>
@@ -2332,31 +2355,31 @@
     </message>
     <message>
         <source>A2</source>
-        <translation>A2</translation>
+        <translation type="vanished">A2</translation>
     </message>
     <message>
         <source>A3</source>
-        <translation>A3</translation>
+        <translation type="vanished">A3</translation>
     </message>
     <message>
         <source>A4</source>
-        <translation>A4</translation>
+        <translation type="vanished">A4</translation>
     </message>
     <message>
         <source>A5</source>
-        <translation>A5</translation>
+        <translation type="vanished">A5</translation>
     </message>
     <message>
         <source>A6</source>
-        <translation>A6</translation>
+        <translation type="vanished">A6</translation>
     </message>
     <message>
         <source>D1</source>
-        <translation>D1</translation>
+        <translation type="vanished">D1</translation>
     </message>
     <message>
         <source>D2</source>
-        <translation>D2</translation>
+        <translation type="vanished">D2</translation>
     </message>
     <message>
         <source>F1</source>
@@ -2652,19 +2675,19 @@
     </message>
     <message>
         <source>A</source>
-        <translation>A</translation>
+        <translation type="vanished">A</translation>
     </message>
     <message>
         <source>C</source>
-        <translation>C</translation>
+        <translation type="vanished">C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation type="vanished">D</translation>
     </message>
     <message>
         <source>E2</source>
-        <translation>E2</translation>
+        <translation type="vanished">E2</translation>
     </message>
     <message>
         <source>Waits till the value returned by the infrared sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value. By default on ports A1 and A2 the distance is specified in centimeters (from 0 to 100). It is not recommended to plug IR sensor into other ports because its raw value will be processed by software on robot with expectation of another sensor type.</source>
@@ -2672,35 +2695,35 @@
     </message>
     <message>
         <source>E3</source>
-        <translation>E3</translation>
+        <translation type="vanished">E3</translation>
     </message>
     <message>
         <source>E4</source>
-        <translation>E4</translation>
+        <translation type="vanished">E4</translation>
     </message>
     <message>
         <source>green flash</source>
-        <translation>зеленые вспышки</translation>
+        <translation type="vanished">зеленые вспышки</translation>
     </message>
     <message>
         <source>green pulse</source>
-        <translation>зеленый пульсирующий</translation>
+        <translation type="vanished">зеленый пульсирующий</translation>
     </message>
     <message>
         <source>orange flash</source>
-        <translation>оранжевые вспышки</translation>
+        <translation type="vanished">оранжевые вспышки</translation>
     </message>
     <message>
         <source>orange pulse</source>
-        <translation>оранжевый пульсирующий</translation>
+        <translation type="vanished">оранжевый пульсирующий</translation>
     </message>
     <message>
         <source>red flash</source>
-        <translation>красные вспышки</translation>
+        <translation type="vanished">красные вспышки</translation>
     </message>
     <message>
         <source>red pulse</source>
-        <translation>красный пульсирующий</translation>
+        <translation type="vanished">красный пульсирующий</translation>
     </message>
     <message>
         <source>body</source>
@@ -2708,39 +2731,39 @@
     </message>
     <message>
         <source>Down</source>
-        <translation>Вниз</translation>
+        <translation type="vanished">Вниз</translation>
     </message>
     <message>
         <source>B2</source>
-        <translation>B2</translation>
+        <translation type="vanished">B2</translation>
     </message>
     <message>
         <source>B3</source>
-        <translation>B3</translation>
+        <translation type="vanished">B3</translation>
     </message>
     <message>
         <source>B4</source>
-        <translation>B4</translation>
+        <translation type="vanished">B4</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation>Ввод</translation>
+        <translation type="vanished">Ввод</translation>
     </message>
     <message>
         <source>Esc</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation>Влево</translation>
+        <translation type="vanished">Влево</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Вправо</translation>
+        <translation type="vanished">Вправо</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Вверх</translation>
+        <translation type="vanished">Вверх</translation>
     </message>
     <message>
         <source>blue</source>
@@ -2772,39 +2795,39 @@
     </message>
     <message>
         <source>cyan</source>
-        <translation>сине-зелёный</translation>
+        <translation type="vanished">сине-зелёный</translation>
     </message>
     <message>
         <source>dark blue</source>
-        <translation>тёмно-синий</translation>
+        <translation type="vanished">тёмно-синий</translation>
     </message>
     <message>
         <source>dark cyan</source>
-        <translation>тёмносине-зеленый</translation>
+        <translation type="vanished">тёмносине-зеленый</translation>
     </message>
     <message>
         <source>dark gray</source>
-        <translation>тёмно-серый</translation>
+        <translation type="vanished">тёмно-серый</translation>
     </message>
     <message>
         <source>dark green</source>
-        <translation>тёмно-зелёный</translation>
+        <translation type="vanished">тёмно-зелёный</translation>
     </message>
     <message>
         <source>dark magenta</source>
-        <translation>тёмно-пурпурный</translation>
+        <translation type="vanished">тёмно-пурпурный</translation>
     </message>
     <message>
         <source>dark yellow</source>
-        <translation>тёмно-жёлтый</translation>
+        <translation type="vanished">тёмно-жёлтый</translation>
     </message>
     <message>
         <source>dark red</source>
-        <translation>тёмно-красный</translation>
+        <translation type="vanished">тёмно-красный</translation>
     </message>
     <message>
         <source>gray</source>
-        <translation>серый</translation>
+        <translation type="vanished">серый</translation>
     </message>
     <message>
         <source>green</source>
@@ -2812,11 +2835,11 @@
     </message>
     <message>
         <source>light gray</source>
-        <translation>светло-серый</translation>
+        <translation type="vanished">светло-серый</translation>
     </message>
     <message>
         <source>magenta</source>
-        <translation>пурпурный</translation>
+        <translation type="vanished">пурпурный</translation>
     </message>
     <message>
         <source>red</source>
@@ -2832,31 +2855,31 @@
     </message>
     <message>
         <source>Escape</source>
-        <translation>Отмена</translation>
+        <translation type="vanished">Отмена</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Назад</translation>
+        <translation type="vanished">Назад</translation>
     </message>
     <message>
         <source>orange</source>
-        <translation>оранжевый</translation>
+        <translation type="vanished">оранжевый</translation>
     </message>
     <message>
         <source>Color sensor</source>
-        <translation>Сенсор цвета</translation>
+        <translation type="vanished">Сенсор цвета</translation>
     </message>
     <message>
         <source>Line sensor</source>
-        <translation>Сенсор линии</translation>
+        <translation type="vanished">Сенсор линии</translation>
     </message>
     <message>
         <source>Object sensor</source>
-        <translation>Сенсор объекта</translation>
+        <translation type="vanished">Сенсор объекта</translation>
     </message>
     <message>
         <source>off</source>
-        <translation>выключен</translation>
+        <translation type="vanished">выключен</translation>
     </message>
     <message>
         <source>Angle (degrees)</source>
@@ -2888,15 +2911,15 @@
     </message>
     <message>
         <source>2</source>
-        <translation>2</translation>
+        <translation type="vanished">2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation>3</translation>
+        <translation type="vanished">3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation>4</translation>
+        <translation type="vanished">4</translation>
     </message>
     <message>
         <source>In</source>

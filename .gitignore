@@ -14,9 +14,6 @@ buildScripts/.pyenv-*/
 *.qm
 .#*
 *.*#
-moc_*.cpp
-ui_*.h
-qrc_*.cpp
 Thumbs.db
 Makefile*
 *.pro.user*
@@ -31,11 +28,11 @@ usabilityFiles/*
 *.log
 
 # Generated editors
-**/generated/elements.h
-**/generated/pluginInterface.h
-**/generated/pluginInterface.cpp
-**/generated/ports.h
-plugin.qrc
+#**/generated/elements.h
+#**/generated/pluginInterface.h
+#**/generated/pluginInterface.cpp
+#**/generated/ports.h
+#plugin.qrc
 
 # Doxygen
 **/doxygen/html/*

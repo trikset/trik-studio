@@ -1,0 +1,29 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>generated/shapes/AbstractNodeClass.sdf</file>
+	<file>generated/shapes/ClearScreenClass.sdf</file>
+	<file>generated/shapes/CommentBlockClass.sdf</file>
+	<file>generated/shapes/FiBlockClass.sdf</file>
+	<file>generated/shapes/FinalNodeClass.sdf</file>
+	<file>generated/shapes/ForkClass.sdf</file>
+	<file>generated/shapes/FunctionClass.sdf</file>
+	<file>generated/shapes/GetButtonCodeClass.sdf</file>
+	<file>generated/shapes/IfBlockClass.sdf</file>
+	<file>generated/shapes/InitialNodeClass.sdf</file>
+	<file>generated/shapes/JoinClass.sdf</file>
+	<file>generated/shapes/KillThreadClass.sdf</file>
+	<file>generated/shapes/LoopClass.sdf</file>
+	<file>generated/shapes/MarkerDownClass.sdf</file>
+	<file>generated/shapes/MarkerUpClass.sdf</file>
+	<file>generated/shapes/PrintTextClass.sdf</file>
+	<file>generated/shapes/RandomizerClass.sdf</file>
+	<file>generated/shapes/ReceiveMessageThreadsClass.sdf</file>
+	<file>generated/shapes/RobotsDiagramNodeClass.sdf</file>
+	<file>generated/shapes/SendMessageThreadsClass.sdf</file>
+	<file>generated/shapes/SubprogramClass.sdf</file>
+	<file>generated/shapes/SubprogramDiagramClass.sdf</file>
+	<file>generated/shapes/SwitchBlockClass.sdf</file>
+	<file>generated/shapes/TimerClass.sdf</file>
+	<file>generated/shapes/VariableInitClass.sdf</file>
+</qresource>
+</RCC>
