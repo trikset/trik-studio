@@ -35,14 +35,14 @@ const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
 using namespace subprogramsImporterExporter;
 
 SubprogramsImporterExporterPlugin::SubprogramsImporterExporterPlugin()
-	: mMenu(tr("Subprograms"))
+	: mMenu(tr("&Subprograms"))
 	, mFirstSeparatorAction(nullptr)
 	, mSecondSeparatorAction(nullptr)
-	, mImportToProjectAction(tr("Import all from file..."), &mMenu)
-	, mExportAction(tr("Export all to file..."), &mMenu)
-	, mSaveToCollection(tr("Import to collection..."), &mMenu)
-	, mImportFromCollection(tr("Export from collection..."), &mMenu)
-	, mClearCollection(tr("Clear collection"), &mMenu)
+	, mImportToProjectAction(tr("&Import from file..."), &mMenu)
+	, mExportAction(tr("&Export to file..."), &mMenu)
+	, mSaveToCollection(tr("&Save to the collection..."), &mMenu)
+	, mImportFromCollection(tr("&Load from the collection"), &mMenu)
+	, mClearCollection(tr("&Clear the collection"), &mMenu)
 	, mRepo(nullptr)
 	, mMainWindowInterpretersInterface(nullptr)
 	, mGraphicalModel(nullptr)
@@ -72,6 +72,7 @@ QList<qReal::ActionInfo> SubprogramsImporterExporterPlugin::actions()
 	mMenu.addSeparator();
 	mMenu.addAction(&mSaveToCollection);
 	mMenu.addAction(&mImportFromCollection);
+	mMenu.addSeparator();
 	mMenu.addAction(&mClearCollection);
 	return { qReal::ActionInfo(&mFirstSeparatorAction, "", "tools")
 			, qReal::ActionInfo(&mMenu, "tools")
