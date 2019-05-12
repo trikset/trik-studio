@@ -30,14 +30,10 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
-      - MINGW: C:\Qt\Tools\mingw530_32
-        QTDIR: C:\Qt\5.11\mingw53_32
-        QT: 5.11
-        ARCH: x86
-      - MINGW: C:\Qt\Tools\mingw492_32
-        QTDIR: C:\Qt\5.6\mingw49_32
-        QT: 5.6
-        ARCH: x86
+      - QT: 5.12
+        ARCH: 32
+      - QT: 5.6
+        ARCH: 64
 
 configuration:
 #  - debug
@@ -64,6 +60,8 @@ clone_script:
 
 
 install:
+  - set QTDIR=C:\Qt\5.12\mingw73_%ARCH%
+  - set MINGW=%QTDIR%\..\..\Tools\mingw730_%ARCH%
   - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\usr\bin;%PATH%
 # need to reconfigure because it is anouther one git
   - git config --global core.autocrlf true
