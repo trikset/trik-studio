@@ -205,7 +205,8 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, [=](const QString &path){
 		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
 		const QString code = logicalRepo->metaInformation("activeCode").toString();
-		const QString name = "lastSavedCode";
+		QFileInfo projectFile(mProjectManager->saveFilePath());
+		const QString name = projectFile.completeBaseName();
 		const QString extension = logicalRepo->metaInformation("activeCodeLanguageExtension").toString();
 		if (code.isEmpty() || name.isEmpty() || path.isEmpty()) {
 			return;

@@ -14,13 +14,13 @@
 
 TARGET = tcp-robot-simulator
 
+TEMPLATE = lib
+
 include($$PWD/../../../../../global.pri)
 
 QT += network
 
 DEFINES += TCP_ROBOT_SIMULATOR_LIBRARY
-
-TEMPLATE = lib
 
 HEADERS += \
 	$$PWD/include/tcpRobotSimulator/declSpec.h \

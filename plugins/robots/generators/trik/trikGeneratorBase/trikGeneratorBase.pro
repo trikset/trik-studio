@@ -14,11 +14,11 @@
 
 TARGET = robots-trik-generator-base
 
+TEMPLATE = lib
+
 include(../../../../../global.pri)
 
 QT += widgets
-
-TEMPLATE = lib
 
 includes(plugins/robots/generators/generatorBase \
 		plugins/robots/common/kitBase \

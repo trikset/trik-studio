@@ -14,11 +14,12 @@
 
 TARGET = robots-ev3-generator-base
 
+TEMPLATE = lib
+
 include(../../../../../global.pri)
 
 QT += widgets
 
-TEMPLATE = lib
 
 includes(plugins/robots/generators/ev3/ev3GeneratorBase \
 		plugins/robots/generators/generatorBase \

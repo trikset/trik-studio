@@ -14,9 +14,9 @@
 
 TARGET = robots-interpreter-core
 
-include(../../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../../global.pri)
 
 copyToDestdir($$PWD/icons/splashscreen.png)
 copyToDestdir($$PWD/fields, now, images/)

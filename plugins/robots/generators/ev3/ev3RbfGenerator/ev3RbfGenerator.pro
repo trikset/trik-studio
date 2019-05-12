@@ -14,11 +14,12 @@
 
 TARGET = robots-ev3-rbf-generator
 
+TEMPLATE = lib
+
 include(../../../../../global.pri)
 
 QT += widgets
 
-TEMPLATE = lib
 CONFIG += plugin
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/

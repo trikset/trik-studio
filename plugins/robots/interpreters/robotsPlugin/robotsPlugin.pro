@@ -14,12 +14,12 @@
 
 TARGET = robots-plugin
 
+TEMPLATE = lib
+CONFIG += plugin
+
 include(../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/
-
-TEMPLATE = lib
-CONFIG += plugin
 
 QT += widgets
 

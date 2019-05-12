@@ -14,6 +14,8 @@
 
 TARGET = qrgui-brand-manager
 
+TEMPLATE = lib
+
 include(../../global.pri)
 
 HEADERS += \
@@ -28,8 +30,6 @@ SOURCES += \
 RESOURCES += \
 	$$PWD/fonts/fonts.qrc \
 	$$PWD/styles/styles.qrc \
-
-TEMPLATE = lib
 
 QT += widgets
 

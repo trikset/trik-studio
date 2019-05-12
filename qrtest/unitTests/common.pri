@@ -12,21 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TEMPLATE = app
+isEmpty(TEMPLATE): TEMPLATE = app
+
 CONFIG += console
-CONFIG -= app_bundle
+macx:CONFIG -= app_bundle
 
 include(../../global.pri)
 
 QT += widgets
 
 SOURCES += $$PWD/mainTest.cpp
-
-if (equals(QMAKE_CXX, "g++") : !macx) {
-	QMAKE_LFLAGS += -Wl,-E
-	# For googletest
-#	QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
-}
 
 INCLUDEPATH += \
 	$$PWD/ \

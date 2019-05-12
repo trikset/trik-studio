@@ -14,11 +14,11 @@
 
 TARGET = test-utils
 
+TEMPLATE = lib
+
 include($$PWD/../common.pri)
 
 DEFINES += TEST_UTILS_LIBRARY
-
-TEMPLATE = lib
 
 HEADERS += \
 	$$PWD/include/testUtils/declSpec.h \

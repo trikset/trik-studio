@@ -1,6 +1,6 @@
-include(../../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../../global.pri)
 
 unix:QT = core
 else:QT = core gui

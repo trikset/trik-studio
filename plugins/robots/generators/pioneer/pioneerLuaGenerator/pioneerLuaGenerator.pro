@@ -14,13 +14,12 @@
 
 TARGET = robots-pioneer-lua-generator
 
-include(../../../../../global.pri)
-
-
-QT += widgets network
-
 TEMPLATE = lib
 CONFIG += plugin
+
+include(../../../../../global.pri)
+
+QT += widgets network
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

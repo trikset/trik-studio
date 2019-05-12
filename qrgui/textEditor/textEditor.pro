@@ -14,9 +14,9 @@
 
 TARGET = qrgui-text-editor
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 links(qrkernel qrutils qscintilla2 qrgui-tool-plugin-interface qrgui-brand-manager)
 

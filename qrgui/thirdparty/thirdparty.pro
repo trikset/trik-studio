@@ -14,9 +14,9 @@
 
 TARGET = qrgui-thirdparty
 
-include(../../global.pri)
-
 TEMPLATE = lib
+
+include(../../global.pri)
 
 DEFINES += QRGUI_THIRDPARTY_LIBRARY
 

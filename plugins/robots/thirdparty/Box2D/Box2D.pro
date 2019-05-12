@@ -1,6 +1,6 @@
-include(../../../../global.pri)
-
 TEMPLATE = lib
+
+include(../../../../global.pri)
 
 CONFIG += warn_off
 

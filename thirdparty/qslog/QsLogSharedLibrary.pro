@@ -3,6 +3,8 @@ include(QsLog.pri)
 
 TARGET = qslog
 
+TEMPLATE = lib
+
 include(../../global.pri)
 
 QT -= gui
@@ -11,7 +13,6 @@ CONFIG -= console
 CONFIG -= app_bundle
 CONFIG += shared warn_off qt
 
-TEMPLATE = lib
 
 win32 {
 	DEFINES += QSLOG_IS_SHARED_LIBRARY
