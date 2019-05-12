@@ -39,8 +39,9 @@ SearchLinePanel::SearchLinePanel(QWidget *parent)
 	, mReplaceLineEdit(new QLineEdit(this))
 {
 	auto gridLayout = new QGridLayout(this);
-	auto hLayoutFst = new QHBoxLayout(this);
-	auto hLayoutSnd = new QHBoxLayout(this);
+	auto hLayoutFst = new QHBoxLayout();
+	auto hLayoutSnd = new QHBoxLayout();
+
 	gridLayout->setSizeConstraint(QLayout::SizeConstraint::SetMinimumSize);
 
 	hLayoutFst->addWidget(mSearchLineEdit);
@@ -74,7 +75,6 @@ SearchLinePanel::SearchLinePanel(QWidget *parent)
 	gridLayout->addLayout(hLayoutFst, 0, 0);
 	gridLayout->addLayout(hLayoutSnd, 1, 0);
 	setFrameShape(QFrame::StyledPanel);
-	setLayout(gridLayout);
 
 	connect(mSearchLineEdit, &SearchLineEdit::textChanged, this, [this](const QRegExp &text){
 		setSearchLineColor(QColor("white"));
