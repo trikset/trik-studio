@@ -17,6 +17,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QEventLoop>
 #include <QtCore/QString>
+#include <QMessageBox>
 
 #include <algorithm>
 
@@ -259,9 +260,15 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 void SubprogramsImporterExporterPlugin::clearCollectionTriggered() const
 {
-	const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY;
-	if (QDir(directoryPath).exists()) {
-		QDir(directoryPath).removeRecursively();
+	QDir dir = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY;
+	if (dir.exists()
+			&& QMessageBox::No != QMessageBox::warning(nullptr
+													   , tr("Clear collection")
+													   , tr("Remove all subprograms for all kits from the collection?")
+													   , QMessageBox::Yes | QMessageBox::No
+													   , QMessageBox::No)
+			) {
+		dir.removeRecursively();
 	}
 }
 
