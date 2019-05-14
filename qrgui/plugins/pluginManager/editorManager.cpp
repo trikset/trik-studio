@@ -68,6 +68,11 @@ void EditorManager::init()
 	}
 }
 
+QList<QString> EditorManager::namesOfPlugins() const
+{
+	return mPluginManager.namesOfPlugins();
+}
+
 QString EditorManager::loadPlugin(const QString &pluginName)
 {
 	MetamodelLoaderInterface *loader = mPluginManager.pluginLoadedByName<MetamodelLoaderInterface>(pluginName).first;

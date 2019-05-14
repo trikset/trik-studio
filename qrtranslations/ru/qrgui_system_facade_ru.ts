@@ -41,6 +41,7 @@
     </message>
     <message>
         <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="134"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -50,44 +51,49 @@
         <translation>Невозможно открыть файл, пожалуйста, попробуйте другой.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="163"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
+        <source>Cannot open this project, need %1 plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="179"/>
         <source>Select file with a save to import</source>
         <translation>Выберите файл для импорта</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="197"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="213"/>
         <source>There are missing plugins</source>
         <translation>Не хватает плагинов</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="198"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="214"/>
         <source>These plugins are not present, but needed to load the save:
 </source>
         <translation>Эти плагины отсутствуют, но нужны для загрузки сохранения:
 </translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="243"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="259"/>
         <source>This project contains unknown element %1 and thus can`t be opened. Probably it was created by old or incorrectly working version of QReal.</source>
         <translation>Данный проект содержит неизвестный элемент %1 и потому не может быть открыт. Возможно он был создан старой или некорректной версией QReal.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="245"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="261"/>
         <source>Can`t open project file</source>
         <translation>Не могу открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="324"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="340"/>
         <source>Select file to save current model to</source>
         <translation>Выберите файл для сохранения модели</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="369"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="385"/>
         <source>File not found</source>
         <translation>Файл не найден</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="369"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="385"/>
         <source>File %1 not found. Try again</source>
         <translation>Файл %1 не найден. Укажите существующий файл</translation>
     </message>

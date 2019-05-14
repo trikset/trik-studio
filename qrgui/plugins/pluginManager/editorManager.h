@@ -61,6 +61,7 @@ public:
 	QString paletteGroupDescription(const Id &editor, const Id &diagram, const QString &group) const override;
 	bool shallPaletteBeSorted(const Id &editor, const Id &diagram) const override;
 
+	QList<QString> namesOfPlugins() const override;
 	QString loadPlugin(const QString &pluginName) override;
 	QString unloadPlugin(const QString &metamodelName) override;
 	bool unloadAllPlugins() override;

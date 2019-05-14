@@ -55,6 +55,8 @@ public:
 	/// @returns True if plugins unloading was successfull or false otherwise.
 	virtual bool unloadAllPlugins() = 0;
 
+	virtual QList<QString> namesOfPlugins() const = 0;
+
 	/// Appends \a metamodel to a list of loaded ones.
 	/// Takes ownership on \a metamodel.
 	virtual void loadMetamodel(Metamodel &metamodel) = 0;

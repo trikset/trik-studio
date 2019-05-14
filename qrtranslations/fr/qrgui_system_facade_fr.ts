@@ -41,6 +41,7 @@
     </message>
     <message>
         <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="134"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -50,43 +51,48 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="163"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
+        <source>Cannot open this project, need %1 plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="179"/>
         <source>Select file with a save to import</source>
         <translation>Choisir le fichier avec la sauvegarde pour importer</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="197"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="213"/>
         <source>There are missing plugins</source>
         <translation>Manque d&apos;extensions</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="198"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="214"/>
         <source>These plugins are not present, but needed to load the save:
 </source>
         <translation>Ces extensions ne sont pas présents, mais sont necessaires pour charger et enregister :</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="243"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="259"/>
         <source>This project contains unknown element %1 and thus can`t be opened. Probably it was created by old or incorrectly working version of QReal.</source>
         <translation>Ce projet contient un élément inconnue %1 et donc ne peut pas être ouvert. Peut être, il a été créeé avec une version trop ancienne (ou corrompue) de QReal.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="245"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="261"/>
         <source>Can`t open project file</source>
         <translation>Le fichier du projet ne peut pas être ouvert</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="324"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="340"/>
         <source>Select file to save current model to</source>
         <translation>Choisissez le ficher pour enregister le modèle</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="369"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="385"/>
         <source>File not found</source>
         <translation>Fichier introuvable</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="369"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="385"/>
         <source>File %1 not found. Try again</source>
         <translation>Fichier %1 introuvable. Réessayez de nouveau</translation>
     </message>

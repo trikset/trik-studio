@@ -135,6 +135,22 @@ bool ProjectManager::openProject(const QString &fileName)
 		return false;
 	}
 
+	auto listOfPlugins = mModels.logicalModelAssistApi().editorManagerInterface().namesOfPlugins();
+	bool containsPLugin = false;
+	//TODO need anouther method to check, left(3) is not safe
+	QString nameOfPlugin = mModels.logicalRepoApi().metaInformation("lastKitId").toString().left(3);
+	for (auto plugin : listOfPlugins) {
+		if (plugin.toLower().contains(nameOfPlugin))
+		{
+			containsPLugin = true;
+			break;
+		}
+	}
+	if (!containsPLugin) {
+		showMessage(tr("Error"), tr("Cannot open this project, need %1 plugin").arg(nameOfPlugin));
+		return false;
+	}
+
 	mModels.reinit();
 
 	if (!pluginsEnough() || !checkVersions() || !checkForUnknownElements()) {
