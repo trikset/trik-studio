@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/bash -x
 # Usage: build-trik-studio.sh <path-to-qt> <path-to-qt-installer-framework> [<path-to-build-dir>]. See build-installer.sh for more info.
 
 set -o nounset
 set -o errexit
 
 build_dir=
-[ -z ${3+x} ] || build_dir=$(readlink -f $3)
+[ -z ${3+x} ] || build_dir=$(realpath $3)
 
 cd "$(dirname "$0")"
 
