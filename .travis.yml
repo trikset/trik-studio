@@ -11,6 +11,7 @@ env:
     - PROJECT=studio
     - TESTS=true
     - TRANSLATIONS=false
+    - INSTALLER=false
     - CELLAR_CACHE_DIR=$([ $TRAVIS_OS_NAME = 'osx' ] && echo "/usr/local/Cellar" || { mkdir -p .empty/{qt,ccache,python@3,pyenv} ; echo .empty ; } )
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
@@ -49,8 +50,8 @@ matrix:
       dist: trusty
       sudo: required
       services: docker
-      name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests"
+      name: "Linux release + installer"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests" INSTALLER=true
     - os: linux
       dist: trusty
       sudo: required

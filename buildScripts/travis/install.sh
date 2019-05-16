@@ -18,6 +18,7 @@ case $TRAVIS_OS_NAME in
   linux)
     docker pull trikset/linux-builder
     docker run -d -v $HOME:$HOME:rw -w `pwd` --name builder trikset/linux-builder Xvfb :0
+    if [ "$INSTALLER" = "true" ]; then docker exec builder bash -c "./buildScripts/travis/install_qt.sh" ; fi
     ;;
   *) exit 1 ;;
 esac
