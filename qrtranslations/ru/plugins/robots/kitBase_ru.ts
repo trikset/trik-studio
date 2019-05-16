@@ -187,7 +187,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/random.h" line="30"/>
         <source>Random</source>
-        <translation type="unfinished"></translation>
+        <translation>Случайное число</translation>
     </message>
 </context>
 <context>

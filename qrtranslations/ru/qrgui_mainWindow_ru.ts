@@ -874,7 +874,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1228"/>
         <source>Find and replace</source>
-        <translation type="unfinished">Найти и заменить</translation>
+        <translation>Найти и заменить</translation>
     </message>
     <message>
         <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1229"/>
@@ -1099,7 +1099,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="127"/>
         <source>Open project</source>
-        <translation type="unfinished">Открыть проект</translation>
+        <translation>Открыть проект</translation>
     </message>
     <message>
         <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="183"/>

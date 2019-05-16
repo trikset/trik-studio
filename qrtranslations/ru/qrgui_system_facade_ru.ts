@@ -37,7 +37,7 @@
     <message>
         <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="74"/>
         <source>Open project</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть проект</translation>
     </message>
     <message>
         <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="134"/>
