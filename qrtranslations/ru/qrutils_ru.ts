@@ -465,7 +465,7 @@
     <message>
         <location filename="../../qrutils/widgets/consoleDock.cpp" line="44"/>
         <source>Reset shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить консоль</translation>
     </message>
 </context>
 <context>

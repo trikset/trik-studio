@@ -474,12 +474,12 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="454"/>
         <source>Variable:</source>
-        <translation type="unfinished"></translation>
+        <translation>Переменная:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="480"/>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Переменная</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="536"/>
