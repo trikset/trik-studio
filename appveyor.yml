@@ -116,7 +116,10 @@ after_test:
   - set INSTALLER_NAME=%INSTALLER_NAME%-%ARCH%.exe
   - dir
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
-
+# install
+  - cd ..
+  - cmd /c .\installer\%INSTALLER_NAME% --script buildScripts\trik_studio_installscript.qs
+  - dir C:\TRIKStudio
 artifacts:
  - path: installer\$(INSTALLER_NAME)
  - path: $(ZIP_NAME)
