@@ -167,6 +167,7 @@ PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
 QMAKE_CXXFLAGS *= -Winvalid-pch
 
+QMAKE_CXXFLAGS_DEBUG += -O1 -ggdb
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$_PRO_FILE_PWD_/include) \

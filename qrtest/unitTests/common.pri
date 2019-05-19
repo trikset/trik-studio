@@ -14,8 +14,7 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
-CONFIG += console
-macx:CONFIG -= app_bundle
+CONFIG += cmdline
 
 include(../../global.pri)
 
