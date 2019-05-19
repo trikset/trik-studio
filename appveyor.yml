@@ -20,8 +20,6 @@ environment:
     QTIFW: C:\Qt\Tools\QtInstallerFramework\3.0
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
-    PYTHON_PATH: C:\Python35
-    PYTHON_LIB: '%PYTHON_PATH%\libs'
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
@@ -31,9 +29,12 @@ environment:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
       - QT: 5.12
-        ARCH: 32
-      - QT: 5.12
         ARCH: 64
+        PYTHON_PATH: C:\Python35-x64
+
+      - QT: 5.12
+        ARCH: 32
+        PYTHON_PATH: C:\Python35
 
 configuration:
 #  - debug
@@ -60,6 +61,7 @@ clone_script:
 
 
 install:
+  - set PYTHON_LIB=%PYTHON_PATH%\libs
   - set QTDIR=C:\Qt\5.12\mingw73_%ARCH%
   - set MINGW=%QTDIR%\..\..\Tools\mingw730_%ARCH%
   - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\usr\bin;%PATH%
