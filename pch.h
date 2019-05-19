@@ -12,26 +12,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include <QtCore/QString>
-#include <QtCore/QObject>
-#include <QtCore/QScopedPointer>
-#include <QtCore/QHash>
-#include <QtCore/QThread>
-#include <QtCore/QStringList>
-#include <QtCore/QVector>
-#include <QtCore/QEventLoop>
-#include <QtCore/QTimer>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
-#include <QtCore/QSocketNotifier>
-#include <QtCore/QReadWriteLock>
-#include <QtCore/qglobal.h>
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QVBoxLayout>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QVector3D>
-#include <QtGui/QVector4D>
-#include <QtGui/QBitmap>
+#ifdef QT_CORE_LIB
+#include <qglobal.h>
+#include <QString>
+#include <QObject>
+#include <QScopedPointer>
+#include <QHash>
+#include <QThread>
+#include <QStringList>
+#include <QVector>
+#include <QEventLoop>
+#include <QTimer>
+#include <QFile>
+#include <QFileInfo>
+#include <QDir>
+#include <QSocketNotifier>
+#include <QReadWriteLock>
+#endif
+
+#ifdef QT_WIDGETS_LIB
+#include <QWidget>
+#include <QLabel>
+#include <QApplication>
+#include <QVBoxLayout>
+#endif
+
+#ifdef QT_GUI_LIB
+#include <QKeyEvent>
+#include <QVector3D>
+#include <QVector4D>
+#include <QBitmap>
+#endif
