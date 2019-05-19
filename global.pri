@@ -79,10 +79,15 @@ isEmpty(TARGET) {
 
 equals(TEMPLATE, app) {
 	!no_rpath {
-		unix:!macx {
+		#reset default rpath before setting new one
+		QMAKE_LFLAGS_RPATH =
+		QMAKE_RPATH =
+
+		linux {
 			QMAKE_LFLAGS += -Wl,-rpath-link,$$GLOBAL_DESTDIR
 			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN\'
-		} macx {
+		}
+		macx {
 			QMAKE_LFLAGS += -rpath @executable_path
 			QMAKE_LFLAGS += -rpath @executable_path/../Lib
 			QMAKE_LFLAGS += -rpath @executable_path/../Frameworks
@@ -119,7 +124,7 @@ unix:!nosanitizers {
 
 	#LSan can be used without performance degrade even in release build
 	#But at the moment we can not, because of Qt  problems
-	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread):!macx-clang { CONFIG += sanitize_leak }
+	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
 		QMAKE_CFLAGS += -fsanitize=leak
