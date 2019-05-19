@@ -170,7 +170,7 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-QMAKE_CXXFLAGS *= -Winvalid-pch
+#QMAKE_CXXFLAGS *= -Winvalid-pch
 
 QMAKE_CXXFLAGS_DEBUG += -O1 -ggdb
 
