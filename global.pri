@@ -80,8 +80,10 @@ isEmpty(TARGET) {
 equals(TEMPLATE, app) {
 	!no_rpath {
 		#reset default rpath before setting new one
-		QMAKE_LFLAGS_RPATH =
-		QMAKE_RPATH =
+		#but this clears path to Qt libraries
+		#good for release/installer build, but ...
+		#QMAKE_LFLAGS_RPATH =
+		#QMAKE_RPATH =
 
 		linux {
 			QMAKE_LFLAGS += -Wl,-rpath-link,$$GLOBAL_DESTDIR
