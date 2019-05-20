@@ -19,7 +19,13 @@ export OS=$OSTYPE
 [ -z ${4+x} ] && BUILD_DIR=$(dirname $(realpath $0))/.. || BUILD_DIR=$(realpath $4)
 [ -z $BUILD_DIR ] && exit 1 || export BIN_DIR=$BUILD_DIR/bin/release
 echo $BIN_DIR
-[ -x $BIN_DIR/trik-studio ] && binary_path=$BIN_DIR/trik-studio || [ -x $BIN_DIR/trik-studio.app ] && binary_path=$BIN_DIR/trik-studio.app/Contents/MacOS/trik-studio || exit 1
+if [ -x $BIN_DIR/trik-studio ] ; then
+    binary_path=$BIN_DIR/trik-studio
+elif [ -d $BIN_DIR/trik-studio.app ] ; then
+    binary_path=$BIN_DIR/trik-studio.app/Contents/MacOS/trik-studio
+else
+    exit 1
+fi
 [ -e $(basename $0) ] || cd $(dirname $(realpath $0))
 export INSTALLER_ROOT=$PWD/
 
