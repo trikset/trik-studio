@@ -15,7 +15,7 @@
 TARGET = 2D-model
 TEMPLATE = app
 CONFIG += cmdline
-
+CONFIG -= app_bundle
 include(../../../../global.pri)
 
 QT += widgets
