@@ -28,8 +28,9 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 
 copyToDestdir(../images/ev3-robot.png, now, images/)
 
-win32 {
-	QMAKE_CXXFLAGS += -Wno-error=pedantic
+win32 | macx {
+	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
+	macx: QT_CONFIG -= no-pkg-config
 	CONFIG *= link_pkgconfig
 	PKGCONFIG *= libusb-1.0
 }

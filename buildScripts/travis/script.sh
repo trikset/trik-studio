@@ -28,7 +28,7 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && export CCACHE_CPP2=yes \
 && export CCACHE_SLOPPINESS=time_macros \
 && eval \"\`pyenv init -\`\" \
-&& eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig' \
+&& eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig:/usr/local/lib/pkgconfig' \
 && which g++ \
 && g++ --version \
 && which qmake \

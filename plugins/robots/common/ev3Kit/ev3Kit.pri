@@ -25,18 +25,15 @@ includes(plugins/robots/common/ev3Kit \
 		qrtext \
 )
 
-win32 {
-	QMAKE_CXXFLAGS += -Wno-error=pedantic
+win32 | macx {
+	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
+	macx: QT_CONFIG -= no-pkg-config
 	CONFIG *= link_pkgconfig
 	PKGCONFIG *= libusb-1.0
 }
 
 unix:!macx {
 	LIBS += -L /usr/bin -lusb-1.0
-}
-
-macx {
-	LIBS += -lusb-1.0
 }
 
 # libusb headers contain dirty code

@@ -25,13 +25,14 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 		robots-utils robots-kit-base qextserialport qslog \
 )
 
-win32 {
-	QMAKE_CXXFLAGS += -Wno-error=pedantic
+win32 | macx {
+	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
+	macx: QT_CONFIG -= no-pkg-config
 	CONFIG *= link_pkgconfig
 	PKGCONFIG *= libusb-1.0
 }
 
-unix {
+unix:!macx {
 	LIBS += -lusb-1.0
 }
 
