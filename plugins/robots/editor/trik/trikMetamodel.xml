@@ -1294,10 +1294,10 @@
 				<element name="TrikV6EnginesStop"/>
 				<element name="TrikV6ClearEncoder"/>
 				<element name="TrikV62ClearEncoder"/>
-				<element name="TrikAngularServo"/>
-				<element name="TrikV62AngularServo"/>
 				<element name="TrikSay"/>
 				<element name="TrikLed" />
+				<element name="TrikAngularServo"/>
+				<element name="TrikV62AngularServo"/>
 				<element name="TrikSystem" />
 				<element name="TrikInitCamera" />
 				<element name="TrikStopCamera" />
