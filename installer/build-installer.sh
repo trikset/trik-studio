@@ -9,6 +9,9 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
+GNU_SED_COMMAND=sed
+$GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND=gsed
+
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
 export QT_DIR=$1/../
@@ -34,9 +37,9 @@ PATH=$QT_DIR/bin:$PATH
 FULL_VERSION=$($binary_path --version | grep -Eo '[^ ]+$')
 #QT IFW want version like [0-9]+((.|-)[0-9]+)*
 VERSION=$(echo $FULL_VERSION | sed -e 's/[^0-9.-]//g' -e 's/[^0-9]$//g' )
-grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs sed -e "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/" -i ""
+grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
 cd config
-grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs sed -e "s/<Version>.*<\/Version>/<Version>$FULL_VERSION<\/Version>/" -i ""
+grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$FULL_VERSION<\/Version>/"
 cd ..
 
 grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
@@ -71,7 +74,7 @@ find . -type d -empty -delete
 echo "Building offline installer..."
 $QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-$FULL_VERSION
 
-grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs sed -e "s/<Version>.*<\/Version>/<Version><\/Version>/" -i ""
+grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
 [ -f $SSH_DIR/id_rsa ] && : || { echo "Done"; exit 0; }
 
