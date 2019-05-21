@@ -818,9 +818,7 @@ void MainWindow::showAbout() const
 
 void MainWindow::showHelp()
 {
-	const QString pathToHelp = PlatformInfo::invariantSettingsPath("pathToHelp");
-	const QString url = QString("file:///%1/index.html").arg(pathToHelp);
-	QDesktopServices::openUrl(QUrl(url));
+	QDesktopServices::openUrl(QUrl("https://help.trikset.com/"));
 }
 
 bool MainWindow::unloadPlugin(const QString &pluginName)

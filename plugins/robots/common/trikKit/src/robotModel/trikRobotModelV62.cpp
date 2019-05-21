@@ -22,12 +22,14 @@ using namespace kitBase::robotModel;
 TrikRobotModelV62::TrikRobotModelV62(const QString &kitId, const QString &robotId)
 	: TrikRobotModelBase(kitId, robotId)
 {
+#if YOU_WANT_TO_HAVE_SERVOS_AS_MOTORS_IN_2D
 	addAllowedConnection(PortInfo("S1", output, {}), { servoMotorInfo() });
 	addAllowedConnection(PortInfo("S2", output, {}), { servoMotorInfo() });
 	addAllowedConnection(PortInfo("S3", output, {}), { servoMotorInfo() });
 	addAllowedConnection(PortInfo("S4", output, {}), { servoMotorInfo() });
 	addAllowedConnection(PortInfo("S5", output, {}), { servoMotorInfo() });
 	addAllowedConnection(PortInfo("S6", output, {}), { servoMotorInfo() });
+#endif
 
 	addAllowedConnection(PortInfo("E1", input, { "M1", "Е1" }, "encoder1"), { encoderInfo() });
 	addAllowedConnection(PortInfo("E2", input, { "M2", "Е2" }, "encoder2"), { encoderInfo() });
