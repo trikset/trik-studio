@@ -690,16 +690,16 @@
 			<group name="Algorithms">
 				<element name="InitialNode"/>
 				<element name="FinalNode"/>
-				<element name="Function"/>
+				<element name="VariableInit"/>
 				<element name="IfBlock"/>
 				<element name="FiBlock"/>
-				<element name="SwitchBlock"/>
 				<element name="Loop"/>
+				<element name="SwitchBlock"/>
+				<element name="Function"/>
 				<element name="Subprogram"/>
 				<element name="Fork"/>
 				<element name="Join"/>
 				<element name="KillThread"/>
-				<element name="VariableInit"/>
 				<element name="Randomizer"/>
 				<element name="CommentBlock"/>
 			</group>
