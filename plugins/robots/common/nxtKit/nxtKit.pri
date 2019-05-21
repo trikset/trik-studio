@@ -26,7 +26,9 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 )
 
 win32 {
-	LIBS += -llibusb-1.0
+	QMAKE_CXXFLAGS += -Wno-error=pedantic
+	CONFIG *= link_pkgconfig
+	PKGCONFIG *= libusb-1.0
 }
 
 unix {

@@ -20,7 +20,6 @@ includes(plugins/robots/common/kitBase \
 		plugins/robots/utils \
 		qrtext \
 		plugins/robots/interpeters/ev3KitInterpreter/src \
-		plugins/robots/thirdparty/libusb-1.0.19/include/libusb-1.0 \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
@@ -30,7 +29,9 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 copyToDestdir(../images/ev3-robot.png, now, images/)
 
 win32 {
-	LIBS += -llibusb-1.0
+	QMAKE_CXXFLAGS += -Wno-error=pedantic
+	CONFIG *= link_pkgconfig
+	PKGCONFIG *= libusb-1.0
 }
 
 unix {

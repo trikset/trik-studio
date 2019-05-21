@@ -22,12 +22,13 @@ includes(plugins/robots/common/ev3Kit \
 		plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \
 		plugins/robots/utils \
-		plugins/robots/thirdparty/libusb-1.0.19/include/libusb-1.0 \
 		qrtext \
 )
 
 win32 {
-	LIBS += -llibusb-1.0
+	QMAKE_CXXFLAGS += -Wno-error=pedantic
+	CONFIG *= link_pkgconfig
+	PKGCONFIG *= libusb-1.0
 }
 
 unix:!macx {

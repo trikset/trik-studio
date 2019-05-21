@@ -296,6 +296,11 @@ defineReplace(fullSystemPath) {
         return($$system_path($$clean_path($$absolute_path($$1))))
 }
 
+win32 {
+	PKG_EXE = $$system(where pkg-config)
+	!isEmpty(PKG_EXE): PKG_CONFIG_PATH = $$fullSystemPath($$dirname(PKG_EXE)\..\lib\pkgconfig)
+}
+
 CONFIG(noPch) {
 	noPch()
 }
