@@ -33,7 +33,8 @@ win32 | macx {
 }
 
 unix:!macx {
-	LIBS += -lusb-1.0
+	LIBS += -L /usr/bin -lusb-1.0
+	INCLUDEPATH += /usr/include/libusb-1.0
 }
 
 # libusb headers contain dirty code
