@@ -513,37 +513,41 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="110"/>
         <source>Project was automaticly converted to version %1. Please check its contents.</source>
-        <translation>Le projet a été automatiquement converti en version %1. Vérifiez son contenu, s&apos;il vous plait.</translation>
+        <translation type="vanished">Le projet a été automatiquement converti en version %1. Vérifiez son contenu, s&apos;il vous plait.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="121"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="111"/>
+        <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="122"/>
         <source>The attempt to automaticly convert this project to the current enviroment version failed and thus save file can`t be opened. </source>
         <translation>La conversion automatique du projet en version d&apos;environnement courant a échoué, le fichier de sauvgarde ne peut pas être ouvert.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="131"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="132"/>
         <source>This project was created by version %1 of the editor.</source>
         <translation>Le projet a été crée par la version %1 de l&apos;editeur.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="132"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="133"/>
         <source>This project was created by too old version of the editor.</source>
         <translation>Ce projet a été crée par une version trop ancienne de l&apos;editeur.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="134"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="135"/>
         <source> It is now considered outdated and cannot be opened.</source>
         <translation>Il est considéré comme obsolet et ne peut pas être ouvert.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="141"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="142"/>
         <source>The save you are trying to open is made by version %1 of editor, whitch is newer than currently installed enviroment. Update your version before opening this save.</source>
         <translation>Le projet a été crée par une version %1 de l&apos;editeur, elle est plus moderne que l&apos;environnement courant, il faut effectuer une mise à jour.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="150"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="151"/>
         <source>Can`t open project file</source>
         <translation>Le projet ne peut pas être ouvert</translation>
     </message>
