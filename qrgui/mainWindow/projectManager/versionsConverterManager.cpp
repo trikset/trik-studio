@@ -107,8 +107,9 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 
 	// Stage IV: Notifying user
 	if (converterApplied) {
-		mMainWindow.errorReporter()->addInformation(QObject::tr("Project was automaticly converted to version %1."\
-				" Please check its contents.").arg(enviromentVersion.toString()));
+		mMainWindow.errorReporter()->addInformation(
+				QObject::tr("Project was automaticly converted from version %1 to version %2."\
+				" Please check its contents.").arg(saveVersion.toString(), enviromentVersion.toString()));
 		mMainWindow.models().mutableLogicalRepoApi().setMetaInformation(
 				converters.first().editor() + "Version", enviromentVersion.toString());
 	}
