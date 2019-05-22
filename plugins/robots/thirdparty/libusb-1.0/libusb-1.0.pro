@@ -16,16 +16,8 @@ TEMPLATE = subdirs
 
 include(../../../../global.pri)
 
-win32 | macx {
-	isEmpty(PKG_EXE): error(Please add path to platform dependent pkg-config in PATH)
-#	This should work, but on windows it always return success code and never call error
-#	!system(pkg-config --exists libusb-1.0): error(Please install libusb-1.0)
-	EXIST_LIBUSB = $$system(pkg-config --exists libusb-1.0 && echo true || echo false)
-	!equals(EXIST_LIBUSB, "true"): error(Please install libusb-1.0)
-	win32: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\bin\libusb-1.0.dll, NOW)
-	macx: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\lib\libusb-1.0.dylib, NOW)
-}
+PKGCONFIG *= libusb-1.0
+CONFIG *= link_pkgconfig
 
-CONFIG(clang) {
-	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
-}
+win32: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\bin\libusb-1.0.dll, NOW)
+macx: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\lib\libusb-1.0.dylib, NOW)

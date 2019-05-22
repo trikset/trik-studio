@@ -28,16 +28,10 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 
 copyToDestdir(../images/ev3-robot.png, now, images/)
 
-win32 | macx {
-	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
-	macx: QT_CONFIG -= no-pkg-config
-	CONFIG *= link_pkgconfig
-	PKGCONFIG *= libusb-1.0
-}
+win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
 
-unix {
-	LIBS += -lusb-1.0
-}
+PKGCONFIG *= libusb-1.0
+CONFIG += link_pkgconfig
 
 HEADERS += \
 	$$PWD/ev3AdditionalPreferences.h \
