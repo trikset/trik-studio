@@ -1132,12 +1132,12 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1624"/>
         <source>Waits till the tacho limit of the motor on the given port will reach the value of the &apos;Tacho Limit&apos; parameter.</source>
-        <translation>Ждать, пока значение тахометра мотора на заданном порте не достигнет значения параметра &apos;Предел тахометра&apos;.</translation>
+        <translation>Ждать, пока показания счетчика количества оборотов на заданном моторе не достинут указанного в значении параметра &apos;Предел оборотов&apos;.</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1639"/>
         <source>Tacho Limit:</source>
-        <translation>Предел техометра:</translation>
+        <translation>Предел оборотов:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1685"/>
@@ -1327,7 +1327,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1674"/>
         <source>Tacho Limit</source>
-        <translation>Предел техометра</translation>
+        <translation>Предел оборотов</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1434"/>
