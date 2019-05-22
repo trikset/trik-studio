@@ -17,7 +17,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
 
-#include <libusb-1.0/libusb.h>
+#include <libusb.h>
 
 #include <qrkernel/logging.h>
 
