@@ -167,7 +167,7 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-QMAKE_CXXFLAGS *= -Winvalid-pch
+QMAKE_CXXFLAGS *= -Wno-invalid-pch
 
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
@@ -205,8 +205,18 @@ QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decl
 			-Werror=non-virtual-dtor -Wno-error=overloaded-virtual \
 			-Werror=uninitialized -Werror=init-self
 
+# Hack to log build time.
+# ------------------------
+PHONY_DEPS = .
+PreBuildTimerEvent.input = PHONY_DEPS
+PreBuildTimerEvent.output = phony.txt #non-existing
+PreBuildTimerEvent.commands = echo "\\\\033[34\\;1m$$PROJECT_NAME build started at \$\$(date +%s) \\\\033[0m | tee $${PROJECT_NAME}.time.txt"
+PreBuildTimerEvent.name = Time $$system(date)
+PreBuildTimerEvent.CONFIG += no_link no_clean target_predeps
+QMAKE_EXTRA_COMPILERS += PreBuildTimerEvent
 
-
+QMAKE_POST_LINK += echo "\\\\033[34\\;1m$$$$PROJECT_NAME build finished in \$\$(( `date +%s` - `cut -f 5 -d ' ' $${PROJECT_NAME}.time.txt`))\\\\033[0m"
+#--------------------------
 
 # Simple function that checks if given argument is a file or directory.
 # Returns false if argument 1 is a file or does not exist.
