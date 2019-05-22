@@ -7,6 +7,10 @@
 
 set -o nounset
 set -o errexit
+set -o pipefail
+
+GNU_SED_COMMAND=sed
+$GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND=gsed
 
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
@@ -15,21 +19,27 @@ export QTIFW_DIR=$2
 export PRODUCT=$3
 export OS=$OSTYPE
 
-[ -z ${4+x} ] && BUILD_DIR=$(dirname $(readlink -f $0))/.. || BUILD_DIR=$(readlink -f $4)
+[ -z ${4+x} ] && BUILD_DIR=$(dirname $(realpath $0))/.. || BUILD_DIR=$(realpath $4)
 [ -z $BUILD_DIR ] && exit 1 || export BIN_DIR=$BUILD_DIR/bin/release
 echo $BIN_DIR
-[ -e $BIN_DIR/trik-studio ] || exit 1
-[ -e $(basename $0) ] || cd $(dirname $(readlink -f $0))
+if [ -x $BIN_DIR/trik-studio ] ; then
+    binary_path=$BIN_DIR/trik-studio
+elif [ -d $BIN_DIR/trik-studio.app ] ; then
+    binary_path=$BIN_DIR/trik-studio.app/Contents/MacOS/trik-studio
+else
+    exit 1
+fi
+[ -e $(basename $0) ] || cd $(dirname $(realpath $0))
 export INSTALLER_ROOT=$PWD/
 
 PATH=$QT_DIR/bin:$PATH
 # FULL_VERSION is like v3.3.0[-rc9][-20-abc123][-dirty]
-FULL_VERSION=$($BIN_DIR/trik-studio --version | grep -Eo '[^ ]+$')
+FULL_VERSION=$($binary_path --version | grep -Eo '[^ ]+$')
 #QT IFW want version like [0-9]+((.|-)[0-9]+)*
-VERSION=$(echo $FULL_VERSION | sed 's/[^0-9.-]//g' | sed 's/[^0-9]$//g' )
-grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
+VERSION=$(echo $FULL_VERSION | sed -e 's/[^0-9.-]//g' -e 's/[^0-9]$//g' )
+grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
 cd config
-grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version>$FULL_VERSION<\/Version>/"
+grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$FULL_VERSION<\/Version>/"
 cd ..
 
 grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
@@ -64,7 +74,7 @@ find . -type d -empty -delete
 echo "Building offline installer..."
 $QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-$FULL_VERSION
 
-grep -r -l --include=*.xml '<Version>.*</Version>' | xargs sed -i "s/<Version>.*<\/Version>/<Version><\/Version>/"
+grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
 [ -f $SSH_DIR/id_rsa ] && : || { echo "Done"; exit 0; }
 
