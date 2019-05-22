@@ -167,7 +167,7 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-QMAKE_CXXFLAGS *= -Wno-invalid-pch
+!warn_off:QMAKE_CXXFLAGS *= -Wno-invalid-pch
 
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
@@ -177,12 +177,12 @@ INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 
 CONFIG += c++11
 
-QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
+!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
 gcc5 | clang {
-	QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
+	!warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 }
 
 clang {
@@ -197,11 +197,11 @@ clang {
 
 false:clang {
 # Problem from Qt system headers
-	QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
+	!warn_off:QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
 }
 
 
-QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
+!warn_off:QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
 			-Werror=non-virtual-dtor -Wno-error=overloaded-virtual \
 			-Werror=uninitialized -Werror=init-self
 

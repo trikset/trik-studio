@@ -50,7 +50,7 @@ matrix:
       sudo: required
       services: docker
       name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       dist: trusty
       sudo: required
