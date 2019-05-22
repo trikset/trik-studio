@@ -818,9 +818,7 @@ void MainWindow::showAbout() const
 
 void MainWindow::showHelp()
 {
-	const QString pathToHelp = PlatformInfo::invariantSettingsPath("pathToHelp");
-	const QString url = QString("file:///%1/index.html").arg(pathToHelp);
-	QDesktopServices::openUrl(QUrl(url));
+	QDesktopServices::openUrl(QUrl("https://help.trikset.com/"));
 }
 
 bool MainWindow::unloadPlugin(const QString &pluginName)
@@ -884,6 +882,7 @@ void MainWindow::closeTab(int index)
 	EditorView * const diagram = dynamic_cast<EditorView *>(widget);
 	StartWidget * const start = dynamic_cast<StartWidget *>(widget);
 	text::QScintillaTextEdit * const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget);
+	gestures::GesturesWidget * const gesture = dynamic_cast<gestures::GesturesWidget *>(widget);
 	bool isClosed = false;
 
 	const QString path = mTextManager->path(possibleCodeTab);
@@ -900,7 +899,7 @@ void MainWindow::closeTab(int index)
 			mController->moduleClosed(diagramId.toString());
 			emit mFacade->events().diagramClosed(diagramId);
 		}
-	} else if (start) {
+	} else if (start || gesture) {
 		isClosed = true;
 	} else if (possibleCodeTab) {
 		isClosed = mTextManager->unbindCode(possibleCodeTab);
@@ -908,6 +907,7 @@ void MainWindow::closeTab(int index)
 			emit mFacade->events().codeTabClosed(QFileInfo(path));
 		}
 	} else {
+		QLOG_ERROR() << "Unknown type of tab " << widget->objectName();
 		// TODO: process other tabs
 		// TODO: Are there any other tabs?
 	}
