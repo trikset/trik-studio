@@ -12,26 +12,277 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include <QtCore/QString>
-#include <QtCore/QObject>
-#include <QtCore/QScopedPointer>
-#include <QtCore/QHash>
-#include <QtCore/QThread>
-#include <QtCore/QStringList>
-#include <QtCore/QVector>
-#include <QtCore/QEventLoop>
-#include <QtCore/QTimer>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
-#include <QtCore/QSocketNotifier>
-#include <QtCore/QReadWriteLock>
-#include <QtCore/qglobal.h>
-#include <QtWidgets/QWidget>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QVBoxLayout>
-#include <QtGui/QKeyEvent>
-#include <QtGui/QVector3D>
-#include <QtGui/QVector4D>
-#include <QtGui/QBitmap>
+#if QT_CORE_LIB
+	#include <QAbstractItemModel>
+	#include <QAbstractTableModel>
+	#include <QAbstractTransition>
+	#include <QBitArray>
+	#include <QBuffer>
+	#include <QByteArray>
+	#include <QCommandLineParser>
+	#include <QCoreApplication>
+	#include <QCryptographicHash>
+	#include <QDataStream>
+	#include <QDate>
+	#include <QDateTime>
+	#include <QDebug>
+	#include <QDir>
+	#include <QDirIterator>
+	#include <QElapsedTimer>
+	#include <QEvent>
+	#include <QEventLoop>
+	#include <QFile>
+	#include <QFileInfo>
+	#include <QFileInfoList>
+	#include <QFinalState>
+	#include <QFlags>
+	#include <QFuture>
+	#include <QFutureWatcher>
+	#include <QHash>
+	#include <QIODevice>
+	#include <QJsonArray>
+	#include <QJsonDocument>
+	#include <QJsonObject>
+	#include <QJsonValue>
+	#include <QLine>
+	#include <QLineF>
+	#include <QLinkedList>
+	#include <QList>
+	#include <QListIterator>
+	#include <QLocale>
+	#include <QMap>
+	#include <QMargins>
+	#include <QMetaClassInfo>
+	#include <QMetaEnum>
+	#include <QMetaMethod>
+	#include <QMetaObject>
+	#include <QMetaProperty>
+	#include <QMetaType>
+	#include <QMimeData>
+	#include <QModelIndex>
+	#include <QModelIndexList>
+	#include <QMultiHash>
+	#include <QMutex>
+	#include <QMutexLocker>
+	#include <QObject>
+	#include <QPair>
+	#include <QPersistentModelIndex>
+	#include <QPluginLoader>
+	#include <QPoint>
+	#include <QPointer>
+	#include <QPointF>
+	#include <QProcess>
+	#include <QProcessEnvironment>
+	#include <QPropertyAnimation>
+	#include <QQueue>
+	#include <QReadLocker>
+	#include <QReadWriteLock>
+	#include <QRect>
+	#include <QRectF>
+	#include <QRegExp>
+	#include <QRegularExpression>
+	#include <QScopedPointer>
+	#include <QSemaphore>
+	#include <QSet>
+	#include <QSettings>
+	#include <QSharedDataPointer>
+	#include <QSharedMemory>
+	#include <QSharedPointer>
+	#include <QSignalMapper>
+	#include <QSignalTransition>
+	#include <QSize>
+	#include <QSizeF>
+	#include <QSocketNotifier>
+	#include <QStack>
+	#include <QStandardPaths>
+	#include <QState>
+	#include <QStateMachine>
+	#include <QString>
+	#include <QStringBuilder>
+	#include <QStringList>
+	#include <QStringListModel>
+	#include <QSysInfo>
+	#include <QtAlgorithms>
+	#include <QtCore>
+	#include <QtCoreDepends>
+	#include <QtDebug>
+	#include <QTextCodec>
+	#include <QTextStream>
+	#include <QtGlobal>
+	#include <QThread>
+	#include <QTime>
+	#include <QTimeLine>
+	#include <QTimer>
+	#include <QtMath>
+	#include <QtPlugin>
+	#include <QTranslator>
+	#include <QUrl>
+	#include <QUuid>
+	#include <QVariant>
+	#include <QVariantAnimation>
+	#include <QVariantList>
+	#include <QVariantMap>
+	#include <QVector>
+	#include <QWaitCondition>
+	#include <QWriteLocker>
+#endif
+
+#ifdef QT_WIDGETS_LIB
+	#include <QAbstractButton>
+	#include <QAbstractItemView>
+	#include <QAbstractScrollArea>
+	#include <QAction>
+	#include <QActionGroup>
+	#include <QApplication>
+	#include <QBoxLayout>
+	#include <QButtonGroup>
+	#include <QCheckBox>
+	#include <QColorDialog>
+	#include <QComboBox>
+	#include <QCommonStyle>
+	#include <QCompleter>
+	#include <QDateTimeEdit>
+	#include <QDesktopWidget>
+	#include <QDialog>
+	#include <QDialogButtonBox>
+	#include <QDockWidget>
+	#include <QDoubleSpinBox>
+	#include <QFileDialog>
+	#include <QFontComboBox>
+	#include <QFontDialog>
+	#include <QFormLayout>
+	#include <QFrame>
+	#include <QGesture>
+	#include <QGraphicsColorizeEffect>
+	#include <QGraphicsDropShadowEffect>
+	#include <QGraphicsItem>
+	#include <QGraphicsLineItem>
+	#include <QGraphicsOpacityEffect>
+	#include <QGraphicsPathItem>
+	#include <QGraphicsScene>
+	#include <QGraphicsSceneHoverEvent>
+	#include <QGraphicsSceneMouseEvent>
+	#include <QGraphicsTextItem>
+	#include <QGraphicsView>
+	#include <QGridLayout>
+	#include <QGroupBox>
+	#include <QHBoxLayout>
+	#include <QHeaderView>
+	#include <QInputDialog>
+	#include <QItemDelegate>
+	#include <QLabel>
+	#include <QLayout>
+	#include <QLineEdit>
+	#include <QListWidget>
+	#include <QListWidgetItem>
+	#include <QMainWindow>
+	#include <QMenu>
+	#include <QMenuBar>
+	#include <QMessageBox>
+	#include <QPanGesture>
+	#include <QPinchGesture>
+	#include <QPlainTextEdit>
+	#include <QProgressBar>
+	#include <QProgressDialog>
+	#include <QProxyStyle>
+	#include <QPushButton>
+	#include <QRadioButton>
+	#include <QScrollArea>
+	#include <QScrollBar>
+	#include <QShortcut>
+	#include <QSizePolicy>
+	#include <QSlider>
+	#include <QSpacerItem>
+	#include <QSpinBox>
+	#include <QSplashScreen>
+	#include <QSplitter>
+	#include <QStackedLayout>
+	#include <QStackedWidget>
+	#include <QStatusBar>
+	#include <QStyle>
+	#include <QStyleFactory>
+	#include <QStyleOption>
+	#include <QStyleOptionGraphicsItem>
+	#include <QTabBar>
+	#include <QTableWidget>
+	#include <QTableWidgetItem>
+	#include <QTabWidget>
+	#include <QTextEdit>
+	#include <QToolBar>
+	#include <QToolBox>
+	#include <QToolButton>
+	#include <QToolTip>
+	#include <QTreeView>
+	#include <QTreeWidget>
+	#include <QTreeWidgetItem>
+	#include <QUndoCommand>
+	#include <QUndoStack>
+	#include <QVBoxLayout>
+	#include <QWidget>
+#endif
+
+#ifdef QT_GUI_LIB
+	#include <QActionEvent>
+	#include <QBitmap>
+	#include <QBrush>
+	#include <QClipboard>
+	#include <QColor>
+	#include <QCursor>
+	#include <QDesktopServices>
+	#include <QDrag>
+	#include <QFocusEvent>
+	#include <QFont>
+	#include <QFontDatabase>
+	#include <QFontMetrics>
+	#include <QIcon>
+	#include <QIconEngine>
+	#include <QImage>
+	#include <QImageWriter>
+	#include <QKeyEvent>
+	#include <QKeySequence>
+	#include <QList>
+	#include <QMatrix>
+	#include <QMouseEvent>
+	#include <QMovie>
+	#include <QPainter>
+	#include <QPainterPath>
+	#include <QPalette>
+	#include <QPen>
+	#include <QPixmap>
+	#include <QPolygon>
+	#include <QPolygonF>
+	#include <QQuaternion>
+	#include <QRadialGradient>
+	#include <QRegion>
+	#include <QResizeEvent>
+	#include <QRgb>
+	#include <QStandardItem>
+	#include <QStandardItemModel>
+	#include <QSyntaxHighlighter>
+	#include <QtEvents>
+	#include <QTextBlock>
+	#include <QTextCursor>
+	#include <QTextDocument>
+	#include <QTextDocumentFragment>
+	#include <QTextFormat>
+	#include <QTextLength>
+	#include <QTouchEvent>
+	#include <QTransform>
+	#include <QVector2D>
+	#include <QVector3D>
+	#include <QVector4D>
+	#include <QWheelEvent>
+	#include <QWidgetList>
+#endif
+
+#ifdef QT_MULTIMEDIA_LIB
+	#include <QAudioDeviceInfo>
+	#include <QAudioFormat>
+	#include <QAudioOutput>
+	#include <QCamera>
+	#include <QCameraImageCapture>
+	#include <QCameraInfo>
+	#include <QMediaContent>
+	#include <QMediaPlayer>
+	#include <QVideoProbe>
+#endif
