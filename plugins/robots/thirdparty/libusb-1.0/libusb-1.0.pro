@@ -19,5 +19,6 @@ include(../../../../global.pri)
 PKGCONFIG *= libusb-1.0
 CONFIG *= link_pkgconfig
 
+# May be --variable=libdir?
 win32: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\bin\libusb-1.0.dll, NOW)
-macx: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\lib\libusb-1.0.dylib, NOW)
+macx: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)/lib/libusb-1.0.dylib, NOW)
