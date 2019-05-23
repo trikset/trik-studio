@@ -20,8 +20,6 @@ environment:
     QTIFW: C:\Qt\Tools\QtInstallerFramework\3.0
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
-    PYTHON_PATH: C:\Python35
-    PYTHON_LIB: '%PYTHON_PATH%\libs'
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
@@ -30,14 +28,13 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
-      - MINGW: C:\Qt\Tools\mingw530_32
-        QTDIR: C:\Qt\5.11\mingw53_32
-        QT: 5.11
+      - QT: 5.12
+        ARCH: 64
+        PYTHON_PATH: C:\Python35-x64
+
+      - QT: 5.12
         ARCH: 32
-      - MINGW: C:\Qt\Tools\mingw492_32
-        QTDIR: C:\Qt\5.6\mingw49_32
-        QT: 5.6
-        ARCH: 32
+        PYTHON_PATH: C:\Python35
 
 configuration:
 #  - debug
@@ -65,6 +62,9 @@ clone_script:
 
 
 install:
+  - set PYTHON_LIB=%PYTHON_PATH%\libs
+  - set QTDIR=C:\Qt\5.12\mingw73_%ARCH%
+  - set MINGW=%QTDIR%\..\..\Tools\mingw730_%ARCH%
   - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
 # need to reconfigure because it is anouther one git
   - git config --global core.autocrlf true
@@ -133,13 +133,13 @@ deploy:
   - provider: Environment
     name: trik-studio-fresh
     on:
-      QT: 5.6
+      ARCH: 32
       APPVEYOR_PROJECT_SLUG: $(master_ci)
 
   - provider: Environment
-    name: trik-studio-qt5.11
+    name: trik-studio-64
     on:
-      QT: 5.11
+      ARCH: 64
       APPVEYOR_PROJECT_SLUG: $(master_ci)
       
 on_finish:
