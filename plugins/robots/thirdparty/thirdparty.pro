@@ -16,7 +16,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 	qextserialport \
-	libusb-1.0.19 \
+	libusb-1.0 \
 	trikRuntime \
 	Box2D \
 	python \

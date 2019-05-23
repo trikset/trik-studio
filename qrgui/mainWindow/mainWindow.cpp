@@ -882,6 +882,7 @@ void MainWindow::closeTab(int index)
 	EditorView * const diagram = dynamic_cast<EditorView *>(widget);
 	StartWidget * const start = dynamic_cast<StartWidget *>(widget);
 	text::QScintillaTextEdit * const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget);
+	gestures::GesturesWidget * const gesture = dynamic_cast<gestures::GesturesWidget *>(widget);
 	bool isClosed = false;
 
 	const QString path = mTextManager->path(possibleCodeTab);
@@ -898,7 +899,7 @@ void MainWindow::closeTab(int index)
 			mController->moduleClosed(diagramId.toString());
 			emit mFacade->events().diagramClosed(diagramId);
 		}
-	} else if (start) {
+	} else if (start || gesture) {
 		isClosed = true;
 	} else if (possibleCodeTab) {
 		isClosed = mTextManager->unbindCode(possibleCodeTab);
@@ -906,6 +907,7 @@ void MainWindow::closeTab(int index)
 			emit mFacade->events().codeTabClosed(QFileInfo(path));
 		}
 	} else {
+		QLOG_ERROR() << "Unknown type of tab " << widget->objectName();
 		// TODO: process other tabs
 		// TODO: Are there any other tabs?
 	}
