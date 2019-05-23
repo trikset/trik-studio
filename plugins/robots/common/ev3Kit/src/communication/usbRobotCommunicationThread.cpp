@@ -38,7 +38,7 @@ using namespace ev3::communication;
 
 UsbRobotCommunicationThread::UsbRobotCommunicationThread()
 	: mHandle(nullptr)
-	, mKeepAliveTimer(new QTimer(this))
+	, mKeepAliveTimer((this))
 {
 }
 
@@ -123,10 +123,9 @@ bool UsbRobotCommunicationThread::connect()
 	}
 
 	emit connected(true, QString());
-	mKeepAliveTimer->moveToThread(this->thread());
-	mKeepAliveTimer->disconnect();
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
-	mKeepAliveTimer->start(500);
+	mKeepAliveTimer.disconnect();
+	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
+	mKeepAliveTimer.start(500);
 	return true;
 }
 
@@ -144,7 +143,7 @@ void UsbRobotCommunicationThread::disconnect()
 		mHandle = nullptr;
 	}
 
-	mKeepAliveTimer->stop();
+	mKeepAliveTimer.stop();
 	emit disconnected();
 }
 
@@ -178,7 +177,7 @@ void UsbRobotCommunicationThread::checkForConnection()
 	if (success != 0) {
 		mHandle = nullptr;
 		emit disconnected();
-		mKeepAliveTimer->stop();
+		mKeepAliveTimer.stop();
 	}
 }
 
