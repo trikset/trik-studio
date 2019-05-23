@@ -164,10 +164,10 @@ void TrikMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikV6EnginesStop"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikV6ClearEncoder"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikV62ClearEncoder"));
-	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikAngularServo"));
-	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikV62AngularServo"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikSay"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikLed"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikAngularServo"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikV62AngularServo"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikSystem"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikInitCamera"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikStopCamera"));

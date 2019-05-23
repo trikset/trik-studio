@@ -378,7 +378,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1211"/>
         <source>Delay:</source>
-        <translation>Задержка</translation>
+        <translation>Задержка:</translation>
     </message>
     <message>
         <source>°</source>
@@ -1506,27 +1506,27 @@
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="413"/>
         <source>Body</source>
-        <translation type="unfinished">Тело функции</translation>
+        <translation>Тело функции</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="937"/>
         <source>Variable</source>
-        <translation type="unfinished">Переменная</translation>
+        <translation>Переменная</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="995"/>
         <source>Devices configuration</source>
-        <translation type="unfinished">Конфигурация устройств</translation>
+        <translation>Конфигурация устройств</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1047"/>
         <source>Message</source>
-        <translation type="unfinished">Сообщение</translation>
+        <translation>Сообщение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1048"/>
         <source>Thread</source>
-        <translation type="unfinished">Задача</translation>
+        <translation>Задача</translation>
     </message>
 </context>
 <context>
