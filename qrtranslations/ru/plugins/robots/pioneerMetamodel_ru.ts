@@ -244,7 +244,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="480"/>
         <source>dist</source>
-        <translation type="unfinished"></translation>
+        <translation>расстояние</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="491"/>
@@ -306,19 +306,19 @@
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="167"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="239"/>
         <source>X:</source>
-        <translation type="unfinished"></translation>
+        <translation>X:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="175"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="247"/>
         <source>Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="183"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="255"/>
         <source>Z:</source>
-        <translation type="unfinished"></translation>
+        <translation>Z:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="191"/>
@@ -329,19 +329,19 @@
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="217"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="279"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="218"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="280"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="219"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="281"/>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="230"/>
@@ -356,17 +356,17 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="279"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="280"/>
         <source>y</source>
-        <translation type="unfinished"></translation>
+        <translation>y</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="281"/>
         <source>z</source>
-        <translation type="unfinished"></translation>
+        <translation>z</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="294"/>
@@ -474,12 +474,12 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="454"/>
         <source>Variable:</source>
-        <translation type="unfinished"></translation>
+        <translation>Переменная:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="480"/>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Переменная</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="536"/>
@@ -531,7 +531,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="216"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
 </context>
 </TS>

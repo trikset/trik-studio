@@ -963,9 +963,11 @@ void TwoDModelWidget::updateWheelComboBoxes()
 	mUi->leftWheelComboBox->clear();
 	mUi->rightWheelComboBox->clear();
 
+#if YOU_WANT_TO_BE_ABLE_TO_DETACH_WHEELS_FROM_2D_MODEL
 	/// @todo More general way of specifying uninitialized values, or someone actually will name some port as "None".
 	mUi->leftWheelComboBox->addItem(tr("No wheel"), QVariant::fromValue(PortInfo("None", output)));
 	mUi->rightWheelComboBox->addItem(tr("No wheel"), QVariant::fromValue(PortInfo("None", output)));
+#endif
 
 	for (const PortInfo &port : mSelectedRobotItem->robotModel().info().availablePorts()) {
 		for (const DeviceInfo &device : mSelectedRobotItem->robotModel().info().allowedDevices(port)) {

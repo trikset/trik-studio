@@ -29,7 +29,7 @@
     <message>
         <location filename="../../../plugins/tools/visualInterpreter/textualPart/pythonInterpreter.cpp" line="38"/>
         <source>Python path was set incorrectly</source>
-        <translation type="unfinished"></translation>
+        <translation>Установлен неверный путь к Python</translation>
     </message>
 </context>
 <context>

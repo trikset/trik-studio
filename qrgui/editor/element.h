@@ -61,8 +61,11 @@ public:
 	virtual Id logicalId() const;
 	virtual QString name() const;
 
-	virtual void connectToPort(Element * src = nullptr, Element * dst = nullptr) {}  // for edge
-	virtual void checkConnectionsToPort() {}  // for node
+	// for edge
+	virtual void connectToPort(Element * src = nullptr, Element * dst = nullptr) { Q_UNUSED(src); Q_UNUSED(dst); }
+	
+	// for node
+	virtual void checkConnectionsToPort() {}
 
 	virtual void initTitles();
 
@@ -71,7 +74,7 @@ public:
 	// representation. also labels could store indices and get data themselves
 	virtual void setLogicalProperty(const QString &roleName, const QString &oldValue, const QString &newValue
 			, bool withUndoRedo = false);
-	QString logicalProperty(const QString &roleName) const;
+	QString logicalProperty(const QString &roleName) const override;
 
 	virtual void setColorRect(bool bl) = 0;
 

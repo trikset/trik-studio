@@ -1001,7 +1001,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2300"/>
         <source>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (1, 2, 3 or 4).</source>
-        <translation>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (A1, A2, ...).</translation>
+        <translation>Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2343"/>

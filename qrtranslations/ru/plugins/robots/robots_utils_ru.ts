@@ -193,32 +193,32 @@
     <message>
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="149"/>
         <source>Stop tracking</source>
-        <translation type="unfinished">Остановить отслеживание</translation>
+        <translation>Остановить отслеживание</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="153"/>
         <source>Start tracking</source>
-        <translation type="unfinished">Начать отслеживание</translation>
+        <translation>Начать отслеживание</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="157"/>
         <source>Reset plot</source>
-        <translation type="unfinished">Очистить график</translation>
+        <translation>Очистить график</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="161"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Увеличить</translation>
+        <translation>Увеличить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="165"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Уменьшить</translation>
+        <translation>Уменьшить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="169"/>
         <source>Export values...</source>
-        <translation type="unfinished">Экспорт показаний...</translation>
+        <translation>Экспорт показаний...</translation>
     </message>
 </context>
 </TS>

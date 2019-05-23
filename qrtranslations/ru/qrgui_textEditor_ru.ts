@@ -53,7 +53,7 @@
     <message>
         <location filename="../../qrgui/textEditor/textManager.cpp" line="97"/>
         <source>Save before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить перед закрытием?</translation>
     </message>
     <message>
         <location filename="../../qrgui/textEditor/textManager.cpp" line="278"/>

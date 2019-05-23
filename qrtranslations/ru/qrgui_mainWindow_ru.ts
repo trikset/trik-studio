@@ -513,37 +513,37 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="110"/>
-        <source>Project was automaticly converted to version %1. Please check its contents.</source>
-        <translation>Проект был автоматически преобразован до версии %1. Пожалуйста, проверьте его содержимое.</translation>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="111"/>
+        <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
+        <translation>Проект был автоматически пробразован из версии %1 до версии %2. Пожалуйста, проверьте его содержимое.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="121"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="122"/>
         <source>The attempt to automaticly convert this project to the current enviroment version failed and thus save file can`t be opened. </source>
         <translation>Попытка автоматического преобразования проекта до версии среды закончилась неудачно, файл сохранения не может быть открыт.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="131"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="132"/>
         <source>This project was created by version %1 of the editor.</source>
         <translation>Данный проект был создан редактором версии %1.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="132"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="133"/>
         <source>This project was created by too old version of the editor.</source>
         <translation>Данный проект был создан редактором слишком старой версии.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="134"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="135"/>
         <source> It is now considered outdated and cannot be opened.</source>
         <translation> Он устарел и не может быть открыт.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="141"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="142"/>
         <source>The save you are trying to open is made by version %1 of editor, whitch is newer than currently installed enviroment. Update your version before opening this save.</source>
         <translation>Проект был создан версией %1 редактора, которая новее, чем версия данной среды, обновитесь.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="150"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="151"/>
         <source>Can`t open project file</source>
         <translation>Не могу открыть проект</translation>
     </message>
@@ -760,18 +760,18 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="836"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="847"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="834"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="845"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="836"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="834"/>
         <source>Plugin unloading failed: </source>
         <translation>Выгрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="847"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="845"/>
         <source>Plugin loading failed: </source>
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
@@ -874,7 +874,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1228"/>
         <source>Find and replace</source>
-        <translation type="unfinished">Найти и заменить</translation>
+        <translation>Найти и заменить</translation>
     </message>
     <message>
         <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1229"/>
