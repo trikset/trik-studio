@@ -76,6 +76,7 @@ bool UsbRobotCommunicationThread::connect()
 	// Uncomment it to debug usb communication:
 	libusb_set_debug(nullptr, MAX_DEBUG_LEVEL);
 	if (result != 0) {
+		emit connected(false, tr("libusb init failed, LIBUSB_ERROR: %1").arg(result));
 		QLOG_ERROR() << QString("libusb init failed, LIBUSB_ERROR: %1").arg(result);
 		return false;
 	}
