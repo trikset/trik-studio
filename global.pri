@@ -40,6 +40,8 @@ release:CONFIG -= debug
 no-sanitizers: CONFIG *= nosanitizers
 CONFIG = $$unique(CONFIG)
 
+macx:QT_CONFIG -= no-pkg-config
+
 CONFIG(debug) {
 	CONFIGURATION = debug
 	CONFIGURATION_SUFFIX = -d
@@ -165,7 +167,7 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-QMAKE_CXXFLAGS *= -Winvalid-pch
+!warn_off:QMAKE_CXXFLAGS *= -Wno-invalid-pch
 
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
@@ -175,12 +177,12 @@ INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 
 CONFIG += c++11
 
-QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
+!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
 gcc5 | clang {
-	QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
+	!warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 }
 
 clang {
@@ -195,16 +197,30 @@ clang {
 
 false:clang {
 # Problem from Qt system headers
-	QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
+	!warn_off:QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
 }
 
 
-QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
+!warn_off:QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
 			-Werror=non-virtual-dtor -Wno-error=overloaded-virtual \
 			-Werror=uninitialized -Werror=init-self
 
+# Hack to log build time.
+# ------------------------
+PHONY_DEPS = .
+PreBuildTimerEvent.input = PHONY_DEPS
+PreBuildTimerEvent.output = phony.txt #non-existing
+PreBuildTimerEvent.commands = \\\\033[34\\;1m$$PROJECT_NAME build started\\\\033[0m
+PreBuildTimerEvent.commands += \\\\033[34\\;1mat \$\$(date +%s) \\\\033[0m | tee $${PROJECT_NAME}.time.txt
+PreBuildTimerEvent.commands = sh -c $$shell_quote(echo -e $$PreBuildTimerEvent.commands)
+win32:PreBuildTimerEvent.name = Timer for $${PROJECT_NAME}
+PreBuildTimerEvent.CONFIG += no_link no_clean target_predeps
+QMAKE_EXTRA_COMPILERS += PreBuildTimerEvent
 
+QMAKE_POST_LINK += sh -c \"echo -e \\\"\\033[34;1m$$$$PROJECT_NAME build finished\\033[0m
+QMAKE_POST_LINK += \\033[34;1min \$\$(( `date +%s` - `cut -f 5 -d $$shell_quote(' ') $${PROJECT_NAME}.time.txt`))\\033[0m\\\"\" $$escape_expand(\\n)
 
+#--------------------------
 
 # Simple function that checks if given argument is a file or directory.
 # Returns false if argument 1 is a file or does not exist.

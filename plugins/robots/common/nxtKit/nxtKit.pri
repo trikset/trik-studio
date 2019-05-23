@@ -25,19 +25,15 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 		robots-utils robots-kit-base qextserialport qslog \
 )
 
-win32 {
-	LIBS += -llibusb-1.0
-}
-
-unix {
-	LIBS += -lusb-1.0
-}
+PKGCONFIG *= libusb-1.0
+CONFIG += link_pkgconfig
 
 # libusb headers contain dirty code
 CONFIG(clang) {
 	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
 } else {
 	QMAKE_CXXFLAGS += -Wno-error=vla
+	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
 }
 
 HEADERS += \

@@ -22,17 +22,22 @@ esac
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 
+export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
+mkdir -p $CCACHE_DIR
+touch $CCACHE_DIR/ccache.conf
 
 $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
-   export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG \
+    export CCACHE_DIR=$CCACHE_DIR \
 && export CCACHE_CPP2=yes \
 && export CCACHE_SLOPPINESS=time_macros \
+&& export CCACHE_DISABLE=1 \
 && eval \"\`pyenv init -\`\" \
-&& eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig' \
+&& eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig:/usr/local/lib/pkgconfig' \
 && which g++ \
 && g++ --version \
 && which qmake \
 && qmake -query \
+&& mkdir -p $CCACHE_DIR \
 && ccache -M 0 \
 && pyenv root \
 && pyenv versions \
