@@ -217,8 +217,8 @@ win32:PreBuildTimerEvent.name = Timer for $${PROJECT_NAME}
 PreBuildTimerEvent.CONFIG += no_link no_clean target_predeps
 QMAKE_EXTRA_COMPILERS += PreBuildTimerEvent
 
-QMAKE_POST_LINK += sh -c \"echo -e \\\"\\033[34;1m$$$$PROJECT_NAME build finished\\033[0m
-QMAKE_POST_LINK += \\033[34;1min \$\$(( `date +%s` - `cut -f 5 -d $$shell_quote(' ') $${PROJECT_NAME}.time.txt`))\\033[0m\\\"\" $$escape_expand(\\n)
+QMAKE_POST_LINK += sh -c \"echo -e \\\"\\033[34;1m$$PROJECT_NAME build finished\\033[0m
+QMAKE_POST_LINK += \\033[34;1min \$\$(( `date +%s` - `cut -f 5 -d $$shell_quote(' ') $${PROJECT_NAME}.time.txt`))\\033[0m\\\"\" $$escape_expand(\\n\\t)
 
 #--------------------------
 
