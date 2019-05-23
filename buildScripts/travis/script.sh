@@ -24,7 +24,7 @@ if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/tra
 
 export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
 mkdir -p $CCACHE_DIR
-touch $CCACHE_DIR/ccache.conf
+touch $CCACHE_DIR/ccache.conf || ls -la $CCACHE_DIR
 
 $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
     export CCACHE_DIR=$CCACHE_DIR \
