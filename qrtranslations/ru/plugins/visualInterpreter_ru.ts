@@ -32,7 +32,7 @@
         <translation>Установлен неверный путь к Python</translation>
     </message>
 </context>
-<contexп>
+<context>
     <name>qReal::RuleParser</name>
     <message>
         <location filename="../../../plugins/tools/visualInterpreter/textualPart/ruleParser.cpp" line="407"/>
