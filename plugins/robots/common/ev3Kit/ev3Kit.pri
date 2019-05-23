@@ -22,27 +22,19 @@ includes(plugins/robots/common/ev3Kit \
 		plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \
 		plugins/robots/utils \
-		plugins/robots/thirdparty/libusb-1.0.19/include/libusb-1.0 \
 		qrtext \
 )
 
-win32 {
-	LIBS += -llibusb-1.0
-}
+PKGCONFIG *= libusb-1.0
+CONFIG += link_pkgconfig
 
-unix:!macx {
-	LIBS += -L /usr/bin -lusb-1.0
-}
-
-macx {
-	LIBS += -lusb-1.0
-}
 
 # libusb headers contain dirty code
 CONFIG(clang) {
 	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
 } else {
 	QMAKE_CXXFLAGS += -Wno-error=vla
+	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
 }
 
 HEADERS += \
