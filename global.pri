@@ -210,9 +210,9 @@ false:clang {
 PHONY_DEPS = .
 PreBuildTimerEvent.input = PHONY_DEPS
 PreBuildTimerEvent.output = phony.txt #non-existing
-PreBuildTimerEvent.commands = \\\\033[34\\;1m$$PROJECT_NAME build started\\\\033[0m
-PreBuildTimerEvent.commands += \\\\033[34\\;1mat \$\$(date +%s) \\\\033[0m | tee $${PROJECT_NAME}.time.txt
-PreBuildTimerEvent.commands = bash -c $$shell_quote(echo -e $$PreBuildTimerEvent.commands)
+PreBuildTimerEvent.commands = \\\"\\033[34;1m$$PROJECT_NAME build started\\033[0m
+PreBuildTimerEvent.commands += \\033[34;1mat \$\$(date +%s) \\033[0m \\\" | tee $${PROJECT_NAME}.time.txt
+PreBuildTimerEvent.commands = bash -c \"echo -e $$PreBuildTimerEvent.commands\"
 win32:PreBuildTimerEvent.name = Timer for $${PROJECT_NAME}
 PreBuildTimerEvent.CONFIG += no_link no_clean target_predeps
 QMAKE_EXTRA_COMPILERS += PreBuildTimerEvent
