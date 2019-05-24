@@ -39,10 +39,10 @@ qReal::interpretation::BlockInterface *CommonBlocksFactory::block(const qReal::I
 	}
 
 	if (RobotsBlock * const robotsBlock = dynamic_cast<RobotsBlock *>(newBlock)) {
-		robotsBlock->init(element, *mGraphicalModelApi, *mLogicalModelApi
-				, mErrorReporter, *mRobotModelManager, *mParser);
+		robotsBlock->init(element, mGraphicalModelApi, mLogicalModelApi
+				, mErrorReporter, *mRobotModelManager, mParser);
 	} else {
-		newBlock->init(element, *mGraphicalModelApi, *mLogicalModelApi, mErrorReporter, *mParser);
+		newBlock->init(element, mGraphicalModelApi, mLogicalModelApi, mErrorReporter, mParser);
 	}
 
 	return newBlock;

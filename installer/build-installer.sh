@@ -14,8 +14,8 @@ $GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND=gsed
 
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
-export QT_DIR=$1/../
-export QTIFW_DIR=$2
+export QT_DIR=$(realpath $1/../)
+export QTIFW_DIR=$(realpath $2)
 export PRODUCT=$3
 export OS=$OSTYPE
 

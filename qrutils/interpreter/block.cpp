@@ -33,16 +33,16 @@ Block::Block()
 }
 
 void Block::init(const Id &graphicalId
-		, const GraphicalModelAssistInterface &graphicalModelApi
-		, const LogicalModelAssistInterface &logicalModelApi
+		, const GraphicalModelAssistInterface *graphicalModelApi
+		, const LogicalModelAssistInterface *logicalModelApi
 		, ErrorReporterInterface * const errorReporter
-		, qrtext::LanguageToolboxInterface &textLanguageToolbox)
+		, qrtext::LanguageToolboxInterface *textLanguageToolbox)
 {
 	mGraphicalId = graphicalId;
-	mGraphicalModelApi = &graphicalModelApi;
-	mLogicalModelApi = &logicalModelApi;
+	mGraphicalModelApi = graphicalModelApi;
+	mLogicalModelApi = logicalModelApi;
 	mErrorReporter = errorReporter;
-	mParser = &textLanguageToolbox;
+	mParser = textLanguageToolbox;
 	if (mLogicalModelApi) {
 		mParserErrorReporter.reset(new utils::ParserErrorReporter(*mParser, *mErrorReporter
 				, mLogicalModelApi->editorManagerInterface()));

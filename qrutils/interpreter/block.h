@@ -47,10 +47,10 @@ public:
 	/// Initializes this block with external components that may be used during the intepretetation process.
 	/// @todo Not good.
 	void init(const qReal::Id &graphicalId
-			, const qReal::GraphicalModelAssistInterface &graphicalModelApi
-			, const qReal::LogicalModelAssistInterface &logicalModelApi
+			, const qReal::GraphicalModelAssistInterface *graphicalModelApi
+			, const qReal::LogicalModelAssistInterface *logicalModelApi
 			, qReal::ErrorReporterInterface * const errorReporter
-			, qrtext::LanguageToolboxInterface &textLanguageToolbox
+			, qrtext::LanguageToolboxInterface *textLanguageToolbox
 			);
 
 	/// A list of identifiers currently known to interpreter.
