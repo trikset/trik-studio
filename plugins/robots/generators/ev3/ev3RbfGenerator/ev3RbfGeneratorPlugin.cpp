@@ -253,7 +253,10 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	QMetaObject::invokeMethod(communicator, "connect", Qt::BlockingQueuedConnection, Q_RETURN_ARG(bool, connected));
 
 	if (connected) {
-		return communicator->uploadFile(rbfPath, targetPath);
+		QString res;
+		QMetaObject::invokeMethod(communicator, "uploadFile", Qt::BlockingQueuedConnection
+				, Q_RETURN_ARG(QString, res), Q_ARG(QString, rbfPath), Q_ARG(QString, targetPath));
+		return res;
 	}
 
 	return QString();
