@@ -167,7 +167,7 @@ UI_DIR = .build/$$CONFIGURATION/ui
 
 PRECOMPILED_HEADER = $$PWD/pch.h
 CONFIG += precompile_header
-!warn_off:QMAKE_CXXFLAGS *= -Wno-invalid-pch
+!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
