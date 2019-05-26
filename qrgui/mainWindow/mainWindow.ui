@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>MainWindowUi</class>
  <widget class="QMainWindow" name="MainWindowUi">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>843</width>
-    <height>559</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>QReal</string>
   </property>
@@ -40,8 +32,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>843</width>
-     <height>22</height>
+     <width>386</width>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -335,7 +327,14 @@
    <widget class="QWidget" name="errorDockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="ErrorListWidget" name="errorListWidget"/>
+      <widget class="ErrorListWidget" name="errorListWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

@@ -8,7 +8,12 @@
 	</platform>
 	<platform name="Linux">
 		<tool name="TRIK gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
+		<tool name="SSH to robot" program="xdg-open" arguments="ssh://root@@@TrikTcpServer@@"/>
+		<tool name="SCP to robot" program="xdg-open" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
 	<platform name="Mac">
+		<tool name="TRIK gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
+		<tool name="SSH to robot" program="open" arguments="ssh://root@@@TrikTcpServer@@"/>
+		<tool name="SCP to robot" program="open" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
 </tools>
