@@ -17,9 +17,9 @@ TEMPLATE = subdirs
 include(../../../../global.pri)
 
 win32 {
-	copyToDestdir(python35.dll, NOW)
-	copyToDestdir(python36.dll, NOW)
-	copyToDestdir(vcruntime140.dll, NOW) # python deps
+	isEmpty(PYTHON_PATH): PYTHON_PATH=$$(PYTHON_PATH)
+	copyToDestdir($$PYTHON_PATH\python35.dll, NOW)
+	copyToDestdir($$PYTHON_PATH\vcruntime140.dll, NOW) # python deps
 }
 
 # todo check and add appropriate libs!!!

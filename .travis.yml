@@ -55,7 +55,7 @@ matrix:
       dist: trusty
       sudo: required
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=small_debug_info"
+      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=small_debug_info CONFIG+=sanitize_address"
       name: "Linux debug + vera + tests + translations"
     - os: osx
       language: cpp
@@ -64,7 +64,7 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS debug + tests"
-      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
+      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=sanitize_address"
 
 
 before_install:
