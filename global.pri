@@ -172,7 +172,6 @@ MOC_DIR = .build/$$CONFIGURATION/moc
 RCC_DIR = .build/$$CONFIGURATION/rcc
 UI_DIR = .build/$$CONFIGURATION/ui
 
-<<<<<<< HEAD
 !noPch:CONFIG += precompile_header
 
 precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
