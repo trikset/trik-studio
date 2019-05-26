@@ -29,6 +29,8 @@ sudo touch $CCACHE_DIR/ccache.conf || ls -la $CCACHE_DIR
 $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
     export CCACHE_DIR=$CCACHE_DIR \
 && export CCACHE_CPP2=yes \
+&& export CCACHE_COMPRESS=yes \
+&& export CCACHE_COMPRESSLEVEL=3 \
 && export CCACHE_SLOPPINESS=time_macros,pch_defines,include_file_ctime \
 && eval \"\`pyenv init -\`\" \
 && eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig:/usr/local/lib/pkgconfig' \
