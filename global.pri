@@ -178,7 +178,10 @@ CONFIG += precompile_header
 #reports false errors for *.gcno coverage files
 #!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
-QMAKE_CXXFLAGS_DEBUG += -O1 -ggdb
+QMAKE_CXXFLAGS_DEBUG += -Og -ggdb
+
+small_debug_info:QMAKE_CXXFLAGS += -g1
+
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$_PRO_FILE_PWD_/include) \

@@ -55,7 +55,7 @@ matrix:
       dist: trusty
       sudo: required
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true
+      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=small_debug_info"
       name: "Linux debug + vera + tests + translations"
     - os: osx
       language: cpp
