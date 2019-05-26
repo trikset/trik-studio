@@ -172,6 +172,7 @@ MOC_DIR = .build/$$CONFIGURATION/moc
 RCC_DIR = .build/$$CONFIGURATION/rcc
 UI_DIR = .build/$$CONFIGURATION/ui
 
+<<<<<<< HEAD
 !noPch:CONFIG += precompile_header
 
 precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
@@ -186,6 +187,7 @@ QMAKE_CXXFLAGS_DEBUG += -Og -ggdb
 
 small_debug_info:QMAKE_CXXFLAGS += -g1
 
+!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$_PRO_FILE_PWD_/include) \
