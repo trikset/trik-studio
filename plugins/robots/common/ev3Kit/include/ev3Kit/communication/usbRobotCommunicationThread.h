@@ -15,8 +15,7 @@
 #pragma once
 
 #include "ev3RobotCommunicationThread.h"
-
-class QTimer;
+#include <QTimer>
 struct libusb_device_handle;
 
 namespace ev3 {
