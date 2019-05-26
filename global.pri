@@ -172,8 +172,12 @@ MOC_DIR = .build/$$CONFIGURATION/moc
 RCC_DIR = .build/$$CONFIGURATION/rcc
 UI_DIR = .build/$$CONFIGURATION/ui
 
-PRECOMPILED_HEADER = $$PWD/pch.h
-CONFIG += precompile_header
+!noPch:CONFIG += precompile_header
+
+precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
+precompile_header:!isEmpty(PRECOMPILED_HEADER) {
+	QMAKE_CXXFLAGS += -include $$PRECOMPILED_HEADER -fpch-preprocess
+}
 
 #reports false errors for *.gcno coverage files
 #!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
