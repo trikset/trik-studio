@@ -38,7 +38,7 @@ using namespace ev3::communication;
 
 UsbRobotCommunicationThread::UsbRobotCommunicationThread()
 	: mHandle(nullptr)
-	, mKeepAliveTimer(new QTimer(this))
+	, mKeepAliveTimer((this))
 {
 }
 
@@ -76,6 +76,7 @@ bool UsbRobotCommunicationThread::connect()
 	// Uncomment it to debug usb communication:
 	libusb_set_debug(nullptr, MAX_DEBUG_LEVEL);
 	if (result != 0) {
+		emit connected(false, tr("libusb init failed, LIBUSB_ERROR: %1").arg(result));
 		QLOG_ERROR() << QString("libusb init failed, LIBUSB_ERROR: %1").arg(result);
 		return false;
 	}
@@ -122,10 +123,9 @@ bool UsbRobotCommunicationThread::connect()
 	}
 
 	emit connected(true, QString());
-	mKeepAliveTimer->moveToThread(this->thread());
-	mKeepAliveTimer->disconnect();
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
-	mKeepAliveTimer->start(500);
+	mKeepAliveTimer.disconnect();
+	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
+	mKeepAliveTimer.start(500);
 	return true;
 }
 
@@ -143,7 +143,7 @@ void UsbRobotCommunicationThread::disconnect()
 		mHandle = nullptr;
 	}
 
-	mKeepAliveTimer->stop();
+	mKeepAliveTimer.stop();
 	emit disconnected();
 }
 
@@ -177,7 +177,7 @@ void UsbRobotCommunicationThread::checkForConnection()
 	if (success != 0) {
 		mHandle = nullptr;
 		emit disconnected();
-		mKeepAliveTimer->stop();
+		mKeepAliveTimer.stop();
 	}
 }
 
