@@ -2060,11 +2060,11 @@ void MainWindow::saveDiagramAsAPictureToFile(const QString &fileName)
 	brush.setColor(Qt::white);
 	painter.setBrush(brush);
 	painter.setPen(QPen(Qt::white));
-	QRectF realBoundingRect = getCurrentTab()->scene()->sceneRect();
+	QRectF realBoundingRect = sceneRect;
 	realBoundingRect.moveTo(QPointF());
 	painter.drawRect(realBoundingRect);
 
-	getCurrentTab()->scene()->render(&painter);
+	getCurrentTab()->scene()->render(&painter, realBoundingRect, sceneRect);
 	image.save(fileName);
 }
 
