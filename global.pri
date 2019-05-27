@@ -225,18 +225,19 @@ false:clang {
 
 # Hack to log build time.
 # ------------------------
-PHONY_DEPS = .
+PHONY_DEPS = $${PROJECT_NAME}.time.txt
 PreBuildTimerEvent.input = PHONY_DEPS
-PreBuildTimerEvent.output = phony.txt #non-existing
+PreBuildTimerEvent.output = $${PROJECT_NAME}.time.txt
 PreBuildTimerEvent.commands = \\\"\\033[34;1m$$PROJECT_NAME build started\\033[0m
-PreBuildTimerEvent.commands += \\033[34;1mat \$\$(date +%s) \\033[0m \\\" | tee $${PROJECT_NAME}.time.txt
+PreBuildTimerEvent.commands += \\033[34;1mat \$\$(touch $${PreBuildTimerEvent.output} && date -r $${PreBuildTimerEvent.output} +\%s) \\033[0m \\\"
 PreBuildTimerEvent.commands = bash -c \"echo -e $$PreBuildTimerEvent.commands\"
-win32:PreBuildTimerEvent.name = Timer for $${PROJECT_NAME}
+PreBuildTimerEvent.name = Timer for $${PROJECT_NAME}
 PreBuildTimerEvent.CONFIG += no_link no_clean target_predeps
 QMAKE_EXTRA_COMPILERS += PreBuildTimerEvent
 
 QMAKE_POST_LINK += bash -c \"echo -e \\\"\\033[34;1m$$PROJECT_NAME build finished\\033[0m
-QMAKE_POST_LINK += \\033[34;1min \$\$(( `date +%s` - `cut -f 5 -d $$shell_quote(' ') $${PROJECT_NAME}.time.txt`))\\033[0m\\\"\" $$escape_expand(\\n\\t)
+QMAKE_POST_LINK += \\033[34;1min \$\$(( `date +%s` - `date -r $${PreBuildTimerEvent.output} +%s`))\\033[0m\\\"\" $$escape_expand(\\n\\t) $$escape_expand(\\n\\t)
+
 
 #--------------------------
 
