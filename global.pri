@@ -81,10 +81,17 @@ isEmpty(TARGET) {
 
 equals(TEMPLATE, app) {
 	!no_rpath {
-		unix:!macx {
+		#reset default rpath before setting new one
+		#but this clears path to Qt libraries
+		#good for release/installer build, but ...
+		#QMAKE_LFLAGS_RPATH =
+		#QMAKE_RPATH =
+
+		linux {
 			QMAKE_LFLAGS += -Wl,-rpath-link,$$GLOBAL_DESTDIR
 			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN\'
-		} macx {
+		}
+		macx {
 			QMAKE_LFLAGS += -rpath @executable_path
 			QMAKE_LFLAGS += -rpath @executable_path/../Lib
 			QMAKE_LFLAGS += -rpath @executable_path/../Frameworks
@@ -121,7 +128,7 @@ unix:!nosanitizers {
 
 	#LSan can be used without performance degrade even in release build
 	#But at the moment we can not, because of Qt  problems
-	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread):!macx-clang { CONFIG += sanitize_leak }
+	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
 		QMAKE_CFLAGS += -fsanitize=leak
@@ -165,10 +172,21 @@ MOC_DIR = .build/$$CONFIGURATION/moc
 RCC_DIR = .build/$$CONFIGURATION/rcc
 UI_DIR = .build/$$CONFIGURATION/ui
 
-PRECOMPILED_HEADER = $$PWD/pch.h
-CONFIG += precompile_header
-!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
+!noPch:CONFIG += precompile_header
 
+precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
+precompile_header:!isEmpty(PRECOMPILED_HEADER) {
+	QMAKE_CXXFLAGS += -include $$PRECOMPILED_HEADER -fpch-preprocess
+}
+
+#reports false errors for *.gcno coverage files
+#!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
+
+QMAKE_CXXFLAGS_DEBUG += -Og -ggdb
+
+small_debug_info:QMAKE_CXXFLAGS += -g1
+
+!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$_PRO_FILE_PWD_/include) \
