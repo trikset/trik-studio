@@ -639,11 +639,12 @@ void MainWindow::print()
 	const bool isEditorTab = getCurrentTab() != nullptr;
 
 	if (isEditorTab) {
-		QPrinter printer(QPrinter::HighResolution);
+		QPrinter printer(QPrinter::ScreenResolution);
 		QPrintDialog dialog(&printer, this);
 		if (dialog.exec() == QDialog::Accepted) {
 			QPainter painter(&printer);
-			getCurrentTab()->scene()->render(&painter);
+			auto rectScene = getCurrentTab()->scene()->itemsBoundingRect();
+			getCurrentTab()->scene()->render(&painter, QRectF(), rectScene);
 		}
 	} else {
 		QsciScintillaBase *textTab = static_cast<QsciScintillaBase *>(currentTab());
