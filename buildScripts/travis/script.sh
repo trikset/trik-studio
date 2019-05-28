@@ -32,7 +32,7 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && export CCACHE_CPP2=yes \
 && export CCACHE_COMPRESS=yes \
 && export CCACHE_COMPRESSLEVEL=3 \
-&& export CCACHE_SLOPPINESS=time_macros,pch_defines,include_file_ctime \
+&& export CCACHE_SLOPPINESS=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches \
 && eval \"\`pyenv init -\`\" \
 && eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig:/usr/local/lib/pkgconfig' \
 && which g++ \
