@@ -37,7 +37,7 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && g++ --version \
 && which qmake \
 && qmake -query \
-&& ccache -z -M 0 \
+&& ccache -sz -M 0 \
 && pyenv root \
 && pyenv versions \
 && pkg-config --list-all \
