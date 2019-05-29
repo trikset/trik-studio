@@ -11,7 +11,6 @@ env:
     - PROJECT=studio
     - TESTS=true
     - TRANSLATIONS=false
-    - CELLAR_CACHE_DIR=$([ $TRAVIS_OS_NAME = 'osx' ] && echo "/usr/local/Cellar" || { mkdir -p .empty/{qt,ccache,python@3,pyenv} ; echo .empty ; } )
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
     - ALL_TESTS="./robots_kitBase_unittests-d && ./robots_interpreterCore_unittests-d && ./robots_twoDModel_unittests-d && ./trik-v62-qts-generator-tests-d && ./robots_utils_unittests-d && ./run-simulator-tests.sh"
@@ -22,10 +21,6 @@ cache:
 #  ccache: true
 #  pip: true
   directories:
-    - $CELLAR_CACHE_DIR/qt
-    - $CELLAR_CACHE_DIR/ccache
-    - $CELLAR_CACHE_DIR/python@3
-    - $CELLAR_CACHE_DIR/pyenv
     - $PYENV_ROOT
 #    - /usr/local/opt/
 #    - /usr/local/lib/
@@ -39,6 +34,16 @@ addons:
 #      - ubuntu-toolchain-r-test
 #    packages:
 #      - python-pip
+  homebrew:
+    packages:
+      - qt
+      - ccache
+      - pyenv
+      - coreutils
+      - libusb
+      - pkg-config
+      - gnu-sed
+
   artifacts:
     paths:
       - build.log
