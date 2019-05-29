@@ -118,11 +118,13 @@ after_test:
   - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%.exe
   - dir
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
+# pack autoinstaller
+  - 7z a autoinstall.zip %INSTALLER_NAME% *.qs reinstall*
 # install
-  - cd ..
-  - cmd /c .\installer\%INSTALLER_NAME% --script buildScripts\trik_studio_installscript.qs
+  - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
 artifacts:
+ - path: installer\autoinstall.zip
  - path: installer\$(INSTALLER_NAME)
  - path: $(ZIP_NAME)
 
