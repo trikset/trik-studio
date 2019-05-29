@@ -10,10 +10,8 @@ case $TRAVIS_OS_NAME in
      export PATH="$(pyenv root)/bin:$PATH"
      eval "$(pyenv init -)"
      export PKG_CONFIG_PATH="$(python3-config --prefix)/lib/pkgconfig"
-     EXECUTOR="buildScripts/with_pyenv "
     ;;
   linux)
-     EXECUTOR="time docker exec builder "
      # if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
    ;;
   *) exit 1 ;;
@@ -21,25 +19,25 @@ esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
-
-export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
-sudo mkdir -p $CCACHE_DIR
-sudo touch $CCACHE_DIR/ccache.conf || ls -la $CCACHE_DIR
-
+mkdir -p $CCACHE_DIR || sudo chown -R $USER $CCACHE_DIR || :
+cat << EOF > $CCACHE_CONFIGPATH
+compiler_check=none
+run_second_cpp=true
+cache_dir=$CCACHE_DIR
+compression=true
+compression_level=3
+sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
+EOF
 $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
-    export CCACHE_DIR=$CCACHE_DIR \
-&& export CCACHE_CPP2=yes \
-&& export CCACHE_COMPRESS=yes \
-&& export CCACHE_COMPRESSLEVEL=3 \
-&& export CCACHE_SLOPPINESS=time_macros,pch_defines,include_file_ctime \
+   export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
+&& ccache -p \
 && eval \"\`pyenv init -\`\" \
 && eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig:/usr/local/lib/pkgconfig' \
 && which g++ \
 && g++ --version \
 && which qmake \
 && qmake -query \
-&& mkdir -p $CCACHE_DIR \
-&& ccache -z -M 0 \
+&& ccache -sz -M 0 \
 && pyenv root \
 && pyenv versions \
 && pkg-config --list-all \
