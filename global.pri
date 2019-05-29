@@ -184,7 +184,13 @@ precompile_header:!isEmpty(PRECOMPILED_HEADER) {
 
 QMAKE_CXXFLAGS_DEBUG += -Og -ggdb
 
-small_debug_info:QMAKE_CXXFLAGS += -g1
+#QMAKE_CXXFLAGS_DEBUG are expanded after QMAKE_CXX_FLAGS into compiler command line
+#Thus we need to set QMAKE_CXXFLAGS_DEBUG (and _RELEASE),
+# because we want to overwrite the -g option for smaller debug info size
+small_debug_info{
+	QMAKE_CXXFLAGS_DEBUG += -g1
+	QMAKE_CXXFLAGS_RELEASE += -g1
+}
 
 !warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
