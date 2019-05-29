@@ -167,11 +167,11 @@ void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
 	case RunPolicy::Ask:
 		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget(), tr("The program has been uploaded")
 				, tr("Do you want to run it?")) == QMessageBox::Yes) {
-			communicator->runProgram(fileOnRobot);
+			QMetaObject::invokeMethod(communicator, "runProgram", Q_ARG(QString, fileOnRobot));
 		}
 		break;
 	case RunPolicy::AlwaysRun:
-		communicator->runProgram(fileOnRobot);
+		QMetaObject::invokeMethod(communicator, "runProgram", Q_ARG(QString, fileOnRobot));
 		break;
 	case RunPolicy::NeverRun:
 		break;
@@ -183,14 +183,14 @@ void Ev3RbfGeneratorPlugin::runProgram()
 	const QString fileOnRobot = uploadProgram();
 	communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator();
 	if (!fileOnRobot.isEmpty() && communicator) {
-		communicator->runProgram(fileOnRobot);
+		QMetaObject::invokeMethod(communicator, "runProgram", Q_ARG(QString, fileOnRobot));
 	}
 }
 
 void Ev3RbfGeneratorPlugin::stopRobot()
 {
 	if (communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator()) {
-		communicator->stopProgram();
+		QMetaObject::invokeMethod(communicator, "stopProgram");
 	}
 }
 

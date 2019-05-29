@@ -124,7 +124,7 @@ bool UsbRobotCommunicationThread::connect()
 
 	emit connected(true, QString());
 	mKeepAliveTimer.disconnect();
-	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
+//	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
 	mKeepAliveTimer.start(500);
 	return true;
 }
