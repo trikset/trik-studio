@@ -18,6 +18,7 @@
 
 #include "ev3Kit/communication/commandConstants.h"
 #include "ev3Kit/communication/ev3DirectCommand.h"
+#include "thirdparty/qslog/QsLog.h"
 
 static const uchar SYSTEM_COMMAND_REPLY =             0x01;    //  System command, reply required
 static const uchar SYSTEM_COMMAND_NO_REPLY =          0x81;    //  System command, reply not required
@@ -44,8 +45,8 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	// A path to file on the remote device.
 	const QString devicePath = targetDir + "/" + fileInfo.fileName();
 	QFile file(sourceFile);
-	/// @todo: Implement more detailed error reporting
 	if (!file.open(QIODevice::ReadOnly)) {
+		QLOG_ERROR() << "File, which should be uploaded, can not be read";
 		return QString();
 	}
 
