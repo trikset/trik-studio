@@ -808,12 +808,12 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1021"/>
         <source>Read Average to Variable</source>
-        <translation>Средне-взвешенное значение в переменную</translation>
+        <translation>Средневзвешенное значение в переменную</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1023"/>
         <source>Read the Weighted Average value from the sensor.  This value is calculated internally by the sensor where each of the eight sensors is either triggered or not and multiplied by a factor to help determine if the line is left, right or on center of the line (according to the set point). EXPECTED VALUES: 0-80 (-1=ERROR)</source>
-        <translation>Считывает среедне-взвешенное значение в переменную. Значение высчитывается внутри сенсора, где каждый из восьми сенсоров берется с коэффициентом, и вычисляется срееднее. Ожидается значение от 0 до 80 (-1 = ошибка)</translation>
+        <translation>Считывает средневзвешенное значение в переменную. Значение высчитывается внутри сенсора, где каждый из восьми сенсоров берется с коэффициентом, и вычисляется срееднее. Ожидается значение от 0 до 80 (-1 = ошибка)</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1063"/>
@@ -905,7 +905,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="2063"/>
         <source>Wake Up Line Leader</source>
-        <translation>Пробуждает датчик линии</translation>
+        <translation>Пробудить датчик линии</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="2065"/>
@@ -1049,7 +1049,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1304"/>
         <source>Sleep Line Leader</source>
-        <translation>Датчик линии в сон</translation>
+        <translation>Датчик линии в спящий режим</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1306"/>
