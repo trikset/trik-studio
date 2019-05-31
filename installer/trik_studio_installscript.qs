@@ -6,6 +6,10 @@ Controller.prototype.IntroductionPageCallback = function() {
 }
 
 Controller.prototype.DynamicTargetWidgetCallback = function() {
+  var targetDir = installer.environmentVariable("TRIK_STUDIO_INSTALL_DIR");
+  if (targetDir != "") {
+    gui.pageWidgetByObjectName("DynamicTargetWidget").targetDirectory.text = targetDir;
+  }
   gui.clickButton(buttons.NextButton);
 }
 
