@@ -183,17 +183,25 @@ void UsbRobotCommunicationThread::checkForConnection()
 
 bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSize, QByteArray &outputBuffer)
 {
-	const bool result = send1(buffer);
-	outputBuffer = receive(responseSize);
-	return result;
+	auto ok = send1(buffer);
+	if (ok)
+		outputBuffer = receive(responseSize);
+	return ok;
 }
 
 bool UsbRobotCommunicationThread::send1(const QByteArray &buffer) const
 {
+	if (!mHandle)
+		return false;
+
 	uchar *cmd = reinterpret_cast<uchar *>(const_cast<char *>(buffer.data()));
 	int actualLength = 0;
-	return mHandle
-			&& libusb_bulk_transfer(mHandle, EV3_EP_OUT, cmd, EV3_PACKET_SIZE, &actualLength, EV3_USB_TIMEOUT) >= 0;
+	auto rc = libusb_bulk_transfer(mHandle, EV3_EP_OUT, cmd, buffer.size(), &actualLength, EV3_USB_TIMEOUT);
+	if (rc != 0) {
+		QLOG_ERROR() << "EV3USB" << "Failed libusb_bulk_transfer with status 0x" + QString::number(rc, 16);
+	}
+
+	return rc == 0 && actualLength == buffer.size();
 }
 
 QByteArray UsbRobotCommunicationThread::receive(int size) const

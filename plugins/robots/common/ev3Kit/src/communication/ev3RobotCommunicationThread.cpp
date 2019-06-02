@@ -20,24 +20,26 @@
 #include "ev3Kit/communication/ev3DirectCommand.h"
 #include "thirdparty/qslog/QsLog.h"
 
-static const uchar SYSTEM_COMMAND_REPLY =             0x01;    //  System command, reply required
-static const uchar SYSTEM_COMMAND_NO_REPLY =          0x81;    //  System command, reply not required
-static const uchar BEGIN_DOWNLOAD =                   0x92;    //  Begin file down load
-static const uchar CONTINUE_DOWNLOAD =                0x93;    //  Continue file down load
-static const uchar DELETE_FILE =                      0x9C;    //  Remove file
-static const uchar SYSTEM_REPLY =                     0x03;    //  System command reply
-static const uchar SYSTEM_REPLY_ERROR =               0x05;    //  System command reply error
-static const uchar DELETE_FILE_RESPONSE_SIZE =        8;
-static const uchar BEGIN_DOWNLOAD_RESPONSE_SIZE =     8;
-static const uchar CONTINUE_DOWNLOAD_RESPONSE_SIZE =  8;
-static const uchar SUCCESS =                          0x00;
-static const uchar END_OF_FILE =                      0x08;
+static const uchar EV3_SYSTEM_COMMAND_REPLY =             0x01;    //  System command, reply required
+static const uchar EV3_SYSTEM_COMMAND_NO_REPLY =          0x81;    //  System command, reply not required
+static const uchar EV3_BEGIN_DOWNLOAD =                   0x92;    //  Begin file down load
+static const uchar EV3_CONTINUE_DOWNLOAD =                0x93;    //  Continue file down load
+static const uchar EV3_DELETE_FILE =                      0x9C;    //  Remove file
+static const uchar EV3_SYSTEM_REPLY =                     0x03;    //  System command reply
+static const uchar EV3_SYSTEM_REPLY_ERROR =               0x05;    //  System command reply error
+static const uchar EV3_DELETE_FILE_RESPONSE_SIZE =        8;
+static const uchar EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE =     8;
+static const uchar EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE =  8;
+static const uchar EV3_SYSTEM_COMMAND_REPLY_SUCCESS =  0x00;
+static const uchar EV3_CONTINUE_DOWNLAD_STATUS_EOF =      0x08;
 
 using namespace ev3::communication;
 
 Ev3RobotCommunicationThread::~Ev3RobotCommunicationThread()
 {
 }
+
+static inline QString char2hex (char c) { return QString("0x%1").arg(static_cast<uint8_t>(c), 2, 16, QLatin1Char('0')); }
 
 QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const QString &targetDir)
 {
@@ -80,10 +82,10 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	QByteArray commandBegin(cmdBeginSize, 0);
 	commandBegin[0] = (cmdBeginSize - 2) & 0xFF;
 	commandBegin[1] = ((cmdBeginSize - 2) >> 8) & 0xFF ;
-	commandBegin[2] = 0x02;
-	commandBegin[3] = 0x00;
-	commandBegin[4] = SYSTEM_COMMAND_REPLY;
-	commandBegin[5] = BEGIN_DOWNLOAD;
+	commandBegin[2] = (++mMessageCounter) & 0xFF;
+	commandBegin[3] = (mMessageCounter >> 8) & 0xFF;
+	commandBegin[4] = EV3_SYSTEM_COMMAND_REPLY;
+	commandBegin[5] = EV3_BEGIN_DOWNLOAD;
 	commandBegin[6] = data.size() & 0xFF;
 	commandBegin[7] = (data.size() >> 8) & 0xFF;
 	commandBegin[8] = (data.size() >> 16) & 0xFF;
@@ -95,16 +97,18 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	commandBegin[index] = 0x00;
 
-	send1(commandBegin);
-	QByteArray commandBeginResponse = receive(BEGIN_DOWNLOAD_RESPONSE_SIZE);
+	if (!send1(commandBegin))
+		QLOG_ERROR() << "EV3USB" << "Failed to start program upload to robot";
 
-	if (commandBeginResponse.at(4) == SYSTEM_REPLY_ERROR) {
+	QByteArray commandBeginResponse = receive(EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE);
+
+	if (commandBeginResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
 		QLOG_ERROR() << "EV3USB"
-						<< "Reply to cmd" << commandBeginResponse.at(5)
-						<< "msg" << (commandBeginResponse.at(3) << 8) + commandBeginResponse.at(2)
-						<< "status" << commandBeginResponse.at(6);
-		if ((commandBeginResponse.at(1) << 8) + commandBeginResponse.at(0) + 2 > 7)
-			QLOG_INFO() << "EV3USB" << "Reply additional:" << commandBeginResponse.right(commandBeginResponse.size()-7);
+						<< "Reply to cmd" << char2hex(commandBeginResponse.at(5))
+						<< "msg#" << (static_cast<uint8_t>(commandBeginResponse.at(3)) << 8) + static_cast<uint32_t>(static_cast<uint8_t>(commandBeginResponse.at(2)))
+						<< "status" << char2hex(commandBeginResponse.at(6));
+		if (commandBeginResponse.size() > 7)
+			QLOG_INFO() << "EV3USB" << "Reply additional:" << commandBeginResponse.right(commandBeginResponse.size()-7).toHex();
 		return QString();
 	}
 
@@ -116,32 +120,36 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		QByteArray commandContinue(cmdContinueSize, 0);
 		commandContinue[0] = (cmdContinueSize - 2) & 0xFF;
 		commandContinue[1] = ((cmdContinueSize - 2) >> 8) & 0xFF ;
-		commandContinue[2] = 0x03;
-		commandContinue[3] = 0x00;
-		commandContinue[4] = SYSTEM_COMMAND_REPLY;
-		commandContinue[5] = CONTINUE_DOWNLOAD;
+		commandContinue[2] = (++mMessageCounter) & 0xFF;
+		commandContinue[3] = (mMessageCounter >> 8) & 0xFF;
+		commandContinue[4] = EV3_SYSTEM_COMMAND_REPLY;
+		commandContinue[5] = EV3_CONTINUE_DOWNLOAD;
 		commandContinue[6] = handle;
 		for (int i = 0; i < sizeToSend; ++i) {
 			commandContinue[7 + i] = data.at(sizeSent++);
 		}
 
-		send1(commandContinue);
-		QThread::sleep(2);
-		QByteArray commandContinueResponse = receive(CONTINUE_DOWNLOAD_RESPONSE_SIZE);
-		if (commandContinueResponse.at(7) != SUCCESS &&
-				(commandContinueResponse.at(7) != END_OF_FILE && sizeSent == data.size())) {
-			qDebug() << (uint)commandContinueResponse.at(7);
+		if (!send1(commandContinue))
+			QLOG_ERROR() << "EV3USB" << "Failed to send program data to robot";
+
+		QByteArray commandContinueResponse = receive(EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE);
+		if (commandContinueResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
+			QLOG_ERROR() << "EV3USB"
+							<< "Reply to cmd" << char2hex(commandContinueResponse.at(5))
+							<< "msg#" << (static_cast<uint8_t>(commandContinueResponse.at(3)) << 8) + static_cast<uint32_t>(static_cast<uint8_t>(commandContinueResponse.at(2)))
+							<< "status" << char2hex(commandContinueResponse.at(6));
+			if (commandContinueResponse.size() > 7)
+				QLOG_INFO() << "EV3USB" << "Reply additional:" << commandContinueResponse.right(commandContinueResponse.size()-7).toHex();
 			return QString();
 		}
 	}
 
-	qDebug() << devicePath;
 	return devicePath;
 }
 
 bool Ev3RobotCommunicationThread::runProgram(const QString &pathOnRobot)
 {
-	QByteArray command = Ev3DirectCommand::formCommand(21 + pathOnRobot.size(), 0, 0x08, 0
+	QByteArray command = Ev3DirectCommand::formCommand(21 + pathOnRobot.size(), ++mMessageCounter, 0x08, 0
 			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
 	int index = 7;
 	#define charOf(x) static_cast<char>(static_cast<uchar>(x))
@@ -164,16 +172,16 @@ bool Ev3RobotCommunicationThread::runProgram(const QString &pathOnRobot)
 	command[index++] = 0x60;  // GV0(0), Size of image at Global Var offset 0.
 	command[index++] = 0x64;  // GV0(4), Address of image at Global Var offset 4
 	command[index++] = 0x00;  // LC0(0), Debug mode (0 = normal) encoded as single byte constant
-	send1(command);
 
-	return true;
+	return send1(command);
 }
 
 void Ev3RobotCommunicationThread::stopProgram()
 {
-	QByteArray command = Ev3DirectCommand::formCommand(9, 0, 0, 0
+	QByteArray command = Ev3DirectCommand::formCommand(9, ++mMessageCounter, 0, 0
 			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
 	command[7] = 0x02;  // opPROGRAM_STOP Opcode
 	command[8] = 0x01;  // LC0(USER_SLOT), User slot = 1 (program slot)
-	send1(command);
+	if (!send1(command))
+		QLOG_ERROR() << "EV3USB" << "Failed to stop program";
 }

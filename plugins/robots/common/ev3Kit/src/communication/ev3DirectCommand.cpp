@@ -17,10 +17,6 @@
 using namespace ev3;
 using namespace ev3::communication;
 
-Ev3DirectCommand::Ev3DirectCommand()
-{
-}
-
 QByteArray Ev3DirectCommand::formCommand(int size, int messageCounter, ushort globalSize
 		, int localSize, enums::commandType::CommandTypeEnum type)
 {
