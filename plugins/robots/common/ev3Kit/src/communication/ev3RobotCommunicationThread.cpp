@@ -99,6 +99,12 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	QByteArray commandBeginResponse = receive(BEGIN_DOWNLOAD_RESPONSE_SIZE);
 
 	if (commandBeginResponse.at(4) == SYSTEM_REPLY_ERROR) {
+		QLOG_ERROR() << "EV3USB"
+						<< "Reply to cmd" << commandBeginResponse.at(5)
+						<< "msg" << (commandBeginResponse.at(3) << 8) + commandBeginResponse.at(2)
+						<< "status" << commandBeginResponse.at(6);
+		if ((commandBeginResponse.at(1) << 8) + commandBeginResponse.at(0) + 2 > 7)
+			QLOG_INFO() << "EV3USB" << "Reply additional:" << commandBeginResponse.right(commandBeginResponse.size()-7);
 		return QString();
 	}
 
@@ -120,13 +126,16 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		}
 
 		send1(commandContinue);
+		QThread::sleep(2);
 		QByteArray commandContinueResponse = receive(CONTINUE_DOWNLOAD_RESPONSE_SIZE);
 		if (commandContinueResponse.at(7) != SUCCESS &&
 				(commandContinueResponse.at(7) != END_OF_FILE && sizeSent == data.size())) {
+			qDebug() << (uint)commandContinueResponse.at(7);
 			return QString();
 		}
 	}
 
+	qDebug() << devicePath;
 	return devicePath;
 }
 
