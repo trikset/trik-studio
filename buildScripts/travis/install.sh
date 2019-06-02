@@ -2,22 +2,6 @@
 set -euxo pipefail
 case $TRAVIS_OS_NAME in
   osx)
-    REQUIRED_PACKAGES="qt ccache pyenv coreutils gnu-sed"
-    export HOMEBREW_TEMP="$HOME/homebrew.tmp"
-    export HOMEBREW_LOGS="$HOMEBREW_TEMP"
-    #To turn autoupdate on use `unset HOMEBREW_NO_AUTO_UPDATE` in a sub-shell before `brew install`
-    export HOMEBREW_NO_AUTO_UPDATE=1
-    for pkg in $REQUIRED_PACKAGES ; do
-      p="${pkg##*/}"
-      p="${p%.*}"
-      if [ -d $CELLAR_CACHE_DIR/$p ] ; then
-	rmdir $CELLAR_CACHE_DIR/$p \
-	  && (brew install $pkg || echo "Failed to install $pkg") \
-        || { brew unlink $p ; brew link --force $p ; }
-      else
-        brew install $pkg || echo "Failed to install $pkg"
-      fi
-    done
   ;;
   linux)
     docker pull trikset/linux-builder

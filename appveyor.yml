@@ -20,8 +20,6 @@ environment:
     QTIFW: C:\Qt\Tools\QtInstallerFramework\3.0
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
-    PYTHON_PATH: C:\Python35
-    PYTHON_LIB: '%PYTHON_PATH%\libs'
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
@@ -30,14 +28,13 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
-      - MINGW: C:\Qt\Tools\mingw530_32
-        QTDIR: C:\Qt\5.11\mingw53_32
-        QT: 5.11
-        ARCH: x86
-      - MINGW: C:\Qt\Tools\mingw492_32
-        QTDIR: C:\Qt\5.6\mingw49_32
-        QT: 5.6
-        ARCH: x86
+      - QT: 5.12
+        ARCH: 64
+        PYTHON_PATH: C:\Python35-x64
+
+      - QT: 5.12
+        ARCH: 32
+        PYTHON_PATH: C:\Python35
 
 configuration:
 #  - debug
@@ -54,6 +51,7 @@ init:
   - git config --global core.autocrlf true
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
+  - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
 
 clone_script:
     - cmd: |
@@ -64,10 +62,14 @@ clone_script:
 
 
 install:
-  - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\usr\bin;%PATH%
+  - set PYTHON_LIB=%PYTHON_PATH%\libs
+  - set QTDIR=C:\Qt\5.12\mingw73_%ARCH%
+  - set MINGW=%QTDIR%\..\..\Tools\mingw730_%ARCH%
+  - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
 # need to reconfigure because it is anouther one git
   - git config --global core.autocrlf true
   - pacman --verbose --noconfirm --sync ccache rsync curl unzip
+  - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
   - ccache -p || echo "Failed to print ccache config (missing -p option)"
@@ -106,21 +108,24 @@ after_test:
   - for %%f in (*.exe) do windeployqt --release %%f
   - set ZIP_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set ZIP_NAME=%ZIP_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set ZIP_NAME=%ZIP_NAME%-%APPVEYOR_REPO_BRANCH%)
-  - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%ARCH%.zip
+  - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%PLATFORM%.zip
   - 7z a %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
   - set INSTALLER_NAME=trik-studio-installer
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH%)
-  - set INSTALLER_NAME=%INSTALLER_NAME%-%ARCH%.exe
-  - dir
+  - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%
+  - set AUTOINSTALLER_ZIP_NAME=%INSTALLER_NAME%-auto.zip
+  - set INSTALLER_NAME=%INSTALLER_NAME%.exe
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
+# pack autoinstaller
+  - 7z a %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% *.qs reinstall*
 # install
-  - cd ..
-  - cmd /c .\installer\%INSTALLER_NAME% --script buildScripts\trik_studio_installscript.qs
+  - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
 artifacts:
+ - path: installer\$(AUTOINSTALLER_ZIP_NAME)
  - path: installer\$(INSTALLER_NAME)
  - path: $(ZIP_NAME)
 
@@ -131,13 +136,13 @@ deploy:
   - provider: Environment
     name: trik-studio-fresh
     on:
-      QT: 5.6
+      ARCH: 32
       APPVEYOR_PROJECT_SLUG: $(master_ci)
 
   - provider: Environment
-    name: trik-studio-qt5.11
+    name: trik-studio-64
     on:
-      QT: 5.11
+      ARCH: 64
       APPVEYOR_PROJECT_SLUG: $(master_ci)
       
 on_finish:

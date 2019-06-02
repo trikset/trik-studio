@@ -16,14 +16,9 @@ TEMPLATE = subdirs
 
 include(../../../../global.pri)
 
-win32 {
-	copyToDestdir(MinGW32/dll/libusb-1.0.dll, NOW)
-}
+PKGCONFIG *= libusb-1.0
+CONFIG *= link_pkgconfig
 
-macx {
-	copyToDestdir(libusb-1.0.dylib, NOW)
-}
-
-CONFIG(clang) {
-	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
-}
+# May be --variable=libdir?
+win32: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\bin\libusb-1.0.dll, NOW)
+macx: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)/lib/libusb-1.0.dylib, NOW)

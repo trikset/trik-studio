@@ -11,25 +11,20 @@ env:
     - PROJECT=studio
     - TESTS=true
     - TRANSLATIONS=false
-    - CELLAR_CACHE_DIR=$([ $TRAVIS_OS_NAME = 'osx' ] && echo "/usr/local/Cellar" || { mkdir -p .empty/{qt,ccache,python@3,pyenv} ; echo .empty ; } )
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
     - ALL_TESTS="./robots_kitBase_unittests-d && ./robots_interpreterCore_unittests-d && ./robots_twoDModel_unittests-d && ./trik-v62-qts-generator-tests-d && ./robots_utils_unittests-d && ./run-simulator-tests.sh"
-    - QMAKE_EXTRA="CONFIG+=tests"
+    - QMAKE_EXTRA="CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
 cache:
   timeout: 1000
-  apt: true
-  ccache: true
+#  apt: true
+#  ccache: true
 #  pip: true
   directories:
-    - $CELLAR_CACHE_DIR/qt
-    - $CELLAR_CACHE_DIR/ccache
-    - $CELLAR_CACHE_DIR/python@3
-    - $CELLAR_CACHE_DIR/pyenv
     - $PYENV_ROOT
 #    - /usr/local/opt/
 #    - /usr/local/lib/
-#    - $HOME/.ccache
+    - $HOME/.ccache
 #    - $HOME/.cache
 
 addons:
@@ -39,6 +34,16 @@ addons:
 #      - ubuntu-toolchain-r-test
 #    packages:
 #      - python-pip
+  homebrew:
+    packages:
+      - qt
+      - ccache
+      - pyenv
+      - coreutils
+      - libusb
+      - pkg-config
+      - gnu-sed
+
   artifacts:
     paths:
       - build.log
@@ -50,12 +55,12 @@ matrix:
       sudo: required
       services: docker
       name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       dist: trusty
       sudo: required
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true
+      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=small_debug_info CONFIG+=sanitize_address"
       name: "Linux debug + vera + tests + translations"
     - os: osx
       language: cpp
@@ -64,20 +69,24 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS debug + tests"
-      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
+      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=sanitize_address"
 
 
 before_install:
   - time wait $EARLY_START_DOCKER_PULL_PID || true
   - ./buildScripts/travis/before_install.sh
+  - export CCACHE_CONFIGPATH=$HOME/ccache.conf
 
 install:
   - ./buildScripts/travis/install.sh
 
 script:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec builder " ; else export EXECUTOR="buildScripts/with_pyenv " ;fi
+  - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
   - ./buildScripts/travis/script.sh & WPID=$!
-  - sleep 2800 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
+  - sleep 2400 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - wait $WPID ; RES=$?; kill $KPID > /dev/null ; ( exit $RES )
+
 after_script:
   - ./buildScripts/travis/after_script.sh
   - kill $HEARTBEAT

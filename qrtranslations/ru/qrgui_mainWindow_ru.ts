@@ -70,72 +70,72 @@
 <context>
     <name>MainWindowUi</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="14"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="6"/>
         <source>QReal</source>
         <translation>QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="49"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="41"/>
         <source>&amp;File</source>
         <translation>Ф&amp;айл</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="65"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="57"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="69"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="61"/>
         <source>Panels</source>
         <translation>Панели</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="82"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="74"/>
         <source>&amp;Help</source>
         <translation>&amp;Справка</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="90"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="82"/>
         <source>&amp;Settings</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="103"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="95"/>
         <source>&amp;Tools</source>
         <translation>&amp;Инструменты</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="109"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="101"/>
         <source>&amp;Edit</source>
         <translation>&amp;Правка</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="131"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="123"/>
         <source>File Toolbar</source>
         <translation>Панель инструментов &quot;Файл&quot;</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="161"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="153"/>
         <source>Mini Map</source>
         <translation>Миникарта</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="210"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="202"/>
         <source>Palette</source>
         <translation>Палитра</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="247"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="239"/>
         <source>Edit Toolbar</source>
         <translation>Панель инструментов &quot;Правка&quot;</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="260"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="252"/>
         <source>View Toolbar</source>
         <translation>Панель инструментов &quot;Вид&quot;</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="278"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="270"/>
         <source>Logical Model Explorer</source>
         <translation>Обозреватель логической модели</translation>
     </message>
@@ -144,17 +144,17 @@
         <translation type="obsolete">Вывод</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="345"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="344"/>
         <source>Graphical Model Explorer</source>
         <translation>Обозреватель графической модели</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="379"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="378"/>
         <source>Property Editor</source>
         <translation>Редактор свойств</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="416"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="415"/>
         <source>Interpreter Toolbar</source>
         <translation>Панель инструментов &quot;Интерпретатор&quot;</translation>
     </message>
@@ -163,82 +163,82 @@
         <translation type="obsolete">Панель инструментов &quot;Генераторы&quot;</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="441"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="440"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="450"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="449"/>
         <source>Zoom In</source>
         <translation>Приблизить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="453"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="452"/>
         <source>Ctrl++</source>
         <translation>Ctrl++</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="462"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="461"/>
         <source>Zoom Out</source>
         <translation>Отдалить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="465"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="464"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="476"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="475"/>
         <source>Antialiasing</source>
         <translation>Антиалиасинг</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="484"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="483"/>
         <source>OpenGL Renderer</source>
         <translation>Рендерер OpenGL</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="493"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="492"/>
         <source>Print</source>
         <translation>Печать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="427"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="426"/>
         <source>Generators Toolbar</source>
         <translation>Панель инструментов &quot;Генераторы&quot;</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="330"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="322"/>
         <source>Errors</source>
         <translation>Ошибки</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="498"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="497"/>
         <source>Export to SVG</source>
         <translation>Экспортировать в SVG</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="503"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="502"/>
         <source>Open in new tab</source>
         <translation>Открыть в новой вкладке</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="508"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="507"/>
         <source>Small Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="511"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="510"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="516"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="515"/>
         <source>About </source>
         <translation>О программе </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="521"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="520"/>
         <source>About Qt...</source>
         <translation></translation>
     </message>
@@ -247,265 +247,265 @@
         <translation type="vanished">Показывать сплешскрин</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="530"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="529"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="533"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="532"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="538"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="537"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="541"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="540"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="550"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="549"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="553"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="552"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="556"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="555"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="567"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="566"/>
         <source>Show grid</source>
         <translation>Показать сетку</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="575"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="574"/>
         <source>Switch on grid</source>
         <translation>Включить сетку</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="580"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="579"/>
         <source>Mouse gestures</source>
         <translation>Жесты мышью</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="585"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="584"/>
         <source>Preferences...</source>
         <translation>Настройки...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="596"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="595"/>
         <source>Switch on alignment</source>
         <translation>Включить направляющие</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="607"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="606"/>
         <source>Show alignment</source>
         <translation>Показать направляющие</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="612"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="611"/>
         <source>Debug</source>
         <translation>Отладка</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="615"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="614"/>
         <source>F9</source>
         <translation>v</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="624"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="623"/>
         <source>Generate and build</source>
         <translation>Сгенерировать и собрать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="627"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="626"/>
         <source>Ctrl+F9</source>
         <translation>Ctrl+F9</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="632"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="635"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="631"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="634"/>
         <source>Set breakpoints</source>
         <translation>Точки останова</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="638"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="637"/>
         <source>Ctrl+F3</source>
         <translation>Ctrl+F3</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="643"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="642"/>
         <source>Cont</source>
         <translation>Продолжить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="646"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="645"/>
         <source>Ctrl+F6</source>
         <translation>Ctrl+F6</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="651"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="650"/>
         <source>Configure</source>
         <translation>Сконфигурировать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="654"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="653"/>
         <source>Ctrl+F2</source>
         <translation>Ctrl+F2</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="663"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="662"/>
         <source>New Diagram</source>
         <translation>Новая диаграмма</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="666"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="665"/>
         <source>Create new diagram in a current model</source>
         <translation>Создать новую диаграмму в текущей модели</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="675"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="678"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="674"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="677"/>
         <source>Fullscreen Mode</source>
         <translation>Полный экран</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="681"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="680"/>
         <source>Ctrl+Shift+F</source>
         <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="690"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="689"/>
         <source>New Project</source>
         <translation>Новый проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="693"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="692"/>
         <source>Ctrl+Shift+N</source>
         <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="698"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="697"/>
         <source>Import...</source>
         <translation>Импортировать...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="701"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="700"/>
         <source>Import QReal project into current.</source>
         <translation>Импортировать проект QReal в текущий</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="706"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="705"/>
         <source>Save diagram as a picture...</source>
         <translation>Сохранить диаграмму как картинку...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="711"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="710"/>
         <source>Close project</source>
         <translation>Закрыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="716"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="715"/>
         <source>Find...</source>
         <translation>Найти...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="721"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="720"/>
         <source>Find and replace</source>
         <translation>Найти и заменить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="726"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="725"/>
         <source>Replace by...</source>
         <translation>Заменить на...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="735"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="734"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="738"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="737"/>
         <source>Ctrl+Z</source>
         <translation>Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="747"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="746"/>
         <source>Redo</source>
         <translation>Повторить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="750"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="749"/>
         <source>Ctrl+Shift+Z</source>
         <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="755"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="754"/>
         <source>Export to XML</source>
         <translation>Экспортировать в XML</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="763"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="762"/>
         <source>Show all text</source>
         <translation>Показать весь текст</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="766"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="765"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="771"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="774"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="770"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="773"/>
         <source>Hide bottom docks</source>
         <translation>Спрятать панели в нижней части окна</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="777"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="776"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="786"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="785"/>
         <source>Copy</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="789"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="788"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="798"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="797"/>
         <source>Paste</source>
         <translation>Вставить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="801"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="800"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="810"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="809"/>
         <source>Cut</source>
         <translation>Вырезать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="813"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="812"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="818"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="817"/>
         <source>Restore default settings and Quit</source>
         <translation>Восстановить настройки по-умолчанию и выйти</translation>
     </message>
@@ -760,55 +760,55 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="834"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="845"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="835"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="846"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="834"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="835"/>
         <source>Plugin unloading failed: </source>
         <translation>Выгрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="845"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="846"/>
         <source>Plugin loading failed: </source>
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="957"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="973"/>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="997"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="958"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="974"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="998"/>
         <source>Shape Editor</source>
         <translation>Редактор формы фигур</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="990"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="991"/>
         <source>Text Editor</source>
         <translation>Текстовый редактор</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1216"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1217"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1217"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1218"/>
         <source>Save project</source>
         <translation>Сохранить проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1218"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1219"/>
         <source>Save project as</source>
         <translation>Сохранить проект как</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1219"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1220"/>
         <source>New project</source>
         <translation>Создать проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1212"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1213"/>
         <source>New diagram</source>
         <translation>Создать диаграмму</translation>
     </message>
@@ -832,92 +832,92 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1220"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1221"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1221"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1222"/>
         <source>Redo</source>
         <translation>Повторить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1222"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1223"/>
         <source>Zoom In</source>
         <translation>Приблизить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1223"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1224"/>
         <source>Zoom Out</source>
         <translation>Отдалить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1224"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1225"/>
         <source>Close current tab</source>
         <translation>Закрыть текущую вкладку</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1225"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1226"/>
         <source>Close all tabs</source>
         <translation>Закрыть все вкладки</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1226"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1227"/>
         <source>Print</source>
         <translation>Печать</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1227"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1228"/>
         <source>Find</source>
         <translation>Найти</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1228"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1229"/>
         <source>Find and replace</source>
         <translation>Найти и заменить</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1229"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1230"/>
         <source>Show all text</source>
         <translation>Показать весь текст</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1230"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1231"/>
         <source>Toggle errors panel</source>
         <translation>Показать/спрятать панель ошибок</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1429"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1430"/>
         <source>Gestures Show</source>
         <translation>Жесты мышью</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1736"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1737"/>
         <source>Shortcuts</source>
         <translation>Горячие клавиши</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1806"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="1807"/>
         <source>External tools</source>
         <translation>Сторонние утилиты</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2044"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2045"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2075"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2076"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2075"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2076"/>
         <source>Images (*.png *.jpg)</source>
         <translation>Изображения (*.png *.jpg)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2234"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2235"/>
         <source>Getting Started</source>
         <translation>Добро пожаловать!</translation>
     </message>

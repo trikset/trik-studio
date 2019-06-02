@@ -40,6 +40,8 @@ release:CONFIG -= debug
 no-sanitizers: CONFIG *= nosanitizers
 CONFIG = $$unique(CONFIG)
 
+macx:QT_CONFIG -= no-pkg-config
+
 CONFIG(debug) {
 	CONFIGURATION = debug
 	CONFIGURATION_SUFFIX = -d
@@ -79,10 +81,17 @@ isEmpty(TARGET) {
 
 equals(TEMPLATE, app) {
 	!no_rpath {
-		unix:!macx {
+		#reset default rpath before setting new one
+		#but this clears path to Qt libraries
+		#good for release/installer build, but ...
+		#QMAKE_LFLAGS_RPATH =
+		#QMAKE_RPATH =
+
+		linux {
 			QMAKE_LFLAGS += -Wl,-rpath-link,$$GLOBAL_DESTDIR
 			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN\'
-		} macx {
+		}
+		macx {
 			QMAKE_LFLAGS += -rpath @executable_path
 			QMAKE_LFLAGS += -rpath @executable_path/../Lib
 			QMAKE_LFLAGS += -rpath @executable_path/../Frameworks
@@ -119,7 +128,7 @@ unix:!nosanitizers {
 
 	#LSan can be used without performance degrade even in release build
 	#But at the moment we can not, because of Qt  problems
-	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread):!macx-clang { CONFIG += sanitize_leak }
+	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
 		QMAKE_CFLAGS += -fsanitize=leak
@@ -163,10 +172,21 @@ MOC_DIR = .build/$$CONFIGURATION/moc
 RCC_DIR = .build/$$CONFIGURATION/rcc
 UI_DIR = .build/$$CONFIGURATION/ui
 
-PRECOMPILED_HEADER = $$PWD/pch.h
-CONFIG += precompile_header
-QMAKE_CXXFLAGS *= -Winvalid-pch
+!noPch:CONFIG += precompile_header
 
+precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
+precompile_header:!isEmpty(PRECOMPILED_HEADER) {
+	QMAKE_CXXFLAGS += -include $$PRECOMPILED_HEADER -fpch-preprocess
+}
+
+#reports false errors for *.gcno coverage files
+#!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
+
+QMAKE_CXXFLAGS_DEBUG += -Og -ggdb
+
+small_debug_info:QMAKE_CXXFLAGS += -g1
+
+!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$_PRO_FILE_PWD_/include) \
@@ -175,12 +195,12 @@ INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 
 CONFIG += c++11
 
-QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
+!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
 gcc5 | clang {
-	QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
+	!warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 }
 
 clang {
@@ -195,16 +215,31 @@ clang {
 
 false:clang {
 # Problem from Qt system headers
-	QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
+	!warn_off:QMAKE_CXXFLAGS += -Wno-error=expansion-to-defined
 }
 
 
-QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
+!warn_off:QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
 			-Werror=non-virtual-dtor -Wno-error=overloaded-virtual \
 			-Werror=uninitialized -Werror=init-self
 
+# Hack to log build time.
+# ------------------------
+PHONY_DEPS = $${PROJECT_NAME}.time.txt
+PreBuildTimerEvent.input = PHONY_DEPS
+PreBuildTimerEvent.output = $${PROJECT_NAME}.time.txt
+PreBuildTimerEvent.commands = \\\"\\033[34;1m$$PROJECT_NAME build started\\033[0m
+PreBuildTimerEvent.commands += \\033[34;1mat \$\$(touch $${PreBuildTimerEvent.output} && date -r $${PreBuildTimerEvent.output} +%s) \\033[0m \\\"
+PreBuildTimerEvent.commands = bash -c \"echo -e $$PreBuildTimerEvent.commands\"
+PreBuildTimerEvent.name = Timer for $${PROJECT_NAME}
+PreBuildTimerEvent.CONFIG += no_link no_clean target_predeps
+QMAKE_EXTRA_COMPILERS += PreBuildTimerEvent
+
+QMAKE_POST_LINK += bash -c \"echo -e \\\"\\033[34;1m$$PROJECT_NAME build finished\\033[0m
+QMAKE_POST_LINK += \\033[34;1min \$\$(( `date +%s` - `date -r $${PreBuildTimerEvent.output} +%s`))\\033[0m\\\"\" $$escape_expand(\\n\\t) $$escape_expand(\\n\\t)
 
 
+#--------------------------
 
 # Simple function that checks if given argument is a file or directory.
 # Returns false if argument 1 is a file or does not exist.
@@ -284,7 +319,7 @@ defineTest(noPch) {
 }
 
 defineTest(enableFlagIfCan) {
-  system(echo $$shell_quote(int main(){return 0;}) | $$QMAKE_CXX $$QMAKE_CXXFLAGS $$1 -x c++ -c - -o $$system(mktemp) 2>/dev/null ) {
+  system(/bin/echo $$shell_quote(int main(){return 0;}) | $$QMAKE_CXX $$QMAKE_CXXFLAGS $$1 -x c++ -c - -o $$system(mktemp) 2>/dev/null ) {
     QMAKE_CXXFLAGS += $$1
   export(QMAKE_CXXFLAGS)
   } else {

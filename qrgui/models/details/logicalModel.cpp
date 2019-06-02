@@ -48,6 +48,28 @@ void LogicalModel::init()
 	blockSignals(true);
 	loadSubtreeFromClient(static_cast<LogicalModelItem *>(mRootItem));
 	blockSignals(false);
+	// Clean incoming explosions for imported subprogram
+	for (auto item : mModelItems) {
+		if (mApi.hasProperty(item->id(), "incomingExplosions")) {
+			IdList realIncomingExplosions;
+			for (auto in : mApi.property(item->id(), "incomingExplosions").value<IdList>()) {
+				if (mModelItems.contains(in)) {
+					realIncomingExplosions << in;
+				}
+			}
+			mApi.setProperty(item->id(), "incomingExplosions", QVariant::fromValue(realIncomingExplosions));
+		}
+		if (mApi.hasProperty(item->id(), "outgoingExplosion")) {
+			auto out = mApi.property(item->id(), "outgoingExplosion").value<Id>();
+			if (out.id() != "") {
+				auto incomingExplosions = mApi.property(out, "incomingExplosions").value<IdList>();
+				if (!incomingExplosions.contains(item->id())) {
+					incomingExplosions.append(item->id());
+					mApi.setProperty(out, "incomingExplosions", QVariant::fromValue(incomingExplosions));
+				}
+			}
+		}
+	}
 }
 
 void LogicalModel::loadSubtreeFromClient(LogicalModelItem * const parent)

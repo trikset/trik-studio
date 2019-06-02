@@ -13,11 +13,11 @@
 # limitations under the License.
 
 TARGET = 2D-model
-
+TEMPLATE = app
+CONFIG += cmdline
+CONFIG -= app_bundle
 include(../../../../global.pri)
 
-TEMPLATE = app
-CONFIG-=app_bundle
 QT += widgets
 
 includes(plugins/robots/interpreters/interpreterCore \

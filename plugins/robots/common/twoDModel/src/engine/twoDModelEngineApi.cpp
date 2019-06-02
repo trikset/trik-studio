@@ -66,7 +66,7 @@ TwoDModelEngineApi::~TwoDModelEngineApi()
 
 void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
 {
-	auto && target = mModel.robotModels()[0];
+	auto target = mModel.robotModels()[0];
 	QMetaObject::invokeMethod(target, "setNewMotor"
 		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
 		, Q_ARG(int, speed), Q_ARG(uint, degrees), Q_ARG(kitBase::robotModel::PortInfo, port), Q_ARG(bool, breakMode));
@@ -75,7 +75,7 @@ void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &po
 int TwoDModelEngineApi::readEncoder(const PortInfo &port) const
 {
 	int t;
-	auto && target = mModel.robotModels()[0];
+	auto target = mModel.robotModels()[0];
 	QMetaObject::invokeMethod(target, "readEncoder"
 		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
 		, Q_RETURN_ARG(int, t), Q_ARG(kitBase::robotModel::PortInfo, port));
@@ -84,7 +84,7 @@ int TwoDModelEngineApi::readEncoder(const PortInfo &port) const
 
 void TwoDModelEngineApi::resetEncoder(const PortInfo &port)
 {
-	auto && target = mModel.robotModels()[0];
+	auto target = mModel.robotModels()[0];
 	QMetaObject::invokeMethod(target, "resetEncoder"
 		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
 		, Q_ARG(kitBase::robotModel::PortInfo, port));
@@ -128,7 +128,7 @@ int TwoDModelEngineApi::readSonarSensor(const PortInfo &port) const
 QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 {
 	QVector<int> t;
-	auto && target = mModel.robotModels()[0];
+	auto target = mModel.robotModels()[0];
 	QMetaObject::invokeMethod(target, "accelerometerReading"
 		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
 		, Q_RETURN_ARG(QVector<int>, t));
@@ -138,7 +138,7 @@ QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 QVector<int> TwoDModelEngineApi::readGyroscopeSensor() const
 {
 	QVector<int> t;
-	auto && target = mModel.robotModels()[0];
+	auto target = mModel.robotModels()[0];
 	QMetaObject::invokeMethod(target, "gyroscopeReading"
 			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
 			, Q_RETURN_ARG(QVector<int>, t));

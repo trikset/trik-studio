@@ -44,7 +44,7 @@ cp    $QT_DIR/bin/Qt5Test.dll                                       $PWD/../data
 #cp    $QT_DIR/bin/icuin5*.dll                                       $PWD/../data
 #cp    $QT_DIR/bin/icuuc5*.dll                                       $PWD/../data
 
-cp    $QT_DIR/bin/libgcc_s_dw2-1.dll                                $PWD/../data
+cp    $QT_DIR/bin/libgcc_s_*-1.dll                                  $PWD/../data
 cp    $QT_DIR/bin/libwinpthread-1.dll                               $PWD/../data
 cp    $QT_DIR/bin/libstdc++-6.dll                                   $PWD/../data
 

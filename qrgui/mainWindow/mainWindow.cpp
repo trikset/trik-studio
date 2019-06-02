@@ -639,11 +639,12 @@ void MainWindow::print()
 	const bool isEditorTab = getCurrentTab() != nullptr;
 
 	if (isEditorTab) {
-		QPrinter printer(QPrinter::HighResolution);
+		QPrinter printer(QPrinter::ScreenResolution);
 		QPrintDialog dialog(&printer, this);
 		if (dialog.exec() == QDialog::Accepted) {
 			QPainter painter(&printer);
-			getCurrentTab()->scene()->render(&painter);
+			auto rectScene = getCurrentTab()->scene()->itemsBoundingRect();
+			getCurrentTab()->scene()->render(&painter, QRectF(), rectScene);
 		}
 	} else {
 		QsciScintillaBase *textTab = static_cast<QsciScintillaBase *>(currentTab());
@@ -2060,11 +2061,11 @@ void MainWindow::saveDiagramAsAPictureToFile(const QString &fileName)
 	brush.setColor(Qt::white);
 	painter.setBrush(brush);
 	painter.setPen(QPen(Qt::white));
-	QRectF realBoundingRect = getCurrentTab()->scene()->sceneRect();
+	QRectF realBoundingRect = sceneRect;
 	realBoundingRect.moveTo(QPointF());
 	painter.drawRect(realBoundingRect);
 
-	getCurrentTab()->scene()->render(&painter);
+	getCurrentTab()->scene()->render(&painter, realBoundingRect, sceneRect);
 	image.save(fileName);
 }
 

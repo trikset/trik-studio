@@ -10,10 +10,8 @@ case $TRAVIS_OS_NAME in
      export PATH="$(pyenv root)/bin:$PATH"
      eval "$(pyenv init -)"
      export PKG_CONFIG_PATH="$(python3-config --prefix)/lib/pkgconfig"
-     EXECUTOR="buildScripts/with_pyenv "
     ;;
   linux)
-     EXECUTOR="time docker exec builder "
      # if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
    ;;
   *) exit 1 ;;
@@ -21,19 +19,25 @@ esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
-
-
+mkdir -p $CCACHE_DIR || sudo chown -R $USER $CCACHE_DIR || :
+cat << EOF > $CCACHE_CONFIGPATH
+compiler_check=none
+run_second_cpp=true
+cache_dir=$CCACHE_DIR
+compression=true
+compression_level=3
+sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
+EOF
 $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ; \
-   export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG \
-&& export CCACHE_CPP2=yes \
-&& export CCACHE_SLOPPINESS=time_macros \
+   export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
+&& ccache -p \
 && eval \"\`pyenv init -\`\" \
-&& eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig' \
+&& eval 'export PKG_CONFIG_PATH=\`python3-config --prefix\`/lib/pkgconfig:/usr/local/lib/pkgconfig' \
 && which g++ \
 && g++ --version \
 && which qmake \
 && qmake -query \
-&& ccache -M 0 \
+&& ccache -sz -M 0 \
 && pyenv root \
 && pyenv versions \
 && pkg-config --list-all \
@@ -45,7 +49,7 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && ccache -s \
 && sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -c \"export ASAN_OPTIONS=detect_leaks=0 LSAN_OPTIONS=detect_leaks=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& sh -c \"export ASAN_OPTIONS='detect_leaks=0 detect_stack_use_after_return=1' LSAN_OPTIONS='detect_leaks=0 fast_unwind_on_malloc=0' DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 

@@ -14,7 +14,7 @@ cp -pr $BIN_DIR/librobots-ev3-kit.so*                                   $PWD/../
 cp -pr $BIN_DIR/librobots-ev3-generator-base.so*                        $PWD/../data/lib
 cp -pr $BIN_DIR/libqextserialport.so*                                   $PWD/../data/lib
 
-cp -L  `dpkg -L libusb-1.0-0-dev | grep .so`                            $PWD/../data/lib/libusb-1.0.so
+cp -L  $(pkg-config --variable=libdir libusb-1.0)/libusb-1.0.so         $PWD/../data/lib/libusb-1.0.so
 
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins/
