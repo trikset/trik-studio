@@ -4,22 +4,22 @@
 <context>
     <name>ev3::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="79"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="80"/>
         <source>libusb init failed, LIBUSB_ERROR: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="100"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="101"/>
         <source>Cannot find EV3 device. Check robot connected and turned on and try again.</source>
         <translation>Не могу найти устройство EV3. Проверьте, что робот включен и присоединен и попробуйте снова.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="113"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="114"/>
         <source>USB device configuration problem. Please contact developers.</source>
         <translation>Проблема конфигурирования устройства USB. Пожалуйста, обратитесь к разработчикам.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="120"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="122"/>
         <source>USB device interface problem. Please contact developers.</source>
         <translation>Проблема USB-интерфейса. Пожалуйста, обратитесь к разработчикам.</translation>
     </message>
