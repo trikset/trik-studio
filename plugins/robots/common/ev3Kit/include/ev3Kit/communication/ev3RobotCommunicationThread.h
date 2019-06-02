@@ -40,10 +40,14 @@ public slots:
 
 protected:
 	/// Must be reimplemented in each thread just to send the given buffer.
+	/// Returns false on error
 	virtual bool send1(const QByteArray &buffer) const = 0;
 
 	/// Must be reimplemented in each thread just to recieve the buffer of the given size.
 	virtual QByteArray receive(int size) const = 0;
+
+	/// Forth running counter.
+	quint16 mMessageCounter {0};
 };
 
 }

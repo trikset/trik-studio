@@ -24,9 +24,8 @@ namespace communication {
 
 class Ev3DirectCommand
 {
+	Ev3DirectCommand(); // NO CTOR BODY
 public:
-	Ev3DirectCommand();
-
 	static QByteArray formCommand(int size, int messageCounter, ushort globalSize
 			, int localSize, enums::commandType::CommandTypeEnum type);
 	static void addOpcode(enums::opcode::OpcodeEnum opcode, QByteArray &command, int &index);
