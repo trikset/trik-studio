@@ -68,6 +68,7 @@ bool UsbRobotCommunicationThread::send(QObject *addressee, const QByteArray &buf
 bool UsbRobotCommunicationThread::connect()
 {
 	if (mHandle) {
+		QLOG_INFO() << "EV3USB" << "Handle reused";
 		emit connected(true, QString());
 		return true;
 	}
@@ -111,6 +112,7 @@ bool UsbRobotCommunicationThread::connect()
 	if (libusb_set_configuration(mHandle, EV3_CONFIGURATION_NB) < 0) {
 		QLOG_ERROR() << "libusb_set_configuration failed ";
 		emit connected(false, tr("USB device configuration problem. Please contact developers."));
+		libusb_close(mHandle);
 		mHandle = nullptr;
 		return false;
 	}
@@ -118,14 +120,15 @@ bool UsbRobotCommunicationThread::connect()
 	if (libusb_claim_interface(mHandle, EV3_INTERFACE_NUMBER) < 0) {
 		QLOG_ERROR() << "libusb_claim_interface failed ";
 		emit connected(false, tr("USB device interface problem. Please contact developers."));
+		libusb_close(mHandle);
 		mHandle = nullptr;
 		return false;
 	}
 
 	emit connected(true, QString());
 	mKeepAliveTimer.disconnect();
-//	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
-	mKeepAliveTimer.start(500);
+	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
+	mKeepAliveTimer.start(3000);
 	return true;
 }
 
@@ -159,11 +162,12 @@ void UsbRobotCommunicationThread::checkForConnection()
 	}
 
 	// Sending "Keep alive" command to check connection.
-	uchar command[10];
+	QByteArray command;
+	command.resize(10);
 	command[0] = 8;
 	command[1] = 0;
-	command[2] = 0;
-	command[3] = 0;
+	command[2] = (++mMessageCounter);
+	command[3] = mMessageCounter >> 8;
 	command[4] = enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY;
 	command[5] = 0;
 	command[6] = 0;
@@ -171,10 +175,9 @@ void UsbRobotCommunicationThread::checkForConnection()
 	command[8] = enums::argumentSize::ArgumentSizeEnum::BYTE;
 	command[9] = 10; //Number of minutes before entering sleep mode.
 
-	int actualLength = 0;
-	int success = libusb_bulk_transfer(mHandle, EV3_EP_OUT, command, EV3_PACKET_SIZE, &actualLength, EV3_USB_TIMEOUT);
-
-	if (success != 0) {
+	if (!send1(command)) {
+		QLOG_ERROR() << "EV3USB" << "Connection lost";
+		libusb_close(mHandle);
 		mHandle = nullptr;
 		emit disconnected();
 		mKeepAliveTimer.stop();

@@ -129,8 +129,9 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 			commandContinue[7 + i] = data.at(sizeSent++);
 		}
 
-		if (!send1(commandContinue))
+		if (!send1(commandContinue)) {
 			QLOG_ERROR() << "EV3USB" << "Failed to send program data to robot";
+		}
 
 		QByteArray commandContinueResponse = receive(EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE);
 		if (commandContinueResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
@@ -144,6 +145,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		}
 	}
 
+	QLOG_INFO() << "File uploaded" << devicePath;
 	return devicePath;
 }
 
@@ -173,7 +175,10 @@ bool Ev3RobotCommunicationThread::runProgram(const QString &pathOnRobot)
 	command[index++] = 0x64;  // GV0(4), Address of image at Global Var offset 4
 	command[index++] = 0x00;  // LC0(0), Debug mode (0 = normal) encoded as single byte constant
 
-	return send1(command);
+	auto res = send1(command);
+	if (!res)
+		QLOG_ERROR() << "Program run failed";
+	return res;
 }
 
 void Ev3RobotCommunicationThread::stopProgram()
