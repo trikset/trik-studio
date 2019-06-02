@@ -39,7 +39,10 @@ Ev3RobotCommunicationThread::~Ev3RobotCommunicationThread()
 {
 }
 
-static inline QString char2hex (char c) { return QString("0x%1").arg(static_cast<uint8_t>(c), 2, 16, QLatin1Char('0')); }
+static inline QString char2hex (char c)
+{
+	return QString("0x%1").arg(static_cast<uint8_t>(c), 2, 16, QLatin1Char('0'));
+}
 
 QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const QString &targetDir)
 {
@@ -105,10 +108,12 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	if (commandBeginResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
 		QLOG_ERROR() << "EV3USB"
 						<< "Reply to cmd" << char2hex(commandBeginResponse.at(5))
-						<< "msg#" << (static_cast<uint8_t>(commandBeginResponse.at(3)) << 8) + static_cast<uint32_t>(static_cast<uint8_t>(commandBeginResponse.at(2)))
+						<< "msg#" << (static_cast<uint8_t>(commandBeginResponse.at(3)) << 8)
+										+ static_cast<uint32_t>(static_cast<uint8_t>(commandBeginResponse.at(2)))
 						<< "status" << char2hex(commandBeginResponse.at(6));
 		if (commandBeginResponse.size() > 7)
-			QLOG_INFO() << "EV3USB" << "Reply additional:" << commandBeginResponse.right(commandBeginResponse.size()-7).toHex();
+			QLOG_INFO() << "EV3USB" << "Reply additional:"
+						<< commandBeginResponse.right(commandBeginResponse.size()-7).toHex();
 		return QString();
 	}
 
@@ -136,10 +141,12 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		if (commandContinueResponse.at(4) == EV3_SYSTEM_REPLY_ERROR) {
 			QLOG_ERROR() << "EV3USB"
 							<< "Reply to cmd" << char2hex(commandContinueResponse.at(5))
-							<< "msg#" << (static_cast<uint8_t>(commandContinueResponse.at(3)) << 8) + static_cast<uint32_t>(static_cast<uint8_t>(commandContinueResponse.at(2)))
+							<< "msg#" << (static_cast<uint8_t>(commandContinueResponse.at(3)) << 8)
+							   + static_cast<uint32_t>(static_cast<uint8_t>(commandContinueResponse.at(2)))
 							<< "status" << char2hex(commandContinueResponse.at(6));
 			if (commandContinueResponse.size() > 7)
-				QLOG_INFO() << "EV3USB" << "Reply additional:" << commandContinueResponse.right(commandContinueResponse.size()-7).toHex();
+				QLOG_INFO() << "EV3USB" << "Reply additional:"
+							<< commandContinueResponse.right(commandContinueResponse.size()-7).toHex();
 			return QString();
 		}
 	}
