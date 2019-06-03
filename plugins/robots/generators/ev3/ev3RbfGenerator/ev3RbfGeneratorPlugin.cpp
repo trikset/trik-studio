@@ -249,17 +249,20 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	if (!communicator) {
 		return QString();
 	}
+	QMetaObject::invokeMethod(communicator, "connect"
+							, (communicator->thread()==QThread::currentThread()
+								? Qt::DirectConnection : Qt::BlockingQueuedConnection)
+							, Q_RETURN_ARG(bool, connected));
 
-	QMetaObject::invokeMethod(communicator, "connect", Qt::BlockingQueuedConnection, Q_RETURN_ARG(bool, connected));
+	if (!connected)
+		return QString();
 
-	if (connected) {
-		QString res;
-		QMetaObject::invokeMethod(communicator, "uploadFile", Qt::BlockingQueuedConnection
-				, Q_RETURN_ARG(QString, res), Q_ARG(QString, rbfPath), Q_ARG(QString, targetPath));
-		return res;
-	}
-
-	return QString();
+	QString res;
+	QMetaObject::invokeMethod(communicator, "uploadFile"
+								, (communicator->thread()==QThread::currentThread()
+									? Qt::DirectConnection : Qt::BlockingQueuedConnection)
+								, Q_RETURN_ARG(QString, res), Q_ARG(QString, rbfPath), Q_ARG(QString, targetPath));
+	return res;
 }
 
 generatorBase::MasterGeneratorBase *Ev3RbfGeneratorPlugin::masterGenerator()

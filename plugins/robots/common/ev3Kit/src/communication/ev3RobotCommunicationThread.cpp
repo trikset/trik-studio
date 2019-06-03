@@ -100,8 +100,10 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	commandBegin[index] = 0x00;
 
-	if (!send1(commandBegin))
+	if (!send1(commandBegin)) {
 		QLOG_ERROR() << "EV3USB" << "Failed to start program upload to robot";
+		return QString();
+	}
 
 	QByteArray commandBeginResponse = receive(EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE);
 
@@ -135,7 +137,9 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		}
 
 		if (!send1(commandContinue)) {
-			QLOG_ERROR() << "EV3USB" << "Failed to send program data to robot";
+			QLOG_ERROR() << "EV3USB" << QString("Failed to send program data to robot bytes %1..%2")
+					.arg(sizeSent-sizeToSend).arg(sizeSent-1);
+			return QString();
 		}
 
 		QByteArray commandContinueResponse = receive(EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE);
