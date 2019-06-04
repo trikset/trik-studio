@@ -30,9 +30,6 @@ copyToDestdir(../images/ev3-robot.png, now, images/)
 
 win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
 
-PKGCONFIG *= libusb-1.0
-CONFIG += link_pkgconfig
-
 HEADERS += \
 	$$PWD/ev3AdditionalPreferences.h \
 	$$PWD/ev3KitInterpreterPlugin.h \

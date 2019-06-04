@@ -90,9 +90,9 @@ bool UsbRobotCommunicationThread::connect()
 		QLOG_INFO() << "hidapi devices:";
 		hid_device_info *devs = hid_enumerate(0x0, 0x0);
 		for(hid_device_info *cur_dev = devs; cur_dev; cur_dev = cur_dev->next) {
-			QLOG_INFO() << qSetFieldWidth(4) << left << qSetPadChar('0')  << hex << uppercasebase
+			QLOG_INFO() << qSetFieldWidth(4) << right << qSetPadChar('0')  << hex << uppercasebase
 						<< cur_dev->vendor_id
-						<< qSetFieldWidth(4) << left << qSetPadChar('0')  << hex << uppercasebase
+						<< qSetFieldWidth(4) << right << qSetPadChar('0')  << hex << uppercasebase
 						<< cur_dev->product_id
 						<< reset << cur_dev->path
 						<< QString::fromWCharArray(cur_dev->serial_number)
@@ -104,7 +104,7 @@ bool UsbRobotCommunicationThread::connect()
 
 	mHandle = hid_open(EV3_VID, EV3_PID, nullptr);
 	if (!mHandle) {
-		QLOG_ERROR() << "hid_open failed "
+		QLOG_ERROR() << "hid_open failed for "
 				<< QString::number(EV3_VID) << QString::number(EV3_PID);
 		emit connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
 		return false;
@@ -184,11 +184,13 @@ bool UsbRobotCommunicationThread::send1(const QByteArray &buf) const
 	auto buffer = buf;
 	buffer.prepend({'\0'});
 	auto n = hid_write(mHandle, reinterpret_cast<const uint8_t*>(buffer.data()), buffer.size());
-	if (n != buffer.size()) {
-		QLOG_ERROR() << "EV3USB" << "Failed hid_write with errno =" << hidapi_lasterror();
+	auto ok = n >= buffer.size();
+	if (!ok) {
+		QLOG_ERROR() << "EV3USB" << "Failed hid_write with" << n
+					 << "bytes written of" << buffer.size() << ", errno =" << hidapi_lasterror();
 	}
 
-	return n == buffer.size();
+	return ok;
 }
 
 QByteArray UsbRobotCommunicationThread::receive(int size) const
@@ -206,7 +208,7 @@ QByteArray UsbRobotCommunicationThread::receive(int size) const
 
 	auto n = hid_read(mHandle, response, bufSize);
 	if ( n <= 0) {
-		QLOG_ERROR() << "EV3USB" << "Failed hid_read with errno = " << errno;
+		QLOG_ERROR() << "EV3USB" << "Failed hid_read with" << n << ", errno = " << errno;
 	}
 	auto resultSize = qMin(EV3_PACKET_SIZE, size);
 	QByteArray result(qMin(resultSize, n), '\0');
