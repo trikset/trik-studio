@@ -48,10 +48,6 @@ isEmpty(QREAL_EDITOR_PATH) {
 	error(Please set QREAL_EDITOR_PATH variable in a .pro file of your editor as a path to that editor .xml file relative to plugins/)
 }
 
-if (equals(QMAKE_CXX, "g++")) {
-	QMAKE_LFLAGS += -Wl,-E
-}
-
 include(extraCompilers.pri)
 
 include(editorsSdk.pri)

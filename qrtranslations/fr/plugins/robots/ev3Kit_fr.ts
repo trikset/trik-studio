@@ -4,23 +4,8 @@
 <context>
     <name>ev3::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="80"/>
-        <source>libusb init failed, LIBUSB_ERROR: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="101"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="109"/>
         <source>Cannot find EV3 device. Check robot connected and turned on and try again.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="114"/>
-        <source>USB device configuration problem. Please contact developers.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="122"/>
-        <source>USB device interface problem. Please contact developers.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

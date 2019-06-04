@@ -23,18 +23,20 @@ includes(plugins/robots/common/ev3Kit \
 		plugins/robots/common/twoDModel \
 		plugins/robots/utils \
 		qrtext \
+                plugins/robots/thirdparty/hidapi/hidapi \
 )
-
-PKGCONFIG *= libusb-1.0
-CONFIG += link_pkgconfig
 
 
 # libusb headers contain dirty code
-CONFIG(clang) {
-	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
-} else {
-	QMAKE_CXXFLAGS += -Wno-error=vla
-	win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
+gcc:QMAKE_CXXFLAGS += -fpermissive
+
+#HIDAPI windows/hid.c contains bad code (2019, June)
+win32: QMAKE_CXXFLAGS += -Wno-error=cast-qual
+win32: LIBS += -lsetupapi
+
+linux {
+    CONFIG *= link_pkgconfig
+    PKGCONFIG += libudev
 }
 
 HEADERS += \

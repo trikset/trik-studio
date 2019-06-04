@@ -23,10 +23,6 @@ isEmpty(QREAL_EDITOR_NAME) {
 	error(Please set QREAL_EDITOR_NAME variable in a .pro file of your editor as a folder name of that editor)
 }
 
-if (equals(QMAKE_CXX, "g++")) {
-	QMAKE_LFLAGS += -Wl,-E
-}
-
 ROOT = $$PWD/../..
 
 include(pluginsSdk.pri)

@@ -16,7 +16,7 @@
 
 #include "ev3RobotCommunicationThread.h"
 #include <QTimer>
-struct libusb_device_handle;
+struct hid_device_ ;// <hidapi.h>
 
 namespace ev3 {
 namespace communication {
@@ -47,7 +47,7 @@ private:
 
 	QByteArray receive(int size) const override;
 
-	libusb_device_handle *mHandle;
+	struct hid_device_ *mHandle;
 
 	/// Timer that sends messages to robot to check that connection is still alive
 	QTimer mKeepAliveTimer;

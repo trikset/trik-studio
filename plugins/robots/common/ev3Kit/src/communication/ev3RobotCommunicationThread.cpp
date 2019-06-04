@@ -100,8 +100,10 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	commandBegin[index] = 0x00;
 
-	if (!send1(commandBegin))
+	if (!send1(commandBegin)) {
 		QLOG_ERROR() << "EV3USB" << "Failed to start program upload to robot";
+		return QString();
+	}
 
 	QByteArray commandBeginResponse = receive(EV3_BEGIN_DOWNLOAD_RESPONSE_SIZE);
 
@@ -111,9 +113,11 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 						<< "msg#" << (static_cast<uint8_t>(commandBeginResponse.at(3)) << 8)
 										+ static_cast<uint32_t>(static_cast<uint8_t>(commandBeginResponse.at(2)))
 						<< "status" << char2hex(commandBeginResponse.at(6));
-		if (commandBeginResponse.size() > 7)
+		if (commandBeginResponse.size() > 7) {
 			QLOG_INFO() << "EV3USB" << "Reply additional:"
 						<< commandBeginResponse.right(commandBeginResponse.size()-7).toHex();
+		}
+
 		return QString();
 	}
 
@@ -135,7 +139,9 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 		}
 
 		if (!send1(commandContinue)) {
-			QLOG_ERROR() << "EV3USB" << "Failed to send program data to robot";
+			QLOG_ERROR() << "EV3USB" << QString("Failed to send program data to robot bytes %1..%2")
+					.arg(sizeSent-sizeToSend).arg(sizeSent-1);
+			return QString();
 		}
 
 		QByteArray commandContinueResponse = receive(EV3_CONTINUE_DOWNLOAD_RESPONSE_SIZE);
@@ -183,8 +189,10 @@ bool Ev3RobotCommunicationThread::runProgram(const QString &pathOnRobot)
 	command[index++] = 0x00;  // LC0(0), Debug mode (0 = normal) encoded as single byte constant
 
 	auto res = send1(command);
-	if (!res)
+	if (!res) {
 		QLOG_ERROR() << "Program run failed";
+	}
+
 	return res;
 }
 
@@ -194,6 +202,7 @@ void Ev3RobotCommunicationThread::stopProgram()
 			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
 	command[7] = 0x02;  // opPROGRAM_STOP Opcode
 	command[8] = 0x01;  // LC0(USER_SLOT), User slot = 1 (program slot)
-	if (!send1(command))
+	if (!send1(command)) {
 		QLOG_ERROR() << "EV3USB" << "Failed to stop program";
+	}
 }
