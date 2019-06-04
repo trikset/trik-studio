@@ -22,6 +22,7 @@
 #include "plugins/robots/thirdparty/hidapi/linux/hid.c"
 static int hidapi_lasterror() { return errno; }
 #elif defined(Q_OS_WIN)
+#include <errhandlingapi.h>
 static int hidapi_lasterror() { return GetLastError(); }
 #include "plugins/robots/thirdparty/hidapi/windows/hid.c"
 #elif defined(Q_OS_MAC)
@@ -203,7 +204,7 @@ QByteArray UsbRobotCommunicationThread::receive(int size) const
 //		QLOG_ERROR() << "EV3USB" << "Failed hid_write with errno =" << errno;
 //	}
 
-	auto n = hid_read(mHandle, response, EV3_PACKET_SIZE);
+	auto n = hid_read(mHandle, response, bufSize);
 	if ( n <= 0) {
 		QLOG_ERROR() << "EV3USB" << "Failed hid_read with errno = " << errno;
 	}

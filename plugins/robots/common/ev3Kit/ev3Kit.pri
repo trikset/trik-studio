@@ -29,6 +29,11 @@ includes(plugins/robots/common/ev3Kit \
 
 # libusb headers contain dirty code
 gcc:QMAKE_CXXFLAGS += -fpermissive
+
+#HIDAPI windows/hid.c contains bad code (2019, June)
+win32: QMAKE_CXXFLAGS += -Wno-error=cast-qual
+win32: LIBS += -lsetupapi
+
 linux {
     CONFIG *= link_pkgconfig
     PKGCONFIG += libudev
