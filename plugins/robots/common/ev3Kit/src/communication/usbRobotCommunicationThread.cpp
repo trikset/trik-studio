@@ -17,7 +17,18 @@
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
 
-#include <libusb.h>
+#if defined(Q_OS_LINUX)
+#include <errno.h>
+#include "plugins/robots/thirdparty/hidapi/linux/hid.c"
+static int hidapi_lasterror() { return errno; }
+#elif defined(Q_OS_WIN)
+static int hidapi_lasterror() { return GetLastError(); }
+#include "plugins/robots/thirdparty/hidapi/windows/hid.c"
+#elif defined(Q_OS_MAC)
+#include <errno>
+#include "plugins/robots/thirdparty/hidapi/mac/hid.c"
+static int hidapi_lasterror() { return errno; }
+#endif
 
 #include <qrkernel/logging.h>
 
@@ -73,55 +84,28 @@ bool UsbRobotCommunicationThread::connect()
 		return true;
 	}
 
-	int result = libusb_init(nullptr);
-	// Uncomment it to debug usb communication:
-	libusb_set_debug(nullptr, MAX_DEBUG_LEVEL);
-	if (result != 0) {
-		emit connected(false, tr("libusb init failed, LIBUSB_ERROR: %1").arg(result));
-		QLOG_ERROR() << QString("libusb init failed, LIBUSB_ERROR: %1").arg(result);
-		return false;
+	{
+		// it is not necessary but logs are extremely useful
+		QLOG_INFO() << "hidapi devices:";
+		hid_device_info *devs = hid_enumerate(0x0, 0x0);
+		for(hid_device_info *cur_dev = devs; cur_dev; cur_dev = cur_dev->next) {
+			QLOG_INFO() << qSetFieldWidth(4) << left << qSetPadChar('0')  << hex << uppercasebase
+						<< cur_dev->vendor_id
+						<< qSetFieldWidth(4) << left << qSetPadChar('0')  << hex << uppercasebase
+						<< cur_dev->product_id
+						<< reset << cur_dev->path
+						<< QString::fromWCharArray(cur_dev->serial_number)
+						<< QString::fromWCharArray(cur_dev->manufacturer_string)
+						<< QString::fromWCharArray(cur_dev->product_string);
+		}
+		hid_free_enumeration(devs);
 	}
 
-	// it is not necessary but logs are extremely useful
-	libusb_device** list = nullptr;
-	ssize_t devicesCount = libusb_get_device_list(nullptr, &list);
-	QLOG_INFO() << "libusb devices:";
-	for (auto i = 0; i < devicesCount; ++i) {
-		struct libusb_device_descriptor desc;
-		libusb_get_device_descriptor(list[i], &desc);
-		QLOG_INFO() << hex << desc.iProduct << desc.idVendor;
-	}
-
-	libusb_free_device_list(list, 1);
-
-	mHandle = libusb_open_device_with_vid_pid(nullptr, EV3_VID, EV3_PID);
+	mHandle = hid_open(EV3_VID, EV3_PID, nullptr);
 	if (!mHandle) {
-		QLOG_ERROR() << "libusb_open_device_with_vid_pid failed "
+		QLOG_ERROR() << "hid_open failed "
 				<< QString::number(EV3_VID) << QString::number(EV3_PID);
 		emit connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
-		return false;
-	}
-
-	// This functionality is not available on Windows/darwin
-#ifndef Q_OS_WIN
-	if (libusb_kernel_driver_active(mHandle, EV3_INTERFACE_NUMBER)) {
-		libusb_detach_kernel_driver(mHandle, EV3_INTERFACE_NUMBER);
-	}
-#endif
-
-	if (libusb_set_configuration(mHandle, EV3_CONFIGURATION_NB) < 0) {
-		QLOG_ERROR() << "libusb_set_configuration failed ";
-		emit connected(false, tr("USB device configuration problem. Please contact developers."));
-		libusb_close(mHandle);
-		mHandle = nullptr;
-		return false;
-	}
-
-	if (libusb_claim_interface(mHandle, EV3_INTERFACE_NUMBER) < 0) {
-		QLOG_ERROR() << "libusb_claim_interface failed ";
-		emit connected(false, tr("USB device interface problem. Please contact developers."));
-		libusb_close(mHandle);
-		mHandle = nullptr;
 		return false;
 	}
 
@@ -140,10 +124,9 @@ void UsbRobotCommunicationThread::reconnect()
 void UsbRobotCommunicationThread::disconnect()
 {
 	if (mHandle) {
-		libusb_attach_kernel_driver(mHandle, EV3_INTERFACE_NUMBER);
-		libusb_close(mHandle);
-		libusb_exit(nullptr);
+		hid_close(mHandle);
 		mHandle = nullptr;
+		hid_exit();
 	}
 
 	mKeepAliveTimer.stop();
@@ -177,7 +160,7 @@ void UsbRobotCommunicationThread::checkForConnection()
 
 	if (!send1(command)) {
 		QLOG_ERROR() << "EV3USB" << "Connection lost";
-		libusb_close(mHandle);
+		hid_close(mHandle);
 		mHandle = nullptr;
 		emit disconnected();
 		mKeepAliveTimer.stop();
@@ -192,30 +175,41 @@ bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSiz
 	return ok;
 }
 
-bool UsbRobotCommunicationThread::send1(const QByteArray &buffer) const
+bool UsbRobotCommunicationThread::send1(const QByteArray &buf) const
 {
 	if (!mHandle)
 		return false;
 
-	uchar *cmd = reinterpret_cast<uchar *>(const_cast<char *>(buffer.data()));
-	int actualLength = 0;
-	auto rc = libusb_bulk_transfer(mHandle, EV3_EP_OUT, cmd, buffer.size(), &actualLength, EV3_USB_TIMEOUT);
-	if (rc != 0) {
-		QLOG_ERROR() << "EV3USB" << "Failed libusb_bulk_transfer with status 0x" + QString::number(rc, 16);
+	auto buffer = buf;
+	buffer.prepend({'\0'});
+	auto n = hid_write(mHandle, reinterpret_cast<const uint8_t*>(buffer.data()), buffer.size());
+	if (n != buffer.size()) {
+		QLOG_ERROR() << "EV3USB" << "Failed hid_write with errno =" << hidapi_lasterror();
 	}
 
-	return rc == 0 && actualLength == buffer.size();
+	return n == buffer.size();
 }
 
 QByteArray UsbRobotCommunicationThread::receive(int size) const
 {
 	// It's strange, but regardless of kind of response, it must have size = 1024 (EV3_PACKET_SIZE)
 	// If we set another size(For example, response[10]), program will throw error.
-	uchar response[EV3_PACKET_SIZE];
-	int actualLength = 0;
-	libusb_bulk_transfer(mHandle, EV3_EP_IN, response, EV3_PACKET_SIZE, &actualLength, EV3_USB_TIMEOUT);
-	QByteArray result(qMin(EV3_PACKET_SIZE, size), '\0');
-	for (int i = 0; i < qMin(EV3_PACKET_SIZE, size); ++i) {
+	uchar response[EV3_PACKET_SIZE] {0, };
+	size_t bufSize = sizeof(response)/sizeof (response[0]);
+//	response[0] = 0;
+//	response[1] = EV3_EP_IN;
+//	auto n = hid_write(mHandle, response, bufSize);
+//	if (n != bufSize) {
+//		QLOG_ERROR() << "EV3USB" << "Failed hid_write with errno =" << errno;
+//	}
+
+	auto n = hid_read(mHandle, response, EV3_PACKET_SIZE);
+	if ( n <= 0) {
+		QLOG_ERROR() << "EV3USB" << "Failed hid_read with errno = " << errno;
+	}
+	auto resultSize = qMin(EV3_PACKET_SIZE, size);
+	QByteArray result(qMin(resultSize, n), '\0');
+	for (int i = 0; i < result.size(); ++i) {
 		result[i] = response[i];
 	}
 
