@@ -381,12 +381,6 @@ void TrikBrick::wait(int milliseconds)
 			loop.quit();
 		};
 
-		auto abortHandler = [timeline, mainHandler]() {
-			if (!timeline->isStarted()) {
-				mainHandler();
-			}
-		};
-
 		connect(t.data(), &utils::AbstractTimer::timeout, this, mainHandler);
 		connect(this, &TrikBrick::stopWaiting, this, mainHandler);
 
