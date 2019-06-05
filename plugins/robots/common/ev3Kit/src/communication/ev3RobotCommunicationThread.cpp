@@ -58,7 +58,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	QFile file(sourceFile);
 	if (!file.open(QIODevice::ReadOnly)) {
-		QLOG_ERROR() << "File, which should be uploaded, can not be read";
+		QLOG_ERROR() << "File, which should be uploaded" << sourceFile << "can not be read";
 		return QString();
 	}
 
