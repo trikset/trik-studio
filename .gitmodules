@@ -15,4 +15,4 @@
 	url = https://github.com/qreal/nxt-tools
 [submodule "plugins/robots/thirdparty/hidapi"]
 	path = plugins/robots/thirdparty/hidapi
-	url = https://github.com/signal11/hidapi
+	url = https://github.com/libusb/hidapi
