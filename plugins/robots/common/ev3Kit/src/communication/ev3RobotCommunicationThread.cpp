@@ -49,6 +49,13 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 	const QFileInfo fileInfo(sourceFile);
 	// A path to file on the remote device.
 	const QString devicePath = targetDir + "/" + fileInfo.fileName();
+
+	if (fileInfo.fileName().length() > mMaxFilenameLength) {
+		emit errorOccured(tr("Attempt to upload program with long filename. Please, shorten it to %1 symbols.")
+				.arg(mMaxFilenameLength));
+		return QString();
+	}
+
 	QFile file(sourceFile);
 	if (!file.open(QIODevice::ReadOnly)) {
 		QLOG_ERROR() << "File, which should be uploaded, can not be read";

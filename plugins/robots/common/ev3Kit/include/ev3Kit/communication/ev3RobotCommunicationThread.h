@@ -48,6 +48,8 @@ protected:
 
 	/// Forth running counter.
 	quint16 mMessageCounter {0};
+
+	static const int mMaxFilenameLength = 27;
 };
 
 }
