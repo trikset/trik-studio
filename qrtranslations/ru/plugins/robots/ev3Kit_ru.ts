@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>ev3::communication::Ev3RobotCommunicationThread</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/ev3RobotCommunicationThread.cpp" line="54"/>
+        <source>Attempt to upload program with long filename. Please, shorten it to %1 symbols.</source>
+        <translation>Попытка сохранить файл с длинным именем. Пожалуйста, сократите его длину до %1 символов.</translation>
+    </message>
+</context>
+<context>
     <name>ev3::communication::UsbRobotCommunicationThread</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="109"/>
