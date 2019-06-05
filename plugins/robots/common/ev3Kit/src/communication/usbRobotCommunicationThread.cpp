@@ -26,7 +26,7 @@ static int hidapi_lasterror() { return errno; }
 static int hidapi_lasterror() { return GetLastError(); }
 #include "plugins/robots/thirdparty/hidapi/windows/hid.c"
 #elif defined(Q_OS_MAC)
-#include <errno>
+#include <errno.h>
 #include "plugins/robots/thirdparty/hidapi/mac/hid.c"
 static int hidapi_lasterror() { return errno; }
 #endif
