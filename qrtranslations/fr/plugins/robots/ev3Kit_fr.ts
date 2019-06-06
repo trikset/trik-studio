@@ -4,7 +4,7 @@
 <context>
     <name>ev3::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="109"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="97"/>
         <source>Cannot find EV3 device. Check robot connected and turned on and try again.</source>
         <translation type="unfinished"></translation>
     </message>
