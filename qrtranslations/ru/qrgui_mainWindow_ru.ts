@@ -902,22 +902,22 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Сторонние утилиты</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2045"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2043"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2076"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2074"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2076"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2074"/>
         <source>Images (*.png *.jpg)</source>
         <translation>Изображения (*.png *.jpg)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2235"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="2233"/>
         <source>Getting Started</source>
         <translation>Добро пожаловать!</translation>
     </message>
