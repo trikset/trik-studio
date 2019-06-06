@@ -545,7 +545,12 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LessOrEqual> &n
 void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Inequality> &node
 		, const QSharedPointer<qrtext::core::ast::Node> &)
 {
-	processBinary(node, Ev3RbfType::data8, "inequality.t");
+	const Ev3RbfType operandsType = moreCommon(typeOf(node->leftOperand()), typeOf(node->rightOperand()));
+	if (operandsType == Ev3RbfType::dataS) {
+		processBinary(node, Ev3RbfType::data8, "inequalityString.t");
+	} else {
+		processBinary(node, Ev3RbfType::data8, "inequality.t");
+	}
 }
 
 void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::GreaterThan> &node
