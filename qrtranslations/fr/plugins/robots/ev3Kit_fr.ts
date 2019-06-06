@@ -4,8 +4,8 @@
 <context>
     <name>ev3::communication::Ev3RobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/ev3RobotCommunicationThread.cpp" line="54"/>
-        <source>Attempt to upload program with long filename. Please, shorten it to %1 symbols.</source>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/ev3RobotCommunicationThread.cpp" line="55"/>
+        <source>EV3 limits filename length to %1 characters, but you have %2, please, rename your project.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
