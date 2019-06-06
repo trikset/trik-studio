@@ -244,7 +244,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="480"/>
         <source>dist</source>
-        <translation>расстояние</translation>
+        <translation>dist</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="491"/>

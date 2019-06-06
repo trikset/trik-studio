@@ -34,6 +34,8 @@ gcc:QMAKE_CXXFLAGS += -fpermissive
 win32: QMAKE_CXXFLAGS += -Wno-error=cast-qual
 win32: LIBS += -lsetupapi
 
+macx: LIBS += -framework CoreFoundation
+
 linux {
     CONFIG *= link_pkgconfig
     PKGCONFIG += libudev

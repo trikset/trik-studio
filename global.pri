@@ -111,8 +111,11 @@ macx-clang {
 equals(TEMPLATE, lib) {
 	win32 {
 		QMAKE_LFLAGS += -Wl,--export-all-symbols
-	} else {
+	} else:linux {
+		#for GNU ld ELF target
 		QMAKE_LFLAGS += -Wl,--export-dynamic
+	}else:macx-clang {
+		QMAKE_LFLAGS += -Wl,-export_dynamic
 	}
 }
 
