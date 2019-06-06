@@ -44,6 +44,9 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 int main(int argc, char *argv[])
 {
 	qInstallMessageHandler(myMessageOutput);
+	//Disable QHash randomization to force stable XML atributes order
+	//https://doc.qt.io/qt-5/qhash.html#qSetGlobalQHashSeed
+	qSetGlobalQHashSeed(0);
 	QCoreApplication app(argc, argv);
 	QStringList args = app.arguments();
 
