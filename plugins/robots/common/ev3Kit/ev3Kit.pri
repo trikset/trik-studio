@@ -100,8 +100,8 @@ SOURCES += \
 	$$PWD/src/communication/ev3DirectCommand.cpp \
 	$$PWD/src/communication/ev3RobotCommunicationThread.cpp \
 	$$PWD/src/communication/bluetoothRobotCommunicationThread.cpp \
-	$$PWD/src/communication/usbRobotCommunicationThread.cpp \
 	$$PWD/src/communication/hidapi.c \
+	$$PWD/src/communication/usbRobotCommunicationThread.cpp \
 
 TRANSLATIONS = \
 	$$PWD/../../../../qrtranslations/ru/plugins/robots/ev3Kit_ru.ts \
