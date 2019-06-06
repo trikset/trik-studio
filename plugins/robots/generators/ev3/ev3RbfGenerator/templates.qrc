@@ -220,5 +220,6 @@
         <file>templates/sensors/lineLeader/readSteering.t</file>
         <file>templates/sensors/lineLeader/sleep.t</file>
         <file>templates/sensors/lineLeader/wakeUp.t</file>
+        <file>templates/luaPrinting/equalityString.t</file>
     </qresource>
 </RCC>

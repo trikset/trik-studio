@@ -522,7 +522,12 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Concatenation> 
 void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Equality> &node
 		, const QSharedPointer<qrtext::core::ast::Node> &)
 {
-	processBinary(node, Ev3RbfType::data8, "equality.t");
+	const Ev3RbfType operandsType = moreCommon(typeOf(node->leftOperand()), typeOf(node->rightOperand()));
+	if (operandsType == Ev3RbfType::dataS) {
+		processBinary(node, Ev3RbfType::data8, "equalityString.t");
+	} else {
+		processBinary(node, Ev3RbfType::data8, "equality.t");
+	}
 }
 
 void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::LessThan> &node
