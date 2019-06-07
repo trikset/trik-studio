@@ -11,10 +11,14 @@ env:
     - PROJECT=studio
     - TESTS=true
     - TRANSLATIONS=false
+    - INSTALLER=false
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
     - ALL_TESTS="./robots_kitBase_unittests-d && ./robots_interpreterCore_unittests-d && ./robots_twoDModel_unittests-d && ./trik-v62-qts-generator-tests-d && ./robots_utils_unittests-d && ./run-simulator-tests.sh"
     - QMAKE_EXTRA="CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
+    - secure: "I1hx4ujFJt2x1E+cgnSMUk7GSfAHDGWNmCQoWWw400y/rG2jhk14FLveJTicu/RsW/z3Qf1YeYi6WpBhnuNmgy95DBtvt74CFbirAGhZWAMExqPGMXiJgACueMin2Fj6yOszOJqXOdJOxlUL7WcGzHLus7Z8NU7Svkuk/HqWRZrBmldS1Keip+jRT368MZlhLKGXLObQWGHaN/cEUunDLm8CHNKv9EO31HG+gPlOu58br8wvPA/CFLFRKr8Ple1tTlTzBaDcuEZfL9cKT7/OlSrn+jMOm+fUq5H0OBm9UgWEc4DZmx4cdp6fH7hz4sP7E3wsL7PENrIkuh0yuPqcRWWtW+kF1bGprhzkna1O+TCQvKnLXiw/yiyR0VZlb7Nl1mPrBze9Vc93mfX+DGyFCUZAzY1nFehJThqpwJexzPFP62MBeskK8YHV40keghQ4Hmf9Elq8tY4ibEMv0IrCsR1JrH1PE381FNEvTrMoy3u1PtNFnh5UrOTeQ34hYTqpYyR8lxdHldlY3iw/wYmy5rRTYUhN1SnDrn5haYFwdqNwTN54PkzWlfuvMbTbVc+Nga1Vize+m5Ar4DPZlnuVm8fb6Gd/odRSsm+gcBZNXIrtYcyOiNWja30+tRSCAHpyOem94E4LrNsIfmWDHV1oo8WwUvgno2HiCdVonOXBqKU="
+    - secure: "qezlG9aI+7SNISzGXKoAkDQcR2qcsYgMJ9C2lLkOIjxMnGp87srZv2A9wJ6vTOgimMb4y4cb6zAgmFbUWLaWOsyK4y83/pOlKJJLm9n17jCfaq6iy3AFkStAx/TjaGLkXhy9YW1ASFOPkXmqp+xlsPdNNLPwIL1IJCuzfqfU9istDwCYuaCbwzmf8mP8YhOsdwv/c+bqAsptzGsmmA2DFh9F6VozvtJFmNaH3XGBk3BPwLzlSMqxL4JFjIvslay7p51tJhvjF5a/7Bk5mruIy80B1mnG5Xw1ute+cFlBSphB5UFCTbJ3PjvV55Wc6WnX9sWYmsH0a+D3XxNMDcELjqaEVosAvPWMLoxIESFyBAoYh3zl/g8JasjqmGSc/uQKyrnT5QRIg29e6/AGGEvmVZQSkfyygHKjlDw78sREOZV+hb2qOa0qgUmg0yn4ii6FebPfBcVD7fU5DYQ+EdHH46IX+Dfubiv/TDWRaxTAQSyUQcDfTbZ696e2cnb8nrK2tDn/hImXjVp/7zxR0xuxw7iydrZdf8UmZ//ITP2c7E33m3t2274Fke9jU/wbdefXOWbdYRwAqW7ZnWschqATbKrIcDbJpzgz9CuR247fo/6ZdUIy0mIAarZD1Y6HFkKJUWpPOOC1qsO6jXRqqQfMJim+t6OJE6c79v64klklw/I="
+    - secure: "Qyhk6Fz/4oIv4IAy1w3he3yH0QlBIRSwHr53V5jyOhPjcz0qAD3c4oPpWDs65i8mnnAl0R4xB2J/J36P8FyZDZVF/qISLkuatswKCPgk6DVMbQp59gTYa368MT02GdE0FM56oqpv/ykE1XEG7d7XZWzRga2+Mize8Iz1Dh1Qd/VfT4B70knHV8d5UuDP4crtAA1mVIxqdUYJg3PDDH6IB9kh4VjMyyiO9QA84dLEI+k92zdtyg+sVYm4UJBxGZ1uVvUrWD7wFv+pvgJ0D26ZOKOCUVUR9RInEI+1ui4crr6J4mvWDxWUyVpt2YBBJ6j4zwGPhxRX08PhXTmisQ1h9U34KzegDOtxjyDhP7OiJQepQiBvCQbkrq0OxXbwHhYcUK6OCwTbGt5AnJZrBttp4FETBG9ZykZjDo9z7bsOByJJK/O/0OyqeyMLVUEWxBDACsWdS/2LM62vupMNIiAh5UvGyr0MvB92OXEUAMUA3JYMN28tHus/mfKewPe5xySLuHK45i4bZyyrhiil1Wp9OsCRJQ9s9mIlRhhu5EJX6PKPaxrnTAcsS4zegDLMl/gxZDjCQPHHGShNLpINqepVg3zMJYQAAAAdCkxsyd8iz1vPh3TrHlao5nwiBhNParUOh3XqgFKlym0qwPk+SkULRtyaEwSZ8IMRPJYos7E0x/I="
 cache:
   timeout: 1000
 #  apt: true
@@ -55,7 +59,7 @@ matrix:
       sudo: required
       services: docker
       name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       dist: trusty
       sudo: required
