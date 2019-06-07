@@ -14,6 +14,7 @@
 
 //This file is used to force C compiler instead of C++ one
 //until */hid.c files are made compatible with C++
+#include <qglobal.h>
 #if defined(Q_OS_LINUX)
 #include <errno.h>
 #include "plugins/robots/thirdparty/hidapi/linux/hid.c"
