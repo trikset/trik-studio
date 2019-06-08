@@ -916,8 +916,9 @@ void TwoDModelWidget::onDeviceConfigurationChanged(const QString &robotId
 
 void TwoDModelWidget::bringToFront()
 {
-#ifdef Q_OS_MAC
+#ifdef Q_OS_DARWIN
 	// sanity check: macos
+	// probably, it is obsolete for Qt 5.12+
 	if (!QApplication::platformNativeInterface())
 		return;
 #endif

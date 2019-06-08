@@ -22,7 +22,7 @@
 #include "ev3Kit/communication/ev3DirectCommand.h"
 #include "ev3Kit/communication/commandConstants.h"
 #include <hidapi.h>
-int hidapi_lasterror();
+extern "C" int hidapi_lasterror();
 
 static const int EV3_VID = 0x0694;
 static const int EV3_PID = 0x0005;

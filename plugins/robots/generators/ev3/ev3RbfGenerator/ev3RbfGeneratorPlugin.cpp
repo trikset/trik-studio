@@ -143,12 +143,6 @@ QString Ev3RbfGeneratorPlugin::uploadProgram()
 	}
 
 	const QString fileOnRobot = upload(fileInfo);
-	if (fileOnRobot.isEmpty()) {
-		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
-		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "\
-				"Connect to a robot via %1.").arg(isUsb ? tr("USB") : tr("Bluetooth")));
-		return QString();
-	}
 
 	return fileOnRobot;
 }
@@ -254,8 +248,12 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 								? Qt::DirectConnection : Qt::BlockingQueuedConnection)
 							, Q_RETURN_ARG(bool, connected));
 
-	if (!connected)
+	if (!connected) {
+		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
+		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "\
+				"Connect to a robot via %1.").arg(isUsb ? tr("USB") : tr("Bluetooth")));
 		return QString();
+	}
 
 	QString res;
 	QMetaObject::invokeMethod(communicator, "uploadFile"

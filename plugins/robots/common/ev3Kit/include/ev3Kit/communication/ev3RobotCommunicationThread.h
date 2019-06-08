@@ -48,6 +48,9 @@ protected:
 
 	/// Forth running counter.
 	quint16 mMessageCounter {0};
+
+	/// Maximum filename length to upload to EV3
+	static const int EV3_MAX_ALLOWED_FILENAME_LENGTH = 27;
 };
 
 }
