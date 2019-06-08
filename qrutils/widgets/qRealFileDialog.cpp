@@ -28,14 +28,15 @@ QString QRealFileDialog::getOpenFileName(const QString &id
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
 	QString lastSelectedFilter;
-	if (selectedFilter)
+	if (selectedFilter) {
 		lastSelectedFilter = *selectedFilter;
-	else {
+	} else {
 		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
 	}
 	auto result = QFileDialog::getOpenFileName(parent, caption, lastDir, filter, &lastSelectedFilter, options);
-	if(selectedFilter)
+	if (selectedFilter) {
 		*selectedFilter = lastSelectedFilter;
+	}
 	saveState(id, directoryOf(result), lastSelectedFilter);
 	return result;
 }
@@ -51,14 +52,15 @@ QString QRealFileDialog::getSaveFileName(const QString &id
 {
 	const QString lastDir = lastSelectedDirectory(id, dir) + "/" + defaultFile;
 	QString lastSelectedFilter;
-	if (selectedFilter)
+	if (selectedFilter) {
 		lastSelectedFilter = *selectedFilter;
-	else {
+	} else {
 		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
 	}
 	const QString result = QFileDialog::getSaveFileName(parent, caption, lastDir, filter, selectedFilter, options);
-	if(selectedFilter)
+	if (selectedFilter) {
 		*selectedFilter = lastSelectedFilter;
+	}
 	saveState(id, directoryOf(result), lastSelectedFilter);
 	return result;
 }
@@ -71,7 +73,7 @@ QString QRealFileDialog::getExistingDirectory(const QString &id
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
 	const QString result = QFileDialog::getExistingDirectory(parent, caption, lastDir, options);
-	saveState(id, result,"");
+	saveState(id, result, "");
 	return result;
 }
 
@@ -85,15 +87,16 @@ QStringList QRealFileDialog::getOpenFileNames(const QString &id
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
 	QString lastSelectedFilter;
-	if (selectedFilter)
+	if (selectedFilter) {
 		lastSelectedFilter = *selectedFilter;
-	else {
+	} else {
 		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
 	}
 	const QStringList result = QFileDialog::getOpenFileNames(parent, caption, lastDir, filter, selectedFilter, options);
 
-	if(selectedFilter)
+	if (selectedFilter) {
 		*selectedFilter = lastSelectedFilter;
+	}
 
 	if (!result.isEmpty()) {
 		saveState(id, directoryOf(result[0]), lastSelectedFilter);
