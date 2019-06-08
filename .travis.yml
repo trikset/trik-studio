@@ -91,7 +91,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec builder " ; else export EXECUTOR="buildScripts/with_pyenv " ;fi
   - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
   - ./buildScripts/travis/script.sh & WPID=$!
-  - sleep 3000 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
+  - sleep 1800 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - wait $WPID ; RES=$?; kill $KPID > /dev/null ; ( exit $RES )
 
 after_script:
