@@ -105,27 +105,27 @@
         <translation>Ошибка компиляции.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="148"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="253"/>
         <source>Could not upload file to robot. Connect to a robot via %1.</source>
         <translation>Не могу загрузить файл на робота. Подключите робота по %1.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="149"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="254"/>
         <source>USB</source>
         <translation>USB</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="149"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="254"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="168"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="162"/>
         <source>The program has been uploaded</source>
         <translation>Загрузка программы завершена успешно</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="169"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="163"/>
         <source>Do you want to run it?</source>
         <translation>Хотите ли Вы запустить эту программу?</translation>
     </message>
