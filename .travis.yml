@@ -92,7 +92,8 @@ script:
   - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
   - ./buildScripts/travis/script.sh & WPID=$!
   - sleep 1800 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-  - wait $WPID ; RES=$?; kill $KPID > /dev/null ; ( exit $RES )
+  - export TIMEOUT=false
+  - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
 
 after_script:
   - ./buildScripts/travis/after_script.sh
