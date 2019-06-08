@@ -73,7 +73,7 @@ QString PlatformInfo::prettyOsVersion()
 	return QString("Windows ") + prettyWindowsVersion(QSysInfo().windowsVersion());
 #elif defined Q_OS_LINUX
 	return "Linux";
-#elif defined Q_OS_MAC
+#elif defined Q_OS_MACOS
 	return QString("Mac ") + QSysInfo().macVersion();
 #endif
 }
