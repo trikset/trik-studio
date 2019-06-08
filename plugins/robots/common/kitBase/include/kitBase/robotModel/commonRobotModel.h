@@ -35,7 +35,7 @@ public:
 	CommonRobotModel(const QString &kitId, const QString &robotId);
 	~CommonRobotModel() override;
 
-	QString robotId() const;
+	QString robotId() const override;
 
 	QString kitId() const final;
 

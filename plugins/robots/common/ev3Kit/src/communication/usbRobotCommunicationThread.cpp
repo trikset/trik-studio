@@ -17,24 +17,12 @@
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
 
-#if defined(Q_OS_LINUX)
-#include <errno.h>
-#include "plugins/robots/thirdparty/hidapi/linux/hid.c"
-static int hidapi_lasterror() { return errno; }
-#elif defined(Q_OS_WIN)
-#include <errhandlingapi.h>
-static int hidapi_lasterror() { return GetLastError(); }
-#include "plugins/robots/thirdparty/hidapi/windows/hid.c"
-#elif defined(Q_OS_MAC)
-#include <errno>
-#include "plugins/robots/thirdparty/hidapi/mac/hid.c"
-static int hidapi_lasterror() { return errno; }
-#endif
-
 #include <qrkernel/logging.h>
 
 #include "ev3Kit/communication/ev3DirectCommand.h"
 #include "ev3Kit/communication/commandConstants.h"
+#include <hidapi.h>
+extern "C" int hidapi_lasterror();
 
 static const int EV3_VID = 0x0694;
 static const int EV3_PID = 0x0005;
@@ -182,7 +170,7 @@ bool UsbRobotCommunicationThread::send1(const QByteArray &buf) const
 		return false;
 
 	auto buffer = buf;
-	buffer.prepend({'\0'});
+	buffer.prepend('\0');
 	auto n = hid_write(mHandle, reinterpret_cast<const uint8_t*>(buffer.data()), buffer.size());
 	auto ok = n >= buffer.size();
 	if (!ok) {

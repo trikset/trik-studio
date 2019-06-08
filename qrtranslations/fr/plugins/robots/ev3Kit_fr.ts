@@ -2,9 +2,17 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>ev3::communication::Ev3RobotCommunicationThread</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/ev3RobotCommunicationThread.cpp" line="55"/>
+        <source>EV3 limits filename length to %1 characters, but you have %2, please, rename your project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ev3::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="109"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="97"/>
         <source>Cannot find EV3 device. Check robot connected and turned on and try again.</source>
         <translation type="unfinished"></translation>
     </message>

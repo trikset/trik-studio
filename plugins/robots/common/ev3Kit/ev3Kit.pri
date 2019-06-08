@@ -34,6 +34,8 @@ gcc:QMAKE_CXXFLAGS += -fpermissive
 win32: QMAKE_CXXFLAGS += -Wno-error=cast-qual
 win32: LIBS += -lsetupapi
 
+macx: LIBS += -framework CoreFoundation
+
 linux {
     CONFIG *= link_pkgconfig
     PKGCONFIG += libudev
@@ -98,6 +100,7 @@ SOURCES += \
 	$$PWD/src/communication/ev3DirectCommand.cpp \
 	$$PWD/src/communication/ev3RobotCommunicationThread.cpp \
 	$$PWD/src/communication/bluetoothRobotCommunicationThread.cpp \
+	$$PWD/src/communication/hidapi.c \
 	$$PWD/src/communication/usbRobotCommunicationThread.cpp \
 
 TRANSLATIONS = \
