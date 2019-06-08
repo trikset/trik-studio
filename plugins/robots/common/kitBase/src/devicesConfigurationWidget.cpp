@@ -30,7 +30,7 @@ DevicesConfigurationWidget::DevicesConfigurationWidget(QWidget *parent, bool aut
 	, mSaving(false)
 	, mRefreshing(false)
 {
-	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setMinimumHeight(125);
 	setFrameShape(QFrame::NoFrame);
