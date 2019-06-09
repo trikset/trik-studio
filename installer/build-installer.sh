@@ -72,7 +72,12 @@ find . -type d -empty -delete
 #$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
-$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-$FULL_VERSION
+case $(uname -s || echo None) in
+  Linux) INSTALLER_EXT=.run;;
+  Darwin) INSTALLER_EXT=.dmg;;
+  *) INSTALLER_EXT=.exe;;
+esac
+$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-${FULL_VERSION}${INSTALLER_EXT}
 
 grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version><\/Version>/"
 

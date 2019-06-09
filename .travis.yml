@@ -24,9 +24,6 @@ env:
 
 cache:
   timeout: 1000
-#  apt: true
-#  ccache: true
-#  pip: true
   directories:
     - $PYENV_ROOT
 #    - /usr/local/opt/
@@ -35,22 +32,8 @@ cache:
 #    - $HOME/.cache
 
 addons:
-#  apt:
-#    update: true
-#    sources:
-#      - ubuntu-toolchain-r-test
-#    packages:
-#      - python-pip
   homebrew:
-    packages:
-      - qt
-      - ccache
-      - pyenv
-      - coreutils
-      - libusb
-      - pkg-config
-      - gnu-sed
-
+    brewfile: true
   artifacts:
     paths:
       - build.log
@@ -72,7 +55,7 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS release"
-      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
+      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
     - os: osx
       language: cpp
       name: "macOS debug + tests"
