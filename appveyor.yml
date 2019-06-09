@@ -9,6 +9,7 @@ skip_commits:
   files:
     - 'buildScripts/travis/*'
     - '.travis.yml'
+    - 'Brewfile'
     - '**/*.html'
     - '**/*.txt'
     - '**/*.md'
