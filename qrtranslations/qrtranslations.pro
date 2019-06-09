@@ -25,6 +25,6 @@ win32 {
 
 unix {
         system(mkdir -p $$system_quote($$GLOBAL_DESTDIR/translations/); find $$system_quote($$PWD/) -name '*.qm' -delete)
-        system(find $$system_quote($$PWD) -name '*.ts' -print0 | xargs -0 $$[QT_INSTALL_BINS]/lrelease -nounfinished -removeidentical)
+        system(find $$system_quote($$PWD) -name '*.ts' -print0 | xargs -0 $$[QT_HOST_BINS]/lrelease -nounfinished -removeidentical)
         system(find $$system_quote($$PWD/./) -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$system_quote($$GLOBAL_DESTDIR/translations/))
 }
