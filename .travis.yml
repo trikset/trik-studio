@@ -42,15 +42,7 @@ addons:
 #    packages:
 #      - python-pip
   homebrew:
-    packages:
-      - qt
-      - ccache
-      - pyenv
-      - coreutils
-      - libusb
-      - pkg-config
-      - gnu-sed
-
+    brewfile:true
   artifacts:
     paths:
       - build.log
