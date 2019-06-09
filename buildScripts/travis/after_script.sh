@@ -3,15 +3,23 @@ set -euxo pipefail
 $EXECUTOR env CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" ccache -s
 case $TRAVIS_OS_NAME in
   osx)
+    QTBIN=/usr/local/opt/qt/bin
+    QTIFWBIN=/usr/local/bin/binarycreator
+    TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH
     ;;
   linux)
-    if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] ; then
-      $EXECUTOR bash -ic "echo Start build installer \
-      && installer/build-trik-studio.sh /Qt/5.12.3/gcc_64/bin /Qt/Tools/QtInstallerFramework/3.0/bin . \
-      && mv installer/trik-studio*installer* installer/trik-studio-installer-linux-$TRAVIS_BRANCH.run \
-      && sshpass -p $password rsync -e 'ssh -o StrictHostKeyChecking=no' installer/trik-studio*installer* $username@$server:dl/ts/fresh/installer/"
-    fi
-    docker stop builder
+    QTBIN=/Qt/5.12.3/gcc_64/bin
+    QTIFWBIN=/Qt/Tools/QtInstallerFramework/3.0/bin
+    TSNAME=trik-studio-installer-linux-$TRAVIS_BRANCH.run
     ;;
   *) exit 1 ;;
 esac
+
+if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] ; then
+      $EXECUTOR bash -ic "echo Start build installer \
+      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+      && mv installer/trik-studio*installer* installer/$TSNAME \
+      && sshpass -p $password rsync -e 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/"
+fi
+
+docker stop builder || :
