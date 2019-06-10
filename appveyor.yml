@@ -112,6 +112,7 @@ after_test:
   - cd %BUILD_DIR%/bin/release
   - bash -c "env LC_ALL=C date -u"
   - for %%f in (*.exe) do windeployqt --release %%f
+  - xcopy /I /Y %QTDIR%\plugins\platforms %BUILD_DIR%\bin\release\platforms
   - set ZIP_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set ZIP_NAME=%ZIP_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set ZIP_NAME=%ZIP_NAME%-%APPVEYOR_REPO_BRANCH%)
   - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%PLATFORM%.zip
