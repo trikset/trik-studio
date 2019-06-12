@@ -304,6 +304,7 @@ void RobotsSettingsPage::showRadioButtonGroup(QWidget * const container, QButton
 	}
 
 	if (radioButtons->buttons().count() == 1) {
+		radioButtons->buttons().first()->click();
 		container->setVisible(false);
 		return;
 	}
