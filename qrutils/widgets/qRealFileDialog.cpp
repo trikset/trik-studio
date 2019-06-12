@@ -27,8 +27,17 @@ QString QRealFileDialog::getOpenFileName(const QString &id
 		, QFileDialog::Options options)
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
-	const QString result = QFileDialog::getOpenFileName(parent, caption, lastDir, filter, selectedFilter, options);
-	saveState(id, directoryOf(result));
+	QString lastSelectedFilter;
+	if (selectedFilter) {
+		lastSelectedFilter = *selectedFilter;
+	} else {
+		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
+	}
+	auto result = QFileDialog::getOpenFileName(parent, caption, lastDir, filter, &lastSelectedFilter, options);
+	if (selectedFilter) {
+		*selectedFilter = lastSelectedFilter;
+	}
+	saveState(id, directoryOf(result), lastSelectedFilter);
 	return result;
 }
 
@@ -42,8 +51,17 @@ QString QRealFileDialog::getSaveFileName(const QString &id
 		, QFileDialog::Options options)
 {
 	const QString lastDir = lastSelectedDirectory(id, dir) + "/" + defaultFile;
+	QString lastSelectedFilter;
+	if (selectedFilter) {
+		lastSelectedFilter = *selectedFilter;
+	} else {
+		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
+	}
 	const QString result = QFileDialog::getSaveFileName(parent, caption, lastDir, filter, selectedFilter, options);
-	saveState(id, directoryOf(result));
+	if (selectedFilter) {
+		*selectedFilter = lastSelectedFilter;
+	}
+	saveState(id, directoryOf(result), lastSelectedFilter);
 	return result;
 }
 
@@ -55,7 +73,7 @@ QString QRealFileDialog::getExistingDirectory(const QString &id
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
 	const QString result = QFileDialog::getExistingDirectory(parent, caption, lastDir, options);
-	saveState(id, result);
+	saveState(id, result, "");
 	return result;
 }
 
@@ -68,10 +86,20 @@ QStringList QRealFileDialog::getOpenFileNames(const QString &id
 		, QFileDialog::Options options)
 {
 	const QString lastDir = lastSelectedDirectory(id, dir);
+	QString lastSelectedFilter;
+	if (selectedFilter) {
+		lastSelectedFilter = *selectedFilter;
+	} else {
+		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
+	}
 	const QStringList result = QFileDialog::getOpenFileNames(parent, caption, lastDir, filter, selectedFilter, options);
 
+	if (selectedFilter) {
+		*selectedFilter = lastSelectedFilter;
+	}
+
 	if (!result.isEmpty()) {
-		saveState(id, directoryOf(result[0]));
+		saveState(id, directoryOf(result[0]), lastSelectedFilter);
 	}
 
 	return result;
@@ -82,9 +110,19 @@ QString QRealFileDialog::lastSelectedDirectory(const QString &id, const QString 
 	return qReal::SettingsManager::value(lastDirectoryKey(id), defaultDirectory).toString();
 }
 
+QString QRealFileDialog::lastSelectedFilter(const QString &id, const QString &defaultFilter)
+{
+	return qReal::SettingsManager::value(lastFilterKey(id), defaultFilter).toString();
+}
+
 QString QRealFileDialog::lastDirectoryKey(const QString &id)
 {
 	return id + "FileDialogLastDir";
+}
+
+QString QRealFileDialog::lastFilterKey(const QString &id)
+{
+	return id + "FileDialogLastFilter";
 }
 
 QString QRealFileDialog::directoryOf(const QString &file)
@@ -96,9 +134,10 @@ QString QRealFileDialog::directoryOf(const QString &file)
 	return QFileInfo(file).absoluteDir().absolutePath();
 }
 
-void QRealFileDialog::saveState(const QString &id, const QString &directory)
+void QRealFileDialog::saveState(const QString &id, const QString &directory, const QString &selectedFilter)
 {
 	if (!directory.isEmpty()) {
 		qReal::SettingsManager::setValue(lastDirectoryKey(id), directory);
+		qReal::SettingsManager::setValue(lastFilterKey(id), selectedFilter);
 	}
 }

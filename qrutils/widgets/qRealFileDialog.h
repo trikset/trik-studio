@@ -28,28 +28,28 @@ public:
 	/// Makes same as QFileDialog::getOpenFileName but with restoring selected
 	/// directory last time when promted dialog with the same id
 	static QString getOpenFileName(const QString &id
-			, QWidget *parent = 0
+			, QWidget *parent = nullptr
 			, const QString &caption = QString()
 			, const QString &dir = QString()
 			, const QString &filter = QString()
-			, QString *selectedFilter = 0
-			, QFileDialog::Options options = 0);
+			, QString *selectedFilter = nullptr
+			, QFileDialog::Options options = nullptr);
 
 	/// Makes same as QFileDialog::getSaveFileName but with restoring selected
 	/// directory last time when promted dialog with the same id
 	static QString getSaveFileName(const QString &id
-			, QWidget *parent = 0
+			, QWidget *parent = nullptr
 			, const QString &caption = QString()
 			, const QString &dir = QString()
 			, const QString &filter = QString()
 			, const QString &defaultFile = QString()
-			, QString *selectedFilter = 0
-			, QFileDialog::Options options = 0);
+			, QString *selectedFilter = nullptr
+			, QFileDialog::Options options = nullptr);
 
 	/// Makes same as QFileDialog::getExistingDirectory but with restoring selected
 	/// directory last time when promted dialog with the same id
 	static QString getExistingDirectory(const QString &id
-			, QWidget *parent = 0
+			, QWidget *parent = nullptr
 			, const QString &caption = QString()
 			, const QString &dir = QString()
 			, QFileDialog::Options options = QFileDialog::ShowDirsOnly);
@@ -57,18 +57,20 @@ public:
 	/// Makes same as QFileDialog::getOpenFileNames but with restoring selected
 	/// directory last time when promted dialog with the same id
 	static QStringList getOpenFileNames(const QString &id
-			, QWidget *parent = 0
+			, QWidget *parent = nullptr
 			, const QString &caption = QString()
 			, const QString &dir = QString()
 			, const QString &filter = QString()
-			, QString *selectedFilter = 0
-			, QFileDialog::Options options = 0);
+			, QString *selectedFilter = nullptr
+			, QFileDialog::Options options = nullptr);
 
 private:
 	static QString lastSelectedDirectory(const QString &id, const QString &defaultDirectory);
+	static QString lastSelectedFilter(const QString &id, const QString &defaultFilter);
 	static QString lastDirectoryKey(const QString &id);
+	static QString lastFilterKey(const QString &id);
 	static QString directoryOf(const QString &file);
-	static void saveState(const QString &id, const QString &directory);
+	static void saveState(const QString &id, const QString &directory, const QString &selectedFilter);
 };
 
 }
