@@ -53,6 +53,7 @@ bool ProjectManagerWrapper::suggestToSaveChangesOrCancel()
 
 	switch (suggestToSaveOrCancelMessage()) {
 	case QMessageBox::DestructiveRole:
+		mUnsavedIndicator=false;
 		return true;
 	case QMessageBox::RejectRole:
 		return false;
