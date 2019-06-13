@@ -87,8 +87,8 @@ void RectangleItem::deserialize(const QDomElement &element)
 	AbstractItem::deserialize(element);
 	const QString beginStr = element.attribute("begin", "0:0");
 	QStringList splittedStr = beginStr.split(":");
-	int x = splittedStr[0].toInt();
-	int y = splittedStr[1].toInt();
+	auto x = splittedStr[0].toFloat();
+	auto y = splittedStr[1].toFloat();
 	const QPointF begin = QPointF(x, y);
 
 	const QString endStr = element.attribute("end", "0:0");
