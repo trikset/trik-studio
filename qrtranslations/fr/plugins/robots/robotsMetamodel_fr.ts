@@ -2050,9 +2050,8 @@
         <translation type="vanished">orange</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
         <source>break</source>
-        <translation>interrompre</translation>
+        <translation type="vanished">interrompre</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
@@ -2073,6 +2072,11 @@
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="155"/>
         <source>Shared</source>
         <translation>Partagé</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
+        <source>brake</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="169"/>

@@ -1425,11 +1425,6 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
-        <source>break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>float</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1556,6 +1551,11 @@
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
+        <source>brake</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -69,6 +69,11 @@
         <translation>по оси z</translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="106"/>
+        <source>brake</source>
+        <translation>тормозить</translation>
+    </message>
+    <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="118"/>
         <source>Package</source>
         <translation>Пакетный</translation>
@@ -161,9 +166,8 @@
         <translation>истина</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="106"/>
         <source>break</source>
-        <translation>break</translation>
+        <translation type="vanished">break</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="106"/>

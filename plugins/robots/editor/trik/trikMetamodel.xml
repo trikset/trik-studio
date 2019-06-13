@@ -162,7 +162,7 @@
 							<showIf value="float" property="Mode" sign="="/>
 						</rectangle>
 						<rectangle fill="#ff0000" stroke-width="1" fill-style="solid" y1="0" y2="10" x1="0" stroke="#ffa500" x2="10" stroke-style="none">
-							<showIf value="break" property="Mode" sign="="/>
+							<showIf value="brake" property="Mode" sign="="/>
 						</rectangle>
 					</picture>
 					<labels>
@@ -176,8 +176,8 @@
 						<parent parentName="EngineCommand"/>
 					</generalizations>
 					<properties>
-						<property displayedName="Mode" type="BreakEngineMode" name="Mode">
-							<default>break</default>
+						<property displayedName="Mode" type="BrakeEngineMode" name="Mode">
+							<default>brake</default>
 						</property>
 						<property displayedName="Ports" type="string" name="Ports">
 							<default>M1, M2, M3, M4</default>

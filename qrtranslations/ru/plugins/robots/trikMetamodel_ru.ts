@@ -1432,9 +1432,8 @@
         <translation>D2</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>break</source>
-        <translation>тормозить</translation>
+        <translation type="vanished">тормозить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
@@ -1565,6 +1564,11 @@
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>magenta</source>
         <translation>пурпурный</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
+        <source>brake</source>
+        <translation>тормозить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>

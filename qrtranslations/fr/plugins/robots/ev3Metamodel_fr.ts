@@ -111,6 +111,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
+        <source>brake</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
         <source>Concurrent</source>
         <translation type="unfinished"></translation>
@@ -163,11 +168,6 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="206"/>
         <source>Public</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
-        <source>break</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
