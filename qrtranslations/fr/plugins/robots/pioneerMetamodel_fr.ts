@@ -71,7 +71,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="106"/>
         <source>brake</source>
-        <translation type="unfinished"></translation>
+        <translation>interrompre</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="118"/>

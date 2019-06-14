@@ -143,7 +143,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>brake</source>
-        <translation type="unfinished"></translation>
+        <translation>interrompre</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>

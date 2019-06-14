@@ -1556,7 +1556,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>brake</source>
-        <translation type="unfinished"></translation>
+        <translation>interrompre</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>

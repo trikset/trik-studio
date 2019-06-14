@@ -151,7 +151,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>brake</source>
-        <translation>тормозить</translation>
+        <translation>торможение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>float</source>
-        <translation>скользить</translation>
+        <translation>скольжение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>

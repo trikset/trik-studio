@@ -3127,7 +3127,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
         <source>brake</source>
-        <translation>тормозить</translation>
+        <translation>торможение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="165"/>
@@ -3208,7 +3208,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
         <source>float</source>
-        <translation>скользить</translation>
+        <translation>скольжение</translation>
     </message>
 </context>
 </TS>

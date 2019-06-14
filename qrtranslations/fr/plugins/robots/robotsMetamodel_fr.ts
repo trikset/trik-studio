@@ -2076,7 +2076,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
         <source>brake</source>
-        <translation type="unfinished"></translation>
+        <translation>interrompre</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="169"/>

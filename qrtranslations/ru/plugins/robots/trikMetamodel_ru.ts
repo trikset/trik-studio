@@ -1438,7 +1438,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>float</source>
-        <translation>скользить</translation>
+        <translation>скольжение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
@@ -1568,7 +1568,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>brake</source>
-        <translation>тормозить</translation>
+        <translation>торможение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>

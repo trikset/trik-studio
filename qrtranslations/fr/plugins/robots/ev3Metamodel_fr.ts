@@ -113,7 +113,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
         <source>brake</source>
-        <translation type="unfinished"></translation>
+        <translation>interrompre</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
