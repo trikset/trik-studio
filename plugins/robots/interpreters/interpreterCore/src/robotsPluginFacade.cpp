@@ -107,6 +107,11 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 
 	registerInterpreter(interpreter);
 
+	mSensorVariablesUpdater.reset(
+		new interpreterCore::interpreter::details::SensorVariablesUpdater(mRobotModelManager, *mParser));
+
+	connect(&mRobotModelManager, SIGNAL(allDevicesConfigured()), mSensorVariablesUpdater.data(), SLOT(run()));
+
 	connect(&configurer.systemEvents(), &qReal::SystemEvents::closedMainWindow
 			, &mProxyInterpreter, &kitBase::InterpreterInterface::userStopRobot);
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::connected

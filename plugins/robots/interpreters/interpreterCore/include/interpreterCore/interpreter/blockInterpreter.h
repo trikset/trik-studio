@@ -28,7 +28,6 @@
 #include <kitBase/devicesConfigurationProvider.h>
 
 #include "interpreterCore/interpreter/details/blocksTable.h"
-#include "interpreterCore/interpreter/details/sensorVariablesUpdater.h"
 #include "interpreterCore/interpreter/details/autoconfigurer.h"
 
 
@@ -104,7 +103,6 @@ private:
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	details::BlocksTable *mBlocksTable;  // Has ownership
 
-	details::SensorVariablesUpdater mSensorVariablesUpdater;
 	details::Autoconfigurer mAutoconfigurer;
 
 	/// Reference to a parser to be able to clear parser state when starting interpretation.
