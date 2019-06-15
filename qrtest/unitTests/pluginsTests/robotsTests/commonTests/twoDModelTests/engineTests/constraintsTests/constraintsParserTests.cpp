@@ -28,6 +28,30 @@ using namespace qrTest::robotsTests::commonTwoDModelTests;
 using namespace twoDModel::constraints::details;
 using namespace utils;
 
+struct ScopedConnection {
+	ScopedConnection(const QMetaObject::Connection &c)
+		: mConnection(c)
+	{}
+
+	ScopedConnection(ScopedConnection &&c)
+		: mConnection(c.mConnection)
+	{
+		c.mMoved = true;
+	}
+
+	~ScopedConnection()
+	{
+		if (!mMoved) {
+			QObject::disconnect(mConnection);
+		}
+	}
+
+private:
+	QMetaObject::Connection mConnection;
+	bool mMoved { false };
+};
+
+
 ConstraintsParserTests::ConstraintsParserTests()
 	: mParser(mEvents, mVariables, mObjects, mTimeline, mStatus)
 {
@@ -90,7 +114,7 @@ TEST_F(ConstraintsParserTests, timeLimitConstraintTest)
 	event->setUp();
 
 	bool eventFired = false;
-	QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(900);
 	event->check();
@@ -127,7 +151,7 @@ TEST_F(ConstraintsParserTests, timerWithoutDropTest)
 	event->setUp();
 
 	bool eventFired = false;
-	QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -169,7 +193,7 @@ TEST_F(ConstraintsParserTests, timerWithDropTest)
 	event->setUp();
 
 	bool eventFired = false;
-	QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -235,7 +259,7 @@ TEST_F(ConstraintsParserTests, comparisonTest)
 		event->setUp();
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -286,7 +310,7 @@ TEST_F(ConstraintsParserTests, constraintTagAndTypeOfTagTest)
 		event->setUp();
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_FALSE(eventFired);
@@ -392,9 +416,9 @@ TEST_F(ConstraintsParserTests, arithmeticTest)
 	bool event1Fired = false;
 	bool event2Fired = false;
 	bool event3Fired = false;
-	QObject::connect(event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
-	QObject::connect(event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
-	QObject::connect(event3, &Event::fired, [&event3Fired]() { event3Fired = true; });
+	ScopedConnection c1 = QObject::connect(event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
+	ScopedConnection c2 = QObject::connect(event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
+	ScopedConnection c3 = QObject::connect(event3, &Event::fired, [&event3Fired]() { event3Fired = true; });
 
 	mTimeline.setTimestamp(100);
 	event1->check();
@@ -459,7 +483,7 @@ TEST_F(ConstraintsParserTests, variableValueTest)
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -506,18 +530,18 @@ TEST_F(ConstraintsParserTests, objectStateTest)
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
 	};
 
-	TestObjectB *objB = new TestObjectB;
-	objB->otherObject()->setIntProperty(100500);
-	objB->otherObject()->setStringProperty("abc");
-	objB->otherObject()->setRectProperty(QRect(1, 2, 3, 4));
-	objB->otherObject()->setPointProperty(QPoint(10, 20));
-	mObjects["object"] = objB;
+	TestObjectB objB;
+	objB.otherObject()->setIntProperty(100500);
+	objB.otherObject()->setStringProperty("abc");
+	objB.otherObject()->setRectProperty(QRect(1, 2, 3, 4));
+	objB.otherObject()->setPointProperty(QPoint(10, 20));
+	mObjects["object"] = &objB;
 
 	testCase("object.otherObject.intProperty", "100500", "int");
 	testCase("object.otherObject.stringProperty", "abc", "string");
@@ -556,16 +580,16 @@ TEST_F(ConstraintsParserTests, setObjectStateTest)
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
 	};
 
-	TestObjectB *objB = new TestObjectB;
+	QScopedPointer<TestObjectB> objB (new TestObjectB);
 	objB->otherObject()->setIntProperty(100500);
 	objB->otherObject()->setStringProperty("abc");
-	mObjects["object"] = objB;
+	mObjects["object"] = objB.data();
 
 	const QString increment11Xml =
 			"<sum>"
@@ -615,7 +639,7 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -629,11 +653,11 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 	testCase("set", set->size(), set->first().toInt(), set->last().toInt());
 	delete set;
 
-	TestObjectA * const object = new TestObjectA();
-	object->setIntListProperty({10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
-	mObjects["object"] = object;
-	testCase("object.intListProperty", object->intListProperty().size()
-			, object->intListProperty().first(), object->intListProperty().last());
+	TestObjectA object;
+	object.setIntListProperty({10, 9, 8, 7, 6, 5, 4, 3, 2, 1});
+	mObjects["object"] = &object;
+	testCase("object.intListProperty", object.intListProperty().size()
+			, object.intListProperty().first(), object.intListProperty().last());
 }
 
 TEST_F(ConstraintsParserTests, boundingRectTest)
@@ -688,7 +712,7 @@ TEST_F(ConstraintsParserTests, boundingRectTest)
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -711,6 +735,7 @@ TEST_F(ConstraintsParserTests, boundingRectTest)
 
 	mVariables["items"] = QVariant::fromValue<QList<CanvasObject *>>(shapes);
 	testCase("variableValue name", correctRect.left(), correctRect.top(), correctRect.width(), correctRect.height());
+	qDeleteAll(shapes);
 }
 
 TEST_F(ConstraintsParserTests, distanceTest)
@@ -741,7 +766,7 @@ TEST_F(ConstraintsParserTests, distanceTest)
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -811,8 +836,8 @@ TEST_F(ConstraintsParserTests, usingTest)
 
 	bool event1Fired = false;
 	bool event2Fired = false;
-	QObject::connect(event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
-	QObject::connect(event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
+	ScopedConnection c1 = QObject::connect(event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
+	ScopedConnection c2 = QObject::connect(event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
 
 	mTimeline.setTimestamp(100);
 	event1->check();
@@ -895,7 +920,7 @@ TEST_F(ConstraintsParserTests, initializationTagTest)
 
 	Event * const event = mEvents["event"];
 	bool eventFired = false;
-	QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -973,11 +998,13 @@ TEST_F(ConstraintsParserTests, communicationTest)
 
 	QMap<QString, int> fireCounters;
 
+	std::vector<ScopedConnection> connections;
 	for (const QString &eventId : mEvents.keys()) {
 		Event * const event = mEvents[eventId];
 		ASSERT_NE(event, nullptr);
 		fireCounters[eventId] = 0;
-		QObject::connect(event, &Event::fired, [&fireCounters, eventId]() { ++fireCounters[eventId]; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, [&fireCounters, eventId]() { ++fireCounters[eventId]; });
+		connections.push_back(std::move(c));
 		if (event->isAliveInitially()) {
 			event->setUp();
 		}
