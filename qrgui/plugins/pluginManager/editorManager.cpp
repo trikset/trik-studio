@@ -55,11 +55,11 @@ EditorManager::~EditorManager()
 
 void EditorManager::init()
 {
-	QSet<MetamodelLoaderInterface *> pluginsList = mPluginManager.loadAllPlugins<MetamodelLoaderInterface>().toSet();
+	auto pluginsList = mPluginManager.loadAllPlugins<MetamodelLoaderInterface>().toSet();
 	pluginsList.remove(nullptr);
 
 	while (!pluginsList.isEmpty()) {
-		for (MetamodelLoaderInterface * const loader : pluginsList) {
+		for (auto &&loader : decltype(pluginsList)(pluginsList)) {
 			if (registerPlugin(loader)) {
 				pluginsList.remove(loader);
 				break;
@@ -70,7 +70,7 @@ void EditorManager::init()
 
 QString EditorManager::loadPlugin(const QString &pluginName)
 {
-	MetamodelLoaderInterface *loader = mPluginManager.pluginLoadedByName<MetamodelLoaderInterface>(pluginName).first;
+	auto loader = mPluginManager.pluginLoadedByName<MetamodelLoaderInterface>(pluginName).first;
 	const QString error = mPluginManager.pluginLoadedByName<MetamodelLoaderInterface>(pluginName).second;
 
 	if (loader && registerPlugin(loader)) {
@@ -84,26 +84,25 @@ QString EditorManager::loadPlugin(const QString &pluginName)
 bool EditorManager::registerPlugin(MetamodelLoaderInterface * const loader)
 {
 	bool allDependenciesAreLoaded = true;
-	const QStringList dependencies = loader->dependencies();
-	for (const QString &dependence : dependencies) {
+	const auto &dependencies = loader->dependencies();
+	for (auto &&dependence : dependencies) {
 		if (!mMetamodels.contains(dependence)) {
 			allDependenciesAreLoaded = false;
 			break;
 		}
 	}
 
-	if (allDependenciesAreLoaded) {
-		const QString pluginName = mPluginManager.fileName(loader);
-		// At the moment dependencies will contain maximally one element (this may change in future).
-		const QString extendedMetamodel = dependencies.isEmpty() ? QString() : dependencies.first();
-		Metamodel *metamodel = extendedMetamodel.isEmpty() ? new Metamodel : mMetamodels[extendedMetamodel];
-		loader->load(*metamodel);
-		mPluginFileNames[metamodel->id()] << pluginName;
-		mMetamodels[metamodel->id()] = metamodel;
-		return true;
-	} else {
+	if (!allDependenciesAreLoaded) {
 		return false;
 	}
+	const QString pluginName = mPluginManager.fileName(loader);
+	// At the moment dependencies will contain maximally one element (this may change in future).
+	const QString extendedMetamodel = dependencies.isEmpty() ? QString() : dependencies.first();
+	Metamodel *metamodel = extendedMetamodel.isEmpty() ? new Metamodel : mMetamodels[extendedMetamodel];
+	loader->load(*metamodel);
+	mPluginFileNames[metamodel->id()] << pluginName;
+	mMetamodels[metamodel->id()] = metamodel;
+	return true;
 }
 
 QString EditorManager::unloadPlugin(const QString &metamodelName)
