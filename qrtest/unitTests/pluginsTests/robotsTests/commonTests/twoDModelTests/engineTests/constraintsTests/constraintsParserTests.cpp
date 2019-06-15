@@ -14,7 +14,9 @@
 
 #include "constraintsParserTests.h"
 
-#include <QtCore/QDebug>
+#include <vector>
+#include <functional>
+#include <QDebug>
 
 #include <utils/objectsSet.h>
 #include <utils/canvas/pointObject.h>
@@ -1003,7 +1005,8 @@ TEST_F(ConstraintsParserTests, communicationTest)
 		Event * const event = mEvents[eventId];
 		ASSERT_NE(event, nullptr);
 		fireCounters[eventId] = 0;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&fireCounters, eventId]() { ++fireCounters[eventId]; });
+		std::function<void()> countEvents([&fireCounters, eventId]() { ++fireCounters[eventId]; });
+		ScopedConnection c = QObject::connect(event, &Event::fired, countEvents);
 		connections.push_back(std::move(c));
 		if (event->isAliveInitially()) {
 			event->setUp();
