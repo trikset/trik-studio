@@ -51,4 +51,3 @@ tests {
 
 	trikStudioSimulatorTests.depends =  qrgui
 }
-

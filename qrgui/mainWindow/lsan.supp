@@ -1,0 +1,14 @@
+#Do not forget to use fast_unwind_on_malloc=0 sanitizer option!
+#
+#uses static local variable to store Mutex
+leak:QTWTF::mainThreadFunctionQueueMutex
+#uses/initializes global variable with new pointer to Mutex
+leak:QTWTF::initializeThreading
+
+# From unit tests. These should be fixed one by one.
+leak:QPlatformIntegrationFactory::create
+leak:twoDModel::constraints::details::ConstraintsParser::parse
+leak:QObjectPrivate::connectImpl
+leak:qReal::EditorManager::registerPlugin
+leak:interpreterCore::textLanguage::RobotsBlockParser::RobotsBlockParser
+leak:qReal::models::Models::Models

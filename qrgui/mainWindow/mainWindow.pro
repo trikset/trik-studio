@@ -162,4 +162,5 @@ macx {
 }
 
 include(scriptAPI/scriptAPI.pri)
+copyToDestdir($$PWD/lsan.supp, now)
 

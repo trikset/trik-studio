@@ -40,4 +40,3 @@ trikScriptRunner.depends = trikControl trikKernel trikNetwork PythonQt
 trikHal.depends = trikKernel
 PythonQt.depends =
 
-copyToDestdir($$PWD/trikRuntime/resources/lsan.supp, now)
