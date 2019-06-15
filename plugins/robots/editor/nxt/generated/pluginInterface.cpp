@@ -121,8 +121,8 @@ void NxtMetamodelPlugin::initEnums()
 	mMetamodel->setEnumEditable("Accelerations", false);
 	mMetamodel->addEnum("AggregationKind", { qMakePair(QString("composite"), tr("Composite")), qMakePair(QString("none"), tr("None")), qMakePair(QString("shared"), tr("Shared")) });
 	mMetamodel->setEnumEditable("AggregationKind", false);
-	mMetamodel->addEnum("BreakEngineMode", { qMakePair(QString("break"), tr("break")), qMakePair(QString("float"), tr("float")) });
-	mMetamodel->setEnumEditable("BreakEngineMode", false);
+	mMetamodel->addEnum("BrakeEngineMode", { qMakePair(QString("brake"), tr("brake")), qMakePair(QString("float"), tr("float")) });
+	mMetamodel->setEnumEditable("BrakeEngineMode", false);
 	mMetamodel->addEnum("CallConcurrencyKind", { qMakePair(QString("concurrent"), tr("Concurrent")), qMakePair(QString("guarded"), tr("Guarded")), qMakePair(QString("sequential"), tr("Sequential")) });
 	mMetamodel->setEnumEditable("CallConcurrencyKind", false);
 	mMetamodel->addEnum("Color", { qMakePair(QString("black"), tr("black")), qMakePair(QString("blue"), tr("blue")), qMakePair(QString("green"), tr("green")), qMakePair(QString("red"), tr("red")), qMakePair(QString("white"), tr("white")), qMakePair(QString("yellow"), tr("yellow")) });

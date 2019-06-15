@@ -34,8 +34,8 @@
         <file>templates/signs/notLess.t</file>
         <file>templates/wait/timer.t</file>
         <file>templates/initialNode.t</file>
-        <file>templates/engines/breakMode/break.t</file>
-        <file>templates/engines/breakMode/float.t</file>
+        <file>templates/engines/brakeMode/brake.t</file>
+        <file>templates/engines/brakeMode/float.t</file>
         <file>templates/conditional/doWhile.t</file>
         <file>templates/conditional/for.t</file>
         <file>templates/conditional/if.t</file>

@@ -111,6 +111,11 @@
         <translation>ось z</translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
+        <source>brake</source>
+        <translation>торможение</translation>
+    </message>
+    <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="186"/>
         <source>Concurrent</source>
         <translation>Параллельно</translation>
@@ -166,9 +171,8 @@
         <translation>Открытая</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>
         <source>break</source>
-        <translation>тормозить</translation>
+        <translation type="vanished">тормозить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="184"/>

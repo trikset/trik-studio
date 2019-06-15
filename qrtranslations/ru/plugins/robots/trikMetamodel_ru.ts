@@ -12,11 +12,11 @@
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="50"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="241"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1526"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1938"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2057"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2128"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2286"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2332"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1939"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2058"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2129"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2287"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2333"/>
         <source>Port</source>
         <translation>Порт</translation>
     </message>
@@ -46,7 +46,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="78"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1394"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2494"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2495"/>
         <source>Angle:</source>
         <translation>Угол:</translation>
     </message>
@@ -69,7 +69,7 @@
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1608"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1663"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1718"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1771"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1772"/>
         <source>Ports</source>
         <translation>Порты</translation>
     </message>
@@ -84,12 +84,12 @@
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="602"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="603"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1420"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1831"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1993"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2056"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2127"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2285"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2526"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1832"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1994"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2057"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2128"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2286"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2527"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -121,6 +121,7 @@
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="155"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="655"/>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1278"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1771"/>
         <source>Mode</source>
         <translation>Режим</translation>
     </message>
@@ -137,7 +138,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="182"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2149"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2150"/>
         <source>Variable:</source>
         <translation>Переменная:</translation>
     </message>
@@ -506,19 +507,19 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="864"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2598"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2599"/>
         <source>File:</source>
         <translation>Файл:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="888"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2630"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2631"/>
         <source>output.txt</source>
         <translation>output.txt</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="888"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2630"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2631"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
@@ -544,7 +545,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="945"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2606"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2607"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
@@ -710,54 +711,54 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1476"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1888"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1889"/>
         <source>Wait for Encoder</source>
         <translation>Ждать энкодер</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1478"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1890"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1891"/>
         <source>Waits till the tacho limit of the motor on the given port will reach the value of the &apos;Tacho Limit&apos; parameter.</source>
         <translation>Ждать, пока показания счетчика количества оборотов на заданном моторе не достинут указанного в значении параметра &apos;Предел оборотов&apos;.</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1485"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1897"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2014"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2078"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2202"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2245"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2307"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1898"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2015"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2079"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2203"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2246"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2308"/>
         <source>Port:</source>
         <translation>Порт:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1493"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1905"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1906"/>
         <source>Tacho Limit:</source>
         <translation>Предел оборотов:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1501"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1799"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1913"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1968"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2030"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2094"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2261"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2502"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1800"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1914"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1969"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2031"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2095"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2262"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2503"/>
         <source>Sign:</source>
         <translation>Считанное значение:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1527"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1833"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1939"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1994"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2058"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2129"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2287"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2527"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1834"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1940"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1995"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2059"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2130"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2288"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2528"/>
         <source>Sign</source>
         <translation>Считанное значение</translation>
     </message>
@@ -835,259 +836,259 @@
         <translation>Выключить моторы по заданным портам.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1771"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1772"/>
         <source>M1, M2, M3, M4</source>
         <translation>M1, M2, M3, M4</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1782"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1783"/>
         <source>Wait for Accelerometer</source>
         <translation>Ждать акселерометр</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1791"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1792"/>
         <source>Acceleration:</source>
         <translation>Ускорение:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1807"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1808"/>
         <source>Axis:</source>
         <translation>Ось:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1831"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1832"/>
         <source>Acceleration</source>
         <translation>Ускорение</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1832"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1833"/>
         <source>Acceleration Axis</source>
         <translation>Ось</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1844"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1845"/>
         <source>Wait for Button</source>
         <translation>Ждать нажатия кнопки</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1846"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1847"/>
         <source>Waits for press of a button on a brick.</source>
         <translation>Ждать нажатия на кнопку на корпусе робота.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1853"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2359"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1854"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2360"/>
         <source>Button:</source>
         <translation>Кнопка:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1877"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2383"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1878"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2384"/>
         <source>Button</source>
         <translation>Кнопка</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1951"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1952"/>
         <source>Wait for Gyroscope</source>
         <translation>Ждать гиродатчик</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1953"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1954"/>
         <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees/sec&apos; parameter value.</source>
         <translation>Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы/сек&apos;.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1960"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1961"/>
         <source>Degrees/sec:</source>
         <translation>Градусы/сек:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1993"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1994"/>
         <source>Degrees/sec</source>
         <translation>Градусы/сек</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2005"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2006"/>
         <source>Wait for Infrared Distance</source>
         <translation>Ждать ИК датчик расстояния</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2007"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2008"/>
         <source>Waits till the value returned by the infrared sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value. By default on ports A1 and A2 the distance is specified in centimeters (from 0 to 100). It is not recommended to plug IR sensor into other ports because its raw value will be processed by software on robot with expectation of another sensor type.</source>
         <translation>Ждать, пока расстояние, возвращаемое инфракрасным датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos;. Еще один парамер — номер порта, к которому подключен датчик. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием. По умолчанию на портах A1 и A2 расстояние указывается в сантиметрах (от 0 до 100), к остальным подключение не рекомендуется, так как чистое значение с датчика будет обработано с ожиданием другого подключенного датчика.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2022"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2253"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2023"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2254"/>
         <source>Distance:</source>
         <translation>Расстояние:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2056"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2285"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2057"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2286"/>
         <source>Distance</source>
         <translation>Расстояние</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2069"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2070"/>
         <source>Wait for Light</source>
         <translation>Ждать свет</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2071"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2072"/>
         <source>Waits till the value returned by the light sensor on the given port will be greater or less than the given in the &apos;Percents&apos; parameter value (0 to 100).</source>
         <translation>Ждать, пока значение, возвращаемое датчиком света на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Проценты&apos;. Еще один парамер — номер порта, к которому подключен датчик цвета. Также параметром указывается операция, которая будет использоваться для сравнения со значением параметра &apos;Проценты&apos;.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2086"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2087"/>
         <source>Percents:</source>
         <translation>Проценты:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2127"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2128"/>
         <source>Percents</source>
         <translation>Проценты</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2140"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2141"/>
         <source>Wait for Message</source>
         <translation>Получить сообщение</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2142"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2143"/>
         <source>Stores a message from another robot into a given variable. When no incoming messages are present at the moment, a robot will wait for incoming message if &apos;Synchronized&apos; property is true, and empty string will be assigned to a variable otherwise.</source>
         <translation>Сохраняет сообщение от другого робота в переменной. Если свойство &quot;Дождаться сообщения&quot; установлено, робот будет ждать, когда входящих сообщений нет, иначе переменной присваивается пустая строка.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2157"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2158"/>
         <source>Synchronized:</source>
         <translation>Дождаться сообщения:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2181"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2182"/>
         <source>Synchronized</source>
         <translation>Дождаться сообщения</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2193"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2194"/>
         <source>Wait for Motion</source>
         <translation>Ждать движения</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2195"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2196"/>
         <source>Waits till the motion sensor on the given port is triggered.</source>
         <translation>Ждет, пока не сработает датчик движения.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2196"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2197"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2236"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2237"/>
         <source>Wait for Ultrasonic Distance</source>
         <translation>Ждать УЗ датчик расстояния</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2238"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2239"/>
         <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, from 0 to 300).</source>
         <translation>Ждать, пока расстояние, возвращаемое ультразвуковым датчиком расстояния, не будет сравнимо с указанным в значении параметра &apos;Расстояние&apos; (расстояние задается в сантиметрах, от 0 до 300). Еще один парамер — номер порта, к которому подключен датчик расстояния. Также параметром указывается операция, которая будет использоваться для сравнения с введенным расстоянием.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2298"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2299"/>
         <source>Wait for Touch Sensor</source>
         <translation>Ждать датчик касания</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2300"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2301"/>
         <source>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (1, 2, 3 or 4).</source>
         <translation>Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2343"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2344"/>
         <source>Wait Gamepad Button</source>
         <translation>Ждать кнопки на пульте</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2345"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2346"/>
         <source>Waits for Android gamepad &apos;magic button&apos; press. Buttons are identified by numbers from 1 to 5 (from left to right)</source>
         <translation>Ждёт нажатия на одну из &apos;магических кнопок&apos; Android-пульта. Кнопки идентифицируются номерами с 1 по 5 (слева направо)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2346"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2347"/>
         <source>Wait gamepad button</source>
         <translation>Ждать кнопки на пульте</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2394"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2397"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2395"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2398"/>
         <source>Wait for Gamepad Connect</source>
         <translation>Ждать подключения пульта</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2396"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2397"/>
         <source>Waits until Android gamepad is connected.</source>
         <translation>Ждать, пока не будет подключен Android-пульт.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2436"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2439"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2437"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2440"/>
         <source>Wait for Gamepad Disconnect</source>
         <translation>Ждать отключения пульта</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2438"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2439"/>
         <source>Waits until Android gamepad is disconnected.</source>
         <translation>Ждать, пока Android-пульт не отключится.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2478"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2481"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2479"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2482"/>
         <source>Wait for Gamepad Wheel</source>
         <translation>Ждать &quot;руля&quot; на пульте</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2480"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2481"/>
         <source>Waits till the value returned by gamepad wheel be greater or less than the given in the &apos;Angle&apos; parameter value. Angle is measured from -100 (max left) to 100 (max right).</source>
         <translation>Ждёт, пока значение, возвращаемое &apos;рулём&apos; Android-пульта не будет больше (или меньше) заданного значения. Угол измеряется от -100 (максимально влево) до 100 (максимально вправо).</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2526"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2527"/>
         <source>Angle</source>
         <translation>Угол</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2538"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2539"/>
         <source>Wait Pad Press</source>
         <translation>Ждать нажатия на пульт</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2540"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2541"/>
         <source>Waits for Android gamepad pad press (left pad has number 1, right pad - number 2).</source>
         <translation>Ждёт нажатия на одну из активных областей Android-пульта. Левая область имеет номер 1, правая - номер 2.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2541"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2542"/>
         <source>Wait pad press</source>
         <translation>Ждать нажатия пульта</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2554"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2555"/>
         <source>Pad:</source>
         <translation>Пульт:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2578"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2579"/>
         <source>Pad</source>
         <translation>Пульт</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2589"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2590"/>
         <source>Write To File</source>
         <translation>Записать в файл</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2591"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2592"/>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
         <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
@@ -1170,17 +1171,17 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1528"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1940"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1941"/>
         <source>Tacho Limit</source>
         <translation>Предел оборотов</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2182"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2183"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2631"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2632"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
@@ -1431,14 +1432,13 @@
         <translation>D2</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>break</source>
-        <translation>тормозить</translation>
+        <translation type="vanished">тормозить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
         <source>float</source>
-        <translation>скользить</translation>
+        <translation>скольжение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
@@ -1564,6 +1564,11 @@
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
         <source>magenta</source>
         <translation>пурпурный</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
+        <source>brake</source>
+        <translation>торможение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>

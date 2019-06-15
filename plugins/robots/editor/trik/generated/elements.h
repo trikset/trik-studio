@@ -1768,6 +1768,7 @@
 
 		void initProperties()
 		{
+			addProperty("Mode", "BrakeEngineMode", QString::fromUtf8("brake"), QObject::tr("Mode"), QObject::tr(""), false);
 			addProperty("Ports", "string", QObject::tr("M1, M2, M3, M4"), QObject::tr("Ports"), QObject::tr(""), false);
 		}
 	};

@@ -3125,6 +3125,11 @@
         <translation>ось z</translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
+        <source>brake</source>
+        <translation>торможение</translation>
+    </message>
+    <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="165"/>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="171"/>
         <source>false</source>
@@ -3197,14 +3202,13 @@
         <translation>Публичный</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
         <source>break</source>
-        <translation>тормозить</translation>
+        <translation type="vanished">тормозить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="157"/>
         <source>float</source>
-        <translation>скользить</translation>
+        <translation>скольжение</translation>
     </message>
 </context>
 </TS>

@@ -141,6 +141,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
+        <source>brake</source>
+        <translation>interrompre</translation>
+    </message>
+    <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
         <source>greater</source>
         <translation type="unfinished"></translation>
@@ -178,11 +183,6 @@
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="140"/>
         <source>Public</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
-        <source>break</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

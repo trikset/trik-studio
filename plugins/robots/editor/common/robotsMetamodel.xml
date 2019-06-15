@@ -31,8 +31,8 @@
 				<value name="zAxis" displayedName="z-axis"/>
 				<value name="normal" displayedName="norm"/>
 			</enum>
-			<enum name="BreakEngineMode">
-				<value name="break" displayedName="break"/>
+			<enum name="BrakeEngineMode">
+				<value name="brake" displayedName="brake"/>
 				<value name="float" displayedName="float"/>
 			</enum>
 			<groups>

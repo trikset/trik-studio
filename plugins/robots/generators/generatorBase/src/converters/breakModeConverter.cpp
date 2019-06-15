@@ -20,7 +20,7 @@ using namespace qReal;
 BreakModeConverter::BreakModeConverter(const QStringList &pathsToTemplates)
 	: EnumConverterBase(pathsToTemplates)
 {
-	addMapping("", "engines/breakMode/break.t");
-	addMapping("break", "engines/breakMode/break.t");
-	addMapping("float", "engines/breakMode/float.t");
+	addMapping("", "engines/brakeMode/brake.t");
+	addMapping("brake", "engines/brakeMode/brake.t");
+	addMapping("float", "engines/brakeMode/float.t");
 }

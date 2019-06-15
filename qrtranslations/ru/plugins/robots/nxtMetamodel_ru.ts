@@ -149,6 +149,11 @@
         <translation>Агрегация</translation>
     </message>
     <message>
+        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
+        <source>brake</source>
+        <translation>торможение</translation>
+    </message>
+    <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="130"/>
         <source>greater</source>
         <translation>больше</translation>
@@ -189,14 +194,13 @@
         <translation>Открытая</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>break</source>
-        <translation>тормозить</translation>
+        <translation type="vanished">тормозить</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="124"/>
         <source>float</source>
-        <translation>скользить</translation>
+        <translation>скольжение</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="120"/>

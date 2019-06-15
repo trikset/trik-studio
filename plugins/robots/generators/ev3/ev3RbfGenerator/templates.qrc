@@ -67,8 +67,8 @@
         <file>templates/signs/less.t</file>
         <file>templates/signs/notGreater.t</file>
         <file>templates/signs/notLess.t</file>
-        <file>templates/engines/breakMode/break.t</file>
-        <file>templates/engines/breakMode/float.t</file>
+        <file>templates/engines/brakeMode/brake.t</file>
+        <file>templates/engines/brakeMode/float.t</file>
         <file>templates/conditional/for.t</file>
         <file>templates/conditional/if.t</file>
         <file>templates/conditional/ifElse.t</file>

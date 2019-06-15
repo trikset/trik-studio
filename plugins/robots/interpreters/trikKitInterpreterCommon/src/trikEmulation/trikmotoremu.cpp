@@ -35,6 +35,7 @@ void trik::TrikMotorEmu::powerOff()
 
 void trik::TrikMotorEmu::brake(int)
 {
+	//TODO add inertia to 2D model
 	powerOff(); // should be the same for 2D model, since there is no inertia
 }
 

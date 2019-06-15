@@ -39,7 +39,7 @@ public slots:
 	void setPower(int power, bool constrain) override;
 	int power() const override;
 	void powerOff() override;
-	void brake(int) override;
+	void brake(int durationMs = 500) override;
 	void setPeriod(int uSec = 20000) override;
 
 private:
