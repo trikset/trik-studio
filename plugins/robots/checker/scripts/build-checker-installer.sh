@@ -25,7 +25,7 @@ function check_qmake_version {
 function show_help {
 	echo "Usage: $(basename $0) [QREAL_DIR [FIELDS_DIR EXAMPLES_DIR TASKS_DIR INPUTS_DIR] ]"
 	echo -e "QREAL_DIR\t-\tPath to QReal sources root"
-	echo "                    Defaults to \"../..\""
+	echo "                    Defaults to $(dirname "$0")"
 	echo -e "FIELDS_DIR\t-\tPath to directory with prepared fields."
 	echo "                                   Defaults to \"$$PWD/fields/fields\""
 	echo -e "EXAMPLES_DIR\t-\tPath to examples dir"
@@ -40,13 +40,14 @@ function show_help {
 
 [ "$*" == "--help" ] && show_help || :
 
-pushd "$(dirname "$0")"
 
 if [ "$#" -ge 1 ]; then
 	qRealDir=$(realpath $1)
 else
-	qRealDir=$(realpath .)
+	qRealDir=$(realpath "$(dirname "$0")")
 fi
+
+pushd $qRealDir
 
 QMAKE=$(check_qmake_version $qRealDir/../..)
 echo "Using qmake: $QMAKE"
