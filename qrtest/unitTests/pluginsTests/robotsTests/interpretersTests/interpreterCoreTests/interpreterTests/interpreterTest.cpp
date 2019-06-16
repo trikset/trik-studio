@@ -33,7 +33,7 @@ void InterpreterTest::SetUp()
 	ON_CALL(mConfigurationInterfaceMock, devices()).WillByDefault(
 			Return(QList<kitBase::robotModel::robotParts::Device *>())
 			);
-	EXPECT_CALL(mConfigurationInterfaceMock, devices()).Times(AtLeast(1));
+	EXPECT_CALL(mConfigurationInterfaceMock, devices()).Times(0);
 
 	/// @todo: Do we need this code in some common place? Why do we need to write
 	/// it every time when we are going to use RobotModelManager mock?
@@ -83,9 +83,9 @@ void InterpreterTest::SetUp()
 	EXPECT_CALL(mModel, timeline()).Times(AtLeast(1));
 
 	ON_CALL(mModel, updateIntervalForInterpretation()).WillByDefault(Return(10));
-	EXPECT_CALL(mModel, updateIntervalForInterpretation()).Times(AtLeast(1));
+	EXPECT_CALL(mModel, updateIntervalForInterpretation()).Times(0);
 
-	EXPECT_CALL(mModel, updateSensorsValues()).Times(AtLeast(1));
+	EXPECT_CALL(mModel, updateSensorsValues()).Times(0);
 
 
 	ON_CALL(mModelManager, model()).WillByDefault(ReturnRef(mModel));

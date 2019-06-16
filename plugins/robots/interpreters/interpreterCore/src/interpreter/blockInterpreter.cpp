@@ -48,7 +48,6 @@ BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphica
 	, mState(idle)
 	, mRobotModelManager(robotModelManager)
 	, mBlocksTable(new details::BlocksTable(blocksFactoryManager, robotModelManager))
-	, mSensorVariablesUpdater(robotModelManager, languageToolbox)
 	, mAutoconfigurer(mGraphicalModelApi, *mBlocksTable, *mInterpretersInterface.errorReporter())
 	, mLanguageToolbox(languageToolbox)
 {
@@ -124,7 +123,6 @@ void BlockInterpreter::interpret()
 
 void BlockInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 {
-	mSensorVariablesUpdater.suspend();
 	mRobotModelManager.model().stopRobot();
 	mState = idle;
 	qDeleteAll(mThreads);
@@ -173,8 +171,6 @@ void BlockInterpreter::devicesConfiguredSlot()
 	if (mState == waitingForDevicesConfiguredToLaunch) {
 		mState = interpreting;
 		mInterpretationStartedTimestamp = mRobotModelManager.model().timeline().timestamp();
-
-		mSensorVariablesUpdater.run();
 
 		const Id &currentDiagramId = mInterpretersInterface.activeDiagram();
 

@@ -32,6 +32,7 @@
 #include "interpreter/proxyInterpreter.h"
 #include "textLanguage/robotsBlockParser.h"
 #include "interpreterCore/managers/paletteUpdateManager.h"
+#include "interpreterCore/interpreter/details/sensorVariablesUpdater.h"
 
 namespace interpreterCore {
 
@@ -141,6 +142,8 @@ private:
 	qReal::ProjectManagementInterface *mProjectManager;
 
 	qReal::gui::MainWindowInterpretersInterface *mMainWindow;
+
+	QScopedPointer<interpreterCore::interpreter::details::SensorVariablesUpdater> mSensorVariablesUpdater;
 };
 
 }

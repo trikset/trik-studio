@@ -46,11 +46,12 @@ public:
 
 	~SensorVariablesUpdater();
 
-	/// Starts background polling process.
-	void run();
-
 	/// Stops background polling process.
 	void suspend();
+
+public slots:
+	/// Starts background polling process.
+	void run();
 
 private slots:
 	void onTimerTimeout();
