@@ -43,12 +43,12 @@ function show_help {
 pushd "$(dirname "$0")"
 
 if [ "$#" -ge 1 ]; then
-	qRealDir=$(readlink -f $1)
+	qRealDir=$(realpath $1)
 else
-	qRealDir=$(readlink -f ../..)
+	qRealDir=$(realpath .)
 fi
 
-QMAKE=$(check_qmake_version $qRealDir)
+QMAKE=$(check_qmake_version $qRealDir/../..)
 echo "Using qmake: $QMAKE"
 QT_HOST_DATA=$($QMAKE -query QT_HOST_DATA)
 QT_INSTALL_PLUGINS=$($QMAKE -query QT_INSTALL_PLUGINS)
@@ -101,66 +101,66 @@ if $NEED_QT_LIBS ; then
 fi
 
 # Copying QReal libraries
-rsync -av $qRealDir/bin/release/changelog.txt \
-$qRealDir/bin/release/libqrgraph.so* \
-$qRealDir/bin/release/libqrgui-brand-manager.so* \
-$qRealDir/bin/release/libqrgui-controller.so* \
-$qRealDir/bin/release/libqrgui-dialogs.so* \
-$qRealDir/bin/release/libqrgui-editor.so* \
-$qRealDir/bin/release/libqrgui-facade.so* \
-$qRealDir/bin/release/libqrgui-meta-meta-model.so* \
-$qRealDir/bin/release/libqrgui-models.so* \
-$qRealDir/bin/release/libqrgui-mouse-gestures.so* \
-$qRealDir/bin/release/libqrgui-plugin-manager.so* \
-$qRealDir/bin/release/libqrgui-preferences-dialog.so* \
-$qRealDir/bin/release/libqrgui-text-editor.so* \
-$qRealDir/bin/release/libqrgui-thirdparty.so* \
-$qRealDir/bin/release/libqrgui-tool-plugin-interface.so* \
-$qRealDir/bin/release/libqrkernel.so* \
-$qRealDir/bin/release/libqrrepo.so* \
-$qRealDir/bin/release/libqrtext.so* \
-$qRealDir/bin/release/libqrutils.so* \
-$qRealDir/bin/release/libqscintilla2.so* \
-$qRealDir/bin/release/libqslog.so* \
-$qRealDir/bin/release/libqrtext.so* .
+rsync -av $qRealDir/changelog.txt \
+$qRealDir/libqrgraph.so* \
+$qRealDir/libqrgui-brand-manager.so* \
+$qRealDir/libqrgui-controller.so* \
+$qRealDir/libqrgui-dialogs.so* \
+$qRealDir/libqrgui-editor.so* \
+$qRealDir/libqrgui-facade.so* \
+$qRealDir/libqrgui-meta-meta-model.so* \
+$qRealDir/libqrgui-models.so* \
+$qRealDir/libqrgui-mouse-gestures.so* \
+$qRealDir/libqrgui-plugin-manager.so* \
+$qRealDir/libqrgui-preferences-dialog.so* \
+$qRealDir/libqrgui-text-editor.so* \
+$qRealDir/libqrgui-thirdparty.so* \
+$qRealDir/libqrgui-tool-plugin-interface.so* \
+$qRealDir/libqrkernel.so* \
+$qRealDir/libqrrepo.so* \
+$qRealDir/libqrtext.so* \
+$qRealDir/libqrutils.so* \
+$qRealDir/libqscintilla2.so* \
+$qRealDir/libqslog.so* \
+$qRealDir/libqrtext.so* .
 
 # Copying TRIKStudio plugins
-rsync -av $qRealDir/bin/release/libqextserialport.so* \
-$qRealDir/bin/release/librobots-2d-model.so* \
-$qRealDir/bin/release/librobots-interpreter-core.so* \
-$qRealDir/bin/release/librobots-trik-kit-interpreter-common.so* \
-$qRealDir/bin/release/librobots-kit-base.so* \
-$qRealDir/bin/release/librobots-trik-kit.so* \
-$qRealDir/bin/release/librobots-utils.so* \
-$qRealDir/bin/release/libPythonQt*.so* \
-$qRealDir/bin/release/libBox2D.so* .
+rsync -av $qRealDir/libqextserialport.so* \
+$qRealDir/librobots-2d-model.so* \
+$qRealDir/librobots-interpreter-core.so* \
+$qRealDir/librobots-trik-kit-interpreter-common.so* \
+$qRealDir/librobots-kit-base.so* \
+$qRealDir/librobots-trik-kit.so* \
+$qRealDir/librobots-utils.so* \
+$qRealDir/libPythonQt*.so* \
+$qRealDir/libBox2D.so* .
 
 
-rsync -avR $qRealDir/bin/release/./translations/ru/*.qm \
-	$qRealDir/bin/release/./translations/ru/plugins/robots/	\
+rsync -avR $qRealDir/./translations/ru/*.qm \
+	$qRealDir/./translations/ru/plugins/robots/	\
 	./
 
-rsync -avR $qRealDir/bin/release/./plugins/editors/* $qRealDir/bin/release/./plugins/tools/librobots-plugin.so \
-	$qRealDir/bin/release/./plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so \
-	$qRealDir/bin/release/./plugins/tools/kitPlugins/librobots-trik-v62-interpreter.so \
+rsync -avR $qRealDir/./plugins/editors/* $qRealDir/./plugins/tools/librobots-plugin.so \
+	$qRealDir/./plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so \
+	$qRealDir/./plugins/tools/kitPlugins/librobots-trik-v62-interpreter.so \
 	./
 
 # Copying TRIKRuntime dependencies
-rsync -avR $qRealDir/bin/release/./libtrik*.so* \
-	$qRealDir/bin/release/./*.js \
-	$qRealDir/bin/release/./*.py \
+rsync -avR $qRealDir/./libtrik*.so* \
+	$qRealDir/./*.js \
+	$qRealDir/./*.py \
 	./
 
 # Copying checker itself
-cp -fP $qRealDir/bin/release/2D-model .
-cp -fP $qRealDir/bin/release/patcher .
-cp -fP $qRealDir/bin/release/check-solution.sh .
+cp -fP $qRealDir/2D-model .
+cp -fP $qRealDir/patcher .
+cp -fP $qRealDir/check-solution.sh .
 
 #Now copy all the denendencies for all the executables into single target folder
 copy_required_libs . $(find . -type f -executable -o -name '*.so' )
 
 cd ..
-cp -fP $qRealDir/bin/release/checker.sh .
+cp -fP $qRealDir/checker.sh .
 
 # Copying fields, examples and tasks
 cp -r $fieldsDir ./fields
