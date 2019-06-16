@@ -371,7 +371,11 @@ void TrikBrick::wait(int milliseconds)
 	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
 
 	if (timeline->isStarted()) {
-		QScopedPointer<utils::AbstractTimer> t(timeline->produceTimer());
+		struct DeleteLater {
+			static void cleanup(QObject *o) { o->deleteLater(); }
+		};
+
+		QScopedPointer<utils::AbstractTimer, DeleteLater> t(timeline->produceTimer());
 		QEventLoop loop;
 
 		auto mainHandler = [&t,this,timeline,&loop]() {
