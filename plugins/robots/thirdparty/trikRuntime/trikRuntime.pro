@@ -22,7 +22,7 @@ SUBDIRS += \
 	trikNetwork \
 	trikControl \
 	trikHal \
-	trikScriptRunner
+	trikScriptRunner \
 
 # qslog.file = $$PWD/../../../../thirdparty/qslog/QsLogSharedLibrary.pro
 # qslog.subdir = $$PWD/../../../../thirdparty/qslog/
@@ -33,9 +33,10 @@ trikKernel.subdir = $$PWD/trikRuntime/trikKernel
 trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
 trikControl.subdir = $$PWD/trikRuntime/trikControl
 trikHal.subdir = $$PWD/trikRuntime/trikHal
-trikControl.depends = trikKernel trikHal 
-trikKernel.depends = 
-trikNetwork.depends = trikKernel 
+trikControl.depends = trikKernel trikHal
+trikKernel.depends =
+trikNetwork.depends = trikKernel
 trikScriptRunner.depends = trikControl trikKernel trikNetwork PythonQt
 trikHal.depends = trikKernel
-PythonQt.depends = 
+PythonQt.depends =
+
