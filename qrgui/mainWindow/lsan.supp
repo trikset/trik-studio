@@ -4,7 +4,10 @@
 leak:QTWTF::mainThreadFunctionQueueMutex
 #uses/initializes global variable with new pointer to Mutex
 leak:QTWTF::initializeThreading
-
+#
+leak:QApplicationPrivate::initializeWidgetFontHash
+leak:QFontconfigDatabase::defaultFont() const
+leak:QGuiApplicationPrivate::createPlatformIntegration()
 # From unit tests. These should be fixed one by one.
 leak:QPlatformIntegrationFactory::create
 leak:twoDModel::constraints::details::ConstraintsParser::parse
@@ -12,3 +15,10 @@ leak:QObjectPrivate::connectImpl
 leak:qReal::EditorManager::registerPlugin
 leak:interpreterCore::textLanguage::RobotsBlockParser::RobotsBlockParser
 leak:qReal::models::Models::Models
+#This comes from a crappy, ugly piece of code....
+leak:generatorBase::GeneratorFactoryBase::
+leak:trik::qts::TrikQtsGeneratorPluginBase::
+leak:qrtext::lua::details::LuaParser::grammar()
+leak:QAction::activate
+#leak:QWeakPointer<QObject>::QWeakPointer<QObject>(QObject*, bool)
+leak:QStringList::QStringList(std::initializer_list<
