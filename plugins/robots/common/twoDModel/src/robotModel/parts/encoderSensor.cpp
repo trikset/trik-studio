@@ -35,4 +35,6 @@ void EncoderSensor::read()
 void EncoderSensor::nullify()
 {
 	mEngine.resetEncoder(port());
+	// Sensors are updated by timer, so some values (especially, encoders) are missed between timer shots.
+	emit newData(0);
 }
