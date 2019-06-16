@@ -44,7 +44,7 @@ macx:QT_CONFIG -= no-pkg-config
 
 CONFIG(debug) {
 	CONFIGURATION = debug
-	CONFIGURATION_SUFFIX = -d
+	CONFIGURATION_SUFFIX =
 	unix {
 		QMAKE_CXXFLAGS += -coverage
 		QMAKE_LFLAGS += -coverage
