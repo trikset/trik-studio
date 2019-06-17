@@ -191,8 +191,10 @@ void Metamodel::addNode(qrgraph::Node &entity)
 
 	const QString diagram = type->diagram();
 	const QString element = type->name();
-	Q_ASSERT_X(!mElements[diagram][element], Q_FUNC_INFO, "Duplicate enitity in metamodel");
-
+	if (auto && elem = mElements[diagram][element]) {
+		auto err = QString("Duplicate enitity %1 for %2 in metamodel").arg(element).arg(diagram);
+		Q_ASSERT_X(!elem, Q_FUNC_INFO, err.toLocal8Bit().data());
+	}
 	mElements[diagram][element] = type;
 	Multigraph::addNode(entity);
 }

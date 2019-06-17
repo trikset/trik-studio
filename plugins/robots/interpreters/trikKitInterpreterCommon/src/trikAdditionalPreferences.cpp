@@ -63,7 +63,7 @@ TrikAdditionalPreferences::~TrikAdditionalPreferences()
 
 void TrikAdditionalPreferences::save()
 {
-	SettingsManager::setValue("TrikTcpServer", mUi->tcpServerLineEdit->text());
+	SettingsManager::setValue("TrikTcpServer", mUi->tcpServerLineEdit->currentText());
 	SettingsManager::setValue("TrikWebCameraReal", mUi->realCameraCheckBox->isChecked());
 	SettingsManager::setValue("TrikSimulatedCameraImagesPath", mUi->imagesPathlineEdit->text());
 	SettingsManager::setValue("TrikSimulatedCameraImagesFromProject", mUi->imagesFromProjectCheckBox->isChecked());
@@ -74,7 +74,9 @@ void TrikAdditionalPreferences::save()
 
 void TrikAdditionalPreferences::restoreSettings()
 {
-	mUi->tcpServerLineEdit->setText(SettingsManager::value("TrikTcpServer").toString());
+	const auto &addr = SettingsManager::value("TrikTcpServer").toString();
+	mUi->tcpServerLineEdit->insertItem(0, addr);
+	mUi->tcpServerLineEdit->setCurrentText(addr);
 	mUi->realCameraCheckBox->setChecked(SettingsManager::value("TrikWebCameraReal").toBool());
 	mUi->imagesPathlineEdit->setText(SettingsManager::value("TrikSimulatedCameraImagesPath").toString());
 	mUi->cameraNameLineEdit->setText(SettingsManager::value("TrikWebCameraRealName").toString());
