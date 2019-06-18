@@ -83,12 +83,12 @@
 <context>
     <name>utils::robotCommunication::TcpRobotCommunicatorWorker</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="229"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="230"/>
         <source>Unable to resolve host.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="247"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="248"/>
         <source>Connection failed. IP: %1</source>
         <translation type="unfinished"></translation>
     </message>
