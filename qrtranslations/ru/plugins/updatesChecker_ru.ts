@@ -4,22 +4,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="23"/>
+        <location filename="../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="+23"/>
         <source>New updates are available!</source>
         <translation>Доступны новые обновления!</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="24"/>
+        <location line="+1"/>
         <source>Update</source>
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="25"/>
+        <location line="+1"/>
         <source>Later</source>
         <translation>Позже</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="27"/>
+        <location line="+2"/>
         <source>Yeah!</source>
         <translation>Ура!</translation>
     </message>
@@ -27,27 +27,27 @@
 <context>
     <name>updatesChecker::UpdatesCheckerPlugin</name>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="33"/>
+        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="+33"/>
         <source>Check for updates</source>
         <translation>Проверить на наличие обновлений</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="66"/>
+        <location line="+33"/>
         <source>There is some connection problem, may be network is disabled</source>
         <translation>Неполадки с подключением, возможно доступ к сети Интернет отсутсвует</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="69"/>
+        <location line="+3"/>
         <source>There is some unrecognized error with updating process</source>
         <translation>Неожиданная ошибка при попытке обновиться (пожалуйста, сообщите разработчикам)</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="80"/>
+        <location line="+11"/>
         <source>No updates available</source>
         <translation>Обновлений пока что нет</translation>
     </message>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="91"/>
+        <location line="+11"/>
         <source>Check for updates on start</source>
         <translation>Проверять на наличие обновлений при старте</translation>
     </message>

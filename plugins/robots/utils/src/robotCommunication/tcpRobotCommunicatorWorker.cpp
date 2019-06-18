@@ -183,7 +183,8 @@ void TcpRobotCommunicatorWorker::processTelemetryMessage(const QString &message)
 		for (QString value : values) {
 			handleValue(value);
 		}
-
+	} else if (message == "keepalive") {
+		// Just ignoring it
 	} else {
 		QLOG_INFO() << "Incoming message of unknown type: " << message;
 	}

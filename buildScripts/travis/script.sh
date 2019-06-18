@@ -49,7 +49,7 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && ccache -s \
 && sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -c \"export ASAN_OPTIONS=$([[$TRAVIS_OS_NAME == linux ]] && echo detect_leaks=1 || :):detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& sh -c \"export ASAN_OPTIONS=$( [[$TRAVIS_OS_NAME == linux ]] && echo detect_leaks=1 || :):detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 

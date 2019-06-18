@@ -18,6 +18,8 @@
 
 #include <qrkernel/logging.h>
 
+#include <QNetworkProxy>
+
 const int keepaliveTime = 3000;
 
 using namespace utils::robotCommunication;
@@ -43,9 +45,32 @@ bool TcpConnectionHandler::connect(const QHostAddress &serverAddress)
 	if (isConnected() || mSocket.state() == QTcpSocket::ConnectingState) {
 		return true;
 	}
-
+	// Sometimes local proxy configuration is an issue
+	// Try to avoid system proxy, because usually we are in local hetwork
+	// But fallback to proxy if connnection failed
+	mSocket.setProxy(QNetworkProxy::NoProxy);
 	mSocket.connectToHost(serverAddress, static_cast<quint16>(mPort));
-	const bool result = mSocket.waitForConnected(3000);
+	auto result = mSocket.waitForConnected(3000);
+	if (!result) {
+		// QNetworkProxyFactory::systemProxyForQuery can run few seconds on Windows
+		// We can make a reconnect attempt wihout quering proxies
+		// However it will take (probably) additional 3000 ms for each case
+		// when just an ip-address was wrong (or robot is turned off)
+		// In case systemProxyForQuery takes more than 3000 ms,
+		// this code can be updated to make a blind re-connection attempt
+		// and just logging proxies after an attempt in case of a failure
+		const QNetworkProxyQuery proxyQuery(serverAddress.toString(), mPort);
+		const auto &tcpProxies = QNetworkProxyFactory::systemProxyForQuery(proxyQuery);
+		if (!tcpProxies.isEmpty()
+				&& (tcpProxies.size() != 1  || tcpProxies.first().type() != QNetworkProxy::NoProxy)) {
+			QLOG_INFO() << "Proxies:" << tcpProxies;
+			QLOG_INFO() << "Attempting to reconnect with an application default proxy";
+			mSocket.setProxy(QNetworkProxy::DefaultProxy);
+			mSocket.connectToHost(serverAddress, static_cast<quint16>(mPort));
+			result = mSocket.waitForConnected(3000);
+		}
+	}
+
 	if (!result) {
 		QLOG_ERROR() << mSocket.errorString();
 	} else {

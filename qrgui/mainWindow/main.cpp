@@ -75,6 +75,11 @@ void initLogging()
 	}
 }
 
+static QString versionInfo()
+{
+	return  "TRIK Studio (" + QSysInfo::buildAbi() + ") " + TRIK_STUDIO_VERSION;
+}
+
 int main(int argc, char *argv[])
 {
 	QRealApplication app(argc, argv);
@@ -86,8 +91,7 @@ int main(int argc, char *argv[])
 
 	if (app.arguments().contains("--version"))
 	{
-		QTextStream(stdout) << "TRIK Studio (" << PlatformInfo::prettyOsVersion() << ") " <<
-			TRIK_STUDIO_VERSION << endl;
+		QTextStream(stdout) << versionInfo() << endl;
 		return 0;
 	}
 
@@ -118,7 +122,9 @@ int main(int argc, char *argv[])
 
 	initLogging();
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
-	QLOG_INFO() << "Running on" << PlatformInfo::prettyOsVersion();
+	QLOG_INFO() << "Version:" << versionInfo();
+	QLOG_INFO() << "Running on" << PlatformInfo::prettyOsVersion()
+				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app.arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 

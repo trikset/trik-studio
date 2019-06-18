@@ -36,11 +36,7 @@ SettingsManager::~SettingsManager()
 
 void SettingsManager::setValue(const QString &name, const QVariant &value)
 {
-	const QVariant oldValue = instance()->value(name);
-	if (oldValue != value) {
-		instance()->set(name, value);
-		emit instance()->settingsChanged(name, oldValue, value);
-	}
+	instance()->set(name, value);
 }
 
 QVariant SettingsManager::value(const QString &key)
@@ -64,7 +60,11 @@ SettingsManager* SettingsManager::instance()
 
 void SettingsManager::set(const QString &name, const QVariant &value)
 {
-	mData[name] = value;
+	const QVariant oldValue = this->value(name);
+	if (oldValue != value) {
+		mData[name] = value;
+		emit settingsChanged(name, oldValue, value);
+	}
 }
 
 QVariant SettingsManager::get(const QString &name, const QVariant &defaultValue) const

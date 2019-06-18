@@ -4,7 +4,7 @@
 <context>
     <name>NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="14"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Настройки NXT</translation>
     </message>
@@ -21,23 +21,23 @@
         <translation type="vanished">USB</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="36"/>
+        <location line="+22"/>
         <source>Bluetooth Settings</source>
         <translation>Настройки Bluetooth</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="42"/>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="59"/>
+        <location line="+6"/>
+        <location line="+17"/>
         <source>COM Port:</source>
         <translation>COM-Порт:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="69"/>
+        <location line="+10"/>
         <source>No COM ports found. If you have a Bluetooth connection with active virtual COM port, please enter its name. Example: COM3</source>
         <translation>COM-порты не найдены. Если установлено Bluetooth-соединение с активным COM-портом, пожалуйста, укажите его имя. Пример: COM3</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="79"/>
+        <location line="+10"/>
         <source>Specify COM port manually</source>
         <translation>Указать COM-порт вручную</translation>
     </message>
@@ -52,7 +52,7 @@
 <context>
     <name>NxtDisplayWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtDisplayWidget.ui" line="435"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtDisplayWidget.ui" line="+435"/>
         <source>tr(NxtDisplay)</source>
         <translation>Дисплей NXT</translation>
     </message>
@@ -60,7 +60,7 @@
 <context>
     <name>nxt::NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="30"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+30"/>
         <source>2D robot image:</source>
         <translation>Картинка робота в 2D:</translation>
     </message>
@@ -68,7 +68,7 @@
 <context>
     <name>nxt::NxtKitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="104"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+104"/>
         <source>Lego NXT</source>
         <translation>Lego NXT</translation>
     </message>
@@ -117,7 +117,7 @@
 <context>
     <name>nxt::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="33"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+33"/>
         <source>Interpretation (Bluetooth)</source>
         <translation>Интерпретация (Bluetooth)</translation>
     </message>
@@ -125,7 +125,7 @@
 <context>
     <name>nxt::robotModel::real::UsbRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="34"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (USB)</source>
         <translation>Интерпретация (USB)</translation>
     </message>
@@ -133,7 +133,7 @@
 <context>
     <name>nxt::robotModel::real::parts::SonarSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="30"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+30"/>
         <source>Sonar sensor</source>
         <translation>Сенсор расстояния</translation>
     </message>

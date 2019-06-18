@@ -4,22 +4,22 @@
 <context>
     <name>qReal::text::TextManager</name>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="96"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="+96"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="97"/>
+        <location line="+1"/>
         <source>Save before closing?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="278"/>
+        <location line="+181"/>
         <source>All files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="284"/>
+        <location line="+6"/>
         <source>Save generated code</source>
         <translation>Enregister le code généré</translation>
     </message>
