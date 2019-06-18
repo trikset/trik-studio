@@ -200,7 +200,7 @@ void CommonRobotModel::configureDevice(const PortInfo &port, const DeviceInfo &d
 	if (device) {
 		mConfiguration.configureDevice(device);
 	} else {
-		QLOG_WARN() << "Can not create device for" << deviceInfo.toString();
+		QLOG_WARN() << "Can not create device" << deviceInfo.toString() << "for port" << port.toString();
 	}
 	/// @todo Handle error
 }
