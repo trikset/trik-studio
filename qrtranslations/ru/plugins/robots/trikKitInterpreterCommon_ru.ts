@@ -27,7 +27,7 @@
         <translation>Настройки TCP</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+9"/>
         <source>Enter robot IP-address here</source>
         <translation>Введите IP-адрес робота</translation>
     </message>
@@ -36,7 +36,7 @@
         <translation type="vanished">Настройки мультимедия</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+13"/>
         <source>Camera Settings</source>
         <translation>Настройки камеры</translation>
     </message>
@@ -235,7 +235,7 @@
         <translation type="vanished">Оставновить QTS</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+36"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+37"/>
         <source>Start</source>
         <translation>Запустить</translation>
     </message>
@@ -255,7 +255,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+186"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>

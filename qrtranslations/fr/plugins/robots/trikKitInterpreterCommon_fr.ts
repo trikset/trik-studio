@@ -27,12 +27,12 @@
         <translation>Configuration de TCP</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+9"/>
         <source>Enter robot IP-address here</source>
         <translation>Tapez l&apos;adresse IP du robot ici</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+13"/>
         <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,7 +178,7 @@
 <context>
     <name>trik::TrikKitInterpreterPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+36"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+37"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
@@ -198,7 +198,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+186"/>
         <source>Enter robot`s IP-address here...</source>
         <translation type="unfinished">Tapez l&apos;adresse IP du robot ici...</translation>
     </message>
