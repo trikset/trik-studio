@@ -15,8 +15,9 @@
 #include "trikKitInterpreterCommon/trikKitInterpreterPluginBase.h"
 
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLineEdit>
 #include <QtXml/QDomDocument>
+#include <QComboBox>
+#include <QLineEdit>
 
 #include <twoDModel/engine/twoDModelEngineFacade.h>
 #include <qrkernel/settingsManager.h>
@@ -430,21 +431,40 @@ kitBase::DevicesConfigurationProvider *TrikKitInterpreterPluginBase::devicesConf
 
 QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 {
-	QLineEdit * const quickPreferences = new QLineEdit;
+	auto quickPreferences = new QComboBox;
 	quickPreferences->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-	quickPreferences->setPlaceholderText(tr("Enter robot`s IP-address here..."));
+	quickPreferences->setEditable(true);
+	quickPreferences->setCurrentText(tr("Enter robot`s IP-address here..."));
+	quickPreferences->setMinimumContentsLength(15);
+	quickPreferences->setSizeAdjustPolicy(QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLength);
+	quickPreferences->lineEdit()->setAlignment(Qt::AlignRight);
 	const auto updateQuickPreferences = [quickPreferences]() {
 		const QString ip = qReal::SettingsManager::value("TrikTcpServer").toString();
-		if (quickPreferences->text() != ip) {
-			quickPreferences->setText(ip);
+
+		// Handle duplicates
+		auto found = false;
+		for(int i = 0; i < quickPreferences->count(); ++i) {
+			if (quickPreferences->itemText(i) == ip) {
+				found = true;
+				break;
+			}
+		}
+
+		if (!found) {
+			quickPreferences->insertItem(0, ip);
+		}
+
+		// Focus on new value
+		if (quickPreferences->currentText() != ip) {
+			quickPreferences->setCurrentText(ip);
 		}
 	};
 
 	updateQuickPreferences();
 	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged, this, updateQuickPreferences);
 	qReal::SettingsListener::listen("TrikTcpServer", updateQuickPreferences, this);
-	connect(quickPreferences, &QLineEdit::textChanged, this, [](const QString &text) {
-		qReal::SettingsManager::setValue("TrikTcpServer", text);
+	connect(quickPreferences->lineEdit(), &QLineEdit::editingFinished, this, [quickPreferences]() {
+		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text().trimmed());
 	});
 
 	connect(this, &QObject::destroyed, this, [quickPreferences]() { delete quickPreferences; });

@@ -36,9 +36,15 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0">
-       <widget class="QLineEdit" name="tcpServerLineEdit">
-        <property name="placeholderText">
+       <widget class="QComboBox" name="tcpServerLineEdit">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <property name="currentText">
          <string>Enter robot IP-address here</string>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::InsertAtTop</enum>
         </property>
        </widget>
       </item>
