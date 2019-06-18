@@ -75,7 +75,7 @@
         <translation type="vanished">ТРИК (старый корпус)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/trikV6KitInterpreterPlugin.cpp" line="42"/>
+        <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/trikV6KitInterpreterPlugin.cpp" line="+42"/>
         <source>TRIK (model-2014)</source>
         <translation>ТРИК (модель 2014)</translation>
     </message>
@@ -97,7 +97,7 @@
 <context>
     <name>trik::robotModel::real::TrikV6RealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/robotModel/real/trikV6RealRobotModel.cpp" line="69"/>
+        <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/robotModel/real/trikV6RealRobotModel.cpp" line="+69"/>
         <source>Interpretation (Wi-Fi)</source>
         <translation>Интерпретация (Wi-Fi)</translation>
     </message>

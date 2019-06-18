@@ -4,17 +4,17 @@
 <context>
     <name>nxt::russianC::NxtRussianCGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtRussianCGenerator/nxtRussianCGeneratorPlugin.cpp" line="25"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtRussianCGenerator/nxtRussianCGeneratorPlugin.cpp" line="+25"/>
         <source>Generation (Russian C)</source>
         <translation>Génération (Russian C)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtRussianCGenerator/nxtRussianCGeneratorPlugin.cpp" line="28"/>
+        <location line="+3"/>
         <source>Generate to Russian C</source>
         <translation>Générer le code en Russian C</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtRussianCGenerator/nxtRussianCGeneratorPlugin.cpp" line="42"/>
+        <location line="+14"/>
         <source>Generate Russian C Code</source>
         <translation>Générer le code en Russian C</translation>
     </message>

@@ -4,17 +4,17 @@
 <context>
     <name>GesturesWidget</name>
     <message>
-        <location filename="../../qrgui/mouseGestures/gesturesWidget.ui" line="20"/>
+        <location filename="../../qrgui/mouseGestures/gesturesWidget.ui" line="+20"/>
         <source>Form</source>
         <translation>Forme</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mouseGestures/gesturesWidget.ui" line="36"/>
+        <location line="+16"/>
         <source>List of mouse gestures</source>
         <translation>Liste des gestes souris</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mouseGestures/gesturesWidget.ui" line="49"/>
+        <location line="+13"/>
         <source>Click to see how to draw it:</source>
         <translation>Cliquez pour voir comment le dessiner : </translation>
     </message>

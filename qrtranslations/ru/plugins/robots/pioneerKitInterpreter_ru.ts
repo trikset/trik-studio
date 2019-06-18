@@ -4,7 +4,7 @@
 <context>
     <name>pioneerKitInterpreter::PioneerKitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/pioneerKitInterpreter/src/pioneerKitInterpreterPlugin.cpp" line="33"/>
+        <location filename="../../../../plugins/robots/interpreters/pioneerKitInterpreter/src/pioneerKitInterpreterPlugin.cpp" line="+33"/>
         <source>Pioneer Kit</source>
         <translation>Квадрокоптер «Пионер»</translation>
     </message>

@@ -53,62 +53,62 @@
 <context>
     <name>PreferencesRobotSettingsPage</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="23"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="+23"/>
         <source>Graphics Watcher update intervals</source>
         <translation>Intervalle de mise à jour des graphes</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="35"/>
+        <location line="+12"/>
         <source>Sensors  (ms)</source>
         <translation>Capteurs (ms)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="63"/>
+        <location line="+28"/>
         <source>Autoscaling  (ms)</source>
         <translation>Auto-redimensionnement (ms)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="91"/>
+        <location line="+28"/>
         <source>Text info (ms)</source>
         <translation>Information texte (ms)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="146"/>
+        <location line="+55"/>
         <source>Uploading &amp;&amp; Running</source>
         <translation>Téléversement et execution des programmes </translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="152"/>
+        <location line="+6"/>
         <source>Running after uploading:</source>
         <translation>Execution après le téléversement : </translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="160"/>
+        <location line="+8"/>
         <source>Ask</source>
         <translation>Demander</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="165"/>
+        <location line="+5"/>
         <source>Always run</source>
         <translation>Toujours executer</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="170"/>
+        <location line="+5"/>
         <source>Never run</source>
         <translation>Ne jamais executer</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="187"/>
+        <location line="+17"/>
         <source>Sensors Settings</source>
         <translation>Configuration des capteurs</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="233"/>
+        <location line="+46"/>
         <source>Robotics construction kit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="247"/>
+        <location line="+14"/>
         <source>Robot model</source>
         <translation type="unfinished"></translation>
     </message>
@@ -144,17 +144,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="26"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+26"/>
         <source>TRIK Studio</source>
         <translation>TRIK Studio</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="75"/>
+        <location line="+49"/>
         <source>Subprograms</source>
         <translation>Sous-programmes</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="80"/>
+        <location line="+5"/>
         <source>The list of all declared subprograms in the project</source>
         <translation>La liste de tous les sous-programmes du projet</translation>
     </message>
@@ -163,102 +163,102 @@
         <translation type="vanished">Conflit de configuration des capteurs, verifiez que les ports des capteurs soient utilisés de manière consistente dans le programme</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="30"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+30"/>
         <source>Run</source>
         <translation>Executer</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="31"/>
+        <location line="+1"/>
         <source>Stop robot</source>
         <translation>Arrêter le robot</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="32"/>
+        <location line="+1"/>
         <source>Connect to robot</source>
         <translation>Se connecter au robot</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="33"/>
+        <location line="+1"/>
         <source>Robot settings</source>
         <translation>Configuration du robot</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="34"/>
+        <location line="+1"/>
         <source>Save as task...</source>
         <translation>Enregistrer comme une tache...</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="35"/>
+        <location line="+1"/>
         <source>Debug</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="36"/>
+        <location line="+1"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="106"/>
+        <location line="+70"/>
         <source>Switch to debug mode</source>
         <translation>Passer en mode de débogage</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="105"/>
+        <location line="-1"/>
         <source>Switch to edit mode</source>
         <translation>Passer en mode d&apos;edition</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="107"/>
+        <location line="+2"/>
         <source>Run interpreter</source>
         <translation>Executer l&apos;interpréteur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="108"/>
+        <location line="+1"/>
         <source>Stop interpreter</source>
         <translation>Arrêter l&apos;interpréteur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/exerciseExportManager.cpp" line="65"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/exerciseExportManager.cpp" line="+65"/>
         <source>Select file to export save to</source>
         <translation>Selectionner le fichier pour l&apos;export</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/exerciseExportManager.cpp" line="67"/>
+        <location line="+2"/>
         <source>QReal Save File(*.qrs)</source>
         <translation>Fichier TRIK Studio (*.qrs)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="63"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="+63"/>
         <source>Blocks</source>
         <translation>Blocs</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="111"/>
+        <location line="+48"/>
         <source>Configure devices</source>
         <translation>Configuration de capteurs</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="130"/>
+        <location line="+19"/>
         <source>Sensors state</source>
         <translation>État des capteurs</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/textLanguage/robotsBlockParser.cpp" line="34"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/textLanguage/robotsBlockParser.cpp" line="+34"/>
         <source>sensor</source>
         <translation>capteur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/textLanguage/robotsBlockParser.cpp" line="35"/>
+        <location line="+1"/>
         <source>encoder</source>
         <translation>encodeur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/textLanguage/robotsBlockParser.cpp" line="36"/>
+        <location line="+1"/>
         <source>time</source>
         <translation>temps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="52"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+52"/>
         <source>Sensor on port %1 does not correspond to blocks on the diagram.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -273,17 +273,17 @@
 <context>
     <name>interpreterCore::ActionsManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="37"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="-71"/>
         <source>To main page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="277"/>
+        <location line="+240"/>
         <source>Real robot</source>
         <translation>Robot réel</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="278"/>
+        <location line="+1"/>
         <source>2D model</source>
         <translation>Modèle 2D</translation>
     </message>
@@ -291,7 +291,7 @@
 <context>
     <name>interpreterCore::DefaultRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/defaultRobotModel.cpp" line="31"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/defaultRobotModel.cpp" line="+31"/>
         <source>Empty model</source>
         <translation>Modèle vide</translation>
     </message>
@@ -299,22 +299,22 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="153"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+153"/>
         <source>Robots</source>
         <translation>Robots</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="200"/>
+        <location line="+47"/>
         <source>Cannot export exercise to the given location (try to change location)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="300"/>
+        <location line="+100"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="395"/>
+        <location line="+95"/>
         <source>Toggle robot console panel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -322,37 +322,37 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="60"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-70"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="61"/>
+        <location line="+1"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="93"/>
+        <location line="+32"/>
         <source>edit mode</source>
         <translation>mode d&apos;édition</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="94"/>
+        <location line="+1"/>
         <source>debug mode</source>
         <translation>mode de débogage</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="270"/>
+        <location line="+176"/>
         <source>Edit mode</source>
         <translation>Mode d&apos;édition</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="273"/>
+        <location line="+3"/>
         <source>Debug mode</source>
         <translation>Mode de débogage</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="420"/>
+        <location line="+147"/>
         <source>Modes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -360,38 +360,38 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="93"/>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="166"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+93"/>
+        <location line="+73"/>
         <source>No connection to robot</source>
         <translation type="unfinished">Pas de connexion au robot</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="98"/>
+        <location line="-68"/>
         <source>Interpreter is already running</source>
         <translation type="unfinished">L&apos;interprétateur est deja lancé</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="150"/>
+        <location line="+52"/>
         <source>Connected successfully</source>
         <translation type="unfinished">Connexion reussie</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="154"/>
+        <location line="+4"/>
         <source>Can&apos;t connect to a robot.</source>
         <translation type="unfinished">La connexion au robot a échoué.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="201"/>
+        <location line="+47"/>
         <source>Cannot create new thread with already occupied id %1</source>
         <translation type="unfinished">Impossible de créer un nouveau thread avec un identificateur deja utilisé %1</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="215"/>
+        <location line="+14"/>
         <source>Threads limit exceeded. Maximum threads count is %1</source>
         <translation type="unfinished">Le nombre limite de threads est atteint. La limite est de %1 </translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="237"/>
+        <location line="+22"/>
         <source>Killing non-existent thread %1</source>
         <translation type="unfinished">Terminaison du thread non existant %1</translation>
     </message>
@@ -430,42 +430,42 @@
 <context>
     <name>interpreterCore::ui::ExerciseExportDialog</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="31"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="+31"/>
         <source>Select non-modifiable parts of exercize</source>
         <translation>Selectionnez les parties non modifiables de l&apos;exercice</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="33"/>
+        <location line="+2"/>
         <source>2d model world is read only</source>
         <translation>Le monde 2D ne peut pas être modifié </translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="34"/>
+        <location line="+1"/>
         <source>Sensors are read only</source>
         <translation>La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="35"/>
+        <location line="+1"/>
         <source>2d model robot position is read only</source>
         <translation>La position du début ne peut pas être modifié en 2D</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="36"/>
+        <location line="+1"/>
         <source>Motors to wheels binding is read only</source>
         <translation>La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="37"/>
+        <location line="+1"/>
         <source>2d model simulation settings are read only</source>
         <translation>La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="58"/>
+        <location line="+21"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="62"/>
+        <location line="+4"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -473,7 +473,7 @@
 <context>
     <name>interpreterCore::ui::ModeStripe</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/modeStripe.cpp" line="22"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/modeStripe.cpp" line="+22"/>
         <source>press %2 or click here to switch to %3</source>
         <translation>Appuyez sur %2 ou cliquez ici pour passer en %3</translation>
     </message>
@@ -481,12 +481,12 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="78"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+78"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Aucune extension n&apos;est chargée</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="212"/>
+        <location line="+134"/>
         <source>No robot models available for </source>
         <translation>Modèle de robot n&apos;est pas défini dans l&apos;extension</translation>
     </message>
