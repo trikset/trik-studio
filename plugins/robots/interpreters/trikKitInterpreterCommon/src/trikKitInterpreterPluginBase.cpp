@@ -437,13 +437,12 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 	quickPreferences->setCurrentText(tr("Enter robot`s IP-address here..."));
 	quickPreferences->setMinimumContentsLength(15);
 	quickPreferences->setSizeAdjustPolicy(QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLength);
-	//quickPreferences->setInsertPolicy(QComboBox::InsertPolicy::InsertAlphabetically);
 	quickPreferences->lineEdit()->setAlignment(Qt::AlignRight);
 	const auto updateQuickPreferences = [quickPreferences]() {
 		const QString ip = qReal::SettingsManager::value("TrikTcpServer").toString();
-		auto found = false;
 
 		// Handle duplicates
+		auto found = false;
 		for(int i = 0; i < quickPreferences->count(); ++i) {
 			if (quickPreferences->itemText(i) == ip) {
 				found = true;
@@ -452,7 +451,7 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 		}
 
 		if (!found) {
-					quickPreferences->insertItem(0, ip);
+			quickPreferences->insertItem(0, ip);
 		}
 
 		// Focus on new value
@@ -465,7 +464,7 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged, this, updateQuickPreferences);
 	qReal::SettingsListener::listen("TrikTcpServer", updateQuickPreferences, this);
 	connect(quickPreferences->lineEdit(), &QLineEdit::editingFinished, this, [quickPreferences]() {
-		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text());
+		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text().trimmed());
 	});
 
 	connect(this, &QObject::destroyed, this, [quickPreferences]() { delete quickPreferences; });
