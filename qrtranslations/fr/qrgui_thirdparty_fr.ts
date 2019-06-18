@@ -12,15 +12,15 @@
         <translation type="vanished">Faux</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="233"/>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="243"/>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="268"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="+233"/>
+        <location line="+10"/>
+        <location line="+25"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="243"/>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="268"/>
+        <location line="-25"/>
+        <location line="+25"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
@@ -36,12 +36,12 @@
         <translation type="vanished">Faux</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="1696"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+1696"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="1697"/>
+        <location line="+1"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,7 +49,7 @@
 <context>
     <name>QtCharEdit</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="1700"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="+1700"/>
         <source>Clear Char</source>
         <translation>Effacer</translation>
     </message>
@@ -57,7 +57,7 @@
 <context>
     <name>QtColorEditWidget</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="2368"/>
+        <location line="+668"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -65,22 +65,22 @@
 <context>
     <name>QtColorPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6496"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+4799"/>
         <source>Red</source>
         <translation>Rouge</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6504"/>
+        <location line="+8"/>
         <source>Green</source>
         <translation>Vert</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6512"/>
+        <location line="+8"/>
         <source>Blue</source>
         <translation>Bleu</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6520"/>
+        <location line="+8"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
@@ -88,97 +88,97 @@
 <context>
     <name>QtCursorDatabase</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="58"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-210"/>
         <source>Arrow</source>
         <translation>Pointe</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="60"/>
+        <location line="+2"/>
         <source>Up Arrow</source>
         <translation>Flèche vers le haut</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="62"/>
+        <location line="+2"/>
         <source>Cross</source>
         <translation>Croix</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="64"/>
+        <location line="+2"/>
         <source>Wait</source>
         <translation>Attendre</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="66"/>
+        <location line="+2"/>
         <source>IBeam</source>
         <translation>IBeam</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="68"/>
+        <location line="+2"/>
         <source>Size Vertical</source>
         <translation>Hauteur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="70"/>
+        <location line="+2"/>
         <source>Size Horizontal</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="72"/>
+        <location line="+2"/>
         <source>Size Backslash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="74"/>
+        <location line="+2"/>
         <source>Size Slash</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="76"/>
+        <location line="+2"/>
         <source>Size All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="78"/>
+        <location line="+2"/>
         <source>Blank</source>
         <translation>Vide</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="80"/>
+        <location line="+2"/>
         <source>Split Vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="82"/>
+        <location line="+2"/>
         <source>Split Horizontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="84"/>
+        <location line="+2"/>
         <source>Pointing Hand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="86"/>
+        <location line="+2"/>
         <source>Forbidden</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="88"/>
+        <location line="+2"/>
         <source>Open Hand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="90"/>
+        <location line="+2"/>
         <source>Closed Hand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="92"/>
+        <location line="+2"/>
         <source>What&apos;s This</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="94"/>
+        <location line="+2"/>
         <source>Busy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -186,12 +186,12 @@
 <context>
     <name>QtFontEditWidget</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="2577"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="+209"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="2597"/>
+        <location line="+20"/>
         <source>Select Font</source>
         <translation>Choisir la police</translation>
     </message>
@@ -199,37 +199,37 @@
 <context>
     <name>QtFontPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6170"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="-350"/>
         <source>Family</source>
         <translation>Famille</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6183"/>
+        <location line="+13"/>
         <source>Point Size</source>
         <translation>Taille de point</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6191"/>
+        <location line="+8"/>
         <source>Bold</source>
         <translation>Gras</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6198"/>
+        <location line="+7"/>
         <source>Italic</source>
         <translation>Italique</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6205"/>
+        <location line="+7"/>
         <source>Underline</source>
         <translation>Souligné</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6212"/>
+        <location line="+7"/>
         <source>Strikeout</source>
         <translation>Barré</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="6219"/>
+        <location line="+7"/>
         <source>Kerning</source>
         <translation>Crénage</translation>
     </message>
@@ -237,7 +237,7 @@
 <context>
     <name>QtKeySequenceEdit</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="328"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="+234"/>
         <source>Clear Shortcut</source>
         <translation>Effacer</translation>
     </message>
@@ -245,17 +245,17 @@
 <context>
     <name>QtLocalePropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="2611"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="-3608"/>
         <source>%1, %2</source>
         <translation>%1, %2</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="2664"/>
+        <location line="+53"/>
         <source>Language</source>
         <translation>Langage</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="2672"/>
+        <location line="+8"/>
         <source>Country</source>
         <translation>Pays</translation>
     </message>
@@ -263,17 +263,17 @@
 <context>
     <name>QtPointFPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3081"/>
+        <location line="+409"/>
         <source>(%1, %2)</source>
         <translation>(%1, %2)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3152"/>
+        <location line="+71"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3160"/>
+        <location line="+8"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -281,17 +281,17 @@
 <context>
     <name>QtPointPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="2841"/>
+        <location line="-319"/>
         <source>(%1, %2)</source>
         <translation>(%1, %2)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="2878"/>
+        <location line="+37"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="2885"/>
+        <location line="+7"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -299,12 +299,12 @@
 <context>
     <name>QtPropertyBrowserUtils</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="187"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-141"/>
         <source>[%1, %2, %3] (%4)</source>
         <translation>[%1, %2, %3] (%4)</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="214"/>
+        <location line="+27"/>
         <source>[%1, %2]</source>
         <translation>[%1, %2]</translation>
     </message>
@@ -312,27 +312,27 @@
 <context>
     <name>QtRectFPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4586"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+1701"/>
         <source>[(%1, %2), %3 x %4]</source>
         <translation>[(%1, %2), %3 x %4]</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4742"/>
+        <location line="+156"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4750"/>
+        <location line="+8"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4758"/>
+        <location line="+8"/>
         <source>Width</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4767"/>
+        <location line="+9"/>
         <source>Height</source>
         <translation>Hauteur</translation>
     </message>
@@ -340,27 +340,27 @@
 <context>
     <name>QtRectPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4156"/>
+        <location line="-611"/>
         <source>[(%1, %2), %3 x %4]</source>
         <translation>[(%1, %2), %3 x %4]</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4276"/>
+        <location line="+120"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4283"/>
+        <location line="+7"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4290"/>
+        <location line="+7"/>
         <source>Width</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="4298"/>
+        <location line="+8"/>
         <source>Height</source>
         <translation>Hauteur</translation>
     </message>
@@ -368,17 +368,17 @@
 <context>
     <name>QtSizeFPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3764"/>
+        <location line="-534"/>
         <source>%1 x %2</source>
         <translation>%1 x %2</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3894"/>
+        <location line="+130"/>
         <source>Width</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3903"/>
+        <location line="+9"/>
         <source>Height</source>
         <translation>Hauteur</translation>
     </message>
@@ -386,33 +386,33 @@
 <context>
     <name>QtSizePolicyPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5682"/>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5683"/>
+        <location line="+1779"/>
+        <location line="+1"/>
         <source>&lt;Invalid&gt;</source>
         <translation>&lt;valeur incorrecte&gt;</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5684"/>
+        <location line="+1"/>
         <source>[%1, %2, %3, %4]</source>
         <translation>[%1, %2, %3, %4]</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5729"/>
+        <location line="+45"/>
         <source>Horizontal Policy</source>
         <translation>Politique horizontale</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5738"/>
+        <location line="+9"/>
         <source>Vertical Policy</source>
         <translation>Politique verticale</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5747"/>
+        <location line="+9"/>
         <source>Horizontal Stretch</source>
         <translation>Étirement horizontal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="5755"/>
+        <location line="+8"/>
         <source>Vertical Stretch</source>
         <translation>Étirement vertical</translation>
     </message>
@@ -420,17 +420,17 @@
 <context>
     <name>QtSizePropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3400"/>
+        <location line="-2355"/>
         <source>%1 x %2</source>
         <translation>%1 x %2</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3496"/>
+        <location line="+96"/>
         <source>Width</source>
         <translation>Largeur</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="3504"/>
+        <location line="+8"/>
         <source>Height</source>
         <translation>Hauteur</translation>
     </message>
@@ -438,12 +438,12 @@
 <context>
     <name>QtTreePropertyBrowser</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qttreepropertybrowser.cpp" line="478"/>
+        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qttreepropertybrowser.cpp" line="+478"/>
         <source>Property</source>
         <translation>Propriété</translation>
     </message>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qttreepropertybrowser.cpp" line="479"/>
+        <location line="+1"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>

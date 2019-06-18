@@ -4,12 +4,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="181"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+181"/>
         <source>Bogus input values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="203"/>
+        <location line="+22"/>
         <source>Error: File %1 couldn&apos;t be opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -17,52 +17,52 @@
 <context>
     <name>TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="14"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Préférences TRIK</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="35"/>
+        <location line="+21"/>
         <source>TCP Settings</source>
         <translation>Configuration de TCP</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="41"/>
+        <location line="+6"/>
         <source>Enter robot IP-address here</source>
         <translation>Tapez l&apos;adresse IP du robot ici</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="51"/>
+        <location line="+10"/>
         <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="57"/>
+        <location line="+6"/>
         <source>Use real camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="73"/>
+        <location line="+16"/>
         <source>Camera:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="95"/>
+        <location line="+22"/>
         <source>Use images from project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="102"/>
+        <location line="+7"/>
         <source>Images:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="108"/>
+        <location line="+6"/>
         <source>Browse...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="118"/>
+        <location line="+10"/>
         <source>Pack images to project</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,7 +70,7 @@
 <context>
     <name>TrikDisplayWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikDisplayWidget.ui" line="14"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikDisplayWidget.ui" line="+14"/>
         <source>Trik Display</source>
         <translation>L&apos;écran Trik</translation>
     </message>
@@ -85,12 +85,12 @@
 <context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="32"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+32"/>
         <source>2D robot image:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="50"/>
+        <location line="+18"/>
         <source>Select Directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,68 +98,68 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="128"/>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="421"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+128"/>
+        <location line="+293"/>
         <source>Trying to read from file %1 failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="183"/>
+        <location line="-238"/>
         <source>No configured motor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="214"/>
+        <location line="+31"/>
         <source>No configured sensor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="246"/>
+        <location line="+32"/>
         <source>No configured accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="262"/>
+        <location line="+16"/>
         <source>No configured gyroscope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="283"/>
+        <location line="+21"/>
         <source>No configured LineSensor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="298"/>
+        <location line="+15"/>
         <source>No configured encoder on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="319"/>
+        <location line="+21"/>
         <source>No configured led</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="338"/>
+        <location line="+19"/>
         <source>Get photo with camera started</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="340"/>
+        <location line="+2"/>
         <source>Get photo with camera finished</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="342"/>
+        <location line="+2"/>
         <source>Cannot get a photo from camera (possibly because of wrong camera name)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="349"/>
+        <location line="+7"/>
         <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="362"/>
+        <location line="+13"/>
         <source>No cofigured random device</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,27 +178,27 @@
 <context>
     <name>trik::TrikKitInterpreterPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="36"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+36"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="36"/>
+        <location line="+0"/>
         <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="246"/>
+        <location line="+210"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="250"/>
+        <location line="+4"/>
         <source>Stop robot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="435"/>
+        <location line="+185"/>
         <source>Enter robot`s IP-address here...</source>
         <translation type="unfinished">Tapez l&apos;adresse IP du robot ici...</translation>
     </message>
