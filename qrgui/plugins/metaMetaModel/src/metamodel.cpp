@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "metaMetaModel/metamodel.h"
+#include <qrkernel/exception/exception.h>
 
 using namespace qReal;
 
@@ -69,8 +70,9 @@ ElementType &Metamodel::elementType(const Id &id) const
 
 ElementType &Metamodel::elementType(const QString &diagram, const QString &element) const
 {
-	Q_ASSERT_X(mElements.contains(diagram) && mElements[diagram].contains(element)
-			, Q_FUNC_INFO, "No such entity in metamodel!");
+	if(!mElements.contains(diagram) || !mElements[diagram].contains(element)) {
+		throw qReal::Exception(QObject::tr("Unkmown element %1").arg(element));
+	}
 	ElementType * const result = mElements[diagram][element];
 	Q_ASSERT_X(result, Q_FUNC_INFO, "No such entity in metamodel!");
 	return *result;
