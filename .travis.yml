@@ -12,6 +12,7 @@ env:
     - TESTS=true
     - TRANSLATIONS=false
     - INSTALLER=false
+    - BUILD_TIMEOUT=2400
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
     - ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests && ./trik-v62-qts-generator-tests && ./robots_utils_unittests && ./run-simulator-tests.sh"
@@ -55,11 +56,11 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS release"
-      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers"
+      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
     - os: osx
       language: cpp
       name: "macOS debug + tests"
-      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=sanitize_address"
+      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
 
 
 before_install:
@@ -74,7 +75,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec builder " ; else export EXECUTOR="buildScripts/with_pyenv " ;fi
   - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
   - ./buildScripts/travis/script.sh & WPID=$!
-  - sleep 2400 && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
+  - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - export TIMEOUT=false
   - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
 
