@@ -15,7 +15,7 @@
 
 -- функция обработки событий, автоматически вызывается автопилотом
 function callback(event)
-	if (event == Ev.ALTITUDE_REACHED) then
+	if (event == Ev.TAKEOFF_COMPLETE) then
 		action[curr_state]()
 	end
 
