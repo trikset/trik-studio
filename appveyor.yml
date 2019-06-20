@@ -15,6 +15,9 @@ skip_commits:
     - '**/*.md'
   message: /\[NOCI\]/
 
+branches:
+  except:
+    - /dependabot.*/
 
 environment:
   global:
