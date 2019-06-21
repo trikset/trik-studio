@@ -117,19 +117,22 @@ after_test:
   - for %%f in (*.exe) do windeployqt --release %%f
   - xcopy /I /Y %QTDIR%\plugins\platforms %BUILD_DIR%\bin\release\platforms
   - set ZIP_NAME=trik-studio
-  - if %APPVEYOR_REPO_TAG%==true (set ZIP_NAME=%ZIP_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set ZIP_NAME=%ZIP_NAME%-%APPVEYOR_REPO_BRANCH%)
+  - set APPVEYOR_REPO_BRANCH_SAFE=%APPVEYOR_REPO_BRANCH:/=-%
+  - if %APPVEYOR_REPO_TAG%==true (set ZIP_NAME=%ZIP_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set ZIP_NAME=%ZIP_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
   - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%PLATFORM%.zip
   - bash -c "env LC_ALL=C date -u"
+  - echo "ZipName:%ZIP_NAME%"
   - 7z a %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - bash -c "env LC_ALL=C date -u"
   - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
   - set INSTALLER_NAME=trik-studio-installer
-  - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH%)
+  - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
   - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%
   - set AUTOINSTALLER_ZIP_NAME=%INSTALLER_NAME%-auto.zip
   - set INSTALLER_NAME=%INSTALLER_NAME%.exe
+  - echo "Installer:%INSTALLER_NAME%"
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
 # pack autoinstaller
   - bash -c "env LC_ALL=C date -u"
@@ -139,6 +142,7 @@ after_test:
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
   - bash -c "env LC_ALL=C date -u"
+
 artifacts:
  - path: installer\$(AUTOINSTALLER_ZIP_NAME)
  - path: installer\$(INSTALLER_NAME)
