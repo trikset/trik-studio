@@ -332,7 +332,7 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="76"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="956"/>
         <source>50</source>
-        <translation>50</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="76"/>
@@ -479,7 +479,7 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="361"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="837"/>
         <source>A, B, C, D</source>
-        <translation>A, B, C, D</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="361"/>
@@ -505,14 +505,14 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="525"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="579"/>
         <source>X:</source>
-        <translation>X:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="389"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="533"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="587"/>
         <source>Y:</source>
-        <translation>Y:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="397"/>
@@ -549,14 +549,14 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="558"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="639"/>
         <source>X</source>
-        <translation>X</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="433"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="559"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="640"/>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="444"/>
@@ -571,42 +571,42 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="453"/>
         <source>X1:</source>
-        <translation>X1:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="461"/>
         <source>Y1:</source>
-        <translation>Y1:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="469"/>
         <source>X2:</source>
-        <translation>X2:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="477"/>
         <source>Y2:</source>
-        <translation>Y2:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="502"/>
         <source>X1</source>
-        <translation>X1</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="503"/>
         <source>X2</source>
-        <translation>X2</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="504"/>
         <source>Y1</source>
-        <translation>Y1</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="505"/>
         <source>Y2</source>
-        <translation>Y2</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="516"/>
@@ -651,7 +651,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="651"/>
         <source>Ev3EngineMovementCommand</source>
-        <translation>Базовый блок моторов ev3</translation>
+        <translation>Базовый блок моторов EV3</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="836"/>
@@ -663,14 +663,14 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="729"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="783"/>
         <source>B, C</source>
-        <translation>B, C</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="676"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="730"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="784"/>
         <source>100</source>
-        <translation>100</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="676"/>
@@ -777,7 +777,7 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="954"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="955"/>
         <source>1000</source>
-        <translation>1000</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="955"/>
@@ -802,7 +802,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1010"/>
         <source>a</source>
-        <translation>a</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1010"/>
@@ -823,7 +823,7 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1063"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1187"/>
         <source>x</source>
-        <translation>x</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1063"/>
@@ -859,7 +859,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1131"/>
         <source>b</source>
-        <translation>b</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1131"/>
@@ -869,7 +869,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1132"/>
         <source>g</source>
-        <translation>g</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1132"/>
@@ -879,7 +879,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1134"/>
         <source>r</source>
-        <translation>r</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1134"/>
@@ -941,7 +941,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1255"/>
         <source>42</source>
-        <translation>42</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1255"/>
@@ -958,7 +958,7 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1257"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1876"/>
         <source>EV3MailBox</source>
-        <translation>Базовый почтовый ящик ev3</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1257"/>
@@ -969,7 +969,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1269"/>
         <source>Ev3SensorBlock</source>
-        <translation>Безовый сенсорный блок ev3</translation>
+        <translation>Базовый сенсорный блок EV3</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="121"/>
@@ -1111,7 +1111,7 @@
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1942"/>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="2007"/>
         <source>0</source>
-        <translation>0</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1609"/>
@@ -1161,7 +1161,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1735"/>
         <source>90</source>
-        <translation>90</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1735"/>
