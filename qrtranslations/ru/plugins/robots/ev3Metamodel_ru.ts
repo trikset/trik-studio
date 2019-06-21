@@ -849,7 +849,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1099"/>
         <source>G Variable:</source>
-        <translation>Знаечние зеленого:</translation>
+        <translation>Значение зеленого:</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="1107"/>
