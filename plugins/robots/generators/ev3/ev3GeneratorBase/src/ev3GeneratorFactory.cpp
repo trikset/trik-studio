@@ -28,6 +28,7 @@
 #include "simpleGenerators/startCompassCalibrationGenerator.h"
 #include "simpleGenerators/stopCompassCalibrationGenerator.h"
 #include "simpleGenerators/readRGBGenerator.h"
+#include "simpleGenerators/waitForColorBlockGenerator.h"
 
 #include "simpleGenerators/lineLeader/calibrateBlackGenerator.h"
 #include "simpleGenerators/lineLeader/calibratePIDGenerator.h"
@@ -41,6 +42,7 @@
 
 #include "converters/outputPortNameConverter.h"
 #include "converters/ledColorConverter.h"
+#include "converters/colorConverter.h"
 
 using namespace ev3;
 using namespace ev3::simple;
@@ -111,6 +113,8 @@ generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGener
 		return new StopCompassCalibrationGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Ev3ReadRGB") {
 		return new ReadRGBGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "Ev3WaitForColor") {
+		return new WaitForColorBlockGenerator(mRepo, customizer, id, this);
 	}
 
 	else if (elementType == "Ev3CalibrateWhiteLL") {
@@ -143,6 +147,11 @@ Binding::ConverterInterface *Ev3GeneratorFactory::outputPortNameConverter() cons
 Binding::ConverterInterface *Ev3GeneratorFactory::ledColorConverter() const
 {
 	return new LedColorConverter(pathsToTemplates());
+}
+
+Binding::ConverterInterface *Ev3GeneratorFactory::colorConverter() const
+{
+	return new ColorConverter(pathsToTemplates());
 }
 
 QStringList Ev3GeneratorFactory::pathsToTemplates() const

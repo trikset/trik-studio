@@ -50,6 +50,8 @@ public:
 	/// Converts TRIK Studio LED color enum values to corresponding names in EV3 runtime.
 	generatorBase::simple::Binding::ConverterInterface *ledColorConverter() const;
 
+	generatorBase::simple::Binding::ConverterInterface *colorConverter() const;
+
 	QStringList pathsToTemplates() const override;
 
 	void reportError(const QString &errorMessage, const qReal::Id &id);
