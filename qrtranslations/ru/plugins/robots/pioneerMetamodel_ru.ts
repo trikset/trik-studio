@@ -228,7 +228,7 @@
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="219"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="352"/>
         <source>0</source>
-        <translation>0</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="145"/>
@@ -248,7 +248,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="480"/>
         <source>dist</source>
-        <translation>dist</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="491"/>
@@ -289,17 +289,17 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="145"/>
         <source>50</source>
-        <translation>50</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="146"/>
         <source>600859810</source>
-        <translation>600859810</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="147"/>
         <source>304206500</source>
-        <translation>304206500</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="158"/>
@@ -310,19 +310,19 @@
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="167"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="239"/>
         <source>X:</source>
-        <translation>X:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="175"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="247"/>
         <source>Y:</source>
-        <translation>Y:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="183"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="255"/>
         <source>Z:</source>
-        <translation>Z:</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="191"/>
@@ -333,19 +333,19 @@
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="217"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="279"/>
         <source>X</source>
-        <translation>X</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="218"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="280"/>
         <source>Y</source>
-        <translation>Y</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="219"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="281"/>
         <source>Z</source>
-        <translation>Z</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="230"/>
@@ -360,17 +360,17 @@
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="279"/>
         <source>x</source>
-        <translation>x</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="280"/>
         <source>y</source>
-        <translation>y</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="281"/>
         <source>z</source>
-        <translation>z</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="294"/>
@@ -403,7 +403,7 @@
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="353"/>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="569"/>
         <source>0.0</source>
-        <translation>0.0</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="350"/>
