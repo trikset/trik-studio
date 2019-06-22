@@ -67,6 +67,8 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/lineLeader/readSteeringGenerator.h \
 	$$PWD/src/simpleGenerators/lineLeader/sleepGenerator.h \
 	$$PWD/src/simpleGenerators/lineLeader/wakeUpGenerator.h \
+	$$PWD/src/simpleGenerators/waitForColorBlockGenerator.h \
+	$$PWD/src/converters/colorConverter.h \
 
 SOURCES += \
 	$$PWD/src/ev3GeneratorPluginBase.cpp \
@@ -99,5 +101,7 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/lineLeader/readSteeringGenerator.cpp \
 	$$PWD/src/simpleGenerators/lineLeader/sleepGenerator.cpp \
 	$$PWD/src/simpleGenerators/lineLeader/wakeUpGenerator.cpp \
+	$$PWD/src/simpleGenerators/waitForColorBlockGenerator.cpp \
+	$$PWD/src/converters/colorConverter.cpp \
 
 OTHER_FILES +=
