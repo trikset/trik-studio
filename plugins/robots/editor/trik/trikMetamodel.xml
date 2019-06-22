@@ -177,7 +177,7 @@
 					</generalizations>
 					<properties>
 						<property displayedName="Mode" type="BrakeEngineMode" name="Mode">
-							<default>brake</default>
+							<default>float</default>
 						</property>
 						<property displayedName="Ports" type="string" name="Ports">
 							<default>M1, M2, M3, M4</default>
