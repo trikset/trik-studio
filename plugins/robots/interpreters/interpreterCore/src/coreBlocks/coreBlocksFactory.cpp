@@ -105,6 +105,7 @@ qReal::IdList CoreBlocksFactory::providedBlocks() const
 		, id("FiBlock")
 		, id("SwitchBlock")
 		, id("Loop")
+		, id("PreconditionalLoop")
 		, id("Fork")
 		, id("Join")
 		, id("SendMessageThreads")

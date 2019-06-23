@@ -337,6 +337,28 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Preconditional Loop" name="PreconditionalLoop" description="">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/loopBlock.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="40" y="-35" textBinded="Condition" hard="true" background="white" prefix="Condition:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<properties>
+						<property displayedName="Condition" type="string" name="Condition">
+							<default>x > 0</default>
+						</property>
+					</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 			<node displayedName="Fork" name="Fork" path="13, 86 : 231, 86 :  | 12, 12 : 231, 12 : " description="Separates program execution into a number of threads that will be executed concurrently from the programmers`s point of view. For example in such way signal from sensor and some time interval can be waited synchroniously. This block must have at least two outgoing links. 'Guard' property of every link must contain unique thread identifiers, and one of those identifiers must be the same as the identifier of a thread where fork is placed (it must be 'main' if it is the first fork in a program.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -694,6 +716,7 @@
 				<element name="IfBlock"/>
 				<element name="FiBlock"/>
 				<element name="Loop"/>
+				<element name="PreconditionalLoop"/>
 				<element name="SwitchBlock"/>
 				<element name="Function"/>
 				<element name="Subprogram"/>

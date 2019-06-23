@@ -759,6 +759,50 @@
 		}
 	};
 
+	class PreconditionalLoop : public qReal::NodeElementType
+	{
+	public:
+		explicit PreconditionalLoop(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("PreconditionalLoop");
+			setFriendlyName(QObject::tr("Preconditional Loop"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr(""));
+			qReal::LabelProperties label_1(1, 0.8, -0.7, "Condition", false, 0);
+			label_1.setBackground(Qt::white);
+			label_1.setScalingX(false);
+			label_1.setScalingY(false);
+			label_1.setHard(true);
+			label_1.setPlainTextMode(false);
+			label_1.setPrefix(QObject::tr("Condition:"));
+			addLabel(label_1);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/PreconditionalLoopClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("Condition", "string", QObject::tr("x > 0"), QObject::tr("Condition"), QObject::tr(""), false);
+		}
+	};
+
 	class PrintText : public qReal::NodeElementType
 	{
 	public:

@@ -60,6 +60,7 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(*(new Loop(*mMetamodel)));
 	mMetamodel->addNode(*(new MarkerDown(*mMetamodel)));
 	mMetamodel->addNode(*(new MarkerUp(*mMetamodel)));
+	mMetamodel->addNode(*(new PreconditionalLoop(*mMetamodel)));
 	mMetamodel->addNode(*(new PrintText(*mMetamodel)));
 	mMetamodel->addNode(*(new Randomizer(*mMetamodel)));
 	mMetamodel->addNode(*(new ReceiveMessageThreads(*mMetamodel)));
@@ -88,6 +89,7 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "Loop"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "MarkerDown"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "MarkerUp"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PreconditionalLoop"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PrintText"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "Randomizer"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "ReceiveMessageThreads"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -118,6 +120,7 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("IfBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("FiBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Loop"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("PreconditionalLoop"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("SwitchBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Function"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Subprogram"));
