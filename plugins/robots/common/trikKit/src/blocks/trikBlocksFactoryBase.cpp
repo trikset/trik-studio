@@ -262,3 +262,8 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 
 	return result;
 }
+
+qReal::IdList TrikBlocksFactoryBase::blocksToHide() const
+{
+	return { id("PreconditionalLoop") };
+}
