@@ -28,6 +28,7 @@ enum Semantics {
 	, finalBlock
 	, conditionalBlock
 	, loopBlock
+	, preconditionalLoopBlock
 	, switchBlock
 	, forkBlock
 	, joinBlock
@@ -75,6 +76,8 @@ protected:
 	/// Implementation must tell if block with given id has loop semantics
 	virtual bool isLoop(const qReal::Id &block) const;
 
+	virtual bool isPreconditionalLoop(const qReal::Id &block) const;
+
 	/// Implementation must tell if block with given id has switch semantics
 	virtual bool isSwitch(const qReal::Id &block) const;
 
@@ -89,6 +92,7 @@ private:
 	const qReal::Id mDefaultFinalBlockType;
 	const qReal::Id mDefaultConditionalBlockType;
 	const qReal::Id mDefaultLoopBlockType;
+	const qReal::Id mDefaultPreconditionalLoopBlockType;
 	const qReal::Id mDefaultSwitchBlockType;
 	const qReal::Id mDefaultForkBlockType;
 	const qReal::Id mDefaultJoinBlockType;

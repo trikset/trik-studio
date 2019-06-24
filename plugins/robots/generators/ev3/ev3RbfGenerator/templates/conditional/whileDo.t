@@ -1,0 +1,5 @@
+@@RANDOM_ID_1@@:
+JR_FALSE(@@CONDITION@@, @@RANDOM_ID_2@@)
+@@BODY@@
+JR(@@RANDOM_ID_1@@)
+@@RANDOM_ID_2@@:

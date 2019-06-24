@@ -61,6 +61,8 @@ public:
 	/// We remember vertices belonging to loop.
 	void visitLoop(const qReal::Id &id, const QList<LinkInfo> &links) override;
 
+	void visitPreconditionalLoop(const qReal::Id &id, const QList<LinkInfo> &links) override;
+
 	/// We clean old info about vertices belonging to some loop.
 	void afterVisit(const qReal::Id &id, QList<LinkInfo> &links) override;
 

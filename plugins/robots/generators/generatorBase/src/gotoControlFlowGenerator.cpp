@@ -90,6 +90,11 @@ void GotoControlFlowGenerator::visitLoop(const Id &id, const QList<LinkInfo> &li
 	produceNextNodeIfNeeded(nextLink, thisNode);
 }
 
+void GotoControlFlowGenerator::visitPreconditionalLoop(const Id &id, const QList<LinkInfo> &links)
+{
+	visitLoop(id, links);
+}
+
 void GotoControlFlowGenerator::visitSwitch(const Id &id, const QList<LinkInfo> &links)
 {
 	SwitchNode * const thisNode = static_cast<SwitchNode *>(mSemanticTree->findNodeFor(id));

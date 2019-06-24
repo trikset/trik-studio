@@ -69,6 +69,7 @@ protected:
 	void visitFinal(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitConditional(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitLoop(const qReal::Id &id, const QList<LinkInfo> &links) override;
+	void visitPreconditionalLoop(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitSwitch(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitFork(const qReal::Id &id, QList<LinkInfo> &links) override;
 	void visitJoin(const qReal::Id &id, QList<LinkInfo> &links) override;
