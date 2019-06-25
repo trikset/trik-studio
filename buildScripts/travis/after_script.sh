@@ -15,6 +15,8 @@ case $TRAVIS_OS_NAME in
   *) exit 1 ;;
 esac
 
+df -h .
+
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
       git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
