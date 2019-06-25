@@ -337,7 +337,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Preconditional Loop" name="PreconditionalLoop" description="">
+			<node displayedName="Pre-conditional Loop" name="PreconditionalLoop" description="">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/preconditionalLoopBlock.svg" x1="0" y2="50" x2="50"/>
