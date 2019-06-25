@@ -340,7 +340,7 @@
 			<node displayedName="Preconditional Loop" name="PreconditionalLoop" description="">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/loopBlock.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/preconditionalLoopBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="40" y="-35" textBinded="Condition" hard="true" background="white" prefix="Condition:"/>
@@ -715,8 +715,8 @@
 				<element name="VariableInit"/>
 				<element name="IfBlock"/>
 				<element name="FiBlock"/>
-				<element name="Loop"/>
 				<element name="PreconditionalLoop"/>
+				<element name="Loop"/>
 				<element name="SwitchBlock"/>
 				<element name="Function"/>
 				<element name="Subprogram"/>

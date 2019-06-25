@@ -119,8 +119,8 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("VariableInit"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("IfBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("FiBlock"));
-	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Loop"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("PreconditionalLoop"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Loop"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("SwitchBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Function"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Subprogram"));
