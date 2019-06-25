@@ -60,7 +60,7 @@
         <translation>Из блока &quot;Цикл&quot; должна выходить связь с маркером &quot;тело цикла&quot;</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+38"/>
         <source>There must be exactly one link without marker on it (default branch)</source>
         <translation>Ветка без маркера должна быть в точности одна (ветка &quot;default&quot;)</translation>
     </message>
@@ -70,12 +70,12 @@
         <translation>Должна быть связь без маркера (ветка &quot;default&quot;)</translation>
     </message>
     <message>
-        <location line="-39"/>
+        <location line="-44"/>
         <source>Outgoing links from loop block must be connected to different blocks</source>
         <translation>Исходящие связи должны быть присоединены к разным блокам</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+18"/>
         <source>There must be at list TWO links outgoing from switch block</source>
         <translation>От блока выбора должно отходить минимум ДВЕ связи</translation>
     </message>

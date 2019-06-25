@@ -65,7 +65,8 @@ protected:
 	/// This method is called when traverser gets into a block with loop semantics
 	virtual void visitLoop(const qReal::Id &id, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
 
-	virtual void visitPreconditionalLoop(const qReal::Id &id, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
+	virtual void visitPreconditionalLoop(const qReal::Id &id
+			, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
 
 	/// This method is called when traverser gets into a block with switch semantics
 	virtual void visitSwitch(const qReal::Id &id, QList<utils::DeepFirstSearcher::LinkInfo> const &links) = 0;
