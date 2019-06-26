@@ -39,6 +39,10 @@ addons:
     paths:
       - build.log
 
+branches:
+  except:
+    - /dependabot.*/
+
 matrix:
   include:
     - os: linux
