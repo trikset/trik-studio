@@ -20,7 +20,7 @@ if %n% EQU 0 (
 )
 if %n% GTR 1 (
   echo Error! Too many candidates:
-  for %%f in (trik-studio-*installer*.exe) do echo %%f
+  for %%f in (%~dp0\trik-studio-*installer*.exe) do echo %%~nf
   echo Remove obsolete installers from this directory or use parameter to choose exact one like this:
   echo %~f0 %~dp0\your-trik-studio-installer.exe
   %pause_command%
