@@ -98,7 +98,7 @@
         <translation>Les liens sortants du bloc boucle doivent être raccordé aux deux blocs différents</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+18"/>
         <source>There must be at list TWO links outgoing from switch block</source>
         <translation>Le bloc de choix multiple doit avoir au moins deux liens sortants</translation>
     </message>

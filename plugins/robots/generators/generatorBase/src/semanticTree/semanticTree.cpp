@@ -49,6 +49,8 @@ SemanticNode *SemanticTree::produceNodeFor(const Id &id)
 		return produceConditional(id);
 	case enums::semantics::loopBlock:
 		return produceLoop(id);
+	case enums::semantics::preconditionalLoopBlock:
+		return produceLoop(id);
 	case enums::semantics::finalBlock:
 		return produceFinal(id);
 	case enums::semantics::forkBlock:

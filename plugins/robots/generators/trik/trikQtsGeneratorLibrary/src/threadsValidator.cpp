@@ -71,6 +71,11 @@ void ThreadsValidator::visitLoop(const qReal::Id &id, const QList<LinkInfo> &lin
 	visitGeneral(id, links);
 }
 
+void ThreadsValidator::visitPreconditionalLoop(const qReal::Id &id, const QList<LinkInfo> &links)
+{
+	visitGeneral(id, links);
+}
+
 void ThreadsValidator::visitSwitch(const qReal::Id &id, const QList<LinkInfo> &links)
 {
 	visitGeneral(id, links);

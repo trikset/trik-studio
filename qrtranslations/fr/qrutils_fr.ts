@@ -293,6 +293,30 @@
     </message>
 </context>
 <context>
+    <name>qReal::interpretation::blocks::PreconditionalLoopBlock</name>
+    <message>
+        <location filename="../../qrutils/interpreter/blocks/preconditionalLoopBlock.cpp" line="+41"/>
+        <source>Outgoing link is not connected</source>
+        <translation>Le lien sortant n&apos;est pas connecté</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Two links marked as &quot;body&quot; found</source>
+        <translation>Deux liens marqués comme &quot;body&quot; sont trouvés</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <location line="+7"/>
+        <source>There must be a link with &quot;body&quot; marker on it</source>
+        <translation>Il doit y être un lien avec un marqueur &quot;body&quot;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>There must be a non-marked outgoing link</source>
+        <translation>Il doit y exister un lien sortant non marqué</translation>
+    </message>
+</context>
+<context>
     <name>qReal::interpretation::blocks::ReceiveThreadMessageBlock</name>
     <message>
         <location filename="../../qrutils/interpreter/blocks/receiveThreadMessageBlock.cpp" line="+25"/>

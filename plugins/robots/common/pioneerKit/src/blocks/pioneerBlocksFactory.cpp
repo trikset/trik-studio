@@ -50,6 +50,7 @@ qReal::IdList PioneerBlocksFactory::blocksToHide() const
 			id("Function")
 			, id("SwitchBlock")
 			, id("Loop")
+			, id("PreconditionalLoop")
 			, id("Subprogram")
 			, id("Fork")
 			, id("Join")

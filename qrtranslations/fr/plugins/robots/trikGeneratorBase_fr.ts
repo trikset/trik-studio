@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikGeneratorBase/src/trikBlocksValidator.cpp" line="+106"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikGeneratorBase/src/trikBlocksValidator.cpp" line="+111"/>
         <source>Property should not be empty.</source>
         <translation type="unfinished"></translation>
     </message>

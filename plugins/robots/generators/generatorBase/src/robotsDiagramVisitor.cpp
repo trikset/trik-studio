@@ -77,6 +77,9 @@ void RobotsDiagramVisitor::visit(const qReal::Id &nodeId, QList<utils::DeepFirst
 	case enums::semantics::loopBlock:
 		visitLoop(nodeId, links);
 		break;
+	case enums::semantics::preconditionalLoopBlock:
+		visitPreconditionalLoop(nodeId, links);
+		break;
 	case enums::semantics::switchBlock:
 		visitSwitch(nodeId, links);
 		break;

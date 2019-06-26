@@ -13,6 +13,7 @@
 # limitations under the License.
 
 HEADERS += \
+	$$PWD/blocks/preconditionalLoopBlock.h \
 	$$PWD/interpreter.h \
 	$$PWD/stopReason.h \
 	$$PWD/thread.h \
@@ -40,6 +41,7 @@ HEADERS += \
 	$$PWD/stackFrame.h \
 
 SOURCES += \
+	$$PWD/blocks/preconditionalLoopBlock.cpp \
 	$$PWD/interpreter.cpp \
 	$$PWD/thread.cpp \
 	$$PWD/block.cpp \

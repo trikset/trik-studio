@@ -53,6 +53,11 @@ void TrikBlocksValidator::visitLoop(const qReal::Id &id, const QList<LinkInfo> &
 	visitGeneral(id, links);
 }
 
+void TrikBlocksValidator::visitPreconditionalLoop(const qReal::Id &id, const QList<LinkInfo> &links)
+{
+	visitGeneral(id, links);
+}
+
 void TrikBlocksValidator::visitSwitch(const qReal::Id &id, const QList<LinkInfo> &links)
 {
 	visitGeneral(id, links);

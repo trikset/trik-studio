@@ -198,6 +198,11 @@ void PrimaryControlFlowValidator::visitLoop(const Id &id
 	mLoopBranches[id] = qMakePair(*bodyLink, *nonMarkedBlock);
 }
 
+void PrimaryControlFlowValidator::visitPreconditionalLoop(const Id &id, const QList<LinkInfo> &links)
+{
+	visitLoop(id, links);
+}
+
 void PrimaryControlFlowValidator::visitSwitch(const Id &id
 		, const QList<LinkInfo> &links)
 {

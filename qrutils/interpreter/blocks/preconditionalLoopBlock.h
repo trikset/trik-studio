@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,25 @@
 
 #pragma once
 
-#include <kitBase/blocksBase/commonBlocksFactory.h>
+#include "qrutils/interpreter/block.h"
 
-namespace trik {
+namespace qReal {
+namespace interpretation {
 namespace blocks {
 
-/// Base class for block factory for all TRIK variants, creates common blocks.
-class TrikBlocksFactoryBase : public kitBase::blocksBase::CommonBlocksFactory
+class PreconditionalLoopBlock : public Block
 {
 public:
-	qReal::interpretation::Block *produceBlock(const qReal::Id &element) override;
-	qReal::IdList providedBlocks() const override;
-	qReal::IdList blocksToDisable() const override;
-	qReal::IdList blocksToHide() const override;
+	PreconditionalLoopBlock();
+
+	void run() override;
+
+private:
+	bool initNextBlocks() override;
+
+	qReal::Id mLoopStartBlockId;
 };
 
+}
 }
 }

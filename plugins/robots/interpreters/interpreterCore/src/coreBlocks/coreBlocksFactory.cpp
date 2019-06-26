@@ -23,6 +23,7 @@
 #include <qrutils/interpreter/blocks/randomInitBlock.h>
 #include <qrutils/interpreter/blocks/emptyBlock.h>
 #include <qrutils/interpreter/blocks/loopBlock.h>
+#include <qrutils/interpreter/blocks/preconditionalLoopBlock.h>
 #include <qrutils/interpreter/blocks/forkBlock.h>
 #include <qrutils/interpreter/blocks/joinBlock.h>
 #include <qrutils/interpreter/blocks/killThreadBlock.h>
@@ -62,6 +63,8 @@ qReal::interpretation::Block *CoreBlocksFactory::produceBlock(const qReal::Id &e
 		return new qReal::interpretation::blocks::SwitchBlock();
 	} else if (elementMetatypeIs(element, "Loop")) {
 		return new qReal::interpretation::blocks::LoopBlock();
+	} else if (elementMetatypeIs(element, "PreconditionalLoop")) {
+		return new qReal::interpretation::blocks::PreconditionalLoopBlock();
 	} else if (elementMetatypeIs(element, "Fork")) {
 		return new qReal::interpretation::blocks::ForkBlock();
 	} else if (elementMetatypeIs(element, "Join")) { // todo: waiting
@@ -105,6 +108,7 @@ qReal::IdList CoreBlocksFactory::providedBlocks() const
 		, id("FiBlock")
 		, id("SwitchBlock")
 		, id("Loop")
+		, id("PreconditionalLoop")
 		, id("Fork")
 		, id("Join")
 		, id("SendMessageThreads")

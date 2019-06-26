@@ -15,6 +15,7 @@
 	<file>generated/shapes/LoopClass.sdf</file>
 	<file>generated/shapes/MarkerDownClass.sdf</file>
 	<file>generated/shapes/MarkerUpClass.sdf</file>
+	<file>generated/shapes/PreconditionalLoopClass.sdf</file>
 	<file>generated/shapes/PrintTextClass.sdf</file>
 	<file>generated/shapes/RandomizerClass.sdf</file>
 	<file>generated/shapes/ReceiveMessageThreadsClass.sdf</file>

@@ -116,6 +116,11 @@ void StructuralControlFlowGenerator::visitLoop(const Id &id, const QList<LinkInf
 	mVerticesInsideLoopBody.insert(mVertexNumber[loopBranches.first.target]);
 }
 
+void StructuralControlFlowGenerator::visitPreconditionalLoop(const Id &id, const QList<LinkInfo> &links)
+{
+	visitLoop(id, links);
+}
+
 void StructuralControlFlowGenerator::visitSwitch(const Id &id, const QList<LinkInfo> &links)
 {
 	Q_UNUSED(id)

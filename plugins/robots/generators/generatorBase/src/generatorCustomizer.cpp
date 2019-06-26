@@ -22,6 +22,7 @@ GeneratorCustomizer::GeneratorCustomizer()
 	, mDefaultFinalBlockType("RobotsMetamodel", "RobotsDiagram", "FinalNode")
 	, mDefaultConditionalBlockType("RobotsMetamodel", "RobotsDiagram", "IfBlock")
 	, mDefaultLoopBlockType("RobotsMetamodel", "RobotsDiagram", "Loop")
+	, mDefaultPreconditionalLoopBlockType("RobotsMetamodel", "RobotsDiagram", "PreconditionalLoop")
 	, mDefaultSwitchBlockType("RobotsMetamodel", "RobotsDiagram", "SwitchBlock")
 	, mDefaultForkBlockType("RobotsMetamodel", "RobotsDiagram", "Fork")
 	, mDefaultJoinBlockType("RobotsMetamodel", "RobotsDiagram", "Join")
@@ -57,6 +58,11 @@ bool GeneratorCustomizer::isConditional(const Id &block) const
 bool GeneratorCustomizer::isLoop(const Id &block) const
 {
 	return block.type() == mDefaultLoopBlockType;
+}
+
+bool GeneratorCustomizer::isPreconditionalLoop(const Id &block) const
+{
+	return block.type() == mDefaultPreconditionalLoopBlockType;
 }
 
 bool GeneratorCustomizer::isSwitch(const Id &block) const
@@ -98,6 +104,10 @@ enums::semantics::Semantics GeneratorCustomizer::semanticsOf(const Id &block) co
 
 	if (isFinalNode(block)) {
 		return enums::semantics::finalBlock;
+	}
+
+	if (isPreconditionalLoop(block)) {
+		return enums::semantics::preconditionalLoopBlock;
 	}
 
 	return enums::semantics::regularBlock;
