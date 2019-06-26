@@ -41,16 +41,17 @@
     </message>
     <message>
         <location line="+60"/>
+        <location line="+7"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-7"/>
         <source>Cannot open file, please try with another one.</source>
         <translation>Невозможно открыть файл, пожалуйста, попробуйте другой.</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+34"/>
         <source>Select file with a save to import</source>
         <translation>Выберите файл для импорта</translation>
     </message>

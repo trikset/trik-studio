@@ -26,6 +26,10 @@ links(qrkernel qrgraph)
 
 DEFINES += QRGUI_META_META_MODEL_LIBRARY
 
+TRANSLATIONS = \
+	$$PWD/../../../qrtranslations/ru/qrgui_metametamodel_ru.ts \
+	$$PWD/../../../qrtranslations/fr/qrgui_metametamodel_fr.ts \
+
 HEADERS += \
 	$$PWD/include/metaMetaModel/metaMetaModelDeclSpec.h \
 	$$PWD/include/metaMetaModel/metamodel.h \
