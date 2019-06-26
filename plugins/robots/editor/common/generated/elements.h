@@ -766,7 +766,7 @@
 			: NodeElementType(metamodel)
 		{
 			setName("PreconditionalLoop");
-			setFriendlyName(QObject::tr("Preconditional Loop"));
+			setFriendlyName(QObject::tr("Pre-conditional Loop"));
 			setDiagram("RobotsDiagram");
 			setDescription(QObject::tr(""));
 			qReal::LabelProperties label_1(1, 0.8, -0.7, "Condition", false, 0);
