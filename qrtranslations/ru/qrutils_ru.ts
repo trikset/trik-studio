@@ -393,6 +393,30 @@
     </message>
 </context>
 <context>
+    <name>qReal::interpretation::blocks::PreconditionalLoopBlock</name>
+    <message>
+        <location filename="../../qrutils/interpreter/blocks/preconditionalLoopBlock.cpp" line="+41"/>
+        <source>Outgoing link is not connected</source>
+        <translation>Исходящая связь ни к чему не подключена</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Two links marked as &quot;body&quot; found</source>
+        <translation>Найдено две связи, помеченные как &quot;тело цикла&quot;</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <location line="+7"/>
+        <source>There must be a link with &quot;body&quot; marker on it</source>
+        <translation>Из блока &quot;Цикл&quot; должна выходить стрелка с маркером &quot;тело цикла&quot;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>There must be a non-marked outgoing link</source>
+        <translation>Должна быть непомеченная исходящая связь</translation>
+    </message>
+</context>
+<context>
     <name>qReal::interpretation::blocks::ReceiveThreadMessageBlock</name>
     <message>
         <location filename="../../qrutils/interpreter/blocks/receiveThreadMessageBlock.cpp" line="+25"/>
