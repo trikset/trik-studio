@@ -1,5 +1,11 @@
 @echo off
 
+set inline=%*
+set pause_command=pause
+if "%inline%" == "" goto endSetPause
+if not "%inline:--no-pause=%" == "%inline%" set pause_command=true
+:endSetPause
+
 if not "%~2" == "" (set TRIK_STUDIO_INSTALL_DIR=%~f2) else (set TRIK_STUDIO_INSTALL_DIR=%SYSTEMDRIVE%\TRIKStudio)
 
 if not "%~1" == "" (set INSTALLER_EXE=%~f1 && goto endFindExe)
@@ -9,7 +15,7 @@ if %n% EQU 0 (
   echo Error! No files matching pattern trik-studio-*installer*.exe
   echo Use parameter to choose installer like this:
   echo %~f0 C:\your-path\your-trik-studio-installer.exe
-  pause
+  %pause_command%
   exit /b 1
 )
 if %n% GTR 1 (
@@ -17,7 +23,7 @@ if %n% GTR 1 (
   for %%f in (trik-studio-*installer*.exe) do echo %%f
   echo Remove obsolete installers from this directory or use parameter to choose exact one like this:
   echo %~f0 %~dp0\your-trik-studio-installer.exe
-  pause
+  %pause_command%
   exit /b 1
 )
 for %%f in (%~dp0\trik-studio-*installer*.exe) do (set INSTALLER_EXE=%%f)
@@ -31,7 +37,7 @@ if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
   %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script %~dp0\trik_studio_uninstallscript.qs
 ) else (
   echo Error! %TRIK_STUDIO_INSTALL_DIR% exists and has no maintenance tool
-  pause
+  %pause_command%
   exit /b 1
 )
 :waitFullUninstall
@@ -42,4 +48,4 @@ echo Installing new version of TRIK Studio. Please wait...
 
 if %errorlevel% EQU 0 (echo Done) else (echo Installation Error)
 
-pause
+%pause_command%
