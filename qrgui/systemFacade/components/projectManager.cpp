@@ -137,7 +137,7 @@ bool ProjectManager::openProject(const QString &fileName)
 
 	try {
 		mModels.reinit();
-	} catch (qReal::Exception error) {
+	} catch (qReal::Exception & error) {
 		showMessage(tr("Error"), error.message());
 		QLOG_ERROR() << error.message();
 		return false;
