@@ -738,7 +738,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="769"/>
-        <source>Preconditional Loop</source>
+        <source>Pre-conditional Loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

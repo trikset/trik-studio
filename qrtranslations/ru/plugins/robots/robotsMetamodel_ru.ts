@@ -362,11 +362,6 @@
         <translation>Задача:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="769"/>
-        <source>Preconditional Loop</source>
-        <translation>Цикл с предусловием</translation>
-    </message>
-    <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="894"/>
         <source>From:</source>
         <translation>От:</translation>
@@ -964,6 +959,11 @@
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="736"/>
         <source>Lifts the marker of the 2D model robot up: the robot stops drawing its trace on the floor after that.</source>
         <translation>Поднимает маркер робота в 2D модели так, что тот перестает рисовать свою траекторию на полу.</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="769"/>
+        <source>Pre-conditional Loop</source>
+        <translation>Цикл с предусловием</translation>
     </message>
     <message>
         <source>A, B, C</source>
