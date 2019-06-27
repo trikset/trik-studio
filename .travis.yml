@@ -68,6 +68,7 @@ matrix:
 
 
 before_install:
+  - set -xueo pipefail ; for f in $(git diff --name-only master...${TRAVIS_COMMIT}); do for p in "*.md" .cirrus.yml appveyor.yml ; do [[ $f == $p ]] done ; done && travis terminate 0 || :
   - time wait $EARLY_START_DOCKER_PULL_PID || true
   - ./buildScripts/travis/before_install.sh
   - export CCACHE_CONFIGPATH=$HOME/ccache.conf
