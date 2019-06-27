@@ -3,16 +3,16 @@
 	<platform name="Windows">
 	<!--<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh @@TrikTcpServer"/>-->
 		<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh root@@@TrikTcpServer@@"/>
-		<tool name="TRIK gamepad" program="./gamepad.exe" arguments="@@TrikTcpServer@@"/>
+		<tool name="TRIK Gamepad" program="./gamepad.exe" arguments="@@TrikTcpServer@@"/>
 		<tool name="WinSCP" program="./winscp/WinSCP.exe" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
 	<platform name="Linux">
-		<tool name="TRIK gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
+		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
 		<tool name="SSH to robot" program="xdg-open" arguments="ssh://root@@@TrikTcpServer@@"/>
 		<tool name="SCP to robot" program="xdg-open" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
 	<platform name="Mac">
-		<tool name="TRIK gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
+		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
 		<tool name="SSH to robot" program="open" arguments="ssh://root@@@TrikTcpServer@@"/>
 		<tool name="SCP to robot" program="open" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
