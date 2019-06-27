@@ -1,0 +1,9 @@
+container:
+  image: trikset/linux-builder:latest
+empty_task:
+  simple_cache:
+    folder: $HOME/.ccache
+    fingerprint_script: echo $CIRRUS_OS
+  example_artifacts:
+    path: ".cirrus.yml"
+  empty_script: true
