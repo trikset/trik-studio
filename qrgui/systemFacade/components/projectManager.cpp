@@ -135,8 +135,13 @@ bool ProjectManager::openProject(const QString &fileName)
 		return false;
 	}
 
-	mModels.reinit();
-
+	try {
+		mModels.reinit();
+	} catch (qReal::Exception & error) {
+		showMessage(tr("Error"), error.message());
+		QLOG_ERROR() << error.message();
+		return false;
+	}
 	if (!pluginsEnough() || !checkVersions() || !checkForUnknownElements()) {
 		// restoring the session
 		if (someProjectWasOpened) {
