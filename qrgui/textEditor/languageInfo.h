@@ -22,6 +22,7 @@
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerlua.h>
 
 #include "qrgui/textEditor/textEditorDeclSpec.h"
+#include "lexerjs.h"
 
 namespace qReal {
 namespace text {
@@ -30,10 +31,6 @@ namespace text {
 /// opened by QReal text editor.
 struct LanguageInfo
 {
-	~LanguageInfo()
-	{
-	}
-
 	/// The extension of the files containing code on this language.
 	QString extension;
 
@@ -160,7 +157,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new QsciLexerCPP()                                         /* lexer */
+				, new LexerJS()                                              /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -176,7 +173,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new QsciLexerCPP()                                         /* lexer */
+				, new LexerJS()                                              /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
