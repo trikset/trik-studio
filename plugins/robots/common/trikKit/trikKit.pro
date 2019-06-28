@@ -21,3 +21,5 @@ include(../../../../global.pri)
 include(trikKit.pri)
 
 copyToDestdir(externalToolsConfig, now)
+
+OTHER_FILES += externalToolsConfig/*

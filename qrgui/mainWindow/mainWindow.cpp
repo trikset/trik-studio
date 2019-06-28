@@ -1895,9 +1895,7 @@ void MainWindow::initToolPlugins()
 		mUi->interpretersToolbar->hide();
 	}
 
-	QList<QPair<QString, PreferencesPage *> > const preferencesPages = mToolManager->preferencesPages();
-	typedef QPair<QString, PreferencesPage *> PageDescriptor;
-	for (const PageDescriptor page : preferencesPages) {
+	for (auto &&page : mToolManager->preferencesPages()) {
 		mPreferencesDialog.registerPage(page.first, page.second);
 	}
 
