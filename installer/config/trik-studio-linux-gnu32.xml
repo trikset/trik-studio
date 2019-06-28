@@ -6,6 +6,8 @@
     <Publisher>CyberTech Labs Ltd.</Publisher>
     <ProductUrl>http://robots.qreal.ru</ProductUrl>
 
+    <ControlScript>../controlScript.qs</ControlScript>
+
     <InstallerWindowIcon>../images/trik-studio.ico</InstallerWindowIcon>
     <InstallerApplicationIcon>../images/trik-studio.ico</InstallerApplicationIcon>
     <Logo>../images/trik-studio-logo.png</Logo>
