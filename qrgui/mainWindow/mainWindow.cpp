@@ -1826,29 +1826,31 @@ void MainWindow::addExternalToolActions()
 				auto toolName = tool.attribute("name");
 				auto program = PlatformInfo::invariantPath(tool.attribute("program"));
 				auto arguments = tool.attribute("arguments").split(" ");
-				QAction *action = new QAction(toolName, externalToolsMenu);
+				auto action = new QAction(toolName, externalToolsMenu);
 				const QRegularExpression re("@@([^@]*)@@");
 				connect(action, &QAction::triggered, this, [=](){
-									auto processedArguments = arguments;
-									QRegularExpressionMatch match;
-									for (auto &arg : processedArguments) {
-										while (arg.contains(re, &match)) {
-											arg.replace(match.captured(0), SettingsManager::value(match.captured(1)).toString());
-										}
-									}
-									auto result = false;
-									if (program == "#url#") {
-										QUrl url(processedArguments.first());
-										result = QDesktopServices::openUrl(url);
-									} else {
-									//I have found no simple nice way to check if process/sub-process has started
-										result = QProcess::startDetached(program, processedArguments);
+					auto processedArguments = arguments;
+					QRegularExpressionMatch match;
+					for (auto &arg : processedArguments) {
+						while (arg.contains(re, &match)) {
+							auto const &newVal = SettingsManager::value(match.captured(1)).toString();
+							arg.replace(match.captured(0), newVal);
+						}
+					}
 
-									}
-									if (!result) {
-										mErrorReporter->addError(tr("Failed to open %1").arg(program));
-									}
-								});
+					bool result;
+					if (program == "#url#") {
+						QUrl url(processedArguments.first());
+						result = QDesktopServices::openUrl(url);
+					} else {
+						//I have found no simple nice way to check if process/sub-process has started without errors
+						result = QProcess::startDetached(program, processedArguments);
+					}
+
+					if (!result) {
+						mErrorReporter->addError(tr("Failed to open %1").arg(program));
+					}
+				});
 
 				externalToolsMenu->addAction(action);
 			}
