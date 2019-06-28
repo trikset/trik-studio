@@ -22,8 +22,8 @@ namespace qReal {
 class QRKERNEL_EXPORT PlatformInfo
 {
 public:
-	/// Returns printable information about operating system which runs this application.
-	static QString prettyOsVersion();
+	/// Returns printable short information string about operating system type which runs this application.
+	static const QString &osType();
 
 	/// Returns QCoreApplication::applicationDirPath on every platform besides Mac OS X
 	/// and path to directory containing application bundle on Mac

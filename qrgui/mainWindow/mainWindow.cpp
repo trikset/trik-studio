@@ -1806,7 +1806,7 @@ void MainWindow::addExternalToolActions()
 {
 	QMenu *externalToolsMenu = new QMenu(tr("External tools"));
 	const QString pathToConfigs = PlatformInfo::applicationDirPath() + "/externalToolsConfig";
-	const QString osName = PlatformInfo::prettyOsVersion();
+	const QString osName = PlatformInfo::osType();
 	const QStringList configs = QDir(pathToConfigs).entryList().filter(".xml");
 	for (const QString &configFile : configs) {
 		QDomDocument xmlConfig = utils::xmlUtils::loadDocument(pathToConfigs + "/" + configFile);
@@ -1815,7 +1815,7 @@ void MainWindow::addExternalToolActions()
 				; element = element.nextSiblingElement("platform"))
 		{
 			const QString name = element.attribute("name");
-			if (!osName.startsWith(name)) {
+			if (!osName.startsWith(name, Qt::CaseInsensitive)) {
 				continue;
 			}
 
