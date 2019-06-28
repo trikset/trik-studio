@@ -1823,31 +1823,34 @@ void MainWindow::addExternalToolActions()
 					; !tool.isNull()
 					; tool = tool.nextSiblingElement("tool"))
 			{
-				const QString toolName = tool.attribute("name");
-				const QString program = PlatformInfo::invariantPath(tool.attribute("program"));
-				QStringList arguments = tool.attribute("arguments").split(" ");
+				auto toolName = tool.attribute("name");
+				auto program = PlatformInfo::invariantPath(tool.attribute("program"));
+				auto arguments = tool.attribute("arguments").split(" ");
+				QAction *action = new QAction(toolName, externalToolsMenu);
+				const QRegularExpression re("@@([^@]*)@@");
+				connect(action, &QAction::triggered, this, [=](){
+									auto processedArguments = arguments;
+									QRegularExpressionMatch match;
+									for (auto &arg : processedArguments) {
+										while (arg.contains(re, &match)) {
+											arg.replace(match.captured(0), SettingsManager::value(match.captured(1)).toString());
+										}
+									}
+									auto result = false;
+									if (program == "#url#") {
+										QUrl url(processedArguments.first());
+										result = QDesktopServices::openUrl(url);
+									} else {
+									//I have found no simple nice way to check if process/sub-process has started
+										result = QProcess::startDetached(program, processedArguments);
 
-				if (QFile(program).exists()) {
-					QAction *action = new QAction(toolName, externalToolsMenu);
-					connect(action, &QAction::triggered, this, [=](){
-						if (arguments.isEmpty()) {
-							QProcess::startDetached(program);
-						} else {
-							QStringList processedArguments = arguments;
-							QRegularExpression re = QRegularExpression("@@([^@]*)@@");
-							QRegularExpressionMatch match = QRegularExpressionMatch();
-							for (QString &arg : processedArguments) {
-								while (arg.contains(re, &match))
-									arg.replace(match.captured(0),
-											SettingsManager::value(match.captured(1)).toString());
-							}
+									}
+									if (!result) {
+										mErrorReporter->addError(tr("Failed to open %1").arg(program));
+									}
+								});
 
-							QProcess::startDetached(program, processedArguments);
-						}
-					});
-
-					externalToolsMenu->addAction(action);
-				}
+				externalToolsMenu->addAction(action);
 			}
 
 			break;
