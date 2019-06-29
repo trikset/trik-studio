@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 	initLogging();
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();
-	QLOG_INFO() << "Running on" << PlatformInfo::prettyOsVersion()
+	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName()
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app.arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();

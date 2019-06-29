@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 	qsrand(time(0));
 	initLogging();
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
-	QLOG_INFO() << "Running on" << qReal::PlatformInfo::prettyOsVersion();
+	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
 	QLOG_INFO() << "Arguments:" << app.arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 

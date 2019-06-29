@@ -1806,7 +1806,7 @@ void MainWindow::addExternalToolActions()
 {
 	QMenu *externalToolsMenu = new QMenu(tr("External tools"));
 	const QString pathToConfigs = PlatformInfo::applicationDirPath() + "/externalToolsConfig";
-	const QString osName = PlatformInfo::prettyOsVersion();
+	const QString osName = PlatformInfo::osType();
 	const QStringList configs = QDir(pathToConfigs).entryList().filter(".xml");
 	for (const QString &configFile : configs) {
 		QDomDocument xmlConfig = utils::xmlUtils::loadDocument(pathToConfigs + "/" + configFile);
@@ -1815,7 +1815,7 @@ void MainWindow::addExternalToolActions()
 				; element = element.nextSiblingElement("platform"))
 		{
 			const QString name = element.attribute("name");
-			if (!osName.startsWith(name)) {
+			if (!osName.startsWith(name, Qt::CaseInsensitive)) {
 				continue;
 			}
 
@@ -1823,31 +1823,36 @@ void MainWindow::addExternalToolActions()
 					; !tool.isNull()
 					; tool = tool.nextSiblingElement("tool"))
 			{
-				const QString toolName = tool.attribute("name");
-				const QString program = PlatformInfo::invariantPath(tool.attribute("program"));
-				QStringList arguments = tool.attribute("arguments").split(" ");
-
-				if (QFile(program).exists()) {
-					QAction *action = new QAction(toolName, externalToolsMenu);
-					connect(action, &QAction::triggered, this, [=](){
-						if (arguments.isEmpty()) {
-							QProcess::startDetached(program);
-						} else {
-							QStringList processedArguments = arguments;
-							QRegularExpression re = QRegularExpression("@@([^@]*)@@");
-							QRegularExpressionMatch match = QRegularExpressionMatch();
-							for (QString &arg : processedArguments) {
-								while (arg.contains(re, &match))
-									arg.replace(match.captured(0),
-											SettingsManager::value(match.captured(1)).toString());
-							}
-
-							QProcess::startDetached(program, processedArguments);
+				auto toolName = tool.attribute("name");
+				auto program = PlatformInfo::invariantPath(tool.attribute("program"));
+				auto arguments = tool.attribute("arguments").split(" ");
+				auto action = new QAction(toolName, externalToolsMenu);
+				const QRegularExpression re("@@([^@]*)@@");
+				connect(action, &QAction::triggered, this, [=](){
+					auto processedArguments = arguments;
+					QRegularExpressionMatch match;
+					for (auto &arg : processedArguments) {
+						while (arg.contains(re, &match)) {
+							auto const &newVal = SettingsManager::value(match.captured(1)).toString();
+							arg.replace(match.captured(0), newVal);
 						}
-					});
+					}
 
-					externalToolsMenu->addAction(action);
-				}
+					bool result;
+					if (program == "#url#") {
+						QUrl url(processedArguments.first());
+						result = QDesktopServices::openUrl(url);
+					} else {
+						//I have found no simple nice way to check if process/sub-process has started without errors
+						result = QProcess::startDetached(program, processedArguments);
+					}
+
+					if (!result) {
+						mErrorReporter->addError(tr("Failed to open %1").arg(toolName));
+					}
+				});
+
+				externalToolsMenu->addAction(action);
 			}
 
 			break;
@@ -1895,9 +1900,7 @@ void MainWindow::initToolPlugins()
 		mUi->interpretersToolbar->hide();
 	}
 
-	QList<QPair<QString, PreferencesPage *> > const preferencesPages = mToolManager->preferencesPages();
-	typedef QPair<QString, PreferencesPage *> PageDescriptor;
-	for (const PageDescriptor page : preferencesPages) {
+	for (auto &&page : mToolManager->preferencesPages()) {
 		mPreferencesDialog.registerPage(page.first, page.second);
 	}
 

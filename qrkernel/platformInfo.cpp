@@ -23,9 +23,19 @@
 
 using namespace qReal;
 
-QString PlatformInfo::prettyOsVersion()
+const QString &PlatformInfo::osType()
 {
-	return QSysInfo::prettyProductName();
+	static const QString type =
+#ifdef Q_OS_LINUX
+	"linux";
+#elif defined(Q_OS_MACOS)
+	"macos";
+#elif defined(Q_OS_WIN)
+	"windows";
+#else
+	"unknown";
+#endif
+	return type;
 }
 
 QString PlatformInfo::applicationDirPath()

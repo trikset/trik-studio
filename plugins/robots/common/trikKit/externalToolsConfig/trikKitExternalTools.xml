@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tools>
-	<platform name="Windows">
+	<platform name="windows">
 	<!--<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh @@TrikTcpServer"/>-->
 		<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh root@@@TrikTcpServer@@"/>
 		<tool name="TRIK Gamepad" program="./gamepad.exe" arguments="@@TrikTcpServer@@"/>
 		<tool name="WinSCP" program="./winscp/WinSCP.exe" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
-	<platform name="Linux">
+	<platform name="linux">
 		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
-		<tool name="SSH to robot" program="xdg-open" arguments="ssh://root@@@TrikTcpServer@@"/>
-		<tool name="SCP to robot" program="xdg-open" arguments="scp://root@@@TrikTcpServer@@"/>
+		<tool name="SSH to robot" program="#url#" arguments="ssh://root@@@TrikTcpServer@@"/>
+		<tool name="SCP to robot" program="#url#" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
-	<platform name="Mac">
+	<platform name="macos">
 		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
-		<tool name="SSH to robot" program="open" arguments="ssh://root@@@TrikTcpServer@@"/>
-		<tool name="SCP to robot" program="open" arguments="scp://root@@@TrikTcpServer@@"/>
+		<tool name="SSH to robot" program="#url#" arguments="ssh://root@@@TrikTcpServer@@"/>
+		<tool name="SCP to robot" program="#url#" arguments="scp://root@@@TrikTcpServer@@"/>
 	</platform>
 </tools>
