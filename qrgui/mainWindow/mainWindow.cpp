@@ -1848,7 +1848,7 @@ void MainWindow::addExternalToolActions()
 					}
 
 					if (!result) {
-						mErrorReporter->addError(tr("Failed to open %1").arg(program));
+						mErrorReporter->addError(tr("Failed to open %1").arg(toolName));
 					}
 				});
 
