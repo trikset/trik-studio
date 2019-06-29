@@ -1,20 +1,47 @@
 @echo off
 
-set inline=%*
+Setlocal EnableDelayedExpansion
+
 set pause_command=pause
-if "%inline%" == "" goto endSetPause
-if not "%inline:--no-pause=%" == "%inline%" set pause_command=true
-:endSetPause
+set need_check_version=false
+set read_installer=false
+set read_targetpath=false
+set INSTALLER_EXE=
+set TRIK_STUDIO_INSTALL_DIR=
+set prev=
 
-if not "%~2" == "" (set TRIK_STUDIO_INSTALL_DIR=%~f2) else (set TRIK_STUDIO_INSTALL_DIR=%SYSTEMDRIVE%\TRIKStudio)
+if "%*" == "" goto endReadInline
+for %%t in (%*) do (
+  set token=%%t
+  if "%%t" == "--no-pause" (
+    set pause_command=true
+  ) else if "%%t" == "--check-version" (
+    set need_check_version=true
+  ) else if "%%t" == "--installer" (
+    REM do nothing
+  ) else if "%%t" == "--target-path" (
+    REM do nothing
+  ) else if "!prev!" == "--installer" (
+	set INSTALLER_EXE=%%~ft
+  ) else if "!prev!" == "--target-path" (
+	set TRIK_STUDIO_INSTALL_DIR=%%~ft
+  ) else (
+    echo Unknown option %%t
+	goto end
+  )
+  set prev=%%t
+)
+:endReadInline
 
-if not "%~1" == "" (set INSTALLER_EXE=%~f1 && goto endFindExe)
+if %TRIK_STUDIO_INSTALL_DIR%=="" set TRIK_STUDIO_INSTALL_DIR=%SYSTEMDRIVE%\TRIKStudio
+
+if not "%INSTALLER_EXE%"=="" goto endFindExe
 set n=0
 for %%f in (%~dp0\trik-studio-*installer*.exe) do (set /a n+=1)
 if %n% EQU 0 (
   echo Error! No files matching pattern trik-studio-*installer*.exe
   echo Use parameter to choose installer like this:
-  echo %~f0 C:\your-path\your-trik-studio-installer.exe
+  echo %~f0 --installer C:\your-path\your-trik-studio-installer.exe
   %pause_command%
   exit /b 1
 )
@@ -22,12 +49,18 @@ if %n% GTR 1 (
   echo Error! Too many candidates:
   for %%f in (%~dp0\trik-studio-*installer*.exe) do echo %%~nf
   echo Remove obsolete installers from this directory or use parameter to choose exact one like this:
-  echo %~f0 %~dp0\your-trik-studio-installer.exe
+  echo %~f0 --installer %~dp0\your-trik-studio-installer.exe
   %pause_command%
   exit /b 1
 )
 for %%f in (%~dp0\trik-studio-*installer*.exe) do (set INSTALLER_EXE=%%f)
 :endFindExe
+
+if "%need_check_version%" == "true" if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
+  for /f "delims=" %%v in ('findstr "<Version>.*</Version>" %TRIK_STUDIO_INSTALL_DIR%\maintenance.dat') do set old_version="%%v"
+  for /f "delims=" %%v in ('findstr "<Version>.*</Version>" %INSTALLER_EXE%') do set new_version="%%v"
+  if !old_version! == !new_version! (echo Version of installer is equal to your version. Don't need reinstall && goto end)
+)
 
 echo Install %INSTALLER_EXE% to %TRIK_STUDIO_INSTALL_DIR%
 
@@ -47,5 +80,5 @@ echo Installing new version of TRIK Studio. Please wait...
 %INSTALLER_EXE% --script %~dp0\trik_studio_installscript.qs
 
 if %errorlevel% EQU 0 (echo Done) else (echo Installation Error)
-
+:end
 %pause_command%
