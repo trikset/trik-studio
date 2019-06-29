@@ -57,6 +57,10 @@ init:
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
+  - set NEED_AUTOZIP=true
+  - set NEED_BINZIP=false
+  - if "x%appveyor_pull_request_number%" NEQ "x" if "%APPVEYOR_REPO_COMMIT_MESSAGE:[INSTALLER]=%" EQU "%APPVEYOR_REPO_COMMIT_MESSAGE%" (set NEED_AUTOZIP=false)
+  - if "x%appveyor_pull_request_number%" NEQ "x" (set NEED_BINZIP=true)
 
 clone_script:
     - cmd: |
@@ -124,6 +128,8 @@ after_test:
   - bash -c "env LC_ALL=C date -u"
   - echo "ZipName:%ZIP_NAME%"
   - 7z a %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - if "%NEED_BINZIP%" EQU "true" (appveyor PushArtifact %ZIP_NAME%)
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - bash -c "env LC_ALL=C date -u"
@@ -138,16 +144,14 @@ after_test:
 # pack autoinstaller
   - bash -c "env LC_ALL=C date -u"
   - 7z a %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% *.qs reinstall*
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - if "%NEED_AUTOZIP%" EQU "true" (appveyor PushArtifact installer\%AUTOINSTALLER_ZIP_NAME%)
 # install
+  - cd %APPVEYOR_BUILD_FOLDER%\installer
   - bash -c "env LC_ALL=C date -u"
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
   - bash -c "env LC_ALL=C date -u"
-
-artifacts:
- - path: installer\$(AUTOINSTALLER_ZIP_NAME)
- - path: installer\$(INSTALLER_NAME)
- - path: $(ZIP_NAME)
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
