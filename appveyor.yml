@@ -143,7 +143,7 @@ after_test:
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
 # pack autoinstaller
   - bash -c "env LC_ALL=C date -u"
-  - 7z a %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% *.qs reinstall*
+  - 7z a %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% trik_studio*.qs reinstall*
   - cd %APPVEYOR_BUILD_FOLDER%
   - if "%NEED_AUTOZIP%" EQU "true" (appveyor PushArtifact installer\%AUTOINSTALLER_ZIP_NAME%)
 # install
