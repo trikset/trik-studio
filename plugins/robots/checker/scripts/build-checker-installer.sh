@@ -164,9 +164,9 @@ cd ..
 cp -fP $qRealDir/checker.sh .
 
 # Copying fields, examples and tasks
-cp -r $fieldsDir ./fields
-cp -r $examplesDir ./examples
-cp -r $tasksDir ./tasks
+cp -r $fieldsDir ./fields || :
+cp -r $examplesDir ./examples || :
+cp -r $tasksDir ./tasks || :
 
 #It saves few megabytes.
 find . -type f -executable | xargs strip -sv || : 
