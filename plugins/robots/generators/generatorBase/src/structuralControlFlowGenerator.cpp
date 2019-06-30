@@ -83,7 +83,7 @@ void StructuralControlFlowGenerator::afterVisit(const Id &id, QList<LinkInfo> &l
 		return;
 	}
 
-	if (semanticsOf(id) == enums::semantics::loopBlock) {
+	if (isLoop(id)) {
 		mLoopNumbers.pop();
 
 		const QPair<LinkInfo, LinkInfo> loopBranches = loopBranchesFor(id);
@@ -288,7 +288,8 @@ SemanticNode *StructuralControlFlowGenerator::transformIfThenElse(IfStructurizat
 		return createSemanticSwitchNode(conditionId, branches, ifNode->hasBreakInside());
 	}
 
-	case enums::semantics::loopBlock: {
+	case enums::semantics::preconditionalLoopBlock:
+	case enums::semantics::loopBlock : {
 		if ((ifNode->exit() && ifNode->elseBranch() && ifNode->exit()->firstId() == ifNode->firstId())
 				|| (!ifNode->exit() && ifNode->elseBranch())) {
 			ZoneNode *zone = new ZoneNode(mSemanticTree);
@@ -351,6 +352,7 @@ SemanticNode *StructuralControlFlowGenerator::transformWhileLoop(WhileStructuriz
 			return semanticLoop;
 		}
 
+		case enums::semantics::preconditionalLoopBlock:
 		case enums::semantics::loopBlock: {
 			semanticLoop = mSemanticTree->produceLoop(conditionId);
 			semanticLoop->bodyZone()->appendChild(transformNode(bodyNode));
@@ -371,7 +373,7 @@ SemanticNode *StructuralControlFlowGenerator::transformWhileLoop(WhileStructuriz
 			break;
 		}
 	} else if (headNode->type() == IntermediateStructurizatorNode::Type::nodeWithBreaks
-			&& semanticsOf(conditionId) == enums::semantics::loopBlock) {
+			&& isLoop(conditionId)) {
 		StructurizatorNodeWithBreaks *nodeWitBreaks = static_cast<StructurizatorNodeWithBreaks *>(headNode);
 		if (nodeWitBreaks->exitBranches().size() != 1 ||
 				nodeWitBreaks->exitBranches().first()->type() == IntermediateStructurizatorNode::block) {
@@ -432,6 +434,7 @@ SemanticNode *StructuralControlFlowGenerator::createConditionWithBreaks(Structur
 		return createSemanticSwitchNode(conditionId, allBranches, true);
 	}
 
+	case enums::semantics::preconditionalLoopBlock:
 	case enums::semantics::loopBlock: {
 		if (exitBranches.size() != 1 ||
 				exitBranches.first()->type() == IntermediateStructurizatorNode::Type::breakNode) {
@@ -551,7 +554,7 @@ void StructuralControlFlowGenerator::appendEdgesAndVertices(const Id &vertex, co
 		const qReal::Id otherVertex = link.target;
 
 		if (!mIds.contains(otherVertex)) {
-			if (semanticsOf(otherVertex) == enums::semantics::loopBlock) {
+			if (isLoop(otherVertex)) {
 				const qReal::Id loopHeader = mFictiveId.sameTypeId();
 				mAdditionalVertices.push_back(loopHeader);
 				appendVertex(loopHeader);
@@ -564,8 +567,7 @@ void StructuralControlFlowGenerator::appendEdgesAndVertices(const Id &vertex, co
 				addEdgeIntoGraph(vertex, otherVertex);
 			}
 		} else {
-			if (semanticsOf(otherVertex) != enums::semantics::loopBlock
-					|| (mLoopNumbers.contains(mVertexNumber[otherVertex])
+			if (isLoop(otherVertex) || (mLoopNumbers.contains(mVertexNumber[otherVertex])
 							&& mVerticesInsideLoopBody.contains(mVertexNumber[vertex]))) {
 				addEdgeIntoGraph(vertex, otherVertex);
 			} else {
@@ -591,4 +593,10 @@ void StructuralControlFlowGenerator::removeVerticesFromLoopBody(const Id &vertex
 			mVerticesInsideLoopBody.remove(mVertexNumber[link.target]);
 		}
 	}
+}
+
+bool StructuralControlFlowGenerator::isLoop(const Id &vertex)
+{
+	return semanticsOf(vertex) == enums::semantics::loopBlock
+			|| semanticsOf(vertex) == enums::semantics::preconditionalLoopBlock;
 }
