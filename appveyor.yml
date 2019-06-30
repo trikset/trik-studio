@@ -57,10 +57,19 @@ init:
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
-  - set NEED_AUTOZIP=true
+  - set NEED_AUTOZIP=false
   - set NEED_BINZIP=false
-  - if "x%appveyor_pull_request_number%" NEQ "x" if "%APPVEYOR_REPO_COMMIT_MESSAGE:[INSTALLER]=%" EQU "%APPVEYOR_REPO_COMMIT_MESSAGE%" (set NEED_AUTOZIP=false)
-  - if "x%appveyor_pull_request_number%" NEQ "x" (set NEED_BINZIP=true)
+  - set NEED_INSTALLER=false
+  - if "%APPVEYOR_REPO_COMMIT_MESSAGE:[INSTALLER]=%" NEQ "%APPVEYOR_REPO_COMMIT_MESSAGE%" (set NEED_INSTALLER=true)
+  - if "%APPVEYOR_REPO_COMMIT_MESSAGE:[BINZIP]=%" NEQ "%APPVEYOR_REPO_COMMIT_MESSAGE%" (set NEED_BINZIP=true)
+  - if "%APPVEYOR_REPO_COMMIT_MESSAGE:[AUTOZIP]=%" NEQ "%APPVEYOR_REPO_COMMIT_MESSAGE%" (set NEED_AUTOZIP=true)
+# this is a push/merge for branch (else it is a PR)
+  - if "x%appveyor_pull_request_number%" EQU "x" (set NEED_AUTOZIP=true)
+#this is a tagged commit build
+  - if "%APPVEYOR_REPO_TAG%" EQU "true" (set NEED_INSTALLER=true ; set NEED_AUTOZIP=true)
+  - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
+  - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
+  - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
 
 clone_script:
     - cmd: |
@@ -127,7 +136,8 @@ after_test:
   - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%PLATFORM%.zip
   - bash -c "env LC_ALL=C date -u"
   - echo "ZipName:%ZIP_NAME%"
-  - 7z a %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
+  - cd %BUILD_DIR%/bin/release
+  - 7z a -- %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
   - cd %APPVEYOR_BUILD_FOLDER%
   - if "%NEED_BINZIP%" EQU "true" (appveyor PushArtifact %ZIP_NAME%)
 # build installer
@@ -141,9 +151,12 @@ after_test:
   - set INSTALLER_NAME=%INSTALLER_NAME%.exe
   - echo "Installer:%INSTALLER_NAME%"
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - if "%NEED_INSTALLER%" EQU "true" (appveyor PushArtifact installer\%INSTALLER_NAME%)
 # pack autoinstaller
   - bash -c "env LC_ALL=C date -u"
-  - 7z a %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% *.qs reinstall*
+  - cd %APPVEYOR_BUILD_FOLDER%/installer
+  - 7z a -- %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% *.qs reinstall*
   - cd %APPVEYOR_BUILD_FOLDER%
   - if "%NEED_AUTOZIP%" EQU "true" (appveyor PushArtifact installer\%AUTOINSTALLER_ZIP_NAME%)
 # install
