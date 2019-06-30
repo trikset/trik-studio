@@ -3,7 +3,7 @@
 Setlocal EnableDelayedExpansion
 
 set pause_command=pause
-set need_check_version=false
+set check_version=true
 set read_installer=false
 set read_targetpath=false
 set INSTALLER_EXE=
@@ -14,9 +14,9 @@ if "%*" == "" goto endReadInline
 for %%t in (%*) do (
   set token=%%t
   if "%%t" == "--no-pause" (
-    set pause_command=true
-  ) else if "%%t" == "--check-version" (
-    set need_check_version=true
+    set pause_command=echo "------"
+  ) else if "%%t" == "--force" (
+    set check_version=false
   ) else if "%%t" == "--installer" (
     REM do nothing
   ) else if "%%t" == "--target-path" (
@@ -26,7 +26,7 @@ for %%t in (%*) do (
   ) else if "!prev!" == "--target-path" (
 	set TRIK_STUDIO_INSTALL_DIR=%%~ft
   ) else (
-    echo Unknown option %%t
+    echo Unknown option: %%t
 	goto end
   )
   set prev=%%t
@@ -48,7 +48,7 @@ if %n% EQU 0 (
 if %n% GTR 1 (
   echo Error! Too many candidates:
   for %%f in (%~dp0\trik-studio-*installer*.exe) do echo %%~nf
-  echo Remove obsolete installers from this directory or use parameter to choose exact one like this:
+  echo Remove obsolete installers from this directory or use --installer:
   echo %~f0 --installer %~dp0\your-trik-studio-installer.exe
   %pause_command%
   exit /b 1
@@ -56,13 +56,13 @@ if %n% GTR 1 (
 for %%f in (%~dp0\trik-studio-*installer*.exe) do (set INSTALLER_EXE=%%f)
 :endFindExe
 
-if "%need_check_version%" == "true" if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
+if "%check_version%" == "true" if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
   for /f "delims=" %%v in ('findstr "<Version>.*</Version>" %TRIK_STUDIO_INSTALL_DIR%\maintenance.dat') do set old_version="%%v"
   for /f "delims=" %%v in ('findstr "<Version>.*</Version>" %INSTALLER_EXE%') do set new_version="%%v"
-  if !old_version! == !new_version! (echo Version of installer is equal to your version. Don't need reinstall && goto end)
+  if !old_version! == !new_version! (echo The same version is already installed. Use --force to skip version check. && goto end)
 )
 
-echo Install %INSTALLER_EXE% to %TRIK_STUDIO_INSTALL_DIR%
+echo Installing %INSTALLER_EXE% to %TRIK_STUDIO_INSTALL_DIR% ...
 
 if not exist %TRIK_STUDIO_INSTALL_DIR% goto endUninstall
 if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
@@ -79,6 +79,6 @@ if exist %TRIK_STUDIO_INSTALL_DIR% goto waitFullUninstall
 echo Installing new version of TRIK Studio. Please wait...
 %INSTALLER_EXE% --script %~dp0\trik_studio_installscript.qs
 
-if %errorlevel% EQU 0 (echo Done) else (echo Installation Error)
+if %errorlevel% EQU 0 (echo Done) else (echo Installation Error. See messages above.)
 :end
 %pause_command%
