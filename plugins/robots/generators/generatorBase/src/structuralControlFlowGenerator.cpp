@@ -567,7 +567,7 @@ void StructuralControlFlowGenerator::appendEdgesAndVertices(const Id &vertex, co
 				addEdgeIntoGraph(vertex, otherVertex);
 			}
 		} else {
-			if (isLoop(otherVertex) || (mLoopNumbers.contains(mVertexNumber[otherVertex])
+			if (!isLoop(otherVertex) || (mLoopNumbers.contains(mVertexNumber[otherVertex])
 							&& mVerticesInsideLoopBody.contains(mVertexNumber[vertex]))) {
 				addEdgeIntoGraph(vertex, otherVertex);
 			} else {
@@ -597,6 +597,6 @@ void StructuralControlFlowGenerator::removeVerticesFromLoopBody(const Id &vertex
 
 bool StructuralControlFlowGenerator::isLoop(const Id &vertex)
 {
-	return semanticsOf(vertex) == enums::semantics::loopBlock
-			|| semanticsOf(vertex) == enums::semantics::preconditionalLoopBlock;
+	auto s = semanticsOf(vertex);
+	return s == enums::semantics::loopBlock || s == enums::semantics::preconditionalLoopBlock;
 }

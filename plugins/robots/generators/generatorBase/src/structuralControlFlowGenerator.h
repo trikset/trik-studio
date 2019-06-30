@@ -125,7 +125,7 @@ private:
 	void addVerticesInLoopBody(const qReal::Id &vertex, const QList<LinkInfo> &links);
 	void removeVerticesFromLoopBody(const qReal::Id &vertex, const QList<LinkInfo> &links);
 
-	bool isLoop(const qReal::Id &vertex);
+	bool isLoop(const qReal::Id &vertex) const;
 
 	QMap<int, semantics::SemanticNode *> mTrees;
 	bool mCanBeGeneratedIntoStructuredCode;
