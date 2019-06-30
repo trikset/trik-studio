@@ -31,6 +31,6 @@ then
       && bin/$CONFIG/build-checker-installer.sh \
       && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$TRAVIS_BRANCH.tar.xz\
 "
-fi
+fi || travis_terminate 3
 
 docker stop builder || :
