@@ -595,7 +595,7 @@ void StructuralControlFlowGenerator::removeVerticesFromLoopBody(const Id &vertex
 	}
 }
 
-bool StructuralControlFlowGenerator::isLoop(const Id &vertex)
+bool StructuralControlFlowGenerator::isLoop(const Id &vertex) const
 {
 	auto s = semanticsOf(vertex);
 	return s == enums::semantics::loopBlock || s == enums::semantics::preconditionalLoopBlock;
