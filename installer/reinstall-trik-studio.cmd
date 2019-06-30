@@ -1,3 +1,11 @@
+REM  This script can be used to manage unattended/autonomous install
+REM  Without any options (double click it or run from command line) it upgrades
+REM  default local TRIK Studio installation.
+REM  Options:
+REM  --force            to skip version check
+REM  --no-pause         to disable pause at the end of a script, useful for automation to close window after run
+REM  --installer PATH   use another TRIK Studio installer binary
+REM  --target-path PATH use this directory as a target installation path
 @echo off
 
 Setlocal EnableDelayedExpansion
