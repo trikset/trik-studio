@@ -240,6 +240,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 	SubprogramsCollectionDialog dialog(map);
 	dialog.exec();
+	QString mainWorldModel = mLogicalModel->logicalRepoApi().metaInformation("worldModel").toString();
 	if (dialog.result() == QDialog::Accepted) {
 		qReal::Id activeDiagram = mMainWindowInterpretersInterface->activeDiagram();
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
@@ -253,6 +254,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 		mMainWindowInterpretersInterface->reinitModels();
 		mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
+		mLogicalModel->mutableLogicalRepoApi().setMetaInformation("worldModel", mainWorldModel);
 		mProjectManager->afterOpen(mRepo->workingFile());
 
 		checkSubprogramsForUniqueNames();
