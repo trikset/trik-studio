@@ -106,7 +106,7 @@
         <translation>Выберите файл с подпрограммами</translation>
     </message>
     <message>
-        <location line="+123"/>
+        <location line="+126"/>
         <source>Clear the collection</source>
         <translation type="unfinished"></translation>
     </message>
