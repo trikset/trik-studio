@@ -8,6 +8,7 @@ clone_depth: 1
 skip_commits:
   files:
     - 'buildScripts/travis/*'
+    - 'buildScripts/docker/*'
     - '.cirrus.yml'
     - '.travis.yml'
     - 'Brewfile'
