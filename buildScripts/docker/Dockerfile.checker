@@ -1,4 +1,4 @@
-FROM trikset/linux-builder
+FROM trikset/checker-runtime
 MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
 ENV DEBIAN_FRONTEND noninteractive
 
