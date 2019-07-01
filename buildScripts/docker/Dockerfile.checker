@@ -1,0 +1,16 @@
+FROM trikset/linux-builder
+MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
+ENV DEBIAN_FRONTEND noninteractive
+
+# Add binaries before ldconfig & prelink.
+RUN curl https://dl.trikset.com/ts/fresh/checker/checker-linux-release-2019.4.tar.xz \
+  | tar xvJ
+
+#Run everything at once to create a single layer
+RUN useradd -M -d /sandbox sandbox \
+    && /bin/echo -e "/trikStudio-checker/bin\n" > /etc/ld.so.conf.d/zz_trik_libs.conf \
+    && echo '-l /trikStudio-checker' >> /etc/prelink.conf \
+    && ldconfig -v
+ENV LANG ru_RU.UTF-8
+RUN du -csh /* 2>/dev/null | sort -h || :
+
