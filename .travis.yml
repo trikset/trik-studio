@@ -1,4 +1,4 @@
-language: generic
+language: minimal
 
 git:
   depth: 20
@@ -46,14 +46,10 @@ branches:
 matrix:
   include:
     - os: linux
-      dist: trusty
-      sudo: required
       services: docker
       name: "Linux release"
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
-      dist: trusty
-      sudo: required
       services: docker
       env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=small_debug_info CONFIG+=sanitize_address"
       name: "Linux debug + vera + tests + translations"
