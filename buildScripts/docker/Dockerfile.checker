@@ -2,6 +2,18 @@ FROM trikset/checker-runtime
 MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
 ENV DEBIAN_FRONTEND noninteractive
 ARG CHECKER_TAG=master
+#Run everything at once to create a single layer
+RUN set -eu \
+    && apt-get update \
+    && apt-get -y dist-upgrade \
+    && apt-get install -y --no-install-recommends \
+	       unzip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+            /var/cache/debconf/* \
+            /usr/share/doc \
+            /usr/share/man
+
 # Add binaries before ldconfig & prelink.
 RUN  curl -v -- https://dl.trikset.com/ts/fresh/checker/checker-linux-release-${CHECKER_TAG}.tar.xz \
       | tar xvJ
@@ -13,4 +25,3 @@ RUN useradd -M -d /sandbox sandbox \
     && ldconfig -v
 ENV LANG ru_RU.UTF-8
 RUN du -csh /* 2>/dev/null | sort -h || :
-
