@@ -133,9 +133,7 @@ qReal::IdList NxtBlocksFactory::blocksToDisable() const
 
 qReal::IdList NxtBlocksFactory::blocksToHide() const
 {
-	return {
-		id("PreconditionalLoop")
-		, id("Join")
+	return { id("Join")
 		, id("SendMessageThreads")
 		, id("ReceiveMessageThreads")
 		, id("KillThread")
