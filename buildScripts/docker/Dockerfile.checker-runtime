@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
 ENV DEBIAN_FRONTEND noninteractive
+ARG CHECKER_TAG=latest
 #Run everything at once to create a single layer
 RUN set -eu \
     && apt-get update \

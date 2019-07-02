@@ -1,10 +1,10 @@
 FROM trikset/checker-runtime
 MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
 ENV DEBIAN_FRONTEND noninteractive
-
+ARG CHECKER_TAG=master
 # Add binaries before ldconfig & prelink.
-RUN curl https://dl.trikset.com/ts/fresh/checker/checker-linux-release-2019.4.tar.xz \
-  | tar xvJ
+RUN  curl -v -- https://dl.trikset.com/ts/fresh/checker/checker-linux-release-${CHECKER_TAG}.tar.xz \
+      | tar xvJ
 
 #Run everything at once to create a single layer
 RUN useradd -M -d /sandbox sandbox \
