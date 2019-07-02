@@ -76,7 +76,6 @@ QWidget *StartWidget::createMainWidget()
 	contentsLayout->setStretch(1, 10);
 
 	result->setLayout(mainLayout);
-	result->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
 	return result;
 }
 
