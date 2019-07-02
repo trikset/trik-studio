@@ -143,7 +143,7 @@ void RobotModel::countMotorTurnover()
 	for (Wheel * const motor : mMotors) {
 		const PortInfo port = mMotors.key(motor);
 		const qreal degrees = Timeline::timeInterval * motor->spoiledSpeed * mRobotModel.onePercentAngularVelocity();
-		const qreal actualDegrees = mPhysicsEngine->isRobotStuck() ? 0 : degrees;
+		const qreal actualDegrees = mPhysicsEngine->isRobotStuck() ? -degrees : degrees;
 		mTurnoverEngines[mMotorToEncoderPortMap[port]] += actualDegrees;
 		if (motor->isUsed && (motor->activeTimeType == DoByLimit)
 				&& (mTurnoverEngines[mMotorToEncoderPortMap[port]] >= motor->degrees))
