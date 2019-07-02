@@ -1089,7 +1089,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+138"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+137"/>
         <source>New project</source>
         <translation>Создать проект</translation>
     </message>
