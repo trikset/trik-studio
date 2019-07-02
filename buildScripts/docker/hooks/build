@@ -3,4 +3,4 @@ set -xueo pipefail
 DOCKER_TAG=${DOCKER_TAG:-latest}
 DOCKERFILE_PATH=${DOCKERFILE_PATH:-${1:-Dockerfile}}
 IMAGE_NAME=${IMAGE_NAME:-${2:-$RANDOM}}
-docker build --build-arg CHECKER_TAG=$( [ $DOCKER_TAG = latest ] && echo master || echo $DOCKER_TAG) -f $DOCKERFILE_PATH -t $IMAGE_NAME .
+docker build --build-arg CHECKER_TAG="$( [ "${DOCKER_TAG}" = latest ] && echo master || echo "${DOCKER_TAG}")" -f "${DOCKERFILE_PATH}" -t "${IMAGE_NAME}" .
