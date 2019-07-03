@@ -378,7 +378,13 @@ void TrikBrick::wait(int milliseconds)
 		QScopedPointer<utils::AbstractTimer, DeleteLater> t(timeline->produceTimer());
 		QEventLoop loop;
 
-		auto mainHandler = [&t,this,timeline,&loop]() {
+		QSharedPointer<bool> called(new bool(false));
+
+		auto mainHandler = [&t,this,timeline,&loop, called]() {
+			if (*called) {
+				return;
+			}
+			*called = true;
 			disconnect(this, &TrikBrick::stopWaiting, nullptr, nullptr);
 			disconnect(timeline, &twoDModel::model::Timeline::beforeStop, nullptr, nullptr);
 			disconnect(t.data(), &utils::AbstractTimer::timeout, nullptr, nullptr);
@@ -395,12 +401,13 @@ void TrikBrick::wait(int milliseconds)
 		// because timer is depends on twoDModel::model::Timeline
 		if (timeline->isStarted()) {
 			t->start(milliseconds);
-			connect(timeline, &twoDModel::model::Timeline::stopped, t.data(), mainHandler);
+			connect(timeline, &twoDModel::model::Timeline::stopped, this, mainHandler);
 			loop.exec();
 		} else {
 			mainHandler();
 		}
 	}
+
 }
 
 quint64 TrikBrick::time() const
