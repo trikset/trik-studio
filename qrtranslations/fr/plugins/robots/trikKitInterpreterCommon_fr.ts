@@ -99,12 +99,12 @@
     <name>trik::TrikBrick</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+128"/>
-        <location line="+293"/>
+        <location line="+300"/>
         <source>Trying to read from file %1 failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-238"/>
+        <location line="-245"/>
         <source>No configured motor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
