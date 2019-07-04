@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #pragma once
-
+#include <QMetaType>
 namespace qReal {
 namespace interpretation {
 
@@ -30,3 +30,5 @@ enum class StopReason
 
 }
 }
+
+Q_DECLARE_METATYPE(qReal::interpretation::StopReason)

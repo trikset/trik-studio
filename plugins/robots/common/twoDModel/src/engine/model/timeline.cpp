@@ -28,6 +28,13 @@ Timeline::Timeline(QObject *parent)
 	, mIsStarted(false)
 	, mTimestamp(0)
 {
+	static volatile auto registered = false;
+	if (!registered) {
+		// For queued signals with argument of this type
+		qRegisterMetaType<qReal::interpretation::StopReason>();
+		registered = true;
+	}
+
 	connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimer()));
 	mTimer.setInterval(defaultRealTimeInterval);
 }
@@ -116,7 +123,7 @@ quint64 Timeline::timestamp() const
 
 utils::AbstractTimer *Timeline::produceTimer()
 {
-	auto &&connection = (QThread::currentThread() != this->thread()) ?
+	auto connection = (QThread::currentThread() != this->thread()) ?
 				Qt::BlockingQueuedConnection : Qt::DirectConnection;
 	utils::AbstractTimer *t = nullptr;
 	QMetaObject::invokeMethod(this, "produceTimerImpl", connection, Q_RETURN_ARG(utils::AbstractTimer *, t));
