@@ -124,7 +124,9 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 		echo $solutionFailedOnOwnFieldMessage
 		sync
 		cat "$reportFile"
-		exit 1
+		if [ ! -f "$mainFolderWithFields/no-stop-on-fail" ]; then
+			exit 1
+		fi
 	fi
 fi
 
@@ -178,8 +180,10 @@ if [ -d "$mainFolderWithFields" ]; then
 			echo "$(pwd)/fields/$fileNameWithoutExtension/$i" > "$failedFieldFile"
 			sync
 			cat "$reportFile"
-			rm -f "$solutionCopy"
-			exit 1
+			if [ ! -f "$mainFolderWithFields/no-stop-on-fail" ]; then
+				rm -f "$solutionCopy"
+				exit 1
+			fi
 		fi
 
 		log "Checker is done"
