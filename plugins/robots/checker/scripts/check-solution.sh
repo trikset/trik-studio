@@ -52,7 +52,7 @@ solutionFailedOnOtherFieldMessage="[ { \"level\": \"error\", \"message\": \"Ре
 fileWithPath=$1
 fileName="${fileWithPath##*/}"
 fileNameWithoutExtension="${fileName%.*}"
-jsFile=${2:-}
+scriptFile=${2:-}
 
 mainFolderWithFields="$fieldsFolder/$fileNameWithoutExtension"
 
@@ -144,7 +144,7 @@ if [ -d "$mainFolderWithFields" ]; then
 		fi
 
 		log "Field: $i, running $patcher $solutionCopy $mainFolderWithFields/$i..."
-		$patcher "$solutionCopy" "$mainFolderWithFields/$i" "$jsFile"
+		$patcher "$solutionCopy" "$mainFolderWithFields/$i" "$scriptFile"
 		if [ $? -ne 0 ]; then
 			echo $internalErrorMessage
 			log "Patching failed, aborting"
