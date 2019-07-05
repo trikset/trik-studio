@@ -183,6 +183,13 @@ deploy:
       ARCH: 64
       APPVEYOR_PROJECT_SLUG: $(master_ci)
       
+  - provider: Environment
+    name: github-release
+    github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
+    on:
+      APPVEYOR_REPO_TAG: true
+      APPVEYOR_PROJECT_SLUG: $(master_ci)
+
 on_finish:
   - ccache -s
   - bash -c "env LC_ALL=C date -u"
