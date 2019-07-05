@@ -33,16 +33,18 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("save-file", QObject::tr("TRIK Studio save file to be patched."));
 	parser.addPositionalArgument("field", QObject::tr("XML file with prepared 2D model field."));
+	parser.addPositionalArgument("script-file", QObject::tr("Script file to be patched into save file."));
 
 	parser.process(app);
 
 	const QStringList positionalArgs = parser.positionalArguments();
-	if (positionalArgs.size() != 2) {
+	if (positionalArgs.size() != 3) {
 		parser.showHelp();
 	}
 
 	const QString saveFile = positionalArgs[0];
 	const QString field = positionalArgs[1];
+	const QString script = positionalArgs[2];
 
 	qrRepo::RepoApi repo(saveFile);
 
@@ -54,8 +56,23 @@ int main(int argc, char *argv[])
 	const QString fieldContents = fieldFile.readAll();
 
 	fieldFile.close();
-
 	repo.setMetaInformation("worldModel", fieldContents);
+
+	if (!script.isEmpty()) {
+		QFile scriptFile(script);
+		if (!scriptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			return 1;
+		}
+
+		const QString scriptContent = scriptFile.readAll();
+		repo.setMetaInformation("activeCode", scriptContent);
+
+		// this value should be changed in case of other script language
+		repo.setMetaInformation("activeCodeLanguageExtension", "js");
+
+		scriptFile.close();
+	}
+
 	if (!repo.saveAll()) {
 		return -1;
 	}

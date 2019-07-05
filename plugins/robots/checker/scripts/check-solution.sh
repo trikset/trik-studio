@@ -52,6 +52,7 @@ solutionFailedOnOtherFieldMessage="[ { \"level\": \"error\", \"message\": \"Ре
 fileWithPath=$1
 fileName="${fileWithPath##*/}"
 fileNameWithoutExtension="${fileName%.*}"
+scriptFile=${2:-}
 
 mainFolderWithFields="$fieldsFolder/$fileNameWithoutExtension"
 
@@ -123,7 +124,9 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 		echo $solutionFailedOnOwnFieldMessage
 		sync
 		cat "$reportFile"
-		exit 1
+		if [ ! -f "$mainFolderWithFields/no-stop-on-fail" ]; then
+			exit 1
+		fi
 	fi
 fi
 
@@ -141,7 +144,7 @@ if [ -d "$mainFolderWithFields" ]; then
 		fi
 
 		log "Field: $i, running $patcher $solutionCopy $mainFolderWithFields/$i..."
-		$patcher "$solutionCopy" "$mainFolderWithFields/$i"
+		$patcher "$solutionCopy" "$mainFolderWithFields/$i" "$scriptFile"
 		if [ $? -ne 0 ]; then
 			echo $internalErrorMessage
 			log "Patching failed, aborting"
@@ -177,8 +180,10 @@ if [ -d "$mainFolderWithFields" ]; then
 			echo "$(pwd)/fields/$fileNameWithoutExtension/$i" > "$failedFieldFile"
 			sync
 			cat "$reportFile"
-			rm -f "$solutionCopy"
-			exit 1
+			if [ ! -f "$mainFolderWithFields/no-stop-on-fail" ]; then
+				rm -f "$solutionCopy"
+				exit 1
+			fi
 		fi
 
 		log "Checker is done"
