@@ -64,7 +64,7 @@ matrix:
 
 
 before_install:
-  - ( set -xueo pipefail ;  for f in $(git diff --name-only ${TRAVIS_COMMIT_RANGE:-"HEAD^"} || echo "_UNDEFINED_"); do ! ( for p in "*.md" .cirrus.yml appveyor.yml "buildScripts/docker/*" ; do  [[ $f != $p ]] || exit 0 ; done ) || exit 0 ; done ) && exec travis_terminate 0 || true
+  - if ./buildScripts/travis/has_only_skipped_files.sh ; then exec travis_terminate 0 ; fi
   - time wait $EARLY_START_DOCKER_PULL_PID || true
   - ./buildScripts/travis/before_install.sh
   - export CCACHE_CONFIGPATH=$HOME/ccache.conf
