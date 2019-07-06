@@ -64,7 +64,7 @@ matrix:
 
 
 before_install:
-  - if ./buildScripts/travis/has_only_skipped_files.sh ; then exec travis_terminate 0 ; fi
+  - if ./buildScripts/travis/has_only_skipped_files.sh ; then travis_terminate 0 ; fi
   - time wait $EARLY_START_DOCKER_PULL_PID || true
   - ./buildScripts/travis/before_install.sh
   - export CCACHE_CONFIGPATH=$HOME/ccache.conf
