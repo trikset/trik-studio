@@ -370,44 +370,29 @@ void TrikBrick::wait(int milliseconds)
 {
 	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
 
-	if (timeline->isStarted()) {
-		struct DeleteLater {
-			static void cleanup(QObject *o) { o->deleteLater(); }
-		};
-
-		QScopedPointer<utils::AbstractTimer, DeleteLater> t(timeline->produceTimer());
-		QEventLoop loop;
-
-		QSharedPointer<bool> called(new bool(false));
-
-		auto mainHandler = [&t,this,timeline,&loop, called]() {
-			if (*called) {
-				return;
-			}
-			*called = true;
-			disconnect(this, &TrikBrick::stopWaiting, nullptr, nullptr);
-			disconnect(timeline, &twoDModel::model::Timeline::beforeStop, nullptr, nullptr);
-			disconnect(t.data(), &utils::AbstractTimer::timeout, nullptr, nullptr);
-			loop.quit();
-		};
-
-		connect(t.data(), &utils::AbstractTimer::timeout, this, mainHandler);
-		connect(this, &TrikBrick::stopWaiting, this, mainHandler);
-
-		// timers that are produced by produceTimer() doesn't use stop singal
-		// be careful, one who use just utils::AbstractTimer can stuck
-		connect(timeline, &twoDModel::model::Timeline::beforeStop, this, mainHandler);
-
-		// because timer is depends on twoDModel::model::Timeline
-		if (timeline->isStarted()) {
-			t->start(milliseconds);
-			connect(timeline, &twoDModel::model::Timeline::stopped, this, mainHandler);
-			loop.exec();
-		} else {
-			mainHandler();
-		}
+	if (!timeline->isStarted()) {
+		return;
 	}
 
+	QEventLoop loop;
+
+	QScopedPointer<utils::AbstractTimer> t(timeline->produceTimer());
+	connect(t.data(), &utils::AbstractTimer::timeout, &loop, &QEventLoop::quit);
+
+	// This one is from brick.reset(), that is called for toolbar Stop button
+	connect(this, &TrikBrick::stopWaiting, &loop, &QEventLoop::quit);
+
+	// Old comment:
+	// timers that are produced by produceTimer() doesn't use stop singal
+	// be careful, one who use just utils::AbstractTimer can stuck
+	// New one: do we really need to connect to both signals?
+	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
+	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
+
+	if (timeline->isStarted()) {
+		t->start(milliseconds);
+		loop.exec();
+	}
 }
 
 quint64 TrikBrick::time() const
