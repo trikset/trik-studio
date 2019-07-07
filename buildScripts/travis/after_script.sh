@@ -3,18 +3,16 @@ set -euxo pipefail
 $EXECUTOR env CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" ccache -s
 case $TRAVIS_OS_NAME in
   osx)
-    QTBIN=/usr/local/opt/qt/bin
     QTIFWBIN=/usr/local/bin
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
-    QTBIN=/Qt/5.12.3/gcc_64/bin
     QTIFWBIN=/Qt/Tools/QtInstallerFramework/3.0/bin
     TSNAME=trik-studio-installer-linux-$TRAVIS_BRANCH.run
     ;;
   *) exit 1 ;;
 esac
-
+QTBIN=${QTBIN:-$(qmake -query QT_HOST_BINS)}
 df -h .
 
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
