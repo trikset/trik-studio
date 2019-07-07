@@ -7,12 +7,12 @@ case $TRAVIS_OS_NAME in
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
-    QTIFWBIN=$(find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1)
+    QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
     TSNAME=trik-studio-installer-linux-$TRAVIS_BRANCH.run
     ;;
   *) exit 1 ;;
 esac
-QTBIN=${QTBIN:-$($EXECUTOR qmake -query QT_HOST_BINS)}
+QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 df -h .
 
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
