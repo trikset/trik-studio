@@ -188,6 +188,7 @@ deploy:
     name: github-release
     github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
     on:
+      ARCH: 32
       APPVEYOR_REPO_TAG: true
       APPVEYOR_PROJECT_SLUG: $(master_ci)
 
