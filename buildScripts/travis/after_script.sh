@@ -7,7 +7,7 @@ case $TRAVIS_OS_NAME in
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
-    QTIFWBIN=/Qt/Tools/QtInstallerFramework/3.0/bin
+    QTIFWBIN=$(find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1)
     TSNAME=trik-studio-installer-linux-$TRAVIS_BRANCH.run
     ;;
   *) exit 1 ;;
