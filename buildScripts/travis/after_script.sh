@@ -12,7 +12,7 @@ case $TRAVIS_OS_NAME in
     ;;
   *) exit 1 ;;
 esac
-QTBIN=${QTBIN:-$(qmake -query QT_HOST_BINS)}
+QTBIN=${QTBIN:-$($EXECUTOR qmake -query QT_HOST_BINS)}
 df -h .
 
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
