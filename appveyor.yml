@@ -61,14 +61,16 @@ init:
   - set NEED_AUTOZIP=false
   - set NEED_BINZIP=false
   - set NEED_INSTALLER=false
-  - set FULL_MESSAGE=%APPVEYOR_PULL_REQUEST_TITLE% %APPVEYOR_REPO_COMMIT_MESSAGE% %APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED%
-  - if "%FULL_MESSAGE:[INSTALLER]=%" NEQ "%FULL_MESSAGE%" (set NEED_INSTALLER=true)
-  - if "%FULL_MESSAGE:[BINZIP]=%" NEQ "%FULL_MESSAGE%" (set NEED_BINZIP=true)
-  - if "%FULL_MESSAGE:[AUTOZIP]=%" NEQ "%FULL_MESSAGE%" (set NEED_AUTOZIP=true)
+#TODO: multiline %APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED% can cause problems
+  - 'set FULL_MESSAGE=%APPVEYOR_PULL_REQUEST_TITLE% %APPVEYOR_REPO_COMMIT_MESSAGE%'
+  - 'echo #%FULL_MESSAGE%#'
+  - 'if "%FULL_MESSAGE:[INSTALLER]=%" NEQ "%FULL_MESSAGE%" ( set "NEED_INSTALLER=true" )'
+  - 'if "%FULL_MESSAGE:[BINZIP]=%"    NEQ "%FULL_MESSAGE%" ( set "NEED_BINZIP=true"    )'
+  - 'if "%FULL_MESSAGE:[AUTOZIP]=%"   NEQ "%FULL_MESSAGE%" ( set "NEED_AUTOZIP=true"   )'
 # this is a push/merge for branch (else it is a PR)
   - if "x%appveyor_pull_request_number%" EQU "x" (set NEED_AUTOZIP=true)
 #this is a tagged commit build
-  - if "%APPVEYOR_REPO_TAG%" EQU "true" (set "NEED_INSTALLER=true" && set NEED_AUTOZIP=true)
+  - if "%APPVEYOR_REPO_TAG%" EQU "true" ( set "NEED_INSTALLER=true" && set NEED_AUTOZIP=true )
   - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
   - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
   - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
