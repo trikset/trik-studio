@@ -15,6 +15,8 @@ esac
 QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 df -h .
 
+$EXECUTOR bash -ic "ccache -s"
+
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
       git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
