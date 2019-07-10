@@ -99,16 +99,6 @@ inline ParserRef<TokenType> operator & (const ParserRef<TokenType> &a, const Tok
 			[] (Token<TokenType> const &token) { return new TemporaryToken<TokenType>(token); }));
 }
 
-/// Syntactic sugar operator for concatenation of tokens and tokens.
-template<typename TokenType>
-inline ParserRef<TokenType> operator & (const TokenType &token1, const TokenType &token2)
-{
-	return ParserRef<TokenType>(new ConcatenationParser<TokenType>(
-			token1 >> [] (Token<TokenType> const &token) { return new TemporaryToken<TokenType>(token); }
-			, token2 >> [] (Token<TokenType> const &token) { return new TemporaryToken<TokenType>(token); })
-			);
-}
-
 /// Operator to discard a token, used to ignore a token from a token stream. For example, A ::= '(' B ')' may be
 /// represented as ParserRef a = -TokenType::openingBracket & b & -TokenType::closingBracket, in this example
 /// parser A will directly return value of B. Connections will be lost.
