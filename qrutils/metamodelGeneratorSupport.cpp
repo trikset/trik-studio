@@ -19,7 +19,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QDesktopWidget>
-
+#include <QScreen>
 #include "xmlUtils.h"
 #include "outFile.h"
 
@@ -80,7 +80,7 @@ void MetamodelGeneratorSupport::loadPlugin(const QString &directoryName
 
 	QApplication::processEvents();
 
-	const QRect screenRect = qApp->desktop()->availableGeometry();
+	const QRect screenRect = QGuiApplication::screens().first()->availableGeometry();
 	progress->move(screenRect.width() / 2 - progressBarWidth / 2
 			, screenRect.height() / 2 - progressBarHeight / 2);
 	progress->setFixedWidth(progressBarWidth);
