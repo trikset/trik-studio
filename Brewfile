@@ -1,4 +1,4 @@
-tap "iakov/homebrew-qtifw"
+tap "jmuelbert/homebrew-qtifw"
 tap "hudochenkov/sshpass"
 brew "qt-ifw"
 brew "qt"
