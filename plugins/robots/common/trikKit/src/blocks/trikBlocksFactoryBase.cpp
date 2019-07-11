@@ -54,6 +54,7 @@
 #include "details/waitGamepadDisconnectBlock.h"
 #include "details/waitGamepadWheelBlock.h"
 #include "details/waitPadPressBlock.h"
+#include "details/trikWaitForGyroscopeBlock.h"
 
 #include "details/writeToFileBlock.h"
 #include "details/removeFileBlock.h"
@@ -108,7 +109,7 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new WaitForSonarDistanceBlock(mRobotModelManager->model()
 				, kitBase::robotModel::DeviceInfo::create<robotModel::parts::TrikSonarSensor>());
 	} else if (elementMetatypeIs(element, "TrikWaitForGyroscope")) {
-		return new WaitForGyroscopeSensorBlock(mRobotModelManager->model());
+		return new details::TrikWaitForGyroscopeBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForAccelerometer")) {
 		return new WaitForAccelerometerSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForMotion")) {
@@ -243,7 +244,7 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {
 		result
-				<< id("TrikWaitForGyroscope")
+//				<< id("TrikWaitForGyroscope")
 				<< id("TrikWaitForAccelerometer")
 				<< id("TrikSystem")
 				<< id("TrikWaitForMotion")

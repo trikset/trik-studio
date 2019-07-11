@@ -16,6 +16,7 @@
 
 #include <utils/abstractTimer.h>
 
+#include "kitBase/robotModel/robotParts/vectorSensor.h"
 #include "kitBase/robotModel/robotParts/scalarSensor.h"
 #include "kitBase/robotModel/robotModelUtils.h"
 
@@ -34,18 +35,31 @@ void WaitForSensorBlock::run()
 
 	/// @todo Works only with scalar sensors.
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
-	robotParts::ScalarSensor * const sensor = RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
-	if (sensor) {
-		connect(sensor, &robotParts::ScalarSensor::newData
+	robotParts::ScalarSensor * const scalarSensor = RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
+	robotParts::VectorSensor * const vectorSensor = RobotModelUtils::findDevice<robotParts::VectorSensor>(mRobotModel, mPort);
+	if (scalarSensor) {
+		connect(scalarSensor, &robotParts::ScalarSensor::newData
 				, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
-		connect(sensor, &robotParts::AbstractSensor::failure
+		connect(scalarSensor, &robotParts::AbstractSensor::failure
 				, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
 		mActiveWaitingTimer->start();
-		sensor->read();
+		scalarSensor->read();
+	} else if (vectorSensor) {
+		connect(vectorSensor, &robotParts::VectorSensor::newData, this,
+				[this](QVector<int> reading) { this->responseSlot(this->converter(reading)); }, Qt::UniqueConnection);
+		connect(vectorSensor, &robotParts::AbstractSensor::failure
+				, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
+		mActiveWaitingTimer->start();
+		vectorSensor->read();
 	} else {
 		mActiveWaitingTimer->stop();
 		error(tr("%1 is not configured on port %2").arg(device().friendlyName(), mPort.userFriendlyName()));
 	}
+}
+
+int WaitForSensorBlock::converter(QVector<int> reading)
+{
+	return reading.size() == 0 ? 0 : reading[0];
 }
 
 void WaitForSensorBlock::timerTimeout()

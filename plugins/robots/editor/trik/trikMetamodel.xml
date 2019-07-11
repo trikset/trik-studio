@@ -1319,6 +1319,7 @@
 				<element name="TrikRemoveFile"/>
 			</group>
 			<group name="Wait">
+				<element name="TrikWaitForGyroscope"/>
 				<element name="TrikWaitForTouchSensor"/>
 				<element name="TrikWaitForLight"/>
 				<element name="TrikWaitForSonarDistance"/>
