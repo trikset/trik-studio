@@ -162,14 +162,15 @@ QRegExp SearchLineEdit::regexpFromText(const QString &text, SearchOptions option
 
 	switch (option) {
 		case SearchOptions::RegularExpression:
-			return result;
+			break;
 		case SearchOptions::CaseInsensitive:
 			result.setPatternSyntax(QRegExp::FixedString);
 			result.setCaseSensitivity(Qt::CaseInsensitive);
-			return result;
+			break;
 		case SearchOptions::CaseSensitive:
 			result.setPatternSyntax(QRegExp::FixedString);
 			result.setCaseSensitivity(Qt::CaseSensitive);
-			return result;
+			break;
 	}
+	return result;
 }

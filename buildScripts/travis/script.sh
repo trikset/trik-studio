@@ -45,9 +45,9 @@ $EXECUTOR bash -ic "{ [ -r /root/.bashrc ] && source /root/.bashrc || true ; } ;
 && { which python && python -V || true ; } \
 && rm -f .qmake.cache \
 && qmake -Wall CONFIG+=$CONFIG $QMAKE_EXTRA $PROJECT.pro \
+&& rm -f build.log \
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
-&& ccache -s \
 && sh -c \"cd bin/$CONFIG && ls\" \
 && sh -c \"export ASAN_OPTIONS=$( [[ $TRAVIS_OS_NAME == linux ]] && echo detect_leaks=1 || :):detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 df -h .

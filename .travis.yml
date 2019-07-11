@@ -51,7 +51,7 @@ matrix:
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=small_debug_info CONFIG+=sanitize_address"
+      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Linux debug + vera + tests + translations"
     - os: osx
       language: cpp
@@ -60,7 +60,7 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS debug + tests"
-      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
+      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
 
 
 before_install:
@@ -83,7 +83,7 @@ script:
 after_script:
   - ./buildScripts/travis/after_script.sh
   - kill $HEARTBEAT
-  - tail -n 1000 build.log
+  - sync ; wc -l build.log ; tail -n 1000 build.log
 
 after_success:
   - true

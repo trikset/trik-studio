@@ -65,9 +65,9 @@ void WatchListWindow::updateVariables()
 		value = [this] (const QString &name) { return mNewParser->value<QVariant>(name); };
 	}
 
-	QStringList sortedIdentifiers = identifiers();
-	qSort(sortedIdentifiers);
-	for (const QString &identifier : sortedIdentifiers) {
+	auto sortedIdentifiers = identifiers();
+	std::sort(sortedIdentifiers.begin(), sortedIdentifiers.end());
+	for (auto &&identifier : sortedIdentifiers) {
 		if (mHiddenVariables.contains(identifier)) {
 			continue;
 		}
