@@ -50,6 +50,7 @@
 #include "simpleGenerators/waitPadPressGenerator.h"
 #include "simpleGenerators/fileWriteGenerator.h"
 #include "simpleGenerators/removeFileGenerator.h"
+#include "simpleGenerators/waitForGyroscopeBlockGenerator.h"
 #include "parts/trikDeviceVariables.h"
 
 using namespace trik;
@@ -142,6 +143,8 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 		return new FileWriteGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikRemoveFile") {
 		return new RemoveFileGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "TrikWaitForGyroscope") {
+		return new WaitForGyroscopeBlockGenerator(mRepo, customizer, id, this);
 	}
 
 	return GeneratorFactoryBase::simpleGenerator(id, customizer);

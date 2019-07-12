@@ -138,6 +138,7 @@
         <file>templates/wait/motion.t</file>
         <file>templates/wait/padPress.t</file>
         <file>templates/wait/button.t</file>
+        <file>templates/wait/gyroscope.t</file>
         <file>templates/subprograms/subprogramCall.t</file>
         <file>templates/subprograms/declarationsSectionHeader.t</file>
         <file>templates/subprograms/forwardDeclaration.t</file>
