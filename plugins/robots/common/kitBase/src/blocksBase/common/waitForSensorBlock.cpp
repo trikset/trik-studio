@@ -35,8 +35,10 @@ void WaitForSensorBlock::run()
 
 	/// @todo Works only with scalar sensors.
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
-	robotParts::ScalarSensor * const scalarSensor = RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
-	robotParts::VectorSensor * const vectorSensor = RobotModelUtils::findDevice<robotParts::VectorSensor>(mRobotModel, mPort);
+	robotParts::ScalarSensor * const scalarSensor =
+			RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
+	robotParts::VectorSensor * const vectorSensor =
+			RobotModelUtils::findDevice<robotParts::VectorSensor>(mRobotModel, mPort);
 	if (scalarSensor) {
 		connect(scalarSensor, &robotParts::ScalarSensor::newData
 				, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);

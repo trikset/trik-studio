@@ -65,7 +65,7 @@
 <context>
     <name>kitBase::blocksBase::common::WaitForSensorBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForSensorBlock.cpp" line="+47"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForSensorBlock.cpp" line="+58"/>
         <source>%1 is not configured on port %2</source>
         <translation>%1 n&apos;est pas configuré sur le port %2</translation>
     </message>
