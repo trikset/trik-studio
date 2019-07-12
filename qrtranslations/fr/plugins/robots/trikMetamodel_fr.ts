@@ -4,1155 +4,1155 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="26"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="+26"/>
         <source>TrikAnalogSensorBlock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="50"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="241"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1526"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1939"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2058"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2129"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2287"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2333"/>
+        <location line="+24"/>
+        <location line="+191"/>
+        <location line="+1285"/>
+        <location line="+413"/>
+        <location line="+119"/>
+        <location line="+71"/>
+        <location line="+158"/>
+        <location line="+46"/>
         <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="61"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1377"/>
+        <location line="-2272"/>
+        <location line="+1316"/>
         <source>Angular Servo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="63"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1379"/>
+        <location line="-1314"/>
+        <location line="+1316"/>
         <source>Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="70"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1386"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1440"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1548"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1629"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1684"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1739"/>
+        <location line="-1309"/>
+        <location line="+1316"/>
+        <location line="+54"/>
+        <location line="+108"/>
+        <location line="+81"/>
+        <location line="+55"/>
+        <location line="+55"/>
         <source>Ports:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="78"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1394"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2495"/>
+        <location line="-1661"/>
+        <location line="+1316"/>
+        <location line="+1101"/>
         <source>Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="79"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1395"/>
+        <location line="-2416"/>
+        <location line="+1316"/>
         <source>°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="103"/>
+        <location line="-1292"/>
         <source>E1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="103"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1419"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1465"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1573"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1608"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1663"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1718"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1772"/>
+        <location line="+0"/>
+        <location line="+1316"/>
+        <location line="+46"/>
+        <location line="+108"/>
+        <location line="+35"/>
+        <location line="+55"/>
+        <location line="+55"/>
+        <location line="+54"/>
         <source>Ports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="104"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="330"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="331"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="403"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="404"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="473"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="475"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="602"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="603"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1420"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1832"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1994"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2057"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2128"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2286"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2527"/>
+        <location line="-1668"/>
+        <location line="+226"/>
+        <location line="+1"/>
+        <location line="+72"/>
+        <location line="+1"/>
+        <location line="+69"/>
+        <location line="+2"/>
+        <location line="+127"/>
+        <location line="+1"/>
+        <location line="+817"/>
+        <location line="+412"/>
+        <location line="+162"/>
+        <location line="+63"/>
+        <location line="+71"/>
+        <location line="+158"/>
+        <location line="+241"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="104"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1420"/>
+        <location line="-2423"/>
+        <location line="+1316"/>
         <source>Angle (degrees)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="115"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="126"/>
+        <location line="-1305"/>
+        <location line="+11"/>
         <source>Detect by Videocamera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="117"/>
+        <location line="-9"/>
         <source>Initializes videocamera line or object detector with the color of the object in the middle of the camera`s sight.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="124"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="623"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1247"/>
+        <location line="+7"/>
+        <location line="+499"/>
+        <location line="+624"/>
         <source>Mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="155"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="655"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1278"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1771"/>
+        <location line="-1092"/>
+        <location line="+500"/>
+        <location line="+623"/>
+        <location line="+493"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="166"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="169"/>
+        <location line="-1605"/>
+        <location line="+3"/>
         <source>Line Detector into Variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="168"/>
+        <location line="-1"/>
         <source>Stores videocamera line detector`s value into a given variable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="182"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2150"/>
+        <location line="+14"/>
+        <location line="+1968"/>
         <source>Variable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="206"/>
+        <location line="-1944"/>
         <source>err</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="206"/>
+        <location line="+0"/>
         <source>Variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="217"/>
+        <location line="+11"/>
         <source>TrikDigitalSensorBlock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="252"/>
+        <location line="+35"/>
         <source>Draw Arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="254"/>
+        <location line="+2"/>
         <source>Draws the arc defined by the rectangle beginning at (x, y) with the specified width and height, and the given startAngle and spanAngle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="261"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="351"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="496"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="550"/>
+        <location line="+7"/>
+        <location line="+90"/>
+        <location line="+145"/>
+        <location line="+54"/>
         <source>X:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="269"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="359"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="504"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="558"/>
+        <location line="-281"/>
+        <location line="+90"/>
+        <location line="+145"/>
+        <location line="+54"/>
         <source>Y:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="277"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="367"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="566"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1166"/>
+        <location line="-281"/>
+        <location line="+90"/>
+        <location line="+199"/>
+        <location line="+600"/>
         <source>Width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="285"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="375"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="574"/>
+        <location line="-881"/>
+        <location line="+90"/>
+        <location line="+199"/>
         <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="293"/>
+        <location line="-281"/>
         <source>Start Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="301"/>
+        <location line="+8"/>
         <source>Span Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="325"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="329"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="400"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="402"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="529"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="530"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="599"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="601"/>
+        <location line="+24"/>
+        <location line="+4"/>
+        <location line="+71"/>
+        <location line="+2"/>
+        <location line="+127"/>
+        <location line="+1"/>
+        <location line="+69"/>
+        <location line="+2"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="325"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="400"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="599"/>
+        <location line="-276"/>
+        <location line="+75"/>
+        <location line="+199"/>
         <source>Height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="326"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="401"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="472"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="528"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="600"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1102"/>
+        <location line="-273"/>
+        <location line="+75"/>
+        <location line="+71"/>
+        <location line="+56"/>
+        <location line="+72"/>
+        <location line="+502"/>
         <source>Redraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="327"/>
+        <location line="-775"/>
         <source>SpanAngle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="328"/>
+        <location line="+1"/>
         <source>StartAngle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="329"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="402"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="601"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1190"/>
+        <location line="+1"/>
+        <location line="+73"/>
+        <location line="+199"/>
+        <location line="+589"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="330"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="403"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="529"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="602"/>
+        <location line="-860"/>
+        <location line="+73"/>
+        <location line="+126"/>
+        <location line="+73"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="331"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="404"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="530"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="603"/>
+        <location line="-271"/>
+        <location line="+73"/>
+        <location line="+126"/>
+        <location line="+73"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="342"/>
+        <location line="-261"/>
         <source>Draw Ellipse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="344"/>
+        <location line="+2"/>
         <source>Draws the ellipse defined by the rectangle beginning at (x, y) with the given width and height.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="399"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="598"/>
+        <location line="+55"/>
+        <location line="+199"/>
         <source>Filled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="415"/>
+        <location line="-183"/>
         <source>Draw Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="417"/>
+        <location line="+2"/>
         <source>Draws a segment on the robot screen. The parameters specify the ends of the segment.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="424"/>
+        <location line="+7"/>
         <source>X1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="432"/>
+        <location line="+8"/>
         <source>Y1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="440"/>
+        <location line="+8"/>
         <source>X2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="448"/>
+        <location line="+8"/>
         <source>Y2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="473"/>
+        <location line="+25"/>
         <source>X1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="474"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="476"/>
+        <location line="+1"/>
+        <location line="+2"/>
         <source>10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="474"/>
+        <location line="-2"/>
         <source>X2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="475"/>
+        <location line="+1"/>
         <source>Y1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="476"/>
+        <location line="+1"/>
         <source>Y2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="487"/>
+        <location line="+11"/>
         <source>Draw Pixel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="489"/>
+        <location line="+2"/>
         <source>Draws one pixel in the specified coordinates on the robot screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="541"/>
+        <location line="+52"/>
         <source>Draw Rectangle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="543"/>
+        <location line="+2"/>
         <source>Draws a rectangle on the robot screen. The parameters specify the coordinates of top-left corner, the width and the height of the rectangle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="614"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="625"/>
+        <location line="+71"/>
+        <location line="+11"/>
         <source>Initialize Videocamera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="616"/>
+        <location line="-9"/>
         <source>Enables line or object or color detector by videocamera and draws videostream on the robot`s screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="666"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="669"/>
+        <location line="+50"/>
+        <location line="+3"/>
         <source>Enable Video Streaming</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="668"/>
+        <location line="-1"/>
         <source>Enables video stream on robot. Video then can be watched on TRIK gamepad or in browser using URL http://ROBOT.IP.ADDRESS:8080/?action=stream</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="698"/>
+        <location line="+30"/>
         <source>Grayscaled</source>
         <translation>Niveaux de gris</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="699"/>
+        <location line="+1"/>
         <source>Quality</source>
         <translation>Qualité</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="710"/>
+        <location line="+11"/>
         <source>Led</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="712"/>
+        <location line="+2"/>
         <source>Sets the color of the LED on the robot`s front panel.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="719"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1077"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1122"/>
+        <location line="+7"/>
+        <location line="+358"/>
+        <location line="+45"/>
         <source>Color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="744"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1101"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1146"/>
+        <location line="-378"/>
+        <location line="+357"/>
+        <location line="+45"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="800"/>
+        <location line="-346"/>
         <source>Play Tone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="757"/>
+        <location line="-43"/>
         <source>Plays on the robot a sound file (.wav or .mp3) previously uploaded to it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="755"/>
+        <location line="-2"/>
         <source>Play Sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="764"/>
+        <location line="+9"/>
         <source>File name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="789"/>
+        <location line="+25"/>
         <source>media/beep.wav</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="789"/>
+        <location line="+0"/>
         <source>File Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="802"/>
+        <location line="+13"/>
         <source>Plays on the robot a sound with the given frequency and duration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="809"/>
+        <location line="+7"/>
         <source>Frequency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="810"/>
+        <location line="+1"/>
         <source>Hz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="843"/>
+        <location line="+33"/>
         <source>Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="819"/>
+        <location line="-24"/>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="654"/>
+        <location line="-165"/>
         <source>Draw stream</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="818"/>
+        <location line="+164"/>
         <source>Duration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="843"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="844"/>
+        <location line="+25"/>
+        <location line="+1"/>
         <source>1000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="844"/>
+        <location line="+0"/>
         <source>Frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="855"/>
+        <location line="+11"/>
         <source>Remove File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="857"/>
+        <location line="+2"/>
         <source>Removes a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="864"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2599"/>
+        <location line="+7"/>
+        <location line="+1735"/>
         <source>File:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="888"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2631"/>
+        <location line="-1711"/>
+        <location line="+1743"/>
         <source>output.txt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="888"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2631"/>
+        <location line="-1743"/>
+        <location line="+1743"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="899"/>
+        <location line="-1732"/>
         <source>Sad Smile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="901"/>
+        <location line="+2"/>
         <source>Draws a sad smile on the robot`s screen :(</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="936"/>
+        <location line="+35"/>
         <source>Say</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="938"/>
+        <location line="+2"/>
         <source>Synthesizes the given phrase and plays it on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Text&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="945"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2607"/>
+        <location line="+7"/>
+        <location line="+1662"/>
         <source>Text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="969"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1366"/>
+        <location line="-1638"/>
+        <location line="+397"/>
         <source>Evaluate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="970"/>
+        <location line="-396"/>
         <source>Hi!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="970"/>
+        <location line="+0"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="981"/>
+        <location line="+11"/>
         <source>Send message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="983"/>
+        <location line="+2"/>
         <source>Sends message to another robot.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="990"/>
+        <location line="+7"/>
         <source>Message:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="998"/>
+        <location line="+8"/>
         <source>Hull number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1034"/>
+        <location line="+36"/>
         <source>TrikSensorBlock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1068"/>
+        <location line="+34"/>
         <source>Background Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1070"/>
+        <location line="+2"/>
         <source>Sets the background color of the current picture on the robot`s screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1113"/>
+        <location line="+43"/>
         <source>Painter Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1115"/>
+        <location line="+2"/>
         <source>Sets the painter color.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1157"/>
+        <location line="+42"/>
         <source>Painter Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1159"/>
+        <location line="+2"/>
         <source>Sets the painter width.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1190"/>
+        <location line="+31"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1201"/>
+        <location line="+11"/>
         <source>Smile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1203"/>
+        <location line="+2"/>
         <source>Draws a smile on the robot`s screen :)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1238"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1249"/>
+        <location line="+35"/>
+        <location line="+11"/>
         <source>Stop Videocamera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1240"/>
+        <location line="-9"/>
         <source>Stops line or object or color detector by videocamera.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1289"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1292"/>
+        <location line="+49"/>
+        <location line="+3"/>
         <source>Disable Video Streaming</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1291"/>
+        <location line="-1"/>
         <source>Disables video stream on robot.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1331"/>
+        <location line="+40"/>
         <source>System Call</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1333"/>
+        <location line="+2"/>
         <source>Invokes bash script-style command on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Command&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1340"/>
+        <location line="+7"/>
         <source>Command:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1364"/>
+        <location line="+24"/>
         <source>Code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1365"/>
+        <location line="+1"/>
         <source>echo 123</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1365"/>
+        <location line="+0"/>
         <source>Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1419"/>
+        <location line="+54"/>
         <source>S1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1431"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1539"/>
+        <location line="+12"/>
+        <location line="+108"/>
         <source>Clear Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1433"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1541"/>
+        <location line="-106"/>
+        <location line="+108"/>
         <source>Nullifies tacho limit of the motors on the given ports.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1465"/>
+        <location line="-76"/>
         <source>E1, E2, E3, E4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1476"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1889"/>
+        <location line="+11"/>
+        <location line="+413"/>
         <source>Wait for Encoder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1478"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1891"/>
+        <location line="-411"/>
+        <location line="+413"/>
         <source>Waits till the tacho limit of the motor on the given port will reach the value of the &apos;Tacho Limit&apos; parameter.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1485"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1898"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2015"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2079"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2203"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2246"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2308"/>
+        <location line="-406"/>
+        <location line="+413"/>
+        <location line="+117"/>
+        <location line="+64"/>
+        <location line="+124"/>
+        <location line="+43"/>
+        <location line="+62"/>
         <source>Port:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1493"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1906"/>
+        <location line="-815"/>
+        <location line="+413"/>
         <source>Tacho Limit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1501"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1800"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1914"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1969"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2031"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2095"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2262"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2503"/>
+        <location line="-405"/>
+        <location line="+299"/>
+        <location line="+114"/>
+        <location line="+55"/>
+        <location line="+62"/>
+        <location line="+64"/>
+        <location line="+167"/>
+        <location line="+241"/>
         <source>Sign:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1527"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1834"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1940"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1995"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2059"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2130"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2288"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2528"/>
+        <location line="-976"/>
+        <location line="+307"/>
+        <location line="+106"/>
+        <location line="+55"/>
+        <location line="+64"/>
+        <location line="+71"/>
+        <location line="+158"/>
+        <location line="+240"/>
         <source>Sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1573"/>
+        <location line="-955"/>
         <source>B1, B2, B3, B4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1584"/>
+        <location line="+11"/>
         <source>TrikV6EngineMovementCommand</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1608"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1663"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1718"/>
+        <location line="+24"/>
+        <location line="+55"/>
+        <location line="+55"/>
         <source>M3, M4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1609"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1664"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1719"/>
+        <location line="-109"/>
+        <location line="+55"/>
+        <location line="+55"/>
         <source>100</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1609"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1664"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1719"/>
+        <location line="-110"/>
+        <location line="+55"/>
+        <location line="+55"/>
         <source>Power (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1620"/>
+        <location line="-99"/>
         <source>Motors Backward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1622"/>
+        <location line="+2"/>
         <source>Enables motors on the given ports in reverse mode with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1637"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1692"/>
+        <location line="+15"/>
+        <location line="+55"/>
         <source>Power:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1638"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1693"/>
+        <location line="-54"/>
+        <location line="+55"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1675"/>
+        <location line="-18"/>
         <source>Motors Forward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1677"/>
+        <location line="+2"/>
         <source>Enables motors on the given ports with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1730"/>
+        <location line="+53"/>
         <source>Stop Motors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1732"/>
+        <location line="+2"/>
         <source>Disables motors on the given ports.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1772"/>
+        <location line="+40"/>
         <source>M1, M2, M3, M4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1783"/>
+        <location line="+11"/>
         <source>Wait for Accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1792"/>
+        <location line="+9"/>
         <source>Acceleration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1808"/>
+        <location line="+16"/>
         <source>Axis:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1832"/>
+        <location line="+24"/>
         <source>Acceleration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1833"/>
+        <location line="+1"/>
         <source>Acceleration Axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1845"/>
+        <location line="+12"/>
         <source>Wait for Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1847"/>
+        <location line="+2"/>
         <source>Waits for press of a button on a brick.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1854"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2360"/>
+        <location line="+7"/>
+        <location line="+506"/>
         <source>Button:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1878"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2384"/>
+        <location line="-482"/>
+        <location line="+506"/>
         <source>Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1952"/>
+        <location line="-432"/>
         <source>Wait for Gyroscope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1954"/>
+        <location line="+2"/>
         <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees/sec&apos; parameter value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1961"/>
+        <location line="+7"/>
         <source>Degrees/sec:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1994"/>
+        <location line="+33"/>
         <source>Degrees/sec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2006"/>
+        <location line="+12"/>
         <source>Wait for Infrared Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2008"/>
+        <location line="+2"/>
         <source>Waits till the value returned by the infrared sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value. By default on ports A1 and A2 the distance is specified in centimeters (from 0 to 100). It is not recommended to plug IR sensor into other ports because its raw value will be processed by software on robot with expectation of another sensor type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2023"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2254"/>
+        <location line="+15"/>
+        <location line="+231"/>
         <source>Distance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2057"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2286"/>
+        <location line="-197"/>
+        <location line="+229"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2070"/>
+        <location line="-216"/>
         <source>Wait for Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2072"/>
+        <location line="+2"/>
         <source>Waits till the value returned by the light sensor on the given port will be greater or less than the given in the &apos;Percents&apos; parameter value (0 to 100).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2087"/>
+        <location line="+15"/>
         <source>Percents:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2128"/>
+        <location line="+41"/>
         <source>Percents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2141"/>
+        <location line="+13"/>
         <source>Wait for Message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2143"/>
+        <location line="+2"/>
         <source>Stores a message from another robot into a given variable. When no incoming messages are present at the moment, a robot will wait for incoming message if &apos;Synchronized&apos; property is true, and empty string will be assigned to a variable otherwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2158"/>
+        <location line="+15"/>
         <source>Synchronized:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2182"/>
+        <location line="+24"/>
         <source>Synchronized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2194"/>
+        <location line="+12"/>
         <source>Wait for Motion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2196"/>
+        <location line="+2"/>
         <source>Waits till the motion sensor on the given port is triggered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2197"/>
+        <location line="+1"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2237"/>
+        <location line="+40"/>
         <source>Wait for Ultrasonic Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2239"/>
+        <location line="+2"/>
         <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, from 0 to 300).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2299"/>
+        <location line="+60"/>
         <source>Wait for Touch Sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2301"/>
+        <location line="+2"/>
         <source>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (1, 2, 3 or 4).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2344"/>
+        <location line="+43"/>
         <source>Wait Gamepad Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2346"/>
+        <location line="+2"/>
         <source>Waits for Android gamepad &apos;magic button&apos; press. Buttons are identified by numbers from 1 to 5 (from left to right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2347"/>
+        <location line="+1"/>
         <source>Wait gamepad button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2395"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2398"/>
+        <location line="+48"/>
+        <location line="+3"/>
         <source>Wait for Gamepad Connect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2397"/>
+        <location line="-1"/>
         <source>Waits until Android gamepad is connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2437"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2440"/>
+        <location line="+40"/>
+        <location line="+3"/>
         <source>Wait for Gamepad Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2439"/>
+        <location line="-1"/>
         <source>Waits until Android gamepad is disconnected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2479"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2482"/>
+        <location line="+40"/>
+        <location line="+3"/>
         <source>Wait for Gamepad Wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2481"/>
+        <location line="-1"/>
         <source>Waits till the value returned by gamepad wheel be greater or less than the given in the &apos;Angle&apos; parameter value. Angle is measured from -100 (max left) to 100 (max right).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2527"/>
+        <location line="+46"/>
         <source>Angle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2539"/>
+        <location line="+12"/>
         <source>Wait Pad Press</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2541"/>
+        <location line="+2"/>
         <source>Waits for Android gamepad pad press (left pad has number 1, right pad - number 2).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2542"/>
+        <location line="+1"/>
         <source>Wait pad press</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2555"/>
+        <location line="+13"/>
         <source>Pad:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2579"/>
+        <location line="+24"/>
         <source>Pad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2590"/>
+        <location line="+11"/>
         <source>Write To File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2592"/>
+        <location line="+2"/>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="152"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+152"/>
         <source>RobotsDiagram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="159"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="160"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="161"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="162"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="163"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="164"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="165"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="166"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="167"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="168"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="169"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="170"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="171"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="172"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="173"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="174"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="175"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="176"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="177"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="178"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="179"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="180"/>
+        <location line="+7"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="181"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="182"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="183"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="184"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="185"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="186"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="187"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="188"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="189"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="190"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="191"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="192"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="193"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="194"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="195"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="196"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="197"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="198"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="199"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="200"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="201"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="202"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="203"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="204"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="205"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Drawing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1160,28 +1160,28 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1022"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="-1570"/>
         <source>Hull Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1023"/>
+        <location line="+1"/>
         <source>Message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1528"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="1941"/>
+        <location line="+505"/>
+        <location line="+413"/>
         <source>Tacho Limit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2183"/>
+        <location line="+242"/>
         <source>Variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="2632"/>
+        <location line="+449"/>
         <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1189,389 +1189,389 @@
 <context>
     <name>TrikMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+40"/>
         <source>E1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location line="+0"/>
         <source>E2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location line="+0"/>
         <source>E3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="245"/>
+        <location line="+0"/>
         <source>E4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location line="-12"/>
         <source>greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location line="+0"/>
         <source>less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location line="+0"/>
         <source>not greater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="233"/>
+        <location line="+0"/>
         <source>not less</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location line="-10"/>
+        <location line="+6"/>
         <source>black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location line="-6"/>
+        <location line="+6"/>
         <source>blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
+        <location line="-6"/>
+        <location line="+6"/>
+        <location line="+14"/>
         <source>green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
+        <location line="-20"/>
+        <location line="+6"/>
+        <location line="+14"/>
         <source>red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location line="-20"/>
+        <location line="+6"/>
         <source>white</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="229"/>
+        <location line="-6"/>
+        <location line="+6"/>
         <source>yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
+        <location line="+24"/>
         <source>Color sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
+        <location line="-22"/>
+        <location line="+22"/>
         <source>Line sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="231"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="253"/>
+        <location line="-22"/>
+        <location line="+22"/>
         <source>Object sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
+        <location line="-34"/>
         <source>norm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
+        <location line="+0"/>
         <source>x-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
+        <location line="+0"/>
         <source>y-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="219"/>
+        <location line="+0"/>
         <source>z-axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location line="+20"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location line="+0"/>
         <source>Inout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location line="+0"/>
         <source>Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="239"/>
+        <location line="+0"/>
         <source>Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
+        <location line="-18"/>
         <source>Composite</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
+        <location line="+0"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="221"/>
+        <location line="+0"/>
         <source>Shared</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
+        <location line="+6"/>
         <source>Concurrent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
+        <location line="+0"/>
         <source>Guarded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="227"/>
+        <location line="+0"/>
         <source>Sequential</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location line="+24"/>
         <source>B1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location line="+0"/>
         <source>B2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location line="+0"/>
         <source>B3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="251"/>
+        <location line="+0"/>
         <source>B4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="247"/>
+        <location line="-4"/>
         <source>A1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="247"/>
+        <location line="+0"/>
         <source>A2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="247"/>
+        <location line="+0"/>
         <source>A3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="247"/>
+        <location line="+0"/>
         <source>A4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="247"/>
+        <location line="+0"/>
         <source>A5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="247"/>
+        <location line="+0"/>
         <source>A6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
+        <location line="-4"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="243"/>
+        <location line="+0"/>
         <source>orange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="249"/>
+        <location line="+6"/>
         <source>D1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="249"/>
+        <location line="+0"/>
         <source>D2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
+        <location line="-24"/>
         <source>float</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location line="+30"/>
         <source>Package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location line="+0"/>
         <source>Private</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location line="+0"/>
         <source>Protected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="255"/>
+        <location line="+0"/>
         <source>Public</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location line="-18"/>
         <source>15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location line="+0"/>
         <source>30</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location line="+0"/>
         <source>50</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="237"/>
+        <location line="+0"/>
         <source>80</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location line="+4"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location line="+0"/>
         <source>Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location line="+0"/>
         <source>Esc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location line="+0"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location line="+0"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="241"/>
+        <location line="+0"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="-18"/>
         <source>cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark cyan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark magenta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>dark yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>light gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="223"/>
+        <location line="+0"/>
         <source>magenta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="225"/>
+        <location line="+2"/>
         <source>brake</source>
         <translation>interrompre</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
+        <location line="+10"/>
+        <location line="+22"/>
         <source>false</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
+        <location line="-22"/>
         <source>body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="235"/>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="257"/>
+        <location line="+0"/>
+        <location line="+22"/>
         <source>true</source>
         <translation type="unfinished"></translation>
     </message>
