@@ -23,7 +23,7 @@ WaitPadPressBlock::WaitPadPressBlock(kitBase::robotModel::RobotModelInterface &r
 {
 }
 
-void WaitPadPressBlock::responseSlot(int reading)
+void WaitPadPressBlock::responseSlot(const QVariant &reading)
 {
 	if (reading == 1) {
 		stop();

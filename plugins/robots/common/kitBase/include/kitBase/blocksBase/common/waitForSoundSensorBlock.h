@@ -29,7 +29,7 @@ public:
 	explicit WaitForSoundSensorBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
 protected slots:
-	void responseSlot(int reading) override;
+	void responseSlot(const QVariant &reading) override;
 
 protected:
 	kitBase::robotModel::DeviceInfo device() const override;

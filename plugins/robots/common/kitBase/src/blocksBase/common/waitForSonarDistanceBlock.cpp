@@ -27,11 +27,11 @@ WaitForSonarDistanceBlock::WaitForSonarDistanceBlock(kitBase::robotModel::RobotM
 {
 }
 
-void WaitForSonarDistanceBlock::responseSlot(int reading)
+void WaitForSonarDistanceBlock::responseSlot(const QVariant &reading)
 {
 	const int targetDistance = eval<int>("Distance");
 	if (!errorsOccured()) {
-		processResponce(reading, targetDistance);
+		processResponce(reading.toInt(), targetDistance);
 	}
 }
 

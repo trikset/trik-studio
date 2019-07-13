@@ -25,11 +25,11 @@ WaitForAccelerometerSensorBlock::WaitForAccelerometerSensorBlock(RobotModelInter
 {
 }
 
-void WaitForAccelerometerSensorBlock::responseSlot(int reading)
+void WaitForAccelerometerSensorBlock::responseSlot(const QVariant &reading)
 {
 	int result = eval<int>("Acceleration");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }
 

@@ -37,7 +37,7 @@ public:
 
 private slots:
 	/// Called when new data from encoder ready, checks it against "TachoLimit" property.
-	void responseSlot(int reading);
+	void responseSlot(const QVariant &reading) override;
 
 private:
 	robotModel::DeviceInfo device() const override;

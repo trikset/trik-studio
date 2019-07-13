@@ -25,11 +25,11 @@ WaitForGyroscopeSensorBlock::WaitForGyroscopeSensorBlock(kitBase::robotModel::Ro
 {
 }
 
-void WaitForGyroscopeSensorBlock::responseSlot(int reading)
+void WaitForGyroscopeSensorBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Degrees");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }
 

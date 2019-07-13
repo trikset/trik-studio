@@ -30,7 +30,7 @@ public:
 	explicit WaitForGyroscopeSensorBlock(robotModel::RobotModelInterface &robotModel);
 
 protected slots:
-	void responseSlot(int reading) override;
+	void responseSlot(const QVariant &reading) override;
 
 protected:
 	robotModel::DeviceInfo device() const override;

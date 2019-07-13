@@ -43,7 +43,7 @@ protected:
 
 private:
 	/// Shall be reimplemented to do value check when new data from sensor is ready.
-	virtual void responseSlot(int reading) = 0;
+	virtual void responseSlot(const QVariant &reading) = 0;
 };
 
 }
