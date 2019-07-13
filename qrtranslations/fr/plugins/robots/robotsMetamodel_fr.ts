@@ -8,12 +8,12 @@
         <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="822"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+822"/>
         <source>X:</source>
         <translation>X :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="830"/>
+        <location line="+8"/>
         <source>Y:</source>
         <translation>Y :</translation>
     </message>
@@ -78,7 +78,7 @@
         <translation type="vanished">Durée</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1256"/>
+        <location line="+426"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
@@ -91,7 +91,7 @@
         <translation type="vanished">Port :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="699"/>
+        <location line="-557"/>
         <source>Color:</source>
         <translation>Couleur :</translation>
     </message>
@@ -112,32 +112,32 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="388"/>
+        <location line="-311"/>
         <source>Body:</source>
         <translation>Corps :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="433"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="886"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="948"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1309"/>
+        <location line="+45"/>
+        <location line="+453"/>
+        <location line="+62"/>
+        <location line="+361"/>
         <source>Variable:</source>
         <translation>Variable :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="486"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="778"/>
+        <location line="-823"/>
+        <location line="+292"/>
         <source>Condition:</source>
         <translation>Condition :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="609"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1059"/>
+        <location line="-169"/>
+        <location line="+450"/>
         <source>Thread:</source>
         <translation>Fil :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="653"/>
+        <location line="-406"/>
         <source>Iterations:</source>
         <translation>Itérations :</translation>
     </message>
@@ -150,37 +150,37 @@
         <translation type="vanished">Limite de compte tours :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="838"/>
+        <location line="+185"/>
         <source>Text:</source>
         <translation>Texte :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="894"/>
+        <location line="+56"/>
         <source>From:</source>
         <translation>De :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="902"/>
+        <location line="+8"/>
         <source>To:</source>
         <translation>À :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="956"/>
+        <location line="+54"/>
         <source>Synchronized:</source>
         <translation>Synchronisé :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1067"/>
+        <location line="+111"/>
         <source>Message:</source>
         <translation>Message :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1211"/>
+        <location line="+144"/>
         <source>Expression:</source>
         <translation>Expression :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1255"/>
+        <location line="+44"/>
         <source>Delay:</source>
         <translation>Délai :</translation>
     </message>
@@ -273,69 +273,69 @@
         <translation type="vanished">Manette :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1317"/>
+        <location line="+62"/>
         <source>Value:</source>
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="26"/>
+        <location line="-1291"/>
         <source>AbstractNode</source>
         <translation>AbstractNode</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="61"/>
+        <location line="+35"/>
         <source>Clear Screen</source>
         <translation>Effacer l&apos;écran</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="63"/>
+        <location line="+2"/>
         <source>Clears everything drawn on the robot`s screen.</source>
         <translation>Efface l&apos;écran du robot.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="86"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="864"/>
+        <location line="+23"/>
+        <location line="+778"/>
         <source>Redraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="97"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="134"/>
+        <location line="-767"/>
+        <location line="+37"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="99"/>
+        <location line="-35"/>
         <source>This block can hold text notes that are ignored by generators and interpreters. Use it for improving the diagram readability.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="134"/>
+        <location line="+35"/>
         <source>Enter some text here...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="145"/>
+        <location line="+11"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="147"/>
+        <location line="+2"/>
         <source>For creating a link between two elements A and B you can just hover a mouse above A, press the right mouse button and (without releasing it) draw a line to the element B. Alternatively you can just &apos;pull&apos; a link from a small blue circle next to the element.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="194"/>
+        <location line="+47"/>
         <source>Guard</source>
         <translation>Garde</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="205"/>
+        <location line="+11"/>
         <source>EngineCommand</source>
         <translation>EngineCommand</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="239"/>
+        <location line="+34"/>
         <source>EngineMovementCommand</source>
         <translation>EngineMovementCommand</translation>
     </message>
@@ -380,12 +380,12 @@
         <translation type="vanished">Rempli</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="865"/>
+        <location line="+626"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="866"/>
+        <location line="+1"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -438,7 +438,7 @@
         <translation type="vanished">Mode</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="263"/>
+        <location line="-603"/>
         <source>Power (%)</source>
         <translation>Puissance (%)</translation>
     </message>
@@ -447,7 +447,7 @@
         <translation type="vanished">B, C</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="263"/>
+        <location line="+0"/>
         <source>100</source>
         <translation>100</translation>
     </message>
@@ -468,7 +468,7 @@
         <translation type="vanished">LED</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="723"/>
+        <location line="+460"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
@@ -481,7 +481,7 @@
         <translation type="vanished">Frequence</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1289"/>
+        <location line="+566"/>
         <source>1000</source>
         <translation>1000</translation>
     </message>
@@ -518,8 +518,8 @@
         <translation type="vanished">Signe</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="926"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1341"/>
+        <location line="-363"/>
+        <location line="+415"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -556,42 +556,42 @@
         <translation type="vanished">Attendre un capteur tactile</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="274"/>
+        <location line="-1067"/>
         <source>End if</source>
         <translation>Fin Si</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="276"/>
+        <location line="+2"/>
         <source>Unites control flow from different condition branches.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="309"/>
+        <location line="+33"/>
         <source>Final Node</source>
         <translation>Nœud terminal</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="311"/>
+        <location line="+2"/>
         <source>The final node of the program. If the program consists of some parallel execution lines the reachment of this block terminates the corresponding execution line. This block can`t have outgoing links.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="344"/>
+        <location line="+33"/>
         <source>Fork</source>
         <translation>Fork</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="346"/>
+        <location line="+2"/>
         <source>Separates program execution into a number of threads that will be executed concurrently from the programmers`s point of view. For example in such way signal from sensor and some time interval can be waited synchroniously. This block must have at least two outgoing links. &apos;Guard&apos; property of every link must contain unique thread identifiers, and one of those identifiers must be the same as the identifier of a thread where fork is placed (it must be &apos;main&apos; if it is the first fork in a program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="379"/>
+        <location line="+33"/>
         <source>Function</source>
         <translation>Fonction</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="381"/>
+        <location line="+2"/>
         <source>Evaluates a value of the given expression. Also new variables can be defined in this block. See the &apos;Expressions Syntax&apos; chapter in help for more information about &apos;Function&apos; block syntax.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -600,144 +600,144 @@
         <translation type="vanished">Corps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="424"/>
+        <location line="+43"/>
         <source>Get Button Code</source>
         <translation>Obtenir le code de bouton</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="426"/>
+        <location line="+2"/>
         <source>Assigns a given variable a value of pressed button. If no button is pressed at the moment and &apos;Wait&apos; property is false when variable is set to -1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="441"/>
+        <location line="+15"/>
         <source>Wait:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="465"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="928"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1342"/>
+        <location line="+24"/>
+        <location line="+463"/>
+        <location line="+414"/>
         <source>Variable</source>
         <translation>Variable</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="466"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="135"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="136"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="137"/>
+        <location line="-876"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+135"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Wait</source>
         <translation>Attendre</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="465"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="928"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1235"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1342"/>
+        <location line="-1"/>
+        <location line="+463"/>
+        <location line="+307"/>
+        <location line="+107"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="477"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="511"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="802"/>
+        <location line="-865"/>
+        <location line="+34"/>
+        <location line="+291"/>
         <source>Condition</source>
         <translation>Condition</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="479"/>
+        <location line="-323"/>
         <source>Separates program execution in correspondece with the given condition. The &apos;Condition&apos; parameter value must be some boolean expression that will determine subsequent program execution line. This block must have two outgoing links, at least one of them must have &apos;Guard&apos; parameter set to &apos;true&apos; or &apos;false&apos;. The execution will be proceed trough the link marked with the guard corresponding to &apos;Condition&apos; parameter of the block.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="511"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="802"/>
+        <location line="+32"/>
+        <location line="+291"/>
         <source>x &gt; 0</source>
         <translation>x &gt; 0</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="522"/>
+        <location line="-280"/>
         <source>Initial Node</source>
         <translation>Nœud initial</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="524"/>
+        <location line="+2"/>
         <source>The entry point of the program execution. Each diagram should have only one such block, it must not have incomming links and it must have only one outgoing link. The interpretation process starts from exactly this block.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="565"/>
+        <location line="+41"/>
         <source>Join</source>
         <translation>Jonction</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="567"/>
+        <location line="+2"/>
         <source>Joins a number of threads into one. &apos;Guard&apos; property of the single outgoing link must contain an identifier of one of threads being joined. The specified thread would wait until the rest of them finish execution, and then proceed in a normal way.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="600"/>
+        <location line="+33"/>
         <source>Kill Thread</source>
         <translation>Tuer un fil</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="602"/>
+        <location line="+2"/>
         <source>Terminates execution of a specified thread.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="633"/>
+        <location line="+31"/>
         <source>Thread</source>
         <translation>Fil</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="633"/>
+        <location line="+0"/>
         <source>main</source>
         <translation>main</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="644"/>
+        <location line="+11"/>
         <source>Loop</source>
         <translation>Boucle</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="646"/>
+        <location line="+2"/>
         <source>This block executes a sequence of blocks for a given number of times. The number of repetitions is specified by the &apos;Iterations&apos; parameter. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when it will go through our &apos;Loop&apos; block for the given number of times.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="679"/>
+        <location line="+33"/>
         <source>Iterations</source>
         <translation>Itérations</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="679"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="927"/>
+        <location line="+0"/>
+        <location line="+248"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="690"/>
+        <location line="-237"/>
         <source>Marker Down</source>
         <translation>Descendre le marqueur </translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="692"/>
+        <location line="+2"/>
         <source>Moves the marker of the 2D model robot down to the floor: the robot will draw its trace on the floor after that. If the marker of another color is already drawing at the moment it will be replaced.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="734"/>
+        <location line="+42"/>
         <source>Marker Up</source>
         <translation>Remonter le marqueur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="736"/>
+        <location line="+2"/>
         <source>Lifts the marker of the 2D model robot up: the robot stops drawing its trace on the floor after that.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="769"/>
+        <location line="+33"/>
         <source>Pre-conditional Loop</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,79 +766,79 @@
         <translation type="vanished">Attendre une distance de sonar</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="813"/>
+        <location line="+44"/>
         <source>Print Text</source>
         <translation>Imprimer le texte</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="815"/>
+        <location line="+2"/>
         <source>Prints a given line in the specified coordinates on the robot`s screen. The value of &apos;Text&apos; property is interpreted as a plain text unless &apos;Evaluate&apos; property is set to true, then it will be interpreted as an expression (that may be useful for example when debugging variables values).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="862"/>
+        <location line="+47"/>
         <source>Evaluate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="863"/>
+        <location line="+1"/>
         <source>Text</source>
         <translation>Texte</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="863"/>
+        <location line="+0"/>
         <source>Enter some text here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="865"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="866"/>
+        <location line="+2"/>
+        <location line="+1"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="877"/>
+        <location line="+11"/>
         <source>Random Initialization</source>
         <translation>Initialisation aléatoire</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="879"/>
+        <location line="+2"/>
         <source>Sets a variable value to a random value inside given interval.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="926"/>
+        <location line="+47"/>
         <source>From</source>
         <translation>De</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="927"/>
+        <location line="+1"/>
         <source>To</source>
         <translation>À</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="939"/>
+        <location line="+12"/>
         <source>Receive Message From Thread</source>
         <translation>Recevoir un message de fil</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="941"/>
+        <location line="+2"/>
         <source>Receive a message sent to a thread from which this block is called.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="980"/>
+        <location line="+39"/>
         <source>Synchronized</source>
         <translation>Synchronisé</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="992"/>
+        <location line="+12"/>
         <source>RobotsDiagramGroup</source>
         <translation>RobotsDiagramGroup</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1007"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="109"/>
+        <location line="+15"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-28"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Le diagramme de comportement du robot</translation>
     </message>
@@ -847,12 +847,12 @@
         <translation type="vanished">Paramétrage des périfériques</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1050"/>
+        <location line="+43"/>
         <source>Send Message To Thread</source>
         <translation>Envoyer un message à un fil</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1052"/>
+        <location line="+2"/>
         <source>Sends a message to a specified thread.</source>
         <translation>Envoie un message à un fil spécifié.</translation>
     </message>
@@ -861,52 +861,52 @@
         <translation type="vanished">Message</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1103"/>
+        <location line="+51"/>
         <source>Subprogram</source>
         <translation>Sousprogramme</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1105"/>
+        <location line="+2"/>
         <source>Subprogram call. Subprograms are used for splitting repetitive program parts into a separate diagram and then calling it from main diagram or other subprograms. When this block is added into a diagram it will be suggested to enter subprogram name. The double click on subprogram call block may open the corresponding subprogram diagram. Moreover user palette will appear containing existing subrpograms, they can be dragged into a diagram like the usual blocks.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1145"/>
+        <location line="+40"/>
         <source>Subprogram Diagram</source>
         <translation>Diagramme de sousprogramme</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1187"/>
+        <location line="+42"/>
         <source>SubprogramDiagramGroup</source>
         <translation>SubprogramDiagramGroup</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1202"/>
+        <location line="+15"/>
         <source>Switch</source>
         <translation>Choix multifonction</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1204"/>
+        <location line="+2"/>
         <source>Selects the program execution branch in correspondence with some expression value. The value of the expression written in &apos;Expression&apos; property is compared to the values on the outgoing links. If equal value is found then execution will be proceeded by that branch. Else branch without a marker will be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1235"/>
+        <location line="+31"/>
         <source>Expression</source>
         <translation>Expression</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1246"/>
+        <location line="+11"/>
         <source>Timer</source>
         <translation>Minuteur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1248"/>
+        <location line="+2"/>
         <source>Waits for a given time in milliseconds.</source>
         <translation>Attends un temps donné en ms.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1289"/>
+        <location line="+41"/>
         <source>Delay (ms)</source>
         <translation>Délai (ms)</translation>
     </message>
@@ -1131,53 +1131,53 @@
         <translation type="vanished">Enregister dans un fichier</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1300"/>
+        <location line="+11"/>
         <source>Variable Initialization</source>
         <translation>Initialisation de variable</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1302"/>
+        <location line="+2"/>
         <source>Assigns a given value to a given variable.</source>
         <translation>Affecter une valeur à une variable.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1341"/>
+        <location line="+39"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="116"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="117"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="118"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="119"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="120"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="121"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="122"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="123"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="124"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="125"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="126"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="127"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="128"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="129"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="130"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="131"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Algorithms</source>
         <translation>Algorithmes</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="132"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="133"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="134"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Actions</source>
         <translation>Actions</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="138"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="139"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="140"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="141"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="142"/>
+        <location line="+4"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <source>Drawing</source>
         <translation>Dessin</translation>
     </message>
@@ -1185,27 +1185,27 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="413"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
         <source>Body</source>
         <translation type="unfinished">Corps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="981"/>
+        <location line="+568"/>
         <source>Variable</source>
         <translation type="unfinished">Variable</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1039"/>
+        <location line="+58"/>
         <source>Devices configuration</source>
         <translation type="unfinished">Paramétrage des périfériques</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1091"/>
+        <location line="+52"/>
         <source>Message</source>
         <translation type="unfinished">Message</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="1092"/>
+        <location line="+1"/>
         <source>Thread</source>
         <translation type="unfinished">Fil</translation>
     </message>
@@ -1945,12 +1945,12 @@
         <translation type="vanished">4</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="164"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+22"/>
         <source>black</source>
         <translation>noire</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="164"/>
+        <location line="+0"/>
         <source>blue</source>
         <translation>bleu</translation>
     </message>
@@ -1991,7 +1991,7 @@
         <translation type="vanished">girs</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="164"/>
+        <location line="+0"/>
         <source>green</source>
         <translation>vert</translation>
     </message>
@@ -2004,7 +2004,7 @@
         <translation type="vanished">pourpre</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="164"/>
+        <location line="+0"/>
         <source>red</source>
         <translation>rouge</translation>
     </message>
@@ -2021,32 +2021,32 @@
         <translation type="vanished">E4</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="164"/>
+        <location line="+0"/>
         <source>white</source>
         <translation>blanc</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="164"/>
+        <location line="+0"/>
         <source>yellow</source>
         <translation>jaune</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="166"/>
+        <location line="+2"/>
         <source>greater</source>
         <translation>supérieur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="166"/>
+        <location line="+0"/>
         <source>less</source>
         <translation>inférieur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="166"/>
+        <location line="+0"/>
         <source>not greater</source>
         <translation>pas supérieur à</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="166"/>
+        <location line="+0"/>
         <source>not less</source>
         <translation>pas inférieur à</translation>
     </message>
@@ -2063,67 +2063,67 @@
         <translation type="vanished">interrompre</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="160"/>
+        <location line="-6"/>
         <source>float</source>
         <translation>float</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="158"/>
+        <location line="-2"/>
         <source>Composite</source>
         <translation>Composite</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="158"/>
+        <location line="+0"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="158"/>
+        <location line="+0"/>
         <source>Shared</source>
         <translation>Partagé</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="160"/>
+        <location line="+2"/>
         <source>brake</source>
         <translation>interrompre</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="172"/>
+        <location line="+12"/>
         <source>Package</source>
         <translation>Paquet</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="172"/>
+        <location line="+0"/>
         <source>Private</source>
         <translation>Privé</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="172"/>
+        <location line="+0"/>
         <source>Protected</source>
         <translation>Protegé</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="172"/>
+        <location line="+0"/>
         <source>Public</source>
         <translation>Publique</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="170"/>
+        <location line="-2"/>
         <source>In</source>
         <translation>Entrée</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="170"/>
+        <location line="+0"/>
         <source>Inout</source>
         <translation>Entrée/sortie</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="170"/>
+        <location line="+0"/>
         <source>Out</source>
         <translation>Sortie</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="170"/>
+        <location line="+0"/>
         <source>Return</source>
         <translation>Retour</translation>
     </message>
@@ -2160,17 +2160,17 @@
         <translation type="vanished">Vrai</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="162"/>
+        <location line="-8"/>
         <source>Concurrent</source>
         <translation>Concurrent</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="162"/>
+        <location line="+0"/>
         <source>Guarded</source>
         <translation>Gardé</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="162"/>
+        <location line="+0"/>
         <source>Sequential</source>
         <translation>Séquentiel</translation>
     </message>
@@ -2183,39 +2183,39 @@
         <translation type="vanished">Echapper</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="168"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="174"/>
+        <location line="+6"/>
+        <location line="+6"/>
         <source>false</source>
         <translation>faux</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="168"/>
+        <location line="-6"/>
         <source>body</source>
         <translation>corps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="168"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="174"/>
+        <location line="+0"/>
+        <location line="+6"/>
         <source>true</source>
         <translation>vrai</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="156"/>
+        <location line="-18"/>
         <source>norm</source>
         <translation>norme</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="156"/>
+        <location line="+0"/>
         <source>x-axis</source>
         <translation>axe x</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="156"/>
+        <location line="+0"/>
         <source>y-axis</source>
         <translation>axe y</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="156"/>
+        <location line="+0"/>
         <source>z-axis</source>
         <translation>axe z</translation>
     </message>
