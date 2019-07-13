@@ -41,11 +41,12 @@ protected:
 
 	robotModel::PortInfo mPort;
 
+	/// Shall be reimplemented in case of vector sensor to have scalar value during the comparation.
+	virtual int converter(QVector<int> reading);
+
 private:
 	/// Shall be reimplemented to do value check when new data from sensor is ready.
 	virtual void responseSlot(int reading) = 0;
-	/// Shall be reimplemented in case of vector sensor to have scalar value during the comparation.
-	virtual int converter(QVector<int> reading);
 };
 
 }

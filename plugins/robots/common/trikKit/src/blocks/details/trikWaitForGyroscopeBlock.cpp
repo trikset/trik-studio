@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "trikWaitForGyroscopeBlock.h"
-#include <QtMath>
 
 using namespace trik::blocks::details;
 
@@ -24,10 +23,8 @@ TrikWaitForGyroscopeBlock::TrikWaitForGyroscopeBlock(kitBase::robotModel::RobotM
 
 int TrikWaitForGyroscopeBlock::converter(QVector<int> reading)
 {
-	if (reading.size() == 0)
-		return 0;
 	if (reading.size() < 3)
-		return reading[0];
+		return WaitForGyroscopeSensorBlock::converter(reading);
 	return reading[2];
 }
 
