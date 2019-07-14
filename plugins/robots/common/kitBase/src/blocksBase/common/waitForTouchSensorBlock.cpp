@@ -25,7 +25,7 @@ WaitForTouchSensorBlock::WaitForTouchSensorBlock(kitBase::robotModel::RobotModel
 {
 }
 
-void WaitForTouchSensorBlock::responseSlot(int reading)
+void WaitForTouchSensorBlock::responseSlot(const QVariant &reading)
 {
 	if (reading > 0) {
 		stop();

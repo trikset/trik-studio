@@ -23,7 +23,7 @@ WaitGamepadDisconnectBlock::WaitGamepadDisconnectBlock(kitBase::robotModel::Robo
 {
 }
 
-void WaitGamepadDisconnectBlock::responseSlot(int reading)
+void WaitGamepadDisconnectBlock::responseSlot(const QVariant &reading)
 {
 	if (reading  == 0) {
 		stop();

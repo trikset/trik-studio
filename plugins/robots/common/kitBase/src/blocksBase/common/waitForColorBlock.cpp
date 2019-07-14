@@ -24,11 +24,11 @@ WaitForColorBlock::WaitForColorBlock(kitBase::robotModel::RobotModelInterface &r
 {
 }
 
-void WaitForColorBlock::responseSlot(int reading)
+void WaitForColorBlock::responseSlot(const QVariant &reading)
 {
 	const QString targetColor = stringProperty("Color");
 	QString color;
-	switch (reading) {
+	switch (reading.toInt()) {
 	case 1: color = "black";
 		break;
 	case 2: color = "blue";

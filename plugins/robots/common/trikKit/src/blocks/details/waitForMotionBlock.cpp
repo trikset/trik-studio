@@ -23,7 +23,7 @@ WaitForMotionBlock::WaitForMotionBlock(kitBase::robotModel::RobotModelInterface 
 {
 }
 
-void WaitForMotionBlock::responseSlot(int reading)
+void WaitForMotionBlock::responseSlot(const QVariant &reading)
 {
 	if (reading > 0) {
 		stop();

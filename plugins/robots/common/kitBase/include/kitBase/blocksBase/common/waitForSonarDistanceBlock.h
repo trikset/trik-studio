@@ -30,7 +30,7 @@ public:
 	WaitForSonarDistanceBlock(robotModel::RobotModelInterface &robotModel, const robotModel::DeviceInfo &device);
 
 protected slots:
-	void responseSlot(int reading) override;
+	void responseSlot(const QVariant &reading) override;
 
 protected:
 	kitBase::robotModel::DeviceInfo device() const override;

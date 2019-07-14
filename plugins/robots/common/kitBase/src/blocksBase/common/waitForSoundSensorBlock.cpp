@@ -25,11 +25,11 @@ WaitForSoundSensorBlock::WaitForSoundSensorBlock(kitBase::robotModel::RobotModel
 {
 }
 
-void WaitForSoundSensorBlock::responseSlot(int reading)
+void WaitForSoundSensorBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Volume");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }
 

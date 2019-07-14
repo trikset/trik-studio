@@ -30,7 +30,7 @@ public:
 	explicit WaitForColorIntensityBlock(robotModel::RobotModelInterface &robotModel);
 
 protected slots:
-	void responseSlot(int reading) override;
+	void responseSlot(const QVariant &reading) override;
 };
 
 }

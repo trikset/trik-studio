@@ -22,10 +22,10 @@ WaitForColorIntensityBlock::WaitForColorIntensityBlock(kitBase::robotModel::Robo
 {
 }
 
-void WaitForColorIntensityBlock::responseSlot(int reading)
+void WaitForColorIntensityBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Intensity");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }

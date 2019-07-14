@@ -29,11 +29,11 @@ WaitForEncoderBlock::WaitForEncoderBlock(RobotModelInterface &robotModel)
 	mActiveWaitingTimer->setInterval(1);
 }
 
-void WaitForEncoderBlock::responseSlot(int reading)
+void WaitForEncoderBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("TachoLimit");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }
 

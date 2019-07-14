@@ -23,11 +23,11 @@ WaitGamepadWheelBlock::WaitGamepadWheelBlock(kitBase::robotModel::RobotModelInte
 {
 }
 
-void WaitGamepadWheelBlock::responseSlot(int reading)
+void WaitGamepadWheelBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Angle");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }
 

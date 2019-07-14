@@ -25,11 +25,11 @@ WaitForLightSensorBlock::WaitForLightSensorBlock(kitBase::robotModel::RobotModel
 {
 }
 
-void WaitForLightSensorBlock::responseSlot(int reading)
+void WaitForLightSensorBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Percents");
 	if (!errorsOccured()) {
-		processResponce(reading, result);
+		processResponce(reading.toInt(), result);
 	}
 }
 
