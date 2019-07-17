@@ -179,6 +179,7 @@ void TrikMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikWriteToFile"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikRemoveFile"));
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForGyroscope"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForTouchSensor"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForLight"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForSonarDistance"));

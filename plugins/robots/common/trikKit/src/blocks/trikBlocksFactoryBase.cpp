@@ -243,7 +243,6 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {
 		result
-				<< id("TrikWaitForGyroscope")
 				<< id("TrikWaitForAccelerometer")
 				<< id("TrikSystem")
 				<< id("TrikWaitForMotion")
@@ -257,6 +256,10 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikInitVideoStreaming")
 				<< id("TrikStopCamera")
 				<< id("TrikStopVideoStreaming")
+				;
+	} else {
+		result
+				<< id("TrikWaitForGyroscope")
 				;
 	}
 
