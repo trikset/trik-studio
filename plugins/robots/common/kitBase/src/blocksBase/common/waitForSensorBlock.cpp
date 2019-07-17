@@ -32,11 +32,10 @@ void WaitForSensorBlock::run()
 {
 	const QString port = this->port();
 
-	/// @todo Works only with scalar sensors.
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
-	robotParts::ScalarSensor * const sensor = RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
+	robotParts::AbstractSensor * const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
 	if (sensor) {
-		connect(sensor, &robotParts::ScalarSensor::newData
+		connect(sensor, &robotParts::ScalarSensor::newAbstractData
 				, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
 		connect(sensor, &robotParts::AbstractSensor::failure
 				, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
@@ -76,10 +75,10 @@ void WaitForSensorBlock::stopActiveTimerInBlock()
 {
 	/// @todo True horror.
 	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	robotParts::ScalarSensor * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+	robotParts::AbstractSensor * const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
 
 	if (sensor) {
-		disconnect(sensor, &robotParts::ScalarSensor::newData, this, &WaitForSensorBlock::responseSlot);
+		disconnect(sensor, &robotParts::ScalarSensor::newAbstractData, this, &WaitForSensorBlock::responseSlot);
 		disconnect(sensor, &robotParts::AbstractSensor::failure, this, &WaitForSensorBlock::failureSlot);
 	}
 

@@ -56,6 +56,9 @@ signals:
 	/// preparing readings and it can take some time, or simply failed silently.
 	void failure();
 
+	/// Emitted when any type of new data is ready
+	void newAbstractData(QVariant);
+
 private:
 	bool mIsLocked;
 };

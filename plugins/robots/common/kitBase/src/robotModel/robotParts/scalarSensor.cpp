@@ -20,7 +20,10 @@ ScalarSensor::ScalarSensor(const DeviceInfo &info, const PortInfo &port)
 	: AbstractSensor(info, port)
 	, mLastValue(0)
 {
-	connect(this, &ScalarSensor::newData, this, [this](int reading) { mLastValue = reading; });
+	connect(this, &ScalarSensor::newData, this, [this](int reading) {
+		mLastValue = reading;
+		emit this->newAbstractData(QVariant::fromValue(reading));
+	});
 }
 
 int ScalarSensor::lastData() const
