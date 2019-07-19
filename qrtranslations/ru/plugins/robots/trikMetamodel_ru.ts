@@ -10,7 +10,7 @@
     </message>
     <message>
         <location line="+24"/>
-        <location line="+191"/>
+        <location line="+226"/>
         <location line="+1285"/>
         <location line="+413"/>
         <location line="+119"/>
@@ -21,20 +21,20 @@
         <translation>Порт</translation>
     </message>
     <message>
-        <location line="-2272"/>
-        <location line="+1316"/>
+        <location line="-2307"/>
+        <location line="+1351"/>
         <source>Angular Servo</source>
         <translation>Угловой сервомотор</translation>
     </message>
     <message>
-        <location line="-1314"/>
-        <location line="+1316"/>
+        <location line="-1349"/>
+        <location line="+1351"/>
         <source>Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.</source>
         <translation>Управление угловым сервомотором. Устанавливает угол поворота вала мотора на данном порту (в градусах). Значения от 0 до 90 соотвествуют повороту по часовой, значения от -90 до 0 --- повороту против часовой.</translation>
     </message>
     <message>
-        <location line="-1309"/>
-        <location line="+1316"/>
+        <location line="-1344"/>
+        <location line="+1351"/>
         <location line="+54"/>
         <location line="+108"/>
         <location line="+81"/>
@@ -44,26 +44,26 @@
         <translation>Порты:</translation>
     </message>
     <message>
-        <location line="-1661"/>
-        <location line="+1316"/>
+        <location line="-1696"/>
+        <location line="+1351"/>
         <location line="+1101"/>
         <source>Angle:</source>
         <translation>Угол:</translation>
     </message>
     <message>
-        <location line="-2416"/>
-        <location line="+1316"/>
+        <location line="-2451"/>
+        <location line="+1351"/>
         <source>°</source>
         <translation>°</translation>
     </message>
     <message>
-        <location line="-1292"/>
+        <location line="-1327"/>
         <source>E1</source>
         <translation>E1</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+1316"/>
+        <location line="+1351"/>
         <location line="+46"/>
         <location line="+108"/>
         <location line="+35"/>
@@ -74,8 +74,8 @@
         <translation>Порты</translation>
     </message>
     <message>
-        <location line="-1668"/>
-        <location line="+226"/>
+        <location line="-1703"/>
+        <location line="+261"/>
         <location line="+1"/>
         <location line="+72"/>
         <location line="+1"/>
@@ -94,8 +94,8 @@
         <translation>0</translation>
     </message>
     <message>
-        <location line="-2423"/>
-        <location line="+1316"/>
+        <location line="-2458"/>
+        <location line="+1351"/>
         <source>Angle (degrees)</source>
         <translation>Угол (градусы)</translation>
     </message>
@@ -475,7 +475,17 @@
         <translation>мс</translation>
     </message>
     <message>
-        <location line="-165"/>
+        <location line="-739"/>
+        <source>Calibrate gyroscope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Sets gyroscope&apos;s angle to zero in current position.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+572"/>
         <source>Draw stream</source>
         <translation>Вывести на экран</translation>
     </message>
@@ -1093,7 +1103,7 @@
         <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+152"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+154"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -1120,10 +1130,12 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
+        <location line="+1"/>
         <source>Actions</source>
         <translation>Действия</translation>
     </message>
     <message>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
