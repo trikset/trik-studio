@@ -604,7 +604,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+67"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+66"/>
         <source>Wall (W)</source>
         <translation>Стена (W)</translation>
     </message>
