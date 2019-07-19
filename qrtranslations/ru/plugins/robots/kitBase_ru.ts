@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/blocksBase/common/deviceBlock.h" line="+46"/>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/blocksBase/common/deviceBlock.h" line="+47"/>
         <source>%1 is not configured.</source>
         <translation>%1 не сконфигурирован.</translation>
     </message>

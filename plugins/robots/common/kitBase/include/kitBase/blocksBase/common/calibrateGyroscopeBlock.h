@@ -29,7 +29,8 @@ namespace blocksBase {
 namespace common {
 
 /// Interpreter implementation for "Calibrate gyroscope" block.
-class ROBOTS_KIT_BASE_EXPORT CalibrateGyroscopeBlock : public kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>
+class ROBOTS_KIT_BASE_EXPORT CalibrateGyroscopeBlock :
+		public kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>
 {
 public:
 	CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel);

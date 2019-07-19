@@ -33,7 +33,7 @@ void WaitForSensorBlock::run()
 	const QString port = this->port();
 
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
-	robotParts::AbstractSensor * const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
+	auto const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
 	if (sensor) {
 		connect(sensor, &robotParts::ScalarSensor::newAbstractData
 				, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
