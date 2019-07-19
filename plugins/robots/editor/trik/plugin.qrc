@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
 	<file>generated/shapes/TrikAngularServoClass.sdf</file>
+	<file>generated/shapes/TrikCalibrateGyroscopeClass.sdf</file>
 	<file>generated/shapes/TrikDetectClass.sdf</file>
 	<file>generated/shapes/TrikDetectorToVariableClass.sdf</file>
 	<file>generated/shapes/TrikDrawArcClass.sdf</file>

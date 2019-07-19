@@ -44,6 +44,7 @@ void TrikMetamodelPlugin::initMultigraph()
 {
 	mMetamodel->addNode(*(new TrikAnalogSensorBlock(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikAngularServo(*mMetamodel)));
+	mMetamodel->addNode(*(new TrikCalibrateGyroscope(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDetect(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDetectorToVariable(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDigitalSensorBlock(*mMetamodel)));
@@ -95,6 +96,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(*(new TrikWriteToFile(*mMetamodel)));
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikAnalogSensorBlock"), mMetamodel->elementType("RobotsDiagram", "TrikSensorBlock"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikAngularServo"), mMetamodel->elementType("RobotsDiagram", "EngineCommand"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikCalibrateGyroscope"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDetect"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDetectorToVariable"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDigitalSensorBlock"), mMetamodel->elementType("RobotsDiagram", "TrikSensorBlock"), qReal::ElementType::generalizationLinkType);
@@ -178,6 +180,7 @@ void TrikMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikSendMessage"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikWriteToFile"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikRemoveFile"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikCalibrateGyroscope"));
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForGyroscope"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForTouchSensor"));

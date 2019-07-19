@@ -46,6 +46,7 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mSensorsConfiguration(robotModel.robotId(), robotModel.size())
 	, mPos(QPointF(0, 0))
 	, mAngle(0)
+	, mGyroAngle(0)
 	, mDeltaRadiansOfAngle(0)
 	, mBeepTime(0)
 	, mIsOnTheGround(true)
@@ -310,7 +311,13 @@ QVector<int> RobotModel::accelerometerReading() const
 QVector<int> RobotModel::gyroscopeReading() const
 {
 	return {0, 0, static_cast<int>(mDeltaRadiansOfAngle * gyroscopeConstant)
-		, static_cast<int>(mAngle * 1000)};
+		, static_cast<int>((mAngle - mGyroAngle) * 1000)};
+}
+
+QVector<int> RobotModel::gyroscopeCalibrate()
+{
+	mGyroAngle = mAngle;
+	return gyroscopeReading();
 }
 
 void RobotModel::nextStep()

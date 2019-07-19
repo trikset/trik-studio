@@ -40,6 +40,8 @@ public:
 
 	void read() override;
 
+	void calibrate();
+
 private:
 	engine::TwoDModelEngineInterface &mEngine;
 };

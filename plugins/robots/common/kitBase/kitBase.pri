@@ -57,6 +57,7 @@ HEADERS += \
 	$$PWD/include/kitBase/blocksBase/common/waitForTouchSensorBlock.h \
 	$$PWD/include/kitBase/blocksBase/common/waitForButtonBlock.h \
 	$$PWD/include/kitBase/blocksBase/common/getButtonCodeBlock.h \
+	$$PWD/include/kitBase/blocksBase/common/calibrateGyroscopeBlock.h \
 	$$PWD/include/kitBase/robotModel/configuration.h \
 	$$PWD/include/kitBase/robotModel/commonRobotModel.h \
 	$$PWD/include/kitBase/robotModel/configurationInterface.h \
@@ -114,6 +115,7 @@ SOURCES += \
 	$$PWD/src/blocksBase/common/waitForTouchSensorBlock.cpp \
 	$$PWD/src/blocksBase/common/waitForButtonBlock.cpp \
 	$$PWD/src/blocksBase/common/getButtonCodeBlock.cpp \
+	$$PWD/src/blocksBase/common/calibrateGyroscopeBlock.cpp \
 	$$PWD/src/robotModel/configuration.cpp \
 	$$PWD/src/robotModel/commonRobotModel.cpp \
 	$$PWD/src/robotModel/robotModelUtils.cpp \

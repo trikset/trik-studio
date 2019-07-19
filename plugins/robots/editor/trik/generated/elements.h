@@ -105,6 +105,41 @@
 		}
 	};
 
+	class TrikCalibrateGyroscope : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikCalibrateGyroscope(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikCalibrateGyroscope");
+			setFriendlyName(QObject::tr("Calibrate gyroscope"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Sets gyroscope's angle to zero in current position."));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikCalibrateGyroscopeClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+		}
+	};
+
 	class TrikDetect : public qReal::NodeElementType
 	{
 	public:

@@ -31,3 +31,8 @@ void Gyroscope::read()
 {
 	emit newData(mEngine.readGyroscopeSensor());
 }
+
+void Gyroscope::calibrate()
+{
+	emit newData(mEngine.calibrateGyroscopeSensor());
+}
