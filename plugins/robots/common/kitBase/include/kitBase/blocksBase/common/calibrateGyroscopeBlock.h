@@ -33,7 +33,7 @@ class ROBOTS_KIT_BASE_EXPORT CalibrateGyroscopeBlock :
 		public kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>
 {
 public:
-	CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel);
+	explicit CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
 protected:
 	virtual void doJob(kitBase::robotModel::robotParts::GyroscopeSensor &gyro);
