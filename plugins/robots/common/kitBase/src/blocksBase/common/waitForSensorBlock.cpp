@@ -36,10 +36,10 @@ void WaitForSensorBlock::run()
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
 	robotParts::ScalarSensor * const sensor = RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
 	if (sensor) {
-		connect(sensor, &robotParts::ScalarSensor::newData
-				, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
-		connect(sensor, &robotParts::AbstractSensor::failure
-				, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
+		mConnections << connect(sensor, &robotParts::ScalarSensor::newData
+								, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
+		mConnections << connect(sensor, &robotParts::AbstractSensor::failure
+								, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
 		mActiveWaitingTimer->start();
 		sensor->read();
 	} else {
@@ -58,30 +58,21 @@ void WaitForSensorBlock::timerTimeout()
 	}
 }
 
+void WaitForSensorBlock::disconnectSensor()
+{
+	for (auto &&c: mConnections) {
+		disconnect(c);
+	}
+}
+
 void WaitForSensorBlock::stop()
 {
-	/// @todo True horror.
-	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	robotParts::ScalarSensor * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
-
-	if (sensor) {
-		disconnect(sensor, &robotParts::ScalarSensor::newData, this, &WaitForSensorBlock::responseSlot);
-		disconnect(sensor, &robotParts::AbstractSensor::failure, this, &WaitForSensorBlock::failureSlot);
-	}
-
+	disconnectSensor();
 	WaitBlock::stop();
 }
 
 void WaitForSensorBlock::stopActiveTimerInBlock()
 {
-	/// @todo True horror.
-	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	robotParts::ScalarSensor * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
-
-	if (sensor) {
-		disconnect(sensor, &robotParts::ScalarSensor::newData, this, &WaitForSensorBlock::responseSlot);
-		disconnect(sensor, &robotParts::AbstractSensor::failure, this, &WaitForSensorBlock::failureSlot);
-	}
-
+	disconnectSensor();
 	WaitBlock::stopActiveTimerInBlock();
 }

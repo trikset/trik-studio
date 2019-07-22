@@ -38,12 +38,6 @@ public:
 	/// Forces system think that last returned by sensor value was the given one.
 	void setLastData(int data);
 
-signals:
-	/// Emitted when new data is ready. Note that concrete sensors may work in "pull" and in "push" mode. In "pull"
-	/// mode this signal is emitted when sensor reads data after "read" call, in "push" mode this signal is emitted
-	/// every time new data is ready, regardless of "read" calls.
-	void newData(int reading);
-
 private:
 	int mLastValue;
 };

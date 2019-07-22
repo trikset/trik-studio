@@ -35,6 +35,8 @@ public:
 
 protected slots:
 	void timerTimeout() override;
+	/// Shall be reimplemented to do value check when new data from sensor is ready.
+	virtual void responseSlot(const QVariant &reading) = 0;
 
 protected:
 	void stop() override;
@@ -42,8 +44,10 @@ protected:
 	robotModel::PortInfo mPort;
 
 private:
-	/// Shall be reimplemented to do value check when new data from sensor is ready.
-	virtual void responseSlot(const QVariant &reading) = 0;
+	/// Disconnect sensor signals/events
+	void disconnectSensor();
+
+	QList<QMetaObject::Connection> mConnections;
 };
 
 }

@@ -28,13 +28,13 @@ GamepadPad::GamepadPad(const DeviceInfo &info, const PortInfo &port
 
 void GamepadPad::read()
 {
-	emit newData(mOldValue);
+	emit newData(QVariant::fromValue(mOldValue));
 }
 
 void GamepadPad::onIncomingData(const QString &portName, const QVector<int> &value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		emit newData(QVariant::fromValue(mOldValue));
 	}
 }

@@ -19,7 +19,8 @@ using namespace kitBase::robotModel::robotParts;
 VectorSensor::VectorSensor(const DeviceInfo &info, const PortInfo &port)
 	: AbstractSensor(info, port)
 {
-	connect(this, &VectorSensor::newData, this, [this](const QVector<int> &reading) { mLastValue = reading; });
+	connect(this, &VectorSensor::newData,
+			this, [this](const QVariant &reading) { mLastValue = reading.value<QVector<int>>(); });
 }
 
 QVector<int> VectorSensor::lastData() const
@@ -29,5 +30,5 @@ QVector<int> VectorSensor::lastData() const
 
 void VectorSensor::setLastData(const QVector<int> &data)
 {
-	emit newData(data);
+	emit newData(QVariant::fromValue(data));
 }

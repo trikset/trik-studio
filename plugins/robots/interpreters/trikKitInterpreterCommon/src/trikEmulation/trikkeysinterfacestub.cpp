@@ -46,9 +46,11 @@ void TrikKeysInterfaceStub::start()
 
 void TrikKeysInterfaceStub::stop()
 {
-	for (const auto &button : mButtons) {
+	for (auto &&button : mButtons) {
 		button->read(); // hack to clear lastReadState
-		disconnect(button, &robotParts::Button::newData, this, &TrikKeysInterfaceStub::handleNewData);
+	}
+	for (auto &&c: mConnections) {
+		disconnect(c);
 	}
 }
 
@@ -103,7 +105,9 @@ bool TrikKeysInterfaceStub::registerButton(int code)
 		}
 
 		mButtons[code] = button;
-		connect(button, &robotParts::Button::newData, this, &TrikKeysInterfaceStub::handleNewData
+		using namespace std::placeholders;
+		mConnections << connect(button, &robotParts::Button::newData,
+				this, std::bind(&TrikKeysInterfaceStub::handleNewData, this, std::bind(&QVariant::value<int>, _1))
 				, Qt::UniqueConnection);
 	}
 

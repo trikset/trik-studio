@@ -37,9 +37,10 @@ void WaitForButtonBlock::run()
 		error(tr("Incorrect button port %1").arg(port));
 		return;
 	}
-
+	using namespace std::placeholders;
 	connect(mButton, &robotModel::robotParts::Button::newData
-			, this, &WaitForButtonBlock::responseSlot, Qt::UniqueConnection);
+			, this, std::bind(&WaitForButtonBlock::responseSlot, this, std::bind(&QVariant::value<int>, _1))
+			, Qt::UniqueConnection);
 
 	mButton->read();
 	mActiveWaitingTimer->start();
