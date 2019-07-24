@@ -42,7 +42,9 @@ public:
 
 	void calibrate() override;
 
-private:
+private:	
+	virtual QVector<int> convert(QVector<int> data);
+
 	engine::TwoDModelEngineInterface &mEngine;
 };
 
