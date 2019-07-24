@@ -63,6 +63,7 @@ void WaitForSensorBlock::disconnectSensor()
 	for (auto &&c: mConnections) {
 		disconnect(c);
 	}
+	mConnections.clear();
 }
 
 void WaitForSensorBlock::stop()

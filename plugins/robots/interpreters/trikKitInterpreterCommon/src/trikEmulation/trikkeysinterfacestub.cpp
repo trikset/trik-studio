@@ -52,6 +52,7 @@ void TrikKeysInterfaceStub::stop()
 	for (auto &&c: mConnections) {
 		disconnect(c);
 	}
+	mConnections.clear();
 }
 
 void TrikKeysInterfaceStub::reset() {
