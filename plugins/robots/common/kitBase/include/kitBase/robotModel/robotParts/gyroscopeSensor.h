@@ -33,7 +33,7 @@ public:
 	GyroscopeSensor(const DeviceInfo &info, const PortInfo &port);
 
 	/// Clears gyroscope readings, and makes this sensor return "zero", like a robot is turned on just now.
-	virtual void calibrate();
+	virtual void calibrate() = 0;
 };
 
 }

@@ -31,6 +31,11 @@ void Gyroscope::read()
 	emit newData(mOldValue);
 }
 
+void Gyroscope::calibrate()
+{
+	/// @todo
+}
+
 void Gyroscope::onIncomingData(const QString &portName, const QVector<int> &value)
 {
 	if (portName == port().name()) {

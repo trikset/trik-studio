@@ -22,9 +22,3 @@ GyroscopeSensor::GyroscopeSensor(const DeviceInfo &info, const PortInfo &port)
 	: VectorSensor(info, port)
 {
 }
-
-void GyroscopeSensor::calibrate()
-{
-	QLOG_ERROR() << "Base gyro calibration not defined";
-	emit failure();
-}

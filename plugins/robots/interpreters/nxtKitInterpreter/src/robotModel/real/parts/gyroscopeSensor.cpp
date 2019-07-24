@@ -49,6 +49,11 @@ void GyroscopeSensor::read()
 	mImplementation.send(command, 18);
 }
 
+void GyroscopeSensor::calibrate()
+{
+	/// @todo
+}
+
 void GyroscopeSensor::doConfiguration()
 {
 	mImplementation.configure();
