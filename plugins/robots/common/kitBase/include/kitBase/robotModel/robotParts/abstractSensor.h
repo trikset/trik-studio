@@ -56,8 +56,10 @@ signals:
 	/// preparing readings and it can take some time, or simply failed silently.
 	void failure();
 
-	/// Emitted when any type of new data is ready
-	void newAbstractData(QVariant);
+	/// Emitted when new data is ready. Note that concrete sensors may work in "pull" and in "push" mode. In "pull"
+	/// mode this signal is emitted when sensor reads data after "read" call, in "push" mode this signal is emitted
+	/// every time new data is ready, regardless of "read" calls.
+	void newData(const QVariant &data);
 
 private:
 	bool mIsLocked;

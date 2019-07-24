@@ -49,11 +49,13 @@ void SensorVariablesUpdater::run()
 				continue;
 			}
 
+			using namespace std::placeholders;
 			connect(
 					scalarSensor
 					, &robotParts::ScalarSensor::newData
 					, this
-					, &SensorVariablesUpdater::onScalarSensorResponse
+					, std::bind(&SensorVariablesUpdater::onScalarSensorResponse, this,
+									std::bind(&QVariant::value<int>, _1))
 					, Qt::UniqueConnection
 					);
 
@@ -76,11 +78,13 @@ void SensorVariablesUpdater::run()
 				continue;
 			}
 
+			using namespace std::placeholders;
 			connect(
 					vectorSensor
 					, &robotParts::VectorSensor::newData
 					, this
-					, &SensorVariablesUpdater::onVectorSensorResponse
+					, std::bind(&SensorVariablesUpdater::onVectorSensorResponse,
+								this, std::bind(&QVariant::value<QVector<int>>, _1))
 					, Qt::UniqueConnection
 					);
 

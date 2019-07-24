@@ -35,10 +35,10 @@ void WaitForSensorBlock::run()
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
 	auto const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
 	if (sensor) {
-		connect(sensor, &robotParts::ScalarSensor::newAbstractData
-				, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
-		connect(sensor, &robotParts::AbstractSensor::failure
-				, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
+		mConnections << connect(sensor, &robotParts::AbstractSensor::newData
+								, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
+		mConnections << connect(sensor, &robotParts::AbstractSensor::failure
+								, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);
 		mActiveWaitingTimer->start();
 		sensor->read();
 	} else {
@@ -57,30 +57,22 @@ void WaitForSensorBlock::timerTimeout()
 	}
 }
 
+void WaitForSensorBlock::disconnectSensor()
+{
+	for (auto &&c: mConnections) {
+		disconnect(c);
+	}
+	mConnections.clear();
+}
+
 void WaitForSensorBlock::stop()
 {
-	/// @todo True horror.
-	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	robotParts::ScalarSensor * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
-
-	if (sensor) {
-		disconnect(sensor, &robotParts::ScalarSensor::newData, this, &WaitForSensorBlock::responseSlot);
-		disconnect(sensor, &robotParts::AbstractSensor::failure, this, &WaitForSensorBlock::failureSlot);
-	}
-
+	disconnectSensor();
 	WaitBlock::stop();
 }
 
 void WaitForSensorBlock::stopActiveTimerInBlock()
 {
-	/// @todo True horror.
-	robotParts::Device * const device = mRobotModel.configuration().device(mPort);
-	robotParts::AbstractSensor * const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
-
-	if (sensor) {
-		disconnect(sensor, &robotParts::ScalarSensor::newAbstractData, this, &WaitForSensorBlock::responseSlot);
-		disconnect(sensor, &robotParts::AbstractSensor::failure, this, &WaitForSensorBlock::failureSlot);
-	}
-
+	disconnectSensor();
 	WaitBlock::stopActiveTimerInBlock();
 }

@@ -105,6 +105,7 @@ private:
 	int mCellNumbY2 = 0;
 
 	QPainterPath mPath;
+	int mWallWidth;
 };
 
 }

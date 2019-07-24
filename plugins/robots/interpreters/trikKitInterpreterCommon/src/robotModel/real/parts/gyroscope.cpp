@@ -28,7 +28,7 @@ Gyroscope::Gyroscope(const DeviceInfo &info, const PortInfo &port
 
 void Gyroscope::read()
 {
-	emit newData(mOldValue);
+	emit newData(QVariant::fromValue(mOldValue));
 }
 
 void Gyroscope::calibrate()
@@ -40,6 +40,6 @@ void Gyroscope::onIncomingData(const QString &portName, const QVector<int> &valu
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		emit newData(QVariant::fromValue(mOldValue));
 	}
 }

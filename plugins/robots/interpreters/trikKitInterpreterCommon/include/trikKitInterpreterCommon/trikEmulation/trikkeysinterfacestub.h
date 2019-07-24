@@ -61,6 +61,7 @@ private:
 	QHash<int, kitBase::robotModel::robotParts::Button *> mButtons;
 	QSharedPointer<kitBase::robotModel::CommonRobotModel> mRobotModel;
 	QScopedPointer<utils::AbstractTimer> mButtonWatchingTimer;
+	QList<QMetaObject::Connection> mConnections;
 };
 
 }

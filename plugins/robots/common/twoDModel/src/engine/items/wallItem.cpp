@@ -25,11 +25,10 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-const int wallWidth = 10;
-
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	: AbstractItem()
 	, mImage(":/icons/2d_wall.png")
+	, mWallWidth(10)
 {
 	setX1(begin.x());
 	setY1(begin.y());
@@ -74,7 +73,7 @@ void WallItem::setPrivateData()
 {
 	setZValue(1);
 	QPen pen(this->pen());
-	pen.setWidth(wallWidth);
+	pen.setWidth(mWallWidth);
 	pen.setStyle(Qt::NoPen);
 	setPen(pen);
 	QBrush brush(this->brush());
@@ -127,12 +126,12 @@ QPointF WallItem::end() const
 
 QRectF WallItem::boundingRect() const
 {
-	return mLineImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width(), drift);
+	return mLineImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width(), mWallWidth);
 }
 
 QPainterPath WallItem::shape() const
 {
-	return mLineImpl.shape(drift, x1(), y1(), x2(), y2());
+	return mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2());
 }
 
 void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -183,6 +182,7 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 {
 	QDomElement wallNode = AbstractItem::serialize(parent);
 	wallNode.setTagName("wall");
+	setPenBrushToElement(wallNode, "wall");
 	mLineImpl.serialize(wallNode, x1() + scenePos().x(), y1() + scenePos().y()
 			, x2() + scenePos().x(), y2() + scenePos().y());
 	return wallNode;
@@ -200,6 +200,11 @@ void WallItem::deserialize(const QDomElement &element)
 	setY1(begin.y());
 	setX2(end.x());
 	setY2(end.y());
+
+	readPenBrush(element);
+	if (pen().width()) {
+		mWallWidth = pen().width();
+	}
 
 	recalculateBorders();
 }
@@ -226,7 +231,7 @@ void WallItem::recalculateBorders()
 	}
 
 	QPainterPathStroker stroker;
-	stroker.setWidth(wallWidth * 3 / 2);
+	stroker.setWidth(mWallWidth * 3 / 2);
 	mPath = stroker.createStroke(wallPath);
 }
 
@@ -347,7 +352,7 @@ QPolygonF WallItem::collidingPolygon() const
 	const QPolygonF polygon = mPath.toFillPolygon();
 	// here we have "one point" wall
 	if (polygon.isEmpty()) {
-		auto offset = QPointF(wallWidth, wallWidth);
+		auto offset = QPointF(mWallWidth, mWallWidth);
 		return QRectF(begin() - offset, begin() + offset);
 	}
 
