@@ -14,8 +14,8 @@
 
 #pragma once
 
-#include <ev3Kit/robotModel/parts/ev3Gyroscope.h>
 #include <utils/robotCommunication/robotCommunicator.h>
+#include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 
 #include "ev3InputDevice.h"
 
@@ -24,7 +24,7 @@ namespace robotModel {
 namespace real {
 namespace parts {
 
-class Gyroscope : public robotModel::parts::Ev3Gyroscope
+class Gyroscope : public kitBase::robotModel::robotParts::GyroscopeSensor
 {
 	Q_OBJECT
 
@@ -34,6 +34,8 @@ public:
 			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
+
+	void calibrate() override;
 
 private:
 	Ev3InputDevice mImplementation;

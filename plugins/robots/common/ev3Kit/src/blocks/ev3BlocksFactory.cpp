@@ -173,6 +173,12 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 		if (!mInterpretedModels.contains(mRobotModelManager->model().robotId())) {
 			result << id("Join") << id("SendMessageThreads") << id("ReceiveMessageThreads") << id("KillThread");
 		}
+		if (!mRobotModelManager->model().name().contains("Gen")) {
+			result
+					<< id("Ev3WaitForGyroscope")
+					<< id("Ev3CalibrateGyroscope")
+					;
+		}
 	}
 
 	return result;
