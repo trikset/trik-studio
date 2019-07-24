@@ -32,5 +32,5 @@ QVector<int> GyroscopeSensor::convert(QVector<int> data)
 	if (tmp < 0) {
 		tmp += FULL_ANGLE;
 	}
-	return {tmp - FULL_ANGLE/2};
+	return {(tmp - FULL_ANGLE/2) / 1000};
 }
