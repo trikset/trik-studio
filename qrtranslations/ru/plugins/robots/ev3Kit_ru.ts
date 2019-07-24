@@ -60,9 +60,8 @@
 <context>
     <name>ev3::robotModel::parts::Ev3Gyroscope</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3Gyroscope.h" line="+27"/>
         <source>Gyroscope</source>
-        <translation>Гиродатчик</translation>
+        <translation type="vanished">Гиродатчик</translation>
     </message>
 </context>
 <context>
