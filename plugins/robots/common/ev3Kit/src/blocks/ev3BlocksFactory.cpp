@@ -153,8 +153,6 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 				<< id("Ev3WaitForSound")
 				<< id("Ev3SendMail")
 				<< id("Ev3WaitForReceivingMail")
-				<< id("Ev3WaitForGyroscope")
-				<< id("Ev3CalibrateGyroscope")
 				<< id("Ev3StartCompassCalibration")
 				<< id("Ev3StopCompassCalibration")
 				<< id("Ev3ReadRGB")
@@ -166,7 +164,6 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 				<< id("Ev3ReadAvrLL")
 				<< id("Ev3ReadAllLL")
 				<< id("Ev3ReadSteeringLL")
-				<< id("Ev3WaitForGyroscope")
 				<< id("Ev3WaitForReceivingMail")
 				;
 	} else {
@@ -176,7 +173,6 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 		if (!mRobotModelManager->model().name().contains("Gen")) {
 			result
 					<< id("Ev3WaitForGyroscope")
-					<< id("Ev3CalibrateGyroscope")
 					;
 		}
 	}

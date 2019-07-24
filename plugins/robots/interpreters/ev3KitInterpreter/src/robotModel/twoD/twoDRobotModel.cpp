@@ -35,6 +35,7 @@
 #include "src/robotModel/twoD/parts/twoDSpeaker.h"
 #include "src/robotModel/twoD/parts/twoDMotor.h"
 #include "src/robotModel/twoD/parts/twoDLed.h"
+#include "src/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 
 using namespace ev3::robotModel;
 using namespace ev3::robotModel::twoD;
@@ -64,6 +65,10 @@ robotParts::Device *TwoDRobotModel::createDevice(PortInfo const &port, DeviceInf
 
 	if (deviceInfo.isA<ev3::robotModel::parts::Ev3Led>()) {
 		return new parts::TwoDLed(deviceInfo, port, *engine());
+	}
+
+	if (deviceInfo.isA<robotParts::GyroscopeSensor>()) {
+		return new parts::GyroscopeSensor(deviceInfo, port, *engine());
 	}
 
 	return twoDModel::robotModel::TwoDRobotModel::createDevice(port, deviceInfo);
