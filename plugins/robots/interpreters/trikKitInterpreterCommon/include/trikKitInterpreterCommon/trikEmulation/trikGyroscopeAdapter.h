@@ -55,13 +55,9 @@ private:
 	qreal degreeToMilidegree(qreal value);
 	int convertToTrikRuntimeTime(quint64 time) const;
 
-	bool mTimeInited = false;
-
 	kitBase::robotModel::robotParts::GyroscopeSensor *mGyro;
 	QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> mModel;
 	QVector<int> mResult;
 	QQuaternion mQuaternion;
 	quint64 mStartTime;
-	quint64 mLastUpdateTimeStamp;
-	int mInitialTilt;
 };

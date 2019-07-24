@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2007-2019 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,32 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/gyroscope.h"
-
+#include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
+using namespace trik::robotModel::twoD::parts;
 
-Gyroscope::Gyroscope(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
-	: robotParts::GyroscopeSensor(info, port)
-	, mEngine(engine)
+GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
+		, const kitBase::robotModel::PortInfo &port
+		, twoDModel::engine::TwoDModelEngineInterface &engine)
+	: twoDModel::robotModel::parts::Gyroscope(info, port, engine)
 {
 }
 
-void Gyroscope::read()
+QVector<int> GyroscopeSensor::convert(QVector<int> data)
 {
-	emit newData(convert(mEngine.readGyroscopeSensor()));
-}
-
-QVector<int> Gyroscope::convert(QVector<int> data)
-{
-	return data;
-}
-
-void Gyroscope::calibrate()
-{
-	emit newData(convert(mEngine.calibrateGyroscopeSensor()));
+	int t = mEngine.modelTimeline().timestamp();
+	return {0, 0, data[0], t, 0, 0, (data[1] + 180000) % 360000 - 180000};
 }

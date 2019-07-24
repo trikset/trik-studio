@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2007-2019 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,40 +14,28 @@
 
 #pragma once
 
-#include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
+#include <twoDModel/robotModel/parts/gyroscope.h>
+#include "trikKitInterpreterCommon/declSpec.h"
 
-#include "twoDModel/twoDModelDeclSpec.h"
-
-namespace twoDModel {
-
-namespace engine {
-class TwoDModelEngineInterface;
-}
-
+namespace trik {
 namespace robotModel {
+namespace twoD {
 namespace parts {
 
-/// 2D-model simulation of gyroscope.
-/// Configuration is perfomed immediately, the answer is ready immediately too.
-class TWO_D_MODEL_EXPORT Gyroscope : public kitBase::robotModel::robotParts::GyroscopeSensor
+class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GyroscopeSensor : public twoDModel::robotModel::parts::Gyroscope
 {
 	Q_OBJECT
 
 public:
-	Gyroscope(const kitBase::robotModel::DeviceInfo &info
+	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+			, twoDModel::engine::TwoDModelEngineInterface &engine);
 
-	void read() override;
-
-	void calibrate() override;
-
-protected:
-	virtual QVector<int> convert(QVector<int> data);
-
-	engine::TwoDModelEngineInterface &mEngine;
+private:
+	QVector<int> convert(QVector<int> data) override;
 };
 
+}
 }
 }
 }

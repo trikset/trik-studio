@@ -24,6 +24,7 @@
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/touchSensor.h>
+#include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 
 #include <trikKit/robotModel/parts/trikLineSensor.h>
 #include <trikKit/robotModel/parts/trikObjectSensor.h>
@@ -42,6 +43,7 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDObjectSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDLightSensor.h"
+#include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 
 using namespace trik::robotModel;
 using namespace trik::robotModel::twoD;
@@ -105,6 +107,10 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 
 	if (deviceInfo.isA<robotModel::parts::TrikColorSensor>()) {
 		return new parts::ColorSensor(deviceInfo, port);
+	}
+
+	if (deviceInfo.isA<kitBase::robotModel::robotParts::GyroscopeSensor>()) {
+		return new parts::GyroscopeSensor(deviceInfo, port, *mEngine);
 	}
 
 	return twoDModel::robotModel::TwoDRobotModel::createDevice(port, deviceInfo);

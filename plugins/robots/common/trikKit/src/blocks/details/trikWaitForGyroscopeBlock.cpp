@@ -25,7 +25,7 @@ void TrikWaitForGyroscopeBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Degrees");
 	if (!errorsOccured()) {
-		processResponce(reading.value<QVector<int>>()[2], result);
+		processResponce(reading.value<QVector<int>>()[6], result);
 	}
 }
 
