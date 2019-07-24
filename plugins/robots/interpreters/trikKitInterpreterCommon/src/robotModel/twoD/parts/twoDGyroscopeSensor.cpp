@@ -15,6 +15,8 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
+#define FULL_ANGLE 360000
+
 using namespace trik::robotModel::twoD::parts;
 
 GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
@@ -27,5 +29,9 @@ GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
 QVector<int> GyroscopeSensor::convert(QVector<int> data)
 {
 	int t = mEngine.modelTimeline().timestamp();
-	return {0, 0, data[0], t, 0, 0, (data[1] + 180000) % 360000 - 180000};
+	int tmp = (data[1] + FULL_ANGLE/2) % FULL_ANGLE;
+	if (tmp < 0) {
+		tmp += FULL_ANGLE;
+	}
+	return {0, 0, data[0], t, 0, 0, tmp - FULL_ANGLE/2};
 }
