@@ -54,7 +54,9 @@ TrikGyroscopeAdapter::TrikGyroscopeAdapter(kitBase::robotModel::robotParts::Gyro
 	, mStartTime(getTimeValue(model.data()))
 	, mLastUpdateTimeStamp(getTimeValue(model.data()))
 {
-	connect(gyro, SIGNAL(newData(QVector<int>)), this, SLOT(countTilt(QVector<int>)));
+	using namespace std::placeholders;
+	connect(mGyro, &kitBase::robotModel::robotParts::GyroscopeSensor::newData,
+			this, std::bind(&TrikGyroscopeAdapter::countTilt, this, std::bind(&QVariant::value<QVector<int>>,_1)));
 }
 
 QVector<int> TrikGyroscopeAdapter::read() const
