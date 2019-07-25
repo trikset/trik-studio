@@ -26,6 +26,7 @@
 #include <kitBase/blocksBase/common/waitForTouchSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForGyroscopeSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForButtonBlock.h>
+#include <kitBase/blocksBase/common/calibrateGyroscopeBlock.h>
 
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 
@@ -85,6 +86,8 @@ qReal::interpretation::Block *Ev3BlocksFactory::produceBlock(const qReal::Id &el
 		return new WaitForSoundSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "Ev3WaitForGyroscope")) {
 		return new WaitForGyroscopeSensorBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "Ev3CalibrateGyroscope")) {
+		return new CalibrateGyroscopeBlock(mRobotModelManager->model());
 
 	} else if (elementMetatypeIs(element, "Ev3WaitForButton")) {
 		return new WaitForButtonBlock(mRobotModelManager->model());
@@ -172,7 +175,7 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 		}
 		if (!mRobotModelManager->model().name().contains("Gen")) {
 			result
-					<< id("Ev3WaitForGyroscope")
+					<< id("Ev3CalibrateGyroscope")
 					;
 		}
 	}

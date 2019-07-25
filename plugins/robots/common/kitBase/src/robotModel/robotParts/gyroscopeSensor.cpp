@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "kitBase/robotModel/robotParts/gyroscopeSensor.h"
-#include <qrkernel/logging.h>
 
 using namespace kitBase::robotModel;
 using namespace robotParts;
