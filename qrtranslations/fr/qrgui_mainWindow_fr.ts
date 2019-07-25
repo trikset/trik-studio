@@ -95,7 +95,7 @@
         <translation>&amp;Aide</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+10"/>
         <source>&amp;Settings</source>
         <translation>&amp;Paramètres</translation>
     </message>
@@ -233,7 +233,7 @@
         <translation type="vanished">À propos...</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+15"/>
         <source>About Qt...</source>
         <translation>À propos Qt...</translation>
     </message>
@@ -242,7 +242,12 @@
         <translation type="vanished">Afficher l&apos;écran de démarrage</translation>
     </message>
     <message>
-        <location line="-5"/>
+        <location line="-10"/>
+        <source>Open Logs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
         <source>About </source>
         <translation type="unfinished"></translation>
     </message>
@@ -737,7 +742,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+603"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+604"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -746,7 +751,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-409"/>
+        <location line="-410"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -758,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+640"/>
+        <location line="+647"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
