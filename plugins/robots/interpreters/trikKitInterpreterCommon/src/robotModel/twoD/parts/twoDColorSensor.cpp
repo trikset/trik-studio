@@ -28,5 +28,5 @@ void ColorSensor::init()
 
 void ColorSensor::read()
 {
-	emit newData({});
+	setLastData({});
 }

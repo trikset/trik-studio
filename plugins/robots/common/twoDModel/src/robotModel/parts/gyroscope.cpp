@@ -25,11 +25,12 @@ Gyroscope::Gyroscope(const DeviceInfo &info
 	: robotParts::GyroscopeSensor(info, port)
 	, mEngine(engine)
 {
+	setLastData(convert(QVector<int>(7, 0)));
 }
 
 void Gyroscope::read()
 {
-	emit newData(QVariant::fromValue(convert(mEngine.readGyroscopeSensor())));
+	setLastData(convert(mEngine.readGyroscopeSensor()));
 }
 
 QVector<int> Gyroscope::convert(QVector<int> data)
@@ -39,5 +40,5 @@ QVector<int> Gyroscope::convert(QVector<int> data)
 
 void Gyroscope::calibrate()
 {
-	emit newData(QVariant::fromValue(convert(mEngine.calibrateGyroscopeSensor())));
+	setLastData(convert(mEngine.calibrateGyroscopeSensor()));
 }

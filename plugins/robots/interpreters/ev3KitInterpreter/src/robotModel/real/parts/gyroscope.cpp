@@ -38,7 +38,5 @@ void Gyroscope::read()
 	const QByteArray command = mImplementation.readyPercentCommand(mImplementation.lowLevelPort(), 0);
 	QByteArray outputBuf;
 	mRobotCommunicator.send(command, gyroscopeSensorResponseSize, outputBuf);
-	QVector<int> res;
-	res.append(static_cast<int>(outputBuf.data()[5]));
-	emit newData(QVariant::fromValue(res));
+	setLastData({static_cast<int>(outputBuf.data()[5])});
 }

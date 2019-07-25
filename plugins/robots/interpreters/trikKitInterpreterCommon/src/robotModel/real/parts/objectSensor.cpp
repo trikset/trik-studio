@@ -34,5 +34,5 @@ void ObjectSensor::detect()
 
 void ObjectSensor::read()
 {
-	emit newData({});
+	setLastData({});
 }
