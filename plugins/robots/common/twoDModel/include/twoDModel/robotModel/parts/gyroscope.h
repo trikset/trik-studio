@@ -43,7 +43,7 @@ public:
 	void calibrate() override;
 
 protected:
-	virtual QVector<int> convert(QVector<int> data);
+	virtual QVector<int> convert(const QVector<int> &data) const;
 
 	engine::TwoDModelEngineInterface &mEngine;
 };

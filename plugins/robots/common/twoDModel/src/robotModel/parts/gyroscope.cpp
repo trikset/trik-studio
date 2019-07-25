@@ -33,7 +33,7 @@ void Gyroscope::read()
 	setLastData(convert(mEngine.readGyroscopeSensor()));
 }
 
-QVector<int> Gyroscope::convert(QVector<int> data)
+QVector<int> Gyroscope::convert(const QVector<int> &data) const
 {
 	return data;
 }

@@ -26,7 +26,7 @@ GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
 {
 }
 
-QVector<int> GyroscopeSensor::convert(QVector<int> data)
+QVector<int> GyroscopeSensor::convert(const QVector<int> &data) const
 {
 	int t = mEngine.modelTimeline().timestamp();
 	int tmp = (data[1] + FULL_ANGLE/2) % FULL_ANGLE;

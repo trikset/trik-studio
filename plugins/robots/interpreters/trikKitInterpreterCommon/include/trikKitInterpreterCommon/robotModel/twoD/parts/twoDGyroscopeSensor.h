@@ -32,7 +32,7 @@ public:
 			, twoDModel::engine::TwoDModelEngineInterface &engine);
 
 private:
-	QVector<int> convert(QVector<int> data) override;
+	QVector<int> convert(const QVector<int> &data) const override;
 };
 
 }
