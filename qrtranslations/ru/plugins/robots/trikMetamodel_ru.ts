@@ -477,12 +477,12 @@
     <message>
         <location line="-739"/>
         <source>Calibrate gyroscope</source>
-        <translation type="unfinished"></translation>
+        <translation>Калибровка  гироскопа</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Sets gyroscope&apos;s angle to zero in current position.</source>
-        <translation type="unfinished"></translation>
+        <translation>Устанавливает гироскоп в 0 в текущей позиции.</translation>
     </message>
     <message>
         <location line="+572"/>
@@ -904,18 +904,30 @@
     </message>
     <message>
         <location line="+2"/>
+        <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;milliDegrees/sec&apos; parameter value.</source>
+        <translation>Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;миллиГрадусы/сек&apos;.</translation>
+    </message>
+    <message>
         <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees/sec&apos; parameter value.</source>
-        <translation>Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы/сек&apos;.</translation>
+        <translation type="vanished">Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы/сек&apos;.</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Degrees/sec:</source>
-        <translation>Градусы/сек:</translation>
+        <source>milliDegrees/sec:</source>
+        <translation>миллиГрадусы/сек:</translation>
     </message>
     <message>
         <location line="+33"/>
+        <source>milliDegrees/sec</source>
+        <translation>миллиГрадусы/сек</translation>
+    </message>
+    <message>
+        <source>Degrees/sec:</source>
+        <translation type="vanished">Градусы/сек:</translation>
+    </message>
+    <message>
         <source>Degrees/sec</source>
-        <translation>Градусы/сек</translation>
+        <translation type="vanished">Градусы/сек</translation>
     </message>
     <message>
         <location line="+12"/>
