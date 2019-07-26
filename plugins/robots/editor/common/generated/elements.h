@@ -376,7 +376,7 @@
 			: NodeElementType(metamodel)
 		{
 			setName("Function");
-			setFriendlyName(QObject::tr("Function"));
+			setFriendlyName(QObject::tr("Expression"));
 			setDiagram("RobotsDiagram");
 			setDescription(QObject::tr("Evaluates a value of the given expression. Also new variables can be defined in this block. See the 'Expressions Syntax' chapter in help for more information about 'Function' block syntax."));
 			qReal::LabelProperties label_1(1, 0.6, 1.2, "Body", false, 0);
@@ -385,7 +385,7 @@
 			label_1.setScalingY(false);
 			label_1.setHard(false);
 			label_1.setPlainTextMode(false);
-			label_1.setPrefix(QObject::tr("Body:"));
+			label_1.setPrefix(QObject::tr("Expression:"));
 			addLabel(label_1);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/FunctionClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
@@ -410,7 +410,7 @@
 
 		void initProperties()
 		{
-			addProperty("Body", "string", QObject::tr(""), QObject::tr("Body"), QObject::tr(""), false);
+			addProperty("Body", "string", QObject::tr(""), QObject::tr("Expression"), QObject::tr(""), false);
 		}
 	};
 
