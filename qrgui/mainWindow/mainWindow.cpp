@@ -286,6 +286,7 @@ void MainWindow::connectActions()
 	mUi->actionAbout->setText(mUi->actionAbout->text()
 			+ mToolManager->customizer()->windowTitle().remove(mToolManager->customizer()->productVersion()));
 	connect(mUi->actionAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
+	connect(mUi->actionOpenLogs, SIGNAL(triggered()), this, SLOT(openLogs()));
 
 	connect(mUi->actionGesturesShow, SIGNAL(triggered()), this, SLOT(showGestures()));
 
@@ -820,6 +821,12 @@ void MainWindow::showAbout() const
 void MainWindow::showHelp()
 {
 	QDesktopServices::openUrl(QUrl("https://help.trikset.com/"));
+}
+
+void MainWindow::openLogs() const
+{
+	QUrl url("file:///" + qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
+	bool result = QDesktopServices::openUrl(url);
 }
 
 bool MainWindow::unloadPlugin(const QString &pluginName)

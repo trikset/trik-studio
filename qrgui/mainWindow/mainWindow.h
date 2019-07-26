@@ -221,6 +221,7 @@ private slots:
 
 	void showAbout() const;
 	void showHelp();
+	void openLogs() const;
 
 	void fullscreen();
 	void hideBottomDocks();
