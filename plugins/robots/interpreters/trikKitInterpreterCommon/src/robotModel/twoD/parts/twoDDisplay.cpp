@@ -226,6 +226,8 @@ void Display::show(const QVector<int32_t> &array, int width, int height, const Q
 		return;
 	}
 
+	// QImage doesn't create copy of a buffer and requires clean up function
+	// Simple workaround -- create deep-copy using "copy" function
 	mCurrentImage = QImage(rawData, width, height, fmt).copy();
 	mEngine.display()->repaintDisplay();
 }
