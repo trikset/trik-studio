@@ -72,6 +72,7 @@ public slots: // needed for invokeMethod
 	void paint(QPainter *painter, const QRect &outputRect) override;
 	void reset() override;
 	void redraw() override;
+	void show(const QVector<int32_t> &array, int width, int height, const QString &format);
 
 signals:
 	/// Emitted when bacground color has changed.

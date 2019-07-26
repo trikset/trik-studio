@@ -41,6 +41,7 @@ public:
 
 public slots:
 	virtual void showImage(const QString &fileName) override;
+	virtual void show(const QVector<int32_t> &array, int width, int height, const QString &format) override;
 	virtual void addLabel(const QString &text, int x, int y) override;
 	virtual void removeLabels() override {}
 	virtual void setPainterColor(const QString &color) override;
