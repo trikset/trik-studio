@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2007-2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "trikKitInterpreterCommon/robotModel/real/parts/colorSensor.h"
+#include "kitBase/blocksBase/common/calibrateGyroscopeBlock.h"
 
-using namespace trik::robotModel::real::parts;
-using namespace kitBase::robotModel;
+using namespace kitBase::blocksBase::common;
 
-ColorSensor::ColorSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &robotCommunicator)
-	: robotModel::parts::TrikColorSensor(info, port)
-	, mRobotCommunicator(robotCommunicator)
+CalibrateGyroscopeBlock::CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel)
+	: kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>(robotModel)
 {
 }
 
-void ColorSensor::init()
+void CalibrateGyroscopeBlock::doJob(kitBase::robotModel::robotParts::GyroscopeSensor &gyro)
 {
-}
-
-void ColorSensor::read()
-{
-	setLastData({});
+	gyro.calibrate();
+	emit done(mNextBlockId);
 }

@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/blocksBase/common/deviceBlock.h" line="+45"/>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/blocksBase/common/deviceBlock.h" line="+47"/>
         <source>%1 is not configured.</source>
         <translation>%1 не сконфигурирован.</translation>
     </message>
@@ -65,7 +65,7 @@
 <context>
     <name>kitBase::blocksBase::common::WaitForSensorBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForSensorBlock.cpp" line="+47"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/blocksBase/common/waitForSensorBlock.cpp" line="+46"/>
         <source>%1 is not configured on port %2</source>
         <translation>%1 не сконфигурирован на порту %2</translation>
     </message>

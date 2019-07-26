@@ -1,4 +1,4 @@
-/* Copyright 2016 CyberTech Labs Ltd.
+/* Copyright 2007-2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,28 @@
 
 #pragma once
 
-#include <kitBase/robotModel/robotParts/scalarSensor.h>
+#include <twoDModel/robotModel/parts/gyroscope.h>
+#include "trikKitInterpreterCommon/declSpec.h"
 
-namespace ev3 {
+namespace trik {
 namespace robotModel {
+namespace twoD {
 namespace parts {
 
-class Ev3Gyroscope : public kitBase::robotModel::robotParts::ScalarSensor
+class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GyroscopeSensor : public twoDModel::robotModel::parts::Gyroscope
 {
 	Q_OBJECT
-	Q_CLASSINFO("name", "gyroscope")
-	Q_CLASSINFO("friendlyName", tr("Gyroscope"))
 
 public:
-	Ev3Gyroscope(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
+			, const kitBase::robotModel::PortInfo &port
+			, twoDModel::engine::TwoDModelEngineInterface &engine);
+
+private:
+	QVector<int> convert(const QVector<int> &data) const override;
 };
 
+}
 }
 }
 }

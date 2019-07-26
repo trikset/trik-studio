@@ -32,11 +32,10 @@ void WaitForSensorBlock::run()
 {
 	const QString port = this->port();
 
-	/// @todo Works only with scalar sensors.
 	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
-	robotParts::ScalarSensor * const sensor = RobotModelUtils::findDevice<robotParts::ScalarSensor>(mRobotModel, mPort);
+	auto const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
 	if (sensor) {
-		mConnections << connect(sensor, &robotParts::ScalarSensor::newData
+		mConnections << connect(sensor, &robotParts::AbstractSensor::newData
 								, this, &WaitForSensorBlock::responseSlot, Qt::UniqueConnection);
 		mConnections << connect(sensor, &robotParts::AbstractSensor::failure
 								, this, &WaitForSensorBlock::failureSlot, Qt::UniqueConnection);

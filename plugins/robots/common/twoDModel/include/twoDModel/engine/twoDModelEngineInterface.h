@@ -53,8 +53,11 @@ public:
 	/// Returns 3 integer values that represents acceleration on three coordinate axes
 	virtual QVector<int> readAccelerometerSensor() const = 0;
 
-	/// Returns 3 integer values that represents angular velocity on three coordinate axes
+	/// Returns 2 integer values that represents angular velocity and absolute angle in horizontal plane
 	virtual QVector<int> readGyroscopeSensor() const = 0;
+
+	/// Calibrate absolute angle of gyroscope and return gyroscope calibrated value
+	virtual QVector<int> calibrateGyroscopeSensor() = 0;
 
 	/// Returns the configured color sensor`s value on the given port.
 	/// It  may be the percent of some color under the sensor or the dominating color enum value.

@@ -26,6 +26,7 @@
 #include <kitBase/blocksBase/common/waitForTouchSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForGyroscopeSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForButtonBlock.h>
+#include <kitBase/blocksBase/common/calibrateGyroscopeBlock.h>
 
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 
@@ -85,6 +86,8 @@ qReal::interpretation::Block *Ev3BlocksFactory::produceBlock(const qReal::Id &el
 		return new WaitForSoundSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "Ev3WaitForGyroscope")) {
 		return new WaitForGyroscopeSensorBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "Ev3CalibrateGyroscope")) {
+		return new CalibrateGyroscopeBlock(mRobotModelManager->model());
 
 	} else if (elementMetatypeIs(element, "Ev3WaitForButton")) {
 		return new WaitForButtonBlock(mRobotModelManager->model());
@@ -153,8 +156,6 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 				<< id("Ev3WaitForSound")
 				<< id("Ev3SendMail")
 				<< id("Ev3WaitForReceivingMail")
-				<< id("Ev3WaitForGyroscope")
-				<< id("Ev3CalibrateGyroscope")
 				<< id("Ev3StartCompassCalibration")
 				<< id("Ev3StopCompassCalibration")
 				<< id("Ev3ReadRGB")
@@ -166,12 +167,16 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 				<< id("Ev3ReadAvrLL")
 				<< id("Ev3ReadAllLL")
 				<< id("Ev3ReadSteeringLL")
-				<< id("Ev3WaitForGyroscope")
 				<< id("Ev3WaitForReceivingMail")
 				;
 	} else {
 		if (!mInterpretedModels.contains(mRobotModelManager->model().robotId())) {
 			result << id("Join") << id("SendMessageThreads") << id("ReceiveMessageThreads") << id("KillThread");
+		}
+		if (!mRobotModelManager->model().name().contains("Gen")) {
+			result
+					<< id("Ev3CalibrateGyroscope")
+					;
 		}
 	}
 

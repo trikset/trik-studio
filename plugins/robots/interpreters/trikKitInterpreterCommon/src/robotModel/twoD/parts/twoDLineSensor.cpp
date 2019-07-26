@@ -96,7 +96,7 @@ void LineSensor::read()
 	const int cross = qRound(crossBlacks * 100.0 / (height * horizontalLineWidth));
 	const int lineWidth = blacks / height;
 	QVector<int> v = { x, cross, lineWidth };
-	emit newData(QVariant::fromValue(v));
+	setLastData(v);
 }
 
 bool LineSensor::closeEnough(QRgb color) const

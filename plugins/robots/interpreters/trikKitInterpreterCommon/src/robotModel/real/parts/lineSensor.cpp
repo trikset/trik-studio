@@ -33,5 +33,5 @@ void LineSensor::detectLine()
 
 void LineSensor::read()
 {
-	emit newData({});
+	setLastData({});
 }

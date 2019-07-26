@@ -28,13 +28,13 @@ Accelerometer::Accelerometer(const DeviceInfo &info, const PortInfo &port
 
 void Accelerometer::read()
 {
-	emit newData(QVariant::fromValue(mOldValue));
+	setLastData(mOldValue);
 }
 
 void Accelerometer::onIncomingData(const QString &portName, const QVector<int> &value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(QVariant::fromValue(mOldValue));
+		setLastData(mOldValue);
 	}
 }

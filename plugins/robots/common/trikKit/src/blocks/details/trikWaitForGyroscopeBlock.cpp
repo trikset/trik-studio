@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2013-2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "trikKitInterpreterCommon/robotModel/real/parts/colorSensor.h"
+#include "trikWaitForGyroscopeBlock.h"
 
-using namespace trik::robotModel::real::parts;
-using namespace kitBase::robotModel;
+using namespace trik::blocks::details;
 
-ColorSensor::ColorSensor(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::TcpRobotCommunicator &robotCommunicator)
-	: robotModel::parts::TrikColorSensor(info, port)
-	, mRobotCommunicator(robotCommunicator)
+TrikWaitForGyroscopeBlock::TrikWaitForGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel)
+	: kitBase::blocksBase::common::WaitForGyroscopeSensorBlock(robotModel)
 {
 }
 
-void ColorSensor::init()
+void TrikWaitForGyroscopeBlock::responseSlot(const QVariant &reading)
 {
+	const int result = eval<int>("Degrees");
+	if (!errorsOccured()) {
+		processResponce(reading.value<QVector<int>>()[2], result);
+	}
 }
 
-void ColorSensor::read()
+QString TrikWaitForGyroscopeBlock::port()
 {
-	setLastData({});
+	return "GyroscopePort";
 }

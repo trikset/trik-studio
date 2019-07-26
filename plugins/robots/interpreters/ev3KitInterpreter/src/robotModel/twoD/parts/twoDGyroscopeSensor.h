@@ -1,4 +1,4 @@
-/* Copyright 2016 CyberTech Labs Ltd.
+/* Copyright 2007-2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,12 +12,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "ev3Kit/robotModel/parts/ev3Gyroscope.h"
+#pragma once
 
-using namespace ev3::robotModel::parts;
-using namespace kitBase::robotModel;
+#include <twoDModel/robotModel/parts/gyroscope.h>
 
-Ev3Gyroscope::Ev3Gyroscope(const DeviceInfo &info, const PortInfo &port)
-	: kitBase::robotModel::robotParts::ScalarSensor(info, port)
+namespace ev3 {
+namespace robotModel {
+namespace twoD {
+namespace parts {
+
+class GyroscopeSensor : public twoDModel::robotModel::parts::Gyroscope
 {
+	Q_OBJECT
+
+public:
+	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
+			, const kitBase::robotModel::PortInfo &port
+			, twoDModel::engine::TwoDModelEngineInterface &engine);
+
+private:
+	QVector<int> convert(const QVector<int> &data) const override;
+};
+
+}
+}
+}
 }

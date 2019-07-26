@@ -22,10 +22,15 @@ using namespace kitBase::robotModel;
 Gyroscope::Gyroscope(const kitBase::robotModel::DeviceInfo &info
 		, const kitBase::robotModel::PortInfo &port
 		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
-	: ev3::robotModel::parts::Ev3Gyroscope(info, port)
+	: kitBase::robotModel::robotParts::GyroscopeSensor(info, port)
 	, mImplementation(robotCommunicator, port)
 	, mRobotCommunicator(robotCommunicator)
 {
+}
+
+void Gyroscope::calibrate()
+{
+	/// @todo
 }
 
 void Gyroscope::read()
@@ -33,5 +38,5 @@ void Gyroscope::read()
 	const QByteArray command = mImplementation.readyPercentCommand(mImplementation.lowLevelPort(), 0);
 	QByteArray outputBuf;
 	mRobotCommunicator.send(command, gyroscopeSensorResponseSize, outputBuf);
-	emit newData(static_cast<int>(outputBuf.data()[5]));
+	setLastData({static_cast<int>(outputBuf.data()[5])});
 }

@@ -1291,6 +1291,20 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Calibrate gyroscope" name="TrikCalibrateGyroscope" path="" description="Sets gyroscope's angle to zero in current position.">
+					<graphics>
+							<picture sizex="50" sizey="50">
+									<image y1="0" name="images/calibrateGyroscopeBlock.svg" x1="0" y2="50" x2="50"/>
+							</picture>
+							<nonResizeable/>
+					</graphics>
+					<logic>
+						<container/>
+						<generalizations>
+							<parent parentName="AbstractNode"/>
+						</generalizations>
+					</logic>
+			</node>
 		</graphicTypes>
 
 		<palette sorted="false">
@@ -1317,8 +1331,10 @@
 				<element name="TrikSendMessage" />
 				<element name="TrikWriteToFile"/>
 				<element name="TrikRemoveFile"/>
+				<element name="TrikCalibrateGyroscope"/>
 			</group>
 			<group name="Wait">
+				<element name="TrikWaitForGyroscope" />
 				<element name="TrikWaitForTouchSensor"/>
 				<element name="TrikWaitForLight"/>
 				<element name="TrikWaitForSonarDistance"/>

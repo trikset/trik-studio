@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2007-2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,29 @@
 
 #pragma once
 
-#include "vectorSensor.h"
-#include "kitBase/kitBaseDeclSpec.h"
+#include <kitBase/blocksBase/common/deviceBlock.h>
+#include "kitBase/robotModel/robotParts/gyroscopeSensor.h"
 
 namespace kitBase {
+
 namespace robotModel {
 namespace robotParts {
+class GyroscopeSensor;
+}
+}
 
-/// Base class for gyroscope sensors.
-class ROBOTS_KIT_BASE_EXPORT GyroscopeSensor : public VectorSensor
+namespace blocksBase {
+namespace common {
+
+/// Interpreter implementation for "Calibrate gyroscope" block.
+class ROBOTS_KIT_BASE_EXPORT CalibrateGyroscopeBlock :
+		public kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>
 {
-	Q_OBJECT
-	Q_CLASSINFO("name", "gyroscope")
-	Q_CLASSINFO("friendlyName", tr("Gyroscope"))
-
 public:
-	/// Constructor, takes device type info and port on which this sensor is configured.
-	GyroscopeSensor(const DeviceInfo &info, const PortInfo &port);
+	explicit CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-	/// Clears gyroscope readings, and makes this sensor return "zero", like a robot is turned on just now.
-	virtual void calibrate() = 0;
+protected:
+	virtual void doJob(kitBase::robotModel::robotParts::GyroscopeSensor &gyro);
 };
 
 }

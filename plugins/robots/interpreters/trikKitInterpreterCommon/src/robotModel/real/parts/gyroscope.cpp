@@ -28,13 +28,18 @@ Gyroscope::Gyroscope(const DeviceInfo &info, const PortInfo &port
 
 void Gyroscope::read()
 {
-	emit newData(QVariant::fromValue(mOldValue));
+	setLastData(mOldValue);
+}
+
+void Gyroscope::calibrate()
+{
+	/// @todo
 }
 
 void Gyroscope::onIncomingData(const QString &portName, const QVector<int> &value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(QVariant::fromValue(mOldValue));
+		setLastData(mOldValue);
 	}
 }

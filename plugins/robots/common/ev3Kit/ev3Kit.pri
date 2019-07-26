@@ -47,7 +47,6 @@ HEADERS += \
 	$$PWD/include/ev3Kit/robotModel/parts/ev3Speaker.h \
 	$$PWD/include/ev3Kit/robotModel/parts/ev3Motor.h \
 	$$PWD/include/ev3Kit/robotModel/parts/ev3Led.h \
-	$$PWD/include/ev3Kit/robotModel/parts/ev3Gyroscope.h \
 	$$PWD/include/ev3Kit/robotModel/parts/ev3Compass.h \
 	$$PWD/include/ev3Kit/robotModel/parts/ev3DCIRSeeker.h \
 	$$PWD/include/ev3Kit/robotModel/parts/ev3ACIRSeeker.h \
@@ -78,7 +77,6 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/ev3Speaker.cpp \
 	$$PWD/src/robotModel/parts/ev3Motor.cpp \
 	$$PWD/src/robotModel/parts/ev3Led.cpp \
-	$$PWD/src/robotModel/parts/ev3Gyroscope.cpp \
 	$$PWD/src/robotModel/parts/ev3Compass.cpp \
 	$$PWD/src/robotModel/parts/ev3DCIRSeeker.cpp \
 	$$PWD/src/robotModel/parts/ev3ACIRSeeker.cpp \

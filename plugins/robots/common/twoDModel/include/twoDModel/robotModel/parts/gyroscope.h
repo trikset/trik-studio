@@ -40,7 +40,11 @@ public:
 
 	void read() override;
 
-private:
+	void calibrate() override;
+
+protected:
+	virtual QVector<int> convert(const QVector<int> &data) const;
+
 	engine::TwoDModelEngineInterface &mEngine;
 };
 

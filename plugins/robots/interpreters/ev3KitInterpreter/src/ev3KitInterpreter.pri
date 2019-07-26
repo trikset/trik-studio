@@ -58,6 +58,7 @@ HEADERS += \
 	$$PWD/robotModel/twoD/parts/twoDSpeaker.h \
 	$$PWD/robotModel/twoD/parts/twoDMotor.h \
 	$$PWD/robotModel/twoD/parts/twoDLed.h \
+	$$PWD/robotModel/twoD/parts/twoDGyroscopeSensor.h \
 
 SOURCES += \
 	$$PWD/ev3AdditionalPreferences.cpp \
@@ -87,6 +88,7 @@ SOURCES += \
 	$$PWD/robotModel/twoD/parts/twoDSpeaker.cpp \
 	$$PWD/robotModel/twoD/parts/twoDMotor.cpp \
 	$$PWD/robotModel/twoD/parts/twoDLed.cpp \
+	$$PWD/robotModel/twoD/parts/twoDGyroscopeSensor.cpp \
 
 FORMS += \
 	$$PWD/ev3AdditionalPreferences.ui \

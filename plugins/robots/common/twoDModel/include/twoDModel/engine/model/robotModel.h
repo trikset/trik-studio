@@ -147,6 +147,8 @@ public:
 	/// Returns gyroscope sensor data.
 	Q_INVOKABLE QVector<int> gyroscopeReading() const;
 
+	Q_INVOKABLE QVector<int> gyroscopeCalibrate();
+
 	/// Returns a bounding path of robot and its sensors in scene coordinates.
 	QPainterPath robotBoundingPath() const;
 
@@ -213,6 +215,7 @@ private:
 
 	QPointF mPos;
 	qreal mAngle;
+	qreal mGyroAngle;
 	qreal mDeltaRadiansOfAngle;
 	int mBeepTime;
 	bool mIsOnTheGround;

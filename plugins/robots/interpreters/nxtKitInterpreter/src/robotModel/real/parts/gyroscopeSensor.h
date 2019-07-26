@@ -32,6 +32,7 @@ public:
 			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
+	void calibrate() override;
 	void doConfiguration() override;
 
 private slots:

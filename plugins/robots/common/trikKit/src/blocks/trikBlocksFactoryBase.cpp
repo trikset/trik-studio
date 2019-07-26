@@ -19,10 +19,10 @@
 #include <kitBase/blocksBase/common/waitForTouchSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForLightSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForAccelerometerBlock.h>
-#include <kitBase/blocksBase/common/waitForGyroscopeSensorBlock.h>
 #include <kitBase/blocksBase/common/waitForSonarDistanceBlock.h>
 #include <kitBase/blocksBase/common/waitForButtonBlock.h>
 #include <kitBase/blocksBase/common/getButtonCodeBlock.h>
+#include <kitBase/blocksBase/common/calibrateGyroscopeBlock.h>
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 
 #include <qrutils/interpreter/blocks/emptyBlock.h>
@@ -54,6 +54,7 @@
 #include "details/waitGamepadDisconnectBlock.h"
 #include "details/waitGamepadWheelBlock.h"
 #include "details/waitPadPressBlock.h"
+#include "details/trikWaitForGyroscopeBlock.h"
 
 #include "details/writeToFileBlock.h"
 #include "details/removeFileBlock.h"
@@ -108,7 +109,7 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new WaitForSonarDistanceBlock(mRobotModelManager->model()
 				, kitBase::robotModel::DeviceInfo::create<robotModel::parts::TrikSonarSensor>());
 	} else if (elementMetatypeIs(element, "TrikWaitForGyroscope")) {
-		return new WaitForGyroscopeSensorBlock(mRobotModelManager->model());
+		return new details::TrikWaitForGyroscopeBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForAccelerometer")) {
 		return new WaitForAccelerometerSensorBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForMotion")) {
@@ -155,6 +156,9 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 
 	} else if (elementMetatypeIs(element, "GetButtonCode")) {
 		return new GetButtonCodeBlock(mRobotModelManager->model());
+
+	} else if (elementMetatypeIs(element, "TrikCalibrateGyroscope")) {
+		return new CalibrateGyroscopeBlock(mRobotModelManager->model());
 	}
 
 	return nullptr;
@@ -225,6 +229,7 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 			;
 
 	result << id("GetButtonCode");
+	result << id("TrikCalibrateGyroscope");
 
 	return result;
 }
@@ -243,7 +248,6 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 
 	if (mRobotModelManager->model().name().contains("TwoD")) {
 		result
-				<< id("TrikWaitForGyroscope")
 				<< id("TrikWaitForAccelerometer")
 				<< id("TrikSystem")
 				<< id("TrikWaitForMotion")
@@ -257,6 +261,11 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikInitVideoStreaming")
 				<< id("TrikStopCamera")
 				<< id("TrikStopVideoStreaming")
+				;
+	} else {
+		result
+				<< id("TrikWaitForGyroscope")
+				<< id("TrikCalibrateGyroscope")
 				;
 	}
 

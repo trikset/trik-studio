@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2007-2019 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,22 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/accelerometer.h"
-
+#include "twoDGyroscopeSensor.h"
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
+#define FULL_ANGLE 360000
 
-Accelerometer::Accelerometer(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
-	: robotParts::AccelerometerSensor(info, port)
-	, mEngine(engine)
+using namespace ev3::robotModel::twoD::parts;
+
+GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
+		, const kitBase::robotModel::PortInfo &port
+		, twoDModel::engine::TwoDModelEngineInterface &engine)
+	: twoDModel::robotModel::parts::Gyroscope(info, port, engine)
 {
 }
 
-void Accelerometer::read()
+QVector<int> GyroscopeSensor::convert(const QVector<int> &data) const
 {
-	setLastData(mEngine.readAccelerometerSensor());
+	int tmp = (data[1] + FULL_ANGLE/2) % FULL_ANGLE;
+	if (tmp < 0) {
+		tmp += FULL_ANGLE;
+	}
+	return {(tmp - FULL_ANGLE/2) / 1000};
 }

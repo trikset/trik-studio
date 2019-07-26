@@ -29,7 +29,7 @@ void WaitForGyroscopeSensorBlock::responseSlot(const QVariant &reading)
 {
 	const int result = eval<int>("Degrees");
 	if (!errorsOccured()) {
-		processResponce(reading.toInt(), result);
+		processResponce(reading.value<QVector<int>>()[0], result);
 	}
 }
 

@@ -46,13 +46,11 @@ static quint64 getTimeValue(trik::robotModel::twoD::TrikTwoDRobotModel * const m
 
 TrikGyroscopeAdapter::TrikGyroscopeAdapter(kitBase::robotModel::robotParts::GyroscopeSensor *gyro
 		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
-	: mTimeInited(false)
-	, mGyro(gyro)
+	: mGyro(gyro)
 	, mModel(model)
 	, mResult(7, 0)
 	, mQuaternion(1, 0, 0, 0)
 	, mStartTime(getTimeValue(model.data()))
-	, mLastUpdateTimeStamp(getTimeValue(model.data()))
 {
 	using namespace std::placeholders;
 	connect(mGyro, &kitBase::robotModel::robotParts::GyroscopeSensor::newData,
@@ -67,12 +65,12 @@ QVector<int> TrikGyroscopeAdapter::read() const
 void TrikGyroscopeAdapter::calibrate(int msec)
 {
 	Q_UNUSED(msec); // Don't wait for now. 2D model calibrates immedeatly with zero bias (at least I hope so)
-	mTimeInited = false;
+	mModel->engine()->calibrateGyroscopeSensor();
 }
 
 bool TrikGyroscopeAdapter::isCalibrated() const
 {
-	return !mTimeInited;
+	return true;
 }
 
 QVector<int> TrikGyroscopeAdapter::readRawData() const
@@ -84,21 +82,7 @@ QVector<int> TrikGyroscopeAdapter::readRawData() const
 
 void TrikGyroscopeAdapter::countTilt(const QVector<int> &oldFormat)
 {
-	const quint64 timeStamp = getTimeValue(mModel.data());
-
-	if (!mTimeInited) {
-		mTimeInited = true;
-		mLastUpdateTimeStamp = timeStamp;
-		mInitialTilt = oldFormat[3];
-	} else {
-		mResult[0] = oldFormat[0];
-		mResult[1] = oldFormat[1];
-		mResult[2] = oldFormat[2];
-		mResult[3] = convertToTrikRuntimeTime(timeStamp);
-		mResult[4] = 0;
-		mResult[5] = 0;
-		mResult[6] = (oldFormat[3] - mInitialTilt + 180000) % 360000 - 180000;
-	}
+	mResult = QVector<int>(oldFormat);
 }
 
 qreal TrikGyroscopeAdapter::degreeToMilidegree(qreal value)

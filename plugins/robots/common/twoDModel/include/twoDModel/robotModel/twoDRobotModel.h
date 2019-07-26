@@ -130,9 +130,10 @@ protected:
 
 	virtual kitBase::robotModel::DeviceInfo markerInfo() const;
 
+	engine::TwoDModelEngineInterface *mEngine = nullptr;  // Does not have ownership.
+
 private:
 	const kitBase::robotModel::RobotModelInterface *mRealModel;
-	engine::TwoDModelEngineInterface *mEngine = nullptr;  // Does not have ownership.
 };
 
 }

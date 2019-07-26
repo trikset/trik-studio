@@ -35,6 +35,8 @@ public:
 
 	void read() override;
 
+	void calibrate() override;
+
 public slots:
 	void onIncomingData(const QString &portName, const QVector<int> &value);
 

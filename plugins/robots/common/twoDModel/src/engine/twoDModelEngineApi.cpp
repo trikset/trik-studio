@@ -145,6 +145,16 @@ QVector<int> TwoDModelEngineApi::readGyroscopeSensor() const
 	return t;
 }
 
+QVector<int> TwoDModelEngineApi::calibrateGyroscopeSensor()
+{
+	QVector<int> t;
+	auto target = mModel.robotModels()[0];
+	QMetaObject::invokeMethod(target, "gyroscopeCalibrate"
+			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
+			, Q_RETURN_ARG(QVector<int>, t));
+	return t;
+}
+
 int TwoDModelEngineApi::spoilSonarReading(const int distance) const
 {
 	const qreal ran = mathUtils::Math::gaussianNoise(spoilSonarDispersion);
