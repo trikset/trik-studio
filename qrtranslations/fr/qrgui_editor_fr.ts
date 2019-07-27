@@ -192,7 +192,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+237"/>
         <source>Add child</source>
         <translation type="unfinished">Rajouter un élement</translation>
     </message>
