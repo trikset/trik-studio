@@ -196,7 +196,7 @@
         <translation>Заменить на...</translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+237"/>
         <source>Add child</source>
         <translation>Добавить элемент</translation>
     </message>

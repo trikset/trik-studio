@@ -684,11 +684,8 @@ void EditorViewScene::replaceBy()
 		for (const QString &elementInGroup : groupsContents) {
 			const Id id = Id::loadFromString("qrm:/" + elem->id().editor() + "/"
 					+ elem->id().diagram() + "/" + elementInGroup);
-			const QString friendlyName = mEditorManager.friendlyName(id);
 			if (currentDiagramsAllowedElementsSet.contains(id)) {
-				QAction *element = new QAction(friendlyName, &menu);
-				element->setData(id.toString());
-				menu.addAction(element);
+				menu.addAction(mEditorManager.icon(id), mEditorManager.friendlyName(id))->setData(id.toString());
 			}
 		}
 	}
