@@ -4,12 +4,11 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+388"/>
         <source>Body:</source>
-        <translation>Функция:</translation>
+        <translation type="vanished">Функция:</translation>
     </message>
     <message>
-        <location line="+98"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+486"/>
         <location line="+292"/>
         <source>Condition:</source>
         <translation>Условие:</translation>
@@ -149,7 +148,8 @@
         <translation type="vanished">Громкость:</translation>
     </message>
     <message>
-        <location line="+512"/>
+        <location line="-311"/>
+        <location line="+823"/>
         <source>Expression:</source>
         <translation>Выражение:</translation>
     </message>
@@ -815,12 +815,11 @@
         <translation>Разделяет исполнение программы на несколько задач, которые будут исполняться параллельно с точки зрения программиста. К примеру, в этом случае ожидание сигнала от датчика или истечения некоторого промежутка времени могут происходить одновременно. Этот блок должен иметь как минимум две исходящие связи. Свойство &quot;Условие&quot; всех исходящих связей должно содержать уникальные идентификаторы задач, и один из этих идентификаторов должен совпадать с идентификатором задачи, из которой вызван этот блок (считается, что первый блок в программе вызывается из задачи с идентификатором &apos;main&apos;).</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Function</source>
-        <translation>Функция</translation>
+        <translation type="vanished">Функция</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+35"/>
         <source>Evaluates a value of the given expression. Also new variables can be defined in this block. See the &apos;Expressions Syntax&apos; chapter in help for more information about &apos;Function&apos; block syntax.</source>
         <translation>Посчитать значение заданного выражения. Также в данном блоке допускается определение переменных. Подробнее про синтаксис допустимых выражений параметра &apos;Функция&apos; см. в документации в разделе &apos;Синтаксис выражений&apos;.</translation>
     </message>
@@ -1119,7 +1118,8 @@
         <translation>Выбирает ветку, по которой будет продолжено исполнение программы. Значение выражения, указанного в свойстве &apos;Выражение&apos; сравнивается со значениями на исходящих связях. Если среди них найдено равное, исполнение будет продолжено по этой ветке. В противном случае будет выбрана ветка без маркера.</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="-825"/>
+        <location line="+856"/>
         <source>Expression</source>
         <translation>Выражение</translation>
     </message>
@@ -1513,9 +1513,13 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
         <source>Body</source>
-        <translation>Тело функции</translation>
+        <translation type="vanished">Тело функции</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
+        <source>Expression</source>
+        <translation type="unfinished">Выражение</translation>
     </message>
     <message>
         <location line="+568"/>

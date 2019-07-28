@@ -112,12 +112,11 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="-311"/>
         <source>Body:</source>
-        <translation>Corps :</translation>
+        <translation type="vanished">Corps :</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="-266"/>
         <location line="+453"/>
         <location line="+62"/>
         <location line="+361"/>
@@ -175,7 +174,8 @@
         <translation>Message :</translation>
     </message>
     <message>
-        <location line="+144"/>
+        <location line="-679"/>
+        <location line="+823"/>
         <source>Expression:</source>
         <translation>Expression :</translation>
     </message>
@@ -586,12 +586,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Function</source>
-        <translation>Fonction</translation>
+        <translation type="vanished">Fonction</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+35"/>
         <source>Evaluates a value of the given expression. Also new variables can be defined in this block. See the &apos;Expressions Syntax&apos; chapter in help for more information about &apos;Function&apos; block syntax.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -891,7 +890,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="-825"/>
+        <location line="+856"/>
         <source>Expression</source>
         <translation>Expression</translation>
     </message>
@@ -1185,9 +1185,13 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
         <source>Body</source>
-        <translation type="unfinished">Corps</translation>
+        <translation type="obsolete">Corps</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
+        <source>Expression</source>
+        <translation type="unfinished">Expression</translation>
     </message>
     <message>
         <location line="+568"/>

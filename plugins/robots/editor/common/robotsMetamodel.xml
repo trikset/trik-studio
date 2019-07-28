@@ -48,7 +48,7 @@
 			<role arrowType="no_arrow" name="NoArrowRole">
 			    <properties/>
 			</role>
- 			<role arrowType="open_arrow" name="OpenArrowRole">
+			<role arrowType="open_arrow" name="OpenArrowRole">
 			    <properties/>
 			</role>
 		</nonGraphicTypes>
@@ -457,20 +457,20 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Function" name="Function" path="58, 12 : 58, 172 :  | 58, 12 : 148, 12 :  | 12, 96 : 108, 96 : " description="Evaluates a value of the given expression. Also new variables can be defined in this block. See the 'Expressions Syntax' chapter in help for more information about 'Function' block syntax.">
+			<node displayedName="Expression" name="Function" path="58, 12 : 58, 172 :  | 58, 12 : 148, 12 :  | 12, 96 : 108, 96 : " description="Evaluates a value of the given expression. Also new variables can be defined in this block. See the 'Expressions Syntax' chapter in help for more information about 'Function' block syntax.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/functionBlock.png" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
-						<label x="30" y="60" textBinded="Body" background="white" prefix="Body:"/>
+						<label x="30" y="60" textBinded="Body" background="white" prefix="Expression:"/>
 					</labels>
 					<nonResizeable/>
 				</graphics>
 				<logic>
 					<container/>
 					<properties>
-						<property displayedName="Body" type="string" name="Body"/>
+						<property displayedName="Expression" type="string" name="Body"/>
 					</properties>
 					<generalizations>
 						<parent parentName="AbstractNode"/>
