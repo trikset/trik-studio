@@ -122,16 +122,16 @@
     <name>kitBase::robotModel::robotParts::ColorSensorPassive</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorPassive.h" line="+33"/>
-        <source>Color sensor (passive)</source>
-        <translation>Сенсор цвета (пассивный)</translation>
+        <source>Color sensor (NXT: passive / EV3: ambient)</source>
+        <translation>Сенсор цвета (NXT: пассивный / EV3: рассеянный)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorRed</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRed.h" line="+30"/>
-        <source>Color sensor (red)</source>
-        <translation>Сенсор цвета (красный)</translation>
+        <source>Color sensor (NXT: red / EV3: reflected)</source>
+        <translation>Сенсор цвета (NXT: красный / EV3: отраженный)</translation>
     </message>
 </context>
 <context>
