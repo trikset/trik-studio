@@ -118,6 +118,7 @@ $qRealDir/libqrgui-text-editor.so* \
 $qRealDir/libqrgui-thirdparty.so* \
 $qRealDir/libqrgui-tool-plugin-interface.so* \
 $qRealDir/libqrkernel.so* \
+$qRealDir/libquazip.so* \
 $qRealDir/libqrrepo.so* \
 $qRealDir/libqrtext.so* \
 $qRealDir/libqrutils.so* \
