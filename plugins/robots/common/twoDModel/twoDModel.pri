@@ -27,6 +27,7 @@ TRANSLATIONS = \
 	$$PWD/../../../../qrtranslations/fr/plugins/robots/twoDModel_fr.ts \
 
 HEADERS += \
+	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.h \
 	$$PWD/include/twoDModel/twoDModelDeclSpec.h \
 	$$PWD/include/twoDModel/engine/twoDModelControlInterface.h \
 	$$PWD/include/twoDModel/engine/twoDModelDisplayInterface.h \
@@ -121,6 +122,7 @@ HEADERS += \
 	$$PWD/src/engine/model/physics/parts/box2DItem.h \
 
 SOURCES += \
+	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \
 	$$PWD/src/engine/twoDModelGuiFacade.cpp \

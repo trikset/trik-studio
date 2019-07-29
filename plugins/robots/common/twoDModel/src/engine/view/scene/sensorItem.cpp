@@ -26,6 +26,7 @@
 #include "twoDModel/robotModel/parts/colorSensorRed.h"
 #include "twoDModel/robotModel/parts/colorSensorGreen.h"
 #include "twoDModel/robotModel/parts/colorSensorBlue.h"
+#include "twoDModel/robotModel/parts/colorSensorAmbient.h"
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -174,7 +175,7 @@ QString SensorItem::name() const
 		return "color_blue";
 	} else if (sensor.isA<robotParts::RangeSensor>()) {
 		return "sonar";
-	} else if (sensor.isA<robotParts::LightSensor>()) {
+	} else if (sensor.isA<robotParts::LightSensor>() || sensor.isA<robotParts::ColorSensorAmbient>()) {
 		return "light";
 	} else {
 		Q_ASSERT(!"Unknown sensor type");

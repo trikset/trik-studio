@@ -34,6 +34,7 @@ HEADERS += \
 	$$PWD/ev3AdditionalPreferences.h \
 	$$PWD/ev3KitInterpreterPlugin.h \
 	$$PWD/ev3DisplayWidget.h \
+	$$PWD/robotModel/real/parts/colorSensorAmbient.h \
 	$$PWD/robotModel/real/realRobotModel.h \
 	$$PWD/robotModel/real/usbRealRobotModel.h \
 	$$PWD/robotModel/real/bluetoothRealRobotModel.h \
@@ -64,6 +65,7 @@ SOURCES += \
 	$$PWD/ev3AdditionalPreferences.cpp \
 	$$PWD/ev3KitInterpreterPlugin.cpp \
 	$$PWD/ev3DisplayWidget.cpp \
+	$$PWD/robotModel/real/parts/colorSensorAmbient.cpp \
 	$$PWD/robotModel/real/realRobotModel.cpp \
 	$$PWD/robotModel/real/usbRealRobotModel.cpp \
 	$$PWD/robotModel/real/bluetoothRealRobotModel.cpp \
