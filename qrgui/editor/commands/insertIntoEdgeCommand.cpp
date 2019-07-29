@@ -70,7 +70,12 @@ bool InsertIntoEdgeCommand::execute()
 		mLastId = mCreateCommand->results().first().id();
 	}
 
-	EdgeElement *edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(mPos);
+	NodeElement *firstNode = mScene.getNodeById(mFirstId);
+	NodeElement *lastNode = mScene.getNodeById(mLastId);
+
+	auto centerPos = mFirstId == mLastId && firstNode ? firstNode->pos() + firstNode->contentsRect().center() : mPos;
+
+	EdgeElement *edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(centerPos);
 	if (!edge) {
 		return true;
 	}
@@ -85,8 +90,8 @@ bool InsertIntoEdgeCommand::execute()
 		initCommand(mCreateFirst, type, mGraphicalAssistApi.properties(edge->logicalId()));
 		initCommand(mCreateSecond, type, {});
 
-		makeLink(mCreateFirst, oldSrc, mScene.getNodeById(mFirstId));
-		makeLink(mCreateSecond, mScene.getNodeById(mLastId), oldDst);
+		makeLink(mCreateFirst, oldSrc, firstNode);
+		makeLink(mCreateSecond, lastNode, oldDst);
 
 		mConfiguration = mGraphicalAssistApi.configuration(edge->id());
 		if (!mRemoveOldEdge) {
@@ -101,8 +106,8 @@ bool InsertIntoEdgeCommand::execute()
 		mRemoveOldEdge->redo();
 
 		mElementShifting.clear();
-		mScene.resolveOverlaps(mScene.getNodeById(mLastId), mPos, mShift, mElementShifting);
-		mScene.resolveOverlaps(mScene.getNodeById(mFirstId), mPos, mShift, mElementShifting);
+		mScene.resolveOverlaps(firstNode, mPos, mShift, mElementShifting);
+		mScene.resolveOverlaps(lastNode, mPos, mShift, mElementShifting);
 	}
 
 	return true;

@@ -728,6 +728,10 @@ void EditorViewScene::replaceBy()
 				mCreatePoint = line.at(line.size() / 2) + edge->pos();
 			}
 
+			auto iconSize = mEditorManager.iconSize(Id::loadFromString(string));
+
+			mCreatePoint -= QPointF(iconSize.width()/2, iconSize.height()/2);
+
 			const Id createdId = createElement(string);
 		}
 	}
