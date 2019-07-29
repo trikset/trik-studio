@@ -33,7 +33,10 @@ QString QRealFileDialog::getOpenFileName(const QString &id
 	} else {
 		lastSelectedFilter = QRealFileDialog::lastSelectedFilter(id, filter.split(";;")[0]);
 	}
-	auto result = QFileDialog::getOpenFileName(parent, caption, lastDir, filter, &lastSelectedFilter, options);
+	auto filters = filter.split(";;");
+	filters.removeDuplicates();
+	auto cleanedFilter = filters.join(";;");
+	auto result = QFileDialog::getOpenFileName(parent, caption, lastDir, cleanedFilter, &lastSelectedFilter, options);
 	if (selectedFilter) {
 		*selectedFilter = lastSelectedFilter;
 	}
