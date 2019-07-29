@@ -29,6 +29,7 @@
 #include <kitBase/robotModel/robotParts/colorSensorGreen.h>
 #include <kitBase/robotModel/robotParts/colorSensorBlue.h>
 #include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
+#include <kitBase/robotModel/robotParts/colorSensorReflected.h>
 
 #include "twoDModel/engine/twoDModelGuiFacade.h"
 #include "twoDModel/engine/model/model.h"
@@ -185,6 +186,8 @@ int TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorBlue>()) {
 		return readSingleColorSensor(blue, countsColor, n);
 	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorAmbient>()) {
+		return readLightSensor(port);
+	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorReflected>()) {
 		return readLightSensor(port);
 	}
 

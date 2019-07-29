@@ -40,6 +40,7 @@
 #include <kitBase/robotModel/robotParts/colorSensorBlue.h>
 #include <kitBase/robotModel/robotParts/colorSensorPassive.h>
 #include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
+#include <kitBase/robotModel/robotParts/colorSensorReflected.h>
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 
 using namespace ev3::robotModel;
@@ -58,6 +59,7 @@ Ev3RobotModelBase::Ev3RobotModelBase(const QString &kitId, const QString &robotI
 			, colorBlueSensorInfo()
 			, colorPassiveSensorInfo()
 			, colorAmbientSensorInfo()
+			, colorReflectedSensorInfo()
 			, gyroscopeSensorInfo()
 			, compassSensorInfo()
 			, ACIRSeekerSensorInfo()
@@ -190,6 +192,11 @@ DeviceInfo Ev3RobotModelBase::colorPassiveSensorInfo() const
 DeviceInfo Ev3RobotModelBase::colorAmbientSensorInfo() const
 {
 	return DeviceInfo::create<robotParts::ColorSensorAmbient>();
+}
+
+DeviceInfo Ev3RobotModelBase::colorReflectedSensorInfo() const
+{
+	return DeviceInfo::create<robotParts::ColorSensorReflected>();
 }
 
 DeviceInfo Ev3RobotModelBase::gyroscopeSensorInfo() const

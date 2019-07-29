@@ -28,6 +28,7 @@ TRANSLATIONS = \
 
 HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.h \
+	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.h \
 	$$PWD/include/twoDModel/twoDModelDeclSpec.h \
 	$$PWD/include/twoDModel/engine/twoDModelControlInterface.h \
 	$$PWD/include/twoDModel/engine/twoDModelDisplayInterface.h \
@@ -123,6 +124,7 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
+	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \
 	$$PWD/src/engine/twoDModelGuiFacade.cpp \
