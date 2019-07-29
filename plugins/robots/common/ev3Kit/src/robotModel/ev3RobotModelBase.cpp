@@ -108,6 +108,7 @@ QList<DeviceInfo> Ev3RobotModelBase::convertibleBases() const
 			, DeviceInfo::create<robotParts::ColorSensorGreen>()
 			, DeviceInfo::create<robotParts::ColorSensorPassive>()
 			, DeviceInfo::create<robotParts::ColorSensorAmbient>()
+			, DeviceInfo::create<robotParts::ColorSensorReflected>()
 			, DeviceInfo::create<robotParts::GyroscopeSensor>()
 			, DeviceInfo::create<ev3::robotModel::parts::Ev3Compass>()
 			, DeviceInfo::create<ev3::robotModel::parts::Ev3ACIRSeeker>()

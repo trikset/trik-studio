@@ -1,6 +1,6 @@
 #pragma once
 
-#include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
+#include <kitBase/robotModel/robotParts/colorSensorReflected.h>
 #include <utils/robotCommunication/robotCommunicator.h>
 
 #include "ev3InputDevice.h"
@@ -10,11 +10,11 @@ namespace robotModel {
 namespace real {
 namespace parts {
 
-class ColorSensorAmbient : public kitBase::robotModel::robotParts::ColorSensorAmbient
+class ColorSensorReflected : public kitBase::robotModel::robotParts::ColorSensorReflected
 {
 	Q_OBJECT
 public:
-	ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info
+	ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
 			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
