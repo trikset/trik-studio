@@ -97,7 +97,7 @@
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorAmbient</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorAmbient.h" line="+15"/>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorAmbient.h" line="+29"/>
         <source>EV3 Color sensor (ambient)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -145,7 +145,7 @@
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorReflected</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorReflected.h" line="+15"/>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorReflected.h" line="+29"/>
         <source>EV3 Color sensor (reflected)</source>
         <translation>EV3 Датчик цвета (отраженный)</translation>
     </message>
