@@ -107,7 +107,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorBlue.h" line="+30"/>
         <source>NXT Color sensor (blue)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT Capteur de couleur (bleu)</translation>
     </message>
 </context>
 <context>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorFull.h" line="+33"/>
         <source>NXT / EV3 Color sensor (full)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT / EV3 Capteur de couleur (reconnaissance de couleurs)</translation>
     </message>
 </context>
 <context>
@@ -123,7 +123,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorGreen.h" line="+30"/>
         <source>NXT Color sensor (green)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT Capteur de couleur (vert)</translation>
     </message>
 </context>
 <context>
@@ -131,7 +131,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorPassive.h" line="+33"/>
         <source>NXT Color sensor (passive)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT Capteur de couleur (passif)</translation>
     </message>
 </context>
 <context>
@@ -139,7 +139,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRed.h" line="+30"/>
         <source>NXT Color sensor (red)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT Capteur de couleur (rouge)</translation>
     </message>
 </context>
 <context>
