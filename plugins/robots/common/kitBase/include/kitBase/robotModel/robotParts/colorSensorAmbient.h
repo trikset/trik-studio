@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2019 Cybertech Labs Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,17 +22,15 @@ namespace kitBase {
 namespace robotModel {
 namespace robotParts {
 
-/// Base class for sensor that returns intensity of blue color under it.
-class ROBOTS_KIT_BASE_EXPORT ColorSensorBlue : public ColorSensor
+class ROBOTS_KIT_BASE_EXPORT ColorSensorAmbient : public ColorSensor
 {
 	Q_OBJECT
-	Q_CLASSINFO("name", "colorBlue")
-	Q_CLASSINFO("friendlyName", tr("NXT Color sensor (blue)"))
+	Q_CLASSINFO("name", "colorAmbient")
+	Q_CLASSINFO("friendlyName", tr("EV3 Color sensor (ambient)"))
 	Q_CLASSINFO("simulated", "true")
 
 public:
-	/// Constructor, takes device type info and port on which this sensor is configured.
-	ColorSensorBlue(const DeviceInfo &info, const PortInfo &port);
+	ColorSensorAmbient(const DeviceInfo &info, const PortInfo &port);
 };
 
 }

@@ -16,8 +16,6 @@
 
 #include <ev3Kit/communication/ev3DirectCommand.h>
 
-const unsigned colorSensorResponseSize = 9;
-
 using namespace ev3::robotModel::real::parts;
 using namespace ev3::communication;
 using namespace kitBase::robotModel;

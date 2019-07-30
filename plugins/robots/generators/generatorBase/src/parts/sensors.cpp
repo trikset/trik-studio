@@ -22,6 +22,7 @@
 #include <kitBase/robotModel/robotParts/colorSensorGreen.h>
 #include <kitBase/robotModel/robotParts/colorSensorBlue.h>
 #include <kitBase/robotModel/robotParts/colorSensorPassive.h>
+#include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/soundSensor.h>

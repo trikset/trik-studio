@@ -1,4 +1,4 @@
-/* Copyright 2015 CyberTech Labs Ltd.
+/* Copyright 2019 Cybertech Labs Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,35 @@
 
 #pragma once
 
-#include <kitBase/robotModel/robotParts/colorSensorPassive.h>
-#include <utils/robotCommunication/robotCommunicator.h>
+#include <kitBase/robotModel/robotParts/colorSensorReflected.h>
 
-#include "ev3InputDevice.h"
+#include "twoDModel/twoDModelDeclSpec.h"
 
-namespace ev3 {
+namespace twoDModel {
+
+namespace engine {
+class TwoDModelEngineInterface;
+}
+
 namespace robotModel {
-namespace real {
 namespace parts {
 
-class ColorSensorPassive : public kitBase::robotModel::robotParts::ColorSensorPassive
+class TWO_D_MODEL_EXPORT ColorSensorReflected : public kitBase::robotModel::robotParts::ColorSensorReflected
 {
 	Q_OBJECT
+	Q_CLASSINFO("friendlyName", tr("EV3 Color sensor (reflected)"))
 
 public:
-	ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info
+	ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+			, engine::TwoDModelEngineInterface &engine);
 
-	void read() override;
+	void read();
 
 private:
-	Ev3InputDevice mImplementation;
-	utils::robotCommunication::RobotCommunicator &mRobotCommunicator;
-	static constexpr unsigned colorSensorResponseSize = 9;
+	engine::TwoDModelEngineInterface &mEngine;
 };
 
-}
 }
 }
 }

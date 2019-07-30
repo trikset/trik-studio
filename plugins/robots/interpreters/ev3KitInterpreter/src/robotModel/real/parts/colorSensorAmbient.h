@@ -1,4 +1,4 @@
-/* Copyright 2015 CyberTech Labs Ltd.
+/* Copyright 2019 Cybertech Labs Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include <kitBase/robotModel/robotParts/colorSensorPassive.h>
+#include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
 #include <utils/robotCommunication/robotCommunicator.h>
 
 #include "ev3InputDevice.h"
@@ -24,12 +24,11 @@ namespace robotModel {
 namespace real {
 namespace parts {
 
-class ColorSensorPassive : public kitBase::robotModel::robotParts::ColorSensorPassive
+class ColorSensorAmbient : public kitBase::robotModel::robotParts::ColorSensorAmbient
 {
 	Q_OBJECT
-
 public:
-	ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info
+	ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
 			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
