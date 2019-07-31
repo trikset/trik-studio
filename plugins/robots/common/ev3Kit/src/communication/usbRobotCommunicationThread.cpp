@@ -138,13 +138,13 @@ void UsbRobotCommunicationThread::checkForConnection()
 	command.resize(10);
 	command[0] = 8;
 	command[1] = 0;
-	command[2] = (++mMessageCounter);
-	command[3] = mMessageCounter >> 8;
-	command[4] = enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY;
+	command[2] = charOf(++mMessageCounter);
+	command[3] = charOf(mMessageCounter >> 8);
+	command[4] = charOf(enums::commandType::CommandTypeEnum::DIRECT_COMMAND_NO_REPLY);
 	command[5] = 0;
 	command[6] = 0;
-	command[7] = enums::opcode::OpcodeEnum::KEEP_ALIVE;
-	command[8] = enums::argumentSize::ArgumentSizeEnum::BYTE;
+	command[7] = charOf(enums::opcode::OpcodeEnum::KEEP_ALIVE);
+	command[8] = charOf(enums::argumentSize::ArgumentSizeEnum::BYTE);
 	command[9] = 10; //Number of minutes before entering sleep mode.
 
 	if (!send1(command)) {
