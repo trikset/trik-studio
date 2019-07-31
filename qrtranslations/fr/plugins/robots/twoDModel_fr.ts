@@ -375,7 +375,7 @@
     <name>twoDModel::robotModel::parts::ColorSensorAmbient</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorAmbient.h" line="+33"/>
-        <source>EV3 Color sensor (ambient)</source>
+        <source>EV3 color sensor (ambient)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -423,7 +423,7 @@
     <name>twoDModel::robotModel::parts::ColorSensorReflected</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorReflected.h" line="+33"/>
-        <source>EV3 Color sensor (reflected)</source>
+        <source>EV3 color sensor (reflected)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

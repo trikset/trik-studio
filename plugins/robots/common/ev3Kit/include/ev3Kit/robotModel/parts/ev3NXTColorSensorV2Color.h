@@ -24,7 +24,7 @@ class Ev3NXTColorSensorV2Color : public kitBase::robotModel::robotParts::ScalarS
 {
 	Q_OBJECT
 	Q_CLASSINFO("name", "NXTColorSensorV2Color")
-	Q_CLASSINFO("friendlyName", tr("NXT Color Sensor V2 (Color)"))
+	Q_CLASSINFO("friendlyName", tr("NXT color sensor V2 (color)"))
 
 public:
 	Ev3NXTColorSensorV2Color(const kitBase::robotModel::DeviceInfo &info

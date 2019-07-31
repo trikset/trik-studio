@@ -61,7 +61,7 @@
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2Color</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2Color.h" line="+27"/>
-        <source>NXT Color Sensor V2 (Color)</source>
+        <source>NXT color sensor V2 (color)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -69,7 +69,7 @@
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2Passive</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2Passive.h" line="+27"/>
-        <source>NXT Color Sensor V2 (Passive)</source>
+        <source>NXT color sensor V2 (passive)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -77,7 +77,7 @@
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2RGB</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2RGB.h" line="+27"/>
-        <source>NXT Color Sensor V2 (RGB)</source>
+        <source>NXT color sensor V2 (RGB)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -85,7 +85,7 @@
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2Raw</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2Raw.h" line="+27"/>
-        <source>NXT Color Sensor V2 (Raw)</source>
+        <source>NXT color sensor V2 (raw)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
