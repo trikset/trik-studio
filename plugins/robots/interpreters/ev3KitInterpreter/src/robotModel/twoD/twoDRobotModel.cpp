@@ -29,6 +29,8 @@
 #include <kitBase/robotModel/robotParts/colorSensorGreen.h>
 #include <kitBase/robotModel/robotParts/colorSensorPassive.h>
 #include <kitBase/robotModel/robotParts/colorSensorRed.h>
+#include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
+#include <kitBase/robotModel/robotParts/colorSensorReflected.h>
 
 #include "src/ev3DisplayWidget.h"
 #include "src/robotModel/twoD/parts/twoDDisplay.h"

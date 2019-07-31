@@ -223,5 +223,7 @@
         <file>templates/luaPrinting/equalityString.t</file>
         <file>templates/luaPrinting/inequalityString.t</file>
         <file>templates/conditional/whileDo.t</file>
+        <file>templates/sensors/colorReflected.t</file>
+        <file>templates/sensors/colorAmbient.t</file>
     </qresource>
 </RCC>

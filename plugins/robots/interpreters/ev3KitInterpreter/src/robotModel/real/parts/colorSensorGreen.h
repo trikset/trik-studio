@@ -38,6 +38,7 @@ public:
 private:
 	Ev3InputDevice mImplementation;
 	utils::robotCommunication::RobotCommunicator &mRobotCommunicator;
+	static constexpr unsigned colorSensorResponseSize = 9;
 };
 
 }

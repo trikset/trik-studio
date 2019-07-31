@@ -220,15 +220,29 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 	}
 
 	QProcess java;
+	QEventLoop loop;
 	java.setEnvironment(QProcess::systemEnvironment());
 	java.setWorkingDirectory(lmsFile.absolutePath());
-#ifdef Q_OS_WIN
-	java.start("cmd /c java -jar assembler.jar " + lmsFile.absolutePath() + "/" + lmsFile.baseName());
-#else
-	java.start("java -jar assembler.jar " + lmsFile.absolutePath() + "/" + lmsFile.baseName());
-#endif
-	connect(&java, &QProcess::readyRead, this, [&java]() { QLOG_INFO() << java.readAll(); });
-	java.waitForFinished();
+	java.setProgram("java");
+	java.setArguments({"-jar", "assembler.jar", lmsFile.baseName()});
+
+	connect(&java, &QProcess::readyRead, &loop, [&java]() { QLOG_INFO() << java.readAll(); });
+	connect(&java, &QProcess::errorOccurred, &loop, [&java, &loop](QProcess::ProcessError e) {
+		QLOG_ERROR() << "Failed to start process (status" << e << "):"
+					 << java.program() << java.arguments();
+		loop.quit();
+	});
+	connect(&java, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
+		, &loop, [&loop, &java](int e, QProcess::ExitStatus s) {
+		if (e || s != QProcess::ExitStatus::NormalExit) {
+			QLOG_ERROR() << "Failed to execute process (errCode:" << e << ", exitStatus:" << s << "):"
+						 << java.program() << java.arguments();
+		}
+		loop.quit();
+	});
+
+	java.start();
+	loop.exec();
 	return true;
 }
 
