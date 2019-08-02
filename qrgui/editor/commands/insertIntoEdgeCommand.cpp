@@ -76,7 +76,13 @@ bool InsertIntoEdgeCommand::execute()
 	auto insertPos = mFirstId == mLastId && firstNode ?
 			firstNode->mapToScene(firstNode->contentsRect().center()) : mPos;
 
-	EdgeElement *edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(insertPos);
+	EdgeElement *edge;
+	edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(insertPos);
+	if (!edge && mPos != insertPos)
+	{
+		insertPos = mPos;
+		edge = mScene.edgeForInsertion(insertPos);
+	}
 	if (!edge) {
 		return true;
 	}
