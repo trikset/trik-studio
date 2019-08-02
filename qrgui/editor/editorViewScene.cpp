@@ -569,9 +569,6 @@ void EditorViewScene::returnElementsToOldPositions(const QMap<Id, QPointF> &shif
 void EditorViewScene::reConnectLink(EdgeElement * edgeElem, Element * src, Element * dst)
 {
 	edgeElem->connectToPort(src, dst);
-	QPolygonF line;
-	line << edgeElem->line()[0] << edgeElem->line().last();
-	edgeElem->setLine(line);
 	edgeElem->layOut();
 }
 

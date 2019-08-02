@@ -159,6 +159,9 @@ public:
 	/// Proxies QGraphicsItem`s setPos filtering out NaNs
 	void setPos(const QPointF &pos);
 
+	/// @return Number of segment under position pos (if there is no such segment, return -1)
+	int defineSegment(const QPointF &scenePos) const;
+
 protected:
 	void paint(QPainter* p, const QStyleOptionGraphicsItem *opt, QWidget* w) override;
 

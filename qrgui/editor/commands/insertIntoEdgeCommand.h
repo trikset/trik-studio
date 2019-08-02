@@ -47,7 +47,7 @@ protected:
 private:
 	void initCommand(qReal::commands::CreateElementsCommand *&command, const Id &type
 			, const QMap<QString, QVariant> &additionalProperties);
-	void makeLink(qReal::commands::CreateElementsCommand *command, NodeElement *src, NodeElement *dst);
+	void makeLink(qReal::commands::CreateElementsCommand *command, NodeElement *src, NodeElement *dst, QPolygonF line);
 
 	EditorViewScene &mScene;
 	const models::Models &mModels;

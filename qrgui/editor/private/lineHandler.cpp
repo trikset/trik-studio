@@ -284,10 +284,11 @@ int LineHandler::definePoint(const QPointF &pos) const
 int LineHandler::defineSegment(const QPointF &pos) const
 {
 	QPainterPathStroker ps;
+	const QPolygonF line = mEdge->line();
 	ps.setWidth(EdgeElement::stripeWidth);
-	for (int i = 0; i < mSavedLine.size() - 1; ++i) {
-		QPainterPath path(mSavedLine[i]);
-		path.lineTo(mSavedLine[i + 1]);
+	for (int i = 0; i < line.size() - 1; ++i) {
+		QPainterPath path(line[i]);
+		path.lineTo(line[i + 1]);
 		if (ps.createStroke(path).contains(pos)) {
 			return i;
 		}
