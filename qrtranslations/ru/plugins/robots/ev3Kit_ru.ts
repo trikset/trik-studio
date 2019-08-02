@@ -46,7 +46,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3Compass.h" line="+27"/>
         <source>Compass</source>
-        <translation type="unfinished"></translation>
+        <translation>Компас</translation>
     </message>
 </context>
 <context>
@@ -84,32 +84,32 @@
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2Color</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2Color.h" line="+27"/>
-        <source>NXT Color Sensor V2 (Color)</source>
-        <translation type="unfinished"></translation>
+        <source>NXT color sensor V2 (color)</source>
+        <translation>Датчик цвета NXT V2 (цвет)</translation>
     </message>
 </context>
 <context>
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2Passive</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2Passive.h" line="+27"/>
-        <source>NXT Color Sensor V2 (Passive)</source>
-        <translation type="unfinished"></translation>
+        <source>NXT color sensor V2 (passive)</source>
+        <translation>Датчик цвета NXT V2 (пассивный)</translation>
     </message>
 </context>
 <context>
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2RGB</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2RGB.h" line="+27"/>
-        <source>NXT Color Sensor V2 (RGB)</source>
-        <translation type="unfinished"></translation>
+        <source>NXT color sensor V2 (RGB)</source>
+        <translation>Датчик цвета NXT V2 (RGB)</translation>
     </message>
 </context>
 <context>
     <name>ev3::robotModel::parts::Ev3NXTColorSensorV2Raw</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3NXTColorSensorV2Raw.h" line="+27"/>
-        <source>NXT Color Sensor V2 (Raw)</source>
-        <translation type="unfinished"></translation>
+        <source>NXT color sensor V2 (raw)</source>
+        <translation>Датчик цвета NXT V2 (raw)</translation>
     </message>
 </context>
 </TS>

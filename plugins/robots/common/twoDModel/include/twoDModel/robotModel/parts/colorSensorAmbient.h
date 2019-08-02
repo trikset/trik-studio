@@ -30,7 +30,7 @@ namespace parts {
 class TWO_D_MODEL_EXPORT ColorSensorAmbient : public kitBase::robotModel::robotParts::ColorSensorAmbient
 {
 	Q_OBJECT
-	Q_CLASSINFO("friendlyName", tr("EV3 Color sensor (ambient)"))
+	Q_CLASSINFO("friendlyName", tr("EV3 color sensor (ambient)"))
 
 public:
 	ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info

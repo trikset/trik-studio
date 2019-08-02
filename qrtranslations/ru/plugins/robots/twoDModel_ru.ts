@@ -647,8 +647,8 @@
     <name>twoDModel::robotModel::parts::ColorSensorAmbient</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorAmbient.h" line="+33"/>
-        <source>EV3 Color sensor (ambient)</source>
-        <translation>EV3 Датчик цвета (рассеянный)</translation>
+        <source>EV3 color sensor (ambient)</source>
+        <translation>Датчик цвета EV3 (рассеянный)</translation>
     </message>
 </context>
 <context>
@@ -695,8 +695,8 @@
     <name>twoDModel::robotModel::parts::ColorSensorReflected</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorReflected.h" line="+33"/>
-        <source>EV3 Color sensor (reflected)</source>
-        <translation>EV3 Датчик цвета (отраженный)</translation>
+        <source>EV3 color sensor (reflected)</source>
+        <translation>Датчик цвета EV3 (отраженный)</translation>
     </message>
 </context>
 <context>

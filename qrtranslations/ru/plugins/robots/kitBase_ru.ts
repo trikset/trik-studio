@@ -91,63 +91,63 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensor.h" line="+32"/>
         <source>Color sensor</source>
-        <translation>Сенсор цвета</translation>
+        <translation>Датчик цвета</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorAmbient</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorAmbient.h" line="+29"/>
-        <source>EV3 Color sensor (ambient)</source>
-        <translation type="unfinished"></translation>
+        <source>EV3 color sensor (ambient)</source>
+        <translation>Датчик цвета EV3 (рассеянный)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorBlue</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorBlue.h" line="+30"/>
-        <source>NXT Color sensor (blue)</source>
-        <translation>NXT Датчик цвета (синий)</translation>
+        <source>NXT color sensor (blue)</source>
+        <translation>Датчик цвета NXT (синий)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorFull</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorFull.h" line="+33"/>
-        <source>NXT / EV3 Color sensor (full)</source>
-        <translation>NXT / EV3 Датчик цвета (распознавание)</translation>
+        <source>NXT / EV3 color sensor (full)</source>
+        <translation>Датчик цвета EV3 / NXT (цвет)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorGreen</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorGreen.h" line="+30"/>
-        <source>NXT Color sensor (green)</source>
-        <translation>NXT Датчик цвета (зеленый)</translation>
+        <source>NXT color sensor (green)</source>
+        <translation>Датчик цвета NXT (зеленый)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorPassive</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorPassive.h" line="+33"/>
-        <source>NXT Color sensor (passive)</source>
-        <translation>NXT Датчик цвета (пассивный)</translation>
+        <source>NXT color sensor (passive)</source>
+        <translation>Датчик цвета NXT (пассивный)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorRed</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRed.h" line="+30"/>
-        <source>NXT Color sensor (red)</source>
-        <translation>NXT Датчик цвета (красный)</translation>
+        <source>NXT color sensor (red)</source>
+        <translation>Датчик цвета NXT (красный)</translation>
     </message>
 </context>
 <context>
     <name>kitBase::robotModel::robotParts::ColorSensorReflected</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorReflected.h" line="+29"/>
-        <source>EV3 Color sensor (reflected)</source>
-        <translation>EV3 Датчик цвета (отраженный)</translation>
+        <source>EV3 color sensor (reflected)</source>
+        <translation>Датчик цвета EV3 (отраженный)</translation>
     </message>
 </context>
 <context>
@@ -179,7 +179,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/lightSensor.h" line="+29"/>
         <source>Light sensor</source>
-        <translation>Сенсор света</translation>
+        <translation>Датчик света</translation>
     </message>
 </context>
 <context>
@@ -211,7 +211,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/rangeSensor.h" line="+30"/>
         <source>Range sensor</source>
-        <translation>Сенсор расстояния</translation>
+        <translation>Датчик расстояния</translation>
     </message>
 </context>
 <context>
@@ -227,7 +227,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/soundSensor.h" line="+30"/>
         <source>Sound sensor</source>
-        <translation>Сенсор звука</translation>
+        <translation>Датчик звука</translation>
     </message>
 </context>
 <context>
@@ -243,7 +243,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/touchSensor.h" line="+30"/>
         <source>Touch sensor</source>
-        <translation>Сенсор касания</translation>
+        <translation>Датчик касания</translation>
     </message>
 </context>
 </TS>
