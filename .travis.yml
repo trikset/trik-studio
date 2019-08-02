@@ -48,7 +48,7 @@ matrix:
     - os: linux
       services: docker
       name: "Linux release"
-      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       services: docker
       env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
