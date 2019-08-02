@@ -22,8 +22,11 @@
 #include "details/event.h"
 #include "twoDModel/engine/model/model.h"
 #include "src/engine/items/wallItem.h"
+#include "src/engine/items/skittleItem.h"
+#include "src/engine/items/ballItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/regions/regionItem.h"
+
 
 using namespace twoDModel::constraints;
 
@@ -158,6 +161,10 @@ void ConstraintsChecker::bindToWorldModelObjects()
 			, this, [this](items::ColorFieldItem *item) { bindObject(item->id(), item); });
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
 			, this, [this](items::RegionItem *item) { bindObject(item->id(), item); });
+	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded
+			, this, [this](items::SkittleItem *item) { bindObject(item->id(), item); });
+	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
+			, this, [this](items::BallItem *item) { bindObject(item->id(), item); });
 
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, [this](QGraphicsItem *item) {
 		for (const QString &key : mObjects.keys(dynamic_cast<QObject *>(item))) {
