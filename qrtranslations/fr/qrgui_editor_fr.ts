@@ -187,12 +187,12 @@
         <translation type="unfinished">Relier avec l&apos;élement courant</translation>
     </message>
     <message>
-        <location line="+310"/>
+        <location line="+307"/>
         <source>Replace by...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+237"/>
+        <location line="+241"/>
         <source>Add child</source>
         <translation type="unfinished">Rajouter un élement</translation>
     </message>

@@ -191,12 +191,12 @@
         <translation>Соединить с данным элементом</translation>
     </message>
     <message>
-        <location line="+310"/>
+        <location line="+307"/>
         <source>Replace by...</source>
         <translation>Заменить на...</translation>
     </message>
     <message>
-        <location line="+237"/>
+        <location line="+241"/>
         <source>Add child</source>
         <translation>Добавить элемент</translation>
     </message>
