@@ -202,6 +202,11 @@ void EdgeElement::paintEdge(QPainter *painter, const QStyleOptionGraphicsItem *o
 	painter->restore();
 }
 
+int EdgeElement::defineSegment(const QPointF &scenePos) const
+{
+	return mHandler->defineSegment(mapFromScene(scenePos));
+}
+
 void EdgeElement::drawArrows(QPainter *painter, bool savedLine) const
 {
 	Qt::PenStyle style(QPen(painter->pen()).style());

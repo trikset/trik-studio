@@ -70,7 +70,19 @@ bool InsertIntoEdgeCommand::execute()
 		mLastId = mCreateCommand->results().first().id();
 	}
 
-	EdgeElement *edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(mPos);
+	NodeElement *firstNode = mScene.getNodeById(mFirstId);
+	NodeElement *lastNode = mScene.getNodeById(mLastId);
+
+	auto insertPos = mFirstId == mLastId && firstNode ?
+			firstNode->mapToScene(firstNode->contentsRect().center()) : mPos;
+
+	EdgeElement *edge;
+	edge = mRemoveOldEdge ? mScene.getEdgeById(mOldEdge) : mScene.edgeForInsertion(insertPos);
+	if (!edge && mPos != insertPos)
+	{
+		insertPos = mPos;
+		edge = mScene.edgeForInsertion(insertPos);
+	}
 	if (!edge) {
 		return true;
 	}
@@ -82,11 +94,19 @@ bool InsertIntoEdgeCommand::execute()
 		mParentId = (mParentId == Id::rootId()) ? mScene.rootItemId() : mParentId;
 		Id type = edge->id().type();
 
+		auto insertSegment = edge->defineSegment(insertPos);
+		QPolygonF firstLine = edge->line().mid(1, insertSegment);
+		firstLine.translate(edge->pos());
+
+		auto lineSize = edge->line().size();
+		QPolygonF lastLine = edge->line().mid(insertSegment + 1, lineSize - insertSegment - 2);
+		lastLine.translate(edge->pos());
+
 		initCommand(mCreateFirst, type, mGraphicalAssistApi.properties(edge->logicalId()));
 		initCommand(mCreateSecond, type, {});
 
-		makeLink(mCreateFirst, oldSrc, mScene.getNodeById(mFirstId));
-		makeLink(mCreateSecond, mScene.getNodeById(mLastId), oldDst);
+		makeLink(mCreateFirst, oldSrc, firstNode, firstLine);
+		makeLink(mCreateSecond, lastNode, oldDst, lastLine);
 
 		mConfiguration = mGraphicalAssistApi.configuration(edge->id());
 		if (!mRemoveOldEdge) {
@@ -101,8 +121,8 @@ bool InsertIntoEdgeCommand::execute()
 		mRemoveOldEdge->redo();
 
 		mElementShifting.clear();
-		mScene.resolveOverlaps(mScene.getNodeById(mLastId), mPos, mShift, mElementShifting);
-		mScene.resolveOverlaps(mScene.getNodeById(mFirstId), mPos, mShift, mElementShifting);
+		mScene.resolveOverlaps(firstNode, mPos, mShift, mElementShifting);
+		mScene.resolveOverlaps(lastNode, mPos, mShift, mElementShifting);
 	}
 
 	return true;
@@ -147,20 +167,24 @@ void InsertIntoEdgeCommand::initCommand(CreateElementsCommand *&command, const I
 	}
 }
 
-void InsertIntoEdgeCommand::makeLink(CreateElementsCommand *command, NodeElement *src, NodeElement *dst)
+void InsertIntoEdgeCommand::makeLink(CreateElementsCommand *command, NodeElement *src, NodeElement *dst, QPolygonF line)
 {
 	command->redo();
 	Id newLink = command->results().first().id();
 	if (src) {
 		mGraphicalAssistApi.setFrom(newLink, src->id());
+		line.prepend(src->mapToScene(src->contentsRect().center()));
 	}
 
 	if (dst) {
 		mGraphicalAssistApi.setTo(newLink, dst->id());
+		line.append(dst->mapToScene(dst->contentsRect().center()));
 	}
 
 	EdgeElement * const edge = mScene.getEdgeById(newLink);
-	edge->setSrc(src);
-	edge->setDst(dst);
-	mScene.reConnectLink(edge);
+	line.translate(-edge->pos());
+	if (!line.isEmpty()) {
+		edge->setLine(line);
+	}
+	mScene.reConnectLink(edge, src, dst);
 }

@@ -569,9 +569,6 @@ void EditorViewScene::returnElementsToOldPositions(const QMap<Id, QPointF> &shif
 void EditorViewScene::reConnectLink(EdgeElement * edgeElem, Element * src, Element * dst)
 {
 	edgeElem->connectToPort(src, dst);
-	QPolygonF line;
-	line << edgeElem->line()[0] << edgeElem->line().last();
-	edgeElem->setLine(line);
 	edgeElem->layOut();
 }
 
@@ -727,6 +724,10 @@ void EditorViewScene::replaceBy()
 			} else {
 				mCreatePoint = line.at(line.size() / 2) + edge->pos();
 			}
+
+			auto iconSize = mEditorManager.iconSize(Id::loadFromString(string));
+
+			mCreatePoint -= QPointF(iconSize.width()/2, iconSize.height()/2);
 
 			const Id createdId = createElement(string);
 		}

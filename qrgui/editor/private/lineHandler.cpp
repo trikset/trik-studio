@@ -143,24 +143,6 @@ void LineHandler::adjust()
 	NodeElement *src = mEdge->src();
 	NodeElement *dst = mEdge->dst();
 
-	if (src && dst && !mEdge->isLoop()) {
-		const QPointF offset = mEdge->mapFromItem(src, src->portPos(mEdge->fromPort())) - line.first();
-		mEdge->setPos(mEdge->pos() + offset);
-		line.last() = mEdge->mapFromItem(dst, dst->portPos(mEdge->toPort()));
-		mEdge->setLine(line);
-		return;
-	}
-
-	if (src && !dst && !mEdge->isLoop()) {
-		const QPointF offset = mEdge->mapFromItem(src, src->portPos(mEdge->fromPort())) - line.first();
-		mEdge->setPos(mEdge->pos() + offset);
-		mEdge->setLine(line);
-	} else if (!src && dst && !mEdge->isLoop()) {
-		const QPointF offset = mEdge->mapFromItem(dst, dst->portPos(mEdge->toPort())) - line.last();
-		mEdge->setPos(mEdge->pos() + offset);
-		mEdge->setLine(line);
-	}
-
 	if (src) {
 		line.first() = mEdge->mapFromItem(src, src->portPos(mEdge->fromPort()));
 	}
@@ -284,10 +266,11 @@ int LineHandler::definePoint(const QPointF &pos) const
 int LineHandler::defineSegment(const QPointF &pos) const
 {
 	QPainterPathStroker ps;
+	const QPolygonF line = mEdge->line();
 	ps.setWidth(EdgeElement::stripeWidth);
-	for (int i = 0; i < mSavedLine.size() - 1; ++i) {
-		QPainterPath path(mSavedLine[i]);
-		path.lineTo(mSavedLine[i + 1]);
+	for (int i = 0; i < line.size() - 1; ++i) {
+		QPainterPath path(line[i]);
+		path.lineTo(line[i + 1]);
 		if (ps.createStroke(path).contains(pos)) {
 			return i;
 		}

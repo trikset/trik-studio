@@ -85,6 +85,9 @@ public:
 	/// Provide undo-redo support for context actions
 	void connectAction(ContextMenuAction *action, QObject *receiver, char const *slot) const;
 
+	/// @return Number of segment under position pos (if there is no such segment, return -1)
+	int defineSegment(const QPointF &pos) const;
+
 protected slots:
 	/// Remove all intermediate points
 	void minimize();
@@ -120,9 +123,6 @@ protected:
 
 	/// @return Number of point under position pos (if there is no such point, return -1)
 	int definePoint(const QPointF &pos) const;
-
-	/// @return Number of segment under position pos (if there is no such segment, return -1)
-	int defineSegment(const QPointF &pos) const;
 
 	/// Should be redefined in subclasses to handle mouse move events. Default implementation does nothing.
 	virtual void handleEdgeMove(const QPointF &pos);
