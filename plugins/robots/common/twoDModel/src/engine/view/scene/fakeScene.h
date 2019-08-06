@@ -38,18 +38,11 @@ public:
 	/// Renders a given piece of the scene and returns resulting image.
 	QImage render(const QRectF &piece);
 
-public slots:
-	/// Sets a background image on the scene and its geometry.
-	void setBackground(model::Image * const background, const QRect &backgroundRect);
-
 private:
 	void addClone(QGraphicsItem * const original, QGraphicsItem * const cloned);
 	void deleteItem(QGraphicsItem * const original);
-	void drawBackground(QPainter *painter, const QRectF &rect) override;
 
 	QMap<QGraphicsItem *, QGraphicsItem *> mClonedItems;
-	model::Image * mBackground = nullptr; // doesn't have the ownership
-	QRect mBackgroundRect;
 };
 
 }
