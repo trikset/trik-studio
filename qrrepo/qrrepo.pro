@@ -17,5 +17,7 @@ TEMPLATE = lib
 include(../global.pri)
 
 clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
+CONFIG+=link_pkgconfig
+PKGCONFIG += zlib
 
 include(qrrepo.pri)

@@ -24,6 +24,7 @@
 #include "exceptions/sourceFolderNotFoundException.h"
 #include "exceptions/couldNotOpenDestinationFileException.h"
 #include "exceptions/couldNotOpenInputFileException.h"
+#include "thirdparty/quazip/quazip/quazip/quazip.h"
 
 using namespace qrRepo;
 using namespace qrRepo::details;

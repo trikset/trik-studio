@@ -16,3 +16,6 @@
 [submodule "plugins/robots/thirdparty/hidapi"]
 	path = plugins/robots/thirdparty/hidapi
 	url = https://github.com/libusb/hidapi
+[submodule "thirdparty/quazip/quazip"]
+	path = thirdparty/quazip/quazip
+	url = https://github.com/stachenov/quazip.git
