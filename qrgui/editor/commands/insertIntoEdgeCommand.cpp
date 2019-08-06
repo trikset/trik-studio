@@ -182,9 +182,9 @@ void InsertIntoEdgeCommand::makeLink(CreateElementsCommand *command, NodeElement
 	}
 
 	EdgeElement * const edge = mScene.getEdgeById(newLink);
-	edge->setSrc(src);
-	edge->setDst(dst);
 	line.translate(-edge->pos());
-	edge->setLine(line);
+	if (!line.isEmpty()) {
+		edge->setLine(line);
+	}
 	mScene.reConnectLink(edge, src, dst);
 }

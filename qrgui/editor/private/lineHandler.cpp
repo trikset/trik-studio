@@ -143,24 +143,6 @@ void LineHandler::adjust()
 	NodeElement *src = mEdge->src();
 	NodeElement *dst = mEdge->dst();
 
-	if (src && dst && !mEdge->isLoop()) {
-		const QPointF offset = mEdge->mapFromItem(src, src->portPos(mEdge->fromPort())) - line.first();
-		mEdge->setPos(mEdge->pos() + offset);
-		line.last() = mEdge->mapFromItem(dst, dst->portPos(mEdge->toPort()));
-		mEdge->setLine(line);
-		return;
-	}
-
-	if (src && !dst && !mEdge->isLoop()) {
-		const QPointF offset = mEdge->mapFromItem(src, src->portPos(mEdge->fromPort())) - line.first();
-		mEdge->setPos(mEdge->pos() + offset);
-		mEdge->setLine(line);
-	} else if (!src && dst && !mEdge->isLoop()) {
-		const QPointF offset = mEdge->mapFromItem(dst, dst->portPos(mEdge->toPort())) - line.last();
-		mEdge->setPos(mEdge->pos() + offset);
-		mEdge->setLine(line);
-	}
-
 	if (src) {
 		line.first() = mEdge->mapFromItem(src, src->portPos(mEdge->fromPort()));
 	}
