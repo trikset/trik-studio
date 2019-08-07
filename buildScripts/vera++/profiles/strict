@@ -1,0 +1,6 @@
+#!/usr/bin/tclsh
+set rules {
+    ForeachsForbidden
+    NoQDebug
+    NoOldSIGNALnSLOT
+}
