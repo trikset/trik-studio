@@ -18,7 +18,8 @@ case $TRAVIS_OS_NAME in
 esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
-if $VERA ; then git diff --name-only ${TRAVIS_COMMIT_RANGE} | xargs file -i | grep text/x-c | cut -f 1 -d : | $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict ; fi
+if $VERA ; then git diff --name-only ${TRAVIS_COMMIT_RANGE} | xargs -r file -i | sed -e "s|\(.*\): text/x-c.*|\1|g" -e "/:/d" \
+                | $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict ; fi
 
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 mkdir -p $CCACHE_DIR || sudo chown -R $USER $CCACHE_DIR || :
