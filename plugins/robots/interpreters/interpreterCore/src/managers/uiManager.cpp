@@ -78,7 +78,6 @@ UiManager::UiManager(QAction &debugModeAction
 	mRobotConsole->hide();
 	initTab();
 	mCustomWidgetsBar->setObjectName("robotsMiscellaneousBar");
-	connect(this, &QObject::destroyed, this, [this]() { mCustomWidgetsBar->setParent(nullptr); });
 	mMainWindow.addToolBar(Qt::TopToolBarArea, mCustomWidgetsBar);
 	mMainWindow.addDockWidget(Qt::BottomDockWidgetArea, mRobotConsole);
 	mMainWindow.tabifyDockWidget(mRobotConsole, mMainWindow.errorReporterDock());
@@ -104,6 +103,7 @@ UiManager::UiManager(QAction &debugModeAction
 UiManager::~UiManager()
 {
 	mDockWidgets.clear();
+	mCustomWidgetsBar->setParent(nullptr);
 }
 
 void UiManager::placeDevicesConfig(QWidget *devicesWidget)
