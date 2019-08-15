@@ -28,12 +28,15 @@ FakeScene::FakeScene(const WorldModel &world)
 	connect(&world, &WorldModel::wallAdded, this, [=](items::WallItem *wall) { addClone(wall, wall->clone()); });
 	connect(&world, &WorldModel::colorItemAdded
 			, this, [=](items::ColorFieldItem *item) { addClone(item, item->clone()); });
-	connect(&world, &WorldModel::imageItemAdded, this, [=](items::ImageItem *item) { addClone(item, item->clone()); });
+	connect(&world, &WorldModel::imageItemAdded, this, [=](items::ImageItem *item) {
+		if (!item->isBackground()) {
+			addClone(item, item->clone());
+		}
+	});
 	connect(&world, &WorldModel::traceItemAdded, this, [=](QGraphicsLineItem *item) {
 		addClone(item, new QGraphicsLineItem(item->line()));
 	});
 	connect(&world, &WorldModel::itemRemoved, this, &FakeScene::deleteItem);
-	connect(&world, &WorldModel::backgroundChanged, this, &FakeScene::setBackground);
 }
 
 void FakeScene::addClone(QGraphicsItem * const original, QGraphicsItem * const cloned)
@@ -66,15 +69,6 @@ void FakeScene::deleteItem(QGraphicsItem * const original)
 	}
 }
 
-void FakeScene::drawBackground(QPainter *painter, const QRectF &rect)
-{
-	if (mBackground && mBackground->isValid()) {
-		mBackground->draw(*painter, mBackgroundRect, 1.0);
-	}
-
-	QGraphicsScene::drawBackground(painter, rect);
-}
-
 QImage view::FakeScene::render(const QRectF &piece)
 {
 	QImage result(piece.size().toSize(), QImage::Format_RGB32);
@@ -82,16 +76,4 @@ QImage view::FakeScene::render(const QRectF &piece)
 	QPainter painter(&result);
 	QGraphicsScene::render(&painter, QRectF(), piece);
 	return result;
-}
-
-void FakeScene::setBackground(Image * const background, const QRect &backgroundRect)
-{
-	if ((background && mBackground && *background != *mBackground)
-			|| (background && !mBackground)
-			|| (!background && mBackground)
-			|| backgroundRect != mBackgroundRect) {
-		mBackground = background;
-		mBackgroundRect = backgroundRect;
-		update();
-	}
 }
