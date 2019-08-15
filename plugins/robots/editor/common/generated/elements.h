@@ -780,7 +780,7 @@
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/PreconditionalLoopClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
-			setMouseGesture("");
+			setMouseGesture("0, 0 : 50, 300 : 100, 150 : 150, 300 : 200, 0");
 			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
 			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
 			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
