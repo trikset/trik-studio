@@ -896,7 +896,12 @@
         <translation>Expression</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-464"/>
+        <source>This block executes a sequence of blocks until condition in &apos;Condition&apos; property becomes true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes true.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+475"/>
         <source>Timer</source>
         <translation>Minuteur</translation>
     </message>

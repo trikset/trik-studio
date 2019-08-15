@@ -362,7 +362,12 @@
         <translation>Задача:</translation>
     </message>
     <message>
-        <location line="-165"/>
+        <location line="-288"/>
+        <source>This block executes a sequence of blocks until condition in &apos;Condition&apos; property becomes true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes true.</source>
+        <translation>Блок позволяет выполнить последовательность блоков, пока указанное в свойстве условие не станет верным. Блок должен иметь две исходящие связи, одна из которых должна быть помечена значением &apos;тело цикла&apos; (то есть значение параметра &apos;Условие&apos; должно быть &apos;тело цикла&apos;). Другая связь, исходящая из блока &apos;Цикл с предусловием&apos;, должна оставаться непомеченной: по ней будет осуществляться переход, когда выполнится &apos;Условие&apos;.</translation>
+    </message>
+    <message>
+        <location line="+123"/>
         <source>From:</source>
         <translation>От:</translation>
     </message>
