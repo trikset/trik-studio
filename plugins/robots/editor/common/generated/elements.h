@@ -768,7 +768,7 @@
 			setName("PreconditionalLoop");
 			setFriendlyName(QObject::tr("Pre-conditional Loop"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("This block executes a sequence of blocks until condition in 'Condition' property becomes true. This block must have two outgoing links. One of them must be marked with the 'body' guard (that means that the property 'Guard' of the link must be set to 'body' value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes true."));
+			setDescription(QObject::tr("This block executes a sequence of blocks while condition in 'Condition' is true. This block must have two outgoing links. One of them must be marked with the 'body' guard (that means that the property 'Guard' of the link must be set to 'body' value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false."));
 			qReal::LabelProperties label_1(1, 0.8, -0.7, "Condition", false, 0);
 			label_1.setBackground(Qt::white);
 			label_1.setScalingX(false);

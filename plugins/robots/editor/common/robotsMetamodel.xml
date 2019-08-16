@@ -337,7 +337,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Pre-conditional Loop" name="PreconditionalLoop" path="0, 0 : 50, 300 : 100, 150 : 150, 300 : 200, 0" description="This block executes a sequence of blocks until condition in 'Condition' property becomes true. This block must have two outgoing links. One of them must be marked with the 'body' guard (that means that the property 'Guard' of the link must be set to 'body' value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes true.">
+			<node displayedName="Pre-conditional Loop" name="PreconditionalLoop" path="0, 0 : 50, 300 : 100, 150 : 150, 300 : 200, 0" description="This block executes a sequence of blocks while condition in 'Condition' is true. This block must have two outgoing links. One of them must be marked with the 'body' guard (that means that the property 'Guard' of the link must be set to 'body' value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/preconditionalLoopBlock.svg" x1="0" y2="50" x2="50"/>
