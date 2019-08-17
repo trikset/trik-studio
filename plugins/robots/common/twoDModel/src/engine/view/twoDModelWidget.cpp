@@ -273,9 +273,11 @@ void TwoDModelWidget::initDetailsTab()
 
 void TwoDModelWidget::connectUiButtons()
 {
-	connect(mUi->realisticPhysicsCheckBox, &QAbstractButton::toggled, this, &TwoDModelWidget::changePhysicsSettings);
-	connect(mUi->enableMotorNoiseCheckBox, &QAbstractButton::toggled, this, &TwoDModelWidget::changePhysicsSettings);
-	connect(mUi->enableSensorNoiseCheckBox, &QAbstractButton::toggled, this, &TwoDModelWidget::changePhysicsSettings);
+	// Attention: we use click signal, because it is not emitted when we manually change this field
+	// using setChecked().
+	connect(mUi->realisticPhysicsCheckBox, &QAbstractButton::clicked, this, &TwoDModelWidget::changePhysicsSettings);
+	connect(mUi->enableMotorNoiseCheckBox, &QAbstractButton::clicked, this, &TwoDModelWidget::changePhysicsSettings);
+	connect(mUi->enableSensorNoiseCheckBox, &QAbstractButton::clicked, this, &TwoDModelWidget::changePhysicsSettings);
 
 	connect(&mActions->deleteAllAction(), &QAction::triggered, this, [this](){
 		if (QMessageBox::Yes
@@ -380,7 +382,6 @@ void TwoDModelWidget::trainingModeChanged(bool enabled)
 
 void TwoDModelWidget::updateUIPhysicsSettings()
 {
-	qDebug() << mModel.settings().realisticMotors() << __FUNCTION__ << __LINE__;
 	mUi->realisticPhysicsCheckBox->setChecked(mModel.settings().realisticPhysics());
 	mUi->enableSensorNoiseCheckBox->setChecked(mModel.settings().realisticSensors());
 	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
@@ -807,7 +808,6 @@ void TwoDModelWidget::changePhysicsSettings()
 	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
 	mModel.settings().setRealisticSensors(mUi->enableSensorNoiseCheckBox->isChecked());
 	mModel.settings().setRealisticMotors(mUi->enableMotorNoiseCheckBox->isChecked());
-	qDebug() << mModel.settings().realisticMotors() << __FUNCTION__ << __LINE__;
 }
 
 void TwoDModelWidget::toggleDetailsVisibility()

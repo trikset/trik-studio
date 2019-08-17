@@ -98,20 +98,18 @@ QDomDocument Model::serialize() const
 	QDomDocument save;
 	QDomElement root = save.createElement("root");
 	save.appendChild(root);
-//	mWorldModel.serializeWorld(root);
+	mWorldModel.serializeWorld(root);
 
-//	QDomElement robots = save.createElement("robots");
-//	for (RobotModel *robotModel : mRobotModels) {
-//		robotModel->serialize(robots);
-//	}
+	QDomElement robots = save.createElement("robots");
+	for (RobotModel *robotModel : mRobotModels) {
+		robotModel->serialize(robots);
+	}
 
-//	root.appendChild(robots);
+	root.appendChild(robots);
 
-//	mSettings.serialize(root);
+	mSettings.serialize(root);
 	mChecker->serializeConstraints(root);
 
-	qDebug() << __FUNCTION__ << __LINE__;
-	qDebug() << save.toString();
 	return save;
 }
 
