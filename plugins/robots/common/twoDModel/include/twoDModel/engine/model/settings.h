@@ -18,6 +18,8 @@
 
 #include "twoDModel/twoDModelDeclSpec.h"
 
+class QDomElement;
+
 namespace twoDModel {
 namespace model {
 
@@ -38,8 +40,15 @@ public:
 	/// Returns true is user wants to add some noise to motors work.
 	bool realisticMotors() const;
 
-	/// Rereads all settings related to realistic emulation.
-	void rereadNoiseSettings();
+	void serialize(QDomElement &parent) const;
+
+	void deserialize(const QDomElement &parent);
+
+	void setRealisticPhysics(bool set);
+
+	void setRealisticSensors(bool set);
+
+	void setRealisticMotors(bool set);
 
 signals:
 	/// Emitted each time when user modifies physical preferences.

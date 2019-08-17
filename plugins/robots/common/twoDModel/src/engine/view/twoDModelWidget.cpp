@@ -104,6 +104,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 
 	connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
 
+	connect(&mModel.settings(), &Settings::physicsChanged, this, [this]() { updateUIPhysicsSettings(); });
+
 	connect(&mModel.timeline(), &Timeline::started, this, [this]() {
 		if (mRobotPositionReadOnly) {
 			returnToStartMarker();
@@ -374,6 +376,14 @@ void TwoDModelWidget::trainingModeChanged(bool enabled)
 			? tr("Training mode: solution will not be checked")
 			: tr("Checking mode: solution will be checked, errors will be reported"));
 	mModel.setConstraintsEnabled(!enabled);
+}
+
+void TwoDModelWidget::updateUIPhysicsSettings()
+{
+	qDebug() << mModel.settings().realisticMotors() << __FUNCTION__ << __LINE__;
+	mUi->realisticPhysicsCheckBox->setChecked(mModel.settings().realisticPhysics());
+	mUi->enableSensorNoiseCheckBox->setChecked(mModel.settings().realisticSensors());
+	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
 }
 
 void TwoDModelWidget::keyPressEvent(QKeyEvent *event)
@@ -794,11 +804,10 @@ void TwoDModelWidget::setCursorType(CursorType cursor)
 
 void TwoDModelWidget::changePhysicsSettings()
 {
-	SettingsManager::setValue("2dModelRealisticPhysics", mUi->realisticPhysicsCheckBox->isChecked());
-	SettingsManager::setValue("enableNoiseOfSensors", mUi->enableSensorNoiseCheckBox->isChecked());
-	SettingsManager::setValue("enableNoiseOfMotors", mUi->enableMotorNoiseCheckBox->isChecked());
-
-	mModel.settings().rereadNoiseSettings();
+	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
+	mModel.settings().setRealisticSensors(mUi->enableSensorNoiseCheckBox->isChecked());
+	mModel.settings().setRealisticMotors(mUi->enableMotorNoiseCheckBox->isChecked());
+	qDebug() << mModel.settings().realisticMotors() << __FUNCTION__ << __LINE__;
 }
 
 void TwoDModelWidget::toggleDetailsVisibility()

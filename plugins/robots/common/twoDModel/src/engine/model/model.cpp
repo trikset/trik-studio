@@ -98,24 +98,31 @@ QDomDocument Model::serialize() const
 	QDomDocument save;
 	QDomElement root = save.createElement("root");
 	save.appendChild(root);
-	mWorldModel.serializeWorld(root);
+//	mWorldModel.serializeWorld(root);
 
-	QDomElement robots = save.createElement("robots");
-	for (RobotModel *robotModel : mRobotModels) {
-		robotModel->serialize(robots);
-	}
+//	QDomElement robots = save.createElement("robots");
+//	for (RobotModel *robotModel : mRobotModels) {
+//		robotModel->serialize(robots);
+//	}
 
-	root.appendChild(robots);
+//	root.appendChild(robots);
+
+//	mSettings.serialize(root);
 	mChecker->serializeConstraints(root);
 
+	qDebug() << __FUNCTION__ << __LINE__;
+	qDebug() << save.toString();
 	return save;
 }
 
 void Model::deserialize(const QDomDocument &wordModel, const QDomDocument &blobs)
 {
-	const QDomNodeList worldList = wordModel.elementsByTagName("world");
-	const QDomNodeList robotsList = wordModel.elementsByTagName("robots");
-	const QDomElement constraints = wordModel.documentElement().firstChildElement("constraints");
+	const auto worldList = wordModel.elementsByTagName("world");
+	const auto robotsList = wordModel.elementsByTagName("robots");
+	const auto constraints = wordModel.documentElement().firstChildElement("constraints");
+	const auto settings = wordModel.documentElement().firstChildElement("settings");
+
+	mSettings.deserialize(settings);
 
 	if (mChecker) {
 		/// @todo: should we handle if it returned false?

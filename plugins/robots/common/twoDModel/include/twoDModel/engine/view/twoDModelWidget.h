@@ -165,6 +165,8 @@ private slots:
 
 	void trainingModeChanged(bool enabled);
 
+	void updateUIPhysicsSettings();
+
 private:
 	enum CursorType
 	{
