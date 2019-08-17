@@ -26,6 +26,8 @@
 
 using namespace twoDModel::model;
 
+static const QString XML_VERSION = "2019";
+
 Model::Model(QObject *parent)
 	: QObject(parent)
 	, mChecker(nullptr)
@@ -98,6 +100,8 @@ QDomDocument Model::serialize() const
 	QDomDocument save;
 	QDomElement root = save.createElement("root");
 	save.appendChild(root);
+	root.setAttribute("version", XML_VERSION);
+
 	mWorldModel.serializeWorld(root);
 
 	QDomElement robots = save.createElement("robots");
