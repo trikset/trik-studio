@@ -250,7 +250,7 @@
         <translation>Консоль робота</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+31"/>
         <source>edit mode</source>
         <translation>режим редактирования</translation>
     </message>
@@ -260,7 +260,7 @@
         <translation>режим отладки</translation>
     </message>
     <message>
-        <location line="+176"/>
+        <location line="+177"/>
         <source>Edit mode</source>
         <translation>Режим редактирования</translation>
     </message>

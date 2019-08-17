@@ -961,13 +961,13 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+281"/>
-        <location line="+219"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+285"/>
+        <location line="+226"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location line="-218"/>
+        <location line="-225"/>
         <source>Do you really want to clear scene?</source>
         <translation>Вы действительно хотите очистить сцену?</translation>
     </message>
@@ -990,7 +990,7 @@
         <translation>Режим проверки: проверка решения будет осуществляться, об ошибках будет сообщаться</translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+72"/>
         <source>Saving world and robot model</source>
         <translation>Сохранение модели мира</translation>
     </message>
@@ -1021,7 +1021,7 @@
         <translation>Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+315"/>
+        <location line="+313"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
