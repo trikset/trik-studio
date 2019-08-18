@@ -90,7 +90,7 @@ bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
 
 void ConstraintsChecker::serializeConstraints(QDomElement &parent) const
 {
-	parent.appendChild(mCurrentXml);
+	parent.appendChild(mCurrentXml.cloneNode());
 }
 
 void ConstraintsChecker::checkConstraints()

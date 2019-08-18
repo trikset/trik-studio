@@ -332,7 +332,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+31"/>
         <source>edit mode</source>
         <translation>mode d&apos;édition</translation>
     </message>
@@ -342,7 +342,7 @@
         <translation>mode de débogage</translation>
     </message>
     <message>
-        <location line="+176"/>
+        <location line="+177"/>
         <source>Edit mode</source>
         <translation>Mode d&apos;édition</translation>
     </message>
