@@ -29,7 +29,7 @@ class TWO_D_MODEL_EXPORT Settings : public QObject
 	Q_OBJECT
 
 public:
-	Settings();
+	Settings() = default;
 
 	/// Returns true is user selected realistic physical engine.
 	bool realisticPhysics() const;
@@ -55,9 +55,9 @@ signals:
 	void physicsChanged(bool isRealistic);
 
 private:
-	bool mRealisticPhysics = false;
-	bool mRealisticSensors = false;
-	bool mRealisticMotors = false;
+	bool mRealisticPhysics { false };
+	bool mRealisticSensors { false };
+	bool mRealisticMotors { false };
 };
 
 }

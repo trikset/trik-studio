@@ -115,10 +115,10 @@ QDomDocument Model::serialize() const
 
 void Model::deserialize(const QDomDocument &wordModel, const QDomDocument &blobs)
 {
-	const auto worldList = wordModel.elementsByTagName("world");
-	const auto robotsList = wordModel.elementsByTagName("robots");
-	const auto constraints = wordModel.documentElement().firstChildElement("constraints");
-	const auto settings = wordModel.documentElement().firstChildElement("settings");
+	const auto &worldList = wordModel.elementsByTagName("world");
+	const auto &robotsList = wordModel.elementsByTagName("robots");
+	const auto &constraints = wordModel.documentElement().firstChildElement("constraints");
+	const auto &settings = wordModel.documentElement().firstChildElement("settings");
 
 	mSettings.deserialize(settings);
 

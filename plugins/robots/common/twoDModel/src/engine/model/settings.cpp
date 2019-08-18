@@ -20,13 +20,6 @@
 
 using namespace twoDModel::model;
 
-Settings::Settings()
-	: mRealisticPhysics(false)
-	, mRealisticSensors(false)
-	, mRealisticMotors(false)
-{
-}
-
 bool Settings::realisticPhysics() const
 {
 	return mRealisticPhysics;
@@ -44,7 +37,7 @@ bool Settings::realisticMotors() const
 
 void Settings::serialize(QDomElement &parent) const
 {
-	QDomElement result = parent.ownerDocument().createElement("settings");
+	auto result = parent.ownerDocument().createElement("settings");
 	parent.appendChild(result);
 	result.setAttribute("realisticPhysics", mRealisticPhysics ? "true" : "false");
 	result.setAttribute("realisticSensors", mRealisticSensors ? "true" : "false");
