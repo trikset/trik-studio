@@ -26,7 +26,7 @@
 
 using namespace twoDModel::model;
 
-static const QString XML_VERSION = "2019";
+static const QString XML_VERSION = "20190819";
 
 Model::Model(QObject *parent)
 	: QObject(parent)
