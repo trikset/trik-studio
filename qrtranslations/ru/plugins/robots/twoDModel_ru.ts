@@ -617,7 +617,7 @@
         <translation>Задание выполнено!</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+15"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
@@ -961,7 +961,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+285"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+290"/>
         <location line="+226"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
