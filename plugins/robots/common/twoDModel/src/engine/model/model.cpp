@@ -26,6 +26,8 @@
 
 using namespace twoDModel::model;
 
+static const QString XML_VERSION = "20190819";
+
 Model::Model(QObject *parent)
 	: QObject(parent)
 	, mChecker(nullptr)
@@ -54,13 +56,15 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 		errorReporter.addInformation(tr("The task is accomplished!"));
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
-		QTimer::singleShot(0, &interpreterControl, SIGNAL(stopAllInterpretation()));
+		QTimer::singleShot(0, &interpreterControl,
+				[&interpreterControl](){ interpreterControl.stopAllInterpretation(); });
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::fail, this, [&](const QString &message) {
 		errorReporter.addError(message);
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
-		QTimer::singleShot(0, &interpreterControl, SLOT(stopAllInterpretation()));
+		QTimer::singleShot(0, &interpreterControl,
+				[&interpreterControl](){ interpreterControl.stopAllInterpretation(); });
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::checkerError
 			, this, [&errorReporter](const QString &message) {
@@ -98,6 +102,8 @@ QDomDocument Model::serialize() const
 	QDomDocument save;
 	QDomElement root = save.createElement("root");
 	save.appendChild(root);
+	root.setAttribute("version", XML_VERSION);
+
 	mWorldModel.serializeWorld(root);
 
 	QDomElement robots = save.createElement("robots");
