@@ -208,21 +208,25 @@ void TwoDModelWidget::initWidget()
 	toggleRulers();
 
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
-			, [&]() { mScene->update(); });
+			, mScene, [&]() { mScene->update(); });
 	connect(mUi->gridParametersBox, &GridParameters::parametersChanged, this, toggleRulers);
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
-			, [&]() {mUi->horizontalRuler->update(); });
+			, mUi->horizontalRuler, [&]() {mUi->horizontalRuler->update(); });
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
-, [&]() { mUi->verticalRuler->update(); });
-	connect(mScene, &TwoDModelScene::sceneRectChanged, [&]() { mUi->horizontalRuler->update(); });
-	connect(mScene, &TwoDModelScene::sceneRectChanged, [&]() { mUi->verticalRuler->update(); });
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
+	connect(mScene, &TwoDModelScene::sceneRectChanged
+			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
+	connect(mScene, &TwoDModelScene::sceneRectChanged
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
 	connect(mScene, &AbstractScene::focused, this, [=]() { onFocusIn(); });
-	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged, [&]() { mUi->horizontalRuler->update(); });
-	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged, [&]() { mUi->verticalRuler->update(); });
+	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged
+			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
+	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
 	connect(mScene->mainView(), &graphicsUtils::AbstractView::contentsRectChanged
-			, [&]() { mUi->horizontalRuler->update(); });
+			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
 	connect(mScene->mainView(), &graphicsUtils::AbstractView::contentsRectChanged
-			, [&]() { mUi->verticalRuler->update(); });
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
 }
 
 void TwoDModelWidget::initPalette()
