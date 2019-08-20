@@ -340,7 +340,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+56"/>
         <source>The task is accomplished!</source>
         <translation>La tache est accomplie !</translation>
     </message>

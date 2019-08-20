@@ -180,7 +180,12 @@
         <translation>Expression :</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="-440"/>
+        <source>This block executes a sequence of blocks while condition in &apos;Condition&apos; is true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+484"/>
         <source>Delay:</source>
         <translation>Délai :</translation>
     </message>
