@@ -49,7 +49,8 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return QRectF({0, 0}, skittleSize);
+	return QRectF({-static_cast<qreal>(skittleSize.width() / 2), -static_cast<qreal>(skittleSize.height() / 2)}
+				  , skittleSize);
 }
 
 void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
