@@ -12,16 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
+#include <QtXml/QDomElement>
+
 #include "twoDModel/engine/model/settings.h"
 
 #include <qrkernel/settingsManager.h>
 
 using namespace twoDModel::model;
-
-Settings::Settings()
-{
-	rereadNoiseSettings();
-}
 
 bool Settings::realisticPhysics() const
 {
@@ -38,14 +35,34 @@ bool Settings::realisticMotors() const
 	return mRealisticMotors;
 }
 
-void Settings::rereadNoiseSettings()
+void Settings::serialize(QDomElement &parent) const
 {
-	const bool oldPhysics = mRealisticPhysics;
-	mRealisticPhysics = qReal::SettingsManager::value("2dModelRealisticPhysics", false).toBool();
-	if (oldPhysics != mRealisticPhysics) {
-		emit physicsChanged(mRealisticPhysics);
-	}
+	auto result = parent.ownerDocument().createElement("settings");
+	parent.appendChild(result);
+	result.setAttribute("realisticPhysics", mRealisticPhysics ? "true" : "false");
+	result.setAttribute("realisticSensors", mRealisticSensors ? "true" : "false");
+	result.setAttribute("realisticMotors", mRealisticMotors ? "true" : "false");
+}
 
-	mRealisticSensors = qReal::SettingsManager::value("enableNoiseOfSensors", false).toBool();
-	mRealisticMotors = qReal::SettingsManager::value("enableNoiseOfMotors", false).toBool();
+void Settings::deserialize(const QDomElement &parent)
+{
+	mRealisticPhysics = parent.attribute("realisticPhysics") == "true";
+	mRealisticSensors = parent.attribute("realisticSensors") == "true";
+	mRealisticMotors = parent.attribute("realisticMotors") == "true";
+	emit physicsChanged(mRealisticPhysics);
+}
+
+void Settings::setRealisticPhysics(bool set)
+{
+	mRealisticPhysics = set;
+}
+
+void Settings::setRealisticSensors(bool set)
+{
+	mRealisticSensors = set;
+}
+
+void Settings::setRealisticMotors(bool set)
+{
+	mRealisticMotors = set;
 }

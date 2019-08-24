@@ -112,6 +112,8 @@ QDomDocument Model::serialize() const
 	}
 
 	root.appendChild(robots);
+
+	mSettings.serialize(root);
 	mChecker->serializeConstraints(root);
 
 	return save;
@@ -119,9 +121,12 @@ QDomDocument Model::serialize() const
 
 void Model::deserialize(const QDomDocument &wordModel, const QDomDocument &blobs)
 {
-	const QDomNodeList worldList = wordModel.elementsByTagName("world");
-	const QDomNodeList robotsList = wordModel.elementsByTagName("robots");
-	const QDomElement constraints = wordModel.documentElement().firstChildElement("constraints");
+	const auto &worldList = wordModel.elementsByTagName("world");
+	const auto &robotsList = wordModel.elementsByTagName("robots");
+	const auto &constraints = wordModel.documentElement().firstChildElement("constraints");
+	const auto &settings = wordModel.documentElement().firstChildElement("settings");
+
+	mSettings.deserialize(settings);
 
 	if (mChecker) {
 		/// @todo: should we handle if it returned false?

@@ -104,6 +104,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 
 	connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
 
+	connect(&mModel.settings(), &Settings::physicsChanged, this, [this]() { updateUIPhysicsSettings(); });
+
 	connect(&mModel.timeline(), &Timeline::started, this, [this]() {
 		if (mRobotPositionReadOnly) {
 			returnToStartMarker();
@@ -205,17 +207,26 @@ void TwoDModelWidget::initWidget()
 	};
 	toggleRulers();
 
-	connect(mUi->gridParametersBox, SIGNAL(parametersChanged()), mScene, SLOT(update()));
+	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
+			, mScene, [&]() { mScene->update(); });
 	connect(mUi->gridParametersBox, &GridParameters::parametersChanged, this, toggleRulers);
-	connect(mUi->gridParametersBox, SIGNAL(parametersChanged()), mUi->horizontalRuler, SLOT(update()));
-	connect(mUi->gridParametersBox, SIGNAL(parametersChanged()), mUi->verticalRuler, SLOT(update()));
-	connect(mScene, SIGNAL(sceneRectChanged(QRectF)), mUi->horizontalRuler, SLOT(update()));
-	connect(mScene, SIGNAL(sceneRectChanged(QRectF)), mUi->verticalRuler, SLOT(update()));
+	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
+			, mUi->horizontalRuler, [&]() {mUi->horizontalRuler->update(); });
+	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
+	connect(mScene, &TwoDModelScene::sceneRectChanged
+			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
+	connect(mScene, &TwoDModelScene::sceneRectChanged
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
 	connect(mScene, &AbstractScene::focused, this, [=]() { onFocusIn(); });
-	connect(mScene->mainView(), SIGNAL(zoomChanged()), mUi->horizontalRuler, SLOT(update()));
-	connect(mScene->mainView(), SIGNAL(zoomChanged()), mUi->verticalRuler, SLOT(update()));
-	connect(mScene->mainView(), SIGNAL(contentsRectChanged()), mUi->horizontalRuler, SLOT(update()));
-	connect(mScene->mainView(), SIGNAL(contentsRectChanged()), mUi->verticalRuler, SLOT(update()));
+	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged
+			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
+	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
+	connect(mScene->mainView(), &graphicsUtils::AbstractView::contentsRectChanged
+			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
+	connect(mScene->mainView(), &graphicsUtils::AbstractView::contentsRectChanged
+			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
 }
 
 void TwoDModelWidget::initPalette()
@@ -271,9 +282,11 @@ void TwoDModelWidget::initDetailsTab()
 
 void TwoDModelWidget::connectUiButtons()
 {
-	connect(mUi->realisticPhysicsCheckBox, &QAbstractButton::toggled, this, &TwoDModelWidget::changePhysicsSettings);
-	connect(mUi->enableMotorNoiseCheckBox, &QAbstractButton::toggled, this, &TwoDModelWidget::changePhysicsSettings);
-	connect(mUi->enableSensorNoiseCheckBox, &QAbstractButton::toggled, this, &TwoDModelWidget::changePhysicsSettings);
+	// Attention: we use click signal, because it is not emitted when we manually change this field
+	// using setChecked().
+	connect(mUi->realisticPhysicsCheckBox, &QAbstractButton::clicked, this, &TwoDModelWidget::changePhysicsSettings);
+	connect(mUi->enableMotorNoiseCheckBox, &QAbstractButton::clicked, this, &TwoDModelWidget::changePhysicsSettings);
+	connect(mUi->enableSensorNoiseCheckBox, &QAbstractButton::clicked, this, &TwoDModelWidget::changePhysicsSettings);
 
 	connect(&mActions->deleteAllAction(), &QAction::triggered, this, [this](){
 		if (QMessageBox::Yes
@@ -374,6 +387,13 @@ void TwoDModelWidget::trainingModeChanged(bool enabled)
 			? tr("Training mode: solution will not be checked")
 			: tr("Checking mode: solution will be checked, errors will be reported"));
 	mModel.setConstraintsEnabled(!enabled);
+}
+
+void TwoDModelWidget::updateUIPhysicsSettings()
+{
+	mUi->realisticPhysicsCheckBox->setChecked(mModel.settings().realisticPhysics());
+	mUi->enableSensorNoiseCheckBox->setChecked(mModel.settings().realisticSensors());
+	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
 }
 
 void TwoDModelWidget::keyPressEvent(QKeyEvent *event)
@@ -794,11 +814,9 @@ void TwoDModelWidget::setCursorType(CursorType cursor)
 
 void TwoDModelWidget::changePhysicsSettings()
 {
-	SettingsManager::setValue("2dModelRealisticPhysics", mUi->realisticPhysicsCheckBox->isChecked());
-	SettingsManager::setValue("enableNoiseOfSensors", mUi->enableSensorNoiseCheckBox->isChecked());
-	SettingsManager::setValue("enableNoiseOfMotors", mUi->enableMotorNoiseCheckBox->isChecked());
-
-	mModel.settings().rereadNoiseSettings();
+	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
+	mModel.settings().setRealisticSensors(mUi->enableSensorNoiseCheckBox->isChecked());
+	mModel.settings().setRealisticMotors(mUi->enableMotorNoiseCheckBox->isChecked());
 }
 
 void TwoDModelWidget::toggleDetailsVisibility()

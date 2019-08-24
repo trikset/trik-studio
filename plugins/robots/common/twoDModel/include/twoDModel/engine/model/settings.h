@@ -18,6 +18,8 @@
 
 #include "twoDModel/twoDModelDeclSpec.h"
 
+class QDomElement;
+
 namespace twoDModel {
 namespace model {
 
@@ -27,7 +29,7 @@ class TWO_D_MODEL_EXPORT Settings : public QObject
 	Q_OBJECT
 
 public:
-	Settings();
+	Settings() = default;
 
 	/// Returns true is user selected realistic physical engine.
 	bool realisticPhysics() const;
@@ -38,17 +40,24 @@ public:
 	/// Returns true is user wants to add some noise to motors work.
 	bool realisticMotors() const;
 
-	/// Rereads all settings related to realistic emulation.
-	void rereadNoiseSettings();
+	void serialize(QDomElement &parent) const;
+
+	void deserialize(const QDomElement &parent);
+
+	void setRealisticPhysics(bool set);
+
+	void setRealisticSensors(bool set);
+
+	void setRealisticMotors(bool set);
 
 signals:
 	/// Emitted each time when user modifies physical preferences.
 	void physicsChanged(bool isRealistic);
 
 private:
-	bool mRealisticPhysics = false;
-	bool mRealisticSensors = false;
-	bool mRealisticMotors = false;
+	bool mRealisticPhysics { false };
+	bool mRealisticSensors { false };
+	bool mRealisticMotors { false };
 };
 
 }
