@@ -36,11 +36,11 @@ environment:
   matrix:
       - QT: 5.12
         ARCH: 64
-        PYTHON_PATH: C:\Python35-x64
+        PYTHON_PATH: C:\Python37-x64
 
       - QT: 5.12
         ARCH: 32
-        PYTHON_PATH: C:\Python35
+        PYTHON_PATH: C:\Python37
 
 configuration:
 #  - debug
