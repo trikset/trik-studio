@@ -3,7 +3,7 @@ set -euxo pipefail
 df -h .
 case $TRAVIS_OS_NAME in
   osx)
-      brew bundle install && brew bundle check --verbose || brew update && brew bundle install && brew bundle check --verbose
+#      brew bundle install && brew bundle check --verbose || brew update && brew bundle install && brew bundle check --verbose
     ;;
   linux)
     docker pull trikset/linux-builder

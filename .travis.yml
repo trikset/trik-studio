@@ -28,15 +28,10 @@ cache:
   timeout: 1000
   directories:
     - $PYENV_ROOT
-#    - /usr/local/opt/
-#    - /usr/local/lib/
     - $HOME/.ccache
     - $TRIK_QT
-#    - $HOME/.cache
 
 addons:
-  homebrew:
-    brewfile: true
   artifacts:
     paths:
       - build.log

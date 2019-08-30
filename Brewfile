@@ -1,8 +1,0 @@
-tap "hudochenkov/sshpass"
-brew "ccache"
-brew "pyenv"
-brew "coreutils"
-brew "libusb"
-brew "pkg-config"
-brew "gnu-sed"
-brew "sshpass"
