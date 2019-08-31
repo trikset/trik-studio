@@ -1,9 +1,10 @@
 #!/bin/bash
 set -euxo pipefail
 $EXECUTOR env CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" ccache -s
+QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $TRAVIS_OS_NAME in
   osx)
-    QTIFWBIN=/usr/local/bin
+    QTIFWBIN=$QTBIN/../../../Tools/QtInstallerFramework/3.1/bin
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
@@ -12,7 +13,6 @@ case $TRAVIS_OS_NAME in
     ;;
   *) exit 1 ;;
 esac
-QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 df -h .
 
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
