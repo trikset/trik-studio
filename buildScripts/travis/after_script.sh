@@ -3,7 +3,7 @@ set -euxo pipefail
 $EXECUTOR env CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" ccache -s
 case $TRAVIS_OS_NAME in
   osx)
-    QTIFWBIN=/usr/local/bin
+    QTIFWBIN=$QTBIN/../../../Tools/QtInstallerFramework/3.1/bin
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
