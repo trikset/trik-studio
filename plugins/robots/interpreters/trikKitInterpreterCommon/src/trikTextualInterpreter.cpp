@@ -17,6 +17,7 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QFile>
 #include <QtCore/QRegularExpression>
+#include <QProcessEnvironment>
 
 #include "trikKitInterpreterCommon/trikTextualInterpreter.h"
 
