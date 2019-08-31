@@ -4,7 +4,7 @@ set -euxo pipefail
 CODECOV=true
 case $TRAVIS_OS_NAME in
   osx)
-     export PATH="/usr/local/opt/qt/bin:$PATH"
+     export PATH="$TRIK_QT/5.12.4/clang_64/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
      export PATH="$(pyenv root)/bin:$PATH"
@@ -18,7 +18,7 @@ case $TRAVIS_OS_NAME in
 esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
-if $VERA ; then git diff --name-only ${TRAVIS_COMMIT_RANGE} | xargs -r file -i | sed -e "s|\(.*\):.*text/x-c.*|\1|g" -e "/:/d" \
+if $VERA ; then git diff --diff-filter=d --name-only ${TRAVIS_COMMIT_RANGE} | xargs -r file -i | sed -e "s|\(.*\):.*text/x-c.*|\1|g" -e "/:/d" \
                 | $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict ; fi
 
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
