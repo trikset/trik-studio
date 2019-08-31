@@ -25,10 +25,14 @@ then
       && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
       && mv installer/trik-studio*installer* installer/$TSNAME \
       && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/\
-      && echo Start build checker archive \
+"
+      if [[ $TRAVIS_OS_NAME == linux ]] ; then
+      $EXECUTOR bash -ic "\
+      echo Start build checker archive \
       && bin/$CONFIG/build-checker-installer.sh \
       && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz\
 "
+     fi
 fi || travis_terminate 3
 
 docker stop builder || :

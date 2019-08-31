@@ -16,6 +16,8 @@
 set -o nounset
 set -o errexit
 
+[[ $(uname -s) == Linux ]] || exit 42
+
 function check_qmake_version {
 
 #	echo Here
@@ -56,20 +58,20 @@ QT_INSTALL_PLUGINS=$($QMAKE -query QT_INSTALL_PLUGINS)
 QT_INSTALL_LIBS=$($QMAKE -query QT_INSTALL_LIBS)
 QT_HOST_LIBS=$($QMAKE -query QT_HOST_LIBS)
 
-qtDir=$(readlink -f $QT_HOST_DATA)
-qtDirForPlugins=$(readlink -f $QT_INSTALL_PLUGINS)
-qtDirLib=$(readlink -f $QT_INSTALL_LIBS)
-hostDirLib=$(readlink -f $QT_HOST_LIBS)
+qtDir=$(realpath $QT_HOST_DATA)
+qtDirForPlugins=$(realpath $QT_INSTALL_PLUGINS)
+qtDirLib=$(realpath $QT_INSTALL_LIBS)
+hostDirLib=$(realpath $QT_HOST_LIBS)
 
 export LD_LIBRARY_PATH=$hostDirLib:$qtDirLib:${LD_LIBRARY_PATH:-}
 
 COPY="cp -rfP"
 NEED_QT_LIBS=true
 
-fieldsDir=$(readlink -f ${2:-$PWD/fields})
-examplesDir=$(readlink -f ${3:-$PWD/solutions})
-tasksDir=$(readlink -f ${4:-$PWD/tasks})
-inputsDir=$(readlink -f ${5:-$PWD/inputs})
+fieldsDir=$(realpath ${2:-$PWD/fields})
+examplesDir=$(realpath ${3:-$PWD/solutions})
+tasksDir=$(realpath ${4:-$PWD/tasks})
+inputsDir=$(realpath ${5:-$PWD/inputs})
 
 rm -rf trikStudio-checker
 mkdir -p trikStudio-checker/bin
