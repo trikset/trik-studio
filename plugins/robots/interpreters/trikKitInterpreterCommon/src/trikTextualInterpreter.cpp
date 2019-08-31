@@ -78,7 +78,10 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	using qReal::text::Languages;
 	using trikScriptRunner::ScriptType;
 	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
-//	Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+
+	if (!QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty()) {
+		Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+	}
 }
 
 trik::TrikTextualInterpreter::~TrikTextualInterpreter()
@@ -106,7 +109,7 @@ void trik::TrikTextualInterpreter::interpretScript(const QString &script, const 
 		updatedScript.insert(indexOf + 1, pyOverrides);
 		mScriptRunner.run(updatedScript, "dummyFile.py");
 	} else {
-		Q_ASSERT(false);
+		reportError(tr("Unsupported script file type"));
 	}
 }
 

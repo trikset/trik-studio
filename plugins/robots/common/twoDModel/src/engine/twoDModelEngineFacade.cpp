@@ -108,7 +108,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			if (mCurrentTabInfo == qReal::TabInfo::TabType::editor) {
 				emit interpreterControl.interpret();
 			} else {
-				emit interpreterControl.startJsInterpretation();
+				emit interpreterControl.startScriptInterpretation();
 			}
 		});
 

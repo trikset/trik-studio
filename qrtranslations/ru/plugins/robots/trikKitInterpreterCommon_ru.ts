@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+181"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+184"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
@@ -245,7 +245,7 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+210"/>
+        <location line="+209"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>
@@ -255,9 +255,17 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+185"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
+    </message>
+</context>
+<context>
+    <name>trik::TrikTextualInterpreter</name>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-94"/>
+        <source>Unsupported script file type</source>
+        <translation>Неверный формат файла</translation>
     </message>
 </context>
 </TS>
