@@ -18,6 +18,7 @@
 #include <QtXml/QDomDocument>
 #include <QComboBox>
 #include <QLineEdit>
+#include <QProcessEnvironment>
 
 #include <twoDModel/engine/twoDModelEngineFacade.h>
 #include <qrkernel/settingsManager.h>
@@ -73,6 +74,11 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)
 {
+	if (extension.endsWith("py") && QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty()) {
+		mMainWindow->errorReporter()->addError("Python is disabled");
+		return;
+	}
+
 	emit codeInterpretationStarted(code, extension);
 
 	auto model = mTwoDRobotModel;
@@ -98,6 +104,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 		, const QString &inputs, const QString &extension)
 {
+
 	// we are in exercise mode (maybe rename it later)
 	emit codeInterpretationStarted(code, extension);
 
@@ -513,8 +520,8 @@ void TrikKitInterpreterPluginBase::onTabChanged(const TabInfo &info)
 
 	if (isCodeTab) {
 		auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
-		auto isJS = [](const QString &ext){ return ext == "js" || ext == "qts"; };
-		bool enable = texttab && isJS(texttab->currentLanguage().extension) && isQtsInterp;
+		auto isScript = [](const QString &ext){ return ext == "py" || ext == "js" || ext == "qts"; };
+		bool enable = texttab && isScript(texttab->currentLanguage().extension) && isQtsInterp;
 		mStart.setEnabled(enable);
 		mStop.setEnabled(enable);
 		//mStart.setVisible(enable);
