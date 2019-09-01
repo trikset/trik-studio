@@ -47,7 +47,7 @@ signals:
 	void stopAllInterpretation(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop);
 
 	/// same
-	void startJsInterpretation();
+	void startScriptInterpretation();
 
 public slots:
 	/// Starts interpteration process.

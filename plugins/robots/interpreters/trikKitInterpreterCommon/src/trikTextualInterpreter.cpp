@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QFile>
 #include <QtCore/QRegularExpression>
+#include <QProcessEnvironment>
 
 #include "trikKitInterpreterCommon/trikTextualInterpreter.h"
 
@@ -29,56 +30,60 @@
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
 
 const QString jsOverrides = "script.random = brick.random;script.wait = brick.wait;script.time = brick.time;"
-		"script.readAll = brick.readAll;script.timer = brick.timer;"
-		"arrayPPinternal = function(arg) {"
-			"var res = '[';"
-			"for(var i = 0; i < arg.length; i++) {"
-				"var separator = i + 1 != arg.length ? ', ' : '';"
-				"if (arg[i] instanceof Array) {"
-					"res += arrayPPinternal(arg[i]) + separator;"
-				"} else { res += arg[i].toString() + separator; }"
-			"}"
-			"res += ']';"
-			"return res;"
+	"script.readAll = brick.readAll;script.timer = brick.timer;"
+	"arrayPPinternal = function(arg) {"
+		"var res = '[';"
+		"for(var i = 0; i < arg.length; i++) {"
+		"var separator = i + 1 != arg.length ? ', ' : '';"
+		"if (arg[i] instanceof Array) {"
+			"res += arrayPPinternal(arg[i]) + separator;"
+		"} else { res += arg[i].toString() + separator; }"
+		"}"
+		"res += ']';"
+		"return res;"
+	"};"
+	"print = function() "
+	"{"
+		"var res = '';"
+		"var argLength = arguments.length;"
+		"for(var i = 0; i < argLength; i++) {"
+		"if (arguments[i] instanceof Array) {res += arrayPPinternal(arguments[i]);"
+		"} else {res += arguments[i].toString();}"
+		"if (i != argLength - 1) { res += \",\";}"
 		"};"
-		"print = function() "
-		"{"
-			"var res = '';"
-			"var argLength = arguments.length;"
-			"for(var i = 0; i < argLength; i++) {"
-				"if (arguments[i] instanceof Array) {res += arrayPPinternal(arguments[i]);"
-				"} else {res += arguments[i].toString();}"
-				"if (i != argLength - 1) { res += \",\";}"
-			"};"
-			"brick.log(res);"
-			"return res;"
-		"};"
-		"script.system = function() {print('system is disabled in the interpreter');};";
+		"brick.log(res);"
+		"return res;"
+	"};"
+	"script.system = function() {print('system is disabled in the interpreter');};";
 
 const QString pyOverrides ="\ndef print(args): brick.log(args);\n";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
-		const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
+	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
 	: mRunning(false), mBrick(model), mScriptRunner(mBrick, nullptr), mErrorReporter(nullptr)
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
 
 	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer* const &in){
-		return engine->newQObject(in);
+	return engine->newQObject(in);
 	};
 	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer* &out){
-		out = qobject_cast<utils::AbstractTimer*>(object.toQObject());
+	out = qobject_cast<utils::AbstractTimer*>(object.toQObject());
 	};
 	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine){
-		qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
+	qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
 	});
-	connect(&mScriptRunner, SIGNAL(completed(QString,int)), this, SLOT(scriptFinished(QString,int)));
+	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed
+		, this, &TrikTextualInterpreter::scriptFinished);
 
 	using qReal::text::Languages;
 	using trikScriptRunner::ScriptType;
 	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
-//	Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+
+	if (!QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty()) {
+	Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+	}
 }
 
 trik::TrikTextualInterpreter::~TrikTextualInterpreter()
@@ -96,29 +101,28 @@ void trik::TrikTextualInterpreter::interpretScript(const QString &script, const 
 	mRunning = true;
 	mBrick.processSensors(true);
 	if (languageExtension.contains("js")) {
-		mScriptRunner.run(jsOverrides + script);
+	mScriptRunner.run(jsOverrides + script);
 	} else if (languageExtension.contains("py")) {
-		QString updatedScript = script;
-		int lastIndexOfImport = updatedScript.lastIndexOf(QRegularExpression("^import .*"
-				, QRegularExpression::MultilineOption));
-		int indexOf = updatedScript.indexOf(QRegularExpression("$", QRegularExpression::MultilineOption)
-				, lastIndexOfImport);
-		updatedScript.insert(indexOf + 1, pyOverrides);
-		mScriptRunner.run(updatedScript, "dummyFile.py");
+	QString updatedScript = script;
+	int lastIndexOfImport = updatedScript.lastIndexOf(QRegularExpression("^import .*"
+		, QRegularExpression::MultilineOption));
+	int indexOf = updatedScript.indexOf(QRegularExpression("$", QRegularExpression::MultilineOption)
+		, lastIndexOfImport);
+	updatedScript.insert(indexOf + 1, pyOverrides);
+	mScriptRunner.run(updatedScript, "dummyFile.py");
 	} else {
-		Q_ASSERT(false);
+	reportError(tr("Unsupported script file type"));
 	}
 }
 
 void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
-		, const QString &inputs, const QString &languageExtension)
+	, const QString &inputs, const QString &languageExtension)
 {
 	Q_UNUSED(languageExtension)
 	mRunning = true;
 	mBrick.processSensors(true);
 	mBrick.setCurrentInputs(inputs);
 	QString newScript = jsOverrides + "script.writeToFile = null;\n" + script;
-	//qDebug() << newScript;
 	mScriptRunner.run(newScript);
 }
 
@@ -166,42 +170,42 @@ void trik::TrikTextualInterpreter::reportLog(const QString &msg)
 QString trik::TrikTextualInterpreter::initInputs(const QString &inputs) const
 {
 	auto jsValToStr = [this](const QJsonValue &val) -> QString {
-		switch (val.type()) {
-		case QJsonValue::Bool:
-			return val.toBool() ? "true" : "false";
-		case QJsonValue::Double:
-			return QString::number(val.Double);//maybe increase precision
-		case QJsonValue::String:
-			return QString("\"%1\"").arg(val.toString());
-		case QJsonValue::Array:
-			return QString(QJsonDocument(val.toArray()).toJson(QJsonDocument::Compact));
-		case QJsonValue::Object:
-			return QString(QJsonDocument(val.toObject()).toJson(QJsonDocument::Compact));
-		default:
-			mErrorReporter->addError(QObject::tr("Bogus input values"));
-			return "";
-		}
+	switch (val.type()) {
+	case QJsonValue::Bool:
+		return val.toBool() ? "true" : "false";
+	case QJsonValue::Double:
+		return QString::number(val.Double);//maybe increase precision
+	case QJsonValue::String:
+		return QString("\"%1\"").arg(val.toString());
+	case QJsonValue::Array:
+		return QString(QJsonDocument(val.toArray()).toJson(QJsonDocument::Compact));
+	case QJsonValue::Object:
+		return QString(QJsonDocument(val.toObject()).toJson(QJsonDocument::Compact));
+	default:
+		mErrorReporter->addError(QObject::tr("Bogus input values"));
+		return "";
+	}
 	};
 
 	QString result;
 	if (!inputs.isEmpty()) {
-		QString val;
-		QFile file;
-		file.setFileName(inputs);
-		if (file.open(QIODevice::ReadOnly)) {
-			val = file.readAll();
-			file.close();
-			QJsonDocument document = QJsonDocument::fromJson(val.toUtf8());
-			QJsonObject object = document.object();
-			for (const QString &name : object.keys()) {
-				QJsonValue value = object[name];
-				QString valueStr = jsValToStr(value);
-				QString line("var " + name + " = " + valueStr + ";\n");
-				result.append(line);
-			}
-		} else {
-			mErrorReporter->addError(QObject::tr("Error: File %1 couldn't be opened!").arg(inputs));
+	QString val;
+	QFile file;
+	file.setFileName(inputs);
+	if (file.open(QIODevice::ReadOnly)) {
+		val = file.readAll();
+		file.close();
+		QJsonDocument document = QJsonDocument::fromJson(val.toUtf8());
+		QJsonObject object = document.object();
+		for (const QString &name : object.keys()) {
+		QJsonValue value = object[name];
+		QString valueStr = jsValToStr(value);
+		QString line("var " + name + " = " + valueStr + ";\n");
+		result.append(line);
 		}
+	} else {
+		mErrorReporter->addError(QObject::tr("Error: File %1 couldn't be opened!").arg(inputs));
+	}
 	}
 	return result;
 }
@@ -236,12 +240,12 @@ void trik::TrikTextualInterpreter::scriptFinished(const QString &error, int scri
 {
 	Q_UNUSED(scriptId);
 	if (!error.isEmpty()) {
-		reportError(error);
+	reportError(error);
 	}
 
 	if (mRunning) { /// @todo: figure out better place for this check - it should avoid double aborts
-		mRunning = false;
-		mBrick.processSensors(false);
-		emit completed();
+	mRunning = false;
+	mBrick.processSensors(false);
+	emit completed();
 	}
 }

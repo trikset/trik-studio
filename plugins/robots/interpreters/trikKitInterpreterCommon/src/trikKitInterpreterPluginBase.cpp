@@ -187,7 +187,6 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 
 					QFile file(dir.filePath(img));
 					if (file.open(QIODevice::ReadOnly)) {
-						qDebug() << img;
 						const QByteArray rowBytes = file.readAll().toBase64();
 						QString rawStr(rowBytes);
 						Q_ASSERT(rawStr.length() == rowBytes.length());
@@ -275,8 +274,7 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 		auto textTab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
 		bool isTextualInterp = mTextualInterpreter->supportedRobotModelNames().contains(model.name());
 		/// FIX IT!!!!!!
-		mStart.setVisible(mIsModelSelected && isTextualInterp && textTab
-				&& textTab->currentLanguage().extension == "js");
+		mStart.setVisible(mIsModelSelected && isTextualInterp && textTab);
 		mStop.setVisible(false); // interpretation should always stop when switching models?
 	});
 
@@ -290,7 +288,7 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	});
 
 	connect(&configurer.interpreterControl()
-			, &kitBase::InterpreterControlInterface::startJsInterpretation
+			, &kitBase::InterpreterControlInterface::startScriptInterpretation
 			, this
 			, [this]() {
 		if (!mTextualInterpreter->isRunning() && mIsModelSelected) { // temporary
@@ -489,7 +487,6 @@ void TrikKitInterpreterPluginBase::testStart()
 			startCodeInterpretation(texttab->text(), "py");
 		}
 	} else {
-		qDebug("wrong tab selected");
 		mStop.setVisible(false);
 		mStart.setVisible(true);
 		/// todo: refactor the whole button shenanigans
