@@ -9,7 +9,7 @@ mkdir -p "$BUNDLE_CONTENTS/Lib"
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
 
 copy_qt_lib QtMultimediaWidgets
+copy_qt_lib QtOpenGL
 
 cp   $BIN_DIR/gamepad "$BUNDLE_CONTENTS/MacOS"
 
-#rm -rf gamepad-build
