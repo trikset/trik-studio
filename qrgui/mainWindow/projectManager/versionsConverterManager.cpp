@@ -38,7 +38,7 @@ bool VersionsConverterManager::validateCurrentProject()
 	}
 
 	const QMap<Id, Version> savedVersions = mMainWindow.models().logicalModelAssistApi().editorVersions();
-	const QMultiMap<QString, ProjectConverter> converters = mMainWindow.toolManager().projectConverters();
+	const auto &converters = mMainWindow.toolManager().projectConverters();
 
 	for (const QString &editor : editorsToCheck) {
 		const Version currentVersion = mMainWindow.editorManager().version(Id(editor));
@@ -53,7 +53,14 @@ bool VersionsConverterManager::validateCurrentProject()
 			return false;
 		}
 
-		if (!convertProject(currentVersion, savedVersion, converters.values(editor))) {
+		QList<ProjectConverter> l;
+		auto const &cs = converters.equal_range(editor);
+
+		for(auto i = cs.first; i != cs.second && i!=converters.end(); ++i) {
+			l.push_back(i->second);
+		}
+
+		if (!convertProject(currentVersion, savedVersion, l)) {
 			return false;
 		}
 	}

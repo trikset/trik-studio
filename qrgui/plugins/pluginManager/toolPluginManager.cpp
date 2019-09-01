@@ -88,12 +88,12 @@ QList<QPair<QString, gui::PreferencesPage *>> ToolPluginManager::preferencesPage
 	return result;
 }
 
-QMultiMap<QString, ProjectConverter> ToolPluginManager::projectConverters() const
+std::multimap<QString, ProjectConverter> ToolPluginManager::projectConverters() const
 {
-	QMultiMap<QString, ProjectConverter> result;
-	for (ToolPluginInterface * const toolPlugin : mPlugins) {
+	std::multimap<QString, ProjectConverter> result;
+	for (auto &&toolPlugin : mPlugins) {
 		for (const ProjectConverter &converter : toolPlugin->projectConverters()) {
-			result.insertMulti(converter.editor(), converter);
+			result.insert(std::make_pair(converter.editor(), converter));
 		}
 	}
 

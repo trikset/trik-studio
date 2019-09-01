@@ -139,7 +139,7 @@ unix:!nosanitizers {
 
 	#LSan can be used without performance degrade even in release build
 	#But at the moment we can not, because of Qt  problems
-	CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
+	!macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
 		QMAKE_CFLAGS += -fsanitize=leak
@@ -149,9 +149,9 @@ unix:!nosanitizers {
 
 	sanitize_undefined:macx-clang {
 		# sometimes runtime is missing in clang. this hack allows to avoid runtime dependency.
-		QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fsanitize-trap=undefined
-		QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
-		QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
+		#QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fsanitize-trap=undefined
+		#QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
+		#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
 	}
 
 	gcc5 {
