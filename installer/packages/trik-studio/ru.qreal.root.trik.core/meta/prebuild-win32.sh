@@ -18,8 +18,8 @@ cp    $BIN_DIR/trikScriptRunner.dll                                             
 cp    $BIN_DIR/trikHal.dll                                                        $PWD/../data/
 cp    $BIN_DIR/trikKernel.dll                                                     $PWD/../data/
 cp    $BIN_DIR/trikNetwork.dll                                                    $PWD/../data/
-cp    $(python3-config --prefix)/python3*.dll                                                       $PWD/../data/
-cp    $(python3-config --prefix)/vcruntime*.dll                                                     $PWD/../data/
+cp    $BIN_DIR/python3*.dll                                                       $PWD/../data/
+cp    $BIN_DIR/vcruntime*.dll                                                     $PWD/../data/
 
 cp    $BIN_DIR/system.js                                                          $PWD/../data/bin/
 cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
