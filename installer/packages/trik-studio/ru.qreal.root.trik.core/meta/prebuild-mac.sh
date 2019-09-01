@@ -15,6 +15,11 @@ cp -pR $BIN_DIR/libqslog.dylib                                            	     
 cp -pR $BIN_DIR/libPythonQt{,_QtAll}-Qt*-Python*.dylib                                  	      "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libtrik*.dylib                                            	          "$BUNDLE_CONTENTS/Lib"
 
+PYTHON_LIBNAME=$(python3-config --prefix)/Python
+cp -pR "$PYTHON_LIBNAME" "$BUNDLE_CONTENTS/Lib"
+find "$BUNDLE_CONTENTS/Lib" -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/Python
+
+
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libtrikMetamodel.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-qts-generator-library.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-generator-base.1.0.0.dylib"

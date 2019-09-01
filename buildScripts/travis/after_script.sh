@@ -1,9 +1,10 @@
 #!/bin/bash
 set -euxo pipefail
 $EXECUTOR env CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" ccache -s
+QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $TRAVIS_OS_NAME in
   osx)
-    QTIFWBIN=/usr/local/bin
+    QTIFWBIN=$QTBIN/../../../Tools/QtInstallerFramework/3.1/bin
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
@@ -12,7 +13,6 @@ case $TRAVIS_OS_NAME in
     ;;
   *) exit 1 ;;
 esac
-QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 df -h .
 
 if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
@@ -25,10 +25,14 @@ then
       && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
       && mv installer/trik-studio*installer* installer/$TSNAME \
       && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/\
-      && echo Start build checker archive \
+"
+      if [[ $TRAVIS_OS_NAME == linux ]] ; then
+      $EXECUTOR bash -ic "\
+      echo Start build checker archive \
       && bin/$CONFIG/build-checker-installer.sh \
       && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz\
 "
+     fi
 fi || travis_terminate 3
 
 docker stop builder || :
