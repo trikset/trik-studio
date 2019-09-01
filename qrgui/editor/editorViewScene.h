@@ -171,8 +171,8 @@ public slots:
 	void redraw();
 
 signals:
-	void zoomIn();
-	void zoomOut();
+	void zoomIn() override;
+	void zoomOut() override;
 
 	/// Emitted when user requested to switch to some element (for example doubled-clicked element with explosion).
 	void goTo(const Id &id);

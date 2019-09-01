@@ -42,9 +42,9 @@ template <typename TKey>
 class GesturesRecognizer : public GesturesManager
 {
 public:
-	GesturesRecognizer(){}
+	GesturesRecognizer() = default;
 
-	~GesturesRecognizer() override {}
+	~GesturesRecognizer() override = default;
 
 	qreal getDistance(const QString &item) override
 	{
@@ -52,7 +52,7 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	void initIdealGestures(QMap<QString, PathVector> const &objects)
+	void initIdealGestures(QMap<QString, PathVector> const &objects) override
 	{
 		for (const QString &object : objects.keys()) {
 			TKey key = getKey(objects[object]);
@@ -60,12 +60,12 @@ public:
 		}
 	}
 
-	void setKey(const PathVector &path)
+	void setKey(const PathVector &path) override
 	{
 		mKey = getKey(path);
 	}
 
-	virtual qreal getMaxDistance(const QString &object) = 0;
+	virtual qreal getMaxDistance(const QString &object) override = 0;
 
 protected:
 	TKey mKey;

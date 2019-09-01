@@ -28,7 +28,7 @@ class BluetoothRobotCommunicationThread : public utils::robotCommunication::Robo
 
 public:
 	BluetoothRobotCommunicationThread();
-	~BluetoothRobotCommunicationThread();
+	~BluetoothRobotCommunicationThread() override;
 
 public slots:
 	bool send(QObject *addressee, const QByteArray &buffer, int responseSize) override;

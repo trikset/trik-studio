@@ -29,7 +29,7 @@ public:
 
 	void generateCode(utils::OutFile &out) override;
 
-	bool init(const QDomElement &element, const QString &context);
+	bool init(const QDomElement &element, const QString &context) override;
 	bool initGraphics() override;
 	bool initRoles() override;
 	bool initRoleProperties() override;

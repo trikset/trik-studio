@@ -24,10 +24,10 @@ class MixedGesturesManager : public GesturesRecognizer<QPair<qreal *, qreal *> >
 {
 public:
 	MixedGesturesManager();
-	~MixedGesturesManager();
+	~MixedGesturesManager() override;
 
-	qreal getMaxDistance(const QString &);
-	bool isMultistroke();
+	qreal getMaxDistance(const QString &) override;
+	bool isMultistroke() override;
 
 	qreal getDistance(QString const &item) override
 	{
@@ -35,14 +35,16 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	qreal getDistance(QPair<qreal *, qreal *> const &key1, QPair<qreal *, qreal *> const &key2);
-	QPair<qreal *, qreal *> getKey(const PathVector &path);
+	qreal getDistance(QPair<qreal *, qreal *> const &key1, QPair<qreal *, qreal *> const &key2) override;
+	QPair<qreal *, qreal *> getKey(const PathVector &path) override;
 };
 
 class MixedClassifier
 {
 public:
-	MixedClassifier();
+	MixedClassifier() = default;
+	MixedClassifier(const MixedClassifier &) = delete;
+	MixedClassifier(MixedClassifier &&) = default;
 	explicit MixedClassifier(const PathVector &path);
 	~MixedClassifier();
 
@@ -51,7 +53,7 @@ public:
 	QPair<qreal *, qreal *> key() const;
 
 private:
-	explicit MixedClassifier(QPair<qreal *, qreal *> const & key);
+	explicit MixedClassifier(QPair<qreal *, qreal *> &&key);
 
 	QPair<qreal *, qreal *> mKey;
 };

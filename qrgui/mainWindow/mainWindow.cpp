@@ -827,6 +827,7 @@ void MainWindow::openLogs() const
 {
 	QUrl url("file:///" + qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
 	bool result = QDesktopServices::openUrl(url);
+	Q_UNUSED(result);
 }
 
 bool MainWindow::unloadPlugin(const QString &pluginName)

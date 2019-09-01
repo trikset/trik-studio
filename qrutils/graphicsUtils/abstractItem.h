@@ -43,11 +43,11 @@ public:
 
 	explicit AbstractItem(QGraphicsItem *parent = nullptr);
 
-	virtual QRectF boundingRect() const = 0;
+	virtual QRectF boundingRect() const override = 0;
 	virtual QRectF realBoundingRect() const;
 	virtual QRectF calcNecessaryBoundingRect() const;
 	virtual QPainterPath realShape() const;
-	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) = 0;
 	virtual void drawExtractionForItem(QPainter *painter);
 	virtual void drawFieldForResizeItem(QPainter *painter);

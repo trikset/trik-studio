@@ -29,7 +29,7 @@ class NodeType : public GraphicType
 {
 public:
 	explicit NodeType(Diagram *diagram);
-	virtual Type* clone() const;
+	virtual Type* clone() const override;
 	virtual ~NodeType();
 	void generateCode(utils::OutFile &out) override;
 	bool copyPorts(NodeType *port) override;
@@ -44,12 +44,12 @@ private:
 	QDomElement mPortsDomElement;
 	bool mIsResizeable;
 
-	virtual bool initRoles();
-	virtual bool initGraphics();
-	virtual bool initDividability();
-	virtual bool initPortTypes();
-	virtual bool initRoleProperties();
-	virtual QString propertyName(Property *property, const QString &roleName);
+	virtual bool initRoles() override;
+	virtual bool initGraphics() override;
+	virtual bool initDividability() override;
+	virtual bool initPortTypes() override;
+	virtual bool initRoleProperties() override;
+	virtual QString propertyName(Property *property, const QString &roleName) override;
 
 	bool initSdf();
 	void generateSdf() const;
@@ -58,7 +58,7 @@ private:
 	bool initPointPorts(const QDomElement &portsElement);
 	bool initLinePorts(const QDomElement &portsElement);
 	bool initCircularPorts(const QDomElement &portsElement);
-	virtual bool initLabel(Label *label, const QDomElement &element, const int &count);
+	virtual bool initLabel(Label *label, const QDomElement &element, const int &count) override;
 	bool initBooleanProperties();
 
 	void generateMouseGesture(utils::OutFile &out);

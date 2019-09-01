@@ -24,10 +24,10 @@ class NearestPosGridGesturesManager : public GesturesRecognizer<qreal *>
 {
 public:
 	NearestPosGridGesturesManager();
-	~NearestPosGridGesturesManager();
-	qreal getMaxDistance(const QString &);
-	bool isMultistroke();
-	qreal getDistance(qreal * const & key1, qreal * const &key2);
+	~NearestPosGridGesturesManager() override;
+	qreal getMaxDistance(const QString &) override;
+	bool isMultistroke() override;
+	qreal getDistance(qreal * const & key1, qreal * const &key2) override;
 
 	qreal getDistance(QString const &item) override
 	{
@@ -35,7 +35,7 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	qreal *getKey(const PathVector &path);
+	qreal *getKey(const PathVector &path) override;
 };
 
 }

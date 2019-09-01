@@ -51,19 +51,19 @@ public:
 	/// @param type - reference to type descriptor of the element. Takes ownership.
 	Element(const ElementType &type, const Id &id, const models::Models &models);
 
-	virtual ~Element() {}
+	virtual ~Element() override = default;
 
 	void initEmbeddedControls();
 
 	virtual void updateData();
 
-	virtual Id id() const;
+	virtual Id id() const override;
 	virtual Id logicalId() const;
-	virtual QString name() const;
+	virtual QString name() const override;
 
 	// for edge
 	virtual void connectToPort(Element * src = nullptr, Element * dst = nullptr) { Q_UNUSED(src); Q_UNUSED(dst); }
-	
+
 	// for node
 	virtual void checkConnectionsToPort() {}
 

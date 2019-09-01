@@ -37,7 +37,7 @@ namespace commands {
 class ReshapeCommand : public qReal::commands::AbstractCommand, public qReal::commands::TrackingEntity
 {
 public:
-	ReshapeCommand(graphicsUtils::AbstractScene &scene, const model::Model &model, const QStringList &ids);
+	ReshapeCommand(graphicsUtils::AbstractScene &scene, const model::Model &, const QStringList &ids);
 
 	void startTracking() override;
 	void stopTracking() override;
@@ -46,15 +46,14 @@ public:
 	bool modificationsHappened() const;
 
 protected:
-	bool execute();
-	bool restoreState();
+	bool execute() override;
+	bool restoreState() override;
 
 private:
 	void takeSnapshot(QMap<QString, QDomElement> &target);
 	void setConfiguration(const QMap<QString, QDomElement> &configuration);
 
 	graphicsUtils::AbstractScene &mScene;
-	const model::Model &mModel;
 	const QStringList mIds;
 	QDomDocument mXmlFactory;
 	QMap<QString, QDomElement> mOldConfiguration;

@@ -64,19 +64,15 @@ QPair<qreal *, qreal *> MixedGesturesManager::getKey(const PathVector &path)
 	return QPair<qreal *, qreal *>(key1, key2);
 }
 
-MixedClassifier::MixedClassifier(QPair<qreal *, qreal *> const &key)
+MixedClassifier::MixedClassifier(QPair<qreal *, qreal *>  &&key)
+	: mKey(key)
 {
-	mKey = key;
 }
 
 MixedClassifier::MixedClassifier(const PathVector &path)
 {
 	MixedGesturesManager gManager;
 	mKey = gManager.getKey(path);
-}
-
-MixedClassifier::MixedClassifier()
-{
 }
 
 MixedClassifier::~MixedClassifier()

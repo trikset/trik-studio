@@ -33,18 +33,18 @@ class Ev3DisplayWidget : public twoDModel::engine::TwoDModelDisplayWidget
 
 public:
 	explicit Ev3DisplayWidget(QWidget *parent = nullptr);
-	~Ev3DisplayWidget();
+	~Ev3DisplayWidget() override;
 
 	void setPainter(qReal::ui::PainterInterface *painter) override;
 
 	bool buttonIsDown(const QString &buttonId) const override;
 
-	void repaintDisplay();
-	int displayWidth() const;
-	int displayHeight() const;
+	void repaintDisplay() override;
+	int displayWidth() const override;
+	int displayHeight() const override;
 
 protected:
-	void paintEvent(QPaintEvent *);
+	void paintEvent(QPaintEvent *) override;
 
 private:
 	Ui::Ev3DisplayWidget *mUi;

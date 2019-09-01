@@ -28,9 +28,9 @@ class EdgeType : public GraphicType
 {
 public:
 	explicit EdgeType(Diagram *diagram);
-	virtual Type* clone() const;
-	virtual ~EdgeType();
-	virtual void generateCode(utils::OutFile &out);
+	virtual Type* clone() const override;
+	virtual ~EdgeType() override;
+	virtual void generateCode(utils::OutFile &out) override;
 	virtual bool generateEnumValues(utils::OutFile &/*out*/, bool /*isNotFirst*/) { return false; }
 	bool copyPorts(NodeType* parent) override;
 	bool copyPictures(GraphicType *parent) override;
@@ -52,15 +52,15 @@ private:
 	QStringList mFromPorts;
 	QStringList mToPorts;
 
-	virtual void generateLabels(utils::OutFile &out) const;
-	virtual bool initRoles();
-	virtual bool initRoleProperties();
-	virtual QString propertyName(Property *property, const QString &roleName);
-	virtual bool initGraphics();
-	virtual bool initDividability();
-	virtual bool initPortTypes();
+	virtual void generateLabels(utils::OutFile &out) const override;
+	virtual bool initRoles() override;
+	virtual bool initRoleProperties() override;
+	virtual QString propertyName(Property *property, const QString &roleName) override;
+	virtual bool initGraphics() override;
+	virtual bool initDividability() override;
+	virtual bool initPortTypes() override;
 	void initPortTypes(const QDomElement &portsElement, QStringList &ports);
 	void generateEdgeStyle(const QString &styleString, utils::OutFile &out);
 	void generatePorts(utils::OutFile &out, const QStringList &portTypes, const QString &direction);
-	virtual bool initLabel(Label *label, const QDomElement &element, const int &count);
+	virtual bool initLabel(Label *label, const QDomElement &element, const int &count) override;
 };

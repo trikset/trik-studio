@@ -28,8 +28,8 @@ public:
 	/// @param elementType - type of table element.
 	/// @param size - size of a table.
 	Table(QSharedPointer<core::types::TypeExpression> const &elementType
-			, int size)
-		: mElementType(elementType), mSize(size)
+			, int /* size */)
+		: mElementType(elementType)
 	{
 	}
 
@@ -46,7 +46,6 @@ public:
 
 private:
 	QSharedPointer<core::types::TypeExpression> mElementType;
-	int mSize;
 };
 
 }

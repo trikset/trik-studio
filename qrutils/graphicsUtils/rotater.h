@@ -30,7 +30,7 @@ class QRUTILS_EXPORT Rotater : public AbstractItem
 public:
 	Rotater();
 
-	QRectF boundingRect() const;
+	QRectF boundingRect() const override;
 
 	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget* widget = nullptr) override;
 	void drawExtractionForItem(QPainter* painter) override;

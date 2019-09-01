@@ -19,7 +19,7 @@
 #include "src/engine/model/physics/box2DPhysicsEngine.h"
 
 class b2Body;
-class b2Vec2;
+struct b2Vec2;
 
 namespace twoDModel {
 namespace model {

@@ -29,7 +29,7 @@ private slots:
 	void responseSlot(const QVariant &reading) override;
 
 private:
-	QString port();
+	QString port() override;
 	kitBase::robotModel::DeviceInfo device() const override;
 };
 

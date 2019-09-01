@@ -31,7 +31,7 @@ public:
 	kitBase::robotModel::PortInfo defaultLeftWheelPort() const override;
 	kitBase::robotModel::PortInfo defaultRightWheelPort() const override;
 	twoDModel::engine::TwoDModelDisplayWidget *displayWidget() const override;
-	QRect sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const;
+	QRect sensorImageRect(const kitBase::robotModel::DeviceInfo &deviceType) const override;
 
 	QPolygonF collidingPolygon() const override;
 	qreal mass() const override;

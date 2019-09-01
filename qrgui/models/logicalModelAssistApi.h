@@ -34,7 +34,7 @@ class QRGUI_MODELS_EXPORT LogicalModelAssistApi : public QObject, public qReal::
 
 public:
 	LogicalModelAssistApi(details::LogicalModel &logicalModel, const EditorManagerInterface &editorManagerInterface);
-	virtual ~LogicalModelAssistApi();
+	virtual ~LogicalModelAssistApi() override = default;
 
 	const EditorManagerInterface &editorManagerInterface() const override;
 
@@ -45,7 +45,7 @@ public:
 			, const QPointF &position, const Id &preferedLogicalId = Id()) override;
 	void createElements(QList<ElementInfo> &elements) override;
 
-	Id parent(const Id &element) const;
+	Id parent(const Id &element) const override;
 	IdList children(const Id &element) const override;
 	void changeParent(const Id &element, const Id &parent, const QPointF &position = QPointF()) override;
 

@@ -220,7 +220,7 @@ void Exploser::explosionsHierarchyPrivate(const Id &currentId, IdList &targetIds
 {
 	targetIds << currentId;
 	const IdList incomingExplosions = mApi.logicalRepoApi().incomingExplosions(currentId);
-	for (const Id incoming : incomingExplosions) {
+	for (auto &&incoming : incomingExplosions) {
 		explosionsHierarchyPrivate(incoming, targetIds);
 	}
 }

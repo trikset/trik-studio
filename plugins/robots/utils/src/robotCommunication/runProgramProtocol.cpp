@@ -62,11 +62,11 @@ void RunProgramProtocol::run(const QFileInfo &fileToRun)
 		communicator.requestCasingVersion();
 	});
 
-	mProtocol->setAction(mWaitingForUploadingComplete, [this, fileToRun](TcpRobotCommunicatorInterface &communicator) {
+	mProtocol->setAction(mWaitingForUploadingComplete, [fileToRun](TcpRobotCommunicatorInterface &communicator) {
 		communicator.uploadProgram(fileToRun.canonicalFilePath());
 	});
 
-	mProtocol->setAction(mWaitingForRunComplete, [this, fileToRun](TcpRobotCommunicatorInterface &communicator) {
+	mProtocol->setAction(mWaitingForRunComplete, [fileToRun](TcpRobotCommunicatorInterface &communicator) {
 		communicator.runProgram(fileToRun.fileName());
 	});
 

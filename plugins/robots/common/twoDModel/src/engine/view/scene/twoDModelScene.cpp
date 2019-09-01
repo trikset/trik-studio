@@ -291,7 +291,7 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		setSelectionArea(QPainterPath());
 	};
 
-	auto initColorField = [this, mouseEvent, &initItem](items::ColorFieldItem *item) {
+	auto initColorField = [this, &initItem](items::ColorFieldItem *item) {
 		initItem(item);
 		item->setPenBrush(penStyleItems(), penWidthItems(), penColorItems()
 				, brushStyleItems(), brushColorItems());

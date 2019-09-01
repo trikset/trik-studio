@@ -72,16 +72,16 @@ public:
 	IdList temporaryRemovedLinksNone(const Id &elem) const override;
 	void removeTemporaryRemovedLinks(const Id &elem) override;
 
-	void setConfiguration(const Id &elem, const QPolygon &newValue);
+	void setConfiguration(const Id &elem, const QPolygon &newValue) override;
 	QPolygon configuration(const Id &elem) const override;
 
 	void setPosition(const Id &elem, const QPointF &newValue) override;
 	QPointF position(const Id &elem) const override;
 
-	void setToPort(const Id &elem, const qreal &newValue);
+	void setToPort(const Id &elem, const qreal &newValue) override;
 	qreal toPort(const Id &elem) const override;
 
-	void setFromPort(const Id &elem, const qreal &newValue);
+	void setFromPort(const Id &elem, const qreal &newValue) override;
 	qreal fromPort(const Id &elem) const override;
 
 	void setName(const Id &elem, const QString &newValue) override;

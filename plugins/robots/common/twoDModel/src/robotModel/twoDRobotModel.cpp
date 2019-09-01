@@ -43,7 +43,6 @@ using namespace kitBase::robotModel;
 TwoDRobotModel::TwoDRobotModel(const RobotModelInterface &realModel)
 	: CommonRobotModel(realModel.kitId(), realModel.robotId())
 	, mRealModel(&realModel)
-	, mEngine(nullptr)
 {
 	for (const PortInfo &port : realModel.availablePorts()) {
 		if (!port.name().toLower().contains("gamepad")) {
@@ -56,8 +55,6 @@ TwoDRobotModel::TwoDRobotModel(const RobotModelInterface &realModel)
 
 TwoDRobotModel::TwoDRobotModel(const QString &robotId)
 	: CommonRobotModel("", robotId)
-	, mRealModel(nullptr)
-	, mEngine(nullptr)
 {
 }
 

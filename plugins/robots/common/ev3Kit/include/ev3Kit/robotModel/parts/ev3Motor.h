@@ -30,7 +30,7 @@ class Ev3Motor : public kitBase::robotModel::robotParts::Motor
 public:
 	Ev3Motor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
-	virtual void on(int speed);
+	virtual void on(int speed) override;
 	virtual void stop() override;
 	virtual void off() override;
 };

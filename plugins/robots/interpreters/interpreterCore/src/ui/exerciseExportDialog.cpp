@@ -57,10 +57,10 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 
 	QPushButton * const okButton = new QPushButton(tr("Ok"), this);
 	okButton->setDefault(true);
-	connect(okButton, &QPushButton::clicked, this, [this] () { accept(); });
+	connect(okButton, &QPushButton::clicked, this, &ExerciseExportDialog::accept);
 
 	QPushButton * const cancelButton = new QPushButton(tr("Cancel"), this);
-	connect(cancelButton, &QPushButton::clicked, this, [this] () { reject(); });
+	connect(cancelButton, &QPushButton::clicked, this, &ExerciseExportDialog::reject);
 
 	buttonsLayout->addWidget(okButton);
 	buttonsLayout->addWidget(cancelButton);
@@ -80,7 +80,7 @@ ReadOnlyFlags ExerciseExportDialog::readOnlyFlags() const
 {
 	ReadOnlyFlags result;
 
-	const auto setFlag = [this, &result] (ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
+	const auto setFlag = [&result] (ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
 		result |= box->isChecked() ? flag : ReadOnly::ReadOnlyEnum::None;
 	};
 

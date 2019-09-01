@@ -28,10 +28,6 @@ LogicalModelAssistApi::LogicalModelAssistApi(LogicalModel &logicalModel
 	connect(&logicalModel, &LogicalModel::elementAdded, this, &LogicalModelAssistApi::elementAdded);
 }
 
-LogicalModelAssistApi::~LogicalModelAssistApi()
-{
-}
-
 const EditorManagerInterface &LogicalModelAssistApi::editorManagerInterface() const
 {
 	return mModelsAssistApi.editorManagerInterface();

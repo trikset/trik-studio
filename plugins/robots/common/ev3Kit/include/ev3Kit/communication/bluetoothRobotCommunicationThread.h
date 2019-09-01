@@ -28,15 +28,15 @@ class BluetoothRobotCommunicationThread : public Ev3RobotCommunicationThread
 
 public:
 	BluetoothRobotCommunicationThread();
-	~BluetoothRobotCommunicationThread();
+	~BluetoothRobotCommunicationThread() override;
 
 public slots:
-	bool send(QObject *addressee, const QByteArray &buffer, int responseSize);
-	bool connect();
-	void reconnect();
-	void disconnect();
+	bool send(QObject *addressee, const QByteArray &buffer, int responseSize) override;
+	bool connect() override;
+	void reconnect() override;
+	void disconnect() override;
 
-	void allowLongJobs(bool allow = true);
+	void allowLongJobs(bool allow = true) override;
 
 private slots:
 	/// Checks if robot is connected

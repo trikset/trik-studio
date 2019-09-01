@@ -125,7 +125,7 @@ public:
 	void switchAlignment(bool isSwitchedOn);
 	void showAlignment(bool isChecked);
 
-	virtual void setColorRect(bool bl);
+	virtual void setColorRect(bool bl) override;
 
 	bool connectionInProgress();
 	void setConnectingState(bool arg);
@@ -134,7 +134,7 @@ public:
 	void arrangeLinearPorts();
 	void arrangeLinks();
 
-	virtual void checkConnectionsToPort();
+	virtual void checkConnectionsToPort() override;
 
 	/** @brief Drawing placeholder at the appropriate position (calculated using event data) */
 	void drawPlaceholder(QGraphicsRectItem *placeholder, QPointF scenePos);

@@ -71,7 +71,7 @@ protected:
 		bool isMaximizingChildren;
 	};
 
-	void copyFields(Type *type) const;
+	void copyFields(Type *type) const override;
 	QString resourceName(const QString &resourceType) const;
 	QString targetDirectory() const;
 

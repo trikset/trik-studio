@@ -24,10 +24,10 @@ class RectangleGesturesManager : public GesturesRecognizer<qreal *>
 {
 public:
 	RectangleGesturesManager();
-	~RectangleGesturesManager();
-	qreal getMaxDistance(const QString &);
-	bool isMultistroke();
-	qreal getDistance(qreal * const &key1, qreal * const &key2);
+	~RectangleGesturesManager() override;
+	qreal getMaxDistance(const QString &) override;
+	bool isMultistroke() override;
+	qreal getDistance(qreal * const &key1, qreal * const &key2) override;
 
 	qreal getDistance(QString const &item) override
 	{
@@ -35,7 +35,7 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	qreal *getKey(const PathVector & path);
+	qreal *getKey(const PathVector & path) override;
 };
 
 }

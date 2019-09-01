@@ -41,7 +41,7 @@ UploadProgramProtocol::~UploadProgramProtocol()
 void UploadProgramProtocol::run(const QFileInfo &programToUpload)
 {
 	mProtocol->setAction(mWaitingForUploadingComplete
-			, [this, programToUpload](TcpRobotCommunicatorInterface &communicator) {
+			, [programToUpload](TcpRobotCommunicatorInterface &communicator) {
 					communicator.uploadProgram(programToUpload.canonicalFilePath());
 	});
 

@@ -46,7 +46,7 @@ public:
 	void drawRect(int x, int y, int width, int height, bool filled)  override;
 	void drawEllipse(int x, int y, int width, int height, bool filled) override;
 	void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle)  override;
-	void redraw();
+	void redraw() override;
 
 private:
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;

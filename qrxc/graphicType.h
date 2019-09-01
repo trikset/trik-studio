@@ -104,7 +104,7 @@ protected:
 	QString mAbstract;
 	void copyFields(GraphicType *type) const;
 	QString resourceName(const QString &resourceType) const;
-	virtual bool isResolving() const;
+	virtual bool isResolving() const override;
 
 protected:
 	bool addProperty(Property *property, const QString &roleName);

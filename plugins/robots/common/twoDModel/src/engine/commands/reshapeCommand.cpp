@@ -21,9 +21,9 @@
 
 using namespace twoDModel::commands;
 
-ReshapeCommand::ReshapeCommand(graphicsUtils::AbstractScene &scene, const model::Model &model, const QStringList &ids)
+ReshapeCommand::ReshapeCommand(graphicsUtils::AbstractScene &scene, const model::Model & /* model */
+							   , const QStringList &ids)
 	: mScene(scene)
-	, mModel(model)
 	, mIds(ids)
 {
 }
