@@ -58,13 +58,13 @@ fi
 echo "Executing prebuild actions..."
 find $PWD/packages/qreal-base -name prebuild-common.sh -print0 | xargs -0 chmod +x
 find $PWD/packages/qreal-base -name prebuild-$OS.sh -print0 | xargs -0 chmod +x
-find $PWD/packages/qreal-base -name prebuild-common.sh | bash
-find $PWD/packages/qreal-base -name prebuild-$OS.sh | bash
+find $PWD/packages/qreal-base -name prebuild-common.sh | bash -x
+find $PWD/packages/qreal-base -name prebuild-$OS.sh | bash -x
 
 find $PWD/packages/$PRODUCT -name prebuild-common.sh -print0 | xargs -0 chmod +x
 find $PWD/packages/$PRODUCT -name prebuild-$OS.sh -print0 | xargs -0 chmod +x
-find $PWD/packages/$PRODUCT -name prebuild-common.sh | bash
-find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash
+find $PWD/packages/$PRODUCT -name prebuild-common.sh | bash -x
+find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash -x
 
 find . -type d -empty -delete
 

@@ -522,7 +522,7 @@
         <translation type="vanished">Le projet a été automatiquement converti en version %1. Vérifiez son contenu, s&apos;il vous plait.</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="+111"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="+118"/>
         <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+647"/>
+        <location line="+648"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>

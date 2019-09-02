@@ -518,7 +518,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="+111"/>
+        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="+118"/>
         <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
         <translation>Проект был автоматически пробразован из версии %1 до версии %2. Пожалуйста, проверьте его содержимое.</translation>
     </message>
@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+842"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+843"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1026"/>
+        <location line="-1027"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -837,7 +837,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+624"/>
+        <location line="+625"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
