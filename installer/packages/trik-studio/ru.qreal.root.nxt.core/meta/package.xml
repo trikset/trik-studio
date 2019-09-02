@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Package>
-    <DisplayName>Nessesary Files</DisplayName>
+    <DisplayName>Necessary Files</DisplayName>
     <DisplayName xml:lang="ru_ru">Обязательные файлы</DisplayName>
     <Description>Enables support of Lego NXT in TRIK Studio</Description>
     <Description xml:lang="ru_ru">Поддержка конструктора Lego NXT</Description>
