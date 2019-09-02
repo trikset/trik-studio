@@ -29,7 +29,7 @@ class ROBOTS_KIT_BASE_EXPORT RobotModelManagerInterface : public QObject
 	Q_OBJECT
 
 public:
-	~RobotModelManagerInterface() override {}
+	~RobotModelManagerInterface() override = default;
 
 	/// Returns current selected robot model.
 	virtual RobotModelInterface &model() const = 0;

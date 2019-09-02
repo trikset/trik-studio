@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-QT += widgets network script xml
+QT += widgets network script xml multimedia
 
 includes(plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \
