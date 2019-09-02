@@ -178,7 +178,7 @@
 <context>
     <name>trik::TrikKitInterpreterPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+37"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+38"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
@@ -188,7 +188,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+209"/>
+        <location line="+215"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>

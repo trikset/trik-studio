@@ -235,7 +235,7 @@
         <translation type="vanished">Оставновить QTS</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+37"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+38"/>
         <source>Start</source>
         <translation>Запустить</translation>
     </message>
@@ -245,7 +245,7 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+209"/>
+        <location line="+215"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>
