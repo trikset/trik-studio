@@ -110,9 +110,8 @@ void UiManager::placeDevicesConfig(QWidget *devicesWidget)
 {
 	QDockWidget * const devicesDock = produceDockWidget(QObject::tr("Configure devices"), devicesWidget);
 	devicesDock->setObjectName("devicesConfigurationDock");
-	connect(this, &QObject::destroyed, this, [this, devicesDock](){
+	connect(this, &QObject::destroyed, this, [devicesDock](){
 		devicesDock->setParent(nullptr);
-		mDockWidgets.remove(devicesDock);
 	});
 
 	utils::SmartDock::hideCloseButton(devicesDock);
@@ -131,14 +130,12 @@ void UiManager::placeWatchPlugins(QDockWidget *watchWindow, QWidget *graphicsWat
 	graphWatchDock->setObjectName("graphicsWatcherDock");
 	mMainWindow.addDockWidget(Qt::LeftDockWidgetArea, graphWatchDock);
 
-	connect(this, &QObject::destroyed, this, [this, watchWindow](){
+	connect(this, &QObject::destroyed, this, [watchWindow](){
 		watchWindow->setParent(nullptr);
-		mDockWidgets.remove(watchWindow);
 	});
 
-	connect(this, &QObject::destroyed, this, [this, graphWatchDock](){
+	connect(this, &QObject::destroyed, this, [graphWatchDock](){
 		graphWatchDock->setParent(nullptr);
-		mDockWidgets.remove(graphWatchDock);
 	});
 
 	mMainWindow.tabifyDockWidget(watchWindow, graphWatchDock);
