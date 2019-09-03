@@ -22,7 +22,7 @@ class TrikV6KitInterpreterPlugin : public TrikKitInterpreterPluginBase
 {
 	Q_OBJECT
 	Q_INTERFACES(kitBase::KitPluginInterface)
-	Q_PLUGIN_METADATA(IID "trik.TrikV62KitInterpreterPlugin")
+	Q_PLUGIN_METADATA(IID "trik.TrikV6KitInterpreterPlugin")
 
 public:
 	TrikV6KitInterpreterPlugin();
