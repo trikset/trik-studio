@@ -69,7 +69,11 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 
 	mAdditionalPreferences = new TrikAdditionalPreferences({ mRealRobotModel->name() });
 
-	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel));
+	auto enablePython = !QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty();
+	if (friendlyKitName().contains("2014")) {
+		enablePython = false;
+	}
+	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, enablePython));
 }
 
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)

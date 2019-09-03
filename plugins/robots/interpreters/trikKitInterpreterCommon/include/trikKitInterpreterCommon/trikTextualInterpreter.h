@@ -30,7 +30,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikTextualInterpreter
 	Q_OBJECT
 
 public:
-	TrikTextualInterpreter(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
+	TrikTextualInterpreter(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model
+						   , bool enablePython = false);
 	~TrikTextualInterpreter() override;
 
 	void interpretCommand(const QString &script);

@@ -59,7 +59,8 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 const QString pyOverrides ="\ndef print(args): brick.log(args);\n";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
-	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
+	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
+		, bool enablePython)
 	: mRunning(false), mBrick(model), mScriptRunner(mBrick, nullptr), mErrorReporter(nullptr)
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
@@ -81,8 +82,8 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	using trikScriptRunner::ScriptType;
 	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
 
-	if (!QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty()) {
-	Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+	if (enablePython) {
+		Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
 	}
 }
 
