@@ -82,7 +82,7 @@
         <translation>Настройки сенсоров</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+18"/>
         <source>Sensors state</source>
         <translation>Графики</translation>
     </message>
@@ -240,7 +240,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-70"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-69"/>
         <source>Miscellaneous</source>
         <translation>Прочее</translation>
     </message>
@@ -260,7 +260,7 @@
         <translation>режим отладки</translation>
     </message>
     <message>
-        <location line="+177"/>
+        <location line="+174"/>
         <source>Edit mode</source>
         <translation>Режим редактирования</translation>
     </message>
