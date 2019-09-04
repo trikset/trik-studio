@@ -17,7 +17,7 @@ In background mode the session will be terminated just after the execution ended
 </translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Save file to be interpreted.</source>
         <translation>Файл сохранения, который будет исполнен.</translation>
     </message>

@@ -69,6 +69,7 @@ void initLogging()
 
 int main(int argc, char *argv[])
 {
+	qReal::PlatformInfo::enableHiDPISupport();
 	QApplication app(argc, argv);
 	QCoreApplication::setApplicationName("2D-model");
 	QCoreApplication::setApplicationVersion("1.0");

@@ -82,6 +82,7 @@ static QString versionInfo()
 
 int main(int argc, char *argv[])
 {
+	PlatformInfo::enableHiDPISupport();
 	QRealApplication app(argc, argv);
 
 	if (app.arguments().contains("--clear-conf")) {
