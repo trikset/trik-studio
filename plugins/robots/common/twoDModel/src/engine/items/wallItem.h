@@ -55,8 +55,6 @@ public:
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
 
-	void onOverlappedWithRobot(bool overlapped = true);
-
 	QPainterPath path() const;
 
 	void resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid);
@@ -72,14 +70,8 @@ public:
 	qreal friction() const override;
 	BodyType bodyType() const override;
 
-signals:
-	void wallDragged(WallItem *item, const QPainterPath &shape, const QRectF &oldPos);
-
 protected:
 	void setPrivateData();
-
-private slots:
-	void handleReposition(const QPointF &pos);
 
 private:
 	void recalculateBorders();
@@ -91,14 +83,8 @@ private:
 
 	graphicsUtils::LineImpl mLineImpl;
 
-	bool mOverlappedWithRobot = false;
 	const QImage mImage;
 
-	qreal mOldX1 = 0;
-	qreal mOldY1 = 0;
-	qreal mOldX2 = 0;
-	qreal mOldY2 = 0;
-	QPointF mOldPosition = QPointF(0, 0);
 	int mCellNumbX1 = 0;
 	int mCellNumbY1 = 0;
 	int mCellNumbX2 = 0;
