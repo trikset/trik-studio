@@ -16,8 +16,11 @@
 
 #include <QtWidgets/QApplication>
 
+#include <qrkernel/platformInfo.h>
+
 int main(int argc, char *argv[])
 {
+	qReal::PlatformInfo::enableHiDPISupport();
 	::testing::InitGoogleTest(&argc, argv);
 
 	QApplication app(argc, argv);

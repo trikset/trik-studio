@@ -14,12 +14,19 @@
 
 #include "platformInfo.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QStandardPaths>
-#include <QtCore/QDir>
-#include <QtCore/QProcessEnvironment>
-
+#include <QCoreApplication>
+#include <QStandardPaths>
+#include <QDir>
+#include <QProcessEnvironment>
+#include <QGuiApplication>
+#include <QLibrary>
 #include <qrkernel/settingsManager.h>
+#include <QsLog.h>
+
+#ifdef Q_OS_WIN
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h> // for SetProcessDPIAware in PlaformInfo::enableHiDPISupport
+#endif
 
 using namespace qReal;
 
@@ -114,4 +121,29 @@ QString PlatformInfo::cpuArchitecture()
 bool PlatformInfo::isX64()
 {
 	return cpuArchitecture().contains("64");
+}
+
+void PlatformInfo::enableHiDPISupport()
+{
+	if (!qEnvironmentVariableIsSet("QT_DEVICE_PIXEL_RATIO")
+			&& !qEnvironmentVariableIsSet("QT_AUTO_SCREEN_SCALE_FACTOR")
+			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
+			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
+		// Only if there is no attempt to set from the system environment
+#ifdef Q_OS_WIN
+		typedef BOOL (WINAPI *SetProcessDPIAware_t)();
+		// Let Windows decide.
+		if(auto SetProcessDPIAware_ = (SetProcessDPIAware_t)QLibrary::resolve("user32", "SetProcessDPIAware")) {
+			if(SetProcessDPIAware_()) {
+				qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
+				QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+			} else {
+				auto err = GetLastError();
+				QLOG_ERROR() << "Failed to SetDpiAware() with error" << err;
+			}
+			return;
+		}
+#endif
+		QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	}
 }
