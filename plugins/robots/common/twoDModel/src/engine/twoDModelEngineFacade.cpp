@@ -187,6 +187,10 @@ TwoDModelEngineInterface &TwoDModelEngineFacade::engine()
 
 void TwoDModelEngineFacade::onStartInterpretation()
 {
+	if (!mModel->settings().realisticPhysics() &&
+			(!mModel->worldModel().balls().isEmpty() || !mModel->worldModel().skittles().isEmpty())) {
+		mModel->errorReporter()->addWarning(tr("Realistic physics' must be turned on to enjoy skittles and balls"));
+	}
 	mModel->timeline().start();
 }
 

@@ -538,6 +538,14 @@
     </message>
 </context>
 <context>
+    <name>twoDModel::engine::TwoDModelEngineFacade</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+192"/>
+        <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
+        <translation>Реалистичная физика должна быть включена для взимодействия  с кеглями и мячами</translation>
+    </message>
+</context>
+<context>
     <name>twoDModel::items::BallItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+43"/>
