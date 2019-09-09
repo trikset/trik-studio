@@ -30,7 +30,7 @@ branches:
 
 environment:
   global:
-    QTIFW: C:\Qt\Tools\QtInstallerFramework\3.0
+    QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
     CCACHE_DIR: C:\ccache.cache
@@ -95,6 +95,7 @@ install:
   - set QTDIR=C:\Qt\5.12\mingw73_%ARCH%
   - set MINGW=%QTDIR%\..\..\Tools\mingw730_%ARCH%
   - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
+  - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
 # need to reconfigure because it is anouther one git
   - git config --global core.autocrlf true
   - pacman --verbose --noconfirm --sync ccache rsync curl unzip
