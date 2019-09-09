@@ -15,6 +15,13 @@ skip_commits:
     - '**/*.html'
     - '**/*.txt'
     - '**/*.md'
+    - 'installer/packages/**/meta/prebuild-mac.sh'
+    - 'installer/packages/**/meta/prebuild-linux-gnu.sh'
+    - '**/*.dockerfile'
+    - '**/*.Dockerfile'
+    - '**/Dockerfile'
+    - '**/Dockerfile.*'
+    - 'plugins/robots/checker/scripts/build-checker-installer.sh'
   message: /\[NOCI\]/
 
 branches:
