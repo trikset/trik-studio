@@ -76,7 +76,7 @@ void TrikDisplayEmu::setPainterWidth(int penWidth)
 void TrikDisplayEmu::drawLine(int x1, int y1, int x2, int y2)
 {
 	QMetaObject::invokeMethod(mDisplay,
-			"drawArc",
+			"drawLine",
 			Q_ARG(int, x1),
 			Q_ARG(int, y1),
 			Q_ARG(int, x2),

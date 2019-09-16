@@ -1,1 +1,1 @@
-Math.log(@@ARGUMENT@@)
+math.log(@@ARGUMENT@@)
