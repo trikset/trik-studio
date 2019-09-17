@@ -44,21 +44,11 @@ void TrikKeysInterfaceStub::start()
 	init();
 }
 
-void TrikKeysInterfaceStub::stop()
-{
+void TrikKeysInterfaceStub::reset() {
 	for (auto &&button : mButtons) {
 		button->read(); // hack to clear lastReadState
 	}
-	for (auto &&c: mConnections) {
-		disconnect(c);
-	}
-	mConnections.clear();
-}
-
-void TrikKeysInterfaceStub::reset() {
-	mButtons.clear();
 	mWasPressed.clear();
-	stop();
 }
 
 bool TrikKeysInterfaceStub::wasPressed(int code)
@@ -79,13 +69,8 @@ int TrikKeysInterfaceStub::buttonCode(bool wait)
 	return -1; /// @todo
 }
 
-void TrikKeysInterfaceStub::handleNewData(int value)
+void TrikKeysInterfaceStub::handleNewData(robotParts::Button *button, int value)
 {
-	robotParts::Button *button = dynamic_cast<robotParts::Button *>(sender());
-	if (button == nullptr) {
-		return;
-	}
-
 	int code = button->code();
 	bool previousValue = mWasPressed[code];
 	mWasPressed[code] = value;
@@ -107,8 +92,8 @@ bool TrikKeysInterfaceStub::registerButton(int code)
 
 		mButtons[code] = button;
 		using namespace std::placeholders;
-		mConnections << connect(button, &robotParts::Button::newData,
-				this, std::bind(&TrikKeysInterfaceStub::handleNewData, this, std::bind(&QVariant::value<int>, _1))
+		connect(button, &robotParts::Button::newData,
+				this, std::bind(&TrikKeysInterfaceStub::handleNewData, this, button, std::bind(&QVariant::value<int>, _1))
 				, Qt::UniqueConnection);
 	}
 
