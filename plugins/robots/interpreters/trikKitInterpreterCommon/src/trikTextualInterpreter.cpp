@@ -30,7 +30,7 @@
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
 
 const QString jsOverrides = "script.random = brick.random;script.wait = brick.wait;script.time = brick.time;"
-	"script.readAll = brick.readAll;script.timer = brick.timer;"
+	"script.readAll = brick.readAll;script.timer = brick.timer;Date.now = brick.time;"
 	"arrayPPinternal = function(arg) {"
 		"var res = '[';"
 		"for(var i = 0; i < arg.length; i++) {"
