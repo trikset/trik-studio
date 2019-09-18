@@ -57,8 +57,8 @@ private:
 
 	QHash<int, QString> mKeycodeMap;
 	QHash<int, bool> mWasPressed;
-	QHash<int, kitBase::robotModel::robotParts::Button *> mButtons;
 	QSharedPointer<kitBase::robotModel::CommonRobotModel> mRobotModel;
+	QHash<int, kitBase::robotModel::robotParts::Button *> mButtons;
 	QScopedPointer<utils::AbstractTimer> mButtonWatchingTimer;
 };
 
