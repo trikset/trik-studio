@@ -11,6 +11,8 @@ skip_commits:
     - 'buildScripts/docker/*'
     - '.cirrus.yml'
     - '.travis.yml'
+    - '.mergify.yml'
+    - '.github/*'
     - 'Brewfile'
     - '**/*.html'
     - '**/*.txt'
