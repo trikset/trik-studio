@@ -55,6 +55,7 @@ void Settings::deserialize(const QDomElement &parent)
 void Settings::setRealisticPhysics(bool set)
 {
 	mRealisticPhysics = set;
+	emit physicsChanged(mRealisticPhysics);
 }
 
 void Settings::setRealisticSensors(bool set)
