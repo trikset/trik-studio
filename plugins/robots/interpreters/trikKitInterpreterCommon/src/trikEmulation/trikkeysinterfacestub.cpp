@@ -93,7 +93,8 @@ bool TrikKeysInterfaceStub::registerButton(int code)
 		mButtons[code] = button;
 		using namespace std::placeholders;
 		connect(button, &robotParts::Button::newData,
-				this, std::bind(&TrikKeysInterfaceStub::handleNewData, this, button, std::bind(&QVariant::value<int>, _1))
+				this, std::bind(&TrikKeysInterfaceStub::handleNewData, this, button
+								, std::bind(&QVariant::value<int>, _1))
 				, Qt::UniqueConnection);
 	}
 
