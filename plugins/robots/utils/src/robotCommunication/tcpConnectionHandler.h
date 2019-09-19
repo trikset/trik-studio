@@ -26,6 +26,7 @@ class TcpConnectionHandler : public QObject
 
 public:
 	explicit TcpConnectionHandler(int port);
+	~TcpConnectionHandler() override;
 
 	bool connect(const QHostAddress &serverAddress);
 
@@ -44,13 +45,12 @@ private slots:
 	void keepalive();
 
 private:
+	/// Timer used to send "keepalive" packets for other side to be able to detect connection failure.
+	QTimer mKeepAliveTimer; /// Must be destructed after mSocket
 	QTcpSocket mSocket;
 	QByteArray mBuffer;
 	int mExpectedBytes = 0;
 	const int mPort;
-
-	/// Timer used to send "keepalive" packets for other side to be able to detect connection failure.
-	QTimer mKeepAliveTimer;
 };
 
 }
