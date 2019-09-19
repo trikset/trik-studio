@@ -38,6 +38,7 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 	mBrush.setColor(mPen.color());
+	savePos();
 }
 
 QRectF AbstractItem::calcNecessaryBoundingRect() const
@@ -353,6 +354,24 @@ void AbstractItem::setY2(qreal y2)
 	}
 }
 
+void AbstractItem::savePos()
+{
+	mOldX1 = mX1;
+	mOldY1 = mY1;
+	mOldX2 = mX2;
+	mOldY2 = mY2;
+	mOldPos = pos();
+}
+
+void AbstractItem::restorePos()
+{
+	setX1(mOldX1);
+	setX2(mOldX2);
+	setY1(mOldY1);
+	setY2(mOldY2);
+	setPos(mOldPos);
+}
+
 void AbstractItem::setXandY(QDomElement& dom, const QRectF &rect)
 {
 	dom.setAttribute("y1", QString::number(rect.top()));
@@ -562,6 +581,7 @@ void AbstractItem::copyTo(AbstractItem * const other) const
 	other->mY2 = mY2;
 	other->mEditable = mEditable;
 	other->setPos(pos());
+	other->savePos();
 	connect(this, &AbstractItem::positionChanged
 			, other, static_cast<void(AbstractItem::*)(const QPointF &)>(&AbstractItem::setPos));
 	connect(this, &AbstractItem::x1Changed, other, &AbstractItem::setX1);

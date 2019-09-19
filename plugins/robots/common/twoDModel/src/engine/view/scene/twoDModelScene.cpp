@@ -128,14 +128,9 @@ void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 	}
 }
 
-void TwoDModelScene::handleNewRobotPosition(RobotItem *robotItem)
+bool TwoDModelScene::hasIntersect(const AbstractItem *item1, const AbstractItem *item2) const
 {
-	for (const items::WallItem *wall : mModel.worldModel().walls()) {
-		if (wall->realShape().intersects(robotItem->realBoundingRect())) {
-			robotItem->recoverDragStartPosition();
-			return;
-		}
-	}
+	return item1->realShape().intersects(item2->realShape());
 }
 
 void TwoDModelScene::handleBackgroundImageItem(items::ImageItem *backgroundImageItem)
@@ -156,11 +151,42 @@ void TwoDModelScene::handleBackgroundImageItem(items::ImageItem *backgroundImage
 	});
 }
 
+bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> checkItems) const
+{
+	for (auto item : checkItems) {
+		if (!item) {
+			continue;
+		} else if (auto robot = dynamic_cast<const RobotItem *>(item)) {
+			for (const auto wall : mModel.worldModel().walls()) {
+				if (hasIntersect(robot, wall)) return false;
+			}
+		} else if (auto ball = dynamic_cast<const items::BallItem *>(item)) {
+			for (const auto wall : mModel.worldModel().walls()) {
+				if (hasIntersect(ball, wall)) return false;
+			}
+		} else if (auto skittle = dynamic_cast<const items::SkittleItem *>(item)) {
+			for (const auto wall : mModel.worldModel().walls()) {
+				if (hasIntersect(skittle, wall)) return false;
+			}
+		} else if (auto wall = dynamic_cast<const items::WallItem *>(item)) {
+			for (const auto ball : mModel.worldModel().balls()) {
+				if (hasIntersect(wall, ball)) return false;
+			}
+			for (const auto skittle : mModel.worldModel().skittles()) {
+				if (hasIntersect(wall, skittle)) return false;
+			}
+			for (const auto robot : mRobots.values()) {
+				if (hasIntersect(wall, robot)) return false;
+			}
+		}
+	}
+	return true;
+}
+
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
 	RobotItem * const robotItem = new RobotItem(robotModel->info().robotImage(), *robotModel);
 
-	connect(robotItem, &RobotItem::changedPosition, this, &TwoDModelScene::handleNewRobotPosition);
 	connect(robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
 	connect(robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
 
@@ -195,8 +221,6 @@ void TwoDModelScene::onWallAdded(items::WallItem *wall)
 	subscribeItem(wall);
 	connect(wall, &items::WallItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
 	wall->setEditable(!mWorldReadOnly);
-	connect(wall, &items::WallItem::wallDragged, this, &TwoDModelScene::worldWallDragged);
-	connect(wall, &items::WallItem::wallDragged, this, [this](){ handleMouseInteractionWithSelectedItems(); });
 }
 
 void TwoDModelScene::onSkittleAdded(items::SkittleItem *skittle)
@@ -297,6 +321,12 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 				, brushStyleItems(), brushColorItems());
 		mModel.worldModel().addColorField(item);
 	};
+
+	for (auto selectedItem : selectedItems()) {
+		if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
+			item->savePos();
+		}
+	}
 
 	for (RobotItem * const robotItem : mRobots.values()) {
 		if (!robotItem->realBoundingRect().contains(position)) {
@@ -445,20 +475,33 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	}
 	default:
-		if (createdItem) {
-			forReleaseResize(mouseEvent);
-		}
-
 		break;
 	}
 
-	registerInUndoStack(createdItem);
-	setMoveFlag(mouseEvent);
+	if (createdItem) {
+		forReleaseResize(mouseEvent);
+	}
+	if (!isCorrectScene({createdItem})) {
+		// Qt bug. You need to manually release item before removing
+		createdItem->mouseReleaseEvent(mouseEvent);
+		mModel.worldModel().removeItem(createdItem->id());
+	} else {
+		registerInUndoStack(createdItem);
+	}
+
+	if (!isCorrectScene(selectedItems())) {
+		for (auto selectedItem : selectedItems()) {
+			if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
+				item->restorePos();
+			}
+		}
+	}
 
 	for (RobotItem * const robotItem : mRobots) {
 		setSceneRect(sceneRect().united(robotItem->sceneBoundingRect()));
 	}
 
+	setMoveFlag(mouseEvent);
 	handleMouseInteractionWithSelectedItems();
 	update();
 	AbstractScene::mouseReleaseEvent(mouseEvent);
@@ -541,30 +584,6 @@ void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
 		}
 
 		mController->execute(command);
-	}
-}
-
-void TwoDModelScene::reshapeItem(QGraphicsSceneMouseEvent *event)
-{
-	setX2andY2(event);
-	if (mGraphicsItem && mGraphicsItem->editable()) {
-		const QPointF oldBegin(mGraphicsItem->x1(), mGraphicsItem->y1());
-		const QPointF oldEnd(mGraphicsItem->x2(), mGraphicsItem->y2());
-		if (mGraphicsItem->dragState() != graphicsUtils::AbstractItem::None) {
-			mView->setDragMode(QGraphicsView::NoDrag);
-		}
-
-		mGraphicsItem->resizeItem(event);
-
-		QPainterPath shape;
-
-		for (RobotItem * const robotItem : mRobots.values()) {
-			shape.addRect(robotItem->realBoundingRect());
-		}
-
-		if (dynamic_cast<items::WallItem *>(mGraphicsItem) && mGraphicsItem->realShape().intersects(shape)) {
-			mGraphicsItem->reverseOldResizingItem(oldBegin, oldEnd);
-		}
 	}
 }
 
@@ -737,23 +756,12 @@ void TwoDModelScene::reshapeWall(QGraphicsSceneMouseEvent *event)
 {
 	const QPointF pos = event->scenePos();
 	if (mCurrentWall) {
-		const QPointF oldPos = mCurrentWall->end();
 		mCurrentWall->setX2(pos.x());
 		mCurrentWall->setY2(pos.y());
 		if (SettingsManager::value("2dShowGrid").toBool()) {
 			mCurrentWall->reshapeBeginWithGrid(SettingsManager::value("2dGridCellSize").toInt());
 			mCurrentWall->reshapeEndWithGrid(SettingsManager::value("2dGridCellSize").toInt());
 		} else {
-			const QPainterPath shape = mCurrentWall->realShape();
-
-			for (RobotItem * const robotItem : mRobots.values()) {
-				if (shape.intersects(robotItem->realBoundingRect())) {
-					mCurrentWall->setX2(oldPos.x());
-					mCurrentWall->setY2(oldPos.y());
-					break;
-				}
-			}
-
 			if (event->modifiers() & Qt::ShiftModifier) {
 				mCurrentWall->reshapeRectWithShift();
 			}
@@ -859,23 +867,6 @@ void TwoDModelScene::subscribeItem(AbstractItem *item)
 			mCurrentReshapeCommand = nullptr;
 		}
 	});
-}
-
-void TwoDModelScene::worldWallDragged(items::WallItem *wall, const QPainterPath &shape, const QRectF &oldPos)
-{
-	bool isNeedStop = false;
-
-	for (RobotItem * const robotItem : mRobots.values()) {
-		if (shape.intersects(robotItem->realBoundingRect())) {
-			isNeedStop = true;
-			break;
-		}
-	}
-
-	wall->onOverlappedWithRobot(isNeedStop);
-	if ((mDrawingAction == none || (mDrawingAction == TwoDModelScene::wall && mCurrentWall == wall)) && isNeedStop) {
-		wall->setCoordinates(oldPos);
-	}
 }
 
 qreal TwoDModelScene::currentZoom() const
