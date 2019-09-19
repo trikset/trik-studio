@@ -1,2 +1,2 @@
-def @@NAME@@(@@ARGUMENTS@@):
+def @@NAME@@(self,@@ARGUMENTS@@):
 @@BODY@@

@@ -22,6 +22,7 @@ namespace blocks {
 
 class PreconditionalLoopBlock : public Block
 {
+	Q_OBJECT
 public:
 	PreconditionalLoopBlock();
 

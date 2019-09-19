@@ -1,1 +1,1 @@
-Math.random() * (@@ARGUMENT@@)
+int(random.random() * (@@ARGUMENT@@))

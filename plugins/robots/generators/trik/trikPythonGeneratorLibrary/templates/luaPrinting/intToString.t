@@ -1,1 +1,1 @@
-@@VALUE@@
+str(@@VALUE@@)
