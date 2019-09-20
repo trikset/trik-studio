@@ -11,6 +11,8 @@ skip_commits:
     - 'buildScripts/docker/*'
     - '.cirrus.yml'
     - '.travis.yml'
+    - '.mergify.yml'
+    - '.github/*'
     - 'Brewfile'
     - '**/*.html'
     - '**/*.txt'
@@ -42,12 +44,12 @@ environment:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
       - QT: 5.12
-        ARCH: 64
-        PYTHON_PATH: C:\Python37-x64
-
-      - QT: 5.12
         ARCH: 32
         PYTHON_PATH: C:\Python37
+
+      - QT: 5.12
+        ARCH: 64
+        PYTHON_PATH: C:\Python37-x64
 
 configuration:
 #  - debug
@@ -69,11 +71,11 @@ init:
   - set NEED_BINZIP=false
   - set NEED_INSTALLER=false
 #TODO: multiline %APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED% can cause problems
-  - 'set FULL_MESSAGE=%APPVEYOR_PULL_REQUEST_TITLE% %APPVEYOR_REPO_COMMIT_MESSAGE%'
+  - 'set FULL_MESSAGE="%APPVEYOR_PULL_REQUEST_TITLE% %APPVEYOR_REPO_COMMIT_MESSAGE%"'
   - 'echo #%FULL_MESSAGE%#'
-  - 'if "%FULL_MESSAGE:[INSTALLER]=%" NEQ "%FULL_MESSAGE%" ( set "NEED_INSTALLER=true" )'
-  - 'if "%FULL_MESSAGE:[BINZIP]=%"    NEQ "%FULL_MESSAGE%" ( set "NEED_BINZIP=true"    )'
-  - 'if "%FULL_MESSAGE:[AUTOZIP]=%"   NEQ "%FULL_MESSAGE%" ( set "NEED_AUTOZIP=true"   )'
+  - 'if %FULL_MESSAGE:[INSTALLER]=% NEQ %FULL_MESSAGE% ( set "NEED_INSTALLER=true" )'
+  - 'if %FULL_MESSAGE:[BINZIP]=%    NEQ %FULL_MESSAGE% ( set "NEED_BINZIP=true"    )'
+  - 'if %FULL_MESSAGE:[AUTOZIP]=%   NEQ %FULL_MESSAGE% ( set "NEED_AUTOZIP=true"   )'
 # this is a push/merge for branch (else it is a PR)
   - if "x%appveyor_pull_request_number%" EQU "x" (set NEED_AUTOZIP=true)
 #this is a tagged commit build
@@ -164,13 +166,13 @@ after_test:
   - echo "Installer:%INSTALLER_NAME%"
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
   - cd %APPVEYOR_BUILD_FOLDER%
-  - if "%NEED_INSTALLER%" EQU "true" (appveyor PushArtifact installer\%INSTALLER_NAME% -FileName installer\%INSTALLER_NAME%)
+  - if "%NEED_INSTALLER%" EQU "true" (appveyor PushArtifact installer\%INSTALLER_NAME%)
 # pack autoinstaller
   - bash -c "env LC_ALL=C date -u"
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - 7z a -- %AUTOINSTALLER_ZIP_NAME% %INSTALLER_NAME% trik_studio*.qs reinstall*
   - cd %APPVEYOR_BUILD_FOLDER%
-  - if "%NEED_AUTOZIP%" EQU "true" (appveyor PushArtifact installer\%AUTOINSTALLER_ZIP_NAME% -FileName installer\%AUTOINSTALLER_ZIP_NAME%)
+  - if "%NEED_AUTOZIP%" EQU "true" (appveyor PushArtifact installer\%AUTOINSTALLER_ZIP_NAME%)
 # install
   - cd %APPVEYOR_BUILD_FOLDER%\installer
   - bash -c "env LC_ALL=C date -u"

@@ -17,6 +17,7 @@
 #include <kitBase/robotModel/commonRobotModel.h>
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <kitBase/robotModel/robotParts/button.h>
+#include <QsLog.h>
 
 using namespace trik;
 using namespace kitBase::robotModel;
@@ -85,7 +86,8 @@ bool TrikKeysInterfaceStub::registerButton(int code)
 		robotParts::Button * button =
 				RobotModelUtils::findDevice<robotParts::Button>(*mRobotModel, mKeycodeMap[code]);
 		if (button == nullptr) {
-			qDebug("error, button not found"); // todo - propogate errors to trikbrick
+			/// TODO: propogate errors to trikbrick
+			QLOG_FATAL() << "button not found for" << code << "/" << hex << code;
 			//emit error(tr("No configured sensor on port: ") + port);
 			return false;
 		}

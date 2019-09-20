@@ -1,0 +1,19 @@
+pull_request_rules:
+  - name: automatic merge on CI success after reviews
+    conditions:
+      - base=master  # accept PRs only into master
+      - "#approved-reviews-by>=1" # there is at least one review
+      - "#review-requested=0" # all reviewers have finished
+      - "#dismissed-reviews-by=0"  # no one declined
+      - "#commented-reviews-by=0"  # no discussion happened in reviews
+      - "#changes-requested-reviews-by=0" # no more changes were requested
+#      - "#status-success = 6" # all checks succeeded
+      - status-success="continuous-integration/travis-ci/pr"
+      - status-success="continuous-integration/appveyor/pr"
+      - status-success="Mergeable"
+      - status-success="CodeFactor"
+
+    actions:
+      merge:
+        method: merge
+        strict: smart  # less CI build time when a lot of PRs

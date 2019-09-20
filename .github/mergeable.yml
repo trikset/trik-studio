@@ -1,0 +1,46 @@
+version: 2
+mergeable:
+  - when: pull_request.*
+    validate:
+      - do: title
+        must_exclude:
+          regex: WIP
+      - do: label
+        must_exclude:
+          regex: 'wip'
+      - do: milestone
+        no_empty:
+          enabled: true
+        must_include:
+          regex: '19\.[0-9]+'
+      - do: approvals
+        min:
+          count: 1
+        required:
+          assignees: true
+#    error:
+#      - do: checks
+#        status: 'failure'
+#        payload:
+#          title: 'Action/edits required'
+#    fail:
+#      - do: checks
+#        status: 'failure'
+#        payload:
+#          title: 'Action/edits required'
+
+  - when: issues.opened
+    validate:
+      - do: description
+        no_empty:
+          enabled: true
+#    error:
+#      - do: checks
+#        status: 'action_required'
+#        payload:
+#          title: 'Action/edits required'
+#    fail:
+#      - do: checks
+#        status: 'failure'
+#        payload:
+#          title: 'Action/edits required'

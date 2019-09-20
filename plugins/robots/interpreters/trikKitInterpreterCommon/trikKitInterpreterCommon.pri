@@ -14,7 +14,8 @@
 
 QT += widgets network script xml multimedia
 
-includes(plugins/robots/common/kitBase \
+includes(thirdparty/qslog \
+		plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \
 		plugins/robots/common/trikKit \
 		plugins/robots/utils \
