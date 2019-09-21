@@ -45,7 +45,7 @@ matrix:
     - os: linux
       services: docker
       name: "Linux release"
-      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=warn_off CONFIG+=sanitize_undefined CONFIG+=sanitizer"
     - os: linux
       services: docker
       env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
@@ -53,7 +53,7 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS release"
-      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=sanitizer CONFIG+=sanitize_undefined" BUILD_TIMEOUT=1800
     - os: osx
       language: cpp
       name: "macOS debug + tests"

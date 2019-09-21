@@ -145,13 +145,21 @@ unix:!nosanitizers {
 		QMAKE_CFLAGS += -fsanitize=leak
 		QMAKE_CXXFLAGS += -fsanitize=leak
 		QMAKE_LFLAGS += -fsanitize=leak
+		QMAKE_LFLAGS += -static-liblsan
 	}
 
-	sanitize_undefined:macx-clang {
-		# sometimes runtime is missing in clang. this hack allows to avoid runtime dependency.
-		#QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fsanitize-trap=undefined
-		#QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
-		#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
+	sanitize_address {
+		QMAKE_LFLAGS += -static-libasan
+	}
+
+	sanitize_undefined {
+		macx-clang {
+			# sometimes runtime is missing in clang. this hack allows to avoid runtime dependency.
+			#QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fsanitize-trap=undefined
+			#QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
+			#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
+		}
+		QMAKE_LFLAGS += -static-libubsan
 	}
 
 	gcc5 {
@@ -162,20 +170,14 @@ unix:!nosanitizers {
 		# They can change in some version of Qt, keep track of it.
 		# By the way, simply setting QMAKE_CFLAGS, QMAKE_CXXFLAGS and QMAKE_LFLAGS instead of those used below
 		# will not work due to arguments order ("-fsanitize=undefined" must be declared before "-fno-sanitize=vptr").
-			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
-			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
-			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
+# Useless now? Commented out.
+#			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
+#			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
+#			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
 		}
 	}
-
-	CONFIG(release){
-		QMAKE_CFLAGS += -fsanitize-recover=all
-		QMAKE_CXXFLAGS += -fsanitize-recover=all
-	} else {
-		QMAKE_CFLAGS += -fsanitize-recover=undefined
-		QMAKE_CXXFLAGS += -fsanitize-recover=undefined
-	}
-
+	QMAKE_CFLAGS += -fno-sanitize-recover
+	QMAKE_CXXFLAGS += -fno-sanitize-recover
 }
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
