@@ -196,7 +196,7 @@ bool SmartDock::event(QEvent *event)
 			if (QEvent::MouseButtonRelease == event->type()) {
 				// Mouse button releasing may cause dock animation into some dock area.
 				// This animation is not started immediately, so checking for it when all handlers worked out.
-				QTimer::singleShot(0, this, SLOT(checkFloating()));
+				QTimer::singleShot(0, this, &SmartDock::checkFloating);
 			}
 		}
 		break;
