@@ -31,18 +31,13 @@ using namespace utils;
 SmartDock::SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindow *parent)
 	: mMainWindow(parent ? parent : findMainWindow())
 	, mInnerWidget(innerWidget)
-	, mDialog(new QRealDialog(objectName))
+	, mDialog(new QRealDialog(objectName, this))
 	, mCurrentMode(Mode::Docked)
 {
 	setObjectName(objectName);
 
 	initDock();
 	initDialog();
-}
-
-SmartDock::~SmartDock()
-{
-	delete mDialog;
 }
 
 bool SmartDock::isCentral() const
