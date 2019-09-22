@@ -145,11 +145,11 @@ unix:!nosanitizers {
 		QMAKE_CFLAGS += -fsanitize=leak
 		QMAKE_CXXFLAGS += -fsanitize=leak
 		QMAKE_LFLAGS += -fsanitize=leak
-		QMAKE_LFLAGS += -static-liblsan
+		!clang:QMAKE_LFLAGS += -static-liblsan
 	}
 
 	sanitize_address {
-		QMAKE_LFLAGS += -static-libasan
+		!clang:QMAKE_LFLAGS += -static-libasan
 	}
 
 	sanitize_undefined {
@@ -159,7 +159,7 @@ unix:!nosanitizers {
 			#QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
 			#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
 		}
-		QMAKE_LFLAGS += -static-libubsan
+		!clang:QMAKE_LFLAGS += -static-libubsan
 	}
 
 	gcc5 {
@@ -176,8 +176,8 @@ unix:!nosanitizers {
 #			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
 		}
 	}
-	QMAKE_CFLAGS += -fno-sanitize-recover
-	QMAKE_CXXFLAGS += -fno-sanitize-recover
+	QMAKE_CFLAGS += -fno-sanitize-recover=all
+	QMAKE_CXXFLAGS += -fno-sanitize-recover=all
 }
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
