@@ -43,7 +43,7 @@ public:
 	/// @param parent Host for this dock widget. If nullptr then dock widget will determine
 	/// main window itself by enumerating QApplication::topLevelWidgets.
 	SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindow *parent = nullptr);
-	~SmartDock();
+	~SmartDock() override = default;
 
 	/// Returns true if this widget is currently replacing main window central area.
 	bool isCentral() const;
@@ -96,7 +96,7 @@ private:
 
 	QMainWindow *mMainWindow;  // Doesn`t take ownerhsip
 	QWidget *mInnerWidget;  // Doesn`t take ownerhsip
-	QRealDialog *mDialog;  // Takes ownership
+	QRealDialog *const mDialog;  // Takes ownership
 	Mode mCurrentMode;
 	bool mDragged = false;
 };
