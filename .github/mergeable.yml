@@ -15,7 +15,7 @@ mergeable:
           regex: '19\.[0-9]+'
       - do: approvals
         min:
-          count: 1
+          count: 0
         required:
           assignees: true
 #    error:
