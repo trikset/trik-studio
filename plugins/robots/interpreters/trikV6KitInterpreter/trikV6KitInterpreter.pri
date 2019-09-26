@@ -22,6 +22,7 @@ includes(plugins/robots/common/kitBase \
 		plugins/robots/interpreters/trikKitInterpreterCommon \
 		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikControl \
 		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikKernel \
+		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikNetwork \
 		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner \
 		)
 
