@@ -62,7 +62,7 @@ MODE="diagram"
 log $runmode
 
 if [ -e $runmode ]; then
-	MODE="js"
+	MODE="script"
 fi
 
 log "$MODE"

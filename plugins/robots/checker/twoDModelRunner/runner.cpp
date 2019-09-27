@@ -83,7 +83,7 @@ bool Runner::interpret(const QString &saveFile, bool background)
 	if (background) {
 		connect(&mPluginFacade.eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
 				, this, [this]() {
-				QTimer::singleShot(0, this, SLOT(close()));
+				QTimer::singleShot(0, this, &Runner::close);
 		});
 	}
 
@@ -97,7 +97,7 @@ bool Runner::interpret(const QString &saveFile, bool background)
 	}
 
 	mReporter.onInterpretationStart();
-	if (mMode == "js") {
+	if (mMode == "script") {
 		return mPluginFacade.interpretCode(mInputsFile);
 	} else if (mMode == "diagram") {
 		mPluginFacade.actionsManager().runAction().trigger();

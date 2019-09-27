@@ -18,6 +18,8 @@
 
 #include <qrrepo/repoApi.h>
 
+#include <QFileInfo>
+
 const QString description = QObject::tr("Patcher for save files, replaces world model "
 		"with contents of a given XML world model");
 
@@ -25,7 +27,7 @@ int main(int argc, char *argv[])
 {
 	QCoreApplication app(argc, argv);
 	QCoreApplication::setApplicationName("Patcher");
-	QCoreApplication::setApplicationVersion("1.0");
+	QCoreApplication::setApplicationVersion("2.0");
 
 	QCommandLineParser parser;
 	parser.setApplicationDescription(description);
@@ -67,8 +69,7 @@ int main(int argc, char *argv[])
 		const QString scriptContent = scriptFile.readAll();
 		repo.setMetaInformation("activeCode", scriptContent);
 
-		// this value should be changed in case of other script language
-		repo.setMetaInformation("activeCodeLanguageExtension", "js");
+		repo.setMetaInformation("activeCodeLanguageExtension", QFileInfo(scriptFile).suffix().toLower());
 
 		scriptFile.close();
 	}
