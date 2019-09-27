@@ -33,6 +33,8 @@ leak:twoDModel::model::RobotModel::initMotor
 leak:twoDModel::model::physics::parts::Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine*, twoDModel::items::SolidItem const&, b2Vec2 const&, float)
 leak:qReal::Id::Id()
 leak:kitBase::robotModel::robotParts::Random::Random
+leak:qReal::ProjectManager::openProject(QString const&)
+leak:kitBase::robotModel::CommonRobotModel::createDevice
 #leak:trik::pascalABC::TrikPascalABCGeneratorPluginBase::customActions()
 #leak:trik::python::TrikPythonGeneratorPluginBase::customActions()
 #leak:queuedConnectionTypes
