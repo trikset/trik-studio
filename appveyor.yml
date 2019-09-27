@@ -7,6 +7,7 @@ clone_depth: 1
 
 skip_commits:
   files:
+    - '**/lsan.supp'
     - 'buildScripts/travis/*'
     - 'buildScripts/docker/*'
     - '.cirrus.yml'
