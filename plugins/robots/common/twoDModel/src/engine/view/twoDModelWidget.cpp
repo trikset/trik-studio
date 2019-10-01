@@ -501,6 +501,7 @@ void TwoDModelWidget::loadWorldModel()
 	} else {
 		loadXmls(save, QDomDocument());
 	}
+	saveWorldModelToRepo();
 }
 
 void TwoDModelWidget::setBackground()
