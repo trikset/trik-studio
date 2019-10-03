@@ -15,8 +15,6 @@
 #include "twoDGyroscopeSensor.h"
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
-#define FULL_ANGLE 360000
-
 using namespace ev3::robotModel::twoD::parts;
 
 GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
@@ -28,9 +26,5 @@ GyroscopeSensor::GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
 
 QVector<int> GyroscopeSensor::convert(const QVector<int> &data) const
 {
-	int tmp = (data[1] + FULL_ANGLE/2) % FULL_ANGLE;
-	if (tmp < 0) {
-		tmp += FULL_ANGLE;
-	}
-	return {(tmp - FULL_ANGLE/2) / 1000};
+	return {data[1] / 1000};
 }
