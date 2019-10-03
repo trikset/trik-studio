@@ -19,6 +19,8 @@
 
 using namespace utils;
 
+const int maxScreenSize = 320;
+
 TextObject::TextObject(QObject *parent)
 	: CanvasObject(parent)
 	, mX(0)
@@ -72,10 +74,8 @@ void TextObject::setText(const QString &text)
 void TextObject::paint(QPainter *painter, const QRect &outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
-	QRect rect = outputRect;
-	rect &= rect.translated(mX, mY);
 	painter->setPen(Qt::black);
-	painter->drawText(QRectF(rect), Qt::AlignLeft | Qt::AlignTop, mText);
+	painter->drawText(QRectF(mX, mY, maxScreenSize, maxScreenSize), Qt::AlignLeft | Qt::AlignTop, mText);
 }
 
 QJsonObject TextObject::toJson() const
