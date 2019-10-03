@@ -68,7 +68,7 @@ QAction *WallItem::wallTool()
 
 void WallItem::setPrivateData()
 {
-	setZValue(1);
+	setZValue(ZValue::Wall);
 	QPen pen(this->pen());
 	pen.setWidth(mWallWidth);
 	pen.setStyle(Qt::NoPen);

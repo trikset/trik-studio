@@ -52,7 +52,6 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
 	setCursor(QCursor(Qt::PointingHandCursor));
-	setZValue(1);
 
 	mPortItem->setParentItem(this);
 	mPortItem->moveBy(-mPortItem->boundingRect().width() - 5, -mPortItem->boundingRect().height() - 5);

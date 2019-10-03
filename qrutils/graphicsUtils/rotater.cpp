@@ -35,7 +35,6 @@ Rotater::Rotater()
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
 	setCursor(QCursor(Qt::PointingHandCursor));
-	setZValue(2);
 
 	QPen pen(Qt::blue);
 	pen.setWidth(3);
