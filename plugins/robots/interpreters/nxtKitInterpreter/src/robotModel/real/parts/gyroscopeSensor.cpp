@@ -52,6 +52,7 @@ void GyroscopeSensor::read()
 void GyroscopeSensor::calibrate()
 {
 	/// @todo
+	emit failure();
 }
 
 void GyroscopeSensor::doConfiguration()
