@@ -15,14 +15,17 @@
 #include "kitBase/blocksBase/common/calibrateGyroscopeBlock.h"
 
 using namespace kitBase::blocksBase::common;
+using namespace kitBase::robotModel::robotParts;
 
 CalibrateGyroscopeBlock::CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel)
-	: kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>(robotModel)
+	: kitBase::blocksBase::common::DeviceBlock<GyroscopeSensor>(robotModel)
 {
 }
 
-void CalibrateGyroscopeBlock::doJob(kitBase::robotModel::robotParts::GyroscopeSensor &gyro)
+void CalibrateGyroscopeBlock::doJob(GyroscopeSensor &gyro)
 {
+	auto failSignal = connect(&gyro, &GyroscopeSensor::failure, [this]{this->warning("Can't calibrate");});
 	gyro.calibrate();
 	emit done(mNextBlockId);
+	disconnect(failSignal);
 }
