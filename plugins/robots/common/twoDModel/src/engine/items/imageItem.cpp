@@ -34,6 +34,7 @@ ImageItem::ImageItem(model::Image *image, const QRect &geometry)
 	setY1(geometry.top());
 	setX2(geometry.right());
 	setY2(geometry.bottom());
+	setBackgroundRole(false);
 }
 
 AbstractItem *ImageItem::clone() const
@@ -134,6 +135,7 @@ void ImageItem::setPath(const QString &path)
 void ImageItem::setBackgroundRole(bool background)
 {
 	mBackgroundRole = background;
+	setZValue(background ? ZValue::Background : ZValue::Picture);
 }
 
 bool ImageItem::isBackground() const

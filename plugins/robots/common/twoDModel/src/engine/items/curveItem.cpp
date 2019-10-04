@@ -39,8 +39,6 @@ CurveItem::CurveItem(const QPointF &begin, const QPointF &end)
 	setY2(end.y());
 	mMarker1.setPos(begin + QPointF(-30, 0));
 	mMarker2.setPos(end + QPointF(130, 0));
-	mMarker1.setZValue(1);
-	mMarker2.setZValue(1);
 	mMarker1.setVisible(isSelected());
 	mMarker2.setVisible(isSelected());
 	setPrivateData();

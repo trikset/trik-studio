@@ -284,7 +284,7 @@
 <context>
     <name>twoDModel::items::CurveItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+64"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
         <source>Bezier Curve (B)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -300,7 +300,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+48"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+49"/>
         <source>Image (I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -615,7 +615,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+659"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+658"/>
         <source>Select image</source>
         <translation type="unfinished"></translation>
     </message>
