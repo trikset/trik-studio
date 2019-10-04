@@ -41,6 +41,15 @@ public:
 		, Ctrl
 	};
 
+	enum ZValue {
+		Background
+		, Picture
+		, Shape
+		, Wall
+		, Moveable
+		, Robot
+	};
+
 	explicit AbstractItem(QGraphicsItem *parent = nullptr);
 
 	virtual QRectF boundingRect() const override = 0;

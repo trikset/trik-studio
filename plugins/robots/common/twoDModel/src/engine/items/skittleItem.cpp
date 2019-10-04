@@ -30,7 +30,7 @@ SkittleItem::SkittleItem(const QPointF &position)
 {
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
 	setPos(position);
-	setZValue(1);
+	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
 }
 
