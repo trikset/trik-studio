@@ -75,7 +75,7 @@ QPainterPath SonarSensorItem::scanningRegion() const
 
 QPainterPath SonarSensorItem::shape() const
 {
-	QPainterPath result = scanningRegion();
+	QPainterPath result;
 	result.addRect(mBoundingRect);
 	return result;
 }
