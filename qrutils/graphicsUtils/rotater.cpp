@@ -27,7 +27,6 @@ using namespace mathUtils;
 const int rotaterLength = 30;
 
 Rotater::Rotater()
-	: AbstractItem()
 {
 	setFlag(ItemIsSelectable);
 	setFlag(ItemIsMovable, false);

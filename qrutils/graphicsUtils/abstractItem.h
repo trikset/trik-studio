@@ -131,6 +131,7 @@ public:
 
 	void setEditable(bool editable);
 	bool editable() const;
+	bool isHovered() const;
 
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
@@ -170,6 +171,8 @@ protected:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void copyTo(AbstractItem * const other) const;
 
@@ -189,6 +192,7 @@ private:
 	qreal mY2;
 	QString mId;
 	bool mEditable;
+	bool mHovered;
 };
 
 }

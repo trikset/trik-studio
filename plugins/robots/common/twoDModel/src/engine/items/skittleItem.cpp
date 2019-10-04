@@ -23,8 +23,7 @@
 using namespace twoDModel::items;
 
 SkittleItem::SkittleItem(const QPointF &position)
-	: SolidItem()
-	, mStartPosition(QPointF())
+	: mStartPosition(QPointF())
 	, mStartRotation(0.0f)
 	, mSvgRenderer(new QSvgRenderer)
 {

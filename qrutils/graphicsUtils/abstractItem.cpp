@@ -35,7 +35,10 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 	, mY2(0)
 	, mId(QUuid::createUuid().toString())
 	, mEditable(true)
+	, mHovered(false)
 {
+	setAcceptHoverEvents(true);
+	setCursor(QCursor(Qt::WhatsThisCursor));
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 	mBrush.setColor(mPen.color());
 	savePos();
@@ -62,7 +65,7 @@ void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	painter->setPen(mPen);
 	painter->setBrush(mBrush);
 	drawItem(painter, option, widget);
-	if (option->state & QStyle::State_Selected) {
+	if (option->state & (QStyle::State_Selected | QStyle::State_MouseOver)) {
 		painter->save();
 		setPenBrushForExtraction(painter, option);
 		drawExtractionForItem(painter);
@@ -491,6 +494,23 @@ void AbstractItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 		QGraphicsItem::mouseMoveEvent(event);
 	}
 }
+
+void AbstractItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+	mHovered = true;
+	QGraphicsItem::hoverEnterEvent(event);
+}
+void AbstractItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+	mHovered = false;
+	QGraphicsItem::hoverLeaveEvent(event);
+}
+
+bool AbstractItem::isHovered() const
+{
+	return mHovered;
+}
+
 
 QString AbstractItem::id() const
 {

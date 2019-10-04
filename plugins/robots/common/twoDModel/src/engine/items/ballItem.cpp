@@ -23,8 +23,7 @@
 using namespace twoDModel::items;
 
 BallItem::BallItem(const QPointF &position)
-	: SolidItem()
-	, mStartRotation(0.0f)
+	: mStartRotation(0.0f)
 	, mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
@@ -44,6 +43,25 @@ QAction *BallItem::ballTool()
 	result->setShortcut(QKeySequence(Qt::Key_C));
 	result->setCheckable(true);
 	return result;
+}
+
+void BallItem::drawExtractionForItem(QPainter *painter)
+{
+	QPen pen;
+	if (isSelected()) {
+		pen.setStyle(Qt::SolidLine);
+	} else if (isHovered())
+	{
+		pen.setDashPattern({8,8});
+		pen.setCapStyle(Qt::FlatCap);
+	} else {
+		return;
+	}
+	pen.setWidthF(1.5);
+	pen.setColor(Qt::green);
+	painter->setPen(pen);
+
+	painter->drawEllipse(boundingRect());
 }
 
 QRectF BallItem::boundingRect() const
@@ -87,6 +105,13 @@ void BallItem::deserialize(const QDomElement &element)
 	mStartPosition = {markerX, markerY};
 	setRotation(rotation);
 	emit x1Changed(x1());
+}
+
+QPainterPath BallItem::shape() const
+{
+	QPainterPath result;
+	result.addEllipse(boundingRect());
+	return result;
 }
 
 void BallItem::saveStartPosition()

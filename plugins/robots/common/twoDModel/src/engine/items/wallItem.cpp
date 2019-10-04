@@ -26,8 +26,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
-	: AbstractItem()
-	, mImage(":/icons/2d_wall.png")
+	: mImage(":/icons/2d_wall.png")
 	, mWallWidth(10)
 {
 	setX1(begin.x());
@@ -109,13 +108,21 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void WallItem::drawExtractionForItem(QPainter *painter)
 {
-	if (!isSelected()) {
+	QPen pen;
+	if (isSelected()) {
+		pen.setStyle(Qt::SolidLine);
+	} else if (isHovered())
+	{
+		pen.setDashPattern({8,8});
+		pen.setCapStyle(Qt::FlatCap);
+	} else {
 		return;
 	}
-
-	painter->setPen(QPen(Qt::green));
-	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), drift);
-	mLineImpl.drawFieldForResizeItem(painter, resizeDrift, x1(), y1(), x2(), y2());
+	pen.setWidthF(1.5);
+	pen.setColor(Qt::green);
+	painter->setPen(pen);
+	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), mWallWidth);
+	mLineImpl.drawFieldForResizeItem(painter, mWallWidth * 3/4, x1(), y1(), x2(), y2());
 }
 
 qreal WallItem::width() const
@@ -181,7 +188,7 @@ void WallItem::recalculateBorders()
 	}
 
 	QPainterPathStroker stroker;
-	stroker.setWidth(mWallWidth * 3 / 2);
+	stroker.setWidth(mWallWidth);
 	mPath = stroker.createStroke(wallPath);
 }
 
