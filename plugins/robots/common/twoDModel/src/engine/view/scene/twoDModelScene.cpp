@@ -499,6 +499,15 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	for (RobotItem * const robotItem : mRobots) {
 		setSceneRect(sceneRect().united(robotItem->sceneBoundingRect()));
 	}
+	for (auto const wall : mModel.worldModel().walls()) {
+		setSceneRect(sceneRect().united(wall->sceneBoundingRect()));
+	}
+	for (auto const ball : mModel.worldModel().balls()) {
+		setSceneRect(sceneRect().united(ball->sceneBoundingRect()));
+	}
+	for (auto const skittle : mModel.worldModel().skittles()) {
+		setSceneRect(sceneRect().united(skittle->sceneBoundingRect()));
+	}
 
 	setMoveFlag(mouseEvent);
 	handleMouseInteractionWithSelectedItems();
