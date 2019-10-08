@@ -130,6 +130,11 @@ QPointF TwoDRobotModel::rotationCenter() const
 	return QPointF(localSize.width(), localSize.height());
 }
 
+QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const
+{
+	return deviceType.isA<robotParts::RangeSensor>() ? QPair<qreal,int>(20, 300) : QPair<qreal, int>(0, 0);
+}
+
 robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
 	if (deviceInfo.isA<robotParts::Button>()) {
@@ -149,7 +154,8 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 	}
 
 	if (deviceInfo.isA<robotParts::RangeSensor>()) {
-		return new parts::RangeSensor(deviceInfo, port, *mEngine);
+		return new parts::RangeSensor(deviceInfo, port
+				, *mEngine, rangeSensorAngleAndDistance(deviceInfo));
 	}
 
 	if (deviceInfo.isA<robotParts::LightSensor>()) {

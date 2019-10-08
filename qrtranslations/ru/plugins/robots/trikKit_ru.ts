@@ -141,7 +141,7 @@
 <context>
     <name>trik::robotModel::parts::TrikSonarSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikSonarSensor.h" line="+26"/>
+        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikSonarSensor.h" line="+27"/>
         <source>Sonic Sensor</source>
         <translation>Датчик расстояния УЗ</translation>
     </message>
