@@ -410,7 +410,7 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	QGraphicsView * const fakeScene = new QGraphicsView;
 	fakeScene->setScene(mFakeScene.data());
 	QTimer * const timer = new QTimer;
-	QObject::connect(timer, SIGNAL(timeout()), mFakeScene.data(), SLOT(update()));
+	QObject::connect(timer, &QTimer::timeout, [=](){mFakeScene.data()->update();});
 	timer->setInterval(300);
 	timer->setSingleShot(false);
 	fakeScene->setMinimumWidth(700);
