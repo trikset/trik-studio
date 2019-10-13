@@ -90,4 +90,12 @@
         <translation>Интерпретация (USB)</translation>
     </message>
 </context>
+<context>
+    <name>ev3::robotModel::real::parts::RangeSensor</name>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/parts/rangeSensor.h" line="+31"/>
+        <source>Sonar sensor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

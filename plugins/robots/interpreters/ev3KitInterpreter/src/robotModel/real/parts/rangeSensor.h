@@ -27,6 +27,8 @@ namespace parts {
 class RangeSensor : public kitBase::robotModel::robotParts::RangeSensor
 {
 	Q_OBJECT
+	Q_CLASSINFO("name", "sonar")
+	Q_CLASSINFO("friendlyName", tr("Sonar sensor"))
 
 public:
 	RangeSensor(const kitBase::robotModel::DeviceInfo &info

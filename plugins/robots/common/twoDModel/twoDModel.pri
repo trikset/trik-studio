@@ -71,7 +71,7 @@ HEADERS += \
 	$$PWD/src/engine/view/scene/fakeScene.h \
 	$$PWD/src/engine/view/scene/robotItem.h \
 	$$PWD/src/engine/view/scene/sensorItem.h \
-	$$PWD/src/engine/view/scene/sonarSensorItem.h \
+	$$PWD/src/engine/view/scene/rangeSensorItem.h \
 	$$PWD/src/engine/view/parts/palette.h \
 	$$PWD/src/engine/view/parts/actionsBox.h \
 	$$PWD/src/engine/view/parts/gridParameters.h \
@@ -135,7 +135,7 @@ SOURCES += \
 	$$PWD/src/engine/view/scene/fakeScene.cpp \
 	$$PWD/src/engine/view/scene/robotItem.cpp \
 	$$PWD/src/engine/view/scene/sensorItem.cpp \
-	$$PWD/src/engine/view/scene/sonarSensorItem.cpp \
+	$$PWD/src/engine/view/scene/rangeSensorItem.cpp \
 	$$PWD/src/engine/view/parts/palette.cpp \
 	$$PWD/src/engine/view/parts/actionsBox.cpp \
 	$$PWD/src/engine/view/parts/gridParameters.cpp \

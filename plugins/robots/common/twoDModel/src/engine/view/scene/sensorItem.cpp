@@ -174,7 +174,7 @@ QString SensorItem::name() const
 	} else if (sensor.isA<robotParts::ColorSensorBlue>()) {
 		return "color_blue";
 	} else if (sensor.isA<robotParts::RangeSensor>()) {
-		return "sonar";
+		return "range";
 	} else if (sensor.isA<robotParts::LightSensor>()
 		|| sensor.isA<robotParts::ColorSensorAmbient>()
 		|| sensor.isA<robotParts::ColorSensorReflected>()) {

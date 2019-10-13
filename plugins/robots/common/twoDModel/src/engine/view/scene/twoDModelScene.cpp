@@ -37,7 +37,7 @@
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/image.h"
 #include "src/engine/view/scene/sensorItem.h"
-#include "src/engine/view/scene/sonarSensorItem.h"
+#include "src/engine/view/scene/rangeSensorItem.h"
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/ballItem.h"
@@ -934,8 +934,9 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
-			? new SonarSensorItem(mModel.worldModel(), robotModel.configuration()
+			? new RangeSensorItem(mModel.worldModel(), robotModel.configuration()
 					, port
+					, robotModel.info().rangeSensorAngleAndDistance(device)
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)
 					)

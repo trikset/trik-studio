@@ -4,7 +4,7 @@ set -euxo pipefail
 CODECOV=true
 case $TRAVIS_OS_NAME in
   osx)
-     export PATH="$TRIK_QT/5.12.4/clang_64/bin:$PATH"
+     export PATH="$TRIK_QT/5.12.5/clang_64/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
@@ -44,7 +44,7 @@ $EXECUTOR bash -ic "\
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -c \"export ASAN_OPTIONS=$( [[ $TRAVIS_OS_NAME == linux ]] && echo detect_leaks=1 || :):detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& sh -c \"export ASAN_OPTIONS=detect_leaks=0:detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0:verbosity=1:log_threads=1  DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 df -h .
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 
