@@ -127,8 +127,9 @@ b2Joint* b2Joint::Create(const b2JointDef* def, b2BlockAllocator* allocator)
 
 void b2Joint::Destroy(b2Joint* joint, b2BlockAllocator* allocator)
 {
+	auto m_type = joint->m_type;
 	joint->~b2Joint();
-	switch (joint->m_type)
+	switch (m_type)
 	{
 	case e_distanceJoint:
 		allocator->Free(joint, sizeof(b2DistanceJoint));
