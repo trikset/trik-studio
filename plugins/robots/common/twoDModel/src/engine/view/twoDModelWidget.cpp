@@ -817,6 +817,8 @@ void TwoDModelWidget::changePhysicsSettings()
 {
 	mModel.settings().setRealisticSensors(mUi->enableSensorNoiseCheckBox->isChecked());
 	mModel.settings().setRealisticMotors(mUi->enableMotorNoiseCheckBox->isChecked());
+	// setPhysics must be the last because it emits signal to update checkBox
+	// with new data from setSensors and setMotors
 	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
 }
 
