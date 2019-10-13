@@ -19,13 +19,16 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-RangeSensor::RangeSensor(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine)
+RangeSensor::RangeSensor(const DeviceInfo &info, const PortInfo &port
+		, engine::TwoDModelEngineInterface &engine, QPair<qreal, int> angleAndRange)
 	: robotParts::RangeSensor(info, port)
 	, mEngine(engine)
+	, mAngle(angleAndRange.first)
+	, mRange(angleAndRange.second)
 {
 }
 
 void RangeSensor::read()
 {
-	emit newData(mEngine.readSonarSensor(port()));
+	emit newData(mEngine.readRangeSensor(port(), mRange, mAngle));
 }

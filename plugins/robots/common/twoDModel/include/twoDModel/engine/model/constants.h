@@ -57,7 +57,7 @@ const uint magenta = 0xFFFF00FF;
 
 const qreal spoilColorDispersion = 2.0;
 const qreal spoilLightDispersion = 1.0;
-const qreal spoilSonarDispersion = 1.5;
+const qreal spoilRangeDispersion = 1.5;
 const qreal varySpeedDispersion = 0.0125;
 const qreal percentSaltPepperNoise = 20.0;
 

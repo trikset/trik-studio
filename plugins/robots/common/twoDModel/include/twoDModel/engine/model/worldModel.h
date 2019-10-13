@@ -58,13 +58,14 @@ public:
 	qreal pixelsInCm() const;
 
 	/// Measures the distance between robot and wall
-	Q_INVOKABLE int sonarReading(const QPointF &position, qreal direction) const;
+	Q_INVOKABLE int rangeReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const;
 
 	/// Returns area which is seen by sonar sensor.
-	QPainterPath sonarScanningRegion(const QPointF &position, qreal direction, int range = 255) const;
+	QPainterPath rangeSensorScanningRegion(const QPointF &position, qreal direction,
+			QPair<qreal,int> angleAndRange) const;
 
 	/// Returns area which is seen by sonar sensor with zero rotation.
-	QPainterPath sonarScanningRegion(const QPointF &position, int range = 255) const;
+	QPainterPath rangeSensorScanningRegion(const QPointF &position, QPair<qreal,int> angleAndRange) const;
 
 	/// Checks if the given path intersects some wall.
 	bool checkCollision(const QPainterPath &path) const;
@@ -234,8 +235,8 @@ signals:
 
 private:
 	/// Returns true if ray intersects some wall.
-	bool checkSonarDistance(const int distance, const QPointF &position
-			, const qreal direction, const QPainterPath &wallPath) const;
+	bool checkRangeDistance(const int distance, const QPointF &position
+			, const qreal direction, const qreal scanningAngle, const QPainterPath &wallPath) const;
 	QPainterPath buildSolidItemsPath() const;
 
 	void createBackgroundImageItem(const QDomElement &element);

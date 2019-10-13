@@ -122,6 +122,9 @@ public:
 	/// Returns a reference to object providing different parts of 2D model emulator.
 	engine::TwoDModelEngineInterface *engine();
 
+	/// Returns scanning angle and max distance by given device type.
+	virtual QPair<qreal,int> rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const;
+
 protected:
 	kitBase::robotModel::robotParts::Device *createDevice(
 			const kitBase::robotModel::PortInfo &port

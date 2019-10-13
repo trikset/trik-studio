@@ -65,7 +65,6 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/real/parts/gamepadWheel.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDSpeaker.h \
-	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDInfraredSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDLightSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDLed.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDLineSensor.h \
@@ -118,7 +117,6 @@ SOURCES += \
 	$$PWD/src/robotModel/real/parts/gamepadWheel.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDDisplay.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDSpeaker.cpp \
-	$$PWD/src/robotModel/twoD/parts/twoDInfraredSensor.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDLightSensor.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDLineSensor.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDObjectSensor.cpp \

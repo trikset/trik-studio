@@ -48,7 +48,8 @@ public:
 
 	/// Returns the distance value scanned by the range sensor.
 	/// @returns The distance in cm till the closest object in the scan field of 255 if no such.
-	virtual int readSonarSensor(const kitBase::robotModel::PortInfo &port) const = 0;
+	virtual int readRangeSensor(const kitBase::robotModel::PortInfo &port
+			, int maxDistance, qreal scanningAngle) const = 0;
 
 	/// Returns 3 integer values that represents acceleration on three coordinate axes
 	virtual QVector<int> readAccelerometerSensor() const = 0;

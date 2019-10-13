@@ -37,12 +37,15 @@ class TWO_D_MODEL_EXPORT RangeSensor : public kitBase::robotModel::robotParts::R
 public:
 	RangeSensor(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+			, engine::TwoDModelEngineInterface &engine
+			, QPair<qreal, int> angleAndRange);
 
 	void read() override;
 
 protected:
 	engine::TwoDModelEngineInterface &mEngine;
+	qreal mAngle;
+	int mRange;
 };
 
 }
