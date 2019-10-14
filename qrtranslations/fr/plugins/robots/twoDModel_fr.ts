@@ -698,7 +698,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+313"/>
+        <location line="+315"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

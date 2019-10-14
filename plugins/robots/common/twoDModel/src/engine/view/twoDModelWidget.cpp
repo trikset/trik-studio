@@ -815,9 +815,11 @@ void TwoDModelWidget::setCursorType(CursorType cursor)
 
 void TwoDModelWidget::changePhysicsSettings()
 {
-	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
 	mModel.settings().setRealisticSensors(mUi->enableSensorNoiseCheckBox->isChecked());
 	mModel.settings().setRealisticMotors(mUi->enableMotorNoiseCheckBox->isChecked());
+	// setPhysics must be the last because it emits signal to update checkBox
+	// with new data from setSensors and setMotors
+	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
 }
 
 void TwoDModelWidget::toggleDetailsVisibility()
