@@ -68,7 +68,22 @@ void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
+	painter->save();
+	if (isSelected() || isHovered()) {
+		QPen newPen = pen();
+		newPen.setCapStyle(Qt::FlatCap);
+		newPen.setDashPattern({3,3});
+		painter->setPen(newPen);
+		if (filled()) {
+			QBrush newBrush = brush();
+			QColor newColor = newBrush.color();
+			newColor.setAlphaF(0.8);
+			newBrush.setColor(newColor);
+			painter->setBrush(newBrush);
+		}
+	}
 	mEllipseImpl.drawEllipseItem(painter, x1(), y1(), x2(), y2());
+	painter->restore();
 }
 
 QDomElement EllipseItem::serialize(QDomElement &parent) const

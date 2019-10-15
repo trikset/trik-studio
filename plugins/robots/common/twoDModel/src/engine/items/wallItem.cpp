@@ -111,18 +111,22 @@ void WallItem::drawExtractionForItem(QPainter *painter)
 	QPen pen;
 	if (isSelected()) {
 		pen.setStyle(Qt::SolidLine);
+		pen.setWidthF(1.75);
 	} else if (isHovered())
 	{
-		pen.setDashPattern({8,8});
+		pen.setWidthF(2.25);
+		pen.setDashPattern({3,3});
 		pen.setCapStyle(Qt::FlatCap);
 	} else {
 		return;
 	}
-	pen.setWidthF(1.5);
-	pen.setColor(Qt::green);
+
+	pen.setColor(Qt::black);
+	painter->save();
 	painter->setPen(pen);
 	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), mWallWidth);
 	mLineImpl.drawFieldForResizeItem(painter, mWallWidth * 3/4, x1(), y1(), x2(), y2());
+	painter->restore();
 }
 
 qreal WallItem::width() const

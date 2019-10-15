@@ -45,22 +45,23 @@ QAction *BallItem::ballTool()
 	return result;
 }
 
+void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option);
+	if (!isSelected() && !isHovered()) return;
+
+	QColor newColor = Qt::green;
+	QPen newPen = QPen(newColor);
+	newPen.setWidthF(1.75);
+	painter->setPen(newPen);
+	if (isSelected()) {
+		newColor.setAlphaF(0.5);
+		painter->setBrush(newColor);
+	}
+}
+
 void BallItem::drawExtractionForItem(QPainter *painter)
 {
-	QPen pen;
-	if (isSelected()) {
-		pen.setStyle(Qt::SolidLine);
-	} else if (isHovered())
-	{
-		pen.setDashPattern({8,8});
-		pen.setCapStyle(Qt::FlatCap);
-	} else {
-		return;
-	}
-	pen.setWidthF(1.5);
-	pen.setColor(Qt::green);
-	painter->setPen(pen);
-
 	painter->drawEllipse(boundingRect());
 }
 

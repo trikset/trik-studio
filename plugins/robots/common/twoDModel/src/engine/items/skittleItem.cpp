@@ -48,7 +48,7 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(skittleSize.width() / 2), -static_cast<qreal>(skittleSize.height() / 2)}
+	return QRectF({-static_cast<qreal>(skittleSize.width()) / 2, -static_cast<qreal>(skittleSize.height()) / 2}
 				  , skittleSize);
 }
 
@@ -118,6 +118,27 @@ qreal SkittleItem::linearDamping() const
 {
 	return 6.0f;
 }
+
+void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option);
+	if (!isSelected() && !isHovered()) return;
+
+	QColor newColor = Qt::green;
+	QPen newPen = QPen(newColor);
+	newPen.setWidthF(1.75);
+	painter->setPen(newPen);
+	if (isSelected()) {
+		newColor.setAlphaF(0.5);
+		painter->setBrush(newColor);
+	}
+}
+
+void SkittleItem::drawExtractionForItem(QPainter *painter)
+{
+	painter->drawEllipse(boundingRect());
+}
+
 
 QPainterPath SkittleItem::path() const
 {

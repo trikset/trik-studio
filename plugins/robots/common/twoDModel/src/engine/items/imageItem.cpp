@@ -35,6 +35,7 @@ ImageItem::ImageItem(model::Image *image, const QRect &geometry)
 	setX2(geometry.right());
 	setY2(geometry.bottom());
 	setBackgroundRole(false);
+	unsetCursor();
 }
 
 AbstractItem *ImageItem::clone() const
@@ -42,6 +43,16 @@ AbstractItem *ImageItem::clone() const
 	const auto cloned = new ImageItem(mImage, QRect(x1(), y1(), x2() - x1(), y2() - y1()));
 	AbstractItem::copyTo(cloned);
 	return cloned;
+}
+
+void ImageItem::drawExtractionForItem(QPainter* painter)
+{
+	painter->save();
+	QBrush newBrush(Qt::Dense5Pattern);
+	newBrush.setColor(QColor(100,100,100,127));
+	painter->fillRect(calcNecessaryBoundingRect().toRect(), newBrush);
+	painter->restore();
+	AbstractItem::drawExtractionForItem(painter);
 }
 
 QAction *ImageItem::imageTool()
