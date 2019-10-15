@@ -59,6 +59,26 @@ void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 	mSvgRenderer->render(painter, boundingRect());
 }
 
+void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option);
+	if (!isSelected() && !isHovered()) return;
+
+	QColor newColor = Qt::green;
+	QPen newPen = QPen(newColor);
+	newPen.setWidthF(1.75);
+	painter->setPen(newPen);
+	if (isSelected()) {
+		newColor.setAlphaF(0.5);
+		painter->setBrush(newColor);
+	}
+}
+
+void SkittleItem::drawExtractionForItem(QPainter *painter)
+{
+	painter->drawEllipse(boundingRect());
+}
+
 QDomElement SkittleItem::serialize(QDomElement &element) const
 {
 	QDomElement skittleNode = AbstractItem::serialize(element);
@@ -118,27 +138,6 @@ qreal SkittleItem::linearDamping() const
 {
 	return 6.0f;
 }
-
-void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
-{
-	Q_UNUSED(option);
-	if (!isSelected() && !isHovered()) return;
-
-	QColor newColor = Qt::green;
-	QPen newPen = QPen(newColor);
-	newPen.setWidthF(1.75);
-	painter->setPen(newPen);
-	if (isSelected()) {
-		newColor.setAlphaF(0.5);
-		painter->setBrush(newColor);
-	}
-}
-
-void SkittleItem::drawExtractionForItem(QPainter *painter)
-{
-	painter->drawEllipse(boundingRect());
-}
-
 
 QPainterPath SkittleItem::path() const
 {

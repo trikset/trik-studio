@@ -47,12 +47,10 @@ AbstractItem *ImageItem::clone() const
 
 void ImageItem::drawExtractionForItem(QPainter* painter)
 {
-	painter->save();
+	AbstractItem::drawExtractionForItem(painter);
 	QBrush newBrush(Qt::Dense5Pattern);
 	newBrush.setColor(QColor(100,100,100,127));
 	painter->fillRect(calcNecessaryBoundingRect().toRect(), newBrush);
-	painter->restore();
-	AbstractItem::drawExtractionForItem(painter);
 }
 
 QAction *ImageItem::imageTool()

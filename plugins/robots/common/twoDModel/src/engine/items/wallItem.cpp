@@ -106,8 +106,9 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	recalculateBorders();
 }
 
-void WallItem::drawExtractionForItem(QPainter *painter)
+void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
+	Q_UNUSED(option);
 	QPen pen;
 	if (isSelected()) {
 		pen.setStyle(Qt::SolidLine);
@@ -120,13 +121,14 @@ void WallItem::drawExtractionForItem(QPainter *painter)
 	} else {
 		return;
 	}
-
 	pen.setColor(Qt::black);
-	painter->save();
 	painter->setPen(pen);
+}
+
+void WallItem::drawExtractionForItem(QPainter *painter)
+{
 	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), mWallWidth);
 	mLineImpl.drawFieldForResizeItem(painter, mWallWidth * 3/4, x1(), y1(), x2(), y2());
-	painter->restore();
 }
 
 qreal WallItem::width() const

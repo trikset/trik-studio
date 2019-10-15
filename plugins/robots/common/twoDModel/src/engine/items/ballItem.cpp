@@ -45,26 +45,6 @@ QAction *BallItem::ballTool()
 	return result;
 }
 
-void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
-{
-	Q_UNUSED(option);
-	if (!isSelected() && !isHovered()) return;
-
-	QColor newColor = Qt::green;
-	QPen newPen = QPen(newColor);
-	newPen.setWidthF(1.75);
-	painter->setPen(newPen);
-	if (isSelected()) {
-		newColor.setAlphaF(0.5);
-		painter->setBrush(newColor);
-	}
-}
-
-void BallItem::drawExtractionForItem(QPainter *painter)
-{
-	painter->drawEllipse(boundingRect());
-}
-
 QRectF BallItem::boundingRect() const
 {
 	return QRectF({0, 0}, ballSize);
@@ -75,6 +55,26 @@ void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	mSvgRenderer->render(painter, boundingRect());
+}
+
+void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option);
+	if (!isSelected() && !isHovered()) return;
+
+	QColor extraColor = Qt::green;
+	QPen extraPen = QPen(extraColor);
+	extraPen.setWidthF(1.75);
+	painter->setPen(extraPen);
+	if (isSelected()) {
+		extraColor.setAlphaF(0.5);
+		painter->setBrush(extraColor);
+	}
+}
+
+void BallItem::drawExtractionForItem(QPainter *painter)
+{
+	painter->drawEllipse(boundingRect());
 }
 
 QDomElement BallItem::serialize(QDomElement &element) const
