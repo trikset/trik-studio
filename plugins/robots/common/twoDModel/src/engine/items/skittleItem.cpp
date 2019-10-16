@@ -60,6 +60,12 @@ void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 	mSvgRenderer->render(painter, boundingRect());
 }
 
+void SkittleItem::savePos()
+{
+	saveStartPosition();
+	AbstractItem::savePos();
+}
+
 QDomElement SkittleItem::serialize(QDomElement &element) const
 {
 	QDomElement skittleNode = AbstractItem::serialize(element);

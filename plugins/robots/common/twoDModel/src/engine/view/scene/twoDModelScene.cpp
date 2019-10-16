@@ -565,7 +565,8 @@ void TwoDModelScene::pasteItemsFromClipboard()
 	for (auto id : newIds)
 	{
 		findItem(id)->setSelected(true);
-		findItem(id)->setPos(findItem(id)->pos() + QPointF(10, 10));
+		findItem(id)->setPos(findItem(id)->pos() + QPointF(20, 20));
+		findItem(id)->savePos();
 	}
 }
 

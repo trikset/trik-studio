@@ -59,6 +59,12 @@ void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	mSvgRenderer->render(painter, boundingRect());
 }
 
+void BallItem::savePos()
+{
+	saveStartPosition();
+	AbstractItem::savePos();
+}
+
 QDomElement BallItem::serialize(QDomElement &element) const
 {
 	QDomElement ballNode = AbstractItem::serialize(element);
