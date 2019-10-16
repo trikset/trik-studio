@@ -70,6 +70,7 @@ void CurveItem::setPrivateData()
 	QPen pen(this->pen());
 	pen.setColor(Qt::green);
 	pen.setStyle(Qt::SolidLine);
+	pen.setCapStyle(Qt::RoundCap);
 	setPen(pen);
 }
 
@@ -88,7 +89,7 @@ void CurveItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *opti
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
-	painter->drawPath(shape());
+	painter->drawPath(curveLine());
 }
 
 void CurveItem::drawExtractionForItem(QPainter *painter)
@@ -103,11 +104,27 @@ void CurveItem::drawExtractionForItem(QPainter *painter)
 	painter->drawLine(x2(), y2(), mMarker2.x(), mMarker2.y());
 }
 
-QPainterPath CurveItem::shape() const
+QPainterPath CurveItem::curveLine() const
 {
 	QPainterPath path;
 	path.moveTo(x1(), y1());
 	path.cubicTo(mMarker1.x(), mMarker1.y(), mMarker2.x(), mMarker2.y(), x2(), y2());
+	return path;
+}
+
+QPainterPath CurveItem::shape() const
+{
+	QPainterPath path;
+	path.setFillRule(Qt::WindingFill);
+	QPainterPathStroker ps;
+	ps.setWidth(pen().width());
+
+	path.addPath(curveLine());
+	path = ps.createStroke(path);
+
+	path.addEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
+	path.addEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
+
 	return path;
 }
 
@@ -175,6 +192,22 @@ QPointF CurveItem::deserializePoint(const QString &string) const
 	}
 
 	return QPointF();
+}
+
+void CurveItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+	mMarker1.setVisible(true);
+	mMarker2.setVisible(true);
+	AbstractItem::hoverEnterEvent(event);
+}
+
+void CurveItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+	if (!isSelected()) {
+		mMarker1.setVisible(false);
+		mMarker2.setVisible(false);
+	}
+	AbstractItem::hoverLeaveEvent(event);
 }
 
 QVariant CurveItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)

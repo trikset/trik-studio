@@ -511,7 +511,6 @@ bool AbstractItem::isHovered() const
 	return mHovered;
 }
 
-
 QString AbstractItem::id() const
 {
 	return mId;

@@ -27,7 +27,7 @@ class QRUTILS_EXPORT LineImpl
 public:
 	LineImpl();
 	QLineF line(qreal x1, qreal y1, qreal x2, qreal y2) const;
-	QPainterPath shape(const int drift, qreal x1, qreal y1, qreal x2, qreal y2) const;
+	QPainterPath shape(const int width, qreal x1, qreal y1, qreal x2, qreal y2) const;
 	QRectF boundingRect(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth, const int drift) const;
 	QRectF realBoundingRectWithoutScene(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth, const int drift) const;
 	void drawItem(QPainter* painter, qreal x1, qreal y1, qreal x2, qreal y2);

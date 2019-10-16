@@ -113,8 +113,7 @@ void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGra
 	if (isSelected()) {
 		pen.setStyle(Qt::SolidLine);
 		pen.setWidthF(1.75);
-	} else if (isHovered())
-	{
+	} else if (isHovered()) {
 		pen.setWidthF(2.25);
 		pen.setDashPattern({3,3});
 		pen.setCapStyle(Qt::FlatCap);

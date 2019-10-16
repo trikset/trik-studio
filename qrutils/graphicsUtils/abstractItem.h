@@ -24,6 +24,7 @@ const int drift = 15;
 const int resizeDrift = 10;
 const int scalingDrift = 10;
 const int scalingRect = 6;
+const qreal selectedOpacity = 0.7;
 
 namespace graphicsUtils {
 

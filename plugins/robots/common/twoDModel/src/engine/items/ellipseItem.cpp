@@ -77,7 +77,7 @@ void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 		if (filled()) {
 			QBrush newBrush = brush();
 			QColor newColor = newBrush.color();
-			newColor.setAlphaF(0.8);
+			newColor.setAlphaF(selectedOpacity);
 			newBrush.setColor(newColor);
 			painter->setBrush(newBrush);
 		}

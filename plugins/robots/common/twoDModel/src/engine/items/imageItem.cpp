@@ -48,9 +48,9 @@ AbstractItem *ImageItem::clone() const
 void ImageItem::drawExtractionForItem(QPainter* painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
-	QBrush newBrush(Qt::Dense5Pattern);
-	newBrush.setColor(QColor(100,100,100,127));
-	painter->fillRect(calcNecessaryBoundingRect().toRect(), newBrush);
+//	QBrush newBrush(Qt::Dense5Pattern);
+//	newBrush.setColor(QColor(100,100,100,127));
+//	painter->fillRect(calcNecessaryBoundingRect().toRect(), newBrush);
 }
 
 QAction *ImageItem::imageTool()
@@ -73,6 +73,11 @@ QRectF ImageItem::calcNecessaryBoundingRect() const
 
 void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+	if (isHovered() || isSelected()) {
+		setOpacity(selectedOpacity);
+	} else {
+		setOpacity(1);
+	}
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	const qreal zoom = scene()->views().isEmpty() ? 1.0 : scene()->views().first()->transform().m11();
