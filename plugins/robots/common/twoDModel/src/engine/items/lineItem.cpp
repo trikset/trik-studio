@@ -84,6 +84,11 @@ QPainterPath LineItem::shape() const
 	return mLineImpl.shape(pen().width(), x1(), y1(), x2(), y2());
 }
 
+QPainterPath LineItem::resizeArea() const
+{
+	return mLineImpl.fieldForResizeItem(resizeDrift, x1(), y1(), x2(), y2());
+}
+
 void LineItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
 	const bool isResizing = dragState() == TopLeft || dragState() == BottomRight;

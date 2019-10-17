@@ -31,9 +31,7 @@ Rotater::Rotater()
 	setFlag(ItemIsSelectable);
 	setFlag(ItemIsMovable, false);
 
-	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
-	setCursor(QCursor(Qt::PointingHandCursor));
 
 	QPen pen(Qt::blue);
 	pen.setWidth(3);
@@ -104,6 +102,14 @@ void Rotater::drawFieldForResizeItem(QPainter *painter)
 {
 	painter->drawEllipse(QPointF(x2(), y2()), mResizeDrift, mResizeDrift);
 }
+
+QPainterPath Rotater::shape() const
+{
+	QPainterPath result;
+	result.addEllipse(QPointF(x2(), y2()), mResizeDrift, mResizeDrift);
+	return result;
+}
+
 
 QRectF Rotater::boundingRect() const
 {

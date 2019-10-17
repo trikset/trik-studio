@@ -38,7 +38,7 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 	, mHovered(false)
 {
 	setAcceptHoverEvents(true);
-	setCursor(QCursor(Qt::WhatsThisCursor));
+	setCursor(QCursor(Qt::PointingHandCursor));
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 	mBrush.setColor(mPen.color());
 	savePos();
@@ -84,17 +84,8 @@ void AbstractItem::drawExtractionForItem(QPainter* painter)
 
 void AbstractItem::drawFieldForResizeItem(QPainter* painter)
 {
-	QRectF itemBoundingRect = calcNecessaryBoundingRect();
-	const qreal x1 = itemBoundingRect.left();
-	const qreal x2 = itemBoundingRect.right();
-	const qreal y1 = itemBoundingRect.top();
-	const qreal y2 = itemBoundingRect.bottom();
-
 	setPenBrushDriftRect(painter);
-	painter->drawRect(QRectF(x1, y1, resizeDrift, resizeDrift));
-	painter->drawRect(QRectF(x2 - resizeDrift, y2 - resizeDrift, resizeDrift, resizeDrift));
-	painter->drawRect(QRectF(x1, y2 - resizeDrift, resizeDrift, resizeDrift));
-	painter->drawRect(QRectF(x2 - resizeDrift, y1, resizeDrift, resizeDrift));
+	painter->drawPath(resizeArea());
 }
 
 void AbstractItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
@@ -209,6 +200,28 @@ void AbstractItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 		setX2(x);
 		setY2(y);
 	}
+}
+
+QPainterPath AbstractItem::resizeArea() const
+{
+	return QPainterPath();
+}
+
+QPainterPath AbstractItem::standartResizeArea() const
+{
+	QRectF itemBoundingRect = calcNecessaryBoundingRect();
+	const qreal x1 = itemBoundingRect.left();
+	const qreal x2 = itemBoundingRect.right();
+	const qreal y1 = itemBoundingRect.top();
+	const qreal y2 = itemBoundingRect.bottom();
+
+	QPainterPath result;
+	result.addRect(QRectF(x1, y1, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2 - resizeDrift, y2 - resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x1, y2 - resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2 - resizeDrift, y1, resizeDrift, resizeDrift));
+
+	return result;
 }
 
 void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -500,6 +513,16 @@ void AbstractItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 	mHovered = true;
 	QGraphicsItem::hoverEnterEvent(event);
 }
+
+void AbstractItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+	if (resizeArea().contains(event->pos())) {
+		setCursor(Qt::SizeAllCursor);
+	} else {
+		setCursor(Qt::PointingHandCursor);
+	}
+}
+
 void AbstractItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
 	mHovered = false;

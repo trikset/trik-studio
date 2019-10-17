@@ -54,8 +54,15 @@ void LineImpl::drawExtractionForItem(QPainter* painter, qreal x1, qreal y1, qrea
 
 void LineImpl::drawFieldForResizeItem(QPainter* painter, const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2)
 {
-	painter->drawEllipse(QPointF(x1, y1), resizeDrift, resizeDrift);
-	painter->drawEllipse(QPointF(x2, y2), resizeDrift, resizeDrift);
+	painter->drawPath(fieldForResizeItem(resizeDrift, x1, y1, x2, y2));
+}
+
+QPainterPath LineImpl::fieldForResizeItem(const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2) const
+{
+	QPainterPath result;
+	result.addEllipse(QPointF(x1, y1), resizeDrift, resizeDrift);
+	result.addEllipse(QPointF(x2, y2), resizeDrift, resizeDrift);
+	return result;
 }
 
 QLineF LineImpl::line(qreal x1, qreal y1, qreal x2, qreal y2) const

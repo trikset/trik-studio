@@ -36,6 +36,7 @@ public:
 	void drawFieldForResizeItem(QPainter* painter, const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2);
 	QPair<qreal, qreal> reshapeRectWithShiftForLine(qreal x1, qreal y1, qreal x2, qreal y2, qreal differenceX
 			, qreal differenceY, qreal size);
+	QPainterPath fieldForResizeItem(const int resizeDrift, qreal x1, qreal y1, qreal x2, qreal y2) const;
 
 	/// Serializes line`s begin and end into the given XML element.
 	void serialize(QDomElement &element, qreal x1, qreal y1, qreal x2, qreal y2) const;

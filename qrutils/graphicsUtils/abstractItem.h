@@ -17,6 +17,7 @@
 #include <QtWidgets/QGraphicsItem>
 #include <QtWidgets/QGraphicsView>
 #include <QtXml/QDomDocument>
+#include <QGraphicsSceneHoverEvent>
 
 #include "qrutils/utilsDeclSpec.h"
 
@@ -57,6 +58,7 @@ public:
 	virtual QRectF realBoundingRect() const;
 	virtual QRectF calcNecessaryBoundingRect() const;
 	virtual QPainterPath realShape() const;
+	virtual QPainterPath resizeArea() const;
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) = 0;
 	virtual void drawExtractionForItem(QPainter *painter);
@@ -134,6 +136,9 @@ public:
 	bool editable() const;
 	bool isHovered() const;
 
+	/// Returns the squares at each corner
+	QPainterPath standartResizeArea() const;
+
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 signals:
@@ -173,6 +178,7 @@ protected:
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void copyTo(AbstractItem * const other) const;

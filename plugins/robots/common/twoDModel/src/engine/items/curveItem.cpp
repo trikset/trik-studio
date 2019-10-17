@@ -97,8 +97,7 @@ void CurveItem::drawExtractionForItem(QPainter *painter)
 	painter->drawPoint(x1(), y1());
 	painter->drawPoint(x2(), y2());
 	setPenBrushDriftRect(painter);
-	painter->drawEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
-	painter->drawEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
+	painter->drawPath(resizeArea());
 	painter->setPen(QPen(Qt::gray, 1, Qt::DashLine));
 	painter->drawLine(x1(), y1(), mMarker1.x(), mMarker1.y());
 	painter->drawLine(x2(), y2(), mMarker2.x(), mMarker2.y());
@@ -122,8 +121,7 @@ QPainterPath CurveItem::shape() const
 	path.addPath(curveLine());
 	path = ps.createStroke(path);
 
-	path.addEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
-	path.addEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
+	path.addPath(resizeArea());
 
 	return path;
 }
@@ -220,9 +218,19 @@ QVariant CurveItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 	return ColorFieldItem::itemChange(change, value);
 }
 
+QPainterPath CurveItem::resizeArea() const
+{
+	QPainterPath result;
+	result.addEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
+	result.addEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
+	return result;
+}
+
+
 CurveItem::Marker::Marker(QGraphicsItem *parent)
 	: QGraphicsObject(parent)
 {
+	setCursor(Qt::SizeAllCursor);
 	setFlag(ItemSendsGeometryChanges);
 }
 

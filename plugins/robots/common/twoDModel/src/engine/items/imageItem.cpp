@@ -53,6 +53,11 @@ void ImageItem::drawExtractionForItem(QPainter* painter)
 	painter->drawRect(calcNecessaryBoundingRect().toRect());
 }
 
+QPainterPath ImageItem::resizeArea() const
+{
+	return standartResizeArea();
+}
+
 QAction *ImageItem::imageTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_image.svg"), tr("Image (I)"), nullptr);
@@ -87,7 +92,7 @@ void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *opti
 QPainterPath ImageItem::shape() const
 {
 	QPainterPath result;
-	result.addRect(boundingRect());
+	result.addRect(calcNecessaryBoundingRect());
 	return result;
 }
 

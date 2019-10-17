@@ -47,6 +47,7 @@ public:
 	void drawExtractionForItem(QPainter *painter) override;
 	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	QPainterPath resizeArea() const override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	void reshapeRectWithShift() override;

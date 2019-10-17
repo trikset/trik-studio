@@ -98,10 +98,15 @@ QPainterPath WallItem::shape() const
 	return mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2());
 }
 
+QPainterPath WallItem::resizeArea() const
+{
+	return mLineImpl.fieldForResizeItem(mWallWidth, x1(), y1(), x2(), y2());
+}
+
 void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
 	painter->drawPath(shape());
 	recalculateBorders();
 }
@@ -127,7 +132,7 @@ void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGra
 void WallItem::drawExtractionForItem(QPainter *painter)
 {
 	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), mWallWidth);
-	mLineImpl.drawFieldForResizeItem(painter, mWallWidth * 3/4, x1(), y1(), x2(), y2());
+	mLineImpl.drawFieldForResizeItem(painter, mWallWidth, x1(), y1(), x2(), y2());
 }
 
 qreal WallItem::width() const

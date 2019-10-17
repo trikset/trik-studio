@@ -127,19 +127,16 @@ QPainterPath EllipseItem::shape() const
 	result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
 	if (isSelected()) {
-		QRectF itemBoundingRect = calcNecessaryBoundingRect();
-		const qreal x1 = itemBoundingRect.left();
-		const qreal x2 = itemBoundingRect.right();
-		const qreal y1 = itemBoundingRect.top();
-		const qreal y2 = itemBoundingRect.bottom();
-
-		result.addRect(QRectF(x1, y1, resizeDrift, resizeDrift));
-		result.addRect(QRectF(x2 - resizeDrift, y2 - resizeDrift, resizeDrift, resizeDrift));
-		result.addRect(QRectF(x1, y2 - resizeDrift, resizeDrift, resizeDrift));
-		result.addRect(QRectF(x2 - resizeDrift, y1, resizeDrift, resizeDrift));
+		result.addPath(resizeArea());
 	}
 	return result;
 }
+
+QPainterPath EllipseItem::resizeArea() const
+{
+	return standartResizeArea();
+}
+
 
 bool EllipseItem::filled() const
 {

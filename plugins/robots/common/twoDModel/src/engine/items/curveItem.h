@@ -44,6 +44,7 @@ public:
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
+	QPainterPath resizeArea() const override;
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
