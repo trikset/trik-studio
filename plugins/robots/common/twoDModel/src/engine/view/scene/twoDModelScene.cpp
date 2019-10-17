@@ -536,23 +536,20 @@ void TwoDModelScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void TwoDModelScene::copySelectedItems()
 {
 	mClipboard.clear();
-	for (auto id : parseItemsToID(selectedItems()).first)
-	{
+	for (auto &&id : parseItemsToID(selectedItems()).first) {
 		mClipboard << mModel.worldModel().serializeItem(id);
 	}
 }
 
 void TwoDModelScene::pasteItemsFromClipboard()
 {
-	for (auto item : selectedItems())
-	{
+	for (auto &&item : selectedItems()) {
 		item->setSelected(false);
 	}
 
 	QList<QDomElement> newItems;
 	QStringList newIds;
-	for (auto item : mClipboard)
-	{
+	for (auto &&item : mClipboard) {
 		QDomElement newItem(item);
 		QString newId = QUuid::createUuid().toString();
 		newItem.setAttribute("id", newId);
@@ -562,8 +559,7 @@ void TwoDModelScene::pasteItemsFromClipboard()
 	auto command = new commands::CreateWorldItemsCommand(mModel, newItems);
 	mController->execute(command);
 
-	for (auto id : newIds)
-	{
+	for (auto id : newIds) {
 		findItem(id)->setSelected(true);
 		findItem(id)->setPos(findItem(id)->pos() + QPointF(20, 20));
 		findItem(id)->savePos();

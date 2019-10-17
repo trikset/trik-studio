@@ -19,7 +19,7 @@ using namespace twoDModel::commands;
 
 CreateWorldItemsCommand::CreateWorldItemsCommand(model::Model &model, const QList<QDomElement> &itemsToCreate)
 {
-	for (auto item : itemsToCreate) {
+	for (auto &&item : itemsToCreate) {
 		addPreAction(new CreateWorldItemCommand(model, item));
 	}
 }
