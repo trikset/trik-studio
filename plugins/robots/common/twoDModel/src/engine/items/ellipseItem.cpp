@@ -19,8 +19,6 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-const int currentDrift = drift / 2;
-
 EllipseItem::EllipseItem(const QPointF &begin, const QPointF &end)
 	: mEllipseImpl()
 {
@@ -56,12 +54,14 @@ void EllipseItem::setPrivateData()
 
 QRectF EllipseItem::calcNecessaryBoundingRect() const
 {
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1()));
+	qreal penWidth = pen().widthF();
+	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()),
+			qAbs(y2() - y1())).adjusted(-penWidth, -penWidth, penWidth, penWidth);
 }
 
 QRectF EllipseItem::boundingRect() const
 {
-	return mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), currentDrift);
+	return mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
 void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -121,20 +121,33 @@ void EllipseItem::deserialize(const QDomElement &element)
 QPainterPath EllipseItem::shape() const
 {
 	QPainterPath result;
-	result.setFillRule(filled() ? Qt::WindingFill : Qt::OddEvenFill);
-	result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
-	result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+	result.setFillRule(Qt::WindingFill);
+
+	if (!filled()) {
+		QPainterPathStroker ps;
+		ps.setWidth(pen().width());
+		result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), 0));
+		result = ps.createStroke(result);
+	} else {
+		result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	}
+
 	if (isSelected()) {
 		result.addPath(resizeArea());
 	}
+
 	return result;
 }
 
 QPainterPath EllipseItem::resizeArea() const
 {
-	return standartResizeArea();
+	QPainterPath result;
+	result.addRect(QRectF(x1(), y1(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x1(), y2(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2(), y1(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2(), y2(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	return result;
 }
-
 
 bool EllipseItem::filled() const
 {

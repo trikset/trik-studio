@@ -19,8 +19,6 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-const int currentDrift = drift / 2;
-
 RectangleItem::RectangleItem(const QPointF &begin, const QPointF &end)
 	: mRectangleImpl()
 {
@@ -56,19 +54,34 @@ void RectangleItem::setPrivateData()
 
 QRectF RectangleItem::calcNecessaryBoundingRect() const
 {
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1()));
+	qreal penWidth = pen().widthF();
+	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()),
+			qAbs(y2() - y1())).adjusted(-penWidth, -penWidth, penWidth, penWidth);
 }
 
 QRectF RectangleItem::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), currentDrift);
+	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
 void RectangleItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
 	mRectangleImpl.drawRectItem(painter, x1(), y1(), x2(), y2());
+}
+
+void RectangleItem::drawExtractionForItem(QPainter *painter)
+{
+	AbstractItem::drawExtractionForItem(painter);
+	QPen extraPen = QPen(Qt::green);
+	extraPen.setWidthF(1.75);
+	painter->setPen(extraPen);
+	painter->setBrush(Qt::transparent);
+	painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	if (!filled()) {
+		painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+	}
 }
 
 QDomElement RectangleItem::serialize(QDomElement &parent) const
@@ -108,7 +121,31 @@ void RectangleItem::deserialize(const QDomElement &element)
 QPainterPath RectangleItem::shape() const
 {
 	QPainterPath result;
-	result.addRect(boundingRect());
+	result.setFillRule(Qt::WindingFill);
+
+	if (!filled()) {
+		QPainterPathStroker ps;
+		ps.setWidth(pen().width());
+		result.addRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0));
+		result = ps.createStroke(result);
+	} else {
+		result.addRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	}
+
+	if (isSelected()) {
+		result.addPath(resizeArea());
+	}
+
+	return result;
+}
+
+QPainterPath RectangleItem::resizeArea() const
+{
+	QPainterPath result;
+	result.addRect(QRectF(x1(), y1(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x1(), y2(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2(), y1(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2(), y2(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
 	return result;
 }
 

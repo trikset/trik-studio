@@ -136,9 +136,6 @@ public:
 	bool editable() const;
 	bool isHovered() const;
 
-	/// Returns the squares at each corner
-	QPainterPath standartResizeArea() const;
-
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 signals:

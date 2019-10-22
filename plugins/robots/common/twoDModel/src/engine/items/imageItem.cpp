@@ -54,7 +54,19 @@ void ImageItem::drawExtractionForItem(QPainter* painter)
 
 QPainterPath ImageItem::resizeArea() const
 {
-	return standartResizeArea();
+	QRectF itemBoundingRect = calcNecessaryBoundingRect();
+	const qreal x1 = itemBoundingRect.left();
+	const qreal x2 = itemBoundingRect.right();
+	const qreal y1 = itemBoundingRect.top();
+	const qreal y2 = itemBoundingRect.bottom();
+
+	QPainterPath result;
+	result.addRect(QRectF(x1, y1, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2 - resizeDrift, y2 - resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x1, y2 - resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2 - resizeDrift, y1, resizeDrift, resizeDrift));
+
+	return result;
 }
 
 QAction *ImageItem::imageTool()
