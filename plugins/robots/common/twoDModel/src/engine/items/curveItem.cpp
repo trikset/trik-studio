@@ -96,8 +96,7 @@ void CurveItem::drawExtractionForItem(QPainter *painter)
 {
 	painter->drawPoint(x1(), y1());
 	painter->drawPoint(x2(), y2());
-	setPenBrushDriftRect(painter);
-	painter->drawPath(resizeArea());
+	drawFieldForResizeItem(painter);
 	painter->setPen(QPen(Qt::gray, 1, Qt::DashLine));
 	painter->drawLine(x1(), y1(), mMarker1.x(), mMarker1.y());
 	painter->drawLine(x2(), y2(), mMarker2.x(), mMarker2.y());

@@ -66,24 +66,22 @@ QRectF EllipseItem::boundingRect() const
 
 void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
-	painter->save();
-	if (isSelected() || isHovered()) {
-		QPen newPen = pen();
-		newPen.setCapStyle(Qt::FlatCap);
-		newPen.setDashPattern({3,3});
-		painter->setPen(newPen);
-		if (filled()) {
-			QBrush newBrush = brush();
-			QColor newColor = newBrush.color();
-			newColor.setAlphaF(selectedOpacity);
-			newBrush.setColor(newColor);
-			painter->setBrush(newBrush);
-		}
-	}
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
 	mEllipseImpl.drawEllipseItem(painter, x1(), y1(), x2(), y2());
-	painter->restore();
+}
+
+void EllipseItem::drawExtractionForItem(QPainter *painter)
+{
+	AbstractItem::drawExtractionForItem(painter);
+	QPen extraPen = QPen(Qt::green);
+	extraPen.setWidthF(1.75);
+	painter->setPen(extraPen);
+	painter->setBrush(Qt::transparent);
+	painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	if (!filled()) {
+		painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+	}
 }
 
 QDomElement EllipseItem::serialize(QDomElement &parent) const

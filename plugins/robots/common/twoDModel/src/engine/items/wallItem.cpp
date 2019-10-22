@@ -95,7 +95,11 @@ QRectF WallItem::boundingRect() const
 
 QPainterPath WallItem::shape() const
 {
-	return mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2());
+	QPainterPath result;
+	result.setFillRule(Qt::WindingFill);
+	result.addPath(mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2()));
+	result.addPath(resizeArea());
+	return result;
 }
 
 QPainterPath WallItem::resizeArea() const
@@ -107,14 +111,14 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	painter->drawPath(shape());
+	painter->drawPath(mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2()));
 	recalculateBorders();
 }
 
 void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
-	Q_UNUSED(option);
-	QPen pen;
+	Q_UNUSED(option)
+	QPen pen(Qt::green);
 	if (isSelected()) {
 		pen.setStyle(Qt::SolidLine);
 		pen.setWidthF(1.75);
@@ -125,7 +129,6 @@ void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGra
 	} else {
 		return;
 	}
-	pen.setColor(Qt::black);
 	painter->setPen(pen);
 }
 

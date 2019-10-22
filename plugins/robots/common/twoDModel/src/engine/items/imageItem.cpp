@@ -48,8 +48,7 @@ AbstractItem *ImageItem::clone() const
 void ImageItem::drawExtractionForItem(QPainter* painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
-	painter->setPen(Qt::lightGray);
-	painter->setBrush(Qt::transparent);
+	setPenBrushDriftRect(painter);
 	painter->drawRect(calcNecessaryBoundingRect().toRect());
 }
 
@@ -78,13 +77,8 @@ QRectF ImageItem::calcNecessaryBoundingRect() const
 
 void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	if (isHovered() || isSelected()) {
-		setOpacity(selectedOpacity);
-	} else {
-		setOpacity(1);
-	}
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
 	const qreal zoom = scene()->views().isEmpty() ? 1.0 : scene()->views().first()->transform().m11();
 	mImage->draw(*painter, calcNecessaryBoundingRect().toRect(), zoom);
 }
@@ -169,6 +163,16 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 	}
 
 	return AbstractItem::itemChange(change, value);
+}
+
+void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+	if (resizeArea().contains(event->pos())) {
+		setCursor(QCursor(Qt::SizeAllCursor));
+	} else {
+		unsetCursor();
+	}
+	QGraphicsItem::hoverMoveEvent(event);
 }
 
 QRect ImageItem::deserializeRect(const QString &string) const

@@ -477,9 +477,8 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	}
 
-	if (createdItem) {
-		forReleaseResize(mouseEvent);
-	}
+	forReleaseResize(mouseEvent);
+
 	if (!isCorrectScene({createdItem})) {
 		// Qt bug. You need to manually release item before removing
 		createdItem->mouseReleaseEvent(mouseEvent);

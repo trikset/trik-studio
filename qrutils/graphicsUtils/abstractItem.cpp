@@ -61,7 +61,7 @@ QPainterPath AbstractItem::realShape() const
 
 void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	Q_UNUSED(widget);
+	Q_UNUSED(widget)
 	painter->setPen(mPen);
 	painter->setBrush(mBrush);
 	drawItem(painter, option, widget);
@@ -148,21 +148,20 @@ void AbstractItem::reshapeRectWithShift()
 
 void AbstractItem::changeDragState(qreal x, qreal y)
 {
+	if (!mapToScene(resizeArea()).contains(QPointF(x, y))) {
+		mDragState = None;
+	} else
 	if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = TopLeft;
 	} else if (QRectF(mapToScene(x2(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = BottomRight;
 	} else if (QRectF(mapToScene(x2(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = TopRight;
 	} else if (QRectF(mapToScene(x1(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = BottomLeft;
 	} else {
 		mDragState = None;
@@ -521,6 +520,7 @@ void AbstractItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 	} else {
 		setCursor(Qt::PointingHandCursor);
 	}
+	QGraphicsItem::hoverMoveEvent(event);
 }
 
 void AbstractItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)

@@ -76,6 +76,9 @@ signals:
 	/// Emitted when user changed path to image or memorize flag.
 	void internalImageChanged();
 
+protected:
+	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+
 private:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 

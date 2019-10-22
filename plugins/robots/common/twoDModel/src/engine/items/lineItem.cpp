@@ -81,7 +81,11 @@ void LineItem::drawExtractionForItem(QPainter* painter)
 
 QPainterPath LineItem::shape() const
 {
-	return mLineImpl.shape(pen().width(), x1(), y1(), x2(), y2());
+	QPainterPath result;
+	result.setFillRule(Qt::WindingFill);
+	result.addPath(mLineImpl.shape(pen().width(), x1(), y1(), x2(), y2()));
+	result.addPath(resizeArea());
+	return result;
 }
 
 QPainterPath LineItem::resizeArea() const
