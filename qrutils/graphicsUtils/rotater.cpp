@@ -87,9 +87,7 @@ void Rotater::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *style,
 void Rotater::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	QPen pen(Qt::red);
-	pen.setWidth(2);
-	painter->setPen(pen);
+	setPenBrushDriftRect(painter);
 }
 
 void Rotater::drawExtractionForItem(QPainter *painter)
@@ -98,18 +96,17 @@ void Rotater::drawExtractionForItem(QPainter *painter)
 	drawFieldForResizeItem(painter);
 }
 
-void Rotater::drawFieldForResizeItem(QPainter *painter)
+void Rotater::setPenBrushDriftRect(QPainter *painter)
 {
-	painter->drawEllipse(QPointF(x2(), y2()), mResizeDrift, mResizeDrift);
+	QPen pen(Qt::red);
+	pen.setWidth(2);
+	painter->setPen(pen);
 }
 
 QPainterPath Rotater::shape() const
 {
-	QPainterPath result;
-	result.addEllipse(QPointF(x2(), y2()), mResizeDrift, mResizeDrift);
-	return result;
+	return resizeArea();
 }
-
 
 QRectF Rotater::boundingRect() const
 {
@@ -165,6 +162,13 @@ void Rotater::resizeItem(QGraphicsSceneMouseEvent *event)
 			AbstractItem::resizeItem(event);
 		}
 	}
+}
+
+QPainterPath Rotater::resizeArea() const
+{
+	QPainterPath result;
+	result.addEllipse(QPointF(x2(), y2()), mResizeDrift, mResizeDrift);
+	return result;
 }
 
 void Rotater::mousePressEvent(QGraphicsSceneMouseEvent *event)

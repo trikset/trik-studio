@@ -150,8 +150,7 @@ void AbstractItem::changeDragState(qreal x, qreal y)
 {
 	if (!mapToScene(resizeArea()).contains(QPointF(x, y))) {
 		mDragState = None;
-	} else
-	if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
+	} else if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
 			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = TopLeft;
 	} else if (QRectF(mapToScene(x2(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
