@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "twoDModelScene.h"
+#include <QtCore/QUuid>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QPainter>
@@ -50,6 +51,7 @@
 #include "src/engine/items/startPosition.h"
 
 #include "src/engine/commands/createWorldItemCommand.h"
+#include "src/engine/commands/createWorldItemsCommand.h"
 #include "src/engine/commands/removeWorldItemsCommand.h"
 #include "src/engine/commands/removeSensorCommand.h"
 #include "src/engine/commands/reshapeCommand.h"
@@ -530,11 +532,45 @@ void TwoDModelScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	}
 }
 
-void TwoDModelScene::deleteSelectedItems()
+void TwoDModelScene::copySelectedItems()
 {
-	QStringList worldItemsToDelete;
-	QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensorsToDelete;
-	for (QGraphicsItem * const item : selectedItems()) {
+	mClipboard.clear();
+	for (auto &&id : parseItemsToID(selectedItems()).first) {
+		mClipboard << mModel.worldModel().serializeItem(id);
+	}
+}
+
+void TwoDModelScene::pasteItemsFromClipboard()
+{
+	for (auto &&item : selectedItems()) {
+		item->setSelected(false);
+	}
+
+	QList<QDomElement> newItems;
+	QStringList newIds;
+	for (auto &&item : mClipboard) {
+		QDomElement newItem(item);
+		QString newId = QUuid::createUuid().toString();
+		newItem.setAttribute("id", newId);
+		newIds << newId;
+		newItems << newItem;
+	}
+	auto command = new commands::CreateWorldItemsCommand(mModel, newItems);
+	mController->execute(command);
+
+	for (auto id : newIds) {
+		findItem(id)->setSelected(true);
+		findItem(id)->setPos(findItem(id)->pos() + QPointF(20, 20));
+		findItem(id)->savePos();
+	}
+}
+
+QPair<QStringList, QList<QPair<model::RobotModel *
+		, kitBase::robotModel::PortInfo>>> TwoDModelScene::parseItemsToID (QList<QGraphicsItem*> items)
+{
+	QStringList worldItems;
+	QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensors;
+	for (QGraphicsItem * const item : items) {
 		SensorItem * const sensor = dynamic_cast<SensorItem *>(item);
 		items::WallItem * const wall = dynamic_cast<items::WallItem *>(item);
 		items::ColorFieldItem * const colorField = dynamic_cast<items::ColorFieldItem *>(item);
@@ -546,31 +582,39 @@ void TwoDModelScene::deleteSelectedItems()
 			for (RobotItem * const robotItem : mRobots.values()) {
 				const kitBase::robotModel::PortInfo port = robotItem->sensors().key(sensor);
 				if (port.isValid()) {
-					sensorsToDelete << qMakePair(&robotItem->robotModel(), port);
+					sensors << qMakePair(&robotItem->robotModel(), port);
 				}
 			}
 		} else if (wall && !mWorldReadOnly) {
-			worldItemsToDelete << wall->id();
-			mCurrentWall = nullptr;
+			worldItems << wall->id();
 		} else if (skittle && !mWorldReadOnly) {
-			worldItemsToDelete << skittle->id();
-			mCurrentSkittle = nullptr;
+			worldItems << skittle->id();
 		} else if (ball && !mWorldReadOnly) {
-			worldItemsToDelete << ball->id();
-			mCurrentBall = nullptr;
+			worldItems << ball->id();
 		} else if (colorField && !mWorldReadOnly) {
-			worldItemsToDelete << colorField->id();
-			mCurrentLine = nullptr;
-			mCurrentStylus = nullptr;
-			mCurrentEllipse = nullptr;
-			mCurrentRectangle = nullptr;
-			mCurrentCurve = nullptr;
+			worldItems << colorField->id();
 		} else if (image && !mWorldReadOnly) {
-			worldItemsToDelete << image->id();
+			worldItems << image->id();
 		}
 	}
+	return QPair<QStringList, QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>>>(worldItems, sensors);
+}
 
-	deleteWithCommand(worldItemsToDelete, sensorsToDelete, {});
+
+void TwoDModelScene::deleteSelectedItems()
+{
+	auto ids = parseItemsToID(selectedItems());
+
+	mCurrentWall = nullptr;
+	mCurrentSkittle = nullptr;
+	mCurrentBall = nullptr;
+	mCurrentLine = nullptr;
+	mCurrentStylus = nullptr;
+	mCurrentEllipse = nullptr;
+	mCurrentRectangle = nullptr;
+	mCurrentCurve = nullptr;
+
+	deleteWithCommand(ids.first, ids.second, {});
 }
 
 void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
@@ -598,6 +642,13 @@ void TwoDModelScene::keyPressEvent(QKeyEvent *event)
 {
 	if (event->key() == Qt::Key_Delete) {
 		deleteSelectedItems();
+	} else if (event->matches(QKeySequence::Copy)) {
+		copySelectedItems();
+	} else if (event->matches(QKeySequence::Cut)) {
+		copySelectedItems();
+		deleteSelectedItems();
+	} else if (event->matches(QKeySequence::Paste)) {
+		pasteItemsFromClipboard();
 	} else {
 		QGraphicsScene::keyPressEvent(event);
 	}

@@ -41,6 +41,7 @@ public:
 
 	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
 	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
+	void savePos() override;
 
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;

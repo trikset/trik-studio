@@ -79,6 +79,12 @@ void SkittleItem::drawExtractionForItem(QPainter *painter)
 	painter->drawEllipse(boundingRect());
 }
 
+void SkittleItem::savePos()
+{
+	saveStartPosition();
+	AbstractItem::savePos();
+}
+
 QDomElement SkittleItem::serialize(QDomElement &element) const
 {
 	QDomElement skittleNode = AbstractItem::serialize(element);

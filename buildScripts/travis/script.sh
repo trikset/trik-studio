@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -xuevo pipefail
 
 CODECOV=true
 case $TRAVIS_OS_NAME in
@@ -15,8 +15,11 @@ case $TRAVIS_OS_NAME in
 esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
-if $VERA ; then  { git diff --diff-filter=d --name-only ${TRAVIS_COMMIT_RANGE} || true ; } | xargs -r file -i | sed -e "s|\(.*\):.*text/x-c.*|\1|g" -e "/:/d" \
-                | $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict ; fi
+if $VERA ; then
+  git_diff=$( { git diff --diff-filter=d --name-only ${TRAVIS_COMMIT_RANGE} || true ; } \
+  | xargs -r file -i | sed -e "s|\(.*\):.*text/x-c.*|\1|g" -e "/:/d")
+  [[ -z "${git_diff}" ]] || $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict <<< "$git_diff"
+fi
 
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 mkdir -p $CCACHE_DIR || sudo chown -R $USER $CCACHE_DIR || :
