@@ -180,7 +180,7 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
 	if (resizeArea().contains(event->pos())) {
-		setCursor(QCursor(Qt::SizeAllCursor));
+		setCursor(mResizeCursor);
 	} else {
 		unsetCursor();
 	}

@@ -61,16 +61,12 @@ void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 
 void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
-	Q_UNUSED(option);
-	if (!isSelected() && !isHovered()) return;
-
-	QColor newColor = Qt::green;
-	QPen newPen = QPen(newColor);
-	newPen.setWidthF(1.75);
-	painter->setPen(newPen);
+	Q_UNUSED(option)
+	painter->setPen(mStrokePen);
 	if (isSelected()) {
-		newColor.setAlphaF(0.5);
-		painter->setBrush(newColor);
+		QColor extraColor = mStrokePen.color();
+		extraColor.setAlphaF(0.5);
+		painter->setBrush(extraColor);
 	}
 }
 

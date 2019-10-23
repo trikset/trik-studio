@@ -38,9 +38,13 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 	, mHovered(false)
 {
 	setAcceptHoverEvents(true);
-	setCursor(QCursor(Qt::PointingHandCursor));
+	mResizeCursor = Qt::SizeAllCursor;
+	mHoverCursor = Qt::PointingHandCursor;
+	setCursor(mHoverCursor);
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 	mBrush.setColor(mPen.color());
+	mStrokePen = QPen(Qt::green);
+	mStrokePen.setWidthF(1.75);
 	savePos();
 }
 
@@ -90,7 +94,7 @@ void AbstractItem::drawFieldForResizeItem(QPainter* painter)
 
 void AbstractItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
-	Q_UNUSED(option);
+	Q_UNUSED(option)
 	QPen pen(Qt::red);
 	pen.setWidth(3);
 	painter->setPen(pen);
@@ -498,9 +502,9 @@ void AbstractItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void AbstractItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
 	if (resizeArea().contains(event->pos())) {
-		setCursor(Qt::SizeAllCursor);
+		setCursor(mResizeCursor);
 	} else {
-		setCursor(Qt::PointingHandCursor);
+		setCursor(mHoverCursor);
 	}
 	QGraphicsItem::hoverMoveEvent(event);
 }

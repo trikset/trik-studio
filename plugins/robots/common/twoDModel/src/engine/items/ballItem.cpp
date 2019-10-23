@@ -60,14 +60,10 @@ void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
-	Q_UNUSED(option);
-	if (!isSelected() && !isHovered()) return;
-
-	QColor extraColor = Qt::green;
-	QPen extraPen = QPen(extraColor);
-	extraPen.setWidthF(1.75);
-	painter->setPen(extraPen);
+	Q_UNUSED(option)
+	painter->setPen(mStrokePen);
 	if (isSelected()) {
+		QColor extraColor = mStrokePen.color();
 		extraColor.setAlphaF(0.5);
 		painter->setBrush(extraColor);
 	}

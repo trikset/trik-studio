@@ -118,16 +118,11 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	QPen pen(Qt::green);
-	if (isSelected()) {
-		pen.setStyle(Qt::SolidLine);
-		pen.setWidthF(1.75);
-	} else if (isHovered()) {
+	QPen pen(mStrokePen);
+	if (!isSelected() && isHovered()) {
 		pen.setWidthF(2.25);
 		pen.setDashPattern({3,3});
 		pen.setCapStyle(Qt::FlatCap);
-	} else {
-		return;
 	}
 	painter->setPen(pen);
 }

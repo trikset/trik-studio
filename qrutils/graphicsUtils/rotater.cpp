@@ -37,6 +37,8 @@ Rotater::Rotater()
 	pen.setWidth(3);
 	setPen(pen);
 	setBrush(Qt::NoBrush);
+
+	mResizeCursor = mHoverCursor;
 }
 
 void Rotater::setMasterItem(RotateItem *masterItem)

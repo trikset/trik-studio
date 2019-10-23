@@ -185,6 +185,10 @@ protected:
 	qreal mOldX2;
 	qreal mOldY2;
 
+	QPen mStrokePen;
+	Qt::CursorShape mResizeCursor;
+	Qt::CursorShape mHoverCursor;
+
 private:
 	DragState mDragState;
 	QPen mPen;

@@ -74,9 +74,7 @@ void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 void EllipseItem::drawExtractionForItem(QPainter *painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
-	QPen extraPen = QPen(Qt::green);
-	extraPen.setWidthF(1.75);
-	painter->setPen(extraPen);
+	painter->setPen(mStrokePen);
 	painter->setBrush(Qt::transparent);
 	painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	if (!filled()) {
