@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euxo pipefail
+set -xuevo pipefail
 
 CODECOV=true
 case $TRAVIS_OS_NAME in
