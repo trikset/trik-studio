@@ -4,7 +4,7 @@
     <Version></Version>
     <Title>TRIK Studio</Title>
     <Publisher>CyberTech Labs Ltd.</Publisher>
-    <ProductUrl>http://robots.qreal.ru</ProductUrl>
+    <ProductUrl>https://trikset.com/products/trik-studio</ProductUrl>
 
     <ControlScript>../controlScript.qs</ControlScript>
 
