@@ -26,8 +26,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
-	: AbstractItem()
-	, mImage(":/icons/2d_wall.png")
+	: mImage(":/icons/2d_wall.png")
 	, mWallWidth(10)
 {
 	setX1(begin.x());
@@ -96,26 +95,42 @@ QRectF WallItem::boundingRect() const
 
 QPainterPath WallItem::shape() const
 {
-	return mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2());
+	QPainterPath result;
+	result.setFillRule(Qt::WindingFill);
+	result.addPath(mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2()));
+	result.addPath(resizeArea());
+	return result;
+}
+
+QPainterPath WallItem::resizeArea() const
+{
+	return mLineImpl.fieldForResizeItem(mWallWidth, x1(), y1(), x2(), y2());
 }
 
 void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
-	painter->drawPath(shape());
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
+	painter->drawPath(mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2()));
 	recalculateBorders();
+}
+
+void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option)
+	QPen pen(mStrokePen);
+	if (!isSelected() && isHovered()) {
+		pen.setWidthF(2.25);
+		pen.setDashPattern({3,3});
+		pen.setCapStyle(Qt::FlatCap);
+	}
+	painter->setPen(pen);
 }
 
 void WallItem::drawExtractionForItem(QPainter *painter)
 {
-	if (!isSelected()) {
-		return;
-	}
-
-	painter->setPen(QPen(Qt::green));
-	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), drift);
-	mLineImpl.drawFieldForResizeItem(painter, resizeDrift, x1(), y1(), x2(), y2());
+	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), mWallWidth);
+	mLineImpl.drawFieldForResizeItem(painter, mWallWidth, x1(), y1(), x2(), y2());
 }
 
 qreal WallItem::width() const
@@ -181,7 +196,7 @@ void WallItem::recalculateBorders()
 	}
 
 	QPainterPathStroker stroker;
-	stroker.setWidth(mWallWidth * 3 / 2);
+	stroker.setWidth(mWallWidth);
 	mPath = stroker.createStroke(wallPath);
 }
 

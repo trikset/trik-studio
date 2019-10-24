@@ -49,9 +49,7 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 
-	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
-	setCursor(QCursor(Qt::PointingHandCursor));
 
 	mPortItem->setParentItem(this);
 	mPortItem->moveBy(-mPortItem->boundingRect().width() - 5, -mPortItem->boundingRect().height() - 5);
