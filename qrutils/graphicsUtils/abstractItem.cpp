@@ -35,9 +35,16 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 	, mY2(0)
 	, mId(QUuid::createUuid().toString())
 	, mEditable(true)
+	, mHovered(false)
 {
+	setAcceptHoverEvents(true);
+	mResizeCursor = Qt::SizeAllCursor;
+	mHoverCursor = Qt::PointingHandCursor;
+	setCursor(mHoverCursor);
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 	mBrush.setColor(mPen.color());
+	mStrokePen = QPen(Qt::green);
+	mStrokePen.setWidthF(1.75);
 	savePos();
 }
 
@@ -58,11 +65,11 @@ QPainterPath AbstractItem::realShape() const
 
 void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	Q_UNUSED(widget);
+	Q_UNUSED(widget)
 	painter->setPen(mPen);
 	painter->setBrush(mBrush);
 	drawItem(painter, option, widget);
-	if (option->state & QStyle::State_Selected) {
+	if (option->state & (QStyle::State_Selected | QStyle::State_MouseOver)) {
 		painter->save();
 		setPenBrushForExtraction(painter, option);
 		drawExtractionForItem(painter);
@@ -81,22 +88,13 @@ void AbstractItem::drawExtractionForItem(QPainter* painter)
 
 void AbstractItem::drawFieldForResizeItem(QPainter* painter)
 {
-	QRectF itemBoundingRect = calcNecessaryBoundingRect();
-	const qreal x1 = itemBoundingRect.left();
-	const qreal x2 = itemBoundingRect.right();
-	const qreal y1 = itemBoundingRect.top();
-	const qreal y2 = itemBoundingRect.bottom();
-
 	setPenBrushDriftRect(painter);
-	painter->drawRect(QRectF(x1, y1, resizeDrift, resizeDrift));
-	painter->drawRect(QRectF(x2 - resizeDrift, y2 - resizeDrift, resizeDrift, resizeDrift));
-	painter->drawRect(QRectF(x1, y2 - resizeDrift, resizeDrift, resizeDrift));
-	painter->drawRect(QRectF(x2 - resizeDrift, y1, resizeDrift, resizeDrift));
+	painter->drawPath(resizeArea());
 }
 
 void AbstractItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
-	Q_UNUSED(option);
+	Q_UNUSED(option)
 	QPen pen(Qt::red);
 	pen.setWidth(3);
 	painter->setPen(pen);
@@ -154,21 +152,19 @@ void AbstractItem::reshapeRectWithShift()
 
 void AbstractItem::changeDragState(qreal x, qreal y)
 {
-	if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+	if (!mapToScene(resizeArea()).contains(QPointF(x, y))) {
+		mDragState = None;
+	} else if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = TopLeft;
 	} else if (QRectF(mapToScene(x2(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = BottomRight;
 	} else if (QRectF(mapToScene(x2(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = TopRight;
 	} else if (QRectF(mapToScene(x1(), y2()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
-			, resizeDrift).contains(QPointF(x, y)))
-	{
+			, resizeDrift).contains(QPointF(x, y))) {
 		mDragState = BottomLeft;
 	} else {
 		mDragState = None;
@@ -206,6 +202,11 @@ void AbstractItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 		setX2(x);
 		setY2(y);
 	}
+}
+
+QPainterPath AbstractItem::resizeArea() const
+{
+	return QPainterPath();
 }
 
 void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -490,6 +491,33 @@ void AbstractItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 	if (event->lastScreenPos() != event->screenPos()) {
 		QGraphicsItem::mouseMoveEvent(event);
 	}
+}
+
+void AbstractItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+	mHovered = true;
+	QGraphicsItem::hoverEnterEvent(event);
+}
+
+void AbstractItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+	if (resizeArea().contains(event->pos())) {
+		setCursor(mResizeCursor);
+	} else {
+		setCursor(mHoverCursor);
+	}
+	QGraphicsItem::hoverMoveEvent(event);
+}
+
+void AbstractItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+	mHovered = false;
+	QGraphicsItem::hoverLeaveEvent(event);
+}
+
+bool AbstractItem::isHovered() const
+{
+	return mHovered;
 }
 
 QString AbstractItem::id() const
