@@ -31,10 +31,12 @@ public:
 	Rotater();
 
 	QRectF boundingRect() const override;
+	QPainterPath shape() const override;
+	QPainterPath resizeArea() const override;
 
 	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget* widget = nullptr) override;
 	void drawExtractionForItem(QPainter* painter) override;
-	void drawFieldForResizeItem(QPainter* painter) override;
+	void setPenBrushDriftRect(QPainter *painter) override;
 	void setPenBrushForExtraction(QPainter* painter, const QStyleOptionGraphicsItem* option) override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	void calcResizeItem(QGraphicsSceneMouseEvent *event) override;

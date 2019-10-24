@@ -69,11 +69,13 @@ void StylusImpl::drawItem(const QList<AbstractItem *> &listLine, QPainter* paint
 
 void StylusImpl::drawExtractionForItem(const QList<AbstractItem *> &listLine, QPainter *painter)
 {
-	QRectF rect = boundingRect(listLine);
-	painter->drawPoint(rect.left(), rect.top());
-	painter->drawPoint(rect.left(), rect.bottom());
-	painter->drawPoint(rect.right(), rect.top());
-	painter->drawPoint(rect.right(), rect.bottom());
+	Q_UNUSED(painter);
+	Q_UNUSED(listLine);
+//	QRectF rect = boundingRect(listLine);
+//	painter->drawPoint(rect.left(), rect.top());
+//	painter->drawPoint(rect.left(), rect.bottom());
+//	painter->drawPoint(rect.right(), rect.top());
+//	painter->drawPoint(rect.right(), rect.bottom());
 }
 
 void StylusImpl::drawFieldForResizeItem(QPainter* painter)
