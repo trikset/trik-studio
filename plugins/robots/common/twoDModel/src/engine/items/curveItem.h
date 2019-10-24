@@ -40,7 +40,11 @@ public:
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	void drawExtractionForItem(QPainter *painter) override;
 
+	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
+	QPainterPath resizeArea() const override;
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
@@ -61,6 +65,7 @@ private:
 	};
 
 	void setPrivateData();
+	QPainterPath curveLine() const;
 
 	void deserializePenBrush(const QDomElement &element);
 	QPointF deserializePoint(const QString &string) const;

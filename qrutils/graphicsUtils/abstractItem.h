@@ -17,6 +17,7 @@
 #include <QtWidgets/QGraphicsItem>
 #include <QtWidgets/QGraphicsView>
 #include <QtXml/QDomDocument>
+#include <QGraphicsSceneHoverEvent>
 
 #include "qrutils/utilsDeclSpec.h"
 
@@ -56,6 +57,7 @@ public:
 	virtual QRectF realBoundingRect() const;
 	virtual QRectF calcNecessaryBoundingRect() const;
 	virtual QPainterPath realShape() const;
+	virtual QPainterPath resizeArea() const;
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) = 0;
 	virtual void drawExtractionForItem(QPainter *painter);
@@ -131,6 +133,7 @@ public:
 
 	void setEditable(bool editable);
 	bool editable() const;
+	bool isHovered() const;
 
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
@@ -170,6 +173,9 @@ protected:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void copyTo(AbstractItem * const other) const;
 
@@ -178,6 +184,10 @@ protected:
 	qreal mOldY1;
 	qreal mOldX2;
 	qreal mOldY2;
+
+	QPen mStrokePen;
+	Qt::CursorShape mResizeCursor;
+	Qt::CursorShape mHoverCursor;
 
 private:
 	DragState mDragState;
@@ -189,6 +199,7 @@ private:
 	qreal mY2;
 	QString mId;
 	bool mEditable;
+	bool mHovered;
 };
 
 }
