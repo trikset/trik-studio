@@ -6,5 +6,5 @@ vmthread _@@NAME@@
 
 @@BODY@@
 
-programEnd:
+__programEnd:
 }
