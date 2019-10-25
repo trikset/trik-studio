@@ -23,8 +23,7 @@
 using namespace twoDModel::items;
 
 BallItem::BallItem(const QPointF &position)
-	: SolidItem()
-	, mStartRotation(0.0f)
+	: mStartRotation(0.0f)
 	, mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
@@ -48,7 +47,8 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return QRectF({0, 0}, ballSize);
+	return QRectF({-static_cast<qreal>(ballSize.width() / 2), -static_cast<qreal>(ballSize.height() / 2)}
+				  , ballSize);
 }
 
 void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -56,6 +56,28 @@ void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	mSvgRenderer->render(painter, boundingRect());
+}
+
+void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option)
+	painter->setPen(mStrokePen);
+	if (isSelected()) {
+		QColor extraColor = mStrokePen.color();
+		extraColor.setAlphaF(0.5);
+		painter->setBrush(extraColor);
+	}
+}
+
+void BallItem::drawExtractionForItem(QPainter *painter)
+{
+	painter->drawEllipse(boundingRect());
+}
+
+void BallItem::savePos()
+{
+	saveStartPosition();
+	AbstractItem::savePos();
 }
 
 QDomElement BallItem::serialize(QDomElement &element) const
@@ -82,11 +104,18 @@ void BallItem::deserialize(const QDomElement &element)
 	qreal rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 
-	setPos(QPointF(x, y) + boundingRect().center());
+	setPos(QPointF(x, y));
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
 	setRotation(rotation);
 	emit x1Changed(x1());
+}
+
+QPainterPath BallItem::shape() const
+{
+	QPainterPath result;
+	result.addEllipse(boundingRect());
+	return result;
 }
 
 void BallItem::saveStartPosition()

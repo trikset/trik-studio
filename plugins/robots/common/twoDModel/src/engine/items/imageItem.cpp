@@ -35,6 +35,7 @@ ImageItem::ImageItem(model::Image *image, const QRect &geometry)
 	setX2(geometry.right());
 	setY2(geometry.bottom());
 	setBackgroundRole(false);
+	unsetCursor();
 }
 
 AbstractItem *ImageItem::clone() const
@@ -42,6 +43,30 @@ AbstractItem *ImageItem::clone() const
 	const auto cloned = new ImageItem(mImage, QRect(x1(), y1(), x2() - x1(), y2() - y1()));
 	AbstractItem::copyTo(cloned);
 	return cloned;
+}
+
+void ImageItem::drawExtractionForItem(QPainter* painter)
+{
+	AbstractItem::drawExtractionForItem(painter);
+	setPenBrushDriftRect(painter);
+	painter->drawRect(calcNecessaryBoundingRect().toRect());
+}
+
+QPainterPath ImageItem::resizeArea() const
+{
+	QRectF itemBoundingRect = calcNecessaryBoundingRect();
+	const qreal x1 = itemBoundingRect.left();
+	const qreal x2 = itemBoundingRect.right();
+	const qreal y1 = itemBoundingRect.top();
+	const qreal y2 = itemBoundingRect.bottom();
+
+	QPainterPath result;
+	result.addRect(QRectF(x1, y1, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2 - resizeDrift, y2 - resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x1, y2 - resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2 - resizeDrift, y1, resizeDrift, resizeDrift));
+
+	return result;
 }
 
 QAction *ImageItem::imageTool()
@@ -64,8 +89,8 @@ QRectF ImageItem::calcNecessaryBoundingRect() const
 
 void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
 	const qreal zoom = scene()->views().isEmpty() ? 1.0 : scene()->views().first()->transform().m11();
 	mImage->draw(*painter, calcNecessaryBoundingRect().toRect(), zoom);
 }
@@ -73,7 +98,7 @@ void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *opti
 QPainterPath ImageItem::shape() const
 {
 	QPainterPath result;
-	result.addRect(boundingRect());
+	result.addRect(calcNecessaryBoundingRect());
 	return result;
 }
 
@@ -150,6 +175,16 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 	}
 
 	return AbstractItem::itemChange(change, value);
+}
+
+void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+	if (resizeArea().contains(event->pos())) {
+		setCursor(mResizeCursor);
+	} else {
+		unsetCursor();
+	}
+	QGraphicsItem::hoverMoveEvent(event);
 }
 
 QRect ImageItem::deserializeRect(const QString &string) const

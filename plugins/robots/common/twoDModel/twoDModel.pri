@@ -110,6 +110,7 @@ HEADERS += \
 	$$PWD/src/engine/items/regions/rectangularRegion.h \
 	$$PWD/src/engine/items/regions/boundRegion.h \
 	$$PWD/src/engine/commands/createWorldItemCommand.h \
+	$$PWD/src/engine/commands/createWorldItemsCommand.h \
 	$$PWD/src/engine/commands/removeWorldItemCommand.h \
 	$$PWD/src/engine/commands/removeWorldItemsCommand.h \
 	$$PWD/src/engine/commands/createRemoveWorldItemImplementation.h \
@@ -180,6 +181,7 @@ SOURCES += \
 	$$PWD/src/engine/constraints/details/triggersFactory.cpp \
 	$$PWD/src/engine/constraints/details/valuesFactory.cpp \
 	$$PWD/src/engine/commands/createWorldItemCommand.cpp \
+	$$PWD/src/engine/commands/createWorldItemsCommand.cpp \
 	$$PWD/src/engine/commands/removeWorldItemCommand.cpp \
 	$$PWD/src/engine/commands/removeWorldItemsCommand.cpp \
 	$$PWD/src/engine/commands/createRemoveWorldItemImplementation.cpp \

@@ -37,9 +37,12 @@ public:
 
 	QRectF boundingRect() const override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	void drawExtractionForItem(QPainter *painter) override;
+	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 
 	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
 	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
+	void savePos() override;
 
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
@@ -54,6 +57,7 @@ public:
 	QPolygonF collidingPolygon() const override;
 	qreal angularDamping() const override;
 	qreal linearDamping() const override;
+	QPainterPath shape () const override;
 
 	QPainterPath path() const;
 

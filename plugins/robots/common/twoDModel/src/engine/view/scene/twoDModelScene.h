@@ -207,10 +207,14 @@ private:
 	void drawBackground(QPainter *painter, const QRectF &rect) override;
 	void keyPressEvent(QKeyEvent *event) override;
 
+	QPair<QStringList, QList<QPair<model::RobotModel *
+			, kitBase::robotModel::PortInfo>>> parseItemsToID (QList<QGraphicsItem*> items);
 	void deleteSelectedItems();
 	void deleteWithCommand(const QStringList &worldItems
 			, const QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> &sensors
 			, const QList<qReal::commands::AbstractCommand *> &additionalCommands);
+	void copySelectedItems();
+	void pasteItemsFromClipboard();
 
 	void reshapeWall(QGraphicsSceneMouseEvent *event);
 	void reshapeLine(QGraphicsSceneMouseEvent *event);
@@ -255,6 +259,8 @@ private:
 	bool mWorldReadOnly = false;
 	bool mRobotReadOnly = false;
 	bool mSensorsReadOnly = false;
+
+	QList<QDomElement> mClipboard;
 };
 
 }
