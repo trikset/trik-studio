@@ -501,6 +501,7 @@ void TwoDModelWidget::loadWorldModel()
 	} else {
 		loadXmls(save, QDomDocument());
 	}
+	saveWorldModelToRepo();
 }
 
 void TwoDModelWidget::setBackground()
@@ -814,9 +815,11 @@ void TwoDModelWidget::setCursorType(CursorType cursor)
 
 void TwoDModelWidget::changePhysicsSettings()
 {
-	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
 	mModel.settings().setRealisticSensors(mUi->enableSensorNoiseCheckBox->isChecked());
 	mModel.settings().setRealisticMotors(mUi->enableMotorNoiseCheckBox->isChecked());
+	// setPhysics must be the last because it emits signal to update checkBox
+	// with new data from setSensors and setMotors
+	mModel.settings().setRealisticPhysics(mUi->realisticPhysicsCheckBox->isChecked());
 }
 
 void TwoDModelWidget::toggleDetailsVisibility()
@@ -982,7 +985,7 @@ void TwoDModelWidget::updateWheelComboBoxes()
 	mUi->leftWheelComboBox->clear();
 	mUi->rightWheelComboBox->clear();
 
-#if YOU_WANT_TO_BE_ABLE_TO_DETACH_WHEELS_FROM_2D_MODEL
+#if defined(YOU_WANT_TO_BE_ABLE_TO_DETACH_WHEELS_FROM_2D_MODEL)
 	/// @todo More general way of specifying uninitialized values, or someone actually will name some port as "None".
 	mUi->leftWheelComboBox->addItem(tr("No wheel"), QVariant::fromValue(PortInfo("None", output)));
 	mUi->rightWheelComboBox->addItem(tr("No wheel"), QVariant::fromValue(PortInfo("None", output)));

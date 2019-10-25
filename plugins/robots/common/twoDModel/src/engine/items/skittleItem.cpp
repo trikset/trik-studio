@@ -23,14 +23,13 @@
 using namespace twoDModel::items;
 
 SkittleItem::SkittleItem(const QPointF &position)
-	: SolidItem()
-	, mStartPosition(QPointF())
+	: mStartPosition(QPointF())
 	, mStartRotation(0.0f)
 	, mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
 	setPos(position);
-	setZValue(1);
+	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
 }
 
@@ -49,7 +48,7 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(skittleSize.width() / 2), -static_cast<qreal>(skittleSize.height() / 2)}
+	return QRectF({-static_cast<qreal>(skittleSize.width()) / 2, -static_cast<qreal>(skittleSize.height()) / 2}
 				  , skittleSize);
 }
 
@@ -58,6 +57,28 @@ void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	mSvgRenderer->render(painter, boundingRect());
+}
+
+void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option)
+	painter->setPen(mStrokePen);
+	if (isSelected()) {
+		QColor extraColor = mStrokePen.color();
+		extraColor.setAlphaF(0.5);
+		painter->setBrush(extraColor);
+	}
+}
+
+void SkittleItem::drawExtractionForItem(QPainter *painter)
+{
+	painter->drawEllipse(boundingRect());
+}
+
+void SkittleItem::savePos()
+{
+	saveStartPosition();
+	AbstractItem::savePos();
 }
 
 QDomElement SkittleItem::serialize(QDomElement &element) const

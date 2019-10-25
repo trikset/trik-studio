@@ -26,7 +26,6 @@ const QSize skittleSize(20, 20);
 const QSize ballSize(30, 30);
 const qreal robotWidth = 50;
 const qreal robotHeight = 50;
-const qreal robotZPoint = 100;
 const QPointF rotatePoint = QPointF(robotWidth / 2, robotHeight / 2);
 const QSize displaySize(200, 300);
 const qreal beepWavesSize = 120;
@@ -58,7 +57,7 @@ const uint magenta = 0xFFFF00FF;
 
 const qreal spoilColorDispersion = 2.0;
 const qreal spoilLightDispersion = 1.0;
-const qreal spoilSonarDispersion = 1.5;
+const qreal spoilRangeDispersion = 1.5;
 const qreal varySpeedDispersion = 0.0125;
 const qreal percentSaltPepperNoise = 20.0;
 

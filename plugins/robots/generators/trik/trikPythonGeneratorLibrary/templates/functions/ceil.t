@@ -1,1 +1,1 @@
-Math.ceil(@@ARGUMENT@@)
+math.ceil(@@ARGUMENT@@)

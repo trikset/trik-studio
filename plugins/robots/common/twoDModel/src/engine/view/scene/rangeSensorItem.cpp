@@ -12,27 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "sonarSensorItem.h"
+#include "rangeSensorItem.h"
 
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 
 using namespace twoDModel::view;
 using namespace kitBase::robotModel;
 
-SonarSensorItem::SonarSensorItem(const model::WorldModel &worldModel
+RangeSensorItem::RangeSensorItem(const model::WorldModel &worldModel
 		, model::SensorsConfiguration &configuration
 		, const PortInfo &port
+		, QPair<qreal, int> angleAndRange
 		, const QString &pathToImage
 		, const QRect &imageSize
 		)
 	: SensorItem(configuration, port, pathToImage, imageSize)
 	, mWorldModel(worldModel)
 	, mIcon(":/icons/sensors/2d_sonar.png")
+	, mAngle(angleAndRange.first)
+	, mRange(angleAndRange.second)
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 }
 
-void SonarSensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *style, QWidget *widget)
+void RangeSensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *style, QWidget *widget)
 {
 	Q_UNUSED(style)
 	Q_UNUSED(widget)
@@ -46,7 +49,7 @@ void SonarSensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem
 	SensorItem::drawItem(painter, style, widget);
 }
 
-void SonarSensorItem::drawExtractionForItem(QPainter *painter)
+void RangeSensorItem::drawExtractionForItem(QPainter *painter)
 {
 	if (!isSelected()) {
 		return;
@@ -63,29 +66,29 @@ void SonarSensorItem::drawExtractionForItem(QPainter *painter)
 	painter->restore();
 }
 
-QRectF SonarSensorItem::boundingRect() const
+QRectF RangeSensorItem::boundingRect() const
 {
 	return scanningRegion().boundingRect().adjusted(-25, -15, 25, 15);
 }
 
-QPainterPath SonarSensorItem::scanningRegion() const
+QPainterPath RangeSensorItem::scanningRegion() const
 {
-	return mWorldModel.sonarScanningRegion(QPointF());
+	return mWorldModel.rangeSensorScanningRegion(QPointF(), QPair<qreal, int>(mAngle, mRange));
 }
 
-QPainterPath SonarSensorItem::shape() const
+QPainterPath RangeSensorItem::shape() const
 {
-	QPainterPath result = scanningRegion();
+	QPainterPath result;
 	result.addRect(mBoundingRect);
 	return result;
 }
 
-QRectF SonarSensorItem::rect() const
+QRectF RangeSensorItem::rect() const
 {
 	return SensorItem::boundingRect();
 }
 
-void SonarSensorItem::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
+void RangeSensorItem::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
 	if (!imageRect().contains(mouseEvent->pos())) {
 		setFlag(ItemIsMovable, false);

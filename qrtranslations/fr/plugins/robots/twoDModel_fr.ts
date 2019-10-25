@@ -268,7 +268,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+192"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+182"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -276,7 +276,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+43"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+42"/>
         <source>Ball (B)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -284,7 +284,7 @@
 <context>
     <name>twoDModel::items::CurveItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+64"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
         <source>Bezier Curve (B)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -292,7 +292,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+43"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+41"/>
         <source>Ellipse (E)</source>
         <translation>Ellipse (E)</translation>
     </message>
@@ -300,7 +300,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+48"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+74"/>
         <source>Image (I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -316,7 +316,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+43"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+41"/>
         <source>Rectangle (R)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -324,7 +324,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+44"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
         <source>Can (C)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -340,7 +340,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+66"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+62"/>
         <source>Wall (W)</source>
         <translation>Mur (W)</translation>
     </message>
@@ -361,7 +361,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+165"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+167"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+38"/>
@@ -615,7 +615,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+640"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+717"/>
         <source>Select image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -639,12 +639,12 @@
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+294"/>
-        <location line="+226"/>
+        <location line="+227"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location line="-225"/>
+        <location line="-226"/>
         <source>Do you really want to clear scene?</source>
         <translation>Est-ce que vous voulez vraiment effacer la scène ?</translation>
     </message>
@@ -683,7 +683,7 @@
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+32"/>
         <source>Select background image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,7 +698,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+313"/>
+        <location line="+315"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

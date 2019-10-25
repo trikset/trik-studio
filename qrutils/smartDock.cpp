@@ -31,18 +31,13 @@ using namespace utils;
 SmartDock::SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindow *parent)
 	: mMainWindow(parent ? parent : findMainWindow())
 	, mInnerWidget(innerWidget)
-	, mDialog(new QRealDialog(objectName))
+	, mDialog(new QRealDialog(objectName, this))
 	, mCurrentMode(Mode::Docked)
 {
 	setObjectName(objectName);
 
 	initDock();
 	initDialog();
-}
-
-SmartDock::~SmartDock()
-{
-	delete mDialog;
 }
 
 bool SmartDock::isCentral() const
@@ -201,7 +196,7 @@ bool SmartDock::event(QEvent *event)
 			if (QEvent::MouseButtonRelease == event->type()) {
 				// Mouse button releasing may cause dock animation into some dock area.
 				// This animation is not started immediately, so checking for it when all handlers worked out.
-				QTimer::singleShot(0, this, SLOT(checkFloating()));
+				QTimer::singleShot(0, this, &SmartDock::checkFloating);
 			}
 		}
 		break;

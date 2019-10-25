@@ -1,4 +1,4 @@
-/* Copyright 2019 CyberTech Labs Ltd.
+/* Copyright 2015-2016 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,28 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#pragma once
+#include "createWorldItemsCommand.h"
+#include "createWorldItemCommand.h"
 
-#include "qrutils/interpreter/block.h"
+using namespace twoDModel::commands;
 
-namespace qReal {
-namespace interpretation {
-namespace blocks {
-
-class PreconditionalLoopBlock : public Block
+CreateWorldItemsCommand::CreateWorldItemsCommand(model::Model &model, const QList<QDomElement> &itemsToCreate)
 {
-	Q_OBJECT
-public:
-	PreconditionalLoopBlock();
-
-	void run() override;
-
-private:
-	bool initNextBlocks() override;
-
-	qReal::Id mLoopStartBlockId;
-};
-
-}
-}
+	for (auto &&item : itemsToCreate) {
+		addPreAction(new CreateWorldItemCommand(model, item));
+	}
 }

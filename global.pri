@@ -41,6 +41,7 @@ no-sanitizers: CONFIG *= nosanitizers
 CONFIG = $$unique(CONFIG)
 
 macx:QT_CONFIG -= no-pkg-config
+QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -Og
 
 CONFIG(debug) {
 	CONFIGURATION = debug
@@ -90,6 +91,7 @@ equals(TEMPLATE, app) {
 		linux {
 			QMAKE_LFLAGS += -Wl,-rpath-link,$$GLOBAL_DESTDIR
 			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN\'
+			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN/../lib\'
 		}
 		macx {
 			QMAKE_LFLAGS += -rpath @executable_path
@@ -110,12 +112,12 @@ macx-clang {
 
 equals(TEMPLATE, lib) {
 	win32 {
-		QMAKE_LFLAGS += -Wl,--export-all-symbols
+		QMAKE_LFLAGS *= -Wl,--export-all-symbols
 	} else:linux {
 		#for GNU ld ELF target
-		QMAKE_LFLAGS += -Wl,--export-dynamic
+		QMAKE_LFLAGS *= -Wl,--export-dynamic
 	}else:macx-clang {
-		QMAKE_LFLAGS += -Wl,-export_dynamic
+		QMAKE_LFLAGS *= -Wl,-export_dynamic
 	}
 }
 
@@ -154,28 +156,9 @@ unix:!nosanitizers {
 		#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
 	}
 
-	gcc5 {
-		CONFIG(sanitize_undefined){
-		# Ubsan has (had at least) known issues with false errors about calls of methods of the base class.
-		# That must be disabled. Variables for confguring ubsan are taken from here:
-		# https://codereview.qt-project.org/#/c/43420/17/mkspecs/common/sanitize.conf
-		# They can change in some version of Qt, keep track of it.
-		# By the way, simply setting QMAKE_CFLAGS, QMAKE_CXXFLAGS and QMAKE_LFLAGS instead of those used below
-		# will not work due to arguments order ("-fsanitize=undefined" must be declared before "-fno-sanitize=vptr").
-			QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fno-sanitize=vptr
-			QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fno-sanitize=vptr
-			QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fno-sanitize=vptr
-		}
-	}
 
-	CONFIG(release){
-		QMAKE_CFLAGS += -fsanitize-recover=all
-		QMAKE_CXXFLAGS += -fsanitize-recover=all
-	} else {
-		QMAKE_CFLAGS += -fsanitize-recover=undefined
-		QMAKE_CXXFLAGS += -fsanitize-recover=undefined
-	}
-
+	QMAKE_CFLAGS += -fno-sanitize-recover=all
+	QMAKE_CXXFLAGS += -fno-sanitize-recover=all
 }
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
@@ -183,21 +166,19 @@ MOC_DIR = .build/$$CONFIGURATION/moc
 RCC_DIR = .build/$$CONFIGURATION/rcc
 UI_DIR = .build/$$CONFIGURATION/ui
 
-!noPch:CONFIG += precompile_header
+!noPch:CONFIG *= precompile_header
 
 precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
 precompile_header:!isEmpty(PRECOMPILED_HEADER) {
 	QMAKE_CXXFLAGS += -include $$PRECOMPILED_HEADER -fpch-preprocess
 }
 
-#reports false errors for *.gcno coverage files
-#!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
+!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
 QMAKE_CXXFLAGS_DEBUG += -Og -ggdb
 
 small_debug_info:QMAKE_CXXFLAGS += -g1
 
-!warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
 
 INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$_PRO_FILE_PWD_/include) \
@@ -210,9 +191,7 @@ CONFIG += c++11
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
-gcc5 | clang {
-	!warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
-}
+!warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 
 clang {
 	#treat git submodules as system path

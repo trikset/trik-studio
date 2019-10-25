@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2015-2016 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,23 @@
 
 #pragma once
 
-#include <twoDModel/robotModel/parts/rangeSensor.h>
+#include <qrgui/controller/commands/doNothingCommand.h>
+#include <QtXml/QDomElement>
 
-#include "trikKitInterpreterCommon/declSpec.h"
+namespace twoDModel {
 
-namespace trik {
-namespace robotModel {
-namespace twoD {
-namespace parts {
+namespace model {
+class Model;
+}
 
-class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDInfraredSensor : public twoDModel::robotModel::parts::RangeSensor
+namespace commands {
+
+/// Accepts a list of world items ids and adds them to model.
+class CreateWorldItemsCommand : public qReal::commands::DoNothingCommand
 {
-	Q_OBJECT
-
 public:
-	TwoDInfraredSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
-
-	void read() override;
+	CreateWorldItemsCommand(model::Model &model, const QList<QDomElement> &itemsToCreate);
 };
 
-}
-}
 }
 }

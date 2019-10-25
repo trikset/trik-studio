@@ -95,7 +95,7 @@
 <context>
     <name>nxt::robotModel::real::parts::SonarSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+30"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+31"/>
         <source>Sonar sensor</source>
         <translation>Capteur ultrasons</translation>
     </message>

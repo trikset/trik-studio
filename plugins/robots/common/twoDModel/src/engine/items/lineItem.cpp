@@ -75,13 +75,22 @@ void LineItem::drawExtractionForItem(QPainter* painter)
 {
 	mLineImpl.drawPointExtractionForItem(painter, x1(), y1(), x2(), y2());
 	setPenBrushDriftRect(painter);
-	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), drift);
+	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), drift + pen().width());
 	mLineImpl.drawFieldForResizeItem(painter, resizeDrift, x1(), y1(), x2(), y2());
 }
 
 QPainterPath LineItem::shape() const
 {
-	return mLineImpl.shape(drift, x1(), y1(), x2(), y2());
+	QPainterPath result;
+	result.setFillRule(Qt::WindingFill);
+	result.addPath(mLineImpl.shape(pen().width(), x1(), y1(), x2(), y2()));
+	result.addPath(resizeArea());
+	return result;
+}
+
+QPainterPath LineItem::resizeArea() const
+{
+	return mLineImpl.fieldForResizeItem(resizeDrift, x1(), y1(), x2(), y2());
 }
 
 void LineItem::resizeItem(QGraphicsSceneMouseEvent *event)

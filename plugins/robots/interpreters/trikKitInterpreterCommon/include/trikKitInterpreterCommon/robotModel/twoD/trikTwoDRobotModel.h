@@ -59,6 +59,7 @@ public:
 	qreal friction() const override;
 	qreal onePercentAngularVelocity() const override;
 	QList<QPointF> wheelsPosition() const override;
+	QPair<qreal, int> rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const override;
 
 	void setWheelPorts(const QString &leftWheelPort, const QString &rightWheelPort);
 

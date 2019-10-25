@@ -71,7 +71,7 @@ HEADERS += \
 	$$PWD/src/engine/view/scene/fakeScene.h \
 	$$PWD/src/engine/view/scene/robotItem.h \
 	$$PWD/src/engine/view/scene/sensorItem.h \
-	$$PWD/src/engine/view/scene/sonarSensorItem.h \
+	$$PWD/src/engine/view/scene/rangeSensorItem.h \
 	$$PWD/src/engine/view/parts/palette.h \
 	$$PWD/src/engine/view/parts/actionsBox.h \
 	$$PWD/src/engine/view/parts/gridParameters.h \
@@ -110,6 +110,7 @@ HEADERS += \
 	$$PWD/src/engine/items/regions/rectangularRegion.h \
 	$$PWD/src/engine/items/regions/boundRegion.h \
 	$$PWD/src/engine/commands/createWorldItemCommand.h \
+	$$PWD/src/engine/commands/createWorldItemsCommand.h \
 	$$PWD/src/engine/commands/removeWorldItemCommand.h \
 	$$PWD/src/engine/commands/removeWorldItemsCommand.h \
 	$$PWD/src/engine/commands/createRemoveWorldItemImplementation.h \
@@ -135,7 +136,7 @@ SOURCES += \
 	$$PWD/src/engine/view/scene/fakeScene.cpp \
 	$$PWD/src/engine/view/scene/robotItem.cpp \
 	$$PWD/src/engine/view/scene/sensorItem.cpp \
-	$$PWD/src/engine/view/scene/sonarSensorItem.cpp \
+	$$PWD/src/engine/view/scene/rangeSensorItem.cpp \
 	$$PWD/src/engine/view/parts/palette.cpp \
 	$$PWD/src/engine/view/parts/actionsBox.cpp \
 	$$PWD/src/engine/view/parts/gridParameters.cpp \
@@ -180,6 +181,7 @@ SOURCES += \
 	$$PWD/src/engine/constraints/details/triggersFactory.cpp \
 	$$PWD/src/engine/constraints/details/valuesFactory.cpp \
 	$$PWD/src/engine/commands/createWorldItemCommand.cpp \
+	$$PWD/src/engine/commands/createWorldItemsCommand.cpp \
 	$$PWD/src/engine/commands/removeWorldItemCommand.cpp \
 	$$PWD/src/engine/commands/removeWorldItemsCommand.cpp \
 	$$PWD/src/engine/commands/createRemoveWorldItemImplementation.cpp \

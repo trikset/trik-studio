@@ -71,9 +71,10 @@ QWidget *StartWidget::createMainWidget()
 	}
 
 	contentsLayout->addWidget(projectsManagement);
-	contentsLayout->addSpacing(700);
-	contentsLayout->setStretch(0, 10);
-	contentsLayout->setStretch(1, 10);
+	contentsLayout->addWidget(new QWidget());
+	contentsLayout->setStretch(0, 2);
+	contentsLayout->setStretch(1, 2);
+	contentsLayout->setStretch(2, 3);
 
 	result->setLayout(mainLayout);
 	return result;

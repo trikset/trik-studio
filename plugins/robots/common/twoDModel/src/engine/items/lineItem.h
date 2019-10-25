@@ -41,6 +41,7 @@ public:
 	void drawExtractionForItem(QPainter* painter) override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
+	QPainterPath resizeArea() const override;
 	void reshapeRectWithShift() override;
 
 	QDomElement serializeWithIndent(QDomElement &parent, const QPointF &topLeftPicture) const;

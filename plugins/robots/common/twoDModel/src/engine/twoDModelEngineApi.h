@@ -43,7 +43,8 @@ public:
 
 	/// @todo: move this logic into sensors adding here some more low-level logic instead.
 	int readTouchSensor(const kitBase::robotModel::PortInfo &port) const override;
-	int readSonarSensor(const kitBase::robotModel::PortInfo &port) const override;
+	int readRangeSensor(const kitBase::robotModel::PortInfo &port
+			, int maxDistance, qreal scanningAngle) const override;
 	QVector<int> readAccelerometerSensor() const override;
 	QVector<int> readGyroscopeSensor() const override;
 	QVector<int> calibrateGyroscopeSensor() override;
@@ -71,7 +72,7 @@ private:
 
 	uint spoilColor(const uint color) const;
 	uint spoilLight(const uint color) const;
-	int spoilSonarReading(const int distance) const;
+	int spoilRangeReading(const int distance) const;
 
 	void enableBackgroundSceneDebugging();
 

@@ -19,8 +19,6 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-const int currentDrift = drift / 2;
-
 EllipseItem::EllipseItem(const QPointF &begin, const QPointF &end)
 	: mEllipseImpl()
 {
@@ -56,19 +54,32 @@ void EllipseItem::setPrivateData()
 
 QRectF EllipseItem::calcNecessaryBoundingRect() const
 {
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1()));
+	qreal penWidth = pen().widthF();
+	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()),
+			qAbs(y2() - y1())).adjusted(-penWidth, -penWidth, penWidth, penWidth);
 }
 
 QRectF EllipseItem::boundingRect() const
 {
-	return mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), currentDrift);
+	return mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
 void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
 	mEllipseImpl.drawEllipseItem(painter, x1(), y1(), x2(), y2());
+}
+
+void EllipseItem::drawExtractionForItem(QPainter *painter)
+{
+	AbstractItem::drawExtractionForItem(painter);
+	painter->setPen(mStrokePen);
+	painter->setBrush(Qt::transparent);
+	painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	if (!filled()) {
+		painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+	}
 }
 
 QDomElement EllipseItem::serialize(QDomElement &parent) const
@@ -108,7 +119,31 @@ void EllipseItem::deserialize(const QDomElement &element)
 QPainterPath EllipseItem::shape() const
 {
 	QPainterPath result;
-	result.addRect(boundingRect());
+	result.setFillRule(Qt::WindingFill);
+
+	if (!filled()) {
+		QPainterPathStroker ps;
+		ps.setWidth(pen().width());
+		result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), 0));
+		result = ps.createStroke(result);
+	} else {
+		result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	}
+
+	if (isSelected()) {
+		result.addPath(resizeArea());
+	}
+
+	return result;
+}
+
+QPainterPath EllipseItem::resizeArea() const
+{
+	QPainterPath result;
+	result.addRect(QRectF(x1(), y1(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x1(), y2(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2(), y1(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
+	result.addRect(QRectF(x2(), y2(), 0, 0).adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift));
 	return result;
 }
 

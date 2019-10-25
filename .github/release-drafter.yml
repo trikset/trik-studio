@@ -1,0 +1,18 @@
+categories:
+  - title: 🚀 Feature
+    label: feature
+  - title: 🚀 Feature
+    label: enhancement
+  - title: 🐛 Bug Fixe
+    label: fix
+  - title: 🐛 Bug Fixe
+    label: bug
+  - title: 🛠 Maintenance
+    label: chore
+  - title: 🛠 Maintenance
+    label: INFRA
+tag-template: - $TITLE @$AUTHOR (#$NUMBER)
+template: |
+  ## Changes
+
+  $CHANGES

@@ -37,7 +37,6 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDSpeaker.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDShell.h"
-#include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDInfraredSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDLed.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDLineSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDObjectSensor.h"
@@ -67,6 +66,13 @@ TrikTwoDRobotModel::TrikTwoDRobotModel(RobotModelInterface &realModel)
 	}
 }
 
+QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
+		(const kitBase::robotModel::DeviceInfo &deviceType) const
+{
+	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 80) :
+		TwoDRobotModel::rangeSensorAngleAndDistance(deviceType);
+}
+
 robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
 	if (deviceInfo.isA<robotParts::Display>()) {
@@ -87,10 +93,6 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 		// configured even later. So setting error reporter only when everything will be ready.
 		connect(shell, &parts::Shell::configured, this, [=]() { shell->setErrorReporter(*mErrorReporter); });
 		return shell;
-	}
-
-	if (deviceInfo.isA<robotModel::parts::TrikInfraredSensor>()) {
-		return new parts::TwoDInfraredSensor(deviceInfo, port, *engine());
 	}
 
 	if (deviceInfo.isA<robotModel::parts::TrikLed>()) {

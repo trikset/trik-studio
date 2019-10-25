@@ -1,1 +1,1 @@
-Math.cos(@@ARGUMENT@@)
+math.cos(@@ARGUMENT@@)

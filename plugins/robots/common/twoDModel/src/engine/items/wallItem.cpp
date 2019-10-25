@@ -26,8 +26,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
-	: AbstractItem()
-	, mImage(":/icons/2d_wall.png")
+	: mImage(":/icons/2d_wall.png")
 	, mWallWidth(10)
 {
 	setX1(begin.x());
@@ -54,9 +53,6 @@ WallItem *WallItem::clone() const
 	cloned->mCellNumbX2 = mCellNumbX2;
 	cloned->mCellNumbY2 = mCellNumbY2;
 
-	cloned->mOldX1 = mOldX1;
-	cloned->mOldY1 = mOldY1;
-	cloned->mOverlappedWithRobot = mOverlappedWithRobot;
 	cloned->mPath = mPath;
 	return cloned;
 }
@@ -71,7 +67,7 @@ QAction *WallItem::wallTool()
 
 void WallItem::setPrivateData()
 {
-	setZValue(1);
+	setZValue(ZValue::Wall);
 	QPen pen(this->pen());
 	pen.setWidth(mWallWidth);
 	pen.setStyle(Qt::NoPen);
@@ -80,38 +76,6 @@ void WallItem::setPrivateData()
 	brush.setStyle(Qt::SolidPattern);
 	brush.setTextureImage(mImage);
 	setBrush(brush);
-}
-
-void WallItem::handleReposition(const QPointF &pos)
-{
-	if (((flags() & ItemIsMovable) || mOverlappedWithRobot)) {
-		const QPointF deltaPos = pos - mOldPosition;
-		if (mathUtils::Geometry::eq(deltaPos, QPointF(0,0), twoDModel::lowPrecision)) {
-			return;
-		}
-
-		const qreal deltaX = (x1() - x2());
-		const qreal deltaY = (y1() - y2());
-		setX1(mOldX1 + deltaPos.x());
-		setX2(mOldX2 + deltaPos.x());
-		setY1(mOldY1 + deltaPos.y());
-		setY2(mOldY2 + deltaPos.y());
-
-		if (SettingsManager::value("2dShowGrid").toBool()) {
-			const int indexGrid = SettingsManager::value("2dGridCellSize").toInt();
-			reshapeBeginWithGrid(indexGrid);
-			mCellNumbX1 = static_cast<int>(x1() / indexGrid);
-			mCellNumbY1 = static_cast<int>(y1() / indexGrid);
-			mCellNumbX2 = static_cast<int>(x2() / indexGrid);
-			mCellNumbY2 = static_cast<int>(y2() / indexGrid);
-		}
-
-		setDraggedEnd(deltaX, deltaY);
-		setPos(mOldPosition);
-
-		const QRectF oldPos = QRectF(QPointF(mOldX1, mOldY1), QPointF(mOldX2, mOldY2));
-		emit wallDragged(this, realShape(), oldPos);
-	}
 }
 
 QPointF WallItem::begin() const
@@ -131,26 +95,42 @@ QRectF WallItem::boundingRect() const
 
 QPainterPath WallItem::shape() const
 {
-	return mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2());
+	QPainterPath result;
+	result.setFillRule(Qt::WindingFill);
+	result.addPath(mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2()));
+	result.addPath(resizeArea());
+	return result;
+}
+
+QPainterPath WallItem::resizeArea() const
+{
+	return mLineImpl.fieldForResizeItem(mWallWidth, x1(), y1(), x2(), y2());
 }
 
 void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	Q_UNUSED(option);
-	Q_UNUSED(widget);
-	painter->drawPath(shape());
+	Q_UNUSED(option)
+	Q_UNUSED(widget)
+	painter->drawPath(mLineImpl.shape(mWallWidth, x1(), y1(), x2(), y2()));
 	recalculateBorders();
+}
+
+void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+{
+	Q_UNUSED(option)
+	QPen pen(mStrokePen);
+	if (!isSelected() && isHovered()) {
+		pen.setWidthF(2.25);
+		pen.setDashPattern({3,3});
+		pen.setCapStyle(Qt::FlatCap);
+	}
+	painter->setPen(pen);
 }
 
 void WallItem::drawExtractionForItem(QPainter *painter)
 {
-	if (!isSelected()) {
-		return;
-	}
-
-	painter->setPen(QPen(Qt::green));
-	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), drift);
-	mLineImpl.drawFieldForResizeItem(painter, resizeDrift, x1(), y1(), x2(), y2());
+	mLineImpl.drawExtractionForItem(painter, x1(), y1(), x2(), y2(), mWallWidth);
+	mLineImpl.drawFieldForResizeItem(painter, mWallWidth, x1(), y1(), x2(), y2());
 }
 
 qreal WallItem::width() const
@@ -162,17 +142,7 @@ QVariant WallItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QV
 {
 	if (change == QGraphicsItem::ItemScenePositionHasChanged) {
 		emit positionChanged(value.toPointF());
-		handleReposition(value.toPointF());
 		return pos();
-	}
-
-	if (change == QGraphicsItem::ItemSelectedHasChanged) {
-		mOldX1 = x1();
-		mOldY1 = y1();
-		mOldX2 = x2();
-		mOldY2 = y2();
-		mOldPosition = pos();
-		return value;
 	}
 
 	return AbstractItem::itemChange(change, value);
@@ -209,11 +179,6 @@ void WallItem::deserialize(const QDomElement &element)
 	recalculateBorders();
 }
 
-void WallItem::onOverlappedWithRobot(bool overlapped)
-{
-	mOverlappedWithRobot = overlapped;
-}
-
 QPainterPath WallItem::path() const
 {
 	return mPath;
@@ -231,7 +196,7 @@ void WallItem::recalculateBorders()
 	}
 
 	QPainterPathStroker stroker;
-	stroker.setWidth(mWallWidth * 3 / 2);
+	stroker.setWidth(mWallWidth);
 	mPath = stroker.createStroke(wallPath);
 }
 

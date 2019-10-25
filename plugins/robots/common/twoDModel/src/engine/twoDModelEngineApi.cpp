@@ -114,17 +114,18 @@ int TwoDModelEngineApi::readTouchSensor(const PortInfo &port) const
 	return pressed ? touchSensorPressedSignal : touchSensorNotPressedSignal;
 }
 
-int TwoDModelEngineApi::readSonarSensor(const PortInfo &port) const
+int TwoDModelEngineApi::readRangeSensor(const PortInfo &port, int maxDistance, qreal scanningAngle) const
 {
 	QPair<QPointF, qreal> neededPosDir = countPositionAndDirection(port);
 
 	int res;
 	auto && target = &mModel.worldModel();
-	QMetaObject::invokeMethod(target, "sonarReading"
+	QMetaObject::invokeMethod(target, "rangeReading"
 		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-		, Q_RETURN_ARG(int, res), Q_ARG(QPointF, neededPosDir.first), Q_ARG(qreal, neededPosDir.second));
+		, Q_RETURN_ARG(int, res), Q_ARG(QPointF, neededPosDir.first), Q_ARG(qreal, neededPosDir.second)
+		, Q_ARG(int, maxDistance), Q_ARG(qreal, scanningAngle));
 
-	return mModel.settings().realisticSensors() ? spoilSonarReading(res) : res;
+	return mModel.settings().realisticSensors() ? spoilRangeReading(res) : res;
 }
 
 QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
@@ -157,9 +158,9 @@ QVector<int> TwoDModelEngineApi::calibrateGyroscopeSensor()
 	return t;
 }
 
-int TwoDModelEngineApi::spoilSonarReading(const int distance) const
+int TwoDModelEngineApi::spoilRangeReading(const int distance) const
 {
-	const qreal ran = mathUtils::Math::gaussianNoise(spoilSonarDispersion);
+	const qreal ran = mathUtils::Math::gaussianNoise(spoilRangeDispersion);
 	return mathUtils::Math::truncateToInterval(0, 255, qRound(distance + ran));
 }
 
@@ -409,7 +410,7 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	QGraphicsView * const fakeScene = new QGraphicsView;
 	fakeScene->setScene(mFakeScene.data());
 	QTimer * const timer = new QTimer;
-	QObject::connect(timer, SIGNAL(timeout()), mFakeScene.data(), SLOT(update()));
+	QObject::connect(timer, &QTimer::timeout, [=](){mFakeScene.data()->update();});
 	timer->setInterval(300);
 	timer->setSingleShot(false);
 	fakeScene->setMinimumWidth(700);

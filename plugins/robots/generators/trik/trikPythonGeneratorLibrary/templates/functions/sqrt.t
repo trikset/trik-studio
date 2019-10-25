@@ -1,1 +1,1 @@
-Math.sqrt(@@ARGUMENT@@)
+math.sqrt(@@ARGUMENT@@)

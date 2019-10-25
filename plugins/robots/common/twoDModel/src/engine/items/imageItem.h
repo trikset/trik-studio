@@ -42,6 +42,8 @@ public:
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter* painter) override;
+	QPainterPath resizeArea() const override;
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
@@ -74,6 +76,9 @@ signals:
 	/// Emitted when user changed path to image or memorize flag.
 	void internalImageChanged();
 
+protected:
+	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+
 private:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
@@ -82,7 +87,7 @@ private:
 	graphicsUtils::RectangleImpl mImpl;
 	model::Image *mImage = nullptr; // Does not have ownership
 
-	bool mBackgroundRole = false;
+	bool mBackgroundRole;
 };
 
 }

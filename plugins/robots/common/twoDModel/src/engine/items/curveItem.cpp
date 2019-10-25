@@ -39,8 +39,6 @@ CurveItem::CurveItem(const QPointF &begin, const QPointF &end)
 	setY2(end.y());
 	mMarker1.setPos(begin + QPointF(-30, 0));
 	mMarker2.setPos(end + QPointF(130, 0));
-	mMarker1.setZValue(1);
-	mMarker2.setZValue(1);
 	mMarker1.setVisible(isSelected());
 	mMarker2.setVisible(isSelected());
 	setPrivateData();
@@ -72,6 +70,7 @@ void CurveItem::setPrivateData()
 	QPen pen(this->pen());
 	pen.setColor(Qt::green);
 	pen.setStyle(Qt::SolidLine);
+	pen.setCapStyle(Qt::RoundCap);
 	setPen(pen);
 }
 
@@ -90,26 +89,39 @@ void CurveItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *opti
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
-	painter->drawPath(shape());
+	painter->drawPath(curveLine());
 }
 
 void CurveItem::drawExtractionForItem(QPainter *painter)
 {
 	painter->drawPoint(x1(), y1());
 	painter->drawPoint(x2(), y2());
-	setPenBrushDriftRect(painter);
-	painter->drawEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
-	painter->drawEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
+	drawFieldForResizeItem(painter);
 	painter->setPen(QPen(Qt::gray, 1, Qt::DashLine));
 	painter->drawLine(x1(), y1(), mMarker1.x(), mMarker1.y());
 	painter->drawLine(x2(), y2(), mMarker2.x(), mMarker2.y());
 }
 
-QPainterPath CurveItem::shape() const
+QPainterPath CurveItem::curveLine() const
 {
 	QPainterPath path;
 	path.moveTo(x1(), y1());
 	path.cubicTo(mMarker1.x(), mMarker1.y(), mMarker2.x(), mMarker2.y(), x2(), y2());
+	return path;
+}
+
+QPainterPath CurveItem::shape() const
+{
+	QPainterPath path;
+	path.setFillRule(Qt::WindingFill);
+	QPainterPathStroker ps;
+	ps.setWidth(pen().width());
+
+	path.addPath(curveLine());
+	path = ps.createStroke(path);
+
+	path.addPath(resizeArea());
+
 	return path;
 }
 
@@ -179,6 +191,22 @@ QPointF CurveItem::deserializePoint(const QString &string) const
 	return QPointF();
 }
 
+void CurveItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+	mMarker1.setVisible(true);
+	mMarker2.setVisible(true);
+	AbstractItem::hoverEnterEvent(event);
+}
+
+void CurveItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+	if (!isSelected()) {
+		mMarker1.setVisible(false);
+		mMarker2.setVisible(false);
+	}
+	AbstractItem::hoverLeaveEvent(event);
+}
+
 QVariant CurveItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
 	if (change == ItemSelectedHasChanged) {
@@ -189,9 +217,19 @@ QVariant CurveItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 	return ColorFieldItem::itemChange(change, value);
 }
 
+QPainterPath CurveItem::resizeArea() const
+{
+	QPainterPath result;
+	result.addEllipse(QPointF(x1(), y1()), resizeDrift, resizeDrift);
+	result.addEllipse(QPointF(x2(), y2()), resizeDrift, resizeDrift);
+	return result;
+}
+
+
 CurveItem::Marker::Marker(QGraphicsItem *parent)
 	: QGraphicsObject(parent)
 {
+	setCursor(Qt::SizeAllCursor);
 	setFlag(ItemSendsGeometryChanges);
 }
 

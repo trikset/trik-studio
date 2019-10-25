@@ -1,1 +1,1 @@
-@@EXPRESSION@@
+@@TYPE@@(@@EXPRESSION@@)

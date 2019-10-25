@@ -16,7 +16,7 @@
 #include <Box2D/Box2D.h>
 
 #include "src/engine/model/physics/box2DPhysicsEngine.h"
-#include "src/engine/view/scene/sonarSensorItem.h"
+#include "src/engine/view/scene/rangeSensorItem.h"
 #include "twoDModel/engine/model/robotModel.h"
 #include "twoDModel/engine/model/constants.h"
 #include "box2DWheel.h"

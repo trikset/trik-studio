@@ -152,8 +152,6 @@ signals:
 	void robotListChanged(RobotItem *robotItem);
 
 private slots:
-	void handleNewRobotPosition(RobotItem *robotItem);
-
 	void handleBackgroundImageItem(items::ImageItem *backgroundImageItem);
 
 	/// Called after robot model was added and create new robot item
@@ -209,12 +207,14 @@ private:
 	void drawBackground(QPainter *painter, const QRectF &rect) override;
 	void keyPressEvent(QKeyEvent *event) override;
 
-	void reshapeItem(QGraphicsSceneMouseEvent *event);
-
+	QPair<QStringList, QList<QPair<model::RobotModel *
+			, kitBase::robotModel::PortInfo>>> parseItemsToID (QList<QGraphicsItem*> items);
 	void deleteSelectedItems();
 	void deleteWithCommand(const QStringList &worldItems
 			, const QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> &sensors
 			, const QList<qReal::commands::AbstractCommand *> &additionalCommands);
+	void copySelectedItems();
+	void pasteItemsFromClipboard();
 
 	void reshapeWall(QGraphicsSceneMouseEvent *event);
 	void reshapeLine(QGraphicsSceneMouseEvent *event);
@@ -225,9 +225,11 @@ private:
 
 	void registerInUndoStack(graphicsUtils::AbstractItem *item);
 	void subscribeItem(graphicsUtils::AbstractItem *item);
-	void worldWallDragged(items::WallItem *wall, const QPainterPath &shape, const QRectF &oldPos);
 
 	void handleMouseInteractionWithSelectedItems();
+
+	bool hasIntersect(const graphicsUtils::AbstractItem *item1, const graphicsUtils::AbstractItem *item2) const;
+	bool isCorrectScene(const QList<QGraphicsItem *> checkItems) const;
 
 	qreal currentZoom() const;
 
@@ -257,6 +259,8 @@ private:
 	bool mWorldReadOnly = false;
 	bool mRobotReadOnly = false;
 	bool mSensorsReadOnly = false;
+
+	QList<QDomElement> mClipboard;
 };
 
 }

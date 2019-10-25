@@ -1,10 +1,10 @@
 #!/bin/bash
-set -euxo pipefail
+set -xuevo pipefail
 
 CODECOV=true
 case $TRAVIS_OS_NAME in
   osx)
-     export PATH="$TRIK_QT/5.12.4/clang_64/bin:$PATH"
+     export PATH="$TRIK_QT/5.12.5/clang_64/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
@@ -15,8 +15,11 @@ case $TRAVIS_OS_NAME in
 esac
 
 if $VERA ; then $EXECUTOR buildScripts/travis/runVera++.sh ; fi
-if $VERA ; then  { git diff --diff-filter=d --name-only ${TRAVIS_COMMIT_RANGE} || true ; } | xargs -r file -i | sed -e "s|\(.*\):.*text/x-c.*|\1|g" -e "/:/d" \
-                | $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict ; fi
+if $VERA ; then
+  git_diff=$( { git diff --diff-filter=d --name-only ${TRAVIS_COMMIT_RANGE} || true ; } \
+  | xargs -r file -i | sed -e "s|\(.*\):.*text/x-c.*|\1|g" -e "/:/d")
+  [[ -z "${git_diff}" ]] || $EXECUTOR vera++ --error --root buildScripts/vera++ --profile strict <<< "$git_diff"
+fi
 
 if $TRANSLATIONS ; then $EXECUTOR lupdate studio.pro plugins/robots/editor/*/translations.pro && $EXECUTOR buildScripts/travis/checkStatus.sh ; fi
 mkdir -p $CCACHE_DIR || sudo chown -R $USER $CCACHE_DIR || :
@@ -44,7 +47,7 @@ $EXECUTOR bash -ic "\
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -c \"export ASAN_OPTIONS=$( [[ $TRAVIS_OS_NAME == linux ]] && echo detect_leaks=1 || :):detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& sh -c \"export ASAN_OPTIONS=detect_leaks=0:detect_stack_use_after_return=1:fast_unwind_on_malloc=0 LSAN_OPTIONS=suppressions=lsan.supp:fast_unwind_on_malloc=0:verbosity=1:log_threads=1  DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 df -h .
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 

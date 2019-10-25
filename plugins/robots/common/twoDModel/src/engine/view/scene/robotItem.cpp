@@ -45,8 +45,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
-	setCursor(QCursor(Qt::PointingHandCursor));
-	setZValue(1);
+	setZValue(ZValue::Robot);
 	const QSizeF robotSize = mRobotModel.info().size();
 	setX2(x1() + robotSize.width());
 	setY2(y1() + robotSize.height());

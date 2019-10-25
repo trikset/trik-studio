@@ -40,6 +40,11 @@ TcpConnectionHandler::TcpConnectionHandler(int port)
 	mKeepAliveTimer.setSingleShot(false);
 }
 
+TcpConnectionHandler::~TcpConnectionHandler()
+{
+	mSocket.disconnect(this); //otherwise DirectConnection from another thread can happen afer dtor
+}
+
 bool TcpConnectionHandler::connect(const QHostAddress &serverAddress)
 {
 	if (isConnected() || mSocket.state() == QTcpSocket::ConnectingState) {

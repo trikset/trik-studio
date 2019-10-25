@@ -41,7 +41,6 @@ public:
 
 	void init();
 	void start();
-	void stop();
 	virtual Status status() const override { return Status::ready; }
 
 public slots:
@@ -51,17 +50,16 @@ public slots:
 	virtual int buttonCode(bool wait) override;
 
 private slots:
-	void handleNewData(int value);
+	void handleNewData(kitBase::robotModel::robotParts::Button *button, int value);
 
 private:
 	bool registerButton(int code);
 
 	QHash<int, QString> mKeycodeMap;
 	QHash<int, bool> mWasPressed;
-	QHash<int, kitBase::robotModel::robotParts::Button *> mButtons;
 	QSharedPointer<kitBase::robotModel::CommonRobotModel> mRobotModel;
+	QHash<int, kitBase::robotModel::robotParts::Button *> mButtons;
 	QScopedPointer<utils::AbstractTimer> mButtonWatchingTimer;
-	QList<QMetaObject::Connection> mConnections;
 };
 
 }

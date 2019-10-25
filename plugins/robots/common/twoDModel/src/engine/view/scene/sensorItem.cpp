@@ -49,10 +49,7 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 
-	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
-	setCursor(QCursor(Qt::PointingHandCursor));
-	setZValue(1);
 
 	mPortItem->setParentItem(this);
 	mPortItem->moveBy(-mPortItem->boundingRect().width() - 5, -mPortItem->boundingRect().height() - 5);
@@ -175,7 +172,7 @@ QString SensorItem::name() const
 	} else if (sensor.isA<robotParts::ColorSensorBlue>()) {
 		return "color_blue";
 	} else if (sensor.isA<robotParts::RangeSensor>()) {
-		return "sonar";
+		return "range";
 	} else if (sensor.isA<robotParts::LightSensor>()
 		|| sensor.isA<robotParts::ColorSensorAmbient>()
 		|| sensor.isA<robotParts::ColorSensorReflected>()) {

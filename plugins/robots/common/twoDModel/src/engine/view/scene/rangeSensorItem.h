@@ -24,15 +24,16 @@ namespace twoDModel {
 namespace view {
 
 /// Sonar sensor that can draw its scanning area.
-class SonarSensorItem : public SensorItem
+class RangeSensorItem : public SensorItem
 {
 	Q_OBJECT
 	Q_INTERFACES(QGraphicsItem)
 
 public:
-	SonarSensorItem(const model::WorldModel &worldModel
+	RangeSensorItem(const model::WorldModel &worldModel
 			, model::SensorsConfiguration &configuration
 			, const kitBase::robotModel::PortInfo &port
+			, QPair<qreal, int> physicalParams
 			, const QString &pathToImage
 			, const QRect &imageSize
 			);
@@ -51,6 +52,8 @@ private:
 
 	const model::WorldModel &mWorldModel;
 	const QImage mIcon;
+	qreal mAngle;
+	int mRange;
 };
 
 }

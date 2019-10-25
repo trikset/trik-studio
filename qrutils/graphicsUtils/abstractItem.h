@@ -17,6 +17,7 @@
 #include <QtWidgets/QGraphicsItem>
 #include <QtWidgets/QGraphicsView>
 #include <QtXml/QDomDocument>
+#include <QGraphicsSceneHoverEvent>
 
 #include "qrutils/utilsDeclSpec.h"
 
@@ -41,12 +42,22 @@ public:
 		, Ctrl
 	};
 
+	enum ZValue {
+		Background
+		, Picture
+		, Shape
+		, Wall
+		, Moveable
+		, Robot
+	};
+
 	explicit AbstractItem(QGraphicsItem *parent = nullptr);
 
 	virtual QRectF boundingRect() const override = 0;
 	virtual QRectF realBoundingRect() const;
 	virtual QRectF calcNecessaryBoundingRect() const;
 	virtual QPainterPath realShape() const;
+	virtual QPainterPath resizeArea() const;
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) = 0;
 	virtual void drawExtractionForItem(QPainter *painter);
@@ -102,6 +113,9 @@ public:
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
 	void reverseOldResizingItem(const QPointF &begin, const QPointF &end);
 
+	virtual void restorePos();
+	virtual void savePos();
+
 	//for save to xml
 	virtual void setXandY(QDomElement& dom, const QRectF &rect);
 	QDomElement setPenBrushToDoc(QDomDocument &document, const QString &domName) const;
@@ -119,6 +133,9 @@ public:
 
 	void setEditable(bool editable);
 	bool editable() const;
+	bool isHovered() const;
+
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 signals:
 	/// Emitted when QGraphicsItem has repositioned.
@@ -127,13 +144,13 @@ signals:
 	/// Emitted when the x-coorinate of the first item`s end modified for some reason.
 	void x1Changed(qreal x1);
 
-	/// Emitted when the x-coorinate of the first item`s end modified for some reason.
+	/// Emitted when the y-coorinate of the first item`s end modified for some reason.
 	void y1Changed(qreal y1);
 
-	/// Emitted when the x-coorinate of the first item`s end modified for some reason.
+	/// Emitted when the x-coorinate of the second item`s end modified for some reason.
 	void x2Changed(qreal x2);
 
-	/// Emitted when the x-coorinate of the first item`s end modified for some reason.
+	/// Emitted when the y-coorinate of the second item`s end modified for some reason.
 	void y2Changed(qreal y2);
 
 	/// Emitted when item`s pen changed somehow.
@@ -156,9 +173,21 @@ protected:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void copyTo(AbstractItem * const other) const;
+
+	QPointF mOldPos;
+	qreal mOldX1;
+	qreal mOldY1;
+	qreal mOldX2;
+	qreal mOldY2;
+
+	QPen mStrokePen;
+	Qt::CursorShape mResizeCursor;
+	Qt::CursorShape mHoverCursor;
 
 private:
 	DragState mDragState;
@@ -170,6 +199,7 @@ private:
 	qreal mY2;
 	QString mId;
 	bool mEditable;
+	bool mHovered;
 };
 
 }

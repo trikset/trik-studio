@@ -45,7 +45,9 @@ public:
 
 	/// Draws selection rect around sensorBoundingBox
 	void drawExtractionForItem(QPainter *painter) override;
+	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	QPainterPath resizeArea() const override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	void reshapeRectWithShift() override;
@@ -54,8 +56,6 @@ public:
 
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
-
-	void onOverlappedWithRobot(bool overlapped = true);
 
 	QPainterPath path() const;
 
@@ -72,14 +72,8 @@ public:
 	qreal friction() const override;
 	BodyType bodyType() const override;
 
-signals:
-	void wallDragged(WallItem *item, const QPainterPath &shape, const QRectF &oldPos);
-
 protected:
 	void setPrivateData();
-
-private slots:
-	void handleReposition(const QPointF &pos);
 
 private:
 	void recalculateBorders();
@@ -91,14 +85,8 @@ private:
 
 	graphicsUtils::LineImpl mLineImpl;
 
-	bool mOverlappedWithRobot = false;
 	const QImage mImage;
 
-	qreal mOldX1 = 0;
-	qreal mOldY1 = 0;
-	qreal mOldX2 = 0;
-	qreal mOldY2 = 0;
-	QPointF mOldPosition = QPointF(0, 0);
 	int mCellNumbX1 = 0;
 	int mCellNumbY1 = 0;
 	int mCellNumbX2 = 0;

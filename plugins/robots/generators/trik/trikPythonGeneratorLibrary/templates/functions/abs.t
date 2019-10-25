@@ -1,1 +1,1 @@
-Math.abs(@@ARGUMENT@@)
+math.abs(@@ARGUMENT@@)
