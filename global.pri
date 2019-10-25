@@ -91,6 +91,7 @@ equals(TEMPLATE, app) {
 		linux {
 			QMAKE_LFLAGS += -Wl,-rpath-link,$$GLOBAL_DESTDIR
 			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN\'
+			QMAKE_LFLAGS += -Wl,-O1,-rpath,\'\$$ORIGIN/../lib\'
 		}
 		macx {
 			QMAKE_LFLAGS += -rpath @executable_path
