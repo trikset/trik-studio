@@ -21,6 +21,8 @@ BreakModeConverter::BreakModeConverter(const QStringList &pathsToTemplates)
 	: EnumConverterBase(pathsToTemplates)
 {
 	addMapping("", "engines/brakeMode/brake.t");
+	/// @todo old saves have 'break' mode instead of 'brake'
+	addMapping("break", "engines/brakeMode/brake.t");
 	addMapping("brake", "engines/brakeMode/brake.t");
 	addMapping("float", "engines/brakeMode/float.t");
 }
