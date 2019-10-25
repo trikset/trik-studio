@@ -32,8 +32,8 @@ GotoControlFlowGenerator::GotoControlFlowGenerator(
 
 ControlFlowGeneratorBase *GotoControlFlowGenerator::cloneFor(const qReal::Id &diagramId, bool cloneForNewDiagram)
 {
-	GotoControlFlowGenerator * const copy = new GotoControlFlowGenerator(mRepo
-			, mErrorReporter, mCustomizer, (cloneForNewDiagram ? *mValidator.clone() : mValidator)
+    GotoControlFlowGenerator * const copy = new GotoControlFlowGenerator(mRepo
+            , mErrorReporter, mCustomizer, (cloneForNewDiagram ? *mValidator.clone() : mValidator)
             , diagramId, parent(), !cloneForNewDiagram);
 
 	return copy;
