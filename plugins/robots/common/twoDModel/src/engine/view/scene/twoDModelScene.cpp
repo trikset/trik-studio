@@ -735,6 +735,7 @@ void TwoDModelScene::addImage()
 	const QSize size = image->preferedSize();
 	const QRect rect(QPoint(-size.width() / 2, -size.height() / 2), size);
 	twoDModel::items::ImageItem *result = new twoDModel::items::ImageItem(image, rect);
+	result->setMemorize(true);
 	mModel.worldModel().addImageItem(result);
 	registerInUndoStack(result);
 	setNoneStatus();
