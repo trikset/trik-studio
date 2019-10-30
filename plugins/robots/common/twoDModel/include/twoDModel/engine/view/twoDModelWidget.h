@@ -82,7 +82,7 @@ public:
 	SensorItem *sensorItem(const kitBase::robotModel::PortInfo &port);
 	void setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible);
 
-	void loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs);
+	void loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo = false);
 
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;
@@ -103,6 +103,7 @@ public:
 	bool supportsZooming() const override;
 	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste
 			, QAction &cut, QAction &find, QAction &findAndeReplace, QAction &replaceBy) override;
+	QDomDocument generateWordModelWithBlobsXml() const;
 
 public slots:
 	void zoomIn() override;
@@ -192,7 +193,6 @@ private:
 
 	QDomDocument generateWordModelXml() const;
 	QDomDocument generateBlobsXml() const;
-	QDomDocument generateWordModelWithBlobsXml() const;
 
 	/// Set active panel toggle button and deactivate all others
 	void setActiveButton(int active);

@@ -49,6 +49,7 @@
 #include "src/engine/items/stylusItem.h"
 #include "src/engine/items/imageItem.h"
 #include "src/engine/commands/changePropertyCommand.h"
+#include "src/engine/commands/loadWorldCommand.h"
 
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/model.h"
@@ -491,17 +492,10 @@ void TwoDModelWidget::loadWorldModel()
 				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 	}
 
-	QDomNodeList blobsList = save.elementsByTagName("blobs");
-	if (blobsList.length()) {
-		QDomDocument blobs;
-		QDomElement root = blobs.createElement("root");
-		root.appendChild(blobsList.at(0));
-		blobs.appendChild(root);
-		loadXmls(save, blobs);
-	} else {
-		loadXmls(save, QDomDocument());
+	auto command = new commands::LoadWorldCommand(*this, save);
+	if (mController) {
+		mController->execute(command);
 	}
-	saveWorldModelToRepo();
 }
 
 void TwoDModelWidget::setBackground()
@@ -683,9 +677,9 @@ QDomDocument TwoDModelWidget::generateWordModelWithBlobsXml() const
 	return wordModelXml;
 }
 
-void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs)
+void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo)
 {
-	if (mController) {
+	if (mController && !withUndo) {
 		// Clearing 2D model undo stack...
 		mController->moduleClosed(editorId());
 		mController->moduleOpened(editorId());
@@ -695,6 +689,7 @@ void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocumen
 	mModel.deserialize(worldModel, blobs);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
+	saveWorldModelToRepo();
 }
 
 Model &TwoDModelWidget::model() const

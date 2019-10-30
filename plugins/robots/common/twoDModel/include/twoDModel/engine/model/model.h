@@ -67,7 +67,7 @@ public:
 	qReal::ErrorReporterInterface *errorReporter();
 
 	QDomDocument serialize() const;
-	void deserialize(const QDomDocument &wordModel, const QDomDocument &blobs);
+	void deserialize(const QDomDocument &worldModel, const QDomDocument &blobs);
 
 	/// Add new robot model
 	/// @param robotModel Model to be added
