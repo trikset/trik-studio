@@ -58,11 +58,11 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	mBody->SetLinearDamping(1.0f);
 	connectWheels();
 
-	for (int i = 0; i < polygonShape.GetVertexCount(); ++i) {
-		mDebuggingDrawPolygon.append(engine->positionToScene(polygonShape.GetVertex(i) + mBody->GetPosition()));
+	for (int i = 0; i < polygonShape.m_count; ++i) {
+		mDebuggingDrawPolygon.append(engine->positionToScene(polygonShape.m_vertices[i] + mBody->GetPosition()));
 	}
 
-	if (!mDebuggingDrawPolygon.isEmpty() & !mDebuggingDrawPolygon.isClosed()) {
+	if (!mDebuggingDrawPolygon.isEmpty() && !mDebuggingDrawPolygon.isClosed()) {
 		mDebuggingDrawPolygon.append(mDebuggingDrawPolygon.first());
 	}
 }
