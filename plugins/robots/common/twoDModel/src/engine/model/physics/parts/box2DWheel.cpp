@@ -67,11 +67,11 @@ Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
 
 	mBody->SetUserData(this);
 
-	for (int i = 0; i < polygonShape.GetVertexCount(); ++i) {
-		mDebuggingDrawPolygon.append(mEngine->positionToScene(polygonShape.GetVertex(i) + mBody->GetPosition()));
+	for (int i = 0; i < polygonShape.m_count; ++i) {
+		mDebuggingDrawPolygon.append(mEngine->positionToScene(polygonShape.m_vertices[i] + mBody->GetPosition()));
 	}
 
-	if (!mDebuggingDrawPolygon.isEmpty() & !mDebuggingDrawPolygon.isClosed()) {
+	if (!mDebuggingDrawPolygon.isEmpty() && !mDebuggingDrawPolygon.isClosed()) {
 		mDebuggingDrawPolygon.append(mDebuggingDrawPolygon.first());
 	}
 }

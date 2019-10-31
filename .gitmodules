@@ -19,3 +19,7 @@
 [submodule "thirdparty/quazip/quazip"]
 	path = thirdparty/quazip/quazip
 	url = https://github.com/stachenov/quazip.git
+[submodule "plugins/robots/thirdparty/Box2D/Box2D"]
+	path = plugins/robots/thirdparty/Box2D/Box2D
+	url = https://github.com/iakov/Box2D
+	branch = "trik-studio"

@@ -20,7 +20,7 @@ links(qrkernel qslog qrutils qrgui-tool-plugin-interface qrgui-controller robots
 
 includes(plugins/robots/common/kitBase)
 includes(plugins/robots/utils qrtext)
-includes(plugins/robots/thirdparty/)
+includes(plugins/robots/thirdparty/Box2D/Box2D)
 
 TRANSLATIONS = \
 	$$PWD/../../../../qrtranslations/ru/plugins/robots/twoDModel_ru.ts \
