@@ -162,13 +162,31 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> checkItems) con
 			for (const auto wall : mModel.worldModel().walls()) {
 				if (hasIntersect(robot, wall)) return false;
 			}
+			for (const auto ball : mModel.worldModel().balls()) {
+				if (hasIntersect(robot, ball)) return false;
+			}
+			for (const auto skittle : mModel.worldModel().skittles()) {
+				if (hasIntersect(robot, skittle)) return false;
+			}
 		} else if (auto ball = dynamic_cast<const items::BallItem *>(item)) {
 			for (const auto wall : mModel.worldModel().walls()) {
 				if (hasIntersect(ball, wall)) return false;
 			}
+			for (const auto robot : mRobots.values()) {
+				if (hasIntersect(ball, robot)) return false;
+			}
+			for (const auto skittle : mModel.worldModel().skittles()) {
+				if (hasIntersect(ball, skittle)) return false;
+			}
 		} else if (auto skittle = dynamic_cast<const items::SkittleItem *>(item)) {
 			for (const auto wall : mModel.worldModel().walls()) {
 				if (hasIntersect(skittle, wall)) return false;
+			}
+			for (const auto robot : mRobots.values()) {
+				if (hasIntersect(skittle, robot)) return false;
+			}
+			for (const auto ball : mModel.worldModel().balls()) {
+				if (hasIntersect(skittle, ball)) return false;
 			}
 		} else if (auto wall = dynamic_cast<const items::WallItem *>(item)) {
 			for (const auto ball : mModel.worldModel().balls()) {
