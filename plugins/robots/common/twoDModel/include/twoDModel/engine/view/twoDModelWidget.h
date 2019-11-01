@@ -180,6 +180,8 @@ private:
 		, drawLine
 		, drawStylus
 		, drawEllipse
+		, drawRectangle
+		, drawBezier
 	};
 
 	static const int defaultPenWidth = 6;

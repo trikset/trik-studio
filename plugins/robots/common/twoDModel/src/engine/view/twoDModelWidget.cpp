@@ -271,10 +271,14 @@ void TwoDModelWidget::initPalette()
 	connect(skittleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawSkittle); });
 	connect(ballTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawBall); });
 	connect(lineTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawLine); });
+	connect(bezierTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawBezier); });
+	connect(rectangleTool, &QAction::triggered, [this](){ setCursorTypeForDrawing(drawRectangle); });
 	connect(ellipseTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawEllipse); });
 	connect(stylusTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawStylus); });
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, this
 			, [this](){ setCursorTypeForDrawing(mNoneCursorType); });
+
+	connect(imageTool, &QAction::triggered, this, [this](){ mUi->palette->unselect(); });
 }
 
 void TwoDModelWidget::initDetailsTab()
@@ -451,7 +455,7 @@ void TwoDModelWidget::centerOnRobot()
 void TwoDModelWidget::setCursorTypeForDrawing(CursorType type)
 {
 	mCursorType = type;
-	mUi->graphicsView->setCursor(cursorTypeToCursor(mCursorType));
+	refreshCursor();
 }
 
 void TwoDModelWidget::saveWorldModel()
@@ -849,6 +853,8 @@ QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) c
 	case drawWall:
 	case drawSkittle:
 	case drawBall:
+	case drawBezier:
+	case drawRectangle:
 		return QGraphicsView::NoDrag;
 	case hand:
 		return QGraphicsView::ScrollHandDrag;
@@ -880,6 +886,10 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 		return QCursor(QPixmap(":/icons/2d_drawEllipseCursor.png"), 0, 0);
 	case drawStylus:
 		return QCursor(QPixmap(":/icons/2d_drawStylusCursor.png"), 0, 0);
+	case drawBezier:
+		return QCursor(QPixmap(":/icons/2d_drawBezierCursor.png"), 0, 0);
+	case drawRectangle:
+		return QCursor(QPixmap(":/icons/2d_drawRectangleCursor.png"), 0, 0);
 	default:
 		return Qt::ArrowCursor;
 	}
