@@ -119,12 +119,12 @@ QDomDocument Model::serialize() const
 	return save;
 }
 
-void Model::deserialize(const QDomDocument &wordModel, const QDomDocument &blobs)
+void Model::deserialize(const QDomDocument &worldModel, const QDomDocument &blobs)
 {
-	const auto &worldList = wordModel.elementsByTagName("world");
-	const auto &robotsList = wordModel.elementsByTagName("robots");
-	const auto &constraints = wordModel.documentElement().firstChildElement("constraints");
-	const auto &settings = wordModel.documentElement().firstChildElement("settings");
+	const auto &worldList = worldModel.elementsByTagName("world");
+	const auto &robotsList = worldModel.elementsByTagName("robots");
+	const auto &constraints = worldModel.documentElement().firstChildElement("constraints");
+	const auto &settings = worldModel.documentElement().firstChildElement("settings");
 
 	mSettings.deserialize(settings);
 
@@ -149,7 +149,7 @@ void Model::deserialize(const QDomDocument &wordModel, const QDomDocument &blobs
 
 	if (robotsList.count() != 1) {
 		// need for backward compatibility with old format
-		const QDomNodeList robotList = wordModel.elementsByTagName("robot");
+		const QDomNodeList robotList = worldModel.elementsByTagName("robot");
 
 		if (robotList.count() != 1) {
 			/// @todo Report error
