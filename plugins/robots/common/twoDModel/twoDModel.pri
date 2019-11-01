@@ -119,6 +119,7 @@ HEADERS += \
 	$$PWD/src/engine/commands/createRemoveSensorImplementation.h \
 	$$PWD/src/engine/commands/changePropertyCommand.h \
 	$$PWD/src/engine/commands/reshapeCommand.h \
+	$$PWD/src/engine/commands/loadWorldCommand.h \
 	$$PWD/src/robotModel/nullTwoDRobotModel.h \
 	$$PWD/src/engine/model/physics/box2DPhysicsEngine.h \
 	$$PWD/src/engine/model/physics/parts/box2DItem.h \
@@ -190,6 +191,7 @@ SOURCES += \
 	$$PWD/src/engine/commands/createRemoveSensorImplementation.cpp \
 	$$PWD/src/engine/commands/changePropertyCommand.cpp \
 	$$PWD/src/engine/commands/reshapeCommand.cpp \
+	$$PWD/src/engine/commands/loadWorldCommand.cpp \
 	$$PWD/src/robotModel/twoDRobotModel.cpp \
 	$$PWD/src/robotModel/nullTwoDRobotModel.cpp \
 	$$PWD/src/robotModel/parts/button.cpp \

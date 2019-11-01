@@ -638,13 +638,13 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+294"/>
-        <location line="+227"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+295"/>
+        <location line="+220"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location line="-226"/>
+        <location line="-219"/>
         <source>Do you really want to clear scene?</source>
         <translation>Est-ce que vous voulez vraiment effacer la scène ?</translation>
     </message>
@@ -683,7 +683,7 @@
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+25"/>
         <source>Select background image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,7 +698,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+315"/>
+        <location line="+316"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>
