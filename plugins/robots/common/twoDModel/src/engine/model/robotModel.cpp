@@ -388,7 +388,7 @@ qreal RobotModel::rotation() const
 void RobotModel::setRotation(qreal angle)
 {
 	if (!mathUtils::Math::eq(mAngle, angle)) {
-		mAngle = fmod(angle, 360);
+		mAngle = angle;
 		emit rotationChanged(angle);
 	}
 }
