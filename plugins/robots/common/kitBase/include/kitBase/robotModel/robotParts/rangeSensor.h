@@ -26,7 +26,7 @@ namespace robotParts {
 class ROBOTS_KIT_BASE_EXPORT RangeSensor : public ScalarSensor
 {
 	Q_OBJECT
-	Q_CLASSINFO("name", "range")
+	Q_CLASSINFO("name", "sonar")
 	Q_CLASSINFO("friendlyName", tr("Range sensor"))
 	Q_CLASSINFO("simulated", "true")
 
