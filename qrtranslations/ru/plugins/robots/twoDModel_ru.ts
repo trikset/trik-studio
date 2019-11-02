@@ -946,7 +946,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+717"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+735"/>
         <source>Select image</source>
         <translation>Выберите картинку</translation>
     </message>
@@ -969,7 +969,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+295"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+299"/>
         <location line="+220"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
@@ -1029,7 +1029,7 @@
         <translation>Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+315"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
@@ -1039,7 +1039,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+153"/>
+        <location line="+159"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

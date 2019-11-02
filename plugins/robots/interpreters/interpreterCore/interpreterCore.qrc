@@ -56,6 +56,8 @@
         <file>icons/2d_drawWallCursor.png</file>
         <file>icons/2d_drawCanCursor.png</file>
         <file>icons/2d_drawBallCursor.png</file>
+        <file>icons/2d_drawBezierCursor.png</file>
+        <file>icons/2d_drawRectangleCursor.png</file>
         <file>icons/2d-model.svg</file>
         <file>icons/switch-2d.svg</file>
         <file>icons/switch-real-nxt.svg</file>
