@@ -638,7 +638,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+295"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+299"/>
         <location line="+220"/>
         <source>Warning</source>
         <translation>Attention</translation>
@@ -698,7 +698,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+315"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -708,7 +708,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+153"/>
+        <location line="+159"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

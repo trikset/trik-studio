@@ -807,8 +807,7 @@ void TwoDModelWidget::setCursorType(CursorType cursor)
 	mNoneCursorType = cursor;
 	mCursorType = mNoneCursorType;
 	SettingsManager::setValue("2dCursorType", cursor);
-	mUi->graphicsView->setDragMode(cursorTypeToDragType(cursor));
-	mUi->graphicsView->setCursor(cursorTypeToCursor(cursor));
+	refreshCursor();
 	syncCursorButtons();
 }
 
@@ -898,7 +897,7 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 void TwoDModelWidget::refreshCursor()
 {
 	mUi->graphicsView->setDragMode(cursorTypeToDragType(mCursorType));
-	mUi->graphicsView->setCursor(cursorTypeToCursor(mCursorType));
+	mUi->graphicsView->viewport()->setCursor(cursorTypeToCursor(mCursorType));
 }
 
 void TwoDModelWidget::onHandCursorActionTriggered()
