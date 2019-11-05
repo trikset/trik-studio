@@ -92,7 +92,7 @@ void TrikBrick::printToShell(const QString &msg)
 	using namespace trik::robotModel;
 	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
-		qDebug("Error: 2d model shell part was not found");
+		emit error(tr("2d model shell part was not found"));
 		return;
 	}
 
@@ -155,7 +155,7 @@ void TrikBrick::say(const QString &msg) {
 	using namespace trik::robotModel;
 	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
-		qDebug("Error: 2d model shell part was not found");
+		emit error(tr("2d model shell part was not found"));
 		return;
 	}
 
@@ -272,7 +272,7 @@ trikControl::GyroSensorInterface *TrikBrick::gyroscope() {
 trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 	using namespace trik::robotModel::parts;
 	using namespace kitBase::robotModel;
-	if (port == "video0") {
+	if (port == "video0" || port == "video2") {
 		return lineSensor("LineSensorPort"); // seems to be the case for 2d model
 	}
 
