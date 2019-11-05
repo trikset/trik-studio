@@ -24,12 +24,45 @@
 #include "exceptions/sourceFolderNotFoundException.h"
 #include "exceptions/couldNotOpenDestinationFileException.h"
 #include "exceptions/couldNotOpenInputFileException.h"
-#include "thirdparty/quazip/quazip/quazip/quazip.h"
+
+#define QUAZIP_STATIC
+#include "thirdparty/quazip/quazip/quazip/JlCompress.h"
 
 using namespace qrRepo;
 using namespace qrRepo::details;
 
 void FolderCompressor::compressFolder(const QString &sourceFolder, const QString &destinationFile)
+{
+	if (!QDir(sourceFolder).exists()) {
+		throw SourceFolderNotFoundException(sourceFolder);
+	}
+
+	if (!JlCompress::compressDir(destinationFile, sourceFolder)) {
+		throw CouldNotCreateOutFileException(destinationFile);
+	}
+}
+
+void FolderCompressor::decompressFolder(const QString &sourceFile, const QString &destinationFolder)
+{
+	if (!QFile(sourceFile).exists()) {
+		throw SaveFileNotFoundException(sourceFile);
+	}
+
+	QDir dir;
+	if (!dir.mkpath(destinationFolder)) {
+		throw CouldNotCreateDestinationFolderException(destinationFolder);
+	}
+
+	if (!JlCompress::getFileList(sourceFile).isEmpty()) {
+		if (JlCompress::extractDir(sourceFile, destinationFolder).isEmpty()) {
+			throw SaveFileNotReadableException(sourceFile);
+		}
+	} else {
+		decompressFolderOld(sourceFile, destinationFolder);
+	}
+}
+
+void FolderCompressor::compressFolderOld(const QString &sourceFolder, const QString &destinationFile)
 {
 	if (!QDir(sourceFolder).exists()) {
 		throw SourceFolderNotFoundException(sourceFolder);
@@ -41,11 +74,11 @@ void FolderCompressor::compressFolder(const QString &sourceFolder, const QString
 	}
 
 	QDataStream dataStream(&file);
-	compress(sourceFolder, "", dataStream);
+	compressOld(sourceFolder, "", dataStream);
 	file.close();
 }
 
-void FolderCompressor::compress(const QString &sourceFolder, const QString &prefix, QDataStream &dataStream)
+void FolderCompressor::compressOld(const QString &sourceFolder, const QString &prefix, QDataStream &dataStream)
 {
 	QDir dir(sourceFolder);
 	if (!dir.exists()) {
@@ -61,7 +94,7 @@ void FolderCompressor::compress(const QString &sourceFolder, const QString &pref
 		const QString folderName = folder.fileName();
 		const QString folderPath = dir.absolutePath() + "/" + folderName;
 		const QString newPrefix = prefix + "/" + folderName;
-		compress(folderPath, newPrefix, dataStream);
+		compressOld(folderPath, newPrefix, dataStream);
 	}
 
 	// 3 - List all files inside the current folder
@@ -82,12 +115,8 @@ void FolderCompressor::compress(const QString &sourceFolder, const QString &pref
 	}
 }
 
-void FolderCompressor::decompressFolder(const QString &sourceFile, const QString &destinationFolder)
+void FolderCompressor::decompressFolderOld(const QString &sourceFile, const QString &destinationFolder)
 {
-	if (!QFile(sourceFile).exists()) {
-		throw SaveFileNotFoundException(sourceFile);
-	}
-
 	QDir dir;
 	if (!dir.mkpath(destinationFolder)) {
 		throw CouldNotCreateDestinationFolderException(destinationFolder);

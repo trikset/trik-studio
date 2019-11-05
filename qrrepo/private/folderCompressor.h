@@ -29,17 +29,19 @@ public:
 	/// binary data in a single file
 	/// @returns true if operation was successful.
 	static void compressFolder(const QString &sourceFolder, const QString &destinationFile);
+	static void compressFolderOld(const QString &sourceFolder, const QString &destinationFile);
 
 	/// A function that deserializes data from the compressed file and
 	/// creates any needed subfolders before saving the file
 	/// @returns true if operation was successful.
 	static void decompressFolder(const QString &sourceFile, const QString &destinationFolder);
+	static void decompressFolderOld(const QString &sourceFile, const QString &destinationFolder);
 
 private:
 	/// Creating is prohibited, utility class instances can not be created.
 	FolderCompressor() = delete;
 
-	static void compress(const QString &sourceFolder, const QString &prefix, QDataStream &dataStream);
+	static void compressOld(const QString &sourceFolder, const QString &prefix, QDataStream &dataStream);
 };
 
 }
