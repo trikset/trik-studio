@@ -53,8 +53,11 @@ void LineSensor::detectLine()
 			}
 		}
 	}
-
-	mLineColor = qRgb(red / size, green / size, blue / size);
+	if (size == 0) {
+		mLineColor = qRgb(255, 255, 255);
+	} else {
+		mLineColor = qRgb(red / size, green / size, blue / size);
+	}
 }
 
 void LineSensor::read()

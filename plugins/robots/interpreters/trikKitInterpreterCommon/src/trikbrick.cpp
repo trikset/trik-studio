@@ -272,7 +272,7 @@ trikControl::GyroSensorInterface *TrikBrick::gyroscope() {
 trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 	using namespace trik::robotModel::parts;
 	using namespace kitBase::robotModel;
-	if (port == "video0") {
+	if (port == "video0" || port == "video2") {
 		return lineSensor("LineSensorPort"); // seems to be the case for 2d model
 	}
 
