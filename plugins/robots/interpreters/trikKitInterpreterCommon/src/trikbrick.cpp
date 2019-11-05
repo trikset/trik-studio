@@ -92,7 +92,7 @@ void TrikBrick::printToShell(const QString &msg)
 	using namespace trik::robotModel;
 	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
-		qDebug("Error: 2d model shell part was not found");
+		emit error(tr("2d model shell part was not found"));
 		return;
 	}
 
@@ -155,7 +155,7 @@ void TrikBrick::say(const QString &msg) {
 	using namespace trik::robotModel;
 	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
-		qDebug("Error: 2d model shell part was not found");
+		emit error(tr("2d model shell part was not found"));
 		return;
 	}
 
