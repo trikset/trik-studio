@@ -132,7 +132,7 @@ QPointF TwoDRobotModel::rotationCenter() const
 
 QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const
 {
-	return deviceType.isA<robotParts::RangeSensor>() ? QPair<qreal,int>(20, 300) : QPair<qreal, int>(0, 0);
+	return deviceType.isA<robotParts::RangeSensor>() ? QPair<qreal,int>(20, 255) : QPair<qreal, int>(0, 0);
 }
 
 robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
