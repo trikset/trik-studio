@@ -819,7 +819,7 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 		for (model::RobotModel *robotModel : mRobots.keys()) {
 			robotModel->clear();
 			if (removeRobot) {
-				for (const kitBase::robotModel::PortInfo &port : robot(*robotModel)->sensors().keys()) {
+				for (const kitBase::robotModel::PortInfo &port : configuredPorts(robotModel->info().robotId())) {
 					deviceConfigurationChanged(robotModel->info().robotId()
 							, port, kitBase::robotModel::DeviceInfo(), reason);
 				}
