@@ -16,7 +16,7 @@ cp     $INSTALLER_ROOT/platform/$PRODUCT-linux-gnu-platform.config      $PWD/../
 
 cp -pr $BIN_DIR/libqrkernel.so*                                         $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgraph.so*                                          $PWD/../data/lib/
-#cp -pr $BIN_DIR/libquazip.so*                                           $PWD/../data/lib/
+cp -L $(pkg-config --variable=sharedlibdir zlib)/libz.so                     $PWD/../data/lib/libz.so.1
 cp -pr $BIN_DIR/libqrrepo.so*                                           $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrutils.so*                                          $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrtext.so*                                           $PWD/../data/lib/

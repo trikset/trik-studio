@@ -23,4 +23,4 @@ mkdir -p $PWD/../data/resources/examples/
 rsync -av --remove-source-files $PWD/../data/examples/ $PWD/../data/resources/examples/
 
 cd $PWD/../data/lib/
-ln -s libusb-1.0.so libusb-1.0.so.0
+ln -svf libusb-1.0.so libusb-1.0.so.0
