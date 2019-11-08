@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 cp    $BIN_DIR/qrkernel.dll                                         $PWD/../data
 cp    $BIN_DIR/qrgraph.dll                                          $PWD/../data
-#cp    $BIN_DIR/quazip.dll                                           $PWD/../data
+cp    $BIN_DIR/zlib1.dll                                            $PWD/../data
 cp    $BIN_DIR/qrrepo.dll                                           $PWD/../data
 cp    $BIN_DIR/qrutils.dll                                          $PWD/../data
 cp    $BIN_DIR/qrtext.dll                                           $PWD/../data

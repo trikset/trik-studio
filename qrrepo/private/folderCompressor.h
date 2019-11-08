@@ -39,7 +39,7 @@ private:
 	/// Creating is prohibited, utility class instances can not be created.
 	FolderCompressor() = delete;
 
-	static void compress(const QString &sourceFolder, const QString &prefix, QDataStream &dataStream);
+	static void decompressFolderOld(const QString &sourceFile, const QString &destinationFolder);
 };
 
 }
