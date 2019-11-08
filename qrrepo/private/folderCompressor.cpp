@@ -62,59 +62,6 @@ void FolderCompressor::decompressFolder(const QString &sourceFile, const QString
 	}
 }
 
-void FolderCompressor::compressFolderOld(const QString &sourceFolder, const QString &destinationFile)
-{
-	if (!QDir(sourceFolder).exists()) {
-		throw SourceFolderNotFoundException(sourceFolder);
-	}
-
-	QFile file(destinationFile);
-	if (!file.open(QIODevice::WriteOnly)) {
-		throw CouldNotOpenDestinationFileException(destinationFile);
-	}
-
-	QDataStream dataStream(&file);
-	compressOld(sourceFolder, "", dataStream);
-	file.close();
-}
-
-void FolderCompressor::compressOld(const QString &sourceFolder, const QString &prefix, QDataStream &dataStream)
-{
-	QDir dir(sourceFolder);
-	if (!dir.exists()) {
-		throw SourceFolderNotFoundException(sourceFolder);
-	}
-
-	// 1 - list all folders inside the current folder
-	dir.setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
-	const QFileInfoList foldersList = dir.entryInfoList();
-
-	// 2 - For each folder in list: call the same function with folders' paths
-	for (const QFileInfo &folder : foldersList) {
-		const QString folderName = folder.fileName();
-		const QString folderPath = dir.absolutePath() + "/" + folderName;
-		const QString newPrefix = prefix + "/" + folderName;
-		compressOld(folderPath, newPrefix, dataStream);
-	}
-
-	// 3 - List all files inside the current folder
-	dir.setFilter(QDir::NoDotAndDotDot | QDir::Files);
-	const QFileInfoList filesList = dir.entryInfoList();
-
-	// 4- For each file in list: add file path and compressed binary data
-	for (const QFileInfo &fileInfo : filesList) {
-		QFile file(dir.absolutePath() + "/" + fileInfo.fileName());
-		if (!file.open(QIODevice::ReadOnly)) {
-			throw CouldNotOpenInputFileException(file.fileName());
-		}
-
-		dataStream << QString(prefix + "/" + fileInfo.fileName());
-		dataStream << qCompress(file.readAll());
-
-		file.close();
-	}
-}
-
 void FolderCompressor::decompressFolderOld(const QString &sourceFile, const QString &destinationFolder)
 {
 	QDir dir;
