@@ -120,7 +120,7 @@ void GotoControlFlowGenerator::performGeneration()
 	ControlFlowGeneratorBase::performGeneration();
 }
 
-SemanticNode *GotoControlFlowGenerator::produceGotoNode(const qReal::Id &id)
+SimpleNode *GotoControlFlowGenerator::produceGotoNode(const qReal::Id &id)
 {
 	// Using other id to eliminate collisions with original node
 	const Id gotoId("label_" + id.editor(), id.diagram(), id.element(), id.id());

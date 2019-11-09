@@ -109,7 +109,7 @@ void PioneerStateMachineGenerator::visitRegular(const qReal::Id &id, const QList
 
 void PioneerStateMachineGenerator::processNode(NonZoneNode *thisNode, const qReal::Id &target)
 {
-	SemanticNode *nextNode = nullptr;
+	NonZoneNode *nextNode = nullptr;
 
 	if (mAsynchronousNodes.contains(thisNode->id().element())) {
 		if (not mSemanticTreeManager->isTopLevelNode(thisNode)) {
@@ -172,7 +172,7 @@ void PioneerStateMachineGenerator::processNode(NonZoneNode *thisNode, const qRea
 				// We shall copy nodes from synchronous fragment after end-of-handler node, if it is present.
 				auto sibling = mSemanticTreeManager->anyRightSibling(nextNode);
 				while (sibling != nullptr && isEndOfHandler(sibling)) {
-					nextNode = mSemanticTreeManager->anyRightSibling(nextNode);
+					nextNode = dynamic_cast<NonZoneNode*>(mSemanticTreeManager->anyRightSibling(nextNode));
 					sibling = mSemanticTreeManager->anyRightSibling(nextNode);
 				}
 
@@ -330,13 +330,9 @@ void PioneerStateMachineGenerator::visitFinal(const qReal::Id &id, const QList<L
 			continue;
 		}
 
-		SimpleNode * const thisNode = static_cast<SimpleNode *>(node);
-
-		// Getting top level parent node for this node.
-		NonZoneNode *parent = mSemanticTreeManager->topLevelParent(thisNode);
-
-		// Searching for end-of-handler node.
-		SemanticNode * endOfHandler = findEndOfHandler(parent);
+		auto thisNode = node;
+		auto parent = mSemanticTreeManager->topLevelParent(thisNode);
+		auto endOfHandler = findEndOfHandler(parent);
 
 		if (!endOfHandler) {
 			// If not found, create and add one.
@@ -360,8 +356,7 @@ void PioneerStateMachineGenerator::visit(const qReal::Id &nodeId, QList<utils::D
 	mVisitedNodes.insert(nodeId);
 }
 
-SemanticNode *PioneerStateMachineGenerator::copySynchronousFragment(
-		SemanticNode *after
+NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *after
 		, const qReal::Id &from
 		, bool withLabel)
 {
@@ -419,7 +414,7 @@ SemanticNode *PioneerStateMachineGenerator::copySynchronousFragment(
 			} else {
 				// This If node is copied without its end-of-handler node, so we need to check for endNode ourselves.
 				if (mSemanticTreeManager->isTopLevelNode(fragmentStartNode)) {
-					SemanticNode * const endNode = produceEndOfHandlerNode();
+					auto endNode = produceEndOfHandlerNode();
 					mSemanticTreeManager->addAfter(fragmentStartNode, endNode);
 					return endNode;
 				}
@@ -465,24 +460,24 @@ SemanticNode *PioneerStateMachineGenerator::copySynchronousFragment(
 		// Goto node pointing to a target of asynchronous node, if we were visited it already. If not, it will generate
 		// Goto by itself.
 		if (!isIf(asynchronousNode)) {
-			if (mVisitedNodes.contains(siblings.last()->id())) {
+			auto lastSiblingNonZoneNode = dynamic_cast<NonZoneNode *>(siblings.last());
+			if (mVisitedNodes.contains(lastSiblingNonZoneNode->id())) {
 				auto asynchronousNodeTarget = mSemanticTreeManager->nonSyntheticRightSibling(asynchronousNode);
 				if (!asynchronousNodeTarget) {
 					reportError(tr("Generation internal error, asynchronous node does not have target node."));
 					return nullptr;
 				}
-
 				auto gotoNode = produceGotoNode(asynchronousNodeTarget->id());
-				dynamic_cast<NonZoneNode *>(siblings.last())->appendSibling(gotoNode);
+				lastSiblingNonZoneNode->appendSibling(gotoNode);
 				return gotoNode;
 			} else {
-				return siblings.last();
+				return lastSiblingNonZoneNode;
 			}
 		} else {
 			auto ifNode = dynamic_cast<IfNode *>(siblings.last());
 			// This If node is copied without its end-of-handler node, so we need to check for endNode ourselves.
 			if (mSemanticTreeManager->isTopLevelNode(ifNode)) {
-				SemanticNode * const endNode = produceEndOfHandlerNode();
+				auto endNode = produceEndOfHandlerNode();
 				mSemanticTreeManager->addAfter(ifNode, endNode);
 				return endNode;
 			}
@@ -514,7 +509,7 @@ bool PioneerStateMachineGenerator::isAsynchronous(const SemanticNode * const nod
 	return false;
 }
 
-SemanticNode *PioneerStateMachineGenerator::produceEndOfHandlerNode()
+SimpleNode *PioneerStateMachineGenerator::produceEndOfHandlerNode()
 {
 	trace("End-of-handler");
 	qReal::Id syntheticId = qReal::Id::createElementId("synthetic", "synthetic", "EndOfHandler");
