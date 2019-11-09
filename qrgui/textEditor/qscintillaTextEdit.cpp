@@ -62,6 +62,11 @@ void QScintillaTextEdit::setCurrentLanguage(const LanguageInfo &language)
 	setTabWidth(mLanguage.tabSize);
 	if (mLanguage.foldingMargin >= 0)
 		setFolding(FoldStyle::BoxedTreeFoldStyle, mLanguage.foldingMargin);
+
+	setBraceMatching(QsciScintilla::SloppyBraceMatch);
+	setMatchedBraceBackgroundColor(Qt::lightGray);
+	setUnmatchedBraceBackgroundColor(Qt::red);
+
 	setFont(mFont);
 	setLexer(mLanguage.lexer);
 
@@ -176,10 +181,10 @@ void QScintillaTextEdit::setDefaultSettings()
 	// Whitespaces visibility
 	setWhitespaceVisibility(QsciScintilla::WsInvisible);
 
-	// Show margin with line numbers (up to 1000)
+	// Show margin with line numbers (up to 9999)
 	setMarginsBackgroundColor(QColor("gainsboro"));
 	setMarginLineNumbers(1, true);
-	setMarginWidth(1, QString("1000"));
+	setMarginWidth(1, QString("9999"));
 
 	// Autocompletion of lexems
 	setAutoCompletionSource(QsciScintilla::AcsAll);
@@ -194,7 +199,7 @@ void QScintillaTextEdit::setDefaultSettings()
 	setUnmatchedBraceForegroundColor(Qt::blue);
 
 	// EOL symbol
-#if defined Q_OS_X11
+#if defined Q_OS_LINUX
 	setEolMode(QsciScintilla::EolUnix);
 #elif defined Q_OS_WIN
 	setEolMode(QsciScintilla::EolWindows);
