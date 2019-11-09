@@ -86,8 +86,8 @@ NonZoneNode *SemanticTreeManager::parent(SemanticNode * const node)
 
 NonZoneNode *SemanticTreeManager::topLevelParent(SemanticNode * const node)
 {
-	NonZoneNode *aParent = parent(node);
-	while (!isTopLevelNode(aParent)) {
+	auto aParent = parent(node);
+	while (aParent && !isTopLevelNode(aParent)) {
 		aParent = parent(aParent);
 	}
 
@@ -105,8 +105,8 @@ bool SemanticTreeManager::isTopLevelNode(const NonZoneNode * const node)
 		return true;
 	}
 
-	const SemanticNode * const parent = static_cast<const NonZoneNode * const>(node)->parentZone()->parentNode();
-	return dynamic_cast<const RootNode * const>(parent) != nullptr;
+	auto parent = static_cast<const NonZoneNode * const>(node)->parentZone()->parentNode();
+	return parent && dynamic_cast<RootNode *>(parent) != nullptr;
 }
 
 void SemanticTreeManager::addToZone(generatorBase::semantics::ZoneNode * const zone, const qReal::Id &id)
