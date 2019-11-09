@@ -285,12 +285,11 @@
         <translation type="vanished">Остановить программу, исполняемую на квадрокоптере</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Lua language</source>
-        <translation>Язык Lua</translation>
+        <translation type="vanished">Язык Lua</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+49"/>
         <source>Generate Lua script for Pioneer Quadcopter</source>
         <translation>Генерировать скрипт на Lua для квадрокоптера &quot;Пионер&quot;</translation>
     </message>
