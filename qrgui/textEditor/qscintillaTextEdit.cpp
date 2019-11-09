@@ -60,6 +60,8 @@ void QScintillaTextEdit::setCurrentLanguage(const LanguageInfo &language)
 	mLanguage = language;
 	setIndentationsUseTabs(mLanguage.tabIndentation);
 	setTabWidth(mLanguage.tabSize);
+	if (mLanguage.foldingMargin >= 0)
+		setFolding(FoldStyle::BoxedTreeFoldStyle, mLanguage.foldingMargin);
 	setFont(mFont);
 	setLexer(mLanguage.lexer);
 
