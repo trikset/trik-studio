@@ -65,6 +65,7 @@ void DevicesConfigurationProvider::disconnectDevicesConfigurationProvider()
 	for (DevicesConfigurationProvider *provider : mConnectedProviders) {
 		provider->disconnectDevicesConfigurationProvider(this);
 	}
+	mConnectedProviders.clear();
 }
 
 void DevicesConfigurationProvider::deviceConfigurationChanged(const QString &robotId
