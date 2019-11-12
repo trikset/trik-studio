@@ -151,7 +151,7 @@ void QScintillaTextEdit::find()
 void QScintillaTextEdit::init()
 {
 	// For some reason c++11-style connections do not work here!
-	connect(this, SIGNAL(textChanged()), this, SLOT(emitTextWasModified()));
+	connect(this, &QScintillaTextEdit::textChanged, this, &QScintillaTextEdit::emitTextWasModified);
 	initFindModeConnections();
 	setDefaultSettings();
 	setCurrentLanguage(Languages::textFileInfo("*.txt"));
