@@ -70,7 +70,7 @@
         <translation>Файл с байткодом EV3</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+30"/>
         <source>Generate Ev3 Robot Byte Code File</source>
         <translation>Сгенерировать в байткод EV3</translation>
     </message>

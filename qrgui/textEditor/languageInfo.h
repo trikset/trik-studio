@@ -44,6 +44,9 @@ struct LanguageInfo
 	/// A size of the tab indent used in editor (in spaces).
 	int tabSize;
 
+	/// A margin to fold or negative (-1) if folding is disabled.
+	int foldingMargin;
+
 	/// The comments view for the current language.
 	QString lineCommentStart;
 	QString lineCommentEnd;
@@ -88,6 +91,7 @@ public:
 				, QObject::tr("Text File")                                   /* extension description */
 				, true                                                       /* tabs indentation */
 				, 8                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, QString()                                                  /* line comment start */
 				, QString()                                                  /* line comment end */
 				, QString()                                                  /* multiline comment start */
@@ -104,6 +108,7 @@ public:
 				, QObject::tr("C Language Source File")                      /* extension description */
 				, true                                                       /* tabs indentation */
 				, 8                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "//"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
@@ -120,6 +125,7 @@ public:
 				, QObject::tr("Russian Algorithmic Language Source File")    /* extension description */
 				, true                                                       /* tabs indentation */
 				, 8                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "//"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
@@ -137,6 +143,7 @@ public:
 				, QObject::tr("Python Source File")                          /* extension description */
 				, false                                                      /* tabs indentation */
 				, 2                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "#"                                                        /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "\"\"\""                                                   /* multiline comment start */
@@ -153,6 +160,7 @@ public:
 				, QObject::tr("Java Script Language Source File")            /* extension description */
 				, true                                                       /* tabs indentation */
 				, 4                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "//"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
@@ -169,6 +177,7 @@ public:
 				, QObject::tr("QtScript Language Source File")               /* extension description */
 				, true                                                       /* tabs indentation */
 				, 8                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "//"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
@@ -185,6 +194,7 @@ public:
 				, QObject::tr("F# Language Source File")                     /* extension description */
 				, false                                                      /* tabs indentation */
 				, 4                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "//"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "(*"                                                       /* multiline comment start */
@@ -202,6 +212,7 @@ public:
 				, QObject::tr("PascalABC Language Source File")              /* extension description */
 				, false                                                      /* tabs indentation */
 				, 4                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "--"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "{*"                                                       /* multiline comment start */
@@ -217,7 +228,8 @@ public:
 		return LanguageInfo{"lua"                                            /* extension */
 				, QObject::tr("Lua Language Source File")                    /* extension description */
 				, true                                                       /* tabs indentation */
-				, 8                                                          /* tab size */
+				, 4                                                          /* tab size */
+				, 2                                                          /* folding margin */
 				, "--"                                                       /* line comment start */
 				, QString()                                                  /* line comment end */
 				, "--[["                                                     /* multiline comment start */
