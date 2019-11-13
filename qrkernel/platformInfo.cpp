@@ -135,7 +135,7 @@ void PlatformInfo::enableHiDPISupport()
 		// Let Windows decide.
 		if(auto SetProcessDPIAware_ = (SetProcessDPIAware_t)QLibrary::resolve("user32", "SetProcessDPIAware")) {
 			if(SetProcessDPIAware_()) {
-				qputenv("QT_DEVICE_PIXEL_RATIO", QByteArray("1"));
+				qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
 				QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
 			} else {
 				auto err = GetLastError();
