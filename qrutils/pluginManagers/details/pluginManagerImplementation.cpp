@@ -59,6 +59,13 @@ QList<QObject *> PluginManagerImplementation::loadAllPlugins()
 
 QPair<QObject *, QString> PluginManagerImplementation::loadPluginByName(const QString &pluginName)
 {
+	if (pluginName == "robots-plugin.dll") {
+		qDebug() << "Starting to search robots-plugin";
+		if (mPluginsDir.exists(pluginName)) {
+			qDebug() << "Plugin " << pluginName << " exists";
+		}
+	}
+
 	QPluginLoader * const loader = new QPluginLoader(mPluginsDir.absoluteFilePath(pluginName), qApp);
 	loader->load();
 	QObject * const plugin = loader->instance();
