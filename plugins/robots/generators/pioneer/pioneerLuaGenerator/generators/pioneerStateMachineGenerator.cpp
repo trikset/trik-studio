@@ -585,7 +585,5 @@ void PioneerStateMachineGenerator::doDeferredGotoGeneration(const qReal::Id &nod
 
 void PioneerStateMachineGenerator::trace(const QString &message)
 {
-#ifdef TRACE
-	qDebug() << message;
-#endif
+	Q_UNUSED(message)
 }

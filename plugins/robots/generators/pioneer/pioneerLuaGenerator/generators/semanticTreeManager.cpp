@@ -254,8 +254,6 @@ NonZoneNode *SemanticTreeManager::produceNode(const qReal::Id &id)
 
 NonZoneNode *SemanticTreeManager::copy(NonZoneNode *node)
 {
-	qDebug() << "Cloning" << node->id();
-
 	if (isGotoNode(node)) {
 		SimpleNode * const gotoNode = mSemanticTree.produceSimple(node->id());
 		gotoNode->bindToSyntheticConstruction(SimpleNode::gotoNode);
