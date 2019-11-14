@@ -62,18 +62,6 @@ PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
 			, &PioneerLuaGeneratorPlugin::uploadProgram
 			, Qt::UniqueConnection
 	);
-
-	text::Languages::registerLanguage(text::LanguageInfo{ "lua"
-			, tr("Lua language")
-			, true
-			, 4
-			, "--"
-			, QString()
-			, "--[["
-			, "]]"
-			, nullptr
-			, {}
-	});
 }
 
 PioneerLuaGeneratorPlugin::~PioneerLuaGeneratorPlugin()
