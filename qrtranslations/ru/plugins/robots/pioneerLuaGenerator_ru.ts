@@ -109,7 +109,7 @@
     </message>
     <message>
         <location line="+10"/>
-        <location line="+110"/>
+        <location line="+108"/>
         <source>Generation internal error, zone contains zone node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: в семантическом дереве узел-зона содержит узел-зону в качестве непосредственного сына.</translation>
     </message>
