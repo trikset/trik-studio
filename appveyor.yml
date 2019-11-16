@@ -115,12 +115,12 @@ install:
   - dir C:\Qt
 
 
-before_build:
-  - curl https://raw.githubusercontent.com/MestreLion/git-tools/master/git-restore-mtime-bare > .fix-mtime.py
-  - python "%PYTHON_PATH%\Tools\scripts\2to3.py" -v -p -w -n -f all .fix-mtime.py
-  - sed -ri "s#line.(startswith|split)\(#line.\1\(b#g" .fix-mtime.py
-  - python .fix-mtime.py
-  - git submodule foreach --recursive python %cd%\.fix-mtime.py
+# before_build:
+#  - curl https://raw.githubusercontent.com/MestreLion/git-tools/master/git-restore-mtime-bare > .fix-mtime.py
+#  - python "%PYTHON_PATH%\Tools\scripts\2to3.py" -v -p -w -n -f all .fix-mtime.py
+#  - sed -ri "s#line.(startswith|split)\(#line.\1\(b#g" .fix-mtime.py
+#  - python .fix-mtime.py
+#  - git submodule foreach --recursive python %cd%\.fix-mtime.py
 
 
 build_script:
