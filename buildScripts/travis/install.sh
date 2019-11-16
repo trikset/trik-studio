@@ -11,6 +11,8 @@ case $TRAVIS_OS_NAME in
     TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass"
     brew install $TRIK_BREW_PACKAGES || brew upgrade $TRIK_BREW_PACKAGES
     wait $QT_INSTALLER_PID
+    echo "FINISHED Qt installation"
+    find $TRIK_QT/5.12.5 -name qmake -executable -type f
     ;;
   linux)
     docker pull trikset/linux-builder
