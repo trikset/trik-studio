@@ -11,7 +11,7 @@ mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
 cp -pR $BIN_DIR/libqrkernel*.dylib                                        "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrgraph*.dylib                                         "$BUNDLE_CONTENTS/Lib"
-#cp -pR $BIN_DIR/libquazip*.dylib                                          "$BUNDLE_CONTENTS/Lib"
+cp -P $(pkg-config --variable=libdir zlib)/libz*.dylib                       "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrrepo*.dylib                                          "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrutils*.dylib                                         "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrtext*.dylib                                          "$BUNDLE_CONTENTS/Lib"
