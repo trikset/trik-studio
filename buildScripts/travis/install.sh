@@ -12,7 +12,7 @@ case $TRAVIS_OS_NAME in
     brew install $TRIK_BREW_PACKAGES || brew upgrade $TRIK_BREW_PACKAGES
     wait $QT_INSTALLER_PID
     echo "FINISHED Qt installation"
-    find $TRIK_QT/5.12.6 -name qmake -executable -type f
+    find $TRIK_QT/5.12.6 -name qmake -perm +111 -type f -or -type l
     ;;
   linux)
     docker pull trikset/linux-builder
