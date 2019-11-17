@@ -69,7 +69,7 @@ public:
 			, generatorBase::semantics::SemanticNode * const nextNode);
 
 	/// Returns true if given node is a direct child of a root node.
-	static bool isTopLevelNode(const generatorBase::semantics::SemanticNode * const node);
+	static bool isTopLevelNode(const generatorBase::semantics::NonZoneNode * const node);
 
 	/// Searches for a first sibling for which given predicate is true.
 	static generatorBase::semantics::SemanticNode *findSibling(generatorBase::semantics::SemanticNode *node

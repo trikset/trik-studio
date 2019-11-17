@@ -93,7 +93,7 @@
         <translation>Диаграмма не открыта</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/generators/semanticTreeManager.cpp" line="+124"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/generators/semanticTreeManager.cpp" line="+122"/>
         <source>Generation internal error, please send bug report to developers.Additional info: zone node %1 can not be used as labeled node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: узел зоны %1 не может быть использован как помеченный узел.</translation>
     </message>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <location line="+10"/>
-        <location line="+110"/>
+        <location line="+108"/>
         <source>Generation internal error, zone contains zone node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: в семантическом дереве узел-зона содержит узел-зону в качестве непосредственного сына.</translation>
     </message>
@@ -415,7 +415,7 @@
         <translation>Вложенные условные конструкции не допускаются.</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+65"/>
         <source>Generation internal error, zone node corresponds to a block in a diagram.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: узел-зона семантического дерева соответствует блоку на диаграмме. Узел-зона может быть только частью представления блока.</translation>
     </message>
@@ -430,12 +430,12 @@
         <translation>Внутренняя ошибка генерации. Дополнительная информация: программа неожиданно закончилась. Такие ошибки должны ловиться при предварительной проверке программы.</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>Generation internal error, asynchronous node does not have target node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: асинхронный узел не имеет узла, которому надо передать управления после асинхронной операции.</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+21"/>
         <source>There is a problem with If construction or with loops (loops without sending requests to the autopilot through &quot;Takeoff&quot;, &quot;Landing&quot;, &quot;Go to local point&quot; blocks are not supported yet).</source>
         <translation>В диаграмме присутстует ошибка в использовании условных конструкций или циклов (циклы без использования обращений к автопилоту через блоки &quot;Взлет&quot;, &quot;Посадка&quot;, &quot;Лететь в точку (ЛК)&quot; пока не поддержаны).</translation>
     </message>
