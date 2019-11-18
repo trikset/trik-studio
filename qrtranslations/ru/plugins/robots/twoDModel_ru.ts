@@ -977,7 +977,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Can&apos;t load this file. Try anouther one.</source>
+        <source>Cannot load file. Try another one.</source>
         <translation>Невозможно загрузить выбранный файл. Попробуйте другой.</translation>
     </message>
 </context>
