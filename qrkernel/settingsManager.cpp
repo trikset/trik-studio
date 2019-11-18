@@ -27,7 +27,6 @@ SettingsManager::SettingsManager()
 	: mSettings(QSettings::IniFormat, QSettings::UserScope, "CyberTech Labs", "TRIK Studio")
 {
 	initDefaultValues();
-	qDebug() << mSettings.fileName();
 	load();
 }
 
