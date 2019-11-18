@@ -748,11 +748,11 @@ void TwoDModelScene::addImage()
 		}
 	}
 
-	model::Image *newImage = new model::Image(loadFileName, false);
-	const QSize size = newImage->preferedSize();
+	auto newImage = new model::Image(loadFileName, false);
+	auto size = newImage->preferedSize();
 	if (size.width() == 0 || size.height() == 0) {
 		if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Error")
-				, tr("Can't load this file. Try anouther one.")
+				, tr("Cannot load file. Try another one.")
 				, QMessageBox::StandardButtons(QMessageBox::Retry | QMessageBox::Close))
 					== QMessageBox::Retry) {
 			addImage();
@@ -761,7 +761,7 @@ void TwoDModelScene::addImage()
 	}
 	mDrawingAction = image;
 	const QRect rect(QPoint(-size.width() / 2, -size.height() / 2), size);
-	twoDModel::items::ImageItem *result = new twoDModel::items::ImageItem(newImage, rect);
+	auto result = new twoDModel::items::ImageItem(newImage, rect);
 	result->setMemorize(true);
 	mModel.worldModel().addImageItem(result);
 	registerInUndoStack(result);
