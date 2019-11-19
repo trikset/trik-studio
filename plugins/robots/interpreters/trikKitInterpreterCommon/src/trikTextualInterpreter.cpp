@@ -49,7 +49,6 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 		"for(var i = 0; i < argLength; i++) {"
 		"if (arguments[i] instanceof Array) {res += arrayPPinternal(arguments[i]);"
 		"} else {res += arguments[i].toString();}"
-		"if (i != argLength - 1) { res += \",\";}"
 		"};"
 		"brick.log(res);"
 		"return res;"
