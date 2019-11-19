@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+186"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+193"/>
         <source>Bogus input values</source>
         <translation type="unfinished"></translation>
     </message>
