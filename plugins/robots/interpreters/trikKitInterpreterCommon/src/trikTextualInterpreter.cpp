@@ -57,13 +57,13 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 	"script.system = function() {print('system is disabled in the interpreter');};";
 
 const QString pyOverrides ="\ndef print(args): brick.log(args);"
-			   "script.random = brick.random;"
-			   "script.wait = brick.wait;"
-			   "script.time = brick.time;"
-			   "script.readAll = brick.readAll;"
-			   "script.timer = brick.timer;"
+			   "myscript.random = brick.random;"
+			   "myscript.wait = brick.wait;"
+			   "myscript.time = brick.time;"
+			   "myscript.readAll = brick.readAll;"
+			   "myscript.timer = brick.timer;"
 			   "Date.now = brick.time;"
-			   "script.system = lambda command, synchronously=True: print('system is disabled in the interpreter');\n";
+			   "myscript.system = lambda command, synchronously=True: print('system is disabled in the interpreter');\n";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
