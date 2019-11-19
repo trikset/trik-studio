@@ -471,7 +471,7 @@ void TwoDModelWidget::saveWorldModel()
 		saveFileName += ".xml";
 	}
 
-	const QDomDocument save = generateWordModelWithBlobsXml();
+	const QDomDocument save = generateWorldModelWithBlobsXml();
 
 	utils::OutFile saveFile(saveFileName);
 	saveFile() << "<?xml version='1.0' encoding='utf-8'?>\n";
@@ -651,7 +651,7 @@ SensorItem *TwoDModelWidget::sensorItem(const kitBase::robotModel::PortInfo &por
 
 void TwoDModelWidget::saveWorldModelToRepo()
 {
-	emit mModel.modelChanged(generateWordModelXml());
+	emit mModel.modelChanged(generateWorldModelXml());
 }
 
 void TwoDModelWidget::saveBlobsToRepo()
@@ -659,7 +659,7 @@ void TwoDModelWidget::saveBlobsToRepo()
 	emit mModel.blobsChanged(generateBlobsXml());
 }
 
-QDomDocument TwoDModelWidget::generateWordModelXml() const
+QDomDocument TwoDModelWidget::generateWorldModelXml() const
 {
 	return mModel.serialize();
 }
@@ -673,9 +673,9 @@ QDomDocument TwoDModelWidget::generateBlobsXml() const
 	return save;
 }
 
-QDomDocument TwoDModelWidget::generateWordModelWithBlobsXml() const
+QDomDocument TwoDModelWidget::generateWorldModelWithBlobsXml() const
 {
-	QDomDocument wordModelXml = generateWordModelXml();
+	QDomDocument wordModelXml = generateWorldModelXml();
 	QDomDocument blobsXml = generateBlobsXml();
 	wordModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
 	return wordModelXml;
@@ -693,7 +693,6 @@ void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocumen
 	mModel.deserialize(worldModel, blobs);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
-	saveWorldModelToRepo();
 }
 
 Model &TwoDModelWidget::model() const
