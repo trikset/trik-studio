@@ -713,7 +713,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+315"/>
+        <location line="+314"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

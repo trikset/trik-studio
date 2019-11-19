@@ -1044,7 +1044,7 @@
         <translation>Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+315"/>
+        <location line="+314"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

@@ -20,7 +20,7 @@ using namespace twoDModel::commands;
 LoadWorldCommand::LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument data)
 	: mWidget(twoDwidget)
 	, mNewWorld(data)
-	, mOldWorld(mWidget.generateWordModelWithBlobsXml())
+	, mOldWorld(mWidget.generateWorldModelWithBlobsXml())
 {
 }
 
@@ -49,4 +49,6 @@ void LoadWorldCommand::loadWorld(QDomDocument world)
 	}
 
 	mWidget.loadXmls(world, blobs, true);
+	mWidget.model().modelChanged(mWidget.generateWorldModelXml());
+	mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }
