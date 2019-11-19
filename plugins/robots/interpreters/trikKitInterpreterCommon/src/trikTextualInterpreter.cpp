@@ -63,7 +63,7 @@ const QString pyOverrides ="\ndef print(args): brick.log(args);"
 			   "myscript.readAll = brick.readAll;"
 			   "myscript.timer = brick.timer;"
 			   "Date.now = brick.time;"
-			   "myscript.system = lambda command, synchronously=True: print('system is disabled in the interpreter');\n";
+			   "script.system = lambda command, synchronously=True: print('system is disabled');\n";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
