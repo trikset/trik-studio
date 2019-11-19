@@ -79,7 +79,7 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)
 {
 	if (extension.endsWith("py") && QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty()) {
-		mMainWindow->errorReporter()->addError("Python is disabled");
+		mMainWindow->errorReporter()->addError(tr("TRIK_PYTHONPATH must be set correctly to run Python script."));
 		return;
 	}
 
