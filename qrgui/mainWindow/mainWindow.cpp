@@ -696,6 +696,14 @@ QWidget *MainWindow::currentTab()
 	return mUi->tabs->currentWidget();
 }
 
+QList<QWidget*> MainWindow::allTabs()
+{
+	QList<QWidget*> result;
+	for (int i = 0; i < mUi->tabs->count(); i++)
+		result << mUi->tabs->widget(i);
+	return result;
+}
+
 void MainWindow::openTab(QWidget *tab, const QString &title)
 {
 	if (mUi->tabs->indexOf(tab) == -1) {

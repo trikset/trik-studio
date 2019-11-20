@@ -91,6 +91,7 @@ public:
 	virtual void deleteElementFromDiagram(const Id &id) = 0;
 
 	virtual QWidget *currentTab() = 0;
+	virtual QList<QWidget*> allTabs() = 0;
 	virtual void openTab(QWidget *tab, const QString &title) = 0;
 	virtual void closeTab(QWidget *tab) = 0;
 	/// Sets text on the header of the tab containing the given widget or does nothing if such tab was not found.

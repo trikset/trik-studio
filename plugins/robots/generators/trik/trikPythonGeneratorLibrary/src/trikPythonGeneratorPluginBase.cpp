@@ -29,6 +29,7 @@
 #include <utils/robotCommunication/stopRobotProtocol.h>
 #include <utils/robotCommunication/uploadProgramProtocol.h>
 #include <utils/robotCommunication/networkCommunicationErrorReporter.h>
+#include <qrgui/textEditor/qscintillaTextEdit.h>
 
 #include "trikPythonMasterGenerator.h"
 #include "emptyShell.h"
@@ -193,6 +194,16 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
 		disableButtons();
 		mUploadProgramProtocol->run(fileInfo);
+		auto tabs = mMainWindowInterface->allTabs();
+		tabs.removeOne(mMainWindowInterface->currentTab());
+		for (auto tab : tabs) {
+			if (qReal::text::QScintillaTextEdit * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
+				auto ext = code->currentLanguage().extension;
+				if (ext == "js" || ext == "py") {
+					mUploadProgramProtocol->run(QFileInfo(mTextManager->path(code)));
+				}
+			}
+		}
 	} else {
 		QLOG_ERROR() << "Code generation failed, aborting";
 	}

@@ -68,7 +68,7 @@
 <context>
     <name>trik::python::TrikPythonGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+71"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+72"/>
         <source>Network operation timed out</source>
         <translation type="unfinished"></translation>
     </message>

@@ -123,7 +123,7 @@
 <context>
     <name>trik::qts::TrikQtsGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikQtsGeneratorLibrary/src/trikQtsGeneratorPluginBase.cpp" line="+71"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikQtsGeneratorLibrary/src/trikQtsGeneratorPluginBase.cpp" line="+72"/>
         <source>Network operation timed out</source>
         <translation>Не удалось получить ответ от робота, проверьте настройки, проверьте, включён ли робот</translation>
     </message>

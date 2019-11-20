@@ -175,6 +175,11 @@ QWidget *NullMainWindow::currentTab()
 	return nullptr;
 }
 
+QList<QWidget*> NullMainWindow::allTabs()
+{
+	return QList<QWidget*>();
+}
+
 void NullMainWindow::openTab(QWidget *tab, const QString &title)
 {
 	Q_UNUSED(tab)
