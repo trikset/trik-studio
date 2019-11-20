@@ -58,6 +58,7 @@ cp -pr $QT_DIR/lib/libicuuc.so*                                         $PWD/../
 
 cp     $QT_DIR/plugins/platforms/libqxcb.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
+cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/
 
 rsync -av /usr/lib/$(uname -i)-linux-gnu/libstdc++.so*                               $PWD/../data/lib/

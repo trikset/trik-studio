@@ -369,6 +369,11 @@
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+11"/>
+        <source>Incorrect image, please try anouther one</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
@@ -634,6 +639,16 @@
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+9"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot load file. Try another one.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
@@ -698,7 +713,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+315"/>
+        <location line="+314"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

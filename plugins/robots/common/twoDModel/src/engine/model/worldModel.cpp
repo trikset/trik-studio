@@ -266,6 +266,12 @@ void WorldModel::addImageItem(items::ImageItem *imageItem)
 	mImages[imageItem->image()->imageId()] = imageItem->image();
 	mOrder[id] = mOrder.size();
 	connect(imageItem, &items::ImageItem::internalImageChanged, this, &WorldModel::blobsChanged);
+	connect(imageItem, &items::ImageItem::internalImageChanged, this, [=](){
+			auto imageSize = imageItem->image()->preferedSize();
+			if (imageSize.height() == 0 || imageSize.width() == 0) {
+				mErrorReporter->addWarning(tr("Incorrect image, please try anouther one"));
+			}
+		});
 	emit imageItemAdded(imageItem);
 	if (!imageItem->isBackground()) {
 		emit blobsChanged();
