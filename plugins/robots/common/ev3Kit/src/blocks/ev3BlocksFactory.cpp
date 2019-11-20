@@ -177,6 +177,9 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 			result
 					<< id("Ev3CalibrateGyroscope")
 					;
+		} else {
+			result << id("SwitchBlock")
+					;
 		}
 	}
 
