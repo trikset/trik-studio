@@ -61,7 +61,6 @@ const QString pyOverrides ="\ndef print(args): brick.log(args);"
 			   "script.time = brick.time;"
 			   "script.readAll = brick.readAll;"
 			   "script.timer = brick.timer;"
-			   "Date.now = brick.time;"
 			   "script.system = lambda command, synchronously=True: print('system is disabled');\n";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
