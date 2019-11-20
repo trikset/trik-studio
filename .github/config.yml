@@ -1,11 +1,3 @@
-
-#Configuration for TODO Probot
-todo:
-  keyword: "@todoIssue"
-
-
-
-
 # Configuration for request-info - https://github.com/behaviorbot/request-info
 # *Required* Comment to reply with
 requestInfoReplyComment: >
