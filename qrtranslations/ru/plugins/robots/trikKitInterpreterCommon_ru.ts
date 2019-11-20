@@ -165,12 +165,12 @@
     </message>
     <message>
         <location line="-30"/>
-        <location line="+285"/>
+        <location line="+286"/>
         <source>Trying to read from file %1 failed</source>
         <translation>Не удалось открыть файл %1</translation>
     </message>
     <message>
-        <location line="-230"/>
+        <location line="-231"/>
         <source>No configured motor on port: %1</source>
         <translation>Не найден сконфигурированный  мотор на порту: %1</translation>
     </message>
