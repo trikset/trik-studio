@@ -376,8 +376,9 @@ void TrikBrick::wait(int milliseconds)
 
 	QEventLoop loop;
 
-	QScopedPointer<utils::AbstractTimer> t(timeline->produceTimer());
-	connect(t.data(), &utils::AbstractTimer::timeout, &loop, &QEventLoop::quit);
+	auto t = timeline->produceTimer();
+	connect(t, &utils::AbstractTimer::timeout, &loop, &QEventLoop::quit);
+	connect(&loop, &QObject::destroyed, t, &QObject::deleteLater);
 
 	// This one is from brick.reset(), that is called for toolbar Stop button
 	connect(this, &TrikBrick::stopWaiting, &loop, &QEventLoop::quit);
