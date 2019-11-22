@@ -197,17 +197,19 @@ void TrikQtsGeneratorPluginBase::uploadProgram()
 
 	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
 		disableButtons();
-		mUploadProgramProtocol->run(fileInfo);
+		QList<QFileInfo> files;
+		files << fileInfo;
 		auto tabs = mMainWindowInterface->allTabs();
 		tabs.removeOne(mMainWindowInterface->currentTab());
 		for (auto &&tab : tabs) {
 			if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
 				auto const &ext = code->currentLanguage().extension;
 				if (ext == "js" || ext == "py") {
-					mUploadProgramProtocol->run(QFileInfo(mTextManager->path(code)));
+					files << QFileInfo(mTextManager->path(code));
 				}
 			}
 		}
+		mUploadProgramProtocol->run(files);
 	} else {
 		QLOG_ERROR() << "Code generation failed, aborting";
 	}

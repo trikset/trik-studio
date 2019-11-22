@@ -41,7 +41,7 @@ public:
 	~UploadProgramProtocol() override;
 
 	/// Upload program from given file to a robot.
-	void run(const QFileInfo &programToUpload);
+	void run(const QList<QFileInfo> programToUpload);
 
 signals:
 	/// Emitted when protocol completed successfully.
