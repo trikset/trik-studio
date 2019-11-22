@@ -138,22 +138,22 @@
         <translation>Генерировать JavaScript код</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Upload program</source>
         <translation>Загрузить программу</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Run program</source>
         <translation>Загрузить и выполнить программу</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Stop robot</source>
         <translation>Остановить робота</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Generate TRIK Code</source>
         <translation>Сгенерировать JavaScript код для TRIK</translation>
     </message>
