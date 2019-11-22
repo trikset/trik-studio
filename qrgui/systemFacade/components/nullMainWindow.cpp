@@ -175,7 +175,7 @@ QWidget *NullMainWindow::currentTab()
 	return nullptr;
 }
 
-QList<QWidget*> NullMainWindow::allTabs()
+QList<QWidget*> NullMainWindow::allTabs() const
 {
 	return QList<QWidget*>();
 }

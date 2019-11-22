@@ -696,7 +696,7 @@ QWidget *MainWindow::currentTab()
 	return mUi->tabs->currentWidget();
 }
 
-QList<QWidget*> MainWindow::allTabs()
+QList<QWidget*> MainWindow::allTabs() const
 {
 	QList<QWidget*> result;
 	for (int i = 0; i < mUi->tabs->count(); i++)

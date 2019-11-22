@@ -129,7 +129,7 @@ public:
 
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
 	QWidget *currentTab() override;
-	QList<QWidget*> allTabs() override;
+	QList<QWidget*> allTabs() const override;
 	void openTab(QWidget *tab, const QString &title) override;
 	void closeTab(QWidget *tab) override;
 

@@ -196,9 +196,9 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 		mUploadProgramProtocol->run(fileInfo);
 		auto tabs = mMainWindowInterface->allTabs();
 		tabs.removeOne(mMainWindowInterface->currentTab());
-		for (auto tab : tabs) {
-			if (qReal::text::QScintillaTextEdit * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
-				auto ext = code->currentLanguage().extension;
+		for (auto &&tab : tabs) {
+			if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
+				auto const &ext = code->currentLanguage().extension;
 				if (ext == "js" || ext == "py") {
 					mUploadProgramProtocol->run(QFileInfo(mTextManager->path(code)));
 				}
