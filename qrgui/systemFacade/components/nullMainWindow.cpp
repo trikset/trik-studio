@@ -177,7 +177,7 @@ QWidget *NullMainWindow::currentTab()
 
 QList<QWidget*> NullMainWindow::allTabs() const
 {
-	return QList<QWidget*>();
+	return {};
 }
 
 void NullMainWindow::openTab(QWidget *tab, const QString &title)

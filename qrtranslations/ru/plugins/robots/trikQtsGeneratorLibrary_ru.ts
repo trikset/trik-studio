@@ -173,6 +173,11 @@
         <translation>Остановить выполнение программы для TRIK</translation>
     </message>
     <message>
+        <location line="+64"/>
+        <source>There are no files to upload. You must open or generate at least one *.js or *.py file.</source>
+        <translation>Нет файлов для загрузки. Вы должны открыть или сгенерировать хотя бы один *.js или *.py файл.</translation>
+    </message>
+    <message>
         <source>No connection to robot</source>
         <translation type="vanished">Нет соединения с роботом, проверьте настройки, проверьте, включён ли робот</translation>
     </message>

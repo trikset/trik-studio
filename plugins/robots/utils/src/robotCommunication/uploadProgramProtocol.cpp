@@ -38,7 +38,7 @@ UploadProgramProtocol::~UploadProgramProtocol()
 {
 }
 
-void UploadProgramProtocol::run(const QList<QFileInfo> programsToUpload)
+void UploadProgramProtocol::run(const QList<QFileInfo> &programsToUpload)
 {
 	mProtocol->setAction(mWaitingForUploadingComplete
 			, [programsToUpload](TcpRobotCommunicatorInterface &communicator) {

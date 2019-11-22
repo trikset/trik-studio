@@ -193,14 +193,9 @@ void TrikPythonGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExt
 
 void TrikPythonGeneratorPluginBase::uploadProgram()
 {
-	const QFileInfo fileInfo = generateCodeForProcessing();
-
-	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
-		disableButtons();
+	if (mUploadProgramProtocol) {
 		QList<QFileInfo> files;
-		files << fileInfo;
-		auto tabs = mMainWindowInterface->allTabs();
-		tabs.removeOne(mMainWindowInterface->currentTab());
+		auto const &tabs = mMainWindowInterface->allTabs();
 		for (auto &&tab : tabs) {
 			if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
 				auto const &ext = code->currentLanguage().extension;
@@ -209,9 +204,15 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 				}
 			}
 		}
-		mUploadProgramProtocol->run(files);
+		if (!files.isEmpty()) {
+			disableButtons();
+			mUploadProgramProtocol->run(files);
+		} else {
+			mMainWindowInterface->errorReporter()->addError(
+					tr("There are no files to upload. You must open or generate at least one *.js or *.py file."));
+		}
 	} else {
-		QLOG_ERROR() << "Code generation failed, aborting";
+		QLOG_ERROR() << "Upload program protocol is not initialized";
 	}
 }
 
