@@ -68,7 +68,7 @@
 <context>
     <name>trik::qts::TrikQtsGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikQtsGeneratorLibrary/src/trikQtsGeneratorPluginBase.cpp" line="+71"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikQtsGeneratorLibrary/src/trikQtsGeneratorPluginBase.cpp" line="+72"/>
         <source>Network operation timed out</source>
         <translation type="unfinished"></translation>
     </message>
@@ -83,22 +83,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Upload program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Stop robot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Generate TRIK Code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -115,6 +115,11 @@
     <message>
         <location line="+1"/>
         <source>Stop TRIK Robot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+64"/>
+        <source>There are no files to upload. You must open or generate at least one *.js or *.py file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

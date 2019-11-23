@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+843"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+850"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -781,9 +781,9 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+111"/>
         <location line="+16"/>
-        <location line="+24"/>
+        <location line="+23"/>
         <source>Shape Editor</source>
         <translation>Редактор формы фигур</translation>
     </message>
@@ -793,7 +793,7 @@
         <translation>Текстовый редактор</translation>
     </message>
     <message>
-        <location line="+226"/>
+        <location line="+224"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1027"/>
+        <location line="-1030"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -832,12 +832,12 @@ WARNING: The settings will be restored after application restart</source>
 ВНИМАНИЕ: Настройки будут сброшены после перезапуска приложения</translation>
     </message>
     <message>
-        <location line="+409"/>
+        <location line="+408"/>
         <source>Could not save file, try to save it to another place</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+625"/>
+        <location line="+629"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
@@ -912,7 +912,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished">Не получилось открыть %1</translation>
     </message>
     <message>
-        <location line="+197"/>
+        <location line="+196"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>

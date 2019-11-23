@@ -180,7 +180,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	// here then we have some problems with correct main window initialization
 	// beacuse of total event loop blocking by plugins. So waiting for main
 	// window initialization complete and then loading plugins.
-	QTimer::singleShot(50, this, SLOT(initPluginsAndStartWidget()));
+	QTimer::singleShot(50, this, &MainWindow::initPluginsAndStartWidget);
 }
 
 void MainWindow::connectActions()
@@ -189,7 +189,7 @@ void MainWindow::connectActions()
 	mUi->actionShow_alignment->setChecked(SettingsManager::value("ShowAlignment").toBool());
 	mUi->actionSwitch_on_grid->setChecked(SettingsManager::value("ActivateGrid").toBool());
 	mUi->actionSwitch_on_alignment->setChecked(SettingsManager::value("ActivateAlignment").toBool());
-	connect(mUi->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
+	connect(mUi->actionQuit, &QAction::triggered, this, &MainWindow::close);
 	connect(mUi->actionRestore_default_settings, &QAction::triggered, this, [this](){
 		if (utils::QRealMessageBox::question(this, tr("Restore default settings"),
 				tr("Do you realy want to restore default settings?"
@@ -206,14 +206,16 @@ void MainWindow::connectActions()
 		}
 	});
 
-	connect(mUi->actionSave, SIGNAL(triggered()), this, SLOT(tryToSave()));
-	connect(mUi->actionSave_as, SIGNAL(triggered()), mProjectManager, SLOT(suggestToSaveAs()));
-	connect(mUi->actionSave_diagram_as_a_picture, SIGNAL(triggered()), this, SLOT(saveDiagramAsAPicture()));
-	connect(mUi->actionPrint, SIGNAL(triggered()), this, SLOT(print()));
-	connect(mUi->actionMakeSvg, SIGNAL(triggered()), this, SLOT(makeSvg()));
+	connect(mUi->actionSave, &QAction::triggered, this, &MainWindow::tryToSave);
+	connect(mUi->actionSave_as, &QAction::triggered, mProjectManager, &ProjectManagerWrapper::suggestToSaveAs);
+	connect(mUi->actionSave_diagram_as_a_picture, &QAction::triggered, this, &MainWindow::saveDiagramAsAPicture);
+	connect(mUi->actionPrint, &QAction::triggered, this, &MainWindow::print);
+	connect(mUi->actionMakeSvg, &QAction::triggered, this, &MainWindow::makeSvg);
 
-	connect(mUi->actionNewProject, SIGNAL(triggered()), this, SLOT(createProject()));
-	connect(mUi->actionNew_Diagram, SIGNAL(triggered()), mProjectManager, SLOT(suggestToCreateDiagram()));
+	connect(mUi->actionNewProject, &QAction::triggered
+			, this, static_cast<void (MainWindow::*)()>(&MainWindow::createProject));
+	connect(mUi->actionNew_Diagram, &QAction::triggered
+			, mProjectManager, &ProjectManagerWrapper::suggestToCreateDiagram);
 
 	connect(mUi->logicalModelExplorer, &ModelExplorer::elementRemoved
 			, this, &MainWindow::deleteFromLogicalExplorer);
@@ -267,12 +269,12 @@ void MainWindow::connectActions()
 	connect(mUi->actionUndo, &QAction::triggered, mController, &Controller::undo);
 	connect(mUi->actionRedo, &QAction::triggered, mController, &Controller::redo);
 
-	connect(mUi->actionPreferences, SIGNAL(triggered()), this, SLOT(showPreferencesDialog()));
+	connect(mUi->actionPreferences, &QAction::triggered, this, &MainWindow::showPreferencesDialog);
 
-	connect(mUi->actionShow_grid, SIGNAL(toggled(bool)), this, SLOT(showGrid(bool)));
-	connect(mUi->actionShow_alignment, SIGNAL(toggled(bool)), this, SLOT(showAlignment(bool)));
-	connect(mUi->actionSwitch_on_grid, SIGNAL(toggled(bool)), this, SLOT(switchGrid(bool)));
-	connect(mUi->actionSwitch_on_alignment, SIGNAL(toggled(bool)), this, SLOT(switchAlignment(bool)));
+	connect(mUi->actionShow_grid, &QAction::toggled, this, &MainWindow::showGrid);
+	connect(mUi->actionShow_alignment, &QAction::toggled, this, &MainWindow::showAlignment);
+	connect(mUi->actionSwitch_on_grid, &QAction::toggled, this, &MainWindow::switchGrid);
+	connect(mUi->actionSwitch_on_alignment, &QAction::toggled, this, &MainWindow::switchAlignment);
 	SettingsListener::listen("ShowGrid", mUi->actionShow_grid, &QAction::setChecked);
 	SettingsListener::listen("ShowAlignment", mUi->actionShow_alignment, &QAction::setChecked);
 	SettingsListener::listen("ActivateGrid", mUi->actionSwitch_on_grid, &QAction::setChecked);
@@ -282,15 +284,15 @@ void MainWindow::connectActions()
 	connect(mUi->actionShow_all_text, &QAction::triggered
 			, [](bool checked) { SettingsManager::setValue("hideNonHardLabels", !checked); });
 
-	connect(mUi->actionHelp, SIGNAL(triggered()), this, SLOT(showHelp()));
+	connect(mUi->actionHelp, &QAction::triggered, this, &MainWindow::showHelp);
 	mUi->actionAbout->setText(mUi->actionAbout->text()
 			+ mToolManager->customizer()->windowTitle().remove(mToolManager->customizer()->productVersion()));
-	connect(mUi->actionAbout, SIGNAL(triggered()), this, SLOT(showAbout()));
-	connect(mUi->actionOpenLogs, SIGNAL(triggered()), this, SLOT(openLogs()));
+	connect(mUi->actionAbout, &QAction::triggered, this, &MainWindow::showAbout);
+	connect(mUi->actionOpenLogs, &QAction::triggered, this, &MainWindow::openLogs);
 
-	connect(mUi->actionGesturesShow, SIGNAL(triggered()), this, SLOT(showGestures()));
+	connect(mUi->actionGesturesShow, &QAction::triggered, this, &MainWindow::showGestures);
 
-	connect(mUi->actionFullscreen, SIGNAL(triggered()), this, SLOT(fullscreen()));
+	connect(mUi->actionFullscreen, &QAction::triggered, this, &MainWindow::fullscreen);
 	connect(mUi->actionFullscreen, &QAction::changed, this, [=]() {
 		const int indexOfFullscreen = mUi->viewToolbar->actions().indexOf(mUi->actionFullscreen);
 		if (indexOfFullscreen > 0) {
@@ -299,11 +301,9 @@ void MainWindow::connectActions()
 		}
 	});
 
-	connect(mFindReplaceDialog, SIGNAL(replaceClicked(QStringList&))
-			, mFindHelper, SLOT(handleReplaceDialog(QStringList&)));
-	connect(mFindReplaceDialog, SIGNAL(findModelByName(QStringList))
-			, mFindHelper, SLOT(handleFindDialog(QStringList)));
-	connect(mFindReplaceDialog, SIGNAL(chosenElement(qReal::Id)), mFindHelper, SLOT(handleRefsDialog(qReal::Id)));
+	connect(mFindReplaceDialog, &FindReplaceDialog::replaceClicked, mFindHelper, &FindManager::handleReplaceDialog);
+	connect(mFindReplaceDialog, &FindReplaceDialog::findModelByName, mFindHelper, &FindManager::handleFindDialog);
+	connect(mFindReplaceDialog, &FindReplaceDialog::chosenElement, mFindHelper, &FindManager::handleRefsDialog);
 
 	SettingsListener::listen("PaletteRepresentation", this, &MainWindow::changePaletteRepresentation);
 	SettingsListener::listen("PaletteIconsInARowCount", this, &MainWindow::changePaletteRepresentation);
@@ -311,16 +311,16 @@ void MainWindow::connectActions()
 	SettingsListener::listen("pathToImages", this, &MainWindow::updatePaletteIcons);
 	connect(&mPreferencesDialog, &PreferencesDialog::settingsApplied, this, &qReal::MainWindow::applySettings);
 
-	connect(mController, SIGNAL(canUndoChanged(bool)), mUi->actionUndo, SLOT(setEnabled(bool)));
-	connect(mController, SIGNAL(canRedoChanged(bool)), mUi->actionRedo, SLOT(setEnabled(bool)));
-	connect(mController, SIGNAL(modifiedChanged(bool)), mProjectManager, SLOT(setUnsavedIndicator(bool)));
+	connect(mController, &Controller::canUndoChanged, mUi->actionUndo, &QAction::setEnabled);
+	connect(mController, &Controller::canRedoChanged, mUi->actionRedo, &QAction::setEnabled);
+	connect(mController, &Controller::modifiedChanged, mProjectManager, &ProjectManagerWrapper::setUnsavedIndicator);
 
 	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::changeWindowTitle);
-	connect(mTextManager, SIGNAL(textChanged(bool)), this, SLOT(setTextChanged(bool)));
+	connect(mTextManager, &text::TextManager::textChanged, this, &MainWindow::setTextChanged);
 
 	connect(mProjectManager, &ProjectManager::afterOpen, mUi->paletteTree, &PaletteTree::refreshUserPalettes);
 	connect(mProjectManager, &ProjectManager::closed, mUi->paletteTree, &PaletteTree::refreshUserPalettes);
-	connect(mProjectManager, SIGNAL(closed()), mController, SLOT(projectClosed()));
+	connect(mProjectManager, &ProjectManager::closed, mController, &Controller::projectClosed);
 
 	connect(mUi->propertyEditor, &PropertyEditorView::shapeEditorRequested, this, static_cast<void (MainWindow::*)
 			(const QPersistentModelIndex &, int, const QString &, bool)>(&MainWindow::openShapeEditor));
@@ -561,7 +561,6 @@ void MainWindow::refreshRecentProjectsList(const QString &fileName)
 	}
 
 	previousString.clear();
-	qDebug() << previousString;
 	if (mRecentProjectsLimit > 0) {
 		previousList.push_front(fileName);
 		QStringListIterator iterator(previousList);
@@ -589,13 +588,13 @@ void MainWindow::openRecentProjectsMenu()
 
 	for (QString projectPath : recentProjects) {
 		mRecentProjectsMenu->addAction(projectPath);
-		QObject::connect(mRecentProjectsMenu->actions().last(), SIGNAL(triggered())
-				, mRecentProjectsMapper, SLOT(map()));
+		QObject::connect(mRecentProjectsMenu->actions().last(), &QAction::triggered
+				, mRecentProjectsMapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
 		mRecentProjectsMapper->setMapping(mRecentProjectsMenu->actions().last(), projectPath);
 	}
-
-	QObject::connect(mRecentProjectsMapper, SIGNAL(mapped(const QString &))
-					 , mProjectManager, SLOT(openExisting(const QString &)));
+	QObject::connect(mRecentProjectsMapper
+			, static_cast<void (QSignalMapper::*)(const QString &)>(&QSignalMapper::mapped)
+			, mProjectManager, &ProjectManagerWrapper::openExisting);
 }
 
 void MainWindow::tryToSave()
@@ -694,6 +693,14 @@ void MainWindow::reportOperation(const QFuture<void> &operation, const QString &
 QWidget *MainWindow::currentTab()
 {
 	return mUi->tabs->currentWidget();
+}
+
+QList<QWidget*> MainWindow::allTabs() const
+{
+	QList<QWidget*> result;
+	for (int i = 0; i < mUi->tabs->count(); i++)
+		result << mUi->tabs->widget(i);
+	return result;
 }
 
 void MainWindow::openTab(QWidget *tab, const QString &title)
@@ -960,8 +967,7 @@ void MainWindow::openShapeEditor(
 	// Here we are going to actually modify model to set a value of a shape.
 	QAbstractItemModel *model = const_cast<QAbstractItemModel *>(index.model());
 	model->setData(index, propertyValue, role);
-	connect(shapeEdit, SIGNAL(shapeSaved(QString, const QPersistentModelIndex &, const int &))
-			, this, SLOT(setData(QString, const QPersistentModelIndex &, const int &)));
+	connect(shapeEdit, &ShapeEdit::shapeSaved, this, &MainWindow::setData);
 
 	mUi->tabs->addTab(shapeEdit, tr("Shape Editor"));
 	mUi->tabs->setCurrentWidget(shapeEdit);
@@ -993,8 +999,7 @@ void MainWindow::openQscintillaTextEditor(const QPersistentModelIndex &index, co
 		textEdit->setText(propertyValue.toUtf8());
 	}
 
-	connect(textEdit, SIGNAL(textSaved(const QString &, const QPersistentModelIndex &, const int &))
-			, this, SLOT(setData(const QString &, const QPersistentModelIndex &, const int &)));
+	connect(textEdit, &text::QScintillaTextEdit::textSaved, this, &MainWindow::setData);
 
 	mUi->tabs->addTab(textEdit, tr("Text Editor"));
 	mUi->tabs->setCurrentWidget(textEdit);
@@ -1011,8 +1016,7 @@ void MainWindow::openReferenceList(const QPersistentModelIndex &index
 		, const QString &referenceType,	const QString &propertyValue, int role)
 {
 	ReferenceList referenceList(this, index, referenceType, propertyValue.split(',', QString::SkipEmptyParts), role);
-	connect(&referenceList, SIGNAL(referenceSet(QStringList, QPersistentModelIndex, int))
-			, this, SLOT(setReference(QStringList, QPersistentModelIndex, int)));
+	connect(&referenceList, &ReferenceList::referenceSet, this, &MainWindow::setReference);
 	referenceList.exec();
 }
 
@@ -1158,11 +1162,10 @@ void MainWindow::initCurrentTab(EditorView *const tab, const QModelIndex &rootIn
 
 	// Connect after setModel etc. because of signal selectionChanged was sent when there were old indexes
 	connect(&tab->editorViewScene(), &EditorViewScene::selectionChanged, this, &MainWindow::sceneSelectionChanged);
-	connect(mUi->actionAntialiasing, SIGNAL(toggled(bool)), tab, SLOT(toggleAntialiasing(bool)));
-	connect(models().graphicalModel(), SIGNAL(rowsAboutToBeMoved(QModelIndex, int, int, QModelIndex, int))
-			, &tab->mvIface(), SLOT(rowsAboutToBeMoved(QModelIndex, int, int, QModelIndex, int)));
-	connect(models().graphicalModel(), SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int))
-			, &tab->mvIface(), SLOT(rowsMoved(QModelIndex, int, int, QModelIndex, int)));
+	connect(mUi->actionAntialiasing, &QAction::toggled, tab, &EditorView::toggleAntialiasing);
+	connect(models().graphicalModel(), &QAbstractItemModel::rowsAboutToBeMoved
+			, &tab->mvIface(), &EditorViewMViface::rowsAboutToBeMoved);
+	connect(models().graphicalModel(), &QAbstractItemModel::rowsMoved, &tab->mvIface(), &EditorViewMViface::rowsMoved);
 	connect(tab, &EditorView::rootElementRemoved, this
 			, static_cast<bool (MainWindow::*)(const QModelIndex &)>(&MainWindow::closeTab));
 	connect(&tab->editorViewScene(), &EditorViewScene::goTo, this, [=](const Id &id) { activateItemOrDiagram(id); });
@@ -1185,7 +1188,7 @@ void MainWindow::setShortcuts(EditorView * const tab)
 	// Add shortcut - select all
 	QAction *selectAction = new QAction(tab);
 	selectAction->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_A));
-	connect(selectAction, SIGNAL(triggered()), scene, SLOT(selectAll()));
+	connect(selectAction, &QAction::triggered, scene, &EditorViewScene::selectAll);
 	tab->addAction(selectAction);
 }
 
@@ -1193,8 +1196,8 @@ void MainWindow::setDefaultShortcuts()
 {
 	QAction *closeCurrentTabAction = new QAction(this);
 	QAction *closeAllTabsAction = new QAction(this);
-	connect(closeCurrentTabAction, SIGNAL(triggered()), this, SLOT(closeCurrentTab()));
-	connect(closeAllTabsAction, SIGNAL(triggered()), this, SLOT(closeAllTabs()));
+	connect(closeCurrentTabAction, &QAction::triggered, this, &MainWindow::closeCurrentTab);
+	connect(closeAllTabsAction, &QAction::triggered, this, &MainWindow::closeAllTabs);
 	addAction(closeCurrentTabAction);
 	addAction(closeAllTabsAction);
 
@@ -1934,7 +1937,7 @@ void MainWindow::customizeActionsVisibility()
 		}
 
 		if (!action) {
-			qDebug() << "Cannot find" << info.first << "in main window actions";
+			QLOG_ERROR() << "Cannot find" << info.first << "in main window actions";
 			continue;
 		}
 
@@ -2003,8 +2006,9 @@ void MainWindow::initTabs()
 	mUi->tabs->setTabsClosable(true);
 	mUi->tabs->setMovable(true);
 	registerEditor(*mUi->tabs);
-	connect(mUi->tabs, SIGNAL(currentChanged(int)), this, SLOT(currentTabChanged(int)));
-	connect(mUi->tabs, SIGNAL(tabCloseRequested(int)), this, SLOT(closeTab(int)));
+	connect(mUi->tabs, &TabWidget::currentChanged, this, &MainWindow::currentTabChanged);
+	connect(mUi->tabs, &TabWidget::tabCloseRequested
+			, this, static_cast<void (MainWindow::*)(int)>(&MainWindow::closeTab));
 }
 
 void MainWindow::initDocks()
@@ -2043,19 +2047,17 @@ void MainWindow::initExplorers()
 
 	mPropertyModel->setSourceModels(models().logicalModel(), models().graphicalModel());
 
-	connect(&models().graphicalModelAssistApi(), SIGNAL(nameChanged(const Id &))
-			, this, SLOT(updateTabName(const Id &)));
-	connect(mUi->graphicalModelExplorer, SIGNAL(clicked(const QModelIndex &))
-			, this, SLOT(graphicalModelExplorerClicked(QModelIndex)));
-	connect(mUi->logicalModelExplorer, SIGNAL(clicked(const QModelIndex &))
-			, this, SLOT(logicalModelExplorerClicked(QModelIndex)));
+	connect(&models().graphicalModelAssistApi(), &models::GraphicalModelAssistApi::nameChanged
+			, this, &MainWindow::updateTabName);
+	connect(mUi->graphicalModelExplorer, &ModelExplorer::clicked, this, &MainWindow::graphicalModelExplorerClicked);
+	connect(mUi->logicalModelExplorer, &ModelExplorer::clicked, this, &MainWindow::logicalModelExplorerClicked);
 }
 
 void MainWindow::initRecentProjectsMenu()
 {
 	mRecentProjectsMenu = new QMenu(tr("Recent projects"), mUi->menu_File);
 	mUi->menu_File->insertMenu(mUi->menu_File->actions().at(1), mRecentProjectsMenu);
-	connect(mRecentProjectsMenu, SIGNAL(aboutToShow()), this, SLOT(openRecentProjectsMenu()));
+	connect(mRecentProjectsMenu, &QMenu::aboutToShow, this, &MainWindow::openRecentProjectsMenu);
 }
 
 void MainWindow::saveDiagramAsAPictureToFile(const QString &fileName)

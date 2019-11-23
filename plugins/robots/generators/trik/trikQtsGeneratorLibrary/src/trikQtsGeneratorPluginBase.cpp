@@ -29,6 +29,7 @@
 #include <utils/robotCommunication/stopRobotProtocol.h>
 #include <utils/robotCommunication/uploadProgramProtocol.h>
 #include <utils/robotCommunication/networkCommunicationErrorReporter.h>
+#include <qrgui/textEditor/qscintillaTextEdit.h>
 
 #include "trikQtsMasterGenerator.h"
 #include "emptyShell.h"
@@ -107,25 +108,29 @@ QList<ActionInfo> TrikQtsGeneratorPluginBase::customActions()
 	mGenerateCodeAction->setText(tr("Generate TRIK code"));
 	mGenerateCodeAction->setIcon(QIcon(":/trik/qts/images/generateQtsCode.svg"));
 	ActionInfo generateCodeActionInfo(mGenerateCodeAction, "generators", "tools");
-	connect(mGenerateCodeAction, SIGNAL(triggered()), this, SLOT(generateCode()), Qt::UniqueConnection);
+	connect(mGenerateCodeAction, &QAction::triggered, this
+			, &TrikQtsGeneratorPluginBase::generateCode, Qt::UniqueConnection);
 
 	mUploadProgramAction->setObjectName("uploadProgram");
 	mUploadProgramAction->setText(tr("Upload program"));
 	mUploadProgramAction->setIcon(QIcon(":/trik/qts/images/uploadProgram.svg"));
 	ActionInfo uploadProgramActionInfo(mUploadProgramAction, "generators", "tools");
-	connect(mUploadProgramAction, SIGNAL(triggered()), this, SLOT(uploadProgram()), Qt::UniqueConnection);
+	connect(mUploadProgramAction, &QAction::triggered, this
+			, &TrikQtsGeneratorPluginBase::uploadProgram, Qt::UniqueConnection);
 
 	mRunProgramAction->setObjectName("runProgram");
 	mRunProgramAction->setText(tr("Run program"));
 	mRunProgramAction->setIcon(QIcon(":/trik/qts/images/run.png"));
 	ActionInfo runProgramActionInfo(mRunProgramAction, "interpreters", "tools");
-	connect(mRunProgramAction, SIGNAL(triggered()), this, SLOT(runProgram()), Qt::UniqueConnection);
+	connect(mRunProgramAction, &QAction::triggered, this
+			, &TrikQtsGeneratorPluginBase::runProgram, Qt::UniqueConnection);
 
 	mStopRobotAction->setObjectName("stopRobot");
 	mStopRobotAction->setText(tr("Stop robot"));
 	mStopRobotAction->setIcon(QIcon(":/trik/qts/images/stop.png"));
 	ActionInfo stopRobotActionInfo(mStopRobotAction, "interpreters", "tools");
-	connect(mStopRobotAction, SIGNAL(triggered()), this, SLOT(stopRobot()), Qt::UniqueConnection);
+	connect(mStopRobotAction, &QAction::triggered, this
+			, &TrikQtsGeneratorPluginBase::stopRobot, Qt::UniqueConnection);
 
 	return {generateCodeActionInfo, uploadProgramActionInfo, runProgramActionInfo, stopRobotActionInfo};
 }
@@ -188,13 +193,26 @@ void TrikQtsGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExtens
 
 void TrikQtsGeneratorPluginBase::uploadProgram()
 {
-	const QFileInfo fileInfo = generateCodeForProcessing();
-
-	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
-		disableButtons();
-		mUploadProgramProtocol->run(fileInfo);
+	if (mUploadProgramProtocol) {
+		QList<QFileInfo> files;
+		auto const &tabs = mMainWindowInterface->allTabs();
+		for (auto &&tab : tabs) {
+			if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
+				auto const &ext = code->currentLanguage().extension;
+				if (ext == "js" || ext == "py") {
+					files << QFileInfo(mTextManager->path(code));
+				}
+			}
+		}
+		if (!files.isEmpty()) {
+			disableButtons();
+			mUploadProgramProtocol->run(files);
+		} else {
+			mMainWindowInterface->errorReporter()->addError(
+					tr("There are no files to upload. You must open or generate at least one *.js or *.py file."));
+		}
 	} else {
-		QLOG_ERROR() << "Code generation failed, aborting";
+		QLOG_ERROR() << "Upload program protocol is not initialized";
 	}
 }
 
