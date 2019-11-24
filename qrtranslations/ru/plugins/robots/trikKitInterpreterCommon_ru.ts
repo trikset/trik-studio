@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+186"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+191"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
@@ -165,12 +165,12 @@
     </message>
     <message>
         <location line="-30"/>
-        <location line="+285"/>
+        <location line="+286"/>
         <source>Trying to read from file %1 failed</source>
         <translation>Не удалось открыть файл %1</translation>
     </message>
     <message>
-        <location line="-230"/>
+        <location line="-231"/>
         <source>No configured motor on port: %1</source>
         <translation>Не найден сконфигурированный  мотор на порту: %1</translation>
     </message>
@@ -251,7 +251,12 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+219"/>
+        <location line="+44"/>
+        <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
+        <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
+    </message>
+    <message>
+        <location line="+175"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>

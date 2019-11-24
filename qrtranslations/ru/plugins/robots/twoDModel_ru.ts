@@ -641,6 +641,11 @@
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Попытка добавить элемент с существующим идентификатором: %1</translation>
     </message>
+    <message>
+        <location line="+11"/>
+        <source>Incorrect image, please try anouther one</source>
+        <translation>Некорректное изображение, попробуйте другое</translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
@@ -965,6 +970,16 @@
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
+    <message>
+        <location line="+9"/>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cannot load file. Try another one.</source>
+        <translation>Невозможно загрузить выбранный файл. Попробуйте другой.</translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
@@ -1029,7 +1044,7 @@
         <translation>Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+315"/>
+        <location line="+314"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

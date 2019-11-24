@@ -11,7 +11,7 @@ mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
 cp -pR $BIN_DIR/libqrkernel*.dylib                                        "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrgraph*.dylib                                         "$BUNDLE_CONTENTS/Lib"
-#cp -pR $BIN_DIR/libquazip*.dylib                                          "$BUNDLE_CONTENTS/Lib"
+cp -P $(pkg-config --variable=libdir zlib)/libz*.dylib                       "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrrepo*.dylib                                          "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrutils*.dylib                                         "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrtext*.dylib                                          "$BUNDLE_CONTENTS/Lib"
@@ -80,6 +80,7 @@ mkdir "$BUNDLE_CONTENTS/MacOS/iconengines"
 
 cp     $QT_DIR/plugins/platforms/libqcocoa.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
 cp     $QT_DIR/plugins/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
+cp     $QT_DIR/plugins/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqcocoa.dylib"       $QT_DIR/lib $LIB_PATH

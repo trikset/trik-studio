@@ -50,7 +50,7 @@ public:
 	void afterSearch() override;
 
 protected:
-	semantics::SemanticNode *produceGotoNode(const qReal::Id &id);
+	semantics::SimpleNode *produceGotoNode(const qReal::Id &id);
 	void produceNextNodeIfNeeded(const LinkInfo &info, semantics::NonZoneNode * const parent);
 	void performGeneration() override;
 };

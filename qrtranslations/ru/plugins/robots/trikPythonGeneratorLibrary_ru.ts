@@ -68,7 +68,7 @@
 <context>
     <name>trik::python::TrikPythonGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+71"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+72"/>
         <source>Network operation timed out</source>
         <translation>Не удалось получить ответ от робота, проверьте настройки, проверьте, включён ли робот</translation>
     </message>
@@ -83,22 +83,22 @@
         <translation>Генерировать код на Python</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Upload program</source>
         <translation>Загрузить программу</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Run program</source>
         <translation>Загрузить и выполнить программу</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Stop robot</source>
         <translation>Остановить робота</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Generate Python code</source>
         <translation>Сгенерированть код для ТРИК на QtScript</translation>
     </message>
@@ -116,6 +116,11 @@
         <location line="+1"/>
         <source>Stop Python program</source>
         <translation>Остановить выполнение программы для TRIK</translation>
+    </message>
+    <message>
+        <location line="+64"/>
+        <source>There are no files to upload. You must open or generate at least one *.js or *.py file.</source>
+        <translation>Нет файлов для загрузки. Вы должны открыть или сгенерировать хотя бы один *.js или *.py файл.</translation>
     </message>
 </context>
 </TS>

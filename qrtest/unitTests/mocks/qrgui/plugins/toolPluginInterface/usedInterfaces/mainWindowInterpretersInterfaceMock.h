@@ -46,6 +46,7 @@ public:
 	MOCK_METHOD1(deleteElementFromDiagram, void(qReal::Id const &id));
 	MOCK_METHOD2(reportOperation, void(const QFuture<void> &operation, const QString &description));
 	MOCK_METHOD0(currentTab, QWidget *());
+	MOCK_CONST_METHOD0(allTabs, QList<QWidget*>());
 	MOCK_METHOD2(openTab, void(QWidget *tab, QString const &title));
 	MOCK_METHOD1(closeTab, void(QWidget *tab));
 	MOCK_METHOD2(setTabText, void(QWidget *tab, QString const &text));

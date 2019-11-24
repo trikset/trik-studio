@@ -742,7 +742,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+604"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+603"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -751,7 +751,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-410"/>
+        <location line="-409"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+648"/>
+        <location line="+655"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -779,9 +779,9 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+111"/>
         <location line="+16"/>
-        <location line="+24"/>
+        <location line="+23"/>
         <source>Shape Editor</source>
         <translation>Editeur de formes</translation>
     </message>
@@ -791,7 +791,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Editeur de texte</translation>
     </message>
     <message>
-        <location line="+222"/>
+        <location line="+220"/>
         <source>New diagram</source>
         <translation>Nouveau diagramme</translation>
     </message>
@@ -891,7 +891,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+197"/>
+        <location line="+196"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>

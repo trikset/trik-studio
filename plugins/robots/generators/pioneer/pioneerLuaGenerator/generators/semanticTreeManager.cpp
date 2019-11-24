@@ -68,8 +68,7 @@ SemanticNode *SemanticTreeManager::anyRightSibling(SemanticNode * const node)
 		return nullptr;
 	}
 
-	const auto zone = nonZoneNode->parentZone();
-	if (zone) {
+	if (const auto zone = nonZoneNode->parentZone()) {
 		return zone->nextChild(nonZoneNode);
 	} else {
 		return nullptr;
@@ -78,18 +77,17 @@ SemanticNode *SemanticTreeManager::anyRightSibling(SemanticNode * const node)
 
 NonZoneNode *SemanticTreeManager::parent(SemanticNode * const node)
 {
-	NonZoneNode * const nonZoneNode = dynamic_cast<NonZoneNode * const>(node);
-	if (!nonZoneNode) {
-		return nullptr;
+	if (auto nonZoneNode = dynamic_cast<NonZoneNode * const>(node)) {
+		auto parentZone = nonZoneNode->parentZone();
+		return dynamic_cast<NonZoneNode *>(parentZone->parentNode());
 	}
-
-	return static_cast<NonZoneNode *>(nonZoneNode->parentZone()->parentNode());
+	return nullptr;
 }
 
 NonZoneNode *SemanticTreeManager::topLevelParent(SemanticNode * const node)
 {
-	NonZoneNode *aParent = parent(node);
-	while (!isTopLevelNode(aParent)) {
+	auto aParent = parent(node);
+	while (aParent && !isTopLevelNode(aParent)) {
 		aParent = parent(aParent);
 	}
 
@@ -101,14 +99,14 @@ void SemanticTreeManager::addAfter(SemanticNode * const thisNode, SemanticNode *
 	static_cast<NonZoneNode * const>(thisNode)->insertSiblingAfterThis(nextNode);
 }
 
-bool SemanticTreeManager::isTopLevelNode(const generatorBase::semantics::SemanticNode * const node)
+bool SemanticTreeManager::isTopLevelNode(const NonZoneNode * const node)
 {
 	if (!static_cast<const NonZoneNode * const>(node)->parentZone()) {
 		return true;
 	}
 
-	const SemanticNode * const parent = static_cast<const NonZoneNode * const>(node)->parentZone()->parentNode();
-	return dynamic_cast<const RootNode * const>(parent) != nullptr;
+	auto parent = static_cast<const NonZoneNode * const>(node)->parentZone()->parentNode();
+	return parent && dynamic_cast<RootNode *>(parent) != nullptr;
 }
 
 void SemanticTreeManager::addToZone(generatorBase::semantics::ZoneNode * const zone, const qReal::Id &id)
@@ -256,8 +254,6 @@ NonZoneNode *SemanticTreeManager::produceNode(const qReal::Id &id)
 
 NonZoneNode *SemanticTreeManager::copy(NonZoneNode *node)
 {
-	qDebug() << "Cloning" << node->id();
-
 	if (isGotoNode(node)) {
 		SimpleNode * const gotoNode = mSemanticTree.produceSimple(node->id());
 		gotoNode->bindToSyntheticConstruction(SimpleNode::gotoNode);

@@ -103,7 +103,9 @@ public:
 	bool supportsZooming() const override;
 	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste
 			, QAction &cut, QAction &find, QAction &findAndeReplace, QAction &replaceBy) override;
-	QDomDocument generateWordModelWithBlobsXml() const;
+	QDomDocument generateWorldModelWithBlobsXml() const;
+	QDomDocument generateWorldModelXml() const;
+	QDomDocument generateBlobsXml() const;
 
 public slots:
 	void zoomIn() override;
@@ -192,9 +194,6 @@ private:
 
 	void setDetailsVisibility(bool visible);
 	void setRunStopButtonsVisibility();
-
-	QDomDocument generateWordModelXml() const;
-	QDomDocument generateBlobsXml() const;
 
 	/// Set active panel toggle button and deactivate all others
 	void setActiveButton(int active);

@@ -16,7 +16,7 @@ cp     $INSTALLER_ROOT/platform/$PRODUCT-linux-gnu-platform.config      $PWD/../
 
 cp -pr $BIN_DIR/libqrkernel.so*                                         $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgraph.so*                                          $PWD/../data/lib/
-#cp -pr $BIN_DIR/libquazip.so*                                           $PWD/../data/lib/
+cp -L $(pkg-config --variable=sharedlibdir zlib)/libz.so                     $PWD/../data/lib/libz.so.1
 cp -pr $BIN_DIR/libqrrepo.so*                                           $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrutils.so*                                          $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrtext.so*                                           $PWD/../data/lib/
@@ -58,6 +58,7 @@ cp -pr $QT_DIR/lib/libicuuc.so*                                         $PWD/../
 
 cp     $QT_DIR/plugins/platforms/libqxcb.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
+cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/
 
 rsync -av /usr/lib/$(uname -i)-linux-gnu/libstdc++.so*                               $PWD/../data/lib/

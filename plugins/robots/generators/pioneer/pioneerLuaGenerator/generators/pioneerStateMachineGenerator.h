@@ -67,8 +67,8 @@ private:
 	/// Copies a linear fragment starting from semantic node with id @p from and pastes it into semantic tree as a
 	/// sibling of @p after node.
 	/// @returns node that ends copied synchronous fragment (goto node) or nullptr if there was error.
-	generatorBase::semantics::SemanticNode * copySynchronousFragment(
-			generatorBase::semantics::SemanticNode *after
+	generatorBase::semantics::NonZoneNode * copySynchronousFragment(
+			generatorBase::semantics::NonZoneNode *after
 			, const qReal::Id &from
 			, bool withLabel);
 
@@ -76,7 +76,7 @@ private:
 	bool isAsynchronous(const generatorBase::semantics::SemanticNode * const node) const;
 
 	/// Creates synthetic node that denotes end of asynchronous handler.
-	generatorBase::semantics::SemanticNode *produceEndOfHandlerNode();
+	generatorBase::semantics::SimpleNode *produceEndOfHandlerNode();
 
 	/// Logs an error and flags that there were errors.
 	void reportError(const QString &message);

@@ -36,7 +36,7 @@ namespace kitBase {
 class KitPluginInterface
 {
 public:
-	virtual ~KitPluginInterface() {}
+	virtual ~KitPluginInterface() = default;
 
 	/// Passes to kit plugin objects that allow it to communicate with engine.
 	virtual void init(const KitPluginConfigurator &configurator)
