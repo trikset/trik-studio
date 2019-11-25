@@ -9,11 +9,11 @@ update_configs:
 
   - package_manager: "submodules"
     directory: "qrtest/thirdparty/googletest/googletest"
-    update_schedule: "weekly"
+    update_schedule: "monthly"
 
   - package_manager: "submodules"
     directory: "qrgui/thirdparty/qt-solutions"
-    update_schedule: "weekly"
+    update_schedule: "monthly"
 
   - package_manager: "submodules"
     directory: "thirdparty/gamepad/gamepad"
@@ -25,13 +25,12 @@ update_configs:
 
   - package_manager: "submodules"
     directory: "plugins/robots/thirdparty/hidapi"
-    update_schedule: "weekly"
+    update_schedule: "monthly"
 
   - package_manager: "submodules"
     directory: "thirdparty/quazip/quazip"
-    update_schedule: "weekly"
+    update_schedule: "monthly"
 
   - package_manager: "submodules"
     directory: "plugins/robots/thirdparty/Box2D/Box2D"
-    update_schedule: "weekly"
-
+    update_schedule: "monthly"
