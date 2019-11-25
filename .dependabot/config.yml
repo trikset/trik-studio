@@ -1,0 +1,36 @@
+version: 1
+
+update_configs:
+  - package_manager: "submodules"
+    directory: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
+    update_schedule: "weekly"
+    default_reviewers:
+      - "iakov"
+
+  - package_manager: "submodules"
+    directory: "qrtest/thirdparty/googletest/googletest"
+    update_schedule: "monthly"
+
+  - package_manager: "submodules"
+    directory: "qrgui/thirdparty/qt-solutions"
+    update_schedule: "monthly"
+
+  - package_manager: "submodules"
+    directory: "thirdparty/gamepad/gamepad"
+    update_schedule: "weekly"
+
+  - package_manager: "submodules"
+    directory: "installer/nxt-tools"
+    update_schedule: "weekly"
+
+  - package_manager: "submodules"
+    directory: "plugins/robots/thirdparty/hidapi"
+    update_schedule: "monthly"
+
+  - package_manager: "submodules"
+    directory: "thirdparty/quazip/quazip"
+    update_schedule: "monthly"
+
+  - package_manager: "submodules"
+    directory: "plugins/robots/thirdparty/Box2D/Box2D"
+    update_schedule: "monthly"
