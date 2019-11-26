@@ -289,6 +289,16 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 	return mLineSensors[port];
 }
 
+trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
+	emit error(tr("Sensor not implemented in simulation mode. Used port: %1").arg(port));
+	return nullptr;
+}
+
+trikControl::ObjectSensorInterface *TrikBrick::objectSensor(const QString &port) {
+	emit error(tr("Sensor not implemented in simulation mode. Used port: %1").arg(port));
+	return nullptr;
+}
+
 trikControl::EncoderInterface *TrikBrick::encoder(const QString &port) {
 	using namespace kitBase::robotModel;
 	if (!mEncoders.contains(port)) {
