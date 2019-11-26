@@ -928,6 +928,7 @@ void TwoDModelScene::registerInUndoStack(AbstractItem *item)
 void TwoDModelScene::subscribeItem(AbstractItem *item)
 {
 	connect(item, &AbstractItem::mouseInteractionStarted, this, [=]() {
+		item->savePos();
 		if (mDrawingAction == none) {
 			QStringList selectedIds;
 			for (const QGraphicsItem *item : selectedItems()) {
