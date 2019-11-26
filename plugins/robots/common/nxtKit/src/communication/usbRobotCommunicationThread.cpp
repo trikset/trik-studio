@@ -18,7 +18,7 @@
 #include <time.h>
 
 #include <qrkernel/logging.h>
-#include <libusb.h>
+#include <plugins/robots/thirdparty/libusb-1.0/include/libusb-1.0/libusb.h>
 
 #include "nxtKit/communication/nxtCommandConstants.h"
 #include "nxtKit/communication/nxtUsbDriverInstaller.h"

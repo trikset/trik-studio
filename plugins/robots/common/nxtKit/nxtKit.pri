@@ -25,7 +25,11 @@ links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interfa
 		robots-utils robots-kit-base qextserialport qslog \
 )
 
-PKGCONFIG *= libusb-1.0
+win32 {
+	LIBS += -llibusb-1.0
+} else {
+	PKGCONFIG *= libusb-1.0
+}
 CONFIG += link_pkgconfig
 
 # libusb headers contain dirty code

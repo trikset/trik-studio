@@ -17,9 +17,7 @@ TEMPLATE = lib
 include(../global.pri)
 
 clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
-CONFIG *= link_pkgconfig
-PKGCONFIG *= zlib
 
-win32: copyToDestdir($$system($$pkgConfigExecutable() zlib --variable=prefix)\bin\zlib1.dll, NOW)
+win32: copyToDestdir($$PWD\..\qrgui\dotFiles\zlib1.dll, NOW)
 
 include(qrrepo.pri)

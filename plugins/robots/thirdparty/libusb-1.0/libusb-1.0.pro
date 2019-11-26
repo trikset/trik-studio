@@ -16,9 +16,19 @@ TEMPLATE = subdirs
 
 include(../../../../global.pri)
 
-PKGCONFIG *= libusb-1.0
+win32 {
+	LIBS += -llibusb-1.0
+} else {
+	PKGCONFIG *= libusb-1.0
+}
 CONFIG *= link_pkgconfig
 
 # May be --variable=libdir?
-win32: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)\bin\libusb-1.0.dll, NOW)
+win32 {
+	contains(QT_ARCH, i386) {
+		copyToDestdir($$PWD\MinGW32\dll\libusb-1.0.dll, NOW)
+	} else {
+		copyToDestdir($$PWD\MinGW64\dll\libusb-1.0.dll, NOW)
+	}
+}
 macx: copyToDestdir($$system($$pkgConfigExecutable() libusb-1.0 --variable=prefix)/lib/libusb-1.0.dylib, NOW)

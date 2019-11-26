@@ -14,6 +14,13 @@
 
 links(qrkernel qrutils quazip)
 
+CONFIG *= link_pkgconfig
+win32 {
+	LIBS += -lz
+} else {
+	PKGCONFIG *= zlib
+}
+
 HEADERS += \
 	$$PWD/private/repository.h \
 	$$PWD/private/folderCompressor.h \
