@@ -34,7 +34,11 @@ export INSTALLER_ROOT=$PWD/
 
 PATH=$QT_DIR/bin:$PATH
 # FULL_VERSION is like v3.3.0[-rc9][-20-abc123][-dirty]
-FULL_VERSION=$($binary_path -platform minimal --version | grep -Eo '[^ ]+$')
+if [ $OSTYPE == "msys" ] ; then
+  FULL_VERSION=$(date '+%Y')
+else
+  FULL_VERSION=$($binary_path -platform minimal --version | grep -Eo '[^ ]+$')
+fi
 #QT IFW want version like [0-9]+((.|-)[0-9]+)*
 VERSION=$(echo $FULL_VERSION | sed -e 's/[^0-9.-]//g' -e 's/[.-]*$//g' -e 's/^[.-]*//g')
 grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
