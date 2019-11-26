@@ -198,7 +198,7 @@
         <location line="+10"/>
         <location line="+5"/>
         <source>Sensor not implemented in simulation mode. Used port: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Датчик не поддержан в режиме имитационного моделирования. Порт: %1</translation>
     </message>
     <message>
         <location line="+10"/>
