@@ -1,7 +1,7 @@
 // This module defines the "official" high-level API of the Qt port of
 // Scintilla.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -28,10 +28,10 @@
 #include <QPointer>
 #include <QStringList>
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscicommand.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscidocument.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintillabase.h>
+#include <Qsci/qsciglobal.h>
+#include <Qsci/qscicommand.h>
+#include <Qsci/qscidocument.h>
+#include <Qsci/qsciscintillabase.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -302,6 +302,14 @@ public:
         //! A triangle below the centre of the first character in the indicator
         //! range.
         TriangleCharacterIndicator = INDIC_POINTCHARACTER,
+
+        //! A vertical gradient between the indicator's foreground colour at
+        //! top to fully transparent at the bottom.
+        GradientIndicator = INDIC_GRADIENT,
+
+        //! A vertical gradient with the indicator's foreground colour in the
+        //! middle and fading to fully transparent at the top and bottom.
+        CentreGradientIndicator = INDIC_GRADIENTCENTRE,
     };
 
     //! This enum defines the different margin options.
@@ -508,11 +516,15 @@ public:
 
         //! Wrapped sub-lines are indented by the same amount as the first
         //! sub-line plus one more level of indentation.
-        WrapIndentIndented = SC_WRAPINDENT_INDENT
+        WrapIndentIndented = SC_WRAPINDENT_INDENT,
+
+        //! Wrapped sub-lines are indented by the same amount as the first
+        //! sub-line plus two more level of indentation.
+        WrapIndentDeeplyIndented = SC_WRAPINDENT_DEEPINDENT
     };
 
     //! Construct an empty QsciScintilla with parent \a parent.
-    QsciScintilla(QWidget *parent = nullptr);
+    QsciScintilla(QWidget *parent = 0);
 
     //! Destroys the QsciScintilla instance.
     virtual ~QsciScintilla();
@@ -528,7 +540,7 @@ public:
     //! and \a last_word_start will contain the position in the document of the
     //! start of the last word of the context.
     virtual QStringList apiContext(int pos, int &context_start,
-            int &last_word_start, bool is_needed_single_word = false);
+            int &last_word_start);
 
     //! Annotate the line \a line with the text \a text using the style number
     //! \a style.
@@ -639,6 +651,10 @@ public:
     //!
     //! \sa setCallTipsVisible()
     int callTipsVisible() const {return maxCallTips;}
+
+    //! Cancel any previous call to findFirst(), findFirstInSelection() or
+    //! findNext() so that replace() does nothing.
+    void cancelFind();
 
     //! Cancel any current auto-completion or user defined list.
     void cancelList();
@@ -779,10 +795,13 @@ public:
     //! POSIX compatible manner by interpreting bare ( and ) as tagged sections
     //! rather than \( and \).
     //!
-    //! \sa findFirstInSelection(), findNext(), replace()
+    //! If \a cxx11 is true then a regular expression is treated as a Cxx11
+    //! regular expression.
+    //!
+    //! \sa cancelFind(), findFirstInSelection(), findNext(), replace()
     virtual bool findFirst(const QString &expr, bool re, bool cs, bool wo,
             bool wrap, bool forward = true, int line = -1, int index = -1,
-            bool show = true, bool posix = false);
+            bool show = true, bool posix = false, bool cxx11 = false);
 
     //! Find the first occurrence of the string \a expr in the current
     //! selection and return true if \a expr was found, otherwise returns
@@ -809,16 +828,26 @@ public:
     //! POSIX compatible manner by interpreting bare ( and ) as tagged sections
     //! rather than \( and \).
     //!
-    //! \sa findFirstInSelection(), findNext(), replace()
+    //! If \a cxx11 is true then a regular expression is treated as a Cxx11
+    //! regular expression.
+    //!
+    //! \sa cancelFind(), findFirst(), findNext(), replace()
     virtual bool findFirstInSelection(const QString &expr, bool re, bool cs,
             bool wo, bool forward = true, bool show = true,
-            bool posix = false);
+            bool posix = false, bool cxx11 = false);
 
     //! Find the next occurence of the string found using findFirst() or
     //! findFirstInSelection().
     //!
-    //! \sa findFirst(), findFirstInSelection(), replace()
+    //! \sa cancelFind(), findFirst(), findFirstInSelection(), replace()
     virtual bool findNext();
+
+    //! Find a brace and it's match.  \a brace is updated with the position of
+    //! the brace and will be -1 if there is none.  \a is updated with the
+    //! position of the matching brace and will be -1 if there is none.
+    //! \a mode specifies how braces are matched.  true is returned if the
+    //! current position is inside a pair of braces.
+    bool findMatchingBrace(long &brace, long &other, BraceMatch mode);
 
     //! Returns the number of the first visible line.
     //!
@@ -1137,7 +1166,7 @@ public:
     //! Replace the current selection, set by a previous call to findFirst(),
     //! findFirstInSelection() or findNext(), with \a replaceStr.
     //!
-    //! \sa findFirst(), findFirstInSelection(), findNext()
+    //! \sa cancelFind(), findFirst(), findFirstInSelection(), findNext()
     virtual void replace(const QString &replaceStr);
 
     //! Reset the fold margin colours to their defaults.
@@ -1154,6 +1183,16 @@ public:
     //!
     //! \sa setHotspotForegroundColor(), resetHotspotBackgroundColor()
     void resetHotspotForegroundColor();
+
+    //! Gets the assumed document width in pixels.
+    //!
+    //! \sa setScrollWidth(), setScrollWidthTracking()
+    int scrollWidth() const;
+
+    //! Returns true if scroll width tracking is enabled.
+    //!
+    //! \sa scrollWidth(), setScrollWidthTracking()
+    bool scrollWidthTracking() const;
 
     //! The fold margin may be drawn as a one pixel sized checkerboard pattern
     //! of two colours, \a fore and \a back.
@@ -1369,6 +1408,23 @@ public:
     //!
     //! \sa setMatchedBraceIndicator()
     void resetMatchedBraceIndicator();
+
+    //! For performance, QScintilla does not measure the display width of the
+    //! document to determine the properties of the horizontal scroll bar.
+    //! Instead, an assumed width is used.  This sets the document width in
+    //! pixels assumed by QScintilla to \a pixelWidth.  The default value is
+    //! 2000.
+    //!
+    //! \sa scrollWidth(), setScrollWidthTracking()
+    void setScrollWidth(int pixelWidth);
+
+    //! If scroll width tracking is enabled then the scroll width is adjusted
+    //! to ensure that all of the lines currently displayed can be completely
+    //! scrolled.  This mode never adjusts the scroll width to be narrower.
+    //! This sets the scroll width tracking to \a enabled.
+    //!
+    //! \sa setScrollWidth(), scrollWidthTracking()
+    void setScrollWidthTracking(bool enabled);
 
     //! Sets the mode used to draw tab characters when whitespace is visible to
     //! \a mode.  The default is to use an arrow.
@@ -1763,6 +1819,10 @@ public slots:
     //! \sa setCaretLineVisible()
     virtual void setCaretLineBackgroundColor(const QColor &col);
 
+    //! Sets the width of the frame of the line containing the caret to \a
+    //! width.
+    virtual void setCaretLineFrameWidth(int width);
+
     //! Enables or disables, according to \a enable, the background color of
     //! the line containing the caret.
     //!
@@ -1840,7 +1900,7 @@ public slots:
     //! \a lex is 0 then syntax styling is disabled.
     //!
     //! \sa lexer()
-    virtual void setLexer(QsciLexer *lexer = nullptr);
+    virtual void setLexer(QsciLexer *lexer = 0);
 
     //! Set the background colour of all margins to \a col.  The default is a
     //! gray.
@@ -2100,6 +2160,9 @@ protected:
     //! \reimp
     virtual void contextMenuEvent(QContextMenuEvent *e);
 
+    //! \reimp
+    virtual void wheelEvent(QWheelEvent *e);
+
 private slots:
     void handleCallTipClick(int dir);
     void handleCharAdded(int charadded);
@@ -2161,7 +2224,6 @@ private:
     void setEnabledColors(int style, QColor &fore, QColor &back);
 
     void braceMatch();
-    bool findMatchingBrace(long &brace, long &other, BraceMatch mode);
     long checkBrace(long pos, int brace_style, bool &colonMode);
     void gotoMatchingBrace(bool select);
 

@@ -1,6 +1,6 @@
 // This defines the interface to the QsciDocument class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -21,7 +21,7 @@
 #ifndef QSCIDOCUMENT_H
 #define QSCIDOCUMENT_H
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
+#include <Qsci/qsciglobal.h>
 
 
 class QsciScintillaBase;

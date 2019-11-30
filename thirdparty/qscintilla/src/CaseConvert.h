@@ -10,9 +10,7 @@
 #ifndef CASECONVERT_H
 #define CASECONVERT_H
 
-#ifdef SCI_NAMESPACE
 namespace Scintilla {
-#endif
 
 enum CaseConversion {
 	CaseConversionFold,
@@ -22,7 +20,6 @@ enum CaseConversion {
 
 class ICaseConverter {
 public:
-	virtual ~ICaseConverter() = default;
 	virtual size_t CaseConvertString(char *converted, size_t sizeConverted, const char *mixed, size_t lenMixed) = 0;
 };
 
@@ -44,8 +41,6 @@ size_t CaseConvertString(char *converted, size_t sizeConverted, const char *mixe
 // Converts a mixed case string using a particular conversion.
 std::string CaseConvertString(const std::string &s, enum CaseConversion conversion);
 
-#ifdef SCI_NAMESPACE
 }
-#endif
 
 #endif

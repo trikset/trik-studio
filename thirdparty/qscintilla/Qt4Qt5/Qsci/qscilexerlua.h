@@ -1,6 +1,6 @@
 // This defines the interface to the QsciLexerLua class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -23,8 +23,8 @@
 
 #include <QObject>
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexer.h>
+#include <Qsci/qsciglobal.h>
+#include <Qsci/qscilexer.h>
 
 
 //! \brief The QsciLexerLua class encapsulates the Scintilla Lua
@@ -104,7 +104,7 @@ public:
 
     //! Construct a QsciLexerLua with parent \a parent.  \a parent is typically
     //! the QsciScintilla instance.
-    QsciLexerLua(QObject *parent = nullptr);
+    QsciLexerLua(QObject *parent = 0);
 
     //! Destroys the QsciLexerLua instance.
     virtual ~QsciLexerLua();
@@ -123,7 +123,7 @@ public:
     //! \internal Returns a space separated list of words or characters in
     //! a particular style that define the start of a block for
     //! auto-indentation.  The styles is returned via \a style.
-    const char *blockStart(int *style = nullptr) const;
+    const char *blockStart(int *style = 0) const;
 
     //! \internal Returns the style used for braces for brace matching.
     int braceStyle() const;

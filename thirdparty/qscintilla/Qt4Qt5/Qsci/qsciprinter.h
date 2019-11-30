@@ -1,6 +1,6 @@
 // This module defines interface to the QsciPrinter class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -30,8 +30,8 @@
 
 #if !defined(QT_NO_PRINTER)
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintilla.h>
+#include <Qsci/qsciglobal.h>
+#include <Qsci/qsciscintilla.h>
 
 
 QT_BEGIN_NAMESPACE

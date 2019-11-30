@@ -1,6 +1,6 @@
 // This module implements the QsciCommandSet class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -313,12 +313,12 @@ QsciCommandSet::QsciCommandSet(QsciScintilla *qs) : qsci(qs)
             QT_TRANSLATE_NOOP("QsciCommand",
                     "Extend selection to end of next word")
         },
-//        {
-//            QsciCommand::WordPartLeft,
-//            Qt::Key_Slash | Qt::CTRL,
-//            0,
-//            QT_TRANSLATE_NOOP("QsciCommand", "Move left one word part")
-//        },
+        {
+            QsciCommand::WordPartLeft,
+            Qt::Key_Slash | Qt::CTRL,
+            0,
+            QT_TRANSLATE_NOOP("QsciCommand", "Move left one word part")
+        },
         {
             QsciCommand::WordPartLeftExtend,
             Qt::Key_Slash | Qt::CTRL | Qt::SHIFT,
@@ -712,7 +712,7 @@ QsciCommandSet::QsciCommandSet(QsciScintilla *qs) : qsci(qs)
         },
         {
             QsciCommand::LineCut,
-			Qt::Key_L | Qt::CTRL | Qt::SHIFT,
+            Qt::Key_L | Qt::CTRL,
             0,
             QT_TRANSLATE_NOOP("QsciCommand", "Cut current line")
         },
@@ -937,7 +937,7 @@ bool QsciCommandSet::writeSettings(QSettings &qs, const char *prefix)
         qs.setValue(skey + "key", cmd->key());
 
         // Write the alternate key.
-        qs.setValue(skey + "alt", cmd->key());
+        qs.setValue(skey + "alt", cmd->alternateKey());
     }
 
     return rc;
