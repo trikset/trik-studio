@@ -605,7 +605,7 @@ bool PositionCacheEntry::Retrieve(unsigned int styleNumber_, const char *s_,
 }
 
 unsigned int PositionCacheEntry::Hash(unsigned int styleNumber_, const char *s, unsigned int len_) {
-	unsigned int ret = s[0] << 7;
+	auto ret = static_cast<unsigned int>(static_cast<uint8_t>(s[0])) << 7;
 	for (unsigned int i=0; i<len_; i++) {
 		ret *= 1000003;
 		ret ^= s[i];
