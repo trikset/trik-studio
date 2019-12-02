@@ -4,5 +4,15 @@ update_configs:
   - package_manager: "submodules"
     directory: "./"
     update_schedule: "weekly"
+    allowed_updates:
+      - match:
+          dependency_name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
     default_reviewers:
       - "iakov"
+
+  - package_manager: "submodules"
+    directory: "./"
+    update_schedule: "monthly"
+    ignored_updates:
+      - match:
+          dependency_name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
