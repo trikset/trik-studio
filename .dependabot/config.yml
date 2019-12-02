@@ -2,35 +2,24 @@ version: 1
 
 update_configs:
   - package_manager: "submodules"
-    directory: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
+    directory: "./"
     update_schedule: "weekly"
+    allowed_updates:
+      - match:
+          dependency_name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
+      - match:
+          dependency_name: "thirdparty/gamepad/gamepad"
     default_reviewers:
       - "iakov"
 
   - package_manager: "submodules"
-    directory: "qrtest/thirdparty/googletest/googletest"
+    directory: "./"
     update_schedule: "monthly"
-
-  - package_manager: "submodules"
-    directory: "qrgui/thirdparty/qt-solutions"
-    update_schedule: "monthly"
-
-  - package_manager: "submodules"
-    directory: "thirdparty/gamepad/gamepad"
-    update_schedule: "weekly"
-
-  - package_manager: "submodules"
-    directory: "installer/nxt-tools"
-    update_schedule: "weekly"
-
-  - package_manager: "submodules"
-    directory: "plugins/robots/thirdparty/hidapi"
-    update_schedule: "monthly"
-
-  - package_manager: "submodules"
-    directory: "thirdparty/quazip/quazip"
-    update_schedule: "monthly"
-
-  - package_manager: "submodules"
-    directory: "plugins/robots/thirdparty/Box2D/Box2D"
-    update_schedule: "monthly"
+    ignored_updates:
+      - match:
+          dependency_name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
+      - match:
+          dependency_name: "thirdparty/gamepad/gamepad"
+    automerged_updates:
+      - match:
+          dependency_name: "*"
