@@ -23,8 +23,8 @@
 
 #include <QObject>
 
-#include <Qsci/qsciglobal.h>
-#include <Qsci/qscilexercpp.h>
+#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
+#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexercpp.h>
 
 
 //! \brief The QsciLexerJavaScript class encapsulates the Scintilla JavaScript

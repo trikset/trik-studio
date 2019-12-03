@@ -21,7 +21,7 @@
 #ifndef QSCIDOCUMENT_H
 #define QSCIDOCUMENT_H
 
-#include <Qsci/qsciglobal.h>
+#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
 
 
 class QsciScintillaBase;

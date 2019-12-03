@@ -23,9 +23,9 @@
 
 #include <QObject>
 
-#include <Qsci/qsciglobal.h>
-#include <Qsci/qscilexer.h>
-#include "Qsci/qsciscintillabase.h"
+#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
+#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexer.h>
+#include "thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintillabase.h"
 
 
 //! \brief The QsciLexerPython class encapsulates the Scintilla Python lexer.
