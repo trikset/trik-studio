@@ -313,12 +313,12 @@ QsciCommandSet::QsciCommandSet(QsciScintilla *qs) : qsci(qs)
             QT_TRANSLATE_NOOP("QsciCommand",
                     "Extend selection to end of next word")
         },
-        {
-            QsciCommand::WordPartLeft,
-            Qt::Key_Slash | Qt::CTRL,
-            0,
-            QT_TRANSLATE_NOOP("QsciCommand", "Move left one word part")
-        },
+//        {
+//            QsciCommand::WordPartLeft,
+//            Qt::Key_Slash | Qt::CTRL,
+//            0,
+//            QT_TRANSLATE_NOOP("QsciCommand", "Move left one word part")
+//        },
         {
             QsciCommand::WordPartLeftExtend,
             Qt::Key_Slash | Qt::CTRL | Qt::SHIFT,
@@ -710,12 +710,12 @@ QsciCommandSet::QsciCommandSet(QsciScintilla *qs) : qsci(qs)
             0,
             QT_TRANSLATE_NOOP("QsciCommand", "Delete current line")
         },
-        {
-            QsciCommand::LineCut,
-            Qt::Key_L | Qt::CTRL,
-            0,
-            QT_TRANSLATE_NOOP("QsciCommand", "Cut current line")
-        },
+//		{
+//			QsciCommand::LineCut,
+//			Qt::Key_L | Qt::CTRL,
+//			0,
+//			QT_TRANSLATE_NOOP("QsciCommand", "Cut current line")
+//		},
         {
             QsciCommand::LineCopy,
             Qt::Key_T | Qt::CTRL | Qt::SHIFT,
