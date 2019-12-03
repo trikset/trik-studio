@@ -17,7 +17,7 @@ include (qreal.pri)
 plugins.file = $$PWD/plugins/robots.pro
 
 RESOURCES += \
-	qrgui/mainwindow/qrgui.qrc
+	qrgui/mainWindow/mainWindow.qrc
 
 include (installer/platform/install-trik-studio.pri)
 
