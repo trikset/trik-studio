@@ -695,7 +695,6 @@ struct libusb_config_descriptor {
  * host-endian format.
  */
 struct libusb_ss_endpoint_companion_descriptor {
-
 	/** Size of this descriptor (in bytes) */
 	uint8_t  bLength;
 
