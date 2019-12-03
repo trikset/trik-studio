@@ -21,6 +21,7 @@
 !win32:VERSION = 15.0.0
 
 TEMPLATE = lib
+
 CONFIG += qt warn_off thread exceptions hide_symbols
 
 CONFIG(debug, debug|release) {
@@ -36,6 +37,10 @@ CONFIG(debug, debug|release) {
 } else {
 	TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
 }
+
+include(../../../global.pri)
+INCLUDEPATH += thirdparty/qscintilla/Qt4Qt5/
+TARGET = qscintilla2
 
 macx:!CONFIG(staticlib) {
 	QMAKE_POST_LINK += install_name_tool -id @rpath/$(TARGET1) $(TARGET)
@@ -107,46 +112,46 @@ HEADERS = \
 	./Qsci/qscicommandset.h \
 	./Qsci/qscidocument.h \
 	./Qsci/qscilexer.h \
-	./Qsci/qscilexeravs.h \
-	./Qsci/qscilexerbash.h \
-	./Qsci/qscilexerbatch.h \
-	./Qsci/qscilexercmake.h \
-	./Qsci/qscilexercoffeescript.h \
+#	./Qsci/qscilexeravs.h \
+#	./Qsci/qscilexerbash.h \
+#	./Qsci/qscilexerbatch.h \
+#	./Qsci/qscilexercmake.h \
+#	./Qsci/qscilexercoffeescript.h \
 	./Qsci/qscilexercpp.h \
-	./Qsci/qscilexercsharp.h \
-	./Qsci/qscilexercss.h \
+#	./Qsci/qscilexercsharp.h \
+#	./Qsci/qscilexercss.h \
 	./Qsci/qscilexercustom.h \
-	./Qsci/qscilexerd.h \
-	./Qsci/qscilexerdiff.h \
-	./Qsci/qscilexeredifact.h \
-	./Qsci/qscilexerfortran.h \
-	./Qsci/qscilexerfortran77.h \
+#	./Qsci/qscilexerd.h \
+#	./Qsci/qscilexerdiff.h \
+#	./Qsci/qscilexeredifact.h \
+#	./Qsci/qscilexerfortran.h \
+#	./Qsci/qscilexerfortran77.h \
 	./Qsci/qscilexerhtml.h \
-	./Qsci/qscilexeridl.h \
-	./Qsci/qscilexerjava.h \
+#	./Qsci/qscilexeridl.h \
+#	./Qsci/qscilexerjava.h \
 	./Qsci/qscilexerjavascript.h \
 	./Qsci/qscilexerjson.h \
 	./Qsci/qscilexerlua.h \
-	./Qsci/qscilexermakefile.h \
-	./Qsci/qscilexermarkdown.h \
-	./Qsci/qscilexermatlab.h \
-	./Qsci/qscilexeroctave.h \
+#	./Qsci/qscilexermakefile.h \
+#	./Qsci/qscilexermarkdown.h \
+#	./Qsci/qscilexermatlab.h \
+#	./Qsci/qscilexeroctave.h \
 	./Qsci/qscilexerpascal.h \
-	./Qsci/qscilexerperl.h \
-	./Qsci/qscilexerpostscript.h \
-	./Qsci/qscilexerpo.h \
-	./Qsci/qscilexerpov.h \
-	./Qsci/qscilexerproperties.h \
+#	./Qsci/qscilexerperl.h \
+#	./Qsci/qscilexerpostscript.h \
+#	./Qsci/qscilexerpo.h \
+#	./Qsci/qscilexerpov.h \
+#	./Qsci/qscilexerproperties.h \
 	./Qsci/qscilexerpython.h \
-	./Qsci/qscilexerruby.h \
-	./Qsci/qscilexerspice.h \
-	./Qsci/qscilexersql.h \
-	./Qsci/qscilexertcl.h \
-	./Qsci/qscilexertex.h \
-	./Qsci/qscilexerverilog.h \
-	./Qsci/qscilexervhdl.h \
+#	./Qsci/qscilexerruby.h \
+#	./Qsci/qscilexerspice.h \
+#	./Qsci/qscilexersql.h \
+#	./Qsci/qscilexertcl.h \
+#	./Qsci/qscilexertex.h \
+#	./Qsci/qscilexerverilog.h \
+#	./Qsci/qscilexervhdl.h \
 	./Qsci/qscilexerxml.h \
-	./Qsci/qscilexeryaml.h \
+#	./Qsci/qscilexeryaml.h \
 	./Qsci/qscimacro.h \
 	./Qsci/qsciprinter.h \
 	./Qsci/qscistyle.h \
@@ -221,46 +226,46 @@ SOURCES = \
 	qscicommandset.cpp \
 	qscidocument.cpp \
 	qscilexer.cpp \
-	qscilexeravs.cpp \
-	qscilexerbash.cpp \
-	qscilexerbatch.cpp \
-	qscilexercmake.cpp \
-	qscilexercoffeescript.cpp \
+#	qscilexeravs.cpp \
+#	qscilexerbash.cpp \
+#	qscilexerbatch.cpp \
+#	qscilexercmake.cpp \
+#	qscilexercoffeescript.cpp \
 	qscilexercpp.cpp \
-	qscilexercsharp.cpp \
-	qscilexercss.cpp \
+#	qscilexercsharp.cpp \
+#	qscilexercss.cpp \
 	qscilexercustom.cpp \
-	qscilexerd.cpp \
-	qscilexerdiff.cpp \
-	qscilexeredifact.cpp \
-	qscilexerfortran.cpp \
-	qscilexerfortran77.cpp \
+#	qscilexerd.cpp \
+#	qscilexerdiff.cpp \
+#	qscilexeredifact.cpp \
+#	qscilexerfortran.cpp \
+#	qscilexerfortran77.cpp \
 	qscilexerhtml.cpp \
-	qscilexeridl.cpp \
-	qscilexerjava.cpp \
+#	qscilexeridl.cpp \
+#	qscilexerjava.cpp \
 	qscilexerjavascript.cpp \
 	qscilexerjson.cpp \
 	qscilexerlua.cpp \
-	qscilexermakefile.cpp \
-	qscilexermarkdown.cpp \
-	qscilexermatlab.cpp \
-	qscilexeroctave.cpp \
+#	qscilexermakefile.cpp \
+#	qscilexermarkdown.cpp \
+#	qscilexermatlab.cpp \
+#	qscilexeroctave.cpp \
 	qscilexerpascal.cpp \
-	qscilexerperl.cpp \
-	qscilexerpostscript.cpp \
-	qscilexerpo.cpp \
-	qscilexerpov.cpp \
-	qscilexerproperties.cpp \
+#	qscilexerperl.cpp \
+#	qscilexerpostscript.cpp \
+#	qscilexerpo.cpp \
+#	qscilexerpov.cpp \
+#	qscilexerproperties.cpp \
 	qscilexerpython.cpp \
-	qscilexerruby.cpp \
-	qscilexerspice.cpp \
-	qscilexersql.cpp \
-	qscilexertcl.cpp \
-	qscilexertex.cpp \
-	qscilexerverilog.cpp \
-	qscilexervhdl.cpp \
+#	qscilexerruby.cpp \
+#	qscilexerspice.cpp \
+#	qscilexersql.cpp \
+#	qscilexertcl.cpp \
+#	qscilexertex.cpp \
+#	qscilexerverilog.cpp \
+#	qscilexervhdl.cpp \
 	qscilexerxml.cpp \
-	qscilexeryaml.cpp \
+#	qscilexeryaml.cpp \
 	qscimacro.cpp \
 	qsciprinter.cpp \
 	qscistyle.cpp \
@@ -272,113 +277,113 @@ SOURCES = \
 	ListBoxQt.cpp \
 	PlatQt.cpp \
 	ScintillaQt.cpp \
-	../lexers/LexA68k.cpp \
-	../lexers/LexAbaqus.cpp \
-	../lexers/LexAda.cpp \
-	../lexers/LexAPDL.cpp \
-	../lexers/LexAsm.cpp \
-	../lexers/LexAsn1.cpp \
-	../lexers/LexASY.cpp \
-	../lexers/LexAU3.cpp \
-	../lexers/LexAVE.cpp \
-	../lexers/LexAVS.cpp \
-	../lexers/LexBaan.cpp \
-	../lexers/LexBash.cpp \
-	../lexers/LexBasic.cpp \
-	../lexers/LexBatch.cpp \
-	../lexers/LexBibTeX.cpp \
-	../lexers/LexBullant.cpp \
-	../lexers/LexCaml.cpp \
-	../lexers/LexCLW.cpp \
-	../lexers/LexCmake.cpp \
-	../lexers/LexCOBOL.cpp \
-	../lexers/LexCoffeeScript.cpp \
-	../lexers/LexConf.cpp \
+#	../lexers/LexA68k.cpp \
+#	../lexers/LexAbaqus.cpp \
+#	../lexers/LexAda.cpp \
+#	../lexers/LexAPDL.cpp \
+#	../lexers/LexAsm.cpp \
+#	../lexers/LexAsn1.cpp \
+#	../lexers/LexASY.cpp \
+#	../lexers/LexAU3.cpp \
+#	../lexers/LexAVE.cpp \
+#	../lexers/LexAVS.cpp \
+#	../lexers/LexBaan.cpp \
+#	../lexers/LexBash.cpp \
+#	../lexers/LexBasic.cpp \
+#	../lexers/LexBatch.cpp \
+#	../lexers/LexBibTeX.cpp \
+#	../lexers/LexBullant.cpp \
+#	../lexers/LexCaml.cpp \
+#	../lexers/LexCLW.cpp \
+#	../lexers/LexCmake.cpp \
+#	../lexers/LexCOBOL.cpp \
+#	../lexers/LexCoffeeScript.cpp \
+#	../lexers/LexConf.cpp \
 	../lexers/LexCPP.cpp \
-	../lexers/LexCrontab.cpp \
-	../lexers/LexCsound.cpp \
-	../lexers/LexCSS.cpp \
-	../lexers/LexD.cpp \
-	../lexers/LexDiff.cpp \
-	../lexers/LexDMAP.cpp \
-	../lexers/LexDMIS.cpp \
-	../lexers/LexECL.cpp \
-	../lexers/LexEDIFACT.cpp \
-	../lexers/LexEiffel.cpp \
-	../lexers/LexErlang.cpp \
-	../lexers/LexErrorList.cpp \
+#	../lexers/LexCrontab.cpp \
+#	../lexers/LexCsound.cpp \
+#	../lexers/LexCSS.cpp \
+#	../lexers/LexD.cpp \
+#	../lexers/LexDiff.cpp \
+#	../lexers/LexDMAP.cpp \
+#	../lexers/LexDMIS.cpp \
+#	../lexers/LexECL.cpp \
+#	../lexers/LexEDIFACT.cpp \
+#	../lexers/LexEiffel.cpp \
+#	../lexers/LexErlang.cpp \
+#	../lexers/LexErrorList.cpp \
 	../lexers/LexEScript.cpp \
-	../lexers/LexFlagship.cpp \
-	../lexers/LexForth.cpp \
-	../lexers/LexFortran.cpp \
-	../lexers/LexGAP.cpp \
-	../lexers/LexGui4Cli.cpp \
-	../lexers/LexHaskell.cpp \
-	../lexers/LexHex.cpp \
+#	../lexers/LexFlagship.cpp \
+#	../lexers/LexForth.cpp \
+#	../lexers/LexFortran.cpp \
+#	../lexers/LexGAP.cpp \
+#	../lexers/LexGui4Cli.cpp \
+#	../lexers/LexHaskell.cpp \
+#	../lexers/LexHex.cpp \
 	../lexers/LexHTML.cpp \
 	../lexers/LexIndent.cpp \
-	../lexers/LexInno.cpp \
-	../lexers/LexJSON.cpp \
-	../lexers/LexKix.cpp \
-	../lexers/LexKVIrc.cpp \
-	../lexers/LexLaTeX.cpp \
-	../lexers/LexLisp.cpp \
-	../lexers/LexLout.cpp \
+#	../lexers/LexInno.cpp \
+#	../lexers/LexJSON.cpp \
+#	../lexers/LexKix.cpp \
+#	../lexers/LexKVIrc.cpp \
+#	../lexers/LexLaTeX.cpp \
+#	../lexers/LexLisp.cpp \
+#	../lexers/LexLout.cpp \
 	../lexers/LexLua.cpp \
-	../lexers/LexMagik.cpp \
-	../lexers/LexMake.cpp \
-	../lexers/LexMarkdown.cpp \
-	../lexers/LexMatlab.cpp \
-	../lexers/LexMaxima.cpp \
-	../lexers/LexMetapost.cpp \
-	../lexers/LexMMIXAL.cpp \
-	../lexers/LexModula.cpp \
-	../lexers/LexMPT.cpp \
-	../lexers/LexMSSQL.cpp \
-	../lexers/LexMySQL.cpp \
-	../lexers/LexNimrod.cpp \
-	../lexers/LexNsis.cpp \
-	../lexers/LexNull.cpp \
-	../lexers/LexOpal.cpp \
-	../lexers/LexOScript.cpp \
+#	../lexers/LexMagik.cpp \
+#	../lexers/LexMake.cpp \
+#	../lexers/LexMarkdown.cpp \
+#	../lexers/LexMatlab.cpp \
+#	../lexers/LexMaxima.cpp \
+#	../lexers/LexMetapost.cpp \
+#	../lexers/LexMMIXAL.cpp \
+#	../lexers/LexModula.cpp \
+#	../lexers/LexMPT.cpp \
+#	../lexers/LexMSSQL.cpp \
+#	../lexers/LexMySQL.cpp \
+#	../lexers/LexNimrod.cpp \
+#	../lexers/LexNsis.cpp \
+#	../lexers/LexNull.cpp \
+#	../lexers/LexOpal.cpp \
+#	../lexers/LexOScript.cpp \
 	../lexers/LexPascal.cpp \
-	../lexers/LexPB.cpp \
-	../lexers/LexPerl.cpp \
-	../lexers/LexPLM.cpp \
-	../lexers/LexPO.cpp \
-	../lexers/LexPOV.cpp \
-	../lexers/LexPowerPro.cpp \
-	../lexers/LexPowerShell.cpp \
-	../lexers/LexProgress.cpp \
-	../lexers/LexProps.cpp \
-	../lexers/LexPS.cpp \
+#	../lexers/LexPB.cpp \
+#	../lexers/LexPerl.cpp \
+#	../lexers/LexPLM.cpp \
+#	../lexers/LexPO.cpp \
+#	../lexers/LexPOV.cpp \
+#	../lexers/LexPowerPro.cpp \
+#	../lexers/LexPowerShell.cpp \
+#	../lexers/LexProgress.cpp \
+#	../lexers/LexProps.cpp \
+#	../lexers/LexPS.cpp \
 	../lexers/LexPython.cpp \
-	../lexers/LexR.cpp \
-	../lexers/LexRebol.cpp \
-	../lexers/LexRegistry.cpp \
-	../lexers/LexRuby.cpp \
-	../lexers/LexRust.cpp \
-	../lexers/LexSAS.cpp \
-	../lexers/LexScriptol.cpp \
-	../lexers/LexSmalltalk.cpp \
-	../lexers/LexSML.cpp \
-	../lexers/LexSorcus.cpp \
-	../lexers/LexSpecman.cpp \
-	../lexers/LexSpice.cpp \
-	../lexers/LexSQL.cpp \
-	../lexers/LexStata.cpp \
-	../lexers/LexSTTXT.cpp \
-	../lexers/LexTACL.cpp \
-	../lexers/LexTADS3.cpp \
-	../lexers/LexTAL.cpp \
-	../lexers/LexTCL.cpp \
-	../lexers/LexTCMD.cpp \
-	../lexers/LexTeX.cpp \
-	../lexers/LexTxt2tags.cpp \
-	../lexers/LexVB.cpp \
-	../lexers/LexVerilog.cpp \
-	../lexers/LexVHDL.cpp \
-	../lexers/LexVisualProlog.cpp \
+#	../lexers/LexR.cpp \
+#	../lexers/LexRebol.cpp \
+#	../lexers/LexRegistry.cpp \
+#	../lexers/LexRuby.cpp \
+#	../lexers/LexRust.cpp \
+#	../lexers/LexSAS.cpp \
+#	../lexers/LexScriptol.cpp \
+#	../lexers/LexSmalltalk.cpp \
+#	../lexers/LexSML.cpp \
+#	../lexers/LexSorcus.cpp \
+#	../lexers/LexSpecman.cpp \
+#	../lexers/LexSpice.cpp \
+#	../lexers/LexSQL.cpp \
+#	../lexers/LexStata.cpp \
+#	../lexers/LexSTTXT.cpp \
+#	../lexers/LexTACL.cpp \
+#	../lexers/LexTADS3.cpp \
+#	../lexers/LexTAL.cpp \
+#	../lexers/LexTCL.cpp \
+#	../lexers/LexTCMD.cpp \
+#	../lexers/LexTeX.cpp \
+#	../lexers/LexTxt2tags.cpp \
+#	../lexers/LexVB.cpp \
+#	../lexers/LexVerilog.cpp \
+#	../lexers/LexVHDL.cpp \
+#	../lexers/LexVisualProlog.cpp \
 	../lexers/LexYAML.cpp \
 	../lexlib/Accessor.cpp \
 	../lexlib/CharacterCategory.cpp \
