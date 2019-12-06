@@ -703,6 +703,11 @@ Model &TwoDModelWidget::model() const
 void TwoDModelWidget::setController(ControllerInterface &controller)
 {
 	mController = &controller;
+
+	// Clearing 2D model undo stack...
+	mController->moduleClosed(editorId());
+	mController->moduleOpened(editorId());
+
 	mScene->setController(controller);
 
 	auto setItemsProperty = [=](const QStringList &items, const QString &property, const QVariant &value) {

@@ -58,7 +58,10 @@ QString CommonRobotModel::kitId() const
 void CommonRobotModel::init()
 {
 	rereadSettings();
-	configureKnownDevices();
+	// We don't need to configure non configurable sensors for generation
+	if (!name().contains("Gen")) {
+		configureKnownDevices();
+	}
 }
 
 void CommonRobotModel::connectToRobot()
@@ -200,7 +203,8 @@ void CommonRobotModel::configureDevice(const PortInfo &port, const DeviceInfo &d
 	if (device) {
 		mConfiguration.configureDevice(device);
 	} else {
-		QLOG_WARN() << "Can not create device" << deviceInfo.toString() << "for port" << port.toString();
+		QLOG_WARN() << "Can not create device" << deviceInfo.toString()
+				<< "for port" << port.toString() << "on" << name();
 	}
 	/// @todo Handle error
 }
