@@ -38,9 +38,10 @@ CONFIG(debug, debug|release) {
 	TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
 }
 
+TARGET = qscintilla2
 include(../../../global.pri)
 INCLUDEPATH += thirdparty/qscintilla/Qt4Qt5/
-TARGET = qscintilla2
+
 
 macx:!CONFIG(staticlib) {
 	QMAKE_POST_LINK += install_name_tool -id @rpath/$(TARGET1) $(TARGET)
