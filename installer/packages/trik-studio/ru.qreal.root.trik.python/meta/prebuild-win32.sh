@@ -9,7 +9,7 @@ cp    $BIN_DIR/plugins/tools/kitPlugins/robots-trik-v62-python-generator.dll    
 
 python_ver=3.7.5 # TMP
 cache_dir="$(cygpath $APPDATA)"/$PRODUCT/installer_cache
-if [ -z $(file -b $BIN_DIR/trik-studio | grep -Eo "^PE32 ") ] ; then PY_BIT=amd64 ; else export PY_BIT=win32 ; fi
+if [ -z $(file -b $BIN_DIR/trik-studio | grep -Eo "^PE32 ") ] ; then PY_BIT=amd64 ; else PY_BIT=win32 ; fi
 mkdir -p "$cache_dir"
 cd "$cache_dir"
 
