@@ -42,7 +42,7 @@ do
   curl -L -s -o PuTTY_$putty_ver/$file.exe $putty_server/w32/$file.exe &
 done
 curl -L -s -o PuTTY_$putty_ver/putty.chm $putty_server/putty.chm &
-# end of download winscp
+# end of download putty
 fi
 
 if [ ! -d winscp_$winscp_ver ]
