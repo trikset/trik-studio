@@ -50,30 +50,26 @@ matrix:
     - stage: lint
       os: linux
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      env: CONFIG=debug VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Vera and translations"
       script:
-      - ./buildScripts/travis/vera_translation.sh & WPID=$!
-      - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-      - export TIMEOUT=false
-      - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
+      - ./buildScripts/travis/vera_translation.sh
       after_script:
       - kill $HEARTBEAT
-      - sync ; wc -l build.log ; tail -n 1000 build.log
 
     - stage: build
       os: linux
       services: docker
       name: "Linux release"
-      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       services: docker
-      env: CONFIG=debug  VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-      name: "Linux debug + vera + tests + translations"
+      env: CONFIG=debug TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      name: "Linux debug + tests"
     - os: osx
       language: cpp
       name: "macOS release"
-      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
     - os: osx
       language: cpp
       name: "macOS debug + tests"
@@ -84,31 +80,10 @@ matrix:
       services: docker
       name: "Linux release installer"
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
-      script:
-      - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec -i builder " ; else export EXECUTOR="time " ;fi
-      - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
-      - ./buildScripts/travis/script.sh & WPID=$!
-      - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-      - export TIMEOUT=false
-      - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
-      - ./buildScripts/travis/after_script.sh
-      - kill $HEARTBEAT
-      - sync ; wc -l build.log ; tail -n 1000 build.log
     - os: osx
       language: cpp
       name: "macOS release installer"
       env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800 
-      script: 
-      - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec -i builder " ; else export EXECUTOR="time " ;fi
-      - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
-      - ./buildScripts/travis/script.sh & WPID=$!
-      - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-      - export TIMEOUT=false
-      - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
-      - ./buildScripts/travis/after_script.sh
-      - kill $HEARTBEAT
-      - sync ; wc -l build.log ; tail -n 1000 build.log
-
 
 before_install:
   - if ./buildScripts/travis/has_only_skipped_files.sh ; then echo "Triggering early terminate..." ; set -xo functrace ; travis_terminate 0 ; fi
