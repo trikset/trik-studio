@@ -47,7 +47,7 @@ branches:
 matrix:
   include:
     - stage: build
-    - os: linux
+      os: linux
       services: docker
       name: "Linux release"
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
@@ -65,6 +65,7 @@ matrix:
       env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
     - stage: installer
       script: ./buildScripts/travis/after_script.sh
+      name: "Testing installer"
 
 before_install:
   - if ./buildScripts/travis/has_only_skipped_files.sh ; then echo "Triggering early terminate..." ; set -xo functrace ; travis_terminate 0 ; fi
