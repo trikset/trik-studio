@@ -3,6 +3,10 @@ language: minimal
 git:
   depth: 20
 
+stages:
+  - build
+  - installer
+
 env:
   global:
     - PYENV_ROOT="$HOME/pyenv.root"
@@ -42,6 +46,7 @@ branches:
 
 matrix:
   include:
+    - stage: build
     - os: linux
       services: docker
       name: "Linux release"
@@ -58,7 +63,8 @@ matrix:
       language: cpp
       name: "macOS debug + tests"
       env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
-
+    - stage: installer
+      script: ./buildScripts/travis/after_script.sh
 
 before_install:
   - if ./buildScripts/travis/has_only_skipped_files.sh ; then echo "Triggering early terminate..." ; set -xo functrace ; travis_terminate 0 ; fi
