@@ -121,18 +121,6 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (PlatformInfo::osType().startsWith("windows") && qEnvironmentVariableIsEmpty("TRIK_PYTHONPATH")) {
-		auto dir = QDir(QCoreApplication::applicationDirPath());
-		dir.makeAbsolute();
-		for (auto file : dir.entryList()) {
-			if (file.endsWith(".zip") && file.startsWith("python"))
-			{
-				qputenv("TRIK_PYTHONPATH", dir.filePath(file).toLatin1());
-				break;
-			}
-		}
-	}
-
 	initLogging();
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();

@@ -69,9 +69,32 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 
 	mAdditionalPreferences = new TrikAdditionalPreferences({ mRealRobotModel->name() });
 
-	auto enablePython = !QProcessEnvironment::systemEnvironment().value("TRIK_PYTHONPATH").isEmpty();
-	if (friendlyKitName().contains("2014")) {
-		enablePython = false;
+	bool enablePython = false;
+	if (!friendlyKitName().contains("2014")) {
+		if (!qEnvironmentVariableIsEmpty("TRIK_PYTHONPATH")) {
+			enablePython = true;
+		} else if (PlatformInfo::osType().startsWith("windows")) {
+			auto dir = QDir(QCoreApplication::applicationDirPath());
+			dir.makeAbsolute();
+			bool isOne = false;
+			QByteArray value;
+			for (auto file : dir.entryList()) {
+				if (file.endsWith(".zip") && file.startsWith("python"))
+				{
+					if (isOne) {
+						isOne = false;
+						value.clear();
+						break;
+					}
+					isOne = true;
+					value = dir.filePath(file).toLatin1();
+				}
+			}
+			if (isOne && !value.isNull()) {
+				qputenv("TRIK_PYTHONPATH", value);
+				enablePython = true;
+			}
+		}
 	}
 	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, enablePython));
 }
