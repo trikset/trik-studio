@@ -76,9 +76,9 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		} else if (PlatformInfo::osType().startsWith("windows")) {
 			auto dir = QDir(QCoreApplication::applicationDirPath());
 			dir.makeAbsolute();
-			bool isOne = false;
+			auto isOne = false;
 			QByteArray value;
-			for (auto file : dir.entryList()) {
+			for (auto &&file : dir.entryList()) {
 				if (file.endsWith(".zip") && file.startsWith("python"))
 				{
 					if (isOne) {
