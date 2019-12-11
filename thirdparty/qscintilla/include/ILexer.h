@@ -10,21 +10,12 @@
 
 #include "Sci_Position.h"
 
-#ifdef SCI_NAMESPACE
 namespace Scintilla {
-#endif
-
-#ifdef _WIN32
-	#define SCI_METHOD __stdcall
-#else
-	#define SCI_METHOD
-#endif
 
 enum { dvOriginal=0, dvLineEnd=1 };
 
 class IDocument {
 public:
-	virtual ~IDocument() = default;
 	virtual int SCI_METHOD Version() const = 0;
 	virtual void SCI_METHOD SetErrorStatus(int status) = 0;
 	virtual Sci_Position SCI_METHOD Length() const = 0;
@@ -55,11 +46,10 @@ public:
 	virtual int SCI_METHOD GetCharacterAndWidth(Sci_Position position, Sci_Position *pWidth) const = 0;
 };
 
-enum { lvOriginal=0, lvSubStyles=1 };
+enum { lvOriginal=0, lvSubStyles=1, lvMetaData=2 };
 
 class ILexer {
 public:
-	virtual ~ILexer() = default;
 	virtual int SCI_METHOD Version() const = 0;
 	virtual void SCI_METHOD Release() = 0;
 	virtual const char * SCI_METHOD PropertyNames() = 0;
@@ -87,17 +77,14 @@ public:
 	virtual const char * SCI_METHOD GetSubStyleBases() = 0;
 };
 
-class ILoader {
+class ILexerWithMetaData : public ILexerWithSubStyles {
 public:
-	virtual ~ILoader() = default;
-	virtual int SCI_METHOD Release() = 0;
-	// Returns a status code from SC_STATUS_*
-	virtual int SCI_METHOD AddData(char *data, Sci_Position length) = 0;
-	virtual void * SCI_METHOD ConvertToDocument() = 0;
+	virtual int SCI_METHOD NamedStyles() = 0;
+	virtual const char * SCI_METHOD NameOfStyle(int style) = 0;
+	virtual const char * SCI_METHOD TagsOfStyle(int style) = 0;
+	virtual const char * SCI_METHOD DescriptionOfStyle(int style) = 0;
 };
 
-#ifdef SCI_NAMESPACE
 }
-#endif
 
 #endif

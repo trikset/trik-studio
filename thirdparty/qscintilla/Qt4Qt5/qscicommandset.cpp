@@ -1,6 +1,6 @@
 // This module implements the QsciCommandSet class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -710,12 +710,12 @@ QsciCommandSet::QsciCommandSet(QsciScintilla *qs) : qsci(qs)
             0,
             QT_TRANSLATE_NOOP("QsciCommand", "Delete current line")
         },
-        {
-            QsciCommand::LineCut,
-			Qt::Key_L | Qt::CTRL | Qt::SHIFT,
-            0,
-            QT_TRANSLATE_NOOP("QsciCommand", "Cut current line")
-        },
+//		{
+//			QsciCommand::LineCut,
+//			Qt::Key_L | Qt::CTRL,
+//			0,
+//			QT_TRANSLATE_NOOP("QsciCommand", "Cut current line")
+//		},
         {
             QsciCommand::LineCopy,
             Qt::Key_T | Qt::CTRL | Qt::SHIFT,
@@ -937,7 +937,7 @@ bool QsciCommandSet::writeSettings(QSettings &qs, const char *prefix)
         qs.setValue(skey + "key", cmd->key());
 
         // Write the alternate key.
-        qs.setValue(skey + "alt", cmd->key());
+        qs.setValue(skey + "alt", cmd->alternateKey());
     }
 
     return rc;

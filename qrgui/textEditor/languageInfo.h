@@ -18,11 +18,11 @@
 
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerpython.h>
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexercpp.h>
+#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerjavascript.h>
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerpascal.h>
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerlua.h>
 
 #include "qrgui/textEditor/textEditorDeclSpec.h"
-#include "lexerjs.h"
 
 namespace qReal {
 namespace text {
@@ -165,7 +165,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new LexerJS()                                              /* lexer */
+				, new QsciLexerJavaScript()                                  /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -182,7 +182,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new LexerJS()                                              /* lexer */
+				, new QsciLexerJavaScript()                                  /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}

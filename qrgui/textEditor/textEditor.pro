@@ -43,7 +43,6 @@ HEADERS += \
 	$$PWD/qscintillaTextEdit.h \
 	$$PWD/languageInfo.h \
 	$$PWD/codeBlockManager.h \
-	$$PWD/lexerjs.h
 
 SOURCES += \
 	$$PWD/textHighlighter.cpp \
@@ -52,4 +51,3 @@ SOURCES += \
 	$$PWD/qscintillaTextEdit.cpp \
 	$$PWD/languageInfo.cpp \
 	$$PWD/codeBlockManager.cpp \
-	$$PWD/lexerjs.cpp
