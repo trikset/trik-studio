@@ -78,7 +78,7 @@ matrix:
     - stage: installer
       os: linux
       services: docker
-      name: "Linux release installer"
+      name: "Linux release installer + checker"
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
     - os: osx
       language: cpp
