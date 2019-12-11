@@ -104,9 +104,9 @@ script:
   - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - export TIMEOUT=false
   - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
+  if [ $INSTALLER && ! $TIMEOUT ] ; then ./buildScripts/travis/build_installer.sh ; fi
 
 after_script:
-  - ./buildScripts/travis/after_script.sh
   - kill $HEARTBEAT
   - sync ; wc -l build.log ; tail -n 1000 build.log
 
