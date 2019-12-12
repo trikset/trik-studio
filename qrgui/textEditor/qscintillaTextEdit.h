@@ -89,6 +89,9 @@ private:
 	/// Configures some settings such as autoindentation and margin properties, brackets highlighting, etc
 	void setDefaultSettings();
 
+	/// Update margin width, useful for zoom
+	void updateMarginWidth();
+
 	const QPersistentModelIndex mIndex;
 	const int mRole;
 	LanguageInfo mLanguage;

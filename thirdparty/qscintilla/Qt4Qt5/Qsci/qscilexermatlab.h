@@ -1,6 +1,6 @@
 // This defines the interface to the QsciLexerMatlab class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -23,8 +23,8 @@
 
 #include <QObject>
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexer.h>
+#include <Qsci/qsciglobal.h>
+#include <Qsci/qscilexer.h>
 
 
 //! \brief The QsciLexerMatlab class encapsulates the Scintilla Matlab file
@@ -67,7 +67,7 @@ public:
 
     //! Construct a QsciLexerMatlab with parent \a parent.  \a parent is
     //! typically the QsciScintilla instance.
-    QsciLexerMatlab(QObject *parent = nullptr);
+    QsciLexerMatlab(QObject *parent = 0);
 
     //! Destroys the QsciLexerMatlab instance.
     virtual ~QsciLexerMatlab();
