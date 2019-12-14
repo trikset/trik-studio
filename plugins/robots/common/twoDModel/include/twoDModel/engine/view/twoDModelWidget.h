@@ -234,6 +234,7 @@ private:
 
 	Ui::TwoDModelWidget *mUi = nullptr;
 	TwoDModelScene *mScene = nullptr;
+	QList<QMetaObject::Connection> mConnections;
 	QScopedPointer<ActionsBox> mActions;
 	ColorItemPopup *mColorFieldItemPopup;  // Takes ownership
 	ImageItemPopup *mImageItemPopup;  // Takes ownership
