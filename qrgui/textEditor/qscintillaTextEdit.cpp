@@ -120,11 +120,13 @@ bool QScintillaTextEdit::supportsFindAndReplace() const
 void QScintillaTextEdit::zoomIn()
 {
 	QsciScintilla::zoomIn();
+	updateMarginWidth();
 }
 
 void QScintillaTextEdit::zoomOut()
 {
 	QsciScintilla::zoomOut();
+	updateMarginWidth();
 }
 
 void QScintillaTextEdit::copy()
@@ -184,7 +186,7 @@ void QScintillaTextEdit::setDefaultSettings()
 	// Show margin with line numbers (up to 9999)
 	setMarginsBackgroundColor(QColor("gainsboro"));
 	setMarginLineNumbers(1, true);
-	setMarginWidth(1, QString("9999"));
+	updateMarginWidth();
 
 	// Autocompletion of lexems
 	setAutoCompletionSource(QsciScintilla::AcsAll);
@@ -221,6 +223,11 @@ void QScintillaTextEdit::setDefaultSettings()
 	// Ctrl + L Go to line and column
 	QShortcut * const ctrlL = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_L), this);
 	connect(ctrlL, &QShortcut::activated, this, &QScintillaTextEdit::goToLineColumn);
+}
+
+void QScintillaTextEdit::updateMarginWidth()
+{
+	setMarginWidth(1, QString("9999"));
 }
 
 void QScintillaTextEdit::commentUncommentLines()

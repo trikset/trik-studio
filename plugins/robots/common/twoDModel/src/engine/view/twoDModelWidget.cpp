@@ -93,30 +93,36 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
 	changePhysicsSettings();
 
-	connect(mScene, &TwoDModelScene::selectionChanged, this, &TwoDModelWidget::onSelectionChange);
-	connect(mScene, &TwoDModelScene::mousePressed, this, &TwoDModelWidget::refreshCursor);
-	connect(mScene, &TwoDModelScene::mouseReleased, this, &TwoDModelWidget::refreshCursor);
-	connect(mScene, &TwoDModelScene::mouseReleased, this, [this](){ saveWorldModelToRepo(); });
-	connect(mScene, &TwoDModelScene::robotPressed, mUi->palette, &Palette::unselect);
-	connect(mScene, &TwoDModelScene::robotListChanged, this, &TwoDModelWidget::onRobotListChange);
+	mConnections << connect(mScene, &TwoDModelScene::selectionChanged, this, &TwoDModelWidget::onSelectionChange);
+	mConnections << connect(mScene, &TwoDModelScene::mousePressed, this, &TwoDModelWidget::refreshCursor);
+	mConnections << connect(mScene, &TwoDModelScene::mouseReleased, this, &TwoDModelWidget::refreshCursor);
+	mConnections << connect(mScene, &TwoDModelScene::mouseReleased, this, [this](){ saveWorldModelToRepo(); });
+	mConnections << connect(mScene, &TwoDModelScene::robotPressed, mUi->palette, &Palette::unselect);
+	mConnections << connect(mScene, &TwoDModelScene::robotListChanged, this, &TwoDModelWidget::onRobotListChange);
 
-	connect(&mModel.worldModel(), &WorldModel::backgroundChanged, mScene, &TwoDModelScene::setBackground);
-	connect(&mModel.worldModel(), &WorldModel::itemRemoved, this, [this]() { saveWorldModelToRepo(); });
+	mConnections << connect(&mModel.worldModel(), &WorldModel::backgroundChanged
+							, mScene, &TwoDModelScene::setBackground);
+	mConnections << connect(&mModel.worldModel(), &WorldModel::itemRemoved
+							, this, [this]() { saveWorldModelToRepo(); });
 
-	connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
+	mConnections << connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
 
-	connect(&mModel.settings(), &Settings::physicsChanged, this, [this]() { updateUIPhysicsSettings(); });
+	mConnections << connect(&mModel.settings(), &Settings::physicsChanged
+							, this, [this]() { updateUIPhysicsSettings(); });
 
-	connect(&mModel.timeline(), &Timeline::started, this, [this]() {
+	mConnections << connect(&mModel.timeline(), &Timeline::started, this, [this]() {
 		if (mRobotPositionReadOnly) {
 			returnToStartMarker();
 		}
 	});
-	connect(&mModel.timeline(), &Timeline::started, this, [this]() { bringToFront(); mUi->timelineBox->setValue(0); });
-	connect(&mModel.timeline(), &Timeline::tick, this, &TwoDModelWidget::incrementTimelineCounter);
-	connect(&mModel.timeline(), &Timeline::started, this, &TwoDModelWidget::setRunStopButtonsVisibility);
-	connect(&mModel.timeline(), &Timeline::stopped, this, &TwoDModelWidget::setRunStopButtonsVisibility);
-	connect(&mModel.timeline(), &Timeline::speedFactorChanged, this, [=](int value) {
+	mConnections << connect(&mModel.timeline(), &Timeline::started
+							, this, [this]() { bringToFront(); mUi->timelineBox->setValue(0); });
+	mConnections << connect(&mModel.timeline(), &Timeline::tick, this, &TwoDModelWidget::incrementTimelineCounter);
+	mConnections << connect(&mModel.timeline(), &Timeline::started
+							, this, &TwoDModelWidget::setRunStopButtonsVisibility);
+	mConnections << connect(&mModel.timeline(), &Timeline::stopped
+							, this, &TwoDModelWidget::setRunStopButtonsVisibility);
+	mConnections << connect(&mModel.timeline(), &Timeline::speedFactorChanged, this, [=](int value) {
 		const QPoint downCoords = mUi->speedDownButton->mapTo(this, mUi->speedDownButton->rect().bottomRight());
 		const QPoint upCoords = mUi->speedUpButton->mapTo(this, mUi->speedUpButton->rect().bottomLeft());
 		const QPoint coords((downCoords.x() + upCoords.x() - mSpeedPopup->width()) / 2, downCoords.y() + 10);
@@ -154,6 +160,10 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 TwoDModelWidget::~TwoDModelWidget()
 {
 	mSelectedRobotItem = nullptr;
+	// These connections can lead to fields access after this dtor has finished.
+	for (auto &&c : mConnections) {
+		QObject::disconnect(c);
+	}
 	delete mScene;
 	delete mDisplay;
 	delete mUi;
@@ -703,6 +713,11 @@ Model &TwoDModelWidget::model() const
 void TwoDModelWidget::setController(ControllerInterface &controller)
 {
 	mController = &controller;
+
+	// Clearing 2D model undo stack...
+	mController->moduleClosed(editorId());
+	mController->moduleOpened(editorId());
+
 	mScene->setController(controller);
 
 	auto setItemsProperty = [=](const QStringList &items, const QString &property, const QVariant &value) {

@@ -653,7 +653,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+299"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
         <location line="+220"/>
         <source>Warning</source>
         <translation>Attention</translation>
@@ -713,7 +713,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+314"/>
+        <location line="+319"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

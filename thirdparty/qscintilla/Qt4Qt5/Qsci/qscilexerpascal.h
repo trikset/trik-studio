@@ -1,6 +1,6 @@
 // This defines the interface to the QsciLexerPascal class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -84,7 +84,7 @@ public:
 
     //! Construct a QsciLexerPascal with parent \a parent.  \a parent is
     //! typically the QsciScintilla instance.
-    QsciLexerPascal(QObject *parent = nullptr);
+    QsciLexerPascal(QObject *parent = 0);
 
     //! Destroys the QsciLexerPascal instance.
     virtual ~QsciLexerPascal();
@@ -103,17 +103,17 @@ public:
     //! \internal Returns a space separated list of words or characters in
     //! a particular style that define the end of a block for
     //! auto-indentation.  The styles is returned via \a style.
-    const char *blockEnd(int *style = nullptr) const;
+    const char *blockEnd(int *style = 0) const;
 
     //! \internal Returns a space separated list of words or characters in
     //! a particular style that define the start of a block for
     //! auto-indentation.  The styles is returned via \a style.
-    const char *blockStart(int *style = nullptr) const;
+    const char *blockStart(int *style = 0) const;
 
     //! \internal Returns a space separated list of keywords in a
     //! particular style that define the start of a block for
     //! auto-indentation.  The styles is returned via \a style.
-    const char *blockStartKeyword(int *style = nullptr) const;
+    const char *blockStartKeyword(int *style = 0) const;
 
     //! \internal Returns the style used for braces for brace matching.
     int braceStyle() const;

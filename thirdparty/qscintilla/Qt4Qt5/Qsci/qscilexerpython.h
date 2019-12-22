@@ -1,6 +1,6 @@
 // This defines the interface to the QsciLexerPython class.
 //
-// Copyright (c) 2017 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -25,7 +25,7 @@
 
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciglobal.h>
 #include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexer.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintillabase.h>
+#include "thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintillabase.h"
 
 
 //! \brief The QsciLexerPython class encapsulates the Scintilla Python lexer.
@@ -84,7 +84,19 @@ public:
         HighlightedIdentifier = 14,
 
         //! A decorator.
-        Decorator = 15
+        Decorator = 15,
+
+        //! A double-quoted f-string.
+        DoubleQuotedFString = 16,
+
+        //! A single-quoted f-string.
+        SingleQuotedFString = 17,
+
+        //! A triple single-quoted f-string.
+        TripleSingleQuotedFString = 18,
+
+        //! A triple double-quoted f-string.
+        TripleDoubleQuotedFString = 19,
     };
 
     //! This enum defines the different conditions that can cause
@@ -110,7 +122,7 @@ public:
 
     //! Construct a QsciLexerPython with parent \a parent.  \a parent is
     //! typically the QsciScintilla instance.
-    QsciLexerPython(QObject *parent = nullptr);
+    QsciLexerPython(QObject *parent = 0);
 
     //! Destroys the QsciLexerPython instance.
     virtual ~QsciLexerPython();
@@ -133,7 +145,7 @@ public:
     //! \internal Returns a space separated list of words or characters in
     //! a particular style that define the start of a block for
     //! auto-indentation.  The styles is returned via \a style.
-    const char *blockStart(int *style = nullptr) const;
+    const char *blockStart(int *style = 0) const;
 
     //! \internal Returns the style used for braces for brace matching.
     int braceStyle() const;
