@@ -522,6 +522,9 @@
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
+              <property name="autoFillBackground">
+               <bool>true</bool>
+              </property>
               <property name="frameShape">
                <enum>QFrame::NoFrame</enum>
               </property>
@@ -539,9 +542,6 @@
               </property>
               <property name="indentation">
                <number>10</number>
-              </property>
-              <property name="animated">
-               <bool>true</bool>
               </property>
               <property name="headerHidden">
                <bool>true</bool>
