@@ -95,7 +95,7 @@ void LineSensor::read()
 		}
 	}
 
-	const int x = qRound(xCoordinates / usefulRows);
+	const int x = usefulRows ? qRound(xCoordinates / usefulRows) : 0;
 	const int cross = qRound(crossBlacks * 100.0 / (height * horizontalLineWidth));
 	const int lineWidth = blacks / height;
 	QVector<int> v = { x, cross, lineWidth };
