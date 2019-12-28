@@ -313,7 +313,7 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	});
 
 	connect(&configurer.interpreterControl()
-			, &kitBase::InterpreterControlInterface::stopAllInterpretation
+			, &kitBase::InterpreterControlInterface::stopped
 			, this
 			, [this](qReal::interpretation::StopReason reason) {
 		if (mTextualInterpreter->isRunning()) {
