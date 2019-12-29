@@ -272,7 +272,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+187"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>
