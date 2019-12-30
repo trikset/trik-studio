@@ -904,17 +904,17 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;milliDegrees/sec&apos; parameter value.</source>
+        <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees&apos; parameter value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>milliDegrees/sec:</source>
+        <source>Degrees:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+33"/>
-        <source>milliDegrees/sec</source>
+        <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
