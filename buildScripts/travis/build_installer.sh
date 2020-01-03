@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euxo pipefail
-$EXECUTOR env CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" ccache -s
 QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $TRAVIS_OS_NAME in
   osx)
@@ -15,7 +14,7 @@ case $TRAVIS_OS_NAME in
 esac
 df -h .
 
-if $INSTALLER && ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
+if ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
       git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
       git fetch --unshallow --tags # for `git describe --tags` to work
@@ -34,5 +33,3 @@ then
 "
      fi
 fi || travis_terminate 3
-
-docker stop builder || :
