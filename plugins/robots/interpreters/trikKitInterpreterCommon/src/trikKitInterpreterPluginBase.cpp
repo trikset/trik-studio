@@ -313,7 +313,9 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	});
 
 	connect(&configurer.interpreterControl()
-			, &kitBase::InterpreterControlInterface::stopAllInterpretation
+// Naive approach to fix crash/pause when stopping from 2d model.
+// Changed from `stopAllInterpretation` to `stopped`, see git blame and corresponding PR
+			, &kitBase::InterpreterControlInterface::stopped
 			, this
 			, [this](qReal::interpretation::StopReason reason) {
 		if (mTextualInterpreter->isRunning()) {
