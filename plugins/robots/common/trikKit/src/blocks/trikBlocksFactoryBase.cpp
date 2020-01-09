@@ -264,7 +264,6 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				;
 	} else {
 		result
-				<< id("TrikWaitForGyroscope")
 				<< id("TrikCalibrateGyroscope")
 				;
 	}
