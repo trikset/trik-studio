@@ -1986,14 +1986,14 @@
 			setName("TrikWaitForGyroscope");
 			setFriendlyName(QObject::tr("Wait for Gyroscope"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the 'milliDegrees/sec' parameter value."));
+			setDescription(QObject::tr("Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the 'Degrees' parameter value."));
 			qReal::LabelProperties label_1(1, 1.1, 1.2, "Degrees", false, 0);
 			label_1.setBackground(Qt::white);
 			label_1.setScalingX(false);
 			label_1.setScalingY(false);
 			label_1.setHard(false);
 			label_1.setPlainTextMode(false);
-			label_1.setPrefix(QObject::tr("milliDegrees/sec:"));
+			label_1.setPrefix(QObject::tr("Degrees:"));
 			addLabel(label_1);
 			qReal::LabelProperties label_2(2, 1.1, 1.8, "Sign", false, 0);
 			label_2.setBackground(Qt::white);
@@ -2026,7 +2026,7 @@
 
 		void initProperties()
 		{
-			addProperty("Degrees", "string", QObject::tr("0"), QObject::tr("milliDegrees/sec"), QObject::tr(""), false);
+			addProperty("Degrees", "string", QObject::tr("0"), QObject::tr("Degrees"), QObject::tr(""), false);
 			addProperty("Sign", "DistanceSign", QString::fromUtf8("greater"), QObject::tr("Sign"), QObject::tr(""), false);
 		}
 	};

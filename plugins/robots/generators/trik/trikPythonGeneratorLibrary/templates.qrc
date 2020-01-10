@@ -231,5 +231,6 @@
         <file>templates/videosensors/stoplineSensor.t</file>
         <file>templates/videosensors/stopobjectSensor.t</file>
         <file>templates/videosensors/stopVideoStreaming.t</file>
+        <file>templates/wait/gyroscope.t</file>
     </qresource>
 </RCC>

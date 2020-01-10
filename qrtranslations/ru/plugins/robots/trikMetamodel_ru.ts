@@ -904,22 +904,34 @@
     </message>
     <message>
         <location line="+2"/>
+        <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees&apos; parameter value.</source>
+        <translation>Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы&apos;.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Degrees:</source>
+        <translation>Градусы:</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Degrees</source>
+        <translation>Градусы</translation>
+    </message>
+    <message>
         <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;milliDegrees/sec&apos; parameter value.</source>
-        <translation>Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;миллиГрадусы/сек&apos;.</translation>
+        <translation type="vanished">Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;миллиГрадусы/сек&apos;.</translation>
     </message>
     <message>
         <source>Waits till the value returned by the gyroscope on the given port will be greater or less than the given in the &apos;Degrees/sec&apos; parameter value.</source>
         <translation type="vanished">Ждать, пока значение, возвращаемое гиродатчиком на указанном порту, не будет сравнимо с указанным в значении параметра &apos;Градусы/сек&apos;.</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>milliDegrees/sec:</source>
-        <translation>миллиГрадусы/сек:</translation>
+        <translation type="vanished">миллиГрадусы/сек:</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>milliDegrees/sec</source>
-        <translation>миллиГрадусы/сек</translation>
+        <translation type="vanished">миллиГрадусы/сек</translation>
     </message>
     <message>
         <source>Degrees/sec:</source>
