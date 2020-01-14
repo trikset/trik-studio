@@ -51,10 +51,10 @@ public:
 	void reinit();
 
 private:
-	models::details::GraphicalModel *mGraphicalModel;
-	models::details::GraphicalPartModel *mGraphicalPartModel;
-	models::details::LogicalModel *mLogicalModel;
-	qrRepo::RepoControlInterface *mRepoApi;
+	QScopedPointer<models::details::GraphicalModel> mGraphicalModel;
+	QScopedPointer<models::details::GraphicalPartModel> mGraphicalPartModel;
+	QScopedPointer<models::details::LogicalModel> mLogicalModel;
+	QScopedPointer<qrRepo::RepoControlInterface> mRepoApi;
 	QScopedPointer<Exploser> mExploser;
 };
 

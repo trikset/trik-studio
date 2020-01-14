@@ -11,7 +11,6 @@ cp -pR $BIN_DIR/librobots-trik-qts-generator-library*.dylib                     
 cp -pR $BIN_DIR/librobots-trik-generator-base*.dylib                                  "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/librobots-trik-kit*.dylib                                             "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/librobots-trik-kit-interpreter-common*.dylib                          "$BUNDLE_CONTENTS/Lib"
-cp -pR $BIN_DIR/libqslog.dylib                                            	          "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libPythonQt{,_QtAll}-Qt*-Python*.dylib                                  	      "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libtrik*.dylib                                            	          "$BUNDLE_CONTENTS/Lib"
 

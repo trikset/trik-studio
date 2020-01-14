@@ -146,8 +146,9 @@ qReal::TextManagerInterface &QrguiFacade::textManager()
 const qReal::Id &QrguiFacade::activeTab()
 {
 	if (mActiveTab.isNull()) {
-		auto && tabs = mModels.graphicalModelAssistApi().children(mModels.graphicalModelAssistApi().rootId());
-		ASSERT_FALSE(tabs.empty()), mActiveTab;
+		auto const &tabs = mModels.graphicalModelAssistApi().children(mModels.graphicalModelAssistApi().rootId());
+		EXPECT_FALSE(tabs.empty());
+		Q_ASSERT(!tabs.empty());
 		mActiveTab = tabs[0];
 	}
 

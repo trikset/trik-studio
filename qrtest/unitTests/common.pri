@@ -15,7 +15,6 @@
 isEmpty(TEMPLATE): TEMPLATE = app
 
 CONFIG += cmdline
-CONFIG -= app_bundle
 
 include(../../global.pri)
 

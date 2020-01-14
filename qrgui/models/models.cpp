@@ -22,8 +22,8 @@ using namespace models;
 Models::Models(const QString &workingCopy, const EditorManagerInterface &editorManager)
 {
 	qrRepo::RepoApi *repoApi = new qrRepo::RepoApi(workingCopy);
-	mGraphicalModel = new models::details::GraphicalModel(repoApi, editorManager);
-	mGraphicalPartModel = new models::details::GraphicalPartModel(*repoApi, *mGraphicalModel);
+	mGraphicalModel.reset(new models::details::GraphicalModel(repoApi, editorManager));
+	mGraphicalPartModel.reset(new models::details::GraphicalPartModel(*repoApi, *mGraphicalModel));
 
 	GraphicalModelAssistApi * const graphicalAssistApi
 			= new GraphicalModelAssistApi(*mGraphicalModel, *mGraphicalPartModel, editorManager);
@@ -31,32 +31,29 @@ Models::Models(const QString &workingCopy, const EditorManagerInterface &editorM
 	mGraphicalModel->setAssistApi(graphicalAssistApi);
 	mGraphicalModel->reinit();
 
-	QObject::connect(mGraphicalModel, SIGNAL(rowsAboutToBeRemoved(QModelIndex, int, int))
-			, mGraphicalPartModel, SLOT(rowsAboutToBeRemovedInGraphicalModel(QModelIndex, int, int)));
+	QObject::connect(&*mGraphicalModel, &models::details::GraphicalModel::rowsAboutToBeRemoved
+			, &*mGraphicalPartModel, &models::details::GraphicalPartModel::rowsAboutToBeRemovedInGraphicalModel);
 
-	mLogicalModel = new models::details::LogicalModel(repoApi, editorManager);
+	mLogicalModel.reset(new models::details::LogicalModel(repoApi, editorManager));
 	mExploser.reset(new Exploser(logicalModelAssistApi()));
-	mRepoApi = repoApi;
+	mRepoApi.reset(repoApi);
 
-	mLogicalModel->connectToGraphicalModel(mGraphicalModel);
-	mGraphicalModel->connectToLogicalModel(mLogicalModel);
+	mLogicalModel->connectToGraphicalModel(&*mGraphicalModel);
+	mGraphicalModel->connectToLogicalModel(&*mLogicalModel);
 }
 
 Models::~Models()
 {
-	delete mGraphicalModel;
-	delete mLogicalModel;
-	delete mRepoApi;
 }
 
 QAbstractItemModel* Models::graphicalModel() const
 {
-	return mGraphicalModel;
+	return &*mGraphicalModel;
 }
 
 QAbstractItemModel* Models::logicalModel() const
 {
-	return mLogicalModel;
+	return &*mLogicalModel;
 }
 
 GraphicalModelAssistApi &Models::graphicalModelAssistApi() const

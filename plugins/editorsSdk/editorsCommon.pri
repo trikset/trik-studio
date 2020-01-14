@@ -31,7 +31,7 @@ unix:!macx {
 }
 
 macx {
-	QRXC = $$DESTDIR/qrxc$${CONFIGURATION_SUFFIX}.app/Contents/MacOS/qrxc$$CONFIGURATION_SUFFIX
+	QRXC = $$DESTDIR/qrxc$${CONFIGURATION_SUFFIX}
 }
 
 QRXC_DIR = $$DESTDIR
