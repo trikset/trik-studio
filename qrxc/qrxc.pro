@@ -14,6 +14,7 @@
 
 include(../global.pri)
 
+CONFIG *= cmdline
 
 HEADERS += \
 	diagram.h \
