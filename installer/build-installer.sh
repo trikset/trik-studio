@@ -20,7 +20,7 @@ export PRODUCT=$3
 export OS=$OSTYPE
 
 [ -z ${4+x} ] && BUILD_DIR=$(dirname $(realpath $0))/.. || BUILD_DIR=$(realpath $4)
-[ -z $BUILD_DIR ] && exit 1 || export BIN_DIR=$BUILD_DIR/bin/release
+[ -z $BUILD_DIR ] && exit 1 ||  { [ -d "$BUILD_DIR/bin/release" ] && export BIN_DIR="$BUILD_DIR/bin/release" ; } || { [ -d "$BUILD_DIR/bin/debug" ] && export BIN_DIR="$BUILD_DIR/bin/debug" ; }
 echo $BIN_DIR
 if [ -x $BIN_DIR/trik-studio ] ; then
     binary_path=$BIN_DIR/trik-studio
@@ -58,13 +58,13 @@ fi
 echo "Executing prebuild actions..."
 find $PWD/packages/qreal-base -name prebuild-common.sh -print0 | xargs -0 chmod +x
 find $PWD/packages/qreal-base -name prebuild-$OS.sh -print0 | xargs -0 chmod +x
-find $PWD/packages/qreal-base -name prebuild-common.sh | bash -x
-find $PWD/packages/qreal-base -name prebuild-$OS.sh | bash -x
+find $PWD/packages/qreal-base -name prebuild-common.sh | bash -xe
+find $PWD/packages/qreal-base -name prebuild-$OS.sh | bash -xe
 
 find $PWD/packages/$PRODUCT -name prebuild-common.sh -print0 | xargs -0 chmod +x
 find $PWD/packages/$PRODUCT -name prebuild-$OS.sh -print0 | xargs -0 chmod +x
-find $PWD/packages/$PRODUCT -name prebuild-common.sh | bash -x
-find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash -x
+find $PWD/packages/$PRODUCT -name prebuild-common.sh | bash -xe
+find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash -xe
 
 find . -type d -empty -delete
 
