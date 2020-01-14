@@ -3,4 +3,5 @@ set rules {
     ForeachsForbidden
     NoQDebug
     NoOldSIGNALnSLOT
+    NoOldInvokeMethod
 }
