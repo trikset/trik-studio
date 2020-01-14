@@ -258,7 +258,7 @@ QString EditorManager::friendlyName(const Id &id) const
 			return mMetamodels[id.editor()]->elementType(id.diagram(), id.element()).friendlyName();
 		}
 	default:
-		Q_ASSERT(!"Malformed Id");
+		Q_ASSERT("Malformed Id" && 0);
 		return "";
 	}
 }
@@ -537,14 +537,14 @@ void EditorManager::setInterpretationMode(bool enabled)
 
 bool EditorManager::isParentProperty(const Id &id, const QString &propertyName) const
 {
-	Q_UNUSED(id);
-	Q_UNUSED(propertyName);
+	Q_UNUSED(id)
+	Q_UNUSED(propertyName)
 	return false;
 }
 
 void EditorManager::deleteProperty(const QString &propDisplayedName) const
 {
-	Q_UNUSED(propDisplayedName);
+	Q_UNUSED(propDisplayedName)
 }
 
 void EditorManager::addProperty(const Id &id, const QString &propDisplayedName) const
@@ -555,11 +555,11 @@ void EditorManager::addProperty(const Id &id, const QString &propDisplayedName) 
 void EditorManager::updateProperties(const Id &id, const QString &property, const QString &propertyType
 		, const QString &propertyDefaultValue, const QString &propertyDisplayedName) const
 {
-	Q_UNUSED(id);
-	Q_UNUSED(property);
-	Q_UNUSED(propertyType);
-	Q_UNUSED(propertyDefaultValue);
-	Q_UNUSED(propertyDisplayedName);
+	Q_UNUSED(id)
+	Q_UNUSED(property)
+	Q_UNUSED(propertyType)
+	Q_UNUSED(propertyDefaultValue)
+	Q_UNUSED(propertyDisplayedName)
 }
 
 QString EditorManager::propertyNameByDisplayedName(const Id &id, const QString &displayedPropertyName) const
@@ -755,21 +755,21 @@ IdList EditorManager::elementsWithTheSameName(const Id &diagram, const QString &
 IdList EditorManager::propertiesWithTheSameName(const Id &id, const QString &propertyCurrentName
 		, const QString &propertyNewName) const
 {
-	Q_UNUSED(id);
-	Q_UNUSED(propertyCurrentName);
-	Q_UNUSED(propertyNewName);
+	Q_UNUSED(id)
+	Q_UNUSED(propertyCurrentName)
+	Q_UNUSED(propertyNewName)
 	return IdList();
 }
 
 void EditorManager::updateGenerationRule(const Id &id, const QString &newRule) const
 {
-	Q_UNUSED(id);
-	Q_UNUSED(newRule);
+	Q_UNUSED(id)
+	Q_UNUSED(newRule)
 }
 
 QString EditorManager::generationRule(const Id &id) const
 {
-	Q_UNUSED(id);
+	Q_UNUSED(id)
 	return QString();
 }
 
@@ -789,21 +789,21 @@ QStringList EditorManager::getPropertiesInformation(const Id &id) const
 
 QStringList EditorManager::getSameNamePropertyParams(const Id &propertyId, const QString &propertyName) const
 {
-	Q_UNUSED(propertyId);
-	Q_UNUSED(propertyName);
+	Q_UNUSED(propertyId)
+	Q_UNUSED(propertyName)
 	return QStringList();
 }
 
 void EditorManager::restoreRemovedProperty(const Id &propertyId, const QString &previousName) const
 {
-	Q_UNUSED(propertyId);
-	Q_UNUSED(previousName);
+	Q_UNUSED(propertyId)
+	Q_UNUSED(previousName)
 }
 
 void EditorManager::restoreRenamedProperty(const Id &propertyId, const QString &previousName) const
 {
-	Q_UNUSED(propertyId);
-	Q_UNUSED(previousName);
+	Q_UNUSED(propertyId)
+	Q_UNUSED(previousName)
 }
 
 void EditorManager::setElementEnabled(const Id &type, bool enabled)
