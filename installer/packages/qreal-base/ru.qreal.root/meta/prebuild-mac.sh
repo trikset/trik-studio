@@ -13,7 +13,7 @@ cp -pR $BIN_DIR/libqrkernel*.dylib                                        "$BUND
 cp -pR $BIN_DIR/libqrgraph*.dylib                                         "$BUNDLE_CONTENTS/Lib"
 cp -P $(pkg-config --variable=libdir zlib)/libz*.dylib                       "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrrepo*.dylib                                          "$BUNDLE_CONTENTS/Lib"
-cp -pR $BIN_DIR/patcher                                                   "$BUNDLE_CONTENTS/MacOS/"
+cp -pR "$BIN_DIR/patcher"                                                 "$BUNDLE_CONTENTS/MacOS/"
 cp -pR $BIN_DIR/libqrutils*.dylib                                         "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqrtext*.dylib                                          "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqscintilla2*.dylib                                     "$BUNDLE_CONTENTS/Lib"
