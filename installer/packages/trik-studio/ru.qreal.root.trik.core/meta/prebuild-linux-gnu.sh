@@ -16,4 +16,4 @@ ldd $BIN_DIR/libPythonQt_QtAll-Qt5*-Python3*.so.1.0  | grep python3 | cut -d ' '
 
 cp -pr $BIN_DIR/libtrik*.so*                                                         $PWD/../data/lib/
 
-cp     $BIN_DIR/system.{py,js}                                                		 $PWD/../data/bin/
+cp     $BIN_DIR/system.{py,js} $BIN_DIR/2D-model                       		 $PWD/../data/bin/

@@ -24,7 +24,7 @@ TEMPLATE = app
 
 QT -= gui
 
-CONFIG += console
+CONFIG += cmdline
 
 SOURCES += \
 	main.cpp \
