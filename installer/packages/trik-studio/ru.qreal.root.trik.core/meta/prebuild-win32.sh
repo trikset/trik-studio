@@ -22,7 +22,7 @@ cp    $BIN_DIR/vcruntime*.dll                                                   
 
 cp    $BIN_DIR/system.js                                                          $PWD/../data/bin/
 cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
-cp    "$BIN_DIR/2D-model.exe"                                                       "$PWD/../data/bin/"
+cp    "$BIN_DIR/2D-model.exe"                                                       "$PWD/../data/"
 
 winscp_ver=5.15
 putty_ver=0.71
