@@ -46,6 +46,7 @@ internalErrorMessage="[ { \"level\": \"error\", \"message\": \"Внутренн�
 incorrectSaveFileMessage="[ { \"level\": \"error\", \"message\": \"Некорректный или испорченный файл с сохранением\" } ]"
 solutionFailedOnOwnFieldMessage="[ { \"level\": \"error\", \"message\": \"Решение работает неправильно\" } ]"
 solutionFailedOnOtherFieldMessage="[ { \"level\": \"error\", \"message\": \"Решение неправильно работает на одном из тестовых полей\" } ]"
+timeoutError="[ { \"level\": \"error\", \"message\": \"Решение работает дольше предполагаемого времени.\" } ]"
 
 [ "$#" -lt 1 ] && show_help || :
 
@@ -66,6 +67,15 @@ if [ -e $runmode ]; then
 fi
 
 log "$MODE"
+
+timelim_path="$mainFolderWithFields/timelim"
+TIMELIM=""
+
+if [ -e $timelim_path ]; then
+	TIMELIM="timeout --preserve-status --foreground -s KILL $(cat $timelim_path)"
+fi
+
+echo $TIMELIM
 
 if ! [ -f "$fileWithPath" ]; then
 	echo $internalErrorMessage
@@ -96,7 +106,7 @@ mkdir -p "$(pwd)/trajectories/$fileNameWithoutExtension"
 if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 	log "Running save with its own field"
 
-	$twoDModel --platform minimal -b "$fileWithPath" \
+	$TIMELIM $twoDModel --platform minimal -b "$fileWithPath" \
 			--report "$(pwd)/reports/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--input "$mainFolderWithFields/check-self.txt" \
@@ -108,6 +118,12 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 		log "Incorrect or corrupt save file $fileWithPath"
 		echo $incorrectSaveFileMessage
 		exit 1
+	fi
+
+	if [ $exitCode -eq 137 ]; then
+		log "Field was exited by timeout"
+		echo $timeoutError
+		continue
 	fi
 
 	if [ $exitCode -gt 100 ]; then
@@ -153,13 +169,19 @@ if [ -d "$mainFolderWithFields" ]; then
 
 		log "Running Checker"
 		currentField="${i%.*}"
-		$twoDModel --platform minimal -b "./$solutionCopy" \
+		$TIMELIM $twoDModel --platform minimal -b "./$solutionCopy" \
 				--report "$(pwd)/reports/$fileNameWithoutExtension/$currentField" \
 				--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/$currentField" \
 				--input "$mainFolderWithFields/$currentField.txt" \
 				--mode "$MODE"
 
 		exitCode=$?
+
+		if [ $exitCode -eq 137 ]; then
+			log "Field was exited by timeout"
+			echo $timeoutError
+			continue
+		fi
 
 		if [ $exitCode -gt 100 ]; then
 			log "Checker internal error, exit code: $exitCode"
