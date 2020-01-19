@@ -71,8 +71,8 @@ log "$MODE"
 timelim_path="$mainFolderWithFields/timelim"
 TIMELIM=""
 
-if [ -e $timelim_path ]; then
-	TIMELIM="timeout --preserve-status --foreground -s KILL $(cat $timelim_path)"
+if [ -e "$timelim_path" ]; then
+	TIMELIM="timeout --preserve-status --foreground -s KILL $(cat "$timelim_path")"
 fi
 
 log "$TIMELIM"
@@ -106,7 +106,7 @@ mkdir -p "$(pwd)/trajectories/$fileNameWithoutExtension"
 if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 	log "Running save with its own field"
 
-	$TIMELIM $twoDModel --platform minimal -b "$fileWithPath" \
+	"$TIMELIM" "$twoDModel" --platform minimal -b "$fileWithPath" \
 			--report "$(pwd)/reports/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--input "$mainFolderWithFields/check-self.txt" \
@@ -168,7 +168,7 @@ if [ -d "$mainFolderWithFields" ]; then
 
 		log "Running Checker"
 		currentField="${i%.*}"
-		$TIMELIM $twoDModel --platform minimal -b "./$solutionCopy" \
+		"$TIMELIM" "$twoDModel" --platform minimal -b "./$solutionCopy" \
 				--report "$(pwd)/reports/$fileNameWithoutExtension/$currentField" \
 				--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/$currentField" \
 				--input "$mainFolderWithFields/$currentField.txt" \
