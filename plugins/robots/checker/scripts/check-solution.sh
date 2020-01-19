@@ -75,10 +75,10 @@ if [ -e $timelim_path ]; then
 	TIMELIM="timeout --preserve-status --foreground -s KILL $(cat $timelim_path)"
 fi
 
-echo $TIMELIM
+log "$TIMELIM"
 
 if ! [ -f "$fileWithPath" ]; then
-	echo $internalErrorMessage
+	echo "$internalErrorMessage"
 	log "File $fileWithPath does not exist, aborting"
 	exit 2
 fi
@@ -116,19 +116,18 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 
 	if [ $exitCode -eq 2 ]; then
 		log "Incorrect or corrupt save file $fileWithPath"
-		echo $incorrectSaveFileMessage
+		echo "$incorrectSaveFileMessage"
 		exit 1
 	fi
 
 	if [ $exitCode -eq 137 ]; then
 		log "Field was exited by timeout"
-		echo $timeoutError
-		continue
+		echo "$timeoutError"
 	fi
 
 	if [ $exitCode -gt 100 ]; then
 		log "Checker internal error, exit code: $exitCode"
-		echo $internalErrorMessage
+		echo "$internalErrorMessage"
 		exit 1
 	fi
 
@@ -137,7 +136,7 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 
 	if [ $exitCode -ne 0 ]; then
 		log "Solution failed on its own field, aborting"
-		echo $solutionFailedOnOwnFieldMessage
+		echo "$solutionFailedOnOwnFieldMessage"
 		sync
 		cat "$reportFile"
 		if [ ! -f "$mainFolderWithFields/no-stop-on-fail" ]; then
@@ -162,7 +161,7 @@ if [ -d "$mainFolderWithFields" ]; then
 		log "Field: $i, running $patcher $solutionCopy $mainFolderWithFields/$i..."
 		$patcher "$solutionCopy" "$mainFolderWithFields/$i" "$scriptFile"
 		if [ $? -ne 0 ]; then
-			echo $internalErrorMessage
+			echo "$internalErrorMessage"
 			log "Patching failed, aborting"
 			exit 2
 		fi
@@ -179,13 +178,13 @@ if [ -d "$mainFolderWithFields" ]; then
 
 		if [ $exitCode -eq 137 ]; then
 			log "Field was exited by timeout"
-			echo $timeoutError
+			echo "$timeoutError"
 			continue
 		fi
 
 		if [ $exitCode -gt 100 ]; then
 			log "Checker internal error, exit code: $exitCode"
-			echo $internalErrorMessage
+			echo "$internalErrorMessage"
 			exit 1
 		fi
 
@@ -195,7 +194,7 @@ if [ -d "$mainFolderWithFields" ]; then
 		fi
 
 		if [ $exitCode -ne 0 ]; then
-			echo $solutionFailedOnOtherFieldMessage
+			echo "$solutionFailedOnOtherFieldMessage"
 			log "Test $currentField failed, aborting"
 			cat "$(pwd)/reports/$fileNameWithoutExtension/$currentField" > "$reportFile"
 			cat "$(pwd)/trajectories/$fileNameWithoutExtension/$currentField" > "$trajectoryFile"
