@@ -20,8 +20,8 @@ cp    $BIN_DIR/trikNetwork.dll                                                  
 cp    $BIN_DIR/python3*.dll                                                       $PWD/../data/
 cp    $BIN_DIR/vcruntime*.dll                                                     $PWD/../data/
 
-cp    $BIN_DIR/system.js                                                          $PWD/../data/bin/
-cp    $BIN_DIR/system.py                                                          $PWD/../data/bin/
+cp    "$BIN_DIR/system.js"                                                          "$PWD/../data/"
+cp    "$BIN_DIR/system.py"                                                          "$PWD/../data/"
 cp    "$BIN_DIR/2D-model.exe"                                                       "$PWD/../data/"
 
 winscp_ver=5.15
