@@ -34,44 +34,51 @@ int main(int argc, char *argv[])
 	parser.addHelpOption();
 	parser.addVersionOption();
 	parser.addPositionalArgument("save-file", QObject::tr("TRIK Studio save file to be patched."));
-	parser.addPositionalArgument("field", QObject::tr("XML file with prepared 2D model field."));
-	parser.addPositionalArgument("script-file", QObject::tr("Script file to be patched into save file."));
+
+	QCommandLineOption patchField("f", QObject::tr("XML file with prepared 2D model field."), "field.xml");
+	parser.addOption(patchField);
+	QCommandLineOption patchScript("s", QObject::tr("Script file to be patched into save file."), "script.js");
+	parser.addOption(patchScript);
 
 	parser.process(app);
 
 	const QStringList positionalArgs = parser.positionalArguments();
-	if (positionalArgs.size() != 3) {
+	if (positionalArgs.size() != 1) {
 		parser.showHelp();
 	}
 
-	const QString saveFile = positionalArgs[0];
-	const QString field = positionalArgs[1];
-	const QString script = positionalArgs[2];
-
+	const auto & saveFile = positionalArgs[0];
 	qrRepo::RepoApi repo(saveFile);
 
-	QFile fieldFile(field);
-	if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		return 1;
-	}
-
-	const QString fieldContents = fieldFile.readAll();
-
-	fieldFile.close();
-	repo.setMetaInformation("worldModel", fieldContents);
-
-	if (!script.isEmpty()) {
-		QFile scriptFile(script);
-		if (!scriptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+	if (parser.isSet(patchField)) {
+		const auto & field = parser.value(patchField);
+		QFile fieldFile(field);
+		if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
 			return 1;
 		}
 
-		const QString scriptContent = scriptFile.readAll();
-		repo.setMetaInformation("activeCode", scriptContent);
+		const QString fieldContents = fieldFile.readAll();
 
-		repo.setMetaInformation("activeCodeLanguageExtension", QFileInfo(scriptFile).suffix().toLower());
+		fieldFile.close();
+		repo.setMetaInformation("worldModel", fieldContents);
+	}
 
-		scriptFile.close();
+
+	if (parser.isSet(patchScript)) {
+		const auto & script = parser.value(patchScript);
+		if (!script.isEmpty()) {
+			QFile scriptFile(script);
+			if (!scriptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+				return 1;
+			}
+
+			const QString scriptContent = scriptFile.readAll();
+			repo.setMetaInformation("activeCode", scriptContent);
+
+			repo.setMetaInformation("activeCodeLanguageExtension", QFileInfo(scriptFile).suffix().toLower());
+
+			scriptFile.close();
+		}
 	}
 
 	if (!repo.saveAll()) {

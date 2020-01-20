@@ -144,7 +144,7 @@ if [ -d "$mainFolderWithFields" ]; then
 		fi
 
 		log "Field: $i, running $patcher $solutionCopy $mainFolderWithFields/$i..."
-		$patcher "$solutionCopy" "$mainFolderWithFields/$i" "$scriptFile"
+		$patcher "$solutionCopy" -f "$mainFolderWithFields/$i" -s "$scriptFile"
 		if [ $? -ne 0 ]; then
 			echo $internalErrorMessage
 			log "Patching failed, aborting"
