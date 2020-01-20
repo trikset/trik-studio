@@ -120,6 +120,10 @@ int main(int argc, char *argv[])
 	const QString input = parser.isSet(inputOption) ? parser.value(inputOption) : QString();
 	const QString mode = parser.isSet(modeOption) ? parser.value(modeOption) : QString("diagram");
 	twoDModel::Runner runner(report, trajectory, input, mode);
+	if (!backgroundMode) {
+		runner.moveToCenter(app);
+	}
+
 	if (!runner.interpret(qrsFile, backgroundMode)) {
 		return 2;
 	}

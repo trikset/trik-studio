@@ -59,6 +59,9 @@ public:
 	/// will be closed immediately after the interpretation stopped.
 	bool interpret(const QString &saveFile, bool background);
 
+	/// Moving model widget to the center. Easy way to solve problems with specific taskbar on Windows.
+	void moveToCenter(QApplication & app);
+
 private slots:
 	void close();
 

@@ -19,6 +19,8 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonValue>
 #include <QtWidgets/QApplication>
+#include <QDesktopWidget>
+#include <QWidget>
 
 #include <twoDModel/engine/view/twoDModelWidget.h>
 #include <twoDModel/engine/model/model.h>
@@ -104,6 +106,23 @@ bool Runner::interpret(const QString &saveFile, bool background)
 	}
 
 	return true;
+}
+
+void Runner::moveToCenter(QApplication &app)
+{
+	for (QWidget * const widget : QApplication::allWidgets()) {
+		if (view::TwoDModelWidget * const twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
+			auto * window = twoDModelWindow;
+				window->setGeometry(
+					QStyle::alignedRect(
+						Qt::LeftToRight,
+						Qt::AlignCenter,
+						window->size(),
+						app.desktop()->availableGeometry()
+					)
+				);
+		}
+	}
 }
 
 void Runner::connectRobotModel(const model::RobotModel *robotModel)
