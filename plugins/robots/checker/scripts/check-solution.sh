@@ -46,6 +46,7 @@ internalErrorMessage="[ { \"level\": \"error\", \"message\": \"Внутренн�
 incorrectSaveFileMessage="[ { \"level\": \"error\", \"message\": \"Некорректный или испорченный файл с сохранением\" } ]"
 solutionFailedOnOwnFieldMessage="[ { \"level\": \"error\", \"message\": \"Решение работает неправильно\" } ]"
 solutionFailedOnOtherFieldMessage="[ { \"level\": \"error\", \"message\": \"Решение неправильно работает на одном из тестовых полей\" } ]"
+timeoutError="[ { \"level\": \"error\", \"message\": \"Решение работает дольше предполагаемого времени.\" } ]"
 
 [ "$#" -lt 1 ] && show_help || :
 
@@ -67,8 +68,17 @@ fi
 
 log "$MODE"
 
+timelim_path="$mainFolderWithFields/timelim"
+TIMELIM=""
+
+if [ -e "$timelim_path" ]; then
+	TIMELIM="timeout --preserve-status --foreground -s KILL $(cat "$timelim_path")"
+fi
+
+log "$TIMELIM"
+
 if ! [ -f "$fileWithPath" ]; then
-	echo $internalErrorMessage
+	echo "$internalErrorMessage"
 	log "File $fileWithPath does not exist, aborting"
 	exit 2
 fi
@@ -96,7 +106,7 @@ mkdir -p "$(pwd)/trajectories/$fileNameWithoutExtension"
 if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 	log "Running save with its own field"
 
-	$twoDModel --platform minimal -b "$fileWithPath" \
+	$TIMELIM "$twoDModel" --platform minimal -b "$fileWithPath" \
 			--report "$(pwd)/reports/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--input "$mainFolderWithFields/check-self.txt" \
@@ -106,13 +116,18 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 
 	if [ $exitCode -eq 2 ]; then
 		log "Incorrect or corrupt save file $fileWithPath"
-		echo $incorrectSaveFileMessage
+		echo "$incorrectSaveFileMessage"
 		exit 1
+	fi
+
+	if [ $exitCode -eq 137 ]; then
+		log "Field was exited by timeout"
+		echo "$timeoutError"
 	fi
 
 	if [ $exitCode -gt 100 ]; then
 		log "Checker internal error, exit code: $exitCode"
-		echo $internalErrorMessage
+		echo "$internalErrorMessage"
 		exit 1
 	fi
 
@@ -121,7 +136,7 @@ if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 
 	if [ $exitCode -ne 0 ]; then
 		log "Solution failed on its own field, aborting"
-		echo $solutionFailedOnOwnFieldMessage
+		echo "$solutionFailedOnOwnFieldMessage"
 		sync
 		cat "$reportFile"
 		if [ ! -f "$mainFolderWithFields/no-stop-on-fail" ]; then
@@ -146,14 +161,14 @@ if [ -d "$mainFolderWithFields" ]; then
 		log "Field: $i, running $patcher $solutionCopy $mainFolderWithFields/$i..."
 		$patcher "$solutionCopy" "$mainFolderWithFields/$i" "$scriptFile"
 		if [ $? -ne 0 ]; then
-			echo $internalErrorMessage
+			echo "$internalErrorMessage"
 			log "Patching failed, aborting"
 			exit 2
 		fi
 
 		log "Running Checker"
 		currentField="${i%.*}"
-		$twoDModel --platform minimal -b "./$solutionCopy" \
+		$TIMELIM "$twoDModel" --platform minimal -b "./$solutionCopy" \
 				--report "$(pwd)/reports/$fileNameWithoutExtension/$currentField" \
 				--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/$currentField" \
 				--input "$mainFolderWithFields/$currentField.txt" \
@@ -161,9 +176,15 @@ if [ -d "$mainFolderWithFields" ]; then
 
 		exitCode=$?
 
+		if [ $exitCode -eq 137 ]; then
+			log "Field was exited by timeout"
+			echo "$timeoutError"
+			continue
+		fi
+
 		if [ $exitCode -gt 100 ]; then
 			log "Checker internal error, exit code: $exitCode"
-			echo $internalErrorMessage
+			echo "$internalErrorMessage"
 			exit 1
 		fi
 
@@ -173,7 +194,7 @@ if [ -d "$mainFolderWithFields" ]; then
 		fi
 
 		if [ $exitCode -ne 0 ]; then
-			echo $solutionFailedOnOtherFieldMessage
+			echo "$solutionFailedOnOtherFieldMessage"
 			log "Test $currentField failed, aborting"
 			cat "$(pwd)/reports/$fileNameWithoutExtension/$currentField" > "$reportFile"
 			cat "$(pwd)/trajectories/$fileNameWithoutExtension/$currentField" > "$trajectoryFile"
