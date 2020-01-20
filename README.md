@@ -1,5 +1,5 @@
 
-[![Build Status](https://img.shields.io/travis/trikset/trik-studio/master.svg?maxAge=3600&style=for-the-badge&logo=linux&logoColor=green)](https://travis-ci.org/trikset/trik-studio)
+[![Build Status](https://img.shields.io/travis/trikset/trik-studio/master.svg?maxAge=3600&style=for-the-badge&logo=linux&logoColor=green)](https://travis-ci.com/trikset/trik-studio)
 [![Build status](https://img.shields.io/appveyor/ci/iakov/trik-studio-7oqgo/master.svg?maxAge=3600&style=for-the-badge&logo=windows&logoColor=green)](https://ci.appveyor.com/project/iakov/trik-studio-7oqgo/branch/master)
 
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=trikset/trik-studio)](https://dependabot.com)
