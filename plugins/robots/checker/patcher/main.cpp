@@ -47,17 +47,17 @@ int main(int argc, char *argv[])
 		parser.showHelp();
 	}
 
-	const auto & saveFile = positionalArgs[0];
+	const auto &saveFile = positionalArgs[0];
 	qrRepo::RepoApi repo(saveFile);
 
 	if (parser.isSet(patchField)) {
-		const auto & field = parser.value(patchField);
+		const auto &field = parser.value(patchField);
 		QFile fieldFile(field);
 		if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
 			return 1;
 		}
 
-		const QString fieldContents = fieldFile.readAll();
+		const auto &fieldContents = fieldFile.readAll();
 
 		fieldFile.close();
 		repo.setMetaInformation("worldModel", fieldContents);
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 
 	if (parser.isSet(patchScript)) {
-		const auto & script = parser.value(patchScript);
+		const auto &script = parser.value(patchScript);
 		if (!script.isEmpty()) {
 			QFile scriptFile(script);
 			if (!scriptFile.open(QIODevice::ReadOnly | QIODevice::Text)) {

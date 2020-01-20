@@ -110,14 +110,13 @@ bool Runner::interpret(const QString &saveFile, bool background)
 
 void Runner::moveToCenter(QApplication &app)
 {
-	for (QWidget * const widget : QApplication::allWidgets()) {
-		if (view::TwoDModelWidget * const twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
-			auto * window = twoDModelWindow;
-				window->setGeometry(
+	for (auto * const widget : QApplication::allWidgets()) {
+		if (auto * const twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
+				twoDModelWindow->setGeometry(
 					QStyle::alignedRect(
 						Qt::LeftToRight,
 						Qt::AlignCenter,
-						window->size(),
+						twoDModelWindow->size(),
 						app.desktop()->availableGeometry()
 					)
 				);
