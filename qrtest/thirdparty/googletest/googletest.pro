@@ -27,11 +27,11 @@ include(../../../global.pri)
 #           GTEST_LINKED_AS_SHARED_LIBRARY=1 \
 #           GTEST_CREATE_SHARED_LIBRARY=1
 
-INCLUDEPATH += \
-	$$PWD/googletest/googletest/ \
-	$$PWD/googletest/googletest/include/ \
-	$$PWD/googletest/googlemock/ \
-	$$PWD/googletest/googlemock/include/ \
+QMAKE_CXXFLAGS += \
+	-isystem $$PWD/googletest/googletest/ \
+	-isystem $$PWD/googletest/googletest/include/ \
+	-isystem $$PWD/googletest/googlemock/ \
+	-isystem $$PWD/googletest/googlemock/include/ \
 
 HEADERS += \
 	$$files(googletest/googletest/include/gtest/*.h) \
