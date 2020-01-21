@@ -20,16 +20,18 @@ then
       git fetch --unshallow --tags # for `git describe --tags` to work
       #TODO: We can build installer and checker archive in parallel if needed
       $EXECUTOR bash -ic "\
-	      echo Start build installer \
+      echo Start build installer \
       && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
       && mv installer/trik-studio*installer* installer/$TSNAME \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/\
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
+      || false \
 "
       if [[ $TRAVIS_OS_NAME == linux ]] ; then
       $EXECUTOR bash -ic "\
       echo Start build checker archive \
       && bin/$CONFIG/build-checker-installer.sh \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz\
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz \
+      || false \
 "
      fi
-fi || travis_terminate 3
+fi
