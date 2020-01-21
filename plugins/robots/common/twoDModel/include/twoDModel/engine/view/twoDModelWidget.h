@@ -148,7 +148,6 @@ private slots:
 
 	void saveWorldModel();
 	void loadWorldModel();
-	void setBackground();
 
 	void onSelectionChange();
 

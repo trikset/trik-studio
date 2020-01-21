@@ -19,6 +19,7 @@
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 
 #include <qrkernel/settingsManager.h>
+#include <QMenu>
 
 using namespace twoDModel::items;
 using namespace qReal;
@@ -47,9 +48,11 @@ AbstractItem *ImageItem::clone() const
 
 void ImageItem::drawExtractionForItem(QPainter* painter)
 {
-	AbstractItem::drawExtractionForItem(painter);
-	setPenBrushDriftRect(painter);
-	painter->drawRect(calcNecessaryBoundingRect().toRect());
+	if (isSelected() || !isBackground()) {
+		AbstractItem::drawExtractionForItem(painter);
+		setPenBrushDriftRect(painter);
+		painter->drawRect(calcNecessaryBoundingRect().toRect());
+	}
 }
 
 QPainterPath ImageItem::resizeArea() const
@@ -115,14 +118,23 @@ QDomElement ImageItem::serialize(QDomElement &parent) const
 			, QString::number(y2() - y1())));
 	imageNode.setAttribute("position", QString::number(x()) + ":" + QString::number(y()));
 	imageNode.setAttribute("imageId", mImage->imageId());
+	imageNode.setAttribute("isBackground", mBackgroundRole ? "true" : "false");
 	return imageNode;
 }
 
 void ImageItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-	const QRect rect = deserializeRect(element.attribute("rect"));
-	setPos(mImpl.deserializePoint(element.attribute("position")));
+	QRect rect;
+	if (element.hasAttribute("backgroundRect")) {
+		rect = deserializeRect(element.attribute("backgroundRect"));
+		setPos(0, 0);
+		setBackgroundRole(true);
+	} else {
+		rect = deserializeRect(element.attribute("rect"));
+		setPos(mImpl.deserializePoint(element.attribute("position")));
+		setBackgroundRole(element.attribute("isBackground", "false") == "true");
+	}
 	setX1(rect.left());
 	setX2(rect.right());
 	setY1(rect.top());
@@ -160,6 +172,9 @@ void ImageItem::setPath(const QString &path)
 void ImageItem::setBackgroundRole(bool background)
 {
 	mBackgroundRole = background;
+	if (!isSelected()) {
+		setFlag(ItemIsSelectable, !mBackgroundRole);
+	}
 	setZValue(background ? ZValue::Background : ZValue::Picture);
 }
 
@@ -172,6 +187,10 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 {
 	if (change == QGraphicsItem::ItemSelectedHasChanged) {
 		emit selectedChanged(value.toBool());
+		if (!value.toBool() && isBackground()) {
+			setFlag(ItemIsSelectable, false);
+			unsetCursor();
+		}
 	}
 
 	return AbstractItem::itemChange(change, value);
@@ -179,12 +198,49 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 
 void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-	if (resizeArea().contains(event->pos())) {
-		setCursor(mResizeCursor);
-	} else {
-		unsetCursor();
+	if (isSelected() || !isBackground()) {
+		if (resizeArea().contains(event->pos())) {
+			setCursor(mResizeCursor);
+		} else {
+			unsetCursor();
+		}
+		QGraphicsItem::hoverMoveEvent(event);
 	}
-	QGraphicsItem::hoverMoveEvent(event);
+}
+
+void ImageItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+	if (isSelected() || !isBackground()) {
+		AbstractItem::mousePressEvent(event);
+	} else {
+		event->accept();
+	}
+}
+
+void ImageItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+	if (isSelected() || !isBackground()) {
+		AbstractItem::mouseMoveEvent(event);
+	} else {
+		event->accept();
+	}
+}
+
+void ImageItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+	if (isSelected() || !isBackground()) {
+		AbstractItem::mouseReleaseEvent(event);
+	} else {
+		event->accept();
+	}
+}
+
+void ImageItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+	if (isBackground()) {
+		setFlag(ItemIsSelectable);
+	}
+	AbstractItem::mousePressEvent(event);
 }
 
 QRect ImageItem::deserializeRect(const QString &string) const

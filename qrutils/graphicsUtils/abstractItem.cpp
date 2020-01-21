@@ -568,6 +568,7 @@ void AbstractItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	}
 
 	event->accept();
+
 	QMenu *menu = new QMenu();
 	QAction *removeAction = menu->addAction(QObject::tr("Remove"));
 	QAction *selectedAction = menu->exec(event->screenPos());

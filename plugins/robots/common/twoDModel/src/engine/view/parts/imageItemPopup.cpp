@@ -30,6 +30,7 @@ using namespace twoDModel::view;
 ImageItemPopup::ImageItemPopup(graphicsUtils::AbstractScene &scene, QWidget *parent)
 	: ItemPopup(scene, parent)
 	, mLastIsMemorized(false)
+	, mLastIsBackground(false)
 {
 	initWidget();
 }
@@ -41,6 +42,11 @@ ImageItemPopup::~ImageItemPopup()
 bool ImageItemPopup::isMemorized() const
 {
 	return mLastIsMemorized;
+}
+
+bool ImageItemPopup::isBackground() const
+{
+	return mLastIsBackground;
 }
 
 QString ImageItemPopup::lastPath() const
@@ -56,6 +62,13 @@ void ImageItemPopup::updateMemorizationToolTip()
 					"rename file this image will disappear from 2D model."));
 }
 
+void ImageItemPopup::updateBackgroundToolTip()
+{
+	mBackgroundRolePicker->setToolTip(mBackgroundRolePicker->isChecked()
+			? tr("The image will be in the background. Warning: the robot does not see this image.")
+			: tr("The image will be in the foreground. Warning: robot sensors do not ignore this image."));
+}
+
 bool ImageItemPopup::suits(QGraphicsItem *item)
 {
 	return dynamic_cast<items::ImageItem *>(item) != nullptr;
@@ -67,18 +80,24 @@ bool ImageItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 	// Subsequent setting values to editors will cause theese values loss. Saving it here.
 	const bool lastIsMemorizedBackup = mLastIsMemorized;
+	const bool lastIsBackgroundBackup = mLastIsBackground;
 	const QString lastPathBackup = mLastPath;
 
 	blockSignals(true);
 	mMemorizationPicker->blockSignals(true);
 	mMemorizationPicker->setChecked(dominantPropertyValue("memorize").toBool());
 
+	mBackgroundRolePicker->blockSignals(true);
+	mBackgroundRolePicker->setChecked(dominantPropertyValue("background").toBool());
+
 	// Restoring values that really were picked by user.
 	mLastIsMemorized = lastIsMemorizedBackup;
+	mLastIsBackground = lastIsBackgroundBackup;
 	mLastPath = lastPathBackup;
 
 	blockSignals(false);
 	mMemorizationPicker->blockSignals(false);
+	mBackgroundRolePicker->blockSignals(false);
 
 	return true;
 }
@@ -87,6 +106,7 @@ void ImageItemPopup::initWidget()
 {
 	QVBoxLayout * const layout = new QVBoxLayout(this);
 	layout->addWidget(initMemorizationPicker());
+	layout->addWidget(initBackgroundPicker());
 	layout->addWidget(initPathPicker());
 
 	updateDueToLayout();
@@ -105,6 +125,25 @@ QWidget *ImageItemPopup::initMemorizationPicker()
 		if (mLastIsMemorized != memorized) {
 			mLastIsMemorized = memorized;
 			emit memorizingChanged(memorized);
+		}
+	});
+
+	return box;
+}
+
+QWidget *ImageItemPopup::initBackgroundPicker()
+{
+	QCheckBox *box = new QCheckBox(this);
+	mBackgroundRolePicker = box;
+	box->setIcon(QIcon(":/icons/2d_background.svg"));
+	updateBackgroundToolTip();
+	box->setFocusPolicy(Qt::NoFocus);
+	connect(mBackgroundRolePicker, &QAbstractButton::toggled, this, &ImageItemPopup::updateBackgroundToolTip);
+	connect(mBackgroundRolePicker, &QAbstractButton::toggled, this, [=](bool isBackground){
+		setPropertyMassively("background", isBackground);
+		if (mLastIsBackground != isBackground) {
+			mLastIsBackground = isBackground;
+			emit backgroundRoleChanged(isBackground);
 		}
 	});
 

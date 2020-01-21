@@ -35,6 +35,9 @@ public:
 	/// Returns true if user selected to embed image into save last time.
 	bool isMemorized() const;
 
+	/// Returns true if user selected to put image on background.
+	bool isBackground() const;
+
 	/// Returns last path to image entered by user.
 	QString lastPath() const;
 
@@ -42,11 +45,15 @@ signals:
 	/// Emitted when keeping image externally has changed.
 	void memorizingChanged(bool isMemorized);
 
+	/// Emitted when keeping image externally has changed.
+	void backgroundRoleChanged(bool isBackground);
+
 	/// Emitted when path to image picked by user has changed.
 	void pathChanged(const QString &path);
 
 private slots:
 	void updateMemorizationToolTip();
+	void updateBackgroundToolTip();
 
 private:
 	bool suits(QGraphicsItem *item) override;
@@ -54,11 +61,14 @@ private:
 
 	void initWidget();
 	QWidget *initMemorizationPicker();
+	QWidget *initBackgroundPicker();
 	QWidget *initPathPicker();
 
 	QPushButton *mPathPicker;  // Takes ownership
 	QCheckBox *mMemorizationPicker;  // Takes ownership
+	QCheckBox *mBackgroundRolePicker;  // Takes ownership
 	bool mLastIsMemorized;
+	bool mLastIsBackground;
 	QString mLastPath;
 };
 
