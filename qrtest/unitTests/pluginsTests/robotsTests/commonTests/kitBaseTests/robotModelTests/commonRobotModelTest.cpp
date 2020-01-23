@@ -127,7 +127,7 @@ TEST_F(CommonRobotModelTest, twoDNoSensorsLifecycleTest)
 
 	model.connectToRobot();
 
-	protocolTester.wait(1);
+	protocolTester.wait(250);
 
 	ASSERT_TRUE(protocolTester.isSignalEmitted("connected"));
 	ASSERT_TRUE(protocolTester.isSignalEmitted("allDevicesConfigured"));
