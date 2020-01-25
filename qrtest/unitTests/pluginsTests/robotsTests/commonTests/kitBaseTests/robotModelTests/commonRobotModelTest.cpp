@@ -82,7 +82,7 @@ TEST_F(CommonRobotModelTest, twoDLifecycleTest)
 
 	model.connectToRobot();
 
-	protocolTester.wait(1);
+	protocolTester.wait(1000);
 
 	ASSERT_TRUE(protocolTester.isSignalEmitted("connected"));
 	ASSERT_TRUE(protocolTester.isSignalEmitted("allDevicesConfigured"));
