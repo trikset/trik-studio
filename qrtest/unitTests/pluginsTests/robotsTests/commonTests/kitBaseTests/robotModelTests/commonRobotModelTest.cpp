@@ -57,7 +57,7 @@ TEST_F(CommonRobotModelTest, lifecycleTest)
 
 	model.connectToRobot();
 
-	protocolTester.wait(250);
+	protocolTester.wait(1000);
 
 	/// @todo We can not configure devices when model is not connected, or it will not configure them on reconnect.
 
@@ -82,7 +82,7 @@ TEST_F(CommonRobotModelTest, twoDLifecycleTest)
 
 	model.connectToRobot();
 
-	protocolTester.wait(1);
+	protocolTester.wait(1000);
 
 	ASSERT_TRUE(protocolTester.isSignalEmitted("connected"));
 	ASSERT_TRUE(protocolTester.isSignalEmitted("allDevicesConfigured"));
@@ -107,7 +107,7 @@ TEST_F(CommonRobotModelTest, realNoSensorsLifecycleTest)
 
 	model.connectToRobot();
 
-	protocolTester.wait(250);
+	protocolTester.wait(1000);
 
 	ASSERT_TRUE(protocolTester.isSignalEmitted("connected"));
 	ASSERT_TRUE(protocolTester.isSignalEmitted("allDevicesConfigured"));
@@ -127,7 +127,7 @@ TEST_F(CommonRobotModelTest, twoDNoSensorsLifecycleTest)
 
 	model.connectToRobot();
 
-	protocolTester.wait(250);
+	protocolTester.wait(1000);
 
 	ASSERT_TRUE(protocolTester.isSignalEmitted("connected"));
 	ASSERT_TRUE(protocolTester.isSignalEmitted("allDevicesConfigured"));
