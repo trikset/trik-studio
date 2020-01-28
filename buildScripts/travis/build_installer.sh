@@ -4,6 +4,7 @@ QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $TRAVIS_OS_NAME in
   osx)
     QTIFWBIN=$QTBIN/../../../Tools/QtInstallerFramework/3.2/bin
+    ls $QTBIN/../../../Tools/QtInstallerFramework/*
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
