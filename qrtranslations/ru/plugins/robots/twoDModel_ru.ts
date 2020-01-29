@@ -383,18 +383,26 @@
         <translation>Двумерная модель</translation>
     </message>
     <message>
-        <location line="+78"/>
         <source>Run program (Enter)</source>
-        <translation>Запустить программу (Enter)</translation>
+        <translation type="vanished">Запустить программу (Enter)</translation>
     </message>
     <message>
-        <location line="+41"/>
         <source>Stop program (Esc)</source>
-        <translation>Остановить программу (Esc)</translation>
+        <translation type="vanished">Остановить программу (Esc)</translation>
     </message>
     <message>
         <source>Return robot to the initial position</source>
         <translation type="vanished">Вернуть робота в исходное положение</translation>
+    </message>
+    <message>
+        <location line="+78"/>
+        <source>Run program</source>
+        <translation>Запустить программу</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Stop program</source>
+        <translation>Остановить программу</translation>
     </message>
     <message>
         <location line="+128"/>
@@ -985,12 +993,12 @@
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
-        <location line="+220"/>
+        <location line="+210"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location line="-219"/>
+        <location line="-209"/>
         <source>Do you really want to clear scene?</source>
         <translation>Вы действительно хотите очистить сцену?</translation>
     </message>
@@ -1013,7 +1021,7 @@
         <translation>Режим проверки: проверка решения будет осуществляться, об ошибках будет сообщаться</translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+62"/>
         <source>Saving world and robot model</source>
         <translation>Сохранение модели мира</translation>
     </message>

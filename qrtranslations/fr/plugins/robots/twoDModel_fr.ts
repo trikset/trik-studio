@@ -177,14 +177,22 @@
         <translation>Un modèle 2D</translation>
     </message>
     <message>
-        <location line="+78"/>
         <source>Run program (Enter)</source>
-        <translation>Executer le programme (Enter)</translation>
+        <translation type="vanished">Executer le programme (Enter)</translation>
+    </message>
+    <message>
+        <source>Stop program (Esc)</source>
+        <translation type="vanished">Arrêter le programme (Esc)</translation>
+    </message>
+    <message>
+        <location line="+78"/>
+        <source>Run program</source>
+        <translation>Executer le programme</translation>
     </message>
     <message>
         <location line="+41"/>
-        <source>Stop program (Esc)</source>
-        <translation>Arrêter le programme (Esc)</translation>
+        <source>Stop program</source>
+        <translation>Arrêter le programme</translation>
     </message>
     <message>
         <location line="+128"/>
@@ -654,12 +662,12 @@
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
-        <location line="+220"/>
+        <location line="+210"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location line="-219"/>
+        <location line="-209"/>
         <source>Do you really want to clear scene?</source>
         <translation>Est-ce que vous voulez vraiment effacer la scène ?</translation>
     </message>
@@ -682,7 +690,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+62"/>
         <source>Saving world and robot model</source>
         <translation>Enregistrement des modèles du monde et du robot</translation>
     </message>

@@ -411,16 +411,6 @@ void TwoDModelWidget::updateUIPhysicsSettings()
 	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
 }
 
-void TwoDModelWidget::keyPressEvent(QKeyEvent *event)
-{
-	QWidget::keyPressEvent(event);
-	if (event->key() == Qt::Key_F5) {
-		mUi->runButton->animateClick();
-	} else if (event->key() == Qt::Key_Escape) {
-		mUi->stopButton->animateClick();
-	}
-}
-
 void TwoDModelWidget::close()
 {
 	setVisible(false);

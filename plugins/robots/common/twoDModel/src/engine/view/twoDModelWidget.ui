@@ -89,7 +89,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>Run program (Enter)</string>
+         <string>Run program</string>
         </property>
         <property name="text">
          <string/>
@@ -130,7 +130,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>Stop program (Esc)</string>
+         <string>Stop program</string>
         </property>
         <property name="text">
          <string/>

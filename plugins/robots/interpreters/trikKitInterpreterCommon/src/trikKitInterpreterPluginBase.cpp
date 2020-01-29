@@ -279,10 +279,12 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	mStart.setObjectName("runTextualInterpretation");
 	mStart.setText(tr("Run program"));
 	mStart.setIcon(QIcon(":/trik/qts/images/run.png"));
+	mStart.setShortcut(QKeySequence(Qt::Key_F5));
 
 	mStop.setObjectName("stopTextualInterpretation");
 	mStop.setText(tr("Stop robot"));
 	mStop.setIcon(QIcon(":/trik/qts/images/stop.png"));
+	mStop.setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
 
 	mStop.setVisible(false);
 	mStart.setVisible(false);
