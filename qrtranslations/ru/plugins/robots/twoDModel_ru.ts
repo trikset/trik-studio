@@ -572,7 +572,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+77"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+76"/>
         <source>Image (I)</source>
         <translation>Картинка (I)</translation>
     </message>
@@ -878,7 +878,7 @@
 <context>
     <name>twoDModel::view::ImageItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+60"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+58"/>
         <source>Image will be packed into save file. Warning: this will increase save file size.</source>
         <translation>Картинка будет запакована в проект. Внимание: это значительно увеличит размер файла сохранения.</translation>
     </message>
@@ -890,12 +890,12 @@
     <message>
         <location line="+7"/>
         <source>The image will be in the background. Warning: the robot does not see this image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение будет на заднем плане. Предупреждение: робот не видит это изображение.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>The image will be in the foreground. Warning: robot sensors do not ignore this image.</source>
-        <translation type="unfinished"></translation>
+        <source>The image will be in the foreground. Warning: robot sees this image with sensors.</source>
+        <translation>Изображение будет на переднем плане. Предупреждение: робот видит это изображение с помощью сенсоров.</translation>
     </message>
     <message>
         <location line="+90"/>

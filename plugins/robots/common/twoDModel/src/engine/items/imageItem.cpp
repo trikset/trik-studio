@@ -19,7 +19,6 @@
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 
 #include <qrkernel/settingsManager.h>
-#include <QMenu>
 
 using namespace twoDModel::items;
 using namespace qReal;

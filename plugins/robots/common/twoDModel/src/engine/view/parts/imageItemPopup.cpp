@@ -29,8 +29,6 @@ using namespace twoDModel::view;
 
 ImageItemPopup::ImageItemPopup(graphicsUtils::AbstractScene &scene, QWidget *parent)
 	: ItemPopup(scene, parent)
-	, mLastIsMemorized(false)
-	, mLastIsBackground(false)
 {
 	initWidget();
 }
@@ -66,7 +64,7 @@ void ImageItemPopup::updateBackgroundToolTip()
 {
 	mBackgroundRolePicker->setToolTip(mBackgroundRolePicker->isChecked()
 			? tr("The image will be in the background. Warning: the robot does not see this image.")
-			: tr("The image will be in the foreground. Warning: robot sensors do not ignore this image."));
+			: tr("The image will be in the foreground. Warning: robot sees this image with sensors."));
 }
 
 bool ImageItemPopup::suits(QGraphicsItem *item)
@@ -114,7 +112,7 @@ void ImageItemPopup::initWidget()
 
 QWidget *ImageItemPopup::initMemorizationPicker()
 {
-	QCheckBox *box = new QCheckBox(this);
+	auto *box = new QCheckBox(this);
 	mMemorizationPicker = box;
 	box->setIcon(QIcon(":/icons/2d_save.png"));
 	updateMemorizationToolTip();
@@ -133,7 +131,7 @@ QWidget *ImageItemPopup::initMemorizationPicker()
 
 QWidget *ImageItemPopup::initBackgroundPicker()
 {
-	QCheckBox *box = new QCheckBox(this);
+	auto *box = new QCheckBox(this);
 	mBackgroundRolePicker = box;
 	box->setIcon(QIcon(":/icons/2d_background.svg"));
 	updateBackgroundToolTip();
@@ -152,7 +150,7 @@ QWidget *ImageItemPopup::initBackgroundPicker()
 
 QWidget *ImageItemPopup::initPathPicker()
 {
-	QPushButton *button = new QPushButton(this);
+	auto *button = new QPushButton(this);
 	button->setFocusPolicy(Qt::NoFocus);
 	button->setFlat(true);
 	button->setIcon(QIcon(":/icons/2d_open.png"));

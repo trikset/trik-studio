@@ -300,7 +300,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+77"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+76"/>
         <source>Image (I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -543,7 +543,7 @@
 <context>
     <name>twoDModel::view::ImageItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+60"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+58"/>
         <source>Image will be packed into save file. Warning: this will increase save file size.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -559,7 +559,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>The image will be in the foreground. Warning: robot sensors do not ignore this image.</source>
+        <source>The image will be in the foreground. Warning: robot sees this image with sensors.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

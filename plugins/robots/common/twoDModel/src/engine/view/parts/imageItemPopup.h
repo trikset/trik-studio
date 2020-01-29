@@ -67,8 +67,8 @@ private:
 	QPushButton *mPathPicker;  // Takes ownership
 	QCheckBox *mMemorizationPicker;  // Takes ownership
 	QCheckBox *mBackgroundRolePicker;  // Takes ownership
-	bool mLastIsMemorized;
-	bool mLastIsBackground;
+	bool mLastIsMemorized { false };
+	bool mLastIsBackground { false };
 	QString mLastPath;
 };
 
