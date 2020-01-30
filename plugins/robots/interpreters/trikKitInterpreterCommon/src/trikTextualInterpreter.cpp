@@ -51,7 +51,7 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 		"} else {res += arguments[i].toString();}"
 		"};"
 		"brick.log(res);"
-		"script.wait(0);"
+		"brick.wait(0);"
 		"return res;"
 	"};"
 	"script.system = function() {print('system is disabled in the interpreter');};";

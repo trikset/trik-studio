@@ -34,6 +34,7 @@
 #include <qrkernel/platformInfo.h>
 #include <src/qtCameraImplementation.h>
 #include <src/imitationCameraImplementation.h>
+#include <QApplication>
 
 ///todo: temporary
 #include <trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h>
@@ -400,7 +401,9 @@ void TrikBrick::wait(int milliseconds)
 	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
 	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
 
-	if (timeline->isStarted()) {
+	if (milliseconds == 0) {
+		QApplication::processEvents();
+	} else if (timeline->isStarted()) {
 		t->start(milliseconds);
 		loop.exec();
 	}
