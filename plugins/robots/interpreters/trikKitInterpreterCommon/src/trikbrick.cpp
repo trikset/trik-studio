@@ -154,13 +154,13 @@ void TrikBrick::reinitImitationCamera()
 void TrikBrick::say(const QString &msg) {
 	using namespace kitBase::robotModel;
 	using namespace trik::robotModel;
-	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
+	auto* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
 		emit error(tr("2d model shell part was not found"));
 		return;
 	}
 
-	QMetaObject::invokeMethod(sh, "say", Q_ARG(const QString &, msg));
+	QMetaObject::invokeMethod(sh, [sh, msg](){sh->say(msg);});
 }
 
 void TrikBrick::stop() {
