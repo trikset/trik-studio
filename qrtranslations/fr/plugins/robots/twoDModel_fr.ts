@@ -300,7 +300,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+76"/>
         <source>Image (I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -472,11 +472,6 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>Set background...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
         <source>Clear items</source>
         <translation>Tout effacer</translation>
     </message>
@@ -548,7 +543,7 @@
 <context>
     <name>twoDModel::view::ImageItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+58"/>
         <source>Image will be packed into save file. Warning: this will increase save file size.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -558,7 +553,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+7"/>
+        <source>The image will be in the background. Warning: the robot does not see this image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The image will be in the foreground. Warning: robot sees this image with sensors.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+90"/>
         <source>Change image...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -620,7 +625,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+735"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+694"/>
         <source>Select image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,13 +658,12 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
-        <location line="+220"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+307"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location line="-219"/>
+        <location line="+1"/>
         <source>Do you really want to clear scene?</source>
         <translation>Est-ce que vous voulez vraiment effacer la scène ?</translation>
     </message>
@@ -672,7 +676,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+91"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,22 +702,7 @@
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+25"/>
-        <source>Select background image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Graphics (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+319"/>
+        <location line="+328"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

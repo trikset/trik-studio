@@ -148,15 +148,6 @@ public:
 	/// Searches on the scene item with the given id. Returns nullptr if not found.
 	QGraphicsObject *findId(const QString &id) const;
 
-	/// Sets a background image on the scene and its geometry.
-	void setBackground(Image * const image, const QRect &rect);
-
-	/// Returns a path to scene background image.
-	Image *background();
-
-	/// Returns a scene background image size and position.
-	QRect &backgroundRect();
-
 	/// Creates element from serialized XML specification.
 	void createElement(const QDomElement &element);
 
@@ -224,9 +215,6 @@ signals:
 	/// Emitted when robot trace is non-empty any more or was cleared from the floor.
 	void robotTraceAppearedOrDisappeared(bool appeared);
 
-	/// Emitted when user changes background image or its size.
-	void backgroundChanged(Image * const image, const QRect &backgroundRect);
-
 	/// Emitted when blobs information changed.
 	void blobsChanged();
 
@@ -239,11 +227,8 @@ private:
 			, const qreal direction, const qreal scanningAngle, const QPainterPath &wallPath) const;
 	QPainterPath buildSolidItemsPath() const;
 
-	void createBackgroundImageItem(const QDomElement &element);
-
 	void serializeBackground(QDomElement &background, const QRect &rect, const Image * const img) const;
 	QRect deserializeRect(const QString &string) const;
-	void deserializeBackground(const QDomElement &backgroundElement);
 
 	QMap<QString, items::WallItem *> mWalls;
 	QMap<QString, items::SkittleItem *> mSkittles;

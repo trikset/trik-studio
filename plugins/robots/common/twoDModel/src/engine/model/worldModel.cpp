@@ -273,9 +273,7 @@ void WorldModel::addImageItem(items::ImageItem *imageItem)
 			}
 		});
 	emit imageItemAdded(imageItem);
-	if (!imageItem->isBackground()) {
-		emit blobsChanged();
-	}
+	emit blobsChanged();
 }
 
 void WorldModel::removeImageItem(items::ImageItem *imageItem)
@@ -318,7 +316,6 @@ void WorldModel::clear()
 	mOrder.clear();
 
 	clearRobotTrace();
-	setBackground(nullptr, QRect());
 
 	emit blobsChanged();
 }
@@ -397,46 +394,10 @@ QRect WorldModel::deserializeRect(const QString &string) const
 	return QRect();
 }
 
-void WorldModel::deserializeBackground(const QDomElement &backgroundElement)
-{
-	QString imageId = backgroundElement.attribute("imageId");
-	const QRect backgroundRect = deserializeRect(backgroundElement.attribute("backgroundRect"));
-	if (backgroundRect.isNull()) {
-		return;
-	}
-
-	if (!imageId.isEmpty()) {
-		setBackground(mImages[imageId], backgroundRect);
-	} else {
-		Image *image = Image::deserialize(backgroundElement);
-		mImages[image->imageId()] = image;
-		setBackground(image, backgroundRect);
-	}
-}
-
 QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 {
 	QDomElement result = parent.ownerDocument().createElement("world");
 	parent.appendChild(result);
-
-	QDomElement background = parent.ownerDocument().createElement("background");
-	if (mBackgroundImage) {
-		serializeBackground(background, mBackgroundRect, mBackgroundImage);
-	} else {
-		for (auto imageItem : mImageItems) {
-			if (imageItem->isBackground()) {
-				QRect rect;
-				rect.setLeft(imageItem->x1() + imageItem->x());
-				rect.setTop(imageItem->y1() + imageItem->y());
-				rect.setRight(imageItem->x2() + imageItem->x());
-				rect.setBottom(imageItem->y2() + imageItem->y());
-				serializeBackground(background, rect, imageItem->image());
-				break;
-			}
-		}
-	}
-
-	result.appendChild(background);
 
 	auto comparator = [&](const QString &id1, const QString &id2) { return mOrder[id1] < mOrder[id2]; };
 
@@ -473,10 +434,6 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	QList<QString> imageIds = mImageItems.keys();
 	qSort(imageIds.begin(), imageIds.end(), comparator);
 	for (const QString &image : imageIds) {
-		if (mImageItems[image]->isBackground()) {
-			continue;
-		}
-
 		mImageItems[image]->serialize(images);
 	}
 
@@ -499,12 +456,6 @@ QDomElement WorldModel::serializeBlobs(QDomElement &parent) const
 {
 	QDomElement result = parent.ownerDocument().createElement("blobs");
 	QDomElement images = parent.ownerDocument().createElement("images");
-
-	if (mBackgroundImage && mBackgroundImage->isValid()) {
-		QDomElement background = parent.ownerDocument().createElement("image");
-		mBackgroundImage->serialize(background);
-		images.appendChild(background);
-	}
 
 	QList<QString> imageIds = mImageItems.keys();
 	for (const QString &imageItem : imageIds) {
@@ -529,15 +480,6 @@ QDomElement WorldModel::serializeItem(const QString &id) const
 	}
 
 	QDomElement temporalParent = mXmlFactory->createElement("temporalParent");
-
-	if (auto imageItem = dynamic_cast<const items::ImageItem *>(item)) {
-		if (imageItem->isBackground()) {
-			QDomElement backgroundImageItem = item->serialize(temporalParent);
-			backgroundImageItem.setAttribute("background", true);
-			return backgroundImageItem;
-		}
-	}
-
 	return item->serialize(temporalParent);
 }
 
@@ -562,7 +504,22 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	deserializeBackground(element.firstChildElement("background"));
+	for (QDomElement backgroundNode = element.firstChildElement("background"); !backgroundNode.isNull()
+			; backgroundNode = backgroundNode.nextSiblingElement("background")) {
+		QString imageId = backgroundNode.attribute("imageId");
+		const QRect backgroundRect = deserializeRect(backgroundNode.attribute("backgroundRect"));
+		if (backgroundRect.isNull()) {
+			break;
+		}
+		if (!imageId.isEmpty()) {
+			createImageItem(backgroundNode, true);
+		} else {
+			Image *image = Image::deserialize(backgroundNode);
+			mImages[image->imageId()] = image;
+			createImageItem(backgroundNode, true);
+		}
+	}
+
 
 	for (QDomElement traceNode = element.firstChildElement("trace"); !traceNode.isNull()
 			; traceNode = traceNode.nextSiblingElement("trace")) {
@@ -623,8 +580,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 
 				mImages.insert(id, img);
 			}
-
-			createImageItem(imageNode);
+			createImageItem(imageNode, imageNode.attribute("isBackground", "false") == "true");
 		}
 	}
 
@@ -669,34 +625,6 @@ QGraphicsObject *WorldModel::findId(const QString &id) const
 	return nullptr;
 }
 
-void WorldModel::setBackground(Image * const image, const QRect &rect)
-{
-	/// @todo: should we check image content if it exist?
-	if (image && !mImages.contains(image->imageId())) {
-		mImages[image->imageId()] = image;
-	}
-
-	if ((image && mBackgroundImage && *image != *mBackgroundImage)
-			|| (image && !mBackgroundImage)
-			|| (!image && mBackgroundImage)
-			|| rect != mBackgroundRect) {
-		mBackgroundImage = image;
-		mBackgroundRect = rect;
-		emit backgroundChanged(mBackgroundImage, mBackgroundRect);
-		emit blobsChanged();
-	}
-}
-
-Image *WorldModel::background()
-{
-	return mBackgroundImage;
-}
-
-QRect &WorldModel::backgroundRect()
-{
-	return mBackgroundRect;
-}
-
 void WorldModel::createElement(const QDomElement &element)
 {
 	if (element.tagName() == "rectangle") {
@@ -710,11 +638,7 @@ void WorldModel::createElement(const QDomElement &element)
 	} else if (element.tagName() == "stylus") {
 		createStylus(element);
 	} else if (element.tagName() == "image") {
-		if (element.hasAttribute("background")) {
-			createBackgroundImageItem(element);
-		} else {
-			createImageItem(element);
-		}
+		createImageItem(element, element.hasAttribute("background"));
 	} else if (element.tagName() == "wall") {
 		createWall(element);
 	} else if (element.tagName() == "skittle") {
@@ -786,16 +710,10 @@ items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool 
 {
 	items::ImageItem *image = new items::ImageItem(mImages.value(element.attribute("imageId"), nullptr), QRect());
 	image->deserialize(element);
-	image->setBackgroundRole(background);
+	image->setBackgroundRole(background || element.attribute("isBackground") == "true");
 	addImageItem(image);
 
 	return image;
-}
-
-void WorldModel::createBackgroundImageItem(const QDomElement &element)
-{
-	items::ImageItem *backgroundImageItem = createImageItem(element, true);
-	emit backgroundImageItemAdded(backgroundImageItem);
 }
 
 void WorldModel::createRegion(const QDomElement &element)
