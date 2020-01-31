@@ -207,7 +207,7 @@
         <translation>Augmenter la vitesse</translation>
     </message>
     <message>
-        <location line="+256"/>
+        <location line="+216"/>
         <source>Left wheel:</source>
         <translation>Roue gauche :</translation>
     </message>
