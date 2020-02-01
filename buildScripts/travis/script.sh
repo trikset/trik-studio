@@ -23,7 +23,7 @@ compression=true
 compression_level=3
 sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
 EOF
-$EXECUTOR bash -ic "\
+$EXECUTOR bash -ixc "\
    export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
 && ccache -p \
 && which g++ \
