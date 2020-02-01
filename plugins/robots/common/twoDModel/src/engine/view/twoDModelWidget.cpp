@@ -100,8 +100,6 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mConnections << connect(mScene, &TwoDModelScene::robotPressed, mUi->palette, &Palette::unselect);
 	mConnections << connect(mScene, &TwoDModelScene::robotListChanged, this, &TwoDModelWidget::onRobotListChange);
 
-	mConnections << connect(&mModel.worldModel(), &WorldModel::backgroundChanged
-							, mScene, &TwoDModelScene::setBackground);
 	mConnections << connect(&mModel.worldModel(), &WorldModel::itemRemoved
 							, this, [this]() { saveWorldModelToRepo(); });
 
@@ -320,7 +318,6 @@ void TwoDModelWidget::connectUiButtons()
 
 	connect(&mActions->saveModelAction(), &QAction::triggered, this, &TwoDModelWidget::saveWorldModel);
 	connect(&mActions->loadModelAction(), &QAction::triggered, this, &TwoDModelWidget::loadWorldModel);
-	connect(&mActions->setBackgroundAction(), &QAction::triggered, this, &TwoDModelWidget::setBackground);
 
 	connect(mUi->speedUpButton, &QAbstractButton::clicked, this, &TwoDModelWidget::speedUp);
 	connect(mUi->speedDownButton, &QAbstractButton::clicked, this, &TwoDModelWidget::speedDown);
@@ -500,32 +497,6 @@ void TwoDModelWidget::loadWorldModel()
 	if (mController) {
 		mController->execute(command);
 	}
-}
-
-void TwoDModelWidget::setBackground()
-{
-	// Loads world and robot models simultaneously.
-	const QString loadFileName = QRealFileDialog::getOpenFileName("2DSelectBackground"
-			, this
-			, tr("Select background image")
-			, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields"
-			, tr("Graphics (*.*)"));
-	if (loadFileName.isEmpty()) {
-		return;
-	}
-
-	QFile imageFile(loadFileName);
-	if (imageFile.size() > 5 * 1024 * 1024) {
-		if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Warning")
-				, tr("You are trying to load to big image, it may freeze execution for some time. Continue?"))
-						!= QMessageBox::Yes) {
-			return;
-		}
-	}
-
-	Image *image = new Image(loadFileName, false);
-	const QSize size = image->preferedSize();
-	mModel.worldModel().setBackground(image, QRect(QPoint(-size.width()/2, -size.height()/2), size));
 }
 
 bool TwoDModelWidget::isColorItem(AbstractItem * const item) const

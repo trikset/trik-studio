@@ -132,9 +132,6 @@ public slots:
 	/// Focuses all graphics views on the robot if it is not visible.
 	void centerOnRobot(RobotItem *selectedItem = nullptr);
 
-	/// Sets a background image on the scene and its geometry.
-	void setBackground(model::Image * const background, const QRect &backgroundRect);
-
 	/// Reread sensor configuration on given port, delete old sensor item and create new.
 	void reinitSensor(RobotItem *robotItem, const kitBase::robotModel::PortInfo &port);
 
@@ -152,8 +149,6 @@ signals:
 	void robotListChanged(RobotItem *robotItem);
 
 private slots:
-	void handleBackgroundImageItem(items::ImageItem *backgroundImageItem);
-
 	/// Called after robot model was added and create new robot item
 	/// @param robotModel Robot model which was added
 	void onRobotAdd(model::RobotModel *robotModel);
@@ -202,7 +197,6 @@ private:
 	void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
-	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 
 	void drawBackground(QPainter *painter, const QRectF &rect) override;
 	void keyPressEvent(QKeyEvent *event) override;

@@ -34,6 +34,7 @@
 #include <qrkernel/platformInfo.h>
 #include <src/qtCameraImplementation.h>
 #include <src/imitationCameraImplementation.h>
+#include <QApplication>
 
 ///todo: temporary
 #include <trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h>
@@ -153,13 +154,13 @@ void TrikBrick::reinitImitationCamera()
 void TrikBrick::say(const QString &msg) {
 	using namespace kitBase::robotModel;
 	using namespace trik::robotModel;
-	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
+	auto* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
 		emit error(tr("2d model shell part was not found"));
 		return;
 	}
 
-	QMetaObject::invokeMethod(sh, "say", Q_ARG(const QString &, msg));
+	QMetaObject::invokeMethod(sh, [sh, msg](){sh->say(msg);});
 }
 
 void TrikBrick::stop() {
@@ -400,7 +401,9 @@ void TrikBrick::wait(int milliseconds)
 	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
 	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
 
-	if (timeline->isStarted()) {
+	if (milliseconds == 0) {
+		QApplication::processEvents();
+	} else if (timeline->isStarted()) {
 		t->start(milliseconds);
 		loop.exec();
 	}

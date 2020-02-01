@@ -23,8 +23,7 @@
 
 using namespace qReal::ui;
 
-static const int updateBatchSize = 200;
-static const int defaultUpdateInterval = 50; // ms
+static const int defaultUpdateInterval = 250; // ms
 
 ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	: QDockWidget(title, parent)
@@ -53,12 +52,20 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 
 	setObjectName("consoleDockContents");
 	connect(&mTimer, &QTimer::timeout, this, [&](){
-		int i = 0;
 		QString res;
-		while (i++ < updateBatchSize && !mMsgQueue.isEmpty()) {
-			res += mMsgQueue.dequeue() + '\n';
+		res.reserve(100000);
+		while (!mMsgQueue.isEmpty()) {
+			res.append(mMsgQueue.dequeue());
+			res.append('\n');
 		}
-		mOutput->appendPlainText(res);
+
+		// HACK: Append text without a newline character
+		auto const &c = mOutput->textCursor();
+		mOutput->moveCursor(QTextCursor::End);
+		mOutput->insertPlainText(res);
+		mOutput->setTextCursor(c);
+		// ----
+
 		mOutput->verticalScrollBar()->setValue(mOutput->verticalScrollBar()->maximum());
 		show();
 		if (mMsgQueue.isEmpty()) {

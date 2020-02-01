@@ -27,6 +27,7 @@ class ImageItem : public graphicsUtils::AbstractItem
 	Q_OBJECT
 	Q_PROPERTY(bool memorize READ memorizes WRITE setMemorize)
 	Q_PROPERTY(QString path READ path WRITE setPath)
+	Q_PROPERTY(bool background READ isBackground WRITE setBackgroundRole)
 
 public:
 	ImageItem(model::Image *image, const QRect &geometry);
@@ -78,6 +79,10 @@ signals:
 
 protected:
 	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;

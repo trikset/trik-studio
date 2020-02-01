@@ -425,7 +425,7 @@
         <translation>Увеличить скорость</translation>
     </message>
     <message>
-        <location line="+256"/>
+        <location line="+216"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -580,7 +580,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+76"/>
         <source>Image (I)</source>
         <translation>Картинка (I)</translation>
     </message>
@@ -751,9 +751,8 @@
         <translation>Загрузить модель мира...</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Set background...</source>
-        <translation>Установить фон...</translation>
+        <translation type="vanished">Установить фон...</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -887,7 +886,7 @@
 <context>
     <name>twoDModel::view::ImageItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+58"/>
         <source>Image will be packed into save file. Warning: this will increase save file size.</source>
         <translation>Картинка будет запакована в проект. Внимание: это значительно увеличит размер файла сохранения.</translation>
     </message>
@@ -897,7 +896,17 @@
         <translation>Картинка не будет включена в файл сохранения. Внимание: при открытии текущего проекта на другой машине или переименовании файла с картинкой изображение в 2D модели пропадет.</translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+7"/>
+        <source>The image will be in the background. Warning: the robot does not see this image.</source>
+        <translation>Изображение будет на заднем плане. Предупреждение: робот не видит это изображение.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The image will be in the foreground. Warning: robot sees this image with sensors.</source>
+        <translation>Изображение будет на переднем плане. Предупреждение: робот видит это изображение с помощью сенсоров.</translation>
+    </message>
+    <message>
+        <location line="+90"/>
         <source>Change image...</source>
         <translation>Изменить картинку...</translation>
     </message>
@@ -959,7 +968,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+735"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+694"/>
         <source>Select image</source>
         <translation>Выберите картинку</translation>
     </message>
@@ -992,13 +1001,12 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
-        <location line="+210"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+307"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location line="-209"/>
+        <location line="+1"/>
         <source>Do you really want to clear scene?</source>
         <translation>Вы действительно хотите очистить сцену?</translation>
     </message>
@@ -1011,7 +1019,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+91"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1037,22 +1045,19 @@
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+25"/>
         <source>Select background image</source>
-        <translation>Выберите фоновое изображение</translation>
+        <translation type="vanished">Выберите фоновое изображение</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Graphics (*.*)</source>
-        <translation>Графика (*.*)</translation>
+        <translation type="vanished">Графика (*.*)</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
-        <translation>Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
+        <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+319"/>
+        <location line="+328"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

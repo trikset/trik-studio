@@ -88,7 +88,7 @@
         <translation>Division entière par zéro</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+572"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+573"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -379,7 +379,7 @@
 <context>
     <name>qReal::ui::ConsoleDock</name>
     <message>
-        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+44"/>
+        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+43"/>
         <source>Reset shell</source>
         <translation type="unfinished"></translation>
     </message>

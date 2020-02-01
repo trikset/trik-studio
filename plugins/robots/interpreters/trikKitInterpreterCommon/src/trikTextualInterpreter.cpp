@@ -51,11 +51,12 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 		"} else {res += arguments[i].toString();}"
 		"};"
 		"brick.log(res);"
+		"brick.wait(0);"
 		"return res;"
 	"};"
 	"script.system = function() {print('system is disabled in the interpreter');};";
 
-const QString pyOverrides ="\ndef print(args): brick.log(args);"
+const QString pyOverrides ="\ndef print(args): script.wait(0); brick.log(args);"
 			   "script.random = brick.random;"
 			   "script.wait = brick.wait;"
 			   "script.time = brick.time;"
