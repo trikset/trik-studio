@@ -139,8 +139,8 @@ QList<HotKeyActionInfo> TrikQtsGeneratorPluginBase::hotKeyActions()
 {
 	mGenerateCodeAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_G));
 	mUploadProgramAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_U));
-	mRunProgramAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_F5));
-	mStopRobotAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F5));
+	mRunProgramAction->setShortcut(QKeySequence(Qt::Key_F5));
+	mStopRobotAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
 
 	HotKeyActionInfo generateCodeInfo("Generator.GenerateTrik", tr("Generate TRIK Code"), mGenerateCodeAction);
 	HotKeyActionInfo uploadProgramInfo("Generator.UploadTrik", tr("Upload TRIK Program"), mUploadProgramAction);

@@ -267,12 +267,12 @@
         <translation>Выполнить программу</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>Stop robot</source>
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+187"/>
+        <location line="+188"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>

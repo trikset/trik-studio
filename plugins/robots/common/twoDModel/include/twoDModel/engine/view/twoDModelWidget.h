@@ -130,7 +130,6 @@ signals:
 protected:
 	void changeEvent(QEvent *e) override;
 	void showEvent(QShowEvent *e) override;
-	void keyPressEvent(QKeyEvent *event) override;
 	void closeEvent(QCloseEvent *event) override;
 
 	void focusInEvent(QFocusEvent *event) override;

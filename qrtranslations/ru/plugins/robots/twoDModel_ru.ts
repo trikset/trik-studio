@@ -383,18 +383,26 @@
         <translation>Двумерная модель</translation>
     </message>
     <message>
-        <location line="+78"/>
         <source>Run program (Enter)</source>
-        <translation>Запустить программу (Enter)</translation>
+        <translation type="vanished">Запустить программу (Enter)</translation>
     </message>
     <message>
-        <location line="+41"/>
         <source>Stop program (Esc)</source>
-        <translation>Остановить программу (Esc)</translation>
+        <translation type="vanished">Остановить программу (Esc)</translation>
     </message>
     <message>
         <source>Return robot to the initial position</source>
         <translation type="vanished">Вернуть робота в исходное положение</translation>
+    </message>
+    <message>
+        <location line="+78"/>
+        <source>Run program</source>
+        <translation>Запустить программу</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Stop program</source>
+        <translation>Остановить программу</translation>
     </message>
     <message>
         <location line="+128"/>
@@ -1021,7 +1029,7 @@
         <translation>Режим проверки: проверка решения будет осуществляться, об ошибках будет сообщаться</translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+62"/>
         <source>Saving world and robot model</source>
         <translation>Сохранение модели мира</translation>
     </message>
