@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 	qrRepo::RepoApi repo(saveFile);
 
 	if (parser.isSet(patchField)) {
-		const auto &field = parser.value(patchField);
+		const auto field = parser.value(patchField);
 		QFile fieldFile(field);
 		if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
 			return 1;
