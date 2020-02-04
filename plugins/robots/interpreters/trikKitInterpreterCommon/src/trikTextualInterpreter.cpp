@@ -50,13 +50,13 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 		"if (arguments[i] instanceof Array) {res += arrayPPinternal(arguments[i]);"
 		"} else {res += arguments[i].toString();}"
 		"};"
-		"brick.log(res);"
+		"brick.log(res+'\n');"
 		"brick.wait(0);"
 		"return res;"
 	"};"
 	"script.system = function() {print('system is disabled in the interpreter');};";
 
-const QString pyOverrides ="\ndef print(args): script.wait(0); brick.log(args);"
+const QString pyOverrides ="\ndef print(args): script.wait(0); brick.log(args + '\n');"
 			   "script.random = brick.random;"
 			   "script.wait = brick.wait;"
 			   "script.time = brick.time;"
@@ -138,7 +138,8 @@ void trik::TrikTextualInterpreter::abort()
 	//mScriptRunner.abort();
 	mBrick.stopWaiting();
 	Q_ASSERT(mScriptRunner.thread() == thread());
-	QMetaObject::invokeMethod(&mScriptRunner, "abort", Qt::QueuedConnection); // just a wild test
+	// just a wild test
+	QMetaObject::invokeMethod(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::abort, Qt::QueuedConnection);
 	mRunning = false; // reset brick?
 	mBrick.processSensors(false);
 }
