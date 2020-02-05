@@ -4,7 +4,7 @@ set -xuevo pipefail
 CODECOV=true
 case $TRAVIS_OS_NAME in
   osx)
-     export PATH="$TRIK_QT/5.12.6/clang_64/bin:$PATH"
+     export PATH="$TRIK_QT/5.12.7/clang_64/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
@@ -23,7 +23,7 @@ compression=true
 compression_level=3
 sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
 EOF
-$EXECUTOR bash -ic "\
+$EXECUTOR bash -ixc "\
    export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
 && ccache -p \
 && which g++ \

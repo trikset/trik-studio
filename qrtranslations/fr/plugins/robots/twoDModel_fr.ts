@@ -177,14 +177,22 @@
         <translation>Un modèle 2D</translation>
     </message>
     <message>
-        <location line="+78"/>
         <source>Run program (Enter)</source>
-        <translation>Executer le programme (Enter)</translation>
+        <translation type="vanished">Executer le programme (Enter)</translation>
+    </message>
+    <message>
+        <source>Stop program (Esc)</source>
+        <translation type="vanished">Arrêter le programme (Esc)</translation>
+    </message>
+    <message>
+        <location line="+78"/>
+        <source>Run program</source>
+        <translation>Executer le programme</translation>
     </message>
     <message>
         <location line="+41"/>
-        <source>Stop program (Esc)</source>
-        <translation>Arrêter le programme (Esc)</translation>
+        <source>Stop program</source>
+        <translation>Arrêter le programme</translation>
     </message>
     <message>
         <location line="+128"/>
@@ -686,7 +694,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+62"/>
         <source>Saving world and robot model</source>
         <translation>Enregistrement des modèles du monde et du robot</translation>
     </message>
