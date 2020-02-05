@@ -187,6 +187,8 @@ INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 
 CONFIG += c++11
 
+DEFINES *= QT_FORCE_ASSERTS
+
 !warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
 
 !clang: QMAKE_CXXFLAGS += -ansi
