@@ -56,7 +56,6 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 		res.reserve(100000);
 		while (!mMsgQueue.isEmpty()) {
 			res.append(mMsgQueue.dequeue());
-			res.append('\n');
 		}
 
 		// HACK: Append text without a newline character

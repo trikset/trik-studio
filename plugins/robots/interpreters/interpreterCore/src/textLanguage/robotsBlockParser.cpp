@@ -193,7 +193,7 @@ void RobotsBlockParser::addIntrinsicFuctions()
 		kitBase::robotModel::robotParts::Shell *shell = kitBase::robotModel::RobotModelUtils::findDevice
 				<kitBase::robotModel::robotParts::Shell>(mRobotModelManager.model(), "ShellPort");
 		if (shell) {
-			shell->print(text.toString());
+			shell->print(text.toString().append('\n'));
 		}
 
 		return text;
