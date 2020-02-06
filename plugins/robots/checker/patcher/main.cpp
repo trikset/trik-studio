@@ -57,10 +57,11 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 
-		const auto &fieldContents = fieldFile.readAll();
+		/// Explicitly convert to QString
+		const QString &fieldContents = fieldFile.readAll();
 
-		fieldFile.close();
 		repo.setMetaInformation("worldModel", fieldContents);
+		fieldFile.close();
 	}
 
 
@@ -72,7 +73,8 @@ int main(int argc, char *argv[])
 				return 1;
 			}
 
-			const QString scriptContent = scriptFile.readAll();
+			/// Explicitly convert to QString
+			const QString &scriptContent = scriptFile.readAll();
 			repo.setMetaInformation("activeCode", scriptContent);
 
 			repo.setMetaInformation("activeCodeLanguageExtension", QFileInfo(scriptFile).suffix().toLower());
