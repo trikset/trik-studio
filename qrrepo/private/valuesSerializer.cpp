@@ -128,8 +128,7 @@ QString ValuesSerializer::serializeQVariant(const QVariant &v)
 		// something bad
 	[[fallthrough]];
 	default:
-		qDebug() << "Unsupported QVariant type!" << v;
-		Q_ASSERT(!"Unsupported QVariant type.");
+		Q_ASSERT_X("Unsupported QVariant type." && 0, Q_FUNC_INFO, v.typeName());
 		return "";
 	}
 }

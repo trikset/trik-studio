@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 		const QString &fieldContents = fieldFile.readAll();
 
 		repo.setMetaInformation("worldModel", fieldContents);
-		fieldFile.close();
 	}
 
 
