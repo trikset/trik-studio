@@ -45,7 +45,7 @@ Display::Display(const DeviceInfo &info
 	connect(this, &Display::shapesSetChanged, this, [=]() {
 		// This is a bit hacky, but shapes set may be modified pretty often, can be pretty large
 		// and its serialization to JSON may take notable time, so we don't want to do it without real need.
-		if (receivers(SIGNAL(propertyChanged(QString, QVariant)))) {
+		if (isSignalConnected(QMetaMethod::fromSignal(&Display::propertyChanged))) {
 			emit propertyChanged("objects", toJson());
 		}
 	});
@@ -100,6 +100,9 @@ void Display::drawArc(int x, int y, int width, int height, int startAngle, int s
 
 void Display::drawSmile(bool sad)
 {
+	if (mSmiles == !sad && mSadSmiles == sad) {
+		return;
+	}
 	mCurrentImage = QImage(sad ? ":/icons/sadSmile.png" : ":/icons/smile.png");
 	mSmiles = !sad;
 	mSadSmiles = sad;
@@ -158,6 +161,7 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 
 	const QRect displayRect(0, 0, mEngine.display()->displayWidth(), mEngine.display()->displayHeight());
 
+	painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 	painter->save();
 	painter->setPen(mBackground);
 	painter->setBrush(mBackground);
@@ -165,8 +169,7 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->drawImage(displayRect, mCurrentImage);
 	painter->restore();
 
-	painter->save();
-	painter->setRenderHint(QPainter::HighQualityAntialiasing);
+	painter->save();	
 	QFont font;
 	font.setPixelSize(textSize);
 	painter->setFont(font);

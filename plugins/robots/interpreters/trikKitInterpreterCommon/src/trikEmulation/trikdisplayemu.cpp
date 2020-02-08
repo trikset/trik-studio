@@ -19,10 +19,17 @@
 #include <trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h>
 
 using namespace trik;
+using robotModel::twoD::parts::Display;
 
 TrikDisplayEmu::TrikDisplayEmu(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model)
 	: mTwoDRobotModel(model), mDisplay(nullptr)
 {
+}
+
+Qt::ConnectionType TrikDisplayEmu::callType() const {
+	return Qt::AutoConnection;
+	// Very strange, but forced blocking connection causes SIGSEGV crash....
+	// return thread() != mDisplay->thread()? Qt::BlockingQueuedConnection : Qt::DirectConnection;
 }
 
 trikControl::DisplayWidgetInterface &TrikDisplayEmu::graphicsWidget()
@@ -32,119 +39,76 @@ trikControl::DisplayWidgetInterface &TrikDisplayEmu::graphicsWidget()
 
 void TrikDisplayEmu::init()
 {
-	mDisplay = kitBase::robotModel::RobotModelUtils::findDevice<robotModel::twoD::parts::Display>(*mTwoDRobotModel
-			, "DisplayPort");
+	mDisplay = kitBase::robotModel::RobotModelUtils::findDevice<Display>(*mTwoDRobotModel, "DisplayPort");
 }
 
 void TrikDisplayEmu::showImage(const QString &fileName)
 {
 	const bool smile = fileName.endsWith(QLatin1String("sad.png"));
-	QMetaObject::invokeMethod(mDisplay,
-			"drawSmile",
-			 Q_ARG(bool, smile));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawSmile(smile); }, callType());
 }
 
 void TrikDisplayEmu::show(const QVector<int32_t> &array, int width, int height, const QString &format)
 {
-	QMetaObject::invokeMethod(mDisplay, "show", Q_ARG(QVector<int32_t>, array)
-						, Q_ARG(int, width), Q_ARG(int, height), Q_ARG(QString, format));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->show(array, width, height, format); }, callType());
 }
 
 void TrikDisplayEmu::addLabel(const QString &text, int x, int y)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"printText",
-			Q_ARG(int, x),
-			Q_ARG(int, y),
-			Q_ARG(const QString &, text));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->printText(x, y, text); }, callType());
 }
 
 void TrikDisplayEmu::setPainterColor(const QString &color)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"setPainterColor",
-			Q_ARG(const QColor &, QColor(color)));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->setPainterColor(color); }, callType());
 }
 
 void TrikDisplayEmu::setPainterWidth(int penWidth)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"setPainterWidth",
-			Q_ARG(int, penWidth));
+	QMetaObject::invokeMethod(mDisplay,[=](){ mDisplay->setPainterWidth(penWidth); }, callType());
 }
 
 void TrikDisplayEmu::drawLine(int x1, int y1, int x2, int y2)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"drawLine",
-			Q_ARG(int, x1),
-			Q_ARG(int, y1),
-			Q_ARG(int, x2),
-			Q_ARG(int, y2));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawLine(x1, y1, x2, y2); }, callType());
 }
 
 void TrikDisplayEmu::drawPoint(int x, int y)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"drawPixel",
-			Q_ARG(int, x),
-			Q_ARG(int, y));
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawPixel(x, y); }, callType());
 }
 
-void TrikDisplayEmu::drawRect(int x, int y, int width, int height, bool filled)
+void TrikDisplayEmu::drawRect(int x, int y, int w, int h, bool filled)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"drawRect",
-			Q_ARG(int, x),
-			Q_ARG(int, y),
-			Q_ARG(int, width),
-			Q_ARG(int, height),
-			Q_ARG(bool, filled));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawRect(x, y, w, h, filled); }, callType());
 }
 
-void TrikDisplayEmu::drawEllipse(int x, int y, int width, int height, bool filled)
+void TrikDisplayEmu::drawEllipse(int x, int y, int w, int h, bool filled)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"drawEllipse",
-			Q_ARG(int, x),
-			Q_ARG(int, y),
-			Q_ARG(int, width),
-			Q_ARG(int, height),
-			Q_ARG(bool, filled));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->drawEllipse(x, y, w, h, filled); }, callType());
 }
 
-void TrikDisplayEmu::drawArc(int x, int y, int width, int height, int startAngle, int spanAngle)
+void TrikDisplayEmu::drawArc(int x, int y, int w, int h, int start, int span)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"drawArc",
-			Q_ARG(int, x),
-			Q_ARG(int, y),
-			Q_ARG(int, width),
-			Q_ARG(int, height),
-			Q_ARG(int, startAngle),
-			Q_ARG(int, spanAngle));
+	QMetaObject::invokeMethod(mDisplay, [=]() { mDisplay->drawArc(x, y, w, h, start, span); },  callType());
 }
 
 void TrikDisplayEmu::setBackground(const QString &color)
 {
-	QMetaObject::invokeMethod(mDisplay,
-			"setBackground",
-			Q_ARG(const QColor &, QColor(color)));
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->setBackground(color); }, callType());
 }
 
 void TrikDisplayEmu::clear()
 {
-	QMetaObject::invokeMethod(mDisplay, "clearScreen");
+	QMetaObject::invokeMethod(mDisplay, &Display::clearScreen, callType());
 }
 
 void TrikDisplayEmu::reset()
 {
-	if (mDisplay) {
-		QMetaObject::invokeMethod(mDisplay, "reset");
-	}
+	QMetaObject::invokeMethod(mDisplay, &Display::reset, callType());
 }
 
 void TrikDisplayEmu::redraw()
 {
-	QMetaObject::invokeMethod(mDisplay, "redraw");
+	QMetaObject::invokeMethod(mDisplay, &Display::redraw,  callType());
 }
