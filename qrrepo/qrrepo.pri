@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-links(qrkernel qrutils quazip)
+links(qrkernel qrutils quazip qslog)
 
 HEADERS += \
 	$$PWD/private/repository.h \
