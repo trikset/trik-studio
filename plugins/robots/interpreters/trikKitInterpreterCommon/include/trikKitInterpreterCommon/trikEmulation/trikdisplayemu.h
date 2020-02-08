@@ -58,6 +58,8 @@ public slots:
 	virtual void redraw() override;
 
 private:
+	Qt::ConnectionType callType() const;
+
 	trikControl::DisplayWidgetInterface mDisplayWidgetInterface;
 	QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 	robotModel::twoD::parts::Display * mDisplay;
