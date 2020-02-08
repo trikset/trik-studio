@@ -18,6 +18,7 @@
 
 #include <QtCore/QPointF>
 #include <QtGui/QPolygon>
+#include <thirdparty/qslog/QsLog.h>
 
 using namespace qReal;
 using namespace qrRepo::details;
@@ -26,7 +27,7 @@ IdList ValuesSerializer::deserializeIdList(const QDomElement &elem, const QStrin
 {
 	QDomNodeList list = elem.elementsByTagName(name);
 	if (list.count() != 1) {
-		qDebug() << "Incorrect element: " + name + " list must appear once";
+		QLOG_ERROR() << "Incorrect element: " + name + " list must appear once";
 		return IdList();
 	}
 
@@ -40,7 +41,7 @@ IdList ValuesSerializer::deserializeIdList(const QDomElement &elem, const QStrin
 	{
 		QString elementStr = element.attribute("id", "");
 		if (elementStr == "") {
-			qDebug() << "Incorrect Child XML node";
+			QLOG_ERROR() << "Incorrect Child XML node";
 			return IdList();
 		}
 
@@ -128,8 +129,7 @@ QString ValuesSerializer::serializeQVariant(const QVariant &v)
 		// something bad
 	[[fallthrough]];
 	default:
-		qDebug() << v;
-		Q_ASSERT(!"Unsupported QVariant type.");
+		Q_ASSERT_X("Unsupported QVariant type." && 0, Q_FUNC_INFO, v.typeName());
 		return "";
 	}
 }
