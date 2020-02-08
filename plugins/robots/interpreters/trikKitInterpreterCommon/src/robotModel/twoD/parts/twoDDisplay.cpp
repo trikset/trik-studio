@@ -45,7 +45,7 @@ Display::Display(const DeviceInfo &info
 	connect(this, &Display::shapesSetChanged, this, [=]() {
 		// This is a bit hacky, but shapes set may be modified pretty often, can be pretty large
 		// and its serialization to JSON may take notable time, so we don't want to do it without real need.
-		if (receivers(SIGNAL(propertyChanged(QString, QVariant)))) {
+		if (isSignalConnected(QMetaMethod::fromSignal(&Display::propertyChanged))) {
 			emit propertyChanged("objects", toJson());
 		}
 	});
