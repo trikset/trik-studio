@@ -20,6 +20,10 @@ include(../../global.pri)
 
 QT += widgets
 
+#clang complains about GTest headers, but error is produced for macro expansion and -isystem does not help
+#probably, this can be fixed if we stop using old-school obsolete MOCK_METHOD{0-9} instead of newer MOCK_METHOD
+clang:QMAKE_CXXFLAGS += -Wno-error=gnu-zero-variadic-macro-arguments
+
 SOURCES += $$PWD/mainTest.cpp
 
 INCLUDEPATH += \
