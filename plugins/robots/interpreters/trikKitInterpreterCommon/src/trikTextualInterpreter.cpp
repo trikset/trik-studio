@@ -227,7 +227,7 @@ void trik::TrikTextualInterpreter::setRunning(bool running)
 void trik::TrikTextualInterpreter::setCurrentDir(const QString &dir)
 {
 	mBrick.setCurrentDir(dir);
-	mScriptRunner.setWorkingDirectory(QFileInfo(dir).dir().path() + "/");
+	mScriptRunner.setWorkingDirectory(QFileInfo(dir).dir().canonicalPath() + "/");
 }
 
 QStringList trik::TrikTextualInterpreter::supportedRobotModelNames() const
