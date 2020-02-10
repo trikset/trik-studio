@@ -25,6 +25,7 @@
 
 #include <twoDModel/engine/model/timeline.h>
 #include <qrgui/textEditor/languageInfo.h>
+#include <trikKernel/fileUtils.h>
 
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
@@ -227,7 +228,7 @@ void trik::TrikTextualInterpreter::setRunning(bool running)
 void trik::TrikTextualInterpreter::setCurrentDir(const QString &dir)
 {
 	mBrick.setCurrentDir(dir);
-	mScriptRunner.setWorkingDirectory(QFileInfo(dir).dir().canonicalPath() + "/");
+	mScriptRunner.setWorkingDirectory(trikKernel::FileUtils::normalizePath(dir));
 }
 
 QStringList trik::TrikTextualInterpreter::supportedRobotModelNames() const
