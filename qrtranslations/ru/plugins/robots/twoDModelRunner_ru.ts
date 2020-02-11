@@ -56,4 +56,12 @@ In background mode the session will be terminated just after the execution ended
         <translation type="obsolete">Путь к файлу, куда будует выводиться траектория робота. Записть не будет осуществлена одномоментно, каждый узел траектории будет записан по факту его подсчета проверяющей системой</translation>
     </message>
 </context>
+<context>
+    <name>twoDModel::Runner</name>
+    <message>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+47"/>
+        <source>Robot console</source>
+        <translation>Консоль робота</translation>
+    </message>
+</context>
 </TS>
