@@ -105,7 +105,7 @@
         <translation>Ошибка компиляции.</translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+130"/>
         <source>Could not upload file to robot. Connect to a robot via %1.</source>
         <translation>Не могу загрузить файл на робота. Подключите робота по %1.</translation>
     </message>
@@ -120,7 +120,7 @@
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location line="-111"/>
+        <location line="-110"/>
         <source>The program has been uploaded</source>
         <translation>Загрузка программы завершена успешно</translation>
     </message>
