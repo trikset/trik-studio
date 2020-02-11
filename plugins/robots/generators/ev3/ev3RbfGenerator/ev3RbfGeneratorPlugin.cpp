@@ -258,6 +258,11 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	if (!communicator) {
 		return QString();
 	}
+	auto errorReporter = connect(
+			communicator, &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
+			[this](const QString &message){
+				mMainWindowInterface->errorReporter()->addError(message);
+			});
 	QMetaObject::invokeMethod(communicator, "connect"
 							, (communicator->thread()==QThread::currentThread()
 								? Qt::DirectConnection : Qt::BlockingQueuedConnection)
@@ -275,6 +280,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 								, (communicator->thread()==QThread::currentThread()
 									? Qt::DirectConnection : Qt::BlockingQueuedConnection)
 								, Q_RETURN_ARG(QString, res), Q_ARG(QString, rbfPath), Q_ARG(QString, targetPath));
+	disconnect(errorReporter);
 	return res;
 }
 
