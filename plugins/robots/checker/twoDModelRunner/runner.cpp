@@ -20,6 +20,10 @@
 #include <QtCore/QJsonValue>
 #include <QtWidgets/QApplication>
 
+#include <qrutils/widgets/consoleDock.h>
+#include <kitBase/robotModel/robotParts/shell.h>
+#include <kitBase/robotModel/robotModelUtils.h>
+
 #include <twoDModel/engine/view/twoDModelWidget.h>
 #include <twoDModel/engine/model/model.h>
 
@@ -40,6 +44,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 			, mQRealFacade.events()
 			, mTextManager)
 	, mReporter(report, trajectory)
+	, mRobotConsole(new qReal::ui::ConsoleDock(tr("Robot console")))
 {
 	mPluginFacade.init(mConfigurator);
 	for (const QString &defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
@@ -96,6 +101,8 @@ bool Runner::interpret(const QString &saveFile, bool background)
 		}
 	}
 
+	mRobotConsole->show();
+
 	mReporter.onInterpretationStart();
 	if (mMode == "script") {
 		return mPluginFacade.interpretCode(mInputsFile);
@@ -112,12 +119,17 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel)
 			, this, &Runner::onRobotRided, Qt::UniqueConnection);
 
 	connect(&robotModel->info().configuration(), &kitBase::robotModel::ConfigurationInterface::deviceConfigured
-			, this, [=](const kitBase::robotModel::robotParts::Device *device)
+			, this, [=](kitBase::robotModel::robotParts::Device *device)
 	{
 		connect(device, &kitBase::robotModel::robotParts::Device::propertyChanged, this
 				, [=](const QString &property, const QVariant &value) {
 			onDeviceStateChanged(robotModel->info().robotId(), device, property, value);
 		});
+
+		if (auto * shell = dynamic_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
+			connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
+					, mRobotConsole, &qReal::ui::ConsoleDock::print);
+		}
 	});
 }
 

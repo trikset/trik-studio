@@ -27,6 +27,12 @@
 #include <interpreterCore/robotsPluginFacade.h>
 #include "reporter.h"
 
+namespace qReal {
+namespace ui {
+class ConsoleDock;
+}
+}
+
 namespace twoDModel {
 
 namespace model {
@@ -78,6 +84,7 @@ private:
 	qReal::PluginConfigurator mConfigurator;
 	interpreterCore::RobotsPluginFacade mPluginFacade;
 	Reporter mReporter;
+	qReal::ui::ConsoleDock *mRobotConsole;
 	QString mInputsFile;
 	QString mMode;
 };
