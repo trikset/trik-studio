@@ -1,1 +1,2 @@
-MUL32(@@OPERAND@@, -1, @@RESULT@@)
+MOVE32_@@TYPE@@(-1, @@RESULT@@)
+MUL@@TYPE@@(@@OPERAND@@, @@RESULT@@, @@RESULT@@)

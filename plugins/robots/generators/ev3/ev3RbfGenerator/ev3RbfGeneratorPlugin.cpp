@@ -162,11 +162,11 @@ void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
 	case RunPolicy::Ask:
 		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget(), tr("The program has been uploaded")
 				, tr("Do you want to run it?")) == QMessageBox::Yes) {
-			QMetaObject::invokeMethod(communicator, "runProgram", Q_ARG(QString, fileOnRobot));
+			QMetaObject::invokeMethod(communicator, [=](){ communicator->runProgram(fileOnRobot); });
 		}
 		break;
 	case RunPolicy::AlwaysRun:
-		QMetaObject::invokeMethod(communicator, "runProgram", Q_ARG(QString, fileOnRobot));
+		QMetaObject::invokeMethod(communicator, [=](){ communicator->runProgram(fileOnRobot); });
 		break;
 	case RunPolicy::NeverRun:
 		break;
@@ -178,14 +178,14 @@ void Ev3RbfGeneratorPlugin::runProgram()
 	const QString fileOnRobot = uploadProgram();
 	communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator();
 	if (!fileOnRobot.isEmpty() && communicator) {
-		QMetaObject::invokeMethod(communicator, "runProgram", Q_ARG(QString, fileOnRobot));
+		QMetaObject::invokeMethod(communicator, [=](){ communicator->runProgram(fileOnRobot); });
 	}
 }
 
 void Ev3RbfGeneratorPlugin::stopRobot()
 {
 	if (communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator()) {
-		QMetaObject::invokeMethod(communicator, "stopProgram");
+		QMetaObject::invokeMethod(communicator, &communication::Ev3RobotCommunicationThread::stopProgram);
 	}
 }
 
@@ -258,10 +258,14 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	if (!communicator) {
 		return QString();
 	}
-	QMetaObject::invokeMethod(communicator, "connect"
-							, (communicator->thread()==QThread::currentThread()
-								? Qt::DirectConnection : Qt::BlockingQueuedConnection)
-							, Q_RETURN_ARG(bool, connected));
+	auto errorReporter = connect(
+			communicator, &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
+			[this](const QString &message){
+				mMainWindowInterface->errorReporter()->addError(message);
+			});
+	QMetaObject::invokeMethod(communicator, &communication::Ev3RobotCommunicationThread::connect
+			, (communicator->thread()==QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection)
+			, &connected);
 
 	if (!connected) {
 		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
@@ -271,10 +275,10 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	}
 
 	QString res;
-	QMetaObject::invokeMethod(communicator, "uploadFile"
-								, (communicator->thread()==QThread::currentThread()
-									? Qt::DirectConnection : Qt::BlockingQueuedConnection)
-								, Q_RETURN_ARG(QString, res), Q_ARG(QString, rbfPath), Q_ARG(QString, targetPath));
+	QMetaObject::invokeMethod(communicator, [=](){ communicator->uploadFile(rbfPath, targetPath); }
+			, (communicator->thread()==QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection)
+			, &res);
+	disconnect(errorReporter);
 	return res;
 }
 
