@@ -126,7 +126,7 @@ utils::AbstractTimer *Timeline::produceTimer()
 	auto connection = (QThread::currentThread() != this->thread()) ?
 				Qt::BlockingQueuedConnection : Qt::DirectConnection;
 	utils::AbstractTimer *t = nullptr;
-	QMetaObject::invokeMethod(this, "produceTimerImpl", connection, Q_RETURN_ARG(utils::AbstractTimer *, t));
+	QMetaObject::invokeMethod(this, "produceTimerImpl", connection, Q_RETURN_ARG(utils::AbstractTimer *, t) );
 	return t;
 }
 
