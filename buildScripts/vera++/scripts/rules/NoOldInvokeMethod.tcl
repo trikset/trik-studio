@@ -15,11 +15,8 @@
 proc NoOldInvokeMethod { fileName } {
   set lineCount 1
   foreach line [getAllLines $fileName] {
-    if { [regexp {invokeMethod} $line] } {
-      if { [regexp {Q_ARG} $line]  || [regexp {Q_RETURN_ARG} $line] } {
-        report $fileName $lineCount "Passing method name as a literal string is forbidden, 
-        use Functor signature instead"
-      }
+    if { [regexp {Q_ARG} $line] || [regexp {Q_RETURN_ARG} $line] } {
+      report $fileName $lineCount "Passing method name as a literal string is forbidden, use Functor signature instead"
     }
     incr lineCount
   }
