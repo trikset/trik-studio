@@ -194,22 +194,31 @@ void TrikPythonGeneratorPluginBase::addShellDevice(robotModel::GeneratorModelExt
 void TrikPythonGeneratorPluginBase::uploadProgram()
 {
 	if (mUploadProgramProtocol) {
-		QList<QFileInfo> files;
-		auto const &tabs = mMainWindowInterface->allTabs();
-		for (auto &&tab : tabs) {
-			if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
-				auto const &ext = code->currentLanguage().extension;
-				if (ext == "js" || ext == "py") {
-					files << QFileInfo(mTextManager->path(code));
+		if (mMainWindowInterface->activeDiagram() != Id())
+		{
+			const QFileInfo fileInfo = generateCodeForProcessing();
+			if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
+				disableButtons();
+				mUploadProgramProtocol->run({fileInfo});
+			}
+		} else {
+			QList<QFileInfo> files;
+			auto const &tabs = mMainWindowInterface->allTabs();
+			for (auto &&tab : tabs) {
+				if (auto * code = dynamic_cast<qReal::text::QScintillaTextEdit *>(tab)) {
+					auto const &ext = code->currentLanguage().extension;
+					if (ext == "js" || ext == "py") {
+						files << QFileInfo(mTextManager->path(code));
+					}
 				}
 			}
-		}
-		if (!files.isEmpty()) {
-			disableButtons();
-			mUploadProgramProtocol->run(files);
-		} else {
-			mMainWindowInterface->errorReporter()->addError(
-					tr("There are no files to upload. You must open or generate at least one *.js or *.py file."));
+			if (!files.isEmpty()) {
+				disableButtons();
+				mUploadProgramProtocol->run(files);
+			} else {
+				mMainWindowInterface->errorReporter()->addError(
+						tr("There are no files to upload. You must open or generate at least one *.js or *.py file."));
+			}
 		}
 	} else {
 		QLOG_ERROR() << "Upload program protocol is not initialized";
