@@ -20,13 +20,7 @@ then
       git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
       git fetch --unshallow --tags # for `git describe --tags` to work
       #TODO: We can build installer and checker archive in parallel if needed
-      $EXECUTOR bash -ic "\
-      echo Start build installer \
-      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-      && mv installer/trik-studio*installer* installer/$TSNAME \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
-      || false \
-"
+
       if [[ $TRAVIS_OS_NAME == linux ]] ; then
       $EXECUTOR bash -ic "\
       echo Start build checker archive \
@@ -34,5 +28,13 @@ then
       && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz \
       || false \
 "
-     fi
+      fi
+
+      $EXECUTOR bash -ic "\
+      echo Start build installer \
+      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+      && mv installer/trik-studio*installer* installer/$TSNAME \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
+      || false \
+"
 fi
