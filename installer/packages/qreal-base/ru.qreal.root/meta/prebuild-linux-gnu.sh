@@ -48,7 +48,6 @@ cp -pr $QT_DIR/lib/libQt5Gui.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5PrintSupport.so*                               $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Svg.so*                                        $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Widgets.so*                                    $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5X11Extras.so*                                  $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
