@@ -25,9 +25,10 @@ class RectangularRegion : public RegionItem
 public:
 	explicit RectangularRegion(QGraphicsItem *parent = nullptr);
 
+protected:
+	QString regionType() const override;
 private:
 	QPainterPath shape() const override;
-	QString regionType() const override;
 };
 
 }

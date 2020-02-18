@@ -720,23 +720,27 @@ void WorldModel::createRegion(const QDomElement &element)
 {
 	const QString type = element.attribute("type", "ellipse").toLower();
 	items::RegionItem *item = nullptr;
+	const QGraphicsObject *boundItem = nullptr;
 	if (type == "ellipse") {
 		item = new items::EllipseRegion;
 	} else if (type == "rectangle") {
 		item = new items::RectangularRegion;
 	} else if (type == "bound") {
-		const QString id = element.attribute("boundItem");
-		const QGraphicsObject *boundItem = findId(id);
+		auto id = element.attribute("boundItem");
+		boundItem = findId(id);
 		if (boundItem) {
-			item = new items::BoundRegion(*boundItem, id);
-			connect(item, &QObject::destroyed, this, [this, item]() { mRegions.remove(item->id()); });
-			// Item itself will be deleted with its parent, see BoundRegion constructor.
+			item = new items::BoundRegion(*boundItem, id);			
 		} /// @todo: else report error
 	}
 
 	if (item) {
 		item->deserialize(element);
-		mRegions[item->id()] = item;
+		auto itemId = item->id();
+		mRegions[itemId] = item;
+		if (boundItem) {
+			// Item itself will be deleted with its parent, see BoundRegion constructor.
+			connect(item, &QObject::destroyed, this, [this, itemId]() { mRegions.remove(itemId); });
+		}
 		emit regionItemAdded(item);
 	}
 }

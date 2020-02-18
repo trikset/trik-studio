@@ -33,9 +33,6 @@ public:
 	/// Returns a unique identifier of the region.
 	QString id() const;
 
-	/// Sets a unique identifier of the region.
-	void setId(const QString &id);
-
 	/// Returns true if the region is filled with hatching.
 	bool filled() const;
 
@@ -76,9 +73,11 @@ public:
 
 protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	virtual QString regionType() const = 0;
 
 private:
-	virtual QString regionType() const = 0;
+	/// Sets a unique identifier of the region.
+	void setId(const QString &id);
 
 	QPointF deserializePoint(const QDomElement &element, const QString &xAttribute, const QString &yAttribute);
 
