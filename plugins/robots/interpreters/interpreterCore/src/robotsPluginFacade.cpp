@@ -234,6 +234,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	});
 
 	sync();
+	mProxyInterpreter.resetInterpreter(interpreter);
 }
 
 qReal::gui::PreferencesPage *RobotsPluginFacade::robotsSettingsPage() const
