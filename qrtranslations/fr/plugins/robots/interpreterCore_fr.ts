@@ -299,7 +299,7 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+153"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+154"/>
         <source>Robots</source>
         <translation>Robots</translation>
     </message>
@@ -309,7 +309,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+100"/>
+        <location line="+101"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
