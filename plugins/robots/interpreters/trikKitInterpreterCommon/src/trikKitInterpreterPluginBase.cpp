@@ -503,7 +503,7 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text().trimmed());
 	});
 
-	connect(this, &QObject::destroyed, this, [quickPreferences]() { delete quickPreferences; });
+	connect(this, &QObject::destroyed, quickPreferences, &QObject::deleteLater);
 	return quickPreferences;
 }
 

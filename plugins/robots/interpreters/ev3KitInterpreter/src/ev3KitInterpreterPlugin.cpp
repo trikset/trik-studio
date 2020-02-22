@@ -171,6 +171,7 @@ QString Ev3KitInterpreterPlugin::defaultSettingsFile() const
 QWidget *Ev3KitInterpreterPlugin::produceBluetoothPortConfigurer()
 {
 	QWidget * const result = new ui::ComPortPicker("Ev3BluetoothPortName", this);
-	connect(this, &QObject::destroyed, this, [result]() { delete result; });
+	/// TODO: better like this result->QObject::setParent(this);
+	connect(this, &QObject::destroyed, result, &QObject::deleteLater);
 	return result;
 }
