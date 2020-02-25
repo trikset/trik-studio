@@ -19,6 +19,12 @@ set TRIK_STUDIO_INSTALL_DIR=
 set prev=
 set selfCmd=%~f0
 set selfDir=%~dp0
+set TRIK_STDIO_UNINSTALL_SCRIPT=trik_studio_uninstallscript.qs
+
+if not exist %TRIK_STDIO_UNINSTALL_SCRIPT% (
+	echo No %TRIK_STDIO_UNINSTALL_SCRIPT% file. Archive might be broken.
+	goto end
+)
 
 if "%*" == "" goto endReadInline
 for %%t in (%*) do (
@@ -77,7 +83,7 @@ echo Installing %INSTALLER_EXE% to %TRIK_STUDIO_INSTALL_DIR% ...
 if not exist %TRIK_STUDIO_INSTALL_DIR% goto endUninstall
 if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
   echo Uninstalling previous version of TRIK Studio. Please wait...
-  %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script "%~dp0\trik_studio_uninstallscript.qs"
+  %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script "%~dp0\%TRIK_STDIO_UNINSTALL_SCRIPT%"
 ) else (
   echo Error! %TRIK_STUDIO_INSTALL_DIR% exists and has no maintenance tool
   %pause_command%
