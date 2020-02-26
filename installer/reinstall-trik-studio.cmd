@@ -19,10 +19,10 @@ set TRIK_STUDIO_INSTALL_DIR=
 set prev=
 set selfCmd=%~f0
 set selfDir=%~dp0
-set TRIK_STDIO_UNINSTALL_SCRIPT=trik_studio_uninstallscript.qs
+set TRIK_STDIO_UNINSTALL_SCRIPT=%~dp0\trik_studio_uninstallscript.qs
 
-if not exist %TRIK_STDIO_UNINSTALL_SCRIPT% (
-	echo No %TRIK_STDIO_UNINSTALL_SCRIPT% file. Archive might be broken.
+if not exist "%TRIK_STDIO_UNINSTALL_SCRIPT%" (
+	echo No "%TRIK_STDIO_UNINSTALL_SCRIPT%" file. Archive might be broken.
 	goto end
 )
 
