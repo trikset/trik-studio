@@ -93,6 +93,8 @@
 
 #include "scriptAPI/scriptAPI.h"
 
+#include "QsLog.h"
+
 using namespace qReal;
 using namespace qReal::gui;
 using namespace qReal::commands;
@@ -1819,6 +1821,7 @@ void MainWindow::addExternalToolActions()
 	const QString pathToConfigs = PlatformInfo::applicationDirPath() + "/externalToolsConfig";
 	const QString osName = PlatformInfo::osType();
 	const QStringList configs = QDir(pathToConfigs).entryList().filter(".xml");
+	QLOG_INFO() << "Initializing external tools from " << pathToConfigs << "with" << configs;
 	for (const QString &configFile : configs) {
 		QDomDocument xmlConfig = utils::xmlUtils::loadDocument(pathToConfigs + "/" + configFile);
 		for (QDomElement element = xmlConfig.firstChildElement("tools").firstChildElement("platform")

@@ -26,5 +26,5 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-kit.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-kit-interpreter-common.1.0.0.dylib"
 
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
-cp -pR $BIN_DIR/system.{py,js}                                                 "$BUNDLE_CONTENTS/MacOS/"
+cp -pR $BIN_DIR/system.{py,js}                                                 "$PWD/../data/"
 cp -pR "$BIN_DIR/2D-model"                                                       "$BUNDLE_CONTENTS/MacOS/"
