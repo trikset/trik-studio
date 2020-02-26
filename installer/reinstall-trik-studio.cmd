@@ -19,10 +19,18 @@ set TRIK_STUDIO_INSTALL_DIR=
 set prev=
 set selfCmd=%~f0
 set selfDir=%~dp0
-set TRIK_STDIO_UNINSTALL_SCRIPT=%~dp0\trik_studio_uninstallscript.qs
+set TRIK_STUDIO_UNINSTALL_SCRIPT=%~dp0\trik_studio_uninstallscript.qs
+set TRIK_STUDIO_INSTALL_SCRIPT=%~dp0\trik_studio_installscript.qs
 
-if not exist "%TRIK_STDIO_UNINSTALL_SCRIPT%" (
-	echo No "%TRIK_STDIO_UNINSTALL_SCRIPT%" file. Archive might be broken.
+if not exist "%TRIK_STUDIO_UNINSTALL_SCRIPT%" (
+	echo No "trik_studio_uninstallscript.qs" file. Archive might be broken.
+	echo Installation Error. See messages above.
+	goto end
+)
+
+if not exist "%TRIK_STUDIO_INSTALL_SCRIPT%" (
+	echo No "trik_studio_installscript.qs" file. Archive might be broken.
+	echo Installation Error. See messages above.
 	goto end
 )
 
@@ -83,7 +91,7 @@ echo Installing %INSTALLER_EXE% to %TRIK_STUDIO_INSTALL_DIR% ...
 if not exist %TRIK_STUDIO_INSTALL_DIR% goto endUninstall
 if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
   echo Uninstalling previous version of TRIK Studio. Please wait...
-  %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script "%TRIK_STDIO_UNINSTALL_SCRIPT%"
+  %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script "%TRIK_STUDIO_UNINSTALL_SCRIPT%"
 ) else (
   echo Error! %TRIK_STUDIO_INSTALL_DIR% exists and has no maintenance tool
   %pause_command%
@@ -93,7 +101,7 @@ if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
 if exist %TRIK_STUDIO_INSTALL_DIR% goto waitFullUninstall
 :endUninstall
 echo Installing new version of TRIK Studio. Please wait...
-"%INSTALLER_EXE%" --script "%~dp0\trik_studio_installscript.qs"
+"%INSTALLER_EXE%" --script "%TRIK_STUDIO_INSTALL_SCRIPT%"
 
 if %errorlevel% EQU 0 (echo Done) else (echo Installation Error. See messages above.)
 :end
