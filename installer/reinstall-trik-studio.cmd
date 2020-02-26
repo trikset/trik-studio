@@ -83,7 +83,7 @@ echo Installing %INSTALLER_EXE% to %TRIK_STUDIO_INSTALL_DIR% ...
 if not exist %TRIK_STUDIO_INSTALL_DIR% goto endUninstall
 if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
   echo Uninstalling previous version of TRIK Studio. Please wait...
-  %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script "%~dp0\%TRIK_STDIO_UNINSTALL_SCRIPT%"
+  %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe --script "%TRIK_STDIO_UNINSTALL_SCRIPT%"
 ) else (
   echo Error! %TRIK_STUDIO_INSTALL_DIR% exists and has no maintenance tool
   %pause_command%
