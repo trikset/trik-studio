@@ -5,4 +5,9 @@
 set -o errexit
 
 cd "$(dirname "$0")"
-bin/trik-studio "$@"
+
+if which python3 >/dev/null 2>&1 && [[ ! -v TRIK_PYTHONPATH ]] ; then
+export TRIK_PYTHONPATH=$(python3 -c 'import os; import sys; print(os.pathsep.join(sys.path))')
+fi
+
+exec bin/trik-studio "$@"
