@@ -18,6 +18,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QRegularExpression>
 #include <QProcessEnvironment>
+#include <QFileInfo>
 
 #include "trikKitInterpreterCommon/trikTextualInterpreter.h"
 
@@ -228,7 +229,8 @@ void trik::TrikTextualInterpreter::setRunning(bool running)
 void trik::TrikTextualInterpreter::setCurrentDir(const QString &dir)
 {
 	mBrick.setCurrentDir(dir);
-	mScriptRunner.setWorkingDirectory(trikKernel::FileUtils::normalizePath(dir));
+	mScriptRunner.setWorkingDirectory(
+				trikKernel::FileUtils::normalizePath(QFileInfo(dir).dir()));
 }
 
 QStringList trik::TrikTextualInterpreter::supportedRobotModelNames() const
