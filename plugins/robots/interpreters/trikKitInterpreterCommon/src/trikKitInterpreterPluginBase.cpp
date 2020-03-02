@@ -123,7 +123,9 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absoluteDir().path());
+	auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
+	auto savePath = texttab ? mCurrentTabPath : mProjectManager->saveFilePath();
+	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absoluteDir().path());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScript(code, extension);
@@ -549,6 +551,7 @@ void TrikKitInterpreterPluginBase::onTabChanged(const TabInfo &info)
 	}
 	const bool isCodeTab = info.type() == qReal::TabInfo::TabType::code;
 	const bool isQtsInterp = mTextualInterpreter->supportedRobotModelNames().contains(mCurrentlySelectedModelName);
+	mCurrentTabPath = info.pathToOpenedTextFile();
 
 	if (isCodeTab) {
 		auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());

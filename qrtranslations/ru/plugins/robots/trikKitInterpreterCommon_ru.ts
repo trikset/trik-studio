@@ -262,7 +262,7 @@
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>
     <message>
-        <location line="+175"/>
+        <location line="+177"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>

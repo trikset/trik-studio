@@ -205,7 +205,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+175"/>
+        <location line="+177"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>
