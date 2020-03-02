@@ -125,7 +125,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 
 	auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
 	auto savePath = texttab ? mCurrentTabPath : mProjectManager->saveFilePath();
-	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absoluteDir().path());
+	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absolutePath());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScript(code, extension);
@@ -152,7 +152,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absoluteDir().path());
+	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absolutePath());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScriptExercise(code, inputs, extension);
