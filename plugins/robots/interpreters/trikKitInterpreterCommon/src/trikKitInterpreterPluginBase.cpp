@@ -19,6 +19,7 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProcessEnvironment>
+#include <QFileInfo>
 
 #include <twoDModel/engine/twoDModelEngineFacade.h>
 #include <qrkernel/settingsManager.h>
@@ -122,7 +123,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(mProjectManager->saveFilePath());
+	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absoluteDir().path());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScript(code, extension);
@@ -149,7 +150,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(mProjectManager->saveFilePath());
+	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absoluteDir().path());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScriptExercise(code, inputs, extension);
