@@ -85,15 +85,15 @@ Component.prototype.createOperations = function()
 				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
 				, "@TargetDir@/" + installer.executableName + installer.execExtension
-				, "--clear-conf");
+				, "--platform minimal --clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--clear-conf");
+				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--platform minimal --clear-conf");
 	} else {
 		component.addOperation("Execute"
 				, "bash"
 				, "-c"
-				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@/" + installer.executableName + installer.execExtension + " --clear-conf");
+				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@/" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
 	}
 }
 
