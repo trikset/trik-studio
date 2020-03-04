@@ -55,7 +55,7 @@ cp -pr $QT_DIR/lib/libicudata.so*                                       $PWD/../
 cp -pr $QT_DIR/lib/libicui18n.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libicuuc.so*                                         $PWD/../data/lib/
 
-cp     $QT_DIR/plugins/platforms/libqxcb.so                             $PWD/../data/bin/platforms/
+cp     $QT_DIR/plugins/platforms/libq{xcb,minimal,offscreen}.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/

@@ -79,11 +79,13 @@ mkdir "$BUNDLE_CONTENTS/MacOS/platforms"
 mkdir "$BUNDLE_CONTENTS/MacOS/imageformats"
 mkdir "$BUNDLE_CONTENTS/MacOS/iconengines"
 
-cp     $QT_DIR/plugins/platforms/libqcocoa.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
+cp     $QT_DIR/plugins/platforms/libq{cocoa,minimal,offscreen}.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
 cp     $QT_DIR/plugins/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
 cp     $QT_DIR/plugins/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
 
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqminimal.dylib"       $QT_DIR/lib $LIB_PATH
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqoffscreen.dylib"       $QT_DIR/lib $LIB_PATH
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqcocoa.dylib"       $QT_DIR/lib $LIB_PATH
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqsvg.dylib"      $QT_DIR/lib $LIB_PATH
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/iconengines/libqsvgicon.dylib"   $QT_DIR/lib $LIB_PATH
