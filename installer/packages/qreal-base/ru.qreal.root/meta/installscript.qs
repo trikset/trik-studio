@@ -85,7 +85,7 @@ Component.prototype.createOperations = function()
 				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
 				, "@TargetDir@/" + installer.executableName + installer.execExtension
-				, "--platform minimal --clear-conf");
+				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
 				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--platform minimal --clear-conf");
