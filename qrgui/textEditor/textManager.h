@@ -38,42 +38,42 @@ public:
 	TextManager(SystemEvents &systemEvents, gui::MainWindowInterpretersInterface &mainWindow);
 
 	/// Reads code source file and create new QScintillaTextEdit associated with this file (rather with filepath)
-	bool openFile(const QString &filePath, const QString &genName, const LanguageInfo &language);
+	bool openFile(const QString &filePath, const QString &genName, const LanguageInfo &language) override;
 
 	/// Remove all info about filePath (including QScintillaTextEdit associated with it)
-	bool closeFile(const QString &filePath);
+	bool closeFile(const QString &filePath) override;
 
-	void changeFilePath(const QString &from, const QString &to);
+	void changeFilePath(const QString &from, const QString &to) override;
 
 	/// Binds diagram with another code source file.
-	bool bindCode(const Id &diagram, const QString &filePath);
+	bool bindCode(const Id &diagram, const QString &filePath) override;
 
-	bool unbindCode(const QString &filePath);
-	bool unbindCode(text::QScintillaTextEdit *code);
-	text::QScintillaTextEdit *code(const QString &filePath) const;
-	QList<text::QScintillaTextEdit *> code(const Id &diagram) const;
-	bool contains(const QString &filePath) const;
+	bool unbindCode(const QString &filePath) override;
+	bool unbindCode(text::QScintillaTextEdit *code) override;
+	text::QScintillaTextEdit *code(const QString &filePath) const override;
+	QList<text::QScintillaTextEdit *> code(const Id &diagram) const override;
+	bool contains(const QString &filePath) const override;
 	bool removeDiagram(const Id &diagram);
-	Id diagram(text::QScintillaTextEdit *code) const;
-	QString path(text::QScintillaTextEdit *code) const;
-	bool isDefaultPath(const QString &path) const;
-	bool isModified(const QString &path) const;
-	bool isModifiedEver(const QString &path) const;
+	Id diagram(text::QScintillaTextEdit *code) const override;
+	QString path(text::QScintillaTextEdit *code) const override;
+	bool isDefaultPath(const QString &path) const override;
+	bool isModified(const QString &path) const override;
+	bool isModifiedEver(const QString &path) const override;
 
 	/// Opens new tab with file created by some generator in text editor and shows a text in it
 	/// @param fileInfo A filepath to file with text
 	/// @param genName A name of generator which created this file
-	void showInTextEditor(const QFileInfo &fileInfo, const QString &genName, const LanguageInfo &language);
+	void showInTextEditor(const QFileInfo &fileInfo, const QString &genName, const LanguageInfo &language) override;
 
 	/// Opens new tab with file
 	/// @param fileInfo A filepath to file with text
-	void showInTextEditor(const QFileInfo &fileInfo, const LanguageInfo &language);
+	void showInTextEditor(const QFileInfo &fileInfo, const LanguageInfo &language) override;
 
 	/// Saves text from tab to another or same file
 	/// @param saveAs Defines what to do: save to the same file or in another
-	bool saveText(bool saveAs);
+	bool saveText(bool saveAs) override;
 
-	QString generatorName(const QString &filepath) const;
+	QString generatorName(const QString &filepath) const override;
 	CodeBlockManager &codeBlockManager();
 
 private slots:
