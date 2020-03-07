@@ -83,12 +83,8 @@ bool TextManager::unbindCode(const QString &filePath)
 	return mDiagramCodeManager.remove(mDiagramCodeManager.key(filePath), filePath) != 0;
 }
 
-bool TextManager::unbindCode(text::QScintillaTextEdit *code)
+bool TextManager::suggestToSaveCode(text::QScintillaTextEdit *code)
 {
-	if (mDiagramCodeManager.key(mPath.value(code)) == Id()) {
-		// Unbind is successful because this code doesn't bind to any diagram
-		return true;
-	}
 	if (mModified[mPath.value(code)].second) {
 		switch (utils::QRealMessageBox::question(
 				mMainWindow.currentTab()
@@ -98,14 +94,28 @@ bool TextManager::unbindCode(text::QScintillaTextEdit *code)
 		{
 		case QMessageBox::Yes:
 			saveText(false);
-			break;
+			return true;
 		case QMessageBox::No:
-			break;
+		{
+			// very bad way but now I have only this idea
+			// need to reset code to last saved state
+			setModified(code, false);
+			return true;
+		}
 		default:
 			return false;
 		}
 	}
-	return unbindCode(mPath.value(code));
+	return true;
+}
+
+bool TextManager::unbindCode(text::QScintillaTextEdit *code)
+{
+	if (mDiagramCodeManager.key(mPath.value(code)) == Id()) {
+		// Unbind is successful because this code doesn't bind to any diagram
+		return true;
+	}
+	return suggestToSaveCode(code) && unbindCode(mPath.value(code));
 }
 
 bool TextManager::closeFile(const QString &filePath)

@@ -50,6 +50,7 @@ public:
 
 	bool unbindCode(const QString &filePath) override;
 	bool unbindCode(text::QScintillaTextEdit *code) override;
+	bool suggestToSaveCode(text::QScintillaTextEdit *code);
 	text::QScintillaTextEdit *code(const QString &filePath) const override;
 	QList<text::QScintillaTextEdit *> code(const Id &diagram) const override;
 	bool contains(const QString &filePath) const override;

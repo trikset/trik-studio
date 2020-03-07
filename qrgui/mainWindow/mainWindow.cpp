@@ -917,8 +917,8 @@ void MainWindow::closeTab(int index)
 	} else if (auto const gesture = dynamic_cast<gestures::GesturesWidget *>(widget)) {
 		isClosed = true;
 	} else if (auto const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget)) {
-		isClosed = mTextManager->unbindCode(possibleCodeTab);
-		if (isClosed) {
+		if (mTextManager->suggestToSaveCode(possibleCodeTab) && mTextManager->unbindCode(possibleCodeTab)) {
+			isClosed = true;
 			emit mFacade->events().codeTabClosed(QFileInfo(mTextManager->path(possibleCodeTab)));
 		}
 	} else {
