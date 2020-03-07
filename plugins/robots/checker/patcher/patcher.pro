@@ -28,3 +28,9 @@ CONFIG += cmdline
 
 SOURCES += \
 	main.cpp \
+
+win32 {
+	QMAKE_MANIFEST = $$PWD/$${TARGET}.exe.manifest
+	DISTFILES += $$QMAKE_MANIFEST
+}
+
