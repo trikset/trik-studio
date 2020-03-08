@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+108"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1030"/>
+        <location line="-1027"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -837,7 +837,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+629"/>
+        <location line="+626"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
