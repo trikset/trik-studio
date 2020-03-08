@@ -64,7 +64,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+48"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+102"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>

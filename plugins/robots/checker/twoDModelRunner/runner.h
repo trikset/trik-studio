@@ -70,7 +70,7 @@ private slots:
 	void close();
 
 private:
-	void connectRobotModel(const model::RobotModel *robotModel);
+	void connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock* console);
 	void onRobotRided(const QPointF &newPosition, const qreal newRotation);
 	void onDeviceStateChanged(const QString &robotId, const kitBase::robotModel::robotParts::Device *device
 			, const QString &property, const QVariant &value);
@@ -85,7 +85,7 @@ private:
 	qReal::PluginConfigurator mConfigurator;
 	interpreterCore::RobotsPluginFacade mPluginFacade;
 	Reporter mReporter;
-	qReal::ui::ConsoleDock *mRobotConsole;
+	QList<qReal::ui::ConsoleDock *> mRobotConsoles;
 	QString mInputsFile;
 	QString mMode;
 };
