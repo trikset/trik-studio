@@ -44,7 +44,6 @@ Runner::Runner(const QString &report, const QString &trajectory)
 			, mQRealFacade.events()
 			, mTextManager)
 	, mReporter(report, trajectory)
-	, mRobotConsole(new qReal::ui::ConsoleDock(tr("Robot console")))
 {
 	mPluginFacade.init(mConfigurator);
 	for (const QString &defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
@@ -95,13 +94,19 @@ bool Runner::interpret(const QString &saveFile, bool background)
 	for (view::TwoDModelWidget * const twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
 				, [this]() { this->mMainWindow.emulateClose(); });
+		auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout());
+		qReal::ui::ConsoleDock* console = nullptr;
+		if (layout) {
+			console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
+			mRobotConsoles << console;
+			// TODO: hack to add console for each widget
+			layout->addWidget(console, layout->rowCount(), 0, 1, -1);
+		}
 		twoDModelWindow->model().timeline().setImmediateMode(background);
 		for (const model::RobotModel *robotModel : twoDModelWindow->model().robotModels()) {
-			connectRobotModel(robotModel);
+			connectRobotModel(robotModel, console);
 		}
 	}
-
-	mRobotConsole->show();
 
 	mReporter.onInterpretationStart();
 	if (mMode == "script") {
@@ -113,7 +118,7 @@ bool Runner::interpret(const QString &saveFile, bool background)
 	return true;
 }
 
-void Runner::connectRobotModel(const model::RobotModel *robotModel)
+void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock* console)
 {
 	connect(robotModel, &model::RobotModel::positionRecalculated
 			, this, &Runner::onRobotRided, Qt::UniqueConnection);
@@ -125,10 +130,11 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel)
 				, [=](const QString &property, const QVariant &value) {
 			onDeviceStateChanged(robotModel->info().robotId(), device, property, value);
 		});
-
-		if (auto * shell = dynamic_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
-			connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
-					, mRobotConsole, &qReal::ui::ConsoleDock::print);
+		if (console) {
+			if (auto * shell = dynamic_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
+				connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
+						, console, &qReal::ui::ConsoleDock::print);
+			}
 		}
 	});
 }
@@ -160,4 +166,8 @@ void Runner::onDeviceStateChanged(const QString &robotId
 void Runner::close()
 {
 	mMainWindow.emulateClose(mReporter.lastMessageIsError() ? 1 : 0);
+	while (!mRobotConsoles.empty()) {
+		mRobotConsoles.first()->deleteLater();
+		mRobotConsoles.removeFirst();
+	}
 }
