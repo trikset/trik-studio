@@ -26,6 +26,7 @@
 
 #include <twoDModel/engine/view/twoDModelWidget.h>
 #include <twoDModel/engine/model/model.h>
+#include <twoDModel/engine/model/timeline.h>
 
 using namespace twoDModel;
 
@@ -70,7 +71,7 @@ Runner::~Runner()
 	mReporter.reportMessages();
 }
 
-bool Runner::interpret(const QString &saveFile, bool background)
+bool Runner::interpret(const QString &saveFile, bool background, int customSpeedFactor)
 {
 	if (!mProjectManager.open(saveFile)) {
 		return false;
@@ -95,7 +96,11 @@ bool Runner::interpret(const QString &saveFile, bool background)
 	for (view::TwoDModelWidget * const twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
 				, [this]() { this->mMainWindow.emulateClose(); });
-		twoDModelWindow->model().timeline().setImmediateMode(background);
+		auto &t = twoDModelWindow->model().timeline();
+		t.setImmediateMode(background);
+		if (!background && customSpeedFactor >= model::Timeline::normalSpeedFactor) {
+			t.setSpeedFactor(customSpeedFactor);
+		}
 		for (const model::RobotModel *robotModel : twoDModelWindow->model().robotModels()) {
 			connectRobotModel(robotModel);
 		}

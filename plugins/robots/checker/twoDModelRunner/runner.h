@@ -63,7 +63,8 @@ public:
 	/// @param saveFile QReal save file (qrs) that will be opened and interpreted.
 	/// @param background If true then the save file will be interpreted in the fastest speed and 2D model window
 	/// will be closed immediately after the interpretation stopped.
-	bool interpret(const QString &saveFile, bool background);
+	/// @param customSpeedFactor can be used when not in background mode to tune interpretation speed
+	bool interpret(const QString &saveFile, bool background, int customSpeedFactor);
 
 private slots:
 	void close();
