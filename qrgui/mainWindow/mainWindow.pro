@@ -26,7 +26,7 @@ links(qrkernel qslog qrutils qrtext qrrepo qscintilla2 qrgui-models qrgui-editor
 		qrgui-facade qrgui-plugin-manager qrgui-tool-plugin-interface qrgui-thirdparty \
 )
 
-includes(qrgraph qrgui qrgui/plugins/metaMetaModel)
+includes(qrgraph qrgui qrgui/plugins/metaMetaModel thirdparty/qslog)
 
 TRANSLATIONS = \
 	$$PWD/../../qrtranslations/ru/qrgui_mainWindow_ru.ts \

@@ -126,6 +126,7 @@ private:
 	qReal::ProjectManagementInterface *mProjectManager; // Does not have ownership.
 	qReal::LogicalModelAssistInterface *mLogicalModel; // Doesn`t have ownership
 	QString mCurrentlySelectedModelName;
+	QString mCurrentTabPath;
 };
 
 }

@@ -200,10 +200,15 @@ clang {
 	SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))
 
 	#treat Qt includes as system headers
-	SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=$$[QT_INSTALL_HEADERS]
-
-	QMAKE_CXXFLAGS += $$SYSTEM_INCLUDE_PREFIX_OPTION
+	SYSTEM_INCLUDE_PREFIX_OPTION *= --system-header-prefix=$$[QT_INSTALL_HEADERS]
 }
+
+#gcc {
+	#treat Qt includes as system headers
+	SYSTEM_INCLUDE_PREFIX_OPTION *= -isystem $$[QT_INSTALL_HEADERS]
+#}
+
+QMAKE_CXXFLAGS *= $$SYSTEM_INCLUDE_PREFIX_OPTION
 
 false:clang {
 # Problem from Qt system headers

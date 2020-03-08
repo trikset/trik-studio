@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+850"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+852"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+108"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1030"/>
+        <location line="-1027"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -837,7 +837,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+629"/>
+        <location line="+626"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
@@ -907,7 +907,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Сторонние утилиты</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+45"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Не получилось открыть %1</translation>
     </message>

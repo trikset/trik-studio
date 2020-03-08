@@ -35,25 +35,33 @@ const QString description = QObject::tr(
 		"Example: \n") +
 		"    2D-model -b --platform minimal --report report.json --trajectory trajectory.fifo example.qrs";
 
-void loadTranslators(const QString &locale)
+bool loadTranslators(const QString &locale)
 {
 	QDir translationsDirectory(qReal::PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + locale);
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
+	bool hasTranslations = false;
 	while (directories.hasNext()) {
 		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);
+			hasTranslations = true;
 		}
 	}
+	return hasTranslations;
 }
 
 void setDefaultLocale()
 {
-	const QString locale = QLocale().name().left(2);
-	if (!locale.isEmpty()) {
-		QLocale::setDefault(QLocale(locale));
-		loadTranslators(locale);
+	const QString lang = QLocale().name().left(2);
+	if (lang.isEmpty()) {
+		return;
+	}
+
+	// Reset to default country for this language
+	QLocale::setDefault(QLocale(lang));
+	if (!loadTranslators(lang)) {
+		QLOG_INFO() << "Missing translations for language" << lang;
 	}
 }
 
@@ -70,9 +78,15 @@ void initLogging()
 int main(int argc, char *argv[])
 {
 	qReal::PlatformInfo::enableHiDPISupport();
+	qsrand(time(0));
+	initLogging();
 	QApplication app(argc, argv);
 	QCoreApplication::setApplicationName("2D-model");
-	QCoreApplication::setApplicationVersion("1.0");
+	QCoreApplication::setApplicationVersion("2020.2");
+	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
+	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
+	QLOG_INFO() << "Arguments:" << app.arguments();
+	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 	setDefaultLocale();
 
 	QCommandLineParser parser;
@@ -83,28 +97,27 @@ int main(int argc, char *argv[])
 	QCommandLineOption backgroundOption({"b", "background"}, QObject::tr("Run emulation in background."));
 	QCommandLineOption platformOption("platform"
 			, QObject::tr("Use this option set to \"minimal\" to disable connection to X server"), "minimal");
-	QCommandLineOption reportOption("report", QObject::tr("A path to file where checker results will be written (JSON)")
-			, "path-to-report", "report.json");
-	QCommandLineOption trajectoryOption("trajectory", QObject::tr("A path to file where robot`s trajectory will be"\
+	QCommandLineOption reportOption({"r","report"}
+									, QObject::tr("A path to file where checker results will be written (JSON)")
+									, "path-to-report", "report.json");
+	QCommandLineOption trajectoryOption({"t", "trajectory"}
+										, QObject::tr("A path to file where robot`s trajectory will be"\
 				" written. The writing will not be performed not immediately, each trajectory point will be written"\
 				" just when obtained by checker, so FIFOs are recommended to be targets for this option.")
 			, "path-to-trajectory", "trajectory.fifo");
-	QCommandLineOption inputOption("input", QObject::tr("Inputs for JavaScript solution")// probably others too
+	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution")// probably others too
 			, "path-to-input", "inputs.txt");
-	QCommandLineOption modeOption("mode", QObject::tr("Interpret mode"), "mode", "diagram");
+	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Interpret mode"), "mode", "diagram");
+	QCommandLineOption speedOption({"s", "speed"}
+								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!)")
+								   , "speed", "0");
 	parser.addOption(backgroundOption);
 	parser.addOption(platformOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
 	parser.addOption(inputOption);
 	parser.addOption(modeOption);
-
-	qsrand(time(0));
-	initLogging();
-	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
-	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
-	QLOG_INFO() << "Arguments:" << app.arguments();
-	QLOG_INFO() << "Setting default locale to" << QLocale().name();
+	parser.addOption(speedOption);
 
 	parser.process(app);
 
@@ -120,7 +133,9 @@ int main(int argc, char *argv[])
 	const QString input = parser.isSet(inputOption) ? parser.value(inputOption) : QString();
 	const QString mode = parser.isSet(modeOption) ? parser.value(modeOption) : QString("diagram");
 	twoDModel::Runner runner(report, trajectory, input, mode);
-	if (!runner.interpret(qrsFile, backgroundMode)) {
+
+	auto speedFactor = parser.value(speedOption).toInt();
+	if (!runner.interpret(qrsFile, backgroundMode, speedFactor)) {
 		return 2;
 	}
 

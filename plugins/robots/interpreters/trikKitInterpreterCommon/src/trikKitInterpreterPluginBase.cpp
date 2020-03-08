@@ -19,6 +19,7 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QProcessEnvironment>
+#include <QFileInfo>
 
 #include <twoDModel/engine/twoDModelEngineFacade.h>
 #include <qrkernel/settingsManager.h>
@@ -122,7 +123,9 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(mProjectManager->saveFilePath());
+	auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
+	auto savePath = texttab ? mCurrentTabPath : mProjectManager->saveFilePath();
+	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absolutePath());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScript(code, extension);
@@ -149,7 +152,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(mProjectManager->saveFilePath());
+	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absolutePath());
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScriptExercise(code, inputs, extension);
@@ -503,7 +506,7 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text().trimmed());
 	});
 
-	connect(this, &QObject::destroyed, this, [quickPreferences]() { delete quickPreferences; });
+	connect(this, &QObject::destroyed, quickPreferences, &QObject::deleteLater);
 	return quickPreferences;
 }
 
@@ -548,6 +551,7 @@ void TrikKitInterpreterPluginBase::onTabChanged(const TabInfo &info)
 	}
 	const bool isCodeTab = info.type() == qReal::TabInfo::TabType::code;
 	const bool isQtsInterp = mTextualInterpreter->supportedRobotModelNames().contains(mCurrentlySelectedModelName);
+	mCurrentTabPath = info.pathToOpenedTextFile();
 
 	if (isCodeTab) {
 		auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());

@@ -93,6 +93,8 @@
 
 #include "scriptAPI/scriptAPI.h"
 
+#include "QsLog.h"
+
 using namespace qReal;
 using namespace qReal::gui;
 using namespace qReal::commands;
@@ -894,16 +896,11 @@ void MainWindow::closeCurrentTab()
 
 void MainWindow::closeTab(int index)
 {
+	switchToTab(index);
 	QWidget * const widget = mUi->tabs->widget(index);
-	EditorView * const diagram = dynamic_cast<EditorView *>(widget);
-	StartWidget * const start = dynamic_cast<StartWidget *>(widget);
-	text::QScintillaTextEdit * const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget);
-	gestures::GesturesWidget * const gesture = dynamic_cast<gestures::GesturesWidget *>(widget);
 	bool isClosed = false;
 
-	const QString path = mTextManager->path(possibleCodeTab);
-
-	if (diagram) {
+	if (auto const diagram = dynamic_cast<EditorView *>(widget)) {
 		const Id diagramId = diagram->editorViewScene().rootItemId();
 		if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
 			isClosed = mProjectManager->suggestToSaveChangesOrCancel();
@@ -915,12 +912,14 @@ void MainWindow::closeTab(int index)
 			mController->moduleClosed(diagramId.toString());
 			emit mFacade->events().diagramClosed(diagramId);
 		}
-	} else if (start || gesture) {
+	} else if (auto const start = dynamic_cast<StartWidget *>(widget)) {
 		isClosed = true;
-	} else if (possibleCodeTab) {
-		isClosed = mTextManager->unbindCode(possibleCodeTab);
-		if (isClosed) {
-			emit mFacade->events().codeTabClosed(QFileInfo(path));
+	} else if (auto const gesture = dynamic_cast<gestures::GesturesWidget *>(widget)) {
+		isClosed = true;
+	} else if (auto const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget)) {
+		if (mTextManager->suggestToSaveCode(possibleCodeTab) && mTextManager->unbindCode(possibleCodeTab)) {
+			isClosed = true;
+			emit mFacade->events().codeTabClosed(QFileInfo(mTextManager->path(possibleCodeTab)));
 		}
 	} else {
 		QLOG_ERROR() << "Unknown type of tab " << widget->objectName();
@@ -1819,6 +1818,7 @@ void MainWindow::addExternalToolActions()
 	const QString pathToConfigs = PlatformInfo::applicationDirPath() + "/externalToolsConfig";
 	const QString osName = PlatformInfo::osType();
 	const QStringList configs = QDir(pathToConfigs).entryList().filter(".xml");
+	QLOG_INFO() << "Initializing external tools from " << pathToConfigs << "with" << configs;
 	for (const QString &configFile : configs) {
 		QDomDocument xmlConfig = utils::xmlUtils::loadDocument(pathToConfigs + "/" + configFile);
 		for (QDomElement element = xmlConfig.firstChildElement("tools").firstChildElement("platform")

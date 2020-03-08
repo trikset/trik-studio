@@ -77,6 +77,7 @@ public:
 
 	virtual void setUnsavedIndicator(bool isUnsaved) = 0;
 
+	// TODO: saveFilePath() should be changed from String to QFileInfo
 	/// Returns path to save file. If temp file it will return empty string.
 	virtual QString saveFilePath() const = 0;
 

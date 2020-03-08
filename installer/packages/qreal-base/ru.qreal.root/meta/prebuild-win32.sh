@@ -50,7 +50,7 @@ cp    $QT_DIR/bin/libgcc_s_*-1.dll                                  $PWD/../data
 cp    $QT_DIR/bin/libwinpthread-1.dll                               $PWD/../data
 cp    $QT_DIR/bin/libstdc++-6.dll                                   $PWD/../data
 
-cp    $QT_DIR/plugins/platforms/qwindows.dll                        $PWD/../data/platforms
+cp    $QT_DIR/plugins/platforms/q{windows,offscreen,minimal}.dll                        $PWD/../data/platforms
 cp    $QT_DIR/plugins/imageformats/qsvg.dll                         $PWD/../data/imageformats
 cp    $QT_DIR/plugins/imageformats/qjpeg.dll                        $PWD/../data/imageformats
 cp    $QT_DIR/plugins/iconengines/qsvgicon.dll                      $PWD/../data/iconengines

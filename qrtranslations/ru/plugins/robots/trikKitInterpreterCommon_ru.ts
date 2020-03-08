@@ -247,7 +247,7 @@
         <translation type="vanished">Оставновить QTS</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+38"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+39"/>
         <source>Start</source>
         <translation>Запустить</translation>
     </message>
@@ -262,7 +262,7 @@
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>
     <message>
-        <location line="+175"/>
+        <location line="+177"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>

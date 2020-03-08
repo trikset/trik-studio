@@ -16,7 +16,6 @@ cp     $INSTALLER_ROOT/platform/$PRODUCT-linux-gnu-platform.config      $PWD/../
 
 cp -pr $BIN_DIR/libqrkernel.so*                                         $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgraph.so*                                          $PWD/../data/lib/
-cp -L $(pkg-config --variable=sharedlibdir zlib)/libz.so                     $PWD/../data/lib/libz.so.1
 cp -pr $BIN_DIR/libqrrepo.so*                                           $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrutils.so*                                          $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrtext.so*                                           $PWD/../data/lib/
@@ -48,7 +47,6 @@ cp -pr $QT_DIR/lib/libQt5Gui.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5PrintSupport.so*                               $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Svg.so*                                        $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Widgets.so*                                    $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5X11Extras.so*                                  $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
@@ -57,7 +55,7 @@ cp -pr $QT_DIR/lib/libicudata.so*                                       $PWD/../
 cp -pr $QT_DIR/lib/libicui18n.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libicuuc.so*                                         $PWD/../data/lib/
 
-cp     $QT_DIR/plugins/platforms/libqxcb.so                             $PWD/../data/bin/platforms/
+cp     $QT_DIR/plugins/platforms/libq{xcb,minimal,offscreen}.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/
