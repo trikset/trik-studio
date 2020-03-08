@@ -779,7 +779,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+108"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>

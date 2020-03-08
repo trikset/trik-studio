@@ -226,7 +226,9 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			out() << code;
 			out.flush();
 			const qReal::Id activeDiagram = mMainWindow->activeDiagram();
-			mTextManager->showInTextEditor(codePath, qReal::text::Languages::pickByExtension(codePath.suffix()));
+			// QString() need to use method with binding
+			// TODO: need refactoring showInTextEditor(?)
+			mTextManager->showInTextEditor(codePath, QString(), qReal::text::Languages::pickByExtension(codePath.suffix()));
 			if (!activeDiagram.isNull()
 					&& mRobotModelManager.model().friendlyName().contains("2d", Qt::CaseInsensitive)) {
 				mMainWindow->activateItemOrDiagram(activeDiagram);
