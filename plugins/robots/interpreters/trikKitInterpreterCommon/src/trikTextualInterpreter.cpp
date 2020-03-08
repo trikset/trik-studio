@@ -225,9 +225,10 @@ void trik::TrikTextualInterpreter::setRunning(bool running)
 	mBrick.processSensors(running);
 }
 
-void trik::TrikTextualInterpreter::setCurrentDir(const QString &dir)
+void trik::TrikTextualInterpreter::setCurrentDir(const QString &dir, const QString &languageExtension)
 {
 	mBrick.setCurrentDir(dir);
+	mScriptRunner.setDefaultRunner(languageExtension);
 	mScriptRunner.setWorkingDirectory(trikKernel::FileUtils::normalizePath(dir));
 }
 

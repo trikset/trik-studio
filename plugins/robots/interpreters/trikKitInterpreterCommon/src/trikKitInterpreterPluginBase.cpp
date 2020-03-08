@@ -125,7 +125,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 
 	auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
 	auto savePath = texttab ? mCurrentTabPath : mProjectManager->saveFilePath();
-	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absolutePath());
+	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absolutePath(), extension);
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScript(code, extension);
@@ -152,7 +152,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 	mMainWindow->errorReporter()->clear();
 	textualInterpreter()->init();
 
-	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absolutePath());
+	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absolutePath(), extension);
 	textualInterpreter()->setRunning(true);
 	emit started();
 	textualInterpreter()->interpretScriptExercise(code, inputs, extension);
@@ -546,12 +546,12 @@ void TrikKitInterpreterPluginBase::testStop(qReal::interpretation::StopReason re
 
 void TrikKitInterpreterPluginBase::onTabChanged(const TabInfo &info)
 {
+	mCurrentTabPath = info.pathToOpenedTextFile();
 	if (!mIsModelSelected) {
 		return;
 	}
 	const bool isCodeTab = info.type() == qReal::TabInfo::TabType::code;
 	const bool isQtsInterp = mTextualInterpreter->supportedRobotModelNames().contains(mCurrentlySelectedModelName);
-	mCurrentTabPath = info.pathToOpenedTextFile();
 
 	if (isCodeTab) {
 		auto texttab = dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab());
