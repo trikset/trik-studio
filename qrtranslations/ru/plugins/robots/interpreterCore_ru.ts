@@ -223,7 +223,7 @@
         <translation>Экспорт упражнения по заданному пути не удался (попробуйте другой путь)</translation>
     </message>
     <message>
-        <location line="+101"/>
+        <location line="+103"/>
         <source>No saved code found in the qrs file</source>
         <translation>В qrs не найден сохраннёный код</translation>
     </message>
