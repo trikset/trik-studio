@@ -43,7 +43,7 @@ public:
 	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter);
 	bool isRunning() const;
 	void setRunning(bool running);
-	void setCurrentDir(const QString &dir);
+	void setCurrentDir(const QString &dir, const QString &languageExtension);
 	QStringList supportedRobotModelNames() const;
 	QStringList knownMethodNames() const;
 
