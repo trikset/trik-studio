@@ -118,7 +118,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+64"/>
+        <location line="+72"/>
         <source>There are no files to upload. You must open or generate at least one *.js or *.py file.</source>
         <translation type="unfinished"></translation>
     </message>
