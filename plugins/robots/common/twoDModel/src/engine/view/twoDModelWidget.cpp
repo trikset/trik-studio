@@ -119,6 +119,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mConnections << connect(&mModel.timeline(), &Timeline::started
 							, this, &TwoDModelWidget::setRunStopButtonsVisibility);
 	mConnections << connect(&mModel.timeline(), &Timeline::stopped
+							, this, &TwoDModelWidget::saveWorldModelToRepo);
+	mConnections << connect(&mModel.timeline(), &Timeline::stopped
 							, this, &TwoDModelWidget::setRunStopButtonsVisibility);
 	mConnections << connect(&mModel.timeline(), &Timeline::speedFactorChanged, this, [=](int value) {
 		const QPoint downCoords = mUi->speedDownButton->mapTo(this, mUi->speedDownButton->rect().bottomRight());
@@ -391,6 +393,7 @@ void TwoDModelWidget::returnToStartMarker()
 	for (items::BallItem *ball : mModel.worldModel().balls()) {
 		ball->returnToStartPosition();
 	}
+	saveWorldModelToRepo();
 }
 
 void TwoDModelWidget::trainingModeChanged(bool enabled)
