@@ -189,6 +189,12 @@ QList<QPointF> Geometry::intersection(const QLineF &line, const QPainterPath &pa
 
 		startPoint = endPoint;
 		endPoint = QPointF(element.x, element.y);
+		// Need check about the same line, because the same lines are parallel
+		// But in Qt 5.12.5 intersect returns sometimes NoIntersection and sometimes BoundedIntersection
+		if ((eq(startPoint, line.p1(), eps) && eq(endPoint, line.p2(), eps))
+				|| (eq(startPoint, line.p2(), eps) && eq(endPoint, line.p1(), eps))) {
+			continue;
+		}
 		QLineF currentLine(startPoint, endPoint);
 		QPointF intersectionPoint;
 		// TODO: consider curve cases
