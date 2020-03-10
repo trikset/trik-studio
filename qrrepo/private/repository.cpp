@@ -366,8 +366,11 @@ void Repository::loadFromDisk()
 
 void Repository::importFromDisk(const QString &importedFile)
 {
+	// Hack in order not to load metainfo with subprograms
+	QHash<QString, QVariant> fakeMetaInfo;
 	mSerializer.setWorkingFile(importedFile);
-	loadFromDisk();
+	mSerializer.loadFromDisk(mObjects, fakeMetaInfo);
+	addChildrenToRootObject();
 	mSerializer.setWorkingFile(mWorkingFile);
 }
 
