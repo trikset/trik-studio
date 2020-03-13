@@ -31,6 +31,9 @@ public:
 	/// Returns a reference to a rotater graphics item.
 	Rotater &rotater();
 
+	void savePos() override;
+	void restorePos() override;
+
 protected:
 	/// Must be called in subclass to initialize rotater position and so on.
 	/// Can`t be called here in constructor because it uses virtual methods.

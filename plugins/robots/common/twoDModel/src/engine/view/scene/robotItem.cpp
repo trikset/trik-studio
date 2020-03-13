@@ -74,6 +74,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 		sensorItem->setPos(position + boundingRect().center());
 		sensorItem->setRotation(configuration.second);
 	}
+	savePos();
 }
 
 void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
