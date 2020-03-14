@@ -70,6 +70,6 @@ void RotateItem::savePos()
 
 void RotateItem::restorePos()
 {
-	rotater().restorePos();
 	AbstractItem::restorePos();
+	rotater().restorePos();
 }
