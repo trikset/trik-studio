@@ -61,3 +61,15 @@ bool RotateItem::theOnlySelectedRotateItem(bool thisSelected) const
 
 	return true;
 }
+
+void RotateItem::savePos()
+{
+	rotater().savePos();
+	AbstractItem::savePos();
+}
+
+void RotateItem::restorePos()
+{
+	AbstractItem::restorePos();
+	rotater().restorePos();
+}
