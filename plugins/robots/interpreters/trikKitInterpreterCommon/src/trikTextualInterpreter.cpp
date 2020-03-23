@@ -148,6 +148,8 @@ void trik::TrikTextualInterpreter::abort()
 void trik::TrikTextualInterpreter::init()
 {
 	mBrick.init(); // very crucial. Maybe move into interpret methods?
+	// TODO: Remove this hack after trikRuntime is fixed to support source directory changes in camera imitation
+	reinitRobotsParts();
 }
 
 void trik::TrikTextualInterpreter::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
