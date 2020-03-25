@@ -127,7 +127,7 @@ QList<const Node *> Queries::immediateFollowers(const Node &node, uint edgeType)
 		}
 	}
 
-	return result.toList();
+	return result.values();
 }
 
 QList<const Node *> Queries::immediatePredecessors(const Node &node, uint edgeType)
@@ -140,12 +140,12 @@ QList<const Node *> Queries::immediatePredecessors(const Node &node, uint edgeTy
 		}
 	}
 
-	return result.toList();
+	return result.values();
 }
 
 QList<const Node *> Queries::reachableSet(const Node &node, uint edgeType)
 {
 	QSet<const Node *> result;
 	::dfs(node, [](const Node &) {return false;}, edgeType, result);
-	return result.toList();
+	return result.values();
 }
