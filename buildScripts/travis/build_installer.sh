@@ -30,11 +30,11 @@ then
 "
       fi
 
-      $EXECUTOR bash -ic "\
-      echo Start build installer \
-      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-      && mv installer/trik-studio*installer* installer/$TSNAME \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
-      || false \
-"
+#      $EXECUTOR bash -ic "\
+#      echo Start build installer \
+#      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+#      && mv installer/trik-studio*installer* installer/$TSNAME \
+#      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
+#      || false \
+#"
 fi
