@@ -25,7 +25,7 @@
         <translation type="vanished">Wi-Fi</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+22"/>
         <source>Robot&apos;s Folders</source>
         <translation type="unfinished"></translation>
     </message>

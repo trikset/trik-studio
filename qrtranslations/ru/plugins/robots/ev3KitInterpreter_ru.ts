@@ -6,10 +6,10 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
-        <translation>Настроки EV3</translation>
+        <translation>Настройки EV3</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+22"/>
         <source>Robot&apos;s Folders</source>
         <translation>Папки Робота</translation>
     </message>
