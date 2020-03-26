@@ -61,10 +61,19 @@ public:
 	Id(const Id &base, const QString &additional);
 
 	/// Default constructor, as required by QMetaType.
-	Id();
+	Id() = default;
 
 	/// Copy constructor, as required by QMetaType.
-	Id(const Id &other);
+	Id(const Id &other) = default;
+
+	/// Move constructor.
+	Id(Id &&other) = default;
+
+	/// Default assignment operator
+	Id& operator=(const Id &other) = default;
+
+	/// Default moving assignment operator
+	Id& operator=(Id &&other) = default;
 
 	/// Returns true if this id is an empty one (same as == Id())
 	bool isNull() const;
