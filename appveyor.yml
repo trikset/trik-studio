@@ -48,7 +48,7 @@ environment:
       - QT: 5.14
         ARCH: 32
         PYTHON_PATH: C:\Python38
-        CONFIGURATION: debug
+        CONFIGURATION: release
 
       - QT: 5.12
         ARCH: 32
