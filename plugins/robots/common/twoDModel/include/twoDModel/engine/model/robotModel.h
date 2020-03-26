@@ -177,6 +177,10 @@ signals:
 	/// Emitted when left or right wheel was reconnected to another port.
 	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
+private slots:
+	void moveCell(int n);
+	void turnOn(qreal angle);
+
 private:
 	QVector2D robotDirectionVector() const;
 

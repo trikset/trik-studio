@@ -39,7 +39,7 @@ QString TrikV6KitInterpreterPlugin::kitId() const
 
 QString TrikV6KitInterpreterPlugin::friendlyKitName() const
 {
-	return tr("TRIK (model-2014)");
+	return tr("Simple robot model");
 }
 
 int TrikV6KitInterpreterPlugin::priority() const

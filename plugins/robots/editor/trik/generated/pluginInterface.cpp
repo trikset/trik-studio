@@ -44,6 +44,7 @@ void TrikMetamodelPlugin::initMultigraph()
 {
 	mMetamodel->addNode(*(new TrikAnalogSensorBlock(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikAngularServo(*mMetamodel)));
+	mMetamodel->addNode(*(new TrikBackwardOneCell(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikCalibrateGyroscope(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDetect(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDetectorToVariable(*mMetamodel)));
@@ -53,6 +54,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(*(new TrikDrawLine(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDrawPixel(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikDrawRect(*mMetamodel)));
+	mMetamodel->addNode(*(new TrikForwardOneCell(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikInitCamera(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikInitVideoStreaming(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikLed(*mMetamodel)));
@@ -70,6 +72,8 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(*(new TrikStopCamera(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikStopVideoStreaming(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikSystem(*mMetamodel)));
+	mMetamodel->addNode(*(new TrikTurnLeft(*mMetamodel)));
+	mMetamodel->addNode(*(new TrikTurnRight(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikV62AngularServo(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikV62ClearEncoder(*mMetamodel)));
 	mMetamodel->addNode(*(new TrikV62WaitForEncoder(*mMetamodel)));
@@ -96,6 +100,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(*(new TrikWriteToFile(*mMetamodel)));
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikAnalogSensorBlock"), mMetamodel->elementType("RobotsDiagram", "TrikSensorBlock"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikAngularServo"), mMetamodel->elementType("RobotsDiagram", "EngineCommand"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikBackwardOneCell"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikCalibrateGyroscope"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDetect"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDetectorToVariable"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -105,6 +110,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDrawLine"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDrawPixel"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDrawRect"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikForwardOneCell"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikInitCamera"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikInitVideoStreaming"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikLed"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -122,6 +128,8 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikStopCamera"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikStopVideoStreaming"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikSystem"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikTurnLeft"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikTurnRight"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikV62AngularServo"), mMetamodel->elementType("RobotsDiagram", "EngineCommand"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikV62ClearEncoder"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikV62WaitForEncoder"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -159,6 +167,10 @@ void TrikMetamodelPlugin::initNameMap()
 void TrikMetamodelPlugin::initPaletteGroupsMap()
 {
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikForwardOneCell"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikBackwardOneCell"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikTurnRight"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikTurnLeft"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikPlayTone"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikPlayToneHz"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikV6EnginesForward"));

@@ -19,6 +19,7 @@
 #include <QtGui/QTransform>
 
 #include <qrutils/mathUtils/math.h>
+#include <qrkernel/settingsManager.h>
 
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/motor.h>
@@ -80,6 +81,18 @@ void RobotModel::reinit()
 	mBeepTime = 0;
 	mDeltaRadiansOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
+
+	connect(&mRobotModel, &RobotModelInterface::moveManually, this, &RobotModel::moveCell, Qt::UniqueConnection);
+	connect(&mRobotModel, &RobotModelInterface::turnManuallyOn, this, &RobotModel::turnOn, Qt::UniqueConnection);
+}
+
+void RobotModel::moveCell(int n) {
+	const int gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	setPosition(position() + QTransform().rotate(mAngle).map(QPointF(n * gridSize, 0)));
+}
+
+void RobotModel::turnOn(qreal angle) {
+	setRotation(rotation() + angle);
 }
 
 void RobotModel::clear()
