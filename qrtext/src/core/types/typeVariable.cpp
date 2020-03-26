@@ -32,7 +32,7 @@ TypeVariable::TypeVariable(const QSharedPointer<TypeExpression> &singleType)
 
 bool TypeVariable::isResolved() const
 {
-	return mAllowedTypes.size() == 1 && !mAllowedTypes.toList().first()->is<Any>();
+	return mAllowedTypes.size() == 1 && !mAllowedTypes.values().first()->is<Any>();
 }
 
 bool TypeVariable::isEmpty() const
@@ -42,17 +42,17 @@ bool TypeVariable::isEmpty() const
 
 QSharedPointer<TypeExpression> TypeVariable::finalType() const
 {
-	if (mAllowedTypes.size() == 0) {
+	if (mAllowedTypes.empty()) {
 		return QSharedPointer<TypeExpression>(new Any());
 	} else {
-		return mAllowedTypes.toList()[0].dynamicCast<TypeExpression>();
+		return mAllowedTypes.begin()->dynamicCast<TypeExpression>();
 	}
 }
 
 void TypeVariable::constrain(const QSharedPointer<TypeVariable> &other
 		, const GeneralizationsTableInterface &generalizationsTable)
 {
-	constrain(other->mAllowedTypes.toList(), generalizationsTable);
+	constrain(other->mAllowedTypes.values(), generalizationsTable);
 }
 
 void TypeVariable::constrain(const QList<QSharedPointer<TypeExpression>> &types
