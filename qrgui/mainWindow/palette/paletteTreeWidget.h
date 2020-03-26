@@ -98,7 +98,7 @@ private:
 
 	/// Method-comparator for sorting Ids by displayed name.
 	/// Needs EditorManager instance to work,
-	/// but qSort() prohibits it to be a member of an object.
+	/// but std::sort() prohibits it to be a member of an object.
 	/// So making it static does the trick.
 	static bool idLessThan(const Id &s1, const Id &s2);
 

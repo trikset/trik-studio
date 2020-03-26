@@ -99,7 +99,7 @@ RobotModelInterface *RobotModelUtils::selectedRobotModelFor(QList<KitPluginInter
 
 void RobotModelUtils::sortRobotModels(QList<RobotModelInterface *> &robotModels)
 {
-	qSort(robotModels.begin(), robotModels.end()
+	std::sort(robotModels.begin(), robotModels.end()
 			, [](RobotModelInterface * const robot1, RobotModelInterface * const robot2) {
 		return robot1->priority() > robot2->priority();
 	});

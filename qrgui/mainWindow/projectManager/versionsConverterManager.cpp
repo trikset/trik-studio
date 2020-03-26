@@ -74,7 +74,7 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 {
 	// Stage I: Sorting converters by versions
 	QList<ProjectConverter> sortedConverters = converters;
-	qSort(sortedConverters.begin(), sortedConverters.end()
+	std::sort(sortedConverters.begin(), sortedConverters.end()
 		, [=](const ProjectConverter &converter1, const ProjectConverter &converter2)
 	{
 		return converter1.fromVersion() < converter2.fromVersion();

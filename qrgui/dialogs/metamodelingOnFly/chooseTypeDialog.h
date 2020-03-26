@@ -42,13 +42,16 @@ public:
 	/// Destructor.
 	~ChooseTypeDialog();
 
+	/// Prevously it was a private slot
+	void nodeButtonClicked();
+
+	/// Prevously it was a private slot
+	void edgeButtonClicked();
+
 signals:
 	/// Emitted when editing is complete and everything must be reloaded.
 	void jobDone();
 
-private slots:
-	void nodeButtonClicked();
-	void edgeButtonClicked();
 
 private:
 	Ui::ChooseTypeDialog *mUi;
