@@ -155,6 +155,7 @@ public:
 	/// Sets a physical engine. Robot recalculates its position using this engine.
 	void setPhysicalEngine(physics::PhysicsEngineBase &engine);
 
+	void setWorldModel(WorldModel &worldModel);
 public slots:
 	void recalculateParams();
 	void nextFragment();
@@ -229,6 +230,7 @@ private:
 	bool mIsFirstAngleStamp;
 	qreal mAngleStampPrevious;
 
+	WorldModel *mWorldModel;  // Does not take ownership
 	physics::PhysicsEngineBase *mPhysicsEngine;  // Does not take ownership
 
 	items::StartPosition *mStartPositionMarker;  // Transfers ownership to QGraphicsScene

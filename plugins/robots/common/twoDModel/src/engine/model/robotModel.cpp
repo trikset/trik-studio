@@ -20,6 +20,7 @@
 
 #include <qrutils/mathUtils/math.h>
 #include <qrkernel/settingsManager.h>
+#include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/motor.h>
@@ -27,10 +28,12 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/settings.h"
 #include "twoDModel/engine/model/timeline.h"
+#include "twoDModel/engine/model/worldModel.h"
 
 #include "physics/physicsEngineBase.h"
 
 #include "src/engine/items/startPosition.h"
+#include "src/engine/items/wallItem.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
@@ -56,6 +59,7 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mPosStamps(positionStampsCount)
 	, mIsFirstAngleStamp(true)
 	, mAngleStampPrevious(0)
+	, mWorldModel(nullptr)
 	, mPhysicsEngine(nullptr)
 	, mStartPositionMarker(new items::StartPosition(info().size()))
 {
@@ -88,7 +92,20 @@ void RobotModel::reinit()
 
 void RobotModel::moveCell(int n) {
 	const int gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	setPosition(position() + QTransform().rotate(mAngle).map(QPointF(n * gridSize, 0)));
+	auto shiftPos = QTransform().rotate(mAngle).map(QPointF(gridSize, 0));
+	for (int i = 0; i < n; i++) {
+		auto moveLine = QLineF(rotationCenter(), rotationCenter() + shiftPos);
+		for (auto wall : mWorldModel->walls()) {
+			auto wallLine = QLineF(wall->begin(), wall->end());
+			if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
+				mWorldModel->errorReporter()->addError(tr("Movement is impossible!"));
+				markerDown(Qt::red);
+				return;
+			}
+		}
+		mPos = position() + shiftPos;
+		nextFragment();
+	}
 }
 
 void RobotModel::turnOn(qreal angle) {
@@ -287,6 +304,11 @@ QPainterPath RobotModel::robotBoundingPath() const
 void RobotModel::setPhysicalEngine(physics::PhysicsEngineBase &engine)
 {
 	mPhysicsEngine = &engine;
+}
+
+void RobotModel::setWorldModel(WorldModel &worldModel)
+{
+	mWorldModel = &worldModel;
 }
 
 QRectF RobotModel::sensorRect(const PortInfo &port, const QPointF sensorPos) const

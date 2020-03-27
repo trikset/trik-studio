@@ -49,7 +49,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	const QSizeF robotSize = mRobotModel.info().size();
 	setX2(x1() + robotSize.width());
 	setY2(y1() + robotSize.height());
-	mMarkerPoint = QPointF(0, y2() / 2);  // Marker is situated behind the robot
+	mMarkerPoint = QPointF((x1()+x2())/2, (y1()+y2())/2);  // Marker is situated under the robot
 	QPen pen(this->pen());
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
