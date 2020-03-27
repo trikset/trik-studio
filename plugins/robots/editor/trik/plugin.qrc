@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
 	<file>generated/shapes/TrikAngularServoClass.sdf</file>
+	<file>generated/shapes/TrikBackwardOneCellClass.sdf</file>
 	<file>generated/shapes/TrikCalibrateGyroscopeClass.sdf</file>
 	<file>generated/shapes/TrikDetectClass.sdf</file>
 	<file>generated/shapes/TrikDetectorToVariableClass.sdf</file>
@@ -9,6 +10,7 @@
 	<file>generated/shapes/TrikDrawLineClass.sdf</file>
 	<file>generated/shapes/TrikDrawPixelClass.sdf</file>
 	<file>generated/shapes/TrikDrawRectClass.sdf</file>
+	<file>generated/shapes/TrikForwardOneCellClass.sdf</file>
 	<file>generated/shapes/TrikInitCameraClass.sdf</file>
 	<file>generated/shapes/TrikInitVideoStreamingClass.sdf</file>
 	<file>generated/shapes/TrikLedClass.sdf</file>
@@ -25,6 +27,8 @@
 	<file>generated/shapes/TrikStopCameraClass.sdf</file>
 	<file>generated/shapes/TrikStopVideoStreamingClass.sdf</file>
 	<file>generated/shapes/TrikSystemClass.sdf</file>
+	<file>generated/shapes/TrikTurnLeftClass.sdf</file>
+	<file>generated/shapes/TrikTurnRightClass.sdf</file>
 	<file>generated/shapes/TrikV62AngularServoClass.sdf</file>
 	<file>generated/shapes/TrikV62ClearEncoderClass.sdf</file>
 	<file>generated/shapes/TrikV62WaitForEncoderClass.sdf</file>

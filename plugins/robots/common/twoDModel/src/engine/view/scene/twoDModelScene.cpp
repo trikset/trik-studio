@@ -478,21 +478,22 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 	forReleaseResize(mouseEvent);
 
-	if (!isCorrectScene({createdItem})) {
-		// Qt bug. You need to manually release item before removing
-		createdItem->mouseReleaseEvent(mouseEvent);
-		mModel.worldModel().removeItem(createdItem->id());
-	} else {
+//	Walls in simple model is very thin
+//	if (!isCorrectScene({createdItem})) {
+//		// Qt bug. You need to manually release item before removing
+//		createdItem->mouseReleaseEvent(mouseEvent);
+//		mModel.worldModel().removeItem(createdItem->id());
+//	} else {
 		registerInUndoStack(createdItem);
-	}
+//	}
 
-	if (!isCorrectScene(selectedItems())) {
-		for (auto selectedItem : selectedItems()) {
-			if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
-				item->restorePos();
-			}
-		}
-	}
+//	if (!isCorrectScene(selectedItems())) {
+//		for (auto selectedItem : selectedItems()) {
+//			if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
+//				item->restorePos();
+//			}
+//		}
+//	}
 
 	for (RobotItem * const robotItem : mRobots) {
 		setSceneRect(sceneRect().united(robotItem->sceneBoundingRect()));

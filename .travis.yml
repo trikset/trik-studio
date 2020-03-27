@@ -20,7 +20,8 @@ env:
     - BUILD_TIMEOUT=2400
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
-    - ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests && ./trik-v62-qts-generator-tests && ./robots_utils_unittests && ./run-simulator-tests.sh"
+    #- ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests && ./trik-v62-qts-generator-tests && ./robots_utils_unittests && ./run-simulator-tests.sh"
+    - ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests"
     - QMAKE_EXTRA="CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
     - TRIK_QT="$HOME/TRIK_Qt"
     - secure: "UioSKmbIZQXcavbLTZxdBUeg0Au5wOUsGTMpHM28FZzZoTxwuXtFYETccJVZly2Wh4gq627dO6oYb0G45d8IHpHXgWgFYS0WQjimGhdMAM6LqNPrDTx1W9KFOrnZwcmA7xyMEKihjMRnzyHl7fpq2ITBhn5LJcBsC3grgWKgyEDiaN75J4joOSx9dQgdA0O1OnKQBsc32TvGurOaqdZnPueyQ7dYwc2r82o9VN0sITGeDN2L3aC35nntb+d/V94sAgbcWHWfICOubLTmcUEcgqbimHd9nojqSJyWR+iTy3h16txnD4MfbyfCq1th56gdvo8gh5H/IFiF1IdJyMFH30IJqBhH5OKsupGbcYEg2fOtMNVtMA6w+k5gvpaEs/RVX+lOWAqS56Pxg8p9XAStsgC/5KE9Y3gTj+58uQHwSi297vsEAtDJI5uNY+JDXxgAbVvcsMotsbpDGJFK0bTPheFouL5+iDySNFlo7h0m/8JGvcFi74BQ1xX8L+Zvxt6BF7WwE90N/Li+my4huOjDDQpOm+iO9HD3B0GEM3p0Vt5XuMaAa97pYLDhOb5GNLIkfYYFATQCh3ip20f0asd8OOMYIgQOcVRlwB+LwMLPIroHW2NvKfU6PTG0NcJVqAV8Mbj0uR0O0Ungt5Ww+R8kVI0GnXnAicbhjU5UCZ7yMYw="
@@ -59,31 +60,31 @@ matrix:
 
     - stage: build
       os: linux
-      services: docker
-      name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
-    - os: linux
+#      services: docker
+#      name: "Linux release"
+#      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+#    - os: linux
       services: docker
       env: CONFIG=debug TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Linux debug + tests"
-    - os: osx
-      language: cpp
-      name: "macOS release"
-      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
-    - os: osx
-      language: cpp
-      name: "macOS debug + tests"
-      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
+#    - os: osx
+#      language: cpp
+#      name: "macOS release"
+#      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+#    - os: osx
+#      language: cpp
+#      name: "macOS debug + tests"
+#      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
 
-    - stage: installer
-      os: linux
-      services: docker
-      name: "Linux release installer + checker"
-      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
-    - os: osx
-      language: cpp
-      name: "macOS release installer"
-      env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+ #   - stage: installer
+ #     os: linux
+ #     services: docker
+ #     name: "Linux release installer + checker"
+ #     env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+ #   - os: osx
+ #     language: cpp
+ #     name: "macOS release installer"
+ #     env:  INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
 
 before_install:
   - if ./buildScripts/travis/has_only_skipped_files.sh ; then echo "Triggering early terminate..." ; set -xo functrace ; travis_terminate 0 ; fi

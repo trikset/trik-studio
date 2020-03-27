@@ -17,16 +17,16 @@ TEMPLATE = subdirs
 SUBDIRS = \
 	interpreterCore \
 	nullKitInterpreter \
-	nxtKitInterpreter \
+	#nxtKitInterpreter \
 	trikKitInterpreterCommon \
 	trikV6KitInterpreter \
-	trikV62KitInterpreter \
-	ev3KitInterpreter \
+#	trikV62KitInterpreter \
+#	ev3KitInterpreter \
 	robotsPlugin \
-	pioneerKitInterpreter \
+#	pioneerKitInterpreter \
 
 robotsPlugin.depends = interpreterCore
 twoDModelRunner.depends = interpreterCore
 trikV6KitInterpreter.depends = trikKitInterpreterCommon
-trikV62KitInterpreter.depends = trikKitInterpreterCommon
-pioneerKitInterpreter.depends = interpreterCore
+#trikV62KitInterpreter.depends = trikKitInterpreterCommon
+#pioneerKitInterpreter.depends = interpreterCore

@@ -639,6 +639,14 @@
     </message>
 </context>
 <context>
+    <name>twoDModel::model::RobotModel</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/robotModel.cpp" line="+101"/>
+        <source>Movement is impossible!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>twoDModel::model::WorldModel</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+167"/>
@@ -968,7 +976,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+694"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+695"/>
         <source>Select image</source>
         <translation>Выберите картинку</translation>
     </message>

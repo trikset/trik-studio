@@ -105,6 +105,41 @@
 		}
 	};
 
+	class TrikBackwardOneCell : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikBackwardOneCell(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikBackwardOneCell");
+			setFriendlyName(QObject::tr("Backward one cell"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikBackwardOneCellClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+		}
+	};
+
 	class TrikCalibrateGyroscope : public qReal::NodeElementType
 	{
 	public:
@@ -636,6 +671,41 @@
 			addProperty("WidthRect", "string", QObject::tr("5"), QObject::tr("Width"), QObject::tr(""), false);
 			addProperty("XCoordinateRect", "string", QObject::tr("0"), QObject::tr("X"), QObject::tr(""), false);
 			addProperty("YCoordinateRect", "string", QObject::tr("0"), QObject::tr("Y"), QObject::tr(""), false);
+		}
+	};
+
+	class TrikForwardOneCell : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikForwardOneCell(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikForwardOneCell");
+			setFriendlyName(QObject::tr("Forward one cell"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikForwardOneCellClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
 		}
 	};
 
@@ -1399,6 +1469,76 @@
 			addProperty("Code", "bool", QString::fromUtf8("false"), QObject::tr("Code"), QObject::tr(""), false);
 			addProperty("Command", "string", QObject::tr("echo 123"), QObject::tr("Command"), QObject::tr(""), false);
 			addProperty("Evaluate", "bool", QString::fromUtf8("false"), QObject::tr("Evaluate"), QObject::tr(""), false);
+		}
+	};
+
+	class TrikTurnLeft : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikTurnLeft(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikTurnLeft");
+			setFriendlyName(QObject::tr("Turn left"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikTurnLeftClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+		}
+	};
+
+	class TrikTurnRight : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikTurnRight(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikTurnRight");
+			setFriendlyName(QObject::tr("Turn right"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikTurnRightClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
 		}
 	};
 

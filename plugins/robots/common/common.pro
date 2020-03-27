@@ -17,13 +17,13 @@ TEMPLATE = subdirs
 SUBDIRS = \
 	kitBase \
 	twoDModel \
-	nxtKit \
+#	nxtKit \
 	trikKit \
-	ev3Kit \
-	pioneerKit \
+#	ev3Kit \
+#	pioneerKit \
 
 twoDModel.depends = kitBase
-nxtKit.depends = twoDModel
+#nxtKit.depends = twoDModel
 trikKit.depends = twoDModel
-ev3Kit.depends = twoDModel
-pioneerKit.depends = kitBase
+#ev3Kit.depends = twoDModel
+#pioneerKit.depends = kitBase

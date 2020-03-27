@@ -206,6 +206,7 @@ void Model::deserialize(const QDomDocument &worldModel, const QDomDocument &blob
 void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF &pos)
 {
 	RobotModel *robot = new RobotModel(robotModel, mSettings, this);
+	robot->setWorldModel(mWorldModel);
 	robot->setPosition(pos);
 
 	connect(&mTimeline, &Timeline::started, robot, &RobotModel::reinit);

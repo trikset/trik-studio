@@ -75,9 +75,13 @@
         <translation type="vanished">ТРИК (старый корпус)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/trikV6KitInterpreterPlugin.cpp" line="+42"/>
         <source>TRIK (model-2014)</source>
-        <translation>ТРИК (модель 2014)</translation>
+        <translation type="vanished">ТРИК (модель 2014)</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/trikV6KitInterpreterPlugin.cpp" line="+42"/>
+        <source>Simple robot model</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

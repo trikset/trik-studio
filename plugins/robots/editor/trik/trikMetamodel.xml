@@ -92,6 +92,62 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Forward one cell" name="TrikForwardOneCell" description="IKHONAKHBEEVA">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/forwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+			<node displayedName="Backward one cell" name="TrikBackwardOneCell" description="IKHONAKHBEEVA">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/backwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+			<node displayedName="Turn right" name="TrikTurnRight" description="IKHONAKHBEEVA">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/turnRightBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+			<node displayedName="Turn left" name="TrikTurnLeft" description="IKHONAKHBEEVA">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/turnLeftBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 			<node displayedName="Motors Backward" name="TrikV6EnginesBackward" path="111, 224 : 0, 113 :  | 113, 0 : 0, 113 :  | 0, 113 : 287, 113 : " description="Enables motors on the given ports in reverse mode with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -1309,6 +1365,10 @@
 
 		<palette sorted="false">
 			<group name="Actions">
+				<element name="TrikForwardOneCell"/>
+				<element name="TrikBackwardOneCell"/>
+				<element name="TrikTurnRight"/>
+				<element name="TrikTurnLeft"/>
 				<!-- combine play tone in one block -->
 				<element name="TrikPlayTone"/>
 				<element name="TrikPlayToneHz"/>
