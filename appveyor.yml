@@ -43,13 +43,6 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
   matrix:
-      - QT: 5.14
-        ARCH: 32
-        PYTHON_PATH: C:\Python38
-        CONFIGURATION: release
-        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-
       - QT: 5.12
         ARCH: 32
         PYTHON_PATH: C:\Python37
@@ -63,6 +56,13 @@ environment:
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
         APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+
+      - QT: 5.14
+        ARCH: 32
+        PYTHON_PATH: C:\Python38
+        CONFIGURATION: release
+        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
