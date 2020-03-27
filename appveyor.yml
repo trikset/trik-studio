@@ -39,7 +39,8 @@ environment:
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
-    TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
+    #TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
+    TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe"
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
@@ -48,9 +49,9 @@ environment:
         ARCH: 32
         PYTHON_PATH: C:\Python37
 
-      - QT: 5.12
-        ARCH: 64
-        PYTHON_PATH: C:\Python37-x64
+#      - QT: 5.12
+#        ARCH: 64
+#        PYTHON_PATH: C:\Python37-x64
 
 configuration:
 #  - debug

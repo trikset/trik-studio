@@ -232,5 +232,15 @@
         <source>Undeclared identifier: %1</source>
         <translation>Identificateur non déclaré : %1</translation>
     </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/boolean.h" line="+28"/>
+        <source>boolean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/table.h" line="+44"/>
+        <source>table[%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
