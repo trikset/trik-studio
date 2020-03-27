@@ -48,18 +48,21 @@ environment:
         PYTHON_PATH: C:\Python38
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 
       - QT: 5.12
         ARCH: 32
         PYTHON_PATH: C:\Python37
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
       - QT: 5.12
         ARCH: 64
         PYTHON_PATH: C:\Python37-x64
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
