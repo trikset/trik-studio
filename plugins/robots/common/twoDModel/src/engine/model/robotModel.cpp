@@ -93,7 +93,8 @@ void RobotModel::reinit()
 void RobotModel::moveCell(int n) {
 	const int gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
 	auto shiftPos = QTransform().rotate(mAngle).map(QPointF(gridSize, 0));
-	for (int i = 0; i < n; i++) {
+	if (n < 0) shiftPos = -shiftPos;
+	for (int i = 0; i < abs(n); i++) {
 		auto moveLine = QLineF(rotationCenter(), rotationCenter() + shiftPos);
 		for (auto wall : mWorldModel->walls()) {
 			auto wallLine = QLineF(wall->begin(), wall->end());
