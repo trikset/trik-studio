@@ -641,7 +641,7 @@
 <context>
     <name>twoDModel::model::RobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/robotModel.cpp" line="+101"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/robotModel.cpp" line="+102"/>
         <source>Movement is impossible!</source>
         <translation type="unfinished"></translation>
     </message>
