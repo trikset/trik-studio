@@ -47,5 +47,37 @@ qReal::IdList TrikV6BlocksFactory::providedBlocks() const
 		result << id("TrikTurnRight");
 		result << id("TrikTurnLeft");
 	}
+
+	// Drawing actions
+	result
+			<< id("TrikSetPainterColor")
+			<< id("TrikSetPainterWidth")
+			<< id("TrikDrawPixel")
+			<< id("TrikDrawLine")
+			<< id("TrikDrawRect")
+			<< id("TrikDrawEllipse")
+			<< id("TrikDrawArc")
+			<< id("TrikSmile")
+			<< id("TrikSadSmile")
+			<< id("TrikSetBackground")
+			;
+
+	// Robots actions
+	result
+			<< id("TrikSay")
+			<< id("TrikLed")
+			<< id("GetButtonCode")
+			<< id("TrikSendMessage")
+			;
+
+	// Wait for sensors
+	result
+			<< id("TrikWaitForTouchSensor")
+			<< id("TrikWaitForLight")
+			<< id("TrikWaitForIRDistance")
+			<< id("TrikWaitForSonarDistance")
+			<< id("TrikWaitForButton")
+			;
+
 	return result;
 }

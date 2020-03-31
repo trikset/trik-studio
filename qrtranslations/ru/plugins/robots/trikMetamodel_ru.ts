@@ -100,7 +100,12 @@
         <translation>Угол (градусы)</translation>
     </message>
     <message>
-        <location line="-1410"/>
+        <location line="-1480"/>
+        <source>Backward</source>
+        <translation>Назад</translation>
+    </message>
+    <message>
+        <location line="+70"/>
         <location line="+11"/>
         <source>Detect by Videocamera</source>
         <translation>Детектировать по камере</translation>
@@ -364,7 +369,12 @@
         <translation>Нарисовать на экране прямоугольник. В качестве параметров указываются координаты левого верхнего угла, ширина и высота прямоугольника.</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+71"/>
+        <source>Forward</source>
+        <translation>Вперед</translation>
+    </message>
+    <message>
+        <location line="+35"/>
         <location line="+11"/>
         <source>Initialize Videocamera</source>
         <translation>Включить видеокамеру</translation>
@@ -475,20 +485,12 @@
         <translation>мс</translation>
     </message>
     <message>
-        <location line="-809"/>
-        <source>Backward one cell</source>
-        <translation type="unfinished"></translation>
+        <location line="-807"/>
+        <source>Moves backward one cell.</source>
+        <translation>Переместиться назад на одну клетку.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+569"/>
-        <location line="+798"/>
-        <location line="+35"/>
-        <source>IKHONAKHBEEVA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1369"/>
+        <location line="+33"/>
         <source>Calibrate gyroscope</source>
         <translation>Калибровка  гироскопа</translation>
     </message>
@@ -498,12 +500,12 @@
         <translation>Устанавливает гироскоп в 0 в текущей позиции.</translation>
     </message>
     <message>
-        <location line="+532"/>
-        <source>Forward one cell</source>
-        <translation type="unfinished"></translation>
+        <location line="+534"/>
+        <source>Moves forward one cell.</source>
+        <translation>Переместиться вперед на одну клетку.</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+73"/>
         <source>Draw stream</source>
         <translation>Вывести на экран</translation>
     </message>
@@ -718,12 +720,22 @@
     <message>
         <location line="+12"/>
         <source>Turn left</source>
-        <translation type="unfinished"></translation>
+        <translation>Налево</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Rotates 90 degrees to the left.</source>
+        <translation>Повернуться на 90 градусов влево.</translation>
     </message>
     <message>
         <location line="+35"/>
+        <source>Rotates 90 degrees to the right.</source>
+        <translation>Повернуться на 90 градусов вправо.</translation>
+    </message>
+    <message>
+        <location line="-2"/>
         <source>Turn right</source>
-        <translation type="unfinished"></translation>
+        <translation>Направо</translation>
     </message>
     <message>
         <location line="+77"/>

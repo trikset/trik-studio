@@ -92,7 +92,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Forward one cell" name="TrikForwardOneCell" description="IKHONAKHBEEVA">
+			<node displayedName="Forward" name="TrikForwardOneCell" description="Moves forward one cell.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/forwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
@@ -106,7 +106,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Backward one cell" name="TrikBackwardOneCell" description="IKHONAKHBEEVA">
+			<node displayedName="Backward" name="TrikBackwardOneCell" description="Moves backward one cell.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/backwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
@@ -120,7 +120,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Turn right" name="TrikTurnRight" description="IKHONAKHBEEVA">
+			<node displayedName="Turn right" name="TrikTurnRight" description="Rotates 90 degrees to the right.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/turnRightBlock.png" x1="0" y2="50" x2="50"/>
@@ -134,7 +134,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Turn left" name="TrikTurnLeft" description="IKHONAKHBEEVA">
+			<node displayedName="Turn left" name="TrikTurnLeft" description="Rotates 90 degrees to the left.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/turnLeftBlock.png" x1="0" y2="50" x2="50"/>

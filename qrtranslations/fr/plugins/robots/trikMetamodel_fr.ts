@@ -100,7 +100,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1410"/>
+        <location line="-1480"/>
+        <source>Backward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+70"/>
         <location line="+11"/>
         <source>Detect by Videocamera</source>
         <translation type="unfinished"></translation>
@@ -364,7 +369,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+71"/>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
         <location line="+11"/>
         <source>Initialize Videocamera</source>
         <translation type="unfinished"></translation>
@@ -475,20 +485,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-809"/>
-        <source>Backward one cell</source>
+        <location line="-807"/>
+        <source>Moves backward one cell.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+569"/>
-        <location line="+798"/>
-        <location line="+35"/>
-        <source>IKHONAKHBEEVA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-1369"/>
+        <location line="+33"/>
         <source>Calibrate gyroscope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -498,12 +500,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+532"/>
-        <source>Forward one cell</source>
+        <location line="+534"/>
+        <source>Moves forward one cell.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+73"/>
         <source>Draw stream</source>
         <translation type="unfinished"></translation>
     </message>
@@ -726,7 +728,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="-33"/>
+        <source>Rotates 90 degrees to the left.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Rotates 90 degrees to the right.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+75"/>
         <source>S1</source>
         <translation type="unfinished"></translation>
     </message>
