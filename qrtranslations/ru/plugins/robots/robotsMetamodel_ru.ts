@@ -16,7 +16,7 @@
     <message>
         <location line="-125"/>
         <source>Iterations:</source>
-        <translation>Итераций:</translation>
+        <translation>Повторить:</translation>
     </message>
     <message>
         <source>Volume (%):</source>
@@ -931,7 +931,7 @@
     <message>
         <location line="+33"/>
         <source>Iterations</source>
-        <translation>Итерации</translation>
+        <translation>Повторить</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1524,7 +1524,7 @@
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
         <source>Expression</source>
-        <translation type="unfinished">Выражение</translation>
+        <translation>Выражение</translation>
     </message>
     <message>
         <location line="+568"/>

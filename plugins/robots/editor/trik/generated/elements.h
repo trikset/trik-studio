@@ -112,9 +112,9 @@
 			: NodeElementType(metamodel)
 		{
 			setName("TrikBackwardOneCell");
-			setFriendlyName(QObject::tr("Backward one cell"));
+			setFriendlyName(QObject::tr("Backward"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			setDescription(QObject::tr("Moves backward one cell."));
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikBackwardOneCellClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -681,9 +681,9 @@
 			: NodeElementType(metamodel)
 		{
 			setName("TrikForwardOneCell");
-			setFriendlyName(QObject::tr("Forward one cell"));
+			setFriendlyName(QObject::tr("Forward"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			setDescription(QObject::tr("Moves forward one cell."));
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikForwardOneCellClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -1481,7 +1481,7 @@
 			setName("TrikTurnLeft");
 			setFriendlyName(QObject::tr("Turn left"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			setDescription(QObject::tr("Rotates 90 degrees to the left."));
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikTurnLeftClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -1516,7 +1516,7 @@
 			setName("TrikTurnRight");
 			setFriendlyName(QObject::tr("Turn right"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("IKHONAKHBEEVA"));
+			setDescription(QObject::tr("Rotates 90 degrees to the right."));
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikTurnRightClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
