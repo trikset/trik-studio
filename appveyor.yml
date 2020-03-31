@@ -57,12 +57,21 @@ environment:
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
         APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
-      - QT: 5.14
+      - QT: 5.12
         ARCH: 32
         PYTHON_PATH: C:\Python38
         CONFIGURATION: release
-        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+
+
+# Qt5.14 build takes too long (2x times) and reaches timeout
+#      - QT: 5.14
+#        ARCH: 32
+#        PYTHON_PATH: C:\Python38
+#        CONFIGURATION: release
+#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
+#        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 
 matrix:
   allow_failures:
