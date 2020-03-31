@@ -25,7 +25,7 @@ class TrikSonarSensor : public kitBase::robotModel::robotParts::RangeSensor
 	Q_OBJECT
 	Q_CLASSINFO("name", "sonar")
 	Q_CLASSINFO("friendlyName", tr("Sonic Sensor"))
-	Q_CLASSINFO("simulated", "true")
+//	Q_CLASSINFO("simulated", "true")
 
 public:
 	TrikSonarSensor(const kitBase::robotModel::DeviceInfo &info

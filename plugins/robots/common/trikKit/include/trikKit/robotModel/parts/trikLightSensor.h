@@ -26,7 +26,7 @@ class TrikLightSensor : public kitBase::robotModel::robotParts::LightSensor
 	Q_OBJECT
 	Q_CLASSINFO("name", "light")
 	Q_CLASSINFO("friendlyName", tr("Light sensor"))
-	Q_CLASSINFO("simulated", "true")
+//	Q_CLASSINFO("simulated", "true")
 
 public:
 	TrikLightSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
