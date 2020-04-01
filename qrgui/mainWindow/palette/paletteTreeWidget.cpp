@@ -142,8 +142,8 @@ void PaletteTreeWidget::mousePressEvent(QMouseEvent *event)
 					, *mEditorManager, &mMainWindow);
 			QAction * const addNodePaletteAction = menu.addAction(tr("Add Entity"));
 			QAction * const addEdgePaletteAction = menu.addAction(tr("Add Relastionship"));
-			connect(addNodePaletteAction, SIGNAL(triggered()), chooseTypeDialog, SLOT(nodeButtonClicked()));
-			connect(addEdgePaletteAction, SIGNAL(triggered()), chooseTypeDialog, SLOT(edgeButtonClicked()));
+			connect(addNodePaletteAction, &QAction::triggered, chooseTypeDialog, &ChooseTypeDialog::nodeButtonClicked);
+			connect(addEdgePaletteAction, &QAction::triggered, chooseTypeDialog, &ChooseTypeDialog::edgeButtonClicked);
 			connect(chooseTypeDialog, &ChooseTypeDialog::jobDone, &mMainWindow, &MainWindow::loadEditorPlugins);
 			menu.exec(QCursor::pos());
 		}
