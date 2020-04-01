@@ -206,7 +206,7 @@ void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 
 	QString out;
 
-	qSort(results.begin(), results.end()
+	std::sort(results.begin(), results.end()
 			, [](QPair<QString, QPair<int, int>> r1, QPair<QString, QPair<int, int>> r2) -> bool {
 				return r1.second.first < r2.second.first;
 			});

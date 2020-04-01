@@ -157,8 +157,8 @@ const ConfigurationInterface &CommonRobotModel::configuration() const
 
 QList<PortInfo> CommonRobotModel::availablePorts() const
 {
-	QList<PortInfo> result = mAllowedConnections.keys();
-	qSort(result);
+	auto result = mAllowedConnections.keys();
+	std::sort(result.begin(), result.end());
 	return result;
 }
 

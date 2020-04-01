@@ -404,7 +404,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	QDomElement walls = parent.ownerDocument().createElement("walls");
 	result.appendChild(walls);
 	QList<QString> wallsIds = mWalls.keys();
-	qSort(wallsIds.begin(), wallsIds.end(), comparator);
+	std::sort(wallsIds.begin(), wallsIds.end(), comparator);
 	for (const QString &wall : wallsIds) {
 		mWalls[wall]->serialize(walls);
 	}
@@ -424,7 +424,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	QDomElement colorFields = parent.ownerDocument().createElement("colorFields");
 	result.appendChild(colorFields);
 	QList<QString> colorFieldsIds = mColorFields.keys();
-	qSort(colorFieldsIds.begin(), colorFieldsIds.end(), comparator);
+	std::sort(colorFieldsIds.begin(), colorFieldsIds.end(), comparator);
 	for (const QString &colorField : colorFieldsIds) {
 		mColorFields[colorField]->serialize(colorFields);
 	}
@@ -432,7 +432,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	QDomElement images = parent.ownerDocument().createElement("images");
 	result.appendChild(images);
 	QList<QString> imageIds = mImageItems.keys();
-	qSort(imageIds.begin(), imageIds.end(), comparator);
+	std::sort(imageIds.begin(), imageIds.end(), comparator);
 	for (const QString &image : imageIds) {
 		mImageItems[image]->serialize(images);
 	}
@@ -440,7 +440,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	QDomElement regions = parent.ownerDocument().createElement("regions");
 	result.appendChild(regions);
 	QList<QString> regionIds = mRegions.keys();
-	qSort(regionIds.begin(), regionIds.end(), comparator);
+	std::sort(regionIds.begin(), regionIds.end(), comparator);
 	for (const QString &region : regionIds) {
 		QDomElement regionElement = parent.ownerDocument().createElement("region");
 		mRegions[region]->serialize(regionElement);

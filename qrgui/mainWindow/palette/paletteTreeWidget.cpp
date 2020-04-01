@@ -55,7 +55,7 @@ void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &
 	show();
 
 	if (sort) {
-		qSort(groups.begin(), groups.end()
+		std::sort(groups.begin(), groups.end()
 				, [](QPair<QString, QList<PaletteElement>> const &e1
 						, QPair<QString, QList<PaletteElement>> const &e2)
 					{
@@ -163,12 +163,12 @@ void PaletteTreeWidget::expand()
 
 void PaletteTreeWidget::sortByFriendlyName(IdList &ids)
 {
-	qSort(ids.begin(), ids.end(), idLessThan);
+	std::sort(ids.begin(), ids.end(), idLessThan);
 }
 
 void PaletteTreeWidget::sortByFriendlyName(QList<PaletteElement> &elements)
 {
-	qSort(elements.begin(), elements.end(), paletteElementLessThan);
+	std::sort(elements.begin(), elements.end(), paletteElementLessThan);
 }
 
 void PaletteTreeWidget::editItem(QTreeWidgetItem * const item)

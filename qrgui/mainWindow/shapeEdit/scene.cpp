@@ -38,9 +38,9 @@ Scene::Scene(graphicsUtils::AbstractView *view, QObject * parent)
 	mCopyPaste = nonePaste;
 	mPortType = "NonTyped";
 
-	connect(this, SIGNAL(selectionChanged()), this, SLOT(changePalette()));
-	connect(this, SIGNAL(selectionChanged()), this, SLOT(changeFontPalette()));
-	connect(this, SIGNAL(selectionChanged()), this, SLOT(changePortsComboBox()));
+	connect(this, &Scene::selectionChanged, this, &Scene::changePalette);
+	connect(this, &Scene::selectionChanged, this, &Scene::changeFontPalette);
+	connect(this, &Scene::selectionChanged, this, &Scene::changePortsComboBox);
 
 	mZValue = 0;
 }
@@ -375,7 +375,7 @@ void Scene::keyPressEvent(QKeyEvent *keyEvent)
 		QPointF topLeftSelection(selectedItemsBoundingRect().topLeft());
 		switch (mCopyPaste) {
 		case copy:
-			foreach(Item *item, mListSelectedItemsForPaste) {
+			for(Item *item: mListSelectedItemsForPaste) {
 				Item* newItem = item->clone();
 				newItem->setPos(posCursor - topLeftSelection + item->scenePos());
 				addItem(newItem);
@@ -383,7 +383,7 @@ void Scene::keyPressEvent(QKeyEvent *keyEvent)
 			}
 			break;
 		case cut:
-			foreach(Item *item, mListSelectedItemsForPaste) {
+			for(Item *item: mListSelectedItemsForPaste) {
 				item->setPos(posCursor - topLeftSelection + item->scenePos());
 				setZValue(item);
 				mListSelectedItemsForPaste.clear();
@@ -504,7 +504,7 @@ QList<Item *> Scene::selectedSceneItems()
 		if (item != nullptr)
 			resList.push_back(item);
 	}
-	qSort(resList.begin(), resList.end(), compareItems);
+	std::sort(resList.begin(), resList.end(), compareItems);
 	return resList;
 }
 
