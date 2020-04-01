@@ -33,7 +33,6 @@ branches:
 
 environment:
   global:
-    QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
     CCACHE_DIR: C:\ccache.cache
@@ -47,23 +46,51 @@ environment:
       - QT: 5.12
         ARCH: 32
         PYTHON_PATH: C:\Python37
+        CONFIGURATION: release
+        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
       - QT: 5.12
         ARCH: 64
         PYTHON_PATH: C:\Python37-x64
+        CONFIGURATION: release
+        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
-configuration:
-#  - debug
-  - release
+      - QT: 5.12
+        ARCH: 32
+        PYTHON_PATH: C:\Python38
+        CONFIGURATION: release
+        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
+
+# Qt5.14 build takes too long (2x times) and reaches timeout
+#      - QT: 5.14
+#        ARCH: 32
+#        PYTHON_PATH: C:\Python38
+#        CONFIGURATION: release
+#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
+#        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+
+matrix:
+  allow_failures:
+    - image: Visual Studio 2019 # build is extremally slow with this image
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
 #  - '%CCACHE_DIR% -> **\*.pr?, appveyor.yml'
 #  - C:\ProgramData\chocolatey\bin -> appveyor.yml
 #  - C:\ProgramData\chocolatey\lib -> appveyor.yml
 #  - '%MSYS_DIR%\var\cache\pacman\pkg -> appveyor.yml'
+#for:
+#  -
+#    matrix:
+#      only:
+#        - QT: 5.14
+#    image: Visual Studio 2019
 
 init:
+  - git config --global core.symlinks true
   - git config --global core.autocrlf true
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
@@ -95,12 +122,14 @@ clone_script:
 
 install:
   - set PYTHON_LIB=%PYTHON_PATH%\libs
-  - set QTDIR=C:\Qt\5.12\mingw73_%ARCH%
-  - set MINGW=%QTDIR%\..\..\Tools\mingw730_%ARCH%
+  - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
+  - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
   - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
+  - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
 # need to reconfigure because it is anouther one git
   - git config --global core.autocrlf true
+  - git config --global core.symlinks true
   - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
@@ -141,29 +170,31 @@ test_script:
 
 after_test:
 # zip binaries
-  - cd %BUILD_DIR%/bin/release
+  - cd %BUILD_DIR%/bin/%CONFIGURATION%
   - bash -c "env LC_ALL=C date -u"
-  - for %%f in (*.exe) do windeployqt --release %%f
-  - xcopy /I /Y %QTDIR%\plugins\platforms %BUILD_DIR%\bin\release\platforms
+  - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
+  - xcopy /I /Y %QTDIR%\plugins\platforms %BUILD_DIR%\bin\%CONFIGURATION%\platforms
   - set ZIP_NAME=trik-studio
   - set APPVEYOR_REPO_BRANCH_SAFE=%APPVEYOR_REPO_BRANCH:/=-%
   - if %APPVEYOR_REPO_TAG%==true (set ZIP_NAME=%ZIP_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set ZIP_NAME=%ZIP_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
-  - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%PLATFORM%.zip
+  - set ZIP_NAME=%ZIP_NAME%_qt%QT%_%PLATFORM%_%CONFIGURATION%.zip
   - bash -c "env LC_ALL=C date -u"
   - echo "ZipName:%ZIP_NAME%"
-  - cd %BUILD_DIR%/bin/release
+  - cd %BUILD_DIR%/bin/%CONFIGURATION%
   - 7z a -- %APPVEYOR_BUILD_FOLDER%\%ZIP_NAME% .
   - cd %APPVEYOR_BUILD_FOLDER%
   - if "%NEED_BINZIP%" EQU "true" (appveyor PushArtifact %ZIP_NAME%)
+  - if "%CONFIGURATION%" NEQ "release" ( exit /b 0 )
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - bash -c "env LC_ALL=C date -u"
   - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
-  - set INSTALLER_NAME=trik-studio-installer
+  - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
+  - if "%QT%" NEQ "5.12" ( set INSTALLER_NAME=%INSTALLER_NAME%-Qt%QT% )
   - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%
   - set AUTOINSTALLER_ZIP_NAME=%INSTALLER_NAME%-auto.zip
-  - set INSTALLER_NAME=%INSTALLER_NAME%.exe
+  - set INSTALLER_NAME=%INSTALLER_NAME%-installer.exe
   - echo "Installer:%INSTALLER_NAME%"
   - ren trik-studio*installer*.exe %INSTALLER_NAME%
   - cd %APPVEYOR_BUILD_FOLDER%
@@ -202,6 +233,8 @@ deploy:
     github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
     on:
       ARCH: 32
+      QT: 5.12
+      CONFIGURATION: release
       APPVEYOR_REPO_TAG: true
       APPVEYOR_PROJECT_SLUG: $(master_ci)
 
