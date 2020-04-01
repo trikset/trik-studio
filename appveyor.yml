@@ -33,6 +33,7 @@ branches:
 
 environment:
   global:
+    PYTHON_VERSION_MINOR: 7 # Default to Python 3.7
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
     CCACHE_DIR: C:\ccache.cache
@@ -45,30 +46,25 @@ environment:
   matrix:
       - QT: 5.12
         ARCH: 32
-        PYTHON_PATH: C:\Python37
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
       - QT: 5.12
         ARCH: 64
-        PYTHON_PATH: C:\Python37-x64
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
       - QT: 5.12
         ARCH: 32
-        PYTHON_PATH: C:\Python38
+        PYTHON_VERSION_MINOR: 8
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
 
 
 # Qt5.14 build takes too long (2x times) and reaches timeout
 #      - QT: 5.14
 #        ARCH: 32
-#        PYTHON_PATH: C:\Python38
+#        PYTHON_VERSION_MINOR: 8
 #        CONFIGURATION: release
 #        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
 #        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
@@ -95,6 +91,8 @@ init:
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
+  - set PYTHON_PATH=C:\Python3%PYTHON_VERSION_MINOR%
+  - if "%ARCH%" == "64" (set PYTHON_PATH=%PYTHON_PATH%-x64)
   - set NEED_AUTOZIP=false
   - set NEED_BINZIP=false
   - set NEED_INSTALLER=false
@@ -108,6 +106,8 @@ init:
   - if "x%appveyor_pull_request_number%" EQU "x" (set NEED_AUTOZIP=true)
 #this is a tagged commit build
   - if "%APPVEYOR_REPO_TAG%" EQU "true" ( set "NEED_INSTALLER=true" && set NEED_AUTOZIP=true )
+#disable artifacts for Python38
+  - if "%PYTHON_VERSION_MINOR%" NEQ "7" ( set "NEED_INSTALLER=false" && set NEED_AUTOZIP=false )
   - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
   - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
   - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
@@ -191,7 +191,7 @@ after_test:
   - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
   - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
-  - if "%QT%" NEQ "5.12" ( set INSTALLER_NAME=%INSTALLER_NAME%-Qt%QT% )
+  - if "%PYTHON_VERSION_MINOR%" NEQ "7" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
   - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%
   - set AUTOINSTALLER_ZIP_NAME=%INSTALLER_NAME%-auto.zip
   - set INSTALLER_NAME=%INSTALLER_NAME%-installer.exe
