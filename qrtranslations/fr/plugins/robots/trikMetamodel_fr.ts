@@ -10,8 +10,8 @@
     </message>
     <message>
         <location line="+24"/>
-        <location line="+261"/>
-        <location line="+1390"/>
+        <location line="+271"/>
+        <location line="+1400"/>
         <location line="+413"/>
         <location line="+119"/>
         <location line="+71"/>
@@ -21,20 +21,20 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2447"/>
-        <location line="+1491"/>
+        <location line="-2467"/>
+        <location line="+1511"/>
         <source>Angular Servo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1489"/>
-        <location line="+1491"/>
+        <location line="-1509"/>
+        <location line="+1511"/>
         <source>Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1484"/>
-        <location line="+1491"/>
+        <location line="-1504"/>
+        <location line="+1511"/>
         <location line="+54"/>
         <location line="+108"/>
         <location line="+81"/>
@@ -44,26 +44,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1836"/>
-        <location line="+1491"/>
+        <location line="-1856"/>
+        <location line="+1511"/>
         <location line="+1101"/>
         <source>Angle:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2591"/>
-        <location line="+1491"/>
+        <location line="-2611"/>
+        <location line="+1511"/>
         <source>°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1467"/>
+        <location line="-1487"/>
         <source>E1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+1491"/>
+        <location line="+1511"/>
         <location line="+46"/>
         <location line="+108"/>
         <location line="+35"/>
@@ -74,8 +74,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1843"/>
-        <location line="+296"/>
+        <location line="-1863"/>
+        <location line="+306"/>
         <location line="+1"/>
         <location line="+72"/>
         <location line="+1"/>
@@ -83,7 +83,7 @@
         <location line="+2"/>
         <location line="+127"/>
         <location line="+1"/>
-        <location line="+922"/>
+        <location line="+932"/>
         <location line="+412"/>
         <location line="+162"/>
         <location line="+63"/>
@@ -94,18 +94,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2598"/>
-        <location line="+1491"/>
+        <location line="-2618"/>
+        <location line="+1511"/>
         <source>Angle (degrees)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1480"/>
+        <location line="-1500"/>
         <source>Backward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+80"/>
         <location line="+11"/>
         <source>Detect by Videocamera</source>
         <translation type="unfinished"></translation>
@@ -117,21 +117,21 @@
     </message>
     <message>
         <location line="+7"/>
-        <location line="+534"/>
+        <location line="+544"/>
         <location line="+624"/>
         <source>Mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1127"/>
-        <location line="+535"/>
+        <location line="-1137"/>
+        <location line="+545"/>
         <location line="+623"/>
         <location line="+563"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1710"/>
+        <location line="-1720"/>
         <location line="+3"/>
         <source>Line Detector into Variable</source>
         <translation type="unfinished"></translation>
@@ -143,12 +143,12 @@
     </message>
     <message>
         <location line="+14"/>
-        <location line="+2073"/>
+        <location line="+2083"/>
         <source>Variable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2049"/>
+        <location line="-2059"/>
         <source>err</source>
         <translation type="unfinished"></translation>
     </message>
@@ -192,12 +192,12 @@
         <location line="-281"/>
         <location line="+90"/>
         <location line="+199"/>
-        <location line="+635"/>
+        <location line="+645"/>
         <source>Width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-916"/>
+        <location line="-926"/>
         <location line="+90"/>
         <location line="+199"/>
         <source>Height:</source>
@@ -238,12 +238,12 @@
         <location line="+71"/>
         <location line="+56"/>
         <location line="+72"/>
-        <location line="+537"/>
+        <location line="+547"/>
         <source>Redraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-810"/>
+        <location line="-820"/>
         <source>SpanAngle</source>
         <translation type="unfinished"></translation>
     </message>
@@ -256,12 +256,12 @@
         <location line="+1"/>
         <location line="+73"/>
         <location line="+199"/>
-        <location line="+624"/>
+        <location line="+634"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-895"/>
+        <location line="-905"/>
         <location line="+73"/>
         <location line="+126"/>
         <location line="+73"/>
@@ -374,7 +374,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+45"/>
         <location line="+11"/>
         <source>Initialize Videocamera</source>
         <translation type="unfinished"></translation>
@@ -485,12 +485,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-807"/>
-        <source>Moves backward one cell.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+33"/>
+        <location line="-784"/>
         <source>Calibrate gyroscope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -500,12 +495,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+534"/>
-        <source>Moves forward one cell.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+73"/>
+        <location line="+617"/>
         <source>Draw stream</source>
         <translation type="unfinished"></translation>
     </message>
@@ -733,7 +723,35 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="-1387"/>
+        <source>Moves backward with a given number of cells.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <location line="+579"/>
+        <source>Move:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-578"/>
+        <location line="+579"/>
+        <source>cells</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-555"/>
+        <location line="+579"/>
+        <source>Number of cells</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-32"/>
+        <source>Moves forward with a given number of cells.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+843"/>
         <source>Rotates 90 degrees to the right.</source>
         <translation type="unfinished"></translation>
     </message>

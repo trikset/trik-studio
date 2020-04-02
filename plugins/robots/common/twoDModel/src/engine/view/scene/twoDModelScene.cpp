@@ -401,11 +401,11 @@ void TwoDModelScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	default:
 		needUpdate = false;
+
+		AbstractScene::mouseMoveEvent(mouseEvent);
 		if (mouseEvent->buttons() & Qt::LeftButton) {
 			forMoveResize(mouseEvent);
 		}
-
-		AbstractScene::mouseMoveEvent(mouseEvent);
 		break;
 	}
 

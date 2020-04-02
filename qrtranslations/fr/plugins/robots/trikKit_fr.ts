@@ -2,6 +2,22 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>trik::blocks::details::BackwardOneCellBlock</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikBackwardOneCellBlock.cpp" line="+40"/>
+        <source>Movement is impossible!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trik::blocks::details::ForwardOneCellBlock</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+40"/>
+        <source>Movement is impossible!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trik::blocks::details::WaitGamepadButtonBlock</name>
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/waitGamepadButtonBlock.cpp" line="+41"/>

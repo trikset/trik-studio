@@ -199,6 +199,10 @@ signals:
 
 	// Hack to manually rotate the robot
 	void turnManuallyOn(qreal angle);
+
+	// Hack to manually control the robot
+	void endManual(bool success);
+
 };
 
 }
