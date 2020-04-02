@@ -30,6 +30,7 @@ public:
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &startPositionElement) override;
 	void deserializeCompatibly(const QDomElement &robotElement);
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
 private:
 	void drawFieldForResizeItem(QPainter* painter) override;
