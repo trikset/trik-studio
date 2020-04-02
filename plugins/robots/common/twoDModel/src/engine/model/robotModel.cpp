@@ -19,6 +19,8 @@
 #include <QtGui/QTransform>
 
 #include <qrutils/mathUtils/math.h>
+#include <qrkernel/settingsManager.h>
+#include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/motor.h>
@@ -26,16 +28,20 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/settings.h"
 #include "twoDModel/engine/model/timeline.h"
+#include "twoDModel/engine/model/worldModel.h"
 
 #include "physics/physicsEngineBase.h"
 
 #include "src/engine/items/startPosition.h"
+#include "src/engine/items/wallItem.h"
+#include "utils/abstractTimer.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 using namespace kitBase::robotModel::robotParts;
 
 const int positionStampsCount = 50;
+const qreal manualSpeed = 0.5;
 
 RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 		, const Settings &settings
@@ -55,6 +61,7 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mPosStamps(positionStampsCount)
 	, mIsFirstAngleStamp(true)
 	, mAngleStampPrevious(0)
+	, mWorldModel(nullptr)
 	, mPhysicsEngine(nullptr)
 	, mStartPositionMarker(new items::StartPosition(info().size()))
 {
@@ -80,6 +87,34 @@ void RobotModel::reinit()
 	mBeepTime = 0;
 	mDeltaRadiansOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
+
+	connect(&mRobotModel, &RobotModelInterface::moveManually, this, &RobotModel::moveCell, Qt::UniqueConnection);
+	connect(&mRobotModel, &RobotModelInterface::turnManuallyOn, this, &RobotModel::turnOn, Qt::UniqueConnection);
+}
+
+void RobotModel::moveCell(int n) {
+	const int gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto shiftPos = QTransform().rotate(mAngle).map(QPointF(gridSize, 0));
+	if (n < 0) shiftPos = -shiftPos;
+	for (int i = 0; i < abs(n); i++) {
+		auto moveLine = QLineF(rotationCenter(), rotationCenter() + shiftPos * (i + 1));
+		for (auto wall : mWorldModel->walls()) {
+			auto wallLine = QLineF(wall->begin(), wall->end());
+			if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
+				mIsRiding = true;
+				mWaitPos = mPos + shiftPos * i;
+				mIsCollide = true;
+				return;
+			}
+		}
+	}
+	mIsRiding = true;
+	mWaitPos = mPos + shiftPos * abs(n);
+	mIsCollide = false;
+}
+
+void RobotModel::turnOn(qreal angle) {
+	setRotation(rotation() + angle);
 }
 
 void RobotModel::clear()
@@ -276,6 +311,11 @@ void RobotModel::setPhysicalEngine(physics::PhysicsEngineBase &engine)
 	mPhysicsEngine = &engine;
 }
 
+void RobotModel::setWorldModel(WorldModel &worldModel)
+{
+	mWorldModel = &worldModel;
+}
+
 QRectF RobotModel::sensorRect(const PortInfo &port, const QPointF sensorPos) const
 {
 	if (!mSensorsConfiguration.type(port).isNull()) {
@@ -323,8 +363,20 @@ QVector<int> RobotModel::gyroscopeCalibrate()
 void RobotModel::nextStep()
 {
 	// Changing position quietly, they must not be caught by UI here.
-	mPos += mPhysicsEngine->positionShift(*this).toPointF();
-	mAngle += mPhysicsEngine->rotation(*this);
+	// No physics for simple robot
+//	mPos += mPhysicsEngine->positionShift(*this).toPointF();
+//	mAngle += mPhysicsEngine->rotation(*this);
+	if (mIsRiding) {
+		auto delta = mWaitPos - mPos;
+		auto lenSquare = QPointF::dotProduct(delta, delta);
+		if (lenSquare <= manualSpeed * manualSpeed) {
+			mPos = mWaitPos;
+			mIsRiding = false;
+			emit mRobotModel.endManual(!mIsCollide);
+		} else {
+			mPos += delta * manualSpeed / qSqrt(lenSquare);
+		}
+	}
 	emit positionRecalculated(mPos, mAngle);
 }
 
@@ -335,26 +387,27 @@ void RobotModel::recalculateParams()
 		return;
 	}
 
-	auto calculateMotorOutput = [&](WheelEnum wheel) {
-		const PortInfo &port = mWheelsToMotorPortsMap.value(wheel, PortInfo());
-		if (!port.isValid() || port.name() == "None") {
-			return;
-		}
+	// No motors on simple model
+//	auto calculateMotorOutput = [&](WheelEnum wheel) {
+//		const PortInfo &port = mWheelsToMotorPortsMap.value(wheel, PortInfo());
+//		if (!port.isValid() || port.name() == "None") {
+//			return;
+//		}
 
-		Wheel * const engine = mMotors.value(port, nullptr);
-		if (!engine) {
-			return;
-		}
+//		Wheel * const engine = mMotors.value(port, nullptr);
+//		if (!engine) {
+//			return;
+//		}
 
-		engine->spoiledSpeed = mSettings.realisticMotors() ? varySpeed(engine->speed) : engine->speed;
-	};
+//		engine->spoiledSpeed = mSettings.realisticMotors() ? varySpeed(engine->speed) : engine->speed;
+//	};
 
-	calculateMotorOutput(left);
-	calculateMotorOutput(right);
+//	calculateMotorOutput(left);
+//	calculateMotorOutput(right);
 
 	nextStep();
-	countSpeedAndAcceleration();
-	countMotorTurnover();
+//	countSpeedAndAcceleration();
+//	countMotorTurnover();
 	countBeep();
 }
 

@@ -15,6 +15,8 @@
 #include "startPosition.h"
 
 #include "twoDModel/engine/model/constants.h"
+#include <qrkernel/settingsManager.h>
+#include <QtMath>
 
 using namespace twoDModel::items;
 
@@ -95,4 +97,24 @@ void StartPosition::changeDragState(qreal x, qreal y)
 void StartPosition::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
 	Q_UNUSED(event)
+}
+
+void StartPosition::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	Q_UNUSED(event)
+	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto x = pos().x() + gridSize/2;
+	auto y = pos().y() + gridSize/2;
+	auto roundedX = x - fmod(x, gridSize);
+	auto roundedX2 = roundedX + ((x > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedX - x) > qAbs(roundedX2 - x)) {
+		roundedX = roundedX2;
+	}
+	auto roundedY = y - fmod(y, gridSize);
+	auto roundedY2 = roundedY + ((y > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedY - y) > qAbs(roundedY2 - y)) {
+		roundedY = roundedY2;
+	}
+	QGraphicsItem::setPos(roundedX - gridSize/2, roundedY - gridSize/2);
+	update();
 }

@@ -193,6 +193,16 @@ signals:
 
 	/// Emitted when all devices are configured (or failed to configure) and model is ready to work.
 	void allDevicesConfigured();
+
+	// Hack to manually move the robot
+	void moveManually(int n);
+
+	// Hack to manually rotate the robot
+	void turnManuallyOn(qreal angle);
+
+	// Hack to manually control the robot
+	void endManual(bool success);
+
 };
 
 }

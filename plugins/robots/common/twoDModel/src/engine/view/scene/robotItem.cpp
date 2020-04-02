@@ -16,6 +16,8 @@
 
 #include "twoDModel/engine/model/constants.h"
 #include "src/engine/items/startPosition.h"
+#include <qrkernel/settingsManager.h>
+#include <QtMath>
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -49,7 +51,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	const QSizeF robotSize = mRobotModel.info().size();
 	setX2(x1() + robotSize.width());
 	setY2(y1() + robotSize.height());
-	mMarkerPoint = QPointF(0, y2() / 2);  // Marker is situated behind the robot
+	mMarkerPoint = QPointF((x1()+x2())/2, (y1()+y2())/2);  // Marker is situated under the robot
 	QPen pen(this->pen());
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
@@ -134,7 +136,22 @@ void RobotItem::onLanded()
 
 void RobotItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	Q_UNUSED(event);
+	Q_UNUSED(event)
+	auto x = pos().x();
+	auto y = pos().y();
+	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto roundedX = x - fmod(x, gridSize);
+	auto roundedX2 = roundedX + ((x > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedX - x) > qAbs(roundedX2 - x)) {
+		roundedX = roundedX2;
+	}
+	auto roundedY = y - fmod(y, gridSize);
+	auto roundedY2 = roundedY + ((y > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedY - y) > qAbs(roundedY2 - y)) {
+		roundedY = roundedY2;
+	}
+	QGraphicsItem::setPos(roundedX, roundedY);
+	update();
 }
 
 QDomElement RobotItem::serialize(QDomElement &parent) const

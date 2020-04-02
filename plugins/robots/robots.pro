@@ -19,7 +19,7 @@ SUBDIRS = \
 	examples \
 	common \
 	interpreters \
-	generators \
+#	generators \
 	utils \
 	checker \
 	thirdparty \
@@ -27,5 +27,5 @@ SUBDIRS = \
 utils.depends = thirdparty
 common.depends = thirdparty utils
 interpreters.depends = common thirdparty utils
-generators.depends = common utils
+#generators.depends = common utils
 checker.depends = interpreters

@@ -16,9 +16,9 @@ TEMPLATE = subdirs
 
 SUBDIRS = \
 	commonTests \
-	generatorsTests \
+#	generatorsTests \
 	interpretersTests \
-	tcpRobotSimulator \
-	utilsTests \
+#	tcpRobotSimulator \
+#	utilsTests \
 
-generatorsTests.depends = tcpRobotSimulator
+#generatorsTests.depends = tcpRobotSimulator

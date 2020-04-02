@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2013-2016 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,24 @@
 
 #pragma once
 
-#include <kitBase/robotModel/robotParts/rangeSensor.h>
+#include <kitBase/blocksBase/robotsBlock.h>
+#include <kitBase/robotModel/robotModelInterface.h>
 
 namespace trik {
-namespace robotModel {
-namespace parts {
+namespace blocks {
+namespace details {
 
-class TrikSonarSensor : public kitBase::robotModel::robotParts::RangeSensor
+class TurnLeftBlock : public kitBase::blocksBase::RobotsBlock
 {
 	Q_OBJECT
-	Q_CLASSINFO("name", "sonar")
-	Q_CLASSINFO("friendlyName", tr("Sonic Sensor"))
-//	Q_CLASSINFO("simulated", "true")
 
 public:
-	TrikSonarSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	explicit TurnLeftBlock(kitBase::robotModel::RobotModelInterface &robotModel);
+
+	void run() override;
+
+private:
+	kitBase::robotModel::RobotModelInterface &mRobotModel;
 };
 
 }

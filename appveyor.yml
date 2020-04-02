@@ -39,7 +39,8 @@ environment:
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
-    TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
+    #TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
+    TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe"
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
@@ -49,29 +50,6 @@ environment:
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
 
-      - QT: 5.12
-        ARCH: 64
-        CONFIGURATION: release
-        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-
-      - QT: 5.12
-        ARCH: 32
-        PYTHON_VERSION_MINOR: 8
-        CONFIGURATION: release
-        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-
-
-# Qt5.14 build takes too long (2x times) and reaches timeout
-#      - QT: 5.14
-#        ARCH: 32
-#        PYTHON_VERSION_MINOR: 8
-#        CONFIGURATION: release
-#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
-#        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-
-matrix:
-  allow_failures:
-    - image: Visual Studio 2019 # build is extremally slow with this image
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
 #  - '%CCACHE_DIR% -> **\*.pr?, appveyor.yml'

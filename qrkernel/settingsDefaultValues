@@ -74,3 +74,4 @@ scriptName=:/mainWindow/hintScripts/obstacle.js
 interpreterStackSize=4000
 gesturesEnabled=true
 dockableWidgets=false
+2dShowGrid=true

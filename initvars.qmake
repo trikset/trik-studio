@@ -6,8 +6,8 @@ SUBDIRS=
 #need to update index because of https://stackoverflow.com/questions/16035240/
 system(git update-index --refresh)
 # ATM we use xenial 16.04 as main linux builder, and it lacks new git with --broken option.
-TRIK_STUDIO_VERSION = $$system(git describe --tags --always --dirty --abbrev=6)
-TRIK_STUDIO_YEAR = 2019
+TRIK_STUDIO_VERSION = junior-$$system(git describe --tags --always --dirty --abbrev=6)
+TRIK_STUDIO_YEAR = 2020
 
 #message($$DESTDIR)
 QMAKE_SUBSTITUTES += .qmake.cache.in

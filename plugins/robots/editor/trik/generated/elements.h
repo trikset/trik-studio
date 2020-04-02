@@ -105,6 +105,51 @@
 		}
 	};
 
+	class TrikBackwardOneCell : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikBackwardOneCell(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikBackwardOneCell");
+			setFriendlyName(QObject::tr("Backward"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Moves backward with a given number of cells."));
+			qReal::LabelProperties label_1(1, 0.3, 1.2, "CellsNumber", false, 0);
+			label_1.setBackground(Qt::white);
+			label_1.setScalingX(false);
+			label_1.setScalingY(false);
+			label_1.setHard(false);
+			label_1.setPlainTextMode(false);
+			label_1.setPrefix(QObject::tr("Move:"));
+			label_1.setSuffix(QObject::tr("cells"));
+			addLabel(label_1);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikBackwardOneCellClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("CellsNumber", "int", QString::fromUtf8("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
+		}
+	};
+
 	class TrikCalibrateGyroscope : public qReal::NodeElementType
 	{
 	public:
@@ -636,6 +681,51 @@
 			addProperty("WidthRect", "string", QObject::tr("5"), QObject::tr("Width"), QObject::tr(""), false);
 			addProperty("XCoordinateRect", "string", QObject::tr("0"), QObject::tr("X"), QObject::tr(""), false);
 			addProperty("YCoordinateRect", "string", QObject::tr("0"), QObject::tr("Y"), QObject::tr(""), false);
+		}
+	};
+
+	class TrikForwardOneCell : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikForwardOneCell(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikForwardOneCell");
+			setFriendlyName(QObject::tr("Forward"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Moves forward with a given number of cells."));
+			qReal::LabelProperties label_1(1, 0.3, 1.2, "CellsNumber", false, 0);
+			label_1.setBackground(Qt::white);
+			label_1.setScalingX(false);
+			label_1.setScalingY(false);
+			label_1.setHard(false);
+			label_1.setPlainTextMode(false);
+			label_1.setPrefix(QObject::tr("Move:"));
+			label_1.setSuffix(QObject::tr("cells"));
+			addLabel(label_1);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikForwardOneCellClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("CellsNumber", "int", QString::fromUtf8("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
 		}
 	};
 
@@ -1399,6 +1489,76 @@
 			addProperty("Code", "bool", QString::fromUtf8("false"), QObject::tr("Code"), QObject::tr(""), false);
 			addProperty("Command", "string", QObject::tr("echo 123"), QObject::tr("Command"), QObject::tr(""), false);
 			addProperty("Evaluate", "bool", QString::fromUtf8("false"), QObject::tr("Evaluate"), QObject::tr(""), false);
+		}
+	};
+
+	class TrikTurnLeft : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikTurnLeft(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikTurnLeft");
+			setFriendlyName(QObject::tr("Turn left"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Rotates 90 degrees to the left."));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikTurnLeftClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+		}
+	};
+
+	class TrikTurnRight : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikTurnRight(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikTurnRight");
+			setFriendlyName(QObject::tr("Turn right"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Rotates 90 degrees to the right."));
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikTurnRightClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
 		}
 	};
 

@@ -14,27 +14,24 @@
 
 #include "trikKit/blocks/trikV6BlocksFactory.h"
 
-#include <kitBase/blocksBase/common/clearEncoderBlock.h>
-#include <kitBase/blocksBase/common/waitForEncoderBlock.h>
-
-#include "details/trikEnginesBackwardBlock.h"
-#include "details/trikEnginesForwardBlock.h"
+#include "details/trikForwardOneCellBlock.h"
+#include "details/trikBackwardOneCellBlock.h"
+#include "details/trikTurnRightBlock.h"
+#include "details/trikTurnLeftBlock.h"
 
 using namespace trik::blocks;
 using namespace trik::blocks::details;
-using namespace kitBase::blocksBase::common;
 
 qReal::interpretation::Block *TrikV6BlocksFactory::produceBlock(const qReal::Id &element)
 {
-	if (elementMetatypeIs(element, "TrikAngularServo")) {
-		// AngularServo and EnginesForward are synonyms since angular and radial servos are controlled the same way.
-		return new details::TrikEnginesForwardBlock(mRobotModelManager->model());
-	} else if (elementMetatypeIs(element, "TrikV4ClearEncoder")
-			|| elementMetatypeIs(element, "TrikV6ClearEncoder"))
-	{
-		return new ClearEncoderBlock(mRobotModelManager->model());
-	} else if (elementMetatypeIs(element, "TrikWaitForEncoder")) {
-		return new WaitForEncoderBlock(mRobotModelManager->model());
+	if (elementMetatypeIs(element, "TrikForwardOneCell")) {
+		return new ForwardOneCellBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikBackwardOneCell")) {
+		return new BackwardOneCellBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikTurnRight")) {
+		return new TurnRightBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikTurnLeft")) {
+		return new TurnLeftBlock(mRobotModelManager->model());
 	}
 
 	return TrikBlocksFactoryBase::produceBlock(element);
@@ -44,13 +41,43 @@ qReal::IdList TrikV6BlocksFactory::providedBlocks() const
 {
 	qReal::IdList result;
 
-	result << TrikBlocksFactoryBase::providedBlocks();
+	if (mRobotModelManager->model().name().contains("TwoD")) {
+		result << id("TrikForwardOneCell");
+		result << id("TrikBackwardOneCell");
+		result << id("TrikTurnRight");
+		result << id("TrikTurnLeft");
+	}
 
+	// Drawing actions
 	result
-			<< id("TrikV6ClearEncoder")
-			<< id("TrikAngularServo")
-			<< id("TrikWaitForEncoder")
-	;
+			<< id("TrikSetPainterColor")
+			<< id("TrikSetPainterWidth")
+			<< id("TrikDrawPixel")
+			<< id("TrikDrawLine")
+			<< id("TrikDrawRect")
+			<< id("TrikDrawEllipse")
+			<< id("TrikDrawArc")
+			<< id("TrikSmile")
+			<< id("TrikSadSmile")
+			<< id("TrikSetBackground")
+			;
+
+	// Robots actions
+	result
+			<< id("TrikSay")
+			<< id("TrikLed")
+			<< id("GetButtonCode")
+			<< id("TrikSendMessage")
+			;
+
+	// Wait for sensors
+	result
+			<< id("TrikWaitForTouchSensor")
+			<< id("TrikWaitForLight")
+			<< id("TrikWaitForIRDistance")
+			<< id("TrikWaitForSonarDistance")
+			<< id("TrikWaitForButton")
+			;
 
 	return result;
 }

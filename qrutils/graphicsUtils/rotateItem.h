@@ -34,6 +34,8 @@ public:
 	void savePos() override;
 	void restorePos() override;
 
+	void setRotation(qreal angle);
+
 protected:
 	/// Must be called in subclass to initialize rotater position and so on.
 	/// Can`t be called here in constructor because it uses virtual methods.

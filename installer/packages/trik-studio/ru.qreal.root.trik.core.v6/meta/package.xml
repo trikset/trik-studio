@@ -7,6 +7,6 @@
     <Version></Version>
     <ReleaseDate>2017-11-14</ReleaseDate>
     <SortingPriority>10</SortingPriority>
-    <Default>false</Default>
+    <Default>true</Default>
     <ForcedInstallation>false</ForcedInstallation>
 </Package>
