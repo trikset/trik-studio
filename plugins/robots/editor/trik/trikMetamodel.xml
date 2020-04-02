@@ -92,11 +92,14 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Forward" name="TrikForwardOneCell" description="Moves forward one cell.">
+			<node displayedName="Forward" name="TrikForwardOneCell" description="Moves forward with a given number of cells.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/forwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
 					</picture>
+					<labels>
+						<label x="15" y="60" textBinded="CellsNumber" background="white" prefix="Move:" suffix="cells"/>
+					</labels>
 					<nonResizeable/>
 				</graphics>
 				<logic>
@@ -104,13 +107,21 @@
 					<generalizations>
 						<parent parentName="AbstractNode"/>
 					</generalizations>
+					<properties>
+						<property displayedName="Number of cells" type="int" name="CellsNumber">
+							<default>1</default>
+						</property>
+					</properties>
 				</logic>
 			</node>
-			<node displayedName="Backward" name="TrikBackwardOneCell" description="Moves backward one cell.">
+			<node displayedName="Backward" name="TrikBackwardOneCell" description="Moves backward with a given number of cells.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/backwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
 					</picture>
+					<labels>
+						<label x="15" y="60" textBinded="CellsNumber" background="white" prefix="Move:" suffix="cells"/>
+					</labels>
 					<nonResizeable/>
 				</graphics>
 				<logic>
@@ -118,6 +129,11 @@
 					<generalizations>
 						<parent parentName="AbstractNode"/>
 					</generalizations>
+					<properties>
+						<property displayedName="Number of cells" type="int" name="CellsNumber">
+							<default>1</default>
+						</property>
+					</properties>
 				</logic>
 			</node>
 			<node displayedName="Turn right" name="TrikTurnRight" description="Rotates 90 degrees to the right.">

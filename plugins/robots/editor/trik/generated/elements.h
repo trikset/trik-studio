@@ -114,7 +114,16 @@
 			setName("TrikBackwardOneCell");
 			setFriendlyName(QObject::tr("Backward"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Moves backward one cell."));
+			setDescription(QObject::tr("Moves backward with a given number of cells."));
+			qReal::LabelProperties label_1(1, 0.3, 1.2, "CellsNumber", false, 0);
+			label_1.setBackground(Qt::white);
+			label_1.setScalingX(false);
+			label_1.setScalingY(false);
+			label_1.setHard(false);
+			label_1.setPlainTextMode(false);
+			label_1.setPrefix(QObject::tr("Move:"));
+			label_1.setSuffix(QObject::tr("cells"));
+			addLabel(label_1);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikBackwardOneCellClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -137,6 +146,7 @@
 
 		void initProperties()
 		{
+			addProperty("CellsNumber", "int", QString::fromUtf8("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
 		}
 	};
 
@@ -683,7 +693,16 @@
 			setName("TrikForwardOneCell");
 			setFriendlyName(QObject::tr("Forward"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Moves forward one cell."));
+			setDescription(QObject::tr("Moves forward with a given number of cells."));
+			qReal::LabelProperties label_1(1, 0.3, 1.2, "CellsNumber", false, 0);
+			label_1.setBackground(Qt::white);
+			label_1.setScalingX(false);
+			label_1.setScalingY(false);
+			label_1.setHard(false);
+			label_1.setPlainTextMode(false);
+			label_1.setPrefix(QObject::tr("Move:"));
+			label_1.setSuffix(QObject::tr("cells"));
+			addLabel(label_1);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikForwardOneCellClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -706,6 +725,7 @@
 
 		void initProperties()
 		{
+			addProperty("CellsNumber", "int", QString::fromUtf8("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
 		}
 	};
 

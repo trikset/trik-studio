@@ -26,11 +26,14 @@ ForwardOneCellBlock::ForwardOneCellBlock(kitBase::robotModel::RobotModelInterfac
 
 void ForwardOneCellBlock::run()
 {
-	emit mRobotModel.moveManually(1);
-	auto timer = mRobotModel.timeline().produceTimer();
-	timer->setRepeatable(false);
-	connect(timer, &utils::AbstractTimer::timeout, this, [this](){
-		emit done(mNextBlockId);
-	});
-	timer->start(500);
+	const auto result = eval<int>("CellsNumber");
+	if (!errorsOccured()) {
+		emit mRobotModel.moveManually(result);
+		auto timer = mRobotModel.timeline().produceTimer();
+		timer->setRepeatable(false);
+		connect(timer, &utils::AbstractTimer::timeout, this, [this](){
+			emit done(mNextBlockId);
+		});
+		timer->start(500);
+	}
 }
