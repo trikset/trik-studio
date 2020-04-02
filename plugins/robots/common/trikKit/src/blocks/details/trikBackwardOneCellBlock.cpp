@@ -24,11 +24,11 @@ BackwardOneCellBlock::BackwardOneCellBlock(kitBase::robotModel::RobotModelInterf
 {
 }
 
-void BackwardOneCellBlock::run()
-{
+void BackwardOneCellBlock::run() {
 	const auto result = -eval<int>("CellsNumber");
 	if (!errorsOccured()) {
-		mConnections << connect(&mRobotModel, &kitBase::robotModel::RobotModelInterface::endManual, this, &BackwardOneCellBlock::endMoving);
+		mConnections << connect(&mRobotModel, &kitBase::robotModel::RobotModelInterface::endManual
+				, this, &BackwardOneCellBlock::endMoving);
 		emit mRobotModel.moveManually(result);
 	}
 }

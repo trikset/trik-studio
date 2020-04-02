@@ -12,7 +12,7 @@
 <context>
     <name>trik::blocks::details::ForwardOneCellBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+39"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+40"/>
         <source>Movement is impossible!</source>
         <translation type="unfinished"></translation>
     </message>
