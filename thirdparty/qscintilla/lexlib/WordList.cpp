@@ -107,12 +107,12 @@ static bool cmpWords(const char *a, const char *b) {
 
 #else
 
-static int cmpWords(const void *a, const void *b) {
+static inline int cmpWords(const void *a, const void *b) {
 	return strcmp(*static_cast<const char * const *>(a), *static_cast<const char * const *>(b));
 }
 
 static void SortWordList(char **words, unsigned int len) {
-	qsort(words, len, sizeof(*words), cmpWords);
+	std::sort(words, words + len, cmpWords);
 }
 
 #endif

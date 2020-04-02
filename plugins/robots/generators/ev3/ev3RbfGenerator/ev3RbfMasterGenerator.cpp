@@ -109,7 +109,7 @@ QString Ev3RbfMasterGenerator::generate(const QString &indentString)
 	const QString constantsString = utils::StringUtils::addIndent(
 			mCustomizer->factory()->variables()->generateConstantsString(), 1, "\t");
 	QStringList variablesList = mCustomizer->factory()->variables()->generateVariableString().split('\n');
-	qSort(variablesList.begin(), variablesList.end());
+	std::sort(variablesList.begin(), variablesList.end());
 	const QString variablesString = utils::StringUtils::addIndent(variablesList.join('\n'), 1, "\t");
 	if (resultCode.contains("@@CONSTANTS@@")) {
 		resultCode.replace("@@CONSTANTS@@", constantsString);

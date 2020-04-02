@@ -185,7 +185,7 @@ INCLUDEPATH += $$absolute_path($$_PRO_FILE_PWD_) \
 	$$absolute_path($$PWD) \
 
 
-CONFIG += c++11
+CONFIG *= c++14
 
 DEFINES *= QT_FORCE_ASSERTS
 
