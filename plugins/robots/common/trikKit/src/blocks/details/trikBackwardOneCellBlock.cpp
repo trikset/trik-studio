@@ -28,12 +28,15 @@ void BackwardOneCellBlock::run()
 {
 	const auto result = -eval<int>("CellsNumber");
 	if (!errorsOccured()) {
+		mConnections << connect(&mRobotModel, &kitBase::robotModel::RobotModelInterface::endManual, this, &BackwardOneCellBlock::endMoving);
 		emit mRobotModel.moveManually(result);
-		auto timer = mRobotModel.timeline().produceTimer();
-		timer->setRepeatable(false);
-		connect(timer, &utils::AbstractTimer::timeout, this, [this](){
-			emit done(mNextBlockId);
-		});
-		timer->start(500);
 	}
+}
+
+void BackwardOneCellBlock::endMoving(bool success) {
+	for (auto connection : mConnections) {
+		disconnect(connection);
+	}
+	if (!success) emit warning(tr("Movement is impossible!"));
+	emit done(mNextBlockId);
 }

@@ -218,6 +218,9 @@ private:
 	twoDModel::robotModel::TwoDRobotModel &mRobotModel;
 	SensorsConfiguration mSensorsConfiguration;
 
+	QPointF mWaitPos;
+	bool mIsCollide;
+	bool mIsRiding;
 	QPointF mPos;
 	qreal mAngle;
 	qreal mGyroAngle;

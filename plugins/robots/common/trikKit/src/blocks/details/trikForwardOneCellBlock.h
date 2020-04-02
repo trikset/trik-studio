@@ -32,6 +32,9 @@ public:
 
 private:
 	kitBase::robotModel::RobotModelInterface &mRobotModel;
+	QList<QMetaObject::Connection> mConnections;
+private slots:
+	void endMoving(bool success);
 };
 
 }
