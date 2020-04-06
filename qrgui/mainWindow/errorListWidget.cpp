@@ -29,7 +29,7 @@ ErrorListWidget::ErrorListWidget(QWidget *parent)
 	connect(this, &ErrorListWidget::itemDoubleClicked, this, &ErrorListWidget::highlightElement);
 
 	bool ok;
-	auto size = qReal::SettingsManager::value("ErrorWindowFontSize").toInt(&ok);
+	auto size = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
 	if (ok) {
 		auto f = font();
 		f.setPointSize(size);

@@ -487,7 +487,7 @@
 <context>
     <name>qReal::ui::ConsoleDock</name>
     <message>
-        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+43"/>
+        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+50"/>
         <source>Reset shell</source>
         <translation>Очистить консоль</translation>
     </message>
