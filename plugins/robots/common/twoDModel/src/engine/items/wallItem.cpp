@@ -263,24 +263,12 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	if (dragState() == TopLeft) {
 		setX1(x);
 		setY1(y);
-		resizeBeginWithGrid(indexGrid);
+		reshapeBeginWithGrid(indexGrid);
 	} else if (dragState() == BottomRight) {
 		setX2(x);
 		setY2(y);
 		reshapeEndWithGrid(indexGrid);
 	}
-}
-
-void WallItem::resizeBeginWithGrid(int indexGrid)
-{
-	const int coefX = static_cast<int>(x1()) / indexGrid;
-	const int coefY = static_cast<int>(y1()) / indexGrid;
-
-	setX1(alignedCoordinate(x1(), coefX, indexGrid));
-	setY1(alignedCoordinate(y1(), coefY, indexGrid));
-
-	mCellNumbX1 = x1() / indexGrid;
-	mCellNumbY1 = y1() / indexGrid;
 }
 
 void WallItem::reshapeEndWithGrid(int indexGrid)
