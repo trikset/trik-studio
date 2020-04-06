@@ -43,7 +43,7 @@ bool ExerciseExportManager::save()
 {
 	ui::ExerciseExportDialog dialog;
 	if (dialog.exec() == QDialog::Rejected) {
-		return false;
+		return true;
 	}
 
 	ReadOnlyFlags flags = dialog.readOnlyFlags();
