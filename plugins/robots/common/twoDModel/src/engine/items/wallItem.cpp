@@ -80,12 +80,12 @@ void WallItem::setPrivateData()
 
 QPointF WallItem::begin() const
 {
-	return QPointF(x1(), y1()) + scenePos();
+	return QPointF(x1(), y1());
 }
 
 QPointF WallItem::end() const
 {
-	return QPointF(x2(), y2()) + scenePos();
+	return QPointF(x2(), y2());
 }
 
 QRectF WallItem::boundingRect() const
@@ -153,8 +153,7 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	QDomElement wallNode = AbstractItem::serialize(parent);
 	wallNode.setTagName("wall");
 	setPenBrushToElement(wallNode, "wall");
-	mLineImpl.serialize(wallNode, x1() + scenePos().x(), y1() + scenePos().y()
-			, x2() + scenePos().x(), y2() + scenePos().y());
+	mLineImpl.serialize(wallNode, x1(), y1(), x2(), y2());
 	return wallNode;
 }
 
@@ -206,7 +205,7 @@ void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
 		AbstractItem::resizeItem(event);
 		reshapeRectWithShift();
 	} else {
-		if (SettingsManager::value("2dShowGrid").toBool() && (dragState() == TopLeft || dragState() == BottomRight)) {
+		if (SettingsManager::value("2dShowGrid").toBool()) {
 			resizeWithGrid(event, SettingsManager::value("2dGridCellSize").toInt());
 		} else {
 			if (dragState() == TopLeft || dragState() == BottomRight) {
@@ -256,31 +255,23 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	const qreal x = mapFromScene(event->scenePos()).x();
 	const qreal y = mapFromScene(event->scenePos()).y();
 
-	if (dragState() != None) {
-		setFlag(QGraphicsItem::ItemIsMovable, false);
-	}
+	setFlag(QGraphicsItem::ItemIsMovable, dragState() == None);
 
 	if (dragState() == TopLeft) {
 		setX1(x);
 		setY1(y);
-		resizeBeginWithGrid(indexGrid);
+		reshapeBeginWithGrid(indexGrid);
 	} else if (dragState() == BottomRight) {
 		setX2(x);
 		setY2(y);
 		reshapeEndWithGrid(indexGrid);
+	} else {
+		const int coefX = static_cast<int>(pos().x()) / indexGrid;
+		const int coefY = static_cast<int>(pos().y()) / indexGrid;
+		setPos(alignedCoordinate(pos().x(), coefX, indexGrid),
+				alignedCoordinate(pos().y(), coefY, indexGrid));
+		update();
 	}
-}
-
-void WallItem::resizeBeginWithGrid(int indexGrid)
-{
-	const int coefX = static_cast<int>(x1()) / indexGrid;
-	const int coefY = static_cast<int>(y1()) / indexGrid;
-
-	setX1(alignedCoordinate(x1(), coefX, indexGrid));
-	setY1(alignedCoordinate(y1(), coefY, indexGrid));
-
-	mCellNumbX1 = x1() / indexGrid;
-	mCellNumbY1 = y1() / indexGrid;
 }
 
 void WallItem::reshapeEndWithGrid(int indexGrid)
