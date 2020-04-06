@@ -197,10 +197,9 @@ void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorL
 		throw new Exception("Incorrect total severity");
 	}
 
-	QLabel *label = new QLabel(message.trimmed());
+	auto *label = new QLabel(message.trimmed(), errorListWidget);
 	label->setAlignment(Qt::AlignVCenter);
 	label->setOpenExternalLinks(true);
-	errorListWidget->addItem(item);
 	errorListWidget->setItemWidget(item, label);
 	errorListWidget->setCurrentItem(item);
 }
