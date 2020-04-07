@@ -247,7 +247,7 @@
 <context>
     <name>qReal::gui::editor::PropertyEditorView</name>
     <message>
-        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+310"/>
+        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+315"/>
         <source>Specify directory:</source>
         <translation type="unfinished">Choisissez le répertoire :</translation>
     </message>

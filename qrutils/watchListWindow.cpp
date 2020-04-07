@@ -14,7 +14,7 @@
 
 #include "watchListWindow.h"
 #include "ui_watchListWindow.h"
-
+#include "qrkernel/settingsManager.h"
 #include <QtGui/QClipboard>
 #include <functional>
 
@@ -67,6 +67,13 @@ void WatchListWindow::updateVariables()
 
 	auto sortedIdentifiers = identifiers();
 	std::sort(sortedIdentifiers.begin(), sortedIdentifiers.end());
+	auto f = mUi->watchListTableWidget->font();
+	bool ok;
+	auto fontSize = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
+	if (ok) {
+		f.setPointSize(fontSize);
+	}
+
 	for (auto &&identifier : sortedIdentifiers) {
 		if (mHiddenVariables.contains(identifier)) {
 			continue;
@@ -76,6 +83,8 @@ void WatchListWindow::updateVariables()
 			mUi->watchListTableWidget->insertRow(row);
 			mUi->watchListTableWidget->setItem(row, 0, new QTableWidgetItem());
 			mUi->watchListTableWidget->setItem(row, 1, new QTableWidgetItem());
+			mUi->watchListTableWidget->item(row, 0)->setFont(f);
+			mUi->watchListTableWidget->item(row, 1)->setFont(f);
 		}
 
 		mUi->watchListTableWidget->item(row, 0)->setText(identifier);
