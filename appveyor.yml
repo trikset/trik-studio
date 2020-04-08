@@ -49,16 +49,16 @@ environment:
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
 
-      - QT: 5.12
-        ARCH: 64
-        CONFIGURATION: release
-        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+#      - QT: 5.12
+#        ARCH: 64
+#        CONFIGURATION: release
+#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
 
-      - QT: 5.12
-        ARCH: 32
-        PYTHON_VERSION_MINOR: 8
-        CONFIGURATION: release
-        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+#      - QT: 5.12
+#        ARCH: 32
+#        PYTHON_VERSION_MINOR: 8
+#        CONFIGURATION: release
+#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
 
 
 # Qt5.14 build takes too long (2x times) and reaches timeout
