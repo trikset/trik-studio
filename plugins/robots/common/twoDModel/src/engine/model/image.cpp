@@ -21,12 +21,23 @@
 #include <QtSvg/QSvgRenderer>
 #include <QtXml/QDomElement>
 
+#include <QImageReader>
+#include <QImageWriter>
 #include <qrkernel/logging.h>
 #include <qrutils/imagesCache.h>
 
 using namespace twoDModel::model;
 
 const quint64 maxSvgSize = 1000;
+
+class _LocalLogger
+{
+public:
+	_LocalLogger() {
+		QLOG_INFO()<< "Supported image formats(read):" << QImageReader::supportedImageFormats();
+		QLOG_INFO()<< "Supported image formats(write):" << QImageWriter::supportedImageFormats();
+	}
+} _LocalLogger;
 
 Image::Image()
 	: mExternal(true)
