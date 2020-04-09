@@ -128,7 +128,7 @@ void SkittleItem::returnToStartPosition()
 
 QPolygonF SkittleItem::collidingPolygon() const
 {
-	return QPolygonF(QRectF(scenePos(), skittleSize - QSize(1, 1)));
+	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
 qreal SkittleItem::angularDamping() const
