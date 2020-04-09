@@ -19,6 +19,8 @@ CONFIG += plugin
 
 include(../../../../global.pri)
 
+copyToDestdir(images/ev3-robot.png, now, images/)
+
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 
 include(src/ev3KitInterpreter.pri)
