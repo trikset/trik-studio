@@ -17,6 +17,7 @@
 #include <QtCore/QUuid>
 #include <QtXml/QDomElement>
 #include <QtGui/QPainter>
+#include <qrutils/graphicsUtils/abstractItem.h>
 
 const QColor defaultColor = QColor(135, 206, 250);
 const QSizeF defaultSize = QSizeF(200, 200);
@@ -31,6 +32,7 @@ RegionItem::RegionItem(QGraphicsItem *parent)
 	, mColor(defaultColor)
 	, mSize(defaultSize)
 {
+	setZValue(graphicsUtils::AbstractItem::ZValue::Region);
 }
 
 QString RegionItem::id() const
