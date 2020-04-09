@@ -906,7 +906,7 @@
         <translation>Изображение будет на переднем плане. Предупреждение: робот видит это изображение с помощью сенсоров.</translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location line="+91"/>
         <source>Change image...</source>
         <translation>Изменить картинку...</translation>
     </message>

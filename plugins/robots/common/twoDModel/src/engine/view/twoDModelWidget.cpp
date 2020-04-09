@@ -197,7 +197,7 @@ void TwoDModelWidget::initWidget()
 
 	connect(mColorFieldItemPopup, &ColorItemPopup::propertyChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
 
-	connect(mImageItemPopup, &ImageItemPopup::somethingChanged, this, [=]() {
+	connect(mImageItemPopup, &ImageItemPopup::propertyChanged, this, [=]() {
 		saveBlobsToRepo();
 		saveWorldModelToRepo();
 	});
