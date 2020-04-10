@@ -125,7 +125,7 @@ install:
   - set PYTHON_LIB=%PYTHON_PATH%\libs
   - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
   - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
-  - set PATH=C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
+  - set PATH=C:\Tools\curl\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
   - set PATH
   - git --version
   - 'qmake -v && qmake -query'

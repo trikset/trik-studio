@@ -55,7 +55,9 @@ rm -f winscp.zip
 # end of download winscp
 fi
 
-wait
+WAIT_EXIT_CODE=0
+wait || WAIT_EXIT_CODE=$?
+if (( $WAIT_EXIT_CODE != 0 && $WAIT_EXIT_CODE != 127 )) ; then ( exit $W ) ; fi
 
 cd "$(dirname "$0")"/../data
 cp -r "$cache_dir"/winscp_$winscp_ver winscp
