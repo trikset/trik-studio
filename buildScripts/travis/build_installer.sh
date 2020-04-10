@@ -16,8 +16,8 @@ df -h .
 
 if ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
-      git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-      git fetch --unshallow --tags # for `git describe --tags` to work
+#      git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+#      git fetch --unshallow --tags # for `git describe --tags` to work
       #TODO: We can build installer and checker archive in parallel if needed
 
       if [[ $TRAVIS_OS_NAME == linux ]] ; then
