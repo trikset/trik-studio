@@ -131,7 +131,6 @@ install:
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
   - pacman --verbose --noconfirm -S ccache rsync curl unzip
-  - cygpath -u .
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
@@ -161,6 +160,8 @@ build_script:
   - git config --global core.autocrlf true
   - git config --global core.symlinks true
   - 'git status -vv && git submodule foreach --recursive git status'
+  - bash -c "env LC_ALL=C date -u"
+  - set INSTALLER_NAME=trik-studio
   - qmake %APPVEYOR_BUILD_FOLDER%\%PROJECT_FILE%.pro -spec win32-g++ CONFIG+=%CONFIGURATION% CONFIG+=tests CONFIG+=silent # QMAKE_CXX="ccache g++"
   - bash -c "env LC_ALL=C date -u"
   - mingw32-make -j2 qmake_all
@@ -194,9 +195,7 @@ after_test:
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - bash -c "env LC_ALL=C date -u"
-  - cygpath -u .
-  - bash -c 'cygpath -u .'
-  - build-trik-studio.sh %QTDIR:\=/%/bin %QTIFW:\=/%/bin %BUILD_DIR:\=/%
+  - 'bash -c "./build-trik-studio.sh %QTDIR:\=/%/bin %QTIFW:\=/%/bin %BUILD_DIR:\=/%"'
   - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
   - if "%PYTHON_VERSION_MINOR%" NEQ "7" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
