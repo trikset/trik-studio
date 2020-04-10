@@ -23,8 +23,8 @@ using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
 SensorsConfiguration::SensorsConfiguration(const QString &robotModelName, const QSizeF &robotSize)
-	: mRobotId(robotModelName)
-	, mRobotSize(robotSize)
+	: mRobotSize(robotSize)
+	, mRobotId(robotModelName)
 {
 }
 
