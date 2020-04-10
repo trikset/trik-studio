@@ -62,11 +62,16 @@ void ImagePicker::restore()
 
 void ImagePicker::pick()
 {
+	QFileInfo info (mPathEditor->text());
+	QDir d(info.exists() && info.isFile() ? info.absolutePath() : info.absoluteFilePath());
 	QString openedFileName = utils::QRealFileDialog::getOpenFileName(
 			mSettingsKey + "LastLocation"
 			, this
 			, tr("Select image")
-			, QString()
+			, d.absolutePath()
 			, tr("Images (*.png *.svg *.jpg *.gif *.bmp);;All files (*.*)"));
-	mPathEditor->setText(openedFileName);
+
+	if (!openedFileName.isEmpty()) {
+		mPathEditor->setText(QDir::current().relativeFilePath(openedFileName));
+	}
 }
