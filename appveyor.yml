@@ -248,6 +248,7 @@ deploy:
 on_finish:
   - ccache -s
   - bash -c "env LC_ALL=C date -u"
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 
 notifications:

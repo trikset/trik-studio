@@ -1,6 +1,5 @@
 #!/bin/bash
-set -o nounset
-set -o errexit
+set -xueo pipefail
 
 cd "$(dirname "$0")"
 
