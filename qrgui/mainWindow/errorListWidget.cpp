@@ -21,11 +21,23 @@
 #include <QtGui/QClipboard>
 
 #include "mainWindow/mainWindow.h"
+#include "qrkernel/settingsManager.h"
 
 ErrorListWidget::ErrorListWidget(QWidget *parent)
+	: QListWidget(parent)
 {
-	Q_UNUSED(parent);
 	connect(this, &ErrorListWidget::itemDoubleClicked, this, &ErrorListWidget::highlightElement);
+
+	bool ok;
+	auto size = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
+	if (ok) {
+		auto f = font();
+		f.setPointSize(size);
+		setFont(f);
+	}
+
+	auto height = fontMetrics().boundingRect("'_").height();
+	setIconSize(QSize(height, height));
 	initContextMenu();
 }
 
@@ -47,11 +59,11 @@ void ErrorListWidget::initContextMenu()
 	mContextMenu = new QMenu(this);
 	QAction *clearAction = mContextMenu->addAction(tr("Clear"));
 	QAction *copyAction = mContextMenu->addAction(tr("Copy"));
-	connect(clearAction, SIGNAL(triggered()), this, SIGNAL(clearRequested()));
-	connect(copyAction, SIGNAL(triggered()), this, SLOT(copyCurrentItem()));
+	connect(clearAction, &QAction::triggered, this, &ErrorListWidget::clearRequested);
+	connect(copyAction, &QAction::triggered, this, &ErrorListWidget::copyCurrentItem);
 
 	setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
+	connect(this, &ErrorListWidget::customContextMenuRequested, this, &ErrorListWidget::showContextMenu);
 }
 
 void ErrorListWidget::showContextMenu(const QPoint &pos)

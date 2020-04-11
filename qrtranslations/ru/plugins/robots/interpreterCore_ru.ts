@@ -232,7 +232,7 @@
         <translation type="vanished">В qrs не найден сохраннёный js код</translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+99"/>
         <source>Toggle robot console panel</source>
         <translation>Показать/спрятать панель консоли</translation>
     </message>

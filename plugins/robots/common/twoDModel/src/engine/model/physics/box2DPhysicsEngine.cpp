@@ -13,8 +13,7 @@
  * limitations under the License. */
 #include "box2DPhysicsEngine.h"
 
-#include <Box2D/Box2D.h>
-
+#include <box2d/box2d.h>
 #include <qrutils/graphicsUtils/abstractItem.h>
 
 #include "twoDModel/engine/model/robotModel.h"
@@ -94,7 +93,7 @@ void Box2DPhysicsEngine::onPressedReleasedSelectedItems(bool active)
 	for (auto *item : mScene->selectedItems()) {
 		Box2DItem *bItem = mBox2DDynamicItems.value(item, nullptr);
 		if (bItem) {
-			bItem->getBody()->SetActive(active);
+			bItem->getBody()->SetEnabled(active);
 		}
 	}
 }
@@ -242,7 +241,7 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 	model::RobotModel * const robot = mRobots.first();
 	if (mBox2DRobots[robot]) {
 		b2Body *rBody = mBox2DRobots[robot]->getBody();
-		float32 secondsInterval = timeInterval / 1000.0f;
+		float secondsInterval = timeInterval / 1000.0f;
 
 		if (mBox2DRobots[robot]->isStopping()){
 			mBox2DRobots[robot]->stop();
@@ -343,7 +342,7 @@ void Box2DPhysicsEngine::wakeUp()
 void Box2DPhysicsEngine::nextFrame()
 {
 	for(QGraphicsItem *item : mBox2DDynamicItems.keys()) {
-		if (mBox2DDynamicItems[item]->getBody()->IsActive() && mBox2DDynamicItems[item]->angleOrPositionChanged()) {
+		if (mBox2DDynamicItems[item]->getBody()->IsEnabled() && mBox2DDynamicItems[item]->angleOrPositionChanged()) {
 			QPointF scenePos = positionToScene(mBox2DDynamicItems[item]->getPosition());
 			item->setPos(scenePos - item->boundingRect().center());
 			item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
@@ -452,9 +451,9 @@ b2World &Box2DPhysicsEngine::box2DWorld()
 	return *mWorld.data();
 }
 
-float32 Box2DPhysicsEngine::pxToCm(qreal px) const
+float Box2DPhysicsEngine::pxToCm(qreal px) const
 {
-	return static_cast<float32>(px / mPixelsInCm);
+	return static_cast<float>(px / mPixelsInCm);
 }
 
 b2Vec2 Box2DPhysicsEngine::pxToCm(const QPointF &posInPx) const
@@ -477,7 +476,7 @@ b2Vec2 Box2DPhysicsEngine::positionToBox2D(const QPointF &sceneCoords) const
 	return positionToBox2D(sceneCoords.x(), sceneCoords.y());
 }
 
-b2Vec2 Box2DPhysicsEngine::positionToBox2D(float32 x, float32 y) const
+b2Vec2 Box2DPhysicsEngine::positionToBox2D(float x, float y) const
 {
 	QPointF invertedCoords = QPointF(x, -y);
 	return 0.01f * pxToCm(invertedCoords);
@@ -488,28 +487,28 @@ QPointF Box2DPhysicsEngine::positionToScene(b2Vec2 boxCoords) const
 	return positionToScene(boxCoords.x, boxCoords.y);
 }
 
-QPointF Box2DPhysicsEngine::positionToScene(float32 x, float32 y) const
+QPointF Box2DPhysicsEngine::positionToScene(float x, float y) const
 {
 	b2Vec2 invertedCoords = b2Vec2(x, -y);
 	return cmToPx(100.0f * invertedCoords);
 }
 
-float32 Box2DPhysicsEngine::angleToBox2D(qreal sceneAngle) const
+float Box2DPhysicsEngine::angleToBox2D(qreal sceneAngle) const
 {
 	return -sceneAngle * mathUtils::pi / 180;
 }
 
-qreal Box2DPhysicsEngine::angleToScene(float32 boxAngle) const
+qreal Box2DPhysicsEngine::angleToScene(float boxAngle) const
 {
 	return -boxAngle / mathUtils::pi * 180;
 }
 
-float32 Box2DPhysicsEngine::pxToM(qreal px) const
+float Box2DPhysicsEngine::pxToM(qreal px) const
 {
 	return pxToCm(px) / 100.0f;
 }
 
-qreal Box2DPhysicsEngine::mToPx(float32 m) const
+qreal Box2DPhysicsEngine::mToPx(float m) const
 {
 	return cmToPx(100.0f * m);
 }

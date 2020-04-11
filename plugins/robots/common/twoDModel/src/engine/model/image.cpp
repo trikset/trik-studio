@@ -21,6 +21,8 @@
 #include <QtSvg/QSvgRenderer>
 #include <QtXml/QDomElement>
 
+#include <QImageReader>
+#include <QImageWriter>
 #include <qrkernel/logging.h>
 #include <qrutils/imagesCache.h>
 

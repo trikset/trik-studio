@@ -611,14 +611,13 @@ void AbstractItem::copyTo(AbstractItem * const other) const
 	other->mEditable = mEditable;
 	other->setPos(pos());
 	other->savePos();
-	connect(this, &AbstractItem::positionChanged
-			, other, static_cast<void(AbstractItem::*)(const QPointF &)>(&AbstractItem::setPos));
+	connect(this, &AbstractItem::positionChanged, other, [other](QPointF p) {other->setPos(p);} );
 	connect(this, &AbstractItem::x1Changed, other, &AbstractItem::setX1);
 	connect(this, &AbstractItem::y1Changed, other, &AbstractItem::setY1);
 	connect(this, &AbstractItem::x2Changed, other, &AbstractItem::setX2);
 	connect(this, &AbstractItem::y2Changed, other, &AbstractItem::setY2);
 	connect(this, &AbstractItem::penChanged, other
-			, static_cast<void(AbstractItem::*)(const QPen &)>(&AbstractItem::setPen));
+			, QOverload<const QPen &>::of(&AbstractItem::setPen));
 	connect(this, &AbstractItem::brushChanged, other
-			, static_cast<void(AbstractItem::*)(const QBrush &)>(&AbstractItem::setBrush));
+			, QOverload<const QBrush &>::of(&AbstractItem::setBrush));
 }

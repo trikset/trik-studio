@@ -114,6 +114,7 @@ QWidget *ImageItemPopup::initMemorizationPicker()
 {
 	auto *box = new QCheckBox(this);
 	mMemorizationPicker = box;
+	box->setChecked(true);
 	box->setIcon(QIcon(":/icons/2d_save.png"));
 	updateMemorizationToolTip();
 	box->setFocusPolicy(Qt::NoFocus);

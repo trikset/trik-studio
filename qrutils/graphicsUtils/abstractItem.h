@@ -44,6 +44,7 @@ public:
 
 	enum ZValue {
 		Background
+		, Region
 		, Picture
 		, Shape
 		, Wall

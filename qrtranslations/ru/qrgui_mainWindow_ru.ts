@@ -4,7 +4,7 @@
 <context>
     <name>ErrorListWidget</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorListWidget.cpp" line="+48"/>
+        <location filename="../../qrgui/mainWindow/errorListWidget.cpp" line="+60"/>
         <source>Clear</source>
         <translation>Очистить</translation>
     </message>
@@ -1230,7 +1230,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::ErrorReporter</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+212"/>
+        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+211"/>
         <source>INFORMATION:</source>
         <translation>ИНФОРМАЦИЯ:</translation>
     </message>

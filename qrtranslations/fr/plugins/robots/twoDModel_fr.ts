@@ -571,7 +571,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location line="+91"/>
         <source>Change image...</source>
         <translation type="unfinished"></translation>
     </message>

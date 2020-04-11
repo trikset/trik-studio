@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "consoleDock.h"
+#include "qrkernel/settingsManager.h"
 
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QScrollBar>
@@ -31,8 +32,14 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 {
 	QFont font("Monospace");
 	font.setStyleHint(QFont::Monospace);
+	bool ok;
+	auto size = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
+	if (ok) {
+		font.setPointSize(size);
+	}
+
 	mOutput->setFont(font);
-	if (!QFontInfo(font).fixedPitch()) {
+	if (!QFontInfo(mOutput->font()).fixedPitch()) {
 		QLOG_ERROR() << "Not monospaced font was choosen " << font.toString();
 	}
 	setWidget(mOutput);

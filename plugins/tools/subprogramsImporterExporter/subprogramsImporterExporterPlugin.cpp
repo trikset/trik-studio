@@ -314,8 +314,10 @@ void SubprogramsImporterExporterPlugin::innerSubprograms(const qReal::Id &id, qR
 		qReal::Id outgoingExplosion = mLogicalModel->logicalRepoApi().outgoingExplosion(logicalId);
 		if (outgoingExplosion.element() == "SubprogramDiagram") {
 			qReal::IdList diagrams = mGraphicalModel->graphicalIdsByLogicalId(outgoingExplosion);
-			list.append(diagrams.first());
-			innerSubprograms(diagrams.first(), list);
+			if (!list.contains(diagrams.first())) {
+				list.append(diagrams.first());
+				innerSubprograms(diagrams.first(), list);
+			}
 		}
 	}
 }

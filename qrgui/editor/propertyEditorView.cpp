@@ -36,6 +36,11 @@ PropertyEditorView::PropertyEditorView(QWidget *parent)
 		, mButtonFactory(nullptr)
 		, mController(nullptr)
 {
+	bool ok;
+	auto size = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
+	if (ok) {
+		mPropertyEditor->setStyleSheet("QTreeWidget { font-size: " + QString::number(size) + "pt; }");
+	}
 	mPropertyEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
