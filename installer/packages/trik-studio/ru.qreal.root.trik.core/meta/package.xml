@@ -7,7 +7,6 @@
     <Version></Version>
     <ReleaseDate>2017-11-14</ReleaseDate>
     <Licenses>
-        <License name="WinScp Component License" file="WinScp-license.txt" />
     </Licenses>
     <SortingPriority>10</SortingPriority>
     <Default>true</Default>
