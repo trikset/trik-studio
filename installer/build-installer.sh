@@ -5,23 +5,26 @@
 # and all components in 'packages/qreal-base' and 'packages/$3'. 'trik-studio' will be renamed to $3.
 # If $4 is empty then <path-to-build-dir> = ../
 
-set -o nounset
-set -o errexit
-set -o pipefail
+set -xueo pipefail
 
-GNU_SED_COMMAND=sed
-$GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND=gsed
+cygpath -u . &> /dev/null || { cygpath() { echo "$2" ; } ; export -f cygpath ; }
+
+GNU_SED_COMMAND="sed"
+$GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND="gsed"
 
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
-export QT_DIR=$(realpath $1/../)
-export QTIFW_DIR=$(realpath $2)
-export PRODUCT=$3
-export OS=$OSTYPE
+export QT_DIR=$(realpath $(cygpath -u "$1")/../)
+export QTIFW_DIR=$(realpath $(cygpath -u "$2"))
+export PRODUCT="$3"
+export OS="$OSTYPE"
 
-[ -z ${4+x} ] && BUILD_DIR=$(dirname $(realpath $0))/.. || BUILD_DIR=$(realpath $4)
+BUILD_DIR=$(dirname $(cygpath -u "$0"))
+[ -z "${4+x}" ] || BUILD_DIR="$4"
+BUILD_DIR=$(realpath $(cygpath -u "$BUILD_DIR"))
+
 [ -z $BUILD_DIR ] && exit 1 ||  { [ -d "$BUILD_DIR/bin/release" ] && export BIN_DIR="$BUILD_DIR/bin/release" ; } || { [ -d "$BUILD_DIR/bin/debug" ] && export BIN_DIR="$BUILD_DIR/bin/debug" ; }
-echo $BIN_DIR
+echo "$BIN_DIR"
 if [ -x $BIN_DIR/trik-studio ] ; then
     binary_path=$BIN_DIR/trik-studio
 elif [ -d $BIN_DIR/trik-studio.app ] ; then
@@ -29,7 +32,7 @@ elif [ -d $BIN_DIR/trik-studio.app ] ; then
 else
     exit 1
 fi
-[ -e $(basename $0) ] || cd $(dirname $(realpath $0))
+[ -e $(basename $(cygpath -u "$0")) ] || cd $(dirname $(realpath $(cygpath -u "$0")))
 export INSTALLER_ROOT=$PWD/
 
 PATH=$QT_DIR/bin:$PATH
