@@ -104,7 +104,8 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 		return;
 	}
 
-	if (!fileName.isEmpty() && !fileName.endsWith(".tsj", Qt::CaseInsensitive)) {
+	if (!fileName.isEmpty()
+			&& !fileName.endsWith(".tsj", Qt::CaseInsensitive) && !fileName.endsWith(".qrs", Qt::CaseInsensitive)) {
 		fileName += ".tsj";
 	}
 
@@ -328,7 +329,7 @@ QStringList SubprogramsImporterExporterPlugin::currentlySavedSubprograms() const
 	const QString kit = mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString();
 	const QString path = tmpPath + QDir::separator() + kit;
 
-	QStringList list = QDir(path).entryList({ "*.tsj" });
+	QStringList list = QDir(path).entryList({ "*.tsj", "*.qrs" });
 	std::transform(list.begin(), list.end(), list.begin(), [](QString &str){ str.chop(4); return str; });
 
 	return list;
