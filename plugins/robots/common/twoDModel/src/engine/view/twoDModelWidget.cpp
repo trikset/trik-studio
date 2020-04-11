@@ -202,6 +202,9 @@ void TwoDModelWidget::initWidget()
 		saveWorldModelToRepo();
 	});
 
+	connect(mRobotItemPopup, &RobotItemPopup::propertyChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
+	connect(mRobotItemPopup, &RobotItemPopup::imageSettingsChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
+
 	connect(mSpeedPopup, &SpeedPopup::resetToDefault, this, [=]() {
 		mCurrentSpeed = defaultSpeedFactorIndex;
 		mModel.timeline().setSpeedFactor(speedFactors[defaultSpeedFactorIndex]);

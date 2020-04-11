@@ -16,6 +16,7 @@
 
 #include "twoDModel/engine/model/constants.h"
 #include "src/engine/items/startPosition.h"
+#include <QBuffer>
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -28,6 +29,8 @@ const int defaultTraceWidth = 6;
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
 	: RotateItem()
 	, mImage(robotImageFileName)
+	, mCustomImage(mImage)
+	, mIsCustomImage(false)
 	, mBeepItem(new BeepItem)
 	, mRectangleImpl()
 	, mRobotModel(robotModel)
@@ -83,7 +86,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	mRectangleImpl.drawImageItem(painter, x1(), y1(), x2(), y2(), mImage);
+	mRectangleImpl.drawImageItem(painter, x1(), y1(), x2(), y2(), mIsCustomImage ? mCustomImage : mImage);
 }
 
 void RobotItem::drawExtractionForItem(QPainter* painter)
@@ -143,6 +146,37 @@ QDomElement RobotItem::serialize(QDomElement &parent) const
 	result.setTagName("robot");
 	result.setAttribute("position", QString::number(x()) + ":" + QString::number(y()));
 	result.setAttribute("direction", QString::number(rotation()));
+
+	return result;
+}
+
+void RobotItem::deserializeImage(const QDomElement &element) {
+	const QDomElement image = element.firstChildElement("robotImage");
+	if (image.isNull()) {
+		return;
+	}
+	QByteArray content = image.text().toLatin1();
+	QByteArray bytes = QByteArray::fromBase64(content);
+	QBuffer buffer(&bytes);
+	QImage tempImage;
+	if (tempImage.load(&buffer, "PNG")) {
+		mCustomImage = tempImage;
+		useCustomImage(true);
+		update();
+	}
+}
+
+QDomElement RobotItem::serializeImage(QDomElement &parent) const {
+	QDomElement result = parent.ownerDocument().createElement("robotImage");
+	parent.appendChild(result);
+
+	QByteArray bytes;
+	QBuffer buffer(&bytes);
+	mCustomImage.save(&buffer, "PNG");
+	buffer.close();
+
+	result.appendChild(result.ownerDocument().createTextNode(bytes.toBase64()));
+
 	return result;
 }
 
@@ -225,6 +259,21 @@ void RobotItem::updateSensorRotation(const kitBase::robotModel::PortInfo &port)
 void RobotItem::setNeededBeep(bool isNeededBeep)
 {
 	mBeepItem->setVisible(isNeededBeep);
+}
+
+void RobotItem::setCustomImage(const QString &robotImageFileName) {
+	mIsCustomImage = true;
+	mCustomImage = QImage(robotImageFileName);
+	update();
+}
+
+void RobotItem::useCustomImage(bool isUsed) {
+	mIsCustomImage = isUsed;
+	update();
+}
+
+bool RobotItem::usedCustomImage() {
+	return mIsCustomImage;
 }
 
 QVariant RobotItem::itemChange(GraphicsItemChange change, const QVariant &value)
