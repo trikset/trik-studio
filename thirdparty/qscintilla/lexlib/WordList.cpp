@@ -112,7 +112,7 @@ static inline int cmpWords(const void *a, const void *b) {
 }
 
 static void SortWordList(char **words, unsigned int len) {
-	std::sort(words, words + len, cmpWords);
+	qsort(words, len, sizeof(*words), cmpWords);
 }
 
 #endif
