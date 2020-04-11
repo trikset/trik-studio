@@ -219,8 +219,8 @@ private:
 	SensorsConfiguration mSensorsConfiguration;
 
 	QPointF mWaitPos;
-	bool mIsCollide;
-	bool mIsRiding;
+	bool mIsCollide { false };
+	bool mIsRiding { false };
 	QPointF mPos;
 	qreal mAngle;
 	qreal mGyroAngle;
