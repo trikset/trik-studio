@@ -34,41 +34,41 @@ public:
 						   , bool enablePython = false);
 	~TrikTextualInterpreter() override;
 
-	void interpretCommand(const QString &script);
-	void interpretScript(const QString &script, const QString &languageExtension);
-	void interpretScriptExercise(const QString &script, const QString &inputs, const QString &languageExtension);
-	void abort();
+//	void interpretCommand(const QString &script);
+//	void interpretScript(const QString &script, const QString &languageExtension);
+//	void interpretScriptExercise(const QString &script, const QString &inputs, const QString &languageExtension);
+//	void abort();
 
-	void init();
-	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter);
-	bool isRunning() const;
-	void setRunning(bool running);
-	void setCurrentDir(const QString &dir, const QString &languageExtension);
-	QStringList supportedRobotModelNames() const;
-	QStringList knownMethodNames() const;
+//	void init();
+//	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter);
+//	bool isRunning() const;
+//	void setRunning(bool running);
+//	void setCurrentDir(const QString &dir, const QString &languageExtension);
+//	QStringList supportedRobotModelNames() const;
+//	QStringList knownMethodNames() const;
 
-signals:
-	void completed();
+//signals:
+//	void completed();
 
-public slots:
-	/// in some cases we need to reinit devices such as camera, etc..
-	void reinitRobotsParts();
+//public slots:
+//	/// in some cases we need to reinit devices such as camera, etc..
+//	void reinitRobotsParts();
 
-private slots:
-	void scriptFinished(const QString &error, int scriptId);
-	void reportError(const QString &msg);
-	void reportWarning(const QString &msg);
-	void reportLog(const QString &msg);
+//private slots:
+//	void scriptFinished(const QString &error, int scriptId);
+//	void reportError(const QString &msg);
+//	void reportWarning(const QString &msg);
+//	void reportLog(const QString &msg);
 
-private:
-	QString initInputs(const QString &inputs) const;
+//private:
+//	QString initInputs(const QString &inputs) const;
 
-	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
-	bool mRunning;
+//	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
+//	bool mRunning;
 
-	TrikBrick mBrick;
-	trikScriptRunner::TrikScriptRunner mScriptRunner;
-	qReal::ErrorReporterInterface *mErrorReporter;
+//	TrikBrick mBrick;
+//	trikScriptRunner::TrikScriptRunner mScriptRunner;
+//	qReal::ErrorReporterInterface *mErrorReporter;
 };
 
 }

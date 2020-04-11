@@ -20,16 +20,16 @@ includes(thirdparty/qslog \
 		plugins/robots/common/trikKit \
 		plugins/robots/utils \
 		qrtext \
-		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikKernel \
-		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikControl \
-		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikControl/include/trikControl \
-		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikNetwork \
-		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner \
+#		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikKernel \
+#		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikControl \
+#		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikControl/include/trikControl \
+#		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikNetwork \
+#		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner \
 		)
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface qscintilla2 \
 		robots-utils robots-kit-base robots-2d-model robots-trik-kit qslog \
-		trikControl trikScriptRunner trikKernel qrgui-text-editor \
+                qrgui-text-editor \
 		)
 
 copyToDestdir(./icons/trik-robot.svg, now, images/)
@@ -76,19 +76,19 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/trikAdditionalPreferences.h \
 	$$PWD/include/trikKitInterpreterCommon/trikDisplayWidget.h \
 	$$PWD/include/trikKitInterpreterCommon/trikKitInterpreterPluginBase.h \
-	$$PWD/include/trikKitInterpreterCommon/trikbrick.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/displaywidgetemu.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikdisplayemu.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triksensoremu.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikmotoremu.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikkeysinterfacestub.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triklinesensoradapter.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikencoderadapter.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikledadapter.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikaccelerometeradapter.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikGyroscopeAdapter.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikProxyMarker.h \
-	$$PWD/include/trikKitInterpreterCommon/trikTextualInterpreter.h
+#	$$PWD/include/trikKitInterpreterCommon/trikbrick.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/displaywidgetemu.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikdisplayemu.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triksensoremu.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikmotoremu.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikkeysinterfacestub.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triklinesensoradapter.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikencoderadapter.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikledadapter.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikaccelerometeradapter.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikGyroscopeAdapter.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikProxyMarker.h \
+#	$$PWD/include/trikKitInterpreterCommon/trikTextualInterpreter.h
 
 SOURCES += \
 	$$PWD/src/robotModel/real/parts/display.cpp \
@@ -128,18 +128,18 @@ SOURCES += \
 	$$PWD/src/trikAdditionalPreferences.cpp \
 	$$PWD/src/trikDisplayWidget.cpp \
 	$$PWD/src/trikKitInterpreterPluginBase.cpp \
-	$$PWD/src/trikbrick.cpp \
-	$$PWD/src/trikEmulation/triksensoremu.cpp \
-	$$PWD/src/trikEmulation/trikdisplayemu.cpp \
-	$$PWD/src/trikEmulation/trikmotoremu.cpp \
-	$$PWD/src/trikEmulation/triklinesensoradapter.cpp \
-	$$PWD/src/trikEmulation/trikkeysinterfacestub.cpp \
-	$$PWD/src/trikEmulation/trikencoderadapter.cpp \
-	$$PWD/src/trikEmulation/trikledadapter.cpp \
-	$$PWD/src/trikEmulation/trikaccelerometeradapter.cpp \
-	$$PWD/src/trikEmulation/trikGyroscopeAdapter.cpp \
-	$$PWD/src/trikEmulation/trikProxyMarker.cpp \
-	$$PWD/src/trikTextualInterpreter.cpp
+#	$$PWD/src/trikbrick.cpp \
+#	$$PWD/src/trikEmulation/triksensoremu.cpp \
+#	$$PWD/src/trikEmulation/trikdisplayemu.cpp \
+#	$$PWD/src/trikEmulation/trikmotoremu.cpp \
+#	$$PWD/src/trikEmulation/triklinesensoradapter.cpp \
+#	$$PWD/src/trikEmulation/trikkeysinterfacestub.cpp \
+#	$$PWD/src/trikEmulation/trikencoderadapter.cpp \
+#	$$PWD/src/trikEmulation/trikledadapter.cpp \
+#	$$PWD/src/trikEmulation/trikaccelerometeradapter.cpp \
+#	$$PWD/src/trikEmulation/trikGyroscopeAdapter.cpp \
+#	$$PWD/src/trikEmulation/trikProxyMarker.cpp \
+#	$$PWD/src/trikTextualInterpreter.cpp
 
 FORMS += \
 	$$PWD/src/trikAdditionalPreferences.ui \

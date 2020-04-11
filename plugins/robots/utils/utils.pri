@@ -14,7 +14,7 @@
 
 QT += widgets network
 
-links(qrkernel qrutils qextserialport qslog qrtext)
+links(qrkernel qrutils qslog qrtext)
 includes(qrtext)
 
 DEFINES += ROBOTS_UTILS_LIBRARY
@@ -47,7 +47,7 @@ HEADERS += \
 	$$PWD/include/utils/robotCommunication/tcpRobotCommunicator.h \
 	$$PWD/include/utils/robotCommunication/tcpRobotCommunicatorInterface.h \
 	$$PWD/include/utils/robotCommunication/uploadProgramProtocol.h \
-	$$PWD/include/utils/widgets/comPortPicker.h \
+#	$$PWD/include/utils/widgets/comPortPicker.h \
 
 HEADERS += \
 	$$PWD/src/robotCommunication/protocol.h \
@@ -72,7 +72,7 @@ SOURCES += \
 	$$PWD/src/canvas/pointObject.cpp \
 	$$PWD/src/canvas/rectangleObject.cpp \
 	$$PWD/src/canvas/textObject.cpp \
-	$$PWD/src/widgets/comPortPicker.cpp \
+#	$$PWD/src/widgets/comPortPicker.cpp \
 	$$PWD/src/robotCommunication/networkCommunicationErrorReporter.cpp \
 	$$PWD/src/robotCommunication/protocol.cpp \
 	$$PWD/src/robotCommunication/robotCommunicator.cpp \

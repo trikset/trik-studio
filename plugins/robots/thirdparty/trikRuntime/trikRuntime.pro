@@ -17,7 +17,7 @@ TEMPLATE = subdirs
 include(../../../../global.pri)
 
 SUBDIRS += \
-	PythonQt \
+        PythonQt \
 	trikKernel \
 	trikNetwork \
 	trikControl \

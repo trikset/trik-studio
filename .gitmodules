@@ -1,6 +1,3 @@
-[submodule "plugins/robots/thirdparty/trikRuntime"]
-	path = plugins/robots/thirdparty/trikRuntime/trikRuntime
-	url = https://github.com/trikset/trikRuntime.git
 [submodule "qrtest/thirdparty/googletest/googletest"]
 	path = qrtest/thirdparty/googletest/googletest
 	url = https://github.com/google/googletest
@@ -10,16 +7,6 @@
 [submodule "thirdparty/gamepad/gamepad"]
 	path = thirdparty/gamepad/gamepad
 	url = https://github.com/trikset/trik-desktop-gamepad
-[submodule "installer/nxt-tools"]
-	path = installer/nxt-tools
-	url = https://github.com/qreal/nxt-tools
-[submodule "plugins/robots/thirdparty/hidapi"]
-	path = plugins/robots/thirdparty/hidapi
-	url = https://github.com/libusb/hidapi
 [submodule "thirdparty/quazip/quazip"]
 	path = thirdparty/quazip/quazip
 	url = https://github.com/stachenov/quazip.git
-[submodule "plugins/robots/thirdparty/Box2D/Box2D"]
-	path = plugins/robots/thirdparty/Box2D/Box2D
-	url = https://github.com/iakov/Box2D
-	branch = "trik-studio"
