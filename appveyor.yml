@@ -124,12 +124,10 @@ install:
   - set PYTHON_LIB=%PYTHON_PATH%\libs
   - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
   - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
-  - set PATH=%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
+  - set PATH=C:\Tools\curl\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
+  - set PATH
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
-# need to reconfigure because it is anouther one git
-  - git config --global core.autocrlf true
-  - git config --global core.symlinks true
   - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
@@ -155,6 +153,7 @@ install:
 build_script:
   - cd %BUILD_DIR%
   - bash -c "env LC_ALL=C date -u"
+  - 'git status -vv && git submodule foreach --recursive git status'
   - qmake %APPVEYOR_BUILD_FOLDER%\%PROJECT_FILE%.pro -spec win32-g++ CONFIG+=%CONFIGURATION% CONFIG+=tests CONFIG+=silent # QMAKE_CXX="ccache g++"
   - bash -c "env LC_ALL=C date -u"
   - mingw32-make -j2 qmake_all
@@ -188,7 +187,7 @@ after_test:
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - bash -c "env LC_ALL=C date -u"
-  - build-trik-studio.sh %QTDIR%\bin %QTIFW%\bin %BUILD_DIR%
+  - 'bash -c "./build-trik-studio.sh %QTDIR:\=/%/bin %QTIFW:\=/%/bin %BUILD_DIR:\=/%"'
   - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
   - if "%PYTHON_VERSION_MINOR%" NEQ "7" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
@@ -241,6 +240,7 @@ deploy:
 on_finish:
   - ccache -s
   - bash -c "env LC_ALL=C date -u"
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 
 notifications:
