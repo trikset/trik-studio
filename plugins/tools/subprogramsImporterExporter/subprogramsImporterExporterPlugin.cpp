@@ -28,9 +28,8 @@
 
 
 const QString PROGRAM_DIRECTORY = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-const QString SUBPROGRAMS_COLLECTION_DIRECTORY = "subprogramsCollection";
-const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
-		{"trikV62Kit", "TRIK"}, {"ev3Kit", "Lego EV3"}, {"nxtKit", "Lego NXT"}};
+const QString SUBPROGRAMS_COLLECTION_DIRECTORY = "subprogramsCollection-tsj";
+const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = { {"trikV62Kit", "TRIK Studio Junior"}};
 
 using namespace subprogramsImporterExporter;
 
