@@ -955,18 +955,22 @@ WARNING: The settings will be restored after application restart</source>
     </message>
     <message>
         <location line="+17"/>
-        <source>QReal Save File (*.qrs)</source>
-        <translation>Fichier de sauvegarde QReal (*.qrs)</translation>
+        <location line="+23"/>
+        <source>TRIK Studio Junior Save File(*.tsj)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <source>QReal Save File (*.qrs)</source>
+        <translation type="vanished">Fichier de sauvegarde QReal (*.qrs)</translation>
+    </message>
+    <message>
+        <location line="-20"/>
         <source>All files (*.*)</source>
         <translation>Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>QReal Save File(*.qrs)</source>
-        <translation>Fichier de sauvegarde QReal (*.qrs)</translation>
+        <translation type="vanished">Fichier de sauvegarde QReal (*.qrs)</translation>
     </message>
 </context>
 <context>
