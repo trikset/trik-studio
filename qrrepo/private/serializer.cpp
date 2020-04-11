@@ -101,12 +101,12 @@ bool Serializer::saveToDisk(QList<Object *> const &objects, QHash<QString, QVari
 	const QDir compressDir(mWorkingDir);
 	const QDir dir = fileInfo.absolutePath();
 
-	QFile previousSave(dir.absolutePath() + "/" + fileName +".qrs");
+	QFile previousSave(dir.absolutePath() + "/" + fileName +".tsj");
 	if (previousSave.exists()) {
 		previousSave.remove();
 	}
 
-	const QString filePath = fileInfo.absolutePath() + "/" + fileName + ".qrs";
+	const QString filePath = fileInfo.absolutePath() + "/" + fileName + ".tsj";
 	try {
 		FolderCompressor::compressFolder(compressDir.absolutePath(), filePath);
 	} catch (...) {

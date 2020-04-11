@@ -64,14 +64,14 @@ bool ExerciseExportManager::save()
 			, nullptr
 			, QObject::tr("Select file to export save to")
 			, "."
-			, QObject::tr("QReal Save File(*.qrs)"));
+			, QObject::tr("TRIK Studio Junior Save File(*.tsj)"));
 
 	if (fileName.isEmpty()) {
 		return false;
 	}
 
-	if (!fileName.isEmpty() && !fileName.endsWith(".qrs", Qt::CaseInsensitive)) {
-		fileName += ".qrs";
+	if (!fileName.isEmpty() && !fileName.endsWith(".tsj", Qt::CaseInsensitive)) {
+		fileName += ".tsj";
 	}
 
 	return mRepoControlApi.saveTo(fileName) && mProjectManager.open(fileName);

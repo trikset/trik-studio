@@ -8,7 +8,7 @@ Component.prototype.createOperations = function()
 
     if (installer.value("os") === "win") {
         component.addOperation("RegisterFileType",
-                               "qrs",
+                               "tsj",
                                "@TargetDir@\\" + installer.executableName + " \"%1\"",
                                "@ProductName@ Project",
                                "application/octet-stream");
