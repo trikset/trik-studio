@@ -27,6 +27,7 @@ namespace view {
 class RobotItem : public graphicsUtils::RotateItem, public items::SolidItem
 {
 	Q_OBJECT
+	Q_PROPERTY(bool customImage READ usedCustomImage WRITE useCustomImage)
 
 public:
 	RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel);
@@ -52,6 +53,12 @@ public:
 	void updateSensorRotation(const kitBase::robotModel::PortInfo &port);
 
 	void setNeededBeep(bool isNeededBeep);
+
+	QDomElement serializeImage(QDomElement &parent) const;
+	void deserializeImage(const QDomElement &element);
+	void setCustomImage(const QString &robotImageFileName);
+	void useCustomImage(bool isUsed);
+	bool usedCustomImage();
 
 	void recoverDragStartPosition();
 	model::RobotModel &robotModel();
@@ -102,7 +109,9 @@ private:
 	void onLanded();
 
 	/** @brief Image of a robot drawn on scene */
-	QImage mImage;
+	const QImage mImage;
+	QImage mCustomImage;
+	bool mIsCustomImage;
 	// Takes ownership
 	BeepItem *mBeepItem;
 

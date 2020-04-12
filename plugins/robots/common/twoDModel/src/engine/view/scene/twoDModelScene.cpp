@@ -932,7 +932,7 @@ void TwoDModelScene::alignWalls()
 	}
 }
 
-RobotItem *TwoDModelScene::robot(model::RobotModel &robotModel)
+RobotItem *TwoDModelScene::robot(model::RobotModel &robotModel) const
 {
 	return mRobots.value(&robotModel);
 }

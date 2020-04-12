@@ -114,7 +114,7 @@
 			setName("TrikBackwardOneCell");
 			setFriendlyName(QObject::tr("Backward"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Moves backward with a given number of cells."));
+			setDescription(QObject::tr("Moves backward by the given number of cells."));
 			qReal::LabelProperties label_1(1, 0.3, 1.2, "CellsNumber", false, 0);
 			label_1.setBackground(Qt::white);
 			label_1.setScalingX(false);
@@ -693,7 +693,7 @@
 			setName("TrikForwardOneCell");
 			setFriendlyName(QObject::tr("Forward"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Moves forward with a given number of cells."));
+			setDescription(QObject::tr("Moves forward by the given number of cells."));
 			qReal::LabelProperties label_1(1, 0.3, 1.2, "CellsNumber", false, 0);
 			label_1.setBackground(Qt::white);
 			label_1.setScalingX(false);

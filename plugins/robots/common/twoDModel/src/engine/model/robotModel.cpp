@@ -35,6 +35,8 @@
 #include "src/engine/items/startPosition.h"
 #include "src/engine/items/wallItem.h"
 #include "utils/abstractTimer.h"
+#include "src/engine/view/scene/twoDModelScene.h"
+#include "src/engine/view/scene/robotItem.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
@@ -473,6 +475,11 @@ QDomElement RobotModel::serialize(QDomElement &parent) const
 	mStartPositionMarker->serialize(robot);
 	serializeWheels(robot);
 
+	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
+	auto robotItem = scene->robot(*const_cast<RobotModel*>(this));
+	if (robotItem->usedCustomImage()) {
+		robotItem->serializeImage(robot);
+	}
 	return robot;
 }
 
@@ -488,6 +495,11 @@ void RobotModel::deserialize(const QDomElement &robotElement)
 	mStartPositionMarker->deserializeCompatibly(robotElement);
 	deserializeWheels(robotElement);
 	emit deserialized(QPointF(x, y), robotElement.attribute("direction", "0").toDouble());
+
+	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
+	auto robotItem = scene->robot(*const_cast<RobotModel*>(this));
+	robotItem->deserializeImage(robotElement);
+
 	nextFragment();
 }
 

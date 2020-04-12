@@ -17,8 +17,12 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
+#include <QtWidgets/QCheckBox>
 
 #include <qrkernel/settingsManager.h>
+#include <qrkernel/platformInfo.h>
+#include <qrutils/widgets/qRealFileDialog.h>
+#include <qrutils/graphicsUtils/abstractScene.h>
 
 #include "src/engine/view/scene/robotItem.h"
 
@@ -46,6 +50,9 @@ bool RobotItemPopup::attachTo(QGraphicsItem *item)
 
 	const bool followingEnabled = qReal::SettingsManager::value("2dFollowingRobot").toBool();
 	mFollowButton->setChecked(followingEnabled);
+
+	mUseImageButton->setChecked(mCurrentItem->usedCustomImage());
+	mImagePicker->setVisible(mCurrentItem->usedCustomImage());
 	return true;
 }
 
@@ -60,7 +67,9 @@ void RobotItemPopup::initWidget()
 	QGridLayout * const layout = new QGridLayout(this);
 	layout->addWidget(initFollowButton(), 0, 0);
 	layout->addWidget(initReturnButton(), 0, 1);
-	layout->addWidget(initSpinBox(), 1, 0, 1, 2);
+	layout->addWidget(initImagePicker(), 1, 1);
+	layout->addWidget(initSaveImageButton(), 1, 0, Qt::AlignCenter);
+	layout->addWidget(initSpinBox(), 2, 0, 1, 2);
 
 	updateDueToLayout();
 }
@@ -95,17 +104,49 @@ QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &
 
 QWidget *RobotItemPopup::initSpinBox()
 {
-	QSpinBox * const spinBox = new QSpinBox(this);
-	spinBox->setRange(1, 30);
-	spinBox->setToolTip(tr("Marker thickness"));
+	mSpinBox = new QSpinBox(this);
+	mSpinBox->setRange(1, 30);
+	mSpinBox->setToolTip(tr("Marker thickness"));
 	QPalette spinBoxPalette;
 	spinBoxPalette.setColor(QPalette::Window, Qt::transparent);
 	spinBoxPalette.setColor(QPalette::Base, Qt::transparent);
-	spinBox->setPalette(spinBoxPalette);
-	connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [=](int value) {
+	mSpinBox->setPalette(spinBoxPalette);
+	connect(mSpinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [=](int value) {
 		mCurrentItem->setPenWidth(value);
 	});
 
-	mSpinBox = spinBox;
-	return spinBox;
+	return mSpinBox;
+}
+
+QWidget *RobotItemPopup::initImagePicker()
+{
+	mImagePicker = initButton(":/icons/2d_training.svg", "Change the robot image");
+
+	connect(mImagePicker, &QPushButton::clicked, this, [=]() {
+		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectRobotImage", mScene.views().first()
+				, tr("Select image")
+				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/.."
+				, tr("Graphics (*.*)"));
+		if (loadFileName.isEmpty()) {
+			return;
+		}
+
+		mCurrentItem->setCustomImage(loadFileName);
+		emit imageSettingsChanged();
+	});
+
+	return mImagePicker;
+}
+
+QWidget *RobotItemPopup::initSaveImageButton()
+{
+	mUseImageButton = new QCheckBox(this);
+	mUseImageButton->setToolTip(tr("Use custom robot image"));
+	mUseImageButton->setFixedSize(25, 25);
+	connect(mUseImageButton, &QAbstractButton::toggled, this, [=](bool useImage){
+		mImagePicker->setVisible(useImage);
+		emit propertyChanged({mCurrentItem->id()}, "customImage", useImage);
+	});
+
+	return mUseImageButton;
 }

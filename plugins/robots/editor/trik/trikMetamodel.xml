@@ -92,7 +92,7 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Forward" name="TrikForwardOneCell" description="Moves forward with a given number of cells.">
+                        <node displayedName="Forward" name="TrikForwardOneCell" description="Moves forward by the given number of cells.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/forwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
@@ -114,7 +114,7 @@
 					</properties>
 				</logic>
 			</node>
-			<node displayedName="Backward" name="TrikBackwardOneCell" description="Moves backward with a given number of cells.">
+                        <node displayedName="Backward" name="TrikBackwardOneCell" description="Moves backward by the given number of cells.">
 				<graphics>
 					<picture sizex="50" sizey="50">
 						<image y1="0" name="images/backwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
