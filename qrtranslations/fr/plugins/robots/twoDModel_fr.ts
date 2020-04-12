@@ -597,7 +597,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+83"/>
         <source>Camera folowing robot: %1</source>
         <translation>Suivre le robot : %1</translation>
     </message>
@@ -620,6 +620,16 @@
         <location line="+18"/>
         <source>Marker thickness</source>
         <translation>Épaisseur du marqueur</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Select image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Graphics (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -666,7 +676,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+312"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
