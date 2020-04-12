@@ -29,6 +29,7 @@ cp    $BIN_DIR/qrgui-tool-plugin-interface.dll                      $PWD/../data
 cp    $BIN_DIR/qrgui-facade.dll                                     $PWD/../data
 cp    "$BIN_DIR/patcher.exe"                                        "$PWD/../data"
 cp    $BIN_DIR/trik-studio.exe                                      $PWD/../data/$PRODUCT.exe
+cp    $INSTALLER_ROOT/platform/$PRODUCT.cmd                         $PWD/../data/
 cp    $BIN_DIR/plugins/tools/updatesChecker.dll                     $PWD/../data/plugins/tools/
 cp    $BIN_DIR/plugins/tools/subprogramsImporterExporter.dll        $PWD/../data/plugins/tools/
 
