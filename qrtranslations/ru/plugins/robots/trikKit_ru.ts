@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikBackwardOneCellBlock.cpp" line="+40"/>
         <source>Movement is impossible!</source>
-        <translation type="unfinished"></translation>
+        <translation>Движение невозможно!</translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+40"/>
         <source>Movement is impossible!</source>
-        <translation type="unfinished"></translation>
+        <translation>Движение невозможно!</translation>
     </message>
 </context>
 <context>
