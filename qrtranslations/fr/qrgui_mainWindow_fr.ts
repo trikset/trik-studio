@@ -1002,7 +1002,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished">Ouvrir un projet</translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+58"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>

@@ -152,9 +152,11 @@ QWidget *StartWidget::createProjectsManagementWidget()
 	}
 
 	mProjectsManagementLayout->addWidget(mOpenProjectButton);
-	mProjectsManagementLayout->addWidget(mNewProjectButton);
+	if (mNewProjectButton) {
+			mProjectsManagementLayout->addWidget(mNewProjectButton);
+	}
 
-	QWidget * const result = new QWidget;
+	QWidget * const result = new QWidget();
 	result->setLayout(mProjectsManagementLayout);
 	return result;
 }

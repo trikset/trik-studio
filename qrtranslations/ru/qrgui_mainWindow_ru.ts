@@ -1112,7 +1112,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Открыть проект</translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+58"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>
