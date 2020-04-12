@@ -141,7 +141,7 @@ QWidget *RobotItemPopup::initImagePicker()
 QWidget *RobotItemPopup::initSaveImageButton()
 {
 	mUseImageButton = new QCheckBox(this);
-	mUseImageButton->setToolTip("Pack robot image into a save file");
+	mUseImageButton->setToolTip(tr("Use custom robot image"));
 	mUseImageButton->setFixedSize(25, 25);
 	connect(mUseImageButton, &QAbstractButton::toggled, this, [=](bool useImage){
 		mImagePicker->setVisible(useImage);

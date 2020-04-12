@@ -631,6 +631,11 @@
         <source>Graphics (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+15"/>
+        <source>Use custom robot image</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::view::SpeedPopup</name>
