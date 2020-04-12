@@ -379,7 +379,7 @@
 <context>
     <name>qReal::ui::ConsoleDock</name>
     <message>
-        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+43"/>
+        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+50"/>
         <source>Reset shell</source>
         <translation type="unfinished"></translation>
     </message>
@@ -392,7 +392,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+35"/>
         <source>Select image</source>
         <translation type="unfinished"></translation>
     </message>

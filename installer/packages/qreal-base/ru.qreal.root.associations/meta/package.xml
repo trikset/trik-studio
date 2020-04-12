@@ -2,8 +2,8 @@
 <Package>
     <DisplayName>File associations</DisplayName>
     <DisplayName xml:lang="ru_ru">Ассоциировать файлы</DisplayName>
-    <Description>Windows will open *.qrs-files with a program by double-click on them</Description>
-    <Description xml:lang="ru_ru">Windows будет открывать файлы *.qrs в в программе по двойному щелчку на них</Description>
+    <Description>Windows will open *.tsj-files with a program by double-click on them</Description>
+    <Description xml:lang="ru_ru">Windows будет открывать файлы *.tsj в в программе по двойному щелчку на них</Description>
     <Version></Version>
     <ReleaseDate>2014-11-19</ReleaseDate>
     <Script>installscript.qs</Script>

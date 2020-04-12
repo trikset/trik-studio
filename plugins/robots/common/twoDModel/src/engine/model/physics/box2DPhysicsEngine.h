@@ -15,7 +15,7 @@
 
 #include "physicsEngineBase.h"
 
-#include <Box2D/Common/b2Math.h>
+#include <box2d/box2d.h>
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/worldModel.h"
@@ -62,15 +62,15 @@ public:
 	b2Vec2 pxToCm(const QPointF &posInPx) const;
 	qreal cmToPx(float cm) const;
 	QPointF cmToPx(const b2Vec2 posInCm) const;
-	float32 pxToM(qreal px) const;
-	qreal mToPx(float32 m) const;
+	float pxToM(qreal px) const;
+	qreal mToPx(float m) const;
 
 	b2Vec2 positionToBox2D(const QPointF &sceneCoords) const;
-	b2Vec2 positionToBox2D(float32 x, float32 y) const;
+	b2Vec2 positionToBox2D(float x, float y) const;
 	QPointF positionToScene(b2Vec2 boxCoords) const;
-	QPointF positionToScene(float32 x, float32 y) const;
-	float32 angleToBox2D(qreal sceneAngle) const;
-	qreal angleToScene(float32 boxAngle) const;
+	QPointF positionToScene(float x, float y) const;
+	float angleToBox2D(qreal sceneAngle) const;
+	qreal angleToScene(float boxAngle) const;
 	qreal computeDensity(const QPolygonF &shape, qreal mass);
 	qreal computeDensity(qreal radius, qreal mass);
 
@@ -106,7 +106,7 @@ private:
 	QMap<RobotModel *, QSet<twoDModel::view::SensorItem *>> mRobotSensors; // Doesn't take ownership
 
 	b2Vec2 mPrevPosition;
-	float32 mPrevAngle;
+	float mPrevAngle;
 };
 
 }

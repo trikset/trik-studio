@@ -134,7 +134,7 @@ void BallItem::returnToStartPosition()
 
 QPolygonF BallItem::collidingPolygon() const
 {
-	return QPolygonF(QRectF(scenePos(), ballSize - QSize(1, 1)));
+	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
 qreal BallItem::angularDamping() const

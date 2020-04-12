@@ -70,8 +70,8 @@ void initLogging()
 {
 	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
 	if (logsDir.mkpath(logsDir.absolutePath())) {
-		Logger::addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2, QsLogging::DebugLevel);
-		Logger::addLogTarget(logsDir.filePath("actions.log"), maxLogSize, 2, QsLogging::TraceLevel);
+		Logger::addLogTarget(logsDir.filePath("tsj.log"), maxLogSize, 2, QsLogging::DebugLevel);
+		Logger::addLogTarget(logsDir.filePath("tsj-actions.log"), maxLogSize, 2, QsLogging::TraceLevel);
 	}
 }
 
@@ -114,7 +114,7 @@ int main(int argc, char *argv[])
 		}
 
 		for (const QString &argument : app.arguments()) {
-			if (argument.endsWith(".qrs") || argument.endsWith(".qrs'") || argument.endsWith(".qrs\"")) {
+			if (argument.endsWith(".tsj") || argument.endsWith(".tsj'") || argument.endsWith(".tsj\"")) {
 				fileToOpen = argument;
 				break;
 			}

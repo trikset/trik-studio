@@ -370,7 +370,11 @@ void RobotsPluginFacade::initSensorWidgets()
 
 	mWatchListWindow = new utils::WatchListWindow(*mParser);
 
-	auto hideVariables = [=]() { mWatchListWindow->hideVariables(mParser->hiddenVariables()); };
+	auto hideVariables = [this]() {
+		mWatchListWindow->hideVariables(mParser->hiddenVariables());
+		auto const &userHiddenVariables = qReal::SettingsManager::value("HiddenVariables").toStringList();
+		mWatchListWindow->hideVariables(userHiddenVariables);
+	};
 	hideVariables();
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this, hideVariables);
 

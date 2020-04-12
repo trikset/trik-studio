@@ -96,16 +96,16 @@ NonZoneNode *SemanticTreeManager::topLevelParent(SemanticNode * const node)
 
 void SemanticTreeManager::addAfter(SemanticNode * const thisNode, SemanticNode * const nextNode)
 {
-	static_cast<NonZoneNode * const>(thisNode)->insertSiblingAfterThis(nextNode);
+	static_cast<NonZoneNode *>(thisNode)->insertSiblingAfterThis(nextNode);
 }
 
 bool SemanticTreeManager::isTopLevelNode(const NonZoneNode * const node)
 {
-	if (!static_cast<const NonZoneNode * const>(node)->parentZone()) {
+	if (!static_cast<const NonZoneNode *>(node)->parentZone()) {
 		return true;
 	}
 
-	auto parent = static_cast<const NonZoneNode * const>(node)->parentZone()->parentNode();
+	auto parent = static_cast<const NonZoneNode *>(node)->parentZone()->parentNode();
 	return parent && dynamic_cast<RootNode *>(parent) != nullptr;
 }
 

@@ -224,8 +224,12 @@
     </message>
     <message>
         <location line="+2"/>
+        <source>TRIK Studio Junior Save File(*.tsj)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>QReal Save File(*.qrs)</source>
-        <translation>Fichier TRIK Studio (*.qrs)</translation>
+        <translation type="vanished">Fichier TRIK Studio (*.qrs)</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="+63"/>
@@ -314,7 +318,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+95"/>
+        <location line="+99"/>
         <source>Toggle robot console panel</source>
         <translation type="unfinished"></translation>
     </message>

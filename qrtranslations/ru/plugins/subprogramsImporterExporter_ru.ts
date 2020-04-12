@@ -45,7 +45,7 @@
 <context>
     <name>subprogramsImporterExporter::SubprogramsImporterExporterPlugin</name>
     <message>
-        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="+38"/>
+        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="+37"/>
         <source>Subprograms</source>
         <translation>Подпрограммы</translation>
     </message>
@@ -80,13 +80,7 @@
         <translation>Выберите файл с подпрограммами (имя для нового)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+44"/>
-        <source>QReal Save File(*.qrs)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="-23"/>
+        <location line="+23"/>
         <source>There are no subprograms in your project.</source>
         <translation>В проекте нет подпрограмм.</translation>
     </message>
@@ -106,7 +100,13 @@
         <translation>Выберите файл с подпрограммами</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="-44"/>
+        <location line="+45"/>
+        <source>TRIK Studio Junior Save File(*.tsj)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+124"/>
         <source>Clear the collection</source>
         <translation type="unfinished"></translation>
     </message>

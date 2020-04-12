@@ -19,6 +19,8 @@ CONFIG += plugin
 
 include(../../../../global.pri)
 
+copyToDestdir(icons/nxt-robot.png, now, images/)
+
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 
 include(src/nxtKitInterpreter.pri)

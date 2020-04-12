@@ -4,7 +4,7 @@
 <context>
     <name>ErrorListWidget</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorListWidget.cpp" line="+48"/>
+        <location filename="../../qrgui/mainWindow/errorListWidget.cpp" line="+60"/>
         <source>Clear</source>
         <translation>Effacer</translation>
     </message>
@@ -955,18 +955,22 @@ WARNING: The settings will be restored after application restart</source>
     </message>
     <message>
         <location line="+17"/>
-        <source>QReal Save File (*.qrs)</source>
-        <translation>Fichier de sauvegarde QReal (*.qrs)</translation>
+        <location line="+23"/>
+        <source>TRIK Studio Junior Save File(*.tsj)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+3"/>
+        <source>QReal Save File (*.qrs)</source>
+        <translation type="vanished">Fichier de sauvegarde QReal (*.qrs)</translation>
+    </message>
+    <message>
+        <location line="-20"/>
         <source>All files (*.*)</source>
         <translation>Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>QReal Save File(*.qrs)</source>
-        <translation>Fichier de sauvegarde QReal (*.qrs)</translation>
+        <translation type="vanished">Fichier de sauvegarde QReal (*.qrs)</translation>
     </message>
 </context>
 <context>
@@ -1120,7 +1124,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::ErrorReporter</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+212"/>
+        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+211"/>
         <source>INFORMATION:</source>
         <translation>INFORMATION :</translation>
     </message>

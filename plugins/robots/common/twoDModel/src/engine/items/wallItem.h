@@ -61,7 +61,6 @@ public:
 
 	void resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid);
 
-	void resizeBeginWithGrid(int indexGrid);
 	void reshapeEndWithGrid(int indexGrid);
 	void reshapeBeginWithGrid(int indexGrid);
 	void setDraggedEnd(qreal x, qreal y);

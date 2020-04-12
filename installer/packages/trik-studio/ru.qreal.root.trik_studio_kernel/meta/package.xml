@@ -7,7 +7,6 @@
     <Version></Version>
     <ReleaseDate>2018-06-15</ReleaseDate>
     <Licenses>
-        <License name="Box2D Component License" file="Box2D-license.txt" />
     </Licenses>
     <SortingPriority>20</SortingPriority>
     <ForcedInstallation>true</ForcedInstallation>

@@ -2,19 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
-    <name>QObject</name>
-    <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+196"/>
-        <source>Bogus input values</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>Error: File %1 couldn&apos;t be opened!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TrikAdditionalPreferences</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="+14"/>
@@ -96,87 +83,6 @@
     </message>
 </context>
 <context>
-    <name>trik::TrikBrick</name>
-    <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+96"/>
-        <location line="+63"/>
-        <source>2d model shell part was not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-30"/>
-        <location line="+298"/>
-        <source>Trying to read from file %1 failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-243"/>
-        <source>No configured motor on port: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+31"/>
-        <source>No configured sensor on port: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>No configured accelerometer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>No configured gyroscope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>No configured LineSensor on port: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <location line="+5"/>
-        <source>Sensor not implemented in simulation mode. Used port: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>No configured encoder on port: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+21"/>
-        <source>No configured led</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Get photo with camera started</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Get photo with camera finished</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Cannot get a photo from camera (possibly because of wrong camera name)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>No cofigured random device</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>trik::TrikKitInterpreterPlugin</name>
     <message>
         <source>TRIK</source>
@@ -190,7 +96,7 @@
 <context>
     <name>trik::TrikKitInterpreterPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+39"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+40"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
@@ -200,12 +106,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+67"/>
-        <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+177"/>
+        <location line="+251"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>
@@ -218,14 +119,6 @@
         <location line="+188"/>
         <source>Enter robot`s IP-address here...</source>
         <translation type="unfinished">Tapez l&apos;adresse IP du robot ici...</translation>
-    </message>
-</context>
-<context>
-    <name>trik::TrikTextualInterpreter</name>
-    <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-96"/>
-        <source>Unsupported script file type</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
