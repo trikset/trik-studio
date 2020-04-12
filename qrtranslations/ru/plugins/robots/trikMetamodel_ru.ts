@@ -106,26 +106,26 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>Moves backward with a given number of cells.</source>
-        <translation type="unfinished"></translation>
+        <source>Moves backward by the given number of cells.</source>
+        <translation>Переместиться назад на заданное количество клеток.</translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+579"/>
         <source>Move:</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество:</translation>
     </message>
     <message>
         <location line="-578"/>
         <location line="+579"/>
         <source>cells</source>
-        <translation type="unfinished"></translation>
+        <translation>;</translation>
     </message>
     <message>
         <location line="-555"/>
         <location line="+579"/>
         <source>Number of cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество</translation>
     </message>
     <message>
         <location line="-533"/>
@@ -398,8 +398,8 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>Moves forward with a given number of cells.</source>
-        <translation type="unfinished"></translation>
+        <source>Moves forward by the given number of cells.</source>
+        <translation>Переместиться вперёд на заданное количество клеток.</translation>
     </message>
     <message>
         <location line="+43"/>
@@ -751,12 +751,12 @@
     <message>
         <location line="+2"/>
         <source>Rotates 90 degrees to the left.</source>
-        <translation>Повернуться на 90 градусов влево.</translation>
+        <translation>Повернуться налево.</translation>
     </message>
     <message>
         <location line="+35"/>
         <source>Rotates 90 degrees to the right.</source>
-        <translation>Повернуться на 90 градусов вправо.</translation>
+        <translation>Повернуться направо.</translation>
     </message>
     <message>
         <location line="-2"/>
