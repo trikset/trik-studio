@@ -328,6 +328,7 @@ void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const Q
 
 	QGraphicsLineItem * const traceItem = new QGraphicsLineItem(QLineF(begin, end));
 	traceItem->setPen(pen);
+	traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Marker);
 
 	if (mRobotTrace.isEmpty()) {
 		emit robotTraceAppearedOrDisappeared(true);
