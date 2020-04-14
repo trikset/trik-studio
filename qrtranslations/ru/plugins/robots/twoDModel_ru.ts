@@ -565,8 +565,8 @@
     <name>twoDModel::items::CurveItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
-        <source>Bezier Curve (B)</source>
-        <translation>Кривая Безье (B)</translation>
+        <source>Bezier Curve (C)</source>
+        <translation>Кривая Безье (C)</translation>
     </message>
 </context>
 <context>
@@ -605,16 +605,16 @@
     <name>twoDModel::items::SkittleItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
-        <source>Can (C)</source>
-        <translation>Банка (C)</translation>
+        <source>Skittle (S)</source>
+        <translation>Банка (S)</translation>
     </message>
 </context>
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+55"/>
-        <source>Stylus (S)</source>
-        <translation>Стилус (S)</translation>
+        <source>Pen (P)</source>
+        <translation>Стулис (P)</translation>
     </message>
 </context>
 <context>

@@ -293,7 +293,7 @@
     <name>twoDModel::items::CurveItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
-        <source>Bezier Curve (B)</source>
+        <source>Bezier Curve (C)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -333,16 +333,20 @@
     <name>twoDModel::items::SkittleItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
-        <source>Can (C)</source>
+        <source>Skittle (S)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+55"/>
         <source>Stylus (S)</source>
-        <translation>Stylo (S)</translation>
+        <translation type="vanished">Stylo (S)</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+55"/>
+        <source>Pen (P)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
