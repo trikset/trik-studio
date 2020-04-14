@@ -105,7 +105,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+2"/>
+        <source>Moves backward by the given number of cells.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+78"/>
         <location line="+11"/>
         <source>Detect by Videocamera</source>
         <translation type="unfinished"></translation>
@@ -374,7 +379,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+2"/>
+        <source>Moves forward by the given number of cells.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
         <location line="+11"/>
         <source>Initialize Videocamera</source>
         <translation type="unfinished"></translation>
@@ -723,12 +733,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1387"/>
-        <source>Moves backward with a given number of cells.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="-1380"/>
         <location line="+579"/>
         <source>Move:</source>
         <translation type="unfinished"></translation>
@@ -746,12 +751,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-32"/>
-        <source>Moves forward with a given number of cells.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+843"/>
+        <location line="+811"/>
         <source>Rotates 90 degrees to the right.</source>
         <translation type="unfinished"></translation>
     </message>

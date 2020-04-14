@@ -83,7 +83,7 @@
         <translation>Выберите файл для сохранения модели</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+46"/>
         <source>File not found</source>
         <translation>Файл не найден</translation>
     </message>
