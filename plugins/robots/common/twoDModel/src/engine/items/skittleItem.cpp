@@ -40,8 +40,8 @@ SkittleItem::~SkittleItem()
 
 QAction *SkittleItem::skittleTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_C));
+	QAction * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Skittle (S)"), nullptr);
+	result->setShortcut(QKeySequence(Qt::Key_S));
 	result->setCheckable(true);
 	return result;
 }

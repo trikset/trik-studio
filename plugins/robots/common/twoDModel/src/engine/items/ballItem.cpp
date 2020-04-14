@@ -40,7 +40,7 @@ BallItem::~BallItem()
 QAction *BallItem::ballTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_C));
+	result->setShortcut(QKeySequence(Qt::Key_B));
 	result->setCheckable(true);
 	return result;
 }
