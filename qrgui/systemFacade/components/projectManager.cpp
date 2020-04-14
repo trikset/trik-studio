@@ -355,7 +355,8 @@ QString ProjectManager::openFileName(const QString &promptPhrase) const
 void ProjectManager::showMessage(const QString &title, const QString &message) const
 {
 	Q_UNUSED(title);
-	qDebug() << qPrintable(message);
+	Q_UNUSED(message);
+	// q Debug() << qPrintable(message);
 }
 
 QString ProjectManager::saveFileName(const QString &promptPhrase) const

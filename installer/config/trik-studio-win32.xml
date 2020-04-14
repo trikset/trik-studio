@@ -8,10 +8,10 @@
 
     <ControlScript>../controlScript.qs</ControlScript>
 
-    <InstallerWindowIcon>../images/trik-studio.ico</InstallerWindowIcon>
-    <InstallerApplicationIcon>../images/trik-studio.ico</InstallerApplicationIcon>
-    <Logo>../images/trik-studio-logo.png</Logo>
-    <Watermark>../images/trik-studio-watermark.png</Watermark>
+    <InstallerWindowIcon>../images/trik-studio-jr.ico</InstallerWindowIcon>
+    <InstallerApplicationIcon>../images/trik-studio-jr.ico</InstallerApplicationIcon>
+    <Logo>../images/trik-studio-jr-logo.png</Logo>
+    <Watermark>../images/trik-studio-jr-watermark.png</Watermark>
 
     <StartMenuDir>TRIK Studio</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
@@ -19,8 +19,8 @@
     <AllowSpaceInPath>false</AllowSpaceInPath>
     <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
-    <TargetDir>@RootDir@TRIKStudio</TargetDir>
-    <AdminTargetDir>@RootDir@TRIKStudio</AdminTargetDir>
+    <TargetDir>@RootDir@TRIKStudio.Jr</TargetDir>
+    <AdminTargetDir>@RootDir@TRIKStudio.Jr</AdminTargetDir>
 
     <RunProgram>@TargetDir@/trik-studio</RunProgram>
 </Installer>

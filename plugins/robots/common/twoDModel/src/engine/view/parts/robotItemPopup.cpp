@@ -123,7 +123,8 @@ QWidget *RobotItemPopup::initImagePicker()
 	mImagePicker = initButton(":/icons/2d_training.svg", "Change the robot image");
 
 	connect(mImagePicker, &QPushButton::clicked, this, [=]() {
-		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectRobotImage", mScene.views().first()
+		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectRobotImage"
+				, mScene.views().first()
 				, tr("Select image")
 				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/.."
 				, tr("Graphics (*.*)"));

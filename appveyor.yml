@@ -186,7 +186,7 @@ after_test:
   - cd %APPVEYOR_BUILD_FOLDER%\installer
   - bash -c "env LC_ALL=C date -u"
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
-  - dir C:\TRIKStudio
+  - dir C:\TRIKStudio.Jr
   - bash -c "env LC_ALL=C date -u"
 
 before_deploy:

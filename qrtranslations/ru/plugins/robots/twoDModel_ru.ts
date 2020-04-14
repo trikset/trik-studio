@@ -957,7 +957,7 @@
         <translation>Толщина маркера</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+19"/>
         <source>Select image</source>
         <translation type="unfinished">Выберите картинку</translation>
     </message>

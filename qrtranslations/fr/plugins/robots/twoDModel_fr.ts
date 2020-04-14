@@ -622,7 +622,7 @@
         <translation>Épaisseur du marqueur</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+19"/>
         <source>Select image</source>
         <translation type="unfinished"></translation>
     </message>
