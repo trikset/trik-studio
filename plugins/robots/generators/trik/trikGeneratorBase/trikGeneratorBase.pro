@@ -79,7 +79,9 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/fileWriteGenerator.h \
 	$$PWD/src/simpleGenerators/removeFileGenerator.h \
 	$$PWD/src/simpleGenerators/stopCameraGenerator.h \
-	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.h
+	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.h \
+	$$PWD/src/simpleGenerators/markerDownGenerator.h \
+	$$PWD/src/simpleGenerators/markerUpGenerator.h \
 
 SOURCES += \
 	$$PWD/src/trikBlocksValidator.cpp \
@@ -123,4 +125,6 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/fileWriteGenerator.cpp \
 	$$PWD/src/simpleGenerators/removeFileGenerator.cpp \
 	$$PWD/src/simpleGenerators/stopCameraGenerator.cpp \
-	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.cpp
+	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.cpp \
+	$$PWD/src/simpleGenerators/markerDownGenerator.cpp \
+	$$PWD/src/simpleGenerators/markerUpGenerator.cpp \
