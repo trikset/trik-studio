@@ -1,0 +1,1 @@
+brick.marker().down("@@COLOR@@")
