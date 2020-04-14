@@ -1,7 +1,7 @@
 pull_request_rules:
   - name: automatic merge on CI success after reviews
     conditions:
-#      - base=master  # accept PRs only into master
+      - base=junior # accept PRs only into JUNIOR
       - "#approved-reviews-by>=1" # there is at least one review
 #      - "#review-requested=0" # all reviewers have finished
       - "#dismissed-reviews-by=0"  # no one declined
