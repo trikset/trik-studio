@@ -2,4 +2,10 @@ arguments = ""
 For Each arg In WScript.Arguments
   arguments = arguments & " " & arg
 Next
-CreateObject("WScript.Shell").Run "trik-studio.cmd " & arguments, 0, False
+
+strPath = Wscript.ScriptFullName
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+Set objFile = objFSO.GetFile(strPath)
+strFolder = objFSO.GetParentFolderName(objFile)
+
+CreateObject("WScript.Shell").Run strFolder & "\trik-studio.cmd " & arguments, 0, true
