@@ -36,8 +36,8 @@ SplashScreen::SplashScreen(bool isVisible)
 	setPixmap(QPixmap(pixmapFilePath).scaled(640, 480, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 	setWindowFlags(windowFlags());
 
-	mProgressBar->move(125, height() - 40);
-	mProgressBar->setFixedSize(width() - 250, 5);
+	mProgressBar->move(20, height() - 30);
+	mProgressBar->setFixedSize(width() - 40, 3);
 	mProgressBar->setRange(0, 100);
 	mProgressBar->setTextVisible(false);
 	mProgressBar->setStyleSheet(BrandManager::styles()->splashscreenStyle());
