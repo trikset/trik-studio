@@ -246,10 +246,10 @@ QRectF ImageItem::deserializeRect(const QString &string) const
 {
 	const QStringList splittedStr = string.split(":");
 	if (splittedStr.count() == 4) {
-		const qreal x = splittedStr[0].toDouble();
-		const qreal y = splittedStr[1].toDouble();
-		const qreal w = splittedStr[2].toDouble();
-		const qreal h = splittedStr[3].toDouble();
+		const auto x = splittedStr[0].toDouble();
+		const auto y = splittedStr[1].toDouble();
+		const auto w = splittedStr[2].toDouble();
+		const auto h = splittedStr[3].toDouble();
 		return QRectF(x, y, w, h);
 	}
 
