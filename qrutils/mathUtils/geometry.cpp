@@ -236,7 +236,7 @@ bool Geometry::belongs(const QPointF &point, const QLineF &segment, qreal eps)
 	}
 
 	if (Math::eq(segment.x1(), segment.x2(), eps)) {
-		return Math::eq(point.x(), segment.x1(), eps);
+		return Math::eq(point.x(), segment.x1(), eps) || Math::eq(point.x(), segment.x2(), eps);
 	}
 
 	return Math::eq(QLineF(segment.p1(), point).angle(), QLineF(point, segment.p2()).angle(), eps);

@@ -195,6 +195,7 @@ void WallItem::recalculateBorders()
 	}
 
 	QPainterPathStroker stroker;
+	stroker.setCapStyle(Qt::FlatCap);
 	stroker.setWidth(mWallWidth);
 	mPath = stroker.createStroke(wallPath);
 }
