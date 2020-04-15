@@ -80,12 +80,12 @@ void WallItem::setPrivateData()
 
 QPointF WallItem::begin() const
 {
-	return QPointF(x1(), y1());
+	return QPointF(x1(), y1()) + mPos;
 }
 
 QPointF WallItem::end() const
 {
-	return QPointF(x2(), y2());
+	return QPointF(x2(), y2()) + mPos;
 }
 
 QRectF WallItem::boundingRect() const
@@ -142,7 +142,7 @@ QVariant WallItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QV
 {
 	if (change == QGraphicsItem::ItemScenePositionHasChanged) {
 		emit positionChanged(value.toPointF());
-		return pos();
+		return value;
 	}
 
 	return AbstractItem::itemChange(change, value);
@@ -153,7 +153,8 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	QDomElement wallNode = AbstractItem::serialize(parent);
 	wallNode.setTagName("wall");
 	setPenBrushToElement(wallNode, "wall");
-	mLineImpl.serialize(wallNode, x1(), y1(), x2(), y2());
+	mLineImpl.serialize(wallNode, x1() + mPos.x(), y1() + mPos.y()
+			, x2() + mPos.x(), y2() + mPos.y());
 	return wallNode;
 }
 
@@ -164,7 +165,8 @@ void WallItem::deserialize(const QDomElement &element)
 	const QPointF begin = points.first;
 	const QPointF end = points.second;
 
-	setPos(QPointF());
+	mPos = QPointF();
+	setPos(mPos);
 	setX1(begin.x());
 	setY1(begin.y());
 	setX2(end.x());
@@ -269,8 +271,9 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	} else {
 		const int coefX = static_cast<int>(pos().x()) / indexGrid;
 		const int coefY = static_cast<int>(pos().y()) / indexGrid;
-		setPos(alignedCoordinate(pos().x(), coefX, indexGrid),
+		mPos = QPointF(alignedCoordinate(pos().x(), coefX, indexGrid),
 				alignedCoordinate(pos().y(), coefY, indexGrid));
+		setPos(mPos);
 		update();
 	}
 }
