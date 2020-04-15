@@ -710,7 +710,7 @@
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+328"/>
+        <location line="+329"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>
