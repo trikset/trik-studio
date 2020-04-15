@@ -228,7 +228,7 @@ private:
 	QPainterPath buildSolidItemsPath() const;
 
 	void serializeBackground(QDomElement &background, const QRect &rect, const Image * const img) const;
-	QRect deserializeRect(const QString &string) const;
+	QRectF deserializeRect(const QString &string) const;
 
 	QMap<QString, items::WallItem *> mWalls;
 	QMap<QString, items::SkittleItem *> mSkittles;

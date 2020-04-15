@@ -381,18 +381,18 @@ void WorldModel::serializeBackground(QDomElement &background, const QRect &rect,
 	background.setAttribute("imageId", imageId);
 }
 
-QRect WorldModel::deserializeRect(const QString &string) const
+QRectF WorldModel::deserializeRect(const QString &string) const
 {
 	const QStringList splittedStr = string.split(":");
 	if (splittedStr.count() == 4) {
-		const int x = splittedStr[0].toInt();
-		const int y = splittedStr[1].toInt();
-		const int w = splittedStr[2].toInt();
-		const int h = splittedStr[3].toInt();
-		return QRect(x, y, w, h);
+		const qreal x = splittedStr[0].toDouble();
+		const qreal y = splittedStr[1].toDouble();
+		const qreal w = splittedStr[2].toDouble();
+		const qreal h = splittedStr[3].toDouble();
+		return QRectF(x, y, w, h);
 	}
 
-	return QRect();
+	return QRectF();
 }
 
 QDomElement WorldModel::serializeWorld(QDomElement &parent) const
@@ -508,7 +508,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 	for (QDomElement backgroundNode = element.firstChildElement("background"); !backgroundNode.isNull()
 			; backgroundNode = backgroundNode.nextSiblingElement("background")) {
 		QString imageId = backgroundNode.attribute("imageId");
-		const QRect backgroundRect = deserializeRect(backgroundNode.attribute("backgroundRect"));
+		const QRectF backgroundRect = deserializeRect(backgroundNode.attribute("backgroundRect"));
 		if (backgroundRect.isNull()) {
 			break;
 		}
