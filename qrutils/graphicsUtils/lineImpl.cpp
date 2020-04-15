@@ -76,6 +76,7 @@ QPainterPath LineImpl::shape(const int width, qreal x1, qreal y1, qreal x2, qrea
 	path.setFillRule(Qt::WindingFill);
 
 	QPainterPathStroker ps;
+	ps.setCapStyle(Qt::FlatCap);
 	ps.setWidth(width);
 
 	path.moveTo(x1, y1);

@@ -47,6 +47,7 @@ public:
 		, Region
 		, Picture
 		, Shape
+		, Marker
 		, Wall
 		, Moveable
 		, Robot

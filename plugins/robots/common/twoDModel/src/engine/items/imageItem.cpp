@@ -124,7 +124,7 @@ QDomElement ImageItem::serialize(QDomElement &parent) const
 void ImageItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-	QRect rect;
+	QRectF rect;
 	if (element.hasAttribute("backgroundRect")) {
 		rect = deserializeRect(element.attribute("backgroundRect"));
 		setPos(0, 0);
@@ -242,16 +242,16 @@ void ImageItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 	AbstractItem::mousePressEvent(event);
 }
 
-QRect ImageItem::deserializeRect(const QString &string) const
+QRectF ImageItem::deserializeRect(const QString &string) const
 {
 	const QStringList splittedStr = string.split(":");
 	if (splittedStr.count() == 4) {
-		const int x = splittedStr[0].toInt();
-		const int y = splittedStr[1].toInt();
-		const int w = splittedStr[2].toInt();
-		const int h = splittedStr[3].toInt();
-		return QRect(x, y, w, h);
+		const auto x = splittedStr[0].toDouble();
+		const auto y = splittedStr[1].toDouble();
+		const auto w = splittedStr[2].toDouble();
+		const auto h = splittedStr[3].toDouble();
+		return QRectF(x, y, w, h);
 	}
 
-	return QRect();
+	return QRectF();
 }

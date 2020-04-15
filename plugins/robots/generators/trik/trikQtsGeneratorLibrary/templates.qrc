@@ -237,5 +237,7 @@
         <file>templates/switch/middle_switch.t</file>
         <file>templates/switch/oneCase_switch.t</file>
         <file>templates/wait/gyroscope.t</file>
+        <file>templates/markerDown.t</file>
+        <file>templates/markerUp.t</file>
     </qresource>
 </RCC>
