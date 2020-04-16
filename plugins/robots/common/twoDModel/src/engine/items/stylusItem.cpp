@@ -53,7 +53,7 @@ AbstractItem *StylusItem::clone() const
 QAction *StylusItem::stylusTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_S));
+	result->setShortcuts({QKeySequence(Qt::Key_S), QKeySequence(Qt::Key_9)});
 	result->setCheckable(true);
 	return result;
 }

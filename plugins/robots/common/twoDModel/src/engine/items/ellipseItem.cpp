@@ -39,7 +39,7 @@ AbstractItem *EllipseItem::clone() const
 QAction *EllipseItem::ellipseTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_E));
+	result->setShortcuts({QKeySequence(Qt::Key_E), QKeySequence(Qt::Key_8)});
 	result->setCheckable(true);
 	return result;
 }

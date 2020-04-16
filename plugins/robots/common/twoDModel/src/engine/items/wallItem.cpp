@@ -60,7 +60,7 @@ WallItem *WallItem::clone() const
 QAction *WallItem::wallTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_W));
+	result->setShortcuts({QKeySequence(Qt::Key_W), QKeySequence(Qt::Key_2)});
 	result->setCheckable(true);
 	return result;
 }
