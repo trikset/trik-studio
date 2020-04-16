@@ -693,6 +693,7 @@ void TwoDModelWidget::setController(ControllerInterface &controller)
 		}
 	};
 
+	connect(mController, &ControllerInterface::executedOrUndoRedo, this, &TwoDModelWidget::saveWorldModelToRepo);
 	connect(mRobotItemPopup, &graphicsUtils::ItemPopup::propertyChanged, this, setItemsProperty);
 	connect(mColorFieldItemPopup, &graphicsUtils::ItemPopup::propertyChanged, this, setItemsProperty);
 	connect(mImageItemPopup, &graphicsUtils::ItemPopup::propertyChanged, this, setItemsProperty);

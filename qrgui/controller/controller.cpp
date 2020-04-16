@@ -89,6 +89,7 @@ void Controller::execute(commands::AbstractCommand *command, UndoStack *stack)
 {
 	if (command && stack) {
 		stack->execute(command);
+		emit executedOrUndoRedo();
 	}
 }
 
@@ -184,6 +185,7 @@ void Controller::redo()
 	UndoStack *stack = selectActiveStack(false);
 	if (stack) {
 		stack->redo();
+		emit executedOrUndoRedo();
 	}
 }
 
@@ -192,6 +194,7 @@ void Controller::undo()
 	UndoStack *stack = selectActiveStack(true);
 	if (stack) {
 		stack->undo();
+		emit executedOrUndoRedo();
 	}
 }
 

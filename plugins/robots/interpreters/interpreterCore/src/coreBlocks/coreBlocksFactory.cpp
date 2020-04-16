@@ -128,8 +128,8 @@ qReal::IdList CoreBlocksFactory::providedBlocks() const
 qReal::IdList CoreBlocksFactory::blocksToDisable() const
 {
 	qReal::IdList result;
-
-	if (!mRobotModelManager->model().name().contains("TwoD")) {
+	auto robotModelName = mRobotModelManager->model().name();
+	if (!robotModelName.contains("TwoD") && !robotModelName.contains("TrikV62")) {
 		result
 				<< id("MarkerDown")
 				<< id("MarkerUp");

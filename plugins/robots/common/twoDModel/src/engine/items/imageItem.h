@@ -87,7 +87,7 @@ protected:
 private:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
-	QRect deserializeRect(const QString &string) const;
+	QRectF deserializeRect(const QString &string) const;
 
 	graphicsUtils::RectangleImpl mImpl;
 	model::Image *mImage = nullptr; // Does not have ownership
