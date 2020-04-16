@@ -233,6 +233,7 @@ void RobotModel::stopRobot()
 		engine->speed = 0;
 		engine->breakMode = true;
 	}
+	mIsRiding = false;
 }
 
 void RobotModel::countBeep()
