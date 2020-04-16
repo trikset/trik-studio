@@ -59,8 +59,8 @@ AbstractItem *CurveItem::clone() const
 
 QAction *CurveItem::curveTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_bezier.svg"), tr("Bezier Curve (B)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_B));
+	QAction * const result = new QAction(QIcon(":/icons/2d_bezier.svg"), tr("Bezier Curve (Z)"), nullptr);
+	result->setShortcuts({QKeySequence(Qt::Key_Z), QKeySequence(Qt::Key_6)});
 	result->setCheckable(true);
 	return result;
 }

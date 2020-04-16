@@ -41,7 +41,7 @@ SkittleItem::~SkittleItem()
 QAction *SkittleItem::skittleTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
-	result->setShortcut(QKeySequence(Qt::Key_C));
+	result->setShortcuts({QKeySequence(Qt::Key_C), QKeySequence(Qt::Key_3)});
 	result->setCheckable(true);
 	return result;
 }

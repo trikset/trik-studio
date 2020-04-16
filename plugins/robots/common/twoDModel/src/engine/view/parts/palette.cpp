@@ -36,7 +36,7 @@ Palette::Palette(QWidget *parent)
 	mToolBar->setOrientation(Qt::Vertical);
 	layout->addWidget(mToolBar);
 
-	mCursorAction->setShortcut(QKeySequence(Qt::Key_N));
+	mCursorAction->setShortcuts({QKeySequence(Qt::Key_N), QKeySequence(Qt::Key_1)});
 	mCursorAction->setCheckable(true);
 	registerTool(mCursorAction.data());
 }

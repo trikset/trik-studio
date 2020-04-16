@@ -293,7 +293,7 @@
     <name>twoDModel::items::CurveItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
-        <source>Bezier Curve (B)</source>
+        <source>Bezier Curve (Z)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
