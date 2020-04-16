@@ -29,10 +29,10 @@ TrikRobotModelV6::TrikRobotModelV6(const QString &kitId, const QString &robotId)
 	addAllowedConnection(PortInfo("E2", output, { "С5" }), { servoMotorInfo() });
 	addAllowedConnection(PortInfo("E3", output, { "С6" }), { servoMotorInfo() });
 
-	addAllowedConnection(PortInfo("B1", input, { "M1", "В1" }, "encoder1"), { encoderInfo() });
-	addAllowedConnection(PortInfo("B2", input, { "M2", "В2" }, "encoder2"), { encoderInfo() });
-	addAllowedConnection(PortInfo("B3", input, { "M3", "В3" }, "encoder3"), { encoderInfo() });
-	addAllowedConnection(PortInfo("B4", input, { "M4", "В4" }, "encoder4"), { encoderInfo() });
+//	addAllowedConnection(PortInfo("B1", input, { "M1", "В1" }, "encoder1"), { encoderInfo() });
+//	addAllowedConnection(PortInfo("B2", input, { "M2", "В2" }, "encoder2"), { encoderInfo() });
+//	addAllowedConnection(PortInfo("B3", input, { "M3", "В3" }, "encoder3"), { encoderInfo() });
+//	addAllowedConnection(PortInfo("B4", input, { "M4", "В4" }, "encoder4"), { encoderInfo() });
 }
 
 QString TrikRobotModelV6::robotConfigFileVersion() const
