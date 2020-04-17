@@ -88,7 +88,7 @@ Component.prototype.createOperations = function()
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--platform minimal --clear-conf");
+				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--clear-conf");
 	} else {
 		component.addOperation("Execute"
 				, "bash"
