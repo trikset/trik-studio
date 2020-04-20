@@ -183,10 +183,10 @@ void Image::setPath(const QString &path)
 	}
 }
 
-void Image::draw(QPainter &painter, const QRect &rect, qreal zoom)
+void Image::draw(QPainter &painter, const QRectF &rect, qreal zoom)
 {
 	if (mExternal && !mPath.isEmpty()) {
-		utils::ImagesCache::instance().drawImageWithoutCachingSize(mPath, painter, rect, zoom);
+		utils::ImagesCache::instance().drawImageWithoutCachingSize(mPath, painter, rect.toRect(), zoom);
 	} else if (mIsSvg) {
 		mSvgRenderer->render(&painter, rect);
 	} else if (!mImage.isNull()) {

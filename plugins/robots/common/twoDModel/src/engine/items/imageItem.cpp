@@ -94,7 +94,7 @@ void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	const qreal zoom = scene()->views().isEmpty() ? 1.0 : scene()->views().first()->transform().m11();
-	mImage->draw(*painter, calcNecessaryBoundingRect().toRect(), zoom);
+	mImage->draw(*painter, calcNecessaryBoundingRect(), zoom);
 }
 
 QPainterPath ImageItem::shape() const

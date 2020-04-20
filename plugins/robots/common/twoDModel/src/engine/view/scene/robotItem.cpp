@@ -30,13 +30,15 @@ const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
 	: RotateItem()
-	, mImage(robotImageFileName)
-	, mCustomImage(mImage)
 	, mIsCustomImage(false)
 	, mBeepItem(new BeepItem)
 	, mRectangleImpl()
 	, mRobotModel(robotModel)
 {
+	mImage = new model::Image(robotImageFileName, false);
+	mImage->setExternal(false);
+	mCustomImage = new model::Image(*mImage);
+
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
 	connect(&mRobotModel, &model::RobotModel::rotationChanged, this, &RobotItem::setRotation);
@@ -88,7 +90,12 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	mRectangleImpl.drawImageItem(painter, x1(), y1(), x2(), y2(), mIsCustomImage ? mCustomImage : mImage);
+	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0);
+	if (mIsCustomImage) {
+		mCustomImage->draw(*painter, rect);
+	} else {
+		mImage->draw(*painter, rect);
+	}
 }
 
 void RobotItem::drawExtractionForItem(QPainter* painter)
@@ -172,28 +179,14 @@ void RobotItem::deserializeImage(const QDomElement &element) {
 	if (image.isNull()) {
 		return;
 	}
-	QByteArray content = image.text().toLatin1();
-	QByteArray bytes = QByteArray::fromBase64(content);
-	QBuffer buffer(&bytes);
-	QImage tempImage;
-	if (tempImage.load(&buffer, "PNG")) {
-		mCustomImage = tempImage;
-		useCustomImage(true);
-		update();
-	}
+	mCustomImage = model::Image::deserialize(image);
+	useCustomImage(true);
 }
 
 QDomElement RobotItem::serializeImage(QDomElement &parent) const {
 	QDomElement result = parent.ownerDocument().createElement("robotImage");
 	parent.appendChild(result);
-
-	QByteArray bytes;
-	QBuffer buffer(&bytes);
-	mCustomImage.save(&buffer, "PNG");
-	buffer.close();
-
-	result.appendChild(result.ownerDocument().createTextNode(bytes.toBase64()));
-
+	mCustomImage->serialize(result);
 	return result;
 }
 
@@ -280,7 +273,7 @@ void RobotItem::setNeededBeep(bool isNeededBeep)
 
 void RobotItem::setCustomImage(const QString &robotImageFileName) {
 	mIsCustomImage = true;
-	mCustomImage = QImage(robotImageFileName);
+	mCustomImage->setPath(robotImageFileName);
 	update();
 }
 
