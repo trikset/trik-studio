@@ -203,6 +203,8 @@ private:
 	void serializeWheels(QDomElement &robotElement) const;
 	void deserializeWheels(const QDomElement &robotElement);
 
+	QPointF alignToGrid(QPointF pos) const;
+
 	QPointF averageAcceleration() const;
 
 	/// Simulated robot motors.
@@ -219,6 +221,7 @@ private:
 	SensorsConfiguration mSensorsConfiguration;
 
 	QPointF mWaitPos;
+	QPointF mLiftedPos;
 	bool mIsCollide { false };
 	bool mIsRiding { false };
 	QPointF mPos;
