@@ -110,8 +110,8 @@ private:
 	void onLanded();
 
 	/** @brief Image of a robot drawn on scene */
-	model::Image *mImage;
-	model::Image *mCustomImage;
+	model::Image mImage;
+	model::Image mCustomImage;
 	bool mIsCustomImage;
 	// Takes ownership
 	BeepItem *mBeepItem;

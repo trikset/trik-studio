@@ -35,9 +35,9 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	, mRectangleImpl()
 	, mRobotModel(robotModel)
 {
-	mImage = new model::Image(robotImageFileName, false);
-	mImage->setExternal(false);
-	mCustomImage = new model::Image(*mImage);
+	mImage = model::Image(robotImageFileName, false);
+	mImage.setExternal(false);
+	mCustomImage = model::Image(mImage);
 
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
@@ -92,9 +92,9 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
 	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0);
 	if (mIsCustomImage) {
-		mCustomImage->draw(*painter, rect);
+		mCustomImage.draw(*painter, rect);
 	} else {
-		mImage->draw(*painter, rect);
+		mImage.draw(*painter, rect);
 	}
 }
 
@@ -179,14 +179,14 @@ void RobotItem::deserializeImage(const QDomElement &element) {
 	if (image.isNull()) {
 		return;
 	}
-	mCustomImage = model::Image::deserialize(image);
+	mCustomImage = *model::Image::deserialize(image);
 	useCustomImage(true);
 }
 
 QDomElement RobotItem::serializeImage(QDomElement &parent) const {
 	QDomElement result = parent.ownerDocument().createElement("robotImage");
 	parent.appendChild(result);
-	mCustomImage->serialize(result);
+	mCustomImage.serialize(result);
 	return result;
 }
 
@@ -273,7 +273,7 @@ void RobotItem::setNeededBeep(bool isNeededBeep)
 
 void RobotItem::setCustomImage(const QString &robotImageFileName) {
 	mIsCustomImage = true;
-	mCustomImage->setPath(robotImageFileName);
+	mCustomImage.setPath(robotImageFileName);
 	update();
 }
 
