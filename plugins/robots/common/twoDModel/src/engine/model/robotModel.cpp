@@ -124,6 +124,8 @@ void RobotModel::clear()
 	reinit();
 	setPosition(QPointF());
 	setRotation(0);
+	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
+	scene->robot(*const_cast<RobotModel*>(this))->useCustomImage(false);
 }
 
 RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, long unsigned int degrees
