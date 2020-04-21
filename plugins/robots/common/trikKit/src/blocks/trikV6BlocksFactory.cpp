@@ -67,15 +67,10 @@ qReal::IdList TrikV6BlocksFactory::providedBlocks() const
 			<< id("TrikSay")
 			<< id("TrikLed")
 			<< id("GetButtonCode")
-			<< id("TrikSendMessage")
 			;
 
-	// Wait for sensors
+	// Wait for button
 	result
-			<< id("TrikWaitForTouchSensor")
-			<< id("TrikWaitForLight")
-			<< id("TrikWaitForIRDistance")
-			<< id("TrikWaitForSonarDistance")
 			<< id("TrikWaitForButton")
 			;
 

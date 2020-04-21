@@ -61,7 +61,7 @@ public:
 	void setPath(const QString &path);
 
 	/// Draws image with \a painter inside the \a rect considering \a zoom.
-	void draw(QPainter &painter, const QRect &rect, qreal zoom = 1.0);
+	void draw(QPainter &painter, const QRectF &rect, qreal zoom = 1.0);
 
 	/// Returns imageId for this image.
 	QString imageId() const;

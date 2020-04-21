@@ -19,6 +19,7 @@
 #include "sensorItem.h"
 #include "src/engine/items/solidItem.h"
 #include "twoDModel/engine/model/robotModel.h"
+#include "twoDModel/engine/model/image.h"
 
 namespace twoDModel {
 namespace view {
@@ -109,8 +110,8 @@ private:
 	void onLanded();
 
 	/** @brief Image of a robot drawn on scene */
-	const QImage mImage;
-	QImage mCustomImage;
+	model::Image mImage;
+	model::Image mCustomImage;
 	bool mIsCustomImage;
 	// Takes ownership
 	BeepItem *mBeepItem;

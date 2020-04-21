@@ -124,6 +124,8 @@ void RobotModel::clear()
 	reinit();
 	setPosition(QPointF());
 	setRotation(0);
+	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
+	scene->robot(*const_cast<RobotModel*>(this))->useCustomImage(false);
 }
 
 RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, long unsigned int degrees
@@ -233,6 +235,7 @@ void RobotModel::stopRobot()
 		engine->speed = 0;
 		engine->breakMode = true;
 	}
+	mIsRiding = false;
 }
 
 void RobotModel::countBeep()
@@ -505,11 +508,13 @@ void RobotModel::deserialize(const QDomElement &robotElement)
 
 void RobotModel::onRobotLiftedFromGround()
 {
+	mLiftedPos = mPos;
 	mIsOnTheGround = false;
 }
 
 void RobotModel::onRobotReturnedOnGround()
 {
+	mWaitPos += alignToGrid(mPos - mLiftedPos);
 	mIsOnTheGround = true;
 }
 
@@ -549,4 +554,22 @@ void RobotModel::deserializeWheels(const QDomElement &robotElement)
 QGraphicsItem *RobotModel::startPositionMarker() const
 {
 	return mStartPositionMarker;
+}
+
+QPointF RobotModel::alignToGrid(QPointF pos) const
+{
+	auto x = pos.x();
+	auto y = pos.y();
+	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto roundedX = x - fmod(x, gridSize);
+	auto roundedX2 = roundedX + ((x > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedX - x) > qAbs(roundedX2 - x)) {
+		roundedX = roundedX2;
+	}
+	auto roundedY = y - fmod(y, gridSize);
+	auto roundedY2 = roundedY + ((y > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedY - y) > qAbs(roundedY2 - y)) {
+		roundedY = roundedY2;
+	}
+	return QPointF(roundedX, roundedY);
 }
