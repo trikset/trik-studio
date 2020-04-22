@@ -8,8 +8,9 @@
 
     <ControlScript>../controlScript.qs</ControlScript>
 
-    <InstallerWindowIcon>../images/trik-studio.ico</InstallerWindowIcon>
-    <InstallerApplicationIcon>../images/trik-studio.ico</InstallerApplicationIcon>
+    <WizardStyle>Modern</WizardStyle>
+    <InstallerWindowIcon>../images/trik-studio</InstallerWindowIcon>
+    <InstallerApplicationIcon>../images/trik-studio</InstallerApplicationIcon>
     <Logo>../images/trik-studio-logo.png</Logo>
     <Watermark>../images/trik-studio-watermark.png</Watermark>
 
