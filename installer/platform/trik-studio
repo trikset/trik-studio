@@ -2,7 +2,13 @@
 
 # Welcome to TRIK Studio! Take it, hold it, love it.
 
-set -o errexit
+set -ueo pipefail
+
+#TODO: pack corresponding python3 runtime into installer and checker packages.
+# Otherwise, we can have a problem with version mismatch
+if [ -z ${TRIK_PYTHONPATH+x} ] && which -a python3 &> /dev/null ; then
+    export TRIK_PYTHONPATH=$(python3 -c 'import sys; import os; print(os.pathsep.join(sys.path))')
+fi
 
 cd "$(dirname "$0")"
 bin/trik-studio "$@"
