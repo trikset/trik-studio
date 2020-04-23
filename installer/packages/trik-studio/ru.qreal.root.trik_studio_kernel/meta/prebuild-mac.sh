@@ -14,7 +14,6 @@ cp     $BIN_DIR/plugins/tools/librobots-plugin.dylib                       "$BUN
 cp -pR $BIN_DIR/librobots-interpreter-core*.dylib                          "$BUNDLE_CONTENTS/Lib/"
 cp -pR $BIN_DIR/librobots-2d-model*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
 #cp -pR $BIN_DIR/libBox2D*.dylib                                            "$BUNDLE_CONTENTS/Lib/"
-cp -pR $BIN_DIR/librobots-generator-base*.dylib                            "$BUNDLE_CONTENTS/Lib/"
 cp -pR $BIN_DIR/librobots-kit-base*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
 cp -pR $BIN_DIR/librobots-utils*.dylib                                     "$BUNDLE_CONTENTS/Lib/"
 #cp -pR $BIN_DIR/libqextserialport*.dylib                                   "$BUNDLE_CONTENTS/Lib/"
