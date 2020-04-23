@@ -91,6 +91,10 @@ else
 	patcher=$binFolder/patcher-d
 fi
 
+if [ -z ${TRIK_PYTHONPATH+x} ] && which -a python3 &> /dev/null ; then
+    export TRIK_PYTHONPATH=$(python3 -c 'import sys; import os; print(os.pathsep.join(sys.path))')
+fi
+
 export LD_LIBRARY_PATH=$binFolder:$LD_LIBRARY_PATH
 
 rm -rf "$(pwd)/reports/$fileNameWithoutExtension"
