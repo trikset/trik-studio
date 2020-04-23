@@ -201,6 +201,7 @@ clang {
 
 	#treat Qt includes as system headers
 	SYSTEM_INCLUDE_PREFIX_OPTION *= --system-header-prefix=$$[QT_INSTALL_HEADERS]
+	QMAKE_CXXFLAG += -Wno-nullability-completeness -Wno-error=nullability-extension
 }
 
 #gcc {

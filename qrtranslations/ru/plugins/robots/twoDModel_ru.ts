@@ -564,9 +564,13 @@
 <context>
     <name>twoDModel::items::CurveItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
         <source>Bezier Curve (B)</source>
-        <translation>Кривая Безье (B)</translation>
+        <translation type="vanished">Кривая Безье (B)</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
+        <source>Bezier Curve (Z)</source>
+        <translation>Кривая Безье (Z)</translation>
     </message>
 </context>
 <context>

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
-    <Name>TRIK Studio</Name>
+    <Name>TRIK Studio Junior</Name>
     <Version></Version>
-    <Title>TRIK Studio</Title>
+    <Title>TRIK Studio Junior</Title>
     <Publisher>CyberTech Labs Ltd.</Publisher>
-    <ProductUrl>https://trikset.com/products/trik-studio</ProductUrl>
+    <ProductUrl>https://trikset.com/products</ProductUrl>
 
     <ControlScript>../controlScript.qs</ControlScript>
 
-    <InstallerWindowIcon>../images/trik-studio-jr.ico</InstallerWindowIcon>
-    <InstallerApplicationIcon>../images/trik-studio-jr.ico</InstallerApplicationIcon>
+    <WizardStyle>Modern</WizardStyle>
+    <InstallerWindowIcon>../images/trik-studio-jr</InstallerWindowIcon>
+    <InstallerApplicationIcon>../images/trik-studio-jr</InstallerApplicationIcon>
     <Logo>../images/trik-studio-jr-logo.png</Logo>
     <Watermark>../images/trik-studio-jr-watermark.png</Watermark>
 
-    <StartMenuDir>TRIK Studio</StartMenuDir>
+    <StartMenuDir>TRIK Studio Junior</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
     <AllowSpaceInPath>false</AllowSpaceInPath>
