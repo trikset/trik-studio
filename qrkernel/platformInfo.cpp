@@ -130,7 +130,7 @@ void PlatformInfo::enableHiDPISupport()
 			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
 			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
 		// Only if there is no attempt to set from the system environment
-#ifdef Q_OS_WIN
+#if 0  // defined(Q_OS_WIN)
 		typedef BOOL (WINAPI *SetProcessDPIAware_t)();
 		// Let Windows decide.
 		if(auto SetProcessDPIAware_ = (SetProcessDPIAware_t)QLibrary::resolve("user32", "SetProcessDPIAware")) {
