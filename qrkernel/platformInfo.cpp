@@ -22,11 +22,7 @@
 #include <QLibrary>
 #include <qrkernel/settingsManager.h>
 #include <QsLog.h>
-
-#ifdef Q_OS_WIN
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h> // for SetProcessDPIAware in PlaformInfo::enableHiDPISupport
-#endif
+#include <QOperatingSystemVersion>
 
 using namespace qReal;
 
@@ -130,20 +126,13 @@ void PlatformInfo::enableHiDPISupport()
 			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
 			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
 		// Only if there is no attempt to set from the system environment
-#if 0  // defined(Q_OS_WIN)
-		typedef BOOL (WINAPI *SetProcessDPIAware_t)();
-		// Let Windows decide.
-		if(auto SetProcessDPIAware_ = (SetProcessDPIAware_t)QLibrary::resolve("user32", "SetProcessDPIAware")) {
-			if(SetProcessDPIAware_()) {
-				qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", QByteArray("1"));
-				QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
-			} else {
-				auto err = GetLastError();
-				QLOG_ERROR() << "Failed to SetDpiAware() with error" << err;
-			}
-			return;
+		if (QOperatingSystemVersion::current().type()  == QOperatingSystemVersion::OSType::Windows) {
+			// DpiAware is set to true in the application manifest
+			// And now we rely on Windows compatibility feature
+			// Probably, even this may be useful: QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+		} else {
+			// For Linux and macOS Qt does a good job
+			QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 		}
-#endif
-		QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	}
 }
