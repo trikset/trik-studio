@@ -125,14 +125,7 @@ void PlatformInfo::enableHiDPISupport()
 			&& !qEnvironmentVariableIsSet("QT_AUTO_SCREEN_SCALE_FACTOR")
 			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
 			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
-		// Only if there is no attempt to set from the system environment
-		if (QOperatingSystemVersion::current().type()  == QOperatingSystemVersion::OSType::Windows) {
-			// DpiAware is set to true in the application manifest
-			// And now we rely on Windows compatibility feature
-			// Probably, even this may be useful: QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
-		} else {
-			// For Linux and macOS Qt does a good job
+		// Only if there is no attempt to set from the system environment	
 			QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-		}
 	}
 }
