@@ -10,7 +10,7 @@ Component.prototype.createOperations = function()
         component.addOperation("RegisterFileType",
                                "qrs",
                                "C:\\Windows\\System32\\wscript.exe //nologo //b // \"@TargetDir@\\" +
-                                    installer.executableName + ".vbs\" \"%1\"",
+                                    installer.executableName + installer.execExtension + "  \"%1\"",
                                "@ProductName@ Project",
                                "application/octet-stream",
                                "iconPath=@TargetDir@/trik-studio.ico");
