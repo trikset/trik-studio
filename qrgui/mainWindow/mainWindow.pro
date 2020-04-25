@@ -155,10 +155,12 @@ RESOURCES = $$PWD/mainWindow.qrc
 
 win32 {
 	RC_FILE = $$PWD/mainWindow.rc
+        QMAKE_MANIFEST = $$PWD/application.exe.manifest
+        DISTFILES += $$QMAKE_MANIFEST
 }
 
 macx {
-	ICON = icon.icns
+        ICON = icon.icns
 }
 
 include(scriptAPI/scriptAPI.pri)
