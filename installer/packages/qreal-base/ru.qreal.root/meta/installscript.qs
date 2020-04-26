@@ -84,7 +84,7 @@ Component.prototype.createOperations = function()
 				, "@TargetDir@/" + installer.maintenanceName
 				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.executableName + installer.execExtension
+				, "@TargetDir@\\" + installer.executableName + installer.execExtension
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
@@ -93,7 +93,7 @@ Component.prototype.createOperations = function()
 		component.addOperation("Execute"
 				, "bash"
 				, "-c"
-				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@\\" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
+				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@/" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
 	}
 }
 
