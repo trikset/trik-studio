@@ -88,12 +88,12 @@ Component.prototype.createOperations = function()
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
-				, "@TargetDir@\\" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--clear-conf");
+				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--clear-conf");
 	} else {
 		component.addOperation("Execute"
 				, "bash"
 				, "-c"
-				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@/" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
+				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@\\" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
 	}
 }
 
