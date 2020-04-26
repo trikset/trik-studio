@@ -12,6 +12,6 @@ Component.prototype.createOperations = function()
                                "@TargetDir@\\" + installer.executableName + installer.execExtension + " \"%1\"",
                                "@ProductName@ Project",
                                "application/octet-stream",
-                               "iconPath=@TargetDir@/trik-studio-jr.ico");
+                               "@TargetDir@/trik-studio-jr.ico");
     }
 }
