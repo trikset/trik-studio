@@ -55,11 +55,11 @@ public:
 
 	void setNeededBeep(bool isNeededBeep);
 
-	QDomElement serializeImage(QDomElement &parent) const;
-	void deserializeImage(const QDomElement &element);
-	void setCustomImage(const QString &robotImageFileName);
+	void setCustomImagePath(const QString &robotImageFileName);
+	void setCustomImage(model::Image *customImage);
 	void useCustomImage(bool isUsed);
 	bool usedCustomImage();
+	model::Image* customImage();
 
 	void recoverDragStartPosition();
 	model::RobotModel &robotModel();
@@ -88,6 +88,7 @@ signals:
 	void sensorAdded(SensorItem *sensor);
 	void sensorRemoved(SensorItem *sensor);
 	void sensorUpdated(SensorItem *sensor);
+	void customImageChanged(model::Image *image);
 
 private:
 	class BeepItem : public QGraphicsItem
@@ -111,7 +112,7 @@ private:
 
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
-	model::Image mCustomImage;
+	model::Image* mCustomImage; // Does not have ownership
 	bool mIsCustomImage;
 	// Takes ownership
 	BeepItem *mBeepItem;

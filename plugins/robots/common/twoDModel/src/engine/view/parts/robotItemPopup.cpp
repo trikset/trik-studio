@@ -132,7 +132,7 @@ QWidget *RobotItemPopup::initImagePicker()
 			return;
 		}
 
-		mCurrentItem->setCustomImage(loadFileName);
+		mCurrentItem->setCustomImagePath(loadFileName);
 		emit imageSettingsChanged();
 	});
 

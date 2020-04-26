@@ -37,7 +37,8 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 {
 	mImage = model::Image(robotImageFileName, false);
 	mImage.setExternal(false);
-	mCustomImage = model::Image(mImage);
+	setCustomImage(new model::Image(robotImageFileName, false));
+	mCustomImage->setExternal(false);
 
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
@@ -92,7 +93,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
 	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0);
 	if (mIsCustomImage) {
-		mCustomImage.draw(*painter, rect);
+		mCustomImage->draw(*painter, rect);
 	} else {
 		mImage.draw(*painter, rect);
 	}
@@ -174,20 +175,13 @@ QDomElement RobotItem::serialize(QDomElement &parent) const
 	return result;
 }
 
-void RobotItem::deserializeImage(const QDomElement &element) {
-	const QDomElement image = element.firstChildElement("robotImage");
-	if (image.isNull()) {
-		return;
-	}
-	mCustomImage = *model::Image::deserialize(image);
-	useCustomImage(true);
+twoDModel::model::Image* RobotItem::customImage() {
+	return mCustomImage;
 }
 
-QDomElement RobotItem::serializeImage(QDomElement &parent) const {
-	QDomElement result = parent.ownerDocument().createElement("robotImage");
-	parent.appendChild(result);
-	mCustomImage.serialize(result);
-	return result;
+void RobotItem::setCustomImage(model::Image *customImage) {
+	mCustomImage = customImage;
+	emit customImageChanged(mCustomImage);
 }
 
 void RobotItem::deserialize(const QDomElement &element)
@@ -271,9 +265,8 @@ void RobotItem::setNeededBeep(bool isNeededBeep)
 	mBeepItem->setVisible(isNeededBeep);
 }
 
-void RobotItem::setCustomImage(const QString &robotImageFileName) {
-	mIsCustomImage = true;
-	mCustomImage.setPath(robotImageFileName);
+void RobotItem::setCustomImagePath(const QString &robotImageFileName) {
+	mCustomImage->setPath(robotImageFileName);
 	update();
 }
 

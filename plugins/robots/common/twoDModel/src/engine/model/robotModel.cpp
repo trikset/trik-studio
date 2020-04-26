@@ -480,9 +480,8 @@ QDomElement RobotModel::serialize(QDomElement &parent) const
 
 	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
 	auto robotItem = scene->robot(*const_cast<RobotModel*>(this));
-	if (robotItem->usedCustomImage()) {
-		robotItem->serializeImage(robot);
-	}
+	robot.setAttribute("isCustomImage", robotItem->usedCustomImage() ? "true" : "false");
+
 	return robot;
 }
 
@@ -501,9 +500,24 @@ void RobotModel::deserialize(const QDomElement &robotElement)
 
 	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
 	auto robotItem = scene->robot(*const_cast<RobotModel*>(this));
-	robotItem->deserializeImage(robotElement);
+
+	const QDomElement image = robotElement.firstChildElement("robotImage");
+
+	if (!image.isNull()) {
+		// need for old saves
+		robotItem->setCustomImage(model::Image::deserialize(image));
+		robotItem->useCustomImage(true);
+	} else {
+		robotItem->useCustomImage(robotElement.attribute("isCustomImage") == "true");
+	}
 
 	nextFragment();
+}
+
+void RobotModel::deserializeImage(const QDomElement &imageElement) {
+	auto scene = dynamic_cast<twoDModel::view::TwoDModelScene *>(mStartPositionMarker->scene());
+	auto robotItem = scene->robot(*const_cast<RobotModel*>(this));
+	robotItem->setCustomImage(model::Image::deserialize(imageElement));
 }
 
 void RobotModel::onRobotLiftedFromGround()

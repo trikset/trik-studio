@@ -176,6 +176,7 @@ void Image::setPath(const QString &path)
 	mIsSvg = path.endsWith(".svg");
 	mImage.reset(nullptr);
 	mSvgRenderer.reset(nullptr);
+	mSvgBytes.clear();
 	if (mIsSvg) {
 		mSvgRenderer.reset(new QSvgRenderer(path));
 	} else {

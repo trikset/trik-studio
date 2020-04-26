@@ -186,6 +186,8 @@ public:
 
 	qReal::ErrorReporterInterface* errorReporter();
 
+	void setRobotImage(Image* image);
+
 signals:
 	/// Emitted when current metrics system conversion constant has changed.
 	void pixelsInCmChanged(qreal newValue);

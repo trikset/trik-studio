@@ -369,6 +369,14 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 	return path;
 }
 
+void WorldModel::setRobotImage(Image* image) {
+	if (mImages.contains("robotImage")) {
+		delete mImages["robotImage"];
+	}
+	mImages.insert("robotImage", image);
+}
+
+
 void WorldModel::serializeBackground(QDomElement &background, const QRect &rect, const Image * const img) const
 {
 	background.setAttribute("backgroundRect", QString("%1:%2:%3:%4").arg(
@@ -462,6 +470,12 @@ QDomElement WorldModel::serializeBlobs(QDomElement &parent) const
 	for (const QString &imageItem : imageIds) {
 		QDomElement image = parent.ownerDocument().createElement("image");
 		mImageItems[imageItem]->image()->serialize(image);
+		images.appendChild(image);
+	}
+
+	if (mImages["robotImage"]) {
+		QDomElement image = parent.ownerDocument().createElement("robotImage");
+		mImages["robotImage"]->serialize(image);
 		images.appendChild(image);
 	}
 

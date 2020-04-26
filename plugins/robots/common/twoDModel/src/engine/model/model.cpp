@@ -176,6 +176,11 @@ void Model::deserialize(const QDomDocument &worldModel, const QDomDocument &blob
 			if (robotModel->info().robotId() == element.toElement().attribute("id")) {
 				robotModel->deserialize(element);
 				robotModel->configuration().deserialize(element);
+				auto robotImageNode = blobs.documentElement().firstChildElement("blobs").firstChildElement("images")
+						.firstChildElement("robotImage");
+				if (!robotImageNode.isNull()) {
+					robotModel->deserializeImage(robotImageNode);
+				}
 				exist = true;
 				robotsList.at(0).removeChild(static_cast<QDomNode>(element));
 				break;

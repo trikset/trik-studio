@@ -185,7 +185,9 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> checkItems) con
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
 	RobotItem * const robotItem = new RobotItem(robotModel->info().robotImage(), *robotModel);
+	mModel.worldModel().setRobotImage(robotItem->customImage());
 
+	connect(robotItem, &RobotItem::customImageChanged, &mModel.worldModel(), &model::WorldModel::setRobotImage);
 	connect(robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
 	connect(robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
 

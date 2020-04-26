@@ -113,6 +113,7 @@ public:
 
 	QDomElement serialize(QDomElement &parent) const;
 	void deserialize(const QDomElement &robotElement);
+	void deserializeImage(const QDomElement &imageElement);
 
 	void onRobotLiftedFromGround();
 	void onRobotReturnedOnGround();
