@@ -76,9 +76,13 @@
 <context>
     <name>trik::robotModel::parts::TrikInfraredSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikInfraredSensor.h" line="+27"/>
         <source>Infrared Sensor</source>
-        <translation>Датчик расстояния ИК</translation>
+        <translation type="vanished">Датчик расстояния ИК</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikInfraredSensor.h" line="+27"/>
+        <source>Range Sensor</source>
+        <translation>Датчик расстояния</translation>
     </message>
 </context>
 <context>
