@@ -37,6 +37,7 @@ PaletteTree::PaletteTree(QWidget *parent)
 	, mTree(nullptr)
 	, mCurrentEditor(0)
 	, mTemporarySpacer(nullptr)
+	, mIconsView(false)
 {
 	initUi();
 }
