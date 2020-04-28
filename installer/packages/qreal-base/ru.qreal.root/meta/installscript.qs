@@ -84,7 +84,7 @@ Component.prototype.createOperations = function()
 				, "@TargetDir@/" + installer.maintenanceName
 				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
-				, "@TargetDir@\\" + installer.executableName + installer.execExtension
+				, "@TargetDir@/" + installer.executableName + ".cmd"
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
