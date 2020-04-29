@@ -69,7 +69,7 @@ TrikTwoDRobotModel::TrikTwoDRobotModel(RobotModelInterface &realModel)
 QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
 		(const kitBase::robotModel::DeviceInfo &deviceType) const
 {
-	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 80) :
+	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 100) :
 			deviceType.isA<robotModel::parts::TrikSonarSensor>() ? QPair<qreal, int>(20, 300) :
 			TwoDRobotModel::rangeSensorAngleAndDistance(deviceType);
 }
