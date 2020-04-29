@@ -387,6 +387,13 @@ MainWindow::~MainWindow()
 	delete mProjectManager;
 	delete mSceneCustomizer;
 	delete mTextManager;
+
+	// TODO: This is a workaround for crash on macOS.
+	// Seems like this crash is caused by memory corruption somewhere else.
+	// If the statusBar with children is deleted before other controls, this helps.
+	delete statusBar();
+	// ----------------
+
 	delete mUi;
 
 	if (mRestoreDefaultSettingsOnClose) {
