@@ -56,7 +56,7 @@ function Component()
 	// Executable names must be lower-case product name with hyphens instead of spaces
 	installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
 	installer.linkExtension = installer.value("os") === "win" ? ".lnk" : "";
-	installer.execExtension = installer.value("os") === "win" ? ".exe" : installer.value("os") === "mac" ? ".app" : "";
+	installer.execExtension = installer.value("os") === "win" ? ".vbs" : installer.value("os") === "mac" ? ".app" : "";
 	installer.maintenanceName = "maintenance" + installer.execExtension;
 	installer.shouldDeinstallPrevious = false;
 
@@ -84,7 +84,7 @@ Component.prototype.createOperations = function()
 				, "@TargetDir@/" + installer.maintenanceName
 				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.executableName + installer.execExtension
+				, "@TargetDir@/" + installer.executableName + ".cmd"
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
