@@ -91,8 +91,6 @@ private:
 	int mCellNumbX2 = 0;
 	int mCellNumbY2 = 0;
 
-	QPointF mPos;
-
 	QPainterPath mPath;
 	int mWallWidth;
 };
