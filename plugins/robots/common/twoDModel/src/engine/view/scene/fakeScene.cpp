@@ -33,14 +33,15 @@ FakeScene::FakeScene(const WorldModel &world)
 			addClone(item, item->clone());
 		}
 	});
-	connect(&world, &WorldModel::traceItemAdded, this, [=](QGraphicsLineItem *item) {
-		addClone(item, new QGraphicsLineItem(item->line()));
+	connect(&world, &WorldModel::traceItemAddedOrChanged, this, [=](QGraphicsPathItem *item) {
+		addClone(item, new QGraphicsPathItem(item->path()));
 	});
 	connect(&world, &WorldModel::itemRemoved, this, &FakeScene::deleteItem);
 }
 
 void FakeScene::addClone(QGraphicsItem * const original, QGraphicsItem * const cloned)
 {
+	deleteItem(original);
 	mClonedItems[original] = cloned;
 	addItem(cloned);
 
@@ -64,6 +65,7 @@ void FakeScene::addClone(QGraphicsItem * const original, QGraphicsItem * const c
 void FakeScene::deleteItem(QGraphicsItem * const original)
 {
 	if (mClonedItems.contains(original)) {
+		removeItem(mClonedItems[original]);
 		delete mClonedItems[original];
 		mClonedItems.remove(original);
 	}

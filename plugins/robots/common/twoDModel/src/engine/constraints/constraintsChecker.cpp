@@ -58,7 +58,7 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 
 	bindToWorldModelObjects();
 	bindToRobotObjects();
-	mObjects["trace"] = new utils::ObjectsSet<QGraphicsLineItem *>(mModel.worldModel().trace(), this);
+	mObjects["trace"] = new utils::ObjectsSet<QGraphicsPathItem *>(mModel.worldModel().trace(), this);
 }
 
 ConstraintsChecker::~ConstraintsChecker()

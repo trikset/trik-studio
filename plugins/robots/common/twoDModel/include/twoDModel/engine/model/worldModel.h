@@ -19,7 +19,7 @@
 #include <QtCore/QPair>
 #include <QtGui/QPainterPath>
 #include <QtGui/QPolygon>
-#include <QtWidgets/QGraphicsLineItem>
+#include <QtWidgets/QGraphicsPathItem>
 #include <QtXml/QDomDocument>
 
 #include "twoDModel/engine/model/image.h"
@@ -89,7 +89,7 @@ public:
 	const QMap<QString, items::ImageItem *> &imageItems() const;
 
 	/// Returns a list of trace items on the floor.
-	const QList<QGraphicsLineItem *> &trace() const;
+	const QList<QGraphicsPathItem *> &trace() const;
 
 	/// Appends \a wall into world model.
 	void addWall(items::WallItem *wall);
@@ -207,7 +207,7 @@ signals:
 	void regionItemAdded(items::RegionItem *item);
 
 	/// Emitted each time when model is appended with some new item.
-	void traceItemAdded(QGraphicsLineItem *item);
+	void traceItemAddedOrChanged(QGraphicsPathItem *item);
 
 	/// Emitted each time when some item was removed from the 2D model world.
 	void itemRemoved(QGraphicsItem *item);
@@ -238,7 +238,7 @@ private:
 	QMap<QString, items::RegionItem *> mRegions;
 	QMap<QString, Image*> mImages; // takes ownership
 	QMap<QString, int> mOrder;
-	QList<QGraphicsLineItem *> mRobotTrace;
+	QList<QGraphicsPathItem *> mRobotTrace;
 	Image *mBackgroundImage = nullptr;
 	QRect mBackgroundRect;
 	QScopedPointer<QDomDocument> mXmlFactory;
@@ -248,4 +248,4 @@ private:
 }
 }
 
-Q_DECLARE_METATYPE(QGraphicsLineItem *)
+Q_DECLARE_METATYPE(QGraphicsPathItem *)
