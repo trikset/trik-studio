@@ -126,6 +126,6 @@ void PlatformInfo::enableHiDPISupport()
 			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
 			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
 		// Only if there is no attempt to set from the system environment	
-			QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+		//	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	}
 }
