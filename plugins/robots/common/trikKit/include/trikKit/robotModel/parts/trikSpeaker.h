@@ -30,6 +30,8 @@ public:
 			, const kitBase::robotModel::PortInfo &port);
 
 	virtual void play(const QString &filePath) = 0;
+
+	virtual void play(const int &duration) = 0;
 };
 
 }

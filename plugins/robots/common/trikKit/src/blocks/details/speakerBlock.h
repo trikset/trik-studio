@@ -27,10 +27,12 @@ class SpeakerBlock : public kitBase::blocksBase::common::DeviceBlock<robotModel:
 	Q_OBJECT
 
 public:
-	explicit SpeakerBlock(kitBase::robotModel::RobotModelInterface &robotModel);
+	explicit SpeakerBlock(kitBase::robotModel::RobotModelInterface &robotModel, bool isPlayToneHz);
 
 private:
 	void doJob(robotModel::parts::TrikSpeaker &shell) override;
+
+	bool mIsPlayToneHz;
 };
 
 }
