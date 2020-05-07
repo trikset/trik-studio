@@ -31,3 +31,8 @@ void TwoDSpeaker::play(const QString &filePath)
 	Q_UNUSED(filePath)
 	mEngine.playSound(duration);
 }
+
+void TwoDSpeaker::play(const int &duration)
+{
+	mEngine.playSound(duration);
+}
