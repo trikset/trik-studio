@@ -230,7 +230,7 @@ const QMap<QString, items::RegionItem *> &WorldModel::regions() const
 	return mRegions;
 }
 
-const QList<QGraphicsLineItem *> &WorldModel::trace() const
+const QList<QGraphicsPathItem *> &WorldModel::trace() const
 {
 	return mRobotTrace;
 }
@@ -325,23 +325,28 @@ void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const Q
 	if (pen.color() == QColor(Qt::transparent)) {
 		return;
 	}
-
-	QGraphicsLineItem * const traceItem = new QGraphicsLineItem(QLineF(begin, end));
-	traceItem->setPen(pen);
-	traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Marker);
-
-	if (mRobotTrace.isEmpty()) {
+	if (mRobotTrace.isEmpty() || mRobotTrace.last()->pen() != pen) {
+		auto path = QPainterPath(begin);
+		path.lineTo(end);
+		auto traceItem = new QGraphicsPathItem(path);
+		traceItem->setPen(pen);
+		traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Marker);
 		emit robotTraceAppearedOrDisappeared(true);
+		mRobotTrace << traceItem;
+		emit traceItemAddedOrChanged(traceItem);
+	} else {
+		auto path = mRobotTrace.last()->path();
+		path.moveTo(begin);
+		path.lineTo(end);
+		mRobotTrace.last()->setPath(path);
+		emit traceItemAddedOrChanged(mRobotTrace.last());
 	}
-
-	mRobotTrace << traceItem;
-	emit traceItemAdded(traceItem);
 }
 
 void WorldModel::clearRobotTrace()
 {
 	while (!mRobotTrace.isEmpty()) {
-		QGraphicsLineItem * const toRemove = mRobotTrace.first();
+		auto const toRemove = mRobotTrace.first();
 		mRobotTrace.removeOne(toRemove);
 		emit itemRemoved(toRemove);
 	}

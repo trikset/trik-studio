@@ -82,8 +82,8 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onImageItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
 			, this, [=](items::RegionItem *item) { addItem(item); });
-	connect(&mModel.worldModel(), &model::WorldModel::traceItemAdded
-			, this, [=](QGraphicsLineItem *item) { addItem(item); });
+	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
+			, this, [=](QGraphicsPathItem *item) { addItem(item); });
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, this, &TwoDModelScene::onItemRemoved);
 
 	connect(&mModel, &model::Model::robotAdded, this, &TwoDModelScene::onRobotAdd);
