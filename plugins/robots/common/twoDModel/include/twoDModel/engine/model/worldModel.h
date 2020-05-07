@@ -238,7 +238,7 @@ private:
 	QMap<QString, items::RegionItem *> mRegions;
 	QMap<QString, Image*> mImages; // takes ownership
 	QMap<QString, int> mOrder;
-	QList<QGraphicsPathItem *> mRobotTrace;
+	QList<QGraphicsPathItem *> mRobotTrace; // Doesn`t take ownership.
 	Image *mBackgroundImage = nullptr;
 	QRect mBackgroundRect;
 	QScopedPointer<QDomDocument> mXmlFactory;
