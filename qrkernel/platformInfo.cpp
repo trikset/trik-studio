@@ -124,7 +124,8 @@ void PlatformInfo::enableHiDPISupport()
 	if (!qEnvironmentVariableIsSet("QT_DEVICE_PIXEL_RATIO")
 			&& !qEnvironmentVariableIsSet("QT_AUTO_SCREEN_SCALE_FACTOR")
 			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
-			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
+			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")
+			&& QOperatingSystemVersion::currentType() != QOperatingSystemVersion::Windows) {
 		// Only if there is no attempt to set from the system environment	
 			QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	}
