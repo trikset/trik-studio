@@ -268,8 +268,24 @@ void MainWindow::connectActions()
 		}
 	});
 
-	connect(mUi->actionUndo, &QAction::triggered, mController, &Controller::undo);
-	connect(mUi->actionRedo, &QAction::triggered, mController, &Controller::redo);
+	connect(mUi->actionUndo, &QAction::triggered, this, [this](){
+		text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
+		if (area) {
+			area->undo();
+		}
+		else {
+			mController->undo();
+		}
+	});
+	connect(mUi->actionRedo, &QAction::triggered, this, [this](){
+		text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
+		if (area) {
+			area->redo();
+		}
+		else {
+			mController->redo();
+		}
+	});
 
 	connect(mUi->actionPreferences, &QAction::triggered, this, &MainWindow::showPreferencesDialog);
 
