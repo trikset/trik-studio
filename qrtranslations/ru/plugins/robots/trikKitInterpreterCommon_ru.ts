@@ -158,8 +158,8 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+96"/>
-        <location line="+63"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+90"/>
+        <location line="+71"/>
         <source>2d model shell part was not found</source>
         <translation>Консоль 2d модели не найдена</translation>
     </message>

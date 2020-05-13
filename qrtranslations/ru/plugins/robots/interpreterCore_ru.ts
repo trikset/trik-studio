@@ -87,7 +87,7 @@
         <translation>Графики</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+49"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+53"/>
         <source>Subprograms</source>
         <translation>Подпрограммы</translation>
     </message>
