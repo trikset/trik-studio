@@ -228,7 +228,7 @@ void Controller::setActiveStack(UndoStack *stack)
 
 void Controller::connectStack(const UndoStack *stack)
 {
-	connect(stack, SIGNAL(cleanChanged(bool)), this, SLOT(resetModifiedState()));
-	connect(stack, SIGNAL(canRedoChanged(bool)), this, SLOT(resetCanRedoState()));
-	connect(stack, SIGNAL(canUndoChanged(bool)), this, SLOT(resetCanUndoState()));
+	connect(stack, &UndoStack::cleanChanged, this, &Controller::resetModifiedState);
+	connect(stack, &UndoStack::canRedoChanged, this, &Controller::resetCanRedoState);
+	connect(stack, &UndoStack::canUndoChanged, this, &Controller::resetCanUndoState);
 }
