@@ -98,7 +98,7 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+88"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+84"/>
         <location line="+70"/>
         <source>2d model shell part was not found</source>
         <translation type="unfinished"></translation>

@@ -61,19 +61,15 @@ TrikBrick::~TrikBrick()
 
 void TrikBrick::reset()
 {
-	mKeys.reset();///@todo: reset motos/device maps?
-	//mDisplay.reset(); - is actually needed? Crashes app at exit
 	emit stopWaiting();
+	mKeys.reset();///@todo: reset motos/device maps?
+	//mDisplay.reset(); /// - is actually needed? Crashes app at exit
 	for (const auto &m : mMotors) {
 		m->powerOff();
 	}
 
 	for (const auto &e : mEncoders) {
 		e->reset();
-	}
-
-	for (const auto &t : mTimers) {
-		t->stop();
 	}
 
 	mTimers.clear();
@@ -440,7 +436,12 @@ QStringList TrikBrick::readAll(const QString &path)
 utils::AbstractTimer *TrikBrick::timer(int milliseconds)
 {
 	utils::AbstractTimer *result = mTwoDRobotModel->timeline().produceTimer();
-	mTimers.append(QSharedPointer<utils::AbstractTimer>(result));
+	// TODO: This memory leak is a hot fix for bad design
+	// Otherwise crash on stop can happen if we have signal connection
+	// from JS ScriptEngine.
+	mTimers.append(QSharedPointer<utils::AbstractTimer>(result, [](utils::AbstractTimer *t){
+					   t->stop();
+				   }));
 	result->setRepeatable(true);
 	result->start(milliseconds);
 	return result;

@@ -141,11 +141,11 @@ void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
 
 void trik::TrikTextualInterpreter::abort()
 {
-	//mScriptRunner.abort();
-	mBrick.stopWaiting();
 	Q_ASSERT(mScriptRunner.thread() == thread());
 	// just a wild test
 	QMetaObject::invokeMethod(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::abort, Qt::QueuedConnection);
+	//mScriptRunner.abort();
+	mBrick.stopWaiting();
 	mRunning = false; // reset brick?
 	mBrick.processSensors(false);
 }
