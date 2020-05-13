@@ -53,8 +53,6 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 	mSensorUpdater->setInterval(model->updateIntervalForInterpretation()); // seems to be x2 of timeline tick
 	connect(mSensorUpdater.data(), &utils::AbstractTimer::timeout
 			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::updateSensorsValues);
-
-	reinitImitationCamera();
 }
 
 TrikBrick::~TrikBrick()
@@ -109,8 +107,7 @@ void TrikBrick::init()
 	mGyroscope.reset(); // for some reason it won't reconnect to the robot parts otherwise.
 	mAccelerometer.reset();
 	mTrikProxyMarker.reset();
-	mImitationCamera.reset();
-
+	reinitImitationCamera();
 	processSensors(true);
 }
 
@@ -451,7 +448,6 @@ utils::AbstractTimer *TrikBrick::timer(int milliseconds)
 
 void TrikBrick::processSensors(bool isRunning)
 {
-	QMetaObject::invokeMethod(mSensorUpdater.data(), [&](){isRunning ?
-					mSensorUpdater->start() : mSensorUpdater->stop();});
+	QMetaObject::invokeMethod(mSensorUpdater.data()
+							  , [this, isRunning](){isRunning ? mSensorUpdater->start() : mSensorUpdater->stop();});
 }
-

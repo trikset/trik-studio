@@ -196,10 +196,6 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 				dir.cd(curPath);
 			}
 		}
-
-		if (mTextualInterpreter) {
-			mTextualInterpreter->reinitRobotsParts();
-		}
 	};
 
 

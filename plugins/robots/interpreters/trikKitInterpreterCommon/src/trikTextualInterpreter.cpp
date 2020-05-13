@@ -153,8 +153,6 @@ void trik::TrikTextualInterpreter::abort()
 void trik::TrikTextualInterpreter::init()
 {
 	mBrick.init(); // very crucial. Maybe move into interpret methods?
-	// TODO: Remove this hack after trikRuntime is fixed to support source directory changes in camera imitation
-	reinitRobotsParts();
 }
 
 void trik::TrikTextualInterpreter::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
@@ -247,11 +245,6 @@ QStringList trik::TrikTextualInterpreter::supportedRobotModelNames() const
 QStringList trik::TrikTextualInterpreter::knownMethodNames() const
 {
 	return mScriptRunner.knownMethodNames();
-}
-
-void trik::TrikTextualInterpreter::reinitRobotsParts()
-{
-	mBrick.reinitImitationCamera();
 }
 
 void trik::TrikTextualInterpreter::scriptFinished(const QString &error, int scriptId)
