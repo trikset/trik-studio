@@ -272,6 +272,8 @@ void MainWindow::connectActions()
 		text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
 		if (area) {
 			area->undo();
+			mUi->actionUndo->setEnabled(area->isUndoAvailable());
+			mUi->actionRedo->setEnabled(area->isRedoAvailable());
 		}
 		else {
 			mController->undo();
@@ -281,6 +283,8 @@ void MainWindow::connectActions()
 		text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
 		if (area) {
 			area->redo();
+			mUi->actionUndo->setEnabled(area->isUndoAvailable());
+			mUi->actionRedo->setEnabled(area->isRedoAvailable());
 		}
 		else {
 			mController->redo();
@@ -335,6 +339,7 @@ void MainWindow::connectActions()
 
 	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::changeWindowTitle);
 	connect(mTextManager, &text::TextManager::textChanged, this, &MainWindow::setTextChanged);
+	connect(mTextManager, &text::TextManager::textChanged, mUi->actionUndo, &QAction::setEnabled);
 
 	connect(mProjectManager, &ProjectManager::afterOpen, mUi->paletteTree, &PaletteTree::refreshUserPalettes);
 	connect(mProjectManager, &ProjectManager::closed, mUi->paletteTree, &PaletteTree::refreshUserPalettes);
@@ -1282,12 +1287,16 @@ void MainWindow::currentTabChanged(int newIndex)
 	mUi->actionFind->setEnabled(!isDecorativeTab);
 	mUi->actionFind_and_replace->setEnabled(!isDecorativeTab);
 	mUi->actionGesturesShow->setEnabled(qReal::SettingsManager::value("gesturesEnabled").toBool());
+	mUi->actionRedo->setEnabled(mController->canRedo());
+	mUi->actionUndo->setEnabled(mController->canUndo());
 
 	if (isEditorTab) {
 		const Id currentTabId = getCurrentTab()->mvIface().rootId();
 		mToolManager->activeTabChanged(TabInfo(currentTabId, getCurrentTab()));
 	} else if (text::QScintillaTextEdit * const text = dynamic_cast<text::QScintillaTextEdit *>(currentTab())) {
 		mToolManager->activeTabChanged(TabInfo(mTextManager->path(text), text));
+		mUi->actionRedo->setEnabled(text->isRedoAvailable());
+		mUi->actionUndo->setEnabled(text->isUndoAvailable());
 	} else {
 		mToolManager->activeTabChanged(TabInfo(currentTab()));
 	}
