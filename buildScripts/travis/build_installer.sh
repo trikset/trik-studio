@@ -7,7 +7,8 @@ case $TRAVIS_OS_NAME in
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
-    QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
+    QTIFWBIN=/opt/qtifw/bin
+    #QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
     TSNAME=trik-studio-installer-linux-$TRAVIS_BRANCH.run
     ;;
   *) exit 1 ;;
@@ -28,13 +29,12 @@ then
       || false \
 "
       fi
-#
-#	ls $QTBIN/../../../Tools/QtInstallerFramework/*
-#      $EXECUTOR bash -ic "\
-#      echo Start build installer \
-#      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-#      && mv installer/trik-studio*installer* installer/$TSNAME \
-#      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
-#      || false \
-#"
+
+      $EXECUTOR bash -ic "\
+      echo Start build installer \
+      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+      && mv installer/trik-studio*installer* installer/$TSNAME \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
+      || false \
+"
 fi
