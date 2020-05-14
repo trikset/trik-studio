@@ -11,7 +11,7 @@ environment:
 # download project artifacts
 before_deploy:
   - ps: iex ((new-object net.webclient).DownloadString('https://github.com/trikset/trik-studio/blob/master/deploy.ps1'))
-  
+
 deploy:
   - provider: Environment
     name: trik-studio-fresh
@@ -24,7 +24,7 @@ deploy:
     on:
       ARCH: 64
       APPVEYOR_PROJECT_SLUG: $(deploy_project)
-      
+
   - provider: Environment
     name: github-release
     github_release_artifact: installer\$(autoinstaller_zip_name)
