@@ -51,7 +51,7 @@ cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5XcbQpa.so*                                     $PWD/../data/lib/
-rsync -avR "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc}.so* "$PWD/../data/lib/"
+rsync -avR "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc,png12}.so* "$PWD/../data/lib/"
 #Take them from Qt if exist
 rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
 
