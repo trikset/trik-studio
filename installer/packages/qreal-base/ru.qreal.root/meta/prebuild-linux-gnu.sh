@@ -51,16 +51,15 @@ cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5XcbQpa.so*                                     $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libicudata.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libicui18n.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libicuuc.so*                                         $PWD/../data/lib/
+rsync -avR "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc}.so* "$PWD/../data/lib/"
+#Take them from Qt if exist
+rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
 
 cp     $QT_DIR/plugins/platforms/libq{xcb,minimal,offscreen}.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/
 
-rsync -av /usr/lib/$(uname -i)-linux-gnu/libstdc++.so*                               $PWD/../data/lib/
 #rsync -av /lib/$(uname -i)-linux-gnu/libc.so*                               $PWD/../data/lib/
 #rsync -av /lib/$(uname -i)-linux-gnu/libc-2.*.so*                               $PWD/../data/lib/
 
