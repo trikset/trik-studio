@@ -43,6 +43,8 @@ environment:
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
+    api_token:
+      secure: ABC123==
   matrix:
       - QT: 5.12
         ARCH: 32
@@ -215,7 +217,7 @@ before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
 
 deploy_script:
-  - ps: Start-AppveyorBuild -ApiKey $env:api_token -ProjectSlug $(master_ci) -EnvironmentVariables @{ "deploy_project" = $(master_ci), "deploy_version" = $env:appveyor_build_version, "autoinstaller_zip_name" = $(AUTOINSTALLER_ZIP_NAME) }
+  - ps: Start-AppveyorBuild -ApiKey $env:api_token -ProjectSlug $(master_ci) -EnvironmentVariables @{ "deploy_project" = $(master_ci), "deploy_version" = $env:appveyor_build_version, "autoinstaller_zip_name" = $(AUTOINSTALLER_ZIP_NAME), "api_token" = $env:api_token }
 
 on_finish:
   - ccache -s

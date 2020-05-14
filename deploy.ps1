@@ -1,12 +1,8 @@
-# api_token - AppVeyor REST API authentication token. Can be found/generated on this page.
 $token = $env:api_token
 $accountName = $env:appveyor_account_name
-# deploy_project - project slug to download artifacts from. Project slug can be seen in the project URL.
 $projectSlug = $env:deploy_project
-# deploy_version - build version to deploy. If not specified artifacts from the most recent version will be downloaded.
 $buildVersion = $env:deploy_version
 $downloadLocation = $env:appveyor_build_folder
-# deploy_artifact - file name or deployment name of artifact to download. If not specified all artifacts will be downloaded.
 $deployArtifact = $env:deploy_artifact
 
 $apiUrl = 'https://ci.appveyor.com/api'

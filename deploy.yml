@@ -1,17 +1,10 @@
-  api_token:
-    secure: ABC123==
-  deploy_project: my-web
-  deploy_version: ''
-  deploy_artifact: ''
-  
-
 environment:
-  # AppVeyor API token for your account, project, version and artifact(s) to download
-  api_token:
-    secure: ABC123==
-  master_ci:
-    secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
-  deploy_project: $(master_ci)
+  # api_token:
+  #   secure: ABC123==
+  #master_ci:
+  #  secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
+  #deploy_project: $(master_ci)
+  autoinstaller_zip_name:
   deploy_version: ''            # download artifacts from latest build if no version specified
   deploy_artifact: ''           # download all artifacts if empty
 
@@ -19,35 +12,28 @@ environment:
 before_deploy:
   - ps: iex ((new-object net.webclient).DownloadString('https://github.com/trikset/trik-studio/blob/master/deploy.ps1'))
   
-# here is your own custom deployment code
 deploy:
   - provider: Environment
     name: trik-studio-fresh
     on:
       ARCH: 32
-      APPVEYOR_PROJECT_SLUG: $(master_ci)
+      APPVEYOR_PROJECT_SLUG: $(deploy_project)
 
   - provider: Environment
     name: trik-studio-64
     on:
       ARCH: 64
-      APPVEYOR_PROJECT_SLUG: $(master_ci)
+      APPVEYOR_PROJECT_SLUG: $(deploy_project)
       
   - provider: Environment
     name: github-release
-    github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
+    github_release_artifact: installer\$(autoinstaller_zip_name)
     on:
       ARCH: 32
       QT: 5.12
       CONFIGURATION: release
       APPVEYOR_REPO_TAG: true
-      APPVEYOR_PROJECT_SLUG: $(master_ci)
+      APPVEYOR_PROJECT_SLUG: $(deploy_project)
 
-# notifications
-# notifications:
-#   - provider: <provider_1>
-#     settings: ...
-
-# disable build and test pahses
 build: off
 test: off
