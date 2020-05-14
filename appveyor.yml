@@ -43,6 +43,12 @@ environment:
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
+    username:
+      secure: eZn8R+p1+cK5mbbM3hgwKg==
+    server:
+      secure: eNEOVBPbi9eZ1J6/JtawxA==
+    password:
+      secure: kO+8E0a4haAAeTldXyseHw==
   matrix:
       - QT: 5.12
         ARCH: 32
@@ -130,6 +136,8 @@ clone_script:
 
 install:
   - 'qmake -v && qmake -query'
+  - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
+  - pacman --verbose --noconfirm --sync ccache rsync curl unzip sshpass
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
@@ -211,32 +219,11 @@ after_test:
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
   - bash -c "env LC_ALL=C date -u"
-
-before_deploy:
-  - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
-
-deploy:
-  - provider: Environment
-    name: trik-studio-fresh
-    on:
-      ARCH: 32
-      APPVEYOR_PROJECT_SLUG: $(master_ci)
-
-  - provider: Environment
-    name: trik-studio-64
-    on:
-      ARCH: 64
-      APPVEYOR_PROJECT_SLUG: $(master_ci)
-      
-  - provider: Environment
-    name: github-release
-    github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
-    on:
-      ARCH: 32
-      QT: 5.12
-      CONFIGURATION: release
-      APPVEYOR_REPO_TAG: true
-      APPVEYOR_PROJECT_SLUG: $(master_ci)
+  #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+  - echo %password%
+  - echo %username%
+  - echo %server%
+  - sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/
 
 on_finish:
   - ccache -s
