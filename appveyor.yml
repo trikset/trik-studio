@@ -43,8 +43,12 @@ environment:
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
-    api_token:
-      secure: ABC123==
+    username:
+      secure: eZn8R+p1+cK5mbbM3hgwKg==
+    server:
+      secure: eNEOVBPbi9eZ1J6/JtawxA==
+    password:
+      secure: kO+8E0a4haAAeTldXyseHw==
   matrix:
       - QT: 5.12
         ARCH: 32
@@ -212,12 +216,8 @@ after_test:
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
   - bash -c "env LC_ALL=C date -u"
-
-before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
-
-deploy_script:
-  - ps: Start-AppveyorBuild -ApiKey $env:api_token -ProjectSlug $(master_ci) -EnvironmentVariables @{ "deploy_project" = $(master_ci), "deploy_version" = $env:appveyor_build_version, "autoinstaller_zip_name" = $(AUTOINSTALLER_ZIP_NAME), "api_token" = $env:api_token }
+  - sshpass -p $(password) rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$(INSTALLER_NAME) $(username)@$(server):dl/ts/fresh/installer/
 
 on_finish:
   - ccache -s
