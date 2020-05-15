@@ -2003,8 +2003,6 @@ void MainWindow::showErrors(const gui::ErrorReporter * const errorReporter)
 
 void MainWindow::reinitModels()
 {
-	closeAllTabs();
-
 	models().reinit();
 
 	PropertyEditorModel* pModel = dynamic_cast<PropertyEditorModel*>(mUi->propertyEditor->model());
