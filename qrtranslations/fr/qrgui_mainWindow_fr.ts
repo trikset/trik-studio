@@ -891,7 +891,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+194"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>

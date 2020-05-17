@@ -912,7 +912,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished">Не получилось открыть %1</translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+194"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>

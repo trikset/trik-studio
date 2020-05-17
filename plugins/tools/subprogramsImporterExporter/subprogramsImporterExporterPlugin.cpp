@@ -149,9 +149,16 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 	}
 
 	qReal::Id activeDiagram = mMainWindowInterpretersInterface->activeDiagram();
+	QHash<QString, QVariant> oldMeta;
+	for (auto metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
+		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
+	}
 	mRepo->importFromDisk(fileName);
 	mMainWindowInterpretersInterface->reinitModels();
 	mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
+	for (auto metaKey : oldMeta.keys()) {
+		mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
+	}
 	mProjectManager->afterOpen(mRepo->workingFile());
 
 	checkSubprogramsForUniqueNames();
@@ -240,7 +247,10 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 	SubprogramsCollectionDialog dialog(map);
 	dialog.exec();
-	auto mainWorldModel = mLogicalModel->logicalRepoApi().metaInformation("worldModel").toString();
+	QHash<QString, QVariant> oldMeta;
+	for (auto metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
+		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
+	}
 	if (dialog.result() == QDialog::Accepted) {
 		qReal::Id activeDiagram = mMainWindowInterpretersInterface->activeDiagram();
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
@@ -254,7 +264,9 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 		mMainWindowInterpretersInterface->reinitModels();
 		mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
-		mLogicalModel->mutableLogicalRepoApi().setMetaInformation("worldModel", mainWorldModel);
+		for (auto metaKey : oldMeta.keys()) {
+			mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
+		}
 		mProjectManager->afterOpen(mRepo->workingFile());
 
 		checkSubprogramsForUniqueNames();
