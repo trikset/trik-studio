@@ -138,14 +138,20 @@ $qRealDir/librobots-utils.so* \
 $qRealDir/libPythonQt*.so* \
 $qRealDir/libBox2D.so* .
 
+rsync -av $qRealDir/libqextserialport.so* \
+$qRealDir/librobots-ev3-kit.so* \
+$qRealDir/librobots-utils.so* \
+$qRealDir/librobots-kit-base.so* \
+.
+
+rsync -av $qRealDir/librobots-nxt-kit.so* .
 
 rsync -avR $qRealDir/./translations/ru/*.qm \
 	$qRealDir/./translations/ru/plugins/robots/	\
 	./
 
 rsync -avR $qRealDir/./plugins/editors/* $qRealDir/./plugins/tools/librobots-plugin.so \
-	$qRealDir/./plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so \
-	$qRealDir/./plugins/tools/kitPlugins/librobots-trik-v62-interpreter.so \
+	$qRealDir/./plugins/tools/kitPlugins/librobots-*-interpreter.so \
 	./
 
 # Copying TRIKRuntime dependencies
