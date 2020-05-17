@@ -142,8 +142,9 @@ rsync -av $qRealDir/libqextserialport.so* \
 $qRealDir/librobots-ev3-kit.so* \
 $qRealDir/librobots-utils.so* \
 $qRealDir/librobots-kit-base.so* \
-$qRealDir/libqextserialport.so* \
 .
+
+rsync -av $qRealDir/librobots-nxt-kit.so* .
 
 rsync -avR $qRealDir/./translations/ru/*.qm \
 	$qRealDir/./translations/ru/plugins/robots/	\
