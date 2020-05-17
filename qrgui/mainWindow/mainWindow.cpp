@@ -335,7 +335,7 @@ void MainWindow::connectActions()
 
 	connect(mController, &Controller::canUndoChanged, mUi->actionUndo, &QAction::setEnabled);
 	connect(mController, &Controller::canRedoChanged, mUi->actionRedo, &QAction::setEnabled);
-	connect(mController, &Controller::modifiedChanged, mProjectManager, &ProjectManagerWrapper::setUnsavedIndicator);
+	connect(mController, &Controller::modifiedChanged, mProjectManager, &ProjectManagerWrapper::setStackUnsaved);
 
 	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::changeWindowTitle);
 	connect(mTextManager, &text::TextManager::textChanged, this, &MainWindow::setTextChanged);
@@ -932,7 +932,10 @@ void MainWindow::closeTab(int index)
 		const Id diagramId = diagram->editorViewScene().rootItemId();
 		if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
 			isClosed = mProjectManager->suggestToSaveChangesOrCancel();
-		} else {
+		} else if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")) {
+			if (mController->isUnsaved(diagramId.toString())) {
+				mProjectManager->setUnsavedIndicator(true);
+			}
 			isClosed = true;
 		}
 

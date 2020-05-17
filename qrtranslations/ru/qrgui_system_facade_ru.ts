@@ -51,7 +51,7 @@
         <translation>Невозможно открыть файл, пожалуйста, попробуйте другой.</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+35"/>
         <source>Select file with a save to import</source>
         <translation>Выберите файл для импорта</translation>
     </message>

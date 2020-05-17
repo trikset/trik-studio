@@ -41,19 +41,23 @@ ProjectManagerWrapper::ProjectManagerWrapper(MainWindow *mainWindow, TextManager
 	, mMainWindow(mainWindow)
 	, mTextManager(textManager)
 	, mVersionsConverter(*mMainWindow)
+	, mStackUnsaved(false)
 {
 	setSaveFilePath();
 }
 
 bool ProjectManagerWrapper::suggestToSaveChangesOrCancel()
 {
-	if (!mUnsavedIndicator) {
+	if (!mUnsavedIndicator && !mStackUnsaved) {
 		return true;
 	}
 
 	switch (suggestToSaveOrCancelMessage()) {
 	case QMessageBox::DestructiveRole:
-		mUnsavedIndicator=false;
+		mMainWindow->controller()->projectSaved();
+		// signals from ProjectSaved do not have time to change mStackUnsaved
+		mStackUnsaved = false;
+		mUnsavedIndicator = false;
 		return true;
 	case QMessageBox::RejectRole:
 		return false;
@@ -200,7 +204,7 @@ void ProjectManagerWrapper::refreshWindowTitleAccordingToSaveFile()
 void ProjectManagerWrapper::refreshTitleModifiedSuffix()
 {
 	const QString modifiedSuffix = tr(" [modified]");
-	if (mUnsavedIndicator && !mMainWindow->windowTitle().endsWith(modifiedSuffix)) {
+	if ((mUnsavedIndicator || mStackUnsaved) && !mMainWindow->windowTitle().endsWith(modifiedSuffix)) {
 		mMainWindow->setWindowTitle(mMainWindow->windowTitle() + modifiedSuffix);
 	}
 }
@@ -271,6 +275,12 @@ bool ProjectManagerWrapper::saveOrSuggestToSaveAs()
 void ProjectManagerWrapper::setUnsavedIndicator(bool isUnsaved)
 {
 	ProjectManager::setUnsavedIndicator(isUnsaved);
+	refreshWindowTitleAccordingToSaveFile();
+}
+
+void ProjectManagerWrapper::setStackUnsaved(bool isUnsaved)
+{
+	mStackUnsaved = isUnsaved;
 	refreshWindowTitleAccordingToSaveFile();
 }
 

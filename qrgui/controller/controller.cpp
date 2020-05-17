@@ -120,6 +120,15 @@ void Controller::moduleClosed(const QString &moduleId)
 	resetAll();
 }
 
+bool Controller::isUnsaved(const QString &moduleId) const
+{
+	if (moduleId.isEmpty() || !mModuleStacks.keys().contains(moduleId))
+		return false;
+	if (mModuleStacks[moduleId] && !mModuleStacks[moduleId]->isClean())
+		return true;
+	return false;
+}
+
 void Controller::resetModifiedState()
 {
 	bool wasModified = false;

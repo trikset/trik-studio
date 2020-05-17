@@ -36,6 +36,8 @@ public:
 	bool canUndo() const override;
 	bool canRedo() const override;
 
+	bool isUnsaved(const QString &moduleId) const;
+
 public slots:
 	void setActiveModule(const QString &moduleId) override;
 	void moduleOpened(const QString &moduleId) override;

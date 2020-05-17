@@ -151,6 +151,7 @@ bool ProjectManager::openProject(const QString &fileName)
 		return false;
 	}
 
+	setUnsavedIndicator(false);
 	setSaveFilePath(fileName);
 	refreshApplicationStateAfterOpen();
 

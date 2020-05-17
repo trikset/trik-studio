@@ -46,6 +46,7 @@ public slots:
 	bool saveOrSuggestToSaveAs() override;
 
 	void setUnsavedIndicator(bool isUnsaved) override;
+	void setStackUnsaved(bool isUnsaved);
 
 public:
 	bool open(const QString &fileName = QString()) override;
@@ -75,6 +76,8 @@ private:
 	MainWindow *mMainWindow;
 	TextManagerInterface *mTextManager;
 	VersionsConverterManager mVersionsConverter;
+	bool mStackUnsaved;
+
 	bool openQRProject(const QFileInfo &fileInfo); //move to public?
 };
 
