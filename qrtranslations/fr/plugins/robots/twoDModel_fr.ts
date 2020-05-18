@@ -480,6 +480,11 @@
     </message>
     <message>
         <location line="+2"/>
+        <source>Load world model without robot configuration...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Clear items</source>
         <translation>Tout effacer</translation>
     </message>
@@ -684,7 +689,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+94"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -701,16 +706,22 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
+        <location line="+22"/>
         <source>2D model saves (*.xml)</source>
         <translation>Fichiers de sauvegarde du modèle 2D (*.xml) </translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-22"/>
         <source>Loading world and robot model</source>
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+329"/>
+        <location line="+22"/>
+        <source>Loading world without robot model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+334"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>
