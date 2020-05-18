@@ -320,6 +320,8 @@ void TwoDModelWidget::connectUiButtons()
 
 	connect(&mActions->saveModelAction(), &QAction::triggered, this, &TwoDModelWidget::saveWorldModel);
 	connect(&mActions->loadModelAction(), &QAction::triggered, this, &TwoDModelWidget::loadWorldModel);
+	connect(&mActions->loadModelWithoutRobotAction(), &QAction::triggered
+			, this, &TwoDModelWidget::loadWorldModelWithoutRobot);
 
 	connect(mUi->speedUpButton, &QAbstractButton::clicked, this, &TwoDModelWidget::speedUp);
 	connect(mUi->speedDownButton, &QAbstractButton::clicked, this, &TwoDModelWidget::speedDown);
@@ -501,7 +503,33 @@ void TwoDModelWidget::loadWorldModel()
 		mController->execute(command);
 	}
 }
+void TwoDModelWidget::loadWorldModelWithoutRobot()
+{
+	const QString loadFileName = QRealFileDialog::getOpenFileName("Open2DModelWidget", this
+			, tr("Loading world without robot model"), ".", tr("2D model saves (*.xml)"));
+	if (loadFileName.isEmpty()) {
+		return;
+	}
 
+	QString errorMessage;
+	int errorLine = 0;
+	int errorColumn = 0;
+	QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
+	if (!errorMessage.isEmpty()) {
+		mModel.errorReporter()->addError(QString("%1:%2: %3")
+				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+	}
+
+	// TODO: Split saves and remove temporary hack
+	auto saveRoot = save.firstChildElement("root");
+	auto currentRoot = generateWorldModelXml().firstChildElement("root");
+	saveRoot.replaceChild(currentRoot.firstChildElement("robots"), saveRoot.firstChildElement("robots"));
+
+	auto command = new commands::LoadWorldCommand(*this, save);
+	if (mController) {
+		mController->execute(command);
+	}
+}
 bool TwoDModelWidget::isColorItem(AbstractItem * const item) const
 {
 	return dynamic_cast<items::ColorFieldItem *>(item)

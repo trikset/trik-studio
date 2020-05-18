@@ -147,6 +147,7 @@ private slots:
 
 	void saveWorldModel();
 	void loadWorldModel();
+	void loadWorldModelWithoutRobot();
 
 	void onSelectionChange();
 

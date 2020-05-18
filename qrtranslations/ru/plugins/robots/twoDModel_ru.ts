@@ -755,6 +755,11 @@
         <translation>Загрузить модель мира...</translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Load world model without robot configuration...</source>
+        <translation>Загрузить модель мира без конфигурации робота...</translation>
+    </message>
+    <message>
         <source>Set background...</source>
         <translation type="vanished">Установить фон...</translation>
     </message>
@@ -1023,7 +1028,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+94"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1040,13 +1045,19 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
+        <location line="+22"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-22"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Loading world without robot model</source>
+        <translation>Загрузка модели мира без модели робота</translation>
     </message>
     <message>
         <source>Select background image</source>
@@ -1061,7 +1072,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+329"/>
+        <location line="+333"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

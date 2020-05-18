@@ -42,6 +42,10 @@ public:
 	/// Returns a reference to action that prompts user to import current world model from some file.
 	QAction &loadModelAction() const;
 
+	/// Returns a reference to action that prompts user to import current world model
+	/// from some file without robot configuration.
+	QAction &loadModelWithoutRobotAction() const;
+
 	/// Returns a reference to action that clears all items from 2D model scene;
 	QAction &deleteAllAction() const;
 
@@ -67,6 +71,7 @@ private:
 
 	QScopedPointer<QAction> mSaveWorldModelAction;
 	QScopedPointer<QAction> mLoadWorldModelAction;
+	QScopedPointer<QAction> mLoadWorldWithoutRobotAction;
 
 	QScopedPointer<QAction> mSeparator2;
 
