@@ -524,7 +524,6 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 	auto saveRoot = save.firstChildElement("root");
 	auto currentRoot = generateWorldModelXml().firstChildElement("root");
 	saveRoot.replaceChild(currentRoot.firstChildElement("robots"), saveRoot.firstChildElement("robots"));
-	saveRoot.replaceChild(currentRoot.firstChildElement("settings"), saveRoot.firstChildElement("settings"));
 
 	auto command = new commands::LoadWorldCommand(*this, save);
 	if (mController) {
