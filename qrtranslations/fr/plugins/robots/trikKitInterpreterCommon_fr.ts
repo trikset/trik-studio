@@ -99,7 +99,7 @@
     <name>trik::TrikBrick</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+96"/>
-        <location line="+63"/>
+        <location line="+64"/>
         <source>2d model shell part was not found</source>
         <translation type="unfinished"></translation>
     </message>

@@ -107,6 +107,7 @@ void TrikBrick::init()
 	mMotors.clear(); // needed? reset?
 	mSensors.clear();
 	mEncoders.clear();
+	mLineSensors.clear();
 	mKeys.init();
 	mGyroscope.reset(); // for some reason it won't reconnect to the robot parts otherwise.
 	processSensors(true);
