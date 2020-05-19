@@ -779,7 +779,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+111"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -914,7 +914,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+68"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+71"/>
         <source>Save</source>
         <translation>Enregister</translation>
     </message>
@@ -949,7 +949,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>[modifié]</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+88"/>
         <source>Select file to save current metamodel to</source>
         <translation>Choisir un fichier pour enregister le metamodèle courant</translation>
     </message>

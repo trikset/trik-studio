@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+111"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1055"/>
+        <location line="-1058"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -837,7 +837,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+626"/>
+        <location line="+629"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
@@ -1024,7 +1024,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+68"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+71"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -1059,7 +1059,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation> [изменён]</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+88"/>
         <source>Select file to save current metamodel to</source>
         <translation>Выберите файл для сохранения метамодели</translation>
     </message>
