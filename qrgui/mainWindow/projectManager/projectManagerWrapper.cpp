@@ -41,7 +41,6 @@ ProjectManagerWrapper::ProjectManagerWrapper(MainWindow *mainWindow, TextManager
 	, mMainWindow(mainWindow)
 	, mTextManager(textManager)
 	, mVersionsConverter(*mMainWindow)
-	, mStackUnsaved(false)
 {
 	setSaveFilePath();
 }
