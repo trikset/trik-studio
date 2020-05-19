@@ -62,16 +62,16 @@ environment:
 
 
 # Qt5.14 build takes too long (2x times) and reaches timeout
-#      - QT: 5.14
-#        ARCH: 32
-#        PYTHON_VERSION_MINOR: 8
-#        CONFIGURATION: release
-#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
-#        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      - QT: 5.14
+        ARCH: 32
+        PYTHON_VERSION_MINOR: 8
+        CONFIGURATION: release
+        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
+        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 
 matrix:
   allow_failures:
-    - image: Visual Studio 2019 # build is extremally slow with this image
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
 #  - '%CCACHE_DIR% -> **\*.pr?, appveyor.yml'
@@ -86,6 +86,13 @@ matrix:
 #    image: Visual Studio 2019
 
 init:
+  - set PYTHON_LIB=%PYTHON_PATH%\libs
+  - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
+  - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
+  - set PATH
+  - set PATH=%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%QTDIR%\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin
+  - set PATH
+  - pacman --verbose --noconfirm --sync ccache rsync curl unzip git
   - git config --global core.symlinks true
   - git config --global core.autocrlf true
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
@@ -121,14 +128,8 @@ clone_script:
 
 
 install:
-  - set PYTHON_LIB=%PYTHON_PATH%\libs
-  - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
-  - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
-  - set PATH=C:\Tools\curl\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
-  - set PATH
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
-  - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
