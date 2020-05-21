@@ -44,11 +44,11 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
     username:
-      secure: eZn8R+p1+cK5mbbM3hgwKg==
+      secure: ucQc7fKH0Up/856kozaDNg==
     server:
-      secure: eNEOVBPbi9eZ1J6/JtawxA==
+      secure: +lf3LenP/9gSf1E9GOiGQg==
     password:
-      secure: kO+8E0a4haAAeTldXyseHw==
+      secure: e2Rwbvcr6Z/YAX4N0/tO3w==
   matrix:
       - QT: 5.12
         ARCH: 32
