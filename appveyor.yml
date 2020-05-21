@@ -224,6 +224,32 @@ after_test:
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
   - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
 
+before_deploy:
+  - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+
+deploy:
+  - provider: Environment
+    name: trik-studio-fresh
+    on:
+      ARCH: 32
+      APPVEYOR_PROJECT_SLUG: $(master_ci)
+
+  - provider: Environment
+    name: trik-studio-64
+    on:
+      ARCH: 64
+      APPVEYOR_PROJECT_SLUG: $(master_ci)
+
+  - provider: Environment
+    name: github-release
+    github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
+    on:
+      ARCH: 32
+      QT: 5.12
+      CONFIGURATION: release
+      APPVEYOR_REPO_TAG: true
+      APPVEYOR_PROJECT_SLUG: $(master_ci)
+
 on_finish:
   - ccache -s
   - bash -c "env LC_ALL=C date -u"
