@@ -222,7 +222,7 @@ after_test:
   - bash -c "env LC_ALL=C date -u"
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
-  - if "x%appveyor_repo_branch%" EQU "xmaster" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
+  - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
 
 on_finish:
   - ccache -s
