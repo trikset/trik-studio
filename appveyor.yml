@@ -43,6 +43,10 @@ environment:
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
+    server:
+      secure: z5zq17IIHeaJejIs42wtuoK9lEQ5bqpic9FqWHUMaAA
+    password:
+      secure: e2Rwbvcr6Z/YAX4N0/tO3w==
   matrix:
       - QT: 5.12
         ARCH: 32
@@ -86,6 +90,7 @@ matrix:
 #    image: Visual Studio 2019
 
 init:
+  # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - set PYTHON_PATH=C:\Python3%PYTHON_VERSION_MINOR%
   - if "%ARCH%" == "64" (set PYTHON_PATH=%PYTHON_PATH%-x64)
   - set PYTHON_LIB=%PYTHON_PATH%\libs
@@ -130,6 +135,8 @@ clone_script:
 
 install:
   - 'qmake -v && qmake -query'
+  - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
+  - pacman --verbose --noconfirm --sync ccache rsync curl unzip sshpass
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
@@ -211,6 +218,9 @@ after_test:
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio
   - bash -c "env LC_ALL=C date -u"
+  # deployment
+  #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+  - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %server%:dl/ts/fresh/installer/)
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
@@ -227,7 +237,7 @@ deploy:
     on:
       ARCH: 64
       APPVEYOR_PROJECT_SLUG: $(master_ci)
-      
+
   - provider: Environment
     name: github-release
     github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
@@ -241,7 +251,7 @@ deploy:
 on_finish:
   - ccache -s
   - bash -c "env LC_ALL=C date -u"
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 
 notifications:
