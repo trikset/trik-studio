@@ -44,9 +44,9 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
     server:
-      secure: z5zq17IIHeaJejIs42wtuoK9lEQ5bqpic9FqWHUMaAA
+      secure: yLdvOoCphRxSVmiBOJrbFx2qQqrC5Rknfaw8pFI+i0o=
     password:
-      secure: e2Rwbvcr6Z/YAX4N0/tO3w==
+      secure: kO+8E0a4haAAeTldXyseHw==
   matrix:
       - QT: 5.12
         ARCH: 32
@@ -222,7 +222,7 @@ after_test:
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
   - echo 'IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze "ssh -o StrictHostKeyChecking=no" installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)'
-  - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
+  - IF "x%server%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %server%:dl/ts/fresh/installer/)
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
