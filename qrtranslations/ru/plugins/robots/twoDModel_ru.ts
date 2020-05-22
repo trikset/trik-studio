@@ -658,6 +658,11 @@
         <source>Incorrect image, please try anouther one</source>
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
+    <message>
+        <location line="+454"/>
+        <source>Unknown image with imageId %1</source>
+        <translation>Неизвестное изображение с imageId %1</translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>

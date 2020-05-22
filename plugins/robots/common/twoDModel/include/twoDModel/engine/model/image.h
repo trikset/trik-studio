@@ -32,6 +32,7 @@ class Image
 {
 public:
 	Image();
+	Image(const QString &id);
 	Image(const QString &path, bool memorize);
 	Image(const Image &other);
 	~Image();

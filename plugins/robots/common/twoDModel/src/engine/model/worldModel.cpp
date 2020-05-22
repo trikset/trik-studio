@@ -315,6 +315,11 @@ void WorldModel::clear()
 
 	mOrder.clear();
 
+	for (Image* img : mImages.values()) {
+		delete img;
+	}
+	mImages.clear();
+
 	clearRobotTrace();
 
 	emit blobsChanged();
@@ -714,12 +719,18 @@ void WorldModel::createStylus(const QDomElement &element)
 
 items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool background)
 {
-	items::ImageItem *image = new items::ImageItem(mImages.value(element.attribute("imageId"), nullptr), QRect());
-	image->deserialize(element);
-	image->setBackgroundRole(background || element.attribute("isBackground") == "true");
-	addImageItem(image);
+	auto imageId = element.attribute("imageId");
+	auto image = mImages.value(imageId, nullptr);
+	if (!image) {
+		image = new Image(imageId);
+		mErrorReporter->addError(tr("Unknown image with imageId %1").arg(imageId));
+	}
+	items::ImageItem *imageItem = new items::ImageItem(image, QRect());
+	imageItem->deserialize(element);
+	imageItem->setBackgroundRole(background || element.attribute("isBackground") == "true");
+	addImageItem(imageItem);
 
-	return image;
+	return imageItem;
 }
 
 void WorldModel::createRegion(const QDomElement &element)

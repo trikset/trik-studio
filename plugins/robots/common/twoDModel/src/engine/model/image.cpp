@@ -38,6 +38,15 @@ Image::Image()
 {
 }
 
+Image::Image(const QString &id)
+	: mExternal(true)
+	, mIsSvg(false)
+	, mImageId(id)
+	, mImage(nullptr)
+	, mSvgRenderer(nullptr)
+{
+}
+
 Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
 	, mIsSvg(path.endsWith(".svg"))
@@ -104,6 +113,8 @@ void Image::serialize(QDomElement &target) const
 		target.setAttribute("path", mPath);
 		target.setAttribute("external", mExternal ? "true" : "false");
 		target.setAttribute("imageId", mImageId);
+	} else {
+		QLOG_WARN() << "Trying to save invalid image " << mImageId;
 	}
 
 	if (mExternal) {
@@ -191,6 +202,12 @@ void Image::draw(QPainter &painter, const QRect &rect, qreal zoom)
 		mSvgRenderer->render(&painter, rect);
 	} else if (!mImage.isNull()) {
 		painter.drawImage(rect, *mImage);
+	} else {
+		painter.save();
+		painter.setBrush(Qt::gray);
+		painter.setPen(Qt::gray);
+		painter.drawRect(rect);
+		painter.restore();
 	}
 }
 

@@ -43,10 +43,8 @@ environment:
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
-    username:
-      secure: ucQc7fKH0Up/856kozaDNg==
     server:
-      secure: +lf3LenP/9gSf1E9GOiGQg==
+      secure: z5zq17IIHeaJejIs42wtuoK9lEQ5bqpic9FqWHUMaAA
     password:
       secure: e2Rwbvcr6Z/YAX4N0/tO3w==
   matrix:
@@ -100,7 +98,7 @@ init:
   - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
   - set PATH
-  - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin
+  - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin;C:\Program Files\AppVeyor\BuildAgent\
   - set PATH
   - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
@@ -223,8 +221,12 @@ after_test:
   - bash -c "env LC_ALL=C date -u"
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+<<<<<<< HEAD
   - echo 'IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze "ssh -o StrictHostKeyChecking=no" installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)'
   - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
+=======
+  - IF "x%password%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %server%:dl/ts/fresh/installer/)
+>>>>>>> 344fc64d11438013146e04ee96695ee0b5256450
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
