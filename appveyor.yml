@@ -124,6 +124,7 @@ init:
   - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
   - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
   - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
+  - echo 'IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze "ssh -o StrictHostKeyChecking=no" installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)'
 
 clone_script:
     - cmd: |
@@ -222,6 +223,7 @@ after_test:
   - bash -c "env LC_ALL=C date -u"
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+  - echo 'IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze "ssh -o StrictHostKeyChecking=no" installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)'
   - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
 
 before_deploy:
