@@ -98,7 +98,7 @@ init:
   - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
   - set PATH
-  - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin
+  - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin;C:\Program Files\AppVeyor\BuildAgent\
   - set PATH
   - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
