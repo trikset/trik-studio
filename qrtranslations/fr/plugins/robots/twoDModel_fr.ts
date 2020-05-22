@@ -382,6 +382,11 @@
         <source>Incorrect image, please try anouther one</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+454"/>
+        <source>Unknown image with imageId %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
