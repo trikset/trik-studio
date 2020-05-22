@@ -221,12 +221,8 @@ after_test:
   - bash -c "env LC_ALL=C date -u"
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
-<<<<<<< HEAD
   - echo 'IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze "ssh -o StrictHostKeyChecking=no" installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)'
   - IF "x%username%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %username%@%server%:dl/ts/fresh/installer/)
-=======
-  - IF "x%password%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/%INSTALLER_NAME% %server%:dl/ts/fresh/installer/)
->>>>>>> 344fc64d11438013146e04ee96695ee0b5256450
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
