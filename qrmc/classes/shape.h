@@ -54,8 +54,8 @@ namespace qrmc {
 		bool hasLinePorts() const;
 		bool hasPicture() const;
 
-		int mWidth;
-		int mHeight;
+		int mWidth {-1};
+		int mHeight {-1};
 		QString mPicture;
 		QList<Label*> mLabels;
 		QList<Port*> mPorts;

@@ -78,7 +78,7 @@ private:
 
 	const qrRepo::LogicalRepoApi &mRepo;
 	QSet<qReal::Id> mVisitedNodes;
-	bool mSearchTerminated;
+	bool mSearchTerminated {};
 };
 
 }

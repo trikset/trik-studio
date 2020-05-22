@@ -193,20 +193,20 @@ signals:
 private:
 	void copyFrom(const LabelProperties &other);
 
-	int mIndex;
-	qreal mX;
-	qreal mY;
+	int mIndex {-1};
+	qreal mX {};
+	qreal mY {};
 	QString mText;
 	QString mBinding;
 	QString mRoleName;
 	QString mNameOfPropertyRole;
-	bool mReadOnly;
-	bool mIsPlainText;
+	bool mReadOnly {};
+	bool mIsPlainText {};
 	qreal mRotation;
 	QColor mBackground;
-	bool mScalingX;
-	bool mScalingY;
-	bool mIsHard;
+	bool mScalingX {};
+	bool mScalingY {};
+	bool mIsHard {};
 	QString mPrefix;
 	QString mSuffix;
 };

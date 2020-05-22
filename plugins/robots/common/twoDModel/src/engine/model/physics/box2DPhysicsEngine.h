@@ -94,7 +94,7 @@ private:
 
 	bool itemTracked(QGraphicsItem * const item);
 
-	twoDModel::view::TwoDModelScene *mScene; // Doesn't take ownership
+	twoDModel::view::TwoDModelScene *mScene {}; // Doesn't take ownership
 	qreal mPixelsInCm;
 	QScopedPointer<b2World> mWorld;
 

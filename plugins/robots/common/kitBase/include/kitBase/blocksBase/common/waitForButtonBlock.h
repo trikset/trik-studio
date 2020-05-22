@@ -33,7 +33,7 @@ public:
 
 private slots:
 	/// Called when new data about button state is received.
-	void responseSlot(int isPressed);
+	void responseSlot(const QVariant &isPressed);
 
 	void timerTimeout() override;
 
@@ -42,7 +42,7 @@ private:
 
 	robotModel::DeviceInfo device() const override;
 
-	robotModel::robotParts::Button *mButton;  // Does not have ownership.
+	robotModel::robotParts::Button *mButton {};  // Does not have ownership.
 };
 
 }

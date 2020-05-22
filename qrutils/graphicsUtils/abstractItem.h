@@ -182,10 +182,10 @@ protected:
 	void copyTo(AbstractItem * const other) const;
 
 	QPointF mOldPos;
-	qreal mOldX1;
-	qreal mOldY1;
-	qreal mOldX2;
-	qreal mOldY2;
+	qreal mOldX1 {};
+	qreal mOldY1 {};
+	qreal mOldX2 {};
+	qreal mOldY2 {};
 
 	QPen mStrokePen;
 	Qt::CursorShape mResizeCursor;

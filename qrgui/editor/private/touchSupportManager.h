@@ -61,12 +61,12 @@ private:
 
 	bool isElementUnder(const QPointF &pos);
 
-	EditorView *mEditorView;
+	EditorView *mEditorView {};
 	QsKineticScroller mScroller;
-	bool mGestureIsRunning;
-	int mFingersInGesture;
+	bool mGestureIsRunning {};
+	int mFingersInGesture {};
 	Qt::MouseButton mButton;
-	qint64 mLastTapTimestamp;
+	qint64 mLastTapTimestamp {};
 	QPointF mLastTouchBeginPoint;
 };
 

@@ -121,7 +121,7 @@ bool ProjectManagerWrapper::openQRProject(const QFileInfo &fileInfo)
 	qrp.open(QFile::ReadOnly | QFile::Text);
 	QByteArray qrpData = qrp.readAll();
 	qrp.close();
-	QJsonParseError er;
+	QJsonParseError er {};
 	QJsonDocument proj = QJsonDocument::fromJson(qrpData, &er);
 	if (er.error != QJsonParseError::NoError) {
 		/// @todo: properly handle er

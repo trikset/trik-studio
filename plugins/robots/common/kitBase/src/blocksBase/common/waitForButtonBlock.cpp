@@ -39,7 +39,7 @@ void WaitForButtonBlock::run()
 	}
 	using namespace std::placeholders;
 	connect(mButton, &robotModel::robotParts::Button::newData
-			, this, std::bind(&WaitForButtonBlock::responseSlot, this, std::bind(&QVariant::value<int>, _1))
+			, this, &WaitForButtonBlock::responseSlot
 			, Qt::UniqueConnection);
 
 	mButton->read();
@@ -51,9 +51,9 @@ void WaitForButtonBlock::timerTimeout()
 	mButton->read();
 }
 
-void WaitForButtonBlock::responseSlot(int isPressed)
+void WaitForButtonBlock::responseSlot(const QVariant &isPressed)
 {
-	if (isPressed) {
+	if (isPressed.value<int>()) {
 		stop();
 	}
 }

@@ -32,7 +32,7 @@ public:
 protected:
 	virtual bool reinitElement();
 
-	EdgeElement *mEdge;
+	EdgeElement *mEdge {};
 };
 
 }

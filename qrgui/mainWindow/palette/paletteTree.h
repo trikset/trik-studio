@@ -145,13 +145,13 @@ private:
 
 	EditorManagerInterface *mEditorManager = nullptr;
 
-	MainWindow *mMainWindow;
+	MainWindow *mMainWindow {};
 
 	/// Hash table with editor ids.
 	QHash<Id, int> mCategories;
 
 	/// Pointer to current tree.
-	PaletteTreeWidgets *mTree;
+	PaletteTreeWidgets *mTree  {};
 
 	/// List with all editor's trees.
 	QList<PaletteTreeWidgets *> mEditorsTrees;
@@ -160,27 +160,27 @@ private:
 	QList<QString> mEditorsNames;
 
 	/// Combobox with editors.
-	QComboBox *mComboBox;
+	QComboBox *mComboBox {};
 
 	/// Search field for palette.
-	QWidget *mSearchLineEdit;
+	QWidget *mSearchLineEdit {};
 
 	/// Main layout of the widget.
-	QVBoxLayout *mLayout;
+	QVBoxLayout *mLayout {};
 
 	/// Current editor number.
-	int mCurrentEditor;
+	int mCurrentEditor { 0 };
 
 	/// Representation flag
-	bool mIconsView;
+	bool mIconsView  {};
 
 	/// Count of items in a row in icon's representation
-	int mItemsCountInARow;
+	int mItemsCountInARow { -1 };
 
 	/// Spacer layout item used when palette is empty to correctly position remaining palette tree widgets. Removed
 	/// from layout when editor tree is initialized.
 	/// Does not have direct ownership (spacer is owned by mLayout) but can remove spacer from layout and delete it.
-	QSpacerItem *mTemporarySpacer;
+	QSpacerItem *mTemporarySpacer {};
 };
 
 }

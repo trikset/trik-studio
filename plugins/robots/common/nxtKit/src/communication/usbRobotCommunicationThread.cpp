@@ -74,7 +74,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 
 	libusb_device **devices;
 	ssize_t count = libusb_get_device_list(nullptr, &devices);
-	libusb_device_descriptor device_descriptor;
+	libusb_device_descriptor device_descriptor {};
 	int i = 0;
 	for (; i < count; ++i) {
 		if (libusb_get_device_descriptor(devices[i], &device_descriptor) < 0) {

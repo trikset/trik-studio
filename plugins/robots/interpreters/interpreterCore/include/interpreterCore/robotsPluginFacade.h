@@ -121,7 +121,7 @@ private:
 	interpreterCore::interpreter::ProxyInterpreter mProxyInterpreter;
 
 	/// Page with plugin settings. Created here, but then ownership is passed to a caller of preferencesPage().
-	ui::RobotsSettingsPage *mRobotSettingsPage;  // Does not have ownership
+	ui::RobotsSettingsPage *mRobotSettingsPage {};  // Does not have ownership
 
 	KitPluginManager mKitPluginManager;
 	RobotModelManager mRobotModelManager;
@@ -131,17 +131,17 @@ private:
 	QScopedPointer<UiManager> mUiManager;
 
 	QScopedPointer<kitBase::DevicesConfigurationWidget> mDockDevicesConfigurer;
-	utils::WatchListWindow *mWatchListWindow;  // Does not have ownership
-	GraphicsWatcherManager *mGraphicsWatcherManager;  // Has ownership
+	utils::WatchListWindow *mWatchListWindow {};  // Does not have ownership
+	GraphicsWatcherManager *mGraphicsWatcherManager {};  // Has ownership
 	BlocksFactoryManager mBlocksFactoryManager;
 	kitBase::EventsForKitPluginInterface mEventsForKitPlugin;
-	PaletteUpdateManager *mPaletteUpdateManager;  // Has ownership via Qt paren-child system
+	PaletteUpdateManager *mPaletteUpdateManager {};  // Has ownership via Qt paren-child system
 
-	qReal::LogicalModelAssistInterface *mLogicalModelApi;
-	qReal::TextManagerInterface *mTextManager;
-	qReal::ProjectManagementInterface *mProjectManager;
+	qReal::LogicalModelAssistInterface *mLogicalModelApi {};
+	qReal::TextManagerInterface *mTextManager {};
+	qReal::ProjectManagementInterface *mProjectManager {};
 
-	qReal::gui::MainWindowInterpretersInterface *mMainWindow;
+	qReal::gui::MainWindowInterpretersInterface *mMainWindow {};
 
 	QScopedPointer<interpreterCore::interpreter::details::SensorVariablesUpdater> mSensorVariablesUpdater;
 };

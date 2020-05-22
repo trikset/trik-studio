@@ -61,20 +61,20 @@ public:
 private:
 	EdgeElement *mEdge;
 	NodeElement *mMaster;
-	Label *mTitle;
+	Label *mTitle {};
 
-	float mSize;
-	float mIndent;
+	float mSize {};
+	float mIndent {};
 	QColor mColor;
 	QRectF mRectangle;
 	QRectF mInnerRectangle;
 
-	bool mDirected;
-	bool mPressed;
+	bool mDirected {};
+	bool mPressed {};
 	Id mEdgeType;
 
 	QPointF mInitialClickPoint;
-	qReal::commands::CreateElementsCommand *mCreateEdgeCommand;
+	qReal::commands::CreateElementsCommand *mCreateEdgeCommand {};
 };
 
 }

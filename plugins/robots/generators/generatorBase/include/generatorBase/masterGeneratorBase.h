@@ -104,13 +104,13 @@ protected:
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	qrtext::LanguageToolboxInterface &mTextLanguage;
 	qReal::Id mDiagram;
-	GeneratorCustomizer *mCustomizer;
-	PrimaryControlFlowValidator *mValidator;
-	GotoControlFlowGenerator *mGotoControlFlowGenerator;  // Takes ownership
-	StructuralControlFlowGenerator *mStructuralControlFlowGenerator; // Takes ownership
+	GeneratorCustomizer *mCustomizer {};
+	PrimaryControlFlowValidator *mValidator {};
+	GotoControlFlowGenerator *mGotoControlFlowGenerator {};  // Takes ownership
+	StructuralControlFlowGenerator *mStructuralControlFlowGenerator {}; // Takes ownership
 	QString mProjectName;
 	QString mProjectDir;
-	int mCurInitialNodeNumber;
+	int mCurInitialNodeNumber {};
 	const utils::ParserErrorReporter &mParserErrorReporter;
 };
 

@@ -53,9 +53,9 @@ private:
 
 	const qrRepo::RepoApi &mRepo;
 	qReal::ErrorReporterInterface &mErrorReporter;
-	bool mSomethingChanged;
-	bool mNoErrors;
-	bool mSecondStage;
+	bool mSomethingChanged {};
+	bool mNoErrors {};
+	bool mSecondStage {};
 	qReal::Id mStartNode;
 	QString mThreadId;
 	QHash<qReal::Id, QString> mBlockThreads;

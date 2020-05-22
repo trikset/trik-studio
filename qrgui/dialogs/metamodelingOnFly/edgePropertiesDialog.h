@@ -55,7 +55,7 @@ private:
 	const Id mDiagram;
 	QString mEdgeName;
 	const EditorManagerInterface &mEditorManagerProxy;
-	RestoreElementDialog *mRestoreElementDialog;  // Doesn`t take ownership
+	RestoreElementDialog *mRestoreElementDialog {};  // Doesn`t take ownership
 };
 
 }

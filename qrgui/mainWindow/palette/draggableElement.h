@@ -104,7 +104,7 @@ private:
 	const EditorManagerInterface &mEditorManagerProxy;  // Does not have ownership.
 	MainWindow &mMainWindow;
 	Id mDeletedElementId;
-	bool mIsRootDiagramNode;
+	bool mIsRootDiagramNode {};
 };
 
 }

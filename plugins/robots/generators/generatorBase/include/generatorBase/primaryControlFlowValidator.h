@@ -79,7 +79,7 @@ protected:
 	qReal::ErrorReporterInterface &mErrorReporter;
 	GeneratorCustomizer &mCustomizer;
 	qReal::Id mDiagram;
-	bool mErrorsOccured;
+	bool mErrorsOccured {};
 
 	qReal::Id mInitialNode;
 	QMap<qReal::Id, QPair<LinkInfo, LinkInfo> > mIfBranches;

@@ -118,20 +118,20 @@ private:
 		, cut
 	};
 
-	int mZValue;
+	int mZValue {};
 	ItemTypes mItemType;
-	bool mWaitMove;
-	int mCount;
-	Line *mLine;
-	QRealEllipse *mEllipse;
-	QRealRectangle *mRectangle;
-	Text *mText;
-	TextPicture *mTextPicture;
-	PointPort *mPointPort;
-	LinePort *mLinePort;
-	Stylus *mStylus;
-	Curve* mCurve;
-	Image* mImage;
+	bool mWaitMove {};
+	int mCount { -1 };
+	Line *mLine {};
+	QRealEllipse *mEllipse {};
+	QRealRectangle *mRectangle {};
+	Text *mText {};
+	TextPicture *mTextPicture {};
+	PointPort *mPointPort {};
+	LinePort *mLinePort {};
+	Stylus *mStylus {};
+	Curve* mCurve {};
+	Image* mImage {};
 	QString mFileName;
 	QPointF mC1;
 	CopyPasteType mCopyPaste;

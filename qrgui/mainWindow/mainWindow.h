@@ -391,7 +391,7 @@ private:
 
 	int mRecentProjectsLimit;
 	QSignalMapper *mRecentProjectsMapper;
-	QMenu *mRecentProjectsMenu;
+	QMenu *mRecentProjectsMenu {};
 
 	FindManager *mFindHelper;
 	ProjectManagerWrapper *mProjectManager;

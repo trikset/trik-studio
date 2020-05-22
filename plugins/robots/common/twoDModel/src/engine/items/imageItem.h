@@ -92,7 +92,7 @@ private:
 	graphicsUtils::RectangleImpl mImpl;
 	model::Image *mImage = nullptr; // Does not have ownership
 
-	bool mBackgroundRole;
+	bool mBackgroundRole {};
 };
 
 }

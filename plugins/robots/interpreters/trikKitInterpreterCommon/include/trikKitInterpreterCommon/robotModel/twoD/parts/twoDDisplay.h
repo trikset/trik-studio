@@ -92,8 +92,8 @@ private:
 	twoDModel::engine::TwoDModelEngineInterface &mEngine;
 	QColor mBackground;
 	QImage mCurrentImage;
-	bool mSmiles;
-	bool mSadSmiles;
+	bool mSmiles {};
+	bool mSadSmiles {};
 	/// @todo: QPoint can`t be used in map without operators declaration.
 	QHash<QPair<int, int>, utils::TextObject *> mLabelsMap;
 };

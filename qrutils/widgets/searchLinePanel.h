@@ -85,7 +85,7 @@ private:
 	QPushButton *mReplaceButton;
 	QLineEdit *mReplaceLineEdit;
 
-	OperationOptions mCurrentOption;
+	OperationOptions mCurrentOption { OperationOptions::Find };
 	QColor mSearchLineColor = "white";
 };
 

@@ -44,8 +44,8 @@ private:
 
 	QAction *mSeparator;
 	QAction *mCheckForUpdatesAction;
-	qReal::ErrorReporterInterface *mErrorReporter;
-	QWidget *mMainWindowWidget;
+	qReal::ErrorReporterInterface *mErrorReporter {};
+	QWidget *mMainWindowWidget {};
 };
 
 }

@@ -52,7 +52,7 @@ private:
 	BrandManager();
 	~BrandManager();
 
-	const Customizer *mCustomizer;  // Doesn`t take ownership
+	const Customizer *mCustomizer {};  // Doesn`t take ownership
 	const Fonts *mFonts;  // Takes ownership
 	const Styles *mStyles;  // Takes ownership
 };

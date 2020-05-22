@@ -34,10 +34,6 @@ using namespace gui;
 
 PaletteTree::PaletteTree(QWidget *parent)
 	: QWidget(parent)
-	, mTree(nullptr)
-	, mCurrentEditor(0)
-	, mTemporarySpacer(nullptr)
-	, mIconsView(false)
 {
 	initUi();
 }

@@ -91,7 +91,7 @@ protected:
 			, blocks::TrikBlocksFactoryBase * const blocksFactory
 			);
 
-	qReal::gui::MainWindowInterpretersInterface *mMainWindow;
+	qReal::gui::MainWindowInterpretersInterface *mMainWindow {};
 
 private:
 	void startCodeInterpretation(const QString &code, const QString &extension);
@@ -122,9 +122,9 @@ private:
 	TrikAdditionalPreferences *mAdditionalPreferences = nullptr;
 	bool mOwnsAdditionalPreferences = true;
 
-	kitBase::InterpreterControlInterface *mInterpreterControl;  // Does not have ownership.
-	qReal::ProjectManagementInterface *mProjectManager; // Does not have ownership.
-	qReal::LogicalModelAssistInterface *mLogicalModel; // Doesn`t have ownership
+	kitBase::InterpreterControlInterface *mInterpreterControl {};  // Does not have ownership.
+	qReal::ProjectManagementInterface *mProjectManager {}; // Does not have ownership.
+	qReal::LogicalModelAssistInterface *mLogicalModel {}; // Doesn`t have ownership
 	QString mCurrentlySelectedModelName;
 	QString mCurrentTabPath;
 };

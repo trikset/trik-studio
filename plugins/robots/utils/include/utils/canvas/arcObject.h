@@ -72,8 +72,8 @@ public:
 
 private:
 	QRect mRect;
-	int mStartAngle;
-	int mSpanAngle;
+	int mStartAngle {};
+	int mSpanAngle {};
 };
 
 }

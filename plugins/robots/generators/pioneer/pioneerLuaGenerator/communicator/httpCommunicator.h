@@ -65,7 +65,7 @@ private:
 
 	/// Currently active request (nullptr most of the time). Used to abort request on timeout.
 	/// Does not have ownership.
-	QNetworkReply *mCurrentReply;
+	QNetworkReply *mCurrentReply {};
 };
 
 }

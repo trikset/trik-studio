@@ -39,7 +39,7 @@ void RangeSensor::read()
 	union {
 		float f;
 		uchar b[4];
-	} floatFromBytesCast;
+	} floatFromBytesCast {};
 	floatFromBytesCast.b[3] = outputBuf.data()[8];
 	floatFromBytesCast.b[2] = outputBuf.data()[7];
 	floatFromBytesCast.b[1] = outputBuf.data()[6];

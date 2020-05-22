@@ -155,7 +155,7 @@ protected:
 	IdList mNodesHavingOutsideLinks;
 
 	/// Current position in mNodesHavingOutsideLinks for quicker access
-	int mPos;
+	int mPos { -1 };
 
 	/// Set of properties that will not be checked in compare elements
 	QSet<QString> mDefaultProperties;
