@@ -29,6 +29,7 @@
 #include <kitBase/robotModel/robotParts/colorSensorGreen.h>
 #include <kitBase/robotModel/robotParts/colorSensorPassive.h>
 #include <kitBase/robotModel/robotParts/colorSensorRed.h>
+#include <kitBase/robotModel/robotParts/colorSensorRaw.h>
 
 #include "nxtDisplayWidget.h"
 #include "robotModel/twoD/parts/twoDDisplay.h"
@@ -98,8 +99,8 @@ QRect TwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo &dev
 	}
 
 	if (deviceType.isA<robotParts::ColorSensor>()
-			|| deviceType.isA<robotParts::LightSensor>())
-	{
+			|| deviceType.isA<robotParts::ColorSensorRaw>()
+			|| deviceType.isA<robotParts::LightSensor>()) {
 		return QRect(-6, -6, 12, 12);
 	}
 

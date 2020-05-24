@@ -30,5 +30,5 @@ ColorSensorGreen::ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info
 
 void ColorSensorGreen::read()
 {
-	emit newData(mEngine.readColorSensor(port()).green());
+	setLastData(mEngine.readColorSensor(port()).greenF() * 100);
 }

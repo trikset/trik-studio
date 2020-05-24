@@ -35,5 +35,5 @@ void ColorSensorPassive::read()
 	auto color = mEngine.readColorSensor(port());
 	auto bright = (color.redF() * color.redF() + color.greenF() * color.greenF() + color.blueF() * color.blueF()) / 3;
 	auto reading = qRound(qSqrt(bright / 3) * 100);
-	emit newData(mathUtils::Math::truncateToInterval(0, 100, reading));
+	setLastData(mathUtils::Math::truncateToInterval(0, 100, reading));
 }

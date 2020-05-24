@@ -30,5 +30,5 @@ ColorSensorBlue::ColorSensorBlue(const kitBase::robotModel::DeviceInfo &info
 
 void ColorSensorBlue::read()
 {
-	emit newData(mEngine.readColorSensor(port()).blue());
+	setLastData(mEngine.readColorSensor(port()).blueF() * 100);
 }

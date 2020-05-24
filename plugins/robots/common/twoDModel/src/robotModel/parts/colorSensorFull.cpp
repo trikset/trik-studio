@@ -78,5 +78,5 @@ void ColorSensorFull::read()
 		reading = 0;
 	}
 
-	emit newData(reading);
+	setLastData(reading);
 }

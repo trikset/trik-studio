@@ -30,5 +30,5 @@ ColorSensorRed::ColorSensorRed(const kitBase::robotModel::DeviceInfo &info
 
 void ColorSensorRed::read()
 {
-	emit newData(mEngine.readColorSensor(port()).red());
+	setLastData(mEngine.readColorSensor(port()).redF() * 100);
 }
