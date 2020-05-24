@@ -62,7 +62,7 @@ public:
 
 	/// Returns the configured color sensor`s value on the given port.
 	/// It  may be the percent of some color under the sensor or the dominating color enum value.
-	virtual int readColorSensor(const kitBase::robotModel::PortInfo &port) const = 0;
+	virtual QColor readColorSensor(const kitBase::robotModel::PortInfo &port) const = 0;
 
 	/// Returns the average brightness of the picture under the light sensor on the given port.
 	virtual int readLightSensor(const kitBase::robotModel::PortInfo &port) const = 0;

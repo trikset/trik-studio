@@ -15,6 +15,7 @@
 #include "twoDModel/robotModel/parts/colorSensorGreen.h"
 
 #include "twoDModel/engine/twoDModelEngineInterface.h"
+#include <QColor>
 
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
@@ -29,5 +30,5 @@ ColorSensorGreen::ColorSensorGreen(const kitBase::robotModel::DeviceInfo &info
 
 void ColorSensorGreen::read()
 {
-	emit newData(mEngine.readColorSensor(port()));
+	emit newData(mEngine.readColorSensor(port()).green());
 }

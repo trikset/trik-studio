@@ -15,6 +15,9 @@
 #include "twoDModel/robotModel/parts/colorSensorPassive.h"
 
 #include "twoDModel/engine/twoDModelEngineInterface.h"
+#include <QColor>
+#include <QtMath>
+#include <qrutils/mathUtils/math.h>
 
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
@@ -29,5 +32,8 @@ ColorSensorPassive::ColorSensorPassive(const kitBase::robotModel::DeviceInfo &in
 
 void ColorSensorPassive::read()
 {
-	emit newData(mEngine.readColorSensor(port()));
+	auto color = mEngine.readColorSensor(port());
+	auto bright = (color.redF() * color.redF() + color.greenF() * color.greenF() + color.blueF() * color.blueF()) / 3;
+	auto reading = qRound(qSqrt(bright / 3) * 100);
+	emit newData(mathUtils::Math::truncateToInterval(0, 100, reading));
 }

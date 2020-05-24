@@ -29,5 +29,5 @@ ColorSensorReflected::ColorSensorReflected(const kitBase::robotModel::DeviceInfo
 
 void ColorSensorReflected::read()
 {
-	emit newData(mEngine.readColorSensor(port()));
+	emit newData(mEngine.readLightSensor(port()));
 }
