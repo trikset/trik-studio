@@ -17,7 +17,7 @@
 #include <QtCore/QMetaType>
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
-#include <time.h>
+#include <ctime>
 
 #include <qrkernel/settingsManager.h>
 #include <plugins/robots/thirdparty/qextserialport/src/qextserialport.h>

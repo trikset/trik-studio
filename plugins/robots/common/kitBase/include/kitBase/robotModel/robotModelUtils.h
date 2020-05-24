@@ -29,7 +29,7 @@ public:
 	template<typename T>
 	static T *findDevice(const RobotModelInterface &robotModel, const PortInfo &port)
 	{
-		return dynamic_cast<T *>(robotModel.configuration().device(port));
+		return qobject_cast<T *>(robotModel.configuration().device(port));
 	}
 
 	/// Returns a pointer to a device if it is configured on the given port string representation and ready to work.

@@ -31,7 +31,7 @@ SendMailGenerator::SendMailGenerator(const qrRepo::RepoApi &repo
 	const QString mailboxName = nameNormalizer->convert(mRepo.property(mId, "ReceiverMailBoxName").toString());
 	const QString type = mRepo.property(mId, "MsgType").toString();
 	if (!mGeneratorFactory->mailboxes().tryRegisterWriteMailbox(mailboxName, type)) {
-		mGeneratorFactory->reportError(tr("There is already mailbox with same name, but different msg type") , mId);
+		mGeneratorFactory->reportError(Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type") , mId);
 	}
 
 	addBinding(Binding::createStatic("@@RECEIVER_NAME@@", receiverName));

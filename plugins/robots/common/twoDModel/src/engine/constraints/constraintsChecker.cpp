@@ -166,7 +166,7 @@ void ConstraintsChecker::bindToWorldModelObjects()
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
 			, this, [this](items::BallItem *item) { bindObject(item->id(), item); });
 
-	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, [this](QGraphicsItem *item) {
+	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, this, [this](QGraphicsItem *item) {
 		for (const QString &key : mObjects.keys(dynamic_cast<QObject *>(item))) {
 			mObjects.remove(key);
 		}

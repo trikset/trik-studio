@@ -22,7 +22,7 @@
 
 #include "parts/randomGeneratorPart.h"
 
-const QString randomKeyWord = "random";
+const auto randomKeyWord = "random";
 
 using namespace pioneer::lua;
 

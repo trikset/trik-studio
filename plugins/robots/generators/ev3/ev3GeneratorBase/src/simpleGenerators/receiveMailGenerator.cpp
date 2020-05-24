@@ -34,11 +34,11 @@ ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo
 	const QString type = mRepo.property(mId, "MsgType").toString();
 	const QString variable = nameNormalizer->convert(mRepo.property(mId, "Variable").toString());
 	if (!mGeneratorFactory->mailboxes().tryRegisterReadMailbox(mailboxName, type)) {
-		mGeneratorFactory->reportError(tr("There is already mailbox with same name, but different msg type") , mId);
+		mGeneratorFactory->reportError(Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type") , mId);
 	}
 
 	if (mGeneratorFactory->mailboxes().mailboxesCount() >= 30) {
-		mGeneratorFactory->reportError(tr("There are too many mailboxes, max size is 30") , mId);
+		mGeneratorFactory->reportError(Ev3GeneratorFactory::tr("There are too many mailboxes, max size is 30") , mId);
 	}
 
 	bool synch = mRepo.property(mId, "Synchronized").toBool();

@@ -20,36 +20,36 @@ namespace pioneer {
 
 /// Names for robot models supported by Pioneer plugins.
 namespace modelNames {
-const QString realCopter = "PioneerRealCopter";
-const QString simulator = "PioneerSimulator";
+const auto realCopter = "PioneerRealCopter";
+const auto simulator = "PioneerSimulator";
 }
 
 /// Names for used global settings.
 namespace settings {
 
 /// String parameter. Path to a Lua compiler that is used to produce binaries for real copter.
-const QString pioneerRealCopterLuaPath = "pioneerRealCopterLuaPath";
+const auto pioneerRealCopterLuaPath = "pioneerRealCopterLuaPath";
 
 /// String parameter. Path to a Lua compiler that is used to produce binaries for a simulator.
-const QString pioneerSimulatorLuaPath = "pioneerSimulatorLuaPath";
+const auto pioneerSimulatorLuaPath = "pioneerSimulatorLuaPath";
 
 /// String parameter. IP address of a Pioneer base station.
-const QString pioneerBaseStationIP = "pioneerBaseStationIP";
+const auto pioneerBaseStationIP = "pioneerBaseStationIP";
 
 /// String parameter. Port of a Pioneer base station.
-const QString pioneerBaseStationPort = "pioneerBaseStationPort";
+const auto pioneerBaseStationPort = "pioneerBaseStationPort";
 
 /// String parameter. Path to a Python interpreter. Default is empty string, which is treated as "use python from PATH".
-const QString pioneerPythonPath = "pioneerPythonPath";
+const auto pioneerPythonPath = "pioneerPythonPath";
 
 /// Boolean parameter. True if "controller" shall be used to upload or run programs instead of POST requests.
-const QString pioneerUseController = "pioneerUseController";
+const auto pioneerUseController = "pioneerUseController";
 
 /// Boolean parameter. If set, COM port and "controller" are used to upload and run program instead of IP address.
-const QString pioneerUseComPort = "pioneerUseComPort";
+const auto pioneerUseComPort = "pioneerUseComPort";
 
 /// String parameter. Name of a COM port to use to upload or run programs.
-const QString pioneerComPort = "pioneerComPort";
+const auto pioneerComPort = "pioneerComPort";
 
 }
 

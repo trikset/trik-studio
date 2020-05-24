@@ -79,7 +79,6 @@ protected:
 	virtual void mousePressEvent(QMouseEvent *event);
 
 private:
-#ifdef Q_OS_WIN
 	/// This class performs win8 drag manager hack for workaround of
 	/// https://github.com/qreal/qreal/issues/1014
 	class HackTouchDragThread : public QThread
@@ -94,13 +93,13 @@ private:
 	protected:
 		virtual void run();
 	};
-#endif
+
 
 	void checkElementForChildren();
 	void hackTouchDrag();
 
 	const PaletteElement mData;
-	QLabel *mLabel;
+	QLabel *mLabel {};
 	const EditorManagerInterface &mEditorManagerProxy;  // Does not have ownership.
 	MainWindow &mMainWindow;
 	Id mDeletedElementId;

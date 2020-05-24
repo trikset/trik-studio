@@ -20,7 +20,6 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 EllipseItem::EllipseItem(const QPointF &begin, const QPointF &end)
-	: mEllipseImpl()
 {
 	setX1(begin.x());
 	setY1(begin.y());

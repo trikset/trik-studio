@@ -14,7 +14,7 @@
 
 #include "nxtKit/communication/i2cCommunicator.h"
 
-#include <time.h>
+#include <ctime>
 
 #include "nxtKit/communication/nxtCommandConstants.h"
 

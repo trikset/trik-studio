@@ -29,7 +29,9 @@ public:
 	/// Can be overriden for creating WPF-like bindings with converters
 	class ROBOTS_GENERATOR_EXPORT ConverterInterface
 	{
+		Q_DISABLE_COPY(ConverterInterface)
 	public:
+		ConverterInterface() = default;
 		virtual ~ConverterInterface();
 
 		virtual QString convert(const QString &data) const = 0;

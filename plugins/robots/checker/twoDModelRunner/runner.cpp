@@ -139,7 +139,7 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal:
 			onDeviceStateChanged(robotModel->info().robotId(), device, property, value);
 		});
 		if (console) {
-			if (auto * shell = dynamic_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
+			if (auto * shell = qobject_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
 				connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
 						, console, &qReal::ui::ConsoleDock::print);
 			}

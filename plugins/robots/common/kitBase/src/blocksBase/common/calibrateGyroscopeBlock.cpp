@@ -24,7 +24,7 @@ CalibrateGyroscopeBlock::CalibrateGyroscopeBlock(kitBase::robotModel::RobotModel
 
 void CalibrateGyroscopeBlock::doJob(GyroscopeSensor &gyro)
 {
-	auto failSignal = connect(&gyro, &GyroscopeSensor::failure, [this]{this->warning("Can't calibrate");});
+	auto failSignal = connect(&gyro, &GyroscopeSensor::failure, this, [this]{this->warning("Can't calibrate");});
 	gyro.calibrate();
 	emit done(mNextBlockId);
 	disconnect(failSignal);

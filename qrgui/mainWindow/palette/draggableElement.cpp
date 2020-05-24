@@ -28,6 +28,7 @@
 
 #include <qrgui/models/models.h>
 #include <qrgui/models/commands/removeElementsCommand.h>
+#include <QOperatingSystemVersion>
 
 #include "mainWindow/mainWindow.h"
 #include "mainWindow/palette/paletteTree.h"
@@ -269,10 +270,11 @@ void DraggableElement::checkElementForChildren()
 
 void DraggableElement::hackTouchDrag()
 {
-#ifdef Q_OS_WIN
-	HackTouchDragThread *thread = new HackTouchDragThread(this);
+	if (QOperatingSystemVersion::currentType() != QOperatingSystemVersion::OSType::Windows) {
+		return;
+	}
+	auto *thread = new HackTouchDragThread(this);
 	thread->start(QThread::LowestPriority);
-#endif
 }
 
 bool DraggableElement::event(QEvent *event)
@@ -297,9 +299,7 @@ bool DraggableElement::event(QEvent *event)
 		QMouseEvent* mouseEvent = new QMouseEvent(QEvent::MouseButtonRelease, pos
 				, Qt::LeftButton, Qt::NoButton, Qt::NoModifier);
 		QApplication::postEvent(touchEvent->target(), mouseEvent);
-#ifdef Q_OS_WIN
 		HackTouchDragThread::simulateSystemRelease();
-#endif
 		break;
 	}
 	case QEvent::TouchUpdate: {
@@ -388,10 +388,15 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 	}
 }
 
-#ifdef Q_OS_WIN
-
+#ifdef Q_OS_WINDOWS
 #include <windows.h>
 #include <winuser.h>
+#else
+static void mouse_event(int, int, int, int, int) { /* empty */ }
+constexpr auto MOUSEEVENTF_LEFTDOWN = 0;
+constexpr auto MOUSEEVENTF_LEFTUP = 0;
+constexpr auto MOUSEEVENTF_MOVE = 0;
+#endif
 
 DraggableElement::HackTouchDragThread::HackTouchDragThread(QObject *parent)
 	: QThread(parent)
@@ -425,4 +430,4 @@ void DraggableElement::HackTouchDragThread::run()
 		QThread::msleep(3);
 	}
 }
-#endif
+

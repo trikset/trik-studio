@@ -49,6 +49,6 @@ void LoadWorldCommand::loadWorld(QDomDocument world)
 	}
 
 	mWidget.loadXmls(world, blobs, true);
-	mWidget.model().modelChanged(mWidget.generateWorldModelXml());
-	mWidget.model().blobsChanged(mWidget.generateBlobsXml());
+	Q_EMIT mWidget.model().modelChanged(mWidget.generateWorldModelXml());
+	Q_EMIT mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }

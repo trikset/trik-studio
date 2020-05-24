@@ -52,7 +52,6 @@ SemanticNode *SemanticTreeManager::nonSyntheticRightSibling(SemanticNode * const
 		currentChild = zone->nextChild(currentChild);
 		while (currentChild && isSynthetic(currentChild)) {
 			currentChild = zone->nextChild(currentChild);
-			continue;
 		}
 
 		return currentChild;

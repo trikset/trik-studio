@@ -112,7 +112,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		connect(this,
 				&TwoDModelEngineFacade::stopButtonPressed,
 				&interpreterControl,
-				[&interpreterControl]() { interpreterControl.stopAllInterpretation(); },
+				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); },
 				Qt::UniqueConnection);
 	};
 

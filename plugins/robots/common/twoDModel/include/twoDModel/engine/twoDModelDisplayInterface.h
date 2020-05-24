@@ -22,8 +22,11 @@ namespace engine {
 /// An interface that each 2D model display emulator must implement.
 class TwoDModelDisplayInterface
 {
+	Q_DISABLE_COPY(TwoDModelDisplayInterface)
 public:
-	virtual ~TwoDModelDisplayInterface() {}
+	TwoDModelDisplayInterface() = default;
+
+	virtual ~TwoDModelDisplayInterface() = default;
 
 	/// Accepts the given painter and draws on the display area with it.
 	virtual void setPainter(qReal::ui::PainterInterface *painter) = 0;

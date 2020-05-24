@@ -50,7 +50,7 @@ class StructuralControlFlowGenerator;
 class ROBOTS_GENERATOR_EXPORT MasterGeneratorBase : public QObject, public TemplateParametrizedEntity
 {
 	Q_OBJECT
-
+	Q_DISABLE_COPY(MasterGeneratorBase)
 public:
 	MasterGeneratorBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include <time.h>
+#include <ctime>
 
 #include <QtCore/QDir>
 #include <QtCore/QCommandLineParser>
@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 		parser.showHelp();
 	}
 
-	const QString qrsFile = positionalArgs.first();
+	const QString &qrsFile = positionalArgs.first();
 	const bool backgroundMode = parser.isSet(backgroundOption);
 	const QString report = parser.isSet(reportOption) ? parser.value(reportOption) : QString();
 	const QString trajectory = parser.isSet(trajectoryOption) ? parser.value(trajectoryOption) : QString();

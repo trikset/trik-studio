@@ -25,8 +25,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 ImageItem::ImageItem(model::Image *image, const QRect &geometry)
-	: mImpl()
-	, mImage(image)
+	: mImage(image)
 {
 	setX(0);
 	setY(0);
