@@ -34,7 +34,6 @@ private:
 
 	kitBase::robotModel::RobotModelInterface &mRobotModel;
 	QList<QMetaObject::Connection> mConnections;
-
 };
 
 }

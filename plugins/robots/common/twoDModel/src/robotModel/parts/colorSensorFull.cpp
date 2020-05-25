@@ -33,20 +33,23 @@ void ColorSensorFull::read()
 {
 	auto color = mEngine.readColorSensor(port());
 	uint resColor = 0xFF000000;
+	uint clearRed = red - black;
+	uint clearGreen = green - black;
+	uint clearBlue = blue - black;
 	if (color.red() > 200) {
-		resColor += 0x00FF0000;
+		resColor += clearRed;
 	} else if (color.red() > 100) {
-		resColor += 0x00880000;
+		resColor += clearRed / 2;
 	}
 	if (color.green() > 200) {
-		resColor += 0x0000FF00;
+		resColor += clearGreen;
 	} else if (color.green() > 100) {
-		resColor += 0x00008800;
+		resColor += clearGreen / 2;
 	}
 	if (color.blue() > 200) {
-		resColor += 0x000000FF;
+		resColor += clearBlue;
 	} else if (color.blue() > 100) {
-		resColor += 0x00000088;
+		resColor += clearBlue / 2;
 	}
 	int reading;
 	switch (resColor) {
