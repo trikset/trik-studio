@@ -28,6 +28,7 @@
 #include "twoDModel/robotModel/parts/colorSensorBlue.h"
 #include "twoDModel/robotModel/parts/colorSensorAmbient.h"
 #include "twoDModel/robotModel/parts/colorSensorReflected.h"
+#include "twoDModel/robotModel/parts/colorSensorRaw.h"
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -162,8 +163,8 @@ QString SensorItem::name() const
 	if (sensor.isA<robotParts::TouchSensor>()) {
 		return "touch";
 	} else if (sensor.isA<robotParts::ColorSensorFull>()
-			|| sensor.isA<robotParts::ColorSensorPassive>())
-	{
+			|| sensor.isA<robotParts::ColorSensorPassive>()
+			|| sensor.isA<robotParts::ColorSensorRaw>()) {
 		return "color_empty";
 	} else if (sensor.isA<robotParts::ColorSensorRed>()) {
 		return "color_red";
@@ -189,8 +190,8 @@ QRectF SensorItem::imageRect() const
 	if (sensor.isA<robotParts::TouchSensor>()) {
 		return QRectF(-12, -5, 25, 10);
 	} else if (sensor.isA<robotParts::ColorSensor>()
-			|| sensor.isA<robotParts::LightSensor>())
-	{
+			|| sensor.isA<robotParts::ColorSensorRaw>()
+			|| sensor.isA<robotParts::LightSensor>()) {
 		return QRectF(-6, -6, 12, 12);
 	}
 	if (sensor.isA<robotParts::RangeSensor>()) {

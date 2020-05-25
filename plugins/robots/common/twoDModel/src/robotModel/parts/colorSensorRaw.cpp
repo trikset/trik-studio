@@ -1,4 +1,4 @@
-/* Copyright 2019 Cybertech Labs Ltd
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,22 +12,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/colorSensorReflected.h"
+#include "twoDModel/robotModel/parts/colorSensorRaw.h"
 
 #include "twoDModel/engine/twoDModelEngineInterface.h"
+#include <QColor>
 
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-ColorSensorReflected::ColorSensorReflected(const kitBase::robotModel::DeviceInfo &info
+ColorSensorRaw::ColorSensorRaw(const kitBase::robotModel::DeviceInfo &info
 		, const kitBase::robotModel::PortInfo &port
 		, engine::TwoDModelEngineInterface &engine)
-	: kitBase::robotModel::robotParts::ColorSensorReflected(info, port)
+	: kitBase::robotModel::robotParts::ColorSensorRaw(info, port)
 	, mEngine(engine)
 {
 }
 
-void ColorSensorReflected::read()
+void ColorSensorRaw::read()
 {
-	setLastData(mEngine.readLightSensor(port()));
+	auto color = mEngine.readColorSensor(port());
+	setLastData({color.red(), color.green(), color.blue()});
 }

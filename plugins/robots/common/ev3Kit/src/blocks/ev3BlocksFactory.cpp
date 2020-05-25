@@ -33,6 +33,7 @@
 #include "details/beepBlock.h"
 #include "details/playToneBlock.h"
 #include "details/ledBlock.h"
+#include "details/ev3ReadRGBBlock.h"
 
 #include "details/ev3EnginesForwardBlock.h"
 #include "details/ev3EnginesBackwardBlock.h"
@@ -67,6 +68,8 @@ qReal::interpretation::Block *Ev3BlocksFactory::produceBlock(const qReal::Id &el
 		return new ClearEncoderBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "Ev3Led")) {
 		return new LedBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "Ev3ReadRGB")) {
+		return new details::Ev3ReadRGBBlock(mRobotModelManager->model());
 
 	} else if (elementMetatypeIs(element, "Ev3WaitForTouchSensor")) {
 		return new WaitForTouchSensorBlock(mRobotModelManager->model());
@@ -158,7 +161,6 @@ qReal::IdList Ev3BlocksFactory::blocksToDisable() const
 				<< id("Ev3WaitForReceivingMail")
 				<< id("Ev3StartCompassCalibration")
 				<< id("Ev3StopCompassCalibration")
-				<< id("Ev3ReadRGB")
 				<< id("Ev3CalibrateWhiteLL")
 				<< id("Ev3CalibrateBlackLL")
 				<< id("Ev3CalibratePIDLL")
