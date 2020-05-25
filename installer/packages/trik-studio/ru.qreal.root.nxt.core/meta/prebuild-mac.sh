@@ -14,6 +14,7 @@ cp     $BIN_DIR/plugins/tools/kitPlugins/librobots-nxt-osek-c-generator.dylib   
 cp -pR $BIN_DIR/librobots-nxt-generator-base*.dylib                                        "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/librobots-nxt-kit*.dylib                                                   "$BUNDLE_CONTENTS/Lib"
 cp -pR $BIN_DIR/libqextserialport*.dylib                                                   "$BUNDLE_CONTENTS/Lib"
+cp -pR $BIN_DIR/libusb-1.*.dylib                                                            "$BUNDLE_CONTENTS/Lib/"
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libnxtMetamodel.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-nxt-interpreter.dylib"
@@ -21,6 +22,7 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-nxt-generator-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-nxt-kit.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqextserialport.1.0.0.dylib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.dylib"
 
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins
