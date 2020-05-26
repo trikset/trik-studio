@@ -52,6 +52,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorGreen.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorPassive.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorRed.h \
+	$$PWD/include/twoDModel/robotModel/parts/colorSensorRaw.h \
 	$$PWD/include/twoDModel/robotModel/parts/display.h \
 	$$PWD/include/twoDModel/robotModel/parts/encoderSensor.h \
 	$$PWD/include/twoDModel/robotModel/parts/lightSensor.h \
@@ -200,6 +201,7 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/colorSensorGreen.cpp \
 	$$PWD/src/robotModel/parts/colorSensorPassive.cpp \
 	$$PWD/src/robotModel/parts/colorSensorRed.cpp \
+	$$PWD/src/robotModel/parts/colorSensorRaw.cpp \
 	$$PWD/src/robotModel/parts/display.cpp \
 	$$PWD/src/robotModel/parts/encoderSensor.cpp \
 	$$PWD/src/robotModel/parts/lightSensor.cpp \

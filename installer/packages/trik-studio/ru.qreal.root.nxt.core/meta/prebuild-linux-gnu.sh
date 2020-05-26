@@ -17,3 +17,5 @@ cp -pr $BIN_DIR/libqextserialport.so*                                           
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins
 
+cd "$PWD/../data/lib/"
+ln -svf libusb-1.0.so libusb-1.0.so.0

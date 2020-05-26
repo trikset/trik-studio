@@ -391,7 +391,7 @@
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+71"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+73"/>
         <location line="+3"/>
         <source>2D Model</source>
         <translation>Modèle 2D</translation>
@@ -435,6 +435,14 @@
         <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorPassive.h" line="+37"/>
         <source>Color sensor (passive)</source>
         <translation>Capteur de couleurs (passif)</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::robotModel::parts::ColorSensorRaw</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRaw.h" line="+35"/>
+        <source>Color sensor (raw)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

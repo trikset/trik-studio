@@ -11,3 +11,4 @@ cp    $BIN_DIR/plugins/tools/kitPlugins/robots-nxt-osek-c-generator.dll     $PWD
 cp    $BIN_DIR/robots-nxt-generator-base.dll                                $PWD/../data/
 cp    $BIN_DIR/robots-nxt-kit.dll                                           $PWD/../data/
 cp    $BIN_DIR/qextserialport.dll                                           $PWD/../data/
+cp    $BIN_DIR/libusb-1.0.dll                                               $PWD/../data

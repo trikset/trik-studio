@@ -219,7 +219,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 		}
 
 		QFileInfo codeDir(path);
-		QFileInfo codePath(codeDir.dir().absoluteFilePath(name + '.' + extension)); // absoluteDir?
+		QFileInfo codePath(codeDir.dir().absoluteFilePath("lastCode." + extension)); // absoluteDir?
 		bool success = false;
 		utils::OutFile out(codePath.filePath(), &success);
 		if (success) {

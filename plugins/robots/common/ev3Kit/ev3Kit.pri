@@ -70,6 +70,7 @@ HEADERS += \
 	$$PWD/src/blocks/details/ev3EnginesBackwardBlock.h \
 	$$PWD/src/blocks/details/ev3EnginesForwardBlock.h \
 	$$PWD/src/blocks/details/ledBlock.h \
+	$$PWD/src/blocks/details/ev3ReadRGBBlock.h \
 
 SOURCES += \
 	$$PWD/src/robotModel/ev3RobotModelBase.cpp \
@@ -95,6 +96,7 @@ SOURCES += \
 	$$PWD/src/blocks/details/ev3EnginesBackwardBlock.cpp \
 	$$PWD/src/blocks/details/ev3EnginesForwardBlock.cpp \
 	$$PWD/src/blocks/details/ledBlock.cpp \
+	$$PWD/src/blocks/details/ev3ReadRGBBlock.cpp \
 	$$PWD/src/communication/ev3DirectCommand.cpp \
 	$$PWD/src/communication/ev3RobotCommunicationThread.cpp \
 	$$PWD/src/communication/bluetoothRobotCommunicationThread.cpp \

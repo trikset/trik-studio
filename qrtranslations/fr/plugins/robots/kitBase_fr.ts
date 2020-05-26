@@ -135,6 +135,14 @@
     </message>
 </context>
 <context>
+    <name>kitBase::robotModel::robotParts::ColorSensorRaw</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRaw.h" line="+29"/>
+        <source>EV3 color sensor (raw)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>kitBase::robotModel::robotParts::ColorSensorRed</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRed.h" line="+30"/>

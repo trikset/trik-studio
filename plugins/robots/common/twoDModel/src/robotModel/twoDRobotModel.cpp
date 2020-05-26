@@ -23,6 +23,8 @@
 #include "twoDModel/robotModel/parts/colorSensorGreen.h"
 #include "twoDModel/robotModel/parts/colorSensorBlue.h"
 #include "twoDModel/robotModel/parts/colorSensorAmbient.h"
+#include "twoDModel/robotModel/parts/colorSensorReflected.h"
+#include "twoDModel/robotModel/parts/colorSensorRaw.h"
 #include "twoDModel/robotModel/parts/display.h"
 #include "twoDModel/robotModel/parts/encoderSensor.h"
 #include "twoDModel/robotModel/parts/lightSensor.h"
@@ -184,6 +186,14 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 
 	if (deviceInfo.isA<robotParts::ColorSensorAmbient>()) {
 		return new parts::ColorSensorAmbient(deviceInfo, port, *mEngine);
+	}
+
+	if (deviceInfo.isA<robotParts::ColorSensorReflected>()) {
+		return new parts::ColorSensorReflected(deviceInfo, port, *mEngine);
+	}
+
+	if (deviceInfo.isA<robotParts::ColorSensorRaw>()) {
+		return new parts::ColorSensorRaw(deviceInfo, port, *mEngine);
 	}
 
 	if (deviceInfo.isA<robotParts::GyroscopeSensor>()) {
