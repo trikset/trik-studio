@@ -1,0 +1,7 @@
+DATA32 tmp_r_@@RANDOM_ID@@
+DATA32 tmp_g_@@RANDOM_ID@@
+DATA32 tmp_b_@@RANDOM_ID@@
+INPUT_DEVICE(READY_RAW, 0, @@PORT@@, 0, 4, 3, tmp_r_@@RANDOM_ID@@, tmp_g_@@RANDOM_ID@@, tmp_b_@@RANDOM_ID@@)
+ARRAY_WRITE(@@RESULT@@, 0, tmp_r_@@RANDOM_ID@@)
+ARRAY_WRITE(@@RESULT@@, 1, tmp_g_@@RANDOM_ID@@)
+ARRAY_WRITE(@@RESULT@@, 2, tmp_b_@@RANDOM_ID@@)
