@@ -4,7 +4,7 @@
 <context>
     <name>nxt::communication::NxtUsbDriverInstaller</name>
     <message>
-        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/nxtUsbDriverInstaller.cpp" line="+49"/>
+        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/nxtUsbDriverInstaller.cpp" line="+53"/>
         <source>Driver for NXT is not installed. An attempt to attach TRIK Studio driver also failed (probably NXT tools package was not installer). No panic! Driver can still be installed manually, see documentation, chapter &quot;Installing NXT driver manually.&quot;. Also TRIK Studio supports &lt;a href=&apos;%1&apos;&gt;Lego Fantom driver&lt;/a&gt;, you can just download and install it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19,7 +19,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+22"/>
         <source>NXT drivers not found</source>
         <translation type="unfinished"></translation>
     </message>

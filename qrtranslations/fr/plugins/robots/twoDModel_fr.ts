@@ -300,7 +300,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+40"/>
         <source>Ellipse (E)</source>
         <translation>Ellipse (E)</translation>
     </message>
@@ -308,7 +308,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+76"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+75"/>
         <source>Image (I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -316,7 +316,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+47"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+46"/>
         <source>Line (L)</source>
         <translation>Ligne (L)</translation>
     </message>
@@ -324,7 +324,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+40"/>
         <source>Rectangle (R)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -340,7 +340,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+55"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
         <source>Stylus (S)</source>
         <translation>Stylo (S)</translation>
     </message>
@@ -684,7 +684,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+309"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+308"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -734,7 +734,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+333"/>
+        <location line="+335"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

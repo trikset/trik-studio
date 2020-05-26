@@ -65,7 +65,7 @@
 <context>
     <name>qReal::QrsMetamodelSaver</name>
     <message>
-        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="+388"/>
+        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="+389"/>
         <source>Unknown link style type %1</source>
         <translation type="unfinished"></translation>
     </message>
