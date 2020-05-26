@@ -39,10 +39,10 @@ class QSCINTILLA_EXPORT QsciDocument
 public:
     //! Create a new unattached document.
     QsciDocument();
-    virtual ~QsciDocument();
+	~QsciDocument();
 
-    QsciDocument(const QsciDocument &);
-    QsciDocument &operator=(const QsciDocument &);
+	QsciDocument(const QsciDocument &);
+	QsciDocument &operator=(const QsciDocument &);
 
 private:
     friend class QsciScintilla;

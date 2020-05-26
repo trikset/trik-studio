@@ -65,7 +65,7 @@ private:
 	QsKineticScroller mScroller;
 	bool mGestureIsRunning {};
 	int mFingersInGesture {};
-	Qt::MouseButton mButton;
+	Qt::MouseButton mButton {};
 	qint64 mLastTapTimestamp {};
 	QPointF mLastTouchBeginPoint;
 };

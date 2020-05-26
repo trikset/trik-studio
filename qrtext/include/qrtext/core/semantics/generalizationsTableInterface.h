@@ -22,8 +22,10 @@ namespace core {
 /// Interface that tells type inferrer which type is a subtype of which. Shall be implemented for concrete language.
 class GeneralizationsTableInterface
 {
+	Q_DISABLE_COPY(GeneralizationsTableInterface)
 public:
-	virtual ~GeneralizationsTableInterface() {}
+	GeneralizationsTableInterface() = default;
+	virtual ~GeneralizationsTableInterface() = default;
 
 	/// Shall return true if "specific" type is a subtype of "general" type, including case when they are equivalent.
 	virtual bool isGeneralization(const QSharedPointer<types::TypeExpression> &specific

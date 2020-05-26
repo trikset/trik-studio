@@ -41,7 +41,9 @@ public:
 	/// into multiple tokens and converts each of them
 	class ROBOTS_GENERATOR_EXPORT MultiConverterInterface
 	{
+		Q_DISABLE_COPY(MultiConverterInterface)
 	public:
+		MultiConverterInterface() = default;
 		virtual ~MultiConverterInterface();
 
 		virtual QStringList convert(const QString &data) const = 0;

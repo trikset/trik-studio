@@ -22,12 +22,12 @@ namespace utils {
 
 class QRUTILS_EXPORT ScalableItem
 {
+	Q_DISABLE_COPY(ScalableItem)
 public:
-	ScalableItem(){}
-	ScalableItem(const ScalableItem &) = delete;
+	ScalableItem() = default;
 	static ScalableCoordinate initCoordinate(const QString &coordinate, int maxValue);
 protected:
-	virtual ~ScalableItem() {}
+	virtual ~ScalableItem() = default;
 };
 
 }

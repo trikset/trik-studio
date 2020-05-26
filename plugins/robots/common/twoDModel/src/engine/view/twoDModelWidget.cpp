@@ -78,8 +78,6 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget())
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget())
 	, mCurrentSpeed(defaultSpeedFactorIndex)
-	, mNoneCursorType(noDrag)
-	, mCursorType(noDrag)
 {
 	setWindowIcon(QIcon(":/icons/2d-model.svg"));
 
@@ -596,7 +594,7 @@ void TwoDModelWidget::onSelectionChange()
 
 void TwoDModelWidget::speedUp()
 {
-	if (mCurrentSpeed < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1) {
+	if (static_cast<unsigned>(mCurrentSpeed) < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1) {
 		mModel.timeline().setSpeedFactor(speedFactors[++mCurrentSpeed]);
 		checkSpeedButtons();
 	}
@@ -613,6 +611,8 @@ void TwoDModelWidget::speedDown()
 void TwoDModelWidget::checkSpeedButtons()
 {
 	mUi->speedUpButton->setEnabled(mCurrentSpeed < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1);
+	mUi->speedUpButton->setEnabled(
+				static_cast<unsigned>(mCurrentSpeed) < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1);
 	mUi->speedDownButton->setEnabled(mCurrentSpeed > 0);
 }
 

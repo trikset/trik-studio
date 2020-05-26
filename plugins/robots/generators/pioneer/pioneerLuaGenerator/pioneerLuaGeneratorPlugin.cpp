@@ -84,6 +84,7 @@ void PioneerLuaGeneratorPlugin::init(const kitBase::KitPluginConfigurator &confi
 	connect(
 			mCommunicationManager.data()
 			, &CommunicationManager::uploadCompleted
+			, this
 			, [this]() { setActionsEnabled(true); }
 	);
 }

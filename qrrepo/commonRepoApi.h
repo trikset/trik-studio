@@ -21,9 +21,11 @@ namespace qrRepo {
 /// Common methods for graphical and logical repository parts.
 class CommonRepoApi
 {
+	Q_DISABLE_COPY(CommonRepoApi)
 public:
+	CommonRepoApi() = default;
 	/// Destructor.
-	virtual ~CommonRepoApi() {}
+	virtual ~CommonRepoApi() = default;
 
 	/// Replaces property values that contain input value with new value.
 	/// @param toReplace - id list that contains ids of elements that properties should be replaced.

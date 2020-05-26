@@ -122,7 +122,7 @@ IntermediateStructurizatorNode *Structurizator::performStructurization(const QSe
 				}
 			}
 
-			if (verticesRoles.size()) {
+			if (!verticesRoles.empty()) {
 				t -= (verticesRoles.size() - 1);
 				if (t < 0) {
 					t = 0;
@@ -559,10 +559,13 @@ void Structurizator::reduceWhileLoop(QSet<QPair<int, int>> &edgesToRemove, QMap<
 
 void Structurizator::reduceConditionsWithBreaks(int &v, QMap<int, QSet<int>> &nodesWithExits, int commonExit)
 {
+	QList<IntermediateStructurizatorNode *> exitBranches;
+	QSet<QPair<int, int>> edgesToRemove;
+	QSet<int> vertices;
 	for (const int u : nodesWithExits.keys()) {
-		QList<IntermediateStructurizatorNode *> exitBranches;
-		QSet<QPair<int, int>> edgesToRemove;
-		QSet<int> vertices = {u};
+		exitBranches.clear();
+		edgesToRemove.clear();
+		vertices = {u};
 
 		for (const int exit : nodesWithExits[u]) {
 			qReal::Id id = mTrees[exit]->firstId();

@@ -34,7 +34,8 @@ ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo
 	const QString type = mRepo.property(mId, "MsgType").toString();
 	const QString variable = nameNormalizer->convert(mRepo.property(mId, "Variable").toString());
 	if (!mGeneratorFactory->mailboxes().tryRegisterReadMailbox(mailboxName, type)) {
-		mGeneratorFactory->reportError(Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type") , mId);
+		mGeneratorFactory->reportError(
+					Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type") , mId);
 	}
 
 	if (mGeneratorFactory->mailboxes().mailboxesCount() >= 30) {

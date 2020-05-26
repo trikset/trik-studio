@@ -45,7 +45,7 @@ bool PrimaryControlFlowValidator::validate(const qReal::Id &diagramId, const QSt
 		return false;
 	}
 
-	if (mRepo.incomingLinks(mInitialNode).size() != 0) {
+	if (!mRepo.incomingLinks(mInitialNode).empty()) {
 		error(QObject::tr("Initial node must not have incoming links"), mInitialNode);
 		return false;
 	}

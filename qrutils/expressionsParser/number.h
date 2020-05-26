@@ -22,6 +22,7 @@ namespace utils {
 
 class QRUTILS_EXPORT Number
 {
+	Q_DISABLE_COPY(Number)
 public:
 	enum Type {
 		doubleType = 0
@@ -45,14 +46,13 @@ public:
 	void operator-=(const Number &sub);
 	void operator*=(const Number &mult);
 	void operator/=(const Number &div);
-	Number operator-();
 	bool operator<(const Number &arg);
 	bool operator>(const Number &arg);
 	bool operator==(const Number &arg);
 	bool operator<=(const Number &arg);
 	bool operator>=(const Number &arg);
 	bool operator!=(const Number &arg);
-
+	void neg();
 protected:
 	QVariant mValue;
 	Type mType;

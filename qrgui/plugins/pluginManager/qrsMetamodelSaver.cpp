@@ -144,9 +144,9 @@ Id QrsMetamodelSaver::saveEdge(qrRepo::RepoApi &repo, const EdgeElementType &edg
 	repo.setProperty(edgeId, "lineType", penStyleToString(edge.penStyle()));
 	repo.setProperty(edgeId, "shape", linkShapeToString(edge.shapeType()));
 
-	const QList<LabelProperties> &labels = edge.labels();
+	const auto &labels = edge.labels();
 	if (!labels.isEmpty()) {
-		const LabelProperties &label = labels.first();
+		const auto &label = *labels.first();
 		repo.setProperty(edgeId, "labelText", label.isStatic() ? label.text() : label.binding());
 		repo.setProperty(edgeId, "labelType", label.isStatic() ? "staticText" : "dynamicText");
 		repo.setProperty(edgeId, "hardLabel", label.isHard());
@@ -253,7 +253,8 @@ void QrsMetamodelSaver::saveSdfGraphics(qrRepo::RepoApi &repo, const NodeElement
 
 void QrsMetamodelSaver::saveLabels(const NodeElementType &node, QDomElement &labels, int width, int height)
 {
-	for (const LabelProperties &label : node.labels()) {
+	for (const auto &labelPtr : node.labels()) {
+		const auto &label = *labelPtr;
 		QDomElement labelElement = labels.ownerDocument().createElement("label");
 		labels.appendChild(labelElement);
 		const int x = static_cast<int>(label.x() * width);

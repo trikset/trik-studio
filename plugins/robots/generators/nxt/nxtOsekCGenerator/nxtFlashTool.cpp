@@ -146,7 +146,6 @@ bool NxtFlashTool::flashRobot()
 		QLOG_INFO() << "Firmware flashed successfully";
 		usbCommunicator->disconnect();
 		mIsFlashing = false;
-		return;
 	};
 
 	mErrorReporter.reportOperation(QtConcurrent::run(flashProcess), tr("Flashing NXT brick..."));

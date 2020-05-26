@@ -33,7 +33,7 @@ BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread()
 	: mPort(nullptr)
 	, mKeepAliveTimer(new QTimer(this))
 {
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()));
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
 }
 
 BluetoothRobotCommunicationThread::~BluetoothRobotCommunicationThread()

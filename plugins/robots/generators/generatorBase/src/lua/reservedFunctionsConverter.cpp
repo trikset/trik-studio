@@ -29,13 +29,13 @@ QString ReservedFunctionsConverter::convert(const QString &name, const QStringLi
 			, "sgn", "sqrt", "abs", "ceil", "floor", "random", "print" };
 	if (oneArgumentFloatFunctions.contains(name)) {
 		return readTemplate(QString("functions/%1.t").arg(name)).replace("@@ARGUMENT@@"
-				, args.count() ? args[0] : QString());
+				, !args.isEmpty()? args[0] : QString());
 	}
 
 	const QStringList twoArgumentsFloatFunctions = { "min", "max", "atan2" };
 	if (twoArgumentsFloatFunctions.contains(name)) {
 		return readTemplate(QString("functions/%1.t").arg(name))
-				.replace("@@ARGUMENT1@@", args.count() ? args[0] : QString())
+				.replace("@@ARGUMENT1@@", !args.empty() ? args[0] : QString())
 				.replace("@@ARGUMENT2@@", args.count() >= 2 ? args[1] : QString());
 	}
 
@@ -46,12 +46,12 @@ QString ReservedFunctionsConverter::convert(const QString &name, const QStringLi
 
 	if (name == "sensor") {
 		/// @todo: Display an error if wrong arguments count
-		return readTemplate("sensors/scalar.t").replace("@@PORT@@", args.count() ? args[0] : QString());
+		return readTemplate("sensors/scalar.t").replace("@@PORT@@", !args.empty() ? args[0] : QString());
 	}
 
 	if (name == "vectorSensor") {
 		/// @todo: Display an error if wrong arguments count
-		return readTemplate("sensors/vector.t").replace("@@PORT@@", args.count() ? args[0] : QString());
+		return readTemplate("sensors/vector.t").replace("@@PORT@@", !args.empty() ? args[0] : QString());
 	}
 
 	return QString();

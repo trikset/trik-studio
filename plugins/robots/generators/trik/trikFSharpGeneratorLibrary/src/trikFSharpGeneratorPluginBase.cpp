@@ -30,7 +30,7 @@ using namespace trik::fSharp;
 using namespace qReal;
 using namespace utils::robotCommunication;
 
-const QString robotModelName = "TrikFSharpGeneratorRobotModel";
+static const auto robotModelName = "TrikFSharpGeneratorRobotModel";
 
 TrikFSharpGeneratorPluginBase::TrikFSharpGeneratorPluginBase(
 		kitBase::robotModel::RobotModelInterface * const robotModel

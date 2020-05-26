@@ -202,6 +202,7 @@ void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 		} else {
 			unsetCursor();
 		}
+		// TODO: Why not AstractItem::hoverMoveEvent()
 		QGraphicsItem::hoverMoveEvent(event);
 	}
 }

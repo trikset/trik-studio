@@ -186,12 +186,12 @@ void ElementType::loadSdf(const QDomElement &picture)
 	}
 }
 
-const QList<LabelProperties> &ElementType::labels() const
+const QList<QSharedPointer<LabelProperties>> &ElementType::labels() const
 {
 	return mLabels;
 }
 
-void ElementType::addLabel(const LabelProperties &label)
+void ElementType::addLabel(const QSharedPointer<LabelProperties> &label)
 {
 	mLabels << label;
 }

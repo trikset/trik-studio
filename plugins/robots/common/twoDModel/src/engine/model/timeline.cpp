@@ -35,7 +35,7 @@ Timeline::Timeline(QObject *parent)
 		registered = true;
 	}
 
-	connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimer()));
+	connect(&mTimer, &QTimer::timeout, this, &Timeline::onTimer);
 	mTimer.setInterval(defaultRealTimeInterval);
 }
 
@@ -81,7 +81,7 @@ void Timeline::onTimer()
 						- mFrameStartTimestamp);
 				const int pauseBeforeFrameEnd = mFrameLength - msFromFrameStart;
 				if (pauseBeforeFrameEnd > 0) {
-					QTimer::singleShot(pauseBeforeFrameEnd - 1, this, SLOT(gotoNextFrame()));
+					QTimer::singleShot(pauseBeforeFrameEnd - 1, this, &Timeline::gotoNextFrame);
 				} else {
 					gotoNextFrame();
 				}

@@ -24,6 +24,7 @@ namespace utils {
 
 class QRUTILS_EXPORT ExpressionsParser
 {
+	Q_DISABLE_COPY(ExpressionsParser)
 
 public:
 	explicit ExpressionsParser(qReal::ErrorReporterInterface *errorReporter);

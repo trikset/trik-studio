@@ -29,8 +29,10 @@ namespace gestures {
 
 class GesturesManager
 {
+	Q_DISABLE_COPY(GesturesManager)
 public:
-	virtual ~GesturesManager() {}
+	GesturesManager() = default;
+	virtual ~GesturesManager() = default;
 	virtual void initIdealGestures(QMap<QString, PathVector> const &objects) = 0;
 	virtual void setKey(const PathVector &path) = 0;
 	virtual qreal getMaxDistance(const QString &object) = 0;

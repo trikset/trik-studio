@@ -23,7 +23,9 @@ namespace modelsImplementation {
 
 class AbstractModelItem
 {
+	Q_DISABLE_COPY(AbstractModelItem)
 public:
+	AbstractModelItem() = default;
 	virtual ~AbstractModelItem();
 
 	typedef QList<AbstractModelItem*> PointerList;

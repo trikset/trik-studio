@@ -22,15 +22,16 @@
 
 namespace utils {
 /// File name for generation utility templates. Searched in templates folder.
-const QString utilsFileName = "utils.template";
+const auto utilsFileName = "utils.template";
 
 /// Separator used in utility templates file to separate templates.
-const QString utilsSeparator = "==========";
+const auto utilsSeparator = "==========";
 
 /// Base class for all generators, contains common methods and infrastructure to
 /// generate one file.
 class QRUTILS_EXPORT AbstractGenerator
 {
+	Q_DISABLE_COPY(AbstractGenerator)
 public:
 	/** Constructor.
 	  @param templateDirPath Path to a directory with generation templates.

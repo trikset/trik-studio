@@ -94,5 +94,6 @@ void RangeSensorItem::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		setFlag(ItemIsMovable, false);
 	}
 
+	// TODO: Why not SensorItem::mousePressEvent ?
 	AbstractItem::mousePressEvent(mouseEvent);
 }

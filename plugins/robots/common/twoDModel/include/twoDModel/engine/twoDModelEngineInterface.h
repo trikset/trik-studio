@@ -29,8 +29,10 @@ class TwoDModelGuiFacade;
 /// Provides some basic engine methods like scanning the field or playing the sound or working with display.
 class TwoDModelEngineInterface
 {
+	Q_DISABLE_COPY(TwoDModelEngineInterface)
 public:
-	virtual ~TwoDModelEngineInterface() {}
+	TwoDModelEngineInterface() = default;
+	virtual ~TwoDModelEngineInterface() = default;
 
 	/// Enables the motor on the given port assigning the given power to it with the given break mode.
 	virtual void setNewMotor(int speed, uint degrees

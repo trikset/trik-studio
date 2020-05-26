@@ -24,8 +24,10 @@ namespace robotModel {
 
 class ROBOTS_TRIK_GENERATOR_BASE_EXPORT GeneratorModelExtensionInterface
 {
+	Q_DISABLE_COPY(GeneratorModelExtensionInterface)
 public:
-	virtual ~GeneratorModelExtensionInterface() {}
+	GeneratorModelExtensionInterface() = default;
+	virtual ~GeneratorModelExtensionInterface() = default;
 
 	/// Adds pre-configured device to the given port.
 	virtual void addDevice(const kitBase::robotModel::PortInfo &port

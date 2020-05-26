@@ -260,7 +260,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	}
 	auto errorReporter = connect(
 			communicator, &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
-			[this](const QString &message){
+			this, [this](const QString &message){
 				mMainWindowInterface->errorReporter()->addError(message);
 			});
 	QMetaObject::invokeMethod(communicator, &communication::Ev3RobotCommunicationThread::connect

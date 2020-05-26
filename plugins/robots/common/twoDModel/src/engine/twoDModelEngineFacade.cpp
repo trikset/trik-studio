@@ -103,7 +103,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		connect(this, &twoDModel::TwoDModelControlInterface::runButtonPressed, this, [this, &interpreterControl]() {
 			if (mCurrentTabInfo == qReal::TabInfo::TabType::editor) {
-				emit interpreterControl.interpret();
+				interpreterControl.interpret();
 			} else {
 				emit interpreterControl.startScriptInterpretation();
 			}

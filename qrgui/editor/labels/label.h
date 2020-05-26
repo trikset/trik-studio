@@ -34,7 +34,7 @@ public:
 	Label(models::GraphicalModelAssistApi &graphicalAssistApi
 			, models::LogicalModelAssistApi &logicalAssistApi
 			, const Id &elementId
-			, const LabelProperties &properties);
+			, const QSharedPointer<LabelProperties> &properties);
 
 	~Label() override;
 
@@ -112,7 +112,7 @@ private:
 	const Id mId;
 	models::GraphicalModelAssistApi &mGraphicalModelAssistApi;
 	models::LogicalModelAssistApi &mLogicalModelAssistApi;
-	LabelProperties mProperties;
+	QSharedPointer<LabelProperties> mProperties;
 };
 
 }

@@ -116,7 +116,8 @@ void PaletteTree::initDone()
 		// In case of empty combobox we do not hide it for user`s ensuring in items absence
 		mComboBox->hide();
 	} else {
-		connect(mComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setActiveEditor(int)));
+		connect(mComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
+				, this, QOverload<int>::of(&PaletteTree::setActiveEditor));
 		mComboBox->show();
 	}
 

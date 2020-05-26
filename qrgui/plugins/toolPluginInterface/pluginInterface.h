@@ -36,8 +36,10 @@ namespace qReal {
 /// it shouldn't care about them.
 class PluginInterface
 {
+	Q_DISABLE_COPY(PluginInterface)
 public:
-	virtual ~PluginInterface() {}
+	PluginInterface() = default;
+	virtual ~PluginInterface() = default;
 
 	/// Shall be overriden to return customizer that allows to change window title,
 	/// show/hide certain GUI elements and so on.

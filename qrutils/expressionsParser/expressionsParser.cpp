@@ -229,7 +229,8 @@ Number *ExpressionsParser::parseTerm(const QString &stream, int &pos)
 	case '-':
 		pos++;
 		skip(stream, pos);
-		res = new Number(-(*parseTerm(stream, pos)));
+		res = parseTerm(stream, pos);
+		res->neg();
 		break;
 	case '(':
 		pos++;

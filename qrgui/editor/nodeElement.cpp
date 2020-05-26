@@ -77,8 +77,8 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 			, portFactory.createPorts(mType.linePorts())
 			, portFactory.createPorts(mType.circularPorts()));
 
-	const QList<LabelProperties> labelInfos = mType.labels();
-	for (const LabelProperties &labelInfo : labelInfos) {
+	const auto &labelInfos = mType.labels();
+	for (const auto &labelInfo : labelInfos) {
 		Label * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 		label->init(mContents);
 		label->setParentItem(this);
@@ -252,13 +252,14 @@ void NodeElement::updateDynamicProperties(const Id &target)
 					, dynamicProperties.toString(4));
 
 			// Label initialization
-			LabelProperties labelInfo(index, x.value(), y.value(), textBinded, false, 0);
-			labelInfo.setBackground(Qt::white);
-			labelInfo.setScalingX(false);
-			labelInfo.setScalingY(false);
-			labelInfo.setHard(false);
-			labelInfo.setPrefix(text);
-			labelInfo.setPlainTextMode(true);
+			QSharedPointer<LabelProperties> labelInfo(new LabelProperties(index, x.value(), y.value()
+																		  , textBinded, false, 0));
+			labelInfo->setBackground(Qt::white);
+			labelInfo->setScalingX(false);
+			labelInfo->setScalingY(false);
+			labelInfo->setHard(false);
+			labelInfo->setPrefix(text);
+			labelInfo->setPlainTextMode(true);
 			Label *label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 			label->init(mContents);
 			label->setParentItem(this);

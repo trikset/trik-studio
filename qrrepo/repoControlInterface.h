@@ -21,8 +21,10 @@ namespace qrRepo {
 /// Provides repository control methods, like save or open saved contents.
 class RepoControlInterface
 {
+	Q_DISABLE_COPY(RepoControlInterface)
 public:
-	virtual ~RepoControlInterface() {}
+	RepoControlInterface() = default;
+	virtual ~RepoControlInterface() = default;
 
 	virtual bool exterminate() = 0;
 

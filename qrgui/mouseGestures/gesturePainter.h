@@ -27,6 +27,7 @@ namespace gestures {
 /// The default implementation creates a new pixmap and calls paint() to fill it.
 class QRGUI_MOUSE_GESTURES_EXPORT GesturePainter : public QIconEngine
 {
+	Q_DISABLE_COPY(GesturePainter)
 public:
 	GesturePainter(const QString &gesture
 			, const QColor &backgroungColor

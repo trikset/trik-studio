@@ -24,15 +24,14 @@ namespace qReal {
 /// Manages all json stylesheets in system
 class Styles
 {
+	Q_DISABLE_COPY(Styles)
 public:
 	explicit Styles(const Fonts &fonts)
 		: mFonts(fonts)
 	{
 	}
 
-	virtual ~Styles()
-	{
-	}
+	virtual ~Styles() = default;
 
 	/// Returns json stylesheet for start tab background
 	virtual QString startTabBackgroundStyle() const

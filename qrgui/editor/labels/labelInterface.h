@@ -25,8 +25,10 @@ namespace editor {
 /// Represents text label on a shape, to be configured and used in editor plugins.
 class LabelInterface
 {
+	Q_DISABLE_COPY(LabelInterface)
 public:
-	virtual ~LabelInterface() {}
+	LabelInterface() = default;
+	virtual ~LabelInterface() = default;
 
 	/// @todo: Set properties described in qrgui/editor/labels/labelProperties.cpp class directly through it?
 

@@ -25,6 +25,7 @@ class Edge;
 /// explicitly mark that they represent entities of some graph.
 class Node
 {
+	Q_DISABLE_COPY(Node)
 public:
 	/// Returns multigraph owning this instance of node.
 	Multigraph &graph() const;

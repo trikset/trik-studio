@@ -46,7 +46,6 @@ public:
 	LabelProperties();
 	LabelProperties(int index, qreal x, qreal y, const QString &text, qreal rotation);
 	LabelProperties(int index, qreal x, qreal y, const QString &binding, bool isReadOnly, qreal rotation);
-	LabelProperties(const LabelProperties &other);
 	LabelProperties(int index, qreal x, qreal y, const QString &binding, const QString &roleName
 			, const QString &nameOfRoleProperty, bool isReadOnly, qreal rotation);
 
@@ -145,7 +144,7 @@ public:
 	void setSuffix(const QString &text);
 
 	/// Assignment will copy contents of \a other into this instance.
-	LabelProperties &operator =(const LabelProperties &other);
+	/// LabelProperties &operator =(const LabelProperties &other);
 
 signals:
 	/// Emitted when label`s index among other siblings changes.

@@ -53,20 +53,20 @@ QsciDocument::~QsciDocument()
 // The copy ctor.
 QsciDocument::QsciDocument(const QsciDocument &that)
 {
-    attach(that);
+	attach(that);
 }
 
 
 // The assignment operator.
 QsciDocument &QsciDocument::operator=(const QsciDocument &that)
 {
-    if (pdoc != that.pdoc)
-    {
-        detach();
-        attach(that);
-    }
+	if (pdoc != that.pdoc)
+	{
+		detach();
+		attach(that);
+	}
 
-    return *this;
+	return *this;
 }
 
 

@@ -26,7 +26,9 @@ namespace parts {
 /// plugins.
 class ROBOTS_GENERATOR_EXPORT DeviceVariables
 {
+	Q_DISABLE_COPY(DeviceVariables)
 public:
+	DeviceVariables() = default;
 	virtual ~DeviceVariables();
 
 	/// Allows to customize path to device expression template based on device info and port info.
