@@ -84,7 +84,7 @@ bool BluetoothRobotCommunicationThread::connect()
 
 	mKeepAliveTimer->moveToThread(this->thread());
 	mKeepAliveTimer->disconnect();
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()));
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
 	mKeepAliveTimer->start(500);
 
 	return !response.isEmpty();

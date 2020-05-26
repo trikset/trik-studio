@@ -1085,7 +1085,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+335"/>
+        <location line="+336"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
