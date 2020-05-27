@@ -45,6 +45,7 @@ public:
 
 	QPolygonF mDebuggingDrawPolygon;
 
+    void stop();
 protected:
 	float prevSpeed = 0;
 
