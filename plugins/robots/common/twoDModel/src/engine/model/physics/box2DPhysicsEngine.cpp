@@ -251,15 +251,15 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 			const qreal speed1 = pxToM(wheelLinearSpeed(*robot, robot->leftWheel())) / secondsInterval * sAdpt;
 			const qreal speed2 = pxToM(wheelLinearSpeed(*robot, robot->rightWheel())) / secondsInterval * sAdpt;
 
-            if (qAbs(speed1) + qAbs(speed2) < b2_epsilon) {
-                mBox2DRobots[robot]->stop();
-                mLeftWheels[robot]->stop();
-                mRightWheels[robot]->stop();
-            }
-            else {
-                mLeftWheels[robot]->keepConstantSpeed(speed1);
-                mRightWheels[robot]->keepConstantSpeed(speed2);
-            }
+			if (qAbs(speed1) + qAbs(speed2) < b2_epsilon) {
+				mBox2DRobots[robot]->stop();
+				mLeftWheels[robot]->stop();
+				mRightWheels[robot]->stop();
+			}
+			else {
+				mLeftWheels[robot]->keepConstantSpeed(speed1);
+				mRightWheels[robot]->keepConstantSpeed(speed2);
+			}
 		}
 
 		mPrevPosition = rBody->GetPosition();

@@ -41,11 +41,10 @@ public:
 	b2Vec2 getForwardVelocity() const;
 
 	void keepConstantSpeed(float speed);
+	void stop();
 	b2Body *getBody();
 
 	QPolygonF mDebuggingDrawPolygon;
-
-    void stop();
 protected:
 	float prevSpeed = 0;
 

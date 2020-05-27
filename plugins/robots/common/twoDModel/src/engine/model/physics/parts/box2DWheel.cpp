@@ -115,7 +115,7 @@ void Box2DWheel::keepConstantSpeed(float speed) {
 
 	//break stop
 	if (qAbs(speedDiff) < b2_epsilon) {
-        stop();
+		stop();
 		return;
 	}
 	mBody->ApplyLinearImpulse(linearImpulse, mBody->GetWorldCenter(), true);
@@ -127,6 +127,6 @@ b2Body *Box2DWheel::getBody()
 }
 
 void Box2DWheel::stop() {
-    mBody->SetLinearVelocity(b2Vec2(0, 0));
-    mBody->SetAngularVelocity(0);
+	mBody->SetLinearVelocity(b2Vec2(0, 0));
+	mBody->SetAngularVelocity(0);
 }

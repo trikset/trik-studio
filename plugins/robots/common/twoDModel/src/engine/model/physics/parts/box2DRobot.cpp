@@ -85,8 +85,8 @@ Box2DRobot::~Box2DRobot() {
 
 void Box2DRobot::stop()
 {
-    mBody->SetLinearVelocity(b2Vec2(0, 0));
-    mBody->SetAngularVelocity(0);
+	mBody->SetLinearVelocity(b2Vec2(0, 0));
+	mBody->SetAngularVelocity(0);
 }
 
 void Box2DRobot::startStopping()
