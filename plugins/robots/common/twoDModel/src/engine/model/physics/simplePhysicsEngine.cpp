@@ -86,9 +86,7 @@ void SimplePhysicsEngine::recalculateParameters(qreal timeInterval, RobotModel &
 		const qreal gammaRadians = timeInterval * angularSpeed;
 		const qreal gammaDegrees = gammaRadians * 180 / pi;
 
-		mPositionShift[&robot] = QVector2D(QPointF(0, 0));
 		mRotation[&robot] = gammaDegrees;
-	} else {
-		mPositionShift[&robot] = averageSpeed * timeInterval * Geometry::directionVector(robot.rotation());
 	}
+	mPositionShift[&robot] = averageSpeed * timeInterval * Geometry::directionVector(robot.rotation());
 }
