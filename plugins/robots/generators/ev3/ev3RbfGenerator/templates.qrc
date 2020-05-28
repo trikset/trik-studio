@@ -85,6 +85,7 @@
         <file>templates/sensors/Up.t</file>
         <file>templates/sensors/Down.t</file>
         <file>templates/sensors/colorRecognition.t</file>
+        <file>templates/sensors/colorRaw.t</file>
         <file>templates/sensors/colorRed.t</file>
         <file>templates/sensors/colorGreen.t</file>
         <file>templates/sensors/colorBlue.t</file>

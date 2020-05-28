@@ -386,6 +386,7 @@ void Box2DPhysicsEngine::itemAdded(QGraphicsItem * const item)
 		connect(abstractItem, &graphicsUtils::AbstractItem::x2Changed, this, onItemDraggedLambda);
 		connect(abstractItem, &graphicsUtils::AbstractItem::y1Changed, this, onItemDraggedLambda);
 		connect(abstractItem, &graphicsUtils::AbstractItem::y2Changed, this, onItemDraggedLambda);
+		connect(abstractItem, &graphicsUtils::AbstractItem::positionChanged, this, onItemDraggedLambda);
 
 		connect(abstractItem, &graphicsUtils::AbstractItem::mouseInteractionStarted, this, [=](){
 			onPressedReleasedSelectedItems(false);
