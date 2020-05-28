@@ -79,7 +79,7 @@ QPair<QDomElement, Item::DomElementTypes> Path::generateItem(QDomDocument &docum
 	QDomElement path = setPenBrushToDoc(document, "path");
 
 	int count = mPath.elementCount();
-	QPainterPath::Element elem;
+	QPainterPath::Element elem {};
 	path.setAttribute("int", count);
 
 	QString text = "";

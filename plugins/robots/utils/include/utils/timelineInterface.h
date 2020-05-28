@@ -23,8 +23,10 @@ class AbstractTimer;
 /// An interface for all objects that may measure time
 class TimelineInterface
 {
+	Q_DISABLE_COPY(TimelineInterface)
 public:
-	virtual ~TimelineInterface() {}
+	TimelineInterface() = default;
+	virtual ~TimelineInterface() = default;
 
 	/// Returns time in ms passed from some point (no matter what point).
 	virtual quint64 timestamp() const = 0;

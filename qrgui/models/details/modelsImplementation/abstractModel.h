@@ -83,7 +83,7 @@ signals:
 protected:
 	const EditorManagerInterface &mEditorManagerInterface;
 	QHash<Id, AbstractModelItem *> mModelItems;
-	AbstractModelItem *mRootItem;
+	AbstractModelItem *mRootItem {};
 
 	QString findPropertyName(const Id &id, const int role) const;
 	QModelIndex index(const AbstractModelItem * const item) const;

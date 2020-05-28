@@ -18,7 +18,7 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-const QString iteratorName = "__iter__";
+static const auto iteratorName = "__iter__";
 
 ForLoopGenerator::ForLoopGenerator(int index
 		, const qrRepo::RepoApi &repo

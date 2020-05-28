@@ -30,20 +30,8 @@ using namespace twoDModel::model;
 
 const quint64 maxSvgSize = 1000;
 
-Image::Image()
-	: mExternal(true)
-	, mIsSvg(false)
-	, mImage(nullptr)
-	, mSvgRenderer(nullptr)
-{
-}
-
 Image::Image(const QString &id)
-	: mExternal(true)
-	, mIsSvg(false)
-	, mImageId(id)
-	, mImage(nullptr)
-	, mSvgRenderer(nullptr)
+	: mImageId(id)
 {
 }
 
@@ -51,8 +39,6 @@ Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
 	, mIsSvg(path.endsWith(".svg"))
 	, mPath(path)
-	, mImage(nullptr)
-	, mSvgRenderer(nullptr)
 {
 	if (!memorize) {
 		if (mIsSvg) {

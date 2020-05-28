@@ -76,7 +76,7 @@ private:
 	QScopedPointer<TwoDModelEngineInterface> mApi;
 	utils::SmartDock *mDock;  // Transfers ownership to main window indirectly
 
-	qReal::TabInfo::TabType mCurrentTabInfo; // temp hack
+	qReal::TabInfo::TabType mCurrentTabInfo { qReal::TabInfo::TabType::other }; // temp hack
 };
 
 }

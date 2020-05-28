@@ -15,7 +15,7 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
-#define FULL_ANGLE 360000
+constexpr auto FULL_ANGLE = 360000;
 
 using namespace trik::robotModel::twoD::parts;
 

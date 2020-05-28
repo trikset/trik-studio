@@ -43,8 +43,10 @@ public:
 	/// An interface for processing visited nodes
 	class QRUTILS_EXPORT VisitorInterface
 	{
+		Q_DISABLE_COPY(VisitorInterface)
 	public:
-		virtual ~VisitorInterface() {}
+		virtual ~VisitorInterface() = default;
+		VisitorInterface() = default;
 
 		/// Called every time when traverser gets into new node.
 		/// Visitor may modify links list (it may be useful if visitor wants to restrict
@@ -78,7 +80,7 @@ private:
 
 	const qrRepo::LogicalRepoApi &mRepo;
 	QSet<qReal::Id> mVisitedNodes;
-	bool mSearchTerminated;
+	bool mSearchTerminated {};
 };
 
 }

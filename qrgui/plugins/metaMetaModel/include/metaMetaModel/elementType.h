@@ -137,10 +137,10 @@ public:
 	void loadSdf(const QDomElement &picture);
 
 	/// Returns a list of all labels on instances of this type.
-	const QList<LabelProperties> &labels() const;
+	const QList<QSharedPointer<LabelProperties>> &labels() const;
 
 	/// Appends \a label to a list of all labels belonging to instances of this type.
-	void addLabel(const LabelProperties &label);
+	void addLabel(const QSharedPointer<LabelProperties> &label);
 
 	/// Returns a list of custom logical properties of this element.
 	const QStringList &propertyNames() const;
@@ -190,7 +190,7 @@ private:
 	QString mDescription;
 	QString mDiagram;
 	QScopedPointer<QDomDocument> mSdf;
-	QList<LabelProperties> mLabels;
+	QList<QSharedPointer<LabelProperties>> mLabels;
 	QStringList mPropertyNames;
 	QStringList mReferenceProperties;
 	QStringList mHiddenProperties;

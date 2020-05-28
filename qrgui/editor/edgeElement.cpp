@@ -75,9 +75,9 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 
 	setAcceptHoverEvents(true);
 
-	const QList<LabelProperties> labelsInfos = mType.labels();
-	for (const LabelProperties &labelInfo : labelsInfos) {
-		Label * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
+	const auto &labelsInfos = mType.labels();
+	for (const auto &labelInfo : labelsInfos) {
+		auto *label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 		label->init(boundingRect());
 		label->setParentItem(this);
 		label->setShouldCenter(false);

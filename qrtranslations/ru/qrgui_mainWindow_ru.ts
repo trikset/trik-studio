@@ -1150,7 +1150,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+85"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
         <source>Mouse gesture</source>
         <translation>Жест мышью</translation>
     </message>
@@ -1206,7 +1206,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Если вы удалите его, то все унаследованные свойства будут удалены у его потомков. Продолжить удаление?</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+75"/>
         <location line="+29"/>
         <source>Change Properties</source>
         <translation>Изменить свойства</translation>

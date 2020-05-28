@@ -31,7 +31,7 @@ namespace model {
 class Image
 {
 public:
-	Image();
+	Image() = default;
 	Image(const QString &id);
 	Image(const QString &path, bool memorize);
 	Image(const Image &other);
@@ -74,8 +74,8 @@ public:
 private:
 	QSize preferedSvgSize() const;
 
-	bool mExternal;
-	bool mIsSvg;
+	bool mExternal { true };
+	bool mIsSvg { false };
 	QString mPath;
 	QString mImageId;
 	QScopedPointer<QImage> mImage;

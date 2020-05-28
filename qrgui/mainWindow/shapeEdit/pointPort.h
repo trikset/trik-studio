@@ -41,8 +41,8 @@ public:
 	QString getType() const;
 
 private:
-	qreal mRadius;
-	qreal mUnrealRadius;
+	qreal mRadius { -1 };
+	qreal mUnrealRadius { -1 };
 	graphicsUtils::PointImpl mPointImpl;
 	QString mType;
 };

@@ -65,7 +65,6 @@ generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::simp
 		return new EndOfHandlerGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "InitialNode") {
 		qReal::Id firstId = mRepo.to(mRepo.links(id).first());
-		QString localLabelFor = mGotoLabelManager.labelFor(firstId);
 		return new InitialNodeGenerator(mRepo, customizer, firstId, this);
 	} else if (elementType == "GeoTakeoff") {
 		return new GeoTakeoffGenerator(mRepo, customizer, id, this);

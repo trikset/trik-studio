@@ -56,7 +56,7 @@ private:
 	bool mIsCircle;
 
 	b2Vec2 mPreviousPosition;
-	float mPreviousRotation;
+	float mPreviousRotation {};
 
 	twoDModel::model::physics::Box2DPhysicsEngine &mEngine; // Doesn't take ownership
 };

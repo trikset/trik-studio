@@ -29,6 +29,7 @@ namespace details {
 /// serialize/deserialize and clone itself.
 class Object
 {
+	Q_DISABLE_COPY(Object)
 public:
 	/// Constructor.
 	/// @param id - id of a new object.

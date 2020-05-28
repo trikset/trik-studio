@@ -55,6 +55,7 @@
 #include "twoDModel/engine/model/model.h"
 
 #include "nullTwoDModelDisplayWidget.h"
+#include <array>
 
 using namespace twoDModel;
 using namespace view;
@@ -66,7 +67,7 @@ using namespace kitBase;
 using namespace kitBase::robotModel;
 using namespace robotParts;
 
-const QList<int> speedFactors = { 2, 3, 4, 5, 6, 8, 10, 15, 20 };
+const int speedFactors[] = { 2, 3, 4, 5, 6, 8, 10, 15, 20 };
 const int defaultSpeedFactorIndex = 3;
 
 TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
@@ -77,8 +78,6 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget())
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget())
 	, mCurrentSpeed(defaultSpeedFactorIndex)
-	, mNoneCursorType(noDrag)
-	, mCursorType(noDrag)
 {
 	setWindowIcon(QIcon(":/icons/2d-model.svg"));
 
@@ -282,7 +281,7 @@ void TwoDModelWidget::initPalette()
 	connect(ballTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawBall); });
 	connect(lineTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawLine); });
 	connect(bezierTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawBezier); });
-	connect(rectangleTool, &QAction::triggered, [this](){ setCursorTypeForDrawing(drawRectangle); });
+	connect(rectangleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); });
 	connect(ellipseTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawEllipse); });
 	connect(stylusTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawStylus); });
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, this
@@ -353,8 +352,8 @@ void TwoDModelWidget::setPortsGroupBoxAndWheelComboBoxes()
 	connectDevicesConfigurationProvider(&mSelectedRobotItem->robotModel().configuration());
 
 	auto connectWheelComboBox = [this](QComboBox * const comboBox, RobotModel::WheelEnum wheel) {
-				connect(comboBox, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged)
-						, [this, wheel, comboBox](int index) {
+				connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
+						, this, [this, wheel, comboBox](int index) {
 								mSelectedRobotItem->robotModel().setMotorPortOnWheel(wheel
 										, comboBox->itemData(index).value<PortInfo>());
 						});
@@ -595,7 +594,7 @@ void TwoDModelWidget::onSelectionChange()
 
 void TwoDModelWidget::speedUp()
 {
-	if (mCurrentSpeed < speedFactors.count() - 1) {
+	if (static_cast<unsigned>(mCurrentSpeed) < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1) {
 		mModel.timeline().setSpeedFactor(speedFactors[++mCurrentSpeed]);
 		checkSpeedButtons();
 	}
@@ -611,7 +610,10 @@ void TwoDModelWidget::speedDown()
 
 void TwoDModelWidget::checkSpeedButtons()
 {
-	mUi->speedUpButton->setEnabled(mCurrentSpeed < speedFactors.count() - 1);
+	mUi->speedUpButton->setEnabled(static_cast<unsigned>(mCurrentSpeed)
+								   < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1);
+	mUi->speedUpButton->setEnabled(
+				static_cast<unsigned>(mCurrentSpeed) < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1);
 	mUi->speedDownButton->setEnabled(mCurrentSpeed > 0);
 }
 

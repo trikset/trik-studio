@@ -99,8 +99,7 @@ private slots:
 private:
 	QString kitIdOf(kitBase::robotModel::RobotModelInterface &model) const;
 
-	/// another @todo
-	bool mEnableRobotActions;
+	bool mEnableRobotActions {};
 
 	/// if the run action should be visible
 	bool mIsOnEditorTab = false;

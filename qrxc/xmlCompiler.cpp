@@ -437,7 +437,7 @@ void XmlCompiler::generateEnumValues(OutFile &out)
 		const QString name = type->name();
 		out() << "\tmMetamodel->addEnum(\"" << name << "\", { ";
 		QStringList pairs;
-		const QMap<QString, QString> values = type->values();
+		const QMap<QString, QString> &values = type->values();
 		for (auto &&key : values.keys()) {
 			pairs << QString("qMakePair(QString(\"%1\"), tr(\"%2\"))").arg(key, values[key]);
 		}

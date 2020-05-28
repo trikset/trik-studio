@@ -141,7 +141,7 @@ private:
 	QStack<int> mLoopNumbers;
 	QSet<int> mVerticesInsideLoopBody;
 	QVector<qReal::Id> mAdditionalVertices;
-	bool mEdgesAndVerticesWereAdded;
+	bool mEdgesAndVerticesWereAdded {};
 	qReal::Id mFictiveId;
 };
 

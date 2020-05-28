@@ -476,7 +476,7 @@ bool GraphicType::resolve()
 				}
 			}
 
-			for (PossibleEdge pEdge : graphicParent->mPossibleEdges) {
+			for (const auto &pEdge : graphicParent->mPossibleEdges) {
 				mPossibleEdges.append(qMakePair(pEdge.first,qMakePair(pEdge.second.first,name())));
 			}
 		}
@@ -497,8 +497,8 @@ void GraphicType::generateName(OutFile &out) const
 
 	/// @todo: I don`t know why we check it here but think it can live for now. This should be moved
 	/// into appropriate place later.
-	for (const QPair<QString, QStringList> &part : mDiagram->paletteGroups()) {
-		for (auto part2 : part.second) {
+	for (const auto &part : mDiagram->paletteGroups()) {
+		for (const auto &part2 : part.second) {
 			if (part2 == normalizedName && mAbstract == "true" ) {
 				qDebug() << "ERROR! Element" << qualifiedName() << "is abstract.";
 				return;

@@ -83,7 +83,7 @@ private:
 	/// Common part of all plugin managers
 	PluginManager mPluginManager;
 
-	SystemEvents *mSystemEvents;
+	SystemEvents *mSystemEvents {};
 };
 
 }

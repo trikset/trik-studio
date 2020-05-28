@@ -119,7 +119,7 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 		onRobotStartAngleChanged(newAngle, dynamic_cast<model::RobotModel *>(sender()));
 	});
 
-	QTimer::singleShot(10, [=]() {
+	QTimer::singleShot(10, this, [this, robot]() {
 		mScene = dynamic_cast<view::TwoDModelScene *>(robot->startPositionMarker()->scene());
 
 		connect(mScene->robot(*robot), &view::RobotItem::mouseInteractionStopped, this, [=]() {

@@ -22,7 +22,7 @@
 
 #include "parts/randomGeneratorPart.h"
 
-const QString randomKeyWord = "random";
+const auto randomKeyWord = "random";
 
 using namespace pioneer::lua;
 
@@ -75,7 +75,7 @@ void RandomFunctionChecker::checkAst(QSharedPointer<qrtext::core::ast::Node> ast
 		}
 	}
 
-	for (const auto child : ast->children()) {
+	for (const auto &child : ast->children()) {
 		if (child) {
 			checkAst(child);
 		}

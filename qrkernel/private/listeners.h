@@ -23,8 +23,10 @@ namespace qReal {
 /// An entity that fires events with some value as parameter.
 class AbstractListener
 {
+	Q_DISABLE_COPY(AbstractListener)
 public:
-	virtual ~AbstractListener() {}
+	AbstractListener() = default;
+	virtual ~AbstractListener() = default;
 
 	/// Fires event that some entity listens for with @arg value as parameter (if needed).
 	virtual void fireEvent(const QVariant &value) = 0;

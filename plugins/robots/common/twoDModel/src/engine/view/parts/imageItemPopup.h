@@ -64,9 +64,9 @@ private:
 	QWidget *initBackgroundPicker();
 	QWidget *initPathPicker();
 
-	QPushButton *mPathPicker;  // Takes ownership
-	QCheckBox *mMemorizationPicker;  // Takes ownership
-	QCheckBox *mBackgroundRolePicker;  // Takes ownership
+	QPushButton *mPathPicker {};  // Takes ownership
+	QCheckBox *mMemorizationPicker {};  // Takes ownership
+	QCheckBox *mBackgroundRolePicker {};  // Takes ownership
 	bool mLastIsMemorized { false };
 	bool mLastIsBackground { false };
 	QString mLastPath;

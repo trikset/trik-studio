@@ -66,7 +66,7 @@ private:
 	/// @return a rectangle of the scene which is viewed in the editor view
 	QRectF getNewRect();
 
-	qReal::MainWindow *mWindow;
+	qReal::MainWindow *mWindow {};
 
 	qReal::gui::editor::EditorView *mEditorView;
 	/// in the scene coordinates

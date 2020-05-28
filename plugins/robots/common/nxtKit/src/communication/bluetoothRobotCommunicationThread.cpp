@@ -17,7 +17,7 @@
 #include <QtCore/QMetaType>
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
-#include <time.h>
+#include <ctime>
 
 #include <qrkernel/settingsManager.h>
 #include <plugins/robots/thirdparty/qextserialport/src/qextserialport.h>
@@ -33,7 +33,7 @@ BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread()
 	: mPort(nullptr)
 	, mKeepAliveTimer(new QTimer(this))
 {
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()));
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
 }
 
 BluetoothRobotCommunicationThread::~BluetoothRobotCommunicationThread()

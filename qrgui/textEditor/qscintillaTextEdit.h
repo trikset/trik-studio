@@ -96,8 +96,8 @@ private:
 	const int mRole;
 	LanguageInfo mLanguage;
 	QFont mFont;
-	int mAverageCharWidth;
-	ui::SearchLinePanel *mSearchLinePanel;
+	int mAverageCharWidth {-1};
+	ui::SearchLinePanel *mSearchLinePanel {};
 
 	QRegExp mLastSearch;
 	bool mLastSearchCalled = false;

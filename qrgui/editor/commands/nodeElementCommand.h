@@ -34,7 +34,7 @@ protected:
 
 	NodeElement *nodeById(const Id &id);
 
-	NodeElement *mNode;
+	NodeElement *mNode {};
 };
 
 }

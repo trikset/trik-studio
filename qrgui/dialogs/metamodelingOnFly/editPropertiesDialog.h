@@ -71,10 +71,10 @@ private:
 
 	Ui::EditPropertiesDialog *mUi;
 	const EditorManagerInterface &mInterpreterEditorManager;
-	RestorePropertiesDialog *mRestorePropertiesDialog;
+	RestorePropertiesDialog *mRestorePropertiesDialog {};
 	Id mId;
 	QString mPropertyName;
-	QListWidgetItem *mPropertyItem;
+	QListWidgetItem *mPropertyItem {};
 	Mode mMode;
 	qrRepo::LogicalRepoApi &mApi;
 	qReal::IdList mElementsOnDiagram;

@@ -35,7 +35,10 @@ namespace kitBase {
 /// Plugin interface for a kit support plugin.
 class KitPluginInterface
 {
+	Q_DISABLE_COPY(KitPluginInterface)
 public:
+	KitPluginInterface() = default;
+
 	virtual ~KitPluginInterface() = default;
 
 	/// Passes to kit plugin objects that allow it to communicate with engine.

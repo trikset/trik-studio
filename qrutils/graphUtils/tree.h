@@ -24,9 +24,10 @@ namespace qReal
 /// A base class for tree structures
 class QRUTILS_EXPORT Tree
 {
+	Q_DISABLE_COPY(Tree)
 public:
 	Tree();
-	virtual ~Tree() {}
+	virtual ~Tree() = default;
 
 	QListIterator<Tree *> children() const;
 

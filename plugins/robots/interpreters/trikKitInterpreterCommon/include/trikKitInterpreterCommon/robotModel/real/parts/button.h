@@ -41,7 +41,7 @@ public slots:
 
 private:
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;
-	int mOldValue;
+	int mOldValue { -1 };
 };
 
 }

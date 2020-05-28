@@ -24,6 +24,7 @@ namespace qrgraph {
 /// Contains implementations for basic graph and multigraph operations.
 class Multigraph
 {
+	Q_DISABLE_COPY(Multigraph)
 public:
 	Multigraph();
 	virtual ~Multigraph();

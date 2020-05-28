@@ -115,7 +115,7 @@ private:
 
 	/// Metamodel object with visual language infomation.
 	/// Does not have ownership.
-	const qReal::EditorManagerInterface *mMetamodel;
+	const qReal::EditorManagerInterface *mMetamodel {};
 };
 
 }

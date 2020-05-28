@@ -193,7 +193,7 @@ public:
     };
     mutable QReadWriteLock lock;
     QString port;
-    PortSettings settings;
+	PortSettings settings {};
     QextReadBuffer readBuffer;
     int settingsDirtyFlags;
     ulong lastErr;
@@ -201,10 +201,10 @@ public:
 
     // platform specific members
 #ifdef Q_OS_UNIX
-    int fd;
-    QSocketNotifier *readNotifier;
-    struct termios currentTermios;
-    struct termios oldTermios;
+	int fd { -1 };
+	QSocketNotifier *readNotifier {};
+	struct termios currentTermios {};
+	struct termios oldTermios {};
 #elif (defined Q_OS_WIN)
     HANDLE handle;
     OVERLAPPED overlap;

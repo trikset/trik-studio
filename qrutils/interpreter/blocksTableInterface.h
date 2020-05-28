@@ -23,8 +23,10 @@ namespace interpretation {
 /// @todo Seems to be unneeded here.
 class BlocksTableInterface
 {
+	Q_DISABLE_COPY(BlocksTableInterface)
 public:
-	virtual ~BlocksTableInterface() {}
+	BlocksTableInterface() = default;
+	virtual ~BlocksTableInterface() = default;
 
 	/// Returns object that implement logic of block by given id.
 	virtual BlockInterface *block(const qReal::Id &element) = 0;

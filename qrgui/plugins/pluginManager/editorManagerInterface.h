@@ -38,8 +38,10 @@ class Element;
 
 class EditorManagerInterface
 {
+	Q_DISABLE_COPY(EditorManagerInterface)
 public:
-	virtual ~EditorManagerInterface() {}
+	EditorManagerInterface() = default;
+	virtual ~EditorManagerInterface() = default;
 
 	virtual IdList editors() const = 0;
 	virtual IdList diagrams(const Id &editor) const = 0;

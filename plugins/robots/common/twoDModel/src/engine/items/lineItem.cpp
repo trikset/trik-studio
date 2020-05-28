@@ -25,8 +25,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 LineItem::LineItem(const QPointF &begin, const QPointF &end, int cornerRadius)
-	: mLineImpl()
-	, mCornerRadius(cornerRadius)
+	: mCornerRadius(cornerRadius)
 {
 	setX1(begin.x());
 	setY1(begin.y());

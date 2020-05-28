@@ -20,7 +20,6 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 RectangleItem::RectangleItem(const QPointF &begin, const QPointF &end)
-	: mRectangleImpl()
 {
 	setX1(begin.x());
 	setY1(begin.y());

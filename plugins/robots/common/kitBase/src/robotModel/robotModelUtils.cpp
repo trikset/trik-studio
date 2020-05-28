@@ -89,7 +89,7 @@ RobotModelInterface *RobotModelUtils::selectedRobotModelFor(QList<KitPluginInter
 	// Falling back to first met robot model.
 	for (KitPluginInterface * const kitPlugin : kits) {
 		if (!kitPlugin->robotModels().isEmpty()) {
-			return kitPlugin->robotModels()[0];
+			return kitPlugin->robotModels().at(0);
 		}
 	}
 

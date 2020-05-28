@@ -647,7 +647,7 @@ void EditorManager::addNodeElement(const Id &diagram, const QString &name, const
 		metamodel->setDiagramNode(diagram.diagram(), name);
 	}
 
-	node->addLabel(LabelProperties(0, -10, 60, "name", false, 0));
+	node->addLabel(QSharedPointer<LabelProperties>(new LabelProperties(0, -10, 60, "name", false, 0)));
 	node->addPointPort(PointPortInfo(QPointF(0, 25), false, false, 50, 50, "NonTyped"));
 	node->addPointPort(PointPortInfo(QPointF(50, 25), false, false, 50, 50, "NonTyped"));
 	node->addPointPort(PointPortInfo(QPointF(25, 0), false, false, 50, 50, "NonTyped"));
@@ -681,11 +681,11 @@ void EditorManager::addEdgeElement(const Id &diagram, const QString &name, const
 	edge->setPenColor(Qt::black);
 	edge->setPenWidth(1);
 
-	LabelProperties label;
+	QSharedPointer<LabelProperties> label;
 	if (labelType.contains("static", Qt::CaseInsensitive)) {
-		label = LabelProperties(0, 0, 0, labelText, 0);
+		label.reset(new LabelProperties(0, 0, 0, labelText, 0));
 	} else {
-		label = LabelProperties(0, 0, 0, labelText, false, 0);
+		label.reset(new LabelProperties(0, 0, 0, labelText, false, 0));
 	}
 
 	edge->addLabel(label);

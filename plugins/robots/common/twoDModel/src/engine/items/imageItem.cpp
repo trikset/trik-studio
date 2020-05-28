@@ -25,8 +25,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 ImageItem::ImageItem(model::Image *image, const QRect &geometry)
-	: mImpl()
-	, mImage(image)
+	: mImage(image)
 {
 	setX(0);
 	setY(0);
@@ -203,6 +202,7 @@ void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 		} else {
 			unsetCursor();
 		}
+		// TODO: Why not AstractItem::hoverMoveEvent()
 		QGraphicsItem::hoverMoveEvent(event);
 	}
 }

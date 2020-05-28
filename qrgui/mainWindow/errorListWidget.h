@@ -46,7 +46,7 @@ private:
 
 	void initContextMenu();
 
-	qReal::MainWindow* mMainWindow;
-	QMenu *mContextMenu;
+	qReal::MainWindow* mMainWindow {};
+	QMenu *mContextMenu {};
 };
 

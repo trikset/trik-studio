@@ -63,16 +63,16 @@ public slots:
 private:
 	QString mWorkingDirName;
 
-	int first_size_x;
-	int first_size_y;
-	int current_size_x;
-	int current_size_y;
-	int mStartX;
-	int mStartY;
-	int i;
-	int j;
-	int sep;
-	QPainter *painter;
+	int first_size_x {-1};
+	int first_size_y {-1};
+	int current_size_x {-1};
+	int current_size_y {-1};
+	int mStartX {-1};
+	int mStartY {-1};
+	int i {-1};
+	int j {-1};
+	int sep {-1};
+	QPainter *painter {};
 	QPen pen;
 	QBrush brush;
 	QString s1;
@@ -87,7 +87,7 @@ private:
 	**/
 	bool mNeedScale;
 	qreal mZoom = 1.0;
-	ElementRepoInterface *mElementRepo;
+	ElementRepoInterface *mElementRepo {};
 
 	bool checkShowConditions(const QDomElement &element, bool isIcon) const;
 	bool checkCondition(const QDomElement &condition) const;

@@ -28,6 +28,7 @@ class Diagram;
 /// Virtual base class of all metatypes supported by metaeditor.
 class Type
 {
+	Q_DISABLE_COPY(Type)
 public:
 	/// Constructor.
 	/// @param isResolved - true, if type is already resolved.

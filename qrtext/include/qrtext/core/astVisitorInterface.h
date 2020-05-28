@@ -31,8 +31,10 @@ class UnaryOperator;
 /// See 'visitor' design pattern (http://www.oodesign.com/visitor-pattern.html).
 class AstVisitorInterface
 {
+	Q_DISABLE_COPY(AstVisitorInterface)
 public:
-	virtual ~AstVisitorInterface() {}
+	AstVisitorInterface() = default;
+	virtual ~AstVisitorInterface() = default;
 
 	// Second argument is a parent everywhere.
 

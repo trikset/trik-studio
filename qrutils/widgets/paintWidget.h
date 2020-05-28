@@ -39,7 +39,7 @@ protected:
 	void paintEvent(QPaintEvent *event);
 
 private:
-	PainterInterface* mPainter;  // doesn't have ownership
+	PainterInterface* mPainter {};  // doesn't have ownership
 };
 
 }

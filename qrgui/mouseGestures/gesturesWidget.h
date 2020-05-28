@@ -46,7 +46,7 @@ signals:
 
 private:
 	Ui::GesturesWidget *mUi;
-	int mCurrentPointNumber;
+	int mCurrentPointNumber { -1 };
 	static int coord(int previous, int next, int part);
 };
 

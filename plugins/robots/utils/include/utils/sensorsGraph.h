@@ -94,7 +94,7 @@ private slots:
 
 private:
 	Ui::SensorsGraph *mUi;  // Has ownsrship
-	SensorViewer *mPlotFrame;  // Has ownership
+	SensorViewer *mPlotFrame {};  // Has ownership
 	QVBoxLayout mToolLayout;
 	QToolButton mStopButton;
 	QToolButton mStartButton;

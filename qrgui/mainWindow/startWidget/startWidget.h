@@ -64,8 +64,8 @@ private:
 	ProjectManager *mProjectManager;  // Doesn't have ownership.
 	int mProjectListSize;
 
-	QBoxLayout *mProjectsManagementLayout;  // Has ownership.
-	QWidget *mRecentProjectsWidget;  // Has ownership.
+	QBoxLayout *mProjectsManagementLayout {};  // Has ownership.
+	QWidget *mRecentProjectsWidget {};  // Has ownership.
 	QPushButton *mNewProjectButton;  // Has ownership.
 	QPushButton *mOpenProjectButton;  // Has ownership.
 	QPushButton *mOpenInterpreterButton;  // Has ownership.

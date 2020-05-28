@@ -78,8 +78,8 @@ protected:
 	qreal mMinCurrent;
 	qreal mMaxCurrent;
 	QPointF mNextToDraw;
-	qreal mGraphHeight;
-	qreal mLeftLimit;
+	qreal mGraphHeight {};
+	qreal mLeftLimit {};
 };
 
 }

@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #pragma once
-
+#include <QtGlobal>
 namespace qrgraph {
 
 class Multigraph;
@@ -23,6 +23,7 @@ class Node;
 /// explicitly mark that they connect entities of some graph.
 class Edge
 {
+	Q_DISABLE_COPY(Edge)
 public:
 	/// Returns multigraph owning this instance of node.
 	Multigraph &graph() const;

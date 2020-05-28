@@ -22,7 +22,7 @@
 
 using namespace twoDModel::constraints::details;
 
-const QString typeOfNull = "undefined";
+const auto typeOfNull = "undefined";
 
 ValuesFactory::ValuesFactory(Variables &variables, const Objects &objects, StatusReporter &status)
 	: mVariables(variables)

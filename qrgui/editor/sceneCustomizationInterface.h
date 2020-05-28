@@ -24,8 +24,10 @@ namespace editor {
 /// @todo Get rid of it cause all entities here must be specified in metamodel.
 class SceneCustomizationInterface
 {
+	Q_DISABLE_COPY(SceneCustomizationInterface)
 public:
-	virtual ~SceneCustomizationInterface() {}
+	SceneCustomizationInterface() = default;
+	virtual ~SceneCustomizationInterface() = default;
 
 	/// Returns an explosion addition menu text that will be displayed in element`s context menu.
 	virtual QString addExplosionMenuName() const = 0;

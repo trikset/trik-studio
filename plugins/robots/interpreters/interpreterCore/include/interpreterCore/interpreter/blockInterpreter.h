@@ -98,7 +98,7 @@ private:
 	qReal::gui::MainWindowInterpretersInterface &mInterpretersInterface;
 
 	InterpreterState mState;
-	quint64 mInterpretationStartedTimestamp;
+	quint64 mInterpretationStartedTimestamp {};
 	QHash<QString, qReal::interpretation::Thread *> mThreads;  // Has ownership
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	details::BlocksTable *mBlocksTable;  // Has ownership

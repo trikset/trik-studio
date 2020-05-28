@@ -26,8 +26,10 @@ namespace types {
 /// Base class for all type expressions.
 class QRTEXT_EXPORT TypeExpression
 {
+	Q_DISABLE_COPY(TypeExpression)
 public:
-	virtual ~TypeExpression() {}
+	TypeExpression() = default;
+	virtual ~TypeExpression() = default;
 
 	/// Returns true, if this type expression is a subclass of given, in C++ terms, not in target language terms. One
 	/// can use C++ inheritance to express generalization relation of a target language, but since C++ does not support

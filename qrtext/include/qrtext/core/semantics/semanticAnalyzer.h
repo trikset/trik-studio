@@ -64,6 +64,7 @@ namespace core {
 /// "float" (even for first assignment).
 class QRTEXT_EXPORT SemanticAnalyzer
 {
+	Q_DISABLE_COPY(SemanticAnalyzer)
 public:
 	/// Constructor. Takes generalizations table for a language and a list of errors to put semantic errors to. Typical
 	/// usage pattern is to subclass SemanticAnalyzer for concrete language and provide generalizations table in

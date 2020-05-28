@@ -231,7 +231,7 @@ private:
 	qReal::ControllerInterface *mController = nullptr;
 
 	graphicsUtils::GridDrawer mGridDrawer;
-	qreal mWidthOfGrid;
+	qreal mWidthOfGrid { -1 };
 
 	/// Current action (toggled button on left panel)
 	DrawingAction mDrawingAction;

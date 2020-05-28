@@ -52,10 +52,10 @@ private:
 	QAbstractButton *initButton(const QString &icon, const QString &toolTip);
 	QWidget *initSpinBox();
 
-	QAbstractButton *mFollowButton;  // Takes ownership
-	QAbstractButton *mReturnButton;  // Takes ownership
-	QSpinBox *mSpinBox;  // Takes ownership
-	RobotItem *mCurrentItem = nullptr;  // Does not take ownership
+	QAbstractButton *mFollowButton {};  // Takes ownership
+	QAbstractButton *mReturnButton {};  // Takes ownership
+	QSpinBox *mSpinBox {};  // Takes ownership
+	RobotItem *mCurrentItem {};  // Does not take ownership
 };
 
 }

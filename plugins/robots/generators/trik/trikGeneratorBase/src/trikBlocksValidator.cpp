@@ -102,7 +102,7 @@ void TrikBlocksValidator::checkStringPropertiesNotEmpty(const qReal::Id &id)
 	};
 
 	const auto properties = mRepo.properties(id);
-	for (auto property : properties.keys()) {
+	for (auto const &property : properties.keys()) {
 		if (badProperties.contains(property)) {
 			continue;
 		}

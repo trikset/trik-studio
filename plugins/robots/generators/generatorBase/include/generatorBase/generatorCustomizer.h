@@ -42,8 +42,9 @@ enum Semantics {
 /// for producing different generator parts.
 class ROBOTS_GENERATOR_EXPORT GeneratorCustomizer
 {
+	Q_DISABLE_COPY(GeneratorCustomizer)
 public:
-	virtual ~GeneratorCustomizer() {}
+	virtual ~GeneratorCustomizer() = default;
 
 	/// Implementation must tell if block with given id has initial node semantics
 	virtual bool isInitialNode(const qReal::Id &block) const;

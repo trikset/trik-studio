@@ -70,7 +70,7 @@ private:
 	QWidget *mDevices;  // Doesn`t take ownership
 	QWidget *mMotors;   // Doesn`t take ownership
 	QWidget *mPhysics;  // Doesn`t take ownership
-	QWidget *mParams;  // Doesn`t take ownership
+	QWidget *mParams {};  // Doesn`t take ownership
 };
 
 }

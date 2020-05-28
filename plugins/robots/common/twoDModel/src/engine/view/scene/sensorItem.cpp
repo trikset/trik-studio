@@ -38,10 +38,8 @@ const int selectionDrift = 7;
 
 SensorItem::SensorItem(model::SensorsConfiguration &configuration
 		, const PortInfo &port, const QString &pathToImage, const QRect &imageRect)
-	: RotateItem()
-	, mConfiguration(configuration)
+	: mConfiguration(configuration)
 	, mPort(port)
-	, mPointImpl()
 	, mImageRect(imageRect.isEmpty() ? this->imageRect() : imageRect)
 	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift
 			, selectionDrift, selectionDrift))

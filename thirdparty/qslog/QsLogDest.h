@@ -45,10 +45,12 @@ namespace QsLogging
 
 class QSLOG_SHARED_OBJECT Destination
 {
+	Q_DISABLE_COPY(Destination)
 public:
 	typedef void (*LogFunction)(const QString &message, Level level);
 
 public:
+	Destination() = default;
 	virtual ~Destination();
 	virtual void write(const QString& message, Level level) = 0;
 	virtual bool isValid() = 0; // returns whether the destination was created correctly

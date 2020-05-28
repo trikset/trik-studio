@@ -35,6 +35,7 @@ struct ScopedConnection {
 		: mConnection(c)
 	{}
 
+	ScopedConnection(const ScopedConnection &c) = delete;
 	ScopedConnection(ScopedConnection &&c)
 		: mConnection(c.mConnection)
 	{

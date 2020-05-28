@@ -90,7 +90,7 @@ private:
 	QTimer mTimer;
 	int mSpeedFactor;
 	int mCyclesCount;
-	qint64 mFrameStartTimestamp;
+	qint64 mFrameStartTimestamp {};
 	bool mIsStarted;
 	quint64 mTimestamp;
 	int mFrameLength = defaultFrameLength;

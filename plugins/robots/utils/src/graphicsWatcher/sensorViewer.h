@@ -71,11 +71,11 @@ private slots:
 	void visualTimerEvent();
 
 private:
-	QGraphicsScene *mScene;  // Has ownership
-	AbstractTimer *mVisualTimer;  // Has ownership
-	KeyPoint *mMainPoint;  // Has ownership
-	KeyPoint *mMarker;  // Has ownership
-	PointsQueueProcessor *mPointsDataProcessor;  // Has ownership
+	QGraphicsScene *mScene {};  // Has ownership
+	AbstractTimer *mVisualTimer {};  // Has ownership
+	KeyPoint *mMainPoint {};  // Has ownership
+	KeyPoint *mMarker {};  // Has ownership
+	PointsQueueProcessor *mPointsDataProcessor {};  // Has ownership
 	QBrush mPenBrush;
 
 	/// Output update delay in ms

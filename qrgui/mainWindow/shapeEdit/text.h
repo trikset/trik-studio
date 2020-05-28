@@ -45,8 +45,8 @@ public:
 			, const QPoint &topLeftPicture);
 
 protected:
-	int mX1;
-	int mY1;
+	int mX1 {};
+	int mY1 {};
 	QRectF mBoundingRect;
 	QGraphicsTextItem mText;
 	bool mIsDynamicText;

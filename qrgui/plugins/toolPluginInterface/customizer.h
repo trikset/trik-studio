@@ -33,8 +33,11 @@ enum class ActionVisibility
 /// Customization class for configuring QReal's main GUI module
 class Customizer
 {
+	Q_DISABLE_COPY(Customizer)
 public:
-	virtual ~Customizer() {}
+	Customizer() = default;
+
+	virtual ~Customizer() = default;
 
 	/// Tells if we can change subprogram properties.
 	virtual bool allowSubprogramPropertiesChanging() const
