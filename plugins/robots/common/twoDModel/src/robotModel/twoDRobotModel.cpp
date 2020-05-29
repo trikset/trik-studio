@@ -126,10 +126,15 @@ QSizeF TwoDRobotModel::size() const
 	return QSizeF(50, 50);
 }
 
+QPointF TwoDRobotModel::robotCenter() const
+{
+	return QPointF(size().width() / 2, size().height() / 2);
+}
+
 QPointF TwoDRobotModel::rotationCenter() const
 {
 	if (wheelsPosition().size() < 2) {
-		return QPointF(size().width() / 2, size().height() / 2);
+		return robotCenter();
 	}
 	return (wheelsPosition()[0] + wheelsPosition()[1]) / 2;
 }

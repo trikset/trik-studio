@@ -70,9 +70,10 @@ void SimplePhysicsEngine::recalculateParameters(qreal timeInterval, RobotModel &
 	const qreal speed1 = wheelLinearSpeed(robot, robot.leftWheel());
 	const qreal speed2 = wheelLinearSpeed(robot, robot.rightWheel());
 	const qreal averageSpeed = (speed1 + speed2) / 2;
-	const qreal distBtwWheels = robot.info().size().height() * 0.75;
 
 	if (!Math::eq(speed1, speed2)) {
+		const qreal distBtwWheels = qAbs(robot.info().wheelsPosition()[0].y() - robot.info().wheelsPosition()[1].y());
+		const auto shiftToCenter = robot.info().rotationCenter() - robot.info().robotCenter();
 		const qreal gammaRadians = (speed1 - speed2) * timeInterval / distBtwWheels;
 		const qreal gammaDegrees = gammaRadians * 180 / pi;
 		qreal angularSpeed = gammaRadians / timeInterval;
@@ -80,9 +81,11 @@ void SimplePhysicsEngine::recalculateParameters(qreal timeInterval, RobotModel &
 
 		QTransform map;
 		map.rotate(robot.rotation());
+		map.translate(shiftToCenter.x(), shiftToCenter.y());
 		map.translate(0, averageRadius);
 		map.rotate(gammaDegrees);
 		map.translate(0, -averageRadius);
+		map.translate(-shiftToCenter.x(), -shiftToCenter.y());
 
 		mPositionShift[&robot] = QVector2D(map.map(QPointF(0, 0)));
 		mRotation[&robot] = gammaDegrees;

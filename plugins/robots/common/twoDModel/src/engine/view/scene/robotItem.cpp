@@ -54,7 +54,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
 
-	setTransformOriginPoint(mRobotModel.info().rotationCenter());
+	setTransformOriginPoint(mRobotModel.info().robotCenter());
 	mBeepItem->setParentItem(this);
 	mBeepItem->setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
 	mBeepItem->setVisible(false);
