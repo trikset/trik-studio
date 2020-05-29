@@ -79,8 +79,11 @@ public:
 	virtual QSizeF size() const;
 
 	/// Returns a point (pixels) in items coordinates arround which robot rotates.
-	/// By default returns center of robot`s rectangle.
+	/// By default returns center of wheels.
 	virtual QPointF rotationCenter() const;
+
+	/// Returns center of robot`s rectangle.
+	virtual QPointF robotCenter() const;
 
 	/// Returns a point (pixels) list of wheels coordinates on robot.
 	virtual QList<QPointF> wheelsPosition() const = 0;
