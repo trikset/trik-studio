@@ -35,7 +35,7 @@ $EXECUTOR bash -lixc "\
 && { which python3 && python3 -V || true ; } \
 && { which python && python -V || true ; } \
 && rm -f .qmake.cache \
-&& qmake -Wall CONFIG+=$CONFIG $QMAKE_EXTRA $PROJECT.pro \
+&& qmake -Wall PYTHON3_VERSION_MINOR=\$TRIK_PYTHON3_VERSION_MINOR CONFIG+=$CONFIG $QMAKE_EXTRA $PROJECT.pro \
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && sh -c \"cd bin/$CONFIG && ls\" \
