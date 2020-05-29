@@ -70,29 +70,19 @@ void SimplePhysicsEngine::recalculateParameters(qreal timeInterval, RobotModel &
 	const qreal speed1 = wheelLinearSpeed(robot, robot.leftWheel());
 	const qreal speed2 = wheelLinearSpeed(robot, robot.rightWheel());
 	const qreal averageSpeed = (speed1 + speed2) / 2;
+	const qreal distBtwWheels = robot.info().size().height() * 0.75;
 
 	if (!Math::eq(speed1, speed2)) {
-		const qreal radius = speed1 * robot.info().size().height() / (speed1 - speed2);
-		const qreal averageRadius = radius - robot.info().size().height() / 2;
-		qreal angularSpeed = 0;
-		qreal actualRadius = 0;
-		if (Math::eq(speed1, -speed2)) {
-			angularSpeed = speed1 / radius;
-			actualRadius = 0;  // Radius is relative to the center of the robot.
-		} else {
-			angularSpeed = averageSpeed / averageRadius;
-			actualRadius = averageRadius;
-		}
-		const qreal gammaRadians = timeInterval * angularSpeed;
+		const qreal gammaRadians = (speed1 - speed2) * timeInterval / distBtwWheels;
 		const qreal gammaDegrees = gammaRadians * 180 / pi;
+		qreal angularSpeed = gammaRadians / timeInterval;
+		const qreal averageRadius = averageSpeed / angularSpeed;
 
 		QTransform map;
 		map.rotate(robot.rotation());
-		/// @todo robotWidth / 2 shall actually be a distance between robot center and
-		/// centers of the wheels by x axis.
-		map.translate(-robot.info().size().width() / 2, actualRadius);
+		map.translate(0, averageRadius);
 		map.rotate(gammaDegrees);
-		map.translate(robot.info().size().width() / 2, -actualRadius);
+		map.translate(0, -averageRadius);
 
 		mPositionShift[&robot] = QVector2D(map.map(QPointF(0, 0)));
 		mRotation[&robot] = gammaDegrees;

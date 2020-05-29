@@ -26,7 +26,6 @@ const QSize skittleSize(20, 20);
 const QSize ballSize(30, 30);
 const qreal robotWidth = 50;
 const qreal robotHeight = 50;
-const QPointF rotatePoint = QPointF(robotWidth / 2, robotHeight / 2);
 const QSize displaySize(200, 300);
 const qreal beepWavesSize = 120;
 const int timeQuant = 10;

@@ -128,8 +128,10 @@ QSizeF TwoDRobotModel::size() const
 
 QPointF TwoDRobotModel::rotationCenter() const
 {
-	QSizeF localSize = size() / 2;
-	return QPointF(localSize.width(), localSize.height());
+	if (wheelsPosition().size() < 2) {
+		return QPointF(size().width() / 2, size().height() / 2);
+	}
+	return (wheelsPosition()[0] + wheelsPosition()[1]) / 2;
 }
 
 QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const
