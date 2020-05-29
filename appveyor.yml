@@ -240,7 +240,7 @@ deploy:
 
   - provider: Environment
     name: github-release
-    github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
+    github_release_artifact: $(AUTOINSTALLER_ZIP_NAME)
     on:
       ARCH: 32
       QT: 5.12
