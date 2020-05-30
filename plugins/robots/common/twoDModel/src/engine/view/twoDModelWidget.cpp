@@ -610,8 +610,6 @@ void TwoDModelWidget::speedDown()
 
 void TwoDModelWidget::checkSpeedButtons()
 {
-	mUi->speedUpButton->setEnabled(static_cast<unsigned>(mCurrentSpeed)
-								   < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1);
 	mUi->speedUpButton->setEnabled(
 				static_cast<unsigned>(mCurrentSpeed) < (sizeof(speedFactors)/sizeof(speedFactors[0])) - 1);
 	mUi->speedDownButton->setEnabled(mCurrentSpeed > 0);
