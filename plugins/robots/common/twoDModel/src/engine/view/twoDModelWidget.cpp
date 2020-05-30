@@ -520,9 +520,13 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 	}
 
 	// TODO: Split saves and remove temporary hack
-	auto saveRoot = save.firstChildElement("root");
-	auto currentRoot = generateWorldModelXml().firstChildElement("root");
-	saveRoot.replaceChild(currentRoot.firstChildElement("robots"), saveRoot.firstChildElement("robots"));
+	auto saveRobot = save.firstChildElement("root").firstChildElement("robots").firstChildElement("robot");
+	auto currentRobot = generateWorldModelXml().firstChildElement("root")
+			.firstChildElement("robots").firstChildElement("robot");
+
+	saveRobot.replaceChild(saveRobot.firstChildElement("sensors"), currentRobot.firstChildElement("sensors"));
+	saveRobot.replaceChild(saveRobot.firstChildElement("wheels"), currentRobot.firstChildElement("wheels"));
+	saveRobot.setAttribute("id", currentRobot.attribute("id"));
 
 	auto command = new commands::LoadWorldCommand(*this, save);
 	if (mController) {
