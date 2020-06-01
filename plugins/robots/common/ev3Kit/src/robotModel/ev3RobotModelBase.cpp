@@ -65,10 +65,10 @@ Ev3RobotModelBase::Ev3RobotModelBase(const QString &kitId, const QString &robotI
 			, compassSensorInfo()
 			, ACIRSeekerSensorInfo()
 			, DCIRSeekerSensorInfo()
-//			, NXTColorSensorV2ColorInfo()
-//			, NXTColorSensorV2RGBInfo()
-//			, NXTColorSensorV2PassiveInfo()
-//			, NXTColorSensorV2RawInfo()
+			, NXTColorSensorV2ColorInfo()
+			, NXTColorSensorV2RGBInfo()
+			, NXTColorSensorV2PassiveInfo()
+			, NXTColorSensorV2RawInfo()
 	};
 
 	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
