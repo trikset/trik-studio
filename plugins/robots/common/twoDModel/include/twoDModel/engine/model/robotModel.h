@@ -135,7 +135,7 @@ public:
 	void markerUp();
 
 	/// Returns a position of the center of the robot in scene coordinates.
-	QPointF rotationCenter() const;
+	QPointF robotCenter() const;
 
 	/// Returns the item whose scene position will determine robot`s start position.
 	/// Transfers ownership.
