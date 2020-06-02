@@ -238,9 +238,9 @@ QPointF RobotModel::averageAcceleration() const
 					- mPosStamps.nthFromHead(1) + mPosStamps.head()) / mPosStamps.size());
 }
 
-QPointF RobotModel::rotationCenter() const
+QPointF RobotModel::robotCenter() const
 {
-	return mPos + mRobotModel.rotationCenter();
+	return mPos + mRobotModel.robotCenter();
 }
 
 QPainterPath RobotModel::robotBoundingPath() const

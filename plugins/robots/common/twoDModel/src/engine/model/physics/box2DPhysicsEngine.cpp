@@ -106,7 +106,7 @@ bool Box2DPhysicsEngine::itemTracked(QGraphicsItem * const item)
 void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 {
 	PhysicsEngineBase::addRobot(robot);
-	addRobot(robot, robot->rotationCenter(), robot->rotation());
+	addRobot(robot, robot->robotCenter(), robot->rotation());
 
 	mPrevPosition = mBox2DRobots[robot]->getBody()->GetPosition();
 	mPrevAngle = mBox2DRobots[robot]->getBody()->GetAngle();
