@@ -16,6 +16,7 @@
 
 #include <QtGui/QPainter>
 #include <QtGui/QImage>
+#include <QPainterPath>
 
 #include "qrutils/utilsDeclSpec.h"
 

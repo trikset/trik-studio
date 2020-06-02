@@ -201,6 +201,8 @@ DEFINES *= QT_FORCE_ASSERTS
 
 !warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 
+gcc:versionAtLeast(QT_VERSION, 5.15.0):QMAKE_CXXFLAGS *= -Wno-error=deprecated-declarations
+
 clang {
 	#treat git submodules as system path
 	SYSTEM_INCLUDE_PREFIX_OPTION += $$system(git submodule status 2>/dev/null | sed $$shell_quote('s/^.[0-9a-fA-F]* \\([^ ]*\\).*$/--system-header-prefix=\\1/g'))

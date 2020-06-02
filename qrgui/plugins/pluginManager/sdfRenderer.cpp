@@ -26,6 +26,7 @@
 
 #include <qrutils/imagesCache.h>
 #include <metaMetaModel/elementRepoInterface.h>
+#include <QPainterPath>
 
 using namespace qReal;
 
