@@ -37,7 +37,7 @@ void FolderCompressor::compressFolder(const QString &sourceFolder, const QString
 		throw SourceFolderNotFoundException(sourceFolder);
 	}
 
-	if (!JlCompress::compressDir(destinationFile, sourceFolder)) {
+	if (!JlCompress::compressDir(destinationFile, sourceFolder, true, QDir::Filters())) {
 		throw CouldNotCreateOutFileException(destinationFile);
 	}
 }
