@@ -24,7 +24,7 @@
 namespace qReal {
 
 /// Container for convenient storing edge element data for passing it into methods with just one parameter.
-class QRGUI_MODELS_EXPORT EdgeInfo : public ElementInfo
+class QRGUI_MODELS_EXPORT EdgeInfo
 {
 public:
 	EdgeInfo();
@@ -44,16 +44,68 @@ public:
 			, int shapeType
 	);
 
+	QDataStream &serialize(QDataStream &out) const;
+
+	QDataStream &deserialize(QDataStream &in);
+
+	bool equals(const EdgeInfo &other) const;
+
+	QMimeData *mimeData() const;
+
+	static ElementInfo fromMimeData(const QMimeData *mimeData);
+
+	bool isEdge() const;
+
+	Id parent() const;
+
+	QString name() const;
+
+	QPointF position() const;
+
+	Id newId();
+
+	Id newLogicalId();
+
+	void setPos(const QPointF &position);
+
+	const Id &explosionTarget() const;
+
+	const Id &id() const;
+
+	const Id &logicalId() const;
+
+	void setLogicalId(const Id &id);
+
+	const Id &logicalParent() const;
+
+	void setLogicalParent(const Id &parent);
+
+	const Id &graphicalParent() const;
+
+	void setGraphicalParent(const Id &parent);
+
+	const QList<QString> logicalProperties() const;
+
+	QVariant logicalProperty(const QString &propertyName) const;
+
+	void setLogicalProperty(const QString &propertyName, const QVariant &propertyValue);
+
+	void setAllLogicalProperties(const QMap<QString, QVariant> &logicalProperties);
+
+	const QList<QString> graphicalProperties() const;
+
+	QVariant graphicalProperty(const QString &propertyName) const;
+
+	void setGraphicalProperty(const QString &propertyName, const QVariant &propertyValue);
+
+	void setAllGraphicalProperties(const QMap<QString, QVariant> &graphicalProperties);
+
+
 	/// @return String representation of shapeType
 	static QString shapeToString(LinkShape shapeType);
 
 	/// @return LinkShape represented by string; return linkShape::unset if string is incorrect
 	static LinkShape stringToShape(const QString &string);
-
-	QDataStream &serialize(QDataStream &out) const override;
-	QDataStream &deserialize(QDataStream &in) override;
-
-	bool equals(const ElementInfo &other) const override;
 
 	/// Places fields into graphical and logical properties map, returns new ElementInfo instance.
 	ElementInfo convertToSimpleInfo() const;
@@ -70,7 +122,11 @@ public:
 	/// Sets Id of a destination of an edge.
 	void setDstId(const Id &id);
 
+	/// Gets element info of an edge.
+	ElementInfo getInfo() const;
+
 private:
+	ElementInfo mInfo;
 	Id mSrcId;
 	Id mDstId;
 

@@ -50,8 +50,8 @@ PasteCommand::PasteCommand(const models::Models &models
 	const QHash<Id, Id> copiedIds = prepareNodes(models.graphicalModelAssistApi(), nodesData, offset);
 
 	QList<ElementInfo> allElements;
-	for (const ElementInfo &node : nodesData) {
-		allElements << node;
+	for (const NodeInfo &node : nodesData) {
+		allElements << node.getInfo();
 	}
 
 	for (EdgeInfo &edge : edgesData) {
@@ -95,7 +95,7 @@ QHash<qReal::Id, qReal::Id> PasteCommand::prepareNodes(models::GraphicalModelAss
 	// then it will be child of new parent element, or not copied, then parent will be root diagram.
 	for (NodeInfo &node : filteredNodes) {
 		node.setPos(mIsGraphicalCopy ? newGraphicalPos(node, copiedIds, offset) : newPos(node, copiedIds, offset));
-		node.setGraphicalParent(newGraphicalParent(node, copiedIds));
+		node.setGraphicalParent(newGraphicalParent(node.getInfo(), copiedIds));
 	}
 
 	nodesData = filteredNodes;
@@ -112,7 +112,7 @@ void PasteCommand::prepareEdge(EdgeInfo &edgeData, const QPointF &offset, const 
 	edgeData.setSrcId(copiedIds.contains(edgeData.srcId()) ? copiedIds[edgeData.srcId()] : Id::rootId());
 	edgeData.setDstId(copiedIds.contains(edgeData.dstId()) ? copiedIds[edgeData.dstId()] : Id::rootId());
 	edgeData.setPos(edgeData.position() + offset);
-	edgeData.setGraphicalParent(newGraphicalParent(edgeData, copiedIds));
+	edgeData.setGraphicalParent(newGraphicalParent(edgeData.getInfo(), copiedIds));
 }
 
 void PasteCommand::pullDataFromClipboard(QList<NodeInfo> &nodesData, QList<EdgeInfo> &edgesData) const
