@@ -13,12 +13,15 @@
  * limitations under the License. */
 
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h"
+#include <QColor>
 
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-ColorSensor::ColorSensor(const DeviceInfo &info, const PortInfo &port)
+ColorSensor::ColorSensor(const DeviceInfo &info, const PortInfo &port
+		, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikColorSensor(info, port)
+	, mEngine(engine)
 {
 }
 
@@ -27,6 +30,8 @@ void ColorSensor::init()
 }
 
 void ColorSensor::read()
-{
-	setLastData({});
+{	
+	auto color = mEngine.readColorSensor(mEngine.videoPort());
+	if (!color.isValid()) return;
+	setLastData({color.red(), color.green(), color.blue()});
 }
