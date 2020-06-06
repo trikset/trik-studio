@@ -98,7 +98,7 @@
         <translation>Внутренняя ошибка генерации. Дополнительная информация: узел зоны %1 не может быть использован как помеченный узел.</translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+38"/>
         <source>Generation internal error, synchronous zone parent is a zone node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: в семантическом дереве родитель узла-зоны сам является узлом-зоной.</translation>
     </message>

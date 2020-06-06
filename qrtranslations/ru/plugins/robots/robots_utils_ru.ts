@@ -191,7 +191,7 @@
 <context>
     <name>utils::sensorsGraph::SensorsGraph</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="+149"/>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="+147"/>
         <source>Stop tracking</source>
         <translation>Остановить отслеживание</translation>
     </message>
