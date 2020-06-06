@@ -131,7 +131,7 @@ QDomElement MetamodelGeneratorSupport::diagramElement(const QDomDocument &metamo
 }
 
 void MetamodelGeneratorSupport::insertElementsInDiagramSublevel(QDomDocument metamodel
-		, const QString &sublevelName, QDomNodeList elements)
+		, const QString &sublevelName, const QDomNodeList &elements)
 {
 	QDomNodeList sublevels = metamodel.elementsByTagName(sublevelName);
 
@@ -160,7 +160,7 @@ void MetamodelGeneratorSupport::insertElementInDiagramSublevel(QDomDocument meta
 	}
 }
 
-void MetamodelGeneratorSupport::appendElements(QDomNode parent, QDomNodeList children)
+void MetamodelGeneratorSupport::appendElements(QDomNode parent, QDomNodeList const &children)
 {
 	const int count = children.length();
 	for (int i = 0; i < count; i++) {
@@ -206,7 +206,7 @@ void MetamodelGeneratorSupport::appendTypesToElement(
 	}
 }
 
-void MetamodelGeneratorSupport::generateProFile(QDomDocument metamodel
+void MetamodelGeneratorSupport::generateProFile(const QDomDocument &metamodel
 		, const QString &baseMetamodelPath, const QString &qrealSourceFilesPath
 		, const QString &newMetamodelName
 		, const QString &newEditorPath, const QString &relativeNewEditorPath)

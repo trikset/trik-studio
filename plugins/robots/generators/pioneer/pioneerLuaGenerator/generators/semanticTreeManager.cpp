@@ -127,7 +127,8 @@ NonZoneNode *SemanticTreeManager::produceLabeledNode(const qReal::Id &block)
 	return node;
 }
 
-SemanticNode *SemanticTreeManager::findSibling(SemanticNode *node, std::function<bool(SemanticNode *)> predicate)
+SemanticNode *SemanticTreeManager::findSibling(SemanticNode *node
+											   , const std::function<bool (SemanticNode *)> &predicate)
 {
 	NonZoneNode *nonZoneNode = dynamic_cast<NonZoneNode *>(node);
 	if (!nonZoneNode) {
@@ -150,8 +151,8 @@ SemanticNode *SemanticTreeManager::findSibling(SemanticNode *node, std::function
 	return nullptr;
 }
 
-QLinkedList<SemanticNode *> SemanticTreeManager::copyRightSiblingsUntil(SemanticNode *node
-		, std::function<bool(SemanticNode *)> predicate)
+std::vector<SemanticNode *> SemanticTreeManager::copyRightSiblingsUntil(SemanticNode *node
+		, const std::function<bool(SemanticNode *)> &predicate)
 {
 	NonZoneNode *nonZoneNode = dynamic_cast<NonZoneNode *>(node);
 	if (!nonZoneNode) {
@@ -166,7 +167,7 @@ QLinkedList<SemanticNode *> SemanticTreeManager::copyRightSiblingsUntil(Semantic
 	}
 
 	NonZoneNode * currentChild = nonZoneNode;
-	QLinkedList<SemanticNode *> result;
+	std::vector<SemanticNode *> result;
 	while (zone->nextChild(currentChild)) {
 		currentChild = dynamic_cast<NonZoneNode *>(zone->nextChild(currentChild));
 
@@ -180,7 +181,7 @@ QLinkedList<SemanticNode *> SemanticTreeManager::copyRightSiblingsUntil(Semantic
 			continue;
 		}
 
-		result << copy(currentChild);
+		result.push_back(copy(currentChild));
 
 		if (predicate(currentChild)) {
 			break;
@@ -275,7 +276,7 @@ NonZoneNode *SemanticTreeManager::copy(NonZoneNode *node)
 
 void SemanticTreeManager::copyIfBranch(ZoneNode * const from, ZoneNode * const to)
 {
-	QLinkedList<SemanticNode *> newNodes;
+	std::vector<SemanticNode *> newNodes;
 	for (auto node : from->children()) {
 		auto nonZoneNode = dynamic_cast<NonZoneNode *>(node);
 		if (!nonZoneNode) {
@@ -283,7 +284,7 @@ void SemanticTreeManager::copyIfBranch(ZoneNode * const from, ZoneNode * const t
 			return;
 		}
 
-		newNodes << copy(nonZoneNode);
+		newNodes.push_back(copy(nonZoneNode));
 	}
 
 	to->appendChildren(newNodes);

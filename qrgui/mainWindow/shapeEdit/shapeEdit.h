@@ -135,7 +135,7 @@ private:
 	void setValuePenColorComboBox(const QColor &penColor);
 	void setValuePenWidthSpinBox(int width);
 	void setValueBrushStyleComboBox(Qt::BrushStyle brushStyle);
-	void setValueBrushColorComboBox(QColor brushColor);
+	void setValueBrushColorComboBox(const QColor &brushColor);
 
 	void setValueTextFamilyFontComboBox(const QFont &fontItem);
 	void setValueTextPixelSizeSpinBox(int size);

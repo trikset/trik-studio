@@ -207,11 +207,11 @@ void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 	QString out;
 
 	std::sort(results.begin(), results.end()
-			, [](QPair<QString, QPair<int, int>> r1, QPair<QString, QPair<int, int>> r2) -> bool {
+			, [](const QPair<QString, QPair<int, int>> &r1, const QPair<QString, QPair<int, int>> &r2) -> bool {
 				return r1.second.first < r2.second.first;
 			});
 
-	for (const QPair<QString, QPair<int, int>> &res : results) {
+	for (const auto &res : results) {
 		out += QString("%1@%2@%3\n").arg(res.first
 				, QString::number(res.second.first)
 				, QString::number(res.second.second));

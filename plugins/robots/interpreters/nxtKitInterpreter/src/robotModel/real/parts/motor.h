@@ -34,7 +34,7 @@ public:
 			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void on(int speed, bool breakMode = true) override;
-	void on(int speed, long unsigned int degrees, bool breakMode = true) override;
+	void on(int speed, uint64_t degrees, bool breakMode = true) override;
 	void stop(bool breakMode = true) override;
 	void off() override;
 	void resetMotorPosition(bool relative);
@@ -45,7 +45,7 @@ private:
 			, enums::regulationMode::RegulationModeEnum regulation
 			, int turnRatio
 			, enums::runState::RunStateEnum runState
-			, unsigned long tachoLimit);
+			, uint64_t tachoLimit);
 
 	utils::robotCommunication::RobotCommunicator &mRobotCommunicator;
 };

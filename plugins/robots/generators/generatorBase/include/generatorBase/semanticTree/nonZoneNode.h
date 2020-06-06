@@ -34,7 +34,7 @@ public:
 	void appendSibling(SemanticNode *node);
 
 	/// Adds given nodes into this node's parent zone at the end of a list of nodes
-	void appendSiblings(QLinkedList<SemanticNode *> const &nodes);
+	void appendSiblings(const std::vector<SemanticNode *> &nodes);
 
 	/// Adds given node into this node's parent zone node after this node
 	void insertSiblingAfterThis(SemanticNode *node);

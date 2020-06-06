@@ -34,17 +34,6 @@ StatLine::operator QLineF () const
 	return mLine;
 }
 
-void StatLine::operator= (const QLineF &l)
-{
-	mLine = l;
-	mPropX1 = false;
-	mPropX2 = false;
-	mPropY1 = false;
-	mPropY2 = false;
-	mInitHeight = 1;
-	mInitWidth = 1;
-}
-
 void StatLine::paint(QPainter *painter, const QRectF &contents) const
 {
 	const qreal x1 = mLine.x1() * (mPropX1 ? mInitWidth : contents.width());

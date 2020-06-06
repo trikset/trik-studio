@@ -24,11 +24,10 @@ namespace commands {
 class QRGUI_MODELS_EXPORT ChangeParentCommand : public AbstractCommand
 {
 public:
-	ChangeParentCommand(
-			models::LogicalModelAssistApi &logicalApi
+	ChangeParentCommand(models::LogicalModelAssistApi &logicalApi
 			, models::GraphicalModelAssistApi &graphicalApi
 			, bool isLogical, const Id &id, const Id &oldParent
-			, const Id newParent, const QPointF &oldPosition
+			, const Id &newParent, const QPointF &oldPosition
 			, const QPointF &newPosition);
 
 protected:

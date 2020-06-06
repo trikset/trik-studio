@@ -68,9 +68,9 @@ void MiniMap::showScene()
 	}
 }
 
-void MiniMap::ensureVisible(QList<QRectF> region)
+void MiniMap::ensureVisible(const QList<QRectF> &region)
 {
-	for (QRectF rect : region) {
+	for (const auto &rect : region) {
 		fitInView(rect, Qt::KeepAspectRatio);
 	}
 }

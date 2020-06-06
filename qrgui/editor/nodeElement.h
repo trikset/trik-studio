@@ -262,7 +262,7 @@ private:
 
 	void updateDynamicLabels();
 
-	bool compareDynamicLabels(QString labelsPack1, QString labelsPack2) const;
+	bool compareDynamicLabels(const QString &labelsPack1, const QString &labelsPack2) const;
 
 	qReal::commands::AbstractCommand *changeParentCommand(const Id &newParent, const QPointF &position) const;
 

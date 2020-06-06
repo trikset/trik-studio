@@ -35,7 +35,7 @@ namespace utils {
 class Editor
 {
 public:
-	Editor(QDomDocument domDocument, XmlCompiler *xmlCompiler);
+	Editor(const QDomDocument &domDocument, XmlCompiler *xmlCompiler);
 	~Editor();
 
 	XmlCompiler *xmlCompiler() const;

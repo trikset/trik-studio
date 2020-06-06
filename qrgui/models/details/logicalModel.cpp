@@ -52,7 +52,7 @@ void LogicalModel::init()
 	for (auto item : mModelItems) {
 		if (mApi.hasProperty(item->id(), "incomingExplosions")) {
 			IdList realIncomingExplosions;
-			for (auto in : mApi.property(item->id(), "incomingExplosions").value<IdList>()) {
+			for (auto &in : mApi.property(item->id(), "incomingExplosions").value<IdList>()) {
 				if (mModelItems.contains(in)) {
 					realIncomingExplosions << in;
 				}
@@ -74,7 +74,7 @@ void LogicalModel::init()
 
 void LogicalModel::loadSubtreeFromClient(LogicalModelItem * const parent)
 {
-	for (Id childId : mApi.children(parent->id())) {
+	for (const auto &childId : mApi.children(parent->id())) {
 		if (mApi.isLogicalElement(childId)) {
 			LogicalModelItem *child = loadElement(parent, childId);
 			loadSubtreeFromClient(child);

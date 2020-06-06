@@ -26,7 +26,7 @@ SdfRenderer::SdfRenderer()
 	toGen.setString(&toGenerator,QIODevice::ReadWrite);
 }
 
-SdfRenderer::SdfRenderer(const QString path)
+SdfRenderer::SdfRenderer(const QString &path)
 	: mStartX(0), mStartY(0), mNeedScale(true)
 {
 	if (!load(path))

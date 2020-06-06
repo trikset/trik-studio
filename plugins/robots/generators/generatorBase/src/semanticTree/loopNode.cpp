@@ -50,7 +50,7 @@ QString LoopNode::toStringImpl(GeneratorCustomizer &customizer, int indent, cons
 	return result;
 }
 
-void LoopNode::appendChildren(QLinkedList<SemanticNode *> const &nodes)
+void LoopNode::appendChildren(std::vector<SemanticNode *> const &nodes)
 {
 	mBodyZone->appendChildren(nodes);
 }

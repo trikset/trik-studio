@@ -29,7 +29,7 @@ Ev3InputDevice::Ev3InputDevice(utils::robotCommunication::RobotCommunicator &rob
 {
 }
 
-void Ev3InputDevice::send(QByteArray command, const unsigned responseSize, QByteArray reading)
+void Ev3InputDevice::send(const QByteArray &command, const unsigned responseSize, QByteArray reading)
 {
 	mRobotCommunicator.send(command, responseSize, reading);
 }

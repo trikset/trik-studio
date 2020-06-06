@@ -32,7 +32,7 @@ void NonZoneNode::appendSibling(SemanticNode *node)
 	parentZone()->appendChild(node);
 }
 
-void NonZoneNode::appendSiblings(const QLinkedList<SemanticNode *> &nodes)
+void NonZoneNode::appendSiblings(const std::vector<SemanticNode *> &nodes)
 {
 	parentZone()->appendChildren(nodes);
 }

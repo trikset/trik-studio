@@ -40,5 +40,5 @@ private:
 	QString mDescription;
 	QString mDefaultValue;
 
-	bool initReferenceType(QString typeName, const QDomElement &element);
+	bool initReferenceType(const QString &typeName, const QDomElement &element);
 };

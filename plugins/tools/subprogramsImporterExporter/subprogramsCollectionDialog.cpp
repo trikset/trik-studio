@@ -59,7 +59,7 @@ void SubprogramsCollectionDialog::updateValues()
 {
 	mUi->listWidget->clear();
 	mUi->selectAllButton->hide();
-	for (auto file : mValues.keys()) {
+	for (const auto &file : mValues.keys()) {
 		mUi->listWidget->addItem(file);
 		QListWidgetItem *item = mUi->listWidget->item(mUi->listWidget->count() - 1);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);

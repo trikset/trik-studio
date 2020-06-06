@@ -54,7 +54,7 @@ private:
 	void change(const QString &text);
 	bool checkElementOnDiagram(const qrRepo::LogicalRepoApi &api, Id &id);
 	void findElementsOnDiagram(const qrRepo::LogicalRepoApi &api, Id &id);
-	void disableParentProperties(const QStringList propertiesDisplayedNames);
+	void disableParentProperties(const QStringList &propertiesDisplayedNames);
 
 	Ui::PropertiesDialog *mUi;  // Has ownership.
 	const EditorManagerInterface &mInterpreterEditorManager;

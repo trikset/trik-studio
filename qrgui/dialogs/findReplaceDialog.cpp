@@ -110,7 +110,7 @@ void FindReplaceDialog::initIds(QMap<QString, QString> foundData)
 {
 	mUi->mListWidget->clear();
 
-	for (QString currentId : foundData.keys()) {
+	for (auto const &currentId : foundData.keys()) {
 		qReal::Id parentId = mCommonApi.parent(qReal::Id::loadFromString(currentId));
 		QString parentName = mCommonApi.name(parentId);
 		if (!parentName.contains("qrm:/")) {

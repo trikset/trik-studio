@@ -60,7 +60,7 @@ void RandomFunctionChecker::checkNode(const qReal::Id &id)
 	}
 }
 
-void RandomFunctionChecker::checkAst(QSharedPointer<qrtext::core::ast::Node> ast)
+void RandomFunctionChecker::checkAst(const QSharedPointer<qrtext::core::ast::Node> &ast)
 {
 	if (ast->is<qrtext::lua::ast::FunctionCall>()) {
 		auto call = qrtext::as<qrtext::lua::ast::FunctionCall>(ast);

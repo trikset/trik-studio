@@ -256,7 +256,7 @@ int LineHandler::definePoint(const QPointF &pos) const
 {
 	const QPolygonF line = mEdge->line();
 	for (int i = 0; i < line.size(); ++i)
-		if (QRectF(line[i] - QPointF(EdgeElement::stripeWidth / 2, EdgeElement::stripeWidth / 2)
+		if (QRectF(line[i] - QPointF(EdgeElement::stripeWidth / 2.0, EdgeElement::stripeWidth / 2.0)
 				, QSizeF(EdgeElement::stripeWidth, EdgeElement::stripeWidth)).contains(pos))
 			return i;
 

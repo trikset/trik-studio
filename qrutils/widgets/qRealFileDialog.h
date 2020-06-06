@@ -33,7 +33,7 @@ public:
 			, const QString &dir = QString()
 			, const QString &filter = QString()
 			, QString *selectedFilter = nullptr
-			, QFileDialog::Options options = nullptr);
+			, QFileDialog::Options options = QFileDialog::Options());
 
 	/// Makes same as QFileDialog::getSaveFileName but with restoring selected
 	/// directory last time when promted dialog with the same id
@@ -44,7 +44,7 @@ public:
 			, const QString &filter = QString()
 			, const QString &defaultFile = QString()
 			, QString *selectedFilter = nullptr
-			, QFileDialog::Options options = nullptr);
+			, QFileDialog::Options options = QFileDialog::Options());
 
 	/// Makes same as QFileDialog::getExistingDirectory but with restoring selected
 	/// directory last time when promted dialog with the same id
@@ -62,7 +62,7 @@ public:
 			, const QString &dir = QString()
 			, const QString &filter = QString()
 			, QString *selectedFilter = nullptr
-			, QFileDialog::Options options = nullptr);
+			, QFileDialog::Options options = QFileDialog::Options());
 
 private:
 	static QString lastSelectedDirectory(const QString &id, const QString &defaultDirectory);

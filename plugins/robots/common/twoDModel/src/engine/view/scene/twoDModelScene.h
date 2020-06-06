@@ -202,7 +202,7 @@ private:
 	void keyPressEvent(QKeyEvent *event) override;
 
 	QPair<QStringList, QList<QPair<model::RobotModel *
-			, kitBase::robotModel::PortInfo>>> parseItemsToID (QList<QGraphicsItem*> items);
+			, kitBase::robotModel::PortInfo>>> parseItemsToID (const QList<QGraphicsItem *> &items);
 	void deleteSelectedItems();
 	void deleteWithCommand(const QStringList &worldItems
 			, const QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> &sensors
@@ -223,7 +223,7 @@ private:
 	void handleMouseInteractionWithSelectedItems();
 
 	bool hasIntersect(const graphicsUtils::AbstractItem *item1, const graphicsUtils::AbstractItem *item2) const;
-	bool isCorrectScene(const QList<QGraphicsItem *> checkItems) const;
+	bool isCorrectScene(const QList<QGraphicsItem *> &checkItems) const;
 
 	qreal currentZoom() const;
 

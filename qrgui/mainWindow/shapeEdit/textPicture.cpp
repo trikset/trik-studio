@@ -34,23 +34,11 @@ TextPicture::TextPicture(int x, int y, const QString &text)
 }
 
 TextPicture::TextPicture(const TextPicture &other)
-	: Text()
+	: Text(other)
 {
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
 	mDomElementType = pictureType;
-	mX1 = other.mX1;
-	mY1 = other.mY1;
-	mText.setPos(other.mText.x(), other.mText.y());
-	mText.setFlags(other.mText.flags());
-	mText.setTextInteractionFlags(Qt::TextEditorInteraction);
-	mText.setPlainText(other.mText.toPlainText());
 	mText.setParentItem(other.parentItem());
 	mFont = other.mFont;
-	mBoundingRect = other.mBoundingRect;
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
 }
 
 Item* TextPicture::clone()
@@ -153,7 +141,7 @@ void TextPicture::setFontUnderline(bool isChecked)
 
 void TextPicture::readFont(const QDomElement &docItem)
 {
-	QDomElement dom = docItem;
+	const QDomElement &dom = docItem;
 	if(!dom.isNull()) {
 		if (dom.hasAttribute("font-fill")) {
 			const QColor color = dom.attribute("font-fill");

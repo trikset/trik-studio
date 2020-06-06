@@ -36,7 +36,7 @@ public:
 	void appendChild(SemanticNode *node);
 
 	/// Adds given nodes list into child list`s end
-	void appendChildren(QLinkedList<SemanticNode *> const &nodes);
+	void appendChildren(const std::vector<SemanticNode *> &nodes);
 
 	/// Adds given node into the child list after the given otherNode node
 	void insertAfter(SemanticNode *after, SemanticNode *node);
@@ -49,7 +49,7 @@ public:
 
 	/// Removes all the children starting from specified node without deleting
 	/// themselves and returns removed tail. Removes all if node is null.
-	QLinkedList<SemanticNode *> removeStartingFrom(SemanticNode *node);
+	std::vector<SemanticNode *> removeStartingFrom(SemanticNode *node);
 
 	/// Returns parent semantic node. The result is never nullptr.
 	SemanticNode *parentNode();

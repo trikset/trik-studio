@@ -152,7 +152,7 @@ QString ValuesSerializer::serializeQPolygonF(const QPolygonF &p)
 QDomElement ValuesSerializer::serializeIdList(const QString &tagName, const IdList &idList, QDomDocument &document)
 {
 	QDomElement result = document.createElement(tagName);
-	for (Id id : idList) {
+	for (auto &&id : idList) {
 		QDomElement element = document.createElement("object");
 		element.setAttribute("id", id.toString());
 		result.appendChild(element);

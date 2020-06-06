@@ -15,6 +15,7 @@
 #pragma once
 
 #include <functional>
+#include <type_traits>
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
 
@@ -128,7 +129,8 @@ public:
 
 	void fireEvent(const QVariant &value) override
 	{
-		mLambda(value.value<Type>());
+		typedef typename std::remove_cv<typename std::remove_reference<Type>::type>::type general_type;
+		mLambda(value.value<general_type>());
 	}
 
 	const QObject *object() const override

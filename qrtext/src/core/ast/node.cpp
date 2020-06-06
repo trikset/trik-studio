@@ -63,7 +63,7 @@ void Node::connect(QSharedPointer<Node> const &node)
 void Node::connect(QList<Range> const &ranges)
 {
 	mRanges << ranges;
-	std::sort(mRanges.begin(), mRanges.end(), [](Range a, Range b) { return a.start() < b.start(); });
+	std::sort(mRanges.begin(), mRanges.end(), [](Range const &a, Range const &b) { return a.start() < b.start(); });
 }
 
 void Node::acceptRecursively(AstVisitorInterface &visitor

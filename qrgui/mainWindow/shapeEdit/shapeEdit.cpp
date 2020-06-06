@@ -304,8 +304,7 @@ void ShapeEdit::generateDom()
 	QDomElement graphics = mDocument.createElement("graphics");
 	mDocument.appendChild(graphics);
 
-	QList<QDomElement> list = generateGraphics();
-	for (QDomElement domItem : list) {
+	for (const auto &domItem : generateGraphics()) {
 		graphics.appendChild(domItem);
 	}
 }
@@ -337,7 +336,7 @@ void ShapeEdit::save()
 		emit shapeSaved(mDocument.toString(4), mIndex, mRole);
 	} else {
 		mEditorManager->updateShape(mId, mDocument.documentElement());
-		for (const Id graphicalElement : mGraphicalElements) {
+		for (const Id &graphicalElement : mGraphicalElements) {
 			mEditorManager->updateShape(graphicalElement, mDocument.documentElement());
 			for (QGraphicsItem * const item : mEditorView->editorViewScene().items()) {
 				qReal::gui::editor::NodeElement * const element = dynamic_cast<qReal::gui::editor::NodeElement *>(item);
@@ -481,7 +480,7 @@ void ShapeEdit::setValuePenWidthSpinBox(int width)
 	mUi->penWidthSpinBox->setValue(width);
 }
 
-void ShapeEdit::setValueBrushColorComboBox(QColor brushColor)
+void ShapeEdit::setValueBrushColorComboBox(const QColor &brushColor)
 {
 	mUi->brushColorComboBox->setColor(brushColor);
 }
