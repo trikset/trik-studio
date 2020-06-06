@@ -189,6 +189,11 @@ void NodeInfo::setAllGraphicalProperties(const QMap<QString, QVariant> &graphica
 	mInfo.setAllLogicalProperties(graphicalProperties);
 }
 
+ElementInfo NodeInfo::getInfo() const
+{
+	return mInfo;
+}
+
 QDataStream &operator<< (QDataStream &out, const NodeInfo &data)
 {
 	return data.serialize(out);
