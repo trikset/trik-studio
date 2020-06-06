@@ -50,10 +50,6 @@ public:
 signals:
 	void completed();
 
-public slots:
-	/// in some cases we need to reinit devices such as camera, etc..
-	void reinitRobotsParts();
-
 private slots:
 	void scriptFinished(const QString &error, int scriptId);
 	void reportError(const QString &msg);

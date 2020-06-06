@@ -149,7 +149,7 @@
         <translation>TRIK Studio</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+53"/>
         <source>Subprograms</source>
         <translation>Sous-programmes</translation>
     </message>

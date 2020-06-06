@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
 	initLogging();
 	QApplication app(argc, argv);
 	QCoreApplication::setApplicationName("2D-model");
-	QCoreApplication::setApplicationVersion("2020.2");
+	QCoreApplication::setApplicationVersion(interpreterCore::Customizer::trikStudioVersion());
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
 	QLOG_INFO() << "Arguments:" << app.arguments();

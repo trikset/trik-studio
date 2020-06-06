@@ -122,10 +122,10 @@ private:
 
 	QScopedPointer<utils::AbstractTimer> mSensorUpdater;
 
-	QHash<QString, TrikMotorEmu *> mMotors;
-	QHash<QString, TrikSensorEmu *> mSensors;
-	QHash<QString, TrikEncoderAdapter *> mEncoders;
-	QHash<QString, TrikLineSensorAdapter *> mLineSensors;
+	QHash<QString, QSharedPointer<TrikMotorEmu>> mMotors;
+	QHash<QString, QSharedPointer<TrikSensorEmu>> mSensors;
+	QHash<QString, QSharedPointer<TrikEncoderAdapter>> mEncoders;
+	QHash<QString, QSharedPointer<TrikLineSensorAdapter>> mLineSensors;
 	QScopedPointer<TrikLedAdapter> mLed;
 	QScopedPointer<TrikAccelerometerAdapter> mAccelerometer;
 	QScopedPointer<TrikGyroscopeAdapter> mGyroscope;
@@ -136,7 +136,7 @@ private:
 	QDir mCurrentDir;
 	bool mIsExcerciseMode = false;
 	QStringList mInputs;
-	QVector<utils::AbstractTimer *> mTimers;
+	QVector<QSharedPointer<utils::AbstractTimer>> mTimers;
 };
 
 }
