@@ -56,7 +56,7 @@ QMimeData *NodeInfo::mimeData() const
 
 ElementInfo NodeInfo::fromMimeData(const QMimeData *mimeData)
 {
-	QByteArray data = mimeData->data(DEFAULT_MIME_TYPE);
+	auto data = mimeData->data(DEFAULT_MIME_TYPE);
 	QDataStream inStream(&data, QIODevice::ReadOnly);
 
 	ElementInfo result;

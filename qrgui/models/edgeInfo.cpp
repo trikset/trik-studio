@@ -21,11 +21,6 @@
 
 using namespace qReal;
 
-EdgeInfo::EdgeInfo()
-	: mInfo(true)
-{
-}
-
 EdgeInfo::EdgeInfo(const Id &graphicalId
 		, const Id &logicalId
 		, LogicalModelAssistInterface &logicalModel
@@ -124,7 +119,7 @@ QMimeData *EdgeInfo::mimeData() const
 
 ElementInfo EdgeInfo::fromMimeData(const QMimeData *mimeData)
 {
-	QByteArray data = mimeData->data(DEFAULT_MIME_TYPE);
+	auto data = mimeData->data(DEFAULT_MIME_TYPE);
 	QDataStream inStream(&data, QIODevice::ReadOnly);
 
 	ElementInfo result;
