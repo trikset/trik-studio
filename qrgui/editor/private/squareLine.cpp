@@ -18,7 +18,7 @@ using namespace qReal;
 using namespace qReal::gui::editor;
 
 const qreal epsilon = 0.0001;
-const qreal offset = 2 * kvadratik;
+const qreal offset = 2 * squareSize;
 
 SquareLine::SquareLine(EdgeElement *edge
 	, const LogicalModelAssistInterface &logicalModel
@@ -160,7 +160,7 @@ void SquareLine::deleteShortSegments()
 		if (segment.length() < epsilon) {
 			line.remove(i, 2);
 			i--;
-		} else if (segment.length() < kvadratik * 2) {
+		} else if (segment.length() < squareSize * 2) {
 			if (i != 1) {
 				QLineF previousLine(line[i - 1], line[i]);
 				if (qAbs(previousLine.x1() - previousLine.x2()) < epsilon) {
