@@ -78,7 +78,7 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 
 	if (root->is<ast::Block>()) {
 		auto statements = as<ast::Block>(root)->children();
-		for (auto statement : statements) {
+		for (auto &&statement : statements) {
 			if (statement != statements.last()) {
 				interpret(statement, semanticAnalyzer);
 			}
@@ -130,7 +130,7 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 		auto parameters = as<ast::FunctionCall>(root)->arguments();
 
 		QList<QVariant> actualParameters;
-		for (auto parameter : parameters) {
+		for (auto &&parameter : parameters) {
 			actualParameters << interpret(parameter, semanticAnalyzer);
 		}
 

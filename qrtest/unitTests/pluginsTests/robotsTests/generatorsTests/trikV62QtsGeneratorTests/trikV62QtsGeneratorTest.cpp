@@ -101,8 +101,8 @@ TEST_F(TrikV62QtsGeneratorTest, runProgramTest)
 	TrikV62QtsGeneratorPlugin plugin;
 	plugin.init(kitPluginConfigurer());
 
-	const QList<qReal::ActionInfo> actions = plugin.customActions();
-	qReal::ActionInfo runProgramAction = actions.at(2);
+	const QList<qReal::ActionInfo> &actions = plugin.customActions();
+	auto const &runProgramAction = actions.at(2);
 	runProgramAction.action()->trigger();
 
 	Wait waiter(5000);
@@ -126,7 +126,7 @@ TEST_F(TrikV62QtsGeneratorTest, incorrectCasingVersionTest)
 	plugin.init(kitPluginConfigurer());
 
 	const QList<qReal::ActionInfo> actions = plugin.customActions();
-	qReal::ActionInfo runProgramAction = actions.at(2);
+	qReal::ActionInfo const &runProgramAction = actions.at(2);
 	runProgramAction.action()->trigger();
 
 	Wait waiter(1000);

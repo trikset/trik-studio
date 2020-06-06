@@ -194,7 +194,7 @@ void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorL
 		item->setIcon(QIcon(":/mainWindow/images/critical.png"));
 		break;
 	default:
-		throw new Exception("Incorrect total severity");
+		throw Exception("Incorrect total severity");
 	}
 
 	auto *label = new QLabel(message.trimmed(), errorListWidget);
@@ -216,6 +216,6 @@ QString ErrorReporter::severityMessage(const Error &error)
 	case Error::critical:
 		return tr("CRITICAL:");
 	default:
-		throw new Exception("Incorrect severity of an error");
+		throw Exception("Incorrect severity of an error");
 	}
 }

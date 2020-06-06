@@ -322,7 +322,7 @@ bool GraphicalModel::setData(const QModelIndex &index, const QVariant &value, in
 	return false;
 }
 
-void GraphicalModel::setNewName(const Id &id, const QString newValue)
+void GraphicalModel::setNewName(const Id &id, const QString &newValue)
 {
 	mApi.setName(id, newValue);
 	emit nameChanged(id);

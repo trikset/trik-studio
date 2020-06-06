@@ -27,7 +27,7 @@
 
 using namespace qrmc;
 
-Shape::Shape(const QString &shape, const QString targetDirectory)
+Shape::Shape(const QString &shape, const QString &targetDirectory)
 	: mNode(nullptr)
 	, mTargetDirectory(targetDirectory)
 {

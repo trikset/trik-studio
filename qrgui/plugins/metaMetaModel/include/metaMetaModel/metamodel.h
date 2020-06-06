@@ -173,8 +173,10 @@ private:
 /// An interface for all objects that load information into metamodel.
 class MetamodelLoaderInterface
 {
+	Q_DISABLE_COPY(MetamodelLoaderInterface)
 public:
-	virtual ~MetamodelLoaderInterface() {}
+	MetamodelLoaderInterface() = default;
+	virtual ~MetamodelLoaderInterface() = default;
 
 	/// Will be implemented to return the a list of names of metamodels that should be loaded before this one.
 	/// @todo: This should be an information in plugin metadata and be processed by common code in plugin manager.

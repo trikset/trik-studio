@@ -236,7 +236,7 @@ void DraggableElement::checkElementForChildren()
 	const IdList children = mEditorManagerProxy.children(mDeletedElementId);
 	if (!children.isEmpty()) {
 		QString childrenNames;
-		for (const Id child : children) {
+		for (const Id &child : children) {
 			childrenNames += " " + mEditorManagerProxy.friendlyName(child) + ",";
 		}
 		if (!childrenNames.isEmpty()) {

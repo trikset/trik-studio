@@ -160,7 +160,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 
 void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 {
-	auto prepareImagesFromProject = [this](QString) {
+	auto prepareImagesFromProject = [this](const QString&) {
 		if (mCurrentlySelectedModelName.contains("trik", Qt::CaseInsensitive)
 				&& qReal::SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool()
 				&& mProjectManager->somethingOpened()) {

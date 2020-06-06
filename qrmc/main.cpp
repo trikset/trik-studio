@@ -83,8 +83,8 @@ int main(int argc, char *argv[])
 		parser.showHelp();
 	}
 
-	const QString metamodel = positionalArgs.first();
-	const QString targetDir = positionalArgs.at(1);
+	const QString &metamodel = positionalArgs.first();
+	const QString &targetDir = positionalArgs.at(1);
 
 	qrRepo::RepoApi repoApi(metamodel);
 	MetaCompiler metaCompiler(repoApi, targetDir);

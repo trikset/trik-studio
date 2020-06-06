@@ -72,7 +72,7 @@ private:
 	modelsImplementation::GraphicalModelItem *loadElement(modelsImplementation::GraphicalModelItem *parentItem
 			, const Id &id);
 
-	void setNewName(const Id &id, const QString newValue);
+	void setNewName(const Id &id, const QString &newValue);
 	virtual modelsImplementation::AbstractModelItem *createModelItem(const Id &id
 			, modelsImplementation::AbstractModelItem *parentItem) const override;
 	void addTree(const Id &parent, const QMultiMap<Id, ElementInfo *> &childrenOfParents, QSet<Id> &visited);

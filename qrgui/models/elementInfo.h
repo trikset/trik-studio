@@ -32,8 +32,6 @@ class GraphicalModelAssistInterface;
 /// Base for convenient storing node or edge element data for passing it into methods with just one parameter.
 class QRGUI_MODELS_EXPORT ElementInfo
 {
-	// TODO: This class has a virtual dtor!!! Uncomment the following line ASAP!!!
-	// Q_DISABLE_COPY(ElementInfo)
 public:
 	ElementInfo();
 
@@ -53,8 +51,6 @@ public:
 			, const QMap<QString, QVariant> &graphicalProperties
 			, const Id &explosionTarget
 			, bool isEdge);
-
-	~ElementInfo();
 
 	/// Saves element data into the given byte stream, it can be then read with deserialize().
 	/// @returns a reference to \a out for convenient usage.

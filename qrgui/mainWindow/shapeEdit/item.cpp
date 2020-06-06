@@ -190,7 +190,7 @@ Item::ScalingPointState Item::getScalingPointState() const
 	return mScalingState;
 }
 
-QColor Item::changeScaleColor(QPair<Item::ScalingPointState, QColor> point)
+QColor Item::changeScaleColor(const QPair<Item::ScalingPointState, QColor> &point)
 {
 	if(point.second == QColor(Qt::black)) {
 		return QColor(Qt::red);
@@ -211,7 +211,7 @@ void Item::setScalingPointColor()
 	}
 }
 
-void Item::setListScalePoint(QList<QPair<ScalingPointState, QColor> > list)
+void Item::setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list)
 {
 	mListScalePoint = list;
 }

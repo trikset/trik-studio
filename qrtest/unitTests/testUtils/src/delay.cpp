@@ -16,7 +16,7 @@
 
 #include <QtCore/QTimer>
 
-void qrTest::delay(std::function<void()> action)
+void qrTest::delay(const std::function<void()> &action)
 {
 	QTimer::singleShot(10, action);
 }

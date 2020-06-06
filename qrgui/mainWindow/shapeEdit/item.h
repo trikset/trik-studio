@@ -70,13 +70,13 @@ public:
 	static void swap(qreal &x, qreal &y);
 	void setNoneDragState();
 
-	void setListScalePoint(QList<QPair<ScalingPointState, QColor> > list);
+	void setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list);
 
 	void initListScalePoint();
 	void calcForChangeScalingState(const QPointF&pos, const QPointF& point1, const QPointF& point2, int correction);
 	virtual void changeScalingPointState(qreal x, qreal y);
 	ScalingPointState getScalingPointState() const;
-	QColor changeScaleColor(QPair<Item::ScalingPointState, QColor> point);
+	QColor changeScaleColor(const QPair<ScalingPointState, QColor> &point);
 	void setScalingPointColor();
 
 	//for save to xml

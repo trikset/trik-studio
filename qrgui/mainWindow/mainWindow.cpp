@@ -81,6 +81,8 @@
 #include <textEditor/codeBlockManager.h>
 #include <textEditor/qscintillaTextEdit.h>
 
+#include <QKeySequence>
+
 #include "qrealApplication.h"
 #include "errorReporter.h"
 #include "shapeEdit/shapeEdit.h"
@@ -571,7 +573,7 @@ void MainWindow::sceneSelectionChanged()
 		mUi->graphicalModelExplorer->setCurrentIndex(QModelIndex());
 		mPropertyModel->clearModelIndexes();
 	} else if (selectedIds.length() == 1) {
-		const Id singleSelected = selectedIds.first();
+		const Id &singleSelected = selectedIds.first();
 		setIndexesOfPropertyEditor(singleSelected);
 
 		const QModelIndex index = models().graphicalModelAssistApi().indexById(singleSelected);
@@ -616,7 +618,7 @@ void MainWindow::openRecentProjectsMenu()
 		recentProjects.pop_front();
 	}
 
-	for (QString projectPath : recentProjects) {
+	for (const QString &projectPath : recentProjects) {
 		mRecentProjectsMenu->addAction(projectPath);
 		QObject::connect(mRecentProjectsMenu->actions().last(), &QAction::triggered
 				, mRecentProjectsMapper, static_cast<void (QSignalMapper::*)()>(&QSignalMapper::map));
@@ -1217,7 +1219,7 @@ void MainWindow::setShortcuts(EditorView * const tab)
 
 	// Add shortcut - select all
 	QAction *selectAction = new QAction(tab);
-	selectAction->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_A));
+	selectAction->setShortcut(QKeySequence(QKeySequence::SelectAll));
 	connect(selectAction, &QAction::triggered, scene, &EditorViewScene::selectAll);
 	tab->addAction(selectAction);
 }

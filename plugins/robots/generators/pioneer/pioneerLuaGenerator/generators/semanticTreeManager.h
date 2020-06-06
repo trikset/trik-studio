@@ -17,6 +17,7 @@
 #include <functional>
 #include <QtCore/QLinkedList>
 #include <QtCore/QMultiHash>
+#include <vector>
 
 namespace generatorBase {
 namespace semantics {
@@ -73,13 +74,12 @@ public:
 
 	/// Searches for a first sibling for which given predicate is true.
 	static generatorBase::semantics::SemanticNode *findSibling(generatorBase::semantics::SemanticNode *node
-			, std::function<bool(generatorBase::semantics::SemanticNode *)> predicate);
+			, const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
 
 	/// Copies right siblings of the @p node until predicate for a sibling becomes true, or until end.
 	/// @returns a list of copied nodes.
-	QLinkedList<generatorBase::semantics::SemanticNode *> copyRightSiblingsUntil(
-			generatorBase::semantics::SemanticNode *node
-			, std::function<bool(generatorBase::semantics::SemanticNode *)> predicate);
+	std::vector<generatorBase::semantics::SemanticNode *> copyRightSiblingsUntil(generatorBase::semantics::SemanticNode *node
+			, const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
 
 	/// Creates a new node for a given Id, registers it as clone if node with such Id is already in semantic tree.
 	generatorBase::semantics::NonZoneNode *produceNode(const qReal::Id &id);

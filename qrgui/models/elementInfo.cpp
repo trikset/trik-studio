@@ -61,10 +61,6 @@ ElementInfo::ElementInfo(const Id &id
 {
 }
 
-ElementInfo::~ElementInfo()
-{
-}
-
 QDataStream &ElementInfo::serialize(QDataStream &out) const
 {
 	return out << mId << mLogicalId << mLogicalParent << mGraphicalParent

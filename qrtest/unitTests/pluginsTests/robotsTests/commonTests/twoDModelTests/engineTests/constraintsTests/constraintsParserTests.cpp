@@ -36,8 +36,8 @@ struct ScopedConnection {
 	{}
 
 	ScopedConnection(const ScopedConnection &c) = delete;
-	ScopedConnection(ScopedConnection &&c)
-		: mConnection(c.mConnection)
+	ScopedConnection(ScopedConnection &&c) noexcept
+		: mConnection(std::move(c.mConnection))
 	{
 		c.mMoved = true;
 	}

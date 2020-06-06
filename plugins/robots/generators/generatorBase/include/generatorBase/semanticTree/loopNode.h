@@ -27,7 +27,7 @@ class ROBOTS_GENERATOR_EXPORT LoopNode : public ConditionalNode
 public:
 	explicit LoopNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 
-	void appendChildren(QLinkedList<SemanticNode *> const &nodes);
+	void appendChildren(const std::vector<SemanticNode *> &nodes);
 
 	/// Switches between while-do and do-while forms.
 	void setForm(bool doWhileForm);

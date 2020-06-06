@@ -208,7 +208,7 @@ void Diagram::initPalette(const QDomElement &paletteElement)
 
 bool Diagram::resolve()
 {
-	for (ImportSpecification import : mImports) {
+	for (auto &&import : mImports) {
 		Type *importedType = mEditor->findType(import.name);
 		if (importedType == nullptr) {
 			qDebug() << "ERROR: imported type" << import.name << "not found, skipping";
@@ -236,7 +236,7 @@ Editor* Diagram::editor() const
 	return mEditor;
 }
 
-Type* Diagram::findType(QString name)
+Type* Diagram::findType(const QString &name)
 {
 	if (mTypes.contains(name)) {
 		return mTypes[name];

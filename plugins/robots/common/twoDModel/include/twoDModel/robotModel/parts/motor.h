@@ -46,7 +46,7 @@ public:
 	void off() override;
 
 	void on(int speed, bool breakMode);
-	void on(int speed, long unsigned int degrees, bool breakMode);
+	void on(int speed, uint64_t degrees, bool breakMode);
 	void stop(bool breakMode);
 
 private:

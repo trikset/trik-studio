@@ -51,7 +51,7 @@ bool DotRunner::run(const QString &algorithm)
 		}
 		const IdList childrenId = mGraphicalModelApi.children(mDiagramId);
 		int index = 1;
-		for (Id id : childrenId) {
+		for (const Id &id : childrenId) {
 			if (mEditorManagerInterface.isGraphicalElementNode(id)) {
 				buildSubgraph(outFile, id, index);
 				writeGraphToDotFile(outFile, id);
@@ -80,8 +80,8 @@ void DotRunner::writeGraphToDotFile(QTextStream &outFile, const Id &id)
 	if (outgoingLinks.isEmpty() && mLogicalModelApi.logicalRepoApi().incomingLinks(id).isEmpty()) {
 		outFile << nameOfElement(id) << ";\n";
 	}
-	for (Id linkId : outgoingLinks) {
-		const Id elementId = mGraphicalModelApi.graphicalRepoApi().otherEntityFromLink(linkId, id);
+	for (const Id &linkId : outgoingLinks) {
+		const Id &elementId = mGraphicalModelApi.graphicalRepoApi().otherEntityFromLink(linkId, id);
 		if (mEditorManagerInterface.isGraphicalElementNode(elementId)) {
 			outFile << nameOfElement(id) << " -> " << nameOfElement(elementId) << ";\n";
 		}
@@ -96,7 +96,7 @@ void DotRunner::buildSubgraph(QTextStream &out, const Id &id, int &index)
 	}
 	out << QString("subgraph %1 {\n").arg(index);
 	index++;
-	for (Id childId : childrenId) {
+	for (const Id &childId : childrenId) {
 		buildSubgraph(out, childId, index);
 		writeGraphToDotFile(out, childId);
 	}

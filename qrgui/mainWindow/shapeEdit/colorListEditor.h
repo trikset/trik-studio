@@ -27,7 +27,7 @@ public:
 
 public:
 	QColor color() const;
-	void setColor(QColor c);
+	void setColor(const QColor &c);
 
 private:
 	QColor mColor;

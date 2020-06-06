@@ -1085,7 +1085,7 @@ void NodeElement::updateDynamicLabels()
 	}
 }
 
-bool NodeElement::compareDynamicLabels(QString labelsPack1, QString labelsPack2) const
+bool NodeElement::compareDynamicLabels(const QString &labelsPack1, const QString &labelsPack2) const
 {
 	QDomDocument dynamicLabels1;
 	dynamicLabels1.setContent(labelsPack1);

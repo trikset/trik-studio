@@ -48,7 +48,7 @@ bool Property::init(const QDomElement &element)
 	return true;
 }
 
-bool Property::initReferenceType(QString typeName, const QDomElement &element)
+bool Property::initReferenceType(const QString &typeName, const QDomElement &element)
 {
 	mType = element.firstChildElement(typeName).attribute("type");
 	if (mType.isEmpty()) {

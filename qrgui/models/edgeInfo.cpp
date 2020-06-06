@@ -13,11 +13,13 @@
  * limitations under the License. */
 
 #include "edgeInfo.h"
+#include <QMimeData>
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/definitions.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/graphicalModelAssistInterface.h>
+
 
 using namespace qReal;
 

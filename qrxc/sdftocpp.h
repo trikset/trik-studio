@@ -30,7 +30,7 @@ class SdfRenderer : public QObject
 
 public:
 	SdfRenderer();
-	explicit SdfRenderer(const QString path);
+	explicit SdfRenderer(const QString &path);
 	explicit SdfRenderer(const QDomNode &bla);
 	~SdfRenderer();
 

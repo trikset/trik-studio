@@ -180,8 +180,7 @@ signals:
 private:
 	QVector2D robotDirectionVector() const;
 
-	Wheel *initMotor(int radius, int speed, long unsigned int degrees
-			, const kitBase::robotModel::PortInfo &port, bool isUsed);
+	Wheel *initMotor(int radius, int speed, uint64_t degrees, const kitBase::robotModel::PortInfo &port, bool isUsed);
 
 	void countNewForces();
 	void countBeep();

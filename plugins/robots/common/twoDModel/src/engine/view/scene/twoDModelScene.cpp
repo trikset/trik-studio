@@ -132,7 +132,7 @@ bool TwoDModelScene::hasIntersect(const AbstractItem *item1, const AbstractItem 
 	return item1->realShape().intersects(item2->realShape());
 }
 
-bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> checkItems) const
+bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) const
 {
 	for (auto item : checkItems) {
 		if (!item) {
@@ -539,7 +539,7 @@ void TwoDModelScene::pasteItemsFromClipboard()
 	auto command = new commands::CreateWorldItemsCommand(mModel, newItems);
 	mController->execute(command);
 
-	for (auto id : newIds) {
+	for (auto &&id : newIds) {
 		findItem(id)->setSelected(true);
 		findItem(id)->setPos(findItem(id)->pos() + QPointF(20, 20));
 		findItem(id)->savePos();
@@ -547,7 +547,7 @@ void TwoDModelScene::pasteItemsFromClipboard()
 }
 
 QPair<QStringList, QList<QPair<model::RobotModel *
-		, kitBase::robotModel::PortInfo>>> TwoDModelScene::parseItemsToID (QList<QGraphicsItem*> items)
+		, kitBase::robotModel::PortInfo>>> TwoDModelScene::parseItemsToID (const QList<QGraphicsItem*> &items)
 {
 	QStringList worldItems;
 	QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensors;
@@ -578,7 +578,7 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 			worldItems << image->id();
 		}
 	}
-	return QPair<QStringList, QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>>>(worldItems, sensors);
+	return {worldItems, sensors};
 }
 
 

@@ -150,13 +150,13 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 
 	qReal::Id activeDiagram = mMainWindowInterpretersInterface->activeDiagram();
 	QHash<QString, QVariant> oldMeta;
-	for (auto metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
+	for (const auto &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 	}
 	mRepo->importFromDisk(fileName);
 	mMainWindowInterpretersInterface->reinitModels();
 	mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
-	for (auto metaKey : oldMeta.keys()) {
+	for (const auto &metaKey : oldMeta.keys()) {
 		mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 	}
 	mProjectManager->afterOpen(mRepo->workingFile());
@@ -214,7 +214,7 @@ void SubprogramsImporterExporterPlugin::saveToCollectionTriggered() const
 		// todo: save to independent project.... dependences????? another subprograms... needs to be copied if it was
 		// inside in selected subprogram
 		QHash<QString, qReal::IdList> toSave;
-		for (auto key : map.keys()) {
+		for (const auto &key : map.keys()) {
 			if (map[key]) {
 				qReal::IdList innerSPs = { nameToId[key] };
 				innerSubprograms(nameToId[key], innerSPs);
@@ -241,14 +241,14 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 	}
 
 	QMap<QString, bool> map;
-	for (auto str :  currentlySavedSPs){
+	for (auto const &str :  currentlySavedSPs){
 		map[str] = false;
 	}
 
 	SubprogramsCollectionDialog dialog(map);
 	dialog.exec();
 	QHash<QString, QVariant> oldMeta;
-	for (auto metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
+	for (auto const &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 	}
 	if (dialog.result() == QDialog::Accepted) {
@@ -256,7 +256,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
 				+ QDir::separator() + mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString()
 				+ QDir::separator();
-		for (auto key : map.keys()) {
+		for (auto const &key : map.keys()) {
 			if (map[key]) {
 				mRepo->importFromDisk(directoryPath + key + ".qrs");
 			}
@@ -264,7 +264,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 		mMainWindowInterpretersInterface->reinitModels();
 		mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
-		for (auto metaKey : oldMeta.keys()) {
+		for (auto const &metaKey : oldMeta.keys()) {
 			mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 		}
 		mProjectManager->afterOpen(mRepo->workingFile());
@@ -321,7 +321,7 @@ bool SubprogramsImporterExporterPlugin::checkSubprogramsForUniqueNames() const
 void SubprogramsImporterExporterPlugin::innerSubprograms(const qReal::Id &id, qReal::IdList &list) const
 {
 	qReal::IdList children = mGraphicalModel->graphicalRepoApi().children(id);
-	for (auto chId : children) {
+	for (auto const &chId : children) {
 		qReal::Id logicalId = mGraphicalModel->graphicalRepoApi().logicalId(chId);
 		qReal::Id outgoingExplosion = mLogicalModel->logicalRepoApi().outgoingExplosion(logicalId);
 		if (outgoingExplosion.element() == "SubprogramDiagram") {
@@ -350,7 +350,7 @@ QMap<QString, bool> SubprogramsImporterExporterPlugin::markLeftExistedInRight(co
 		, const QStringList &right) const
 {
 	QMap<QString, bool> answer;
-	for (auto s : left) {
+	for (auto const &s : left) {
 		answer[s] = right.contains(s);
 	}
 

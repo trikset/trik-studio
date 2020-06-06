@@ -158,9 +158,9 @@ private:
 	void loadFromDisk();
 	void addChildrenToRootObject();
 
-	qReal::IdList idsOfAllChildrenOf(qReal::Id id) const;
-	QList<Object*> allChildrenOf(qReal::Id id) const;
-	QList<Object*> allChildrenOfWithLogicalId(qReal::Id id) const;
+	qReal::IdList idsOfAllChildrenOf(const qReal::Id &id) const;
+	QList<Object*> allChildrenOf(const qReal::Id &id) const;
+	QList<Object*> allChildrenOfWithLogicalId(const qReal::Id &id) const;
 
 	QHash<qReal::Id, Object *> mObjects;
 	QHash<QString, QVariant> mMetaInfo;

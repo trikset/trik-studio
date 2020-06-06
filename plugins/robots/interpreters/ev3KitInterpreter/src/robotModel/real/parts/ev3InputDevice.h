@@ -32,7 +32,7 @@ public:
 	Ev3InputDevice(utils::robotCommunication::RobotCommunicator &robotCommunicator
 			, const kitBase::robotModel::PortInfo &port);
 
-	void send(QByteArray command, const unsigned responseSize, QByteArray reading);
+	void send(const QByteArray &command, const unsigned responseSize, QByteArray reading);
 
 	/// Returns a value of port that can be used as corresponding byte in request packages.
 	char lowLevelPort() const;
