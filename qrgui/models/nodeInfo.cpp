@@ -48,6 +48,16 @@ NodeInfo::NodeInfo(const Id &id
 {
 }
 
+QDataStream &NodeInfo::serialize(QDataStream &out) const
+{
+	return mInfo.serialize(out);
+}
+
+QDataStream &NodeInfo::deserialize(QDataStream &in)
+{
+	return mInfo.deserialize(in);
+}
+
 
 QMimeData *NodeInfo::mimeData() const
 {

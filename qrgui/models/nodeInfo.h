@@ -40,6 +40,7 @@ public:
 			, const QMap<QString, QVariant> &logicalProperties
 			, const QMap<QString, QVariant> &graphicalProperties
 			, const Id &explosionTarget);
+
 	QDataStream &serialize(QDataStream &out) const;
 
 	QDataStream &deserialize(QDataStream &in);

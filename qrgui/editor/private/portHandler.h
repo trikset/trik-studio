@@ -116,7 +116,7 @@ private:
 
 	/// Returns point port ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
-	/// @param location Point that is considered for locate in locality (kvadratik, kvadratik) of point ports.
+	/// @param location Point that is considered for locate in locality (squareSize, squareSize) of point ports.
 	/// location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return Point port ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
@@ -124,7 +124,7 @@ private:
 
 	/// Returns line port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
-	/// @param location Point that is considered for locate in locality (kvadratik - 5, kvadratik - 5) of line port
+	/// @param location Point that is considered for locate in locality (squareSize - 5, squareSize - 5) of line port
 	/// points. location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return line port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
@@ -132,7 +132,7 @@ private:
 
 	/// Returns circular port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
-	/// @param location Point that is considered for locate in locality kvadratik of circular port
+	/// @param location Point that is considered for locate in locality squareSize of circular port
 	/// points. location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return circular port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.

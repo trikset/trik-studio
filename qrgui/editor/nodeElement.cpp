@@ -854,7 +854,7 @@ QRectF NodeElement::contentsRect() const
 
 QRectF NodeElement::boundingRect() const
 {
-	return mContents.adjusted(-2 * kvadratik, -2 * kvadratik, kvadratik, kvadratik);
+	return mContents.adjusted(-2 * squareSize, -2 * squareSize, squareSize, squareSize);
 }
 
 void NodeElement::updateData()
@@ -1452,8 +1452,8 @@ QRectF NodeElement::diagramRenderingRect() const
 			, mModels
 			);
 
-	const qreal xCoeff = (boundingRect().width() - 3 * kvadratik) / (initial->boundingRect().width() - 3 * kvadratik);
-	const qreal yCoeff = (boundingRect().height() - 3 * kvadratik) / (initial->boundingRect().height() - 3 *kvadratik);
+	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial->boundingRect().width() - 3 * squareSize);
+	const qreal yCoeff = (boundingRect().height() - 3 * squareSize) / (initial->boundingRect().height() - 3 *squareSize);
 
 	delete initial;
 

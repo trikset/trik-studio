@@ -277,8 +277,8 @@ qreal PortHandler::pointPortId(const QPointF &location, const QStringList &types
 {
 	for (int pointPortNumber = 0; pointPortNumber < mPointPorts.count(); pointPortNumber++) {
 		const StatPoint * const pointPort = mPointPorts.at(pointPortNumber);
-		if (QRectF(transformPortForNodeSize(pointPort) - QPointF(kvadratik, kvadratik)
-				, QSizeF(kvadratik * 2, kvadratik * 2)).contains(location) && types.contains(pointPort->type()))
+		if (QRectF(transformPortForNodeSize(pointPort) - QPointF(squareSize, squareSize)
+				, QSizeF(squareSize * 2, squareSize * 2)).contains(location) && types.contains(pointPort->type()))
 		{
 			return pointPortNumber;
 		}
@@ -296,7 +296,7 @@ qreal PortHandler::linePortId(const QPointF &location, const QStringList &types)
 		}
 
 		QPainterPathStroker ps;
-		ps.setWidth(kvadratik - 5);
+		ps.setWidth(squareSize - 5);
 
 		QPainterPath path;
 		const QLineF line = transformPortForNodeSize(linePort);
@@ -323,7 +323,7 @@ qreal PortHandler::circularPortId(const QPointF &location, const QStringList &ty
 		}
 
 		QPainterPathStroker ps;
-		ps.setWidth(kvadratik);
+		ps.setWidth(squareSize);
 
 		QPainterPath path;
 		StatCircular::CircularPort circular = transformPortForNodeSize(circularPort);
