@@ -434,16 +434,11 @@ QStringList TrikBrick::readAll(const QString &path)
 
 utils::AbstractTimer *TrikBrick::timer(int milliseconds)
 {
-	utils::AbstractTimer *result = mTwoDRobotModel->timeline().produceTimer();
-	// TODO: This memory leak is a hot fix for bad design
-	// Otherwise crash on stop can happen if we have signal connection
-	// from JS ScriptEngine.
-	mTimers.append(QSharedPointer<utils::AbstractTimer>(result, [](utils::AbstractTimer *t){
-					   t->stop();
-				   }));
+	auto result = QSharedPointer<utils::AbstractTimer>(mTwoDRobotModel->timeline().produceTimer());
+	mTimers.append(result);
 	result->setRepeatable(true);
 	result->start(milliseconds);
-	return result;
+	return result.get();
 }
 
 void TrikBrick::processSensors(bool isRunning)
