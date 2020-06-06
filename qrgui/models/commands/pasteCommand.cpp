@@ -50,7 +50,7 @@ PasteCommand::PasteCommand(const models::Models &models
 	const QHash<Id, Id> copiedIds = prepareNodes(models.graphicalModelAssistApi(), nodesData, offset);
 
 	QList<ElementInfo> allElements;
-	for (const NodeInfo &node : nodesData) {
+	for (auto &node : nodesData) {
 		allElements << node.getInfo();
 	}
 

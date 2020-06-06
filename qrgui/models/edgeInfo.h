@@ -27,7 +27,7 @@ namespace qReal {
 class QRGUI_MODELS_EXPORT EdgeInfo
 {
 public:
-	EdgeInfo();
+	EdgeInfo() = default;
 
 	EdgeInfo(const Id &graphicalId
 			, const Id &logicalId
@@ -126,7 +126,7 @@ public:
 	ElementInfo getInfo() const;
 
 private:
-	ElementInfo mInfo;
+	ElementInfo mInfo {true};
 	Id mSrcId;
 	Id mDstId;
 
