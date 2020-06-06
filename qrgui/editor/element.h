@@ -38,7 +38,7 @@ namespace editor {
 class Label;
 
 /// size of a point port
-const int kvadratik = 10;
+const int squareSize = 10;
 
 /// base class for an element on a diagram
 class QRGUI_EDITOR_EXPORT Element : public QObject, public QGraphicsItem, public ElementRepoInterface
