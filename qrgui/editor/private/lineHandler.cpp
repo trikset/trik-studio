@@ -304,11 +304,11 @@ void LineHandler::deleteLoop(QPolygonF &line, int startPos)
 					== QLineF::BoundedIntersection)
 			{
 				if ((i != 0) || !((j == line.size() - 2)
-						&& (QLineF(line.first(), line.last()).length() < (kvadratik * 2))))
+						&& (QLineF(line.first(), line.last()).length() < (squareSize * 2))))
 				{
 					QPainterPath path;
 					QPainterPathStroker ps;
-					ps.setWidth(kvadratik);
+					ps.setWidth(squareSize);
 					for (int k = 0; k < line.size() - 1; ++k) {
 						path.moveTo(line[k]);
 						path.lineTo(line[k + 1]);
@@ -352,7 +352,7 @@ bool LineHandler::checkPort(const QPointF &pos, bool isStart) const
 	}
 
 	const QPointF point = mEdge->mapFromItem(node, node->portPos(port));
-	QRectF rect(point - QPointF(kvadratik, kvadratik), point + QPointF(kvadratik, kvadratik));
+	QRectF rect(point - QPointF(squareSize, squareSize), point + QPointF(squareSize, squareSize));
 	return rect.contains(pos);
 }
 

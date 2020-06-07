@@ -13,17 +13,13 @@
  * limitations under the License. */
 
 #include "edgeInfo.h"
-
+#include <QMimeData>
 #include <qrkernel/settingsManager.h>
+#include <qrkernel/definitions.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/graphicalModelAssistInterface.h>
 
 using namespace qReal;
-
-EdgeInfo::EdgeInfo()
-	: ElementInfo(true)
-{
-}
 
 EdgeInfo::EdgeInfo(const Id &graphicalId
 		, const Id &logicalId
@@ -40,11 +36,11 @@ EdgeInfo::EdgeInfo(const Id &graphicalId
 	const QMap<QString, QVariant> properties = graphicalModel.properties(logicalId);
 	for (const QString &property : properties.keys()) {
 		if (property != "from" && property != "to") {
-			setLogicalProperty(property, properties[property]);
+			mInfo.setLogicalProperty(property, properties[property]);
 		}
 	}
 
-	setGraphicalProperty("position", graphicalModel.position(graphicalId));
+	mInfo.setGraphicalProperty("position", graphicalModel.position(graphicalId));
 }
 
 EdgeInfo::EdgeInfo(const Id &id
@@ -56,7 +52,7 @@ EdgeInfo::EdgeInfo(const Id &id
 		, const QPolygon &configuration
 		, int shapeType
 		)
-	: ElementInfo(id, logicalId, logicalParent, graphicalParent, {}, {}, Id(), true)
+	: mInfo(id, logicalId, logicalParent, graphicalParent, {}, {}, Id(), true)
 	, mPortFrom(portFrom)
 	, mPortTo(portTo)
 	, mConfiguration(configuration)
@@ -93,27 +89,157 @@ LinkShape EdgeInfo::stringToShape(const QString &string)
 
 QDataStream &EdgeInfo::serialize(QDataStream &out) const
 {
-	return ElementInfo::serialize(out) << mSrcId << mDstId << mPortFrom << mPortTo << mConfiguration << mShapeType;
+	return mInfo.serialize(out) << mSrcId << mDstId << mPortFrom << mPortTo << mConfiguration << mShapeType;
 }
 
 QDataStream &EdgeInfo::deserialize(QDataStream &in)
 {
-	return ElementInfo::deserialize(in) >> mSrcId >> mDstId >> mPortFrom >> mPortTo >> mConfiguration >> mShapeType;
+	return mInfo.deserialize(in) >> mSrcId >> mDstId >> mPortFrom >> mPortTo >> mConfiguration >> mShapeType;
 }
 
-bool EdgeInfo::equals(const ElementInfo &other) const
+bool EdgeInfo::equals(const EdgeInfo &other) const
 {
 	const EdgeInfo *otherEdge = dynamic_cast<const EdgeInfo *>(&other);
 	if (!otherEdge) {
 		return false;
 	}
 
-	return ElementInfo::equals(other)
+	return mInfo.equals(other.getInfo())
 			&& mSrcId == otherEdge->mSrcId
 			&& mDstId == otherEdge->mDstId
 			&& mPortFrom == otherEdge->mPortFrom
 			&& mPortTo == otherEdge->mPortTo
 			&& mConfiguration == otherEdge->mConfiguration;
+}
+
+QMimeData *EdgeInfo::mimeData() const
+{
+	return mInfo.mimeData();
+}
+
+ElementInfo EdgeInfo::fromMimeData(const QMimeData *mimeData)
+{
+	auto data = mimeData->data(DEFAULT_MIME_TYPE);
+	QDataStream inStream(&data, QIODevice::ReadOnly);
+
+	ElementInfo result;
+	inStream >> result;
+	return result;
+}
+
+bool EdgeInfo::isEdge() const
+{
+	return mInfo.isEdge();
+}
+
+Id EdgeInfo::parent() const
+{
+	return mInfo.parent();
+}
+
+QString EdgeInfo::name() const
+{
+	return mInfo.name();
+}
+
+QPointF EdgeInfo::position() const
+{
+	return mInfo.position();
+}
+
+Id EdgeInfo::newId()
+{
+	return mInfo.newId();
+}
+
+Id EdgeInfo::newLogicalId()
+{
+	return mInfo.newLogicalId();
+}
+
+void EdgeInfo::setPos(const QPointF &position)
+{
+	return mInfo.setPos(position);
+}
+
+const Id &EdgeInfo::explosionTarget() const
+{
+	return mInfo.explosionTarget();
+}
+
+const Id &EdgeInfo::id() const
+{
+	return mInfo.id();
+}
+
+const Id &EdgeInfo::logicalId() const
+{
+	return mInfo.logicalId();
+}
+
+void EdgeInfo::setLogicalId(const Id &id)
+{
+	mInfo.setLogicalId(id);
+}
+
+const Id &EdgeInfo::logicalParent() const
+{
+	return mInfo.logicalParent();
+}
+
+void EdgeInfo::setLogicalParent(const Id &parent)
+{
+	mInfo.setLogicalParent(parent);
+}
+
+const Id &EdgeInfo::graphicalParent() const
+{
+	return mInfo.graphicalParent();
+}
+
+void EdgeInfo::setGraphicalParent(const Id &parent)
+{
+	mInfo.setGraphicalParent(parent);
+}
+
+const QList<QString> EdgeInfo::logicalProperties() const
+{
+	return mInfo.logicalProperties();
+}
+
+QVariant EdgeInfo::logicalProperty(const QString &propertyName) const
+{
+	return mInfo.logicalProperty(propertyName);
+}
+
+void EdgeInfo::setLogicalProperty(const QString &propertyName, const QVariant &propertyValue)
+{
+	mInfo.setLogicalProperty(propertyName, propertyValue);
+}
+
+void EdgeInfo::setAllLogicalProperties(const QMap<QString, QVariant> &logicalProperties)
+{
+	mInfo.setAllGraphicalProperties(logicalProperties);
+}
+
+const QList<QString> EdgeInfo::graphicalProperties() const
+{
+	return mInfo.graphicalProperties();
+}
+
+QVariant EdgeInfo::graphicalProperty(const QString &propertyName) const
+{
+	return mInfo.graphicalProperty(propertyName);
+}
+
+void EdgeInfo::setGraphicalProperty(const QString &propertyName, const QVariant &propertyValue)
+{
+	return mInfo.setGraphicalProperty(propertyName, propertyValue);
+}
+
+void EdgeInfo::setAllGraphicalProperties(const QMap<QString, QVariant> &graphicalProperties)
+{
+	mInfo.setAllLogicalProperties(graphicalProperties);
 }
 
 QDataStream &operator<< (QDataStream &out, const EdgeInfo &data)
@@ -133,7 +259,7 @@ bool operator== (const EdgeInfo &first, const EdgeInfo &second)
 
 ElementInfo EdgeInfo::convertToSimpleInfo() const
 {
-	ElementInfo element(*this);
+	ElementInfo element(mInfo);
 	element.setGraphicalProperty("configuration", mConfiguration);
 	element.setGraphicalProperty("linkShape", mShapeType);
 
@@ -164,4 +290,9 @@ void EdgeInfo::setSrcId(const Id &id)
 void EdgeInfo::setDstId(const Id &id)
 {
 	mDstId = id;
+}
+
+ElementInfo EdgeInfo::getInfo() const
+{
+	return mInfo;
 }

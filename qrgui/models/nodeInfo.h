@@ -23,7 +23,7 @@
 namespace qReal {
 
 /// Container for convenient storing node element data for passing it into methods with just one parameter.
-class QRGUI_MODELS_EXPORT NodeInfo : public ElementInfo
+class QRGUI_MODELS_EXPORT NodeInfo
 {
 public:
 	NodeInfo();
@@ -40,6 +40,66 @@ public:
 			, const QMap<QString, QVariant> &logicalProperties
 			, const QMap<QString, QVariant> &graphicalProperties
 			, const Id &explosionTarget);
+
+	QDataStream &serialize(QDataStream &out) const;
+
+	QDataStream &deserialize(QDataStream &in);
+
+	QMimeData *mimeData() const;
+
+	static ElementInfo fromMimeData(const QMimeData *mimeData);
+
+	bool isEdge() const;
+
+	Id parent() const;
+
+	QString name() const;
+
+	QPointF position() const;
+
+	Id newId();
+
+	Id newLogicalId();
+
+	void setPos(const QPointF &position);
+
+	const Id &explosionTarget() const;
+
+	const Id &id() const;
+
+	const Id &logicalId() const;
+
+	void setLogicalId(const Id &id);
+
+	const Id &logicalParent() const;
+
+	void setLogicalParent(const Id &parent);
+
+	const Id &graphicalParent() const;
+
+	void setGraphicalParent(const Id &parent);
+
+	const QList<QString> logicalProperties() const;
+
+	QVariant logicalProperty(const QString &propertyName) const;
+
+	void setLogicalProperty(const QString &propertyName, const QVariant &propertyValue);
+
+	void setAllLogicalProperties(const QMap<QString, QVariant> &logicalProperties);
+
+	const QList<QString> graphicalProperties() const;
+
+	QVariant graphicalProperty(const QString &propertyName) const;
+
+	void setGraphicalProperty(const QString &propertyName, const QVariant &propertyValue);
+
+	void setAllGraphicalProperties(const QMap<QString, QVariant> &graphicalProperties);
+
+	/// Gets element info of an edge.
+	ElementInfo getInfo() const;
+
+private:
+	ElementInfo mInfo;
 };
 
 }

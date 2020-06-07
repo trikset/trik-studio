@@ -78,7 +78,7 @@ void BrokenLine::deleteUnneededPoints()
 
 void BrokenLine::deleteClosePoints(QPolygonF &line) const
 {
-	const int rad = kvadratik * 2;
+	const int rad = squareSize * 2;
 
 	for (int i = 0; i < line.size() - 1; i++) {
 		if (QLineF(line[i], line[i + 1]).length() < rad) {
@@ -115,7 +115,7 @@ bool BrokenLine::tooSmallTriangle(const QPolygonF &line, int i) const
 	line3.lineTo(line[i + 2]);
 
 	QPainterPathStroker neighbourhood;
-	neighbourhood.setWidth(kvadratik * 4);
+	neighbourhood.setWidth(squareSize * 4);
 
 	return neighbourhood.createStroke(line1).contains(line[i + 2])
 			|| neighbourhood.createStroke(line2).contains(line[i])

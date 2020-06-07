@@ -13,7 +13,8 @@
  * limitations under the License. */
 
 #include "nodeInfo.h"
-
+#include <QMimeData>
+#include <qrkernel/definitions.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/graphicalModelAssistInterface.h>
 
@@ -42,9 +43,155 @@ NodeInfo::NodeInfo(const Id &id
 		, const QMap<QString, QVariant> &logicalProperties
 		, const QMap<QString, QVariant> &graphicalProperties
 		, const Id &explosionTarget)
-	: ElementInfo(id, logicalId, graphicalParent, logicalParent
+	: mInfo(id, logicalId, graphicalParent, logicalParent
 			, logicalProperties, graphicalProperties, explosionTarget, false)
 {
+}
+
+QDataStream &NodeInfo::serialize(QDataStream &out) const
+{
+	return mInfo.serialize(out);
+}
+
+QDataStream &NodeInfo::deserialize(QDataStream &in)
+{
+	return mInfo.deserialize(in);
+}
+
+
+QMimeData *NodeInfo::mimeData() const
+{
+	return mInfo.mimeData();
+}
+
+ElementInfo NodeInfo::fromMimeData(const QMimeData *mimeData)
+{
+	auto data = mimeData->data(DEFAULT_MIME_TYPE);
+	QDataStream inStream(&data, QIODevice::ReadOnly);
+
+	ElementInfo result;
+	inStream >> result;
+	return result;
+}
+
+bool NodeInfo::isEdge() const
+{
+	return mInfo.isEdge();
+}
+
+Id NodeInfo::parent() const
+{
+	return mInfo.parent();
+}
+
+QString NodeInfo::name() const
+{
+	return mInfo.name();
+}
+
+QPointF NodeInfo::position() const
+{
+	return mInfo.position();
+}
+
+Id NodeInfo::newId()
+{
+	return mInfo.newId();
+}
+
+Id NodeInfo::newLogicalId()
+{
+	return mInfo.newLogicalId();
+}
+
+void NodeInfo::setPos(const QPointF &position)
+{
+	return mInfo.setPos(position);
+}
+
+const Id &NodeInfo::explosionTarget() const
+{
+	return mInfo.explosionTarget();
+}
+
+const Id &NodeInfo::id() const
+{
+	return mInfo.id();
+}
+
+const Id &NodeInfo::logicalId() const
+{
+	return mInfo.logicalId();
+}
+
+void NodeInfo::setLogicalId(const Id &id)
+{
+	mInfo.setLogicalId(id);
+}
+
+const Id &NodeInfo::logicalParent() const
+{
+	return mInfo.logicalParent();
+}
+
+void NodeInfo::setLogicalParent(const Id &parent)
+{
+	mInfo.setLogicalParent(parent);
+}
+
+const Id &NodeInfo::graphicalParent() const
+{
+	return mInfo.graphicalParent();
+}
+
+void NodeInfo::setGraphicalParent(const Id &parent)
+{
+	mInfo.setGraphicalParent(parent);
+}
+
+const QList<QString> NodeInfo::logicalProperties() const
+{
+	return mInfo.logicalProperties();
+}
+
+QVariant NodeInfo::logicalProperty(const QString &propertyName) const
+{
+	return mInfo.logicalProperty(propertyName);
+}
+
+void NodeInfo::setLogicalProperty(const QString &propertyName, const QVariant &propertyValue)
+{
+	mInfo.setLogicalProperty(propertyName, propertyValue);
+}
+
+void NodeInfo::setAllLogicalProperties(const QMap<QString, QVariant> &logicalProperties)
+{
+	mInfo.setAllGraphicalProperties(logicalProperties);
+}
+
+const QList<QString> NodeInfo::graphicalProperties() const
+{
+	return mInfo.graphicalProperties();
+}
+
+QVariant NodeInfo::graphicalProperty(const QString &propertyName) const
+{
+	return mInfo.graphicalProperty(propertyName);
+}
+
+void NodeInfo::setGraphicalProperty(const QString &propertyName, const QVariant &propertyValue)
+{
+	return mInfo.setGraphicalProperty(propertyName, propertyValue);
+}
+
+void NodeInfo::setAllGraphicalProperties(const QMap<QString, QVariant> &graphicalProperties)
+{
+	mInfo.setAllLogicalProperties(graphicalProperties);
+}
+
+ElementInfo NodeInfo::getInfo() const
+{
+	return mInfo;
 }
 
 QDataStream &operator<< (QDataStream &out, const NodeInfo &data)
@@ -59,5 +206,5 @@ QDataStream &operator>> (QDataStream &in, NodeInfo &data)
 
 bool operator== (const NodeInfo &first, const NodeInfo &second)
 {
-	return first.equals(second);
+	return first.getInfo().equals(second.getInfo());
 }
