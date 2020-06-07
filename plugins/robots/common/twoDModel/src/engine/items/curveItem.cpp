@@ -254,7 +254,7 @@ void CurveItem::Marker::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
 QVariant CurveItem::Marker::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-	if (change == ItemPositionChange) {
+	if (change == ItemPositionHasChanged) {
 		parentItem()->update();
 	}
 

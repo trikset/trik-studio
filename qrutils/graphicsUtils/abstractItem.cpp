@@ -580,7 +580,7 @@ void AbstractItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 QVariant AbstractItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-	if (change == QGraphicsItem::ItemPositionChange) {
+	if (change == QGraphicsItem::ItemPositionHasChanged) {
 		emit positionChanged(value.toPointF());
 	}
 
