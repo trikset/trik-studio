@@ -297,9 +297,9 @@ void StartWidget::openInterpretedDiagram()
 	QrsMetamodelLoader loader;
 	connect(&loader, &QrsMetamodelLoader::errorOccured
 			, static_cast<gui::ErrorReporter *>(mMainWindow->errorReporter()), &gui::ErrorReporter::addError);
-	const QList<Metamodel *> metamodels = loader.load(fileName);
-	for (Metamodel *metamodel : metamodels) {
-		editorManager.loadMetamodel(*metamodel);
+
+	for (auto &&metamodel : loader.load(fileName)) {
+		editorManager.loadMetamodel(metamodel);
 	}
 
 	/// @todo: Hack for rereading palette, must be done automaticly on plugins set changed!

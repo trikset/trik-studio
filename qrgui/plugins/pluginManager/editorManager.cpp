@@ -98,7 +98,9 @@ bool EditorManager::registerPlugin(MetamodelLoaderInterface * const loader)
 	const QString pluginName = mPluginManager.fileName(loader);
 	// At the moment dependencies will contain maximally one element (this may change in future).
 	const QString extendedMetamodel = dependencies.isEmpty() ? QString() : dependencies.first();
-	Metamodel *metamodel = extendedMetamodel.isEmpty() ? new Metamodel : mMetamodels[extendedMetamodel];
+	const auto &metamodel = extendedMetamodel.isEmpty() ?
+								decltype(mMetamodels)::mapped_type(new Metamodel)
+							  : mMetamodels[extendedMetamodel];
 	loader->load(*metamodel);
 	mPluginFileNames[metamodel->id()] << pluginName;
 	mMetamodels[metamodel->id()] = metamodel;
@@ -151,13 +153,13 @@ bool EditorManager::unloadAllPlugins()
 	return result;
 }
 
-void EditorManager::loadMetamodel(Metamodel &metamodel)
+void EditorManager::loadMetamodel(const QSharedPointer<Metamodel> &metamodel)
 {
-	if (mMetamodels.contains(metamodel.id())) {
+	if (mMetamodels.contains(metamodel->id())) {
 		return;
 	}
 
-	mMetamodels[metamodel.id()] = &metamodel;
+	mMetamodels[metamodel->id()] = metamodel;
 }
 
 IdList EditorManager::editors() const
@@ -388,7 +390,7 @@ bool EditorManager::hasElement(const Id &elementId) const
 	Q_ASSERT(elementId.idSize() == 3);
 	if (!mMetamodels.contains(elementId.editor()))
 		return false;
-	Metamodel *editor = mMetamodels[elementId.editor()];
+	auto &editor = mMetamodels[elementId.editor()];
 	for (const QString &diagram : editor->diagrams()) {
 		for (const ElementType *element : editor->elements(diagram)) {
 			if (elementId.diagram() == diagram && elementId.element() == element->name()) {
@@ -401,7 +403,7 @@ bool EditorManager::hasElement(const Id &elementId) const
 
 Id EditorManager::findElementByType(const QString &type) const
 {
-	for (Metamodel *editor : mMetamodels.values()) {
+	for (auto &&editor : mMetamodels.values()) {
 		for (const QString &diagram : editor->diagrams()) {
 			for (const ElementType *element : editor->elements(diagram)) {
 				if (type == element->name()) {
@@ -415,7 +417,7 @@ Id EditorManager::findElementByType(const QString &type) const
 
 Metamodel* EditorManager::metamodel(const QString &editor) const
 {
-	return mMetamodels[editor];
+	return &*mMetamodels[editor];
 }
 
 bool EditorManager::isDiagramNode(const Id &id) const
@@ -426,7 +428,7 @@ bool EditorManager::isDiagramNode(const Id &id) const
 
 bool EditorManager::isParentOf(const Id &child, const Id &parent) const // child — EnginesForware, parent — AbstractNode
 {
-	const Metamodel *plugin = mMetamodels[child.editor()];
+	const auto &plugin = mMetamodels[child.editor()];
 	if (!plugin) {
 		return false;
 	}
@@ -438,7 +440,7 @@ bool EditorManager::isParentOf(const Id &child, const Id &parent) const // child
 		parentElement = parent.editor();
 	}
 
-	return isParentOf(plugin, child.diagram(), child.element(), parentDiagram, parentElement);
+	return isParentOf(&*plugin, child.diagram(), child.element(), parentDiagram, parentElement);
 }
 
 bool EditorManager::isParentOf(const Metamodel *plugin, const QString &childDiagram
@@ -449,7 +451,7 @@ bool EditorManager::isParentOf(const Metamodel *plugin, const QString &childDiag
 
 QStringList EditorManager::allChildrenTypesOf(const Id &parent) const
 {
-	const Metamodel *plugin = mMetamodels[parent.editor()];
+	const auto &plugin = mMetamodels[parent.editor()];
 	if (!plugin) {
 		return QStringList();
 	}
@@ -699,7 +701,7 @@ void EditorManager::addEdgeElement(const Id &diagram, const QString &name, const
 
 void EditorManager::createEditorAndDiagram(const QString &name)
 {
-	Metamodel * const interpretedMetamodel = new Metamodel();
+	QSharedPointer<Metamodel> interpretedMetamodel(new Metamodel());
 	interpretedMetamodel->setId(name);
 	interpretedMetamodel->setFriendlyName(name);
 	interpretedMetamodel->addDiagram(name);
@@ -719,7 +721,7 @@ void EditorManager::createEditorAndDiagram(const QString &name)
 	interpretedMetamodel->addElement(*diagramNode);
 	interpretedMetamodel->setDiagramNode(name, name);
 	interpretedMetamodel->produceEdge(*abstractNode, *abstractNode, ElementType::containmentLinkType);
-	loadMetamodel(*interpretedMetamodel);
+	loadMetamodel(interpretedMetamodel);
 }
 
 void EditorManager::saveMetamodel(const QString &newMetamodelFileName)

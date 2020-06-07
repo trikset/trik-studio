@@ -170,7 +170,7 @@ void ElementType::setDiagram(const QString &diagramName)
 
 QDomElement ElementType::sdf() const
 {
-	return mSdf.isNull() ? QDomElement() : mSdf->documentElement();
+	return mSdf->isNull() ? QDomElement() : mSdf->documentElement();
 }
 
 void ElementType::loadSdf(const QDomElement &picture)
