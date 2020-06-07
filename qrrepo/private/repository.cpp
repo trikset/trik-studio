@@ -25,8 +25,11 @@ Repository::Repository(const QString &workingFile)
 		: mWorkingFile(workingFile)
 		, mSerializer(workingFile)
 {
-	init();
 	loadFromDisk();
+	if (mObjects.isEmpty()) {
+		// Nothing loaded
+		init();
+	}
 }
 
 void Repository::init()

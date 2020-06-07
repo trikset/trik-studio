@@ -50,6 +50,7 @@ protected:
 	BlocksFactoryManagerInterfaceMock mBlocksFactoryManager;
 	ConfigurationInterfaceMock mConfigurationInterfaceMock;
 	QScopedPointer<interpreterCore::textLanguage::RobotsBlockParser> mParser;
+	DummyBlockFactory mBlocksFactory;
 	QEventLoop mEventLoop;
 	bool mInterpreterStopped = false;
 };

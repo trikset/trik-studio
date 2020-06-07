@@ -1,21 +1,4 @@
 {
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: definite
-   fun:_Znwm
-   fun:_ZN15QDomAttrPrivate9cloneNodeEb
-   fun:_ZN23QDomNamedNodeMapPrivate5cloneEP15QDomNodePrivate
-   fun:_ZN18QDomElementPrivateC1EPS_b
-   fun:_ZN18QDomElementPrivate9cloneNodeEb
-   fun:_ZN15QDomNodePrivateC1EPS_b
-   fun:_ZN18QDomElementPrivateC1EPS_b
-   fun:_ZN19QDomDocumentPrivate10importNodeEP15QDomNodePrivateb
-   fun:_ZN12QDomDocument10importNodeERK8QDomNodeb
-   fun:_ZN5qReal11ElementType7loadSdfERK11QDomElement
-   fun:*qReal9MetamodelE
-   fun:_ZN21RobotsMetamodelPlugin14initMultigraphEv
-}
-{
    <Ignore-NVIDIA-libs>
    Memcheck:Leak
    match-leak-kinds: possible
