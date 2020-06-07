@@ -365,23 +365,25 @@ private:
 	QMap<QString, Id> mElementsNamesAndIds;
 
 	/// mFindDialog - Dialog for searching elements.
-	FindReplaceDialog *mFindReplaceDialog;
+	FindReplaceDialog *mFindReplaceDialog; //Has ownership
 
-	Controller *mController;
-	QScopedPointer<ToolPluginManager> mToolManager;
+	QScopedPointer<gui::ErrorReporter> mErrorReporter;
+
 	QScopedPointer<PropertyEditorModel> mPropertyModel;
-	text::TextManager *mTextManager;
-	EditorInterface *mCurrentEditor;
+	QScopedPointer<text::TextManager> mTextManager;
+	QScopedPointer<ProjectManagerWrapper> mProjectManager;
+	QScopedPointer<Controller> mController;
+	QScopedPointer<ToolPluginManager> mToolManager;
+
+	EditorInterface* mCurrentEditor {}; // No ownership
 
 	QVector<bool> mSaveListChecked;
 
 	QStringList mDiagramsList;
 	QModelIndex mRootIndex;
 
-	gui::ErrorReporter *mErrorReporter;  // Has ownership
-
 	/// Fullscreen mode flag
-	bool mIsFullscreen;
+	bool mIsFullscreen { false };
 
 	/// Internal map table to store info what widgets should we hide/show
 	QMap<QString, bool> mDocksVisibility;
@@ -389,15 +391,13 @@ private:
 	QString mTempDir;
 	qReal::gui::PreferencesDialog mPreferencesDialog;
 
-	int mRecentProjectsLimit;
-	QSignalMapper *mRecentProjectsMapper;
-	QMenu *mRecentProjectsMenu {};
+	int mRecentProjectsLimit {};
+	QMenu *mRecentProjectsMenu {}; // Has ownership
 
-	FindManager *mFindHelper;
-	ProjectManagerWrapper *mProjectManager;
-	StartWidget *mStartWidget;
+	QScopedPointer<FindManager> mFindHelper;
+	StartWidget *mStartWidget {}; // Has ownership
 
-	qReal::gui::editor::SceneCustomizer *mSceneCustomizer;
+	QScopedPointer<qReal::gui::editor::SceneCustomizer> mSceneCustomizer;
 	QList<QDockWidget *> mAdditionalDocks;
 	QMap<QWidget *, int> mLastTabBarIndexes;
 
@@ -408,7 +408,7 @@ private:
 
 	gui::ScriptAPI mScriptAPI;
 
-	bool mRestoreDefaultSettingsOnClose;
+	bool mRestoreDefaultSettingsOnClose {};
 };
 
 }

@@ -290,7 +290,7 @@ void XmlCompiler::generateInitMultigraph(OutFile &out)
 		for (const Type *type : diagram->types()) {
 			if (dynamic_cast<const GraphicType *>(type)) {
 				const QString elementType = NameNormalizer::normalize(type->qualifiedName());
-				out() << "\tmMetamodel->addNode(*(new " << elementType << "(*mMetamodel)));\n";
+				out() << "\tmMetamodel->addNode(new " << elementType << "(*mMetamodel));\n";
 			}
 		}
 	}

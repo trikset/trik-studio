@@ -33,7 +33,7 @@ class StartWidget : public QWidget
 	Q_OBJECT
 
 public:
-	StartWidget(MainWindow *mainWindow, ProjectManager *projectManager);
+	StartWidget(MainWindow *mainWindow, ProjectManager *projectManager, QWidget *parent);
 
 	/// If false is passed the interpreters buttons instances are deleted.
 	/// This method can change layout of the buttons on start tab.
@@ -62,14 +62,14 @@ private:
 
 	MainWindow *mMainWindow;  // Doesn't have ownership.
 	ProjectManager *mProjectManager;  // Doesn't have ownership.
-	int mProjectListSize;
+	int mProjectListSize { -1 };
 
 	QBoxLayout *mProjectsManagementLayout {};  // Has ownership.
 	QWidget *mRecentProjectsWidget {};  // Has ownership.
-	QPushButton *mNewProjectButton;  // Has ownership.
-	QPushButton *mOpenProjectButton;  // Has ownership.
-	QPushButton *mOpenInterpreterButton;  // Has ownership.
-	QPushButton *mCreateInterpreterButton;  // Has ownership.
+	QPushButton *mNewProjectButton {};  // Has ownership.
+	QPushButton *mOpenProjectButton {};  // Has ownership.
+	QPushButton *mOpenInterpreterButton {};  // Has ownership.
+	QPushButton *mCreateInterpreterButton {};  // Has ownership.
 };
 
 }

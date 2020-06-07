@@ -82,13 +82,13 @@ Node &Multigraph::produceNode()
 	return *node;
 }
 
-void Multigraph::addNode(Node &node)
+void Multigraph::addNode(Node *node)
 {
-	if (&node.graph() != this || mNodes.contains(&node)) {
+	if (!node || &node->graph() != this || mNodes.contains(node)) {
 		return;
 	}
 
-	mNodes << &node;
+	mNodes << node;
 }
 
 Edge &Multigraph::produceEdge(uint type)

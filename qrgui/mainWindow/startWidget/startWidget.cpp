@@ -31,14 +31,11 @@
 
 using namespace qReal;
 
-StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager)
-	: mMainWindow(mainWindow)
+StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager, QWidget *parent)
+	: QWidget(parent)
+	, mMainWindow(mainWindow)
 	, mProjectManager(projectManager)
-	, mProjectListSize(SettingsManager::value("recentProjectsLimit", 5).toInt())  // TODO: Why 5?
-	, mNewProjectButton(nullptr)
-	, mOpenProjectButton(nullptr)
-	, mOpenInterpreterButton(nullptr)
-	, mCreateInterpreterButton(nullptr)
+	, mProjectListSize(SettingsManager::value("recentProjectsLimit", 5).toInt())  // TODO: Why 5?	
 {
 	setStyleSheet(BrandManager::styles()->startTabSubstrateBackgroundStyle());
 	QWidget * const mainWidget = createMainWidget();
@@ -52,7 +49,7 @@ StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager)
 
 QWidget *StartWidget::createMainWidget()
 {
-	QWidget * const result = new QWidget;
+	QWidget * const result = new QWidget(this);
 	result->setStyleSheet(BrandManager::styles()->startTabBackgroundStyle());
 
 	QWidget * const header = createHeader();
