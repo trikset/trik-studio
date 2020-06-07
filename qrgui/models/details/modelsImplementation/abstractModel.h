@@ -39,6 +39,7 @@ class QRGUI_MODELS_EXPORT AbstractModel : public QAbstractItemModel, public Mode
 	Q_OBJECT
 
 public:
+	virtual ~AbstractModel();
 	AbstractModel(const EditorManagerInterface &editorManagerInterface);
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;

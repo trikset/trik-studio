@@ -22,6 +22,8 @@ using namespace models;
 Models::Models(const QString &workingCopy, const EditorManagerInterface &editorManager)
 {
 	qrRepo::RepoApi *repoApi = new qrRepo::RepoApi(workingCopy);
+	mRepoApi.reset(repoApi);
+
 	mGraphicalModel.reset(new models::details::GraphicalModel(repoApi, editorManager));
 	mGraphicalPartModel.reset(new models::details::GraphicalPartModel(*repoApi, *mGraphicalModel));
 
@@ -36,7 +38,7 @@ Models::Models(const QString &workingCopy, const EditorManagerInterface &editorM
 
 	mLogicalModel.reset(new models::details::LogicalModel(repoApi, editorManager));
 	mExploser.reset(new Exploser(logicalModelAssistApi()));
-	mRepoApi.reset(repoApi);
+
 
 	mLogicalModel->connectToGraphicalModel(&*mGraphicalModel);
 	mGraphicalModel->connectToLogicalModel(&*mLogicalModel);

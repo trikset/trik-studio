@@ -75,7 +75,7 @@ public:
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
 			, const Settings &settings, QObject *parent = nullptr);
 
-	~RobotModel();
+	~RobotModel() = default;
 
 	void reinit();
 
@@ -201,7 +201,7 @@ private:
 
 	/// Simulated robot motors.
 	/// Has ownership.
-	QHash<kitBase::robotModel::PortInfo, Wheel *> mMotors;
+	QHash<kitBase::robotModel::PortInfo, QSharedPointer<Wheel>> mMotors;
 	/// Stores how many degrees the motor rotated on.
 	QHash<kitBase::robotModel::PortInfo, qreal> mTurnoverEngines;
 	/// Describes which wheel is driven by which motor.

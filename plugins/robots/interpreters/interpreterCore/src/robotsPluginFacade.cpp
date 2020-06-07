@@ -47,8 +47,12 @@ RobotsPluginFacade::RobotsPluginFacade()
 
 RobotsPluginFacade::~RobotsPluginFacade()
 {
-	qDeleteAll(mInterpreters.values().toSet());
-	mInterpreters.clear();
+	qDeleteAll(mInterpreters.values().toSet());	
+	for (auto &&kitId : mKitPluginManager.kitIds()) {
+		for (auto *kit : mKitPluginManager.kitsById(kitId)) {
+			kit->release();
+		}
+	}
 }
 
 void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)

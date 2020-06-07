@@ -544,13 +544,13 @@ IdList RepoApi::elementsByType(const QString &type, bool sensitivity, bool regEx
 {
 	const Qt::CaseSensitivity caseSensitivity = sensitivity ? Qt::CaseSensitive : Qt::CaseInsensitive;
 
-	QRegExp *regExp = new QRegExp(type,caseSensitivity);
+	QRegExp regExp(type,caseSensitivity);
 
 	IdList result;
 
 	if (regExpression) {
 		for (const Id &id : mRepository->elements()) {
-			if (id.element().contains(*regExp)) {
+			if (id.element().contains(regExp)) {
 				result.append(id);
 			}
 		}

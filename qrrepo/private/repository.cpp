@@ -31,6 +31,8 @@ Repository::Repository(const QString &workingFile)
 
 void Repository::init()
 {
+	qDeleteAll(mObjects);
+	mObjects.clear();
 	mObjects.insert(Id::rootId(), new LogicalObject(Id::rootId()));
 	mObjects[Id::rootId()]->setProperty("name", Id::rootId().toString());
 }
@@ -523,11 +525,9 @@ void Repository::printDebug() const
 
 bool Repository::exterminate()
 {
-	printDebug();
-	mObjects.clear();
+	printDebug();	
 	//serializer.clearWorkingDir();
-	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk(mObjects.values(), mMetaInfo);
-
+	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk({}, mMetaInfo);
 	init();
 	printDebug();
 
@@ -536,7 +536,6 @@ bool Repository::exterminate()
 
 void Repository::open(const QString &saveFile)
 {
-	mObjects.clear();
 	init();
 	mSerializer.setWorkingFile(saveFile);
 	mWorkingFile = saveFile;

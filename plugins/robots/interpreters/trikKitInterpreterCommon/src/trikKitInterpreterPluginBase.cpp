@@ -401,6 +401,14 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	handleImitationCameraWork();
 }
 
+void TrikKitInterpreterPluginBase::release()
+{
+	mTwoDModel.reset();
+	mTwoDRobotModel.reset();
+	mRealRobotModel.reset();
+	mTextualInterpreter.reset();
+}
+
 QList<kitBase::robotModel::RobotModelInterface *> TrikKitInterpreterPluginBase::robotModels()
 {
 	// @todo: restore it later

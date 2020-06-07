@@ -92,7 +92,12 @@ void Ev3KitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configu
 			, interpretersInterface
 			, configurator.qRealConfigurator().mainWindowDockInterface()
 			, configurator.qRealConfigurator().projectManager()
-			, configurator.interpreterControl());
+					 , configurator.interpreterControl());
+}
+
+void Ev3KitInterpreterPlugin::release()
+{
+	mTwoDModel.reset();
 }
 
 QString Ev3KitInterpreterPlugin::kitId() const

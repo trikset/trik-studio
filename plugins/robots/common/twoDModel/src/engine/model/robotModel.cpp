@@ -61,13 +61,8 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	reinit();
 }
 
-RobotModel::~RobotModel()
-{
-}
-
 void RobotModel::reinit()
 {
-	qDeleteAll(mMotors);
 	mMotors.clear();
 	mMarker = Qt::transparent;
 
@@ -91,7 +86,7 @@ void RobotModel::clear()
 
 RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees, const PortInfo &port, bool isUsed)
 {
-	Wheel *motor = new Wheel();
+	auto *motor = new Wheel();
 	motor->radius = radius;
 	motor->speed = speed;
 	motor->degrees = degrees;
@@ -103,7 +98,7 @@ RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees
 		motor->activeTimeType = DoByLimit;
 	}
 
-	mMotors[port] = motor;
+	mMotors[port].reset(motor);
 
 	/// @todo We need some mechanism to set correspondence between motors and encoders. In NXT motors and encoders are
 	///       physically plugged into one port, so we can find corresponding port by name. But in TRIK encoders can be
@@ -140,8 +135,8 @@ void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool
 
 void RobotModel::countMotorTurnover()
 {
-	for (Wheel * const motor : mMotors) {
-		const PortInfo port = mMotors.key(motor);
+	for (auto &&motor : mMotors) {
+		const PortInfo &port = mMotors.key(motor);
 		const qreal degrees = Timeline::timeInterval * motor->spoiledSpeed * mRobotModel.onePercentAngularVelocity();
 		const qreal actualDegrees = mPhysicsEngine->isRobotStuck() ? -degrees : degrees;
 		mTurnoverEngines[mMotorToEncoderPortMap[port]] += actualDegrees;
@@ -191,7 +186,7 @@ void RobotModel::stopRobot()
 	mIsFirstAngleStamp = true;
 	mPosStamps.clear();
 	emit playingSoundChanged(false);
-	for (Wheel * const engine : mMotors) {
+	for (auto &&engine : mMotors) {
 		engine->speed = 0;
 		engine->breakMode = true;
 	}
@@ -340,7 +335,7 @@ void RobotModel::recalculateParams()
 			return;
 		}
 
-		Wheel * const engine = mMotors.value(port, nullptr);
+		auto &engine = mMotors.value(port);
 		if (!engine) {
 			return;
 		}
