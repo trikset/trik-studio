@@ -53,6 +53,7 @@ public:
 	bool suggestToSaveChangesOrCancel() override;
 
 	void refreshWindowTitleAccordingToSaveFile();
+	bool saveText();
 
 	bool askQuestion(const QString &title, const QString &question) const override;
 
