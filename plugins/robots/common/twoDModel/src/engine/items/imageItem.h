@@ -29,6 +29,8 @@ class ImageItem : public graphicsUtils::AbstractItem
 	Q_PROPERTY(QString path READ path WRITE setPath)
 	Q_PROPERTY(bool background READ isBackground WRITE setBackgroundRole)
 
+	Q_DISABLE_COPY(ImageItem)
+
 public:
 	ImageItem(model::Image *image, const QRect &geometry);
 

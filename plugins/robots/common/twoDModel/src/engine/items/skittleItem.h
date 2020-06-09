@@ -25,6 +25,7 @@ namespace items {
 class SkittleItem : public graphicsUtils::AbstractItem, public SolidItem
 {
 	Q_OBJECT
+	Q_DISABLE_COPY(SkittleItem)
 
 public:
 	explicit SkittleItem(const QPointF &position);

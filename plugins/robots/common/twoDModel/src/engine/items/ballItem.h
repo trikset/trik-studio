@@ -26,6 +26,7 @@ namespace items {
 class BallItem : public graphicsUtils::AbstractItem, public SolidItem
 {
 	Q_OBJECT
+	Q_DISABLE_COPY(BallItem)
 
 public:
 	explicit BallItem(const QPointF &position);
