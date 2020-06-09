@@ -763,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+683"/>
+        <location line="+684"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -779,7 +779,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+110"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -871,7 +871,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+203"/>
+        <location line="+204"/>
         <source>Gestures Show</source>
         <translation>Afficher les gestes</translation>
     </message>
