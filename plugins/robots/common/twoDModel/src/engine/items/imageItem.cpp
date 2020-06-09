@@ -26,6 +26,9 @@ using namespace graphicsUtils;
 
 ImageItem::ImageItem(model::Image *image, const QRect &geometry)
 	: mImage(image)
+	, mStrokePen(QPen(Qt::green))
+	, mResizeCursor(Qt::SizeAllCursor)
+	, mHoverCursor(Qt::PointingHandCursor)
 {
 	setX(0);
 	setY(0);
@@ -35,6 +38,8 @@ ImageItem::ImageItem(model::Image *image, const QRect &geometry)
 	setY2(geometry.bottom());
 	setBackgroundRole(false);
 	unsetCursor();
+
+	mStrokePen.setWidthF(1.75);
 }
 
 AbstractItem *ImageItem::clone() const

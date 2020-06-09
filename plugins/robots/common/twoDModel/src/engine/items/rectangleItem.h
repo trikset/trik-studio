@@ -56,6 +56,16 @@ private:
 	void setPrivateData();
 
 	graphicsUtils::RectangleImpl mRectangleImpl;
+
+	QPointF mOldPos;
+	qreal mOldX1 {};
+	qreal mOldY1 {};
+	qreal mOldX2 {};
+	qreal mOldY2 {};
+
+	QPen mStrokePen;
+	Qt::CursorShape mResizeCursor;
+	Qt::CursorShape mHoverCursor;
 };
 
 }

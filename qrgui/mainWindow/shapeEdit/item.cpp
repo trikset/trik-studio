@@ -23,6 +23,9 @@
 Item::Item(graphicsUtils::AbstractItem* parent)
 	: AbstractItem(parent), mDomElementType(noneType)
 	, mScalingState(noneScale)
+	, mStrokePen(QPen(Qt::green))
+	, mResizeCursor(Qt::SizeAllCursor)
+	, mHoverCursor(Qt::PointingHandCursor)
 {
 	mNeedScalingRect = false;
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
@@ -32,6 +35,8 @@ Item::Item(graphicsUtils::AbstractItem* parent)
 	setBrush(brush);
 	mZValue = 0;
 	initListScalePoint();
+
+	mStrokePen.setWidthF(1.75);
 }
 
 void Item::setItemZValue(int zValue)

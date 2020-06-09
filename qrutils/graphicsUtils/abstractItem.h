@@ -170,6 +170,8 @@ signals:
 	/// Emitted when user releases left mouse button on this item.
 	void mouseInteractionStopped();
 
+
+
 protected:
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
@@ -180,16 +182,6 @@ protected:
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void copyTo(AbstractItem * const other) const;
-
-	QPointF mOldPos;
-	qreal mOldX1 {};
-	qreal mOldY1 {};
-	qreal mOldX2 {};
-	qreal mOldY2 {};
-
-	QPen mStrokePen;
-	Qt::CursorShape mResizeCursor;
-	Qt::CursorShape mHoverCursor;
 
 private:
 	DragState mDragState;
@@ -202,6 +194,16 @@ private:
 	QString mId;
 	bool mEditable;
 	bool mHovered;
+
+	QPointF mOldPos;
+	qreal mOldX1 {};
+	qreal mOldY1 {};
+	qreal mOldX2 {};
+	qreal mOldY2 {};
+
+	QPen mStrokePen;
+	Qt::CursorShape mResizeCursor;
+	Qt::CursorShape mHoverCursor;
 };
 
 }

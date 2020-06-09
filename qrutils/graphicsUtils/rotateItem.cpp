@@ -18,7 +18,11 @@ using namespace graphicsUtils;
 
 RotateItem::RotateItem(QGraphicsItem *parent)
 	: AbstractItem(parent)
+	, mStrokePen(QPen(Qt::green))
+	, mResizeCursor(Qt::SizeAllCursor)
+	, mHoverCursor(Qt::PointingHandCursor)
 {
+	mStrokePen.setWidthF(1.75);
 }
 
 QRectF RotateItem::rect() const

@@ -25,11 +25,16 @@ using namespace twoDModel::items;
 BallItem::BallItem(const QPointF &position)
 	: mStartRotation(0.0f)
 	, mSvgRenderer(new QSvgRenderer)
+	, mStrokePen(QPen(Qt::green))
+	, mResizeCursor(Qt::SizeAllCursor)
+	, mHoverCursor(Qt::PointingHandCursor)
 {
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
 	setPos(position);
 	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
+
+	mStrokePen.setWidthF(1.75);
 }
 
 BallItem::~BallItem()

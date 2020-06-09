@@ -20,12 +20,17 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 EllipseItem::EllipseItem(const QPointF &begin, const QPointF &end)
+	: mStrokePen(QPen(Qt::green))
+	, mResizeCursor(Qt::SizeAllCursor)
+	, mHoverCursor(Qt::PointingHandCursor)
 {
 	setX1(begin.x());
 	setY1(begin.y());
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
+
+	mStrokePen.setWidthF(1.75);
 }
 
 AbstractItem *EllipseItem::clone() const

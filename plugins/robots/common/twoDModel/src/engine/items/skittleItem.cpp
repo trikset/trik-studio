@@ -31,6 +31,10 @@ SkittleItem::SkittleItem(const QPointF &position)
 	setPos(position);
 	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
+	mResizeCursor = Qt::SizeAllCursor;
+	mHoverCursor = Qt::PointingHandCursor;
+	mStrokePen = QPen(Qt::green);
+	mStrokePen.setWidthF(1.75);
 }
 
 SkittleItem::~SkittleItem()
