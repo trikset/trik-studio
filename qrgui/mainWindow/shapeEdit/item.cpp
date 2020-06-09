@@ -23,9 +23,6 @@
 Item::Item(graphicsUtils::AbstractItem* parent)
 	: AbstractItem(parent), mDomElementType(noneType)
 	, mScalingState(noneScale)
-	, mStrokePen(QPen(Qt::green))
-	, mResizeCursor(Qt::SizeAllCursor)
-	, mHoverCursor(Qt::PointingHandCursor)
 {
 	mNeedScalingRect = false;
 	setFlag(QGraphicsItem::ItemIsSelectable, true);

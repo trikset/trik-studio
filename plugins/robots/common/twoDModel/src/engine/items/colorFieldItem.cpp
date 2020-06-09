@@ -18,12 +18,8 @@ using namespace twoDModel::items;
 
 ColorFieldItem::ColorFieldItem(QGraphicsItem* parent)
 	: graphicsUtils::AbstractItem(parent)
-	, mStrokePen(QPen(Qt::green))
-	, mResizeCursor(Qt::SizeAllCursor)
-	, mHoverCursor(Qt::PointingHandCursor)
 {
 	setZValue(ZValue::Shape);
-
 	mStrokePen.setWidthF(1.75);
 }
 

@@ -27,10 +27,6 @@ using namespace graphicsUtils;
 
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	: mImage(":/icons/2d_wall.png")
-	, mWallWidth(10)
-	, mStrokePen(QPen(Qt::green))
-	, mResizeCursor(Qt::SizeAllCursor)
-	, mHoverCursor(Qt::PointingHandCursor)
 {
 	setX1(begin.x());
 	setY1(begin.y());

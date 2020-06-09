@@ -93,7 +93,7 @@ private:
 	int mCellNumbY2 = 0;
 
 	QPainterPath mPath;
-	int mWallWidth;
+	int mWallWidth {10};
 
 	QPointF mOldPos;
 	qreal mOldX1 {};
@@ -101,9 +101,9 @@ private:
 	qreal mOldX2 {};
 	qreal mOldY2 {};
 
-	QPen mStrokePen;
-	Qt::CursorShape mResizeCursor;
-	Qt::CursorShape mHoverCursor;
+	QPen mStrokePen {QPen(Qt::green)};
+	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
+	Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
 
 }

@@ -74,9 +74,9 @@ private:
 	qreal mOldX2 {};
 	qreal mOldY2 {};
 
-	QPen mStrokePen;
-	Qt::CursorShape mResizeCursor;
-	Qt::CursorShape mHoverCursor;
+	QPen mStrokePen {QPen(Qt::green)};
+	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
+	Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
 
 }
