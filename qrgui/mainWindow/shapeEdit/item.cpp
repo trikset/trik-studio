@@ -21,8 +21,7 @@
 #include <QtCore/QList>
 
 Item::Item(graphicsUtils::AbstractItem* parent)
-	: AbstractItem(parent), mDomElementType(noneType)
-	, mScalingState(noneScale)
+	: AbstractItem(parent)
 {
 	mNeedScalingRect = false;
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
