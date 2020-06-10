@@ -35,8 +35,6 @@ WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsScenePositionChanges);
 	setPrivateData();
 	setAcceptDrops(true);
-
-	mStrokePen.setWidthF(1.75);
 }
 
 WallItem *WallItem::clone() const
@@ -119,7 +117,7 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	QPen pen(mStrokePen);
+	QPen pen(getStrokePen());
 	if (!isSelected() && isHovered()) {
 		pen.setWidthF(2.25);
 		pen.setDashPattern({3,3});

@@ -19,7 +19,6 @@ using namespace graphicsUtils;
 RotateItem::RotateItem(QGraphicsItem *parent)
 	: AbstractItem(parent)
 {
-	mStrokePen.setWidthF(1.75);
 }
 
 QRectF RotateItem::rect() const

@@ -48,6 +48,12 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 	savePos();
 }
 
+AbstractItem::AbstractItem(Qt::CursorShape resizeCursor, QGraphicsItem *parent)
+	: AbstractItem(parent)
+{
+	mResizeCursor = resizeCursor;
+}
+
 QRectF AbstractItem::calcNecessaryBoundingRect() const
 {
 	return boundingRect();
@@ -597,6 +603,16 @@ void AbstractItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseReleaseEvent(event);
 	emit mouseInteractionStopped();
+}
+
+Qt::CursorShape AbstractItem::getResizeCursor()
+{
+	return mResizeCursor;
+}
+
+QPen AbstractItem::getStrokePen()
+{
+	return mStrokePen;
 }
 
 void AbstractItem::copyTo(AbstractItem * const other) const

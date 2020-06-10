@@ -31,7 +31,6 @@ SkittleItem::SkittleItem(const QPointF &position)
 	setPos(position);
 	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
-	mStrokePen.setWidthF(1.75);
 }
 
 SkittleItem::~SkittleItem()
@@ -63,9 +62,9 @@ void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	painter->setPen(mStrokePen);
+	painter->setPen(getStrokePen());
 	if (isSelected()) {
-		QColor extraColor = mStrokePen.color();
+		QColor extraColor = getStrokePen().color();
 		extraColor.setAlphaF(0.5);
 		painter->setBrush(extraColor);
 	}

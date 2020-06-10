@@ -35,8 +35,6 @@ ImageItem::ImageItem(model::Image *image, const QRect &geometry)
 	setY2(geometry.bottom());
 	setBackgroundRole(false);
 	unsetCursor();
-
-	mStrokePen.setWidthF(1.75);
 }
 
 AbstractItem *ImageItem::clone() const
@@ -200,7 +198,7 @@ void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
 	if (isSelected() || !isBackground()) {
 		if (resizeArea().contains(event->pos())) {
-			setCursor(mResizeCursor);
+			setCursor(getResizeCursor());
 		} else {
 			unsetCursor();
 		}

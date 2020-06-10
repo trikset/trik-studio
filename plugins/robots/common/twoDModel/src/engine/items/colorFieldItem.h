@@ -47,17 +47,6 @@ public:
 
 	/// Creates a copy of this graphical item. Transfers ownership to the caller.
 	virtual AbstractItem *clone() const = 0;
-
-private:
-	QPointF mOldPos;
-	qreal mOldX1 {};
-	qreal mOldY1 {};
-	qreal mOldX2 {};
-	qreal mOldY2 {};
-
-	QPen mStrokePen {QPen(Qt::green)};
-	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
-	Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
 
 }

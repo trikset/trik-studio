@@ -95,16 +95,6 @@ private:
 	model::Image *mImage = nullptr; // Does not have ownership
 
 	bool mBackgroundRole {};
-
-	QPointF mOldPos;
-	qreal mOldX1 {};
-	qreal mOldY1 {};
-	qreal mOldX2 {};
-	qreal mOldY2 {};
-
-	QPen mStrokePen {QPen(Qt::green)};
-	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
-	Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
 
 }

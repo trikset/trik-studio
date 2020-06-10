@@ -20,7 +20,6 @@ ColorFieldItem::ColorFieldItem(QGraphicsItem* parent)
 	: graphicsUtils::AbstractItem(parent)
 {
 	setZValue(ZValue::Shape);
-	mStrokePen.setWidthF(1.75);
 }
 
 ColorFieldItem::~ColorFieldItem()

@@ -139,6 +139,10 @@ public:
 
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
+	Qt::CursorShape getResizeCursor();
+
+	QPen getStrokePen();
+
 signals:
 	/// Emitted when QGraphicsItem has repositioned.
 	void positionChanged(const QPointF &pos);
@@ -170,9 +174,9 @@ signals:
 	/// Emitted when user releases left mouse button on this item.
 	void mouseInteractionStopped();
 
-
-
 protected:
+	explicit AbstractItem(Qt::CursorShape resizeCursor, QGraphicsItem *parent = nullptr);
+
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 

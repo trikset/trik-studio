@@ -31,8 +31,6 @@ Item::Item(graphicsUtils::AbstractItem* parent)
 	setBrush(brush);
 	mZValue = 0;
 	initListScalePoint();
-
-	mStrokePen.setWidthF(1.75);
 }
 
 void Item::setItemZValue(int zValue)

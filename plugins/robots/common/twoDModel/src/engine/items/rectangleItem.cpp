@@ -26,10 +26,6 @@ RectangleItem::RectangleItem(const QPointF &begin, const QPointF &end)
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
-	mResizeCursor = Qt::SizeAllCursor;
-	mHoverCursor = Qt::PointingHandCursor;
-	mStrokePen = QPen(Qt::green);
-	mStrokePen.setWidthF(1.75);
 }
 
 AbstractItem *RectangleItem::clone() const
@@ -77,7 +73,7 @@ void RectangleItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* 
 void RectangleItem::drawExtractionForItem(QPainter *painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
-	painter->setPen(mStrokePen);
+	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
 	painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	if (!filled()) {
