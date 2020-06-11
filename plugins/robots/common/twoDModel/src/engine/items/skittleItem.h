@@ -61,8 +61,8 @@ public:
 	QPainterPath path() const;
 
 private:
-	QPointF mStartPosition {QPointF()};
-	qreal mStartRotation {0.0f};
+	QPointF mStartPosition;
+	qreal mStartRotation {0.0};
 
 	QSvgRenderer *mSvgRenderer;
 };

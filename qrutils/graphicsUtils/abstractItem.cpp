@@ -28,6 +28,7 @@ const qreal epsilon = 0.0000001;
 
 AbstractItem::AbstractItem(QGraphicsItem* parent)
 	: QGraphicsObject(parent)
+	, mId(QUuid::createUuid().toString())
 {
 	setAcceptHoverEvents(true);
 	setCursor(mHoverCursor);

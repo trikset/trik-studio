@@ -195,7 +195,7 @@ private:
 	qreal mY1 {0};
 	qreal mX2 {0};
 	qreal mY2 {0};
-	QString mId {QUuid::createUuid().toString()};
+	QString mId;
 	bool mEditable {true};
 	bool mHovered {false};
 
@@ -205,7 +205,7 @@ private:
 	qreal mOldX2 {};
 	qreal mOldY2 {};
 
-	QPen mStrokePen {QPen(Qt::green)};
+	QPen mStrokePen {Qt::green};
 	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
 	const Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
