@@ -64,7 +64,7 @@ public:
 
 private:
 	QPointF mStartPosition;
-	qreal mStartRotation;
+	qreal mStartRotation {0.0f};
 
 	QSvgRenderer *mSvgRenderer;
 };

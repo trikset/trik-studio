@@ -96,9 +96,9 @@ public:
 
 protected:
 	QList<QPair<ScalingPointState, QColor> > mListScalePoint;
-	bool mNeedScalingRect;
+	bool mNeedScalingRect {false};
 	DomElementTypes mDomElementType {noneType};
 	ScalingPointState mScalingState {noneScale};
-	int mZValue;
+	int mZValue {0};
 	VisibilityCondition mVisibilityCondition;
 };

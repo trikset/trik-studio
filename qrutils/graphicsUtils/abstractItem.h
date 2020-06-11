@@ -188,16 +188,16 @@ protected:
 	void copyTo(AbstractItem * const other) const;
 
 private:
-	DragState mDragState;
+	DragState mDragState {None};
 	QPen mPen;
 	QBrush mBrush;
-	qreal mX1;
-	qreal mY1;
-	qreal mX2;
-	qreal mY2;
-	QString mId;
-	bool mEditable;
-	bool mHovered;
+	qreal mX1 {0};
+	qreal mY1 {0};
+	qreal mX2 {0};
+	qreal mY2 {0};
+	QString mId {QUuid::createUuid().toString()};
+	bool mEditable {true};
+	bool mHovered {false};
 
 	QPointF mOldPos;
 	qreal mOldX1 {};
@@ -205,9 +205,9 @@ private:
 	qreal mOldX2 {};
 	qreal mOldY2 {};
 
-	QPen mStrokePen;
-	Qt::CursorShape mResizeCursor;
-	Qt::CursorShape mHoverCursor;
+	QPen mStrokePen {QPen(Qt::green)};
+	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
+	const Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
 
 }

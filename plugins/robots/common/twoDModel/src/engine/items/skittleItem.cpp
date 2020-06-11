@@ -23,9 +23,7 @@
 using namespace twoDModel::items;
 
 SkittleItem::SkittleItem(const QPointF &position)
-	: mStartPosition(QPointF())
-	, mStartRotation(0.0f)
-	, mSvgRenderer(new QSvgRenderer)
+	: mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
 	setPos(position);

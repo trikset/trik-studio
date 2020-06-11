@@ -23,8 +23,7 @@
 using namespace twoDModel::items;
 
 BallItem::BallItem(const QPointF &position)
-	: mStartRotation(0.0f)
-	, mSvgRenderer(new QSvgRenderer)
+	: mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
 	setPos(position);

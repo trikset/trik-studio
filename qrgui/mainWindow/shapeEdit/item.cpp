@@ -23,13 +23,11 @@
 Item::Item(graphicsUtils::AbstractItem* parent)
 	: AbstractItem(parent)
 {
-	mNeedScalingRect = false;
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
 	setFlag(QGraphicsItem::ItemIsMovable, true);
 	QBrush brush(this->brush());
 	brush.setColor(pen().color());
 	setBrush(brush);
-	mZValue = 0;
 	initListScalePoint();
 }
 
