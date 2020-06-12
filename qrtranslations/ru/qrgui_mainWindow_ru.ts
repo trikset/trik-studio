@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+882"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+860"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+110"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1058"/>
+        <location line="-1041"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -832,7 +832,7 @@ WARNING: The settings will be restored after application restart</source>
 ВНИМАНИЕ: Настройки будут сброшены после перезапуска приложения</translation>
     </message>
     <message>
-        <location line="+436"/>
+        <location line="+419"/>
         <source>Could not save file, try to save it to another place</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
@@ -892,7 +892,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Показать/спрятать панель ошибок</translation>
     </message>
     <message>
-        <location line="+203"/>
+        <location line="+204"/>
         <source>Gestures Show</source>
         <translation>Жесты мышью</translation>
     </message>
@@ -1094,7 +1094,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+138"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
         <source>New project</source>
         <translation>Создать проект</translation>
     </message>

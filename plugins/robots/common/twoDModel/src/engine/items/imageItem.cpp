@@ -198,7 +198,7 @@ void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
 	if (isSelected() || !isBackground()) {
 		if (resizeArea().contains(event->pos())) {
-			setCursor(mResizeCursor);
+			setCursor(getResizeCursor());
 		} else {
 			unsetCursor();
 		}

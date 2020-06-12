@@ -14,7 +14,6 @@
 
 #include "edgeInfo.h"
 #include <QMimeData>
-
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/definitions.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>

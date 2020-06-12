@@ -27,7 +27,6 @@ using namespace graphicsUtils;
 
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	: mImage(":/icons/2d_wall.png")
-	, mWallWidth(10)
 {
 	setX1(begin.x());
 	setY1(begin.y());
@@ -118,7 +117,7 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	QPen pen(mStrokePen);
+	QPen pen(getStrokePen());
 	if (!isSelected() && isHovered()) {
 		pen.setWidthF(2.25);
 		pen.setDashPattern({3,3});

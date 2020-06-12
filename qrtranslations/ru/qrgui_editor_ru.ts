@@ -191,7 +191,7 @@
         <translation>Соединить с данным элементом</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+312"/>
         <source>Replace by...</source>
         <translation>Заменить на...</translation>
     </message>

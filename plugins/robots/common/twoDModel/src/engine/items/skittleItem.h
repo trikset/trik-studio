@@ -25,6 +25,7 @@ namespace items {
 class SkittleItem : public graphicsUtils::AbstractItem, public SolidItem
 {
 	Q_OBJECT
+	Q_DISABLE_COPY(SkittleItem)
 
 public:
 	explicit SkittleItem(const QPointF &position);
@@ -61,7 +62,7 @@ public:
 
 private:
 	QPointF mStartPosition;
-	qreal mStartRotation;
+	qreal mStartRotation {0.0};
 
 	QSvgRenderer *mSvgRenderer;
 };

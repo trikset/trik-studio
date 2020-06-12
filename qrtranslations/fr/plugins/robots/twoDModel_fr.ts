@@ -38,7 +38,7 @@
         <translation>L&apos;élément racine doit être une balise &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+36"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Il doit y exister une contrainte &quot;timelimit&quot;.</translation>
     </message>
@@ -263,7 +263,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+115"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+109"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
@@ -284,7 +284,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+42"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+41"/>
         <source>Ball (B)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -332,7 +332,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+41"/>
         <source>Can (C)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -348,7 +348,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+62"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+61"/>
         <source>Wall (W)</source>
         <translation>Mur (W)</translation>
     </message>

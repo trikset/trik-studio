@@ -187,7 +187,7 @@
         <translation type="unfinished">Relier avec l&apos;élement courant</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+312"/>
         <source>Replace by...</source>
         <translation type="unfinished"></translation>
     </message>
