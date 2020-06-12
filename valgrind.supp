@@ -1,4 +1,37 @@
 {
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:g_malloc
+   fun:g_slice_alloc
+   fun:g_slice_alloc0
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.5600.4
+   fun:g_main_context_dispatch
+   ...
+   fun:start_thread
+   fun:clone
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   ...
+   fun:compile_matchingpath
+   fun:compile_bracket_matchingpath
+   fun:compile_matchingpath
+   fun:compile_bracket_matchingpath
+   fun:compile_matchingpath
+   fun:jit_compile
+   fun:pcre2_jit_compile_16
+   fun:_ZN25QRegularExpressionPrivate15optimizePatternEv
+   fun:compilePattern
+   fun:_ZNK18QRegularExpression5matchERK7QStringiNS_9MatchTypeE6QFlagsINS_11MatchOptionEE
+   fun:_ZNK19QDirIteratorPrivate14matchesFiltersERK7QStringRK9QFileInfo
+   fun:entryMatches
+   fun:_ZN19QDirIteratorPrivate7advanceEv
+   fun:_ZN19QDirIteratorPrivateC1ERK16QFileSystemEntryRK11QStringList6QFlagsIN4QDir6FilterEES6_IN12QDirIterator12IteratorFlagEEb
+}
+{
    <Ignore-NVIDIA-libs>
    Memcheck:Leak
    match-leak-kinds: possible
