@@ -208,7 +208,7 @@ void Diagram::initPalette(const QDomElement &paletteElement)
 
 bool Diagram::resolve()
 {
-	for (auto &&import : mImports) {
+	for(auto &&import : mImports) {
 		Type *importedType = mEditor->findType(import.name);
 		if (importedType == nullptr) {
 			qDebug() << "ERROR: imported type" << import.name << "not found, skipping";
@@ -222,7 +222,7 @@ bool Diagram::resolve()
 		mTypes.insert(copiedType->qualifiedName(), copiedType);
 	}
 
-	foreach(Type *type, mTypes.values())
+	for(auto *type: mTypes.values())
 		if (!type->resolve()) {
 			qDebug() << "ERROR: can't resolve type" << type->name();
 			return false;

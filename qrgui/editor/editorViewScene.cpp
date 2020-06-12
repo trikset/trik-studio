@@ -505,8 +505,10 @@ EdgeElement * EditorViewScene::edgeForInsertion(const QPointF &scenePos)
 		EdgeElement *edge = dynamic_cast<EdgeElement *>(item);
 		if (edge && edge->isDividable()) {
 			QSizeF portSize(squareSize, squareSize);
-			QRectF startPort(edge->mapToScene(edge->line().first()) - QPointF(squareSize / 2.0, squareSize / 2.0), portSize);
-			QRectF endPort(edge->mapToScene(edge->line().last()) - QPointF(squareSize / 2.0, squareSize / 2.0), portSize);
+			QRectF startPort(edge->mapToScene(edge->line().first())
+							 - QPointF(squareSize / 2.0, squareSize / 2.0), portSize);
+			QRectF endPort(edge->mapToScene(edge->line().last())
+						   - QPointF(squareSize / 2.0, squareSize / 2.0), portSize);
 			if (!startPort.contains(scenePos) && !endPort.contains(scenePos)) {
 				return edge;
 			}

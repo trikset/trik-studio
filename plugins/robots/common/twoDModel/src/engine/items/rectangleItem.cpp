@@ -73,7 +73,7 @@ void RectangleItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* 
 void RectangleItem::drawExtractionForItem(QPainter *painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
-	painter->setPen(mStrokePen);
+	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
 	painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	if (!filled()) {
