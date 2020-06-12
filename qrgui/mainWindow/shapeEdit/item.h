@@ -26,6 +26,8 @@
 
 class Item : public graphicsUtils::AbstractItem
 {
+	Q_DISABLE_COPY(Item)
+
 public:
 	enum DomElementTypes {
 		noneType
@@ -94,9 +96,9 @@ public:
 
 protected:
 	QList<QPair<ScalingPointState, QColor> > mListScalePoint;
-	bool mNeedScalingRect;
-	DomElementTypes mDomElementType;
-	ScalingPointState mScalingState;
-	int mZValue;
+	bool mNeedScalingRect {false};
+	DomElementTypes mDomElementType {noneType};
+	ScalingPointState mScalingState {noneScale};
+	int mZValue {0};
 	VisibilityCondition mVisibilityCondition;
 };

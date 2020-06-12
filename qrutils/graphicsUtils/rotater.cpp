@@ -27,6 +27,7 @@ using namespace mathUtils;
 const int rotaterLength = 30;
 
 Rotater::Rotater()
+	: AbstractItem(Qt::PointingHandCursor)
 {
 	setFlag(ItemIsSelectable);
 	setFlag(ItemIsMovable, false);
@@ -37,8 +38,6 @@ Rotater::Rotater()
 	pen.setWidth(3);
 	setPen(pen);
 	setBrush(Qt::NoBrush);
-
-	mResizeCursor = mHoverCursor;
 }
 
 void Rotater::setMasterItem(RotateItem *masterItem)
