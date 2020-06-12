@@ -287,7 +287,9 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 	// args ::= ‘(’ [explist] ‘)’ | tableconstructor | String
 	args <<= ((-LuaTokenTypes::openingBracket & ~explist & -LuaTokenTypes::closingBracket)
 			| tableconstructor
-			| LuaTokenTypes::string >> [] (Token<LuaTokenTypes> const &token) { return new ast::String(token.lexeme()); }
+			| LuaTokenTypes::string >> [] (const Token<LuaTokenTypes> &token) {
+											return new ast::String(token.lexeme());
+										}
 			) >> [this] (QSharedPointer<ast::Node> node) {
 					if (node->is<TemporaryList>()) {
 						return node;

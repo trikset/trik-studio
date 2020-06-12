@@ -220,8 +220,10 @@ QRectF XmlLoader::readRectOfXandY(const QDomElement &docItem)
 	return QRectF(x1, y1, x2 - x1, y2 - y1);
 }
 
-QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(const QPair<QString, bool> &pointX1, const QPair<QString, bool> &pointX2
-		, const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2)
+QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(const QPair<QString, bool> &pointX1
+												   , const QPair<QString, bool> &pointX2
+												   , const QPair<QString, bool> &pointY1
+												   , const QPair<QString, bool> &pointY2)
 {
 	qreal x1 = pointX1.first.toDouble() + mDrift.x();
 	qreal x2 = pointX2.first.toDouble() + mDrift.x();

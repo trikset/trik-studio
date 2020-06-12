@@ -1,7 +1,6 @@
 #!/usr/bin/tclsh
+#    NoOldSIGNALnSLOT
 set rules {
     ForeachsForbidden
-    NoQDebug
-    NoOldSIGNALnSLOT
     NoOldInvokeMethod
 }

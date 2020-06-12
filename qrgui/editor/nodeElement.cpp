@@ -1452,8 +1452,8 @@ QRectF NodeElement::diagramRenderingRect() const
 			, mModels
 			);
 
-	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial->boundingRect().width() - 3 * squareSize);
-	const qreal yCoeff = (boundingRect().height() - 3 * squareSize) / (initial->boundingRect().height() - 3 *squareSize);
+	const auto xCoeff = (boundingRect().width() - 3 * squareSize) / (initial->boundingRect().width() - 3 * squareSize);
+	const auto yCoeff = (boundingRect().height() - 3 * squareSize)/ (initial->boundingRect().height()- 3 * squareSize);
 
 	delete initial;
 

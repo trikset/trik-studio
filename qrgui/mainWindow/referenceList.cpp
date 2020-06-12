@@ -93,7 +93,7 @@ void ReferenceList::valueChanged()
 QStringList ReferenceList::getNewValue() const
 {
 	QStringList newValue;
-	foreach(QListWidgetItem *item, mUi->listWidget->selectedItems()) {
+	for(auto *item: mUi->listWidget->selectedItems()) {
 		newValue << item->data(Qt::UserRole).toString();
 	}
 	return newValue;

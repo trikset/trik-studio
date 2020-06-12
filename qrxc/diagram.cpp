@@ -222,7 +222,7 @@ bool Diagram::resolve()
 		mTypes.insert(copiedType->qualifiedName(), copiedType);
 	}
 
-	foreach(Type *type, mTypes.values())
+	for(auto *type: mTypes.values())
 		if (!type->resolve()) {
 			qDebug() << "ERROR: can't resolve type" << type->name();
 			return false;

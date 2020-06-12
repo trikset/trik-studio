@@ -44,7 +44,7 @@ public:
 			, const QString &kit
 			, const QStringList &commands
 			, const QString &startedMessage
-                        , const std::function<QString()> &robotIpGetter
+			, const std::function<QString()> &robotIpGetter
 			);
 
 	~UploaderTool() override;

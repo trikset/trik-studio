@@ -128,7 +128,7 @@
         <translation>Присваивание вызову функции невозможно</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+127"/>
         <source>In &apos;args&apos; semantic action node is of incorrect type</source>
         <translation>Узел в семантическом действии &apos;args&apos; неправильного типа</translation>
     </message>
