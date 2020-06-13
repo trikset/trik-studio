@@ -415,7 +415,7 @@ QList<Object*> Repository::allChildrenOfWithLogicalId(const Id &id) const
 
 	// along with each ID we also add its logical ID.
 
-	foreach(const Id &childId, mObjects[id]->children())
+	for(const auto &childId: mObjects[id]->children())
 		result << allChildrenOf(childId)
 				<< allChildrenOf(logicalId(childId));
 	return result;
@@ -477,7 +477,7 @@ bool Repository::saveDiagramsById(QHash<QString, IdList> const &diagramIds)
 
 void Repository::remove(const IdList &list) const
 {
-	foreach(const Id &id, list) {
+	for(const auto &id: list) {
 		qDebug() << id.toString();
 		mSerializer.removeFromDisk(id);
 	}

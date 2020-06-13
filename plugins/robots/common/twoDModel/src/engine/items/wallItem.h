@@ -25,6 +25,7 @@ namespace items {
 class WallItem : public graphicsUtils::AbstractItem, public SolidItem
 {
 	Q_OBJECT
+	Q_DISABLE_COPY(WallItem)
 
 public:
 	WallItem(const QPointF &begin, const QPointF &end);
@@ -92,7 +93,7 @@ private:
 	int mCellNumbY2 = 0;
 
 	QPainterPath mPath;
-	int mWallWidth;
+	int mWallWidth {10};
 };
 
 }

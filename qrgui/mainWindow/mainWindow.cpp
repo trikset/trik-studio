@@ -631,7 +631,7 @@ void MainWindow::openRecentProjectsMenu()
 
 void MainWindow::tryToSave()
 {
-	if(!mProjectManager->saveOrSuggestToSaveAs()) {
+	if(!mProjectManager->saveText() && !mProjectManager->saveOrSuggestToSaveAs()) {
 		mErrorReporter->addWarning(tr("Could not save file, try to save it to another place"));
 	}
 }
@@ -746,6 +746,7 @@ void MainWindow::openTab(QWidget *tab, const QString &title)
 
 void MainWindow::closeTab(QWidget *tab)
 {
+	mUi->tabs->setCurrentWidget(tab);
 	closeTab(mUi->tabs->indexOf(tab));
 }
 
@@ -926,7 +927,6 @@ void MainWindow::closeCurrentTab()
 
 void MainWindow::closeTab(int index)
 {
-	switchToTab(index);
 	QWidget * const widget = mUi->tabs->widget(index);
 	bool isClosed = false;
 
@@ -1341,6 +1341,7 @@ bool MainWindow::closeTab(const QModelIndex &graphicsIndex)
 	for (int i = 0; i < mUi->tabs->count(); i++) {
 		EditorView * const tab = (dynamic_cast<EditorView *>(mUi->tabs->widget(i)));
 		if (tab && tab->mvIface().rootIndex() == graphicsIndex) {
+			mUi->tabs->setCurrentWidget(tab);
 			closeTab(i);
 			return true;
 		}

@@ -259,10 +259,6 @@ bool ProjectManagerWrapper::save()
 
 bool ProjectManagerWrapper::saveOrSuggestToSaveAs()
 {
-	if (mTextManager->saveText(false)) {
-		return true;
-	}
-
 	if (mSaveFilePath == mAutosaver.tempFilePath()
 			|| mSaveFilePath == mMainWindow->editorManager().saveMetamodelFilePath()) {
 		return suggestToSaveAs();
@@ -281,6 +277,10 @@ void ProjectManagerWrapper::setStackUnsaved(bool isUnsaved)
 {
 	mStackUnsaved = isUnsaved;
 	refreshWindowTitleAccordingToSaveFile();
+}
+
+bool ProjectManagerWrapper::saveText() {
+	return mTextManager->saveText(false);
 }
 
 bool ProjectManagerWrapper::suggestToSaveAs()

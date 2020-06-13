@@ -23,9 +23,7 @@
 using namespace twoDModel::items;
 
 SkittleItem::SkittleItem(const QPointF &position)
-	: mStartPosition(QPointF())
-	, mStartRotation(0.0f)
-	, mSvgRenderer(new QSvgRenderer)
+	: mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
 	setPos(position);
@@ -62,9 +60,9 @@ void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	painter->setPen(mStrokePen);
+	painter->setPen(getStrokePen());
 	if (isSelected()) {
-		QColor extraColor = mStrokePen.color();
+		QColor extraColor = getStrokePen().color();
 		extraColor.setAlphaF(0.5);
 		painter->setBrush(extraColor);
 	}

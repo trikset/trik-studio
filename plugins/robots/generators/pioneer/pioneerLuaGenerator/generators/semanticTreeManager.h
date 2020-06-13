@@ -78,7 +78,8 @@ public:
 
 	/// Copies right siblings of the @p node until predicate for a sibling becomes true, or until end.
 	/// @returns a list of copied nodes.
-	std::vector<generatorBase::semantics::SemanticNode *> copyRightSiblingsUntil(generatorBase::semantics::SemanticNode *node
+	std::vector<generatorBase::semantics::SemanticNode *>
+	copyRightSiblingsUntil(generatorBase::semantics::SemanticNode *node
 			, const std::function<bool(generatorBase::semantics::SemanticNode *)> &predicate);
 
 	/// Creates a new node for a given Id, registers it as clone if node with such Id is already in semantic tree.

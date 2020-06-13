@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+882"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+883"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+111"/>
+        <location line="+110"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -892,7 +892,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Показать/спрятать панель ошибок</translation>
     </message>
     <message>
-        <location line="+203"/>
+        <location line="+204"/>
         <source>Gestures Show</source>
         <translation>Жесты мышью</translation>
     </message>

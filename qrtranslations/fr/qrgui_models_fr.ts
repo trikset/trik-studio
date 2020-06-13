@@ -12,7 +12,7 @@
 <context>
     <name>qReal::models::details::modelsImplementation::AbstractModel</name>
     <message>
-        <location filename="../../qrgui/models/details/modelsImplementation/abstractModel.cpp" line="+43"/>
+        <location filename="../../qrgui/models/details/modelsImplementation/abstractModel.cpp" line="+48"/>
         <source>name</source>
         <translation>nom</translation>
     </message>

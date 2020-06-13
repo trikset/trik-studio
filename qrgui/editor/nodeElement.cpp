@@ -1446,16 +1446,14 @@ void NodeElement::initRenderedDiagram()
 
 QRectF NodeElement::diagramRenderingRect() const
 {
-	const NodeElement *initial = new NodeElement(
+	const NodeElement initial(
 			mLogicalAssistApi.editorManagerInterface().elementType(id()).toNode()
 			, id().sameTypeId()
 			, mModels
 			);
 
-	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial->boundingRect().width() - 3 * squareSize);
-	const qreal yCoeff = (boundingRect().height() - 3 * squareSize) / (initial->boundingRect().height() - 3 *squareSize);
-
-	delete initial;
+	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial.boundingRect().width() - 3 * squareSize);
+	const qreal yCoeff = (boundingRect().height()- 3 * squareSize) / (initial.boundingRect().height()- 3 * squareSize);
 
 	// QReal:BP hardcode
 	// TODO: Remove this.
