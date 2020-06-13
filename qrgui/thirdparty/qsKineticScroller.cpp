@@ -57,6 +57,7 @@ public:
 	  , isPressed(false)
 	  , isMoving(false)
 	  , lastMouseYPos(0)
+	  , lastMouseXPos(0)
 	  , lastVerticalScrollBarPosition(0)
 	  , lastHorizontalScrollBarPosition(0)
 	  , velocityY(0)

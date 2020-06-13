@@ -46,7 +46,7 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(ballSize.width() / 2), -static_cast<qreal>(ballSize.height() / 2)}
+	return QRectF({-static_cast<qreal>(ballSize.width() / 2.0), -static_cast<qreal>(ballSize.height() / 2.0)}
 				  , ballSize);
 }
 

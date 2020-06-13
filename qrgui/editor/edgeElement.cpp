@@ -237,7 +237,7 @@ void EdgeElement::drawArrows(QPainter *painter, bool savedLine) const
 	painter->restore();
 }
 
-QPen EdgeElement::edgePen(QPainter *painter, QColor color, Qt::PenStyle style, int width) const
+QPen EdgeElement::edgePen(QPainter *painter, const QColor &color, Qt::PenStyle style, int width) const
 {
 	QPen pen = painter->pen();
 	pen.setColor(color);
@@ -247,7 +247,7 @@ QPen EdgeElement::edgePen(QPainter *painter, QColor color, Qt::PenStyle style, i
 	return pen;
 }
 
-void EdgeElement::setEdgePainter(QPainter *painter, QPen pen, qreal opacity) const
+void EdgeElement::setEdgePainter(QPainter *painter, const QPen &pen, qreal opacity) const
 {
 	painter->setPen(pen);
 	painter->setOpacity(opacity);
@@ -266,7 +266,7 @@ QPainterPath EdgeElement::shape() const
 	path = ps.createStroke(path);
 
 	for (const QPointF &point : mLine) {
-		path.addRect(QRectF(point - QPointF(stripeWidth / 2, stripeWidth / 2)
+		path.addRect(QRectF(point - QPointF(stripeWidth / 2.0, stripeWidth / 2.0)
 				, QSizeF(stripeWidth, stripeWidth)).adjusted(1, 1, -1, -1));
 	}
 

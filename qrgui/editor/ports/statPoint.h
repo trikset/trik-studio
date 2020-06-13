@@ -30,7 +30,6 @@ public:
 	explicit StatPoint(const PointPortInfo &info);
 
 	operator QPointF() const;
-	void operator= (const QPointF &p);
 
 	void paint(QPainter *painter, const QRectF &contents) const;
 	QPointF transformForContents(const QRectF &contents) const;

@@ -152,7 +152,7 @@ QString Diagram::displayedName() const
 }
 
 QString Diagram::generateMapMethod(const QString& lineTemplate
-		, std::function<QString(Type * const, const QString &)> generator) const
+		, const std::function<QString(Type * const, const QString &)> &generator) const
 {
 	QString result;
 	for (Type * const type : mTypes) {
@@ -246,7 +246,7 @@ QString Diagram::generatePossibleEdges(const QString &lineTemplate) const
 }
 
 QString Diagram::generateListMethod(const QString &lineTemplate
-		, std::function<QString(const Type * const, const QString &)> generator) const
+		, const std::function<QString(const Type * const, const QString &)> &generator) const
 {
 	QString result;
 	bool isFirstLine = true;

@@ -1085,7 +1085,7 @@ void NodeElement::updateDynamicLabels()
 	}
 }
 
-bool NodeElement::compareDynamicLabels(QString labelsPack1, QString labelsPack2) const
+bool NodeElement::compareDynamicLabels(const QString &labelsPack1, const QString &labelsPack2) const
 {
 	QDomDocument dynamicLabels1;
 	dynamicLabels1.setContent(labelsPack1);
@@ -1453,7 +1453,7 @@ QRectF NodeElement::diagramRenderingRect() const
 			);
 
 	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial->boundingRect().width() - 3 * squareSize);
-	const qreal yCoeff = (boundingRect().height() - 3 * squareSize) / (initial->boundingRect().height() - 3 *squareSize);
+	const qreal yCoeff = (boundingRect().height()- 3 * squareSize) / (initial->boundingRect().height()- 3 * squareSize);
 
 	delete initial;
 

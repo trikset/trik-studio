@@ -51,7 +51,7 @@ public:
 
 	/// Registers a function that will be called when generator visits a node with given id.
 	/// Allows to collect additional information during generation.
-	void registerNodeHook(std::function<void(const qReal::Id)> hook);
+	void registerNodeHook(const std::function<void(const qReal::Id &)> &hook);
 
 private:
 	void performGeneration() override;

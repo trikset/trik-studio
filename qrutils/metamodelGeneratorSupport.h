@@ -54,8 +54,7 @@ public:
 	);
 
 	/// Generate .pro file of new editor plugin
-	void generateProFile(
-			QDomDocument metamodel ///< Metamodel is needed to fix 'include' .xml paths
+	void generateProFile(const QDomDocument &metamodel ///< Metamodel is needed to fix 'include' .xml paths
 			, const QString &baseMetamodelPath, const QString &qrealSourceFilesPath
 			, const QString &newMetamodelName
 			, const QString &newEditorPath, const QString &relativeNewEditorPath
@@ -74,14 +73,14 @@ public:
 	/// Inserts elements in <diagram></diagram> specified sublevel with creating
 	/// this sublevel if it doesn't exist. For example graphicTypes and nonGraphicTypes.
 	void insertElementsInDiagramSublevel(QDomDocument metamodel
-			, const QString &sublevelName, QDomNodeList elements);
+			, const QString &sublevelName, const QDomNodeList &elements);
 
 	/// Inserts one element
 	void insertElementInDiagramSublevel(QDomDocument metamodel
 			, const QString &sublevelName, const QDomElement &element);
 
 	/// Appends all childrens to parent
-	void appendElements(QDomNode parent, QDomNodeList children);
+	void appendElements(QDomNode parent, const QDomNodeList &children);
 
 	QStringList collectAllGraphicTypesInMetamodel(const QDomDocument &metamodel
 			, bool isDisplayedName) const;

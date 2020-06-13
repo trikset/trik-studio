@@ -140,20 +140,20 @@ bool BaseGraphTransformationUnit::checkRuleMatchingRecursively()
 				if (checkRuleMatchingRecursively()) {
 					isMatched = true;
 					mMatch = QHash<Id, Id>();
-					for (const Id id : matchBackup.keys()) {
+					for (const Id &id : matchBackup.keys()) {
 						mMatch.insert(id, matchBackup.value(id));
 					}
 
 					mNodesHavingOutsideLinks = IdList();
-					for (const Id id : nodesHavingOutsideLinksBackup) {
+					for (const Id &id : nodesHavingOutsideLinksBackup) {
 						mNodesHavingOutsideLinks.append(id);
 					}
 					mCurrentMatchedGraphInRule = IdList();
-					for (const Id id : currentMatchedGraphInRuleBackup) {
+					for (const Id &id : currentMatchedGraphInRuleBackup) {
 						mCurrentMatchedGraphInRule.append(id);
 					}
 					mCurrentMatchedGraphInModel = IdList();
-					for (const Id id : currentMatchedGraphInModelBackup) {
+					for (const Id &id : currentMatchedGraphInModelBackup) {
 						mCurrentMatchedGraphInModel.append(id);
 					}
 

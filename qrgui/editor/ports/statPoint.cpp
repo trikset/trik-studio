@@ -32,15 +32,6 @@ StatPoint::operator QPointF () const
 	return mPoint;
 }
 
-void StatPoint::operator= (const QPointF &p)
-{
-	mPoint = p;
-	mPropX = false;
-	mPropY = false;
-	mInitHeight = 1;
-	mInitWidth = 1;
-}
-
 void StatPoint::paint(QPainter *painter, const QRectF &contents) const
 {
 	const qreal x = mPoint.x() * (mPropX ? mInitWidth : contents.width());

@@ -395,9 +395,9 @@ qreal WallItem::alignedCoordinate(qreal coord, int coef, const int indexGrid) co
 {
 	const int coefSign = coef ? coef / qAbs(coef) : 0;
 
-	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2) {
+	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2.0) {
 		return coef * indexGrid;
-	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2) {
+	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2.0) {
 		return (coef + coefSign) * indexGrid;
 	}
 

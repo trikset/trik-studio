@@ -16,7 +16,7 @@
 
 using namespace utils::sensorsGraph;
 
-KeyPoint::KeyPoint(const QColor color)
+KeyPoint::KeyPoint(const QColor &color)
 	: mVisualArea(QRectF(-10, -10, 10, 10))
 	, mColor(color)
 {

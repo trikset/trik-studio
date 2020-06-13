@@ -78,7 +78,7 @@ void SemanticAnalyzer::finalizeResolve(const QSharedPointer<ast::Node> &node)
 		}
 	}
 
-	for (auto child : node->children()) {
+	for (auto &&child : node->children()) {
 		if (!child.isNull()) {
 			finalizeResolve(child);
 		}

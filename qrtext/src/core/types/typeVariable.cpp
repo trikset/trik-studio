@@ -60,8 +60,8 @@ void TypeVariable::constrain(const QList<QSharedPointer<TypeExpression>> &types
 {
 	QSet<QSharedPointer<TypeExpression>> result;
 
-	for (auto type : mAllowedTypes) {
-		for (auto otherType : types) {
+	for (auto &&type : mAllowedTypes) {
+		for (auto &&otherType : types) {
 			if (type->is<Any>()) {
 				result << otherType;
 			} else if (otherType->is<Any>()) {
@@ -82,10 +82,10 @@ void TypeVariable::constrainAssignment(const QSharedPointer<TypeVariable> &other
 	*wasCoercion = false;
 	QSet<QSharedPointer<TypeExpression>> result;
 
-	for (auto type : mAllowedTypes) {
+	for (auto &&type : mAllowedTypes) {
 		QSet<QSharedPointer<TypeExpression>> allowedForType;
 
-		for (auto otherType : other->mAllowedTypes) {
+		for (auto &&otherType : other->mAllowedTypes) {
 			if (type->is<Any>()) {
 				allowedForType << otherType;
 			} else if (otherType->is<Any>()) {
@@ -100,7 +100,7 @@ void TypeVariable::constrainAssignment(const QSharedPointer<TypeVariable> &other
 		// For example, if we assign float value to integer variable and a language
 		// allows implicit casts from integer to float, we'll make our variable float.
 		if (allowedForType.isEmpty()) {
-			for (auto otherType : other->mAllowedTypes) {
+			for (auto const &otherType : other->mAllowedTypes) {
 				if (generalizationsTable.isGeneralization(type, otherType)) {
 					result << otherType;
 					*wasCoercion = true;

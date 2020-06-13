@@ -776,9 +776,9 @@ QString EditorManager::generationRule(const Id &id) const
 QStringList EditorManager::getPropertiesInformation(const Id &id) const
 {
 	QStringList result;
-	const ElementType &element = elementType(id);
-	const QStringList propertyNamesList = element.propertyNames();
-	for (const QString &property : propertyNamesList) {
+	const auto &element = elementType(id);
+	const auto &propertyNamesList = element.propertyNames();
+	for (const auto &property : propertyNamesList) {
 		result << element.propertyDisplayedName(property);
 		result << element.propertyType(property);
 		result << element.propertyDefaultValue(property);

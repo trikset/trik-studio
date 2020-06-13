@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+881"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+883"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -1082,7 +1082,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ShapeEdit</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+353"/>
+        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+352"/>
         <source>Saving</source>
         <translation>Сохранение</translation>
     </message>

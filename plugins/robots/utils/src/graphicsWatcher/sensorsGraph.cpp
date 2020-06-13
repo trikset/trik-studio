@@ -26,17 +26,15 @@ struct SensorsGraph::TrackObject {
 	QString inParserName;
 	QString displayName;
 
-	TrackObject(const int &id, const QString &internalName, const QString &externalName)
+	TrackObject(int id, const QString &internalName, const QString &externalName)
 		: index(id)
 		, inParserName(internalName)
 		, displayName(externalName)
 	{
 	}
 
-	TrackObject(const int &id)
+	explicit TrackObject(int id)
 		: index(id)
-		, inParserName("")
-		, displayName("")
 	{
 	}
 

@@ -30,7 +30,7 @@ public:
 	bool init(const QDomElement &diagramElement);
 	bool resolve();
 	Editor *editor() const;
-	Type *findType(QString name);
+	Type *findType(const QString &name);
 	QMap<QString, Type*> types() const;
 	QString name() const;
 	QString nodeName() const;

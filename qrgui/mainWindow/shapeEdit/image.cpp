@@ -17,7 +17,7 @@
 #include <QtGui/QBitmap>
 #include <QtGui/QImageWriter>
 
-Image::Image(QString fileName, qreal x, qreal y, Item* parent)
+Image::Image(const QString &fileName, qreal x, qreal y, Item* parent)
 	: Item(parent)
 	, mImage(fileName)
 	, mRectangleImpl()

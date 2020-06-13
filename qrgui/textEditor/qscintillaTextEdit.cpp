@@ -253,8 +253,8 @@ void QScintillaTextEdit::commentUncommentLines()
 	const QRegularExpression lineRegExp(QString("^(?<indent>[ |\t]*)%1(?<innerCode>.*)%2[ |\t]*$")
 			.arg(regExpForm(mLanguage.lineCommentStart)).arg(regExpForm(mLanguage.lineCommentEnd)));
 	if (not selectedText.isEmpty()) {
-		long startSelectedPosition = SendScintilla(SCI_GETSELECTIONSTART);
-		long endSelectedPosition = SendScintilla(SCI_GETSELECTIONEND);
+		auto startSelectedPosition = SendScintilla(SCI_GETSELECTIONSTART);
+		auto endSelectedPosition = SendScintilla(SCI_GETSELECTIONEND);
 		int lineStart = -1;
 		int indexStart = -1;
 		int lineEnd = -1;
@@ -262,8 +262,8 @@ void QScintillaTextEdit::commentUncommentLines()
 		lineIndexFromPosition(static_cast<int>(startSelectedPosition), &lineStart, &indexStart);
 		lineIndexFromPosition(static_cast<int>(endSelectedPosition), &lineEnd, &indexEnd);
 
-		long lastSelectedLine = SendScintilla(SCI_LINEFROMPOSITION, endSelectedPosition);
-		long lastSelectedLineEndPos = SendScintilla(SCI_GETLINEENDPOSITION, lastSelectedLine);
+		auto lastSelectedLine = SendScintilla(SCI_LINEFROMPOSITION, endSelectedPosition);
+		auto lastSelectedLineEndPos = SendScintilla(SCI_GETLINEENDPOSITION, lastSelectedLine);
 
 		// first case: selected full block with one or more lines
 		if (indexStart == 0 && lastSelectedLineEndPos == endSelectedPosition) {

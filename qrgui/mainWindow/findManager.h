@@ -48,7 +48,7 @@ private:
 	/// Finds items by input name and search mode
 	/// @param key - name
 	/// @param currentMode - mode
-	qReal::IdList foundByMode(QString key, QString currentMode, bool sensitivity, bool regExpression);
+	qReal::IdList foundByMode(const QString &key, const QString &currentMode, bool sensitivity, bool regExpression);
 
 	/// Finds items by input name and search modes - searchData
 	/// @param searchData - name and search modes

@@ -89,8 +89,7 @@ void RobotModel::clear()
 	setRotation(0);
 }
 
-RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, long unsigned int degrees
-		, const PortInfo &port, bool isUsed)
+RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees, const PortInfo &port, bool isUsed)
 {
 	Wheel *motor = new Wheel();
 	motor->radius = radius;

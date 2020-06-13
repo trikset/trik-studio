@@ -20,13 +20,13 @@
 using namespace qrgraph;
 
 bool dfs(const Node &start, const std::function<bool(const Node &node)> &processor
-		, uint edgeType, QSet<const Node *> &visited)
+		, uint edgeType, QSet<const Node *> *visited)
 {
-	if (visited.contains(&start)) {
+	if (visited->contains(&start)) {
 		return false;
 	}
 
-	visited.insert(&start);
+	visited->insert(&start);
 	if (processor(start)) {
 		// Target is found, search succeeded.
 		return true;
@@ -42,7 +42,7 @@ bool dfs(const Node &start, const std::function<bool(const Node &node)> &process
 bool Queries::dfs(const Node &start, const std::function<bool (const Node &)> &processor, uint edgeType)
 {
 	QSet<const Node *> visited;
-	return ::dfs(start, processor, edgeType, visited);
+	return ::dfs(start, processor, edgeType, &visited);
 }
 
 bool Queries::bfs(const Node &start, const std::function<bool (const Node &)> &processor, uint edgeType)
@@ -146,6 +146,6 @@ QList<const Node *> Queries::immediatePredecessors(const Node &node, uint edgeTy
 QList<const Node *> Queries::reachableSet(const Node &node, uint edgeType)
 {
 	QSet<const Node *> result;
-	::dfs(node, [](const Node &) {return false;}, edgeType, result);
+	::dfs(node, [](const Node &) {return false;}, edgeType, &result);
 	return result.values();
 }

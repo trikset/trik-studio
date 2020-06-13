@@ -42,7 +42,7 @@ class QRGUI_PLUGINS_MANAGER_EXPORT SdfRenderer : public QObject
 
 public:
 	SdfRenderer();
-	explicit SdfRenderer(const QString path);
+	explicit SdfRenderer(const QString &path);
 	~SdfRenderer();
 
 	bool load (const QString &filename);
@@ -111,8 +111,8 @@ private:
 	float y1_def(QDomElement &element);
 	float x2_def(QDomElement &element);
 	float y2_def(QDomElement &element);
-	float coord_def(QDomElement &element, QString coordName, int current_size, int first_size);
-	void logger(QString path, QString string);
+	float coord_def(QDomElement &element, const QString &coordName, int current_size, int first_size);
+	void logger(const QString &path, const QString &string);
 
 	/// checks that str[i] is not L, C, M or Z
 	/// @todo Not so helpful comment

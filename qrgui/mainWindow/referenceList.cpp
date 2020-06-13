@@ -45,7 +45,7 @@ void ReferenceList::loadList(const QString &refType)
 	// there will be no need in this when models are synchronized
 	qReal::models::GraphicalModelAssistApi &assistApi = mWindow->models().graphicalModelAssistApi();
 
-	for (qReal::Id element : repoApi->elementsByType(refType)) {
+	for (const auto &element : repoApi->elementsByType(refType)) {
 		if (repoApi->isLogicalElement(element) && !assistApi.graphicalIdsByLogicalId(element).isEmpty()) {
 			addItem(element);
 		}
@@ -93,7 +93,7 @@ void ReferenceList::valueChanged()
 QStringList ReferenceList::getNewValue() const
 {
 	QStringList newValue;
-	foreach(QListWidgetItem *item, mUi->listWidget->selectedItems()) {
+	for(auto *item: mUi->listWidget->selectedItems()) {
 		newValue << item->data(Qt::UserRole).toString();
 	}
 	return newValue;

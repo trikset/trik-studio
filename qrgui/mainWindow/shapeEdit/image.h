@@ -21,7 +21,7 @@
 class Image : public Item
 {
 public:
-	Image(QString fileName, qreal x, qreal y, Item* parent = nullptr);
+	Image(const QString &fileName, qreal x, qreal y, Item* parent = nullptr);
 	Image(const Image &other);
 	virtual Item* clone();
 	virtual QRectF boundingRect() const;

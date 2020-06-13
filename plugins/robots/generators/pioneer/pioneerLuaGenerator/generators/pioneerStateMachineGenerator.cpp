@@ -38,7 +38,7 @@ PioneerStateMachineGenerator::PioneerStateMachineGenerator(
 	mAsynchronousNodes << "GeoTakeoff" << "GeoLanding" << "GoToPoint" << "GoToGPSPoint";
 }
 
-void PioneerStateMachineGenerator::registerNodeHook(std::function<void(const qReal::Id)> hook)
+void PioneerStateMachineGenerator::registerNodeHook(const std::function<void(const qReal::Id&)> &hook)
 {
 	mNodeHooks.append(hook);
 }
@@ -434,7 +434,7 @@ NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *
 			oldFragmentStart
 			, [this](SemanticNode * node){ return isAsynchronous(node); });
 
-	if (siblings.isEmpty()) {
+	if (siblings.empty()) {
 		// Fragment is trivial and non-asynchronous --- so it must be FinalNode. Fine, no need to copy it.
 		if (fragmentStartNode->id().element() != "FinalNode") {
 			reportError(tr("Generation internal error, program ends abruptly."));
@@ -444,7 +444,7 @@ NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *
 		return fragmentStartNode;
 	}
 
-	if (isAsynchronous(siblings.last())) {
+	if (isAsynchronous(siblings.back())) {
 		// Synchronous fragment finished with asynchronous node
 		fragmentStartNode->appendSiblings(siblings);
 
@@ -460,7 +460,7 @@ NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *
 		// Goto node pointing to a target of asynchronous node, if we were visited it already. If not, it will generate
 		// Goto by itself.
 		if (!isIf(asynchronousNode)) {
-			auto lastSiblingNonZoneNode = dynamic_cast<NonZoneNode *>(siblings.last());
+			auto lastSiblingNonZoneNode = dynamic_cast<NonZoneNode *>(siblings.back());
 			if (mVisitedNodes.contains(lastSiblingNonZoneNode->id())) {
 				auto asynchronousNodeTarget = mSemanticTreeManager->nonSyntheticRightSibling(asynchronousNode);
 				if (!asynchronousNodeTarget) {
@@ -474,7 +474,7 @@ NonZoneNode *PioneerStateMachineGenerator::copySynchronousFragment(NonZoneNode *
 				return lastSiblingNonZoneNode;
 			}
 		} else {
-			auto ifNode = dynamic_cast<IfNode *>(siblings.last());
+			auto ifNode = dynamic_cast<IfNode *>(siblings.back());
 			// This If node is copied without its end-of-handler node, so we need to check for endNode ourselves.
 			if (mSemanticTreeManager->isTopLevelNode(ifNode)) {
 				auto endNode = produceEndOfHandlerNode();

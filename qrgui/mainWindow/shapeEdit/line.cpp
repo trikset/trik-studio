@@ -238,13 +238,10 @@ QPair<QPair<QString, QString>, QPair<QString, QString> > Line::setXandYBefore(co
 			x2 = setScaleForDoc(0, rect);
 		}
 	}
-
-	// omfg!
-	return QPair<QPair<QString, QString>, QPair<QString, QString> >(QPair<QString, QString>(x1, y1)
-			, QPair<QString, QString>(x2, y2));
+	return {{x1, y1}, {x2, y2}};
 }
 
-void Line::setDomXandY(QDomElement& dom, QPair<QPair<QString, QString>, QPair<QString, QString> > pair)
+void Line::setDomXandY(QDomElement& dom, const QPair<QPair<QString, QString>, QPair<QString, QString> > &pair)
 {
 	dom.setAttribute("y1", pair.first.second);
 	dom.setAttribute("x1", pair.first.first);

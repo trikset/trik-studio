@@ -742,7 +742,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+633"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+635"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -972,7 +972,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ShapeEdit</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+353"/>
+        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+352"/>
         <source>Saving</source>
         <translation>Enregistrement</translation>
     </message>
