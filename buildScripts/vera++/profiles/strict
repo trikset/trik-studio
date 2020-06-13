@@ -1,4 +1,5 @@
 #!/usr/bin/tclsh
+#    NoQDebug
 #    NoOldSIGNALnSLOT
 set rules {
     ForeachsForbidden
