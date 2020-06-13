@@ -23,7 +23,6 @@ using namespace models::details::modelsImplementation;
 
 AbstractModel::~AbstractModel()
 {
-
 }
 
 AbstractModel::AbstractModel(const EditorManagerInterface &editorManagerInterface)
