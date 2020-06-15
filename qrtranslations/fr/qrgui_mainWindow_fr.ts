@@ -906,7 +906,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Images (*.png *.jpg)</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+161"/>
         <source>Getting Started</source>
         <translation>Commencer</translation>
     </message>
