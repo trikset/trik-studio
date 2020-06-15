@@ -444,5 +444,5 @@ utils::AbstractTimer *TrikBrick::timer(int milliseconds)
 void TrikBrick::processSensors(bool isRunning)
 {
 	QMetaObject::invokeMethod(mSensorUpdater.data()
-							  , [this, isRunning](){isRunning ? mSensorUpdater->start() : mSensorUpdater->stop();});
+				  , [this, isRunning](){isRunning ? mSensorUpdater->start() : mSensorUpdater->stop();});
 }

@@ -38,7 +38,6 @@ public:
 	/// Shall be overriden to release all used resources
 	virtual void release()
 	{
-
 	}
 };
 

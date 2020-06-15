@@ -34,7 +34,8 @@ ToolPluginManager::ToolPluginManager()
 }
 
 ToolPluginManager::~ToolPluginManager()
-{	
+{
+	release();
 	qDeleteAll(mPlugins);
 }
 
