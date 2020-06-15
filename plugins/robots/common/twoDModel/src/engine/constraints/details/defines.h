@@ -17,6 +17,7 @@
 #include <functional>
 #include <QtCore/QMap>
 #include <QtCore/QVariant>
+#include <QSharedPointer>
 
 namespace twoDModel {
 namespace constraints {
@@ -58,7 +59,7 @@ typedef std::function<void()> Trigger;
 typedef std::function<QVariant()> Value;
 
 typedef QMap<QString, QVariant> Variables;
-typedef QMap<QString, Event *> Events;
+typedef QMap<QString, QSharedPointer<Event>> Events;
 typedef QMap<QString, QObject *> Objects;
 
 }

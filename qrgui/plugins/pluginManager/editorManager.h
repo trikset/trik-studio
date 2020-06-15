@@ -64,7 +64,7 @@ public:
 	QString loadPlugin(const QString &pluginName) override;
 	QString unloadPlugin(const QString &metamodelName) override;
 	bool unloadAllPlugins() override;
-	void loadMetamodel(Metamodel &metamodel) override;
+	void loadMetamodel(const QSharedPointer<Metamodel> &metamodel) override;
 
 	QString mouseGesture(const Id &id) const override;
 	QString friendlyName(const Id &id) const override;
@@ -159,7 +159,7 @@ private:
 
 	QMap<QString, QStringList> mPluginFileNames;
 	QMap<QString, Pattern> mGroups;
-	QMap<QString, Metamodel *> mMetamodels;
+	QMap<QString, QSharedPointer<Metamodel>> mMetamodels;
 
 	QDir mPluginsDir;
 

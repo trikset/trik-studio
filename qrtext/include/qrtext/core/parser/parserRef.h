@@ -47,15 +47,15 @@ public:
 	/// Move constructor.
 	ParserRef(ParserRef<TokenType> &&other) = default;
 
-	/// Assignment operator that assigns parsers themselves, not "external" pointers. Note that it has different
-	/// semantics with copy constructor, so be cautious.
-	ParserRef &operator =(const ParserRef<TokenType> &other)
+	/// "Assignment operator" that assigns parsers themselves, not "external" pointers.
+	/// Note that it has different semantics with copy constructor, so be cautious.
+	ParserRef &operator <<=(const ParserRef<TokenType> &other)
 	{
 		*mRef = *(other.mRef);
 		return *this;
 	}
 
-	ParserRef &operator =(ParserRef<TokenType> &&other)
+	ParserRef &operator <<=(ParserRef<TokenType> &&other)
 	{
 		*mRef = std::move(*(other.mRef));
 		return *this;

@@ -43,7 +43,7 @@ class QRGUI_PLUGINS_MANAGER_EXPORT QrsMetamodelSaver : public QObject
 
 public:
 	/// Serializes \a metamodels into .qrs-file located at \a path.
-	bool save(const QList<Metamodel *> &metamodels, const QString &path);
+	bool save(const QList<QSharedPointer<Metamodel>> &metamodels, const QString &path);
 
 signals:
 	/// Emitted when metamodel traversal encountered some error in metamodel.

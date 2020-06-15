@@ -42,26 +42,26 @@ void NxtMetamodelPlugin::initPlugin()
 
 void NxtMetamodelPlugin::initMultigraph()
 {
-	mMetamodel->addNode(*(new NxtBeep(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtClearEncoder(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtDrawCircle(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtDrawLine(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtDrawPixel(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtDrawRect(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtEngineMovementCommand(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtEnginesBackward(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtEnginesForward(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtEnginesStop(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtPlayTone(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtSensorBlock(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForButton(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForColor(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForColorIntensity(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForEncoder(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForLight(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForSonarDistance(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForSound(*mMetamodel)));
-	mMetamodel->addNode(*(new NxtWaitForTouchSensor(*mMetamodel)));
+	mMetamodel->addNode(new NxtBeep(*mMetamodel));
+	mMetamodel->addNode(new NxtClearEncoder(*mMetamodel));
+	mMetamodel->addNode(new NxtDrawCircle(*mMetamodel));
+	mMetamodel->addNode(new NxtDrawLine(*mMetamodel));
+	mMetamodel->addNode(new NxtDrawPixel(*mMetamodel));
+	mMetamodel->addNode(new NxtDrawRect(*mMetamodel));
+	mMetamodel->addNode(new NxtEngineMovementCommand(*mMetamodel));
+	mMetamodel->addNode(new NxtEnginesBackward(*mMetamodel));
+	mMetamodel->addNode(new NxtEnginesForward(*mMetamodel));
+	mMetamodel->addNode(new NxtEnginesStop(*mMetamodel));
+	mMetamodel->addNode(new NxtPlayTone(*mMetamodel));
+	mMetamodel->addNode(new NxtSensorBlock(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForButton(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForColor(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForColorIntensity(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForEncoder(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForLight(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForSonarDistance(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForSound(*mMetamodel));
+	mMetamodel->addNode(new NxtWaitForTouchSensor(*mMetamodel));
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "NxtEnginesBackward"), mMetamodel->elementType("RobotsDiagram", "NxtEngineMovementCommand"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "NxtEnginesForward"), mMetamodel->elementType("RobotsDiagram", "NxtEngineMovementCommand"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "NxtEnginesStop"), mMetamodel->elementType("RobotsDiagram", "EngineCommand"), qReal::ElementType::generalizationLinkType);

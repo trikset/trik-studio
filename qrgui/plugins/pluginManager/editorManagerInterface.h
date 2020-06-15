@@ -59,7 +59,7 @@ public:
 
 	/// Appends \a metamodel to a list of loaded ones.
 	/// Takes ownership on \a metamodel.
-	virtual void loadMetamodel(Metamodel &metamodel) = 0;
+	virtual void loadMetamodel(const QSharedPointer<Metamodel> &metamodel) = 0;
 
 	virtual QString mouseGesture(const Id &id) const = 0;
 	virtual QString friendlyName(const Id &id) const = 0;

@@ -44,9 +44,9 @@ const Id metamodelContainmentLinkType = Id("MetaEditor", "MetaEditor", "Containe
 const Id metamodelExplosionLinkType = Id("MetaEditor", "MetaEditor", "Explosion");
 const Id metamodelPropertiesAsContainerType = Id("MetaEditor", "MetaEditor", "MetaEntityPropertiesAsContainer");
 
-QList<Metamodel *> QrsMetamodelLoader::load(const QString &pathToQrs)
+QList<QSharedPointer<Metamodel> > QrsMetamodelLoader::load(const QString &pathToQrs)
 {
-	QList<Metamodel *> result;
+	QList<QSharedPointer<Metamodel>> result;
 	const qrRepo::RepoApi repo(pathToQrs);
 	if (!repo.exist(Id::rootId())) {
 		return result;
@@ -54,7 +54,7 @@ QList<Metamodel *> QrsMetamodelLoader::load(const QString &pathToQrs)
 
 	for (const Id &id : repo.children(Id::rootId())) {
 		if (id.type() == metamodelRootDiagramType && repo.isLogicalElement(id)) {
-			result << parseMetamodel(repo, id);
+			result << QSharedPointer<Metamodel>(parseMetamodel(repo, id));
 		}
 	}
 

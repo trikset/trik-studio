@@ -21,9 +21,7 @@
 using namespace qReal;
 using namespace models::details::modelsImplementation;
 
-AbstractModel::~AbstractModel()
-{
-}
+AbstractModel::~AbstractModel() = default;
 
 AbstractModel::AbstractModel(const EditorManagerInterface &editorManagerInterface)
 		: mEditorManagerInterface(editorManagerInterface)
