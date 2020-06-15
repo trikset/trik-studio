@@ -83,6 +83,7 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikmotoremu.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikkeysinterfacestub.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triklinesensoradapter.h \
+	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikColorSensorAdapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikencoderadapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikledadapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikaccelerometeradapter.h \
@@ -133,6 +134,7 @@ SOURCES += \
 	$$PWD/src/trikEmulation/trikdisplayemu.cpp \
 	$$PWD/src/trikEmulation/trikmotoremu.cpp \
 	$$PWD/src/trikEmulation/triklinesensoradapter.cpp \
+	$$PWD/src/trikEmulation/trikColorSensorAdapter.cpp \
 	$$PWD/src/trikEmulation/trikkeysinterfacestub.cpp \
 	$$PWD/src/trikEmulation/trikencoderadapter.cpp \
 	$$PWD/src/trikEmulation/trikledadapter.cpp \
