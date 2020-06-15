@@ -309,7 +309,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+106"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
