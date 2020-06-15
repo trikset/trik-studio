@@ -209,6 +209,8 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, &qReal::ProjectManagementInterface::afterOpen
 			, this
 			, [=](const QString &path){
+		mLogicalModelApi->mutableLogicalRepoApi().setMetaInformation("trikStudioVersion", mCustomizer.productVersion());
+
 		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
 		const QString code = logicalRepo->metaInformation("activeCode").toString();
 		QFileInfo projectFile(mProjectManager->saveFilePath());

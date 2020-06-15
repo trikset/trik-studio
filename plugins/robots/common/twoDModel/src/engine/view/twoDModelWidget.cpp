@@ -154,6 +154,15 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->robotWidthInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
 	mUi->robotMassInGr->setValue(robotMass);
 	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+	mConnections << connect(&mModel, &model::Model::robotAdded, [this](){
+		auto robotModels = mModel.robotModels();
+		auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
+				: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
+		mUi->robotTrackInCm->setValue(robotTrack / pixelsInCm);
+	});
+	mUi->robotTrackInCm->setValue(robotWidth / pixelsInCm);
+	mUi->robotTrackInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
 }
 
 TwoDModelWidget::~TwoDModelWidget()

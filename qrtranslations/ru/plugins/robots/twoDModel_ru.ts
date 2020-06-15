@@ -461,13 +461,18 @@
     </message>
     <message>
         <location line="+13"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Robot mass:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>Robot mass:</source>
         <translation>Масса робота:</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Robot width:</source>
         <translation>Ширина робота:</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>Robot track:</source>
+        <translation>Колейность робота:</translation>
     </message>
 </context>
 <context>
@@ -1023,7 +1028,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+308"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+317"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
