@@ -19,7 +19,6 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/graphicalModelAssistInterface.h>
 
-
 using namespace qReal;
 
 EdgeInfo::EdgeInfo(const Id &graphicalId

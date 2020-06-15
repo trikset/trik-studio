@@ -61,7 +61,6 @@ public:
 		return *this;
 	}
 
-
 	/// Returns parser itself.
 	ParserInterface<TokenType> const *operator ->() const
 	{
