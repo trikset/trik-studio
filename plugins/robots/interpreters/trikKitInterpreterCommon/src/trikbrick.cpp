@@ -53,24 +53,17 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 	mSensorUpdater->setInterval(model->updateIntervalForInterpretation()); // seems to be x2 of timeline tick
 	connect(mSensorUpdater.data(), &utils::AbstractTimer::timeout
 			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::updateSensorsValues);
-
-	reinitImitationCamera();
 }
 
 TrikBrick::~TrikBrick()
 {
-	qDeleteAll(mMotors);
-	qDeleteAll(mSensors);
-	qDeleteAll(mEncoders);
-	qDeleteAll(mLineSensors);
-	qDeleteAll(mTimers);
 }
 
 void TrikBrick::reset()
 {
-	mKeys.reset();///@todo: reset motos/device maps?
-	//mDisplay.reset(); - is actually needed? Crashes app at exit
 	emit stopWaiting();
+	mKeys.reset();///@todo: reset motos/device maps?
+	//mDisplay.reset(); /// - is actually needed? Crashes app at exit
 	for (const auto &m : mMotors) {
 		m->powerOff();
 	}
@@ -79,11 +72,6 @@ void TrikBrick::reset()
 		e->reset();
 	}
 
-	for (const auto &t : mTimers) {
-		t->stop();
-	}
-
-	qDeleteAll(mTimers);
 	mTimers.clear();
 }
 
@@ -103,13 +91,18 @@ void TrikBrick::printToShell(const QString &msg)
 void TrikBrick::init()
 {
 	mDisplay.init();
+	mKeys.init();
 	mTwoDRobotModel->updateSensorsValues();
-	mMotors.clear(); // needed? reset?
+
+	mMotors.clear();
 	mSensors.clear();
 	mEncoders.clear();
 	mLineSensors.clear();
-	mKeys.init();
+	mTimers.clear();
 	mGyroscope.reset(); // for some reason it won't reconnect to the robot parts otherwise.
+	mAccelerometer.reset();
+	mTrikProxyMarker.reset();
+	reinitImitationCamera();
 	processSensors(true);
 }
 
@@ -185,9 +178,9 @@ trikControl::MotorInterface *TrikBrick::motor(const QString &port)
 			emit error(tr("No configured motor on port: %1").arg(port));
 			return nullptr;
 		}
-		mMotors[port] = new TrikMotorEmu(mot);
+		mMotors[port].reset(new TrikMotorEmu(mot));
 	}
-	return mMotors[port];
+	return mMotors[port].get();
 }
 
 trikControl::MarkerInterface *TrikBrick::marker()
@@ -216,9 +209,9 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 			emit error(tr("No configured sensor on port: %1").arg(port));
 			return nullptr;
 		}
-		mSensors[port] = new TrikSensorEmu(sens);
+		mSensors[port].reset(new TrikSensorEmu(sens));
 	}
-	return mSensors[port];
+	return mSensors[port].get();
 }
 
 QStringList TrikBrick::motorPorts(trikControl::MotorInterface::Type type) const
@@ -285,10 +278,10 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 			emit error(tr("No configured LineSensor on port: %1").arg(port));
 			return nullptr;
 		}
-		mLineSensors[port] = new TrikLineSensorAdapter(sens);
+		mLineSensors[port].reset(new TrikLineSensorAdapter(sens));
 	}
 
-	return mLineSensors[port];
+	return mLineSensors[port].get();
 }
 
 trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
@@ -311,10 +304,10 @@ trikControl::EncoderInterface *TrikBrick::encoder(const QString &port) {
 			return nullptr;
 		}
 
-		mEncoders[port] = new TrikEncoderAdapter(enc->port(), mTwoDRobotModel->engine());
+		mEncoders[port].reset(new TrikEncoderAdapter(enc->port(), mTwoDRobotModel->engine()));
 	}
 
-	return mEncoders[port];
+	return mEncoders[port].get();
 }
 
 trikControl::DisplayInterface *TrikBrick::display()
@@ -441,16 +434,15 @@ QStringList TrikBrick::readAll(const QString &path)
 
 utils::AbstractTimer *TrikBrick::timer(int milliseconds)
 {
-	utils::AbstractTimer *result = mTwoDRobotModel->timeline().produceTimer();
+	auto result = QSharedPointer<utils::AbstractTimer>(mTwoDRobotModel->timeline().produceTimer());
 	mTimers.append(result);
 	result->setRepeatable(true);
 	result->start(milliseconds);
-	return result;
+	return result.get();
 }
 
 void TrikBrick::processSensors(bool isRunning)
 {
-	QMetaObject::invokeMethod(mSensorUpdater.data(), [&](){isRunning ?
-					mSensorUpdater->start() : mSensorUpdater->stop();});
+	QMetaObject::invokeMethod(mSensorUpdater.data()
+				  , [this, isRunning](){isRunning ? mSensorUpdater->start() : mSensorUpdater->stop();});
 }
-

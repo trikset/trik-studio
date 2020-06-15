@@ -94,6 +94,11 @@ void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configu
 			, configurator.interpreterControl());
 }
 
+void NxtKitInterpreterPlugin::release()
+{
+	mTwoDModel.reset();
+}
+
 QString NxtKitInterpreterPlugin::kitId() const
 {
 	return "nxtKit";

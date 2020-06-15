@@ -47,6 +47,12 @@ public:
 		Q_UNUSED(configurator)
 	}
 
+	/// Releases all resources
+	virtual void release()
+	{
+	}
+
+
 	/// An identifier of constructor kit. Kit plugins with same kitId are automaticly grouped
 	/// together extending each other.
 	virtual QString kitId() const = 0;

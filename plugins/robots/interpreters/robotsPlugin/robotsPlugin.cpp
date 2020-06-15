@@ -36,6 +36,11 @@ void RobotsPlugin::init(const PluginConfigurator &configurator)
 	SettingsManager::setValue("IndexGrid", gridWidth);
 }
 
+void RobotsPlugin::release()
+{
+	mRobotsPluginFacade.reset();
+}
+
 qReal::Customizer *RobotsPlugin::customizationInterface()
 {
 	return &mRobotsPluginFacade->customizer();

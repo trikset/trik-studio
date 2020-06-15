@@ -149,7 +149,7 @@
         <translation>TRIK Studio</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+53"/>
         <source>Subprograms</source>
         <translation>Sous-programmes</translation>
     </message>
@@ -299,7 +299,7 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+154"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+158"/>
         <source>Robots</source>
         <translation>Robots</translation>
     </message>

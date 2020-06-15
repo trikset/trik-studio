@@ -47,6 +47,7 @@ public:
 	~TrikKitInterpreterPluginBase() override;
 
 	void init(const kitBase::KitPluginConfigurator &configurer) override;
+	void release() override;
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 

@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+201"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+199"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
@@ -158,8 +158,8 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+96"/>
-        <location line="+64"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+84"/>
+        <location line="+69"/>
         <source>2d model shell part was not found</source>
         <translation>Консоль 2d модели не найдена</translation>
     </message>
@@ -262,7 +262,7 @@
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>
     <message>
-        <location line="+177"/>
+        <location line="+173"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>
@@ -272,7 +272,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+196"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>
@@ -280,7 +280,7 @@
 <context>
     <name>trik::TrikTextualInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-101"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-99"/>
         <location line="+16"/>
         <source>Unsupported script file type</source>
         <translation>Неверный формат файла</translation>

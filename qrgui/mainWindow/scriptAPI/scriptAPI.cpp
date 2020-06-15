@@ -37,13 +37,6 @@ using namespace gui;
 using namespace utils;
 
 ScriptAPI::ScriptAPI()
-	: mGuiFacade(nullptr)
-	, mVirtualCursor(nullptr)
-	, mVirtualKeyboard(nullptr)
-	, mSceneAPI(nullptr)
-	, mPaletteAPI(nullptr)
-	, mHintAPI(nullptr)
-	, mScriptEngine(new QScriptEngine)
 {
 }
 

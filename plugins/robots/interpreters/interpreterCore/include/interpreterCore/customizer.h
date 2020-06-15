@@ -32,6 +32,8 @@ public:
 	QString aboutText() const override;
 	QString examplesDirectory() const override;
 
+	static QString trikStudioVersion();
+
 	QList<QPair<QString, qReal::ActionVisibility>> actionsVisibility() const override;
 
 	bool showInterpeterButton() const override;

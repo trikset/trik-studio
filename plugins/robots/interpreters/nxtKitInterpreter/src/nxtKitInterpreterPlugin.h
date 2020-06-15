@@ -36,6 +36,7 @@ public:
 	~NxtKitInterpreterPlugin() override;
 
 	void init(const kitBase::KitPluginConfigurator &configurator) override;
+	void release() override;
 
 	QString kitId() const override;
 	QString friendlyKitName() const override;

@@ -196,10 +196,6 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 				dir.cd(curPath);
 			}
 		}
-
-		if (mTextualInterpreter) {
-			mTextualInterpreter->reinitRobotsParts();
-		}
 	};
 
 
@@ -403,6 +399,14 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::rereadSettings);
 
 	handleImitationCameraWork();
+}
+
+void TrikKitInterpreterPluginBase::release()
+{
+	mTwoDModel.reset();
+	mTwoDRobotModel.reset();
+	mRealRobotModel.reset();
+	mTextualInterpreter.reset();
 }
 
 QList<kitBase::robotModel::RobotModelInterface *> TrikKitInterpreterPluginBase::robotModels()
