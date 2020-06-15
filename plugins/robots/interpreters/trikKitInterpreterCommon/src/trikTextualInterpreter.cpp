@@ -57,7 +57,7 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 	"};"
 	"script.system = function() {print('system is disabled in the interpreter');};";
 
-const QString pyOverrides ="\ndef print(args): brick.log(args);brick.log('\\n');script.wait(0);\n"
+const QString pyOverrides ="\n__import__('sys').stdout = type('trik_studio_stdout', (object,), { 'write': brick.log, 'flush': lambda: None })\n"
 			   "script.random = brick.random;"
 			   "script.wait = brick.wait;"
 			   "script.time = brick.time;"
