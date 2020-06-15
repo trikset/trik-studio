@@ -392,7 +392,7 @@ QModelIndex MainWindow::rootIndex() const
 }
 
 MainWindow::~MainWindow()
-{	
+{
 	mUi->paletteTree->saveConfiguration();
 	SettingsManager::instance()->saveData();
 	// TODO: This is a workaround for crash on macOS.

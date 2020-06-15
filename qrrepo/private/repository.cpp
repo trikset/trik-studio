@@ -528,7 +528,7 @@ void Repository::printDebug() const
 
 bool Repository::exterminate()
 {
-	printDebug();	
+	printDebug();
 	//serializer.clearWorkingDir();
 	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk({}, mMetaInfo);
 	init();
