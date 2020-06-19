@@ -32,6 +32,7 @@ QList<ProjectConverter> SaveConvertionManager::converters()
 		, from302to310Converter()
 		, from312to313Converter()
 		, from320to330Converter()
+		, from330to20204Converter()
 	};
 }
 
@@ -222,6 +223,30 @@ ProjectConverter SaveConvertionManager::from320to330Converter()
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
 		worldModel.replace("trikV62KitRobot", "trikKitRobot");
+		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
+		return ProjectConverter::Success;
+	});
+}
+
+ProjectConverter SaveConvertionManager::from330to20204Converter()
+{
+	return ProjectConverter(editor(), Version::fromString("3.3.0"), Version::fromString("2020.4")
+			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
+	{
+		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+		if (!worldModel.contains("TrikLineSensor")
+				&& !worldModel.contains("trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
+			return ProjectConverter::NoModificationsMade;
+		}
+
+		worldModel.replace("trik::robotModel::twoD::parts::TwoDInfraredSensor"
+				, "twoDModel::robotModel::parts::RangeSensor");
+
+		worldModel.replace("TrikLineSensorPort###lineSensor", "###");
+		worldModel.replace("LineSensorPort", "Video2Port");
+
+		worldModel.replace("TrikLineSensor", "TrikVideoCamera");
+
 		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
 		return ProjectConverter::Success;
 	});

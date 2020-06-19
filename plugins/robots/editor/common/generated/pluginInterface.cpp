@@ -29,7 +29,7 @@ void RobotsMetamodelPlugin::initPlugin()
 		mMetamodel->setId("RobotsMetamodel");
 	}
 	if (mMetamodel->version().isEmpty()) {
-		mMetamodel->setVersion("3.3.0");
+		mMetamodel->setVersion("2020.4");
 	}
 
 	initMultigraph();
