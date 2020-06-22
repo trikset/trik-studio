@@ -19,7 +19,6 @@
 
 class TrikColorSensorAdapter : public trikControl::ColorSensorInterface
 {
-
 Q_OBJECT
 
 public:
@@ -27,11 +26,10 @@ public:
 	virtual Status status() const override;
 
 public slots:
-	virtual void init(bool showOnDisplay) override;
-	virtual QVector<int> read(int m, int n) override;
-	virtual void stop() override;
+	void init(bool showOnDisplay) override;
+	QVector<int> read(int m, int n) override;
+	void stop() override;
 
 private:
-
 	trik::robotModel::parts::TrikColorSensor *mColorSensor;
 };

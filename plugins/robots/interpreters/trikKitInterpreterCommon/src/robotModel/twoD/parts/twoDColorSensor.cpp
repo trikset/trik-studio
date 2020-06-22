@@ -31,7 +31,7 @@ void ColorSensor::init()
 
 void ColorSensor::read()
 {	
-	auto color = mEngine.readColorSensor(mEngine.videoPort());
+	const auto &color = mEngine.readColorSensor(mEngine.videoPort());
 	if (!color.isValid()) return;
 	setLastData({color.red(), color.green(), color.blue()});
 }
