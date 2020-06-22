@@ -25,33 +25,6 @@ Stylus::Stylus(qreal x1, qreal y1, Item* parent) : Item(parent), mStylusImpl()
 	mDomElementType = pictureType;
 }
 
-Stylus::Stylus(const Stylus &other)
-	:Item()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mTmpX1 = other.mTmpX1;
-	mTmpY1 = other.mTmpY1;
-	mListScalePoint = other.mListScalePoint;
-	for (AbstractItem *line : other.mAbstractListLine) {
-		Line *newLine = new Line(*dynamic_cast<Line *>(line));
-		mAbstractListLine.append(newLine);
-	}
-	setPos(other.x(), other.y());
-}
-
-Item* Stylus::clone()
-{
-	Stylus* item = new Stylus(*this);
-	return item;
-}
-
 void Stylus::addLine(qreal x2, qreal y2)
 {
 	setX2(x2);

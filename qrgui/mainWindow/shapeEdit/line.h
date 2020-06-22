@@ -21,10 +21,9 @@
 class Line : public Item
 {
 	Q_INTERFACES(AbstractItem)
+	Q_DISABLE_COPY(Line)
 public:
 	Line(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
-	Line(const Line &other);
-	virtual Item* clone();
 	QLineF line() const;
 	QPainterPath shape() const;
 	virtual QRectF boundingRect() const;

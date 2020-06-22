@@ -19,10 +19,9 @@
 
 class LinePort : public Line
 {
+	Q_DISABLE_COPY(LinePort)
 public:
 	LinePort(qreal x1, qreal y1, qreal x2, qreal y2, Line* parent = nullptr);
-	LinePort(const LinePort &other);
-	virtual Item* clone();
 
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
 			, const QPoint &topLeftPicture);

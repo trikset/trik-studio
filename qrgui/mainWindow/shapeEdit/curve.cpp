@@ -31,29 +31,6 @@ Curve::Curve(const QPointF &start, const QPointF &end, const QPointF &c1)
 	mCurvePath->quadTo(mC1, QPointF(x2(), y2()));
 }
 
-Curve::Curve(const Curve &other)
-		: Path(QPainterPath())
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = Item::pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mC1 = other.mC1;
-	mCurvePath = other.mCurvePath;
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* Curve::clone()
-{
-	Curve* item = new Curve(*this);
-	return item;
-}
-
 QPainterPath Curve::shape() const
 {
 	QPainterPath path;

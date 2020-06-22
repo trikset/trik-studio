@@ -26,28 +26,6 @@ LinePort::LinePort(qreal x1, qreal y1, qreal x2, qreal y2, Line* parent)
 	setY2(y2);
 }
 
-LinePort::LinePort(const LinePort &other)
-	:Line(other)
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = portType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mListScalePoint = other.mListScalePoint;
-	mType = other.mType;
-	setPos(other.x(), other.y());
-}
-
-Item* LinePort::clone()
-{
-	LinePort* item = new LinePort(*this);
-	return item;
-}
-
 QPair<QDomElement, Item::DomElementTypes> LinePort::generateItem(QDomDocument &document, const QPoint &topLeftPicture)
 {
 	QDomElement linePort = document.createElement("linePort");
