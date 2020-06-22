@@ -495,12 +495,12 @@ void Scene::clearScene()
 	mZValue = 0;
 }
 
-QList<Item *> Scene::selectedSceneItems()
+QList<QSharedPointer<Item>> Scene::selectedSceneItems()
 {
-	QList<Item *> resList;
+	QList<QSharedPointer<Item>> resList;
 	mListSelectedItems = selectedItems();
 	for (QGraphicsItem *graphicsItem : mListSelectedItems) {
-		Item* item = dynamic_cast<Item*>(graphicsItem);
+		QSharedPointer<Item> item(dynamic_cast<Item*>(graphicsItem));
 		if (item != nullptr)
 			resList.push_back(item);
 	}
@@ -523,7 +523,7 @@ QList<TextPicture *> Scene::selectedTextPictureItems()
 void Scene::changePenStyle(const QString &text)
 {
 	mPenStyleItems = text;
-	for (Item *item : selectedSceneItems())
+	for (auto item : selectedSceneItems())
 		item->setPenStyle(text);
 	update();
 }
@@ -531,7 +531,7 @@ void Scene::changePenStyle(const QString &text)
 void Scene::changePenWidth(int width)
 {
 	mPenWidthItems = width;
-	for (Item *item : selectedSceneItems())
+	for (auto item : selectedSceneItems())
 		item->setPenWidth(width);
 	update();
 }
@@ -539,7 +539,7 @@ void Scene::changePenWidth(int width)
 void Scene::changePenColor(const QString &text)
 {
 	mPenColorItems = text;
-	for (Item *item : selectedSceneItems())
+	for (auto item : selectedSceneItems())
 		item->setPenColor(text);
 	update();
 }
@@ -547,7 +547,7 @@ void Scene::changePenColor(const QString &text)
 void Scene::changeBrushStyle(const QString &text)
 {
 	mBrushStyleItems = text;
-	for (Item *item : selectedSceneItems())
+	for (auto item : selectedSceneItems())
 		item->setBrushStyle(text);
 	update();
 }
@@ -555,7 +555,7 @@ void Scene::changeBrushStyle(const QString &text)
 void Scene::changeBrushColor(const QString &text)
 {
 	mBrushColorItems = text;
-	for (Item *item : selectedSceneItems())
+	for (auto item : selectedSceneItems())
 		item->setBrushColor(text);
 	update();
 }

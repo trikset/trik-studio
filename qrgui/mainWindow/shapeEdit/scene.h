@@ -63,7 +63,7 @@ public:
 	void addStylus(bool checked);
 	void addNone(bool checked);
 
-	QList<Item *> selectedSceneItems();
+	QList<QSharedPointer<Item>> selectedSceneItems();
 
 signals:
 	void noSelectedItems();
@@ -135,7 +135,7 @@ private:
 	QString mFileName;
 	QPointF mC1;
 	CopyPasteType mCopyPaste;
-	QList<Item *> mListSelectedItemsForPaste;
+	QList<QSharedPointer<Item>> mListSelectedItemsForPaste;
 	QList<QGraphicsItem *> mListSelectedItems;
 	QList<TextPicture *> mListSelectedTextPictureItems;
 	TextPicture *mSelectedTextPicture;
