@@ -47,8 +47,7 @@ Scene::Scene(graphicsUtils::AbstractView *view, QObject * parent)
 QRectF Scene::selectedItemsBoundingRect() const
 {
 	QRectF resBoundRect;
-	auto list = mListSelectedItemsForPaste;
-	for (auto graphicsItem : list)
+	for (auto &&graphicsItem : mListSelectedItemsForPaste)
 		resBoundRect |= graphicsItem->sceneBoundingRect();
 	return resBoundRect;
 }
@@ -129,7 +128,7 @@ void Scene::setZValue(Item* item)
 void Scene::setZValueSelectedItems()
 {
 	mListSelectedItems = selectedItems();
-	for (auto graphicsItem : mListSelectedItems) {
+	for (auto &&graphicsItem : mListSelectedItems) {
 		Item* item = dynamic_cast<Item*>(graphicsItem);
 		item->setZValue(mZValue);
 		mZValue++;
@@ -138,7 +137,7 @@ void Scene::setZValueSelectedItems()
 
 void Scene::setNullZValueItems()
 {
-	for (auto graphicsItem : mListSelectedItems) {
+	for (auto &&graphicsItem : mListSelectedItems) {
 		Item* item = dynamic_cast<Item*>(graphicsItem);
 		item->setZValue(item->itemZValue());
 	}
@@ -147,16 +146,15 @@ void Scene::setNullZValueItems()
 
 QPair<bool, Item *> Scene::checkOnResize(qreal x, qreal y)
 {
-	QList<QSharedPointer<Item>> list = selectedSceneItems();
-	for (auto item : list) {
+	for (auto &&item : selectedSceneItems()) {
 		item->changeDragState(x, y);
 		item->changeScalingPointState(x, y);
 		if (item->dragState() != Item::None)  {
 			mView->setDragMode(QGraphicsView::NoDrag);
-			return QPair<bool, Item *>(true, item.data());
+			return {true, item.data()};
 		}
 	}
-	return QPair<bool, Item *>(false, nullptr);
+	return {false, nullptr};
 }
 
 void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -374,7 +372,7 @@ void Scene::keyPressEvent(QKeyEvent *keyEvent)
 		QPointF topLeftSelection(selectedItemsBoundingRect().topLeft());
 		switch (mCopyPaste) {
 		case copy:
-			for(auto item: mListSelectedItemsForPaste) {
+			for(auto &&item: mListSelectedItemsForPaste) {
 				auto newItem = item;
 				newItem->setPos(posCursor - topLeftSelection + item->scenePos());
 				addItem(newItem.data());
@@ -382,7 +380,7 @@ void Scene::keyPressEvent(QKeyEvent *keyEvent)
 			}
 			break;
 		case cut:
-			for(auto item: mListSelectedItemsForPaste) {
+			for(auto &&item: mListSelectedItemsForPaste) {
 				item->setPos(posCursor - topLeftSelection + item->scenePos());
 				setZValue(item.data());
 				mListSelectedItemsForPaste.clear();
@@ -480,7 +478,7 @@ void Scene::addImage(const QString &fileName)
 void Scene::deleteItem()
 {
 	QList<QGraphicsItem *> list = selectedItems();
-	for (auto graphicsItem : list) {
+	for (auto &&graphicsItem : list) {
 		removeItem(graphicsItem);
 		delete graphicsItem;
 	}
@@ -498,7 +496,7 @@ QList<QSharedPointer<Item>> Scene::selectedSceneItems()
 {
 	QList<QSharedPointer<Item>> resList;
 	mListSelectedItems = selectedItems();
-	for (auto graphicsItem : mListSelectedItems) {
+	for (auto &&graphicsItem : mListSelectedItems) {
 		QSharedPointer<Item> item(dynamic_cast<Item*>(graphicsItem));
 		if (item != nullptr)
 			resList.push_back(item);
@@ -511,7 +509,7 @@ QList<QSharedPointer<TextPicture>> Scene::selectedTextPictureItems()
 {
 	QList<QSharedPointer<TextPicture>> resList;
 	mListSelectedItems = selectedItems();
-	for (auto graphicsItem : mListSelectedItems) {
+	for (auto &&graphicsItem : mListSelectedItems) {
 		QSharedPointer<TextPicture> item(dynamic_cast<TextPicture*>(graphicsItem));
 		if (item != nullptr)
 			resList.push_back(item);
@@ -522,7 +520,7 @@ QList<QSharedPointer<TextPicture>> Scene::selectedTextPictureItems()
 void Scene::changePenStyle(const QString &text)
 {
 	mPenStyleItems = text;
-	for (auto item : selectedSceneItems())
+	for (auto &&item : selectedSceneItems())
 		item->setPenStyle(text);
 	update();
 }
@@ -530,7 +528,7 @@ void Scene::changePenStyle(const QString &text)
 void Scene::changePenWidth(int width)
 {
 	mPenWidthItems = width;
-	for (auto item : selectedSceneItems())
+	for (auto &&item : selectedSceneItems())
 		item->setPenWidth(width);
 	update();
 }
@@ -538,7 +536,7 @@ void Scene::changePenWidth(int width)
 void Scene::changePenColor(const QString &text)
 {
 	mPenColorItems = text;
-	for (auto item : selectedSceneItems())
+	for (auto &&item : selectedSceneItems())
 		item->setPenColor(text);
 	update();
 }
@@ -546,7 +544,7 @@ void Scene::changePenColor(const QString &text)
 void Scene::changeBrushStyle(const QString &text)
 {
 	mBrushStyleItems = text;
-	for (auto item : selectedSceneItems())
+	for (auto &&item : selectedSceneItems())
 		item->setBrushStyle(text);
 	update();
 }
@@ -554,7 +552,7 @@ void Scene::changeBrushStyle(const QString &text)
 void Scene::changeBrushColor(const QString &text)
 {
 	mBrushColorItems = text;
-	for (auto item : selectedSceneItems())
+	for (auto &&item : selectedSceneItems())
 		item->setBrushColor(text);
 	update();
 }
@@ -563,7 +561,7 @@ void Scene::changePortsType(const QString &type)
 {
 	mPortType = type;
 
-	for (auto item : selectedItems()) {
+	for (auto &&item : selectedItems()) {
 		PointPort *point = dynamic_cast<PointPort *>(item);
 		if (point) {
 			point->setType(type);
@@ -604,7 +602,7 @@ void Scene::changeFontPalette()
 	if (mListSelectedTextPictureItems.isEmpty())
 		emit noSelectedTextPictureItems();
 	else {
-		auto item = mListSelectedTextPictureItems.back();
+		const auto &item = mListSelectedTextPictureItems.back();
 		if (item != nullptr) {
 			QPen penItem = item->pen();
 			QFont fontItem = item->font();
@@ -615,7 +613,7 @@ void Scene::changeFontPalette()
 
 void Scene::changePortsComboBox()
 {
-	for (auto item : selectedItems()) {
+	for (auto &&item : selectedItems()) {
 		PointPort *point = dynamic_cast<PointPort *>(item);
 		if (point) {
 			emit existSelectedPortItems(point->getType());
@@ -632,49 +630,49 @@ void Scene::changePortsComboBox()
 
 void Scene::changeFontFamily(const QFont& font)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setFontFamily(font);
 	update();
 }
 
 void Scene::changeFontPixelSize(int size)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setFontPixelSize(size);
 	update();
 }
 
 void Scene::changeFontColor(const QString &text)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setFontColor(text);
 	update();
 }
 
 void Scene::changeFontItalic(bool isChecked)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setFontItalic(isChecked);
 	update();
 }
 
 void Scene::changeFontBold(bool isChecked)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setFontBold(isChecked);
 	update();
 }
 
 void Scene::changeFontUnderline(bool isChecked)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setFontUnderline(isChecked);
 	update();
 }
 
 void Scene::changeTextName(const QString &name)
 {
-	for (auto item : selectedTextPictureItems())
+	for (auto &&item : selectedTextPictureItems())
 		item->setTextName(name);
 	update();
 }
