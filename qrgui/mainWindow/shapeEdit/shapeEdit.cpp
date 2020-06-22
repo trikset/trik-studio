@@ -652,7 +652,7 @@ void ShapeEdit::addStylus(bool checked)
 
 void ShapeEdit::visibilityButtonClicked()
 {
-	QList<Item *> selectedItems = mScene->selectedSceneItems();
+	auto selectedItems = mScene->selectedSceneItems();
 	if (selectedItems.isEmpty()) {
 		return;
 	}

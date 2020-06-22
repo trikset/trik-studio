@@ -190,6 +190,12 @@ bool AbstractScene::compareItems(AbstractItem* first, AbstractItem* second)
 	return first->zValue() < second->zValue();
 }
 
+bool AbstractScene::compareSharedPtrItems(const QSharedPointer<AbstractItem> &first
+										  , const QSharedPointer<AbstractItem> &second)
+{
+	return first->zValue() < second->zValue();
+}
+
 void AbstractScene::setEmptyPenBrushItems()
 {
 	mPenStyleItems = "Solid";

@@ -21,10 +21,9 @@
 
 class Curve : public Path
 {
+	Q_DISABLE_COPY(Curve)
 public:
 	Curve(const QPointF &start, const QPointF &end, const QPointF &c1);
-	Curve(const Curve &other);
-	virtual Item* clone();
 	void  setCXandCY(qreal x, qreal y);
 	QRectF searchMaxMinCoord() const;
 	virtual QRectF boundingRect() const;

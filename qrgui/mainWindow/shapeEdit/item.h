@@ -59,7 +59,6 @@ public:
 	};
 
 	Item(graphicsUtils::AbstractItem* parent = nullptr);
-	virtual Item* clone() = 0;
 	virtual void setItemZValue(int zValue);
 	int itemZValue();
 	static int sign(int x);
