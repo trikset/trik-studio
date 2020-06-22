@@ -98,6 +98,7 @@ void TrikBrick::init()
 	mSensors.clear();
 	mEncoders.clear();
 	mLineSensors.clear();
+	mColorSensors.clear();
 	mTimers.clear();
 	mGyroscope.reset(); // for some reason it won't reconnect to the robot parts otherwise.
 	mAccelerometer.reset();
@@ -272,8 +273,7 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 	}
 
 	if (!mLineSensors.contains(port)) {
-		TrikLineSensor * sens =
-				RobotModelUtils::findDevice<TrikLineSensor>(*mTwoDRobotModel, port);
+		auto sens = RobotModelUtils::findDevice<TrikLineSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
 			emit error(tr("No configured LineSensor on port: %1").arg(port));
 			return nullptr;
@@ -285,8 +285,22 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 }
 
 trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
-	emit error(tr("Sensor not implemented in simulation mode. Used port: %1").arg(port));
-	return nullptr;
+	using namespace trik::robotModel::parts;
+	using namespace kitBase::robotModel;
+	if (port == "video0" || port == "video2") {
+		return colorSensor("ColorSensorPort"); // seems to be the case for 2d model
+	}
+
+	if (!mColorSensors.contains(port)) {
+		auto sens = RobotModelUtils::findDevice<TrikColorSensor>(*mTwoDRobotModel, port);
+		if (sens == nullptr) {
+			emit error(tr("No configured ColorSensor on port: %1").arg(port));
+			return nullptr;
+		}
+		mColorSensors[port].reset(new TrikColorSensorAdapter(sens));
+	}
+
+	return mColorSensors[port].get();
 }
 
 trikControl::ObjectSensorInterface *TrikBrick::objectSensor(const QString &port) {

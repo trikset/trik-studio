@@ -1,4 +1,4 @@
-/* Copyright 2016-2017 CyberTech Labs Ltd.
+/* Copyright 2020 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,22 @@
 
 #pragma once
 
-#include <trikControl/lineSensorInterface.h>
-#include <trikKit/robotModel/parts/trikLineSensor.h> // replace with forward declaration
+#include <trikControl/colorSensorInterface.h>
+#include <trikKit/robotModel/parts/trikColorSensor.h> // replace with forward declaration
 
-class TrikLineSensorAdapter : public trikControl::LineSensorInterface
+class TrikColorSensorAdapter : public trikControl::ColorSensorInterface
 {
-
 Q_OBJECT
 
 public:
-	TrikLineSensorAdapter(trik::robotModel::parts::TrikLineSensor *sensor);
+	TrikColorSensorAdapter(trik::robotModel::parts::TrikColorSensor *sensor);
 	virtual Status status() const override;
 
 public slots:
 	void init(bool showOnDisplay) override;
-	void detect() override;
-	QVector<int> read() override;
+	QVector<int> read(int m, int n) override;
 	void stop() override;
-	QVector<int> getDetectParameters() const override;
 
 private:
-
-	trik::robotModel::parts::TrikLineSensor *mLineSensor;
+	trik::robotModel::parts::TrikColorSensor *mColorSensor;
 };

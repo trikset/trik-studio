@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2020 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,23 +20,18 @@ namespace trik {
 namespace robotModel {
 namespace parts {
 
-/// Device representing TRIK camera line detector.
-class TrikLineSensor : public kitBase::robotModel::robotParts::VectorSensor
+class TrikVideoCamera : public kitBase::robotModel::robotParts::VectorSensor
 {
 	Q_OBJECT
-	Q_CLASSINFO("name", "trikLineSensor")
-	Q_CLASSINFO("friendlyName", tr("Line Sensor"))
-//	Q_CLASSINFO("simulated", "true")
+	Q_CLASSINFO("name", "trikVideoCamera")
+	Q_CLASSINFO("friendlyName", tr("Video Camera"))
+	Q_CLASSINFO("simulated", "true")
+	Q_CLASSINFO("direction", "input")
 
 public:
-	TrikLineSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
-
-	/// Turns camera on and prepares a sensor.
-	virtual void init() = 0;
-
-	/// Locks dominant color at center of a field of view of a camera as line color and begins tracking it.
-	virtual void detectLine() = 0;
+	TrikVideoCamera(const kitBase::robotModel::DeviceInfo &info
+			, const kitBase::robotModel::PortInfo &port)
+	    : VectorSensor(info, port) {}
 };
 
 }

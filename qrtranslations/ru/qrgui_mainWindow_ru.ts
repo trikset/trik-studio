@@ -927,7 +927,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Изображения (*.png *.jpg)</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+161"/>
         <source>Getting Started</source>
         <translation>Добро пожаловать!</translation>
     </message>

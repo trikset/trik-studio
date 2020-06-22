@@ -2222,6 +2222,8 @@ bool MainWindow::restoreState(const QByteArray &state, int version)
 	const bool result = QMainWindow::restoreState(state, version);
 	if (mUi->errorListWidget->count() == 0) {
 		mUi->errorDock->hide();
+	} else {
+		mUi->errorDock->setVisible(true);
 	}
 
 	return result;

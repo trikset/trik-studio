@@ -19,7 +19,6 @@
 #include <kitBase/robotModel/robotParts/button.h>
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 #include <kitBase/robotModel/robotParts/accelerometerSensor.h>
-
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 
 #include "trikKit/robotModel/parts/trikLightSensor.h"
@@ -40,6 +39,7 @@
 #include "trikKit/robotModel/parts/trikGamepadPad.h"
 #include "trikKit/robotModel/parts/trikGamepadPadPressSensor.h"
 #include "trikKit/robotModel/parts/trikGamepadWheel.h"
+#include "trikKit/robotModel/parts/trikVideoCamera.h"
 
 using namespace trik::robotModel;
 using namespace kitBase::robotModel;
@@ -91,13 +91,13 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 	addAllowedConnection(PortInfo("LineSensorPort", tr("Video 2"), input, { "TrikLineSensorPort" }, "lineSensor"
 			, PortInfo::ReservedVariableType::vector), { lineSensorInfo() });
 
+	addAllowedConnection(video2Port(), { videoCameraInfo() });
+
 	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), { objectSensorInfo() });
 	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
 	addAllowedConnection(PortInfo("ObjectSensorSizePort", input, {}, "objectSensorSize"), { objectSensorInfo() });
 
-	addAllowedConnection(PortInfo("ColorSensorRPort", input, {}, "colorSensorR"), { colorSensorInfo() });
-	addAllowedConnection(PortInfo("ColorSensorGPort", input, {}, "colorSensorG"), { colorSensorInfo() });
-	addAllowedConnection(PortInfo("ColorSensorBPort", input, {}, "colorSensorB"), { colorSensorInfo() });
+	addAllowedConnection(PortInfo("ColorSensorPort", input, {}, "colorSensor"), { colorSensorInfo() });
 
 	addAllowedConnection(PortInfo("ShellPort", output), { shellInfo() });
 
@@ -130,9 +130,8 @@ QList<PortInfo> TrikRobotModelBase::configurablePorts() const
 			, PortInfo("D2", input, {}, "sensorD2")
 			};
 
-	return CommonRobotModel::configurablePorts() + digitalPorts + QList<PortInfo>{PortInfo("LineSensorPort"
-			, tr("Video 2"), input, { "TrikLineSensorPort" }, "lineSensor"
-			, PortInfo::ReservedVariableType::vector)};
+	QList<PortInfo> const videoPorts = {video2Port()};
+	return CommonRobotModel::configurablePorts() + digitalPorts + videoPorts;
 }
 
 QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
@@ -143,6 +142,7 @@ QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
 		, DeviceInfo::create<parts::TrikSonarSensor>()
 		, DeviceInfo::create<parts::TrikMotionSensor>()
 		, DeviceInfo::create<parts::TrikLineSensor>()
+		, DeviceInfo::create<parts::TrikVideoCamera>()
 	};
 }
 
@@ -266,6 +266,10 @@ DeviceInfo TrikRobotModelBase::gamepadConnectionIndicatorInfo() const
 	return DeviceInfo::create<parts::TrikGamepadConnectionIndicator>();
 }
 
+DeviceInfo TrikRobotModelBase::videoCameraInfo() const {
+	return DeviceInfo::create<parts::TrikVideoCamera>();
+}
+
 QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 {
 	QHash<QString, int> result;
@@ -277,4 +281,8 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 	result["PowerButton"] = 116;
 	result["EscButton"] = 1;
 	return result;
+}
+
+PortInfo TrikRobotModelBase::video2Port() const {
+	return PortInfo("Video2Port", tr("Video 2"), input);
 }

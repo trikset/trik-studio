@@ -26,6 +26,7 @@
 #include <kitBase/robotModel/robotParts/touchSensor.h>
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 
+#include <trikKit/robotModel/parts/trikVideoCamera.h>
 #include <trikKit/robotModel/parts/trikLineSensor.h>
 #include <trikKit/robotModel/parts/trikObjectSensor.h>
 #include <trikKit/robotModel/parts/trikColorSensor.h>
@@ -109,11 +110,11 @@ robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const
 	}
 
 	if (deviceInfo.isA<robotModel::parts::TrikColorSensor>()) {
-		return new parts::ColorSensor(deviceInfo, port);
+		return new parts::ColorSensor(deviceInfo, port, *engine());
 	}
 
 	if (deviceInfo.isA<kitBase::robotModel::robotParts::GyroscopeSensor>()) {
-		return new parts::GyroscopeSensor(deviceInfo, port, *mEngine);
+		return new parts::GyroscopeSensor(deviceInfo, port, *engine());
 	}
 
 	return twoDModel::robotModel::TwoDRobotModel::createDevice(port, deviceInfo);
@@ -174,7 +175,7 @@ QString TrikTwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 		return ":icons/twoDIrRangeSensor.svg";
 	} else if (deviceType.isA<robotModel::parts::TrikSonarSensor>()) {
 		return ":icons/twoDUsRangeSensor.svg";
-	} else if (deviceType.isA<robotModel::parts::TrikLineSensor>()) {
+	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
 		return ":icons/twoDVideoModule.svg";
 	}
 
@@ -197,7 +198,7 @@ QRect TrikTwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo 
 		return QRect(-18, -18, 36, 36);
 	} else if (deviceType.isA<robotModel::parts::TrikSonarSensor>()) {
 		return QRect(-18, -18, 36, 36);
-	} else if (deviceType.isA<robotModel::parts::TrikLineSensor>()) {
+	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
 		return QRect(-9, -9, 18, 18);
 	}
 
@@ -212,10 +213,6 @@ QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> TrikTwoDRo
 
 QPair<QPoint, qreal> TrikTwoDRobotModel::specialDeviceConfiguration(const PortInfo &port) const
 {
-	if (port == PortInfo("LineSensorPort", input)) {
-		return qMakePair(QPoint(1, 0), 0);
-	}
-
 	return twoDModel::robotModel::TwoDRobotModel::specialDeviceConfiguration(port);
 }
 

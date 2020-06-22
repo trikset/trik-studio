@@ -63,6 +63,7 @@ public:
 	engine::TwoDModelDisplayInterface *display() override;
 	engine::TwoDModelGuiFacade &guiFacade() const override;
 
+	kitBase::robotModel::PortInfo videoPort() const override;
 private:
 	QPair<QPointF, qreal> countPositionAndDirection(const kitBase::robotModel::PortInfo &port) const;
 
