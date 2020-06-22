@@ -129,7 +129,7 @@ void Scene::setZValue(Item* item)
 void Scene::setZValueSelectedItems()
 {
 	mListSelectedItems = selectedItems();
-	for (QGraphicsItem *graphicsItem : mListSelectedItems) {
+	for (auto graphicsItem : mListSelectedItems) {
 		Item* item = dynamic_cast<Item*>(graphicsItem);
 		item->setZValue(mZValue);
 		mZValue++;
@@ -138,7 +138,7 @@ void Scene::setZValueSelectedItems()
 
 void Scene::setNullZValueItems()
 {
-	for (QGraphicsItem *graphicsItem : mListSelectedItems) {
+	for (auto graphicsItem : mListSelectedItems) {
 		Item* item = dynamic_cast<Item*>(graphicsItem);
 		item->setZValue(item->itemZValue());
 	}
@@ -480,7 +480,7 @@ void Scene::addImage(const QString &fileName)
 void Scene::deleteItem()
 {
 	QList<QGraphicsItem *> list = selectedItems();
-	for (QGraphicsItem *graphicsItem : list) {
+	for (auto graphicsItem : list) {
 		removeItem(graphicsItem);
 		delete graphicsItem;
 	}
@@ -498,7 +498,7 @@ QList<QSharedPointer<Item>> Scene::selectedSceneItems()
 {
 	QList<QSharedPointer<Item>> resList;
 	mListSelectedItems = selectedItems();
-	for (QGraphicsItem *graphicsItem : mListSelectedItems) {
+	for (auto graphicsItem : mListSelectedItems) {
 		QSharedPointer<Item> item(dynamic_cast<Item*>(graphicsItem));
 		if (item != nullptr)
 			resList.push_back(item);
@@ -563,7 +563,7 @@ void Scene::changePortsType(const QString &type)
 {
 	mPortType = type;
 
-	for (QGraphicsItem *item : selectedItems()) {
+	for (auto item : selectedItems()) {
 		PointPort *point = dynamic_cast<PointPort *>(item);
 		if (point) {
 			point->setType(type);
@@ -615,7 +615,7 @@ void Scene::changeFontPalette()
 
 void Scene::changePortsComboBox()
 {
-	for (QGraphicsItem *item : selectedItems()) {
+	for (auto item : selectedItems()) {
 		PointPort *point = dynamic_cast<PointPort *>(item);
 		if (point) {
 			emit existSelectedPortItems(point->getType());
