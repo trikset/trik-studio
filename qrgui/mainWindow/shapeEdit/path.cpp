@@ -23,28 +23,6 @@ Path::Path(const QPainterPath &path) : Item(nullptr)
 	mDomElementType = Item::pictureType;
 }
 
-Path::Path(const Path &other)
-	:Item()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = Item::pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mPath = other.mPath;
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* Path::clone()
-{
-	Path* item = new Path(*this);
-	return item;
-}
-
 QRectF Path::boundingRect() const
 {
 	return mPath.boundingRect();

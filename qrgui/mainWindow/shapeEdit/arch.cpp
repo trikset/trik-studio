@@ -33,30 +33,6 @@ Arch::Arch(QRectF rect, int startAngle, int spanAngle, Item* parent = nullptr)
 	mRect = rect;
 }
 
-Arch::Arch(const Arch &other)
-	:Item()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mSpanAngle = other.mSpanAngle;
-	mStartAngle = other.mStartAngle;
-	mRect = other.mRect;
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* Arch::clone()
-{
-	Arch* item = new Arch(*this);
-	return item;
-}
-
 int Arch::startAngle() const
 {
 	return mStartAngle;

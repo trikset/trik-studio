@@ -30,29 +30,6 @@ PointPort::PointPort(qreal x, qreal y, Item *parent) : Item(parent), mPointImpl(
 	mDomElementType = portType;
 }
 
-PointPort::PointPort(const PointPort &other)
-	:Item(), mPointImpl()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = portType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mRadius = other.mRadius;
-	mListScalePoint = other.mListScalePoint;
-	mType = other.mType;
-	setPos(other.x(), other.y());
-}
-
-Item* PointPort::clone()
-{
-	PointPort* item = new PointPort(*this);
-	return item;
-}
-
 QRectF PointPort::boundingRect() const
 {
 	return mPointImpl.boundingRect(x1() + mUnrealRadius, y1() + mUnrealRadius, mRadius, scalingDrift);

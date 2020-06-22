@@ -18,11 +18,10 @@
 
 class TextPicture : public Text
 {
+	Q_DISABLE_COPY(TextPicture)
 public:
 	TextPicture();
 	TextPicture(int x, int y, const QString &text = "text");
-	TextPicture(const TextPicture &other);
-	virtual Item* clone();
 	void setTextName(const QString &name);
 	void setFontFamily(const QFont& font);
 	void setFontPixelSize(int size);

@@ -15,7 +15,8 @@
 #include "ellipse.h"
 
 QRealEllipse::QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent)
-		: Item(parent), mRectangleImpl()
+		: Item(parent)
+		, mRectangleImpl()
 {
 	mNeedScalingRect = true;
 	setPen(QPen(Qt::blue));
@@ -25,27 +26,6 @@ QRealEllipse::QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent)
 	setY1(y1);
 	setX2(x2);
 	setY2(y2);
-}
-
-QRealEllipse::QRealEllipse(const QRealEllipse &other)
-	 : Item(), mRectangleImpl()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* QRealEllipse::clone()
-{
-	QRealEllipse* item = new QRealEllipse(*this);
-	return item;
 }
 
 QRectF QRealEllipse::boundingRect() const

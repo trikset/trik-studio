@@ -33,20 +33,6 @@ TextPicture::TextPicture(int x, int y, const QString &text)
 	init(x, y, text);
 }
 
-TextPicture::TextPicture(const TextPicture &other)
-	: Text(other)
-{
-	mDomElementType = pictureType;
-	mText.setParentItem(other.parentItem());
-	mFont = other.mFont;
-}
-
-Item* TextPicture::clone()
-{
-	TextPicture* item = new TextPicture(*this);
-	return item;
-}
-
 void TextPicture::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option);

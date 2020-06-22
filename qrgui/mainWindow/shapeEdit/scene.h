@@ -137,14 +137,12 @@ private:
 	CopyPasteType mCopyPaste;
 	QList<QSharedPointer<Item>> mListSelectedItemsForPaste;
 	QList<QGraphicsItem *> mListSelectedItems;
-	QList<TextPicture *> mListSelectedTextPictureItems;
-	TextPicture *mSelectedTextPicture;
-	QPair<bool, Item *> mNeedResize;
+	QList<QSharedPointer<TextPicture>> mListSelectedTextPictureItems;
 	QString mPortType;
 
 	void initListSelectedItemsForPaste();
 	QRectF selectedItemsBoundingRect() const;
-	QList<TextPicture *> selectedTextPictureItems();
+	QList<QSharedPointer<TextPicture>> selectedTextPictureItems();
 	QPointF setCXandCY(QGraphicsSceneMouseEvent *event);
 	void reshapeLine(QGraphicsSceneMouseEvent *event);
 	void reshapeLinePort(QGraphicsSceneMouseEvent *event);

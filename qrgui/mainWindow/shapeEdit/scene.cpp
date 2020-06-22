@@ -28,7 +28,6 @@ Scene::Scene(graphicsUtils::AbstractView *view, QObject * parent)
 	, mItemType(none)
 	, mWaitMove(false)
 	, mCount(0)
-	, mSelectedTextPicture(nullptr)
 {
 	mSizeEmptyRectX = sizeEmptyRectX;
 	mSizeEmptyRectY = sizeEmptyRectY;
@@ -48,8 +47,8 @@ Scene::Scene(graphicsUtils::AbstractView *view, QObject * parent)
 QRectF Scene::selectedItemsBoundingRect() const
 {
 	QRectF resBoundRect;
-	QList<Item *> list = mListSelectedItemsForPaste;
-	for (Item *graphicsItem : list)
+	auto list = mListSelectedItemsForPaste;
+	for (auto graphicsItem : list)
 		resBoundRect |= graphicsItem->sceneBoundingRect();
 	return resBoundRect;
 }
@@ -148,13 +147,13 @@ void Scene::setNullZValueItems()
 
 QPair<bool, Item *> Scene::checkOnResize(qreal x, qreal y)
 {
-	QList<Item *> list = selectedSceneItems();
-	for (Item *item : list) {
+	QList<QSharedPointer<Item>> list = selectedSceneItems();
+	for (auto item : list) {
 		item->changeDragState(x, y);
 		item->changeScalingPointState(x, y);
 		if (item->dragState() != Item::None)  {
 			mView->setDragMode(QGraphicsView::NoDrag);
-			return QPair<bool, Item *>(true, item);
+			return QPair<bool, Item *>(true, item.data());
 		}
 	}
 	return QPair<bool, Item *>(false, nullptr);
@@ -375,17 +374,17 @@ void Scene::keyPressEvent(QKeyEvent *keyEvent)
 		QPointF topLeftSelection(selectedItemsBoundingRect().topLeft());
 		switch (mCopyPaste) {
 		case copy:
-			for(Item *item: mListSelectedItemsForPaste) {
-				Item* newItem = item->clone();
+			for(auto item: mListSelectedItemsForPaste) {
+				auto newItem = item;
 				newItem->setPos(posCursor - topLeftSelection + item->scenePos());
-				addItem(newItem);
-				setZValue(newItem);
+				addItem(newItem.data());
+				setZValue(newItem.data());
 			}
 			break;
 		case cut:
-			for(Item *item: mListSelectedItemsForPaste) {
+			for(auto item: mListSelectedItemsForPaste) {
 				item->setPos(posCursor - topLeftSelection + item->scenePos());
-				setZValue(item);
+				setZValue(item.data());
 				mListSelectedItemsForPaste.clear();
 			}
 			break;
@@ -504,16 +503,16 @@ QList<QSharedPointer<Item>> Scene::selectedSceneItems()
 		if (item != nullptr)
 			resList.push_back(item);
 	}
-	std::sort(resList.begin(), resList.end(), compareItems);
+	std::sort(resList.begin(), resList.end(), compareSharedPtrItems);
 	return resList;
 }
 
-QList<TextPicture *> Scene::selectedTextPictureItems()
+QList<QSharedPointer<TextPicture>> Scene::selectedTextPictureItems()
 {
-	QList<TextPicture *> resList;
+	QList<QSharedPointer<TextPicture>> resList;
 	mListSelectedItems = selectedItems();
-	for (QGraphicsItem *graphicsItem : mListSelectedItems) {
-		TextPicture* item = dynamic_cast<TextPicture*>(graphicsItem);
+	for (auto graphicsItem : mListSelectedItems) {
+		QSharedPointer<TextPicture> item(dynamic_cast<TextPicture*>(graphicsItem));
 		if (item != nullptr)
 			resList.push_back(item);
 	}
@@ -605,7 +604,7 @@ void Scene::changeFontPalette()
 	if (mListSelectedTextPictureItems.isEmpty())
 		emit noSelectedTextPictureItems();
 	else {
-		TextPicture* item = dynamic_cast<TextPicture*>(mListSelectedTextPictureItems.back());
+		auto item = mListSelectedTextPictureItems.back();
 		if (item != nullptr) {
 			QPen penItem = item->pen();
 			QFont fontItem = item->font();
@@ -633,49 +632,49 @@ void Scene::changePortsComboBox()
 
 void Scene::changeFontFamily(const QFont& font)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setFontFamily(font);
 	update();
 }
 
 void Scene::changeFontPixelSize(int size)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setFontPixelSize(size);
 	update();
 }
 
 void Scene::changeFontColor(const QString &text)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setFontColor(text);
 	update();
 }
 
 void Scene::changeFontItalic(bool isChecked)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setFontItalic(isChecked);
 	update();
 }
 
 void Scene::changeFontBold(bool isChecked)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setFontBold(isChecked);
 	update();
 }
 
 void Scene::changeFontUnderline(bool isChecked)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setFontUnderline(isChecked);
 	update();
 }
 
 void Scene::changeTextName(const QString &name)
 {
-	for (TextPicture *item : selectedTextPictureItems())
+	for (auto item : selectedTextPictureItems())
 		item->setTextName(name);
 	update();
 }

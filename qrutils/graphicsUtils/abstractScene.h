@@ -41,6 +41,8 @@ public:
 	virtual void forReleaseResize(QGraphicsSceneMouseEvent *event);
 
 	static bool compareItems(graphicsUtils::AbstractItem* first, graphicsUtils::AbstractItem* second);
+	static bool compareSharedPtrItems(QSharedPointer<graphicsUtils::AbstractItem> first
+							 , QSharedPointer<graphicsUtils::AbstractItem> second);
 	QString convertPenToString(const QPen &pen);
 	QString convertBrushToString(const QBrush &brush);
 	void setPenBrushItems(const QPen &pen, const QBrush &brush);

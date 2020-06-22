@@ -22,10 +22,9 @@
 
 class QRealRectangle : public Item
 {
+	Q_DISABLE_COPY(QRealRectangle)
 public:
 	QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
-	QRealRectangle(const QRealRectangle &other);
-	virtual Item* clone();
 	virtual QRectF boundingRect() const;
 	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
 
