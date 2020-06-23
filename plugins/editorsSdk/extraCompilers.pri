@@ -13,49 +13,51 @@
 # limitations under the License.
 
 EDITOR_PATH = $$PWD/../$$QREAL_EDITOR_PATH
+QRXC_GENERATED_PATH = $$OUT_PWD
 
 # https://bugreports.qt.io/browse/QTBUG-47566
 # QT_NO_CPU_FEATURE=sse4.2 and QT_HASH_SEED=0 as an attempt ot get predictable qHash
 
 win32 {
-	QRXC_COMMAND = cd $$EDITOR_PATH && set QT_NO_CPU_FEATURE=sse4.2 && set QT_HASH_SEED=0 && $$QRXC
+    QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && set QT_NO_CPU_FEATURE=sse4.2 && set QT_HASH_SEED=0 && $$QRXC
 } else:!macx {
-	QRXC_COMMAND = cd $$EDITOR_PATH && env ASAN_OPTIONS=detect_leaks=0 LD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
+    QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && env ASAN_OPTIONS=detect_leaks=0 LD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
 } else {
-	QRXC_COMMAND = cd $$EDITOR_PATH && env ASAN_OPTIONS=detect_leaks=0 DYLD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
+    QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && env ASAN_OPTIONS=detect_leaks=0 DYLD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
 }
 
-qrxc_source.commands = $$QRXC_COMMAND $$QREAL_XML $$ROOT
+qrxc_source.commands = $$QRXC_COMMAND $$EDITOR_PATH/$$QREAL_XML
 qrxc_source.depends = $$QRXC $$QREAL_XML_DEPENDS
 qrxc_source.input = QREAL_XML
-qrxc_source.output = $$EDITOR_PATH/generated/pluginInterface.cpp
+qrxc_source.output = $$QRXC_GENERATED_PATH/generated/pluginInterface.cpp
 qrxc_source.variable_out = SOURCES
 qrxc_source.name = QReal_XML_Compiler
 
 QMAKE_EXTRA_COMPILERS += qrxc_source
 
+# qmake does not give an adequate way to specify a "custom compiler" that generates multiple files. What a shame.
 FAKE_COMMAND = cd .
 
 qrxc_header.commands = $$FAKE_COMMAND
-qrxc_header.depends = $$QRXC $$QREAL_XML_DEPENDS $$EDITOR_PATH/generated/pluginInterface.cpp
+qrxc_header.depends = $$QRXC $$QREAL_XML_DEPENDS $$QRXC_GENERATED_PATH/generated/pluginInterface.cpp
 qrxc_header.input = QREAL_XML
-qrxc_header.output = $$EDITOR_PATH/generated/pluginInterface.h
+qrxc_header.output = $$QRXC_GENERATED_PATH/generated/pluginInterface.h
 qrxc_header.variable_out = MOC_HEADERS
 
 QMAKE_EXTRA_COMPILERS += qrxc_header
 
 qrxc_elements.commands = $$FAKE_COMMAND
-qrxc_elements.depends = $$QRXC $$QREAL_XML_DEPENDS $$EDITOR_PATH/generated/pluginInterface.cpp
+qrxc_elements.depends = $$QRXC $$QREAL_XML_DEPENDS $$QRXC_GENERATED_PATH/generated/pluginInterface.cpp
 qrxc_elements.input = QREAL_XML
-qrxc_elements.output = $$EDITOR_PATH/generated/elements.h
+qrxc_elements.output = $$QRXC_GENERATED_PATH/generated/elements.h
 qrxc_elements.variable_out = HEADERS
 
 QMAKE_EXTRA_COMPILERS += qrxc_elements
 
 qrxc_resource.commands = $$FAKE_COMMAND
-qrxc_resource.depends = $$QRXC $$QREAL_XML_DEPENDS $$EDITOR_PATH/generated/pluginInterface.cpp
+qrxc_resource.depends = $$QRXC $$QREAL_XML_DEPENDS $$QRXC_GENERATED_PATH/generated/pluginInterface.cpp
 qrxc_resource.input = QREAL_XML
-qrxc_resource.output = $$EDITOR_PATH/plugin.qrc
+qrxc_resource.output = $$QRXC_GENERATED_PATH/plugin.qrc
 qrxc_resource.variable_out = NEW_RESOURCES
 
 QMAKE_EXTRA_COMPILERS += qrxc_resource

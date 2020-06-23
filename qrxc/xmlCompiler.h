@@ -34,7 +34,7 @@ public:
 	~XmlCompiler();
 
 	QString pluginName() const;
-	bool compile(const QString &inputXmlFileName, const QString &sourcesRootFolder);
+	bool compile(const QString &inputXmlFileName);
 	Editor *loadXmlFile(const QDir &currentDir, const QString &inputXmlFileName);
 	Diagram *getDiagram(const QString &diagramName);
 	void addResource(const QString &resourceName);
@@ -67,5 +67,4 @@ private:
 	QString mPluginVersion;
 	QString mResources;
 	QString mCurrentEditor;
-	QString mSourcesRootFolder;
 };

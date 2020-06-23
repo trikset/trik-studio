@@ -42,7 +42,7 @@ XmlCompiler::XmlCompiler()
 	if (!dir.exists("generated")) {
 		dir.mkdir("generated");
 	}
-	dir.cd("generated");
+    dir.cd("generated");
 	if (!dir.exists("shapes")) {
 		dir.mkdir("shapes");
 	}
@@ -59,12 +59,11 @@ QString XmlCompiler::pluginName() const
 	return mPluginName;
 }
 
-bool XmlCompiler::compile(const QString &inputXmlFileName, const QString &sourcesRootFolder)
+bool XmlCompiler::compile(const QString &inputXmlFileName)
 {
 	const QFileInfo inputXmlFileInfo(inputXmlFileName);
-	mPluginName = NameNormalizer::normalize(inputXmlFileInfo.completeBaseName());
+    mPluginName = NameNormalizer::normalize(inputXmlFileInfo.completeBaseName());
 	mCurrentEditor = inputXmlFileInfo.absoluteFilePath();
-	mSourcesRootFolder = sourcesRootFolder;
 	const QDir startingDir = inputXmlFileInfo.dir();
 	if (!loadXmlFile(startingDir, inputXmlFileInfo.fileName())) {
 		return false;
