@@ -261,7 +261,7 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+61"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>
@@ -276,7 +276,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+204"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>

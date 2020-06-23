@@ -204,7 +204,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+61"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -219,7 +219,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+204"/>
         <source>Enter robot`s IP-address here...</source>
         <translation type="unfinished">Tapez l&apos;adresse IP du robot ici...</translation>
     </message>
