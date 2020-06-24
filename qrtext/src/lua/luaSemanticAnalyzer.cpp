@@ -108,7 +108,7 @@ void LuaSemanticAnalyzer::checkReservedIdentifiersUsage(const QSharedPointer<cor
 	if (node->is<ast::Identifier>()) {
 		const auto identifier = as<ast::Identifier>(node);
 		if (mIntrinsicFunctions.contains(identifier->name())
-				&& (!parent->is<ast::FunctionCall>() || as<ast::FunctionCall>(parent)->function() != node))
+				&& (!parent || !parent->is<ast::FunctionCall>() || as<ast::FunctionCall>(parent)->function() != node))
 		{
 			reportError(node, QObject::tr("Intrinsic function used as an identifier"));
 		}

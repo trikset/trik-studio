@@ -62,7 +62,7 @@ public:
 
 	/// Can be called to append new entity into this metamodel.
 	/// @note Metamodel will take ownership on \a entity.
-	void addNode(qrgraph::Node &entity) override;
+	void addNode(qrgraph::Node *entity) override;
 
 	/// Returns type descriptor of the given element (the vertex of this multigraph with the given name).
 	/// @warning If this metamodel does not contain \a diagram or \a diagram does not contain \a element

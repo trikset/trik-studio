@@ -42,13 +42,7 @@ TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase() :
 
 TrikKitInterpreterPluginBase::~TrikKitInterpreterPluginBase()
 {
-	if (mOwnsAdditionalPreferences) {
-		delete mAdditionalPreferences;
-	}
-
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
+	release();
 }
 
 void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
@@ -403,10 +397,18 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 
 void TrikKitInterpreterPluginBase::release()
 {
+	if (mOwnsAdditionalPreferences) {
+		delete mAdditionalPreferences;
+	}
+
+	if (mOwnsBlocksFactory) {
+		delete mBlocksFactory;
+	}
+
+	mTextualInterpreter.reset(); // release before mTwoDModel is destroyed
 	mTwoDModel.reset();
 	mTwoDRobotModel.reset();
 	mRealRobotModel.reset();
-	mTextualInterpreter.reset();
 }
 
 QList<kitBase::robotModel::RobotModelInterface *> TrikKitInterpreterPluginBase::robotModels()

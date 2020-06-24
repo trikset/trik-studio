@@ -40,6 +40,8 @@
 #include "src/engine/items/regions/ellipseRegion.h"
 #include "src/engine/items/regions/rectangularRegion.h"
 
+#include "kitBase/robotModel/robotModelUtils.h"
+
 using namespace twoDModel;
 using namespace kitBase::robotModel;
 using namespace twoDModel::model;
@@ -153,6 +155,7 @@ int TwoDModelEngineApi::spoilRangeReading(const int distance) const
 QColor TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 {
 	const QImage image = areaUnderSensor(port, 1.0);
+	if (image.isNull()) return QColor();
 
 	qreal averageB = 0, averageG = 0, averageR = 0;
 	auto arr = image.constBits();
@@ -342,4 +345,9 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 			? true
 			: mModel.robotModels()[0]->info().robotId().contains("trik"));
 	timer->start();
+}
+
+kitBase::robotModel::PortInfo TwoDModelEngineApi::videoPort() const
+{
+	return RobotModelUtils::findPort(mModel.robotModels()[0]->info(), "Video2Port", input);
 }

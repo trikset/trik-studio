@@ -62,6 +62,10 @@ private:
 	/// Replaces "trikV62KitRobot" with "trikKitRobot"
 	static qReal::ProjectConverter from320to330Converter();
 
+	/// Replaces "twoDInfraredSensor" with "RangeSensor"
+	/// Replaces "TrikLineSensor" with "TrikVideoCamera"
+	static qReal::ProjectConverter from330to20204Converter();
+
 	static bool isRobotsDiagram(const qReal::Id &element);
 	static bool isDiagramType(const qReal::Id &element);
 	static bool isEdgeType(const qReal::Id &element);

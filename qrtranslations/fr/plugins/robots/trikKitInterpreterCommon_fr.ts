@@ -99,18 +99,18 @@
     <name>trik::TrikBrick</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+84"/>
-        <location line="+69"/>
+        <location line="+70"/>
         <source>2d model shell part was not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-30"/>
-        <location line="+298"/>
+        <location line="+311"/>
         <source>Trying to read from file %1 failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-243"/>
+        <location line="-256"/>
         <source>No configured motor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -130,13 +130,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+20"/>
         <source>No configured LineSensor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+19"/>
+        <source>No configured ColorSensor on port: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+10"/>
-        <location line="+5"/>
         <source>Sensor not implemented in simulation mode. Used port: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -200,7 +204,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+67"/>
+        <location line="+61"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -215,7 +219,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+204"/>
         <source>Enter robot`s IP-address here...</source>
         <translation type="unfinished">Tapez l&apos;adresse IP du robot ici...</translation>
     </message>

@@ -25,8 +25,11 @@ Repository::Repository(const QString &workingFile)
 		: mWorkingFile(workingFile)
 		, mSerializer(workingFile)
 {
-	init();
 	loadFromDisk();
+	if (mObjects.isEmpty()) {
+		// Nothing loaded
+		init();
+	}
 }
 
 void Repository::init()
@@ -525,7 +528,7 @@ void Repository::printDebug() const
 
 bool Repository::exterminate()
 {
-	printDebug();	
+	printDebug();
 	//serializer.clearWorkingDir();
 	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk({}, mMetaInfo);
 	init();

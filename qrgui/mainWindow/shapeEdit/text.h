@@ -23,11 +23,10 @@
 
 class Text : public Item
 {
+	Q_DISABLE_COPY(Text)
 public:
 	Text(bool isDynamic = false);
 	Text(int x, int y, const QString &text = "text", bool isDynamic = false);
-	Text(const Text &other);
-	virtual Item* clone();
 	void init(int x, int y, const QString &text);
 	bool isDynamicText();
 	virtual void setIsDynamicText(bool isDynamic);

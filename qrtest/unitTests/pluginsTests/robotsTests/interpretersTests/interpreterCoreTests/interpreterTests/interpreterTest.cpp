@@ -96,8 +96,7 @@ void InterpreterTest::SetUp()
 
 	mParser.reset(new interpreterCore::textLanguage::RobotsBlockParser(mModelManager, []() { return 0; }));
 
-	DummyBlockFactory *blocksFactory = new DummyBlockFactory;
-	blocksFactory->configure(
+	mBlocksFactory.configure(
 			mQrguiFacade->graphicalModelAssistInterface()
 			, mQrguiFacade->logicalModelAssistInterface()
 			, mModelManager
@@ -106,17 +105,17 @@ void InterpreterTest::SetUp()
 			);
 
 	ON_CALL(mBlocksFactoryManager, block(_, _)).WillByDefault(
-			Invoke([=] (qReal::Id const &id, kitBase::robotModel::RobotModelInterface const &robotModel) {
+			Invoke([this] (qReal::Id const &id, kitBase::robotModel::RobotModelInterface const &robotModel) {
 					Q_UNUSED(robotModel)
-					return blocksFactory->block(id);
+					return mBlocksFactory.block(id);
 			} )
 			);
 	EXPECT_CALL(mBlocksFactoryManager, block(_, _)).Times(AtLeast(0));
 
 	ON_CALL(mBlocksFactoryManager, enabledBlocks(_)).WillByDefault(
-			Invoke([=] (kitBase::robotModel::RobotModelInterface const &robotModel) {
+			Invoke([this] (kitBase::robotModel::RobotModelInterface const &robotModel) {
 					Q_UNUSED(robotModel)
-					return blocksFactory->providedBlocks().toSet();
+					return mBlocksFactory.providedBlocks().toSet();
 			} )
 			);
 	EXPECT_CALL(mBlocksFactoryManager, enabledBlocks(_)).Times(0);

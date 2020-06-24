@@ -44,10 +44,10 @@ const Id metamodelContainmentLinkType = Id("MetaEditor", "MetaEditor", "Containe
 const Id metamodelExplosionLinkType = Id("MetaEditor", "MetaEditor", "Explosion");
 const Id metamodelPropertiesAsContainerType = Id("MetaEditor", "MetaEditor", "MetaEntityPropertiesAsContainer");
 
-bool QrsMetamodelSaver::save(const QList<Metamodel *> &metamodels, const QString &path)
+bool QrsMetamodelSaver::save(const QList<QSharedPointer<Metamodel> > &metamodels, const QString &path)
 {
 	qrRepo::RepoApi repo(QString(), false);
-	for (const Metamodel * const metamodel : metamodels) {
+	for (auto &&metamodel : metamodels) {
 		saveMetamodel(repo, *metamodel);
 	}
 

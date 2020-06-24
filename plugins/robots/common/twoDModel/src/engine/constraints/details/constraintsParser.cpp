@@ -81,7 +81,9 @@ bool ConstraintsParser::parseConstraints(const QDomElement &constraints)
 			; !constraint.isNull()
 			; constraint = constraint.nextSiblingElement())
 	{
-		if (!addToEvents(parseConstraint(constraint))) {
+		auto *parsed = parseConstraint(constraint);
+		if (!addToEvents(parsed)) {
+			delete parsed;
 			return false;
 		}
 
@@ -773,7 +775,7 @@ bool ConstraintsParser::addToEvents(Event * const event)
 		return error(QObject::tr("Duplicate id: \"%1\"").arg(id));
 	}
 
-	mEvents[event->id()] = event;
+	mEvents[event->id()].reset(event);
 	return true;
 }
 

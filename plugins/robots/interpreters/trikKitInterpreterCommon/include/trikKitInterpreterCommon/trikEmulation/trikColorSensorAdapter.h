@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2020 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,22 @@
 
 #pragma once
 
-#include "mainWindow/shapeEdit/item.h"
-#include "mainWindow/shapeEdit/line.h"
+#include <trikControl/colorSensorInterface.h>
+#include <trikKit/robotModel/parts/trikColorSensor.h> // replace with forward declaration
 
-class LinePort : public Line
+class TrikColorSensorAdapter : public trikControl::ColorSensorInterface
 {
-	Q_DISABLE_COPY(LinePort)
+Q_OBJECT
+
 public:
-	LinePort(qreal x1, qreal y1, qreal x2, qreal y2, Line* parent = nullptr);
+	TrikColorSensorAdapter(trik::robotModel::parts::TrikColorSensor *sensor);
+	virtual Status status() const override;
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
-
-	void setType(const QString &type);
-	QString getType() const;
+public slots:
+	void init(bool showOnDisplay) override;
+	QVector<int> read(int m, int n) override;
+	void stop() override;
 
 private:
-	QString mType;
+	trik::robotModel::parts::TrikColorSensor *mColorSensor;
 };

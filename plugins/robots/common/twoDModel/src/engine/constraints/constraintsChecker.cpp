@@ -34,10 +34,6 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 	: mErrorReporter(errorReporter)
 	, mModel(model)
 	, mParser(new details::ConstraintsParser(mEvents, mVariables, mObjects, mModel.timeline(), mStatus))
-	, mParsedSuccessfully(false)
-	, mSuccessTriggered(false)
-	, mFailTriggered(false)
-	, mEnabled(true)
 {
 	connect(&mStatus, &details::StatusReporter::success, this, [this](bool deferred) {
 		if (deferred) {
@@ -63,7 +59,6 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 
 ConstraintsChecker::~ConstraintsChecker()
 {
-	qDeleteAll(mEvents);
 }
 
 bool ConstraintsChecker::hasConstraints() const
@@ -73,7 +68,6 @@ bool ConstraintsChecker::hasConstraints() const
 
 bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
 {
-	qDeleteAll(mEvents);
 	mEvents.clear();
 	mActiveEvents.clear();
 	mVariables.clear();
@@ -119,11 +113,11 @@ void ConstraintsChecker::reportParserError(const QString &message)
 void ConstraintsChecker::prepareEvents()
 {
 	mActiveEvents.clear();
-	for (details::Event * const event : mEvents) {
-		connect(event, &details::Event::settedUp, this, &ConstraintsChecker::setUpEvent, Qt::UniqueConnection);
-		connect(event, &details::Event::dropped, this, &ConstraintsChecker::dropEvent, Qt::UniqueConnection);
+	for (auto &&event : mEvents) {
+		connect(&*event, &details::Event::settedUp, this, &ConstraintsChecker::setUpEvent, Qt::UniqueConnection);
+		connect(&*event, &details::Event::dropped, this, &ConstraintsChecker::dropEvent, Qt::UniqueConnection);
 		if (event->isAliveInitially()) {
-			mActiveEvents << event;
+			mActiveEvents << &*event;
 			event->setUp();
 		} else {
 			event->drop();

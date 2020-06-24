@@ -742,7 +742,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+635"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+612"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -751,7 +751,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-437"/>
+        <location line="-420"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+684"/>
+        <location line="+667"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -906,7 +906,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Images (*.png *.jpg)</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+161"/>
         <source>Getting Started</source>
         <translation>Commencer</translation>
     </message>
@@ -984,7 +984,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+138"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
         <source>New project</source>
         <translation>Nouveau projet</translation>
     </message>

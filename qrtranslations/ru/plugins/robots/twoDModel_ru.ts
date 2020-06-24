@@ -207,7 +207,7 @@
         <translation>Корневой элемент должен быть тэгом &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+36"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Должен иметься тэг &quot;timelimit&quot;.</translation>
     </message>
@@ -540,7 +540,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+115"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+109"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>

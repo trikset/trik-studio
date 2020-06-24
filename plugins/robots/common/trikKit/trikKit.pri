@@ -48,6 +48,7 @@ HEADERS += \
 	$$PWD/include/trikKit/robotModel/parts/trikMotorsAggregator.h \
 	$$PWD/include/trikKit/robotModel/parts/trikTouchSensor.h \
 	$$PWD/include/trikKit/robotModel/parts/trikLightSensor.h \
+	$$PWD/include/trikKit/robotModel/parts/trikVideoCamera.h \
 	$$PWD/include/trikKit/blocks/trikBlocksFactoryBase.h \
 	$$PWD/include/trikKit/blocks/trikV6BlocksFactory.h \
 	$$PWD/include/trikKit/blocks/trikV62BlocksFactory.h \

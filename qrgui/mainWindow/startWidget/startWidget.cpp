@@ -31,14 +31,11 @@
 
 using namespace qReal;
 
-StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager)
-	: mMainWindow(mainWindow)
+StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager, QWidget *parent)
+	: QWidget(parent)
+	, mMainWindow(mainWindow)
 	, mProjectManager(projectManager)
 	, mProjectListSize(SettingsManager::value("recentProjectsLimit", 5).toInt())  // TODO: Why 5?
-	, mNewProjectButton(nullptr)
-	, mOpenProjectButton(nullptr)
-	, mOpenInterpreterButton(nullptr)
-	, mCreateInterpreterButton(nullptr)
 {
 	setStyleSheet(BrandManager::styles()->startTabSubstrateBackgroundStyle());
 	QWidget * const mainWidget = createMainWidget();
@@ -52,7 +49,7 @@ StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager)
 
 QWidget *StartWidget::createMainWidget()
 {
-	QWidget * const result = new QWidget;
+	QWidget * const result = new QWidget(this);
 	result->setStyleSheet(BrandManager::styles()->startTabBackgroundStyle());
 
 	QWidget * const header = createHeader();
@@ -300,9 +297,9 @@ void StartWidget::openInterpretedDiagram()
 	QrsMetamodelLoader loader;
 	connect(&loader, &QrsMetamodelLoader::errorOccured
 			, static_cast<gui::ErrorReporter *>(mMainWindow->errorReporter()), &gui::ErrorReporter::addError);
-	const QList<Metamodel *> metamodels = loader.load(fileName);
-	for (Metamodel *metamodel : metamodels) {
-		editorManager.loadMetamodel(*metamodel);
+
+	for (auto &&metamodel : loader.load(fileName)) {
+		editorManager.loadMetamodel(metamodel);
 	}
 
 	/// @todo: Hack for rereading palette, must be done automaticly on plugins set changed!

@@ -27,27 +27,6 @@ QRealRectangle::QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item* par
 	setY2(y2);
 }
 
-QRealRectangle::QRealRectangle(const QRealRectangle &other)
-	:Item(), mRectangleImpl()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* QRealRectangle::clone()
-{
-	QRealRectangle* item = new QRealRectangle(*this);
-	return item;
-}
-
 QRectF QRealRectangle::boundingRect() const
 {
 	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), scalingDrift);

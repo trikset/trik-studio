@@ -20,10 +20,9 @@
 
 class Path : public Item
 {
+	Q_DISABLE_COPY(Path)
 public:
 	Path(const QPainterPath &path);
-	Path(const Path &other);
-	virtual Item* clone();
 	virtual QRectF boundingRect() const;
 	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) ;
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document

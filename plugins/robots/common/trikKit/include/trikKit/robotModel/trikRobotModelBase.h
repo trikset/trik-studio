@@ -60,16 +60,20 @@ protected:
 	virtual kitBase::robotModel::DeviceInfo accelerometerInfo() const;
 
 	virtual kitBase::robotModel::DeviceInfo ledInfo() const;
+	virtual kitBase::robotModel::DeviceInfo shellInfo() const;
+
+	virtual kitBase::robotModel::DeviceInfo videoCameraInfo() const;
 	virtual kitBase::robotModel::DeviceInfo lineSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo colorSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo objectSensorInfo() const;
-	virtual kitBase::robotModel::DeviceInfo shellInfo() const;
 
 	virtual kitBase::robotModel::DeviceInfo gamepadButtonInfo() const;
 	virtual kitBase::robotModel::DeviceInfo gamepadPadInfo() const;
 	virtual kitBase::robotModel::DeviceInfo gamepadPadPressSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo gamepadWheelInfo() const;
 	virtual kitBase::robotModel::DeviceInfo gamepadConnectionIndicatorInfo() const;
+
+	virtual kitBase::robotModel::PortInfo video2Port() const;
 };
 
 }
