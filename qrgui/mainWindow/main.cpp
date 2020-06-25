@@ -114,9 +114,9 @@ int main(int argc, char *argv[])
 		}
 
 		for (const QString &argument : app.arguments()) {
-			if (argument.endsWith(".qrs") || argument.endsWith(".qrs'") || argument.endsWith(".qrs\"")) {
-				fileToOpen = argument;
-				break;
+			fileToOpen += argument;
+			if (argument.endsWith(".exe") || argument.endsWith(".exe'") || argument.endsWith(".exe\"")) {
+				fileToOpen = "";
 			}
 		}
 	}
