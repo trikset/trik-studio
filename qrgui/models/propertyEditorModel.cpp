@@ -473,7 +473,7 @@ QString PropertyEditorModel::propertyName(const QModelIndex &index) const
 		for (QDomElement element
 				= dynamProperties.firstChildElement("properties").firstChildElement("property");
 				!element.isNull();
-				element = element.nextSiblingElement("property"))
+				element = element.nextSiblingElement("property"), ++i)
 		{
 			if (i == index.row() - propertiesCount) {
 				fieldName = element.attribute("name");

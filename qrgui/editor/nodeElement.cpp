@@ -191,10 +191,6 @@ void NodeElement::updateDynamicProperties(const Id &target)
 	if (mPreviousDynamicLabels.isEmpty() ||
 			(!mPreviousDynamicLabels.isEmpty() && compareDynamicLabels(dynamiclabels, mPreviousDynamicLabels))) {
 		mPreviousDynamicLabels = dynamiclabels;
-		QDomDocument dynamicProperties;
-		QDomElement properties = dynamicProperties.createElement("properties");
-		QDomDocument dynamicLabels;
-		dynamicLabels.setContent(dynamiclabels);
 
 		// ...delete old dynamic labels
 		const int oldCount = mLabels.count() - mStartingLabelsCount;
@@ -207,17 +203,24 @@ void NodeElement::updateDynamicProperties(const Id &target)
 				= mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(logicalId(), "dynamicProperties");
 		QMap<QString, QString> valueByPropertyName;
 		if (!mCurretDynamicProperties.isEmpty()) {
-			QDomDocument dynamicProperties;
-			dynamicProperties.setContent(mCurretDynamicProperties);
+			QDomDocument currentDynamicProperties;
+			currentDynamicProperties.setContent(mCurretDynamicProperties);
 
 			for (QDomElement element
-					= dynamicProperties.firstChildElement("properties").firstChildElement("property")
+					= currentDynamicProperties.firstChildElement("properties").firstChildElement("property")
 					; !element.isNull()
 					; element = element.nextSiblingElement("property"))
 			{
 				valueByPropertyName[element.attribute("name")] = element.attribute("dynamicPropertyValue");
 			}
 		}
+
+		QDomDocument dynamicProperties;
+		QDomElement properties = dynamicProperties.createElement("properties");
+		dynamicProperties.appendChild(properties);
+
+		QDomDocument dynamicLabels;
+		dynamicLabels.setContent(dynamiclabels);
 
 		int index = mLabels.count() + 1;
 		for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label")
@@ -244,13 +247,6 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			property.setAttribute("dynamicPropertyValue", value);
 			properties.appendChild(property);
 
-			if (dynamicProperties.appendChild(properties).isNull()) {
-				dynamicProperties.replaceChild(properties, properties);
-			}
-
-			mLogicalAssistApi.mutableLogicalRepoApi().setProperty(logicalId(), "dynamicProperties"
-					, dynamicProperties.toString(4));
-
 			// Label initialization
 			QSharedPointer<LabelProperties> labelInfo(new LabelProperties(index, x.value(), y.value()
 																		  , textBinded, false, 0));
@@ -267,6 +263,10 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			label->setPlainText(value);
 			mLabels.append(label);
 		}
+
+		mLogicalAssistApi.mutableLogicalRepoApi().setProperty(logicalId(), "dynamicProperties"
+				, dynamicProperties.toString(4));
+
 	}
 }
 
