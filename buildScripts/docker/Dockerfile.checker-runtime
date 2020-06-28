@@ -3,7 +3,7 @@ MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
 ENV DEBIAN_FRONTEND noninteractive
 ARG CHECKER_TAG=latest
 #Run everything at once to create a single layer
-ENV TRIK_PYTHON3_VERSION_MINOR 5
+ENV TRIK_PYTHON3_VERSION_MINOR 7
 RUN set -eu \
     && echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
     && echo "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu xenial main" >> /etc/apt/sources.list \
