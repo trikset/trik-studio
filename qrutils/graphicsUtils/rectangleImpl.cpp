@@ -39,7 +39,7 @@ QPainterPath RectangleImpl::shape(qreal x1, qreal y1, qreal x2, qreal y2, const 
 	return path;
 }
 
-QRectF RectangleImpl::calcRect(qreal x1, qreal y1, qreal x2, qreal y2) const
+QRectF RectangleImpl::calcRect(qreal x1, qreal y1, qreal x2, qreal y2)
 {
 	return QRectF(qMin(x1, x2), qMin(y1, y2), qAbs(x2 - x1), qAbs(y2 - y1));
 }
@@ -67,12 +67,12 @@ void RectangleImpl::drawImageItemWithMirrored(QPainter *painter, qreal x1, qreal
 		else
 			image = myImage.mirrored(true, true);
 	}
-	painter->drawImage(QRectF(qMin(x1, x2), qMin(y1, y2), qAbs(x2 - x1), qAbs(y2 - y1)), image);
+	drawImageItem(painter, x1, y1, x2, y2, image);
 }
 
 void RectangleImpl::drawImageItem(QPainter *painter, qreal x1, qreal y1, qreal x2, qreal y2, const QImage &myImage)
 {
-	painter->drawImage(QRectF(qMin(x1, x2), qMin(y1, y2), qAbs(x2 - x1), qAbs(y2 - y1)), myImage);
+	painter->drawImage(calcRect(x1, y1, x2, y2), myImage);
 }
 
 QPointF RectangleImpl::deserializePoint(const QString &string) const
