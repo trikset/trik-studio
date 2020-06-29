@@ -49,8 +49,8 @@ public:
 	/// @todo Remove direct reference to semanticAnalyzer.
 	QVariant interpret(const QSharedPointer<core::ast::Node> &root, const core::SemanticAnalyzer &semanticAnalyzer);
 
-	/// Returns a list of known identifiers
-	QStringList identifiers() const;
+	/// Check if the identifier is known to interpreter
+	bool hasIdentifier(const QString &name) const;
 
 	/// Remome identifier from known identifiers
 	void forgetIdentifier(const QString &identifier);
