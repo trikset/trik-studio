@@ -111,7 +111,7 @@ bool Runner::interpret(const QString &saveFile, bool background, int customSpeed
 
 		auto &t = twoDModelWindow->model().timeline();
 		t.setImmediateMode(background);
-		if (!background && customSpeedFactor >= model::Timeline::normalSpeedFactor) {
+		if (customSpeedFactor >= model::Timeline::normalSpeedFactor) {
 			t.setSpeedFactor(customSpeedFactor);
 		}
 	}
