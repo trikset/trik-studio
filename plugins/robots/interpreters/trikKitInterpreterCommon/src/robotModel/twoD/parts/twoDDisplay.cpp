@@ -25,7 +25,7 @@ using namespace kitBase::robotModel;
 
 const int realWidth = 238;
 const int realHeight = 278;
-const int textSize = 20;
+const int textSize = 17;
 
 Display::Display(const DeviceInfo &info
 		, const PortInfo &port

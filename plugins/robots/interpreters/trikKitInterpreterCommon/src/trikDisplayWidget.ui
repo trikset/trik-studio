@@ -315,7 +315,7 @@ QPushButton#buttonEnter:pressed {
      <x>54</x>
      <y>63</y>
      <width>91</width>
-     <height>123</height>
+     <height>106</height>
     </rect>
    </property>
    <property name="sizePolicy">
