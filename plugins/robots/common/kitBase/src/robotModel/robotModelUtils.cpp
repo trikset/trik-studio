@@ -22,12 +22,10 @@ using namespace kitBase::robotModel;
 
 PortInfo RobotModelUtils::findPort(const RobotModelInterface &robotModel, const QString &name, Direction direction)
 {
-	for (const kitBase::robotModel::PortInfo &portInfo : robotModel.availablePorts()) {
-		if ((portInfo.name() == name || portInfo.nameAliases().contains(name)) && portInfo.direction() == direction) {
-			return portInfo;
-		}
+	const auto &port = robotModel.getPortBy(name);
+	if (port.isValid() && port.direction() == direction) {
+			return port;
 	}
-
 	return PortInfo();
 }
 
