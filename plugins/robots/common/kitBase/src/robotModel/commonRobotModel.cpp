@@ -87,16 +87,15 @@ void CommonRobotModel::disconnectFromRobot()
 
 void CommonRobotModel::updateSensorsValues() const
 {
-	for (robotParts::Device * const device : mConfiguration.devices()) {
-		robotParts::AbstractSensor * const sensor = dynamic_cast<robotParts::AbstractSensor *>(device);
-		if (sensor && !sensor->port().reservedVariable().isEmpty()) {
-
-			if (!sensor->ready() || sensor->isLocked()) {
-				/// @todo Error reporting
-				continue;
+	for (auto &&device : mConfiguration.devices()) {
+		if (auto &&sensor = dynamic_cast<robotParts::AbstractSensor *>(device)) {
+			if (!sensor->port().reservedVariable().isEmpty()) {
+				if (!sensor->ready() || sensor->isLocked()) {
+					/// @todo Error reporting
+					continue;
+				}
+				sensor->read();
 			}
-
-			sensor->read();
 		}
 	}
 }
@@ -157,26 +156,28 @@ const ConfigurationInterface &CommonRobotModel::configuration() const
 
 QList<PortInfo> CommonRobotModel::availablePorts() const
 {
-	auto result = mAllowedConnections.keys();
-	std::sort(result.begin(), result.end());
-	return result;
+	return mAllowedConnections.keys();
+}
+
+PortInfo CommonRobotModel::getPortBy(const QString &name) const
+{
+	return mPortByName[name];
 }
 
 QList<PortInfo> CommonRobotModel::configurablePorts() const
 {
 	QList<PortInfo> result;
 
-	for (const PortInfo &port : availablePorts()) {
-		QList<DeviceInfo> const devices = allowedDevices(port);
-		if (devices.empty()) {
+	for (auto i = mAllowedConnections.keyValueBegin(); i != mAllowedConnections.keyValueEnd(); ++i) {
+		if ((*i).second.empty()) {
 			/// @todo: Display error?
 		}
 
 		// Device can be automaticly configured if it is the only one that can be plugged into this port
 		// (for example display) or if two devices with different directions can be plugged into this port
 		// (for example motor and encoder). Otherwise this device must be configured manually by user.
-		if (devices.count() > 1) {
-			result << port;
+		if ((*i).second.count() > 1) {
+			result << (*i).first;
 		}
 	}
 
@@ -190,7 +191,7 @@ QList<DeviceInfo> CommonRobotModel::allowedDevices(const PortInfo &port) const
 
 void CommonRobotModel::configureDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
-	if (!availablePorts().contains(port)) {
+	if (!mAllowedConnections.contains(port)) {
 		return;
 	}
 
@@ -244,11 +245,20 @@ void CommonRobotModel::onInterpretationStarted()
 void CommonRobotModel::addAllowedConnection(const PortInfo &port, QList<DeviceInfo> const &devices)
 {
 	mAllowedConnections[port].append(devices);
+	mPortByName[port.name()] = port;
+	for (auto &&a : port.nameAliases()) {
+		mPortByName[a] = port;
+	}
+
 }
 
 void CommonRobotModel::removeAllowedConnections(const PortInfo &port)
 {
 	mAllowedConnections.remove(port);
+	mPortByName.remove(port.name());
+	for (auto &&a : port.nameAliases()) {
+		mPortByName.remove(a);
+	}
 }
 
 robotParts::Device * CommonRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
