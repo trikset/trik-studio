@@ -55,6 +55,7 @@ public:
 	MOCK_METHOD0(mutableConfiguration, kitBase::robotModel::ConfigurationInterface&());
 
 	MOCK_CONST_METHOD0(availablePorts, QList< kitBase::robotModel::PortInfo>());
+	MOCK_CONST_METHOD1(getPortBy, kitBase::robotModel::PortInfo(const QString &name));
 	MOCK_CONST_METHOD0(buttonCodes, StringIntHash());
 	MOCK_CONST_METHOD0(configurablePorts, QList< kitBase::robotModel::PortInfo>());
 	MOCK_CONST_METHOD1(allowedDevices, QList< kitBase::robotModel::DeviceInfo>(

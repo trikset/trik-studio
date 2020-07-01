@@ -746,7 +746,7 @@ void WorldModel::createRegion(const QDomElement &element)
 		auto id = element.attribute("boundItem");
 		boundItem = findId(id);
 		if (boundItem) {
-			item = new items::BoundRegion(*boundItem, id);			
+			item = new items::BoundRegion(*boundItem, id);
 		} /// @todo: else report error
 	}
 

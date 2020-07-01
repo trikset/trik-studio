@@ -129,6 +129,9 @@ public:
 	/// Lists all available ports for that model.
 	virtual QList<PortInfo> availablePorts() const = 0;
 
+	/// Find port by name or alias for that model, otherwise, returns a default PortInfo, that not isValid
+	virtual PortInfo getPortBy(const QString &name) const = 0;
+
 	/// Returns a map of button names to button codes.
 	virtual QHash<QString, int> buttonCodes() const = 0;
 
