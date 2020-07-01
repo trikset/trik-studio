@@ -26,33 +26,32 @@ void Configuration::configureDevice(robotParts::Device * const device)
 {
 	Q_ASSERT(device);
 
-	auto &port = device->port();
-	if (mConfiguredDevices.contains(port)
-			&& mConfiguredDevices.value(port)->deviceInfo() == device->deviceInfo()
-			&& port.name() != "DisplayPort")  // hack for cleaning display in 2D model
+	if (mConfiguredDevices.contains(device->port())
+			&& mConfiguredDevices.value(device->port())->deviceInfo() == device->deviceInfo()
+			&& device->port().name() != "DisplayPort")  // hack for cleaning display in 2D model
 	{
 		// It is same device that is already configured on that port, we don't need to do anything.
 		return;
 	}
 
-	delete mConfiguredDevices.value(port);
-	mConfiguredDevices.remove(port);
+	delete mConfiguredDevices.value(device->port());
+	mConfiguredDevices.remove(device->port());
 
-	if (mPendingDevices.contains(port)) {
-		if (mPendingDevices.value(port)->deviceInfo() == device->deviceInfo()
-			&& port.name() != "DisplayPort") { // hack for cleaning display in 2D model
+	if (mPendingDevices.contains(device->port())) {
+		if (mPendingDevices.value(device->port())->deviceInfo() == device->deviceInfo()
+			&& device->port().name() != "DisplayPort") { // hack for cleaning display in 2D model
 			// It is same device that is already pending for configuration on that port, we don't need to do anything.
 			return;
 		}
 
 		// QObject shall automatically disconnect on deletion, so we just forget about device not finished configuring.
 		// It is not thread-safe, of course, so Configuration shall always run in one thread.
-		delete mPendingDevices.value(port);
-		mPendingDevices.remove(port);
+		delete mPendingDevices.value(device->port());
+		mPendingDevices.remove(device->port());
 	}
 
-	mPendingDevices.insert(port, device);
-	mConfigurationInProgress.remove(port);
+	mPendingDevices.insert(device->port(), device);
+	mConfigurationInProgress.remove(device->port());
 }
 
 robotParts::Device *Configuration::device(const PortInfo &port) const

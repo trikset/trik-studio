@@ -13,11 +13,9 @@
  * limitations under the License. */
 
 #pragma once
-#include <QtSvg/QGraphicsSvgItem>
-#include <QScopedPointer>
-#include <twoDModel/engine/model/image.h>
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
+
 #include "sensorItem.h"
 #include "src/engine/items/solidItem.h"
 #include "twoDModel/engine/model/robotModel.h"
@@ -104,11 +102,9 @@ private:
 	void onLanded();
 
 	/** @brief Image of a robot drawn on scene */
-	// Use utilitary class that can handle PNG & SVG properly.
-	// QImage renders SVG ugly, thus robot moves smothier now
-	twoDModel::model::Image mImage;
-
-	QScopedPointer<BeepItem> mBeepItem;
+	QImage mImage;
+	// Takes ownership
+	BeepItem *mBeepItem;
 
 	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors;  // Does not have ownership
 

@@ -33,7 +33,9 @@ LuaToolbox::LuaToolbox()
 {
 }
 
-LuaToolbox::~LuaToolbox() = default;
+LuaToolbox::~LuaToolbox()
+{
+}
 
 QVariant LuaToolbox::interpret(QSharedPointer<Node> const &root)
 {
@@ -172,9 +174,10 @@ QVariant LuaToolbox::value(const QString &identifier) const
 
 void LuaToolbox::setVariableValue(const QString &name, const QString &initCode, const QVariant &value)
 {
-	if (!mInterpreter->hasIdentifier(name)) {
+	if (!mInterpreter->identifiers().contains(name)) {
 		parse(qReal::Id(), "", initCode);
 	}
+
 	mInterpreter->setVariableValue(name, value);
 }
 
