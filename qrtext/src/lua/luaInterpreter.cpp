@@ -161,9 +161,9 @@ void LuaInterpreter::addIntrinsicFunction(const QString &name
 	mIntrinsicFunctions.insert(name, semantic);
 }
 
-bool LuaInterpreter::hasIdentifier(const QString &name) const
+QStringList LuaInterpreter::identifiers() const
 {
-	return mIdentifierValues.contains(name);
+	return mIdentifierValues.keys();
 }
 
 void LuaInterpreter::forgetIdentifier(const QString &identifier)

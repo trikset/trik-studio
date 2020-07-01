@@ -33,11 +33,9 @@ FakeScene::FakeScene(const WorldModel &world)
 			addClone(item, item->clone());
 		}
 	});
-	connect(&world, &WorldModel::traceItemAddedOrChanged, this, [this](QGraphicsPathItem *item, bool justChanged) {
+	connect(&world, &WorldModel::traceItemAddedOrChanged, this, [=](QGraphicsPathItem *item) {
 		// if traceItem was changed need delete old clone before adding new clone
-		if (justChanged) {
-			deleteItem(item);
-		}
+		deleteItem(item);
 		addClone(item, new QGraphicsPathItem(item->path()));
 	});
 	connect(&world, &WorldModel::itemRemoved, this, &FakeScene::deleteItem);

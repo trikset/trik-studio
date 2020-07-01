@@ -65,8 +65,6 @@ public:
 
 	QList<PortInfo> availablePorts() const final;
 
-	PortInfo getPortBy(const QString &name) const final;
-
 	QList<PortInfo> configurablePorts() const override;
 
 	QList<DeviceInfo> allowedDevices(const PortInfo &port) const final;
@@ -121,9 +119,6 @@ private:
 	/// Shows which types of devices can be connected to which ports.
 	/// @todo Add a notion of direction.
 	QHash<PortInfo, QList<DeviceInfo>> mAllowedConnections;
-
-	/// Reverse index for faster lookup, contains names and aliases
-	QHash<QString, PortInfo> mPortByName;
 
 	/// Devices configuration.
 	Configuration mConfiguration;

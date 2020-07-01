@@ -207,7 +207,7 @@ signals:
 	void regionItemAdded(items::RegionItem *item);
 
 	/// Emitted each time when model is appended with some new item.
-	void traceItemAddedOrChanged(QGraphicsPathItem *item, bool justChanged);
+	void traceItemAddedOrChanged(QGraphicsPathItem *item);
 
 	/// Emitted each time when some item was removed from the 2D model world.
 	void itemRemoved(QGraphicsItem *item);
