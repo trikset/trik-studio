@@ -338,13 +338,13 @@ void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const Q
 		traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Marker);
 		emit robotTraceAppearedOrDisappeared(true);
 		mRobotTrace << traceItem;
-		emit traceItemAddedOrChanged(traceItem);
+		emit traceItemAddedOrChanged(traceItem, false);
 	} else {
 		auto path = mRobotTrace.last()->path();
 		path.moveTo(begin);
 		path.lineTo(end);
 		mRobotTrace.last()->setPath(path);
-		emit traceItemAddedOrChanged(mRobotTrace.last());
+		emit traceItemAddedOrChanged(mRobotTrace.last(), true);
 	}
 }
 
