@@ -312,10 +312,10 @@ QPushButton#buttonEnter:pressed {
   <widget class="qReal::ui::PaintWidget" name="display" native="true">
    <property name="geometry">
     <rect>
-     <x>54</x>
-     <y>63</y>
-     <width>91</width>
-     <height>106</height>
+     <x>53</x>
+     <y>61</y>
+     <width>94</width>
+     <height>127</height>
     </rect>
    </property>
    <property name="sizePolicy">

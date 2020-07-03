@@ -23,16 +23,16 @@
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-const int realWidth = 238;
-const int realHeight = 278;
-const int textSize = 17;
+const int realWidth = 240;
+const int realHeight = 280;
+const int topMenuHeight = 45;
+const int textSize = 20;
 
 Display::Display(const DeviceInfo &info
 		, const PortInfo &port
 		, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikDisplay(info, port)
 	, mEngine(engine)
-	, mBackground(Qt::transparent)
 {
 	mEngine.display()->setPainter(this);
 
@@ -161,6 +161,7 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	Q_UNUSED(outputRect)
 
 	const QRect displayRect(0, 0, mEngine.display()->displayWidth(), mEngine.display()->displayHeight());
+	const int scaledTopMenuHeight = topMenuHeight * (displayRect.height()) / (realHeight * 1.0);
 
 	painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 	painter->save();
@@ -168,6 +169,10 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->setBrush(mBackground);
 	painter->drawRect(displayRect);
 	painter->drawImage(displayRect, mCurrentImage);
+	if (mBackground != Qt::transparent && mCurrentImage.isNull()) {
+		painter->setBrush(Qt::Dense1Pattern);
+		painter->drawRect(0, 0, mEngine.display()->displayWidth(), scaledTopMenuHeight);
+	}
 	painter->restore();
 
 	painter->save();	
@@ -175,8 +180,9 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	font.setPixelSize(textSize);
 	painter->setFont(font);
 	painter->setPen(Qt::black);
+	painter->translate(0, scaledTopMenuHeight);
 	const qreal xScale = displayRect.width() / (realWidth * 1.0);
-	const qreal yScale = displayRect.height() / (realHeight * 1.0);
+	const qreal yScale = (displayRect.height() - scaledTopMenuHeight) / (realHeight * 1.0);
 	painter->scale(xScale, yScale);
 	Canvas::paint(painter, {0, 0, realWidth, realHeight});
 	painter->restore();

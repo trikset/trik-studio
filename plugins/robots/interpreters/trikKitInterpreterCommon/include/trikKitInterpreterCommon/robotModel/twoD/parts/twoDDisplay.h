@@ -90,7 +90,7 @@ signals:
 
 private:
 	twoDModel::engine::TwoDModelEngineInterface &mEngine;
-	QColor mBackground;
+	QColor mBackground {Qt::transparent};
 	QImage mCurrentImage;
 	bool mSmiles {};
 	bool mSadSmiles {};
