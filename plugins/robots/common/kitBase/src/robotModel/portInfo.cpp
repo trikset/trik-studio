@@ -16,12 +16,6 @@
 
 using namespace kitBase::robotModel;
 
-PortInfo::PortInfo()
-	: mDirection(output)
-	, mReservedVariableType(ReservedVariableType::scalar)
-{
-}
-
 PortInfo::PortInfo(const QString &name, Direction direction
 		, const QStringList &nameAliases, const QString &reservedVariableName
 		, ReservedVariableType reservedVariableType)
@@ -47,12 +41,12 @@ bool PortInfo::isValid() const
 	return !mName.isEmpty();
 }
 
-QString PortInfo::name() const
+const QString &PortInfo::name() const
 {
 	return mName;
 }
 
-QString PortInfo::userFriendlyName() const
+const QString &PortInfo::userFriendlyName() const
 {
 	return mUserFriendlyName;
 }
@@ -62,12 +56,12 @@ Direction PortInfo::direction() const
 	return mDirection;
 }
 
-QStringList PortInfo::nameAliases() const
+const QStringList &PortInfo::nameAliases() const
 {
 	return mNameAliases;
 }
 
-QString PortInfo::reservedVariable() const
+const QString &PortInfo::reservedVariable() const
 {
 	return mReservedVariable;
 }

@@ -253,7 +253,6 @@ void CommonRobotModel::addAllowedConnection(const PortInfo &port, QList<DeviceIn
 	for (auto &&a : port.nameAliases()) {
 		mPortByName[a] = port;
 	}
-
 }
 
 void CommonRobotModel::removeAllowedConnections(const PortInfo &port)
