@@ -897,7 +897,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Жесты мышью</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+324"/>
         <source>Shortcuts</source>
         <translation>Горячие клавиши</translation>
     </message>
@@ -912,7 +912,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished">Не получилось открыть %1</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+196"/>
         <source>Recent projects</source>
         <translation>Недавние проекты</translation>
     </message>

@@ -45,6 +45,10 @@ public:
 	/// @todo Make it const if possible.
 	virtual Id activeDiagram() const = 0;
 
+	/// Gets graphical Ids of all currently opened diagrams.
+	/// @returns Ids of opened diagrams.
+	virtual IdList openedDiagrams() const = 0;
+
 	virtual void openSettingsDialog(const QString &tab) = 0;
 
 	/// Rereads model information from repository and reinitializes models

@@ -148,14 +148,16 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 		return;
 	}
 
-	qReal::Id activeDiagram = mMainWindowInterpretersInterface->activeDiagram();
+	qReal::IdList openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 	QHash<QString, QVariant> oldMeta;
 	for (const auto &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 	}
 	mRepo->importFromDisk(fileName);
 	mMainWindowInterpretersInterface->reinitModels();
-	mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
+	for (const auto &diagram : openedDiagrams) {
+		mMainWindowInterpretersInterface->activateItemOrDiagram(diagram);
+	}
 	for (const auto &metaKey : oldMeta.keys()) {
 		mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 	}
@@ -252,7 +254,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 	}
 	if (dialog.result() == QDialog::Accepted) {
-		qReal::Id activeDiagram = mMainWindowInterpretersInterface->activeDiagram();
+		qReal::IdList openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
 				+ QDir::separator() + mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString()
 				+ QDir::separator();
@@ -263,8 +265,10 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		}
 
 		mMainWindowInterpretersInterface->reinitModels();
-		mMainWindowInterpretersInterface->activateItemOrDiagram(activeDiagram);
-		for (auto const &metaKey : oldMeta.keys()) {
+		for (const auto &diagram : openedDiagrams) {
+			mMainWindowInterpretersInterface->activateItemOrDiagram(diagram);
+		}
+		for (const auto &metaKey : oldMeta.keys()) {
 			mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 		}
 		mProjectManager->afterOpen(mRepo->workingFile());

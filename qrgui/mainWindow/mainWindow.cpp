@@ -1748,6 +1748,23 @@ Id MainWindow::activeDiagram() const
 	return getCurrentTab() ? getCurrentTab()->mvIface().rootId() : Id();
 }
 
+IdList MainWindow::openedDiagrams() const
+{
+	IdList result;
+	for (int i = 0; i < mUi->tabs->count(); ++i) {
+		if (auto const diagram = dynamic_cast<EditorView *>(mUi->tabs->widget(i))) {
+			const Id diagramId = diagram->editorViewScene().rootItemId();
+			if (diagramId.editor() == "RobotsMetamodel"
+					&& diagramId.diagram() == "RobotsDiagram"
+					&& (diagramId.element() == "RobotsDiagramNode"
+						|| diagramId.element() == "SubprogramDiagram")) {
+				result << diagram->mvIface().rootId();
+			}
+		}
+	}
+	return result;
+}
+
 void MainWindow::initPluginsAndStartWidget()
 {
 	initToolPlugins();
@@ -1986,6 +2003,8 @@ void MainWindow::showErrors(const gui::ErrorReporter * const errorReporter)
 
 void MainWindow::reinitModels()
 {
+	closeAllTabs();
+
 	models().reinit();
 
 	PropertyEditorModel* pModel = dynamic_cast<PropertyEditorModel*>(mUi->propertyEditor->model());
