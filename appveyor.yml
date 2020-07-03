@@ -146,6 +146,9 @@ install:
   - ccache -M 900M
   - which g++
   - g++ --version
+  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
+  - unzip tests_qrs.zip
+  - ls
   - dir C:\Qt\Tools\
   - dir C:\Qt
 
@@ -172,6 +175,8 @@ test_script:
   - echo %cd%
   - cd %BUILD_DIR%\bin\%CONFIGURATION%
   - dir
+  - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
+  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
   - bash -c "env LC_ALL=C date -u"
   - cmd /c %TEST_SUITE%
 
