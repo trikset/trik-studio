@@ -1753,7 +1753,7 @@ IdList MainWindow::openedDiagrams() const
 	IdList result;
 	for (int i = 0; i < mUi->tabs->count(); ++i) {
 		if (auto const diagram = dynamic_cast<EditorView *>(mUi->tabs->widget(i))) {
-			const Id diagramId = diagram->editorViewScene().rootItemId();
+			const Id &diagramId = diagram->editorViewScene().rootItemId();
 			if (diagramId.editor() == "RobotsMetamodel"
 					&& diagramId.diagram() == "RobotsDiagram"
 					&& (diagramId.element() == "RobotsDiagramNode"
