@@ -162,6 +162,7 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 		mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 	}
 	mProjectManager->afterOpen(mRepo->workingFile());
+	mProjectManager->setUnsavedIndicator(true);
 
 	checkSubprogramsForUniqueNames();
 }
@@ -272,6 +273,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 			mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 		}
 		mProjectManager->afterOpen(mRepo->workingFile());
+		mProjectManager->setUnsavedIndicator(true);
 
 		checkSubprogramsForUniqueNames();
 	}
