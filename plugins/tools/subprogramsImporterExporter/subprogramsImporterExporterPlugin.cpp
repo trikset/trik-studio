@@ -148,7 +148,7 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 		return;
 	}
 
-	qReal::IdList openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
+	const auto &openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 	QHash<QString, QVariant> oldMeta;
 	for (const auto &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
@@ -255,7 +255,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 	}
 	if (dialog.result() == QDialog::Accepted) {
-		qReal::IdList openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
+		const auto &openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
 				+ QDir::separator() + mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString()
 				+ QDir::separator();
