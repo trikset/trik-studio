@@ -44,6 +44,7 @@ public:
 	ErrorReporterInterface *errorReporter() override;
 
 	Id activeDiagram() const override;
+	IdList openedDiagrams() const override;
 
 	void openSettingsDialog(const QString &tab) override;
 
