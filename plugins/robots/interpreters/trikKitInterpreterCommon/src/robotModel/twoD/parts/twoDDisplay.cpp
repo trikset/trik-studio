@@ -170,7 +170,7 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->drawRect(displayRect);
 	painter->drawImage(displayRect, mCurrentImage);
 	if (mBackground != Qt::transparent && mCurrentImage.isNull()) {
-		painter->setBrush(Qt::Dense1Pattern);
+		painter->setBrush(QBrush(Qt::darkRed, Qt::BDiagPattern));
 		painter->drawRect(0, 0, mEngine.display()->displayWidth(), scaledTopMenuHeight);
 	}
 	painter->restore();
