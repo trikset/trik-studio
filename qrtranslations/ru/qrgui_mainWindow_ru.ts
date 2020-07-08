@@ -1059,7 +1059,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation> [изменён]</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+90"/>
         <source>Select file to save current metamodel to</source>
         <translation>Выберите файл для сохранения метамодели</translation>
     </message>

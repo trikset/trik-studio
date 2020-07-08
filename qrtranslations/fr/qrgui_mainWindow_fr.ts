@@ -949,7 +949,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>[modifié]</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+90"/>
         <source>Select file to save current metamodel to</source>
         <translation>Choisir un fichier pour enregister le metamodèle courant</translation>
     </message>

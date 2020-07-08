@@ -269,12 +269,14 @@ bool ProjectManagerWrapper::saveOrSuggestToSaveAs()
 
 void ProjectManagerWrapper::setUnsavedIndicator(bool isUnsaved)
 {
+	mAutosaver.setAutoSaving(true);
 	ProjectManager::setUnsavedIndicator(isUnsaved);
 	refreshWindowTitleAccordingToSaveFile();
 }
 
 void ProjectManagerWrapper::setStackUnsaved(bool isUnsaved)
 {
+	mAutosaver.setAutoSaving(true);
 	mStackUnsaved = isUnsaved;
 	refreshWindowTitleAccordingToSaveFile();
 }

@@ -44,6 +44,8 @@ public:
 	explicit Autosaver(ProjectManager &projectManager);
 	void reinit();
 
+	void setAutoSaving(bool mNeedToSave);
+
 	QString tempFilePath() const;
 	bool isAutosave(const QString &fileName) const;
 	bool isTempFile(const QString &fileName) const;
@@ -84,6 +86,7 @@ private:
 	// if option AutosaveInterval in not specified
 	static const uint defaultInterval = 600;
 
+	bool mNeedToSave {true};
 	ProjectManager &mProjectManager;
 	QTimer mTimer;
 };
