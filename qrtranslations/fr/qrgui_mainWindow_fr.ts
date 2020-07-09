@@ -876,7 +876,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Afficher les gestes</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+324"/>
         <source>Shortcuts</source>
         <translation>Raccourcis</translation>
     </message>
@@ -891,7 +891,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+196"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>
@@ -949,7 +949,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>[modifié]</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+90"/>
         <source>Select file to save current metamodel to</source>
         <translation>Choisir un fichier pour enregister le metamodèle courant</translation>
     </message>

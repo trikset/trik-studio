@@ -1116,47 +1116,52 @@ void EditorViewScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	QGraphicsScene::mouseReleaseEvent(event);
 	Element *element = findElemAt(event->scenePos());
 
-	if (event->button() == Qt::RightButton && !(mMouseMovementManager->pathIsEmpty())) {
-		const QPoint pos = views()[0]->window()->mapFromGlobal(event->screenPos());
-		QLOG_TRACE() << "Mouse gesture movement to " << pos;
-		mMouseMovementManager->mouseMove(event->scenePos());
-		mRightButtonPressed = false;
-		drawGesture();
-		EdgeElement * const edgeElement = dynamic_cast<EdgeElement *>(element);
-		if (edgeElement) {
-			if (event->buttons() & Qt::LeftButton ) {
-				edgeElement->breakPointHandler(element->mapFromScene(event->scenePos()));
+	if (event->button() == Qt::RightButton) {
+		if (mMouseMovementManager->pathIsEmpty()) {
+			clearSelection();
+			initContextMenu(element, event->scenePos());
+		} else {
+			const QPoint pos = views()[0]->window()->mapFromGlobal(event->screenPos());
+			QLOG_TRACE() << "Mouse gesture movement to " << pos;
+			mMouseMovementManager->mouseMove(event->scenePos());
+			mRightButtonPressed = false;
+			drawGesture();
+			EdgeElement * const edgeElement = dynamic_cast<EdgeElement *>(element);
+			if (edgeElement) {
+				if (event->buttons() & Qt::LeftButton ) {
+					edgeElement->breakPointHandler(element->mapFromScene(event->scenePos()));
+					return;
+				}
+			}
+
+			if (!mMouseMovementManager->wasMoving()) {
+				deleteGesture();
+				if (element && !element->isSelected()) {
+					clearSelection();
+					element->setSelected(true);
+				}
+
+				initContextMenu(element, event->scenePos());
+				clearSelection();
 				return;
 			}
-		}
 
-		if (!mMouseMovementManager->wasMoving()) {
-			deleteGesture();
-			if (element && !element->isSelected()) {
-				clearSelection();
-				element->setSelected(true);
+			QLOG_TRACE() << "Mouse gesture release at " << pos;
+
+			const QPointF start = mMouseMovementManager->firstPoint();
+			const QPointF end = mMouseMovementManager->lastPoint();
+			NodeElement * const startNode = findNodeAt(start);
+			NodeElement * const endNode = findNodeAt(end);
+			if (startNode && endNode && mMouseMovementManager->isEdgeCandidate()
+					&& startNode->id() != endNode->id()) {
+				getLinkByGesture(*startNode, *endNode);
+				deleteGesture();
+			} else {
+				mTimer->start(SettingsManager::value("gestureDelay").toInt());
 			}
 
-			initContextMenu(element, event->scenePos());
-			clearSelection();
 			return;
 		}
-
-		QLOG_TRACE() << "Mouse gesture release at " << pos;
-
-		const QPointF start = mMouseMovementManager->firstPoint();
-		const QPointF end = mMouseMovementManager->lastPoint();
-		NodeElement * const startNode = findNodeAt(start);
-		NodeElement * const endNode = findNodeAt(end);
-		if (startNode && endNode && mMouseMovementManager->isEdgeCandidate()
-				&& startNode->id() != endNode->id()) {
-			getLinkByGesture(*startNode, *endNode);
-			deleteGesture();
-		} else {
-			mTimer->start(SettingsManager::value("gestureDelay").toInt());
-		}
-
-		return;
 	}
 
 	if (element) {

@@ -94,6 +94,7 @@ public:
 	void dehighlight() override;
 	ErrorReporterInterface *errorReporter() override;
 	Id activeDiagram() const override;
+	IdList openedDiagrams() const override;
 	void openShapeEditor(const QPersistentModelIndex &index, int role, const QString &propertyValue
 		, bool useTypedPorts);
 	void openQscintillaTextEditor(const QPersistentModelIndex &index, const int role, const QString &propertyValue);

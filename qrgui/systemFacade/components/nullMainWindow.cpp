@@ -100,6 +100,11 @@ Id NullMainWindow::activeDiagram() const
 	return mActiveId;
 }
 
+IdList NullMainWindow::openedDiagrams() const
+{
+	return {mActiveId};
+}
+
 void NullMainWindow::openSettingsDialog(const QString &tab)
 {
 	Q_UNUSED(tab)
