@@ -123,6 +123,10 @@ var Dir = new function () {
 			return nonEmptyMessage[langIndex()];
 		}
 
+		if (DesktopServices.findFiles(path, "*.*") != 0) {
+			return "Directory in not empty"
+		}
+
 		if (Dir.isRelative(path)) {
 			return noRelative[langIndex()];
 		}
@@ -187,7 +191,7 @@ Component.prototype.chooseTarget = function () {
 	var widget = gui.pageWidgetByObjectName("DynamicTargetWidget");
 	if (widget != null) {
 		var newTarget = QFileDialog.getExistingDirectory(fileDialogHeader[langIndex()], widget.targetDirectory.text);
-		if (newTarget != "" && DesktopServices.findFiles(newTarget, "*.*") != 0 ) {
+		if (newTarget != "") {
 			widget.targetDirectory.text = Dir.toNativeSeparator(newTarget);
 		}
 	}
