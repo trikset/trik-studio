@@ -187,7 +187,7 @@ Component.prototype.chooseTarget = function () {
 	var widget = gui.pageWidgetByObjectName("DynamicTargetWidget");
 	if (widget != null) {
 		var newTarget = QFileDialog.getExistingDirectory(fileDialogHeader[langIndex()], widget.targetDirectory.text);
-		if (newTarget != "") {
+		if (newTarget != "" && DesktopServices.findFiles(newTarget, "*.*") != 0 ) {
 			widget.targetDirectory.text = Dir.toNativeSeparator(newTarget);
 		}
 	}
