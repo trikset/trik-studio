@@ -234,7 +234,7 @@ ProjectConverter SaveConvertionManager::from330to20204Converter()
 			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
-		if (!worldModel.contains("TrikLineSensor")
+		if (!worldModel.contains("trik::robotModel::parts::TrikLineSensor")
 				&& !worldModel.contains("trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
 			return ProjectConverter::NoModificationsMade;
 		}
