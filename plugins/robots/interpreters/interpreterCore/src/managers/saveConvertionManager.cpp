@@ -222,6 +222,9 @@ ProjectConverter SaveConvertionManager::from320to330Converter()
 			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+		if (!worldModel.contains("trikV62KitRobot")) {
+			return ProjectConverter::NoModificationsMade;
+		}
 		worldModel.replace("trikV62KitRobot", "trikKitRobot");
 		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
 		return ProjectConverter::Success;
