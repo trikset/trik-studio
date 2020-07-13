@@ -235,12 +235,12 @@ ProjectConverter SaveConvertionManager::from330to20204Converter()
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
 		if (!worldModel.contains("trik::robotModel::parts::TrikLineSensor")
-				&& !worldModel.contains("trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
+				&& !worldModel.contains("value=\"trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
 			return ProjectConverter::NoModificationsMade;
 		}
 
-		worldModel.replace("trik::robotModel::twoD::parts::TwoDInfraredSensor"
-				, "twoDModel::robotModel::parts::RangeSensor");
+		worldModel.replace("value=\"trik::robotModel::twoD::parts::TwoDInfraredSensor"
+				, "value=\"twoDModel::robotModel::parts::RangeSensor");
 
 		worldModel.replace("TrikLineSensorPort###lineSensor", "###");
 		worldModel.replace("LineSensorPort", "Video2Port");
