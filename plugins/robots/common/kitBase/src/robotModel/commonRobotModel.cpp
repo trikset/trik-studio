@@ -162,6 +162,11 @@ QList<PortInfo> CommonRobotModel::availablePorts() const
 	return result;
 }
 
+PortInfo CommonRobotModel::getPortBy(const QString &name) const
+{
+	return mPortByName[name];
+}
+
 QList<PortInfo> CommonRobotModel::configurablePorts() const
 {
 	QList<PortInfo> result;
@@ -190,7 +195,7 @@ QList<DeviceInfo> CommonRobotModel::allowedDevices(const PortInfo &port) const
 
 void CommonRobotModel::configureDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
-	if (!availablePorts().contains(port)) {
+	if (!mAllowedConnections.contains(port)) {
 		return;
 	}
 
@@ -244,11 +249,19 @@ void CommonRobotModel::onInterpretationStarted()
 void CommonRobotModel::addAllowedConnection(const PortInfo &port, QList<DeviceInfo> const &devices)
 {
 	mAllowedConnections[port].append(devices);
+	mPortByName[port.name()] = port;
+	for (auto &&a : port.nameAliases()) {
+		mPortByName[a] = port;
+	}
 }
 
 void CommonRobotModel::removeAllowedConnections(const PortInfo &port)
 {
 	mAllowedConnections.remove(port);
+	mPortByName.remove(port.name());
+	for (auto &&a : port.nameAliases()) {
+		mPortByName.remove(a);
+	}
 }
 
 robotParts::Device * CommonRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)

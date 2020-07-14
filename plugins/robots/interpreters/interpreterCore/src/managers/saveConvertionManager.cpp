@@ -222,6 +222,9 @@ ProjectConverter SaveConvertionManager::from320to330Converter()
 			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+		if (!worldModel.contains("trikV62KitRobot")) {
+			return ProjectConverter::NoModificationsMade;
+		}
 		worldModel.replace("trikV62KitRobot", "trikKitRobot");
 		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
 		return ProjectConverter::Success;
@@ -234,13 +237,13 @@ ProjectConverter SaveConvertionManager::from330to20204Converter()
 			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
-		if (!worldModel.contains("TrikLineSensor")
-				&& !worldModel.contains("trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
+		if (!worldModel.contains("trik::robotModel::parts::TrikLineSensor")
+				&& !worldModel.contains("value=\"trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
 			return ProjectConverter::NoModificationsMade;
 		}
 
-		worldModel.replace("trik::robotModel::twoD::parts::TwoDInfraredSensor"
-				, "twoDModel::robotModel::parts::RangeSensor");
+		worldModel.replace("value=\"trik::robotModel::twoD::parts::TwoDInfraredSensor"
+				, "value=\"twoDModel::robotModel::parts::RangeSensor");
 
 		worldModel.replace("TrikLineSensorPort###lineSensor", "###");
 		worldModel.replace("LineSensorPort", "Video2Port");

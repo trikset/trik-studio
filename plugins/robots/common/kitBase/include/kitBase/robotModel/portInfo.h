@@ -37,7 +37,7 @@ public:
 	static PortInfo fromString(const QString &string);
 
 	/// Constructs invalid PortInfo instance.
-	PortInfo();
+	PortInfo() = default;
 
 	/// Constructs new PortInfo instance. If name is empty then the port is considered to be invalid.
 	/// Ports with same names but different directions are considered to be different.
@@ -56,10 +56,10 @@ public:
 	bool isValid() const;
 
 	/// Returns internal name of the port.
-	QString name() const;
+	const QString &name() const;
 
 	/// Returns user-friendly name of the port.
-	QString userFriendlyName() const;
+	const QString &userFriendlyName() const;
 
 	/// Returns the direction of this port. Ports with similar names but different
 	/// directions are considered to be different.
@@ -67,11 +67,11 @@ public:
 
 	/// Returns a list of names that will be treated as corresponding to the same port as name() does.
 	/// Useful for compability of diagrams for the different robot models (e.g. 'M1' for TRIK and 'A' for NXT).
-	QStringList nameAliases() const;
+	const QStringList &nameAliases() const;
 
 	/// Returns a name of the reserved variable for this port (that varible can be used to access
 	/// devices values on this port).
-	QString reservedVariable() const;
+	const QString &reservedVariable() const;
 
 	ReservedVariableType reservedVariableType() const;
 
@@ -81,16 +81,15 @@ public:
 private:
 	QString mName;
 	QString mUserFriendlyName;
-	Direction mDirection;
+	Direction mDirection { output };
 	QStringList mNameAliases;
 	QString mReservedVariable;
-	ReservedVariableType mReservedVariableType;
+	ReservedVariableType mReservedVariableType { ReservedVariableType::scalar };
 };
 
 inline bool operator ==(const PortInfo &left, const PortInfo &right)
 {
-	return left.name() == right.name()
-			&& left.direction() == right.direction();
+	return left.direction() == right.direction() && left.name() == right.name();
 }
 
 inline bool operator !=(const PortInfo &left, const PortInfo &right)
