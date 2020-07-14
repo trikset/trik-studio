@@ -18,6 +18,7 @@
 #include <QtWidgets/QGraphicsView>
 
 #include "abstractScene.h"
+#include <qrutils/graphicsUtils/rotateItem.h>
 
 using namespace graphicsUtils;
 
@@ -153,6 +154,12 @@ void ItemPopup::checkSelection()
 
 	show();
 
+	for (auto &item : items) {
+		if (auto *rotateItem = dynamic_cast<graphicsUtils::RotateItem *>(item)) {
+			items.append(&rotateItem->rotater());
+		}
+	}
+
 	// Item`s pos will be just under this widget`s middle, 10 px below.
 	QGraphicsView * const view = mScene.views().first();
 	Q_ASSERT(view);
@@ -185,15 +192,8 @@ QPointF ItemPopup::leftmostTopmost(const QList<QGraphicsItem *> &items)
 {
 	QPointF result{INT_MAX, INT_MAX};
 	for (const QGraphicsItem *item : items) {
-		if (const AbstractItem *abstractItem = dynamic_cast<const AbstractItem *>(item)) {
-			result.setX(qMin(result.x(), abstractItem->pos().x() + abstractItem->x1()));
-			result.setX(qMin(result.x(), abstractItem->pos().x() + abstractItem->x2()));
-			result.setY(qMin(result.y(), abstractItem->pos().y() + abstractItem->y1()));
-			result.setY(qMin(result.y(), abstractItem->pos().y() + abstractItem->y2()));
-		} else {
-			result.setX(qMin(result.x(), item->x()));
-			result.setY(qMin(result.y(), item->y()));
-		}
+		result.setX(qMin(result.x(), item->sceneBoundingRect().left()));
+		result.setY(qMin(result.y(), item->sceneBoundingRect().top()));
 	}
 
 	return result;
