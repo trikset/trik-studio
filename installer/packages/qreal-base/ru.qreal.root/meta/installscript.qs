@@ -128,7 +128,7 @@ var Dir = new function () {
 			return nonEmptyMessage[langIndex()];
 		}
 
-		if (QDesktopServices.findFiles(path, "*.*") != 0) {
+		if (QDesktopServices.findFiles(path, "trik-studio*") == 0 && QDesktopServices.findFiles(path, "*.*") != 0) {
 			return directoryNotEmpty[langIndex()];
 		}
 
