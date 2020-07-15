@@ -29,28 +29,26 @@ PortInfo RobotModelUtils::findPort(const RobotModelInterface &robotModel, const 
 	return PortInfo();
 }
 
-QMap<QString, QMap<PortInfo, DeviceInfo> > RobotModelUtils::deserialize(const QString &configuration)
+QMap<QString, QMap<PortInfo, DeviceInfo>> RobotModelUtils::deserializeFromWorldModel(const QString &worldModel)
 {
 	QMap<QString, QMap<PortInfo, DeviceInfo>> result;
 
-	QDomDocument parsedConfiguration;
-	parsedConfiguration.setContent(configuration);
-	const QDomElement rootElement = parsedConfiguration.documentElement();
-	for (QDomElement robotModelElement = rootElement.firstChildElement(); !robotModelElement.isNull()
-			; robotModelElement = robotModelElement.nextSiblingElement())
-	{
-		const QString robotModel = robotModelElement.attribute("name");
-		for (QDomElement configurationElement = robotModelElement.firstChildElement(); !configurationElement.isNull()
-				; configurationElement = configurationElement.nextSiblingElement())
-		{
-			const PortInfo port = PortInfo::fromString(configurationElement.attribute("port"));
-			const DeviceInfo device = DeviceInfo::fromString(configurationElement.attribute("device"));
-			if (port.isValid()) {
-				result[robotModel][port] = device;
+	QDomDocument parsedWorldModel;
+	if(parsedWorldModel.setContent(worldModel)) {
+		const auto &robots = parsedWorldModel.firstChildElement("robots");
+		for (QDomElement robot = robots.firstChildElement("robot"); !robot.isNull()
+				; robot = robot.nextSiblingElement("robot")) {
+			const auto &robotModel = robot.attribute("id");
+			const auto &sensors = robot.firstChildElement("sensors");
+			for (QDomElement sensor = sensors.firstChildElement("sensor"); !sensor.isNull()
+					; sensor = sensor.nextSiblingElement("sensor")) {
+				const auto &port = PortInfo::fromString(sensor.attribute("port"));
+				if (port.isValid()) {
+					result[robotModel][port] = DeviceInfo::fromString(sensor.attribute("type"));
+				}
 			}
 		}
 	}
-
 	return result;
 }
 
