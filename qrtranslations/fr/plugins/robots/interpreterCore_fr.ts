@@ -314,7 +314,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+98"/>
         <source>Toggle robot console panel</source>
         <translation type="unfinished"></translation>
     </message>

@@ -321,7 +321,6 @@ void RobotsPluginFacade::saveCode(const QString &code, const QString &languageEx
 	auto logicalRepo = &mLogicalModelApi->mutableLogicalRepoApi();
 	logicalRepo->setMetaInformation("activeCode", code);
 	logicalRepo->setMetaInformation("activeCodeLanguageExtension", languageExtension);
-	mProjectManager->setUnsavedIndicator(true);
 }
 
 void RobotsPluginFacade::connectInterpreterToActions()
