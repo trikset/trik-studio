@@ -3,6 +3,7 @@ set -o nounset
 set -o errexit
 
 cd "$(dirname "$0")"
+source "$INSTALLER_ROOT"/utils/linux-gnu_utils.sh
 
 mkdir -p $PWD/../data/bin/
 mkdir -p $PWD/../data/resources/
@@ -51,9 +52,9 @@ cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5XcbQpa.so*                                     $PWD/../data/lib/
-rsync -avR --copy-unsafe-links "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc,png12}.so* "$PWD/../data/lib/"
+#rsync -avR --copy-unsafe-links "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc,png12}.so* "$PWD/../data/lib/"
 #Take them from Qt if exist
-rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
+#rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
 
 cp     $QT_DIR/plugins/platforms/libq{xcb,minimal,offscreen}.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
@@ -72,3 +73,6 @@ rm -rf $PWD/../data/imageformats/
 rm -rf $PWD/../data/iconengines/
 rm -rf $PWD/../data/platforms/
 rm -rf $PWD/../data/plugins/
+
+add_required_libs "$PWD/../data/bin" "$PWD/../data/lib"
+add_required_libs "$PWD/../data/lib"
