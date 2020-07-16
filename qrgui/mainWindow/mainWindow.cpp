@@ -102,6 +102,8 @@ using namespace qReal::gui;
 using namespace qReal::commands;
 using namespace qReal::gui::editor;
 
+const QString twoDModelId = "TrikStudio.2DModel.Editor";
+
 MainWindow::MainWindow(const QString &fileToOpen)
 	: mUi(new Ui::MainWindowUi)
 	, mSplashScreen(new SplashScreen(SettingsManager::value("Splashscreen").toBool()))
@@ -266,7 +268,7 @@ void MainWindow::connectActions()
 
 	connect(mUi->actionUndo, &QAction::triggered, this, [this](){
 		text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
-		if (area) {
+		if (area && mCurrentEditor->editorId() != twoDModelId) {
 			area->undo();
 			mUi->actionUndo->setEnabled(area->isUndoAvailable());
 			mUi->actionRedo->setEnabled(area->isRedoAvailable());
@@ -277,7 +279,7 @@ void MainWindow::connectActions()
 	});
 	connect(mUi->actionRedo, &QAction::triggered, this, [this](){
 		text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
-		if (area) {
+		if (area && mCurrentEditor->editorId() != twoDModelId) {
 			area->redo();
 			mUi->actionUndo->setEnabled(area->isUndoAvailable());
 			mUi->actionRedo->setEnabled(area->isRedoAvailable());
@@ -800,6 +802,7 @@ void MainWindow::registerEditor(EditorInterface &editor)
 			, *mUi->actionReplaceBy);
 	connect(&editor.focusAction(), &QAction::triggered, this, [this, &editor]() {
 		mCurrentEditor = &editor;
+		updateUndoRedoState();
 		const bool zoomingEnabled = editor.supportsZooming();
 		mUi->actionZoom_In->setEnabled(zoomingEnabled);
 		mUi->actionZoom_Out->setEnabled(zoomingEnabled);
@@ -1269,16 +1272,14 @@ void MainWindow::currentTabChanged(int newIndex)
 	mUi->actionFind->setEnabled(!isDecorativeTab);
 	mUi->actionFind_and_replace->setEnabled(!isDecorativeTab);
 	mUi->actionGesturesShow->setEnabled(qReal::SettingsManager::value("gesturesEnabled").toBool());
-	mUi->actionRedo->setEnabled(mController->canRedo());
-	mUi->actionUndo->setEnabled(mController->canUndo());
+
+	updateUndoRedoState();
 
 	if (isEditorTab) {
 		const Id currentTabId = getCurrentTab()->mvIface().rootId();
 		mToolManager->activeTabChanged(TabInfo(currentTabId, getCurrentTab()));
 	} else if (text::QScintillaTextEdit * const text = dynamic_cast<text::QScintillaTextEdit *>(currentTab())) {
 		mToolManager->activeTabChanged(TabInfo(mTextManager->path(text), text));
-		mUi->actionRedo->setEnabled(text->isRedoAvailable());
-		mUi->actionUndo->setEnabled(text->isUndoAvailable());
 	} else {
 		mToolManager->activeTabChanged(TabInfo(currentTab()));
 	}
@@ -1572,6 +1573,22 @@ void MainWindow::highlightCode(Id const &graphicalId, bool highlight)
 		} else {
 			area->markerDeleteAll();
 		}
+	}
+}
+
+void MainWindow::updateUndoRedoState()
+{
+	text::QScintillaTextEdit * const text = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
+	if (mCurrentEditor == nullptr) {
+		return;
+	}
+	if (mCurrentEditor->editorId() != twoDModelId && text != nullptr) {
+		mUi->actionRedo->setEnabled(text->isRedoAvailable());
+		mUi->actionUndo->setEnabled(text->isUndoAvailable());
+	}
+	else {
+		mUi->actionRedo->setEnabled(mController->canRedo());
+		mUi->actionUndo->setEnabled(mController->canUndo());
 	}
 }
 
