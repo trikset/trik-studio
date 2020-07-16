@@ -13,7 +13,7 @@ copy_required_libs() {
 	local binaries="$@"
 	local libs=$(env LD_LIBRARY_PATH="$targetLibsDir:$hostDirLib:$qtDirLib:${LD_LIBRARY_PATH:-}" ldd $binaries \
 		| grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' \
-		| xargs realpath -L -s | sort -u | grep -Ev "^$(realpath -e $targetLibsDir)|linux-vdso|^/lib/|^/lib64/")
+		| xargs realpath -L -s | sort -u | grep -Ev "^$(realpath -e $targetLibsDir)|linux-vdso|^/lib64/")
 	local rsync=""
 	
 	for lib in ${libs}; do rsync="$rsync ${lib}*" ; done
