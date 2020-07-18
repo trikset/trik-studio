@@ -357,6 +357,8 @@ private:
 
 	void highlightCode(Id const &graphicalId, bool highlight);
 
+	void updateUndoRedoState();
+
 	Ui::MainWindowUi *mUi;
 	QScopedPointer<SystemFacade> mFacade;
 

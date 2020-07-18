@@ -44,7 +44,7 @@ environment:
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
     server:
-      secure: z5zq17IIHeaJejIs42wtuoK9lEQ5bqpic9FqWHUMaAA=
+      secure: cSPfeMLOOlPhHRS4eZz337/2X+HUquhXmDZx2OgRSFE=
     password:
       secure: e2Rwbvcr6Z/YAX4N0/tO3w==
   matrix:
