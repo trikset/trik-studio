@@ -1,6 +1,6 @@
 // This module implements the QsciDocument class.
 //
-// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2020 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -53,20 +53,20 @@ QsciDocument::~QsciDocument()
 // The copy ctor.
 QsciDocument::QsciDocument(const QsciDocument &that)
 {
-	attach(that);
+    attach(that);
 }
 
 
 // The assignment operator.
 QsciDocument &QsciDocument::operator=(const QsciDocument &that)
 {
-	if (pdoc != that.pdoc)
-	{
-		detach();
-		attach(that);
-	}
+    if (pdoc != that.pdoc)
+    {
+        detach();
+        attach(that);
+    }
 
-	return *this;
+    return *this;
 }
 
 

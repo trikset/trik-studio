@@ -1,6 +1,6 @@
 // This defines the interface to the QsciDocument class.
 //
-// Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
+// Copyright (c) 2020 Riverbank Computing Limited <info@riverbankcomputing.com>
 // 
 // This file is part of QScintilla.
 // 
@@ -39,10 +39,10 @@ class QSCINTILLA_EXPORT QsciDocument
 public:
     //! Create a new unattached document.
     QsciDocument();
-	~QsciDocument();
+    virtual ~QsciDocument();
 
-	QsciDocument(const QsciDocument &);
-	QsciDocument &operator=(const QsciDocument &);
+    QsciDocument(const QsciDocument &);
+    QsciDocument &operator=(const QsciDocument &);
 
 private:
     friend class QsciScintilla;
