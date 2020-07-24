@@ -90,7 +90,7 @@ before_install:
   - time wait $EARLY_START_DOCKER_PULL_PID || true
   - ./buildScripts/travis/before_install.sh
   - export CCACHE_CONFIGPATH=$HOME/ccache.conf
-
+  - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main" >> /etc/apt/sources.list ; sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1E9377A2BA9EF27F BA6932366A755776 ; sudo apt-get update ; sudo apt-get install python3.7 ; fi
 
 install:
   - ./buildScripts/travis/install.sh
@@ -100,11 +100,15 @@ before_script:
   - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
 
 script:
+  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
+  - unzip tests_qrs.zip
   - ./buildScripts/travis/script.sh & WPID=$!
   - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - export TIMEOUT=false
   - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
   - if $INSTALLER ; then ./buildScripts/travis/build_installer.sh ; fi
+  - $EXECUTOR bin/$CONFIG/build-checker-installer.sh
+  - $EXECUTOR python3.7 ./buildScripts/tests/fieldstest.py bin/$CONFIG/2D-model testing
 
 after_script:
   - ./buildScripts/travis/after_script.sh
