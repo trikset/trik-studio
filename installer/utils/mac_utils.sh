@@ -6,7 +6,7 @@ export BUNDLE_CONTENTS=$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/Contents/
 export LIB_PATH=@executable_path/../Lib
 
 function fix_dependencies {
-	set -xvueo pipefail
+	set -ueo pipefail
 	local target="$1"
 	pushd "$(dirname "$target")"
 	local prefix=$(realpath -e "$2")
