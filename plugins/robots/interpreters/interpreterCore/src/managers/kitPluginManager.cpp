@@ -69,10 +69,10 @@ int KitPluginManager::priority(const QString &kitId) const
 
 void KitPluginManager::tryToLoadKitPlugins()
 {
-	QList<kitBase::KitPluginInterface *> const loadedInterpreterPlugins =
+	QList<kitBase::KitPluginInterface *> const loadedKitPlugins =
 			mPluginManager.loadAllPlugins<kitBase::KitPluginInterface>();
 
-	for (kitBase::KitPluginInterface * const kitPlugin : loadedInterpreterPlugins) {
+	for (kitBase::KitPluginInterface * const kitPlugin : loadedKitPlugins) {
 		mPluginInterfaces.insertMulti(kitPlugin->kitId(), kitPlugin);
 	}
 }
