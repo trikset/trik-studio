@@ -20,7 +20,6 @@ cp -pr $BIN_DIR/libBox2D.so*                                            $PWD/../
 cp -pr $BIN_DIR/librobots-generator-base.so*                            $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-kit-base.so*                                  $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-utils.so*                                     $PWD/../data/lib/
-cp -pr $BIN_DIR/libqextserialport.so*                                   $PWD/../data/lib/
 rsync -a --remove-source-files $PWD/../data/externalToolsConfig/                                 $PWD/../data/bin/externalToolsConfig/
 
 # Cleaning up prebuild-common.sh results...
