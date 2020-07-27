@@ -742,7 +742,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+612"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+614"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+667"/>
+        <location line="+668"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -871,12 +871,12 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+204"/>
+        <location line="+202"/>
         <source>Gestures Show</source>
         <translation>Afficher les gestes</translation>
     </message>
     <message>
-        <location line="+324"/>
+        <location line="+340"/>
         <source>Shortcuts</source>
         <translation>Raccourcis</translation>
     </message>
