@@ -28,11 +28,12 @@ TextObject::TextObject(QObject *parent)
 {
 }
 
-TextObject::TextObject(int x, int y, const QString &text, const QColor &color, int thickness, QObject *parent)
+TextObject::TextObject(int x, int y, const QString &text, const QColor &color, int thickness, int fontSize, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mX(x)
 	, mY(y)
 	, mText(text)
+	, mFontSize(fontSize)
 {
 }
 
@@ -66,15 +67,30 @@ QString TextObject::text() const
 	return mText;
 }
 
+int TextObject::fontSize() const
+{
+	return mFontSize;
+}
+
 void TextObject::setText(const QString &text)
 {
 	mText = text;
+}
+
+void TextObject::setFontSize(int fontSize)
+{
+	mFontSize = fontSize;
 }
 
 void TextObject::paint(QPainter *painter, const QRect &outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
 	painter->setPen(Qt::black);
+	if (mFontSize > 0) {
+		QFont font;
+		font.setPixelSize(mFontSize);
+		painter->setFont(font);
+	}
 	painter->drawText(QRectF(mX, mY, maxScreenSize, maxScreenSize), Qt::AlignLeft | Qt::AlignTop, mText);
 }
 
@@ -87,5 +103,6 @@ QJsonObject TextObject::toJson() const
 	result["text"] = text();
 	result["color"] = color().name();
 	result["thickness"] = thickness();
+	result["fontSize"] = fontSize();
 	return result;
 }

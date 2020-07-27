@@ -52,11 +52,12 @@ void Display::drawCircle(int x, int y, int radius)
 	Q_UNUSED(radius)
 }
 
-void Display::printText(int x, int y, const QString &text)
+void Display::printText(int x, int y, const QString &text, int fontSize)
 {
 	Q_UNUSED(x)
 	Q_UNUSED(y)
 	Q_UNUSED(text)
+	Q_UNUSED(fontSize)
 }
 
 void Display::clearScreen()

@@ -101,8 +101,9 @@ void Display::drawCircle(int x, int y, int radius, bool filled)
 }
 
 
-void Display::printText(int x, int y, const QString &text)
+void Display::printText(int x, int y, const QString &text, int fontSize)
 {
+	Q_UNUSED(fontSize)
 	QByteArray command = Ev3DirectCommand::formCommand(21 + text.length(), 0, 0, 0
 			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;

@@ -117,14 +117,18 @@ void Display::setBackground(const QColor &color)
 	emit backgroundChanged(color);
 }
 
-void Display::printText(int x, int y, const QString &text)
+void Display::printText(int x, int y, const QString &text, int fontSize)
 {
+	if (fontSize <= 0) {
+		fontSize = textSize;
+	}
 	const QPair<int, int> coords(x, y);
 	if (mLabelsMap.contains(coords)) {
 		mLabelsMap[coords]->setText(text);
+		mLabelsMap[coords]->setFontSize(fontSize);
 	} else {
 		utils::TextObject * const textObject = new utils::TextObject(x, y, text
-			, mCurrentPenColor, mCurrentPenWidth);
+			, mCurrentPenColor, mCurrentPenWidth, fontSize);
 		mObjects << textObject;
 		mLabelsMap[coords] = textObject;
 		mLabels << textObject;
