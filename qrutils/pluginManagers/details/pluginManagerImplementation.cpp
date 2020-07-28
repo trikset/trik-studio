@@ -23,6 +23,7 @@ using namespace qReal::details;
 PluginManagerImplementation::PluginManagerImplementation(const QString &pluginsDirPath)
 	: mPluginsDir(pluginsDirPath)
 {
+	QLOG_INFO() << "Plugin manager for " << mPluginsDir << "with PATH=" << qgetenv("PATH");
 }
 
 PluginManagerImplementation::~PluginManagerImplementation()
