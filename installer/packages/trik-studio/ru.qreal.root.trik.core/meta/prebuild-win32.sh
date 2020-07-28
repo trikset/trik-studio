@@ -10,7 +10,7 @@ cp    $BIN_DIR/robots-trik-generator-base.dll                                   
 cp    $BIN_DIR/robots-trik-kit.dll                                                $PWD/../data/
 cp    $BIN_DIR/robots-trik-kit-interpreter-common.dll                             $PWD/../data/
 
-cp    $BIN_DIR/PythonQt*.dll                                                      $PWD/../data/
+cp    "$BIN_DIR"/trikPythonQt*.dll                                                "$PWD"/../data/
 cp    $BIN_DIR/trikControl.dll                                                    $PWD/../data/
 cp    $BIN_DIR/trikScriptRunner.dll                                               $PWD/../data/
 cp    $BIN_DIR/trikHal.dll                                                        $PWD/../data/
