@@ -99,15 +99,12 @@ before_script:
   - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
 
 script:
-  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
-  - unzip tests_qrs.zip
   - ./buildScripts/travis/script.sh & WPID=$!
   - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - export TIMEOUT=false
   - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
   - if $INSTALLER ; then ./buildScripts/travis/build_installer.sh ; fi
-  - $EXECUTOR bin/$CONFIG/build-checker-installer.sh
-  - $EXECUTOR python3.7 ./buildScripts/tests/fieldstest.py bin/$CONFIG/2D-model testing
+  - ./buildScripts/travis/test.sh
 
 after_script:
   - ./buildScripts/travis/after_script.sh
