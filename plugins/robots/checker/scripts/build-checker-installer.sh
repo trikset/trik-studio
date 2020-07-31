@@ -135,7 +135,7 @@ $qRealDir/librobots-trik-kit-interpreter-common.so* \
 $qRealDir/librobots-kit-base.so* \
 $qRealDir/librobots-trik-kit.so* \
 $qRealDir/librobots-utils.so* \
-$qRealDir/libPythonQt*.so* \
+$qRealDir/libtrikPythonQt*.so* \
 $qRealDir/libBox2D.so* .
 
 rsync -av $qRealDir/libqextserialport.so* \
