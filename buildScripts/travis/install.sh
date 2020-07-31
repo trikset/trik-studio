@@ -9,7 +9,7 @@ case $TRAVIS_OS_NAME in
     export HOMEBREW_NO_INSTALL_CLEANUP=1
     export HOMEBREW_NO_AUTO_UPDATE=1
     brew tap "hudochenkov/sshpass"
-    TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass qt"
+    TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass qt p7zip"
     for pkg in $TRIK_BREW_PACKAGES ; do
       p="${pkg##*/}"
       p="${p%.*}"
