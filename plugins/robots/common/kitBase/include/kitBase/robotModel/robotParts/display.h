@@ -36,7 +36,7 @@ public:
 	/// Prints the given text on the robot`s screen in the given coordinates.
 	/// The collision behaviour depends on concrete kit: the text may be replaced
 	/// (like in TRIK) or intersect (like in NXT).
-	virtual void printText(int x, int y, const QString &text) = 0;
+	virtual void printText(int x, int y, const QString &text, int fontSize = -1) = 0;
 
 	/// Clears everything on a display without redrawing it.
 	virtual void clearScreen() = 0;
