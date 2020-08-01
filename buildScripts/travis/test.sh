@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
-$EXECUTOR bash -lixc "7z x tests_qrs.zip"
+curl --output tests_qrs.7z "https://dl.trikset.com/edu/.solutions20200701/test.7z"
+$EXECUTOR bash -lixc "7z x tests_qrs.7z"
 if [ $TRAVIS_OS_NAME = "linux" ]
 then
 	$EXECUTOR bin/$CONFIG/build-checker-installer.sh
