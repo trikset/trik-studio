@@ -152,6 +152,9 @@ public:
 	/// Stores the meta-information for current stored binded to the given key.
 	void setMetaInformation(const QString &key, const QVariant &info);
 
+	/// Clear the meta-information.
+	void clearMetaInformation();
+
 private:
 	void init();
 
