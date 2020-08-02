@@ -472,7 +472,7 @@
     <message>
         <location line="+44"/>
         <source>Robot track:</source>
-        <translation>Колейность робота:</translation>
+        <translation>Колея робота:</translation>
     </message>
 </context>
 <context>

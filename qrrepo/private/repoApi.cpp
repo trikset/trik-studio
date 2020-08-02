@@ -639,3 +639,8 @@ void RepoApi::setMetaInformation(const QString &key, const QVariant &info)
 {
 	mRepository->setMetaInformation(key, info);
 }
+
+void RepoApi::clearMetaInformation()
+{
+	mRepository->clearMetaInformation();
+}

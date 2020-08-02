@@ -629,3 +629,8 @@ void Repository::setMetaInformation(const QString &key, const QVariant &info)
 {
 	mMetaInfo[key] = info;
 }
+
+void Repository::clearMetaInformation()
+{
+	mMetaInfo.clear();
+}
