@@ -66,15 +66,6 @@ void setDefaultLocale(bool localizationDisabled)
 	}
 }
 
-void initLogging()
-{
-	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
-	if (logsDir.mkpath(logsDir.absolutePath())) {
-		Logger::addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2, QsLogging::DebugLevel);
-		Logger::addLogTarget(logsDir.filePath("actions.log"), maxLogSize, 2, QsLogging::TraceLevel);
-	}
-}
-
 static QString versionInfo()
 {
 	return  "TRIK Studio (" + QSysInfo::buildAbi() + ") " + TRIK_STUDIO_VERSION;
@@ -92,7 +83,7 @@ int main(int argc, char *argv[])
 
 	if (app.arguments().contains("--version"))
 	{
-		QTextStream(stdout) << versionInfo() << endl;
+		QTextStream(stdout) << versionInfo() << Qt::endl;
 		return 0;
 	}
 
@@ -121,7 +112,13 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	initLogging();
+	qReal::Logger logger;
+	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
+	if (logsDir.mkpath(logsDir.absolutePath())) {
+		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2, QsLogging::DebugLevel);
+		logger.addLogTarget(logsDir.filePath("actions.log"), maxLogSize, 2, QsLogging::TraceLevel);
+	}
+
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName()
