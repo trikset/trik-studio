@@ -71,8 +71,8 @@ using namespace qrtext::core;
 /// recursive references, and QSharedPointer cannot handle this
 /// without hacks. Thus we manage a full list of shared pointers
 /// to clean up manually in the dtor.
-struct LuaBlockParser : ParserInterface <LuaTokenTypes> {
-
+struct LuaBlockParser : ParserInterface <LuaTokenTypes>
+{
 	LuaBlockParser(const ParserRef<LuaTokenTypes> &main, const QList<ParserRef<LuaTokenTypes>> &other)
 	{
 		mParsers << main << other;
@@ -99,10 +99,7 @@ struct LuaBlockParser : ParserInterface <LuaTokenTypes> {
 
 private:
 	QList<ParserRef<LuaTokenTypes>> mParsers;
-
 };
-
-
 
 LuaParser::LuaParser(QList<Error> &errors)
 	: Parser<LuaTokenTypes>(grammar(), errors)

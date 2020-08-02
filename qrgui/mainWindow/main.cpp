@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 
 	if (app.arguments().contains("--version"))
 	{
-		QTextStream(stdout) << versionInfo() << Qt::endl;
+		QTextStream(stdout) << versionInfo() << endl;
 		return 0;
 	}
 
