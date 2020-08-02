@@ -4,6 +4,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ARG CHECKER_TAG=latest
 #Run everything at once to create a single layer
 ENV TRIK_PYTHON3_VERSION_MINOR 7
+#Since LANG has the lowest priority (of LC_ALL, LC_CTYPE) and can be overrided by other vars, we prefer to use LANG
+ENV LANG C.UTF-8
 RUN set -eu \
     && echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
     && echo "deb http://ppa.launchpad.net/ubuntu-toolchain-r/test/ubuntu xenial main" >> /etc/apt/sources.list \
@@ -24,5 +26,5 @@ RUN set -eu \
             /usr/share/man \
             /usr/share/locale/?? \
             /usr/share/locale/??_?? \
-    && locale-gen --purge ru_RU.UTF-8
+    && locale-gen --purge ru_RU.UTF-8 fr_FR.UTF-8 en_US.UTF-8 de_DE.UTF-8
 RUN du -csh /* 2>/dev/null | sort -h || :
