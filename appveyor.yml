@@ -178,7 +178,7 @@ test_script:
   - bash -c "env LC_ALL=C date -u"
   - cmd /c %TEST_SUITE%
   - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
-  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
+  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
 
 after_test:
 # zip binaries
