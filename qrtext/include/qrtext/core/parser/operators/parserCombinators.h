@@ -88,7 +88,7 @@ template<typename TokenType>
 inline ParserRef<TokenType> operator & (const TokenType &token, const ParserRef<TokenType> &b)
 {
 	return ParserRef<TokenType>(new ConcatenationParser<TokenType>(token >>
-			[] (Token<TokenType> const &token) { return new TemporaryToken<TokenType>(token); }, b));
+			[] (Token<TokenType> const &token) { return wrap(new TemporaryToken<TokenType>(token)); }, b));
 }
 
 /// Syntactic sugar operator for concatenation of parsers with tokens.
@@ -96,7 +96,7 @@ template<typename TokenType>
 inline ParserRef<TokenType> operator & (const ParserRef<TokenType> &a, const TokenType &token)
 {
 	return ParserRef<TokenType>(new ConcatenationParser<TokenType>(a, token >>
-			[] (Token<TokenType> const &token) { return new TemporaryToken<TokenType>(token); }));
+			[] (Token<TokenType> const &token) { return wrap(new TemporaryToken<TokenType>(token)); }));
 }
 
 /// Operator to discard a token, used to ignore a token from a token stream. For example, A ::= '(' B ')' may be
@@ -105,7 +105,7 @@ inline ParserRef<TokenType> operator & (const ParserRef<TokenType> &a, const Tok
 template<typename TokenType>
 inline ParserRef<TokenType> operator - (const TokenType &token)
 {
-	return token >> [] () { return new TemporaryDiscardableNode(); };
+	return token >> [] () { return wrap(new TemporaryDiscardableNode()); };
 }
 
 /// Operator to discard a result of parser, used to ignore entire subtree. Connections from ignored subtree
@@ -113,7 +113,7 @@ inline ParserRef<TokenType> operator - (const TokenType &token)
 template<typename TokenType>
 inline ParserRef<TokenType> operator - (const ParserRef<TokenType> &parser)
 {
-	return parser >> [] (QSharedPointer<ast::Node> node) {
+	return parser >> [] (const QSharedPointer<ast::Node> &node) {
 			if (node->is<TemporaryErrorNode>()) {
 				return node;
 			} else {

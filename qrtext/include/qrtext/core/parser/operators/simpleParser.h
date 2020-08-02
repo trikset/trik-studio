@@ -43,7 +43,7 @@ public:
 			return wrap(new TemporaryErrorNode());
 		}
 
-		const auto node = wrap(mSemanticAction());
+		auto node = mSemanticAction();
 		if (node) {
 			node->connect(token);
 		} else {

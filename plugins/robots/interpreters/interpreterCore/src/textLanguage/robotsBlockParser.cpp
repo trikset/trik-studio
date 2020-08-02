@@ -38,8 +38,7 @@ const QString timeVariableName = QObject::tr("time");
 RobotsBlockParser::RobotsBlockParser(
 		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, const utils::ComputableNumber::IntComputer &timeComputer)
-	: qrtext::lua::LuaToolbox()
-	, mRobotModelManager(robotModelManager)
+	: mRobotModelManager(robotModelManager)
 	, mTimeComputer(timeComputer)
 {
 	setReservedVariables();
@@ -101,6 +100,7 @@ const QStringList &RobotsBlockParser::hiddenVariables() const
 void RobotsBlockParser::clear()
 {
 	setReservedVariables();
+	LuaToolbox::clear();
 }
 
 void RobotsBlockParser::onDeviceConfigurationChanged(const QString &robotId

@@ -30,7 +30,6 @@ namespace qrtext {
 class LanguageToolboxInterface : public DebuggerInterface
 {
 public:
-	virtual ~LanguageToolboxInterface() {}
 
 	/// Interprets given code string using given id and property name for connection. Returns result of an expression.
 	template<typename T>

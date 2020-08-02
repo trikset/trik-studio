@@ -66,6 +66,44 @@ using namespace qrtext::lua;
 using namespace qrtext::lua::details;
 using namespace qrtext::core;
 
+/// This helper class aims to fight against problem of
+/// cyclic references. Recursive grammar structure produces
+/// recursive references, and QSharedPointer cannot handle this
+/// without hacks. Thus we manage a full list of shared pointers
+/// to clean up manually in the dtor.
+struct LuaBlockParser : ParserInterface <LuaTokenTypes> {
+
+	LuaBlockParser(const ParserRef<LuaTokenTypes> &main, const QList<ParserRef<LuaTokenTypes>> &other)
+	{
+		mParsers << main << other;
+	}
+
+	QSet<LuaTokenTypes> first() const override
+	{
+		return mParsers[0]->first();
+	}
+
+	QSharedPointer<qrtext::core::ast::Node> parse(TokenStream<LuaTokenTypes> &tokenStream
+												  , ParserContext<LuaTokenTypes> &parserContext) const override
+	{
+		return mParsers[0]->parse(tokenStream, parserContext);
+	}
+
+	~LuaBlockParser() override
+	{
+		for (auto &&p: mParsers) {
+			p.internalPointer()->clear();
+			//p.internalPointer().clear();
+		}
+	}
+
+private:
+	QList<ParserRef<LuaTokenTypes>> mParsers;
+
+};
+
+
+
 LuaParser::LuaParser(QList<Error> &errors)
 	: Parser<LuaTokenTypes>(grammar(), errors)
 {
@@ -75,15 +113,15 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 {
 	QSharedPointer<core::PrecedenceTable<LuaTokenTypes>> precedenceTable(new LuaPrecedenceTable());
 
+	ParserRef<LuaTokenTypes> exp;
+	ParserRef<LuaTokenTypes> prefixexp;
+	ParserRef<LuaTokenTypes> args;
 	ParserRef<LuaTokenTypes> stat;
 	ParserRef<LuaTokenTypes> explist;
-	ParserRef<LuaTokenTypes> exp;
 	ParserRef<LuaTokenTypes> primary;
-	ParserRef<LuaTokenTypes> prefixexp;
 	ParserRef<LuaTokenTypes> varpart;
 	ParserRef<LuaTokenTypes> functioncallpart;
 	ParserRef<LuaTokenTypes> prefixterm;
-	ParserRef<LuaTokenTypes> args;
 	ParserRef<LuaTokenTypes> tableconstructor;
 	ParserRef<LuaTokenTypes> fieldlist;
 	ParserRef<LuaTokenTypes> field;
@@ -93,12 +131,12 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 
 	auto reportUnsupported = [this] (Token<LuaTokenTypes> const &token) {
 		context().reportError(token, "This construction is not supported yet");
-		return new TemporaryErrorNode();
+		return wrap(new TemporaryErrorNode());
 	};
 
 	// Additional production that parses unqualified identifier.
 	auto identifier = LuaTokenTypes::identifier
-			>> [] (Token<LuaTokenTypes> const &token) { return new ast::Identifier(token.lexeme()); }
+			>> [] (Token<LuaTokenTypes> const &token) { return wrap(new ast::Identifier(token.lexeme())); }
 			/= "identifier"
 			;
 
@@ -203,13 +241,13 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 
 	// primary ::= nil | false | true | Number | String | ‘...’ | prefixexp | tableconstructor | unop exp
 	primary <<=
-			LuaTokenTypes::nilKeyword >> [] { return new ast::Nil(); }
-			| LuaTokenTypes::falseKeyword >> [] { return new ast::False(); }
-			| LuaTokenTypes::trueKeyword >> [] { return new ast::True(); }
+			LuaTokenTypes::nilKeyword >> [] { return wrap(new ast::Nil()); }
+			| LuaTokenTypes::falseKeyword >> [] { return wrap(new ast::False()); }
+			| LuaTokenTypes::trueKeyword >> [] { return wrap(new ast::True()); }
 			| LuaTokenTypes::integerLiteral
-					>> [] (Token<LuaTokenTypes> const &token) { return new ast::IntegerNumber(token.lexeme()); }
+					>> [] (Token<LuaTokenTypes> const &token) { return wrap(new ast::IntegerNumber(token.lexeme())); }
 			| LuaTokenTypes::floatLiteral
-					>> [] (Token<LuaTokenTypes> const &token) { return new ast::FloatNumber(token.lexeme()); }
+					>> [] (Token<LuaTokenTypes> const &token) { return wrap(new ast::FloatNumber(token.lexeme())); }
 			| LuaTokenTypes::string >> [] (Token<LuaTokenTypes> const &token) {
 					QString string = token.lexeme();
 					// Cut off quotes.
@@ -219,7 +257,7 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 					// Replace escape characters.
 					auto transformedString = LuaStringEscapeUtils::unescape(string);
 
-					return new ast::String(transformedString);
+					return wrap(new ast::String(transformedString));
 				}
 			| LuaTokenTypes::tripleDot >> reportUnsupported
 			| prefixexp
@@ -231,7 +269,7 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 					precedenceTable, LuaTokenTypes::minus, primary, binop))
 					)
 					>> [] (QSharedPointer<TemporaryPair> const &node) {
-						const auto unOp = as<ast::UnaryOperator>(node->left());
+						auto unOp = as<ast::UnaryOperator>(node->left());
 						unOp->setOperand(node->right());
 						return unOp;
 					}
@@ -269,7 +307,7 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 	// varpart ::= ‘[’ exp(0) ‘]’ | ‘.’ Name
 	varpart <<= (-LuaTokenTypes::openingSquareBracket & exp & -LuaTokenTypes::closingSquareBracket)
 			| (-LuaTokenTypes::dot & LuaTokenTypes::identifier >> [] (Token<LuaTokenTypes> const &token) {
-						return new ast::String(token.lexeme());
+						return wrap(new ast::String(token.lexeme()));
 					}
 			)
 			/= "varpart"
@@ -288,7 +326,7 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 	args <<= ((-LuaTokenTypes::openingBracket & ~explist & -LuaTokenTypes::closingBracket)
 			| tableconstructor
 			| LuaTokenTypes::string >> [] (const Token<LuaTokenTypes> &token) {
-											return new ast::String(token.lexeme());
+											return wrap(new ast::String(token.lexeme()));
 										}
 			) >> [this] (QSharedPointer<ast::Node> node) {
 					if (node->is<TemporaryList>()) {
@@ -377,40 +415,44 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 
 	// binop ::= ‘+’ | ‘-’ | ‘*’ | ‘/’ | ‘//’ | ‘^’ | ‘%’ | ‘&’ | ‘~’ | ‘|’ | ‘>>’ | ‘<<’ | ‘..’
 	//           | ‘<’ | ‘<=’ | ‘>’ | ‘>=’ | ‘==’ | ‘~=’ | ‘!=’ | and | or
-	binop <<= LuaTokenTypes::plus >> [] { return new ast::Addition(); }
-			| LuaTokenTypes::minus >> [] { return new ast::Subtraction(); }
-			| LuaTokenTypes::asterick >> [] { return new ast::Multiplication(); }
-			| LuaTokenTypes::slash >> [] { return new ast::Division(); }
-			| LuaTokenTypes::doubleSlash >> [] { return new ast::IntegerDivision(); }
-			| LuaTokenTypes::hat >> [] { return new ast::Exponentiation(); }
-			| LuaTokenTypes::percent >> [] { return new ast::Modulo(); }
-			| LuaTokenTypes::ampersand >> [] { return new ast::BitwiseAnd(); }
-			| LuaTokenTypes::tilda >> [] { return new ast::BitwiseXor(); }
-			| LuaTokenTypes::verticalLine >> [] { return new ast::BitwiseOr(); }
-			| LuaTokenTypes::doubleGreater >> [] { return new ast::BitwiseRightShift(); }
-			| LuaTokenTypes::doubleLess >> [] { return new ast::BitwiseLeftShift(); }
-			| LuaTokenTypes::doubleDot >> [] { return new ast::Concatenation(); }
-			| LuaTokenTypes::less >> [] { return new ast::LessThan(); }
-			| LuaTokenTypes::lessEquals >> [] { return new ast::LessOrEqual(); }
-			| LuaTokenTypes::greater >> [] { return new ast::GreaterThan(); }
-			| LuaTokenTypes::greaterEquals >> [] { return new ast::GreaterOrEqual(); }
-			| LuaTokenTypes::doubleEquals >> [] { return new ast::Equality(); }
-			| LuaTokenTypes::tildaEquals >> [] { return new ast::Inequality(); }
-			| LuaTokenTypes::exclamationMarkEquals >> [] { return new ast::Inequality(); }
-			| LuaTokenTypes::andKeyword >> [] { return new ast::LogicalAnd(); }
-			| LuaTokenTypes::orKeyword >> [] { return new ast::LogicalOr(); }
-			| LuaTokenTypes::doubleAmpersand >> [] { return new ast::LogicalAnd(); }
-			| LuaTokenTypes::doubleVerticalLine >> [] { return new ast::LogicalOr(); }
+	binop <<= LuaTokenTypes::plus >> [] { return wrap(new ast::Addition()); }
+			| LuaTokenTypes::minus >> [] { return wrap(new ast::Subtraction()); }
+			| LuaTokenTypes::asterick >> [] { return wrap(new ast::Multiplication()); }
+			| LuaTokenTypes::slash >> [] { return wrap(new ast::Division()); }
+			| LuaTokenTypes::doubleSlash >> [] { return wrap(new ast::IntegerDivision()); }
+			| LuaTokenTypes::hat >> [] { return wrap(new ast::Exponentiation()); }
+			| LuaTokenTypes::percent >> [] { return wrap(new ast::Modulo()); }
+			| LuaTokenTypes::ampersand >> [] { return wrap(new ast::BitwiseAnd()); }
+			| LuaTokenTypes::tilda >> [] { return wrap(new ast::BitwiseXor()); }
+			| LuaTokenTypes::verticalLine >> [] { return wrap(new ast::BitwiseOr()); }
+			| LuaTokenTypes::doubleGreater >> [] { return wrap(new ast::BitwiseRightShift()); }
+			| LuaTokenTypes::doubleLess >> [] { return wrap(new ast::BitwiseLeftShift()); }
+			| LuaTokenTypes::doubleDot >> [] { return wrap(new ast::Concatenation()); }
+			| LuaTokenTypes::less >> [] { return wrap(new ast::LessThan()); }
+			| LuaTokenTypes::lessEquals >> [] { return wrap(new ast::LessOrEqual()); }
+			| LuaTokenTypes::greater >> [] { return wrap(new ast::GreaterThan()); }
+			| LuaTokenTypes::greaterEquals >> [] { return wrap(new ast::GreaterOrEqual()); }
+			| LuaTokenTypes::doubleEquals >> [] { return wrap(new ast::Equality()); }
+			| LuaTokenTypes::tildaEquals >> [] { return wrap(new ast::Inequality()); }
+			| LuaTokenTypes::exclamationMarkEquals >> [] { return wrap(new ast::Inequality()); }
+			| LuaTokenTypes::andKeyword >> [] { return wrap(new ast::LogicalAnd()); }
+			| LuaTokenTypes::orKeyword >> [] { return wrap(new ast::LogicalOr()); }
+			| LuaTokenTypes::doubleAmpersand >> [] { return wrap(new ast::LogicalAnd()); }
+			| LuaTokenTypes::doubleVerticalLine >> [] { return wrap(new ast::LogicalOr()); }
 			/= "binop"
 			;
 
 	// unop ::= ‘-’ | not | ‘#’ | ‘~’
-	unop <<= LuaTokenTypes::minus >> [] { return new ast::UnaryMinus(); }
-			| LuaTokenTypes::notKeyword >> [] { return new ast::Not(); }
-			| LuaTokenTypes::sharp >> [] { return new ast::Length(); }
-			| LuaTokenTypes::tilda >> [] { return new ast::BitwiseNegation(); }
+	unop <<= LuaTokenTypes::minus >> [] { return wrap(new ast::UnaryMinus()); }
+			| LuaTokenTypes::notKeyword >> [] { return wrap(new ast::Not()); }
+			| LuaTokenTypes::sharp >> [] { return wrap(new ast::Length()); }
+			| LuaTokenTypes::tilda >> [] { return wrap(new ast::BitwiseNegation()); }
 			/= "unop"
 			;
 
-	return block.parser();
+	QList<ParserRef<LuaTokenTypes>> helper { exp , prefixexp , args , stat, explist, primary, varpart
+											, functioncallpart, prefixterm, tableconstructor, fieldlist
+											, field, fieldsep, binop, unop};
+	QSharedPointer<LuaBlockParser> result(new LuaBlockParser(block, helper));
+	return result;
 }
