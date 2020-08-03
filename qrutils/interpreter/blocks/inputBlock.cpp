@@ -32,5 +32,4 @@ void InputBlock::run()
 	if (!errorsOccured()) {
 		emit done(mNextBlockId);
 	}
-
 }
