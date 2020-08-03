@@ -28,11 +28,12 @@ void PrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 {
 	const int x = eval<int>("XCoordinateText");
 	const int y = eval<int>("YCoordinateText");
+	const int fontSize = eval<int>("FontSize");
 	const QString result = boolProperty("Evaluate") ? eval<QString>("PrintText") : stringProperty("PrintText");
 	const bool redraw = boolProperty("Redraw");
 
 	if (!errorsOccured()) {
-		display.printText(x, y, result);
+		display.printText(x, y, result, fontSize);
 		if (redraw) {
 			display.redraw();
 		}

@@ -643,6 +643,7 @@
 						<label x="50" y="60" textBinded="XCoordinateText" prefix="X:"/>
 						<label x="50" y="90" textBinded="YCoordinateText" prefix="Y:"/>
 						<label x="50" y="120" textBinded="PrintText" prefix="Text:"/>
+                                                <label x="50" y="150" textBinded="FontSize" prefix="Font size:"/>
 					</labels>
 					<nonResizeable/>
 				</graphics>
@@ -663,7 +664,10 @@
 						</property>
 						<property displayedName="Redraw" type="bool" name="Redraw">
 							<default>true</default>
-						</property>
+                                                </property>
+                                                <property displayedName="Font" type="string" name="FontSize">
+                                                        <default>20</default>
+                                                </property>
 					</properties>
 					<generalizations>
 						<parent parentName="AbstractNode"/>
