@@ -250,6 +250,28 @@
 					<container/>
 				</logic>
 			</node>
+			<node displayedName="User Input" name="Input" description="Blablabla.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/variableInitBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="33" y="60" textBinded="variable" background="white" prefix="Variable:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<properties>
+						<property displayedName="Variable" type="string" name="variable">
+							<default>x</default>
+						</property>
+					</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+					<container/>
+				</logic>
+			</node>
 			<node displayedName="Random Initialization" name="Randomizer" description="Sets a variable value to a random value inside given interval.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -713,6 +735,7 @@
 				<element name="InitialNode"/>
 				<element name="FinalNode"/>
 				<element name="VariableInit"/>
+				<element name="Input"/>
 				<element name="IfBlock"/>
 				<element name="FiBlock"/>
 				<element name="PreconditionalLoop"/>
