@@ -99,8 +99,7 @@ const QStringList &RobotsBlockParser::hiddenVariables() const
 
 void RobotsBlockParser::clear()
 {
-	setReservedVariables();
-	LuaToolbox::clear();
+	setReservedVariables(); // calls inherited LuaToolbox::clear() too
 }
 
 void RobotsBlockParser::onDeviceConfigurationChanged(const QString &robotId
