@@ -182,5 +182,7 @@ find . -type f -executable | xargs strip -sv || :
 # Packing
 popd
 
-rm -f trik_checker.tar.xz
-time { tar c trikStudio-checker | xz -z3ecvT 0 > trik_checker.tar.xz ; }
+if [[ -z "${TRIK_SKIP_CHECKER_ARCHIVE+x}" ]] ; then
+   rm -f trik_checker.tar.xz
+   time { tar c trikStudio-checker | xz -z3ecvT 0 > trik_checker.tar.xz ; }
+fi
