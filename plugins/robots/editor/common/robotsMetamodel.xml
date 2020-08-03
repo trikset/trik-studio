@@ -665,7 +665,7 @@
 						<property displayedName="Redraw" type="bool" name="Redraw">
 							<default>true</default>
                                                 </property>
-                                                <property displayedName="Font" type="string" name="FontSize">
+                                                <property displayedName="Font size" type="string" name="FontSize">
                                                         <default>20</default>
                                                 </property>
 					</properties>

@@ -29,7 +29,7 @@ PrintTextBlockGenerator::PrintTextBlockGenerator(const qrRepo::RepoApi &repo
 					, customizer.factory()->intPropertyConverter(id, "XCoordinateText"))
 			, Binding::createConverting("@@Y@@", "YCoordinateText"
 					, customizer.factory()->intPropertyConverter(id, "YCoordinateText"))
-			, Binding::createConverting("@@FONT@@", "FontSize"
+			, Binding::createConverting("@@FONTSIZE@@", "FontSize"
 					, customizer.factory()->intPropertyConverter(id, "FontSize"))
 			, (repo.property(id, "Evaluate").toBool()
 					? Binding::createConverting("@@TEXT@@", "PrintText"
