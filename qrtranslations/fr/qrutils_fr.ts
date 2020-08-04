@@ -256,17 +256,61 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+29"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+33"/>
         <source>Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="-4"/>
         <source>Input value for %1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+14"/>
+        <source>Control flow break detected, stopping</source>
+        <translation type="unfinished">Une pause de flux de contrôle détecté, arrêt en cours</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Block has disappeared!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
+        <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>There should be a maximum of TWO links outgoing from input block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Outgoing link is not connected</source>
+        <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Two links marked with &quot;cancel&quot; found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one of the two links must be marked with &quot;cancel&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one link must be not marked with &quot;cancel&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two links marked with &apos;false&apos; found</source>
+        <translation type="obsolete">Deux liens marqués comme &apos;false&apos; sont détectés</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>You must input some value!</source>
         <translation type="unfinished"></translation>
     </message>

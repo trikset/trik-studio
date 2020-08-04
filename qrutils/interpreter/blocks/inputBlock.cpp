@@ -19,21 +19,92 @@ using namespace qReal::interpretation::blocks;
 
 void InputBlock::run()
 {
-	bool ok;
+	auto dialog = new QInputDialog();
+	connect(dialog, &QInputDialog::textValueSelected, this, &InputBlock::onValueSelected);
+	connect(dialog, &QDialog::rejected, this, &InputBlock::onRejected);
 	const auto var = stringProperty("variable");
 	const auto defaultValue = stringProperty("default");
 	auto prompt = stringProperty("prompt");
 	if (prompt.isEmpty()) {
 		prompt = tr("Input value for %1:").arg(var);
 	}
-	const auto value = QInputDialog::getText(nullptr, tr("Input"), prompt, QLineEdit::Normal, defaultValue, &ok);
+	dialog->setLabelText(prompt);
+	dialog->setInputMode(QInputDialog::TextInput);
+	dialog->setWindowTitle(tr("Input"));
+	dialog->setTextValue(defaultValue);
+	dialog->open();
+}
 
-	if (!ok || value.isEmpty()) {
-		emit error(tr("You must input some value!"));
+bool InputBlock::initNextBlocks()
+{
+	mNextBlockId = Id();
+	mCancelBlockId = Id();
+	if (id().isNull() || id() == Id::rootId()) {
+		error(tr("Control flow break detected, stopping"));
+		return false;
+	}
+	if (!mGraphicalModelApi->graphicalRepoApi().exist(id())) {
+		error(tr("Block has disappeared!"));
+		return false;
+	}
+
+	const IdList links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
+	if (links.count() == 0) {
+		error(tr("No outgoing links, please connect this block to something or use Final Node to end program"));
+		return false;
+	}
+	if (links.size() > 2) {
+		error(tr("There should be a maximum of TWO links outgoing from input block"));
+		return false;
+	}
+
+	for (const Id &linkId : links) {
+		const Id targetBlockId = mGraphicalModelApi->graphicalRepoApi().otherEntityFromLink(linkId, id());
+		if (targetBlockId.isNull() || targetBlockId == Id::rootId()) {
+			error(tr("Outgoing link is not connected"));
+			return false;
+		}
+
+		if (stringProperty(linkId, "Guard").toLower() == "cancel") {
+			if (mCancelBlockId.isNull()) {
+				mCancelBlockId = targetBlockId;
+			} else {
+				error(tr("Two links marked with \"cancel\" found"));
+				return false;
+			}
+		} else {
+			if (mNextBlockId.isNull()) {
+				mNextBlockId = targetBlockId;
+			} else {
+				error(tr("At least one of the two links must be marked with \"cancel\""));
+				return false;
+			}
+		}
+	}
+
+	if (mNextBlockId.isNull()) {
+		error(tr("At least one link must be not marked with \"cancel\""));
+		return false;
+	}
+
+	return true;
+}
+
+void InputBlock::onValueSelected(const QString &value) {
+	if (value.isEmpty()) {
+		error("The value must not be empty!");
 		return;
 	}
-	evalCode(var + " = " + value);
+	evalCode(stringProperty("variable") + " = " + value);
 	if (!errorsOccured()) {
 		emit done(mNextBlockId);
+	}
+}
+
+void InputBlock::onRejected() {
+	if (mCancelBlockId.isNull()) {
+		error(tr("You must input some value!"));
+	} else {
+		emit done(mCancelBlockId);
 	}
 }

@@ -27,6 +27,12 @@ class QRUTILS_EXPORT InputBlock : public Block
 
 public:
 	void run() override;
+private:
+	bool initNextBlocks() override;
+	void onValueSelected(const QString &value);
+	void onRejected();
+
+	qReal::Id mCancelBlockId;
 };
 
 }

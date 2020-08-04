@@ -348,17 +348,57 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+29"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+33"/>
         <source>Input</source>
         <translation>Ввод</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="-4"/>
         <source>Input value for %1:</source>
         <translation>Введите значение для %1:</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+14"/>
+        <source>Control flow break detected, stopping</source>
+        <translation type="unfinished">Обнаружен разрыв потока управления, исполнение завершено</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Block has disappeared!</source>
+        <translation type="unfinished">Блок исчез!</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
+        <translation type="unfinished">Нет исходящих связей. Пожалуйста, подключите этот блок к чему-нибудь или используйте блок &quot;Конец&quot;, чтобы завершить выполнение программы</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>There should be a maximum of TWO links outgoing from input block</source>
+        <translation type="unfinished">От блока ввода должно исходить не более ДВУХ связей</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Outgoing link is not connected</source>
+        <translation type="unfinished">Исходящая связь ни к чему не подключена</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Two links marked with &quot;cancel&quot; found</source>
+        <translation type="unfinished">Обе связи помечены условием &quot;cancel&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one of the two links must be marked with &quot;cancel&quot;</source>
+        <translation type="unfinished">Должна быть как минимум одна связь из двух с маркером &quot;cancel&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one link must be not marked with &quot;cancel&quot;</source>
+        <translation type="unfinished">Хотя бы одна связь должна быть не с маркером &quot;cancel&quot;</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>You must input some value!</source>
         <translation>Вы должны ввести какое-нибудь значение!</translation>
     </message>
