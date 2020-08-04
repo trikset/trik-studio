@@ -93,7 +93,6 @@ struct LuaBlockParser : ParserInterface <LuaTokenTypes>
 	{
 		for (auto &&p: mParsers) {
 			p.internalPointer()->clear();
-			//p.internalPointer().clear();
 		}
 	}
 
