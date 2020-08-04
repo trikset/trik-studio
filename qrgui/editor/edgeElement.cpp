@@ -89,7 +89,7 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 
 	mShapeType = static_cast<LinkShape>(SettingsManager::value("LineType").toInt());
 	initLineHandler();
-	mChangeShapeAction.setMenu(mLineFactory->shapeTypeMenu());
+	//Memleak: mChangeShapeAction.setMenu(mLineFactory->shapeTypeMenu());
 }
 
 EdgeElement::~EdgeElement()
