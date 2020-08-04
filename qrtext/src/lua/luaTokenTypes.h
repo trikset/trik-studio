@@ -106,7 +106,7 @@ inline uint qHash(const LuaTokenTypes &key)
 }
 
 /// Helper operator for debugging.
-inline QDebug operator <<(QDebug debug, const LuaTokenTypes &token)
+inline QDebug &operator <<(QDebug &debug, const LuaTokenTypes &token)
 {
 	debug << static_cast<std::underlying_type<LuaTokenTypes>::type>(token);
 	return debug;

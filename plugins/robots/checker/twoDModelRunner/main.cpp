@@ -65,21 +65,17 @@ void setDefaultLocale()
 	}
 }
 
-void initLogging()
-{
-	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
-	if (logsDir.mkpath(logsDir.absolutePath())
-		&& QFileInfo(logsDir.filePath("2d-model.log")).isWritable())
-	{
-		qReal::Logger::addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2, QsLogging::DebugLevel);
-	}
-}
-
 int main(int argc, char *argv[])
 {
 	qReal::PlatformInfo::enableHiDPISupport();
 	qsrand(time(0));
-	initLogging();
+	qReal::Logger logger;
+	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
+	if (logsDir.mkpath(logsDir.absolutePath())
+		&& QFileInfo(logsDir.filePath("2d-model.log")).isWritable()) {
+		logger.addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2, QsLogging::DebugLevel);
+	}
+
 	QApplication app(argc, argv);
 	QCoreApplication::setApplicationName("2D-model");
 	QCoreApplication::setApplicationVersion(interpreterCore::Customizer::trikStudioVersion());

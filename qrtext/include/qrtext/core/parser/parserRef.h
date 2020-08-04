@@ -51,7 +51,7 @@ public:
 	/// Note that it has different semantics with copy constructor, so be cautious.
 	ParserRef &operator <<=(const ParserRef<TokenType> &other)
 	{
-		*mRef = *(other.mRef);
+		*mRef = *other.mRef;
 		return *this;
 	}
 
@@ -71,6 +71,12 @@ public:
 	QSharedPointer<ParserInterface<TokenType>> parser() const
 	{
 		return *mRef;
+	}
+
+	/// Returns raw "internal" pointer to parser.
+	const QSharedPointer<QSharedPointer<ParserInterface<TokenType>>> &internalPointer() const
+	{
+		return mRef;
 	}
 
 private:

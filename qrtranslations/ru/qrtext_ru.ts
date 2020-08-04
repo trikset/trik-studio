@@ -113,7 +113,7 @@
         <translation>Деление на 0</translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaParser.cpp" line="+158"/>
+        <location filename="../../qrtext/src/lua/luaParser.cpp" line="+193"/>
         <source>node in &apos;stat&apos; semantic action is of unexpected type</source>
         <translation>Узел в семантическом действии &apos;stat&apos; неизвестного типа</translation>
     </message>

@@ -28,7 +28,7 @@ template<typename TokenType>
 class ParserInterface
 {
 public:
-	virtual ~ParserInterface() {}
+	virtual ~ParserInterface() = default;
 
 	/// Parses given token stream in given context and returns AST with result or nullptr if failed.
 	virtual QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream

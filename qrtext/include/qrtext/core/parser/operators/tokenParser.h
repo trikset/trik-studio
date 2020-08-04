@@ -44,7 +44,7 @@ public:
 			return wrap(new TemporaryErrorNode());
 		}
 
-		auto node = wrap(mSemanticAction(token));
+		auto node = mSemanticAction(token);
 		if (node) {
 			node->connect(token);
 		} else {
