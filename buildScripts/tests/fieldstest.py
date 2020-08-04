@@ -18,6 +18,7 @@ if __name__=='__main__':
 		if (output.returncode != 0):
 			print("Solution failed with return code %d " % output.returncode)
 			num_failed_tests += 1
+		sys.stdout.flush()
 	if num_failed_tests == 0:
 		sys.exit(0)
 	else:

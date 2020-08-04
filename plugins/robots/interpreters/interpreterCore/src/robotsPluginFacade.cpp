@@ -99,7 +99,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mEventsForKitPlugin
 			, mRobotModelManager));
 
-	interpreter::BlockInterpreter *interpreter = new interpreter::BlockInterpreter(
+	auto *interpreter = new interpreter::BlockInterpreter(
 			configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, configurer.mainWindowInterpretersInterface()
@@ -383,18 +383,18 @@ void RobotsPluginFacade::initSensorWidgets()
 	hideVariables();
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this, hideVariables);
 
-	mGraphicsWatcherManager = new GraphicsWatcherManager(*mParser, mRobotModelManager, this);
+	mGraphicsWatcherManager.reset(new GraphicsWatcherManager(*mParser, mRobotModelManager, this));
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started
-			, mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
+			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped
-			, mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
-	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, mGraphicsWatcherManager, [=]() {
+			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, &*mGraphicsWatcherManager, [=]() {
 		mActionsManager.runAction().setVisible(false);
 		mActionsManager.stopRobotAction().setVisible(mRobotModelManager.model().interpretedModel());
 	});
 	connect(&mProxyInterpreter
 			, &kitBase::InterpreterInterface::stopped
-			, mGraphicsWatcherManager
+			, &*mGraphicsWatcherManager
 			, [=] () {
 		if (!dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab())) {
 			// since userStop fires on any tab/model switch even when the code tab is opened
@@ -416,7 +416,7 @@ void RobotsPluginFacade::initSensorWidgets()
 
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mRobotSettingsPage);
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mDockDevicesConfigurer.data());
-	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mGraphicsWatcherManager);
+	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mGraphicsWatcherManager.data());
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mParser.data());
 }
 

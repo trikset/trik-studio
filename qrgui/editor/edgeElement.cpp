@@ -89,7 +89,7 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 
 	mShapeType = static_cast<LinkShape>(SettingsManager::value("LineType").toInt());
 	initLineHandler();
-	mChangeShapeAction.setMenu(mLineFactory->shapeTypeMenu());
+	//Memleak: mChangeShapeAction.setMenu(mLineFactory->shapeTypeMenu());
 }
 
 EdgeElement::~EdgeElement()
@@ -101,9 +101,6 @@ EdgeElement::~EdgeElement()
 	if (mDst) {
 		mDst->delEdge(this);
 	}
-
-	delete mLineFactory;
-	delete mHandler;
 }
 
 void EdgeElement::initTitles()
@@ -114,8 +111,7 @@ void EdgeElement::initTitles()
 
 void EdgeElement::initLineHandler()
 {
-	delete mHandler;
-	mHandler = mLineFactory->createHandler(mShapeType);
+	mHandler.reset(mLineFactory->createHandler(mShapeType));
 	mHandler->connectAction(&mReverseAction, this, SLOT(reverse()));
 }
 
