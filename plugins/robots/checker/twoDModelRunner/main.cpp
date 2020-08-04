@@ -69,16 +69,21 @@ int main(int argc, char *argv[])
 {
 	qReal::PlatformInfo::enableHiDPISupport();
 	qsrand(time(0));
-	qReal::Logger logger;
-	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
-	if (logsDir.mkpath(logsDir.absolutePath())
-		&& QFileInfo(logsDir.filePath("2d-model.log")).isWritable()) {
-		logger.addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2, QsLogging::DebugLevel);
-	}
-
 	QApplication app(argc, argv);
 	QCoreApplication::setApplicationName("2D-model");
 	QCoreApplication::setApplicationVersion(interpreterCore::Customizer::trikStudioVersion());
+
+	const auto &defaultPlatformConfigPath = qReal::PlatformInfo::defaultPlatformConfigPath();
+	if (!defaultPlatformConfigPath.isEmpty()) {
+		// Loading default settings for concrete platform if such exist.
+		qReal::SettingsManager::instance()->loadSettings(defaultPlatformConfigPath);
+	}
+
+	qReal::Logger logger;
+	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
+	if (logsDir.mkpath(logsDir.absolutePath())) {
+		logger.addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2, QsLogging::DebugLevel);
+	}
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
 	QLOG_INFO() << "Arguments:" << app.arguments();
