@@ -21,8 +21,12 @@ void InputBlock::run()
 {
 	bool ok;
 	const auto var = stringProperty("variable");
-	const auto value = QInputDialog::getText(nullptr, tr("Input"), tr("Input value for %1:").arg(var)
-			, QLineEdit::Normal, QString(), &ok);
+	const auto defaultValue = stringProperty("default");
+	auto prompt = stringProperty("prompt");
+	if (prompt.isEmpty()) {
+		prompt = tr("Input value for %1:").arg(var);
+	}
+	const auto value = QInputDialog::getText(nullptr, tr("Input"), prompt, QLineEdit::Normal, defaultValue, &ok);
 
 	if (!ok || value.isEmpty()) {
 		emit error(tr("You must input some value!"));

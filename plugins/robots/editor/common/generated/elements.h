@@ -564,7 +564,7 @@
 			setName("Input");
 			setFriendlyName(QObject::tr("User Input"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Blablabla."));
+			setDescription(QObject::tr("Sets a variable value to a user value from input dialog."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.66, 1.2, "variable", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
@@ -573,6 +573,22 @@
 			label_1->setPlainTextMode(false);
 			label_1->setPrefix(QObject::tr("Variable:"));
 			addLabel(label_1);
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.66, 1.8, "default", false, 0));
+			label_2->setBackground(Qt::white);
+			label_2->setScalingX(false);
+			label_2->setScalingY(false);
+			label_2->setHard(false);
+			label_2->setPlainTextMode(false);
+			label_2->setPrefix(QObject::tr("Default:"));
+			addLabel(label_2);
+			QSharedPointer<qReal::LabelProperties> label_3(new qReal::LabelProperties(3, 0.66, 2.4, "prompt", false, 0));
+			label_3->setBackground(Qt::white);
+			label_3->setScalingX(false);
+			label_3->setScalingY(false);
+			label_3->setHard(false);
+			label_3->setPlainTextMode(false);
+			label_3->setPrefix(QObject::tr("Text:"));
+			addLabel(label_3);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/InputClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -595,6 +611,8 @@
 
 		void initProperties()
 		{
+			addProperty("default", "string", QObject::tr(""), QObject::tr("Default"), QObject::tr(""), false);
+			addProperty("prompt", "string", QObject::tr(""), QObject::tr("Text"), QObject::tr(""), false);
 			addProperty("variable", "string", QObject::tr("x"), QObject::tr("Variable"), QObject::tr(""), false);
 		}
 	};
