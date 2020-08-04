@@ -36,19 +36,19 @@ void BlocksFactoryManager::addFactory(BlocksFactoryInterface * const factory, co
 qReal::interpretation::BlockInterface *BlocksFactoryManager::block(const qReal::Id &element
 		, const RobotModelInterface &robotModel)
 {
-	qReal::interpretation::BlockInterface *emptyBlock = nullptr;
+	qReal::interpretation::BlockInterface *lastEmptyBlock = nullptr;
 
 	for (BlocksFactoryInterface * const factory : factoriesFor(robotModel)) {
-		qReal::interpretation::BlockInterface * const block = factory->block(element);
+		auto block = factory->block(element);
 		if (block && !dynamic_cast<qReal::interpretation::blocks::EmptyBlock *>(block)) {
 			return block;
 		} else {
 			/// @todo: Ask for empty block somewhere else, not memorizing it here.
-			emptyBlock = block;
+			delete lastEmptyBlock;
+			lastEmptyBlock = block;
 		}
 	}
-
-	return emptyBlock;
+	return lastEmptyBlock;
 }
 
 QSet<qReal::Id> BlocksFactoryManager::enabledBlocks(const RobotModelInterface &robotModel) const
