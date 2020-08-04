@@ -212,7 +212,7 @@
         <translation>Обнаружен разрыв потока управления, исполнение завершено</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+21"/>
         <source>Too many outgoing links</source>
         <translation>Слишком много исходящих связей</translation>
     </message>
@@ -227,8 +227,8 @@
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
     <message>
-        <location line="-19"/>
-        <location line="+85"/>
+        <location line="-28"/>
+        <location line="+94"/>
         <source>Block has disappeared!</source>
         <translation>Блок исчез!</translation>
     </message>
@@ -358,17 +358,15 @@
         <translation>Введите значение для %1:</translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Control flow break detected, stopping</source>
-        <translation type="unfinished">Обнаружен разрыв потока управления, исполнение завершено</translation>
+        <translation type="obsolete">Обнаружен разрыв потока управления, исполнение завершено</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Block has disappeared!</source>
-        <translation type="unfinished">Блок исчез!</translation>
+        <translation type="obsolete">Блок исчез!</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+73"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation type="unfinished">Нет исходящих связей. Пожалуйста, подключите этот блок к чему-нибудь или используйте блок &quot;Конец&quot;, чтобы завершить выполнение программы</translation>
     </message>
@@ -378,7 +376,7 @@
         <translation type="unfinished">От блока ввода должно исходить не более ДВУХ связей</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-55"/>
         <source>Outgoing link is not connected</source>
         <translation type="unfinished">Исходящая связь ни к чему не подключена</translation>
     </message>

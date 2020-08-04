@@ -39,25 +39,12 @@ bool InputBlock::initNextBlocks()
 {
 	mNextBlockId = Id();
 	mCancelBlockId = Id();
-	if (id().isNull() || id() == Id::rootId()) {
-		error(tr("Control flow break detected, stopping"));
-		return false;
-	}
-	if (!mGraphicalModelApi->graphicalRepoApi().exist(id())) {
-		error(tr("Block has disappeared!"));
+
+	if (!isCorrectBlock() || !checkLinksCount()) {
 		return false;
 	}
 
 	const IdList links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
-	if (links.count() == 0) {
-		error(tr("No outgoing links, please connect this block to something or use Final Node to end program"));
-		return false;
-	}
-	if (links.size() > 2) {
-		error(tr("There should be a maximum of TWO links outgoing from input block"));
-		return false;
-	}
-
 	for (const Id &linkId : links) {
 		const Id targetBlockId = mGraphicalModelApi->graphicalRepoApi().otherEntityFromLink(linkId, id());
 		if (targetBlockId.isNull() || targetBlockId == Id::rootId()) {
@@ -106,5 +93,17 @@ void InputBlock::onRejected() {
 		error(tr("You must input some value!"));
 	} else {
 		emit done(mCancelBlockId);
+	}
+}
+
+bool InputBlock::checkLinksCount() {
+	const IdList links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
+	if (links.count() == 0) {
+		error(tr("No outgoing links, please connect this block to something or use Final Node to end program"));
+		return false;
+	}
+	if (links.size() > 2) {
+		error(tr("There should be a maximum of TWO links outgoing from input block"));
+		return false;
 	}
 }

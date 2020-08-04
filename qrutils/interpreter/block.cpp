@@ -54,7 +54,7 @@ QStringList Block::identifiers() const
 	return mParser->identifiers();
 }
 
-bool Block::initNextBlocks()
+bool Block::isCorrectBlock()
 {
 	if (id().isNull() || id() == Id::rootId()) {
 		error(tr("Control flow break detected, stopping"));
@@ -63,6 +63,15 @@ bool Block::initNextBlocks()
 
 	if (!mGraphicalModelApi->graphicalRepoApi().exist(id())) {
 		error(tr("Block has disappeared!"));
+		return false;
+	}
+	return true;
+}
+
+
+bool Block::initNextBlocks()
+{
+	if (!isCorrectBlock()) {
 		return false;
 	}
 

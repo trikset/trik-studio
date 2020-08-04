@@ -133,7 +133,7 @@
     </message>
     <message>
         <location line="+5"/>
-        <location line="+85"/>
+        <location line="+94"/>
         <source>Block has disappeared!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -266,17 +266,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Control flow break detected, stopping</source>
-        <translation type="unfinished">Une pause de flux de contrôle détecté, arrêt en cours</translation>
+        <translation type="obsolete">Une pause de flux de contrôle détecté, arrêt en cours</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Block has disappeared!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
+        <location line="+73"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
     </message>
@@ -286,7 +280,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-55"/>
         <source>Outgoing link is not connected</source>
         <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
     </message>

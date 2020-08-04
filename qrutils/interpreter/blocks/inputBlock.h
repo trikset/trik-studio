@@ -29,6 +29,7 @@ public:
 	void run() override;
 private:
 	bool initNextBlocks() override;
+	bool checkLinksCount();
 	void onValueSelected(const QString &value);
 	void onRejected();
 
