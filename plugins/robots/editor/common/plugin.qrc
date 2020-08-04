@@ -10,6 +10,7 @@
 	<file>generated/shapes/GetButtonCodeClass.sdf</file>
 	<file>generated/shapes/IfBlockClass.sdf</file>
 	<file>generated/shapes/InitialNodeClass.sdf</file>
+	<file>generated/shapes/InputClass.sdf</file>
 	<file>generated/shapes/JoinClass.sdf</file>
 	<file>generated/shapes/KillThreadClass.sdf</file>
 	<file>generated/shapes/LoopClass.sdf</file>

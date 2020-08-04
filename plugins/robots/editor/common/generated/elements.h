@@ -555,6 +555,50 @@
 		}
 	};
 
+	class Input : public qReal::NodeElementType
+	{
+	public:
+		explicit Input(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("Input");
+			setFriendlyName(QObject::tr("User Input"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Blablabla."));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.66, 1.2, "variable", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(false);
+			label_1->setPlainTextMode(false);
+			label_1->setPrefix(QObject::tr("Variable:"));
+			addLabel(label_1);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/InputClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("variable", "string", QObject::tr("x"), QObject::tr("Variable"), QObject::tr(""), false);
+		}
+	};
+
 	class Join : public qReal::NodeElementType
 	{
 	public:
