@@ -256,17 +256,17 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+24"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+29"/>
         <source>Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-2"/>
         <source>Input value for %1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>You must input some value!</source>
         <translation type="unfinished"></translation>
     </message>

@@ -348,17 +348,17 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+24"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+29"/>
         <source>Input</source>
         <translation>Ввод</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-2"/>
         <source>Input value for %1:</source>
         <translation>Введите значение для %1:</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <source>You must input some value!</source>
         <translation>Вы должны ввести какое-нибудь значение!</translation>
     </message>
