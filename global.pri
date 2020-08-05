@@ -195,6 +195,8 @@ CONFIG *= c++14
 
 DEFINES *= QT_FORCE_ASSERTS
 
+DEFINES *= QT_NO_ACCESSIBILITY
+
 !warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
 
 !clang: QMAKE_CXXFLAGS += -ansi

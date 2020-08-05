@@ -28,7 +28,8 @@ TextObject::TextObject(QObject *parent)
 {
 }
 
-TextObject::TextObject(int x, int y, const QString &text, const QColor &color, int thickness, int fontSize, QObject *parent)
+TextObject::TextObject(int x, int y, const QString &text
+					   , const QColor &color, int thickness, int fontSize, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mX(x)
 	, mY(y)
