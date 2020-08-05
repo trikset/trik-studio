@@ -61,7 +61,6 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
 	qDeleteAll(mBox2DRobots);
 	qDeleteAll(mBox2DResizableItems);
-	qDeleteAll(mBox2DDynamicItems);
 }
 
 QVector2D Box2DPhysicsEngine::positionShift(model::RobotModel &robot) const

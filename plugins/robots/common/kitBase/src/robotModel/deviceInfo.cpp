@@ -80,6 +80,11 @@ bool DeviceInfo::isNull() const
 	return mDeviceType == nullptr;
 }
 
+void DeviceInfo::release()
+{
+	DeviceInfo::mCreatedInfos.clear();
+}
+
 QString DeviceInfo::toString() const
 {
 	return QString(mDeviceType ? mDeviceType->className() : QString());

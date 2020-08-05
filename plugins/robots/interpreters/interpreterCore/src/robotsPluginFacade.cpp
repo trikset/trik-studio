@@ -53,6 +53,7 @@ RobotsPluginFacade::~RobotsPluginFacade()
 			kit->release();
 		}
 	}
+	kitBase::robotModel::DeviceInfo::release();
 }
 
 void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
