@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 #include "kernelDeclSpec.h"
 
@@ -35,7 +35,7 @@ public:
 	/// @param maxOldLogsCount The maximal number of log files related to this target.
 	/// @param level The minimal log entries level that will be accepter by this target.
 	void addLogTarget(const QString &path, int maxSize, int maxOldLogsCount
-			, QsLogging::Level = QsLogging::InfoLevel);
+			);
 	~Logger();
 };
 

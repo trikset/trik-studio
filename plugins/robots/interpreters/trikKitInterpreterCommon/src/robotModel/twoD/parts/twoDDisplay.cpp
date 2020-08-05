@@ -15,7 +15,7 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h"
 
 #include <QtCore/QJsonArray>
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 #include <utils/canvas/textObject.h>
 #include <trikControl/utilities.h>

@@ -115,8 +115,7 @@ int main(int argc, char *argv[])
 	qReal::Logger logger;
 	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
 	if (logsDir.mkpath(logsDir.absolutePath())) {
-		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2, QsLogging::DebugLevel);
-		logger.addLogTarget(logsDir.filePath("actions.log"), maxLogSize, 2, QsLogging::TraceLevel);
+		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2);
 	}
 
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";

@@ -1,36 +1,10 @@
-# This pro file will build QsLog as a shared library
-include(QsLog.pri)
+#force as a shared library
+DEFINES += QSLOG_IS_SHARED_LIBRARY
 
-TARGET = qslog
+include(qslog/QsLogSharedLibrary.pro)
 
-TEMPLATE = lib
-
+#override target for backward compatibility
+TARGET=qslog
+#do not add a version major number to a name of dll
+CONFIG += skip_target_version_ext
 include(../../global.pri)
-
-QT -= gui
-QT += core
-CONFIG -= console
-CONFIG -= app_bundle
-CONFIG += shared warn_off qt
-
-
-win32 {
-	DEFINES += QSLOG_IS_SHARED_LIBRARY
-}
-
-unix:!macx {
-	# make install will install the shared object in the appropriate folders
-	headers.files = $$PWD/QsLog.h $$PWD/QsLogDest.h $$PWD/QsLogLevel.h
-	headers.path = /usr/include/$(QMAKE_TARGET)
-
-	other_files.files = *.txt
-	other_files.path = /usr/local/share/$(QMAKE_TARGET)
-
-	contains(QT_ARCH, x86_64) {
-		target.path = /usr/lib64
-	} else {
-		target.path = /usr/lib
-	}
-
-	INSTALLS += headers target other_files
-}

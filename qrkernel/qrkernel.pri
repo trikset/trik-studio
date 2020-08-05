@@ -39,6 +39,3 @@ SOURCES += \
 
 RESOURCES += \
 	$$PWD/qrkernel.qrc \
-
-includes(thirdparty/qslog)
-links(qslog)

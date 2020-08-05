@@ -20,7 +20,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QAction>
 
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 using namespace qReal::ui;
 
