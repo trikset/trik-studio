@@ -256,12 +256,12 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+33"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+34"/>
         <source>Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="-5"/>
         <source>Input value for %1:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,7 +270,7 @@
         <translation type="obsolete">Une pause de flux de contrôle détecté, arrêt en cours</translation>
     </message>
     <message>
-        <location line="+73"/>
+        <location line="+80"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
     </message>
@@ -280,7 +280,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-55"/>
+        <location line="-61"/>
         <source>Outgoing link is not connected</source>
         <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
     </message>
@@ -304,7 +304,7 @@
         <translation type="obsolete">Deux liens marqués comme &apos;false&apos; sont détectés</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+26"/>
         <source>You must input some value!</source>
         <translation type="unfinished"></translation>
     </message>

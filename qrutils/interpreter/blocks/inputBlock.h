@@ -30,7 +30,7 @@ public:
 private:
 	bool initNextBlocks() override;
 	bool checkLinksCount();
-	void onValueSelected(const QString &value);
+	void onValueSelected(const QString &text);
 	void onRejected();
 
 	qReal::Id mCancelBlockId;

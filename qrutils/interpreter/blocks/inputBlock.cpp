@@ -78,10 +78,16 @@ bool InputBlock::initNextBlocks()
 	return true;
 }
 
-void InputBlock::onValueSelected(const QString &value) {
+void InputBlock::onValueSelected(const QString &text) {
+	auto value = text;
 	if (value.isEmpty()) {
-		error("The value must not be empty!");
-		return;
+		const auto defaultValue = stringProperty("default");
+		if (defaultValue.isEmpty()) {
+			onRejected();
+			return;
+		} else {
+			value = defaultValue;
+		}
 	}
 	evalCode(stringProperty("variable") + " = " + value);
 	if (!errorsOccured()) {
