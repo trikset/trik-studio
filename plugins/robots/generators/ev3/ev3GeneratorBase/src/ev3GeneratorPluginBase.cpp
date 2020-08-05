@@ -38,6 +38,8 @@ Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, cons
 
 Ev3GeneratorPluginBase::~Ev3GeneratorPluginBase()
 {
+	utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance().disconnect();
+	utils::Singleton<communication::UsbRobotCommunicationThread>::instance().disconnect();
 }
 
 QString Ev3GeneratorPluginBase::kitId() const

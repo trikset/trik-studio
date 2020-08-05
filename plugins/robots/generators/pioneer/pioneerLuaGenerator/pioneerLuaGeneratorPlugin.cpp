@@ -29,8 +29,8 @@ using namespace pioneer::lua;
 using namespace qReal;
 
 PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
-	: mGenerateCodeAction(new QAction(nullptr))
-	, mUploadProgramAction(new QAction(nullptr))
+	: mGenerateCodeAction(new QAction(this))
+	, mUploadProgramAction(new QAction(this))
 	, mBlocksFactory(new blocks::PioneerBlocksFactory)
 	, mGeneratorForRealCopterRobotModel(
 			new PioneerGeneratorRobotModel(

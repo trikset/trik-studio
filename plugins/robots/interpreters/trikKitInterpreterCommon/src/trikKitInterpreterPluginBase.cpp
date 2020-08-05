@@ -36,7 +36,7 @@ const Id robotDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagra
 const Id subprogramDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram");
 
 TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase() :
-	mStart(tr("Start"), nullptr), mStop(tr("Stop"), nullptr)
+	mStart(tr("Start"), this), mStop(tr("Stop"), this)
 {
 }
 

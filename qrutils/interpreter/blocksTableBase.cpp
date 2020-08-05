@@ -25,7 +25,7 @@ BlocksTableBase::BlocksTableBase()
 
 BlocksTableBase::~BlocksTableBase()
 {
-	qDeleteAll(mBlocks);
+	clear();
 }
 
 BlockInterface *BlocksTableBase::block(const Id &element)

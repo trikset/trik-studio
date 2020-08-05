@@ -51,10 +51,10 @@ TrikPascalABCGeneratorPluginBase::TrikPascalABCGeneratorPluginBase(
 		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 		, const QStringList &pathsToTemplates)
 	: TrikGeneratorPluginBase(robotModel, blocksFactory)
-	, mGenerateCodeAction(new QAction(nullptr))
-	, mUploadProgramAction(new QAction(nullptr))
-	, mRunProgramAction(new QAction(nullptr))
-	, mStopRobotAction(new QAction(nullptr))
+	, mGenerateCodeAction(new QAction(this))
+	, mUploadProgramAction(new QAction(this))
+	, mRunProgramAction(new QAction(this))
+	, mStopRobotAction(new QAction(this))
 	, mAdditionalPreferences(new TrikPascalABCAdditionalPreferences(robotModel->name()))
 	, mPathsToTemplates(pathsToTemplates)
 	, mRuntimeUploaderTool(
