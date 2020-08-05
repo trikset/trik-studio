@@ -84,6 +84,16 @@ matrix:
       name: "macOS release installer"
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
 
+    - stage: test
+      os: linux
+      before_install:
+      - sudo apt-get -y install p7zip-full libxkbcommon-x11-0
+      - sudo add-apt-repository -y ppa:deadsnakes/ppa
+      - sudo apt update
+      - sudo apt install python3.7
+      script:
+      - ./buildScripts/travis/run_clean_env_test.sh
+
 before_install:
   - if [[ $TRAVIS_OS_NAME  == osx ]] ; then [[ -n ${TRIK_PYTHON3_VERSION_MINOR:-} ]] || export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')" ; fi
   - if ./buildScripts/travis/has_only_skipped_files.sh ; then echo "Triggering early terminate..." ; set -xo functrace ; travis_terminate 0 ; fi
