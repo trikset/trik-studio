@@ -21,11 +21,10 @@ using namespace kitBase;
 using namespace blocksBase;
 using namespace robotModel;
 
-BlocksFactoryManager::~BlocksFactoryManager()
-{
-}
+BlocksFactoryManager::~BlocksFactoryManager() = default;
 
-void BlocksFactoryManager::addFactory(const QSharedPointer<BlocksFactoryInterface> &factory, const RobotModelInterface *robotModel)
+void BlocksFactoryManager::addFactory(const QSharedPointer<BlocksFactoryInterface> &factory
+		, const RobotModelInterface *robotModel)
 {
 	if (!mFactories.values(robotModel).contains(factory)) {
 		mFactories.insertMulti(robotModel, factory);
@@ -98,7 +97,8 @@ QSet<qReal::Id> BlocksFactoryManager::commonBlocks() const
 	return result;
 }
 
-QList<QSharedPointer<BlocksFactoryInterface>> BlocksFactoryManager::factoriesFor(const RobotModelInterface &robotModel) const
+QList<QSharedPointer<BlocksFactoryInterface>>
+BlocksFactoryManager::factoriesFor(const RobotModelInterface &robotModel) const
 {
 	return mFactories.values(nullptr) + mFactories.values(&robotModel);
 }
