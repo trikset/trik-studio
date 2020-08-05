@@ -26,10 +26,6 @@ namespace robotModel {
 class TrikGeneratorRobotModel;
 }
 
-namespace blocks {
-class TrikV62BlocksFactory;
-}
-
 /// A base class for every generator from the TRIK kit.
 class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikGeneratorPluginBase : public generatorBase::RobotsGeneratorPluginBase
 {

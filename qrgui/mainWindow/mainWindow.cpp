@@ -1863,7 +1863,7 @@ void MainWindow::traverseListOfActions(const QList<ActionInfo> &actions)
 
 void MainWindow::addExternalToolActions()
 {
-	QMenu *externalToolsMenu = new QMenu(tr("External tools"));
+	QMenu *externalToolsMenu = new QMenu(tr("External tools"), this);
 	const QString pathToConfigs = PlatformInfo::applicationDirPath() + "/externalToolsConfig";
 	const QString osName = PlatformInfo::osType();
 	const QStringList configs = QDir(pathToConfigs).entryList().filter(".xml");

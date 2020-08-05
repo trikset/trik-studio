@@ -87,6 +87,11 @@ using namespace qReal;
 using namespace simple;
 using namespace kitBase::robotModel;
 
+#define RETURN_GENERATOR_PTR(type, arguments) \
+	{ \
+		return new type arguments; \
+	}
+
 GeneratorFactoryBase::GeneratorFactoryBase(const qrRepo::RepoApi &repo
 		, ErrorReporterInterface &errorReporter
 		, const RobotModelManagerInterface &robotModelManager
@@ -98,17 +103,14 @@ GeneratorFactoryBase::GeneratorFactoryBase(const qrRepo::RepoApi &repo
 {
 }
 
-GeneratorFactoryBase::~GeneratorFactoryBase()
-{
-	delete mDeviceVariables;
-}
+GeneratorFactoryBase::~GeneratorFactoryBase() = default;
 
 void GeneratorFactoryBase::initialize()
 {
 	mLuaTranslator.setPathsToTemplates(pathsToTemplates());
 	initVariables();
 	initSubprograms();
-	mThreads = new parts::Threads(pathsToTemplates());
+	mThreads.reset(new parts::Threads(pathsToTemplates()));
 	initEngines();
 	initSensors();
 	initFunctions();
@@ -123,33 +125,33 @@ void GeneratorFactoryBase::setMainDiagramId(const Id &diagramId)
 
 void GeneratorFactoryBase::initVariables()
 {
-	mVariables = new parts::Variables(pathsToTemplates(), mRobotModelManager.model(), mLuaTranslator.toolbox());
+	mVariables.reset(new parts::Variables(pathsToTemplates(), mRobotModelManager.model(), mLuaTranslator.toolbox()));
 }
 
 void GeneratorFactoryBase::initSubprograms()
 {
-	mSubprograms = new parts::Subprograms(mRepo, mErrorReporter
-			, pathsToTemplates(), mLuaTranslator.toolbox(), nameNormalizerConverter(), typeConverter());
+	mSubprograms.reset(new parts::Subprograms(mRepo, mErrorReporter
+			, pathsToTemplates(), mLuaTranslator.toolbox(), nameNormalizerConverter(), typeConverter()));
 }
 
 void GeneratorFactoryBase::initEngines()
 {
-	mEngines = new parts::Engines(pathsToTemplates(), portNameConverter(), enginesConverter());
+	mEngines.reset(new parts::Engines(pathsToTemplates(), portNameConverter(), enginesConverter()));
 }
 
 void GeneratorFactoryBase::initSensors()
 {
-	mSensors = new parts::Sensors(pathsToTemplates(), portNameConverter());
+	mSensors.reset(new parts::Sensors(pathsToTemplates(), portNameConverter()));
 }
 
 void GeneratorFactoryBase::initFunctions()
 {
-	mFunctions = new parts::Functions(pathsToTemplates());
+	mFunctions.reset(new parts::Functions(pathsToTemplates()));
 }
 
 void GeneratorFactoryBase::initDeviceVariables()
 {
-	mDeviceVariables = new parts::DeviceVariables();
+	mDeviceVariables.reset(new parts::DeviceVariables());
 }
 
 QList<parts::InitTerminateCodeGenerator *> GeneratorFactoryBase::initTerminateGenerators()
@@ -160,17 +162,17 @@ QList<parts::InitTerminateCodeGenerator *> GeneratorFactoryBase::initTerminateGe
 
 parts::Variables *GeneratorFactoryBase::variablesInfo() const
 {
-	return mVariables;
+	return mVariables.get();
 }
 
 parts::Variables *GeneratorFactoryBase::variables()
 {
-	return mVariables;
+	return mVariables.get();
 }
 
 parts::Subprograms *GeneratorFactoryBase::subprograms()
 {
-	return mSubprograms;
+	return mSubprograms.get();
 }
 
 parts::Threads &GeneratorFactoryBase::threads()
@@ -180,81 +182,66 @@ parts::Threads &GeneratorFactoryBase::threads()
 
 parts::Engines *GeneratorFactoryBase::engines()
 {
-	return mEngines;
+	return mEngines.get();
 }
 
 parts::Sensors *GeneratorFactoryBase::sensors()
 {
-	return mSensors;
+	return mSensors.get();
 }
 
 parts::Functions *GeneratorFactoryBase::functions()
 {
-	return mFunctions;
+	return mFunctions.get();
 }
 
 parts::DeviceVariables *GeneratorFactoryBase::deviceVariables() const
 {
-	return mDeviceVariables;
+	return mDeviceVariables.get();
 }
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::ifGenerator(const Id &id
 		, GeneratorCustomizer &customizer
 		, bool elseIsEmpty
 		, bool needInverting)
-{
-	return new IfElementGenerator(mRepo, customizer, id, elseIsEmpty, needInverting, this);
-}
+RETURN_GENERATOR_PTR(IfElementGenerator, (mRepo, customizer, id, elseIsEmpty, needInverting, this))
+
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::infiniteLoopGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
-{
-	return new InfiniteLoopGenerator(mRepo, customizer, id, this);
-}
+RETURN_GENERATOR_PTR(InfiniteLoopGenerator, (mRepo, customizer, id, this))
+
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::whileLoopGenerator(const Id &id
 		, GeneratorCustomizer &customizer
 		, bool doWhileForm
 		, bool needInverting)
-{
-	return new WhileLoopGenerator(mRepo, customizer, id, doWhileForm, needInverting, this);
-}
+RETURN_GENERATOR_PTR(WhileLoopGenerator, (mRepo, customizer, id, doWhileForm, needInverting, this))
+
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::forLoopGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
-{
-	return new ForLoopGenerator(++mLoopGeneratorIndex, mRepo, customizer, id, this);
-}
+RETURN_GENERATOR_PTR(ForLoopGenerator, (++mLoopGeneratorIndex, mRepo, customizer, id, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::switchHeadGenerator(const Id &id
 		, GeneratorCustomizer &customizer, const QStringList &values, bool generateIfs)
-{
-	return new SwitchGenerator(mRepo, customizer, id, "head", values, generateIfs, this);
-}
+RETURN_GENERATOR_PTR(SwitchGenerator, (mRepo, customizer, id, "head", values, generateIfs, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::switchMiddleGenerator(const Id &id
 		, GeneratorCustomizer &customizer, const QStringList &values, bool generateIfs)
-{
-	return new SwitchGenerator(mRepo, customizer, id, "middle", values, generateIfs, this);
-}
+RETURN_GENERATOR_PTR(SwitchGenerator, (mRepo, customizer, id, "middle", values, generateIfs, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::switchDefaultGenerator(const Id &id
 		, GeneratorCustomizer &customizer, bool generateIfs)
-{
-	return new SwitchGenerator(mRepo, customizer, id, "default", {}, generateIfs, this);
-}
+RETURN_GENERATOR_PTR(SwitchGenerator, (mRepo, customizer, id, "default", {}, generateIfs, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::forkCallGenerator(const Id &id
 		, GeneratorCustomizer &customizer, const QMap<Id, QString> &threads)
-{
-	return new ForkCallGenerator(mRepo, customizer, id, threads, this);
-}
+RETURN_GENERATOR_PTR(ForkCallGenerator, (mRepo, customizer, id, threads, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::joinGenerator(const Id &id, GeneratorCustomizer &customizer
 		, const QStringList &joinedThreads, const QString &mainThreadId)
-{
-	return new JoinGenerator(mRepo, customizer, id, joinedThreads, mainThreadId, this);
-}
+RETURN_GENERATOR_PTR(JoinGenerator, (mRepo, customizer, id, joinedThreads, mainThreadId, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::simpleGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)
@@ -322,120 +309,85 @@ AbstractSimpleGenerator *GeneratorFactoryBase::simpleGenerator(const qReal::Id &
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::breakGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
-{
-	return new BreakGenerator(mRepo, customizer, id, this);
-}
+RETURN_GENERATOR_PTR(BreakGenerator, (mRepo, customizer, id, this))
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::continueGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
-{
-	return new ContinueGenerator(mRepo, customizer, id, this);
-}
+RETURN_GENERATOR_PTR(ContinueGenerator, (mRepo, customizer, id, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::labelGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)
-{
-	return new LabelGenerator(mRepo, customizer, id, this);
-}
+RETURN_GENERATOR_PTR(LabelGenerator, (mRepo, customizer, id, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::gotoSimpleGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)
-{
-	return new GotoSimpleGenerator(mRepo, customizer, id, this);
-}
+RETURN_GENERATOR_PTR(GotoSimpleGenerator, (mRepo, customizer, id, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::finalNodeGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer, bool fromMainGenerator)
-{
-	return new FinalNodeGenerator(mRepo, customizer, id, fromMainGenerator, this);
-}
+RETURN_GENERATOR_PTR(FinalNodeGenerator, (mRepo, customizer, id, fromMainGenerator, this))
 
 // Converters can be instantiated without taking ownership because binders do this
 
 Binding::ConverterInterface *GeneratorFactoryBase::intPropertyConverter(const Id &id, const QString &property) const
-{
-	return new converters::IntPropertyConverter(pathsToTemplates(), mLuaTranslator, id
-			, property, reservedVariableNameConverter());
-}
+RETURN_GENERATOR_PTR(converters::IntPropertyConverter, (pathsToTemplates(), mLuaTranslator, id
+			, property, reservedVariableNameConverter()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::floatPropertyConverter(const Id &id, const QString &property) const
-{
-	return new converters::FloatPropertyConverter(mLuaTranslator, id, property, reservedVariableNameConverter());
-}
+RETURN_GENERATOR_PTR(converters::FloatPropertyConverter,
+							(mLuaTranslator, id, property, reservedVariableNameConverter()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::boolPropertyConverter(const Id &id
 		, const QString &property, bool needInverting) const
-{
-	return new converters::BoolPropertyConverter(pathsToTemplates(), mLuaTranslator
-			, id, property, reservedVariableNameConverter(), needInverting);
-}
+RETURN_GENERATOR_PTR(converters::BoolPropertyConverter, (pathsToTemplates(), mLuaTranslator
+			, id, property, reservedVariableNameConverter(), needInverting))
 
 Binding::ConverterInterface *GeneratorFactoryBase::stringPropertyConverter(const qReal::Id &block
 		, const QString &property) const
-{
-	return new converters::StringPropertyConverter(mLuaTranslator, block, property, reservedVariableNameConverter());
-}
+RETURN_GENERATOR_PTR(converters::StringPropertyConverter,
+							(mLuaTranslator, block, property, reservedVariableNameConverter()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::reservedVariableNameConverter() const
-{
-	return new converters::ReservedVariablesConverter(pathsToTemplates()
+RETURN_GENERATOR_PTR(converters::ReservedVariablesConverter,(pathsToTemplates()
 			, mErrorReporter
 			, mRobotModelManager.model()
 			, currentConfiguration()
 			, portNameConverter()
-			, *deviceVariables());
-}
+			, *deviceVariables()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::nameNormalizerConverter() const
-{
-	return new converters::NameNormalizerConverter;
-}
+RETURN_GENERATOR_PTR(converters::NameNormalizerConverter, ())
 
 Binding::ConverterInterface *GeneratorFactoryBase::dynamicPropertiesConverter(const qReal::Id &block) const
-{
-	return new converters::DynamicPropertiesConverter(mLuaTranslator, block
-			, pathsToTemplates(), reservedVariableNameConverter());
-}
+RETURN_GENERATOR_PTR(converters::DynamicPropertiesConverter,
+							(mLuaTranslator, block, pathsToTemplates(), reservedVariableNameConverter()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::functionBlockConverter(const qReal::Id &block
 		, const QString &property) const
-{
-	return new converters::FunctionBlockConverter(mLuaTranslator, block, property, reservedVariableNameConverter());
-}
+RETURN_GENERATOR_PTR(converters::FunctionBlockConverter,
+							(mLuaTranslator, block, property, reservedVariableNameConverter()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::inequalitySignConverter() const
-{
-	return new converters::InequalitySignConverter(pathsToTemplates());
-}
+RETURN_GENERATOR_PTR(converters::InequalitySignConverter, (pathsToTemplates()))
 
 Binding::MultiConverterInterface *GeneratorFactoryBase::enginesConverter() const
-{
-	return new converters::EnginePortsConverter(portNameConverter());
-}
+RETURN_GENERATOR_PTR(converters::EnginePortsConverter, (portNameConverter()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::portNameConverter() const
-{
-	return new converters::PortNameConverter(pathsToTemplates()
+RETURN_GENERATOR_PTR(converters::PortNameConverter, (pathsToTemplates()
 			, mRobotModelManager.model().availablePorts()
-			, mErrorReporter);
-}
+			, mErrorReporter))
 
 Binding::ConverterInterface *GeneratorFactoryBase::breakModeConverter() const
-{
-	return new converters::BreakModeConverter(pathsToTemplates());
-}
+RETURN_GENERATOR_PTR(converters::BreakModeConverter, (pathsToTemplates()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::typeConverter() const
-{
-	return new converters::TypeConverter(pathsToTemplates());
-}
+RETURN_GENERATOR_PTR(converters::TypeConverter, (pathsToTemplates()))
 
 Binding::ConverterInterface *GeneratorFactoryBase::switchConditionsMerger(const QStringList &values
 		, bool generateIf) const
-{
-	return new converters::SwitchConditionsMerger(pathsToTemplates(), reservedVariableNameConverter()
-			, values, generateIf);
-}
+RETURN_GENERATOR_PTR(converters::SwitchConditionsMerger,
+							(pathsToTemplates(), reservedVariableNameConverter(), values, generateIf))
 
 QString GeneratorFactoryBase::initCode()
 {
