@@ -133,7 +133,7 @@
     </message>
     <message>
         <location line="+5"/>
-        <location line="+94"/>
+        <location line="+93"/>
         <source>Block has disappeared!</source>
         <translation type="unfinished"></translation>
     </message>

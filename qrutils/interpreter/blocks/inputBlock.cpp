@@ -106,4 +106,5 @@ bool InputBlock::checkLinksCount() {
 		error(tr("There should be a maximum of TWO links outgoing from input block"));
 		return false;
 	}
+	return true;
 }

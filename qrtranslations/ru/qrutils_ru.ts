@@ -212,7 +212,7 @@
         <translation>Обнаружен разрыв потока управления, исполнение завершено</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+20"/>
         <source>Too many outgoing links</source>
         <translation>Слишком много исходящих связей</translation>
     </message>
@@ -227,8 +227,8 @@
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
     <message>
-        <location line="-28"/>
-        <location line="+94"/>
+        <location line="-27"/>
+        <location line="+93"/>
         <source>Block has disappeared!</source>
         <translation>Блок исчез!</translation>
     </message>

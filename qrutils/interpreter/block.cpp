@@ -68,7 +68,6 @@ bool Block::isCorrectBlock()
 	return true;
 }
 
-
 bool Block::initNextBlocks()
 {
 	if (!isCorrectBlock()) {
