@@ -28,6 +28,7 @@ void InputBlock::run()
 	if (prompt.isEmpty()) {
 		prompt = tr("Input value for %1:").arg(var);
 	}
+	dialog->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
 	dialog->setLabelText(prompt);
 	dialog->setInputMode(QInputDialog::TextInput);
 	dialog->setWindowTitle(tr("Input"));
