@@ -29,7 +29,7 @@ TrikV6PascalABCGeneratorPlugin::TrikV6PascalABCGeneratorPlugin()
 						, "TrikV6PascalABCGeneratorRobotModel"
 						, tr("Generation (PascalABC)")
 						, 8 /* After Javascript generator */)
-				, new blocks::TrikV6BlocksFactory()
+				, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory())
 				, {":/trikPascalABC/templates"})
 {
 }

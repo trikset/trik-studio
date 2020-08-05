@@ -66,7 +66,8 @@ public:
 
 	/// Returns a blocks factory for a given robot model. Nullptr can be returned and means that no factory is provided
 	/// by this plugin. Ownership must be transfered.
-	virtual blocksBase::BlocksFactoryInterface *blocksFactoryFor(const robotModel::RobotModelInterface *model) = 0;
+	virtual QSharedPointer<blocksBase::BlocksFactoryInterface> blocksFactoryFor(
+			const robotModel::RobotModelInterface *model) = 0;
 
 	/// If overrided and returns some model as value that model will be used as default selected model for this kit
 	/// @todo is it possible that plugin does not provide default model? Maybe first model in robotModels() list will be

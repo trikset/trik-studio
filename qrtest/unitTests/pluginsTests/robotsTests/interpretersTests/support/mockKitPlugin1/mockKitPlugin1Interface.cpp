@@ -36,7 +36,7 @@ QList<kitBase::AdditionalPreferences *>  MockKitPlugin1Interface::settingsWidget
 	return {nullptr};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *MockKitPlugin1Interface::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> MockKitPlugin1Interface::blocksFactoryFor(
 		kitBase::robotModel::RobotModelInterface const *model)
 {
 	Q_UNUSED(model)

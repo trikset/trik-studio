@@ -82,7 +82,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	mParser.reset(new textLanguage::RobotsBlockParser(mRobotModelManager
 			, [this]() { return mProxyInterpreter.timeElapsed(); }));
 
-	kitBase::blocksBase::BlocksFactoryInterface * const coreFactory = new coreBlocks::CoreBlocksFactory();
+	auto coreFactory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new coreBlocks::CoreBlocksFactory());
 	coreFactory->configure(configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, mRobotModelManager
@@ -448,8 +448,8 @@ void RobotsPluginFacade::initFactoriesFor(const QString &kitId
 {
 	// Pulling each robot model to each kit plugin with same ids. We need it for supporting
 	// plugin-based blocks set extension for concrete roobt model.
-	for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
-		kitBase::blocksBase::BlocksFactoryInterface * const factory = kit->blocksFactoryFor(model);
+	for (auto &&kit : mKitPluginManager.kitsById(kitId)) {
+		const auto &factory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(kit->blocksFactoryFor(model));
 		if (factory) {
 			/// @todo Non-obvious dependency on mParser, which may or may not be constructed here.
 			///       More functional style will be helpful here.

@@ -28,7 +28,7 @@ TrikV6QtsGeneratorPlugin::TrikV6QtsGeneratorPlugin()
 					, "TrikQtsGeneratorRobotModel"
 					, tr("Generation (Java Script)")
 					, 9 /* After 2D model */)
-			, new blocks::TrikV6BlocksFactory()
+			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV6BlocksFactory())
 			, {":/trikV6Qts/templates", ":/trikQts/templates"})
 	, mModel(static_cast<robotModel::TrikV6GeneratorRobotModel *>(robotModels().first()))
 {

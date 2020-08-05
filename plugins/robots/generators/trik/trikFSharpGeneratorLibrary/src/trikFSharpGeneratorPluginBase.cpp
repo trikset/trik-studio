@@ -34,7 +34,7 @@ static const auto robotModelName = "TrikFSharpGeneratorRobotModel";
 
 TrikFSharpGeneratorPluginBase::TrikFSharpGeneratorPluginBase(
 		kitBase::robotModel::RobotModelInterface * const robotModel
-		, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
+		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 		, const QStringList &pathsToTemplates)
 	: TrikGeneratorPluginBase(robotModel, blocksFactory)
 	, mGenerateCodeAction(new QAction(nullptr))

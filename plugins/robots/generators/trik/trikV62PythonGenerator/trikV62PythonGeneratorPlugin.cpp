@@ -28,7 +28,7 @@ TrikV62PythonGeneratorPlugin::TrikV62PythonGeneratorPlugin()
 					, "TrikV62PythonGeneratorRobotModel"
 					, tr("Generation (Python)")
 					, 7 /* After PascalABC model */)
-			, new blocks::TrikV62BlocksFactory()
+			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV62BlocksFactory())
 			, {":/trikPython/templates"})
 	, mModel(static_cast<robotModel::TrikV62GeneratorRobotModel *>(robotModels().first()))
 {

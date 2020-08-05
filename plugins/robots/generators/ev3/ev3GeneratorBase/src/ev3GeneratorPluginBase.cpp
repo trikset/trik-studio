@@ -50,7 +50,7 @@ QList<kitBase::robotModel::RobotModelInterface *> Ev3GeneratorPluginBase::robotM
 	return { mUsbRobotModel.data(), mBluetoothRobotModel.data() };
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *Ev3GeneratorPluginBase::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> Ev3GeneratorPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {

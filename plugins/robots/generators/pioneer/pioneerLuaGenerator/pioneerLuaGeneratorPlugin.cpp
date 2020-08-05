@@ -135,7 +135,7 @@ QList<kitBase::robotModel::RobotModelInterface *> PioneerLuaGeneratorPlugin::rob
 	return { mGeneratorForRealCopterRobotModel.data() };
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *PioneerLuaGeneratorPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerLuaGeneratorPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)

@@ -42,8 +42,6 @@ private:
 	/// Temporary storage for robot model to be able to correctly initialize it.
 	/// Does not have ownership.
 	robotModel::TrikV62GeneratorRobotModel *mModel;
-
-	blocks::TrikV62BlocksFactory mBlocksFactoryV62;
 };
 
 }

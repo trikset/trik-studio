@@ -41,7 +41,7 @@ using namespace utils::robotCommunication;
 
 TrikQtsGeneratorPluginBase::TrikQtsGeneratorPluginBase(
 		trik::robotModel::TrikRobotModelBase * const robotModel
-		, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
+		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 		, const QStringList &pathsToTemplates)
 	: TrikGeneratorPluginBase(robotModel, blocksFactory)
 	, mGenerateCodeAction(new QAction(this))
