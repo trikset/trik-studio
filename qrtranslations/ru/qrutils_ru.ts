@@ -348,17 +348,17 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+34"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+27"/>
         <source>Input</source>
         <translation>Ввод</translation>
     </message>
     <message>
-        <location line="-5"/>
+        <location line="+9"/>
         <source>Input value for %1:</source>
         <translation>Введите значение для %1:</translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+77"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation>Нет исходящих связей. Пожалуйста, подключите этот блок к чему-нибудь или используйте блок &quot;Конец&quot;, чтобы завершить выполнение программы</translation>
     </message>
@@ -373,7 +373,12 @@
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+4"/>
+        <source>cancel</source>
+        <translation>отмена</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Two links marked with &quot;cancel&quot; found</source>
         <translation>Обе связи помечены условием &quot;cancel&quot;</translation>
     </message>

@@ -256,12 +256,12 @@
 <context>
     <name>qReal::interpretation::blocks::InputBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+34"/>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+27"/>
         <source>Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-5"/>
+        <location line="+9"/>
         <source>Input value for %1:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,7 +270,7 @@
         <translation type="obsolete">Une pause de flux de contrôle détecté, arrêt en cours</translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+77"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
     </message>
@@ -285,7 +285,12 @@
         <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+4"/>
+        <source>cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Two links marked with &quot;cancel&quot; found</source>
         <translation type="unfinished"></translation>
     </message>

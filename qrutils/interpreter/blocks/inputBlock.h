@@ -15,6 +15,7 @@
 #pragma once
 
 #include "qrutils/interpreter/block.h"
+#include <QInputDialog>
 
 namespace qReal {
 namespace interpretation {
@@ -26,7 +27,10 @@ class QRUTILS_EXPORT InputBlock : public Block
 	Q_OBJECT
 
 public:
+	explicit InputBlock();
+	~InputBlock() override;
 	void run() override;
+	void setFailedStatus() override;
 private:
 	bool initNextBlocks() override;
 	bool checkLinksCount();
@@ -34,6 +38,7 @@ private:
 	void onRejected();
 
 	qReal::Id mCancelBlockId;
+	QInputDialog mDialog;
 };
 
 }

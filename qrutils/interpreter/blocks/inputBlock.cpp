@@ -13,27 +13,31 @@
  * limitations under the License. */
 
 #include "inputBlock.h"
-#include <QInputDialog>
 
 using namespace qReal::interpretation::blocks;
 
+InputBlock::InputBlock()
+{
+	connect(&mDialog, &QInputDialog::textValueSelected, this, &InputBlock::onValueSelected);
+	connect(&mDialog, &QDialog::rejected, this, &InputBlock::onRejected);
+	mDialog.setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
+	mDialog.setWindowFlag(Qt::WindowStaysOnTopHint);
+	mDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+	mDialog.setInputMode(QInputDialog::TextInput);
+	mDialog.setWindowTitle(tr("Input"));
+}
+
 void InputBlock::run()
 {
-	auto dialog = new QInputDialog();
-	connect(dialog, &QInputDialog::textValueSelected, this, &InputBlock::onValueSelected);
-	connect(dialog, &QDialog::rejected, this, &InputBlock::onRejected);
 	const auto var = stringProperty("variable");
 	const auto defaultValue = stringProperty("default");
 	auto prompt = stringProperty("prompt");
 	if (prompt.isEmpty()) {
 		prompt = tr("Input value for %1:").arg(var);
 	}
-	dialog->setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
-	dialog->setLabelText(prompt);
-	dialog->setInputMode(QInputDialog::TextInput);
-	dialog->setWindowTitle(tr("Input"));
-	dialog->setTextValue(defaultValue);
-	dialog->open();
+	mDialog.setLabelText(prompt);
+	mDialog.setTextValue(defaultValue);
+	mDialog.open();
 }
 
 bool InputBlock::initNextBlocks()
@@ -53,7 +57,7 @@ bool InputBlock::initNextBlocks()
 			return false;
 		}
 
-		if (stringProperty(linkId, "Guard").toLower() == "cancel") {
+		if (stringProperty(linkId, "Guard").toLower() == tr("cancel")) {
 			if (mCancelBlockId.isNull()) {
 				mCancelBlockId = targetBlockId;
 			} else {
@@ -114,4 +118,15 @@ bool InputBlock::checkLinksCount() {
 		return false;
 	}
 	return true;
+}
+
+void InputBlock::setFailedStatus()
+{
+	mDialog.close();
+	Block::setFailedStatus();
+}
+
+InputBlock::~InputBlock()
+{
+	mDialog.deleteLater();
 }
