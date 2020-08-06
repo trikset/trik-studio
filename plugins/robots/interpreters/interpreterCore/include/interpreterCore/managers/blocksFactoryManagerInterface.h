@@ -29,7 +29,7 @@ public:
 	/// Binds the given factory to the given robot model. If robotModel is null then the
 	/// factory is considered to be binded to all robot models.
 	/// Takes ownership.
-	virtual void addFactory(kitBase::blocksBase::BlocksFactoryInterface * const factory
+	virtual void addFactory(const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &factory
 			, const kitBase::robotModel::RobotModelInterface *robotModel = nullptr) = 0;
 
 	/// Produces the block of the given type for the given robot model.

@@ -31,10 +31,10 @@ using namespace qReal;
 Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 	: Ev3GeneratorPluginBase("Ev3RbfUsbGeneratorRobotModel", tr("Autonomous mode (USB)"), 9
 			, "Ev3RbfBluetoothGeneratorRobotModel", tr("Autonomous mode (Bluetooth)"), 8)
-	, mGenerateCodeAction(new QAction(nullptr))
-	, mUploadProgramAction(new QAction(nullptr))
-	, mRunProgramAction(new QAction(nullptr))
-	, mStopRobotAction(new QAction(nullptr))
+	, mGenerateCodeAction(new QAction(this))
+	, mUploadProgramAction(new QAction(this))
+	, mRunProgramAction(new QAction(this))
+	, mStopRobotAction(new QAction(this))
 {
 	mGenerateCodeAction->setText(tr("Generate to Ev3 Robot Byte Code File"));
 	mGenerateCodeAction->setIcon(QIcon(":/ev3/rbf/images/generateRbfCode.svg"));

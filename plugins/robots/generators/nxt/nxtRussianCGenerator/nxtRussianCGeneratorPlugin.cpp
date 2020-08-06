@@ -23,7 +23,7 @@ using namespace nxt::russianC;
 
 NxtRussianCGeneratorPlugin::NxtRussianCGeneratorPlugin()
 	: NxtGeneratorPluginBase("NxtRussialCGeneratorRobotModel", tr("Generation (Russian C)"), 7 /* Last order */)
-	, mGenerateCodeAction(new QAction(nullptr))
+	, mGenerateCodeAction(new QAction(this))
 {
 	mGenerateCodeAction->setText(tr("Generate to Russian C"));
 	mGenerateCodeAction->setIcon(QIcon(":/nxt/russianC/images/generateRussianCCode.svg"));

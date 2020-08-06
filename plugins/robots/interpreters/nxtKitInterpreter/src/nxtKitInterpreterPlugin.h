@@ -44,7 +44,7 @@ public:
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 	kitBase::robotModel::RobotModelInterface *defaultRobotModel() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<qReal::ActionInfo> customActions() override;  // Transfers ownership of embedded QActions
@@ -64,7 +64,7 @@ private:
 	robotModel::twoD::TwoDRobotModel mTwoDRobotModel;
 
 	/// @todo Use shared pointers instead of this sh~.
-	blocks::NxtBlocksFactory *mBlocksFactory = nullptr;  // Transfers ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 	bool mOwnsBlocksFactory = true;
 
 	NxtAdditionalPreferences *mAdditionalPreferences = nullptr;  // Transfers ownership

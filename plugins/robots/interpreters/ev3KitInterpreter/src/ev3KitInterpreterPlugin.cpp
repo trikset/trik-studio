@@ -51,10 +51,6 @@ Ev3KitInterpreterPlugin::~Ev3KitInterpreterPlugin()
 	if (mOwnsAdditionalPreferences) {
 		delete mAdditionalPreferences;
 	}
-
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
 }
 
 void Ev3KitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
@@ -115,7 +111,7 @@ QList<kitBase::robotModel::RobotModelInterface *> Ev3KitInterpreterPlugin::robot
 	return {&mUsbRealRobotModel, &mBluetoothRealRobotModel, &mTwoDRobotModel};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *Ev3KitInterpreterPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> Ev3KitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {

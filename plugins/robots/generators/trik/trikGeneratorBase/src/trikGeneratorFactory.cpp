@@ -67,6 +67,7 @@ TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mPathsToTemplates(pathsToTemplates)
 {
+	mDeviceVariables.reset(new trik::parts::TrikDeviceVariables());
 }
 
 TrikGeneratorFactory::~TrikGeneratorFactory()
@@ -156,9 +157,4 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 QStringList TrikGeneratorFactory::pathsToTemplates() const
 {
 	return mPathsToTemplates; //{":/" + mGeneratorName + "/templates"};
-}
-
-generatorBase::parts::DeviceVariables *TrikGeneratorFactory::deviceVariables() const
-{
-	return new trik::parts::TrikDeviceVariables();
 }

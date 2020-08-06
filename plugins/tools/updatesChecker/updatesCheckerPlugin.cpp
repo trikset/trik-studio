@@ -29,8 +29,8 @@
 using namespace updatesChecker;
 
 UpdatesCheckerPlugin::UpdatesCheckerPlugin()
-	: mSeparator(new QAction(nullptr))
-	, mCheckForUpdatesAction(new QAction(tr("Check for updates"), nullptr))
+	: mSeparator(new QAction(this))
+	, mCheckForUpdatesAction(new QAction(tr("Check for updates"), this))
 {
 	mSeparator->setSeparator(true);
 	connect(mCheckForUpdatesAction, &QAction::triggered, [this](){ checkForUpdates(); });

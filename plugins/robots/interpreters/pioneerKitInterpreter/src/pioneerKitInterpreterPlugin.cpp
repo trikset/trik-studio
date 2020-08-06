@@ -38,7 +38,7 @@ QList<kitBase::robotModel::RobotModelInterface *> PioneerKitInterpreterPlugin::r
 	return {};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *PioneerKitInterpreterPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerKitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)

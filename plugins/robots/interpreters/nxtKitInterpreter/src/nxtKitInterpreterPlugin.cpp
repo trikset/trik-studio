@@ -51,10 +51,6 @@ NxtKitInterpreterPlugin::~NxtKitInterpreterPlugin()
 	if (mOwnsAdditionalPreferences) {
 		delete mAdditionalPreferences;
 	}
-
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
 }
 
 void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
@@ -114,7 +110,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NxtKitInterpreterPlugin::robot
 	return {&mUsbRealRobotModel, &mBluetoothRealRobotModel, &mTwoDRobotModel};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *NxtKitInterpreterPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NxtKitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model);

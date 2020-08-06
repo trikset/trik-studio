@@ -37,7 +37,7 @@ class TrikPascalABCGeneratorPluginBase : public TrikGeneratorPluginBase
 
 public:
 	TrikPascalABCGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-									 , kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
+									 , const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 									 , const QStringList &pathsToTemplates);
 
 	~TrikPascalABCGeneratorPluginBase() override;

@@ -268,13 +268,13 @@ protected:
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	lua::LuaProcessor &mLuaTranslator;
 	qReal::Id mDiagram;
-	parts::Variables *mVariables {};
-	parts::Subprograms *mSubprograms {};
-	parts::Threads *mThreads {};
-	parts::Engines *mEngines {};
-	parts::Sensors *mSensors {};
-	parts::Functions *mFunctions {};
-	parts::DeviceVariables *mDeviceVariables {};  // Has ownership.
+	QScopedPointer<parts::Variables> mVariables;
+	QScopedPointer<parts::Subprograms> mSubprograms;
+	QScopedPointer<parts::Threads> mThreads;
+	QScopedPointer<parts::Engines> mEngines;
+	QScopedPointer<parts::Sensors> mSensors;
+	QScopedPointer<parts::Functions> mFunctions;
+	QScopedPointer<parts::DeviceVariables> mDeviceVariables;
 	int mLoopGeneratorIndex  { 0 };
 };
 

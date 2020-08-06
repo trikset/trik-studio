@@ -68,12 +68,12 @@ void QScintillaTextEdit::setCurrentLanguage(const LanguageInfo &language)
 	setUnmatchedBraceBackgroundColor(Qt::red);
 
 	setFont(mFont);
-	setLexer(mLanguage.lexer);
+	setLexer(mLanguage.lexer.get());
 
 	if (mLanguage.lexer) {
 		mFont.setPointSize(mLanguage.lexer->defaultFont().pointSize());
 		mLanguage.lexer->setFont(mFont);
-		QsciAPIs * const api = new QsciAPIs(mLanguage.lexer);
+		QsciAPIs * const api = new QsciAPIs(mLanguage.lexer.get());
 		for (const QString &additionalToken : mLanguage.additionalAutocompletionTokens) {
 			api->add(additionalToken);
 		}

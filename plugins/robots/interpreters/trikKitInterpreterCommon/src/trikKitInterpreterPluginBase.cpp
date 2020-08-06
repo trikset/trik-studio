@@ -36,7 +36,7 @@ const Id robotDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagra
 const Id subprogramDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram");
 
 TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase() :
-	mStart(tr("Start"), nullptr), mStop(tr("Stop"), nullptr)
+	mStart(tr("Start"), this), mStop(tr("Stop"), this)
 {
 }
 
@@ -48,7 +48,7 @@ TrikKitInterpreterPluginBase::~TrikKitInterpreterPluginBase()
 void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		(robotModel::TrikRobotModelBase * const realRobotModel
 		, robotModel::twoD::TrikTwoDRobotModel * const twoDRobotModel
-		, blocks::TrikBlocksFactoryBase * const blocksFactory
+		, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
 		)
 {
 	mRealRobotModel.reset(realRobotModel);
@@ -401,10 +401,6 @@ void TrikKitInterpreterPluginBase::release()
 		delete mAdditionalPreferences;
 	}
 
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
-
 	mTextualInterpreter.reset(); // release before mTwoDModel is destroyed
 	mTwoDModel.reset();
 	mTwoDRobotModel.reset();
@@ -417,12 +413,10 @@ QList<kitBase::robotModel::RobotModelInterface *> TrikKitInterpreterPluginBase::
 	return {/*mRealRobotModel.data(),*/ mTwoDRobotModel.data()};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *TrikKitInterpreterPluginBase::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> TrikKitInterpreterPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model);
-
-	mOwnsBlocksFactory = false;
 	return mBlocksFactory;
 }
 

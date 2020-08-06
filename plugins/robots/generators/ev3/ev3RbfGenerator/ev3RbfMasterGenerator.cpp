@@ -79,7 +79,7 @@ QString Ev3RbfMasterGenerator::generate(const QString &indentString)
 	if (gotoMainControlFlow) {
 		mainCode = gotoMainControlFlow->toString(1, indentString);
 		const generatorBase::parts::Subprograms::GenerationResult gotoSubprogramsResult = mCustomizer->factory()
-				->subprograms()->generate(mGotoControlFlowGenerator, indentString);
+				->subprograms()->generate(mGotoControlFlowGenerator.get(), indentString);
 		if (gotoSubprogramsResult != generatorBase::parts::Subprograms::GenerationResult::success) {
 			mainCode = QString();
 		}
