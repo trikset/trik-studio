@@ -7,6 +7,7 @@ stages:
   - lint
   - build
   - installer
+  - test
 
 env:
   global:
@@ -46,6 +47,44 @@ branches:
 
 matrix:
   include:
+    - stage: lint
+      os: linux
+      services: docker
+      env: CONFIG=debug VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      name: "Vera and translations"
+      script:
+      - ./buildScripts/travis/vera_translation.sh
+      after_script:
+      - kill $HEARTBEAT
+
+    - stage: build
+      os: linux
+      services: docker
+      name: "Linux release"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+    - os: linux
+      services: docker
+      env: CONFIG=debug TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      name: "Linux debug + tests"
+    - os: osx
+      language: cpp
+      name: "macOS release"
+      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+    - os: osx
+      language: cpp
+      name: "macOS debug + tests"
+      env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
+
+    - stage: installer
+      os: linux
+      services: docker
+      name: "Linux release installer + checker"
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+    - os: osx
+      language: cpp
+      name: "macOS release installer"
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+
     - stage: test
       dist: trusty
       before_install:
