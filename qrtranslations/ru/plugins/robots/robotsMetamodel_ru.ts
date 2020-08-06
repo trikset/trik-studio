@@ -149,7 +149,7 @@
     </message>
     <message>
         <location line="-311"/>
-        <location line="+823"/>
+        <location line="+832"/>
         <source>Expression:</source>
         <translation>Выражение:</translation>
     </message>
@@ -182,8 +182,8 @@
         <translation type="vanished">Датчик линии в переменную</translation>
     </message>
     <message>
-        <location line="-778"/>
-        <location line="+453"/>
+        <location line="-787"/>
+        <location line="+462"/>
         <location line="+62"/>
         <location line="+361"/>
         <source>Variable:</source>
@@ -194,12 +194,12 @@
         <translation type="vanished">Имя файла:</translation>
     </message>
     <message>
-        <location line="-471"/>
+        <location line="-480"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
     <message>
-        <location line="+229"/>
+        <location line="+238"/>
         <source>Message:</source>
         <translation>Сообщение:</translation>
     </message>
@@ -284,7 +284,7 @@
         <translation type="vanished">Кнопка:</translation>
     </message>
     <message>
-        <location line="-245"/>
+        <location line="-254"/>
         <source>X:</source>
         <translation>X:</translation>
     </message>
@@ -342,7 +342,7 @@
         <translation type="vanished">Длительность</translation>
     </message>
     <message>
-        <location line="+426"/>
+        <location line="+435"/>
         <source>ms</source>
         <translation>мс</translation>
     </message>
@@ -351,13 +351,13 @@
         <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="-815"/>
+        <location line="-824"/>
         <source>Wait:</source>
         <translation>Дождаться нажатия:</translation>
     </message>
     <message>
         <location line="+168"/>
-        <location line="+450"/>
+        <location line="+459"/>
         <source>Thread:</source>
         <translation>Задача:</translation>
     </message>
@@ -443,7 +443,7 @@
         <translation>Значение:</translation>
     </message>
     <message>
-        <location line="-1291"/>
+        <location line="-1300"/>
         <source>AbstractNode</source>
         <translation>Базовый блок</translation>
     </message>
@@ -459,12 +459,12 @@
     </message>
     <message>
         <location line="+23"/>
-        <location line="+778"/>
+        <location line="+787"/>
         <source>Redraw</source>
         <translation>Обновить картинку</translation>
     </message>
     <message>
-        <location line="-767"/>
+        <location line="-776"/>
         <location line="+37"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
@@ -557,7 +557,7 @@
         <translation type="vanished">Заполнен</translation>
     </message>
     <message>
-        <location line="+626"/>
+        <location line="+635"/>
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -627,7 +627,7 @@
         <translation type="vanished">Включить моторы в режиме реверса по заданным портам с заданной мощностью. Порты задаются буквами A, B или C, разделенными запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в обычном режиме.</translation>
     </message>
     <message>
-        <location line="-603"/>
+        <location line="-612"/>
         <source>Power (%)</source>
         <translation>Мощность (%)</translation>
     </message>
@@ -678,7 +678,7 @@
         <translation type="vanished">Проиграть на роботе звук с заданной частотой и длительностью. Аналогичен блоку &apos;Гудок&apos;, но позволяет задавать параметры звука. Имеется параметр, определяющий, ждать ли завершения проигрывания звука или сразу же перейти к следующему блоку.</translation>
     </message>
     <message>
-        <location line="+566"/>
+        <location line="+575"/>
         <source>1000</source>
         <translation>1000</translation>
     </message>
@@ -785,7 +785,7 @@
         <translation type="vanished">Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
-        <location line="-1067"/>
+        <location line="-1076"/>
         <source>End if</source>
         <translation>Конец условия</translation>
     </message>
@@ -839,13 +839,13 @@
     </message>
     <message>
         <location line="+39"/>
-        <location line="+463"/>
+        <location line="+472"/>
         <location line="+414"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>
     <message>
-        <location line="-876"/>
+        <location line="-885"/>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+135"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -854,14 +854,14 @@
     </message>
     <message>
         <location line="-1"/>
-        <location line="+463"/>
+        <location line="+472"/>
         <location line="+307"/>
         <location line="+107"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location line="-865"/>
+        <location line="-874"/>
         <location line="+34"/>
         <location line="+291"/>
         <source>Condition</source>
@@ -935,12 +935,12 @@
     </message>
     <message>
         <location line="+0"/>
-        <location line="+248"/>
+        <location line="+257"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location line="-237"/>
+        <location line="-246"/>
         <source>Marker Down</source>
         <translation>Опустить маркер</translation>
     </message>
@@ -1003,9 +1003,24 @@
         <translation>Печатает заданную строку в заданном месте на экране робота. Значение свойства &quot;Текст&quot; по умолчанию трактуется как строка в чистом виде, оно так и будет выведено на экран. Чтобы система считала, что это выражение на текстовом языке (это может быть полезно, например, при отладке значения переменных), поставьте галочку &quot;Вычислять&quot; в редакторе свойств.</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+31"/>
+        <source>Font size:</source>
+        <translation>Размер шрифта:</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Evaluate</source>
         <translation>Вычислять</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>20</source>
+        <translation>20</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Font size</source>
+        <translation>Размер шрифта</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1118,18 +1133,18 @@
         <translation>Выбирает ветку, по которой будет продолжено исполнение программы. Значение выражения, указанного в свойстве &apos;Выражение&apos; сравнивается со значениями на исходящих связях. Если среди них найдено равное, исполнение будет продолжено по этой ветке. В противном случае будет выбрана ветка без маркера.</translation>
     </message>
     <message>
-        <location line="-825"/>
-        <location line="+856"/>
+        <location line="-834"/>
+        <location line="+865"/>
         <source>Expression</source>
         <translation>Выражение</translation>
     </message>
     <message>
-        <location line="-464"/>
+        <location line="-473"/>
         <source>This block executes a sequence of blocks while condition in &apos;Condition&apos; is true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false.</source>
         <translation>Блок позволяет выполнить последовательность блоков, пока указанное в свойстве &apos;Условие&apos; условие является верным. Блок должен иметь две исходящие связи, одна из которых должна быть помечена значением &apos;тело цикла&apos; (то есть значение параметра &apos;Условие&apos; должно быть &apos;тело цикла&apos;). Другая связь, исходящая из блока &apos;Цикл с предусловием&apos;, должна оставаться непомеченной: по ней будет осуществляться переход, когда &apos;Условие&apos; станет ложным.</translation>
     </message>
     <message>
-        <location line="+475"/>
+        <location line="+484"/>
         <source>Timer</source>
         <translation>Таймер</translation>
     </message>
@@ -1522,12 +1537,12 @@
         <translation type="vanished">Тело функции</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-937"/>
         <source>Expression</source>
         <translation type="unfinished">Выражение</translation>
     </message>
     <message>
-        <location line="+568"/>
+        <location line="+577"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>

@@ -78,7 +78,7 @@
         <translation type="vanished">Durée</translation>
     </message>
     <message>
-        <location line="+426"/>
+        <location line="+435"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
@@ -91,7 +91,7 @@
         <translation type="vanished">Port :</translation>
     </message>
     <message>
-        <location line="-557"/>
+        <location line="-566"/>
         <source>Color:</source>
         <translation>Couleur :</translation>
     </message>
@@ -117,26 +117,26 @@
     </message>
     <message>
         <location line="-266"/>
-        <location line="+453"/>
+        <location line="+462"/>
         <location line="+62"/>
         <location line="+361"/>
         <source>Variable:</source>
         <translation>Variable :</translation>
     </message>
     <message>
-        <location line="-823"/>
+        <location line="-832"/>
         <location line="+292"/>
         <source>Condition:</source>
         <translation>Condition :</translation>
     </message>
     <message>
         <location line="-169"/>
-        <location line="+450"/>
+        <location line="+459"/>
         <source>Thread:</source>
         <translation>Fil :</translation>
     </message>
     <message>
-        <location line="-406"/>
+        <location line="-415"/>
         <source>Iterations:</source>
         <translation>Itérations :</translation>
     </message>
@@ -154,7 +154,7 @@
         <translation>Texte :</translation>
     </message>
     <message>
-        <location line="+56"/>
+        <location line="+65"/>
         <source>From:</source>
         <translation>De :</translation>
     </message>
@@ -174,18 +174,18 @@
         <translation>Message :</translation>
     </message>
     <message>
-        <location line="-679"/>
-        <location line="+823"/>
+        <location line="-688"/>
+        <location line="+832"/>
         <source>Expression:</source>
         <translation>Expression :</translation>
     </message>
     <message>
-        <location line="-440"/>
+        <location line="-449"/>
         <source>This block executes a sequence of blocks while condition in &apos;Condition&apos; is true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+484"/>
+        <location line="+493"/>
         <source>Delay:</source>
         <translation>Délai :</translation>
     </message>
@@ -283,7 +283,7 @@
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location line="-1291"/>
+        <location line="-1300"/>
         <source>AbstractNode</source>
         <translation>AbstractNode</translation>
     </message>
@@ -299,12 +299,12 @@
     </message>
     <message>
         <location line="+23"/>
-        <location line="+778"/>
+        <location line="+787"/>
         <source>Redraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-767"/>
+        <location line="-776"/>
         <location line="+37"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
@@ -385,7 +385,7 @@
         <translation type="vanished">Rempli</translation>
     </message>
     <message>
-        <location line="+626"/>
+        <location line="+635"/>
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -443,7 +443,7 @@
         <translation type="vanished">Mode</translation>
     </message>
     <message>
-        <location line="-603"/>
+        <location line="-612"/>
         <source>Power (%)</source>
         <translation>Puissance (%)</translation>
     </message>
@@ -486,7 +486,7 @@
         <translation type="vanished">Frequence</translation>
     </message>
     <message>
-        <location line="+566"/>
+        <location line="+575"/>
         <source>1000</source>
         <translation>1000</translation>
     </message>
@@ -561,7 +561,7 @@
         <translation type="vanished">Attendre un capteur tactile</translation>
     </message>
     <message>
-        <location line="-1067"/>
+        <location line="-1076"/>
         <source>End if</source>
         <translation>Fin Si</translation>
     </message>
@@ -620,13 +620,13 @@
     </message>
     <message>
         <location line="+24"/>
-        <location line="+463"/>
+        <location line="+472"/>
         <location line="+414"/>
         <source>Variable</source>
         <translation>Variable</translation>
     </message>
     <message>
-        <location line="-876"/>
+        <location line="-885"/>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+135"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -635,14 +635,14 @@
     </message>
     <message>
         <location line="-1"/>
-        <location line="+463"/>
+        <location line="+472"/>
         <location line="+307"/>
         <location line="+107"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location line="-865"/>
+        <location line="-874"/>
         <location line="+34"/>
         <location line="+291"/>
         <source>Condition</source>
@@ -716,12 +716,12 @@
     </message>
     <message>
         <location line="+0"/>
-        <location line="+248"/>
+        <location line="+257"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location line="-237"/>
+        <location line="-246"/>
         <source>Marker Down</source>
         <translation>Descendre le marqueur </translation>
     </message>
@@ -780,8 +780,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+31"/>
+        <source>Font size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>Evaluate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>20</source>
+        <translation type="unfinished">20</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -895,8 +910,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-825"/>
-        <location line="+856"/>
+        <location line="-834"/>
+        <location line="+865"/>
         <source>Expression</source>
         <translation>Expression</translation>
     </message>
@@ -1194,12 +1209,12 @@
         <translation type="obsolete">Corps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-937"/>
         <source>Expression</source>
         <translation type="unfinished">Expression</translation>
     </message>
     <message>
-        <location line="+568"/>
+        <location line="+577"/>
         <source>Variable</source>
         <translation type="unfinished">Variable</translation>
     </message>
