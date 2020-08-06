@@ -10,5 +10,8 @@ leak:QFontconfigDatabase::defaultFont() const
 leak:QGuiApplicationPrivate::createPlatformIntegration()
 # From unit tests. These should be fixed one by one.
 leak:QPlatformIntegrationFactory::create
-#This comes from a crappy, ugly piece of code....
-#leak:QWeakPointer<QObject>::QWeakPointer<QObject>(QObject*, bool)
+leak:QFontconfigDatabase::addApplicationFont(QByteArray const&, QString const&)
+leak:ev3::communication::UsbRobotCommunicationThread::UsbRobotCommunicationThread
+leak:nxt::communication::UsbRobotCommunicationThread::UsbRobotCommunicationThread
+leak:ev3::communication::BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread
+leak:nxt::communication::BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread

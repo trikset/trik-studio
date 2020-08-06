@@ -307,7 +307,7 @@ QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &
 
 	QAction * const menuAction = new QAction(subActions.first()->icon(), name, this);
 	menuAction->setCheckable(true);
-	menuAction->setMenu(new QMenu());
+	menuAction->setMenu(new QMenu(&mDummyWidget));
 	menuAction->menu()->addActions(subActions);
 
 	auto checkAction = [menuAction, kitId](const QString &name) {

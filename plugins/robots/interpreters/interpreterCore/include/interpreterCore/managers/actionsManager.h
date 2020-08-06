@@ -174,6 +174,9 @@ private:
 	/// Main window interface object, to ask about currently open tab and so on.
 	// Does not have ownership
 	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterpretersInterface = nullptr;
+
+	// Is used to be a default parent for menu's
+	QWidget mDummyWidget;
 };
 
 }
