@@ -837,6 +837,14 @@
 			label_3->setPlainTextMode(false);
 			label_3->setPrefix(QObject::tr("Text:"));
 			addLabel(label_3);
+			QSharedPointer<qReal::LabelProperties> label_4(new qReal::LabelProperties(4, 1, 3, "FontSize", false, 0));
+			label_4->setBackground(Qt::white);
+			label_4->setScalingX(false);
+			label_4->setScalingY(false);
+			label_4->setHard(false);
+			label_4->setPlainTextMode(false);
+			label_4->setPrefix(QObject::tr("Font size:"));
+			addLabel(label_4);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/PrintTextClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -860,6 +868,7 @@
 		void initProperties()
 		{
 			addProperty("Evaluate", "bool", QString::fromUtf8("false"), QObject::tr("Evaluate"), QObject::tr(""), false);
+			addProperty("FontSize", "string", QObject::tr("20"), QObject::tr("Font size"), QObject::tr(""), false);
 			addProperty("PrintText", "string", QObject::tr("Enter some text here"), QObject::tr("Text"), QObject::tr(""), false);
 			addProperty("Redraw", "bool", QString::fromUtf8("true"), QObject::tr("Redraw"), QObject::tr(""), false);
 			addProperty("XCoordinateText", "string", QObject::tr("1"), QObject::tr("X"), QObject::tr(""), false);

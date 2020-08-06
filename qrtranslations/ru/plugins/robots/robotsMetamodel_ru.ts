@@ -1013,16 +1013,6 @@
         <translation>Текст</translation>
     </message>
     <message>
-        <location line="668"/>
-        <source>Font size</source>
-        <translation>Размер шрифта</translation>
-    </message>
-    <message>
-        <location line="646"/>
-        <source>Font size:</source>
-        <translation>Размер шрифта:</translation>
-    </message>
-    <message>
         <location line="+0"/>
         <source>Enter some text here</source>
         <translation>Введите текст</translation>
