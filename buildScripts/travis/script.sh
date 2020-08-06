@@ -40,7 +40,7 @@ $EXECUTOR bash -lixc "\
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -xc \"export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& sh -xc \"export QT_QPA_PLATFORM=xcb ; export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
 df -h .
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 

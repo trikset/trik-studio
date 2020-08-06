@@ -116,7 +116,7 @@ private:
 	void giveObjectNames();
 
 	/// Creates action with menu that lets switching between robot models.
-	QAction *produceMenuAction(const QString &kitId, const QString &name, const QList<QAction *> &subActions) const;
+	QAction *produceMenuAction(const QString &kitId, const QString &name, const QList<QAction *> &subActions);
 
 	/// Plugins can have their own custom actions, we need to get them from KitPluginManager.
 	KitPluginManager &mKitPluginManager;
