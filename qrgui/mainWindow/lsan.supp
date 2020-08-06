@@ -10,40 +10,5 @@ leak:QFontconfigDatabase::defaultFont() const
 leak:QGuiApplicationPrivate::createPlatformIntegration()
 # From unit tests. These should be fixed one by one.
 leak:QPlatformIntegrationFactory::create
-leak:twoDModel::constraints::details::ConstraintsParser::parse
-leak:QObjectPrivate::connectImpl
-leak:qReal::EditorManager::registerPlugin
-leak:interpreterCore::textLanguage::RobotsBlockParser::RobotsBlockParser
-leak:qReal::models::Models::Models
 #This comes from a crappy, ugly piece of code....
-leak:generatorBase::GeneratorFactoryBase::
-leak:trik::qts::TrikQtsGeneratorPluginBase::
-leak:qrtext::lua::details::LuaParser::grammar()
-leak:QAction::activate
 #leak:QWeakPointer<QObject>::QWeakPointer<QObject>(QObject*, bool)
-leak:QStringList::QStringList(std::initializer_list<
-
-#run-simulator-tests.sh
-leak:qReal::details::PluginManagerImplementation::loadPluginByName(QString const&)
-leak:interpreterCore::ActionsManager::ActionsManager(interpreterCore::KitPluginManager&, interpreterCore::RobotModelManager&)
-leak:*PluginBase::customActions()
-leak:qReal::models::details::GraphicalPartModel::addGraphicalPart
-leak:interpreterCore::UiManager::initTab()
-leak:twoDModel::model::RobotModel::initMotor
-leak:twoDModel::model::physics::parts::Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine*, twoDModel::items::SolidItem const&, b2Vec2 const&, float)
-leak:qReal::Id::Id()
-leak:kitBase::robotModel::robotParts::Random::Random
-leak:qReal::ProjectManager::openProject(QString const&)
-leak:kitBase::robotModel::CommonRobotModel::createDevice
-#leak:trik::pascalABC::TrikPascalABCGeneratorPluginBase::customActions()
-#leak:trik::python::TrikPythonGeneratorPluginBase::customActions()
-#leak:queuedConnectionTypes
-#leak:ev3::rbf::Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
-#leak:trik::pascalABC::TrikPascalABCGeneratorPlugin::TrikPascalABCGeneratorPlugin()
-#leak:trik::fSharp::TrikV62FSharpGeneratorPlugin::TrikV62FSharpGeneratorPlugin()
-#leak:nxt::russianC::NxtRussianCGeneratorPlugin::NxtRussianCGeneratorPlugin()
-#leak:trik::python::TrikV62PythonGeneratorPlugin::TrikV62PythonGeneratorPlugin()
-#leak:trik::pascalABC::TrikV6PascalABCGeneratorPlugin::TrikV6PascalABCGeneratorPlugin()
-#leak:nxt::osekC::NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
-#leak:pioneer::lua::PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
-#leak:interpreterCore::ActionsManager::initKitPluginActions()
