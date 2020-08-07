@@ -19,14 +19,9 @@
 
 using namespace qReal::gestures;
 
-RectangleGesturesManager::RectangleGesturesManager()
-{
-}
+RectangleGesturesManager::RectangleGesturesManager() = default;
 
-RectangleGesturesManager::~RectangleGesturesManager()
-{
-	qDeleteAll(mGestures);
-}
+RectangleGesturesManager::~RectangleGesturesManager() = default;
 
 qreal RectangleGesturesManager::getMaxDistance(const QString &)
 {
@@ -38,7 +33,7 @@ bool RectangleGesturesManager::isMultistroke()
 	return true;
 }
 
-qreal RectangleGesturesManager::getDistance(qreal * const & key1, qreal * const & key2)
+qreal RectangleGesturesManager::getDistance(const key_type &key1, const key_type &key2)
 {
 	qreal norm = 0;
 	qreal sum = 0;
@@ -50,10 +45,10 @@ qreal RectangleGesturesManager::getDistance(qreal * const & key1, qreal * const 
 	return sum / (gridSize * gridSize);
 }
 
-qreal *RectangleGesturesManager::getKey(const PathVector & path)
+RectangleGesturesManager::key_type RectangleGesturesManager::getKey(const PathVector & path)
 {
 	const Key key = KeyBuilder::getKey(path, gridSize, gridSize);
-	qreal *finalKey = new qreal[gridSize * gridSize];
+	key_type finalKey (gridSize * gridSize);
 	for (int i = 0; i < gridSize * gridSize; ++i) {
 		finalKey[i] = key.size();
 	}

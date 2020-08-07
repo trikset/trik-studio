@@ -23,19 +23,9 @@ const qreal weight2 = 1 - weight1;
 
 using namespace qReal::gestures;
 
-MixedGesturesManager::MixedGesturesManager()
-{
-}
+MixedGesturesManager::MixedGesturesManager() = default;
 
-MixedGesturesManager::~MixedGesturesManager()
-{
-	for (const QString &object : mGestures.keys()) {
-		delete[] mGestures[object].first;
-		delete[] mGestures[object].second;
-		mGestures.remove(object);
-	}
-}
-
+MixedGesturesManager::~MixedGesturesManager() = default;
 
 qreal MixedGesturesManager::getMaxDistance(const QString &)
 {
@@ -46,7 +36,7 @@ bool MixedGesturesManager::isMultistroke()
 	return true;
 }
 
-qreal MixedGesturesManager::getDistance(QPair<qreal *,qreal *> const &key1, QPair<qreal *, qreal *> const &key2)
+qreal MixedGesturesManager::getDistance(const key_type &key1, const key_type &key2)
 {
 	RectangleGesturesManager rectMan;
 	NearestPosGridGesturesManager gridMan;
@@ -55,16 +45,16 @@ qreal MixedGesturesManager::getDistance(QPair<qreal *,qreal *> const &key1, QPai
 	return dist1 * weight1 + dist2 * weight2;
 }
 
-QPair<qreal *, qreal *> MixedGesturesManager::getKey(const PathVector &path)
+MixedGesturesManager::key_type MixedGesturesManager::getKey(const PathVector &path)
 {
 	RectangleGesturesManager rectMan;
 	NearestPosGridGesturesManager gridMan;
-	qreal *key1 = rectMan.getKey(path);
-	qreal *key2 = gridMan.getKey(path);
-	return QPair<qreal *, qreal *>(key1, key2);
+	const auto &key1 = rectMan.getKey(path);
+	const auto &key2 = gridMan.getKey(path);
+	return {key1, key2};
 }
 
-MixedClassifier::MixedClassifier(QPair<qreal *, qreal *>  &&key)
+MixedClassifier::MixedClassifier(MixedGesturesManager::key_type &&key)
 	: mKey(key)
 {
 }
@@ -75,34 +65,30 @@ MixedClassifier::MixedClassifier(const PathVector &path)
 	mKey = gManager.getKey(path);
 }
 
-MixedClassifier::~MixedClassifier()
-{
-	delete mKey.first;
-	delete mKey.second;
-}
+MixedClassifier::~MixedClassifier() = default;
 
 qreal MixedClassifier::getDistance(const MixedClassifier &classifier)
 {
-	QPair<qreal *, qreal *> key = classifier.key();
+	const auto &key = classifier.key();
 	MixedGesturesManager gManager;
 	return gManager.getDistance(key, mKey);
 }
 
 MixedClassifier MixedClassifier::getPoint(const MixedClassifier &centre, qreal centreWeight)
 {
-	qreal *key1 = centre.key().first;
-	qreal *key2 = centre.key().second;
-	qreal *finalKey1 = new qreal[gridSize * gridSize];
-	qreal *finalKey2 = new qreal[gridSize * gridSize];
+	const auto &key1 = centre.key().first;
+	const auto &key2 = centre.key().second;
+	MixedGesturesManager::key_type::first_type finalKey1(gridSize * gridSize);
+	MixedGesturesManager::key_type::second_type finalKey2(gridSize * gridSize);
 	for (int i = 0; i < gridSize * gridSize; i ++) {
 		finalKey1[i] = (key1[i] * centreWeight + mKey.first[i]) / (centreWeight + 1);
 		finalKey2[i] = (key2[i] * centreWeight + mKey.second[i]) / (centreWeight + 1);
 	}
 
-	return MixedClassifier(QPair<qreal *, qreal *>(finalKey1, finalKey2));
+	return MixedClassifier(MixedGesturesManager::key_type {finalKey1, finalKey2});
 }
 
-QPair<qreal *, qreal *> MixedClassifier::key() const
+MixedGesturesManager::key_type MixedClassifier::key() const
 {
 	return mKey;
 }

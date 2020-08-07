@@ -44,6 +44,8 @@ template <typename TKey>
 class GesturesRecognizer : public GesturesManager
 {
 public:
+	using key_type = TKey;
+
 	GesturesRecognizer() = default;
 
 	~GesturesRecognizer() override = default;
@@ -56,9 +58,8 @@ public:
 
 	void initIdealGestures(QMap<QString, PathVector> const &objects) override
 	{
-		for (const QString &object : objects.keys()) {
-			TKey key = getKey(objects[object]);
-			mGestures.insert(object, key);
+		for (auto &&object : objects.keys()) {
+			mGestures.insert(object, getKey(objects[object]));
 		}
 	}
 
@@ -71,9 +72,9 @@ public:
 
 protected:
 	TKey mKey;
-	virtual qreal getDistance(const TKey &key1, const TKey &key2) = 0;
+	virtual qreal getDistance(const key_type &key1, const key_type &key2) = 0;
 	virtual TKey getKey(const PathVector &path) = 0;
-	QMap<QString, TKey> mGestures;
+	QMap<QString, key_type> mGestures;
 	//maybe to do several lists for multistroke gestures
 };
 
