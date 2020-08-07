@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2020 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,22 @@
 
 #pragma once
 
-#include <kitBase/blocksBase/commonBlocksFactory.h>
+#include <kitBase/blocksBase/common/displayBlock.h>
 
 namespace trik {
 namespace blocks {
+namespace details {
 
-/// Base class for block factory for all TRIK variants, creates common blocks.
-class TrikBlocksFactoryBase : public kitBase::blocksBase::CommonBlocksFactory
+class TrikPrintTextBlock : public kitBase::blocksBase::common::DisplayBlock
 {
 public:
-	qReal::interpretation::Block *produceBlock(const qReal::Id &element) override;
-	qReal::IdList providedBlocks() const override;
-	qReal::IdList blocksToDisable() const override;
-	qReal::IdList blocksToHide() const override;
+	TrikPrintTextBlock(kitBase::robotModel::RobotModelInterface &robotModel);
+
+private:
+	void doJob(kitBase::robotModel::robotParts::Display &display) override;
+
 };
 
+}
 }
 }

@@ -39,6 +39,8 @@
 #include "details/setPainterWidthBlock.h"
 #include "details/setPainterColorBlock.h"
 #include "details/setBackgroundBlock.h"
+#include "details/trikPrintTextBlock.h"
+
 #include "details/initCameraBlock.h"
 #include "details/detectLineBlock.h"
 #include "details/lineDetectorToVariable.h"
@@ -139,6 +141,8 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new SmileBlock(mRobotModelManager->model(), true);
 	} else if (elementMetatypeIs(element, "TrikSetBackground")) {
 		return new SetBackgroundBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikPrintText")) {
+		return new TrikPrintTextBlock(mRobotModelManager->model());
 
 	} else if (elementMetatypeIs(element, "TrikWaitGamepadButton")) {
 		return new WaitGamepadButtonBlock(mRobotModelManager->model());
@@ -205,6 +209,7 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 			;
 
 	result
+			<< id("TrikPrintText")
 			<< id("TrikSetPainterColor")
 			<< id("TrikSetPainterWidth")
 			<< id("TrikDrawPixel")
@@ -267,6 +272,16 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikCalibrateGyroscope")
 				;
 	}
+
+	result << id("PrintText");
+
+	return result;
+}
+
+qReal::IdList TrikBlocksFactoryBase::blocksToHide() const
+{
+	qReal::IdList result;
+	result << id("PrintText");
 
 	return result;
 }

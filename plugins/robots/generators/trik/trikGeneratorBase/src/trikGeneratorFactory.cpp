@@ -33,6 +33,7 @@
 #include "simpleGenerators/playToneGenerator.h"
 #include "simpleGenerators/waitForMessageGenerator.h"
 #include "simpleGenerators/sadSmileGenerator.h"
+#include "simpleGenerators/printTextGenerator.h"
 #include "simpleGenerators/sayGenerator.h"
 #include "simpleGenerators/sendMessageGenerator.h"
 #include "simpleGenerators/setPainterWidthGenerator.h"
@@ -103,6 +104,8 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 		return new SmileGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikSadSmile") {
 		return new SadSmileGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "TrikPrintText") {
+		return new PrintTextGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikSay") {
 		return new SayGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikSendMessage") {
