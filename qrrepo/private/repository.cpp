@@ -539,8 +539,7 @@ bool Repository::exterminate()
 
 void Repository::open(const QString &saveFile)
 {
-	qDeleteAll(mObjects);
-	mObjects.clear();
+	init();
 	mSerializer.setWorkingFile(saveFile);
 	mWorkingFile = saveFile;
 	loadFromDisk();
