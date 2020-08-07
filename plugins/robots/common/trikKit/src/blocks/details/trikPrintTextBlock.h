@@ -27,7 +27,6 @@ public:
 
 private:
 	void doJob(kitBase::robotModel::robotParts::Display &display) override;
-
 };
 
 }
