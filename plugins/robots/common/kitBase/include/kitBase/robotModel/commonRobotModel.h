@@ -123,7 +123,7 @@ private:
 	QHash<PortInfo, QList<DeviceInfo>> mAllowedConnections;
 
 	/// Reverse index for faster lookup, contains names and aliases
-	QHash<QString, QList<PortInfo>> mPortByName;
+	QHash<QString, QList<PortInfo>> mPortsByName;
 
 	/// Devices configuration.
 	Configuration mConfiguration;
