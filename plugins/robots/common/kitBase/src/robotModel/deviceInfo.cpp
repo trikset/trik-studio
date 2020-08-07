@@ -113,8 +113,8 @@ QString DeviceInfo::property(const QMetaObject * const metaObject, const QString
 	// friendly name earlier than its parent`s one.
 	for (int i = metaObject->classInfoCount() - 1; i >= 0; --i) {
 		const QMetaClassInfo classInfo = metaObject->classInfo(i);
-		if (QString(classInfo.name()) == name) {
-			return QString(classInfo.value());
+		if (classInfo.name() == name) {
+			return classInfo.value();
 		}
 	}
 

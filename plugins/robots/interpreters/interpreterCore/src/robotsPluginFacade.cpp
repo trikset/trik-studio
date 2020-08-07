@@ -47,7 +47,7 @@ RobotsPluginFacade::RobotsPluginFacade()
 
 RobotsPluginFacade::~RobotsPluginFacade()
 {
-	qDeleteAll(mInterpreters.values().toSet());	
+	qDeleteAll(mInterpreters.values().toSet());
 	for (auto &&kitId : mKitPluginManager.kitIds()) {
 		for (auto *kit : mKitPluginManager.kitsById(kitId)) {
 			kit->release();
