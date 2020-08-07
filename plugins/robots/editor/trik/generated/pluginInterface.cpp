@@ -58,6 +58,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new TrikLed(*mMetamodel));
 	mMetamodel->addNode(new TrikPlayTone(*mMetamodel));
 	mMetamodel->addNode(new TrikPlayToneHz(*mMetamodel));
+	mMetamodel->addNode(new TrikPrintText(*mMetamodel));
 	mMetamodel->addNode(new TrikRemoveFile(*mMetamodel));
 	mMetamodel->addNode(new TrikSadSmile(*mMetamodel));
 	mMetamodel->addNode(new TrikSay(*mMetamodel));
@@ -110,6 +111,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikLed"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikPlayTone"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikPlayToneHz"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikPrintText"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikRemoveFile"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikSadSmile"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikSay"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -207,6 +209,7 @@ void TrikMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("TrikSmile"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("TrikSadSmile"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("TrikSetBackground"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("TrikPrintText"));
 }
 
 void TrikMetamodelPlugin::initPaletteGroupsDescriptionMap()
