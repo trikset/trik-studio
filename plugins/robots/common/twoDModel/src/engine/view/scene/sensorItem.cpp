@@ -43,13 +43,12 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 	, mImageRect(imageRect.isEmpty() ? this->calculateImageRect() : imageRect)
 	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift
 			, selectionDrift, selectionDrift))
-	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, false)
+	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, true)
 	, mPortItem(new PortItem(port))
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 
 	setAcceptDrops(true);
-
 	mPortItem->setParentItem(this);
 	mPortItem->moveBy(-mPortItem->boundingRect().width() - 5, -mPortItem->boundingRect().height() - 5);
 	mPortItem->setFlag(ItemIgnoresTransformations);

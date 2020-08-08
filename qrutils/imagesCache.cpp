@@ -94,7 +94,7 @@ void ImagesCache::drawImageWithoutCachingSize(const QString &fileName, QPainter 
 QFileInfo ImagesCache::selectBestImageFile(const QString &filePath)
 {
 	const QFileInfo originalFileInfo(filePath);
-	const QFileInfo svgVersion(originalFileInfo.path() + originalFileInfo.completeBaseName() + "svg");
+	const QFileInfo svgVersion(originalFileInfo.path() + originalFileInfo.completeBaseName() + ".svg");
 
 	if (svgVersion.exists()) {
 		return svgVersion;

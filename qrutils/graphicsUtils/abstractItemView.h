@@ -45,6 +45,14 @@ protected:
 	void keyPressEvent(QKeyEvent *event) override;
 	void wheelEvent(QWheelEvent *event) override;
 	void scrollContentsBy(int dx, int dy) override;
+	void setScaleLimits(qreal minAbsScale, qreal maxAbsScale);
+
+private:
+	void scaleTo(qreal newScale);
+
+	qreal mMinAbsScale { 0.2 };
+	qreal mMaxAbsScale { 10.0 };
+	qreal mCurrentAbsScale { 1.0 };
 };
 
 }

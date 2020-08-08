@@ -27,7 +27,7 @@ const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
 	: RotateItem()
-	, mImage(robotImageFileName, false)
+	, mImage(robotImageFileName, true)
 	, mBeepItem(new BeepItem)
 	, mRectangleImpl()
 	, mRobotModel(robotModel)
