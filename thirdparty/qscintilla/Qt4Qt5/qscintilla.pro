@@ -40,6 +40,7 @@ CONFIG(debug, debug|release) {
 
 TARGET = qscintilla2
 include(../../../global.pri)
+LIBS -= -lqslog
 INCLUDEPATH += thirdparty/qscintilla/Qt4Qt5/
 
 
