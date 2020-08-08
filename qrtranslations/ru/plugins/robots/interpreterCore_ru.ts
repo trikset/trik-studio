@@ -278,18 +278,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+93"/>
-        <location line="+73"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+91"/>
+        <location line="+72"/>
         <source>No connection to robot</source>
         <translation>Нет соединения с роботом</translation>
     </message>
     <message>
-        <location line="-68"/>
+        <location line="-67"/>
         <source>Interpreter is already running</source>
         <translation>Программа уже запущена</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+51"/>
         <source>Connected successfully</source>
         <translation>Подключение к роботу выполнено</translation>
     </message>
@@ -299,7 +299,7 @@
         <translation>Не удалось подключиться к роботу.</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+44"/>
         <source>Cannot create new thread with already occupied id %1</source>
         <translation>Идентификатор потока %1 уже занят</translation>
     </message>

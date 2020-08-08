@@ -89,7 +89,7 @@ private:
 		, idle
 	};
 
-	void addThread(qReal::interpretation::Thread * const thread, const QString &threadId);
+	void addThread(const QSharedPointer<qReal::interpretation::Thread> &thread, const QString &threadId);
 
 	void reportError(const QString &message);
 
@@ -99,9 +99,9 @@ private:
 
 	InterpreterState mState;
 	quint64 mInterpretationStartedTimestamp {};
-	QHash<QString, qReal::interpretation::Thread *> mThreads;  // Has ownership
+	QHash<QString, QSharedPointer<qReal::interpretation::Thread>> mThreads;
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
-	details::BlocksTable *mBlocksTable;  // Has ownership
+	QScopedPointer<details::BlocksTable> mBlocksTable;
 
 	details::Autoconfigurer mAutoconfigurer;
 
