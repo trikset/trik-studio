@@ -37,7 +37,7 @@ Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, cons
 }
 
 Ev3GeneratorPluginBase::~Ev3GeneratorPluginBase()
-{	
+{
 }
 
 QString Ev3GeneratorPluginBase::kitId() const

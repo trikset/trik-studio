@@ -27,12 +27,14 @@
 #include <metaMetaModel/elementRepoInterface.h>
 #include <QPainterPath>
 
+#include <QsLog.h>
+
 using namespace qReal;
 
 SdfRenderer::SdfRenderer()
 	: mWorkingDirName (SettingsManager::value("workingDir").toString())
 	, mImagesCache(utils::ImagesCache::instance())
-{	
+{
 }
 
 SdfRenderer::SdfRenderer(const QString &path)
@@ -40,8 +42,8 @@ SdfRenderer::SdfRenderer(const QString &path)
 {
 	if (!load(path))
 	{
-		qDebug() << "File " + path + " - loading failed!";
-	}	
+		QLOG_ERROR() << "File " + path + " - loading failed!";
+	}
 }
 
 SdfRenderer::~SdfRenderer()

@@ -52,3 +52,5 @@ SOURCES += \
 
 RESOURCES += \
 	$$PWD/pluginManager.qrc \
+
+includes(thirdparty/qslog)

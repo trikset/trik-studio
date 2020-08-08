@@ -36,7 +36,7 @@ class Image
 public:
 	Image() = default;
 	explicit Image(const QString &id);
-	Image(const QString &path, bool memorize);	
+	Image(const QString &path, bool memorize);
 	~Image();
 
 	/// Reads image from XML-representation.

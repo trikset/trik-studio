@@ -183,7 +183,7 @@ void BlockInterpreter::devicesConfiguredSlot()
 void BlockInterpreter::threadStopped(qReal::interpretation::StopReason reason)
 {
 	auto thread = static_cast<qReal::interpretation::Thread *>(sender());
-	mThreads.remove(thread->id());	
+	mThreads.remove(thread->id());
 	if (mThreads.isEmpty()) {
 		stopRobot(reason);
 	}
