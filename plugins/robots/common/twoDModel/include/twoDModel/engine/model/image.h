@@ -18,6 +18,8 @@
 #include <QtCore/QString>
 #include <QtCore/QRect>
 
+#include <qrutils/imagesCache.h>
+
 class QDomElement;
 class QSvgRenderer;
 class QImage;
@@ -81,6 +83,7 @@ private:
 	QScopedPointer<QImage> mImage;
 	QByteArray mSvgBytes;
 	QScopedPointer<QSvgRenderer> mSvgRenderer;
+	const QSharedPointer<utils::ImagesCache> mImagesCache;
 };
 
 }

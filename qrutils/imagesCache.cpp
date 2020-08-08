@@ -22,20 +22,6 @@
 
 using namespace utils;
 
-ImagesCache::ImagesCache()
-{
-}
-
-ImagesCache::~ImagesCache()
-{
-}
-
-ImagesCache &ImagesCache::instance()
-{
-	static ImagesCache instance;
-	return instance;
-}
-
 void ImagesCache::drawImage(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom)
 {
 	if (mFileNamePixmapMap.contains(fileName)) {

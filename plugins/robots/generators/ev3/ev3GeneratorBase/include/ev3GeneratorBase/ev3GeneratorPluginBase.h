@@ -61,7 +61,7 @@ public:
 protected:
 	void onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model) override;
 	void regenerateExtraFiles(const QFileInfo &newFileInfo) override;
-	communication::Ev3RobotCommunicationThread *currentCommunicator();
+	QSharedPointer<communication::Ev3RobotCommunicationThread> currentCommunicator();
 
 private:
 	QScopedPointer<robotModel::Ev3GeneratorRobotModel> mUsbRobotModel;

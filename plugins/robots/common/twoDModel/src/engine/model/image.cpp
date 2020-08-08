@@ -32,6 +32,7 @@ const quint64 maxSvgSize = 1000;
 
 Image::Image(const QString &id)
 	: mImageId(id)
+	, mImagesCache(utils::ImagesCache::instance())
 {
 }
 
@@ -183,7 +184,7 @@ void Image::setPath(const QString &path)
 void Image::draw(QPainter &painter, const QRect &rect, qreal zoom) const
 {
 	if (mExternal && !mPath.isEmpty()) {
-		utils::ImagesCache::instance().drawImageWithoutCachingSize(mPath, painter, rect, zoom);
+		mImagesCache->drawImageWithoutCachingSize(mPath, painter, rect, zoom);
 	} else if (mIsSvg) {
 		mSvgRenderer->render(&painter, rect);
 	} else if (!mImage.isNull()) {

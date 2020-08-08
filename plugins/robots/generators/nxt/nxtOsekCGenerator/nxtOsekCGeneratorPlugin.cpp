@@ -41,10 +41,7 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	initHotKeyActions();
 }
 
-NxtOsekCGeneratorPlugin::~NxtOsekCGeneratorPlugin()
-{
-	delete mFlashTool;
-}
+NxtOsekCGeneratorPlugin::~NxtOsekCGeneratorPlugin() = default;
 
 QString NxtOsekCGeneratorPlugin::defaultFilePath(const QString &projectName) const
 {
@@ -99,8 +96,8 @@ void NxtOsekCGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configu
 {
 	RobotsGeneratorPluginBase::init(configurator);
 
-	mFlashTool = new NxtFlashTool(*mMainWindowInterface->errorReporter(), mCommunicator);
-	connect(mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
+	mFlashTool.reset(new NxtFlashTool(*mMainWindowInterface->errorReporter(), *mCommunicator));
+	connect(&*mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
 }
 
 QList<ActionInfo> NxtOsekCGeneratorPlugin::customActions()

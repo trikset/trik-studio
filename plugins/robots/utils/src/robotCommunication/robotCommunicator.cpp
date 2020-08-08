@@ -50,20 +50,20 @@ void RobotCommunicator::send(const QByteArray &buffer, const unsigned responseSi
 
 void RobotCommunicator::connect()
 {
-	QMetaObject::invokeMethod(mRobotCommunicationThreadObject, "connect");
+	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), "connect");
 }
 
 void RobotCommunicator::disconnect()
 {
-	QMetaObject::invokeMethod(mRobotCommunicationThreadObject, "disconnect");
+	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), "disconnect");
 }
 
-RobotCommunicationThreadInterface *RobotCommunicator::currentCommunicator() const
+QSharedPointer<RobotCommunicationThreadInterface> RobotCommunicator::currentCommunicator() const
 {
 	return mRobotCommunicationThreadObject;
 }
 
-void RobotCommunicator::setRobotCommunicationThreadObject(RobotCommunicationThreadInterface *robotCommunication)
+void RobotCommunicator::setRobotCommunicationThreadObject(const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication)
 {
 	if (mRobotCommunicationThreadObject) {
 		mRobotCommunicationThreadObject->allowLongJobs(false);
@@ -76,14 +76,14 @@ void RobotCommunicator::setRobotCommunicationThreadObject(RobotCommunicationThre
 	mRobotCommunicationThreadObject->allowLongJobs();
 	mRobotCommunicationThread.start();
 
-	QObject::connect(mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::connected
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::connected
 			, this, &RobotCommunicator::connected);
-	QObject::connect(mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::disconnected
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::disconnected
 			, this, &RobotCommunicator::disconnected);
-	QObject::connect(mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::response
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::response
 			, this, &RobotCommunicator::response);
-	QObject::connect(mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::errorOccured
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::errorOccured
 			, this, &RobotCommunicator::errorOccured);
-	QObject::connect(mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::messageArrived
+	QObject::connect(&*mRobotCommunicationThreadObject, &RobotCommunicationThreadInterface::messageArrived
 			, this, &RobotCommunicator::messageArrived);
 }

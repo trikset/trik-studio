@@ -37,9 +37,7 @@ Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, cons
 }
 
 Ev3GeneratorPluginBase::~Ev3GeneratorPluginBase()
-{
-	utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance().disconnect();
-	utils::Singleton<communication::UsbRobotCommunicationThread>::instance().disconnect();
+{	
 }
 
 QString Ev3GeneratorPluginBase::kitId() const
@@ -83,7 +81,7 @@ void Ev3GeneratorPluginBase::regenerateExtraFiles(const QFileInfo &newFileInfo)
 	Q_UNUSED(newFileInfo)
 }
 
-communication::Ev3RobotCommunicationThread *Ev3GeneratorPluginBase::currentCommunicator()
+QSharedPointer<communication::Ev3RobotCommunicationThread> Ev3GeneratorPluginBase::currentCommunicator()
 {
 	if (auto robotModel = dynamic_cast<robotModel::Ev3GeneratorRobotModel *>(&mRobotModelManager->model())) {
 		return robotModel->communicator();

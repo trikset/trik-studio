@@ -15,6 +15,7 @@
 #pragma once
 
 #include <ev3Kit/robotModel/ev3RobotModelBase.h>
+#include <QSharedPointer>
 #include "ev3GeneratorBase/ev3GeneratorBaseDeclSpec.h"
 
 namespace ev3 {
@@ -34,7 +35,7 @@ public:
 	/// @param priority A priority of this model over other among their kit.
 	Ev3GeneratorRobotModel(const QString &kitId, const QString &robotId
 			, const QString &name, const QString &friendlyName, int priority
-			, communication::Ev3RobotCommunicationThread &communicator);
+			, const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator);
 	~Ev3GeneratorRobotModel();
 
 	QString name() const override;
@@ -46,13 +47,13 @@ public:
 	int priority() const override;
 
 	/// Returns a pointer to communication thread object of this robot.
-	communication::Ev3RobotCommunicationThread *communicator();
+	QSharedPointer<communication::Ev3RobotCommunicationThread> communicator();
 
 private:
 	const QString mName;
 	const QString mFriendlyName;
 	const int mPriority;
-	communication::Ev3RobotCommunicationThread &mCommunicator;
+	const QSharedPointer<communication::Ev3RobotCommunicationThread> mCommunicator;
 };
 
 }

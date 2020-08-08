@@ -17,6 +17,7 @@
 #include <QtGui/QPixmap>
 
 #include <qrutils/utilsDeclSpec.h>
+#include <qrutils/singleton.h>
 
 class QSvgRenderer;
 class QFileInfo;
@@ -25,10 +26,10 @@ namespace utils {
 
 /// Cache for images that contains them pre-loaded and parsed and is able to quickly draw it on a painter.
 /// Pixmaps and svg images are contained separately as they are rendered differently.
-class QRUTILS_EXPORT ImagesCache
+class QRUTILS_EXPORT ImagesCache: public utils::Singleton<ImagesCache>
 {
 public:
-	static ImagesCache &instance();
+	~ImagesCache() = default;
 
 	/// Draws image with given file name with a given painter in given rectangle. Note that actual file, from which
 	/// an image will be loaded may be different from fileName, as described in selectBestImageFile.
@@ -41,8 +42,8 @@ public:
 	void drawImageWithoutCachingSize(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom);
 
 private:
-	ImagesCache();
-	~ImagesCache();
+	friend utils::Singleton<ImagesCache>;
+	ImagesCache() = default;
 
 	/// Selects "best available" image file, using following rules:
 	/// - if there is .svg file with given name in a directory from filePath, it is used as actual image file.

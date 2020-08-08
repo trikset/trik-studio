@@ -27,7 +27,7 @@ class RealRobotModel : public Ev3RobotModelBase
 
 public:
 	RealRobotModel(const QString &kitId, const QString &robotId
-			, utils::robotCommunication::RobotCommunicationThreadInterface *communicationThread);
+			, const QSharedPointer<utils::robotCommunication::RobotCommunicationThreadInterface> &communicationThread);
 
 	bool needsConnection() const override;
 

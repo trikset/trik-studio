@@ -12,6 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
+#include <QMutex>
+#include <QSharedPointer>
+
 #pragma once
 
 namespace utils {
@@ -22,10 +25,18 @@ class Singleton
 {
 public:
 	/// Creates single instance of some type (given in class template) if it does not exist and returns it.
-	static T &instance()
+	static QSharedPointer<T> instance()
 	{
-		static T result;
-		return result;
+		static QMutex m;
+		QMutexLocker lock(&m);
+		static QWeakPointer<T> instance;
+		if (auto result = instance.lock()) {
+			return result;
+		} else {
+			result = QSharedPointer<T>(new T());
+			instance = result;
+			return result;
+		}
 	}
 };
 
