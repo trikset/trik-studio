@@ -40,6 +40,7 @@ Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
 	, mIsSvg(path.endsWith(".svg"))
 	, mPath(path)
+	, mImagesCache(utils::ImagesCache::instance())
 {
 	if (!memorize) {
 		if (mIsSvg) {
@@ -53,6 +54,7 @@ Image::Image(const QString &path, bool memorize)
 }
 
 Image::Image(const Image &other)
+	: mImagesCache(other.mImagesCache)
 {
 	mExternal = other.mExternal;
 	mIsSvg = other.mIsSvg;
