@@ -40,12 +40,12 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	b2PolygonShape polygonShape;
 	QPolygonF collidingPolygon = mModel->info().collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
-	mPolygon = new b2Vec2[collidingPolygon.size()];
+	mPolygon.reset(new b2Vec2[collidingPolygon.size()]);
 	for (int i = 0; i < collidingPolygon.size(); ++i) {
 		mPolygon[i] = engine->positionToBox2D(collidingPolygon.at(i) - localCenter);
 	}
 
-	polygonShape.Set(mPolygon, collidingPolygon.size());
+	polygonShape.Set(mPolygon.get(), collidingPolygon.size());
 	robotFixture.shape = &polygonShape;
 	robotFixture.density = engine->computeDensity(collidingPolygon, mModel->info().mass());
 	robotFixture.friction = mModel->info().friction();
@@ -71,16 +71,10 @@ Box2DRobot::~Box2DRobot() {
 		mWorld.DestroyJoint(i->joint);
 	}
 
-	for (auto wheel : mWheels) {
-		delete wheel;
-	}
-
-	for (auto sensor : mSensors) {
-		delete sensor;
-	}
+	qDeleteAll(mWheels);
+	qDeleteAll(mSensors);
 
 	mWorld.DestroyBody(mBody);
-	delete[] mPolygon;
 }
 
 void Box2DRobot::stop()

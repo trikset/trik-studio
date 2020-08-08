@@ -27,14 +27,14 @@ ClearEncoderBlock::ClearEncoderBlock(RobotModelInterface &robotModel)
 
 void ClearEncoderBlock::run()
 {
-	for (robotParts::EncoderSensor * const encoder : parsePorts()) {
+	for (const auto encoder : parsePorts()) {
 		encoder->nullify();
 	}
 
 	// Emitting done() immediately will switch current block right during SensorVariablesUpdater
 	// doing his job. This may cause bad side effects.
 	// Without it, clearEncoder effects may be delayed
-	QTimer::singleShot(0, this,  SLOT(doneNextBlock()));
+	QTimer::singleShot(0, this,  &ClearEncoderBlock::doneNextBlock);
 }
 
 void ClearEncoderBlock::doneNextBlock()
@@ -45,7 +45,7 @@ void ClearEncoderBlock::doneNextBlock()
 QMap<PortInfo, DeviceInfo> ClearEncoderBlock::usedDevices()
 {
 	QMap<PortInfo, DeviceInfo> result;
-	for (robotParts::EncoderSensor * const encoder : parsePorts()) {
+	for (const auto encoder : parsePorts()) {
 		result[encoder->port()] = encoder->deviceInfo();
 	}
 
@@ -55,8 +55,8 @@ QMap<PortInfo, DeviceInfo> ClearEncoderBlock::usedDevices()
 QList<robotParts::EncoderSensor *> ClearEncoderBlock::parsePorts()
 {
 	QList<robotParts::EncoderSensor *> result;
-	for (const QString &port : stringProperty("Ports").split(',', QString::SkipEmptyParts)) {
-		robotParts::EncoderSensor * const encoder = RobotModelUtils::findDevice<robotParts::EncoderSensor>(
+	for (const auto &port : stringProperty("Ports").split(',', QString::SkipEmptyParts)) {
+		const auto encoder = RobotModelUtils::findDevice<robotParts::EncoderSensor>(
 				mRobotModel, port.trimmed());
 
 		if (encoder) {

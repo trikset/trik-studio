@@ -14,7 +14,7 @@
         <translation>/* ERREUR SELECTIONNEZ LE TYPE DU CAPTEUR */</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+77"/>
+        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+79"/>
         <source>There is no opened diagram</source>
         <translation>Il n&apos;y a pas de diagramme d&apos;ouvert</translation>
     </message>

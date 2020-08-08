@@ -59,6 +59,8 @@ public:
 			, const utils::ParserErrorReporter &parserErrorReporter
 			, const qReal::Id &diagramId);
 
+	~MasterGeneratorBase();
+
 	void setProjectDir(const QFileInfo &fileInfo);
 
 	/// @warning This method mustn`t be called from constructor. Otherwise
@@ -104,10 +106,10 @@ protected:
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	qrtext::LanguageToolboxInterface &mTextLanguage;
 	qReal::Id mDiagram;
-	GeneratorCustomizer *mCustomizer {};
+	QScopedPointer<GeneratorCustomizer> mCustomizer;
 	PrimaryControlFlowValidator *mValidator {};
-	GotoControlFlowGenerator *mGotoControlFlowGenerator {};  // Takes ownership
-	StructuralControlFlowGenerator *mStructuralControlFlowGenerator {}; // Takes ownership
+	QScopedPointer<GotoControlFlowGenerator> mGotoControlFlowGenerator;
+	QScopedPointer<StructuralControlFlowGenerator> mStructuralControlFlowGenerator;
 	QString mProjectName;
 	QString mProjectDir;
 	int mCurInitialNodeNumber {};

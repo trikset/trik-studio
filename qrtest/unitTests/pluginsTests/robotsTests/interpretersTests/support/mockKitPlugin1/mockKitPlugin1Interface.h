@@ -39,7 +39,7 @@ public:
 	// Transfers ownership.
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			kitBase::robotModel::RobotModelInterface const *model) override;
 
 	QList<qReal::ActionInfo> customActions() override;

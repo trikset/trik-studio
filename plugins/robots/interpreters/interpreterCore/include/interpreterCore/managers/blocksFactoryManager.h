@@ -29,7 +29,7 @@ class BlocksFactoryManager : public BlocksFactoryManagerInterface
 public:
 	~BlocksFactoryManager() override;
 
-	void addFactory(kitBase::blocksBase::BlocksFactoryInterface * const factory
+	void addFactory(const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &factory
 			, const kitBase::robotModel::RobotModelInterface *robotModel = nullptr) override;
 
 	qReal::interpretation::BlockInterface *block(const qReal::Id &element
@@ -44,14 +44,14 @@ public:
 private:
 	/// Provides a list of factories that can create blocks for given robot model (common factory that creates blocks
 	/// for all models, and model-specific factories).
-	QList<kitBase::blocksBase::BlocksFactoryInterface *> factoriesFor(
+	QList<QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> > factoriesFor(
 			const kitBase::robotModel::RobotModelInterface &robotModel) const;
 
 	/// Maps robot model to a set of block factories that can provide blocks for it.
 	// Has ownership over factories.
 	// Does not have ownership over robot models.
 	QMap<const kitBase::robotModel::RobotModelInterface *
-			, kitBase::blocksBase::BlocksFactoryInterface *> mFactories;
+			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>> mFactories;
 
 };
 

@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2020 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,18 @@
 
 #pragma once
 
-#include <kitBase/blocksBase/commonBlocksFactory.h>
+#include <generatorBase/simpleGenerators/bindingGenerator.h>
 
 namespace trik {
-namespace blocks {
+namespace simple {
 
-/// Base class for block factory for all TRIK variants, creates common blocks.
-class TrikBlocksFactoryBase : public kitBase::blocksBase::CommonBlocksFactory
+class PrintTextGenerator : public generatorBase::simple::BindingGenerator
 {
 public:
-	qReal::interpretation::Block *produceBlock(const qReal::Id &element) override;
-	qReal::IdList providedBlocks() const override;
-	qReal::IdList blocksToDisable() const override;
-	qReal::IdList blocksToHide() const override;
+	PrintTextGenerator(const qrRepo::RepoApi &repo
+					   , generatorBase::GeneratorCustomizer &customizer
+					   , const qReal::Id &id
+					   , QObject *parent);
 };
 
 }

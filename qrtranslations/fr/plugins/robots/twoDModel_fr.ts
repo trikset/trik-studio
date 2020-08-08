@@ -538,7 +538,7 @@
 <context>
     <name>twoDModel::view::DetailsTab</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+36"/>
         <source>Display</source>
         <translation>Écran</translation>
     </message>

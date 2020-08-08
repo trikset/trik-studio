@@ -880,6 +880,79 @@
 		}
 	};
 
+	class TrikPrintText : public qReal::NodeElementType
+	{
+	public:
+		explicit TrikPrintText(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("TrikPrintText");
+			setFriendlyName(QObject::tr("Print Text"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("Prints a given line in the specified coordinates and font size on the robot`s screen. The value of 'Text' property is interpreted as a plain text unless 'Evaluate' property is set to true, then it will be interpreted as an expression (that may be useful for example when debugging variables values)."));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 1, 1.2, "XCoordinateText", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(false);
+			label_1->setPlainTextMode(false);
+			label_1->setPrefix(QObject::tr("X:"));
+			addLabel(label_1);
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 1, 1.8, "YCoordinateText", false, 0));
+			label_2->setBackground(Qt::white);
+			label_2->setScalingX(false);
+			label_2->setScalingY(false);
+			label_2->setHard(false);
+			label_2->setPlainTextMode(false);
+			label_2->setPrefix(QObject::tr("Y:"));
+			addLabel(label_2);
+			QSharedPointer<qReal::LabelProperties> label_3(new qReal::LabelProperties(3, 1, 2.4, "PrintText", false, 0));
+			label_3->setBackground(Qt::white);
+			label_3->setScalingX(false);
+			label_3->setScalingY(false);
+			label_3->setHard(false);
+			label_3->setPlainTextMode(false);
+			label_3->setPrefix(QObject::tr("Text:"));
+			addLabel(label_3);
+			QSharedPointer<qReal::LabelProperties> label_4(new qReal::LabelProperties(4, 1, 3, "FontSize", false, 0));
+			label_4->setBackground(Qt::white);
+			label_4->setScalingX(false);
+			label_4->setScalingY(false);
+			label_4->setHard(false);
+			label_4->setPlainTextMode(false);
+			label_4->setPrefix(QObject::tr("Font size:"));
+			addLabel(label_4);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikPrintTextClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("Evaluate", "bool", QString::fromUtf8("false"), QObject::tr("Evaluate"), QObject::tr(""), false);
+			addProperty("FontSize", "string", QObject::tr("20"), QObject::tr("Font size"), QObject::tr(""), false);
+			addProperty("PrintText", "string", QObject::tr("Enter some text here"), QObject::tr("Text"), QObject::tr(""), false);
+			addProperty("Redraw", "bool", QString::fromUtf8("true"), QObject::tr("Redraw"), QObject::tr(""), false);
+			addProperty("XCoordinateText", "string", QObject::tr("1"), QObject::tr("X"), QObject::tr(""), false);
+			addProperty("YCoordinateText", "string", QObject::tr("1"), QObject::tr("Y"), QObject::tr(""), false);
+		}
+	};
+
 	class TrikRemoveFile : public qReal::NodeElementType
 	{
 	public:

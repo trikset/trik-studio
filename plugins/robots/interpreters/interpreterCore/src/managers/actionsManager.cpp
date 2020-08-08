@@ -27,16 +27,16 @@ static const qReal::Id subprogramDiagramType = qReal::Id("RobotsMetamodel", "Rob
 ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelManager &robotModelManager)
 	: mKitPluginManager(kitPluginManager)
 	, mRobotModelManager(robotModelManager)
-	, mRunAction(new QAction(QIcon(":/icons/robots_run.svg"), QObject::tr("Run"), nullptr))
-	, mStopRobotAction(new QAction(QIcon(":/icons/robots_stop.svg"), QObject::tr("Stop robot"), nullptr))
-	, mConnectToRobotAction(new QAction(QIcon(":/icons/robots_connect.svg"), QObject::tr("Connect to robot"), nullptr))
-	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), nullptr)
-	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), nullptr)
-	, mDebugModeAction(new QAction(QIcon(":/icons/main_tabbar_debug.svg"), QObject::tr("Debug"), nullptr))
-	, mEditModeAction(new QAction(QIcon(":/icons/main_tabbar_edit.svg"), QObject::tr("Edit"), nullptr))
-	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), nullptr))
-	, mSeparator1(nullptr)
-	, mSeparator2(nullptr)
+	, mRunAction(new QAction(QIcon(":/icons/robots_run.svg"), QObject::tr("Run"), this))
+	, mStopRobotAction(new QAction(QIcon(":/icons/robots_stop.svg"), QObject::tr("Stop robot"), this))
+	, mConnectToRobotAction(new QAction(QIcon(":/icons/robots_connect.svg"), QObject::tr("Connect to robot"), this))
+	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), this)
+	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), this)
+	, mDebugModeAction(new QAction(QIcon(":/icons/main_tabbar_debug.svg"), QObject::tr("Debug"), this))
+	, mEditModeAction(new QAction(QIcon(":/icons/main_tabbar_edit.svg"), QObject::tr("Edit"), this))
+	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), this))
+	, mSeparator1(this)
+	, mSeparator2(this)
 {
 	initKitPluginActions();
 	giveObjectNames();
@@ -260,7 +260,7 @@ void ActionsManager::initKitPluginActions()
 		kitBase::robotModel::RobotModelUtils::sortRobotModels(robotModels);
 		for (kitBase::robotModel::RobotModelInterface * const robotModel : robotModels) {
 			const QString &text = robotModel->friendlyName();
-			QAction * const fastSelectionAction = new QAction(fastSelectorIcons[robotModel], text, nullptr);
+			QAction * const fastSelectionAction = new QAction(fastSelectorIcons[robotModel], text, group);
 			robotModelMapper->setMapping(fastSelectionAction, robotModel);
 			connect(fastSelectionAction, SIGNAL(triggered()), robotModelMapper, SLOT(map()));
 			fastSelectionAction->setObjectName("switchTo" + kitId + robotModel->name());
@@ -289,7 +289,7 @@ void ActionsManager::initKitPluginActions()
 }
 
 QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &name
-		, const QList<QAction *> &subActions) const
+		, const QList<QAction *> &subActions)
 {
 	if (subActions.isEmpty()) {
 		return nullptr;
@@ -305,9 +305,9 @@ QAction *ActionsManager::produceMenuAction(const QString &kitId, const QString &
 		return result;
 	}
 
-	QAction * const menuAction = new QAction(subActions.first()->icon(), name, nullptr);
+	QAction * const menuAction = new QAction(subActions.first()->icon(), name, this);
 	menuAction->setCheckable(true);
-	menuAction->setMenu(new QMenu);
+	menuAction->setMenu(new QMenu(&mDummyWidget));
 	menuAction->menu()->addActions(subActions);
 
 	auto checkAction = [menuAction, kitId](const QString &name) {

@@ -28,7 +28,7 @@ TrikV62FSharpGeneratorPlugin::TrikV62FSharpGeneratorPlugin()
 					, "TrikV62FSharpGeneratorRobotModel"
 					, tr("Generation (F#)")
 					, 6 /* After Python generator */)
-			, new blocks::TrikV62BlocksFactory()
+			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::TrikV62BlocksFactory())
 			, {":/trikFSharp/templates"})
 	, mModel(static_cast<robotModel::TrikV62GeneratorRobotModel *>(robotModels().first()))
 {

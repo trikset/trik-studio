@@ -32,10 +32,6 @@ DetailsTab::DetailsTab(QWidget *parent)
 	, mMotorsItem(new QTreeWidgetItem(mMotorsRoot))
 	, mPhysicsItem(new QTreeWidgetItem(mPhysicsRoot))
 	, mParamsItem(new QTreeWidgetItem(mParamsRoot))
-	, mDisplay(nullptr)
-	, mDevices(nullptr)
-	, mMotors(nullptr)
-	, mPhysics(nullptr)
 {
 	initItem(mDisplayRoot, tr("Display"), true);
 	initItem(mDevicesRoot, tr("Ports configuration"), true);

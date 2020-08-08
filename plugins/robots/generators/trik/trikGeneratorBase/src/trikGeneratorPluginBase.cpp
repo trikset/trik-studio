@@ -19,7 +19,7 @@
 using namespace trik;
 
 TrikGeneratorPluginBase::TrikGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-		, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory)
+		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory)
 	: mRobotModel(robotModel)
 	, mBlocksFactory(blocksFactory)
 {
@@ -34,7 +34,7 @@ QList<kitBase::robotModel::RobotModelInterface *> TrikGeneratorPluginBase::robot
 	return { mRobotModel.data() };
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *TrikGeneratorPluginBase::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> TrikGeneratorPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)

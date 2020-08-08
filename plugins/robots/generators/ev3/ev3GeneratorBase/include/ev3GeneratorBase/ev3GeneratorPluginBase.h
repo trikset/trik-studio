@@ -53,7 +53,7 @@ public:
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
@@ -66,7 +66,7 @@ protected:
 private:
 	QScopedPointer<robotModel::Ev3GeneratorRobotModel> mUsbRobotModel;
 	QScopedPointer<robotModel::Ev3GeneratorRobotModel> mBluetoothRobotModel;
-	blocks::Ev3BlocksFactory *mBlocksFactory;  // Transfers ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 };
 
 }
