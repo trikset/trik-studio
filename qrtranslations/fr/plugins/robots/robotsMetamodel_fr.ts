@@ -8,7 +8,7 @@
         <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+822"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+884"/>
         <source>X:</source>
         <translation>X :</translation>
     </message>
@@ -116,16 +116,17 @@
         <translation type="vanished">Corps :</translation>
     </message>
     <message>
-        <location line="-266"/>
-        <location line="+453"/>
+        <location line="-328"/>
+        <location line="+141"/>
+        <location line="+374"/>
         <location line="+62"/>
         <location line="+361"/>
         <source>Variable:</source>
         <translation>Variable :</translation>
     </message>
     <message>
-        <location line="-823"/>
-        <location line="+292"/>
+        <location line="-885"/>
+        <location line="+354"/>
         <source>Condition:</source>
         <translation>Condition :</translation>
     </message>
@@ -149,7 +150,8 @@
         <translation type="vanished">Limite de compte tours :</translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="-125"/>
+        <location line="+310"/>
         <source>Text:</source>
         <translation>Texte :</translation>
     </message>
@@ -174,8 +176,8 @@
         <translation>Message :</translation>
     </message>
     <message>
-        <location line="-679"/>
-        <location line="+823"/>
+        <location line="-741"/>
+        <location line="+885"/>
         <source>Expression:</source>
         <translation>Expression :</translation>
     </message>
@@ -283,7 +285,7 @@
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location line="-1291"/>
+        <location line="-1353"/>
         <source>AbstractNode</source>
         <translation>AbstractNode</translation>
     </message>
@@ -299,12 +301,12 @@
     </message>
     <message>
         <location line="+23"/>
-        <location line="+778"/>
+        <location line="+840"/>
         <source>Redraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-767"/>
+        <location line="-829"/>
         <location line="+37"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
@@ -385,7 +387,7 @@
         <translation type="vanished">Rempli</translation>
     </message>
     <message>
-        <location line="+626"/>
+        <location line="+688"/>
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -443,7 +445,7 @@
         <translation type="vanished">Mode</translation>
     </message>
     <message>
-        <location line="-603"/>
+        <location line="-665"/>
         <source>Power (%)</source>
         <translation>Puissance (%)</translation>
     </message>
@@ -473,7 +475,7 @@
         <translation type="vanished">LED</translation>
     </message>
     <message>
-        <location line="+460"/>
+        <location line="+522"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
@@ -561,7 +563,7 @@
         <translation type="vanished">Attendre un capteur tactile</translation>
     </message>
     <message>
-        <location line="-1067"/>
+        <location line="-1129"/>
         <source>End if</source>
         <translation>Fin Si</translation>
     </message>
@@ -620,14 +622,15 @@
     </message>
     <message>
         <location line="+24"/>
-        <location line="+463"/>
+        <location line="+151"/>
+        <location line="+374"/>
         <location line="+414"/>
         <source>Variable</source>
         <translation>Variable</translation>
     </message>
     <message>
-        <location line="-876"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+135"/>
+        <location line="-938"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+138"/>
         <location line="+1"/>
         <location line="+1"/>
         <source>Wait</source>
@@ -635,32 +638,33 @@
     </message>
     <message>
         <location line="-1"/>
-        <location line="+463"/>
+        <location line="+151"/>
+        <location line="+374"/>
         <location line="+307"/>
         <location line="+107"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location line="-865"/>
+        <location line="-927"/>
         <location line="+34"/>
-        <location line="+291"/>
+        <location line="+353"/>
         <source>Condition</source>
         <translation>Condition</translation>
     </message>
     <message>
-        <location line="-323"/>
+        <location line="-385"/>
         <source>Separates program execution in correspondece with the given condition. The &apos;Condition&apos; parameter value must be some boolean expression that will determine subsequent program execution line. This block must have two outgoing links, at least one of them must have &apos;Guard&apos; parameter set to &apos;true&apos; or &apos;false&apos;. The execution will be proceed trough the link marked with the guard corresponding to &apos;Condition&apos; parameter of the block.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+32"/>
-        <location line="+291"/>
+        <location line="+353"/>
         <source>x &gt; 0</source>
         <translation>x &gt; 0</translation>
     </message>
     <message>
-        <location line="-280"/>
+        <location line="-342"/>
         <source>Initial Node</source>
         <translation>Nœud initial</translation>
     </message>
@@ -671,6 +675,21 @@
     </message>
     <message>
         <location line="+41"/>
+        <source>User Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Sets a variable value to a user value from input dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Default:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
         <source>Join</source>
         <translation>Jonction</translation>
     </message>
@@ -842,7 +861,7 @@
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-28"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Le diagramme de comportement du robot</translation>
     </message>
@@ -895,8 +914,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-825"/>
-        <location line="+856"/>
+        <location line="-887"/>
+        <location line="+918"/>
         <source>Expression</source>
         <translation>Expression</translation>
     </message>
@@ -1167,6 +1186,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
+        <location line="+1"/>
         <source>Algorithms</source>
         <translation>Algorithmes</translation>
     </message>
@@ -1194,12 +1214,22 @@
         <translation type="obsolete">Corps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
         <translation type="unfinished">Expression</translation>
     </message>
     <message>
-        <location line="+568"/>
+        <location line="+201"/>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Text</source>
+        <translation type="unfinished">Texte</translation>
+    </message>
+    <message>
+        <location line="+428"/>
         <source>Variable</source>
         <translation type="unfinished">Variable</translation>
     </message>
