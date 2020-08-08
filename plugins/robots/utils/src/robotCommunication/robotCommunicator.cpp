@@ -63,7 +63,8 @@ QSharedPointer<RobotCommunicationThreadInterface> RobotCommunicator::currentComm
 	return mRobotCommunicationThreadObject;
 }
 
-void RobotCommunicator::setRobotCommunicationThreadObject(const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication)
+void RobotCommunicator::setRobotCommunicationThreadObject(
+		const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication)
 {
 	if (mRobotCommunicationThreadObject) {
 		mRobotCommunicationThreadObject->allowLongJobs(false);
