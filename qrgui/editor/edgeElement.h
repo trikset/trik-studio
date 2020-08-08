@@ -215,8 +215,8 @@ private:
 	NodeElement *mSrc;
 	NodeElement *mDst;
 
-	LineFactory *mLineFactory; // Takes ownership
-	LineHandler *mHandler; // Takes ownership
+	QScopedPointer<LineFactory> mLineFactory;
+	QScopedPointer<LineHandler> mHandler;
 
 	qreal mPortFrom;
 	qreal mPortTo;

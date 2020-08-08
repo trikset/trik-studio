@@ -38,7 +38,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NullKitInterpreterPlugin::robo
 	return QList<kitBase::robotModel::RobotModelInterface *>() << &mRobotModel;
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *NullKitInterpreterPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NullKitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)

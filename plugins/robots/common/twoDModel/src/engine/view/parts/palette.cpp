@@ -22,7 +22,7 @@ using namespace twoDModel::view;
 
 Palette::Palette(QWidget *parent)
 	: QWidget(parent)
-	, mCursorAction(new QAction(QIcon(":/icons/2d_none.png"), tr("Cursor (N)"), nullptr))
+	, mCursorAction(new QAction(QIcon(":/icons/2d_none.png"), tr("Cursor (N)"), this))
 	, mGroup(new QActionGroup(this))
 	, mToolBar(new QToolBar(this))
 {

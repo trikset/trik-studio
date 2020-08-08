@@ -93,8 +93,8 @@ private slots:
 	void updateValues();
 
 private:
-	Ui::SensorsGraph *mUi;  // Has ownsrship
-	SensorViewer *mPlotFrame {};  // Has ownership
+	QScopedPointer<Ui::SensorsGraph> mUi;
+	QScopedPointer<SensorViewer> mPlotFrame;
 	QVBoxLayout mToolLayout;
 	QToolButton mStopButton;
 	QToolButton mStartButton;
@@ -103,7 +103,7 @@ private:
 	QToolButton mResetButton;
 	QToolButton mSaveButton;
 	QComboBox mSlotComboBox;
-	AbstractTimer *mUpdateTimer;  // Has ownership
+	QScopedPointer<AbstractTimer> mUpdateTimer;
 	const qrtext::DebuggerInterface &mParser;
 	struct TrackObject;
 	QList<TrackObject> mWatchList;

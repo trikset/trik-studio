@@ -26,3 +26,8 @@ void Logger::addLogTarget(const QString &path, int maxSize, int maxOldLogsCount,
 	QsLogging::Logger::instance().setLoggingLevel(QsLogging::TraceLevel);
 	QsLogging::Logger::instance().addDestination(destination);
 }
+
+Logger::~Logger()
+{
+	QsLogging::Logger::destroyInstance();
+}

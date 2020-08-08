@@ -65,34 +65,34 @@ protected:
 	void leaveEvent(QEvent *);
 	void mouseDoubleClickEvent(QMouseEvent *event);
 
-	void initGraphicsOutput();
-
 private slots:
 	void visualTimerEvent();
 
 private:
-	QGraphicsScene *mScene {};  // Has ownership
-	AbstractTimer *mVisualTimer {};  // Has ownership
-	KeyPoint *mMainPoint {};  // Has ownership
-	KeyPoint *mMarker {};  // Has ownership
-	PointsQueueProcessor *mPointsDataProcessor {};  // Has ownership
-	QBrush mPenBrush;
+	void initGraphicsOutput();
+
+	QScopedPointer<QGraphicsScene> mScene;
+	QScopedPointer<AbstractTimer> mVisualTimer;
+	KeyPoint mMainPoint { Qt::yellow };
+	KeyPoint mMarker { Qt::red };
+	QScopedPointer<PointsQueueProcessor> mPointsDataProcessor;
+	QBrush mPenBrush { Qt::yellow };
 
 	/// Output update delay in ms
-	int mFpsInterval;
+	int mFpsInterval { 50 };
 	/// Time in milliseconds
-	int mAutoScaleInterval;
+	int mAutoScaleInterval { 3000 };
 	/// Update interval of current value
-	int mUpdateTextInfoInterval;
+	int mUpdateTextInfoInterval { 500 };
 	/// Shift in pixels each frame
 	static const int stepSize = 2;
 	/// Zoom coefficent
 	static const int zoomRate = 2;
 
-	int mScaleCoefficient;
-	int mAutoScaleTimer;
-	int mUpdateCurrValueTimer;
-	qreal mOutputValue;
+	int mScaleCoefficient { 0 };
+	int mAutoScaleTimer { 0 };
+	int mUpdateCurrValueTimer { 0 };
+	qreal mOutputValue { 0.0 };
 };
 
 }

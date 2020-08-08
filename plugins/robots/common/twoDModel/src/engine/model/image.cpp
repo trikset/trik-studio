@@ -180,7 +180,7 @@ void Image::setPath(const QString &path)
 	}
 }
 
-void Image::draw(QPainter &painter, const QRect &rect, qreal zoom)
+void Image::draw(QPainter &painter, const QRect &rect, qreal zoom) const
 {
 	if (mExternal && !mPath.isEmpty()) {
 		utils::ImagesCache::instance().drawImageWithoutCachingSize(mPath, painter, rect, zoom);

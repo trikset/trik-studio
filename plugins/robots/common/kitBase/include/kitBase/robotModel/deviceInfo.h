@@ -86,6 +86,9 @@ public:
 	/// Returns true if device is empty (instantiated with DeviceInfo() constructor).
 	bool isNull() const;
 
+	/// Cleanup resources
+	static void release();
+
 private:
 	/// Trait that tells if the Object has a Q_OBJECT macro.
 	template <typename Object>

@@ -47,12 +47,13 @@ RobotsPluginFacade::RobotsPluginFacade()
 
 RobotsPluginFacade::~RobotsPluginFacade()
 {
-	qDeleteAll(mInterpreters.values().toSet());	
+	qDeleteAll(mInterpreters.values().toSet());
 	for (auto &&kitId : mKitPluginManager.kitIds()) {
 		for (auto *kit : mKitPluginManager.kitsById(kitId)) {
 			kit->release();
 		}
 	}
+	kitBase::robotModel::DeviceInfo::release();
 }
 
 void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
@@ -82,7 +83,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	mParser.reset(new textLanguage::RobotsBlockParser(mRobotModelManager
 			, [this]() { return mProxyInterpreter.timeElapsed(); }));
 
-	kitBase::blocksBase::BlocksFactoryInterface * const coreFactory = new coreBlocks::CoreBlocksFactory();
+	auto coreFactory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new coreBlocks::CoreBlocksFactory());
 	coreFactory->configure(configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, mRobotModelManager
@@ -99,7 +100,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mEventsForKitPlugin
 			, mRobotModelManager));
 
-	interpreter::BlockInterpreter *interpreter = new interpreter::BlockInterpreter(
+	auto *interpreter = new interpreter::BlockInterpreter(
 			configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, configurer.mainWindowInterpretersInterface()
@@ -383,18 +384,18 @@ void RobotsPluginFacade::initSensorWidgets()
 	hideVariables();
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this, hideVariables);
 
-	mGraphicsWatcherManager = new GraphicsWatcherManager(*mParser, mRobotModelManager, this);
+	mGraphicsWatcherManager.reset(new GraphicsWatcherManager(*mParser, mRobotModelManager, this));
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started
-			, mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
+			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped
-			, mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
-	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, mGraphicsWatcherManager, [=]() {
+			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, &*mGraphicsWatcherManager, [=]() {
 		mActionsManager.runAction().setVisible(false);
 		mActionsManager.stopRobotAction().setVisible(mRobotModelManager.model().interpretedModel());
 	});
 	connect(&mProxyInterpreter
 			, &kitBase::InterpreterInterface::stopped
-			, mGraphicsWatcherManager
+			, &*mGraphicsWatcherManager
 			, [=] () {
 		if (!dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab())) {
 			// since userStop fires on any tab/model switch even when the code tab is opened
@@ -416,7 +417,7 @@ void RobotsPluginFacade::initSensorWidgets()
 
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mRobotSettingsPage);
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mDockDevicesConfigurer.data());
-	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mGraphicsWatcherManager);
+	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mGraphicsWatcherManager.data());
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mParser.data());
 }
 
@@ -448,8 +449,8 @@ void RobotsPluginFacade::initFactoriesFor(const QString &kitId
 {
 	// Pulling each robot model to each kit plugin with same ids. We need it for supporting
 	// plugin-based blocks set extension for concrete roobt model.
-	for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
-		kitBase::blocksBase::BlocksFactoryInterface * const factory = kit->blocksFactoryFor(model);
+	for (auto &&kit : mKitPluginManager.kitsById(kitId)) {
+		const auto &factory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(kit->blocksFactoryFor(model));
 		if (factory) {
 			/// @todo Non-obvious dependency on mParser, which may or may not be constructed here.
 			///       More functional style will be helpful here.

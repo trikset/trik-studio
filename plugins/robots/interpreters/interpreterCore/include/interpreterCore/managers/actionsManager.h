@@ -116,7 +116,7 @@ private:
 	void giveObjectNames();
 
 	/// Creates action with menu that lets switching between robot models.
-	QAction *produceMenuAction(const QString &kitId, const QString &name, const QList<QAction *> &subActions) const;
+	QAction *produceMenuAction(const QString &kitId, const QString &name, const QList<QAction *> &subActions);
 
 	/// Plugins can have their own custom actions, we need to get them from KitPluginManager.
 	KitPluginManager &mKitPluginManager;
@@ -174,6 +174,9 @@ private:
 	/// Main window interface object, to ask about currently open tab and so on.
 	// Does not have ownership
 	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterpretersInterface = nullptr;
+
+	// Is used to be a default parent for menu's
+	QWidget mDummyWidget;
 };
 
 }

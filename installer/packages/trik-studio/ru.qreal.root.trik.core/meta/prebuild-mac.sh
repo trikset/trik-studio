@@ -11,7 +11,6 @@ cp -fpR $BIN_DIR/librobots-trik-qts-generator-library*.dylib                    
 cp -fpR $BIN_DIR/librobots-trik-generator-base*.dylib                                  "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/librobots-trik-kit*.dylib                                             "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/librobots-trik-kit-interpreter-common*.dylib                          "$BUNDLE_CONTENTS/Lib"
-rsync -af "$BIN_DIR"/libtrikPythonQt{,_QtAll}-Qt*-Python*.dylib                	"$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libtrik*.dylib                                            	          "$BUNDLE_CONTENTS/Lib"
 
 PYTHON_LIBNAME=$(python3-config --prefix)/Python

@@ -31,7 +31,7 @@ TrikV62KitInterpreterPlugin::TrikV62KitInterpreterPlugin()
 {
 	const auto realRobotModel = new robotModel::real::RealRobotModel(kitIdString, "trikKitRobot");
 	const auto twoDRobotModel = new robotModel::twoD::TwoDRobotModel(*realRobotModel);
-	const auto blocksFactory = new blocks::TrikV62BlocksFactory();
+	const auto blocksFactory = QSharedPointer<blocks::TrikV62BlocksFactory>(new blocks::TrikV62BlocksFactory());
 
 	initKitInterpreterPluginBase(realRobotModel, twoDRobotModel, blocksFactory);
 

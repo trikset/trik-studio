@@ -15,6 +15,7 @@
 #pragma once
 
 #include <trikQtsGeneratorLibrary/trikQtsGeneratorPluginBase.h>
+#include <trikKit/blocks/trikV62BlocksFactory.h>
 
 namespace trik {
 

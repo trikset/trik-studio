@@ -11,7 +11,7 @@ In background mode the session will be terminated just after the execution ended
         <translation>Émule le comportement du robot sur le modèle 2D TRIK Studio séparément de l&apos;environnement de programmation. Le fichier .qrs sera interprété comme si le bouton &apos;Executer&apos; était appuyé dans TRIK Studio.</translation>
     </message>
     <message>
-        <location line="+71"/>
+        <location line="+72"/>
         <source>Save file to be interpreted.</source>
         <translation>Le fichier de sauvegarde à interpréter.</translation>
     </message>

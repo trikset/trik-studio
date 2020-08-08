@@ -80,7 +80,7 @@ private:
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
 	b2World &mWorld; // Doesn't take ownership
 
-	b2Vec2 *mPolygon; // Takes ownership
+	QScopedArrayPointer<b2Vec2> mPolygon; // Takes ownership
 
 	bool mIsStopping = false;
 

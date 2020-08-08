@@ -26,11 +26,11 @@ GridParameters::GridParameters(QWidget *parent)
 {
 	QHBoxLayout *layout = new QHBoxLayout(this);
 
-	mShowGridCheckBox = new QCheckBox;
+	mShowGridCheckBox = new QCheckBox(this);
 	mShowGridCheckBox->setText(tr("Grid"));
 	mShowGridCheckBox->setTristate(false);
 
-	mCellSize = new QSlider;
+	mCellSize = new QSlider(this);
 	mCellSize->setOrientation(Qt::Horizontal);
 	mCellSize->setMinimum(50);
 	mCellSize->setMaximum(200);

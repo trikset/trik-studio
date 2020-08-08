@@ -7,6 +7,7 @@ stages:
   - lint
   - build
   - installer
+  - test
 
 env:
   global:
@@ -20,7 +21,7 @@ env:
     - BUILD_TIMEOUT=2400
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
-    - ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests && ./trik-v62-qts-generator-tests && ./robots_utils_unittests && ./run-simulator-tests.sh"
+    - ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests && ./trik-v62-qts-generator-tests && ./robots_utils_unittests && env ASAN_OPTIONS=detect_leaks=0 ./run-simulator-tests.sh"
     - QMAKE_EXTRA="CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
     - TRIK_QT="$HOME/TRIK_Qt"
     - secure: "Djp1JuoB/dDxIQwmYfaJIflulGaZk69djacFE4L/ippcFfcN9As/dzTvBHjHNV2urZoNGAH5iuIGgX0b6aMKIzQRcGbLOrr7yx3SiT/hJ/sh6tnDoiz6kVDiq6Nubf+Mpvgjbm3wuseqcdK4LzHLVv4bZh7cB+JPG4x5PndbD2RyaCoSwdqsZ+fZj0ixteVsGrexSW/w4ZPiAtTfxsRKYJmivLl3jQNm6b0g3AEr37BO/M88xSaECa3WagR6bSgWlNqhftBq51Qk/242LIhLKlLEDLNr4zj04SctO+dZQqT8T99REihHfgbzYg+oFG2/M4fpkxsHykKG8t+Ssgx6iuIMwP8nI/wH6zY68xsmLaMR0rXT8gRxXz2w6z1xwQlXbcRYTWH/PKrLFwIN4d+//GzHHnsh/e6TM6T5pv8t704wmcCer1MbHbHqfRUjK3CAKE62HzsHh4En1PmFsW5kCedmDwTvMvTMiwR7Sru0TrUJ4ldXXbIcfGwisJfhntUQ53eWsN0uZ0FjfZqLQtGEDpn4m+WZwf3cMXKicX18mGXeRsnEOOxK/b62qBTh+hBK+3li69jflVqJJzWqVa4GDkL10OgW5hk/IHCDiTPLqeg/6eCefZFn7FcT4iRdG5CzROfXY5Ep0Gf/ia+uBZBpvlQMQ84/WBLMhgHXGCJGwqU="
@@ -84,6 +85,18 @@ matrix:
       name: "macOS release installer"
       env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
 
+    - stage: test
+      dist: trusty
+      before_install:
+      - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 762E3157
+      install:
+      - sudo apt-get -y install p7zip-full libxkbcommon-x11-0
+      - sudo add-apt-repository -y ppa:deadsnakes/ppa
+      - sudo apt update
+      - sudo apt-get install -y --no-install-recommends python3.7
+      script:
+      - ./buildScripts/travis/run_clean_env_test.sh
+
 before_install:
   - if [[ $TRAVIS_OS_NAME  == osx ]] ; then [[ -n ${TRIK_PYTHON3_VERSION_MINOR:-} ]] || export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')" ; fi
   - if ./buildScripts/travis/has_only_skipped_files.sh ; then echo "Triggering early terminate..." ; set -xo functrace ; travis_terminate 0 ; fi
@@ -103,8 +116,8 @@ script:
   - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - export TIMEOUT=false
   - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
+  - if $INSTALLER ; then ./buildScripts/travis/test.sh ; fi
   - if $INSTALLER ; then ./buildScripts/travis/build_installer.sh ; fi
-  - ./buildScripts/travis/test.sh
 
 after_script:
   - ./buildScripts/travis/after_script.sh

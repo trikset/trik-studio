@@ -132,7 +132,7 @@ private:
 
 	QScopedPointer<kitBase::DevicesConfigurationWidget> mDockDevicesConfigurer;
 	utils::WatchListWindow *mWatchListWindow {};  // Does not have ownership
-	GraphicsWatcherManager *mGraphicsWatcherManager {};  // Has ownership
+	QScopedPointer<GraphicsWatcherManager> mGraphicsWatcherManager;
 	BlocksFactoryManager mBlocksFactoryManager;
 	kitBase::EventsForKitPluginInterface mEventsForKitPlugin;
 	PaletteUpdateManager *mPaletteUpdateManager {};  // Has ownership via Qt paren-child system

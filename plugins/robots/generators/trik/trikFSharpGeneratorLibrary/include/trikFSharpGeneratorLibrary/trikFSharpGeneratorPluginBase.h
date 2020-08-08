@@ -44,7 +44,7 @@ class ROBOTS_TRIK_FSHARP_GENERATOR_LIBRARY_EXPORT TrikFSharpGeneratorPluginBase 
 
 public:
 	TrikFSharpGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-				, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
+				, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 				, const QStringList &pathsToTemplates);
 
 	~TrikFSharpGeneratorPluginBase() override;

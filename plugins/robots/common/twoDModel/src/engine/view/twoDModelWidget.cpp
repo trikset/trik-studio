@@ -75,8 +75,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
 	, mModel(model)
-	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget())
-	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget())
+	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
+	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mCurrentSpeed(defaultSpeedFactorIndex)
 {
 	setWindowIcon(QIcon(":/icons/2d-model.svg"));

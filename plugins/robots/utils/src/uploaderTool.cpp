@@ -34,7 +34,7 @@ UploaderTool::UploaderTool(
 		, const std::function<QString()> &robotIpGetter
 		)
 	: mMainWindowInterface(nullptr)
-	, mAction(new QAction(QIcon(icon), actionName, nullptr))
+	, mAction(new QAction(QIcon(icon), actionName, this))
 	, mCommands(commands)
 	, mStartedMessage(startedMessage)
 	, mRobotIpGetter(robotIpGetter)

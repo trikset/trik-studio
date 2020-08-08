@@ -29,7 +29,7 @@ using namespace twoDModel::engine;
 TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotModel &robotModel)
 	: mRobotModelName(robotModel.name())
 	, mModel(new model::Model())
-	, mView(new view::TwoDModelWidget(*mModel))
+	, mView(new view::TwoDModelWidget(*mModel, nullptr)) // parent widget is set in the `init` method later
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView.data()))
 {
@@ -53,6 +53,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 {
 	mModel->init(*interpretersInterface.errorReporter(), interpreterControl);
 	dockInterface.registerEditor(*mView);
+	mView->setParent(dockInterface.windowWidget());
 	mView->setController(controller);
 
 	const auto onActiveTabChanged = [this](const qReal::TabInfo &info) {

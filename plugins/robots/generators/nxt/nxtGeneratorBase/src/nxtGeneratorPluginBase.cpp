@@ -42,7 +42,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NxtGeneratorPluginBase::robotM
 	return { mRobotModel.data() };
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *NxtGeneratorPluginBase::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NxtGeneratorPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)

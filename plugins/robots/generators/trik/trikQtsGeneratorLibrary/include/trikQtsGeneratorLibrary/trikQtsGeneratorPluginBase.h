@@ -50,7 +50,7 @@ class TrikQtsGeneratorPluginBase : public TrikGeneratorPluginBase
 
 public:
 	TrikQtsGeneratorPluginBase(trik::robotModel::TrikRobotModelBase * const robotModel
-			, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
+			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 			, const QStringList &pathsToTemplates);
 
 	~TrikQtsGeneratorPluginBase() override;

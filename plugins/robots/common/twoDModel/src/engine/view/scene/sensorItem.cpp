@@ -43,7 +43,7 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 	, mImageRect(imageRect.isEmpty() ? this->imageRect() : imageRect)
 	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift
 			, selectionDrift, selectionDrift))
-	, mImage(QImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage))
+	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, false)
 	, mPortItem(new PortItem(port))
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
@@ -67,7 +67,7 @@ void SensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *sty
 	painter->setRenderHints(painter->renderHints()
 			| QPainter::SmoothPixmapTransform
 			| QPainter::HighQualityAntialiasing);
-	painter->drawImage(mImageRect, mImage);
+	mImage.draw(*painter, mImageRect.toRect());
 	painter->restore();
 }
 
