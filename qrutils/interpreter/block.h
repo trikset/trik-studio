@@ -165,6 +165,8 @@ protected:
 	/// Returns true, if there were parser/interpreter errors on last eval() call.
 	bool errorsOccured() const;
 
+	bool isCorrectBlock();
+
 	/// @todo: there is no such things as protected fields. State of a class shall not be directly available to
 	/// descendants.
 	qReal::Id mNextBlockId;

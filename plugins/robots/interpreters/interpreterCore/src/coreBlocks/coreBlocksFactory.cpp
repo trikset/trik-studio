@@ -20,6 +20,7 @@
 #include "details/timerBlock.h"
 #include <qrutils/interpreter/blocks/functionBlock.h>
 #include <qrutils/interpreter/blocks/variableInitBlock.h>
+#include <qrutils/interpreter/blocks/inputBlock.h>
 #include <qrutils/interpreter/blocks/randomInitBlock.h>
 #include <qrutils/interpreter/blocks/emptyBlock.h>
 #include <qrutils/interpreter/blocks/loopBlock.h>
@@ -81,6 +82,8 @@ qReal::interpretation::Block *CoreBlocksFactory::produceBlock(const qReal::Id &e
 		return new qReal::interpretation::blocks::FunctionBlock();
 	} else if (elementMetatypeIs(element, "VariableInit")) {
 		return new qReal::interpretation::blocks::VariableInitBlock();
+	} else if (elementMetatypeIs(element, "Input")) {
+		return new qReal::interpretation::blocks::InputBlock();
 	} else if (elementMetatypeIs(element, "Randomizer")) {
 		return new kitBase::blocksBase::common::RandomInitBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "PrintText")) {
@@ -117,6 +120,7 @@ qReal::IdList CoreBlocksFactory::providedBlocks() const
 		, id("Subprogram")
 		, id("Function")
 		, id("VariableInit")
+		, id("Input")
 		, id("Randomizer")
 		, id("ClearScreen")
 		, id("PrintText")
@@ -129,10 +133,13 @@ qReal::IdList CoreBlocksFactory::blocksToDisable() const
 {
 	qReal::IdList result;
 	auto robotModelName = mRobotModelManager->model().name();
-	if (!robotModelName.contains("TwoD") && !robotModelName.contains("TrikV62")) {
-		result
-				<< id("MarkerDown")
-				<< id("MarkerUp");
+	if (!robotModelName.contains("TwoD")) {
+		result << id("Input");
+		if (!robotModelName.contains("TrikV62")) {
+			result
+					<< id("MarkerDown")
+					<< id("MarkerUp");
+		}
 	}
 
 	return result;
