@@ -37,18 +37,9 @@ Image::Image(const QString &id)
 
 Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
-	, mIsSvg(path.endsWith(".svg"))
-	, mPath(path)
+	, mImageId(QUuid::createUuid().toString())
 {
-	if (!memorize) {
-		if (mIsSvg) {
-			mSvgRenderer.reset(new QSvgRenderer(path));
-		} else {
-			mImage.reset(new QImage(path));
-		}
-	}
-
-	mImageId = QUuid::createUuid().toString();
+	setPath(path);
 }
 
 Image::Image(const Image &other)
