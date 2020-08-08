@@ -92,7 +92,7 @@
         <translation>Целичисленное деление на ноль</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+569"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+570"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
@@ -212,7 +212,7 @@
         <translation>Обнаружен разрыв потока управления, исполнение завершено</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+20"/>
         <source>Too many outgoing links</source>
         <translation>Слишком много исходящих связей</translation>
     </message>
@@ -227,8 +227,8 @@
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
     <message>
-        <location line="-19"/>
-        <location line="+85"/>
+        <location line="-27"/>
+        <location line="+93"/>
         <source>Block has disappeared!</source>
         <translation>Блок исчез!</translation>
     </message>
@@ -343,6 +343,59 @@
     <message>
         <source>There must be a link with property &quot;Guard&quot; set to one of the conditions</source>
         <translation type="vanished">Должна быть связь со свойством &quot;Условие&quot; установленным в одно из условий</translation>
+    </message>
+</context>
+<context>
+    <name>qReal::interpretation::blocks::InputBlock</name>
+    <message>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+27"/>
+        <source>Input</source>
+        <translation>Ввод</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Input value for %1:</source>
+        <translation>Введите значение для %1:</translation>
+    </message>
+    <message>
+        <location line="+77"/>
+        <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
+        <translation>Нет исходящих связей. Пожалуйста, подключите этот блок к чему-нибудь или используйте блок &quot;Конец&quot;, чтобы завершить выполнение программы</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>There should be a maximum of TWO links outgoing from input block</source>
+        <translation>От блока ввода должно исходить не более ДВУХ связей</translation>
+    </message>
+    <message>
+        <location line="-61"/>
+        <source>Outgoing link is not connected</source>
+        <translation>Исходящая связь ни к чему не подключена</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>cancel</source>
+        <translation>отмена</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Two links marked with &quot;cancel&quot; found</source>
+        <translation>Обе связи помечены условием &quot;cancel&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one of the two links must be marked with &quot;cancel&quot;</source>
+        <translation>Должна быть как минимум одна связь из двух с маркером &quot;cancel&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one link must be not marked with &quot;cancel&quot;</source>
+        <translation>Хотя бы одна связь должна быть не с маркером &quot;cancel&quot;</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>You must input some value!</source>
+        <translation>Вы должны ввести какое-нибудь значение!</translation>
     </message>
 </context>
 <context>

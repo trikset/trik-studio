@@ -38,36 +38,13 @@ Image::Image(const QString &id)
 
 Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
-	, mIsSvg(path.endsWith(".svg"))
-	, mPath(path)
+	, mImageId(QUuid::createUuid().toString())
 	, mImagesCache(utils::ImagesCache::instance())
 {
-	if (!memorize) {
-		if (mIsSvg) {
-			mSvgRenderer.reset(new QSvgRenderer(path));
-		} else {
-			mImage.reset(new QImage(path));
-		}
-	}
-
-	mImageId = QUuid::createUuid().toString();
+	setPath(path);
 }
 
-Image::Image(const Image &other)
-	: mImagesCache(other.mImagesCache)
-{
-	mExternal = other.mExternal;
-	mIsSvg = other.mIsSvg;
-	mPath = other.mPath;
-	mImage.reset(other.mImage.data() && !mIsSvg ? new QImage(*other.mImage) : nullptr);
-	mSvgBytes = other.mSvgBytes;
-	mSvgRenderer.reset(mIsSvg ? new QSvgRenderer(mSvgBytes) : nullptr);
-	mImageId = other.mImageId;
-}
-
-Image::~Image()
-{
-}
+Image::~Image() = default;
 
 Image *Image::deserialize(const QDomElement &element)
 {
@@ -203,25 +180,4 @@ void Image::draw(QPainter &painter, const QRect &rect, qreal zoom) const
 QString Image::imageId() const
 {
 	return mImageId;
-}
-
-bool Image::operator==(const Image &other) const
-{
-	return other.mPath == mPath;
-}
-
-bool Image::operator!=(const Image &other) const
-{
-	return !(other == *this);
-}
-
-Image &Image::operator=(const Image &right)
-{
-	mExternal = right.mExternal;
-	mIsSvg = right.mIsSvg;
-	mPath = right.mPath;
-	mImage.reset(!right.mImage.isNull() && !mIsSvg ? new QImage(*right.mImage) : nullptr);
-	mSvgBytes = right.mSvgBytes;
-	mSvgRenderer.reset(mIsSvg ? (mExternal ? new QSvgRenderer(mPath) : new QSvgRenderer(mSvgBytes)) : nullptr);
-	return *this;
 }

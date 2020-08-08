@@ -88,7 +88,7 @@
         <translation>Division entière par zéro</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+569"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+570"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <location line="+5"/>
-        <location line="+85"/>
+        <location line="+93"/>
         <source>Block has disappeared!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -251,6 +251,67 @@
         <location line="+7"/>
         <source>There must be at least one link with &quot;true&quot; or &quot;false&quot; marker on it</source>
         <translation>Il doit y exister au moins un lien marqué comme &quot;vrai&quot; ou &quot;faux&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>qReal::interpretation::blocks::InputBlock</name>
+    <message>
+        <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+27"/>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Input value for %1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control flow break detected, stopping</source>
+        <translation type="obsolete">Une pause de flux de contrôle détecté, arrêt en cours</translation>
+    </message>
+    <message>
+        <location line="+77"/>
+        <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
+        <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>There should be a maximum of TWO links outgoing from input block</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-61"/>
+        <source>Outgoing link is not connected</source>
+        <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Two links marked with &quot;cancel&quot; found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one of the two links must be marked with &quot;cancel&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>At least one link must be not marked with &quot;cancel&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Two links marked with &apos;false&apos; found</source>
+        <translation type="obsolete">Deux liens marqués comme &apos;false&apos; sont détectés</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>You must input some value!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -424,10 +424,9 @@ QString GeneratorFactoryBase::isrHooksCode()
 
 QMap<PortInfo, DeviceInfo> GeneratorFactoryBase::currentConfiguration() const
 {
-	const Id logicalId = mRepo.logicalId(mDiagram);
-	const QString configuration = mRepo.property(logicalId, "devicesConfiguration").toString();
+	auto worldModel = mRepo.metaInformation("worldModel").toString();
 	QMap<PortInfo, DeviceInfo> result =
-			RobotModelUtils::deserialize(configuration)[mRobotModelManager.model().robotId()];
+			RobotModelUtils::deserializeFromWorldModel(worldModel)[mRobotModelManager.model().robotId()];
 	// At the moment we have sensors configuration from widget-configurer. We must also add here non-configurable
 	// by user devices (like encoders, displays and so on).
 	for (const PortInfo &port : mRobotModelManager.model().availablePorts()) {

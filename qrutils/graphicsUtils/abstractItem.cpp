@@ -64,6 +64,7 @@ void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setPen(mPen);
 	painter->setBrush(mBrush);
+	painter->setRenderHint(QPainter::Antialiasing);
 	drawItem(painter, option, widget);
 	if (option->state & (QStyle::State_Selected | QStyle::State_MouseOver)) {
 		painter->save();

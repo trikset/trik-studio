@@ -9,7 +9,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+486"/>
-        <location line="+292"/>
+        <location line="+354"/>
         <source>Condition:</source>
         <translation>Условие:</translation>
     </message>
@@ -148,8 +148,8 @@
         <translation type="vanished">Громкость:</translation>
     </message>
     <message>
-        <location line="-311"/>
-        <location line="+823"/>
+        <location line="-373"/>
+        <location line="+885"/>
         <source>Expression:</source>
         <translation>Выражение:</translation>
     </message>
@@ -182,8 +182,9 @@
         <translation type="vanished">Датчик линии в переменную</translation>
     </message>
     <message>
-        <location line="-778"/>
-        <location line="+453"/>
+        <location line="-840"/>
+        <location line="+141"/>
+        <location line="+374"/>
         <location line="+62"/>
         <location line="+361"/>
         <source>Variable:</source>
@@ -194,7 +195,8 @@
         <translation type="vanished">Имя файла:</translation>
     </message>
     <message>
-        <location line="-471"/>
+        <location line="-781"/>
+        <location line="+310"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
@@ -351,12 +353,12 @@
         <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="-815"/>
+        <location line="-877"/>
         <source>Wait:</source>
         <translation>Дождаться нажатия:</translation>
     </message>
     <message>
-        <location line="+168"/>
+        <location line="+230"/>
         <location line="+450"/>
         <source>Thread:</source>
         <translation>Задача:</translation>
@@ -443,7 +445,7 @@
         <translation>Значение:</translation>
     </message>
     <message>
-        <location line="-1291"/>
+        <location line="-1353"/>
         <source>AbstractNode</source>
         <translation>Базовый блок</translation>
     </message>
@@ -459,12 +461,12 @@
     </message>
     <message>
         <location line="+23"/>
-        <location line="+778"/>
+        <location line="+840"/>
         <source>Redraw</source>
         <translation>Обновить картинку</translation>
     </message>
     <message>
-        <location line="-767"/>
+        <location line="-829"/>
         <location line="+37"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
@@ -557,7 +559,7 @@
         <translation type="vanished">Заполнен</translation>
     </message>
     <message>
-        <location line="+626"/>
+        <location line="+688"/>
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -627,7 +629,7 @@
         <translation type="vanished">Включить моторы в режиме реверса по заданным портам с заданной мощностью. Порты задаются буквами A, B или C, разделенными запятыми. Мощность задается в процентах числом от -100 до 100, если задано отрицательное значение, мотор включается в обычном режиме.</translation>
     </message>
     <message>
-        <location line="-603"/>
+        <location line="-665"/>
         <source>Power (%)</source>
         <translation>Мощность (%)</translation>
     </message>
@@ -665,7 +667,7 @@
         <translation type="vanished">Установить цвет светодиода на передней панели робота.</translation>
     </message>
     <message>
-        <location line="+460"/>
+        <location line="+522"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
@@ -785,7 +787,7 @@
         <translation type="vanished">Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
-        <location line="-1067"/>
+        <location line="-1129"/>
         <source>End if</source>
         <translation>Конец условия</translation>
     </message>
@@ -839,14 +841,15 @@
     </message>
     <message>
         <location line="+39"/>
-        <location line="+463"/>
+        <location line="+151"/>
+        <location line="+374"/>
         <location line="+414"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>
     <message>
-        <location line="-876"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+135"/>
+        <location line="-938"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+138"/>
         <location line="+1"/>
         <location line="+1"/>
         <source>Wait</source>
@@ -854,32 +857,33 @@
     </message>
     <message>
         <location line="-1"/>
-        <location line="+463"/>
+        <location line="+151"/>
+        <location line="+374"/>
         <location line="+307"/>
         <location line="+107"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location line="-865"/>
+        <location line="-927"/>
         <location line="+34"/>
-        <location line="+291"/>
+        <location line="+353"/>
         <source>Condition</source>
         <translation>Условие</translation>
     </message>
     <message>
-        <location line="-323"/>
+        <location line="-385"/>
         <source>Separates program execution in correspondece with the given condition. The &apos;Condition&apos; parameter value must be some boolean expression that will determine subsequent program execution line. This block must have two outgoing links, at least one of them must have &apos;Guard&apos; parameter set to &apos;true&apos; or &apos;false&apos;. The execution will be proceed trough the link marked with the guard corresponding to &apos;Condition&apos; parameter of the block.</source>
         <translation>Разделить выполнение программы в соответствии с заданным условием. Значением параметра &apos;Условие&apos; является некое логическое выражение, на основе значения которого будет осуществлен выбор дальнейшего пути выполнения диаграммы. У данного блока должны быть две исходящие связи, у одной из которых должно быть задано значение параметра &apos;Условие&apos; (возможные варианты — &apos;истина&apos; и &apos;ложь&apos;). При невыполнении данного условия выполнение передается по другой связи.</translation>
     </message>
     <message>
         <location line="+32"/>
-        <location line="+291"/>
+        <location line="+353"/>
         <source>x &gt; 0</source>
         <translation>x &gt; 0</translation>
     </message>
     <message>
-        <location line="-280"/>
+        <location line="-342"/>
         <source>Initial Node</source>
         <translation>Начало</translation>
     </message>
@@ -890,6 +894,21 @@
     </message>
     <message>
         <location line="+41"/>
+        <source>User Input</source>
+        <translation>Пользовательский ввод</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Sets a variable value to a user value from input dialog.</source>
+        <translation>Устанавливает значение переменной в значение из окна пользовательского ввода</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Default:</source>
+        <translation>По умолчанию:</translation>
+    </message>
+    <message>
+        <location line="+45"/>
         <source>Join</source>
         <translation>Слияние задач</translation>
     </message>
@@ -1065,7 +1084,7 @@
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-28"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -1118,8 +1137,8 @@
         <translation>Выбирает ветку, по которой будет продолжено исполнение программы. Значение выражения, указанного в свойстве &apos;Выражение&apos; сравнивается со значениями на исходящих связях. Если среди них найдено равное, исполнение будет продолжено по этой ветке. В противном случае будет выбрана ветка без маркера.</translation>
     </message>
     <message>
-        <location line="-825"/>
-        <location line="+856"/>
+        <location line="-887"/>
+        <location line="+918"/>
         <source>Expression</source>
         <translation>Выражение</translation>
     </message>
@@ -1495,6 +1514,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
+        <location line="+1"/>
         <source>Algorithms</source>
         <translation>Алгоритмы</translation>
     </message>
@@ -1522,12 +1542,22 @@
         <translation type="vanished">Тело функции</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-928"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
         <translation type="unfinished">Выражение</translation>
     </message>
     <message>
-        <location line="+568"/>
+        <location line="+201"/>
+        <source>Default</source>
+        <translation>По умолчанию</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Text</source>
+        <translation>Текст</translation>
+    </message>
+    <message>
+        <location line="+428"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>

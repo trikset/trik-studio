@@ -59,11 +59,9 @@ private:
 	/// Reacts to opening or closing .qrs project.
 	void onOpenedProjectChanged();
 
-	/// Serializes current sensors configuration into inner string representation.
-	QString save() const;
-
-	/// Parses given sensors configuration serialized by save() method and broadcasts it to all connected providers.
-	void load(const QString &configuration);
+	/// Parses given sensors configuration serialized by SensorsConfiguration::serialize method
+	/// and broadcasts it to all connected providers.
+	void load(const QString &worldModel);
 
 	/// Returns the logical id of the robot`s behaviour diagram if it is the only one in save file or Id() otherwise.
 	qReal::Id mainDiagramId() const;
