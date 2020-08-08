@@ -44,14 +44,7 @@ PropertyEditorView::PropertyEditorView(QWidget *parent)
 	mPropertyEditor->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
-PropertyEditorView::~PropertyEditorView()
-{
-	delete mPropertyEditor;
-	delete mVariantManager;
-	delete mVariantFactory;
-	delete mButtonManager;
-	delete mButtonFactory;
-}
+PropertyEditorView::~PropertyEditorView() = default;
 
 void PropertyEditorView::init(qReal::models::LogicalModelAssistApi &logicalModelAssistApi
 		, qReal::Controller &controller)
@@ -141,21 +134,17 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 {
 	mPropertyEditor->clear();
 
-	mPropertyEditor->unsetFactoryForManager(mButtonManager);
-	mPropertyEditor->unsetFactoryForManager(mVariantManager);
+	mPropertyEditor->unsetFactoryForManager(mButtonManager.get());
+	mPropertyEditor->unsetFactoryForManager(mVariantManager.get());
 
-	delete mVariantManager;
-	delete mVariantFactory;
-	delete mButtonManager;
-	delete mButtonFactory;
+	mVariantManager.reset(new QtVariantPropertyManager());
+	mVariantFactory.reset(new QtVariantEditorFactory());
+	mButtonManager.reset(new PushButtonPropertyManager());
+	mButtonFactory.reset(new PushButtonFactory());
+	mGroupManager.reset(new QtGroupPropertyManager());
 
-	mVariantManager = new QtVariantPropertyManager();
-	mVariantFactory = new QtVariantEditorFactory();
-	mButtonManager = new PushButtonPropertyManager();
-	mButtonFactory = new PushButtonFactory();
-
-	mPropertyEditor->setFactoryForManager(mButtonManager, mButtonFactory);
-	mPropertyEditor->setFactoryForManager(mVariantManager, mVariantFactory);
+	mPropertyEditor->setFactoryForManager(mButtonManager.get(), mButtonFactory.get());
+	mPropertyEditor->setFactoryForManager(mVariantManager.get(), mVariantFactory.get());
 
 	if (mModel->rowCount(index) > 0) {
 		int i = 0;
@@ -178,13 +167,12 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 				mPropertyEditor->addProperty(item);
 				++i;
 			} else {
-				QtGroupPropertyManager *groupManager = new QtGroupPropertyManager;
 				QtVariantProperty *vItem = mVariantManager->addProperty(type, name);
 				item = vItem;
 				int count = mModel->countOfChilds(valueIndex);
 
-				if (count != 0) {
-					item = groupManager->addProperty(name);
+				if (count != 0) {					
+					item = mGroupManager->addProperty(name);
 				} else {
 					this->setPropertyToRoot(valueIndex, values, vItem);
 					this->setDescription(vItem, i);
@@ -222,10 +210,10 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 		}
 	}
 
-	connect(mButtonManager, SIGNAL(buttonClicked(QtProperty*))
-			, this, SLOT(buttonClicked(QtProperty*)), Qt::UniqueConnection);
-	connect(mVariantManager, SIGNAL(valueChanged(QtProperty*, QVariant))
-			, this, SLOT(editorValueChanged(QtProperty *, QVariant)), Qt::UniqueConnection);
+	connect(mButtonManager.get(), &PushButtonPropertyManager::buttonClicked
+			, this, &PropertyEditorView::buttonClicked, Qt::UniqueConnection);
+	connect(mVariantManager.get(), &QtVariantPropertyManager::valueChanged
+			, this, &PropertyEditorView::buttonClicked, Qt::UniqueConnection);
 	mPropertyEditor->setPropertiesWithoutValueMarked(true);
 	mPropertyEditor->setRootIsDecorated(false);
 }
