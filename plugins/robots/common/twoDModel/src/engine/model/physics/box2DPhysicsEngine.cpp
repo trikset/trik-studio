@@ -132,19 +132,19 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 			auto rItem = dynamic_cast<view::RobotItem *>(sender());
 			auto model = &rItem->robotModel();
 			mRobotSensors[model].insert(sensor);
-			mBox2DRobots[model]->addSensor(*sensor);
+			mBox2DRobots[model]->addSensor(sensor);
 		});
 		connect(mScene->robot(*robot), &view::RobotItem::sensorRemoved, this, [&](twoDModel::view::SensorItem *sensor) {
 			auto rItem = dynamic_cast<view::RobotItem *>(sender());
 			auto model = &rItem->robotModel();
 			mRobotSensors[model].remove(sensor);
-			mBox2DRobots[model]->removeSensor(*sensor);
+			mBox2DRobots[model]->removeSensor(sensor);
 		});
 		connect(mScene->robot(*robot), &view::RobotItem::sensorUpdated
 				, this, [&](twoDModel::view::SensorItem *sensor) {
 			auto rItem = dynamic_cast<view::RobotItem *>(sender());
 			auto model = &rItem->robotModel();
-			mBox2DRobots[model]->reinitSensor(*sensor);
+			mBox2DRobots[model]->reinitSensor(sensor);
 		});
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
@@ -404,7 +404,7 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 		}
 
 		b2Vec2 pos = positionToBox2D(collidingPolygon.boundingRect().center());
-		Box2DItem *box2dItem = new Box2DItem(this, *wallItem, pos, angleToBox2D(item->rotation()));
+		Box2DItem *box2dItem = new Box2DItem(this, wallItem, pos, angleToBox2D(item->rotation()));
 		mBox2DResizableItems[item] = box2dItem;
 		return;
 	}
@@ -427,7 +427,7 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 		}
 	} else {
 		b2Vec2 pos = positionToBox2D(collidingPolygon.boundingRect().center());
-		Box2DItem *box2dItem = new Box2DItem(this, *solidItem, pos, angleToBox2D(item->rotation()));
+		Box2DItem *box2dItem = new Box2DItem(this, solidItem, pos, angleToBox2D(item->rotation()));
 		mBox2DResizableItems[item] = box2dItem;
 		if (solidItem->bodyType() == items::SolidItem::DYNAMIC) {
 			mBox2DDynamicItems[item] = box2dItem;

@@ -98,18 +98,18 @@ bool Box2DRobot::isStopping()
 	return mIsStopping;
 }
 
-void Box2DRobot::addSensor(const twoDModel::view::SensorItem &sensor)
+void Box2DRobot::addSensor(const twoDModel::view::SensorItem *sensor)
 {
 	// orientation and direction will be set by reinitSensor() method
-	mSensors[&sensor] = new Box2DItem(mEngine, sensor, {0, 0}, 0);
+	mSensors[sensor] = new Box2DItem(mEngine, sensor, {0, 0}, 0);
 	reinitSensor(sensor);
 }
 
-void Box2DRobot::removeSensor(const twoDModel::view::SensorItem &sensor)
+void Box2DRobot::removeSensor(const twoDModel::view::SensorItem *sensor)
 {
-	mWorld.DestroyJoint(mSensors[&sensor]->getBody()->GetJointList()->joint);
-	delete mSensors[&sensor];
-	mSensors.remove(&sensor);
+	mWorld.DestroyJoint(mSensors[sensor]->getBody()->GetJointList()->joint);
+	delete mSensors[sensor];
+	mSensors.remove(sensor);
 }
 
 void Box2DRobot::moveToPoint(const b2Vec2 &destination)
@@ -146,14 +146,14 @@ void Box2DRobot::setRotation(float angle)
 	reinitSensors();
 }
 
-void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem &sensor)
+void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem *sensor)
 {
 	// box2d doesn't rotate or shift elements, which are connected to main robot body via joints in case
 	// when we manually use method SetTransform.
 	// So we need to handle elements such as sensors by hand.
 	// We use this method in case when user shifts or rotates sensor(s).
 
-	auto box2dSensor = mSensors[&sensor];
+	auto box2dSensor = mSensors[sensor];
 	box2dSensor->getBody()->SetLinearVelocity({0, 0});
 	box2dSensor->getBody()->SetAngularVelocity(0);
 	if (const b2JointEdge *jointList = box2dSensor->getBody()->GetJointList()) {
@@ -162,11 +162,11 @@ void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem &sensor)
 		mWorld.DestroyJoint(joint);
 	}
 
-	QPolygonF collidingPolygon = sensor.collidingPolygon();
+	QPolygonF collidingPolygon = sensor->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
 
 	QPointF deltaToCenter = mModel->robotCenter() - mModel->position();
-	QPointF localPos = sensor.pos() - deltaToCenter;
+	QPointF localPos = sensor->pos() - deltaToCenter;
 	QTransform transform;
 	QPointF dif = mModel->robotCenter();
 	transform.translate(-dif.x(), -dif.y());
@@ -180,14 +180,14 @@ void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem &sensor)
 	// IMPORTANT: we connect every sensor with box2d circle item.
 	// So rotation of sensor doesn't matter, we set rotation corresponding to robot.
 	// if in future it will be changed, you'll see some strange behavior, because of joints. See connectSensor method.
-	mSensors[&sensor]->getBody()->SetTransform(pos, mBody->GetAngle());
-	connectSensor(*mSensors[&sensor]);
+	mSensors[sensor]->getBody()->SetTransform(pos, mBody->GetAngle());
+	connectSensor(*mSensors[sensor]);
 }
 
 void Box2DRobot::reinitSensors()
 {
-	for (const twoDModel::view::SensorItem *sensor : mSensors.keys()) {
-		reinitSensor(*sensor);
+	for (auto *sensor : mSensors.keys()) {
+		reinitSensor(sensor);
 	}
 }
 

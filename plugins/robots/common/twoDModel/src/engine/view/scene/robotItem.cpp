@@ -199,10 +199,13 @@ void RobotItem::removeSensor(const kitBase::robotModel::PortInfo &port)
 		return;
 	}
 
-	scene()->removeItem(mSensors[port]);
-	delete mSensors[port];
-	emit sensorRemoved(mSensors[port]);
+	auto sensor = mSensors[port];
+	scene()->removeItem(sensor);
 	mSensors[port] = nullptr;
+	delete sensor;
+	// Only pointer itself, not the pointee can be used after deletion
+	emit sensorRemoved(sensor);
+
 }
 
 void RobotItem::updateSensorPosition(const kitBase::robotModel::PortInfo &port)

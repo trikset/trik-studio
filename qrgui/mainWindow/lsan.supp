@@ -14,7 +14,3 @@ leak:QFontconfigDatabase::addApplicationFont(QByteArray const&, QString const&)
 leak:QFontconfigDatabase::populateFontDatabase()
 #Singletons
 leak:kitBase::robotModel::DeviceInfo::property(QMetaObject const*, QString const&)
-leak:ev3::communication::UsbRobotCommunicationThread::UsbRobotCommunicationThread
-leak:nxt::communication::UsbRobotCommunicationThread::UsbRobotCommunicationThread
-leak:ev3::communication::BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread
-leak:nxt::communication::BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread
