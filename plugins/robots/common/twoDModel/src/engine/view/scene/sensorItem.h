@@ -75,7 +75,7 @@ protected:
 		const QRect mBoundingRect;
 	};
 
-	QRectF imageRect() const;
+	QRectF calculateImageRect() const;
 	QString name() const;
 	QString pathToImage() const;
 

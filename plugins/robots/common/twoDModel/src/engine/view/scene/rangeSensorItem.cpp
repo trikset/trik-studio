@@ -87,13 +87,3 @@ QRectF RangeSensorItem::rect() const
 {
 	return SensorItem::boundingRect();
 }
-
-void RangeSensorItem::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
-{
-	if (!imageRect().contains(mouseEvent->pos())) {
-		setFlag(ItemIsMovable, false);
-	}
-
-	// TODO: Why not SensorItem::mousePressEvent ?
-	AbstractItem::mousePressEvent(mouseEvent);
-}

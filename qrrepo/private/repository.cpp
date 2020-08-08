@@ -26,13 +26,9 @@ Repository::Repository(const QString &workingFile)
 		, mSerializer(workingFile)
 {
 	loadFromDisk();
-	if (mObjects.isEmpty()) {
-		// Nothing loaded
-		init();
-	}
 }
 
-void Repository::init()
+void Repository::resetToEmpty()
 {
 	qDeleteAll(mObjects);
 	mObjects.clear();
@@ -252,7 +248,7 @@ void Repository::setProperty(const Id &id, const QString &name, const QVariant &
 //				 : true);
 		mObjects[id]->setProperty(name, value);
 	} else {
-		throw Exception("Repository: Setting property of nonexistent object " + id.toString());
+		throw Exception("Repository: Setting property " + name + " of nonexistent object " + id.toString());
 	}
 }
 
@@ -366,6 +362,10 @@ void Repository::removeTemporaryRemovedLinks(const Id &id)
 void Repository::loadFromDisk()
 {
 	mSerializer.loadFromDisk(mObjects, mMetaInfo);
+	if (mObjects.isEmpty()) {
+		// Nothing loaded
+		resetToEmpty();
+	}
 	addChildrenToRootObject();
 }
 
@@ -531,7 +531,7 @@ bool Repository::exterminate()
 	printDebug();
 	//serializer.clearWorkingDir();
 	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk({}, mMetaInfo);
-	init();
+	resetToEmpty();
 	printDebug();
 
 	return result;
@@ -539,7 +539,8 @@ bool Repository::exterminate()
 
 void Repository::open(const QString &saveFile)
 {
-	init();
+	qDeleteAll(mObjects);
+	mObjects.clear();
 	mSerializer.setWorkingFile(saveFile);
 	mWorkingFile = saveFile;
 	loadFromDisk();

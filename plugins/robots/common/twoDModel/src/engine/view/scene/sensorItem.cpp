@@ -40,7 +40,7 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 		, const PortInfo &port, const QString &pathToImage, const QRect &imageRect)
 	: mConfiguration(configuration)
 	, mPort(port)
-	, mImageRect(imageRect.isEmpty() ? this->imageRect() : imageRect)
+	, mImageRect(imageRect.isEmpty() ? this->calculateImageRect() : imageRect)
 	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift
 			, selectionDrift, selectionDrift))
 	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, false)
@@ -182,7 +182,7 @@ QString SensorItem::name() const
 	}
 }
 
-QRectF SensorItem::imageRect() const
+QRectF SensorItem::calculateImageRect() const
 {
 	const DeviceInfo sensor = mConfiguration.type(mPort);
 	if (sensor.isA<robotParts::TouchSensor>()) {

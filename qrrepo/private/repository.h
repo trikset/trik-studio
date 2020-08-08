@@ -156,8 +156,11 @@ public:
 	void clearMetaInformation();
 
 private:
-	void init();
 
+	/// Recreate as an empty repo with the single root item.
+	void resetToEmpty();
+
+	/// Loads from disk, but resets in case of error or missing data
 	void loadFromDisk();
 	void addChildrenToRootObject();
 
