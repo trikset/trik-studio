@@ -22,6 +22,7 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/mainWindowDockInterface.h>
 
 #include <qrgui/preferencesDialog/preferencesDialog.h>
+#include <textEditor/qscintillaTextEdit.h>
 
 
 class QGraphicsView;
@@ -274,7 +275,7 @@ private slots:
 	void openShapeEditor();
 
 	void updatePaletteIcons();
-	void setTextChanged(bool changed);
+	void setTextChanged(qReal::text::QScintillaTextEdit *editor, bool changed);
 
 private:
 	/// Initializes a tab if it is a diagram --- sets its logical and graphical

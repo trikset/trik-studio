@@ -42,7 +42,7 @@
 <context>
     <name>qReal::text::TextManager</name>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="+91"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="+86"/>
         <source>Confirmation</source>
         <translation>Подтвердите</translation>
     </message>
@@ -56,7 +56,7 @@
         <translation>Сохранить перед закрытием?</translation>
     </message>
     <message>
-        <location line="+193"/>
+        <location line="+192"/>
         <source>All files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>

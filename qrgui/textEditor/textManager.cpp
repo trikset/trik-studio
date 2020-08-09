@@ -38,27 +38,22 @@ TextManager::TextManager(SystemEvents &systemEvents, gui::MainWindowInterpreters
 
 bool TextManager::openFile(const QString &filePath, const QString &generatorName, const text::LanguageInfo &language)
 {
-	QFile file(filePath);
-	QTextStream *inStream = nullptr;
+	QFile file(filePath);	
 
 	if (!file.isOpen() && file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		inStream = new QTextStream(&file);
-		inStream->setCodec(QTextCodec::codecForName("UTF-8"));
-
-		QScintillaTextEdit *area = new QScintillaTextEdit();
-
+		QTextStream inStream(&file);
+		inStream.setCodec(QTextCodec::codecForName("UTF-8"));
+		const auto &area = new QScintillaTextEdit();
+		connect(&*area, &QScintillaTextEdit::textWasModified, this
+				, [this](QScintillaTextEdit *t) { setModified(t, true); });
 		area->setCurrentLanguage(language);
-		area->setText(inStream->readAll());
+		area->setText(inStream.readAll());
 		mText.insert(filePath, area);
 		mPath.insert(area, filePath);
 		mPathType.insert(filePath, true);
-		mModified.insert(filePath, QPair<bool, bool>(false, false));
+		mModified.insert(filePath, {false, false});
 		mGeneratorName.insert(filePath, generatorName);
 		mCodeBlockManager.addNewCode(filePath);
-
-		connect(area, SIGNAL(textWasModified(text::QScintillaTextEdit*))
-				, this, SLOT(setModified(text::QScintillaTextEdit*)));
-
 		return true;
 	}
 
@@ -131,7 +126,7 @@ bool TextManager::closeFile(const QString &filePath)
 
 void TextManager::changeFilePath(const QString &from, const QString &to)
 {
-	QScintillaTextEdit *code = mText.value(from);
+	const auto &code = mText.value(from);
 	QPair<bool, bool> mod(true, false);
 	const QString genName = generatorName(from);
 	const Id diagram = mDiagramCodeManager.key(from);
@@ -159,9 +154,8 @@ QList<text::QScintillaTextEdit *> TextManager::code(const Id &diagram) const
 	QList<text::QScintillaTextEdit *> codeList;
 
 	for (const QString &filePath : mDiagramCodeManager.values(diagram)) {
-		codeList += mText.value(filePath);
+		codeList << mText.value(filePath);
 	}
-
 	return codeList;
 }
 
@@ -213,7 +207,7 @@ void TextManager::setModified(text::QScintillaTextEdit *code, bool modified)
 		mCodeBlockManager.setActive(path, !(modified && code->isUndoAvailable()));
 	}
 
-	emit textChanged(modified && code->isUndoAvailable());
+	emit textChanged(code, modified && code->isUndoAvailable());
 }
 
 void TextManager::onTabClosed(const QFileInfo &file)
