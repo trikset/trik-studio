@@ -23,7 +23,7 @@ Ev3GeneratorRobotModel::Ev3GeneratorRobotModel(const QString &kitId
 		, const QString &name
 		, const QString &friendlyName
 		, int priority
-		, communication::Ev3RobotCommunicationThread &communicator)
+		, const QSharedPointer<communication::Ev3RobotCommunicationThread> &communicator)
 	: Ev3RobotModelBase(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)
@@ -61,7 +61,7 @@ int Ev3GeneratorRobotModel::priority() const
 	return mPriority;
 }
 
-ev3::communication::Ev3RobotCommunicationThread *Ev3GeneratorRobotModel::communicator()
+QSharedPointer<ev3::communication::Ev3RobotCommunicationThread> Ev3GeneratorRobotModel::communicator()
 {
-	return &mCommunicator;
+	return mCommunicator;
 }

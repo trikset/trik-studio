@@ -165,7 +165,7 @@
         <translation>Génération (NXT OSEK C)</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+51"/>
         <source>NXT tools package is not installed</source>
         <translation type="unfinished"></translation>
     </message>

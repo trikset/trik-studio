@@ -37,12 +37,13 @@ qReal::interpretation::BlockInterface *BlocksFactoryManager::block(const qReal::
 	qReal::interpretation::BlockInterface *lastEmptyBlock = nullptr;
 
 	for (auto &&factory : factoriesFor(robotModel)) {
+		delete lastEmptyBlock;
 		auto block = factory->block(element);
 		if (block && !dynamic_cast<qReal::interpretation::blocks::EmptyBlock *>(block)) {
+
 			return block;
 		} else {
 			/// @todo: Ask for empty block somewhere else, not memorizing it here.
-			delete lastEmptyBlock;
 			lastEmptyBlock = block;
 		}
 	}

@@ -23,7 +23,7 @@ namespace qReal {
 class UndoStack : public QUndoStack
 {
 public:
-	UndoStack();
+	UndoStack(QObject *parent = nullptr);
 
 	/// Executes @param command and takes ownership on it
 	void execute(commands::AbstractCommand *command);

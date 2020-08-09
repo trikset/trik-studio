@@ -20,7 +20,7 @@
 using namespace nxt::robotModel::real;
 
 UsbRealRobotModel::UsbRealRobotModel(const QString &kitId, const QString &robotId)
-	: RealRobotModel(kitId, robotId, &utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
+	: RealRobotModel(kitId, robotId, utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
 {
 }
 

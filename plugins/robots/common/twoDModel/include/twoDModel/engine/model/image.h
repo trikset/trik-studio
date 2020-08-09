@@ -18,6 +18,8 @@
 #include <QtCore/QString>
 #include <QtCore/QRect>
 
+#include <qrutils/imagesCache.h>
+
 class QDomElement;
 class QSvgRenderer;
 class QImage;
@@ -30,11 +32,11 @@ namespace model {
 /// image bytes.
 class Image
 {
+	Q_DISABLE_COPY(Image)
 public:
 	Image() = default;
 	explicit Image(const QString &id);
 	Image(const QString &path, bool memorize);
-	Image(const Image &other);
 	~Image();
 
 	/// Reads image from XML-representation.
@@ -67,10 +69,6 @@ public:
 	/// Returns imageId for this image.
 	QString imageId() const;
 
-	bool operator==(const Image &other) const;
-	bool operator!=(const Image &other) const;
-	Image &operator=(const Image &right);
-
 private:
 	QSize preferedSvgSize() const;
 
@@ -81,6 +79,7 @@ private:
 	QScopedPointer<QImage> mImage;
 	QByteArray mSvgBytes;
 	QScopedPointer<QSvgRenderer> mSvgRenderer;
+	const QSharedPointer<utils::ImagesCache> mImagesCache;
 };
 
 }

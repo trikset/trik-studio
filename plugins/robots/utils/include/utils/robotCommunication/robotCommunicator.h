@@ -17,6 +17,8 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 
+#include <QSharedPointer>
+
 #include "utils/utilsDeclSpec.h"
 #include "robotCommunicationThreadInterface.h"
 
@@ -28,7 +30,6 @@ namespace robotCommunication {
 class ROBOTS_UTILS_EXPORT RobotCommunicator : public QObject
 {
 	Q_OBJECT
-
 public:
 	explicit RobotCommunicator(QObject *parent = nullptr);
 	~RobotCommunicator();
@@ -39,10 +40,10 @@ public:
 	void disconnect();
 
 	/// Returns a pointer to communication thread object that currently implementing this communicator.
-	RobotCommunicationThreadInterface *currentCommunicator() const;
+	QSharedPointer<RobotCommunicationThreadInterface> currentCommunicator() const;
 
 	/// Sets object that implements communication with robot. Does not take ownership.
-	void setRobotCommunicationThreadObject(RobotCommunicationThreadInterface *robotCommunication);
+	void setRobotCommunicationThreadObject(const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication);
 
 signals:
 	void errorOccured(const QString &message);
@@ -53,7 +54,7 @@ signals:
 
 private:
 	QThread mRobotCommunicationThread;
-	RobotCommunicationThreadInterface *mRobotCommunicationThreadObject;  // Does not have owenrship
+	QSharedPointer<RobotCommunicationThreadInterface> mRobotCommunicationThreadObject;
 };
 
 }

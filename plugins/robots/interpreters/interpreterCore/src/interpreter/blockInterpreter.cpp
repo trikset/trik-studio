@@ -76,8 +76,6 @@ BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphica
 
 BlockInterpreter::~BlockInterpreter()
 {
-	qDeleteAll(mThreads);
-	delete mBlocksTable;
 }
 
 bool BlockInterpreter::isRunning() const
@@ -125,7 +123,6 @@ void BlockInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 {
 	mRobotModelManager.model().stopRobot();
 	mState = idle;
-	qDeleteAll(mThreads);
 	mThreads.clear();
 	mBlocksTable->setFailure();
 	emit stopped(reason);
@@ -174,7 +171,7 @@ void BlockInterpreter::devicesConfiguredSlot()
 
 		const Id &currentDiagramId = mInterpretersInterface.activeDiagram();
 
-		qReal::interpretation::Thread * const initialThread = new qReal::interpretation::Thread(&mGraphicalModelApi
+		auto initialThread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi
 				, mInterpretersInterface, startingElementType, currentDiagramId, *mBlocksTable, "main");
 
 		emit started();
@@ -185,11 +182,8 @@ void BlockInterpreter::devicesConfiguredSlot()
 
 void BlockInterpreter::threadStopped(qReal::interpretation::StopReason reason)
 {
-	qReal::interpretation::Thread * const thread = static_cast<qReal::interpretation::Thread *>(sender());
-
+	auto thread = static_cast<qReal::interpretation::Thread *>(sender());
 	mThreads.remove(thread->id());
-	delete thread;
-
 	if (mThreads.isEmpty()) {
 		stopRobot(reason);
 	}
@@ -203,13 +197,13 @@ void BlockInterpreter::newThread(const Id &startBlockId, const QString &threadId
 		return;
 	}
 
-	qReal::interpretation::Thread * const thread = new qReal::interpretation::Thread(&mGraphicalModelApi
+	auto thread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi
 			, mInterpretersInterface, startingElementType, *mBlocksTable, startBlockId, threadId);
 
 	addThread(thread, threadId);
 }
 
-void BlockInterpreter::addThread(qReal::interpretation::Thread * const thread, const QString &threadId)
+void BlockInterpreter::addThread(const QSharedPointer<qReal::interpretation::Thread> &thread, const QString &threadId)
 {
 	if (mThreads.count() >= maxThreadsCount) {
 		reportError(tr("Threads limit exceeded. Maximum threads count is %1").arg(maxThreadsCount));
@@ -217,11 +211,11 @@ void BlockInterpreter::addThread(qReal::interpretation::Thread * const thread, c
 	}
 
 	mThreads[threadId] = thread;
-	connect(thread, &interpretation::Thread::stopped, this, &BlockInterpreter::threadStopped);
+	connect(&*thread, &interpretation::Thread::stopped, this, &BlockInterpreter::threadStopped);
 
-	connect(thread, &qReal::interpretation::Thread::newThread, this, &BlockInterpreter::newThread);
-	connect(thread, &qReal::interpretation::Thread::killThread, this, &BlockInterpreter::killThread);
-	connect(thread, &qReal::interpretation::Thread::sendMessage, this, &BlockInterpreter::sendMessage);
+	connect(&*thread, &qReal::interpretation::Thread::newThread, this, &BlockInterpreter::newThread);
+	connect(&*thread, &qReal::interpretation::Thread::killThread, this, &BlockInterpreter::killThread);
+	connect(&*thread, &qReal::interpretation::Thread::sendMessage, this, &BlockInterpreter::sendMessage);
 
 	QCoreApplication::processEvents();
 	if (mState != idle) {

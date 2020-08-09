@@ -48,13 +48,13 @@ public:
 	void finishStopping();
 	bool isStopping();
 
-	void addSensor(const view::SensorItem &sensor);
-	void removeSensor(const view::SensorItem &sensor);
+	void addSensor(const view::SensorItem *sensor);
+	void removeSensor(const view::SensorItem *sensor);
 
 	void moveToPoint(const b2Vec2 &destination);
 	void setRotation(float angle);
 
-	void reinitSensor(const view::SensorItem &sensor);
+	void reinitSensor(const view::SensorItem *sensor);
 	void reinitSensors();
 
 	void applyForceToCenter(const b2Vec2 &force, bool wake);

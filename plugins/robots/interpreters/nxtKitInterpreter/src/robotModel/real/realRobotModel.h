@@ -28,7 +28,7 @@ class RealRobotModel : public NxtRobotModelBase
 public:
 	/// Takes ownership on communication thread
 	RealRobotModel(const QString &kitId, const QString &robotId
-			, utils::robotCommunication::RobotCommunicationThreadInterface *communicationThread);
+			, const QSharedPointer<utils::robotCommunication::RobotCommunicationThreadInterface> &communicationThread);
 
 	bool needsConnection() const override;
 

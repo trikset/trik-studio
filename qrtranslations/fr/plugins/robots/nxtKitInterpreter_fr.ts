@@ -79,7 +79,7 @@
 <context>
     <name>nxt::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+33"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+35"/>
         <source>Interpretation (Bluetooth)</source>
         <translation>Interprétation (Bluetooth)</translation>
     </message>

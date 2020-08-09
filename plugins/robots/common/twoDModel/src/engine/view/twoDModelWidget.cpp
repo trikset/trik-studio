@@ -757,6 +757,8 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 	mUi->gridParametersBox->setVisible(!worldReadOnly);
 	if (!worldReadOnly && hasSpacer()) {
 		mUi->sceneHeaderWidget->layout()->removeItem(mUi->horizontalSpacer);
+		delete mUi->horizontalSpacer;
+		mUi->horizontalSpacer = nullptr;
 	} else if (worldReadOnly && !hasSpacer()){
 		static_cast<QHBoxLayout *>(mUi->sceneHeaderWidget->layout())->insertItem(1, mUi->horizontalSpacer);
 	}

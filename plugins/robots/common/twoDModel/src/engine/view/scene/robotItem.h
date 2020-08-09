@@ -108,7 +108,7 @@ private:
 	// QImage renders SVG ugly, thus robot moves smothier now
 	twoDModel::model::Image mImage;
 
-	QScopedPointer<BeepItem> mBeepItem;
+	BeepItem mBeepItem;
 
 	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors;  // Does not have ownership
 

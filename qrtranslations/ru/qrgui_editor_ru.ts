@@ -201,7 +201,7 @@
         <translation>Добавить элемент</translation>
     </message>
     <message>
-        <location line="+500"/>
+        <location line="+495"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -251,7 +251,7 @@
 <context>
     <name>qReal::gui::editor::PropertyEditorView</name>
     <message>
-        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+315"/>
+        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+303"/>
         <source>Specify directory:</source>
         <translation>Выберите каталог:</translation>
     </message>

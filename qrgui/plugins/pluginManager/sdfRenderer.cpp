@@ -24,26 +24,26 @@
 #include <QtGui/QFont>
 #include <QtGui/QIcon>
 
-#include <qrutils/imagesCache.h>
 #include <metaMetaModel/elementRepoInterface.h>
 #include <QPainterPath>
+
+#include <QsLog.h>
 
 using namespace qReal;
 
 SdfRenderer::SdfRenderer()
-	: mStartX(0), mStartY(0), mNeedScale(true), mElementRepo(0)
+	: mWorkingDirName (SettingsManager::value("workingDir").toString())
+	, mImagesCache(utils::ImagesCache::instance())
 {
-	mWorkingDirName = SettingsManager::value("workingDir").toString();
 }
 
 SdfRenderer::SdfRenderer(const QString &path)
-	: mStartX(0), mStartY(0), mNeedScale(true)
+	: SdfRenderer()
 {
 	if (!load(path))
 	{
-		qDebug() << "File " + path + " - loading failed!";
+		QLOG_ERROR() << "File " + path + " - loading failed!";
 	}
-	mWorkingDirName = SettingsManager::value("workingDir").toString();
 }
 
 SdfRenderer::~SdfRenderer()
@@ -339,7 +339,7 @@ void SdfRenderer::image_draw(QDomElement &element)
 			+ element.attribute("name", "default");
 
 	const QRect rect(x1, y1, x2 - x1, y2 - y1);
-	utils::ImagesCache::instance().drawImage(fileName, *painter, rect, mZoom);
+	mImagesCache->drawImage(fileName, *painter, rect, mZoom);
 }
 
 void SdfRenderer::point(QDomElement &element)

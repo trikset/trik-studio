@@ -29,6 +29,7 @@
 #include <qrkernel/settingsManager.h>
 
 #include "plugins/pluginManager/pluginsManagerDeclSpec.h"
+#include <qrutils/imagesCache.h>
 
 #include "pluginsManagerDeclSpec.h"
 
@@ -62,13 +63,14 @@ public slots:
 
 private:
 	QString mWorkingDirName;
+	const QSharedPointer<utils::ImagesCache> mImagesCache;
 
 	int first_size_x {-1};
 	int first_size_y {-1};
 	int current_size_x {-1};
 	int current_size_y {-1};
-	int mStartX {-1};
-	int mStartY {-1};
+	int mStartX { 0 };
+	int mStartY { 0 };
 	int i {-1};
 	int j {-1};
 	int sep {-1};
@@ -85,7 +87,7 @@ private:
 	/** @brief is false if we don't need to scale according to absolute
 	 * coords, is useful for rendering icons. default is true
 	**/
-	bool mNeedScale;
+	bool mNeedScale { true };
 	qreal mZoom = 1.0;
 	ElementRepoInterface *mElementRepo {};
 

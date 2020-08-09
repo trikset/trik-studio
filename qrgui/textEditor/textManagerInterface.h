@@ -33,7 +33,7 @@ class QRGUI_TEXT_EDITOR_EXPORT TextManagerInterface : public QObject
 	Q_OBJECT
 
 public:
-	virtual ~TextManagerInterface() {}
+	virtual ~TextManagerInterface() = default;
 
 	virtual bool openFile(const QString &filePath, const QString &genName, const text::LanguageInfo &language) = 0;
 	virtual bool closeFile(const QString &filePath) = 0;
@@ -56,7 +56,7 @@ public:
 	virtual QString generatorName(const QString &filepath) const  = 0;
 
 signals:
-	void textChanged(bool changed);
+	void textChanged(text::QScintillaTextEdit *editor, bool changed);
 };
 
 }

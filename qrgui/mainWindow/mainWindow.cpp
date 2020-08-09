@@ -816,15 +816,15 @@ void MainWindow::registerEditor(EditorInterface &editor)
 	});
 }
 
-void MainWindow::setTextChanged(bool changed)
-{
-	text::QScintillaTextEdit *area = static_cast<text::QScintillaTextEdit *>(currentTab());
+void MainWindow::setTextChanged(text::QScintillaTextEdit *editor, bool changed)
+{	
+	static QByteArray CHANGED_MARK = "*";
 	const QString windowTitle = mToolManager->customizer()->windowTitle();
-	const QString filePath = mTextManager->path(area);
-	const QString chIndicator = changed ? "*" : "";
+	const QString chIndicator = changed ? CHANGED_MARK : "";
+	const QString filePath = mTextManager->path(editor);
 	setWindowTitle(windowTitle + " " + chIndicator + filePath);
 	const int index = mUi->tabs->currentIndex();
-	mUi->tabs->setTabText(index, mUi->tabs->tabText(index).remove(QChar('*'), Qt::CaseInsensitive) + chIndicator);
+	mUi->tabs->setTabText(index, mUi->tabs->tabText(index).remove(CHANGED_MARK, Qt::CaseInsensitive) + chIndicator);
 }
 
 void MainWindow::removeReferences(const Id &id)

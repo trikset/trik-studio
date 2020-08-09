@@ -39,7 +39,7 @@ using namespace utils::robotCommunication;
 using namespace kitBase::robotModel;
 
 RealRobotModel::RealRobotModel(const QString &kitId, const QString &robotId
-		, utils::robotCommunication::RobotCommunicationThreadInterface *communicationThread)
+		, const QSharedPointer<utils::robotCommunication::RobotCommunicationThreadInterface> &communicationThread)
 	: Ev3RobotModelBase(kitId, robotId)
 	, mRobotCommunicator(new RobotCommunicator(this))
 {

@@ -19,7 +19,9 @@
 using namespace nxt::robotModel::real;
 
 BluetoothRealRobotModel::BluetoothRealRobotModel(const QString &kitId, const QString &robotId)
-	: RealRobotModel(kitId, robotId, new communication::BluetoothRobotCommunicationThread)
+	: RealRobotModel(kitId, robotId
+	, QSharedPointer<communication::BluetoothRobotCommunicationThread> (
+						 new communication::BluetoothRobotCommunicationThread))
 {
 }
 

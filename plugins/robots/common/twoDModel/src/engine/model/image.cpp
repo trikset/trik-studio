@@ -32,30 +32,19 @@ const quint64 maxSvgSize = 1000;
 
 Image::Image(const QString &id)
 	: mImageId(id)
+	, mImagesCache(utils::ImagesCache::instance())
 {
 }
 
 Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
 	, mImageId(QUuid::createUuid().toString())
+	, mImagesCache(utils::ImagesCache::instance())
 {
 	setPath(path);
 }
 
-Image::Image(const Image &other)
-{
-	mExternal = other.mExternal;
-	mIsSvg = other.mIsSvg;
-	mPath = other.mPath;
-	mImage.reset(other.mImage.data() && !mIsSvg ? new QImage(*other.mImage) : nullptr);
-	mSvgBytes = other.mSvgBytes;
-	mSvgRenderer.reset(mIsSvg ? new QSvgRenderer(mSvgBytes) : nullptr);
-	mImageId = other.mImageId;
-}
-
-Image::~Image()
-{
-}
+Image::~Image() = default;
 
 Image *Image::deserialize(const QDomElement &element)
 {
@@ -162,8 +151,8 @@ void Image::setPath(const QString &path)
 {
 	mPath = path;
 	mIsSvg = path.endsWith(".svg");
-	mImage.reset(nullptr);
-	mSvgRenderer.reset(nullptr);
+	mImage.reset();
+	mSvgRenderer.reset();
 	if (mIsSvg) {
 		mSvgRenderer.reset(new QSvgRenderer(path));
 	} else {
@@ -174,7 +163,7 @@ void Image::setPath(const QString &path)
 void Image::draw(QPainter &painter, const QRect &rect, qreal zoom) const
 {
 	if (mExternal && !mPath.isEmpty()) {
-		utils::ImagesCache::instance().drawImageWithoutCachingSize(mPath, painter, rect, zoom);
+		mImagesCache->drawImageWithoutCachingSize(mPath, painter, rect, zoom);
 	} else if (mIsSvg) {
 		mSvgRenderer->render(&painter, rect);
 	} else if (!mImage.isNull()) {
@@ -191,25 +180,4 @@ void Image::draw(QPainter &painter, const QRect &rect, qreal zoom) const
 QString Image::imageId() const
 {
 	return mImageId;
-}
-
-bool Image::operator==(const Image &other) const
-{
-	return other.mPath == mPath;
-}
-
-bool Image::operator!=(const Image &other) const
-{
-	return !(other == *this);
-}
-
-Image &Image::operator=(const Image &right)
-{
-	mExternal = right.mExternal;
-	mIsSvg = right.mIsSvg;
-	mPath = right.mPath;
-	mImage.reset(!right.mImage.isNull() && !mIsSvg ? new QImage(*right.mImage) : nullptr);
-	mSvgBytes = right.mSvgBytes;
-	mSvgRenderer.reset(mIsSvg ? (mExternal ? new QSvgRenderer(mPath) : new QSvgRenderer(mSvgBytes)) : nullptr);
-	return *this;
 }

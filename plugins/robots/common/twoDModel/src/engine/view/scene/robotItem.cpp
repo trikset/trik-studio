@@ -26,10 +26,7 @@ const int border = 0;
 const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
-	: RotateItem()
-	, mImage(robotImageFileName, true)
-	, mBeepItem(new BeepItem)
-	, mRectangleImpl()
+	: mImage(robotImageFileName, true)
 	, mRobotModel(robotModel)
 {
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
@@ -55,9 +52,9 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	setPen(pen);
 
 	setTransformOriginPoint(mRobotModel.info().robotCenter());
-	mBeepItem->setParentItem(this);
-	mBeepItem->setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
-	mBeepItem->setVisible(false);
+	mBeepItem.setParentItem(this);
+	mBeepItem.setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
+	mBeepItem.setVisible(false);
 
 	RotateItem::init();
 
@@ -200,10 +197,13 @@ void RobotItem::removeSensor(const kitBase::robotModel::PortInfo &port)
 		return;
 	}
 
-	scene()->removeItem(mSensors[port]);
-	delete mSensors[port];
-	emit sensorRemoved(mSensors[port]);
+	auto sensor = mSensors[port];
+	scene()->removeItem(sensor);
 	mSensors[port] = nullptr;
+	delete sensor;
+	// Only pointer itself, not the pointee can be used after deletion
+	emit sensorRemoved(sensor);
+
 }
 
 void RobotItem::updateSensorPosition(const kitBase::robotModel::PortInfo &port)
@@ -224,7 +224,7 @@ void RobotItem::updateSensorRotation(const kitBase::robotModel::PortInfo &port)
 
 void RobotItem::setNeededBeep(bool isNeededBeep)
 {
-	mBeepItem->setVisible(isNeededBeep);
+	mBeepItem.setVisible(isNeededBeep);
 }
 
 QVariant RobotItem::itemChange(GraphicsItemChange change, const QVariant &value)

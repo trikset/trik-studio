@@ -82,8 +82,8 @@ private slots:
 	void onTabClosed(const QFileInfo &file);
 
 private:
-	QMap<QString, text::QScintillaTextEdit *> mText;
-	QMap<text::QScintillaTextEdit *, QString> mPath;
+	QMap<QString, text::QScintillaTextEdit*> mText; // No ownership
+	QMap<text::QScintillaTextEdit*, QString> mPath; // No ownership
 
 	/// If default path - true.
 	QMap<QString, bool> mPathType;

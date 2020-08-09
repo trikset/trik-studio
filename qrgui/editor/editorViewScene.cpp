@@ -1310,15 +1310,10 @@ void EditorViewScene::drawGesture()
 void EditorViewScene::deleteGesture()
 {
 	mRightButtonPressed = false;
-	QList<QGraphicsItem*> itemsForRemoving;
-	for (QGraphicsItem *item : mGesture) {
-		itemsForRemoving.append(item);
-	}
-
-	for (QGraphicsItem *item : itemsForRemoving) {
+	for (auto &&item : mGesture) {
 		removeItem(item);
 	}
-
+	qDeleteAll(mGesture);
 	mGesture.clear();
 	mMouseMovementManager->clear();
 }

@@ -20,7 +20,7 @@
 using namespace ev3::robotModel::real;
 
 BluetoothRealRobotModel::BluetoothRealRobotModel(const QString &kitId, const QString &robotId)
-	: RealRobotModel(kitId, robotId, &utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance())
+	: RealRobotModel(kitId, robotId, utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance())
 {
 }
 
