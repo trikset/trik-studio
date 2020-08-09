@@ -171,7 +171,7 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 				item = vItem;
 				int count = mModel->countOfChilds(valueIndex);
 
-				if (count != 0) {					
+				if (count != 0) {
 					item = mGroupManager->addProperty(name);
 				} else {
 					this->setPropertyToRoot(valueIndex, values, vItem);

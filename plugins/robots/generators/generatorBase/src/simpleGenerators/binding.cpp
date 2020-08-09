@@ -63,7 +63,6 @@ Binding::Binding(const QString &label, const QString &propertyOrValue, bool take
 	, mProperty(takeFromRepo ? propertyOrValue : "")
 	, mValue(takeFromRepo ? "" : propertyOrValue)
 	, mConverter(new EmptyConverter)
-	, mMultiConverter(nullptr)
 {
 }
 
@@ -73,7 +72,6 @@ Binding::Binding(const QString &label, const QString &propertyOrValue, bool take
 	, mProperty(takeFromRepo ? propertyOrValue : "")
 	, mValue(takeFromRepo ? "" : propertyOrValue)
 	, mConverter(converter)
-	, mMultiConverter(nullptr)
 {
 }
 
@@ -81,14 +79,12 @@ Binding::Binding(const QString &label, const QString &property
 		, const MultiConverterInterface *converter)
 	: mLabel(label)
 	, mProperty(property)
-	, mConverter(nullptr)
 	, mMultiConverter(converter)
 {
 }
 
 Binding::~Binding()
 {
-	delete mConverter;
 }
 
 void Binding::apply(const qrRepo::RepoApi &repo

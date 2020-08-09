@@ -97,8 +97,8 @@ private:
 	const QString mLabel;
 	const QString mProperty;
 	const QString mValue;
-	const ConverterInterface *mConverter; // Takes ownership
-	const MultiConverterInterface *mMultiConverter; // Takes ownership
+	const QScopedPointer<const ConverterInterface> mConverter;
+	const QScopedPointer<const MultiConverterInterface> mMultiConverter;
 };
 
 }

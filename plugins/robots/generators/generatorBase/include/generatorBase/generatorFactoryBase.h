@@ -48,6 +48,7 @@ class GeneratorCustomizer;
 /// and converters to init/terminate code generators and path to templates)
 class ROBOTS_GENERATOR_EXPORT GeneratorFactoryBase : public QObject
 {
+	Q_OBJECT
 public:
 	GeneratorFactoryBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter
