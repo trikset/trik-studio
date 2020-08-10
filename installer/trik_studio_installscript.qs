@@ -1,4 +1,11 @@
 function Controller() {
+  installer.autoRejectMessageBoxes();
+  installer.setMessageBoxAutomaticAnswer("OverwriteTargetDirectory", QMessageBox.Yes);
+  installer.setMessageBoxAutomaticAnswer("stopProcessesForUpdates", QMessageBox.Ignore);
+  installer.installationFinished.connect(function() {
+    gui.clickButton(buttons.NextButton);
+  });
+  installer.setMessageBoxAutomaticAnswer("cancelInstallation", QMessageBox.Yes);
 }
 
 Controller.prototype.IntroductionPageCallback = function() {
