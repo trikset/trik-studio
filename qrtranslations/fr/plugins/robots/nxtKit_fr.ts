@@ -37,7 +37,7 @@
 <context>
     <name>nxt::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/usbRobotCommunicationThread.cpp" line="+157"/>
+        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/usbRobotCommunicationThread.cpp" line="+158"/>
         <source>USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63,7 +63,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+40"/>
         <source>Cannot find NXT device in resetted mode. Check robot resetted, connected and ticking and try again.</source>
         <translation type="unfinished"></translation>
     </message>

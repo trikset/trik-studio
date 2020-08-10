@@ -45,6 +45,7 @@ UsbRobotCommunicationThread::UsbRobotCommunicationThread()
 	, mStopped(false)
 {
 	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &UsbRobotCommunicationThread::checkForConnection);
+	QObject::connect(this, &UsbRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 	mDriverInstaller->moveToThread(qApp->thread());
 	QObject::connect(this, &UsbRobotCommunicationThread::noDriversFound, mDriverInstaller.data()
 			, &NxtUsbDriverInstaller::installUsbDriver, Qt::QueuedConnection);
@@ -289,8 +290,6 @@ void UsbRobotCommunicationThread::disconnect()
 		libusb_exit(nullptr);
 		mHandle = nullptr;
 	}
-
-	mKeepAliveTimer->stop();
 	emit disconnected();
 }
 
