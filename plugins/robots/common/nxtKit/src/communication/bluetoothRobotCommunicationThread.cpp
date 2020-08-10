@@ -17,6 +17,7 @@
 #include <QtCore/QMetaType>
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
+#include <QEventLoop>
 #include <ctime>
 
 #include <qrkernel/settingsManager.h>
@@ -34,6 +35,7 @@ BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread()
 	, mKeepAliveTimer(new QTimer(this))
 {
 	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
+	QObject::connect(this, &BluetoothRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 }
 
 BluetoothRobotCommunicationThread::~BluetoothRobotCommunicationThread()
@@ -63,7 +65,9 @@ bool BluetoothRobotCommunicationThread::connect()
 {
 	if (mPort) {
 		disconnect();
-		QThread::msleep(1000);  // Give port some time to close
+		QEventLoop l;
+		QTimer::singleShot(1000, &l, &QEventLoop::quit);
+		l.exec();
 	}
 
 	const QString portName = qReal::SettingsManager::value("NxtBluetoothPortName").toString();
@@ -100,13 +104,8 @@ void BluetoothRobotCommunicationThread::reconnect()
 
 void BluetoothRobotCommunicationThread::disconnect()
 {
-	if (mPort) {
-		mPort->close();
-		delete mPort;
-		mPort = nullptr;
-		mKeepAliveTimer->stop();
-	}
-
+	delete mPort;
+	mPort = nullptr;
 	emit disconnected();
 }
 

@@ -93,19 +93,17 @@ void ScriptAPI::pickComboBoxItem(QComboBox *comboBox, const QString &name, int d
 	mVirtualCursor->move(newPos);
 	mVirtualCursor->raise();
 	mVirtualCursor->show();
-	QTimer *timer = new QTimer();
-	timer->setInterval(100);
+	QTimer timer;
+	timer.setInterval(100);
 
-	connect(timer, &QTimer::timeout
+	connect(&timer, &QTimer::timeout
 			, [this, comboBox]() {
 				mVirtualCursor->moved(comboBox->view()->viewport());
 			});
 
-	timer->start();
+	timer.start();
 	mVirtualCursor->moveToRect(target, duration);
-	timer->stop();
-
-	delete timer;
+	timer.stop();
 
 	QEvent *pressEvent = new QMouseEvent(QMouseEvent::MouseButtonPress
 			,  mVirtualCursor->pos()

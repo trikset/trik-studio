@@ -38,13 +38,15 @@ using namespace ev3::communication;
 
 UsbRobotCommunicationThread::UsbRobotCommunicationThread()
 	: mHandle(nullptr)
-	, mKeepAliveTimer((this))
+	, mKeepAliveTimer(new QTimer(this))
 {
+	hid_init();
 }
 
 UsbRobotCommunicationThread::~UsbRobotCommunicationThread()
 {
 	disconnect();
+	hid_exit();
 }
 
 bool UsbRobotCommunicationThread::send(QObject *addressee, const QByteArray &buffer, int responseSize)
@@ -99,9 +101,11 @@ bool UsbRobotCommunicationThread::connect()
 	}
 
 	emit connected(true, QString());
-	mKeepAliveTimer.disconnect();
-	QObject::connect(&mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()), Qt::UniqueConnection);
-	mKeepAliveTimer.start(3000);
+	mKeepAliveTimer->disconnect();
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &UsbRobotCommunicationThread::checkForConnection);
+	QObject::connect(this, &UsbRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
+
+	mKeepAliveTimer->start(3000);
 	return true;
 }
 
@@ -115,10 +119,7 @@ void UsbRobotCommunicationThread::disconnect()
 	if (mHandle) {
 		hid_close(mHandle);
 		mHandle = nullptr;
-		hid_exit();
 	}
-
-	mKeepAliveTimer.stop();
 	emit disconnected();
 }
 
@@ -149,10 +150,7 @@ void UsbRobotCommunicationThread::checkForConnection()
 
 	if (!send1(command)) {
 		QLOG_ERROR() << "EV3USB" << "Connection lost";
-		hid_close(mHandle);
-		mHandle = nullptr;
-		emit disconnected();
-		mKeepAliveTimer.stop();
+		disconnect();
 	}
 }
 

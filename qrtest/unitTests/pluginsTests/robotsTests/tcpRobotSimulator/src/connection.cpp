@@ -228,11 +228,6 @@ void Connection::doDisconnect()
 		return;
 	}
 
-	if (mUseHeartbeat) {
-		mKeepAliveTimer->stop();
-		mHeartbeatTimer->stop();
-	}
-
 	mDisconnectReported = true;
 
 	emit disconnected();
@@ -246,8 +241,10 @@ void Connection::initKeepalive()
 		mKeepAliveTimer.reset(new QTimer);
 		mHeartbeatTimer.reset(new QTimer);
 
-		connect(mKeepAliveTimer.data(), SIGNAL(timeout()), this, SLOT(keepAlive()));
-		connect(mHeartbeatTimer.data(), SIGNAL(timeout()), this, SLOT(onHeartbeatTimeout()));
+		connect(mKeepAliveTimer.data(), &QTimer::timeout, this, &Connection::keepAlive);
+		connect(mHeartbeatTimer.data(), &QTimer::timeout, this, &Connection::onHeartbeatTimeout);
+		connect(this, &Connection::disconnected, mKeepAliveTimer.data(), &QTimer::stop);
+		connect(this, &Connection::disconnected, mHeartbeatTimer.data(), &QTimer::stop);
 
 		mKeepAliveTimer->setSingleShot(false);
 		mHeartbeatTimer->setSingleShot(false);
