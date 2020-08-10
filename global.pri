@@ -166,11 +166,11 @@ unix:!nosanitizers {
         QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
         QMAKE_CXXFLAGS_RELEASE += -fsanitize-recover=all
 
-        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover
-        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover
+        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
+        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
 
-        QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover
-        QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover
+        QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover=all
+        QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover=all
 }
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
