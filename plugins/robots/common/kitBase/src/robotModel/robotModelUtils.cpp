@@ -36,7 +36,7 @@ QMap<QString, QMap<PortInfo, DeviceInfo>> RobotModelUtils::deserializeFromWorldM
 
 	QDomDocument parsedWorldModel;
 	if(parsedWorldModel.setContent(worldModel)) {
-		const auto &robots = parsedWorldModel.firstChildElement("robots");
+		const auto &robots = parsedWorldModel.firstChildElement("root").firstChildElement("robots");
 		for (QDomElement robot = robots.firstChildElement("robot"); !robot.isNull()
 				; robot = robot.nextSiblingElement("robot")) {
 			const auto &robotModel = robot.attribute("id");
