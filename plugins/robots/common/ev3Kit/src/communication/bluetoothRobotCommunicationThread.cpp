@@ -25,7 +25,7 @@
 #include "ev3Kit/communication/commandConstants.h"
 #include "ev3Kit/communication/ev3DirectCommand.h"
 
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 const int keepAliveResponseSize = 5;
 
