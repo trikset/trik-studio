@@ -21,7 +21,7 @@ cp -pr $BIN_DIR/libqrrepo.so*                                           $PWD/../
 cp -pr $BIN_DIR/libqrutils.so*                                          $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrtext.so*                                           $PWD/../data/lib/
 cp -pr $BIN_DIR/libqscintilla2.so*                                      $PWD/../data/lib/
-cp -pr $BIN_DIR/libqslog.so*                                            $PWD/../data/lib/
+cp -pr $BIN_DIR/libtrikQsLog.so*                                            $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-brand-manager.so*                              $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-controller.so*                                 $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-dialogs.so*                                    $PWD/../data/lib/

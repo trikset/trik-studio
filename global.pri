@@ -351,6 +351,6 @@ CONFIG(noPch) {
 
 
 includes(thirdparty/qslog/qslog)
-links(qslog)
+links(trikQsLog)
 
 } # GLOBAL_PRI_INCLUDED

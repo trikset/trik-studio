@@ -18,7 +18,7 @@ include(../../../common.pri)
 
 include(../../../../../plugins/robots/utils/utils.pri)
 
-links(qslog test-utils)
+links(test-utils)
 
 includes(plugins/robots/utils)
 

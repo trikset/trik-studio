@@ -31,7 +31,7 @@ includes(plugins/robots/generators/nxt/nxtGeneratorBase \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo qscintilla2 robots-utils robots-nxt-kit \
+links(qrkernel qrutils qrrepo qscintilla2 robots-utils robots-nxt-kit \
 		robots-generator-base robots-nxt-generator-base)
 
 TRANSLATIONS = \

@@ -19,7 +19,7 @@ include(../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/
 
-links(qrkernel qslog qrgui-preferences-dialog)
+links(qrkernel qrgui-preferences-dialog)
 
 INCLUDEPATH += \
 	$$PWD/../../../qrgui/ \

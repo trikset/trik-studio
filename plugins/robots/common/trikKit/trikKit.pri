@@ -21,8 +21,7 @@ includes(plugins/robots/common/trikKit \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-		robots-utils robots-kit-base qslog \
-)
+                robots-utils robots-kit-base)
 
 HEADERS += \
 	$$PWD/include/trikKit/robotModel/trikRobotModelBase.h \

@@ -15,8 +15,7 @@
 QT += widgets
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-		robots-utils robots-kit-base robots-2d-model robots-nxt-kit qextserialport qslog \
-		)
+                robots-utils robots-kit-base robots-2d-model robots-nxt-kit qextserialport )
 
 includes(plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \

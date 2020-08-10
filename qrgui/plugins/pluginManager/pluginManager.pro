@@ -20,7 +20,7 @@ include(../../../global.pri)
 
 QT += xml svg
 
-links(qrkernel qslog qrgraph qrutils qrrepo qrgui-tool-plugin-interface qrgui-meta-meta-model)
+links(qrkernel qrgraph qrutils qrrepo qrgui-tool-plugin-interface qrgui-meta-meta-model)
 
 includes(qrgui qrgraph qrgui/plugins/metaMetaModel)
 
@@ -53,4 +53,3 @@ SOURCES += \
 RESOURCES += \
 	$$PWD/pluginManager.qrc \
 
-includes(thirdparty/qslog)

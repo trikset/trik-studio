@@ -18,7 +18,7 @@ TEMPLATE = lib
 
 include(../../global.pri)
 
-links(qrkernel qslog qrutils qrgraph \
+links(qrkernel qrutils qrgraph \
 		qrgui-mouse-gestures qrgui-thirdparty qrgui-models qrgui-meta-meta-model \
 		qrgui-controller qrgui-plugin-manager qrgui-brand-manager \
 		qrgui-dialogs \
