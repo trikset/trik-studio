@@ -126,13 +126,6 @@ public:
 	{
 		return 0;
 	}
-
-	/// Returns a list of intepreters specific only for this kit plugin. Intepreters will be selected in correspondence
-	/// with data returned by InterpreterInterface::supportedDiagrams().
-	virtual QList<kitBase::InterpreterInterface *> customInterpreters() const
-	{
-		return {};
-	}
 };
 
 }

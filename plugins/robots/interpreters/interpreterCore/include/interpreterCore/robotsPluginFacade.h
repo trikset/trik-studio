@@ -102,9 +102,6 @@ private:
 
 	void connectEventsForKitPlugin();
 
-	// Takes ownership
-	void registerInterpreter(kitBase::InterpreterInterface * const interpreter);
-
 	/// After all parts of a plugin are connected to each other, sends notifications about changes which were missed
 	/// during initialization process. For example, model change notification is sent in constructor of settings page,
 	/// before kit plugins were even created, so we need to resend it.
@@ -115,8 +112,7 @@ private:
 
 	QScopedPointer<textLanguage::RobotsBlockParser> mParser;
 
-	/// Storage robots interpreters. Contains mapping of diagram types to generic diagram interpreters.
-	QMap<qReal::Id, kitBase::InterpreterInterface *> mInterpreters;  // Has ownership
+	kitBase::InterpreterInterface * mInterpreter;  // Has ownership
 
 	interpreterCore::interpreter::ProxyInterpreter mProxyInterpreter;
 

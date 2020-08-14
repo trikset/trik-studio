@@ -190,8 +190,9 @@ void ActionsManager::onActiveTabChanged(const qReal::TabInfo &info)
 	mRunAction->setEnabled(isDiagramTab);
 	mStopRobotAction->setEnabled(isDiagramTab);
 	mIsOnEditorTab = isDiagramTab;
-	mRunAction->setVisible(mIsOnEditorTab && mIsOnInterpretedModel);
-	mStopRobotAction->setVisible(false);
+	if (!mStopRobotAction->isVisible()) {
+		mRunAction->setVisible(mIsOnEditorTab && mIsOnInterpretedModel);
+	}
 }
 
 void ActionsManager::onRobotModelActionChecked(QObject *robotModelObject)

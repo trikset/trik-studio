@@ -47,7 +47,7 @@ RobotsPluginFacade::RobotsPluginFacade()
 
 RobotsPluginFacade::~RobotsPluginFacade()
 {
-	qDeleteAll(mInterpreters.values().toSet());
+	delete mInterpreter;
 	for (auto &&kitId : mKitPluginManager.kitIds()) {
 		for (auto *kit : mKitPluginManager.kitsById(kitId)) {
 			kit->release();
@@ -100,7 +100,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mEventsForKitPlugin
 			, mRobotModelManager));
 
-	auto *interpreter = new interpreter::BlockInterpreter(
+	mInterpreter = new interpreter::BlockInterpreter(
 			configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, configurer.mainWindowInterpretersInterface()
@@ -109,8 +109,9 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mRobotModelManager
 			, *mParser
 			);
-
-	registerInterpreter(interpreter);
+	if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(mInterpreter)) {
+		mDevicesConfigurationManager->connectDevicesConfigurationProvider(provider);
+	}
 
 	mSensorVariablesUpdater.reset(
 		new interpreterCore::interpreter::details::SensorVariablesUpdater(mRobotModelManager, *mParser));
@@ -194,10 +195,6 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 						;
 
 				mActionsManager.exportExerciseAction().setEnabled(!hasReadOnlyFlags);
-
-				if (info.type() == qReal::TabInfo::TabType::editor) {
-					mProxyInterpreter.resetInterpreter(mInterpreters[info.rootDiagramId().type()]);
-				}
 			});
 
 	connect(&mActionsManager.exportExerciseAction(), &QAction::triggered, this, [this] () {
@@ -245,7 +242,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	});
 
 	sync();
-	mProxyInterpreter.resetInterpreter(interpreter);
+	mProxyInterpreter.resetInterpreter(mInterpreter);
 }
 
 qReal::gui::PreferencesPage *RobotsPluginFacade::robotsSettingsPage() const
@@ -436,9 +433,6 @@ void RobotsPluginFacade::initKitPlugins(const qReal::PluginConfigurator &configu
 			}
 
 			mDevicesConfigurationManager->connectDevicesConfigurationProvider(kit->devicesConfigurationProvider());
-			for (kitBase::InterpreterInterface * const interpreter : kit->customInterpreters()) {
-				registerInterpreter(interpreter);
-			}
 		}
 	}
 }
@@ -518,24 +512,6 @@ void RobotsPluginFacade::connectEventsForKitPlugin()
 				emit mEventsForKitPlugin.robotModelChanged(model.name());
 			}
 	);
-}
-
-void RobotsPluginFacade::registerInterpreter(kitBase::InterpreterInterface * const interpreter)
-{
-	bool allDiagramsAlreadyRegistered = true;
-	const qReal::IdList diagrams = interpreter->supportedDiagrams();
-	for (const qReal::Id &diagram : diagrams) {
-		if (!mInterpreters.contains(diagram)) {
-			allDiagramsAlreadyRegistered = false;
-			mInterpreters[diagram] = interpreter;
-		}
-	}
-
-	if (allDiagramsAlreadyRegistered) {
-		delete interpreter;
-	} else if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(interpreter)) {
-		mDevicesConfigurationManager->connectDevicesConfigurationProvider(provider);
-	}
 }
 
 void RobotsPluginFacade::sync()
