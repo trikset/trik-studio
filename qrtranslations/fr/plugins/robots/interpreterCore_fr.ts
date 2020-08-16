@@ -278,7 +278,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+241"/>
         <source>Real robot</source>
         <translation>Robot réel</translation>
     </message>
@@ -299,12 +299,12 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+159"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+160"/>
         <source>Robots</source>
         <translation>Robots</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+43"/>
         <source>Cannot export exercise to the given location (try to change location)</source>
         <translation type="unfinished"></translation>
     </message>
