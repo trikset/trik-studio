@@ -6,6 +6,7 @@ source $INSTALLER_ROOT/utils/mac_utils.sh
 
 rm -rf "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app"
 rsync -a $BIN_DIR/trik-studio.app/                                        "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/"
+cp    "$INSTALLER_ROOT/platform/qt.conf"				  "$BUNDLE_CONTENTS/Resources/qt.conf"
 cp    $INSTALLER_ROOT/platform/$PRODUCT-mac-platform.config               "$BUNDLE_CONTENTS/MacOS/platform.config"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
