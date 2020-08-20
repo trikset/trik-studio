@@ -60,15 +60,14 @@ TcpRobotCommunicator::TcpRobotCommunicator(const QString &serverIpSettingsKey)
 
 	QObject::connect(mWorker.data(), &TcpRobotCommunicatorWorker::casingVersionReceived
 			, this, &TcpRobotCommunicator::casingVersionReceived, Qt::QueuedConnection);
-
+	QObject::connect(&mWorkerThread, &QThread::started, mWorker.data(), &TcpRobotCommunicatorWorker::init);
 	mWorkerThread.start();
 
-	QMetaObject::invokeMethod(mWorker.data(), "init");
 }
 
 TcpRobotCommunicator::~TcpRobotCommunicator()
 {
-	QMetaObject::invokeMethod(mWorker.data(), "deinit");
+	QMetaObject::invokeMethod(mWorker.data(), "deinit", Qt::BlockingQueuedConnection);
 
 	if (mWorkerThread.isRunning()) {
 		mWorkerThread.quit();

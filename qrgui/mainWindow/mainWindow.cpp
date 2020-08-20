@@ -2224,7 +2224,7 @@ QDockWidget *MainWindow::minimapDock() const
 
 QStatusBar *MainWindow::statusBar() const
 {
-	return mUi->statusbar;
+	return QMainWindow::statusBar();
 }
 
 QList<QToolBar *> MainWindow::toolBars() const

@@ -43,7 +43,7 @@ TcpConnectionHandler::TcpConnectionHandler(int port)
 
 TcpConnectionHandler::~TcpConnectionHandler()
 {
-	mSocket.disconnect(this); //otherwise DirectConnection from another thread can happen afer dtor
+	mSocket.disconnect(); //otherwise DirectConnection from another thread can happen afer dtor
 }
 
 bool TcpConnectionHandler::connect(const QHostAddress &serverAddress)

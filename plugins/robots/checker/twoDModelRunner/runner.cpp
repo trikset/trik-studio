@@ -33,7 +33,7 @@ using namespace twoDModel;
 Runner::Runner(const QString &report, const QString &trajectory)
 	: mProjectManager(mQRealFacade.models())
 	, mMainWindow(mErrorReporter, mQRealFacade.events()
-			, mProjectManager, mQRealFacade.models().graphicalModelAssistApi())
+			, &mProjectManager, &mQRealFacade.models().graphicalModelAssistApi())
 	, mConfigurator(mQRealFacade.models().repoControlApi()
 			, mQRealFacade.models().graphicalModelAssistApi()
 			, mQRealFacade.models().logicalModelAssistApi()
