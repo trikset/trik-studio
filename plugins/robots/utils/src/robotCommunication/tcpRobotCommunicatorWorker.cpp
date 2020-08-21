@@ -53,7 +53,9 @@ void TcpRobotCommunicatorWorker::init()
 
 void TcpRobotCommunicatorWorker::deinit()
 {
-	disconnectConnection();
+	mTelemetryConnection.reset();
+	mControlConnection.reset();
+	mVersionTimer.reset();
 }
 
 void TcpRobotCommunicatorWorker::uploadProgram(const QString &programName, const QString &programContents)

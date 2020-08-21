@@ -505,8 +505,6 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 	connect(quickPreferences->lineEdit(), &QLineEdit::editingFinished, this, [quickPreferences]() {
 		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text().trimmed());
 	});
-
-	connect(this, &QObject::destroyed, quickPreferences, &QObject::deleteLater);
 	return quickPreferences;
 }
 

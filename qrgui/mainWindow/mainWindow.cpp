@@ -817,7 +817,7 @@ void MainWindow::registerEditor(EditorInterface &editor)
 }
 
 void MainWindow::setTextChanged(text::QScintillaTextEdit *editor, bool changed)
-{	
+{
 	static QByteArray CHANGED_MARK = "*";
 	const QString windowTitle = mToolManager->customizer()->windowTitle();
 	const QString chIndicator = changed ? CHANGED_MARK : "";
@@ -2224,7 +2224,7 @@ QDockWidget *MainWindow::minimapDock() const
 
 QStatusBar *MainWindow::statusBar() const
 {
-	return mUi->statusbar;
+	return QMainWindow::statusBar();
 }
 
 QList<QToolBar *> MainWindow::toolBars() const
