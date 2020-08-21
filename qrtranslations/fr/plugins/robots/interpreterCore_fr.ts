@@ -238,7 +238,7 @@
         <translation>Configuration de capteurs</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+14"/>
         <source>Sensors state</source>
         <translation>État des capteurs</translation>
     </message>
@@ -322,7 +322,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-69"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-65"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
@@ -342,7 +342,7 @@
         <translation>mode de débogage</translation>
     </message>
     <message>
-        <location line="+174"/>
+        <location line="+162"/>
         <source>Edit mode</source>
         <translation>Mode d&apos;édition</translation>
     </message>
@@ -352,7 +352,7 @@
         <translation>Mode de débogage</translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+146"/>
         <source>Modes</source>
         <translation type="unfinished"></translation>
     </message>

@@ -62,7 +62,6 @@ TcpRobotCommunicator::TcpRobotCommunicator(const QString &serverIpSettingsKey)
 			, this, &TcpRobotCommunicator::casingVersionReceived, Qt::QueuedConnection);
 	QObject::connect(&mWorkerThread, &QThread::started, mWorker.data(), &TcpRobotCommunicatorWorker::init);
 	mWorkerThread.start();
-
 }
 
 TcpRobotCommunicator::~TcpRobotCommunicator()
@@ -140,7 +139,6 @@ void TcpRobotCommunicator::disconnect()
 
 void TcpRobotCommunicator::onMessageFromRobot(const MessageKind &messageKind, const QString &message)
 {
-
 	switch (messageKind) {
 	case MessageKind::error:
 		emit errorFromRobot(message);
