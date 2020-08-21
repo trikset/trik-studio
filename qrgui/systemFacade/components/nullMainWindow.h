@@ -32,7 +32,8 @@ class QRGUI_SYSTEM_FACADE_EXPORT NullMainWindow : public QObject
 
 public:
 	NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events
-			, const ProjectManagementInterface *projectManager = nullptr, const GraphicalModelAssistInterface *graphicalModel = nullptr);
+			, const ProjectManagementInterface *projectManager = nullptr
+			, const GraphicalModelAssistInterface *graphicalModel = nullptr);
 	~NullMainWindow();
 
 	void selectItem(const Id &graphicalId) override;

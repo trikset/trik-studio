@@ -92,49 +92,55 @@ void TcpRobotCommunicator::uploadProgram(const QString &programName)
 
 	const QString fileNameOnARobot = QFileInfo(programName).fileName();
 
-	QMetaObject::invokeMethod(mWorker.data(), "uploadProgram"
-			, Q_ARG(QString, fileNameOnARobot), Q_ARG(QString, fileContents));
+	QMetaObject::invokeMethod(mWorker.data(), [this, fileNameOnARobot, fileContents](){
+		mWorker->uploadProgram(fileNameOnARobot, fileContents);
+	});
 }
 
 void TcpRobotCommunicator::runProgram(const QString &programName)
 {
-	QMetaObject::invokeMethod(mWorker.data(), "runProgram", Q_ARG(QString, programName));
+	QMetaObject::invokeMethod(mWorker.data(), [this, programName]() {
+		mWorker->runProgram(programName);
+	});
 }
 
 void TcpRobotCommunicator::runDirectCommand(const QString &directCommand, bool asScript)
 {
-	QMetaObject::invokeMethod(mWorker.data(), "runDirectCommand"
-			, Q_ARG(QString, directCommand), Q_ARG(bool, asScript));
+	QMetaObject::invokeMethod(mWorker.data(), [this, directCommand, asScript] {
+		mWorker->runDirectCommand(directCommand, asScript);
+	});
 }
 
 void TcpRobotCommunicator::requestCasingVersion()
 {
-	QMetaObject::invokeMethod(mWorker.data(), "requestCasingVersion");
+	QMetaObject::invokeMethod(mWorker.data(), &TcpRobotCommunicatorWorker::requestCasingVersion);
 }
 
 void TcpRobotCommunicator::stopRobot()
 {
-	QMetaObject::invokeMethod(mWorker.data(), "stopRobot");
+	QMetaObject::invokeMethod(mWorker.data(), &TcpRobotCommunicatorWorker::stopRobot);
 }
 
 void TcpRobotCommunicator::requestData(const QString &sensor)
 {
-	QMetaObject::invokeMethod(mWorker.data(), "requestData", Q_ARG(QString, sensor));
+	QMetaObject::invokeMethod(mWorker.data(), [this, sensor]() {
+		mWorker->requestData(sensor);
+	});
 }
 
 void TcpRobotCommunicator::requestData()
 {
-	QMetaObject::invokeMethod(mWorker.data(), "requestData");
+	QMetaObject::invokeMethod(mWorker.data(), QOverload<>::of(&TcpRobotCommunicatorWorker::requestData));
 }
 
 void TcpRobotCommunicator::connect()
 {
-	QMetaObject::invokeMethod(mWorker.data(), "connect");
+	QMetaObject::invokeMethod(mWorker.data(), &TcpRobotCommunicatorWorker::connect);
 }
 
 void TcpRobotCommunicator::disconnect()
 {
-	QMetaObject::invokeMethod(mWorker.data(), "disconnect");
+	QMetaObject::invokeMethod(mWorker.data(), &TcpRobotCommunicatorWorker::disconnectConnection);
 }
 
 void TcpRobotCommunicator::onMessageFromRobot(const MessageKind &messageKind, const QString &message)

@@ -817,7 +817,7 @@ void MainWindow::registerEditor(EditorInterface &editor)
 }
 
 void MainWindow::setTextChanged(text::QScintillaTextEdit *editor, bool changed)
-{	
+{
 	static QByteArray CHANGED_MARK = "*";
 	const QString windowTitle = mToolManager->customizer()->windowTitle();
 	const QString chIndicator = changed ? CHANGED_MARK : "";
