@@ -14,9 +14,12 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
-CONFIG += cmdline
+equals(TEMPLATE, app) {
+    CONFIG += cmdline testcase
+}
 
 include(../../global.pri)
+
 
 QT += widgets
 
