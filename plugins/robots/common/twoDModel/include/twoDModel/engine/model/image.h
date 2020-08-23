@@ -34,13 +34,12 @@ class Image
 {
 	Q_DISABLE_COPY(Image)
 public:
-	Image() = default;
 	explicit Image(const QString &id);
 	Image(const QString &path, bool memorize);
 	~Image();
 
 	/// Reads image from XML-representation.
-	static Image *deserialize(const QDomElement &element);
+	static QSharedPointer<Image> deserialize(const QDomElement &element);
 
 	/// Returns true if image was successfully loaded.
 	bool isValid() const;
@@ -60,8 +59,8 @@ public:
 	/// Returns true if this item is embedded into save.
 	QString path() const;
 
-	/// Sets a path to displayed image.
-	void setPath(const QString &path);
+	/// Loads from file.
+	void loadFrom(const QString &path);
 
 	/// Draws image with \a painter inside the \a rect considering \a zoom.
 	void draw(QPainter &painter, const QRect &rect, qreal zoom = 1.0) const;

@@ -30,6 +30,8 @@ using namespace twoDModel::model;
 
 const quint64 maxSvgSize = 1000;
 
+Image::~Image() = default;
+
 Image::Image(const QString &id)
 	: mImageId(id)
 	, mImagesCache(utils::ImagesCache::instance())
@@ -41,31 +43,31 @@ Image::Image(const QString &path, bool memorize)
 	, mImageId(QUuid::createUuid().toString())
 	, mImagesCache(utils::ImagesCache::instance())
 {
-	setPath(path);
+	loadFrom(path);
 }
 
-Image::~Image() = default;
-
-Image *Image::deserialize(const QDomElement &element)
+QSharedPointer<Image> Image::deserialize(const QDomElement &element)
 {
 	const bool external = element.attribute("external") == "true";
 	const QString path = element.attribute("path");
-	Image *image = new Image(path, !external);
-	image->mImageId = element.attribute("imageId", image->mImageId);
 	QByteArray content = element.text().toLatin1();
-
-	if (!external) {
-		if (path.endsWith("svg", Qt::CaseInsensitive)) {
-			image->mSvgBytes = content;
+	auto image = QSharedPointer<Image>::create(element.attribute("imageId", QUuid::createUuid().toString()));
+	image->setExternal(external);
+	if (external) {
+		image->loadFrom(path);
+	} else {
+		image->mPath = path;
+		if (path.endsWith("svg", Qt::CaseInsensitive)) {			
+			image->mIsSvg = true;
+			image->mSvgBytes = std::move(content);
 			image->mSvgRenderer.reset(new QSvgRenderer(image->mSvgBytes));
 		} else {
-			QByteArray bytes = QByteArray::fromBase64(content);
+			auto bytes = QByteArray::fromBase64(content);
 			QBuffer buffer(&bytes);
 			QImage tempImage;
 			if (!tempImage.load(&buffer, "PNG")) {
 				QLOG_ERROR() << "Corrupted image" << image->mPath << "when loading from save";
 			}
-
 			image->mImage.reset(new QImage(tempImage));
 		}
 	}
@@ -147,7 +149,7 @@ QString Image::path() const
 	return mPath;
 }
 
-void Image::setPath(const QString &path)
+void Image::loadFrom(const QString &path)
 {
 	mPath = path;
 	mIsSvg = path.endsWith(".svg");

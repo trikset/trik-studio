@@ -707,7 +707,7 @@ void TwoDModelScene::addImage()
 		}
 	}
 
-	auto newImage = new model::Image(loadFileName, false);
+	auto newImage = QSharedPointer<model::Image>::create(loadFileName, false);
 	auto size = newImage->preferedSize();
 	if (size.width() == 0 || size.height() == 0) {
 		if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Error")

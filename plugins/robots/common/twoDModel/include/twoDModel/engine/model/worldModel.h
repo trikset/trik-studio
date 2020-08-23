@@ -236,7 +236,7 @@ private:
 	QMap<QString, items::ColorFieldItem *> mColorFields;
 	QMap<QString, items::ImageItem *> mImageItems;
 	QMap<QString, items::RegionItem *> mRegions;
-	QMap<QString, Image*> mImages; // takes ownership
+	QMap<QString, QSharedPointer<model::Image>> mImages;
 	QMap<QString, int> mOrder;
 	QList<QGraphicsPathItem *> mRobotTrace; // Doesn`t take ownership.
 	Image *mBackgroundImage = nullptr;

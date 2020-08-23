@@ -51,14 +51,7 @@ WorldModel::WorldModel()
 {
 }
 
-WorldModel::~WorldModel()
-{
-	for (Image* img : mImages.values()) {
-		delete img;
-	}
-
-	mImages.clear();
-}
+WorldModel::~WorldModel() = default;
 
 void WorldModel::init(qReal::ErrorReporterInterface &errorReporter)
 {
@@ -315,9 +308,6 @@ void WorldModel::clear()
 
 	mOrder.clear();
 
-	for (Image* img : mImages.values()) {
-		delete img;
-	}
 	mImages.clear();
 
 	clearRobotTrace();
@@ -509,7 +499,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 				; imagesNode = imagesNode.nextSiblingElement("images")) {
 			for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
 					; imageNode = imageNode.nextSiblingElement("image")) {
-				model::Image *img = Image::deserialize(imageNode);
+				auto img = Image::deserialize(imageNode);
 				mImages.insert(img->imageId(), img);
 			}
 		}
@@ -525,7 +515,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		if (!imageId.isEmpty()) {
 			createImageItem(backgroundNode, true);
 		} else {
-			Image *image = Image::deserialize(backgroundNode);
+			auto image = Image::deserialize(backgroundNode);
 			mImages[image->imageId()] = image;
 			createImageItem(backgroundNode, true);
 		}
@@ -582,7 +572,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
 				; imageNode = imageNode.nextSiblingElement("image")) {
 			if (imageNode.hasAttribute("path")) {
-				model::Image *img = Image::deserialize(imageNode);
+				auto img = Image::deserialize(imageNode);
 				QString id = element.attribute("imageId");
 				if (id.isNull()) {
 					id = img->imageId();
@@ -722,10 +712,10 @@ items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool 
 	auto imageId = element.attribute("imageId");
 	auto image = mImages.value(imageId, nullptr);
 	if (!image) {
-		image = new Image(imageId);
+		image.reset(new Image(imageId));
 		mErrorReporter->addError(tr("Unknown image with imageId %1").arg(imageId));
 	}
-	items::ImageItem *imageItem = new items::ImageItem(image, QRect());
+	auto imageItem = new items::ImageItem(image, QRect());
 	imageItem->deserialize(element);
 	imageItem->setBackgroundRole(background || element.attribute("isBackground") == "true");
 	addImageItem(imageItem);
