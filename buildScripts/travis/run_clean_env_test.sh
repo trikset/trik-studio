@@ -13,7 +13,7 @@ case $TRAVIS_OS_NAME in
     ;;
   osx)
     ./installer/install_studio_mac.sh ./installer/
-    env QT_QPA_PLATFORM=minimal python3.7 ./buildScripts/tests/fieldstest.py "$HOME/TRIKStudio/TRIK\ Studio.app/Contents/MacOS/2D-model" testing
+    env QT_QPA_PLATFORM=minimal python3.7 ./buildScripts/tests/fieldstest.py "$HOME/TRIKStudio/TRIK Studio.app/Contents/MacOS/2D-model" testing
     ;;
   *) exit 1 ;;
 esac
