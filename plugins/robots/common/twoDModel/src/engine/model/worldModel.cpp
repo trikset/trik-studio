@@ -213,7 +213,7 @@ const QMap<QString, items::ColorFieldItem *> &WorldModel::colorFields() const
 	return mColorFields;
 }
 
-const QMap<QString, items::ImageItem *> &WorldModel::imageItems() const
+const QMap<QString, QSharedPointer<items::ImageItem>> &WorldModel::imageItems() const
 {
 	return mImageItems;
 }
@@ -247,7 +247,7 @@ void WorldModel::removeColorField(items::ColorFieldItem *colorField)
 	emit itemRemoved(colorField);
 }
 
-void WorldModel::addImageItem(items::ImageItem *imageItem)
+void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
 {
 	const QString id = imageItem->id();
 	if (mImageItems.contains(id)) {
@@ -258,14 +258,14 @@ void WorldModel::addImageItem(items::ImageItem *imageItem)
 	mImageItems[id] = imageItem;
 	mImages[imageItem->image()->imageId()] = imageItem->image();
 	mOrder[id] = mOrder.size();
-	connect(imageItem, &items::ImageItem::internalImageChanged, this, &WorldModel::blobsChanged);
-	connect(imageItem, &items::ImageItem::internalImageChanged, this, [=](){
+	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, &WorldModel::blobsChanged);
+	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, [=](){
 			auto imageSize = imageItem->image()->preferedSize();
 			if (imageSize.height() == 0 || imageSize.width() == 0) {
 				mErrorReporter->addWarning(tr("Incorrect image, please try anouther one"));
 			}
 		});
-	emit imageItemAdded(imageItem);
+	emit imageItemAdded(imageItem.data());
 	emit blobsChanged();
 }
 
@@ -296,7 +296,7 @@ void WorldModel::clear()
 	}
 
 	while (!mImageItems.isEmpty()) {
-		removeImageItem(mImageItems.last());
+		removeImageItem(mImageItems.last().data());
 	}
 
 	while (!mRegions.isEmpty()) {
@@ -616,7 +616,7 @@ QGraphicsObject *WorldModel::findId(const QString &id) const
 	}
 
 	if (mImageItems.contains(id)) {
-		return mImageItems[id];
+		return mImageItems[id].data();
 	}
 
 	if (mRegions.contains(id)) {
@@ -707,7 +707,7 @@ void WorldModel::createStylus(const QDomElement &element)
 	addColorField(stylusItem);
 }
 
-items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool background)
+QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &element, bool background)
 {
 	auto imageId = element.attribute("imageId");
 	auto image = mImages.value(imageId, nullptr);
@@ -715,7 +715,7 @@ items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool 
 		image.reset(new Image(imageId));
 		mErrorReporter->addError(tr("Unknown image with imageId %1").arg(imageId));
 	}
-	auto imageItem = new items::ImageItem(image, QRect());
+	auto imageItem = QSharedPointer<items::ImageItem>::create(image, QRect());
 	imageItem->deserialize(element);
 	imageItem->setBackgroundRole(background || element.attribute("isBackground") == "true");
 	addImageItem(imageItem);

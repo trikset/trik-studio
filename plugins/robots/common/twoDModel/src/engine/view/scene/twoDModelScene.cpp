@@ -720,10 +720,10 @@ void TwoDModelScene::addImage()
 	}
 	mDrawingAction = image;
 	const QRect rect(QPoint(-size.width() / 2, -size.height() / 2), size);
-	auto result = new twoDModel::items::ImageItem(newImage, rect);
+	auto result = QSharedPointer<twoDModel::items::ImageItem>::create(newImage, rect);
 	result->setMemorize(true);
 	mModel.worldModel().addImageItem(result);
-	registerInUndoStack(result);
+	registerInUndoStack(result.data());
 	setNoneStatus();
 }
 

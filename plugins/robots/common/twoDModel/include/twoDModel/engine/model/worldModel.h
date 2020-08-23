@@ -86,7 +86,7 @@ public:
 	const QMap<QString, items::RegionItem *> &regions() const;
 
 	/// Returns a list of image items in the world model.
-	const QMap<QString, items::ImageItem *> &imageItems() const;
+	const QMap<QString, QSharedPointer<items::ImageItem>> &imageItems() const;
 
 	/// Returns a list of trace items on the floor.
 	const QList<QGraphicsPathItem *> &trace() const;
@@ -116,7 +116,7 @@ public:
 	void removeColorField(items::ColorFieldItem *colorField);
 
 	/// Adds image item into 2D model.
-	void addImageItem(items::ImageItem *imageItem);
+	void addImageItem(const QSharedPointer<items::ImageItem> &imageItem);
 
 	/// Removes image item from 2D model.
 	void removeImageItem(items::ImageItem *imageItem);
@@ -176,7 +176,7 @@ public:
 	void createStylus(const QDomElement &element);
 
 	/// Creates image item described by \a element in the world model.
-	items::ImageItem *createImageItem(const QDomElement &element, bool background=false);
+	QSharedPointer<items::ImageItem> createImageItem(const QDomElement &element, bool background=false);
 
 	/// Creates region item described by \a element in the world model.
 	void createRegion(const QDomElement &element);
@@ -234,7 +234,7 @@ private:
 	QMap<QString, items::SkittleItem *> mSkittles;
 	QMap<QString, items::BallItem *> mBalls;
 	QMap<QString, items::ColorFieldItem *> mColorFields;
-	QMap<QString, items::ImageItem *> mImageItems;
+	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
 	QMap<QString, items::RegionItem *> mRegions;
 	QMap<QString, QSharedPointer<model::Image>> mImages;
 	QMap<QString, int> mOrder;
