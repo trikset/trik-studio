@@ -57,7 +57,7 @@ QSharedPointer<Image> Image::deserialize(const QDomElement &element)
 		image->loadFrom(path);
 	} else {
 		image->mPath = path;
-		if (path.endsWith("svg", Qt::CaseInsensitive)) {			
+		if (path.endsWith("svg", Qt::CaseInsensitive)) {
 			image->mIsSvg = true;
 			image->mSvgBytes = std::move(content);
 			image->mSvgRenderer.reset(new QSvgRenderer(image->mSvgBytes));

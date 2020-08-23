@@ -138,8 +138,7 @@ public:
 	QPointF robotCenter() const;
 
 	/// Returns the item whose scene position will determine robot`s start position.
-	/// Transfers ownership.
-	QGraphicsItem *startPositionMarker() const;
+	QSharedPointer<QGraphicsItem> startPositionMarker() const;
 
 	/// Returns accelerometer sensor data.
 	Q_INVOKABLE QVector<int> accelerometerReading() const;
@@ -226,7 +225,7 @@ private:
 
 	physics::PhysicsEngineBase *mPhysicsEngine;  // Does not take ownership
 
-	items::StartPosition *mStartPositionMarker;  // Transfers ownership to QGraphicsScene
+	QSharedPointer<items::StartPosition> mStartPositionMarker;
 };
 
 }

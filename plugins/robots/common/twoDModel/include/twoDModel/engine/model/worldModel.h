@@ -32,7 +32,6 @@ class ErrorReporterInterface;
 }
 
 namespace twoDModel {
-
 namespace items {
 class WallItem;
 class SkittleItem;
@@ -71,55 +70,55 @@ public:
 	bool checkCollision(const QPainterPath &path) const;
 
 	/// Returns a set of walls in the world model. Result is mapping of wall ids to walls themselves.
-	const QMap<QString, items::WallItem *> &walls() const;
+	const QMap<QString, QSharedPointer<items::WallItem>> &walls() const;
 
 	/// Returns a set of skittles in the world model. Result is mapping of skittle ids to slittles themselves.
-	const QMap<QString, items::SkittleItem *> &skittles() const;
+	const QMap<QString, QSharedPointer<items::SkittleItem>> &skittles() const;
 
 	/// Returns a set of balls in the world model. Result is mapping of ball ids to balls themselves.
-	const QMap<QString, items::BallItem *> &balls() const;
+	const QMap<QString, QSharedPointer<items::BallItem>> &balls() const;
 
 	/// Returns a set of color field items in the world model. Result is mapping of field ids to fields themselves.
-	const QMap<QString, items::ColorFieldItem *> &colorFields() const;
+	const QMap<QString, QSharedPointer<items::ColorFieldItem>> &colorFields() const;
 
 	/// Returns a set of region items in the world model. Result is mapping of field ids to regions themselves.
-	const QMap<QString, items::RegionItem *> &regions() const;
+	const QMap<QString, QSharedPointer<items::RegionItem>> &regions() const;
 
 	/// Returns a list of image items in the world model.
 	const QMap<QString, QSharedPointer<items::ImageItem>> &imageItems() const;
 
 	/// Returns a list of trace items on the floor.
-	const QList<QGraphicsPathItem *> &trace() const;
+	const QList<QSharedPointer<QGraphicsPathItem>> &trace() const;
 
 	/// Appends \a wall into world model.
-	void addWall(items::WallItem *wall);
+	void addWall(const QSharedPointer<items::WallItem> &wall);
 
 	/// Removes \a wall from the world model.
-	void removeWall(items::WallItem *wall);
+	void removeWall(QSharedPointer<items::WallItem> wall);
 
 	/// Appends \a skittle into world model.
-	void addSkittle(items::SkittleItem *skittle);
+	void addSkittle(const QSharedPointer<items::SkittleItem> &skittle);
 
 	/// Removes \a skittle from the world model.
-	void removeSkittle(items::SkittleItem *skittle);
+	void removeSkittle(QSharedPointer<items::SkittleItem> skittle);
 
 	/// Appends \a ball into world model.
-	void addBall(items::BallItem *ball);
+	void addBall(const QSharedPointer<items::BallItem> &ball);
 
 	/// Removes \a ball from the world model.
-	void removeBall(items::BallItem *ball);
+	void removeBall(QSharedPointer<items::BallItem> ball);
 
 	/// Appends colored item \a colorField into the world model.
-	void addColorField(items::ColorFieldItem *colorField);
+	void addColorField(const QSharedPointer<items::ColorFieldItem> &colorField);
 
 	/// Removes colored item \a colorField form the world model.
-	void removeColorField(items::ColorFieldItem *colorField);
+	void removeColorField(QSharedPointer<items::ColorFieldItem> colorField);
 
 	/// Adds image item into 2D model.
 	void addImageItem(const QSharedPointer<items::ImageItem> &imageItem);
 
 	/// Removes image item from 2D model.
-	void removeImageItem(items::ImageItem *imageItem);
+	void removeImageItem(QSharedPointer<items::ImageItem> imageItem);
 
 	/// Removes all walls, colored items, regions and robot traces from the world model.
 	void clear();
@@ -146,7 +145,7 @@ public:
 	void deserialize(const QDomElement &element, const QDomElement &blobs);
 
 	/// Searches on the scene item with the given id. Returns nullptr if not found.
-	QGraphicsObject *findId(const QString &id) const;
+	QSharedPointer<QGraphicsObject> findId(const QString &id) const;
 
 	/// Creates element from serialized XML specification.
 	void createElement(const QDomElement &element);
@@ -189,28 +188,28 @@ signals:
 	void pixelsInCmChanged(qreal newValue);
 
 	/// Emitted each time when model is appended with some new wall.
-	void wallAdded(items::WallItem *item);
+	void wallAdded(const QSharedPointer<items::WallItem> &item);
 
 	/// Emitted each time when model is appended with some new skittle.
-	void skittleAdded(items::SkittleItem *item);
+	void skittleAdded(const QSharedPointer<items::SkittleItem> &item);
 
 	/// Emitted each time when model is appended with some new skittle.
-	void ballAdded(items::BallItem *item);
+	void ballAdded(const QSharedPointer<items::BallItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
-	void colorItemAdded(items::ColorFieldItem *item);
+	void colorItemAdded(const QSharedPointer<items::ColorFieldItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
-	void imageItemAdded(items::ImageItem *item);
+	void imageItemAdded(const QSharedPointer<items::ImageItem> &item);
 
 	/// Emitted each time when model is appended with some new item.
-	void regionItemAdded(items::RegionItem *item);
+	void regionItemAdded(const QSharedPointer<items::RegionItem> &item);
 
 	/// Emitted each time when model is appended with some new item.
-	void traceItemAddedOrChanged(QGraphicsPathItem *item, bool justChanged);
+	void traceItemAddedOrChanged(const QSharedPointer<QGraphicsPathItem> &item, bool justChanged);
 
 	/// Emitted each time when some item was removed from the 2D model world.
-	void itemRemoved(QGraphicsItem *item);
+	void itemRemoved(const QSharedPointer<QGraphicsItem> &item);
 
 	/// Emitted when robot trace is non-empty any more or was cleared from the floor.
 	void robotTraceAppearedOrDisappeared(bool appeared);
@@ -230,16 +229,15 @@ private:
 	void serializeBackground(QDomElement &background, const QRect &rect, const Image * const img) const;
 	QRectF deserializeRect(const QString &string) const;
 
-	QMap<QString, items::WallItem *> mWalls;
-	QMap<QString, items::SkittleItem *> mSkittles;
-	QMap<QString, items::BallItem *> mBalls;
-	QMap<QString, items::ColorFieldItem *> mColorFields;
+	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
+	QMap<QString, QSharedPointer<items::SkittleItem>> mSkittles;
+	QMap<QString, QSharedPointer<items::BallItem>> mBalls;
+	QMap<QString, QSharedPointer<items::ColorFieldItem>> mColorFields;
 	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
-	QMap<QString, items::RegionItem *> mRegions;
+	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;
 	QMap<QString, QSharedPointer<model::Image>> mImages;
 	QMap<QString, int> mOrder;
-	QList<QGraphicsPathItem *> mRobotTrace; // Doesn`t take ownership.
-	Image *mBackgroundImage = nullptr;
+	QList<QSharedPointer<QGraphicsPathItem>> mRobotTrace;
 	QRect mBackgroundRect;
 	QScopedPointer<QDomDocument> mXmlFactory;
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
