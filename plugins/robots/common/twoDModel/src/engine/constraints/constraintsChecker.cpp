@@ -29,6 +29,7 @@
 
 
 using namespace twoDModel::constraints;
+Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
 
 ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model)
 	: mErrorReporter(errorReporter)
@@ -54,7 +55,7 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 
 	bindToWorldModelObjects();
 	bindToRobotObjects();
-	mObjects["trace"] = new utils::ObjectsSet<QGraphicsPathItem *>(mModel.worldModel().trace(), this);
+	mObjects["trace"] = new utils::ObjectsSet<QSharedPointer<QGraphicsPathItem>>(mModel.worldModel().trace(), this);
 }
 
 ConstraintsChecker::~ConstraintsChecker()
@@ -150,18 +151,19 @@ void ConstraintsChecker::dropEvent()
 void ConstraintsChecker::bindToWorldModelObjects()
 {
 	connect(&mModel.worldModel(), &model::WorldModel::wallAdded
-			, this, [this](items::WallItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::WallItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded
-			, this, [this](items::ColorFieldItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::ColorFieldItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
-			, this, [this](items::RegionItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::RegionItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded
-			, this, [this](items::SkittleItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::SkittleItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
-			, this, [this](items::BallItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
 
-	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, this, [this](QGraphicsItem *item) {
-		for (const QString &key : mObjects.keys(dynamic_cast<QObject *>(item))) {
+	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
+			, this, [this](const QSharedPointer<QGraphicsItem> &item) {
+		for (const QString &key : mObjects.keys(dynamic_cast<QObject*>(item.data()))) {
 			mObjects.remove(key);
 		}
 	});

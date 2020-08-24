@@ -475,7 +475,7 @@ void RobotModel::deserializeWheels(const QDomElement &robotElement)
 	setMotorPortOnWheel(WheelEnum::right, PortInfo::fromString(wheels.attribute("right")));
 }
 
-QGraphicsItem *RobotModel::startPositionMarker() const
+QSharedPointer<QGraphicsItem> RobotModel::startPositionMarker() const
 {
 	return mStartPositionMarker;
 }

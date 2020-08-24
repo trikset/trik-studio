@@ -158,24 +158,24 @@ private slots:
 	void onRobotRemove(model::RobotModel *robotModel);
 
 	/// Called after new wall is added to a world model.
-	void onWallAdded(items::WallItem *wall);
+	void onWallAdded(QSharedPointer<items::WallItem> wall);
 
 	/// Called after new skittle is added to a world model.
-	void onSkittleAdded(items::SkittleItem *skittle);
+	void onSkittleAdded(QSharedPointer<items::SkittleItem> skittle);
 
 	/// Called after new ball is added to a world model.
-	void onBallAdded(items::BallItem *ball);
+	void onBallAdded(const QSharedPointer<items::BallItem> &ball);
 
 	/// Called after new color field item is added to a world model.
-	void onColorItemAdded(graphicsUtils::AbstractItem *item);
+	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
 	/// Called after new image item is added to a world model.
-	void onImageItemAdded(graphicsUtils::AbstractItem *item);
+	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
-	void onAbstractItemAdded(graphicsUtils::AbstractItem *item);
+	void onAbstractItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
 
 	/// Called after some item was kicked away from a world model.
-	void onItemRemoved(QGraphicsItem *item);
+	void onItemRemoved(const QSharedPointer<QGraphicsItem> &item);
 
 	void drawAxes(QPainter *painter);
 
@@ -222,7 +222,8 @@ private:
 
 	void handleMouseInteractionWithSelectedItems();
 
-	bool hasIntersect(const graphicsUtils::AbstractItem *item1, const graphicsUtils::AbstractItem *item2) const;
+	bool hasIntersect(const graphicsUtils::AbstractItem *item2
+					  , const graphicsUtils::AbstractItem *item1) const;
 	bool isCorrectScene(const QList<QGraphicsItem *> &checkItems) const;
 
 	qreal currentZoom() const;
@@ -236,17 +237,17 @@ private:
 	/// Current action (toggled button on left panel)
 	DrawingAction mDrawingAction;
 
-	QMap<model::RobotModel *, RobotItem *> mRobots;
+	QMap<model::RobotModel *, QSharedPointer<RobotItem>> mRobots;
 
 	/// Temporary wall that's being created. When it's complete, it's added to world model
-	items::WallItem *mCurrentWall = nullptr;
-	items::SkittleItem *mCurrentSkittle = nullptr;
-	items::BallItem *mCurrentBall = nullptr;
-	items::LineItem *mCurrentLine = nullptr;
-	items::CurveItem *mCurrentCurve = nullptr;
-	items::StylusItem *mCurrentStylus = nullptr;
-	items::RectangleItem *mCurrentRectangle = nullptr;
-	items::EllipseItem *mCurrentEllipse = nullptr;
+	QSharedPointer<items::WallItem> mCurrentWall;
+	QSharedPointer<items::SkittleItem> mCurrentSkittle;
+	QSharedPointer<items::BallItem> mCurrentBall;
+	QSharedPointer<items::LineItem> mCurrentLine;
+	QSharedPointer<items::CurveItem> mCurrentCurve;
+	QSharedPointer<items::StylusItem> mCurrentStylus;
+	QSharedPointer<items::RectangleItem> mCurrentRectangle;
+	QSharedPointer<items::EllipseItem> mCurrentEllipse;
 
 	commands::ReshapeCommand *mCurrentReshapeCommand = nullptr;
 

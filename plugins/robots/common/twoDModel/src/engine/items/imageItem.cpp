@@ -24,7 +24,7 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-ImageItem::ImageItem(model::Image *image, const QRect &geometry)
+ImageItem::ImageItem(const QSharedPointer<model::Image> &image, const QRect &geometry)
 	: mImage(image)
 {
 	setX(0);
@@ -139,7 +139,7 @@ void ImageItem::deserialize(const QDomElement &element)
 	setY2(rect.bottom());
 }
 
-twoDModel::model::Image *ImageItem::image() const
+QSharedPointer<twoDModel::model::Image> ImageItem::image() const
 {
 	return mImage;
 }
@@ -162,7 +162,7 @@ void ImageItem::setMemorize(bool memorize)
 
 void ImageItem::setPath(const QString &path)
 {
-	mImage->setPath(path);
+	mImage->loadFrom(path);
 	update();
 	emit internalImageChanged();
 }

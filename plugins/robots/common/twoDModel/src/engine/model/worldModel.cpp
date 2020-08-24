@@ -51,14 +51,7 @@ WorldModel::WorldModel()
 {
 }
 
-WorldModel::~WorldModel()
-{
-	for (Image* img : mImages.values()) {
-		delete img;
-	}
-
-	mImages.clear();
-}
+WorldModel::~WorldModel() = default;
 
 void WorldModel::init(qReal::ErrorReporterInterface &errorReporter)
 {
@@ -145,22 +138,22 @@ bool WorldModel::checkCollision(const QPainterPath &path) const
 	return buildSolidItemsPath().intersects(path);
 }
 
-const QMap<QString, items::WallItem *> &WorldModel::walls() const
+const QMap<QString, QSharedPointer<items::WallItem> > &WorldModel::walls() const
 {
 	return mWalls;
 }
 
-const QMap<QString, items::SkittleItem *> &WorldModel::skittles() const
+const QMap<QString, QSharedPointer<items::SkittleItem>> &WorldModel::skittles() const
 {
 	return mSkittles;
 }
 
-const QMap<QString, items::BallItem *> &WorldModel::balls() const
+const QMap<QString, QSharedPointer<items::BallItem>> &WorldModel::balls() const
 {
 	return mBalls;
 }
 
-void WorldModel::addWall(items::WallItem *wall)
+void WorldModel::addWall(const QSharedPointer<items::WallItem> &wall)
 {
 	const QString id = wall->id();
 	if (mWalls.contains(id)) {
@@ -173,13 +166,13 @@ void WorldModel::addWall(items::WallItem *wall)
 	emit wallAdded(wall);
 }
 
-void WorldModel::removeWall(items::WallItem *wall)
+void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 {
 	mWalls.remove(wall->id());
 	emit itemRemoved(wall);
 }
 
-void WorldModel::addSkittle(items::SkittleItem *skittle)
+void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
 {
 	const QString id = skittle->id();
 	if (mSkittles.contains(id)) {
@@ -191,13 +184,13 @@ void WorldModel::addSkittle(items::SkittleItem *skittle)
 	emit skittleAdded(skittle);
 }
 
-void WorldModel::removeSkittle(items::SkittleItem *skittle)
+void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
 {
 	mSkittles.remove(skittle->id());
 	emit itemRemoved(skittle);
 }
 
-void WorldModel::addBall(items::BallItem *ball)
+void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
 {
 	const QString id = ball->id();
 	if (mBalls.contains(id)) {
@@ -209,33 +202,33 @@ void WorldModel::addBall(items::BallItem *ball)
 	emit ballAdded(ball);
 }
 
-void WorldModel::removeBall(items::BallItem *ball)
+void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 {
 	mBalls.remove(ball->id());
 	emit itemRemoved(ball);
 }
 
-const QMap<QString, items::ColorFieldItem *> &WorldModel::colorFields() const
+const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFields() const
 {
 	return mColorFields;
 }
 
-const QMap<QString, items::ImageItem *> &WorldModel::imageItems() const
+const QMap<QString, QSharedPointer<items::ImageItem>> &WorldModel::imageItems() const
 {
 	return mImageItems;
 }
 
-const QMap<QString, items::RegionItem *> &WorldModel::regions() const
+const QMap<QString, QSharedPointer<items::RegionItem>> &WorldModel::regions() const
 {
 	return mRegions;
 }
 
-const QList<QGraphicsPathItem *> &WorldModel::trace() const
+const QList<QSharedPointer<QGraphicsPathItem> > &WorldModel::trace() const
 {
 	return mRobotTrace;
 }
 
-void WorldModel::addColorField(items::ColorFieldItem *colorField)
+void WorldModel::addColorField(const QSharedPointer<items::ColorFieldItem> &colorField)
 {
 	const QString id = colorField->id();
 	if (mColorFields.contains(id)) {
@@ -248,13 +241,13 @@ void WorldModel::addColorField(items::ColorFieldItem *colorField)
 	emit colorItemAdded(colorField);
 }
 
-void WorldModel::removeColorField(items::ColorFieldItem *colorField)
+void WorldModel::removeColorField(QSharedPointer<items::ColorFieldItem> colorField)
 {
 	mColorFields.remove(colorField->id());
 	emit itemRemoved(colorField);
 }
 
-void WorldModel::addImageItem(items::ImageItem *imageItem)
+void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
 {
 	const QString id = imageItem->id();
 	if (mImageItems.contains(id)) {
@@ -265,18 +258,20 @@ void WorldModel::addImageItem(items::ImageItem *imageItem)
 	mImageItems[id] = imageItem;
 	mImages[imageItem->image()->imageId()] = imageItem->image();
 	mOrder[id] = mOrder.size();
-	connect(imageItem, &items::ImageItem::internalImageChanged, this, &WorldModel::blobsChanged);
-	connect(imageItem, &items::ImageItem::internalImageChanged, this, [=](){
-			auto imageSize = imageItem->image()->preferedSize();
-			if (imageSize.height() == 0 || imageSize.width() == 0) {
-				mErrorReporter->addWarning(tr("Incorrect image, please try anouther one"));
+	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, &WorldModel::blobsChanged);
+	connect(&*imageItem, &items::ImageItem::internalImageChanged, this, [this, id](){
+			if (auto item = mImageItems.value(id))	{
+				auto imageSize = item->image()->preferedSize();
+				if (imageSize.height() == 0 || imageSize.width() == 0) {
+					mErrorReporter->addWarning(tr("Incorrect image, please try anouther one"));
+				}
 			}
 		});
 	emit imageItemAdded(imageItem);
 	emit blobsChanged();
 }
 
-void WorldModel::removeImageItem(items::ImageItem *imageItem)
+void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 {
 	mImageItems.remove(imageItem->id());
 
@@ -307,17 +302,13 @@ void WorldModel::clear()
 	}
 
 	while (!mRegions.isEmpty()) {
-		QGraphicsItem * const toRemove = mRegions.last();
-		const QString toRemoveKey = mRegions.lastKey(); // possible fix of the crash in remove
-		mRegions.remove(toRemoveKey);
+		auto toRemove = mRegions.last();
+		mRegions.remove(toRemove->id());
 		emit itemRemoved(toRemove);
 	}
 
 	mOrder.clear();
 
-	for (Image* img : mImages.values()) {
-		delete img;
-	}
 	mImages.clear();
 
 	clearRobotTrace();
@@ -333,7 +324,7 @@ void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const Q
 	if (mRobotTrace.isEmpty() || mRobotTrace.last()->pen() != pen) {
 		auto path = QPainterPath(begin);
 		path.lineTo(end);
-		auto traceItem = new QGraphicsPathItem(path);
+		auto traceItem = QSharedPointer<QGraphicsPathItem>::create(path);
 		traceItem->setPen(pen);
 		traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Marker);
 		emit robotTraceAppearedOrDisappeared(true);
@@ -364,15 +355,15 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 	/// @todo Maintain a cache for this.
 	QPainterPath path;
 
-	for (items::WallItem *wall : mWalls) {
+	for (auto &&wall : mWalls) {
 		path.addPath(wall->path());
 	}
 
-	for (items::SkittleItem *skittle: mSkittles) {
+	for (auto &&skittle: mSkittles) {
 		path.addPath(skittle->path());
 	}
 
-	for (items::BallItem *ball: mBalls) {
+	for (auto &&ball: mBalls) {
 		path.addPath(ball->path());
 	}
 
@@ -422,13 +413,13 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 
 	QDomElement skittles = parent.ownerDocument().createElement("skittles");
 	result.appendChild(skittles);
-	for (items::SkittleItem * const skittle : mSkittles) {
+	for (auto &&skittle : mSkittles) {
 		skittle->serialize(skittles);
 	}
 
 	QDomElement balls = parent.ownerDocument().createElement("balls");
 	result.appendChild(balls);
-	for (items::BallItem * const ball : mBalls) {
+	for (auto &&ball : mBalls) {
 		ball->serialize(balls);
 	}
 
@@ -485,13 +476,12 @@ QDomElement WorldModel::serializeBlobs(QDomElement &parent) const
 
 QDomElement WorldModel::serializeItem(const QString &id) const
 {
-	const graphicsUtils::AbstractItem *item = dynamic_cast<const graphicsUtils::AbstractItem *>(findId(id));
-	if (!item) {
+	if (auto item = qSharedPointerDynamicCast<graphicsUtils::AbstractItem>(findId(id))) {
+		QDomElement temporalParent = mXmlFactory->createElement("temporalParent");
+		return item->serialize(temporalParent);
+	} else {
 		return QDomElement();
 	}
-
-	QDomElement temporalParent = mXmlFactory->createElement("temporalParent");
-	return item->serialize(temporalParent);
 }
 
 void WorldModel::deserialize(const QDomElement &element, const QDomElement &blobs)
@@ -509,7 +499,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 				; imagesNode = imagesNode.nextSiblingElement("images")) {
 			for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
 					; imageNode = imageNode.nextSiblingElement("image")) {
-				model::Image *img = Image::deserialize(imageNode);
+				auto img = Image::deserialize(imageNode);
 				mImages.insert(img->imageId(), img);
 			}
 		}
@@ -525,7 +515,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		if (!imageId.isEmpty()) {
 			createImageItem(backgroundNode, true);
 		} else {
-			Image *image = Image::deserialize(backgroundNode);
+			auto image = Image::deserialize(backgroundNode);
 			mImages[image->imageId()] = image;
 			createImageItem(backgroundNode, true);
 		}
@@ -582,7 +572,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
 				; imageNode = imageNode.nextSiblingElement("image")) {
 			if (imageNode.hasAttribute("path")) {
-				model::Image *img = Image::deserialize(imageNode);
+				auto img = Image::deserialize(imageNode);
 				QString id = element.attribute("imageId");
 				if (id.isNull()) {
 					id = img->imageId();
@@ -603,7 +593,7 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 	}
 }
 
-QGraphicsObject *WorldModel::findId(const QString &id) const
+QSharedPointer<QGraphicsObject> WorldModel::findId(const QString &id) const
 {
 	if (id.isEmpty()) {
 		return nullptr;
@@ -663,69 +653,69 @@ void WorldModel::createElement(const QDomElement &element)
 
 void WorldModel::createWall(const QDomElement &element)
 {
-	items::WallItem *wall = new items::WallItem(QPointF(), QPointF());
+	auto wall = QSharedPointer<items::WallItem>::create(QPointF(), QPointF());
 	wall->deserialize(element);
 	addWall(wall);
 }
 
 void WorldModel::createSkittle(const QDomElement &element)
 {
-	items::SkittleItem *skittle = new items::SkittleItem(QPointF());
+	auto skittle = QSharedPointer<items::SkittleItem>::create(QPointF());
 	skittle->deserialize(element);
 	addSkittle(skittle);
 }
 
 void WorldModel::createBall(const QDomElement &element)
 {
-	items::BallItem *ball = new items::BallItem(QPointF());
+	auto ball = QSharedPointer<items::BallItem>::create(QPointF());
 	ball->deserialize(element);
 	addBall(ball);
 }
 
 void WorldModel::createLine(const QDomElement &element)
 {
-	items::LineItem *lineItem = new items::LineItem(QPointF(), QPointF());
+	auto lineItem = QSharedPointer<items::LineItem>::create(QPointF(), QPointF());
 	lineItem->deserialize(element);
 	addColorField(lineItem);
 }
 
 void WorldModel::createRectangle(const QDomElement &element)
 {
-	items::RectangleItem *rectangleItem = new items::RectangleItem(QPointF(), QPointF());
+	auto rectangleItem = QSharedPointer<items::RectangleItem>::create(QPointF(), QPointF());
 	rectangleItem->deserialize(element);
 	addColorField(rectangleItem);
 }
 
 void WorldModel::createEllipse(const QDomElement &element)
 {
-	items::EllipseItem *ellipseItem = new items::EllipseItem(QPointF(), QPointF());
+	auto ellipseItem = QSharedPointer<items::EllipseItem>::create(QPointF(), QPointF());
 	ellipseItem->deserialize(element);
 	addColorField(ellipseItem);
 }
 
 void WorldModel::createCubicBezier(const QDomElement &element)
 {
-	items::CurveItem *curveItem = new items::CurveItem(QPointF(), QPointF());
+	auto curveItem = QSharedPointer<items::CurveItem>::create(QPointF(), QPointF());
 	curveItem->deserialize(element);
 	addColorField(curveItem);
 }
 
 void WorldModel::createStylus(const QDomElement &element)
 {
-	items::StylusItem *stylusItem = new items::StylusItem(0, 0);
+	auto stylusItem = QSharedPointer<items::StylusItem>::create(0, 0);
 	stylusItem->deserialize(element);
 	addColorField(stylusItem);
 }
 
-items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool background)
+QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &element, bool background)
 {
 	auto imageId = element.attribute("imageId");
 	auto image = mImages.value(imageId, nullptr);
 	if (!image) {
-		image = new Image(imageId);
+		image.reset(new Image(imageId));
 		mErrorReporter->addError(tr("Unknown image with imageId %1").arg(imageId));
 	}
-	items::ImageItem *imageItem = new items::ImageItem(image, QRect());
+	auto imageItem = QSharedPointer<items::ImageItem>::create(image, QRect());
 	imageItem->deserialize(element);
 	imageItem->setBackgroundRole(background || element.attribute("isBackground") == "true");
 	addImageItem(imageItem);
@@ -736,17 +726,17 @@ items::ImageItem * WorldModel::createImageItem(const QDomElement &element, bool 
 void WorldModel::createRegion(const QDomElement &element)
 {
 	const QString type = element.attribute("type", "ellipse").toLower();
-	items::RegionItem *item = nullptr;
-	const QGraphicsObject *boundItem = nullptr;
+	QSharedPointer<items::RegionItem> item;
+	QSharedPointer<QGraphicsObject> boundItem;
 	if (type == "ellipse") {
-		item = new items::EllipseRegion;
+		item.reset(new items::EllipseRegion);
 	} else if (type == "rectangle") {
-		item = new items::RectangularRegion;
+		item.reset(new items::RectangularRegion);
 	} else if (type == "bound") {
 		auto id = element.attribute("boundItem");
 		boundItem = findId(id);
 		if (boundItem) {
-			item = new items::BoundRegion(*boundItem, id);
+			item.reset(new items::BoundRegion(*boundItem, id));
 		} /// @todo: else report error
 	}
 
@@ -756,7 +746,7 @@ void WorldModel::createRegion(const QDomElement &element)
 		mRegions[itemId] = item;
 		if (boundItem) {
 			// Item itself will be deleted with its parent, see BoundRegion constructor.
-			connect(item, &QObject::destroyed, this, [this, itemId]() { mRegions.remove(itemId); });
+			connect(&*item, &QObject::destroyed, this, [this, itemId]() { mRegions.remove(itemId); });
 		}
 		emit regionItemAdded(item);
 	}
@@ -764,16 +754,16 @@ void WorldModel::createRegion(const QDomElement &element)
 
 void WorldModel::removeItem(const QString &id)
 {
-	QGraphicsObject *item = findId(id);
-	if (auto wall = dynamic_cast<items::WallItem *>(item)) {
+	auto item = findId(id);
+	if (auto wall = qSharedPointerDynamicCast<items::WallItem>(item)) {
 		removeWall(wall);
-	} else if (auto colorItem = dynamic_cast<items::ColorFieldItem *>(item)) {
+	} else if (auto colorItem = qSharedPointerDynamicCast<items::ColorFieldItem>(item)) {
 		removeColorField(colorItem);
-	} else if (auto skittleItem = dynamic_cast<items::SkittleItem *>(item)) {
+	} else if (auto skittleItem = qSharedPointerDynamicCast<items::SkittleItem>(item)) {
 		removeSkittle(skittleItem);
-	} else if (auto ballItem = dynamic_cast<items::BallItem *>(item)) {
+	} else if (auto ballItem = qSharedPointerDynamicCast<items::BallItem>(item)) {
 		removeBall(ballItem);
-	} else if (auto image = dynamic_cast<items::ImageItem *>(item)) {
+	} else if (auto image = qSharedPointerDynamicCast<items::ImageItem>(item)) {
 		removeImageItem(image);
 	}
 }

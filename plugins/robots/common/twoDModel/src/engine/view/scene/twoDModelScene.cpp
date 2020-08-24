@@ -81,9 +81,11 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onImageItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
-			, this, [=](items::RegionItem *item) { addItem(item); });
+			, this, [=](const QSharedPointer<items::RegionItem> &item) { addItem(item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
-			, this, [this](QGraphicsPathItem *item, bool justChanged) { if (!justChanged) { addItem(item); }});
+			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
+		if (!justChanged) { addItem(item.data()); }
+	});
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, this, &TwoDModelScene::onItemRemoved);
 
 	connect(&mModel, &model::Model::robotAdded, this, &TwoDModelScene::onRobotAdd);
@@ -92,6 +94,38 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 
 TwoDModelScene::~TwoDModelScene()
 {
+	for (auto &&r: mRobots.values()) {
+		removeItem(r->robotModel().startPositionMarker().data());
+		removeItem(r.data());
+	}
+
+	for(auto &&x: mModel.worldModel().balls()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().regions()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().imageItems()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().colorFields()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().skittles()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().walls()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().trace()) {
+		removeItem(x.data());
+	}
 }
 
 bool TwoDModelScene::oneRobot() const
@@ -127,7 +161,8 @@ void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 	}
 }
 
-bool TwoDModelScene::hasIntersect(const AbstractItem *item1, const AbstractItem *item2) const
+bool TwoDModelScene::hasIntersect(const graphicsUtils::AbstractItem *item2
+								  , const graphicsUtils::AbstractItem *item1) const
 {
 	return item1->realShape().intersects(item2->realShape());
 }
@@ -137,45 +172,45 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 	for (auto item : checkItems) {
 		if (!item) {
 			continue;
-		} else if (auto robot = dynamic_cast<const RobotItem *>(item)) {
-			for (const auto wall : mModel.worldModel().walls()) {
-				if (hasIntersect(robot, wall)) return false;
+		} else if (auto robot = dynamic_cast<RobotItem *>(item)) {
+			for (auto &&wall : mModel.worldModel().walls()) {
+				if (hasIntersect(robot, wall.data())) return false;
 			}
-			for (const auto ball : mModel.worldModel().balls()) {
-				if (hasIntersect(robot, ball)) return false;
+			for (auto &&ball : mModel.worldModel().balls()) {
+				if (hasIntersect(robot, ball.data())) return false;
 			}
-			for (const auto skittle : mModel.worldModel().skittles()) {
-				if (hasIntersect(robot, skittle)) return false;
+			for (auto &&skittle : mModel.worldModel().skittles()) {
+				if (hasIntersect(robot, skittle.data())) return false;
 			}
-		} else if (auto ball = dynamic_cast<const items::BallItem *>(item)) {
-			for (const auto wall : mModel.worldModel().walls()) {
-				if (hasIntersect(ball, wall)) return false;
+		} else if (auto ball = dynamic_cast<items::BallItem *>(item)) {
+			for (auto &&wall : mModel.worldModel().walls()) {
+				if (hasIntersect(ball, wall.data())) return false;
 			}
-			for (const auto robot : mRobots.values()) {
-				if (hasIntersect(ball, robot)) return false;
+			for (auto &&robot : mRobots.values()) {
+				if (hasIntersect(ball, robot.data())) return false;
 			}
-			for (const auto skittle : mModel.worldModel().skittles()) {
-				if (hasIntersect(ball, skittle)) return false;
+			for (auto &&skittle : mModel.worldModel().skittles()) {
+				if (hasIntersect(ball, skittle.data())) return false;
 			}
 		} else if (auto skittle = dynamic_cast<const items::SkittleItem *>(item)) {
-			for (const auto wall : mModel.worldModel().walls()) {
-				if (hasIntersect(skittle, wall)) return false;
+			for (auto &&wall : mModel.worldModel().walls()) {
+				if (hasIntersect(skittle, wall.data())) return false;
 			}
-			for (const auto robot : mRobots.values()) {
-				if (hasIntersect(skittle, robot)) return false;
+			for (auto &&robot : mRobots.values()) {
+				if (hasIntersect(skittle, robot.data())) return false;
 			}
-			for (const auto ball : mModel.worldModel().balls()) {
-				if (hasIntersect(skittle, ball)) return false;
+			for (auto &&ball : mModel.worldModel().balls()) {
+				if (hasIntersect(skittle, ball.data())) return false;
 			}
 		} else if (auto wall = dynamic_cast<const items::WallItem *>(item)) {
-			for (const auto ball : mModel.worldModel().balls()) {
-				if (hasIntersect(wall, ball)) return false;
+			for (auto &&ball : mModel.worldModel().balls()) {
+				if (hasIntersect(wall, ball.data())) return false;
 			}
-			for (const auto skittle : mModel.worldModel().skittles()) {
-				if (hasIntersect(wall, skittle)) return false;
+			for (auto &&skittle : mModel.worldModel().skittles()) {
+				if (hasIntersect(wall, skittle.data())) return false;
 			}
-			for (const auto robot : mRobots.values()) {
-				if (hasIntersect(wall, robot)) return false;
+			for (auto &&robot : mRobots.values()) {
+				if (hasIntersect(wall, robot.data())) return false;
 			}
 		}
 	}
@@ -184,54 +219,49 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
-	RobotItem * const robotItem = new RobotItem(robotModel->info().robotImage(), *robotModel);
+	auto robotItem = QSharedPointer<RobotItem>(new RobotItem(robotModel->info().robotImage(), *robotModel));
 
-	connect(robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
-	connect(robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
+	connect(&*robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
+	connect(&*robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
 
 	robotItem->setEditable(!mRobotReadOnly);
 
-	addItem(robotItem);
+	addItem(robotItem.data());
 	robotItem->robotModel().startPositionMarker()->setZValue(robotItem->zValue() - lowPrecision);
-	addItem(robotItem->robotModel().startPositionMarker());
-	subscribeItem(static_cast<AbstractItem *>(robotModel->startPositionMarker()));
+	addItem(robotItem->robotModel().startPositionMarker().data());
+	subscribeItem(qSharedPointerDynamicCast<AbstractItem>(robotModel->startPositionMarker()).data());
 
 	mRobots.insert(robotModel, robotItem);
 
-	emit robotListChanged(robotItem);
+	emit robotListChanged(robotItem.data());
 }
 
 void TwoDModelScene::onRobotRemove(model::RobotModel *robotModel)
 {
-	RobotItem *robotItem = mRobots[robotModel];
-
-	removeItem(robotItem);
 	mRobots.remove(robotModel);
-
-	delete robotItem;
 
 	emit robotListChanged(nullptr);
 }
 
-void TwoDModelScene::onWallAdded(items::WallItem *wall)
+void TwoDModelScene::onWallAdded(QSharedPointer<items::WallItem> wall)
 {
-	addItem(wall);
-	subscribeItem(wall);
-	connect(wall, &items::WallItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
+	addItem(wall.data());
+	subscribeItem(wall.data());
+	connect(&*wall, &items::WallItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
 	wall->setEditable(!mWorldReadOnly);
 }
 
-void TwoDModelScene::onSkittleAdded(items::SkittleItem *skittle)
+void TwoDModelScene::onSkittleAdded(QSharedPointer<items::SkittleItem> skittle)
 {
 	onAbstractItemAdded(skittle);
-	connect(skittle, &items::SkittleItem::mouseInteractionStopped
+	connect(&*skittle, &items::SkittleItem::mouseInteractionStopped
 			, this, &TwoDModelScene::handleMouseInteractionWithSelectedItems);
 }
 
-void TwoDModelScene::onBallAdded(items::BallItem *ball)
+void TwoDModelScene::onBallAdded(const QSharedPointer<items::BallItem> &ball)
 {
 	onAbstractItemAdded(ball);
-	connect(ball, &items::BallItem::mouseInteractionStopped
+	connect(&*ball, &items::BallItem::mouseInteractionStopped
 			, this, &TwoDModelScene::handleMouseInteractionWithSelectedItems);
 }
 
@@ -246,31 +276,28 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 	}
 }
 
-void TwoDModelScene::onColorItemAdded(graphicsUtils::AbstractItem *item)
+void TwoDModelScene::onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item)
 {
 	onAbstractItemAdded(item);
 }
 
-void TwoDModelScene::onImageItemAdded(graphicsUtils::AbstractItem *item)
+void TwoDModelScene::onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item)
 {
 	onAbstractItemAdded(item);
 }
 
-void TwoDModelScene::onAbstractItemAdded(AbstractItem *item)
+void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
 {
-	addItem(item);
-	subscribeItem(item);
-	connect(item, &graphicsUtils::AbstractItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
+	addItem(item.data());
+	subscribeItem(item.data());
+	connect(&*item, &graphicsUtils::AbstractItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
 	item->setEditable(!mWorldReadOnly);
 }
 
-void TwoDModelScene::onItemRemoved(QGraphicsItem *item)
+void TwoDModelScene::onItemRemoved(const QSharedPointer<QGraphicsItem> &item)
 {
 	mGraphicsItem = nullptr;
-	removeItem(item);
-	// We delete the item not immediately cause in other handlers of WorldModel`s itemRemoved() signal
-	// it may still be used.
-	utils::DeleteLaterHelper<QGraphicsItem>::deleteLater(item);
+	removeItem(item.data());
 }
 
 void TwoDModelScene::drawAxes(QPainter *painter)
@@ -307,13 +334,13 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 	emit mousePressed();
 
-	auto initItem = [this, mouseEvent](QGraphicsItem *item) {
-		removeMoveFlag(mouseEvent, item);
+	auto initItem = [this, mouseEvent](const QSharedPointer<QGraphicsItem> &item) {
+		removeMoveFlag(mouseEvent, item.data());
 		// This will deselect all items
 		setSelectionArea(QPainterPath());
 	};
 
-	auto initColorField = [this, &initItem](items::ColorFieldItem *item) {
+	auto initColorField = [this, &initItem](const QSharedPointer<items::ColorFieldItem> &item) {
 		initItem(item);
 		item->setPenBrush(penStyleItems(), penWidthItems(), penColorItems()
 				, brushStyleItems(), brushColorItems());
@@ -326,42 +353,42 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		}
 	}
 
-	for (RobotItem * const robotItem : mRobots.values()) {
+	for (auto &&robotItem : mRobots.values()) {
 		if (!robotItem->realBoundingRect().contains(position)) {
 			switch (mDrawingAction) {
 			case wall:
-				mCurrentWall = new items::WallItem(position, position);
+				mCurrentWall.reset(new items::WallItem(position, position));
 				initItem(mCurrentWall);
 				mModel.worldModel().addWall(mCurrentWall);
 				break;
 			case skittle:
-				mCurrentSkittle = new items::SkittleItem(position);
+				mCurrentSkittle.reset(new items::SkittleItem(position));
 				initItem(mCurrentSkittle);
 				mModel.worldModel().addSkittle(mCurrentSkittle);
 				break;
 			case ball:
-				mCurrentBall = new items::BallItem(position);
+				mCurrentBall.reset(new items::BallItem(position));
 				initItem(mCurrentBall);
 				mModel.worldModel().addBall(mCurrentBall);
 				break;
 			case line:
-				mCurrentLine = new items::LineItem(position, position);
+				mCurrentLine.reset(new items::LineItem(position, position));
 				initColorField(mCurrentLine);
 				break;
 			case bezier:
-				mCurrentCurve = new items::CurveItem(position, position);
+				mCurrentCurve.reset(new items::CurveItem(position, position));
 				initColorField(mCurrentCurve);
 				break;
 			case stylus:
-				mCurrentStylus = new items::StylusItem(position.x(), position.y());
+				mCurrentStylus.reset(new items::StylusItem(position.x(), position.y()));
 				initColorField(mCurrentStylus);
 				break;
 			case rectangle:
-				mCurrentRectangle = new items::RectangleItem(position, position);
+				mCurrentRectangle.reset(new items::RectangleItem(position, position));
 				initColorField(mCurrentRectangle);
 				break;
 			case ellipse:
-				mCurrentEllipse = new items::EllipseItem(position, position);
+				mCurrentEllipse.reset(new items::EllipseItem(position, position));
 				initColorField(mCurrentEllipse);
 				break;
 			default:
@@ -424,7 +451,7 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	emit mouseReleased();
 
 	// After dragging item may be null. We mustn`t select it in that case.
-	AbstractItem *createdItem = nullptr;
+	QSharedPointer<AbstractItem> createdItem;
 	switch (mDrawingAction){
 	case wall: {
 		reshapeWall(mouseEvent);
@@ -478,32 +505,32 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 	forReleaseResize(mouseEvent);
 
-	if (!isCorrectScene({createdItem})) {
+	if (!isCorrectScene({createdItem.data()})) {
 		// Qt bug. You need to manually release item before removing
 		createdItem->mouseReleaseEvent(mouseEvent);
 		mModel.worldModel().removeItem(createdItem->id());
 	} else {
-		registerInUndoStack(createdItem);
+		registerInUndoStack(createdItem.data());
 	}
 
 	if (!isCorrectScene(selectedItems())) {
-		for (auto selectedItem : selectedItems()) {
-			if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
+		for (auto &&selectedItem : selectedItems()) {
+			if (auto &&item = dynamic_cast<AbstractItem *>(selectedItem)) {
 				item->restorePos();
 			}
 		}
 	}
 
-	for (RobotItem * const robotItem : mRobots) {
+	for (auto &&robotItem : mRobots) {
 		setSceneRect(sceneRect().united(robotItem->sceneBoundingRect()));
 	}
-	for (auto const wall : mModel.worldModel().walls()) {
+	for (auto &&wall : mModel.worldModel().walls()) {
 		setSceneRect(sceneRect().united(wall->sceneBoundingRect()));
 	}
-	for (auto const ball : mModel.worldModel().balls()) {
+	for (auto &&ball : mModel.worldModel().balls()) {
 		setSceneRect(sceneRect().united(ball->sceneBoundingRect()));
 	}
-	for (auto const skittle : mModel.worldModel().skittles()) {
+	for (auto &&skittle : mModel.worldModel().skittles()) {
 		setSceneRect(sceneRect().united(skittle->sceneBoundingRect()));
 	}
 
@@ -560,8 +587,8 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 		items::BallItem * const ball = dynamic_cast<items::BallItem *>(item);
 
 		if (sensor && !mSensorsReadOnly) {
-			for (RobotItem * const robotItem : mRobots.values()) {
-				const kitBase::robotModel::PortInfo port = robotItem->sensors().key(sensor);
+			for (auto &&robotItem : mRobots.values()) {
+				auto port = robotItem->sensors().key(sensor);
 				if (port.isValid()) {
 					sensors << qMakePair(&robotItem->robotModel(), port);
 				}
@@ -707,7 +734,7 @@ void TwoDModelScene::addImage()
 		}
 	}
 
-	auto newImage = new model::Image(loadFileName, false);
+	auto newImage = QSharedPointer<model::Image>::create(loadFileName, false);
 	auto size = newImage->preferedSize();
 	if (size.width() == 0 || size.height() == 0) {
 		if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Error")
@@ -720,10 +747,10 @@ void TwoDModelScene::addImage()
 	}
 	mDrawingAction = image;
 	const QRect rect(QPoint(-size.width() / 2, -size.height() / 2), size);
-	auto result = new twoDModel::items::ImageItem(newImage, rect);
+	QSharedPointer<twoDModel::items::ImageItem> result(new twoDModel::items::ImageItem(newImage, rect));
 	result->setMemorize(true);
 	mModel.worldModel().addImageItem(result);
-	registerInUndoStack(result);
+	registerInUndoStack(result.data());
 	setNoneStatus();
 }
 
@@ -738,23 +765,23 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 		// User pressed clear button, this action must be undone when required, so executing it with command.
 
 		QStringList worldItemsToDelete;
-		for (const items::WallItem *wall : mModel.worldModel().walls()) {
+		for (auto &&wall : mModel.worldModel().walls()) {
 			worldItemsToDelete << wall->id();
 		}
 
-		for (const items::SkittleItem *skittle : mModel.worldModel().skittles()) {
+		for (auto &&skittle : mModel.worldModel().skittles()) {
 			worldItemsToDelete << skittle->id();
 		}
 
-		for (const items::BallItem *ball : mModel.worldModel().balls()) {
+		for (auto &&ball : mModel.worldModel().balls()) {
 			worldItemsToDelete << ball->id();
 		}
 
-		for (const items::ColorFieldItem *colorField : mModel.worldModel().colorFields()) {
+		for (auto &&colorField : mModel.worldModel().colorFields()) {
 			worldItemsToDelete << colorField->id();
 		}
 
-		for (const items::RegionItem *region : mModel.worldModel().regions()) {
+		for (auto &&region : mModel.worldModel().regions()) {
 			worldItemsToDelete << region->id();
 		}
 
@@ -886,12 +913,12 @@ void TwoDModelScene::registerInUndoStack(AbstractItem *item)
 
 void TwoDModelScene::subscribeItem(AbstractItem *item)
 {
-	connect(item, &AbstractItem::mouseInteractionStarted, this, [=]() {
+	connect(&*item, &AbstractItem::mouseInteractionStarted, this, [=]() {
 		item->savePos();
 		if (mDrawingAction == none) {
 			QStringList selectedIds;
-			for (const QGraphicsItem *item : selectedItems()) {
-				if (const AbstractItem *itemWithId = dynamic_cast<const AbstractItem *>(item)) {
+			for (auto &&item : selectedItems()) {
+				if (auto &&itemWithId = dynamic_cast<const AbstractItem *>(item)) {
 					selectedIds << itemWithId->id();
 				}
 			}
@@ -901,7 +928,7 @@ void TwoDModelScene::subscribeItem(AbstractItem *item)
 		}
 	});
 
-	connect(item, &AbstractItem::mouseInteractionStopped, this, [=]() {
+	connect(&*item, &AbstractItem::mouseInteractionStopped, this, [=]() {
 		if (mDrawingAction == none) {
 			mCurrentReshapeCommand->stopTracking();
 			if (mController) {
@@ -923,8 +950,8 @@ qreal TwoDModelScene::currentZoom() const
 void TwoDModelScene::alignWalls()
 {
 	if (SettingsManager::value("2dShowGrid").toBool()) {
-		for (items::WallItem * const wall : mModel.worldModel().walls()) {
-			if (items().contains(wall)) {
+		for (auto &&wall : mModel.worldModel().walls()) {
+			if (items().contains(wall.data())) {
 				wall->alignTheWall(SettingsManager::value("2dGridCellSize").toInt());
 			}
 		}
@@ -933,23 +960,21 @@ void TwoDModelScene::alignWalls()
 
 RobotItem *TwoDModelScene::robot(model::RobotModel &robotModel)
 {
-	return mRobots.value(&robotModel);
+	return mRobots.value(&robotModel).data();
 }
 
 void TwoDModelScene::centerOnRobot(RobotItem *selectedItem)
 {
-	RobotItem *robotItem = mRobots.values().first();
-
-	if (selectedItem) {
-		robotItem = selectedItem;
-	}
+	auto robots = mRobots.values();
+	auto x = std::find(mRobots.begin(), mRobots.end(), selectedItem);
+	auto robotItem = (!selectedItem || x == mRobots.end()) ? robots.first() : x.value();
 
 	for (QGraphicsView * const view : views()) {
 		const QRectF viewPortRect = view->mapToScene(view->viewport()->rect()).boundingRect();
 		if (!viewPortRect.contains(robotItem->sceneBoundingRect().toRect())) {
 			const QRectF requiredViewPort = viewPortRect.translated(robotItem->scenePos() - viewPortRect.center());
 			setSceneRect(itemsBoundingRect().united(requiredViewPort));
-			view->centerOn(robotItem);
+			view->centerOn(robotItem.data());
 		}
 	}
 }

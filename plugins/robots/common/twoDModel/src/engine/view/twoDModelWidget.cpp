@@ -392,15 +392,15 @@ void TwoDModelWidget::unsetPortsGroupBoxAndWheelComboBoxes()
 void TwoDModelWidget::returnToStartMarker()
 {
 	mModel.worldModel().clearRobotTrace();
-	for (RobotModel * const model : mModel.robotModels()) {
+	for (auto &&model : mModel.robotModels()) {
 		mScene->robot(*model)->returnToStartPosition();
 	}
 
-	for (items::SkittleItem *skittle : mModel.worldModel().skittles()) {
+	for (auto &&skittle : mModel.worldModel().skittles()) {
 		skittle->returnToStartPosition();
 	}
 
-	for (items::BallItem *ball : mModel.worldModel().balls()) {
+	for (auto &&ball : mModel.worldModel().balls()) {
 		ball->returnToStartPosition();
 	}
 	saveWorldModelToRepo();
@@ -567,11 +567,11 @@ void TwoDModelWidget::onSelectionChange()
 		return;
 	}
 
-	const QList<QGraphicsItem *> listSelectedItems = mScene->selectedItems();
+	auto listSelectedItems = mScene->selectedItems();
 	RobotItem *robotItem = nullptr;
 	bool oneRobotItem = false;
 
-	for (QGraphicsItem *item : listSelectedItems) {
+	for (auto &&item : listSelectedItems) {
 		if (dynamic_cast<RobotItem *>(item)) {
 			robotItem = dynamic_cast<RobotItem *>(item);
 			if (oneRobotItem) {

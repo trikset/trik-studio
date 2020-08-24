@@ -86,7 +86,7 @@ public slots:
 
 protected:
 	void onPixelsInCmChanged(qreal value) override;
-	void itemAdded(QGraphicsItem * const item) override;
+	void itemAdded(QGraphicsItem *item) override;
 	void itemRemoved(QGraphicsItem * const item) override;
 
 private:
