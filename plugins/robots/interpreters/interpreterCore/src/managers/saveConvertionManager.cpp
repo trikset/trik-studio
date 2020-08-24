@@ -22,7 +22,8 @@ QString SaveConvertionManager::editor()
 	return "RobotsMetamodel";
 }
 
-void SaveConvertionManager::reconnectEdges(const Id &newBlock, const Id &block, GraphicalModelAssistInterface &graphicalApi)
+void SaveConvertionManager::reconnectEdges(const Id &newBlock, const Id &block
+										   , GraphicalModelAssistInterface &graphicalApi)
 {
 	const bool isEdge = isEdgeType(block);
 	if (isEdge) {
