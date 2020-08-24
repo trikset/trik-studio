@@ -66,6 +66,7 @@ private:
 	/// Replaces "TrikLineSensor" with "TrikVideoCamera"
 	static qReal::ProjectConverter from330to20204Converter();
 
+	/// Replaces "PrintText" with "TrikPrintText" in trikKit
 	static qReal::ProjectConverter from20204to20205Converter();
 
 	static bool isRobotsDiagram(const qReal::Id &element);

@@ -281,7 +281,7 @@ ProjectConverter SaveConvertionManager::from20204to20205Converter()
 			, [=](GraphicalModelAssistInterface &graphicalApi, LogicalModelAssistInterface &logicalApi)
 	{
 		if (!logicalApi.logicalRepoApi()
-				.metaInformation("lastKitId").toString().contains("Trik", Qt::CaseInsensitive)) {
+				.metaInformation("lastKitId").toString().contains("trik", Qt::CaseInsensitive)) {
 			return ProjectConverter::NoModificationsMade;
 		}
 
@@ -333,8 +333,6 @@ ProjectConverter SaveConvertionManager::from20204to20205Converter()
 		return modificationsMade ? ProjectConverter::Success : ProjectConverter::NoModificationsMade;
 	});
 }
-
-
 
 bool SaveConvertionManager::isRobotsDiagram(const Id &element)
 {
