@@ -101,7 +101,7 @@ matrix:
       name: "MacOS tests in clean env"
       before_install:
       install:
-      - brew install p7zip
+      - env HOMEBREW_NO_AUTO_UPDATE=1 brew install p7zip
       script:
       - ./buildScripts/travis/run_clean_env_test.sh
 
