@@ -278,7 +278,7 @@ ProjectConverter SaveConvertionManager::from330to20204Converter()
 
 ProjectConverter SaveConvertionManager::from20204to20205Converter()
 {
-	return ProjectConverter(editor(), Version::fromString("2020.4"), Version::fromString("2020.4")
+	return ProjectConverter(editor(), Version::fromString("2020.4"), Version::fromString("2020.5")
 			, [=](GraphicalModelAssistInterface &graphicalApi, LogicalModelAssistInterface &logicalApi)
 	{
 		if (!logicalApi.logicalRepoApi()
