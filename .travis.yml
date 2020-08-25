@@ -98,6 +98,7 @@ matrix:
       script:
       - ./buildScripts/travis/run_clean_env_test.sh
     - os: osx
+      osx_image: xcode8.3
       name: "MacOS tests in clean env"
       before_install:
       install:
