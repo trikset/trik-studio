@@ -1391,6 +1391,7 @@
 				<element name="TrikWaitGamepadConnect" />
 			</group>
 			<group name="Drawing">
+				<element name="TrikPrintText"/>
 				<element name="TrikSetPainterColor"/>
 				<element name="TrikSetPainterWidth"/>
 				<element name="TrikDrawPixel"/>
@@ -1401,7 +1402,6 @@
 				<element name="TrikSmile"/>
 				<element name="TrikSadSmile"/>
 				<element name="TrikSetBackground"/>
-				<element name="TrikPrintText"/>
 			</group>
 		</palette>
 	</diagram>

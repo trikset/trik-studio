@@ -66,11 +66,16 @@ private:
 	/// Replaces "TrikLineSensor" with "TrikVideoCamera"
 	static qReal::ProjectConverter from330to20204Converter();
 
+	/// Replaces "PrintText" with "TrikPrintText" in trikKit
+	static qReal::ProjectConverter from20204to20205Converter();
+
 	static bool isRobotsDiagram(const qReal::Id &element);
 	static bool isDiagramType(const qReal::Id &element);
 	static bool isEdgeType(const qReal::Id &element);
 	static qReal::IdList elementsOfRobotsDiagrams(const qReal::LogicalModelAssistInterface &logicalApi);
 	static QString editor();
+	static void reconnectEdges(const qReal::Id &newBlock, const qReal::Id &block
+							   , qReal::GraphicalModelAssistInterface &graphicalApi);
 
 	/// Helper method, creates "typical" that applies a list of filters to a block if block satisfies given condition.
 	/// @param oldVersion - version from which converter can convert.
