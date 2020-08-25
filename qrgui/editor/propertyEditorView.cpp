@@ -212,8 +212,10 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 
 	connect(mButtonManager.get(), &PushButtonPropertyManager::buttonClicked
 			, this, &PropertyEditorView::buttonClicked, Qt::UniqueConnection);
-	connect(mVariantManager.get(), &QtVariantPropertyManager::valueChanged
-			, this, &PropertyEditorView::buttonClicked, Qt::UniqueConnection);
+	// For some reason c++11-style connections do not work here!
+	// TODO: fix with new SIGNAL/SLOT signature
+	connect(mVariantManager.get(), SIGNAL(valueChanged(QtProperty*, QVariant))
+				, this, SLOT(editorValueChanged(QtProperty *, QVariant)), Qt::UniqueConnection);
 	mPropertyEditor->setPropertiesWithoutValueMarked(true);
 	mPropertyEditor->setRootIsDecorated(false);
 }
