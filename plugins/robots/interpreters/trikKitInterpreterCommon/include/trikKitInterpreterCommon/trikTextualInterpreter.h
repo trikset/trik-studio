@@ -19,6 +19,7 @@
 #include "robotModel/twoD/trikTwoDRobotModel.h"
 #include "trikKitInterpreterCommon/trikbrick.h"
 #include "trikScriptRunner/trikScriptRunner.h"
+#include <trikNetwork/mailboxInterface.h>
 
 #include "declSpec.h"
 
@@ -63,6 +64,7 @@ private:
 	bool mRunning;
 
 	TrikBrick mBrick;
+	trikNetwork::MailboxInterface *mMailbox;
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
 	qReal::ErrorReporterInterface *mErrorReporter;
 };
