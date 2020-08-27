@@ -26,6 +26,7 @@
 #include <twoDModel/engine/model/timeline.h>
 #include <qrgui/textEditor/languageInfo.h>
 #include <trikKernel/fileUtils.h>
+#include <trikNetwork/mailboxFactory.h>
 
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
@@ -69,7 +70,8 @@ const QString pyOverrides ="\n__import__('sys').stdout = type('trik_studio_stdou
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
 		, bool enablePython)
-	: mRunning(false), mBrick(model), mScriptRunner(mBrick, nullptr), mErrorReporter(nullptr)
+	: mBrick(model), mMailbox(trikNetwork::MailboxFactory::create(8889))
+	, mScriptRunner(mBrick, mMailbox)
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
