@@ -304,7 +304,7 @@ QVector<int> RobotModel::accelerometerReading() const
 
 QVector<int> RobotModel::gyroscopeReading() const
 {
-	return {static_cast<int>(mDeltaRadiansOfAngle * gyroscopeConstant)
+	return {static_cast<int>(mDeltaRadiansOfAngle)
 		, static_cast<int>((mAngle - mGyroAngle) * 1000)};
 }
 

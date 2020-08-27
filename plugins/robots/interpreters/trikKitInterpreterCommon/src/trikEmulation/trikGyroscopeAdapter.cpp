@@ -18,6 +18,7 @@
 #include <twoDModel/engine/twoDModelEngineInterface.h>
 #include <twoDModel/engine/model/constants.h>
 
+using namespace twoDModel;
 
 template <typename T>
 static T getPitch(const QQuaternion &q)
@@ -75,14 +76,14 @@ bool TrikGyroscopeAdapter::isCalibrated() const
 
 QVector<int> TrikGyroscopeAdapter::readRawData() const
 {
-	QVector<int> result = mModel->engine()->readGyroscopeSensor();
-	result.append(convertToTrikRuntimeTime(getTimeValue(mModel.data())));
-	return result;
+	const auto t = convertToTrikRuntimeTime(getTimeValue(mModel.data()));
+	return {0, 0, static_cast<int>(mModel->engine()->readGyroscopeSensor()[0] * gyroscopeConstant), t};
 }
 
 void TrikGyroscopeAdapter::countTilt(const QVector<int> &oldFormat)
 {
 	mResult = QVector<int>(oldFormat);
+	mResult[3] = convertToTrikRuntimeTime(mResult[3]);
 }
 
 qreal TrikGyroscopeAdapter::degreeToMilidegree(qreal value)
