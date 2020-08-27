@@ -19,6 +19,7 @@
 #include "robotModel/twoD/trikTwoDRobotModel.h"
 #include "trikKitInterpreterCommon/trikbrick.h"
 #include "trikScriptRunner/trikScriptRunner.h"
+#include <trikNetwork/mailboxInterface.h>
 
 #include "declSpec.h"
 
@@ -60,11 +61,12 @@ private:
 	QString initInputs(const QString &inputs) const;
 
 	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
-	bool mRunning;
+	bool mRunning { false };
 
 	TrikBrick mBrick;
+	trikNetwork::MailboxInterface *mMailbox {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
-	qReal::ErrorReporterInterface *mErrorReporter;
+	qReal::ErrorReporterInterface *mErrorReporter {};
 };
 
 }
