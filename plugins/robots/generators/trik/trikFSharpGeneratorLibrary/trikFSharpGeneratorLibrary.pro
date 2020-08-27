@@ -30,7 +30,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base robots-utils \
+links(qrkernel qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base robots-utils \
 		qrgui-preferences-dialog robots-kit-base \
 )
 

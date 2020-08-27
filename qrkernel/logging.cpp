@@ -13,21 +13,22 @@
  * limitations under the License. */
 
 #include "logging.h"
-
+#include <QsLogDest.h>
 using namespace qReal;
 
-void Logger::addLogTarget(const QString &path, int maxSize, int maxOldLogsCount, QsLogging::Level level)
+void Logger::addLogTarget(const QString &path, int maxSize, int maxOldLogsCount)
 {
-	QsLogging::DestinationPtr destination(QsLogging::DestinationFactory::MakeFileDestination(path
-			, QsLogging::EnableLogRotation
-			, QsLogging::MaxSizeBytes(maxSize)
-			, QsLogging::MaxOldLogCount(maxOldLogsCount)
-			, level));
-	QsLogging::Logger::instance().setLoggingLevel(QsLogging::TraceLevel);
-	QsLogging::Logger::instance().addDestination(destination);
+	auto dest = QsLogging::DestinationFactory::MakeFileDestination(path
+							   , QsLogging::LogRotationOption::EnableLogRotation
+							   , QsLogging::MaxSizeBytes(maxSize)
+							  , QsLogging::MaxOldLogCount(maxOldLogsCount));
+	QsLogging::Logger::instance().setLoggingLevel(QsLogging::DebugLevel);
+	QsLogging::Logger::instance().addDestination(std::move(dest));
 }
 
 Logger::~Logger()
 {
-	QsLogging::Logger::destroyInstance();
+#if defined(Q_OS_WIN)
+	QsLogging::Logger::instance().shutDownLoggerThread();
+#endif
 }

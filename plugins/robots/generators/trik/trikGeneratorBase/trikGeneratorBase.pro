@@ -27,7 +27,7 @@ includes(plugins/robots/generators/generatorBase \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo robots-generator-base robots-kit-base robots-trik-kit)
+links(qrkernel qrutils qrrepo robots-generator-base robots-kit-base robots-trik-kit)
 
 DEFINES += ROBOTS_TRIK_GENERATOR_BASE_LIBRARY
 

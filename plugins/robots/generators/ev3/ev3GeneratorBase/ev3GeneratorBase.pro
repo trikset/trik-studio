@@ -29,7 +29,7 @@ includes(plugins/robots/generators/ev3/ev3GeneratorBase \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo robots-generator-base robots-ev3-kit robots-kit-base)
+links(qrkernel qrutils qrrepo robots-generator-base robots-ev3-kit robots-kit-base)
 
 DEFINES += ROBOTS_EV3_GENERATOR_BASE_LIBRARY
 

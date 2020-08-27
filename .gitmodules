@@ -23,3 +23,6 @@
 	path = plugins/robots/thirdparty/Box2D/Box2D
 	url = https://github.com/iakov/Box2D
 	branch = "trik-studio"
+[submodule "thirdparty/qslog/qslog"]
+	path = thirdparty/qslog/qslog
+	url = https://bitbucket.org/codeimproved/qslog.git

@@ -18,7 +18,7 @@ cp -fpR "$BIN_DIR/patcher"                                                 "$BUN
 cp -fpR $BIN_DIR/libqrutils*.dylib                                         "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqrtext*.dylib                                          "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqscintilla2*.dylib                                     "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqslog*.dylib                                           "$BUNDLE_CONTENTS/Lib"
+cp -fpR $BIN_DIR/libtrikQsLog*.dylib                                           "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqrgui-brand-manager*.dylib                             "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqrgui-controller*.dylib                                "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqrgui-dialogs*.dylib                                   "$BUNDLE_CONTENTS/Lib"

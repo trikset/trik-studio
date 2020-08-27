@@ -18,7 +18,7 @@
 
 #include <QtCore/QPointF>
 #include <QtGui/QPolygon>
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 using namespace qReal;
 using namespace qrRepo::details;

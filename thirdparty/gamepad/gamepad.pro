@@ -4,3 +4,4 @@ CONFIG -= app_bundle
 include (../../global.pri)
 
 include (gamepad/trikDesktopGamepad.pri)
+LIBS -= -ltrikQsLog
