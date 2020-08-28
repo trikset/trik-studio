@@ -103,16 +103,17 @@ matrix:
     - os: linux
       dist: trusty
       name: "Linux tests in clean env"
-      before_install:
-#      - sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 762E3157
       addons:
         apt:
+          update: true
           sources:
           - deadsnakes
           packages:
-          - python3.7
           - p7zip-full
           - libxkbcommon-x11-0
+          - python3.7
+      before_install:
+      install:
       script:
       - ./buildScripts/travis/run_clean_env_test.sh
     - os: osx
