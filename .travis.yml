@@ -60,15 +60,15 @@ matrix:
     - stage: build
       os: linux
       services: docker
-      name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+      name: "Linux release + tests"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       services: docker
       env: CONFIG=debug TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Linux debug + tests"
     - os: osx
       language: cpp
-      name: "macOS release"
+      name: "macOS release + tests"
       env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
     - os: osx
       language: cpp
@@ -83,7 +83,7 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS release installer"
-      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests" BUILD_TIMEOUT=1800
 
     - stage: test
       dist: xenial
