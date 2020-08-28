@@ -11,6 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License. */
+#include <cmath>
 
 #include "luaToolboxTest.h"
 
@@ -164,14 +165,14 @@ TEST_F(LuaToolboxTest, twoFunctions)
 				});
 	};
 
-	const auto addFloatFunction = [this, add1aryFunction] (const QString &name
+	const auto addFloatFunction = [add1aryFunction] (const QString &name
 			, std::function<qreal(qreal)> const &function)
 	{
 		add1aryFunction(name, new types::Float, new types::Float
 				, [function](const QVariant &arg) { return function(arg.toReal()); });
 	};
 
-	addFloatFunction("cos", [](qreal x) {return cos(x); });
+	addFloatFunction("cos", [](qreal x) {return std::cos(x); });
 
 	mToolbox->interpret<int>("cos(1)");
 	mToolbox->interpret<int>("cos(1)");

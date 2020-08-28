@@ -14,6 +14,10 @@
 
 links(qrkernel qrutils quazip)
 
+clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
+CONFIG *= link_pkgconfig
+PKGCONFIG *= zlib
+
 HEADERS += \
 	$$PWD/private/repository.h \
 	$$PWD/private/folderCompressor.h \

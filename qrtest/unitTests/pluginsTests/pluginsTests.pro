@@ -16,5 +16,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 	blockDiagramTests \
-#	robotsTests \
+        robotsTests \
 	generationRulesToolTest \

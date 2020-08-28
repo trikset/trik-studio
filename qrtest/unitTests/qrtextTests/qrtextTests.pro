@@ -18,8 +18,6 @@ include(../common.pri)
 
 include(../../../qrtext/qrtext.pri)
 
-links(qslog)
-
 INCLUDEPATH += ../../../qrtext/include
 
 HEADERS += \

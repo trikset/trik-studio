@@ -14,7 +14,7 @@
 
 include(../common.pri)
 
-links(qrkernel qrutils qslog)
+links(qrkernel qrutils)
 
 include(../../../plugins/blockDiagram/visualDebugSupport/visualDebugSupport.pri)
 
