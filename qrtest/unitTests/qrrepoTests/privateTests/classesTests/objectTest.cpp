@@ -274,43 +274,43 @@ TEST(ObjectTest, cloneTest)
 	const Id child2_child("editor", "diagram", "element", "child2_child");
 	const Id child3_child("editor", "diagram", "element", "child3_child");
 
-	qrRepo::details::LogicalObject parentObj(parent);
-	qrRepo::details::LogicalObject rootObj(root);
-	qrRepo::details::LogicalObject child1Obj(child1);
-	qrRepo::details::LogicalObject child2Obj(child2);
-	qrRepo::details::LogicalObject child3Obj(child3);
-	qrRepo::details::LogicalObject child1_childObj(child1_child);
-	qrRepo::details::LogicalObject child2_childObj(child2_child);
-	qrRepo::details::LogicalObject child3_childObj(child3_child);
+	auto parentObj = new qrRepo::details::LogicalObject(parent);
+	auto rootObj = new qrRepo::details::LogicalObject(root);
+	auto child1Obj = new qrRepo::details::LogicalObject(child1);
+	auto child2Obj = new qrRepo::details::LogicalObject(child2);
+	auto child3Obj = new qrRepo::details::LogicalObject(child3);
+	auto child1_childObj = new qrRepo::details::LogicalObject(child1_child);
+	auto child2_childObj = new qrRepo::details::LogicalObject(child2_child);
+	auto child3_childObj = new qrRepo::details::LogicalObject(child3_child);
 
-	rootObj.setProperty("testProperty1", "value1");
-	child3_childObj.setProperty("testProperty2", "value2");
+	rootObj->setProperty("testProperty1", "value1");
+	child3_childObj->setProperty("testProperty2", "value2");
 
 	QHash<Id, qrRepo::details::Object *> objHash;
-	objHash.insert(parent, &parentObj);
-	objHash.insert(root, &rootObj);
-	objHash.insert(child1, &child1Obj);
-	objHash.insert(child2, &child2Obj);
-	objHash.insert(child3, &child3Obj);
-	objHash.insert(child1_child, &child1_childObj);
-	objHash.insert(child2_child, &child2_childObj);
-	objHash.insert(child3_child, &child3_childObj);
+	objHash.insert(parent, parentObj);
+	objHash.insert(root, rootObj);
+	objHash.insert(child1, child1Obj);
+	objHash.insert(child2, child2Obj);
+	objHash.insert(child3, child3Obj);
+	objHash.insert(child1_child, child1_childObj);
+	objHash.insert(child2_child, child2_childObj);
+	objHash.insert(child3_child, child3_childObj);
 
-	parentObj.addChild(root);
-	rootObj.addChild(child1);
-	rootObj.addChild(child2);
-	rootObj.addChild(child3);
-	child1Obj.addChild(child1_child);
-	child2Obj.addChild(child2_child);
-	child3Obj.addChild(child3_child);
+	parentObj->addChild(root);
+	rootObj->addChild(child1);
+	rootObj->addChild(child2);
+	rootObj->addChild(child3);
+	child1Obj->addChild(child1_child);
+	child2Obj->addChild(child2_child);
+	child3Obj->addChild(child3_child);
 
-	qrRepo::details::Object * const cloned = rootObj.clone(objHash);
+	auto cloned = rootObj->clone(objHash);
 	cloned->setParent(parent);
 
 	ASSERT_EQ(objHash.keys().size(), 15);
 
 	ASSERT_EQ(cloned->parent(), parent);
-	ASSERT_TRUE(cloned != &rootObj);
+	ASSERT_TRUE(cloned != rootObj);
 	ASSERT_TRUE(cloned->id() != root);
 	ASSERT_EQ(cloned->id().type(), root.type());
 
@@ -331,9 +331,9 @@ TEST(ObjectTest, cloneTest)
 	ASSERT_TRUE(objHash.contains(clonedChildId2));
 	ASSERT_TRUE(objHash.contains(clonedChildId3));
 
-	EXPECT_TRUE(objHash.value(clonedChildId1) != &child1Obj);
-	EXPECT_TRUE(objHash.value(clonedChildId2) != &child2Obj);
-	EXPECT_TRUE(objHash.value(clonedChildId3) != &child3Obj);
+	EXPECT_TRUE(objHash.value(clonedChildId1) != child1Obj);
+	EXPECT_TRUE(objHash.value(clonedChildId2) != child2Obj);
+	EXPECT_TRUE(objHash.value(clonedChildId3) != child3Obj);
 
 	ASSERT_EQ(objHash.value(clonedChildId1)->children().size(), 1);
 	ASSERT_EQ(objHash.value(clonedChildId2)->children().size(), 1);
@@ -350,15 +350,16 @@ TEST(ObjectTest, cloneTest)
 	EXPECT_TRUE(clonedChildChildId1 != child1_child);
 	EXPECT_TRUE(clonedChildChildId2 != child2_child);
 	EXPECT_TRUE(clonedChildChildId3 != child3_child);
-	EXPECT_TRUE(objHash.value(clonedChildChildId1) != &child1_childObj);
-	EXPECT_TRUE(objHash.value(clonedChildChildId2) != &child2_childObj);
-	EXPECT_TRUE(objHash.value(clonedChildChildId3) != &child3_childObj);
+	EXPECT_TRUE(objHash.value(clonedChildChildId1) != child1_childObj);
+	EXPECT_TRUE(objHash.value(clonedChildChildId2) != child2_childObj);
+	EXPECT_TRUE(objHash.value(clonedChildChildId3) != child3_childObj);
 
 	ASSERT_TRUE(cloned->hasProperty("testProperty1"));
 	ASSERT_TRUE(objHash.value(clonedChildChildId3)->hasProperty("testProperty2"));
 
 	EXPECT_EQ(cloned->property("testProperty1").toString(), "value1");
 	EXPECT_EQ(objHash.value(clonedChildChildId3)->property("testProperty2").toString(), "value2");
+	qDeleteAll(objHash);
 }
 
 TEST(ObjectTest, replacePropertiesTest)

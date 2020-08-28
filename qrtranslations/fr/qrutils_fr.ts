@@ -23,7 +23,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+648"/>
+        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+642"/>
         <source>Unexpected end of stream at %1. Mb you forget &apos;;&apos;?</source>
         <translation>La fin du flux inattendue sur %1. Peut-être vous avez oublié &apos;;&apos; ?</translation>
     </message>

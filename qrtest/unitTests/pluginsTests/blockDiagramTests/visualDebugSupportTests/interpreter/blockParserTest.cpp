@@ -37,7 +37,7 @@ TEST_F(BlockParserTest, parseProcessTest) {
 
 	mParser->parseProcess(stream, pos, Id::rootId());
 
-	QMap<QString, Number *> const &variables = mParser->variables();
+	auto const &variables = mParser->variables();
 	QStringList const variableNames = variables.keys();
 
 	ASSERT_EQ(variableNames.size(), 3);
@@ -45,9 +45,9 @@ TEST_F(BlockParserTest, parseProcessTest) {
 	ASSERT_TRUE(variableNames.contains("b"));
 	ASSERT_TRUE(variableNames.contains("c"));
 
-	Number const *a = variables.value("a");
-	Number const *b = variables.value("b");
-	Number const *c = variables.value("c");
+	auto a = variables.value("a");
+	auto b = variables.value("b");
+	auto c = variables.value("c");
 
 	EXPECT_EQ(a->value().toInt(), 5);
 	EXPECT_EQ(b->value().toInt(), 3);

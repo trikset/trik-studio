@@ -29,8 +29,8 @@ TEST(NumberExampleTest, sum)
 
 TEST(ParserExampleTest, expressionCalculation)
 {
-	qReal::BlockParser *parser = new qReal::BlockParser(nullptr);
+	qReal::BlockParser parser(nullptr);
 	QString const stream = "1+1";
 	int pos = 0;
-	EXPECT_EQ(parser->parseExpression(stream, pos)->value().toInt(), 2);
+	EXPECT_EQ(parser.parseExpression(stream, pos)->value().toInt(), 2);
 }

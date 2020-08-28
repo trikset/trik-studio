@@ -93,6 +93,7 @@ TEST_F(SerializerTest, saveAndLoadFromDiskTest)
 	ASSERT_TRUE(metaInfo.keys().count() == 2);
 	ASSERT_EQ(metaInfo["key1"], "info1");
 	ASSERT_EQ(metaInfo["key2"], 2);
+	qDeleteAll(map);
 }
 
 // Decomment EXPECT_FALSE and delete EXPECT_TRUE(true) when removeFromDisk will be fixed. pathToElement(id) returns
@@ -149,4 +150,5 @@ TEST_F(SerializerTest, saveAndLoadGraphicalPartsTest)
 			= dynamic_cast<GraphicalObject const *>(map.value(graphicalElement));
 
 	ASSERT_EQ(QPointF(10, 20), deserializedGraphicalObject->graphicalPartProperty(0, "Coord"));
+	qDeleteAll(map);
 }
