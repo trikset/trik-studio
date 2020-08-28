@@ -76,7 +76,7 @@ bool TrikGyroscopeAdapter::isCalibrated() const
 
 QVector<int> TrikGyroscopeAdapter::readRawData() const
 {
-	const auto t = convertToTrikRuntimeTime(getTimeValue(mModel.data()));
+	const auto &t = convertToTrikRuntimeTime(getTimeValue(mModel.data()));
 	return {0, 0, static_cast<int>(mModel->engine()->readGyroscopeSensor()[0] * gyroscopeConstant), t};
 }
 
@@ -95,4 +95,3 @@ int TrikGyroscopeAdapter::convertToTrikRuntimeTime(quint64 time) const
 {
 	return static_cast<int>(time * 1000 / 256);
 }
-
