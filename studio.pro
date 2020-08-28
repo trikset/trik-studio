@@ -29,7 +29,7 @@ tests {
 
 	trikStudioSimulatorTests.subdir = $$PWD/qrtest/trikStudioSimulatorTests
 
-        qrtest.depends = qrgui
+        qrtest.depends = plugins
 
-	trikStudioSimulatorTests.depends =  qrgui
+        trikStudioSimulatorTests.depends =  plugins
 }
