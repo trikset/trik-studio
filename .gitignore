@@ -1,4 +1,4 @@
-qrtest/unitTests/pluginsTests/robotsTests/**/target_wrapper.sh
+qrtest/unitTests/**/target_wrapper.sh
 **/object_script.*
 buildScripts/vera++/params
 buildScripts/.pyenv-*/
