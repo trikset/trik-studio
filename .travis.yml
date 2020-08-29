@@ -100,22 +100,6 @@ matrix:
           - libxkbcommon-x11-0
       script:
       - ./buildScripts/travis/run_clean_env_test.sh
-    - os: linux
-      dist: trusty
-      name: "Linux tests in clean env"
-      addons:
-        apt:
-          update: true
-          sources:
-          - deadsnakes
-          packages:
-          - p7zip-full
-          - libxkbcommon-x11-0
-          - python3.7
-      before_install:
-      install:
-      script:
-      - ./buildScripts/travis/run_clean_env_test.sh
     - os: osx
       name: "MacOS tests in clean env"
       before_install:
