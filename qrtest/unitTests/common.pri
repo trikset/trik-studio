@@ -15,7 +15,7 @@
 isEmpty(TEMPLATE): TEMPLATE = app
 
 equals(TEMPLATE, app) {
-    CONFIG += cmdline testcase
+    CONFIG += testcase testcase_no_bundle no_testcase_installs
 }
 
 include(../../global.pri)
