@@ -50,7 +50,10 @@ int main(int argc, char *argv[])
 	qInstallMessageHandler(handler);
 	qReal::PlatformInfo::enableHiDPISupport();
 	::testing::InitGoogleTest(&argc, argv);
-	::testing::FLAGS_gtest_death_test_style = "threadsafe";
+	// "threadsafe" conflicts with AddressSanitizer for GCC 9.3
+	// ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+	::testing::FLAGS_gtest_death_test_style = "fast";
+
 
 	QApplication app(argc, argv);
 
