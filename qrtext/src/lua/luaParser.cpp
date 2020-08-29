@@ -414,6 +414,6 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 
 	QList<ParserRef<LuaTokenTypes>> helper { exp , prefixexp , args , stat, explist, primary, varpart
 											, functioncallpart, prefixterm, tableconstructor, fieldlist
-											, field, fieldsep, binop, unop};	
+											, field, fieldsep, binop, unop};
 	return QSharedPointer<AutoreleaseRecursiveGrammarParser<LuaTokenTypes>>::create(block, helper);
 }

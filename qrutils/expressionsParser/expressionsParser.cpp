@@ -252,7 +252,7 @@ QSharedPointer<Number> ExpressionsParser::parseTerm(const QString &stream, int &
 					auto value = parseExpression(stream, pos);
 					if (checkForClosingBracket(stream, pos)) {
 						pos++;
-						res = applyFunction(variable, value);						
+						res = applyFunction(variable, value);
 					}
 				}
 			} else if (mVariables.contains(variable)) {

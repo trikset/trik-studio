@@ -22,9 +22,12 @@
 
 using namespace qReal;
 
-TEST(IdsTest, loadFromStringTest) {
-	::testing::FLAGS_gtest_death_test_style = "threadsafe";
+TEST(IdsTest, checkGTestDeathTestSupport) {
+	auto tryQAssert = [](){ Q_ASSERT(0 && "Q_ASSERT can be catched by GTest's EXPECT_DEATH"); };
+	EXPECT_DEATH_IF_SUPPORTED(tryQAssert(), ".*Q_ASSERT.*EXPECT_DEATH.*");
+}
 
+TEST(IdsTest, loadFromStringTest) {
 	EXPECT_DEATH_IF_SUPPORTED(Id::loadFromString("qrm:/editor/diagram/element/id/test")
 			, ".*path\\.count\\(\\) > 0 && path\\.count\\(\\) <= 5.*");
 
@@ -50,9 +53,7 @@ TEST(IdsTest, loadFromStringTest) {
 	EXPECT_EQ(id, Id("", "", "", ""));
 }
 
-TEST(IdsTest, checkIntegrityTest) {
-	::testing::FLAGS_gtest_death_test_style = "threadsafe";
-
+TEST(IdsTest, checkIntegrityTest) {	
 	EXPECT_DEATH_IF_SUPPORTED(Id id("editor", "diagram", "", "id")
 			, ".*checkIntegrity\\(\\).*");
 
@@ -77,8 +78,6 @@ TEST(IdsTest, rootIdTest) {
 }
 
 TEST(IdsTest, additonalConstructorTest) {
-	::testing::FLAGS_gtest_death_test_style = "threadsafe";
-
 	EXPECT_DEATH_IF_SUPPORTED(Id id(Id::loadFromString("qrm:/editor/diagram/element/id"), "test")
 			, ".*Can not add a part to Id, it will be too long.*");
 
