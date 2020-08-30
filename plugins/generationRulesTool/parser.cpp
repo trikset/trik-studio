@@ -97,12 +97,9 @@ QSharedPointer<qrtext::core::ParserInterface<TokenTypes>> simpleParser::Parser::
 				~(-TokenTypes::dot & (transitionEndIdentifier | transitionStartIdentifier)))
 			>> [] (QSharedPointer<ast::Node> elementIdentifierNode) {
 				if (elementIdentifierNode->is<TemporaryPair>()) {
-
 					auto asPair = qrtext::as<TemporaryPair>(elementIdentifierNode);
-
 					auto identifierPart = asPair->left();
 					auto linkPart = asPair->right();
-
 					return qrtext::wrap(new ast::ElementIdentifier(identifierPart, linkPart));
 				} else {
 					return qrtext::wrap(new ast::ElementIdentifier(elementIdentifierNode));
