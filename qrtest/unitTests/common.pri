@@ -14,12 +14,12 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
+include(../../global.pri)
+
+# after global.pri sets DESTDIR
 equals(TEMPLATE, app) {
     CONFIG += testcase testcase_no_bundle no_testcase_installs
 }
-
-include(../../global.pri)
-
 
 QT += widgets
 
