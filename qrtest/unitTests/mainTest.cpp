@@ -53,9 +53,8 @@ int main(int argc, char *argv[])
 	// ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 	::testing::FLAGS_gtest_death_test_style = "fast";
 
-	QApplication app(argc, argv);
-
-	Q_UNUSED(app);
-
-	return RUN_ALL_TESTS();
+	QScopedPointer<QApplication> app(new QApplication(argc, argv));
+	auto rc = RUN_ALL_TESTS();
+	app.reset();
+	return rc;
 }
