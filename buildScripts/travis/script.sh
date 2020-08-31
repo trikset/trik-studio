@@ -45,7 +45,7 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
      export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
      export LSAN_OPTIONS=suppressions=$PWD/bin/$CONFIG/lsan.supp:print_suppressions=0 ; \
      export DISPLAY=:0 ; \
-     make check -k -s && cd bin/$CONFIG && $TESTS ; \
+     make check -k -s && ( set +eu ; cd bin/$CONFIG && $TESTS ) ; \
    }\
 "
 
