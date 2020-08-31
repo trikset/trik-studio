@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 {
 	qReal::PlatformInfo::enableHiDPISupport();
 	qsrand(time(0));
-	QApplication app(argc, argv);
+	QScopedPointer<QApplication> app(new QApplication(argc, argv));
 	QCoreApplication::setApplicationName("2D-model");
 	QCoreApplication::setApplicationVersion(interpreterCore::Customizer::trikStudioVersion());
 
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 	}
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
-	QLOG_INFO() << "Arguments:" << app.arguments();
+	QLOG_INFO() << "Arguments:" << app->arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 	setDefaultLocale();
 
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 	parser.addOption(modeOption);
 	parser.addOption(speedOption);
 
-	parser.process(app);
+	parser.process(*app);
 
 	const QStringList positionalArgs = parser.positionalArguments();
 	if (positionalArgs.size() != 1) {
@@ -138,14 +138,16 @@ int main(int argc, char *argv[])
 	const QString trajectory = parser.isSet(trajectoryOption) ? parser.value(trajectoryOption) : QString();
 	const QString input = parser.isSet(inputOption) ? parser.value(inputOption) : QString();
 	const QString mode = parser.isSet(modeOption) ? parser.value(modeOption) : QString("diagram");
-	twoDModel::Runner runner(report, trajectory, input, mode);
+	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode));
 
 	auto speedFactor = parser.value(speedOption).toInt();
-	if (!runner.interpret(qrsFile, backgroundMode, speedFactor)) {
+	if (!runner->interpret(qrsFile, backgroundMode, speedFactor)) {
 		return 2;
 	}
 
-	const int exitCode = app.exec();
+	const int exitCode = app->exec();
+	runner.reset();
+	app.reset();
 	QLOG_INFO() << "------------------- APPLICATION FINISHED -------------------";
 	return exitCode;
 }
