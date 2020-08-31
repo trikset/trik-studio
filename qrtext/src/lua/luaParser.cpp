@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "qrtext/src/lua/luaParser.h"
-
+#include "qrtext/core/parser/AutoreleaseRecursiveGrammar.h"
 #include "qrtext/core/parser/parserRef.h"
 #include "qrtext/core/parser/operators/parserCombinators.h"
 #include "qrtext/core/parser/operators/expressionParser.h"
@@ -65,40 +65,6 @@
 using namespace qrtext::lua;
 using namespace qrtext::lua::details;
 using namespace qrtext::core;
-
-/// This helper class aims to fight against problem of
-/// cyclic references. Recursive grammar structure produces
-/// recursive references, and QSharedPointer cannot handle this
-/// without hacks. Thus we manage a full list of shared pointers
-/// to clean up manually in the dtor.
-struct LuaBlockParser : ParserInterface <LuaTokenTypes>
-{
-	LuaBlockParser(const ParserRef<LuaTokenTypes> &main, const QList<ParserRef<LuaTokenTypes>> &other)
-	{
-		mParsers << main << other;
-	}
-
-	QSet<LuaTokenTypes> first() const override
-	{
-		return mParsers[0]->first();
-	}
-
-	QSharedPointer<qrtext::core::ast::Node> parse(TokenStream<LuaTokenTypes> &tokenStream
-												  , ParserContext<LuaTokenTypes> &parserContext) const override
-	{
-		return mParsers[0]->parse(tokenStream, parserContext);
-	}
-
-	~LuaBlockParser() override
-	{
-		for (auto &&p: mParsers) {
-			p.internalPointer()->clear();
-		}
-	}
-
-private:
-	QList<ParserRef<LuaTokenTypes>> mParsers;
-};
 
 LuaParser::LuaParser(QList<Error> &errors)
 	: Parser<LuaTokenTypes>(grammar(), errors)
@@ -449,6 +415,5 @@ QSharedPointer<ParserInterface<LuaTokenTypes>> LuaParser::grammar()
 	QList<ParserRef<LuaTokenTypes>> helper { exp , prefixexp , args , stat, explist, primary, varpart
 											, functioncallpart, prefixterm, tableconstructor, fieldlist
 											, field, fieldsep, binop, unop};
-	QSharedPointer<LuaBlockParser> result(new LuaBlockParser(block, helper));
-	return result;
+	return QSharedPointer<AutoreleaseRecursiveGrammarParser<LuaTokenTypes>>::create(block, helper);
 }

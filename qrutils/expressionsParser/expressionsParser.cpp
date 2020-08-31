@@ -27,17 +27,14 @@ ExpressionsParser::ExpressionsParser(ErrorReporterInterface *errorReporter)
 	srand(time(nullptr));
 }
 
-ExpressionsParser::~ExpressionsParser()
-{
-	qDeleteAll(mVariables);
-}
+ExpressionsParser::~ExpressionsParser() = default;
 
-QMap<QString, Number *> const &ExpressionsParser::variables() const
+QMap<QString, QSharedPointer<Number>> const &ExpressionsParser::variables() const
 {
 	return mVariables;
 }
 
-QMap<QString, Number *> &ExpressionsParser::mutableVariables()
+QMap<QString, QSharedPointer<Number>> &ExpressionsParser::mutableVariables()
 {
 	return mVariables;
 }
@@ -116,7 +113,7 @@ bool ExpressionsParser::isAssignment(const QChar &c) const
 	return c.toLatin1() == '=';
 }
 
-Number *ExpressionsParser::parseNumber(const QString &stream, int &pos)
+QSharedPointer<Number> ExpressionsParser::parseNumber(const QString &stream, int &pos)
 {
 	int beginPos = pos;
 	bool isDouble = false;
@@ -125,7 +122,7 @@ Number *ExpressionsParser::parseNumber(const QString &stream, int &pos)
 	}
 
 	if (!checkForDigit(stream, pos)) {
-		return new Number();
+		return QSharedPointer<Number>::create();
 	}
 
 	while (pos < stream.length() && isDigit(stream.at(pos))) {
@@ -136,7 +133,7 @@ Number *ExpressionsParser::parseNumber(const QString &stream, int &pos)
 		pos++;
 
 		if (!checkForDigit(stream, pos)) {
-			return new Number();
+			return QSharedPointer<Number>::create();
 		}
 
 		while (pos < stream.length() && isDigit(stream.at(pos))) {
@@ -148,7 +145,7 @@ Number *ExpressionsParser::parseNumber(const QString &stream, int &pos)
 		pos++;
 
 		if (isEndOfStream(stream, pos)) {
-			return new Number();
+			return QSharedPointer<Number>::create();
 		}
 
 		if (pos < stream.length() && isSign(stream.at(pos))) {
@@ -156,7 +153,7 @@ Number *ExpressionsParser::parseNumber(const QString &stream, int &pos)
 		}
 
 		if (!checkForDigit(stream, pos)) {
-			return new Number();
+			return QSharedPointer<Number>::create();
 		}
 
 		while (pos < stream.length() && isDigit(stream.at(pos))) {
@@ -164,9 +161,9 @@ Number *ExpressionsParser::parseNumber(const QString &stream, int &pos)
 		}
 	}
 	if (isDouble) {
-		return new Number(stream.mid(beginPos, pos - beginPos).toDouble(), Number::doubleType);
+		return QSharedPointer<Number>::create(stream.mid(beginPos, pos - beginPos).toDouble(), Number::doubleType);
 	} else {
-		return new Number(stream.mid(beginPos, pos - beginPos).toInt(), Number::intType);
+		return QSharedPointer<Number>::create(stream.mid(beginPos, pos - beginPos).toInt(), Number::intType);
 	}
 }
 
@@ -211,13 +208,13 @@ bool ExpressionsParser::isHtmlBrTag(const QString &stream, int &pos) const
 	}
 }
 
-Number *ExpressionsParser::parseTerm(const QString &stream, int &pos)
+QSharedPointer<Number> ExpressionsParser::parseTerm(const QString &stream, int &pos)
 {
-	Number *res = nullptr;
+	QSharedPointer<Number> res;
 	skip(stream, pos);
 
 	if (hasErrors() || isEndOfStream(stream, pos)) {
-		return new Number();
+		return QSharedPointer<Number>::create();
 	}
 
 	switch (stream.at(pos).toLatin1()) {
@@ -252,15 +249,14 @@ Number *ExpressionsParser::parseTerm(const QString &stream, int &pos)
 				skip(stream, pos);
 				if (checkForOpeningBracket(stream, pos)) {
 					pos++;
-					Number *value = parseExpression(stream, pos);
+					auto value = parseExpression(stream, pos);
 					if (checkForClosingBracket(stream, pos)) {
 						pos++;
 						res = applyFunction(variable, value);
-						delete value;
 					}
 				}
 			} else if (mVariables.contains(variable)) {
-				res = new Number(mVariables[variable]->value(), mVariables[variable]->type());
+				res.reset(new Number(mVariables[variable]->value(), mVariables[variable]->type()));
 			} else {
 				error(unknownIdentifier, QString::number(unknownIdentifierIndex + 1), "", variable);
 			}
@@ -272,15 +268,15 @@ Number *ExpressionsParser::parseTerm(const QString &stream, int &pos)
 	}
 	skip(stream, pos);
 	if (!res) {
-		res = new Number();
+		res.reset(new Number());
 	}
 
 	return res;
 }
 
-Number *ExpressionsParser::parseMult(const QString &stream, int &pos)
+QSharedPointer<Number> ExpressionsParser::parseMult(const QString &stream, int &pos)
 {
-	Number *res = parseTerm(stream, pos);
+	QSharedPointer<Number> res(parseTerm(stream, pos));
 	while (pos < stream.length() && isMultiplicationOrDivision(stream.at(pos))) {
 		pos++;
 		switch (stream.at(pos - 1).toLatin1()) {
@@ -289,7 +285,7 @@ Number *ExpressionsParser::parseMult(const QString &stream, int &pos)
 			break;
 		case '/':
 			{
-				Number *divisor = parseTerm(stream, pos);
+				auto divisor = parseTerm(stream, pos);
 				if (divisor->type() == Number::intType && divisor->value().toInt() == 0) {
 					error(divisionByZero);
 				} else {
@@ -304,9 +300,9 @@ Number *ExpressionsParser::parseMult(const QString &stream, int &pos)
 	return res;
 }
 
-Number *ExpressionsParser::parseExpression(const QString &stream, int &pos)
+QSharedPointer<Number> ExpressionsParser::parseExpression(const QString &stream, int &pos)
 {
-	Number *res = parseMult(stream, pos);
+	auto res = parseMult(stream, pos);
 	while (pos < stream.length() && isArithmeticalMinusOrPlus(stream.at(pos))) {
 		pos++;
 		switch (stream.at(pos - 1).toLatin1()) {
@@ -342,7 +338,7 @@ void ExpressionsParser::parseCommand(const QString &stream, int &pos)
 
 	if (isAssignment(stream.at(pos))) {
 		pos++;
-		Number *n = parseExpression(stream, pos);
+		auto n = parseExpression(stream, pos);
 		if (!hasErrors()) {
 			const bool containsVariable = mVariables.keys().contains(variable);
 			const Number::Type t1 = containsVariable ? mVariables[variable]->type() : Number::intType;
@@ -356,8 +352,6 @@ void ExpressionsParser::parseCommand(const QString &stream, int &pos)
 				} else {
 					mVariables[variable]->setValue(n->value().toDouble());
 				}
-
-				delete n;
 			}
 		}
 	} else {
@@ -389,8 +383,8 @@ void ExpressionsParser::parseProcess(const QString &stream, int &pos, const Id &
 
 bool ExpressionsParser::parseSingleComprasion(const QString &stream, int &pos)
 {
-	Number *left = parseExpression(stream, pos);
-	Number *right = nullptr;
+	auto left = parseExpression(stream, pos);
+	decltype (left) right;
 	if (hasErrors() || isEndOfStream(stream, pos)) {
 		return false;
 	}
@@ -707,7 +701,6 @@ void ExpressionsParser::clear()
 {
 	mHasParseErrors = false;
 	mErrorReporter = nullptr;
-	qDeleteAll(mVariables);
 	mVariables.clear();
 	mCurrentId = Id::rootId();
 }
@@ -740,14 +733,14 @@ bool ExpressionsParser::isFunction(const QString &variable)
 			;
 }
 
-Number *ExpressionsParser::applyFunction(const QString &variable, Number *value)
+QSharedPointer<Number> ExpressionsParser::applyFunction(const QString &variable, const QSharedPointer<Number> &value)
 {
-	Number *result = nullptr;
+	Number *result {};
 	qreal argument = value->value().toDouble();
 	if (variable == "cos") {
-		result = new Number(cos(argument), Number::doubleType);
+		result= new Number(cos(argument), Number::doubleType);
 	} else if (variable == "sin") {
-		result = new Number(sin(argument), Number::doubleType);
+		result= new Number(sin(argument), Number::doubleType);
 	} else if (variable == "ln") {
 		result = new Number(log(argument), Number::doubleType);
 	} else if (variable == "exp") {
@@ -768,5 +761,5 @@ Number *ExpressionsParser::applyFunction(const QString &variable, Number *value)
 		result = new Number(static_cast<int>(rand() % static_cast<int>(argument)), Number::intType);
 	}
 
-	return result;
+	return QSharedPointer<Number>(result);
 }
