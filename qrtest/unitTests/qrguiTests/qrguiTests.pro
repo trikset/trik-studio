@@ -18,7 +18,7 @@ QT += xml
 
 include(../common.pri)
 
-links(qrkernel qslog qrutils qrrepo qrgui-controller qrgui-plugin-manager qrgui-tool-plugin-interface)
+links(qrkernel qrutils qrrepo qrgui-controller qrgui-plugin-manager qrgui-tool-plugin-interface)
 
 INCLUDEPATH += \
 	# A little hack to make .ui files happy. They include other files by relative path based on qrgui/.ui \

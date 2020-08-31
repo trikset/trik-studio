@@ -16,8 +16,6 @@ TARGET = qrrepo_unittests
 
 include(../common.pri)
 
-links(qslog)
-
 include(../../../qrrepo/qrrepo.pri)
 
 INCLUDEPATH += \
