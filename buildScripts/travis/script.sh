@@ -23,7 +23,7 @@ compression=true
 compression_level=3
 sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
 EOF
-$EXECUTOR bash -lixc "\
+$EXECUTOR bash -lic " set -xueo pipefail; \
    export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
 && ccache -p \
 && which g++ \
@@ -40,8 +40,15 @@ $EXECUTOR bash -lixc "\
 && qmake -Wall PYTHON3_VERSION_MINOR=\$TRIK_PYTHON3_VERSION_MINOR CONFIG+=$CONFIG $QMAKE_EXTRA $PROJECT.pro \
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
-&& sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -xc \"export QT_QPA_PLATFORM=minimal ; export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 && export LSAN_OPTIONS=suppressions=$PWD/bin/$CONFIG/lsan.supp:print_suppressions=0 && export DISPLAY=:0 && make check -k && cd bin/$CONFIG && $TESTS\""
+&& ls bin/$CONFIG \
+&& { export QT_QPA_PLATFORM=minimal ; \
+     export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
+     export LSAN_OPTIONS=suppressions=$PWD/bin/$CONFIG/lsan.supp:print_suppressions=0 ; \
+     export DISPLAY=:0 ; \
+     make check -k -s && cd bin/$CONFIG && $TESTS ; \
+   }\
+"
+
 df -h .
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 
