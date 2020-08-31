@@ -25,20 +25,21 @@ TEST(GraphicalObjectTest, graphicalPartsCloneTest)
 	const Id element("editor", "diagram", "element", "id");
 	const Id graphicalElement("editor", "diagram", "element", "graphicalId");
 
-	GraphicalObject graphicalObj(graphicalElement, Id(), element);
+	auto graphicalObj = new GraphicalObject(graphicalElement, Id(), element);
 
 	QHash<Id, Object *> objHash;
-	objHash.insert(graphicalElement, &graphicalObj);
+	objHash.insert(graphicalElement, graphicalObj);
 
-	graphicalObj.createGraphicalPart(0);
-	graphicalObj.setGraphicalPartProperty(0, "Coord", QPointF(10, 20));
+	graphicalObj->createGraphicalPart(0);
+	graphicalObj->setGraphicalPartProperty(0, "Coord", QPointF(10, 20));
 
-	const Object * const cloned = graphicalObj.clone(objHash);
+	auto cloned = graphicalObj->clone(objHash);
 
-	const GraphicalObject * const graphicalClone = dynamic_cast<const GraphicalObject *>(cloned);
+	auto graphicalClone = dynamic_cast<const GraphicalObject *>(cloned);
 
 	ASSERT_TRUE(graphicalClone != nullptr);
 	ASSERT_EQ(QPointF(10, 20), graphicalClone->graphicalPartProperty(0, "Coord"));
+	qDeleteAll(objHash);
 }
 
 TEST(GraphicalObjectTest, graphicalPartsSerializeTest)

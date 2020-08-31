@@ -17,8 +17,6 @@ QT       += core
 QT       -= gui
 
 TARGET = generationRulesTool_unittests
-DESTDIR = $$PWD/bin/$$CONFIGURATION
-
 include(../../common.pri)
 include(../../../../plugins/generationRulesTool/generationRulesTool.pri)
 

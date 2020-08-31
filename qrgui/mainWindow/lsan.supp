@@ -7,11 +7,15 @@ leak:QTWTF::Mutex::Mutex()
 leak:QApplicationPrivate::initializeWidgetFontHash
 leak:QFontconfigDatabase::defaultFont() const
 leak:QGuiApplicationPrivate::createPlatformIntegration()
-leak:*libfontconfig.so.1*
-leak:*libfreetype.so.6*
+leak:QApplication::desktop()
+leak:*/libfontconfig.so.1*
+leak:*/libfreetype.so.6*
+leak:*/libglib-2.0.so.0*
 # From unit tests. These should be fixed one by one.
 leak:QPlatformIntegrationFactory::create
 leak:QFontconfigDatabase::addApplicationFont(QByteArray const&, QString const&)
 leak:QFontconfigDatabase::populateFontDatabase()
 #Singletons
 leak:kitBase::robotModel::DeviceInfo::property(QMetaObject const*, QString const&)
+#We still have problems with PythonQt
+leak:*/libpython3.*

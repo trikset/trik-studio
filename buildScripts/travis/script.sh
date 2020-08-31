@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xuevo pipefail
+set -ueo pipefail
 
 CODECOV=true
 case $TRAVIS_OS_NAME in
@@ -23,7 +23,7 @@ compression=true
 compression_level=3
 sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
 EOF
-$EXECUTOR bash -lixc "\
+$EXECUTOR bash -lic " set -xueo pipefail; \
    export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
 && ccache -p \
 && which g++ \
@@ -36,12 +36,19 @@ $EXECUTOR bash -lixc "\
 && { which python && python -V || true ; } \
 && eval 'export PKG_CONFIG_PATH=\`python3.\${TRIK_PYTHON3_VERSION_MINOR}-config --prefix\`/lib/pkgconfig' \
 && rm -f .qmake.cache \
-&&  { echo 'Remove broken object files' ; find . -name '*.o' -type f -print0 | xargs -0 file --mime-type | grep -v 'application/x-object' | cut -f 1 -d ':' | xargs -t rm -f _RM_REQUIRES_ARGUMENTS_BUT_BSD_XARGS_IS_MISSING_R_PARAMETER_ARGUMENT ; } \
+&&  { echo -n 'Remove broken object files ' ; find . -name '*.o' -type f -print0 | xargs -0 file --mime-type | grep -v 'application/x-object' | cut -f 1 -d ':' | xargs -t rm -f _RM_REQUIRES_ARGUMENTS_BUT_BSD_XARGS_IS_MISSING_R_PARAMETER_ARGUMENT || : ; echo Done ; } \
 && qmake -Wall PYTHON3_VERSION_MINOR=\$TRIK_PYTHON3_VERSION_MINOR CONFIG+=$CONFIG $QMAKE_EXTRA $PROJECT.pro \
 && sh -c 'make -j2 qmake_all 1>>build.log 2>&1' \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
-&& sh -c \"cd bin/$CONFIG && ls\" \
-&& sh -xc \"export QT_QPA_PLATFORM=minimal ; export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 && export LSAN_OPTIONS=suppressions=lsan.supp:print_suppressions=0 && export DISPLAY=:0 && cd bin/$CONFIG && $TESTS\""
+&& ls bin/$CONFIG \
+&& { export QT_QPA_PLATFORM=minimal ; \
+     export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
+     export LSAN_OPTIONS=suppressions=$PWD/bin/$CONFIG/lsan.supp:print_suppressions=0 ; \
+     export DISPLAY=:0 ; \
+     make check -k -s && ( set +eu ; cd bin/$CONFIG && $TESTS ) ; \
+   }\
+"
+
 df -h .
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 

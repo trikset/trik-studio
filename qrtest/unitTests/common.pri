@@ -14,12 +14,16 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
-equals(TEMPLATE, app) {
-    CONFIG += cmdline testcase
-}
-
 include(../../global.pri)
 
+# after global.pri sets DESTDIR
+
+#Workaround for MinGW build. Qt incorrectly sets it to empty string on Win32 for bash
+TEST_TARGET_DIR = .
+
+equals(TEMPLATE, app) {
+    CONFIG += testcase testcase_no_bundle no_testcase_installs
+}
 
 QT += widgets
 
