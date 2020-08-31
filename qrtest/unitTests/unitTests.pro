@@ -32,3 +32,4 @@ qrkernelTests.depends = testUtils
 qrrepoTests.depends = testUtils
 qrutilsTests.depends = testUtils
 qrtextTests.depends = testUtils
+qrgraphTests.depends = testUtils
