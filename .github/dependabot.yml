@@ -6,22 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: "gitsubmodule"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    allow:
-      - dependency_name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
-      - dependency_name: "thirdparty/gamepad/gamepad"
-    reviewers:
-      - "iakov"
-  - package-ecosystem: "gitsubmodule"
-    directory: "/"
     schedule:
       interval: "monthly"
-    ignore:
-      - dependency_name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
-      - dependency_name: "thirdparty/gamepad/gamepad"
-    allow:
-      - dependency_name: "*"
     reviewers:
       - "iakov"
