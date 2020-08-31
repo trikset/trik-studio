@@ -163,7 +163,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaParser.cpp" line="+192"/>
+        <location filename="../../qrtext/src/lua/luaParser.cpp" line="+158"/>
         <source>node in &apos;stat&apos; semantic action is of unexpected type</source>
         <translation>Le nœud d&apos;une action sémantique &apos;stat&apos; est de type inattendu</translation>
     </message>

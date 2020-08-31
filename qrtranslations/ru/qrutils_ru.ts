@@ -27,7 +27,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+648"/>
+        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+642"/>
         <source>Unexpected end of stream at %1. Mb you forget &apos;;&apos;?</source>
         <translation>Неожиданный конец выражения в позиции %1. Может быть, Вы забыли &apos;;&apos;?</translation>
     </message>
