@@ -88,7 +88,6 @@ matrix:
     - stage: test
       dist: xenial
       name: "Linux tests in clean env"
-      before_install:
       addons:
         apt:
           sources:
