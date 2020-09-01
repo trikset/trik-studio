@@ -60,11 +60,12 @@ private:
 	QString initInputs(const QString &inputs) const;
 
 	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
-	bool mRunning;
+	bool mRunning { false };
 
 	TrikBrick mBrick;
+	trikNetwork::MailboxInterface *mMailbox {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
-	qReal::ErrorReporterInterface *mErrorReporter;
+	qReal::ErrorReporterInterface *mErrorReporter {};
 };
 
 }

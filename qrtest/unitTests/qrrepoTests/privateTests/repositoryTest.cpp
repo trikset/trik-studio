@@ -67,6 +67,9 @@ void RepositoryTest::removeDirectory(QString const &dirName)
 }
 
 void RepositoryTest::SetUp() {
+	LogicalObject theRoot(Id::rootId());
+	theRoot.setProperty("name", Id::rootId().toString());
+
 	LogicalObject parentObj(parent);
 	parentObj.setParent(fakeParent);
 
@@ -108,6 +111,7 @@ void RepositoryTest::SetUp() {
 	child3_childObj.setProperty("name", "child3_child");
 
 	QList<Object *> list;
+	list.push_back(&theRoot);
 	list.push_back(&parentObj);
 	list.push_back(&rootObj);
 	list.push_back(&child1Obj);
@@ -130,6 +134,7 @@ void RepositoryTest::SetUp() {
 	newObj2.setProperty("property2", "value2");
 
 	QList<Object *> newList;
+	newList.push_back(&theRoot);
 	newList.push_back(&newObj1);
 	newList.push_back(&newObj2);
 
@@ -597,7 +602,7 @@ TEST_F(RepositoryTest, saveTest) {
 	mRepository->save(toSave);
 	mRepository->open("saveFile.qrs");
 
-	EXPECT_EQ(mRepository->elements().size(), 7);
+	EXPECT_EQ(mRepository->elements().size(), 6);
 	EXPECT_TRUE(mRepository->exist(child1));
 	EXPECT_TRUE(mRepository->exist(child2));
 	EXPECT_TRUE(mRepository->exist(child3));
@@ -613,7 +618,7 @@ TEST_F(RepositoryTest, saveWithLogicalIdTest) {
 	mRepository->saveWithLogicalId(toSave);
 	mRepository->open("saveFile.qrs");
 
-	EXPECT_EQ(mRepository->elements().size(), 5);
+	EXPECT_EQ(mRepository->elements().size(), 4);
 	EXPECT_TRUE(mRepository->exist(child1));
 	EXPECT_TRUE(mRepository->exist(child1_child));
 	EXPECT_TRUE(mRepository->exist(child2_child));

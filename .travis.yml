@@ -21,7 +21,7 @@ env:
     - BUILD_TIMEOUT=2400
     - EARLY_START_DOCKER_PULL_PID=$( if [ $TRAVIS_OS_NAME = 'linux' ] ; then time docker pull trikset/linux-builder ; else true ; fi >&2 & echo $!)
     - HEARTBEAT=$(while sleep 100; do echo "=====[ $SECONDS seconds, still building... ]====="; done >&2 & echo $! )
-    - ALL_TESTS="./robots_kitBase_unittests && ./robots_interpreterCore_unittests && ./robots_twoDModel_unittests && ./trik-v62-qts-generator-tests && ./robots_utils_unittests && env ASAN_OPTIONS=detect_leaks=0 ./run-simulator-tests.sh"
+    - ALL_TESTS="./run-simulator-tests.sh"
     - QMAKE_EXTRA="CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
     - TRIK_QT="$HOME/TRIK_Qt"
     - secure: "Djp1JuoB/dDxIQwmYfaJIflulGaZk69djacFE4L/ippcFfcN9As/dzTvBHjHNV2urZoNGAH5iuIGgX0b6aMKIzQRcGbLOrr7yx3SiT/hJ/sh6tnDoiz6kVDiq6Nubf+Mpvgjbm3wuseqcdK4LzHLVv4bZh7cB+JPG4x5PndbD2RyaCoSwdqsZ+fZj0ixteVsGrexSW/w4ZPiAtTfxsRKYJmivLl3jQNm6b0g3AEr37BO/M88xSaECa3WagR6bSgWlNqhftBq51Qk/242LIhLKlLEDLNr4zj04SctO+dZQqT8T99REihHfgbzYg+oFG2/M4fpkxsHykKG8t+Ssgx6iuIMwP8nI/wH6zY68xsmLaMR0rXT8gRxXz2w6z1xwQlXbcRYTWH/PKrLFwIN4d+//GzHHnsh/e6TM6T5pv8t704wmcCer1MbHbHqfRUjK3CAKE62HzsHh4En1PmFsW5kCedmDwTvMvTMiwR7Sru0TrUJ4ldXXbIcfGwisJfhntUQ53eWsN0uZ0FjfZqLQtGEDpn4m+WZwf3cMXKicX18mGXeRsnEOOxK/b62qBTh+hBK+3li69jflVqJJzWqVa4GDkL10OgW5hk/IHCDiTPLqeg/6eCefZFn7FcT4iRdG5CzROfXY5Ep0Gf/ia+uBZBpvlQMQ84/WBLMhgHXGCJGwqU="
@@ -60,15 +60,15 @@ matrix:
     - stage: build
       os: linux
       services: docker
-      name: "Linux release"
-      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests CONFIG+=silent CONFIG+=warn_off"
+      name: "Linux release + tests"
+      env: QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
     - os: linux
       services: docker
       env: CONFIG=debug TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Linux debug + tests"
     - os: osx
       language: cpp
-      name: "macOS release"
+      name: "macOS release + tests"
       env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
     - os: osx
       language: cpp
@@ -83,7 +83,7 @@ matrix:
     - os: osx
       language: cpp
       name: "macOS release installer"
-      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
+      env: INSTALLER=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers CONFIG-=tests" BUILD_TIMEOUT=1800
 
     - stage: test
       dist: xenial
@@ -100,21 +100,6 @@ matrix:
           - libxkbcommon-x11-0
       script:
       - ./buildScripts/travis/run_clean_env_test.sh
-#    - os: linux
-#      dist: trusty
-#      name: "Linux tests in clean env"
-#      before_install:
-#      addons:
-#        apt:
-#          update: true
-#          sources:
-#          - deadsnakes
-#          packages:
-#          - python3.7
-#          - p7zip-full
-#          - libxkbcommon-x11-0
-#      script:
-#      - ./buildScripts/travis/run_clean_env_test.sh
     - os: osx
       name: "MacOS tests in clean env"
       before_install:

@@ -65,7 +65,7 @@ void BlockParser::parseVarPart(QString const &stream, int &pos)
 					{
 						pos++;
 						skip(stream, pos);
-						Number *temp = parseExpression(stream, pos);
+						auto temp = parseExpression(stream, pos);
 						temp->setType(curType);
 						mVariables[variable] = temp;
 						break;
@@ -73,7 +73,7 @@ void BlockParser::parseVarPart(QString const &stream, int &pos)
 				case ',':
 					{
 						pos++;
-						mVariables[variable] = new Number();
+						mVariables[variable].reset(new Number());
 						skip(stream, pos);
 						if (pos == stream.length()) {
 							error(unexpectedEndOfStream, QString::number(pos+1));
@@ -94,7 +94,7 @@ void BlockParser::parseVarPart(QString const &stream, int &pos)
 							return;
 						}
 
-						mVariables[variable] = new Number();
+						mVariables[variable].reset(new Number());
 						break;
 					}
 				}

@@ -39,7 +39,6 @@ environment:
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
-    TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
@@ -169,14 +168,12 @@ build_script:
   - bash -c "env LC_ALL=C date -u"
   - mingw32-make -j2 qmake_all
   - bash -c "env LC_ALL=C date -u"
-  - mingw32-make -j2 -k all
+  - mingw32-make -j2 -k check
 
 test_script:
   - echo %cd%
   - cd %BUILD_DIR%\bin\%CONFIGURATION%
   - dir
-  - bash -c "env LC_ALL=C date -u"
-  - cmd /c %TEST_SUITE%
   - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
   - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
 

@@ -16,5 +16,9 @@ TEMPLATE = subdirs
 
 SUBDIRS = \
 	interpreterCoreTests \
-	support/mockKitPlugin1 \
-	support/mockKitPlugin2 \
+	mockKitPlugin1 \
+	mockKitPlugin2 \
+
+mockKitPlugin1.subdir = support/mockKitPlugin1
+mockKitPlugin2.subdir = support/mockKitPlugin2
+interpreterCoreTests.depends += mockKitPlugin1 mockKitPlugin2
