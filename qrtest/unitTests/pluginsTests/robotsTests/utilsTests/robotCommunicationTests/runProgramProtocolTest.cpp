@@ -41,14 +41,14 @@ void RunProgramProtocolTest::SetUp()
 	ON_CALL(*mCommunicator, uploadProgram(_)).WillByDefault(
 		Invoke([this](const QString &name) {
 			Q_UNUSED(name)
-			delay([this]() { emit mCommunicator->uploadProgramDone(); });
+			delay([this]() { emit mCommunicator->uploadProgramDone(); }, 50);
 		})
 	);
 
 	ON_CALL(*mCommunicator, runProgram(_)).WillByDefault(
 		Invoke([this](const QString &name) {
 			Q_UNUSED(name)
-			delay([this]() { emit mCommunicator->startedRunning(); });
+			delay([this]() { emit mCommunicator->startedRunning(); }, 50);
 		})
 	);
 }

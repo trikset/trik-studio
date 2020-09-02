@@ -22,6 +22,6 @@
 namespace qrTest {
 
 /// Execute some action after control returns to event loop.
-TEST_UTILS_EXPORT void delay(const std::function<void()> &action);
+TEST_UTILS_EXPORT void delay(const std::function<void()> &action, int msec = 10);
 
 }
