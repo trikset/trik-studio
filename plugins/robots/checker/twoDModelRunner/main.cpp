@@ -101,8 +101,6 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("qrs-file", QObject::tr("Save file to be interpreted."));
 	QCommandLineOption backgroundOption({"b", "background"}, QObject::tr("Run emulation in background."));
-	QCommandLineOption platformOption("platform"
-			, QObject::tr("Use this option set to \"minimal\" to disable connection to X server"), "minimal");
 	QCommandLineOption reportOption({"r","report"}
 									, QObject::tr("A path to file where checker results will be written (JSON)")
 									, "path-to-report", "report.json");
@@ -113,20 +111,21 @@ int main(int argc, char *argv[])
 			, "path-to-trajectory", "trajectory.fifo");
 	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution")// probably others too
 			, "path-to-input", "inputs.txt");
-	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Interpret mode"), "mode", "diagram");
+	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Interpret mode. Interpret mode. Set to \"script\" for"\
+								" executing js file in a project or set to \"diagram\" for executing the diagram.")
+								, "mode", "diagram");
 	QCommandLineOption speedOption({"s", "speed"}
 								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!)")
 								   , "speed", "0");
-	QCommandLineOption closeOnSuccess("close-on-succes"
+	QCommandLineOption closeOnSuccessOption("close-on-succes"
 								   , QObject::tr("The model will be closed if the program finishes without errors."));
 	parser.addOption(backgroundOption);
-	parser.addOption(platformOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
 	parser.addOption(inputOption);
 	parser.addOption(modeOption);
 	parser.addOption(speedOption);
-	parser.addOption(closeOnSuccess);
+	parser.addOption(closeOnSuccessOption);
 
 	parser.process(*app);
 
@@ -141,7 +140,7 @@ int main(int argc, char *argv[])
 	const QString trajectory = parser.isSet(trajectoryOption) ? parser.value(trajectoryOption) : QString();
 	const QString input = parser.isSet(inputOption) ? parser.value(inputOption) : QString();
 	const QString mode = parser.isSet(modeOption) ? parser.value(modeOption) : QString("diagram");
-	const bool closeOnSuccessMode = parser.isSet(closeOnSuccess);
+	const bool closeOnSuccessMode = parser.isSet(closeOnSuccessOption);
 	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode));
 
 	auto speedFactor = parser.value(speedOption).toInt();

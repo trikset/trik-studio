@@ -21,12 +21,16 @@ In background mode the session will be terminated just after the execution ended
         <translation>Executer l&apos;émulation en tache de fond.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
-        <translation>Mettez &quot;minimal&quot; dans cette option pour désactiver la connexion au serveur X</translation>
+        <location line="+11"/>
+        <source>Interpret mode. Interpret mode. Set to &quot;script&quot; for executing js file in a project or set to &quot;diagram&quot; for executing the diagram.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
+        <translation type="vanished">Mettez &quot;minimal&quot; dans cette option pour désactiver la connexion au serveur X</translation>
+    </message>
+    <message>
+        <location line="-9"/>
         <source>A path to file where checker results will be written (JSON)</source>
         <translation>Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
     </message>
@@ -41,13 +45,13 @@ In background mode the session will be terminated just after the execution ended
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Interpret mode</source>
+        <location line="+6"/>
+        <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!)</source>
+        <location line="+3"/>
+        <source>The model will be closed if the program finishes without errors.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

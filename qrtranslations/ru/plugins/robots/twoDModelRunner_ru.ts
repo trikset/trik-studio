@@ -27,12 +27,16 @@ In background mode the session will be terminated just after the execution ended
         <translation>Произвести эмуляцию в фоне.</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
-        <translation>Используйте эту опцию, установленную в &quot;minimal&quot; для того, чтобы запустить программу без X-сервера</translation>
+        <location line="+11"/>
+        <source>Interpret mode. Interpret mode. Set to &quot;script&quot; for executing js file in a project or set to &quot;diagram&quot; for executing the diagram.</source>
+        <translation>Режим исполнения. Установите &quot;script&quot; для выполнения js файла в проекте или &quot;diagram&quot; для выполнения диаграммы.</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
+        <translation type="vanished">Используйте эту опцию, установленную в &quot;minimal&quot; для того, чтобы запустить программу без X-сервера</translation>
+    </message>
+    <message>
+        <location line="-9"/>
         <source>A path to file where checker results will be written (JSON)</source>
         <translation>Путь к файлу, куда будут записаны результаты проверки (JSON)</translation>
     </message>
@@ -44,17 +48,17 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+4"/>
         <source>Inputs for JavaScript solution</source>
-        <translation type="unfinished"></translation>
+        <translation>Входные данные для JavaScript файла</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Interpret mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+6"/>
         <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!)</source>
         <translation>Ускорение, попробуйте от 5 до 20, но можно и 1000 пробовать </translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The model will be closed if the program finishes without errors.</source>
+        <translation>Окно исполнения будет закрыто, если программа завершится без ошибок.</translation>
     </message>
     <message>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, engine so FIFOs are recommended to be targets for this option.</source>
