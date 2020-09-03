@@ -47,7 +47,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	, mReporter(report, trajectory)
 {
 	mPluginFacade.init(mConfigurator);
-	for (const QString &defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
+	for (const auto &defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
 		qReal::SettingsManager::loadDefaultSettings(defaultSettingsFile);
 	}
 
@@ -79,8 +79,8 @@ bool Runner::interpret(const QString &saveFile, bool background, int customSpeed
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
 	QList<view::TwoDModelWidget *> twoDModelWindows;
-	for (QWidget * const widget : QApplication::allWidgets()) {
-		if (view::TwoDModelWidget * const twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
+	for (const auto widget : QApplication::allWidgets()) {
+		if (const auto twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
 			twoDModelWindows << twoDModelWindow;
 		}
 	}
@@ -92,7 +92,7 @@ bool Runner::interpret(const QString &saveFile, bool background, int customSpeed
 		});
 	}
 
-	for (view::TwoDModelWidget * const twoDModelWindow : twoDModelWindows) {
+	for (const auto twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
 				, [this]() { this->mMainWindow.emulateClose(); });
 
@@ -105,7 +105,7 @@ bool Runner::interpret(const QString &saveFile, bool background, int customSpeed
 			layout->addWidget(console, layout->rowCount(), 0, 1, -1);
 		}
 
-		for (const model::RobotModel *robotModel : twoDModelWindow->model().robotModels()) {
+		for (const auto robotModel : twoDModelWindow->model().robotModels()) {
 			connectRobotModel(robotModel, console);
 		}
 
