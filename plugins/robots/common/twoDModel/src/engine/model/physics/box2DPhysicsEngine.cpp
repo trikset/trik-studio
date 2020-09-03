@@ -25,6 +25,7 @@
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/ballItem.h"
+#include "src/engine/items/startPosition.h"
 #include "qrutils/mathUtils/math.h"
 #include "parts/box2DWheel.h"
 #include "parts/box2DRobot.h"

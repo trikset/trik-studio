@@ -27,6 +27,7 @@ namespace qReal {
 class QRGUI_SYSTEM_FACADE_EXPORT SystemFacade
 {
 public:
+	~SystemFacade();
 	SystemFacade();
 
 	/// Returns a reference to an entity that obtains and manages the plugins with visual languages descriptions.
@@ -40,9 +41,9 @@ public:
 	SystemEvents &events();
 
 private:
-	EditorManager mEditorManager;
-	models::Models mModels;
-	SystemEvents mEvents;
+	QScopedPointer<EditorManager> mEditorManager;
+	QScopedPointer<models::Models> mModels;
+	QScopedPointer<SystemEvents> mEvents;
 };
 
 }

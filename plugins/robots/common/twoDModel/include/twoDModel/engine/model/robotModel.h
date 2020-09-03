@@ -18,6 +18,8 @@
 
 #include <utils/circularQueue.h>
 
+#include <QPointer>
+
 #include "twoDModel/robotModel/twoDRobotModel.h"
 #include "sensorsConfiguration.h"
 
@@ -75,7 +77,7 @@ public:
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
 			, const Settings &settings, QObject *parent = nullptr);
 
-	~RobotModel() = default;
+	~RobotModel();
 
 	void reinit();
 
@@ -138,7 +140,7 @@ public:
 	QPointF robotCenter() const;
 
 	/// Returns the item whose scene position will determine robot`s start position.
-	QSharedPointer<QGraphicsItem> startPositionMarker() const;
+	items::StartPosition *startPositionMarker();
 
 	/// Returns accelerometer sensor data.
 	Q_INVOKABLE QVector<int> accelerometerReading() const;
@@ -213,21 +215,21 @@ private:
 	twoDModel::robotModel::TwoDRobotModel &mRobotModel;
 	SensorsConfiguration mSensorsConfiguration;
 
-	QPointF mPos;
-	qreal mAngle;
-	qreal mGyroAngle;
-	qreal mDeltaDegreesOfAngle;
-	int mBeepTime;
-	bool mIsOnTheGround;
+	QPointF mPos { 0, 0 };
+	qreal mAngle { 0 };
+	qreal mGyroAngle { 0 };
+	qreal mDeltaDegreesOfAngle { 0 };
+	int mBeepTime { 0 };
+	bool mIsOnTheGround { true };
 	QColor mMarker;
-	QPointF mAcceleration;
+	QPointF mAcceleration { 0, 0 };
 	utils::CircularQueue<QPointF> mPosStamps;
-	bool mIsFirstAngleStamp;
-	qreal mAngleStampPrevious;
+	bool mIsFirstAngleStamp { true };
+	qreal mAngleStampPrevious { 0 };
 
-	physics::PhysicsEngineBase *mPhysicsEngine;  // Does not take ownership
+	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
 
-	QSharedPointer<items::StartPosition> mStartPositionMarker;
+	QPointer<items::StartPosition> mStartPositionMarker;
 };
 
 }

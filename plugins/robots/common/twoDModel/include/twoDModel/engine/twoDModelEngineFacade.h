@@ -72,7 +72,7 @@ private:
 	const QString mRobotModelName;
 
 	QScopedPointer<model::Model> mModel;
-	view::TwoDModelWidget *mView;
+	view::TwoDModelWidget* mView; // TODO: transfer ownership to parent widget
 	QScopedPointer<TwoDModelEngineInterface> mApi;
 	utils::SmartDock *mDock;  // Transfers ownership to main window indirectly
 

@@ -112,7 +112,7 @@ private:
 
 	QScopedPointer<textLanguage::RobotsBlockParser> mParser;
 
-	kitBase::InterpreterInterface * mInterpreter;  // Has ownership
+	QScopedPointer<kitBase::InterpreterInterface> mInterpreter;
 
 	interpreterCore::interpreter::ProxyInterpreter mProxyInterpreter;
 

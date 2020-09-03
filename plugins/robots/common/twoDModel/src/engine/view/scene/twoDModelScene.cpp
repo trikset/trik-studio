@@ -95,7 +95,6 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 TwoDModelScene::~TwoDModelScene()
 {
 	for (auto &&r: mRobots.values()) {
-		removeItem(r->robotModel().startPositionMarker().data());
 		removeItem(r.data());
 	}
 
@@ -228,8 +227,8 @@ void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 
 	addItem(robotItem.data());
 	robotItem->robotModel().startPositionMarker()->setZValue(robotItem->zValue() - lowPrecision);
-	addItem(robotItem->robotModel().startPositionMarker().data());
-	subscribeItem(qSharedPointerDynamicCast<AbstractItem>(robotModel->startPositionMarker()).data());
+	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership	
+	subscribeItem(robotModel->startPositionMarker());
 
 	mRobots.insert(robotModel, robotItem);
 

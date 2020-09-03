@@ -71,7 +71,7 @@ private slots:
 private:
 	void initGraphicsOutput();
 
-	QScopedPointer<QGraphicsScene> mScene;
+	QGraphicsScene *mScene; // Has ownership as the parent
 	QScopedPointer<AbstractTimer> mVisualTimer;
 	KeyPoint mMainPoint { Qt::yellow };
 	KeyPoint mMarker { Qt::red };

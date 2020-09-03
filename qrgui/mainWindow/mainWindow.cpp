@@ -109,10 +109,11 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mSplashScreen(new SplashScreen(SettingsManager::value("Splashscreen").toBool()))
 	, mController(new Controller)
 	, mRootIndex(QModelIndex())
-	, mPreferencesDialog(this)
+	, mPreferencesDialog(new gui::PreferencesDialog(this))
 	, mRecentProjectsLimit(SettingsManager::value("recentProjectsLimit").toInt())
 	, mSceneCustomizer(new SceneCustomizer())
 	, mInitialFileToOpen(fileToOpen)
+	, mScriptAPI(new  ScriptAPI())
 {
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
@@ -146,7 +147,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	mUi->errorDock->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT + Qt::Key_1));
 	addAction(mUi->errorDock->toggleViewAction());
 
-	mPreferencesDialog.init();
+	mPreferencesDialog->init();
 
 	mSplashScreen->setProgress(60);
 
@@ -329,7 +330,7 @@ void MainWindow::connectActions()
 	SettingsListener::listen("PaletteIconsInARowCount", this, &MainWindow::changePaletteRepresentation);
 	SettingsListener::listen("toolbarSize", this, &MainWindow::resetToolbarSize);
 	SettingsListener::listen("pathToImages", this, &MainWindow::updatePaletteIcons);
-	connect(&mPreferencesDialog, &PreferencesDialog::settingsApplied, this, &qReal::MainWindow::applySettings);
+	connect(mPreferencesDialog, &PreferencesDialog::settingsApplied, this, &qReal::MainWindow::applySettings);
 
 	connect(&*mController, &Controller::canUndoChanged, mUi->actionUndo, &QAction::setEnabled);
 	connect(&*mController, &Controller::canRedoChanged, mUi->actionRedo, &QAction::setEnabled);
@@ -366,7 +367,7 @@ void MainWindow::connectSystemEvents()
 	connect(&*mErrorReporter, &ErrorReporter::errorAdded, &mFacade->events(), &SystemEvents::errorAdded);
 	connect(&*mErrorReporter, &ErrorReporter::criticalAdded, &mFacade->events(), &SystemEvents::criticalAdded);
 
-	connect(static_cast<QRealApplication *>(qApp), &QRealApplication::lowLevelEvent
+	connect(qobject_cast<QRealApplication *>(qApp), &QRealApplication::lowLevelEvent
 			, &mFacade->events(), &SystemEvents::lowLevelEvent);
 }
 
@@ -397,13 +398,14 @@ MainWindow::~MainWindow()
 {
 	mUi->paletteTree->saveConfiguration();
 	SettingsManager::instance()->saveData();
+	SettingsListener::disconnectSource(this);
+	delete mUi; mUi = nullptr;
 	// TODO: This is a workaround for crash on macOS.
 	// Seems like this crash is caused by memory corruption somewhere else.
 	// If the statusBar with children is deleted before other controls, this helps.
-	delete statusBar();
+	// delete statusBar();
 	// ----------------
 
-	delete mUi;
 
 	if (mRestoreDefaultSettingsOnClose) {
 		SettingsManager::clearSettings();
@@ -418,7 +420,7 @@ EditorManagerInterface &MainWindow::editorManager()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	mScriptAPI.abortEvaluation();
+	mScriptAPI->abortEvaluation();
 
 	closeAllTabs();
 
@@ -732,7 +734,7 @@ void MainWindow::closeTab(QWidget *tab)
 QMap<QString, gui::PreferencesPage *> MainWindow::preferencesPages() const
 {
 	QMap<QString, PreferencesPage *> result;
-	for (PreferencesPage * const page : mPreferencesDialog.pages()) {
+	for (auto &&page : mPreferencesDialog->pages()) {
 		result[page->objectName()] = page;
 	}
 
@@ -949,7 +951,7 @@ void MainWindow::closeTab(int index)
 
 void MainWindow::showPreferencesDialog()
 {
-	if (mPreferencesDialog.exec() == QDialog::Accepted) {
+	if (mPreferencesDialog->exec() == QDialog::Accepted) {
 		mToolManager->updateSettings();
 	}
 
@@ -958,7 +960,7 @@ void MainWindow::showPreferencesDialog()
 
 void MainWindow::openSettingsDialog(const QString &tab)
 {
-	mPreferencesDialog.switchCurrentPage(tab);
+	mPreferencesDialog->switchCurrentPage(tab);
 	showPreferencesDialog();
 }
 
@@ -1791,9 +1793,9 @@ void MainWindow::initPluginsAndStartWidget()
 	}
 
 	BrandManager::configure(mToolManager.data());
-	mPreferencesDialog.setWindowIcon(BrandManager::applicationIcon());
+	mPreferencesDialog->setWindowIcon(BrandManager::applicationIcon());
 	PreferencesPage *hotKeyManagerPage = new PreferencesHotKeyManagerPage(this);
-	mPreferencesDialog.registerPage(tr("Shortcuts"), hotKeyManagerPage);
+	mPreferencesDialog->registerPage(tr("Shortcuts"), hotKeyManagerPage);
 
 	if (!mProjectManager->restoreIncorrectlyTerminated() &&
 			(mInitialFileToOpen.isEmpty() || !mProjectManager->open(mInitialFileToOpen)))
@@ -1961,7 +1963,7 @@ void MainWindow::initToolPlugins()
 	}
 
 	for (auto &&page : mToolManager->preferencesPages()) {
-		mPreferencesDialog.registerPage(page.first, page.second);
+		mPreferencesDialog->registerPage(page.first, page.second);
 	}
 
 	const bool allowExplosionsCustomization = toolManager().customizer()->allowSubprogramPropertiesChanging();
@@ -2304,16 +2306,17 @@ void MainWindow::openStartTab()
 void MainWindow::initScriptAPI()
 {
 	QThread * const scriptAPIthread = new QThread(this);
-	mScriptAPI.init(*this);
+	mScriptAPI->init(*this);
 
 	QAction *const evalAction = new QAction(this);
 	// Setting a secret combination to activate script interpretation.
 	evalAction->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F12));
-	connect(evalAction, &QAction::triggered, &mScriptAPI, &ScriptAPI::evaluate, Qt::DirectConnection);
+	connect(evalAction, &QAction::triggered, mScriptAPI, &ScriptAPI::evaluate);
 	addAction(evalAction);
 
+	mScriptAPI->moveToThread(scriptAPIthread);
 	connect(&mFacade->events(), &SystemEvents::closedMainWindow, scriptAPIthread, &QThread::quit);
-	mScriptAPI.moveToThread(scriptAPIthread);
+	connect(scriptAPIthread, &QThread::finished, mScriptAPI, &QObject::deleteLater);
 	scriptAPIthread->start();
 }
 

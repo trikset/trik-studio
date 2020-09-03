@@ -23,6 +23,7 @@ namespace ev3 {
 
 class ROBOTS_EV3_GENERATOR_BASE_EXPORT Ev3GeneratorFactory : public generatorBase::GeneratorFactoryBase
 {
+	Q_OBJECT
 public:
 	Ev3GeneratorFactory(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

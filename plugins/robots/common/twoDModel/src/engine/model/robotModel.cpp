@@ -44,22 +44,14 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mSettings(settings)
 	, mRobotModel(robotModel)
 	, mSensorsConfiguration(robotModel.robotId(), robotModel.size())
-	, mPos(QPointF(0, 0))
-	, mAngle(0)
-	, mGyroAngle(0)
-	, mDeltaDegreesOfAngle(0)
-	, mBeepTime(0)
-	, mIsOnTheGround(true)
 	, mMarker(Qt::transparent)
-	, mAcceleration(QPointF(0, 0))
 	, mPosStamps(positionStampsCount)
-	, mIsFirstAngleStamp(true)
-	, mAngleStampPrevious(0)
-	, mPhysicsEngine(nullptr)
 	, mStartPositionMarker(new items::StartPosition(info().size()))
 {
 	reinit();
 }
+
+RobotModel::~RobotModel() = default;
 
 void RobotModel::reinit()
 {
@@ -476,7 +468,7 @@ void RobotModel::deserializeWheels(const QDomElement &robotElement)
 	setMotorPortOnWheel(WheelEnum::right, PortInfo::fromString(wheels.attribute("right")));
 }
 
-QSharedPointer<QGraphicsItem> RobotModel::startPositionMarker() const
+twoDModel::items::StartPosition *RobotModel::startPositionMarker()
 {
 	return mStartPositionMarker;
 }

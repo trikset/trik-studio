@@ -393,7 +393,7 @@ private:
 	QMap<QString, bool> mDocksVisibility;
 
 	QString mTempDir;
-	qReal::gui::PreferencesDialog mPreferencesDialog;
+	qReal::gui::PreferencesDialog *mPreferencesDialog; //Has ownership
 
 	int mRecentProjectsLimit {};
 	QMenu *mRecentProjectsMenu {}; // Has ownership
@@ -410,7 +410,7 @@ private:
 	/// A field for storing file name passed as console argument
 	QString mInitialFileToOpen;
 
-	gui::ScriptAPI mScriptAPI;
+	gui::ScriptAPI *mScriptAPI; // Has ownership,  but manages via worker thread
 
 	bool mRestoreDefaultSettingsOnClose {};
 };

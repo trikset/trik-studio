@@ -28,7 +28,7 @@ PluginManagerImplementation::PluginManagerImplementation(const QString &pluginsD
 
 PluginManagerImplementation::~PluginManagerImplementation()
 {
-	for (auto &pair : mLoaders) {
+	for (auto &&pair : mLoaders) {
 		pair.second->unload();
 		delete pair.second;
 	}

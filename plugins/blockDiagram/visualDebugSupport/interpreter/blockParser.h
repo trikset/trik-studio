@@ -24,9 +24,9 @@ namespace qReal {
 /// Block diagram action process field parser and interpreter
 class BlockParser : public QObject, public utils::ExpressionsParser
 {
-
+	Q_OBJECT
 public:
-	BlockParser(ErrorReporterInterface* errorReporter);
+	explicit BlockParser(ErrorReporterInterface* errorReporter);
 
 private:
 

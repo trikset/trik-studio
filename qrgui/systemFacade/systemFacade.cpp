@@ -19,26 +19,34 @@
 using namespace qReal;
 
 SystemFacade::SystemFacade()
-	: mEditorManager()
-	, mModels(QString(), mEditorManager)
+	: mEditorManager(new EditorManager())
+	, mModels(new models::Models(QString(), *mEditorManager))
+	, mEvents(new SystemEvents())
 {
-	QObject::connect(&mModels.logicalModelAssistApi(), &models::LogicalModelAssistApi::elementAdded
-			, &mEvents, &SystemEvents::logicalElementAdded);
-	QObject::connect(&mModels.graphicalModelAssistApi(), &models::GraphicalModelAssistApi::elementAdded
-			, &mEvents, &SystemEvents::graphicalElementAdded);
+	QObject::connect(&mModels->logicalModelAssistApi(), &models::LogicalModelAssistApi::elementAdded
+			, &*mEvents, &SystemEvents::logicalElementAdded);
+	QObject::connect(&mModels->graphicalModelAssistApi(), &models::GraphicalModelAssistApi::elementAdded
+                     , &*mEvents, &SystemEvents::graphicalElementAdded);
+}
+
+SystemFacade::~SystemFacade()
+{
+	mModels.reset();
+	mEditorManager.reset();
+	mEvents.reset();
 }
 
 EditorManagerInterface &SystemFacade::editorManager()
 {
-	return mEditorManager;
+	return *mEditorManager;
 }
 
 models::Models &SystemFacade::models()
 {
-	return mModels;
+	return *mModels;
 }
 
 SystemEvents &SystemFacade::events()
 {
-	return mEvents;
+	return *mEvents;
 }

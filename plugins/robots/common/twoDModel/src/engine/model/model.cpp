@@ -20,7 +20,7 @@
 
 #include "src/engine/constraints/constraintsChecker.h"
 #include "src/robotModel/nullTwoDRobotModel.h"
-
+#include "src/engine/items/startPosition.h"
 #include "physics/simplePhysicsEngine.h"
 #include "physics/box2DPhysicsEngine.h"
 

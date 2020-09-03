@@ -53,7 +53,7 @@ void SensorViewer::initGraphicsOutput()
 	mScene->setItemIndexMethod(QGraphicsScene::NoIndex);
 	mScene->setSceneRect(-200, -160, 205, 160);
 
-	setScene(mScene.data());
+	setScene(mScene);
 	setRenderHint(QPainter::Antialiasing, false);
 	setDragMode(QGraphicsView::NoDrag);
 

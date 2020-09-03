@@ -47,7 +47,7 @@ RobotsPluginFacade::RobotsPluginFacade()
 
 RobotsPluginFacade::~RobotsPluginFacade()
 {
-	delete mInterpreter;
+	mInterpreter.reset();
 	for (auto &&kitId : mKitPluginManager.kitIds()) {
 		for (auto *kit : mKitPluginManager.kitsById(kitId)) {
 			kit->release();
@@ -100,7 +100,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mEventsForKitPlugin
 			, mRobotModelManager));
 
-	mInterpreter = new interpreter::BlockInterpreter(
+	mInterpreter.reset(new interpreter::BlockInterpreter(
 			configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, configurer.mainWindowInterpretersInterface()
@@ -108,8 +108,8 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mBlocksFactoryManager
 			, mRobotModelManager
 			, *mParser
-			);
-	if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(mInterpreter)) {
+		));
+	if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(mInterpreter.data())) {
 		mDevicesConfigurationManager->connectDevicesConfigurationProvider(provider);
 	}
 
@@ -242,7 +242,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	});
 
 	sync();
-	mProxyInterpreter.resetInterpreter(mInterpreter);
+	mProxyInterpreter.resetInterpreter(mInterpreter.data());
 }
 
 qReal::gui::PreferencesPage *RobotsPluginFacade::robotsSettingsPage() const
