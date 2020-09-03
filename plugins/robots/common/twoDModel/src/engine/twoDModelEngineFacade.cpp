@@ -53,7 +53,6 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 {
 	mModel->init(*interpretersInterface.errorReporter(), interpreterControl);
 	dockInterface.registerEditor(*mView);
-	mView->setParent(dockInterface.windowWidget());
 	mView->setController(controller);
 
 	const auto onActiveTabChanged = [this](const qReal::TabInfo &info) {
