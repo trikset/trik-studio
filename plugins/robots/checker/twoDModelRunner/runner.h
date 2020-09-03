@@ -64,7 +64,9 @@ public:
 	/// @param background If true then the save file will be interpreted in the fastest speed and 2D model window
 	/// will be closed immediately after the interpretation stopped.
 	/// @param customSpeedFactor can be used when not in background mode to tune interpretation speed
-	bool interpret(const QString &saveFile, bool background, int customSpeedFactor);
+	/// @param closeOnSuccessMode If true then model will be closed if the program finishes without errors.
+	bool interpret(const QString &saveFile, const bool background
+				   , const int customSpeedFactor, const bool closeOnSuccess);
 
 private slots:
 	void close();

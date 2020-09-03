@@ -70,7 +70,8 @@ Runner::~Runner()
 	mReporter.reportMessages();
 }
 
-bool Runner::interpret(const QString &saveFile, bool background, int customSpeedFactor)
+bool Runner::interpret(const QString &saveFile, const bool background
+					   , const int customSpeedFactor, const bool closeOnSuccess)
 {
 	if (!mProjectManager.open(saveFile)) {
 		return false;
@@ -85,12 +86,11 @@ bool Runner::interpret(const QString &saveFile, bool background, int customSpeed
 		}
 	}
 
-	if (background) {
-		connect(&mPluginFacade.eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
-				, this, [this]() {
-				QTimer::singleShot(0, this, &Runner::close);
-		});
-	}
+	connect(&mPluginFacade.eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
+			, this, [this, background, closeOnSuccess](qReal::interpretation::StopReason reason) {
+		if (background || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
+			QTimer::singleShot(0, this, &Runner::close);
+	});
 
 	for (const auto twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
