@@ -54,11 +54,16 @@ In background mode the session will be terminated just after the execution ended
         <source>The model will be closed if the program finishes without errors.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+1"/>
+        <source>Shows robot&apos;s console.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+103"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>

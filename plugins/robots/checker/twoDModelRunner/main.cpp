@@ -119,6 +119,7 @@ int main(int argc, char *argv[])
 								   , "speed", "0");
 	QCommandLineOption closeOnSuccessOption("close-on-succes"
 								   , QObject::tr("The model will be closed if the program finishes without errors."));
+	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
@@ -126,6 +127,7 @@ int main(int argc, char *argv[])
 	parser.addOption(modeOption);
 	parser.addOption(speedOption);
 	parser.addOption(closeOnSuccessOption);
+	parser.addOption(showConsoleOption);
 
 	parser.process(*app);
 
@@ -141,10 +143,11 @@ int main(int argc, char *argv[])
 	const QString input = parser.isSet(inputOption) ? parser.value(inputOption) : QString();
 	const QString mode = parser.isSet(modeOption) ? parser.value(modeOption) : QString("diagram");
 	const bool closeOnSuccessMode = parser.isSet(closeOnSuccessOption);
+	const bool showConsoleMode = parser.isSet(showConsoleOption);
 	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode));
 
 	auto speedFactor = parser.value(speedOption).toInt();
-	if (!runner->interpret(qrsFile, backgroundMode, speedFactor, closeOnSuccessMode)) {
+	if (!runner->interpret(qrsFile, backgroundMode, speedFactor, closeOnSuccessMode, showConsoleMode)) {
 		return 2;
 	}
 

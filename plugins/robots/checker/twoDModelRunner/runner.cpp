@@ -71,7 +71,7 @@ Runner::~Runner()
 }
 
 bool Runner::interpret(const QString &saveFile, const bool background
-					   , const int customSpeedFactor, const bool closeOnSuccess)
+					   , const int customSpeedFactor, const bool closeOnSuccess, const bool showConsole)
 {
 	if (!mProjectManager.open(saveFile)) {
 		return false;
@@ -96,17 +96,19 @@ bool Runner::interpret(const QString &saveFile, const bool background
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
 				, [this]() { this->mMainWindow.emulateClose(); });
 
-		auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout());
-		qReal::ui::ConsoleDock* console = nullptr;
-		if (layout) {
-			console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
-			mRobotConsoles << console;
-			// TODO: hack to add console for each widget
-			layout->addWidget(console, layout->rowCount(), 0, 1, -1);
-		}
+		if (showConsole) {
+			auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout());
+			qReal::ui::ConsoleDock* console = nullptr;
+			if (layout) {
+				console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
+				mRobotConsoles << console;
+				// TODO: hack to add console for each widget
+				layout->addWidget(console, layout->rowCount(), 0, 1, -1);
+			}
 
-		for (const auto robotModel : twoDModelWindow->model().robotModels()) {
-			connectRobotModel(robotModel, console);
+			for (const auto robotModel : twoDModelWindow->model().robotModels()) {
+				connectRobotModel(robotModel, console);
+			}
 		}
 
 		auto &t = twoDModelWindow->model().timeline();

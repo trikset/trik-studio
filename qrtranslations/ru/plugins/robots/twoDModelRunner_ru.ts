@@ -48,7 +48,7 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+4"/>
         <source>Inputs for JavaScript solution</source>
-        <translation>Входные данные для JavaScript файла</translation>
+        <translation>Входные данные для JavaScript файла.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -61,6 +61,11 @@ In background mode the session will be terminated just after the execution ended
         <translation>Окно исполнения будет закрыто, если программа завершится без ошибок.</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>Shows robot&apos;s console.</source>
+        <translation>Отоброжает консоль робота.</translation>
+    </message>
+    <message>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, engine so FIFOs are recommended to be targets for this option.</source>
         <translation type="obsolete">Путь к файлу, куда будует выводиться траектория робота. Записть не будет осуществлена одномоментно, каждый узел траектории будет записан по факту его подсчета проверяющей системой</translation>
     </message>
@@ -68,7 +73,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+103"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>

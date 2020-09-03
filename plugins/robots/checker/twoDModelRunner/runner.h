@@ -65,8 +65,9 @@ public:
 	/// will be closed immediately after the interpretation stopped.
 	/// @param customSpeedFactor can be used when not in background mode to tune interpretation speed
 	/// @param closeOnSuccessMode If true then model will be closed if the program finishes without errors.
+	/// @param showConsole If true then robot's console will be showed.
 	bool interpret(const QString &saveFile, const bool background
-				   , const int customSpeedFactor, const bool closeOnSuccess);
+				   , const int customSpeedFactor, const bool closeOnSuccess, const bool showConsole);
 
 private slots:
 	void close();
