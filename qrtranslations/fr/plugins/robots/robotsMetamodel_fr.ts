@@ -131,7 +131,12 @@
         <translation>Condition :</translation>
     </message>
     <message>
-        <location line="-169"/>
+        <location line="-273"/>
+        <source>Reads a value into variable from an input dialog.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+104"/>
         <location line="+450"/>
         <source>Thread:</source>
         <translation>Fil :</translation>
@@ -630,7 +635,8 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+138"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <source>Wait</source>
@@ -679,12 +685,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Sets a variable value to a user value from input dialog.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
+        <location line="+17"/>
         <source>Default:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1186,7 +1187,6 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
-        <location line="+1"/>
         <source>Algorithms</source>
         <translation>Algorithmes</translation>
     </message>
@@ -1198,7 +1198,7 @@
         <translation>Actions</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
