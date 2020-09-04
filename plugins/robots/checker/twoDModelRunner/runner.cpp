@@ -24,7 +24,6 @@
 #include <kitBase/robotModel/robotParts/shell.h>
 #include <kitBase/robotModel/robotModelUtils.h>
 
-#include <twoDModel/engine/view/twoDModelWidget.h>
 #include <twoDModel/engine/model/model.h>
 #include <twoDModel/engine/model/timeline.h>
 
@@ -97,17 +96,7 @@ bool Runner::interpret(const QString &saveFile, const bool background
 				, [this]() { this->mMainWindow.emulateClose(); });
 
 		if (showConsole) {
-			qReal::ui::ConsoleDock* console = nullptr;
-			if (auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout())) {
-				console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
-				mRobotConsoles << console;
-				// TODO: hack to add console for each widget
-				layout->addWidget(console, layout->rowCount(), 0, 1, -1);
-			}
-
-			for (auto &&robotModel : twoDModelWindow->model().robotModels()) {
-				connectRobotModel(robotModel, console);
-			}
+			attachNewConsoleTo(twoDModelWindow);
 		}
 
 		auto &t = twoDModelWindow->model().timeline();
@@ -169,7 +158,22 @@ void Runner::onDeviceStateChanged(const QString &robotId
 			, device->port().name()
 			, property
 			, value
-			);
+							 );
+}
+
+void Runner::attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow)
+{
+	qReal::ui::ConsoleDock* console = nullptr;
+	if (auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout())) {
+		console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
+		mRobotConsoles << console;
+		// TODO: hack to add console for each widget
+		layout->addWidget(console, layout->rowCount(), 0, 1, -1);
+	}
+
+	for (auto &&robotModel : twoDModelWindow->model().robotModels()) {
+		connectRobotModel(robotModel, console);
+	}
 }
 
 void Runner::close()

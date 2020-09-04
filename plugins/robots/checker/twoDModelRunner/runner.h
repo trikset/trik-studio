@@ -26,6 +26,7 @@
 #include <qrgui/plugins/toolPluginInterface/pluginConfigurator.h>
 #include <interpreterCore/robotsPluginFacade.h>
 #include "reporter.h"
+#include <twoDModel/engine/view/twoDModelWidget.h>
 
 namespace qReal {
 namespace ui {
@@ -76,6 +77,7 @@ private:
 	void onRobotRided(const QPointF &newPosition, const qreal newRotation);
 	void onDeviceStateChanged(const QString &robotId, const kitBase::robotModel::robotParts::Device *device
 			, const QString &property, const QVariant &value);
+	void attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow);
 
 	qReal::SystemFacade mQRealFacade;
 	qReal::Controller mController;
