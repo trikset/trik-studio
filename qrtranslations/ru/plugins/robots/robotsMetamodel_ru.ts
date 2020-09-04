@@ -358,7 +358,12 @@
         <translation>Дождаться нажатия:</translation>
     </message>
     <message>
-        <location line="+230"/>
+        <location line="+126"/>
+        <source>Reads a value into variable from an input dialog.</source>
+        <translation>Ввести с клавиатуры значение в переменную.</translation>
+    </message>
+    <message>
+        <location line="+104"/>
         <location line="+450"/>
         <source>Thread:</source>
         <translation>Задача:</translation>
@@ -849,7 +854,8 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+138"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <source>Wait</source>
@@ -898,12 +904,11 @@
         <translation>Пользовательский ввод</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Sets a variable value to a user value from input dialog.</source>
-        <translation>Устанавливает значение переменной в значение из окна пользовательского ввода</translation>
+        <translation type="vanished">Устанавливает значение переменной в значение из окна пользовательского ввода</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+17"/>
         <source>Default:</source>
         <translation>По умолчанию:</translation>
     </message>
@@ -1514,7 +1519,6 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
-        <location line="+1"/>
         <source>Algorithms</source>
         <translation>Алгоритмы</translation>
     </message>
@@ -1526,7 +1530,7 @@
         <translation>Действия</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+5"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>

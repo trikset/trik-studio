@@ -266,11 +266,26 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+29"/>
+        <source>Only one link with &quot;%1&quot; is allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>One of the outgoing links must be marked with &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Link to the next statement is missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Control flow break detected, stopping</source>
         <translation type="obsolete">Une pause de flux de contrôle détecté, arrêt en cours</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+35"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
     </message>
@@ -280,28 +295,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-61"/>
+        <location line="-62"/>
         <source>Outgoing link is not connected</source>
         <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
     </message>
     <message>
+        <location line="+5"/>
         <location line="+4"/>
+        <location line="+7"/>
         <source>cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Two links marked with &quot;cancel&quot; found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>At least one of the two links must be marked with &quot;cancel&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>At least one link must be not marked with &quot;cancel&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -309,7 +311,7 @@
         <translation type="obsolete">Deux liens marqués comme &apos;false&apos; sont détectés</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+33"/>
         <source>You must input some value!</source>
         <translation type="unfinished"></translation>
     </message>

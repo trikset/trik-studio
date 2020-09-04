@@ -564,7 +564,7 @@
 			setName("Input");
 			setFriendlyName(QObject::tr("User Input"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Sets a variable value to a user value from input dialog."));
+			setDescription(QObject::tr("Reads a value into variable from an input dialog."));
 			qReal::LabelProperties label_1(1, 0.66, 1.2, "variable", false, 0);
 			label_1.setBackground(Qt::white);
 			label_1.setScalingX(false);
