@@ -49,33 +49,34 @@ bool InputBlock::initNextBlocks()
 		return false;
 	}
 
-	const IdList links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
-	for (const Id &linkId : links) {
-		const Id targetBlockId = mGraphicalModelApi->graphicalRepoApi().otherEntityFromLink(linkId, id());
+	const IdList &links = mGraphicalModelApi->graphicalRepoApi().outgoingLinks(id());
+	for (auto &&linkId : links) {
+		const Id &targetBlockId = mGraphicalModelApi->graphicalRepoApi().otherEntityFromLink(linkId, id());
 		if (targetBlockId.isNull() || targetBlockId == Id::rootId()) {
 			error(tr("Outgoing link is not connected"));
 			return false;
 		}
 
-		if (stringProperty(linkId, "Guard").toLower() == tr("cancel")) {
+		auto const &guard = stringProperty(linkId, "Guard").toLower();
+		if ( guard == "cancel" || guard == tr("cancel")) {
 			if (mCancelBlockId.isNull()) {
 				mCancelBlockId = targetBlockId;
 			} else {
-				error(tr("Two links marked with \"cancel\" found"));
+				error(tr("Only one link with \"%1\" is allowed").arg(tr("cancel")));
 				return false;
 			}
 		} else {
 			if (mNextBlockId.isNull()) {
 				mNextBlockId = targetBlockId;
 			} else {
-				error(tr("At least one of the two links must be marked with \"cancel\""));
+				error(tr("One of the outgoing links must be marked with \"%1\"").arg(tr("cancel")));
 				return false;
 			}
 		}
 	}
 
 	if (mNextBlockId.isNull()) {
-		error(tr("At least one link must be not marked with \"cancel\""));
+		error(tr("Link to the next statement is missing"));
 		return false;
 	}
 
