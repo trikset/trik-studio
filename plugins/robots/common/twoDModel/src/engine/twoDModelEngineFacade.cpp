@@ -29,7 +29,7 @@ using namespace twoDModel::engine;
 TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotModel &robotModel)
 	: mRobotModelName(robotModel.name())
 	, mModel(new model::Model())
-	, mView(new view::TwoDModelWidget(*mModel, nullptr)) // parent widget is set in the `init` method later
+	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView.data()))
 {

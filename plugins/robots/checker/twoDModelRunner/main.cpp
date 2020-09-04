@@ -102,23 +102,24 @@ int main(int argc, char *argv[])
 	parser.addPositionalArgument("qrs-file", QObject::tr("Save file to be interpreted."));
 	QCommandLineOption backgroundOption({"b", "background"}, QObject::tr("Run emulation in background."));
 	QCommandLineOption reportOption({"r","report"}
-									, QObject::tr("A path to file where checker results will be written (JSON)")
+									, QObject::tr("A path to file where checker results will be written (JSON).")
 									, "path-to-report", "report.json");
 	QCommandLineOption trajectoryOption({"t", "trajectory"}
 										, QObject::tr("A path to file where robot`s trajectory will be"\
 				" written. The writing will not be performed not immediately, each trajectory point will be written"\
 				" just when obtained by checker, so FIFOs are recommended to be targets for this option.")
 			, "path-to-trajectory", "trajectory.fifo");
-	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution")// probably others too
+	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution.")// probably others too
 			, "path-to-input", "inputs.txt");
 	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Set to \"script\" for"\
-								"execution of js/py from the project or set to \"diagram\" for block diagram.")
+								" execution of js/py from the project or set to \"diagram\" for block diagram.")
 								, "mode", "diagram");
 	QCommandLineOption speedOption({"s", "speed"}
-								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!)")
+								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!).")
 								   , "speed", "0");
 	QCommandLineOption closeOnSuccessOption("close-on-succes"
-								   , QObject::tr("Close the window and exit if the diagram/script finishes without errors."));
+								   , QObject::tr("Close the window and exit if the diagram/script"\
+												 " finishes without errors."));
 	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);

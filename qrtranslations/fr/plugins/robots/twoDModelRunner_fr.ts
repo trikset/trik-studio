@@ -21,8 +21,23 @@ In background mode the session will be terminated just after the execution ended
         <translation>Executer l&apos;émulation en tache de fond.</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>Interpret mode. Interpret mode. Set to &quot;script&quot; for executing js file in a project or set to &quot;diagram&quot; for executing the diagram.</source>
+        <location line="+2"/>
+        <source>A path to file where checker results will be written (JSON).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Inputs for JavaScript solution.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Set to &quot;script&quot; for execution of js/py from the project or set to &quot;diagram&quot; for block diagram.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -30,32 +45,21 @@ In background mode the session will be terminated just after the execution ended
         <translation type="vanished">Mettez &quot;minimal&quot; dans cette option pour désactiver la connexion au serveur X</translation>
     </message>
     <message>
-        <location line="-9"/>
         <source>A path to file where checker results will be written (JSON)</source>
-        <translation>Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
+        <translation type="vanished">Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="-10"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Le chemin au ficher ou la trajectoire du robot sera enregistrée. L&apos;enregistrement ne sera pas fait immediatement, chaque point de trajectoire sera écrit dès lors qu&apos;il est obteneur par le checker, donc FIFO sont récommandés pour cette option.</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Inputs for JavaScript solution</source>
+        <location line="+13"/>
+        <source>Close the window and exit if the diagram/script finishes without errors.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>The model will be closed if the program finishes without errors.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Shows robot&apos;s console.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -63,7 +67,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+103"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+102"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>
