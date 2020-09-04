@@ -119,7 +119,6 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("InitialNode"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("FinalNode"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("VariableInit"));
-	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Input"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("IfBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("FiBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("PreconditionalLoop"));
@@ -138,6 +137,7 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("Timer"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("ReceiveMessageThreads"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("Input"));
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("PrintText"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("ClearScreen"));

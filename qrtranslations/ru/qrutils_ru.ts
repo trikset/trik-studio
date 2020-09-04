@@ -358,7 +358,22 @@
         <translation>Введите значение для %1:</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+29"/>
+        <source>Only one link with &quot;%1&quot; is allowed</source>
+        <translation>Разрешается только одна связь вида &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>One of the outgoing links must be marked with &quot;%1&quot;</source>
+        <translation>Одна из исходящих связей должны быть помечена как &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Link to the next statement is missing</source>
+        <translation>Не указан следующий блок</translation>
+    </message>
+    <message>
+        <location line="+35"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation>Нет исходящих связей. Пожалуйста, подключите этот блок к чему-нибудь или используйте блок &quot;Конец&quot;, чтобы завершить выполнение программы</translation>
     </message>
@@ -368,32 +383,31 @@
         <translation>От блока ввода должно исходить не более ДВУХ связей</translation>
     </message>
     <message>
-        <location line="-61"/>
+        <location line="-62"/>
         <source>Outgoing link is not connected</source>
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
     <message>
+        <location line="+5"/>
         <location line="+4"/>
+        <location line="+7"/>
         <source>cancel</source>
         <translation>отмена</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Two links marked with &quot;cancel&quot; found</source>
-        <translation>Обе связи помечены условием &quot;cancel&quot;</translation>
+        <translation type="vanished">Обе связи помечены условием &quot;cancel&quot;</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>At least one of the two links must be marked with &quot;cancel&quot;</source>
-        <translation>Должна быть как минимум одна связь из двух с маркером &quot;cancel&quot;</translation>
+        <translation type="vanished">Должна быть как минимум одна связь из двух с маркером &quot;cancel&quot;</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>At least one link must be not marked with &quot;cancel&quot;</source>
-        <translation>Хотя бы одна связь должна быть не с маркером &quot;cancel&quot;</translation>
+        <translation type="vanished">Хотя бы одна связь должна быть не с маркером &quot;cancel&quot;</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+33"/>
         <source>You must input some value!</source>
         <translation>Вы должны ввести какое-нибудь значение!</translation>
     </message>
