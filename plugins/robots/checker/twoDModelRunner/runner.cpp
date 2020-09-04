@@ -47,7 +47,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	, mReporter(report, trajectory)
 {
 	mPluginFacade.init(mConfigurator);
-	for (const auto &defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
+	for (auto &&defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
 		qReal::SettingsManager::loadDefaultSettings(defaultSettingsFile);
 	}
 
@@ -80,7 +80,7 @@ bool Runner::interpret(const QString &saveFile, const bool background
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
 	QList<view::TwoDModelWidget *> twoDModelWindows;
-	for (const auto widget : QApplication::allWidgets()) {
+	for (auto &&widget : QApplication::allWidgets()) {
 		if (const auto twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
 			twoDModelWindows << twoDModelWindow;
 		}
@@ -92,21 +92,20 @@ bool Runner::interpret(const QString &saveFile, const bool background
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 
-	for (const auto twoDModelWindow : twoDModelWindows) {
+	for (auto &&twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
 				, [this]() { this->mMainWindow.emulateClose(); });
 
 		if (showConsole) {
-			auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout());
 			qReal::ui::ConsoleDock* console = nullptr;
-			if (layout) {
+			if (auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout())) {
 				console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
 				mRobotConsoles << console;
 				// TODO: hack to add console for each widget
 				layout->addWidget(console, layout->rowCount(), 0, 1, -1);
 			}
 
-			for (const auto robotModel : twoDModelWindow->model().robotModels()) {
+			for (auto &&robotModel : twoDModelWindow->model().robotModels()) {
 				connectRobotModel(robotModel, console);
 			}
 		}
