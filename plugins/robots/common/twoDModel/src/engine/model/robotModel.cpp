@@ -47,7 +47,7 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mPos(QPointF(0, 0))
 	, mAngle(0)
 	, mGyroAngle(0)
-	, mDeltaRadiansOfAngle(0)
+	, mDeltaDegreesOfAngle(0)
 	, mBeepTime(0)
 	, mIsOnTheGround(true)
 	, mMarker(Qt::transparent)
@@ -73,7 +73,7 @@ void RobotModel::reinit()
 	}
 
 	mBeepTime = 0;
-	mDeltaRadiansOfAngle = 0;
+	mDeltaDegreesOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
 }
 
@@ -208,7 +208,8 @@ void RobotModel::countSpeedAndAcceleration()
 		mAngleStampPrevious = mAngle;
 		mIsFirstAngleStamp = false;
 	} else {
-		mDeltaRadiansOfAngle = qDegreesToRadians(mAngle - mAngleStampPrevious);
+		// Convert to millidegress per second
+		mDeltaDegreesOfAngle = (mAngle - mAngleStampPrevious) * 1000 / Timeline::timeInterval;
 		mAngleStampPrevious = mAngle;
 	}
 
@@ -304,7 +305,7 @@ QVector<int> RobotModel::accelerometerReading() const
 
 QVector<int> RobotModel::gyroscopeReading() const
 {
-	return {static_cast<int>(mDeltaRadiansOfAngle * gyroscopeConstant)
+	return {static_cast<int>(mDeltaDegreesOfAngle * 1000)
 		, static_cast<int>((mAngle - mGyroAngle) * 1000)};
 }
 
