@@ -85,7 +85,7 @@
 <context>
     <name>ev3::Ev3KitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3KitInterpreterPlugin.cpp" line="+106"/>
+        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3KitInterpreterPlugin.cpp" line="+108"/>
         <source>Lego EV3</source>
         <translation>Lego EV3</translation>
     </message>

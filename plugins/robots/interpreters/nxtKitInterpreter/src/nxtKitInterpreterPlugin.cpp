@@ -48,9 +48,7 @@ NxtKitInterpreterPlugin::NxtKitInterpreterPlugin()
 
 NxtKitInterpreterPlugin::~NxtKitInterpreterPlugin()
 {
-	if (mOwnsAdditionalPreferences) {
-		delete mAdditionalPreferences;
-	}
+	release();
 }
 
 void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
@@ -92,6 +90,10 @@ void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configu
 
 void NxtKitInterpreterPlugin::release()
 {
+	if (mOwnsAdditionalPreferences) {
+		delete mAdditionalPreferences;
+		mAdditionalPreferences = nullptr;
+	}
 	mTwoDModel.reset();
 }
 

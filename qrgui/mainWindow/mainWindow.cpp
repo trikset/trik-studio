@@ -2306,7 +2306,7 @@ void MainWindow::openStartTab()
 }
 
 void MainWindow::initScriptAPI()
-{	
+{
 	QThread * const scriptAPIthread = new QThread(this);
 	mScriptAPI = new ScriptAPI();
 	mScriptAPI->moveToThread(scriptAPIthread);

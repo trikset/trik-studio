@@ -48,9 +48,7 @@ Ev3KitInterpreterPlugin::Ev3KitInterpreterPlugin()
 
 Ev3KitInterpreterPlugin::~Ev3KitInterpreterPlugin()
 {
-	if (mOwnsAdditionalPreferences) {
-		delete mAdditionalPreferences;
-	}
+	release();
 }
 
 void Ev3KitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
@@ -93,6 +91,10 @@ void Ev3KitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configu
 
 void Ev3KitInterpreterPlugin::release()
 {
+	if (mOwnsAdditionalPreferences) {
+		delete mAdditionalPreferences;
+		mAdditionalPreferences = nullptr;
+	}
 	mTwoDModel.reset();
 }
 
