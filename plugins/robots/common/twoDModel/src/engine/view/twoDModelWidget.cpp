@@ -92,36 +92,36 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
 	changePhysicsSettings();
 
-	mConnections << connect(mScene, &TwoDModelScene::selectionChanged, this, &TwoDModelWidget::onSelectionChange);
-	mConnections << connect(mScene, &TwoDModelScene::mousePressed, this, &TwoDModelWidget::refreshCursor);
-	mConnections << connect(mScene, &TwoDModelScene::mouseReleased, this, &TwoDModelWidget::refreshCursor);
-	mConnections << connect(mScene, &TwoDModelScene::mouseReleased, this, [this](){ saveWorldModelToRepo(); });
-	mConnections << connect(mScene, &TwoDModelScene::robotPressed, mUi->palette, &Palette::unselect);
-	mConnections << connect(mScene, &TwoDModelScene::robotListChanged, this, &TwoDModelWidget::onRobotListChange);
+	connect(&*mScene, &TwoDModelScene::selectionChanged, this, &TwoDModelWidget::onSelectionChange);
+	connect(&*mScene, &TwoDModelScene::mousePressed, this, &TwoDModelWidget::refreshCursor);
+	connect(&*mScene, &TwoDModelScene::mouseReleased, this, &TwoDModelWidget::refreshCursor);
+	connect(&*mScene, &TwoDModelScene::mouseReleased, this, [this](){ saveWorldModelToRepo(); });
+	connect(&*mScene, &TwoDModelScene::robotPressed, mUi->palette, &Palette::unselect);
+	connect(&*mScene, &TwoDModelScene::robotListChanged, this, &TwoDModelWidget::onRobotListChange);
 
-	mConnections << connect(&mModel.worldModel(), &WorldModel::itemRemoved
-							, this, [this]() { saveWorldModelToRepo(); });
+	connect(&mModel.worldModel(), &WorldModel::itemRemoved
+			, this, [this]() { saveWorldModelToRepo(); });
 
-	mConnections << connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
+	connect(&mModel.worldModel(), &WorldModel::blobsChanged, this, [this]() { saveBlobsToRepo(); });
 
-	mConnections << connect(&mModel.settings(), &Settings::physicsChanged
-							, this, [this]() { updateUIPhysicsSettings(); });
+	connect(&mModel.settings(), &Settings::physicsChanged
+			, this, [this]() { updateUIPhysicsSettings(); });
 
-	mConnections << connect(&mModel.timeline(), &Timeline::started, this, [this]() {
+	connect(&mModel.timeline(), &Timeline::started, this, [this]() {
 		if (mRobotPositionReadOnly) {
 			returnToStartMarker();
 		}
 	});
-	mConnections << connect(&mModel.timeline(), &Timeline::started
-							, this, [this]() { bringToFront(); mUi->timelineBox->setValue(0); });
-	mConnections << connect(&mModel.timeline(), &Timeline::tick, this, &TwoDModelWidget::incrementTimelineCounter);
-	mConnections << connect(&mModel.timeline(), &Timeline::started
-							, this, &TwoDModelWidget::setRunStopButtonsVisibility);
-	mConnections << connect(&mModel.timeline(), &Timeline::stopped
-							, this, &TwoDModelWidget::saveWorldModelToRepo);
-	mConnections << connect(&mModel.timeline(), &Timeline::stopped
-							, this, &TwoDModelWidget::setRunStopButtonsVisibility);
-	mConnections << connect(&mModel.timeline(), &Timeline::speedFactorChanged, this, [=](int value) {
+	connect(&mModel.timeline(), &Timeline::started
+			, this, [this]() { bringToFront(); mUi->timelineBox->setValue(0); });
+	connect(&mModel.timeline(), &Timeline::tick, this, &TwoDModelWidget::incrementTimelineCounter);
+	connect(&mModel.timeline(), &Timeline::started
+			, this, &TwoDModelWidget::setRunStopButtonsVisibility);
+	connect(&mModel.timeline(), &Timeline::stopped
+			, this, &TwoDModelWidget::saveWorldModelToRepo);
+	connect(&mModel.timeline(), &Timeline::stopped
+			, this, &TwoDModelWidget::setRunStopButtonsVisibility);
+	connect(&mModel.timeline(), &Timeline::speedFactorChanged, this, [=](int value) {
 		const QPoint downCoords = mUi->speedDownButton->mapTo(this, mUi->speedDownButton->rect().bottomRight());
 		const QPoint upCoords = mUi->speedUpButton->mapTo(this, mUi->speedUpButton->rect().bottomLeft());
 		const QPoint coords((downCoords.x() + upCoords.x() - mSpeedPopup->width()) / 2, downCoords.y() + 10);
@@ -155,7 +155,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->robotMassInGr->setValue(robotMass);
 	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
 
-	mConnections << connect(&mModel, &model::Model::robotAdded, [this](){
+	connect(&mModel, &model::Model::robotAdded, [this](){
 		auto robotModels = mModel.robotModels();
 		auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
 				: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
@@ -168,10 +168,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 TwoDModelWidget::~TwoDModelWidget()
 {
 	mSelectedRobotItem = nullptr;
-	// These connections can lead to fields access after this dtor has finished.
-	for (auto &&c : mConnections) {
-		QObject::disconnect(c);
-	}
+	mScene.reset();
 	delete mUi;
 }
 
@@ -181,10 +178,10 @@ void TwoDModelWidget::initWidget()
 
 	mUi->setupUi(this);
 
-	mScene = new TwoDModelScene(mModel, mUi->graphicsView);
-	connectDevicesConfigurationProvider(mScene);
+	mScene.reset(new TwoDModelScene(mModel, mUi->graphicsView));
+	connectDevicesConfigurationProvider(mScene.data());
 	mScene->addActions(mActions->sceneContextMenuActions());
-	mUi->graphicsView->setScene(mScene);
+	mUi->graphicsView->setScene(mScene.data());
 	mUi->graphicsView->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 	move(0, 0);
 
@@ -225,17 +222,17 @@ void TwoDModelWidget::initWidget()
 	toggleRulers();
 
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
-			, mScene, [&]() { mScene->update(); });
+			, &*mScene, [&]() { mScene->update(); });
 	connect(mUi->gridParametersBox, &GridParameters::parametersChanged, this, toggleRulers);
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, mUi->horizontalRuler, [&]() {mUi->horizontalRuler->update(); });
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
-	connect(mScene, &TwoDModelScene::sceneRectChanged
+	connect(&*mScene, &TwoDModelScene::sceneRectChanged
 			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
-	connect(mScene, &TwoDModelScene::sceneRectChanged
+	connect(&*mScene, &TwoDModelScene::sceneRectChanged
 			, mUi->verticalRuler, [&]() { mUi->verticalRuler->update(); });
-	connect(mScene, &AbstractScene::focused, this, [=]() { onFocusIn(); });
+	connect(&*mScene, &AbstractScene::focused, this, [=]() { onFocusIn(); });
 	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged
 			, mUi->horizontalRuler, [&]() { mUi->horizontalRuler->update(); });
 	connect(mScene->mainView(), &graphicsUtils::AbstractView::zoomChanged
@@ -272,16 +269,16 @@ void TwoDModelWidget::initPalette()
 	const int size = qReal::SettingsManager::value("toolbarSize", 32).toInt();
 	mUi->palette->setSize({size, size});
 
-	connect(wallTool, &QAction::triggered, mScene, &TwoDModelScene::addWall);
-	connect(skittleTool, &QAction::triggered, mScene, &TwoDModelScene::addSkittle);
-	connect(ballTool, &QAction::triggered, mScene, &TwoDModelScene::addBall);
-	connect(lineTool, &QAction::triggered, mScene, &TwoDModelScene::addLine);
-	connect(bezierTool, &QAction::triggered, mScene, &TwoDModelScene::addBezier);
-	connect(rectangleTool, &QAction::triggered, mScene, &TwoDModelScene::addRectangle);
-	connect(ellipseTool, &QAction::triggered, mScene, &TwoDModelScene::addEllipse);
-	connect(stylusTool, &QAction::triggered, mScene, &TwoDModelScene::addStylus);
-	connect(imageTool, &QAction::triggered, mScene, &TwoDModelScene::addImage);
-	connect(&mUi->palette->cursorAction(), &QAction::triggered, mScene, &TwoDModelScene::setNoneStatus);
+	connect(wallTool, &QAction::triggered, &*mScene, &TwoDModelScene::addWall);
+	connect(skittleTool, &QAction::triggered, &*mScene, &TwoDModelScene::addSkittle);
+	connect(ballTool, &QAction::triggered, &*mScene, &TwoDModelScene::addBall);
+	connect(lineTool, &QAction::triggered, &*mScene, &TwoDModelScene::addLine);
+	connect(bezierTool, &QAction::triggered, &*mScene, &TwoDModelScene::addBezier);
+	connect(rectangleTool, &QAction::triggered, &*mScene, &TwoDModelScene::addRectangle);
+	connect(ellipseTool, &QAction::triggered, &*mScene, &TwoDModelScene::addEllipse);
+	connect(stylusTool, &QAction::triggered, &*mScene, &TwoDModelScene::addStylus);
+	connect(imageTool, &QAction::triggered, &*mScene, &TwoDModelScene::addImage);
+	connect(&mUi->palette->cursorAction(), &QAction::triggered, &*mScene, &TwoDModelScene::setNoneStatus);
 
 	connect(wallTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawWall); });
 	connect(skittleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawSkittle); });
@@ -628,7 +625,7 @@ void TwoDModelWidget::checkSpeedButtons()
 
 TwoDModelScene *TwoDModelWidget::scene()
 {
-	return mScene;
+	return mScene.data();
 }
 
 engine::TwoDModelDisplayWidget *TwoDModelWidget::display()

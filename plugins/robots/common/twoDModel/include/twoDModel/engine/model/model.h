@@ -117,7 +117,7 @@ private:
 	WorldModel mWorldModel;
 	Timeline mTimeline;
 	QScopedPointer<constraints::ConstraintsChecker> mChecker;
-	QList<RobotModel *> mRobotModels;
+	QList<RobotModel *> mRobotModels; //Has ownership
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
 	physics::PhysicsEngineBase *mRealisticPhysicsEngine;  // Takes ownership.
 	physics::PhysicsEngineBase *mSimplePhysicsEngine;  // Takes ownership.

@@ -232,8 +232,7 @@ private:
 	void incrementTimelineCounter();
 
 	Ui::TwoDModelWidget *mUi {};
-	TwoDModelScene *mScene {}; // Transfers ownership to parent widget upon creation
-	QList<QMetaObject::Connection> mConnections;
+	QScopedPointer<TwoDModelScene> mScene;
 	QScopedPointer<ActionsBox> mActions;
 	ColorItemPopup *mColorFieldItemPopup {};  // Takes ownership
 	ImageItemPopup *mImageItemPopup {};  // Takes ownership

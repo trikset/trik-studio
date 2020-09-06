@@ -113,7 +113,6 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mRecentProjectsLimit(SettingsManager::value("recentProjectsLimit").toInt())
 	, mSceneCustomizer(new SceneCustomizer())
 	, mInitialFileToOpen(fileToOpen)
-	, mScriptAPI(new  ScriptAPI())
 {
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
@@ -400,6 +399,7 @@ MainWindow::~MainWindow()
 	SettingsManager::instance()->saveData();
 	SettingsListener::disconnectSource(this);
 	delete mUi; mUi = nullptr;
+	mToolManager.reset();
 	// TODO: This is a workaround for crash on macOS.
 	// Seems like this crash is caused by memory corruption somewhere else.
 	// If the statusBar with children is deleted before other controls, this helps.
@@ -420,7 +420,9 @@ EditorManagerInterface &MainWindow::editorManager()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	mScriptAPI->abortEvaluation();
+	if (mScriptAPI) {
+		mScriptAPI->abortEvaluation();
+	}
 
 	closeAllTabs();
 
@@ -2304,9 +2306,13 @@ void MainWindow::openStartTab()
 }
 
 void MainWindow::initScriptAPI()
-{
+{	
 	QThread * const scriptAPIthread = new QThread(this);
-	mScriptAPI->init(*this);
+	mScriptAPI = new ScriptAPI();
+	mScriptAPI->moveToThread(scriptAPIthread);
+	connect(&mFacade->events(), &SystemEvents::closedMainWindow, scriptAPIthread, &QThread::quit);
+	connect(scriptAPIthread, &QThread::finished, mScriptAPI, &QObject::deleteLater);
+	connect(scriptAPIthread, &QThread::started, mScriptAPI, [this](){ mScriptAPI->init(this); });
 
 	QAction *const evalAction = new QAction(this);
 	// Setting a secret combination to activate script interpretation.
@@ -2314,9 +2320,6 @@ void MainWindow::initScriptAPI()
 	connect(evalAction, &QAction::triggered, mScriptAPI, &ScriptAPI::evaluate);
 	addAction(evalAction);
 
-	mScriptAPI->moveToThread(scriptAPIthread);
-	connect(&mFacade->events(), &SystemEvents::closedMainWindow, scriptAPIthread, &QThread::quit);
-	connect(scriptAPIthread, &QThread::finished, mScriptAPI, &QObject::deleteLater);
 	scriptAPIthread->start();
 }
 
