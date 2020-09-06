@@ -33,14 +33,14 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView))
 {
-	mModel.data()->addRobotModel(robotModel);
+	mModel->addRobotModel(robotModel);
 	connect(mView, &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
 	connect(mView, &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
 	connect(mView, &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
 	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
 }
 
-TwoDModelEngineFacade::~TwoDModelEngineFacade() {}
+TwoDModelEngineFacade::~TwoDModelEngineFacade() = default;
 
 void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
 								 const qReal::SystemEvents &systemEvents,

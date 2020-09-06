@@ -23,31 +23,31 @@ using namespace tcpRobotSimulator;
 
 TcpRobotSimulator::TcpRobotSimulator(int port)
 {
-	listen(QHostAddress::LocalHost, port);
+	if(!listen(QHostAddress::LocalHost, port)) {
+		qErrnoWarning(errno, "Failed to open TCP port");
+	}
 }
 
 TcpRobotSimulator::~TcpRobotSimulator()
 {
-	if (mConnection) {
-		QMetaObject::invokeMethod(mConnection.data(), "closeConnection");
-	}
-
-	if (mConnectionThread && mConnectionThread->isRunning()) {
+	if (mConnectionThread) {
 		mConnectionThread->quit();
-		mConnectionThread->wait(1000);
+		mConnectionThread->wait();
+		mConnectionThread.reset();
 	}
 }
 
 void TcpRobotSimulator::incomingConnection(qintptr socketDescriptor)
 {
-	mConnection.reset(new Connection(Protocol::messageLength, Heartbeat::use, mConfigVersion));
+	mConnection = new Connection(Protocol::messageLength, Heartbeat::use, mConfigVersion);
 	mConnectionThread.reset(new QThread());
-	connect(mConnectionThread.data(), &QThread::finished, mConnectionThread.data(), &QThread::deleteLater);
-	connect(mConnection.data(), &Connection::runProgramRequestReceivedSignal
-			, this, &TcpRobotSimulator::runProgramRequestReceivedSignal, Qt::QueuedConnection);
 	mConnection->moveToThread(mConnectionThread.data());
+	connect(mConnectionThread.data(), &QThread::finished, mConnection, &QObject::deleteLater);
+	connect(mConnection, &Connection::runProgramRequestReceivedSignal
+			, this, &TcpRobotSimulator::runProgramRequestReceivedSignal, Qt::QueuedConnection);
+	connect(mConnectionThread.data(), &QThread::started
+			, mConnection, [this, socketDescriptor](){ mConnection->init(socketDescriptor); });
 	mConnectionThread->start();
-	QMetaObject::invokeMethod(mConnection.data(), "init", Q_ARG(int, socketDescriptor));
 }
 
 bool TcpRobotSimulator::runProgramRequestReceived() const

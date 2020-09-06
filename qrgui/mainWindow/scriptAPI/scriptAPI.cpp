@@ -44,14 +44,14 @@ ScriptAPI::~ScriptAPI()
 {
 }
 
-void ScriptAPI::init(MainWindow &mainWindow)
+void ScriptAPI::init(MainWindow *mainWindow)
 {
-	mGuiFacade.reset(new GuiFacade(mainWindow));
-	mVirtualCursor.reset(new VirtualCursor(*this, &mainWindow));
+	mGuiFacade.reset(new GuiFacade(*mainWindow));
+	mVirtualCursor.reset(new VirtualCursor(*this, mainWindow));
 	mVirtualKeyboard.reset(new VirtualKeyboard(*this));
-	mSceneAPI.reset(new SceneAPI(*this, mainWindow));
-	mPaletteAPI.reset(new PaletteAPI(*this, mainWindow));
-	mHintAPI.reset(new HintAPI);
+	mSceneAPI.reset(new SceneAPI(*this, *mainWindow));
+	mPaletteAPI.reset(new PaletteAPI(*this, *mainWindow));
+	mHintAPI.reset(new HintAPI());
 
 	const QScriptValue scriptAPI = mScriptEngine.newQObject(this);
 	// This instance will be available in scripts by writing something like "api.wait(100)"

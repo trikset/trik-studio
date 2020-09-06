@@ -56,9 +56,8 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 	mBlocksFactory = blocksFactory;
 
 	const auto modelEngine = new twoDModel::engine::TwoDModelEngineFacade(*mTwoDRobotModel);
-
-	mTwoDRobotModel->setEngine(modelEngine->engine());
 	mTwoDModel.reset(modelEngine);
+	mTwoDRobotModel->setEngine(modelEngine->engine());
 
 	connectDevicesConfigurationProvider(devicesConfigurationProvider()); // ... =(
 
@@ -399,6 +398,7 @@ void TrikKitInterpreterPluginBase::release()
 {
 	if (mOwnsAdditionalPreferences) {
 		delete mAdditionalPreferences;
+		mAdditionalPreferences = nullptr;
 	}
 
 	mTextualInterpreter.reset(); // release before mTwoDModel is destroyed

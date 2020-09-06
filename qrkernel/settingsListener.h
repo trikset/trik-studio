@@ -75,7 +75,8 @@ public:
 	{
 		instance().mListeners.insertMulti(key, new LambdaListener0(lambda, owner));
 		if (owner) {
-			connect(owner, &QObject::destroyed, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
+			connect(owner, &QObject::destroyed
+					, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
 		}
 	}
 
@@ -89,7 +90,8 @@ public:
 	{
 		instance().mListeners.insertMulti(key, new LambdaListener1<Type>(lambda, owner));
 		if (owner) {
-			connect(owner, &QObject::destroyed, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
+			connect(owner, &QObject::destroyed
+					, &instance(), QOverload<QObject*>::of(&SettingsListener::disconnectSource));
 		}
 	}
 

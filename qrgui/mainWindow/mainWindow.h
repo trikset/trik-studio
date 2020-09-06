@@ -410,7 +410,7 @@ private:
 	/// A field for storing file name passed as console argument
 	QString mInitialFileToOpen;
 
-	gui::ScriptAPI *mScriptAPI; // Has ownership,  but manages via worker thread
+	gui::ScriptAPI *mScriptAPI {}; // Has ownership,  but manages via worker thread
 
 	bool mRestoreDefaultSettingsOnClose {};
 };

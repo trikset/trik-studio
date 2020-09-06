@@ -44,6 +44,7 @@ Model::~Model()
 {
 	delete mRealisticPhysicsEngine;
 	delete mSimplePhysicsEngine;
+	qDeleteAll(mRobotModels);
 }
 
 void Model::init(qReal::ErrorReporterInterface &errorReporter
