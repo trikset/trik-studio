@@ -40,7 +40,7 @@ Connection::~Connection()
 
 void Connection::init(const QHostAddress &ip, int port)
 {
-	mSocket.reset(new QTcpSocket());
+	mSocket = new QTcpSocket(this);
 
 	connectSlots();
 
@@ -81,12 +81,11 @@ void Connection::closeConnection()
 	mKeepAliveTimer->stop();
 	mHeartbeatTimer->stop();
 	mSocket->close();
-	thread()->quit();
 }
 
 void Connection::init(int socketDescriptor)
 {
-	mSocket.reset(new QTcpSocket());
+	mSocket = new QTcpSocket(this);
 
 	initKeepalive();
 
@@ -215,11 +214,11 @@ void Connection::onHeartbeatTimeout()
 
 void Connection::connectSlots()
 {
-	connect(mSocket.data(), SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-	connect(mSocket.data(), SIGNAL(connected()), this, SLOT(onConnect()));
-	connect(mSocket.data(), SIGNAL(disconnected()), this, SLOT(onDisconnect()));
-	connect(mSocket.data(), SIGNAL(error(QAbstractSocket::SocketError))
-			, this, SLOT(onError(QAbstractSocket::SocketError)));
+	connect(mSocket, &QTcpSocket::readyRead, this, &Connection::onReadyRead);
+	connect(mSocket, &QTcpSocket::connected, this, &Connection::onConnect);
+	connect(mSocket, &QTcpSocket::disconnected, this, &Connection::onDisconnect);
+	connect(mSocket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::error)
+			, this, &Connection::onError);
 }
 
 void Connection::doDisconnect()

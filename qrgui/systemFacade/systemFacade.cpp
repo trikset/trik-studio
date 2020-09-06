@@ -26,7 +26,7 @@ SystemFacade::SystemFacade()
 	QObject::connect(&mModels->logicalModelAssistApi(), &models::LogicalModelAssistApi::elementAdded
 			, &*mEvents, &SystemEvents::logicalElementAdded);
 	QObject::connect(&mModels->graphicalModelAssistApi(), &models::GraphicalModelAssistApi::elementAdded
-                     , &*mEvents, &SystemEvents::graphicalElementAdded);
+			, &*mEvents, &SystemEvents::graphicalElementAdded);
 }
 
 SystemFacade::~SystemFacade()

@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include <QPointer>
 #include <QtCore/QObject>
 #include <QtNetwork/QAbstractSocket>
 
@@ -134,13 +135,13 @@ private:
 	void initKeepalive();
 
 	/// Socket for this connection.
-	QScopedPointer<QTcpSocket> mSocket;
+	QPointer<QTcpSocket> mSocket; // Has ownership
 
 	/// Buffer to accumulate parts of a message.
 	QByteArray mBuffer;
 
 	/// Declared size of a current message.
-	int mExpectedBytes = 0;
+	int mExpectedBytes { 0 };
 
 	/// Protocol selected for this connection.
 	Protocol mProtocol;
