@@ -1898,6 +1898,11 @@ void MainWindow::addExternalToolActions()
 							auto const &newVal = SettingsManager::value(match.captured(1)).toString();
 							arg.replace(match.captured(0), newVal);
 						}
+
+						// Avoid relative paths in arguments
+						if (arg.startsWith("./")) {
+							arg = qReal::PlatformInfo::applicationDirPath() + arg.mid(1);
+						}
 					}
 
 					bool result;
