@@ -31,13 +31,13 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 	, mModel(new model::Model())
 	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
-	, mDock(new utils::SmartDock("2dModelDock", mView.data()))
+	, mDock(new utils::SmartDock("2dModelDock", mView))
 {
 	mModel.data()->addRobotModel(robotModel);
-	connect(mView.data(), &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
-	connect(mView.data(), &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
-	connect(mView.data(), &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
-	connect(mDock, &utils::SmartDock::dockedChanged, mView.data(), &view::TwoDModelWidget::setCompactMode);
+	connect(mView, &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
+	connect(mView, &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
+	connect(mView, &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
+	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
 }
 
 TwoDModelEngineFacade::~TwoDModelEngineFacade() {}
