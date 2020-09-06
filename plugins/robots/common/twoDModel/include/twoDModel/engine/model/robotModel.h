@@ -143,7 +143,9 @@ public:
 	/// Returns accelerometer sensor data.
 	Q_INVOKABLE QVector<int> accelerometerReading() const;
 
-	/// Returns gyroscope sensor data.
+	/// Returns gyroscope sensor data:
+	/// data[0] -- angular velocity over Z axis (millidegrees per second)
+	/// data[1] -- tilt around Z axis (millidegrees)
 	Q_INVOKABLE QVector<int> gyroscopeReading() const;
 
 	Q_INVOKABLE QVector<int> gyroscopeCalibrate();
@@ -214,7 +216,7 @@ private:
 	QPointF mPos;
 	qreal mAngle;
 	qreal mGyroAngle;
-	qreal mDeltaRadiansOfAngle;
+	qreal mDeltaDegreesOfAngle;
 	int mBeepTime;
 	bool mIsOnTheGround;
 	QColor mMarker;
