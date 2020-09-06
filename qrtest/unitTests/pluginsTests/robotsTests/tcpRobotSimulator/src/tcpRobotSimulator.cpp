@@ -30,6 +30,11 @@ TcpRobotSimulator::TcpRobotSimulator(int port)
 
 TcpRobotSimulator::~TcpRobotSimulator()
 {
+	if (mConnectionThread) {
+		mConnectionThread->quit();
+		mConnectionThread->wait();
+		mConnectionThread.reset();
+	}
 }
 
 void TcpRobotSimulator::incomingConnection(qintptr socketDescriptor)

@@ -76,13 +76,6 @@ void Connection::send(const QByteArray &data)
 	mSocket->write(message);
 }
 
-void Connection::closeConnection()
-{
-	mKeepAliveTimer->stop();
-	mHeartbeatTimer->stop();
-	mSocket->close();
-}
-
 void Connection::init(int socketDescriptor)
 {
 	mSocket = new QTcpSocket(this);

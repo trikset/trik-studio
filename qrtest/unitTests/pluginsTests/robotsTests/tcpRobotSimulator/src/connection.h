@@ -70,9 +70,6 @@ public:
 	/// Sends given byte array to peer.
 	Q_INVOKABLE void send(const QByteArray &data);
 
-	/// Closes socket and stops all timers, must be called from Connection thread before it stops.
-	Q_INVOKABLE void closeConnection();
-
 	/// Check that server received "run" command.
 	bool runProgramRequestReceived() const;
 
