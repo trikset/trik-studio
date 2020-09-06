@@ -80,6 +80,9 @@ bool Runner::interpret(const QString &saveFile, const bool background
 	/// GUI must be separated from logic and not appear here at all.
 	QList<view::TwoDModelWidget *> twoDModelWindows;
 	for (auto &&widget : QApplication::allWidgets()) {
+		if (background) {
+			widget->hide();
+		}
 		if (const auto twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
 			twoDModelWindows << twoDModelWindow;
 		}
