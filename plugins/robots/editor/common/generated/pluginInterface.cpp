@@ -55,6 +55,7 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(*(new GetButtonCode(*mMetamodel)));
 	mMetamodel->addNode(*(new IfBlock(*mMetamodel)));
 	mMetamodel->addNode(*(new InitialNode(*mMetamodel)));
+	mMetamodel->addNode(*(new Input(*mMetamodel)));
 	mMetamodel->addNode(*(new Join(*mMetamodel)));
 	mMetamodel->addNode(*(new KillThread(*mMetamodel)));
 	mMetamodel->addNode(*(new Loop(*mMetamodel)));
@@ -84,6 +85,7 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GetButtonCode"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "IfBlock"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "InitialNode"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "Input"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "Join"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "KillThread"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "Loop"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -135,6 +137,7 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("Timer"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("ReceiveMessageThreads"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("Input"));
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("PrintText"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("ClearScreen"));
