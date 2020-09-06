@@ -232,7 +232,7 @@ private:
 	void incrementTimelineCounter();
 
 	Ui::TwoDModelWidget *mUi {};
-	TwoDModelScene *mScene {};
+	TwoDModelScene *mScene {}; // Transfers ownership to parent widget upon creation
 	QList<QMetaObject::Connection> mConnections;
 	QScopedPointer<ActionsBox> mActions;
 	ColorItemPopup *mColorFieldItemPopup {};  // Takes ownership
@@ -246,8 +246,8 @@ private:
 	model::Model &mModel;
 	qReal::ControllerInterface *mController {};
 
-	engine::TwoDModelDisplayWidget *mDisplay {};
-	engine::TwoDModelDisplayWidget *mNullDisplay {};
+	engine::TwoDModelDisplayWidget *mDisplay {}; // Transfers ownership to parent widget upon creation
+	engine::TwoDModelDisplayWidget *mNullDisplay {}; // Transfers ownership to parent widget upon creation
 
 	int mCurrentSpeed { -1 };
 

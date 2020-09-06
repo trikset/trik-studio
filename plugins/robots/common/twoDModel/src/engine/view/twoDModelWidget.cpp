@@ -172,8 +172,6 @@ TwoDModelWidget::~TwoDModelWidget()
 	for (auto &&c : mConnections) {
 		QObject::disconnect(c);
 	}
-	delete mScene;
-	delete mDisplay;
 	delete mUi;
 }
 
