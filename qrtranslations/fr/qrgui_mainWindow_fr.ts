@@ -886,7 +886,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+50"/>
         <source>Failed to open %1</source>
         <translation type="unfinished"></translation>
     </message>
