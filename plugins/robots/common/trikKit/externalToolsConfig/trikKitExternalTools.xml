@@ -10,7 +10,7 @@
 		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
 		<tool name="SSH to robot" program="#url#" arguments="ssh://root@@@TrikTcpServer@@"/>
 		<tool name="SCP to robot" program="#url#" arguments="scp://root@@@TrikTcpServer@@"/>
-		<tool name="Maze generator" program="sh" arguments="./run_maze_generator.sh ./maze-gui-gen"/>
+		<tool name="Maze generator" program="bash" arguments="./run_maze_generator.sh"/>
 	</platform>
 	<platform name="macos">
 		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>

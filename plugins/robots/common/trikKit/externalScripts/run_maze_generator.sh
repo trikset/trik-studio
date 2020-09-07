@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Copyright 2020 CyberTech Labs Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+set -ueo pipefail
 
-APP_PATH="$1"
+APP_NAME="maze-gui-gen"
+APP_FULL_PATH="$(dirname ${0})/${APP_NAME}"
 
-if [ -f "$APP_PATH" ]; then
-	./"$APP_PATH"
+if [ -x "$APP_FULL_PATH" ]; then
+	"$APP_FULL_PATH"
 else
-	xdg-open https://lvjonok.github.io/maze-gui-gen/
+	xdg-open "https://lvjonok.github.io/${APP_NAME}/"
 fi
