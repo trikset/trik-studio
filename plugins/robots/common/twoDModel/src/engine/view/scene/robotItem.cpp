@@ -16,6 +16,9 @@
 
 #include "twoDModel/engine/model/constants.h"
 #include "src/engine/items/startPosition.h"
+#include <qrkernel/settingsManager.h>
+#include <QtMath>
+#include <QBuffer>
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -26,7 +29,8 @@ const int border = 0;
 const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
-	: mImage(robotImageFileName, true)
+	: mImage(robotImageFileName, false)
+	, mBeepItem(new BeepItem())
 	, mRobotModel(robotModel)
 {
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
@@ -46,15 +50,15 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	const QSizeF robotSize = mRobotModel.info().size();
 	setX2(x1() + robotSize.width());
 	setY2(y1() + robotSize.height());
-	mMarkerPoint = QPointF(0, y2() / 2);  // Marker is situated behind the robot
+	mMarkerPoint = QPointF((x1()+x2())/2, (y1()+y2())/2);  // Marker is situated under the robot
 	QPen pen(this->pen());
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
 
 	setTransformOriginPoint(mRobotModel.info().robotCenter());
-	mBeepItem.setParentItem(this);
-	mBeepItem.setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
-	mBeepItem.setVisible(false);
+	mBeepItem->setParentItem(this);
+	mBeepItem->setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
+	mBeepItem->setVisible(false);
 
 	RotateItem::init();
 
@@ -80,7 +84,12 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	mImage.draw(*painter, graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()).toRect());
+	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0).toRect();
+	if (mCustomImage) {
+		mCustomImage->draw(*painter, rect);
+	} else {
+		mImage.draw(*painter, rect);
+	}
 }
 
 void RobotItem::drawExtractionForItem(QPainter* painter)
@@ -131,7 +140,22 @@ void RobotItem::onLanded()
 
 void RobotItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	Q_UNUSED(event);
+	Q_UNUSED(event)
+	auto x = pos().x();
+	auto y = pos().y();
+	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto roundedX = x - fmod(x, gridSize);
+	auto roundedX2 = roundedX + ((x > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedX - x) > qAbs(roundedX2 - x)) {
+		roundedX = roundedX2;
+	}
+	auto roundedY = y - fmod(y, gridSize);
+	auto roundedY2 = roundedY + ((y > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedY - y) > qAbs(roundedY2 - y)) {
+		roundedY = roundedY2;
+	}
+	QGraphicsItem::setPos(roundedX, roundedY);
+	update();
 }
 
 QDomElement RobotItem::serialize(QDomElement &parent) const
@@ -140,6 +164,23 @@ QDomElement RobotItem::serialize(QDomElement &parent) const
 	result.setTagName("robot");
 	result.setAttribute("position", QString::number(x()) + ":" + QString::number(y()));
 	result.setAttribute("direction", QString::number(rotation()));
+
+	return result;
+}
+
+void RobotItem::deserializeImage(const QDomElement &element) {
+	const QDomElement image = element.firstChildElement("robotImage");
+	if (image.isNull()) {
+		return;
+	}
+	mCustomImage = Image::deserialize(image);
+	useCustomImage(true);
+}
+
+QDomElement RobotItem::serializeImage(QDomElement &parent) const {
+	QDomElement result = parent.ownerDocument().createElement("robotImage");
+	parent.appendChild(result);
+	mCustomImage->serialize(result);
 	return result;
 }
 
@@ -224,7 +265,22 @@ void RobotItem::updateSensorRotation(const kitBase::robotModel::PortInfo &port)
 
 void RobotItem::setNeededBeep(bool isNeededBeep)
 {
-	mBeepItem.setVisible(isNeededBeep);
+	mBeepItem->setVisible(isNeededBeep);
+}
+
+void RobotItem::setCustomImage(const QString &robotImageFileName) {
+	mIsCustomImage = true;
+	mCustomImage->loadFrom(robotImageFileName);
+	update();
+}
+
+void RobotItem::useCustomImage(bool isUsed) {
+	mIsCustomImage = isUsed;
+	update();
+}
+
+bool RobotItem::usedCustomImage() {
+	return mIsCustomImage;
 }
 
 QVariant RobotItem::itemChange(GraphicsItemChange change, const QVariant &value)
@@ -258,12 +314,14 @@ RobotModel &RobotItem::robotModel()
 
 void RobotItem::returnToStartPosition()
 {
+	mRobotModel.onRobotLiftedFromGround();
 	mRobotModel.setRotation(mRobotModel.startPositionMarker()->rotation());
 	// Here we want the center of the robot to be the position of the marker.
 	const QPointF shiftFromPicture = mapFromScene(pos());
 	const QPointF markerPos = mRobotModel.startPositionMarker()->scenePos();
 	const QPointF shiftToCenter = mapToScene(QPointF()) - mapToScene(boundingRect().center() - shiftFromPicture);
 	mRobotModel.setPosition(markerPos + shiftToCenter);
+	mRobotModel.onRobotReturnedOnGround();
 
 	emit recoverRobotPosition(markerPos + shiftToCenter);
 }

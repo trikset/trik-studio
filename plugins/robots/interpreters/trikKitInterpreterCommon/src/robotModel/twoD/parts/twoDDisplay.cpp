@@ -18,7 +18,7 @@
 #include <QsLog.h>
 
 #include <utils/canvas/textObject.h>
-#include <trikControl/utilities.h>
+//#include <trikControl/utilities.h>
 
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
@@ -179,7 +179,7 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	}
 	painter->restore();
 
-	painter->save();	
+	painter->save();
 	QFont font;
 	font.setPixelSize(textSize);
 	painter->setFont(font);
@@ -208,6 +208,10 @@ void Display::redraw()
 
 void Display::show(const QVector<int32_t> &array, int width, int height, const QString &format)
 {
-	mCurrentImage = trikControl::Utilities::imageFromBytes(array, width, height, format);
+	Q_UNIMPLEMENTED();
+	Q_UNUSED(array)
+	Q_UNUSED(width)
+	Q_UNUSED(height)
+	Q_UNUSED(format)
 	mEngine.display()->repaintDisplay();
 }

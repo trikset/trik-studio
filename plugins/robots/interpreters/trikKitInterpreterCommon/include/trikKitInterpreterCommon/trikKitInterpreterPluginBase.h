@@ -27,7 +27,7 @@
 #include "robotModel/twoD/trikTwoDRobotModel.h"
 #include "trikAdditionalPreferences.h"
 
-#include <trikKitInterpreterCommon/trikTextualInterpreter.h>
+//#include <trikKitInterpreterCommon/trikTextualInterpreter.h>
 
 /// @todo: refactor
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/mainWindowInterpretersInterface.h>
@@ -70,7 +70,7 @@ public:
 
 	QList<qReal::HotKeyActionInfo> hotKeyActions() override;
 
-	TrikTextualInterpreter *textualInterpreter() const;
+	//TrikTextualInterpreter *textualInterpreter() const;
 
 signals:
 	void started();
@@ -104,7 +104,7 @@ private:
 	QScopedPointer<robotModel::TrikRobotModelBase> mRealRobotModel;
 	QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 
-	QScopedPointer<TrikTextualInterpreter> mTextualInterpreter;
+	//QScopedPointer<TrikTextualInterpreter> mTextualInterpreter;
 
 	QAction mStart;
 	QAction mStop;

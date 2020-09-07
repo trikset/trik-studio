@@ -93,12 +93,12 @@
         <translation>Диаграмма не открыта</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/generators/semanticTreeManager.cpp" line="+121"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/generators/semanticTreeManager.cpp" line="+122"/>
         <source>Generation internal error, please send bug report to developers.Additional info: zone node %1 can not be used as labeled node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: узел зоны %1 не может быть использован как помеченный узел.</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+37"/>
         <source>Generation internal error, synchronous zone parent is a zone node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: в семантическом дереве родитель узла-зоны сам является узлом-зоной.</translation>
     </message>
@@ -289,7 +289,7 @@
         <translation type="vanished">Язык Lua</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+49"/>
         <source>Generate Lua script for Pioneer Quadcopter</source>
         <translation>Генерировать скрипт на Lua для квадрокоптера &quot;Пионер&quot;</translation>
     </message>

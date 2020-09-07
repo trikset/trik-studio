@@ -135,7 +135,7 @@
 		}
 	};
 
-	class ControlFlow : public qReal::EdgeElementType 
+	class ControlFlow : public qReal::EdgeElementType
 	{
 	public:
 		explicit ControlFlow(qReal::Metamodel &metamodel)

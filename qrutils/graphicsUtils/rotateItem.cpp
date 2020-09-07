@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "rotateItem.h"
+#include <QtCore/qmath.h>
 
 using namespace graphicsUtils;
 
@@ -72,4 +73,14 @@ void RotateItem::restorePos()
 {
 	AbstractItem::restorePos();
 	rotater().restorePos();
+}
+
+void RotateItem::setRotation(qreal angle) {
+	qreal rightAngle = 90;
+	qreal roundedAngle = angle - fmod(angle, rightAngle);
+	qreal roundedAngle2 = angle + ((angle > 0) ? rightAngle : -rightAngle);
+	if (qAbs(roundedAngle - angle) > qAbs(roundedAngle2 - angle)) {
+		roundedAngle = roundedAngle2;
+	}
+	QGraphicsItem::setRotation(roundedAngle);
 }

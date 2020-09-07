@@ -18,7 +18,7 @@ TEMPLATE = lib
 
 include(../../../../global.pri)
 
-copyToDestdir($$PWD/icons/splashscreen.png)
+copyToDestdir($$PWD/icons/splashscreen.png, now)
 copyToDestdir($$PWD/fields, now, images/)
 
 include(interpreterCore.pri)

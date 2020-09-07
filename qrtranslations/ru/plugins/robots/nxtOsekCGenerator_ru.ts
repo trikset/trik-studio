@@ -40,7 +40,7 @@
         <translation type="vanished">Для загрузки прошивки в робота требуется запустить QReal:Robots с правами администратора</translation>
     </message>
     <message>
-        <location line="+107"/>
+        <location line="+108"/>
         <source>The program has been uploaded</source>
         <translation>Загрузка завершена</translation>
     </message>
@@ -117,7 +117,7 @@
         <translation>Произошла ошибка компиляции. Проверьте синтаксис выражений внутри блоков &quot;Функция&quot;;. Если Вы уверены в их корректности, обратитесь к разработчикам</translation>
     </message>
     <message>
-        <location line="-176"/>
+        <location line="-177"/>
         <source>Could not open %1 for reading.</source>
         <translation>Не могу открыть файл %1 для чтения.</translation>
     </message>
@@ -142,7 +142,7 @@
         <translation>Процесс прошивки робота успешно завершен.</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Flashing NXT brick...</source>
         <translation>Прошиваю робота...</translation>
     </message>
@@ -169,7 +169,7 @@
         <translation>Генерация (C)</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+54"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>
     </message>

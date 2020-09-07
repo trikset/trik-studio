@@ -41,21 +41,28 @@ signals:
 	/// Emitted when user clicked restore robot position button.
 	void restoreRobotPositionClicked();
 
+	/// Emitted when user changed robot image settings.
+	void imageSettingsChanged();
+
 private:
 	bool suits(QGraphicsItem *item) override;
 	bool attachTo(QGraphicsItem *item) override;
 	bool attachTo(const QList<QGraphicsItem *> &items) override;
 
 	void initWidget();
+	QAbstractButton *initButton(const QString &icon, const QString &toolTip);
 	QWidget *initFollowButton();
 	QWidget *initReturnButton();
-	QAbstractButton *initButton(const QString &icon, const QString &toolTip);
 	QWidget *initSpinBox();
+	QWidget *initImagePicker();
+	QWidget *initSaveImageButton();
 
 	QAbstractButton *mFollowButton {};  // Takes ownership
 	QAbstractButton *mReturnButton {};  // Takes ownership
 	QSpinBox *mSpinBox {};  // Takes ownership
 	RobotItem *mCurrentItem {};  // Does not take ownership
+	QAbstractButton *mImagePicker{};  // Takes ownership
+	QAbstractButton *mUseImageButton{};  // Takes ownership
 };
 
 }

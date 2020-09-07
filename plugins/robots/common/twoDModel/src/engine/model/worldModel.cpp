@@ -767,3 +767,7 @@ void WorldModel::removeItem(const QString &id)
 		removeImageItem(image);
 	}
 }
+
+qReal::ErrorReporterInterface* WorldModel::errorReporter() {
+	return mErrorReporter;
+}

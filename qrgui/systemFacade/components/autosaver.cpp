@@ -94,7 +94,7 @@ QString Autosaver::autosaveFilePath(const QString &currentFilePath) const
 
 QString Autosaver::tempFilePath() const
 {
-	return QString("%1/%2.qrs").arg(
+	return QString("%1/%2.tsj").arg(
 			PlatformInfo::applicationDirPath()
 			, SettingsManager::value("AutosaveTempFile").toString());
 }

@@ -64,40 +64,40 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 	addAllowedConnection(PortInfo("Esc", input, {}, "buttonEsc"), { buttonInfo() });
 	addAllowedConnection(PortInfo("Power", input, {}, "buttonPower"), { buttonInfo() });
 
-	addAllowedConnection(PortInfo("M1", output, { "М1" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("M2", output, { "М2" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("M3", output, { "М3" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("M4", output, { "М4" }), { powerMotorInfo() });
-	addAllowedConnection(PortInfo("MAll", output, { "MAll" }), { powerMotorsAggregatorInfo() });
+//	addAllowedConnection(PortInfo("M1", output, { "М1" }), { powerMotorInfo() });
+//	addAllowedConnection(PortInfo("M2", output, { "М2" }), { powerMotorInfo() });
+//	addAllowedConnection(PortInfo("M3", output, { "М3" }), { powerMotorInfo() });
+//	addAllowedConnection(PortInfo("M4", output, { "М4" }), { powerMotorInfo() });
+//	addAllowedConnection(PortInfo("MAll", output, { "MAll" }), { powerMotorsAggregatorInfo() });
 
 	addAllowedConnection(PortInfo("A1", input, { "А1" }, "sensorA1"), analogPortConnections);
 	addAllowedConnection(PortInfo("A2", input, { "А2" }, "sensorA2"), analogPortConnections);
 	addAllowedConnection(PortInfo("A3", input, { "А3" }, "sensorA3"), analogPortConnections);
 	addAllowedConnection(PortInfo("A4", input, { "А4" }, "sensorA4"), analogPortConnections);
-	addAllowedConnection(PortInfo("A5", input, { "А5" }, "sensorA5"), analogPortConnections);
-	addAllowedConnection(PortInfo("A6", input, { "А6" }, "sensorA6"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A5", input, { "А5" }, "sensorA5"), analogPortConnections);
+//	addAllowedConnection(PortInfo("A6", input, { "А6" }, "sensorA6"), analogPortConnections);
 
-	addAllowedConnection(PortInfo("D1", input, {}, "sensorD1"), { sonarSensorInfo() });
-	addAllowedConnection(PortInfo("D2", input, {}, "sensorD2"), { sonarSensorInfo() });
+//	addAllowedConnection(PortInfo("D1", input, {}, "sensorD1"), { sonarSensorInfo() });
+//	addAllowedConnection(PortInfo("D2", input, {}, "sensorD2"), { sonarSensorInfo() });
 
-	addAllowedConnection(PortInfo("GyroscopePort", input, {}, "gyroscope", PortInfo::ReservedVariableType::vector)
-			, { gyroscopeInfo() });
+//	addAllowedConnection(PortInfo("GyroscopePort", input, {}, "gyroscope", PortInfo::ReservedVariableType::vector)
+//			, { gyroscopeInfo() });
 
-	addAllowedConnection(PortInfo("AccelerometerPort", input, {}, "accelerometer"
-			, PortInfo::ReservedVariableType::vector), { accelerometerInfo() });
+//	addAllowedConnection(PortInfo("AccelerometerPort", input, {}, "accelerometer"
+//			, PortInfo::ReservedVariableType::vector), { accelerometerInfo() });
 
 	addAllowedConnection(PortInfo("LedPort", output), { ledInfo() });
 
-	addAllowedConnection(PortInfo("LineSensorPort", tr("Video 2"), input, { "TrikLineSensorPort" }, "lineSensor"
-			, PortInfo::ReservedVariableType::vector), { lineSensorInfo() });
+//	addAllowedConnection(PortInfo("LineSensorPort", tr("Video 2"), input, { "TrikLineSensorPort" }, "lineSensor"
+//			, PortInfo::ReservedVariableType::vector), { lineSensorInfo() });
 
-	addAllowedConnection(video2Port(), { videoCameraInfo() });
+//	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), { objectSensorInfo() });
+//	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
+//	addAllowedConnection(PortInfo("ObjectSensorSizePort", input, {}, "objectSensorSize"), { objectSensorInfo() });
 
-	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), { objectSensorInfo() });
-	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
-	addAllowedConnection(PortInfo("ObjectSensorSizePort", input, {}, "objectSensorSize"), { objectSensorInfo() });
-
-	addAllowedConnection(PortInfo("ColorSensorPort", input, {}, "colorSensor"), { colorSensorInfo() });
+//	addAllowedConnection(PortInfo("ColorSensorRPort", input, {}, "colorSensorR"), { colorSensorInfo() });
+//	addAllowedConnection(PortInfo("ColorSensorGPort", input, {}, "colorSensorG"), { colorSensorInfo() });
+//	addAllowedConnection(PortInfo("ColorSensorBPort", input, {}, "colorSensorB"), { colorSensorInfo() });
 
 	addAllowedConnection(PortInfo("ShellPort", output), { shellInfo() });
 
@@ -125,13 +125,15 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 
 QList<PortInfo> TrikRobotModelBase::configurablePorts() const
 {
-	QList<PortInfo> const digitalPorts = {
-			  PortInfo("D1", input, {}, "sensorD1")
-			, PortInfo("D2", input, {}, "sensorD2")
-			};
+//	QList<PortInfo> const digitalPorts = {
+//			  PortInfo("D1", input, {}, "sensorD1")
+//			, PortInfo("D2", input, {}, "sensorD2")
+//			};
 
-	QList<PortInfo> const videoPorts = {video2Port()};
-	return CommonRobotModel::configurablePorts() + digitalPorts + videoPorts;
+	return CommonRobotModel::configurablePorts();
+//			+ digitalPorts + QList<PortInfo>{PortInfo("LineSensorPort"
+//			, tr("Video 2"), input, { "TrikLineSensorPort" }, "lineSensor"
+//			, PortInfo::ReservedVariableType::vector)};
 }
 
 QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const

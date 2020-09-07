@@ -175,8 +175,12 @@
     </message>
     <message>
         <location line="+2"/>
+        <source>TRIK Studio Junior Save File(*.tsj)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>QReal Save File(*.qrs)</source>
-        <translation>Файл сохранения TRIK Studio (*.qrs)</translation>
+        <translation type="vanished">Файл сохранения TRIK Studio (*.qrs)</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+52"/>

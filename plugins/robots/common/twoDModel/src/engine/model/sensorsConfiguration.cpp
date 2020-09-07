@@ -52,7 +52,7 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 QPointF SensorsConfiguration::defaultPosition() const
 {
 	/// @todo: Move it somewhere?
-	return QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
+	return QPointF(mRobotSize.width(), mRobotSize.height() / 2);
 }
 
 QPointF SensorsConfiguration::position(const PortInfo &port) const

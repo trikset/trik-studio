@@ -127,7 +127,7 @@ public slots:
 	void alignWalls();
 
 	/// Returns a pointer to a robot graphics item.
-	RobotItem *robot(model::RobotModel &robotModel);
+	RobotItem *robot(model::RobotModel &robotModel) const;
 
 	/// Focuses all graphics views on the robot if it is not visible.
 	void centerOnRobot(RobotItem *selectedItem = nullptr);

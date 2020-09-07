@@ -40,7 +40,7 @@
         <translation type="vanished">QReal necessite les droits de superutilisateur pour mettre à jour le code du robot NXT</translation>
     </message>
     <message>
-        <location line="+107"/>
+        <location line="+108"/>
         <source>The program has been uploaded</source>
         <translation>Le téléversement du programme est terminé</translation>
     </message>
@@ -117,7 +117,7 @@
         <translation>Une erreur de compilation s&apos;est produite. Vérifiez le syntaxe à l&apos;intérieur des blocs &quot;fonction&quot;. S&apos;ils sont valides, contactez les developpeurs</translation>
     </message>
     <message>
-        <location line="-176"/>
+        <location line="-177"/>
         <source>Could not open %1 for reading.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -142,7 +142,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Flashing NXT brick...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,7 +165,7 @@
         <translation>Génération (NXT OSEK C)</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+54"/>
         <source>NXT tools package is not installed</source>
         <translation type="unfinished"></translation>
     </message>

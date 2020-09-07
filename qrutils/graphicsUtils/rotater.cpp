@@ -149,15 +149,15 @@ void Rotater::calcResizeItem(QGraphicsSceneMouseEvent *event)
 	const qreal addAngle = deltaAngle > M_PI ? -2 * M_PI : deltaAngle < -M_PI ? 2 * M_PI : 0;
 	const qreal angle = mMaster->rotation() * M_PI / 180 + deltaAngle + addAngle;
 
-	if (event->modifiers() & Qt::ShiftModifier) {
-		qreal roundedAngle = (angle - fmod(angle, M_PI_4));
-		if (qAbs(roundedAngle - angle) > qAbs(roundedAngle + M_PI_4 - angle)) {
-			roundedAngle += M_PI_4;
-		}
-		mMaster->setRotation(roundedAngle * 180 / M_PI - masterAngleCompensation);
-	} else {
+//	if (event->modifiers() & Qt::ShiftModifier) {
+//		qreal roundedAngle = (angle - fmod(angle, M_PI_2));
+//		if (qAbs(roundedAngle - angle) > qAbs(roundedAngle + M_PI_2 - angle)) {
+//			roundedAngle += M_PI_2;
+//		}
+//		mMaster->setRotation(roundedAngle * 180 / M_PI - masterAngleCompensation);
+//	} else {
 		mMaster->setRotation(angle * 180 / M_PI - masterAngleCompensation);
-	}
+//	}
 }
 
 void Rotater::resizeItem(QGraphicsSceneMouseEvent *event)

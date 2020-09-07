@@ -52,29 +52,10 @@ environment:
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
 
-#      - QT: 5.12
-#        ARCH: 64
-#        CONFIGURATION: release
-#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-
-#      - QT: 5.12
-#        ARCH: 32
-#        PYTHON_VERSION_MINOR: 8
-#        CONFIGURATION: release
-#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
-
-
-# Qt5.14 build takes too long (2x times) and reaches timeout
-#      - QT: 5.14
-#        ARCH: 32
-#        PYTHON_VERSION_MINOR: 8
-#        CONFIGURATION: release
-#        QTIFW: C:\Qt\Tools\QtInstallerFramework\3.2
-#        APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-
 matrix:
   allow_failures:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
 #  - '%CCACHE_DIR% -> **\*.pr?, appveyor.yml'
@@ -218,7 +199,7 @@ after_test:
   - cd %APPVEYOR_BUILD_FOLDER%\installer
   - bash -c "env LC_ALL=C date -u"
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
-  - dir C:\TRIKStudio
+  - dir C:\TRIKStudio.Jr
   - bash -c "env LC_ALL=C date -u"
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }

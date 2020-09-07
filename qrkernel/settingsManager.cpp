@@ -24,7 +24,7 @@ using namespace qReal;
 SettingsManager* SettingsManager::mInstance = nullptr;
 
 SettingsManager::SettingsManager()
-	: mSettings(QSettings::IniFormat, QSettings::UserScope, "CyberTech Labs", "TRIK Studio")
+	: mSettings(QSettings::IniFormat, QSettings::UserScope, "CyberTech Labs", "TRIK Studio Junior")
 {
 	initDefaultValues();
 	load();

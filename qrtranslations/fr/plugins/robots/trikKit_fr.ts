@@ -2,6 +2,22 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>trik::blocks::details::BackwardOneCellBlock</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikBackwardOneCellBlock.cpp" line="+40"/>
+        <source>Movement is impossible!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trik::blocks::details::ForwardOneCellBlock</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+40"/>
+        <source>Movement is impossible!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trik::blocks::details::WaitGamepadButtonBlock</name>
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/waitGamepadButtonBlock.cpp" line="+41"/>
@@ -12,8 +28,7 @@
 <context>
     <name>trik::robotModel::TrikRobotModelBase</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+91"/>
-        <location line="+196"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+289"/>
         <source>Video 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -69,9 +84,13 @@
 <context>
     <name>trik::robotModel::parts::TrikInfraredSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikInfraredSensor.h" line="+27"/>
         <source>Infrared Sensor</source>
-        <translation>Capteur infrarouge</translation>
+        <translation type="vanished">Capteur infrarouge</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikInfraredSensor.h" line="+27"/>
+        <source>Range Sensor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

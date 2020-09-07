@@ -2,24 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
-    <name>ev3::blocks::details::Ev3ReadRGBBlock</name>
-    <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/blocks/details/ev3ReadRGBBlock.cpp" line="+43"/>
-        <source>Sensor reading should consist of three components</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Sensor reading failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Color raw sensor is not configured on port %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ev3::communication::Ev3RobotCommunicationThread</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/ev3RobotCommunicationThread.cpp" line="+55"/>
@@ -30,7 +12,7 @@
 <context>
     <name>ev3::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="+99"/>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/usbRobotCommunicationThread.cpp" line="+97"/>
         <source>Cannot find EV3 device. Check robot connected and turned on and try again.</source>
         <translation>Не могу найти устройство EV3. Проверьте, что робот включен и присоединен и попробуйте снова.</translation>
     </message>

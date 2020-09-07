@@ -2,26 +2,26 @@
 <Installer>
     <Name>TRIK Studio</Name>
     <Version></Version>
-    <Title>TRIK Studio</Title>
+    <Title>TRIK Studio Junior</Title>
     <Publisher>CyberTech Labs Ltd.</Publisher>
-    <ProductUrl>https://trikset.com/products/trik-studio</ProductUrl>
+    <ProductUrl>https://trikset.com/products</ProductUrl>
 
     <ControlScript>../controlScript.qs</ControlScript>
 
     <WizardStyle>Modern</WizardStyle>
-    <InstallerWindowIcon>../images/trik-studio-logo</InstallerWindowIcon>
-    <InstallerApplicationIcon>../images/trik-studio-logo</InstallerApplicationIcon>
-    <Logo>../images/trik-studio-logo.png</Logo>
-    <Watermark>../images/trik-studio-watermark.png</Watermark>
+    <InstallerWindowIcon>../images/trik-studio-jr</InstallerWindowIcon>
+    <InstallerApplicationIcon>../images/trik-studio-jr</InstallerApplicationIcon>
+    <Logo>../images/trik-studio-jr-logo.png</Logo>
+    <Watermark>../images/trik-studio-jr-watermark.png</Watermark>
 
-    <StartMenuDir>TRIK Studio</StartMenuDir>
+    <StartMenuDir>TRIK Studio Junior</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
     <AllowSpaceInPath>false</AllowSpaceInPath>
     <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
-    <TargetDir>@HomeDir@/TRIKStudio</TargetDir>
-    <AdminTargetDir>@HomeDir@/TRIKStudio</AdminTargetDir>
+    <TargetDir>@HomeDir@/TRIKStudio.Jr</TargetDir>
+    <AdminTargetDir>@HomeDir@/TRIKStudio.Jr</AdminTargetDir>
 
     <RunProgram>bash</RunProgram>
     <RunProgramArguments>

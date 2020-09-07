@@ -95,7 +95,7 @@
         <translation>Неизвестный блок</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+79"/>
+        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+77"/>
         <source>There is no opened diagram</source>
         <translation>Сначала откройте диаграмму</translation>
     </message>

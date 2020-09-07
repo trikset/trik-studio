@@ -38,6 +38,7 @@ DetailsTab::DetailsTab(QWidget *parent)
 	initItem(mMotorsRoot, tr("Motors"), false);
 	initItem(mPhysicsRoot, tr("Physics"), false);
 	initItem(mParamsRoot, tr("Model parameters"), false);
+	mParamsRoot->setHidden(true);
 }
 
 DetailsTab::~DetailsTab()

@@ -21,6 +21,7 @@
 #include "sensorItem.h"
 #include "src/engine/items/solidItem.h"
 #include "twoDModel/engine/model/robotModel.h"
+#include "twoDModel/engine/model/image.h"
 
 namespace twoDModel {
 namespace view {
@@ -29,6 +30,7 @@ namespace view {
 class RobotItem : public graphicsUtils::RotateItem, public items::SolidItem
 {
 	Q_OBJECT
+	Q_PROPERTY(bool customImage READ usedCustomImage WRITE useCustomImage)
 
 public:
 	RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel);
@@ -54,6 +56,12 @@ public:
 	void updateSensorRotation(const kitBase::robotModel::PortInfo &port);
 
 	void setNeededBeep(bool isNeededBeep);
+
+	QDomElement serializeImage(QDomElement &parent) const;
+	void deserializeImage(const QDomElement &element);
+	void setCustomImage(const QString &robotImageFileName);
+	void useCustomImage(bool isUsed);
+	bool usedCustomImage();
 
 	void recoverDragStartPosition();
 	model::RobotModel &robotModel();
@@ -104,11 +112,11 @@ private:
 	void onLanded();
 
 	/** @brief Image of a robot drawn on scene */
-	// Use utilitary class that can handle PNG & SVG properly.
-	// QImage renders SVG ugly, thus robot moves smothier now
-	twoDModel::model::Image mImage;
-
-	BeepItem mBeepItem;
+	model::Image mImage;
+	QSharedPointer<model::Image> mCustomImage;
+	bool mIsCustomImage{};
+	// Takes ownership
+	BeepItem *mBeepItem;
 
 	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors;  // Does not have ownership
 

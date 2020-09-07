@@ -80,6 +80,10 @@ HEADERS += \
 	$$PWD/src/blocks/details/removeFileBlock.h \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.h \
 	$$PWD/src/blocks/details/trikPrintTextBlock.h \
+	$$PWD/src/blocks/details/trikForwardOneCellBlock.h \
+	$$PWD/src/blocks/details/trikBackwardOneCellBlock.h \
+	$$PWD/src/blocks/details/trikTurnRightBlock.h \
+	$$PWD/src/blocks/details/trikTurnLeftBlock.h \
 
 SOURCES += \
 	$$PWD/src/robotModel/trikRobotModelBase.cpp \
@@ -137,6 +141,10 @@ SOURCES += \
 	$$PWD/src/blocks/details/removeFileBlock.cpp \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.cpp \
 	$$PWD/src/blocks/details/trikPrintTextBlock.cpp \
+	$$PWD/src/blocks/details/trikForwardOneCellBlock.cpp \
+	$$PWD/src/blocks/details/trikBackwardOneCellBlock.cpp \
+	$$PWD/src/blocks/details/trikTurnRightBlock.cpp \
+	$$PWD/src/blocks/details/trikTurnLeftBlock.cpp \
 
 TRANSLATIONS += \
 	$$PWD/../../../../qrtranslations/ru/plugins/robots/trikKit_ru.ts \

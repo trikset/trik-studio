@@ -89,7 +89,7 @@ bool ProjectManager::open(const QString &fileName)
 	const QString dequotedFileName = utils::StringUtils::dequote(fileName);
 	const QFileInfo fileInfo(dequotedFileName);
 
-	if (fileInfo.suffix() == "qrs" || fileInfo.completeBaseName().isEmpty()) {
+	if (fileInfo.suffix() == "tsj" || fileInfo.completeBaseName().isEmpty()) {
 		if (!dequotedFileName.isEmpty() && !saveFileExists(dequotedFileName)) {
 			return false;
 		}
@@ -356,7 +356,8 @@ QString ProjectManager::openFileName(const QString &promptPhrase) const
 void ProjectManager::showMessage(const QString &title, const QString &message) const
 {
 	Q_UNUSED(title);
-	qDebug() << qPrintable(message);
+	Q_UNUSED(message);
+	// q Debug() << qPrintable(message);
 }
 
 QString ProjectManager::saveFileName(const QString &promptPhrase) const

@@ -26,7 +26,7 @@ class TrikTouchSensor : public kitBase::robotModel::robotParts::TouchSensor
 	Q_OBJECT
 	Q_CLASSINFO("name", "touch")
 	Q_CLASSINFO("friendlyName", tr("Touch sensor"))
-	Q_CLASSINFO("simulated", "true")
+//	Q_CLASSINFO("simulated", "true")
 
 public:
 	TrikTouchSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);

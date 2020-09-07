@@ -95,7 +95,7 @@ bool ProjectManagerWrapper::open(const QString &fileName)
 
 	const QFileInfo fileInfo(dequotedFileName);
 
-	if (fileInfo.suffix() == "qrs" || fileInfo.completeBaseName().isEmpty()) {
+	if (fileInfo.suffix() == "tsj" || fileInfo.suffix() == "qrs" || fileInfo.completeBaseName().isEmpty()) {
 		if (!dequotedFileName.isEmpty() && !saveFileExists(dequotedFileName)) {
 			return false;
 		}
@@ -309,7 +309,7 @@ QString ProjectManagerWrapper::openFileName(const QString &dialogWindowTitle) co
 	const QString defaultDirectory = pathToExamples.isEmpty()
 			? QFileInfo(mSaveFilePath).absoluteDir().absolutePath()
 			: pathToExamples;
-	QString filter = tr("QReal Save File (*.qrs)") + ";;";
+	QString filter = tr("TRIK Studio Junior Save File(*.tsj)") + ";;";
 	const QString extensions = textFileFilters();
 
 	filter += (extensions.isEmpty() ? "" : extensions + ";;") + tr("All files (*.*)");
@@ -332,10 +332,10 @@ QString ProjectManagerWrapper::saveFileName(const QString &dialogWindowTitle) co
 			? PlatformInfo::invariantSettingsPath("pathToDefaultSaves")
 			: QFileInfo(mSaveFilePath).absoluteDir().absolutePath();
 	QString fileName = QRealFileDialog::getSaveFileName("SaveQRSProject", mMainWindow, dialogWindowTitle
-			, defaultSaveFilePath, tr("QReal Save File(*.qrs)"), oldFileName);
+			, defaultSaveFilePath, tr("TRIK Studio Junior Save File(*.tsj)"), oldFileName);
 
-	if (!fileName.isEmpty() && !fileName.endsWith(".qrs", Qt::CaseInsensitive)) {
-		fileName += ".qrs";
+	if (!fileName.isEmpty() && !fileName.endsWith(".tsj", Qt::CaseInsensitive)) {
+		fileName += ".tsj";
 	}
 
 	return fileName;

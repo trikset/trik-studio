@@ -28,9 +28,8 @@
 
 
 const QString PROGRAM_DIRECTORY = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-const QString SUBPROGRAMS_COLLECTION_DIRECTORY = "subprogramsCollection";
-const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = {
-		{"trikV62Kit", "TRIK"}, {"ev3Kit", "Lego EV3"}, {"nxtKit", "Lego NXT"}};
+const QString SUBPROGRAMS_COLLECTION_DIRECTORY = "subprogramsCollection-tsj";
+const QMap<QString, QString> KIT_ID_TO_FRIENDLY_NAME = { {"trikV62Kit", "TRIK Studio Junior"}};
 
 using namespace subprogramsImporterExporter;
 
@@ -98,14 +97,15 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 	QString fileName = utils::QRealFileDialog::getSaveFileName("ExportSubprograms"
 			, mMainWindowInterpretersInterface->currentTab()
 			, tr("Select subprograms file (name for new one)")
-			, fileLocation, tr("QReal Save File(*.qrs)"));
+			, fileLocation, tr("TRIK Studio Junior Save File(*.tsj)"));
 
 	if (fileName.isEmpty()) {
 		return;
 	}
 
-	if (!fileName.isEmpty() && !fileName.endsWith(".qrs", Qt::CaseInsensitive)) {
-		fileName += ".qrs";
+	if (!fileName.isEmpty()
+			&& !fileName.endsWith(".tsj", Qt::CaseInsensitive) && !fileName.endsWith(".qrs", Qt::CaseInsensitive)) {
+		fileName += ".tsj";
 	}
 
 	qReal::IdList subprograms = mLogicalModel->logicalRepoApi().elementsByType("SubprogramDiagram", true, false);
@@ -142,7 +142,7 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 	QString fileName = utils::QRealFileDialog::getOpenFileName("ExportSubprograms"
 			, mMainWindowInterpretersInterface->currentTab()
 			, tr("Select subprograms file")
-			, fileLocation, tr("QReal Save File(*.qrs)"));
+			, fileLocation, tr("TRIK Studio Junior Save File(*.tsj)"));
 
 	if (fileName.isEmpty()) {
 		return;
@@ -222,7 +222,7 @@ void SubprogramsImporterExporterPlugin::saveToCollectionTriggered() const
 			if (map[key]) {
 				qReal::IdList innerSPs = { nameToId[key] };
 				innerSubprograms(nameToId[key], innerSPs);
-				toSave.insert(collectionDirectory.path() + QDir::separator() + key + ".qrs", innerSPs);
+				toSave.insert(collectionDirectory.path() + QDir::separator() + key + ".tsj", innerSPs);
 			}
 		}
 
@@ -262,7 +262,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 				+ QDir::separator();
 		for (auto const &key : map.keys()) {
 			if (map[key]) {
-				mRepo->importFromDisk(directoryPath + key + ".qrs");
+				mRepo->importFromDisk(directoryPath + key + ".tsj");
 			}
 		}
 
@@ -348,7 +348,7 @@ QStringList SubprogramsImporterExporterPlugin::currentlySavedSubprograms() const
 	const QString kit = mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString();
 	const QString path = tmpPath + QDir::separator() + kit;
 
-	QStringList list = QDir(path).entryList({ "*.qrs" });
+	QStringList list = QDir(path).entryList({ "*.tsj", "*.qrs" });
 	std::transform(list.begin(), list.end(), list.begin(), [](QString &str){ str.chop(4); return str; });
 
 	return list;

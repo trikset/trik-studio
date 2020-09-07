@@ -227,7 +227,7 @@ void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 
 	addItem(robotItem.data());
 	robotItem->robotModel().startPositionMarker()->setZValue(robotItem->zValue() - lowPrecision);
-	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership	
+	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership
 	subscribeItem(robotModel->startPositionMarker());
 
 	mRobots.insert(robotModel, robotItem);
@@ -427,11 +427,11 @@ void TwoDModelScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	default:
 		needUpdate = false;
+
+		AbstractScene::mouseMoveEvent(mouseEvent);
 		if (mouseEvent->buttons() & Qt::LeftButton) {
 			forMoveResize(mouseEvent);
 		}
-
-		AbstractScene::mouseMoveEvent(mouseEvent);
 		break;
 	}
 
@@ -504,21 +504,22 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 	forReleaseResize(mouseEvent);
 
-	if (!isCorrectScene({createdItem.data()})) {
-		// Qt bug. You need to manually release item before removing
-		createdItem->mouseReleaseEvent(mouseEvent);
-		mModel.worldModel().removeItem(createdItem->id());
-	} else {
+//	Walls in simple model is very thin
+//	if (!isCorrectScene({createdItem})) {
+//		// Qt bug. You need to manually release item before removing
+//		createdItem->mouseReleaseEvent(mouseEvent);
+//		mModel.worldModel().removeItem(createdItem->id());
+//	} else {
 		registerInUndoStack(createdItem.data());
-	}
+//	}
 
-	if (!isCorrectScene(selectedItems())) {
-		for (auto &&selectedItem : selectedItems()) {
-			if (auto &&item = dynamic_cast<AbstractItem *>(selectedItem)) {
-				item->restorePos();
-			}
-		}
-	}
+//	if (!isCorrectScene(selectedItems())) {
+//		for (auto selectedItem : selectedItems()) {
+//			if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
+//				item->restorePos();
+//			}
+//		}
+//	}
 
 	for (auto &&robotItem : mRobots) {
 		setSceneRect(sceneRect().united(robotItem->sceneBoundingRect()));
@@ -957,7 +958,7 @@ void TwoDModelScene::alignWalls()
 	}
 }
 
-RobotItem *TwoDModelScene::robot(model::RobotModel &robotModel)
+RobotItem *TwoDModelScene::robot(model::RobotModel &robotModel) const
 {
 	return mRobots.value(&robotModel).data();
 }

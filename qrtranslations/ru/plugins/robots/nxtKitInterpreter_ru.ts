@@ -68,7 +68,7 @@
 <context>
     <name>nxt::NxtKitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+107"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+104"/>
         <source>Lego NXT</source>
         <translation>Lego NXT</translation>
     </message>
@@ -117,7 +117,7 @@
 <context>
     <name>nxt::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+35"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+33"/>
         <source>Interpretation (Bluetooth)</source>
         <translation>Интерпретация (Bluetooth)</translation>
     </message>

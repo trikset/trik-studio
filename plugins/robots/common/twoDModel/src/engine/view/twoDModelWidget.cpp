@@ -205,6 +205,9 @@ void TwoDModelWidget::initWidget()
 		saveWorldModelToRepo();
 	});
 
+	connect(mRobotItemPopup, &RobotItemPopup::propertyChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
+	connect(mRobotItemPopup, &RobotItemPopup::imageSettingsChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
+
 	connect(mSpeedPopup, &SpeedPopup::resetToDefault, this, [=]() {
 		mCurrentSpeed = defaultSpeedFactorIndex;
 		mModel.timeline().setSpeedFactor(speedFactors[defaultSpeedFactorIndex]);
@@ -264,6 +267,9 @@ void TwoDModelWidget::initPalette()
 	mUi->palette->registerTool(ellipseTool);
 	mUi->palette->registerTool(stylusTool);
 	mUi->palette->registerTool(imageTool);
+
+	skittleTool->setEnabled(false);
+	ballTool->setEnabled(false);
 
 	qReal::SettingsListener::listen("toolbarSize", [this](int size){ mUi->palette->setSize({size, size}); }, this);
 	const int size = qReal::SettingsManager::value("toolbarSize", 32).toInt();

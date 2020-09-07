@@ -462,17 +462,21 @@
     <message>
         <location line="+13"/>
         <source>Robot mass:</source>
-        <translation>Масса робота:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+57"/>
+        <source>Robot track:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Robot mass:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">Масса робота:</translation>
+    </message>
+    <message>
+        <location line="-44"/>
         <source>Robot width:</source>
         <translation>Ширина робота:</translation>
-    </message>
-    <message>
-        <location line="+44"/>
-        <source>Robot track:</source>
-        <translation>Колея робота:</translation>
     </message>
 </context>
 <context>
@@ -629,7 +633,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+61"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+62"/>
         <source>Wall (W)</source>
         <translation>Стена (W)</translation>
     </message>
@@ -666,7 +670,7 @@
     <message>
         <location line="+450"/>
         <source>Unknown image with imageId %1</source>
-        <translation>Неизвестное изображение с imageId %1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -775,7 +779,7 @@
     <message>
         <location line="+2"/>
         <source>Load world model without robot configuration...</source>
-        <translation>Загрузить модель мира без конфигурации робота...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set background...</source>
@@ -959,7 +963,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+83"/>
         <source>Camera folowing robot: %1</source>
         <translation>Следовать за роботом: %1</translation>
     </message>
@@ -983,6 +987,21 @@
         <source>Marker thickness</source>
         <translation>Толщина маркера</translation>
     </message>
+    <message>
+        <location line="+19"/>
+        <source>Select image</source>
+        <translation type="unfinished">Выберите картинку</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Graphics (*.*)</source>
+        <translation type="unfinished">Графика (*.*)</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Use custom robot image</source>
+        <translation>Использовать другое изображение исполнителя</translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::view::SpeedPopup</name>
@@ -995,7 +1014,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+720"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
         <source>Select image</source>
         <translation>Выберите картинку</translation>
     </message>
@@ -1028,7 +1047,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+312"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1075,7 +1094,7 @@
     <message>
         <location line="+22"/>
         <source>Loading world without robot model</source>
-        <translation>Загрузка модели мира без модели робота</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select background image</source>

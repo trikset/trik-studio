@@ -57,7 +57,7 @@ for %%t in (%*) do (
 )
 :endReadInline
 
-if "%TRIK_STUDIO_INSTALL_DIR%"=="" set TRIK_STUDIO_INSTALL_DIR=%SYSTEMDRIVE%\TRIKStudio
+if "%TRIK_STUDIO_INSTALL_DIR%"=="" set TRIK_STUDIO_INSTALL_DIR=%SYSTEMDRIVE%\TRIKStudio.Jr
 
 if not "%INSTALLER_EXE%"=="" goto endFindExe
 set n=0

@@ -31,7 +31,7 @@ cp    "$BIN_DIR/patcher.exe"                                        "$PWD/../dat
 cp    $BIN_DIR/trik-studio.exe                                      $PWD/../data/$PRODUCT.exe
 cp    $INSTALLER_ROOT/platform/$PRODUCT.cmd                         $PWD/../data/
 cp    "$INSTALLER_ROOT/platform/$PRODUCT.vbs"                       "$PWD/../data/"
-cp    "$INSTALLER_ROOT/images/trik-studio.ico"                      "$PWD/../data/"
+cp    "$INSTALLER_ROOT/images/trik-studio-jr.ico"                      "$PWD/../data/"
 cp    $BIN_DIR/plugins/tools/updatesChecker.dll                     $PWD/../data/plugins/tools/
 cp    $BIN_DIR/plugins/tools/subprogramsImporterExporter.dll        $PWD/../data/plugins/tools/
 

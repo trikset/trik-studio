@@ -69,37 +69,39 @@ const QString pyOverrides ="\n__import__('sys').stdout = type('trik_studio_stdou
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
 		, bool enablePython)
-	: mRunning(false), mBrick(model), mScriptRunner(mBrick, nullptr), mErrorReporter(nullptr)
+//	: mRunning(false), mBrick(model), mScriptRunner(mBrick, nullptr), mErrorReporter(nullptr)
 {
-	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
-	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
+	Q_UNUSED(model)
+	Q_UNUSED(enablePython)
+//	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
+//	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
 
-	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer* const &in){
-	return engine->newQObject(in);
-	};
-	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer* &out){
-	out = qobject_cast<utils::AbstractTimer*>(object.toQObject());
-	};
-	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine){
-	qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
-	});
-	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed
-		, this, &TrikTextualInterpreter::scriptFinished);
+//	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer* const &in){
+//	return engine->newQObject(in);
+//	};
+//	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer* &out){
+//	out = qobject_cast<utils::AbstractTimer*>(object.toQObject());
+//	};
+//	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine){
+//	qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
+//	});
+//	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed
+//		, this, &TrikTextualInterpreter::scriptFinished);
 
-	using qReal::text::Languages;
-	using trikScriptRunner::ScriptType;
-	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
+//	using qReal::text::Languages;
+//	using trikScriptRunner::ScriptType;
+//	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
 
-	if (enablePython) {
-		Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
-	}
+//	if (enablePython) {
+//		Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
+//	}
 }
 
 trik::TrikTextualInterpreter::~TrikTextualInterpreter()
 {
 	abort();
 }
-
+/*
 void trik::TrikTextualInterpreter::interpretCommand(const QString &script)
 {
 	mScriptRunner.runDirectCommand(script);
@@ -261,3 +263,4 @@ void trik::TrikTextualInterpreter::scriptFinished(const QString &error, int scri
 	emit completed();
 	}
 }
+*/

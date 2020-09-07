@@ -27,6 +27,7 @@ using namespace graphicsUtils;
 
 WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	: mImage(":/icons/2d_wall.png")
+	, mWallWidth(5)
 {
 	setX1(begin.x());
 	setY1(begin.y());

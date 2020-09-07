@@ -158,6 +158,7 @@ public:
 	/// Sets a physical engine. Robot recalculates its position using this engine.
 	void setPhysicalEngine(physics::PhysicsEngineBase &engine);
 
+	void setWorldModel(WorldModel &worldModel);
 public slots:
 	void recalculateParams();
 	void nextFragment();
@@ -180,6 +181,10 @@ signals:
 	/// Emitted when left or right wheel was reconnected to another port.
 	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
+private slots:
+	void moveCell(int n);
+	void turnOn(qreal angle);
+
 private:
 	QVector2D robotDirectionVector() const;
 
@@ -199,6 +204,8 @@ private:
 
 	void serializeWheels(QDomElement &robotElement) const;
 	void deserializeWheels(const QDomElement &robotElement);
+
+	QPointF alignToGrid(QPointF pos) const;
 
 	QPointF averageAcceleration() const;
 
@@ -221,6 +228,10 @@ private:
 	qreal mDeltaDegreesOfAngle { 0 };
 	int mBeepTime { 0 };
 	bool mIsOnTheGround { true };
+	QPointF mWaitPos;
+	QPointF mLiftedPos;
+	bool mIsCollide { false };
+	bool mIsRiding { false };
 	QColor mMarker;
 	QPointF mAcceleration { 0, 0 };
 	utils::CircularQueue<QPointF> mPosStamps;
@@ -228,6 +239,7 @@ private:
 	qreal mAngleStampPrevious { 0 };
 
 	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
+	WorldModel *mWorldModel{};  // Does not take ownership
 
 	QPointer<items::StartPosition> mStartPositionMarker;
 };

@@ -243,8 +243,9 @@
         <translation type="vanished">любой</translation>
     </message>
     <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/boolean.h" line="+28"/>
         <source>boolean</source>
-        <translation type="vanished">логический</translation>
+        <translation>логический</translation>
     </message>
     <message>
         <source>float</source>
@@ -263,8 +264,9 @@
         <translation type="vanished">число</translation>
     </message>
     <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/table.h" line="+44"/>
         <source>table[%1]</source>
-        <translation type="vanished">массив[%1]</translation>
+        <translation>массив[%1]</translation>
     </message>
     <message>
         <location filename="../../qrtext/include/qrtext/core/parser/operators/simpleParser.h" line="+51"/>

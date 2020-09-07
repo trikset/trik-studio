@@ -29,37 +29,49 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+2"/>
         <source>A path to file where checker results will be written (JSON).</source>
-        <translation>Путь к файлу, куда будут записаны результаты проверки (JSON).</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Inputs for JavaScript solution.</source>
-        <translation>Входные данные для JavaScript файла.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Set to &quot;script&quot; for execution of js/py from the project or set to &quot;diagram&quot; for block diagram.</source>
-        <translation>Установите &quot;script&quot; для выполнения js/py скрипта из проекта или установите &quot;diagram&quot; для выполнения диаграммы блоков.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!).</source>
-        <translation>Ускорение, попробуйте от 5 до 20, но можно пробовать и 1000.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-10"/>
-        <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
-        <translation>Путь к файлу, куда будет выводиться траектори робота. Запись не будет осуществлена единомоментно, каждый узел траектории будет записан по факту его просчета проверяющей системой. Поэтому разумно использования FIFO-файлов в качестве значения этого параметра.</translation>
-    </message>
-    <message>
-        <location line="+13"/>
+        <location line="+3"/>
         <source>Close the window and exit if the diagram/script finishes without errors.</source>
-        <translation>Закрыть окно если диаграмма/скрипт были выполнены без ошибок.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Shows robot&apos;s console.</source>
-        <translation>Отображает консоль робота.</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
+        <translation type="vanished">Используйте эту опцию, установленную в &quot;minimal&quot; для того, чтобы запустить программу без X-сервера</translation>
+    </message>
+    <message>
+        <source>A path to file where checker results will be written (JSON)</source>
+        <translation type="vanished">Путь к файлу, куда будут записаны результаты проверки (JSON)</translation>
+    </message>
+    <message>
+        <location line="-15"/>
+        <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
+        <translation>Путь к файлу, куда будет выводиться траектори робота. Запись не будет осуществлена единомоментно, каждый узел траектории будет записан по факту его просчета проверяющей системой. Поэтому разумно использования FIFO-файлов в качестве значения этого параметра.</translation>
+    </message>
+    <message>
+        <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!)</source>
+        <translation type="vanished">Ускорение, попробуйте от 5 до 20, но можно и 1000 пробовать </translation>
     </message>
     <message>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, engine so FIFOs are recommended to be targets for this option.</source>

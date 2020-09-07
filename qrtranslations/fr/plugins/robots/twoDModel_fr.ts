@@ -353,7 +353,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+61"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+62"/>
         <source>Wall (W)</source>
         <translation>Mur (W)</translation>
     </message>
@@ -620,7 +620,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+83"/>
         <source>Camera folowing robot: %1</source>
         <translation>Suivre le robot : %1</translation>
     </message>
@@ -644,6 +644,21 @@
         <source>Marker thickness</source>
         <translation>Épaisseur du marqueur</translation>
     </message>
+    <message>
+        <location line="+19"/>
+        <source>Select image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Graphics (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Use custom robot image</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>twoDModel::view::SpeedPopup</name>
@@ -656,7 +671,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+720"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
         <source>Select image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -689,7 +704,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+312"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>

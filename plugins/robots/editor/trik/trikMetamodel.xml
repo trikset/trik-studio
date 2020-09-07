@@ -92,6 +92,78 @@
 					</generalizations>
 				</logic>
 			</node>
+                        <node displayedName="Forward" name="TrikForwardOneCell" description="Moves forward by the given number of cells.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/forwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="15" y="60" textBinded="CellsNumber" background="white" prefix="Move:" suffix="cells"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+					<properties>
+						<property displayedName="Number of cells" type="int" name="CellsNumber">
+							<default>1</default>
+						</property>
+					</properties>
+				</logic>
+			</node>
+                        <node displayedName="Backward" name="TrikBackwardOneCell" description="Moves backward by the given number of cells.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/backwardOneCellBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="15" y="60" textBinded="CellsNumber" background="white" prefix="Move:" suffix="cells"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+					<properties>
+						<property displayedName="Number of cells" type="int" name="CellsNumber">
+							<default>1</default>
+						</property>
+					</properties>
+				</logic>
+			</node>
+			<node displayedName="Turn right" name="TrikTurnRight" description="Rotates 90 degrees to the right.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/turnRightBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+			<node displayedName="Turn left" name="TrikTurnLeft" description="Rotates 90 degrees to the left.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/turnLeftBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 			<node displayedName="Motors Backward" name="TrikV6EnginesBackward" path="111, 224 : 0, 113 :  | 113, 0 : 0, 113 :  | 0, 113 : 287, 113 : " description="Enables motors on the given ports in reverse mode with the given power. Ports are specified in accordance with TRIK controller notations (for example M1, E2) and divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -1349,6 +1421,10 @@
 
 		<palette sorted="false">
 			<group name="Actions">
+				<element name="TrikForwardOneCell"/>
+				<element name="TrikBackwardOneCell"/>
+				<element name="TrikTurnRight"/>
+				<element name="TrikTurnLeft"/>
 				<!-- combine play tone in one block -->
 				<element name="TrikPlayTone"/>
 				<element name="TrikPlayToneHz"/>
