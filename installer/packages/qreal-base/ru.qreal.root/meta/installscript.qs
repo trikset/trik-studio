@@ -210,12 +210,15 @@ Component.prototype.targetChanged = function (text) {
 		widget.complete = false;
 		return;
 	}
+	widget.labelOverwrite.text = "<font color='green'> DO maintenanceName=" + installer.maintenanceName + "</font>";
 
 	if (installer.isInstaller() && widget != null) {
 		if (text != "") {
 			widget.complete = true;
 			installer.setValue("TargetDir", text);
+			widget.labelOverwrite.text = "<font color='green'> Search maintenanceName=" + installer.maintenanceName + "</font>";
 			if (installer.fileExists(Dir.toNativeSeparator(text + "/" + installer.maintenanceName))) {
+				widget.labelOverwrite.text = "<font color='green'> FOUND maintenanceName=" + installer.maintenanceName + "</font>";
 				var warning = "<font color='green'>" + overwrite[langIndex()] + "</font>";
 				widget.labelOverwrite.text = warning;
 				installer.shouldDeinstallPrevious = true;
