@@ -62,7 +62,7 @@ function Component()
 	installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
 	installer.linkExtension = installer.value("os") === "win" ? ".lnk" : "";
 	installer.execExtension = installer.value("os") === "win" ? ".vbs" : installer.value("os") === "mac" ? ".app" : "";
-	installer.maintenanceName = "maintenance" + installer.value("os") === "win" ? ".exe" : installer.execExtension;
+	installer.maintenanceName = "maintenance" + (installer.value("os") === "win" ? ".exe" : installer.execExtension);
 	installer.shouldDeinstallPrevious = false;
 
 	component.loaded.connect(this, Component.prototype.installerLoaded);
