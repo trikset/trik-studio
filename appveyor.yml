@@ -156,7 +156,7 @@ test_script:
   - cd %BUILD_DIR%\bin\%CONFIGURATION%
   - dir
   - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
-  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
+#  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
 
 after_test:
 # zip binaries
