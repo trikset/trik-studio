@@ -44,6 +44,7 @@ void TrikMetamodelPlugin::initMultigraph()
 {
 	mMetamodel->addNode(new TrikAnalogSensorBlock(*mMetamodel));
 	mMetamodel->addNode(new TrikAngularServo(*mMetamodel));
+	mMetamodel->addNode(new TrikBackwardOneCell(*mMetamodel));
 	mMetamodel->addNode(new TrikCalibrateGyroscope(*mMetamodel));
 	mMetamodel->addNode(new TrikDetect(*mMetamodel));
 	mMetamodel->addNode(new TrikDetectorToVariable(*mMetamodel));
@@ -53,6 +54,7 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new TrikDrawLine(*mMetamodel));
 	mMetamodel->addNode(new TrikDrawPixel(*mMetamodel));
 	mMetamodel->addNode(new TrikDrawRect(*mMetamodel));
+	mMetamodel->addNode(new TrikForwardOneCell(*mMetamodel));
 	mMetamodel->addNode(new TrikInitCamera(*mMetamodel));
 	mMetamodel->addNode(new TrikInitVideoStreaming(*mMetamodel));
 	mMetamodel->addNode(new TrikLed(*mMetamodel));
@@ -71,6 +73,8 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new TrikStopCamera(*mMetamodel));
 	mMetamodel->addNode(new TrikStopVideoStreaming(*mMetamodel));
 	mMetamodel->addNode(new TrikSystem(*mMetamodel));
+	mMetamodel->addNode(new TrikTurnLeft(*mMetamodel));
+	mMetamodel->addNode(new TrikTurnRight(*mMetamodel));
 	mMetamodel->addNode(new TrikV62AngularServo(*mMetamodel));
 	mMetamodel->addNode(new TrikV62ClearEncoder(*mMetamodel));
 	mMetamodel->addNode(new TrikV62WaitForEncoder(*mMetamodel));

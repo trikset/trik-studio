@@ -274,7 +274,7 @@ void EdgeType::generateCode(OutFile &out)
 {
 	const QString className = NameNormalizer::normalize(qualifiedName());
 
-	out() << "\tclass " << className << " : public qReal::EdgeElementType \n\t{\n"
+	out() << "\tclass " << className << " : public qReal::EdgeElementType\n\t{\n"
 	<< "\tpublic:\n"
 
 	<< "\t\texplicit " << className << "(qReal::Metamodel &metamodel)\n"

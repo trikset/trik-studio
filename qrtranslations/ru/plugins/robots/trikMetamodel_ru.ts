@@ -1233,7 +1233,7 @@
         <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+164"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>

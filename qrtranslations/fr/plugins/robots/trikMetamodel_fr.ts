@@ -1201,7 +1201,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+164"/>
         <source>RobotsDiagram</source>
         <translation type="unfinished"></translation>
     </message>
