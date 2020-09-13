@@ -13,3 +13,6 @@
 [submodule "thirdparty/qslog/qslog"]
 	path = thirdparty/qslog/qslog
 	url = https://bitbucket.org/codeimproved/qslog.git
+[submodule "plugins/robots/thirdparty/trikRuntime/trikRuntime"]
+	path = plugins/robots/thirdparty/trikRuntime/trikRuntime
+	url = https://github.com/trikset/trikRuntime
