@@ -29,7 +29,7 @@ const Id graphicalElement("editor", "diagram", "element", "graphicalId");
 
 void GraphicalPartModelTest::SetUp()
 {
-	mRepoApi = new qrRepo::RepoApi("qrrepo_test.qrs");
+	mRepoApi = new qrRepo::RepoApi("qrrepo_test.tsj");
 	mRepoApi->addChild(Id::rootId(), element);
 	mRepoApi->addChild(Id::rootId(), graphicalElement, element);
 
