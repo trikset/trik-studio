@@ -173,13 +173,13 @@ trikControl::MotorInterface *TrikBrick::motor(const QString &port)
 {
 	using namespace kitBase::robotModel;
 	if (!mMotors.contains(port)) {
-		robotParts::Motor * mot =
+		robotParts::Motor * motor =
 				RobotModelUtils::findDevice<robotParts::Motor>(*mTwoDRobotModel, port);
-		if (mot == nullptr) {
+		if (motor == nullptr) {
 			emit error(tr("No configured motor on port: %1").arg(port));
 			return nullptr;
 		}
-		mMotors[port].reset(new TrikMotorEmu(mot));
+		mMotors[port].reset(new TrikMotorEmu(motor));
 	}
 	return mMotors[port].get();
 }
