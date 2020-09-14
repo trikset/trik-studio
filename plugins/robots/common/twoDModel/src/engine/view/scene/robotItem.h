@@ -114,7 +114,7 @@ private:
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
 	QSharedPointer<model::Image> mCustomImage;
-	bool mIsCustomImage{};
+	bool mIsCustomImage {false};
 	// Takes ownership
 	BeepItem *mBeepItem;
 

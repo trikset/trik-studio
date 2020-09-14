@@ -30,6 +30,7 @@ const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
 	: mImage(robotImageFileName, false)
+	, mCustomImage(new Image(robotImageFileName, true))
 	, mBeepItem(new BeepItem())
 	, mRobotModel(robotModel)
 {
@@ -85,7 +86,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
 	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0).toRect();
-	if (mCustomImage) {
+	if (mIsCustomImage) {
 		mCustomImage->draw(*painter, rect);
 	} else {
 		mImage.draw(*painter, rect);
