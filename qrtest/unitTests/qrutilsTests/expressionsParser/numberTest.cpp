@@ -38,8 +38,8 @@ TEST(NumberTest, ariphmeticsIntTest)
 	n1 /= n2;
 	EXPECT_EQ(n1.value().toInt(), 0);
 
-	n1 = -n2;
-	EXPECT_EQ(n1.value().toInt(), -3);
+	n2.neg();
+	EXPECT_EQ(n2.value().toInt(), -3);
 }
 
 TEST(NumberTest, ariphmeticsDoubleTest)
@@ -59,8 +59,8 @@ TEST(NumberTest, ariphmeticsDoubleTest)
 	n1 /= n2;
 	EXPECT_EQ(n1.value().toDouble(), 2.3);
 
-	n2 = -n1;
-	EXPECT_EQ(n2.value().toDouble(), -2.3);
+	n1.neg();
+	EXPECT_EQ(n1.value().toDouble(), -2.3);
 }
 
 TEST(NumberTest, ariphmeticsBothTypesTest)

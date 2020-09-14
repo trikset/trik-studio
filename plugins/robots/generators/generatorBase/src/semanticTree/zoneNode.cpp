@@ -40,7 +40,7 @@ void ZoneNode::appendChild(SemanticNode *node)
 	node->setParentNode(this);
 }
 
-void ZoneNode::appendChildren(QLinkedList<SemanticNode *> const &nodes)
+void ZoneNode::appendChildren(std::vector<SemanticNode *> const &nodes)
 {
 	for (SemanticNode * const node : nodes) {
 		appendChild(node);
@@ -49,7 +49,7 @@ void ZoneNode::appendChildren(QLinkedList<SemanticNode *> const &nodes)
 
 void ZoneNode::insertAfter(SemanticNode *after, SemanticNode *node)
 {
-	mChildren.insert(qFind(mChildren.begin(), mChildren.end(), after) + 1, node);
+	mChildren.insert(std::find(mChildren.begin(), mChildren.end(), after) + 1, node);
 	node->setParentNode(this);
 }
 
@@ -67,9 +67,9 @@ SemanticNode *ZoneNode::removeLast()
 	return result;
 }
 
-QLinkedList<SemanticNode *> ZoneNode::removeStartingFrom(SemanticNode *node)
+std::vector<SemanticNode *> ZoneNode::removeStartingFrom(SemanticNode *node)
 {
-	QLinkedList<SemanticNode *> result;
+	std::vector<SemanticNode *> result;
 	bool foundNode = node == nullptr;
 
 	for (SemanticNode * const current : mChildren) {
@@ -80,7 +80,7 @@ QLinkedList<SemanticNode *> ZoneNode::removeStartingFrom(SemanticNode *node)
 		if (foundNode) {
 			current->setParentNode(nullptr);
 			mChildren.removeOne(current);
-			result << current;
+			result.push_back(current);
 		}
 	}
 

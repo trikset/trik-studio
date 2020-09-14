@@ -26,13 +26,13 @@ class LoadWorldCommand : public qReal::commands::AbstractCommand
 {
 public:
 	/// Creates instance of command using XML \a data.
-	LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument data);
+	LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data);
 
 private:
 	bool execute() override;
 	bool restoreState() override;
 
-	void loadWorld(QDomDocument world);
+	void loadWorld(const QDomDocument &world);
 
 	view::TwoDModelWidget &mWidget;
 	const QDomDocument mNewWorld;

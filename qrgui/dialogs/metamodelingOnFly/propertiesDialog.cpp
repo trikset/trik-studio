@@ -73,7 +73,7 @@ void PropertiesDialog::updatePropertiesNamesList()
 	disableParentProperties(propertiesDisplayedNames);
 }
 
-void PropertiesDialog::disableParentProperties(const QStringList propertiesDisplayedNames)
+void PropertiesDialog::disableParentProperties(const QStringList &propertiesDisplayedNames)
 {
 	const int size = mPropertiesNames.length();
 

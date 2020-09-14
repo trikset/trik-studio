@@ -59,7 +59,7 @@ public:
 
 	/// Prints the given text on the canvas in the given coordinates.
 	/// The text is replaced with new one when coordinates collision happens.
-	virtual void printText(int x, int y, const QString &text);
+	virtual void printText(int x, int y, const QString &text, int fontSize = -1);
 
 	/// Draw point on the canvas without redrawing it.
 	/// @param x - x coordinate.

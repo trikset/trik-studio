@@ -53,7 +53,9 @@ void TcpRobotCommunicatorWorker::init()
 
 void TcpRobotCommunicatorWorker::deinit()
 {
-	disconnectConnection();
+	mTelemetryConnection.reset();
+	mControlConnection.reset();
+	mVersionTimer.reset();
 }
 
 void TcpRobotCommunicatorWorker::uploadProgram(const QString &programName, const QString &programContents)
@@ -180,7 +182,7 @@ void TcpRobotCommunicatorWorker::processTelemetryMessage(const QString &message)
 		QString data(message);
 		data.remove(0, allDataMarker.length());
 		QStringList values = data.split(';');
-		for (QString value : values) {
+		for (auto const &value : values) {
 			handleValue(value);
 		}
 	} else if (message == "keepalive") {
@@ -192,7 +194,7 @@ void TcpRobotCommunicatorWorker::processTelemetryMessage(const QString &message)
 
 void TcpRobotCommunicatorWorker::handleValue(const QString &data)
 {
-	QString temp(data);
+	const auto &temp = data;
 	QStringList portAndValue = temp.split(":");
 	if (portAndValue[1].startsWith('(')) {
 		portAndValue[1].remove(0, 1);

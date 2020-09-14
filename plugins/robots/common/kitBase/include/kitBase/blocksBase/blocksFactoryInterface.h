@@ -30,7 +30,10 @@ namespace blocksBase {
 /// An inteface of the factory that produces blocks for interpreter.
 class BlocksFactoryInterface
 {
+	Q_DISABLE_COPY(BlocksFactoryInterface)
 public:
+	BlocksFactoryInterface() = default;
+
 	virtual ~BlocksFactoryInterface() {}
 
 	/// Creates a new block by given id.

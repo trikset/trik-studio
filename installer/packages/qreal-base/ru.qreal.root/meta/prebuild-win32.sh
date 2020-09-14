@@ -12,7 +12,7 @@ cp    $BIN_DIR/qrrepo.dll                                           $PWD/../data
 cp    $BIN_DIR/qrutils.dll                                          $PWD/../data
 cp    $BIN_DIR/qrtext.dll                                           $PWD/../data
 cp    $BIN_DIR/qscintilla2.dll                                      $PWD/../data
-cp    $BIN_DIR/qslog.dll                                            $PWD/../data
+cp    $BIN_DIR/trikQsLog.dll                                            $PWD/../data
 cp    $BIN_DIR/qrgui-brand-manager.dll                              $PWD/../data
 cp    $BIN_DIR/qrgui-controller.dll                                 $PWD/../data
 cp    $BIN_DIR/qrgui-dialogs.dll                                    $PWD/../data

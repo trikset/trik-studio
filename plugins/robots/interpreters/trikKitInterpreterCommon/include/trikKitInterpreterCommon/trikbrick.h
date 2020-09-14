@@ -28,6 +28,7 @@
 #include "trikEmulation/trikmotoremu.h"
 #include "trikEmulation/trikkeysinterfacestub.h"
 #include "trikEmulation/triklinesensoradapter.h"
+#include "trikEmulation/trikColorSensorAdapter.h"
 #include "trikEmulation/trikledadapter.h"
 #include "trikEmulation/trikaccelerometeradapter.h"
 #include "trikEmulation/trikGyroscopeAdapter.h" /// @todo: replace with forward refs
@@ -122,10 +123,11 @@ private:
 
 	QScopedPointer<utils::AbstractTimer> mSensorUpdater;
 
-	QHash<QString, TrikMotorEmu *> mMotors;
-	QHash<QString, TrikSensorEmu *> mSensors;
-	QHash<QString, TrikEncoderAdapter *> mEncoders;
-	QHash<QString, TrikLineSensorAdapter *> mLineSensors;
+	QHash<QString, QSharedPointer<TrikMotorEmu>> mMotors;
+	QHash<QString, QSharedPointer<TrikSensorEmu>> mSensors;
+	QHash<QString, QSharedPointer<TrikEncoderAdapter>> mEncoders;
+	QHash<QString, QSharedPointer<TrikLineSensorAdapter>> mLineSensors;
+	QHash<QString, QSharedPointer<TrikColorSensorAdapter>> mColorSensors;
 	QScopedPointer<TrikLedAdapter> mLed;
 	QScopedPointer<TrikAccelerometerAdapter> mAccelerometer;
 	QScopedPointer<TrikGyroscopeAdapter> mGyroscope;
@@ -136,7 +138,7 @@ private:
 	QDir mCurrentDir;
 	bool mIsExcerciseMode = false;
 	QStringList mInputs;
-	QVector<utils::AbstractTimer *> mTimers;
+	QVector<QSharedPointer<utils::AbstractTimer>> mTimers;
 };
 
 }

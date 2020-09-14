@@ -50,7 +50,7 @@ class StructuralControlFlowGenerator;
 class ROBOTS_GENERATOR_EXPORT MasterGeneratorBase : public QObject, public TemplateParametrizedEntity
 {
 	Q_OBJECT
-
+	Q_DISABLE_COPY(MasterGeneratorBase)
 public:
 	MasterGeneratorBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter
@@ -58,6 +58,8 @@ public:
 			, qrtext::LanguageToolboxInterface &textLanguage
 			, const utils::ParserErrorReporter &parserErrorReporter
 			, const qReal::Id &diagramId);
+
+	~MasterGeneratorBase();
 
 	void setProjectDir(const QFileInfo &fileInfo);
 
@@ -104,13 +106,13 @@ protected:
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	qrtext::LanguageToolboxInterface &mTextLanguage;
 	qReal::Id mDiagram;
-	GeneratorCustomizer *mCustomizer;
-	PrimaryControlFlowValidator *mValidator;
-	GotoControlFlowGenerator *mGotoControlFlowGenerator;  // Takes ownership
-	StructuralControlFlowGenerator *mStructuralControlFlowGenerator; // Takes ownership
+	QScopedPointer<GeneratorCustomizer> mCustomizer;
+	PrimaryControlFlowValidator *mValidator {};
+	QScopedPointer<GotoControlFlowGenerator> mGotoControlFlowGenerator;
+	QScopedPointer<StructuralControlFlowGenerator> mStructuralControlFlowGenerator;
 	QString mProjectName;
 	QString mProjectDir;
-	int mCurInitialNodeNumber;
+	int mCurInitialNodeNumber {};
 	const utils::ParserErrorReporter &mParserErrorReporter;
 };
 

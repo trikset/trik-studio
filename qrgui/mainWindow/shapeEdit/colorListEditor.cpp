@@ -24,7 +24,7 @@ QColor ColorListEditor::color() const
 	return itemData(currentIndex(), Qt::DecorationRole).value<QColor>();
 }
 
-void ColorListEditor::setColor(QColor color)
+void ColorListEditor::setColor(const QColor &color)
 {
 	setCurrentIndex(findData(color, int(Qt::DecorationRole)));
 }

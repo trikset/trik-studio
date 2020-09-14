@@ -75,23 +75,23 @@ private:
 	void initHotKeyActions();
 
 	/// Action that launches code generator
-	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mGenerateCodeAction {};  // Doesn't have ownership; may be disposed by GUI.
 
 	/// Action that uploads nxtOSEK on a robot
-	QAction *mFlashRobotAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mFlashRobotAction {};  // Doesn't have ownership; may be disposed by GUI.
 
 	/// Action that compiles and uploads program on a robot
-	QAction *mUploadProgramAction;  // Doesn't have ownership; may be disposed by GUI.
+	QAction *mUploadProgramAction {};  // Doesn't have ownership; may be disposed by GUI.
 
 	QList<qReal::HotKeyActionInfo> mHotKeyActionInfos;
 
 	/// When true, nxt-tools are found by QReal and flashing and uploading is possible
-	bool mNxtToolsPresent;
+	bool mNxtToolsPresent { false };
 	/// Flasher object
-	NxtFlashTool *mFlashTool = nullptr;  // Has ownership
+	QScopedPointer<NxtFlashTool> mFlashTool;
 
 	NxtOsekCMasterGenerator *mMasterGenerator;
-	communication::UsbRobotCommunicationThread &mCommunicator;
+	const QSharedPointer<communication::UsbRobotCommunicationThread> mCommunicator;
 };
 
 }

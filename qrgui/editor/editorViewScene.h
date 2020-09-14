@@ -255,7 +255,7 @@ private:
 	Id mLastCreatedFromLinker;
 
 	/// Does not have ownership.
-	qReal::commands::CreateElementsCommand *mLastCreatedFromLinkerCommand;
+	qReal::commands::CreateElementsCommand *mLastCreatedFromLinkerCommand {};
 
 	models::Clipboard mClipboardHandler;
 
@@ -286,12 +286,12 @@ private:
 	QPointF mOffset;
 
 	/** @brief Is "true" when we just select items on scene, and "false" when we drag selected items */
-	bool mShouldReparentItems;
+	bool mShouldReparentItems {};
 
 	QGraphicsRectItem *mTopLeftCorner;
 	QGraphicsRectItem *mBottomRightCorner;
 
-	bool mMouseGesturesEnabled;
+	bool mMouseGesturesEnabled {};
 
 	QMenu mContextMenu;
 
@@ -300,8 +300,8 @@ private:
 
 	QList<NodeElement *> mLastSearchElements;
 	QRegExp mSearchText;
-	bool mLastSearchOccur = false;
-	int mCurrentSearchElement;
+	bool mLastSearchOccur {};
+	int mCurrentSearchElement {};
 };
 
 }

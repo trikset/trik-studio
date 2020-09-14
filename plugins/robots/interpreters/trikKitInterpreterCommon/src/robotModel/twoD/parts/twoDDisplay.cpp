@@ -15,15 +15,17 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h"
 
 #include <QtCore/QJsonArray>
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 #include <utils/canvas/textObject.h>
+//#include <trikControl/utilities.h>
 
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
-const int realWidth = 238;
-const int realHeight = 278;
+const int realWidth = 240;
+const int realHeight = 280;
+const int topMenuHeight = 45;
 const int textSize = 20;
 
 Display::Display(const DeviceInfo &info
@@ -31,7 +33,6 @@ Display::Display(const DeviceInfo &info
 		, twoDModel::engine::TwoDModelEngineInterface &engine)
 	: robotModel::parts::TrikDisplay(info, port)
 	, mEngine(engine)
-	, mBackground(Qt::transparent)
 {
 	mEngine.display()->setPainter(this);
 
@@ -116,14 +117,18 @@ void Display::setBackground(const QColor &color)
 	emit backgroundChanged(color);
 }
 
-void Display::printText(int x, int y, const QString &text)
+void Display::printText(int x, int y, const QString &text, int fontSize)
 {
+	if (fontSize <= 0) {
+		fontSize = textSize;
+	}
 	const QPair<int, int> coords(x, y);
 	if (mLabelsMap.contains(coords)) {
 		mLabelsMap[coords]->setText(text);
+		mLabelsMap[coords]->setFontSize(fontSize);
 	} else {
 		utils::TextObject * const textObject = new utils::TextObject(x, y, text
-			, mCurrentPenColor, mCurrentPenWidth);
+			, mCurrentPenColor, mCurrentPenWidth, fontSize);
 		mObjects << textObject;
 		mLabelsMap[coords] = textObject;
 		mLabels << textObject;
@@ -160,6 +165,7 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	Q_UNUSED(outputRect)
 
 	const QRect displayRect(0, 0, mEngine.display()->displayWidth(), mEngine.display()->displayHeight());
+	const int scaledTopMenuHeight = topMenuHeight * (displayRect.height()) / (realHeight * 1.0);
 
 	painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 	painter->save();
@@ -167,15 +173,20 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->setBrush(mBackground);
 	painter->drawRect(displayRect);
 	painter->drawImage(displayRect, mCurrentImage);
+	if (mBackground != Qt::transparent && mCurrentImage.isNull()) {
+		painter->setBrush(QBrush(Qt::darkRed, Qt::BDiagPattern));
+		painter->drawRect(0, 0, mEngine.display()->displayWidth(), scaledTopMenuHeight);
+	}
 	painter->restore();
 
-	painter->save();	
+	painter->save();
 	QFont font;
 	font.setPixelSize(textSize);
 	painter->setFont(font);
 	painter->setPen(Qt::black);
+	painter->translate(0, scaledTopMenuHeight);
 	const qreal xScale = displayRect.width() / (realWidth * 1.0);
-	const qreal yScale = displayRect.height() / (realHeight * 1.0);
+	const qreal yScale = (displayRect.height() - scaledTopMenuHeight) / (realHeight * 1.0);
 	painter->scale(xScale, yScale);
 	Canvas::paint(painter, {0, 0, realWidth, realHeight});
 	painter->restore();
@@ -197,40 +208,10 @@ void Display::redraw()
 
 void Display::show(const QVector<int32_t> &array, int width, int height, const QString &format)
 {
-	auto fmt = QImage::Format_RGB32;
-	auto *rawData = static_cast<const uchar *>(static_cast<const void *>(array.data()));
-
-	// Reserve maximum possible size to avoid reallocation
-	QVector<uchar> formattedData( (width + 3) * (height + 3) * 3 + 3);
-
-	// QImage requires 32-bit aligned scan lines
-	// Helper function to convert data
-	auto copyAligned = [&](int perLine){
-		auto scanLineSize = static_cast<int>((static_cast<unsigned>(perLine + 3)) & 0xFFFFFFFC);
-		formattedData.resize(scanLineSize * height);
-		auto dst = formattedData.begin();
-		for (auto src = array.begin(); src < array.end(); src += perLine) {
-			dst = std::copy(src, src + perLine, dst);
-			dst += scanLineSize - perLine;
-		}
-		rawData = formattedData.constData();
-	};
-
-	if (!format.compare("rgb32", Qt::CaseInsensitive)) {
-		/* do nothing */
-	} else if (!format.compare("rgb888", Qt::CaseInsensitive)) {
-		fmt = QImage::Format_RGB888;
-		copyAligned(3 * width);
-	} else if (format == "grayscale8") {
-		fmt = QImage::Format_Grayscale8;
-		copyAligned(width);
-	} else {
-		QLOG_ERROR() << "Unsupported format" << format;
-		return;
-	}
-
-	// QImage doesn't create copy of a buffer and requires clean up function
-	// Simple workaround -- create deep-copy using "copy" function
-	mCurrentImage = QImage(rawData, width, height, fmt).copy();
+	Q_UNIMPLEMENTED();
+	Q_UNUSED(array)
+	Q_UNUSED(width)
+	Q_UNUSED(height)
+	Q_UNUSED(format)
 	mEngine.display()->repaintDisplay();
 }

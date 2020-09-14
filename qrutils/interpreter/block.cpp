@@ -14,7 +14,7 @@
 
 #include <qrutils/interpreter/block.h>
 
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 #include <qrtext/languageToolboxInterface.h>
 #include <qrgui/plugins/pluginManager/editorManagerInterface.h>
 

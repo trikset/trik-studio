@@ -40,8 +40,10 @@ enum class Arity
 template<typename TokenType>
 class PrecedenceTable
 {
+	Q_DISABLE_COPY(PrecedenceTable)
 public:
-	virtual ~PrecedenceTable() {}
+	PrecedenceTable() = default;
+	virtual ~PrecedenceTable() = default;
 
 	/// Returns precedence of an operator denoted by its token type and arity. Bigger precedence numbers correspond
 	/// to higher precedence.

@@ -18,6 +18,8 @@
 #include <QtCore/QString>
 #include <QtCore/QRect>
 
+#include <qrutils/imagesCache.h>
+
 class QDomElement;
 class QSvgRenderer;
 class QImage;
@@ -30,14 +32,14 @@ namespace model {
 /// image bytes.
 class Image
 {
+	Q_DISABLE_COPY(Image)
 public:
-	Image();
+	explicit Image(const QString &id);
 	Image(const QString &path, bool memorize);
-	Image(const Image &other);
 	~Image();
 
 	/// Reads image from XML-representation.
-	static Image *deserialize(const QDomElement &element);
+	static QSharedPointer<Image> deserialize(const QDomElement &element);
 
 	/// Returns true if image was successfully loaded.
 	bool isValid() const;
@@ -57,29 +59,26 @@ public:
 	/// Returns true if this item is embedded into save.
 	QString path() const;
 
-	/// Sets a path to displayed image.
-	void setPath(const QString &path);
+	/// Loads from file.
+	void loadFrom(const QString &path);
 
 	/// Draws image with \a painter inside the \a rect considering \a zoom.
-	void draw(QPainter &painter, const QRectF &rect, qreal zoom = 1.0);
+	void draw(QPainter &painter, const QRect &rect, qreal zoom = 1.0) const;
 
 	/// Returns imageId for this image.
 	QString imageId() const;
 
-	bool operator==(const Image &other) const;
-	bool operator!=(const Image &other) const;
-	Image &operator=(const Image &right);
-
 private:
 	QSize preferedSvgSize() const;
 
-	bool mExternal;
-	bool mIsSvg;
+	bool mExternal { true };
+	bool mIsSvg { false };
 	QString mPath;
 	QString mImageId;
 	QScopedPointer<QImage> mImage;
 	QByteArray mSvgBytes;
 	QScopedPointer<QSvgRenderer> mSvgRenderer;
+	const QSharedPointer<utils::ImagesCache> mImagesCache;
 };
 
 }

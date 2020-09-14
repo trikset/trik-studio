@@ -53,7 +53,7 @@ private:
 	int mDragArea;
 	QString mFont;
 
-	bool mFontButtonWasPressed;
-	bool mWasChecked;
+	bool mFontButtonWasPressed {};
+	bool mWasChecked {};
 	QString mOldFont;
 };

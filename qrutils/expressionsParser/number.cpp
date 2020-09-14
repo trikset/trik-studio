@@ -105,8 +105,9 @@ void Number::operator/=(const Number &div)
 	}
 }
 
-Number Number::operator-()
+void Number::neg()
 {
+
 	switch (mType) {
 		case Number::intType:
 			mValue = -mValue.toInt();
@@ -115,9 +116,8 @@ Number Number::operator-()
 			mValue = -mValue.toDouble();
 			break;
 	}
-
-	return *this;
 }
+
 
 bool Number::operator<(const Number &arg)
 {

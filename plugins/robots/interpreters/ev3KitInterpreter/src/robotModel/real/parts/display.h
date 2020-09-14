@@ -37,7 +37,7 @@ public:
 
 	void drawCircle(int x, int y, int radius, bool filled) override;
 
-	void printText(int x, int y, const QString &text) override;
+	void printText(int x, int y, const QString &text, int fontSize = -1) override;
 	void clearScreen() override;
 	void redraw() override;
 

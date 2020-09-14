@@ -35,6 +35,8 @@ ToolPluginManager::ToolPluginManager()
 
 ToolPluginManager::~ToolPluginManager()
 {
+	release();
+	qDeleteAll(mPlugins);
 }
 
 void ToolPluginManager::init(const PluginConfigurator &configurator)
@@ -44,6 +46,13 @@ void ToolPluginManager::init(const PluginConfigurator &configurator)
 
 	for (ToolPluginInterface * const toolPlugin : mPlugins) {
 		toolPlugin->init(configurator);
+	}
+}
+
+void ToolPluginManager::release()
+{
+	for (auto *toolPlugin : mPlugins) {
+		toolPlugin->release();
 	}
 }
 

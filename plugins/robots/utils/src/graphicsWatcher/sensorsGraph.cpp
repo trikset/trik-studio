@@ -26,17 +26,15 @@ struct SensorsGraph::TrackObject {
 	QString inParserName;
 	QString displayName;
 
-	TrackObject(const int &id, const QString &internalName, const QString &externalName)
+	TrackObject(int id, const QString &internalName, const QString &externalName)
 		: index(id)
 		, inParserName(internalName)
 		, displayName(externalName)
 	{
 	}
 
-	TrackObject(const int &id)
+	explicit TrackObject(int id)
 		: index(id)
-		, inParserName("")
-		, displayName("")
 	{
 	}
 
@@ -60,21 +58,15 @@ SensorsGraph::SensorsGraph(const qrtext::DebuggerInterface &parser, QWidget *par
 	mPlotFrame->centerOn(mPlotFrame->sceneRect().center());
 }
 
-SensorsGraph::~SensorsGraph()
-{
-	delete mPlotFrame;
-	delete mUi;
-	delete mUpdateTimer;
-}
+SensorsGraph::~SensorsGraph() = default;
 
 void SensorsGraph::setTimeline(utils::TimelineInterface &timeline)
 {
-	delete mUpdateTimer;
-	mUpdateTimer = timeline.produceTimer();
+	mUpdateTimer.reset(timeline.produceTimer());
 	mUpdateTimer->setInterval(mUpdateInterval);
 	mUpdateTimer->setRepeatable(true);
 	mPlotFrame->setTimeline(timeline);
-	connect(mUpdateTimer, &AbstractTimer::timeout, this, &SensorsGraph::updateValues);
+	connect(&*mUpdateTimer, &AbstractTimer::timeout, this, &SensorsGraph::updateValues);
 }
 
 void SensorsGraph::setStartStopButtonsVisible(bool visible)
@@ -130,12 +122,12 @@ void SensorsGraph::initGui()
 	mToolLayout.addWidget(&mResetButton, 0);
 	mToolLayout.addWidget(&mSaveButton, 0);
 
-	mPlotFrame = new SensorViewer(this);
+	mPlotFrame.reset(new SensorViewer(this));
 
-	mUi->mainLayout->addWidget(mPlotFrame, 0, 0);
+	mUi->mainLayout->addWidget(&*mPlotFrame, 0, 0);
 	mUi->mainLayout->addLayout(&mToolLayout, 0, 1);
 	mUi->mainLayout->addWidget(&mSlotComboBox, 1, 0);
-	mUi->mainLayout->setAlignment(mPlotFrame, Qt::AlignTop);
+	mUi->mainLayout->setAlignment(&*mPlotFrame, Qt::AlignTop);
 	mUi->mainLayout->setAlignment(&mSlotComboBox, Qt::AlignTop);
 	mPlotFrame->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
@@ -173,13 +165,15 @@ void SensorsGraph::makeConnections()
 {
 	connect(&mStartButton, &QAbstractButton::clicked, this, &SensorsGraph::startJob);
 	connect(&mStopButton, &QAbstractButton::clicked, this, &SensorsGraph::stopJob);
-	connect(&mSaveButton, &QAbstractButton::clicked, mPlotFrame, &SensorViewer::exportHistory);
-	connect(&mResetButton, &QAbstractButton::clicked, mPlotFrame, &SensorViewer::clear);
-	connect(&mZoomInButton, &QAbstractButton::clicked, mPlotFrame, &SensorViewer::zoomIn);
-	connect(&mZoomOutButton, &QAbstractButton::clicked, mPlotFrame, &SensorViewer::zoomOut);
+	connect(&mSaveButton, &QAbstractButton::clicked, &*mPlotFrame, &SensorViewer::exportHistory);
+	connect(&mResetButton, &QAbstractButton::clicked, &*mPlotFrame, &SensorViewer::clear);
+	connect(&mZoomInButton, &QAbstractButton::clicked, &*mPlotFrame, &SensorViewer::zoomIn);
+	connect(&mZoomOutButton, &QAbstractButton::clicked, &*mPlotFrame, &SensorViewer::zoomOut);
 
-	connect(&mSlotComboBox, SIGNAL(currentIndexChanged(int)), mPlotFrame, SLOT(onSensorChange()));
-	connect(&mSlotComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentSensor(int)));
+	connect(&mSlotComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
+			, &*mPlotFrame, &SensorViewer::onSensorChange);
+	connect(&mSlotComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
+			, this, &SensorsGraph::setCurrentSensor);
 }
 
 void SensorsGraph::watchListChanged()

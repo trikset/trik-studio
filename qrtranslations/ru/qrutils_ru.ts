@@ -27,7 +27,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+647"/>
+        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+642"/>
         <source>Unexpected end of stream at %1. Mb you forget &apos;;&apos;?</source>
         <translation>Неожиданный конец выражения в позиции %1. Может быть, Вы забыли &apos;;&apos;?</translation>
     </message>
@@ -92,7 +92,7 @@
         <translation>Целичисленное деление на ноль</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+573"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+570"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>

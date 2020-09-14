@@ -24,6 +24,7 @@ namespace generatorBase {
 /// This class can be inherited by those entities who need to use generator templates
 class ROBOTS_GENERATOR_EXPORT TemplateParametrizedEntity
 {
+	Q_DISABLE_COPY(TemplateParametrizedEntity)
 public:
 	TemplateParametrizedEntity();
 

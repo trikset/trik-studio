@@ -24,28 +24,12 @@
 using namespace qReal;
 
 NullMainWindow::NullMainWindow(ErrorReporterInterface &errorReporter
-		, SystemEvents &events)
-	: mErrorReporter(errorReporter)
-	, mEvents(events)
-	, mGraphicalModel(nullptr)
-	, mWindowWidget(new QWidget)
-	, mLogicalModelDock(new QDockWidget(mWindowWidget))
-	, mGraphicalModelDock(new QDockWidget(mWindowWidget))
-	, mPropertyEditorDock(new QDockWidget(mWindowWidget))
-	, mErrorReporterDock(new QDockWidget(mWindowWidget))
-	, mPaletteDock(new QDockWidget(mWindowWidget))
-	, mMinimapDock(new QDockWidget(mWindowWidget))
-	, mStatusBar(new QStatusBar(mWindowWidget))
-{
-}
-
-NullMainWindow::NullMainWindow(ErrorReporterInterface &errorReporter
 		, SystemEvents &events
-		, const ProjectManagementInterface &projectManager
-		, const GraphicalModelAssistInterface &graphicalModel)
+		, const ProjectManagementInterface *projectManager
+		, const GraphicalModelAssistInterface *graphicalModel)
 	: mErrorReporter(errorReporter)
 	, mEvents(events)
-	, mGraphicalModel(&graphicalModel)
+	, mGraphicalModel(graphicalModel)
 	, mWindowWidget(new QWidget)
 	, mLogicalModelDock(new QDockWidget(mWindowWidget))
 	, mGraphicalModelDock(new QDockWidget(mWindowWidget))
@@ -55,7 +39,9 @@ NullMainWindow::NullMainWindow(ErrorReporterInterface &errorReporter
 	, mMinimapDock(new QDockWidget(mWindowWidget))
 	, mStatusBar(new QStatusBar(mWindowWidget))
 {
-	connect(&projectManager, &ProjectManagementInterface::afterOpen, this, &NullMainWindow::openFirstDiagram);
+	if (projectManager) {
+		connect(projectManager, &ProjectManagementInterface::afterOpen, this, &NullMainWindow::openFirstDiagram);
+	}
 }
 
 NullMainWindow::~NullMainWindow()
@@ -98,6 +84,11 @@ ErrorReporterInterface *NullMainWindow::errorReporter()
 Id NullMainWindow::activeDiagram() const
 {
 	return mActiveId;
+}
+
+IdList NullMainWindow::openedDiagrams() const
+{
+	return {mActiveId};
 }
 
 void NullMainWindow::openSettingsDialog(const QString &tab)

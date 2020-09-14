@@ -139,6 +139,10 @@ public:
 
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
+	Qt::CursorShape getResizeCursor();
+
+	QPen getStrokePen();
+
 signals:
 	/// Emitted when QGraphicsItem has repositioned.
 	void positionChanged(const QPointF &pos);
@@ -171,6 +175,8 @@ signals:
 	void mouseInteractionStopped();
 
 protected:
+	explicit AbstractItem(Qt::CursorShape resizeCursor, QGraphicsItem *parent = nullptr);
+
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
@@ -181,27 +187,27 @@ protected:
 
 	void copyTo(AbstractItem * const other) const;
 
-	QPointF mOldPos;
-	qreal mOldX1;
-	qreal mOldY1;
-	qreal mOldX2;
-	qreal mOldY2;
-
-	QPen mStrokePen;
-	Qt::CursorShape mResizeCursor;
-	Qt::CursorShape mHoverCursor;
-
 private:
-	DragState mDragState;
+	DragState mDragState {None};
 	QPen mPen;
 	QBrush mBrush;
-	qreal mX1;
-	qreal mY1;
-	qreal mX2;
-	qreal mY2;
+	qreal mX1 {0};
+	qreal mY1 {0};
+	qreal mX2 {0};
+	qreal mY2 {0};
 	QString mId;
-	bool mEditable;
-	bool mHovered;
+	bool mEditable {true};
+	bool mHovered {false};
+
+	QPointF mOldPos;
+	qreal mOldX1 {};
+	qreal mOldY1 {};
+	qreal mOldX2 {};
+	qreal mOldY2 {};
+
+	QPen mStrokePen {Qt::green};
+	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
+	const Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
 };
 
 }

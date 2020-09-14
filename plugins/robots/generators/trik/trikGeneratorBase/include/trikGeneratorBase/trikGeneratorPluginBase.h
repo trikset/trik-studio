@@ -26,10 +26,6 @@ namespace robotModel {
 class TrikGeneratorRobotModel;
 }
 
-namespace blocks {
-class TrikV62BlocksFactory;
-}
-
 /// A base class for every generator from the TRIK kit.
 class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikGeneratorPluginBase : public generatorBase::RobotsGeneratorPluginBase
 {
@@ -37,14 +33,14 @@ class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikGeneratorPluginBase : public generat
 
 public:
 	TrikGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-			, kitBase::blocksBase::BlocksFactoryInterface * const blocksFactory
+			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 			);
 
 	~TrikGeneratorPluginBase() override;
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
@@ -59,8 +55,7 @@ private:
 	/// Robot model that is used to query information about various robot devices.
 	QScopedPointer<kitBase::robotModel::RobotModelInterface> mRobotModel;
 
-	/// Does not have ownership.
-	kitBase::blocksBase::BlocksFactoryInterface *mBlocksFactory;
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 };
 
 }

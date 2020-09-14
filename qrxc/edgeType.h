@@ -47,7 +47,7 @@ private:
 	QString mLineType;
 	QString mShapeType;
 	QColor mLineColor;
-	int mLineWidth;
+	int mLineWidth { -1 };
 	QString mIsDividable;
 	QStringList mFromPorts;
 	QStringList mToPorts;

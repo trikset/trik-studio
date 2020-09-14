@@ -15,7 +15,7 @@
 proc ForeachsForbidden { fileName } {
   set lineCount 1
   foreach line [getAllLines $fileName] {
-    if { [regexp {foreach} $line] } {
+    if { [regexp {foreach *\(} $line] } {
       report $fileName $lineCount "'foreach' is forbidden, use 'for' range loops instead"
     }
     incr lineCount

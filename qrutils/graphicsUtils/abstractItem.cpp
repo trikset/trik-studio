@@ -28,24 +28,20 @@ const qreal epsilon = 0.0000001;
 
 AbstractItem::AbstractItem(QGraphicsItem* parent)
 	: QGraphicsObject(parent)
-	, mDragState(None)
-	, mX1(0)
-	, mY1(0)
-	, mX2(0)
-	, mY2(0)
 	, mId(QUuid::createUuid().toString())
-	, mEditable(true)
-	, mHovered(false)
 {
 	setAcceptHoverEvents(true);
-	mResizeCursor = Qt::SizeAllCursor;
-	mHoverCursor = Qt::PointingHandCursor;
 	setCursor(mHoverCursor);
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 	mBrush.setColor(mPen.color());
-	mStrokePen = QPen(Qt::green);
 	mStrokePen.setWidthF(1.75);
 	savePos();
+}
+
+AbstractItem::AbstractItem(Qt::CursorShape resizeCursor, QGraphicsItem *parent)
+	: AbstractItem(parent)
+{
+	mResizeCursor = resizeCursor;
 }
 
 QRectF AbstractItem::calcNecessaryBoundingRect() const
@@ -68,6 +64,7 @@ void AbstractItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setPen(mPen);
 	painter->setBrush(mBrush);
+	painter->setRenderHint(QPainter::Antialiasing);
 	drawItem(painter, option, widget);
 	if (option->state & (QStyle::State_Selected | QStyle::State_MouseOver)) {
 		painter->save();
@@ -580,7 +577,7 @@ void AbstractItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 QVariant AbstractItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
-	if (change == QGraphicsItem::ItemPositionChange) {
+	if (change == QGraphicsItem::ItemPositionHasChanged) {
 		emit positionChanged(value.toPointF());
 	}
 
@@ -597,6 +594,16 @@ void AbstractItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mouseReleaseEvent(event);
 	emit mouseInteractionStopped();
+}
+
+Qt::CursorShape AbstractItem::getResizeCursor()
+{
+	return mResizeCursor;
+}
+
+QPen AbstractItem::getStrokePen()
+{
+	return mStrokePen;
 }
 
 void AbstractItem::copyTo(AbstractItem * const other) const

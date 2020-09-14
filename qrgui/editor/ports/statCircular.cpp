@@ -63,7 +63,7 @@ StatCircular::CircularPort StatCircular::transformForContents(const QRectF &cont
 	const qreal rx = mR * (mPropX ? mInitWidth : contents.width());
 	const qreal ry = mR * (mPropX ? mInitWidth : contents.height());
 
-	CircularPort port;
+	CircularPort port {};
 	port.x = x;
 	port.y = y;
 	port.rx = rx;

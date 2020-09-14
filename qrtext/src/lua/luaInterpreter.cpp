@@ -78,7 +78,7 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 
 	if (root->is<ast::Block>()) {
 		auto statements = as<ast::Block>(root)->children();
-		for (auto statement : statements) {
+		for (auto &&statement : statements) {
 			if (statement != statements.last()) {
 				interpret(statement, semanticAnalyzer);
 			}
@@ -130,7 +130,7 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 		auto parameters = as<ast::FunctionCall>(root)->arguments();
 
 		QList<QVariant> actualParameters;
-		for (auto parameter : parameters) {
+		for (auto &&parameter : parameters) {
 			actualParameters << interpret(parameter, semanticAnalyzer);
 		}
 
@@ -161,9 +161,9 @@ void LuaInterpreter::addIntrinsicFunction(const QString &name
 	mIntrinsicFunctions.insert(name, semantic);
 }
 
-QStringList LuaInterpreter::identifiers() const
+bool LuaInterpreter::hasIdentifier(const QString &name) const
 {
-	return mIdentifierValues.keys();
+	return mIdentifierValues.contains(name);
 }
 
 void LuaInterpreter::forgetIdentifier(const QString &identifier)

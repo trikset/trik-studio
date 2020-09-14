@@ -55,7 +55,7 @@ struct LanguageInfo
 
 	/// A pointer to text edit colorer object; nullptr can be passed to disable coloring.
 	/// Transfers ownership to editor.
-	QsciLexer *lexer;
+	QSharedPointer<QsciLexer> lexer;
 
 	/// A list of tokens that will be proposed to user in autocompletion window.
 	QStringList additionalAutocompletionTokens;
@@ -113,7 +113,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new QsciLexerCPP()                                         /* lexer */
+				, QSharedPointer<QsciLexer> {new QsciLexerCPP()}             /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -131,7 +131,7 @@ public:
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
 				/// @todo: write own lexer
-				, new QsciLexerCPP()                                         /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerCPP() }           /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -148,7 +148,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "\"\"\""                                                   /* multiline comment start */
 				, "\"\"\""                                                   /* multiline comment end */
-				, new QsciLexerPython()                                      /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerPython() }        /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -165,7 +165,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new QsciLexerJavaScript()                                  /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerJavaScript() }    /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -182,7 +182,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "/*"                                                       /* multiline comment start */
 				, "*/"                                                       /* multiline comment end */
-				, new QsciLexerJavaScript()                                  /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerJavaScript() }    /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -200,7 +200,7 @@ public:
 				, "(*"                                                       /* multiline comment start */
 				, "*)"                                                       /* multiline comment end */
 				/// @todo: write own lexer?
-				, new QsciLexerCPP()                                         /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerCPP() }           /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -217,7 +217,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "{*"                                                       /* multiline comment start */
 				, "*}"                                                       /* multiline comment end */
-				, new QsciLexerPascal()                                      /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerPascal() }        /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}
@@ -234,7 +234,7 @@ public:
 				, QString()                                                  /* line comment end */
 				, "--[["                                                     /* multiline comment start */
 				, "]]"                                                       /* multiline comment end */
-				, new QsciLexerLua()                                         /* lexer */
+				, QSharedPointer<QsciLexer> { new QsciLexerLua() }           /* lexer */
 				, additionalTokens                                           /* additional autocompletion tokens */
 		};
 	}

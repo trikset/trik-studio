@@ -23,7 +23,7 @@ namespace qrTest {
 class BlocksFactoryManagerInterfaceMock : public interpreterCore::BlocksFactoryManagerInterface
 {
 public:
-	MOCK_METHOD2(addFactory, void(kitBase::blocksBase::BlocksFactoryInterface * const factory
+	MOCK_METHOD2(addFactory, void(QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> const &factory
 			, kitBase::robotModel::RobotModelInterface const *robotModel));
 	MOCK_METHOD2(block, qReal::interpretation::BlockInterface *(qReal::Id const &element
 			, kitBase::robotModel::RobotModelInterface const &robotModel));

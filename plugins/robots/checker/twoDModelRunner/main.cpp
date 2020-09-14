@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include <time.h>
+#include <ctime>
 
 #include <QtCore/QDir>
 #include <QtCore/QCommandLineParser>
@@ -65,27 +65,28 @@ void setDefaultLocale()
 	}
 }
 
-void initLogging()
-{
-	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
-	if (logsDir.mkpath(logsDir.absolutePath())
-		&& QFileInfo(logsDir.filePath("2d-model.log")).isWritable())
-	{
-		qReal::Logger::addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2, QsLogging::DebugLevel);
-	}
-}
-
 int main(int argc, char *argv[])
 {
 	qReal::PlatformInfo::enableHiDPISupport();
 	qsrand(time(0));
-	initLogging();
-	QApplication app(argc, argv);
+	QScopedPointer<QApplication> app(new QApplication(argc, argv));
 	QCoreApplication::setApplicationName("2D-model");
-	QCoreApplication::setApplicationVersion("2020.2");
+	QCoreApplication::setApplicationVersion(interpreterCore::Customizer::trikStudioVersion());
+
+	const auto &defaultPlatformConfigPath = qReal::PlatformInfo::defaultPlatformConfigPath();
+	if (!defaultPlatformConfigPath.isEmpty()) {
+		// Loading default settings for concrete platform if such exist.
+		qReal::SettingsManager::instance()->loadSettings(defaultPlatformConfigPath);
+	}
+
+	qReal::Logger logger;
+	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
+	if (logsDir.mkpath(logsDir.absolutePath())) {
+		logger.addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2);
+	}
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
-	QLOG_INFO() << "Arguments:" << app.arguments();
+	QLOG_INFO() << "Arguments:" << app->arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 	setDefaultLocale();
 
@@ -100,51 +101,60 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("qrs-file", QObject::tr("Save file to be interpreted."));
 	QCommandLineOption backgroundOption({"b", "background"}, QObject::tr("Run emulation in background."));
-	QCommandLineOption platformOption("platform"
-			, QObject::tr("Use this option set to \"minimal\" to disable connection to X server"), "minimal");
 	QCommandLineOption reportOption({"r","report"}
-									, QObject::tr("A path to file where checker results will be written (JSON)")
+									, QObject::tr("A path to file where checker results will be written (JSON).")
 									, "path-to-report", "report.json");
 	QCommandLineOption trajectoryOption({"t", "trajectory"}
 										, QObject::tr("A path to file where robot`s trajectory will be"\
 				" written. The writing will not be performed not immediately, each trajectory point will be written"\
 				" just when obtained by checker, so FIFOs are recommended to be targets for this option.")
 			, "path-to-trajectory", "trajectory.fifo");
-	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution")// probably others too
+	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution.")// probably others too
 			, "path-to-input", "inputs.txt");
-	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Interpret mode"), "mode", "diagram");
+	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Set to \"script\" for"\
+								" execution of js/py from the project or set to \"diagram\" for block diagram.")
+								, "mode", "diagram");
 	QCommandLineOption speedOption({"s", "speed"}
-								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!)")
+								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!).")
 								   , "speed", "0");
+	QCommandLineOption closeOnSuccessOption("close-on-succes"
+								   , QObject::tr("Close the window and exit if the diagram/script"\
+												 " finishes without errors."));
+	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
 	parser.addOption(backgroundOption);
-	parser.addOption(platformOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
 	parser.addOption(inputOption);
 	parser.addOption(modeOption);
 	parser.addOption(speedOption);
+	parser.addOption(closeOnSuccessOption);
+	parser.addOption(showConsoleOption);
 
-	parser.process(app);
+	parser.process(*app);
 
 	const QStringList positionalArgs = parser.positionalArguments();
 	if (positionalArgs.size() != 1) {
 		parser.showHelp();
 	}
 
-	const QString qrsFile = positionalArgs.first();
+	const QString &qrsFile = positionalArgs.first();
 	const bool backgroundMode = parser.isSet(backgroundOption);
 	const QString report = parser.isSet(reportOption) ? parser.value(reportOption) : QString();
 	const QString trajectory = parser.isSet(trajectoryOption) ? parser.value(trajectoryOption) : QString();
 	const QString input = parser.isSet(inputOption) ? parser.value(inputOption) : QString();
 	const QString mode = parser.isSet(modeOption) ? parser.value(modeOption) : QString("diagram");
-	twoDModel::Runner runner(report, trajectory, input, mode);
+	const bool closeOnSuccessMode = parser.isSet(closeOnSuccessOption);
+	const bool showConsoleMode = parser.isSet(showConsoleOption);
+	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode));
 
 	auto speedFactor = parser.value(speedOption).toInt();
-	if (!runner.interpret(qrsFile, backgroundMode, speedFactor)) {
+	if (!runner->interpret(qrsFile, backgroundMode, speedFactor, closeOnSuccessMode, showConsoleMode)) {
 		return 2;
 	}
 
-	const int exitCode = app.exec();
+	const int exitCode = app->exec();
+	runner.reset();
+	app.reset();
 	QLOG_INFO() << "------------------- APPLICATION FINISHED -------------------";
 	return exitCode;
 }

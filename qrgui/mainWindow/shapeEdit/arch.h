@@ -21,10 +21,9 @@
 
 class Arch : public Item
 {
+	Q_DISABLE_COPY(Arch)
 public:
 	Arch(QRectF rect, int startAngle, int spanAngle, Item* parent);
-	Arch(const Arch &other);
-	virtual Item* clone();
 	int startAngle() const;
 	int spanAngle() const;
 	void setStartAngle(int start);

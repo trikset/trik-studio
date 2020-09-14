@@ -124,7 +124,6 @@ $qRealDir/libqrrepo.so* \
 $qRealDir/libqrtext.so* \
 $qRealDir/libqrutils.so* \
 $qRealDir/libqscintilla2.so* \
-$qRealDir/libqslog.so* \
 $qRealDir/libqrtext.so* .
 
 # Copying TRIKStudio plugins
@@ -135,17 +134,22 @@ $qRealDir/librobots-trik-kit-interpreter-common.so* \
 $qRealDir/librobots-kit-base.so* \
 $qRealDir/librobots-trik-kit.so* \
 $qRealDir/librobots-utils.so* \
-$qRealDir/libPythonQt*.so* \
 $qRealDir/libBox2D.so* .
 
+rsync -av $qRealDir/libqextserialport.so* \
+$qRealDir/librobots-ev3-kit.so* \
+$qRealDir/librobots-utils.so* \
+$qRealDir/librobots-kit-base.so* \
+.
+
+rsync -av $qRealDir/librobots-nxt-kit.so* .
 
 rsync -avR $qRealDir/./translations/ru/*.qm \
 	$qRealDir/./translations/ru/plugins/robots/	\
 	./
 
 rsync -avR $qRealDir/./plugins/editors/* $qRealDir/./plugins/tools/librobots-plugin.so \
-	$qRealDir/./plugins/tools/kitPlugins/librobots-trik-v6-interpreter.so \
-	$qRealDir/./plugins/tools/kitPlugins/librobots-trik-v62-interpreter.so \
+	$qRealDir/./plugins/tools/kitPlugins/librobots-*-interpreter.so \
 	./
 
 # Copying TRIKRuntime dependencies
@@ -176,5 +180,7 @@ find . -type f -executable | xargs strip -sv || :
 # Packing
 popd
 
-rm -f trik_checker.tar.xz
-time { tar c trikStudio-checker | xz -z3ecvT 0 > trik_checker.tar.xz ; }
+if [[ -z "${TRIK_SKIP_CHECKER_ARCHIVE+x}" ]] ; then
+   rm -f trik_checker.tar.xz
+   time { tar c trikStudio-checker | xz -z3ecvT 0 > trik_checker.tar.xz ; }
+fi

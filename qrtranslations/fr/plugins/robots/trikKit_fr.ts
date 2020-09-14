@@ -26,6 +26,14 @@
     </message>
 </context>
 <context>
+    <name>trik::robotModel::TrikRobotModelBase</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+289"/>
+        <source>Video 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trik::robotModel::parts::TrikColorSensor</name>
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikColorSensor.h" line="+29"/>
@@ -162,6 +170,14 @@
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikTouchSensor.h" line="+28"/>
         <source>Touch sensor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>trik::robotModel::parts::TrikVideoCamera</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikVideoCamera.h" line="+27"/>
+        <source>Video Camera</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

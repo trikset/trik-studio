@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 #include "kernelDeclSpec.h"
 
@@ -34,8 +34,9 @@ public:
 	///        log files count is already equal to the next parameter then the old contents will be overwritten.
 	/// @param maxOldLogsCount The maximal number of log files related to this target.
 	/// @param level The minimal log entries level that will be accepter by this target.
-	static void addLogTarget(const QString &path, int maxSize, int maxOldLogsCount
-			, QsLogging::Level = QsLogging::InfoLevel);
+	void addLogTarget(const QString &path, int maxSize, int maxOldLogsCount
+			);
+	~Logger();
 };
 
 }

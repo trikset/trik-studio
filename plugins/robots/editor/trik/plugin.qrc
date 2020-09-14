@@ -16,6 +16,7 @@
 	<file>generated/shapes/TrikLedClass.sdf</file>
 	<file>generated/shapes/TrikPlayToneClass.sdf</file>
 	<file>generated/shapes/TrikPlayToneHzClass.sdf</file>
+	<file>generated/shapes/TrikPrintTextClass.sdf</file>
 	<file>generated/shapes/TrikRemoveFileClass.sdf</file>
 	<file>generated/shapes/TrikSadSmileClass.sdf</file>
 	<file>generated/shapes/TrikSayClass.sdf</file>

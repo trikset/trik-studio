@@ -207,7 +207,7 @@
         <translation>Корневой элемент должен быть тэгом &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+36"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Должен иметься тэг &quot;timelimit&quot;.</translation>
     </message>
@@ -461,11 +461,20 @@
     </message>
     <message>
         <location line="+13"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Robot mass:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Масса робота:</translation>
+        <source>Robot mass:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+57"/>
+        <source>Robot track:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Robot mass:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">Масса робота:</translation>
+    </message>
+    <message>
+        <location line="-44"/>
         <source>Robot width:</source>
         <translation>Ширина робота:</translation>
     </message>
@@ -535,12 +544,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+115"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+110"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+186"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
     </message>
@@ -556,7 +565,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+42"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+41"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
     </message>
@@ -576,7 +585,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+40"/>
         <source>Ellipse (E)</source>
         <translation>Эллипс (E)</translation>
     </message>
@@ -584,7 +593,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+76"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+75"/>
         <source>Image (I)</source>
         <translation>Картинка (I)</translation>
     </message>
@@ -592,7 +601,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+47"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+46"/>
         <source>Line (L)</source>
         <translation>Линия (L)</translation>
     </message>
@@ -600,7 +609,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+40"/>
         <source>Rectangle (R)</source>
         <translation>Прямоугольник (R)</translation>
     </message>
@@ -608,7 +617,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+41"/>
         <source>Can (C)</source>
         <translation>Банка (C)</translation>
     </message>
@@ -616,7 +625,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+55"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
         <source>Stylus (S)</source>
         <translation>Стилус (S)</translation>
     </message>
@@ -632,7 +641,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+56"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
         <source>The task is accomplished!</source>
         <translation>Задание выполнено!</translation>
     </message>
@@ -645,7 +654,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+167"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+160"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+38"/>
@@ -654,15 +663,20 @@
         <translation>Попытка добавить элемент с существующим идентификатором: %1</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>Incorrect image, please try anouther one</source>
         <translation>Некорректное изображение, попробуйте другое</translation>
+    </message>
+    <message>
+        <location line="+450"/>
+        <source>Unknown image with imageId %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+71"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+73"/>
         <location line="+3"/>
         <source>2D Model</source>
         <translation>2D модель</translation>
@@ -706,6 +720,14 @@
         <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorPassive.h" line="+37"/>
         <source>Color sensor (passive)</source>
         <translation>Сенсор цвета (пассивный)</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::robotModel::parts::ColorSensorRaw</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRaw.h" line="+35"/>
+        <source>Color sensor (raw)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -753,6 +775,11 @@
         <location line="+1"/>
         <source>Load world model...</source>
         <translation>Загрузить модель мира...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Load world model without robot configuration...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set background...</source>
@@ -854,7 +881,7 @@
 <context>
     <name>twoDModel::view::DetailsTab</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+36"/>
         <source>Display</source>
         <translation>Дисплей</translation>
     </message>
@@ -987,7 +1014,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+695"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
         <source>Select image</source>
         <translation>Выберите картинку</translation>
     </message>
@@ -1020,7 +1047,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+315"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1038,7 +1065,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+94"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1055,13 +1082,19 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
+        <location line="+22"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-22"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Loading world without robot model</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Select background image</source>
@@ -1076,7 +1109,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+329"/>
+        <location line="+339"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

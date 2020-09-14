@@ -75,9 +75,9 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 
 	setAcceptHoverEvents(true);
 
-	const QList<LabelProperties> labelsInfos = mType.labels();
-	for (const LabelProperties &labelInfo : labelsInfos) {
-		Label * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
+	const auto &labelsInfos = mType.labels();
+	for (const auto &labelInfo : labelsInfos) {
+		auto *label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 		label->init(boundingRect());
 		label->setParentItem(this);
 		label->setShouldCenter(false);
@@ -89,7 +89,7 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 
 	mShapeType = static_cast<LinkShape>(SettingsManager::value("LineType").toInt());
 	initLineHandler();
-	mChangeShapeAction.setMenu(mLineFactory->shapeTypeMenu());
+	//Memleak: mChangeShapeAction.setMenu(mLineFactory->shapeTypeMenu());
 }
 
 EdgeElement::~EdgeElement()
@@ -101,9 +101,6 @@ EdgeElement::~EdgeElement()
 	if (mDst) {
 		mDst->delEdge(this);
 	}
-
-	delete mLineFactory;
-	delete mHandler;
 }
 
 void EdgeElement::initTitles()
@@ -114,8 +111,7 @@ void EdgeElement::initTitles()
 
 void EdgeElement::initLineHandler()
 {
-	delete mHandler;
-	mHandler = mLineFactory->createHandler(mShapeType);
+	mHandler.reset(mLineFactory->createHandler(mShapeType));
 	mHandler->connectAction(&mReverseAction, this, SLOT(reverse()));
 }
 
@@ -237,7 +233,7 @@ void EdgeElement::drawArrows(QPainter *painter, bool savedLine) const
 	painter->restore();
 }
 
-QPen EdgeElement::edgePen(QPainter *painter, QColor color, Qt::PenStyle style, int width) const
+QPen EdgeElement::edgePen(QPainter *painter, const QColor &color, Qt::PenStyle style, int width) const
 {
 	QPen pen = painter->pen();
 	pen.setColor(color);
@@ -247,7 +243,7 @@ QPen EdgeElement::edgePen(QPainter *painter, QColor color, Qt::PenStyle style, i
 	return pen;
 }
 
-void EdgeElement::setEdgePainter(QPainter *painter, QPen pen, qreal opacity) const
+void EdgeElement::setEdgePainter(QPainter *painter, const QPen &pen, qreal opacity) const
 {
 	painter->setPen(pen);
 	painter->setOpacity(opacity);
@@ -266,7 +262,7 @@ QPainterPath EdgeElement::shape() const
 	path = ps.createStroke(path);
 
 	for (const QPointF &point : mLine) {
-		path.addRect(QRectF(point - QPointF(stripeWidth / 2, stripeWidth / 2)
+		path.addRect(QRectF(point - QPointF(stripeWidth / 2.0, stripeWidth / 2.0)
 				, QSizeF(stripeWidth, stripeWidth)).adjusted(1, 1, -1, -1));
 	}
 

@@ -20,14 +20,14 @@
 namespace qReal {
 namespace gestures {
 
-class RectangleGesturesManager : public GesturesRecognizer<qreal *>
+class RectangleGesturesManager : public GesturesRecognizer<QVector<qreal>>
 {
 public:
 	RectangleGesturesManager();
 	~RectangleGesturesManager() override;
 	qreal getMaxDistance(const QString &) override;
 	bool isMultistroke() override;
-	qreal getDistance(qreal * const &key1, qreal * const &key2) override;
+	qreal getDistance(const key_type &key1, const key_type &key2) override;
 
 	qreal getDistance(QString const &item) override
 	{
@@ -35,7 +35,7 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	qreal *getKey(const PathVector & path) override;
+	key_type getKey(const PathVector & path) override;
 };
 
 }

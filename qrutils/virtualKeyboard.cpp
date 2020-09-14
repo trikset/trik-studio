@@ -18,12 +18,16 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QUrl>
 #include <QtGui/QDesktopServices>
+#include <QOperatingSystemVersion>
 
 using namespace utils;
 
 void VirtualKeyboard::show()
 {
-#ifdef Q_OS_WIN
+	if (QOperatingSystemVersion::currentType() != QOperatingSystemVersion::OSType::Windows) {
+		return;
+	}
+
 	switch(QSysInfo::windowsVersion()) {
 	case QSysInfo::WV_WINDOWS8:
 		showWindows8Keyboard();
@@ -31,7 +35,6 @@ void VirtualKeyboard::show()
 	default:
 		break;
 	}
-#endif
 }
 
 void VirtualKeyboard::showWindows8Keyboard()

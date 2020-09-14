@@ -59,12 +59,11 @@ QString XmlCompiler::pluginName() const
 	return mPluginName;
 }
 
-bool XmlCompiler::compile(const QString &inputXmlFileName, const QString &sourcesRootFolder)
+bool XmlCompiler::compile(const QString &inputXmlFileName)
 {
 	const QFileInfo inputXmlFileInfo(inputXmlFileName);
 	mPluginName = NameNormalizer::normalize(inputXmlFileInfo.completeBaseName());
 	mCurrentEditor = inputXmlFileInfo.absoluteFilePath();
-	mSourcesRootFolder = sourcesRootFolder;
 	const QDir startingDir = inputXmlFileInfo.dir();
 	if (!loadXmlFile(startingDir, inputXmlFileInfo.fileName())) {
 		return false;
@@ -290,7 +289,7 @@ void XmlCompiler::generateInitMultigraph(OutFile &out)
 		for (const Type *type : diagram->types()) {
 			if (dynamic_cast<const GraphicType *>(type)) {
 				const QString elementType = NameNormalizer::normalize(type->qualifiedName());
-				out() << "\tmMetamodel->addNode(*(new " << elementType << "(*mMetamodel)));\n";
+				out() << "\tmMetamodel->addNode(new " << elementType << "(*mMetamodel));\n";
 			}
 		}
 	}
@@ -437,7 +436,7 @@ void XmlCompiler::generateEnumValues(OutFile &out)
 		const QString name = type->name();
 		out() << "\tmMetamodel->addEnum(\"" << name << "\", { ";
 		QStringList pairs;
-		const QMap<QString, QString> values = type->values();
+		const QMap<QString, QString> &values = type->values();
 		for (auto &&key : values.keys()) {
 			pairs << QString("qMakePair(QString(\"%1\"), tr(\"%2\"))").arg(key, values[key]);
 		}

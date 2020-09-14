@@ -44,6 +44,7 @@ public:
 	~ToolPluginManager();
 
 	void init(const PluginConfigurator &configurator);
+	void release();
 	void updateSettings();
 	QList<ActionInfo> actions() const;
 	QList<QPair<QString, gui::PreferencesPage *> > preferencesPages() const;
@@ -83,7 +84,7 @@ private:
 	/// Common part of all plugin managers
 	PluginManager mPluginManager;
 
-	SystemEvents *mSystemEvents;
+	SystemEvents *mSystemEvents {};
 };
 
 }

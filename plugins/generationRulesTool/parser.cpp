@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "parser.h"
-
+#include <qrtext/core/parser/AutoreleaseRecursiveGrammar.h>
 #include "ast/callGeneratorFor.h"
 #include "ast/complexIdentifier.h"
 #include "ast/elementIdentifier.h"
@@ -43,6 +43,7 @@ using namespace simpleParser;
 
 using namespace qrtext::core;
 
+
 simpleParser::Parser::Parser(QList<qrtext::core::Error> &errors)
 	: qrtext::core::Parser<TokenTypes>(grammar(), errors)
 {
@@ -71,25 +72,25 @@ QSharedPointer<qrtext::core::ParserInterface<TokenTypes>> simpleParser::Parser::
 
 	auto identifier = TokenTypes::identifier
 			>> [] (Token<TokenTypes> const &token) {
-				return new ast::Identifier(token.lexeme());
+				return qrtext::wrap(new ast::Identifier(token.lexeme()));
 	};
 
 	auto transitionStartIdentifier = TokenTypes::transitionStartKeyword
 			>> [] (Token<TokenTypes> const &token) {
 				Q_UNUSED(token);
-				return new ast::TransitionStart();
+				return qrtext::wrap(new ast::TransitionStart());
 	};
 
 	auto transitionEndIdentifier = TokenTypes::transitionEndKeyword
 			>> [] (Token<TokenTypes> const &token) {
 				Q_UNUSED(token);
-				return new ast::TransitionEnd();
+				return qrtext::wrap(new ast::TransitionEnd());
 	};
 
 	auto thisIdentifier = TokenTypes::thisKeyword
 			>> [] (Token<TokenTypes> const &token) {
 				Q_UNUSED(token);
-				return new ast::This();
+				return qrtext::wrap(new ast::This());
 	};
 
 	auto elementIdentifier = ((identifier | thisIdentifier) &
@@ -97,10 +98,8 @@ QSharedPointer<qrtext::core::ParserInterface<TokenTypes>> simpleParser::Parser::
 			>> [] (QSharedPointer<ast::Node> elementIdentifierNode) {
 				if (elementIdentifierNode->is<TemporaryPair>()) {
 					auto asPair = qrtext::as<TemporaryPair>(elementIdentifierNode);
-
 					auto identifierPart = asPair->left();
 					auto linkPart = asPair->right();
-
 					return qrtext::wrap(new ast::ElementIdentifier(identifierPart, linkPart));
 				} else {
 					return qrtext::wrap(new ast::ElementIdentifier(elementIdentifierNode));
@@ -149,7 +148,7 @@ QSharedPointer<qrtext::core::ParserInterface<TokenTypes>> simpleParser::Parser::
 
 	auto text = TokenTypes::text
 			>> [] (Token<TokenTypes> const &token) {
-				return new ast::Text(token.lexeme());
+				return qrtext::wrap(new ast::Text(token.lexeme()));
 	};
 
 	auto foreachExcludeStatement = (-TokenTypes::foreachExcludeKeyword
@@ -230,8 +229,8 @@ QSharedPointer<qrtext::core::ParserInterface<TokenTypes>> simpleParser::Parser::
 				return qrtext::wrap(new ast::GenerateToFile(fileNamePart, programPart));
 	};
 
-	auto comparator = TokenTypes::equal >> [] { return new ast::Equal(); }
-				| TokenTypes::notEqual >> [] { return new ast::NotEqual(); };
+	auto comparator = TokenTypes::equal >> [] { return qrtext::wrap(new ast::Equal()); }
+				| TokenTypes::notEqual >> [] { return qrtext::wrap(new ast::NotEqual()); };
 
 	auto condition = (complexIdentifier
 				& ~(comparator & text))
@@ -273,17 +272,17 @@ QSharedPointer<qrtext::core::ParserInterface<TokenTypes>> simpleParser::Parser::
 	auto newline = TokenTypes::newlineKeyword
 			>> [] (Token<TokenTypes> const &token) {
 				Q_UNUSED(token);
-				return new ast::Newline();
+				return qrtext::wrap(new ast::Newline());
 	};
 
 	auto tab = TokenTypes::tabKeyword
 			>> [] (Token<TokenTypes> const &token) {
 				Q_UNUSED(token);
-				return new ast::Tab();
+				return qrtext::wrap(new ast::Tab());
 	};
 
-	statement = text | tab | newline | complexIdentifier | foreachStatement | foreachExcludeStatement
+	statement <<= text | tab | newline | complexIdentifier | foreachStatement | foreachExcludeStatement
 			| callGeneratorForStatement | generateToFileStatement | generatorStatement | ifExpression;
 
-	return program.parser();
+	return QSharedPointer<AutoreleaseRecursiveGrammarParser<TokenTypes>>::create(program);
 }

@@ -35,7 +35,10 @@ namespace kitBase {
 /// Plugin interface for a kit support plugin.
 class KitPluginInterface
 {
+	Q_DISABLE_COPY(KitPluginInterface)
 public:
+	KitPluginInterface() = default;
+
 	virtual ~KitPluginInterface() = default;
 
 	/// Passes to kit plugin objects that allow it to communicate with engine.
@@ -43,6 +46,12 @@ public:
 	{
 		Q_UNUSED(configurator)
 	}
+
+	/// Releases all resources
+	virtual void release()
+	{
+	}
+
 
 	/// An identifier of constructor kit. Kit plugins with same kitId are automaticly grouped
 	/// together extending each other.
@@ -57,7 +66,8 @@ public:
 
 	/// Returns a blocks factory for a given robot model. Nullptr can be returned and means that no factory is provided
 	/// by this plugin. Ownership must be transfered.
-	virtual blocksBase::BlocksFactoryInterface *blocksFactoryFor(const robotModel::RobotModelInterface *model) = 0;
+	virtual QSharedPointer<blocksBase::BlocksFactoryInterface> blocksFactoryFor(
+			const robotModel::RobotModelInterface *model) = 0;
 
 	/// If overrided and returns some model as value that model will be used as default selected model for this kit
 	/// @todo is it possible that plugin does not provide default model? Maybe first model in robotModels() list will be
@@ -115,13 +125,6 @@ public:
 	virtual int priority() const
 	{
 		return 0;
-	}
-
-	/// Returns a list of intepreters specific only for this kit plugin. Intepreters will be selected in correspondence
-	/// with data returned by InterpreterInterface::supportedDiagrams().
-	virtual QList<kitBase::InterpreterInterface *> customInterpreters() const
-	{
-		return {};
 	}
 };
 

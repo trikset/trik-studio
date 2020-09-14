@@ -67,7 +67,7 @@ QT += xml widgets svg
 
 includes(qrtext qrgraph)
 
-links(qrkernel qslog qrtext)
+links(qrkernel qrtext)
 
 DEFINES += QRUTILS_LIBRARY
 

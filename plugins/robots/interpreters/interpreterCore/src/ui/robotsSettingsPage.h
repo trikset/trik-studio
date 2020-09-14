@@ -87,7 +87,7 @@ private:
 	RobotModelManager &mRobotModelManager;
 
 	/// Has ownership indirectly, via Qt parent-child memory management system.
-	QButtonGroup *mKitButtons;
+	QButtonGroup *mKitButtons {};
 
 	/// Has ownership indirectly, via Qt parent-child memory management system.
 	QHash<QAbstractButton *, QButtonGroup *> mKitRobotModels;

@@ -29,18 +29,18 @@ using namespace twoDModel::engine;
 TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotModel &robotModel)
 	: mRobotModelName(robotModel.name())
 	, mModel(new model::Model())
-	, mView(new view::TwoDModelWidget(*mModel))
+	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
-	, mDock(new utils::SmartDock("2dModelDock", mView.data()))
+	, mDock(new utils::SmartDock("2dModelDock", mView))
 {
-	mModel.data()->addRobotModel(robotModel);
-	connect(mView.data(), &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
-	connect(mView.data(), &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
-	connect(mView.data(), &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
-	connect(mDock, &utils::SmartDock::dockedChanged, mView.data(), &view::TwoDModelWidget::setCompactMode);
+	mModel->addRobotModel(robotModel);
+	connect(mView, &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
+	connect(mView, &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
+	connect(mView, &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
+	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
 }
 
-TwoDModelEngineFacade::~TwoDModelEngineFacade() {}
+TwoDModelEngineFacade::~TwoDModelEngineFacade() = default;
 
 void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
 								 const qReal::SystemEvents &systemEvents,
@@ -103,7 +103,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		connect(this, &twoDModel::TwoDModelControlInterface::runButtonPressed, this, [this, &interpreterControl]() {
 			if (mCurrentTabInfo == qReal::TabInfo::TabType::editor) {
-				emit interpreterControl.interpret();
+				interpreterControl.interpret();
 			} else {
 				emit interpreterControl.startScriptInterpretation();
 			}
@@ -112,7 +112,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		connect(this,
 				&TwoDModelEngineFacade::stopButtonPressed,
 				&interpreterControl,
-				[&interpreterControl]() { interpreterControl.stopAllInterpretation(); },
+				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); },
 				Qt::UniqueConnection);
 	};
 

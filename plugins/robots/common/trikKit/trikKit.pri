@@ -21,8 +21,7 @@ includes(plugins/robots/common/trikKit \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-		robots-utils robots-kit-base qslog \
-)
+                robots-utils robots-kit-base)
 
 HEADERS += \
 	$$PWD/include/trikKit/robotModel/trikRobotModelBase.h \
@@ -48,6 +47,7 @@ HEADERS += \
 	$$PWD/include/trikKit/robotModel/parts/trikMotorsAggregator.h \
 	$$PWD/include/trikKit/robotModel/parts/trikTouchSensor.h \
 	$$PWD/include/trikKit/robotModel/parts/trikLightSensor.h \
+	$$PWD/include/trikKit/robotModel/parts/trikVideoCamera.h \
 	$$PWD/include/trikKit/blocks/trikBlocksFactoryBase.h \
 	$$PWD/include/trikKit/blocks/trikV6BlocksFactory.h \
 	$$PWD/include/trikKit/blocks/trikV62BlocksFactory.h \
@@ -79,6 +79,7 @@ HEADERS += \
 	$$PWD/src/blocks/details/writeToFileBlock.h \
 	$$PWD/src/blocks/details/removeFileBlock.h \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.h \
+	$$PWD/src/blocks/details/trikPrintTextBlock.h \
 	$$PWD/src/blocks/details/trikForwardOneCellBlock.h \
 	$$PWD/src/blocks/details/trikBackwardOneCellBlock.h \
 	$$PWD/src/blocks/details/trikTurnRightBlock.h \
@@ -139,6 +140,7 @@ SOURCES += \
 	$$PWD/src/blocks/details/writeToFileBlock.cpp \
 	$$PWD/src/blocks/details/removeFileBlock.cpp \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.cpp \
+	$$PWD/src/blocks/details/trikPrintTextBlock.cpp \
 	$$PWD/src/blocks/details/trikForwardOneCellBlock.cpp \
 	$$PWD/src/blocks/details/trikBackwardOneCellBlock.cpp \
 	$$PWD/src/blocks/details/trikTurnRightBlock.cpp \

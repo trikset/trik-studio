@@ -62,7 +62,7 @@ public:
 
 	/// Can be called to append new entity into this metamodel.
 	/// @note Metamodel will take ownership on \a entity.
-	void addNode(qrgraph::Node &entity) override;
+	void addNode(qrgraph::Node *entity) override;
 
 	/// Returns type descriptor of the given element (the vertex of this multigraph with the given name).
 	/// @warning If this metamodel does not contain \a diagram or \a diagram does not contain \a element
@@ -173,8 +173,10 @@ private:
 /// An interface for all objects that load information into metamodel.
 class MetamodelLoaderInterface
 {
+	Q_DISABLE_COPY(MetamodelLoaderInterface)
 public:
-	virtual ~MetamodelLoaderInterface() {}
+	MetamodelLoaderInterface() = default;
+	virtual ~MetamodelLoaderInterface() = default;
 
 	/// Will be implemented to return the a list of names of metamodels that should be loaded before this one.
 	/// @todo: This should be an information in plugin metadata and be processed by common code in plugin manager.

@@ -1,19 +1,19 @@
 # The project file for the QScintilla library.
 #
-# Copyright (c) 2019 Riverbank Computing Limited <info@riverbankcomputing.com>
-#
+# Copyright (c) 2020 Riverbank Computing Limited <info@riverbankcomputing.com>
+# 
 # This file is part of QScintilla.
-#
+# 
 # This file may be used under the terms of the GNU General Public License
 # version 3.0 as published by the Free Software Foundation and appearing in
 # the file LICENSE included in the packaging of this file.  Please review the
 # following information to ensure the GNU General Public License version 3.0
 # requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-#
+# 
 # If you do not wish to use this file under the terms of the GPL version 3.0
 # then you may purchase a commercial license.  For more information contact
 # info@riverbankcomputing.com.
-#
+# 
 # This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 # WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -25,21 +25,22 @@ TEMPLATE = lib
 CONFIG += qt warn_off thread exceptions hide_symbols
 
 CONFIG(debug, debug|release) {
-	mac: {
-		TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}_debug
-	} else {
-		win32: {
-			TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}d
-		} else {
-			TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
-		}
-	}
+    mac: {
+        TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}_debug
+    } else {
+        win32: {
+            TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}d
+        } else {
+            TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
+        }
+    }
 } else {
-	TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
+    TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
 }
 
 TARGET = qscintilla2
 include(../../../global.pri)
+LIBS -= -ltrikQsLog
 INCLUDEPATH += thirdparty/qscintilla/Qt4Qt5/
 
 
@@ -50,26 +51,26 @@ INCLUDEPATH += thirdparty/qscintilla/Qt4Qt5/
 INCLUDEPATH += . ../include ../lexlib ../src
 
 !CONFIG(staticlib) {
-	DEFINES += QSCINTILLA_MAKE_DLL
+    DEFINES += QSCINTILLA_MAKE_DLL
 }
 DEFINES += SCINTILLA_QT SCI_LEXER INCLUDE_DEPRECATED_FEATURES
 
 greaterThan(QT_MAJOR_VERSION, 4) {
 	QT += widgets printsupport
 
-	greaterThan(QT_MINOR_VERSION, 1) {
-		macx:QT += macextras
-	}
+    greaterThan(QT_MINOR_VERSION, 1) {
+	    macx:QT += macextras
+    }
 
-	# Work around QTBUG-39300.
-	CONFIG -= android_install
+    # Work around QTBUG-39300.
+    CONFIG -= android_install
 } else {
-	DEFINES += QT_NO_ACCESSIBILITY
+    DEFINES += QT_NO_ACCESSIBILITY
 }
 
 # For old versions of GCC.
 unix:!macx {
-	CONFIG += c++11
+    CONFIG += c++11
 }
 
 # Comment this in if you want the internal Scintilla classes to be placed in a
@@ -92,14 +93,14 @@ qsci.files = ../qsci
 INSTALLS += qsci
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-	features.path = $$[QT_HOST_DATA]/mkspecs/features
+    features.path = $$[QT_HOST_DATA]/mkspecs/features
 } else {
-	features.path = $$[QT_INSTALL_DATA]/mkspecs/features
+    features.path = $$[QT_INSTALL_DATA]/mkspecs/features
 }
 CONFIG(staticlib) {
-	features.files = $$PWD/features_staticlib/qscintilla2.prf
+    features.files = $$PWD/features_staticlib/qscintilla2.prf
 } else {
-	features.files = $$PWD/features/qscintilla2.prf
+    features.files = $$PWD/features/qscintilla2.prf
 }
 INSTALLS += features
 

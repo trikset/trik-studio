@@ -36,7 +36,7 @@ public:
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	// Transfers ownership.
@@ -49,8 +49,7 @@ public:
 	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
 
 private:
-	/// @todo Use shared pointers instead of this sh~.
-	pioneer::blocks::PioneerBlocksFactory *mBlocksFactory = nullptr;  // Transfers ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 };
 
 }

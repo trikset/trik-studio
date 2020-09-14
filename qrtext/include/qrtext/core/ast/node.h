@@ -31,6 +31,7 @@ namespace ast {
 /// Base class for all abstract syntax tree nodes.
 class QRTEXT_EXPORT Node
 {
+	Q_DISABLE_COPY(Node)
 public:
 	Node();
 

@@ -23,6 +23,7 @@ namespace modelsImplementation {
 
 class AbstractModelItem
 {
+	Q_DISABLE_COPY(AbstractModelItem)
 public:
 	virtual ~AbstractModelItem();
 

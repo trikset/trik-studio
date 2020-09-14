@@ -46,12 +46,14 @@ public slots:
 	bool saveOrSuggestToSaveAs() override;
 
 	void setUnsavedIndicator(bool isUnsaved) override;
+	void setStackUnsaved(bool isUnsaved);
 
 public:
 	bool open(const QString &fileName = QString()) override;
 	bool suggestToSaveChangesOrCancel() override;
 
 	void refreshWindowTitleAccordingToSaveFile();
+	bool saveText();
 
 	bool askQuestion(const QString &title, const QString &question) const override;
 
@@ -75,6 +77,8 @@ private:
 	MainWindow *mMainWindow;
 	TextManagerInterface *mTextManager;
 	VersionsConverterManager mVersionsConverter;
+	bool mStackUnsaved { false };
+
 	bool openQRProject(const QFileInfo &fileInfo); //move to public?
 };
 

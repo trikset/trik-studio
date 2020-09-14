@@ -34,3 +34,10 @@ void Speaker::play(const QString &filePath)
 
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
+
+void Speaker::play(const int &duration)
+{
+	// Not implemented
+	Q_UNUSED(duration)
+	return;
+}

@@ -37,7 +37,7 @@ public:
 	/// @todo: color enum here?
 	void setBackground(const QColor &color) override;
 	void clearScreen() override;
-	void printText(int x, int y, const QString &text) override;
+	void printText(int x, int y, const QString &text, int fontSize = -1) override;
 
 	void setPainterColor(const QColor &color) override;
 	void setPainterWidth(int penWidth) override;

@@ -28,6 +28,7 @@
 #include "twoDModel/robotModel/parts/colorSensorBlue.h"
 #include "twoDModel/robotModel/parts/colorSensorAmbient.h"
 #include "twoDModel/robotModel/parts/colorSensorReflected.h"
+#include "twoDModel/robotModel/parts/colorSensorRaw.h"
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -37,20 +38,17 @@ const int selectionDrift = 7;
 
 SensorItem::SensorItem(model::SensorsConfiguration &configuration
 		, const PortInfo &port, const QString &pathToImage, const QRect &imageRect)
-	: RotateItem()
-	, mConfiguration(configuration)
+	: mConfiguration(configuration)
 	, mPort(port)
-	, mPointImpl()
-	, mImageRect(imageRect.isEmpty() ? this->imageRect() : imageRect)
+	, mImageRect(imageRect.isEmpty() ? this->calculateImageRect() : imageRect)
 	, mBoundingRect(mImageRect.adjusted(-selectionDrift, -selectionDrift
 			, selectionDrift, selectionDrift))
-	, mImage(QImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage))
+	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, true)
 	, mPortItem(new PortItem(port))
 {
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 
 	setAcceptDrops(true);
-
 	mPortItem->setParentItem(this);
 	mPortItem->moveBy(-mPortItem->boundingRect().width() - 5, -mPortItem->boundingRect().height() - 5);
 	mPortItem->setFlag(ItemIgnoresTransformations);
@@ -68,7 +66,7 @@ void SensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *sty
 	painter->setRenderHints(painter->renderHints()
 			| QPainter::SmoothPixmapTransform
 			| QPainter::HighQualityAntialiasing);
-	painter->drawImage(mImageRect, mImage);
+	mImage.draw(*painter, mImageRect.toRect());
 	painter->restore();
 }
 
@@ -162,8 +160,8 @@ QString SensorItem::name() const
 	if (sensor.isA<robotParts::TouchSensor>()) {
 		return "touch";
 	} else if (sensor.isA<robotParts::ColorSensorFull>()
-			|| sensor.isA<robotParts::ColorSensorPassive>())
-	{
+			|| sensor.isA<robotParts::ColorSensorPassive>()
+			|| sensor.isA<robotParts::ColorSensorRaw>()) {
 		return "color_empty";
 	} else if (sensor.isA<robotParts::ColorSensorRed>()) {
 		return "color_red";
@@ -183,14 +181,14 @@ QString SensorItem::name() const
 	}
 }
 
-QRectF SensorItem::imageRect() const
+QRectF SensorItem::calculateImageRect() const
 {
 	const DeviceInfo sensor = mConfiguration.type(mPort);
 	if (sensor.isA<robotParts::TouchSensor>()) {
 		return QRectF(-12, -5, 25, 10);
 	} else if (sensor.isA<robotParts::ColorSensor>()
-			|| sensor.isA<robotParts::LightSensor>())
-	{
+			|| sensor.isA<robotParts::ColorSensorRaw>()
+			|| sensor.isA<robotParts::LightSensor>()) {
 		return QRectF(-6, -6, 12, 12);
 	}
 	if (sensor.isA<robotParts::RangeSensor>()) {

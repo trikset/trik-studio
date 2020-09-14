@@ -1175,6 +1175,46 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Print Text" name="TrikPrintText" description="Prints a given line in the specified coordinates and font size on the robot`s screen. The value of 'Text' property is interpreted as a plain text unless 'Evaluate' property is set to true, then it will be interpreted as an expression (that may be useful for example when debugging variables values).">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/printTextBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="50" y="60" textBinded="XCoordinateText" prefix="X:"/>
+						<label x="50" y="90" textBinded="YCoordinateText" prefix="Y:"/>
+						<label x="50" y="120" textBinded="PrintText" prefix="Text:"/>
+						<label x="50" y="150" textBinded="FontSize" prefix="Font size:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<properties>
+						<property displayedName="X" type="string" name="XCoordinateText">
+							<default>1</default>
+						</property>
+						<property displayedName="Y" type="string" name="YCoordinateText">
+							<default>1</default>
+						</property>
+						<property displayedName="Text" type="string" name="PrintText">
+							<default>Enter some text here</default>
+						</property>
+						<property displayedName="Evaluate" type="bool" name="Evaluate">
+							<default>false</default>
+						</property>
+						<property displayedName="Redraw" type="bool" name="Redraw">
+							<default>true</default>
+						</property>
+						<property displayedName="Font size" type="string" name="FontSize">
+							<default>20</default>
+						</property>
+					</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 			<node displayedName="Sad Smile" name="TrikSadSmile" path="156, 91 : 173, 110 :  | 115, 73 : 156, 91 :  | 78, 73 : 114, 73 :  | 33, 85 : 78, 73 :  | 12, 106 : 33, 85 :  | 126, 12 : 126, 48 :  | 63, 12 : 63, 49 : " description="Draws a sad smile on the robot`s screen :(">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -1427,6 +1467,7 @@
 				<element name="TrikWaitGamepadConnect" />
 			</group>
 			<group name="Drawing">
+				<element name="TrikPrintText"/>
 				<element name="TrikSetPainterColor"/>
 				<element name="TrikSetPainterWidth"/>
 				<element name="TrikDrawPixel"/>

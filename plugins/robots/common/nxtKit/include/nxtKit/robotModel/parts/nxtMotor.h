@@ -35,7 +35,7 @@ public:
 	void off() override;
 
 	virtual void on(int speed, bool breakMode);
-	virtual void on(int speed, long unsigned int degrees, bool breakMode);
+	virtual void on(int speed, uint64_t degrees, bool breakMode);
 	virtual void stop(bool breakMode);
 };
 

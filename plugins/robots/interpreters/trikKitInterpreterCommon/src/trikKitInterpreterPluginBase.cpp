@@ -37,25 +37,19 @@ const Id robotDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagra
 const Id subprogramDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram");
 
 TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase() :
-	mStart(tr("Start"), nullptr), mStop(tr("Stop"), nullptr)
+	mStart(tr("Start"), this), mStop(tr("Stop"), this)
 {
 }
 
 TrikKitInterpreterPluginBase::~TrikKitInterpreterPluginBase()
 {
-	if (mOwnsAdditionalPreferences) {
-		delete mAdditionalPreferences;
-	}
-
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
+	release();
 }
 
 void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		(robotModel::TrikRobotModelBase * const realRobotModel
 		, robotModel::twoD::TrikTwoDRobotModel * const twoDRobotModel
-		, blocks::TrikBlocksFactoryBase * const blocksFactory
+		, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
 		)
 {
 	mRealRobotModel.reset(realRobotModel);
@@ -63,9 +57,8 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 	mBlocksFactory = blocksFactory;
 
 	const auto modelEngine = new twoDModel::engine::TwoDModelEngineFacade(*mTwoDRobotModel);
-
-	mTwoDRobotModel->setEngine(modelEngine->engine());
 	mTwoDModel.reset(modelEngine);
+	mTwoDRobotModel->setEngine(modelEngine->engine());
 
 	connectDevicesConfigurationProvider(devicesConfigurationProvider()); // ... =(
 
@@ -168,7 +161,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 
 void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 {
-	auto prepareImagesFromProject = [this](QString) {
+	auto prepareImagesFromProject = [this](const QString&) {
 		if (mCurrentlySelectedModelName.contains("trik", Qt::CaseInsensitive)
 				&& qReal::SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool()
 				&& mProjectManager->somethingOpened()) {
@@ -204,10 +197,6 @@ void TrikKitInterpreterPluginBase::handleImitationCameraWork()
 				dir.cd(curPath);
 			}
 		}
-
-//		if (mTextualInterpreter) {
-//			mTextualInterpreter->reinitRobotsParts();
-//		}
 	};
 
 
@@ -413,18 +402,28 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 	handleImitationCameraWork();
 }
 
+void TrikKitInterpreterPluginBase::release()
+{
+	if (mOwnsAdditionalPreferences) {
+		delete mAdditionalPreferences;
+		mAdditionalPreferences = nullptr;
+	}
+
+	mTwoDModel.reset();
+	mTwoDRobotModel.reset();
+	mRealRobotModel.reset();
+}
+
 QList<kitBase::robotModel::RobotModelInterface *> TrikKitInterpreterPluginBase::robotModels()
 {
 	// @todo: restore it later
 	return {/*mRealRobotModel.data(),*/ mTwoDRobotModel.data()};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *TrikKitInterpreterPluginBase::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> TrikKitInterpreterPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model);
-
-	mOwnsBlocksFactory = false;
 	return mBlocksFactory;
 }
 
@@ -513,8 +512,6 @@ QWidget *TrikKitInterpreterPluginBase::produceIpAddressConfigurer()
 	connect(quickPreferences->lineEdit(), &QLineEdit::editingFinished, this, [quickPreferences]() {
 		qReal::SettingsManager::setValue("TrikTcpServer", quickPreferences->lineEdit()->text().trimmed());
 	});
-
-	connect(this, &QObject::destroyed, quickPreferences, &QObject::deleteLater);
 	return quickPreferences;
 }
 

@@ -9,7 +9,8 @@ Component.prototype.createOperations = function()
     if (installer.value("os") === "win") {
         component.addOperation("RegisterFileType",
                                "tsj",
-                               "@TargetDir@\\" + installer.executableName + installer.execExtension + " \"%1\"",
+                               "C:\\Windows\\System32\\wscript.exe //nologo //b // \"@TargetDir@\\" +
+                                    installer.executableName + installer.execExtension + "\"  \"%1\"",
                                "@ProductName@ Project",
                                "application/octet-stream",
                                "@TargetDir@/trik-studio-jr.ico");

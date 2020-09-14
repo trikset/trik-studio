@@ -18,7 +18,7 @@
 #include <QtWidgets/QPushButton>
 
 VisibilityConditionsDialog::VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &properties
-		, QList<Item *> const &items, QWidget *parent)
+		, QList<QSharedPointer<Item>> const &items, QWidget *parent)
 	: QDialog(parent)
 	, ui(new Ui::VisibilityConditionsDialog)
 	, mProperties(properties), mItems(items)
@@ -64,7 +64,7 @@ void VisibilityConditionsDialog::changeOperators(Type type)
 
 void VisibilityConditionsDialog::okClicked()
 {
-	for (Item *item : mItems) {
+	for (auto item : mItems) {
 		item->setVisibilityCondition(ui->propertyComboBox->currentText()
 				, ui->operatorComboBox->currentText(), ui->valueWidget->value());
 	}
@@ -85,7 +85,7 @@ void VisibilityConditionsDialog::setWidgetValues()
 bool VisibilityConditionsDialog::areValuesEqual() const
 {
 	Item::VisibilityCondition value = mItems.first()->visibilityCondition();
-	for (Item *item : mItems) {
+	for (auto item : mItems) {
 		if (item->visibilityCondition() != value) {
 			return false;
 		}

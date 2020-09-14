@@ -70,7 +70,7 @@
 <context>
     <name>utils::robotCommunication::TcpRobotCommunicator</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicator.cpp" line="+83"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicator.cpp" line="+81"/>
         <source>Empty program name, can not upload</source>
         <translation type="unfinished"></translation>
     </message>
@@ -83,7 +83,7 @@
 <context>
     <name>utils::robotCommunication::TcpRobotCommunicatorWorker</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="+230"/>
+        <location filename="../../../../plugins/robots/utils/src/robotCommunication/tcpRobotCommunicatorWorker.cpp" line="+232"/>
         <source>Unable to resolve host.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -96,7 +96,7 @@
 <context>
     <name>utils::sensorsGraph::SensorViewer</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorViewer.cpp" line="+132"/>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorViewer.cpp" line="+109"/>
         <source>Save values history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -114,7 +114,7 @@
 <context>
     <name>utils::sensorsGraph::SensorsGraph</name>
     <message>
-        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="+149"/>
+        <location filename="../../../../plugins/robots/utils/src/graphicsWatcher/sensorsGraph.cpp" line="+141"/>
         <source>Stop tracking</source>
         <translation type="unfinished"></translation>
     </message>

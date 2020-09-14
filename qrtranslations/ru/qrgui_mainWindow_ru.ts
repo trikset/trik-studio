@@ -765,7 +765,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+852"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+867"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+110"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1027"/>
+        <location line="-1046"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -832,12 +832,12 @@ WARNING: The settings will be restored after application restart</source>
 ВНИМАНИЕ: Настройки будут сброшены после перезапуска приложения</translation>
     </message>
     <message>
-        <location line="+408"/>
+        <location line="+423"/>
         <source>Could not save file, try to save it to another place</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+626"/>
+        <location line="+630"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
@@ -892,12 +892,12 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Показать/спрятать панель ошибок</translation>
     </message>
     <message>
-        <location line="+199"/>
+        <location line="+202"/>
         <source>Gestures Show</source>
         <translation>Жесты мышью</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+340"/>
         <source>Shortcuts</source>
         <translation>Горячие клавиши</translation>
     </message>
@@ -907,7 +907,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Сторонние утилиты</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+50"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Не получилось открыть %1</translation>
     </message>
@@ -927,7 +927,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Изображения (*.png *.jpg)</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+161"/>
         <source>Getting Started</source>
         <translation>Добро пожаловать!</translation>
     </message>
@@ -1024,7 +1024,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+68"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+71"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -1059,7 +1059,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation> [изменён]</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+90"/>
         <source>Select file to save current metamodel to</source>
         <translation>Выберите файл для сохранения метамодели</translation>
     </message>
@@ -1086,7 +1086,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ShapeEdit</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+353"/>
+        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+352"/>
         <source>Saving</source>
         <translation>Сохранение</translation>
     </message>
@@ -1098,7 +1098,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+138"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
         <source>New project</source>
         <translation>Создать проект</translation>
     </message>
@@ -1154,7 +1154,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+85"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
         <source>Mouse gesture</source>
         <translation>Жест мышью</translation>
     </message>
@@ -1210,7 +1210,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Если вы удалите его, то все унаследованные свойства будут удалены у его потомков. Продолжить удаление?</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+75"/>
         <location line="+29"/>
         <source>Change Properties</source>
         <translation>Изменить свойства</translation>

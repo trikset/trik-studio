@@ -27,8 +27,10 @@ namespace gui {
 
 class MainWindowDockInterface
 {
+	Q_DISABLE_COPY(MainWindowDockInterface)
 public:
-	virtual ~MainWindowDockInterface() {}
+	MainWindowDockInterface() = default;
+	virtual ~MainWindowDockInterface() = default;
 
 	/// Returns a widget of main window for such operation as appending actions to it and so on.
 	virtual QWidget *windowWidget() = 0;

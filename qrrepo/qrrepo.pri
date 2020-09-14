@@ -12,7 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-links(qrkernel qrutils quazip qslog)
+links(qrkernel qrutils quazip)
+
+clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
+CONFIG *= link_pkgconfig
+PKGCONFIG *= zlib
 
 HEADERS += \
 	$$PWD/private/repository.h \

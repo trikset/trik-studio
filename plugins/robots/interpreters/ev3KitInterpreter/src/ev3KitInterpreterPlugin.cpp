@@ -48,13 +48,7 @@ Ev3KitInterpreterPlugin::Ev3KitInterpreterPlugin()
 
 Ev3KitInterpreterPlugin::~Ev3KitInterpreterPlugin()
 {
-	if (mOwnsAdditionalPreferences) {
-		delete mAdditionalPreferences;
-	}
-
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
+	release();
 }
 
 void Ev3KitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
@@ -95,6 +89,15 @@ void Ev3KitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configu
 			, configurator.interpreterControl());
 }
 
+void Ev3KitInterpreterPlugin::release()
+{
+	if (mOwnsAdditionalPreferences) {
+		delete mAdditionalPreferences;
+		mAdditionalPreferences = nullptr;
+	}
+	mTwoDModel.reset();
+}
+
 QString Ev3KitInterpreterPlugin::kitId() const
 {
 	return "ev3Kit";
@@ -110,7 +113,7 @@ QList<kitBase::robotModel::RobotModelInterface *> Ev3KitInterpreterPlugin::robot
 	return {&mUsbRealRobotModel, &mBluetoothRealRobotModel, &mTwoDRobotModel};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *Ev3KitInterpreterPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> Ev3KitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {
@@ -171,7 +174,5 @@ QString Ev3KitInterpreterPlugin::defaultSettingsFile() const
 QWidget *Ev3KitInterpreterPlugin::produceBluetoothPortConfigurer()
 {
 	QWidget * const result = new ui::ComPortPicker("Ev3BluetoothPortName", this);
-	/// TODO: better like this result->QObject::setParent(this);
-	connect(this, &QObject::destroyed, result, &QObject::deleteLater);
 	return result;
 }

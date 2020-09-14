@@ -23,6 +23,8 @@
 #include "twoDModel/robotModel/parts/colorSensorGreen.h"
 #include "twoDModel/robotModel/parts/colorSensorBlue.h"
 #include "twoDModel/robotModel/parts/colorSensorAmbient.h"
+#include "twoDModel/robotModel/parts/colorSensorReflected.h"
+#include "twoDModel/robotModel/parts/colorSensorRaw.h"
 #include "twoDModel/robotModel/parts/display.h"
 #include "twoDModel/robotModel/parts/encoderSensor.h"
 #include "twoDModel/robotModel/parts/lightSensor.h"
@@ -124,10 +126,17 @@ QSizeF TwoDRobotModel::size() const
 	return QSizeF(50, 50);
 }
 
+QPointF TwoDRobotModel::robotCenter() const
+{
+	return QPointF(size().width() / 2, size().height() / 2);
+}
+
 QPointF TwoDRobotModel::rotationCenter() const
 {
-	QSizeF localSize = size() / 2;
-	return QPointF(localSize.width(), localSize.height());
+	if (wheelsPosition().size() < 2) {
+		return robotCenter();
+	}
+	return (wheelsPosition()[0] + wheelsPosition()[1]) / 2;
 }
 
 QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const
@@ -184,6 +193,14 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 
 	if (deviceInfo.isA<robotParts::ColorSensorAmbient>()) {
 		return new parts::ColorSensorAmbient(deviceInfo, port, *mEngine);
+	}
+
+	if (deviceInfo.isA<robotParts::ColorSensorReflected>()) {
+		return new parts::ColorSensorReflected(deviceInfo, port, *mEngine);
+	}
+
+	if (deviceInfo.isA<robotParts::ColorSensorRaw>()) {
+		return new parts::ColorSensorRaw(deviceInfo, port, *mEngine);
 	}
 
 	if (deviceInfo.isA<robotParts::GyroscopeSensor>()) {

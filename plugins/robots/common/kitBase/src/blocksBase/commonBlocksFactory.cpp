@@ -38,7 +38,7 @@ qReal::interpretation::BlockInterface *CommonBlocksFactory::block(const qReal::I
 		newBlock = new qReal::interpretation::blocks::EmptyBlock;
 	}
 
-	if (RobotsBlock * const robotsBlock = dynamic_cast<RobotsBlock *>(newBlock)) {
+	if (auto robotsBlock = dynamic_cast<RobotsBlock *>(newBlock)) {
 		robotsBlock->init(element, mGraphicalModelApi, mLogicalModelApi
 				, mErrorReporter, *mRobotModelManager, mParser);
 	} else {

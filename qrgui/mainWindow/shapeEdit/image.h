@@ -20,10 +20,9 @@
 
 class Image : public Item
 {
+	Q_DISABLE_COPY(Image)
 public:
-	Image(QString fileName, qreal x, qreal y, Item* parent = nullptr);
-	Image(const Image &other);
-	virtual Item* clone();
+	Image(const QString &fileName, qreal x, qreal y, Item* parent = nullptr);
 	virtual QRectF boundingRect() const;
 	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
 	virtual void setItemZValue(int zValue);

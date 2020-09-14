@@ -88,9 +88,9 @@ const QList<TextObject *> &Canvas::labels() const
 	return mLabels;
 }
 
-void Canvas::printText(int x, int y, const QString &text)
+void Canvas::printText(int x, int y, const QString &text, int fontSize)
 {
-	TextObject * const object = new TextObject(x, y, text, mCurrentPenColor, mCurrentPenWidth);
+	TextObject * const object = new TextObject(x, y, text, mCurrentPenColor, mCurrentPenWidth, fontSize);
 	mObjects << object;
 	mLabels << object;
 }

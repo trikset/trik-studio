@@ -205,7 +205,7 @@ private:
 	QMap<Ev3RbfType, int> mArrayDeclarationCount;
 	QMap<qReal::Id, QMap<Ev3RbfType, int>> mRegistersCount;
 	// Doesn't takes ownership
-	const generatorBase::simple::Binding::ConverterInterface *mReservedVariablesConverter;
+	const generatorBase::simple::Binding::ConverterInterface *mReservedVariablesConverter {};
 	generatorBase::lua::ReservedFunctionsConverter mReservedFunctionsConverter;
 };
 

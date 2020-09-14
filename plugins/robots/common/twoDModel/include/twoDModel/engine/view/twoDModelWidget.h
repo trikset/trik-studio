@@ -147,6 +147,7 @@ private slots:
 
 	void saveWorldModel();
 	void loadWorldModel();
+	void loadWorldModelWithoutRobot();
 
 	void onSelectionChange();
 
@@ -230,37 +231,36 @@ private:
 
 	void incrementTimelineCounter();
 
-	Ui::TwoDModelWidget *mUi = nullptr;
-	TwoDModelScene *mScene = nullptr;
-	QList<QMetaObject::Connection> mConnections;
+	Ui::TwoDModelWidget *mUi {};
+	QScopedPointer<TwoDModelScene> mScene;
 	QScopedPointer<ActionsBox> mActions;
-	ColorItemPopup *mColorFieldItemPopup;  // Takes ownership
-	ImageItemPopup *mImageItemPopup;  // Takes ownership
-	RobotItemPopup *mRobotItemPopup;  // Takes ownership
-	SpeedPopup *mSpeedPopup;  // Takes owneship
+	ColorItemPopup *mColorFieldItemPopup {};  // Takes ownership
+	ImageItemPopup *mImageItemPopup {};  // Takes ownership
+	RobotItemPopup *mRobotItemPopup {};  // Takes ownership
+	SpeedPopup *mSpeedPopup {};  // Takes owneship
 
-	RobotItem *mSelectedRobotItem = nullptr;
-	kitBase::DevicesConfigurationWidget *mCurrentConfigurer;
+	RobotItem *mSelectedRobotItem {};
+	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};
 
 	model::Model &mModel;
-	qReal::ControllerInterface *mController = nullptr;
+	qReal::ControllerInterface *mController {};
 
-	engine::TwoDModelDisplayWidget *mDisplay = nullptr;
-	engine::TwoDModelDisplayWidget *mNullDisplay = nullptr;
+	engine::TwoDModelDisplayWidget *mDisplay {}; // Transfers ownership to parent widget upon creation
+	engine::TwoDModelDisplayWidget *mNullDisplay {}; // Transfers ownership to parent widget upon creation
 
-	int mCurrentSpeed;
+	int mCurrentSpeed { -1 };
 
-	CursorType mNoneCursorType; // cursorType for noneStatus
-	CursorType mCursorType; // current cursorType
+	CursorType mNoneCursorType { CursorType::noDrag }; // cursorType for noneStatus
+	CursorType mCursorType { CursorType::noDrag }; // current cursorType
 
-	bool mFollowRobot = false;
-	bool mDetailsAreVisible = false;
-	bool mFirstShow = true;
+	bool mFollowRobot {};
+	bool mDetailsAreVisible {};
+	bool mFirstShow { true };
 
-	bool mSensorsReadOnly = false;
-	bool mRobotPositionReadOnly = false;
+	bool mSensorsReadOnly {};
+	bool mRobotPositionReadOnly {};
 
-	bool mCompactMode = false;
+	bool mCompactMode {};
 };
 
 }

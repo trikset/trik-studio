@@ -39,16 +39,22 @@ environment:
     CCACHE_DIR: C:\ccache.cache
     BUILD_DIR: '%APPVEYOR_BUILD_FOLDER%\.build'
     PROJECT_FILE: studio
-    #TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe && .\trik-v62-qts-generator-tests.exe && .\robots_utils_unittests.exe"
-    TEST_SUITE: .\robots_kitBase_unittests.exe && .\robots_interpreterCore_unittests.exe && .\robots_twoDModel_unittests.exe"
     APPVEYOR_CACHE_ENTRY_ZIP_ARGS: -t7z -m0=lzma -mx=9
     master_ci:
       secure: CuoEe+MMcU6PLsinM6SbBsq2QWGiTmpTH/kPfC20g7M=
+    server:
+      secure: cSPfeMLOOlPhHRS4eZz337/2X+HUquhXmDZx2OgRSFE=
+    password:
+      secure: e2Rwbvcr6Z/YAX4N0/tO3w==
   matrix:
       - QT: 5.12
         ARCH: 32
         CONFIGURATION: release
         QTIFW: C:\Qt\Tools\QtInstallerFramework\3.1
+
+matrix:
+  allow_failures:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
 
 #cache:
 #  - '%BUILD_DIR% -> **\*.pr?, appveyor.yml'
@@ -64,49 +70,53 @@ environment:
 #    image: Visual Studio 2019
 
 init:
-  - git config --global core.symlinks true
-  - git config --global core.autocrlf true
+  # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - set PYTHON_PATH=C:\Python3%PYTHON_VERSION_MINOR%
+  - if "%ARCH%" == "64" (set PYTHON_PATH=%PYTHON_PATH%-x64)
+  - set PYTHON_LIB=%PYTHON_PATH%\libs
+  - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
+  - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
+  - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
+  - set PATH
+  - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin;C:\Program Files\AppVeyor\BuildAgent\
+  - set PATH
+  - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
-  - set PYTHON_PATH=C:\Python3%PYTHON_VERSION_MINOR%
-  - if "%ARCH%" == "64" (set PYTHON_PATH=%PYTHON_PATH%-x64)
   - set NEED_AUTOZIP=false
   - set NEED_BINZIP=false
   - set NEED_INSTALLER=false
 #TODO: multiline %APPVEYOR_REPO_COMMIT_MESSAGE_EXTENDED% can cause problems
-  - 'set FULL_MESSAGE="%APPVEYOR_PULL_REQUEST_TITLE% %APPVEYOR_REPO_COMMIT_MESSAGE%"'
+  - 'set "FULL_MESSAGE=%APPVEYOR_PULL_REQUEST_TITLE% %APPVEYOR_REPO_COMMIT_MESSAGE%"'
   - 'echo #%FULL_MESSAGE%#'
-  - 'if %FULL_MESSAGE:[INSTALLER]=% NEQ %FULL_MESSAGE% ( set "NEED_INSTALLER=true" )'
-  - 'if %FULL_MESSAGE:[BINZIP]=%    NEQ %FULL_MESSAGE% ( set "NEED_BINZIP=true"    )'
-  - 'if %FULL_MESSAGE:[AUTOZIP]=%   NEQ %FULL_MESSAGE% ( set "NEED_AUTOZIP=true"   )'
+  - 'if "%FULL_MESSAGE:[INSTALLER]=%" NEQ "%FULL_MESSAGE%" ( set "NEED_INSTALLER=true" )'
+  - 'if "%FULL_MESSAGE:[BINZIP]=%"    NEQ "%FULL_MESSAGE%" ( set "NEED_BINZIP=true"    )'
+  - 'if "%FULL_MESSAGE:[AUTOZIP]=%"   NEQ "%FULL_MESSAGE%" ( set "NEED_AUTOZIP=true"   )'
 # this is a push/merge for branch (else it is a PR)
-  - if "x%appveyor_pull_request_number%" EQU "x" (set NEED_AUTOZIP=true)
+  - if "x%appveyor_pull_request_number%" EQU "x" (set "NEED_AUTOZIP=true")
 #this is a tagged commit build
-  - if "%APPVEYOR_REPO_TAG%" EQU "true" ( set "NEED_INSTALLER=true" && set NEED_AUTOZIP=true )
+  - if "%APPVEYOR_REPO_TAG%" EQU "true" ( set "NEED_INSTALLER=true" && set "NEED_AUTOZIP=true" )
 #disable artifacts for Python38
-  - if "%PYTHON_VERSION_MINOR%" NEQ "7" ( set "NEED_INSTALLER=false" && set NEED_AUTOZIP=false )
+  - if "%PYTHON_VERSION_MINOR%" NEQ "7" ( set "NEED_INSTALLER=false" && set "NEED_AUTOZIP=false" )
   - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
   - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
   - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
 
 clone_script:
     - cmd: |
-         git clone --progress --single-branch --no-checkout --branch=%appveyor_repo_branch% https://github.com/%appveyor_repo_name%.git %appveyor_build_folder%
+         "C:\\Program Files\\Git\\cmd\\git" config --global core.symlinks true
+         "C:\\Program Files\\Git\\cmd\\git" config --global core.autocrlf true
+         "C:\\Program Files\\Git\\cmd\\git" clone --progress --single-branch --no-checkout --branch=%appveyor_repo_branch% https://github.com/%appveyor_repo_name%.git %appveyor_build_folder%
          cd %appveyor_build_folder%
-         if "x%appveyor_pull_request_number%" == "x" ( git checkout -f %appveyor_repo_commit% ) else ( git fetch origin +refs/pull/%appveyor_pull_request_number%/merge: && git checkout -f FETCH_HEAD )
-         git submodule update --init --recursive
+         if "x%appveyor_pull_request_number%" == "x" ( "C:\\Program Files\\Git\\cmd\\git" checkout -f %appveyor_repo_commit% ) else ( "C:\\Program Files\\Git\\cmd\\git" fetch origin +refs/pull/%appveyor_pull_request_number%/merge: && "C:\\Program Files\\Git\\cmd\\git" checkout -f FETCH_HEAD )
+         "C:\\Program Files\\Git\\cmd\\git" submodule update --init --recursive
 
 
 install:
-  - set PYTHON_LIB=%PYTHON_PATH%\libs
-  - set QTDIR=C:\Qt\%QT%\mingw73_%ARCH%
-  - set MINGW=C:\Qt\Tools\mingw730_%ARCH%
-  - set PATH=C:\Tools\curl\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%PATH%
-  - set PATH
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
-  - pacman --verbose --noconfirm --sync ccache rsync curl unzip
+  - pacman --verbose --noconfirm --sync ccache rsync curl unzip sshpass
   - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
 #--refresh --sysupgrade --ask=20
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
@@ -116,6 +126,9 @@ install:
   - ccache -M 900M
   - which g++
   - g++ --version
+  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
+  - unzip tests_qrs.zip
+  - ls
   - dir C:\Qt\Tools\
   - dir C:\Qt
 
@@ -136,14 +149,14 @@ build_script:
   - bash -c "env LC_ALL=C date -u"
   - mingw32-make -j2 qmake_all
   - bash -c "env LC_ALL=C date -u"
-  - mingw32-make -j2 -k all
+  - mingw32-make -j2 -k check
 
 test_script:
   - echo %cd%
   - cd %BUILD_DIR%\bin\%CONFIGURATION%
   - dir
-  - bash -c "env LC_ALL=C date -u"
-  - cmd /c %TEST_SUITE%
+  - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
+#  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
 
 after_test:
 # zip binaries
@@ -188,6 +201,9 @@ after_test:
   - cmd /c %INSTALLER_NAME% --script trik_studio_installscript.qs
   - dir C:\TRIKStudio.Jr
   - bash -c "env LC_ALL=C date -u"
+  # deployment
+  #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
+  - IF "x%server%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' %INSTALLER_NAME% %server%:dl/ts/fresh/installer/)
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
@@ -204,10 +220,10 @@ deploy:
     on:
       ARCH: 64
       APPVEYOR_PROJECT_SLUG: $(master_ci)
-      
+
   - provider: Environment
     name: github-release
-    github_release_artifact: installer\$(AUTOINSTALLER_ZIP_NAME)
+    github_release_artifact: $(AUTOINSTALLER_ZIP_NAME)
     on:
       ARCH: 32
       QT: 5.12
@@ -218,7 +234,7 @@ deploy:
 on_finish:
   - ccache -s
   - bash -c "env LC_ALL=C date -u"
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  # - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 
 notifications:

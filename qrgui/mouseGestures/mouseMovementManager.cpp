@@ -43,7 +43,8 @@ MouseMovementManager::MouseMovementManager(const Id &diagram
 
 	// Initialization process is pretty long, so it must be performed in another thread.
 	// mInitializing flag will be set to false when initialization process is finished.
-	QtConcurrent::run(this, &MouseMovementManager::initializeGestures);
+	//QtConcurrent::run(this, &MouseMovementManager::initializeGestures);
+	MouseMovementManager::initializeGestures();
 }
 
 QWidget *MouseMovementManager::producePainter() const

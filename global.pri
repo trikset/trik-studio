@@ -141,7 +141,7 @@ unix:!nosanitizers {
 
 	#LSan can be used without performance degrade even in release build
 	#But at the moment we can not, because of Qt  problems
-	!macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
+        !macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_memory):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
 		QMAKE_CFLAGS += -fsanitize=leak
@@ -156,9 +156,21 @@ unix:!nosanitizers {
 		#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
 	}
 
+        sanitize_memory {
+                QMAKE_CFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
+                QMAKE_CXXFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
 
-        QMAKE_CFLAGS += -fsanitize-recover=all
-        QMAKE_CXXFLAGS += -fsanitize-recover=all
+        }
+
+
+        QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
+        QMAKE_CXXFLAGS_RELEASE += -fsanitize-recover=all
+
+        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
+        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
+
+        QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover=all
+        QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover=all
 }
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
@@ -189,11 +201,15 @@ CONFIG *= c++14
 
 DEFINES *= QT_FORCE_ASSERTS
 
+DEFINES *= QT_NO_ACCESSIBILITY
+
 !warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
 !warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
+
+gcc:versionAtLeast(QT_VERSION, 5.15.0):QMAKE_CXXFLAGS *= -Wno-error=deprecated-declarations
 
 clang {
 	#treat git submodules as system path
@@ -332,5 +348,9 @@ defineReplace(fullSystemPath) {
 CONFIG(noPch) {
 	noPch()
 }
+
+
+includes(thirdparty/qslog/qslog)
+links(trikQsLog)
 
 } # GLOBAL_PRI_INCLUDED

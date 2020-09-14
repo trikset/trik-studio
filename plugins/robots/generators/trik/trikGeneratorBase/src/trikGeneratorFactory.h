@@ -35,8 +35,6 @@ public:
 
 	QStringList pathsToTemplates() const override;
 
-	generatorBase::parts::DeviceVariables *deviceVariables() const override;
-
 private:
 	const QStringList mPathsToTemplates;
 };

@@ -56,9 +56,9 @@ void Display::drawCircle(int x, int y, int radius)
 	Canvas::drawEllipse(x, y, radius, radius);
 }
 
-void Display::printText(int x, int y, const QString &text)
+void Display::printText(int x, int y, const QString &text, int fontSize)
 {
-	Canvas::printText(x * textPixelWidth, y * textPixelHeight, text);
+	Canvas::printText(x * textPixelWidth, y * textPixelHeight, text, fontSize);
 }
 
 void Display::clearScreen()

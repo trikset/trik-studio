@@ -47,12 +47,13 @@ public:
 	~TrikKitInterpreterPluginBase() override;
 
 	void init(const kitBase::KitPluginConfigurator &configurer) override;
+	void release() override;
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
 	kitBase::robotModel::RobotModelInterface *defaultRobotModel() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
@@ -85,13 +86,12 @@ private slots:
 
 protected:
 	/// Takes ownership over all supplied pointers.
-	void initKitInterpreterPluginBase(
-			robotModel::TrikRobotModelBase * const realRobotModel
+	void initKitInterpreterPluginBase(robotModel::TrikRobotModelBase * const realRobotModel
 			, robotModel::twoD::TrikTwoDRobotModel * const twoDRobotModel
-			, blocks::TrikBlocksFactoryBase * const blocksFactory
+			, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
 			);
 
-	qReal::gui::MainWindowInterpretersInterface *mMainWindow;
+	qReal::gui::MainWindowInterpretersInterface *mMainWindow {};
 
 private:
 	void startCodeInterpretation(const QString &code, const QString &extension);
@@ -113,18 +113,15 @@ private:
 
 	qReal::SystemEvents *mSystemEvents = nullptr; // Does not have ownership
 
-	/// @todo Use shared pointers instead of this sh~.
-	/// Ownership depends on mOwnsBlocksFactory flag.
-	blocks::TrikBlocksFactoryBase *mBlocksFactory = nullptr;
-	bool mOwnsBlocksFactory = true;
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 
 	/// Ownership depends on mOwnsAdditionalPreferences flag.
 	TrikAdditionalPreferences *mAdditionalPreferences = nullptr;
 	bool mOwnsAdditionalPreferences = true;
 
-	kitBase::InterpreterControlInterface *mInterpreterControl;  // Does not have ownership.
-	qReal::ProjectManagementInterface *mProjectManager; // Does not have ownership.
-	qReal::LogicalModelAssistInterface *mLogicalModel; // Doesn`t have ownership
+	kitBase::InterpreterControlInterface *mInterpreterControl {};  // Does not have ownership.
+	qReal::ProjectManagementInterface *mProjectManager {}; // Does not have ownership.
+	qReal::LogicalModelAssistInterface *mLogicalModel {}; // Doesn`t have ownership
 	QString mCurrentlySelectedModelName;
 	QString mCurrentTabPath;
 };

@@ -19,7 +19,7 @@ using namespace qReal;
 using namespace qReal::commands;
 
 Controller::Controller()
-	: mGlobalStack(new UndoStack)
+	: mGlobalStack(new UndoStack(this))
 	, mActiveStack(nullptr)
 	, mModifiedState(false)
 	, mCanRedoState(true)
@@ -89,7 +89,6 @@ void Controller::execute(commands::AbstractCommand *command, UndoStack *stack)
 {
 	if (command && stack) {
 		stack->execute(command);
-		emit executedOrUndoRedo();
 	}
 }
 
@@ -99,7 +98,7 @@ void Controller::moduleOpened(const QString &moduleId)
 		return;
 	}
 
-	UndoStack *stack = new UndoStack;
+	UndoStack *stack = new UndoStack(this);
 	connectStack(stack);
 	mModuleStacks.insert(moduleId, stack);
 	resetAll();
@@ -118,6 +117,12 @@ void Controller::moduleClosed(const QString &moduleId)
 	delete mModuleStacks[moduleId];
 	mModuleStacks.remove(moduleId);
 	resetAll();
+}
+
+bool Controller::isUnsaved(const QString &moduleId) const
+{
+	return !moduleId.isEmpty() && mModuleStacks.keys().contains(moduleId)
+		&& mModuleStacks[moduleId] && !mModuleStacks[moduleId]->isClean();
 }
 
 void Controller::resetModifiedState()
@@ -185,7 +190,6 @@ void Controller::redo()
 	UndoStack *stack = selectActiveStack(false);
 	if (stack) {
 		stack->redo();
-		emit executedOrUndoRedo();
 	}
 }
 
@@ -194,7 +198,6 @@ void Controller::undo()
 	UndoStack *stack = selectActiveStack(true);
 	if (stack) {
 		stack->undo();
-		emit executedOrUndoRedo();
 	}
 }
 
@@ -228,7 +231,7 @@ void Controller::setActiveStack(UndoStack *stack)
 
 void Controller::connectStack(const UndoStack *stack)
 {
-	connect(stack, SIGNAL(cleanChanged(bool)), this, SLOT(resetModifiedState()));
-	connect(stack, SIGNAL(canRedoChanged(bool)), this, SLOT(resetCanRedoState()));
-	connect(stack, SIGNAL(canUndoChanged(bool)), this, SLOT(resetCanUndoState()));
+	connect(stack, &UndoStack::cleanChanged, this, &Controller::resetModifiedState);
+	connect(stack, &UndoStack::canRedoChanged, this, &Controller::resetCanRedoState);
+	connect(stack, &UndoStack::canUndoChanged, this, &Controller::resetCanUndoState);
 }

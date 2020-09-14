@@ -174,7 +174,7 @@ protected:
 	const qReal::LogicalModelAssistInterface *mLogicalModelApi;  // Doesn't have ownership.
 
 	qReal::Id mGraphicalId;
-	Thread *mThread;
+	Thread *mThread {};
 
 private slots:
 	void finishedRunning();
@@ -193,10 +193,10 @@ private:
 	/// Shall be reimplemented to provide semantics of block execution.
 	virtual void run() = 0;
 
-	qrtext::LanguageToolboxInterface *mParser;  // Doesn't have ownership.
+	qrtext::LanguageToolboxInterface *mParser {};  // Doesn't have ownership.
 
 	State mState;
-	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn't have ownership.
+	qReal::ErrorReporterInterface *mErrorReporter {};  // Doesn't have ownership.
 
 	/// @todo: Block shall not own ParserErrorReporter, it shall be received from factory.
 	QScopedPointer<utils::ParserErrorReporter> mParserErrorReporter;

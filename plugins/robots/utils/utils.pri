@@ -14,7 +14,7 @@
 
 QT += widgets network
 
-links(qrkernel qrutils qslog qrtext)
+links(qrkernel qrutils qrtext)
 includes(qrtext)
 
 DEFINES += ROBOTS_UTILS_LIBRARY

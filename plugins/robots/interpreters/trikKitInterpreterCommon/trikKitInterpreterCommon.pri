@@ -14,7 +14,7 @@
 
 QT += widgets network script xml multimedia
 
-includes(thirdparty/qslog \
+includes( \
 		plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \
 		plugins/robots/common/trikKit \
@@ -28,7 +28,7 @@ includes(thirdparty/qslog \
 		)
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface qscintilla2 \
-		robots-utils robots-kit-base robots-2d-model robots-trik-kit qslog \
+		robots-utils robots-kit-base robots-2d-model robots-trik-kit \
                 qrgui-text-editor \
 		)
 

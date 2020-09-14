@@ -30,9 +30,9 @@ using namespace gui;
 
 NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	: NxtGeneratorPluginBase("NxtOsekCGeneratorRobotModel", tr("Generation (NXT OSEK C)"), 9 /* After 2D model */)
-	, mGenerateCodeAction(new QAction(nullptr))
-	, mFlashRobotAction(new QAction(nullptr))
-	, mUploadProgramAction(new QAction(nullptr))
+	, mGenerateCodeAction(new QAction(this))
+	, mFlashRobotAction(new QAction(this))
+	, mUploadProgramAction(new QAction(this))
 	, mNxtToolsPresent(false)
 	, mMasterGenerator(nullptr)
 	, mCommunicator(utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
@@ -41,10 +41,7 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	initHotKeyActions();
 }
 
-NxtOsekCGeneratorPlugin::~NxtOsekCGeneratorPlugin()
-{
-	delete mFlashTool;
-}
+NxtOsekCGeneratorPlugin::~NxtOsekCGeneratorPlugin() = default;
 
 QString NxtOsekCGeneratorPlugin::defaultFilePath(const QString &projectName) const
 {
@@ -99,8 +96,8 @@ void NxtOsekCGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configu
 {
 	RobotsGeneratorPluginBase::init(configurator);
 
-	mFlashTool = new NxtFlashTool(*mMainWindowInterface->errorReporter(), mCommunicator);
-	connect(mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
+	mFlashTool.reset(new NxtFlashTool(*mMainWindowInterface->errorReporter(), *mCommunicator));
+	connect(&*mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
 }
 
 QList<ActionInfo> NxtOsekCGeneratorPlugin::customActions()

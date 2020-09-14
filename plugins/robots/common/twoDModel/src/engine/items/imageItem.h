@@ -29,8 +29,10 @@ class ImageItem : public graphicsUtils::AbstractItem
 	Q_PROPERTY(QString path READ path WRITE setPath)
 	Q_PROPERTY(bool background READ isBackground WRITE setBackgroundRole)
 
+	Q_DISABLE_COPY(ImageItem)
+
 public:
-	ImageItem(model::Image *image, const QRect &geometry);
+	ImageItem(const QSharedPointer<model::Image> &image, const QRect &geometry);
 
 	AbstractItem *clone() const;
 
@@ -50,7 +52,7 @@ public:
 	void deserialize(const QDomElement &element) override;
 
 	/// Returns image of this item.
-	model::Image *image() const;
+	QSharedPointer<model::Image> image() const;
 
 	/// Returns true if this item is embedded into save.
 	bool memorizes() const;
@@ -90,9 +92,9 @@ private:
 	QRectF deserializeRect(const QString &string) const;
 
 	graphicsUtils::RectangleImpl mImpl;
-	model::Image *mImage = nullptr; // Does not have ownership
+	QSharedPointer<model::Image> mImage;
 
-	bool mBackgroundRole;
+	bool mBackgroundRole {};
 };
 
 }

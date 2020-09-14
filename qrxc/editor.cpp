@@ -24,7 +24,7 @@
 
 #include <QtCore/QDebug>
 
-Editor::Editor(QDomDocument domDocument, XmlCompiler *xmlCompiler)
+Editor::Editor(const QDomDocument &domDocument, XmlCompiler *xmlCompiler)
 	: mXmlCompiler(xmlCompiler), mXmlDomDocument(domDocument), mLoadingComplete(false)
 {}
 

@@ -22,14 +22,13 @@ AbstractView::AbstractView(QWidget * parent) : QGraphicsView(parent)
 
 void AbstractView::zoomIn()
 {
-	scale(1.5,1.5);
+	scaleTo(1.5);
 	emit zoomChanged();
 }
 
 void AbstractView::zoomOut()
 {
-	scale(0.66,0.66);
-	emit zoomChanged();
+	scaleTo(1/1.5);
 }
 
 void AbstractView::wheelEvent(QWheelEvent *event)
@@ -51,6 +50,31 @@ void AbstractView::scrollContentsBy(int dx, int dy)
 	}
 
 	emit contentsRectChanged();
+}
+
+void AbstractView::setScaleLimits(qreal minAbsScale, qreal maxAbsScale)
+{
+	if (minAbsScale > 0) {
+		mMinAbsScale = minAbsScale;
+	}
+
+	if (maxAbsScale > 0) {
+		mMaxAbsScale = maxAbsScale;
+	}
+
+	if (mMaxAbsScale < mMinAbsScale) {
+		std::swap(mMaxAbsScale, mMinAbsScale);
+	}
+}
+
+void AbstractView::scaleTo(qreal newScaleMultiplier)
+{
+	auto newAbsScale = newScaleMultiplier * mCurrentAbsScale;
+	if (mMinAbsScale <= newAbsScale && newAbsScale <= mMaxAbsScale) {
+		mCurrentAbsScale = newAbsScale;
+		scale(newScaleMultiplier, newScaleMultiplier);
+		emit zoomChanged();
+	}
 }
 
 void AbstractView::keyPressEvent(QKeyEvent *event)

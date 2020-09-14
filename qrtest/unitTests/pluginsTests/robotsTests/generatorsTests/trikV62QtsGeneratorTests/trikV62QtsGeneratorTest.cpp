@@ -98,11 +98,11 @@ tcpRobotSimulator::TcpRobotSimulator &TrikV62QtsGeneratorTest::controlSimulator(
 
 TEST_F(TrikV62QtsGeneratorTest, runProgramTest)
 {
+	EXPECT_TRUE(controlSimulator().isListening());
 	TrikV62QtsGeneratorPlugin plugin;
 	plugin.init(kitPluginConfigurer());
-
-	const QList<qReal::ActionInfo> actions = plugin.customActions();
-	qReal::ActionInfo runProgramAction = actions.at(2);
+	const QList<qReal::ActionInfo> &actions = plugin.customActions();
+	auto const &runProgramAction = actions.at(2);
 	runProgramAction.action()->trigger();
 
 	Wait waiter(5000);
@@ -115,6 +115,7 @@ TEST_F(TrikV62QtsGeneratorTest, runProgramTest)
 
 TEST_F(TrikV62QtsGeneratorTest, incorrectCasingVersionTest)
 {
+	EXPECT_TRUE(controlSimulator().isListening());
 	controlSimulator().setConfigVersion("model-2014");
 
 	const qReal::ErrorReporterInterface *errorReporter
@@ -126,7 +127,7 @@ TEST_F(TrikV62QtsGeneratorTest, incorrectCasingVersionTest)
 	plugin.init(kitPluginConfigurer());
 
 	const QList<qReal::ActionInfo> actions = plugin.customActions();
-	qReal::ActionInfo runProgramAction = actions.at(2);
+	qReal::ActionInfo const &runProgramAction = actions.at(2);
 	runProgramAction.action()->trigger();
 
 	Wait waiter(1000);

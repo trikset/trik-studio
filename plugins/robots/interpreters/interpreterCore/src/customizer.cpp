@@ -38,8 +38,7 @@ QImage Customizer::applicationLogo() const
 
 QString Customizer::productVersion() const
 {
-	/// @todo other storage for it?
-	return TRIK_STUDIO_VERSION;
+	return trikStudioVersion();
 }
 
 QString Customizer::aboutText() const
@@ -50,6 +49,11 @@ QString Customizer::aboutText() const
 QString Customizer::examplesDirectory() const
 {
 	return qReal::PlatformInfo::invariantSettingsPath("pathToExamples");
+}
+
+QString Customizer::trikStudioVersion()
+{
+	return TRIK_STUDIO_VERSION;
 }
 
 QList<QPair<QString, qReal::ActionVisibility> > Customizer::actionsVisibility() const

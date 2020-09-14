@@ -29,7 +29,9 @@ public:
 	/// Can be overriden for creating WPF-like bindings with converters
 	class ROBOTS_GENERATOR_EXPORT ConverterInterface
 	{
+		Q_DISABLE_COPY(ConverterInterface)
 	public:
+		ConverterInterface() = default;
 		virtual ~ConverterInterface();
 
 		virtual QString convert(const QString &data) const = 0;
@@ -39,7 +41,9 @@ public:
 	/// into multiple tokens and converts each of them
 	class ROBOTS_GENERATOR_EXPORT MultiConverterInterface
 	{
+		Q_DISABLE_COPY(MultiConverterInterface)
 	public:
+		MultiConverterInterface() = default;
 		virtual ~MultiConverterInterface();
 
 		virtual QStringList convert(const QString &data) const = 0;
@@ -93,8 +97,8 @@ private:
 	const QString mLabel;
 	const QString mProperty;
 	const QString mValue;
-	const ConverterInterface *mConverter; // Takes ownership
-	const MultiConverterInterface *mMultiConverter; // Takes ownership
+	const QScopedPointer<const ConverterInterface> mConverter;
+	const QScopedPointer<const MultiConverterInterface> mMultiConverter;
 };
 
 }

@@ -18,6 +18,8 @@
 
 #include <utils/circularQueue.h>
 
+#include <QPointer>
+
 #include "twoDModel/robotModel/twoDRobotModel.h"
 #include "sensorsConfiguration.h"
 
@@ -135,16 +137,17 @@ public:
 	void markerUp();
 
 	/// Returns a position of the center of the robot in scene coordinates.
-	QPointF rotationCenter() const;
+	QPointF robotCenter() const;
 
 	/// Returns the item whose scene position will determine robot`s start position.
-	/// Transfers ownership.
-	QGraphicsItem *startPositionMarker() const;
+	items::StartPosition *startPositionMarker();
 
 	/// Returns accelerometer sensor data.
 	Q_INVOKABLE QVector<int> accelerometerReading() const;
 
-	/// Returns gyroscope sensor data.
+	/// Returns gyroscope sensor data:
+	/// data[0] -- angular velocity over Z axis (millidegrees per second)
+	/// data[1] -- tilt around Z axis (millidegrees)
 	Q_INVOKABLE QVector<int> gyroscopeReading() const;
 
 	Q_INVOKABLE QVector<int> gyroscopeCalibrate();
@@ -185,8 +188,7 @@ private slots:
 private:
 	QVector2D robotDirectionVector() const;
 
-	Wheel *initMotor(int radius, int speed, long unsigned int degrees
-			, const kitBase::robotModel::PortInfo &port, bool isUsed);
+	Wheel *initMotor(int radius, int speed, uint64_t degrees, const kitBase::robotModel::PortInfo &port, bool isUsed);
 
 	void countNewForces();
 	void countBeep();
@@ -209,7 +211,7 @@ private:
 
 	/// Simulated robot motors.
 	/// Has ownership.
-	QHash<kitBase::robotModel::PortInfo, Wheel *> mMotors;
+	QHash<kitBase::robotModel::PortInfo, QSharedPointer<Wheel>> mMotors;
 	/// Stores how many degrees the motor rotated on.
 	QHash<kitBase::robotModel::PortInfo, qreal> mTurnoverEngines;
 	/// Describes which wheel is driven by which motor.
@@ -220,26 +222,26 @@ private:
 	twoDModel::robotModel::TwoDRobotModel &mRobotModel;
 	SensorsConfiguration mSensorsConfiguration;
 
+	QPointF mPos { 0, 0 };
+	qreal mAngle { 0 };
+	qreal mGyroAngle { 0 };
+	qreal mDeltaDegreesOfAngle { 0 };
+	int mBeepTime { 0 };
+	bool mIsOnTheGround { true };
 	QPointF mWaitPos;
 	QPointF mLiftedPos;
 	bool mIsCollide { false };
 	bool mIsRiding { false };
-	QPointF mPos;
-	qreal mAngle;
-	qreal mGyroAngle;
-	qreal mDeltaRadiansOfAngle;
-	int mBeepTime;
-	bool mIsOnTheGround;
 	QColor mMarker;
-	QPointF mAcceleration;
+	QPointF mAcceleration { 0, 0 };
 	utils::CircularQueue<QPointF> mPosStamps;
-	bool mIsFirstAngleStamp;
-	qreal mAngleStampPrevious;
+	bool mIsFirstAngleStamp { true };
+	qreal mAngleStampPrevious { 0 };
 
-	WorldModel *mWorldModel;  // Does not take ownership
-	physics::PhysicsEngineBase *mPhysicsEngine;  // Does not take ownership
+	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
+	WorldModel *mWorldModel{};  // Does not take ownership
 
-	items::StartPosition *mStartPositionMarker;  // Transfers ownership to QGraphicsScene
+	QPointer<items::StartPosition> mStartPositionMarker;
 };
 
 }

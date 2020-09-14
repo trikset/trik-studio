@@ -41,12 +41,11 @@ signals:
 
 private slots:
 	void onIncomingData();
-	void onDisconnected();
 	void keepalive();
 
 private:
 	/// Timer used to send "keepalive" packets for other side to be able to detect connection failure.
-	QTimer mKeepAliveTimer; /// Must be destructed after mSocket
+	QTimer *mKeepAliveTimer {};
 	QTcpSocket mSocket;
 	QByteArray mBuffer;
 	int mExpectedBytes = 0;

@@ -28,11 +28,12 @@ class ROBOTS_UTILS_EXPORT TextObject : public CanvasObject
 	Q_PROPERTY(int y READ y WRITE setY)
 	Q_PROPERTY(QPoint pos READ pos)
 	Q_PROPERTY(QString text READ text WRITE setText)
+	Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize)
 
 public:
 	explicit TextObject(QObject *parent = nullptr);
 	TextObject(int x, int y, const QString &text
-			, const QColor &color = Qt::black, int thickness = 1, QObject *parent = nullptr);
+			, const QColor &color = Qt::black, int thickness = 1, int fontSize = -1, QObject *parent = nullptr);
 
 	/// Returns the x-coordinate of the text`s top left corner.
 	int x() const;
@@ -52,8 +53,14 @@ public:
 	/// Returns the rendered string.
 	QString text() const;
 
+	/// Returns the rendered string font size.
+	int fontSize() const;
+
 	/// Sets the rendered string.
 	void setText(const QString &text);
+
+	/// Sets the rendered string font size.
+	void setFontSize(int fontSize);
 
 	void paint(QPainter *painter, const QRect &outputRect) override;
 	QJsonObject toJson() const override;
@@ -62,6 +69,7 @@ private:
 	int mX;
 	int mY;
 	QString mText;
+	int mFontSize;
 };
 
 }

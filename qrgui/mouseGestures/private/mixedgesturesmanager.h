@@ -20,7 +20,7 @@
 namespace qReal {
 namespace gestures {
 
-class MixedGesturesManager : public GesturesRecognizer<QPair<qreal *, qreal *> >
+class MixedGesturesManager : public GesturesRecognizer<QPair<QVector<qreal>, QVector<qreal>>>
 {
 public:
 	MixedGesturesManager();
@@ -35,8 +35,8 @@ public:
 		return getDistance(mKey, key);
 	}
 
-	qreal getDistance(QPair<qreal *, qreal *> const &key1, QPair<qreal *, qreal *> const &key2) override;
-	QPair<qreal *, qreal *> getKey(const PathVector &path) override;
+	qreal getDistance(const key_type &key1, const key_type &key2) override;
+	key_type  getKey(const PathVector &path) override;
 };
 
 class MixedClassifier
@@ -50,12 +50,12 @@ public:
 
 	qreal getDistance(const MixedClassifier &classifier);
 	MixedClassifier getPoint(const MixedClassifier &centre, qreal centreWeight);
-	QPair<qreal *, qreal *> key() const;
+	MixedGesturesManager::key_type  key() const;
 
 private:
-	explicit MixedClassifier(QPair<qreal *, qreal *> &&key);
+	explicit MixedClassifier(MixedGesturesManager::key_type &&key);
 
-	QPair<qreal *, qreal *> mKey;
+	MixedGesturesManager::key_type mKey;
 };
 
 }

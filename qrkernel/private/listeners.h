@@ -15,6 +15,7 @@
 #pragma once
 
 #include <functional>
+#include <type_traits>
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
 
@@ -23,8 +24,10 @@ namespace qReal {
 /// An entity that fires events with some value as parameter.
 class AbstractListener
 {
+	Q_DISABLE_COPY(AbstractListener)
 public:
-	virtual ~AbstractListener() {}
+	AbstractListener() = default;
+	virtual ~AbstractListener() = default;
 
 	/// Fires event that some entity listens for with @arg value as parameter (if needed).
 	virtual void fireEvent(const QVariant &value) = 0;
@@ -126,7 +129,8 @@ public:
 
 	void fireEvent(const QVariant &value) override
 	{
-		mLambda(value.value<Type>());
+		typedef typename std::remove_cv<typename std::remove_reference<Type>::type>::type general_type;
+		mLambda(value.value<general_type>());
 	}
 
 	const QObject *object() const override

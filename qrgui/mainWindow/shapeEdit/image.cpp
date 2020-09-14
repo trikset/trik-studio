@@ -17,7 +17,7 @@
 #include <QtGui/QBitmap>
 #include <QtGui/QImageWriter>
 
-Image::Image(QString fileName, qreal x, qreal y, Item* parent)
+Image::Image(const QString &fileName, qreal x, qreal y, Item* parent)
 	: Item(parent)
 	, mImage(fileName)
 	, mRectangleImpl()
@@ -31,30 +31,6 @@ Image::Image(QString fileName, qreal x, qreal y, Item* parent)
 	setY1(y);
 	setX2(x + pixmap->width());
 	setY2(y + pixmap->height());
-}
-
-Image::Image(const Image &other)
-	:Item(), mRectangleImpl()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mListScalePoint = other.mListScalePoint;
-	mPixmapItem = other.mPixmapItem;
-	mFileName = other.mFileName;
-	mImage = other.mImage;
-	setPos(other.x(), other.y());
-}
-
-Item* Image::clone()
-{
-	Image* item = new Image(*this);
-	return item;
 }
 
 QRectF Image::boundingRect() const

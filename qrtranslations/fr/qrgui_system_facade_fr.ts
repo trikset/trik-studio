@@ -51,7 +51,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+35"/>
         <source>Select file with a save to import</source>
         <translation>Choisir le fichier avec la sauvegarde pour importer</translation>
     </message>

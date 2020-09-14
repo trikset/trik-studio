@@ -13,6 +13,7 @@
 # limitations under the License.
 
 HEADERS += \
+	$$PWD/include/qrtext/core/parser/AutoreleaseRecursiveGrammar.h \
 	$$PWD/include/qrtext/debuggerInterface.h \
 	$$PWD/include/qrtext/declSpec.h \
 	$$PWD/include/qrtext/languageToolboxInterface.h \
@@ -136,7 +137,7 @@ TRANSLATIONS = \
 	$$PWD/../qrtranslations/ru/qrtext_ru.ts \
 	$$PWD/../qrtranslations/fr/qrtext_fr.ts \
 
-includes(qrkernel thirdparty/qslog)
-links(qrkernel qslog)
+includes(qrkernel)
+links(qrkernel)
 
 DEFINES += QRTEXT_LIBRARY

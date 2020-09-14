@@ -25,7 +25,7 @@ const Id graphicalElement("editor", "diagram", "element", "graphicalId");
 
 void RepoApiTest::SetUp()
 {
-	mRepoApi = new RepoApi("test.qrs");
+	mRepoApi = new RepoApi("test.tsj");
 
 	mRepoApi->addChild(Id::rootId(), logicalElement);
 	mRepoApi->addChild(Id::rootId(), graphicalElement, logicalElement);

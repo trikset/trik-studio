@@ -16,6 +16,7 @@
 
 #include <QtNetwork/QTcpServer>
 #include <QtCore/QScopedPointer>
+#include <QPointer>
 
 #include "declSpec.h"
 
@@ -62,7 +63,7 @@ private:
 	QScopedPointer<QThread> mConnectionThread;
 
 	/// Connection object, handles actual interaction with client.
-	QScopedPointer<Connection> mConnection;
+	QPointer<Connection> mConnection; // Has ownership, is deleted from worker thread
 
 	/// Robot casing version used to respond to "configVersion" command.
 	QString mConfigVersion;

@@ -18,7 +18,7 @@ include(../../../../common.pri)
 
 include(../../../../../../plugins/robots/interpreters/interpreterCore/interpreterCore.pri)
 
-links(qrkernel qslog test-utils qrgui-text-editor)
+links(qrkernel test-utils qrgui-text-editor)
 
 includes(plugins/robots/interpreters \
 	plugins/robots/interpreters/interpreterCore \

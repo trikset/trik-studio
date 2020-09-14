@@ -26,8 +26,8 @@ namespace utils {
 
 class Type
 {
+	Q_DISABLE_COPY(Type)
 public:
-	Type(const Type &) = delete;
 	Type(bool isResolved, Diagram *diagram);
 	virtual ~Type();
 	virtual Type* clone() const = 0;

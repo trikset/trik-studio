@@ -23,13 +23,6 @@
 #include <qrutils/mathUtils/geometry.h>
 /// @todo: Get rid of it!
 #include <kitBase/robotModel/robotParts/touchSensor.h>
-#include <kitBase/robotModel/robotParts/colorSensorFull.h>
-#include <kitBase/robotModel/robotParts/colorSensorPassive.h>
-#include <kitBase/robotModel/robotParts/colorSensorRed.h>
-#include <kitBase/robotModel/robotParts/colorSensorGreen.h>
-#include <kitBase/robotModel/robotParts/colorSensorBlue.h>
-#include <kitBase/robotModel/robotParts/colorSensorAmbient.h>
-#include <kitBase/robotModel/robotParts/colorSensorReflected.h>
 
 #include "twoDModel/engine/twoDModelGuiFacade.h"
 #include "twoDModel/engine/model/model.h"
@@ -46,6 +39,8 @@
 #include "src/engine/items/stylusItem.h"
 #include "src/engine/items/regions/ellipseRegion.h"
 #include "src/engine/items/regions/rectangularRegion.h"
+
+#include "kitBase/robotModel/robotModelUtils.h"
 
 using namespace twoDModel;
 using namespace kitBase::robotModel;
@@ -69,27 +64,24 @@ TwoDModelEngineApi::~TwoDModelEngineApi()
 void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
 {
 	auto target = mModel.robotModels()[0];
-	QMetaObject::invokeMethod(target, "setNewMotor"
-		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-		, Q_ARG(int, speed), Q_ARG(uint, degrees), Q_ARG(kitBase::robotModel::PortInfo, port), Q_ARG(bool, breakMode));
+	QMetaObject::invokeMethod(target, [&](){target->setNewMotor(speed, degrees, port, breakMode);}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 }
 
 int TwoDModelEngineApi::readEncoder(const PortInfo &port) const
 {
 	int t;
 	auto target = mModel.robotModels()[0];
-	QMetaObject::invokeMethod(target, "readEncoder"
-		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-		, Q_RETURN_ARG(int, t), Q_ARG(kitBase::robotModel::PortInfo, port));
+	QMetaObject::invokeMethod(target, [&](){t = target->readEncoder(port);}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
 }
 
 void TwoDModelEngineApi::resetEncoder(const PortInfo &port)
 {
 	auto target = mModel.robotModels()[0];
-	QMetaObject::invokeMethod(target, "resetEncoder"
-		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-		, Q_ARG(kitBase::robotModel::PortInfo, port));
+	QMetaObject::invokeMethod(target, [&](){target->resetEncoder(port);}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 }
 
 int TwoDModelEngineApi::readTouchSensor(const PortInfo &port) const
@@ -120,10 +112,9 @@ int TwoDModelEngineApi::readRangeSensor(const PortInfo &port, int maxDistance, q
 
 	int res;
 	auto && target = &mModel.worldModel();
-	QMetaObject::invokeMethod(target, "rangeReading"
-		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-		, Q_RETURN_ARG(int, res), Q_ARG(QPointF, neededPosDir.first), Q_ARG(qreal, neededPosDir.second)
-		, Q_ARG(int, maxDistance), Q_ARG(qreal, scanningAngle));
+	QMetaObject::invokeMethod(target, [&](){res = target->rangeReading(
+	neededPosDir.first, neededPosDir.second, maxDistance, scanningAngle);}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 
 	return mModel.settings().realisticSensors() ? spoilRangeReading(res) : res;
 }
@@ -132,9 +123,8 @@ QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 {
 	QVector<int> t;
 	auto target = mModel.robotModels()[0];
-	QMetaObject::invokeMethod(target, "accelerometerReading"
-		, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-		, Q_RETURN_ARG(QVector<int>, t));
+	QMetaObject::invokeMethod(target, [&](){t = target->accelerometerReading();}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
 }
 
@@ -142,9 +132,8 @@ QVector<int> TwoDModelEngineApi::readGyroscopeSensor() const
 {
 	QVector<int> t;
 	auto target = mModel.robotModels()[0];
-	QMetaObject::invokeMethod(target, "gyroscopeReading"
-			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-			, Q_RETURN_ARG(QVector<int>, t));
+	QMetaObject::invokeMethod(target, [&](){t = target->gyroscopeReading();}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
 }
 
@@ -152,9 +141,8 @@ QVector<int> TwoDModelEngineApi::calibrateGyroscopeSensor()
 {
 	QVector<int> t;
 	auto target = mModel.robotModels()[0];
-	QMetaObject::invokeMethod(target, "gyroscopeCalibrate"
-			, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection
-			, Q_RETURN_ARG(QVector<int>, t));
+	QMetaObject::invokeMethod(target, [&](){t = target->gyroscopeCalibrate();}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
 }
 
@@ -164,36 +152,35 @@ int TwoDModelEngineApi::spoilRangeReading(const int distance) const
 	return mathUtils::Math::truncateToInterval(0, 255, qRound(distance + ran));
 }
 
-int TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
+QColor TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 {
 	const QImage image = areaUnderSensor(port, 1.0);
-	QHash<uint, int> countsColor;
+	if (image.isNull()) return QColor();
 
-	const uint *data = reinterpret_cast<const uint *>(image.bits());
-	const int n = image.byteCount() / 4;
-	for (int i = 0; i < n; ++i) {
-		const uint color = mModel.settings().realisticSensors() ? spoilColor(data[i]) : data[i];
-		++countsColor[color];
+	qreal averageB = 0, averageG = 0, averageR = 0;
+	auto arr = image.constBits();
+	auto nPix = image.byteCount() / 4;
+	for (int i = 0; i < nPix; i++) {
+		averageB += arr[4 * i];
+		averageG += arr[4 * i + 1];
+		averageR += arr[4 * i + 2];
+	}
+	averageR /= nPix;
+	averageG /= nPix;
+	averageB /= nPix;
+
+	if (mModel.settings().realisticSensors()) {
+		const qreal noise = mathUtils::Math::gaussianNoise(spoilColorDispersion);
+		averageR += noise;
+		averageG += noise;
+		averageB += noise;
 	}
 
-	if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorFull>()) {
-		return readColorFullSensor(countsColor);
-	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorPassive>()) {
-		return readColorNoneSensor(countsColor, n);
-	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorRed>()) {
-		return readSingleColorSensor(red, countsColor, n);
-	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorGreen>()) {
-		return readSingleColorSensor(green, countsColor, n);
-	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorBlue>()) {
-		return readSingleColorSensor(blue, countsColor, n);
-	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorAmbient>()) {
-		return readLightSensor(port);
-	} else if (mModel.robotModels()[0]->configuration().type(port).isA<robotParts::ColorSensorReflected>()) {
-		return readLightSensor(port);
-	}
+	auto r = mathUtils::Math::truncateToInterval(0, 255, qRound(averageR));
+	auto g = mathUtils::Math::truncateToInterval(0, 255, qRound(averageG));
+	auto b = mathUtils::Math::truncateToInterval(0, 255, qRound(averageB));
 
-	QLOG_ERROR() << "Incorrect 2d model sensor configuration";
-	return 0;
+	return QColor(r, g, b);
 }
 
 uint TwoDModelEngineApi::spoilColor(const uint color) const
@@ -249,68 +236,6 @@ QImage TwoDModelEngineApi::areaUnderSensor(const PortInfo &port, qreal widthFact
 #endif
 
 	return result;
-}
-
-int TwoDModelEngineApi::readColorFullSensor(QHash<uint, int> const &countsColor) const
-{
-	if (countsColor.isEmpty()) {
-		return 0;
-	}
-
-	QList<int> const values = countsColor.values();
-	int maxValue = INT_MIN;
-	for (int value : values) {
-		if (value > maxValue) {
-			maxValue = value;
-		}
-	}
-
-	const uint maxColor = countsColor.key(maxValue);
-	switch (maxColor) {
-	case (black):
-		return 1;
-	case (red):
-		return 5;
-	case (green):
-		return 3;
-	case (blue) :
-		return 2;
-	case (yellow):
-		return 4;
-	case (white):
-		return 6;
-	case (cyan):
-		return 7;
-	case (magenta):
-		return 8;
-	default:
-		return 0;
-	}
-}
-
-int TwoDModelEngineApi::readSingleColorSensor(uint color, QHash<uint, int> const &countsColor, int n) const
-{
-	return (static_cast<double>(countsColor[color]) / static_cast<double>(n)) * 100.0;
-}
-
-int TwoDModelEngineApi::readColorNoneSensor(QHash<uint, int> const &countsColor, int n) const
-{
-	qreal allWhite = static_cast<qreal>(countsColor[white]);
-
-	QHashIterator<uint, int> i(countsColor);
-	while(i.hasNext()) {
-		i.next();
-		const uint color = i.key();
-		if (color != white) {
-			const int b = (color >> 0) & 0xFF;
-			const int g = (color >> 8) & 0xFF;
-			const int r = (color >> 16) & 0xFF;
-			const qreal k = qSqrt(static_cast<qreal>(b * b + g * g + r * r)) / 500.0;
-			allWhite += static_cast<qreal>(i.value()) * k;
-		}
-	}
-
-	return static_cast<int>((allWhite / static_cast<qreal>(n)) * 100.0);
 }
 
 int TwoDModelEngineApi::readLightSensor(const PortInfo &port) const
@@ -393,10 +318,10 @@ uint TwoDModelEngineApi::spoilLight(const uint color) const
 QPair<QPointF, qreal> TwoDModelEngineApi::countPositionAndDirection(const PortInfo &port) const
 {
 	RobotModel * const robotModel = mModel.robotModels()[0];
-	const QPointF rotationCenter = robotModel->info().rotationCenter();
-	const QVector2D sensorVector = QVector2D(robotModel->configuration().position(port) - rotationCenter);
+	const QPointF robotCenter = robotModel->info().robotCenter();
+	const QVector2D sensorVector = QVector2D(robotModel->configuration().position(port) - robotCenter);
 	const QPointF rotatedVector = mathUtils::Geometry::rotateVector(sensorVector, robotModel->rotation()).toPointF();
-	const QPointF position = robotModel->position() + rotationCenter + rotatedVector;
+	const QPointF position = robotModel->position() + robotCenter + rotatedVector;
 	const qreal direction = robotModel->configuration().direction(port) + robotModel->rotation();
 	return { position, direction };
 }
@@ -410,7 +335,7 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	QGraphicsView * const fakeScene = new QGraphicsView;
 	fakeScene->setScene(mFakeScene.data());
 	QTimer * const timer = new QTimer;
-	QObject::connect(timer, &QTimer::timeout, [=](){mFakeScene.data()->update();});
+	QObject::connect(timer, &QTimer::timeout, &*mFakeScene, [this](){mFakeScene->update();});
 	timer->setInterval(300);
 	timer->setSingleShot(false);
 	fakeScene->setMinimumWidth(700);
@@ -420,4 +345,9 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 			? true
 			: mModel.robotModels()[0]->info().robotId().contains("trik"));
 	timer->start();
+}
+
+kitBase::robotModel::PortInfo TwoDModelEngineApi::videoPort() const
+{
+	return RobotModelUtils::findPort(mModel.robotModels()[0]->info(), "Video2Port", input);
 }

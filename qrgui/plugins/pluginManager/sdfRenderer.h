@@ -29,6 +29,7 @@
 #include <qrkernel/settingsManager.h>
 
 #include "plugins/pluginManager/pluginsManagerDeclSpec.h"
+#include <qrutils/imagesCache.h>
 
 #include "pluginsManagerDeclSpec.h"
 
@@ -42,7 +43,7 @@ class QRGUI_PLUGINS_MANAGER_EXPORT SdfRenderer : public QObject
 
 public:
 	SdfRenderer();
-	explicit SdfRenderer(const QString path);
+	explicit SdfRenderer(const QString &path);
 	~SdfRenderer();
 
 	bool load (const QString &filename);
@@ -62,17 +63,18 @@ public slots:
 
 private:
 	QString mWorkingDirName;
+	const QSharedPointer<utils::ImagesCache> mImagesCache;
 
-	int first_size_x;
-	int first_size_y;
-	int current_size_x;
-	int current_size_y;
-	int mStartX;
-	int mStartY;
-	int i;
-	int j;
-	int sep;
-	QPainter *painter;
+	int first_size_x {-1};
+	int first_size_y {-1};
+	int current_size_x {-1};
+	int current_size_y {-1};
+	int mStartX { 0 };
+	int mStartY { 0 };
+	int i {-1};
+	int j {-1};
+	int sep {-1};
+	QPainter *painter {};
 	QPen pen;
 	QBrush brush;
 	QString s1;
@@ -85,9 +87,9 @@ private:
 	/** @brief is false if we don't need to scale according to absolute
 	 * coords, is useful for rendering icons. default is true
 	**/
-	bool mNeedScale;
+	bool mNeedScale { true };
 	qreal mZoom = 1.0;
-	ElementRepoInterface *mElementRepo;
+	ElementRepoInterface *mElementRepo {};
 
 	bool checkShowConditions(const QDomElement &element, bool isIcon) const;
 	bool checkCondition(const QDomElement &condition) const;
@@ -111,8 +113,8 @@ private:
 	float y1_def(QDomElement &element);
 	float x2_def(QDomElement &element);
 	float y2_def(QDomElement &element);
-	float coord_def(QDomElement &element, QString coordName, int current_size, int first_size);
-	void logger(QString path, QString string);
+	float coord_def(QDomElement &element, const QString &coordName, int current_size, int first_size);
+	void logger(const QString &path, const QString &string);
 
 	/// checks that str[i] is not L, C, M or Z
 	/// @todo Not so helpful comment

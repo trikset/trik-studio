@@ -71,14 +71,14 @@ bool GraphicType::init(const QString &context)
 	}
 
 	const IdList outLinks = mApi.outgoingLinks(mId);
-	for (const Id outLink : outLinks) {
+	for (const Id &outLink : outLinks) {
 		if (outLink.element() == "Container") {
 			const Id elementId = mApi.to(outLink);
 			const QString typeName = mApi.name(elementId);
 			mContains << typeName.split(",", QString::SkipEmptyParts);
 		} else if (outLink.element() == "Inheritance") {
-			const Id elementId = mApi.to(outLink);
-			const QString childName = mApi.name(elementId);
+			const Id &elementId = mApi.to(outLink);
+			const QString &childName = mApi.name(elementId);
 			if (!mChildren.contains(childName)) {
 				mChildren << childName.split(",", QString::SkipEmptyParts);
 			}
@@ -86,7 +86,7 @@ bool GraphicType::init(const QString &context)
 	}
 
 	const IdList inLinks = mApi.incomingLinks(mId);
-	for (const Id inLink : inLinks) {
+	for (const Id &inLink : inLinks) {
 		if (inLink.element() == "Inheritance") {
 			const Id elementId = mApi.from(inLink);
 			const QString parentName = mApi.name(elementId);
@@ -234,7 +234,7 @@ bool GraphicType::resolve()
 
 		GraphicType* gParent = dynamic_cast<GraphicType*>(parent);
 		if (gParent) {
-			for (const PossibleEdge pEdge : gParent->mPossibleEdges) {
+			for (const PossibleEdge &pEdge : gParent->mPossibleEdges) {
 				mPossibleEdges.append(qMakePair(pEdge.first,qMakePair(pEdge.second.first,name())));
 			}
 		}

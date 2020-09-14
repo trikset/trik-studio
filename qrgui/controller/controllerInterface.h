@@ -75,9 +75,6 @@ signals:
 
 	/// Emitted whenever the value of canRedo() changes.
 	void canRedoChanged(bool canRedo);
-
-	/// Emitted whenever the execute, redo or undo is calling
-	void executedOrUndoRedo();
 };
 
 }

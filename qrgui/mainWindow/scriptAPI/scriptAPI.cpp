@@ -37,13 +37,6 @@ using namespace gui;
 using namespace utils;
 
 ScriptAPI::ScriptAPI()
-	: mGuiFacade(nullptr)
-	, mVirtualCursor(nullptr)
-	, mVirtualKeyboard(nullptr)
-	, mSceneAPI(nullptr)
-	, mPaletteAPI(nullptr)
-	, mHintAPI(nullptr)
-	, mScriptEngine(new QScriptEngine)
 {
 }
 
@@ -51,14 +44,14 @@ ScriptAPI::~ScriptAPI()
 {
 }
 
-void ScriptAPI::init(MainWindow &mainWindow)
+void ScriptAPI::init(MainWindow *mainWindow)
 {
-	mGuiFacade.reset(new GuiFacade(mainWindow));
-	mVirtualCursor.reset(new VirtualCursor(*this, &mainWindow));
+	mGuiFacade.reset(new GuiFacade(*mainWindow));
+	mVirtualCursor.reset(new VirtualCursor(*this, mainWindow));
 	mVirtualKeyboard.reset(new VirtualKeyboard(*this));
-	mSceneAPI.reset(new SceneAPI(*this, mainWindow));
-	mPaletteAPI.reset(new PaletteAPI(*this, mainWindow));
-	mHintAPI.reset(new HintAPI);
+	mSceneAPI.reset(new SceneAPI(*this, *mainWindow));
+	mPaletteAPI.reset(new PaletteAPI(*this, *mainWindow));
+	mHintAPI.reset(new HintAPI());
 
 	const QScriptValue scriptAPI = mScriptEngine.newQObject(this);
 	// This instance will be available in scripts by writing something like "api.wait(100)"
@@ -100,19 +93,17 @@ void ScriptAPI::pickComboBoxItem(QComboBox *comboBox, const QString &name, int d
 	mVirtualCursor->move(newPos);
 	mVirtualCursor->raise();
 	mVirtualCursor->show();
-	QTimer *timer = new QTimer();
-	timer->setInterval(100);
+	QTimer timer;
+	timer.setInterval(100);
 
-	connect(timer, &QTimer::timeout
+	connect(&timer, &QTimer::timeout
 			, [this, comboBox]() {
 				mVirtualCursor->moved(comboBox->view()->viewport());
 			});
 
-	timer->start();
+	timer.start();
 	mVirtualCursor->moveToRect(target, duration);
-	timer->stop();
-
-	delete timer;
+	timer.stop();
 
 	QEvent *pressEvent = new QMouseEvent(QMouseEvent::MouseButtonPress
 			,  mVirtualCursor->pos()

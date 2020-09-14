@@ -200,8 +200,8 @@ private:
 
 	void paintEdge(QPainter *painter, const QStyleOptionGraphicsItem *option, bool drawSavedLine) const;
 	void drawArrows(QPainter *painter, bool savedLine) const;
-	QPen edgePen(QPainter *painter, QColor color, Qt::PenStyle style, int width) const;
-	void setEdgePainter(QPainter *painter, QPen pen, qreal opacity) const;
+	QPen edgePen(QPainter *painter, const QColor &color, Qt::PenStyle style, int width) const;
+	void setEdgePainter(QPainter *painter, const QPen &pen, qreal opacity) const;
 
 	NodeElement *innermostChild(const QList<QGraphicsItem *> &items, NodeElement * const element) const;
 	void updateLongestPart();
@@ -215,8 +215,8 @@ private:
 	NodeElement *mSrc;
 	NodeElement *mDst;
 
-	LineFactory *mLineFactory; // Takes ownership
-	LineHandler *mHandler; // Takes ownership
+	QScopedPointer<LineFactory> mLineFactory;
+	QScopedPointer<LineHandler> mHandler;
 
 	qreal mPortFrom;
 	qreal mPortTo;

@@ -26,6 +26,7 @@ namespace kitBase {
 /// separately for each robot model, so, for example, changes made in NXT mode do not affect TRIK.
 class ROBOTS_KIT_BASE_EXPORT DevicesConfigurationProvider
 {
+	Q_DISABLE_COPY(DevicesConfigurationProvider)
 public:
 	/// Constructor.
 	/// @param name - name of an instance of provider, which can be used in debug output.

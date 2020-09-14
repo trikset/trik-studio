@@ -68,7 +68,7 @@ public slots: // needed for invokeMethod
 	void drawRect(int x, int y, int width, int height, bool filled) override;
 	void drawEllipse(int x, int y, int width, int height, bool filled) override;
 	void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle) override;
-	void printText(int x, int y, const QString &text) override;
+	void printText(int x, int y, const QString &text, int fontSize = -1) override;
 	void paint(QPainter *painter, const QRect &outputRect) override;
 	void reset() override;
 	void redraw() override;
@@ -90,10 +90,10 @@ signals:
 
 private:
 	twoDModel::engine::TwoDModelEngineInterface &mEngine;
-	QColor mBackground;
+	QColor mBackground {Qt::transparent};
 	QImage mCurrentImage;
-	bool mSmiles;
-	bool mSadSmiles;
+	bool mSmiles {};
+	bool mSadSmiles {};
 	/// @todo: QPoint can`t be used in map without operators declaration.
 	QHash<QPair<int, int>, utils::TextObject *> mLabelsMap;
 };

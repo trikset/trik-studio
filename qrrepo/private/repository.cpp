@@ -25,12 +25,13 @@ Repository::Repository(const QString &workingFile)
 		: mWorkingFile(workingFile)
 		, mSerializer(workingFile)
 {
-	init();
 	loadFromDisk();
 }
 
-void Repository::init()
+void Repository::resetToEmpty()
 {
+	qDeleteAll(mObjects);
+	mObjects.clear();
 	mObjects.insert(Id::rootId(), new LogicalObject(Id::rootId()));
 	mObjects[Id::rootId()]->setProperty("name", Id::rootId().toString());
 }
@@ -247,7 +248,7 @@ void Repository::setProperty(const Id &id, const QString &name, const QVariant &
 //				 : true);
 		mObjects[id]->setProperty(name, value);
 	} else {
-		throw Exception("Repository: Setting property of nonexistent object " + id.toString());
+		throw Exception("Repository: Setting property " + name + " of nonexistent object " + id.toString());
 	}
 }
 
@@ -361,6 +362,10 @@ void Repository::removeTemporaryRemovedLinks(const Id &id)
 void Repository::loadFromDisk()
 {
 	mSerializer.loadFromDisk(mObjects, mMetaInfo);
+	if (mObjects.isEmpty()) {
+		// Nothing loaded
+		resetToEmpty();
+	}
 	addChildrenToRootObject();
 }
 
@@ -382,7 +387,7 @@ void Repository::addChildrenToRootObject()
 	}
 }
 
-IdList Repository::idsOfAllChildrenOf(Id id) const
+IdList Repository::idsOfAllChildrenOf(const Id &id) const
 {
 	IdList result;
 	result.clear();
@@ -395,7 +400,7 @@ IdList Repository::idsOfAllChildrenOf(Id id) const
 	return result;
 }
 
-QList<Object*> Repository::allChildrenOf(Id id) const
+QList<Object*> Repository::allChildrenOf(const Id &id) const
 {
 	QList<Object*> result;
 	result.append(mObjects[id]);
@@ -406,14 +411,14 @@ QList<Object*> Repository::allChildrenOf(Id id) const
 	return result;
 }
 
-QList<Object*> Repository::allChildrenOfWithLogicalId(Id id) const
+QList<Object*> Repository::allChildrenOfWithLogicalId(const Id &id) const
 {
 	QList<Object*> result;
 	result.append(mObjects[id]);
 
 	// along with each ID we also add its logical ID.
 
-	foreach(const Id &childId, mObjects[id]->children())
+	for(const auto &childId: mObjects[id]->children())
 		result << allChildrenOf(childId)
 				<< allChildrenOf(logicalId(childId));
 	return result;
@@ -475,7 +480,7 @@ bool Repository::saveDiagramsById(QHash<QString, IdList> const &diagramIds)
 
 void Repository::remove(const IdList &list) const
 {
-	foreach(const Id &id, list) {
+	for(const auto &id: list) {
 		qDebug() << id.toString();
 		mSerializer.removeFromDisk(id);
 	}
@@ -513,7 +518,7 @@ void Repository::printDebug() const
 	for (Object *object : mObjects.values()) {
 		qDebug() << object->id().toString();
 		qDebug() << "Children:";
-		for (Id id : object->children())
+		for (Id const &id : object->children())
 			qDebug() << id.toString();
 		qDebug() << "Parent:";
 		qDebug() << object->parent().toString();
@@ -524,11 +529,9 @@ void Repository::printDebug() const
 bool Repository::exterminate()
 {
 	printDebug();
-	mObjects.clear();
 	//serializer.clearWorkingDir();
-	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk(mObjects.values(), mMetaInfo);
-
-	init();
+	bool result = !mWorkingFile.isEmpty() && mSerializer.saveToDisk({}, mMetaInfo);
+	resetToEmpty();
 	printDebug();
 
 	return result;
@@ -536,8 +539,8 @@ bool Repository::exterminate()
 
 void Repository::open(const QString &saveFile)
 {
+	qDeleteAll(mObjects);
 	mObjects.clear();
-	init();
 	mSerializer.setWorkingFile(saveFile);
 	mWorkingFile = saveFile;
 	loadFromDisk();
@@ -626,4 +629,9 @@ QVariant Repository::metaInformation(const QString &key) const
 void Repository::setMetaInformation(const QString &key, const QVariant &info)
 {
 	mMetaInfo[key] = info;
+}
+
+void Repository::clearMetaInformation()
+{
+	mMetaInfo.clear();
 }

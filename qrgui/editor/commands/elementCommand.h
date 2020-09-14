@@ -17,6 +17,8 @@
 #include "controller/commands/abstractCommand.h"
 #include "editor/editorView.h"
 
+#include <QPointer>
+
 namespace qReal {
 namespace gui {
 namespace editor {
@@ -46,12 +48,8 @@ protected:
 	Element *elementById(const Id &id);
 
 	Element *mElement;
-	const EditorViewScene *mScene;
+	QPointer<const EditorViewScene> mScene;
 	Id mId;
-	bool mSceneWasRemoved;
-
-private slots:
-	void onSceneWasRemoved();
 };
 
 }

@@ -22,8 +22,10 @@ namespace qrtext {
 /// Interface for debuggers, watchers and other tools requiring direct access to text language interpterer.
 class DebuggerInterface
 {
+	Q_DISABLE_COPY(DebuggerInterface)
 public:
-	virtual ~DebuggerInterface() {}
+	DebuggerInterface() = default;
+	virtual ~DebuggerInterface() = default;
 
 	/// A list of identifiers currently known to interpreter.
 	virtual QStringList identifiers() const = 0;

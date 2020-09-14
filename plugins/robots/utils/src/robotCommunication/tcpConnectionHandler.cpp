@@ -25,24 +25,25 @@ const int keepaliveTime = 3000;
 using namespace utils::robotCommunication;
 
 TcpConnectionHandler::TcpConnectionHandler(int port)
-	: mPort(port)
+	: mKeepAliveTimer(new QTimer(this))
+	, mPort(port)
 {
 	QObject::connect(&mSocket, &QTcpSocket::readyRead, this
 		, &TcpConnectionHandler::onIncomingData, Qt::DirectConnection);
 
-	QObject::connect(&mSocket, &QTcpSocket::disconnected, this
-		, &TcpConnectionHandler::onDisconnected, Qt::DirectConnection);
+	QObject::connect(&mSocket, &QTcpSocket::disconnected
+					 , mKeepAliveTimer, &QTimer::stop, Qt::DirectConnection);
 
-	QObject::connect(&mKeepAliveTimer, &QTimer::timeout, this
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this
 		, &TcpConnectionHandler::keepalive, Qt::DirectConnection);
 
-	mKeepAliveTimer.setInterval(keepaliveTime);
-	mKeepAliveTimer.setSingleShot(false);
+	mKeepAliveTimer->setInterval(keepaliveTime);
+	mKeepAliveTimer->setSingleShot(false);
 }
 
 TcpConnectionHandler::~TcpConnectionHandler()
 {
-	mSocket.disconnect(this); //otherwise DirectConnection from another thread can happen afer dtor
+	mSocket.disconnect(); //otherwise DirectConnection from another thread can happen afer dtor
 }
 
 bool TcpConnectionHandler::connect(const QHostAddress &serverAddress)
@@ -79,7 +80,7 @@ bool TcpConnectionHandler::connect(const QHostAddress &serverAddress)
 	if (!result) {
 		QLOG_ERROR() << mSocket.errorString();
 	} else {
-		mKeepAliveTimer.start();
+		mKeepAliveTimer->start();
 	}
 
 	mBuffer.clear();
@@ -117,7 +118,7 @@ void TcpConnectionHandler::send(const QString &data)
 		QLOG_ERROR() << "Unable to send data" << data << "to" << mSocket.peerAddress();
 	} else {
 		/// Resetting keepalive timer since we already sent something to the other side.
-		mKeepAliveTimer.start();
+		mKeepAliveTimer->start();
 	}
 }
 
@@ -165,9 +166,4 @@ void TcpConnectionHandler::onIncomingData()
 void TcpConnectionHandler::keepalive()
 {
 	send("keepalive");
-}
-
-void TcpConnectionHandler::onDisconnected()
-{
-	mKeepAliveTimer.stop();
 }

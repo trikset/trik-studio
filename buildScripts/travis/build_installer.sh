@@ -3,11 +3,12 @@ set -euxo pipefail
 QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $TRAVIS_OS_NAME in
   osx)
-    QTIFWBIN=$QTBIN/../../../Tools/QtInstallerFramework/3.2/bin
+    QTIFWBIN=$HOME/qtifw/bin
     TSNAME=trik-studio-installer-mac-$TRAVIS_BRANCH.dmg
     ;;
   linux)
-    QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
+    QTIFWBIN=/opt/qtifw/bin
+    #QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
     TSNAME=trik-studio-installer-linux-$TRAVIS_BRANCH.run
     ;;
   *) exit 1 ;;
@@ -24,17 +25,16 @@ then
       $EXECUTOR bash -ic "\
       echo Start build checker archive \
       && bin/$CONFIG/build-checker-installer.sh \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz \
       || false \
 "
       fi
-#
-#	ls $QTBIN/../../../Tools/QtInstallerFramework/*
-#      $EXECUTOR bash -ic "\
-#      echo Start build installer \
-#      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-#      && mv installer/trik-studio*installer* installer/$TSNAME \
-#      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$server:dl/ts/fresh/installer/ \
-#      || false \
-#"
+
+      $EXECUTOR bash -ic "\
+      echo Start build installer \
+      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+      && mv installer/trik-studio*installer* installer/$TSNAME \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/ \
+      || false \
+"
 fi

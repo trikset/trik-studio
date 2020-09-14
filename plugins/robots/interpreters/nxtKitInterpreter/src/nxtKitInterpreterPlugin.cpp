@@ -48,13 +48,7 @@ NxtKitInterpreterPlugin::NxtKitInterpreterPlugin()
 
 NxtKitInterpreterPlugin::~NxtKitInterpreterPlugin()
 {
-	if (mOwnsAdditionalPreferences) {
-		delete mAdditionalPreferences;
-	}
-
-	if (mOwnsBlocksFactory) {
-		delete mBlocksFactory;
-	}
+	release();
 }
 
 void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configurator)
@@ -94,6 +88,15 @@ void NxtKitInterpreterPlugin::init(const kitBase::KitPluginConfigurator &configu
 			, configurator.interpreterControl());
 }
 
+void NxtKitInterpreterPlugin::release()
+{
+	if (mOwnsAdditionalPreferences) {
+		delete mAdditionalPreferences;
+		mAdditionalPreferences = nullptr;
+	}
+	mTwoDModel.reset();
+}
+
 QString NxtKitInterpreterPlugin::kitId() const
 {
 	return "nxtKit";
@@ -109,7 +112,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NxtKitInterpreterPlugin::robot
 	return {&mUsbRealRobotModel, &mBluetoothRealRobotModel, &mTwoDRobotModel};
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *NxtKitInterpreterPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NxtKitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model);
@@ -168,6 +171,5 @@ kitBase::DevicesConfigurationProvider *NxtKitInterpreterPlugin::devicesConfigura
 QWidget *NxtKitInterpreterPlugin::produceBluetoothPortConfigurer()
 {
 	QWidget * const result = new ui::ComPortPicker("NxtBluetoothPortName", this);
-	connect(this, &QObject::destroyed, result, &QObject::deleteLater);
 	return result;
 }

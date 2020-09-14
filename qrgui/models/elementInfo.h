@@ -52,18 +52,16 @@ public:
 			, const Id &explosionTarget
 			, bool isEdge);
 
-	virtual ~ElementInfo();
-
 	/// Saves element data into the given byte stream, it can be then read with deserialize().
 	/// @returns a reference to \a out for convenient usage.
-	virtual QDataStream &serialize(QDataStream &out) const;
+	QDataStream &serialize(QDataStream &out) const;
 
 	/// Reastores this element state reading it out from the given byte stream written with serialize().
 	/// @returns a reference to \a in for convenient usage.
-	virtual QDataStream &deserialize(QDataStream &in);
+	QDataStream &deserialize(QDataStream &in);
 
 	/// Returns true if \a contains just the same data as this instance.
-	virtual bool equals(const ElementInfo &other) const;
+	bool equals(const ElementInfo &other) const;
 
 	/// Produces and returns mime data object where stored this element.
 	/// Transfers ownership to caller.

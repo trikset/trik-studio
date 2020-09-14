@@ -42,7 +42,7 @@ private:
 
 	QString mEditor;
 	QString mDiagram;
-	const EditorManager *mEditorManager;
+	const EditorManager *mEditorManager {};
 	Pattern mPattern;
 
 };

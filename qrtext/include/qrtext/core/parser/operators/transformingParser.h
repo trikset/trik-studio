@@ -42,24 +42,25 @@ public:
 	QSharedPointer<ast::Node> parse(TokenStream<TokenType> &tokenStream
 			, ParserContext<TokenType> &parserContext) const override
 	{
-		typedef typename utils::function_traits<Transformation>::template arg<0>::type PointerToNodeType;
+		typedef typename utils::function_traits<Transformation>::template arg<0>::type PointerToNodeTypeRaw;
+		typedef typename std::remove_reference<PointerToNodeTypeRaw>::type PointerToNodeType;
 		typedef decltype(&PointerToNodeType::operator *) DereferenceOperatorType;
 		typedef typename utils::function_traits<DereferenceOperatorType>::result_type NodeReference;
 		typedef typename std::remove_reference<NodeReference>::type NodeType;
 
-		QSharedPointer<ast::Node> parserResult = mParser->parse(tokenStream, parserContext);
-		if (parserResult->is<TemporaryErrorNode>()) {
-			return parserResult;
+		auto const &parserResult1 = mParser->parse(tokenStream, parserContext);
+		if (parserResult1->template is<TemporaryErrorNode>()) {
+			return parserResult1;
 		}
 
-		auto node = as<NodeType>(parserResult);
-		parserResult = as<ast::Node>(mTransformation(node));
-		if (!parserResult) {
-			parserResult = wrap(new TemporaryDiscardableNode());
+		auto node = as<NodeType>(parserResult1);
+		auto parserResult2 = as<ast::Node>(mTransformation(node));
+		if (!parserResult2) {
+			parserResult2 = wrap(new TemporaryDiscardableNode());
 		}
 
-		parserResult->connect(node);
-		return parserResult;
+		parserResult2->connect(node);
+		return parserResult2;
 	}
 
 	QSet<TokenType> first() const override

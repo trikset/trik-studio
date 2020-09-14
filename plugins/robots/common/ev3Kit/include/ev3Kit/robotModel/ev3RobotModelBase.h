@@ -45,6 +45,7 @@ protected:
 	virtual kitBase::robotModel::DeviceInfo colorPassiveSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo colorAmbientSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo colorReflectedSensorInfo() const;
+	virtual kitBase::robotModel::DeviceInfo colorRawSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo gyroscopeSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo compassSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo ACIRSeekerSensorInfo() const;

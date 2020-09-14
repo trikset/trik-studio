@@ -48,6 +48,11 @@ var overwrite = [
 		"A previous installation exists in this folder. If you wish to continue, everything will be overwritten.",
 		// "Другая версия программы уже существует в этой директории. Если Вы желаете продолжить, она будет удалена."];
 		"\u0414\u0440\u0443\u0433\u0430\u044f \u0432\u0435\u0440\u0441\u0438\u044f \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b \u0443\u0436\u0435 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u0435\u0442 \u0432 \u044d\u0442\u043e\u0439 \u0434\u0438\u0440\u0435\u043a\u0442\u043e\u0440\u0438\u0438. \u0415\u0441\u043b\u0438 \u0412\u044b \u0436\u0435\u043b\u0430\u0435\u0442\u0435 \u043f\u0440\u043e\u0434\u043e\u043b\u0436\u0438\u0442\u044c, \u043e\u043d\u0430 \u0431\u0443\u0434\u0435\u0442 \u0443\u0434\u0430\u043b\u0435\u043d\u0430."];
+var directoryNotEmpty = [
+		"The target directory must be empty.",
+		// "Каталог установки должен быть пустым."];
+		"\u041a\u0430\u0442\u0430\u043b\u043e\u0433 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438 \u0434\u043e\u043b\u0436\u0435\u043d \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c."];
+
 
 
 // Constructor
@@ -56,8 +61,8 @@ function Component()
 	// Executable names must be lower-case product name with hyphens instead of spaces
 	installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
 	installer.linkExtension = installer.value("os") === "win" ? ".lnk" : "";
-	installer.execExtension = installer.value("os") === "win" ? ".exe" : installer.value("os") === "mac" ? ".app" : "";
-	installer.maintenanceName = "maintenance" + installer.execExtension;
+	installer.execExtension = installer.value("os") === "win" ? ".vbs" : installer.value("os") === "mac" ? ".app" : "";
+	installer.maintenanceName = "maintenance" + (installer.value("os") === "win" ? ".exe" : installer.execExtension);
 	installer.shouldDeinstallPrevious = false;
 
 	component.loaded.connect(this, Component.prototype.installerLoaded);
@@ -84,7 +89,7 @@ Component.prototype.createOperations = function()
 				, "@TargetDir@/" + installer.maintenanceName
 				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.executableName + installer.execExtension
+				, "@TargetDir@/" + installer.executableName + ".cmd"
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
@@ -121,6 +126,10 @@ var Dir = new function () {
 	this.validatePath = function(path) {
 		if (path.length == 0) {
 			return nonEmptyMessage[langIndex()];
+		}
+
+		if (QDesktopServices.findFiles(path, "trik-studio*") == 0 && QDesktopServices.findFiles(path, "*.*") != 0) {
+			return directoryNotEmpty[langIndex()];
 		}
 
 		if (Dir.isRelative(path)) {

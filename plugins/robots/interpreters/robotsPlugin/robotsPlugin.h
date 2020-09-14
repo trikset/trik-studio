@@ -34,6 +34,7 @@ public:
 	RobotsPlugin();
 
 	void init(const qReal::PluginConfigurator &configurator) override;
+	void release() override;
 	qReal::Customizer *customizationInterface() override;  // Does not transfer ownership.
 	QPair<QString, qReal::gui::PreferencesPage *> preferencesPage() override;  // Transfers ownership.
 	QList<qReal::ActionInfo> actions() override;  // Does not transfer ownership of QAction objects.

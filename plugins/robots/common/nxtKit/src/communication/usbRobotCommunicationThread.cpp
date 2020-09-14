@@ -15,7 +15,7 @@
 #include "nxtKit/communication/usbRobotCommunicationThread.h"
 
 #include <QtCore/QCoreApplication>
-#include <time.h>
+#include <ctime>
 
 #include <qrkernel/logging.h>
 #include <libusb.h>
@@ -45,6 +45,7 @@ UsbRobotCommunicationThread::UsbRobotCommunicationThread()
 	, mStopped(false)
 {
 	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &UsbRobotCommunicationThread::checkForConnection);
+	QObject::connect(this, &UsbRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 	mDriverInstaller->moveToThread(qApp->thread());
 	QObject::connect(this, &UsbRobotCommunicationThread::noDriversFound, mDriverInstaller.data()
 			, &NxtUsbDriverInstaller::installUsbDriver, Qt::QueuedConnection);
@@ -74,8 +75,8 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 
 	libusb_device **devices;
 	ssize_t count = libusb_get_device_list(nullptr, &devices);
-	libusb_device_descriptor device_descriptor;
-	int i = 0;
+	libusb_device_descriptor device_descriptor {};
+	ssize_t i = 0;
 	for (; i < count; ++i) {
 		if (libusb_get_device_descriptor(devices[i], &device_descriptor) < 0) {
 			continue;
@@ -289,8 +290,6 @@ void UsbRobotCommunicationThread::disconnect()
 		libusb_exit(nullptr);
 		mHandle = nullptr;
 	}
-
-	mKeepAliveTimer->stop();
 	emit disconnected();
 }
 

@@ -35,6 +35,8 @@ public:
 
 	void play(const QString &filePath) override;
 
+	void play(const int &duration) override;
+
 private:
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;
 };

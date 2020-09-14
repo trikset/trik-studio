@@ -23,7 +23,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+647"/>
+        <location filename="../../qrutils/expressionsParser/expressionsParser.cpp" line="+642"/>
         <source>Unexpected end of stream at %1. Mb you forget &apos;;&apos;?</source>
         <translation>La fin du flux inattendue sur %1. Peut-être vous avez oublié &apos;;&apos; ?</translation>
     </message>
@@ -88,7 +88,7 @@
         <translation>Division entière par zéro</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+573"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+570"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>

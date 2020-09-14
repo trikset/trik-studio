@@ -36,7 +36,7 @@ void LineSensor::init()
 
 void LineSensor::detectLine()
 {
-	const QImage image = mEngine.areaUnderSensor(port(), 0.2);
+	const QImage image = mEngine.areaUnderSensor(mEngine.videoPort(), 0.2);
 
 	int size = 0;
 	int red = 0;
@@ -62,7 +62,7 @@ void LineSensor::detectLine()
 
 void LineSensor::read()
 {
-	const QImage image = mEngine.areaUnderSensor(port(), 2.0);
+	const QImage image = mEngine.areaUnderSensor(mEngine.videoPort(), 2.0);
 
 	if (image.isNull()) {
 		return;

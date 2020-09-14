@@ -25,8 +25,7 @@ using namespace twoDModel::model::physics::parts;
 
 Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
 		, const b2Vec2 &positionBox2D, const float rotationBox2D, Box2DRobot &robot)
-	: prevSpeed(0.0)
-	, mRobot(robot)
+	: mRobot(robot)
 	, mEngine(engine)
 	, mWheelHeightM(engine->pxToM(twoDModel::robotWheelDiameterInPx / 2))
 	, mWheelWidthM(engine->pxToM(twoDModel::robotWheelDiameterInPx))
@@ -115,15 +114,18 @@ void Box2DWheel::keepConstantSpeed(float speed) {
 
 	//break stop
 	if (qAbs(speedDiff) < b2_epsilon) {
-		mBody->SetLinearVelocity({0, 0});
-		mBody->SetAngularVelocity(0);
+		stop();
 		return;
 	}
-
 	mBody->ApplyLinearImpulse(linearImpulse, mBody->GetWorldCenter(), true);
 }
 
 b2Body *Box2DWheel::getBody()
 {
 	return mBody;
+}
+
+void Box2DWheel::stop() {
+	mBody->SetLinearVelocity(b2Vec2(0, 0));
+	mBody->SetAngularVelocity(0);
 }

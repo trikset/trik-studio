@@ -29,8 +29,8 @@ using namespace pioneer::lua;
 using namespace qReal;
 
 PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
-	: mGenerateCodeAction(new QAction(nullptr))
-	, mUploadProgramAction(new QAction(nullptr))
+	: mGenerateCodeAction(new QAction(this))
+	, mUploadProgramAction(new QAction(this))
 	, mBlocksFactory(new blocks::PioneerBlocksFactory)
 	, mGeneratorForRealCopterRobotModel(
 			new PioneerGeneratorRobotModel(
@@ -84,6 +84,7 @@ void PioneerLuaGeneratorPlugin::init(const kitBase::KitPluginConfigurator &confi
 	connect(
 			mCommunicationManager.data()
 			, &CommunicationManager::uploadCompleted
+			, this
 			, [this]() { setActionsEnabled(true); }
 	);
 }
@@ -134,7 +135,7 @@ QList<kitBase::robotModel::RobotModelInterface *> PioneerLuaGeneratorPlugin::rob
 	return { mGeneratorForRealCopterRobotModel.data() };
 }
 
-kitBase::blocksBase::BlocksFactoryInterface *PioneerLuaGeneratorPlugin::blocksFactoryFor(
+QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> PioneerLuaGeneratorPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	Q_UNUSED(model)

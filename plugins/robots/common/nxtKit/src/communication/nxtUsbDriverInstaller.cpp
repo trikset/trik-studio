@@ -17,6 +17,7 @@
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
+#include <QOperatingSystemVersion>
 
 #include <qrkernel/logging.h>
 #include <qrkernel/platformInfo.h>
@@ -26,7 +27,7 @@
 
 using namespace nxt::communication;
 
-const QString bossaDriverDescription = "Arduino Srl \\(www\\.arduino\\.org\\)";
+const auto bossaDriverDescription = R"(Arduino Srl \(www\.arduino\.org\))";
 
 QString NxtUsbDriverInstaller::path(const QString &file) const
 {
@@ -35,7 +36,10 @@ QString NxtUsbDriverInstaller::path(const QString &file) const
 
 bool NxtUsbDriverInstaller::installUsbDriver()
 {
-#ifdef Q_OS_WIN
+	if (QOperatingSystemVersion::currentType() != QOperatingSystemVersion::OSType::Windows) {
+		return true;
+	}
+
 	QLOG_WARN() << "Driver for LEGO device not found. Trying to installing WinUSB...";
 
 	if (mInstallationProcess.state() != QProcess::NotRunning) {
@@ -77,10 +81,10 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 			"\"%2%3 -i -a %4\\*.inf\"\" \"\"")
 			.arg(path("driver\\elevate.exe"), deleteBossaDriverCmd, pnpUtilPath, path(QString("driver")));
 	QLOG_INFO() << "Elevating pnputil... Using command" << installDriversCmd;
-	connect(&mInstallationProcess, QProcess::readyRead, this, [=]() {
+	connect(&mInstallationProcess, &QProcess::readyRead, this, [=]() {
 		QLOG_INFO() << "NXT drivers installer:" << mInstallationProcess.readAll();
 	});
-	connect(&mInstallationProcess, static_cast<void(QProcess::*)(int)>(&QProcess::finished), this, [=](int exitCode) {
+	connect(&mInstallationProcess, QOverload<int>::of(&QProcess::finished), this, [this](int exitCode) {
 		QLOG_INFO() << "NXT drivers installation finished with exit code" << exitCode;
 		if (exitCode != 0) {
 			emit errorOccured(tr("An attempt to attach TRIK Studio driver failed. No panic! Driver can be still "\
@@ -101,9 +105,6 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 	}
 
 	return true;
-#else
-	return true;
-#endif
 }
 
 bool NxtUsbDriverInstaller::promptDriverInstallation() const
@@ -142,7 +143,10 @@ QString NxtUsbDriverInstaller::checkWindowsDriverComponents() const
 
 QString NxtUsbDriverInstaller::findBossaProgramPortDriver() const
 {
-#ifdef Q_OS_WIN
+	if (QOperatingSystemVersion::currentType() != QOperatingSystemVersion::OSType::Windows) {
+		return {};
+	}
+
 	// In lastest Windows versions Arduino driver attached to resetted NXT by default. This is the reason
 	// why all Lego NXT users have nightmare with resetting NXT firmware. Here we search for the name of Arduino
 	// driver attached to NXT device.
@@ -164,7 +168,7 @@ QString NxtUsbDriverInstaller::findBossaProgramPortDriver() const
 		return QString();
 	}
 
-	QRegExp driverNameRegexp(QString(".*Published name :\\s+([A-Za-z0-9_\\.]+)\\s+Driver package provider :\\s+%1.*")
+	QRegExp driverNameRegexp(QString(R"(.*Published name :\s+([A-Za-z0-9_\.]+)\s+Driver package provider :\s+%1.*)")
 			.arg(bossaDriverDescription));
 	if (driverNameRegexp.exactMatch(data.join('\n'))) {
 		QLOG_INFO() << "Found" << bossaDriverDescription << "entry:" << result;
@@ -174,7 +178,4 @@ QString NxtUsbDriverInstaller::findBossaProgramPortDriver() const
 	}
 
 	return result;
-#else
-	return QString();
-#endif
 }

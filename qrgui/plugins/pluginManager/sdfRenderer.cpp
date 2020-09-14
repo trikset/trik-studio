@@ -24,25 +24,26 @@
 #include <QtGui/QFont>
 #include <QtGui/QIcon>
 
-#include <qrutils/imagesCache.h>
 #include <metaMetaModel/elementRepoInterface.h>
+#include <QPainterPath>
+
+#include <QsLog.h>
 
 using namespace qReal;
 
 SdfRenderer::SdfRenderer()
-	: mStartX(0), mStartY(0), mNeedScale(true), mElementRepo(0)
+	: mWorkingDirName (SettingsManager::value("workingDir").toString())
+	, mImagesCache(utils::ImagesCache::instance())
 {
-	mWorkingDirName = SettingsManager::value("workingDir").toString();
 }
 
-SdfRenderer::SdfRenderer(const QString path)
-	: mStartX(0), mStartY(0), mNeedScale(true)
+SdfRenderer::SdfRenderer(const QString &path)
+	: SdfRenderer()
 {
 	if (!load(path))
 	{
-		qDebug() << "File " + path + " - loading failed!";
+		QLOG_ERROR() << "File " + path + " - loading failed!";
 	}
-	mWorkingDirName = SettingsManager::value("workingDir").toString();
 }
 
 SdfRenderer::~SdfRenderer()
@@ -338,7 +339,7 @@ void SdfRenderer::image_draw(QDomElement &element)
 			+ element.attribute("name", "default");
 
 	const QRect rect(x1, y1, x2 - x1, y2 - y1);
-	utils::ImagesCache::instance().drawImage(fileName, *painter, rect, mZoom);
+	mImagesCache->drawImage(fileName, *painter, rect, mZoom);
 }
 
 void SdfRenderer::point(QDomElement &element)
@@ -360,7 +361,7 @@ QPoint *SdfRenderer::getpoints(QDomElement &element, int n)
 	{
 		QString str;
 		str.setNum(i + 1);
-		QDomElement elem = element;
+		QDomElement const &elem = element;
 		QString xnum = elem.attribute(QString("x").append(str));
 		if (xnum.endsWith("%"))
 		{
@@ -629,7 +630,7 @@ void SdfRenderer::curve_draw(QDomElement &element)
 
 void SdfRenderer::parsestyle(QDomElement &element)
 {
-	QDomElement elem = element;
+	QDomElement const &elem = element;
 	if(!elem.isNull())
 	{
 		if (elem.hasAttribute("stroke-width"))
@@ -731,7 +732,7 @@ void SdfRenderer::parsestyle(QDomElement &element)
 	painter->setBrush(brush);
 }
 
-float SdfRenderer::coord_def(QDomElement &element, QString coordName, int current_size, int first_size)
+float SdfRenderer::coord_def(QDomElement &element, QString const &coordName, int current_size, int first_size)
 {
 	float coord = 0;
 	QString coordStr = element.attribute(coordName);
@@ -781,7 +782,7 @@ float SdfRenderer::y2_def(QDomElement &element)
 	return coord_def(element, "y2", current_size_y, first_size_y) + mStartY;
 }
 
-void SdfRenderer::logger(QString path, QString string)
+void SdfRenderer::logger(const QString &path, const QString &string)
 {	log.setFileName(path);
 	log.open(QIODevice::Append | QIODevice::Text);
 	logtext.setDevice(&log);

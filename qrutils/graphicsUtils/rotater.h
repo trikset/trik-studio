@@ -27,6 +27,8 @@ const int addAngle = 30; // Degrees; for arrow pike drawing
 /// Class that represents line that allows to rotate QGraphicItems
 class QRUTILS_EXPORT Rotater : public AbstractItem
 {
+	Q_DISABLE_COPY(Rotater)
+
 public:
 	Rotater();
 
@@ -49,10 +51,10 @@ private:
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent * event) override;
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
-	int mLength;
-	int mDrift;
-	int mResizeDrift;
-	graphicsUtils::RotateItem *mMaster;
+	int mLength { -1 };
+	int mDrift { -1 };
+	int mResizeDrift { -1 };
+	graphicsUtils::RotateItem *mMaster {};
 	graphicsUtils::LineImpl mLineImpl;
 };
 

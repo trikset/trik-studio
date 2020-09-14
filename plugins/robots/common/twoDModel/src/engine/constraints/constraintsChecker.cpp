@@ -29,15 +29,12 @@
 
 
 using namespace twoDModel::constraints;
+Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
 
 ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model)
 	: mErrorReporter(errorReporter)
 	, mModel(model)
 	, mParser(new details::ConstraintsParser(mEvents, mVariables, mObjects, mModel.timeline(), mStatus))
-	, mParsedSuccessfully(false)
-	, mSuccessTriggered(false)
-	, mFailTriggered(false)
-	, mEnabled(true)
 {
 	connect(&mStatus, &details::StatusReporter::success, this, [this](bool deferred) {
 		if (deferred) {
@@ -58,12 +55,11 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 
 	bindToWorldModelObjects();
 	bindToRobotObjects();
-	mObjects["trace"] = new utils::ObjectsSet<QGraphicsLineItem *>(mModel.worldModel().trace(), this);
+	mObjects["trace"] = new utils::ObjectsSet<QSharedPointer<QGraphicsPathItem>>(mModel.worldModel().trace(), this);
 }
 
 ConstraintsChecker::~ConstraintsChecker()
 {
-	qDeleteAll(mEvents);
 }
 
 bool ConstraintsChecker::hasConstraints() const
@@ -73,7 +69,6 @@ bool ConstraintsChecker::hasConstraints() const
 
 bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
 {
-	qDeleteAll(mEvents);
 	mEvents.clear();
 	mActiveEvents.clear();
 	mVariables.clear();
@@ -119,11 +114,11 @@ void ConstraintsChecker::reportParserError(const QString &message)
 void ConstraintsChecker::prepareEvents()
 {
 	mActiveEvents.clear();
-	for (details::Event * const event : mEvents) {
-		connect(event, &details::Event::settedUp, this, &ConstraintsChecker::setUpEvent, Qt::UniqueConnection);
-		connect(event, &details::Event::dropped, this, &ConstraintsChecker::dropEvent, Qt::UniqueConnection);
+	for (auto &&event : mEvents) {
+		connect(&*event, &details::Event::settedUp, this, &ConstraintsChecker::setUpEvent, Qt::UniqueConnection);
+		connect(&*event, &details::Event::dropped, this, &ConstraintsChecker::dropEvent, Qt::UniqueConnection);
 		if (event->isAliveInitially()) {
-			mActiveEvents << event;
+			mActiveEvents << &*event;
 			event->setUp();
 		} else {
 			event->drop();
@@ -156,18 +151,19 @@ void ConstraintsChecker::dropEvent()
 void ConstraintsChecker::bindToWorldModelObjects()
 {
 	connect(&mModel.worldModel(), &model::WorldModel::wallAdded
-			, this, [this](items::WallItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::WallItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded
-			, this, [this](items::ColorFieldItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::ColorFieldItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
-			, this, [this](items::RegionItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::RegionItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded
-			, this, [this](items::SkittleItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::SkittleItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
-			, this, [this](items::BallItem *item) { bindObject(item->id(), item); });
+			, this, [this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
 
-	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, [this](QGraphicsItem *item) {
-		for (const QString &key : mObjects.keys(dynamic_cast<QObject *>(item))) {
+	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
+			, this, [this](const QSharedPointer<QGraphicsItem> &item) {
+		for (const QString &key : mObjects.keys(dynamic_cast<QObject*>(item.data()))) {
 			mObjects.remove(key);
 		}
 	});

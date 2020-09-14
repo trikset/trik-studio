@@ -14,7 +14,7 @@
 
 #include "exception.h"
 
-#include <thirdparty/qslog/QsLog.h>
+#include <QsLog.h>
 
 using namespace qReal;
 

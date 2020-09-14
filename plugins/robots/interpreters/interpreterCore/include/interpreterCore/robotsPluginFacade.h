@@ -102,9 +102,6 @@ private:
 
 	void connectEventsForKitPlugin();
 
-	// Takes ownership
-	void registerInterpreter(kitBase::InterpreterInterface * const interpreter);
-
 	/// After all parts of a plugin are connected to each other, sends notifications about changes which were missed
 	/// during initialization process. For example, model change notification is sent in constructor of settings page,
 	/// before kit plugins were even created, so we need to resend it.
@@ -115,13 +112,12 @@ private:
 
 	QScopedPointer<textLanguage::RobotsBlockParser> mParser;
 
-	/// Storage robots interpreters. Contains mapping of diagram types to generic diagram interpreters.
-	QMap<qReal::Id, kitBase::InterpreterInterface *> mInterpreters;  // Has ownership
+	QScopedPointer<kitBase::InterpreterInterface> mInterpreter;
 
 	interpreterCore::interpreter::ProxyInterpreter mProxyInterpreter;
 
 	/// Page with plugin settings. Created here, but then ownership is passed to a caller of preferencesPage().
-	ui::RobotsSettingsPage *mRobotSettingsPage;  // Does not have ownership
+	ui::RobotsSettingsPage *mRobotSettingsPage {};  // Does not have ownership
 
 	KitPluginManager mKitPluginManager;
 	RobotModelManager mRobotModelManager;
@@ -131,17 +127,17 @@ private:
 	QScopedPointer<UiManager> mUiManager;
 
 	QScopedPointer<kitBase::DevicesConfigurationWidget> mDockDevicesConfigurer;
-	utils::WatchListWindow *mWatchListWindow;  // Does not have ownership
-	GraphicsWatcherManager *mGraphicsWatcherManager;  // Has ownership
+	utils::WatchListWindow *mWatchListWindow {};  // Does not have ownership
+	QScopedPointer<GraphicsWatcherManager> mGraphicsWatcherManager;
 	BlocksFactoryManager mBlocksFactoryManager;
 	kitBase::EventsForKitPluginInterface mEventsForKitPlugin;
-	PaletteUpdateManager *mPaletteUpdateManager;  // Has ownership via Qt paren-child system
+	PaletteUpdateManager *mPaletteUpdateManager {};  // Has ownership via Qt paren-child system
 
-	qReal::LogicalModelAssistInterface *mLogicalModelApi;
-	qReal::TextManagerInterface *mTextManager;
-	qReal::ProjectManagementInterface *mProjectManager;
+	qReal::LogicalModelAssistInterface *mLogicalModelApi {};
+	qReal::TextManagerInterface *mTextManager {};
+	qReal::ProjectManagementInterface *mProjectManager {};
 
-	qReal::gui::MainWindowInterpretersInterface *mMainWindow;
+	qReal::gui::MainWindowInterpretersInterface *mMainWindow {};
 
 	QScopedPointer<interpreterCore::interpreter::details::SensorVariablesUpdater> mSensorVariablesUpdater;
 };

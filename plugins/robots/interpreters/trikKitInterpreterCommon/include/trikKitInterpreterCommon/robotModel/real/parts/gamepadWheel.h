@@ -48,7 +48,7 @@ private slots:
 private:
 	/// Communicator object that is used to send/receive data to/from telemetry service on a robot.
 	utils::robotCommunication::TcpRobotCommunicator &mRobotCommunicator;
-	int mOldValue;
+	int mOldValue {-1};
 };
 
 }

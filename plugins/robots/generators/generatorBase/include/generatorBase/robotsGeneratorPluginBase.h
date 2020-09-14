@@ -98,20 +98,20 @@ protected:
 	QFileInfo generationTarget(const QString &project) const;
 
 	/// Interface of MainWindow
-	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterface;  // Does not have ownership
+	qReal::gui::MainWindowInterpretersInterface *mMainWindowInterface {};  // Does not have ownership
 
 	/// Interface of project manager (allows to perform open/save activities)
-	qReal::ProjectManagementInterface *mProjectManager; // Does not have ownership
+	qReal::ProjectManagementInterface *mProjectManager {}; // Does not have ownership
 
 	/// Control interface of the repository
-	const qrRepo::RepoApi *mRepo;  // Does not have ownership
+	const qrRepo::RepoApi *mRepo {};  // Does not have ownership
 
-	const kitBase::robotModel::RobotModelManagerInterface *mRobotModelManager;
-	qrtext::LanguageToolboxInterface *mTextLanguage;  // Does not have ownership
+	const kitBase::robotModel::RobotModelManagerInterface *mRobotModelManager {};
+	qrtext::LanguageToolboxInterface *mTextLanguage {};  // Does not have ownership
 
 	QList<qReal::HotKeyActionInfo> mHotKeyActionInfos;
-	qReal::SystemEvents *mSystemEvents; // Does not have ownership
-	qReal::TextManagerInterface *mTextManager;
+	qReal::SystemEvents *mSystemEvents {}; // Does not have ownership
+	qReal::TextManagerInterface *mTextManager {};
 	QMultiHash<qReal::Id, QFileInfo> mCodePath;
 
 	QScopedPointer<utils::ParserErrorReporter> mParserErrorReporter;

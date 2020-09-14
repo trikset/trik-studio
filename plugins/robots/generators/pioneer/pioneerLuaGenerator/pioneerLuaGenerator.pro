@@ -31,7 +31,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo qscintilla2 qrgui-text-editor qrgui-preferences-dialog qrtext robots-kit-base \
+links(qrkernel qrutils qrrepo qscintilla2 qrgui-text-editor qrgui-preferences-dialog qrtext robots-kit-base \
 		robots-generator-base robots-pioneer-kit robots-utils)
 
 TRANSLATIONS = $$PWD/../../../../../qrtranslations/ru/plugins/robots/pioneerLuaGenerator_ru.ts

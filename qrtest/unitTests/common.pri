@@ -14,9 +14,16 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
-CONFIG += cmdline
-
 include(../../global.pri)
+
+# after global.pri sets DESTDIR
+
+#Workaround for MinGW build. Qt incorrectly sets it to empty string on Win32 for bash
+TEST_TARGET_DIR = .
+
+equals(TEMPLATE, app) {
+    CONFIG += testcase testcase_no_bundle no_testcase_installs
+}
 
 QT += widgets
 
@@ -36,4 +43,4 @@ QMAKE_CXXFLAGS += \
     -isystem $$PWD/../thirdparty/googletest/googletest/googletest/include \
     -isystem $$PWD/../thirdparty/googletest/googletest/googlemock/include \
 
-links(googletest)
+links(googletest qrkernel)

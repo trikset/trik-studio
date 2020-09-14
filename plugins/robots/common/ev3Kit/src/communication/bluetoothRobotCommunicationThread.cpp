@@ -25,6 +25,8 @@
 #include "ev3Kit/communication/commandConstants.h"
 #include "ev3Kit/communication/ev3DirectCommand.h"
 
+#include <QsLog.h>
+
 const int keepAliveResponseSize = 5;
 
 using namespace ev3::communication;
@@ -33,7 +35,6 @@ BluetoothRobotCommunicationThread::BluetoothRobotCommunicationThread()
 	: mPort(nullptr)
 	, mKeepAliveTimer(new QTimer(this))
 {
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()));
 }
 
 BluetoothRobotCommunicationThread::~BluetoothRobotCommunicationThread()
@@ -67,7 +68,7 @@ bool BluetoothRobotCommunicationThread::connect()
 	}
 
 	const QString portName = qReal::SettingsManager::value("Ev3BluetoothPortName").toString();
-	mPort = new QextSerialPort(portName, QextSerialPort::Polling);
+	mPort = new QextSerialPort(portName, QextSerialPort::Polling, this);
 	mPort->setBaudRate(BAUD9600);
 	mPort->setFlowControl(FLOW_OFF);
 	mPort->setParity(PAR_NONE);
@@ -84,7 +85,8 @@ bool BluetoothRobotCommunicationThread::connect()
 
 	mKeepAliveTimer->moveToThread(this->thread());
 	mKeepAliveTimer->disconnect();
-	QObject::connect(mKeepAliveTimer, SIGNAL(timeout()), this, SLOT(checkForConnection()));
+	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &BluetoothRobotCommunicationThread::checkForConnection);
+	QObject::connect(this, &BluetoothRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
 	mKeepAliveTimer->start(500);
 
 	return !response.isEmpty();
@@ -97,13 +99,8 @@ void BluetoothRobotCommunicationThread::reconnect()
 
 void BluetoothRobotCommunicationThread::disconnect()
 {
-	if (mPort) {
-		mPort->close();
-		delete mPort;
-		mPort = nullptr;
-		mKeepAliveTimer->stop();
-	}
-
+	delete mPort;
+	mPort = nullptr;
 	emit disconnected();
 }
 
@@ -140,7 +137,6 @@ void BluetoothRobotCommunicationThread::checkForConnection()
 
 	if (response == QByteArray()) {
 		emit disconnected();
-		mKeepAliveTimer->stop();
 	}
 }
 
@@ -151,5 +147,7 @@ void BluetoothRobotCommunicationThread::keepAlive()
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::KEEP_ALIVE, command, index);
 	Ev3DirectCommand::addByteParameter(10, command, index); // 10 - Number of minutes before entering sleep mode.
-	send1(command);
+	if (!send1(command)) {
+		QLOG_ERROR() << "Bluetooth: failed to send keep-alive";
+	}
 }

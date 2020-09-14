@@ -233,7 +233,7 @@ qReal::IdList RepoApi::connectedElements(const qReal::Id &id) const
 qReal::IdList RepoApi::outgoingConnectedElements(const qReal::Id &id) const
 {
 	qReal::IdList result;
-	for (qReal::Id curLink : outgoingLinks(id)) {
+	for (qReal::Id const &curLink : outgoingLinks(id)) {
 		qReal::Id toElem = to(curLink);
 
 		result.append(toElem);
@@ -244,7 +244,7 @@ qReal::IdList RepoApi::outgoingConnectedElements(const qReal::Id &id) const
 qReal::IdList RepoApi::incomingConnectedElements(const qReal::Id &id) const
 {
 	qReal::IdList result;
-	for (qReal::Id curLink : incomingLinks(id)) {
+	for (qReal::Id const &curLink : incomingLinks(id)) {
 		qReal::Id fromElem = from(curLink);
 
 		result.append(fromElem);
@@ -519,7 +519,7 @@ IdList RepoApi::logicalElements(const Id &type) const
 	Q_ASSERT(type.idSize() == 3);
 
 	IdList result;
-	for (Id id : mRepository->elements()) {
+	for (Id const &id : mRepository->elements()) {
 		if (id.element() == type.element() && mRepository->isLogicalId(id))
 			result.append(id);
 	}
@@ -532,7 +532,7 @@ IdList RepoApi::graphicalElements(const Id &type) const
 	Q_ASSERT(type.idSize() == 3);
 
 	IdList result;
-	for (Id id : mRepository->elements()) {
+	for (Id const &id : mRepository->elements()) {
 		if (id.element() == type.element() && !mRepository->isLogicalId(id))
 			result.append(id);
 	}
@@ -544,13 +544,13 @@ IdList RepoApi::elementsByType(const QString &type, bool sensitivity, bool regEx
 {
 	const Qt::CaseSensitivity caseSensitivity = sensitivity ? Qt::CaseSensitive : Qt::CaseInsensitive;
 
-	QRegExp *regExp = new QRegExp(type,caseSensitivity);
+	QRegExp regExp(type,caseSensitivity);
 
 	IdList result;
 
 	if (regExpression) {
 		for (const Id &id : mRepository->elements()) {
-			if (id.element().contains(*regExp)) {
+			if (id.element().contains(regExp)) {
 				result.append(id);
 			}
 		}
@@ -638,4 +638,9 @@ QVariant RepoApi::metaInformation(const QString &key) const
 void RepoApi::setMetaInformation(const QString &key, const QVariant &info)
 {
 	mRepository->setMetaInformation(key, info);
+}
+
+void RepoApi::clearMetaInformation()
+{
+	mRepository->clearMetaInformation();
 }

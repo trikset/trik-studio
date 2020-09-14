@@ -33,32 +33,6 @@ TextPicture::TextPicture(int x, int y, const QString &text)
 	init(x, y, text);
 }
 
-TextPicture::TextPicture(const TextPicture &other)
-	: Text()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	mX1 = other.mX1;
-	mY1 = other.mY1;
-	mText.setPos(other.mText.x(), other.mText.y());
-	mText.setFlags(other.mText.flags());
-	mText.setTextInteractionFlags(Qt::TextEditorInteraction);
-	mText.setPlainText(other.mText.toPlainText());
-	mText.setParentItem(other.parentItem());
-	mFont = other.mFont;
-	mBoundingRect = other.mBoundingRect;
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* TextPicture::clone()
-{
-	TextPicture* item = new TextPicture(*this);
-	return item;
-}
-
 void TextPicture::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option);
@@ -153,7 +127,7 @@ void TextPicture::setFontUnderline(bool isChecked)
 
 void TextPicture::readFont(const QDomElement &docItem)
 {
-	QDomElement dom = docItem;
+	const QDomElement &dom = docItem;
 	if(!dom.isNull()) {
 		if (dom.hasAttribute("font-fill")) {
 			const QColor color = dom.attribute("font-fill");

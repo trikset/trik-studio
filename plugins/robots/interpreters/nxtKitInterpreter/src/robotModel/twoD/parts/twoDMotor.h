@@ -30,7 +30,7 @@ public:
 			, const kitBase::robotModel::PortInfo &port
 			, twoDModel::engine::TwoDModelEngineInterface &engine);
 
-	void on(int speed, long unsigned int degrees, bool breakMode) override;
+	void on(int speed, uint64_t degrees, bool breakMode) override;
 	void stop(bool breakMode) override;
 
 private:

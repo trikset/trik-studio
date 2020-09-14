@@ -22,6 +22,7 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/mainWindowDockInterface.h>
 
 #include <qrgui/preferencesDialog/preferencesDialog.h>
+#include <textEditor/qscintillaTextEdit.h>
 
 
 class QGraphicsView;
@@ -94,6 +95,7 @@ public:
 	void dehighlight() override;
 	ErrorReporterInterface *errorReporter() override;
 	Id activeDiagram() const override;
+	IdList openedDiagrams() const override;
 	void openShapeEditor(const QPersistentModelIndex &index, int role, const QString &propertyValue
 		, bool useTypedPorts);
 	void openQscintillaTextEditor(const QPersistentModelIndex &index, const int role, const QString &propertyValue);
@@ -273,7 +275,7 @@ private slots:
 	void openShapeEditor();
 
 	void updatePaletteIcons();
-	void setTextChanged(bool changed);
+	void setTextChanged(qReal::text::QScintillaTextEdit *editor, bool changed);
 
 private:
 	/// Initializes a tab if it is a diagram --- sets its logical and graphical
@@ -356,6 +358,8 @@ private:
 
 	void highlightCode(Id const &graphicalId, bool highlight);
 
+	void updateUndoRedoState();
+
 	Ui::MainWindowUi *mUi;
 	QScopedPointer<SystemFacade> mFacade;
 
@@ -365,39 +369,39 @@ private:
 	QMap<QString, Id> mElementsNamesAndIds;
 
 	/// mFindDialog - Dialog for searching elements.
-	FindReplaceDialog *mFindReplaceDialog;
+	FindReplaceDialog *mFindReplaceDialog; //Has ownership
 
-	Controller *mController;
-	QScopedPointer<ToolPluginManager> mToolManager;
+	QScopedPointer<gui::ErrorReporter> mErrorReporter;
+
 	QScopedPointer<PropertyEditorModel> mPropertyModel;
-	text::TextManager *mTextManager;
-	EditorInterface *mCurrentEditor;
+	QScopedPointer<text::TextManager> mTextManager;
+	QScopedPointer<ProjectManagerWrapper> mProjectManager;
+	QScopedPointer<Controller> mController;
+	QScopedPointer<ToolPluginManager> mToolManager;
+
+	EditorInterface* mCurrentEditor {}; // No ownership
 
 	QVector<bool> mSaveListChecked;
 
 	QStringList mDiagramsList;
 	QModelIndex mRootIndex;
 
-	gui::ErrorReporter *mErrorReporter;  // Has ownership
-
 	/// Fullscreen mode flag
-	bool mIsFullscreen;
+	bool mIsFullscreen { false };
 
 	/// Internal map table to store info what widgets should we hide/show
 	QMap<QString, bool> mDocksVisibility;
 
 	QString mTempDir;
-	qReal::gui::PreferencesDialog mPreferencesDialog;
+	qReal::gui::PreferencesDialog *mPreferencesDialog; //Has ownership
 
-	int mRecentProjectsLimit;
-	QSignalMapper *mRecentProjectsMapper;
-	QMenu *mRecentProjectsMenu;
+	int mRecentProjectsLimit {};
+	QMenu *mRecentProjectsMenu {}; // Has ownership
 
-	FindManager *mFindHelper;
-	ProjectManagerWrapper *mProjectManager;
-	StartWidget *mStartWidget;
+	QScopedPointer<FindManager> mFindHelper;
+	StartWidget *mStartWidget {}; // Has ownership
 
-	qReal::gui::editor::SceneCustomizer *mSceneCustomizer;
+	QScopedPointer<qReal::gui::editor::SceneCustomizer> mSceneCustomizer;
 	QList<QDockWidget *> mAdditionalDocks;
 	QMap<QWidget *, int> mLastTabBarIndexes;
 
@@ -406,9 +410,9 @@ private:
 	/// A field for storing file name passed as console argument
 	QString mInitialFileToOpen;
 
-	gui::ScriptAPI mScriptAPI;
+	gui::ScriptAPI *mScriptAPI {}; // Has ownership,  but manages via worker thread
 
-	bool mRestoreDefaultSettingsOnClose;
+	bool mRestoreDefaultSettingsOnClose {};
 };
 
 }

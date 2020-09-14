@@ -241,7 +241,7 @@
         <translation type="vanished">Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>
     <message>
-        <location line="+251"/>
+        <location line="+240"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>
@@ -251,7 +251,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+198"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>

@@ -42,9 +42,9 @@ private:
 	bool setSelectionState(bool select);
 	bool isSelected() const;
 
-	bool mNewState;
-	bool mForceValueChange;
-	bool mOldState;
+	bool mNewState {};
+	bool mForceValueChange {};
+	bool mOldState {};
 };
 
 }

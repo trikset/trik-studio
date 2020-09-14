@@ -19,8 +19,8 @@ cp -pr $BIN_DIR/librobots-2d-model.so*                                  $PWD/../
 #cp -pr $BIN_DIR/libBox2D.so*                                            $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-kit-base.so*                                  $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-utils.so*                                     $PWD/../data/lib/
-#cp -pr $BIN_DIR/libqextserialport.so*                                   $PWD/../data/lib/
 rsync -a --remove-source-files $PWD/../data/externalToolsConfig/                                 $PWD/../data/bin/externalToolsConfig/
+cp     "$BIN_DIR/run_maze_generator.sh"                                 "$PWD/../data/bin/"
 
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins/

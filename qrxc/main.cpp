@@ -52,16 +52,15 @@ int main(int argc, char *argv[])
 
 	qDebug() << "Running " + args.join(" ");
 
-	if (args.count() != 3) {
-		qDebug() << "Usage: qrxc inputFile.xml <path to root directory of qreal sources>";
+	if (args.count() != 2) {
+		qDebug() << "Usage: qrxc inputFile.xml\nOutput will be produced to the current directory";
 		return 1;
 	}
 
 	const QString inputXmlFileName = args[1];
-	const QString root = args[2];
 
 	XmlCompiler xmlCompiler;
-	if (!xmlCompiler.compile(inputXmlFileName, root))
+	if (!xmlCompiler.compile(inputXmlFileName))
 		return 1;
 
 	return 0;

@@ -31,7 +31,7 @@ void Motor::on(int speed, bool breakMode)
 	on(speed, 0, breakMode);
 }
 
-void Motor::on(int speed, long unsigned int degrees, bool breakMode)
+void Motor::on(int speed, uint64_t degrees, bool breakMode)
 {
 	int mode = enums::motorMode::MOTORON | enums::motorMode::REGULATED;
 	if (breakMode) {
@@ -54,7 +54,7 @@ void Motor::off()
 
 void Motor::setOutputState(int speed, int mode
 		, enums::regulationMode::RegulationModeEnum regulation, int turnRatio
-		, enums::runState::RunStateEnum runState, unsigned long tachoLimit)
+		, enums::runState::RunStateEnum runState, uint64_t tachoLimit)
 {
 	QByteArray command(15, 0);
 	command[0] = 13;  // command length.

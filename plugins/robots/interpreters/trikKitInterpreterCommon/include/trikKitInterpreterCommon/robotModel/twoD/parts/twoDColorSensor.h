@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include <twoDModel/engine/twoDModelEngineInterface.h>
 #include <trikKit/robotModel/parts/trikColorSensor.h>
 
 #include "trikKitInterpreterCommon/declSpec.h"
@@ -31,10 +32,14 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT ColorSensor : public robotModel:
 
 public:
 	ColorSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+			, const kitBase::robotModel::PortInfo &port
+			, twoDModel::engine::TwoDModelEngineInterface &engine);
 
 	void init() override;
 	void read() override;
+
+private:
+	twoDModel::engine::TwoDModelEngineInterface &mEngine;
 };
 
 }

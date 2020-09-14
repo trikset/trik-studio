@@ -112,10 +112,10 @@ private:
 	const QString mTargetDirectory;
 
 	QString generateListMethod(const QString &lineTemplate
-			, std::function<QString(const Type * const, const QString &)> generator) const;
+			, const std::function<QString (const Type *const, const QString &)> &generator) const;
 
 	QString generateMapMethod(const QString& lineTemplate
-			, std::function<QString(Type * const, const QString &)> generator) const;
+			, const std::function<QString (Type *const, const QString &)> &generator) const;
 };
 
 }

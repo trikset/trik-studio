@@ -187,7 +187,7 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 	mMainWindowInterface->errorReporter()->clearErrors();
 	mMainWindowInterface->errorReporter()->clear();
 
-	MasterGeneratorBase * const generator = masterGenerator();
+	QScopedPointer<MasterGeneratorBase> generator (masterGenerator());
 	const QFileInfo path = srcPath();
 
 	generator->initialize();
@@ -196,7 +196,6 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 	const QString generatedSrcPath = generator->generate(language().indent());
 
 	if (mMainWindowInterface->errorReporter()->wereErrors()) {
-		delete generator;
 		return false;
 	}
 
@@ -211,7 +210,6 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 		mMainWindowInterface->activateItemOrDiagram(activeDiagram);
 	}
 
-	delete generator;
 	return true;
 }
 

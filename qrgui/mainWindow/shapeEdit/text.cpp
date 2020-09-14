@@ -44,32 +44,6 @@ void Text::init(int x, int y, const QString &text)
 	mY1 = y;
 }
 
-Text::Text(const Text &other)
-	:Item()
-{
-	mIsDynamicText = other.mIsDynamicText;
-	mNeedScalingRect = other.mNeedScalingRect;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = labelType;
-	mX1 = other.mX1;
-	mY1 = other.mY1;
-	mText.setPos(other.mText.x(), other.mText.y());
-	mText.setFlags(other.mText.flags());
-	mText.setTextInteractionFlags(Qt::TextEditorInteraction);
-	mText.setPlainText(other.mText.toPlainText());
-	mText.setParentItem(this);
-	mBoundingRect = other.mBoundingRect;
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* Text::clone()
-{
-	Text* item = new Text(*this);
-	return item;
-}
-
 void Text::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option);

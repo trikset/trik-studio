@@ -25,8 +25,10 @@ namespace ui {
 /// @see qReal::ui::PaintWidget
 class QRUTILS_EXPORT PainterInterface
 {
+	Q_DISABLE_COPY(PainterInterface)
 public:
-	virtual ~PainterInterface() {}
+	PainterInterface() = default;
+	virtual ~PainterInterface() = default;
 
 	/// Implements the painting process itself.
 	virtual void paint(QPainter *painter, const QRect &outputRect) = 0;

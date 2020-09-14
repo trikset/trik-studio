@@ -30,10 +30,10 @@ private:
 	void analysePoints(QList<QPoint> const &path);
 	void clear();
 
-	int mLeftBound;
-	int mRightBound;
-	int mUpperBound;
-	int mLowerBound;
+	int mLeftBound {-1};
+	int mRightBound {-1};
+	int mUpperBound {-1};
+	int mLowerBound {-1};
 	static const int inMovement = 20;
 	static const int iSize = 7;
 	static const int unidimensionalLimit = 4;

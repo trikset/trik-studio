@@ -115,19 +115,19 @@ private:
 	model::Model &mModel;
 	details::StatusReporter mStatus;
 	QScopedPointer<details::ConstraintsParser> mParser;
-	bool mParsedSuccessfully;
-	bool mSuccessTriggered;
-	bool mDefferedSuccessTriggered;
-	bool mFailTriggered;
+	bool mParsedSuccessfully {};
+	bool mSuccessTriggered {};
+	bool mDefferedSuccessTriggered {};
+	bool mFailTriggered {};
 
 	details::Events mEvents;
 	details::Variables mVariables;
-	details::Objects mObjects;
+	details::Objects mObjects; // No ownership
 
-	QList<details::Event *> mActiveEvents;
+	QList<details::Event *> mActiveEvents; //No ownership
 
 	QDomElement mCurrentXml;
-	bool mEnabled;
+	bool mEnabled { true };
 };
 
 }

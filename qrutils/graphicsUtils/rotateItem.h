@@ -22,6 +22,8 @@ class Rotater;
 
 class QRUTILS_EXPORT RotateItem : public AbstractItem
 {
+	Q_DISABLE_COPY(RotateItem)
+
 public:
 	explicit RotateItem(QGraphicsItem *parent = nullptr);
 

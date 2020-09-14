@@ -36,6 +36,7 @@ public:
 	~Ev3KitInterpreterPlugin() override;
 
 	void init(const kitBase::KitPluginConfigurator &configurator) override;
+	void release() override;
 
 	QString kitId() const override;
 	QString friendlyKitName() const override;
@@ -43,7 +44,7 @@ public:
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 	kitBase::robotModel::RobotModelInterface *defaultRobotModel() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<qReal::ActionInfo> customActions() override;  // Transfers ownership of embedded QActions
@@ -62,7 +63,7 @@ private:
 	robotModel::real::BluetoothRealRobotModel mBluetoothRealRobotModel;
 	robotModel::twoD::TwoDRobotModel mTwoDRobotModel;
 
-	blocks::Ev3BlocksFactory *mBlocksFactory = nullptr;  // Transfers ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;  // Transfers ownership
 	bool mOwnsBlocksFactory = true;
 
 	Ev3AdditionalPreferences *mAdditionalPreferences = nullptr;  // Transfers ownership

@@ -18,8 +18,6 @@ include(../common.pri)
 
 include(../../../qrutils/qrutils.pri)
 
-links(qslog)
-
 INCLUDEPATH += ../../../qrutils
 
 HEADERS += \

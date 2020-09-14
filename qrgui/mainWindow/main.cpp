@@ -66,15 +66,6 @@ void setDefaultLocale(bool localizationDisabled)
 	}
 }
 
-void initLogging()
-{
-	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
-	if (logsDir.mkpath(logsDir.absolutePath())) {
-		Logger::addLogTarget(logsDir.filePath("tsj.log"), maxLogSize, 2, QsLogging::DebugLevel);
-		Logger::addLogTarget(logsDir.filePath("tsj-actions.log"), maxLogSize, 2, QsLogging::TraceLevel);
-	}
-}
-
 static QString versionInfo()
 {
 	return  "TRIK Studio (" + QSysInfo::buildAbi() + ") " + TRIK_STUDIO_VERSION;
@@ -83,21 +74,21 @@ static QString versionInfo()
 int main(int argc, char *argv[])
 {
 	PlatformInfo::enableHiDPISupport();
-	QRealApplication app(argc, argv);
+	QScopedPointer<QRealApplication> app(new QRealApplication(argc, argv));
 
-	if (app.arguments().contains("--clear-conf")) {
+	if (app->arguments().contains("--clear-conf")) {
 		clearConfig();
 		return 0;
 	}
 
-	if (app.arguments().contains("--version"))
+	if (app->arguments().contains("--version"))
 	{
 		QTextStream(stdout) << versionInfo() << endl;
 		return 0;
 	}
 
 	qsrand(time(0));
-	setDefaultLocale(app.arguments().contains("--no-locale"));
+	setDefaultLocale(app->arguments().contains("--no-locale"));
 
 	const QString defaultPlatformConfigPath = PlatformInfo::defaultPlatformConfigPath();
 	if (!defaultPlatformConfigPath.isEmpty()) {
@@ -106,14 +97,14 @@ int main(int argc, char *argv[])
 	}
 
 	QString fileToOpen;
-	if (app.arguments().count() > 1) {
-		const int setIndex = app.arguments().indexOf("--config");
+	if (app->arguments().count() > 1) {
+		const int setIndex = app->arguments().indexOf("--config");
 		if (setIndex > -1) {
-			const QString settingsFileName = app.arguments().at(setIndex + 1);
+			const QString settingsFileName = app->arguments().at(setIndex + 1);
 			SettingsManager::instance()->loadSettings(settingsFileName);
 		}
 
-		for (const QString &argument : app.arguments()) {
+		for (const QString &argument : app->arguments()) {
 			if (argument.endsWith(".tsj") || argument.endsWith(".tsj'") || argument.endsWith(".tsj\"")) {
 				fileToOpen = argument;
 				break;
@@ -121,23 +112,30 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	initLogging();
+	qReal::Logger logger;
+	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
+	if (logsDir.mkpath(logsDir.absolutePath())) {
+		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2);
+	}
+
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName()
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
-	QLOG_INFO() << "Arguments:" << app.arguments();
+	QLOG_INFO() << "Arguments:" << app->arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 
-	MainWindow window(fileToOpen);
+	QScopedPointer<MainWindow> window(new MainWindow(fileToOpen));
 	int exitCode = 0; // The window decided to not show itself, exiting now.
 
-	if (window.isVisible()) {
-		exitCode = app.exec();
+	if (window->isVisible()) {
+		exitCode = app->exec();
 	}
 
+	window.reset();
+	app.reset();
 	QLOG_INFO() << "------------------- APPLICATION FINISHED -------------------";
 	return exitCode;
 }

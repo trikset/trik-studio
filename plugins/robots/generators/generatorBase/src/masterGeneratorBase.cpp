@@ -51,6 +51,8 @@ MasterGeneratorBase::MasterGeneratorBase(const qrRepo::RepoApi &repo
 {
 }
 
+MasterGeneratorBase::~MasterGeneratorBase() = default;
+
 void MasterGeneratorBase::setProjectDir(const QFileInfo &fileInfo)
 {
 	mProjectName = fileInfo.completeBaseName();
@@ -59,16 +61,16 @@ void MasterGeneratorBase::setProjectDir(const QFileInfo &fileInfo)
 
 void MasterGeneratorBase::initialize()
 {
-	mCustomizer = createCustomizer();
+	mCustomizer.reset(createCustomizer());
 	mCustomizer->factory()->initialize();
 	setPathsToTemplates(mCustomizer->factory()->pathsToTemplates());
 
 	mValidator = createValidator();
 
-	mGotoControlFlowGenerator = new GotoControlFlowGenerator(mRepo
-			, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this);
-	mStructuralControlFlowGenerator = new StructuralControlFlowGenerator(mRepo
-			, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this);
+	mGotoControlFlowGenerator.reset(new GotoControlFlowGenerator(mRepo
+			, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this));
+	mStructuralControlFlowGenerator.reset(new StructuralControlFlowGenerator(mRepo
+			, mErrorReporter, *mCustomizer, *mValidator, mDiagram, this));
 }
 
 QString MasterGeneratorBase::generate(const QString &indentString)
@@ -97,7 +99,7 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 	if (mainControlFlow && !mStructuralControlFlowGenerator->cantBeGeneratedIntoStructuredCode()) {
 		mainCode = mainControlFlow->toString(1, indentString);
 		const parts::Subprograms::GenerationResult subprogramsResult = mCustomizer->factory()->subprograms()->generate(
-				mStructuralControlFlowGenerator, indentString);
+				mStructuralControlFlowGenerator.get(), indentString);
 		switch (subprogramsResult) {
 		case parts::Subprograms::GenerationResult::success:
 			break;
@@ -120,7 +122,7 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 		if (gotoMainControlFlow) {
 			mainCode = gotoMainControlFlow->toString(1, indentString);
 			const parts::Subprograms::GenerationResult gotoSubprogramsResult = mCustomizer->factory()
-					->subprograms()->generate(mGotoControlFlowGenerator, indentString);
+					->subprograms()->generate(mGotoControlFlowGenerator.get(), indentString);
 			if (gotoSubprogramsResult != parts::Subprograms::GenerationResult::success) {
 				mainCode = QString();
 			}
@@ -207,11 +209,11 @@ void MasterGeneratorBase::generateLinkingInfo(QString &resultCode)
 	QString out;
 
 	std::sort(results.begin(), results.end()
-			, [](QPair<QString, QPair<int, int>> r1, QPair<QString, QPair<int, int>> r2) -> bool {
+			, [](const QPair<QString, QPair<int, int>> &r1, const QPair<QString, QPair<int, int>> &r2) -> bool {
 				return r1.second.first < r2.second.first;
 			});
 
-	for (const QPair<QString, QPair<int, int>> &res : results) {
+	for (const auto &res : results) {
 		out += QString("%1@%2@%3\n").arg(res.first
 				, QString::number(res.second.first)
 				, QString::number(res.second.second));

@@ -27,7 +27,6 @@ LuaProcessor::LuaProcessor(qReal::ErrorReporterInterface &errorReporter
 		, const utils::ParserErrorReporter &parserErrorReporter
 		, QObject *parent)
 	: QObject(parent)
-	, TemplateParametrizedEntity()
 	, mErrorReporter(errorReporter)
 	, mTextLanguage(textLanguage)
 	, mParserErrorReporter(parserErrorReporter)

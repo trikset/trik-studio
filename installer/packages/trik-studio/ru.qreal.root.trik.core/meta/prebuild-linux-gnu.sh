@@ -10,3 +10,4 @@ cp     $BIN_DIR/plugins/editors/libtrikMetamodel.so                             
 cp -pr $BIN_DIR/librobots-trik-kit.so*                                             $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-trik-kit-interpreter-common.so*                          $PWD/../data/lib/
 
+rsync -a "$BIN_DIR"/libtrik*.so*                                                         "$PWD"/../data/lib/

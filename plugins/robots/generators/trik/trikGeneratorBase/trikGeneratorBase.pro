@@ -27,7 +27,7 @@ includes(plugins/robots/generators/generatorBase \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo robots-generator-base robots-kit-base robots-trik-kit)
+links(qrkernel qrutils qrrepo robots-generator-base robots-kit-base robots-trik-kit)
 
 DEFINES += ROBOTS_TRIK_GENERATOR_BASE_LIBRARY
 
@@ -82,6 +82,7 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.h \
 	$$PWD/src/simpleGenerators/markerDownGenerator.h \
 	$$PWD/src/simpleGenerators/markerUpGenerator.h \
+	$$PWD/src/simpleGenerators/printTextGenerator.h \
 
 SOURCES += \
 	$$PWD/src/trikBlocksValidator.cpp \
@@ -128,3 +129,4 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.cpp \
 	$$PWD/src/simpleGenerators/markerDownGenerator.cpp \
 	$$PWD/src/simpleGenerators/markerUpGenerator.cpp \
+	$$PWD/src/simpleGenerators/printTextGenerator.cpp \

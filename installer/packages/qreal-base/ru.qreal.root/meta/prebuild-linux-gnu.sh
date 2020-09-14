@@ -3,6 +3,7 @@ set -o nounset
 set -o errexit
 
 cd "$(dirname "$0")"
+source "$INSTALLER_ROOT"/utils/linux-gnu_utils.sh
 
 mkdir -p $PWD/../data/bin/
 mkdir -p $PWD/../data/resources/
@@ -20,7 +21,7 @@ cp -pr $BIN_DIR/libqrrepo.so*                                           $PWD/../
 cp -pr $BIN_DIR/libqrutils.so*                                          $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrtext.so*                                           $PWD/../data/lib/
 cp -pr $BIN_DIR/libqscintilla2.so*                                      $PWD/../data/lib/
-cp -pr $BIN_DIR/libqslog.so*                                            $PWD/../data/lib/
+cp -pr $BIN_DIR/libtrikQsLog.so*                                            $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-brand-manager.so*                              $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-controller.so*                                 $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-dialogs.so*                                    $PWD/../data/lib/
@@ -51,16 +52,15 @@ cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5XcbQpa.so*                                     $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libicudata.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libicui18n.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libicuuc.so*                                         $PWD/../data/lib/
+#rsync -avR --copy-unsafe-links "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc,png12}.so* "$PWD/../data/lib/"
+#Take them from Qt if exist
+#rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
 
 cp     $QT_DIR/plugins/platforms/libq{xcb,minimal,offscreen}.so                             $PWD/../data/bin/platforms/
 cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
 cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/
 
-rsync -av /usr/lib/$(uname -i)-linux-gnu/libstdc++.so*                               $PWD/../data/lib/
 #rsync -av /lib/$(uname -i)-linux-gnu/libc.so*                               $PWD/../data/lib/
 #rsync -av /lib/$(uname -i)-linux-gnu/libc-2.*.so*                               $PWD/../data/lib/
 
@@ -73,3 +73,6 @@ rm -rf $PWD/../data/imageformats/
 rm -rf $PWD/../data/iconengines/
 rm -rf $PWD/../data/platforms/
 rm -rf $PWD/../data/plugins/
+
+add_required_libs "$PWD/../data/bin" "$PWD/../data/lib"
+add_required_libs "$PWD/../data/lib"

@@ -170,7 +170,7 @@ void ElementType::setDiagram(const QString &diagramName)
 
 QDomElement ElementType::sdf() const
 {
-	return mSdf.isNull() ? QDomElement() : mSdf->documentElement();
+	return mSdf->isNull() ? QDomElement() : mSdf->documentElement();
 }
 
 void ElementType::loadSdf(const QDomElement &picture)
@@ -186,12 +186,12 @@ void ElementType::loadSdf(const QDomElement &picture)
 	}
 }
 
-const QList<LabelProperties> &ElementType::labels() const
+const QList<QSharedPointer<LabelProperties>> &ElementType::labels() const
 {
 	return mLabels;
 }
 
-void ElementType::addLabel(const LabelProperties &label)
+void ElementType::addLabel(const QSharedPointer<LabelProperties> &label)
 {
 	mLabels << label;
 }

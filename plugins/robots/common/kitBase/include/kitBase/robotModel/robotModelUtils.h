@@ -29,7 +29,7 @@ public:
 	template<typename T>
 	static T *findDevice(const RobotModelInterface &robotModel, const PortInfo &port)
 	{
-		return dynamic_cast<T *>(robotModel.configuration().device(port));
+		return qobject_cast<T *>(robotModel.configuration().device(port));
 	}
 
 	/// Returns a pointer to a device if it is configured on the given port string representation and ready to work.
@@ -44,9 +44,9 @@ public:
 	/// If no suitable ports found invalid instance is returned.
 	static PortInfo findPort(const RobotModelInterface &robotModel, const QString &name, Direction direction);
 
-	/// Converts string representation of devices configuration into a number of maps:
+	/// Converts string representation of world model into a number of maps:
 	/// robot model is mapped into map of its ports to devices configured on them.
-	static QMap<QString, QMap<PortInfo, DeviceInfo>> deserialize(const QString &configuration);
+	static QMap<QString, QMap<PortInfo, DeviceInfo>> deserializeFromWorldModel(const QString &worldModel);
 
 	/// Returns lastly selected robot model for the given kits set with the same id.
 	/// If user didn`t select robot model yet then robot model specified in kit as default one is returned.

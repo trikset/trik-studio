@@ -19,14 +19,16 @@ using namespace twoDModel::view;
 ActionsBox::ActionsBox(QObject *parent)
 	: QObject(parent)
 	, mSceneModeActions(this)
-	, mScrollHandModeAction(new QAction(QIcon(":/icons/2d_hand.png"), tr("Hand dragging mode"), nullptr))
-	, mMultiSelectionModeAction(new QAction(QIcon(":/icons/2d_multiselection.png"), tr("Multiselection mode"), nullptr))
-	, mSeparator1(new QAction(nullptr))
-	, mSaveWorldModelAction(new QAction(QIcon(":/icons/2d_save.png"), tr("Save world model..."), nullptr))
-	, mLoadWorldModelAction(new QAction(QIcon(":/icons/2d_open.png"), tr("Load world model..."), nullptr))
-	, mSeparator2(new QAction(nullptr))
-	, mDeleteAllAction(new QAction(QIcon(":/icons/2d_clear.png"), tr("Clear items"), nullptr))
-	, mClearFloorAction(new QAction(QIcon(":/icons/2d_clear_floor.svg"), tr("Clear floor"), nullptr))
+	, mScrollHandModeAction(new QAction(QIcon(":/icons/2d_hand.png"), tr("Hand dragging mode"), this))
+	, mMultiSelectionModeAction(new QAction(QIcon(":/icons/2d_multiselection.png"), tr("Multiselection mode"), this))
+	, mSeparator1(new QAction(this))
+	, mSaveWorldModelAction(new QAction(QIcon(":/icons/2d_save.png"), tr("Save world model..."), this))
+	, mLoadWorldModelAction(new QAction(QIcon(":/icons/2d_open.png"), tr("Load world model..."), this))
+	, mLoadWorldWithoutRobotAction(new QAction(QIcon(":/icons/2d_open.png")
+			, tr("Load world model without robot configuration..."), this))
+	, mSeparator2(new QAction(this))
+	, mDeleteAllAction(new QAction(QIcon(":/icons/2d_clear.png"), tr("Clear items"), this))
+	, mClearFloorAction(new QAction(QIcon(":/icons/2d_clear_floor.svg"), tr("Clear floor"), this))
 {
 	mScrollHandModeAction->setCheckable(true);
 	mMultiSelectionModeAction->setCheckable(true);
@@ -60,6 +62,11 @@ QAction &ActionsBox::loadModelAction() const
 	return *mLoadWorldModelAction;
 }
 
+QAction &ActionsBox::loadModelWithoutRobotAction() const
+{
+	return *mLoadWorldWithoutRobotAction;
+}
+
 QAction &ActionsBox::deleteAllAction() const
 {
 	return *mDeleteAllAction;
@@ -78,6 +85,7 @@ QList<QAction *> ActionsBox::sceneContextMenuActions() const
 		, mSeparator1.data()
 		, &saveModelAction()
 		, &loadModelAction()
+		, &loadModelWithoutRobotAction()
 		, mSeparator2.data()
 		, &deleteAllAction()
 		, &clearFloorAction()
@@ -88,6 +96,7 @@ void ActionsBox::setWorldModelActionsVisible(bool visible)
 {
 	saveModelAction().setVisible(visible);
 	loadModelAction().setVisible(visible);
+	loadModelWithoutRobotAction().setVisible(visible);
 	deleteAllAction().setVisible(visible);
 	/// @todo: Do we need to hide clearFloorAction() here?
 }

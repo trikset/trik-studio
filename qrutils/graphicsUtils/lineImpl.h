@@ -15,6 +15,7 @@
 #pragma once
 
 #include <QtGui/QPainter>
+#include <QPainterPath>
 
 #include "qrutils/utilsDeclSpec.h"
 

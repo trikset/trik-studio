@@ -23,7 +23,7 @@ namespace items {
 /// Provides information for physics such as friction, mass, form, etc.
 class SolidItem
 {
-
+	Q_DISABLE_COPY(SolidItem)
 public:
 	/// static: zero mass, zero velocity, may be manually moved
 	/// kinematic: zero mass, non-zero velocity set by user
@@ -35,7 +35,9 @@ public:
 		KINEMATIC
 	};
 
-	virtual ~SolidItem(){}
+	SolidItem() = default;
+
+	virtual ~SolidItem() = default;
 
 	/// Returns body form as polygon.
 	virtual QPolygonF collidingPolygon() const = 0;

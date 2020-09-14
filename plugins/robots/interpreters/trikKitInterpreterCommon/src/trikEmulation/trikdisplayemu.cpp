@@ -53,9 +53,9 @@ void TrikDisplayEmu::show(const QVector<int32_t> &array, int width, int height, 
 	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->show(array, width, height, format); }, callType());
 }
 
-void TrikDisplayEmu::addLabel(const QString &text, int x, int y)
+void TrikDisplayEmu::addLabel(const QString &text, int x, int y, int fontSize)
 {
-	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->printText(x, y, text); }, callType());
+	QMetaObject::invokeMethod(mDisplay, [=](){ mDisplay->printText(x, y, text, fontSize); }, callType());
 }
 
 void TrikDisplayEmu::setPainterColor(const QString &color)

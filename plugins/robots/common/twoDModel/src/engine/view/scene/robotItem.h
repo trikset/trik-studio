@@ -13,9 +13,11 @@
  * limitations under the License. */
 
 #pragma once
+#include <QtSvg/QGraphicsSvgItem>
+#include <QScopedPointer>
+#include <twoDModel/engine/model/image.h>
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
-
 #include "sensorItem.h"
 #include "src/engine/items/solidItem.h"
 #include "twoDModel/engine/model/robotModel.h"
@@ -111,8 +113,8 @@ private:
 
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
-	model::Image mCustomImage;
-	bool mIsCustomImage;
+	QSharedPointer<model::Image> mCustomImage;
+	bool mIsCustomImage {false};
 	// Takes ownership
 	BeepItem *mBeepItem;
 

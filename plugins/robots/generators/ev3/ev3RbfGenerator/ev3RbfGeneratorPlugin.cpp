@@ -31,10 +31,10 @@ using namespace qReal;
 Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 	: Ev3GeneratorPluginBase("Ev3RbfUsbGeneratorRobotModel", tr("Autonomous mode (USB)"), 9
 			, "Ev3RbfBluetoothGeneratorRobotModel", tr("Autonomous mode (Bluetooth)"), 8)
-	, mGenerateCodeAction(new QAction(nullptr))
-	, mUploadProgramAction(new QAction(nullptr))
-	, mRunProgramAction(new QAction(nullptr))
-	, mStopRobotAction(new QAction(nullptr))
+	, mGenerateCodeAction(new QAction(this))
+	, mUploadProgramAction(new QAction(this))
+	, mRunProgramAction(new QAction(this))
+	, mStopRobotAction(new QAction(this))
 {
 	mGenerateCodeAction->setText(tr("Generate to Ev3 Robot Byte Code File"));
 	mGenerateCodeAction->setIcon(QIcon(":/ev3/rbf/images/generateRbfCode.svg"));
@@ -151,7 +151,7 @@ QString Ev3RbfGeneratorPlugin::uploadProgram()
 void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
 {
 	const QString fileOnRobot = uploadProgram();
-	communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator();
+	const auto &communicator = currentCommunicator();
 
 	if (fileOnRobot.isEmpty() || !communicator) {
 		return;
@@ -162,11 +162,11 @@ void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
 	case RunPolicy::Ask:
 		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget(), tr("The program has been uploaded")
 				, tr("Do you want to run it?")) == QMessageBox::Yes) {
-			QMetaObject::invokeMethod(communicator, [=](){ communicator->runProgram(fileOnRobot); });
+			QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
 		}
 		break;
 	case RunPolicy::AlwaysRun:
-		QMetaObject::invokeMethod(communicator, [=](){ communicator->runProgram(fileOnRobot); });
+		QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
 		break;
 	case RunPolicy::NeverRun:
 		break;
@@ -175,17 +175,17 @@ void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
 
 void Ev3RbfGeneratorPlugin::runProgram()
 {
-	const QString fileOnRobot = uploadProgram();
-	communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator();
+	const auto fileOnRobot = uploadProgram();
+	const auto &communicator = currentCommunicator();
 	if (!fileOnRobot.isEmpty() && communicator) {
-		QMetaObject::invokeMethod(communicator, [=](){ communicator->runProgram(fileOnRobot); });
+		QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
 	}
 }
 
 void Ev3RbfGeneratorPlugin::stopRobot()
 {
-	if (communication::Ev3RobotCommunicationThread * const communicator = currentCommunicator()) {
-		QMetaObject::invokeMethod(communicator, &communication::Ev3RobotCommunicationThread::stopProgram);
+	if (const auto &communicator = currentCommunicator()) {
+		QMetaObject::invokeMethod(communicator.get(), &communication::Ev3RobotCommunicationThread::stopProgram);
 	}
 }
 
@@ -254,16 +254,16 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	const QString targetPath = "../prjs/" + folderName;
 	const QString rbfPath = lmsFile.absolutePath() + "/" + lmsFile.baseName() + ".rbf";
 	bool connected = false;
-	communication::Ev3RobotCommunicationThread *communicator = currentCommunicator();
+	const auto &communicator = currentCommunicator();
 	if (!communicator) {
 		return QString();
 	}
 	auto errorReporter = connect(
-			communicator, &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
-			[this](const QString &message){
+			communicator.get(), &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
+			this, [this](const QString &message){
 				mMainWindowInterface->errorReporter()->addError(message);
 			});
-	QMetaObject::invokeMethod(communicator, &communication::Ev3RobotCommunicationThread::connect
+	QMetaObject::invokeMethod(communicator.get(), &communication::Ev3RobotCommunicationThread::connect
 			, (communicator->thread()==QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection)
 			, &connected);
 
@@ -275,7 +275,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	}
 
 	QString res;
-	QMetaObject::invokeMethod(communicator, [=](){ communicator->uploadFile(rbfPath, targetPath); }
+	QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->uploadFile(rbfPath, targetPath); }
 			, (communicator->thread()==QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection)
 			, &res);
 	disconnect(errorReporter);

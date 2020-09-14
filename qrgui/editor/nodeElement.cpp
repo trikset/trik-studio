@@ -77,8 +77,8 @@ NodeElement::NodeElement(const NodeElementType &type, const Id &id, const models
 			, portFactory.createPorts(mType.linePorts())
 			, portFactory.createPorts(mType.circularPorts()));
 
-	const QList<LabelProperties> labelInfos = mType.labels();
-	for (const LabelProperties &labelInfo : labelInfos) {
+	const auto &labelInfos = mType.labels();
+	for (const auto &labelInfo : labelInfos) {
 		Label * const label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 		label->init(mContents);
 		label->setParentItem(this);
@@ -191,10 +191,6 @@ void NodeElement::updateDynamicProperties(const Id &target)
 	if (mPreviousDynamicLabels.isEmpty() ||
 			(!mPreviousDynamicLabels.isEmpty() && compareDynamicLabels(dynamiclabels, mPreviousDynamicLabels))) {
 		mPreviousDynamicLabels = dynamiclabels;
-		QDomDocument dynamicProperties;
-		QDomElement properties = dynamicProperties.createElement("properties");
-		QDomDocument dynamicLabels;
-		dynamicLabels.setContent(dynamiclabels);
 
 		// ...delete old dynamic labels
 		const int oldCount = mLabels.count() - mStartingLabelsCount;
@@ -207,17 +203,24 @@ void NodeElement::updateDynamicProperties(const Id &target)
 				= mLogicalAssistApi.mutableLogicalRepoApi().stringProperty(logicalId(), "dynamicProperties");
 		QMap<QString, QString> valueByPropertyName;
 		if (!mCurretDynamicProperties.isEmpty()) {
-			QDomDocument dynamicProperties;
-			dynamicProperties.setContent(mCurretDynamicProperties);
+			QDomDocument currentDynamicProperties;
+			currentDynamicProperties.setContent(mCurretDynamicProperties);
 
 			for (QDomElement element
-					= dynamicProperties.firstChildElement("properties").firstChildElement("property")
+					= currentDynamicProperties.firstChildElement("properties").firstChildElement("property")
 					; !element.isNull()
 					; element = element.nextSiblingElement("property"))
 			{
 				valueByPropertyName[element.attribute("name")] = element.attribute("dynamicPropertyValue");
 			}
 		}
+
+		QDomDocument dynamicProperties;
+		QDomElement properties = dynamicProperties.createElement("properties");
+		dynamicProperties.appendChild(properties);
+
+		QDomDocument dynamicLabels;
+		dynamicLabels.setContent(dynamiclabels);
 
 		int index = mLabels.count() + 1;
 		for (QDomElement element = dynamicLabels.firstChildElement("labels").firstChildElement("label")
@@ -244,21 +247,15 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			property.setAttribute("dynamicPropertyValue", value);
 			properties.appendChild(property);
 
-			if (dynamicProperties.appendChild(properties).isNull()) {
-				dynamicProperties.replaceChild(properties, properties);
-			}
-
-			mLogicalAssistApi.mutableLogicalRepoApi().setProperty(logicalId(), "dynamicProperties"
-					, dynamicProperties.toString(4));
-
 			// Label initialization
-			LabelProperties labelInfo(index, x.value(), y.value(), textBinded, false, 0);
-			labelInfo.setBackground(Qt::white);
-			labelInfo.setScalingX(false);
-			labelInfo.setScalingY(false);
-			labelInfo.setHard(false);
-			labelInfo.setPrefix(text);
-			labelInfo.setPlainTextMode(true);
+			QSharedPointer<LabelProperties> labelInfo(new LabelProperties(index, x.value(), y.value()
+																		  , textBinded, false, 0));
+			labelInfo->setBackground(Qt::white);
+			labelInfo->setScalingX(false);
+			labelInfo->setScalingY(false);
+			labelInfo->setHard(false);
+			labelInfo->setPrefix(text);
+			labelInfo->setPlainTextMode(true);
 			Label *label = new Label(mGraphicalAssistApi, mLogicalAssistApi, mId, labelInfo);
 			label->init(mContents);
 			label->setParentItem(this);
@@ -266,6 +263,10 @@ void NodeElement::updateDynamicProperties(const Id &target)
 			label->setPlainText(value);
 			mLabels.append(label);
 		}
+
+		mLogicalAssistApi.mutableLogicalRepoApi().setProperty(logicalId(), "dynamicProperties"
+				, dynamicProperties.toString(4));
+
 	}
 }
 
@@ -853,7 +854,7 @@ QRectF NodeElement::contentsRect() const
 
 QRectF NodeElement::boundingRect() const
 {
-	return mContents.adjusted(-2 * kvadratik, -2 * kvadratik, kvadratik, kvadratik);
+	return mContents.adjusted(-2 * squareSize, -2 * squareSize, squareSize, squareSize);
 }
 
 void NodeElement::updateData()
@@ -1084,7 +1085,7 @@ void NodeElement::updateDynamicLabels()
 	}
 }
 
-bool NodeElement::compareDynamicLabels(QString labelsPack1, QString labelsPack2) const
+bool NodeElement::compareDynamicLabels(const QString &labelsPack1, const QString &labelsPack2) const
 {
 	QDomDocument dynamicLabels1;
 	dynamicLabels1.setContent(labelsPack1);
@@ -1445,16 +1446,14 @@ void NodeElement::initRenderedDiagram()
 
 QRectF NodeElement::diagramRenderingRect() const
 {
-	const NodeElement *initial = new NodeElement(
+	const NodeElement initial(
 			mLogicalAssistApi.editorManagerInterface().elementType(id()).toNode()
 			, id().sameTypeId()
 			, mModels
 			);
 
-	const qreal xCoeff = (boundingRect().width() - 3 * kvadratik) / (initial->boundingRect().width() - 3 * kvadratik);
-	const qreal yCoeff = (boundingRect().height() - 3 * kvadratik) / (initial->boundingRect().height() - 3 *kvadratik);
-
-	delete initial;
+	const qreal xCoeff = (boundingRect().width() - 3 * squareSize) / (initial.boundingRect().width() - 3 * squareSize);
+	const qreal yCoeff = (boundingRect().height()- 3 * squareSize) / (initial.boundingRect().height()- 3 * squareSize);
 
 	// QReal:BP hardcode
 	// TODO: Remove this.

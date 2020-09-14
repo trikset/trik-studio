@@ -80,7 +80,7 @@ ElementType &Metamodel::elementType(const QString &diagram, const QString &eleme
 
 void Metamodel::addElement(ElementType &element)
 {
-	addNode(element);
+	addNode(&element);
 }
 
 QStringList Metamodel::enumNames() const
@@ -185,9 +185,9 @@ void Metamodel::setPaletteSorted(const QString &diagram, bool sorted)
 	mPaletteSorting[diagram] = sorted;
 }
 
-void Metamodel::addNode(qrgraph::Node &entity)
+void Metamodel::addNode(qrgraph::Node *entity)
 {
-	ElementType * const type = dynamic_cast<ElementType *>(&entity);
+	ElementType * const type = dynamic_cast<ElementType *>(entity);
 	Q_ASSERT_X(type, Q_FUNC_INFO, "Attempt to add non-metamodel enitity!");
 	Q_ASSERT_X(&type->metamodel() == this, Q_FUNC_INFO, "Attempt to add entity from other metamodel!");
 

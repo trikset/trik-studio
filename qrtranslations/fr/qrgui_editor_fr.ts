@@ -187,7 +187,7 @@
         <translation type="unfinished">Relier avec l&apos;élement courant</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+309"/>
         <source>Replace by...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -247,7 +247,7 @@
 <context>
     <name>qReal::gui::editor::PropertyEditorView</name>
     <message>
-        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+315"/>
+        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+305"/>
         <source>Specify directory:</source>
         <translation type="unfinished">Choisissez le répertoire :</translation>
     </message>

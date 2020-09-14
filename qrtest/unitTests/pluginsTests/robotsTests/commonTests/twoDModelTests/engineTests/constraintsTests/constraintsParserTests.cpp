@@ -35,8 +35,9 @@ struct ScopedConnection {
 		: mConnection(c)
 	{}
 
-	ScopedConnection(ScopedConnection &&c)
-		: mConnection(c.mConnection)
+	ScopedConnection(const ScopedConnection &c) = delete;
+	ScopedConnection(ScopedConnection &&c) noexcept
+		: mConnection(std::move(c.mConnection))
 	{
 		c.mMoved = true;
 	}
@@ -61,12 +62,10 @@ ConstraintsParserTests::ConstraintsParserTests()
 
 ConstraintsParserTests::~ConstraintsParserTests()
 {
-	qDeleteAll(mEvents);
 }
 
 void ConstraintsParserTests::SetUp()
 {
-	qDeleteAll(mEvents);
 	mEvents.clear();
 	mVariables.clear();
 	mObjects.clear();
@@ -111,12 +110,12 @@ TEST_F(ConstraintsParserTests, timeLimitConstraintTest)
 			"</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 1);
-	Event * const event = mEvents.values()[0];
+	auto event = mEvents.values()[0];
 	ASSERT_NE(event, nullptr);
 	event->setUp();
 
 	bool eventFired = false;
-	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(900);
 	event->check();
@@ -148,12 +147,12 @@ TEST_F(ConstraintsParserTests, timerWithoutDropTest)
 			"</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 2);
-	Event * const event = mEvents["event"];
+	auto &event = mEvents["event"];
 	ASSERT_NE(event, nullptr);
 	event->setUp();
 
 	bool eventFired = false;
-	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -190,12 +189,12 @@ TEST_F(ConstraintsParserTests, timerWithDropTest)
 			"</constraints>";
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 2);
-	Event * const event = mEvents["event"];
+	auto &event = mEvents["event"];
 	ASSERT_NE(event, nullptr);
 	event->setUp();
 
 	bool eventFired = false;
-	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -256,12 +255,12 @@ TEST_F(ConstraintsParserTests, comparisonTest)
 				"</constraints>").arg(sign, type);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 		event->setUp();
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -307,12 +306,12 @@ TEST_F(ConstraintsParserTests, constraintTagAndTypeOfTagTest)
 				"</constraints>").arg(checkOnce ? "true" : "false", objectId, type);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["constraint"];
+		auto &event = mEvents["constraint"];
 		ASSERT_NE(event, nullptr);
 		event->setUp();
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_FALSE(eventFired);
@@ -405,22 +404,22 @@ TEST_F(ConstraintsParserTests, arithmeticTest)
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 4);
 
-	Event * const event1 = mEvents["event1"];
+	auto &event1 = mEvents["event1"];
 	ASSERT_NE(event1, nullptr);
 	event1->setUp();
-	Event * const event2 = mEvents["event2"];
+	auto &event2 = mEvents["event2"];
 	ASSERT_NE(event2, nullptr);
 	event2->setUp();
-	Event * const event3 = mEvents["event3"];
+	auto &event3 = mEvents["event3"];
 	ASSERT_NE(event3, nullptr);
 	event3->setUp();
 
 	bool event1Fired = false;
 	bool event2Fired = false;
 	bool event3Fired = false;
-	ScopedConnection c1 = QObject::connect(event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
-	ScopedConnection c2 = QObject::connect(event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
-	ScopedConnection c3 = QObject::connect(event3, &Event::fired, [&event3Fired]() { event3Fired = true; });
+	ScopedConnection c1 = QObject::connect(&*event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
+	ScopedConnection c2 = QObject::connect(&*event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
+	ScopedConnection c3 = QObject::connect(&*event3, &Event::fired, [&event3Fired]() { event3Fired = true; });
 
 	mTimeline.setTimestamp(100);
 	event1->check();
@@ -481,11 +480,11 @@ TEST_F(ConstraintsParserTests, variableValueTest)
 				"</constraints>").arg(variable, type, value);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -528,11 +527,11 @@ TEST_F(ConstraintsParserTests, objectStateTest)
 				"</constraints>").arg(object, type, value);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -578,11 +577,11 @@ TEST_F(ConstraintsParserTests, setObjectStateTest)
 				"</constraints>").arg(object, property, valueXml);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -637,11 +636,11 @@ TEST_F(ConstraintsParserTests, objectsSetTest)
 				"</constraints>").arg(object, QString::number(size), QString::number(first), QString::number(last));
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -710,11 +709,11 @@ TEST_F(ConstraintsParserTests, boundingRectTest)
 						, QString::number(height));
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -764,11 +763,11 @@ TEST_F(ConstraintsParserTests, distanceTest)
 				"</constraints>").arg(value);
 		ASSERT_TRUE(mParser.parse(xml));
 		ASSERT_EQ(mEvents.count(), 2);
-		Event * const event = mEvents["event"];
+		auto &event = mEvents["event"];
 		ASSERT_NE(event, nullptr);
 
 		bool eventFired = false;
-		ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 		event->check();
 		ASSERT_TRUE(eventFired);
@@ -829,17 +828,17 @@ TEST_F(ConstraintsParserTests, usingTest)
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 3);
 
-	Event * const event1 = mEvents["event1"];
+	auto &event1 = mEvents["event1"];
 	ASSERT_NE(event1, nullptr);
 	event1->setUp();
-	Event * const event2 = mEvents["event2"];
+	auto &event2 = mEvents["event2"];
 	ASSERT_NE(event2, nullptr);
 	// event2 is not setted up initially
 
 	bool event1Fired = false;
 	bool event2Fired = false;
-	ScopedConnection c1 = QObject::connect(event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
-	ScopedConnection c2 = QObject::connect(event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
+	ScopedConnection c1 = QObject::connect(&*event1, &Event::fired, [&event1Fired]() { event1Fired = true; });
+	ScopedConnection c2 = QObject::connect(&*event2, &Event::fired, [&event2Fired]() { event2Fired = true; });
 
 	mTimeline.setTimestamp(100);
 	event1->check();
@@ -914,15 +913,15 @@ TEST_F(ConstraintsParserTests, initializationTagTest)
 	ASSERT_TRUE(mParser.parse(xml));
 	ASSERT_EQ(mEvents.count(), 3);
 
-	for (Event * const event : mEvents.values()) {
+	for (auto &event : mEvents.values()) {
 		ASSERT_NE(event, nullptr);
 		event->setUp();
 		event->check();
 	}
 
-	Event * const event = mEvents["event"];
+	auto &event = mEvents["event"];
 	bool eventFired = false;
-	ScopedConnection c = QObject::connect(event, &Event::fired, [&eventFired]() { eventFired = true; });
+	ScopedConnection c = QObject::connect(&*event, &Event::fired, [&eventFired]() { eventFired = true; });
 
 	mTimeline.setTimestamp(1000);
 	event->check();
@@ -1002,11 +1001,11 @@ TEST_F(ConstraintsParserTests, communicationTest)
 
 	std::vector<ScopedConnection> connections;
 	for (const QString &eventId : mEvents.keys()) {
-		Event * const event = mEvents[eventId];
+		auto &event = mEvents[eventId];
 		ASSERT_NE(event, nullptr);
 		fireCounters[eventId] = 0;
 		std::function<void()> countEvents([&fireCounters, eventId]() { ++fireCounters[eventId]; });
-		ScopedConnection c = QObject::connect(event, &Event::fired, countEvents);
+		ScopedConnection c = QObject::connect(&*event, &Event::fired, countEvents);
 		connections.push_back(std::move(c));
 		if (event->isAliveInitially()) {
 			event->setUp();
@@ -1018,7 +1017,7 @@ TEST_F(ConstraintsParserTests, communicationTest)
 	int time = 0;
 	while (time <= timeout && !fireCounters[doneEventId]) {
 		mTimeline.setTimestamp(time);
-		for (Event * const event : mEvents.values()) {
+		for (auto &event : mEvents.values()) {
 			event->check();
 		}
 

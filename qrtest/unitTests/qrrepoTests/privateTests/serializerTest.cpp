@@ -54,7 +54,7 @@ void SerializerTest::TearDown()
 	mSerializer->clearWorkingDir();
 	delete mSerializer;
 
-	QFile::remove("saveFile.qrs");
+	QFile::remove("saveFile.tsj");
 }
 
 TEST_F(SerializerTest, saveAndLoadFromDiskTest)
@@ -74,11 +74,10 @@ TEST_F(SerializerTest, saveAndLoadFromDiskTest)
 	QList<Object *> list;
 	list.push_back(&obj1);
 	list.push_back(&obj2);
-
-	mSerializer->saveToDisk(list, metaInfo);
+	ASSERT_TRUE(mSerializer->saveToDisk(list, metaInfo));
 
 	QHash<Id, Object *> map;
-	mSerializer->setWorkingFile("saveFile.qrs");
+	mSerializer->setWorkingFile("saveFile.tsj");
 	mSerializer->loadFromDisk(map, metaInfo);
 
 	ASSERT_TRUE(map.contains(id1));
@@ -93,6 +92,7 @@ TEST_F(SerializerTest, saveAndLoadFromDiskTest)
 	ASSERT_TRUE(metaInfo.keys().count() == 2);
 	ASSERT_EQ(metaInfo["key1"], "info1");
 	ASSERT_EQ(metaInfo["key2"], 2);
+	qDeleteAll(map);
 }
 
 // Decomment EXPECT_FALSE and delete EXPECT_TRUE(true) when removeFromDisk will be fixed. pathToElement(id) returns
@@ -111,8 +111,8 @@ TEST_F(SerializerTest, removeFromDiskTest)
 	list.push_back(&obj1);
 	list.push_back(&obj2);
 
-	mSerializer->saveToDisk(list, QHash<QString, QVariant>());
-	mSerializer->decompressFile("saveFile.qrs");
+	ASSERT_TRUE(mSerializer->saveToDisk(list, QHash<QString, QVariant>()));
+	mSerializer->decompressFile("saveFile.tsj");
 	mSerializer->removeFromDisk(id2);
 
 	//EXPECT_FALSE(QFile::exists("unsaved/tree/logical/editor1/diagram2/element2/id2"));
@@ -136,11 +136,11 @@ TEST_F(SerializerTest, saveAndLoadGraphicalPartsTest)
 	list.push_back(&graphicalObj);
 	list.push_back(&logicalObj);
 
-	mSerializer->saveToDisk(list, QHash<QString, QVariant>());
+	ASSERT_TRUE(mSerializer->saveToDisk(list, QHash<QString, QVariant>()));
 
 	QHash<Id, Object *> map;
 	QHash<QString, QVariant> metaInfo;
-	mSerializer->setWorkingFile("saveFile.qrs");
+	mSerializer->setWorkingFile("saveFile.tsj");
 	mSerializer->loadFromDisk(map, metaInfo);
 
 	ASSERT_TRUE(map.contains(graphicalElement));
@@ -149,4 +149,5 @@ TEST_F(SerializerTest, saveAndLoadGraphicalPartsTest)
 			= dynamic_cast<GraphicalObject const *>(map.value(graphicalElement));
 
 	ASSERT_EQ(QPointF(10, 20), deserializedGraphicalObject->graphicalPartProperty(0, "Coord"));
+	qDeleteAll(map);
 }

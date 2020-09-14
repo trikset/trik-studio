@@ -21,10 +21,9 @@
 
 class PointPort : public Item
 {
+	Q_DISABLE_COPY(PointPort)
 public:
 	PointPort(qreal x, qreal y, Item *parent = nullptr);
-	PointPort(const PointPort &other);
-	virtual Item* clone();
 	virtual QRectF boundingRect() const;
 	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
 	virtual void drawExtractionForItem(QPainter* painter);
@@ -41,8 +40,8 @@ public:
 	QString getType() const;
 
 private:
-	qreal mRadius;
-	qreal mUnrealRadius;
+	qreal mRadius { -1 };
+	qreal mUnrealRadius { -1 };
 	graphicsUtils::PointImpl mPointImpl;
 	QString mType;
 };

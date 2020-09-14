@@ -47,13 +47,16 @@ ProjectManagerWrapper::ProjectManagerWrapper(MainWindow *mainWindow, TextManager
 
 bool ProjectManagerWrapper::suggestToSaveChangesOrCancel()
 {
-	if (!mUnsavedIndicator) {
+	if (!mUnsavedIndicator && !mStackUnsaved) {
 		return true;
 	}
 
 	switch (suggestToSaveOrCancelMessage()) {
 	case QMessageBox::DestructiveRole:
-		mUnsavedIndicator=false;
+		mMainWindow->controller()->projectSaved();
+		// signals from ProjectSaved do not have time to change mStackUnsaved
+		mStackUnsaved = false;
+		mUnsavedIndicator = false;
 		return true;
 	case QMessageBox::RejectRole:
 		return false;
@@ -118,7 +121,7 @@ bool ProjectManagerWrapper::openQRProject(const QFileInfo &fileInfo)
 	qrp.open(QFile::ReadOnly | QFile::Text);
 	QByteArray qrpData = qrp.readAll();
 	qrp.close();
-	QJsonParseError er;
+	QJsonParseError er {};
 	QJsonDocument proj = QJsonDocument::fromJson(qrpData, &er);
 	if (er.error != QJsonParseError::NoError) {
 		/// @todo: properly handle er
@@ -200,7 +203,7 @@ void ProjectManagerWrapper::refreshWindowTitleAccordingToSaveFile()
 void ProjectManagerWrapper::refreshTitleModifiedSuffix()
 {
 	const QString modifiedSuffix = tr(" [modified]");
-	if (mUnsavedIndicator && !mMainWindow->windowTitle().endsWith(modifiedSuffix)) {
+	if ((mUnsavedIndicator || mStackUnsaved) && !mMainWindow->windowTitle().endsWith(modifiedSuffix)) {
 		mMainWindow->setWindowTitle(mMainWindow->windowTitle() + modifiedSuffix);
 	}
 }
@@ -256,10 +259,6 @@ bool ProjectManagerWrapper::save()
 
 bool ProjectManagerWrapper::saveOrSuggestToSaveAs()
 {
-	if (mTextManager->saveText(false)) {
-		return true;
-	}
-
 	if (mSaveFilePath == mAutosaver.tempFilePath()
 			|| mSaveFilePath == mMainWindow->editorManager().saveMetamodelFilePath()) {
 		return suggestToSaveAs();
@@ -270,8 +269,20 @@ bool ProjectManagerWrapper::saveOrSuggestToSaveAs()
 
 void ProjectManagerWrapper::setUnsavedIndicator(bool isUnsaved)
 {
+	mAutosaver.setAutoSaving(true);
 	ProjectManager::setUnsavedIndicator(isUnsaved);
 	refreshWindowTitleAccordingToSaveFile();
+}
+
+void ProjectManagerWrapper::setStackUnsaved(bool isUnsaved)
+{
+	mAutosaver.setAutoSaving(true);
+	mStackUnsaved = isUnsaved;
+	refreshWindowTitleAccordingToSaveFile();
+}
+
+bool ProjectManagerWrapper::saveText() {
+	return mTextManager->saveText(false);
 }
 
 bool ProjectManagerWrapper::suggestToSaveAs()

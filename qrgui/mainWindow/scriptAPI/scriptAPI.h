@@ -49,7 +49,7 @@ public:
 	~ScriptAPI();
 
 	/// Initializes scripting API.
-	void init(MainWindow &mainWindow);
+	void init(MainWindow *mainWindow);
 
 	/// Starts evaluatiion of the script with script engine.
 	void evaluate();

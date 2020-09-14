@@ -29,5 +29,5 @@ ColorSensorAmbient::ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &in
 
 void ColorSensorAmbient::read()
 {
-	emit newData(mEngine.readColorSensor(port()));
+	setLastData(mEngine.readLightSensor(port()));
 }

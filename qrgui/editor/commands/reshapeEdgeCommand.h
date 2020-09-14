@@ -53,10 +53,10 @@ private:
 	Id mOldDst;
 	Id mNewSrc;
 	Id mNewDst;
-	qreal mOldFromPort;
-	qreal mNewFromPort;
-	qreal mOldToPort;
-	qreal mNewToPort;
+	qreal mOldFromPort {};
+	qreal mNewFromPort {};
+	qreal mOldToPort {};
+	qreal mNewToPort {};
 };
 
 }

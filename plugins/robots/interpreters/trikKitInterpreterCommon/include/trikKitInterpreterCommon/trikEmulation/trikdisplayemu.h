@@ -40,22 +40,22 @@ public:
 	void init();
 
 public slots:
-	virtual void showImage(const QString &fileName) override;
-	virtual void show(const QVector<int32_t> &array, int width, int height, const QString &format) override;
-	virtual void addLabel(const QString &text, int x, int y) override;
-	virtual void removeLabels() override {}
-	virtual void setPainterColor(const QString &color) override;
-	virtual void setPainterWidth(int penWidth) override;
-	virtual void drawLine(int x1, int y1, int x2, int y2) override;
-	virtual void drawPoint(int x, int y) override;
-	virtual void drawRect(int x, int y, int width, int height, bool filled) override;
-	virtual void drawEllipse(int x, int y, int width, int height, bool filled) override;
-	virtual void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle) override;
-	virtual void setBackground(const QString &color) override;
-	virtual void hide() override {}
-	virtual void clear() override;
-	virtual void reset() override;
-	virtual void redraw() override;
+	void showImage(const QString &fileName) override;
+	void show(const QVector<int32_t> &array, int width, int height, const QString &format) override;
+	void addLabel(const QString &text, int x, int y, int fontSize = -1) override;
+	void removeLabels() override {}
+	void setPainterColor(const QString &color) override;
+	void setPainterWidth(int penWidth) override;
+	void drawLine(int x1, int y1, int x2, int y2) override;
+	void drawPoint(int x, int y) override;
+	void drawRect(int x, int y, int width, int height, bool filled) override;
+	void drawEllipse(int x, int y, int width, int height, bool filled) override;
+	void drawArc(int x, int y, int width, int height, int startAngle, int spanAngle) override;
+	void setBackground(const QString &color) override;
+	void hide() override {}
+	void clear() override;
+	void reset() override;
+	void redraw() override;
 
 private:
 	Qt::ConnectionType callType() const;

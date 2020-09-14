@@ -106,7 +106,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+251"/>
+        <location line="+240"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,7 +116,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+198"/>
         <source>Enter robot`s IP-address here...</source>
         <translation type="unfinished">Tapez l&apos;adresse IP du robot ici...</translation>
     </message>

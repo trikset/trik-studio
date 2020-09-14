@@ -24,9 +24,8 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-ImageItem::ImageItem(model::Image *image, const QRect &geometry)
-	: mImpl()
-	, mImage(image)
+ImageItem::ImageItem(const QSharedPointer<model::Image> &image, const QRect &geometry)
+	: mImage(image)
 {
 	setX(0);
 	setY(0);
@@ -94,7 +93,7 @@ void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *opti
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	const qreal zoom = scene()->views().isEmpty() ? 1.0 : scene()->views().first()->transform().m11();
-	mImage->draw(*painter, calcNecessaryBoundingRect(), zoom);
+	mImage->draw(*painter, calcNecessaryBoundingRect().toRect(), zoom);
 }
 
 QPainterPath ImageItem::shape() const
@@ -140,7 +139,7 @@ void ImageItem::deserialize(const QDomElement &element)
 	setY2(rect.bottom());
 }
 
-twoDModel::model::Image *ImageItem::image() const
+QSharedPointer<twoDModel::model::Image> ImageItem::image() const
 {
 	return mImage;
 }
@@ -163,7 +162,7 @@ void ImageItem::setMemorize(bool memorize)
 
 void ImageItem::setPath(const QString &path)
 {
-	mImage->setPath(path);
+	mImage->loadFrom(path);
 	update();
 	emit internalImageChanged();
 }
@@ -199,10 +198,11 @@ void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
 	if (isSelected() || !isBackground()) {
 		if (resizeArea().contains(event->pos())) {
-			setCursor(mResizeCursor);
+			setCursor(getResizeCursor());
 		} else {
 			unsetCursor();
 		}
+		// TODO: Why not AstractItem::hoverMoveEvent()
 		QGraphicsItem::hoverMoveEvent(event);
 	}
 }

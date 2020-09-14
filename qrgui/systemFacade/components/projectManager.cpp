@@ -130,7 +130,7 @@ bool ProjectManager::openProject(const QString &fileName)
 
 	try {
 		mModels.repoControlApi().open(fileName);
-	} catch (qrRepo::QrRepoException) {
+	} catch (qrRepo::QrRepoException&) {
 		showMessage(tr("Error"), tr("Cannot open file, please try with another one."));
 		return false;
 	}
@@ -151,6 +151,7 @@ bool ProjectManager::openProject(const QString &fileName)
 		return false;
 	}
 
+	setUnsavedIndicator(false);
 	setSaveFilePath(fileName);
 	refreshApplicationStateAfterOpen();
 
@@ -331,7 +332,7 @@ bool ProjectManager::suggestToSaveAs()
 
 bool ProjectManager::saveAs(const QString &fileName)
 {
-	const QString workingFileName = fileName;
+	const QString &workingFileName = fileName;
 	if (workingFileName.isEmpty()) {
 		return false;
 	}

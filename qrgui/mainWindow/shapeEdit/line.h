@@ -21,10 +21,9 @@
 class Line : public Item
 {
 	Q_INTERFACES(AbstractItem)
+	Q_DISABLE_COPY(Line)
 public:
 	Line(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
-	Line(const Line &other);
-	virtual Item* clone();
 	QLineF line() const;
 	QPainterPath shape() const;
 	virtual QRectF boundingRect() const;
@@ -37,7 +36,7 @@ public:
 	virtual void reshapeRectWithShift();
 
 	QPair<QPair<QString, QString>, QPair<QString, QString> > setXandYBefore(const QRect &rect);
-	void setDomXandY(QDomElement& dom, QPair<QPair<QString, QString>, QPair<QString, QString> > pair);
+	void setDomXandY(QDomElement &dom, const QPair<QPair<QString, QString>, QPair<QString, QString> > &pair);
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
 			, const QPoint &topLeftPicture);
 

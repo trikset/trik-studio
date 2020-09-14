@@ -22,6 +22,26 @@ QString SaveConvertionManager::editor()
 	return "RobotsMetamodel";
 }
 
+void SaveConvertionManager::reconnectEdges(const Id &newBlock, const Id &block
+										   , GraphicalModelAssistInterface &graphicalApi)
+{
+	const bool isEdge = isEdgeType(block);
+	if (isEdge) {
+		// If out element is edge then connecting it to same elements as the old one was connected
+		graphicalApi.setFrom(newBlock, graphicalApi.from(block));
+		graphicalApi.setTo(newBlock, graphicalApi.to(block));
+	} else {
+		// Replacing old node in all incomming and outgoing edges of the old node with the new one.
+		for (const Id &edge : graphicalApi.graphicalRepoApi().outgoingLinks(block)) {
+			graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "from", newBlock.toVariant());
+		}
+
+		for (const Id &edge : graphicalApi.graphicalRepoApi().incomingLinks(block)) {
+			graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "to", newBlock.toVariant());
+		}
+	}
+}
+
 QList<ProjectConverter> SaveConvertionManager::converters()
 {
 	return { before300Alpha1Converter()
@@ -32,6 +52,8 @@ QList<ProjectConverter> SaveConvertionManager::converters()
 		, from302to310Converter()
 		, from312to313Converter()
 		, from320to330Converter()
+		, from330to20204Converter()
+		, from20204to20205Converter()
 	};
 }
 
@@ -221,9 +243,95 @@ ProjectConverter SaveConvertionManager::from320to330Converter()
 			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
 	{
 		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+		if (!worldModel.contains("trikV62KitRobot")) {
+			return ProjectConverter::NoModificationsMade;
+		}
 		worldModel.replace("trikV62KitRobot", "trikKitRobot");
 		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
 		return ProjectConverter::Success;
+	});
+}
+
+ProjectConverter SaveConvertionManager::from330to20204Converter()
+{
+	return ProjectConverter(editor(), Version::fromString("3.3.0"), Version::fromString("2020.4")
+			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
+	{
+		QString worldModel = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+		if (!worldModel.contains("trik::robotModel::parts::TrikLineSensor")
+				&& !worldModel.contains("value=\"trik::robotModel::twoD::parts::TwoDInfraredSensor")) {
+			return ProjectConverter::NoModificationsMade;
+		}
+
+		worldModel.replace("value=\"trik::robotModel::twoD::parts::TwoDInfraredSensor"
+				, "value=\"twoDModel::robotModel::parts::RangeSensor");
+
+		worldModel.replace("TrikLineSensorPort###lineSensor", "###");
+		worldModel.replace("LineSensorPort", "Video2Port");
+
+		worldModel.replace("TrikLineSensor", "TrikVideoCamera");
+
+		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel);
+		return ProjectConverter::Success;
+	});
+}
+
+ProjectConverter SaveConvertionManager::from20204to20205Converter()
+{
+	return ProjectConverter(editor(), Version::fromString("2020.4"), Version::fromString("2020.4.1")
+			, [=](GraphicalModelAssistInterface &graphicalApi, LogicalModelAssistInterface &logicalApi)
+	{
+		if (!logicalApi.logicalRepoApi()
+				.metaInformation("lastKitId").toString().contains("trik", Qt::CaseInsensitive)) {
+			return ProjectConverter::NoModificationsMade;
+		}
+
+		bool modificationsMade = false;
+
+		for (const Id &block : elementsOfRobotsDiagrams(logicalApi)) {
+			const Id logicalBlock = graphicalApi.isGraphicalId(block)
+					? graphicalApi.logicalId(block)
+					: block;
+
+			Id graphicalBlock;
+			if (graphicalApi.isGraphicalId(block)) {
+				graphicalBlock = block;
+			} else {
+				const IdList graphicalIds = graphicalApi.graphicalIdsByLogicalId(logicalBlock);
+				if (graphicalIds.isEmpty()) {
+					continue;
+				}
+
+				graphicalBlock = graphicalIds.first();
+			}
+
+			if (graphicalBlock.element() == "PrintText") {
+				Id newBlock = Id::createElementId(graphicalBlock.editor(), graphicalBlock.diagram(), "TrikPrintText");
+				newBlock = graphicalApi.createElement(graphicalApi.parent(graphicalBlock)
+						, newBlock
+						, false
+						, graphicalApi.name(graphicalBlock)
+						, graphicalApi.position(graphicalBlock)
+						, logicalApi.createElement(logicalApi.parent(logicalBlock), newBlock.type()));
+				graphicalApi.copyProperties(newBlock, graphicalBlock);
+
+				auto newLogicalId = graphicalApi.logicalId(newBlock);
+				auto iterator = logicalApi.logicalRepoApi().propertiesIterator(logicalBlock);
+				while (iterator.hasNext()) {
+					iterator.next();
+					const auto name = iterator.key();
+					auto value = iterator.value().toString();
+					logicalApi.setPropertyByRoleName(newLogicalId, value, name);
+				}
+				logicalApi.setPropertyByRoleName(graphicalApi.logicalId(newBlock), 20, "FontSize");
+
+				reconnectEdges(newBlock, graphicalBlock, graphicalApi);
+				modificationsMade = true;
+				graphicalApi.removeElement(graphicalBlock);
+			}
+		}
+
+		return modificationsMade ? ProjectConverter::Success : ProjectConverter::NoModificationsMade;
 	});
 }
 
@@ -396,22 +504,7 @@ SaveConvertionManager::GraphicalFilter SaveConvertionManager::graphicalRecreate(
 		// And initializing it...
 		constructor(newBlock, block, graphicalApi);
 
-		const bool isEdge = isEdgeType(block);
-		if (isEdge) {
-			// If out element is edge then connecting it to same elements as the old one was connected
-			graphicalApi.setFrom(newBlock, graphicalApi.from(block));
-			graphicalApi.setTo(newBlock, graphicalApi.to(block));
-		} else {
-			// Replacing old node in all incomming and outgoing edges of the old node with the new one.
-			for (const Id &edge : graphicalApi.graphicalRepoApi().outgoingLinks(block)) {
-				graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "from", newBlock.toVariant());
-			}
-
-			for (const Id &edge : graphicalApi.graphicalRepoApi().incomingLinks(block)) {
-				graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "to", newBlock.toVariant());
-			}
-		}
-
+		reconnectEdges(newBlock, block, graphicalApi);
 		// And finally disposing of outdated entity.
 		graphicalApi.removeElement(block);
 		return true;

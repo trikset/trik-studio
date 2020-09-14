@@ -26,7 +26,7 @@ SdfRenderer::SdfRenderer()
 	toGen.setString(&toGenerator,QIODevice::ReadWrite);
 }
 
-SdfRenderer::SdfRenderer(const QString path)
+SdfRenderer::SdfRenderer(const QString &path)
 	: mStartX(0), mStartY(0), mNeedScale(true)
 {
 	if (!load(path))
@@ -231,7 +231,6 @@ void SdfRenderer::draw_text(QDomElement &element)
 	while (str.contains('\n'))
 	{
 		int i = str.indexOf('\n');
-		QString temp = str.left(i);
 		str.remove(0, i + 1);
 	}
 
@@ -267,11 +266,8 @@ void SdfRenderer::polygon(QDomElement &element)
 	{
 		points = getpoints(element, n);
 	}
-	if (points != nullptr)
-	{
-//		painter->drawConvexPolygon(points, n);
-		delete[] points;
-	}
+
+	delete[] points;
 	defaultstyle();
 }
 
@@ -295,8 +291,7 @@ QPoint *SdfRenderer::getpoints(QDomElement &element, int n)
 	{
 		QString str;
 		str.setNum(i + 1);
-		QDomElement elem = element;
-		QString xnum = elem.attribute(QString("x").append(str));
+		QString xnum = element.attribute(QString("x").append(str));
 		if (xnum.endsWith("%"))
 		{
 			xnum.chop(1);
@@ -315,7 +310,7 @@ QPoint *SdfRenderer::getpoints(QDomElement &element, int n)
 		else
 			x = xnum.toFloat() * current_size_x / first_size_x + mStartX;
 
-		QString ynum = elem.attribute(QString("y").append(str));
+		QString ynum = element.attribute(QString("y").append(str));
 		if (ynum.endsWith("%"))
 		{
 			ynum.chop(1);
@@ -509,7 +504,7 @@ void SdfRenderer::path_draw(QDomElement &element)
 
 void SdfRenderer::parsestyle(QDomElement &element)
 {
-	QDomElement elem = element;
+	const auto &elem = element;
 	toGen << QString("\n\tQPen pen;\n");
 	toGen << QString("\tQBrush brush;\n");
 	toGen << QString("\tQFont font;\n\n");

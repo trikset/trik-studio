@@ -26,28 +26,12 @@ using namespace utils::sensorsGraph;
 
 SensorViewer::SensorViewer(QWidget *parent)
 	: QGraphicsView(parent)
-	, mVisualTimer(nullptr)
-	, mPenBrush(QBrush(Qt::yellow))
-	, mFpsInterval(50)
-	, mAutoScaleInterval(3000)
-	, mUpdateTextInfoInterval(500)
-	, mScaleCoefficient(0)
-	, mAutoScaleTimer(0)
-	, mUpdateCurrValueTimer(0)
-	, mOutputValue(0)
+	, mScene(new QGraphicsScene(this))
 {
 	initGraphicsOutput();
 }
 
-SensorViewer::~SensorViewer()
-{
-	delete mMainPoint;
-	delete mMarker;
-
-	delete mPointsDataProcessor;
-	delete mScene;
-	delete mVisualTimer;
-}
+SensorViewer::~SensorViewer() = default;
 
 void SensorViewer::resizeEvent(QResizeEvent *event)
 {
@@ -58,17 +42,14 @@ void SensorViewer::resizeEvent(QResizeEvent *event)
 
 void SensorViewer::setTimeline(TimelineInterface &timeline)
 {
-	delete mVisualTimer;
-	mVisualTimer = timeline.produceTimer();
+	mVisualTimer.reset(timeline.produceTimer());
 	mVisualTimer->setRepeatable(true);
-	connect(mVisualTimer, &AbstractTimer::timeout, this, &SensorViewer::visualTimerEvent);
+	connect(&*mVisualTimer, &AbstractTimer::timeout, this, &SensorViewer::visualTimerEvent);
 }
 
 void SensorViewer::initGraphicsOutput()
 {
 	setCursor(Qt::CrossCursor);
-
-	mScene = new QGraphicsScene(this);
 	mScene->setItemIndexMethod(QGraphicsScene::NoIndex);
 	mScene->setSceneRect(-200, -160, 205, 160);
 
@@ -84,14 +65,12 @@ void SensorViewer::initGraphicsOutput()
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-	mMainPoint = new KeyPoint(Qt::yellow);
-	mScene->addItem(mMainPoint);
+	mScene->addItem(&mMainPoint);
 
-	mMarker = new KeyPoint(Qt::red);
-	mScene->addItem(mMarker);
-	mMarker->hide();
+	mScene->addItem(&mMarker);
+	mMarker.hide();
 
-	mPointsDataProcessor = new PointsQueueProcessor(mScene->sceneRect().height() - 20, mScene->sceneRect().left());
+	mPointsDataProcessor.reset(new PointsQueueProcessor(mScene->sceneRect().height() - 20, mScene->sceneRect().left()));
 }
 
 void SensorViewer::startJob()
@@ -112,13 +91,11 @@ void SensorViewer::clear()
 {
 	mPointsDataProcessor->clearData();
 
-	for (QGraphicsItem *item : mScene->items()) {
-		QGraphicsLineItem *curLine = qgraphicsitem_cast<QGraphicsLineItem *>(item);
-		if (curLine == nullptr) {
-			continue;
+	for (auto *item : mScene->items()) {
+		if (auto *curLine = qgraphicsitem_cast<QGraphicsLineItem *>(item)) {
+			mScene->removeItem(curLine);
+			delete curLine;
 		}
-
-		mScene->removeItem(curLine);
 	}
 
 	QMatrix defaultMatrix;
@@ -158,7 +135,7 @@ void SensorViewer::setNextValue(const qreal newValue)
 
 void SensorViewer::drawNextFrame()
 {
-	mMainPoint->setPos(mPointsDataProcessor->latestPosition());
+	mMainPoint.setPos(mPointsDataProcessor->latestPosition());
 
 	// shifting lines left
 	mPointsDataProcessor->makeShiftLeft(stepSize);
@@ -232,15 +209,15 @@ void SensorViewer::mouseMoveEvent(QMouseEvent *event)
 			, event->pos().y()));
 	qreal valueUnderCursor = mPointsDataProcessor->pointToAbsoluteValue(pivot.y());
 
-	mMarker->setPos(pivot);
-	mMarker->show();
+	mMarker.setPos(pivot);
+	mMarker.show();
 
 	QToolTip::showText(QCursor::pos(), tr("value: ") + QString::number(valueUnderCursor));
 }
 
 void SensorViewer::leaveEvent(QEvent *)
 {
-	mMarker->hide();
+	mMarker.hide();
 }
 
 void SensorViewer::mouseDoubleClickEvent(QMouseEvent *event)
@@ -281,7 +258,6 @@ void SensorViewer::zoomOut()
 void SensorViewer::onSensorChange()
 {
 	clear();
-
 	if (mPenBrush.color().toCmyk() == QColor(Qt::yellow).toCmyk()) {
 		mPenBrush = QBrush(Qt::green);
 	} else {

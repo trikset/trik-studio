@@ -17,7 +17,7 @@
 
 using namespace twoDModel::commands;
 
-LoadWorldCommand::LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument data)
+LoadWorldCommand::LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data)
 	: mWidget(twoDwidget)
 	, mNewWorld(data)
 	, mOldWorld(mWidget.generateWorldModelWithBlobsXml())
@@ -36,7 +36,7 @@ bool LoadWorldCommand::restoreState()
 	return true;
 }
 
-void LoadWorldCommand::loadWorld(QDomDocument world)
+void LoadWorldCommand::loadWorld(const QDomDocument &world)
 {
 	QDomDocument blobs;
 	QDomNodeList blobsList = world.elementsByTagName("blobs");
@@ -49,6 +49,6 @@ void LoadWorldCommand::loadWorld(QDomDocument world)
 	}
 
 	mWidget.loadXmls(world, blobs, true);
-	mWidget.model().modelChanged(mWidget.generateWorldModelXml());
-	mWidget.model().blobsChanged(mWidget.generateBlobsXml());
+	Q_EMIT mWidget.model().modelChanged(mWidget.generateWorldModelXml());
+	Q_EMIT mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }

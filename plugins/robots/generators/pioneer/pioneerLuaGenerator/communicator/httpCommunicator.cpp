@@ -29,7 +29,7 @@ using namespace pioneer::lua;
 using namespace qReal;
 
 /// API part in URLs for HTTP requests.
-const QString apiLevel = "v0.1";
+static const auto apiLevel = "v0.1";
 
 /// Timeout for HTTP reply (in milliseconds).
 const int timeout = 3000;

@@ -20,7 +20,7 @@ includes(plugins/robots/generators/generatorBase \
 		plugins/robots/common/kitBase \
 )
 
-links(qrkernel qslog qrutils qrrepo qrtext qrgui-tool-plugin-interface qrgui-text-editor robots-kit-base)
+links(qrkernel qrutils qrrepo qrtext qrgui-tool-plugin-interface qrgui-text-editor robots-kit-base)
 
 DEFINES += ROBOTS_GENERATOR_LIBRARY
 

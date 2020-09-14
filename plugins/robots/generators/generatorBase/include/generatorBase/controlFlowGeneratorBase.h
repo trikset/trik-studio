@@ -88,13 +88,13 @@ protected:
 
 	GeneratorCustomizer &customizer() const;
 
-	semantics::SemanticTree *mSemanticTree;  // Takes ownership
+	semantics::SemanticTree *mSemanticTree {};  // Takes ownership
 	const qrRepo::RepoApi &mRepo;
 	qReal::ErrorReporterInterface &mErrorReporter;
 	GeneratorCustomizer &mCustomizer;
 	QString mThreadId;
-	bool mErrorsOccured;
-	const bool mIsMainGenerator;
+	bool mErrorsOccured {};
+	const bool mIsMainGenerator {};
 
 	const qReal::Id mDiagram;
 	PrimaryControlFlowValidator &mValidator;

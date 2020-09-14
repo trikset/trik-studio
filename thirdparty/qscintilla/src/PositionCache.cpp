@@ -140,7 +140,7 @@ void LineLayout::SetLineStart(int line, int start) {
 }
 
 void LineLayout::SetBracesHighlight(Range rangeLine, const Sci::Position braces[],
-									char bracesMatchStyle, int xHighlight, bool ignoreStyle) {
+                                    char bracesMatchStyle, int xHighlight, bool ignoreStyle) {
 	if (!ignoreStyle && rangeLine.ContainsCharacter(braces[0])) {
 		const Sci::Position braceOffset = braces[0] - rangeLine.start;
 		if (braceOffset < numCharsInLine) {
@@ -156,7 +156,7 @@ void LineLayout::SetBracesHighlight(Range rangeLine, const Sci::Position braces[
 		}
 	}
 	if ((braces[0] >= rangeLine.start && braces[1] <= rangeLine.end) ||
-			(braces[1] >= rangeLine.start && braces[0] <= rangeLine.end)) {
+	        (braces[1] >= rangeLine.start && braces[0] <= rangeLine.end)) {
 		xHighlightGuide = xHighlight;
 	}
 }
@@ -310,7 +310,7 @@ void LineLayoutCache::SetLevel(int level_) {
 }
 
 LineLayout *LineLayoutCache::Retrieve(Sci::Line lineNumber, Sci::Line lineCaret, int maxChars, int styleClock_,
-									  Sci::Line linesOnScreen, Sci::Line linesInDoc) {
+                                      Sci::Line linesOnScreen, Sci::Line linesInDoc) {
 	AllocateForLevel(linesOnScreen, linesInDoc);
 	if (styleClock != styleClock_) {
 		Invalidate(LineLayout::llCheckTextAndStyle);
@@ -335,7 +335,7 @@ LineLayout *LineLayoutCache::Retrieve(Sci::Line lineNumber, Sci::Line lineCaret,
 		if (!cache.empty() && (pos < static_cast<int>(cache.size()))) {
 			if (cache[pos]) {
 				if ((cache[pos]->lineNumber != lineNumber) ||
-						(cache[pos]->maxLineLength < maxChars)) {
+				        (cache[pos]->maxLineLength < maxChars)) {
 					cache[pos].reset();
 				}
 			}

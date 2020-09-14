@@ -166,14 +166,14 @@ void XmlLoader::readPorts(const QDomElement &port)
 	}
 }
 
-QPair<QString, bool> XmlLoader::readScaleCoord(QString point, const QDomElement &docItem)
+QPair<QString, bool> XmlLoader::readScaleCoord(const QString &point, const QDomElement &docItem)
 {
 	QString text = docItem.attribute(point, "0");
 	if (text.endsWith("a")) {
 		text.truncate(text.size() - 1);
-		return QPair<QString, bool>(text, true);
+		return {text, true};
 	}
-	return QPair<QString, bool>(text, false);
+	return {text, false};
 }
 
 void XmlLoader::changeScaleColor(int i)
@@ -182,8 +182,8 @@ void XmlLoader::changeScaleColor(int i)
 	mListScalePoint.removeAt(i + 1);
 }
 
-void XmlLoader::checkScale(QPair<QString, bool> pointX1, QPair<QString, bool> pointX2
-		, QPair<QString, bool> pointY1, QPair<QString, bool> pointY2)
+void XmlLoader::checkScale(const QPair<QString, bool> &pointX1, const QPair<QString, bool> &pointX2
+		, const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2)
 {
 	if (pointX1.second) {
 		changeScaleColor(0);
@@ -220,8 +220,10 @@ QRectF XmlLoader::readRectOfXandY(const QDomElement &docItem)
 	return QRectF(x1, y1, x2 - x1, y2 - y1);
 }
 
-QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(QPair<QString, bool> pointX1, QPair<QString, bool> pointX2
-		, QPair<QString, bool> pointY1, QPair<QString, bool> pointY2)
+QPair<QPointF, QPointF> XmlLoader::calcLineOfXandY(const QPair<QString, bool> &pointX1
+												   , const QPair<QString, bool> &pointX2
+												   , const QPair<QString, bool> &pointY1
+												   , const QPair<QString, bool> &pointY2)
 {
 	qreal x1 = pointX1.first.toDouble() + mDrift.x();
 	qreal x2 = pointX2.first.toDouble() + mDrift.x();
@@ -402,7 +404,7 @@ void XmlLoader::readPath(const QDomElement &element)
 	QPointF endPoint;
 	QPointF c1;
 	QPointF c2;
-	QDomElement elem = element;
+	const QDomElement &elem = element;
 	QPainterPath path;
 
 	if (!elem.isNull()) {

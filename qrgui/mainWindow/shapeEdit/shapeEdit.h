@@ -105,7 +105,7 @@ private slots:
 	void resetHighlightAllButtons();
 
 private:
-	Scene *mScene;  // Has ownership.
+	Scene *mScene {};  // Has ownership.
 	QGraphicsItemGroup mItemGroup;
 	QList<QAbstractButton *> mButtonGroup;  // Doesn't have direct ownership (owned by mUi).
 	QDomDocument mDocument;
@@ -113,16 +113,16 @@ private:
 	Ui::ShapeEdit *mUi;  // Has ownership.
 
 	// TODO: lolwut? Use assist API instead.
-	qReal::models::details::LogicalModel *mModel;  // Doesn't have ownership.
+	qReal::models::details::LogicalModel *mModel {};  // Doesn't have ownership.
 	const QPersistentModelIndex mIndex;
-	const int mRole;
+	const int mRole { -1 };
 	Id mId;
-	const EditorManagerInterface *mEditorManager;  // Doesn't have ownership.
+	const EditorManagerInterface *mEditorManager {};  // Doesn't have ownership.
 	IdList mGraphicalElements;
-	MainWindow *mMainWindow;  // Doesn't have ownership.
-	qReal::gui::editor::EditorView *mEditorView;  // Doesn't have ownership.
+	MainWindow *mMainWindow {};  // Doesn't have ownership.
+	qReal::gui::editor::EditorView *mEditorView {};  // Doesn't have ownership.
 
-	bool mUseTypedPorts;
+	bool mUseTypedPorts {};
 
 	void initButtonGroup();
 	void initFontPalette();
@@ -135,7 +135,7 @@ private:
 	void setValuePenColorComboBox(const QColor &penColor);
 	void setValuePenWidthSpinBox(int width);
 	void setValueBrushStyleComboBox(Qt::BrushStyle brushStyle);
-	void setValueBrushColorComboBox(QColor brushColor);
+	void setValueBrushColorComboBox(const QColor &brushColor);
 
 	void setValueTextFamilyFontComboBox(const QFont &fontItem);
 	void setValueTextPixelSizeSpinBox(int size);

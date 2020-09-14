@@ -43,31 +43,10 @@ DevicesConfigurationManager::DevicesConfigurationManager(
 			, this, &DevicesConfigurationManager::onOpenedProjectChanged);
 }
 
-QString DevicesConfigurationManager::save() const
-{
-	QDomDocument result;
-	QDomElement rootElement = result.createElement("devicesConfiguration");
-	result.appendChild(rootElement);
-	for (const QString &robotModel : configuredModels()) {
-		QDomElement robotModelElement = result.createElement("robotModel");
-		robotModelElement.setAttribute("name", robotModel);
-		rootElement.appendChild(robotModelElement);
-		for (const PortInfo &port : configuredPorts(robotModel)) {
-			const DeviceInfo device = currentConfiguration(robotModel, port);
-			QDomElement configurationElement = result.createElement("configuration");
-			configurationElement.setAttribute("port", port.toString());
-			configurationElement.setAttribute("device", device.toString());
-			robotModelElement.appendChild(configurationElement);
-		}
-	}
-
-	return result.toString();
-}
-
-void DevicesConfigurationManager::load(const QString &configuration)
+void DevicesConfigurationManager::load(const QString &worldModel)
 {
 	clearConfiguration(Reason::loading);
-	QMap<QString, QMap<PortInfo, DeviceInfo>> const parsed = RobotModelUtils::deserialize(configuration);
+	QMap<QString, QMap<PortInfo, DeviceInfo>> const parsed = RobotModelUtils::deserializeFromWorldModel(worldModel);
 	for (const QString &robotId : parsed.keys()) {
 		for (const PortInfo &port : parsed[robotId].keys()) {
 			deviceConfigurationChanged(robotId, port, parsed[robotId][port], Reason::loading);
@@ -96,23 +75,10 @@ Id DevicesConfigurationManager::mainDiagramId() const
 void DevicesConfigurationManager::onDeviceConfigurationChanged(const QString &robotId
 		, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
 {
-	if (reason == Reason::loading) {
-		return;
-	}
-
 	Q_UNUSED(robotId)
 	Q_UNUSED(port)
 	Q_UNUSED(sensor)
-
-	const qReal::Id activeDiagramGraphicalId = mMainWindowInterpretersInterface.activeDiagram();
-	const qReal::Id logicalRootId = activeDiagramGraphicalId.element() != diagramName
-			? mainDiagramId()
-			: mGraphicalModelAssistInterface.logicalId(activeDiagramGraphicalId);
-	if (logicalRootId.isNull()) {
-		return;
-	}
-
-	mLogicalModelAssistInterface.setPropertyByRoleName(logicalRootId, save(), "devicesConfiguration");
+	Q_UNUSED(reason)
 }
 
 void DevicesConfigurationManager::onOpenedProjectChanged()
@@ -122,8 +88,8 @@ void DevicesConfigurationManager::onOpenedProjectChanged()
 		return;
 	}
 
-	const QString devicesConfiguration = logicalRootId.isNull()
+	const auto &worldModel = logicalRootId.isNull()
 			? QString()
-			: mLogicalModelAssistInterface.propertyByRoleName(logicalRootId, "devicesConfiguration").toString();
-	load(devicesConfiguration);
+			: mLogicalModelAssistInterface.mutableLogicalRepoApi().metaInformation("worldModel").toString();
+	load(worldModel);
 }

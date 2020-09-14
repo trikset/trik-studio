@@ -742,7 +742,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+605"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+618"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -751,7 +751,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-409"/>
+        <location line="-424"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,7 +763,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+655"/>
+        <location line="+672"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -779,7 +779,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location line="+108"/>
+        <location line="+110"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -871,12 +871,12 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+199"/>
+        <location line="+202"/>
         <source>Gestures Show</source>
         <translation>Afficher les gestes</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+340"/>
         <source>Shortcuts</source>
         <translation>Raccourcis</translation>
     </message>
@@ -886,7 +886,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+50"/>
         <source>Failed to open %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -906,7 +906,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Images (*.png *.jpg)</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+161"/>
         <source>Getting Started</source>
         <translation>Commencer</translation>
     </message>
@@ -914,7 +914,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+68"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+71"/>
         <source>Save</source>
         <translation>Enregister</translation>
     </message>
@@ -949,7 +949,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>[modifié]</translation>
     </message>
     <message>
-        <location line="+82"/>
+        <location line="+90"/>
         <source>Select file to save current metamodel to</source>
         <translation>Choisir un fichier pour enregister le metamodèle courant</translation>
     </message>
@@ -976,7 +976,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ShapeEdit</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+353"/>
+        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+352"/>
         <source>Saving</source>
         <translation>Enregistrement</translation>
     </message>
@@ -988,7 +988,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+138"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
         <source>New project</source>
         <translation>Nouveau projet</translation>
     </message>
@@ -1044,7 +1044,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+85"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
         <source>Mouse gesture</source>
         <translation>Geste souris</translation>
     </message>
@@ -1100,7 +1100,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Si vous le supprimer, ses propriétés seront supprimées de la liste des éléments héritiers. Continuer la supprssion ?</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+75"/>
         <location line="+29"/>
         <source>Change Properties</source>
         <translation>Modifier les propriétés</translation>

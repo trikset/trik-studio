@@ -27,11 +27,11 @@ public:
 	virtual Status status() const override;
 
 public slots:
-	virtual void init(bool showOnDisplay) override;
-	virtual void detect() override;
-	virtual QVector<int> read() override;
-	virtual void stop() override;
-	virtual QVector<int> getDetectParameters() const override;
+	void init(bool showOnDisplay) override;
+	void detect() override;
+	QVector<int> read() override;
+	void stop() override;
+	QVector<int> getDetectParameters() const override;
 
 private:
 

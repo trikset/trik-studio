@@ -18,7 +18,7 @@
 
 #include "ev3Kit/communication/commandConstants.h"
 #include "ev3Kit/communication/ev3DirectCommand.h"
-#include "thirdparty/qslog/QsLog.h"
+#include "QsLog.h"
 
 static constexpr uchar EV3_SYSTEM_COMMAND_REPLY =             0x01;    //  System command, reply required
 static constexpr uchar EV3_SYSTEM_COMMAND_NO_REPLY =          0x81;    //  System command, reply not required

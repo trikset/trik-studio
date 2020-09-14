@@ -89,12 +89,6 @@ LabelProperties::LabelProperties(int index, qreal x, qreal y, const QString &bin
 {
 }
 
-LabelProperties::LabelProperties(const LabelProperties &other)
-	: QObject(other.parent())
-{
-	copyFrom(other);
-}
-
 int LabelProperties::index() const
 {
 	return mIndex;
@@ -293,11 +287,11 @@ void LabelProperties::setSuffix(const QString &text)
 	}
 }
 
-LabelProperties &LabelProperties::operator =(const LabelProperties &other)
-{
-	copyFrom(other);
-	return *this;
-}
+//LabelProperties &LabelProperties::operator =(const LabelProperties &other)
+//{
+//	copyFrom(other);
+//	return *this;
+//}
 
 void LabelProperties::copyFrom(const LabelProperties &other)
 {

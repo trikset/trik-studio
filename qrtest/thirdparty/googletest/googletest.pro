@@ -17,6 +17,7 @@
 TEMPLATE = lib
 
 include(../../../global.pri)
+LIBS -= -ltrikQsLog
 
 # CONFIG += warn_off
 

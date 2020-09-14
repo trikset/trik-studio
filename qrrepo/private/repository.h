@@ -152,15 +152,21 @@ public:
 	/// Stores the meta-information for current stored binded to the given key.
 	void setMetaInformation(const QString &key, const QVariant &info);
 
-private:
-	void init();
+	/// Clear the meta-information.
+	void clearMetaInformation();
 
+private:
+
+	/// Recreate as an empty repo with the single root item.
+	void resetToEmpty();
+
+	/// Loads from disk, but resets in case of error or missing data
 	void loadFromDisk();
 	void addChildrenToRootObject();
 
-	qReal::IdList idsOfAllChildrenOf(qReal::Id id) const;
-	QList<Object*> allChildrenOf(qReal::Id id) const;
-	QList<Object*> allChildrenOfWithLogicalId(qReal::Id id) const;
+	qReal::IdList idsOfAllChildrenOf(const qReal::Id &id) const;
+	QList<Object*> allChildrenOf(const qReal::Id &id) const;
+	QList<Object*> allChildrenOfWithLogicalId(const qReal::Id &id) const;
 
 	QHash<qReal::Id, Object *> mObjects;
 	QHash<QString, QVariant> mMetaInfo;

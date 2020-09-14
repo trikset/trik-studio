@@ -24,7 +24,6 @@
 #include <kitBase/robotModel/robotParts/shell.h>
 #include <kitBase/robotModel/robotModelUtils.h>
 
-#include <twoDModel/engine/view/twoDModelWidget.h>
 #include <twoDModel/engine/model/model.h>
 #include <twoDModel/engine/model/timeline.h>
 
@@ -33,7 +32,7 @@ using namespace twoDModel;
 Runner::Runner(const QString &report, const QString &trajectory)
 	: mProjectManager(mQRealFacade.models())
 	, mMainWindow(mErrorReporter, mQRealFacade.events()
-			, mProjectManager, mQRealFacade.models().graphicalModelAssistApi())
+			, &mProjectManager, &mQRealFacade.models().graphicalModelAssistApi())
 	, mConfigurator(mQRealFacade.models().repoControlApi()
 			, mQRealFacade.models().graphicalModelAssistApi()
 			, mQRealFacade.models().logicalModelAssistApi()
@@ -47,7 +46,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	, mReporter(report, trajectory)
 {
 	mPluginFacade.init(mConfigurator);
-	for (const QString &defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
+	for (auto &&defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
 		qReal::SettingsManager::loadDefaultSettings(defaultSettingsFile);
 	}
 
@@ -70,7 +69,8 @@ Runner::~Runner()
 	mReporter.reportMessages();
 }
 
-bool Runner::interpret(const QString &saveFile, bool background, int customSpeedFactor)
+bool Runner::interpret(const QString &saveFile, const bool background
+					   , const int customSpeedFactor, const bool closeOnSuccess, const bool showConsole)
 {
 	if (!mProjectManager.open(saveFile)) {
 		return false;
@@ -79,39 +79,32 @@ bool Runner::interpret(const QString &saveFile, bool background, int customSpeed
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
 	QList<view::TwoDModelWidget *> twoDModelWindows;
-	for (QWidget * const widget : QApplication::allWidgets()) {
-		if (view::TwoDModelWidget * const twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
+	for (auto &&widget : QApplication::allWidgets()) {
+		if (background) {
+			widget->hide();
+		}
+		if (const auto twoDModelWindow = dynamic_cast<view::TwoDModelWidget *>(widget)) {
 			twoDModelWindows << twoDModelWindow;
 		}
 	}
 
-	if (background) {
-		connect(&mPluginFacade.eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
-				, this, [this]() {
-				QTimer::singleShot(0, this, &Runner::close);
-		});
-	}
+	connect(&mPluginFacade.eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
+			, this, [this, background, closeOnSuccess](qReal::interpretation::StopReason reason) {
+		if (background || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
+			QTimer::singleShot(0, this, &Runner::close);
+	});
 
-	for (view::TwoDModelWidget * const twoDModelWindow : twoDModelWindows) {
+	for (auto &&twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
 				, [this]() { this->mMainWindow.emulateClose(); });
 
-		auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout());
-		qReal::ui::ConsoleDock* console = nullptr;
-		if (layout) {
-			console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
-			mRobotConsoles << console;
-			// TODO: hack to add console for each widget
-			layout->addWidget(console, layout->rowCount(), 0, 1, -1);
-		}
-
-		for (const model::RobotModel *robotModel : twoDModelWindow->model().robotModels()) {
-			connectRobotModel(robotModel, console);
+		if (showConsole) {
+			attachNewConsoleTo(twoDModelWindow);
 		}
 
 		auto &t = twoDModelWindow->model().timeline();
 		t.setImmediateMode(background);
-		if (!background && customSpeedFactor >= model::Timeline::normalSpeedFactor) {
+		if (customSpeedFactor >= model::Timeline::normalSpeedFactor) {
 			t.setSpeedFactor(customSpeedFactor);
 		}
 	}
@@ -139,7 +132,7 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal:
 			onDeviceStateChanged(robotModel->info().robotId(), device, property, value);
 		});
 		if (console) {
-			if (auto * shell = dynamic_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
+			if (auto * shell = qobject_cast<kitBase::robotModel::robotParts::Shell*>(device)) {
 				connect(shell, &kitBase::robotModel::robotParts::Shell::textPrinted
 						, console, &qReal::ui::ConsoleDock::print);
 			}
@@ -168,7 +161,22 @@ void Runner::onDeviceStateChanged(const QString &robotId
 			, device->port().name()
 			, property
 			, value
-			);
+							 );
+}
+
+void Runner::attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow)
+{
+	qReal::ui::ConsoleDock* console = nullptr;
+	if (auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout())) {
+		console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
+		mRobotConsoles << console;
+		// TODO: hack to add console for each widget
+		layout->addWidget(console, layout->rowCount(), 0, 1, -1);
+	}
+
+	for (auto &&robotModel : twoDModelWindow->model().robotModels()) {
+		connectRobotModel(robotModel, console);
+	}
 }
 
 void Runner::close()

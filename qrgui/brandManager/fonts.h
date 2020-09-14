@@ -23,15 +23,14 @@ namespace qReal {
 /// A class for managing all used in system fonts
 class Fonts
 {
+	Q_DISABLE_COPY(Fonts)
 public:
 	Fonts()
 	{
 		initTitlesFont();
 	}
 
-	virtual ~Fonts()
-	{
-	}
+	virtual ~Fonts() = default;
 
 	/// Returns font for inline labels on scene
 	QFont sceneLabelsFont() const

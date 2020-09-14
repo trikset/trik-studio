@@ -23,8 +23,10 @@ namespace modelsImplementation {
 
 class ModelIndexesInterface
 {
+	Q_DISABLE_COPY(ModelIndexesInterface)
 public:
-	virtual ~ModelIndexesInterface() {}
+	ModelIndexesInterface() = default;
+	virtual ~ModelIndexesInterface() = default;
 	virtual QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const = 0;
 };
 

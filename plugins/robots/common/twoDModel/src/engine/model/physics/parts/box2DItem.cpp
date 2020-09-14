@@ -21,37 +21,37 @@ using namespace twoDModel::items;
 using namespace parts;
 
 Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
-		, const SolidItem &item, const b2Vec2 &pos, float angle)
+		, const SolidItem *item, const b2Vec2 &pos, float angle)
 	: mIsCircle(false)
 	, mEngine(*engine)
 {
 	b2BodyDef bodyDef;
 	bodyDef.position = pos;
 	bodyDef.angle = angle;
-	if (item.bodyType() == SolidItem::DYNAMIC) {
+	if (item->bodyType() == SolidItem::DYNAMIC) {
 		bodyDef.type = b2_dynamicBody;
-	} else if (item.bodyType() == SolidItem::KINEMATIC) {
+	} else if (item->bodyType() == SolidItem::KINEMATIC) {
 		bodyDef.type = b2_kinematicBody;
-	} else if (item.bodyType() == SolidItem::STATIC) {
+	} else if (item->bodyType() == SolidItem::STATIC) {
 		bodyDef.type = b2_staticBody;
 	}
 
 	mBody = this->mEngine.box2DWorld().CreateBody(&bodyDef);
-	mBody->SetAngularDamping(item.angularDamping());
-	mBody->SetLinearDamping(item.linearDamping());
+	mBody->SetAngularDamping(item->angularDamping());
+	mBody->SetLinearDamping(item->linearDamping());
 
 	b2FixtureDef fixture;
 	fixture.restitution = 0.8;
-	QPolygonF collidingPolygon = item.collidingPolygon();
+	QPolygonF collidingPolygon = item->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
 	b2CircleShape circleShape;
 	b2PolygonShape polygonShape;
-	if (item.isCircle()) {
+	if (item->isCircle()) {
 		mIsCircle = true;
 		qreal radius = collidingPolygon.boundingRect().height() / 2;
 		circleShape.m_radius = this->mEngine.pxToM(radius);
 		fixture.shape = &circleShape;
-		fixture.density = engine->computeDensity(radius, item.mass());
+		fixture.density = engine->computeDensity(radius, item->mass());
 	} else {
 		if (collidingPolygon.isClosed()) {
 			collidingPolygon.removeLast();
@@ -64,10 +64,10 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 
 		polygonShape.Set(mPolygon, collidingPolygon.size());
 		fixture.shape = &polygonShape;
-		fixture.density = engine->computeDensity(collidingPolygon, item.mass());
+		fixture.density = engine->computeDensity(collidingPolygon, item->mass());
 	}
 
-	fixture.friction = item.friction();
+	fixture.friction = item->friction();
 	mBody->CreateFixture(&fixture);
 	mBody->SetUserData(this);
 }

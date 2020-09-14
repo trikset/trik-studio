@@ -67,6 +67,9 @@ void RepositoryTest::removeDirectory(QString const &dirName)
 }
 
 void RepositoryTest::SetUp() {
+	LogicalObject theRoot(Id::rootId());
+	theRoot.setProperty("name", Id::rootId().toString());
+
 	LogicalObject parentObj(parent);
 	parentObj.setParent(fakeParent);
 
@@ -108,6 +111,7 @@ void RepositoryTest::SetUp() {
 	child3_childObj.setProperty("name", "child3_child");
 
 	QList<Object *> list;
+	list.push_back(&theRoot);
 	list.push_back(&parentObj);
 	list.push_back(&rootObj);
 	list.push_back(&child1Obj);
@@ -119,7 +123,7 @@ void RepositoryTest::SetUp() {
 
 	Serializer serializer("saveFile");
 	serializer.saveToDisk(list, QHash<QString, QVariant>());
-	mRepository = new Repository("saveFile.qrs");
+	mRepository = new Repository("saveFile.tsj");
 
 	serializer.clearWorkingDir();
 
@@ -130,6 +134,7 @@ void RepositoryTest::SetUp() {
 	newObj2.setProperty("property2", "value2");
 
 	QList<Object *> newList;
+	newList.push_back(&theRoot);
 	newList.push_back(&newObj1);
 	newList.push_back(&newObj2);
 
@@ -140,8 +145,8 @@ void RepositoryTest::SetUp() {
 void RepositoryTest::TearDown() {
 	delete mRepository;
 
-	QFile::remove("saveFile.qrs");
-	QFile::remove("newSaveFile.qrs");
+	QFile::remove("saveFile.tsj");
+	QFile::remove("newSaveFile.tsj");
 }
 
 TEST_F(RepositoryTest, replacePropertiesTest) {
@@ -340,7 +345,7 @@ TEST_F(RepositoryTest, removeIdTest) {
 
 // Same as removeFromDisk test fro Serializer
 TEST_F(RepositoryTest, removeIdListTest) {
-	mRepository->serializer().decompressFile("saveFile.qrs");
+	mRepository->serializer().decompressFile("saveFile.tsj");
 	IdList toRemove;
 	toRemove << child3 << child1_child << child2_child << child3_child;
 	mRepository->remove(toRemove);
@@ -377,7 +382,7 @@ TEST_F(RepositoryTest, exterminateTest) {
 }
 
 TEST_F(RepositoryTest, openTest) {
-	mRepository->open("newSaveFile.qrs");
+	mRepository->open("newSaveFile.tsj");
 	EXPECT_EQ(mRepository->elements().size(), 3);
 	EXPECT_TRUE(mRepository->elements().contains(Id::rootId()));
 	EXPECT_TRUE(mRepository->elements().contains(newId1));
@@ -391,7 +396,7 @@ TEST_F(RepositoryTest, openTest) {
 }
 
 TEST_F(RepositoryTest,importFromDiskTest) {
-	mRepository->importFromDisk("newSaveFile.qrs");
+	mRepository->importFromDisk("newSaveFile.tsj");
 
 	IdList elems = mRepository->elements();
 	ASSERT_EQ(elems.size(), 11);
@@ -415,7 +420,7 @@ TEST_F(RepositoryTest,importFromDiskTest) {
 }
 
 TEST_F(RepositoryTest, workingFileTest) {
-	EXPECT_EQ(mRepository->workingFile(), "saveFile.qrs");
+	EXPECT_EQ(mRepository->workingFile(), "saveFile.tsj");
 
 	mRepository->setWorkingFile("newSaveFile");
 	EXPECT_EQ(mRepository->workingFile(), "newSaveFile");
@@ -578,7 +583,7 @@ TEST_F(RepositoryTest, saveAllTest) {
 	mRepository->serializer().clearWorkingDir();
 	mRepository->remove(root);
 	mRepository->saveAll();
-	mRepository->open("saveFile.qrs");
+	mRepository->open("saveFile.tsj");
 
 	EXPECT_FALSE(mRepository->exist(root));
 	EXPECT_TRUE(mRepository->exist(parent));
@@ -595,9 +600,9 @@ TEST_F(RepositoryTest, saveTest) {
 	IdList toSave;
 	toSave << child1 << child2 << child3;
 	mRepository->save(toSave);
-	mRepository->open("saveFile.qrs");
+	mRepository->open("saveFile.tsj");
 
-	EXPECT_EQ(mRepository->elements().size(), 7);
+	EXPECT_EQ(mRepository->elements().size(), 6);
 	EXPECT_TRUE(mRepository->exist(child1));
 	EXPECT_TRUE(mRepository->exist(child2));
 	EXPECT_TRUE(mRepository->exist(child3));
@@ -611,9 +616,9 @@ TEST_F(RepositoryTest, saveWithLogicalIdTest) {
 	IdList toSave;
 	toSave << child1 << child3_child;
 	mRepository->saveWithLogicalId(toSave);
-	mRepository->open("saveFile.qrs");
+	mRepository->open("saveFile.tsj");
 
-	EXPECT_EQ(mRepository->elements().size(), 5);
+	EXPECT_EQ(mRepository->elements().size(), 4);
 	EXPECT_TRUE(mRepository->exist(child1));
 	EXPECT_TRUE(mRepository->exist(child1_child));
 	EXPECT_TRUE(mRepository->exist(child2_child));
@@ -630,7 +635,7 @@ TEST_F(RepositoryTest, saveDiagramsByIdTest) {
 
 	mRepository->saveDiagramsById(diagramIds);
 
-	mRepository->serializer().decompressFile("diagram1.qrs");
+	mRepository->serializer().decompressFile("diagram1.tsj");
 
 	const QString unsavedTree = mRepository->serializer().workingDirectory() + "/tree/";
 	EXPECT_TRUE(QFile::exists(unsavedTree + "graphical/editor1/diagram2/element3/child1"));
@@ -639,5 +644,5 @@ TEST_F(RepositoryTest, saveDiagramsByIdTest) {
 	EXPECT_FALSE(QFile::exists(unsavedTree + "graphical/editor1/diagram1/element2/root"));
 	EXPECT_FALSE(QDir().exists(unsavedTree + "logical"));
 
-	QFile::remove("diagram1.qrs");
+	QFile::remove("diagram1.tsj");
 }

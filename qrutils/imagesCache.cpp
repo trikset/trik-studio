@@ -22,20 +22,6 @@
 
 using namespace utils;
 
-ImagesCache::ImagesCache()
-{
-}
-
-ImagesCache::~ImagesCache()
-{
-}
-
-ImagesCache &ImagesCache::instance()
-{
-	static ImagesCache instance;
-	return instance;
-}
-
 void ImagesCache::drawImage(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom)
 {
 	if (mFileNamePixmapMap.contains(fileName)) {
@@ -94,7 +80,7 @@ void ImagesCache::drawImageWithoutCachingSize(const QString &fileName, QPainter 
 QFileInfo ImagesCache::selectBestImageFile(const QString &filePath)
 {
 	const QFileInfo originalFileInfo(filePath);
-	const QFileInfo svgVersion(originalFileInfo.path() + originalFileInfo.completeBaseName() + "svg");
+	const QFileInfo svgVersion(originalFileInfo.path() + originalFileInfo.completeBaseName() + ".svg");
 
 	if (svgVersion.exists()) {
 		return svgVersion;

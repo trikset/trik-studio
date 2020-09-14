@@ -20,7 +20,6 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 RectangleItem::RectangleItem(const QPointF &begin, const QPointF &end)
-	: mRectangleImpl()
 {
 	setX1(begin.x());
 	setY1(begin.y());
@@ -74,7 +73,7 @@ void RectangleItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* 
 void RectangleItem::drawExtractionForItem(QPainter *painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
-	painter->setPen(mStrokePen);
+	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
 	painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	if (!filled()) {

@@ -178,7 +178,10 @@ QString Autosaver::openTempFilePrompt() const
 
 void Autosaver::saveAutoSave()
 {
-	mProjectManager.saveTo(autosaveFilePath());
+	if (mNeedToSave) {
+		setAutoSaving(false);
+		mProjectManager.saveTo(autosaveFilePath());
+	}
 }
 
 bool Autosaver::removeFile(const QString &fileName)
@@ -199,4 +202,9 @@ bool Autosaver::removeAutoSave()
 bool Autosaver::removeAutoSave(const QString &fileName)
 {
 	return removeFile(autosaveFilePath(fileName));
+}
+
+void Autosaver::setAutoSaving(bool needToSave)
+{
+	mNeedToSave = needToSave;
 }

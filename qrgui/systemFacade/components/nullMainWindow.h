@@ -31,9 +31,9 @@ class QRGUI_SYSTEM_FACADE_EXPORT NullMainWindow : public QObject
 	Q_OBJECT
 
 public:
-	NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events);
 	NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events
-			, const ProjectManagementInterface &projectManager, const GraphicalModelAssistInterface &graphicalModel);
+			, const ProjectManagementInterface *projectManager = nullptr
+			, const GraphicalModelAssistInterface *graphicalModel = nullptr);
 	~NullMainWindow();
 
 	void selectItem(const Id &graphicalId) override;
@@ -44,6 +44,7 @@ public:
 	ErrorReporterInterface *errorReporter() override;
 
 	Id activeDiagram() const override;
+	IdList openedDiagrams() const override;
 
 	void openSettingsDialog(const QString &tab) override;
 

@@ -44,9 +44,9 @@ const Id metamodelContainmentLinkType = Id("MetaEditor", "MetaEditor", "Containe
 const Id metamodelExplosionLinkType = Id("MetaEditor", "MetaEditor", "Explosion");
 const Id metamodelPropertiesAsContainerType = Id("MetaEditor", "MetaEditor", "MetaEntityPropertiesAsContainer");
 
-QList<Metamodel *> QrsMetamodelLoader::load(const QString &pathToQrs)
+QList<QSharedPointer<Metamodel> > QrsMetamodelLoader::load(const QString &pathToQrs)
 {
-	QList<Metamodel *> result;
+	QList<QSharedPointer<Metamodel>> result;
 	const qrRepo::RepoApi repo(pathToQrs);
 	if (!repo.exist(Id::rootId())) {
 		return result;
@@ -54,7 +54,7 @@ QList<Metamodel *> QrsMetamodelLoader::load(const QString &pathToQrs)
 
 	for (const Id &id : repo.children(Id::rootId())) {
 		if (id.type() == metamodelRootDiagramType && repo.isLogicalElement(id)) {
-			result << parseMetamodel(repo, id);
+			result << QSharedPointer<Metamodel>(parseMetamodel(repo, id));
 		}
 	}
 
@@ -164,17 +164,17 @@ void QrsMetamodelLoader::parseEdge(const qrRepo::RepoApi &repo
 	const QString labelText = stringProperty(repo, id, "labelText");
 
 	if (!labelText.isEmpty()) {
-		LabelProperties label;
+		QSharedPointer<LabelProperties> label;
 		const QString labelType = stringProperty(repo, id, "labelType");
 		if (labelType.contains("static", Qt::CaseInsensitive)) {
-			label = LabelProperties(0, 0, 0, labelText, 0);
+			label.reset(new LabelProperties(0, 0, 0, labelText, 0));
 		} else if (labelType.contains("dynamic", Qt::CaseInsensitive)) {
-			label = LabelProperties(0, 0, 0, labelText, false, 0);
+			label.reset(new LabelProperties(0, 0, 0, labelText, false, 0));
 		} else {
 			emit errorOccured(tr("Incorrect label type"), id);
 		}
 
-		label.setHard(boolProperty(repo, id, "hardLabel"));
+		label->setHard(boolProperty(repo, id, "hardLabel"));
 		edge->addLabel(label);
 	}
 
@@ -334,20 +334,20 @@ void QrsMetamodelLoader::parseLabels(NodeElementType &node, const QDomElement &l
 			continue;
 		}
 
-		LabelProperties label;
+		QSharedPointer<LabelProperties> label;
 		if (text.isEmpty()) {
-			label = LabelProperties(index, x.value(), y.value(), textBinded, readOnly, rotation);
+			label.reset(new LabelProperties(index, x.value(), y.value(), textBinded, readOnly, rotation));
 		} else {
-			label = LabelProperties(index, x.value(), y.value(), text, rotation);
+			label.reset(new LabelProperties(index, x.value(), y.value(), text, rotation));
 		}
 
-		label.setPlainTextMode(isPlainText);
-		label.setBackground(background);
-		label.setScalingX(x.isScalable());
-		label.setScalingY(y.isScalable());
-		label.setHard(isHard);
-		label.setPrefix(prefix);
-		label.setSuffix(suffix);
+		label->setPlainTextMode(isPlainText);
+		label->setBackground(background);
+		label->setScalingX(x.isScalable());
+		label->setScalingY(y.isScalable());
+		label->setHard(isHard);
+		label->setPrefix(prefix);
+		label->setSuffix(suffix);
 		node.addLabel(label);
 	}
 }
@@ -554,7 +554,7 @@ void QrsMetamodelLoader::inherit(ElementType &child, const ElementType &parent
 	const bool overrideLabels = overrideAll || generalizationProperties.contains("labels");
 
 	if (!overrideLabels) {
-		for (const LabelProperties &parentLabel : parent.labels()) {
+		for (const auto &parentLabel : parent.labels()) {
 			/// @todo: label index must be corrected here
 			child.addLabel(parentLabel);
 		}

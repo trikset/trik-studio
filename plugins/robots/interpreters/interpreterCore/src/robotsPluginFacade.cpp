@@ -47,8 +47,13 @@ RobotsPluginFacade::RobotsPluginFacade()
 
 RobotsPluginFacade::~RobotsPluginFacade()
 {
-	qDeleteAll(mInterpreters.values().toSet());
-	mInterpreters.clear();
+	mInterpreter.reset();
+	for (auto &&kitId : mKitPluginManager.kitIds()) {
+		for (auto *kit : mKitPluginManager.kitsById(kitId)) {
+			kit->release();
+		}
+	}
+	kitBase::robotModel::DeviceInfo::release();
 }
 
 void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
@@ -78,7 +83,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	mParser.reset(new textLanguage::RobotsBlockParser(mRobotModelManager
 			, [this]() { return mProxyInterpreter.timeElapsed(); }));
 
-	kitBase::blocksBase::BlocksFactoryInterface * const coreFactory = new coreBlocks::CoreBlocksFactory();
+	auto coreFactory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new coreBlocks::CoreBlocksFactory());
 	coreFactory->configure(configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, mRobotModelManager
@@ -95,7 +100,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mEventsForKitPlugin
 			, mRobotModelManager));
 
-	interpreter::BlockInterpreter *interpreter = new interpreter::BlockInterpreter(
+	mInterpreter.reset(new interpreter::BlockInterpreter(
 			configurer.graphicalModelApi()
 			, configurer.logicalModelApi()
 			, configurer.mainWindowInterpretersInterface()
@@ -103,9 +108,10 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, mBlocksFactoryManager
 			, mRobotModelManager
 			, *mParser
-			);
-
-	registerInterpreter(interpreter);
+		));
+	if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(mInterpreter.data())) {
+		mDevicesConfigurationManager->connectDevicesConfigurationProvider(provider);
+	}
 
 	mSensorVariablesUpdater.reset(
 		new interpreterCore::interpreter::details::SensorVariablesUpdater(mRobotModelManager, *mParser));
@@ -189,10 +195,6 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 						;
 
 				mActionsManager.exportExerciseAction().setEnabled(!hasReadOnlyFlags);
-
-				if (info.type() == qReal::TabInfo::TabType::editor) {
-					mProxyInterpreter.resetInterpreter(mInterpreters[info.rootDiagramId().type()]);
-				}
 			});
 
 	connect(&mActionsManager.exportExerciseAction(), &QAction::triggered, this, [this] () {
@@ -209,6 +211,8 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 			, &qReal::ProjectManagementInterface::afterOpen
 			, this
 			, [=](const QString &path){
+		mLogicalModelApi->mutableLogicalRepoApi().setMetaInformation("trikStudioVersion", mCustomizer.productVersion());
+
 		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
 		const QString code = logicalRepo->metaInformation("activeCode").toString();
 		QFileInfo projectFile(mProjectManager->saveFilePath());
@@ -219,7 +223,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 		}
 
 		QFileInfo codeDir(path);
-		QFileInfo codePath(codeDir.dir().absoluteFilePath(name + '.' + extension)); // absoluteDir?
+		QFileInfo codePath(codeDir.dir().absoluteFilePath("lastCode." + extension)); // absoluteDir?
 		bool success = false;
 		utils::OutFile out(codePath.filePath(), &success);
 		if (success) {
@@ -238,7 +242,7 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	});
 
 	sync();
-	mProxyInterpreter.resetInterpreter(interpreter);
+	mProxyInterpreter.resetInterpreter(mInterpreter.data());
 }
 
 qReal::gui::PreferencesPage *RobotsPluginFacade::robotsSettingsPage() const
@@ -315,7 +319,6 @@ void RobotsPluginFacade::saveCode(const QString &code, const QString &languageEx
 	auto logicalRepo = &mLogicalModelApi->mutableLogicalRepoApi();
 	logicalRepo->setMetaInformation("activeCode", code);
 	logicalRepo->setMetaInformation("activeCodeLanguageExtension", languageExtension);
-	mProjectManager->setUnsavedIndicator(true);
 }
 
 void RobotsPluginFacade::connectInterpreterToActions()
@@ -378,18 +381,18 @@ void RobotsPluginFacade::initSensorWidgets()
 	hideVariables();
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, this, hideVariables);
 
-	mGraphicsWatcherManager = new GraphicsWatcherManager(*mParser, mRobotModelManager, this);
+	mGraphicsWatcherManager.reset(new GraphicsWatcherManager(*mParser, mRobotModelManager, this));
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started
-			, mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
+			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStart);
 	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::stopped
-			, mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
-	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, mGraphicsWatcherManager, [=]() {
+			, &*mGraphicsWatcherManager, &GraphicsWatcherManager::forceStop);
+	connect(&mProxyInterpreter, &kitBase::InterpreterInterface::started, &*mGraphicsWatcherManager, [=]() {
 		mActionsManager.runAction().setVisible(false);
 		mActionsManager.stopRobotAction().setVisible(mRobotModelManager.model().interpretedModel());
 	});
 	connect(&mProxyInterpreter
 			, &kitBase::InterpreterInterface::stopped
-			, mGraphicsWatcherManager
+			, &*mGraphicsWatcherManager
 			, [=] () {
 		if (!dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab())) {
 			// since userStop fires on any tab/model switch even when the code tab is opened
@@ -411,7 +414,7 @@ void RobotsPluginFacade::initSensorWidgets()
 
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mRobotSettingsPage);
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mDockDevicesConfigurer.data());
-	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mGraphicsWatcherManager);
+	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mGraphicsWatcherManager.data());
 	mDevicesConfigurationManager->connectDevicesConfigurationProvider(mParser.data());
 }
 
@@ -430,9 +433,6 @@ void RobotsPluginFacade::initKitPlugins(const qReal::PluginConfigurator &configu
 			}
 
 			mDevicesConfigurationManager->connectDevicesConfigurationProvider(kit->devicesConfigurationProvider());
-			for (kitBase::InterpreterInterface * const interpreter : kit->customInterpreters()) {
-				registerInterpreter(interpreter);
-			}
 		}
 	}
 }
@@ -443,8 +443,8 @@ void RobotsPluginFacade::initFactoriesFor(const QString &kitId
 {
 	// Pulling each robot model to each kit plugin with same ids. We need it for supporting
 	// plugin-based blocks set extension for concrete roobt model.
-	for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(kitId)) {
-		kitBase::blocksBase::BlocksFactoryInterface * const factory = kit->blocksFactoryFor(model);
+	for (auto &&kit : mKitPluginManager.kitsById(kitId)) {
+		const auto &factory = QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(kit->blocksFactoryFor(model));
 		if (factory) {
 			/// @todo Non-obvious dependency on mParser, which may or may not be constructed here.
 			///       More functional style will be helpful here.
@@ -512,24 +512,6 @@ void RobotsPluginFacade::connectEventsForKitPlugin()
 				emit mEventsForKitPlugin.robotModelChanged(model.name());
 			}
 	);
-}
-
-void RobotsPluginFacade::registerInterpreter(kitBase::InterpreterInterface * const interpreter)
-{
-	bool allDiagramsAlreadyRegistered = true;
-	const qReal::IdList diagrams = interpreter->supportedDiagrams();
-	for (const qReal::Id &diagram : diagrams) {
-		if (!mInterpreters.contains(diagram)) {
-			allDiagramsAlreadyRegistered = false;
-			mInterpreters[diagram] = interpreter;
-		}
-	}
-
-	if (allDiagramsAlreadyRegistered) {
-		delete interpreter;
-	} else if (auto provider = dynamic_cast<kitBase::DevicesConfigurationProvider *>(interpreter)) {
-		mDevicesConfigurationManager->connectDevicesConfigurationProvider(provider);
-	}
 }
 
 void RobotsPluginFacade::sync()

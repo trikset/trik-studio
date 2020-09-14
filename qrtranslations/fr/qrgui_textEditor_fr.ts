@@ -4,7 +4,7 @@
 <context>
     <name>qReal::text::TextManager</name>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="+91"/>
+        <location filename="../../qrgui/textEditor/textManager.cpp" line="+86"/>
         <source>Confirmation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14,7 +14,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+193"/>
+        <location line="+192"/>
         <source>All files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>

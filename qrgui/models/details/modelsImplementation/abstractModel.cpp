@@ -21,6 +21,8 @@
 using namespace qReal;
 using namespace models::details::modelsImplementation;
 
+AbstractModel::~AbstractModel() = default;
+
 AbstractModel::AbstractModel(const EditorManagerInterface &editorManagerInterface)
 		: mEditorManagerInterface(editorManagerInterface)
 {
@@ -191,7 +193,6 @@ void AbstractModel::reinit()
 {
 	cleanupTree(mRootItem);
 	mModelItems.clear();
-	delete mRootItem;
 	mRootItem = createModelItem(Id::rootId(), nullptr);
 	beginResetModel();
 	endResetModel();
@@ -202,10 +203,9 @@ void AbstractModel::cleanupTree(modelsImplementation::AbstractModelItem * item)
 {
 	for (AbstractModelItem *childItem : item->children()) {
 		cleanupTree(childItem);
-		delete childItem;
 	}
-
 	item->clearChildren();
+	delete item;
 }
 
 void AbstractModel::removeModelItems(details::modelsImplementation::AbstractModelItem *const root)

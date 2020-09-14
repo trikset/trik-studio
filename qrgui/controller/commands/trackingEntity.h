@@ -22,8 +22,10 @@ namespace commands {
 /// A helper class for commands that track some continious user operation
 class QRGUI_CONTROLLER_EXPORT TrackingEntity
 {
+	Q_DISABLE_COPY(TrackingEntity)
 public:
-	virtual ~TrackingEntity() {}
+	TrackingEntity() = default;
+	virtual ~TrackingEntity() = default;
 
 	/// Executed when user starts some operation
 	virtual void startTracking();

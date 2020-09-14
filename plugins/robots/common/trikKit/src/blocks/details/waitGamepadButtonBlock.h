@@ -43,7 +43,7 @@ private:
 	kitBase::robotModel::DeviceInfo device() const override;
 
 	const QString mPort;
-	robotModel::parts::TrikGamepadButton *mButton;  // Does not have ownership.
+	robotModel::parts::TrikGamepadButton *mButton {};  // Does not have ownership.
 };
 
 }

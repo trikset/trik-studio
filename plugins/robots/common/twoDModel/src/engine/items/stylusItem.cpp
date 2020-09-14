@@ -20,7 +20,6 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 StylusItem::StylusItem(qreal x1, qreal y1)
-	: mStylusImpl()
 {
 	QPen pen(this->pen());
 	pen.setColor(Qt::black);

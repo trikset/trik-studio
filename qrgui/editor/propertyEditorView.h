@@ -96,14 +96,15 @@ private:
 
 	QString propertyDescription(const int cellIndex) const;
 
-	bool mChangingPropertyValue;
-	PropertyEditorModel *mModel;
-	QtTreePropertyBrowser *mPropertyEditor;
-	qReal::models::LogicalModelAssistApi *mLogicalModelAssistApi;
-	QtVariantPropertyManager *mVariantManager;
-	QtVariantEditorFactory *mVariantFactory;
-	PushButtonPropertyManager *mButtonManager;
-	PushButtonFactory *mButtonFactory;
+	bool mChangingPropertyValue {};
+	PropertyEditorModel *mModel {};
+	QScopedPointer<QtTreePropertyBrowser> mPropertyEditor;
+	qReal::models::LogicalModelAssistApi* mLogicalModelAssistApi {};
+	QScopedPointer<QtVariantPropertyManager> mVariantManager;
+	QScopedPointer<QtVariantEditorFactory> mVariantFactory;
+	QScopedPointer<PushButtonPropertyManager> mButtonManager;
+	QScopedPointer<PushButtonFactory> mButtonFactory;
+	QScopedPointer<QtGroupPropertyManager> mGroupManager;
 	qReal::Controller *mController;
 };
 

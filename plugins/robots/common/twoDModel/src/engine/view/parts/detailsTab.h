@@ -66,11 +66,11 @@ private:
 	QTreeWidgetItem *mMotorsItem;   // Takes ownership
 	QTreeWidgetItem *mPhysicsItem;  // Takes ownership
 	QTreeWidgetItem *mParamsItem;  // Takes ownership
-	QWidget *mDisplay;  // Doesn`t take ownership
-	QWidget *mDevices;  // Doesn`t take ownership
-	QWidget *mMotors;   // Doesn`t take ownership
-	QWidget *mPhysics;  // Doesn`t take ownership
-	QWidget *mParams;  // Doesn`t take ownership
+	QWidget *mDisplay {};  // Doesn`t take ownership
+	QWidget *mDevices {};  // Doesn`t take ownership
+	QWidget *mMotors {};   // Doesn`t take ownership
+	QWidget *mPhysics {};  // Doesn`t take ownership
+	QWidget *mParams {};  // Doesn`t take ownership
 };
 
 }

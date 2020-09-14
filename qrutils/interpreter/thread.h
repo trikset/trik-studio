@@ -119,7 +119,7 @@ private:
 	void connectBlock(BlockInterface * const block);
 
 	const qReal::GraphicalModelAssistInterface *mGraphicalModelApi;  // Doesn't have ownership
-	const qReal::LogicalModelAssistInterface *mLogicalModelApi;
+	const qReal::LogicalModelAssistInterface *mLogicalModelApi {};
 	qReal::gui::MainWindowInterpretersInterface &mInterpretersInterface;
 	const Id mInitialNodeType;
 	BlocksTableInterface &mBlocksTable;

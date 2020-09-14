@@ -29,16 +29,11 @@ const int border = 0;
 const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
-	: RotateItem()
-	, mIsCustomImage(false)
-	, mBeepItem(new BeepItem)
-	, mRectangleImpl()
+	: mImage(robotImageFileName, false)
+	, mCustomImage(new Image(robotImageFileName, true))
+	, mBeepItem(new BeepItem())
 	, mRobotModel(robotModel)
 {
-	mImage = model::Image(robotImageFileName, false);
-	mImage.setExternal(false);
-	mCustomImage = model::Image(mImage);
-
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
 	connect(&mRobotModel, &model::RobotModel::rotationChanged, this, &RobotItem::setRotation);
@@ -61,7 +56,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
 
-	setTransformOriginPoint(mRobotModel.info().rotationCenter());
+	setTransformOriginPoint(mRobotModel.info().robotCenter());
 	mBeepItem->setParentItem(this);
 	mBeepItem->setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
 	mBeepItem->setVisible(false);
@@ -90,9 +85,9 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0);
+	auto rect = mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0).toRect();
 	if (mIsCustomImage) {
-		mCustomImage.draw(*painter, rect);
+		mCustomImage->draw(*painter, rect);
 	} else {
 		mImage.draw(*painter, rect);
 	}
@@ -179,14 +174,14 @@ void RobotItem::deserializeImage(const QDomElement &element) {
 	if (image.isNull()) {
 		return;
 	}
-	mCustomImage = *model::Image::deserialize(image);
+	mCustomImage = Image::deserialize(image);
 	useCustomImage(true);
 }
 
 QDomElement RobotItem::serializeImage(QDomElement &parent) const {
 	QDomElement result = parent.ownerDocument().createElement("robotImage");
 	parent.appendChild(result);
-	mCustomImage.serialize(result);
+	mCustomImage->serialize(result);
 	return result;
 }
 
@@ -244,10 +239,13 @@ void RobotItem::removeSensor(const kitBase::robotModel::PortInfo &port)
 		return;
 	}
 
-	scene()->removeItem(mSensors[port]);
-	delete mSensors[port];
-	emit sensorRemoved(mSensors[port]);
+	auto sensor = mSensors[port];
+	scene()->removeItem(sensor);
 	mSensors[port] = nullptr;
+	delete sensor;
+	// Only pointer itself, not the pointee can be used after deletion
+	emit sensorRemoved(sensor);
+
 }
 
 void RobotItem::updateSensorPosition(const kitBase::robotModel::PortInfo &port)
@@ -273,7 +271,7 @@ void RobotItem::setNeededBeep(bool isNeededBeep)
 
 void RobotItem::setCustomImage(const QString &robotImageFileName) {
 	mIsCustomImage = true;
-	mCustomImage.setPath(robotImageFileName);
+	mCustomImage->loadFrom(robotImageFileName);
 	update();
 }
 

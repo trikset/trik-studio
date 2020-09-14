@@ -30,8 +30,10 @@ namespace details {
 
 class ModelsAssistInterface
 {
+	Q_DISABLE_COPY(ModelsAssistInterface)
 public:
-	virtual ~ModelsAssistInterface() {}
+	ModelsAssistInterface() = default;
+	virtual ~ModelsAssistInterface() = default;
 
 	virtual Id createElement(const Id &parent, const Id &type) = 0;
 	virtual Id createElement(const Id &parent, const Id &id

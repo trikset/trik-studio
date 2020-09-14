@@ -80,12 +80,12 @@ void WallItem::setPrivateData()
 
 QPointF WallItem::begin() const
 {
-	return QPointF(x1(), y1()) + mPos;
+	return QPointF(x1(), y1()) + scenePos();
 }
 
 QPointF WallItem::end() const
 {
-	return QPointF(x2(), y2()) + mPos;
+	return QPointF(x2(), y2()) + scenePos();
 }
 
 QRectF WallItem::boundingRect() const
@@ -118,7 +118,7 @@ void WallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void WallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	QPen pen(mStrokePen);
+	QPen pen(getStrokePen());
 	if (!isSelected() && isHovered()) {
 		pen.setWidthF(2.25);
 		pen.setDashPattern({3,3});
@@ -153,8 +153,9 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	QDomElement wallNode = AbstractItem::serialize(parent);
 	wallNode.setTagName("wall");
 	setPenBrushToElement(wallNode, "wall");
-	mLineImpl.serialize(wallNode, x1() + mPos.x(), y1() + mPos.y()
-			, x2() + mPos.x(), y2() + mPos.y());
+	auto pos = scenePos();
+	mLineImpl.serialize(wallNode, x1() + pos.x(), y1() + pos.y()
+			, x2() + pos.x(), y2() + pos.y());
 	return wallNode;
 }
 
@@ -165,8 +166,7 @@ void WallItem::deserialize(const QDomElement &element)
 	const QPointF begin = points.first;
 	const QPointF end = points.second;
 
-	mPos = QPointF();
-	setPos(mPos);
+	setPos(QPointF());
 	setX1(begin.x());
 	setY1(begin.y());
 	setX2(end.x());
@@ -271,9 +271,9 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	} else {
 		const int coefX = static_cast<int>(pos().x()) / indexGrid;
 		const int coefY = static_cast<int>(pos().y()) / indexGrid;
-		mPos = QPointF(alignedCoordinate(pos().x(), coefX, indexGrid),
+		auto newPos = QPointF(alignedCoordinate(pos().x(), coefX, indexGrid),
 				alignedCoordinate(pos().y(), coefY, indexGrid));
-		setPos(mPos);
+		setPos(newPos);
 		update();
 	}
 }
@@ -396,9 +396,9 @@ qreal WallItem::alignedCoordinate(qreal coord, int coef, const int indexGrid) co
 {
 	const int coefSign = coef ? coef / qAbs(coef) : 0;
 
-	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2) {
+	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2.0) {
 		return coef * indexGrid;
-	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2) {
+	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2.0) {
 		return (coef + coefSign) * indexGrid;
 	}
 

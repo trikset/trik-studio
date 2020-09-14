@@ -21,16 +21,13 @@
 #include <QtCore/QList>
 
 Item::Item(graphicsUtils::AbstractItem* parent)
-	: AbstractItem(parent), mDomElementType(noneType)
-	, mScalingState(noneScale)
+	: AbstractItem(parent)
 {
-	mNeedScalingRect = false;
 	setFlag(QGraphicsItem::ItemIsSelectable, true);
 	setFlag(QGraphicsItem::ItemIsMovable, true);
 	QBrush brush(this->brush());
 	brush.setColor(pen().color());
 	setBrush(brush);
-	mZValue = 0;
 	initListScalePoint();
 }
 
@@ -190,7 +187,7 @@ Item::ScalingPointState Item::getScalingPointState() const
 	return mScalingState;
 }
 
-QColor Item::changeScaleColor(QPair<Item::ScalingPointState, QColor> point)
+QColor Item::changeScaleColor(const QPair<Item::ScalingPointState, QColor> &point)
 {
 	if(point.second == QColor(Qt::black)) {
 		return QColor(Qt::red);
@@ -211,7 +208,7 @@ void Item::setScalingPointColor()
 	}
 }
 
-void Item::setListScalePoint(QList<QPair<ScalingPointState, QColor> > list)
+void Item::setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list)
 {
 	mListScalePoint = list;
 }

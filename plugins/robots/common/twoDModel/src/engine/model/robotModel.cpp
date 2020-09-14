@@ -52,31 +52,17 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mSettings(settings)
 	, mRobotModel(robotModel)
 	, mSensorsConfiguration(robotModel.robotId(), robotModel.size())
-	, mPos(QPointF(0, 0))
-	, mAngle(0)
-	, mGyroAngle(0)
-	, mDeltaRadiansOfAngle(0)
-	, mBeepTime(0)
-	, mIsOnTheGround(true)
 	, mMarker(Qt::transparent)
-	, mAcceleration(QPointF(0, 0))
 	, mPosStamps(positionStampsCount)
-	, mIsFirstAngleStamp(true)
-	, mAngleStampPrevious(0)
-	, mWorldModel(nullptr)
-	, mPhysicsEngine(nullptr)
 	, mStartPositionMarker(new items::StartPosition(info().size()))
 {
 	reinit();
 }
 
-RobotModel::~RobotModel()
-{
-}
+RobotModel::~RobotModel() = default;
 
 void RobotModel::reinit()
 {
-	qDeleteAll(mMotors);
 	mMotors.clear();
 	mMarker = Qt::transparent;
 
@@ -87,7 +73,7 @@ void RobotModel::reinit()
 	}
 
 	mBeepTime = 0;
-	mDeltaRadiansOfAngle = 0;
+	mDeltaDegreesOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
 
 	connect(&mRobotModel, &RobotModelInterface::moveManually, this, &RobotModel::moveCell, Qt::UniqueConnection);
@@ -99,7 +85,7 @@ void RobotModel::moveCell(int n) {
 	auto shiftPos = QTransform().rotate(mAngle).map(QPointF(gridSize, 0));
 	if (n < 0) shiftPos = -shiftPos;
 	for (int i = 0; i < abs(n); i++) {
-		auto moveLine = QLineF(rotationCenter(), rotationCenter() + shiftPos * (i + 1));
+		QLineF moveLine(robotCenter(), robotCenter() + shiftPos * (i + 1));
 		for (auto wall : mWorldModel->walls()) {
 			auto wallLine = QLineF(wall->begin(), wall->end());
 			if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
@@ -128,10 +114,9 @@ void RobotModel::clear()
 	scene->robot(*const_cast<RobotModel*>(this))->useCustomImage(false);
 }
 
-RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, long unsigned int degrees
-		, const PortInfo &port, bool isUsed)
+RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees, const PortInfo &port, bool isUsed)
 {
-	Wheel *motor = new Wheel();
+	auto *motor = new Wheel();
 	motor->radius = radius;
 	motor->speed = speed;
 	motor->degrees = degrees;
@@ -143,7 +128,7 @@ RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, long unsigned in
 		motor->activeTimeType = DoByLimit;
 	}
 
-	mMotors[port] = motor;
+	mMotors[port].reset(motor);
 
 	/// @todo We need some mechanism to set correspondence between motors and encoders. In NXT motors and encoders are
 	///       physically plugged into one port, so we can find corresponding port by name. But in TRIK encoders can be
@@ -180,8 +165,8 @@ void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool
 
 void RobotModel::countMotorTurnover()
 {
-	for (Wheel * const motor : mMotors) {
-		const PortInfo port = mMotors.key(motor);
+	for (auto &&motor : mMotors) {
+		const PortInfo &port = mMotors.key(motor);
 		const qreal degrees = Timeline::timeInterval * motor->spoiledSpeed * mRobotModel.onePercentAngularVelocity();
 		const qreal actualDegrees = mPhysicsEngine->isRobotStuck() ? -degrees : degrees;
 		mTurnoverEngines[mMotorToEncoderPortMap[port]] += actualDegrees;
@@ -231,7 +216,7 @@ void RobotModel::stopRobot()
 	mIsFirstAngleStamp = true;
 	mPosStamps.clear();
 	emit playingSoundChanged(false);
-	for (Wheel * const engine : mMotors) {
+	for (auto &&engine : mMotors) {
 		engine->speed = 0;
 		engine->breakMode = true;
 	}
@@ -254,7 +239,8 @@ void RobotModel::countSpeedAndAcceleration()
 		mAngleStampPrevious = mAngle;
 		mIsFirstAngleStamp = false;
 	} else {
-		mDeltaRadiansOfAngle = qDegreesToRadians(mAngle - mAngleStampPrevious);
+		// Convert to millidegress per second
+		mDeltaDegreesOfAngle = (mAngle - mAngleStampPrevious) * 1000 / Timeline::timeInterval;
 		mAngleStampPrevious = mAngle;
 	}
 
@@ -278,9 +264,9 @@ QPointF RobotModel::averageAcceleration() const
 					- mPosStamps.nthFromHead(1) + mPosStamps.head()) / mPosStamps.size());
 }
 
-QPointF RobotModel::rotationCenter() const
+QPointF RobotModel::robotCenter() const
 {
-	return mPos + mRobotModel.rotationCenter();
+	return mPos + mRobotModel.robotCenter();
 }
 
 QPainterPath RobotModel::robotBoundingPath() const
@@ -355,7 +341,7 @@ QVector<int> RobotModel::accelerometerReading() const
 
 QVector<int> RobotModel::gyroscopeReading() const
 {
-	return {static_cast<int>(mDeltaRadiansOfAngle * gyroscopeConstant)
+	return {static_cast<int>(mDeltaDegreesOfAngle * 1000)
 		, static_cast<int>((mAngle - mGyroAngle) * 1000)};
 }
 
@@ -551,7 +537,7 @@ void RobotModel::deserializeWheels(const QDomElement &robotElement)
 	setMotorPortOnWheel(WheelEnum::right, PortInfo::fromString(wheels.attribute("right")));
 }
 
-QGraphicsItem *RobotModel::startPositionMarker() const
+twoDModel::items::StartPosition *RobotModel::startPositionMarker()
 {
 	return mStartPositionMarker;
 }

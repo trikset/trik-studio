@@ -32,7 +32,7 @@ void FindManager::handleRefsDialog(const qReal::Id &id)
 	mMainWindow->selectItemOrDiagram(id);
 }
 
-qReal::IdList FindManager::foundByMode(QString key, QString currentMode, bool sensitivity
+qReal::IdList FindManager::foundByMode(const QString &key, const QString &currentMode, bool sensitivity
 		, bool regExpression)
 {
 	// TODO: replace mode string with modifiers
@@ -57,9 +57,9 @@ QMap<QString, QString> FindManager::findItems(const QStringList &searchData)
 
 	for(int i = 1; i < searchData.length(); i++) {
 		if (searchData[i] != tr("case sensitivity") && searchData[i] != tr("by regular expression")) {
-			qReal::IdList byMode = foundByMode(searchData.first(), searchData[i], sensitivity
+			auto const& byMode = foundByMode(searchData.first(), searchData[i], sensitivity
 					, regExpression);
-			for (qReal::Id currentId : byMode) {
+			for (const qReal::Id &currentId : byMode) {
 				if (found.contains(currentId.toString())) {
 					found[currentId.toString()] += tr(", ") + searchData[i];
 					continue;
@@ -82,7 +82,7 @@ void FindManager::handleReplaceDialog(QStringList &searchData)
 		qReal::IdList toRename = foundByMode(searchData.first(), tr("by name")
 				, searchData.contains(tr("case sensitivity"))
 				, searchData.contains(tr("by regular expression")));
-		for (qReal::Id currentId : toRename) {
+		for (const qReal::Id &currentId : toRename) {
 			mLogicalApi.setName(currentId, searchData[1]);
 		}
 	}

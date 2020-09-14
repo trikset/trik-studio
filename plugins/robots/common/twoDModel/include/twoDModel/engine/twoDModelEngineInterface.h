@@ -29,8 +29,10 @@ class TwoDModelGuiFacade;
 /// Provides some basic engine methods like scanning the field or playing the sound or working with display.
 class TwoDModelEngineInterface
 {
+	Q_DISABLE_COPY(TwoDModelEngineInterface)
 public:
-	virtual ~TwoDModelEngineInterface() {}
+	TwoDModelEngineInterface() = default;
+	virtual ~TwoDModelEngineInterface() = default;
 
 	/// Enables the motor on the given port assigning the given power to it with the given break mode.
 	virtual void setNewMotor(int speed, uint degrees
@@ -60,9 +62,8 @@ public:
 	/// Calibrate absolute angle of gyroscope and return gyroscope calibrated value
 	virtual QVector<int> calibrateGyroscopeSensor() = 0;
 
-	/// Returns the configured color sensor`s value on the given port.
-	/// It  may be the percent of some color under the sensor or the dominating color enum value.
-	virtual int readColorSensor(const kitBase::robotModel::PortInfo &port) const = 0;
+	/// Returns the average color for color's sensor on the given port.
+	virtual QColor readColorSensor(const kitBase::robotModel::PortInfo &port) const = 0;
 
 	/// Returns the average brightness of the picture under the light sensor on the given port.
 	virtual int readLightSensor(const kitBase::robotModel::PortInfo &port) const = 0;
@@ -94,6 +95,9 @@ public:
 
 	/// Returns an object for convenient searching and managing widgets of 2D model GUI.
 	virtual engine::TwoDModelGuiFacade &guiFacade() const = 0;
+
+	// TODO: remove hack with video port name
+	virtual kitBase::robotModel::PortInfo videoPort() const = 0;
 
 };
 

@@ -26,6 +26,7 @@
 
 #include "src/engine/items/solidItem.h"
 #include "twoDModel/engine/model/sensorsConfiguration.h"
+#include "twoDModel/engine/model/image.h"
 
 namespace twoDModel {
 namespace view {
@@ -74,7 +75,7 @@ protected:
 		const QRect mBoundingRect;
 	};
 
-	QRectF imageRect() const;
+	QRectF calculateImageRect() const;
 	QString name() const;
 	QString pathToImage() const;
 
@@ -93,7 +94,9 @@ protected:
 
 	const QRectF mImageRect;
 	const QRectF mBoundingRect;
-	const QImage mImage;
+	// Use utilitary class that can handle PNG & SVG properly.
+	// QImage renders SVG ugly, thus robot moves smothier now
+	const twoDModel::model::Image mImage;
 	PortItem *mPortItem;  // Has ownership.
 };
 

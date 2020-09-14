@@ -57,12 +57,12 @@ private:
 	QWidget *initImagePicker();
 	QWidget *initSaveImageButton();
 
-	QAbstractButton *mFollowButton;  // Takes ownership
-	QAbstractButton *mReturnButton;  // Takes ownership
-	QAbstractButton *mImagePicker;  // Takes ownership
-	QAbstractButton *mUseImageButton;  // Takes ownership
-	QSpinBox *mSpinBox;  // Takes ownership
-	RobotItem *mCurrentItem = nullptr;  // Does not take ownership
+	QAbstractButton *mFollowButton {};  // Takes ownership
+	QAbstractButton *mReturnButton {};  // Takes ownership
+	QSpinBox *mSpinBox {};  // Takes ownership
+	RobotItem *mCurrentItem {};  // Does not take ownership
+	QAbstractButton *mImagePicker{};  // Takes ownership
+	QAbstractButton *mUseImageButton{};  // Takes ownership
 };
 
 }

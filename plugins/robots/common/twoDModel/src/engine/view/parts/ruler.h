@@ -58,7 +58,7 @@ private:
 
 	Qt::Orientation mOrientation;
 	qreal mPixelsInCm;
-	QGraphicsView *mView;  // Doesn`t take owership
+	QGraphicsView *mView {};  // Doesn`t take owership
 	QFont mFont;
 };
 

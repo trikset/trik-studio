@@ -14,7 +14,7 @@
 
 QT += widgets xml
 
-links(qrkernel qslog qrutils qrtext qrgui-preferences-dialog robots-utils)
+links(qrkernel qrutils qrtext qrgui-preferences-dialog robots-utils)
 includes(qrtext plugins/robots/utils)
 
 DEFINES += ROBOTS_KIT_BASE_LIBRARY
@@ -81,6 +81,7 @@ HEADERS += \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorRed.h \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorGreen.h \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorBlue.h \
+	$$PWD/include/kitBase/robotModel/robotParts/colorSensorRaw.h \
 	$$PWD/include/kitBase/robotModel/robotParts/encoderSensor.h \
 	$$PWD/include/kitBase/robotModel/robotParts/gyroscopeSensor.h \
 	$$PWD/include/kitBase/robotModel/robotParts/lightSensor.h \
@@ -137,6 +138,7 @@ SOURCES += \
 	$$PWD/src/robotModel/robotParts/colorSensorBlue.cpp \
 	$$PWD/src/robotModel/robotParts/colorSensorAmbient.cpp \
 	$$PWD/src/robotModel/robotParts/colorSensorReflected.cpp \
+	$$PWD/src/robotModel/robotParts/colorSensorRaw.cpp \
 	$$PWD/src/robotModel/robotParts/encoderSensor.cpp \
 	$$PWD/src/robotModel/robotParts/gyroscopeSensor.cpp \
 	$$PWD/src/robotModel/robotParts/lightSensor.cpp \

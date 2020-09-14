@@ -40,7 +40,7 @@ QString NameNormalizer::upperFirst(const QString &string)
 	}
 	QStringList tokens = string.split(" ");
 	QStringList upperedTokens;
-	for (QString token : tokens)
+	for (auto &&token : tokens)
 	{
 		upperedTokens.append(token.at(0).toUpper() + token.mid(1));
 	}

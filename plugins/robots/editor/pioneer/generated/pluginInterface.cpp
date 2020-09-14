@@ -42,17 +42,17 @@ void PioneerMetamodelPlugin::initPlugin()
 
 void PioneerMetamodelPlugin::initMultigraph()
 {
-	mMetamodel->addNode(*(new GeoLanding(*mMetamodel)));
-	mMetamodel->addNode(*(new GeoTakeoff(*mMetamodel)));
-	mMetamodel->addNode(*(new GoToGPSPoint(*mMetamodel)));
-	mMetamodel->addNode(*(new GoToPoint(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerGetLPSPosition(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerLed(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerMagnet(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerPrint(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerReadRangeSensor(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerSystem(*mMetamodel)));
-	mMetamodel->addNode(*(new PioneerYaw(*mMetamodel)));
+	mMetamodel->addNode(new GeoLanding(*mMetamodel));
+	mMetamodel->addNode(new GeoTakeoff(*mMetamodel));
+	mMetamodel->addNode(new GoToGPSPoint(*mMetamodel));
+	mMetamodel->addNode(new GoToPoint(*mMetamodel));
+	mMetamodel->addNode(new PioneerGetLPSPosition(*mMetamodel));
+	mMetamodel->addNode(new PioneerLed(*mMetamodel));
+	mMetamodel->addNode(new PioneerMagnet(*mMetamodel));
+	mMetamodel->addNode(new PioneerPrint(*mMetamodel));
+	mMetamodel->addNode(new PioneerReadRangeSensor(*mMetamodel));
+	mMetamodel->addNode(new PioneerSystem(*mMetamodel));
+	mMetamodel->addNode(new PioneerYaw(*mMetamodel));
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GeoLanding"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GeoTakeoff"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GoToGPSPoint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);

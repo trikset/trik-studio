@@ -46,11 +46,11 @@ private:
 	void readPorts(const QDomElement &port);
 	void readImage(const QDomElement &image);
 	void changeScaleColor(int i);
-	void checkScale(QPair<QString, bool> pointX1, QPair<QString, bool> pointX2
-			, QPair<QString, bool> pointY1, QPair<QString, bool> pointY2);
-	QPair<QString, bool> readScaleCoord(QString point, const QDomElement &docItem);
-	QPair<QPointF, QPointF> calcLineOfXandY(QPair<QString, bool> pointX1, QPair<QString, bool> pointX2
-			, QPair<QString, bool> pointY1, QPair<QString, bool> pointY2);
+	void checkScale(const QPair<QString, bool> &pointX1, const QPair<QString, bool> &pointX2
+			, const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2);
+	QPair<QString, bool> readScaleCoord(const QString &point, const QDomElement &docItem);
+	QPair<QPointF, QPointF> calcLineOfXandY(const QPair<QString, bool> &pointX1, const QPair<QString, bool> &pointX2
+			, const QPair<QString, bool> &pointY1, const QPair<QString, bool> &pointY2);
 	QPair<QPointF, QPointF> readLineOfXandY(const QDomElement &docItem);
 	QPair<QPointF, QPointF> readLinePortOfXandY(const QDomElement &start, const QDomElement &end);
 	QRectF readRectOfXandY(const QDomElement &docItem);

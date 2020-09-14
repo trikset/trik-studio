@@ -27,8 +27,10 @@ namespace lua {
 /// lua ast nodes to target language`s operations.
 class ROBOTS_GENERATOR_EXPORT PrecedenceConverterInterface
 {
+	Q_DISABLE_COPY(PrecedenceConverterInterface)
 public:
-	virtual ~PrecedenceConverterInterface() {}
+	virtual ~PrecedenceConverterInterface() = default;
+	PrecedenceConverterInterface() = default;
 
 	/// Returns a precedence of the operator represented by the given AST node.
 	/// Bigger precedence numbers correspond to higher precedence.

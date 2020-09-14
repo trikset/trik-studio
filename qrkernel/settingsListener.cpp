@@ -43,7 +43,7 @@ void SettingsListener::onSettingsChanged(const QString &name, const QVariant &ol
 	}
 }
 
-void SettingsListener::disconnect(QObject *object)
+void SettingsListener::disconnectSource(QObject *object)
 {
 	for (AbstractListener * const listener : instance().mListeners.values()) {
 		if (listener->object() == object) {
@@ -56,7 +56,7 @@ void SettingsListener::disconnect(QObject *object)
 	}
 }
 
-void SettingsListener::disconnect(const QString &key, QObject *object)
+void SettingsListener::disconnectSource(const QString &key, QObject *object)
 {
 	for (AbstractListener * const listener : instance().mListeners.values()) {
 		if (listener->object() == object) {

@@ -39,13 +39,12 @@ public:
 	/// @param commands - commands to be executed on a robot when connection is established.
 	/// @param startedMessage - message that will be shown in ErrorReporter when execution of commands is started.
 	/// @param robotIpGetter - function that returns current robot ip address.
-	UploaderTool(
-			const QString &actionName
+	UploaderTool(const QString &actionName
 			, const QString &icon
 			, const QString &kit
 			, const QStringList &commands
 			, const QString &startedMessage
-			, const std::function<QString()> robotIpGetter
+			, const std::function<QString()> &robotIpGetter
 			);
 
 	~UploaderTool() override;

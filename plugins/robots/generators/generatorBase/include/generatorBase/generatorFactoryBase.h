@@ -48,6 +48,7 @@ class GeneratorCustomizer;
 /// and converters to init/terminate code generators and path to templates)
 class ROBOTS_GENERATOR_EXPORT GeneratorFactoryBase : public QObject
 {
+	Q_OBJECT
 public:
 	GeneratorFactoryBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter
@@ -268,14 +269,14 @@ protected:
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	lua::LuaProcessor &mLuaTranslator;
 	qReal::Id mDiagram;
-	parts::Variables *mVariables;
-	parts::Subprograms *mSubprograms;
-	parts::Threads *mThreads;
-	parts::Engines *mEngines;
-	parts::Sensors *mSensors;
-	parts::Functions *mFunctions;
-	parts::DeviceVariables *mDeviceVariables;  // Has ownership.
-	int mLoopGeneratorIndex = 0;
+	QScopedPointer<parts::Variables> mVariables;
+	QScopedPointer<parts::Subprograms> mSubprograms;
+	QScopedPointer<parts::Threads> mThreads;
+	QScopedPointer<parts::Engines> mEngines;
+	QScopedPointer<parts::Sensors> mSensors;
+	QScopedPointer<parts::Functions> mFunctions;
+	QScopedPointer<parts::DeviceVariables> mDeviceVariables;
+	int mLoopGeneratorIndex  { 0 };
 };
 
 }

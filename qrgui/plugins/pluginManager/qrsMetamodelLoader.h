@@ -44,7 +44,7 @@ public:
 	/// Opens and parses .qrs save file containing serialized metamodel and creates Metamodel object instance
 	/// from it. If something went wrong errorOccured() will be emitted. Resulting list may be empty.
 	/// @note Transfers owership to caller.
-	QList<Metamodel *> load(const QString &pathToQrs);
+	QList<QSharedPointer<Metamodel>> load(const QString &pathToQrs);
 
 signals:
 	/// Emitted when metamodel parser found some error in metamodel.

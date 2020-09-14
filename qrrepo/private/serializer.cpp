@@ -162,7 +162,9 @@ void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHa
 					: dynamic_cast<Object *>(new LogicalObject(element))
 					;
 
-			objectsHash.insert(object->id(), object);
+			auto &old = objectsHash[object->id()];
+			delete old;
+			old = object;
 		}
 	}
 }

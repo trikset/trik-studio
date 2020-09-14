@@ -26,6 +26,8 @@
 
 class Item : public graphicsUtils::AbstractItem
 {
+	Q_DISABLE_COPY(Item)
+
 public:
 	enum DomElementTypes {
 		noneType
@@ -57,7 +59,6 @@ public:
 	};
 
 	Item(graphicsUtils::AbstractItem* parent = nullptr);
-	virtual Item* clone() = 0;
 	virtual void setItemZValue(int zValue);
 	int itemZValue();
 	static int sign(int x);
@@ -70,13 +71,13 @@ public:
 	static void swap(qreal &x, qreal &y);
 	void setNoneDragState();
 
-	void setListScalePoint(QList<QPair<ScalingPointState, QColor> > list);
+	void setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list);
 
 	void initListScalePoint();
 	void calcForChangeScalingState(const QPointF&pos, const QPointF& point1, const QPointF& point2, int correction);
 	virtual void changeScalingPointState(qreal x, qreal y);
 	ScalingPointState getScalingPointState() const;
-	QColor changeScaleColor(QPair<Item::ScalingPointState, QColor> point);
+	QColor changeScaleColor(const QPair<ScalingPointState, QColor> &point);
 	void setScalingPointColor();
 
 	//for save to xml
@@ -94,9 +95,9 @@ public:
 
 protected:
 	QList<QPair<ScalingPointState, QColor> > mListScalePoint;
-	bool mNeedScalingRect;
-	DomElementTypes mDomElementType;
-	ScalingPointState mScalingState;
-	int mZValue;
+	bool mNeedScalingRect {false};
+	DomElementTypes mDomElementType {noneType};
+	ScalingPointState mScalingState {noneScale};
+	int mZValue {0};
 	VisibilityCondition mVisibilityCondition;
 };

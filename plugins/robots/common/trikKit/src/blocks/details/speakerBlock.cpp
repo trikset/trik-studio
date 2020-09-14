@@ -17,15 +17,22 @@
 using namespace trik::blocks::details;
 using namespace kitBase::robotModel;
 
-SpeakerBlock::SpeakerBlock(RobotModelInterface &robotModel)
-	: kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikSpeaker>(robotModel)
+SpeakerBlock::SpeakerBlock(RobotModelInterface &robotModel, bool isPlayToneHz)
+	: kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikSpeaker>(robotModel),
+	  mIsPlayToneHz(isPlayToneHz)
 {
 }
 
 void SpeakerBlock::doJob(robotModel::parts::TrikSpeaker &speaker)
 {
-	const QString toSpeak = stringProperty("FileName");
-	speaker.play(toSpeak);
+	if (mIsPlayToneHz) {
+		auto duration = intProperty("Duration");
+		speaker.play(duration);
+	}
+	else {
+		const QString toSpeak = stringProperty("FileName");
+		speaker.play(toSpeak);
+	}
 
 	emit done(mNextBlockId);
 }

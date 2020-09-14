@@ -40,7 +40,7 @@ Connection::~Connection()
 
 void Connection::init(const QHostAddress &ip, int port)
 {
-	mSocket.reset(new QTcpSocket());
+	mSocket = new QTcpSocket(this);
 
 	connectSlots();
 
@@ -76,17 +76,9 @@ void Connection::send(const QByteArray &data)
 	mSocket->write(message);
 }
 
-void Connection::closeConnection()
-{
-	mKeepAliveTimer->stop();
-	mHeartbeatTimer->stop();
-	mSocket->close();
-	thread()->quit();
-}
-
 void Connection::init(int socketDescriptor)
 {
-	mSocket.reset(new QTcpSocket());
+	mSocket = new QTcpSocket(this);
 
 	initKeepalive();
 
@@ -215,22 +207,17 @@ void Connection::onHeartbeatTimeout()
 
 void Connection::connectSlots()
 {
-	connect(mSocket.data(), SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-	connect(mSocket.data(), SIGNAL(connected()), this, SLOT(onConnect()));
-	connect(mSocket.data(), SIGNAL(disconnected()), this, SLOT(onDisconnect()));
-	connect(mSocket.data(), SIGNAL(error(QAbstractSocket::SocketError))
-			, this, SLOT(onError(QAbstractSocket::SocketError)));
+	connect(mSocket, &QTcpSocket::readyRead, this, &Connection::onReadyRead);
+	connect(mSocket, &QTcpSocket::connected, this, &Connection::onConnect);
+	connect(mSocket, &QTcpSocket::disconnected, this, &Connection::onDisconnect);
+	connect(mSocket, QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::error)
+			, this, &Connection::onError);
 }
 
 void Connection::doDisconnect()
 {
 	if (mDisconnectReported) {
 		return;
-	}
-
-	if (mUseHeartbeat) {
-		mKeepAliveTimer->stop();
-		mHeartbeatTimer->stop();
 	}
 
 	mDisconnectReported = true;
@@ -246,8 +233,10 @@ void Connection::initKeepalive()
 		mKeepAliveTimer.reset(new QTimer);
 		mHeartbeatTimer.reset(new QTimer);
 
-		connect(mKeepAliveTimer.data(), SIGNAL(timeout()), this, SLOT(keepAlive()));
-		connect(mHeartbeatTimer.data(), SIGNAL(timeout()), this, SLOT(onHeartbeatTimeout()));
+		connect(mKeepAliveTimer.data(), &QTimer::timeout, this, &Connection::keepAlive);
+		connect(mHeartbeatTimer.data(), &QTimer::timeout, this, &Connection::onHeartbeatTimeout);
+		connect(this, &Connection::disconnected, mKeepAliveTimer.data(), &QTimer::stop);
+		connect(this, &Connection::disconnected, mHeartbeatTimer.data(), &QTimer::stop);
 
 		mKeepAliveTimer->setSingleShot(false);
 		mHeartbeatTimer->setSingleShot(false);

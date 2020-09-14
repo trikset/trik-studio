@@ -91,7 +91,7 @@ private:
 	QList<QPair<Level, QString>> mMessages;
 	const QScopedPointer<utils::OutFile> mMessagesFile;
 	const QScopedPointer<utils::OutFile> mTrajectoryFile;
-	bool mFirstMessage;
+	bool mFirstMessage { true };
 };
 
 }

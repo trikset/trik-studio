@@ -54,7 +54,7 @@ private:
 	const Id mDiagram;
 	QString mNodeName;
 	const EditorManagerInterface &mEditorManagerProxy;
-	RestoreElementDialog *mRestoreElementDialog;  // Doesn`t have ownership
+	RestoreElementDialog *mRestoreElementDialog {};  // Doesn`t have ownership
 };
 
 }

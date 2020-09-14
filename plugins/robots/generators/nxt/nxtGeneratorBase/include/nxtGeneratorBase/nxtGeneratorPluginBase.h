@@ -40,14 +40,14 @@ public:
 	QString kitId() const override;
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
 
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
 private:
 	QScopedPointer<robotModel::NxtGeneratorRobotModel> mRobotModel;
-	blocks::NxtBlocksFactory *mBlocksFactory;  // Transfers ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 };
 
 }

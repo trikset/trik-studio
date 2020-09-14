@@ -24,7 +24,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qslog qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base \
+links(qrkernel qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base \
 		robots-kit-base robots-trik-kit robots-utils robots-trik-qts-generator-library \
 )
 

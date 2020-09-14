@@ -27,7 +27,7 @@ using namespace testing;
 
 void SensorsConfigurationManagerTest::SetUp()
 {
-	mQrguiFacade.reset(new QrguiFacade("unittests/basicTest.qrs"));
+	mQrguiFacade.reset(new QrguiFacade("unittests/basicTest.tsj"));
 	mQrguiFacade->setActiveTab(qReal::Id::loadFromString(
 		"qrm:/RobotsMetamodel/RobotsDiagram/RobotsDiagramNode/{f08fa823-e187-4755-87ba-e4269ae4e798}"));
 
@@ -82,7 +82,7 @@ TEST_F(SensorsConfigurationManagerTest, serializationTest)
 	mQrguiFacade->setActiveTab(oldDiagram);
 
 	// It was an old practice to switch devices configuration when switching between tabs.
-	// Now configuration is beeng modified only when .qrs projects are opened or closed.
+	// Now configuration is beeng modified only when .tsj projects are opened or closed.
 	ASSERT_EQ(mConfigurer2->device("model1", PortInfo("1", input)), DeviceInfo());
 	ASSERT_EQ(mConfigurer2->device("model1", PortInfo("2", input)), device2);
 	ASSERT_EQ(mConfigurer2->device("model2", PortInfo("A", output)), DeviceInfo());

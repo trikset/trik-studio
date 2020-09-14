@@ -31,17 +31,17 @@ UploaderTool::UploaderTool(
 		, const QString &kit
 		, const QStringList &commands
 		, const QString &startedMessage
-		, const std::function<QString()> robotIpGetter
+		, const std::function<QString()> &robotIpGetter
 		)
 	: mMainWindowInterface(nullptr)
-	, mAction(new QAction(QIcon(icon), actionName, nullptr))
+	, mAction(new QAction(QIcon(icon), actionName, this))
 	, mCommands(commands)
 	, mStartedMessage(startedMessage)
 	, mRobotIpGetter(robotIpGetter)
 {
 	connect(mAction, &QAction::triggered, this, &UploaderTool::upload);
 	mAction->setVisible(qReal::SettingsManager::value("SelectedRobotKit").toString() == kit);
-	qReal::SettingsListener::listen("SelectedRobotKit", [this, kit](const QString selectedKit) {
+	qReal::SettingsListener::listen("SelectedRobotKit", [this, kit](const QString &selectedKit) {
 		mAction->setVisible(selectedKit == kit);
 	}, this);
 

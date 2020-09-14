@@ -21,5 +21,8 @@ include(../../../../global.pri)
 include(trikKit.pri)
 
 copyToDestdir(externalToolsConfig, now)
+copyToDestdir(externalScripts/run_maze_generator.sh, now)
 
-OTHER_FILES += externalToolsConfig/*
+OTHER_FILES += \
+    externalToolsConfig/* \
+    externalScripts/run_maze_generator.sh \

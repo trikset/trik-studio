@@ -31,7 +31,7 @@ class TEST_UTILS_EXPORT Wait
 public:
 	/// Constructor.
 	/// @param timeout - timeout in milliseconds that is a maximum time to wait for a signal to appear.
-	Wait(int timeout);
+	explicit Wait(int timeout);
 
 	/// Stop waiting upon receiving a given signal from a given sender. This method can be called as many times as
 	/// needed, and has "or" semantics, so the waiting will stop once any signal is received.
@@ -53,7 +53,7 @@ private:
 	QEventLoop mLoop;
 
 	/// Timeout value in milliseconds.
-	int mTimeout;
+	int mTimeout { -1 };
 };
 
 }

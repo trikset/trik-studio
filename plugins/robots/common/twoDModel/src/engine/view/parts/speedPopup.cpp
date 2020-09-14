@@ -22,7 +22,7 @@
 using namespace twoDModel::view;
 
 constexpr auto timeToLive = 2000;
-const QString pattern = QObject::tr("Speed:&nbsp;&nbsp;<b>%1%</b>");
+const auto pattern = QObject::tr("Speed:&nbsp;&nbsp;<b>%1%</b>");
 
 SpeedPopup::SpeedPopup(QWidget *parent)
 	: QWidget(parent)

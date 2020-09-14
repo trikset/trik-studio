@@ -82,12 +82,12 @@
         <translation>Настройки сенсоров</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+14"/>
         <source>Sensors state</source>
         <translation>Графики</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+49"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+53"/>
         <source>Subprograms</source>
         <translation>Подпрограммы</translation>
     </message>
@@ -196,7 +196,7 @@
         <translation>На главную</translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+241"/>
         <source>Real robot</source>
         <translation>Реальный робот</translation>
     </message>
@@ -217,17 +217,17 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+154"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+160"/>
         <source>Robots</source>
         <translation>Роботы</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+43"/>
         <source>Cannot export exercise to the given location (try to change location)</source>
         <translation>Экспорт упражнения по заданному пути не удался (попробуйте другой путь)</translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+106"/>
         <source>No saved code found in the qrs file</source>
         <translation>В qrs не найден сохраннёный код</translation>
     </message>
@@ -236,7 +236,7 @@
         <translation type="vanished">В qrs не найден сохраннёный js код</translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+98"/>
         <source>Toggle robot console panel</source>
         <translation>Показать/спрятать панель консоли</translation>
     </message>
@@ -244,7 +244,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-69"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-65"/>
         <source>Miscellaneous</source>
         <translation>Прочее</translation>
     </message>
@@ -264,7 +264,7 @@
         <translation>режим отладки</translation>
     </message>
     <message>
-        <location line="+174"/>
+        <location line="+162"/>
         <source>Edit mode</source>
         <translation>Режим редактирования</translation>
     </message>
@@ -274,7 +274,7 @@
         <translation>Режим отладки</translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+146"/>
         <source>Modes</source>
         <translation>Режимы</translation>
     </message>
@@ -282,18 +282,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+93"/>
-        <location line="+73"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+91"/>
+        <location line="+72"/>
         <source>No connection to robot</source>
         <translation>Нет соединения с роботом</translation>
     </message>
     <message>
-        <location line="-68"/>
+        <location line="-67"/>
         <source>Interpreter is already running</source>
         <translation>Программа уже запущена</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+51"/>
         <source>Connected successfully</source>
         <translation>Подключение к роботу выполнено</translation>
     </message>
@@ -303,7 +303,7 @@
         <translation>Не удалось подключиться к роботу.</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+44"/>
         <source>Cannot create new thread with already occupied id %1</source>
         <translation>Идентификатор потока %1 уже занят</translation>
     </message>

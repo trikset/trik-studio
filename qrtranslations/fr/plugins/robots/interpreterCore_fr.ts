@@ -149,7 +149,7 @@
         <translation>TRIK Studio</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+53"/>
         <source>Subprograms</source>
         <translation>Sous-programmes</translation>
     </message>
@@ -242,7 +242,7 @@
         <translation>Configuration de capteurs</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+14"/>
         <source>Sensors state</source>
         <translation>État des capteurs</translation>
     </message>
@@ -282,7 +282,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+241"/>
         <source>Real robot</source>
         <translation>Robot réel</translation>
     </message>
@@ -303,22 +303,22 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+154"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+160"/>
         <source>Robots</source>
         <translation>Robots</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+43"/>
         <source>Cannot export exercise to the given location (try to change location)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+106"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+99"/>
+        <location line="+98"/>
         <source>Toggle robot console panel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,7 +326,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-69"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-65"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
@@ -346,7 +346,7 @@
         <translation>mode de débogage</translation>
     </message>
     <message>
-        <location line="+174"/>
+        <location line="+162"/>
         <source>Edit mode</source>
         <translation>Mode d&apos;édition</translation>
     </message>
@@ -356,7 +356,7 @@
         <translation>Mode de débogage</translation>
     </message>
     <message>
-        <location line="+147"/>
+        <location line="+146"/>
         <source>Modes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -364,18 +364,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+93"/>
-        <location line="+73"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+91"/>
+        <location line="+72"/>
         <source>No connection to robot</source>
         <translation type="unfinished">Pas de connexion au robot</translation>
     </message>
     <message>
-        <location line="-68"/>
+        <location line="-67"/>
         <source>Interpreter is already running</source>
         <translation type="unfinished">L&apos;interprétateur est deja lancé</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+51"/>
         <source>Connected successfully</source>
         <translation type="unfinished">Connexion reussie</translation>
     </message>
@@ -385,7 +385,7 @@
         <translation type="unfinished">La connexion au robot a échoué.</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+44"/>
         <source>Cannot create new thread with already occupied id %1</source>
         <translation type="unfinished">Impossible de créer un nouveau thread avec un identificateur deja utilisé %1</translation>
     </message>

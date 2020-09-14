@@ -25,7 +25,7 @@ namespace sensorsGraph {
 class KeyPoint : public QGraphicsItem
 {
 public:
-	explicit KeyPoint(const QColor color);
+	explicit KeyPoint(const QColor &color);
 
 	QRectF boundingRect() const;
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

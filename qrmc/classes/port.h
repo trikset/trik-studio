@@ -24,8 +24,10 @@ class MetaCompiler;
 /// Represents a port, i.e. a place on a node where edges can be connected to.
 class Port
 {
+	Q_DISABLE_COPY(Port)
 public:
-	virtual ~Port() {}
+	Port() = default;
+	virtual ~Port() = default;
 
 	/// Initializes port.
 	/// @param element - XML document part with information about this port.

@@ -53,8 +53,9 @@ void Display::clearScreen()
 	mRobotCommunicator.runDirectCommand(directCommand);
 }
 
-void Display::printText(int x, int y, const QString &text)
+void Display::printText(int x, int y, const QString &text, int fontSize)
 {
+	Q_UNUSED(fontSize)
 	const QString pathToCommand = ":/trikQts/templates/drawing/printText.t";
 	const QString directCommand = utils::InFile::readAll(pathToCommand).replace("@@TEXT@@", "\"" + text + "\"")
 			.replace("@@X@@", QString::number(x)).replace("@@Y@@", QString::number(y))

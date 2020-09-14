@@ -24,8 +24,10 @@ namespace qReal {
 /// An interface for all components that show to user some internal long activity.
 class ProgressReporterInterface
 {
+	Q_DISABLE_COPY(ProgressReporterInterface)
 public:
-	virtual ~ProgressReporterInterface() {}
+	ProgressReporterInterface() = default;
+	virtual ~ProgressReporterInterface() = default;
 
 	/// Will be implemented to show user some computational activity. Long operation should be started in non-GUI
 	/// thread not to freeze UI. Recommeded way to start operation is using one of qrutils/runExtensions.h methods.

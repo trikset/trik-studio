@@ -60,7 +60,7 @@ public:
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
-	kitBase::blocksBase::BlocksFactoryInterface *blocksFactoryFor(
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model
 			) override;
 
@@ -97,7 +97,7 @@ private:
 	QAction *mUploadProgramAction;  // Doesn't have ownership; may be disposed by GUI.
 
 	/// Factory for blocks on a diagram that can be processed by this generator.
-	blocks::PioneerBlocksFactory *mBlocksFactory;  // Transfers ownership
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 
 	/// Robot model for a generator, defines robot name and other unneeded properties.
 	QScopedPointer<PioneerGeneratorRobotModel> mGeneratorForRealCopterRobotModel;
@@ -115,7 +115,7 @@ private:
 
 	/// Metamodel object with visual language infomation.
 	/// Does not have ownership.
-	const qReal::EditorManagerInterface *mMetamodel;
+	const qReal::EditorManagerInterface *mMetamodel {};
 };
 
 }

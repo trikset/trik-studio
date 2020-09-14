@@ -9,14 +9,12 @@ mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/editors/"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools/"
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
 mkdir -p "$BUNDLE_CONTENTS/Resources/"
-cp     $BIN_DIR/plugins/editors/librobotsMetamodel.dylib                   "$BUNDLE_CONTENTS/Lib/plugins/editors/"
-cp     $BIN_DIR/plugins/tools/librobots-plugin.dylib                       "$BUNDLE_CONTENTS/Lib/plugins/tools/"
-cp -pR $BIN_DIR/librobots-interpreter-core*.dylib                          "$BUNDLE_CONTENTS/Lib/"
-cp -pR $BIN_DIR/librobots-2d-model*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
-#cp -pR $BIN_DIR/libBox2D*.dylib                                            "$BUNDLE_CONTENTS/Lib/"
-cp -pR $BIN_DIR/librobots-kit-base*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
-cp -pR $BIN_DIR/librobots-utils*.dylib                                     "$BUNDLE_CONTENTS/Lib/"
-#cp -pR $BIN_DIR/libqextserialport*.dylib                                   "$BUNDLE_CONTENTS/Lib/"
+cp -f    $BIN_DIR/plugins/editors/librobotsMetamodel.dylib                   "$BUNDLE_CONTENTS/Lib/plugins/editors/"
+cp -f    $BIN_DIR/plugins/tools/librobots-plugin.dylib                       "$BUNDLE_CONTENTS/Lib/plugins/tools/"
+cp -fpR $BIN_DIR/librobots-interpreter-core*.dylib                          "$BUNDLE_CONTENTS/Lib/"
+cp -fpR $BIN_DIR/librobots-2d-model*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
+cp -fpR $BIN_DIR/librobots-kit-base*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
+cp -fpR $BIN_DIR/librobots-utils*.dylib                                     "$BUNDLE_CONTENTS/Lib/"
 
 copy_qt_lib QtMultimedia
 copy_qt_lib QtNetwork
@@ -30,7 +28,6 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-2d-model.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-generator-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-kit-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-utils.1.0.0.dylib"
-#fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/qextserialport.1.0.0.dylib"
 
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins/

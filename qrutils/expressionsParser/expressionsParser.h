@@ -24,12 +24,13 @@ namespace utils {
 
 class QRUTILS_EXPORT ExpressionsParser
 {
+	Q_DISABLE_COPY(ExpressionsParser)
 
 public:
 	explicit ExpressionsParser(qReal::ErrorReporterInterface *errorReporter);
 	virtual ~ExpressionsParser();
 
-	Number *parseExpression(const QString &stream, int &pos);
+	QSharedPointer<Number> parseExpression(const QString &stream, int &pos);
 	void parseProcess(const QString &stream, int& pos, const qReal::Id &curId);
 	bool parseConditionHelper(const QString &stream, int &pos);
 	bool parseCondition(const QString &stream, int& pos, const qReal::Id &curId);
@@ -38,8 +39,8 @@ public:
 	void setErrorReporter(qReal::ErrorReporterInterface *errorReporter);
 	void clear();
 
-	QMap<QString, Number *> const &variables() const;
-	QMap<QString, Number *> &mutableVariables();
+	QMap<QString, QSharedPointer<Number>> const &variables() const;
+	QMap<QString, QSharedPointer<Number>> &mutableVariables();
 
 protected:
 	enum ParseErrorType {
@@ -77,11 +78,11 @@ protected:
 	bool isHtmlBrTag(const QString &stream, int &pos) const;
 
 	QString parseIdentifier(const QString &stream, int &pos);
-	Number *parseNumber(const QString &stream, int &pos);
+	QSharedPointer<Number> parseNumber(const QString &stream, int &pos);
 	void skip(const QString &stream, int &pos) const;
 
-	Number *parseTerm(const QString &stream, int &pos);
-	Number *parseMult(const QString &stream, int&pos);
+	QSharedPointer<Number> parseTerm(const QString &stream, int &pos);
+	QSharedPointer<Number> parseMult(const QString &stream, int&pos);
 
 	virtual void parseVarPart(const QString &stream, int &pos);
 	void parseCommand(const QString &stream, int &pos);
@@ -106,9 +107,9 @@ protected:
 	virtual void checkForVariable(const QString &nameOfVariable, int &index);
 
 	bool isFunction(const QString &variable);
-	Number *applyFunction(const QString &variable, Number *value);
+	QSharedPointer<Number> applyFunction(const QString &variable, const QSharedPointer<Number> &value);
 
-	QMap<QString, Number *> mVariables;  // Takes ownership
+	QMap<QString, QSharedPointer<Number>> mVariables;
 	bool mHasParseErrors;
 	qReal::ErrorReporterInterface *mErrorReporter;  // Does not take ownership
 	qReal::Id mCurrentId;

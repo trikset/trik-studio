@@ -33,26 +33,6 @@ Line::Line(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent):Item(parent), m
 	setY2(y2);
 }
 
-Line::Line(const Line &other):Item(), mLineImpl()
-{
-	mNeedScalingRect = other.mNeedScalingRect ;
-	setPen(other.pen());
-	setBrush(other.brush());
-	mDomElementType = pictureType;
-	setX1(other.x1());
-	setX2(other.x2());
-	setY1(other.y1());
-	setY2(other.y2());
-	mListScalePoint = other.mListScalePoint;
-	setPos(other.x(), other.y());
-}
-
-Item* Line::clone()
-{
-	Line* item = new Line(*this);
-	return item;
-}
-
 QRectF Line::boundingRect() const
 {
 	return mLineImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width(), drift);
@@ -238,13 +218,10 @@ QPair<QPair<QString, QString>, QPair<QString, QString> > Line::setXandYBefore(co
 			x2 = setScaleForDoc(0, rect);
 		}
 	}
-
-	// omfg!
-	return QPair<QPair<QString, QString>, QPair<QString, QString> >(QPair<QString, QString>(x1, y1)
-			, QPair<QString, QString>(x2, y2));
+	return {{x1, y1}, {x2, y2}};
 }
 
-void Line::setDomXandY(QDomElement& dom, QPair<QPair<QString, QString>, QPair<QString, QString> > pair)
+void Line::setDomXandY(QDomElement& dom, const QPair<QPair<QString, QString>, QPair<QString, QString> > &pair)
 {
 	dom.setAttribute("y1", pair.first.second);
 	dom.setAttribute("x1", pair.first.first);

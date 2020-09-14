@@ -33,7 +33,7 @@ class Box2DItem
 {
 public:
 	Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *mEngine
-			, const twoDModel::items::SolidItem &mItem, const b2Vec2 &pos, float angle);
+			, const items::SolidItem *mItem, const b2Vec2 &pos, float angle);
 
 	~Box2DItem();
 
@@ -56,7 +56,7 @@ private:
 	bool mIsCircle;
 
 	b2Vec2 mPreviousPosition;
-	float mPreviousRotation;
+	float mPreviousRotation {};
 
 	twoDModel::model::physics::Box2DPhysicsEngine &mEngine; // Doesn't take ownership
 };

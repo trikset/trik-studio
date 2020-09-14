@@ -24,6 +24,7 @@ namespace qrgraph {
 /// Contains implementations for basic graph and multigraph operations.
 class Multigraph
 {
+	Q_DISABLE_COPY(Multigraph)
 public:
 	Multigraph();
 	virtual ~Multigraph();
@@ -59,7 +60,7 @@ public:
 	/// Appends vertex into this instance multigraph. If vertex does not belong to this multigraph or already contained
 	/// by this instance nothing will happen.
 	/// @note Multigraph will take ownership on \a node.
-	virtual void addNode(Node &node);
+	virtual void addNode(Node *node);
 
 	/// Creates and adds edge into this multigraph instance. Edge then can be connected to nodes via Edge::connect.
 	/// @param type The type of the edge. Edges of desired types can be then conveniently filtered out from the whole

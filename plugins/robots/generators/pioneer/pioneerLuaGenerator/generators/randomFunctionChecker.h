@@ -55,7 +55,7 @@ public:
 private:
 	/// Checks if given abstract sybtax tree uses "random()" function, and if it does, notifies RandomGeneratorPart that
 	/// RND initialization is needed.
-	void checkAst(QSharedPointer<qrtext::core::ast::Node> ast);
+	void checkAst(const QSharedPointer<qrtext::core::ast::Node> &ast);
 
 	/// Adds hints to a text language parser if needed by a node. For example, type inference will not work for random
 	/// initialization node without additional hint that initialized variable is in fact integer.

@@ -23,11 +23,10 @@
 
 class Text : public Item
 {
+	Q_DISABLE_COPY(Text)
 public:
 	Text(bool isDynamic = false);
 	Text(int x, int y, const QString &text = "text", bool isDynamic = false);
-	Text(const Text &other);
-	virtual Item* clone();
 	void init(int x, int y, const QString &text);
 	bool isDynamicText();
 	virtual void setIsDynamicText(bool isDynamic);
@@ -45,8 +44,8 @@ public:
 			, const QPoint &topLeftPicture);
 
 protected:
-	int mX1;
-	int mY1;
+	int mX1 {};
+	int mY1 {};
 	QRectF mBoundingRect;
 	QGraphicsTextItem mText;
 	bool mIsDynamicText;

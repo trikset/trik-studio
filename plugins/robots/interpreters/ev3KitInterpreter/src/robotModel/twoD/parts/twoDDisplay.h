@@ -50,7 +50,7 @@ public:
 	void drawLine(int x1, int y1, int x2, int y2) override;
 	void drawRect(int x, int y, int width, int height, bool filled) override;
 	void drawCircle(int x, int y, int radius, bool filled) override;
-	void printText(int x, int y, const QString &text) override;
+	void printText(int x, int y, const QString &text, int fontSize = -1) override;
 
 	void paint(QPainter *painter, const QRect &outputRect) override;
 

@@ -23,8 +23,7 @@
 using namespace twoDModel::items;
 
 BallItem::BallItem(const QPointF &position)
-	: mStartRotation(0.0f)
-	, mSvgRenderer(new QSvgRenderer)
+	: mSvgRenderer(new QSvgRenderer)
 {
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
 	setPos(position);
@@ -47,7 +46,7 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(ballSize.width() / 2), -static_cast<qreal>(ballSize.height() / 2)}
+	return QRectF({-static_cast<qreal>(ballSize.width() / 2.0), -static_cast<qreal>(ballSize.height() / 2.0)}
 				  , ballSize);
 }
 
@@ -61,9 +60,9 @@ void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
-	painter->setPen(mStrokePen);
+	painter->setPen(getStrokePen());
 	if (isSelected()) {
-		QColor extraColor = mStrokePen.color();
+		QColor extraColor = getStrokePen().color();
 		extraColor.setAlphaF(0.5);
 		painter->setBrush(extraColor);
 	}

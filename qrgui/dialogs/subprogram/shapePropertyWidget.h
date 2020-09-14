@@ -49,7 +49,7 @@ private:
 
 	void addShape(int &index, qreal &x, const QString &shape, const QString &currentShape, bool &foundCurrentShape);
 
-	qreal mWidthOfGrid;
+	qreal mWidthOfGrid {};
 	graphicsUtils::GridDrawer mGridDrawer;
 	QList<ShapeWidget *> mShapes;
 	int mSelectedShapeIndex;
