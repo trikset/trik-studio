@@ -186,16 +186,22 @@ void DevicesConfigurationWidget::save()
 
 void DevicesConfigurationWidget::propagateChanges(const PortInfo &port, const DeviceInfo &sensor)
 {
+	const auto kit = mCurrentRobotId.split(QRegExp("[A-Z]")).first();
 	for (const QString &robotModelType : mRobotModels.keys()) {
 		const RobotModelInterface *robotModel = mRobotModels[robotModelType];
-		for (const PortInfo &otherPort : robotModel->configurablePorts()) {
-			if (areConvertible(port, otherPort)) {
-				if (sensor.isNull()) {
-					deviceConfigurationChanged(robotModel->robotId(), otherPort, DeviceInfo(), Reason::userAction);
-				} else {
-					const DeviceInfo otherDevice = convertibleDevice(robotModel, otherPort, sensor);
-					if (!otherDevice.isNull()) {
-						deviceConfigurationChanged(robotModel->robotId(), otherPort, otherDevice, Reason::userAction);
+		if (robotModel->robotId().contains(kit)) {
+			for (const PortInfo &otherPort : robotModel->configurablePorts()) {
+				if (areConvertible(port, otherPort)) {
+					if (sensor.isNull()) {
+						deviceConfigurationChanged(robotModel->robotId(), otherPort, DeviceInfo(), Reason::userAction);
+					} else {
+						const DeviceInfo otherDevice = convertibleDevice(robotModel, otherPort, sensor);
+						if (!otherDevice.isNull()) {
+							deviceConfigurationChanged(robotModel->robotId()
+													   , otherPort
+													   , otherDevice
+													   , Reason::userAction);
+						}
 					}
 				}
 			}
