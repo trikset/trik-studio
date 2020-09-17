@@ -426,7 +426,8 @@ QMap<PortInfo, DeviceInfo> GeneratorFactoryBase::currentConfiguration() const
 {
 	auto worldModel = mRepo.metaInformation("worldModel").toString();
 	// Hope that there are only one robot
-	auto result = RobotModelUtils::deserializeFromWorldModel(worldModel).first();
+	auto robotsConfig = RobotModelUtils::deserializeFromWorldModel(worldModel);
+	auto result = robotsConfig.isEmpty() ? QMap<PortInfo, DeviceInfo>() : robotsConfig.first();
 	// At the moment we have sensors configuration from widget-configurer. We must also add here non-configurable
 	// by user devices (like encoders, displays and so on).
 	for (const PortInfo &port : mRobotModelManager.model().availablePorts()) {
