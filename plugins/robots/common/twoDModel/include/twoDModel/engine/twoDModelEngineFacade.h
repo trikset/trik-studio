@@ -17,6 +17,8 @@
 #include <QtCore/QString>
 #include <QtCore/QScopedPointer>
 
+#include <QPointer>
+
 #include "twoDModel/robotModel/twoDRobotModel.h"
 #include "twoDModel/engine/twoDModelControlInterface.h"
 #include "twoDModel/engine/twoDModelEngineInterface.h"
@@ -72,7 +74,7 @@ private:
 	const QString mRobotModelName;
 
 	QScopedPointer<model::Model> mModel;
-	view::TwoDModelWidget* mView {};
+	QPointer<view::TwoDModelWidget> mView {};
 	QScopedPointer<TwoDModelEngineInterface> mApi;
 	utils::SmartDock *mDock;  // Transfers ownership to main window indirectly
 
