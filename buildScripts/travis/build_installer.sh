@@ -17,19 +17,6 @@ df -h .
 
 if ! $TIMEOUT && [ "$TRAVIS_REPO_SLUG" == "trikset/trik-studio" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
-#      git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-#      git fetch --unshallow --tags # for `git describe --tags` to work
-      #TODO: We can build installer and checker archive in parallel if needed
-
-      if [[ $TRAVIS_OS_NAME == linux ]] ; then
-      $EXECUTOR bash -ic "\
-      echo Start build checker archive \
-      && bin/$CONFIG/build-checker-installer.sh \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-$TRAVIS_OS_NAME-$CONFIG-$TRAVIS_BRANCH.tar.xz \
-      || false \
-"
-      fi
-
       $EXECUTOR bash -ic "\
       echo Start build installer \
       && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
