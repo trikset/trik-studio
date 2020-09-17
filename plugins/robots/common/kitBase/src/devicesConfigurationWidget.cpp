@@ -197,10 +197,8 @@ void DevicesConfigurationWidget::propagateChanges(const PortInfo &port, const De
 					} else {
 						const DeviceInfo otherDevice = convertibleDevice(robotModel, otherPort, sensor);
 						if (!otherDevice.isNull()) {
-							deviceConfigurationChanged(robotModel->robotId()
-													   , otherPort
-													   , otherDevice
-													   , Reason::userAction);
+							deviceConfigurationChanged(robotModel->robotId(), otherPort
+									, otherDevice, Reason::userAction);
 						}
 					}
 				}
