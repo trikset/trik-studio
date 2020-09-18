@@ -102,7 +102,8 @@ void InputBlock::onValueSelected(const QString &text) {
 
 void InputBlock::onRejected() {
 	if (mCancelBlockId.isNull()) {
-		error(tr("You must input some value!"));
+		warning(tr("You must input some value!"));
+		retry();
 	} else {
 		emit done(mCancelBlockId);
 	}
@@ -130,4 +131,9 @@ void InputBlock::setFailedStatus()
 InputBlock::~InputBlock()
 {
 	mDialog.deleteLater();
+}
+
+void InputBlock::retry()
+{
+	emit done(id());
 }
