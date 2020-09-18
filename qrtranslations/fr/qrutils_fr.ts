@@ -285,7 +285,7 @@
         <translation type="obsolete">Une pause de flux de contrôle détecté, arrêt en cours</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+36"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
     </message>
@@ -295,7 +295,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-62"/>
+        <location line="-63"/>
         <source>Outgoing link is not connected</source>
         <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
     </message>
