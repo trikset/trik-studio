@@ -97,7 +97,7 @@ install:
 
 before_script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec -i builder " ; else export EXECUTOR="time " ;fi
-  - export CCACHE_DIR=$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG
+  - export CCACHE_DIR="$HOME/.ccache/$TRAVIS_OS_NAME-$CONFIG"
 
 script:
   - ./buildScripts/travis/script.sh & WPID=$!

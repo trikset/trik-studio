@@ -26,6 +26,7 @@
 #include <twoDModel/engine/model/timeline.h>
 #include <qrgui/textEditor/languageInfo.h>
 #include <trikKernel/fileUtils.h>
+#include <trikNetwork/mailboxFactory.h>
 
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
