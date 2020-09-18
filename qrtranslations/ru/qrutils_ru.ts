@@ -373,7 +373,7 @@
         <translation>Не указан следующий блок</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+36"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
         <translation>Нет исходящих связей. Пожалуйста, подключите этот блок к чему-нибудь или используйте блок &quot;Конец&quot;, чтобы завершить выполнение программы</translation>
     </message>
@@ -383,7 +383,7 @@
         <translation>От блока ввода должно исходить не более ДВУХ связей</translation>
     </message>
     <message>
-        <location line="-62"/>
+        <location line="-63"/>
         <source>Outgoing link is not connected</source>
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
