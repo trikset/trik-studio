@@ -40,7 +40,9 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
 }
 
-TwoDModelEngineFacade::~TwoDModelEngineFacade() = default;
+TwoDModelEngineFacade::~TwoDModelEngineFacade(){
+	delete mView;
+}
 
 void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
 								 const qReal::SystemEvents &systemEvents,
