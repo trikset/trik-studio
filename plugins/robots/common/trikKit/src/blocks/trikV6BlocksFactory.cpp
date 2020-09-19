@@ -74,5 +74,6 @@ qReal::IdList TrikV6BlocksFactory::providedBlocks() const
 			<< id("TrikWaitForButton")
 			;
 
+	result << id("TrikPrintText");
 	return result;
 }
