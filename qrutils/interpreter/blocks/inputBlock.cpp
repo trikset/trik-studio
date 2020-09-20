@@ -102,7 +102,8 @@ void InputBlock::onValueSelected(const QString &text) {
 
 void InputBlock::onRejected() {
 	if (mCancelBlockId.isNull()) {
-		error(tr("You must input some value!"));
+		warning(tr("You must input some value!"));
+		emit done(id());
 	} else {
 		emit done(mCancelBlockId);
 	}
