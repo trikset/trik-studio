@@ -36,7 +36,6 @@ private:
 	bool checkLinksCount();
 	void onValueSelected(const QString &text);
 	void onRejected();
-	void retry();
 
 	qReal::Id mCancelBlockId;
 	QInputDialog mDialog;
