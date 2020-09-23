@@ -626,8 +626,6 @@ void NodeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
-	QScopedPointer<commands::InsertIntoEdgeCommand> insertCommand (new commands::InsertIntoEdgeCommand(
-			*evScene, mModels, id(), id(), Id::rootId(), event->scenePos(), boundingRect().bottomRight(), false));
 
 	bool shouldProcessResize = true;
 
@@ -677,7 +675,9 @@ void NodeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	if (shouldProcessResize && mResizeCommand) {
-		mResizeCommand->addPostAction(insertCommand.take());
+		auto *insertCommand = new commands::InsertIntoEdgeCommand(
+				*evScene, mModels, id(), id(), Id::rootId(), event->scenePos(), boundingRect().bottomRight(), false);
+		mResizeCommand->addPostAction(insertCommand);
 		endResize();
 	}
 
