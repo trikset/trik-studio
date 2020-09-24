@@ -34,6 +34,7 @@ public:
 			, generatorBase::GeneratorCustomizer &customizer) override;
 
 	QStringList pathsToTemplates() const override;
+	void initDeviceVariables() override;
 
 private:
 	const QStringList mPathsToTemplates;
