@@ -1407,7 +1407,9 @@ void EditorViewScene::setCorners(const QPointF &topLeft, const QPointF &bottomRi
 
 void EditorViewScene::initializeActions()
 {
-	mActionDeleteFromDiagram.setShortcut(QKeySequence(Qt::Key_Delete));
+	mActionDeleteFromDiagram.setShortcuts(QList<QKeySequence>()
+				<< QKeySequence(Qt::Key_Delete)
+				<< QKeySequence(Qt::Key_Backspace));
 	mActionDeleteFromDiagram.setText(tr("Delete"));
 	connect(&mActionDeleteFromDiagram, &QAction::triggered, this, &EditorViewScene::deleteSelectedItems);
 	mActionDeleteFromDiagram.setEnabled(false);
