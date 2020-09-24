@@ -36,7 +36,7 @@ class ChangePropertyCommand : public qReal::commands::AbstractCommand
 {
 public:
 	/// Use this overload to modify properties via models api
-	ChangePropertyCommand(const graphicsUtils::AbstractScene &scene, const model::Model &model
+	ChangePropertyCommand(const graphicsUtils::AbstractScene &scene
 			, const QStringList &ids, const QString &property, const QVariant &value);
 
 protected:
@@ -47,7 +47,6 @@ private:
 	bool setProperties(const QMap<QString, QVariant> &values);
 
 	const graphicsUtils::AbstractScene &mScene;
-	const model::Model &mModel;
 	const QStringList mIds;
 	QString mPropertyName;
 
