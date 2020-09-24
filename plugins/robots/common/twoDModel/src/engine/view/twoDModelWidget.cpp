@@ -558,7 +558,7 @@ QList<AbstractItem *> TwoDModelWidget::selectedColorItems() const
 
 void TwoDModelWidget::onSelectionChange()
 {
-	if (mScene->oneRobot()) {
+	if (!mScene || mScene->oneRobot()) {
 		return;
 	}
 
