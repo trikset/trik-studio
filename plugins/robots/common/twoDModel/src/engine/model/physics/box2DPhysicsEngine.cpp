@@ -59,7 +59,7 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(&worldModel, &model::WorldModel::ballAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::itemRemoved,
-			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
+			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
