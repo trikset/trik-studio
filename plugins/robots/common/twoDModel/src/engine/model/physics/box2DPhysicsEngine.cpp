@@ -260,7 +260,8 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 
 	mWorld->Step(secondsInterval, velocityIterations, positionIterations);
 
-	if ("If you want debug BOX2D, fix this expression to be false" && true) {
+	static volatile auto sThisFlagHelpsToAvoidClangError = true;
+	if ("If you want debug BOX2D, fix this expression to be false" && sThisFlagHelpsToAvoidClangError) {
 		return;
 	}
 
