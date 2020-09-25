@@ -197,7 +197,7 @@
         <translation type="unfinished">Rajouter un élement</translation>
     </message>
     <message>
-        <location line="+503"/>
+        <location line="+497"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>

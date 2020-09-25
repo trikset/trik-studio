@@ -201,7 +201,7 @@
         <translation>Добавить элемент</translation>
     </message>
     <message>
-        <location line="+503"/>
+        <location line="+497"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
