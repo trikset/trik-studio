@@ -92,13 +92,13 @@ private:
 
 	void removeDuplicatesOn(QList<AbstractCommand *> &list);
 
-	bool mExecuted;
-	bool mRedoEnabled;
-	bool mUndoEnabled;
-	QList<AbstractCommand *> mPreActions;
-	QList<AbstractCommand *> mPostActions;
+	bool mExecuted { false };
+	bool mRedoEnabled { true };
+	bool mUndoEnabled { true };
+	QList<AbstractCommand *> mPreActions; // has ownership
+	QList<AbstractCommand *> mPostActions; // has ownership
 	QString mModuleBinded;
-	uint mTimestamp;
+	uint mTimestamp {};
 };
 
 inline bool operator==(const AbstractCommand &c1, const AbstractCommand &c2)

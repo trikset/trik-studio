@@ -564,7 +564,7 @@ QList<AbstractItem *> TwoDModelWidget::selectedColorItems() const
 
 void TwoDModelWidget::onSelectionChange()
 {
-	if (mScene->oneRobot()) {
+	if (!mScene || mScene->oneRobot()) {
 		return;
 	}
 
@@ -728,7 +728,7 @@ void TwoDModelWidget::setController(ControllerInterface &controller)
 
 	auto setItemsProperty = [=](const QStringList &items, const QString &property, const QVariant &value) {
 		if (mController) {
-			mController->execute(new commands::ChangePropertyCommand(*mScene, mModel, items, property, value));
+			mController->execute(new commands::ChangePropertyCommand(*mScene, items, property, value));
 		}
 	};
 

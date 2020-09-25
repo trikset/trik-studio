@@ -20,19 +20,14 @@
 using namespace qReal::commands;
 
 AbstractCommand::AbstractCommand()
-	: mExecuted(false), mRedoEnabled(true), mUndoEnabled(true)
 {
 	mTimestamp = QDateTime::currentMSecsSinceEpoch();
 }
 
 AbstractCommand::~AbstractCommand()
 {
-	for (AbstractCommand *command : mPreActions) {
-		delete command;
-	}
-	for (AbstractCommand *command : mPostActions) {
-		delete command;
-	}
+	qDeleteAll(mPreActions);
+	qDeleteAll(mPostActions);
 }
 
 void AbstractCommand::redo()

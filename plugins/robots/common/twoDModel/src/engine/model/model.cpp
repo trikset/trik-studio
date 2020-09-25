@@ -288,13 +288,10 @@ void Model::initPhysics()
 {
 	//mRealisticPhysicsEngine = new physics::Box2DPhysicsEngine(mWorldModel, mRobotModels);
 	mSimplePhysicsEngine = new physics::SimplePhysicsEngine(mWorldModel, mRobotModels);
-//	connect(this, &model::Model::robotAdded, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::addRobot);
-//	connect(this, &model::Model::robotRemoved, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 	connect(this, &model::Model::robotAdded, mSimplePhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mSimplePhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 
 	connect(&mTimeline, &Timeline::tick, this, &Model::recalculatePhysicsParams);
-//	connect(&mTimeline, &Timeline::nextFrame, this, [this](){ mRealisticPhysicsEngine->nextFrame();	});
 }
 
 void Model::recalculatePhysicsParams()
