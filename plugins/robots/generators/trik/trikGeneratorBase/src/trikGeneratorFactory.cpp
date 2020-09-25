@@ -75,6 +75,11 @@ TrikGeneratorFactory::~TrikGeneratorFactory()
 {
 }
 
+void TrikGeneratorFactory::initDeviceVariables()
+{
+	mDeviceVariables.reset(new trik::parts::TrikDeviceVariables());
+}
+
 AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)
 {

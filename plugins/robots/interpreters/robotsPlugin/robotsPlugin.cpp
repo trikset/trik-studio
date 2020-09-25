@@ -26,8 +26,8 @@ static const int gridWidth = 25; // Half of element size
 
 RobotsPlugin::RobotsPlugin()
 	: mMainWindowInterpretersInterface(nullptr)
+	, mRobotsPluginFacade(new interpreterCore::RobotsPluginFacade)
 {
-	mRobotsPluginFacade.reset(new interpreterCore::RobotsPluginFacade);
 }
 
 void RobotsPlugin::init(const PluginConfigurator &configurator)
