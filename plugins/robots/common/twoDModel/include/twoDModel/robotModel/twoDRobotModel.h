@@ -47,6 +47,7 @@ public:
 	QList<kitBase::robotModel::PortInfo> configurablePorts() const override;
 	QList<kitBase::robotModel::DeviceInfo> convertibleBases() const override;
 	int priority() const override;
+	void rereadSettings() override;
 
 	/// Configures 2D model window`s engine for using it in 2D model devices emulators.
 	void setEngine(engine::TwoDModelEngineInterface &engine);
@@ -128,6 +129,8 @@ public:
 	/// Returns scanning angle and max distance by given device type.
 	virtual QPair<qreal,int> rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const;
 
+signals:
+	void settingsChanged();
 protected:
 	kitBase::robotModel::robotParts::Device *createDevice(
 			const kitBase::robotModel::PortInfo &port

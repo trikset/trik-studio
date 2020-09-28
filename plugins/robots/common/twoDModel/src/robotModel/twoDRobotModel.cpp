@@ -222,3 +222,8 @@ DeviceInfo TwoDRobotModel::markerInfo() const
 {
 	return DeviceInfo::create<parts::Marker>();
 }
+
+void TwoDRobotModel::rereadSettings()
+{
+	emit settingsChanged();
+}
