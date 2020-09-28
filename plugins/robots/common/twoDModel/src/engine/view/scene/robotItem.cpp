@@ -29,7 +29,7 @@ const int border = 0;
 const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
-	: mImage(robotImageFileName, false)
+	: mImage(robotImageFileName, true)
 	, mCustomImage(new Image(robotImageFileName, true))
 	, mBeepItem(new BeepItem())
 	, mRobotModel(robotModel)
