@@ -102,6 +102,7 @@ private:
 	void ride(const QPointF &newPos, qreal rotation);
 
 	void onLanded();
+	void updateImage();
 
 	/** @brief Image of a robot drawn on scene */
 	// Use utilitary class that can handle PNG & SVG properly.
