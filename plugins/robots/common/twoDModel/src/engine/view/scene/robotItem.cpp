@@ -45,6 +45,9 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::rotationChanged
 			, this, &RobotItem::updateSensorRotation);
 
+	connect(&mRobotModel.info(), &twoDModel::robotModel::TwoDRobotModel::settingsChanged
+			, this, &RobotItem::updateImage);
+
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
 	setZValue(ZValue::Robot);
@@ -382,4 +385,9 @@ void RobotItem::BeepItem::drawBeepArcs(QPainter *painter, const QPointF &center,
 	painter->drawArc(rect, 45 * 16, 90 * 16);
 	painter->drawArc(rect, 225 * 16, 90 * 16);
 	painter->restore();
+}
+
+void RobotItem::updateImage()
+{
+	mImage.loadFrom(mRobotModel.info().robotImage());
 }

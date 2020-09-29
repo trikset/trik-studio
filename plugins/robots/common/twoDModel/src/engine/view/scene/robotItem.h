@@ -110,6 +110,7 @@ private:
 	void ride(const QPointF &newPos, qreal rotation);
 
 	void onLanded();
+	void updateImage();
 
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
