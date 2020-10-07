@@ -3,7 +3,7 @@ MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
 ENV DEBIAN_FRONTEND noninteractive
 ARG CHECKER_TAG=latest
 #Run everything at once to create a single layer
-ENV TRIK_PYTHON3_VERSION_MINOR 7
+ENV TRIK_PYTHON3_VERSION_MINOR 8
 #Since LANG has the lowest priority (of LC_ALL, LC_CTYPE) and can be overrided by other vars, we prefer to use LANG
 ENV LANG C.UTF-8
 RUN set -eu \
