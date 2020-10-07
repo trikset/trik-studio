@@ -33,7 +33,7 @@ branches:
 
 environment:
   global:
-    PYTHON_VERSION_MINOR: 7 # Default to Python 3.7
+    PYTHON_VERSION_MINOR: 8 # Default to Python 3.8
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
     CCACHE_DIR: C:\ccache.cache
@@ -116,8 +116,8 @@ init:
   - if "x%appveyor_pull_request_number%" EQU "x" (set "NEED_AUTOZIP=true")
 #this is a tagged commit build
   - if "%APPVEYOR_REPO_TAG%" EQU "true" ( set "NEED_INSTALLER=true" && set "NEED_AUTOZIP=true" )
-#disable artifacts for Python38
-  - if "%PYTHON_VERSION_MINOR%" NEQ "7" ( set "NEED_INSTALLER=false" && set "NEED_AUTOZIP=false" )
+#disable artifacts for non-default  Python builds
+  - if "%PYTHON_VERSION_MINOR%" NEQ "8" ( set "NEED_INSTALLER=false" && set "NEED_AUTOZIP=false" )
   - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
   - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
   - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
@@ -200,7 +200,7 @@ after_test:
   - 'bash -c "./build-trik-studio.sh %QTDIR:\=/%/bin %QTIFW:\=/%/bin %BUILD_DIR:\=/%"'
   - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
-  - if "%PYTHON_VERSION_MINOR%" NEQ "7" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
+  - if "%PYTHON_VERSION_MINOR%" NEQ "8" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
   - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%
   - set AUTOINSTALLER_ZIP_NAME=%INSTALLER_NAME%-auto.zip
   - set INSTALLER_NAME=%INSTALLER_NAME%-installer.exe
