@@ -65,6 +65,8 @@ public:
 
 	void reinitImitationCamera();
 
+	QDir getCurrentDir() const;
+
 public slots:
 	void configure(const QString &, const QString &) override {}
 	void playSound(const QString &) override {}
@@ -105,6 +107,7 @@ public slots:
 	QStringList readAll(const QString &path);
 	/// In trikRuntime returns QTimer, but we need timer with emulated 2D time. Hopefully this is enough
 	utils::AbstractTimer *timer(int milliseconds);
+
 	void processSensors(bool isRunning = true);
 
 signals:
