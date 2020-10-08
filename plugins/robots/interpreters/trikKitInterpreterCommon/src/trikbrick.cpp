@@ -375,55 +375,6 @@ QVector<uint8_t> TrikBrick::getStillImage()
 	}
 }
 
-int TrikBrick::random(int from, int to)
-{
-	using namespace kitBase::robotModel;
-	auto r = RobotModelUtils::findDevice<robotParts::Random>(*mTwoDRobotModel, "RandomPort");
-	// maybe store it later, like the others
-	if (!r) {
-		emit error(tr("No cofigured random device"));
-		return -1;
-	}
-
-	return r->random(from, to);
-}
-
-void TrikBrick::wait(int milliseconds)
-{
-	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
-
-	if (!timeline->isStarted()) {
-		return;
-	}
-
-	QEventLoop loop;
-
-	auto t = timeline->produceTimer();
-	connect(t, &utils::AbstractTimer::timeout, &loop, &QEventLoop::quit);
-	connect(&loop, &QObject::destroyed, t, &QObject::deleteLater);
-
-	// This one is from brick.reset(), that is called for toolbar Stop button
-	connect(this, &TrikBrick::stopWaiting, &loop, &QEventLoop::quit);
-
-	// Old comment:
-	// timers that are produced by produceTimer() doesn't use stop singal
-	// be careful, one who use just utils::AbstractTimer can stuck
-	// New one: do we really need to connect to both signals?
-	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
-	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
-
-	if (milliseconds == 0) {
-		QApplication::processEvents();
-	} else if (timeline->isStarted()) {
-		t->start(milliseconds);
-		loop.exec();
-	}
-}
-
-quint64 TrikBrick::time() const
-{
-	return mTwoDRobotModel->timeline().timestamp();
-}
 
 QStringList TrikBrick::readAll(const QString &path)
 {
@@ -449,14 +400,6 @@ QStringList TrikBrick::readAll(const QString &path)
 	return result;
 }
 
-utils::AbstractTimer *TrikBrick::timer(int milliseconds)
-{
-	auto result = QSharedPointer<utils::AbstractTimer>(mTwoDRobotModel->timeline().produceTimer());
-	mTimers.append(result);
-	result->setRepeatable(true);
-	result->start(milliseconds);
-	return result.get();
-}
 
 void TrikBrick::processSensors(bool isRunning)
 {

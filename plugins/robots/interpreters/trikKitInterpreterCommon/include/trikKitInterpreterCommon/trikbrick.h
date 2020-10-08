@@ -101,12 +101,7 @@ public slots:
 	void stopEventDevice(const QString &) override {}
 
 	/// some ScriptExecution control replacements. @todo: factor out in the separate class
-	int random(int from, int to);
-	void wait(int milliseconds);
-	quint64 time() const;
 	QStringList readAll(const QString &path);
-	/// In trikRuntime returns QTimer, but we need timer with emulated 2D time. Hopefully this is enough
-	utils::AbstractTimer *timer(int milliseconds);
 
 	void processSensors(bool isRunning = true);
 
@@ -114,7 +109,6 @@ signals:
 	void error(const QString &msg);
 	void warning(const QString &msg);
 	void log(const QString &msg);
-	void stopWaiting();
 
 private:
 	void printToShell(const QString &msg);
