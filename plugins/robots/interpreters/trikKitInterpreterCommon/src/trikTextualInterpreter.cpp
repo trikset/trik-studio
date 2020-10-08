@@ -31,8 +31,7 @@
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
 
-const QString jsOverrides = "script.random = brick.random;script.wait = brick.wait;script.time = brick.time;"
-	"script.readAll = brick.readAll;script.timer = brick.timer;Date.now = brick.time;"
+const QString jsOverrides = "Date.now = script.time;"
 	"arrayPPinternal = function(arg) {"
 		"var res = '[';"
 		"for(var i = 0; i < arg.length; i++) {"
@@ -60,18 +59,15 @@ const QString jsOverrides = "script.random = brick.random;script.wait = brick.wa
 
 const QString pyOverrides ="\n__import__('sys').stdout = type('trik_studio_stdout', (object,),"
 				"{ 'write': brick.log, 'flush': lambda: None })\n"
-				"script.random = brick.random;"
-				"script.wait = brick.wait;"
-				"script.time = brick.time;"
-				"script.readAll = brick.readAll;"
-				"script.timer = brick.timer;"
 				"script.system = lambda command, synchronously=True: print('system is disabled')\n";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
 		, bool enablePython)
-	: mBrick(model), mMailbox(trikNetwork::MailboxFactory::create(8889))
-	, mScriptRunner(mBrick, mMailbox)
+	: mBrick(model)
+	, mMailbox(trikNetwork::MailboxFactory::create(8889))
+	, mExecutionControl(new TwoDExecutionControl(mBrick, model))
+	, mScriptRunner(mBrick, mMailbox, mExecutionControl)
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
@@ -147,8 +143,6 @@ void trik::TrikTextualInterpreter::abort()
 	Q_ASSERT(mScriptRunner.thread() == thread());
 	// just a wild test
 	QMetaObject::invokeMethod(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::abort, Qt::QueuedConnection);
-	//mScriptRunner.abort();
-	mBrick.stopWaiting();
 	mRunning = false; // reset brick?
 	mBrick.processSensors(false);
 }

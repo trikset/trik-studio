@@ -26,7 +26,6 @@
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/random.h>
-#include <kitBase/robotModel/robotParts/random.h>
 #include <twoDModel/robotModel/parts/marker.h>
 #include <twoDModel/engine/model/timeline.h>
 #include <qrkernel/settingsManager.h>
@@ -61,7 +60,6 @@ TrikBrick::~TrikBrick()
 
 void TrikBrick::reset()
 {
-	emit stopWaiting();
 	mKeys.reset();///@todo: reset motos/device maps?
 	//mDisplay.reset(); /// - is actually needed? Crashes app at exit
 	for (const auto &m : mMotors) {
@@ -86,6 +84,11 @@ void TrikBrick::printToShell(const QString &msg)
 	}
 
 	sh->print(msg);
+}
+
+QDir TrikBrick::getCurrentDir() const
+{
+	return mCurrentDir;
 }
 
 void TrikBrick::init()
