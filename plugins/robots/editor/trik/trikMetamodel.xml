@@ -108,7 +108,7 @@
 						<parent parentName="AbstractNode"/>
 					</generalizations>
 					<properties>
-						<property displayedName="Number of cells" type="int" name="CellsNumber">
+						<property displayedName="Number of cells" type="string" name="CellsNumber">
 							<default>1</default>
 						</property>
 					</properties>
@@ -130,7 +130,7 @@
 						<parent parentName="AbstractNode"/>
 					</generalizations>
 					<properties>
-						<property displayedName="Number of cells" type="int" name="CellsNumber">
+						<property displayedName="Number of cells" type="string" name="CellsNumber">
 							<default>1</default>
 						</property>
 					</properties>
