@@ -91,7 +91,6 @@ private:
 
 	QRectF deserializeRect(const QString &string) const;
 
-	graphicsUtils::RectangleImpl mImpl;
 	QSharedPointer<model::Image> mImage;
 
 	bool mBackgroundRole {};
