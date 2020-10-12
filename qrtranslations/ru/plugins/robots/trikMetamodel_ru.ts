@@ -685,7 +685,9 @@
         <translation>Устанавливает толщину кисти.</translation>
     </message>
     <message>
-        <location line="-316"/>
+        <location line="-1208"/>
+        <location line="+579"/>
+        <location line="+313"/>
         <location line="+1"/>
         <location line="+346"/>
         <source>1</source>

@@ -146,7 +146,7 @@
 
 		void initProperties()
 		{
-			addProperty("CellsNumber", "int", QString::fromUtf8("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
+			addProperty("CellsNumber", "string", QObject::tr("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
 		}
 	};
 
@@ -725,7 +725,7 @@
 
 		void initProperties()
 		{
-			addProperty("CellsNumber", "int", QString::fromUtf8("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
+			addProperty("CellsNumber", "string", QObject::tr("1"), QObject::tr("Number of cells"), QObject::tr(""), false);
 		}
 	};
 
