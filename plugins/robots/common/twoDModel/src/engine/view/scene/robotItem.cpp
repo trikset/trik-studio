@@ -83,7 +83,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	mImage.draw(*painter, graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()).toRect());
+	mImage.draw(*painter, RectangleImpl::calcRect(x1(), y1(), x2(), y2()).toRect());
 }
 
 void RobotItem::drawExtractionForItem(QPainter* painter)
@@ -94,7 +94,7 @@ void RobotItem::drawExtractionForItem(QPainter* painter)
 
 QRectF RobotItem::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), border);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), border);
 }
 
 QRectF RobotItem::calcNecessaryBoundingRect() const

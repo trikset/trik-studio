@@ -80,7 +80,7 @@ QAction *ImageItem::imageTool()
 
 QRectF ImageItem::boundingRect() const
 {
-	return mImpl.boundingRect(x1(), y1(), x2(), y2(), drift);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), drift);
 }
 
 QRectF ImageItem::calcNecessaryBoundingRect() const
@@ -130,7 +130,7 @@ void ImageItem::deserialize(const QDomElement &element)
 		setBackgroundRole(true);
 	} else {
 		rect = deserializeRect(element.attribute("rect"));
-		setPos(mImpl.deserializePoint(element.attribute("position")));
+		setPos(RectangleImpl::deserializePoint(element.attribute("position")));
 		setBackgroundRole(element.attribute("isBackground", "false") == "true");
 	}
 	setX1(rect.left());

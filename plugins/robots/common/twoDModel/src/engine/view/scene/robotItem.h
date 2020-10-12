@@ -114,7 +114,6 @@ private:
 	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors;  // Does not have ownership
 
 	QPointF mDragStart;
-	graphicsUtils::RectangleImpl mRectangleImpl;
 	QPointF mMarkerPoint;
 
 	model::RobotModel &mRobotModel;
