@@ -23,7 +23,7 @@
 #include <trikControl/utilities.h>
 
 TwoDExecutionControl::TwoDExecutionControl(
-		trikControl::BrickInterface &brick
+		trik::TrikBrick &brick
 		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
 	: mBrick(&brick)
 	, mTwoDRobotModel(model)

@@ -25,7 +25,7 @@
 class TwoDExecutionControl : public trikScriptRunner::TrikScriptControlInterface
 {
 public:
-	TwoDExecutionControl(trikControl::BrickInterface &brick,
+	TwoDExecutionControl(trik::TrikBrick &brick,
 			const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model);
 
 	~TwoDExecutionControl() override;
