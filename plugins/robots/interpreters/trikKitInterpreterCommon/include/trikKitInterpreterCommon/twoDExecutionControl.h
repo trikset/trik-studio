@@ -44,11 +44,17 @@ public:
 	void processSensors(bool isRunning = true);
 
 	bool isInEventDrivenMode() const override;
+
 	QVector<int32_t> getPhoto() override;
+
 	void system(const QString &command, bool synchronously) override;
+
 	void writeToFile(const QString &file, const QString &text) override;
+
 	void writeData(const QString &file, const QVector<uint8_t> &bytes) override;
+
 	QStringList readAll(const QString &file) const override;
+
 	void removeFile(const QString &file) override;
 
 public slots:
