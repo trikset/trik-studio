@@ -25,9 +25,8 @@
 class TwoDExecutionControl : public trikScriptRunner::TrikScriptControlInterface
 {
 public:
-	TwoDExecutionControl(
-			trikControl::BrickInterface &brick
-			, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model);
+	TwoDExecutionControl(trikControl::BrickInterface &brick,
+			const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model);
 
 	~TwoDExecutionControl() override;
 
@@ -58,7 +57,8 @@ public slots:
 	void quit() override;
 
 private:
-	trik::TrikBrick mBrick;
+	bool mInEventDrivenMode {false};
+	QSharedPointer<trik::TrikBrick> mBrick;
 	QList<QSharedPointer<utils::AbstractTimer>> mTimers;
 	QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 };
