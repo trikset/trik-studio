@@ -24,7 +24,7 @@
 TwoDExecutionControl::TwoDExecutionControl(
 		trikControl::BrickInterface &brick
 		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
-	: trikScriptRunner::TrikScriptExecutionControl(brick)
+	: trikScriptRunner::TrikScriptControlInterface(brick)
 	, mBrick(model)
 	, mTwoDRobotModel(model)
 {
@@ -104,4 +104,45 @@ utils::AbstractTimer *TwoDExecutionControl::timer(int milliseconds)
 	result->setRepeatable(true);
 	result->start(milliseconds);
 	return result.get();
+}
+
+
+bool TwoDExecutionControl::isInEventDrivenMode() const
+{
+}
+
+QVector<int32_t> TwoDExecutionControl::getPhoto()
+{
+}
+
+QTimer *TwoDExecutionControl::timer(int milliseconds)
+{
+}
+
+void TwoDExecutionControl::system(const QString &command, bool synchronously)
+{
+}
+
+void TwoDExecutionControl::writeToFile(const QString &file, const QString &text)
+{
+}
+
+void TwoDExecutionControl::writeData(const QString &file, const QVector<uint8_t> &bytes)
+{
+}
+
+QStringList TwoDExecutionControl::readAll(const QString &file) const
+{
+}
+
+void TwoDExecutionControl::removeFile(const QString &file)
+{
+}
+
+void TwoDExecutionControl::run()
+{
+}
+
+void TwoDExecutionControl::quit()
+{
 }
