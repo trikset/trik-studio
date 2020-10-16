@@ -25,7 +25,7 @@
 TwoDExecutionControl::TwoDExecutionControl(
 		trik::TrikBrick &brick
 		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
-	: mBrick(&brick)
+	: mBrick(brick)
 	, mTwoDRobotModel(model)
 {
 	qRegisterMetaType<QVector<int32_t>>("QVector<int32_t>");
@@ -113,7 +113,7 @@ bool TwoDExecutionControl::isInEventDrivenMode() const
 
 QVector<int32_t> TwoDExecutionControl::getPhoto()
 {
-	return trikControl::Utilities::rescalePhoto(mBrick->getStillImage());
+	return trikControl::Utilities::rescalePhoto(mBrick.getStillImage());
 }
 
 void TwoDExecutionControl::system(const QString &command, bool synchronously)
@@ -124,26 +124,26 @@ void TwoDExecutionControl::system(const QString &command, bool synchronously)
 
 void TwoDExecutionControl::writeToFile(const QString &file, const QString &text)
 {
-	QFile out(mBrick->getCurrentDir().absoluteFilePath(file));
+	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
 	out.open(QIODevice::WriteOnly | QIODevice::Append);
 	out.write(text.toUtf8());
 }
 
 void TwoDExecutionControl::writeData(const QString &file, const QVector<uint8_t> &bytes)
 {
-	QFile out(mBrick->getCurrentDir().absoluteFilePath(file));
+	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
 	out.open(QIODevice::WriteOnly | QIODevice::Append);
 	out.write(reinterpret_cast<const char*>(bytes.data()), bytes.size());
 }
 
 QStringList TwoDExecutionControl::readAll(const QString &file) const
 {
-	return mBrick->readAll(file);
+	return mBrick.readAll(file);
 }
 
 void TwoDExecutionControl::removeFile(const QString &file)
 {
-	QFile out(mBrick->getCurrentDir().absoluteFilePath(file));
+	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
 	out.remove();
 }
 

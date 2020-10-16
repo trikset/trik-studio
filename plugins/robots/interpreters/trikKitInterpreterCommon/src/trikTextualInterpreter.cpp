@@ -66,8 +66,7 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 		, bool enablePython)
 	: mBrick(model)
 	, mMailbox(trikNetwork::MailboxFactory::create(8889))
-	, mExecutionControl(new TwoDExecutionControl(mBrick, model))
-	, mScriptRunner(mBrick, mMailbox, mExecutionControl)
+	, mScriptRunner(mBrick, mMailbox, new TwoDExecutionControl(mBrick, model))
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
