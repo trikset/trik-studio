@@ -64,7 +64,7 @@ public slots:
 
 private:
 	bool mInEventDrivenMode {false};
-	QSharedPointer<trik::TrikBrick> mBrick;
+	trik::TrikBrick &mBrick;
 	QList<QSharedPointer<utils::AbstractTimer>> mTimers;
 	QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 };
