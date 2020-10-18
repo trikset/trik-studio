@@ -66,7 +66,7 @@ private:
 
 	TrikBrick mBrick;
 	trikNetwork::MailboxInterface *mMailbox {};
-	TwoDExecutionControl *mExecutionControl;
+	TwoDExecutionControl *mExecutionControl {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
 	qReal::ErrorReporterInterface *mErrorReporter {};
 };
