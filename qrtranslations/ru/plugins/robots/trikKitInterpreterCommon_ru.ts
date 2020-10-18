@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+202"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+195"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
@@ -158,19 +158,19 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+84"/>
-        <location line="+70"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+82"/>
+        <location line="+75"/>
         <source>2d model shell part was not found</source>
         <translation>Консоль 2d модели не найдена</translation>
     </message>
     <message>
         <location line="-30"/>
-        <location line="+311"/>
+        <location line="+262"/>
         <source>Trying to read from file %1 failed</source>
         <translation>Не удалось открыть файл %1</translation>
     </message>
     <message>
-        <location line="-256"/>
+        <location line="-207"/>
         <source>No configured motor on port: %1</source>
         <translation>Не найден сконфигурированный  мотор на порту: %1</translation>
     </message>
@@ -235,9 +235,8 @@
         <translation>Получить снимок из папки/проекта не удалось (возможно из-за неправильного пути/отстуствия снимков в проекте)</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>No cofigured random device</source>
-        <translation>Генератор случайных чисел не сконфигурирован</translation>
+        <translation type="vanished">Генератор случайных чисел не сконфигурирован</translation>
     </message>
 </context>
 <context>
@@ -284,7 +283,7 @@
 <context>
     <name>trik::TrikTextualInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-99"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-97"/>
         <location line="+16"/>
         <source>Unsupported script file type</source>
         <translation>Неверный формат файла</translation>

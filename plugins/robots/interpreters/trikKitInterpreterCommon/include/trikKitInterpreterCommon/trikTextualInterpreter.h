@@ -20,6 +20,7 @@
 #include "trikKitInterpreterCommon/trikbrick.h"
 #include "trikScriptRunner/trikScriptRunner.h"
 #include <trikNetwork/mailboxInterface.h>
+#include "twoDExecutionControl.h"
 
 #include "declSpec.h"
 
@@ -65,6 +66,7 @@ private:
 
 	TrikBrick mBrick;
 	trikNetwork::MailboxInterface *mMailbox {};
+	TwoDExecutionControl *mExecutionControl {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
 	qReal::ErrorReporterInterface *mErrorReporter {};
 };
