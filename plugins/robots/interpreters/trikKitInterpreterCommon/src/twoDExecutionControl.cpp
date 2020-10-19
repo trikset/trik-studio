@@ -82,20 +82,19 @@ void TwoDExecutionControl::reset()
 {
 	emit stopWaiting();
 	for (auto &&timer : mTimers) {
-		QMetaObject::invokeMethod(timer.data(), &utils::AbstractTimer::stop, Qt::QueuedConnection);
+		QMetaObject::invokeMethod(timer, &utils::AbstractTimer::stop, Qt::BlockingQueuedConnection);
 		timer->deleteLater();
 	}
-
 	mTimers.clear();
 }
 
 utils::AbstractTimer *TwoDExecutionControl::timer(int milliseconds)
 {
-	auto result = QSharedPointer<utils::AbstractTimer>(mTwoDRobotModel->timeline().produceTimer());
+	auto result = mTwoDRobotModel->timeline().produceTimer();
 	mTimers.append(result);
 	result->setRepeatable(true);
 	result->start(milliseconds);
-	return result.get();
+	return result;
 }
 
 
