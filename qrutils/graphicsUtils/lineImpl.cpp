@@ -76,13 +76,14 @@ QPainterPath LineImpl::shape(const int width, qreal x1, qreal y1, qreal x2, qrea
 	path.setFillRule(Qt::WindingFill);
 
 	QPainterPathStroker ps;
-	ps.setCapStyle(Qt::FlatCap);
 	ps.setWidth(width);
 
 	path.moveTo(x1, y1);
 	if (mathUtils::Math::eq(x1, x2) && mathUtils::Math::eq(y1, y2)) {
+		ps.setCapStyle(Qt::SquareCap);
 		path.lineTo(x2 + 0.1, y2);
 	} else {
+		ps.setCapStyle(Qt::FlatCap);
 		path.lineTo(x2, y2);
 	}
 
