@@ -259,8 +259,6 @@ private:
 
 	bool mSensorsReadOnly {};
 	bool mRobotPositionReadOnly {};
-
-	bool mCompactMode {};
 };
 
 }

@@ -780,9 +780,7 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 
 void TwoDModelWidget::setCompactMode(bool enabled)
 {
-	mCompactMode = enabled;
-	setRunStopButtonsVisibility();
-	mActions->setSaveLoadActionsShortcutsEnabled(!mCompactMode);
+	mActions->setSaveLoadActionsShortcutsEnabled(!enabled);
 }
 
 QString TwoDModelWidget::editorId() const
@@ -854,8 +852,8 @@ void TwoDModelWidget::setDetailsVisibility(bool visible)
 
 void TwoDModelWidget::setRunStopButtonsVisibility()
 {
-	mUi->runButton->setVisible(!mCompactMode && !mModel.timeline().isStarted());
-	mUi->stopButton->setVisible(!mCompactMode && mModel.timeline().isStarted());
+	mUi->runButton->setVisible(!mModel.timeline().isStarted());
+	mUi->stopButton->setVisible(mModel.timeline().isStarted());
 }
 
 QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) const
