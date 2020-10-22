@@ -82,7 +82,7 @@ void TwoDExecutionControl::reset()
 {
 	emit stopWaiting();
 	for (auto &&timer : mTimers) {
-		QMetaObject::invokeMethod(timer, &utils::AbstractTimer::stop, Qt::BlockingQueuedConnection);
+		QMetaObject::invokeMethod(timer, &utils::AbstractTimer::stop, Qt::QueuedConnection);
 		timer->deleteLater();
 	}
 	mTimers.clear();
