@@ -186,19 +186,7 @@ QPainterPath WallItem::path() const
 
 void WallItem::recalculateBorders()
 {
-	QPainterPath wallPath;
-	wallPath.moveTo(begin());
-
-	if (mathUtils::Geometry::eq(begin(), end())) {
-		wallPath.lineTo(end().x() + 0.1, end().y());
-	} else {
-		wallPath.lineTo(end());
-	}
-
-	QPainterPathStroker stroker;
-	stroker.setCapStyle(Qt::FlatCap);
-	stroker.setWidth(mWallWidth);
-	mPath = stroker.createStroke(wallPath);
+	mPath = mLineImpl.shape(mWallWidth, begin().x(), begin().y(), end().x(), end().y());
 }
 
 void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -312,7 +300,7 @@ QPolygonF WallItem::collidingPolygon() const
 	// here we have "one point" wall
 	if (polygon.isEmpty()) {
 		auto offset = QPointF(mWallWidth, mWallWidth);
-		return QRectF(begin() - offset, begin() + offset);
+		return QRectF(begin() - offset / 2, begin() + offset / 2);
 	}
 
 	QRectF abcdBoundingRect = polygon.boundingRect();
