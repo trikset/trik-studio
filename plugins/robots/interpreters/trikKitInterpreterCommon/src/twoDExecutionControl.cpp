@@ -41,7 +41,7 @@ int TwoDExecutionControl::random(int from, int to) const
 	auto r = RobotModelUtils::findDevice<robotParts::Random>(*mTwoDRobotModel, "RandomPort");
 	// maybe store it later, like the others
 	if (!r) {
-		//emit error(tr("No cofigured random device"));
+		mBrick.error(tr("No cofigured random device"));
 		return -1;
 	}
 

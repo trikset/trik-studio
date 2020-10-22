@@ -83,6 +83,14 @@
     </message>
 </context>
 <context>
+    <name>TwoDExecutionControl</name>
+    <message>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+44"/>
+        <source>No cofigured random device</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+32"/>
