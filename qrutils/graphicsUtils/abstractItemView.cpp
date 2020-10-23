@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "abstractItemView.h"
+#include <QScrollBar>
 
 using namespace graphicsUtils;
 
@@ -40,13 +41,7 @@ void AbstractView::wheelEvent(QWheelEvent *event)
 			zoomOut();
 		event->accept();
 	} else if (event->modifiers() == Qt::ShiftModifier) {
-		auto newEvent = new QWheelEvent(event->pos(), event->globalPos(), QPoint()
-				// Turn vertical movement into horizontal
-				, QPoint(event->angleDelta().y() / 4, event->angleDelta().x() / 4)
-				, event->buttons(), event->modifiers(), event->phase()
-				, event->inverted(), event->source());
-		QGraphicsView::wheelEvent(newEvent);
-		event->accept();
+		horizontalScrollBar()->event(event);
 	} else {
 		QGraphicsView::wheelEvent(event);
 	}
