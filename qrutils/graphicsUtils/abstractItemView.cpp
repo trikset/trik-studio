@@ -46,6 +46,7 @@ void AbstractView::wheelEvent(QWheelEvent *event)
 				, event->buttons(), event->modifiers(), event->phase()
 				, event->inverted(), event->source());
 		QGraphicsView::wheelEvent(newEvent);
+		event->accept();
 	} else {
 		QGraphicsView::wheelEvent(event);
 	}
