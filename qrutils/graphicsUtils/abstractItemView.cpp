@@ -33,7 +33,7 @@ void AbstractView::zoomOut()
 
 void AbstractView::wheelEvent(QWheelEvent *event)
 {
-	if (event->modifiers() == Qt::ControlModifier) {
+	if (event->modifiers() == Qt::ControlModifier || event->buttons() == Qt::MidButton) {
 		if (event->delta() > 0)
 			zoomIn();
 		else
