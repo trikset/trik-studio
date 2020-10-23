@@ -39,6 +39,13 @@ void AbstractView::wheelEvent(QWheelEvent *event)
 		else
 			zoomOut();
 		event->accept();
+	} else if (event->modifiers() == Qt::ShiftModifier) {
+		auto newEvent = new QWheelEvent(event->pos(), event->globalPos(), QPoint()
+				// Turn vertical movement into horizontal
+				, QPoint(event->angleDelta().y() / 4, event->angleDelta().x() / 4)
+				, event->buttons(), event->modifiers(), event->phase()
+				, event->inverted(), event->source());
+		QGraphicsView::wheelEvent(newEvent);
 	} else {
 		QGraphicsView::wheelEvent(event);
 	}
