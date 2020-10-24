@@ -59,6 +59,7 @@ private slots:
 
 private:
 	QString initInputs(const QString &inputs) const;
+	QString addCodeAfterImport(const QString &script, const QString &addCode) const;
 
 	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 	bool mRunning { false };
