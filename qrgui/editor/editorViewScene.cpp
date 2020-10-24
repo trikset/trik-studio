@@ -1331,7 +1331,6 @@ void EditorViewScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
 		} else {
 			emit zoomOut();
 		}
-
 		wheelEvent->accept();
 	}
 }

@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "abstractItemView.h"
+#include <QScrollBar>
 
 using namespace graphicsUtils;
 
@@ -33,12 +34,16 @@ void AbstractView::zoomOut()
 
 void AbstractView::wheelEvent(QWheelEvent *event)
 {
-	QGraphicsView::wheelEvent(event);
-	if (event->buttons() == Qt::MidButton) {
-		if (event->delta() >= 0)
-			zoomOut();
-		else
+	if (event->modifiers() == Qt::ControlModifier || event->buttons() == Qt::MidButton) {
+		if (event->delta() > 0)
 			zoomIn();
+		else
+			zoomOut();
+		event->accept();
+	} else if (event->modifiers() == Qt::ShiftModifier) {
+		horizontalScrollBar()->event(event);
+	} else {
+		QGraphicsView::wheelEvent(event);
 	}
 }
 
