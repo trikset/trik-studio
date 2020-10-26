@@ -99,7 +99,6 @@ init:
   - set PATH
   - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin;C:\Program Files\AppVeyor\BuildAgent\
   - set PATH
-  - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
@@ -135,9 +134,18 @@ clone_script:
 install:
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
-  - pacman --verbose --noconfirm --sync ccache rsync curl unzip sshpass
-  - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
-#--refresh --sysupgrade --ask=20
+  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
+# deal with 2020 summer package upgrade problem, when keys changed
+  - curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
+  - curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
+  - pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz || bash -lc 'pacman --noconfirm -U --config <(echo) msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz'
+# update core files
+  - cmd /c "pacman --verbose --noconfirm -Syuu" #update core files
+  - tasklist /v
+  - taskkill /im gpg-agent.exe /f /t
+# proceed normally
+  - cmd /c "pacman --verbose --noconfirm -S ccache rsync unzip sshpass mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config"
+  - unzip tests_qrs.zip
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
   - ccache -p || echo "Failed to print ccache config (missing -p option)"
   - if not exist %BUILD_DIR% mkdir %BUILD_DIR%
@@ -145,8 +153,6 @@ install:
   - ccache -M 900M
   - which g++
   - g++ --version
-  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
-  - unzip tests_qrs.zip
   - ls
   - dir C:\Qt\Tools\
   - dir C:\Qt
