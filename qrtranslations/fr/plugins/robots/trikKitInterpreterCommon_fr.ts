@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+206"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+200"/>
         <source>Bogus input values</source>
         <translation type="unfinished"></translation>
     </message>
@@ -98,19 +98,19 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+84"/>
-        <location line="+70"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+82"/>
+        <location line="+75"/>
         <source>2d model shell part was not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-30"/>
-        <location line="+311"/>
+        <location line="+262"/>
         <source>Trying to read from file %1 failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-256"/>
+        <location line="-207"/>
         <source>No configured motor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -174,11 +174,6 @@
         <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location line="+13"/>
-        <source>No cofigured random device</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>trik::TrikKitInterpreterPlugin</name>
@@ -227,7 +222,7 @@
 <context>
     <name>trik::TrikTextualInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-98"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-96"/>
         <location line="+15"/>
         <source>Unsupported script file type</source>
         <translation type="unfinished"></translation>

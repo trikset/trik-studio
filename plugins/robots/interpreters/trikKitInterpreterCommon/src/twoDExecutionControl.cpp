@@ -20,15 +20,15 @@
 #include <kitBase/robotModel/robotParts/random.h>
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <twoDModel/engine/model/timeline.h>
+#include <trikControl/utilities.h>
 
 TwoDExecutionControl::TwoDExecutionControl(
 		trikControl::BrickInterface &brick
 		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
-	: trikScriptRunner::TrikScriptControlInterface(brick)
-	, mBrick(model)
+	: mBrick(&brick)
 	, mTwoDRobotModel(model)
 {
-	//connect(this, &TwoDExecutionControl::readAll, &mBrick, &trik::TrikBrick::readAll);
+	qRegisterMetaType<QVector<int32_t>>("QVector<int32_t>");
 }
 
 TwoDExecutionControl::~TwoDExecutionControl()
@@ -88,7 +88,6 @@ qint64 TwoDExecutionControl::time() const
 void TwoDExecutionControl::reset()
 {
 	emit stopWaiting();
-	qDebug() << "reset" << __PRETTY_FUNCTION__;
 	for (auto &&timer : mTimers) {
 		QMetaObject::invokeMethod(timer.data(), &utils::AbstractTimer::stop, Qt::QueuedConnection);
 		timer->deleteLater();
@@ -109,40 +108,51 @@ utils::AbstractTimer *TwoDExecutionControl::timer(int milliseconds)
 
 bool TwoDExecutionControl::isInEventDrivenMode() const
 {
+	return mInEventDrivenMode;
 }
 
 QVector<int32_t> TwoDExecutionControl::getPhoto()
 {
-}
-
-QTimer *TwoDExecutionControl::timer(int milliseconds)
-{
+	return trikControl::Utilities::rescalePhoto(mBrick->getStillImage());
 }
 
 void TwoDExecutionControl::system(const QString &command, bool synchronously)
 {
+	Q_UNUSED(command)
+	Q_UNUSED(synchronously)
 }
 
 void TwoDExecutionControl::writeToFile(const QString &file, const QString &text)
 {
+	QFile out(mBrick->getCurrentDir().absoluteFilePath(file));
+	out.open(QIODevice::WriteOnly | QIODevice::Append);
+	out.write(text.toUtf8());
 }
 
 void TwoDExecutionControl::writeData(const QString &file, const QVector<uint8_t> &bytes)
 {
+	QFile out(mBrick->getCurrentDir().absoluteFilePath(file));
+	out.open(QIODevice::WriteOnly | QIODevice::Append);
+	out.write(reinterpret_cast<const char*>(bytes.data()), bytes.size());
 }
 
 QStringList TwoDExecutionControl::readAll(const QString &file) const
 {
+	return mBrick->readAll(file);
 }
 
 void TwoDExecutionControl::removeFile(const QString &file)
 {
+	QFile out(mBrick->getCurrentDir().absoluteFilePath(file));
+	out.remove();
 }
 
 void TwoDExecutionControl::run()
 {
+	mInEventDrivenMode = true;
 }
 
 void TwoDExecutionControl::quit()
 {
+	emit quitSignal();
 }
