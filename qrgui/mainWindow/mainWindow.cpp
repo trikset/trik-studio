@@ -827,7 +827,7 @@ void MainWindow::setTextChanged(text::QScintillaTextEdit *editor, bool changed)
 	const QString chIndicator = changed ? CHANGED_MARK : "";
 	const QString filePath = mTextManager->path(editor);
 	setWindowTitle(windowTitle + " " + chIndicator + filePath);
-	const int index = mUi->tabs->currentIndex();
+	const int index = mUi->tabs->indexOf(editor);
 	mUi->tabs->setTabText(index, mUi->tabs->tabText(index).remove(CHANGED_MARK, Qt::CaseInsensitive) + chIndicator);
 }
 
