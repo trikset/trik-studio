@@ -141,8 +141,7 @@ install:
   - pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz || bash -lc 'pacman --noconfirm -U --config <(echo) msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz'
 # update core files
   - cmd /c "pacman --verbose --noconfirm -Syuu" #update core files
-  - tasklist /v
-  - taskkill /im gpg-agent.exe /f /t
+  - cmd /c "taskkill /im gpg-agent.exe /f /t"
 # proceed normally
   - cmd /c "pacman --verbose --noconfirm -S ccache rsync unzip sshpass mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config"
   - unzip tests_qrs.zip
