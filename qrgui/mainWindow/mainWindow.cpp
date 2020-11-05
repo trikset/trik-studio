@@ -336,6 +336,7 @@ void MainWindow::connectActions()
 	connect(&*mController, &Controller::modifiedChanged, &*mProjectManager, &ProjectManagerWrapper::setStackUnsaved);
 
 	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::changeWindowTitle);
+	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::sceneSelectionChanged);
 	connect(&*mTextManager, &text::TextManager::textChanged, this, &MainWindow::setTextChanged);
 	connect(&*mTextManager, &text::TextManager::textChanged, mUi->actionUndo, &QAction::setEnabled);
 
@@ -556,13 +557,12 @@ void MainWindow::sceneSelectionChanged()
 	if (!getCurrentTab()) {
 		return;
 	}
+	const IdList selectedIds = getCurrentTab()->editorViewScene().selectedIds();
 
-	const IdList selectedIds = dynamic_cast<EditorViewScene *>(sender())->selectedIds();
-
-	if (selectedIds.isEmpty()) {
+	if (selectedIds.length() != 1) {
 		mUi->graphicalModelExplorer->setCurrentIndex(QModelIndex());
 		mPropertyModel->clearModelIndexes();
-	} else if (selectedIds.length() == 1) {
+	} else {
 		const Id &singleSelected = selectedIds.first();
 		setIndexesOfPropertyEditor(singleSelected);
 
