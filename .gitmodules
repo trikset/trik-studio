@@ -10,9 +10,6 @@
 [submodule "thirdparty/gamepad/gamepad"]
 	path = thirdparty/gamepad/gamepad
 	url = https://github.com/trikset/trik-desktop-gamepad
-[submodule "installer/nxt-tools"]
-	path = installer/nxt-tools
-	url = https://github.com/qreal/nxt-tools
 [submodule "plugins/robots/thirdparty/hidapi"]
 	path = plugins/robots/thirdparty/hidapi
 	url = https://github.com/libusb/hidapi
@@ -26,3 +23,6 @@
 [submodule "thirdparty/qslog/qslog"]
 	path = thirdparty/qslog/qslog
 	url = https://bitbucket.org/codeimproved/qslog.git
+[submodule "installer/nxt-tools"]
+	path = installer/nxt-tools
+	url = https://github.com/trikset/nxt-tools
