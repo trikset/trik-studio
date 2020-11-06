@@ -13,7 +13,7 @@
     <name>trik::robotModel::TrikRobotModelBase</name>
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+91"/>
-        <location line="+196"/>
+        <location line="+197"/>
         <source>Video 2</source>
         <translation type="unfinished"></translation>
     </message>
