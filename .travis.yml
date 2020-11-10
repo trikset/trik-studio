@@ -66,6 +66,7 @@ matrix:
       services: docker
       env: CONFIG=debug TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Linux debug + tests"
+
     - os: osx
       language: cpp
       name: "macOS release + tests"
@@ -74,6 +75,11 @@ matrix:
       language: cpp
       name: "macOS debug + tests"
       env: CONFIG=debug  VERA=false TESTS=$ALL_TESTS QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address" BUILD_TIMEOUT=1800
+    - os: osx
+      osx_image: xcode8
+      language: cpp
+      name: "macOS 10.11 release"
+      env:  QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=no-sanitizers" BUILD_TIMEOUT=1800
 
     - stage: installer
       os: linux
