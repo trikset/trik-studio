@@ -4,7 +4,8 @@ set -ueo pipefail
 CODECOV=true
 case $TRAVIS_OS_NAME in
   osx)
-     export PATH="/usr/local/opt/qt/bin:$PATH"
+     ls /usr/local/opt/qt*
+     export PATH="/usr/local/opt/qt5/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
