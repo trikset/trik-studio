@@ -30,6 +30,9 @@ then
 "
       fi
 
+      if [[ "$TRAVIS_OS_NAME" == osx ]] ; then
+	 [ -d $HOME/qtifw ] || env TRIK_QT_INSTALL_DIR=$HOME/qtifw buildScripts/travis/install_qtifw_mac.sh
+      fi
       $EXECUTOR bash -ic "\
       echo Start build installer \
       && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \

@@ -19,7 +19,6 @@ case $TRAVIS_OS_NAME in
 #    wait $QT_INSTALLER_PID
 #    echo "FINISHED Qt installation"
 #    find $TRIK_QT/5.12.7 -name qmake -perm +111 -type f -or -type l
-    [ -d $HOME/qtifw ] || env TRIK_QT_INSTALL_DIR=$HOME/qtifw buildScripts/travis/install_qtifw_mac.sh
     ;;
   linux)
     docker pull trikset/linux-builder
