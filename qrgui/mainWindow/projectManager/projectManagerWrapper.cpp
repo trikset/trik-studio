@@ -196,7 +196,9 @@ void ProjectManagerWrapper::refreshWindowTitleAccordingToSaveFile()
 {
 	const QString windowTitle = mMainWindow->toolManager().customizer()->windowTitle();
 	const QString saveFile = mAutosaver.isTempFile(mSaveFilePath) ? tr("Unsaved project") : mSaveFilePath;
-	mMainWindow->setWindowTitle(windowTitle + " " + saveFile);
+	if (qReal::SettingsManager::value("MainWindowTitle").toString().isEmpty()) {
+		mMainWindow->setWindowTitle(windowTitle + " " + saveFile);
+	}
 	refreshTitleModifiedSuffix();
 }
 
