@@ -181,7 +181,7 @@
         <translation type="unfinished">Créer un nouvel élement</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+64"/>
         <location line="+9"/>
         <source>Connect with the current item</source>
         <translation type="unfinished">Relier avec l&apos;élement courant</translation>
@@ -197,7 +197,7 @@
         <translation type="unfinished">Rajouter un élement</translation>
     </message>
     <message>
-        <location line="+497"/>
+        <location line="+495"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>
