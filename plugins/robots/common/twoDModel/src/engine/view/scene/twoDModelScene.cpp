@@ -784,6 +784,10 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 			worldItemsToDelete << region->id();
 		}
 
+		for (auto &&image : mModel.worldModel().imageItems()) {
+			worldItemsToDelete << image->id();
+		}
+
 		QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensorsToDelete;
 		QList<qReal::commands::AbstractCommand *> additionalCommands;
 		for (model::RobotModel *robotModel : mRobots.keys()) {
