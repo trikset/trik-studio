@@ -47,6 +47,7 @@ public:
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	void drawExtractionForItem(QPainter* painter) override;
 	QPainterPath resizeArea() const override;
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
@@ -94,6 +95,7 @@ private:
 	QSharedPointer<model::Image> mImage;
 
 	bool mBackgroundRole {};
+	QPointF mEstimatedPos;
 };
 
 }
