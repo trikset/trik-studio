@@ -1054,7 +1054,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Несохраненный проект</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source> [modified]</source>
         <translation> [изменён]</translation>
     </message>

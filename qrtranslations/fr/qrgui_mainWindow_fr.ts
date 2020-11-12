@@ -944,7 +944,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Projet non sauvegardé</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source> [modified]</source>
         <translation>[modifié]</translation>
     </message>
