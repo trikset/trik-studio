@@ -256,10 +256,8 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 		setY2(y);
 		reshapeEndWithGrid(indexGrid);
 	} else {
-		const int coefX = static_cast<int>(pos().x()) / indexGrid;
-		const int coefY = static_cast<int>(pos().y()) / indexGrid;
-		auto newPos = QPointF(alignedCoordinate(pos().x(), coefX, indexGrid),
-				alignedCoordinate(pos().y(), coefY, indexGrid));
+		auto newPos = QPointF(alignedCoordinate(pos().x(), indexGrid),
+				alignedCoordinate(pos().y(), indexGrid));
 		setPos(newPos);
 		update();
 	}
@@ -267,11 +265,8 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 
 void WallItem::reshapeEndWithGrid(int indexGrid)
 {
-	const int coefX = static_cast<int>(x2()) / indexGrid;
-	const int coefY = static_cast<int>(y2()) / indexGrid;
-
-	setX2(alignedCoordinate(x2(), coefX, indexGrid));
-	setY2(alignedCoordinate(y2(), coefY, indexGrid));
+	setX2(alignedCoordinate(x2(), indexGrid));
+	setY2(alignedCoordinate(y2(), indexGrid));
 
 	mCellNumbX2 = x2() / indexGrid;
 	mCellNumbY2 = y2() / indexGrid;
@@ -279,10 +274,8 @@ void WallItem::reshapeEndWithGrid(int indexGrid)
 
 void WallItem::reshapeBeginWithGrid(int indexGrid)
 {
-	const int coefX = static_cast<int> (x1()) / indexGrid;
-	const int coefY = static_cast<int> (y1()) / indexGrid;
-	setX1(alignedCoordinate(x1(), coefX, indexGrid));
-	setY1(alignedCoordinate(y1(), coefY, indexGrid));
+	setX1(alignedCoordinate(x1(), indexGrid));
+	setY1(alignedCoordinate(y1(), indexGrid));
 	mCellNumbX1 = x1() / indexGrid;
 	mCellNumbY1 = y1() / indexGrid;
 }
@@ -377,17 +370,4 @@ void WallItem::setDraggedEnd(qreal x, qreal y)
 {
 	setX2(x1() - x);
 	setY2(y1() - y);
-}
-
-qreal WallItem::alignedCoordinate(qreal coord, int coef, const int indexGrid) const
-{
-	const int coefSign = coef ? coef / qAbs(coef) : 0;
-
-	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2.0) {
-		return coef * indexGrid;
-	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2.0) {
-		return (coef + coefSign) * indexGrid;
-	}
-
-	return coord;
 }

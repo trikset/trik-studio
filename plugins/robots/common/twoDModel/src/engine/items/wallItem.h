@@ -78,7 +78,6 @@ protected:
 private:
 	void recalculateBorders();
 
-	qreal alignedCoordinate(qreal coord, int coef, const int indexGrid) const;
 	void setBeginCoordinatesWithGrid(int indexGrid);
 	void setEndCoordinatesWithGrid(int indexGrid);
 	void countCellNumbCoordinates(int indexGrid);

@@ -180,12 +180,16 @@ void AbstractItem::setDragState(AbstractItem::DragState dragState)
 
 void AbstractItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 {
-	const qreal x = mapFromScene(event->scenePos()).x();
-	const qreal y = mapFromScene(event->scenePos()).y();
 	if (mDragState != None) {
 		setFlag(QGraphicsItem::ItemIsMovable, false);
 	}
+	setXYWithDragState(mapFromScene(event->scenePos()));
+}
 
+void AbstractItem::setXYWithDragState(const QPointF pos)
+{
+	const auto x = pos.x();
+	const auto y = pos.y();
 	if (mDragState == TopLeft) {
 		setX1(x);
 		setY1(y);
@@ -627,4 +631,18 @@ void AbstractItem::copyTo(AbstractItem * const other) const
 			, QOverload<const QPen &>::of(&AbstractItem::setPen));
 	connect(this, &AbstractItem::brushChanged, other
 			, QOverload<const QBrush &>::of(&AbstractItem::setBrush));
+}
+
+qreal AbstractItem::alignedCoordinate(qreal coord, const int indexGrid) const
+{
+	const int coef = static_cast<int>(coord) / indexGrid;
+	const int coefSign = coef ? coef / qAbs(coef) : 0;
+
+	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2.0) {
+		return coef * indexGrid;
+	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2.0) {
+		return (coef + coefSign) * indexGrid;
+	}
+
+	return coord;
 }

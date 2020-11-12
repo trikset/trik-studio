@@ -35,6 +35,9 @@ ImageItem::ImageItem(const QSharedPointer<model::Image> &image, const QRect &geo
 	setY2(geometry.bottom());
 	setBackgroundRole(false);
 	unsetCursor();
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
+			mEstimatedPos = pos();
+		});
 }
 
 AbstractItem *ImageItem::clone() const
@@ -254,4 +257,35 @@ QRectF ImageItem::deserializeRect(const QString &string) const
 	}
 
 	return QRectF();
+}
+
+void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	mEstimatedPos += event->scenePos() - event->lastScenePos();
+	const auto showGrid = SettingsManager::value("2dShowGrid").toBool();
+	if (!showGrid || event->modifiers() != Qt::ShiftModifier) {
+		if (dragState() != None) {
+			calcResizeItem(event);
+		} else {
+			setPos(mEstimatedPos);
+		}
+	} else if (dragState() != None) {
+		setFlag(QGraphicsItem::ItemIsMovable, false);
+		const auto gridSize = SettingsManager::value("2dGridCellSize").toInt();
+		const auto x = alignedCoordinate(event->scenePos().x(), gridSize);
+		const auto y = alignedCoordinate(event->scenePos().y(), gridSize);
+		setXYWithDragState(mapFromScene(x, y));
+	} else {
+		setFlag(QGraphicsItem::ItemIsMovable, false);
+		// move
+		setPos(mEstimatedPos);
+		// and align top left corner to grid
+		QRectF itemBoundingRect = calcNecessaryBoundingRect();
+		const auto topLeft = mapToScene(QPointF(itemBoundingRect.left(), itemBoundingRect.top()));
+		const auto gridSize = SettingsManager::value("2dGridCellSize").toInt();
+		const auto x = alignedCoordinate(topLeft.x(), gridSize);
+		const auto y = alignedCoordinate(topLeft.y(), gridSize);
+		auto delta = QPointF(x, y) - topLeft;
+		moveBy(delta.x(), delta.y());
+	}
 }
