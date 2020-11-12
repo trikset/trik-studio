@@ -19,7 +19,7 @@ using namespace utils;
 RealTimer::RealTimer()
 {
 	setRepeatable(false);
-	connect(&mTimer, SIGNAL(timeout()), this, SLOT(onTimeout()));
+	connect(&mTimer, &QTimer::timeout, this, &RealTimer::timeout);
 }
 
 bool RealTimer::isTicking() const
