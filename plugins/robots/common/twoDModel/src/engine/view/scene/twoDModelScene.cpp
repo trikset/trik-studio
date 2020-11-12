@@ -647,7 +647,7 @@ void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
 
 void TwoDModelScene::keyPressEvent(QKeyEvent *event)
 {
-	if (event->key() == Qt::Key_Delete) {
+	if (event->matches(QKeySequence::Delete) || event->key() == Qt::Key_Backspace) {
 		deleteSelectedItems();
 	} else if (event->matches(QKeySequence::Copy)) {
 		copySelectedItems();
