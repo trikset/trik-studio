@@ -52,7 +52,7 @@ const QString jsOverrides = "Date.now = script.time;"
 		"} else {res += arguments[i].toString();}"
 		"};"
 		"brick.log(res+'\\n');"
-		"brick.wait(0);"
+		"script.wait(0);"
 		"return res;"
 	"};"
 	"script.system = function() {print('system is disabled in the interpreter');};";
