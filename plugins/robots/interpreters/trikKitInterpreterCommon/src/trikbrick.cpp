@@ -161,6 +161,11 @@ void TrikBrick::say(const QString &msg) {
 	QMetaObject::invokeMethod(sh, [sh, msg](){sh->say(msg);});
 }
 
+void TrikBrick::playTone(int, int msDuration) {
+	auto* robot = mTwoDRobotModel.data();
+	QMetaObject::invokeMethod(robot, [robot, msDuration](){robot->engine()->playSound(msDuration);});
+}
+
 void TrikBrick::stop() {
 	/// @todo: properly implement this?
 	mTwoDRobotModel->stopRobot();

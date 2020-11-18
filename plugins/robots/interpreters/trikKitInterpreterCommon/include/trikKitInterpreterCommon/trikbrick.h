@@ -70,6 +70,7 @@ public:
 public slots:
 	void configure(const QString &, const QString &) override {}
 	void playSound(const QString &) override {}
+	void playTone(int, int msDuration) override;
 	void say(const QString &msg) override;
 	void stop() override;
 	trikControl::MotorInterface *motor(const QString &port) override;
@@ -95,7 +96,6 @@ public slots:
 	trikControl::FifoInterface *fifo(const QString &) override {return nullptr;}
 	trikControl::I2cDeviceInterface *i2c(int, int) override {return nullptr;}
 
-	void playTone(int, int) override {}
 	QVector<uint8_t> getStillImage() override;
 	trikControl::EventDeviceInterface *eventDevice(const QString &) override {return nullptr;}
 	void stopEventDevice(const QString &) override {}

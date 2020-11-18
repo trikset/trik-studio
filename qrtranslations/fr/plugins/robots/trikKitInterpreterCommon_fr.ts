@@ -113,7 +113,7 @@
     </message>
     <message>
         <location line="-30"/>
-        <location line="+262"/>
+        <location line="+267"/>
         <source>Trying to read from file %1 failed</source>
         <translation type="unfinished"></translation>
     </message>
