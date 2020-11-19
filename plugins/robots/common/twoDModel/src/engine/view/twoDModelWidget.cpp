@@ -953,6 +953,11 @@ void TwoDModelWidget::onDeviceConfigurationChanged(const QString &robotId
 	}
 }
 
+void TwoDModelWidget::setBackgroundMode()
+{
+	mBackgroundMode = true;
+}
+
 void TwoDModelWidget::bringToFront()
 {
 #ifdef Q_OS_DARWIN
@@ -961,6 +966,10 @@ void TwoDModelWidget::bringToFront()
 	if (!QApplication::platformNativeInterface())
 		return;
 #endif
+
+	if (mBackgroundMode) {
+		return;
+	}
 
 	if (isHidden()) {
 		show();
