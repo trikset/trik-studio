@@ -94,7 +94,6 @@ private:
 	QPainterPath mPath;
 	int mWallWidth {10};
 	QPointF mEstimatedPos;
-
 };
 
 }
