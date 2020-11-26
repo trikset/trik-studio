@@ -83,6 +83,7 @@ void AbstractScene::setX2andY2(QGraphicsSceneMouseEvent *event)
 
 void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event)
 {
+	if (selectedItems().size() > 2) return;
 	reshapeItem(event, mGraphicsItem);
 }
 

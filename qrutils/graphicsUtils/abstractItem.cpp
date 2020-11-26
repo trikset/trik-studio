@@ -596,6 +596,7 @@ void AbstractItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void AbstractItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+	setFlag(QGraphicsItem::ItemIsMovable, mEditable);
 	QGraphicsItem::mouseReleaseEvent(event);
 	emit mouseInteractionStopped();
 }
