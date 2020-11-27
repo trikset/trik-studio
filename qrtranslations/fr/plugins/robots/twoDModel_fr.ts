@@ -657,7 +657,7 @@
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+720"/>
-        <source>Select image</source>
+        <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -666,7 +666,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+14"/>
         <source>Warning</source>
         <translation type="unfinished">Attention</translation>
     </message>
@@ -682,7 +682,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Cannot load file. Try another one.</source>
+        <source>Cannot load %1. Try another file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
