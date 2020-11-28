@@ -119,7 +119,7 @@ before_install:
   - export CCACHE_CONFIGPATH=$HOME/ccache.conf
 
 install:
-  - ./buildScripts/travis/install.sh
+  - "./buildScripts/travis/install_${TRAVIS_OS_NAME}.sh"
 
 before_script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec -i builder " ; else export EXECUTOR="time " ;fi
