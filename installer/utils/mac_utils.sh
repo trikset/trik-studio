@@ -20,6 +20,9 @@ function fix_dependencies {
 		change="-id \"$short_id\""
 	fi
 	for dep in $(otool -L "$target" | grep "^\t[^@]" | cut -f 1 -d \( || : ) ; do
+		if [[ "$dep" == /System/Library/Frameworks/* || "$dep" == /usr/lib/*  ]] ; then
+			continue;
+		fi
 		normalized=$(realpath -e "$dep")
 		if [[ "$normalized" == "$prefix"/* ]] ; then
 			relative=$(realpath -e --relative-to "$prefix" "$normalized")
