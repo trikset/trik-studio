@@ -8,7 +8,7 @@ source $INSTALLER_ROOT/utils/mac_utils.sh
 mkdir -p "$BUNDLE_CONTENTS/Lib/"
 
 cp -fpR    $BIN_DIR/librobots-pioneer-kit*.dylib                          		"$BUNDLE_CONTENTS/Lib/"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-pioneer-kit.dylib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-pioneer-kit.1.0.0.dylib"
 
 
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins"

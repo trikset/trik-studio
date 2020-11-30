@@ -14,13 +14,14 @@ function fix_dependencies {
 	local relative
 	local change
 	local short_id
-	short_id=$(otool -D "$target" | tail -n +2 | grep -v '^@' || : )
-	if [[ -n "$short_id" ]] ; then
-		short_id="$(realpath -e --relative-to "$prefix" "$short_id")"
+	local install_name
+	install_name=$(otool -D "$target" | tail -n +2 | grep -v '^@' || : )
+	if [[ -n "$install_name" ]] ; then
+		short_id=$(realpath -e --relative-to "$prefix" "$short_id" || echo "@rpath/"$(basename "$install_name"))
 		change="-id \"$short_id\""
 	fi
 	for dep in $(otool -L "$target" | grep "^\t[^@]" | cut -f 1 -d \( || : ) ; do
-		if [[ "$dep" == /System/Library/Frameworks/* || "$dep" == /usr/lib/*  ]] ; then
+		if [[ "$dep" == /System/Library/Frameworks/* || "$dep" == /usr/lib/*  || "$dep" == "$install_name" ]] ; then
 			continue;
 		fi
 		normalized=$(realpath -e "$dep")

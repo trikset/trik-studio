@@ -22,6 +22,7 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitplugins/librobots-
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-ev3-kit.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-ev3-generator-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqextserialport.1.0.0.dylib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.dylib"
 
 # Cleaning up prebuild-common.sh results...

@@ -15,7 +15,6 @@ cp -fpR $BIN_DIR/libtrik*.dylib                                            	    
 
 PYTHON_LIBNAME=$(python3-config --prefix)/Python
 cp -fpR "$PYTHON_LIBNAME" "$BUNDLE_CONTENTS/Lib"
-find "$BUNDLE_CONTENTS/Lib" -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/Python
 
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libtrikMetamodel.dylib"
@@ -26,7 +25,11 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-kit-interpreter-comm
 
 export -f fix_dependencies
 export -f fix_qreal_dependencies
-find "$BUNDLE_CONTENTS/Lib" -depth 1 -name "libtrik*.dylib" -print0 | xargs -0 -n 1 -I {} bash -c 'fix_qreal_dependencies "{}"'
+find "$BUNDLE_CONTENTS/Lib" -depth 1 -name "libtrik*.*.*.*.dylib" -print0 | xargs -0 -n 1 -I {} bash -c 'fix_qreal_dependencies "{}"'
+
+#very bad code. it breaks symbolic links
+find "$BUNDLE_CONTENTS/Lib" -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/Python
+
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
 cp -pR $BIN_DIR/system.{py,js}                                                 "$PWD/../data/"
 cp -fpR "$BIN_DIR/2D-model"                                                       "$BUNDLE_CONTENTS/MacOS/"
