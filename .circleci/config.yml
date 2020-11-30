@@ -8,8 +8,13 @@ jobs:
   lint:
     docker:
     - image: trikset/linux-builder
+    shell: /bin/bash -leo pipefail
+    environment:
+    - BASH_ENV: /etc/profile
     steps:
+    - run: Xfvb :0 &
     - checkout
+    - run: git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
     - run: buildScripts/travis/vera_translation.sh
   build:
     docker:
