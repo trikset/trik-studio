@@ -16,12 +16,12 @@ jobs:
     - checkout
     - run: git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
     - run: buildScripts/travis/vera_translation.sh
-  build:
-    docker:
-    - image: trikset/linux-builder
-    steps:
-    - checkout
-    - run: buildScripts/travis/script.sh
+#  build:
+#    docker:
+#    - image: trikset/linux-builder
+#    steps:
+#    - checkout
+#    - run: buildScripts/travis/script.sh
 
 workflows:
   # Name the workflow "welcome"
@@ -32,11 +32,11 @@ workflows:
   main:
     jobs:
       - lint
-      - build:
-          requires:
-            - lint
-        #      - test:
-        #        requires:
-        #        - build
+#      - build:
+#         requires:
+#         - lint
+#      - test:
+#        requires:
+#        - build
 
 
