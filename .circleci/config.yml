@@ -4,10 +4,34 @@ version: 2.1
 orbs:
   # Declare a dependency on the welcome-orb
   welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+jobs:
+  lint:
+    docker:
+    - image: trikset/linux-builder
+    steps:
+    - checkout
+    - run: buildScripts/travis/vera_translation.sh
+  build:
+    docker:
+    - image: trikset/linux-builder
+    steps:
+    - checkout
+    - run: buildScripts/travis/script.sh
+
 workflows:
   # Name the workflow "welcome"
   welcome:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+  main:
+    jobs:
+      - lint
+      - build:
+          requires:
+            - lint
+        #      - test:
+        #        requires:
+        #        - build
+
+
