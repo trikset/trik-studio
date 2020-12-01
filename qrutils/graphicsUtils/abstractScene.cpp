@@ -83,12 +83,25 @@ void AbstractScene::setX2andY2(QGraphicsSceneMouseEvent *event)
 
 void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event)
 {
+	setX2andY2(event);
+	if (!mGraphicsItem) return;
+	auto oldPos = mGraphicsItem->pos();
 	reshapeItem(event, mGraphicsItem);
+	auto delta = mGraphicsItem->pos() - oldPos;
+	if (mGraphicsItem->isSelected()) {
+		mGraphicsItem->setPos(oldPos);
+	}
+	for (auto selectedItem : selectedItems()) {
+		if (auto item = dynamic_cast<AbstractItem*>(selectedItem)) {
+			if (!item->parentItem()) {
+				item->moveBy(delta.x(), delta.y());
+			}
+		}
+	}
 }
 
 void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event, graphicsUtils::AbstractItem *item)
 {
-	setX2andY2(event);
 	if (item && item->editable()) {
 		if (item->dragState() != graphicsUtils::AbstractItem::None) {
 			mView->setDragMode(QGraphicsView::NoDrag);

@@ -35,6 +35,9 @@ WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsScenePositionChanges);
 	setPrivateData();
 	setAcceptDrops(true);
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
+			mEstimatedPos = pos();
+		});
 }
 
 WallItem *WallItem::clone() const
@@ -191,6 +194,8 @@ void WallItem::recalculateBorders()
 
 void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
+	mEstimatedPos += event->scenePos() - event->lastScenePos();
+
 	if (event->modifiers() & Qt::ShiftModifier && (dragState() == TopLeft || dragState() == BottomRight)) {
 		AbstractItem::resizeItem(event);
 		reshapeRectWithShift();
@@ -245,7 +250,7 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	const qreal x = mapFromScene(event->scenePos()).x();
 	const qreal y = mapFromScene(event->scenePos()).y();
 
-	setFlag(QGraphicsItem::ItemIsMovable, dragState() == None);
+	setFlag(QGraphicsItem::ItemIsMovable, false);
 
 	if (dragState() == TopLeft) {
 		setX1(x);
@@ -256,17 +261,16 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 		setY2(y);
 		reshapeEndWithGrid(indexGrid);
 	} else {
-		auto newPos = QPointF(alignedCoordinate(pos().x(), indexGrid),
-				alignedCoordinate(pos().y(), indexGrid));
-		setPos(newPos);
-		update();
+		setPos(mEstimatedPos);
+		moveBy(alignedCoordinate(begin().x(), indexGrid) - begin().x()
+			   , alignedCoordinate(begin().y(), indexGrid) - begin().y());
 	}
 }
 
 void WallItem::reshapeEndWithGrid(int indexGrid)
 {
-	setX2(alignedCoordinate(x2(), indexGrid));
-	setY2(alignedCoordinate(y2(), indexGrid));
+	setX2(alignedCoordinate(end().x(), indexGrid) - pos().x());
+	setY2(alignedCoordinate(end().y(), indexGrid) - pos().y());
 
 	mCellNumbX2 = x2() / indexGrid;
 	mCellNumbY2 = y2() / indexGrid;
@@ -274,8 +278,9 @@ void WallItem::reshapeEndWithGrid(int indexGrid)
 
 void WallItem::reshapeBeginWithGrid(int indexGrid)
 {
-	setX1(alignedCoordinate(x1(), indexGrid));
-	setY1(alignedCoordinate(y1(), indexGrid));
+	setX1(alignedCoordinate(begin().x(), indexGrid) - pos().x());
+	setY1(alignedCoordinate(begin().y(), indexGrid) - pos().y());
+
 	mCellNumbX1 = x1() / indexGrid;
 	mCellNumbY1 = y1() / indexGrid;
 }
