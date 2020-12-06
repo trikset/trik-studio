@@ -77,7 +77,7 @@
         <translation>Блоки</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+49"/>
         <source>Configure devices</source>
         <translation>Настройки сенсоров</translation>
     </message>
@@ -240,7 +240,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-65"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-66"/>
         <source>Miscellaneous</source>
         <translation>Прочее</translation>
     </message>
@@ -250,7 +250,7 @@
         <translation>Консоль робота</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+32"/>
         <source>edit mode</source>
         <translation>режим редактирования</translation>
     </message>
@@ -260,7 +260,7 @@
         <translation>режим отладки</translation>
     </message>
     <message>
-        <location line="+162"/>
+        <location line="+151"/>
         <source>Edit mode</source>
         <translation>Режим редактирования</translation>
     </message>
