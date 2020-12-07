@@ -27,6 +27,7 @@
 #include <qrgui/textEditor/languageInfo.h>
 #include <trikKernel/fileUtils.h>
 #include <trikNetwork/mailboxFactory.h>
+#include <qrkernel/settingsManager.h>
 
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
@@ -65,7 +66,7 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
 		, bool enablePython)
 	: mBrick(model)
-	, mMailbox(trikNetwork::MailboxFactory::create(8889))
+	, mMailbox(qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()? trikNetwork::MailboxFactory::create(8889): nullptr)
 	, mScriptRunner(mBrick, mMailbox, new TwoDExecutionControl(mBrick, model))
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
