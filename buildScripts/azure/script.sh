@@ -1,7 +1,6 @@
 #!/bin/bash
 set -ueo pipefail
-df -h .
-echo "Started $AGENT_OS build"
+
 CODECOV=true
 case $AGENT_OS in
   Darwin)
@@ -51,8 +50,7 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
    }\
 "
 
-echo "Starting:  $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh"
 df -h .
-$EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
+$EXECUTOR bash -ic buildScripts/azure/checkStatus.sh
 
 $CODECOV
