@@ -323,6 +323,13 @@ QVariant ValuesFactory::propertyOf(const QVariantList &list, const QString &prop
 		return list.isEmpty();
 	}
 
+	// Accessing list element by index
+	bool isInt;
+	auto index = property.toInt(&isInt);
+	if (isInt && index >= 0 && index < list.size()) {
+		return list.at(index);
+	}
+
 	ok && (*ok = false);
 	return QVariant();
 }
