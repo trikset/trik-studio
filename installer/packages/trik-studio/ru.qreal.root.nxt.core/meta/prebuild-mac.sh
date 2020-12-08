@@ -22,7 +22,7 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-nxt-generator-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-nxt-kit.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqextserialport.1.0.0.dylib"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.dylib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.0.dylib"
 
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins
