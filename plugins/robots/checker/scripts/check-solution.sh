@@ -110,6 +110,7 @@ mkdir -p "$(pwd)/trajectories/$fileNameWithoutExtension"
 if [ ! -f "$mainFolderWithFields/no-check-self" ]; then
 	log "Running save with its own field"
 
+	ulimit -vS 4000000
 	$TIMELIM "$twoDModel" --platform minimal -b "$fileWithPath" \
 			--report "$(pwd)/reports/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
 			--trajectory "$(pwd)/trajectories/$fileNameWithoutExtension/_$fileNameWithoutExtension" \
