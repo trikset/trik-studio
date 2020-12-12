@@ -48,6 +48,9 @@ int TwoDExecutionControl::random(int from, int to) const
 	return r->random(from, to);
 }
 
+// Secret function from QtCore
+uint qGlobalPostedEventsCount();
+
 void TwoDExecutionControl::wait(const int &milliseconds)
 {
 	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
@@ -65,11 +68,14 @@ void TwoDExecutionControl::wait(const int &milliseconds)
 	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
 	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
 
-	if (milliseconds == 0) {
-		QApplication::processEvents();
-	} else if (timeline->isStarted()) {
+	if (milliseconds != 0 && timeline->isStarted()) {
 		t->start(milliseconds);
 		loop.exec();
+	}
+
+	// Cleanup event queue of the thread
+	while(qGlobalPostedEventsCount()) {
+		QCoreApplication::sendPostedEvents();
 	}
 }
 
