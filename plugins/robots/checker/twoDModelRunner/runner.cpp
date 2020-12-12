@@ -30,29 +30,36 @@
 using namespace twoDModel;
 
 Runner::Runner(const QString &report, const QString &trajectory)
-	: mProjectManager(mQRealFacade.models())
-	, mMainWindow(mErrorReporter, mQRealFacade.events()
-			, &mProjectManager, &mQRealFacade.models().graphicalModelAssistApi())
-	, mConfigurator(mQRealFacade.models().repoControlApi()
-			, mQRealFacade.models().graphicalModelAssistApi()
-			, mQRealFacade.models().logicalModelAssistApi()
-			, mController
-			, mMainWindow
-			, mMainWindow
-			, mProjectManager
-			, mSceneCustomizer
-			, mQRealFacade.events()
-			, mTextManager)
-	, mReporter(report, trajectory)
 {
-	mPluginFacade.init(mConfigurator);
-	for (auto &&defaultSettingsFile : mPluginFacade.defaultSettingsFiles()) {
+	mQRealFacade.reset(new qReal::SystemFacade());
+	mProjectManager.reset(new qReal::ProjectManager(mQRealFacade->models()));
+	mErrorReporter.reset(new qReal::ConsoleErrorReporter());
+	mMainWindow.reset(new qReal::NullMainWindow(*mErrorReporter, mQRealFacade->events()
+				, &*mProjectManager, &mQRealFacade->models().graphicalModelAssistApi()));
+
+	mController.reset(new qReal::Controller());
+	mSceneCustomizer.reset(new qReal::gui::editor::SceneCustomizer());
+	mTextManager.reset(new qReal::NullTextManager());
+	mConfigurator.reset(new qReal::PluginConfigurator(mQRealFacade->models().repoControlApi()
+							 , mQRealFacade->models().graphicalModelAssistApi()
+							 , mQRealFacade->models().logicalModelAssistApi()
+							 , *mController
+							 , *mMainWindow
+							 , *mMainWindow
+							 , *mProjectManager
+							 , *mSceneCustomizer
+							 , mQRealFacade->events()
+							 , *mTextManager));
+	mReporter.reset(new Reporter(report, trajectory));
+	mPluginFacade.reset(new interpreterCore::RobotsPluginFacade());
+	mPluginFacade->init(*mConfigurator);
+	for (auto &&defaultSettingsFile : mPluginFacade->defaultSettingsFiles()) {
 		qReal::SettingsManager::loadDefaultSettings(defaultSettingsFile);
 	}
 
-	connect(&mErrorReporter, &qReal::ConsoleErrorReporter::informationAdded, &mReporter, &Reporter::addInformation);
-	connect(&mErrorReporter, &qReal::ConsoleErrorReporter::errorAdded, &mReporter, &Reporter::addError);
-	connect(&mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &mReporter, &Reporter::addError);
+	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::informationAdded, &*mReporter, &Reporter::addInformation);
+	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::errorAdded, &*mReporter, &Reporter::addError);
+	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &*mReporter, &Reporter::addError);
 }
 
 Runner::Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode)
@@ -65,14 +72,24 @@ Runner::Runner(const QString &report, const QString &trajectory, const QString &
 
 Runner::~Runner()
 {
-	mReporter.onInterpretationEnd();
-	mReporter.reportMessages();
+	mReporter->onInterpretationEnd();
+	mReporter->reportMessages();
+	mPluginFacade.reset();
+	mReporter.reset();
+	mConfigurator.reset();
+	mTextManager.reset();
+	mSceneCustomizer.reset();
+	mController.reset();
+	mMainWindow.reset();
+	mErrorReporter.reset();
+	mProjectManager.reset();
+	mQRealFacade.reset();
 }
 
 bool Runner::interpret(const QString &saveFile, const bool background
 					   , const int customSpeedFactor, const bool closeOnSuccess, const bool showConsole)
 {
-	if (!mProjectManager.open(saveFile)) {
+	if (!mProjectManager->open(saveFile)) {
 		return false;
 	}
 
@@ -89,15 +106,15 @@ bool Runner::interpret(const QString &saveFile, const bool background
 		}
 	}
 
-	connect(&mPluginFacade.eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
+	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
 			, this, [this, background, closeOnSuccess](qReal::interpretation::StopReason reason) {
 		if (background || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 
 	for (auto &&twoDModelWindow : twoDModelWindows) {
-		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &mMainWindow
-				, [this]() { this->mMainWindow.emulateClose(); });
+		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &*mMainWindow
+				, [this]() { this->mMainWindow->emulateClose(); });
 
 		if (showConsole) {
 			attachNewConsoleTo(twoDModelWindow);
@@ -110,11 +127,11 @@ bool Runner::interpret(const QString &saveFile, const bool background
 		}
 	}
 
-	mReporter.onInterpretationStart();
+	mReporter->onInterpretationStart();
 	if (mMode == "script") {
-		return mPluginFacade.interpretCode(mInputsFile);
+		return mPluginFacade->interpretCode(mInputsFile);
 	} else if (mMode == "diagram") {
-		mPluginFacade.actionsManager().runAction().trigger();
+		mPluginFacade->actionsManager().runAction().trigger();
 	}
 
 	return true;
@@ -143,9 +160,9 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal:
 
 void Runner::onRobotRided(const QPointF &newPosition, const qreal newRotation)
 {
-	mReporter.newTrajectoryPoint(
+	mReporter->newTrajectoryPoint(
 			static_cast<model::RobotModel *>(sender())->info().robotId()
-			, mPluginFacade.interpreter().timeElapsed()
+			, mPluginFacade->interpreter().timeElapsed()
 			, newPosition
 			, newRotation
 			);
@@ -156,8 +173,8 @@ void Runner::onDeviceStateChanged(const QString &robotId
 		, const QString &property
 		, const QVariant &value)
 {
-	mReporter.newDeviceState(robotId
-			, mPluginFacade.interpreter().timeElapsed()
+	mReporter->newDeviceState(robotId
+			, mPluginFacade->interpreter().timeElapsed()
 			, device->deviceInfo().name()
 			, device->port().name()
 			, property
@@ -169,7 +186,7 @@ void Runner::attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow)
 {
 	qReal::ui::ConsoleDock* console = nullptr;
 	if (auto layout = dynamic_cast<QGridLayout*>(twoDModelWindow->layout())) {
-		console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow.windowWidget());
+		console = new qReal::ui::ConsoleDock(tr("Robot console"), mMainWindow->windowWidget());
 		mRobotConsoles << console;
 		// TODO: hack to add console for each widget
 		layout->addWidget(console, layout->rowCount(), 0, 1, -1);
@@ -182,7 +199,7 @@ void Runner::attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow)
 
 void Runner::close()
 {
-	mMainWindow.emulateClose(mReporter.lastMessageIsError() ? 1 : 0);
+	mMainWindow->emulateClose(mReporter->lastMessageIsError() ? 1 : 0);
 	while (!mRobotConsoles.empty()) {
 		mRobotConsoles.first()->deleteLater();
 		mRobotConsoles.removeFirst();

@@ -65,12 +65,20 @@ void TwoDExecutionControl::wait(const int &milliseconds)
 	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
 	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
 
-	if (milliseconds == 0) {
-		QApplication::processEvents();
-	} else if (timeline->isStarted()) {
+	if (milliseconds != 0 && timeline->isStarted()) {
 		t->start(milliseconds);
 		loop.exec();
 	}
+
+	// We use deleteLater, these events must be dispatched somewhere in the thread ASAP, let's do it now
+	// Otherwise, lots of memory leaks here.
+	QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+	// Probably, we have other events to send/dispatch. But very rare. The line below can be commented out, actually
+	QCoreApplication::sendPostedEvents();
+	// If it is a long-running loop, it is better to process all events sometimes, let's do it now
+	// But usually we have the single event pending or few from window system.
+	// However even the single event like "Window is closing" is very useful, trust me.
+	QCoreApplication::processEvents();
 }
 
 qint64 TwoDExecutionControl::time() const
