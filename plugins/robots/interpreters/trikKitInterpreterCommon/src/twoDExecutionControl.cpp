@@ -48,9 +48,6 @@ int TwoDExecutionControl::random(int from, int to) const
 	return r->random(from, to);
 }
 
-// Secret function from QtCore
-uint qGlobalPostedEventsCount();
-
 void TwoDExecutionControl::wait(const int &milliseconds)
 {
 	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
@@ -73,10 +70,14 @@ void TwoDExecutionControl::wait(const int &milliseconds)
 		loop.exec();
 	}
 
-	// Cleanup event queue of the thread
-	while(qGlobalPostedEventsCount()) {
-		QCoreApplication::sendPostedEvents();
-	}
+	// If it is a long-running loop, it is better to process all events sometimes, let's do it now
+	// But usually we have the single event pending or few from window system
+	QCoreApplication::processEvents();
+	// Probably, we have other events to send/dispatch. But very rare. The line below can be commented out, actually
+	QCoreApplication::sendPostedEvents();
+	// We use deleteLater, these events must be dispatched somewhere in the thread ASAP, let's do it now
+	// Otherwise, lots of memory leaks here.
+	QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
 }
 
 qint64 TwoDExecutionControl::time() const
