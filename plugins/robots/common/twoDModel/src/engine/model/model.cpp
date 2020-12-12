@@ -215,7 +215,8 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF 
 
 	connect(&mTimeline, &Timeline::tick, robot, &RobotModel::recalculateParams);
 	connect(&mTimeline, &Timeline::nextFrame, robot, &RobotModel::nextFragment);
-	connect(&mTimeline, &Timeline::nextFrame, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame);
+	connect(&mTimeline, &Timeline::nextFrame
+			, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame, Qt::UniqueConnection);
 
 	robot->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
 
@@ -293,7 +294,8 @@ void Model::initPhysics()
 	connect(this, &model::Model::robotRemoved, mSimplePhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 
 	connect(&mTimeline, &Timeline::tick, this, &Model::recalculatePhysicsParams);
-	connect(&mTimeline, &Timeline::nextFrame, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame);
+	connect(&mTimeline, &Timeline::nextFrame
+			, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame, Qt::UniqueConnection);
 }
 
 void Model::recalculatePhysicsParams()
