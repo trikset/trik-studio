@@ -70,14 +70,15 @@ void TwoDExecutionControl::wait(const int &milliseconds)
 		loop.exec();
 	}
 
-	// If it is a long-running loop, it is better to process all events sometimes, let's do it now
-	// But usually we have the single event pending or few from window system
-	QCoreApplication::processEvents();
-	// Probably, we have other events to send/dispatch. But very rare. The line below can be commented out, actually
-	QCoreApplication::sendPostedEvents();
 	// We use deleteLater, these events must be dispatched somewhere in the thread ASAP, let's do it now
 	// Otherwise, lots of memory leaks here.
 	QCoreApplication::sendPostedEvents(nullptr, QEvent::DeferredDelete);
+	// Probably, we have other events to send/dispatch. But very rare. The line below can be commented out, actually
+	QCoreApplication::sendPostedEvents();
+	// If it is a long-running loop, it is better to process all events sometimes, let's do it now
+	// But usually we have the single event pending or few from window system.
+	// However even the single event like "Window is closing" is very useful, trust me.
+	QCoreApplication::processEvents();
 }
 
 qint64 TwoDExecutionControl::time() const
