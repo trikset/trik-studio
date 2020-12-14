@@ -21,5 +21,5 @@ ________________________________________
 
 ## History
 
-The TRIK Studio is based on [QReal](http://qreal.ru) project, and long time ago it was born as a plugin named QReal::Robots. Here is obsolete [README](https://github.com/qreal/qreal) from the ancestor
+The TRIK Studio is based on [QReal](https://github.com/qreal/qreal) project, and long time ago it was born as a plugin named QReal::Robots. Here is obsolete [README](https://github.com/qreal/qreal) from the ancestor
 
