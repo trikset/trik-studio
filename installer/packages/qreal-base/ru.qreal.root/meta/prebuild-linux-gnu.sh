@@ -52,18 +52,12 @@ cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../
 cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
 cp -pr $QT_DIR/lib/libQt5XcbQpa.so*                                     $PWD/../data/lib/
+cp -pr $QT_DIR/lib/libQt5WaylandC{lient,ompositor}.so*                  $PWD/../data/lib/
 #rsync -avR --copy-unsafe-links "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc,png12}.so* "$PWD/../data/lib/"
 #Take them from Qt if exist
 #rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
 
-cp     $QT_DIR/plugins/platforms/libq{xcb,minimal,offscreen}.so                             $PWD/../data/bin/platforms/
-cp     $QT_DIR/plugins/imageformats/libqsvg.so                          $PWD/../data/bin/imageformats/
-cp     $QT_DIR/plugins/imageformats/libqjpeg.so                         $PWD/../data/bin/imageformats/
-cp     $QT_DIR/plugins/iconengines/libqsvgicon.so                       $PWD/../data/bin/iconengines/
-
-#rsync -av /lib/$(uname -i)-linux-gnu/libc.so*                               $PWD/../data/lib/
-#rsync -av /lib/$(uname -i)-linux-gnu/libc-2.*.so*                               $PWD/../data/lib/
-
+rsync -avR "$QT_DIR"/plugins/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
 
 mv     $PWD/../data/acknowledgements.txt                                $PWD/../data/resources/
 mv     $PWD/../data/changelog.txt                                       $PWD/../data/resources/
