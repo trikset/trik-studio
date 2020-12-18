@@ -3,16 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-  # strategy:
-  #   matrix:
-  #     linux:
-  #       imageName: 'ubuntu-latest'
-  #     mac:
-  #       imageName: 'macos-latest'
-
-  # pool:
-  #   vmImage: $(imageName)
-
 trigger:
 - main
 
@@ -25,8 +15,6 @@ variables:
   ALL_TESTS: "./run-simulator-tests.sh"
   CACHE_DIR: $(Pipeline.Workspace)/ccache
   INSTALLER: false
-  #server: $(server)
-  #password: $(password)
 
 jobs:
 - job: Lint
@@ -48,8 +36,8 @@ jobs:
     displayName: 'vera_translation.sh'
 
 - job: Build
-  dependsOn: []
-  #condition: succeeded()
+  dependsOn: Lint
+  condition: succeeded()
 
   strategy:
     matrix:
