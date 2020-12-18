@@ -1,15 +1,14 @@
 #!/bin/bash
 set -ueo pipefail
-df -h .
-echo "Started $AGENT_OS build"
+
 CODECOV=true
-case $AGENT_OS in
-  Darwin)
+case $TRAVIS_OS_NAME in
+  osx)
      export PATH="/usr/local/opt/qt/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
-  Linux)
+  linux)
      # if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
    ;;
   *) exit 1 ;;
@@ -24,7 +23,6 @@ compression=true
 compression_level=3
 sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
 EOF
-
 $EXECUTOR bash -lic " set -xueo pipefail; \
    export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
 && ccache -p \
@@ -44,14 +42,13 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
 && sh -c 'make -j2 all 1>>build.log 2>&1' \
 && ls bin/$CONFIG \
 && { export QT_QPA_PLATFORM=minimal ; \
-     export ASAN_OPTIONS=$(if [[ $AGENT_OS == Linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
+     export ASAN_OPTIONS=$(if [[ $TRAVIS_OS_NAME == linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
      export LSAN_OPTIONS=suppressions=$PWD/bin/$CONFIG/lsan.supp:print_suppressions=0 ; \
      export DISPLAY=:0 ; \
      env QT_QPA_PLATFORM=minimal make check -k -s && ( set +eux ; cd bin/$CONFIG && $TESTS ) ; \
    }\
 "
 
-echo "Starting:  $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh"
 df -h .
 $EXECUTOR bash -ic buildScripts/travis/checkStatus.sh
 
