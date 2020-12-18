@@ -1,0 +1,88 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+variables:
+  CONFIG: release
+  QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
+  EXECUTOR: "time docker exec -i builder env BASH_ENV=/etc/profile"
+  PROJECT: studio
+  TESTS: true
+  ALL_TESTS: "./run-simulator-tests.sh"
+  CACHE_DIR: $(Pipeline.Workspace)/ccache
+  INSTALLER: false
+
+jobs:
+- job: Lint
+  variables:
+    CONFIG: debug
+    VERA: true
+    TRANSLATIONS: true
+    QMAKE_EXTRA: "$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+  - script: |
+      git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
+      buildScripts/azure/install_linux.sh
+    displayName: 'Set up enviroment'
+
+  - script: $EXECUTOR buildScripts/azure/vera_translation.sh
+    displayName: 'vera_translation.sh'
+
+- job: Build
+  dependsOn: Lint
+  condition: succeeded()
+
+  strategy:
+    matrix:
+      Linux release + tests + installer + deploy:
+        imageName: 'ubuntu-latest'
+        QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+        INSTALLER: true
+        jobName: "Linux release + tests + installer + deploy"
+      Linux debug + tests:
+        imageName: 'ubuntu-latest'
+        QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+        CONFIG: debug
+        TESTS: $ALL_TESTS
+
+  pool:
+    vmImage: $(imageName)
+
+  variables:
+    CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+    CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
+
+  steps:
+  - bash: |
+      sudo apt-get install ccache -y
+      echo "##vso[task.prependpath]/usr/lib/ccache"
+    displayName: Install ccache and update PATH
+
+  - task: Cache@2
+    inputs:
+      key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)"'
+      path: $(CCACHE_DIR)
+      restoreKeys: "ccache-$(Agent.OS)-$(CONFIG)"
+
+  - script: |
+      git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
+      buildScripts/azure/install_linux.sh
+    displayName: 'Set up enviroment'
+
+  - script: |
+      buildScripts/azure/script.sh
+    displayName: 'script.sh'
+
+  - script: |
+      $EXECUTOR ./buildScripts/azure/test.sh
+      buildScripts/azure/build_installer.sh
+    condition: eq(variables.INSTALLER, true)
+    displayName: 'Installer and deploy'
+

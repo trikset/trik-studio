@@ -1,0 +1,40 @@
+#!/bin/bash
+set -euxo pipefail
+QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
+case $AGENT_OS in
+  Darwin)
+    QTIFWBIN=$HOME/qtifw/bin
+    TSNAME=trik-studio-installer-mac-$BUILD_SOURCEBRANCH.dmg
+    ;;
+  Linux)
+    QTIFWBIN=/opt/qtifw/bin
+    #QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
+    TSNAME=trik-studio-installer-linux-$BUILD_SOURCEBRANCH.run
+    ;;
+  *) exit 1 ;;
+esac
+df -h .
+
+if [ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" ] && [ "$SYSTEM_PULLREQUEST_PULLREQUESTNUMBER" == "false" ]
+then
+#      git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+#      git fetch --unshallow --tags # for `git describe --tags` to work
+      #TODO: We can build installer and checker archive in parallel if needed
+
+      if [[ $AGENT_OS == Linux ]] ; then
+      $EXECUTOR bash -ic "\
+      echo Start build checker archive \
+      && bin/$CONFIG/build-checker-installer.sh \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-${AGENT_OS}-$CONFIG-$BUILD_SOURCEBRANCH.tar.xz \
+      || false \
+"
+      fi
+
+      $EXECUTOR bash -ic "\
+      echo Start build installer \
+      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+      && mv installer/trik-studio*installer* installer/$TSNAME \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/ \
+      || false \
+"
+fi
