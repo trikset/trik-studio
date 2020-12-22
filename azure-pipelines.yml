@@ -1,15 +1,15 @@
 trigger:
 - main
-#  env BASH_ENV=/etc/profile
+
 variables:
   CONFIG: release
   QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
   EXECUTOR: "time docker exec -i builder"
   PROJECT: studio
-  TESTS: true
   ALL_TESTS: "./run-simulator-tests.sh"
-  BUILD_TIMEOUT: 3000
+  BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
+  TRIK_PYTHON3_VERSION_MINOR: 8
 
 stages:
 - stage: LintStage
@@ -19,32 +19,45 @@ stages:
       vmImage: ubuntu-latest
 
     steps:
-    - script: |
-        git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
-        buildScripts/azure/install_linux.sh
-      displayName: 'Docker + git submodule update'
+    - checkout: self
+      fetchDepth: 1
+      submodules: recursive
 
-    - script: $EXECUTOR buildScripts/azure/vera_translation.sh
+    - bash: buildScripts/azure/install_$(Agent.OS).sh
+      displayName: 'Set up the environment'
+
+    - bash: $EXECUTOR buildScripts/azure/vera_translation.sh
       displayName: 'vera_translation.sh'
 
-
-- stage: BuildStage
+- stage: CacheableBuildStage
   dependsOn: LintStage
   condition: succeeded()
   jobs:
-  - job: CacheableBuild
+  - job: Build
     strategy:
       matrix:
         linux-release:
-            displayName: Linux release
-            imageName: 'ubuntu-latest'
-            QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          displayName: Linux release
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
         linux-debug:
-            displayName: Linux debug
-            imageName: 'ubuntu-latest'
-            QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-            CONFIG: debug
-            TESTS: $ALL_TESTS
+          displayName: Linux debug
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+          TESTS: $ALL_TESTS
+        macOS-release:
+          displayName: macOS release
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          EXECUTOR: "time"
+        macOS-debug:
+          displayName: macOS debug
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+          TESTS: $ALL_TESTS
+          EXECUTOR: "time"
 
     pool:
       vmImage: $(imageName)
@@ -52,40 +65,60 @@ stages:
       CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
+    - checkout: self
+      fetchDepth: 1
+      submodules: recursive
+    
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)" 
+
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
-        git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
-        buildScripts/azure/install_linux.sh
+        buildScripts/azure/install_$(Agent.OS).sh
       displayName: Set up the environment
     - task: Cache@2
       inputs:
         key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
         path: $(CCACHE_DIR)
-        restoreKeys: "ccache-$(Agent.OS)-$(CONFIG)"
       displayName: Cache azure task
 
-    - script: |
+    - bash: |
         buildScripts/azure/buildNoTests.sh & WPID=$!
         sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null
+        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ; 
       displayName: 'Build with buildNoTests.sh'
 
-  - job: BuildWithTests
-    dependsOn: CacheableBuild
-    condition: succeeded()
+- stage: BuildWithTestStage
+  dependsOn: CacheableBuildStage
+  condition: succeeded()
+  jobs:
+  - job: Build
     strategy:
       matrix:
         linux-release:
-            displayName: Linux release + tests
-            imageName: 'ubuntu-latest'
-            QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          displayName: Linux release
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
         linux-debug:
-            displayName: Linux debug + tests
-            imageName: 'ubuntu-latest'
-            QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-            CONFIG: debug
-            TESTS: $ALL_TESTS
+          displayName: Linux debug
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+          TESTS: $ALL_TESTS
+        macOS-release:
+          displayName: macOS release + tests
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
+          EXECUTOR: "time"
+        macOS-debug:
+          displayName: macOS debug + tests
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+          TESTS: $ALL_TESTS
+          EXECUTOR: "time"
 
     pool:
       vmImage: $(imageName)
@@ -93,55 +126,74 @@ stages:
       CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
+    - checkout: self
+      fetchDepth: 1
+      submodules: recursive
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)" 
+
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
-        git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
-        buildScripts/azure/install_linux.sh
+        buildScripts/azure/install_$(Agent.OS).sh
       displayName: Set up the environment
+
     - task: Cache@2
       inputs:
         key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
         path: $(CCACHE_DIR)
-        restoreKeys: "ccache-$(Agent.OS)-$(CONFIG)"
       displayName: Cache azure task
 
-    - script: |
-        buildScripts/azure/buildWithTests.sh
+    - bash: buildScripts/azure/buildWithTests.sh
       displayName: 'Build with buildWithTests.sh'
 
 - stage: InstallerStage
-  dependsOn: BuildStage
+  dependsOn: BuildWithTestStage
   condition: succeeded()
   jobs:
   - job: installer
-    displayName: Installer + deployment
+    strategy:
+      matrix:
+        linux-release:
+          displayName: Linux release
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+        macOS-release:
+          displayName: MacOS release
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
+          EXECUTOR: "time"
+
     variables:
-      QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
     pool:
-      vmImage: ubuntu-latest
+      vmImage: $(imageName)
 
     steps:
+    - checkout: self
+      fetchDepth: 1
+      submodules: recursive
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)" 
+
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
-        git submodule update --init --recursive --jobs 4 --depth 1 --single-branch
-        buildScripts/azure/install_linux.sh
+        buildScripts/azure/install_$(Agent.OS).sh
       displayName: Set up the environment
 
     - task: Cache@2
       inputs:
-        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)"'
+        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
         path: $(CCACHE_DIR)
-        restoreKeys: "ccache-$(Agent.OS)-$(CONFIG)"
       displayName: Cache azure task
 
-    - bash: |
-        buildScripts/azure/buildNoTests.sh
+    - bash: buildScripts/azure/buildNoTests.sh
       displayName: 'Build with buildNoTests.sh'
 
-    - bash: |
-        $EXECUTOR env CONFIG=$CONFIG ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
-      displayName: 'Installer and deploy'
-
+    - bash: $EXECUTOR env CONFIG=$CONFIG ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
+      displayName: 'Build installer and deploy'
