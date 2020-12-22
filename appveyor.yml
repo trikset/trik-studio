@@ -9,7 +9,9 @@ skip_commits:
   files:
     - '**/lsan.supp'
     - 'buildScripts/travis/*'
+    - 'buildScripts/azure/*'
     - 'buildScripts/docker/*'
+    - 'azure-pipelines.yml'
     - '.cirrus.yml'
     - '.travis.yml'
     - '.mergify.yml'

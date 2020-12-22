@@ -110,10 +110,6 @@ stages:
         buildScripts/azure/buildWithTests.sh
       displayName: 'Build with buildWithTests.sh'
 
-    - publish: "build-status"
-      artifact: "status-$(Agent.OS)-$(CONFIG)"
-
-
 - stage: InstallerStage
   dependsOn: BuildStage
   condition: succeeded()
@@ -126,6 +122,7 @@ stages:
     pool:
       vmImage: ubuntu-latest
 
+    steps:
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
