@@ -137,12 +137,11 @@ stages:
         restoreKeys: "ccache-$(Agent.OS)-$(CONFIG)"
       displayName: Cache azure task
 
-    - script: | 
+    - bash: |
         buildScripts/azure/buildNoTests.sh
       displayName: 'Build with buildNoTests.sh'
 
-    - script: |
-        $EXECUTOR ./buildScripts/azure/test.sh
-        buildScripts/azure/build_installer.sh
+    - bash: |
+        $EXECUTOR env CONFIG=$CONFIG ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
       displayName: 'Installer and deploy'
 
