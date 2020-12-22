@@ -126,6 +126,7 @@ stages:
     pool:
       vmImage: ubuntu-latest
 
+    steps:
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
