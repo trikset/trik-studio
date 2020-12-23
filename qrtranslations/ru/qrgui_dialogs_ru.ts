@@ -75,7 +75,7 @@
     <message>
         <location line="+32"/>
         <source>Add Argument</source>
-        <translation type="unfinished">обавить аргумент</translation>
+        <translation>Добавить аргумент</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -616,7 +616,7 @@
     <message>
         <location line="+4"/>
         <source>Name should start with a letter(row %1)</source>
-        <translation type="unfinished">Имя аргумента должно начинаться с буквы (строка %1)</translation>
+        <translation>Имя аргумента должно начинаться с буквы (строка %1)</translation>
     </message>
     <message>
         <location line="+11"/>
