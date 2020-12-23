@@ -6,6 +6,7 @@ variables:
   QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
   EXECUTOR: "time docker exec -i builder"
   PROJECT: studio
+  TESTS: true
   ALL_TESTS: "./run-simulator-tests.sh"
   BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
@@ -69,10 +70,6 @@ stages:
       fetchDepth: 1
       submodules: recursive
 
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)"
-
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
@@ -130,10 +127,6 @@ stages:
       fetchDepth: 1
       submodules: recursive
 
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)"
-
     - bash: |
         sudo apt-get install ccache -y
         echo "##vso[task.prependpath]/usr/lib/ccache"
@@ -175,10 +168,6 @@ stages:
     - checkout: self
       fetchDepth: 1
       submodules: recursive
-
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)"
 
     - bash: |
         sudo apt-get install ccache -y
