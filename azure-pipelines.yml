@@ -10,7 +10,6 @@ variables:
   ALL_TESTS: "./run-simulator-tests.sh"
   BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
-  TRIK_PYTHON3_VERSION_MINOR: 8
 
 stages:
 - stage: LintStage
