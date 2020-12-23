@@ -68,10 +68,10 @@ stages:
     - checkout: self
       fetchDepth: 1
       submodules: recursive
-    
+
     - task: UsePythonVersion@0
       inputs:
-        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)" 
+        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)"
 
     - bash: |
         sudo apt-get install ccache -y
@@ -87,7 +87,7 @@ stages:
     - bash: |
         buildScripts/azure/buildNoTests.sh & WPID=$!
         sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ; 
+        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
       displayName: 'Build with buildNoTests.sh'
 
 - stage: BuildWithTestStage
@@ -132,7 +132,7 @@ stages:
 
     - task: UsePythonVersion@0
       inputs:
-        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)" 
+        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)"
 
     - bash: |
         sudo apt-get install ccache -y
@@ -178,7 +178,7 @@ stages:
 
     - task: UsePythonVersion@0
       inputs:
-        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)" 
+        versionSpec: "3.$(TRIK_PYTHON3_VERSION_MINOR)"
 
     - bash: |
         sudo apt-get install ccache -y
