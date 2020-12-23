@@ -263,7 +263,7 @@ void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
 	mEstimatedPos += event->scenePos() - event->lastScenePos();
 	const auto showGrid = SettingsManager::value("2dShowGrid").toBool();
-	if (!showGrid || event->modifiers() != Qt::ShiftModifier) {
+	if (!showGrid || event->modifiers() == Qt::ControlModifier) {
 		if (dragState() != None) {
 			calcResizeItem(event);
 		} else {

@@ -87,6 +87,7 @@ void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event)
 	if (!mGraphicsItem) return;
 	auto oldPos = mGraphicsItem->pos();
 	reshapeItem(event, mGraphicsItem);
+	if (selectedItems().size() < 2) return;
 	auto delta = mGraphicsItem->pos() - oldPos;
 	if (mGraphicsItem->isSelected()) {
 		mGraphicsItem->setPos(oldPos);
