@@ -4,6 +4,7 @@ set -ueo pipefail
 CODECOV=true
 case $AGENT_OS in
   Darwin)
+     export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
      export PATH="/usr/local/opt/qt/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
