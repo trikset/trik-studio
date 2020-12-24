@@ -9,20 +9,68 @@ variables:
   PROJECT: studio
   TESTS: true
   ALL_TESTS: "./run-simulator-tests.sh"
-  BUILD_TIMEOUT: 2800
+  BUILD_TIMEOUT: 120
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
 
+parameters:
+  - name: checkoutStep
+    type: step
+    default:
+      checkout: self
+      fetchDepth: 1
+      submodules: recursive
+
+  - name: environmentStep
+    type: step
+    default:
+      bash: |
+        if [[ "$AGENT_OS" == Linux ]] ; then sudo apt-get install -y ccache ; else brew install --HEAD ccache; fi
+        buildScripts/azure/install_$(Agent.OS).sh
+      displayName: Set up the environment
+
+  - name: cacheStep
+    type: step
+    default:
+      task: Cache@2
+      inputs:
+        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
+        path: $(CCACHE_DIR)
+      displayName: Cache azure task
+
+  - name: buildNoTestsStep
+    type: step
+    default:
+      bash: |
+        buildScripts/azure/buildNoTests.sh & WPID=$!
+        sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
+        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
+      displayName: 'Build with buildNoTests.sh'
+
+  - name: buildWithTestsStep
+    type: step
+    default:
+      bash: buildScripts/azure/buildWithTests.sh
+      displayName: 'Build with buildWithTests.sh'
+
+  - name: buildInstallerStep
+    type: step
+    default:
+      bash: $EXECUTOR env CONFIG=$CONFIG ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
+      env:
+        password: $(server_password)
+        server: $(server_name)
+      displayName: 'Build installer and deploy'
+
 stages:
-- stage: LintStage
+- stage: lintStage
+  displayName: Lint stage
   jobs:
   - job: Lint
     pool:
       vmImage: ubuntu-latest
 
     steps:
-    - checkout: self
-      fetchDepth: 1
-      submodules: recursive
+    - ${{ parameters.checkoutStep }}
 
     - bash: buildScripts/azure/install_$(Agent.OS).sh
       displayName: 'Set up the environment'
@@ -30,30 +78,47 @@ stages:
     - bash: $EXECUTOR buildScripts/azure/vera_translation.sh
       displayName: 'vera_translation.sh'
 
-- stage: CacheableBuildStage
-  dependsOn: LintStage
+- stage: linuxCacheableBuildStage
+  displayName: Linux cache build
+  dependsOn: lintStage
   condition: succeeded()
   jobs:
   - job: Build
     strategy:
       matrix:
-        linux-release:
-          displayName: Linux release
+        Linux release:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-        linux-debug:
-          displayName: Linux debug
+        Linux debug:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
-        macOS-release:
-          displayName: macOS release
+
+    pool:
+      vmImage: $(imageName)
+    variables:
+      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+
+- stage: macOSCacheableBuildStage
+  displayName: MacOS cache build
+  dependsOn: lintStage
+  condition: succeeded()
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        MacOS release:
           imageName: 'macOS-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
-        macOS-debug:
-          displayName: macOS debug
+        MacOS debug:
           imageName: 'macOS-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
@@ -66,50 +131,51 @@ stages:
       CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
-    - checkout: self
-      fetchDepth: 1
-      submodules: recursive
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
 
-    - bash: |
-        if [[ "$AGENT_OS" == Linux ]] ; then sudo apt-get install -y ccache ; else brew install --HEAD ccache; fi
-        buildScripts/azure/install_$(Agent.OS).sh
-      displayName: Set up the environment
-    - task: Cache@2
-      inputs:
-        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
-        path: $(CCACHE_DIR)
-      displayName: Cache azure task
-
-    - bash: |
-        buildScripts/azure/buildNoTests.sh & WPID=$!
-        sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
-      displayName: 'Build with buildNoTests.sh'
-
-- stage: BuildWithTestStage
-  dependsOn: CacheableBuildStage
+- stage: linuxBuildWithTestsStage
+  displayName: Linux build with tests
+  dependsOn: linuxCacheableBuildStage
   condition: succeeded()
   jobs:
   - job: Build
     strategy:
       matrix:
-        linux-release:
-          displayName: Linux release
+        Linux release + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-        linux-debug:
-          displayName: Linux debug
+        Linux debug + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
-        macOS-release:
-          displayName: macOS release + tests
+
+    pool:
+      vmImage: $(imageName)
+    variables:
+      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildWithTestsStep }}
+
+- stage: macOSBuildWithTestsStage
+  displayName: MacOs build with tests
+  dependsOn: macOSCacheableBuildStage
+  condition: succeeded()
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        MacOS release + tests:
           imageName: 'macOS-latest'
-          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
-        macOS-debug:
-          displayName: macOS debug + tests
+        macOS debug + tests:
           imageName: 'macOS-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
@@ -120,69 +186,49 @@ stages:
       vmImage: $(imageName)
     variables:
       CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
-
     steps:
-    - checkout: self
-      fetchDepth: 1
-      submodules: recursive
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildWithTestsStep }}
 
-    - bash: |
-        if [[ "$AGENT_OS" == Linux ]] ; then sudo apt-get install -y ccache ; else brew install --HEAD ccache; fi
-        buildScripts/azure/install_$(Agent.OS).sh
-      displayName: Set up the environment
-
-    - task: Cache@2
-      inputs:
-        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
-        path: $(CCACHE_DIR)
-      displayName: Cache azure task
-
-    - bash: buildScripts/azure/buildWithTests.sh
-      displayName: 'Build with buildWithTests.sh'
-
-- stage: InstallerStage
-  dependsOn: BuildWithTestStage
+- stage: linuxInstallerStage
+  displayName: Linux installer
+  dependsOn: linuxBuildWithTestsStage
   condition: succeeded()
   jobs:
   - job: installer
-    strategy:
-      matrix:
-        linux-release:
-          displayName: Linux release
-          imageName: 'ubuntu-latest'
-          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-        macOS-release:
-          displayName: MacOS release
-          imageName: 'macOS-latest'
-          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
-          EXECUTOR: "time"
-
+    displayName: "Test, installer, deploy"
     variables:
+      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
     pool:
-      vmImage: $(imageName)
+      vmImage: 'ubuntu-latest'
 
     steps:
-    - checkout: self
-      fetchDepth: 1
-      submodules: recursive
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+    - ${{ parameters.buildInstallerStep }}
 
-    - bash: |
-        if [[ "$AGENT_OS" == Linux ]] ; then sudo apt-get install -y ccache ; else brew install --HEAD ccache; fi
-        buildScripts/azure/install_$(Agent.OS).sh
-      displayName: Set up the environment
+- stage: macOsInstallerStage
+  displayName: MacOs installer
+  dependsOn: macOSBuildWithTestsStage
+  condition: succeeded()
+  jobs:
+  - job: installer
+    displayName: "Test, installer, deploy"
+    variables:
+      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      EXECUTOR: "time"
+      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+    pool:
+      vmImage: 'macOS-latest'
 
-    - task: Cache@2
-      inputs:
-        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
-        path: $(CCACHE_DIR)
-      displayName: Cache azure task
-
-    - bash: buildScripts/azure/buildNoTests.sh
-      displayName: 'Build with buildNoTests.sh'
-
-    - bash: $EXECUTOR env CONFIG=$CONFIG ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
-      env:
-        password: $(server_password)
-        server: $(server_name)
-      displayName: 'Build installer and deploy'
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+    - ${{ parameters.buildInstallerStep }}
