@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-if [ ! -z ${TRIK_PYTHON3_VERSION_MINOR+x} ]; then export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"; fi
+if [ $AGENT_OS = Darwin ]; then export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"; fi
 [ -r tests_qrs.7z ] || curl -Lo tests_qrs.7z https://dl.trikset.com/edu/.solutions20200701/testing_small.7z
 7z -y x tests_qrs.7z
 env ASAN_OPTIONS=use_sigaltstack=0 \
