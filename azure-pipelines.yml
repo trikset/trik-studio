@@ -9,7 +9,7 @@ variables:
   PROJECT: studio
   TESTS: true
   ALL_TESTS: "./run-simulator-tests.sh"
-  BUILD_TIMEOUT: 120
+  BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
 
 parameters:
