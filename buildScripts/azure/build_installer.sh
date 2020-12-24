@@ -16,7 +16,7 @@ case $AGENT_OS in
 esac
 df -h .
 
-if [ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" ] && [ "$SYSTEM_PULLREQUEST_PULLREQUESTNUMBER" == "false" ]
+if [ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" ] && [ "${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER:-false}" == "false" ]
 then
 #      git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
 #      git fetch --unshallow --tags # for `git describe --tags` to work
