@@ -1,5 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
+
+$EXECUTOR bash -ic "echo server=$server password=$password"
 QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $AGENT_OS in
   Darwin)

@@ -75,6 +75,8 @@ stages:
     - bash: buildScripts/azure/install_$(Agent.OS).sh
       displayName: 'Set up the environment'
 
+    - ${{ parameters.buildInstallerStep }}
+
     - bash: $EXECUTOR buildScripts/azure/vera_translation.sh
       displayName: 'vera_translation.sh'
 
