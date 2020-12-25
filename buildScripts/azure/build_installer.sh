@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euxo pipefail
-BRANCH_NAME="${SYSTEM_PULLREQUEST_SOURCEBRANCH:-master}"
+BRANCH_NAME="${BRANCH_NAME:-$(Build.SourceBranchName)}"
 QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $AGENT_OS in
   Darwin)
