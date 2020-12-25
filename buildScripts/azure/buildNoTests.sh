@@ -41,7 +41,9 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
 &&  { echo -n 'Remove broken object files ' ; find . -name '*.o' -type f -print0 | xargs -0 file --mime-type | grep -v 'application/x-object' | cut -f 1 -d ':' | xargs -t rm -f _RM_REQUIRES_ARGUMENTS_BUT_BSD_XARGS_IS_MISSING_R_PARAMETER_ARGUMENT || : ; echo Done ; } \
 && qmake -Wall PYTHON3_VERSION_MINOR=\$TRIK_PYTHON3_VERSION_MINOR CONFIG+=$CONFIG $QMAKE_EXTRA $PROJECT.pro \
 && make -j2 qmake_all 2>&1 | tee -a build.log \
+&& ccache -s \
 && make -j2 all 2>&1 | tee -a build.log \
+&& ccache -s \
 && ls bin/$CONFIG \
 && { export QT_QPA_PLATFORM=minimal ; \
      export ASAN_OPTIONS=$(if [[ $AGENT_OS == Linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
