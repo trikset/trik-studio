@@ -55,7 +55,7 @@ parameters:
   - name: buildInstallerStep
     type: step
     default:
-      bash: $EXECUTOR env CONFIG=$CONFIG ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
+      bash: $EXECUTOR env CONFIG=$CONFIG AGENT_OS=$(Agent.OS) ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
       env:
         password: $(server_password)
         server: $(server_name)
