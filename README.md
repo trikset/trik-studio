@@ -1,5 +1,5 @@
 
-[![Build Status](https://img.shields.io/travis/trikset/trik-studio/master.svg?maxAge=3600&style=for-the-badge&logo=linux&logoColor=green)](https://travis-ci.com/trikset/trik-studio)
+[![Build Status](https://dev.azure.com/trikset/trik-studio/_apis/build/status/trikset.trik-studio?branchName=master)](https://dev.azure.com/trikset/trik-studio/_build/latest?definitionId=1&branchName=master)
 [![Build status](https://img.shields.io/appveyor/ci/iakov/trik-studio-7oqgo/master.svg?maxAge=3600&style=for-the-badge&logo=windows&logoColor=green)](https://ci.appveyor.com/project/iakov/trik-studio-7oqgo/branch/master)
 
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=trikset/trik-studio)](https://dependabot.com)
@@ -22,4 +22,3 @@ ________________________________________
 ## History
 
 The TRIK Studio is based on [QReal](https://github.com/qreal/qreal) project, and long time ago it was born as a plugin named QReal::Robots. Here is obsolete [README](https://github.com/qreal/qreal) from the ancestor
-
