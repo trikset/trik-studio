@@ -4,13 +4,13 @@ QTBIN=${QTBIN:-$($EXECUTOR  bash -c "make qmake -n | sed 's#/qmake.*\$##g'")}
 case $AGENT_OS in
   Darwin)
     QTIFWBIN=$HOME/qtifw/bin
-    TSNAME=trik-studio-installer-mac-$BUILD_SOURCEBRANCH.dmg
+    TSNAME=trik-studio-installer-mac-$SYSTEM_PULLREQUEST_TARGETBRANCH.dmg
     export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
     ;;
   Linux)
     QTIFWBIN=/opt/qtifw/bin
     #QTIFWBIN=$($EXECUTOR bash -c  'find /Qt/Tools/QtInstallerFramework/ -maxdepth 2 -name bin -type d -print0 | sort -Vrz | head -zn 1')
-    TSNAME=trik-studio-installer-linux-$BUILD_SOURCEBRANCH.run
+    TSNAME=trik-studio-installer-linux-$SYSTEM_PULLREQUEST_TARGETBRANCH.run
     ;;
   *) exit 1 ;;
 esac
@@ -26,7 +26,7 @@ then
       $EXECUTOR bash -ic "\
       echo Start build checker archive \
       && bin/$CONFIG/build-checker-installer.sh \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-${AGENT_OS}-$CONFIG-$BUILD_SOURCEBRANCH.tar.xz \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-${AGENT_OS}-$CONFIG-$SYSTEM_PULLREQUEST_TARGETBRANCH.tar.xz \
       || false \
 "
       fi

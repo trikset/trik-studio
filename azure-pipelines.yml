@@ -23,9 +23,7 @@ parameters:
   - name: environmentStep
     type: step
     default:
-      bash: |
-        if [[ "$AGENT_OS" == Linux ]] ; then sudo apt-get install -y ccache ; else brew install --HEAD ccache; fi
-        buildScripts/azure/install_$(Agent.OS).sh
+      bash: buildScripts/azure/install_$(Agent.OS).sh
       displayName: Set up the environment
 
   - name: cacheStep
@@ -57,8 +55,8 @@ parameters:
     default:
       bash: $EXECUTOR env CONFIG=$CONFIG AGENT_OS=$(Agent.OS) ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
       env:
-        password: $(server_password)
-        server: $(server_name)
+        password: $(SERVER_PASSWORD)
+        server: $(SERVER_NAME)
       displayName: 'Build installer and deploy'
 
 stages:
