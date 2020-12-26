@@ -11,6 +11,7 @@ variables:
   ALL_TESTS: "./run-simulator-tests.sh"
   BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
+  CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
 parameters:
   - name: checkoutStep
@@ -99,11 +100,8 @@ stages:
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
     - ${{ parameters.checkoutStep }}
@@ -129,11 +127,8 @@ stages:
           CONFIG: debug
           TESTS: $ALL_TESTS
           EXECUTOR: "time"
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
     - ${{ parameters.checkoutStep }}
@@ -157,11 +152,9 @@ stages:
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+
     steps:
     - ${{ parameters.checkoutStep }}
     - ${{ parameters.environmentStep }}
@@ -186,11 +179,9 @@ stages:
           CONFIG: debug
           TESTS: $ALL_TESTS
           EXECUTOR: "time"
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+
     steps:
     - ${{ parameters.checkoutStep }}
     - ${{ parameters.environmentStep }}
@@ -206,7 +197,6 @@ stages:
     displayName: "Test, installer, deploy"
     variables:
       QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -228,7 +218,6 @@ stages:
     variables:
       QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       EXECUTOR: "time"
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
     pool:
       vmImage: 'macOS-latest'
 
