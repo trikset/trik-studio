@@ -11,6 +11,7 @@ variables:
   ALL_TESTS: "./run-simulator-tests.sh"
   BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
+  CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
 parameters:
   - name: checkoutStep
@@ -23,9 +24,7 @@ parameters:
   - name: environmentStep
     type: step
     default:
-      bash: |
-        if [[ "$AGENT_OS" == Linux ]] ; then sudo apt-get install -y ccache ; else brew install --HEAD ccache; fi
-        buildScripts/azure/install_$(Agent.OS).sh
+      bash: buildScripts/azure/install_$(Agent.OS).sh
       displayName: Set up the environment
 
   - name: cacheStep
@@ -57,9 +56,16 @@ parameters:
     default:
       bash: $EXECUTOR env CONFIG=$CONFIG AGENT_OS=$(Agent.OS) ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
       env:
-        password: $(server_password)
-        server: $(server_name)
+        password: $(SERVER_PASSWORD)
+        server: $(SERVER_NAME)
       displayName: 'Build installer and deploy'
+
+  - name: setTagNameStep
+    type: step
+    default:
+      bash: export BRANCH_NAME="$(git describe --exact-match $(Build.SourceVersion))"
+      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+      displayName:  'Tag name as an environment variable'
 
 stages:
 - stage: lintStage
@@ -94,11 +100,8 @@ stages:
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
     - ${{ parameters.checkoutStep }}
@@ -124,11 +127,8 @@ stages:
           CONFIG: debug
           TESTS: $ALL_TESTS
           EXECUTOR: "time"
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
     steps:
     - ${{ parameters.checkoutStep }}
@@ -152,11 +152,9 @@ stages:
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+
     steps:
     - ${{ parameters.checkoutStep }}
     - ${{ parameters.environmentStep }}
@@ -181,11 +179,9 @@ stages:
           CONFIG: debug
           TESTS: $ALL_TESTS
           EXECUTOR: "time"
-
     pool:
       vmImage: $(imageName)
-    variables:
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+
     steps:
     - ${{ parameters.checkoutStep }}
     - ${{ parameters.environmentStep }}
@@ -201,7 +197,6 @@ stages:
     displayName: "Test, installer, deploy"
     variables:
       QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -210,6 +205,7 @@ stages:
     - ${{ parameters.environmentStep }}
     - ${{ parameters.cacheStep }}
     - ${{ parameters.buildNoTestsStep }}
+    - ${{ parameters.setTagNameStep }}
     - ${{ parameters.buildInstallerStep }}
 
 - stage: macOsInstallerStage
@@ -222,7 +218,6 @@ stages:
     variables:
       QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       EXECUTOR: "time"
-      CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
     pool:
       vmImage: 'macOS-latest'
 
@@ -231,4 +226,5 @@ stages:
     - ${{ parameters.environmentStep }}
     - ${{ parameters.cacheStep }}
     - ${{ parameters.buildNoTestsStep }}
+    - ${{ parameters.setTagNameStep }}
     - ${{ parameters.buildInstallerStep }}
