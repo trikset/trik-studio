@@ -30,6 +30,4 @@ public:
 
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
 			, const QPoint &topLeftPicture);
-private:
-	graphicsUtils::RectangleImpl mRectangleImpl;
 };

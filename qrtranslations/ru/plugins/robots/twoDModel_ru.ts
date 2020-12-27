@@ -593,7 +593,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+75"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+78"/>
         <source>Image (I)</source>
         <translation>Картинка (I)</translation>
     </message>
@@ -633,7 +633,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+62"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+60"/>
         <source>Wall (W)</source>
         <translation>Стена (W)</translation>
     </message>
@@ -1014,9 +1014,13 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
         <source>Select image</source>
-        <translation>Выберите картинку</translation>
+        <translation type="vanished">Выберите картинку</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
+        <source>Select images</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1024,7 +1028,7 @@
         <translation>Графика (*.*)</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+14"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1040,8 +1044,12 @@
     </message>
     <message>
         <location line="+1"/>
+        <source>Cannot load %1. Try another file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot load file. Try another one.</source>
-        <translation>Невозможно загрузить выбранный файл. Попробуйте другой.</translation>
+        <translation type="vanished">Невозможно загрузить выбранный файл. Попробуйте другой.</translation>
     </message>
 </context>
 <context>
@@ -1109,7 +1117,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+339"/>
+        <location line="+337"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
@@ -1119,7 +1127,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+168"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

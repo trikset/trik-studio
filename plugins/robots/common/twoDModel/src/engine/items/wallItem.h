@@ -53,8 +53,6 @@ public:
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	void reshapeRectWithShift() override;
 
-	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
-
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
 
@@ -78,22 +76,13 @@ protected:
 private:
 	void recalculateBorders();
 
-	qreal alignedCoordinate(qreal coord, int coef, const int indexGrid) const;
-	void setBeginCoordinatesWithGrid(int indexGrid);
-	void setEndCoordinatesWithGrid(int indexGrid);
-	void countCellNumbCoordinates(int indexGrid);
-
 	graphicsUtils::LineImpl mLineImpl;
 
 	const QImage mImage;
 
-	int mCellNumbX1 = 0;
-	int mCellNumbY1 = 0;
-	int mCellNumbX2 = 0;
-	int mCellNumbY2 = 0;
-
 	QPainterPath mPath;
 	int mWallWidth {10};
+	QPointF mEstimatedPos;
 };
 
 }

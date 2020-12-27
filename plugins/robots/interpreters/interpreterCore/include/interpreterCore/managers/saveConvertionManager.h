@@ -75,7 +75,7 @@ private:
 	static qReal::IdList elementsOfRobotsDiagrams(const qReal::LogicalModelAssistInterface &logicalApi);
 	static QString editor();
 	static void reconnectEdges(const qReal::Id &newBlock, const qReal::Id &block
-							   , qReal::GraphicalModelAssistInterface &graphicalApi);
+							   , qReal::details::ModelsAssistInterface &Api);
 
 	/// Helper method, creates "typical" that applies a list of filters to a block if block satisfies given condition.
 	/// @param oldVersion - version from which converter can convert.

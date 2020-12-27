@@ -786,9 +786,7 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 
 void TwoDModelWidget::setCompactMode(bool enabled)
 {
-	mCompactMode = enabled;
-	setRunStopButtonsVisibility();
-	mActions->setSaveLoadActionsShortcutsEnabled(!mCompactMode);
+	mActions->setSaveLoadActionsShortcutsEnabled(!enabled);
 }
 
 QString TwoDModelWidget::editorId() const
@@ -860,8 +858,8 @@ void TwoDModelWidget::setDetailsVisibility(bool visible)
 
 void TwoDModelWidget::setRunStopButtonsVisibility()
 {
-	mUi->runButton->setVisible(!mCompactMode && !mModel.timeline().isStarted());
-	mUi->stopButton->setVisible(!mCompactMode && mModel.timeline().isStarted());
+	mUi->runButton->setVisible(!mModel.timeline().isStarted());
+	mUi->stopButton->setVisible(mModel.timeline().isStarted());
 }
 
 QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) const
@@ -961,6 +959,11 @@ void TwoDModelWidget::onDeviceConfigurationChanged(const QString &robotId
 	}
 }
 
+void TwoDModelWidget::setBackgroundMode()
+{
+	mBackgroundMode = true;
+}
+
 void TwoDModelWidget::bringToFront()
 {
 #ifdef Q_OS_DARWIN
@@ -969,6 +972,10 @@ void TwoDModelWidget::bringToFront()
 	if (!QApplication::platformNativeInterface())
 		return;
 #endif
+
+	if (mBackgroundMode) {
+		return;
+	}
 
 	if (isHidden()) {
 		show();

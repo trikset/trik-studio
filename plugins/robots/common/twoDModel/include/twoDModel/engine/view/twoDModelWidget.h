@@ -99,6 +99,8 @@ public:
 	/// In a compact mode 2D model window has less controls, they may seem in another way.
 	void setCompactMode(bool enabled);
 
+	void setBackgroundMode();
+
 	QString editorId() const override;
 	bool supportsZooming() const override;
 	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste
@@ -260,7 +262,7 @@ private:
 	bool mSensorsReadOnly {};
 	bool mRobotPositionReadOnly {};
 
-	bool mCompactMode {};
+	bool mBackgroundMode {false};
 };
 
 }

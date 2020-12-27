@@ -95,9 +95,8 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 //	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
 //	addAllowedConnection(PortInfo("ObjectSensorSizePort", input, {}, "objectSensorSize"), { objectSensorInfo() });
 
-//	addAllowedConnection(PortInfo("ColorSensorRPort", input, {}, "colorSensorR"), { colorSensorInfo() });
-//	addAllowedConnection(PortInfo("ColorSensorGPort", input, {}, "colorSensorG"), { colorSensorInfo() });
-//	addAllowedConnection(PortInfo("ColorSensorBPort", input, {}, "colorSensorB"), { colorSensorInfo() });
+//	addAllowedConnection(PortInfo("ColorSensorPort", input, {}, "colorSensor"
+//			, PortInfo::ReservedVariableType::vector), { colorSensorInfo() });
 
 	addAllowedConnection(PortInfo("ShellPort", output), { shellInfo() });
 

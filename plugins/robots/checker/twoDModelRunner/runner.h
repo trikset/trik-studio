@@ -79,16 +79,16 @@ private:
 			, const QString &property, const QVariant &value);
 	void attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow);
 
-	qReal::SystemFacade mQRealFacade;
-	qReal::Controller mController;
-	qReal::ConsoleErrorReporter mErrorReporter;
-	qReal::ProjectManager mProjectManager;
-	qReal::NullMainWindow mMainWindow;
-	qReal::NullTextManager mTextManager;
-	qReal::gui::editor::SceneCustomizer mSceneCustomizer;
-	qReal::PluginConfigurator mConfigurator;
-	interpreterCore::RobotsPluginFacade mPluginFacade;
-	Reporter mReporter;
+	QScopedPointer<qReal::SystemFacade> mQRealFacade;
+	QScopedPointer<qReal::Controller> mController;
+	QScopedPointer<qReal::ConsoleErrorReporter> mErrorReporter;
+	QScopedPointer<qReal::ProjectManager> mProjectManager;
+	QScopedPointer<qReal::NullMainWindow> mMainWindow;
+	QScopedPointer<qReal::NullTextManager> mTextManager;
+	QScopedPointer<qReal::gui::editor::SceneCustomizer> mSceneCustomizer;
+	QScopedPointer<qReal::PluginConfigurator> mConfigurator;
+	QScopedPointer<Reporter> mReporter;
+	QScopedPointer<interpreterCore::RobotsPluginFacade> mPluginFacade;
 	QList<qReal::ui::ConsoleDock *> mRobotConsoles;
 	QString mInputsFile;
 	QString mMode;

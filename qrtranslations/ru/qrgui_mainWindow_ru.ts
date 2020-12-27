@@ -1054,7 +1054,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Несохраненный проект</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source> [modified]</source>
         <translation> [изменён]</translation>
     </message>
@@ -1234,7 +1234,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::ErrorReporter</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+211"/>
+        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+212"/>
         <source>INFORMATION:</source>
         <translation>ИНФОРМАЦИЯ:</translation>
     </message>

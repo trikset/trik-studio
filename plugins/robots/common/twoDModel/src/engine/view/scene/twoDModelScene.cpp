@@ -648,7 +648,7 @@ void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
 
 void TwoDModelScene::keyPressEvent(QKeyEvent *event)
 {
-	if (event->key() == Qt::Key_Delete) {
+	if (event->matches(QKeySequence::Delete) || event->key() == Qt::Key_Backspace) {
 		deleteSelectedItems();
 	} else if (event->matches(QKeySequence::Copy)) {
 		copySelectedItems();
@@ -717,41 +717,47 @@ void TwoDModelScene::addEllipse()
 void TwoDModelScene::addImage()
 {
 	// Loads world and robot models simultaneously.
-	const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectImage", views().first()
-			, tr("Select image")
+	const auto loadImages = utils::QRealFileDialog::getOpenFileNames("2DSelectImage", views().first()
+			, tr("Select images")
 			, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields"
 			, tr("Graphics (*.*)"));
-	if (loadFileName.isEmpty()) {
-		return;
-	}
 
-	QFile imageFile(loadFileName);
-	if (imageFile.size() >  5 * 1024 * 1024) {
-		if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Warning")
-				, tr("You are trying to load to big image, it may freeze execution for some time. Continue?"))
-						!= QMessageBox::Yes) {
-			return;
-		}
-	}
 
-	auto newImage = QSharedPointer<model::Image>::create(loadFileName, false);
-	auto size = newImage->preferedSize();
-	if (size.width() == 0 || size.height() == 0) {
-		if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Error")
-				, tr("Cannot load file. Try another one.")
-				, QMessageBox::StandardButtons(QMessageBox::Retry | QMessageBox::Close))
-					== QMessageBox::Retry) {
-			addImage();
+	const auto gridSize = SettingsManager::value("2dGridCellSize").toInt();
+	const QPoint step(gridSize, gridSize);
+	QPoint topLeft = mainView()->mapToScene(0,0).toPoint() + step;
+
+	for (auto &&loadFileName : loadImages) {
+		if (loadFileName.isEmpty()) {
+			continue;
 		}
-		return;
+
+		QFile imageFile(loadFileName);
+		if (imageFile.size() >  5 * 1024 * 1024) {
+			if (utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Warning")
+					, tr("You are trying to load to big image, it may freeze execution for some time. Continue?"))
+							!= QMessageBox::Yes) {
+				continue;
+			}
+		}
+
+		auto newImage = QSharedPointer<model::Image>::create(loadFileName, false);
+		auto size = newImage->preferedSize();
+		if (size.width() == 0 || size.height() == 0) {
+			utils::QRealMessageBox::question(QApplication::focusWidget(), tr("Error")
+					, tr("Cannot load %1. Try another file.").arg(loadFileName)
+					, QMessageBox::StandardButtons(QMessageBox::Close));
+			continue;
+		}
+		mDrawingAction = image;
+		const QRect rect(topLeft, size);
+		QSharedPointer<twoDModel::items::ImageItem> result(new twoDModel::items::ImageItem(newImage, rect));
+		result->setMemorize(true);
+		mModel.worldModel().addImageItem(result);
+		registerInUndoStack(result.data());
+		setNoneStatus();
+		topLeft += step;
 	}
-	mDrawingAction = image;
-	const QRect rect(QPoint(-size.width() / 2, -size.height() / 2), size);
-	QSharedPointer<twoDModel::items::ImageItem> result(new twoDModel::items::ImageItem(newImage, rect));
-	result->setMemorize(true);
-	mModel.worldModel().addImageItem(result);
-	registerInUndoStack(result.data());
-	setNoneStatus();
 }
 
 void TwoDModelScene::setNoneStatus()
@@ -783,6 +789,10 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 
 		for (auto &&region : mModel.worldModel().regions()) {
 			worldItemsToDelete << region->id();
+		}
+
+		for (auto &&image : mModel.worldModel().imageItems()) {
+			worldItemsToDelete << image->id();
 		}
 
 		QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensorsToDelete;

@@ -17,10 +17,11 @@
 #include <QtGui/QBitmap>
 #include <QtGui/QImageWriter>
 
+using namespace graphicsUtils;
+
 Image::Image(const QString &fileName, qreal x, qreal y, Item* parent)
 	: Item(parent)
 	, mImage(fileName)
-	, mRectangleImpl()
 {
 	mFileName = fileName;
 	QPixmap* pixmap = new QPixmap(fileName);
@@ -35,7 +36,7 @@ Image::Image(const QString &fileName, qreal x, qreal y, Item* parent)
 
 QRectF Image::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
 }
 
 void Image::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -43,7 +44,7 @@ void Image::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, 
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 
-	mRectangleImpl.drawImageItemWithMirrored(painter, x1(), y1(), x2(), y2(), mImage);
+	RectangleImpl::drawImageItemWithMirrored(painter, x1(), y1(), x2(), y2(), mImage);
 }
 
 void Image::setItemZValue(int zValue)

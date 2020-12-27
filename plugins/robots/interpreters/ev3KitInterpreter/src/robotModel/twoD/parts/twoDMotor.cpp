@@ -26,6 +26,7 @@ TwoDMotor::TwoDMotor(kitBase::robotModel::DeviceInfo const &info
 
 void TwoDMotor::on(int speed)
 {
+	Ev3Motor::on(speed);
 	mEngine.setNewMotor(speed, 0, port(), true);
 }
 

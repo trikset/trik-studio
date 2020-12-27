@@ -55,6 +55,8 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	setX2(x1() + robotSize.width());
 	setY2(y1() + robotSize.height());
 	mMarkerPoint = QPointF((x1()+x2())/2, (y1()+y2())/2);  // Marker is situated under the robot
+	// TODO: Use rotationCenter?
+	// mMarkerPoint = mRobotModel.info().rotationCenter();
 	QPen pen(this->pen());
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
@@ -104,7 +106,7 @@ void RobotItem::drawExtractionForItem(QPainter* painter)
 
 QRectF RobotItem::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), border);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), border);
 }
 
 QRectF RobotItem::calcNecessaryBoundingRect() const
