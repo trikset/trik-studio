@@ -123,11 +123,7 @@ quint64 Timeline::timestamp() const
 
 utils::AbstractTimer *Timeline::produceTimer()
 {
-	auto connection = (QThread::currentThread() != this->thread()) ?
-				Qt::BlockingQueuedConnection : Qt::DirectConnection;
-	utils::AbstractTimer *t = nullptr;
-	QMetaObject::invokeMethod(this, [this, &t](){ t = produceTimerImpl();}, connection);
-	return t;
+	return produceTimerImpl();
 }
 
 void Timeline::setImmediateMode(bool immediateMode)

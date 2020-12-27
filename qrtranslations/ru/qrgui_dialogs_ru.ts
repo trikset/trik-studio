@@ -73,9 +73,13 @@
         <translation>Аргументы подпрограммы:</translation>
     </message>
     <message>
-        <location line="+32"/>
         <source>Add Argumet</source>
-        <translation>Добавить аргумент</translation>
+        <translation type="vanished">Добавить аргумент</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Add Argument</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
@@ -598,7 +602,7 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+104"/>
         <location line="+15"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -614,9 +618,13 @@
         <translation>Имя параметра %1 не заполнено</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+4"/>
+        <source>Name should start with a letter(row %1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Name should start with a lowercase letter(row %1)</source>
-        <translation>Имя аргумента должно начинаться с маленькой буквы (строка %1)</translation>
+        <translation type="vanished">Имя аргумента должно начинаться с маленькой буквы (строка %1)</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -634,8 +642,8 @@
         <translation>Одинаковые имена</translation>
     </message>
     <message>
-        <location line="-270"/>
-        <location line="+278"/>
+        <location line="-269"/>
+        <location line="+277"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

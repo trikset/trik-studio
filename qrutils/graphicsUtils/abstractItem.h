@@ -186,6 +186,8 @@ protected:
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 	void copyTo(AbstractItem * const other) const;
+	qreal alignedCoordinate(qreal coord, const int indexGrid) const;
+	void setXYWithDragState(const QPointF pos);
 
 private:
 	DragState mDragState {None};

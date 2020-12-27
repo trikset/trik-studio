@@ -54,8 +54,6 @@ public:
 
 private:
 	void setPrivateData();
-
-	graphicsUtils::RectangleImpl mEllipseImpl;
 };
 
 }

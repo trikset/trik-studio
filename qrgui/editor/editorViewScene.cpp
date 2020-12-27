@@ -85,8 +85,8 @@ EditorViewScene::EditorViewScene(const models::Models &models
 	initCorners();
 	initializeActions();
 
-	connect(mTimer, SIGNAL(timeout()), this, SLOT(getObjectByGesture()));
-	connect(mTimerForArrowButtons, SIGNAL(timeout()), this, SLOT(updateMovedElements()));
+	connect(mTimer, &QTimer::timeout, this, &EditorViewScene::getObjectByGesture);
+	connect(mTimerForArrowButtons, &QTimer::timeout, this, &EditorViewScene::updateMovedElements);
 	connect(this, &QGraphicsScene::selectionChanged, this, &EditorViewScene::deselectLabels);
 	connect(&mExploser, &view::details::ExploserView::goTo, this, &EditorViewScene::goTo);
 	connect(&mExploser, &view::details::ExploserView::refreshPalette, this, &EditorViewScene::refreshPalette);
@@ -343,6 +343,7 @@ int EditorViewScene::launchEdgeMenu(EdgeElement *edge, NodeElement *node
 			QAction *element = new QAction(friendlyName, createElemMenu);
 			// deleted as child of createElemMenu
 			createElemMenu->addAction(element);
+			// TODO: something strange, QSignalMapper cannot be replaced with functors
 			QObject::connect(element, SIGNAL(triggered()), menuSignalMapper, SLOT(map()));
 			menuSignalMapper->setMapping(element, id.toString());
 		}
@@ -1331,7 +1332,6 @@ void EditorViewScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
 		} else {
 			emit zoomOut();
 		}
-
 		wheelEvent->accept();
 	}
 }
@@ -1407,7 +1407,7 @@ void EditorViewScene::setCorners(const QPointF &topLeft, const QPointF &bottomRi
 
 void EditorViewScene::initializeActions()
 {
-	mActionDeleteFromDiagram.setShortcut(QKeySequence(Qt::Key_Delete));
+	mActionDeleteFromDiagram.setShortcuts({{Qt::Key_Delete}, {Qt::Key_Backspace}, QKeySequence::Backspace});
 	mActionDeleteFromDiagram.setText(tr("Delete"));
 	connect(&mActionDeleteFromDiagram, &QAction::triggered, this, &EditorViewScene::deleteSelectedItems);
 	mActionDeleteFromDiagram.setEnabled(false);

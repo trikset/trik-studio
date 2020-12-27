@@ -23,21 +23,21 @@ QString SaveConvertionManager::editor()
 }
 
 void SaveConvertionManager::reconnectEdges(const Id &newBlock, const Id &block
-										   , GraphicalModelAssistInterface &graphicalApi)
+										   , details::ModelsAssistInterface &api)
 {
 	const bool isEdge = isEdgeType(block);
 	if (isEdge) {
 		// If out element is edge then connecting it to same elements as the old one was connected
-		graphicalApi.setFrom(newBlock, graphicalApi.from(block));
-		graphicalApi.setTo(newBlock, graphicalApi.to(block));
+		api.setFrom(newBlock, api.from(block));
+		api.setTo(newBlock, api.to(block));
 	} else {
 		// Replacing old node in all incomming and outgoing edges of the old node with the new one.
-		for (const Id &edge : graphicalApi.graphicalRepoApi().outgoingLinks(block)) {
-			graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "from", newBlock.toVariant());
+		for (const Id &edge : api.mutableRepoApi().outgoingLinks(block)) {
+			api.mutableRepoApi().setProperty(edge, "from", newBlock.toVariant());
 		}
 
-		for (const Id &edge : graphicalApi.graphicalRepoApi().incomingLinks(block)) {
-			graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "to", newBlock.toVariant());
+		for (const Id &edge : api.mutableRepoApi().incomingLinks(block)) {
+			api.mutableRepoApi().setProperty(edge, "to", newBlock.toVariant());
 		}
 	}
 }
@@ -306,28 +306,28 @@ ProjectConverter SaveConvertionManager::from20204to20205Converter()
 			}
 
 			if (graphicalBlock.element() == "PrintText") {
-				Id newBlock = Id::createElementId(graphicalBlock.editor(), graphicalBlock.diagram(), "TrikPrintText");
-				newBlock = graphicalApi.createElement(graphicalApi.parent(graphicalBlock)
-						, newBlock
+				const auto newType = Id(graphicalBlock.editor(), graphicalBlock.diagram(), "TrikPrintText");
+				const auto newGraphicalBlock = graphicalApi.createElement(graphicalApi.parent(graphicalBlock)
+						, newType.sameTypeId()
 						, false
 						, graphicalApi.name(graphicalBlock)
 						, graphicalApi.position(graphicalBlock)
-						, logicalApi.createElement(logicalApi.parent(logicalBlock), newBlock.type()));
-				graphicalApi.copyProperties(newBlock, graphicalBlock);
+						, logicalApi.createElement(logicalApi.parent(logicalBlock), newType));
+				graphicalApi.copyProperties(newGraphicalBlock, graphicalBlock);
+				const auto newLogicalBlock = graphicalApi.logicalId(newGraphicalBlock);
 
-				auto newLogicalId = graphicalApi.logicalId(newBlock);
 				auto iterator = logicalApi.logicalRepoApi().propertiesIterator(logicalBlock);
 				while (iterator.hasNext()) {
 					iterator.next();
-					const auto name = iterator.key();
-					auto value = iterator.value().toString();
-					logicalApi.setPropertyByRoleName(newLogicalId, value, name);
+					logicalApi.mutableLogicalRepoApi().setProperty(newLogicalBlock, iterator.key(), iterator.value());
 				}
-				logicalApi.setPropertyByRoleName(graphicalApi.logicalId(newBlock), 20, "FontSize");
 
-				reconnectEdges(newBlock, graphicalBlock, graphicalApi);
-				modificationsMade = true;
+				logicalApi.setPropertyByRoleName(newLogicalBlock, 20, "FontSize");
+				reconnectEdges(newGraphicalBlock, graphicalBlock, graphicalApi);
+				reconnectEdges(newLogicalBlock, logicalBlock, logicalApi);
 				graphicalApi.removeElement(graphicalBlock);
+				logicalApi.removeElement(logicalBlock);
+				modificationsMade = true;
 			}
 		}
 

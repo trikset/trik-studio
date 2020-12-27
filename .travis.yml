@@ -53,7 +53,7 @@ matrix:
       env: CONFIG=debug VERA=true TESTS=$ALL_TESTS TRANSLATIONS=true QMAKE_EXTRA="$QMAKE_EXTRA CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       name: "Vera and translations"
       script:
-      - ./buildScripts/travis/vera_translation.sh
+      - $EXECUTOR ./buildScripts/travis/vera_translation.sh
       after_script:
       - kill $HEARTBEAT
 
@@ -93,7 +93,7 @@ before_install:
   - export CCACHE_CONFIGPATH=$HOME/ccache.conf
 
 install:
-  - ./buildScripts/travis/install.sh
+  - "./buildScripts/travis/install_${TRAVIS_OS_NAME}.sh"
 
 before_script:
   - if [ "$TRAVIS_OS_NAME" = "linux" ] ; then export EXECUTOR="time docker exec -i builder " ; else export EXECUTOR="time " ;fi
@@ -104,7 +104,7 @@ script:
   - sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
   - export TIMEOUT=false
   - wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || export TIMEOUT=true ; ( exit $RES )
-  - if $INSTALLER ; then ./buildScripts/travis/test.sh ; fi
+  - if $INSTALLER ; then $EXECUTOR ./buildScripts/travis/test.sh ; fi
   - if $INSTALLER ; then ./buildScripts/travis/build_installer.sh ; fi
 
 after_script:

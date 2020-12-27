@@ -163,7 +163,8 @@ void ErrorReporter::sendBubblingMessage(const QString &message, int duration, QW
 	}
 
 	// The message will show and dispose itself.
-	new HintReporter(parent, message, duration);
+	auto bubble = new HintReporter(parent, message, duration);
+	bubble->move(0, 0);
 }
 
 void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorListWidget) const

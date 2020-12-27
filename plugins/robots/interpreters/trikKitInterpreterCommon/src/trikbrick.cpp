@@ -26,7 +26,6 @@
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/random.h>
-#include <kitBase/robotModel/robotParts/random.h>
 #include <twoDModel/robotModel/parts/marker.h>
 #include <twoDModel/engine/model/timeline.h>
 #include <qrkernel/settingsManager.h>
@@ -61,7 +60,6 @@ TrikBrick::~TrikBrick()
 
 void TrikBrick::reset()
 {
-	emit stopWaiting();
 	mKeys.reset();///@todo: reset motos/device maps?
 	//mDisplay.reset(); /// - is actually needed? Crashes app at exit
 	for (const auto &m : mMotors) {
@@ -86,6 +84,11 @@ void TrikBrick::printToShell(const QString &msg)
 	}
 
 	sh->print(msg);
+}
+
+QDir TrikBrick::getCurrentDir() const
+{
+	return mCurrentDir;
 }
 
 void TrikBrick::init()
@@ -156,6 +159,11 @@ void TrikBrick::say(const QString &msg) {
 	}
 
 	QMetaObject::invokeMethod(sh, [sh, msg](){sh->say(msg);});
+}
+
+void TrikBrick::playTone(int, int msDuration) {
+	auto* robot = mTwoDRobotModel.data();
+	QMetaObject::invokeMethod(robot, [robot, msDuration](){robot->engine()->playSound(msDuration);});
 }
 
 void TrikBrick::stop() {
@@ -372,55 +380,6 @@ QVector<uint8_t> TrikBrick::getStillImage()
 	}
 }
 
-int TrikBrick::random(int from, int to)
-{
-	using namespace kitBase::robotModel;
-	auto r = RobotModelUtils::findDevice<robotParts::Random>(*mTwoDRobotModel, "RandomPort");
-	// maybe store it later, like the others
-	if (!r) {
-		emit error(tr("No cofigured random device"));
-		return -1;
-	}
-
-	return r->random(from, to);
-}
-
-void TrikBrick::wait(int milliseconds)
-{
-	auto timeline = dynamic_cast<twoDModel::model::Timeline *> (&mTwoDRobotModel->timeline());
-
-	if (!timeline->isStarted()) {
-		return;
-	}
-
-	QEventLoop loop;
-
-	auto t = timeline->produceTimer();
-	connect(t, &utils::AbstractTimer::timeout, &loop, &QEventLoop::quit);
-	connect(&loop, &QObject::destroyed, t, &QObject::deleteLater);
-
-	// This one is from brick.reset(), that is called for toolbar Stop button
-	connect(this, &TrikBrick::stopWaiting, &loop, &QEventLoop::quit);
-
-	// Old comment:
-	// timers that are produced by produceTimer() doesn't use stop singal
-	// be careful, one who use just utils::AbstractTimer can stuck
-	// New one: do we really need to connect to both signals?
-	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
-	connect(timeline, &twoDModel::model::Timeline::stopped, &loop, &QEventLoop::quit);
-
-	if (milliseconds == 0) {
-		QApplication::processEvents();
-	} else if (timeline->isStarted()) {
-		t->start(milliseconds);
-		loop.exec();
-	}
-}
-
-quint64 TrikBrick::time() const
-{
-	return mTwoDRobotModel->timeline().timestamp();
-}
 
 QStringList TrikBrick::readAll(const QString &path)
 {
@@ -446,14 +405,6 @@ QStringList TrikBrick::readAll(const QString &path)
 	return result;
 }
 
-utils::AbstractTimer *TrikBrick::timer(int milliseconds)
-{
-	auto result = QSharedPointer<utils::AbstractTimer>(mTwoDRobotModel->timeline().produceTimer());
-	mTimers.append(result);
-	result->setRepeatable(true);
-	result->start(milliseconds);
-	return result.get();
-}
 
 void TrikBrick::processSensors(bool isRunning)
 {
