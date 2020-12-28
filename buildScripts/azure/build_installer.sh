@@ -27,7 +27,7 @@ then
       $EXECUTOR bash -ic "\
       echo Start build checker archive \
       && bin/$CONFIG/build-checker-installer.sh \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-${AGENT_OS}-$CONFIG-$BRANCH_NAME.tar.xz \
+      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz \
       || false \
 "
       fi
