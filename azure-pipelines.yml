@@ -1,5 +1,4 @@
 trigger:
-- master
 - junior
 
 variables:
@@ -8,7 +7,6 @@ variables:
   EXECUTOR: "time docker exec -i builder"
   PROJECT: studio
   TESTS: true
-  ALL_TESTS: "./run-simulator-tests.sh"
   BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
   CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
@@ -54,7 +52,7 @@ parameters:
   - name: buildInstallerStep
     type: step
     default:
-      bash: $EXECUTOR env CONFIG=$CONFIG AGENT_OS=$(Agent.OS) ./buildScripts/azure/test.sh && buildScripts/azure/build_installer.sh
+      bash: $EXECUTOR env CONFIG=$CONFIG AGENT_OS=$(Agent.OS) buildScripts/azure/build_installer.sh
       env:
         password: $(SERVER_PASSWORD)
         server: $(SERVER_NAME)
@@ -99,7 +97,6 @@ stages:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
-          TESTS: $ALL_TESTS
     pool:
       vmImage: $(imageName)
 
@@ -125,7 +122,6 @@ stages:
           imageName: 'macOS-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
-          TESTS: $ALL_TESTS
           EXECUTOR: "time"
     pool:
       vmImage: $(imageName)
@@ -151,7 +147,6 @@ stages:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
-          TESTS: $ALL_TESTS
     pool:
       vmImage: $(imageName)
 
@@ -177,7 +172,6 @@ stages:
           imageName: 'macOS-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
-          TESTS: $ALL_TESTS
           EXECUTOR: "time"
     pool:
       vmImage: $(imageName)
