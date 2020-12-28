@@ -1,6 +1,11 @@
 trigger:
-- master
-- junior
+  branches:
+    include:
+    - master
+    - junior
+  tags:
+    include:
+    - '*'
 
 variables:
   CONFIG: release
