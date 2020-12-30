@@ -9,7 +9,9 @@ skip_commits:
   files:
     - '**/lsan.supp'
     - 'buildScripts/travis/*'
+    - 'buildScripts/azure/*'
     - 'buildScripts/docker/*'
+    - 'azure-pipelines.yml'
     - '.cirrus.yml'
     - '.travis.yml'
     - '.mergify.yml'
@@ -33,7 +35,7 @@ branches:
 
 environment:
   global:
-    PYTHON_VERSION_MINOR: 7 # Default to Python 3.7
+    PYTHON_VERSION_MINOR: 8 # Default to Python 3.8
     MSYS_DIR: C:\msys64
     APPVEYOR_SAVE_CACHE_ON_ERROR: true
     CCACHE_DIR: C:\ccache.cache
@@ -80,7 +82,6 @@ init:
   - set PATH
   - set PATH=%APPVEYOR_BUILD_FOLDER%\buildScripts\appveyor;%QTDIR%\bin;%MINGW%\bin;C:\msys64\mingw%ARCH%\bin;C:\msys64\usr\bin;%SystemRoot%;%SystemRoot%\system32;C:\Program Files\7-Zip;%SystemRoot%\system32\WindowsPowerShell\v1.0;C:\Tools\curl\bin;C:\Program Files\AppVeyor\BuildAgent\
   - set PATH
-  - pacman --verbose --noconfirm --sync ccache rsync curl unzip
   - if "x%appveyor_pull_request_number%" NEQ "x" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "x%appveyor_repo_branch%" NEQ "xmaster" set APPVEYOR_CACHE_SKIP_SAVE=true
   - if "%ARCH%" == "32" (set PLATFORM=i686) else (set PLATFORM=x86_64)
@@ -97,11 +98,21 @@ init:
   - if "x%appveyor_pull_request_number%" EQU "x" (set "NEED_AUTOZIP=true")
 #this is a tagged commit build
   - if "%APPVEYOR_REPO_TAG%" EQU "true" ( set "NEED_INSTALLER=true" && set "NEED_AUTOZIP=true" )
-#disable artifacts for Python38
-  - if "%PYTHON_VERSION_MINOR%" NEQ "7" ( set "NEED_INSTALLER=false" && set "NEED_AUTOZIP=false" )
+#disable artifacts for non-default  Python builds
+  - if "%PYTHON_VERSION_MINOR%" NEQ "8" ( set "NEED_INSTALLER=false" && set "NEED_AUTOZIP=false" )
   - 'echo "Deploy installer executable: %NEED_INSTALLER%"'
   - 'echo "Deploy \\bin zip archive: %NEED_BINZIP%"'
   - 'echo "Deploy full zipped installer: %NEED_AUTOZIP%"'
+# deal with 2020 summer package upgrade problem, when keys changed
+  - curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz
+  - curl -O http://repo.msys2.org/msys/x86_64/msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz.sig
+  - pacman --noconfirm -U msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz || bash -lc 'pacman --noconfirm -U --config <(echo) msys2-keyring-r21.b39fb11-1-any.pkg.tar.xz'
+# Deal with December 2020 MSYS2 update: update core files to migrate to zstd compression
+  - curl -O http://repo.msys2.org/msys/x86_64/zstd-1.4.7-1-x86_64.pkg.tar.xz # the latest in xz
+  - curl -O http://repo.msys2.org/msys/x86_64/pacman-5.2.2-5-x86_64.pkg.tar.xz # the latest in xz
+  - pacman --verbose --noconfirm --disable-download-timeout -U zstd-1.4.7-1-x86_64.pkg.tar.xz pacman-5.2.2-5-x86_64.pkg.tar.xz # Upgrade now (Dec 2020) needs zstd decompressor
+  - 'del /q %APPVEYOR_BUILD_FOLDER%\*.*' # cleanup before checkout
+  - cmd /c "pacman --verbose --noconfirm --disable-download-timeout -Syuu" #Full update of core files
 
 clone_script:
     - cmd: |
@@ -116,9 +127,9 @@ clone_script:
 install:
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
-  - pacman --verbose --noconfirm --sync ccache rsync curl unzip sshpass
-  - pacman -Su --noconfirm mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config
-#--refresh --sysupgrade --ask=20
+  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
+  - cmd /c "pacman --verbose --noconfirm -S ccache rsync unzip sshpass mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config"
+  - unzip tests_qrs.zip
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
   - ccache -p || echo "Failed to print ccache config (missing -p option)"
   - if not exist %BUILD_DIR% mkdir %BUILD_DIR%
@@ -126,8 +137,6 @@ install:
   - ccache -M 900M
   - which g++
   - g++ --version
-  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
-  - unzip tests_qrs.zip
   - ls
   - dir C:\Qt\Tools\
   - dir C:\Qt
@@ -181,7 +190,7 @@ after_test:
   - 'bash -c "./build-trik-studio.sh %QTDIR:\=/%/bin %QTIFW:\=/%/bin %BUILD_DIR:\=/%"'
   - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
-  - if "%PYTHON_VERSION_MINOR%" NEQ "7" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
+  - if "%PYTHON_VERSION_MINOR%" NEQ "8" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)
   - set INSTALLER_NAME=%INSTALLER_NAME%-%PLATFORM%
   - set AUTOINSTALLER_ZIP_NAME=%INSTALLER_NAME%-auto.zip
   - set INSTALLER_NAME=%INSTALLER_NAME%-installer.exe

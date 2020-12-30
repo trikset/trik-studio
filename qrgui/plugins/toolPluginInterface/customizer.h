@@ -78,7 +78,7 @@ public:
 	/// Customizes text in about dialog
 	virtual QString aboutText() const
 	{
-		return "<b>QReal<b><br><br><a href=\"http://qreal.ru/\">http://qreal.ru/</a>";
+		return "<b>QReal<b><br><br><a href=\"https://qreal.github.io/\">http://qreal.github.io/</a>";
 	}
 
 	/// Customizes default examples directory for current system.

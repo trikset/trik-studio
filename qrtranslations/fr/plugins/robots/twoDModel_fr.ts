@@ -313,7 +313,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+75"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+78"/>
         <source>Image (I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -353,7 +353,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+62"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+60"/>
         <source>Wall (W)</source>
         <translation>Mur (W)</translation>
     </message>
@@ -672,7 +672,7 @@
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
-        <source>Select image</source>
+        <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -681,7 +681,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+14"/>
         <source>Warning</source>
         <translation type="unfinished">Attention</translation>
     </message>
@@ -697,7 +697,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Cannot load file. Try another one.</source>
+        <source>Cannot load %1. Try another file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -754,7 +754,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+339"/>
+        <location line="+337"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -764,7 +764,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+168"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

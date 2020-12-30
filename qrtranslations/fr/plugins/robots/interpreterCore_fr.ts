@@ -144,12 +144,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+26"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+27"/>
         <source>TRIK Studio</source>
         <translation>TRIK Studio</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+54"/>
         <source>Subprograms</source>
         <translation>Sous-programmes</translation>
     </message>
@@ -237,7 +237,7 @@
         <translation>Blocs</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+49"/>
         <source>Configure devices</source>
         <translation>Configuration de capteurs</translation>
     </message>
@@ -326,7 +326,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-65"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-66"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
@@ -336,7 +336,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+32"/>
         <source>edit mode</source>
         <translation>mode d&apos;édition</translation>
     </message>
@@ -346,7 +346,7 @@
         <translation>mode de débogage</translation>
     </message>
     <message>
-        <location line="+162"/>
+        <location line="+151"/>
         <source>Edit mode</source>
         <translation>Mode d&apos;édition</translation>
     </message>

@@ -36,6 +36,9 @@ WallItem::WallItem(const QPointF &begin, const QPointF &end)
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsScenePositionChanges);
 	setPrivateData();
 	setAcceptDrops(true);
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
+			mEstimatedPos = pos();
+		});
 }
 
 WallItem *WallItem::clone() const
@@ -47,11 +50,6 @@ WallItem *WallItem::clone() const
 	connect(this, &AbstractItem::y1Changed, cloned, &WallItem::recalculateBorders);
 	connect(this, &AbstractItem::x2Changed, cloned, &WallItem::recalculateBorders);
 	connect(this, &AbstractItem::y2Changed, cloned, &WallItem::recalculateBorders);
-
-	cloned->mCellNumbX1 = mCellNumbX1;
-	cloned->mCellNumbY1 = mCellNumbY1;
-	cloned->mCellNumbX2 = mCellNumbX2;
-	cloned->mCellNumbY2 = mCellNumbY2;
 
 	cloned->mPath = mPath;
 	return cloned;
@@ -138,16 +136,6 @@ qreal WallItem::width() const
 	return pen().width();
 }
 
-QVariant WallItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
-{
-	if (change == QGraphicsItem::ItemScenePositionHasChanged) {
-		emit positionChanged(value.toPointF());
-		return value;
-	}
-
-	return AbstractItem::itemChange(change, value);
-}
-
 QDomElement WallItem::serialize(QDomElement &parent) const
 {
 	QDomElement wallNode = AbstractItem::serialize(parent);
@@ -187,34 +175,25 @@ QPainterPath WallItem::path() const
 
 void WallItem::recalculateBorders()
 {
-	QPainterPath wallPath;
-	wallPath.moveTo(begin());
-
-	if (mathUtils::Geometry::eq(begin(), end())) {
-		wallPath.lineTo(end().x() + 0.1, end().y());
-	} else {
-		wallPath.lineTo(end());
-	}
-
-	QPainterPathStroker stroker;
-	stroker.setCapStyle(Qt::FlatCap);
-	stroker.setWidth(mWallWidth);
-	mPath = stroker.createStroke(wallPath);
+	mPath = mLineImpl.shape(mWallWidth, begin().x(), begin().y(), end().x(), end().y());
 }
 
 void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
+	mEstimatedPos += event->scenePos() - event->lastScenePos();
+
 	if (event->modifiers() & Qt::ShiftModifier && (dragState() == TopLeft || dragState() == BottomRight)) {
 		AbstractItem::resizeItem(event);
 		reshapeRectWithShift();
 	} else {
-		if (SettingsManager::value("2dShowGrid").toBool()) {
+		if (SettingsManager::value("2dShowGrid").toBool() && event->modifiers() != Qt::ControlModifier) {
 			resizeWithGrid(event, SettingsManager::value("2dGridCellSize").toInt());
 		} else {
 			if (dragState() == TopLeft || dragState() == BottomRight) {
-				AbstractItem::resizeItem(event);
+				calcResizeItem(event);
 			} else {
-				setFlag(QGraphicsItem::ItemIsMovable, true);
+				setFlag(QGraphicsItem::ItemIsMovable, false);
+				setPos(mEstimatedPos);
 			}
 		}
 	}
@@ -258,7 +237,7 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	const qreal x = mapFromScene(event->scenePos()).x();
 	const qreal y = mapFromScene(event->scenePos()).y();
 
-	setFlag(QGraphicsItem::ItemIsMovable, dragState() == None);
+	setFlag(QGraphicsItem::ItemIsMovable, false);
 
 	if (dragState() == TopLeft) {
 		setX1(x);
@@ -269,42 +248,28 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 		setY2(y);
 		reshapeEndWithGrid(indexGrid);
 	} else {
-		const int coefX = static_cast<int>(pos().x()) / indexGrid;
-		const int coefY = static_cast<int>(pos().y()) / indexGrid;
-		auto newPos = QPointF(alignedCoordinate(pos().x(), coefX, indexGrid),
-				alignedCoordinate(pos().y(), coefY, indexGrid));
-		setPos(newPos);
-		update();
+		setPos(mEstimatedPos);
+		moveBy(alignedCoordinate(begin().x(), indexGrid) - begin().x()
+			   , alignedCoordinate(begin().y(), indexGrid) - begin().y());
 	}
 }
 
 void WallItem::reshapeEndWithGrid(int indexGrid)
 {
-	const int coefX = static_cast<int>(x2()) / indexGrid;
-	const int coefY = static_cast<int>(y2()) / indexGrid;
-
-	setX2(alignedCoordinate(x2(), coefX, indexGrid));
-	setY2(alignedCoordinate(y2(), coefY, indexGrid));
-
-	mCellNumbX2 = x2() / indexGrid;
-	mCellNumbY2 = y2() / indexGrid;
+	setX2(alignedCoordinate(end().x(), indexGrid) - pos().x());
+	setY2(alignedCoordinate(end().y(), indexGrid) - pos().y());
 }
 
 void WallItem::reshapeBeginWithGrid(int indexGrid)
 {
-	const int coefX = static_cast<int> (x1()) / indexGrid;
-	const int coefY = static_cast<int> (y1()) / indexGrid;
-	setX1(alignedCoordinate(x1(), coefX, indexGrid));
-	setY1(alignedCoordinate(y1(), coefY, indexGrid));
-	mCellNumbX1 = x1() / indexGrid;
-	mCellNumbY1 = y1() / indexGrid;
+	setX1(alignedCoordinate(begin().x(), indexGrid) - pos().x());
+	setY1(alignedCoordinate(begin().y(), indexGrid) - pos().y());
 }
 
 void WallItem::alignTheWall(int indexGrid)
 {
-	countCellNumbCoordinates(indexGrid);
-	setBeginCoordinatesWithGrid(indexGrid);
-	setEndCoordinatesWithGrid(indexGrid);
+	reshapeBeginWithGrid(indexGrid);
+	reshapeEndWithGrid(indexGrid);
 }
 
 QPolygonF WallItem::collidingPolygon() const
@@ -313,7 +278,7 @@ QPolygonF WallItem::collidingPolygon() const
 	// here we have "one point" wall
 	if (polygon.isEmpty()) {
 		auto offset = QPointF(mWallWidth, mWallWidth);
-		return QRectF(begin() - offset, begin() + offset);
+		return QRectF(begin() - offset / 2, begin() + offset / 2);
 	}
 
 	QRectF abcdBoundingRect = polygon.boundingRect();
@@ -360,47 +325,8 @@ SolidItem::BodyType WallItem::bodyType() const
 	return BodyType::STATIC;
 }
 
-void WallItem::countCellNumbCoordinates(int indexGrid)
-{
-	mCellNumbX1 = x1() / indexGrid;
-	mCellNumbY1 = y1() / indexGrid;
-
-	if (qAbs(y2() - y1()) > qAbs(x2() - x1())) {
-		mCellNumbX2 = mCellNumbX1;
-		mCellNumbY2 = y2() / indexGrid;
-	} else {
-		mCellNumbX2 = x2() / indexGrid;
-		mCellNumbY2 = mCellNumbY1;
-	}
-}
-
-void WallItem::setBeginCoordinatesWithGrid(int indexGrid)
-{
-	setX1(mCellNumbX1 * indexGrid);
-	setY1(mCellNumbY1 * indexGrid);
-}
-
-void WallItem::setEndCoordinatesWithGrid(int indexGrid)
-{
-	setX2(mCellNumbX2 * indexGrid);
-	setY2(mCellNumbY2 * indexGrid);
-}
-
 void WallItem::setDraggedEnd(qreal x, qreal y)
 {
 	setX2(x1() - x);
 	setY2(y1() - y);
-}
-
-qreal WallItem::alignedCoordinate(qreal coord, int coef, const int indexGrid) const
-{
-	const int coefSign = coef ? coef / qAbs(coef) : 0;
-
-	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2.0) {
-		return coef * indexGrid;
-	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2.0) {
-		return (coef + coefSign) * indexGrid;
-	}
-
-	return coord;
 }

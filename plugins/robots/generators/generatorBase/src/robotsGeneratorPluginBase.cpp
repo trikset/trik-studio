@@ -129,19 +129,7 @@ QFileInfo RobotsGeneratorPluginBase::generateCodeForProcessing()
 	const Id &activeDiagram = mMainWindowInterface->activeDiagram();
 
 	if (!activeDiagram.isNull()) {
-		if (generateCode(false)) {
-			for (const QFileInfo &path : mCodePath.values(activeDiagram)) {
-				if (mTextManager->isDefaultPath(path.absoluteFilePath())
-					&& (!mTextManager->isModifiedEver(path.absoluteFilePath()))
-					&& !mTextManager->generatorName(path.absoluteFilePath()).compare(generatorName()))
-				{
-					fileInfo = path;
-					break;
-				}
-			}
-		} else {
-			return QFileInfo();
-		}
+		fileInfo = QFileInfo(generateCode(false));
 	} else if (auto code = dynamic_cast<text::QScintillaTextEdit *>(mMainWindowInterface->currentTab())) {
 		fileInfo = QFileInfo(mTextManager->path(code));
 		mTextManager->saveText(false);
@@ -182,7 +170,7 @@ QString RobotsGeneratorPluginBase::friendlyKitName() const
 	return QString();
 }
 
-bool RobotsGeneratorPluginBase::generateCode(bool openTab)
+QString RobotsGeneratorPluginBase::generateCode(bool openTab)
 {
 	mMainWindowInterface->errorReporter()->clearErrors();
 	mMainWindowInterface->errorReporter()->clear();
@@ -196,7 +184,7 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 	const QString generatedSrcPath = generator->generate(language().indent());
 
 	if (mMainWindowInterface->errorReporter()->wereErrors()) {
-		return false;
+		return QString();
 	}
 
 	const Id activeDiagram = mMainWindowInterface->activeDiagram();
@@ -210,7 +198,7 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 		mMainWindowInterface->activateItemOrDiagram(activeDiagram);
 	}
 
-	return true;
+	return generatedSrcPath;
 }
 
 void RobotsGeneratorPluginBase::regenerateCode(const qReal::Id &diagram

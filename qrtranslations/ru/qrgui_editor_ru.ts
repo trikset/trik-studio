@@ -185,7 +185,7 @@
         <translation>Создать новый элемент</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+64"/>
         <location line="+9"/>
         <source>Connect with the current item</source>
         <translation>Соединить с данным элементом</translation>
@@ -201,7 +201,7 @@
         <translation>Добавить элемент</translation>
     </message>
     <message>
-        <location line="+495"/>
+        <location line="+494"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

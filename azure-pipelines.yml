@@ -1,0 +1,230 @@
+trigger:
+  branches:
+    include:
+    - master
+    - junior
+  tags:
+    include:
+    - '*'
+
+variables:
+  CONFIG: release
+  QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
+  EXECUTOR: "time docker exec -i builder"
+  PROJECT: studio
+  TESTS: true
+  BUILD_TIMEOUT: 2800
+  CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
+  CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
+
+parameters:
+  - name: checkoutStep
+    type: step
+    default:
+      checkout: self
+      fetchDepth: 1
+      submodules: recursive
+
+  - name: environmentStep
+    type: step
+    default:
+      bash: buildScripts/azure/install_$(Agent.OS).sh
+      displayName: Set up the environment
+
+  - name: cacheStep
+    type: step
+    default:
+      task: Cache@2
+      inputs:
+        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
+        path: $(CCACHE_DIR)
+      displayName: Cache azure task
+
+  - name: buildNoTestsStep
+    type: step
+    default:
+      bash: |
+        buildScripts/azure/buildNoTests.sh & WPID=$!
+        sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
+        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
+      displayName: 'Build with buildNoTests.sh'
+
+  - name: buildWithTestsStep
+    type: step
+    default:
+      bash: buildScripts/azure/buildWithTests.sh
+      displayName: 'Build with buildWithTests.sh'
+
+  - name: buildInstallerStep
+    type: step
+    default:
+      bash: buildScripts/azure/build_installer.sh
+      env:
+        password: $(SERVER_PASSWORD)
+        server: $(SERVER_NAME)
+      displayName: 'Build installer and deploy'
+
+  - name: setTagNameStep
+    type: step
+    default:
+      bash: export BRANCH_NAME="$(git describe --exact-match $(Build.SourceVersion))"
+      condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+      displayName:  'Tag name as an environment variable'
+
+stages:
+- stage: lintStage
+  displayName: Lint stage
+  jobs:
+  - job: Lint
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+
+    - bash: buildScripts/azure/install_$(Agent.OS).sh
+      displayName: 'Set up the environment'
+
+    - bash: $EXECUTOR buildScripts/azure/vera_translation.sh
+      displayName: 'vera_translation.sh'
+
+- stage: linuxCacheableBuildStage
+  displayName: Linux cache build
+  dependsOn: lintStage
+  condition: succeeded()
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        Linux release:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+        Linux debug:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+    pool:
+      vmImage: $(imageName)
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+
+- stage: macOSCacheableBuildStage
+  displayName: MacOS cache build
+  dependsOn: lintStage
+  condition: succeeded()
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        MacOS release:
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          EXECUTOR: "time"
+        MacOS debug:
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+          EXECUTOR: "time"
+    pool:
+      vmImage: $(imageName)
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+
+- stage: linuxBuildWithTestsStage
+  displayName: Linux build with tests
+  dependsOn: linuxCacheableBuildStage
+  condition: succeeded()
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        Linux release + tests:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+        Linux debug + tests:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+    pool:
+      vmImage: $(imageName)
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildWithTestsStep }}
+
+- stage: macOSBuildWithTestsStage
+  displayName: MacOs build with tests
+  dependsOn: macOSCacheableBuildStage
+  condition: succeeded()
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        MacOS release + tests:
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          EXECUTOR: "time"
+        macOS debug + tests:
+          imageName: 'macOS-latest'
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+          CONFIG: debug
+          EXECUTOR: "time"
+    pool:
+      vmImage: $(imageName)
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildWithTestsStep }}
+
+- stage: linuxInstallerStage
+  displayName: Linux installer
+  dependsOn: linuxBuildWithTestsStage
+  condition: succeeded()
+  jobs:
+  - job: installer
+    displayName: "Test, installer, deploy"
+    variables:
+      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+    - ${{ parameters.setTagNameStep }}
+    - ${{ parameters.buildInstallerStep }}
+
+- stage: macOsInstallerStage
+  displayName: MacOs installer
+  dependsOn: macOSBuildWithTestsStage
+  condition: succeeded()
+  jobs:
+  - job: installer
+    displayName: "Test, installer, deploy"
+    variables:
+      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      EXECUTOR: "time"
+    pool:
+      vmImage: 'macOS-latest'
+
+    steps:
+    - ${{ parameters.checkoutStep }}
+    - ${{ parameters.environmentStep }}
+    - ${{ parameters.cacheStep }}
+    - ${{ parameters.buildNoTestsStep }}
+    - ${{ parameters.setTagNameStep }}
+    - ${{ parameters.buildInstallerStep }}

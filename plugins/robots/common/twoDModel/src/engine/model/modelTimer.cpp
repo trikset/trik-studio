@@ -24,7 +24,7 @@ ModelTimer::ModelTimer(const Timeline *timeline)
 	, mInterval(0)
 	, mRepeatable(false)
 {
-	connect(timeline, SIGNAL(tick()), this, SLOT(onTick()));
+	connect(timeline, &Timeline::tick, this, &ModelTimer::onTick);
 }
 
 ModelTimer::~ModelTimer()
@@ -81,13 +81,13 @@ void ModelTimer::setInterval(int ms)
 
 void ModelTimer::setRepeatable(bool repeatable)
 {
-	mRepeatable = repeatable;
+	setSingleShot(!repeatable);
 }
 
 void ModelTimer::onTimeout()
 {
 	AbstractTimer::onTimeout();
-	if (mRepeatable) {
+	if (!isSingleShot()) {
 		start();
 	}
 }

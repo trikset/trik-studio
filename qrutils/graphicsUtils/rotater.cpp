@@ -122,42 +122,35 @@ void Rotater::calcResizeItem(QGraphicsSceneMouseEvent *event)
 	const qreal mouseX = event->scenePos().x() - masterCenter.x();
 	const qreal mouseY = event->scenePos().y() - masterCenter.y();
 
-	// Master rotation is signed angle between initial and mouse vector.
-	// Calculating it from theese vectors product and cosine theorem
-	const qreal vectorProduct = zeroRotationVector.x() * mouseY
-			- zeroRotationVector.y() * mouseX;
 	const qreal mouseVectorLength = sqrt(mouseX * mouseX + mouseY * mouseY);
 	if (mouseVectorLength < EPS) {
 		return;
 	}
 
+	// Master rotation is signed angle between initial and mouse vector.
+	// Calculating it from theese vectors product and cosine theorem
+	const qreal vectorProductLength = zeroRotationVector.x() * mouseY
+			- zeroRotationVector.y() * mouseX;
+	const qreal sin = vectorProductLength / (mouseVectorLength * mLength);
+
 	const qreal translationX = mouseX - zeroRotationVector.x();
 	const qreal translationY = mouseY - zeroRotationVector.y();
-	const qreal translation = translationX * translationX + translationY * translationY;
-
-	const qreal sin = vectorProduct / (mouseVectorLength * mLength);
-	const bool cosIsNegative = mouseVectorLength * mouseVectorLength + mLength * mLength < translation;
+	const bool cosIsNegative = mouseVectorLength * mouseVectorLength + mLength * mLength
+			< translationX * translationX + translationY * translationY;
 
 	const qreal angleInWrongQuarter = asin(sin);
-	const qreal littleAngle = cosIsNegative ? M_PI - angleInWrongQuarter : angleInWrongQuarter;
+	const qreal angleInRightQuarter = cosIsNegative ? M_PI - angleInWrongQuarter : angleInWrongQuarter;
+	const qreal littleAngle = angleInRightQuarter * 180 / M_PI;
 
 	const qreal masterAngleCompensation = mMaster->parentItem()
 			? mMaster->parentItem()->rotation()
 			: 0.0;
 
-	const qreal deltaAngle = fmod(littleAngle - mMaster->rotation() * M_PI / 180, 2 * M_PI);
-	const qreal addAngle = deltaAngle > M_PI ? -2 * M_PI : deltaAngle < -M_PI ? 2 * M_PI : 0;
-	const qreal angle = mMaster->rotation() * M_PI / 180 + deltaAngle + addAngle;
+	const qreal deltaAngle = fmod(littleAngle - mMaster->rotation()- masterAngleCompensation, 360);
+	const qreal addAngle = deltaAngle > 180 ? -360 : deltaAngle < -180 ? 360 : 0;
+	const qreal angle = mMaster->rotation() + deltaAngle + addAngle;
 
-//	if (event->modifiers() & Qt::ShiftModifier) {
-//		qreal roundedAngle = (angle - fmod(angle, M_PI_2));
-//		if (qAbs(roundedAngle - angle) > qAbs(roundedAngle + M_PI_2 - angle)) {
-//			roundedAngle += M_PI_2;
-//		}
-//		mMaster->setRotation(roundedAngle * 180 / M_PI - masterAngleCompensation);
-//	} else {
-		mMaster->setRotation(angle * 180 / M_PI - masterAngleCompensation);
-//	}
+	mMaster->setRotation(angle * 180 / M_PI - masterAngleCompensation);
 }
 
 void Rotater::resizeItem(QGraphicsSceneMouseEvent *event)
