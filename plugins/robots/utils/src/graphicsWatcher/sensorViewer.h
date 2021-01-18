@@ -19,6 +19,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QMouseEvent>
 #include <QtWidgets/QToolTip>
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
 
 #include "keyPoint.h"
 #include "pointsQueueProcessor.h"
@@ -72,7 +73,7 @@ private:
 	void initGraphicsOutput();
 
 	QGraphicsScene *mScene; // Has ownership as the parent
-	QScopedPointer<AbstractTimer> mVisualTimer;
+	QScopedPointer<trikScriptRunner::TrikAbstractTimer> mVisualTimer;
 	KeyPoint mMainPoint { Qt::yellow };
 	KeyPoint mMarker { Qt::red };
 	QScopedPointer<PointsQueueProcessor> mPointsDataProcessor;

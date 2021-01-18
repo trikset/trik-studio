@@ -44,7 +44,7 @@ void SensorViewer::setTimeline(TimelineInterface &timeline)
 {
 	mVisualTimer.reset(timeline.produceTimer());
 	mVisualTimer->setRepeatable(true);
-	connect(&*mVisualTimer, &AbstractTimer::timeout, this, &SensorViewer::visualTimerEvent);
+	connect(&*mVisualTimer, &trikScriptRunner::TrikAbstractTimer::timeout, this, &SensorViewer::visualTimerEvent);
 }
 
 void SensorViewer::initGraphicsOutput()

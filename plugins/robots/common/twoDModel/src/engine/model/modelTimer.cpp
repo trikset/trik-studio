@@ -81,13 +81,13 @@ void ModelTimer::setInterval(int ms)
 
 void ModelTimer::setRepeatable(bool repeatable)
 {
-	setSingleShot(!repeatable);
+	mRepeatable = repeatable;
 }
 
 void ModelTimer::onTimeout()
 {
-	AbstractTimer::onTimeout();
-	if (!isSingleShot()) {
+	trikScriptRunner::TrikAbstractTimer::onTimeout();
+	if (mRepeatable) {
 		start();
 	}
 }

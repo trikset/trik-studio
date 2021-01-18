@@ -101,7 +101,7 @@ void Timeline::gotoNextFrame()
 	}
 }
 
-utils::AbstractTimer *Timeline::produceTimerImpl()
+trikScriptRunner::TrikAbstractTimer *Timeline::produceTimerImpl()
 {
 	return new ModelTimer(this);
 }
@@ -121,7 +121,7 @@ quint64 Timeline::timestamp() const
 	return mTimestamp;
 }
 
-utils::AbstractTimer *Timeline::produceTimer()
+trikScriptRunner::TrikAbstractTimer *Timeline::produceTimer()
 {
 	return produceTimerImpl();
 }

@@ -22,7 +22,7 @@
 
 namespace utils {
 
-class ROBOTS_UTILS_EXPORT AbstractTimer : public QTimer
+class ROBOTS_UTILS_EXPORT Abst2ractTimer : public QTimer
 {
 	Q_OBJECT
 

@@ -16,7 +16,7 @@
 
 using namespace utils;
 
-void AbstractTimer::onTimeout()
+void Abst2ractTimer::onTimeout()
 {
 	emit timeout();
 }

@@ -18,9 +18,8 @@
 
 #include "nxtKit/robotModel/parts/nxtSpeaker.h"
 
-namespace utils {
-class AbstractTimer;
-}
+
+namespace trikScriptRunner { class TrikAbstractTimer; }
 
 namespace nxt {
 namespace blocks {
@@ -42,7 +41,7 @@ private slots:
 	void timeout();
 
 private:
-	utils::AbstractTimer * const mTimer;  // Takes ownership
+	trikScriptRunner::TrikAbstractTimer * const mTimer;  // Takes ownership
 };
 
 }

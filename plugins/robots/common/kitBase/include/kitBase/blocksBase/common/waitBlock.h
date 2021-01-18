@@ -18,6 +18,8 @@
 
 #include <kitBase/blocksBase/robotsBlock.h>
 
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
+
 namespace utils {
 class AbstractTimer;
 }
@@ -64,7 +66,7 @@ protected:
 
 	/// @todo Make it private.
 	robotModel::RobotModelInterface &mRobotModel;
-	QScopedPointer<utils::AbstractTimer> mActiveWaitingTimer;
+	QScopedPointer<trikScriptRunner::TrikAbstractTimer> mActiveWaitingTimer;
 
 private slots:
 	/// Shall be redefined in subclasses to request for a sensor or button to read its value.

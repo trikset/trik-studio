@@ -21,6 +21,8 @@
 
 #include <qrtext/debuggerInterface.h>
 
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
+
 #include "utilsDeclSpec.h"
 
 namespace Ui {
@@ -103,7 +105,7 @@ private:
 	QToolButton mResetButton;
 	QToolButton mSaveButton;
 	QComboBox mSlotComboBox;
-	QScopedPointer<AbstractTimer> mUpdateTimer;
+	QScopedPointer<trikScriptRunner::TrikAbstractTimer> mUpdateTimer;
 	const qrtext::DebuggerInterface &mParser;
 	struct TrackObject;
 	QList<TrackObject> mWatchList;

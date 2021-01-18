@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include <utils/abstractTimer.h>
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
 
 #include "twoDModel/engine/model/timeline.h"
 
@@ -22,7 +22,7 @@ namespace twoDModel {
 namespace model {
 
 /// Timer implementation for 2D model. Used in TimerBlock and BeepBlock
-class ModelTimer : public utils::AbstractTimer
+class ModelTimer : public trikScriptRunner::TrikAbstractTimer
 {
 	Q_OBJECT
 

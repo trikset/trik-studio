@@ -16,9 +16,9 @@
 
 #include <QtCore/QtGlobal>
 
-namespace utils {
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
 
-class AbstractTimer;
+namespace utils {
 
 /// An interface for all objects that may measure time
 class TimelineInterface
@@ -32,7 +32,7 @@ public:
 	virtual quint64 timestamp() const = 0;
 
 	/// Creates new timer for specific implementation. Transfers ownership.
-	virtual AbstractTimer *produceTimer() = 0;
+	virtual trikScriptRunner::TrikAbstractTimer *produceTimer() = 0;
 };
 
 }

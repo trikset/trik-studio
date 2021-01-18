@@ -66,7 +66,7 @@ void SensorsGraph::setTimeline(utils::TimelineInterface &timeline)
 	mUpdateTimer->setInterval(mUpdateInterval);
 	mUpdateTimer->setRepeatable(true);
 	mPlotFrame->setTimeline(timeline);
-	connect(&*mUpdateTimer, &AbstractTimer::timeout, this, &SensorsGraph::updateValues);
+	connect(&*mUpdateTimer, &trikScriptRunner::TrikAbstractTimer::timeout, this, &SensorsGraph::updateValues);
 }
 
 void SensorsGraph::setStartStopButtonsVisible(bool visible)

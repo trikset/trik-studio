@@ -15,6 +15,7 @@
 #pragma once
 
 #include "trikScriptRunner/trikScriptControlInterface.h"
+#include "trikScriptRunner/trikAbstractTimer.h"
 
 #include "trikControl/brickInterface.h"
 #include "trikbrick.h"
@@ -39,7 +40,7 @@ public:
 	//QStringList readAll(const QString &file) const override;
 
 	/// In trikRuntime returns QTimer, but we need timer with emulated 2D time. Hopefully this is enough
-	utils::AbstractTimer *timer(int milliseconds) override;
+	trikScriptRunner::TrikAbstractTimer *timer(int milliseconds) override;
 
 	void processSensors(bool isRunning = true);
 
@@ -65,6 +66,6 @@ public slots:
 private:
 	bool mInEventDrivenMode {false};
 	trik::TrikBrick &mBrick;
-	QList<utils::AbstractTimer*> mTimers; // Owns, but in safe manner: timers can be from different threads
+	QList<trikScriptRunner::TrikAbstractTimer*> mTimers; // Owns, but in safe manner: timers can be from different threads
 	QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 };

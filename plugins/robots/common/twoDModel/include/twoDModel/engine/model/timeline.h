@@ -21,6 +21,7 @@
 
 #include "constants.h"
 #include "twoDModel/twoDModelDeclSpec.h"
+#include "plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h"
 
 namespace twoDModel {
 namespace model {
@@ -47,7 +48,7 @@ public:
 
 	quint64 timestamp() const override;
 
-	utils::AbstractTimer *produceTimer() override;
+	trikScriptRunner::TrikAbstractTimer *produceTimer() override;
 
 	/// If @arg immediateMode is true then timeline will emit ticks without delay.
 	/// Thus the immediate process modeling may be performed in background.
@@ -81,7 +82,7 @@ signals:
 private slots:
 	void onTimer();
 	void gotoNextFrame();
-	utils::AbstractTimer *produceTimerImpl();
+	trikScriptRunner::TrikAbstractTimer *produceTimerImpl();
 
 private:
 	static const int defaultRealTimeInterval = 0;

@@ -16,7 +16,7 @@
 
 #include <QtCore/QDateTime>
 
-#include "utils/realTimer.h"
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikRealTimer.h>
 
 using namespace utils;
 
@@ -25,7 +25,7 @@ quint64 RealTimeline::timestamp() const
 	return QDateTime::currentMSecsSinceEpoch();
 }
 
-AbstractTimer *RealTimeline::produceTimer()
+trikScriptRunner::TrikAbstractTimer *RealTimeline::produceTimer()
 {
-	return new RealTimer;
+	return new trikScriptRunner::TrikRealTimer;
 }

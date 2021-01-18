@@ -22,7 +22,7 @@
 namespace utils {
 
 /// Timer implementation for real-life time
-class ROBOTS_UTILS_EXPORT RealTimer : public AbstractTimer
+class ROBOTS_UTILS_EXPORT RealTimer : public Abst2ractTimer
 {
 public:
 	RealTimer();
