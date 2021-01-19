@@ -17,26 +17,20 @@ case $AGENT_OS in
 esac
 df -h .
 
-if [ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" ] && [ "${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER:-false}" == "false" ]
-then
-#      git config remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-#      git fetch --unshallow --tags # for `git describe --tags` to work
-      #TODO: We can build installer and checker archive in parallel if needed
+NEED_DEPLOY=$([[ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" && "${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
 
-      if [[ $AGENT_OS == Linux ]] ; then
-      $EXECUTOR bash -ic "\
-      echo Start build checker archive \
-      && bin/$CONFIG/build-checker-installer.sh \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz \
-      || false \
-"
+if [[ $AGENT_OS == Linux ]] ; then
+      echo Start build checker archive
+      $EXECUTOR bash -ic "bin/$CONFIG/build-checker-installer.sh"
+      if $NEED_DEPLOY ; then
+          $EXECUTOR bash -ic "sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $server:dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
       fi
+fi
+echo Start build installer
+$EXECUTOR bash -ic "\
+      installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
+      && mv installer/trik-studio*installer* installer/$TSNAME"
 
-      $EXECUTOR bash -ic "\
-      echo Start build installer \
-      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-      && mv installer/trik-studio*installer* installer/$TSNAME \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/ \
-      || false \
-"
+if $NEED_DEPLOY ; then
+    $EXECUTOR bash -ic "sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/"
 fi

@@ -11,4 +11,4 @@ if [ -z ${TRIK_PYTHONPATH+x} ] && which -a python3 &> /dev/null ; then
 fi
 
 cd "$(dirname "$0")"
-bin/trik-studio "$@"
+exec bin/trik-studio "$@"
