@@ -20,10 +20,6 @@
 
 #include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
 
-namespace utils {
-class AbstractTimer;
-}
-
 namespace kitBase {
 namespace blocksBase {
 namespace common {

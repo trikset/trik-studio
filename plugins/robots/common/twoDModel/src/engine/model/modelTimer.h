@@ -14,8 +14,6 @@
 
 #pragma once
 
-#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
-
 #include "twoDModel/engine/model/timeline.h"
 
 namespace twoDModel {
@@ -30,16 +28,16 @@ public:
 	explicit ModelTimer(const Timeline *timeline /* Doesn`t take ownership */);
 	~ModelTimer() override;
 
-	bool isTicking() const override;
+	bool isActive() const override;
 	int interval() const override;
 	void start() override;
 	void start(int ms) override;
 	void stop() override;
 	void setInterval(int ms) override;
-	void setRepeatable(bool repeatable) override;
+	void setSingleShot(bool isSingleShot) override;
 
 private slots:
-	void onTimeout() override;
+	void onTimeout();
 	void onTick();
 
 private:

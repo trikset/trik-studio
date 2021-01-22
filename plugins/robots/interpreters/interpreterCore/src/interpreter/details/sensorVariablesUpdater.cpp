@@ -37,7 +37,7 @@ SensorVariablesUpdater::~SensorVariablesUpdater()
 void SensorVariablesUpdater::run()
 {
 	mUpdateTimer.reset(mRobotModelManager.model().timeline().produceTimer());
-	connect(mUpdateTimer.data(), &utils::AbstractTimer::timeout, this, &SensorVariablesUpdater::onTimerTimeout);
+	connect(mUpdateTimer.data(), &trikScriptRunner::TrikAbstractTimer::timeout, this, &SensorVariablesUpdater::onTimerTimeout);
 	resetVariables();
 
 	for (robotParts::Device * const device : mRobotModelManager.model().configuration().devices()) {

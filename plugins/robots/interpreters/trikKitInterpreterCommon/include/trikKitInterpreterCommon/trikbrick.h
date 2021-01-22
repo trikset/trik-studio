@@ -34,10 +34,6 @@
 #include "trikEmulation/trikGyroscopeAdapter.h" /// @todo: replace with forward refs
 #include "trikEmulation/trikProxyMarker.h"
 
-namespace utils {
-class AbstractTimer;
-}
-
 namespace trikControl {
 class CameraImplementationInterface;
 }
@@ -118,7 +114,7 @@ private:
 	TrikDisplayEmu mDisplay;
 	TrikKeysInterfaceStub mKeys;
 
-	QScopedPointer<utils::AbstractTimer> mSensorUpdater;
+	QScopedPointer<trikScriptRunner::TrikAbstractTimer> mSensorUpdater;
 
 	QHash<QString, QSharedPointer<TrikMotorEmu>> mMotors;
 	QHash<QString, QSharedPointer<TrikSensorEmu>> mSensors;
@@ -135,7 +131,7 @@ private:
 	QDir mCurrentDir;
 	bool mIsExcerciseMode = false;
 	QStringList mInputs;
-	QVector<QSharedPointer<utils::AbstractTimer>> mTimers;
+	QVector<QSharedPointer<trikScriptRunner::TrikAbstractTimer>> mTimers;
 };
 
 }

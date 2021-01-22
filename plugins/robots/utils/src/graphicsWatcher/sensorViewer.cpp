@@ -43,7 +43,7 @@ void SensorViewer::resizeEvent(QResizeEvent *event)
 void SensorViewer::setTimeline(TimelineInterface &timeline)
 {
 	mVisualTimer.reset(timeline.produceTimer());
-	mVisualTimer->setRepeatable(true);
+	mVisualTimer->setSingleShot(false);
 	connect(&*mVisualTimer, &trikScriptRunner::TrikAbstractTimer::timeout, this, &SensorViewer::visualTimerEvent);
 }
 
@@ -75,7 +75,7 @@ void SensorViewer::initGraphicsOutput()
 
 void SensorViewer::startJob()
 {
-	if (mVisualTimer && !mVisualTimer->isTicking()) {
+	if (mVisualTimer && !mVisualTimer->isActive()) {
 		mVisualTimer->start(mFpsInterval);
 	}
 }
@@ -271,7 +271,7 @@ void SensorViewer::configureUserOptions(const int &fpsDelay, const int &autoScal
 	mFpsInterval = (fpsDelay < maxFpsInterval) ? fpsDelay : maxFpsInterval;
 	mAutoScaleInterval = autoScaleDelay;
 	mUpdateTextInfoInterval = textInfoUpdateDelay;
-	if (mVisualTimer && mVisualTimer->isTicking()) {
+	if (mVisualTimer && mVisualTimer->isActive()) {
 		mVisualTimer->stop();
 		mVisualTimer->start(mFpsInterval);
 	}

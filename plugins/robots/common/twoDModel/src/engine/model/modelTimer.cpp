@@ -22,7 +22,7 @@ ModelTimer::ModelTimer(const Timeline *timeline)
 	, mListening(false)
 	, mTimePast(0)
 	, mInterval(0)
-	, mRepeatable(false)
+	, mRepeatable(true)
 {
 	connect(timeline, &Timeline::tick, this, &ModelTimer::onTick);
 }
@@ -31,7 +31,7 @@ ModelTimer::~ModelTimer()
 {
 }
 
-bool ModelTimer::isTicking() const
+bool ModelTimer::isActive() const
 {
 	return mListening;
 }
@@ -79,14 +79,14 @@ void ModelTimer::setInterval(int ms)
 	mInterval = ms;
 }
 
-void ModelTimer::setRepeatable(bool repeatable)
+void ModelTimer::setSingleShot(bool isSingleShot)
 {
-	mRepeatable = repeatable;
+	mRepeatable = !isSingleShot;
 }
 
 void ModelTimer::onTimeout()
 {
-	trikScriptRunner::TrikAbstractTimer::onTimeout();
+	emit timeout();
 	if (mRepeatable) {
 		start();
 	}

@@ -16,10 +16,7 @@
 
 #include <qrutils/interpreter/block.h>
 #include <kitBase/robotModel/robotModelInterface.h>
-
-namespace utils {
-class AbstractTimer;
-}
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
 
 namespace interpreterCore {
 namespace coreBlocks {
@@ -42,7 +39,7 @@ private slots:
 	void timeout();
 
 private:
-	utils::AbstractTimer * const mTimer;  // Has ownership (via Qt parent-child system).
+	trikScriptRunner::TrikAbstractTimer * const mTimer;  // Has ownership (via Qt parent-child system).
 };
 
 }

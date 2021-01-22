@@ -15,7 +15,10 @@
 QT += widgets network
 
 links(qrkernel qrutils qextserialport qrtext)
-includes(qrtext)
+includes(\
+		qrtext \
+		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner \
+		)
 
 DEFINES += ROBOTS_UTILS_LIBRARY
 

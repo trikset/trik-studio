@@ -16,10 +16,9 @@
 
 #include <kitBase/blocksBase/common/deviceBlock.h>
 
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
+
 #include "nxtKit/robotModel/parts/nxtSpeaker.h"
-
-
-namespace trikScriptRunner { class TrikAbstractTimer; }
 
 namespace nxt {
 namespace blocks {

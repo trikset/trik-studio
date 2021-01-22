@@ -16,11 +16,10 @@
 
 #include <kitBase/blocksBase/common/deviceBlock.h>
 
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
+
 #include "ev3Kit/robotModel/parts/ev3Speaker.h"
 
-namespace utils {
-class AbstractTimer;
-}
 
 namespace ev3 {
 namespace blocks {
@@ -42,7 +41,7 @@ private slots:
 	void timeout();
 
 private:
-	utils::AbstractTimer * const mTimer;  // Takes ownership
+	trikScriptRunner::TrikAbstractTimer * const mTimer;  // Takes ownership
 };
 
 }

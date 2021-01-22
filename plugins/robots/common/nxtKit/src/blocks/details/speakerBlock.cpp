@@ -15,7 +15,6 @@
 #include "speakerBlock.h"
 
 #include <utils/timelineInterface.h>
-#include <utils/abstractTimer.h>
 #include <kitBase/robotModel/robotModelUtils.h>
 
 using namespace nxt::blocks::details;
@@ -26,7 +25,7 @@ SpeakerBlock::SpeakerBlock(RobotModelInterface &robotModel)
 	, mTimer(robotModel.timeline().produceTimer())
 {
 	mTimer->setParent(this);
-	connect(mTimer, &utils::AbstractTimer::timeout, this, &SpeakerBlock::timeout);
+	connect(mTimer, &trikScriptRunner::TrikAbstractTimer::timeout, this, &SpeakerBlock::timeout);
 }
 
 void SpeakerBlock::run()

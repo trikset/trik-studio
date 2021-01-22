@@ -30,7 +30,7 @@
 #include <qrkernel/settingsManager.h>
 
 
-Q_DECLARE_METATYPE(utils::AbstractTimer*)
+Q_DECLARE_METATYPE(trikScriptRunner::TrikAbstractTimer*)
 
 const QString jsOverrides = "Date.now = script.time;"
 	"arrayPPinternal = function(arg) {"
@@ -73,14 +73,14 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
 
-	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer* const &in){
+	auto atimerToScriptValue = [](QScriptEngine *engine, trikScriptRunner::TrikAbstractTimer* const &in){
 	return engine->newQObject(in);
 	};
-	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer* &out){
-	out = qobject_cast<utils::AbstractTimer*>(object.toQObject());
+	auto atimerFromScriptValue = [](const QScriptValue &object, trikScriptRunner::TrikAbstractTimer* &out){
+	out = qobject_cast<trikScriptRunner::TrikAbstractTimer*>(object.toQObject());
 	};
 	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine){
-	qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
+	qScriptRegisterMetaType<trikScriptRunner::TrikAbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
 	});
 	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed
 		, this, &TrikTextualInterpreter::scriptFinished);

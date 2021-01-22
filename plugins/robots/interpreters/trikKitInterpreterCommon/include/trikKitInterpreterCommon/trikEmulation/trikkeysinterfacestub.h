@@ -18,8 +18,9 @@
 #include <QtCore/QScopedPointer>
 #include <QtCore/QHash>
 
-#include <utils/abstractTimer.h>
 #include <trikControl/keysInterface.h>
+
+#include <trikScriptRunner/trikAbstractTimer.h>
 
 namespace kitBase {
 namespace robotModel {
@@ -59,7 +60,7 @@ private:
 	QHash<int, bool> mWasPressed;
 	QSharedPointer<kitBase::robotModel::CommonRobotModel> mRobotModel;
 	QHash<int, kitBase::robotModel::robotParts::Button *> mButtons;
-	QScopedPointer<utils::AbstractTimer> mButtonWatchingTimer;
+	QScopedPointer<trikScriptRunner::TrikAbstractTimer> mButtonWatchingTimer;
 };
 
 }

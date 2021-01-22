@@ -20,7 +20,6 @@
 #include "trikControl/brickInterface.h"
 #include "trikbrick.h"
 
-#include <utils/abstractTimer.h>
 #include <trikKitInterpreterCommon/robotModel/twoD/trikTwoDRobotModel.h>
 
 class TwoDExecutionControl : public trikScriptRunner::TrikScriptControlInterface

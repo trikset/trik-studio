@@ -26,7 +26,7 @@ SpeakerBlock::SpeakerBlock(RobotModelInterface &robotModel)
 	, mTimer(robotModel.timeline().produceTimer())
 {
 	mTimer->setParent(this);
-	connect(mTimer, &utils::AbstractTimer::timeout, this, &SpeakerBlock::timeout);
+	connect(mTimer, &trikScriptRunner::TrikAbstractTimer::timeout, this, &SpeakerBlock::timeout);
 }
 
 void SpeakerBlock::run()

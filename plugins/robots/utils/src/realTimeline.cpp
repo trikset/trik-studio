@@ -16,7 +16,7 @@
 
 #include <QtCore/QDateTime>
 
-#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikRealTimer.h>
+#include <trikScriptRunner/trikRealTimer.h>
 
 using namespace utils;
 

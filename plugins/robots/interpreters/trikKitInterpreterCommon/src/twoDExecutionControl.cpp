@@ -59,7 +59,7 @@ void TwoDExecutionControl::wait(const int &milliseconds)
 	QEventLoop loop;
 
 	auto t = timeline->produceTimer();
-	connect(t, &utils::AbstractTimer::timeout, &loop, &QEventLoop::quit);
+	connect(t, &trikScriptRunner::TrikAbstractTimer::timeout, &loop, &QEventLoop::quit);
 	connect(&loop, &QObject::destroyed, t, &QObject::deleteLater);
 
 	connect(timeline, &twoDModel::model::Timeline::beforeStop, &loop, &QEventLoop::quit);
@@ -90,17 +90,17 @@ void TwoDExecutionControl::reset()
 {
 	emit stopWaiting();
 	for (auto &&timer : mTimers) {
-		QMetaObject::invokeMethod(timer, &utils::AbstractTimer::stop, Qt::QueuedConnection);
+		QMetaObject::invokeMethod(timer, &trikScriptRunner::TrikAbstractTimer::stop, Qt::QueuedConnection);
 		timer->deleteLater();
 	}
 	mTimers.clear();
 }
 
-utils::AbstractTimer *TwoDExecutionControl::timer(int milliseconds)
+trikScriptRunner::TrikAbstractTimer *TwoDExecutionControl::timer(int milliseconds)
 {
 	auto result = mTwoDRobotModel->timeline().produceTimer();
 	mTimers.append(result);
-	result->setRepeatable(true);
+	result->setSingleShot(true);
 	result->start(milliseconds);
 	return result;
 }

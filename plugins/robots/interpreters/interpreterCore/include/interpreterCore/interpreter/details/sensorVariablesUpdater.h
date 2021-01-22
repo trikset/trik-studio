@@ -20,11 +20,10 @@
 
 #include <kitBase/robotModel/robotModelManagerInterface.h>
 
+#include <plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner/include/trikScriptRunner/trikAbstractTimer.h>
+
 #include "interpreterCore/textLanguage/robotsBlockParser.h"
 
-namespace utils {
-class AbstractTimer;
-}
 
 namespace interpreterCore {
 namespace interpreter {
@@ -72,7 +71,7 @@ private:
 
 	void resetVariables();
 
-	QScopedPointer<utils::AbstractTimer> mUpdateTimer;
+	QScopedPointer<trikScriptRunner::TrikAbstractTimer> mUpdateTimer;
 	const kitBase::robotModel::RobotModelManagerInterface &mRobotModelManager;
 	qrtext::DebuggerInterface &mParser;
 };

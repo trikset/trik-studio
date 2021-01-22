@@ -21,7 +21,7 @@ quint64 TestTimeline::timestamp() const
 	return mTimestamp;
 }
 
-utils::AbstractTimer *TestTimeline::produceTimer()
+trikScriptRunner::TrikAbstractTimer *TestTimeline::produceTimer()
 {
 	return nullptr;
 }
