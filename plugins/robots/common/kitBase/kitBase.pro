@@ -13,9 +13,8 @@
 # limitations under the License.
 
 TARGET = robots-kit-base
+TEMPLATE = lib
 
 include(../../../../global.pri)
-
-TEMPLATE = lib
 
 include(kitBase.pri)

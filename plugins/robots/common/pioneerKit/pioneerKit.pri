@@ -21,7 +21,7 @@ includes(plugins/robots/common/pioneerKit \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-                robots-utils robots-kit-base )
+		robots-utils robots-kit-base)
 
 SOURCES += $$files(*.cpp, true)
 HEADERS += $$files(*.h, true)
