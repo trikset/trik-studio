@@ -29,3 +29,5 @@ TRIK_STUDIO_YEAR = 2021
 
 #message($$DESTDIR)
 QMAKE_SUBSTITUTES += .qmake.cache.in
+
+DISTFILES += .qmake.cache.in
