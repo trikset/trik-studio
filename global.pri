@@ -81,6 +81,7 @@ isEmpty(TARGET) {
 }
 
 equals(TEMPLATE, app) {
+	VERSION = $${PROJECT_GIT_VERSION_MAJOR}.$${PROJECT_GIT_VERSION_MINOR}.$${PROJECT_GIT_VERSION_PATCH}
 	!no_rpath {
 		#reset default rpath before setting new one
 		#but this clears path to Qt libraries
@@ -105,8 +106,10 @@ equals(TEMPLATE, app) {
 #Workaround for a known gcc/ld (before 7.3/bionic) issue
 use_gold_linker:!clang: QMAKE_LFLAGS += -Wl,--disable-new-dtags
 
+win32:VERSION_PE_HEADER = $${PROJECT_GIT_VERSION_MAJOR}$${PROJECT_GIT_VERSION_MINOR}.$${PROJECT_GIT_VERSION_PATCH}
+
 macx-clang {
-	QMAKE_MACOSX_DEPLOYMENT_TARGET=10.9
+	QMAKE_MACOSX_DEPLOYMENT_TARGET=10.12
 	QMAKE_LFLAGS_SONAME = -Wl,-install_name,@rpath/
 }
 

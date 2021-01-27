@@ -3,11 +3,29 @@ TEMPLATE=subdirs
 SUBDIRS=
 #DESTDIR = $$absolute_path($$DESTDIR)
 
-#need to update index because of https://stackoverflow.com/questions/16035240/
-system(git update-index --refresh)
 # ATM we use xenial 16.04 as main linux builder, and it lacks new git with --broken option.
-TRIK_STUDIO_VERSION = $$system(git describe --tags --always --dirty --abbrev=6)
-TRIK_STUDIO_YEAR = 2019
+REPO_GIT_VERSION_STRING=$$system(git describe --tags --always --dirty --abbrev=6 || true)
+REPO_GIT_VERSION_LIST=$$replace(REPO_GIT_VERSION_STRING, [-.], ":")
+REPO_GIT_VERSION_LIST=$$replace(REPO_GIT_VERSION_LIST, [a-zA-Z], "")
+REPO_GIT_VERSION_LIST=$$split(REPO_GIT_VERSION_LIST, :)
+
+PROJECT_GIT_VERSION_MAJOR=$$member(REPO_GIT_VERSION_LIST, 0)
+PROJECT_GIT_VERSION_MINOR=$$member(REPO_GIT_VERSION_LIST, 1)
+PROJECT_GIT_VERSION_PATCH=$$member(REPO_GIT_VERSION_LIST, 2)
+contains(REPO_GIT_VERSION_STRING, .*dirty.*): PROJECT_GIT_VERSION_PATCH = 9999
+
+isEmpty(PROJECT_GIT_VERSION_PATCH):PROJECT_GIT_VERSION_PATCH=999
+isEmpty(PROJECT_GIT_VERSION_MINOR):PROJECT_GIT_VERSION_MINOR=999
+isEmpty(PROJECT_GIT_VERSION_MAJOR):PROJECT_GIT_VERSION_MAJOR=999
+
+TRIK_STUDIO_VERSION=$$REPO_GIT_VERSION_STRING
+isEmpty(TRIK_STUDIO_VERSION):TRIK_STUDIO_VERSION=999
+
+message(Version is "$$TRIK_STUDIO_VERSION with codes" \
+      $$PROJECT_GIT_VERSION_MAJOR/$$PROJECT_GIT_VERSION_MINOR/$$PROJECT_GIT_VERSION_PATCH)
+
+#obsolete???
+TRIK_STUDIO_YEAR = 2021
 
 #message($$DESTDIR)
 QMAKE_SUBSTITUTES += .qmake.cache.in
