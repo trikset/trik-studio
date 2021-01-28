@@ -154,9 +154,9 @@ FORMS += \
 RESOURCES = $$PWD/mainWindow.qrc
 
 win32 {
-	RC_FILE = $$PWD/mainWindow.rc
-        QMAKE_MANIFEST = $$PWD/application.exe.manifest
-        DISTFILES += $$QMAKE_MANIFEST
+	QMAKE_MANIFEST = $$PWD/application.exe.manifest
+        RC_ICONS = icon.ico
+	DISTFILES += $$QMAKE_MANIFEST $$RC_ICONS
 }
 
 macx {
