@@ -100,7 +100,7 @@ utils::AbstractTimer *TwoDExecutionControl::timer(int milliseconds)
 {
 	auto result = mTwoDRobotModel->timeline().produceTimer();
 	mTimers.append(result);
-	result->setRepeatable(true);
+	result->setSingleShot(false);
 	result->start(milliseconds);
 	return result;
 }

@@ -48,7 +48,7 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 	, mSensorUpdater(model->timeline().produceTimer())
 {
 	connect(this, &TrikBrick::log, this, &TrikBrick::printToShell);
-	mSensorUpdater->setRepeatable(true);
+	mSensorUpdater->setSingleShot(false);
 	mSensorUpdater->setInterval(model->updateIntervalForInterpretation()); // seems to be x2 of timeline tick
 	connect(mSensorUpdater.data(), &utils::AbstractTimer::timeout
 			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::updateSensorsValues);
