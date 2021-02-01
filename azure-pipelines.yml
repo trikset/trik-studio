@@ -23,8 +23,16 @@ parameters:
     type: step
     default:
       checkout: self
-      fetchDepth: 1
+      fetchDepth: 100
       submodules: recursive
+
+  - name: gitListStep
+    type: step
+    default:
+      bash: |
+        git tag -l
+        git branch -a
+      displayName: Set up the environment
 
   - name: environmentStep
     type: step
