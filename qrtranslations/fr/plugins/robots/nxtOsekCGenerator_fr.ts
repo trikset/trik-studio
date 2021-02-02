@@ -166,11 +166,12 @@
     </message>
     <message>
         <location line="+51"/>
+        <location line="+129"/>
         <source>NXT tools package is not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="-82"/>
         <source>Generate code</source>
         <translation>Générer le code</translation>
     </message>
@@ -200,9 +201,8 @@
         <translation>flash.sh n&apos;est pas trouvé. Assurez-vous qu&apos;il soit présent dans le repertoire de  QReal</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>upload.sh not found. Make sure it is present in QReal installation directory</source>
-        <translation>upload.sh n&apos;est pas trouvé. Assurez-vous qu&apos;il soit présent dans le repertoire de  QReal</translation>
+        <translation type="vanished">upload.sh n&apos;est pas trouvé. Assurez-vous qu&apos;il soit présent dans le repertoire de  QReal</translation>
     </message>
 </context>
 </TS>
