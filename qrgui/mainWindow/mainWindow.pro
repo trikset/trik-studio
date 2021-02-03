@@ -160,7 +160,8 @@ win32 {
 }
 
 macx {
-        ICON = icon.icns
+	ICON = icon.icns
+	QMAKE_INFO_PLIST = mainWindow.plist
 }
 
 include(scriptAPI/scriptAPI.pri)
