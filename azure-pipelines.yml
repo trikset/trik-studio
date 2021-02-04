@@ -49,8 +49,8 @@ parameters:
         path: $(CCACHE_DIR)
         restoreKeys: |
           "ccache-$(Agent.OS)-$(CONFIG)" | "$(Build.SourceVersion)" | "$(QMAKE_EXTRA)"
-          "ccache-$(Agent.OS)-$(CONFIG)" | "$(Build.SourceVersion)"
           "ccache-$(Agent.OS)-$(CONFIG)" | "$(QMAKE_EXTRA)"
+          "ccache-$(Agent.OS)-$(CONFIG)" | "$(Build.SourceVersion)"
           "ccache-$(Agent.OS)-$(CONFIG)"
       displayName: Process caches
 
