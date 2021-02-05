@@ -17,14 +17,12 @@
     <StartMenuDir>TRIK Studio</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
-    <AllowSpaceInPath>false</AllowSpaceInPath>
-    <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
     <TargetDir>@HomeDir@/TRIKStudio</TargetDir>
-    <AdminTargetDir>@HomeDir@/TRIKStudio</AdminTargetDir>
+    <AdminTargetDir>@ApplicationsDir@/TRIKStudio</AdminTargetDir>
 
     <RunProgram>open</RunProgram>
     <RunProgramArguments>
-        <Argument>@TargetDir@/TRIK Studio.app</Argument>
+	    <Argument>@TargetDir@/TRIK Studio.app</Argument>
     </RunProgramArguments>
 </Installer>

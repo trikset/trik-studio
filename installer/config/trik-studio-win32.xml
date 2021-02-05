@@ -17,11 +17,9 @@
     <StartMenuDir>TRIK Studio</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
-    <AllowSpaceInPath>false</AllowSpaceInPath>
-    <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
-    <TargetDir>@RootDir@TRIKStudio</TargetDir>
-    <AdminTargetDir>@RootDir@TRIKStudio</AdminTargetDir>
+    <TargetDir>@RootDir@/TRIKStudio</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@/TRIKStudio</AdminTargetDir>
 
     <RunProgram>@TargetDir@/trik-studio</RunProgram>
 </Installer>
