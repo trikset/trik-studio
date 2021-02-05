@@ -27,10 +27,10 @@ if [[ $AGENT_OS == Linux ]] ; then
       fi
 fi
 echo Start build installer
-$EXECUTOR bash -ic "\
-      installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-      && mv installer/trik-studio*installer* installer/$TSNAME"
+$EXECUTOR bash -ic "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
 
 if $NEED_DEPLOY ; then
-    $EXECUTOR bash -ic "sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/"
+    $EXECUTOR bash -ic "\
+          mv installer/trik-studio*installer* installer/$TSNAME \
+          && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/"
 fi
