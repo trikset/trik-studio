@@ -88,6 +88,7 @@ qint64 TwoDExecutionControl::time() const
 
 void TwoDExecutionControl::reset()
 {
+	mInEventDrivenMode = false;
 	emit stopWaiting();
 	for (auto &&timer : mTimers) {
 		QMetaObject::invokeMethod(timer, &utils::AbstractTimer::stop, Qt::QueuedConnection);
