@@ -85,6 +85,12 @@ parameters:
       condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
       displayName:  'Tag name as an environment variable'
 
+  - name: publishInstallerArtifact
+    type: step
+    default:
+      publish: installer/
+      artifact: "$(Agent.OS) installer"
+
 stages:
 - stage: lintStage
   displayName: Lint stage
@@ -225,6 +231,7 @@ stages:
     - ${{ parameters.buildNoTestsStep }}
     - ${{ parameters.setTagNameStep }}
     - ${{ parameters.buildInstallerStep }}
+    - ${{ parameters.publishInstallerArtifact }}
 
 - stage: macOsInstallerStage
   displayName: MacOs installer
@@ -246,3 +253,4 @@ stages:
     - ${{ parameters.buildNoTestsStep }}
     - ${{ parameters.setTagNameStep }}
     - ${{ parameters.buildInstallerStep }}
+    - ${{ parameters.publishInstallerArtifact }}
