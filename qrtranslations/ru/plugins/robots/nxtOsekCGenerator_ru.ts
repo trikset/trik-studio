@@ -170,11 +170,12 @@
     </message>
     <message>
         <location line="+51"/>
+        <location line="+129"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="-82"/>
         <source>Generate code</source>
         <translation>Генерировать код</translation>
     </message>
@@ -204,9 +205,8 @@
         <translation>Не найден скрипт flash.sh. Убедитесь, что пакет nxt-tools установлен корректно</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>upload.sh not found. Make sure it is present in QReal installation directory</source>
-        <translation>Не найден скрипт upload.sh. Убедитесь, что пакет nxt-tools установлен корректно</translation>
+        <translation type="vanished">Не найден скрипт upload.sh. Убедитесь, что пакет nxt-tools установлен корректно</translation>
     </message>
 </context>
 </TS>

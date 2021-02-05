@@ -209,7 +209,7 @@ void NxtOsekCGeneratorPlugin::uploadProgram()
 {
 	if (!mNxtToolsPresent) {
 		mMainWindowInterface->errorReporter()->addError(
-				tr("upload.sh not found. Make sure it is present in QReal installation directory"));
+				tr("NXT tools package is not installed"));
 	} else {
 		const QFileInfo fileInfo = generateCodeForProcessing();
 
@@ -225,7 +225,7 @@ void NxtOsekCGeneratorPlugin::checkNxtTools()
 	if (!dir.exists()) {
 		mNxtToolsPresent = false;
 	} else {
-		QDir gnuarm(dir.absolutePath() + "/gnuarm");
+		QDir gnuarm(dir.absolutePath() + "/gnuarm/bin");
 		QDir nexttool(dir.absolutePath() + "/nexttool");
 		QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
 
