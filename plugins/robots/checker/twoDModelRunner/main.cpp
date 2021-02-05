@@ -85,14 +85,14 @@ int main(int argc, char *argv[])
 		logger.addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2);
 	}
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
-	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName();
+	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture();
 	QLOG_INFO() << "Arguments:" << app->arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 	setDefaultLocale();
 
 	// Hack to switch on default robot model
-	for (QString kit : {"trikV62", "trikV6", "ev3", "nxt"}) {
-		qReal::SettingsManager::setValue("SelectedModelFor" + kit + "Kit", QVariant());
+	for (auto &&kit : {"trikV62", "trikV6", "ev3", "nxt"}) {
+		qReal::SettingsManager::setValue(QString("SelectedModelFor%1Kit").arg(kit), QVariant());
 	}
 
 	QCommandLineParser parser;
