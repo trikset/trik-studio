@@ -27,13 +27,14 @@ class ROBOTS_UTILS_EXPORT RealTimer : public AbstractTimer
 public:
 	RealTimer();
 
-	bool isTicking() const override;
+	bool isActive() const override;
 	int interval() const override;
 	void start() override;
 	void start(int ms) override;
 	void stop() override;
 	void setInterval(int ms) override;
-	void setRepeatable(bool repeatable) override;
+	void setSingleShot(bool isSingleShot) override;
+	bool isSingleShot() override;
 
 private:
 	QTimer mTimer;

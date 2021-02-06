@@ -133,7 +133,7 @@ install:
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
   - ccache -p || echo "Failed to print ccache config (missing -p option)"
   - if not exist %BUILD_DIR% mkdir %BUILD_DIR%
-  - du -sh %BUILD_DIR% %CCACHE_DIR%
+#  - du -sh %BUILD_DIR% %CCACHE_DIR%
   - ccache -M 900M
   - which g++
   - g++ --version

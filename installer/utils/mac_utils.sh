@@ -17,7 +17,7 @@ function fix_dependencies {
 	local install_name
 	install_name=$(otool -D "$target" | tail -n +2 | grep -v '^@' || : )
 	if [[ -n "$install_name" ]] ; then
-		short_id=$(realpath -e --relative-to "$prefix" "$short_id" || echo "@rpath/"$(basename "$install_name"))
+		short_id=$(realpath -e --relative-to "$prefix" "$install_name" || echo "@rpath/"$(basename "$install_name"))
 		change="-id \"$short_id\""
 	fi
 	for dep in $(otool -L "$target" | grep "^\t[^@]" | cut -f 1 -d \( || : ) ; do

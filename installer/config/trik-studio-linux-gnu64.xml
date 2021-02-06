@@ -17,11 +17,9 @@
     <StartMenuDir>TRIK Studio Junior</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
-    <AllowSpaceInPath>false</AllowSpaceInPath>
-    <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
     <TargetDir>@HomeDir@/TRIKStudio.Jr</TargetDir>
-    <AdminTargetDir>@HomeDir@/TRIKStudio.Jr</AdminTargetDir>
+    <AdminTargetDir>@ApplicationsDir@/TRIKStudio.Jr</AdminTargetDir>
 
     <RunProgram>bash</RunProgram>
     <RunProgramArguments>

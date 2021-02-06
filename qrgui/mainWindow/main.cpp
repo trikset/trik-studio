@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();
-	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName()
+	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture()
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app->arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();

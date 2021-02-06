@@ -22,27 +22,21 @@
 
 namespace utils {
 
-class ROBOTS_UTILS_EXPORT AbstractTimer : public QTimer
+class ROBOTS_UTILS_EXPORT AbstractTimer : public QObject
 {
 	Q_OBJECT
 
 public:
-	/// Returns true if the timer is working now or false otherwise
-	virtual bool isTicking() const = 0;
-	/// Alias for isTicking for ebtter symmetry with QTimer
-	virtual bool isActive() const { return isTicking(); }
+	virtual bool isActive() const = 0;
 	virtual int interval() const = 0;
 	virtual void setInterval(int ms) = 0;
-
-	/// If \a repeatable then the timer will set itself up again when timeout reached.
-	/// By default timers are not repeatable.
-	/// TODO: Remove such methods, because it is QTimer herit now.
-	virtual void setRepeatable(bool repeatable) = 0;
+	virtual void setSingleShot(bool isSingleShot) = 0;
+	virtual bool isSingleShot() = 0;
 
 public slots:
 	virtual void start() = 0;
 	virtual void start(int ms) = 0;
-	Q_INVOKABLE virtual void stop() = 0;
+	virtual void stop() = 0;
 
 signals:
 	void timeout() ;
