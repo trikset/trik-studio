@@ -18,6 +18,7 @@
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <kitBase/robotModel/robotParts/button.h>
 #include <QsLog.h>
+#include <QEventLoop>
 
 using namespace trik;
 using namespace kitBase::robotModel;
@@ -46,6 +47,7 @@ void TrikKeysInterfaceStub::start()
 }
 
 void TrikKeysInterfaceStub::reset() {
+	emit buttonPressed(-1, -1); // hack to stop waiting
 	for (auto &&button : mButtons) {
 		button->read(); // hack to clear lastReadState
 	}
@@ -66,8 +68,25 @@ bool TrikKeysInterfaceStub::isPressed(int code)
 
 int TrikKeysInterfaceStub::buttonCode(bool wait)
 {
-	Q_UNUSED(wait);
-	return -1; /// @todo
+	if (!wait) {
+		for (auto code : mButtons.keys()) {
+			if (mWasPressed[code])
+				return code;
+		}
+
+		return -1;
+	}
+
+	int code = -1;
+	QEventLoop l;
+	connect(this, &KeysInterface::buttonPressed, &l, [&l, &code](int c, int v) {
+		Q_UNUSED(v)
+		code = c;
+		l.quit();
+	});
+	l.exec();
+
+	return code;
 }
 
 void TrikKeysInterfaceStub::handleNewData(robotParts::Button *button, int value)
@@ -83,8 +102,7 @@ void TrikKeysInterfaceStub::handleNewData(robotParts::Button *button, int value)
 bool TrikKeysInterfaceStub::registerButton(int code)
 {
 	if (!mButtons.contains(code)) {
-		robotParts::Button * button =
-				RobotModelUtils::findDevice<robotParts::Button>(*mRobotModel, mKeycodeMap[code]);
+		auto button = RobotModelUtils::findDevice<robotParts::Button>(*mRobotModel, mKeycodeMap[code]);
 		if (button == nullptr) {
 			/// TODO: propogate errors to trikbrick
 			QLOG_FATAL() << "button not found for" << code << "/" << hex << code;
