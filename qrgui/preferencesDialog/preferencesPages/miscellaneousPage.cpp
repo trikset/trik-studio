@@ -12,20 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "miscellaniousPage.h"
-#include "ui_miscellaniousPage.h"
+#include "miscellaneousPage.h"
+#include "ui_miscellaneousPage.h"
 
 #include <qrkernel/settingsManager.h>
 #include <qrutils/widgets/qRealFileDialog.h>
 
 using namespace qReal;
 
-PreferencesMiscellaniousPage::PreferencesMiscellaniousPage(QWidget *parent)
+PreferencesMiscellaneousPage::PreferencesMiscellaneousPage(QWidget *parent)
 		: PreferencesPage(parent)
-		, mUi(new Ui::PreferencesMiscellaniousPage)
+		, mUi(new Ui::PreferencesMiscellaneousPage)
 {
 	mUi->setupUi(this);
-	setObjectName("preferencesMiscellaniousPage");
+	setObjectName("preferencesMiscellaneousPage");
 	setWindowIcon(QIcon(":/preferencesDialog/images/miscellaneous.png"));
 
 	connect(mUi->imagesPathBrowseButton, SIGNAL(clicked()), this, SLOT(browseImagesPath()));
@@ -35,12 +35,12 @@ PreferencesMiscellaniousPage::PreferencesMiscellaniousPage(QWidget *parent)
 	restoreSettings();
 }
 
-PreferencesMiscellaniousPage::~PreferencesMiscellaniousPage()
+PreferencesMiscellaneousPage::~PreferencesMiscellaneousPage()
 {
 	delete mUi;
 }
 
-void PreferencesMiscellaniousPage::changeEvent(QEvent *e)
+void PreferencesMiscellaneousPage::changeEvent(QEvent *e)
 {
 	switch (e->type()) {
 	case QEvent::LanguageChange:
@@ -51,16 +51,16 @@ void PreferencesMiscellaniousPage::changeEvent(QEvent *e)
 	}
 }
 
-void PreferencesMiscellaniousPage::browseImagesPath()
+void PreferencesMiscellaneousPage::browseImagesPath()
 {
-	const QString path = utils::QRealFileDialog::getExistingDirectory("OpenImagesOnMiscellaniousPage"
+	const QString path = utils::QRealFileDialog::getExistingDirectory("OpenImagesOnMiscellaneousPage"
 			, this, tr("Open Directory")).replace("\\", "/");
 	if (!path.isEmpty()) {
 		mUi->imagesPathEdit->setText(path);
 	}
 }
 
-void PreferencesMiscellaniousPage::save()
+void PreferencesMiscellaneousPage::save()
 {
 	SettingsManager::setValue("Splashscreen", mUi->splashScreenCheckBox->isChecked());
 	SettingsManager::setValue("Antialiasing", mUi->antialiasingCheckBox->isChecked());
@@ -71,7 +71,7 @@ void PreferencesMiscellaniousPage::save()
 	SettingsManager::setValue("toolbarSize", mUi->toolbarSizeSlider->value());
 }
 
-void PreferencesMiscellaniousPage::restoreSettings()
+void PreferencesMiscellaneousPage::restoreSettings()
 {
 	mUi->antialiasingCheckBox->setChecked(SettingsManager::value("Antialiasing").toBool());
 	mUi->splashScreenCheckBox->setChecked(SettingsManager::value("Splashscreen").toBool());
