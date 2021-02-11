@@ -18,8 +18,8 @@
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
 
-    <TargetDir>@RootDir@/TRIKStudio</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@/TRIKStudio</AdminTargetDir>
+    <TargetDir>@RootDir@TRIKStudio</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@TRIKStudio</AdminTargetDir>
 
-    <RunProgram>@TargetDir@/trik-studio</RunProgram>
+    <RunProgram>@TargetDir@trik-studio</RunProgram>
 </Installer>
