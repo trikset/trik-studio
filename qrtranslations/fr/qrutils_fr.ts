@@ -442,7 +442,7 @@
 <context>
     <name>qReal::ui::ConsoleDock</name>
     <message>
-        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+50"/>
+        <location filename="../../qrutils/widgets/consoleDock.cpp" line="+54"/>
         <source>Reset shell</source>
         <translation type="unfinished"></translation>
     </message>
