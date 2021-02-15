@@ -19,6 +19,7 @@
 #include <qrrepo/repoApi.h>
 
 #include <QFileInfo>
+#include <QDomElement>
 
 const QString description = QObject::tr("Patcher for save files, replaces world model "
 		"with contents of a given XML world model");
@@ -35,10 +36,14 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("save-file", QObject::tr("TRIK Studio save file to be patched."));
 
-	QCommandLineOption patchField("f", QObject::tr("XML file with prepared 2D model field."), "field.xml");
+	QCommandLineOption patchField("f", QObject::tr("XML file with prepared 2D model field."
+										"Both world and robot configurations will be patched"), "field.xml");
 	parser.addOption(patchField);
 	QCommandLineOption patchScript("s", QObject::tr("Script file to be patched into save file."), "script.js");
 	parser.addOption(patchScript);
+	QCommandLineOption patchWorld("w", QObject::tr("XML file with prepared 2D model field."
+										"Only world configurations will be patched"), "field.xml");
+	parser.addOption(patchWorld);
 
 	parser.process(app);
 
@@ -63,6 +68,27 @@ int main(int argc, char *argv[])
 		repo.setMetaInformation("worldModel", fieldContents);
 	}
 
+	if (parser.isSet(patchWorld)) {
+		const auto &field = parser.value(patchWorld);
+		QFile fieldFile(field);
+		if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			return 1;
+		}
+
+		QDomDocument newWorld;
+		newWorld.setContent(&fieldFile);
+		QDomDocument prevWorld;
+		prevWorld.setContent(repo.metaInformation("worldModel").toString());
+
+		newWorld.documentElement().replaceChild(
+					prevWorld.documentElement().firstChildElement("robots"),
+					newWorld.documentElement().firstChildElement("robots"));
+
+		QString newWorldStr;
+		QTextStream stream(&newWorldStr);
+		newWorld.save(stream, 4);
+		repo.setMetaInformation("worldModel", newWorldStr);
+	}
 
 	if (parser.isSet(patchScript)) {
 		const auto &script = parser.value(patchScript);
