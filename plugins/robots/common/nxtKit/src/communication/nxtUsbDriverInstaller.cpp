@@ -37,10 +37,11 @@ QString NxtUsbDriverInstaller::path(const QString &file) const
 bool NxtUsbDriverInstaller::installUsbDriver()
 {
 	if (QOperatingSystemVersion::currentType() != QOperatingSystemVersion::OSType::Windows) {
+		QLOG_INFO() << "Cannot install USB driver, unsupported OS " << QOperatingSystemVersion::currentType();
 		return true;
 	}
 
-	QLOG_WARN() << "Driver for LEGO device not found. Trying to installing WinUSB...";
+	QLOG_WARN() << "Driver for LEGO device not found. Trying to install WinUSB...";
 
 	if (mInstallationProcess.state() != QProcess::NotRunning) {
 		QLOG_ERROR() << "Attempted to install NXT driver during installation already running, that's strange";

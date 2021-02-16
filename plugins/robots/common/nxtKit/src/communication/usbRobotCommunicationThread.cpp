@@ -85,6 +85,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 		if (device_descriptor.idVendor == vid && device_descriptor.idProduct == pid) {
 			const int err = libusb_open(devices[i], &mHandle);
 			if (err == LIBUSB_ERROR_NOT_SUPPORTED) {
+				QLOG_ERROR() << "libusb_open returned LIBUSB_ERROR_NOT_SUPPORTED";
 				emit noDriversFound();
 				libusb_free_device_list(devices, 1);
 				if (mHandle) {
