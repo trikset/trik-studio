@@ -637,12 +637,16 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
         <source>The task is accomplished!</source>
-        <translation>Задание выполнено!</translation>
+        <translation type="vanished">Задание выполнено!</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
+        <source>The task is accomplished in %1 seconds!</source>
+        <translation>Задание выполнено за %1 секунд!</translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>

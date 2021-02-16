@@ -54,7 +54,8 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 	mWorldModel.init(errorReporter);
 	mChecker.reset(new constraints::ConstraintsChecker(errorReporter, *this));
 	connect(mChecker.data(), &constraints::ConstraintsChecker::success, this, [&]() {
-		errorReporter.addInformation(tr("The task is accomplished!"));
+		errorReporter.addInformation(tr("The task is accomplished in %1 seconds!")
+									.arg(QString::number(timeline().timestamp() / 1000.0)));
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
 		QTimer::singleShot(0, &interpreterControl,

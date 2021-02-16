@@ -361,12 +361,16 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
         <source>The task is accomplished!</source>
-        <translation>La tache est accomplie !</translation>
+        <translation type="vanished">La tache est accomplie !</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
+        <source>The task is accomplished in %1 seconds!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
