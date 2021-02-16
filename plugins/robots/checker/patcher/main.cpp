@@ -60,9 +60,7 @@ int main(int argc, char *argv[])
 	qrRepo::RepoApi repo(saveFile);
 
 	// Check that from three booleans (-f/-w/--wp options) at least two of them are not true at the same time
-	// a ^ b ? c : a
-	if (parser.isSet(patchField) ^ parser.isSet(patchWorld) ? parser.isSet(patchWorldAndPosition)
-			: parser.isSet(patchField)) {
+	if (parser.isSet(patchField) + parser.isSet(patchWorld) + parser.isSet(patchWorldAndPosition) > 1) {
 		return 2;
 	}
 
