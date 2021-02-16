@@ -36,14 +36,18 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("save-file", QObject::tr("TRIK Studio save file to be patched."));
 
-	QCommandLineOption patchField("f", QObject::tr("XML file with prepared 2D model field."
-										"Both world and robot configurations will be patched"), "field.xml");
+	QCommandLineOption patchField("f", QObject::tr("XML file with prepared 2D model field. "
+							"Both world and robot configurations (position + ports) will be patched."), "field.xml");
 	parser.addOption(patchField);
 	QCommandLineOption patchScript("s", QObject::tr("Script file to be patched into save file."), "script.js");
 	parser.addOption(patchScript);
-	QCommandLineOption patchWorld("w", QObject::tr("XML file with prepared 2D model field."
-										"Only world configurations will be patched"), "field.xml");
+	QCommandLineOption patchWorld("w", QObject::tr("XML file with prepared 2D model field. "
+										"Only world configurations will be patched."), "field.xml");
 	parser.addOption(patchWorld);
+
+	QCommandLineOption patchWorldAndPosition("wp", QObject::tr("XML file with prepared 2D model field. "
+										"Only world configurations and robot position will be patched."), "field.xml");
+	parser.addOption(patchWorldAndPosition);
 
 	parser.process(app);
 
@@ -54,6 +58,13 @@ int main(int argc, char *argv[])
 
 	const auto &saveFile = positionalArgs[0];
 	qrRepo::RepoApi repo(saveFile);
+
+	// Check that from three booleans (-f/-w/--wp options) at least two of them are not true at the same time
+	// a ^ b ? c : a
+	if (parser.isSet(patchField) ^ parser.isSet(patchWorld) ? parser.isSet(patchWorldAndPosition)
+			: parser.isSet(patchField)) {
+		return 2;
+	}
 
 	if (parser.isSet(patchField)) {
 		const auto &field = parser.value(patchField);
@@ -83,6 +94,33 @@ int main(int argc, char *argv[])
 		newWorld.documentElement().replaceChild(
 					prevWorld.documentElement().firstChildElement("robots"),
 					newWorld.documentElement().firstChildElement("robots"));
+
+		QString newWorldStr;
+		QTextStream stream(&newWorldStr);
+		newWorld.save(stream, 4);
+		repo.setMetaInformation("worldModel", newWorldStr);
+	}
+
+	if (parser.isSet(patchWorldAndPosition)) {
+		const auto &field = parser.value(patchWorldAndPosition);
+		QFile fieldFile(field);
+		if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			return 1;
+		}
+
+		QDomDocument newWorld;
+		newWorld.setContent(&fieldFile);
+		QDomDocument prevWorld;
+		prevWorld.setContent(repo.metaInformation("worldModel").toString());
+
+		// Logic below is the same as in context menu "Load world without robot configuration..."
+		// Copied from "TwoDModelWidget::loadWorldModelWithoutRobot"
+		auto saveRobot = newWorld.documentElement().firstChildElement("robots").firstChildElement("robot");
+		auto currentRobot = prevWorld.documentElement().firstChildElement("robots").firstChildElement("robot");
+
+		saveRobot.replaceChild(currentRobot.firstChildElement("sensors"), saveRobot.firstChildElement("sensors"));
+		saveRobot.replaceChild(currentRobot.firstChildElement("wheels"), saveRobot.firstChildElement("wheels"));
+		saveRobot.setAttribute("id", currentRobot.attribute("id"));
 
 		QString newWorldStr;
 		QTextStream stream(&newWorldStr);
