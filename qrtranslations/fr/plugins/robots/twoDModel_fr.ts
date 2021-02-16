@@ -361,8 +361,9 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <source>The task is accomplished in %1 seconds!</source>
-        <translation>La tâche est accomplie en %1 secondes!</translation>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
+        <source>The task was accomplished in %1 sec!</source>
+        <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
     <message>
         <location line="+16"/>
