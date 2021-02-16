@@ -83,13 +83,13 @@ Component.prototype.createOperations = function()
 	component.createOperations();
 	if (installer.value("os") == "win") {
 		component.addOperation("CreateShortcut"
-				, "@TargetDir@/" + installer.executableName + installer.execExtension
-				, "@StartMenuDir@/@ProductName@ @Version@" + installer.linkExtension);
+				, "@TargetDir@\\" + installer.executableName + installer.execExtension
+				, "@StartMenuDir@\\@ProductName@ @Version@" + installer.linkExtension);
 		component.addOperation("CreateShortcut"
-				, "@TargetDir@/" + installer.maintenanceName
-				, "@StartMenuDir@/Uninstall @ProductName@" + installer.linkExtension);
+				, "@TargetDir@\\" + installer.maintenanceName
+				, "@StartMenuDir@\\Uninstall @ProductName@" + installer.linkExtension);
 		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.executableName + ".cmd"
+				, "@TargetDir@\\" + installer.executableName + ".cmd"
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
