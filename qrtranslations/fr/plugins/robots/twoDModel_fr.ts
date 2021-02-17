@@ -362,11 +362,11 @@
     <name>twoDModel::model::Model</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
-        <source>The task is accomplished!</source>
-        <translation>La tache est accomplie !</translation>
+        <source>The task was accomplished in %1 sec!</source>
+        <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>

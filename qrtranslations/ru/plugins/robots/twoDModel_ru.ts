@@ -638,11 +638,11 @@
     <name>twoDModel::model::Model</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
-        <source>The task is accomplished!</source>
-        <translation>Задание выполнено!</translation>
+        <source>The task was accomplished in %1 sec!</source>
+        <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
