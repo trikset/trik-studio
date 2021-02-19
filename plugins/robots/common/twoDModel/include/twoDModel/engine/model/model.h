@@ -121,6 +121,7 @@ private:
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
 	physics::PhysicsEngineBase *mRealisticPhysicsEngine;  // Takes ownership.
 	physics::PhysicsEngineBase *mSimplePhysicsEngine;  // Takes ownership.
+	quint64 mStartTimestamp {0};
 };
 
 }
