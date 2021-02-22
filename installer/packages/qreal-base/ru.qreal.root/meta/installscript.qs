@@ -84,7 +84,8 @@ Component.prototype.createOperations = function()
 	if (installer.value("os") == "win") {
 		component.addOperation("CreateShortcut"
 				, "@TargetDir@\\" + installer.executableName + installer.execExtension
-				, "@StartMenuDir@\\@ProductName@ @Version@" + installer.linkExtension);
+				, "@StartMenuDir@\\@ProductName@ @Version@" + installer.linkExtension
+				,  "iconPath=@TargetDir@/trik-studio.ico");
 		component.addOperation("CreateShortcut"
 				, "@TargetDir@\\" + installer.maintenanceName
 				, "@StartMenuDir@\\Uninstall @ProductName@" + installer.linkExtension);
