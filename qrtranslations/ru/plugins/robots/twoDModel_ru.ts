@@ -637,7 +637,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+58"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
