@@ -146,9 +146,10 @@ clone_script:
 install:
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
-  - curl --output tests_qrs.zip "https://dl.trikset.com/edu/.solutions20200701/test.zip"
+  - curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
   - cmd /c "pacman --verbose --noconfirm -S ccache rsync unzip sshpass mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config"
-  - unzip tests_qrs.zip
+  - 7z x tests.7z
+  - dir /w testing_small
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
   - ccache -p || echo "Failed to print ccache config (missing -p option)"
   - if not exist %BUILD_DIR% mkdir %BUILD_DIR%
@@ -184,7 +185,7 @@ test_script:
   - cd %BUILD_DIR%\bin\%CONFIGURATION%
   - dir
   - for %%f in (*.exe) do windeployqt --%CONFIGURATION% %%f
-  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing
+  - set PYTHONIOENCODING=utf-8 & python "%APPVEYOR_BUILD_FOLDER%\buildScripts\tests\fieldstest.py" 2D-model.exe %APPVEYOR_BUILD_FOLDER%\testing_small
 
 after_test:
 # zip binaries
