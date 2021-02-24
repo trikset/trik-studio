@@ -18,11 +18,11 @@
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
 
-    <TargetDir>@HomeDir@/TRIKStudio</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@/TRIKStudio</AdminTargetDir>
+    <TargetDir>@HomeDir@/TRIKStudio/</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@/TRIKStudio/</AdminTargetDir>
 
     <RunProgram>bash</RunProgram>
     <RunProgramArguments>
-        <Argument>@TargetDir@/trik-studio</Argument>
+	    <Argument>@TargetDir@/trik-studio</Argument>
     </RunProgramArguments>
 </Installer>
