@@ -19,14 +19,17 @@ SUBDIRS = \
 	nullKitInterpreter \
 	nxtKitInterpreter \
 	trikKitInterpreterCommon \
-	trikV6KitInterpreter \
 	trikV62KitInterpreter \
 	ev3KitInterpreter \
 	robotsPlugin \
 	pioneerKitInterpreter \
 
+CONFIG(debug, debug | release) {
+	SUBDIRS += trikV6KitInterpreter
+	trikV6KitInterpreter.depends = trikKitInterpreterCommon
+}
+
 robotsPlugin.depends = interpreterCore
 twoDModelRunner.depends = interpreterCore
-trikV6KitInterpreter.depends = trikKitInterpreterCommon
 trikV62KitInterpreter.depends = trikKitInterpreterCommon
 pioneerKitInterpreter.depends = interpreterCore
