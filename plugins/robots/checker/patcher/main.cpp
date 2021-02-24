@@ -113,8 +113,8 @@ int main(int argc, char *argv[])
 
 		// Logic below is the same as in context menu "Load world without robot configuration..."
 		// Copied from "TwoDModelWidget::loadWorldModelWithoutRobot"
-		auto saveRobot = newWorld.documentElement().firstChildElement("robots").firstChildElement("robot");
-		auto currentRobot = prevWorld.documentElement().firstChildElement("robots").firstChildElement("robot");
+		auto saveRobot = prevWorld.documentElement().firstChildElement("robots").firstChildElement("robot");
+		auto currentRobot = newWorld.documentElement().firstChildElement("robots").firstChildElement("robot");
 
 		saveRobot.replaceChild(currentRobot.firstChildElement("sensors"), saveRobot.firstChildElement("sensors"));
 		saveRobot.replaceChild(currentRobot.firstChildElement("wheels"), saveRobot.firstChildElement("wheels"));
