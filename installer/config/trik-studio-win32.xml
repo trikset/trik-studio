@@ -18,8 +18,14 @@
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
 
-    <TargetDir>@RootDir@TRIKStudio</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@TRIKStudio</AdminTargetDir>
+    <TargetDir>@RootDir@TRIKStudio\</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@TRIKStudio\</AdminTargetDir>
 
-    <RunProgram>@TargetDir@trik-studio</RunProgram>
+    <RunProgram>wscript.exe</RunProgram>
+    <RunProgramArguments>
+	    <Argument>//nologo</Argument>
+	    <Argument>//b</Argument>
+	    <Argument>//</Argument>
+	    <Argument>@TargetDir@\trik-studio.vbs</Argument>
+    </RunProgramArguments>
 </Installer>
