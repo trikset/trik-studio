@@ -148,7 +148,8 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 					return region->shape().contains(
 							robotModel->robotsTransform().map(robotModel->sensorBoundingPath(device->port())));
 				}
-				return region->containsPoint(robotModel->robotsTransform().map(robotModel->configuration().position(device->port())));
+				return region->containsPoint(
+						robotModel->robotsTransform().map(robotModel->configuration().position(device->port())));
 			}
 
 			return false;

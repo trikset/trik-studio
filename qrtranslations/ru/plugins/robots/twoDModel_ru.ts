@@ -238,7 +238,7 @@
     </message>
     <message>
         <location line="+55"/>
-        <location line="+174"/>
+        <location line="+175"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
@@ -313,7 +313,7 @@
         <translation>%1 - не регион</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+43"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 не сопоставить с регионом (не тот тип)</translation>
     </message>
@@ -330,7 +330,7 @@
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
-        <location line="-72"/>
+        <location line="-77"/>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>

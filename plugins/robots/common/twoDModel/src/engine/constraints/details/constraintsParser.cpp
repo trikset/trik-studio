@@ -370,7 +370,8 @@ Condition ConstraintsParser::parseInsideTag(const QDomElement &element)
 		return mConditions.constant(true);
 	}
 
-	return mConditions.inside(element.attribute("objectId"), element.attribute("regionId"), element.attribute("objectPoint", "center"));
+	return mConditions.inside(element.attribute("objectId"), element.attribute("regionId")
+			, element.attribute("objectPoint", "center"));
 }
 
 Condition ConstraintsParser::parseEventSettedDroppedTag(const QDomElement &element)
