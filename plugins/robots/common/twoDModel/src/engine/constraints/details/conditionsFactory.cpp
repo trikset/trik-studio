@@ -118,14 +118,14 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 		if (QGraphicsObject * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
 			if (objectPoint == "all") {
-				return region->shape().contains(graphicsObject->shape());
+				return region->mapToScene(region->shape()).contains(graphicsObject->mapToScene(graphicsObject->shape()));
 			}
 			return region->containsItem(graphicsObject);
 		}
 
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
-				return region->shape().contains(robotModel->robotBoundingPath(false));
+				return region->mapToScene(region->shape()).contains(robotModel->robotBoundingPath(false));
 			}
 			return region->containsPoint(robotModel->robotCenter());
 		}
@@ -145,7 +145,7 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 			if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
 				if (objectPoint == "all") {
-					return region->shape().contains(
+					return region->mapToScene(region->shape()).contains(
 							robotModel->robotsTransform().map(robotModel->sensorBoundingPath(device->port())));
 				}
 				return region->containsPoint(
