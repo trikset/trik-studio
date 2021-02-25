@@ -20,7 +20,7 @@
         <translation>%1 n&apos;est pas une région</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+47"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 n&apos;est pas d&apos;un type qui permet de l&apos;associer avec une région</translation>
     </message>

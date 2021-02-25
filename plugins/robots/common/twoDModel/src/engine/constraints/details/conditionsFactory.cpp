@@ -120,6 +120,9 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			if (objectPoint == "all") {
 				return region->mapToScene(region->shape()).contains(
 						graphicsObject->mapToScene(graphicsObject->shape()));
+			} else if (objectPoint == "any") {
+				return region->mapToScene(region->shape()).intersects(
+						graphicsObject->mapToScene(graphicsObject->shape()));
 			}
 			return region->containsItem(graphicsObject);
 		}
