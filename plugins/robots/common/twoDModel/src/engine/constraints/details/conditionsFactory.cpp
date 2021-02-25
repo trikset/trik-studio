@@ -118,7 +118,8 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 		if (QGraphicsObject * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shape()).contains(graphicsObject->mapToScene(graphicsObject->shape()));
+				return region->mapToScene(region->shape()).contains(
+						graphicsObject->mapToScene(graphicsObject->shape()));
 			}
 			return region->containsItem(graphicsObject);
 		}
