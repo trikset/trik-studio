@@ -20,7 +20,7 @@
         <translation>%1 n&apos;est pas une région</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+44"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 n&apos;est pas d&apos;un type qui permet de l&apos;associer avec une région</translation>
     </message>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <location line="+55"/>
-        <location line="+174"/>
+        <location line="+175"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Balise inconnue &quot;%1&quot;.</translation>
     </message>

@@ -95,9 +95,9 @@ Condition ConditionsFactory::notLess(const Value &leftValue, const Value &rightV
 	return [leftValue, rightValue]() { return leftValue() >= rightValue(); };
 }
 
-Condition ConditionsFactory::inside(const QString &objectId, const QString &regionId) const
+Condition ConditionsFactory::inside(const QString &objectId, const QString &regionId, const QString &objectPoint) const
 {
-	return [this, objectId, regionId]() {
+	return [this, objectId, regionId, objectPoint]() {
 		if (!mObjects.contains(objectId)) {
 			reportError(QObject::tr("No such object: %1").arg(objectId));
 			return false;
@@ -117,10 +117,17 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 		}
 
 		if (QGraphicsObject * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
+			if (objectPoint == "all") {
+				return region->mapToScene(region->shape()).contains(
+						graphicsObject->mapToScene(graphicsObject->shape()));
+			}
 			return region->containsItem(graphicsObject);
 		}
 
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
+			if (objectPoint == "all") {
+				return region->mapToScene(region->shape()).contains(robotModel->robotBoundingPath(false));
+			}
 			return region->containsPoint(robotModel->robotCenter());
 		}
 
@@ -138,13 +145,12 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			}
 
 			if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
-				const QPointF devicePosition = robotModel->configuration().position(device->port());
-				const QPointF deviceRelativeToCenter = devicePosition
-						+ robotModel->position() - robotModel->robotCenter();
-				const QPointF realDevicePosition = QTransform().rotate(robotModel->rotation())
-						.map(deviceRelativeToCenter) + robotModel->robotCenter();
-
-				return region->containsPoint(realDevicePosition);
+				if (objectPoint == "all") {
+					return region->mapToScene(region->shape()).contains(
+							robotModel->robotsTransform().map(robotModel->sensorBoundingPath(device->port())));
+				}
+				return region->containsPoint(
+						robotModel->robotsTransform().map(robotModel->configuration().position(device->port())));
 			}
 
 			return false;

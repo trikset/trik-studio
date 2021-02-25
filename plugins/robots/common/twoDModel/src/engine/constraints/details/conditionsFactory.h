@@ -57,7 +57,7 @@ public:
 
 	/// Produces new condition instance that returnes true if item with id \a objectId lays inside of
 	/// the region with id \a regionId at the call moment.
-	Condition inside(const QString &objectId, const QString &regionId) const;
+	Condition inside(const QString &objectId, const QString &regionId, const QString &objectPoint) const;
 
 	/// Produces new condition instance that returnes true if the event with id \a eventId
 	/// is alive at the call moment and false otherwise.
