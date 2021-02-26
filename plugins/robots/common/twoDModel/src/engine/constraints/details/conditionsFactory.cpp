@@ -149,8 +149,10 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 			if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
 				if (objectPoint == "all") {
+					auto deviceShape = robotModel->robotsTransform().map(
+							robotModel->sensorBoundingPath(device->port()));
 					return region->mapToScene(region->shape()).contains(
-							robotModel->robotsTransform().map(robotModel->sensorBoundingPath(device->port())));
+							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
 				}
 				return region->containsPoint(
 						robotModel->robotsTransform().map(robotModel->configuration().position(device->port())));

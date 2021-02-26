@@ -46,13 +46,15 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 
 	// If there was no sensor before then placing it right in front of the robot;
 	// else putting it instead of old one.
-	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(), 0) : mSensorsInfo[port];
+	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(device), 0) : mSensorsInfo[port];
 }
 
-QPointF SensorsConfiguration::defaultPosition() const
+QPointF SensorsConfiguration::defaultPosition(const DeviceInfo &device) const
 {
 	/// @todo: Move it somewhere?
-	return QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
+	return device.simulated()
+			? QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2)
+			: QPointF(mRobotSize.width() / 2, mRobotSize.height() / 2);
 }
 
 QPointF SensorsConfiguration::position(const PortInfo &port) const

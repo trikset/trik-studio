@@ -78,7 +78,7 @@ private:
 			, const kitBase::robotModel::DeviceInfo &device
 			, Reason reason) override;
 
-	QPointF defaultPosition() const;
+	QPointF defaultPosition(const kitBase::robotModel::DeviceInfo &device) const;
 
 	const QSizeF mRobotSize;
 	QString mRobotId;
