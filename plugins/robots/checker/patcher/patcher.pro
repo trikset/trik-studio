@@ -23,6 +23,7 @@ includes(qrrepo)
 TEMPLATE = app
 
 QT -= gui
+QT += xml
 
 CONFIG += cmdline
 

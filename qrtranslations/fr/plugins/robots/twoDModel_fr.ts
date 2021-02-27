@@ -20,7 +20,7 @@
         <translation>%1 n&apos;est pas une région</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+49"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 n&apos;est pas d&apos;un type qui permet de l&apos;associer avec une région</translation>
     </message>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <location line="+55"/>
-        <location line="+174"/>
+        <location line="+175"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Balise inconnue &quot;%1&quot;.</translation>
     </message>
@@ -361,12 +361,12 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
-        <source>The task is accomplished!</source>
-        <translation>La tache est accomplie !</translation>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+58"/>
+        <source>The task was accomplished in %1 sec!</source>
+        <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>

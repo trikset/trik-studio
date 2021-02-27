@@ -122,6 +122,8 @@ public:
 	void setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
 	QRectF sensorRect(const kitBase::robotModel::PortInfo &port, const QPointF sensorPos) const;
+	QPainterPath sensorBoundingPath(const kitBase::robotModel::PortInfo &port) const;
+	QTransform robotsTransform() const;
 
 	/// Returns the color of the trace that robot should draw. Transparent color may also be returned
 	/// (then it is highly recommended not to draw trace at all in preformance thoughts).
@@ -153,7 +155,7 @@ public:
 	Q_INVOKABLE QVector<int> gyroscopeCalibrate();
 
 	/// Returns a bounding path of robot and its sensors in scene coordinates.
-	QPainterPath robotBoundingPath() const;
+	QPainterPath robotBoundingPath(const bool withSensors = true) const;
 
 	/// Sets a physical engine. Robot recalculates its position using this engine.
 	void setPhysicalEngine(physics::PhysicsEngineBase &engine);

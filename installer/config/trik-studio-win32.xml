@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Installer>
-    <Name>TRIK Studio</Name>
+    <Name>TRIK Studio Jr.</Name>
     <Version></Version>
     <Title>TRIK Studio Junior</Title>
     <Publisher>CyberTech Labs Ltd.</Publisher>
@@ -18,8 +18,14 @@
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
 
-    <TargetDir>@RootDir@/TRIKStudio.Jr</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@/TRIKStudio.Jr</AdminTargetDir>
+    <TargetDir>@RootDir@TRIKStudio.Jr\</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@TRIKStudio.Jr\</AdminTargetDir>
 
-    <RunProgram>@TargetDir@/trik-studio</RunProgram>
+    <RunProgram>wscript.exe</RunProgram>
+    <RunProgramArguments>
+	    <Argument>//nologo</Argument>
+	    <Argument>//b</Argument>
+	    <Argument>//</Argument>
+	    <Argument>@TargetDir@\trik-studio.vbs</Argument>
+    </RunProgramArguments>
 </Installer>

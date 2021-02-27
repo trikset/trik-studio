@@ -238,7 +238,7 @@
     </message>
     <message>
         <location line="+55"/>
-        <location line="+174"/>
+        <location line="+175"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
@@ -313,7 +313,7 @@
         <translation>%1 - не регион</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+49"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 не сопоставить с регионом (не тот тип)</translation>
     </message>
@@ -330,7 +330,7 @@
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
-        <location line="-72"/>
+        <location line="-83"/>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
@@ -641,12 +641,12 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+57"/>
-        <source>The task is accomplished!</source>
-        <translation>Задание выполнено!</translation>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+58"/>
+        <source>The task was accomplished in %1 sec!</source>
+        <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
