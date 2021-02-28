@@ -17,6 +17,7 @@ cp -fpR $BIN_DIR/libBox2D*.dylib                                            "$BU
 cp -fpR $BIN_DIR/librobots-generator-base*.dylib                            "$BUNDLE_CONTENTS/Lib/"
 cp -fpR $BIN_DIR/librobots-kit-base*.dylib                                  "$BUNDLE_CONTENTS/Lib/"
 cp -fpR $BIN_DIR/librobots-utils*.dylib                                     "$BUNDLE_CONTENTS/Lib/"
+cp -fpR "$BIN_DIR"/libqextserialport*.dylib                                 "$BUNDLE_CONTENTS/Lib"
 
 copy_qt_lib QtMultimedia
 copy_qt_lib QtNetwork
@@ -30,6 +31,7 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libBox2D.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-generator-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-kit-base.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-utils.1.0.0.dylib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqextserialport.1.0.0.dylib"
 
 # Cleaning up prebuild-common.sh results...
 rm -rf $PWD/../data/plugins/
