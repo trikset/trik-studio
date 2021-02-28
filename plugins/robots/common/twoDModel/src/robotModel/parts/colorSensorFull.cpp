@@ -41,9 +41,9 @@ void ColorSensorFull::read()
 	} else if (color.red() > 100) {
 		resColor += clearRed / 2;
 	}
-	if (color.green() > 200) {
+	if (color.green() > 150) {
 		resColor += clearGreen;
-	} else if (color.green() > 100) {
+	} else if (color.green() > 75) {
 		resColor += clearGreen / 2;
 	}
 	if (color.blue() > 200) {
