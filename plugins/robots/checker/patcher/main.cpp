@@ -49,6 +49,9 @@ int main(int argc, char *argv[])
 										"Only world configurations and robot position will be patched."), "field.xml");
 	parser.addOption(patchWorldAndPosition);
 
+	QCommandLineOption putRobotOnStart("rrp", QObject::tr("Reset robot position to start position"));
+	parser.addOption(putRobotOnStart);
+
 	parser.process(app);
 
 	const QStringList positionalArgs = parser.positionalArguments();
@@ -142,6 +145,18 @@ int main(int argc, char *argv[])
 
 			scriptFile.close();
 		}
+	}
+
+	if (parser.isSet(putRobotOnStart)) {
+		QDomDocument world;
+		world.setContent(repo.metaInformation("worldModel").toString());
+		auto robot = world.documentElement().firstChildElement("robots").firstChildElement("robot");
+		auto start = robot.firstChildElement("startPosition");
+		robot.setAttribute("direction", start.attribute("direction"));
+		auto x = start.attribute("x").toDouble() - 25;
+		auto y = start.attribute("y").toDouble() - 25;
+		robot.setAttribute("position", QString::number(x) + ":" + QString::number(y));
+		repo.setMetaInformation("worldModel", world.toString(4));
 	}
 
 	if (!repo.saveAll()) {
