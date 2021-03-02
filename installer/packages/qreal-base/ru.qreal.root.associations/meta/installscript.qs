@@ -9,7 +9,7 @@ Component.prototype.createOperations = function()
     if (installer.value("os") === "win") {
         component.addOperation("RegisterFileType",
                                "qrs",
-                               "C:\\Windows\\System32\\wscript.exe //nologo //b // \"@TargetDir@\\" +
+                               "C:\\Windows\\System32\\wscript.exe //nologo //e:vbscript //b // \"@TargetDir@\\" +
                                     installer.executableName + installer.execExtension + "\"  \"%1\"",
                                "@ProductName@ Project",
                                "application/octet-stream",
