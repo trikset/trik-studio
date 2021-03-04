@@ -22,6 +22,7 @@
 
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/motor.h>
+#include <kitBase/robotModel/robotParts/rangeSensor.h>
 
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/settings.h"
@@ -279,7 +280,12 @@ void RobotModel::setPhysicalEngine(physics::PhysicsEngineBase &engine)
 QRectF RobotModel::sensorRect(const PortInfo &port, const QPointF sensorPos) const
 {
 	if (!mSensorsConfiguration.type(port).isNull()) {
+		auto device = mSensorsConfiguration.type(port);
 		const QSizeF size = mRobotModel.sensorImageRect(mSensorsConfiguration.type(port)).size();
+		if (device.isA<robotParts::RangeSensor>()) {
+			return QRectF(sensorPos.x() - size.width()/2, sensorPos.y() - size.height()/2
+					, size.width()/2, size.height());
+		}
 		return QRectF(sensorPos - QPointF(size.width() / 2, size.height() / 2), size);
 	}
 
