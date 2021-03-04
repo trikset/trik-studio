@@ -3,7 +3,7 @@
     export HOMEBREW_NO_INSTALL_CLEANUP=1
     export HOMEBREW_NO_AUTO_UPDATE=1
     brew tap "hudochenkov/sshpass"
-    TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass qt p7zip"
+    TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass qt@5 p7zip"
     for pkg in $TRIK_BREW_PACKAGES ; do
       p="${pkg##*/}"
       p="${p%.*}"
