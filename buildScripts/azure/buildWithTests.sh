@@ -5,7 +5,9 @@ CODECOV=true
 case $AGENT_OS in
   Darwin)
      export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
-     export PATH="/usr/local/opt/qt/bin:$PATH"
+     echo 'export PATH="/usr/local/opt/qt@5/bin:$PATH"' >> /Users/runner/.bash_profile
+     export LDFLAGS="-L/usr/local/opt/qt@5/lib"
+     export CPPFLAGS="-I/usr/local/opt/qt@5/include"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
