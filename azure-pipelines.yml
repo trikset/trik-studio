@@ -126,6 +126,10 @@ stages:
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
+        Linux release with retired features:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=trik_retired_features CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent"
+          TESTS: $ALL_TESTS
     pool:
       vmImage: $(imageName)
 
