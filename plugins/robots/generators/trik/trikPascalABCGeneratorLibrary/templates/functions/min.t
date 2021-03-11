@@ -1,1 +1,0 @@
-Min(@@ARGUMENT1@@, @@ARGUMENT2@@)

@@ -1,1 +1,0 @@
-ArcCos(@@ARGUMENT@@)

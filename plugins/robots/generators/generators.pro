@@ -50,33 +50,4 @@ ev3RbfGenerator.depends = ev3GeneratorBase
 pioneerLuaGenerator.depends = generatorBase
 
 CONFIG(trik_retired_features) {
-SUBDIRS += \
-        trikSharpBinaries \
-        nxtRussianCGenerator \
-        trikFSharpGeneratorLibrary \
-        trikV6FSharpGenerator \
-        trikV62FSharpGenerator \
-        trikPascalABCGeneratorLibrary \
-        trikV6PascalABCGenerator \
-        trikV62PascalABCGenerator \
-	trikV6QtsGenerator \
-
-trikV6QtsGenerator.subdir = $$PWD/trik/trikV6QtsGenerator
-trikFSharpGeneratorLibrary.subdir = $$PWD/trik/trikFSharpGeneratorLibrary
-trikV6FSharpGenerator.subdir = $$PWD/trik/trikV6FSharpGenerator
-trikV62FSharpGenerator.subdir = $$PWD/trik/trikV62FSharpGenerator
-trikPascalABCGeneratorLibrary.subdir = $$PWD/trik/trikPascalABCGeneratorLibrary
-trikV6PascalABCGenerator.subdir = $$PWD/trik/trikV6PascalABCGenerator
-trikV62PascalABCGenerator.subdir = $$PWD/trik/trikV62PascalABCGenerator
-trikSharpBinaries.subdir = $$PWD/trik/trikSharpBinaries
-nxtRussianCGenerator.subdir = $$PWD/nxt/nxtRussianCGenerator
-
-trikV6QtsGenerator.depends = trikQtsGeneratorLibrary
-trikFSharpGeneratorLibrary.depends = trikGeneratorBase
-trikV6FSharpGenerator.depends = trikFSharpGeneratorLibrary
-trikV62FSharpGenerator.depends = trikFSharpGeneratorLibrary
-trikPascalABCGeneratorLibrary.depends = trikGeneratorBase
-trikV6PascalABCGenerator.depends = trikPascalABCGeneratorLibrary
-trikV62PascalABCGenerator.depends = trikPascalABCGeneratorLibrary
-nxtRussianCGenerator.depends = nxtGeneratorBase
 }
