@@ -49,8 +49,7 @@ ev3GeneratorBase.depends = generatorBase
 ev3RbfGenerator.depends = ev3GeneratorBase
 pioneerLuaGenerator.depends = generatorBase
 
-
-CONFIG(debug, debug|release) {
+CONFIG(trik_retired_features) {
 SUBDIRS += \
         trikSharpBinaries \
         nxtRussianCGenerator \
@@ -81,4 +80,3 @@ trikV6PascalABCGenerator.depends = trikPascalABCGeneratorLibrary
 trikV62PascalABCGenerator.depends = trikPascalABCGeneratorLibrary
 nxtRussianCGenerator.depends = nxtGeneratorBase
 }
-
