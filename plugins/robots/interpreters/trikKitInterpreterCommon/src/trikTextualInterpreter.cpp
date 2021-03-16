@@ -66,10 +66,11 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
 		, bool enablePython)
 	: mBrick(model)
-	, mMailbox(qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()
-			   ? trikNetwork::MailboxFactory::create(8889): nullptr)
-	, mScriptRunner(mBrick, mMailbox, new TwoDExecutionControl(mBrick, model))
+	, mScriptRunner(mBrick, mMailbox.data(), new TwoDExecutionControl(mBrick, model))
 {
+	auto mailboxPort = qReal::SettingsManager::value("TRIK2DMailboxPort", 0).toInt();
+	mMailbox.reset(mailboxPort <= 0 ? trikNetwork::MailboxFactory::create(mailboxPort) : nullptr);
+
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
 

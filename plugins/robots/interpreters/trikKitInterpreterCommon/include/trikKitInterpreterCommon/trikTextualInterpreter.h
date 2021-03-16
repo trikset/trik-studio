@@ -66,7 +66,7 @@ private:
 	bool mRunning { false };
 
 	TrikBrick mBrick;
-	trikNetwork::MailboxInterface *mMailbox {};
+	QScopedPointer<trikNetwork::MailboxInterface> mMailbox {};
 	TwoDExecutionControl *mExecutionControl {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
 	qReal::ErrorReporterInterface *mErrorReporter {};
