@@ -154,7 +154,7 @@ int TwoDModelEngineApi::spoilRangeReading(const int distance) const
 
 QColor TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 {
-	const QImage image = areaUnderSensor(port, 1.0);
+	const QImage image = areaUnderSensor(port, 0.3);
 	if (image.isNull()) return QColor();
 
 	qreal averageB = 0, averageG = 0, averageR = 0;

@@ -48,18 +48,6 @@ bool ExerciseExportManager::save()
 
 	ReadOnlyFlags flags = dialog.readOnlyFlags();
 
-	const auto save = [this, &flags] (const QString &tag, ReadOnly::ReadOnlyEnum flag) {
-		mLogicalModel.mutableLogicalRepoApi().setMetaInformation(tag, flags.testFlag(flag));
-	};
-
-	save("twoDModelWorldReadOnly", ReadOnly::World);
-	save("twoDModelSensorsReadOnly", ReadOnly::Sensors);
-	save("twoDModelRobotPositionReadOnly", ReadOnly::RobotPosition);
-	save("twoDModelRobotConfigurationReadOnly", ReadOnly::RobotSetup);
-	save("twoDModelSimulationSettingsReadOnly", ReadOnly::SimulationSettings);
-
-	mLogicalModel.mutableLogicalRepoApi().setMetaInformation("exerciseId", QUuid::createUuid().toString());
-
 	QString fileName = utils::QRealFileDialog::getSaveFileName("SaveAsTask"
 			, nullptr
 			, QObject::tr("Select file to export save to")
@@ -74,5 +62,33 @@ bool ExerciseExportManager::save()
 		fileName += ".tsj";
 	}
 
-	return mRepoControlApi.saveTo(fileName) && mProjectManager.open(fileName);
+	// Save meta information
+	QHash<QString, QVariant> metaInfo;
+	for (const auto &metaKey : mLogicalModel.logicalRepoApi().metaInformationKeys()) {
+		metaInfo[metaKey] = mLogicalModel.logicalRepoApi().metaInformation(metaKey);
+	}
+	// Set new meta information
+	const auto setFlag = [this, &flags] (const QString &tag, ReadOnly::ReadOnlyEnum flag) {
+		mLogicalModel.mutableLogicalRepoApi().setMetaInformation(tag, flags.testFlag(flag));
+	};
+	setFlag("twoDModelWorldReadOnly", ReadOnly::World);
+	setFlag("twoDModelSensorsReadOnly", ReadOnly::Sensors);
+	setFlag("twoDModelRobotPositionReadOnly", ReadOnly::RobotPosition);
+	setFlag("twoDModelRobotConfigurationReadOnly", ReadOnly::RobotSetup);
+	setFlag("twoDModelSimulationSettingsReadOnly", ReadOnly::SimulationSettings);
+	mLogicalModel.mutableLogicalRepoApi().setMetaInformation("exerciseId", QUuid::createUuid().toString());
+
+	// Save exercise
+	auto workingFile = mRepoControlApi.workingFile();
+	mRepoControlApi.setWorkingFile(fileName);
+	auto success = mRepoControlApi.saveAll();
+	mRepoControlApi.setWorkingFile(workingFile);
+
+	// Restore meta information
+	mLogicalModel.mutableLogicalRepoApi().clearMetaInformation();
+	for (const auto &metaKey : metaInfo.keys()) {
+		mLogicalModel.mutableLogicalRepoApi().setMetaInformation(metaKey, metaInfo[metaKey]);
+	}
+
+	return success;
 }

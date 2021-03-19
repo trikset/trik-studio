@@ -168,6 +168,9 @@ stages:
         Linux release + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+        Linux release with retired features:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=trik_retired_features CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent"
         Linux debug + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
