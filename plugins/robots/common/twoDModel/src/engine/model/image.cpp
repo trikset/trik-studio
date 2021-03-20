@@ -114,7 +114,7 @@ void Image::serialize(QDomElement &target) const
 
 bool Image::isValid() const
 {
-	return !mPath.isEmpty();
+	return !mPath.isEmpty() && (!mSvgRenderer.isNull() || !mImage->isNull());
 }
 
 QSize Image::preferedSize() const
