@@ -59,7 +59,8 @@ var directoryNotEmpty = [
 function Component()
 {
 	// Executable names must be lower-case product name with hyphens instead of spaces
-	installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
+	//installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
+	installer.executableName = "trik-studio"
 	installer.linkExtension = installer.value("os") === "win" ? ".lnk" : "";
 	installer.execExtension = installer.value("os") === "win" ? ".vbs" : installer.value("os") === "mac" ? ".app" : "";
 	installer.maintenanceName = "maintenance" + (installer.value("os") === "win" ? ".exe" : installer.execExtension);
@@ -85,7 +86,7 @@ Component.prototype.createOperations = function()
 		component.addOperation("CreateShortcut"
 				, "@TargetDir@\\" + installer.executableName + installer.execExtension
 				, "@StartMenuDir@\\@ProductName@ @Version@" + installer.linkExtension
-				,  "iconPath=@TargetDir@\\trik-studio.ico");
+				,  "iconPath=@TargetDir@\\trik-studio-jr.ico");
 		component.addOperation("CreateShortcut"
 				, "@TargetDir@\\" + installer.maintenanceName
 				, "@StartMenuDir@\\Uninstall @ProductName@" + installer.linkExtension);
