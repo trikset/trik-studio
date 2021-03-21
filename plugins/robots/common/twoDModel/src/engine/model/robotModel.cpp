@@ -24,6 +24,7 @@
 
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/motor.h>
+#include <kitBase/robotModel/robotParts/rangeSensor.h>
 
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/settings.h"
@@ -269,32 +270,45 @@ QPointF RobotModel::robotCenter() const
 	return mPos + mRobotModel.robotCenter();
 }
 
-QPainterPath RobotModel::robotBoundingPath() const
+QTransform RobotModel::robotsTransform() const
+{
+	const QRectF boundingRect(QPointF(), mRobotModel.size());
+	const QPointF realRotatePoint = QPointF(boundingRect.width() / 2, boundingRect.height() / 2);
+	const QPointF translationToZero = -realRotatePoint - boundingRect.topLeft();
+	const QPointF finalTranslation = mPos + realRotatePoint + boundingRect.topLeft();
+	return QTransform().translate(finalTranslation.x(), finalTranslation.y())
+			.rotate(mAngle).translate(translationToZero.x(), translationToZero.y());
+}
+
+QPainterPath RobotModel::sensorBoundingPath(const PortInfo &port) const
+{
+	if (mSensorsConfiguration.type(port).isNull() || !mSensorsConfiguration.type(port).simulated())
+	{
+		return QPainterPath();
+	}
+	const QPointF sensorPos = mSensorsConfiguration.position(port);
+	QPainterPath tempSensorPath;
+	tempSensorPath.addRect(sensorRect(port, sensorPos));
+	const QTransform transformSensor = QTransform()
+			.translate(sensorPos.x(), sensorPos.y())        // /\  And going back again
+			.rotate(mSensorsConfiguration.direction(port))  // ||  Then rotating
+			.translate(-sensorPos.x(), -sensorPos.y());     // ||  First translating to zero
+	return transformSensor.map(tempSensorPath);
+}
+
+QPainterPath RobotModel::robotBoundingPath(const bool withSensors) const
 {
 	QPainterPath path;
 	const QRectF boundingRect(QPointF(), mRobotModel.size());
 	path.addRect(boundingRect);
 
-	const QPointF realRotatePoint = QPointF(boundingRect.width() / 2, boundingRect.height() / 2);
-	const QPointF translationToZero = -realRotatePoint - boundingRect.topLeft();
-	const QPointF finalTranslation = mPos + realRotatePoint + boundingRect.topLeft();
-	const QTransform transform = QTransform().translate(finalTranslation.x(), finalTranslation.y())
-			.rotate(mAngle).translate(translationToZero.x(), translationToZero.y());
-
-	for (const PortInfo &port : mRobotModel.configurablePorts()){
-		if (!mSensorsConfiguration.type(port).isNull() && mSensorsConfiguration.type(port).simulated()) {
-			const QPointF sensorPos = mSensorsConfiguration.position(port);
-			QPainterPath tempSensorPath;
-			tempSensorPath.addRect(sensorRect(port, sensorPos));
-			const QTransform transformSensor = QTransform()
-					.translate(sensorPos.x(), sensorPos.y())        // /\  And going back again
-					.rotate(mSensorsConfiguration.direction(port))  // ||  Then rotating
-					.translate(-sensorPos.x(), -sensorPos.y());     // ||  First translating to zero
-			path.addPath(transformSensor.map(tempSensorPath));
+	if (withSensors) {
+		for (const PortInfo &port : mRobotModel.configurablePorts()){
+			path.addPath(sensorBoundingPath(port));
 		}
 	}
 
-	return transform.map(path);
+	return robotsTransform().map(path);
 }
 
 void RobotModel::setPhysicalEngine(physics::PhysicsEngineBase &engine)
@@ -310,7 +324,13 @@ void RobotModel::setWorldModel(WorldModel &worldModel)
 QRectF RobotModel::sensorRect(const PortInfo &port, const QPointF sensorPos) const
 {
 	if (!mSensorsConfiguration.type(port).isNull()) {
+		auto device = mSensorsConfiguration.type(port);
 		const QSizeF size = mRobotModel.sensorImageRect(mSensorsConfiguration.type(port)).size();
+		// We don't need part with radiating waves from range sensor in bounding rect of sensor
+		if (device.isA<robotParts::RangeSensor>()) {
+			return QRectF(sensorPos.x() - size.width()/2, sensorPos.y() - size.height()/2
+					, size.width()/2, size.height());
+		}
 		return QRectF(sensorPos - QPointF(size.width() / 2, size.height() / 2), size);
 	}
 

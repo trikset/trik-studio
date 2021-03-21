@@ -22,8 +22,16 @@ parameters:
     type: step
     default:
       checkout: self
-      fetchDepth: 1
+      fetchDepth: 100
       submodules: recursive
+
+  - name: gitListStep
+    type: step
+    default:
+      bash: |
+        git tag -l
+        git branch -a
+      displayName: Set up the environment
 
   - name: environmentStep
     type: step
@@ -36,9 +44,14 @@ parameters:
     default:
       task: Cache@2
       inputs:
-        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Agent.OS)-$(CONFIG)-$(Build.SourceVersion)"'
+        key: '"ccache-$(Agent.OS)-$(CONFIG)" | "$(Build.SourceVersion)" | "$(QMAKE_EXTRA)"'
         path: $(CCACHE_DIR)
-      displayName: Cache azure task
+        restoreKeys: |
+          "ccache-$(Agent.OS)-$(CONFIG)" | "$(Build.SourceVersion)" | "$(QMAKE_EXTRA)"
+          "ccache-$(Agent.OS)-$(CONFIG)" | "$(Build.SourceVersion)"
+          "ccache-$(Agent.OS)-$(CONFIG)" | "$(QMAKE_EXTRA)"
+          "ccache-$(Agent.OS)-$(CONFIG)"
+      displayName: Process caches
 
   - name: buildNoTestsStep
     type: step
@@ -70,6 +83,12 @@ parameters:
       bash: export BRANCH_NAME="$(git describe --exact-match $(Build.SourceVersion))"
       condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
       displayName:  'Tag name as an environment variable'
+
+  - name: publishInstallerArtifact
+    type: step
+    default:
+      publish: installer/
+      artifact: "$(Agent.OS) installer"
 
 stages:
 - stage: lintStage
@@ -149,6 +168,9 @@ stages:
         Linux release + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+        Linux release with retired features:
+          imageName: 'ubuntu-latest'
+          QMAKE_EXTRA: "CONFIG+=trik_retired_features CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent"
         Linux debug + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
@@ -207,6 +229,7 @@ stages:
     - ${{ parameters.buildNoTestsStep }}
     - ${{ parameters.setTagNameStep }}
     - ${{ parameters.buildInstallerStep }}
+    - ${{ parameters.publishInstallerArtifact }}
 
 - stage: macOsInstallerStage
   displayName: MacOs installer
@@ -228,3 +251,4 @@ stages:
     - ${{ parameters.buildNoTestsStep }}
     - ${{ parameters.setTagNameStep }}
     - ${{ parameters.buildInstallerStep }}
+    - ${{ parameters.publishInstallerArtifact }}

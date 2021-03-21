@@ -18,11 +18,11 @@ using namespace utils;
 
 RealTimer::RealTimer()
 {
-	setRepeatable(false);
+	setSingleShot(true);
 	connect(&mTimer, &QTimer::timeout, this, &RealTimer::timeout);
 }
 
-bool RealTimer::isTicking() const
+bool RealTimer::isActive() const
 {
 	return mTimer.isActive();
 }
@@ -53,7 +53,12 @@ void RealTimer::setInterval(int ms)
 	mTimer.setInterval(ms);
 }
 
-void RealTimer::setRepeatable(bool repeatable)
+bool RealTimer::isSingleShot()
 {
-	mTimer.setSingleShot(!repeatable);
+	return mTimer.isSingleShot();
+}
+
+void RealTimer::setSingleShot(bool isSingleShot)
+{
+	mTimer.setSingleShot(isSingleShot);
 }

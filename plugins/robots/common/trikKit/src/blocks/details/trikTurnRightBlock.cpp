@@ -28,7 +28,7 @@ void TurnRightBlock::run()
 {
 	emit mRobotModel.turnManuallyOn(90);
 	auto timer = mRobotModel.timeline().produceTimer();
-	timer->setRepeatable(false);
+	timer->setSingleShot(true);
 	connect(timer, &utils::AbstractTimer::timeout, this, [this](){
 		emit done(mNextBlockId);
 	});

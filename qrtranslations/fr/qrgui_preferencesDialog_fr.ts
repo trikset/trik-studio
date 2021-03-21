@@ -305,9 +305,9 @@
     </message>
 </context>
 <context>
-    <name>PreferencesMiscellaniousPage</name>
+    <name>PreferencesMiscellaneousPage</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/miscellaniousPage.ui" line="+109"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/miscellaneousPage.ui" line="+109"/>
         <source>Graphics</source>
         <translation>Graphes</translation>
     </message>
@@ -352,7 +352,7 @@
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/miscellaniousPage.cpp" line="+57"/>
+        <location filename="../../qrgui/preferencesDialog/preferencesPages/miscellaneousPage.cpp" line="+57"/>
         <source>Open Directory</source>
         <translation>Ouvrir le répertoire</translation>
     </message>
@@ -366,7 +366,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Miscellanious</source>
+        <source>Miscellaneous</source>
         <translation>Divers</translation>
     </message>
     <message>

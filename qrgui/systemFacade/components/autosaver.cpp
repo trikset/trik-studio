@@ -94,9 +94,9 @@ QString Autosaver::autosaveFilePath(const QString &currentFilePath) const
 
 QString Autosaver::tempFilePath() const
 {
-	return QString("%1/%2.tsj").arg(
-			PlatformInfo::applicationDirPath()
-			, SettingsManager::value("AutosaveTempFile").toString());
+	// Use persistant path for autosave file to be able to find it after restart on crash
+	return QString("%1/%2.tsj").arg(PlatformInfo::invariantPath("@AppDataLocation@")
+									, SettingsManager::value("AutosaveTempFileName").toString());
 }
 
 bool Autosaver::isAutosave(const QString &fileName) const

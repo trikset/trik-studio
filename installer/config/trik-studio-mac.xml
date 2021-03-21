@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
-    <Name>TRIK Studio</Name>
+    <Name>TRIK Studio Jr</Name>
     <Version></Version>
     <Title>TRIK Studio Junior</Title>
     <Publisher>CyberTech Labs Ltd.</Publisher>
@@ -17,14 +17,12 @@
     <StartMenuDir>TRIK Studio Junior</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
-    <AllowSpaceInPath>false</AllowSpaceInPath>
-    <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
-    <TargetDir>@HomeDir@/TRIKStudio.Jr</TargetDir>
-    <AdminTargetDir>@HomeDir@/TRIKStudio.Jr</AdminTargetDir>
+    <TargetDir>@HomeDir@/TRIKStudio.Jr/</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@/TRIKStudio.Jr/</AdminTargetDir>
 
     <RunProgram>open</RunProgram>
     <RunProgramArguments>
-        <Argument>@TargetDir@/TRIK Studio.app</Argument>
+	    <Argument>@TargetDir@/TRIK Studio.app</Argument>
     </RunProgramArguments>
 </Installer>

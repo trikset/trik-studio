@@ -17,13 +17,13 @@ case $AGENT_OS in
 esac
 df -h .
 
-if [ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" ] && [ "${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER:-false}" == "false" ]
-then
-      $EXECUTOR bash -ic "\
-      echo Start build installer \
-      && installer/build-trik-studio.sh $QTBIN $QTIFWBIN . \
-      && mv installer/trik-studio*installer* installer/$TSNAME \
-      && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/ \
-      || false \
-"
+NEED_DEPLOY=$([[ "$BUILD_REPOSITORY_NAME" == "trikset/trik-studio" && "${SYSTEM_PULLREQUEST_PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
+
+echo Start build installer
+$EXECUTOR bash -ic "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
+
+if $NEED_DEPLOY ; then
+    $EXECUTOR bash -ic "\
+          mv installer/trik-studio*installer* installer/$TSNAME \
+          && sshpass -p $password rsync -avze 'ssh -o StrictHostKeyChecking=no' installer/$TSNAME $server:dl/ts/fresh/installer/"
 fi

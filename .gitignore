@@ -1,6 +1,8 @@
 qrtest/unitTests/**/target_wrapper.sh
 qrtest/unitTests/**/moc_wrapper.sh
 qrtest/unitTests/**/rcc_wrapper.sh
+#Qt autgenerated resource file for executable
+**/*_resource.rc
 **/object_script.*
 buildScripts/vera++/params
 buildScripts/.pyenv-*/

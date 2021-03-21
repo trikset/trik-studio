@@ -5,7 +5,7 @@ CODECOV=true
 case $AGENT_OS in
   Darwin)
      export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
-     export PATH="/usr/local/opt/qt/bin:$PATH"
+     export PATH="/usr/local/opt/qt@5/bin:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
     ;;
@@ -23,16 +23,17 @@ cache_dir=$CCACHE_DIR
 compression=true
 compression_level=3
 sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
+max_size=1200M
 EOF
 
 $EXECUTOR bash -lic " set -xueo pipefail; \
    export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
-&& ccache -p \
+&& ccache -V && ccache -p \
 && which g++ \
 && g++ --version \
 && which qmake \
 && qmake -query \
-&& ccache -sz -M 0 \
+&& ccache -sz \
 && pkg-config --list-all \
 && { which python3 && python3 -V || true ; } \
 && { which python && python -V || true ; } \

@@ -17,16 +17,16 @@
 #include "qrgui/preferencesDialog/preferencesPage.h"
 
 namespace Ui {
-	class PreferencesMiscellaniousPage;
+	class PreferencesMiscellaneousPage;
 }
 
-class PreferencesMiscellaniousPage : public qReal::gui::PreferencesPage
+class PreferencesMiscellaneousPage : public qReal::gui::PreferencesPage
 {
 	Q_OBJECT
 
 public:
-	explicit PreferencesMiscellaniousPage(QWidget *parent = nullptr);
-	~PreferencesMiscellaniousPage();
+	explicit PreferencesMiscellaneousPage(QWidget *parent = nullptr);
+	~PreferencesMiscellaneousPage();
 
 	void save();
 	virtual void restoreSettings();
@@ -38,5 +38,5 @@ private slots:
 	void browseImagesPath();
 
 private:
-	Ui::PreferencesMiscellaniousPage *mUi;
+	Ui::PreferencesMiscellaneousPage *mUi;
 };
