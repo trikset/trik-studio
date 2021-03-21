@@ -84,10 +84,11 @@ protected:
 
 private:
 	enum Direction {
-		Up = 0,
-		Down = 1,
-		Left = 2,
-		Right = 3
+		Up = 270,
+		Down = 90,
+		Left = 180,
+		Right = 0,
+		No = -1
 	};
 	Direction imageDirection();
 
@@ -123,8 +124,7 @@ private:
 
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
-	QSharedPointer<model::Image> mCustomImage;
-	QMap<Direction, QSharedPointer<model::Image>> mRotatingCustomImages;
+	QMap<Direction, QSharedPointer<model::Image>> mCustomImages;
 	bool mIsRotatingImage {false};
 	bool mIsCustomImage {false};
 	// Takes ownership
