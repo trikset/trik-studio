@@ -620,7 +620,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+83"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+84"/>
         <source>Camera folowing robot: %1</source>
         <translation>Suivre le robot : %1</translation>
     </message>
@@ -655,7 +655,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+8"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>You must select exactly one any image fileor four with the endings &apos;up&apos;, &apos;down&apos;, &apos;right&apos; and &apos;left&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Use custom robot image</source>
         <translation type="unfinished"></translation>
     </message>
