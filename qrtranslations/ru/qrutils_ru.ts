@@ -353,7 +353,7 @@
         <translation>Ввод</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>Input value for %1:</source>
         <translation>Введите значение для %1:</translation>
     </message>
