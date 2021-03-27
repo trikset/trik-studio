@@ -107,14 +107,7 @@ void trik::TrikTextualInterpreter::interpretCommand(const QString &script)
 QString trik::TrikTextualInterpreter::addCodeAfterImport(const QString &script, const QString &addCode) const
 {
 	QString updatedScript = script;
-	int lastIndexOfImport = updatedScript.lastIndexOf(QRegularExpression("^import .*"
-		, QRegularExpression::MultilineOption));
-	int indexOf = 0;
-	if (lastIndexOfImport != -1) {
-		indexOf = updatedScript.indexOf(QRegularExpression("$", QRegularExpression::MultilineOption)
-				, lastIndexOfImport) + 1;
-	}
-	updatedScript.insert(indexOf, addCode);
+	updatedScript.insert(0, addCode);
 	return updatedScript;
 }
 
