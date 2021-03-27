@@ -964,7 +964,7 @@
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+84"/>
-        <source>Camera folowing robot: %1</source>
+        <source>Camera following robot: %1</source>
         <translation>Следовать за роботом: %1</translation>
     </message>
     <message>
@@ -1000,11 +1000,11 @@
     <message>
         <location line="+8"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>You must select exactly one any image fileor four with the endings &apos;up&apos;, &apos;down&apos;, &apos;right&apos; and &apos;left&apos;</source>
+        <source>You must select exactly one any image file or four with the endings &apos;up&apos;, &apos;down&apos;, &apos;right&apos;, and &apos;left&apos;</source>
         <translation type="unfinished">Вы должны выбрать ровно один любой файл или четыре файла, заканчивающиеся на &apos;up&apos;, &apos;down&apos;, &apos;right&apos; и &apos;left&apos;</translation>
     </message>
     <message>

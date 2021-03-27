@@ -81,7 +81,7 @@ QWidget *RobotItemPopup::initFollowButton()
 	mFollowButton->setCheckable(true);
 	connect(mFollowButton, &QAbstractButton::toggled, this, &RobotItemPopup::followingChanged);
 	connect(mFollowButton, &QAbstractButton::toggled, this, [=](bool enabled) {
-		mFollowButton->setToolTip(tr("Camera folowing robot: %1")
+		mFollowButton->setToolTip(tr("Camera following robot: %1")
 				.arg(enabled ? tr("enabled") : tr("disabled")));
 	});
 	return mFollowButton;
@@ -136,8 +136,8 @@ QWidget *RobotItemPopup::initImagePicker()
 		if (mCurrentItem->setCustomImage(loadFileNames)) {
 			emit imageSettingsChanged();
 		} else {
-			utils::QRealMessageBox::question(this, tr("Error"), tr("You must select exactly one any image file"
-					"or four with the endings 'up', 'down', 'right' and 'left'"), QMessageBox::Close);
+			utils::QRealMessageBox::question(this, tr("Error"), tr("You must select exactly one any image file "
+					"or four with the endings 'up', 'down', 'right', and 'left'"), QMessageBox::Close);
 			return;
 		}
 	});
