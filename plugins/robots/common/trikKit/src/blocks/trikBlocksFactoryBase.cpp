@@ -266,12 +266,12 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikStopCamera")
 				<< id("TrikStopVideoStreaming")
 				;
-        if (!qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()) {
-            result
-                << id("TrikSendMessage")
-                << id("TrikWaitForMessage")
-                ;
-        }
+		if (!qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()) {
+			result
+				<< id("TrikSendMessage")
+				<< id("TrikWaitForMessage")
+				;
+		}
 	} else {
 		result
 				<< id("TrikCalibrateGyroscope")
