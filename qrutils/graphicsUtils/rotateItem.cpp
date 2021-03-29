@@ -78,7 +78,7 @@ void RotateItem::restorePos()
 void RotateItem::setRotation(qreal angle) {
 	qreal rightAngle = 90;
 	qreal roundedAngle = angle - fmod(angle, rightAngle);
-	qreal roundedAngle2 = angle + ((angle > 0) ? rightAngle : -rightAngle);
+	qreal roundedAngle2 = roundedAngle + ((angle > 0) ? rightAngle : -rightAngle);
 	if (qAbs(roundedAngle - angle) > qAbs(roundedAngle2 - angle)) {
 		roundedAngle = roundedAngle2;
 	}

@@ -261,7 +261,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>Input value for %1:</source>
         <translation type="unfinished"></translation>
     </message>

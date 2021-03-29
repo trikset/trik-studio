@@ -146,11 +146,10 @@ void Rotater::calcResizeItem(QGraphicsSceneMouseEvent *event)
 			? mMaster->parentItem()->rotation()
 			: 0.0;
 
-	const qreal deltaAngle = fmod(littleAngle - mMaster->rotation()- masterAngleCompensation, 360);
+	const qreal deltaAngle = fmod(littleAngle - mMaster->rotation(), 360);
 	const qreal addAngle = deltaAngle > 180 ? -360 : deltaAngle < -180 ? 360 : 0;
 	const qreal angle = mMaster->rotation() + deltaAngle + addAngle;
-
-	mMaster->setRotation(angle * 180 / M_PI - masterAngleCompensation);
+	mMaster->setRotation(angle - masterAngleCompensation);
 }
 
 void Rotater::resizeItem(QGraphicsSceneMouseEvent *event)

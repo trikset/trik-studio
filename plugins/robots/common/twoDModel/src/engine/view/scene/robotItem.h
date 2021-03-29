@@ -22,6 +22,7 @@
 #include "src/engine/items/solidItem.h"
 #include "twoDModel/engine/model/robotModel.h"
 #include "twoDModel/engine/model/image.h"
+#include <QMap>
 
 namespace twoDModel {
 namespace view {
@@ -57,9 +58,9 @@ public:
 
 	void setNeededBeep(bool isNeededBeep);
 
-	QDomElement serializeImage(QDomElement &parent) const;
+	void serializeImage(QDomElement &parent) const;
 	void deserializeImage(const QDomElement &element);
-	void setCustomImage(const QString &robotImageFileName);
+	bool setCustomImage(const QStringList &robotImageFileNames);
 	void useCustomImage(bool isUsed);
 	bool usedCustomImage();
 
@@ -79,8 +80,17 @@ public:
 
 protected:
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
-
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+
+private:
+	enum Direction {
+		Up = 270,
+		Down = 90,
+		Left = 180,
+		Right = 0,
+		No = -1
+	};
+	Direction imageDirection();
 
 signals:
 	void mousePressed();
@@ -114,7 +124,8 @@ private:
 
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
-	QSharedPointer<model::Image> mCustomImage;
+	QMap<Direction, QSharedPointer<model::Image>> mCustomImages;
+	bool mIsRotatingImage {false};
 	bool mIsCustomImage {false};
 	// Takes ownership
 	BeepItem *mBeepItem;

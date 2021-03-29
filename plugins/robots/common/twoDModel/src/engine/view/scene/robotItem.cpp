@@ -19,6 +19,7 @@
 #include <qrkernel/settingsManager.h>
 #include <QtMath>
 #include <QBuffer>
+#include <QFileInfo>
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -30,10 +31,10 @@ const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
 	: mImage(robotImageFileName, true)
-	, mCustomImage(new Image(robotImageFileName, true))
 	, mBeepItem(new BeepItem())
 	, mRobotModel(robotModel)
 {
+	mCustomImages[No].reset(new Image(robotImageFileName, true));
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
 	connect(&mRobotModel, &model::RobotModel::rotationChanged, this, &RobotItem::setRotation);
@@ -84,6 +85,17 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	savePos();
 }
 
+RobotItem::Direction RobotItem::imageDirection()
+{
+	int fullAngle = static_cast<int>(rotation());
+	auto dir = fullAngle % 360;
+	if (dir < 0) dir += 360;
+	dir += 45;
+	dir /= 90;
+	dir %= 4;
+	return static_cast<Direction>(dir * 90);
+}
+
 void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option)
@@ -92,7 +104,17 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
 	auto rect = RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0).toRect();
 	if (mIsCustomImage) {
-		mCustomImage->draw(*painter, rect);
+		if (mIsRotatingImage) {
+			painter->save();
+			// We actually use knowledge that left-top of rect is (0,0)
+			painter->translate(rect.right()/2, rect.bottom()/2);
+			painter->rotate(-rotation());
+			painter->translate(-rect.right()/2, -rect.bottom()/2);
+			mCustomImages[imageDirection()]->draw(*painter, rect);
+			painter->restore();
+		} else {
+			mCustomImages[No]->draw(*painter, rect);
+		}
 	} else {
 		mImage.draw(*painter, rect);
 	}
@@ -176,18 +198,37 @@ QDomElement RobotItem::serialize(QDomElement &parent) const
 
 void RobotItem::deserializeImage(const QDomElement &element) {
 	const QDomElement image = element.firstChildElement("robotImage");
-	if (image.isNull()) {
-		return;
+	// Need for old saves
+	if (!image.isNull()) {
+		mCustomImages[No] = Image::deserialize(image);
+		useCustomImage(true);
+		mIsRotatingImage = false;
+	} else {
+		const QDomElement images = element.firstChildElement("robotImages");
+		if (images.isNull()) {
+			return;
+		}
+		for (QDomElement image = images.firstChildElement(); !image.isNull()
+				; image = image.nextSiblingElement()) {
+			Direction dir = static_cast<Direction>(image.attribute("direction").toInt());
+			mCustomImages[dir] = Image::deserialize(image);
+		}
+		useCustomImage(true);
+		mIsRotatingImage = mCustomImages[Up]->isValid();
 	}
-	mCustomImage = Image::deserialize(image);
-	useCustomImage(true);
 }
 
-QDomElement RobotItem::serializeImage(QDomElement &parent) const {
-	QDomElement result = parent.ownerDocument().createElement("robotImage");
-	parent.appendChild(result);
-	mCustomImage->serialize(result);
-	return result;
+void RobotItem::serializeImage(QDomElement &parent) const {
+	QDomElement imgParent = parent.ownerDocument().createElement("robotImages");
+	for (const auto key : mCustomImages.keys()) {
+		if (mCustomImages[key]->isValid()){
+			QDomElement img = imgParent.ownerDocument().createElement("robotImage");
+			img.setAttribute("direction", key);
+			imgParent.appendChild(img);
+			mCustomImages[key]->serialize(img);
+		}
+	}
+	parent.appendChild(imgParent);
 }
 
 void RobotItem::deserialize(const QDomElement &element)
@@ -274,10 +315,48 @@ void RobotItem::setNeededBeep(bool isNeededBeep)
 	mBeepItem->setVisible(isNeededBeep);
 }
 
-void RobotItem::setCustomImage(const QString &robotImageFileName) {
-	mIsCustomImage = true;
-	mCustomImage->loadFrom(robotImageFileName);
+bool RobotItem::setCustomImage(const QStringList &robotImageFileNames) {
+	if (robotImageFileNames.size() == 1) {
+		mIsCustomImage = true;
+		mIsRotatingImage = false;
+		mCustomImages[No]->loadFrom(robotImageFileNames[0]);
+	} else if (robotImageFileNames.size() == 4) {
+		QMap<Direction, QSharedPointer<model::Image>> oldImages;
+		for (auto && key : mCustomImages.keys()) {
+			oldImages[key] = mCustomImages[key];
+			mCustomImages[key].reset();
+		}
+		for (auto && fileName : robotImageFileNames) {
+			auto fileBaseName = QFileInfo(fileName).baseName().toLower();
+			auto newImage = new Image(fileName, true);
+			if (fileBaseName.endsWith("up")) {
+				mCustomImages[Up].reset(newImage);
+			} else if (fileBaseName.endsWith("down")) {
+				mCustomImages[Down].reset(newImage);
+			} else if (fileBaseName.endsWith("right")) {
+				mCustomImages[Right].reset(newImage);
+			} else if (fileBaseName.endsWith("left")) {
+				mCustomImages[Left].reset(newImage);
+			}
+		}
+		auto success = true;
+		for (auto && img : mCustomImages) {
+			success = success && img->isValid();
+		}
+		if (success) {
+			mIsCustomImage = true;
+			mIsRotatingImage = true;
+		} else {
+			for (auto && key : oldImages.keys()) {
+				mCustomImages[key] = oldImages[key];
+			}
+			return false;
+		}
+	} else {
+		return false;
+	}
 	update();
+	return true;
 }
 
 void RobotItem::useCustomImage(bool isUsed) {

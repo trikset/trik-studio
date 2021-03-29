@@ -113,7 +113,7 @@ init:
   - pacman --verbose --noconfirm --disable-download-timeout -U zstd-1.4.7-1-x86_64.pkg.tar.xz pacman-5.2.2-5-x86_64.pkg.tar.xz # Upgrade now (Dec 2020) needs zstd decompressor
   - 'del /q %APPVEYOR_BUILD_FOLDER%\*.*' # cleanup before checkout
   - cmd /c "pacman --verbose --noconfirm --disable-download-timeout -Syuu" #Full update of core files
-
+  - cmd /c "pacman --verbose --noconfirm --disable-download-timeout -Sy" #Update core files if databases list was changed
 clone_script:
     - cmd: |
          "C:\\Program Files\\Git\\cmd\\git" config --global core.symlinks true

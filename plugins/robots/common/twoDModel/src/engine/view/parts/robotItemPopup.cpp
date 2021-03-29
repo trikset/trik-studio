@@ -23,6 +23,7 @@
 #include <qrkernel/platformInfo.h>
 #include <qrutils/widgets/qRealFileDialog.h>
 #include <qrutils/graphicsUtils/abstractScene.h>
+#include <qrutils/widgets/qRealMessageBox.h>
 
 #include "src/engine/view/scene/robotItem.h"
 
@@ -80,7 +81,7 @@ QWidget *RobotItemPopup::initFollowButton()
 	mFollowButton->setCheckable(true);
 	connect(mFollowButton, &QAbstractButton::toggled, this, &RobotItemPopup::followingChanged);
 	connect(mFollowButton, &QAbstractButton::toggled, this, [=](bool enabled) {
-		mFollowButton->setToolTip(tr("Camera folowing robot: %1")
+		mFollowButton->setToolTip(tr("Camera following robot: %1")
 				.arg(enabled ? tr("enabled") : tr("disabled")));
 	});
 	return mFollowButton;
@@ -123,17 +124,22 @@ QWidget *RobotItemPopup::initImagePicker()
 	mImagePicker = initButton(":/icons/2d_training.svg", "Change the robot image");
 
 	connect(mImagePicker, &QPushButton::clicked, this, [=]() {
-		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectRobotImage"
+		const QStringList loadFileNames = utils::QRealFileDialog::getOpenFileNames("2DSelectRobotImage"
 				, mScene.views().first()
 				, tr("Select image")
 				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/.."
 				, tr("Graphics (*.*)"));
-		if (loadFileName.isEmpty()) {
+		if (loadFileNames.isEmpty()) {
 			return;
 		}
 
-		mCurrentItem->setCustomImage(loadFileName);
-		emit imageSettingsChanged();
+		if (mCurrentItem->setCustomImage(loadFileNames)) {
+			emit imageSettingsChanged();
+		} else {
+			utils::QRealMessageBox::question(this, tr("Error"), tr("You must select exactly one any image file "
+					"or four with the endings 'up', 'down', 'right', and 'left'"), QMessageBox::Close);
+			return;
+		}
 	});
 
 	return mImagePicker;
