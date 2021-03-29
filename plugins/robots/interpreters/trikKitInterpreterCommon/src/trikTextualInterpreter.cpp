@@ -104,17 +104,6 @@ void trik::TrikTextualInterpreter::interpretCommand(const QString &script)
 	mScriptRunner.runDirectCommand(script);
 }
 
-QString trik::TrikTextualInterpreter::addCodeAfterImport(const QString &script, const QString &addCode) const
-{
-	QString updatedScript = script;
-	int lastIndexOfImport = updatedScript.lastIndexOf(QRegularExpression("^import .*"
-		, QRegularExpression::MultilineOption));
-	int indexOf = updatedScript.indexOf(QRegularExpression("$", QRegularExpression::MultilineOption)
-		, lastIndexOfImport);
-	updatedScript.insert(indexOf + 1, addCode);
-	return updatedScript;
-}
-
 void trik::TrikTextualInterpreter::interpretScript(const QString &script, const QString &languageExtension)
 {
 	mRunning = true;
@@ -122,7 +111,8 @@ void trik::TrikTextualInterpreter::interpretScript(const QString &script, const 
 	if (languageExtension.contains("js")) {
 		mScriptRunner.run(jsOverrides + script);
 	} else if (languageExtension.contains("py")) {
-		mScriptRunner.run(addCodeAfterImport(script, pyOverrides), "dummyFile.py");
+		auto updatedScript = script;
+		mScriptRunner.run(updatedScript.insert(0, pyOverrides), "dummyFile.py");
 	} else {
 		reportError(tr("Unsupported script file type"));
 	}
@@ -137,7 +127,8 @@ void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
 	if (languageExtension.contains("js")) {
 		mScriptRunner.run(jsOverrides + "script.writeToFile = null;\n" + script);
 	} else if (languageExtension.contains("py")) {
-		mScriptRunner.run(addCodeAfterImport(script, pyOverrides + "\nscript.writeToFile = None\n"), "dummyFile.py");
+		auto updatedScript = script;
+		mScriptRunner.run(updatedScript.insert(0, pyOverrides + "\nscript.writeToFile = None\n"), "dummyFile.py");
 	} else {
 		reportError(tr("Unsupported script file type"));
 	}
