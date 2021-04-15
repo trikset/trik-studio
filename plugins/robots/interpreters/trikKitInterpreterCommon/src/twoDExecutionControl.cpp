@@ -121,6 +121,7 @@ void TwoDExecutionControl::system(const QString &command, bool synchronously)
 {
 	Q_UNUSED(command)
 	Q_UNUSED(synchronously)
+	emit textInStdOut("system is disabled\n");
 }
 
 void TwoDExecutionControl::writeToFile(const QString &file, const QString &text)
