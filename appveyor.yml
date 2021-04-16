@@ -147,7 +147,7 @@ install:
   - 'qmake -v && qmake -query'
   - 'dir %PYTHON_PATH% %MINGW% %QTDIR% %QTIFW% %MSYS_DIR% /w'
   - curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
-  - cmd /c "pacman --verbose --noconfirm -S dos2unix ccache rsync unzip sshpass mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config"
+  - cmd /c "pacman --verbose --noconfirm -S dos2unix ccache rsync unzip sshpass make mingw%ARCH%/mingw-w64-%PLATFORM%-libusb mingw%ARCH%/mingw-w64-%PLATFORM%-zlib mingw%ARCH%/mingw-w64-%PLATFORM%-pkg-config"
   - 7z x tests.7z
   - dir /w testing_small
   - ccache.exe -V || appveyor DownloadFile "http://alam.srb2.org/ccache.exe" -FileName "ccache.exe" && xcopy /Y /V /I ccache.exe %MINGW%\bin && ccache -V
@@ -176,9 +176,9 @@ build_script:
   - 'git status -vv && git submodule foreach --recursive git status'
   - qmake %APPVEYOR_BUILD_FOLDER%\%PROJECT_FILE%.pro -spec win32-g++ CONFIG+=%CONFIGURATION% CONFIG+=tests CONFIG+=silent # QMAKE_CXX="ccache g++"
   - bash -c "env LC_ALL=C date -u"
-  - mingw32-make -j2 qmake_all
+  - make -j2 qmake_all
   - bash -c "env LC_ALL=C date -u"
-  - mingw32-make -j2 -k check
+  - make -j2 -k check
 
 test_script:
   - echo %cd%
