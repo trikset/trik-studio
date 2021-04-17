@@ -157,7 +157,7 @@ build_script:
   - 'git status -vv && git submodule foreach --recursive git status'
   - qmake %APPVEYOR_BUILD_FOLDER%\%PROJECT_FILE%.pro -spec win32-g++ CONFIG+=%CONFIGURATION% CONFIG+=tests CONFIG+=silent # QMAKE_CXX="ccache g++"
   - bash -c "env LC_ALL=C date -u"
-  - mingw32-make -j2 qmake_all
+  - mingw32-make qmake_all
   - bash -c "env LC_ALL=C date -u"
   - mingw32-make -j2 -k check
 
