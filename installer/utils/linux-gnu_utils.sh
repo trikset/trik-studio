@@ -16,9 +16,9 @@ copy_required_libs() {
 		| xargs realpath -L -s | sort -u | grep -Ev "^$(realpath -e $targetLibsDir)|linux-vdso|^/lib64/")
 	local rsync=""
 	
-	for lib in ${libs}; do rsync="$rsync ${lib}*" ; done
+	for lib in ${libs}; do rsync="$rsync ${lib}" ; done
 	echo "LIBS to copy: $rsync"
-	if [[ -n "$rsync" ]] ; then eval rsync -av "$rsync" "${targetLibsDir}" ; fi
+	if [[ -n "$rsync" ]] ; then eval rsync -av -L "$rsync" "${targetLibsDir}" ; fi
 }
 
 add_required_libs() {
