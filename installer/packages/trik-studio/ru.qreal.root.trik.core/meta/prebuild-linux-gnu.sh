@@ -4,7 +4,7 @@ set -o errexit
 
 cd "$(dirname "$0")"
 
-mkdir -p $PWD/../data/lib
+mkdir -p "$PWD/../data/lib/python-runtime"
 mkdir -p $PWD/../data/lib/plugins/editors
 cp     $BIN_DIR/plugins/editors/libtrikMetamodel.so                                $PWD/../data/lib/plugins/editors
 cp -pr $BIN_DIR/librobots-trik-qts-generator-library.so*                           $PWD/../data/lib/
@@ -12,8 +12,28 @@ cp -pr $BIN_DIR/librobots-trik-generator-base.so*                               
 cp -pr $BIN_DIR/librobots-trik-kit.so*                                             $PWD/../data/lib/
 cp -pr $BIN_DIR/librobots-trik-kit-interpreter-common.so*                          $PWD/../data/lib/
 rsync -a "$BIN_DIR"/libtrikPythonQt{,_QtAll}-Qt*-Python*.so*                                        "$PWD"/../data/lib/
-ldd $BIN_DIR/libtrikPythonQt_QtAll-Qt5*-Python3*.so.1.0  | grep python3 | cut -d ' ' -f 3 | head -n 1 | xargs cp -prvt $PWD/../data/lib/
 
 rsync -a "$BIN_DIR"/libtrik*.so*                                                         "$PWD"/../data/lib/
 
 cp     $BIN_DIR/system.{py,js} $BIN_DIR/2D-model                       		 $PWD/../data/bin/
+#Add Python runtime libraries
+
+[ -r venv/bin/activate ] || python3.${TRIK_PYTHON3_VERSION_MINOR} -m venv venv
+. venv/bin/activate
+python3 -m pip install pyinstaller
+pyinstaller --clean --noconfirm --log-level DEBUG --onedir --name trik \
+	--hidden-import math \
+	--hidden-import random \
+	--hidden-import sys \
+	--hidden-import time \
+	--hidden-import os \
+	--hidden-import types \
+ 	$BIN_DIR/system.py
+rsync -avR dist/trik/./{base_library.zip,lib-dynload/} "$PWD/../data/lib/python-runtime"
+rsync -avR dist/trik/./*.so* "$PWD/../data/lib/"
+#source "$INSTALLER_ROOT"/utils/linux-gnu_utils.sh
+#add_required_libs "$PWD/../data/bin" "$PWD/../data/lib"
+#add_required_libs "$PWD/../data/lib"
+
+#PythonQt requires for dlopen'ing
+pushd "$PWD/../data/lib" && for f in libpython3.*.so.* ; do ln -svf "$f" $(echo $f | cut -d . -f 1-3) ; done ; popd

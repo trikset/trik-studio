@@ -8,7 +8,7 @@ cd "$(dirname "$0")"
 #TODO: pack corresponding python3 runtime into installer and checker packages.
 # Otherwise, we can have a problem with version mismatch
 if [ -z ${TRIK_PYTHONPATH+x} ] ; then
-	export TRIK_PYTHONPATH=.:"$PWD"/python-runtime/base_library.zip:"$PWD"/lib-dynload
+	export TRIK_PYTHONPATH=.:"$PWD"/lib/python-runtime/base_library.zip:"$PWD"/lib/lib-dynload
 fi
 
 exec bin/trik-studio "$@"
