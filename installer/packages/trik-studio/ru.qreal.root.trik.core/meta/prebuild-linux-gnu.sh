@@ -21,19 +21,22 @@ cp     $BIN_DIR/system.{py,js} $BIN_DIR/2D-model                       		 $PWD/.
 [ -r venv/bin/activate ] || python3.${TRIK_PYTHON3_VERSION_MINOR} -m venv venv
 . venv/bin/activate
 python3 -m pip install pyinstaller
-pyinstaller --clean --noconfirm --log-level DEBUG --onedir --name trik \
-	--hidden-import math \
-	--hidden-import random \
-	--hidden-import sys \
-	--hidden-import time \
-	--hidden-import os \
-	--hidden-import types \
+
+#PyInstaller provides all required modules
+#So we need to handle this garbage of files later (below) with proper rsync
+pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
+	--hidden-import=math \
+	--hidden-import=random \
+	--hidden-import=sys \
+	--hidden-import=time \
+	--hidden-import=os \
+	--hidden-import=types \
  	$BIN_DIR/system.py
-rsync -avR dist/trik/./{base_library.zip,lib-dynload/} "$PWD/../data/lib/python-runtime"
-rsync -avR dist/trik/./*.so* "$PWD/../data/lib/"
-#source "$INSTALLER_ROOT"/utils/linux-gnu_utils.sh
-#add_required_libs "$PWD/../data/bin" "$PWD/../data/lib"
-#add_required_libs "$PWD/../data/lib"
+
+rsync -avR --remove-source-files dist/trik/./*.so* "$PWD/../data/lib/"
+# Remove before copying other files
+rm dist/trik/trik
+rsync -avRm --ignore-missing-args --delete --delete-after dist/trik/./* "$PWD/../data/lib/python-runtime"
 
 #PythonQt requires for dlopen'ing
 pushd "$PWD/../data/lib" && for f in libpython3.*.so.* ; do ln -svf "$f" $(echo $f | cut -d . -f 1-3) ; done ; popd
