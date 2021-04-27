@@ -32,35 +32,7 @@
 
 Q_DECLARE_METATYPE(utils::AbstractTimer*)
 
-const QString jsOverrides = "Date.now = script.time;"
-	"arrayPPinternal = function(arg) {"
-		"var res = '[';"
-		"for(var i = 0; i < arg.length; i++) {"
-		"var separator = i + 1 != arg.length ? ', ' : '';"
-		"if (arg[i] instanceof Array) {"
-			"res += arrayPPinternal(arg[i]) + separator;"
-		"} else { res += arg[i].toString() + separator; }"
-		"}"
-		"res += ']';"
-		"return res;"
-	"};"
-	"print = function() "
-	"{"
-		"var res = '';"
-		"var argLength = arguments.length;"
-		"for(var i = 0; i < argLength; i++) {"
-		"if (arguments[i] instanceof Array) {res += arrayPPinternal(arguments[i]);"
-		"} else {res += arguments[i].toString();}"
-		"};"
-		"brick.log(res+'\\n');"
-		"script.wait(0);"
-		"return res;"
-	"};"
-	"script.system = function() {print('system is disabled in the interpreter');};";
-
-const QString pyOverrides ="\n__import__('sys').stdout = type('trik_studio_stdout', (object,),"
-				"{ 'write': brick.log, 'flush': lambda: None })\n"
-				"script.system = lambda command, synchronously=True: print('system is disabled')\n";
+const QString jsOverrides = "Date.now = script.time;";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
@@ -82,6 +54,7 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	mScriptRunner.addCustomEngineInitStep([&atimerToScriptValue, &atimerFromScriptValue](QScriptEngine *engine){
 	qScriptRegisterMetaType<utils::AbstractTimer*>(engine, atimerToScriptValue, atimerFromScriptValue);
 	});
+	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::textInStdOut, &mBrick, &TrikBrick::log);
 	connect(&mScriptRunner, &trikScriptRunner::TrikScriptRunner::completed
 		, this, &TrikTextualInterpreter::scriptFinished);
 
@@ -111,8 +84,7 @@ void trik::TrikTextualInterpreter::interpretScript(const QString &script, const 
 	if (languageExtension.contains("js")) {
 		mScriptRunner.run(jsOverrides + script);
 	} else if (languageExtension.contains("py")) {
-		auto updatedScript = script;
-		mScriptRunner.run(updatedScript.insert(0, pyOverrides), "dummyFile.py");
+		mScriptRunner.run(script, "dummyFile.py");
 	} else {
 		reportError(tr("Unsupported script file type"));
 	}
@@ -128,7 +100,7 @@ void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
 		mScriptRunner.run(jsOverrides + "script.writeToFile = null;\n" + script);
 	} else if (languageExtension.contains("py")) {
 		auto updatedScript = script;
-		mScriptRunner.run(updatedScript.insert(0, pyOverrides + "\nscript.writeToFile = None\n"), "dummyFile.py");
+		mScriptRunner.run(updatedScript.insert(0, "\nscript.writeToFile = None\n"), "dummyFile.py");
 	} else {
 		reportError(tr("Unsupported script file type"));
 	}
