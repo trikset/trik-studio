@@ -128,24 +128,25 @@ jobs:
              g++ --version
 
       - name: QMake
+        timeout-minutes: 1
         run: |
             cd ${{ env.BUILD_DIR }}
             qmake $GITHUB_WORKSPACE/studio.pro -spec win32-g++ CONFIG+=release CONFIG+=tests CONFIG+=noPch PYTHON_PATH="${pythonLocation}" # CONFIG+=silent
 
       - name: QMake all
-#        timeout-minutes: 5
+        timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
             mingw32-make -j $(nproc) qmake_all
 
       - name: Make all
-#        timeout-minutes: 10
+        timeout-minutes: 90
         run: |
             cd ${{ env.BUILD_DIR }}
             mingw32-make -j $(nproc) all
         
       - name: Unit tests
-#        timeout-minutes: 10
+        timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
             mingw32-make -k check
