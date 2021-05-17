@@ -50,7 +50,7 @@ jobs:
     env:
       TEST_DIR: $GITHUB_WORKSPACE/small_testing
     steps:
-      
+
       - name: Cancel Previous Workflow Runs
         uses: n1hility/cancel-previous-runs@v2.0
         with:
@@ -101,7 +101,7 @@ jobs:
           architecture: 'x86'
 
       - name: Update PATH
-        run: | 
+        run: |
              set -xue
              cygpath -w "${IQTA_TOOLS}/mingw${{matrix.mingw-short-version}}0_32/bin" >> $GITHUB_PATH
              cygpath -w "${pythonLocation}" >> $GITHUB_PATH
@@ -115,7 +115,7 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
-            
+
       - name: Check available tools
         run: |
              set -xueo pipefail
@@ -144,7 +144,7 @@ jobs:
         run: |
             cd ${{ env.BUILD_DIR }}
             mingw32-make -j $(nproc) all
-        
+
       - name: Unit tests
         timeout-minutes: 5
         run: |
