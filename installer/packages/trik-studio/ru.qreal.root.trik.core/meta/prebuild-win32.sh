@@ -23,8 +23,8 @@ cp    "$BIN_DIR/system.js"                                                      
 cp    "$BIN_DIR/system.py"                                                          "$PWD/../data/"
 cp    "$BIN_DIR/2D-model.exe"                                                       "$PWD/../data/"
 
-winscp_ver=5.15
-putty_ver=0.71
+winscp_ver=5.17.10
+putty_ver=0.75
 cache_dir="$(cygpath $APPDATA)"/$PRODUCT/installer_cache
 mkdir -p "$cache_dir"
 cd "$cache_dir"
@@ -49,7 +49,7 @@ then
 # download winscp
 winscp_zip="https://sourceforge.net/projects/winscp/files/WinSCP/$winscp_ver/WinSCP-$winscp_ver-Portable.zip"
 
-curl -L -s -o winscp.zip $winscp_zip
+curl -v -L -s -o winscp.zip $winscp_zip
 unzip -o winscp.zip -d winscp_$winscp_ver
 rm -f winscp.zip
 # end of download winscp
