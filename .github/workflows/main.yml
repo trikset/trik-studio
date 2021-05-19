@@ -1,0 +1,205 @@
+name: GHA CI
+on:
+  push:
+    branches-ignore:
+      - 'dependabot**'
+    tags:
+    paths-ignore:
+      - '**/lsan.supp'
+      - 'buildScripts/travis/*'
+      - 'buildScripts/azure/*'
+      - 'buildScripts/docker/*'
+      - 'azure-pipelines.yml'
+      - '.cirrus.yml'
+      - '.travis.yml'
+      - '.mergify.yml'
+      - 'Brewfile'
+      - '**/*.html'
+      - '**/*.txt'
+      - '**/*.md'
+      - 'installer/packages/**/meta/prebuild-mac.sh'
+      - 'installer/packages/**/meta/prebuild-linux-gnu.sh'
+      - '**/*.dockerfile'
+      - '**/*.Dockerfile'
+      - '**/Dockerfile'
+      - '**/Dockerfile.*'
+      - 'plugins/robots/checker/scripts/build-checker-installer.sh'
+  pull_request:
+    branches-ignore:
+      - 'dependabot**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+#          - qt-version: '5.12.10'
+#            mingw-version: 7.3
+#            mingw-short-version: 73
+#            python-version: 3.8
+          - qt-version: '5.15.2'
+            mingw-version: 8.1
+            mingw-short-version: 81
+            python-version: 3.8
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      TEST_DIR: $GITHUB_WORKSPACE/small_testing
+    steps:
+
+      - name: Cancel Previous Workflow Runs
+        uses: n1hility/cancel-previous-runs@v2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          path-type: inherit
+          msystem: MINGW32
+
+      - name: Download packages to msys2
+        run: |
+            ARCH=32
+            PLATFORM=i686
+            pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip sshpass mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
+
+      - name: Prepare build directory name
+        shell: bash
+        run: |
+            DIR=$(realpath $(cygpath -u "$GITHUB_WORKSPACE")/../build)
+            echo "BUILD_DIR=$DIR" >> $GITHUB_ENV
+
+      - name: Create build directory
+        run: mkdir -vp ${{ env.BUILD_DIR }}
+
+      - name: Configure git
+        shell: bash
+        run: |
+            git config --global core.symlinks true
+            git config --global core.autocrlf true
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          dir: C:\
+          version: ${{matrix.qt-version}}
+          arch: win32_mingw${{matrix.mingw-short-version}}
+          modules: 'qtscript qtsvg'
+          tools: 'tools_ifw,4.1,qt.tools.ifw.41 tools_mingw,${{matrix.mingw-version}},qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
+          extra: '--external 7z'
+
+# After Qt install action, that spoils pythonLocation variable
+      - name: Set up Python ${{matrix.python-version}}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{matrix.python-version}}
+          architecture: 'x86'
+
+      - name: Update PATH
+        run: |
+             set -xue
+             cygpath -w "${IQTA_TOOLS}/mingw${{matrix.mingw-short-version}}0_32/bin" >> $GITHUB_PATH
+             cygpath -w "${pythonLocation}" >> $GITHUB_PATH
+             cygpath -w "${Qt5_Dir}/bin" >> $GITHUB_PATH
+
+      - name: Check PATH
+        run: echo PATH="$PATH"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Check available tools
+        run: |
+             set -xueo pipefail
+             uname -a
+             rsync --version
+             ls "$IQTA_TOOLS/" "$Qt5_Dir/"
+             qmake --version && qmake -query
+             python3 --version
+             which g++
+             g++ --version
+
+      - name: QMake
+        timeout-minutes: 1
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            qmake $GITHUB_WORKSPACE/studio.pro -spec win32-g++ CONFIG+=release CONFIG+=tests CONFIG+=noPch PYTHON_PATH="${pythonLocation}" # CONFIG+=silent
+
+      - name: QMake all
+        timeout-minutes: 5
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            mingw32-make -j $(nproc) qmake_all
+
+      - name: Make all
+        timeout-minutes: 90
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            mingw32-make -j $(nproc) all
+
+      - name: Unit tests
+        timeout-minutes: 5
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            mingw32-make -k check
+
+      - name: Prepare all dlls
+        if: false
+        run: |
+            for file in $(find ${{ env.BUILD_DIR }}/bin/release/*.exe) ; do windeployqt --release $file ; done
+      - name: Tests
+        if: false
+        timeout-minutes: 3
+        continue-on-error: true
+        run: |
+            echo "$PATH"
+            echo ------
+            cd ${{ env.BUILD_DIR }}/bin/release
+            set PYTHONIOENCODING=utf-8 & python "$GITHUB_WORKSPACE\buildScripts\tests\fieldstest.py" 2D-model.exe ${{ env.TEST_DIR }}
+
+      - name: Push binaries
+        if: false
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries-${{ matrix.qt-version}}
+          path: ${{ env.BUILD_DIR }}/bin/release
+
+      - name: Build installer
+        run: |
+            cd $GITHUB_WORKSPACE/installer
+            ls ${IQTA_TOOLS}/QtInstallerFramework/4.1
+            ./build-trik-studio.sh ${Qt5_Dir}/bin ${IQTA_TOOLS}/QtInstallerFramework/4.1/bin ${{ env.BUILD_DIR }}
+
+      - name: Push installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: auto-installer-${{ matrix.qt-version}}
+          path: |
+            installer/trik-studio*installer*.exe
+            installer/trik_studio*.qs
+            installer/reinstall*
+
+      - name: Prepare for RDP connection
+        if: false
+        continue-on-error: true
+        shell: pwsh
+        env:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        run: |
+            Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+            Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+            Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+            Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+#            Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+#            Expand-Archive ngrok.zip
+#            .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+#            choco install far dependencies
+#           .\ngrok\ngrok.exe tcp 3389
