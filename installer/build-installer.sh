@@ -15,7 +15,13 @@ $GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND="gsed"
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
 export QT_DIR=$(realpath $(cygpath -u "$1"))
-export QT_LIB=$("$QT_DIR"/qmake -query QT_INSTALL_LIBS)
+
+case $(uname -s) in
+ Linux|Darwin) qt_query_key=QT_INSTALL_LIBS ;;
+ *) qt_query_key=QT_INSTALL_BINS ;;
+esac
+export QT_LIB=$("$QT_DIR"/qmake -query $qt_query_key)
+
 export QT_PLUGINS=$("$QT_DIR"/qmake -query QT_INSTALL_PLUGINS)
 export QTIFW_DIR=$(realpath $(cygpath -u "$2"))
 export PRODUCT="$3"

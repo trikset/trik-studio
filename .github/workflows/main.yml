@@ -140,7 +140,7 @@ jobs:
             mingw32-make -j $(nproc) qmake_all
 
       - name: Make all
-        timeout-minutes: 90
+        timeout-minutes: 70
         run: |
             cd ${{ env.BUILD_DIR }}
             mingw32-make -j $(nproc) all
@@ -154,7 +154,8 @@ jobs:
       - name: Prepare all dlls
         if: false
         run: |
-            for file in $(find ${{ env.BUILD_DIR }}/bin/release/*.exe) ; do windeployqt --release $file ; done
+            for file in $(ls ${{ env.BUILD_DIR }}/bin/release/*.exe || :) ; do windeployqt --release $file ; done
+
       - name: Tests
         if: false
         timeout-minutes: 3
@@ -175,20 +176,19 @@ jobs:
       - name: Build installer
         run: |
             cd $GITHUB_WORKSPACE/installer
-            ls ${IQTA_TOOLS}/QtInstallerFramework/4.1
-            ./build-trik-studio.sh ${Qt5_Dir} ${IQTA_TOOLS}/QtInstallerFramework/4.1/bin ${{ env.BUILD_DIR }}
+            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.1/bin" "${{ env.BUILD_DIR }}"
 
       - name: Push installer
         uses: actions/upload-artifact@v2
         with:
-          name: auto-installer-${{ matrix.qt-version}}
+          name: trik-studio-auto-installer-qt${{ matrix.qt-version}}
           path: |
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
             installer/reinstall*
 
       - name: Prepare for RDP connection
-        if: false
+        if: false #comment this line to create RDP session
         continue-on-error: true
         shell: pwsh
         env:
@@ -198,8 +198,8 @@ jobs:
             Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
             Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
             Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-#            Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-#            Expand-Archive ngrok.zip
-#            .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
-#            choco install far dependencies
-#           .\ngrok\ngrok.exe tcp 3389
+            Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+            Expand-Archive ngrok.zip
+            .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+            choco install far dependencies
+            .\ngrok\ngrok.exe tcp 3389
