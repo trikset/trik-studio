@@ -4,9 +4,29 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/systemFacade/components/consoleErrorReporter.cpp" line="+38"/>
+        <location filename="../../qrgui/systemFacade/components/consoleErrorReporter.cpp" line="+26"/>
+        <source>Information:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Warning:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Error:</source>
         <translation>Erreur :</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Critical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Bubble:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
