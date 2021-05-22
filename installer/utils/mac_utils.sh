@@ -39,10 +39,10 @@ function fix_dependencies {
 }
 
 function fix_qreal_dependencies {
-	fix_dependencies "$1" "$QT_DIR/lib/"
+	fix_dependencies "$1" "$QT_LIB/"
 }
 
 function copy_qt_lib {
-	rsync  -avR "$QT_DIR/lib/./$1.framework/Versions/5/$1" "$BUNDLE_CONTENTS/Lib"
-	fix_dependencies "$BUNDLE_CONTENTS/Lib/$1.framework/Versions/5/$1" "$QT_DIR/lib/"
+	rsync  -avR "$QT_LIB/./$1.framework/Versions/5/$1" "$BUNDLE_CONTENTS/Lib"
+	fix_dependencies "$BUNDLE_CONTENTS/Lib/$1.framework/Versions/5/$1" "$QT_LIB/"
 }
