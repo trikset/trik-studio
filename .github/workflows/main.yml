@@ -176,7 +176,7 @@ jobs:
         run: |
             cd $GITHUB_WORKSPACE/installer
             ls ${IQTA_TOOLS}/QtInstallerFramework/4.1
-            ./build-trik-studio.sh ${Qt5_Dir}/bin ${IQTA_TOOLS}/QtInstallerFramework/4.1/bin ${{ env.BUILD_DIR }}
+            ./build-trik-studio.sh ${Qt5_Dir} ${IQTA_TOOLS}/QtInstallerFramework/4.1/bin ${{ env.BUILD_DIR }}
 
       - name: Push installer
         uses: actions/upload-artifact@v2
