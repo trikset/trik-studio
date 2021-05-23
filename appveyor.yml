@@ -207,7 +207,7 @@ after_test:
 # build installer
   - cd %APPVEYOR_BUILD_FOLDER%/installer
   - bash -c "env LC_ALL=C date -u"
-  - 'bash -c "./build-trik-studio.sh %QTDIR:\=/%/bin %QTIFW:\=/%/bin %BUILD_DIR:\=/%"'
+  - 'bash -c "./build-trik-studio.sh %QTDIR:\=/% %QTIFW:\=/%/bin %BUILD_DIR:\=/%"'
   - set INSTALLER_NAME=trik-studio
   - if %APPVEYOR_REPO_TAG%==true (set INSTALLER_NAME=%INSTALLER_NAME%_%APPVEYOR_REPO_TAG_NAME%) else (set INSTALLER_NAME=%INSTALLER_NAME%-%APPVEYOR_REPO_BRANCH_SAFE%)
   - if "%PYTHON_VERSION_MINOR%" NEQ "8" (set INSTALLER_NAME=%INSTALLER_NAME%-Python3%PYTHON_VERSION_MINOR%)

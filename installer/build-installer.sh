@@ -14,7 +14,15 @@ $GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND="gsed"
 
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
-export QT_DIR=$(realpath $(cygpath -u "$1")/../)
+export QT_DIR=$(realpath $(cygpath -u "$1"))
+
+case $(uname -s) in
+ Linux|Darwin) qt_query_key=QT_INSTALL_LIBS ;;
+ *) qt_query_key=QT_INSTALL_BINS ;;
+esac
+export QT_LIB=$("$QT_DIR"/qmake -query $qt_query_key)
+
+export QT_PLUGINS=$("$QT_DIR"/qmake -query QT_INSTALL_PLUGINS)
 export QTIFW_DIR=$(realpath $(cygpath -u "$2"))
 export PRODUCT="$3"
 export OS="$OSTYPE"
@@ -35,9 +43,9 @@ fi
 [ -e $(basename $(cygpath -u "$0")) ] || cd $(dirname $(realpath $(cygpath -u "$0")))
 export INSTALLER_ROOT=$PWD/
 
-PATH=$QT_DIR/bin:$PATH
+#PATH=$QT_DIR:$PATH
 # FULL_VERSION is like v3.3.0[-rc9][-20-abc123][-dirty]
-FULL_VERSION=$(env ASAN_OPTIONS=detect_leaks=0 "$binary_path" -platform minimal --version | grep -Eo '[^ ]+$')
+FULL_VERSION=$(env LSAN_OPTIONS=detect_leaks=0 ASAN_OPTIONS=detect_leaks=0 "$binary_path" -platform minimal --version | grep -Eo '[^ ]+$')
 #QT IFW want version like [0-9]+((.|-)[0-9]+)*
 VERSION=$(echo $FULL_VERSION | sed -e 's/[^0-9.-]//g' -e 's/[.-]*$//g' -e 's/^[.-]*//g')
 grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
