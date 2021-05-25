@@ -68,6 +68,16 @@ jobs:
             PLATFORM=i686
             pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip sshpass mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
 
+# https://github.com/msys2/MSYS2-packages/issues/2485 - sshpass failed with strange error
+      - name: Get older sshpass
+        run: |
+            wget http://repo.msys2.org/msys/x86_64/sshpass-1.06-1-x86_64.pkg.tar.xz
+            pacman --verbose --noconfirm -U ./sshpass-1.06-1-x86_64.pkg.tar.xz
+            rm ./sshpass-1.06-1-x86_64.pkg.tar.xz
+
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+
       - name: Prepare build directory name
         shell: bash
         run: |
@@ -186,6 +196,10 @@ jobs:
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
             installer/reinstall*
+
+      - name: Deploy installer
+        if: ${{ github.event_name != 'pull_request' && github.repository_owner == 'trikset'}}
+        run: sshpass -p ${{ secrets.DL_PASSWORD }} rsync -ve "ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
 
       - name: Prepare for RDP connection
         if: false #comment this line to create RDP session
