@@ -23,3 +23,7 @@ SUBDIRS = \
 	gamepad/gamepad.pro \
 	quazip/quazip.pro \
 
+win32 {
+	SUBDIRS += \
+		trik-checkapp/trikCheckApp.pro \
+	}
