@@ -25,5 +25,5 @@ SUBDIRS = \
 
 win32 {
 	SUBDIRS += \
-		trik-checkapp/trikCheckApp.pro \
+		checkapp/checkapp.pro \
 	}
