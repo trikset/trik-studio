@@ -26,3 +26,6 @@
 [submodule "installer/nxt-tools"]
 	path = installer/nxt-tools
 	url = https://github.com/trikset/nxt-tools
+[submodule "trik-checkapp"]
+	path = thirdparty/checkapp/checkapp
+	url = https://github.com/trikset/trik-checkapp

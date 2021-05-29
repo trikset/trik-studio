@@ -12,7 +12,7 @@ cp    $BIN_DIR/qrrepo.dll                                           $PWD/../data
 cp    $BIN_DIR/qrutils.dll                                          $PWD/../data
 cp    $BIN_DIR/qrtext.dll                                           $PWD/../data
 cp    $BIN_DIR/qscintilla2.dll                                      $PWD/../data
-cp    $BIN_DIR/trikQsLog.dll                                            $PWD/../data
+cp    $BIN_DIR/trikQsLog.dll                                        $PWD/../data
 cp    $BIN_DIR/qrgui-brand-manager.dll                              $PWD/../data
 cp    $BIN_DIR/qrgui-controller.dll                                 $PWD/../data
 cp    $BIN_DIR/qrgui-dialogs.dll                                    $PWD/../data
@@ -28,6 +28,7 @@ cp    $BIN_DIR/qrgui-thirdparty.dll                                 $PWD/../data
 cp    $BIN_DIR/qrgui-tool-plugin-interface.dll                      $PWD/../data
 cp    $BIN_DIR/qrgui-facade.dll                                     $PWD/../data
 cp    "$BIN_DIR/patcher.exe"                                        "$PWD/../data"
+cp    "$BIN_DIR/checkapp.exe"                                       "$PWD/../data"
 cp    $BIN_DIR/trik-studio.exe                                      $PWD/../data/$PRODUCT.exe
 cp    $INSTALLER_ROOT/platform/$PRODUCT.cmd                         $PWD/../data/
 cp    "$INSTALLER_ROOT/platform/$PRODUCT.vbs"                       "$PWD/../data/"
@@ -44,6 +45,7 @@ cp    "$QT_LIB"/Qt5Widgets.dll                                    "$PWD"/../data
 cp    "$QT_LIB"/Qt5Xml.dll                                        "$PWD"/../data
 cp    "$QT_LIB"/Qt5Script.dll                                     "$PWD"/../data
 cp    "$QT_LIB"/Qt5Test.dll                                       "$PWD"/../data
+cp    "$QT_LIB"/Qt5Concurrent.dll                                 "$PWD"/../data
 cp    "$QT_LIB"/libgcc_s_*-1.dll                                  "$PWD"/../data
 cp    "$QT_LIB"/libwinpthread-1.dll                               "$PWD"/../data
 cp    "$QT_LIB"/libstdc++-6.dll                                   "$PWD"/../data
