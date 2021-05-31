@@ -16,3 +16,6 @@
 [submodule "thirdparty/qslog/qslog"]
 	path = thirdparty/qslog/qslog
 	url = https://bitbucket.org/codeimproved/qslog.git
+[submodule "trik-checkapp"]
+	path = thirdparty/checkapp/checkapp
+	url = https://github.com/trikset/trik-checkapp
