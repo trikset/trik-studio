@@ -8,14 +8,18 @@ def get_files(dir_path: str) -> Iterable[str]:
 	return sorted(os.path.join(d, file) for d, ns, f in os.walk(os.path.expanduser(dir_path)) for file in f)
 	
 if __name__=='__main__':
+	sys.stdout.reconfigure(encoding='utf-8')
 	bin_path = sys.argv[1]
 	num_failed_tests = 0
 	print("Start test")
 	for f in list(get_files(sys.argv[2])):
 		begin_time = datetime.datetime.now()
 		output = subprocess.run([bin_path, '-b', '-s', '5', f], capture_output=True, shell=False)
-		print("Test %s. " % f + "Return code : %d. " % output.returncode + "Message: %s" % output.stderr)
+		print("Test", f)
+		print("Return code :", output.returncode)
+		print(output.stderr.strip())
 		print(datetime.datetime.now() - begin_time)
+		print()
 		if (output.returncode != 0):
 			print("Solution failed with return code %d " % output.returncode)
 			num_failed_tests += 1
