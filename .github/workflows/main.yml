@@ -171,6 +171,7 @@ jobs:
             ls $GITHUB_WORKSPACE/testing_small
 
       - name: Tests
+        id: tests
         timeout-minutes: 2
         continue-on-error: true
         run: |
@@ -199,6 +200,12 @@ jobs:
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
             installer/reinstall*
+
+      - name: Check errors
+        if: ${{ steps.tests.outcome == 'failure' }}
+        run: |
+            echo Errors occurred in the step Tests
+            exit 1
 
       - name: Deploy installer
         if: ${{ github.event_name != 'pull_request' && github.repository_owner == 'trikset'}}
