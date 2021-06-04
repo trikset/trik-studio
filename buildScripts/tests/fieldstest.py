@@ -19,7 +19,7 @@ if __name__=='__main__':
 		print("Return code :", output.returncode)
 		print(output.stderr.strip())
 		print(datetime.datetime.now() - begin_time)
-		print()
+		print("-" * 20)
 		if (output.returncode != 0):
 			print("Solution failed with return code %d " % output.returncode)
 			num_failed_tests += 1
