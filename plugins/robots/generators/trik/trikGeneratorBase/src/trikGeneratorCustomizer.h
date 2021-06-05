@@ -27,6 +27,7 @@ public:
 			, qReal::ErrorReporterInterface &errorReporter
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 			, generatorBase::lua::LuaProcessor &luaProcessor
+			, generatorBase::ReadableLabelManager &readableLabelManager
 			, const QStringList &pathsToTemplates
 			, bool supportsSwitchUnstableToBreaks);
 

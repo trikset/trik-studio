@@ -64,8 +64,9 @@ TrikGeneratorFactory::TrikGeneratorFactory(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, lua::LuaProcessor &luaProcessor
+		, generatorBase::ReadableLabelManager &readableLabelManager
 		, const QStringList &pathsToTemplates)
-	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
+	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor, readableLabelManager)
 	, mPathsToTemplates(pathsToTemplates)
 {
 	mDeviceVariables.reset(new trik::parts::TrikDeviceVariables());

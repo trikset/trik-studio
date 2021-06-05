@@ -65,22 +65,25 @@ HEADERS += \
 	$$PWD/include/generatorBase/lua/reservedFunctionsConverter.h \
 	$$PWD/include/generatorBase/gotoControlFlowGenerator.h \
 	$$PWD/src/converters/dynamicPropertiesConverter.h \
+	$$PWD/src/readableLabelManager.h \
+	$$PWD/src/simpleGenerators/syntheticIfGenerator.h \
+	$$PWD/src/simpleGenerators/syntheticVariableNameGenerator.h \
 	$$PWD/src/structuralControlFlowGenerator.h \
-	$$PWD/src/structurizator.h \
+	$$PWD/src/structurizer.h \
+	$$PWD/src/structurizerNodes/breakStructurizerNode.h \
+	$$PWD/src/structurizerNodes/continuationStructurizerNode.h \
+	$$PWD/src/structurizerNodes/ifStructurizerNode.h \
+	$$PWD/src/structurizerNodes/loopStructurizerNode.h \
+	$$PWD/src/structurizerNodes/sequenceStructurizerNode.h \
+	$$PWD/src/structurizerNodes/simpleStructurizerNode.h \
+	$$PWD/src/structurizerNodes/structurizerNode.h \
+	$$PWD/src/structurizerNodes/switchStructurizerNode.h \
 
 HEADERS += \
-	$$PWD/src/structurizatorNodes/intermediateStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/simpleStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/breakStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/ifStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/structurizatorNodeWithBreaks.h \
-	$$PWD/src/structurizatorNodes/switchStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/blockStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/whileStructurizatorNode.h \
-	$$PWD/src/structurizatorNodes/selfLoopStructurizatorNode.h \
 
 
 SOURCES += \
+	$$PWD/src/readableLabelManager.cpp \
 	$$PWD/src/robotsGeneratorPluginBase.cpp \
 	$$PWD/src/masterGeneratorBase.cpp \
 	$$PWD/src/generatorCustomizer.cpp \
@@ -88,6 +91,16 @@ SOURCES += \
 	$$PWD/src/robotsDiagramVisitor.cpp \
 	$$PWD/src/primaryControlFlowValidator.cpp \
 	$$PWD/src/generatorFactoryBase.cpp \
+	$$PWD/src/simpleGenerators/syntheticIfGenerator.cpp \
+	$$PWD/src/simpleGenerators/syntheticVariableNameGenerator.cpp \
+	$$PWD/src/structurizerNodes/breakStructurizerNode.cpp \
+	$$PWD/src/structurizerNodes/continuationStructurizerNode.cpp \
+	$$PWD/src/structurizerNodes/ifStructurizerNode.cpp \
+	$$PWD/src/structurizerNodes/loopStructurizerNode.cpp \
+	$$PWD/src/structurizerNodes/sequenceStructurizerNode.cpp \
+	$$PWD/src/structurizerNodes/simpleStructurizerNode.cpp \
+	$$PWD/src/structurizerNodes/structurizerNode.cpp \
+	$$PWD/src/structurizerNodes/switchStructurizerNode.cpp \
 	$$PWD/src/templateParametrizedEntity.cpp \
 	$$PWD/src/parts/variables.cpp \
 	$$PWD/src/parts/subprograms.cpp \
@@ -113,7 +126,7 @@ SOURCES += \
 	$$PWD/src/gotoControlFlowGenerator.cpp \
 	$$PWD/src/converters/dynamicPropertiesConverter.cpp \
 	$$PWD/src/structuralControlFlowGenerator.cpp \
-	$$PWD/src/structurizator.cpp \
+	$$PWD/src/structurizer.cpp \
 
 # Simple element generators & converters
 
@@ -253,12 +266,3 @@ SOURCES += \
 	$$PWD/src/lua/precedenceConverter.cpp \
 
 SOURCES += \
-	$$PWD/src/structurizatorNodes/intermediateStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/simpleStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/breakStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/ifStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/structurizatorNodeWithBreaks.cpp \
-	$$PWD/src/structurizatorNodes/switchStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/blockStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/whileStructurizatorNode.cpp \
-	$$PWD/src/structurizatorNodes/selfLoopStructurizatorNode.cpp \

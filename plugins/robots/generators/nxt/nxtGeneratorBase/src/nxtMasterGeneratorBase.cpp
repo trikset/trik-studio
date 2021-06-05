@@ -34,7 +34,7 @@ NxtMasterGeneratorBase::NxtMasterGeneratorBase(const qrRepo::RepoApi &repo
 generatorBase::GeneratorCustomizer *NxtMasterGeneratorBase::createCustomizer()
 {
 	return new NxtGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor()
-			, mGeneratorName, supportsSwitchUnstableToBreaks());
+			, *mReadableLabelManager , mGeneratorName, supportsSwitchUnstableToBreaks());
 }
 
 void NxtMasterGeneratorBase::beforeGeneration()

@@ -43,6 +43,8 @@ public:
 
 	void setGenerateIfs();
 
+	ZoneNode *branchZoneByValue(const QString &value);
+
 protected:
 	QLinkedList<SemanticNode *> children() const override;
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;

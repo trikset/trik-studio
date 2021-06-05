@@ -42,6 +42,7 @@ class LuaProcessor;
 }
 
 class GeneratorCustomizer;
+class ReadableLabelManager;
 
 /// This class must be inherited in each concrete generator. Implementation
 /// must specify every generator part (starting from simple block generators
@@ -53,7 +54,8 @@ public:
 	GeneratorFactoryBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, lua::LuaProcessor &luaProcessor);
+			, lua::LuaProcessor &luaProcessor
+			, ReadableLabelManager &readableLabelManager);
 
 	virtual ~GeneratorFactoryBase();
 
@@ -95,6 +97,14 @@ public:
 	virtual simple::AbstractSimpleGenerator *ifGenerator(const qReal::Id &id
 			, GeneratorCustomizer &customizer
 			, bool elseIsEmpty
+			, bool needInverting);
+
+	/// Returns a pointer to a code generator for blocks with if semantics
+	virtual simple::AbstractSimpleGenerator *syntheticIfGenerator(const qReal::Id &id
+			, const QMap<qReal::Id, bool> &ids
+			, GeneratorCustomizer &customizer
+			, bool elseIsEmpty
+			, QString syntheticCondition
 			, bool needInverting);
 
 	/// Returns a pointer to a code generator for infinite loops
@@ -145,6 +155,10 @@ public:
 
 	/// Returns a pointer to a code generator for goto label declaration
 	virtual simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id
+			, GeneratorCustomizer &customizer);
+
+	/// Returns a pointer to a code generator for goto label declaration
+	virtual simple::AbstractSimpleGenerator *syntheticVariableNameGenerator(const qReal::Id &id
 			, GeneratorCustomizer &customizer);
 
 	/// Returns a pointer to a code generator for 'goto' instruction
@@ -276,6 +290,7 @@ protected:
 	QScopedPointer<parts::Sensors> mSensors;
 	QScopedPointer<parts::Functions> mFunctions;
 	QScopedPointer<parts::DeviceVariables> mDeviceVariables;
+	ReadableLabelManager &mReadableLabelManager;
 	int mLoopGeneratorIndex  { 0 };
 };
 

@@ -33,6 +33,7 @@ public:
 		, breakNode
 		, continueNode
 		, gotoNode
+		, tempVariableNode
 	};
 
 	explicit SimpleNode(const qReal::Id &idBinded, QObject *parent = nullptr);
@@ -41,6 +42,8 @@ public:
 	void bindToSyntheticConstruction(SyntheticBlockType type);
 
 	static SimpleNode *createBreakNode(QObject *parent);
+	static SimpleNode *createSyntheticVariableNode(const qReal::Id &id, QObject *parent);
+
 protected:
 	QLinkedList<SemanticNode *> children() const override;
 

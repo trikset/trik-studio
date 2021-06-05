@@ -15,11 +15,10 @@
 #pragma once
 
 #include <generatorBase/simpleGenerators/bindingGenerator.h>
+#include "src/readableLabelManager.h"
 
 namespace pioneer {
 namespace lua {
-
-class GotoLabelManager;
 
 /// Generates human-readable label for a node.
 class LabelGenerator : public generatorBase::simple::BindingGenerator
@@ -29,7 +28,7 @@ public:
 			, generatorBase::GeneratorCustomizer &customizer
 			, const qReal::Id &id
 			, QObject *parent
-			, GotoLabelManager &gotoLabelManager);
+			, generatorBase::ReadableLabelManager &readableLabelManager);
 };
 
 }

@@ -121,3 +121,14 @@ QLinkedList<SemanticNode *> SwitchNode::children() const
 
 	return result;
 }
+
+ZoneNode *SwitchNode::branchZoneByValue(const QString &value)
+{
+	if ((value == "") && (mDefaultBranch != nullptr)) {
+		return mDefaultBranch;
+	}
+	if (mBranches.keys().contains(value)) {
+		return mBranches[value];
+	}
+	return nullptr;
+}

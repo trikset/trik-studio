@@ -17,7 +17,14 @@
 #include "generatorBase/robotsGeneratorDeclSpec.h"
 #include "generatorBase/controlFlowGeneratorBase.h"
 #include "generatorBase/semanticTree/semanticTree.h"
-#include "structurizator.h"
+#include "structurizer.h"
+#include "structurizerNodes/structurizerNode.h"
+#include "structurizerNodes/ifStructurizerNode.h"
+#include "structurizerNodes/loopStructurizerNode.h"
+#include "structurizerNodes/simpleStructurizerNode.h"
+#include "structurizerNodes/switchStructurizerNode.h"
+#include "structurizerNodes/sequenceStructurizerNode.h"
+
 
 #include <QtCore/QStack>
 #include <QtCore/QVector>
@@ -26,7 +33,7 @@ namespace generatorBase {
 
 /// Generates semantic tree in control-structured style.
 /// First we obtain control flow graph.
-/// Then we are trying structurize such a graph with Structurizator.
+/// Then we are trying structurize such a graph with Structurizer.
 /// If structurization was successfull then we are trying to transform
 /// control flow tree to Semantic Tree used for code generation.
 ///
@@ -43,8 +50,7 @@ public:
 			, PrimaryControlFlowValidator &validator
 			, const qReal::Id &diagramId
 			, QObject *parent = 0
-			, bool isThisDiagramMain = true
-			, const qReal::Id &simpleId = qReal::Id());
+			, bool isThisDiagramMain = true);
 
 	/// Implementation of clone operation for structural generator
 	ControlFlowGeneratorBase *cloneFor(const qReal::Id &diagramId, bool cloneForNewDiagram) override;
@@ -52,19 +58,13 @@ public:
 	void beforeSearch() override;
 
 	/// functions for visiting Ids. While each visit we contruct graph.
-	void visit(const qReal::Id &id, QList<LinkInfo> &links) override;
+	void visitRegular(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitConditional(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitSwitch(const qReal::Id &id, const QList<LinkInfo> &links) override;
 	void visitUnknown(const qReal::Id &id, QList<LinkInfo> const &links) override;
-
-	/// We introduce fake-loop-preheader vertex incident to vertices not from loop body.
-	/// We remember vertices belonging to loop.
 	void visitLoop(const qReal::Id &id, const QList<LinkInfo> &links) override;
 
 	void visitPreconditionalLoop(const qReal::Id &id, const QList<LinkInfo> &links) override;
-
-	/// We clean old info about vertices belonging to some loop.
-	void afterVisit(const qReal::Id &id, QList<LinkInfo> &links) override;
 
 	/// This method can be used for semantic tree debug printing after all
 	/// traversal stages.
@@ -91,58 +91,39 @@ private:
 			, bool fromMain) override;
 
 	void performStructurization();
-	void obtainSemanticTree(IntermediateStructurizatorNode *root);
 
-	/// helper method for ZoneNode
-	void checkAndAppendBlock(semantics::ZoneNode *zone, IntermediateStructurizatorNode *node);
+	void makeSemanticTree(StructurizerNode *nodes, semantics::ZoneNode *zone
+			, QMap<qReal::Id, int> &numberOfOccurrences, QSet<qReal::Id> &alreadyCalculated);
 
-	/// transformation methods
-	semantics::SemanticNode *transformNode(IntermediateStructurizatorNode *node);
-	semantics::SemanticNode *transformSimple(SimpleStructurizatorNode *simpleNode);
-	semantics::SemanticNode *transformBlock(BlockStructurizatorNode *blockNode);
-	semantics::SemanticNode *transformIfThenElse(IfStructurizatorNode *ifNode);
-	semantics::SemanticNode *transformSelfLoop(SelfLoopStructurizatorNode *selfLoopNode);
-	semantics::SemanticNode *transformWhileLoop(WhileStructurizatorNode *whileNode);
-	semantics::SemanticNode *transformSwitch(SwitchStructurizatorNode *switchNode);
-	semantics::SemanticNode *transformBreakNode();
+	void addSimple(StructurizerNode *node, semantics::ZoneNode *zone
+			, QMap<qReal::Id, int> &numberOfOccurrences, QSet<qReal::Id> &alreadyCalculated);
 
-	/// helper functions
-	semantics::SemanticNode *createConditionWithBreaks(StructurizatorNodeWithBreaks *nodeWithBreaks);
-	semantics::SemanticNode *createSemanticIfNode(const qReal::Id &conditionId
-			, IntermediateStructurizatorNode *thenNode
-			, IntermediateStructurizatorNode *elseNode);
+	void addBreak(StructurizerNode *node, semantics::ZoneNode *zone
+			, QMap<qReal::Id, int> &numberOfOccurrences, QSet<qReal::Id> &alreadyCalculated);
 
-	semantics::SemanticNode *createSemanticSwitchNode(const qReal::Id &conditionId
-			, const QList<IntermediateStructurizatorNode *> &branches
-			, bool generateIfs);
+	void addIf(StructurizerNode *node, semantics::ZoneNode *zone
+			, QMap<qReal::Id, int> &numberOfOccurrences, QSet<qReal::Id> &alreadyCalculated);
+
+	void addLoop(StructurizerNode *node, semantics::ZoneNode *zone
+			, QMap<qReal::Id, int> &numberOfOccurrences, QSet<qReal::Id> &alreadyCalculated);
+
+	void addSwitch(StructurizerNode *node, semantics::ZoneNode *zone
+			, QMap<qReal::Id, int> &numberOfOccurrences, QSet<qReal::Id> &alreadyCalculated);
 
 	/// methods for building graph
 	void appendVertex(const qReal::Id &vertex);
 	void addEdgeIntoGraph(const qReal::Id &from, const qReal::Id &to);
 	void appendEdgesAndVertices(const qReal::Id &vertex, const QList<LinkInfo> &links);
 
-	/// methods for handling vertices belonging to loop body
-	void addVerticesInLoopBody(const qReal::Id &vertex, const QList<LinkInfo> &links);
-	void removeVerticesFromLoopBody(const qReal::Id &vertex, const QList<LinkInfo> &links);
+	QString syntheticConditionToString(StructurizerNode::ConditionTree *tree);
 
-	bool isLoop(const qReal::Id &vertex) const;
-
-	QMap<int, semantics::SemanticNode *> mTrees;
 	bool mCanBeGeneratedIntoStructuredCode;
-	Structurizator *mStructurizator;
+	Structurizer *mStructurizer;
 
-	int mVerticesNumber;
 	QSet<qReal::Id> mIds;
-	int mStartVertex;
-	QMap<qReal::Id, int> mVertexNumber;
-	QMap<int, int> mLoopHeader;
-	QMap<int, QSet<int>> mFollowers;
+	qReal::Id mStartVertex;
+	QMap<qReal::Id, QList<qReal::Id>> mFollowers;
 	bool mIsGraphBeingConstructed;
-	QStack<int> mLoopNumbers;
-	QSet<int> mVerticesInsideLoopBody;
-	QVector<qReal::Id> mAdditionalVertices;
-	bool mEdgesAndVerticesWereAdded {};
-	qReal::Id mFictiveId;
 };
 
 }

@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "gotoLabelManager.h"
+#include "readableLabelManager.h"
 
 #include <generatorBase/semanticTree/semanticNode.h>
 #include <generatorBase/semanticTree/simpleNode.h>
 
-using namespace pioneer::lua;
+using namespace generatorBase;
 
-QString GotoLabelManager::labelFor(const qReal::Id &id)
+QString ReadableLabelManager::labelFor(const qReal::Id &id)
 {
 	qReal::Id actualId = id;
 	if (actualId.editor().startsWith("label_")) {
@@ -41,18 +41,19 @@ QString GotoLabelManager::labelFor(const qReal::Id &id)
 		mNodeTypesCount.insert(type, 1);
 	}
 
-	const auto label = beautify(QString("%1_%2").arg(actualId.element()).arg(mNodeTypesCount.value(type)));
+	const auto label = QString("__temp_%1").arg(mLabels.size() + 1);
+			//beautify(QString("%1_%2").arg(actualId.element()).arg(mNodeTypesCount.value(type)));
 	mLabels.insert(actualId, label);
 	return label;
 }
 
-void GotoLabelManager::reinit()
+void ReadableLabelManager::reinit()
 {
 	mLabels.clear();
 	mNodeTypesCount.clear();
 }
 
-QString GotoLabelManager::beautify(const QString &label)
+QString ReadableLabelManager::beautify(const QString &label)
 {
 	QString result;
 	for (QChar ch : label) {

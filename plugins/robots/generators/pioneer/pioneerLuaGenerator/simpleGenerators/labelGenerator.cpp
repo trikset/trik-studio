@@ -17,8 +17,6 @@
 #include <generatorBase/generatorCustomizer.h>
 #include <qrutils/stringUtils.h>
 
-#include "generators/gotoLabelManager.h"
-
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
@@ -26,11 +24,11 @@ LabelGenerator::LabelGenerator(const qrRepo::RepoApi &repo
 		, generatorBase::GeneratorCustomizer &customizer
 		, const qReal::Id &id
 		, QObject *parent
-		, GotoLabelManager &gotoLabelManager)
+		, generatorBase::ReadableLabelManager &readableLabelManager)
 	: BindingGenerator(repo, customizer, id, "label.t"
 			, { Binding::createStaticConverting(
 					"@@ID@@"
-					, gotoLabelManager.labelFor(id)
+					, readableLabelManager.labelFor(id)
 					, customizer.factory()->nameNormalizerConverter()
 				)
 			}

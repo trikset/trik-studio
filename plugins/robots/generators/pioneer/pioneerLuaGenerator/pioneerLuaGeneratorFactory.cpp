@@ -20,7 +20,7 @@
 #include "parts/tofPart.h"
 #include "parts/magnetPart.h"
 #include "parts/randomGeneratorPart.h"
-#include "generators/gotoLabelManager.h"
+#include "src/readableLabelManager.h"
 #include "simpleGenerators/endOfHandlerGenerator.h"
 #include "simpleGenerators/geoLandingGenerator.h"
 #include "simpleGenerators/geoTakeoffGenerator.h"
@@ -45,11 +45,10 @@ PioneerLuaGeneratorFactory::PioneerLuaGeneratorFactory(const qrRepo::RepoApi &re
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName
-		, GotoLabelManager &gotoLabelManager)
-	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
+		, generatorBase::ReadableLabelManager &readableLabelManager
+		, const QString &generatorName)
+	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor, readableLabelManager)
 	, mGeneratorName(generatorName)
-	, mGotoLabelManager(gotoLabelManager)
 {
 }
 
@@ -132,13 +131,13 @@ RandomGeneratorPart& PioneerLuaGeneratorFactory::randomGeneratorPart()
 generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::labelGenerator(const qReal::Id &id
 		, generatorBase::GeneratorCustomizer &customizer)
 {
-	return new LabelGenerator(mRepo, customizer, id, this, mGotoLabelManager);
+	return new LabelGenerator(mRepo, customizer, id, this, mReadableLabelManager);
 }
 
 generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::gotoSimpleGenerator(const qReal::Id &id
 		, generatorBase::GeneratorCustomizer &customizer)
 {
-	return new GotoGenerator(mRepo, customizer, id, this, mGotoLabelManager);
+	return new GotoGenerator(mRepo, customizer, id, this, mReadableLabelManager);
 }
 
 QList<generatorBase::parts::InitTerminateCodeGenerator *> PioneerLuaGeneratorFactory::initTerminateGenerators()

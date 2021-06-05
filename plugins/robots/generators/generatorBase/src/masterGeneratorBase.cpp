@@ -32,6 +32,7 @@
 #include "generatorBase/parts/threads.h"
 #include "generatorBase/parts/sensors.h"
 #include "generatorBase/parts/initTerminateCodeGenerator.h"
+#include "readableLabelManager.h"
 
 using namespace generatorBase;
 using namespace qReal;
@@ -48,6 +49,7 @@ MasterGeneratorBase::MasterGeneratorBase(const qrRepo::RepoApi &repo
 	, mTextLanguage(textLanguage)
 	, mDiagram(diagramId)
 	, mParserErrorReporter(parserErrorReporter)
+	, mReadableLabelManager(new ReadableLabelManager())
 {
 }
 
@@ -79,6 +81,8 @@ QString MasterGeneratorBase::generate(const QString &indentString)
 		mErrorReporter.addCritical(QObject::tr("There is no opened diagram"));
 		return QString();
 	}
+
+	mReadableLabelManager->reinit();
 
 	beforeGeneration();
 	if (!QDir(mProjectDir).exists()) {

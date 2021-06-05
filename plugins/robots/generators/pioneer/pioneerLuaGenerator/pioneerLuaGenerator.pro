@@ -44,7 +44,6 @@ HEADERS += \
 	$$PWD/communicator/communicatorInterface.h \
 	$$PWD/communicator/communicationManager.h \
 	$$PWD/communicator/httpCommunicator.h \
-	$$PWD/generators/gotoLabelManager.h \
 	$$PWD/generators/pioneerStateMachineGenerator.h \
 	$$PWD/generators/randomFunctionChecker.h \
 	$$PWD/generators/semanticTreeManager.h \
@@ -78,7 +77,6 @@ SOURCES += \
 	$$PWD/pioneerLuaMasterGenerator.cpp \
 	$$PWD/communicator/communicationManager.cpp \
 	$$PWD/communicator/httpCommunicator.cpp \
-	$$PWD/generators/gotoLabelManager.cpp \
 	$$PWD/generators/pioneerStateMachineGenerator.cpp \
 	$$PWD/generators/randomFunctionChecker.cpp \
 	$$PWD/generators/semanticTreeManager.cpp \

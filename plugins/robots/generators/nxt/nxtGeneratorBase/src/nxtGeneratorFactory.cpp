@@ -32,8 +32,9 @@ NxtGeneratorFactory::NxtGeneratorFactory(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
+		, generatorBase::ReadableLabelManager &readableLabelManager
 		, const QString &generatorName)
-	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
+	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor, readableLabelManager)
 	, mGeneratorName(generatorName)
 	, mImages(pathsToTemplates())
 {

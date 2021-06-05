@@ -20,9 +20,11 @@
 #include "simpleGenerators/nullGenerator.h"
 #include "simpleGenerators/commentElementGenerator.h"
 #include "simpleGenerators/ifElementGenerator.h"
+#include "simpleGenerators/syntheticIfGenerator.h"
 #include "simpleGenerators/infiniteLoopGenerator.h"
 #include "simpleGenerators/forLoopGenerator.h"
 #include "simpleGenerators/whileLoopGenerator.h"
+#include "simpleGenerators/syntheticVariableNameGenerator.h"
 #include "simpleGenerators/forkCallGenerator.h"
 #include "simpleGenerators/joinGenerator.h"
 #include "simpleGenerators/killThreadGenerator.h"
@@ -95,11 +97,13 @@ using namespace kitBase::robotModel;
 GeneratorFactoryBase::GeneratorFactoryBase(const qrRepo::RepoApi &repo
 		, ErrorReporterInterface &errorReporter
 		, const RobotModelManagerInterface &robotModelManager
-		, lua::LuaProcessor &luaProcessor)
+		, lua::LuaProcessor &luaProcessor
+		, ReadableLabelManager &readableLabelManager)
 	: mRepo(repo)
 	, mErrorReporter(errorReporter)
 	, mRobotModelManager(robotModelManager)
 	, mLuaTranslator(luaProcessor)
+	, mReadableLabelManager(readableLabelManager)
 {
 }
 
@@ -206,6 +210,13 @@ simple::AbstractSimpleGenerator *GeneratorFactoryBase::ifGenerator(const Id &id
 		, bool needInverting)
 RETURN_GENERATOR_PTR(IfElementGenerator, (mRepo, customizer, id, elseIsEmpty, needInverting, this))
 
+simple::AbstractSimpleGenerator *GeneratorFactoryBase::syntheticIfGenerator(const Id &id
+		, const QMap<qReal::Id, bool> &ids
+		, GeneratorCustomizer &customizer
+		, bool elseIsEmpty
+		, QString syntheticCondition
+		, bool needInverting)
+RETURN_GENERATOR_PTR(SyntheticIfGenerator, (mRepo, customizer, ids, elseIsEmpty, syntheticCondition, id, needInverting, mReadableLabelManager, this))
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::infiniteLoopGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
@@ -318,6 +329,10 @@ RETURN_GENERATOR_PTR(ContinueGenerator, (mRepo, customizer, id, this))
 AbstractSimpleGenerator *GeneratorFactoryBase::labelGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)
 RETURN_GENERATOR_PTR(LabelGenerator, (mRepo, customizer, id, this))
+
+AbstractSimpleGenerator *GeneratorFactoryBase::syntheticVariableNameGenerator(const qReal::Id &id
+		, GeneratorCustomizer &customizer)
+RETURN_GENERATOR_PTR(SyntheticVariableNameGenerator, (mRepo, customizer, id, mReadableLabelManager, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::gotoSimpleGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)

@@ -15,6 +15,7 @@
 #pragma once
 
 #include <generatorBase/masterGeneratorBase.h>
+#include "src/readableLabelManager.h"
 
 #include <QtCore/QScopedPointer>
 
@@ -26,7 +27,6 @@ namespace pioneer {
 namespace lua {
 
 class PioneerStateMachineGenerator;
-class GotoLabelManager;
 class RandomFunctionChecker;
 
 /// Main generator that directs generation process (mainly by configuring its base class that does actual job).
@@ -65,9 +65,6 @@ private:
 	/// Metamodel for generated model. Used to query various language-related info, for example, property names
 	/// for a node.
 	const qReal::EditorManagerInterface &mMetamodel;
-
-	/// Storage and generator for human-readable goto labels.
-	QScopedPointer<GotoLabelManager> mGotoLabelManager;
 
 	/// Object that tracks "random()" function usage in Lua code of properties, to be able to properly initialize
 	/// random number generator if needed.

@@ -20,9 +20,10 @@ NxtGeneratorCustomizer::NxtGeneratorCustomizer(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
+		, generatorBase::ReadableLabelManager &readableLabelManager
 		, const QString &generatorName
 		, bool supportsSwitchUnstableToBreaks)
-	: mFactory(repo, errorReporter, robotModelManager, luaProcessor, generatorName)
+	: mFactory(repo, errorReporter, robotModelManager, luaProcessor, readableLabelManager, generatorName)
 	, mSupportsSwitchUnstableToBreaks(supportsSwitchUnstableToBreaks)
 {
 }

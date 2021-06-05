@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2017 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,30 @@
 
 #pragma once
 
-#include "intermediateStructurizatorNode.h"
+#include <QtCore/QHash>
+#include <QtCore/QString>
+
+#include <qrkernel/ids.h>
 
 namespace generatorBase {
 
-class BlockStructurizatorNode : public IntermediateStructurizatorNode
+/// Class that stores and produces human-readable labels for goto statements.
+class ReadableLabelManager
 {
-	Q_OBJECT
-
 public:
-	explicit BlockStructurizatorNode(IntermediateStructurizatorNode *firstNode
-			, IntermediateStructurizatorNode *secondNode
-			, QObject *parent);
+	/// Returns existing or generates new label for a node with given id.
+	QString labelFor(const qReal::Id &id);
 
-	IntermediateStructurizatorNode *firstNode() const;
-	IntermediateStructurizatorNode *secondNode() const;
+	/// Clears all stored labels.
+	void reinit();
 
-	bool analyzeBreak();
-	Type type() const;
-	qReal::Id firstId() const;
 private:
-	IntermediateStructurizatorNode *mFirstNode;
-	IntermediateStructurizatorNode *mSecondNode;
+	/// Makes given string CAPS_WITH_UNDERSCORES.
+	static QString beautify(const QString &label);
+
+	QHash<qReal::Id, int> mNodeTypesCount;
+	QHash<qReal::Id, QString> mLabels;
+
 };
 
 }
