@@ -5,6 +5,7 @@
 		<tool name="PuTTY" program="./winscp/PuTTY/putty.exe" arguments="-ssh root@@@TrikTcpServer@@"/>
 		<tool name="TRIK Gamepad" program="./gamepad.exe" arguments="@@TrikTcpServer@@"/>
 		<tool name="WinSCP" program="./winscp/WinSCP.exe" arguments="scp://root@@@TrikTcpServer@@"/>
+		<tool name="TRIK Checkapp" program="./checkapp.exe"/>
 	</platform>
 	<platform name="linux">
 		<tool name="TRIK Gamepad" program="./gamepad" arguments="@@TrikTcpServer@@"/>
