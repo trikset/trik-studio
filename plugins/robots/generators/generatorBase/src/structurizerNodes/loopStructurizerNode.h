@@ -8,8 +8,6 @@ namespace generatorBase {
 
 class LoopStructurizerNode : public StructurizerNode
 {
-	Q_OBJECT
-
 public:
 	explicit LoopStructurizerNode(QObject *parent);
 	explicit LoopStructurizerNode(const Vertex &id, bool invertCondition, QObject *parent);
@@ -41,11 +39,8 @@ public:
 	void transformBeforeDerecursivation();
 
 protected:
-
 	const Vertex mId;
 	const bool mInvertedCondition;
 	StructurizerNode *mBody;
-
 };
-
 }

@@ -8,8 +8,6 @@ namespace generatorBase {
 
 class ContinuationStructurizerNode : public StructurizerNode
 {
-	Q_OBJECT
-
 public:
 	explicit ContinuationStructurizerNode(const Vertex &id, QObject *parent);
 
@@ -37,6 +35,5 @@ public:
 
 protected:
 	const Vertex mId;
-
 };
 }

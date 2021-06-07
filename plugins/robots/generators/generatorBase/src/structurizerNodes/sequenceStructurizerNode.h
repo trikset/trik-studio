@@ -8,8 +8,6 @@ namespace generatorBase {
 
 class SequenceStructurizerNode : public StructurizerNode
 {
-	Q_OBJECT
-
 public:
 	explicit SequenceStructurizerNode(QObject *parent);
 
@@ -39,6 +37,5 @@ public:
 
 protected:
 	QVector<StructurizerNode *> mChildren;
-
 };
 }

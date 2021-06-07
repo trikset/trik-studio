@@ -8,8 +8,6 @@ namespace generatorBase {
 
 class SimpleStructurizerNode : public StructurizerNode
 {
-	Q_OBJECT
-
 public:
 	explicit SimpleStructurizerNode(const Vertex &id, QObject *parent);
 
@@ -36,6 +34,5 @@ public:
 
 protected:
 	const Vertex mId;
-
 };
 }

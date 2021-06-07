@@ -6,10 +6,7 @@ namespace generatorBase {
 
 class StructurizerNode : public QObject
 {
-	Q_OBJECT
-
 public:
-
 	enum Type {
 		simple
 		, continuation
@@ -43,6 +40,7 @@ public:
 
 		int numberOfFirstVertex(const Vertex &id) const;
 		~ConditionTree();
+
 	private:
 		bool calculateValue(const QMap<QPair<Vertex, Vertex>, bool> &values) const;
 		void findAllValues(QSet<QPair<Vertex, Vertex>> &values) const;
@@ -80,8 +78,5 @@ public:
 
 	virtual void dropEmptyConditionals() = 0;
 	virtual void transformBeforeDerecursivation() = 0;
-
-protected:
-
 };
 }

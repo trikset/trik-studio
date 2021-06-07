@@ -8,12 +8,8 @@ namespace generatorBase {
 
 class SwitchStructurizerNode : public StructurizerNode
 {
-	Q_OBJECT
-
 public:
 	explicit SwitchStructurizerNode(const Vertex &id, const QVector<Vertex> &branches, QObject *parent);
-
-	//explicit SwitchStructurizerNode(const Vertex &id, QObject *parent);
 
 	Type type() const;
 	Vertex id() const;
@@ -42,11 +38,8 @@ public:
 	void transformBeforeDerecursivation();
 
 protected:
-
 	const Vertex mId;
 	QMap<Vertex, StructurizerNode *> mBranches;
 	QPair<Vertex, StructurizerNode *> mDefaultBranch;
-
 };
-
 }

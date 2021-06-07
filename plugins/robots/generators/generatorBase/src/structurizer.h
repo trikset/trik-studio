@@ -15,8 +15,6 @@ class LoopStructurizerNode;
 
 class Structurizer : public QObject
 {
-	Q_OBJECT
-
 public:
 	explicit Structurizer(QObject *parent = nullptr);
 
@@ -41,5 +39,4 @@ private:
 
 	void reorderLoopHeads(QVector<Vertex> &v);
 };
-
 }

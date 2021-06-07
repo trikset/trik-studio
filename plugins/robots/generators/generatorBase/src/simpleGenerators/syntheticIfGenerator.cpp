@@ -33,7 +33,6 @@ SyntheticIfGenerator::SyntheticIfGenerator(const qrRepo::RepoApi &repo
 	, mNeedInverting(needInverting)
 	, mNameManager(nameManager)
 {
-
 }
 
 QString SyntheticIfGenerator::generate()

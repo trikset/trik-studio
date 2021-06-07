@@ -13,11 +13,13 @@ StructurizerNode::~StructurizerNode()
 
 StructurizerNode::ConditionTree::ConditionTree(const QPair<Vertex, Vertex> &idPair)
 	: mInverted(false), mIsOperator(false),mIsValue(true), mValue(idPair), mLeft(nullptr), mRight(nullptr)
-{}
+{
+}
 
 StructurizerNode::ConditionTree::ConditionTree(Operator o, ConditionTree *left, ConditionTree *right)
 	: mInverted(false), mIsOperator(true), mIsValue(false), mOperator(o), mLeft(left), mRight(right)
-{}
+{
+}
 
 void StructurizerNode::ConditionTree::invert()
 {

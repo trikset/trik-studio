@@ -8,8 +8,6 @@ namespace generatorBase {
 
 class IfStructurizerNode : public StructurizerNode
 {
-	Q_OBJECT
-
 public:
 	explicit IfStructurizerNode(const Vertex &id, const Vertex &firstId, const Vertex &secondId, QObject *parent);
 	explicit IfStructurizerNode(const ConditionTree *ifCondition, QObject *parent);
@@ -43,11 +41,8 @@ public:
 	~IfStructurizerNode();
 
 protected:
-
 	const ConditionTree *mCondition;
 	StructurizerNode *mThenBranch;
 	StructurizerNode *mElseBranch;
-
 };
-
 }

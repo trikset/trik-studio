@@ -37,7 +37,6 @@ private:
 
 	QHash<qReal::Id, int> mNodeTypesCount;
 	QHash<qReal::Id, QString> mLabels;
-
 };
 
 }

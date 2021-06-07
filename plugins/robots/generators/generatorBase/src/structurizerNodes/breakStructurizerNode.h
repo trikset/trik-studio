@@ -6,7 +6,6 @@ namespace generatorBase {
 
 class BreakStructurizerNode : public SimpleStructurizerNode
 {
-
 public:
 	explicit BreakStructurizerNode(QObject *parent = nullptr);
 
@@ -14,6 +13,5 @@ public:
 	bool isEqual(StructurizerNode *other) const;
 
 	StructurizerNode *clone() const;
-
 };
 }
