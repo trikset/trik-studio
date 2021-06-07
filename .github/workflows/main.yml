@@ -47,8 +47,6 @@ jobs:
     defaults:
       run:
         shell: msys2 {0}
-    env:
-      TEST_DIR: $GITHUB_WORKSPACE/small_testing
     steps:
 
       - name: Cancel Previous Workflow Runs
@@ -166,15 +164,21 @@ jobs:
         run: |
             for file in $(ls ${{ env.BUILD_DIR }}/bin/release/*.exe || :) ; do windeployqt --release $file ; done
 
+      - name: Download tests
+        run: |
+            curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
+            7z x tests.7z
+            ls $GITHUB_WORKSPACE/testing_small
+
       - name: Tests
-        if: false
-        timeout-minutes: 3
+        id: tests
+        timeout-minutes: 2
         continue-on-error: true
         run: |
             echo "$PATH"
             echo ------
             cd ${{ env.BUILD_DIR }}/bin/release
-            set PYTHONIOENCODING=utf-8 & python "$GITHUB_WORKSPACE\buildScripts\tests\fieldstest.py" 2D-model.exe ${{ env.TEST_DIR }}
+            python "${{ github.workspace }}\buildScripts\tests\fieldstest.py" 2D-model.exe "${{ github.workspace }}\testing_small"
 
       - name: Push binaries
         if: false
@@ -196,6 +200,12 @@ jobs:
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
             installer/reinstall*
+
+      - name: Check errors
+        if: ${{ steps.tests.outcome == 'failure' }}
+        run: |
+            echo Errors occurred in the step Tests
+            exit 1
 
       - name: Deploy installer
         if: ${{ github.event_name != 'pull_request' && github.repository_owner == 'trikset'}}
