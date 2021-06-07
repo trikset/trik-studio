@@ -320,13 +320,14 @@ QString StructuralControlFlowGenerator::syntheticConditionToString(StructurizerN
 			result = head.id();
 		} else if (mCustomizer.semanticsOf(head) == enums::semantics::switchBlock) {
 			//it is switch
+			QList<QString> cases;
 			for (auto &link : mRepo.outgoingLinks(head)) {
 				if (mRepo.otherEntityFromLink(link, head) == target) {
 					QString guard = mRepo.property(link, "Guard").toString();
-					result = QString("(%1==%2)").arg(head.id(), guard);
-					break;
+					cases << QString("(%1==%2)").arg(head.id(), guard);
 				}
 			}
+			result = cases.join(" or ");
 		} else {
 			//strange case
 			result = head.id();
