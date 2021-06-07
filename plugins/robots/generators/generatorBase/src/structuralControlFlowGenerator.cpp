@@ -211,14 +211,26 @@ void StructuralControlFlowGenerator::addSwitch(StructurizerNode *node, semantics
 	auto switchNode = static_cast<SwitchNode *>(mSemanticTree->produceNodeFor(switchElement->id()));
 	zone->appendChild(switchNode);
 
-	for (auto &link : mRepo.outgoingLinks(switchElement->id())) {
+	QMap<Id, ZoneNode *> addedBranches;
+	for (const Id &link : mRepo.outgoingLinks(switchElement->id())) {
 		const QString value = mRepo.property(link, "Guard").toString();
-		switchNode->addBranch(value, nullptr);
-		auto target = mRepo.otherEntityFromLink(link, switchElement->id());
-		makeSemanticTree(switchElement->branches()[target]
-			, switchNode->branchZoneByValue(value)
-			, numberOfOccurrences
-			, alreadyCalculated);
+		const Id targetId = mRepo.otherEntityFromLink(link, switchElement->id());
+
+		if (addedBranches.contains(targetId)) {
+			ZoneNode * const targetZone = addedBranches[targetId];
+			switchNode->mergeBranch(value, targetZone);
+		} else {
+			switchNode->addBranch(value);
+			ZoneNode *zoneForBranch = switchNode->branchZoneByValue(value);
+			addedBranches[targetId] = zoneForBranch;
+			StructurizerNode *branchElement = nullptr;
+			if (targetId == (switchElement->defaultBranch().first)) {
+				branchElement = switchElement->defaultBranch().second;
+			} else {
+				branchElement = switchElement->branches().value(targetId);
+			}
+			makeSemanticTree(branchElement, zoneForBranch, numberOfOccurrences, alreadyCalculated);
+		}
 	}
 }
 
@@ -273,7 +285,9 @@ void StructuralControlFlowGenerator::appendVertex(const Id &vertex)
 
 void StructuralControlFlowGenerator::addEdgeIntoGraph(const Id &from, const Id &to)
 {
-	mFollowers[from].append(to);
+	if (!mFollowers[from].contains(to)) {
+		mFollowers[from].append(to);
+	}
 }
 
 void StructuralControlFlowGenerator::appendEdgesAndVertices(const Id &vertex, const QList<LinkInfo> &links)

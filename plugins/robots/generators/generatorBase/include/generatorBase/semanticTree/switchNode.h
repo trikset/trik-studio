@@ -28,10 +28,10 @@ public:
 	explicit SwitchNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 
 	/// Adds new branch for the switch value (i.e. branch zone will be created for the given value).
-	void addBranch(const QString &value, SemanticNode * const node);
+	void addBranch(const QString &value);
 
-	/// Binds existing branch with the switch value (i.e. value will be binded with the parent zone of the node).
-	void mergeBranch(const QString &value, NonZoneNode * const node);
+	/// Binds existing branch with the switch value (i.e. value will be binded with zone node of the branch).
+	void mergeBranch(const QString &value, ZoneNode * const zone);
 
 	/// Returns true if branches for this switch block were already merged.
 	/// This can help to resolve confusion in case when one branch enter into the middle of another.
@@ -43,6 +43,7 @@ public:
 
 	void setGenerateIfs();
 
+	/// Returns branch zone node by guard value.
 	ZoneNode *branchZoneByValue(const QString &value);
 
 protected:

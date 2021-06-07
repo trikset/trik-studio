@@ -87,6 +87,11 @@ QMap<StructurizerNode::Vertex, StructurizerNode *> SwitchStructurizerNode::branc
 	return mBranches;
 }
 
+QPair<StructurizerNode::Vertex, StructurizerNode *> SwitchStructurizerNode::defaultBranch() const
+{
+	return mDefaultBranch;
+}
+
 void SwitchStructurizerNode::dropContinuations(const Vertex &id)
 {
 	for (auto *&t : mBranches) {

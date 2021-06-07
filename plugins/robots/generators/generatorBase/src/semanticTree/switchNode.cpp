@@ -27,20 +27,17 @@ SwitchNode::SwitchNode(const Id &idBinded, QObject *parent)
 {
 }
 
-void SwitchNode::addBranch(const QString &value, SemanticNode * const node)
+void SwitchNode::addBranch(const QString &value)
 {
 	ZoneNode * const zone = new ZoneNode(this);
 	zone->setParentNode(this);
 	bind(value, zone);
-	if (node) {
-		zone->appendChild(node);
-	}
 }
 
-void SwitchNode::mergeBranch(const QString &value, NonZoneNode * const node)
+void SwitchNode::mergeBranch(const QString &value, ZoneNode * const zone)
 {
-	Q_ASSERT(node);
-	bind(value, node->parentZone());
+	Q_ASSERT(zone);
+	bind(value, zone);
 }
 
 bool SwitchNode::branchesMerged() const
@@ -56,6 +53,18 @@ void SwitchNode::setBranchesMergedFlag()
 void SwitchNode::setGenerateIfs()
 {
 	mGenerateIfs = true;
+}
+
+
+ZoneNode *SwitchNode::branchZoneByValue(const QString &value)
+{
+	if (value.isEmpty()) {
+		return mDefaultBranch;
+	}
+	if (mBranches.contains(value)) {
+		return mBranches[value];
+	}
+	return nullptr;
 }
 
 QString SwitchNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const
@@ -120,15 +129,4 @@ QLinkedList<SemanticNode *> SwitchNode::children() const
 	}
 
 	return result;
-}
-
-ZoneNode *SwitchNode::branchZoneByValue(const QString &value)
-{
-	if ((value == "") && (mDefaultBranch != nullptr)) {
-		return mDefaultBranch;
-	}
-	if (mBranches.keys().contains(value)) {
-		return mBranches[value];
-	}
-	return nullptr;
 }
