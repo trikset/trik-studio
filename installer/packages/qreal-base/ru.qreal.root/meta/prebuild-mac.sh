@@ -60,11 +60,12 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqrgui-facade.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libupdatesChecker.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libsubprogramsImporterExporter.dylib"
 
-mv "$BUNDLE_CONTENTS/MacOS/trik-studio" "$BUNDLE_CONTENTS/MacOS/$PRODUCT"
+mv "$BUNDLE_CONTENTS/MacOS/trik-studio" "$BUNDLE_CONTENTS/MacOS/trik-studio.bin"
+cp     "$INSTALLER_ROOT/platform/$PRODUCT" "$BUNDLE_CONTENTS/MacOS/"
 sed -i.bak s/qreal/trik-studio/g "$BUNDLE_CONTENTS/Info.plist"
 sed -i.bak s/yourcompany/cybertech/g "$BUNDLE_CONTENTS/Info.plist"
 rm -f "$BUNDLE_CONTENTS/Info.plist.bak"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/$PRODUCT"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/${PRODUCT}.bin"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/patcher"
 
 copy_qt_lib QtCore
