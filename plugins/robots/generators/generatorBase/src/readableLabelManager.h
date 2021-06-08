@@ -26,7 +26,8 @@ class ReadableLabelManager
 {
 public:
 	/// Returns existing or generates new label for a node with given id.
-	QString labelFor(const qReal::Id &id);
+	/// For new ids label starts with given prefix or uses node type.
+	QString labelFor(const qReal::Id &id, const QString &prefix = "");
 
 	/// Clears all stored labels.
 	void reinit();
@@ -35,7 +36,7 @@ private:
 	/// Makes given string CAPS_WITH_UNDERSCORES.
 	static QString beautify(const QString &label);
 
-	QHash<qReal::Id, int> mNodeTypesCount;
+	QHash<QString, int> mNodeTypesCount;
 	QHash<qReal::Id, QString> mLabels;
 };
 

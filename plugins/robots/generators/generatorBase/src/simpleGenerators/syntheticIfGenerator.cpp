@@ -40,7 +40,7 @@ QString SyntheticIfGenerator::generate()
 	QString result = mSyntheticCondition;
 	for (const qReal::Id &id : mUseVariable.keys()) {
 		if (mUseVariable[id]) {
-			result.replace(id.id(), mNameManager.labelFor(id));
+			result.replace(id.id(), mNameManager.labelFor(id, "__temp_"));
 		} else {
 			result.replace(id.id(), mRepo.property(id, "Condition").toString());
 		}

@@ -19,7 +19,7 @@
 
 using namespace generatorBase;
 
-QString ReadableLabelManager::labelFor(const qReal::Id &id)
+QString ReadableLabelManager::labelFor(const qReal::Id &id, const QString &prefix)
 {
 	qReal::Id actualId = id;
 	if (actualId.editor().startsWith("label_")) {
@@ -34,15 +34,16 @@ QString ReadableLabelManager::labelFor(const qReal::Id &id)
 		return mLabels.value(actualId);
 	}
 
-	const auto type = actualId.type();
+	const auto type = prefix == ""
+			? QString("%1_").arg(beautify(actualId.element()))
+			: prefix;
 	if (mNodeTypesCount.contains(type)) {
 		++mNodeTypesCount[type];
 	} else {
 		mNodeTypesCount.insert(type, 1);
 	}
 
-	const auto label = QString("__temp_%1").arg(mLabels.size() + 1);
-			//beautify(QString("%1_%2").arg(actualId.element()).arg(mNodeTypesCount.value(type)));
+	const auto label = QString("%1%2").arg(type).arg(mNodeTypesCount.value(type));
 	mLabels.insert(actualId, label);
 	return label;
 }

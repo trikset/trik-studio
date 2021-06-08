@@ -11,7 +11,7 @@ simple::SyntheticVariableNameGenerator::SyntheticVariableNameGenerator(const qrR
 		, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "function.t"
 			, { Binding::createStaticConverting("@@BODY@@"
-					, nameManager.labelFor(id) + "=" +
+					, nameManager.labelFor(id, "__temp_") + "=" +
 						repo.property(id, repo.hasProperty(id, "Condition") ? "Condition" : "Expression").toString()
 					, customizer.factory()->functionBlockConverter(id, "Condition")) }
 			, parent)
