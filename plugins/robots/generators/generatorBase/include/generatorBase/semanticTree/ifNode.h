@@ -41,9 +41,11 @@ protected:
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;
 
 private:
+	void init();
+
 	ZoneNode *mThenZone;  // Takes ownership
 	ZoneNode *mElseZone;  // Takes ownership
-	bool mIsSimple;
+	bool mIsSimple {false};
 	bool mIsSynthetic;
 	QString mSyntheticCondition;
 	QMap<qReal::Id, bool> mIdWasUsedBefore;
