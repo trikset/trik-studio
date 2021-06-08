@@ -77,6 +77,5 @@ public:
 	virtual int numberOfConditionCalculating(const Vertex &id) const = 0;
 
 	virtual void dropEmptyConditionals() = 0;
-	virtual void transformBeforeDerecursivation() = 0;
 };
 }

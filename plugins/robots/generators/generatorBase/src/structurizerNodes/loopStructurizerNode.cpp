@@ -54,7 +54,7 @@ StructurizerNode::Vertex LoopStructurizerNode::id() const
 	return mId;
 }
 
-bool LoopStructurizerNode::isEqual(StructurizerNode * other) const
+bool LoopStructurizerNode::isEqual(StructurizerNode *other) const
 {
 	if (other->type() != loop) {
 		return false;
@@ -105,7 +105,6 @@ void  LoopStructurizerNode::dropEmptyConditionals()
 StructurizerNode::ConditionTree *LoopStructurizerNode::findAllContinuations(const Vertex &id) const
 {
 	Q_UNUSED(id);
-	qDebug() << "WANT FACTORIZE FROM LOOP";
 	return nullptr;
 }
 
@@ -127,10 +126,6 @@ void LoopStructurizerNode::replaceContinuation(const Vertex &id, StructurizerNod
 int LoopStructurizerNode::numberOfConditionCalculating(const Vertex &id) const
 {
 	return (mId == id ? 1 : 0) + mBody->numberOfConditionCalculating(id);
-}
-
-void LoopStructurizerNode::transformBeforeDerecursivation()
-{
 }
 
 bool LoopStructurizerNode::isInverted() const

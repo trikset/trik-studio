@@ -30,7 +30,6 @@ public:
 	StructurizerNode *clone() const;
 	int numberOfConditionCalculating(const Vertex &id) const;
 	void dropEmptyConditionals();
-	void transformBeforeDerecursivation();
 
 protected:
 	const Vertex mId;

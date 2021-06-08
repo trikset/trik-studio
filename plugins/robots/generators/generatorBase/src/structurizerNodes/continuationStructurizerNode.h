@@ -31,7 +31,6 @@ public:
 	bool isEqual(StructurizerNode *other) const;
 	StructurizerNode *clone() const;
 	int numberOfConditionCalculating(const Vertex &id) const;
-	void transformBeforeDerecursivation();
 
 protected:
 	const Vertex mId;

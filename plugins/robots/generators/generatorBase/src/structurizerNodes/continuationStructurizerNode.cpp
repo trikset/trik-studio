@@ -96,7 +96,3 @@ int ContinuationStructurizerNode::numberOfConditionCalculating(const Vertex &id)
 	Q_UNUSED(id)
 	return 0;
 }
-
-void ContinuationStructurizerNode::transformBeforeDerecursivation()
-{
-}

@@ -37,7 +37,6 @@ public:
 	StructurizerNode *thenBranch();
 	StructurizerNode *elseBranch();
 	bool isEmpty() const;
-	void transformBeforeDerecursivation();
 	~IfStructurizerNode();
 
 protected:

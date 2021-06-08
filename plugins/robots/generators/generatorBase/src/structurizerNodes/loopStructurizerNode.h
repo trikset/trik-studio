@@ -36,7 +36,6 @@ public:
 	bool isInverted() const;
 	StructurizerNode *body();
 	void addToBody(StructurizerNode *e);
-	void transformBeforeDerecursivation();
 
 protected:
 	const Vertex mId;

@@ -87,15 +87,7 @@ StructurizerNode *Structurizer::performStructurization(const QSet<qReal::Id> &ve
 
 		//if recursive
 		if (system[v]->containsContinuation(v)) {
-			system[v]->mergeConditionalBranches(mExits, mLoopHeads);
 			system[v]->derecursivate(v);
-
-			for (int j = orderOfResolution.size() - 1; j > i; --j) {
-				if (system[v]->containsContinuation(orderOfResolution[j])) {
-					system[v]->mergeConditionalBranches(mExits, mLoopHeads);
-					system[v]->factorize(orderOfResolution[j], true);
-				}
-			}
 		}
 
 		//elimination
@@ -171,7 +163,8 @@ void Structurizer::reorderLoopHeads(QVector<Vertex> &vertexOrder)
 					}
 					bool isInLoop = true;
 					for (auto &p : mPredecessors[f]) {
-						if (!loopBody[e].contains(p)) {
+						if (!loopBody[e].contains(p)
+							&& !(loopBody.contains(f) && loopBody[f].contains(p))) {
 							isInLoop = false;
 							break;
 						}
@@ -179,6 +172,9 @@ void Structurizer::reorderLoopHeads(QVector<Vertex> &vertexOrder)
 					if (isInLoop) {
 						somethingChanged = true;
 						loopBody[e].insert(f);
+						if (loopBody.contains(f)) {
+							loopBody[e].unite(loopBody[f]);
+						}
 					}
 				}
 			}

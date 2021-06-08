@@ -227,7 +227,3 @@ int SwitchStructurizerNode::numberOfConditionCalculating(const Vertex &id) const
 	count += mDefaultBranch.second->numberOfConditionCalculating(id);
 	return count;
 }
-
-void SwitchStructurizerNode::transformBeforeDerecursivation()
-{
-}

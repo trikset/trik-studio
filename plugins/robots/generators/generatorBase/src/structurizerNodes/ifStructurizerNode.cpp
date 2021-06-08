@@ -7,7 +7,7 @@ using namespace generatorBase;
 
 StructurizerNode::Type IfStructurizerNode::type() const
 {
-	return Type::ifThenElse;
+	return ifThenElse;
 }
 
 bool IfStructurizerNode::isEmpty() const
@@ -37,14 +37,6 @@ IfStructurizerNode::IfStructurizerNode(const Vertex &id, const Vertex &firstId, 
 
 	mCondition = new ConditionTree({id, firstId});
 }
-
-/*IfStructurizerNode::IfStructurizerNode(QObject *parent)
-	: StructurizerNode(parent)
-	, mCondition(nullptr)
-	, mThenBranch(new SequenceStructurizerNode(parent))
-	, mElseBranch(new SequenceStructurizerNode(parent))
-{
-}*/
 
 IfStructurizerNode::IfStructurizerNode(const ConditionTree * ifCondition, QObject *parent)
 	: StructurizerNode(parent)
@@ -88,7 +80,7 @@ void IfStructurizerNode::dropContinuations(const Vertex &id)
 	mElseBranch->dropContinuations(id);
 }
 
-bool IfStructurizerNode::isEqual(StructurizerNode * other) const
+bool IfStructurizerNode::isEqual(StructurizerNode *other) const
 {
 	if (other->type() != ifThenElse) {
 		return false;
@@ -142,8 +134,8 @@ StructurizerNode::ConditionTree *IfStructurizerNode::findAllContinuations(const 
 
 void IfStructurizerNode::factorize(const Vertex &id, bool force)
 {
-	Q_UNUSED(id)
-	Q_UNUSED(force)
+	mThenBranch->factorize(id, force);
+	mElseBranch->factorize(id, force);
 }
 
 void IfStructurizerNode::derecursivate(const Vertex &id)
@@ -194,10 +186,4 @@ int IfStructurizerNode::numberOfConditionCalculating(const Vertex &id) const
 	count += mThenBranch->numberOfConditionCalculating(id);
 	count += mElseBranch->numberOfConditionCalculating(id);
 	return count;
-}
-
-void IfStructurizerNode::transformBeforeDerecursivation()
-{
-	mThenBranch->transformBeforeDerecursivation();
-	mElseBranch->transformBeforeDerecursivation();
 }

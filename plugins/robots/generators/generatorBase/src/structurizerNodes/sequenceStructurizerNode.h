@@ -33,9 +33,10 @@ public:
 
 	void addToTheEnd(StructurizerNode *);
 	QVector<StructurizerNode *> children();
-	void transformBeforeDerecursivation();
 
 protected:
 	QVector<StructurizerNode *> mChildren;
+
+	void addBreaksToLoopFor(const Vertex &id);
 };
 }

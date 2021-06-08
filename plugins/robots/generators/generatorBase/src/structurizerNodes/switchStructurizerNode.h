@@ -35,7 +35,6 @@ public:
 	void dropEmptyConditionals();
 
 	bool isEmpty() const;
-	void transformBeforeDerecursivation();
 
 protected:
 	const Vertex mId;
