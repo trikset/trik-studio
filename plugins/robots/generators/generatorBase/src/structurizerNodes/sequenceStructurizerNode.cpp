@@ -175,7 +175,8 @@ void SequenceStructurizerNode::factorize(const Vertex &id, bool force)
 	} else {
 		StructurizerNode *newIf = new IfStructurizerNode(ifCondition, parent());
 		StructurizerNode *thenBranch = static_cast<IfStructurizerNode *>(newIf)->thenBranch();
-		static_cast<SequenceStructurizerNode *>(thenBranch)->addToTheEnd(new ContinuationStructurizerNode(id, parent()));
+		static_cast<SequenceStructurizerNode *>(thenBranch)
+				->addToTheEnd(new ContinuationStructurizerNode(id, parent()));
 		mChildren.append(newIf);
 	}
 	dropEmptyConditionals();
@@ -239,7 +240,8 @@ void SequenceStructurizerNode::derecursivate(const Vertex &id)
 	mChildren.append(loop);
 }
 
-bool SequenceStructurizerNode::mergeConditionalBranches(const QSet<Vertex> &exits, const QSet<Vertex> &loopHeads)
+bool SequenceStructurizerNode::mergeConditionalBranches(const QSet<Vertex> &exits
+		, const QSet<Vertex> &loopHeads)
 {
 	bool result = false;
 	for (int i = 0; i < mChildren.size(); ++i) {
@@ -247,8 +249,10 @@ bool SequenceStructurizerNode::mergeConditionalBranches(const QSet<Vertex> &exit
 			result = true;
 		}
 		if (mChildren[i]->type() == ifThenElse) {
-			SequenceStructurizerNode *first = static_cast<SequenceStructurizerNode *>(static_cast<IfStructurizerNode *>(mChildren[i])->thenBranch());
-			SequenceStructurizerNode *second = static_cast<SequenceStructurizerNode *>(static_cast<IfStructurizerNode *>(mChildren[i])->elseBranch());
+			SequenceStructurizerNode *first = static_cast<SequenceStructurizerNode *>(
+					static_cast<IfStructurizerNode *>(mChildren[i])->thenBranch());
+			SequenceStructurizerNode *second = static_cast<SequenceStructurizerNode *>(
+					static_cast<IfStructurizerNode *>(mChildren[i])->elseBranch());
 			if (first->mChildren.size() == 0 || second->mChildren.size() == 0) {
 				continue;
 			}
@@ -280,8 +284,11 @@ bool SequenceStructurizerNode::mergeConditionalBranches(const QSet<Vertex> &exit
 			int nonExitCount = 0;
 			for (auto &e : thisSwitch->branches()) {
 				if (static_cast<SequenceStructurizerNode *>(e)->mChildren.size() > 0
-					&& static_cast<SequenceStructurizerNode *>(e)->mChildren.last()->type() == continuation) {
-					endContinuations.insert(static_cast<SequenceStructurizerNode *>(e)->mChildren.last()->id());
+					&& static_cast<SequenceStructurizerNode *>(e)
+							->mChildren.last()->type() == continuation)
+				{
+					endContinuations.insert(static_cast<SequenceStructurizerNode *>(e)
+							->mChildren.last()->id());
 				}
 				if (static_cast<SequenceStructurizerNode *>(e)->mChildren.size() > 0
 					&& static_cast<SequenceStructurizerNode *>(e)->mChildren.last()->type() == simple
@@ -311,7 +318,9 @@ void SequenceStructurizerNode::dropEmptyConditionals()
 	for (int j = 0; j < mChildren.size(); ++j) {
 		if (mChildren[j]->type() == ifThenElse && static_cast<IfStructurizerNode *>(mChildren[j])->isEmpty()) {
 			mChildren.erase(mChildren.begin() + j--);
-		} else if (mChildren[j]->type() == switchCase && static_cast<SwitchStructurizerNode *>(mChildren[j])->isEmpty()) {
+		} else if (mChildren[j]->type() == switchCase
+				&& static_cast<SwitchStructurizerNode *>(mChildren[j])->isEmpty())
+		{
 			mChildren.erase(mChildren.begin() + j--);
 		} else {
 			mChildren[j]->dropEmptyConditionals();
@@ -356,11 +365,23 @@ void SequenceStructurizerNode::addBreaksToLoopFor(const Vertex &id)
 		} else if (mChildren[i]->type() == loop) {
 			auto thisLoop = static_cast<LoopStructurizerNode *>(mChildren[i]);
 			static_cast<SequenceStructurizerNode *>(thisLoop->body())->addBreaksToLoopFor(id);
-			ConditionTree *breakCondition = static_cast<SequenceStructurizerNode *>(thisLoop->body())->findAllContinuations(id);
+			ConditionTree *breakCondition = static_cast<SequenceStructurizerNode *>(
+					thisLoop->body())->findAllContinuations(id);
 			thisLoop->replaceContinuation(id, new BreakStructurizerNode(parent()));
 			auto breakIf = new IfStructurizerNode(breakCondition, parent());
 			mChildren.insert(++i, breakIf);
-			static_cast<SequenceStructurizerNode *>(breakIf->thenBranch())->addToTheEnd(new ContinuationStructurizerNode(id, parent()));
+			static_cast<SequenceStructurizerNode *>(breakIf->thenBranch())
+					->addToTheEnd(new ContinuationStructurizerNode(id, parent()));
 		}
 	}
+}
+
+bool SequenceStructurizerNode::hasBreakOnUpperLevel() const
+{
+	for (const auto &e : mChildren) {
+		if (e->hasBreakOnUpperLevel()) {
+			return true;
+		}
+	}
+	return false;
 }

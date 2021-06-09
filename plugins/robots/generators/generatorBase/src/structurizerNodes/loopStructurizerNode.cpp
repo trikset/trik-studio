@@ -132,3 +132,8 @@ bool LoopStructurizerNode::isInverted() const
 {
 	return mInvertedCondition;
 }
+
+bool LoopStructurizerNode::hasBreakOnUpperLevel() const
+{
+	return false;
+}

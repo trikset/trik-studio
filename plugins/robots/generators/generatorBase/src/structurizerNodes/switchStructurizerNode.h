@@ -34,6 +34,8 @@ public:
 
 	void dropEmptyConditionals();
 
+	bool hasBreakOnUpperLevel() const;
+
 	bool isEmpty() const;
 
 protected:

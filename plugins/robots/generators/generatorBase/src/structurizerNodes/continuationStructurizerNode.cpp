@@ -96,3 +96,8 @@ int ContinuationStructurizerNode::numberOfConditionCalculating(const Vertex &id)
 	Q_UNUSED(id)
 	return 0;
 }
+
+bool ContinuationStructurizerNode::hasBreakOnUpperLevel() const
+{
+	return false;
+}

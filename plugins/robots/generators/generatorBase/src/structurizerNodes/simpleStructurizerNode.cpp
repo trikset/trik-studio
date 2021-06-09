@@ -92,3 +92,8 @@ int SimpleStructurizerNode::numberOfConditionCalculating(const Vertex &id) const
 	Q_UNUSED(id)
 	return 0;
 }
+
+bool SimpleStructurizerNode::hasBreakOnUpperLevel() const
+{
+	return false;
+}

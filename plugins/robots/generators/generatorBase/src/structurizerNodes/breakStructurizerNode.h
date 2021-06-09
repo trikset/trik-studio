@@ -11,6 +11,7 @@ public:
 
 	Type type() const;
 	bool isEqual(StructurizerNode *other) const;
+	bool hasBreakOnUpperLevel() const;
 
 	StructurizerNode *clone() const;
 };

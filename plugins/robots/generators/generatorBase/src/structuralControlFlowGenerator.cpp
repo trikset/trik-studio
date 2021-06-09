@@ -91,9 +91,13 @@ void StructuralControlFlowGenerator::visitSwitch(const Id &id, const QList<LinkI
 	for (auto &link : links) {
 		if (mRepo.property(link.linkId, "Guard").toString() == "") {
 			defaultLink = link;
-		} else {
-			appendEdgesAndVertices(id, {link});
 		}
+	}
+	for (auto &link : links) {
+		if (link.target == defaultLink.target) {
+			continue;
+		}
+		appendEdgesAndVertices(id, {link});
 	}
 	appendEdgesAndVertices(id, {defaultLink});
 }
@@ -209,6 +213,9 @@ void StructuralControlFlowGenerator::addSwitch(StructurizerNode *node, semantics
 	}
 
 	auto switchNode = static_cast<SwitchNode *>(mSemanticTree->produceNodeFor(switchElement->id()));
+	if (switchElement->hasBreakOnUpperLevel()) {
+		switchNode->setGenerateIfs();
+	}
 	zone->appendChild(switchNode);
 
 	QMap<Id, ZoneNode *> addedBranches;
@@ -333,8 +340,10 @@ QString StructuralControlFlowGenerator::syntheticConditionToString(StructurizerN
 			result = head.id();
 		}
 	} else {
-		result = tree->boolOperator() == StructurizerNode::ConditionTree::OR ? "(@@1@@) or (@@2@@)" : "(@@1@@) and (@@2@@)";
-		result.replace("@@1@@", syntheticConditionToString(tree->left())).replace("@@2@@", syntheticConditionToString(tree->right()));
+		result = tree->boolOperator() == StructurizerNode::ConditionTree::OR
+				? "(@@1@@) or (@@2@@)" : "(@@1@@) and (@@2@@)";
+		result.replace("@@1@@", syntheticConditionToString(tree->left()))
+				.replace("@@2@@", syntheticConditionToString(tree->right()));
 	}
 	return tree->isInverted() ? QString("not(%1)").arg(result) : result;
 }

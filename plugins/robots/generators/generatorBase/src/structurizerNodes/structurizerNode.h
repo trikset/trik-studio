@@ -75,6 +75,7 @@ public:
 	virtual bool isEqual(StructurizerNode *other) const = 0;
 	virtual StructurizerNode *clone() const = 0;
 	virtual int numberOfConditionCalculating(const Vertex &id) const = 0;
+	virtual bool hasBreakOnUpperLevel() const = 0;
 
 	virtual void dropEmptyConditionals() = 0;
 };

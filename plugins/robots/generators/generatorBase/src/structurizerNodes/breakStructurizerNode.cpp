@@ -21,3 +21,8 @@ StructurizerNode *BreakStructurizerNode::clone() const
 {
 	return new BreakStructurizerNode(parent());
 }
+
+bool BreakStructurizerNode::hasBreakOnUpperLevel() const
+{
+	return true;
+}

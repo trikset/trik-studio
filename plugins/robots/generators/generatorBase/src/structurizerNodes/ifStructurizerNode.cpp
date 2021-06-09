@@ -26,14 +26,17 @@ int IfStructurizerNode::numberOfContinuation(const Vertex &id) const
 	return mThenBranch->numberOfContinuation(id) + mElseBranch->numberOfContinuation(id);
 }
 
-IfStructurizerNode::IfStructurizerNode(const Vertex &id, const Vertex &firstId, const Vertex &secondId, QObject *parent)
+IfStructurizerNode::IfStructurizerNode(const Vertex &id, const Vertex &firstId
+		, const Vertex &secondId, QObject *parent)
 	: StructurizerNode(parent)
 {
 	mThenBranch = new SequenceStructurizerNode(parent);
-	static_cast<SequenceStructurizerNode *>(mThenBranch)->addToTheEnd(new ContinuationStructurizerNode(firstId, parent));
+	static_cast<SequenceStructurizerNode *>(mThenBranch)
+			->addToTheEnd(new ContinuationStructurizerNode(firstId, parent));
 
 	mElseBranch = new SequenceStructurizerNode(parent);
-	static_cast<SequenceStructurizerNode *>(mElseBranch)->addToTheEnd(new ContinuationStructurizerNode(secondId, parent));
+	static_cast<SequenceStructurizerNode *>(mElseBranch)
+			->addToTheEnd(new ContinuationStructurizerNode(secondId, parent));
 
 	mCondition = new ConditionTree({id, firstId});
 }
@@ -186,4 +189,9 @@ int IfStructurizerNode::numberOfConditionCalculating(const Vertex &id) const
 	count += mThenBranch->numberOfConditionCalculating(id);
 	count += mElseBranch->numberOfConditionCalculating(id);
 	return count;
+}
+
+bool IfStructurizerNode::hasBreakOnUpperLevel() const
+{
+	return mThenBranch->hasBreakOnUpperLevel() || mElseBranch->hasBreakOnUpperLevel();
 }

@@ -116,7 +116,8 @@ bool SwitchStructurizerNode::isEqual(StructurizerNode *other) const
 		}
 	}
 	if (static_cast<SwitchStructurizerNode *>(other)->mDefaultBranch.first != mDefaultBranch.first
-		|| !static_cast<SwitchStructurizerNode *>(other)->mBranches[mDefaultBranch.first]->isEqual(mBranches[mDefaultBranch.first]))
+		|| !static_cast<SwitchStructurizerNode *>(other)->mBranches[mDefaultBranch.first]
+				->isEqual(mBranches[mDefaultBranch.first]))
 	{
 		return false;
 	}
@@ -148,7 +149,8 @@ StructurizerNode::ConditionTree *SwitchStructurizerNode::findAllContinuations(co
 			if (branchCondition == nullptr) {
 				branchCondition = new ConditionTree(qMakePair(mId, e));
 			} else {
-				branchCondition = new ConditionTree(ConditionTree::OR, branchCondition, new ConditionTree(qMakePair(mId, e)));
+				branchCondition = new ConditionTree(ConditionTree::OR
+						, branchCondition, new ConditionTree(qMakePair(mId, e)));
 			}
 		}
 		if (branchCondition != nullptr) {
@@ -226,4 +228,17 @@ int SwitchStructurizerNode::numberOfConditionCalculating(const Vertex &id) const
 	}
 	count += mDefaultBranch.second->numberOfConditionCalculating(id);
 	return count;
+}
+
+bool SwitchStructurizerNode::hasBreakOnUpperLevel() const
+{
+	for (const auto &e : mBranches) {
+		if (e->hasBreakOnUpperLevel()) {
+			return true;
+		}
+	}
+	if (mDefaultBranch.second->hasBreakOnUpperLevel()) {
+		return true;
+	}
+	return false;
 }

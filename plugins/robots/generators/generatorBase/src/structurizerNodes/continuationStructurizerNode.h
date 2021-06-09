@@ -31,6 +31,7 @@ public:
 	bool isEqual(StructurizerNode *other) const;
 	StructurizerNode *clone() const;
 	int numberOfConditionCalculating(const Vertex &id) const;
+	bool hasBreakOnUpperLevel() const;
 
 protected:
 	const Vertex mId;
