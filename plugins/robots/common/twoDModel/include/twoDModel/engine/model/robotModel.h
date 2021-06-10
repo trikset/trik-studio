@@ -31,6 +31,7 @@ namespace twoDModel {
 
 namespace items {
 class StartPosition;
+class BallItem;
 }
 
 namespace model {
@@ -202,6 +203,7 @@ private:
 	void synchronizePositions();
 
 	void nextStep();
+	QRectF aheadRect() const;
 	qreal roundPos(qreal pos) const;
 	int varySpeed(const int speed) const;
 

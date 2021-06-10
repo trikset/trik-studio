@@ -35,6 +35,7 @@
 
 #include "src/engine/items/startPosition.h"
 #include "src/engine/items/wallItem.h"
+#include "src/engine/items/ballItem.h"
 #include "utils/abstractTimer.h"
 #include "src/engine/view/scene/twoDModelScene.h"
 #include "src/engine/view/scene/robotItem.h"
@@ -45,6 +46,7 @@ using namespace kitBase::robotModel::robotParts;
 
 const int positionStampsCount = 50;
 const qreal manualSpeed = 0.5;
+const qreal eps = manualSpeed / 2;
 
 RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 		, const Settings &settings
@@ -371,21 +373,65 @@ QVector<int> RobotModel::gyroscopeCalibrate()
 	return gyroscopeReading();
 }
 
+QRectF RobotModel::aheadRect() const {
+	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	return QRectF(0, eps, eps, gridSize - 2 * eps);
+}
+
 void RobotModel::nextStep()
 {
 	// Changing position quietly, they must not be caught by UI here.
 	// No physics for simple robot
 //	mPos += mPhysicsEngine->positionShift(*this).toPointF();
 //	mAngle += mPhysicsEngine->rotation(*this);
+	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto ahead = aheadRect().translated(gridSize, 0);
+	items::BallItem *needToMove;
+	QMap<items::BallItem*, bool> movedItems;
 	if (mIsRiding) {
+		do {
+			needToMove = nullptr;
+			auto aheadPolygon = robotsTransform().map(ahead);
+			for (auto movable : mWorldModel->balls()) {
+				auto movablePolygon = movable->mapToScene(movable->boundingRect());
+				if (movablePolygon.intersects(aheadPolygon) && !movedItems.contains(movable.data())) {
+					needToMove = movable.data();
+					movedItems[needToMove] = true;
+					break;
+				}
+			}
+			ahead.translate(gridSize, 0);
+		} while (needToMove);
+
 		auto delta = mWaitPos - mPos;
 		auto lenSquare = QPointF::dotProduct(delta, delta);
+		auto oldPos = mPos;
+
 		if (lenSquare <= manualSpeed * manualSpeed) {
 			mPos = mWaitPos;
 			mIsRiding = false;
 			emit mRobotModel.endManual(!mIsCollide);
 		} else {
-			mPos += delta * manualSpeed / qSqrt(lenSquare);
+			auto unitVector = delta / qSqrt(lenSquare);
+			QLineF moveLine(QPointF(), (movedItems.size() + 1) *  gridSize * unitVector);
+			moveLine.translate(robotsTransform().map(QPointF()));
+			for (auto wall : mWorldModel->walls()) {
+				auto wallLine = QLineF(wall->begin(), wall->end());
+				if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
+					mIsCollide = true;
+					mIsRiding = false;
+					mPos = alignToGrid(mPos);
+					emit mRobotModel.endManual(!mIsCollide);
+					break;
+				}
+			}
+			if (mIsRiding) {
+				mPos += manualSpeed * unitVector;
+			}
+		}
+
+		for (auto item : movedItems.keys(true)) {
+			item->setPos(item->pos() + mPos - oldPos);
 		}
 	}
 	emit positionRecalculated(mPos, mAngle);
