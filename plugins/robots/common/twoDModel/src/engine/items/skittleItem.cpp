@@ -23,17 +23,15 @@
 using namespace twoDModel::items;
 
 SkittleItem::SkittleItem(const QPointF &position)
-	: mSvgRenderer(new QSvgRenderer)
+	:MovableItem(position)
 {
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
-	setPos(position);
-	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
 }
 
-SkittleItem::~SkittleItem()
+QSize SkittleItem::itemSize() const
 {
-	delete mSvgRenderer;
+	return skittleSize;
 }
 
 QAction *SkittleItem::skittleTool()
@@ -44,116 +42,21 @@ QAction *SkittleItem::skittleTool()
 	return result;
 }
 
-QRectF SkittleItem::boundingRect() const
-{
-	return QRectF({-static_cast<qreal>(skittleSize.width()) / 2, -static_cast<qreal>(skittleSize.height()) / 2}
-				  , skittleSize);
-}
-
-void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-	Q_UNUSED(option)
-	Q_UNUSED(widget)
-	mSvgRenderer->render(painter, boundingRect());
-}
-
-void SkittleItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
-{
-	Q_UNUSED(option)
-	painter->setPen(getStrokePen());
-	if (isSelected()) {
-		QColor extraColor = getStrokePen().color();
-		extraColor.setAlphaF(0.5);
-		painter->setBrush(extraColor);
-	}
-}
-
-void SkittleItem::drawExtractionForItem(QPainter *painter)
-{
-	painter->drawEllipse(boundingRect());
-}
-
-void SkittleItem::savePos()
-{
-	saveStartPosition();
-	AbstractItem::savePos();
-}
-
 QDomElement SkittleItem::serialize(QDomElement &element) const
 {
-	QDomElement skittleNode = AbstractItem::serialize(element);
+	QDomElement skittleNode = MovableItem::serialize(element);
 	skittleNode.setTagName("skittle");
-	skittleNode.setAttribute("x", QString::number(x1() + scenePos().x()));
-	skittleNode.setAttribute("y", QString::number(y1() + scenePos().y()));
-	skittleNode.setAttribute("markerX", QString::number(x1() + mStartPosition.x()));
-	skittleNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
-	skittleNode.setAttribute("rotation", QString::number(rotation()));
-	skittleNode.setAttribute("startRotation", QString::number(mStartRotation));
 	return skittleNode;
-}
-
-void SkittleItem::deserialize(const QDomElement &element)
-{
-	AbstractItem::deserialize(element);
-
-	qreal x = element.attribute("x", "0").toDouble();
-	qreal y = element.attribute("y", "0").toDouble();
-	qreal markerX = element.attribute("markerX", "0").toDouble();
-	qreal markerY = element.attribute("markerY", "0").toDouble();
-	qreal rotation = element.attribute("rotation", "0").toDouble();
-	mStartRotation = element.attribute("startRotation", "0").toDouble();
-
-	setPos(QPointF(x, y));
-	setTransformOriginPoint(boundingRect().center());
-	mStartPosition = {markerX, markerY};
-	setRotation(rotation);
-	emit x1Changed(x1());
-}
-
-void SkittleItem::saveStartPosition()
-{
-	mStartPosition = pos();
-	mStartRotation = rotation();
-	emit x1Changed(x1());
-}
-
-void SkittleItem::returnToStartPosition()
-{
-	setPos(mStartPosition);
-	setRotation(mStartRotation);
-	emit x1Changed(x1());
-}
-
-QPolygonF SkittleItem::collidingPolygon() const
-{
-	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
 qreal SkittleItem::angularDamping() const
 {
-	return 6.0f;
+	return 6.0;
 }
 
 qreal SkittleItem::linearDamping() const
 {
-	return 6.0f;
-}
-
-QPainterPath SkittleItem::path() const
-{
-	QPainterPath path;
-	QPolygonF collidingPlgn = collidingPolygon();
-	QMatrix m;
-	m.rotate(rotation());
-
-	const QPointF firstP = collidingPlgn.at(0);
-	collidingPlgn.translate(-firstP.x(), -firstP.y());
-
-	path.addEllipse(collidingPlgn.boundingRect());
-	path = m.map(path);
-	path.translate(firstP.x(), firstP.y());
-
-	return path;
+	return 6.0;
 }
 
 bool SkittleItem::isCircle() const
@@ -169,9 +72,4 @@ qreal SkittleItem::mass() const
 qreal SkittleItem::friction() const
 {
 	return 0.2;
-}
-
-SolidItem::BodyType SkittleItem::bodyType() const
-{
-	return SolidItem::DYNAMIC;
 }

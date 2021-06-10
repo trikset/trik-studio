@@ -103,6 +103,7 @@ HEADERS += \
 	$$PWD/src/engine/items/rectangleItem.h \
 	$$PWD/src/engine/items/ellipseItem.h \
 	$$PWD/src/engine/items/imageItem.h \
+	$$PWD/src/engine/items/movableItem.h \
 	$$PWD/src/engine/items/skittleItem.h \
 	$$PWD/src/engine/items/ballItem.h \
 	$$PWD/src/engine/items/startPosition.h \
@@ -169,6 +170,7 @@ SOURCES += \
 	$$PWD/src/engine/items/rectangleItem.cpp \
 	$$PWD/src/engine/items/ellipseItem.cpp \
 	$$PWD/src/engine/items/imageItem.cpp \
+	$$PWD/src/engine/items/movableItem.cpp \
 	$$PWD/src/engine/items/skittleItem.cpp \
 	$$PWD/src/engine/items/ballItem.cpp \
 	$$PWD/src/engine/items/startPosition.cpp \

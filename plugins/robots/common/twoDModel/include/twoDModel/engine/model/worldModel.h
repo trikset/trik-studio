@@ -36,6 +36,7 @@ namespace items {
 class WallItem;
 class SkittleItem;
 class BallItem;
+class MovableItem;
 class ColorFieldItem;
 class ImageItem;
 class RegionItem;
@@ -77,6 +78,9 @@ public:
 
 	/// Returns a set of balls in the world model. Result is mapping of ball ids to balls themselves.
 	const QMap<QString, QSharedPointer<items::BallItem>> &balls() const;
+
+	/// Returns a set of all movable items in the world model. Result is mapping of ids to items themselves.
+	const QMap<QString, QSharedPointer<items::MovableItem>> &movables() const;
 
 	/// Returns a set of color field items in the world model. Result is mapping of field ids to fields themselves.
 	const QMap<QString, QSharedPointer<items::ColorFieldItem>> &colorFields() const;
@@ -234,6 +238,7 @@ private:
 	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
 	QMap<QString, QSharedPointer<items::SkittleItem>> mSkittles;
 	QMap<QString, QSharedPointer<items::BallItem>> mBalls;
+	QMap<QString, QSharedPointer<items::MovableItem>> mMovables;
 	QMap<QString, QSharedPointer<items::ColorFieldItem>> mColorFields;
 	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
 	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;

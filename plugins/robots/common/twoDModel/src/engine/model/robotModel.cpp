@@ -386,13 +386,13 @@ void RobotModel::nextStep()
 //	mAngle += mPhysicsEngine->rotation(*this);
 	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
 	auto ahead = aheadRect().translated(gridSize, 0);
-	items::BallItem *needToMove;
-	QMap<items::BallItem*, bool> movedItems;
+	items::MovableItem *needToMove;
+	QMap<items::MovableItem*, bool> movedItems;
 	if (mIsRiding) {
 		do {
 			needToMove = nullptr;
 			auto aheadPolygon = robotsTransform().map(ahead);
-			for (auto movable : mWorldModel->balls()) {
+			for (auto movable : mWorldModel->movables()) {
 				auto movablePolygon = movable->mapToScene(movable->boundingRect());
 				if (movablePolygon.intersects(aheadPolygon) && !movedItems.contains(movable.data())) {
 					needToMove = movable.data();

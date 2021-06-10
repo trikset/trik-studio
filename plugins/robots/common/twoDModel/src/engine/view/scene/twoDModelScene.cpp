@@ -428,6 +428,9 @@ void TwoDModelScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	case ball:
 		reshapeBall(mouseEvent);
 		break;
+	case skittle:
+		reshapeSkittle(mouseEvent);
+		break;
 	default:
 		needUpdate = false;
 
@@ -462,6 +465,7 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	}
 	case skittle: {
+		reshapeSkittle(mouseEvent);
 		createdItem = mCurrentSkittle;
 		mCurrentSkittle = nullptr;
 		break;
@@ -842,6 +846,13 @@ void TwoDModelScene::reshapeBall(QGraphicsSceneMouseEvent *event)
 {
 	if (mCurrentBall) {
 		mCurrentBall->resizeItem(event);
+	}
+}
+
+void TwoDModelScene::reshapeSkittle(QGraphicsSceneMouseEvent *event)
+{
+	if (mCurrentSkittle) {
+		mCurrentSkittle->resizeItem(event);
 	}
 }
 

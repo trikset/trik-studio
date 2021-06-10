@@ -14,57 +14,31 @@
 
 #pragma once
 
-#include "src/engine/items/solidItem.h"
-#include <qrutils/graphicsUtils/abstractItem.h>
-
-class QSvgRenderer;
+#include <src/engine/items/movableItem.h>
 
 namespace twoDModel {
 namespace items {
 
-class SkittleItem : public graphicsUtils::AbstractItem, public SolidItem
+class SkittleItem : public MovableItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(SkittleItem)
 
 public:
 	explicit SkittleItem(const QPointF &position);
-	~SkittleItem();
 
 	/// Creates and returns skittle item for 2D model palette.
 	/// Transfers ownership.
 	static QAction *skittleTool();
 
-	QRectF boundingRect() const override;
-	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-	void drawExtractionForItem(QPainter *painter) override;
-	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
-
-	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
-	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
-	void savePos() override;
-
 	QDomElement serialize(QDomElement &element) const override;
-	void deserialize(const QDomElement &element) override;
-
-	void saveStartPosition();
-	void returnToStartPosition();
 
 	bool isCircle() const override;
 	qreal mass() const override;
-	BodyType bodyType() const override;
 	qreal friction() const override;
-	QPolygonF collidingPolygon() const override;
 	qreal angularDamping() const override;
 	qreal linearDamping() const override;
-
-	QPainterPath path() const;
-
-private:
-	QPointF mStartPosition;
-	qreal mStartRotation {0.0};
-
-	QSvgRenderer *mSvgRenderer;
+	QSize itemSize() const override;
 };
 
 }

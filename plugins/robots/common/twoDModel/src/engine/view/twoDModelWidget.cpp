@@ -268,7 +268,7 @@ void TwoDModelWidget::initPalette()
 	mUi->palette->registerTool(stylusTool);
 	mUi->palette->registerTool(imageTool);
 
-	skittleTool->setEnabled(false);
+//	skittleTool->setEnabled(false);
 //	ballTool->setEnabled(false);
 
 	qReal::SettingsListener::listen("toolbarSize", [this](int size){ mUi->palette->setSize({size, size}); }, this);

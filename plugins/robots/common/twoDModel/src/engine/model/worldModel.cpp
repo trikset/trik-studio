@@ -153,6 +153,11 @@ const QMap<QString, QSharedPointer<items::BallItem>> &WorldModel::balls() const
 	return mBalls;
 }
 
+const QMap<QString, QSharedPointer<items::MovableItem>> &WorldModel::movables() const
+{
+	return mMovables;
+}
+
 void WorldModel::addWall(const QSharedPointer<items::WallItem> &wall)
 {
 	const QString id = wall->id();
@@ -181,12 +186,14 @@ void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
 	}
 
 	mSkittles[id] = skittle;
+	mMovables[id] = skittle.dynamicCast<items::MovableItem>();
 	emit skittleAdded(skittle);
 }
 
 void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
 {
 	mSkittles.remove(skittle->id());
+	mMovables.remove(skittle->id());
 	emit itemRemoved(skittle);
 }
 
@@ -199,12 +206,14 @@ void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
 	}
 
 	mBalls[id] = ball;
+	mMovables[id] = ball.dynamicCast<items::MovableItem>();
 	emit ballAdded(ball);
 }
 
 void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 {
 	mBalls.remove(ball->id());
+	mMovables.remove(ball->id());
 	emit itemRemoved(ball);
 }
 
