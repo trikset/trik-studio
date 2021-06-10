@@ -19,6 +19,7 @@
 #include <QtSvg/QSvgRenderer>
 
 #include <twoDModel/engine/model/constants.h>
+#include <qrkernel/settingsManager.h>
 
 using namespace twoDModel::items;
 
@@ -27,8 +28,12 @@ BallItem::BallItem(const QPointF &position)
 {
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
 	setPos(position);
+	mEstimatedPos = position;
 	setZValue(ZValue::Moveable);
 	setTransformOriginPoint(boundingRect().center());
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
+			mEstimatedPos = pos();
+		});
 }
 
 BallItem::~BallItem()
@@ -161,6 +166,17 @@ QPainterPath BallItem::path() const
 	path.translate(firstP.x(), firstP.y());
 
 	return path;
+}
+
+void BallItem::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	Q_UNUSED(event)
+	mEstimatedPos += event->scenePos() - event->lastScenePos();
+	const auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	auto x = alignedCoordinate(mEstimatedPos.x() - ballSize.width()/2, gridSize) + ballSize.width()/2;
+	auto y = alignedCoordinate(mEstimatedPos.y() - ballSize.height()/2, gridSize) + ballSize.height()/2;
+	setPos(x, y);
+	update();
 }
 
 bool BallItem::isCircle() const
