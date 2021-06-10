@@ -169,20 +169,7 @@ void RobotItem::onLanded()
 void RobotItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
-	auto x = pos().x();
-	auto y = pos().y();
-	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	auto roundedX = x - fmod(x, gridSize);
-	auto roundedX2 = roundedX + ((x > 0) ? gridSize : -gridSize);
-	if (qAbs(roundedX - x) > qAbs(roundedX2 - x)) {
-		roundedX = roundedX2;
-	}
-	auto roundedY = y - fmod(y, gridSize);
-	auto roundedY2 = roundedY + ((y > 0) ? gridSize : -gridSize);
-	if (qAbs(roundedY - y) > qAbs(roundedY2 - y)) {
-		roundedY = roundedY2;
-	}
-	QGraphicsItem::setPos(roundedX, roundedY);
+	QGraphicsItem::setPos(mRobotModel.alignToGrid(pos()));
 	update();
 }
 

@@ -302,6 +302,6 @@ void Model::recalculatePhysicsParams()
 	if (mSettings.realisticPhysics()) {
 //		mRealisticPhysicsEngine->recalculateParameters(Timeline::timeInterval);
 	} else {
-		mSimplePhysicsEngine->recalculateParameters(Timeline::timeInterval);
+//		mSimplePhysicsEngine->recalculateParameters(Timeline::timeInterval);
 	}
 }

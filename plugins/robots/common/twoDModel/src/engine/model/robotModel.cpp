@@ -564,18 +564,15 @@ twoDModel::items::StartPosition *RobotModel::startPositionMarker()
 
 QPointF RobotModel::alignToGrid(QPointF pos) const
 {
-	auto x = pos.x();
-	auto y = pos.y();
+	return QPointF(roundPos(pos.x()), roundPos(pos.y()));
+}
+
+qreal RobotModel::roundPos(qreal pos) const {
 	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	auto roundedX = x - fmod(x, gridSize);
-	auto roundedX2 = roundedX + ((x > 0) ? gridSize : -gridSize);
-	if (qAbs(roundedX - x) > qAbs(roundedX2 - x)) {
-		roundedX = roundedX2;
+	auto roundedPos = pos - fmod(pos, gridSize);
+	auto roundedPos2 = roundedPos + ((pos > 0) ? gridSize : -gridSize);
+	if (qAbs(roundedPos - pos) > qAbs(roundedPos2 - pos)) {
+		return roundedPos2;
 	}
-	auto roundedY = y - fmod(y, gridSize);
-	auto roundedY2 = roundedY + ((y > 0) ? gridSize : -gridSize);
-	if (qAbs(roundedY - y) > qAbs(roundedY2 - y)) {
-		roundedY = roundedY2;
-	}
-	return QPointF(roundedX, roundedY);
+	return roundedPos;
 }
