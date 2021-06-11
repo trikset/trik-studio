@@ -25,7 +25,7 @@ using namespace twoDModel::items;
 BallItem::BallItem(const QPointF &position)
 	:MovableItem(position)
 {
-	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
+	mImage.loadFrom(QString(":/icons/2d_ball.svg"));
 	setTransformOriginPoint(boundingRect().center());
 }
 

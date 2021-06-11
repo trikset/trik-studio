@@ -15,7 +15,7 @@
 #pragma once
 
 #include <qrutils/graphicsUtils/abstractItem.h>
-
+#include "twoDModel/engine/model/image.h"
 #include "src/engine/items/solidItem.h"
 
 class QSvgRenderer;
@@ -55,7 +55,7 @@ public:
 	virtual QSize itemSize() const = 0;
 
 protected:
-	QSvgRenderer *mSvgRenderer;
+	model::Image mImage;
 
 private:
 	QPointF mStartPosition;

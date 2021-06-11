@@ -24,7 +24,7 @@
 using namespace twoDModel::items;
 
 MovableItem::MovableItem(const QPointF &position)
-	: mSvgRenderer(new QSvgRenderer)
+	: mImage("", true)
 {
 	setPos(position);
 	mEstimatedPos = position;
@@ -36,14 +36,13 @@ MovableItem::MovableItem(const QPointF &position)
 
 MovableItem::~MovableItem()
 {
-	delete mSvgRenderer;
 }
 
 void MovableItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	mSvgRenderer->render(painter, boundingRect());
+	mImage.draw(*painter, QRect({-itemSize().width() / 2, -itemSize().height() / 2}, itemSize()));
 }
 
 void MovableItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)

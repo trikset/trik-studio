@@ -25,7 +25,7 @@ using namespace twoDModel::items;
 CubeItem::CubeItem(const QPointF &position)
 	:MovableItem(position)
 {
-	mSvgRenderer->load(QString(":/icons/2d_cube.svg"));
+	mImage.loadFrom(QString(":/icons/2d_cube.png"));
 	setTransformOriginPoint(boundingRect().center());
 }
 
