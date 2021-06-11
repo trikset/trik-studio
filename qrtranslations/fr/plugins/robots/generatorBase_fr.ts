@@ -14,7 +14,7 @@
         <translation>/* ERREUR SELECTIONNEZ LE TYPE DU CAPTEUR */</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+79"/>
+        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+81"/>
         <source>There is no opened diagram</source>
         <translation>Il n&apos;y a pas de diagramme d&apos;ouvert</translation>
     </message>
@@ -136,7 +136,7 @@
 <context>
     <name>generatorBase::MasterGeneratorBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+42"/>
         <source>This diagram cannot be generated into the structured code. Generating it into the code with &apos;goto&apos; statements.</source>
         <translation>Ce diagramme ne peut pas être transformé en code structuré. Le code contenant &apos;goto&apos; sera généré.</translation>
     </message>
