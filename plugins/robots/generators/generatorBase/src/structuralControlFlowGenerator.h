@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@
 #include "structurizerNodes/simpleStructurizerNode.h"
 #include "structurizerNodes/switchStructurizerNode.h"
 #include "structurizerNodes/sequenceStructurizerNode.h"
-
 
 #include <QtCore/QStack>
 #include <QtCore/QVector>
