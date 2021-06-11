@@ -87,18 +87,6 @@ void RobotModel::moveCell(int n) {
 	const int gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
 	auto shiftPos = QTransform().rotate(mAngle).map(QPointF(gridSize, 0));
 	if (n < 0) shiftPos = -shiftPos;
-	for (int i = 0; i < abs(n); i++) {
-		QLineF moveLine(robotCenter(), robotCenter() + shiftPos * (i + 1));
-		for (auto wall : mWorldModel->walls()) {
-			auto wallLine = QLineF(wall->begin(), wall->end());
-			if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
-				mIsRiding = true;
-				mWaitPos = mPos + shiftPos * i;
-				mIsCollide = true;
-				return;
-			}
-		}
-	}
 	mIsRiding = true;
 	mWaitPos = mPos + shiftPos * abs(n);
 	mIsCollide = false;
