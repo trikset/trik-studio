@@ -216,6 +216,7 @@ private:
 	void reshapeStylus(QGraphicsSceneMouseEvent *event);
 	void reshapeRectangle(QGraphicsSceneMouseEvent *event);
 	void reshapeEllipse(QGraphicsSceneMouseEvent *event);
+	void reshapeBall(QGraphicsSceneMouseEvent *event);
 
 	void registerInUndoStack(graphicsUtils::AbstractItem *item);
 	void subscribeItem(graphicsUtils::AbstractItem *item);

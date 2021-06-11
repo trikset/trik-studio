@@ -31,6 +31,7 @@ namespace twoDModel {
 
 namespace items {
 class StartPosition;
+class BallItem;
 }
 
 namespace model {
@@ -84,6 +85,7 @@ public:
 	void clear();
 	void stopRobot();
 	void playSound(int timeInMs);
+	QPointF alignToGrid(QPointF pos) const;
 
 	Q_INVOKABLE void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
 
@@ -201,13 +203,12 @@ private:
 	void synchronizePositions();
 
 	void nextStep();
-
+	QRectF aheadRect() const;
+	qreal roundPos(qreal pos) const;
 	int varySpeed(const int speed) const;
 
 	void serializeWheels(QDomElement &robotElement) const;
 	void deserializeWheels(const QDomElement &robotElement);
-
-	QPointF alignToGrid(QPointF pos) const;
 
 	QPointF averageAcceleration() const;
 

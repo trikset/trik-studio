@@ -42,7 +42,7 @@ public:
 	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 
 	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
-	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	void savePos() override;
 
 	QDomElement serialize(QDomElement &element) const override;
@@ -65,6 +65,7 @@ public:
 private:
 	QPointF mStartPosition;
 	qreal mStartRotation {0.0};
+	QPointF mEstimatedPos;
 
 	QSvgRenderer *mSvgRenderer;
 };

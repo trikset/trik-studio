@@ -425,6 +425,9 @@ void TwoDModelScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	case ellipse:
 		reshapeEllipse(mouseEvent);
 		break;
+	case ball:
+		reshapeBall(mouseEvent);
+		break;
 	default:
 		needUpdate = false;
 
@@ -464,6 +467,7 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	}
 	case ball: {
+		reshapeBall(mouseEvent);
 		createdItem = mCurrentBall;
 		mCurrentBall = nullptr;
 		break;
@@ -831,6 +835,13 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 			}
 		}
 
+	}
+}
+
+void TwoDModelScene::reshapeBall(QGraphicsSceneMouseEvent *event)
+{
+	if (mCurrentBall) {
+		mCurrentBall->resizeItem(event);
 	}
 }
 
