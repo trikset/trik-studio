@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -237,6 +237,9 @@ void StructuralControlFlowGenerator::addSwitch(StructurizerNode *node, semantics
 				branchElement = switchElement->branches().value(targetId);
 			}
 			makeSemanticTree(branchElement, zoneForBranch, numberOfOccurrences, alreadyCalculated);
+			if (zoneForBranch->children().size() == 0) {
+				zoneForBranch->appendChild(SimpleNode::createPassNode(mSemanticTree));
+			}
 		}
 	}
 }
@@ -282,6 +285,9 @@ void StructuralControlFlowGenerator::addLoop(StructurizerNode *node, semantics::
 	}
 	zone->appendChild(loopNode);
 	makeSemanticTree(loopElement->body(), loopNode->bodyZone(), numberOfOccurrences, alreadyCalculated);
+	if (loopNode->bodyZone()->children().size() == 0) {
+		loopNode->bodyZone()->appendChild(SimpleNode::createPassNode(mSemanticTree));
+	}
 }
 
 

@@ -66,6 +66,7 @@ HEADERS += \
 	$$PWD/include/generatorBase/gotoControlFlowGenerator.h \
 	$$PWD/src/converters/dynamicPropertiesConverter.h \
 	$$PWD/src/readableLabelManager.h \
+	$$PWD/src/simpleGenerators/passGenerator.h \
 	$$PWD/src/simpleGenerators/syntheticIfGenerator.h \
 	$$PWD/src/simpleGenerators/syntheticVariableNameGenerator.h \
 	$$PWD/src/structuralControlFlowGenerator.h \
@@ -91,6 +92,7 @@ SOURCES += \
 	$$PWD/src/robotsDiagramVisitor.cpp \
 	$$PWD/src/primaryControlFlowValidator.cpp \
 	$$PWD/src/generatorFactoryBase.cpp \
+	$$PWD/src/simpleGenerators/passGenerator.cpp \
 	$$PWD/src/simpleGenerators/syntheticIfGenerator.cpp \
 	$$PWD/src/simpleGenerators/syntheticVariableNameGenerator.cpp \
 	$$PWD/src/structurizerNodes/breakStructurizerNode.cpp \

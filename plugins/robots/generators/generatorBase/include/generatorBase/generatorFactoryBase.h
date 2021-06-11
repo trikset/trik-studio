@@ -153,6 +153,10 @@ public:
 	virtual simple::AbstractSimpleGenerator *continueGenerator(const qReal::Id &id
 			, GeneratorCustomizer &customizer);
 
+	/// Returns a pointer to a code generator for 'pass' instruction
+	virtual simple::AbstractSimpleGenerator *passGenerator(const qReal::Id &id
+			, GeneratorCustomizer &customizer);
+
 	/// Returns a pointer to a code generator for goto label declaration
 	virtual simple::AbstractSimpleGenerator *labelGenerator(const qReal::Id &id
 			, GeneratorCustomizer &customizer);

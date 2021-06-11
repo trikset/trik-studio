@@ -32,6 +32,9 @@ QString SimpleNode::toStringImpl(GeneratorCustomizer &customizer, int indent, co
 	case breakNode:
 		return utils::StringUtils::addIndent(customizer.factory()->breakGenerator(mId
 				, customizer)->generate(), indent, indentString);
+	case passNode:
+		return utils::StringUtils::addIndent(customizer.factory()->passGenerator(mId
+				, customizer)->generate(), indent, indentString);
 	case continueNode:
 		return utils::StringUtils::addIndent(customizer.factory()->continueGenerator(mId
 				, customizer)->generate(), indent, indentString);
@@ -57,6 +60,13 @@ SimpleNode *SimpleNode::createBreakNode(QObject *parent)
 	SimpleNode *breakNode = new SimpleNode(qReal::Id(), parent);
 	breakNode->bindToSyntheticConstruction(SyntheticBlockType::breakNode);
 	return breakNode;
+}
+
+SimpleNode *SimpleNode::createPassNode(QObject *parent)
+{
+	SimpleNode *passNode = new SimpleNode(qReal::Id(), parent);
+	passNode->bindToSyntheticConstruction(SyntheticBlockType::passNode);
+	return passNode;
 }
 
 SimpleNode *SimpleNode::createSyntheticVariableNode(const qReal::Id &id, QObject *parent)

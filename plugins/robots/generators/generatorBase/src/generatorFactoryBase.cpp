@@ -51,6 +51,7 @@
 #include "simpleGenerators/subprogramsSimpleGenerator.h"
 #include "simpleGenerators/breakGenerator.h"
 #include "simpleGenerators/continueGenerator.h"
+#include "simpleGenerators/passGenerator.h"
 #include "simpleGenerators/labelGenerator.h"
 #include "simpleGenerators/gotoSimpleGenerator.h"
 #include "simpleGenerators/variableInitGenerator.h"
@@ -216,7 +217,8 @@ simple::AbstractSimpleGenerator *GeneratorFactoryBase::syntheticIfGenerator(cons
 		, bool elseIsEmpty
 		, QString syntheticCondition
 		, bool needInverting)
-RETURN_GENERATOR_PTR(SyntheticIfGenerator, (mRepo, customizer, ids, elseIsEmpty, syntheticCondition, id, needInverting, mReadableLabelManager, this))
+RETURN_GENERATOR_PTR(SyntheticIfGenerator, (mRepo, customizer, ids, elseIsEmpty, syntheticCondition
+		, id, needInverting, mReadableLabelManager, this))
 
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::infiniteLoopGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
@@ -325,6 +327,10 @@ RETURN_GENERATOR_PTR(BreakGenerator, (mRepo, customizer, id, this))
 simple::AbstractSimpleGenerator *GeneratorFactoryBase::continueGenerator(const Id &id
 		, GeneratorCustomizer &customizer)
 RETURN_GENERATOR_PTR(ContinueGenerator, (mRepo, customizer, id, this))
+
+simple::AbstractSimpleGenerator *GeneratorFactoryBase::passGenerator(const Id &id
+		, GeneratorCustomizer &customizer)
+RETURN_GENERATOR_PTR(PassGenerator, (mRepo, customizer, id, this))
 
 AbstractSimpleGenerator *GeneratorFactoryBase::labelGenerator(const qReal::Id &id
 		, GeneratorCustomizer &customizer)
