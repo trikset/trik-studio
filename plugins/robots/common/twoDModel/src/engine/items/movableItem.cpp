@@ -59,7 +59,7 @@ void MovableItem::setPenBrushForExtraction(QPainter *painter, const QStyleOption
 
 void MovableItem::drawExtractionForItem(QPainter *painter)
 {
-	painter->drawEllipse(boundingRect());
+	painter->drawPath(shape());
 }
 
 void MovableItem::savePos()
@@ -155,7 +155,11 @@ QPainterPath MovableItem::path() const
 	QPointF firstP = collidingPlgn.at(0);
 	collidingPlgn.translate(-firstP.x(), -firstP.y());
 
-	path.addEllipse(collidingPlgn.boundingRect());
+	if (isCircle()) {
+		path.addEllipse(collidingPlgn.boundingRect());
+	} else {
+		path.addRect(collidingPlgn.boundingRect());
+	}
 	path = m.map(path);
 	path.translate(firstP.x(), firstP.y());
 

@@ -40,7 +40,7 @@ namespace twoDModel {
 
 namespace items {
 class WallItem;
-class SkittleItem;
+class CubeItem;
 class BallItem;
 class LineItem;
 class CurveItem;
@@ -89,8 +89,8 @@ public slots:
 	/// Sets a flag that next user mouse actions should draw a wall on the scene.
 	void addWall();
 
-	/// Sets a flag that next user mouse actions should draw a skittle on the scene.
-	void addSkittle();
+	/// Sets a flag that next user mouse actions should draw a cube on the scene.
+	void addCube();
 
 	/// Sets a flag that next user mouse actions should draw a ball on the scene.
 	void addBall();
@@ -160,8 +160,8 @@ private slots:
 	/// Called after new wall is added to a world model.
 	void onWallAdded(QSharedPointer<items::WallItem> wall);
 
-	/// Called after new skittle is added to a world model.
-	void onSkittleAdded(QSharedPointer<items::SkittleItem> skittle);
+	/// Called after new cube is added to a world model.
+	void onCubeAdded(QSharedPointer<items::CubeItem> cube);
 
 	/// Called after new ball is added to a world model.
 	void onBallAdded(const QSharedPointer<items::BallItem> &ball);
@@ -184,7 +184,7 @@ private:
 	{
 		none = 0
 		, wall
-		, skittle
+		, cube
 		, ball
 		, line
 		, bezier
@@ -217,7 +217,7 @@ private:
 	void reshapeRectangle(QGraphicsSceneMouseEvent *event);
 	void reshapeEllipse(QGraphicsSceneMouseEvent *event);
 	void reshapeBall(QGraphicsSceneMouseEvent *event);
-	void reshapeSkittle(QGraphicsSceneMouseEvent *event);
+	void reshapeCube(QGraphicsSceneMouseEvent *event);
 
 	void registerInUndoStack(graphicsUtils::AbstractItem *item);
 	void subscribeItem(graphicsUtils::AbstractItem *item);
@@ -243,7 +243,7 @@ private:
 
 	/// Temporary wall that's being created. When it's complete, it's added to world model
 	QSharedPointer<items::WallItem> mCurrentWall;
-	QSharedPointer<items::SkittleItem> mCurrentSkittle;
+	QSharedPointer<items::CubeItem> mCurrentCube;
 	QSharedPointer<items::BallItem> mCurrentBall;
 	QSharedPointer<items::LineItem> mCurrentLine;
 	QSharedPointer<items::CurveItem> mCurrentCurve;

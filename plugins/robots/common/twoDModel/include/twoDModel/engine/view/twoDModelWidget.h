@@ -178,7 +178,7 @@ private:
 		, hand
 		, multiselection
 		, drawWall
-		, drawSkittle
+		, drawCube
 		, drawBall
 		, drawLine
 		, drawStylus

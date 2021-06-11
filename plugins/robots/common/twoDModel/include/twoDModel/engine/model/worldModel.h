@@ -34,7 +34,7 @@ class ErrorReporterInterface;
 namespace twoDModel {
 namespace items {
 class WallItem;
-class SkittleItem;
+class CubeItem;
 class BallItem;
 class MovableItem;
 class ColorFieldItem;
@@ -73,8 +73,8 @@ public:
 	/// Returns a set of walls in the world model. Result is mapping of wall ids to walls themselves.
 	const QMap<QString, QSharedPointer<items::WallItem>> &walls() const;
 
-	/// Returns a set of skittles in the world model. Result is mapping of skittle ids to slittles themselves.
-	const QMap<QString, QSharedPointer<items::SkittleItem>> &skittles() const;
+	/// Returns a set of cubes in the world model. Result is mapping of cube ids to slittles themselves.
+	const QMap<QString, QSharedPointer<items::CubeItem>> &cubes() const;
 
 	/// Returns a set of balls in the world model. Result is mapping of ball ids to balls themselves.
 	const QMap<QString, QSharedPointer<items::BallItem>> &balls() const;
@@ -100,11 +100,11 @@ public:
 	/// Removes \a wall from the world model.
 	void removeWall(QSharedPointer<items::WallItem> wall);
 
-	/// Appends \a skittle into world model.
-	void addSkittle(const QSharedPointer<items::SkittleItem> &skittle);
+	/// Appends \a cube into world model.
+	void addCube(const QSharedPointer<items::CubeItem> &cube);
 
-	/// Removes \a skittle from the world model.
-	void removeSkittle(QSharedPointer<items::SkittleItem> skittle);
+	/// Removes \a cube from the world model.
+	void removeCube(QSharedPointer<items::CubeItem> cube);
 
 	/// Appends \a ball into world model.
 	void addBall(const QSharedPointer<items::BallItem> &ball);
@@ -157,8 +157,8 @@ public:
 	/// Creates wall item described by \a element in the world model.
 	void createWall(const QDomElement &element);
 
-	/// Creates skittle item described by \a element in the world model.
-	void createSkittle(const QDomElement &element);
+	/// Creates cube item described by \a element in the world model.
+	void createCube(const QDomElement &element);
 
 	/// Creates ball item described by \a element in the world model.
 	void createBall(const QDomElement &element);
@@ -196,10 +196,10 @@ signals:
 	/// Emitted each time when model is appended with some new wall.
 	void wallAdded(const QSharedPointer<items::WallItem> &item);
 
-	/// Emitted each time when model is appended with some new skittle.
-	void skittleAdded(const QSharedPointer<items::SkittleItem> &item);
+	/// Emitted each time when model is appended with some new cube.
+	void cubeAdded(const QSharedPointer<items::CubeItem> &item);
 
-	/// Emitted each time when model is appended with some new skittle.
+	/// Emitted each time when model is appended with some new cube.
 	void ballAdded(const QSharedPointer<items::BallItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
@@ -236,7 +236,7 @@ private:
 	QRectF deserializeRect(const QString &string) const;
 
 	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
-	QMap<QString, QSharedPointer<items::SkittleItem>> mSkittles;
+	QMap<QString, QSharedPointer<items::CubeItem>> mCubes;
 	QMap<QString, QSharedPointer<items::BallItem>> mBalls;
 	QMap<QString, QSharedPointer<items::MovableItem>> mMovables;
 	QMap<QString, QSharedPointer<items::ColorFieldItem>> mColorFields;

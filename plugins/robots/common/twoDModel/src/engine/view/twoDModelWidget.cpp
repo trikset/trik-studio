@@ -41,7 +41,7 @@
 #include "scene/robotItem.h"
 
 #include "src/engine/items/wallItem.h"
-#include "src/engine/items/skittleItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/ballItem.h"
 #include "src/engine/items/curveItem.h"
 #include "src/engine/items/rectangleItem.h"
@@ -249,7 +249,7 @@ void TwoDModelWidget::initWidget()
 void TwoDModelWidget::initPalette()
 {
 	QAction * const wallTool = items::WallItem::wallTool();
-	QAction * const skittleTool = items::SkittleItem::skittleTool();
+	QAction * const cubeTool = items::CubeItem::cubeTool();
 	QAction * const ballTool = items::BallItem::ballTool();
 	QAction * const lineTool = items::LineItem::lineTool();
 	QAction * const bezierTool = items::CurveItem::curveTool();
@@ -259,7 +259,7 @@ void TwoDModelWidget::initPalette()
 	QAction * const imageTool = items::ImageItem::imageTool();
 
 	mUi->palette->registerTool(wallTool);
-	mUi->palette->registerTool(skittleTool);
+	mUi->palette->registerTool(cubeTool);
 	mUi->palette->registerTool(ballTool);
 	mUi->palette->registerTool(lineTool);
 	mUi->palette->registerTool(bezierTool);
@@ -276,7 +276,7 @@ void TwoDModelWidget::initPalette()
 	mUi->palette->setSize({size, size});
 
 	connect(wallTool, &QAction::triggered, &*mScene, &TwoDModelScene::addWall);
-	connect(skittleTool, &QAction::triggered, &*mScene, &TwoDModelScene::addSkittle);
+	connect(cubeTool, &QAction::triggered, &*mScene, &TwoDModelScene::addCube);
 	connect(ballTool, &QAction::triggered, &*mScene, &TwoDModelScene::addBall);
 	connect(lineTool, &QAction::triggered, &*mScene, &TwoDModelScene::addLine);
 	connect(bezierTool, &QAction::triggered, &*mScene, &TwoDModelScene::addBezier);
@@ -287,7 +287,7 @@ void TwoDModelWidget::initPalette()
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, &*mScene, &TwoDModelScene::setNoneStatus);
 
 	connect(wallTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawWall); });
-	connect(skittleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawSkittle); });
+	connect(cubeTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawCube); });
 	connect(ballTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawBall); });
 	connect(lineTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawLine); });
 	connect(bezierTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawBezier); });
@@ -397,8 +397,8 @@ void TwoDModelWidget::returnToStartMarker()
 		mScene->robot(*model)->returnToStartPosition();
 	}
 
-	for (auto &&skittle : mModel.worldModel().skittles()) {
-		skittle->returnToStartPosition();
+	for (auto &&cube : mModel.worldModel().cubes()) {
+		cube->returnToStartPosition();
 	}
 
 	for (auto &&ball : mModel.worldModel().balls()) {
@@ -870,7 +870,7 @@ QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) c
 	case drawLine:
 	case drawStylus:
 	case drawWall:
-	case drawSkittle:
+	case drawCube:
 	case drawBall:
 	case drawBezier:
 	case drawRectangle:
@@ -897,8 +897,8 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 		return QCursor(QPixmap(":/icons/2d_drawLineCursor.png"), 0, 0);
 	case drawWall:
 		return QCursor(QPixmap(":/icons/2d_drawWallCursor.png"), 0, 0);
-	case drawSkittle:
-		return QCursor(QPixmap(":/icons/2d_drawCanCursor.png"), 0, 0);
+	case drawCube:
+		return QCursor(QPixmap(":/icons/2d_drawCubeCursor.png"), 0, 0);
 	case drawBall:
 		return QCursor(QPixmap(":/icons/2d_drawBallCursor.png"), 0, 0);
 	case drawEllipse:

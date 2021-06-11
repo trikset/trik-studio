@@ -23,7 +23,7 @@
 #include "twoDModel/engine/model/image.h"
 
 #include "src/engine/items/wallItem.h"
-#include "src/engine/items/skittleItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/ballItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/curveItem.h"
@@ -143,9 +143,9 @@ const QMap<QString, QSharedPointer<items::WallItem> > &WorldModel::walls() const
 	return mWalls;
 }
 
-const QMap<QString, QSharedPointer<items::SkittleItem>> &WorldModel::skittles() const
+const QMap<QString, QSharedPointer<items::CubeItem>> &WorldModel::cubes() const
 {
-	return mSkittles;
+	return mCubes;
 }
 
 const QMap<QString, QSharedPointer<items::BallItem>> &WorldModel::balls() const
@@ -177,24 +177,24 @@ void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 	emit itemRemoved(wall);
 }
 
-void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
+void WorldModel::addCube(const QSharedPointer<items::CubeItem> &cube)
 {
-	const QString id = skittle->id();
-	if (mSkittles.contains(id)) {
+	const QString id = cube->id();
+	if (mCubes.contains(id)) {
 		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
 		return; // probably better than having no way to delete those duplicate items on the scene
 	}
 
-	mSkittles[id] = skittle;
-	mMovables[id] = skittle.dynamicCast<items::MovableItem>();
-	emit skittleAdded(skittle);
+	mCubes[id] = cube;
+	mMovables[id] = cube.dynamicCast<items::MovableItem>();
+	emit cubeAdded(cube);
 }
 
-void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
+void WorldModel::removeCube(QSharedPointer<items::CubeItem> cube)
 {
-	mSkittles.remove(skittle->id());
-	mMovables.remove(skittle->id());
-	emit itemRemoved(skittle);
+	mCubes.remove(cube->id());
+	mMovables.remove(cube->id());
+	emit itemRemoved(cube);
 }
 
 void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
@@ -294,8 +294,8 @@ void WorldModel::clear()
 		removeWall(mWalls.last());
 	}
 
-	while (!mSkittles.isEmpty()) {
-		removeSkittle(mSkittles.last());
+	while (!mCubes.isEmpty()) {
+		removeCube(mCubes.last());
 	}
 
 	while (!mBalls.isEmpty()) {
@@ -368,8 +368,8 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 		path.addPath(wall->path());
 	}
 
-	for (auto &&skittle: mSkittles) {
-		path.addPath(skittle->path());
+	for (auto &&cube: mCubes) {
+		path.addPath(cube->path());
 	}
 
 	for (auto &&ball: mBalls) {
@@ -420,10 +420,10 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 		mWalls[wall]->serialize(walls);
 	}
 
-	QDomElement skittles = parent.ownerDocument().createElement("skittles");
-	result.appendChild(skittles);
-	for (auto &&skittle : mSkittles) {
-		skittle->serialize(skittles);
+	QDomElement cubes = parent.ownerDocument().createElement("cubes");
+	result.appendChild(cubes);
+	for (auto &&cube : mCubes) {
+		cube->serialize(cubes);
 	}
 
 	QDomElement balls = parent.ownerDocument().createElement("balls");
@@ -552,11 +552,11 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	for (QDomElement skittlesNode = element.firstChildElement("skittles"); !skittlesNode.isNull()
-			; skittlesNode = skittlesNode.nextSiblingElement("skittles")) {
-		for (QDomElement skittleNode = skittlesNode.firstChildElement("skittle"); !skittleNode.isNull()
-				; skittleNode = skittleNode.nextSiblingElement("skittle")) {
-			createSkittle(skittleNode);
+	for (QDomElement cubesNode = element.firstChildElement("cubes"); !cubesNode.isNull()
+			; cubesNode = cubesNode.nextSiblingElement("cubes")) {
+		for (QDomElement cubeNode = cubesNode.firstChildElement("cube"); !cubeNode.isNull()
+				; cubeNode = cubeNode.nextSiblingElement("cube")) {
+			createCube(cubeNode);
 		}
 	}
 
@@ -612,8 +612,8 @@ QSharedPointer<QGraphicsObject> WorldModel::findId(const QString &id) const
 		return mWalls[id];
 	}
 
-	if (mSkittles.contains(id)) {
-		return mSkittles[id];
+	if (mCubes.contains(id)) {
+		return mCubes[id];
 	}
 
 	if (mBalls.contains(id)) {
@@ -651,8 +651,8 @@ void WorldModel::createElement(const QDomElement &element)
 		createImageItem(element, element.hasAttribute("background"));
 	} else if (element.tagName() == "wall") {
 		createWall(element);
-	} else if (element.tagName() == "skittle") {
-		createSkittle(element);
+	} else if (element.tagName() == "cube") {
+		createCube(element);
 	} else if (element.tagName() == "ball") {
 		createBall(element);
 	} else if (element.tagName() == "region") {
@@ -667,11 +667,11 @@ void WorldModel::createWall(const QDomElement &element)
 	addWall(wall);
 }
 
-void WorldModel::createSkittle(const QDomElement &element)
+void WorldModel::createCube(const QDomElement &element)
 {
-	auto skittle = QSharedPointer<items::SkittleItem>::create(QPointF());
-	skittle->deserialize(element);
-	addSkittle(skittle);
+	auto cube = QSharedPointer<items::CubeItem>::create(QPointF());
+	cube->deserialize(element);
+	addCube(cube);
 }
 
 void WorldModel::createBall(const QDomElement &element)
@@ -768,8 +768,8 @@ void WorldModel::removeItem(const QString &id)
 		removeWall(wall);
 	} else if (auto colorItem = qSharedPointerDynamicCast<items::ColorFieldItem>(item)) {
 		removeColorField(colorItem);
-	} else if (auto skittleItem = qSharedPointerDynamicCast<items::SkittleItem>(item)) {
-		removeSkittle(skittleItem);
+	} else if (auto cubeItem = qSharedPointerDynamicCast<items::CubeItem>(item)) {
+		removeCube(cubeItem);
 	} else if (auto ballItem = qSharedPointerDynamicCast<items::BallItem>(item)) {
 		removeBall(ballItem);
 	} else if (auto image = qSharedPointerDynamicCast<items::ImageItem>(item)) {
