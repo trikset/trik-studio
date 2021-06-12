@@ -45,7 +45,7 @@ QAction *CubeItem::cubeTool()
 QDomElement CubeItem::serialize(QDomElement &element) const
 {
 	QDomElement cubeNode = MovableItem::serialize(element);
-	cubeNode.setTagName("cube");
+	cubeNode.setAttribute("type", "cube");
 	return cubeNode;
 }
 

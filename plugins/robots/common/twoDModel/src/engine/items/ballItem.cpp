@@ -45,7 +45,7 @@ QAction *BallItem::ballTool()
 QDomElement BallItem::serialize(QDomElement &element) const
 {
 	QDomElement ballNode = MovableItem::serialize(element);
-	ballNode.setTagName("ball");
+	ballNode.setAttribute("type", "ball");
 	return ballNode;
 }
 

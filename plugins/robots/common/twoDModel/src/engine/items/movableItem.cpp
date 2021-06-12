@@ -69,14 +69,15 @@ void MovableItem::savePos()
 
 QDomElement MovableItem::serialize(QDomElement &element) const
 {
-	QDomElement ballNode = AbstractItem::serialize(element);
-	ballNode.setAttribute("x", QString::number(x1() + scenePos().x()));
-	ballNode.setAttribute("y", QString::number(y1() + scenePos().y()));
-	ballNode.setAttribute("markerX", QString::number(x1() + mStartPosition.x()));
-	ballNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
-	ballNode.setAttribute("rotation", QString::number(rotation()));
-	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
-	return ballNode;
+	QDomElement movableNode = AbstractItem::serialize(element);
+	movableNode.setTagName("movable");
+	movableNode.setAttribute("x", QString::number(x1() + scenePos().x()));
+	movableNode.setAttribute("y", QString::number(y1() + scenePos().y()));
+	movableNode.setAttribute("markerX", QString::number(x1() + mStartPosition.x()));
+	movableNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
+	movableNode.setAttribute("rotation", QString::number(rotation()));
+	movableNode.setAttribute("startRotation", QString::number(mStartRotation));
+	return movableNode;
 }
 
 void MovableItem::deserialize(const QDomElement &element)

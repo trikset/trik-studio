@@ -40,8 +40,9 @@ namespace twoDModel {
 
 namespace items {
 class WallItem;
-class CubeItem;
 class BallItem;
+class CubeItem;
+class MovableItem;
 class LineItem;
 class CurveItem;
 class StylusItem;
@@ -160,11 +161,8 @@ private slots:
 	/// Called after new wall is added to a world model.
 	void onWallAdded(QSharedPointer<items::WallItem> wall);
 
-	/// Called after new cube is added to a world model.
-	void onCubeAdded(QSharedPointer<items::CubeItem> cube);
-
-	/// Called after new ball is added to a world model.
-	void onBallAdded(const QSharedPointer<items::BallItem> &ball);
+	/// Called after new movable item is added to a world model.
+	void onMovableAdded(QSharedPointer<items::MovableItem> movable);
 
 	/// Called after new color field item is added to a world model.
 	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);

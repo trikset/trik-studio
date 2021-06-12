@@ -143,16 +143,6 @@ const QMap<QString, QSharedPointer<items::WallItem> > &WorldModel::walls() const
 	return mWalls;
 }
 
-const QMap<QString, QSharedPointer<items::CubeItem>> &WorldModel::cubes() const
-{
-	return mCubes;
-}
-
-const QMap<QString, QSharedPointer<items::BallItem>> &WorldModel::balls() const
-{
-	return mBalls;
-}
-
 const QMap<QString, QSharedPointer<items::MovableItem>> &WorldModel::movables() const
 {
 	return mMovables;
@@ -177,44 +167,22 @@ void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 	emit itemRemoved(wall);
 }
 
-void WorldModel::addCube(const QSharedPointer<items::CubeItem> &cube)
+void WorldModel::addMovable(const QSharedPointer<items::MovableItem> &movable)
 {
-	const QString id = cube->id();
-	if (mCubes.contains(id)) {
+	const QString id = movable->id();
+	if (mMovables.contains(id)) {
 		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
 		return; // probably better than having no way to delete those duplicate items on the scene
 	}
 
-	mCubes[id] = cube;
-	mMovables[id] = cube.dynamicCast<items::MovableItem>();
-	emit cubeAdded(cube);
+	mMovables[id] = movable;
+	emit movableAdded(movable);
 }
 
-void WorldModel::removeCube(QSharedPointer<items::CubeItem> cube)
+void WorldModel::removeMovable(QSharedPointer<items::MovableItem> movable)
 {
-	mCubes.remove(cube->id());
-	mMovables.remove(cube->id());
-	emit itemRemoved(cube);
-}
-
-void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
-{
-	const QString id = ball->id();
-	if (mBalls.contains(id)) {
-		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
-		return; // probably better than having no way to delete those duplicate items on the scene
-	}
-
-	mBalls[id] = ball;
-	mMovables[id] = ball.dynamicCast<items::MovableItem>();
-	emit ballAdded(ball);
-}
-
-void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
-{
-	mBalls.remove(ball->id());
-	mMovables.remove(ball->id());
-	emit itemRemoved(ball);
+	mMovables.remove(movable->id());
+	emit itemRemoved(movable);
 }
 
 const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFields() const
@@ -294,12 +262,8 @@ void WorldModel::clear()
 		removeWall(mWalls.last());
 	}
 
-	while (!mCubes.isEmpty()) {
-		removeCube(mCubes.last());
-	}
-
-	while (!mBalls.isEmpty()) {
-		removeBall(mBalls.last());
+	while (!mMovables.isEmpty()) {
+		removeMovable(mMovables.last());
 	}
 
 	while (!mColorFields.isEmpty()) {
@@ -368,12 +332,8 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 		path.addPath(wall->path());
 	}
 
-	for (auto &&cube: mCubes) {
-		path.addPath(cube->path());
-	}
-
-	for (auto &&ball: mBalls) {
-		path.addPath(ball->path());
+	for (auto &&movable: mMovables) {
+		path.addPath(movable->path());
 	}
 
 	return path;
@@ -420,16 +380,10 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 		mWalls[wall]->serialize(walls);
 	}
 
-	QDomElement cubes = parent.ownerDocument().createElement("cubes");
-	result.appendChild(cubes);
-	for (auto &&cube : mCubes) {
-		cube->serialize(cubes);
-	}
-
-	QDomElement balls = parent.ownerDocument().createElement("balls");
-	result.appendChild(balls);
-	for (auto &&ball : mBalls) {
-		ball->serialize(balls);
+	QDomElement movables = parent.ownerDocument().createElement("movables");
+	result.appendChild(movables);
+	for (auto &&movable : mMovables) {
+		movable->serialize(movables);
 	}
 
 	QDomElement colorFields = parent.ownerDocument().createElement("colorFields");
@@ -552,19 +506,11 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	for (QDomElement cubesNode = element.firstChildElement("cubes"); !cubesNode.isNull()
-			; cubesNode = cubesNode.nextSiblingElement("cubes")) {
-		for (QDomElement cubeNode = cubesNode.firstChildElement("cube"); !cubeNode.isNull()
-				; cubeNode = cubeNode.nextSiblingElement("cube")) {
-			createCube(cubeNode);
-		}
-	}
-
-	for (QDomElement ballsNode = element.firstChildElement("balls"); !ballsNode.isNull()
-			; ballsNode = ballsNode.nextSiblingElement("balls")) {
-		for (QDomElement ballNode = ballsNode.firstChildElement("ball"); !ballNode.isNull()
-				; ballNode = ballNode.nextSiblingElement("ball")) {
-			createBall(ballNode);
+	for (QDomElement movablesNode = element.firstChildElement("movables"); !movablesNode.isNull()
+			; movablesNode = movablesNode.nextSiblingElement("movables")) {
+		for (QDomElement movableNode = movablesNode.firstChildElement("movable"); !movableNode.isNull()
+				; movableNode = movableNode.nextSiblingElement("movable")) {
+			createMovable(movableNode);
 		}
 	}
 
@@ -612,12 +558,8 @@ QSharedPointer<QGraphicsObject> WorldModel::findId(const QString &id) const
 		return mWalls[id];
 	}
 
-	if (mCubes.contains(id)) {
-		return mCubes[id];
-	}
-
-	if (mBalls.contains(id)) {
-		return mBalls[id];
+	if (mMovables.contains(id)) {
+		return mMovables[id];
 	}
 
 	if (mColorFields.contains(id)) {
@@ -651,10 +593,8 @@ void WorldModel::createElement(const QDomElement &element)
 		createImageItem(element, element.hasAttribute("background"));
 	} else if (element.tagName() == "wall") {
 		createWall(element);
-	} else if (element.tagName() == "cube") {
-		createCube(element);
-	} else if (element.tagName() == "ball") {
-		createBall(element);
+	} else if (element.tagName() == "movable") {
+		createMovable(element);
 	} else if (element.tagName() == "region") {
 		createRegion(element);
 	}
@@ -667,18 +607,27 @@ void WorldModel::createWall(const QDomElement &element)
 	addWall(wall);
 }
 
+void WorldModel::createMovable(const QDomElement &element)
+{
+	if (element.attribute("type") == "cube") {
+		createCube(element);
+	} else {
+		createBall(element);
+	}
+}
+
 void WorldModel::createCube(const QDomElement &element)
 {
 	auto cube = QSharedPointer<items::CubeItem>::create(QPointF());
 	cube->deserialize(element);
-	addCube(cube);
+	addMovable(cube);
 }
 
 void WorldModel::createBall(const QDomElement &element)
 {
 	auto ball = QSharedPointer<items::BallItem>::create(QPointF());
 	ball->deserialize(element);
-	addBall(ball);
+	addMovable(ball);
 }
 
 void WorldModel::createLine(const QDomElement &element)
@@ -768,10 +717,8 @@ void WorldModel::removeItem(const QString &id)
 		removeWall(wall);
 	} else if (auto colorItem = qSharedPointerDynamicCast<items::ColorFieldItem>(item)) {
 		removeColorField(colorItem);
-	} else if (auto cubeItem = qSharedPointerDynamicCast<items::CubeItem>(item)) {
-		removeCube(cubeItem);
-	} else if (auto ballItem = qSharedPointerDynamicCast<items::BallItem>(item)) {
-		removeBall(ballItem);
+	} else if (auto movableItem = qSharedPointerDynamicCast<items::MovableItem>(item)) {
+		removeMovable(movableItem);
 	} else if (auto image = qSharedPointerDynamicCast<items::ImageItem>(item)) {
 		removeImageItem(image);
 	}

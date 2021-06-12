@@ -156,10 +156,8 @@ void ConstraintsChecker::bindToWorldModelObjects()
 			, this, [this](const QSharedPointer<items::ColorFieldItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
 			, this, [this](const QSharedPointer<items::RegionItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::cubeAdded
-			, this, [this](const QSharedPointer<items::CubeItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
-			, this, [this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::movableAdded
+			, this, [this](const QSharedPointer<items::MovableItem> &item) { bindObject(item->id(), item.data()); });
 
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
 			, this, [this](const QSharedPointer<QGraphicsItem> &item) {
