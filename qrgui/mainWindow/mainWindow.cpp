@@ -918,7 +918,8 @@ void MainWindow::closeTab(int index)
 		const Id diagramId = diagram->editorViewScene().rootItemId();
 		if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
 			isClosed = mProjectManager->suggestToSaveChangesOrCancel();
-		} else if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")) {
+		} else if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")
+				|| diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "BlackBoxDiagram")) {
 			if (mController->isUnsaved(diagramId.toString())) {
 				mProjectManager->setUnsavedIndicator(true);
 			}
@@ -1778,7 +1779,8 @@ IdList MainWindow::openedDiagrams() const
 			if (diagramId.editor() == "RobotsMetamodel"
 					&& diagramId.diagram() == "RobotsDiagram"
 					&& (diagramId.element() == "RobotsDiagramNode"
-						|| diagramId.element() == "SubprogramDiagram")) {
+						|| diagramId.element() == "SubprogramDiagram"
+						|| diagramId.element() == "BlackBoxDiagram")) { //IKHON
 				result << diagram->mvIface().rootId();
 			}
 		}

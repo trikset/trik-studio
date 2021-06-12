@@ -29,6 +29,7 @@ using namespace kitBase::robotModel;
 const IdList supportedDiagramTypes = {
 		Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")
 		, Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")
+		, Id("RobotsMetamodel", "RobotsDiagram", "BlackBoxDiagram")
 };
 
 const Id startingElementType = Id("RobotsMetamodel", "RobotsDiagram", "InitialNode");

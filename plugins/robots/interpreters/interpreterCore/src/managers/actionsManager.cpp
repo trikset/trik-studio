@@ -23,6 +23,7 @@ using namespace interpreterCore;
 
 static const qReal::Id robotDiagramType = qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode");
 static const qReal::Id subprogramDiagramType = qReal::Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram");
+static const qReal::Id blackBoxDiagramType = qReal::Id("RobotsMetamodel", "RobotsDiagram", "BlackBoxDiagram");
 
 ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelManager &robotModelManager)
 	: mKitPluginManager(kitPluginManager)
@@ -223,7 +224,8 @@ void ActionsManager::setEnableRobotActions(bool enableRobotActions)
 void ActionsManager::updateEnabledActions()
 {
 	const qReal::Id &rootElementId = mMainWindowInterpretersInterface->activeDiagram();
-	const bool enabled = rootElementId.type() == robotDiagramType || rootElementId.type() == subprogramDiagramType;
+	const bool enabled = rootElementId.type() == robotDiagramType || rootElementId.type() == subprogramDiagramType
+			|| rootElementId.type() == blackBoxDiagramType;
 
 	for (QAction * const action : mActions) {
 		if (action != &mRobotSettingsAction) {
