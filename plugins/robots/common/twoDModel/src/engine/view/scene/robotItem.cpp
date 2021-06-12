@@ -201,14 +201,14 @@ void RobotItem::deserializeImage(const QDomElement &element) {
 			mCustomImages[dir] = Image::deserialize(image);
 		}
 		useCustomImage(true);
-		mIsRotatingImage = mCustomImages[Up]->isValid();
+		mIsRotatingImage = mCustomImages[Up] && mCustomImages[Up]->isValid();
 	}
 }
 
 void RobotItem::serializeImage(QDomElement &parent) const {
 	QDomElement imgParent = parent.ownerDocument().createElement("robotImages");
 	for (const auto key : mCustomImages.keys()) {
-		if (mCustomImages[key]->isValid()){
+		if (mCustomImages[key] && mCustomImages[key]->isValid()){
 			QDomElement img = imgParent.ownerDocument().createElement("robotImage");
 			img.setAttribute("direction", key);
 			imgParent.appendChild(img);
@@ -328,7 +328,7 @@ bool RobotItem::setCustomImage(const QStringList &robotImageFileNames) {
 		}
 		auto success = true;
 		for (auto && img : mCustomImages) {
-			success = success && img->isValid();
+			success = success && img && img->isValid();
 		}
 		if (success) {
 			mIsCustomImage = true;
