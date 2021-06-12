@@ -621,8 +621,8 @@ void WorldModel::createWall(const QDomElement &element)
 
 void WorldModel::createMovable(const QDomElement &element)
 {
-	auto imageId = element.attribute("imageId");
-	auto image = mImages.value(imageId, nullptr);
+	const auto imageId = element.attribute("imageId");
+	const auto image = mImages.value(imageId, nullptr);
 	QSharedPointer<items::MovableItem> movable;
 	if (element.attribute("type") == "cube") {
 		movable = createCube(element);

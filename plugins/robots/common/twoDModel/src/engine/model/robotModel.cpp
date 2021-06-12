@@ -380,8 +380,8 @@ void RobotModel::nextStep()
 		do {
 			needToMove = nullptr;
 			auto aheadPolygon = robotsTransform().map(ahead);
-			for (auto movable : mWorldModel->movables()) {
-				auto movablePolygon = movable->mapToScene(movable->boundingRect());
+			for (auto &&movable : mWorldModel->movables()) {
+				const auto movablePolygon = movable->mapToScene(movable->boundingRect());
 				if (movablePolygon.intersects(aheadPolygon) && !movedItems.contains(movable.data())) {
 					needToMove = movable.data();
 					movedItems[needToMove] = true;
@@ -391,19 +391,19 @@ void RobotModel::nextStep()
 			ahead.translate(gridSize, 0);
 		} while (needToMove);
 
-		auto delta = mWaitPos - mPos;
-		auto lenSquare = QPointF::dotProduct(delta, delta);
-		auto oldPos = mPos;
+		const auto delta = mWaitPos - mPos;
+		const auto lenSquare = QPointF::dotProduct(delta, delta);
+		const auto oldPos = mPos;
 
 		if (lenSquare <= manualSpeed * manualSpeed) {
 			mPos = mWaitPos;
 			mIsRiding = false;
 			emit mRobotModel.endManual(!mIsCollide);
 		} else {
-			auto unitVector = delta / qSqrt(lenSquare);
+			const auto unitVector = delta / qSqrt(lenSquare);
 			QLineF moveLine(QPointF(), (movedItems.size() + 1) *  gridSize * unitVector);
 			moveLine.translate(robotsTransform().map(QPointF()));
-			for (auto wall : mWorldModel->walls()) {
+			for (auto &&wall : mWorldModel->walls()) {
 				auto wallLine = QLineF(wall->begin(), wall->end());
 				if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
 					mIsCollide = true;
@@ -418,7 +418,7 @@ void RobotModel::nextStep()
 			}
 		}
 
-		for (auto item : movedItems.keys(true)) {
+		for (auto &&item : movedItems.keys(true)) {
 			item->setPos(item->pos() + mPos - oldPos);
 		}
 	}

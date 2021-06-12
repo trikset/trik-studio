@@ -53,7 +53,7 @@ QWidget *MovableItemPopup::initRestoreButton()
 {
 	mRestoreButton = initButton(":/icons/2d_restore.png", tr("Restore default image"));
 	connect(mRestoreButton, &QAbstractButton::clicked, this, [=]() {
-		for (auto item : mCurrentItems) {
+		for (const auto& item : mCurrentItems) {
 			dynamic_cast<items::MovableItem *>(item)->resetImage();
 		}
 		emit imageSettingsChanged();
@@ -85,7 +85,7 @@ QWidget *MovableItemPopup::initImagePicker()
 		}
 
 		QSharedPointer<model::Image> img(new model::Image(loadFileName, true));
-		for (auto item : mCurrentItems) {
+		for (const auto& item : mCurrentItems) {
 			dynamic_cast<items::MovableItem *>(item)->resetImage(img);
 		}
 		emit imageSettingsChanged();
