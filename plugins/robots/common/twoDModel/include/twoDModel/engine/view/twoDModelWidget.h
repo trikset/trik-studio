@@ -61,6 +61,7 @@ class ActionsBox;
 class ColorItemPopup;
 class ImageItemPopup;
 class RobotItemPopup;
+class MovableItemPopup;
 class SpeedPopup;
 
 class TWO_D_MODEL_EXPORT TwoDModelWidget : public QWidget
@@ -239,6 +240,7 @@ private:
 	ColorItemPopup *mColorFieldItemPopup {};  // Takes ownership
 	ImageItemPopup *mImageItemPopup {};  // Takes ownership
 	RobotItemPopup *mRobotItemPopup {};  // Takes ownership
+	MovableItemPopup *mMovableItemPopup {};  // Takes ownership
 	SpeedPopup *mSpeedPopup {};  // Takes owneship
 
 	RobotItem *mSelectedRobotItem {};

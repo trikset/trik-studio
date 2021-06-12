@@ -41,6 +41,7 @@ public:
 	qreal angularDamping() const override;
 	qreal linearDamping() const override;
 	QSize itemSize() const override;
+	QString defaultImagePath() const override;
 };
 
 }

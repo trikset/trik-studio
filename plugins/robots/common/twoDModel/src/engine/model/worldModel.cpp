@@ -429,6 +429,18 @@ QDomElement WorldModel::serializeBlobs(QDomElement &parent) const
 		images.appendChild(image);
 	}
 
+	QSet<QString> usedIds;
+	for (const QString &movableItem : mMovables.keys()) {
+		const auto img = mMovables[movableItem]->image();
+		if (usedIds.contains(img->imageId())) {
+			continue;
+		}
+		QDomElement image = parent.ownerDocument().createElement("image");
+		img->serialize(image);
+		images.appendChild(image);
+		usedIds << img->imageId();
+	}
+
 	if (!images.childNodes().isEmpty()) {
 		result.appendChild(images);
 		parent.appendChild(result);
@@ -609,25 +621,30 @@ void WorldModel::createWall(const QDomElement &element)
 
 void WorldModel::createMovable(const QDomElement &element)
 {
+	auto imageId = element.attribute("imageId");
+	auto image = mImages.value(imageId, nullptr);
+	QSharedPointer<items::MovableItem> movable;
 	if (element.attribute("type") == "cube") {
-		createCube(element);
+		movable = createCube(element);
 	} else {
-		createBall(element);
+		movable = createBall(element);
 	}
+	movable->resetImage(image);
+	addMovable(movable);
 }
 
-void WorldModel::createCube(const QDomElement &element)
+QSharedPointer<items::CubeItem> WorldModel::createCube(const QDomElement &element)
 {
 	auto cube = QSharedPointer<items::CubeItem>::create(QPointF());
 	cube->deserialize(element);
-	addMovable(cube);
+	return cube;
 }
 
-void WorldModel::createBall(const QDomElement &element)
+QSharedPointer<items::BallItem> WorldModel::createBall(const QDomElement &element)
 {
 	auto ball = QSharedPointer<items::BallItem>::create(QPointF());
 	ball->deserialize(element);
-	addMovable(ball);
+	return ball;
 }
 
 void WorldModel::createLine(const QDomElement &element)

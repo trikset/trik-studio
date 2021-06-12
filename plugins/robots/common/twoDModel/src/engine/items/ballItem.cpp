@@ -22,11 +22,12 @@
 
 using namespace twoDModel::items;
 
+const QString defaultPath = ":/icons/2d_ball.svg";
+
 BallItem::BallItem(const QPointF &position)
 	:MovableItem(position)
 {
-	mImage.loadFrom(QString(":/icons/2d_ball.svg"));
-	setTransformOriginPoint(boundingRect().center());
+	init();
 }
 
 QSize BallItem::itemSize() const
@@ -34,9 +35,14 @@ QSize BallItem::itemSize() const
 	return ballSize;
 }
 
+QString BallItem::defaultImagePath() const
+{
+	return defaultPath;
+}
+
 QAction *BallItem::ballTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
+	QAction * const result = new QAction(QIcon(defaultPath), tr("Ball (B)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_B), QKeySequence(Qt::Key_4)});
 	result->setCheckable(true);
 	return result;

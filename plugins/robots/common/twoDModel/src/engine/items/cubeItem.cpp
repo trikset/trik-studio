@@ -22,11 +22,17 @@
 
 using namespace twoDModel::items;
 
+const QString defaultPath = ":/icons/2d_cube.png";
+
 CubeItem::CubeItem(const QPointF &position)
 	:MovableItem(position)
 {
-	mImage.loadFrom(QString(":/icons/2d_cube.png"));
-	setTransformOriginPoint(boundingRect().center());
+	init();
+}
+
+QString CubeItem::defaultImagePath() const
+{
+	return defaultPath;
 }
 
 QSize CubeItem::itemSize() const
@@ -36,7 +42,7 @@ QSize CubeItem::itemSize() const
 
 QAction *CubeItem::cubeTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_cube.svg"), tr("Cube (C)"), nullptr);
+	QAction * const result = new QAction(QIcon(defaultPath), tr("Cube (C)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_C), QKeySequence(Qt::Key_3)});
 	result->setCheckable(true);
 	return result;

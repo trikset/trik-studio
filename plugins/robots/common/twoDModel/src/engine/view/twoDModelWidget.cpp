@@ -36,6 +36,7 @@
 #include "parts/imageItemPopup.h"
 #include "parts/robotItemPopup.h"
 #include "parts/speedPopup.h"
+#include "parts/movableItemPopup.h"
 
 #include "scene/twoDModelScene.h"
 #include "scene/robotItem.h"
@@ -191,6 +192,7 @@ void TwoDModelWidget::initWidget()
 	mColorFieldItemPopup = new ColorItemPopup(defaultPen, *mScene, this);
 	mImageItemPopup = new ImageItemPopup(*mScene, this);
 	mRobotItemPopup = new RobotItemPopup(*mScene, this);
+	mMovableItemPopup = new MovableItemPopup(*mScene, this);
 	mSpeedPopup = new SpeedPopup(this);
 
 	mScene->setPenBrushItems(defaultPen, Qt::NoBrush);
@@ -201,6 +203,11 @@ void TwoDModelWidget::initWidget()
 	connect(mColorFieldItemPopup, &ColorItemPopup::propertyChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
 
 	connect(mImageItemPopup, &ImageItemPopup::propertyChanged, this, [=]() {
+		saveBlobsToRepo();
+		saveWorldModelToRepo();
+	});
+
+	connect(mMovableItemPopup, &MovableItemPopup::imageSettingsChanged, this, [=]() {
 		saveBlobsToRepo();
 		saveWorldModelToRepo();
 	});

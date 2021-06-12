@@ -24,14 +24,18 @@
 using namespace twoDModel::items;
 
 MovableItem::MovableItem(const QPointF &position)
-	: mImage("", true)
+	: mEstimatedPos(position)
 {
 	setPos(position);
-	mEstimatedPos = position;
+}
+
+void MovableItem::init() {
 	setZValue(ZValue::Moveable);
 	connect(this, &AbstractItem::mouseInteractionStarted, this, [this](){
 			mEstimatedPos = pos();
 		});
+	mImage.reset(new model::Image(defaultImagePath(), false));
+	setTransformOriginPoint(boundingRect().center());
 }
 
 MovableItem::~MovableItem()
@@ -42,7 +46,7 @@ void MovableItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *op
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	mImage.draw(*painter, QRect({-itemSize().width() / 2, -itemSize().height() / 2}, itemSize()));
+	mImage->draw(*painter, QRect({-itemSize().width() / 2, -itemSize().height() / 2}, itemSize()));
 }
 
 void MovableItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
@@ -77,6 +81,9 @@ QDomElement MovableItem::serialize(QDomElement &element) const
 	movableNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
 	movableNode.setAttribute("rotation", QString::number(rotation()));
 	movableNode.setAttribute("startRotation", QString::number(mStartRotation));
+	if (!mImage->external()) {
+		movableNode.setAttribute("imageId", mImage->imageId());
+	}
 	return movableNode;
 }
 
@@ -164,6 +171,21 @@ QPainterPath MovableItem::path() const
 	path.translate(firstP.x(), firstP.y());
 
 	return path;
+}
+
+void MovableItem::resetImage(const QSharedPointer<model::Image> image) {
+	if (image.isNull()) {
+		mImage->loadFrom(defaultImagePath());
+		mImage->setExternal(false);
+	} else {
+		mImage = image;
+	}
+	update();
+}
+
+QSharedPointer<twoDModel::model::Image> MovableItem::image() const
+{
+	return mImage;
 }
 
 SolidItem::BodyType MovableItem::bodyType() const

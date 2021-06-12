@@ -43,19 +43,21 @@ public:
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
 
+	void init();
 	void saveStartPosition();
 	void returnToStartPosition();
-
+	void resetImage(const QSharedPointer<model::Image> image = nullptr);
 	BodyType bodyType() const override;
 	QRectF boundingRect() const override;
 	QPolygonF collidingPolygon() const override;
 	QPainterPath shape () const override;
 	QPainterPath path() const;
-
+	QSharedPointer<model::Image> image() const;
 	virtual QSize itemSize() const = 0;
+	virtual QString defaultImagePath() const = 0;
 
 protected:
-	model::Image mImage;
+	QSharedPointer<model::Image> mImage;
 
 private:
 	QPointF mStartPosition;

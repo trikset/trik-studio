@@ -149,10 +149,10 @@ public:
 	void createMovable(const QDomElement &element);
 
 	/// Creates cube item described by \a element in the world model.
-	void createCube(const QDomElement &element);
+	QSharedPointer<items::CubeItem> createCube(const QDomElement &element);
 
 	/// Creates ball item described by \a element in the world model.
-	void createBall(const QDomElement &element);
+	QSharedPointer<items::BallItem> createBall(const QDomElement &element);
 
 	/// Creates line colored item described by \a element in the world model.
 	void createLine(const QDomElement &element);
