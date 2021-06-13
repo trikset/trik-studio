@@ -22,7 +22,7 @@
 #include "details/event.h"
 #include "twoDModel/engine/model/model.h"
 #include "src/engine/items/wallItem.h"
-#include "src/engine/items/skittleItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/ballItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/regions/regionItem.h"
@@ -156,10 +156,8 @@ void ConstraintsChecker::bindToWorldModelObjects()
 			, this, [this](const QSharedPointer<items::ColorFieldItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
 			, this, [this](const QSharedPointer<items::RegionItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded
-			, this, [this](const QSharedPointer<items::SkittleItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
-			, this, [this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::movableAdded
+			, this, [this](const QSharedPointer<items::MovableItem> &item) { bindObject(item->id(), item.data()); });
 
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
 			, this, [this](const QSharedPointer<QGraphicsItem> &item) {

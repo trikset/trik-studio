@@ -34,8 +34,9 @@ class ErrorReporterInterface;
 namespace twoDModel {
 namespace items {
 class WallItem;
-class SkittleItem;
+class CubeItem;
 class BallItem;
+class MovableItem;
 class ColorFieldItem;
 class ImageItem;
 class RegionItem;
@@ -72,11 +73,8 @@ public:
 	/// Returns a set of walls in the world model. Result is mapping of wall ids to walls themselves.
 	const QMap<QString, QSharedPointer<items::WallItem>> &walls() const;
 
-	/// Returns a set of skittles in the world model. Result is mapping of skittle ids to slittles themselves.
-	const QMap<QString, QSharedPointer<items::SkittleItem>> &skittles() const;
-
-	/// Returns a set of balls in the world model. Result is mapping of ball ids to balls themselves.
-	const QMap<QString, QSharedPointer<items::BallItem>> &balls() const;
+	/// Returns a set of all movable items in the world model. Result is mapping of ids to items themselves.
+	const QMap<QString, QSharedPointer<items::MovableItem>> &movables() const;
 
 	/// Returns a set of color field items in the world model. Result is mapping of field ids to fields themselves.
 	const QMap<QString, QSharedPointer<items::ColorFieldItem>> &colorFields() const;
@@ -96,17 +94,11 @@ public:
 	/// Removes \a wall from the world model.
 	void removeWall(QSharedPointer<items::WallItem> wall);
 
-	/// Appends \a skittle into world model.
-	void addSkittle(const QSharedPointer<items::SkittleItem> &skittle);
+	/// Appends \a movable into world model.
+	void addMovable(const QSharedPointer<items::MovableItem> &movable);
 
-	/// Removes \a skittle from the world model.
-	void removeSkittle(QSharedPointer<items::SkittleItem> skittle);
-
-	/// Appends \a ball into world model.
-	void addBall(const QSharedPointer<items::BallItem> &ball);
-
-	/// Removes \a ball from the world model.
-	void removeBall(QSharedPointer<items::BallItem> ball);
+	/// Removes \a movable from the world model.
+	void removeMovable(QSharedPointer<items::MovableItem> movable);
 
 	/// Appends colored item \a colorField into the world model.
 	void addColorField(const QSharedPointer<items::ColorFieldItem> &colorField);
@@ -153,11 +145,14 @@ public:
 	/// Creates wall item described by \a element in the world model.
 	void createWall(const QDomElement &element);
 
-	/// Creates skittle item described by \a element in the world model.
-	void createSkittle(const QDomElement &element);
+	/// Creates movabel item described by \a element in the world model.
+	void createMovable(const QDomElement &element);
+
+	/// Creates cube item described by \a element in the world model.
+	QSharedPointer<items::CubeItem> createCube(const QDomElement &element);
 
 	/// Creates ball item described by \a element in the world model.
-	void createBall(const QDomElement &element);
+	QSharedPointer<items::BallItem> createBall(const QDomElement &element);
 
 	/// Creates line colored item described by \a element in the world model.
 	void createLine(const QDomElement &element);
@@ -192,11 +187,8 @@ signals:
 	/// Emitted each time when model is appended with some new wall.
 	void wallAdded(const QSharedPointer<items::WallItem> &item);
 
-	/// Emitted each time when model is appended with some new skittle.
-	void skittleAdded(const QSharedPointer<items::SkittleItem> &item);
-
-	/// Emitted each time when model is appended with some new skittle.
-	void ballAdded(const QSharedPointer<items::BallItem> &item);
+	/// Emitted each time when model is appended with some new movable item.
+	void movableAdded(const QSharedPointer<items::MovableItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
 	void colorItemAdded(const QSharedPointer<items::ColorFieldItem> &item);
@@ -232,8 +224,7 @@ private:
 	QRectF deserializeRect(const QString &string) const;
 
 	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
-	QMap<QString, QSharedPointer<items::SkittleItem>> mSkittles;
-	QMap<QString, QSharedPointer<items::BallItem>> mBalls;
+	QMap<QString, QSharedPointer<items::MovableItem>> mMovables;
 	QMap<QString, QSharedPointer<items::ColorFieldItem>> mColorFields;
 	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
 	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;

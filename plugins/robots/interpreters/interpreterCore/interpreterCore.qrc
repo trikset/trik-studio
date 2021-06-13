@@ -15,8 +15,8 @@
         <file>icons/robots_connect.svg</file>
         <file>icons/robots_settings.png</file>
         <file>icons/2d_wall.png</file>
-        <file>icons/2d_can.svg</file>
         <file>icons/2d_ball.svg</file>
+        <file>icons/2d_cube.png</file>
         <file>icons/2d_hand.png</file>
         <file>icons/2d_multiselection.png</file>
         <file>icons/2d_open.png</file>
@@ -26,6 +26,7 @@
         <file>icons/2d_save.png</file>
         <file>icons/2d_target.png</file>
         <file>icons/2d_robot_back.png</file>
+        <file>icons/2d_restore.png</file>
         <file>icons/2d_plus.svg</file>
         <file>icons/2d_minus.svg</file>
         <file>icons/2d_training.svg</file>
@@ -54,7 +55,7 @@
         <file>icons/2d_drawLineCursor.png</file>
         <file>icons/2d_drawStylusCursor.png</file>
         <file>icons/2d_drawWallCursor.png</file>
-        <file>icons/2d_drawCanCursor.png</file>
+        <file>icons/2d_drawCubeCursor.png</file>
         <file>icons/2d_drawBallCursor.png</file>
         <file>icons/2d_drawBezierCursor.png</file>
         <file>icons/2d_drawRectangleCursor.png</file>

@@ -549,7 +549,7 @@
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+184"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
     </message>
@@ -557,17 +557,24 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+184"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
-        <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
+        <translation type="vanished">Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
 </context>
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+46"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+45"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::items::CubeItem</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+45"/>
+        <source>Cube (C)</source>
+        <translation>Кубик (C)</translation>
     </message>
 </context>
 <context>
@@ -617,9 +624,8 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+41"/>
         <source>Can (C)</source>
-        <translation>Банка (C)</translation>
+        <translation type="vanished">Банка (C)</translation>
     </message>
 </context>
 <context>
@@ -654,9 +660,8 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+155"/>
         <location line="+19"/>
-        <location line="+18"/>
         <location line="+38"/>
         <location line="+19"/>
         <source>Trying to add an item with a duplicate id: %1</source>
@@ -668,7 +673,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+450"/>
+        <location line="+448"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -953,6 +958,24 @@
     </message>
 </context>
 <context>
+    <name>twoDModel::view::MovableItemPopup</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/movableItemPopup.cpp" line="+54"/>
+        <source>Restore default image</source>
+        <translation>Восстановить картинку по умолчанию</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Select image</source>
+        <translation>Выберите картинку</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Graphics (*.*)</source>
+        <translation>Графика (*.*)</translation>
+    </message>
+</context>
+<context>
     <name>twoDModel::view::Palette</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/palette.cpp" line="+25"/>
@@ -990,12 +1013,12 @@
     <message>
         <location line="+19"/>
         <source>Select image</source>
-        <translation type="unfinished">Выберите картинку</translation>
+        <translation>Выберите картинку</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Graphics (*.*)</source>
-        <translation type="unfinished">Графика (*.*)</translation>
+        <translation>Графика (*.*)</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -1005,7 +1028,7 @@
     <message>
         <location line="+0"/>
         <source>You must select exactly one any image file or four with the endings &apos;up&apos;, &apos;down&apos;, &apos;right&apos;, and &apos;left&apos;</source>
-        <translation type="unfinished">Вы должны выбрать ровно один любой файл или четыре файла, заканчивающиеся на &apos;up&apos;, &apos;down&apos;, &apos;right&apos; и &apos;left&apos;</translation>
+        <translation>Вы должны выбрать ровно один любой файл или четыре файла, заканчивающиеся на &apos;up&apos;, &apos;down&apos;, &apos;right&apos; и &apos;left&apos;</translation>
     </message>
     <message>
         <location line="+12"/>
@@ -1028,9 +1051,9 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+725"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+693"/>
         <source>Select images</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите картинки</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1055,7 +1078,7 @@
     <message>
         <location line="+1"/>
         <source>Cannot load %1. Try another file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно загрузить %1. Попробуйте другой файл.</translation>
     </message>
     <message>
         <source>Cannot load file. Try another one.</source>
@@ -1065,7 +1088,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+322"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1083,7 +1106,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+91"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>

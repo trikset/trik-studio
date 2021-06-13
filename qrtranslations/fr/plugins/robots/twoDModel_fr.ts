@@ -273,24 +273,24 @@
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+184"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Le programme est terminé, mais la tache n&apos;est pas accomplie.</translation>
     </message>
 </context>
 <context>
-    <name>twoDModel::engine::TwoDModelEngineFacade</name>
+    <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+184"/>
-        <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+45"/>
+        <source>Ball (B)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>twoDModel::items::BallItem</name>
+    <name>twoDModel::items::CubeItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+46"/>
-        <source>Ball (B)</source>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+45"/>
+        <source>Cube (C)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -335,14 +335,6 @@
     </message>
 </context>
 <context>
-    <name>twoDModel::items::SkittleItem</name>
-    <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+41"/>
-        <source>Can (C)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>twoDModel::items::StylusItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
@@ -374,9 +366,8 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+155"/>
         <location line="+19"/>
-        <location line="+18"/>
         <location line="+38"/>
         <location line="+19"/>
         <source>Trying to add an item with a duplicate id: %1</source>
@@ -388,7 +379,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+450"/>
+        <location line="+448"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -610,6 +601,24 @@
     </message>
 </context>
 <context>
+    <name>twoDModel::view::MovableItemPopup</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/movableItemPopup.cpp" line="+54"/>
+        <source>Restore default image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Select image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Graphics (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>twoDModel::view::Palette</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/palette.cpp" line="+25"/>
@@ -685,7 +694,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+725"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+693"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
@@ -718,7 +727,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+322"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -736,7 +745,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+91"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>

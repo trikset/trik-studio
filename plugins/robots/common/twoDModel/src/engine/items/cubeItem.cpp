@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "skittleItem.h"
+#include "cubeItem.h"
 
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
@@ -22,54 +22,60 @@
 
 using namespace twoDModel::items;
 
-SkittleItem::SkittleItem(const QPointF &position)
+const QString defaultPath = ":/icons/2d_cube.png";
+
+CubeItem::CubeItem(const QPointF &position)
 	:MovableItem(position)
 {
-	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
-	setTransformOriginPoint(boundingRect().center());
+	init();
 }
 
-QSize SkittleItem::itemSize() const
+QString CubeItem::defaultImagePath() const
 {
-	return skittleSize;
+	return defaultPath;
 }
 
-QAction *SkittleItem::skittleTool()
+QSize CubeItem::itemSize() const
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
+	return cubeSize;
+}
+
+QAction *CubeItem::cubeTool()
+{
+	QAction * const result = new QAction(QIcon(defaultPath), tr("Cube (C)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_C), QKeySequence(Qt::Key_3)});
 	result->setCheckable(true);
 	return result;
 }
 
-QDomElement SkittleItem::serialize(QDomElement &element) const
+QDomElement CubeItem::serialize(QDomElement &element) const
 {
-	QDomElement skittleNode = MovableItem::serialize(element);
-	skittleNode.setTagName("skittle");
-	return skittleNode;
+	QDomElement cubeNode = MovableItem::serialize(element);
+	cubeNode.setAttribute("type", "cube");
+	return cubeNode;
 }
 
-qreal SkittleItem::angularDamping() const
-{
-	return 6.0;
-}
-
-qreal SkittleItem::linearDamping() const
+qreal CubeItem::angularDamping() const
 {
 	return 6.0;
 }
 
-bool SkittleItem::isCircle() const
+qreal CubeItem::linearDamping() const
 {
-	return true;
+	return 6.0;
 }
 
-qreal SkittleItem::mass() const
+bool CubeItem::isCircle() const
+{
+	return false;
+}
+
+qreal CubeItem::mass() const
 {
 	return 0.05;
 }
 
-qreal SkittleItem::friction() const
+qreal CubeItem::friction() const
 {
 	return 0.2;
 }

@@ -80,6 +80,7 @@ HEADERS += \
 	$$PWD/src/engine/view/parts/colorItemPopup.h \
 	$$PWD/src/engine/view/parts/imageItemPopup.h \
 	$$PWD/src/engine/view/parts/robotItemPopup.h \
+	$$PWD/src/engine/view/parts/movableItemPopup.h \
 	$$PWD/src/engine/view/parts/speedPopup.h \
 	$$PWD/src/engine/view/parts/ruler.h \
 	$$PWD/src/engine/constraints/constraintsChecker.h \
@@ -103,7 +104,8 @@ HEADERS += \
 	$$PWD/src/engine/items/rectangleItem.h \
 	$$PWD/src/engine/items/ellipseItem.h \
 	$$PWD/src/engine/items/imageItem.h \
-	$$PWD/src/engine/items/skittleItem.h \
+	$$PWD/src/engine/items/movableItem.h \
+	$$PWD/src/engine/items/cubeItem.h \
 	$$PWD/src/engine/items/ballItem.h \
 	$$PWD/src/engine/items/startPosition.h \
 	$$PWD/src/engine/items/regions/regionItem.h \
@@ -146,6 +148,7 @@ SOURCES += \
 	$$PWD/src/engine/view/parts/colorItemPopup.cpp \
 	$$PWD/src/engine/view/parts/imageItemPopup.cpp \
 	$$PWD/src/engine/view/parts/robotItemPopup.cpp \
+	$$PWD/src/engine/view/parts/movableItemPopup.cpp \
 	$$PWD/src/engine/view/parts/speedPopup.cpp \
 	$$PWD/src/engine/view/parts/ruler.cpp \
 	$$PWD/src/engine/model/model.cpp \
@@ -169,7 +172,8 @@ SOURCES += \
 	$$PWD/src/engine/items/rectangleItem.cpp \
 	$$PWD/src/engine/items/ellipseItem.cpp \
 	$$PWD/src/engine/items/imageItem.cpp \
-	$$PWD/src/engine/items/skittleItem.cpp \
+	$$PWD/src/engine/items/movableItem.cpp \
+	$$PWD/src/engine/items/cubeItem.cpp \
 	$$PWD/src/engine/items/ballItem.cpp \
 	$$PWD/src/engine/items/startPosition.cpp \
 	$$PWD/src/engine/items/regions/regionItem.cpp \

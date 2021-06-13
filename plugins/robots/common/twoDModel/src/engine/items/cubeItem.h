@@ -19,17 +19,17 @@
 namespace twoDModel {
 namespace items {
 
-class SkittleItem : public MovableItem
+class CubeItem : public MovableItem
 {
 	Q_OBJECT
-	Q_DISABLE_COPY(SkittleItem)
+	Q_DISABLE_COPY(CubeItem)
 
 public:
-	explicit SkittleItem(const QPointF &position);
+	explicit CubeItem(const QPointF &position);
 
-	/// Creates and returns skittle item for 2D model palette.
+	/// Creates and returns cube item for 2D model palette.
 	/// Transfers ownership.
-	static QAction *skittleTool();
+	static QAction *cubeTool();
 
 	QDomElement serialize(QDomElement &element) const override;
 
@@ -39,6 +39,7 @@ public:
 	qreal angularDamping() const override;
 	qreal linearDamping() const override;
 	QSize itemSize() const override;
+	QString defaultImagePath() const override;
 };
 
 }

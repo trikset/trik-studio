@@ -31,7 +31,7 @@ namespace twoDModel {
 
 namespace items {
 class StartPosition;
-class BallItem;
+class MovableItem;
 }
 
 namespace model {

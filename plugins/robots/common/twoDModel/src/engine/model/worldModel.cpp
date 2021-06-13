@@ -23,7 +23,7 @@
 #include "twoDModel/engine/model/image.h"
 
 #include "src/engine/items/wallItem.h"
-#include "src/engine/items/skittleItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/ballItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/curveItem.h"
@@ -143,14 +143,9 @@ const QMap<QString, QSharedPointer<items::WallItem> > &WorldModel::walls() const
 	return mWalls;
 }
 
-const QMap<QString, QSharedPointer<items::SkittleItem>> &WorldModel::skittles() const
+const QMap<QString, QSharedPointer<items::MovableItem>> &WorldModel::movables() const
 {
-	return mSkittles;
-}
-
-const QMap<QString, QSharedPointer<items::BallItem>> &WorldModel::balls() const
-{
-	return mBalls;
+	return mMovables;
 }
 
 void WorldModel::addWall(const QSharedPointer<items::WallItem> &wall)
@@ -172,40 +167,22 @@ void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 	emit itemRemoved(wall);
 }
 
-void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
+void WorldModel::addMovable(const QSharedPointer<items::MovableItem> &movable)
 {
-	const QString id = skittle->id();
-	if (mSkittles.contains(id)) {
+	const QString id = movable->id();
+	if (mMovables.contains(id)) {
 		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
 		return; // probably better than having no way to delete those duplicate items on the scene
 	}
 
-	mSkittles[id] = skittle;
-	emit skittleAdded(skittle);
+	mMovables[id] = movable;
+	emit movableAdded(movable);
 }
 
-void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
+void WorldModel::removeMovable(QSharedPointer<items::MovableItem> movable)
 {
-	mSkittles.remove(skittle->id());
-	emit itemRemoved(skittle);
-}
-
-void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
-{
-	const QString id = ball->id();
-	if (mBalls.contains(id)) {
-		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
-		return; // probably better than having no way to delete those duplicate items on the scene
-	}
-
-	mBalls[id] = ball;
-	emit ballAdded(ball);
-}
-
-void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
-{
-	mBalls.remove(ball->id());
-	emit itemRemoved(ball);
+	mMovables.remove(movable->id());
+	emit itemRemoved(movable);
 }
 
 const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFields() const
@@ -285,12 +262,8 @@ void WorldModel::clear()
 		removeWall(mWalls.last());
 	}
 
-	while (!mSkittles.isEmpty()) {
-		removeSkittle(mSkittles.last());
-	}
-
-	while (!mBalls.isEmpty()) {
-		removeBall(mBalls.last());
+	while (!mMovables.isEmpty()) {
+		removeMovable(mMovables.last());
 	}
 
 	while (!mColorFields.isEmpty()) {
@@ -359,12 +332,8 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 		path.addPath(wall->path());
 	}
 
-	for (auto &&skittle: mSkittles) {
-		path.addPath(skittle->path());
-	}
-
-	for (auto &&ball: mBalls) {
-		path.addPath(ball->path());
+	for (auto &&movable: mMovables) {
+		path.addPath(movable->path());
 	}
 
 	return path;
@@ -411,16 +380,10 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 		mWalls[wall]->serialize(walls);
 	}
 
-	QDomElement skittles = parent.ownerDocument().createElement("skittles");
-	result.appendChild(skittles);
-	for (auto &&skittle : mSkittles) {
-		skittle->serialize(skittles);
-	}
-
-	QDomElement balls = parent.ownerDocument().createElement("balls");
-	result.appendChild(balls);
-	for (auto &&ball : mBalls) {
-		ball->serialize(balls);
+	QDomElement movables = parent.ownerDocument().createElement("movables");
+	result.appendChild(movables);
+	for (auto &&movable : mMovables) {
+		movable->serialize(movables);
 	}
 
 	QDomElement colorFields = parent.ownerDocument().createElement("colorFields");
@@ -464,6 +427,18 @@ QDomElement WorldModel::serializeBlobs(QDomElement &parent) const
 		QDomElement image = parent.ownerDocument().createElement("image");
 		mImageItems[imageItem]->image()->serialize(image);
 		images.appendChild(image);
+	}
+
+	QSet<QString> usedIds;
+	for (const QString &movableItem : mMovables.keys()) {
+		const auto img = mMovables[movableItem]->image();
+		if (usedIds.contains(img->imageId())) {
+			continue;
+		}
+		QDomElement image = parent.ownerDocument().createElement("image");
+		img->serialize(image);
+		images.appendChild(image);
+		usedIds << img->imageId();
 	}
 
 	if (!images.childNodes().isEmpty()) {
@@ -543,19 +518,11 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	for (QDomElement skittlesNode = element.firstChildElement("skittles"); !skittlesNode.isNull()
-			; skittlesNode = skittlesNode.nextSiblingElement("skittles")) {
-		for (QDomElement skittleNode = skittlesNode.firstChildElement("skittle"); !skittleNode.isNull()
-				; skittleNode = skittleNode.nextSiblingElement("skittle")) {
-			createSkittle(skittleNode);
-		}
-	}
-
-	for (QDomElement ballsNode = element.firstChildElement("balls"); !ballsNode.isNull()
-			; ballsNode = ballsNode.nextSiblingElement("balls")) {
-		for (QDomElement ballNode = ballsNode.firstChildElement("ball"); !ballNode.isNull()
-				; ballNode = ballNode.nextSiblingElement("ball")) {
-			createBall(ballNode);
+	for (QDomElement movablesNode = element.firstChildElement("movables"); !movablesNode.isNull()
+			; movablesNode = movablesNode.nextSiblingElement("movables")) {
+		for (QDomElement movableNode = movablesNode.firstChildElement("movable"); !movableNode.isNull()
+				; movableNode = movableNode.nextSiblingElement("movable")) {
+			createMovable(movableNode);
 		}
 	}
 
@@ -603,12 +570,8 @@ QSharedPointer<QGraphicsObject> WorldModel::findId(const QString &id) const
 		return mWalls[id];
 	}
 
-	if (mSkittles.contains(id)) {
-		return mSkittles[id];
-	}
-
-	if (mBalls.contains(id)) {
-		return mBalls[id];
+	if (mMovables.contains(id)) {
+		return mMovables[id];
 	}
 
 	if (mColorFields.contains(id)) {
@@ -642,10 +605,8 @@ void WorldModel::createElement(const QDomElement &element)
 		createImageItem(element, element.hasAttribute("background"));
 	} else if (element.tagName() == "wall") {
 		createWall(element);
-	} else if (element.tagName() == "skittle") {
-		createSkittle(element);
-	} else if (element.tagName() == "ball") {
-		createBall(element);
+	} else if (element.tagName() == "movable") {
+		createMovable(element);
 	} else if (element.tagName() == "region") {
 		createRegion(element);
 	}
@@ -658,18 +619,32 @@ void WorldModel::createWall(const QDomElement &element)
 	addWall(wall);
 }
 
-void WorldModel::createSkittle(const QDomElement &element)
+void WorldModel::createMovable(const QDomElement &element)
 {
-	auto skittle = QSharedPointer<items::SkittleItem>::create(QPointF());
-	skittle->deserialize(element);
-	addSkittle(skittle);
+	const auto imageId = element.attribute("imageId");
+	const auto image = mImages.value(imageId, nullptr);
+	QSharedPointer<items::MovableItem> movable;
+	if (element.attribute("type") == "cube") {
+		movable = createCube(element);
+	} else {
+		movable = createBall(element);
+	}
+	movable->resetImage(image);
+	addMovable(movable);
 }
 
-void WorldModel::createBall(const QDomElement &element)
+QSharedPointer<items::CubeItem> WorldModel::createCube(const QDomElement &element)
+{
+	auto cube = QSharedPointer<items::CubeItem>::create(QPointF());
+	cube->deserialize(element);
+	return cube;
+}
+
+QSharedPointer<items::BallItem> WorldModel::createBall(const QDomElement &element)
 {
 	auto ball = QSharedPointer<items::BallItem>::create(QPointF());
 	ball->deserialize(element);
-	addBall(ball);
+	return ball;
 }
 
 void WorldModel::createLine(const QDomElement &element)
@@ -759,10 +734,8 @@ void WorldModel::removeItem(const QString &id)
 		removeWall(wall);
 	} else if (auto colorItem = qSharedPointerDynamicCast<items::ColorFieldItem>(item)) {
 		removeColorField(colorItem);
-	} else if (auto skittleItem = qSharedPointerDynamicCast<items::SkittleItem>(item)) {
-		removeSkittle(skittleItem);
-	} else if (auto ballItem = qSharedPointerDynamicCast<items::BallItem>(item)) {
-		removeBall(ballItem);
+	} else if (auto movableItem = qSharedPointerDynamicCast<items::MovableItem>(item)) {
+		removeMovable(movableItem);
 	} else if (auto image = qSharedPointerDynamicCast<items::ImageItem>(item)) {
 		removeImageItem(image);
 	}
