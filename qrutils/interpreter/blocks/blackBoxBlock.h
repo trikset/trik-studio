@@ -35,13 +35,16 @@ public:
 	void finishedSteppingInto() override;
 
 private slots:
-	void onCellChanged(int row, int col);
+	void onChanged(QTableWidgetItem* item);
+	void onDoubleClick(QTableWidgetItem* item);
 	void finishTable();
 
 private:
+	void setNotEditable(QTableWidgetItem* item);
 	int lastRaw();
 	QTableWidget* mTable;
-	QList<QMetaObject::Connection> mConnections;
+	QTableWidgetItem* inputItem;
+	QTableWidgetItem* outputItem;
 };
 
 }

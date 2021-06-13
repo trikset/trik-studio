@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "blackBoxBlock.h"
-#include <QMetaObject>
 #include <QHeaderView>
 
 using namespace qReal::interpretation::blocks;
@@ -26,37 +25,48 @@ enum Column {
 BlackBoxBlock::BlackBoxBlock()
 	: mTable(new QTableWidget(1, 2))
 {
-	mTable->setItem(lastRaw(), input, new QTableWidgetItem());
+	inputItem = new QTableWidgetItem();
+	outputItem = new QTableWidgetItem("Finish");
+	setNotEditable(outputItem);
+	mTable->setItem(lastRaw(), input, inputItem);
+	mTable->setItem(lastRaw(), output, outputItem);
 	mTable->setVisible(false);
 	mTable->setHorizontalHeaderLabels({"input", "output"});
 	mTable->setAttribute(Qt::WA_DeleteOnClose);
 	mTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
+	mTable->setWindowFlag(Qt::WindowStaysOnTopHint);
+	mTable->resize(280, 720);
+	mTable->move(170, 200);
 	connect(mTable, &QWidget::destroyed, this, &BlackBoxBlock::finishTable);
-	connect(mTable, &QTableWidget::cellChanged, this, &BlackBoxBlock::onCellChanged);
+	connect(mTable, &QTableWidget::itemChanged, this, &BlackBoxBlock::onChanged);
+	connect(mTable, &QTableWidget::itemDoubleClicked, this, &BlackBoxBlock::onDoubleClick);
+}
+
+void BlackBoxBlock::setNotEditable(QTableWidgetItem* item) {
+	item->setFlags(item->flags() ^ Qt::ItemIsEditable);
 }
 
 void BlackBoxBlock::run()
 {
+	mTable->setWindowTitle("Black Box");
 	mTable->setVisible(true);
 }
 
-void BlackBoxBlock::onCellChanged(int row, int col) {
-	if (row == lastRaw() && col == input && !mTable->item(row, col)->text().isEmpty()) {
+void BlackBoxBlock::onDoubleClick(QTableWidgetItem* item) {
+	if (item == outputItem) {
+		mTable->removeRow(lastRaw());
+		finishTable();
+	}
+}
+
+void BlackBoxBlock::onChanged(QTableWidgetItem* item) {
+	if (item == inputItem && !item->text().isEmpty()) {
 		// Find subprogram diagram
 		const Id logicalId = mGraphicalModelApi->logicalId(id());
 		const Id logicalDiagram = mLogicalModelApi->logicalRepoApi().outgoingExplosion(logicalId);
 		const IdList diagrams = mGraphicalModelApi->graphicalIdsByLogicalId(logicalDiagram);
 		if (!diagrams.isEmpty()) {
-			// Add next row
-			mTable->insertRow(mTable->rowCount());
-			mTable->setItem(lastRaw(), input, new QTableWidgetItem());
-			// Set last input not editable
-			auto inputItem = mTable->item(lastRaw() - 1, input);
-			inputItem->setFlags(inputItem->flags() ^ Qt::ItemIsEditable);
-			// Set input value
 			evalCode(mTable->horizontalHeaderItem(input)->text() + " = " + inputItem->text());
-			// Goto subprogram
 			emit stepInto(diagrams[0]);
 		} else {
 			error("Can't find diagram");
@@ -66,13 +76,24 @@ void BlackBoxBlock::onCellChanged(int row, int col) {
 
 void BlackBoxBlock::finishedSteppingInto()
 {
-	// Put output to table and set it not editable
+	auto lastInput = inputItem->text();
+	inputItem->setText("");
+
+	// Add raw for results
+	mTable->insertRow(mTable->rowCount() - 1);
+
+	auto curInput = new QTableWidgetItem(lastInput);
+	setNotEditable(curInput);
+	mTable->setItem(lastRaw() - 1, input, curInput);
+
 	auto res = evalCode<QString>(mTable->horizontalHeaderItem(output)->text());
-	auto item = new QTableWidgetItem(res);
-	item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-	mTable->setItem(lastRaw() - 1, output, item);
+	auto curOutput = new QTableWidgetItem(res);
+	setNotEditable(curOutput);
+	mTable->setItem(lastRaw() - 1, output, curOutput);
+
 	// Goto start
-	mTable->setCurrentCell(lastRaw(), input);
+	mTable->setCurrentItem(inputItem);
+	mTable->scrollToItem(inputItem);
 	emit done(id());
 }
 
