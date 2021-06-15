@@ -170,6 +170,11 @@
 					<container>
 						<contains type="AbstractNode"/>
 					</container>
+					<properties>
+						<property displayedName="Finished" type="bool" name="finished">
+							<default>false</default>
+						</property>
+					</properties>
 				</logic>
 			</node>
 			<node displayedName="Final Node" name="FinalNode" path="13, 200 : 198, 15 :  | 12, 12 : 198, 198 : " description="The final node of the program. If the program consists of some parallel execution lines the reachment of this block terminates the corresponding execution line. This block can`t have outgoing links.">

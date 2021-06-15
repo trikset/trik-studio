@@ -1101,7 +1101,7 @@ void MainWindow::openNewTab(const QModelIndex &arg)
 
 	const Id diagramId = models().graphicalModelAssistApi().idByIndex(index);
 	if (diagramId.element() == "BlackBoxDiagram" && models().logicalRepoApi().property(
-			models().graphicalModelAssistApi().logicalId(diagramId), "finished") == "true") {
+			models().graphicalModelAssistApi().logicalId(diagramId), "finished").toBool() == true) {
 		return;
 	}
 

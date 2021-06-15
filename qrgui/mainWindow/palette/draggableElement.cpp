@@ -39,6 +39,7 @@
 #include "editor/editorViewScene.h"
 
 #include <plugins/pluginManager/toolPluginManager.h>
+#include <models/commands/changePropertyCommand.h>
 
 using namespace qReal;
 using namespace gui;
@@ -353,25 +354,38 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 			menu->exec(QCursor::pos());
 		} else if (!mData.explosionTarget().isNull()) {
 			QMenu * const menu = new QMenu();
-			if (mMainWindow.toolManager().customizer()->allowSubprogramPropertiesChanging()) {
-				QAction * const changePropertiesAction = menu->addAction(tr("Change Properties"));
-				connect(changePropertiesAction, &QAction::triggered, this
-						, &DraggableElement::changeDynamicPropertiesPaletteActionTriggered);
-				changePropertiesAction->setData(explosionTarget().toVariant());
-
-				QAction * const deleteElementAction = menu->addAction(tr("Delete"));
-				auto removeElement = [&](){
-					auto localRemoveElementsCommand = new commands::RemoveElementsCommand(mMainWindow.models());
-					mMainWindow.controller()->executeGlobal(localRemoveElementsCommand->withLogicalItemToDelete(
-							mData.explosionTarget()));
-				};
-
-				connect(deleteElementAction, &QAction::triggered
-						, this
-						, removeElement
-						, Qt::QueuedConnection);
+			if (explosionTarget().element() == "SubprogramDiagram") {
+				if (mMainWindow.toolManager().customizer()->allowSubprogramPropertiesChanging()) {
+					QAction * const changePropertiesAction = menu->addAction(tr("Change Properties"));
+					connect(changePropertiesAction, &QAction::triggered, this
+							, &DraggableElement::changeDynamicPropertiesPaletteActionTriggered);
+					changePropertiesAction->setData(explosionTarget().toVariant());
+				}
+			} else if (explosionTarget().element() == "BlackBoxDiagram") {
+				QAction * const finishBlackBoxAction = menu->addAction(tr("Finish black box"));
+				finishBlackBoxAction->setData(explosionTarget().toVariant());
+				connect(finishBlackBoxAction, &QAction::triggered, this, [this](){
+						const QAction * const action = static_cast<const QAction *>(sender());
+						auto command = new commands::ChangePropertyCommand(
+								&mMainWindow.models().logicalModelAssistApi()
+								, "finished"
+								, action->data().value<Id>()
+								, QVariant(true)
+						);
+						mMainWindow.controller()->execute(command);
+				});
 			}
 
+			QAction * const deleteElementAction = menu->addAction(tr("Delete"));
+			auto removeElement = [&](){
+				auto localRemoveElementsCommand = new commands::RemoveElementsCommand(mMainWindow.models());
+				mMainWindow.controller()->executeGlobal(localRemoveElementsCommand->withLogicalItemToDelete(
+						mData.explosionTarget()));
+			};
+			connect(deleteElementAction, &QAction::triggered
+					, this
+					, removeElement
+					, Qt::QueuedConnection);
 			menu->exec(QCursor::pos());
 		}
 	} else {

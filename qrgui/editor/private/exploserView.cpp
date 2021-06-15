@@ -25,6 +25,7 @@
 #include "editor/editorViewScene.h"
 #include "editor/sceneCustomizer.h"
 #include "editor/commands/expandCommand.h"
+#include <models/commands/changePropertyCommand.h>
 
 using namespace qReal;
 using namespace qReal::commands;
@@ -146,6 +147,20 @@ void ExploserView::createConnectionSubmenus(QMenu &contextMenu, const Element * 
 					, &ExploserView::changeDynamicPropertiesActionTriggered);
 			changeDynamicPropertiesAction->setData(target.toVariant());
 		}
+	} else if (element->id().element() == "BlackBox") {
+		const Id target = mLogicalApi.logicalRepoApi().outgoingExplosion(element->logicalId());
+		QAction * const finishBlackBoxAction = contextMenu.addAction(tr("Finish black box"));
+		finishBlackBoxAction->setData(target.toVariant());
+		connect(finishBlackBoxAction, &QAction::triggered, this, [this](){
+				const QAction * const action = static_cast<const QAction *>(sender());
+				auto command = new qReal::commands::ChangePropertyCommand(
+						&mLogicalApi
+						, "finished"
+						, action->data().value<Id>()
+						, QVariant(true)
+				);
+				mController.execute(command);
+		});
 	}
 
 	const QList<const Explosion *> explosions = mLogicalApi.editorManagerInterface().explosions(element->id().type());
@@ -169,7 +184,7 @@ void ExploserView::handleDoubleClick(const Id &id)
 {
 	Id outgoingLink = mLogicalApi.logicalRepoApi().outgoingExplosion(id);
 	if (outgoingLink.element() == "BlackBoxDiagram"
-			&& mLogicalApi.logicalRepoApi().property(outgoingLink, "finished") == "true") {
+			&& mLogicalApi.logicalRepoApi().property(outgoingLink, "finished").toBool() == true) {
 		return;
 	}
 	if (outgoingLink.isNull()) {
