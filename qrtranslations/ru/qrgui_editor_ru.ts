@@ -280,13 +280,13 @@
 <context>
     <name>qReal::gui::editor::view::details::ExploserView</name>
     <message>
-        <location filename="../../qrgui/editor/private/exploserView.cpp" line="+80"/>
-        <location line="+111"/>
+        <location filename="../../qrgui/editor/private/exploserView.cpp" line="+81"/>
+        <location line="+129"/>
         <source>New </source>
         <translation>Новый </translation>
     </message>
     <message>
-        <location line="-61"/>
+        <location line="-79"/>
         <location line="+14"/>
         <source>Change Properties</source>
         <translation>Изменить свойства</translation>
@@ -300,6 +300,11 @@
         <location line="+4"/>
         <source>Add element to palette</source>
         <translation>Добавить элемент в палитру</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Finish black box</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
