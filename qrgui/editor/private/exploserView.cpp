@@ -168,6 +168,10 @@ void ExploserView::createConnectionSubmenus(QMenu &contextMenu, const Element * 
 void ExploserView::handleDoubleClick(const Id &id)
 {
 	Id outgoingLink = mLogicalApi.logicalRepoApi().outgoingExplosion(id);
+	if (outgoingLink.element() == "BlackBoxDiagram"
+			&& mLogicalApi.logicalRepoApi().property(outgoingLink, "finished") == "true") {
+		return;
+	}
 	if (outgoingLink.isNull()) {
 		const QList<const Explosion *> explosions = mLogicalApi.editorManagerInterface().explosions(id);
 		if (!explosions.isEmpty()) {

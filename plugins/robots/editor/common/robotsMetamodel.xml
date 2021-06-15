@@ -274,7 +274,7 @@
 						<parent parentName="AbstractNode"/>
 					</generalizations>
 					<explodesTo>
-						<target type="BlackBoxDiagramGroup" makeReusable="false" requireImmediateLinkage="true"/>
+						<target type="BlackBoxDiagramGroup" makeReusable="true" requireImmediateLinkage="true"/>
 					</explodesTo>
 				</logic>
 			</node>

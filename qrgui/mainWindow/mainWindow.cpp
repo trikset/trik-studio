@@ -1099,6 +1099,12 @@ void MainWindow::openNewTab(const QModelIndex &arg)
 		index = index.parent();
 	}
 
+	const Id diagramId = models().graphicalModelAssistApi().idByIndex(index);
+	if (diagramId.element() == "BlackBoxDiagram" && models().logicalRepoApi().property(
+			models().graphicalModelAssistApi().logicalId(diagramId), "finished") == "true") {
+		return;
+	}
+
 	int tabNumber = -1;
 	for (int i = 0; i < mUi->tabs->count(); ++i) {
 		EditorView *tab = (dynamic_cast<EditorView *>(mUi->tabs->widget(i)));
@@ -1111,7 +1117,6 @@ void MainWindow::openNewTab(const QModelIndex &arg)
 	if (tabNumber != -1) {
 		mUi->tabs->setCurrentIndex(tabNumber);
 	} else {
-		const Id diagramId = models().graphicalModelAssistApi().idByIndex(index);
 		EditorView * const view = new EditorView(models(), *controller(), *mSceneCustomizer, diagramId, this);
 		view->mutableScene().enableMouseGestures(qReal::SettingsManager::value("gesturesEnabled").toBool());
 		SettingsListener::listen("gesturesEnabled", &(view->mutableScene()), &EditorViewScene::enableMouseGestures);
