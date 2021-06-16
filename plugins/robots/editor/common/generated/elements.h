@@ -68,6 +68,14 @@
 			label_1->setHard(true);
 			label_1->setPlainTextMode(false);
 			addLabel(label_1);
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.66, 1.2, "inputsCount", false, 0));
+			label_2->setBackground(Qt::white);
+			label_2->setScalingX(false);
+			label_2->setScalingY(false);
+			label_2->setHard(false);
+			label_2->setPlainTextMode(false);
+			label_2->setPrefix(QObject::tr("Number of inputs:"));
+			addLabel(label_2);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/BlackBoxClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -90,6 +98,7 @@
 
 		void initProperties()
 		{
+			addProperty("inputsCount", "int", QString::fromUtf8("1"), QObject::tr("Inputs count"), QObject::tr(""), false);
 		}
 	};
 

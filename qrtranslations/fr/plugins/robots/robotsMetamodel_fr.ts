@@ -8,7 +8,7 @@
         <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+984"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+993"/>
         <source>X:</source>
         <translation>X :</translation>
     </message>
@@ -290,12 +290,12 @@
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location line="-1453"/>
+        <location line="-1462"/>
         <source>AbstractNode</source>
         <translation>AbstractNode</translation>
     </message>
     <message>
-        <location line="+135"/>
+        <location line="+144"/>
         <source>Clear Screen</source>
         <translation>Effacer l&apos;écran</translation>
     </message>
@@ -652,7 +652,7 @@
         <translation>x</translation>
     </message>
     <message>
-        <location line="-1443"/>
+        <location line="-1452"/>
         <source>Black Box</source>
         <translation type="unfinished"></translation>
     </message>
@@ -662,7 +662,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+14"/>
+        <source>Number of inputs:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Inputs count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>Black Box Diagram</source>
         <translation type="unfinished"></translation>
     </message>
