@@ -108,7 +108,7 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 		fileName += ".tsj";
 	}
 
-	qReal::IdList subprograms = mLogicalModel->logicalRepoApi().elementsByType("SubprogramDiagram", true, false);
+	qReal::IdList subprograms = subprogramsList();
 	QSet<QString> uniqueNames;
 	QMap<QString, qReal::Id> nameToId;
 
@@ -189,7 +189,7 @@ void SubprogramsImporterExporterPlugin::saveToCollectionTriggered() const
 		collectionDirectory.cd(kit);
 	}
 
-	qReal::IdList subprograms = mLogicalModel->logicalRepoApi().elementsByType("SubprogramDiagram", true, false);
+	qReal::IdList subprograms = subprogramsList();
 	QSet<QString> uniqueNames;
 
 	for (const qReal::Id &id : subprograms) {
@@ -307,10 +307,9 @@ bool SubprogramsImporterExporterPlugin::checkOpenedProject() const
 
 bool SubprogramsImporterExporterPlugin::checkSubprogramsForUniqueNames() const
 {
-	qReal::IdList subprograms = mLogicalModel->logicalRepoApi().elementsByType("SubprogramDiagram", true, false);
 	QMap<qReal::Id, QString> idToName;
 
-	for (const qReal::Id &id : subprograms) {
+	for (const qReal::Id &id : subprogramsList()) {
 		QString name = mGraphicalModel->name(id);
 		if (not name.isNull()) {
 			idToName[id] = name;
@@ -332,7 +331,7 @@ void SubprogramsImporterExporterPlugin::innerSubprograms(const qReal::Id &id, qR
 	for (auto const &chId : children) {
 		qReal::Id logicalId = mGraphicalModel->graphicalRepoApi().logicalId(chId);
 		qReal::Id outgoingExplosion = mLogicalModel->logicalRepoApi().outgoingExplosion(logicalId);
-		if (outgoingExplosion.element() == "SubprogramDiagram") {
+		if (outgoingExplosion.element() == "SubprogramDiagram" || outgoingExplosion.element() == "BlackBoxDiagram") {
 			qReal::IdList diagrams = mGraphicalModel->graphicalIdsByLogicalId(outgoingExplosion);
 			if (!list.contains(diagrams.first())) {
 				list.append(diagrams.first());
@@ -352,6 +351,12 @@ QStringList SubprogramsImporterExporterPlugin::currentlySavedSubprograms() const
 	std::transform(list.begin(), list.end(), list.begin(), [](QString &str){ str.chop(4); return str; });
 
 	return list;
+}
+
+qReal::IdList SubprogramsImporterExporterPlugin::subprogramsList() const
+{
+	return mLogicalModel->logicalRepoApi().elementsByType("SubprogramDiagram", true, false)
+			+ mLogicalModel->logicalRepoApi().elementsByType("BlackBoxDiagram", true, false);
 }
 
 QMap<QString, bool> SubprogramsImporterExporterPlugin::markLeftExistedInRight(const QStringList &left

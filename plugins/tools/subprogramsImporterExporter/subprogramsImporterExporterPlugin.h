@@ -58,6 +58,7 @@ private:
 	QStringList currentlySavedSubprograms() const;
 	QMap<QString, bool> markLeftExistedInRight(const QStringList &left, const QStringList &right) const;
 
+	qReal::IdList subprogramsList() const;
 	bool checkOpenedProject() const;
 	bool checkSubprogramsForUniqueNames() const;
 	void innerSubprograms(const qReal::Id &id, qReal::IdList &list) const;

@@ -121,7 +121,7 @@
         <translation>Нет открытого проекта</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+21"/>
         <source>There are different subprograms with the same name in your project. Please make them unique.</source>
         <translation>В проекте есть разные подпрограммы с одинаковыми именами. Пожалуйтса, сделайте имена уникальными.</translation>
     </message>
