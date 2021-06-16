@@ -1785,7 +1785,7 @@ IdList MainWindow::openedDiagrams() const
 					&& diagramId.diagram() == "RobotsDiagram"
 					&& (diagramId.element() == "RobotsDiagramNode"
 						|| diagramId.element() == "SubprogramDiagram"
-						|| diagramId.element() == "BlackBoxDiagram")) { //IKHON
+						|| diagramId.element() == "BlackBoxDiagram")) {
 				result << diagram->mvIface().rootId();
 			}
 		}
