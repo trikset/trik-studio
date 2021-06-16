@@ -23,19 +23,11 @@ enum Column {
 };
 
 BlackBoxBlock::BlackBoxBlock()
-	: mTable(new QTableWidget(1, 2))
+	: mTable(new QTableWidget(1, 0))
 {
-	inputItem = new QTableWidgetItem();
-	outputItem = new QTableWidgetItem("Finish");
-	setNotEditable(outputItem);
-	mTable->setItem(lastRaw(), input, inputItem);
-	mTable->setItem(lastRaw(), output, outputItem);
-	mTable->setVisible(false);
-	mTable->setHorizontalHeaderLabels({"input", "output"});
 	mTable->setAttribute(Qt::WA_DeleteOnClose);
 	mTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	mTable->setWindowFlag(Qt::WindowStaysOnTopHint);
-	mTable->resize(280, 720);
 	mTable->move(170, 200);
 	connect(mTable, &QWidget::destroyed, this, &BlackBoxBlock::finishTable);
 	connect(mTable, &QTableWidget::itemChanged, this, &BlackBoxBlock::onChanged);
@@ -48,52 +40,92 @@ void BlackBoxBlock::setNotEditable(QTableWidgetItem* item) {
 
 void BlackBoxBlock::run()
 {
+	bool ok;
+	int inputsCount = mLogicalModelApi->logicalRepoApi().property(
+			mGraphicalModelApi->logicalId(id()), "inputsCount").toInt(&ok);
+	if (!ok) {
+		error(tr("Inputs count must be int"));
+		return;
+	} else if (inputsCount < 1) {
+		error(tr("Inputs count must be more or equal to 1"));
+		return;
+	}
+	mTable->setColumnCount(inputsCount + 1);
+	QStringList headers;
+	if (inputsCount == 1) {
+		headers << "input";
+	} else {
+		for (int i = 0; i < inputsCount; i++) {
+			mInputItems.append(new QTableWidgetItem());
+			mTable->setItem(lastRow(), i, mInputItems[i]);
+			headers << "input" + QString::number(i + 1);
+		}
+	}
+	headers << "output";
+	mTable->setHorizontalHeaderLabels(headers);
+	mOutputItem = new QTableWidgetItem("Finish");
+	setNotEditable(mOutputItem);
+	mTable->setItem(lastRow(), mInputItems.size(), mOutputItem);
+
 	mTable->setWindowTitle("Black Box");
+	mTable->resize(140 * (mInputItems.size() + 1), 720);
 	mTable->setVisible(true);
 }
 
 void BlackBoxBlock::onDoubleClick(QTableWidgetItem* item) {
-	if (item == outputItem) {
-		mTable->removeRow(lastRaw());
+	if (item == mOutputItem) {
+		mTable->removeRow(lastRow());
 		finishTable();
 	}
 }
 
 void BlackBoxBlock::onChanged(QTableWidgetItem* item) {
-	if (item == inputItem && !item->text().isEmpty()) {
+	if (mInputItems.contains(item)) {
+		for (int i = 0; i < mInputItems.size(); i++) {
+			if (mInputItems[i]->text().isEmpty()) {
+				activateCell(mInputItems[i]);
+				return;
+			}
+		}
 		// Find subprogram diagram
 		const Id logicalId = mGraphicalModelApi->logicalId(id());
 		const Id logicalDiagram = mLogicalModelApi->logicalRepoApi().outgoingExplosion(logicalId);
 		const IdList diagrams = mGraphicalModelApi->graphicalIdsByLogicalId(logicalDiagram);
 		if (!diagrams.isEmpty()) {
-			evalCode(mTable->horizontalHeaderItem(input)->text() + " = " + inputItem->text());
+			for (int i = 0; i < mInputItems.size(); i++) {
+				evalCode(mTable->horizontalHeaderItem(i)->text() + " = " + mInputItems[i]->text());
+			}
 			emit stepInto(diagrams[0]);
 		} else {
-			error("Can't find diagram");
+			error(tr("Can't find diagram"));
 		}
 	}
 }
 
 void BlackBoxBlock::finishedSteppingInto()
 {
-	auto lastInput = inputItem->text();
-	inputItem->setText("");
+	QList<QString> lastInputs;
+	for (int i = 0; i < mInputItems.size(); i++) {
+		lastInputs.append(mInputItems[i]->text());
+		mInputItems[i]->setText("");
+	}
 
-	// Add raw for results
+	// Add row for results
 	mTable->insertRow(mTable->rowCount() - 1);
 
-	auto curInput = new QTableWidgetItem(lastInput);
-	setNotEditable(curInput);
-	mTable->setItem(lastRaw() - 1, input, curInput);
+	for (int i = 0; i < mInputItems.size(); i++) {
+		auto curInput = new QTableWidgetItem(lastInputs[i]);
+		setNotEditable(curInput);
+		mTable->setItem(lastRow() - 1, i, curInput);
+	}
 
-	auto res = evalCode<QString>(mTable->horizontalHeaderItem(output)->text());
+	auto res = evalCode<QString>(mTable->horizontalHeaderItem(mInputItems.size())->text());
 	auto curOutput = new QTableWidgetItem(res);
 	setNotEditable(curOutput);
-	mTable->setItem(lastRaw() - 1, output, curOutput);
+	mTable->setItem(lastRow() - 1, mInputItems.size(), curOutput);
 
 	// Goto start
-	mTable->setCurrentItem(inputItem);
-	mTable->scrollToItem(inputItem);
+	activateCell(mInputItems[0]);
 	emit done(id());
 }
 
@@ -102,7 +134,13 @@ void BlackBoxBlock::finishTable()
 	emit done(mNextBlockId);
 }
 
-int BlackBoxBlock::lastRaw()
+int BlackBoxBlock::lastRow()
 {
 	return mTable->rowCount() - 1;
+}
+
+void BlackBoxBlock::activateCell(QTableWidgetItem* item)
+{
+	mTable->setCurrentItem(item);
+	mTable->scrollToItem(item);
 }

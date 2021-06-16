@@ -41,10 +41,11 @@ private slots:
 
 private:
 	void setNotEditable(QTableWidgetItem* item);
-	int lastRaw();
+	int lastRow();
+	void activateCell(QTableWidgetItem* item);
 	QTableWidget* mTable;
-	QTableWidgetItem* inputItem;
-	QTableWidgetItem* outputItem;
+	QList<QTableWidgetItem*> mInputItems;
+	QTableWidgetItem* mOutputItem;
 };
 
 }
