@@ -207,7 +207,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+52"/>
         <source>Can&apos;t find diagram</source>
         <translation type="unfinished"></translation>
     </message>

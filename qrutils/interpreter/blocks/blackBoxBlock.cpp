@@ -54,6 +54,8 @@ void BlackBoxBlock::run()
 	QStringList headers;
 	if (inputsCount == 1) {
 		headers << "input";
+		mInputItems.append(new QTableWidgetItem());
+		mTable->setItem(lastRow(), 0, mInputItems[0]);
 	} else {
 		for (int i = 0; i < inputsCount; i++) {
 			mInputItems.append(new QTableWidgetItem());
@@ -126,7 +128,6 @@ void BlackBoxBlock::finishedSteppingInto()
 
 	// Goto start
 	activateCell(mInputItems[0]);
-	emit done(id());
 }
 
 void BlackBoxBlock::finishTable()
