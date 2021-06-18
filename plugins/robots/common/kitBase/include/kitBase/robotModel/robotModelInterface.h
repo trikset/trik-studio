@@ -15,6 +15,7 @@
 #pragma once
 
 #include <QtCore/QObject>
+#include <QColor>
 
 #include "kitBase/robotModel/configurationInterface.h"
 #include "kitBase/robotModel/portInfo.h"
@@ -205,6 +206,9 @@ signals:
 
 	// Hack to manually control the robot
 	void endManual(bool success);
+
+	// Hack to manually draw in cell
+	void drawManually(const QColor &color, const QString& text = QString());
 
 };
 

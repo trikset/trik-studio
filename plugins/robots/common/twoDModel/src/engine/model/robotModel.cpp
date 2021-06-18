@@ -81,6 +81,7 @@ void RobotModel::reinit()
 
 	connect(&mRobotModel, &RobotModelInterface::moveManually, this, &RobotModel::moveCell, Qt::UniqueConnection);
 	connect(&mRobotModel, &RobotModelInterface::turnManuallyOn, this, &RobotModel::turnOn, Qt::UniqueConnection);
+	connect(&mRobotModel, &RobotModelInterface::drawManually, this, &RobotModel::drawInCell, Qt::UniqueConnection);
 }
 
 void RobotModel::moveCell(int n) {
@@ -94,6 +95,23 @@ void RobotModel::moveCell(int n) {
 
 void RobotModel::turnOn(qreal angle) {
 	setRotation(rotation() + angle);
+}
+
+void RobotModel::drawInCell(const QColor &color, const QString& text)
+{
+	const auto penWidth = qReal::SettingsManager::value("GridWidth").toDouble() / 100;
+	const auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
+	mWorldModel->prependRobotTrace(QPen(Qt::black, penWidth), QBrush(color), robotBoundingPath(false));
+	if (text.isEmpty()) return;
+	QPainterPath path;
+	QFont font;
+	font.setPixelSize(35);
+	path.addText(robotBoundingPath(false).boundingRect().bottomLeft(), font, text);
+	auto robotBR = robotBoundingPath(false).boundingRect();
+	auto bR = path.boundingRect();
+	path.translate(robotBR.left() - bR.left() + (gridSize - bR.width())/2
+			, robotBR.bottom() - bR.bottom() + (bR.height() - gridSize)/2);
+	mWorldModel->prependRobotTrace(QPen(Qt::white), QBrush(Qt::black), path);
 }
 
 void RobotModel::clear()
@@ -421,6 +439,8 @@ void RobotModel::nextStep()
 		for (auto &&item : movedItems.keys(true)) {
 			item->setPos(item->pos() + mPos - oldPos);
 		}
+	} else {
+		emit mRobotModel.endManual(true);
 	}
 	emit positionRecalculated(mPos, mAngle);
 }

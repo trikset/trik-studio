@@ -42,6 +42,7 @@
 
 #include <twoDModel/blocks/markerDownBlock.h>
 #include <twoDModel/blocks/markerUpBlock.h>
+#include <twoDModel/blocks/drawInCellBlock.h>
 
 #include <kitBase/blocksBase/common/randomInitBlock.h>
 
@@ -97,6 +98,8 @@ qReal::interpretation::Block *CoreBlocksFactory::produceBlock(const qReal::Id &e
 		return new twoDModel::blocks::MarkerDownBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "MarkerUp")) {
 		return new twoDModel::blocks::MarkerUpBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "DrawInCell")) {
+		return new twoDModel::blocks::DrawInCellBlock();
 	}
 
 	return nullptr;
@@ -130,6 +133,7 @@ qReal::IdList CoreBlocksFactory::providedBlocks() const
 		, id("PrintText")
 		, id("MarkerDown")
 		, id("MarkerUp")
+		, id("DrawInCell")
 	};
 }
 
@@ -142,7 +146,8 @@ qReal::IdList CoreBlocksFactory::blocksToDisable() const
 		if (!robotModelName.contains("TrikV62")) {
 			result
 					<< id("MarkerDown")
-					<< id("MarkerUp");
+					<< id("MarkerUp")
+					<< id("DrawInCell");
 		}
 	}
 

@@ -118,6 +118,9 @@ public:
 	/// Appends one more segment of the given to the robot`s trace.
 	void appendRobotTrace(const QPen &pen, const QPointF &begin, const QPointF &end);
 
+	/// Prepends full path to the robot`s trace.
+	void prependRobotTrace(const QPen &pen, const QBrush &brush, const QPainterPath &path);
+
 	/// Removes all the segments from the current robot`s trace.
 	void clearRobotTrace();
 
