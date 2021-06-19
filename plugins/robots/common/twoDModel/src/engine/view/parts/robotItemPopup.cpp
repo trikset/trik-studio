@@ -137,7 +137,7 @@ QWidget *RobotItemPopup::initImagePicker()
 			emit imageSettingsChanged();
 		} else {
 			utils::QRealMessageBox::question(this, tr("Error"), tr("You must select exactly one any image file "
-					"or four with the endings 'up', 'down', 'right', and 'left'"), QMessageBox::Close);
+					"or not more then four with the endings 'up', 'down', 'right', and 'left'"), QMessageBox::Close);
 			return;
 		}
 	});
