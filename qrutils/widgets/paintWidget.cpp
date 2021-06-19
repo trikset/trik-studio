@@ -26,7 +26,9 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 	QWidget::paintEvent(event);
 
 	QPainter painter(this);
-	mPainter->paint(&painter, geometry());
+	auto rect = geometry();
+	rect.translate(-rect.topLeft());
+	mPainter->paint(&painter, rect);
 }
 
 void PaintWidget::setPainter(PainterInterface *painter)

@@ -162,17 +162,14 @@ void Display::setPainterWidth(int penWidth)
 
 void Display::paint(QPainter *painter, const QRect &outputRect)
 {
-	Q_UNUSED(outputRect)
-
-	const QRect displayRect(0, 0, mEngine.display()->displayWidth(), mEngine.display()->displayHeight());
-	const int scaledTopMenuHeight = topMenuHeight * (displayRect.height()) / (realHeight * 1.0);
+	const int scaledTopMenuHeight = topMenuHeight * (outputRect.height()) / (realHeight * 1.0);
 
 	painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
 	painter->save();
 	painter->setPen(mBackground);
 	painter->setBrush(mBackground);
-	painter->drawRect(displayRect);
-	painter->drawImage(displayRect, mCurrentImage);
+	painter->drawRect(outputRect);
+	painter->drawImage(outputRect, mCurrentImage);
 	if (mBackground != Qt::transparent && mCurrentImage.isNull()) {
 		painter->setBrush(QBrush(Qt::darkRed, Qt::BDiagPattern));
 		painter->drawRect(0, 0, mEngine.display()->displayWidth(), scaledTopMenuHeight);
@@ -185,8 +182,8 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->setFont(font);
 	painter->setPen(Qt::black);
 	painter->translate(0, scaledTopMenuHeight);
-	const qreal xScale = displayRect.width() / (realWidth * 1.0);
-	const qreal yScale = (displayRect.height() - scaledTopMenuHeight) / (realHeight * 1.0);
+	const qreal xScale = outputRect.width() / (realWidth * 1.0);
+	const qreal yScale = (outputRect.height() - scaledTopMenuHeight) / (realHeight * 1.0);
 	painter->scale(xScale, yScale);
 	Canvas::paint(painter, {0, 0, realWidth, realHeight});
 	painter->restore();
