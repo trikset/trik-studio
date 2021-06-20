@@ -35,6 +35,7 @@
 #include <qrutils/interpreter/blocks/commentBlock.h>
 #include <qrutils/interpreter/blocks/subprogramBlock.h>
 #include <qrutils/interpreter/blocks/unsupportedBlock.h>
+#include <qrutils/interpreter/blocks/blackBoxBlock.h>
 
 #include "details/printTextBlock.h"
 #include "details/clearScreenBlock.h"
@@ -78,6 +79,8 @@ qReal::interpretation::Block *CoreBlocksFactory::produceBlock(const qReal::Id &e
 		return new qReal::interpretation::blocks::ReceiveThreadMessageBlock();
 	} else if (elementMetatypeIs(element, "Subprogram")) {
 		return new qReal::interpretation::blocks::SubprogramBlock();
+	} else if (elementMetatypeIs(element, "BlackBox")) {
+		return new qReal::interpretation::blocks::BlackBoxBlock();
 	} else if (elementMetatypeIs(element, "Function")) {
 		return new qReal::interpretation::blocks::FunctionBlock();
 	} else if (elementMetatypeIs(element, "VariableInit")) {
@@ -118,6 +121,7 @@ qReal::IdList CoreBlocksFactory::providedBlocks() const
 		, id("ReceiveMessageThreads")
 		, id("KillThread")
 		, id("Subprogram")
+		, id("BlackBox")
 		, id("Function")
 		, id("VariableInit")
 		, id("Input")

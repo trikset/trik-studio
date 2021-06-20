@@ -43,6 +43,9 @@ void RobotsMetamodelPlugin::initPlugin()
 void RobotsMetamodelPlugin::initMultigraph()
 {
 	mMetamodel->addNode(new AbstractNode(*mMetamodel));
+	mMetamodel->addNode(new BlackBox(*mMetamodel));
+	mMetamodel->addNode(new BlackBoxDiagram(*mMetamodel));
+	mMetamodel->addNode(new BlackBoxDiagramGroup(*mMetamodel));
 	mMetamodel->addNode(new ClearScreen(*mMetamodel));
 	mMetamodel->addNode(new CommentBlock(*mMetamodel));
 	mMetamodel->addNode(new ControlFlow(*mMetamodel));
@@ -74,6 +77,9 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new SwitchBlock(*mMetamodel));
 	mMetamodel->addNode(new Timer(*mMetamodel));
 	mMetamodel->addNode(new VariableInit(*mMetamodel));
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "BlackBox"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->addExplosion(mMetamodel->elementType("RobotsDiagram", "BlackBox"), mMetamodel->elementType("RobotsDiagram", "BlackBoxDiagramGroup"), true, true);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "BlackBoxDiagram"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::containmentLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "ClearScreen"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "CommentBlock"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "EngineCommand"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -126,6 +132,7 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("SwitchBlock"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Function"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Subprogram"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("BlackBox"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Fork"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("Join"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Algorithms"), QString::fromUtf8("KillThread"));

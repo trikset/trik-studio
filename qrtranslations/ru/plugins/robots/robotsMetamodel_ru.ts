@@ -8,7 +8,7 @@
         <translation type="vanished">Функция:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+486"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+595"/>
         <location line="+354"/>
         <source>Condition:</source>
         <translation>Условие:</translation>
@@ -450,12 +450,47 @@
         <translation>Значение:</translation>
     </message>
     <message>
-        <location line="-1353"/>
+        <location line="-1462"/>
         <source>AbstractNode</source>
         <translation>Базовый блок</translation>
     </message>
     <message>
         <location line="+35"/>
+        <source>Black Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>This is black box.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Number of inputs:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Inputs count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Black Box Diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>BlackBoxDiagramGroup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
         <source>Clear Screen</source>
         <translation>Очистить экран</translation>
     </message>
@@ -854,7 +889,7 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+144"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -1089,7 +1124,7 @@
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-30"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -1504,6 +1539,7 @@
     </message>
     <message>
         <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>

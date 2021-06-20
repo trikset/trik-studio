@@ -343,7 +343,7 @@ bool SaveConvertionManager::isRobotsDiagram(const Id &element)
 
 bool SaveConvertionManager::isDiagramType(const Id &element)
 {
-	const QStringList robotsDiagrams = { "RobotsDiagramNode", "SubprogramDiagram" };
+	const QStringList robotsDiagrams = { "RobotsDiagramNode", "SubprogramDiagram", "BlackBoxDiagram" };
 	return isRobotsDiagram(element) && robotsDiagrams.contains(element.element());
 }
 

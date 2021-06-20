@@ -1,6 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
 	<file>generated/shapes/AbstractNodeClass.sdf</file>
+	<file>generated/shapes/BlackBoxClass.sdf</file>
+	<file>generated/shapes/BlackBoxDiagramClass.sdf</file>
 	<file>generated/shapes/ClearScreenClass.sdf</file>
 	<file>generated/shapes/CommentBlockClass.sdf</file>
 	<file>generated/shapes/FiBlockClass.sdf</file>

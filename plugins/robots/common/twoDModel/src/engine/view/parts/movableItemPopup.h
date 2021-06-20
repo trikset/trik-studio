@@ -25,8 +25,8 @@ class CubeItem;
 }
 namespace view {
 
-/// A popup for CubeItem on 2D model scene.
-/// Contains IKHON spin box for setting robot`s marker thickness and a couple of position management buttons.
+/// A popup for MovableItem on 2D model scene.
+/// Contains image`s path picker and button to reset image.
 class MovableItemPopup : public graphicsUtils::ItemPopup
 {
 	Q_OBJECT

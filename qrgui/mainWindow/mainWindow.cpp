@@ -918,7 +918,8 @@ void MainWindow::closeTab(int index)
 		const Id diagramId = diagram->editorViewScene().rootItemId();
 		if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")) {
 			isClosed = mProjectManager->suggestToSaveChangesOrCancel();
-		} else if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")) {
+		} else if (diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")
+				|| diagramId.type() == qReal::Id("RobotsMetamodel", "RobotsDiagram", "BlackBoxDiagram")) {
 			if (mController->isUnsaved(diagramId.toString())) {
 				mProjectManager->setUnsavedIndicator(true);
 			}
@@ -1098,6 +1099,12 @@ void MainWindow::openNewTab(const QModelIndex &arg)
 		index = index.parent();
 	}
 
+	const Id diagramId = models().graphicalModelAssistApi().idByIndex(index);
+	if (diagramId.element() == "BlackBoxDiagram" && models().logicalRepoApi().property(
+			models().graphicalModelAssistApi().logicalId(diagramId), "finished").toBool() == true) {
+		return;
+	}
+
 	int tabNumber = -1;
 	for (int i = 0; i < mUi->tabs->count(); ++i) {
 		EditorView *tab = (dynamic_cast<EditorView *>(mUi->tabs->widget(i)));
@@ -1110,7 +1117,6 @@ void MainWindow::openNewTab(const QModelIndex &arg)
 	if (tabNumber != -1) {
 		mUi->tabs->setCurrentIndex(tabNumber);
 	} else {
-		const Id diagramId = models().graphicalModelAssistApi().idByIndex(index);
 		EditorView * const view = new EditorView(models(), *controller(), *mSceneCustomizer, diagramId, this);
 		view->mutableScene().enableMouseGestures(qReal::SettingsManager::value("gesturesEnabled").toBool());
 		SettingsListener::listen("gesturesEnabled", &(view->mutableScene()), &EditorViewScene::enableMouseGestures);
@@ -1778,7 +1784,8 @@ IdList MainWindow::openedDiagrams() const
 			if (diagramId.editor() == "RobotsMetamodel"
 					&& diagramId.diagram() == "RobotsDiagram"
 					&& (diagramId.element() == "RobotsDiagramNode"
-						|| diagramId.element() == "SubprogramDiagram")) {
+						|| diagramId.element() == "SubprogramDiagram"
+						|| diagramId.element() == "BlackBoxDiagram")) {
 				result << diagram->mvIface().rootId();
 			}
 		}

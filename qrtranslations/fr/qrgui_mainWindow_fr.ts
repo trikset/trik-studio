@@ -779,7 +779,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Le chargement d&apos;une extention a échoué :</translation>
     </message>
     <message>
-        <location line="+110"/>
+        <location line="+111"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -791,7 +791,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Editeur de texte</translation>
     </message>
     <message>
-        <location line="+220"/>
+        <location line="+225"/>
         <source>New diagram</source>
         <translation>Nouveau diagramme</translation>
     </message>
@@ -876,7 +876,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Afficher les gestes</translation>
     </message>
     <message>
-        <location line="+340"/>
+        <location line="+341"/>
         <source>Shortcuts</source>
         <translation>Raccourcis</translation>
     </message>
@@ -1044,7 +1044,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+87"/>
         <source>Mouse gesture</source>
         <translation>Geste souris</translation>
     </message>
@@ -1101,12 +1101,12 @@ WARNING: The settings will be restored after application restart</source>
     </message>
     <message>
         <location line="+75"/>
-        <location line="+29"/>
+        <location line="+30"/>
         <source>Change Properties</source>
         <translation>Modifier les propriétés</translation>
     </message>
     <message>
-        <location line="-24"/>
+        <location line="-25"/>
         <source>Change Appearance</source>
         <translation>Modifier l&apos;apparence</translation>
     </message>
@@ -1116,7 +1116,12 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Supprimer l&apos;élément</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+26"/>
+        <source>Finish black box</source>
+        <translation type="unfinished">Закончить черный ящик</translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>

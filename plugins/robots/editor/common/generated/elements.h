@@ -51,6 +51,115 @@
 		}
 	};
 
+	class BlackBox : public qReal::NodeElementType
+	{
+	public:
+		explicit BlackBox(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("BlackBox");
+			setFriendlyName(QObject::tr("Black Box"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("This is black box."));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, -0.4, -0.7, "name", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(true);
+			label_1->setPlainTextMode(false);
+			addLabel(label_1);
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.66, 1.2, "inputsCount", false, 0));
+			label_2->setBackground(Qt::white);
+			label_2->setScalingX(false);
+			label_2->setScalingY(false);
+			label_2->setHard(false);
+			label_2->setPlainTextMode(false);
+			label_2->setPrefix(QObject::tr("Number of inputs:"));
+			addLabel(label_2);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/BlackBoxClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("inputsCount", "int", QString::fromUtf8("1"), QObject::tr("Inputs count"), QObject::tr(""), false);
+		}
+	};
+
+	class BlackBoxDiagram : public qReal::NodeElementType
+	{
+	public:
+		explicit BlackBoxDiagram(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("BlackBoxDiagram");
+			setFriendlyName(QObject::tr("Black Box Diagram"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr(""));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.205882, 0.0588235, "name", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(false);
+			label_1->setPlainTextMode(false);
+			addLabel(label_1);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/BlackBoxDiagramClass.sdf").documentElement());
+			setSize(QSizeF(204, 204));
+			initProperties();
+			setMouseGesture("");
+			addPointPort(qReal::PointPortInfo(QPointF(0.00980392, 0.5), false, false, 204, 204, "NonTyped"));
+			addPointPort(qReal::PointPortInfo(QPointF(0.5, 0.00980392), false, false, 204, 204, "NonTyped"));
+			addPointPort(qReal::PointPortInfo(QPointF(0.990196, 0.5), false, false, 204, 204, "NonTyped"));
+			addPointPort(qReal::PointPortInfo(QPointF(0.5, 0.990196), false, false, 204, 204, "NonTyped"));
+			setResizable(true);
+			setContainer(true);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("finished", "bool", QString::fromUtf8("false"), QObject::tr("Finished"), QObject::tr(""), false);
+		}
+	};
+
+	class BlackBoxDiagramGroup : public qReal::PatternType
+	{
+	public:
+		explicit BlackBoxDiagramGroup(qReal::Metamodel &metamodel)
+			: PatternType(metamodel)
+		{
+			setName("BlackBoxDiagramGroup");
+			setFriendlyName(QObject::tr("BlackBoxDiagramGroup"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr(""));
+			setXml(QString::fromUtf8(" <group rootNode=\"diagram\" name=\"BlackBoxDiagramGroup\">\n  <groupNode type=\"BlackBoxDiagram\" name=\"diagram\" xPosition=\"0\" yPosition=\"0\"/>\n  <groupNode type=\"InitialNode\" parent=\"diagram\" name=\"initialNode\" xPosition=\"50\" yPosition=\"300\"/>\n </group>\n"));
+		}
+
+	};
+
 	class ClearScreen : public qReal::NodeElementType
 	{
 	public:

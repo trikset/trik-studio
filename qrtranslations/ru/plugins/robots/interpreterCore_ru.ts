@@ -114,7 +114,7 @@
         <translation>time</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+30"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+31"/>
         <source>Run</source>
         <translation>Выполнить</translation>
     </message>
@@ -196,7 +196,7 @@
         <translation>На главную</translation>
     </message>
     <message>
-        <location line="+241"/>
+        <location line="+242"/>
         <source>Real robot</source>
         <translation>Реальный робот</translation>
     </message>
@@ -282,7 +282,7 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+91"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
         <location line="+72"/>
         <source>No connection to robot</source>
         <translation>Нет соединения с роботом</translation>

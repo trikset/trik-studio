@@ -35,6 +35,7 @@ using namespace qReal;
 
 const Id robotDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode");
 const Id subprogramDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram");
+const Id blackBoxDiagramType = Id("RobotsMetamodel", "RobotsDiagram", "BlackBoxDiagram");
 
 TrikKitInterpreterPluginBase::TrikKitInterpreterPluginBase() :
 	mStart(tr("Start"), this), mStop(tr("Stop"), this)

@@ -781,7 +781,7 @@
         <translation>Загрузка плагина завершилась ошибкой: </translation>
     </message>
     <message>
-        <location line="+110"/>
+        <location line="+111"/>
         <location line="+16"/>
         <location line="+23"/>
         <source>Shape Editor</source>
@@ -793,7 +793,7 @@
         <translation>Текстовый редактор</translation>
     </message>
     <message>
-        <location line="+224"/>
+        <location line="+229"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>
@@ -818,7 +818,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1046"/>
+        <location line="-1052"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -837,7 +837,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+630"/>
+        <location line="+636"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
@@ -897,7 +897,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Жесты мышью</translation>
     </message>
     <message>
-        <location line="+340"/>
+        <location line="+341"/>
         <source>Shortcuts</source>
         <translation>Горячие клавиши</translation>
     </message>
@@ -1154,7 +1154,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+87"/>
         <source>Mouse gesture</source>
         <translation>Жест мышью</translation>
     </message>
@@ -1211,12 +1211,12 @@ WARNING: The settings will be restored after application restart</source>
     </message>
     <message>
         <location line="+75"/>
-        <location line="+29"/>
+        <location line="+30"/>
         <source>Change Properties</source>
         <translation>Изменить свойства</translation>
     </message>
     <message>
-        <location line="-24"/>
+        <location line="-25"/>
         <source>Change Appearance</source>
         <translation>Изменить внешний вид</translation>
     </message>
@@ -1226,7 +1226,12 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Удалить элемент</translation>
     </message>
     <message>
-        <location line="+24"/>
+        <location line="+26"/>
+        <source>Finish black box</source>
+        <translation type="unfinished">Закончить черный ящик</translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

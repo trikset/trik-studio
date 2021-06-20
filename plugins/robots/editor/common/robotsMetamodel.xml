@@ -44,6 +44,10 @@
 					<groupNode type="SubprogramDiagram" name="diagram" xPosition="0" yPosition="0"/>
 					<groupNode type="InitialNode" name="initialNode" xPosition="50" yPosition="300" parent="diagram"/>
 				</group>
+				<group name="BlackBoxDiagramGroup" rootNode="diagram">
+					<groupNode type="BlackBoxDiagram" name="diagram" xPosition="0" yPosition="0"/>
+					<groupNode type="InitialNode" name="initialNode" xPosition="50" yPosition="300" parent="diagram"/>
+				</group>
 			</groups>
 			<role arrowType="no_arrow" name="NoArrowRole">
 			    <properties/>
@@ -140,6 +144,39 @@
 					</container>
 				</logic>
 			</node>
+			<node displayedName="Black Box Diagram" name="BlackBoxDiagram">
+				<graphics>
+					<picture sizex="204" sizey="204">
+						<line fill="#000000" stroke-style="solid" stroke="#000000" y1="2" stroke-width="0" x1="22" y2="2" fill-style="none" x2="182"/>
+						<line fill="#000000" stroke-style="solid" stroke="#000000" y1="202" stroke-width="0" x1="22" y2="202" fill-style="none" x2="182"/>
+						<line fill="#000000" stroke-style="solid" stroke="#000000" y1="22" stroke-width="0" x1="2" y2="182" fill-style="none" x2="2"/>
+						<line fill="#000000" stroke-style="solid" stroke="#000000" y1="22" stroke-width="0" x1="202" y2="182" fill-style="none" x2="202"/>
+						<arc spanAngle="1440" startAngle="1440" y1="2" x1="2" y2="42" x2="42"/>
+						<arc spanAngle="1440" startAngle="0" y1="2" x1="162" y2="42" x2="202"/>
+						<arc spanAngle="1440" startAngle="2880" y1="162" x1="2" y2="202" x2="42"/>
+						<arc spanAngle="-1440" startAngle="0" y1="162" x1="162" y2="202" x2="202"/>
+					</picture>
+					<labels>
+						<label x="42" y="12" textBinded="name"/>
+					</labels>
+					<ports>
+						<pointPort x="2" y="102"/>
+						<pointPort x="102" y="2"/>
+						<pointPort x="202" y="102"/>
+						<pointPort x="102" y="202"/>
+					</ports>
+				</graphics>
+				<logic>
+					<container>
+						<contains type="AbstractNode"/>
+					</container>
+					<properties>
+						<property displayedName="Finished" type="bool" name="finished">
+							<default>false</default>
+						</property>
+					</properties>
+				</logic>
+			</node>
 			<node displayedName="Final Node" name="FinalNode" path="13, 200 : 198, 15 :  | 12, 12 : 198, 198 : " description="The final node of the program. If the program consists of some parallel execution lines the reachment of this block terminates the corresponding execution line. This block can`t have outgoing links.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -221,6 +258,32 @@
 					</generalizations>
 					<explodesTo>
 						<target type="SubprogramDiagramGroup" makeReusable="true" requireImmediateLinkage="true"/>
+					</explodesTo>
+				</logic>
+			</node>
+			<node displayedName="Black Box" name="BlackBox" description="This is black box.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/unknownSomething.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="-20" y="-35" textBinded="name" hard="true"/>
+						<label x="33" y="60" textBinded="inputsCount" background="white" prefix="Number of inputs:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<properties>
+						<property displayedName="Inputs count" type="int" name="inputsCount">
+							<default>1</default>
+						</property>
+					</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+					<explodesTo>
+						<target type="BlackBoxDiagramGroup" makeReusable="true" requireImmediateLinkage="true"/>
 					</explodesTo>
 				</logic>
 			</node>
@@ -746,6 +809,7 @@
 				<element name="SwitchBlock"/>
 				<element name="Function"/>
 				<element name="Subprogram"/>
+				<element name="BlackBox"/>
 				<element name="Fork"/>
 				<element name="Join"/>
 				<element name="KillThread"/>

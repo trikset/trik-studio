@@ -195,6 +195,24 @@
     </message>
 </context>
 <context>
+    <name>qReal::interpretation::blocks::BlackBoxBlock</name>
+    <message>
+        <location filename="../../qrutils/interpreter/blocks/blackBoxBlock.cpp" line="+47"/>
+        <source>Inputs count must be int</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Inputs count must be more or equal to 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+52"/>
+        <source>Can&apos;t find diagram</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>qReal::interpretation::blocks::CommentBlock</name>
     <message>
         <location filename="../../qrutils/interpreter/blocks/commentBlock.cpp" line="+28"/>

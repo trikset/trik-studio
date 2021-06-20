@@ -29,6 +29,7 @@ HEADERS += \
 	$$PWD/blocks/switchBlock.h \
 	$$PWD/blocks/loopBlock.h \
 	$$PWD/blocks/subprogramBlock.h \
+	$$PWD/blocks/blackBoxBlock.h \
 	$$PWD/blocks/forkBlock.h \
 	$$PWD/blocks/functionBlock.h \
 	$$PWD/blocks/variableInitBlock.h \
@@ -55,6 +56,7 @@ SOURCES += \
 	$$PWD/blocks/switchBlock.cpp \
 	$$PWD/blocks/loopBlock.cpp \
 	$$PWD/blocks/subprogramBlock.cpp \
+	$$PWD/blocks/blackBoxBlock.cpp \
 	$$PWD/blocks/forkBlock.cpp \
 	$$PWD/blocks/functionBlock.cpp \
 	$$PWD/blocks/variableInitBlock.cpp \
