@@ -99,7 +99,7 @@ jobs:
           dir: C:\
           version: ${{matrix.qt-version}}
           arch: win32_mingw${{matrix.mingw-short-version}}
-          modules: 'qtscript qtsvg'
+          modules: 'qtscript'
           tools: 'tools_ifw,4.1,qt.tools.ifw.41 tools_mingw,${{matrix.mingw-version}},qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
           extra: '--external 7z'
 
