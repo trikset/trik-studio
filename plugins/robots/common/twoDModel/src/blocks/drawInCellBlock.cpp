@@ -23,8 +23,8 @@ void DrawInCellBlock::run()
 	if (!mRobotModelManager) {
 		error("No robot");
 	}
-	const auto color = stringProperty("Color");
-	const auto text = boolProperty("Evaluate") ? eval<QString>("PrintText") : stringProperty("PrintText");
+	const auto &color = stringProperty("Color");
+	const auto &text = boolProperty("Evaluate") ? eval<QString>("PrintText") : stringProperty("PrintText");
 	if (!errorsOccured()) {
 		mRobotModelManager->model().drawManually(propertyToColor(color), text);
 		mConnections << connect(&mRobotModelManager->model(), &kitBase::robotModel::RobotModelInterface::endManual
@@ -34,7 +34,7 @@ void DrawInCellBlock::run()
 
 void DrawInCellBlock::endManual()
 {
-	for (auto connection : mConnections) {
+	for (auto &&connection : mConnections) {
 		disconnect(connection);
 	}
 	emit done(mNextBlockId);

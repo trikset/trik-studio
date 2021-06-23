@@ -125,7 +125,7 @@ private:
 	/** @brief Image of a robot drawn on scene */
 	model::Image mImage;
 	QMap<Direction, QSharedPointer<model::Image>> mCustomImages;
-	QSharedPointer<model::Image> mEmptyImage;
+	const QSharedPointer<model::Image> mEmptyImage;
 	bool mIsRotatingImage {false};
 	bool mIsCustomImage {false};
 	// Takes ownership
