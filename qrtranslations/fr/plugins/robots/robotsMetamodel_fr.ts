@@ -8,7 +8,7 @@
         <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+993"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+1047"/>
         <source>X:</source>
         <translation>X :</translation>
     </message>
@@ -91,7 +91,8 @@
         <translation type="vanished">Port :</translation>
     </message>
     <message>
-        <location line="-557"/>
+        <location line="-1158"/>
+        <location line="+601"/>
         <source>Color:</source>
         <translation>Couleur :</translation>
     </message>
@@ -155,7 +156,8 @@
         <translation type="vanished">Limite de compte tours :</translation>
     </message>
     <message>
-        <location line="-125"/>
+        <location line="-547"/>
+        <location line="+422"/>
         <location line="+310"/>
         <source>Text:</source>
         <translation>Texte :</translation>
@@ -290,7 +292,7 @@
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location line="-1462"/>
+        <location line="-1516"/>
         <source>AbstractNode</source>
         <translation>AbstractNode</translation>
     </message>
@@ -306,12 +308,12 @@
     </message>
     <message>
         <location line="+23"/>
-        <location line="+840"/>
+        <location line="+894"/>
         <source>Redraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-829"/>
+        <location line="-883"/>
         <location line="+37"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
@@ -342,7 +344,7 @@
         <translation>Garde</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+65"/>
         <source>EngineCommand</source>
         <translation>EngineCommand</translation>
     </message>
@@ -480,7 +482,8 @@
         <translation type="vanished">LED</translation>
     </message>
     <message>
-        <location line="+522"/>
+        <location line="-71"/>
+        <location line="+593"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
@@ -635,7 +638,7 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+144"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+146"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -652,7 +655,7 @@
         <translation>x</translation>
     </message>
     <message>
-        <location line="-1452"/>
+        <location line="-1506"/>
         <source>Black Box</source>
         <translation type="unfinished"></translation>
     </message>
@@ -687,7 +690,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+431"/>
+        <location line="+159"/>
+        <source>Draw in cell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Draw in cell.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+324"/>
         <location line="+34"/>
         <location line="+353"/>
         <source>Condition</source>
@@ -835,7 +848,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="-684"/>
+        <location line="+731"/>
         <source>Evaluate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1239,6 +1253,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
+        <location line="+1"/>
         <source>Drawing</source>
         <translation>Dessin</translation>
     </message>
@@ -1260,7 +1275,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-420"/>
+        <location line="+421"/>
         <source>Text</source>
         <translation type="unfinished">Texte</translation>
     </message>

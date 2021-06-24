@@ -795,6 +795,33 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Draw in cell" name="DrawInCell" description="Draw in cell.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image name="" x1="0" x2="50" y1="0" y2="50" />
+					</picture>
+					<labels>
+						<label x="27" y="-35" textBinded="Color" hard="true" prefix="Color:"/>
+						<label x="50" y="60" textBinded="PrintText" hard="true" prefix="Text:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+					<properties>
+						<property displayedName="Color" type="BackgroundColor" name="Color">
+							<default>blue</default>
+						</property>
+						<property displayedName="Text" type="string" name="PrintText"/>
+						<property displayedName="Evaluate" type="bool" name="Evaluate">
+							<default>false</default>
+						</property>
+					</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 		</graphicTypes>
 
 		<palette sorted="false">
@@ -830,6 +857,7 @@
 				<element name="ClearScreen"/>
 				<element name="MarkerDown"/>
 				<element name="MarkerUp"/>
+				<element name="DrawInCell"/>
 			</group>
 		</palette>
 	</diagram>

@@ -188,6 +188,7 @@ signals:
 private slots:
 	void moveCell(int n);
 	void turnOn(qreal angle);
+	void drawInCell(const QColor &color, const QString& text);
 
 private:
 	QVector2D robotDirectionVector() const;

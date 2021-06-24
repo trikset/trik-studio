@@ -379,7 +379,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+448"/>
+        <location line="+461"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -674,7 +674,7 @@
     </message>
     <message>
         <location line="+0"/>
-        <source>You must select exactly one any image file or four with the endings &apos;up&apos;, &apos;down&apos;, &apos;right&apos;, and &apos;left&apos;</source>
+        <source>You must select exactly one any image file or not more then four with the endings &apos;up&apos;, &apos;down&apos;, &apos;right&apos;, and &apos;left&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

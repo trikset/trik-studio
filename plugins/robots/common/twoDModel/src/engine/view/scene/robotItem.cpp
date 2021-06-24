@@ -31,10 +31,14 @@ const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
 	: mImage(robotImageFileName, true)
+	, mEmptyImage(new Image("", false))
 	, mBeepItem(new BeepItem())
 	, mRobotModel(robotModel)
 {
 	mCustomImages[No].reset(new Image(robotImageFileName, true));
+	for (auto dir : {Left, Right, Up, Down}) {
+		mCustomImages[dir] = mEmptyImage;
+	}
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
 	connect(&mRobotModel, &model::RobotModel::rotationChanged, this, &RobotItem::setRotation);
@@ -107,10 +111,13 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 		if (mIsRotatingImage) {
 			painter->save();
 			// We actually use knowledge that left-top of rect is (0,0)
+			if (mCustomImages[imageDirection()] && mCustomImages[imageDirection()]->isValid()) {
+				mLastDirection = imageDirection();
+			}
 			painter->translate(rect.right()/2, rect.bottom()/2);
 			painter->rotate(-rotation());
 			painter->translate(-rect.right()/2, -rect.bottom()/2);
-			mCustomImages[imageDirection()]->draw(*painter, rect);
+			mCustomImages[mLastDirection]->draw(*painter, rect);
 			painter->restore();
 		} else {
 			mCustomImages[No]->draw(*painter, rect);
@@ -200,8 +207,14 @@ void RobotItem::deserializeImage(const QDomElement &element) {
 			Direction dir = static_cast<Direction>(image.attribute("direction").toInt());
 			mCustomImages[dir] = Image::deserialize(image);
 		}
+		for (const auto dir : {Right, Up, Left, Down}) {
+			if (mCustomImages[dir].isNull()){
+				mCustomImages[dir] = mEmptyImage;
+			} else if (mCustomImages[Right]->isValid()) {
+				mIsRotatingImage = true;
+			}
+		}
 		useCustomImage(true);
-		mIsRotatingImage = mCustomImages[Up] && mCustomImages[Up]->isValid();
 	}
 }
 
@@ -307,7 +320,7 @@ bool RobotItem::setCustomImage(const QStringList &robotImageFileNames) {
 		mIsCustomImage = true;
 		mIsRotatingImage = false;
 		mCustomImages[No]->loadFrom(robotImageFileNames[0]);
-	} else if (robotImageFileNames.size() == 4) {
+	} else if (robotImageFileNames.size() <= 4) {
 		QMap<Direction, QSharedPointer<model::Image>> oldImages;
 		for (auto && key : mCustomImages.keys()) {
 			oldImages[key] = mCustomImages[key];
@@ -326,9 +339,13 @@ bool RobotItem::setCustomImage(const QStringList &robotImageFileNames) {
 				mCustomImages[Left].reset(newImage);
 			}
 		}
-		auto success = true;
-		for (auto && img : mCustomImages) {
-			success = success && img && img->isValid();
+		auto success = false;
+		for (auto && key : mCustomImages.keys()) {
+			if (!mCustomImages[key]) {
+				mCustomImages[key] = mEmptyImage;
+			} else if (mCustomImages[key]->isValid()) {
+				success = true;
+			}
 		}
 		if (success) {
 			mIsCustomImage = true;

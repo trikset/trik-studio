@@ -49,6 +49,7 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new ClearScreen(*mMetamodel));
 	mMetamodel->addNode(new CommentBlock(*mMetamodel));
 	mMetamodel->addNode(new ControlFlow(*mMetamodel));
+	mMetamodel->addNode(new DrawInCell(*mMetamodel));
 	mMetamodel->addNode(new EngineCommand(*mMetamodel));
 	mMetamodel->addNode(new EngineMovementCommand(*mMetamodel));
 	mMetamodel->addNode(new FiBlock(*mMetamodel));
@@ -82,6 +83,7 @@ void RobotsMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "BlackBoxDiagram"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::containmentLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "ClearScreen"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "CommentBlock"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "DrawInCell"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "EngineCommand"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "EngineMovementCommand"), mMetamodel->elementType("RobotsDiagram", "EngineCommand"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "FiBlock"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -150,6 +152,7 @@ void RobotsMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("ClearScreen"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("MarkerDown"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("MarkerUp"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Drawing"), QString::fromUtf8("DrawInCell"));
 }
 
 void RobotsMetamodelPlugin::initPaletteGroupsDescriptionMap()

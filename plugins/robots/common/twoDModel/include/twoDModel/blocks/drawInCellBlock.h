@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,26 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "paintWidget.h"
+#pragma once
 
-using namespace qReal::ui;
+#include <kitBase/blocksBase/robotsBlock.h>
+#include "twoDModel/twoDModelDeclSpec.h"
 
-PaintWidget::PaintWidget(QWidget *parent)
-	: QWidget(parent)
+namespace twoDModel {
+namespace blocks {
+
+/// IKHON
+class TWO_D_MODEL_EXPORT DrawInCellBlock
+		: public kitBase::blocksBase::RobotsBlock
 {
+	Q_OBJECT
+
+public:
+	void run() override;
+private:
+	QList<QMetaObject::Connection> mConnections;
+private slots:
+	void endManual();
+};
+
 }
-
-void PaintWidget::paintEvent(QPaintEvent *event)
-{
-	QWidget::paintEvent(event);
-
-	QPainter painter(this);
-	auto rect = geometry();
-	rect.translate(-rect.topLeft());
-	mPainter->paint(&painter, rect);
-}
-
-void PaintWidget::setPainter(PainterInterface *painter)
-{
-	mPainter = painter;
 }

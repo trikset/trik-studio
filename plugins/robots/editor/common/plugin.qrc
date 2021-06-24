@@ -5,6 +5,7 @@
 	<file>generated/shapes/BlackBoxDiagramClass.sdf</file>
 	<file>generated/shapes/ClearScreenClass.sdf</file>
 	<file>generated/shapes/CommentBlockClass.sdf</file>
+	<file>generated/shapes/DrawInCellClass.sdf</file>
 	<file>generated/shapes/FiBlockClass.sdf</file>
 	<file>generated/shapes/FinalNodeClass.sdf</file>
 	<file>generated/shapes/ForkClass.sdf</file>

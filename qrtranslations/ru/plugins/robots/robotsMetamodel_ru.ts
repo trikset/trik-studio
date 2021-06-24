@@ -8,7 +8,7 @@
         <translation type="vanished">Функция:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+595"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+649"/>
         <location line="+354"/>
         <source>Condition:</source>
         <translation>Условие:</translation>
@@ -115,7 +115,8 @@
         <translation type="vanished">Порт:</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="-555"/>
+        <location line="+601"/>
         <source>Color:</source>
         <translation>Цвет:</translation>
     </message>
@@ -195,7 +196,8 @@
         <translation type="vanished">Имя файла:</translation>
     </message>
     <message>
-        <location line="-781"/>
+        <location line="-1203"/>
+        <location line="+422"/>
         <location line="+310"/>
         <source>Text:</source>
         <translation>Текст:</translation>
@@ -450,7 +452,7 @@
         <translation>Значение:</translation>
     </message>
     <message>
-        <location line="-1462"/>
+        <location line="-1516"/>
         <source>AbstractNode</source>
         <translation>Базовый блок</translation>
     </message>
@@ -501,12 +503,12 @@
     </message>
     <message>
         <location line="+23"/>
-        <location line="+840"/>
+        <location line="+894"/>
         <source>Redraw</source>
         <translation>Обновить картинку</translation>
     </message>
     <message>
-        <location line="-829"/>
+        <location line="-883"/>
         <location line="+37"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
@@ -538,6 +540,16 @@
     </message>
     <message>
         <location line="+11"/>
+        <source>Draw in cell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Draw in cell.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+52"/>
         <source>EngineCommand</source>
         <translation>Базовый блок моторов</translation>
     </message>
@@ -707,7 +719,8 @@
         <translation type="vanished">Установить цвет светодиода на передней панели робота.</translation>
     </message>
     <message>
-        <location line="+522"/>
+        <location line="-71"/>
+        <location line="+593"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
@@ -889,7 +902,7 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+144"/>
+        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+146"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -1062,7 +1075,8 @@
         <translation>Печатает заданную строку в заданном месте на экране робота. Значение свойства &quot;Текст&quot; по умолчанию трактуется как строка в чистом виде, оно так и будет выведено на экран. Чтобы система считала, что это выражение на текстовом языке (это может быть полезно, например, при отладке значения переменных), поставьте галочку &quot;Вычислять&quot; в редакторе свойств.</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="-684"/>
+        <location line="+731"/>
         <source>Evaluate</source>
         <translation>Вычислять</translation>
     </message>
@@ -1571,6 +1585,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
+        <location line="+1"/>
         <source>Drawing</source>
         <translation>Рисование</translation>
     </message>
@@ -1592,7 +1607,8 @@
         <translation>По умолчанию</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-420"/>
+        <location line="+421"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>

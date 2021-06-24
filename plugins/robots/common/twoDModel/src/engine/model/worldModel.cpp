@@ -289,6 +289,19 @@ void WorldModel::clear()
 	emit blobsChanged();
 }
 
+
+
+void WorldModel::prependRobotTrace(const QPen &pen, const QBrush &brush, const QPainterPath &path)
+{
+	auto traceItem = QSharedPointer<QGraphicsPathItem>::create(path);
+	traceItem->setPen(pen);
+	traceItem->setBrush(brush);
+	traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Shape);
+	mRobotTrace.prepend(traceItem);
+	emit robotTraceAppearedOrDisappeared(true);
+	emit traceItemAddedOrChanged(traceItem, false);
+}
+
 void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const QPointF &end)
 {
 	if (pen.color() == QColor(Qt::transparent)) {
