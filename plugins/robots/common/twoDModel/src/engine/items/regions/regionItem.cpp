@@ -98,7 +98,7 @@ bool RegionItem::containsPoint(const QPointF &point) const
 	return QGraphicsItem::contains(mapFromScene(point));
 }
 
-bool RegionItem::containsItem(QGraphicsItem *item) const
+bool RegionItem::containsItemCenter(QGraphicsItem *item) const
 {
 	return containsPoint(item->boundingRect().center() + item->scenePos());
 }

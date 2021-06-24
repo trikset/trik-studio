@@ -64,16 +64,16 @@ public:
 	bool containsPoint(const QPointF &point) const;
 
 	/// Returns true if the center of the bounding rect of the given item is contained by this region.
-	bool containsItem(QGraphicsItem *item) const;
+	bool containsItemCenter(QGraphicsItem *item) const;
 
 	QRectF boundingRect() const override;
+	virtual QString regionType() const = 0;
 
 	virtual void serialize(QDomElement &element) const;
 	virtual void deserialize(const QDomElement &element);
 
 protected:
 	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
-	virtual QString regionType() const = 0;
 
 private:
 	/// Sets a unique identifier of the region.
