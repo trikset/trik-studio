@@ -25,6 +25,8 @@
 using namespace twoDModel::constraints::details;
 using namespace kitBase;
 
+const qreal eps = 0.001;
+
 ConditionsFactory::ConditionsFactory(Events &events
 		, const Variables &variables
 		, const Objects &objects
@@ -115,21 +117,31 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			reportError(QObject::tr("%1 is not a region").arg(regionId));
 			return false;
 		}
+		QPainterPath adjRegion;
+		const auto && adjustedRect = region->sceneBoundingRect().adjusted(-eps, -eps, eps, eps);
+		if (region->regionType() == "ellipse") {
+			adjRegion.addEllipse(adjustedRect);
+		} else if (region->regionType() == "rectangle") {
+			adjRegion.addRect(adjustedRect);
+		} else {
+			adjRegion.addPath(region->shape());
+		}
 
 		if (QGraphicsObject * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shape()).contains(
-						graphicsObject->mapToScene(graphicsObject->shape()));
+				return adjRegion.contains(graphicsObject->mapToScene(graphicsObject->shape()));
 			} else if (objectPoint == "any") {
 				return region->mapToScene(region->shape()).intersects(
 						graphicsObject->mapToScene(graphicsObject->shape()));
 			}
-			return region->containsItem(graphicsObject);
+			return region->containsItemCenter(graphicsObject);
 		}
 
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shape()).contains(robotModel->robotBoundingPath(false));
+				return adjRegion.contains(robotModel->robotBoundingPath(false));
+			} else if (objectPoint == "any") {
+				return  region->mapToScene(region->shape()).intersects(robotModel->robotBoundingPath(false));
 			}
 			return region->containsPoint(robotModel->robotCenter());
 		}
@@ -148,11 +160,14 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			}
 
 			if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
+				const auto && deviceShape = robotModel->robotsTransform().map(
+						robotModel->sensorBoundingPath(device->port()));
 				if (objectPoint == "all") {
-					auto deviceShape = robotModel->robotsTransform().map(
-							robotModel->sensorBoundingPath(device->port()));
-					return region->mapToScene(region->shape()).contains(
-							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
+					return adjRegion.contains(deviceShape.isEmpty()
+							? robotModel->robotBoundingPath(false) : deviceShape);
+				} else if (objectPoint == "any") {
+					return region->mapToScene(region->shape()).intersects(deviceShape.isEmpty()
+							? robotModel->robotBoundingPath(false) : deviceShape);
 				}
 				return region->containsPoint(
 						robotModel->robotsTransform().map(robotModel->configuration().position(device->port())));

@@ -1,4 +1,4 @@
-# Copyright 2007-2015 QReal Research Group
+# Copyright 2021 CyberTech Labs Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TEMPLATE = subdirs
+include (../../global.pri)
 
-HEADERS += \
-	runExtensions.h \
+TARGET = checkapp
 
-SUBDIRS = \
-	qscintilla/Qt4Qt5/qscintilla.pro \
-	qslog/QsLogSharedLibrary.pro \
-	gamepad/gamepad.pro \
-	quazip/quazip.pro \
-
-win32 {
-	SUBDIRS += \
-		checkapp/checkapp.pro \
-	}
+include (checkapp/checkapp.pri)

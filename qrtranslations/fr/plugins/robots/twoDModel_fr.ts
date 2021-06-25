@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+104"/>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
         <source>No such object: %1</source>
         <translation>Objet inexistant : %1</translation>
@@ -20,7 +20,7 @@
         <translation>%1 n&apos;est pas une région</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+62"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 n&apos;est pas d&apos;un type qui permet de l&apos;associer avec une région</translation>
     </message>

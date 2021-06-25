@@ -303,7 +303,7 @@
         <translation>Атрибут &quot;%1&quot; тэга &quot;%2&quot; не может быть пустым.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+107"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+109"/>
         <source>No such region: %1</source>
         <translation>Нет такого региона: %1</translation>
     </message>
@@ -313,7 +313,7 @@
         <translation>%1 - не регион</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+62"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 не сопоставить с регионом (не тот тип)</translation>
     </message>
@@ -330,7 +330,7 @@
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
-        <location line="-83"/>
+        <location line="-96"/>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
