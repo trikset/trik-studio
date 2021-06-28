@@ -24,6 +24,7 @@ enum Column {
 
 BlackBoxBlock::BlackBoxBlock()
 	: mTable(new QTableWidget(1, 0))
+	, mFinishButton(new QPushButton(tr("Finish")))
 {
 	mTable->setAttribute(Qt::WA_DeleteOnClose);
 	mTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -31,7 +32,7 @@ BlackBoxBlock::BlackBoxBlock()
 	mTable->move(170, 200);
 	connect(mTable, &QWidget::destroyed, this, &BlackBoxBlock::finishTable);
 	connect(mTable, &QTableWidget::itemChanged, this, &BlackBoxBlock::onChanged);
-	connect(mTable, &QTableWidget::itemDoubleClicked, this, &BlackBoxBlock::onDoubleClick);
+	connect(mFinishButton, &QPushButton::pressed, this, &BlackBoxBlock::finishTable);
 }
 
 void BlackBoxBlock::setNotEditable(QTableWidgetItem* item) {
@@ -65,20 +66,11 @@ void BlackBoxBlock::run()
 	}
 	headers << "output";
 	mTable->setHorizontalHeaderLabels(headers);
-	mOutputItem = new QTableWidgetItem("Finish");
-	setNotEditable(mOutputItem);
-	mTable->setItem(lastRow(), mInputItems.size(), mOutputItem);
+	mTable->setCellWidget(lastRow(), mInputItems.size(), mFinishButton);
 
 	mTable->setWindowTitle("Black Box");
 	mTable->resize(140 * (mInputItems.size() + 1), 720);
 	mTable->setVisible(true);
-}
-
-void BlackBoxBlock::onDoubleClick(QTableWidgetItem* item) {
-	if (item == mOutputItem) {
-		mTable->removeRow(lastRow());
-		finishTable();
-	}
 }
 
 void BlackBoxBlock::onChanged(QTableWidgetItem* item) {
@@ -132,6 +124,7 @@ void BlackBoxBlock::finishedSteppingInto()
 
 void BlackBoxBlock::finishTable()
 {
+	mTable->removeRow(lastRow());
 	emit done(mNextBlockId);
 }
 
