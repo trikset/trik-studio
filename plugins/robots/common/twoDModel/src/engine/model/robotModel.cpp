@@ -393,7 +393,7 @@ void RobotModel::nextStep()
 	if (mIsRiding) {
 		auto oneStep = qReal::SettingsManager::value("2dGridCellSize").toInt();
 		const auto delta = mWaitPos - mPos;
-		const auto direction = robotsTransform().map(QPointF(1, 0));
+		const auto direction = QTransform().rotate(mAngle).map(QPointF(1, 0));
 		auto scalarProduct = delta.x() * direction.x() + delta.y() * direction.y();
 		auto ahead = aheadRect();
 		if (scalarProduct > 0) {
