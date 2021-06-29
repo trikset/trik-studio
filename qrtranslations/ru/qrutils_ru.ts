@@ -281,19 +281,24 @@
 <context>
     <name>qReal::interpretation::blocks::BlackBoxBlock</name>
     <message>
-        <location filename="../../qrutils/interpreter/blocks/blackBoxBlock.cpp" line="+47"/>
+        <location filename="../../qrutils/interpreter/blocks/blackBoxBlock.cpp" line="+27"/>
+        <source>Finish</source>
+        <translation>Закончить</translation>
+    </message>
+    <message>
+        <location line="+21"/>
         <source>Inputs count must be int</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество входов должно быть целым</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Inputs count must be more or equal to 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество входов должно быть не меньше одного</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+43"/>
         <source>Can&apos;t find diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Диаграмма не найдена</translation>
     </message>
 </context>
 <context>
