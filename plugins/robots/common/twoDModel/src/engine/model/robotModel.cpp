@@ -390,11 +390,20 @@ void RobotModel::nextStep()
 	// No physics for simple robot
 //	mPos += mPhysicsEngine->positionShift(*this).toPointF();
 //	mAngle += mPhysicsEngine->rotation(*this);
-	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	auto ahead = aheadRect().translated(gridSize, 0);
-	items::MovableItem *needToMove;
-	QMap<items::MovableItem*, bool> movedItems;
 	if (mIsRiding) {
+		auto oneStep = qReal::SettingsManager::value("2dGridCellSize").toInt();
+		const auto delta = mWaitPos - mPos;
+		const auto direction = robotsTransform().map(QPointF(1, 0));
+		auto scalarProduct = delta.x() * direction.x() + delta.y() * direction.y();
+		auto ahead = aheadRect();
+		if (scalarProduct > 0) {
+			ahead.translate(oneStep, 0);
+		} else {
+			ahead.translate(-ahead.width(), 0);
+			oneStep = -oneStep;
+		}
+		items::MovableItem *needToMove;
+		QMap<items::MovableItem*, bool> movedItems;
 		do {
 			needToMove = nullptr;
 			auto aheadPolygon = robotsTransform().map(ahead);
@@ -406,10 +415,9 @@ void RobotModel::nextStep()
 					break;
 				}
 			}
-			ahead.translate(gridSize, 0);
+			ahead.translate(oneStep, 0);
 		} while (needToMove);
 
-		const auto delta = mWaitPos - mPos;
 		const auto lenSquare = QPointF::dotProduct(delta, delta);
 		const auto oldPos = mPos;
 
@@ -419,8 +427,8 @@ void RobotModel::nextStep()
 			emit mRobotModel.endManual(!mIsCollide);
 		} else {
 			const auto unitVector = delta / qSqrt(lenSquare);
-			QLineF moveLine(QPointF(), (movedItems.size() + 1) *  gridSize * unitVector);
-			moveLine.translate(robotsTransform().map(QPointF()));
+			QLineF moveLine(QPointF(), (movedItems.size() + 0.5) * abs(oneStep) * unitVector);
+			moveLine.translate(robotCenter());
 			for (auto &&wall : mWorldModel->walls()) {
 				auto wallLine = QLineF(wall->begin(), wall->end());
 				if (moveLine.intersect(wallLine, nullptr) == QLineF::BoundedIntersection) {
