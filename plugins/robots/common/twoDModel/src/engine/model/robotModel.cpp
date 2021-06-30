@@ -392,11 +392,10 @@ void RobotModel::nextStep()
 //	mAngle += mPhysicsEngine->rotation(*this);
 	if (mIsRiding) {
 		auto oneStep = qReal::SettingsManager::value("2dGridCellSize").toInt();
-		const auto delta = mWaitPos - mPos;
-		const auto direction = QTransform().rotate(mAngle).map(QPointF(1, 0));
-		auto scalarProduct = delta.x() * direction.x() + delta.y() * direction.y();
-		auto ahead = aheadRect();
-		if (scalarProduct > 0) {
+		const auto &delta = mWaitPos - mPos;
+		const auto &direction = QTransform().rotate(mAngle).map(QPointF(1, 0));
+		auto && ahead = aheadRect();
+		if (delta.x() * direction.x() + delta.y() * direction.y() > 0) {
 			ahead.translate(oneStep, 0);
 		} else {
 			ahead.translate(-ahead.width(), 0);
@@ -406,7 +405,7 @@ void RobotModel::nextStep()
 		QMap<items::MovableItem*, bool> movedItems;
 		do {
 			needToMove = nullptr;
-			auto aheadPolygon = robotsTransform().map(ahead);
+			const auto &aheadPolygon = robotsTransform().map(ahead);
 			for (auto &&movable : mWorldModel->movables()) {
 				const auto movablePolygon = movable->mapToScene(movable->boundingRect());
 				if (movablePolygon.intersects(aheadPolygon) && !movedItems.contains(movable.data())) {
