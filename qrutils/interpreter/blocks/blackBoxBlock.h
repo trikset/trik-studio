@@ -16,6 +16,7 @@
 
 #include "qrutils/interpreter/block.h"
 #include <QTableWidget>
+#include <QPushButton>
 
 namespace qReal {
 namespace interpretation {
@@ -34,10 +35,11 @@ public:
 	void run() override;
 	void finishedSteppingInto() override;
 
+public slots:
+	void finishTable();
+
 private slots:
 	void onChanged(QTableWidgetItem* item);
-	void onDoubleClick(QTableWidgetItem* item);
-	void finishTable();
 
 private:
 	void setNotEditable(QTableWidgetItem* item);
@@ -45,7 +47,7 @@ private:
 	void activateCell(QTableWidgetItem* item);
 	QTableWidget* mTable;
 	QList<QTableWidgetItem*> mInputItems;
-	QTableWidgetItem* mOutputItem;
+	QPushButton* mFinishButton;
 };
 
 }

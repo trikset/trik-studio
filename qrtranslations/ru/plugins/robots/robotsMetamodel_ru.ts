@@ -459,7 +459,7 @@
     <message>
         <location line="+35"/>
         <source>Black Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Черный ящик</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -469,27 +469,27 @@
     <message>
         <location line="+14"/>
         <source>Number of inputs:</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество входов:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Inputs count</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество входов</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Black Box Diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Диаграмма черного ящика</translation>
     </message>
     <message>
         <location line="+32"/>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Закончен</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>BlackBoxDiagramGroup</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+15"/>
