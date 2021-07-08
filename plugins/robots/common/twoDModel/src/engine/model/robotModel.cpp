@@ -379,11 +379,6 @@ QVector<int> RobotModel::gyroscopeCalibrate()
 	return gyroscopeReading();
 }
 
-QRectF RobotModel::aheadRect() const {
-	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	return QRectF(0, eps, eps, gridSize - 2 * eps);
-}
-
 void RobotModel::nextStep()
 {
 	// Changing position quietly, they must not be caught by UI here.
@@ -394,7 +389,7 @@ void RobotModel::nextStep()
 		auto oneStep = qReal::SettingsManager::value("2dGridCellSize").toInt();
 		const auto &delta = mWaitPos - mPos;
 		const auto &direction = QTransform().rotate(mAngle).map(QPointF(1, 0));
-		auto && ahead = aheadRect();
+		auto ahead = QRectF(0, eps, eps, oneStep - 2 * eps);
 		if (delta.x() * direction.x() + delta.y() * direction.y() > 0) {
 			ahead.translate(oneStep, 0);
 		} else {
