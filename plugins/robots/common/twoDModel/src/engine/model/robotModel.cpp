@@ -379,11 +379,6 @@ QVector<int> RobotModel::gyroscopeCalibrate()
 	return gyroscopeReading();
 }
 
-QRectF RobotModel::aheadRect() const {
-	auto gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	return QRectF(0, eps, eps, gridSize - 2 * eps);
-}
-
 void RobotModel::nextStep()
 {
 	// Changing position quietly, they must not be caught by UI here.
@@ -392,11 +387,10 @@ void RobotModel::nextStep()
 //	mAngle += mPhysicsEngine->rotation(*this);
 	if (mIsRiding) {
 		auto oneStep = qReal::SettingsManager::value("2dGridCellSize").toInt();
-		const auto delta = mWaitPos - mPos;
-		const auto direction = QTransform().rotate(mAngle).map(QPointF(1, 0));
-		auto scalarProduct = delta.x() * direction.x() + delta.y() * direction.y();
-		auto ahead = aheadRect();
-		if (scalarProduct > 0) {
+		const auto &delta = mWaitPos - mPos;
+		const auto &direction = QTransform().rotate(mAngle).map(QPointF(1, 0));
+		auto ahead = QRectF(0, eps, eps, oneStep - 2 * eps);
+		if (delta.x() * direction.x() + delta.y() * direction.y() > 0) {
 			ahead.translate(oneStep, 0);
 		} else {
 			ahead.translate(-ahead.width(), 0);
@@ -406,7 +400,7 @@ void RobotModel::nextStep()
 		QMap<items::MovableItem*, bool> movedItems;
 		do {
 			needToMove = nullptr;
-			auto aheadPolygon = robotsTransform().map(ahead);
+			const auto &aheadPolygon = robotsTransform().map(ahead);
 			for (auto &&movable : mWorldModel->movables()) {
 				const auto movablePolygon = movable->mapToScene(movable->boundingRect());
 				if (movablePolygon.intersects(aheadPolygon) && !movedItems.contains(movable.data())) {

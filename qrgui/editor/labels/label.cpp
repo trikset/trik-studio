@@ -347,6 +347,13 @@ void Label::setHard(bool hard)
 
 bool Label::isReadOnly() const
 {
+	Element * const parent = dynamic_cast<Element *>(parentItem());
+	const auto &parentDiagram = mLogicalModelAssistApi.logicalRepoApi().outgoingExplosion(parent->logicalId());
+	if (mLogicalModelAssistApi.logicalRepoApi().exist(parentDiagram)) {
+		if (mLogicalModelAssistApi.logicalRepoApi().property(parentDiagram, "finished").toBool()) {
+			return true;
+		}
+	}
 	return mProperties->isReadOnly();
 }
 
