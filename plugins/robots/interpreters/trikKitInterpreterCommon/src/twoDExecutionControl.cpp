@@ -149,6 +149,11 @@ void TwoDExecutionControl::removeFile(const QString &file)
 	out.remove();
 }
 
+int TwoDExecutionControl::timeInterval(int packedTimeLeft, int packedTimeRight)
+{
+	return trikKernel::TimeVal::timeInterval(packedTimeLeft, packedTimeRight);
+}
+
 void TwoDExecutionControl::run()
 {
 	mInEventDrivenMode = true;

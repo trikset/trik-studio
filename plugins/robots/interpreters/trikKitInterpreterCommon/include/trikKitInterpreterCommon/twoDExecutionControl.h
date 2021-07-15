@@ -57,6 +57,8 @@ public:
 
 	void removeFile(const QString &file) override;
 
+	int timeInterval(int packedTimeLeft, int packedTimeRight) override;
+
 public slots:
 	void reset() override;
 	void run() override;
