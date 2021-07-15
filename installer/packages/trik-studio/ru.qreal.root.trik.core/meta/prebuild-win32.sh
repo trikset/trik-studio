@@ -20,7 +20,7 @@ cp    $BIN_DIR/python3*.dll                                                     
 cp    $BIN_DIR/vcruntime*.dll                                                     $PWD/../data/
 
 cp    "$BIN_DIR/system.js"                                                          "$PWD/../data/"
-cp    "$BIN_DIR/system.py"                                                          "$PWD/../data/"
+cp    "$BIN_DIR/TRIK.py"                                                          "$PWD/../data/"
 cp    "$BIN_DIR/2D-model.exe"                                                       "$PWD/../data/"
 
 winscp_ver=5.17.10

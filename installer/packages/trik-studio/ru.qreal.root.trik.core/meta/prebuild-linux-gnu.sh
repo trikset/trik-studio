@@ -31,7 +31,7 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 	--hidden-import=time \
 	--hidden-import=os \
 	--hidden-import=types \
-	$BIN_DIR/system.py
+	$BIN_DIR/TRIK.py
 
 rsync -avR --remove-source-files dist/trik/./*.so* "$PWD/../data/lib/"
 # Remove before copying other files
