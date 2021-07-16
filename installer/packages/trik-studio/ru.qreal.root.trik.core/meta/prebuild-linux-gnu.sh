@@ -15,7 +15,8 @@ rsync -a "$BIN_DIR"/libtrikPythonQt{,_QtAll}-Qt*-Python*.so*                    
 
 rsync -a "$BIN_DIR"/libtrik*.so*                                                         "$PWD"/../data/lib/
 
-cp     $BIN_DIR/system.{py,js} $BIN_DIR/2D-model                       		 $PWD/../data/bin/
+cp     $BIN_DIR/system.js $BIN_DIR/2D-model                       		 			$PWD/../data/bin/
+cp     $BIN_DIR/TRIK.py                        		 								$PWD/../data/bin/
 #Add Python runtime libraries
 
 [ -r venv/bin/activate ] || python3.${TRIK_PYTHON3_VERSION_MINOR} -m venv venv
@@ -31,7 +32,7 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 	--hidden-import=time \
 	--hidden-import=os \
 	--hidden-import=types \
-	$BIN_DIR/system.py
+	$BIN_DIR/TRIK.py
 
 rsync -avR --remove-source-files dist/trik/./*.so* "$PWD/../data/lib/"
 # Remove before copying other files
