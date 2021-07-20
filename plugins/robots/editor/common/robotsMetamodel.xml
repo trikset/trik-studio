@@ -261,10 +261,10 @@
 					</explodesTo>
 				</logic>
 			</node>
-			<node displayedName="Black Box" name="BlackBox" description="This is black box.">
+			<node displayedName="Black Box" name="BlackBox" description="Operator with an unknown information processing rule.">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/unknownSomething.png" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/blackBoxBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="-20" y="-35" textBinded="name" hard="true"/>
@@ -795,10 +795,10 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Draw in cell" name="DrawInCell" description="Draw in cell.">
+			<node displayedName="Draw in cell" name="DrawInCell" description="Paints the cell under the robot.">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image name="" x1="0" x2="50" y1="0" y2="50" />
+						<image name="images/drawInCellBlock.svg" x1="0" x2="50" y1="0" y2="50" />
 					</picture>
 					<labels>
 						<label x="27" y="-35" textBinded="Color" hard="true" prefix="Color:"/>
