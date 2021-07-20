@@ -462,12 +462,7 @@
         <translation>Черный ящик</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>This is black box.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
+        <location line="+16"/>
         <source>Number of inputs:</source>
         <translation>Количество входов:</translation>
     </message>
@@ -541,15 +536,10 @@
     <message>
         <location line="+11"/>
         <source>Draw in cell</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрасить клетку</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Draw in cell.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+52"/>
+        <location line="+54"/>
         <source>EngineCommand</source>
         <translation>Базовый блок моторов</translation>
     </message>
@@ -1081,7 +1071,17 @@
         <translation>Вычислять</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-1024"/>
+        <source>Operator with an unknown information processing rule.</source>
+        <translation>Оператор с неизвестным правилом обработки информации.</translation>
+    </message>
+    <message>
+        <location line="+253"/>
+        <source>Paints the cell under the robot.</source>
+        <translation>Закрашивает клетку под роботом.</translation>
+    </message>
+    <message>
+        <location line="+772"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
