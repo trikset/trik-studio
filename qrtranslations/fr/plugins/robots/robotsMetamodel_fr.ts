@@ -660,12 +660,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>This is black box.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
+        <location line="+16"/>
         <source>Number of inputs:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -695,12 +690,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <source>Draw in cell.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+324"/>
+        <location line="+326"/>
         <location line="+34"/>
         <location line="+353"/>
         <source>Condition</source>
@@ -854,7 +844,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-1024"/>
+        <source>Operator with an unknown information processing rule.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+253"/>
+        <source>Paints the cell under the robot.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+772"/>
         <source>Text</source>
         <translation>Texte</translation>
     </message>

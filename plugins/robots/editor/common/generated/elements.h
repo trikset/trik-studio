@@ -60,7 +60,7 @@
 			setName("BlackBox");
 			setFriendlyName(QObject::tr("Black Box"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("This is black box."));
+			setDescription(QObject::tr("Operator with an unknown information processing rule."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, -0.4, -0.7, "name", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
@@ -313,7 +313,7 @@
 			setName("DrawInCell");
 			setFriendlyName(QObject::tr("Draw in cell"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Draw in cell."));
+			setDescription(QObject::tr("Paints the cell under the robot."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.54, -0.7, "Color", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
