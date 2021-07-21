@@ -3,34 +3,7 @@ updates:
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
-      interval: "weekly"
-    allow:
-      - dependency-name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
-      - dependency-name: "thirdparty/gamepad/gamepad"
-    reviewers:
-      - "iakov"
-
-  - package-ecosystem: "gitsubmodule"
-    directory: "/"
-    schedule:
       interval: "monthly"
-    ingore:
-      - dependency-name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
-      - dependency-name: "thirdparty/gamepad/gamepad"
-    reviewers:
-      - "iakov"
-
-  - package-ecosystem: "gitsubmodule"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    target-branch: "junior"
-    labels:
-      - "junior"
-      - "dependencies"
-    allow:
-      - dependency-name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
-      - dependency-name: "thirdparty/gamepad/gamepad"
     reviewers:
       - "iakov"
 
@@ -42,8 +15,5 @@ updates:
     labels:
       - "junior"
       - "dependencies"
-    ingore:
-      - dependency-name: "plugins/robots/thirdparty/trikRuntime/trikRuntime"
-      - dependency-name: "thirdparty/gamepad/gamepad"
     reviewers:
       - "iakov"
