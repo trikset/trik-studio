@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+TEMPLATE = app
+CONFIG -= app_bundle
+
 include (../../global.pri)
 
 TARGET = checkapp
