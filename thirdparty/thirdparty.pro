@@ -22,8 +22,4 @@ SUBDIRS = \
 	qslog/QsLogSharedLibrary.pro \
 	gamepad/gamepad.pro \
 	quazip/quazip.pro \
-
-win32 {
-	SUBDIRS += \
-		checkapp/checkapp.pro \
-	}
+	checkapp/checkapp.pro \
