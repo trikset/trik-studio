@@ -15,8 +15,8 @@ rsync -a "$BIN_DIR"/libtrikPythonQt{,_QtAll}-Qt*-Python*.so*                    
 
 rsync -a "$BIN_DIR"/libtrik*.so*                                                         "$PWD"/../data/lib/
 
-cp     $BIN_DIR/system.js $BIN_DIR/2D-model                       		 			$PWD/../data/bin/
-cp     $BIN_DIR/TRIK.py                        		 								$PWD/../data/bin/
+cp     "$BIN_DIR"/{system.js,TRIK.py,2D-model,checkapp}            			"PWD/../data/bin/"
+
 #Add Python runtime libraries
 
 [ -r venv/bin/activate ] || python3.${TRIK_PYTHON3_VERSION_MINOR} -m venv venv
