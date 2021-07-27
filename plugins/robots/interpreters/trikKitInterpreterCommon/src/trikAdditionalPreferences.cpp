@@ -68,6 +68,7 @@ void TrikAdditionalPreferences::save()
 	SettingsManager::setValue("TrikSimulatedCameraImagesPath", mUi->imagesPathlineEdit->text());
 	SettingsManager::setValue("TrikSimulatedCameraImagesFromProject", mUi->imagesFromProjectCheckBox->isChecked());
 	SettingsManager::setValue("TrikWebCameraRealName", mUi->cameraNameLineEdit->text());
+	SettingsManager::setValue("TRIK2DMailbox", mUi->mailboxCheckBox->isChecked());
 	mUi->robotImagePicker->save();
 	emit settingsChanged();
 }
@@ -83,6 +84,7 @@ void TrikAdditionalPreferences::restoreSettings()
 	mUi->imagesFromProjectCheckBox->setChecked(SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool());
 	mUi->simulatedCameraFrame->setVisible(not mUi->realCameraCheckBox->isChecked());
 	mUi->realCameraFrame->setVisible(mUi->realCameraCheckBox->isChecked());
+	mUi->mailboxCheckBox->setChecked(SettingsManager::value("TRIK2DMailbox").toBool());
 	mUi->robotImagePicker->restore();
 }
 

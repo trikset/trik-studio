@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>357</width>
-    <height>434</height>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -57,13 +57,6 @@
       <string>Camera Settings</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="realCameraCheckBox">
-        <property name="text">
-         <string>Use real camera</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QFrame" name="realCameraFrame">
         <property name="frameShape">
@@ -84,6 +77,13 @@
           <widget class="QLineEdit" name="cameraNameLineEdit"/>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="realCameraCheckBox">
+        <property name="text">
+         <string>Use real camera</string>
+        </property>
        </widget>
       </item>
       <item row="2" column="1">
@@ -133,6 +133,35 @@
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="NetworkSettingsBox">
+     <property name="title">
+      <string>Network Settings</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="mailboxCheckBox">
+        <property name="text">
+         <string>Enable Mailbox</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
