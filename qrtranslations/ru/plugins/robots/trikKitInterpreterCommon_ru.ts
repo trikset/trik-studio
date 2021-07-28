@@ -159,7 +159,7 @@
 <context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+32"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation>Картинка робота в 2D:</translation>
     </message>
@@ -167,6 +167,16 @@
         <location line="+18"/>
         <source>Select Directory</source>
         <translation>Выберите папку</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>You should restart the program to apply changes</source>
+        <translation>Перезапустите программу, чтобы применить изменения</translation>
     </message>
     <message>
         <source>Open Directory</source>

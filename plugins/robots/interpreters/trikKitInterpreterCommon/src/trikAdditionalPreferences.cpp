@@ -17,6 +17,7 @@
 
 #include <QtWidgets/QStyle>
 
+#include <QMessageBox>
 #include <qrkernel/settingsManager.h>
 #include <qrutils/widgets/qRealFileDialog.h>
 
@@ -70,6 +71,11 @@ void TrikAdditionalPreferences::save()
 	SettingsManager::setValue("TrikWebCameraRealName", mUi->cameraNameLineEdit->text());
 	SettingsManager::setValue("TRIK2DMailbox", mUi->mailboxCheckBox->isChecked());
 	mUi->robotImagePicker->save();
+
+	if (mailboxSavedState != mUi->mailboxCheckBox->isChecked()) {
+		QMessageBox::information(this, tr("Information"), tr("You should restart the program to apply changes"));
+		mailboxSavedState = mUi->mailboxCheckBox->isChecked();
+	}
 	emit settingsChanged();
 }
 
@@ -85,6 +91,7 @@ void TrikAdditionalPreferences::restoreSettings()
 	mUi->simulatedCameraFrame->setVisible(not mUi->realCameraCheckBox->isChecked());
 	mUi->realCameraFrame->setVisible(mUi->realCameraCheckBox->isChecked());
 	mUi->mailboxCheckBox->setChecked(SettingsManager::value("TRIK2DMailbox").toBool());
+	mailboxSavedState = mUi->mailboxCheckBox->isChecked();
 	mUi->robotImagePicker->restore();
 }
 
