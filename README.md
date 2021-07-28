@@ -1,8 +1,5 @@
 
-[![Build Status](https://dev.azure.com/trikset/trik-studio/_apis/build/status/trikset.trik-studio?branchName=master)](https://dev.azure.com/trikset/trik-studio/_build/latest?definitionId=1&branchName=master)
-[![Build status](https://img.shields.io/appveyor/ci/iakov/trik-studio-7oqgo/master.svg?maxAge=3600&style=for-the-badge&logo=windows&logoColor=green)](https://ci.appveyor.com/project/iakov/trik-studio-7oqgo/branch/master)
-
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=trikset/trik-studio)](https://dependabot.com)
+![GHA build status](https://github.com/trikset/trik-studio/actions/workflows/main.yml/badge.svg) [![Build Status](https://dev.azure.com/trikset/trik-studio/_apis/build/status/trikset.trik-studio?branchName=master)](https://dev.azure.com/trikset/trik-studio/_build/latest?definitionId=1&branchName=master)
 
 # [![TRIK Studio logo from master branch](https://github.com/trikset/trik-studio/raw/master/installer/images/trik-studio-32x32.png)TRIK Studio](https://dl.trikset.com/ts/fresh)
 
