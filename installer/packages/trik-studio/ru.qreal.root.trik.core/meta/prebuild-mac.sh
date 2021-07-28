@@ -20,5 +20,7 @@ export -f fix_qreal_dependencies
 find "$BUNDLE_CONTENTS/Lib" -depth 1 -name "libtrik*.*.*.*.dylib" -print0 | xargs -0 -n 1 -I {} bash -c 'fix_qreal_dependencies "{}"'
 
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
-cp -fpR "$BIN_DIR/2D-model"                                                       "$BUNDLE_CONTENTS/MacOS/"
+cp -fpR "$BIN_DIR"/{2D-model,checkapp}                                                  "$BUNDLE_CONTENTS/MacOS/"
+
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/checkapp"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/2D-model"

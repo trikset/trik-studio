@@ -11,3 +11,5 @@ cp -pr $BIN_DIR/librobots-trik-kit.so*                                          
 cp -pr $BIN_DIR/librobots-trik-kit-interpreter-common.so*                          $PWD/../data/lib/
 
 rsync -a "$BIN_DIR"/libtrik*.so*                                                         "$PWD"/../data/lib/
+
+cp     "$BIN_DIR"/{2D-model,checkapp}            			                       "$PWD/../data/bin/"
