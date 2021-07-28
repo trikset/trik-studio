@@ -27,7 +27,9 @@ find "$BUNDLE_CONTENTS/Lib" -depth 1 -name "libtrik*.*.*.*.dylib" -print0 | xarg
 
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
 cp -pR "$BIN_DIR"/{system.js,TRIK.py}	                                                "$PWD/../data/"
-cp -fpR "$BIN_DIR/{2D-model,checkapp}"                                                  "$BUNDLE_CONTENTS/MacOS/"
+cp -fpR "$BIN_DIR"/{2D-model,checkapp}                                                  "$BUNDLE_CONTENTS/MacOS/"
+
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/checkapp"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/2D-model"
 
 [ -r venv/bin/activate ] || python3.${TRIK_PYTHON3_VERSION_MINOR} -m venv venv
