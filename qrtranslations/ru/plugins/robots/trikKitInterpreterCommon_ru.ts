@@ -41,17 +41,17 @@
         <translation>Настройки камеры</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+28"/>
         <source>Use real camera</source>
         <translation>Использовать камеру</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="-13"/>
         <source>Camera:</source>
         <translation>Камера:</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+29"/>
         <source>Use images from project</source>
         <translation>Использовать запакованные в проект изображения</translation>
     </message>
@@ -66,7 +66,17 @@
         <translation>Запаковывать изображения в проект</translation>
     </message>
     <message>
-        <location line="-16"/>
+        <location line="+16"/>
+        <source>Network Settings</source>
+        <translation>Настройки сети</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable Mailbox</source>
+        <translation>Активировать Mailbox</translation>
+    </message>
+    <message>
+        <location line="-38"/>
         <source>Images:</source>
         <translation>Изображения:</translation>
     </message>
@@ -149,7 +159,7 @@
 <context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+32"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation>Картинка робота в 2D:</translation>
     </message>
@@ -157,6 +167,16 @@
         <location line="+18"/>
         <source>Select Directory</source>
         <translation>Выберите папку</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>You should restart the program to apply changes</source>
+        <translation>Перезапустите программу, чтобы применить изменения</translation>
     </message>
     <message>
         <source>Open Directory</source>
