@@ -462,17 +462,15 @@
         <translation>Черный ящик</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Number of inputs:</source>
-        <translation>Количество входов:</translation>
+        <translation type="vanished">Количество входов:</translation>
     </message>
     <message>
-        <location line="+24"/>
         <source>Inputs count</source>
-        <translation>Количество входов</translation>
+        <translation type="vanished">Количество входов</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+51"/>
         <source>Black Box Diagram</source>
         <translation>Диаграмма черного ящика</translation>
     </message>
@@ -1076,7 +1074,17 @@
         <translation>Оператор с неизвестным правилом обработки информации.</translation>
     </message>
     <message>
-        <location line="+253"/>
+        <location line="+14"/>
+        <source>Number of variables:</source>
+        <translation>Количество переменных:</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Number of variables</source>
+        <translation>Количество переменных</translation>
+    </message>
+    <message>
+        <location line="+215"/>
         <source>Paints the cell under the robot.</source>
         <translation>Закрашивает клетку под роботом.</translation>
     </message>
