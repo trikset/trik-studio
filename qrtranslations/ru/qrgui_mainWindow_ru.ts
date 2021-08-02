@@ -1230,7 +1230,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::ErrorReporter</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+212"/>
+        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+215"/>
         <source>INFORMATION:</source>
         <translation>ИНФОРМАЦИЯ:</translation>
     </message>
