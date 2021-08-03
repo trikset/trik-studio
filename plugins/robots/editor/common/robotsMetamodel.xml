@@ -268,14 +268,14 @@
 					</picture>
 					<labels>
 						<label x="-20" y="-35" textBinded="name" hard="true"/>
-						<label x="33" y="60" textBinded="inputsCount" background="white" prefix="Number of inputs:"/>
+						<label x="33" y="60" textBinded="inputsCount" background="white" prefix="Number of variables:"/>
 					</labels>
 					<nonResizeable/>
 				</graphics>
 				<logic>
 					<container/>
 					<properties>
-						<property displayedName="Inputs count" type="int" name="inputsCount">
+						<property displayedName="Number of variables" type="int" name="inputsCount">
 							<default>1</default>
 						</property>
 					</properties>

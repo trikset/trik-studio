@@ -74,7 +74,7 @@
 			label_2->setScalingY(false);
 			label_2->setHard(false);
 			label_2->setPlainTextMode(false);
-			label_2->setPrefix(QObject::tr("Number of inputs:"));
+			label_2->setPrefix(QObject::tr("Number of variables:"));
 			addLabel(label_2);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/BlackBoxClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
@@ -98,7 +98,7 @@
 
 		void initProperties()
 		{
-			addProperty("inputsCount", "int", QString::fromUtf8("1"), QObject::tr("Inputs count"), QObject::tr(""), false);
+			addProperty("inputsCount", "int", QString::fromUtf8("1"), QObject::tr("Number of variables"), QObject::tr(""), false);
 		}
 	};
 

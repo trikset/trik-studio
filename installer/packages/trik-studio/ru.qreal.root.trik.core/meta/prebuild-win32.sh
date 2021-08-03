@@ -22,3 +22,4 @@ cp    $BIN_DIR/robots-trik-kit-interpreter-common.dll                           
 #cp    "$BIN_DIR/system.js"                                                          "$PWD/../data/"
 #cp    "$BIN_DIR/system.py"                                                          "$PWD/../data/"
 cp    "$BIN_DIR/2D-model.exe"                                                       "$PWD/../data/"
+cp    "$BIN_DIR/checkapp.exe"                                                       "$PWD/../data/"
