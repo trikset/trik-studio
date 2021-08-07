@@ -304,7 +304,7 @@
     <message>
         <location line="+14"/>
         <source>Finish black box</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть черный ящик</translation>
     </message>
 </context>
 <context>
