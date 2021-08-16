@@ -23,7 +23,7 @@ enum Column {
 };
 
 BlackBoxBlock::BlackBoxBlock()
-	: mTable(new QTableWidget(1, 0))
+	: mTable(new QTableWidget(2, 0))
 	, mFinishButton(new QPushButton(tr("Finish")))
 {
 	mTable->setAttribute(Qt::WA_DeleteOnClose);
@@ -56,17 +56,26 @@ void BlackBoxBlock::run()
 	if (inputsCount == 1) {
 		headers << "input";
 		mInputItems.append(new QTableWidgetItem());
-		mTable->setItem(lastRow(), 0, mInputItems[0]);
+		mTable->setItem(lastInputRow(), 0, mInputItems[0]);
 	} else {
 		for (int i = 0; i < inputsCount; i++) {
 			mInputItems.append(new QTableWidgetItem());
-			mTable->setItem(lastRow(), i, mInputItems[i]);
+			mTable->setItem(lastInputRow(), i, mInputItems[i]);
 			headers << "input" + QString::number(i + 1);
 		}
 	}
 	headers << "output";
 	mTable->setHorizontalHeaderLabels(headers);
-	mTable->setCellWidget(lastRow(), mInputItems.size(), mFinishButton);
+
+	mRunItem = new QTableWidgetItem();
+	mRunItem->setFlags(mRunItem->flags() ^ Qt::ItemIsSelectable ^ Qt::ItemIsEditable);
+	mRunItem->setBackgroundColor(Qt::lightGray);
+	mRunItem->setText(tr("Run"));
+	mRunItem->setTextAlignment(Qt::AlignCenter);
+	mTable->setItem(lastInputRow(), mInputItems.size(), mRunItem);
+
+	mTable->setSpan(lastInputRow() + 1, 0, 1, mTable->columnCount());
+	mTable->setCellWidget(lastInputRow() + 1, 0, mFinishButton);
 
 	mTable->setWindowTitle("Black Box");
 	mTable->resize(140 * (mInputItems.size() + 1), 720);
@@ -74,7 +83,7 @@ void BlackBoxBlock::run()
 }
 
 void BlackBoxBlock::onChanged(QTableWidgetItem* item) {
-	if (mInputItems.contains(item)) {
+	if (mInputItems.contains(item) && !item->text().isEmpty()) {
 		for (int i = 0; i < mInputItems.size(); i++) {
 			if (mInputItems[i]->text().isEmpty()) {
 				activateCell(mInputItems[i]);
@@ -105,18 +114,18 @@ void BlackBoxBlock::finishedSteppingInto()
 	}
 
 	// Add row for results
-	mTable->insertRow(mTable->rowCount() - 1);
+	mTable->insertRow(lastInputRow());
 
 	for (int i = 0; i < mInputItems.size(); i++) {
 		auto curInput = new QTableWidgetItem(lastInputs[i]);
 		setNotEditable(curInput);
-		mTable->setItem(lastRow() - 1, i, curInput);
+		mTable->setItem(lastInputRow() - 1, i, curInput);
 	}
 
 	auto res = evalCode<QString>(mTable->horizontalHeaderItem(mInputItems.size())->text());
 	auto curOutput = new QTableWidgetItem(res);
 	setNotEditable(curOutput);
-	mTable->setItem(lastRow() - 1, mInputItems.size(), curOutput);
+	mTable->setItem(lastInputRow() - 1, mInputItems.size(), curOutput);
 
 	// Goto start
 	activateCell(mInputItems[0]);
@@ -124,13 +133,14 @@ void BlackBoxBlock::finishedSteppingInto()
 
 void BlackBoxBlock::finishTable()
 {
-	mTable->removeRow(lastRow());
+	mTable->removeRow(lastInputRow());
+	mTable->removeRow(mTable->rowCount() - 1);
 	emit done(mNextBlockId);
 }
 
-int BlackBoxBlock::lastRow()
+int BlackBoxBlock::lastInputRow()
 {
-	return mTable->rowCount() - 1;
+	return mTable->rowCount() - 2;
 }
 
 void BlackBoxBlock::activateCell(QTableWidgetItem* item)
