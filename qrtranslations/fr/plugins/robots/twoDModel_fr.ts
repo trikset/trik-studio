@@ -15,12 +15,17 @@
         <translation>Région inexistante : %1</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Only &apos;all&apos; tag for object point supported in Junior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+8"/>
         <source>%1 is not a region</source>
         <translation>%1 n&apos;est pas une région</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 n&apos;est pas d&apos;un type qui permet de l&apos;associer avec une région</translation>
     </message>
