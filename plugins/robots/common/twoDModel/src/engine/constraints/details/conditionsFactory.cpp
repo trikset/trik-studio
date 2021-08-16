@@ -110,6 +110,11 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			return false;
 		}
 
+		if (objectPoint != "all") {
+			reportError(QObject::tr("Only 'all' tag for object point supported in Junior"));
+			return false;
+		}
+
 		QObject * const object = mObjects[objectId];
 		items::RegionItem * const region = dynamic_cast<items::RegionItem *>(mObjects[regionId]);
 
@@ -137,6 +142,7 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			return region->containsItemCenter(graphicsObject);
 		}
 
+		// robotBoundingPath is alligned to cells
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
 				return adjRegion.contains(robotModel->robotBoundingPath(false));
