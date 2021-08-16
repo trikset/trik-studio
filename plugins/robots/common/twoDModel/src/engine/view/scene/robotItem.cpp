@@ -191,16 +191,20 @@ QDomElement RobotItem::serialize(QDomElement &parent) const
 }
 
 void RobotItem::deserializeImage(const QDomElement &element) {
+	mIsRotatingImage = false;
 	const QDomElement image = element.firstChildElement("robotImage");
 	// Need for old saves
 	if (!image.isNull()) {
 		mCustomImages[No] = Image::deserialize(image);
 		useCustomImage(true);
-		mIsRotatingImage = false;
 	} else {
 		const QDomElement images = element.firstChildElement("robotImages");
 		if (images.isNull()) {
+			useCustomImage(false);
 			return;
+		}
+		for (auto && key : mCustomImages.keys()) {
+			mCustomImages[key].reset();
 		}
 		for (QDomElement image = images.firstChildElement(); !image.isNull()
 				; image = image.nextSiblingElement()) {
@@ -210,9 +214,12 @@ void RobotItem::deserializeImage(const QDomElement &element) {
 		for (const auto dir : {Right, Up, Left, Down}) {
 			if (mCustomImages[dir].isNull()){
 				mCustomImages[dir] = mEmptyImage;
-			} else if (mCustomImages[Right]->isValid()) {
+			} else if (mCustomImages[dir]->isValid()) {
 				mIsRotatingImage = true;
 			}
+		}
+		if (mCustomImages[No].isNull()) {
+			mCustomImages[No] = mEmptyImage;
 		}
 		useCustomImage(true);
 	}
