@@ -106,7 +106,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	auto rect = RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0).toRect();
+	auto rect = RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0);
 	if (mIsCustomImage) {
 		if (mIsRotatingImage) {
 			painter->save();

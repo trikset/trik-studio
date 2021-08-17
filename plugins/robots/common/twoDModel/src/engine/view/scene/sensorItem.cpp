@@ -66,7 +66,7 @@ void SensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *sty
 	painter->setRenderHints(painter->renderHints()
 			| QPainter::SmoothPixmapTransform
 			| QPainter::HighQualityAntialiasing);
-	mImage.draw(*painter, mImageRect.toRect());
+	mImage.draw(*painter, mImageRect);
 	painter->restore();
 }
 
