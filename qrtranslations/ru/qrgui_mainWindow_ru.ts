@@ -1228,7 +1228,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+26"/>
         <source>Finish black box</source>
-        <translation type="unfinished">Закончить черный ящик</translation>
+        <translation>Закрыть черный ящик</translation>
     </message>
     <message>
         <location line="+14"/>

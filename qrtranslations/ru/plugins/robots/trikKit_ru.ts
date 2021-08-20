@@ -4,7 +4,7 @@
 <context>
     <name>trik::blocks::details::BackwardOneCellBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikBackwardOneCellBlock.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikBackwardOneCellBlock.cpp" line="+44"/>
         <source>Movement is impossible!</source>
         <translation>Движение невозможно!</translation>
     </message>
@@ -12,7 +12,7 @@
 <context>
     <name>trik::blocks::details::ForwardOneCellBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/trikForwardOneCellBlock.cpp" line="+44"/>
         <source>Movement is impossible!</source>
         <translation>Движение невозможно!</translation>
     </message>

@@ -26,5 +26,13 @@
         <file>icons/twoDVideoModule.svg</file>
         <file>icons/twoDIrRangeSensor.svg</file>
         <file>icons/twoDUsRangeSensor.svg</file>
+        <file>icons/junior_robots/Airplane.svg</file>
+        <file>icons/junior_robots/Chip.svg</file>
+        <file>icons/junior_robots/Clown.svg</file>
+        <file>icons/junior_robots/Helicopter.svg</file>
+        <file>icons/junior_robots/Human.svg</file>
+        <file>icons/junior_robots/Owl.svg</file>
+        <file>icons/junior_robots/Tank.svg</file>
+        <file>icons/junior_robots/Truck.svg</file>
     </qresource>
 </RCC>

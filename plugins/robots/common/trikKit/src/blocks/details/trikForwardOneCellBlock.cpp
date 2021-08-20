@@ -25,11 +25,15 @@ ForwardOneCellBlock::ForwardOneCellBlock(kitBase::robotModel::RobotModelInterfac
 }
 
 void ForwardOneCellBlock::run() {
-	const auto result = eval<int>("CellsNumber");
+	const auto result = eval<QVariant>("CellsNumber");
 	if (!errorsOccured()) {
+		if (!result.canConvert(QMetaType::Int)) {
+			error("Can't convert cells number to int");
+			return;
+		}
 		mConnections << connect(&mRobotModel, &kitBase::robotModel::RobotModelInterface::endManual
 				, this, &ForwardOneCellBlock::endMoving);
-		emit mRobotModel.moveManually(result);
+		emit mRobotModel.moveManually(result.toInt());
 	}
 }
 

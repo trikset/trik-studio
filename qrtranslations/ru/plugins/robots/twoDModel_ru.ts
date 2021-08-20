@@ -308,12 +308,17 @@
         <translation>Нет такого региона: %1</translation>
     </message>
     <message>
+        <location line="+5"/>
+        <source>Only &apos;all&apos; tag for object point supported in Junior</source>
+        <translation>Только тэг &apos;all&apos; поддерживается в среде Junior</translation>
+    </message>
+    <message>
         <location line="+8"/>
         <source>%1 is not a region</source>
         <translation>%1 - не регион</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 не сопоставить с регионом (не тот тип)</translation>
     </message>
@@ -330,7 +335,7 @@
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
-        <location line="-96"/>
+        <location line="-102"/>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>

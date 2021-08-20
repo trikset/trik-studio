@@ -296,7 +296,12 @@
         <translation>Количество входов должно быть не меньше одного</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+22"/>
+        <source>Run</source>
+        <translation>Выполнить</translation>
+    </message>
+    <message>
+        <location line="+30"/>
         <source>Can&apos;t find diagram</source>
         <translation>Диаграмма не найдена</translation>
     </message>
