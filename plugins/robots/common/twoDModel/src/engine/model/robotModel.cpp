@@ -455,6 +455,14 @@ void RobotModel::onRobotReturnedOnGround()
 	mIsOnTheGround = true;
 }
 
+bool RobotModel::isRiding() const
+{
+	for (auto &&engine : mMotors) {
+		if (engine && engine->isUsed && engine->speed != 0) return true;
+	}
+	return false;
+}
+
 void RobotModel::setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port)
 {
 	if (mWheelsToMotorPortsMap[wheel] != port) {
