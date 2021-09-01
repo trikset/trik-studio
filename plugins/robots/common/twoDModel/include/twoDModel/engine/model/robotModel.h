@@ -50,6 +50,7 @@ class TWO_D_MODEL_EXPORT RobotModel : public QObject
 	Q_PROPERTY(qreal rotation READ rotation WRITE setRotation)
 	Q_PROPERTY(qreal x READ x)
 	Q_PROPERTY(qreal y READ y)
+	Q_PROPERTY(bool isRiding READ isRiding)
 
 public:
 	enum ATime {
@@ -112,6 +113,8 @@ public:
 
 	/// Returns false if robot item is dragged by user at the moment.
 	bool onTheGround() const;
+
+	bool isRiding() const;
 
 	QDomElement serialize(QDomElement &parent) const;
 	void deserialize(const QDomElement &robotElement);
