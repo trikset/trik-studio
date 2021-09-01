@@ -25,7 +25,7 @@ InputBlock::InputBlock()
 	mDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	mDialog.setInputMode(QInputDialog::TextInput);
 	mDialog.setWindowTitle(tr("Input"));
-	mDialog.move(150, 150);
+	mDialog.move(190, 250);
 }
 
 void InputBlock::run()

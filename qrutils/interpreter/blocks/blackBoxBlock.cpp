@@ -29,7 +29,7 @@ BlackBoxBlock::BlackBoxBlock()
 	mTable->setAttribute(Qt::WA_DeleteOnClose);
 	mTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	mTable->setWindowFlag(Qt::WindowStaysOnTopHint);
-	mTable->move(170, 200);
+	mTable->move(1270, 200);
 	connect(mTable, &QWidget::destroyed, this, &BlackBoxBlock::finishTable);
 	connect(mTable, &QTableWidget::itemChanged, this, &BlackBoxBlock::onChanged);
 	connect(mFinishButton, &QPushButton::pressed, this, &BlackBoxBlock::finishTable);

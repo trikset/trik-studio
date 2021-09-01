@@ -580,6 +580,11 @@ void RobotModel::onRobotReturnedOnGround()
 	mIsOnTheGround = true;
 }
 
+bool RobotModel::isRiding() const
+{
+	return mIsRiding;
+}
+
 void RobotModel::setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port)
 {
 	if (mWheelsToMotorPortsMap[wheel] != port) {
