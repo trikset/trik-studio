@@ -207,6 +207,12 @@ jobs:
             echo Errors occurred in the step Tests
             exit 1
 
+      - name: Get tag
+        run: echo "CURRENT_TAG=$(git tag --contains HEAD)" >> $GITHUB_ENV
+      - name: Check tag
+        if: ${{ env.CURRENT_TAG != ''}}
+        run: echo "GITHUB_REF_SLUG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
+
       - name: Deploy installer
         if: ${{ github.event_name != 'pull_request' && github.repository_owner == 'trikset'}}
         run: sshpass -p ${{ secrets.DL_PASSWORD }} rsync -ve "ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
