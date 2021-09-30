@@ -37,19 +37,21 @@ jobs:
       fail-fast: false
       matrix:
         include:
-#          - qt-version: '5.12.10'
-#            mingw-version: 7.3
-#            mingw-short-version: 73
-#            python-version: 3.8
+          - qt-version: '5.12.11'
+            mingw-version: 7.3
+            mingw-short-version: 73
+            python-version: 3.8
+            deploy-installer: true
+
           - qt-version: '5.15.2'
             mingw-version: 8.1
             mingw-short-version: 81
             python-version: 3.8
+
     defaults:
       run:
         shell: msys2 {0}
-    env:
-      TEST_DIR: $GITHUB_WORKSPACE/small_testing
+
     steps:
 
       - name: Cancel Previous Workflow Runs
@@ -211,7 +213,7 @@ jobs:
         run: echo "GITHUB_REF_SLUG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
 
       - name: Deploy installer
-        if: ${{ github.event_name != 'pull_request' && github.repository_owner == 'trikset'}}
+        if: ${{ matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
         run: sshpass -p ${{ secrets.DL_PASSWORD }} rsync -ve "ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
 
       - name: Prepare for RDP connection
