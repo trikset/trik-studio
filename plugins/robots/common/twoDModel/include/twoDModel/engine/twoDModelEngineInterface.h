@@ -53,6 +53,11 @@ public:
 	virtual int readRangeSensor(const kitBase::robotModel::PortInfo &port
 			, int maxDistance, qreal scanningAngle) const = 0;
 
+	/// Returns IKHON
+	/// @returns
+	virtual QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port
+			, int maxDistance) const = 0;
+
 	/// Returns 3 integer values that represents acceleration on three coordinate axes
 	virtual QVector<int> readAccelerometerSensor() const = 0;
 

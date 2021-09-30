@@ -119,6 +119,24 @@ int TwoDModelEngineApi::readRangeSensor(const PortInfo &port, int maxDistance, q
 	return mModel.settings().realisticSensors() ? spoilRangeReading(res) : res;
 }
 
+QVector<int> TwoDModelEngineApi::readLidarSensor(const PortInfo &port, int maxDistance) const
+{
+	QPair<QPointF, qreal> neededPosDir = countPositionAndDirection(port);
+
+	QVector<int> res;
+	auto && target = &mModel.worldModel();
+	QMetaObject::invokeMethod(target, [&](){res = target->lidarReading(
+	neededPosDir.first, neededPosDir.second, maxDistance);}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
+
+	if (mModel.settings().realisticSensors()) {
+		for (int i = 0; i < res.size(); i++) {
+			res[i] = spoilRangeReading(res[i]);
+		}
+	}
+	return res;
+}
+
 QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 {
 	QVector<int> t;

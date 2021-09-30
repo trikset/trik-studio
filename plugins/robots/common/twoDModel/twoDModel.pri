@@ -62,6 +62,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/gyroscope.h \
 	$$PWD/include/twoDModel/robotModel/parts/accelerometer.h \
 	$$PWD/include/twoDModel/robotModel/parts/marker.h \
+	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
 	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
 
@@ -211,6 +212,7 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/gyroscope.cpp \
 	$$PWD/src/robotModel/parts/accelerometer.cpp \
 	$$PWD/src/robotModel/parts/marker.cpp \
+	$$PWD/src/robotModel/parts/lidar.cpp \
 	$$PWD/src/blocks/markerDownBlock.cpp \
 	$$PWD/src/blocks/markerUpBlock.cpp \
 	$$PWD/src/engine/model/physics/box2DPhysicsEngine.cpp \

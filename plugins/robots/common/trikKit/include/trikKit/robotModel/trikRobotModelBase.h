@@ -51,7 +51,7 @@ protected:
 	virtual kitBase::robotModel::DeviceInfo touchSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo lightSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo infraredSensorInfo() const;
-
+	virtual kitBase::robotModel::DeviceInfo lidarInfo() const;
 	virtual kitBase::robotModel::DeviceInfo sonarSensorInfo() const;
 
 	virtual kitBase::robotModel::DeviceInfo motionSensorInfo() const;

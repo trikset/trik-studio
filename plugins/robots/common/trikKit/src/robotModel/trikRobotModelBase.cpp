@@ -20,6 +20,7 @@
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 #include <kitBase/robotModel/robotParts/accelerometerSensor.h>
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
 
 #include "trikKit/robotModel/parts/trikLightSensor.h"
 #include "trikKit/robotModel/parts/trikTouchSensor.h"
@@ -122,6 +123,9 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 
 	addAllowedConnection(PortInfo("GamepadConnectionIndicatorPort", input, {}, "gamepadConnected")
 			, { gamepadConnectionIndicatorInfo() });
+
+	addAllowedConnection(PortInfo("LidarPort", input, {}, "lidar", PortInfo::ReservedVariableType::vector)
+			, { lidarInfo() });
 }
 
 QList<PortInfo> TrikRobotModelBase::configurablePorts() const
@@ -210,6 +214,11 @@ DeviceInfo TrikRobotModelBase::motionSensorInfo() const
 DeviceInfo TrikRobotModelBase::gyroscopeInfo() const
 {
 	return DeviceInfo::create<robotParts::GyroscopeSensor>();
+}
+
+DeviceInfo TrikRobotModelBase::lidarInfo() const
+{
+	return DeviceInfo::create<robotParts::LidarSensor>();
 }
 
 DeviceInfo TrikRobotModelBase::accelerometerInfo() const
