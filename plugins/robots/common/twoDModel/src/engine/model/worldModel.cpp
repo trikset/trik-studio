@@ -63,13 +63,13 @@ qreal WorldModel::pixelsInCm() const
 	return twoDModel::pixelsInCm;
 }
 
-QVector<int> WorldModel::lidarReading(const QPointF &position, qreal direction, int maxDistance) const
+QVector<int> WorldModel::lidarReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const
 {
 	QVector<int> res;
 	const auto solidItemsPath = buildSolidItemsPath();
 	auto angleAndRange = QPair<qreal, int>(1, maxDistance);
-	for (int i = 0; i < 360; i++) {
-		auto laserPath = rangeSensorScanningRegion(position, direction + i, angleAndRange);
+	for (int i = 0; i < maxAngle; i++) {
+		auto laserPath = rangeSensorScanningRegion(position, direction - maxAngle/2 + i, angleAndRange);
 		const auto intersection = solidItemsPath.intersected(laserPath);
 		int currentRangeInCm = INT_MAX;
 		for (int j = 0; j < intersection.elementCount(); j++) {

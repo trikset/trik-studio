@@ -32,6 +32,7 @@
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/vectorSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
 
 #include "robotItem.h"
 
@@ -996,6 +997,7 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
+			|| device.isA<kitBase::robotModel::robotParts::LidarSensor>()
 			? new RangeSensorItem(mModel.worldModel(), robotModel.configuration()
 					, port
 					, robotModel.info().rangeSensorAngleAndDistance(device)

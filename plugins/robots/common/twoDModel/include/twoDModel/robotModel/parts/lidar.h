@@ -36,12 +36,15 @@ class TWO_D_MODEL_EXPORT Lidar : public kitBase::robotModel::robotParts::LidarSe
 public:
 	Lidar(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port
-			, engine::TwoDModelEngineInterface &engine);
+			, engine::TwoDModelEngineInterface &engine
+			, QPair<qreal, int> angleAndRange);
 
 	void read() override;
 
 protected:
 	engine::TwoDModelEngineInterface &mEngine;
+	qreal mAngle;
+	int mRange;
 };
 
 }

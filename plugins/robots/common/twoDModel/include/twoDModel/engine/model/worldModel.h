@@ -59,8 +59,9 @@ public:
 	/// Measures the distance between robot and wall
 	Q_INVOKABLE int rangeReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const;
 
-	///
-	Q_INVOKABLE QVector<int> lidarReading(const QPointF &position, qreal direction, int maxDistance) const;
+	/// Measures the distance between robot and solid object for each angle in maxAngle and maxDistance scanning region
+	Q_INVOKABLE QVector<int> lidarReading(const QPointF &position, qreal direction
+			, int maxDistance, qreal maxAngle) const;
 
 	/// Returns area which is seen by sonar sensor.
 	QPainterPath rangeSensorScanningRegion(const QPointF &position, qreal direction,

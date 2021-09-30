@@ -19,16 +19,17 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-Lidar::Lidar(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+Lidar::Lidar(const DeviceInfo &info, const PortInfo &port
+		, engine::TwoDModelEngineInterface &engine, QPair<qreal, int> angleAndRange)
 	: robotParts::LidarSensor(info, port)
 	, mEngine(engine)
+	, mAngle(angleAndRange.first)
+	, mRange(angleAndRange.second)
 {
-	setLastData(QVector<int>(360, 0));
+	setLastData(QVector<int>(360, -1));
 }
 
 void Lidar::read()
 {
-	setLastData(mEngine.readLidarSensor(port(), 255));
+	setLastData(mEngine.readLidarSensor(port(), mRange, mAngle));
 }

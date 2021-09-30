@@ -52,6 +52,7 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 		lightSensorInfo()
 		, infraredSensorInfo()
 		, touchSensorInfo()
+		, lidarSensorInfo()
 	};
 
 	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
@@ -123,9 +124,6 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 
 	addAllowedConnection(PortInfo("GamepadConnectionIndicatorPort", input, {}, "gamepadConnected")
 			, { gamepadConnectionIndicatorInfo() });
-
-	addAllowedConnection(PortInfo("LidarPort", input, {}, "lidar", PortInfo::ReservedVariableType::vector)
-			, { lidarInfo() });
 }
 
 QList<PortInfo> TrikRobotModelBase::configurablePorts() const
@@ -148,6 +146,7 @@ QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
 		, DeviceInfo::create<parts::TrikMotionSensor>()
 		, DeviceInfo::create<parts::TrikLineSensor>()
 		, DeviceInfo::create<parts::TrikVideoCamera>()
+		, DeviceInfo::create<robotParts::LidarSensor>()
 	};
 }
 
@@ -216,7 +215,7 @@ DeviceInfo TrikRobotModelBase::gyroscopeInfo() const
 	return DeviceInfo::create<robotParts::GyroscopeSensor>();
 }
 
-DeviceInfo TrikRobotModelBase::lidarInfo() const
+DeviceInfo TrikRobotModelBase::lidarSensorInfo() const
 {
 	return DeviceInfo::create<robotParts::LidarSensor>();
 }

@@ -217,7 +217,7 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 	}
 
 	if (deviceInfo.isA<robotParts::LidarSensor>()) {
-		return new parts::Lidar(deviceInfo, port, *mEngine);
+		return new parts::Lidar(deviceInfo, port, *mEngine, rangeSensorAngleAndDistance(deviceInfo));
 	}
 
 	return CommonRobotModel::createDevice(port, deviceInfo);

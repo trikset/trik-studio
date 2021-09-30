@@ -27,6 +27,7 @@ class ROBOTS_KIT_BASE_EXPORT LidarSensor : public VectorSensor
 	Q_OBJECT
 	Q_CLASSINFO("name", "lidar")
 	Q_CLASSINFO("friendlyName", tr("Lidar"))
+	Q_CLASSINFO("simulated", "true")
 
 public:
 	/// Constructor, takes device type info and port on which this sensor is configured.

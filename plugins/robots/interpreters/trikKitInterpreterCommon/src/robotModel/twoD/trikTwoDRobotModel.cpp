@@ -25,6 +25,7 @@
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/touchSensor.h>
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
 
 #include <trikKit/robotModel/parts/trikVideoCamera.h>
 #include <trikKit/robotModel/parts/trikLineSensor.h>
@@ -72,6 +73,7 @@ QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
 {
 	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 80) :
 			deviceType.isA<robotModel::parts::TrikSonarSensor>() ? QPair<qreal, int>(20, 300) :
+			deviceType.isA<robotParts::LidarSensor>() ? QPair<qreal,int>(360, 80) :
 			TwoDRobotModel::rangeSensorAngleAndDistance(deviceType);
 }
 
@@ -177,6 +179,8 @@ QString TrikTwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 		return ":icons/twoDUsRangeSensor.svg";
 	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
 		return ":icons/twoDVideoModule.svg";
+	} else if (deviceType.isA<robotParts::LidarSensor>()) {
+		return ":icons/twoDIrRangeSensor.svg";
 	}
 
 	return QString();
@@ -200,6 +204,8 @@ QRect TrikTwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo 
 		return QRect(-18, -18, 36, 36);
 	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
 		return QRect(-9, -9, 18, 18);
+	} else if (deviceType.isA<robotParts::LidarSensor>()) {
+		return QRect(-18, -18, 36, 36);
 	}
 
 	return QRect();
