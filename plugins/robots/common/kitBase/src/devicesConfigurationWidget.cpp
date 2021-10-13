@@ -113,7 +113,9 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 	}
 
 	if (mAutosaveMode) {
-		connect(comboBox, &QComboBox::currentTextChanged, this, &DevicesConfigurationWidget::save);
+		connect(comboBox, &QComboBox::currentTextChanged, this, [this](){
+			propagateChangesFromBox(static_cast<QComboBox *>(sender()));
+		});
 	}
 
 	QHBoxLayout * const layout = new QHBoxLayout;
@@ -128,10 +130,9 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 void DevicesConfigurationWidget::onDeviceConfigurationChanged(const QString &robotId
 		, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
 {
-	Q_UNUSED(port)
-	Q_UNUSED(sensor)
 	Q_UNUSED(reason)
 
+	propagateChanges(robotId, port, sensor);
 	// This method can be called when we did not accomplish processing all combo boxes during saving.
 	// So ignoring such case.
 	if (!mSaving && robotId == mCurrentRobotId) {
@@ -169,24 +170,25 @@ void DevicesConfigurationWidget::save()
 
 	mSaving = true;
 	for (QComboBox * const box : mConfigurers) {
-		if (!box->isVisible()) {
-			continue;
-		}
-
-		const QString robotModelName = box->property("robotModelName").toString();
-		const PortInfo port = box->property("port").value<PortInfo>();
-		const DeviceInfo device = box->itemData(box->currentIndex()).value<DeviceInfo>();
-		if (robotModelName == mCurrentModelType && currentConfiguration(mCurrentRobotId, port) != device) {
-			propagateChanges(port, device);
+		if (box->isVisible() && box->property("robotModelName").toString() == mCurrentModelType) {
+			propagateChangesFromBox(box);
 		}
 	}
-
 	mSaving = false;
 }
 
-void DevicesConfigurationWidget::propagateChanges(const PortInfo &port, const DeviceInfo &sensor)
+void DevicesConfigurationWidget::propagateChangesFromBox(QComboBox *box)
 {
-	const auto kit = mCurrentRobotId.split(QRegExp("[A-Z]")).first();
+	const PortInfo port = box->property("port").value<PortInfo>();
+	const DeviceInfo device = box->itemData(box->currentIndex()).value<DeviceInfo>();
+	if (currentConfiguration(mCurrentRobotId, port) != device) {
+		propagateChanges(mCurrentRobotId, port, device);
+	}
+}
+
+void DevicesConfigurationWidget::propagateChanges(const QString &robotId, const PortInfo &port, const DeviceInfo &sensor)
+{
+	const auto kit = robotId.split(QRegExp("[A-Z]")).first();
 	for (const QString &robotModelType : mRobotModels.keys()) {
 		const RobotModelInterface *robotModel = mRobotModels[robotModelType];
 		if (robotModel->robotId().contains(kit)) {
