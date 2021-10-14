@@ -114,7 +114,7 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 
 	if (mAutosaveMode) {
 		connect(comboBox, &QComboBox::currentTextChanged, this, [this](){
-			propagateChangesFromBox(static_cast<QComboBox *>(sender()));
+			propagateChangesFromBox(qobject_cast<QComboBox *>(sender()));
 		});
 	}
 
@@ -144,8 +144,8 @@ void DevicesConfigurationWidget::refresh()
 {
 	mRefreshing = true;
 	for (QComboBox * const box : mConfigurers) {
-		const PortInfo port = box->property("port").value<PortInfo>();
-		const DeviceInfo device = currentConfiguration(mCurrentRobotId, port);
+		const PortInfo &port = box->property("port").value<PortInfo>();
+		const DeviceInfo &device = currentConfiguration(mCurrentRobotId, port);
 		if (device.isNull()) {
 			box->setCurrentIndex(0);
 		} else {
