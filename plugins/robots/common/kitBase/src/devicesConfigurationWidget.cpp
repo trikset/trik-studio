@@ -130,9 +130,7 @@ QLayout *DevicesConfigurationWidget::initPort(const QString &robotModelName
 void DevicesConfigurationWidget::onDeviceConfigurationChanged(const QString &robotId
 		, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
 {
-	Q_UNUSED(reason)
-
-	propagateChanges(robotId, port, sensor);
+	propagateChanges(robotId, port, sensor, reason);
 	// This method can be called when we did not accomplish processing all combo boxes during saving.
 	// So ignoring such case.
 	if (!mSaving && robotId == mCurrentRobotId) {
@@ -179,14 +177,14 @@ void DevicesConfigurationWidget::save()
 
 void DevicesConfigurationWidget::propagateChangesFromBox(QComboBox *box)
 {
-	const PortInfo port = box->property("port").value<PortInfo>();
-	const DeviceInfo device = box->itemData(box->currentIndex()).value<DeviceInfo>();
+	const PortInfo &port = box->property("port").value<PortInfo>();
+	const DeviceInfo &device = box->itemData(box->currentIndex()).value<DeviceInfo>();
 	if (currentConfiguration(mCurrentRobotId, port) != device) {
-		propagateChanges(mCurrentRobotId, port, device);
+		propagateChanges(mCurrentRobotId, port, device, Reason::userAction);
 	}
 }
 
-void DevicesConfigurationWidget::propagateChanges(const QString &robotId, const PortInfo &port, const DeviceInfo &sensor)
+void DevicesConfigurationWidget::propagateChanges(const QString &robotId, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
 {
 	const auto kit = robotId.split(QRegExp("[A-Z]")).first();
 	for (const QString &robotModelType : mRobotModels.keys()) {
@@ -195,12 +193,12 @@ void DevicesConfigurationWidget::propagateChanges(const QString &robotId, const 
 			for (const PortInfo &otherPort : robotModel->configurablePorts()) {
 				if (areConvertible(port, otherPort)) {
 					if (sensor.isNull()) {
-						deviceConfigurationChanged(robotModel->robotId(), otherPort, DeviceInfo(), Reason::userAction);
+						deviceConfigurationChanged(robotModel->robotId(), otherPort, DeviceInfo(), reason);
 					} else {
 						const DeviceInfo otherDevice = convertibleDevice(robotModel, otherPort, sensor);
 						if (!otherDevice.isNull()) {
 							deviceConfigurationChanged(robotModel->robotId(), otherPort
-									, otherDevice, Reason::userAction);
+									, otherDevice, reason);
 						}
 					}
 				}

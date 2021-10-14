@@ -78,7 +78,7 @@ private:
 			, Reason reason) override;
 
 	void propagateChanges(const QString &robotId, const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &sensor);
+			, const robotModel::DeviceInfo &sensor, Reason reason);
 
 	void propagateChangesFromBox(QComboBox *box);
 
