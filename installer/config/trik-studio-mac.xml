@@ -18,8 +18,7 @@
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
 
-    <TargetDir>@HomeDir@/TRIKStudio/</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@/TRIKStudio/</AdminTargetDir>
+    <TargetDir>@ApplicationsDir@/TRIKStudio/</TargetDir>
 
     <RunProgram>open</RunProgram>
     <RunProgramArguments>
