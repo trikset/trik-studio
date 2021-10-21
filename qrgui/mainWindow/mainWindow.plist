@@ -22,5 +22,40 @@
 	<string>${QMAKE_FULL_VERSION}</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<true/>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.trikset.studio.qrs</string>
+			</array>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeIconFile</key>
+			<string>${ASSETCATALOG_COMPILER_APPICON_NAME}</string>
+			<key>UTTypeDescription</key>
+			<string>TRIK Studio Project File</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.source-code</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>com.trikset.studio.qrs</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>qrs</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

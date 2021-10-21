@@ -142,11 +142,11 @@ stages:
     strategy:
       matrix:
         MacOS release:
-          imageName: 'macOS-latest'
+          imageName: 'macOS-10.15'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         MacOS debug:
-          imageName: 'macOS-latest'
+          imageName: 'macOS-10.15'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
