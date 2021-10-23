@@ -184,7 +184,8 @@ void DevicesConfigurationWidget::propagateChangesFromBox(QComboBox *box)
 	}
 }
 
-void DevicesConfigurationWidget::propagateChanges(const QString &robotId, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
+void DevicesConfigurationWidget::propagateChanges(const QString &robotId, const PortInfo &port
+		, const DeviceInfo &sensor, Reason reason)
 {
 	const auto kit = robotId.split(QRegExp("[A-Z]")).first();
 	for (const QString &robotModelType : mRobotModels.keys()) {
