@@ -19,7 +19,7 @@
     <RemoveTargetDir>true</RemoveTargetDir>
 
     <TargetDir>@RootDir@TRIKStudio\</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@TRIKStudio\</AdminTargetDir>
+    <AdminTargetDir>@ApplicationsDirX86@TRIKStudio\</AdminTargetDir>
 
     <RunProgram>wscript.exe</RunProgram>
     <RunProgramArguments>
