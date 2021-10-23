@@ -28,4 +28,4 @@ rm -f python.zip
 fi
 
 cd "$(dirname "$0")"/../data
-cp -r "$cache_dir"/"PYTHON_$python_ver"/python*.zip .
+cp -r "$cache_dir"/"PYTHON_$python_ver"/{python*.zip,unicodedata.pyd} .
