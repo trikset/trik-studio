@@ -81,6 +81,7 @@ HEADERS += \
 	$$PWD/commands/foldCommand.h \
 	$$PWD/commands/reshapeEdgeCommand.h \
 	$$PWD/commands/expandCommand.h \
+	$$PWD/commands/replaceByCommand.h \
 
 SOURCES += \
 	$$PWD/editorView.cpp \
@@ -126,6 +127,7 @@ SOURCES += \
 	$$PWD/commands/foldCommand.cpp \
 	$$PWD/commands/reshapeEdgeCommand.cpp \
 	$$PWD/commands/expandCommand.cpp \
+	$$PWD/commands/replaceByCommand.cpp \
 
 RESOURCES += \
 	$$PWD/contextIcons.qrc \
