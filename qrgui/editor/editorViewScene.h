@@ -285,9 +285,6 @@ private:
 	/** @brief shift of the move */
 	QPointF mOffset;
 
-	/** @brief Is "true" when we just select items on scene, and "false" when we drag selected items */
-	bool mShouldReparentItems {};
-
 	QGraphicsRectItem *mTopLeftCorner;
 	QGraphicsRectItem *mBottomRightCorner;
 
