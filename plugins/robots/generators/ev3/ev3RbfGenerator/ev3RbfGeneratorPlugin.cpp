@@ -270,11 +270,11 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 			this, [this](const QString &message){
 				mMainWindowInterface->errorReporter()->addError(message);
 			});
-	auto blockingConnectionType = communicator->thread() == QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection;
+	auto blockingConnectionType = communicator->thread() == QThread::currentThread()
+			? Qt::DirectConnection : Qt::BlockingQueuedConnection;
 	QMetaObject::invokeMethod(communicator.get(), &communication::Ev3RobotCommunicationThread::connect
 			, blockingConnectionType
 			, &connected);
-
 	if (!connected) {
 		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
 		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "\
