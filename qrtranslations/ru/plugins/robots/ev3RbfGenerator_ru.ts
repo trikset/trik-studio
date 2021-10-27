@@ -35,7 +35,7 @@
         <translation type="vanished">Генерация (Байткод)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="+32"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="+33"/>
         <source>Autonomous mode (USB)</source>
         <translation>Автономный режим (USB)</translation>
     </message>
@@ -55,12 +55,12 @@
         <translation>Загрузить программу</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+11"/>
         <source>Run program</source>
         <translation>Запустить программу</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+8"/>
         <source>Stop robot</source>
         <translation>Остановить программу</translation>
     </message>
@@ -70,7 +70,7 @@
         <translation>Файл с байткодом EV3</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+32"/>
         <source>Generate Ev3 Robot Byte Code File</source>
         <translation>Сгенерировать в байткод EV3</translation>
     </message>
@@ -90,12 +90,11 @@
         <translation>Остановить программу на EV3</translation>
     </message>
     <message>
-        <location line="+34"/>
         <source>&lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt; is not installed. Please download and install it.</source>
-        <translation>&lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt; не установлена. Пожалуйста, скачайте и установите ее.</translation>
+        <translation type="vanished">&lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt; не установлена. Пожалуйста, скачайте и установите ее.</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+39"/>
         <source>Can&apos;t write source code files to disk!</source>
         <translation>Не могу записать файлы с исходным кодом на диск!</translation>
     </message>
@@ -105,7 +104,12 @@
         <translation>Ошибка компиляции.</translation>
     </message>
     <message>
-        <location line="+130"/>
+        <location line="+72"/>
+        <source>&lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt; is not installed properly, but is required to upload programs to EV3.</source>
+        <translation>Для загрузки программ на EV3 необходимо установить &lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <location line="+60"/>
         <source>Could not upload file to robot. Connect to a robot via %1.</source>
         <translation>Не могу загрузить файл на робота. Подключите робота по %1.</translation>
     </message>
@@ -120,7 +124,7 @@
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location line="-110"/>
+        <location line="-114"/>
         <source>The program has been uploaded</source>
         <translation>Загрузка программы завершена успешно</translation>
     </message>

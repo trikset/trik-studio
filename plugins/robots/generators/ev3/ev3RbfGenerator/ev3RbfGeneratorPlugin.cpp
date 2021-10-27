@@ -24,6 +24,7 @@
 #include <ev3GeneratorBase/robotModel/ev3GeneratorRobotModel.h>
 #include <qrkernel/settingsManager.h>
 #include "ev3RbfMasterGenerator.h"
+#include <QsLog.h>
 
 using namespace ev3::rbf;
 using namespace qReal;
@@ -42,12 +43,21 @@ Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 
 	mUploadProgramAction->setText(tr("Upload program"));
 	mUploadProgramAction->setIcon(QIcon(":/ev3/rbf/images/uploadProgram.svg"));
-	connect(mUploadProgramAction, &QAction::triggered, this, &Ev3RbfGeneratorPlugin::uploadAndRunProgram);
+	connect(mUploadProgramAction
+			, &QAction::triggered
+			, this
+			, [this](){
+		auto rp = static_cast<RunPolicy>(SettingsManager::value("ev3RunPolicy").toInt());
+		uploadAndRunProgram(rp);
+	});
 
 	mRunProgramAction->setObjectName("runEv3RbfProgram");
 	mRunProgramAction->setText(tr("Run program"));
 	mRunProgramAction->setIcon(QIcon(":/ev3/rbf/images/run.png"));
-	connect(mRunProgramAction, &QAction::triggered, this, &Ev3RbfGeneratorPlugin::runProgram, Qt::UniqueConnection);
+	connect(mRunProgramAction, &QAction::triggered
+			, this
+			, [this]{ uploadAndRunProgram(RunPolicy::AlwaysRun); }
+	);
 
 	mStopRobotAction->setObjectName("stopEv3RbfRobot");
 	mStopRobotAction->setText(tr("Stop robot"));
@@ -66,6 +76,8 @@ Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 			, nullptr
 			, {}
 	});
+
+	mJavaDetected = javaInstalled();
 }
 
 QList<ActionInfo> Ev3RbfGeneratorPlugin::customActions()
@@ -121,12 +133,6 @@ QString Ev3RbfGeneratorPlugin::generatorName() const
 
 QString Ev3RbfGeneratorPlugin::uploadProgram()
 {
-	if (!javaInstalled()) {
-		mMainWindowInterface->errorReporter()->addError(tr("<a href=\"https://java.com/ru/download/\">Java</a> is "\
-				"not installed. Please download and install it."));
-		return QString();
-	}
-
 	QFileInfo const fileInfo = generateCodeForProcessing();
 	if (!fileInfo.exists()) {
 		return QString();
@@ -143,12 +149,10 @@ QString Ev3RbfGeneratorPlugin::uploadProgram()
 		return QString();
 	}
 
-	const QString fileOnRobot = upload(fileInfo);
-
-	return fileOnRobot;
+	return upload(fileInfo);
 }
 
-void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
+void Ev3RbfGeneratorPlugin::uploadAndRunProgram(RunPolicy runPolicy)
 {
 	const QString fileOnRobot = uploadProgram();
 	const auto &communicator = currentCommunicator();
@@ -157,28 +161,20 @@ void Ev3RbfGeneratorPlugin::uploadAndRunProgram()
 		return;
 	}
 
-	const RunPolicy runPolicy = static_cast<RunPolicy>(SettingsManager::value("ev3RunPolicy").toInt());
 	switch (runPolicy) {
-	case RunPolicy::Ask:
-		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget(), tr("The program has been uploaded")
-				, tr("Do you want to run it?")) == QMessageBox::Yes) {
+		case RunPolicy::Ask:
+			if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget()
+												, tr("The program has been uploaded")
+												, tr("Do you want to run it?")
+			) != QMessageBox::Yes) {
+				return;
+			}
+			Q_FALLTHROUGH();
+		case RunPolicy::AlwaysRun:
 			QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
-		}
-		break;
-	case RunPolicy::AlwaysRun:
-		QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
-		break;
-	case RunPolicy::NeverRun:
-		break;
-	}
-}
-
-void Ev3RbfGeneratorPlugin::runProgram()
-{
-	const auto fileOnRobot = uploadProgram();
-	const auto &communicator = currentCommunicator();
-	if (!fileOnRobot.isEmpty() && communicator) {
-		QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->runProgram(fileOnRobot); });
+			Q_FALLTHROUGH();
+		case RunPolicy::NeverRun:
+			return;
 	}
 }
 
@@ -194,9 +190,13 @@ bool Ev3RbfGeneratorPlugin::javaInstalled()
 	QProcess java;
 	java.setEnvironment(QProcess::systemEnvironment());
 
-	java.start("java");
+	java.start("java", {"-version"});
+	auto started = java.waitForStarted(5000);
+	// do not check the result, because it is false when process already finished
 	java.waitForFinished();
-	return !java.readAllStandardError().isEmpty();
+	auto version = java.readAllStandardError();
+	QLOG_INFO() << "Java test says:" << version;
+	return started && !version.isEmpty();
 }
 
 bool Ev3RbfGeneratorPlugin::copySystemFiles(const QString &destination)
@@ -215,6 +215,13 @@ bool Ev3RbfGeneratorPlugin::copySystemFiles(const QString &destination)
 
 bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 {
+	if (!mJavaDetected) {
+		mMainWindowInterface->errorReporter()->addError(
+					tr("<a href=\"https://java.com/ru/download/\">Java</a> is "\
+				"not installed properly, but is required to upload programs to EV3."));
+		return false;
+	}
+
 	QFile rbfFile(lmsFile.absolutePath() + "/" + lmsFile.baseName() + ".rbf");
 	if (rbfFile.exists()) {
 		rbfFile.remove();
@@ -263,8 +270,9 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 			this, [this](const QString &message){
 				mMainWindowInterface->errorReporter()->addError(message);
 			});
+	auto blockingConnectionType = communicator->thread() == QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection;
 	QMetaObject::invokeMethod(communicator.get(), &communication::Ev3RobotCommunicationThread::connect
-			, (communicator->thread()==QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection)
+			, blockingConnectionType
 			, &connected);
 
 	if (!connected) {
@@ -275,8 +283,8 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	}
 
 	QString res;
-	QMetaObject::invokeMethod(communicator.get(), [=](){ communicator->uploadFile(rbfPath, targetPath); }
-			, (communicator->thread()==QThread::currentThread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection)
+	QMetaObject::invokeMethod(communicator.get(), [=](){ return communicator->uploadFile(rbfPath, targetPath); }
+			, blockingConnectionType
 			, &res);
 	disconnect(errorReporter);
 	return res;
