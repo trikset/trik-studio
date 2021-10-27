@@ -69,23 +69,12 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 			enablePython = true;
 		} else if (PlatformInfo::osType().startsWith("windows")) {
 			auto dir = QDir(QCoreApplication::applicationDirPath());
-			dir.makeAbsolute();
-			auto isOne = false;
-			QByteArray value;
-			for (auto &&file : dir.entryList()) {
-				if (file.endsWith(".zip") && file.startsWith("python"))
-				{
-					if (isOne) {
-						isOne = false;
-						value.clear();
-						break;
-					}
-					isOne = true;
-					value = dir.filePath(file).toLatin1();
-				}
-			}
-			if (isOne && !value.isNull()) {
-				qputenv("TRIK_PYTHONPATH", value);
+			dir.makeAbsolute();			
+			const auto &zips = dir.entryInfoList({"python*.zip"}, QDir::Files | QDir::Readable);
+			if (zips.size() == 1) {
+				const auto &zip = zips.first();
+				const auto &path = zip.absoluteFilePath() + ';' + zip.absolutePath();
+				qputenv("TRIK_PYTHONPATH", path.toLocal8Bit());
 				enablePython = true;
 			}
 		}
