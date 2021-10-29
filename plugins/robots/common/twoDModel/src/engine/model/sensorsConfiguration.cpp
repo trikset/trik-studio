@@ -42,11 +42,11 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 		return;
 	}
 
-	emit deviceAdded(port, reason == Reason::loading);
-
 	// If there was no sensor before then placing it right in front of the robot;
 	// else putting it instead of old one.
 	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(device), 0) : mSensorsInfo[port];
+
+	emit deviceAdded(port, reason == Reason::loading);
 }
 
 QPointF SensorsConfiguration::defaultPosition(const DeviceInfo &device) const
