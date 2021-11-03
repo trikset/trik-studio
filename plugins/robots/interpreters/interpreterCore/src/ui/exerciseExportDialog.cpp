@@ -68,18 +68,11 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 
 ExerciseExportDialog::~ExerciseExportDialog()
 {
-	qReal::SettingsManager::setValue("worldReadOnlyDefault", mWorldReadOnlyCheckBox->isChecked());
-	qReal::SettingsManager::setValue("sensorsReadOnlyDefault", mSensorsReadOnlyCheckBox->isChecked());
-	qReal::SettingsManager::setValue("robotPositionReadOnlyDefault", mRobotPositionReadOnlyCheckBox->isChecked());
-	qReal::SettingsManager::setValue("robotSetupReadOnlyDefault", mRobotSetupReadOnlyCheckBox->isChecked());
-	qReal::SettingsManager::setValue("simulationSettingsReadOnlyDefault"
-			, mSimulationSettingsReadOnlyCheckBox->isChecked());
 }
 
 ReadOnlyFlags ExerciseExportDialog::readOnlyFlags() const
 {
 	ReadOnlyFlags result;
-
 	const auto setFlag = [&result] (ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
 		result |= box->isChecked() ? flag : ReadOnly::ReadOnlyEnum::None;
 	};

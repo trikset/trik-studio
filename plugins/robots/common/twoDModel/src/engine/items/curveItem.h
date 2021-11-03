@@ -49,6 +49,8 @@ public:
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
 
+	void setEditable(bool editable) override;
+
 private:
 	class Marker : public QGraphicsObject
 	{
