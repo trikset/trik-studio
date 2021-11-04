@@ -195,7 +195,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+128"/>
+        <location line="+112"/>
         <source>Decrease speed</source>
         <translation>Diminuer la vitesse</translation>
     </message>
@@ -656,7 +656,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+720"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+716"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
@@ -739,7 +739,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+337"/>
+        <location line="+317"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>
