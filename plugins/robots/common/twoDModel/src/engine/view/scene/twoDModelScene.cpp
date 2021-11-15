@@ -691,7 +691,7 @@ void TwoDModelScene::addImage()
 	// Loads world and robot models simultaneously.
 	const auto loadImages = utils::QRealFileDialog::getOpenFileNames("2DSelectImage", views().first()
 			, tr("Select images")
-			, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields"
+			, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields/junior"
 			, tr("Graphics (*.*)"));
 
 

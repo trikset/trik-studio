@@ -160,7 +160,7 @@ QWidget *ImageItemPopup::initPathPicker()
 		// Loads world and robot models simultaneously.
 		const QString loadFileName = utils::QRealFileDialog::getOpenFileName("2DSelectImage", mScene.views().first()
 				, tr("Select image")
-				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields"
+				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields/junior"
 				, tr("Graphics (*.*)"));
 		if (loadFileName.isEmpty()) {
 			return;
