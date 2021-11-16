@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+164"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+169"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
@@ -76,7 +76,17 @@
         <translation>Активировать Mailbox</translation>
     </message>
     <message>
-        <location line="-38"/>
+        <location line="+7"/>
+        <source>Hull number:</source>
+        <translation>Бортномер:</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>999</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-52"/>
         <source>Images:</source>
         <translation>Изображения:</translation>
     </message>
@@ -169,7 +179,7 @@
         <translation>Выберите папку</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+29"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
@@ -288,7 +298,7 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+49"/>
+        <location line="+52"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>

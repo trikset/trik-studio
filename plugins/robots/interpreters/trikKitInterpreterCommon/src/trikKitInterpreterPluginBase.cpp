@@ -79,7 +79,10 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 			}
 		}
 	}
+
 	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, enablePython));
+	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged
+			, mTextualInterpreter.data(), &TrikTextualInterpreter::setMailboxHullNumber);
 }
 
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)
