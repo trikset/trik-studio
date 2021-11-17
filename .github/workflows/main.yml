@@ -103,7 +103,7 @@ jobs:
           version: ${{matrix.qt-version}}
           arch: win32_mingw${{matrix.mingw-short-version}}
           modules: 'qtscript'
-          tools: 'tools_ifw,4.1.1,qt.tools.ifw.41 tools_mingw,${{matrix.mingw-version}}.0,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
+          tools: 'tools_ifw,4.2,qt.tools.ifw.42 tools_mingw,${{matrix.mingw-version}}.0,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
           extra: '--external 7z'
 
 # After Qt install action, that spoils pythonLocation variable
@@ -195,7 +195,7 @@ jobs:
       - name: Build installer
         run: |
             cd $GITHUB_WORKSPACE/installer
-            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.1/bin" "${{ env.BUILD_DIR }}"
+            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.2/bin" "${{ env.BUILD_DIR }}"
 
       - name: Push installer
         uses: actions/upload-artifact@v2
