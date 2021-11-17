@@ -46,6 +46,7 @@ public:
 	bool isRunning() const;
 	void setRunning(bool running);
 	void setCurrentDir(const QString &dir, const QString &languageExtension);
+	void setMailboxHullNumber();
 	QStringList supportedRobotModelNames() const;
 	QStringList knownMethodNames() const;
 

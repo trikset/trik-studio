@@ -55,6 +55,9 @@ TrikAdditionalPreferences::TrikAdditionalPreferences(const QStringList &realRobo
 
 	connect(mUi->packImagesPushButton, &QPushButton::clicked
 			, this, &TrikAdditionalPreferences::packImagesToProjectClicked);
+
+	connect(mUi->mailboxCheckBox, &QCheckBox::toggled, mUi->mailboxHullNumberLabel, &QLabel::setVisible);
+	connect(mUi->mailboxCheckBox, &QCheckBox::toggled, mUi->mailboxHullNumber, &QLineEdit::setVisible);
 }
 
 TrikAdditionalPreferences::~TrikAdditionalPreferences()
@@ -70,6 +73,7 @@ void TrikAdditionalPreferences::save()
 	SettingsManager::setValue("TrikSimulatedCameraImagesFromProject", mUi->imagesFromProjectCheckBox->isChecked());
 	SettingsManager::setValue("TrikWebCameraRealName", mUi->cameraNameLineEdit->text());
 	SettingsManager::setValue("TRIK2DMailbox", mUi->mailboxCheckBox->isChecked());
+	SettingsManager::setValue("TRIK2DHullNumber", mUi->mailboxHullNumber->text());
 	mUi->robotImagePicker->save();
 
 	if (mailboxSavedState != mUi->mailboxCheckBox->isChecked()) {
