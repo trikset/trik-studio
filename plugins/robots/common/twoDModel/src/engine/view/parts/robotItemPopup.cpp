@@ -127,7 +127,7 @@ QWidget *RobotItemPopup::initImagePicker()
 		const QStringList loadFileNames = utils::QRealFileDialog::getOpenFileNames("2DSelectRobotImage"
 				, mScene.views().first()
 				, tr("Select image")
-				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/.."
+				, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../junior_robots"
 				, tr("Graphics (*.*)"));
 		if (loadFileNames.isEmpty()) {
 			return;

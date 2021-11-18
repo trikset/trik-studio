@@ -34,5 +34,17 @@
         <file>icons/junior_robots/Owl.svg</file>
         <file>icons/junior_robots/Tank.svg</file>
         <file>icons/junior_robots/Truck.svg</file>
+        <file>icons/junior_robots/trik-robot.svg</file>
+        <file>icons/junior_robots/Boat.svg</file>
+        <file>icons/junior_robots/Cat.svg</file>
+        <file>icons/junior_robots/Dragon.svg</file>
+        <file>icons/junior_robots/Elevator.svg</file>
+        <file>icons/junior_robots/empty.svg</file>
+        <file>icons/junior_robots/Kolobok1.png</file>
+        <file>icons/junior_robots/Kolobok2.svg</file>
+        <file>icons/junior_robots/Robot.svg</file>
+        <file>icons/junior_robots/Turtle.svg</file>
+        <file>icons/junior_robots/Vacuum Cleaner.jpg</file>
+        <file>icons/junior_robots/Vacuum Cleaner.png</file>
     </qresource>
 </RCC>

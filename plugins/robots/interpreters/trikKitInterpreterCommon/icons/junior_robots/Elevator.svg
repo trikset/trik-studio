@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X8 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="163.28mm" height="163.28mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 16328 16328"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:black;stroke-width:158.75}
+    .str3 {stroke:black;stroke-width:105.83}
+    .str2 {stroke:black;stroke-width:132.29}
+    .str6 {stroke:black;stroke-width:79.38;stroke-linecap:round;stroke-linejoin:round}
+    .str5 {stroke:black;stroke-width:158.75;stroke-linecap:round;stroke-linejoin:round}
+    .str4 {stroke:black;stroke-width:105.83;stroke-linecap:round;stroke-linejoin:round}
+    .str1 {stroke:black;stroke-width:132.29;stroke-linecap:round;stroke-linejoin:round}
+    .fil6 {fill:none}
+    .fil3 {fill:#313535}
+    .fil0 {fill:#4C5051}
+    .fil2 {fill:#666C6D}
+    .fil1 {fill:#7F5146}
+    .fil11 {fill:#8EE1EF}
+    .fil9 {fill:#959E9E}
+    .fil13 {fill:#99CC00}
+    .fil4 {fill:#9DA5A5}
+    .fil8 {fill:#AFBBBC}
+    .fil12 {fill:#D18B8B}
+    .fil5 {fill:#D86B68}
+    .fil10 {fill:#FFB78F}
+    .fil7 {fill:#FFFADE}
+   ]]>
+  </style>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="Слой_3">
+   <rect class="fil0 str0" transform="matrix(2.64845E-14 1 -1 2.64845E-14 16314.4 -9.58)" width="16323" height="16323"/>
+   <polygon class="fil1 str1" points="-9,-10 2003,2523 13008,2523 16314,-14 "/>
+   <polygon class="fil2 str1" points="-5,16299 2008,13767 13013,13767 16319,16304 "/>
+   <rect class="fil3 str2" transform="matrix(2.64845E-14 1 -1 2.64845E-14 13031.2 2523.25)" width="11224" height="11036"/>
+   <g id="Слой_6">
+    <rect class="fil4 str2" transform="matrix(2.64845E-14 1 -1 2.64845E-14 10282.8 3952.64)" width="2526" height="4241"/>
+    <circle class="fil5 str3" transform="matrix(2.64845E-14 1 -1 2.64845E-14 8757.66 4645.66)" r="258"/>
+    <circle class="fil5 str3" transform="matrix(2.64845E-14 1 -1 2.64845E-14 8771.89 5725.02)" r="258"/>
+    <circle class="fil5 str3" transform="matrix(2.64845E-14 1 -1 2.64845E-14 7891.3 4649.12)" r="258"/>
+    <circle class="fil5 str3" transform="matrix(2.64845E-14 1 -1 2.64845E-14 7905.54 5728.49)" r="258"/>
+    <circle class="fil5 str3" transform="matrix(2.64845E-14 1 -1 2.64845E-14 7019.21 4668.6)" r="258"/>
+    <circle class="fil5 str3" transform="matrix(2.64845E-14 1 -1 2.64845E-14 7033.42 5747.96)" r="258"/>
+    <line class="fil6 str1" x1="9838" y1="4561" x2="9838" y2= "5811" />
+    <line class="fil6 str1" x1="9541" y1="4567" x2="9541" y2= "5817" />
+    <path class="fil7 str2" d="M14857 10007c-417,-7 -774,-804 -774,-1771 0,-967 383,-1729 774,-1731 332,-2 332,3507 0,3502z"/>
+    <line class="fil6 str3" x1="14824" y1="15150" x2="913" y2= "15150" />
+    <polygon class="fil8 str3" points="1266,1585 1053,1321 14576,1321 14244,1585 "/>
+    <polygon class="fil9 str4" points="5146,16299 5966,14207 6510,14207 5691,16299 "/>
+   </g>
+  </g>
+  <g id="Слой_4">
+   <path class="fil10 str5" d="M6943 4844c545,0 877,70 886,137 4,34 -798,277 -798,277 19,301 -111,693 -180,765 333,154 702,359 686,502 -19,155 -1353,233 -1636,274 -50,177 -210,1690 302,2978 243,612 694,567 776,265 212,-776 598,-818 722,-173 91,475 -283,1178 -1160,1151 -394,-13 -766,-335 -813,-402 -182,95 -379,182 -594,255 -1413,485 -3651,-10 -3517,-484 119,-420 1704,-246 1781,-466 11,-31 -43,-148 -109,-237 -211,23 -1550,-134 -1553,-292 -10,-384 1227,-422 1406,-402 -118,-585 58,-1329 128,-1544 -1744,-384 -1675,-619 -1681,-685 -45,-549 1435,-183 1709,-174l0 -429c-199,-12 -1669,-129 -1654,-475 28,-603 2738,-187 3280,-119 -4,-122 6,-350 128,-594 45,-91 236,-522 694,-603 722,-128 1197,475 1197,475z"/>
+   <path class="fil6 str1" d="M4604 9549c-149,-209 -392,-324 -630,-292 -307,40 -559,318 -576,666"/>
+   <path class="fil6 str1" d="M3142 8992c-3,182 17,404 147,694"/>
+   <path class="fil6 str1" d="M6943 4844c54,108 78,178 88,414"/>
+   <g id="Слой_5">
+    <path class="fil11 str6" d="M5937 5449c-85,60 -92,261 -35,388 40,90 128,180 207,146 90,-38 125,-221 85,-353 -42,-142 -173,-240 -257,-181z"/>
+    <path class="fil12 str6" d="M6011 4944c0,0 1,-147 2,-148 0,0 87,-84 86,-85 -52,-57 -141,15 -229,54 0,0 77,190 141,179z"/>
+    <path class="fil6 str6" d="M5789 4548c-50,57 -30,176 73,206"/>
+    <path class="fil6 str6" d="M5635 5019c2,-103 113,-252 225,-240"/>
+   </g>
+  </g>
+  <g id="Layer_1">
+   <path class="fil13" d="M12549 9473l0 -1095c0,-32 -25,-57 -56,-57l-253 0c-32,0 -57,25 -57,57l0 363 -980 0c-32,0 -57,26 -57,57l0 253c0,31 25,56 57,56l980 0 0 366c0,32 25,57 57,57l253 0c31,0 56,-25 56,-57zm-1361 3626l692 -692 630 629c20,21 39,15 39,-17l0 -405c0,-32 -19,-73 -39,-96l-377 -381 364 0c31,0 56,-25 56,-56l0 -264c0,-31 -25,-56 -56,-56l-1292 0c-31,0 -57,25 -57,56l0 264c0,31 26,56 57,56l426 0 -443 443c-21,21 -40,65 -40,96l0 404c0,33 17,40 40,19zm443 -2664c61,121 205,240 379,259 0,0 40,2 48,2 0,0 15,0 17,0 288,-4 468,-227 474,-526l0 -511c0,-31 -25,-56 -56,-56l-1290 0c-32,0 -57,25 -57,56l0 253c0,32 25,57 57,57l374 0 -389 389c-21,21 -40,65 -40,96l0 462 483 -481zm416 -117c-87,-4 -135,-65 -135,-161l0 -188 276 0 0 188c0,94 -46,157 -136,161 -5,0 -5,0 -5,0zm502 1315l0 -801c0,-31 -25,-56 -56,-56l-253 0c-32,0 -57,25 -57,56l0 216 -675 0 0 -216c0,-31 -25,-56 -56,-56l-67 0 -237 236 0 619c0,31 25,56 57,56l247 0c31,0 56,-25 56,-56l0 -213 675 0 0 213c0,31 25,56 57,56l253 0c31,3 56,-23 56,-54z"/>
+  </g>
+ </g>
+</svg>
