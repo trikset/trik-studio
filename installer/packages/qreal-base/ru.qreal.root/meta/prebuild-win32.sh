@@ -36,25 +36,22 @@ cp    "$INSTALLER_ROOT/images/trik-studio-jr.ico"                      "$PWD/../
 cp    $BIN_DIR/plugins/tools/updatesChecker.dll                     $PWD/../data/plugins/tools/
 cp    $BIN_DIR/plugins/tools/subprogramsImporterExporter.dll        $PWD/../data/plugins/tools/
 
-cp    $QT_DIR/bin/Qt5Core.dll                                       $PWD/../data
-cp    $QT_DIR/bin/Qt5Gui.dll                                        $PWD/../data
-cp    $QT_DIR/bin/Qt5PrintSupport.dll                               $PWD/../data
-cp    $QT_DIR/bin/Qt5Svg.dll                                        $PWD/../data
-cp    $QT_DIR/bin/Qt5Widgets.dll                                    $PWD/../data
-cp    $QT_DIR/bin/Qt5Xml.dll                                        $PWD/../data
-cp    $QT_DIR/bin/Qt5Script.dll                                     $PWD/../data
-cp    $QT_DIR/bin/Qt5Test.dll                                       $PWD/../data
-cp    $QT_DIR/bin/Qt5Concurrent.dll                                 $PWD/../data
 
-#cp    $QT_DIR/bin/icudt5*.dll                                       $PWD/../data   
-#cp    $QT_DIR/bin/icuin5*.dll                                       $PWD/../data
-#cp    $QT_DIR/bin/icuuc5*.dll                                       $PWD/../data
 
-cp    $QT_DIR/bin/libgcc_s_*-1.dll                                  $PWD/../data
-cp    $QT_DIR/bin/libwinpthread-1.dll                               $PWD/../data
-cp    $QT_DIR/bin/libstdc++-6.dll                                   $PWD/../data
+cp    "$QT_LIB"/Qt5Core.dll                                       "$PWD"/../data
+cp    "$QT_LIB"/Qt5Gui.dll                                        "$PWD"/../data
+cp    "$QT_LIB"/Qt5PrintSupport.dll                               "$PWD"/../data
+cp    "$QT_LIB"/Qt5Svg.dll                                        "$PWD"/../data
+cp    "$QT_LIB"/Qt5Widgets.dll                                    "$PWD"/../data
+cp    "$QT_LIB"/Qt5Xml.dll                                        "$PWD"/../data
+cp    "$QT_LIB"/Qt5Script.dll                                     "$PWD"/../data
+cp    "$QT_LIB"/Qt5Test.dll                                       "$PWD"/../data
+cp    "$QT_LIB"/Qt5Concurrent.dll                                 "$PWD"/../data
+cp    "$QT_LIB"/libgcc_s_*-1.dll                                  "$PWD"/../data
+cp    "$QT_LIB"/libwinpthread-1.dll                               "$PWD"/../data
+cp    "$QT_LIB"/libstdc++-6.dll                                   "$PWD"/../data
 
-cp    $QT_DIR/plugins/platforms/q{windows,offscreen,minimal}.dll                        $PWD/../data/platforms
-cp    $QT_DIR/plugins/imageformats/qsvg.dll                         $PWD/../data/imageformats
-cp    $QT_DIR/plugins/imageformats/qjpeg.dll                        $PWD/../data/imageformats
-cp    $QT_DIR/plugins/iconengines/qsvgicon.dll                      $PWD/../data/iconengines
+cp    "$QT_LIB"/../plugins/platforms/q{windows,offscreen,minimal}.dll                        $PWD/../data/platforms
+cp    "$QT_LIB"/../plugins/imageformats/qsvg.dll                         $PWD/../data/imageformats
+cp    "$QT_LIB"/../plugins/imageformats/qjpeg.dll                        $PWD/../data/imageformats
+cp    "$QT_LIB"/../plugins/iconengines/qsvgicon.dll                      $PWD/../data/iconengines

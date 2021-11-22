@@ -60,11 +60,12 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqrgui-facade.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libupdatesChecker.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libsubprogramsImporterExporter.dylib"
 
-mv "$BUNDLE_CONTENTS/MacOS/trik-studio" "$BUNDLE_CONTENTS/MacOS/$PRODUCT"
+mv "$BUNDLE_CONTENTS/MacOS/trik-studio" "$BUNDLE_CONTENTS/MacOS/trik-studio.bin"
+cp     "$INSTALLER_ROOT/platform/$PRODUCT" "$BUNDLE_CONTENTS/MacOS/"
 sed -i.bak s/qreal/trik-studio/g "$BUNDLE_CONTENTS/Info.plist"
 sed -i.bak s/yourcompany/cybertech/g "$BUNDLE_CONTENTS/Info.plist"
 rm -f "$BUNDLE_CONTENTS/Info.plist.bak"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/$PRODUCT"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/${PRODUCT}.bin"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/patcher"
 
 copy_qt_lib QtCore
@@ -82,17 +83,17 @@ mkdir "$BUNDLE_CONTENTS/MacOS/platforms"
 mkdir "$BUNDLE_CONTENTS/MacOS/imageformats"
 mkdir "$BUNDLE_CONTENTS/MacOS/iconengines"
 
-cp -f    $QT_DIR/plugins/platforms/libq{cocoa,minimal,offscreen}.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
-cp -f    $QT_DIR/plugins/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
-cp -f    $QT_DIR/plugins/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
-cp -f    $QT_DIR/plugins/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
+cp -f    "$QT_PLUGINS"/platforms/libq{cocoa,minimal,offscreen}.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
+cp -f    "$QT_PLUGINS"/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
+cp -f    "$QT_PLUGINS"/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
+cp -f    "$QT_PLUGINS"/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
 
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqminimal.dylib"       "$QT_DIR/lib" "$LIB_PATH"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqoffscreen.dylib"       "$QT_DIR/lib" "$LIB_PATH"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqcocoa.dylib"       "$QT_DIR/lib" "$LIB_PATH"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqsvg.dylib"      "$QT_DIR/lib" "$LIB_PATH"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqjpeg.dylib"      "$QT_DIR/lib" "$LIB_PATH"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/iconengines/libqsvgicon.dylib"   "$QT_DIR/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqminimal.dylib"       "$QT_LIB/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqoffscreen.dylib"       "$QT_LIB/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqcocoa.dylib"       "$QT_LIB/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqsvg.dylib"      "$QT_LIB/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqjpeg.dylib"      "$QT_LIB/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/iconengines/libqsvgicon.dylib"   "$QT_LIB/lib" "$LIB_PATH"
 
 # Cleaning up prebuild-common.sh results…
 rm -rf $PWD/../data/platforms/

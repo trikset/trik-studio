@@ -410,7 +410,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+128"/>
+        <location line="+112"/>
         <source>Decrease speed</source>
         <translation>Уменьшить скорость</translation>
     </message>
@@ -1060,7 +1060,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+693"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+689"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1159,7 +1159,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+337"/>
+        <location line="+317"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

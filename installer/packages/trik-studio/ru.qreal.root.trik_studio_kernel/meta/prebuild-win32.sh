@@ -12,8 +12,9 @@ cp    $BIN_DIR/robots-2d-model.dll                                   $PWD/../dat
 #cp    $BIN_DIR/robots-generator-base.dll                             $PWD/../data
 cp    $BIN_DIR/robots-kit-base.dll                                   $PWD/../data
 cp    $BIN_DIR/robots-utils.dll                                      $PWD/../data
+cp    "$BIN_DIR/qextserialport.dll"                                    "$PWD/../data/"
 
 
-cp    $QT_DIR/bin/Qt5Network.dll			$PWD/../data
-cp    $QT_DIR/bin/Qt5Multimedia.dll			$PWD/../data
+cp    "$QT_LIB/Qt5Network.dll"			"$PWD/../data"
+cp    "$QT_LIB/Qt5Multimedia.dll"		"$PWD/../data"
 

@@ -261,7 +261,6 @@ private:
 	bool mDetailsAreVisible {};
 	bool mFirstShow { true };
 
-	bool mSensorsReadOnly {};
 	bool mRobotPositionReadOnly {};
 
 	bool mBackgroundMode {false};

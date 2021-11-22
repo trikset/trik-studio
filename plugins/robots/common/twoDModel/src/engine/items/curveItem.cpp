@@ -225,6 +225,12 @@ QPainterPath CurveItem::resizeArea() const
 	return result;
 }
 
+void CurveItem::setEditable(bool editable)
+{
+	AbstractItem::setEditable(editable);
+	mMarker1.setFlag(QGraphicsItem::ItemIsMovable, editable);
+	mMarker2.setFlag(QGraphicsItem::ItemIsMovable, editable);
+}
 
 CurveItem::Marker::Marker(QGraphicsItem *parent)
 	: QGraphicsObject(parent)
@@ -270,7 +276,7 @@ void CurveItem::Marker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void CurveItem::Marker::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
-	setPos(parentItem()->mapFromScene(event->scenePos()));
+	if (flags() & ItemIsMovable) setPos(parentItem()->mapFromScene(event->scenePos()));
 }
 
 void CurveItem::Marker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

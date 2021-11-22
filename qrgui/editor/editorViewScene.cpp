@@ -41,6 +41,7 @@
 #include "editor/commands/reshapeEdgeCommand.h"
 #include "editor/commands/resizeCommand.h"
 #include "editor/commands/expandCommand.h"
+#include "editor/commands/replaceByCommand.h"
 
 using namespace qReal;
 using namespace qReal::commands;
@@ -68,7 +69,6 @@ EditorViewScene::EditorViewScene(const models::Models &models
 	, mTimer(new QTimer(this))
 	, mTimerForArrowButtons(new QTimer(this))
 	, mOffset(QPointF(0, 0))
-	, mShouldReparentItems(false)
 	, mTopLeftCorner(new QGraphicsRectItem(0, 0, 1, 1))
 	, mBottomRightCorner(new QGraphicsRectItem(0, 0, 1, 1))
 	, mMouseGesturesEnabled(false)
@@ -380,7 +380,6 @@ int EditorViewScene::launchEdgeMenu(EdgeElement *edge, NodeElement *node
 Id EditorViewScene::createElement(const QString &str)
 {
 	mLastCreatedFromLinker = createElement(str, mCreatePoint, &mLastCreatedFromLinkerCommand);
-	mShouldReparentItems = false;
 	return mLastCreatedFromLinker;
 }
 
@@ -694,22 +693,13 @@ void EditorViewScene::replaceBy()
 		NodeElement *node = replaceNodes.first();
 		QAction *action = menu.exec(QCursor::pos());
 		if (action) {
-			QString string = action->data().toString();
-			mCreatePoint = node->pos();
-			Id newElemId = createElement(string);
-			NodeElement * newElem = dynamic_cast<NodeElement *>(getElem(newElemId));
-			if (newElem == nullptr) {
-				QLOG_INFO() << "Can't replace by nonexistance element. Id = " << newElemId;
-				return;
-			}
+			const Id typeId = Id::loadFromString(action->data().toString());
+			ElementInfo newElementInfo(typeId.sameTypeId(), Id(), mEditorManager.friendlyName(typeId), Id(), false);
+			newElementInfo.setLogicalParent(mRootId);
+			newElementInfo.setGraphicalParent(mRootId);
 
-			const QList<EdgeElement *> edges = node->edgeList();
-			for (auto edge : edges) {
-				auto srcElem = node == edge->src() ? newElem : edge->src();
-				auto dstElem = node == edge->dst() ? newElem : edge->dst();
-				reConnectLink(edge, srcElem, dstElem);
-			}
-			mController.execute((new RemoveAndUpdateCommand(*this, mModels))->withItemsToDelete({ node->id() }));
+			mController.execute(new ReplaceByCommand(mModels, *this, node, newElementInfo));
+			mLastCreatedFromLinker = newElementInfo.id();
 		}
 	} else {
 		EdgeElement *edge = replaceEdges.first();
@@ -1104,8 +1094,6 @@ void EditorViewScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	invalidate();
-
-	mShouldReparentItems = (selectedItems().size() > 0);
 }
 
 void EditorViewScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)

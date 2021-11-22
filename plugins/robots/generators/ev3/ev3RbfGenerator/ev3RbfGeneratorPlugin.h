@@ -45,15 +45,12 @@ private slots:
 	QString uploadProgram();
 
 	/// Generates and uploads script to a EV3 robot. Runs uploaded program basing on run policy.
-	void uploadAndRunProgram();
+	void uploadAndRunProgram(RunPolicy runPolicy);
 
 	/// Stops curretly executing program on the EV3 robot;
 	void stopRobot();
 
 private:
-	/// Generates, uploads and starts script on the EV3 robot.
-	void runProgram();
-
 	/// Function that checks installed JRE or not
 	bool javaInstalled();
 
@@ -73,6 +70,8 @@ private:
 
 	/// Action that stops current program on a robot
 	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
+
+	bool mJavaDetected {};
 };
 
 }

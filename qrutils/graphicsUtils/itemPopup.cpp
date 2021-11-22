@@ -130,7 +130,7 @@ void ItemPopup::onMouseReleasedScene()
 
 void ItemPopup::checkSelection()
 {
-	if (!mEnabled && mMousePressed) {
+	if (!mEnabled || mMousePressed) {
 		return;
 	}
 

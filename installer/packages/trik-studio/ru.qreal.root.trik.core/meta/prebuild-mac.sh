@@ -5,7 +5,9 @@ set -o errexit
 cd "$(dirname "$0")"
 source $INSTALLER_ROOT/utils/mac_utils.sh
 
+mkdir -p "$BUNDLE_CONTENTS/Lib/python-runtime"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/editors"
+
 cp  -f   $BIN_DIR/plugins/editors/libtrikMetamodel.dylib                                "$BUNDLE_CONTENTS/Lib/plugins/editors/"
 cp -fpR $BIN_DIR/librobots-trik-kit*.dylib                                             "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/librobots-trik-kit-interpreter-common*.dylib                          "$BUNDLE_CONTENTS/Lib"
