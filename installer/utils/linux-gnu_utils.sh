@@ -8,17 +8,17 @@ copy_required_libs() {
 	set -x
 	local targetLibsDir="$1"
 	shift
-	local qtDirLib="$QT_DIR"/lib/
+	local qtDirLib="$QT_LIB"
 	local hostDirLib="$qtDirLib"
 	local binaries="$@"
 	local libs=$(env LD_LIBRARY_PATH="$targetLibsDir:$hostDirLib:$qtDirLib:${LD_LIBRARY_PATH:-}" ldd $binaries \
-		| grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' \
+		| grep -Ev "not found$" | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(c|dl|m|pthread|rt)\.so.*" \
 		| xargs realpath -L -s | sort -u | grep -Ev "^$(realpath -e $targetLibsDir)|linux-vdso|^/lib64/")
 	local rsync=""
 	
-	for lib in ${libs}; do rsync="$rsync ${lib}*" ; done
+	for lib in ${libs}; do rsync="$rsync ${lib}" ; done
 	echo "LIBS to copy: $rsync"
-	if [[ -n "$rsync" ]] ; then eval rsync -av "$rsync" "${targetLibsDir}" ; fi
+	if [[ -n "$rsync" ]] ; then eval rsync -av -L "$rsync" "${targetLibsDir}" ; fi
 }
 
 add_required_libs() {

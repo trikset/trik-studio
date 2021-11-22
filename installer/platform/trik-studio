@@ -3,12 +3,23 @@
 # Welcome to TRIK Studio! Take it, hold it, love it.
 
 set -ueo pipefail
+cd "$(dirname "$0")"
+
+case $(uname -s) in
+    Linux)
+            TRIK_PYTHONPATH_BUNDLE_DIR="$PWD"/lib/python-runtime
+            cd bin
+    ;;
+    Darwin)
+           TRIK_PYTHONPATH_BUNDLE_DIR="$PWD"/../Lib/python-runtime
+    ;;
+    * ) echo "Unsupported platform" ;;
+esac
 
 #TODO: pack corresponding python3 runtime into installer and checker packages.
 # Otherwise, we can have a problem with version mismatch
-if [ -z ${TRIK_PYTHONPATH+x} ] && which -a python3 &> /dev/null ; then
-    true || export TRIK_PYTHONPATH=$(python3 -c 'import sys; import os; print(os.pathsep.join(sys.path))')
+if [ -z ${TRIK_PYTHONPATH+x} ] ; then
+    export TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
 fi
 
-cd "$(dirname "$0")"
-exec bin/trik-studio "$@"
+exec ./trik-studio.bin "$@"

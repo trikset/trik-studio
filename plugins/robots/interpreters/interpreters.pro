@@ -25,6 +25,11 @@ SUBDIRS = \
 	robotsPlugin \
 #	pioneerKitInterpreter \
 
+CONFIG(trik_retired_features) {
+	SUBDIRS += trikV6KitInterpreter
+	trikV6KitInterpreter.depends = trikKitInterpreterCommon
+}
+
 robotsPlugin.depends = interpreterCore
 twoDModelRunner.depends = interpreterCore
 trikV6KitInterpreter.depends = trikKitInterpreterCommon

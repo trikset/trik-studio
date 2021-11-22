@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Package>
-    <DisplayName>Necessary Files</DisplayName>
+    <DisplayName>Core TRIK support components</DisplayName>
     <DisplayName xml:lang="ru_ru">Поддержка ТРИК</DisplayName>
     <Description>Mandatory components for TRIK</Description>
     <Description xml:lang="ru_ru">Обязательные компоненты для конструктора ТРИК</Description>
