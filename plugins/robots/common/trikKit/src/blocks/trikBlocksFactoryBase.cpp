@@ -63,6 +63,7 @@
 
 #include "trikKit/robotModel/parts/trikInfraredSensor.h"
 #include "trikKit/robotModel/parts/trikSonarSensor.h"
+#include <qrkernel/settingsManager.h>
 
 using namespace trik::blocks;
 using namespace trik::blocks::details;
@@ -256,8 +257,6 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikWaitForAccelerometer")
 				<< id("TrikSystem")
 				<< id("TrikWaitForMotion")
-				<< id("TrikSendMessage")
-				<< id("TrikWaitForMessage")
 				<< id("TrikWaitGamepadButton")
 				<< id("TrikWaitPadPress")
 				<< id("TrikWaitGamepadWheel")
@@ -267,6 +266,12 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikStopCamera")
 				<< id("TrikStopVideoStreaming")
 				;
+		if (!qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()) {
+			result
+				<< id("TrikSendMessage")
+				<< id("TrikWaitForMessage")
+				;
+		}
 	} else {
 		result
 				<< id("TrikCalibrateGyroscope")

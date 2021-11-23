@@ -745,42 +745,22 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 	mUi->palette->setVisible(!worldReadOnly);
 	mActions->setWorldModelActionsVisible(!worldReadOnly);
 	mColorFieldItemPopup->setEnabled(!worldReadOnly);
-
-	const auto hasSpacer = [this]() {
-		for (int i = 0; i < mUi->sceneHeaderWidget->layout()->count(); ++i) {
-			if (mUi->sceneHeaderWidget->layout()->itemAt(i) == mUi->horizontalSpacer) {
-				return true;
-			}
-		}
-
-		return false;
-	};
-
-	mUi->gridParametersBox->setVisible(!worldReadOnly);
-	if (!worldReadOnly && hasSpacer()) {
-		mUi->sceneHeaderWidget->layout()->removeItem(mUi->horizontalSpacer);
-		delete mUi->horizontalSpacer;
-		mUi->horizontalSpacer = nullptr;
-	} else if (worldReadOnly && !hasSpacer()){
-		static_cast<QHBoxLayout *>(mUi->sceneHeaderWidget->layout())->insertItem(1, mUi->horizontalSpacer);
-	}
+	mImageItemPopup->setEnabled(!worldReadOnly);
 
 	const bool sensorsReadOnly = flags.testFlag(ReadOnly::Sensors);
-	const bool robotConfigurationReadOnly = flags.testFlag(ReadOnly::RobotSetup);
-
 	mUi->detailsTab->setDevicesSectionsVisible(!sensorsReadOnly);
-	mUi->detailsTab->setMotorsSectionsVisible(!robotConfigurationReadOnly);
-
 	mCurrentConfigurer->setEnabled(!sensorsReadOnly);
+
+	const bool robotConfigurationReadOnly = flags.testFlag(ReadOnly::RobotSetup);
+	mUi->detailsTab->setMotorsSectionsVisible(!robotConfigurationReadOnly);
 	mUi->leftWheelComboBox->setEnabled(!robotConfigurationReadOnly);
 	mUi->rightWheelComboBox->setEnabled(!robotConfigurationReadOnly);
 
 	const bool simulationSettingsReadOnly = flags.testFlag(ReadOnly::SimulationSettings);
-
 	mUi->detailsTab->setPhysicsSectionsVisible(!simulationSettingsReadOnly);
 
-	mSensorsReadOnly = sensorsReadOnly;
 	mRobotPositionReadOnly = flags.testFlag(ReadOnly::RobotPosition);
+	if (mRobotPositionReadOnly) returnToStartMarker();
 
 	mScene->setInteractivityFlags(flags);
 }

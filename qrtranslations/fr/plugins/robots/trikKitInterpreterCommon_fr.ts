@@ -24,17 +24,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+28"/>
         <source>Use real camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+55"/>
+        <source>Network Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable Mailbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Hull number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>999</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-88"/>
         <source>Camera:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+29"/>
         <source>Use images from project</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72,13 +92,23 @@
 <context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+32"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Select Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>You should restart the program to apply changes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -106,7 +136,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+211"/>
         <source>Run program</source>
         <translation type="unfinished"></translation>
     </message>

@@ -153,7 +153,7 @@ jobs:
             mingw32-make -j $(nproc) qmake_all
 
       - name: Make all
-        timeout-minutes: 90
+        timeout-minutes: 70
         run: |
             cd ${{ env.BUILD_DIR }}
             mingw32-make -j $(nproc) all
@@ -167,16 +167,25 @@ jobs:
       - name: Prepare all dlls
         if: false
         run: |
-            for file in $(find ${{ env.BUILD_DIR }}/bin/release/*.exe) ; do windeployqt --release $file ; done
-      - name: Tests
+            for file in $(ls ${{ env.BUILD_DIR }}/bin/release/*.exe || :) ; do windeployqt --release $file ; done
+
+      - name: Download tests
         if: false
-        timeout-minutes: 3
+        run: |
+            curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
+            7z x tests.7z
+            ls $GITHUB_WORKSPACE/testing_small
+
+      - name: Tests
+        id: tests
+        timeout-minutes: 2
+        if: false
         continue-on-error: true
         run: |
             echo "$PATH"
             echo ------
             cd ${{ env.BUILD_DIR }}/bin/release
-            set PYTHONIOENCODING=utf-8 & python "$GITHUB_WORKSPACE\buildScripts\tests\fieldstest.py" 2D-model.exe ${{ env.TEST_DIR }}
+            set PYTHONIOENCODING=utf-8 & python "${{ github.workspace }}\buildScripts\tests\fieldstest.py" 2D-model.exe "${{ github.workspace }}\testing_small"
 
       - name: Push binaries
         if: false
@@ -193,7 +202,7 @@ jobs:
       - name: Push installer
         uses: actions/upload-artifact@v2
         with:
-          name: auto-installer-${{ matrix.qt-version}}
+          name: trik-studio-auto-installer-qt${{ matrix.qt-version}}
           path: |
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
@@ -216,7 +225,7 @@ jobs:
         run: sshpass -p ${{ secrets.DL_PASSWORD }} rsync -ve "ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
 
       - name: Prepare for RDP connection
-        if: false
+        if: false #comment this line to create RDP session
         continue-on-error: true
         shell: pwsh
         env:
@@ -226,8 +235,8 @@ jobs:
             Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
             Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
             Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-#            Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-#            Expand-Archive ngrok.zip
-#            .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
-#            choco install far dependencies
-#           .\ngrok\ngrok.exe tcp 3389
+            Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+            Expand-Archive ngrok.zip
+            .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+            choco install far dependencies
+            .\ngrok\ngrok.exe tcp 3389

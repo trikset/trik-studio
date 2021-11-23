@@ -121,6 +121,7 @@ void TwoDExecutionControl::system(const QString &command, bool synchronously)
 {
 	Q_UNUSED(command)
 	Q_UNUSED(synchronously)
+	emit textInStdOut("system is disabled\n");
 }
 
 void TwoDExecutionControl::writeToFile(const QString &file, const QString &text)
@@ -146,6 +147,11 @@ void TwoDExecutionControl::removeFile(const QString &file)
 {
 	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
 	out.remove();
+}
+
+int TwoDExecutionControl::timeInterval(int packedTimeLeft, int packedTimeRight)
+{
+	return trikKernel::TimeVal::timeInterval(packedTimeLeft, packedTimeRight);
 }
 
 void TwoDExecutionControl::run()

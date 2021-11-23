@@ -139,18 +139,14 @@ void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 	mSensorsReadOnly = (flags & kitBase::ReadOnly::Sensors) != 0;
 
 	for (const auto item : items()) {
-		const auto robotItem = dynamic_cast<RobotItem *>(item);
-		const auto sensorItem = dynamic_cast<SensorItem *>(item);
-		const auto worldItem = dynamic_cast<items::ColorFieldItem *>(item);
-		const auto startPosition = dynamic_cast<items::StartPosition *>(item);
-		if (worldItem) {
-			worldItem->setEditable(!mWorldReadOnly);
-		} else if (robotItem) {
+		if (const auto &&robotItem = dynamic_cast<RobotItem *>(item)) {
 			robotItem->setEditable(!mRobotReadOnly);
-		} else if (sensorItem) {
+		} else if (const auto &&sensorItem = dynamic_cast<SensorItem *>(item)) {
 			sensorItem->setEditable(!mSensorsReadOnly);
-		} else if (startPosition) {
+		} else if (const auto &&startPosition = dynamic_cast<items::StartPosition *>(item)) {
 			startPosition->setEditable(!mRobotReadOnly);
+		} else if (const auto &&worldItem = dynamic_cast<graphicsUtils::AbstractItem *>(item)) {
+			worldItem->setEditable(!mWorldReadOnly);
 		}
 	}
 }

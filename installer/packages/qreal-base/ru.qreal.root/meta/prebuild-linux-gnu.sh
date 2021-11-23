@@ -37,27 +37,23 @@ cp -pr $BIN_DIR/libqrgui-thirdparty.so*                                 $PWD/../
 cp -pr $BIN_DIR/libqrgui-tool-plugin-interface.so*                      $PWD/../data/lib/
 cp -pr $BIN_DIR/libqrgui-facade.so*                                     $PWD/../data/lib/
 cp     $BIN_DIR/patcher                                                 $PWD/../data/bin/
-cp     $BIN_DIR/trik-studio                                             $PWD/../data/bin/$PRODUCT
+cp     "$BIN_DIR"/trik-studio                                             "$PWD/../data/bin/${PRODUCT}.bin"
 cp     $BIN_DIR/plugins/tools/libupdatesChecker.so                      $PWD/../data/lib/plugins/tools/
 cp     $BIN_DIR/plugins/tools/libsubprogramsImporterExporter.so            $PWD/../data/lib/plugins/tools/
 
+cp -pr "$QT_LIB"/libQt5Core.so*                                       $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5DBus.so*                                       $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5Gui.so*                                        $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5PrintSupport.so*                               $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5Svg.so*                                        $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5Widgets.so*                                    $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5Xml.so*                                        $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5Script.so*                                     $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5Test.so*                                       $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5XcbQpa.so*                                     $PWD/../data/lib/
+cp -pr "$QT_LIB"/libQt5WaylandC{lient,ompositor}.so*                  $PWD/../data/lib/
 
-cp -pr $QT_DIR/lib/libQt5Core.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5DBus.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5Gui.so*                                        $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5PrintSupport.so*                               $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5Svg.so*                                        $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5Widgets.so*                                    $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5Xml.so*                                        $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5Script.so*                                     $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5Test.so*                                       $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5XcbQpa.so*                                     $PWD/../data/lib/
-cp -pr $QT_DIR/lib/libQt5WaylandC{lient,ompositor}.so*                  $PWD/../data/lib/
-#rsync -avR --copy-unsafe-links "/usr/lib/$(uname -i)-linux-gnu"/./lib{stdc++,icudata,icui18n,icuuc,png12}.so* "$PWD/../data/lib/"
-#Take them from Qt if exist
-#rsync -avR "$QT_DIR"/lib/./libicu{data,i18n,uc}.so*                                 "$PWD/../data/lib/" || :
-
-rsync -avR "$QT_DIR"/plugins/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
+rsync -avR "$QT_PLUGINS"/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
 
 mv     $PWD/../data/acknowledgements.txt                                $PWD/../data/resources/
 mv     $PWD/../data/changelog.txt                                       $PWD/../data/resources/

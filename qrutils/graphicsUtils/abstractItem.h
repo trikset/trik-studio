@@ -133,7 +133,7 @@ public:
 	/// Sets a unique identifier of an item.
 	void setId(const QString &id);
 
-	void setEditable(bool editable);
+	virtual void setEditable(bool editable);
 	bool editable() const;
 	bool isHovered() const;
 
