@@ -31,7 +31,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.trikset.studio.qrs</string>
+				<string>com.trikset.studio.tsj</string>
 			</array>
 		</dict>
 	</array>
@@ -47,12 +47,12 @@
 				<string>public.source-code</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>com.trikset.studio.qrs</string>
+			<string>com.trikset.studio.tsj</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>qrs</string>
+					<string>tsj</string>
 				</array>
 			</dict>
 		</dict>
