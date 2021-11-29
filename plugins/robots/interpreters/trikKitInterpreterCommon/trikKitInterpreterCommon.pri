@@ -89,6 +89,7 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikaccelerometeradapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikGyroscopeAdapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikProxyMarker.h \
+	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triklidaremu.h \
 	$$PWD/include/trikKitInterpreterCommon/trikTextualInterpreter.h \
 	$$PWD/include/trikKitInterpreterCommon/twoDExecutionControl.h \
 
@@ -142,6 +143,7 @@ SOURCES += \
 	$$PWD/src/trikEmulation/trikaccelerometeradapter.cpp \
 	$$PWD/src/trikEmulation/trikGyroscopeAdapter.cpp \
 	$$PWD/src/trikEmulation/trikProxyMarker.cpp \
+	$$PWD/src/trikEmulation/triklidaremu.cpp \
 	$$PWD/src/trikTextualInterpreter.cpp \
 	$$PWD/src/twoDExecutionControl.cpp \
 

@@ -1,0 +1,1 @@
+brick.lidar(@@PORT@@).read()
