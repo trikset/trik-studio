@@ -228,9 +228,8 @@ trikControl::LidarInterface *TrikBrick::lidar(const QString &port)
 {
 	using namespace kitBase::robotModel;
 	if (!mLidars.contains(port)) {
-		robotParts::VectorSensor * lidar =
-				RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
-		if (lidar == nullptr) {
+		auto * lidar = RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
+		if (!lidar) {
 			emit error(tr("No configured lidar on port: %1").arg(port));
 			return nullptr;
 		}

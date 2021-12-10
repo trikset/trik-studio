@@ -24,9 +24,8 @@ class TrikLidarEmu : public trikControl::LidarInterface
 {
 	Q_OBJECT
 
-	// DeviceInterface interface
 public:
-	TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar);
+	explicit TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar);
 
 	Status status() const override {return Status::ready;}
 
@@ -34,7 +33,7 @@ public slots:
 	QVector<int> read() const override;
 
 private:
-	kitBase::robotModel::robotParts::VectorSensor *mLidar;
+	kitBase::robotModel::robotParts::VectorSensor *mLidar {}; // Doesn't have ownership
 };
 
 }
