@@ -22,6 +22,5 @@ TrikLidarEmu::TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar)
 
 QVector<int> TrikLidarEmu::read() const
 {
-	QMetaObject::invokeMethod(mLidar, "read");
-	return mLidar->lastData(); // not best, race conditions?
+	return mLidar->lastData();
 }
