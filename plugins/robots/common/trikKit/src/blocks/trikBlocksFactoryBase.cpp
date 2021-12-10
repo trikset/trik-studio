@@ -50,6 +50,7 @@
 #include "details/ledBlock.h"
 #include "details/sayBlock.h"
 #include "details/systemCommandBlock.h"
+#include "details/readLidarBlock.h"
 
 #include "details/waitGamepadButtonBlock.h"
 #include "details/waitGamepadConnectBlock.h"
@@ -166,6 +167,8 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 
 	} else if (elementMetatypeIs(element, "TrikCalibrateGyroscope")) {
 		return new CalibrateGyroscopeBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikReadLidar")) {
+		return new ReadLidarBlock(mRobotModelManager->model());
 	}
 
 	return nullptr;
@@ -194,6 +197,7 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 			<< id("TrikDetectorToVariable")
 			<< id("TrikInitVideoStreaming")
 			<< id("TrikStopVideoStreaming")
+			<< id("TrikReadLidar")
 			<< id("TrikSendMessage")
 			<< id("TrikWaitForMessage")
 			;

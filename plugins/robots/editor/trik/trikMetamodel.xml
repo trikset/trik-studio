@@ -1207,6 +1207,28 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Read Lidar To Variable" name="TrikReadLidar" description="IKHON">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/readLidarBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="33" y="60" textBinded="variable" background="white" prefix="Variable:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<properties>
+						<property displayedName="Variable" type="string" name="variable">
+							<default>x</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 			<node displayedName="Send message" name="TrikSendMessage" description="Sends message to another robot.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -1372,6 +1394,7 @@
 				<element name="TrikWriteToFile"/>
 				<element name="TrikRemoveFile"/>
 				<element name="TrikCalibrateGyroscope"/>
+				<element name="TrikReadLidar"/>
 			</group>
 			<group name="Wait">
 				<element name="TrikWaitForGyroscope" />
