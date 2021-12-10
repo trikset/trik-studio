@@ -224,9 +224,10 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 	return mSensors[port].get();
 }
 
-trikControl::LidarInterface *TrikBrick::lidar(const QString &port)
+trikControl::LidarInterface *TrikBrick::lidar()
 {
 	using namespace kitBase::robotModel;
+	auto & port = "LidarPort";
 	if (!mLidars.contains(port)) {
 		auto * lidar = RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
 		if (!lidar) {

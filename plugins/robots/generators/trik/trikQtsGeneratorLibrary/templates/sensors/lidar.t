@@ -1,1 +1,1 @@
-brick.lidar(@@PORT@@).read()
+brick.lidar().read()

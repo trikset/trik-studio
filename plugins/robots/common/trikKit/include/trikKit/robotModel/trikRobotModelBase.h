@@ -74,6 +74,7 @@ protected:
 	virtual kitBase::robotModel::DeviceInfo gamepadConnectionIndicatorInfo() const;
 
 	virtual kitBase::robotModel::PortInfo video2Port() const;
+	virtual kitBase::robotModel::PortInfo lidarPort() const;
 };
 
 }

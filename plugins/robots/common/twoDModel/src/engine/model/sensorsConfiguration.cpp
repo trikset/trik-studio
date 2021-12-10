@@ -18,6 +18,7 @@
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/sensorsConfiguration.h"
+#include "kitBase/robotModel/robotParts/lidarSensor.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
@@ -52,9 +53,9 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 QPointF SensorsConfiguration::defaultPosition(const DeviceInfo &device) const
 {
 	/// @todo: Move it somewhere?
-	return device.simulated()
-			? QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2)
-			: QPointF(mRobotSize.width() / 2, mRobotSize.height() / 2);
+	return  !device.simulated() || device.isA<kitBase::robotModel::robotParts::LidarSensor>()
+			? QPointF(mRobotSize.width() / 2, mRobotSize.height() / 2)
+			: QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
 }
 
 QPointF SensorsConfiguration::position(const PortInfo &port) const

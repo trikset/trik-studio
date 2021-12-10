@@ -40,6 +40,7 @@
 #include "twoDModel/engine/model/image.h"
 #include "src/engine/view/scene/sensorItem.h"
 #include "src/engine/view/scene/rangeSensorItem.h"
+#include "src/engine/view/scene/lidarSensorItem.h"
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/ballItem.h"
@@ -997,13 +998,19 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
-			|| device.isA<kitBase::robotModel::robotParts::LidarSensor>()
 			? new RangeSensorItem(mModel.worldModel(), robotModel.configuration()
 					, port
 					, robotModel.info().rangeSensorAngleAndDistance(device)
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)
 					)
+			: device.isA<kitBase::robotModel::robotParts::LidarSensor>()
+			? new LidarSensorItem(mModel.worldModel(), robotModel.configuration()
+					  , port
+					  , robotModel.info().rangeSensorAngleAndDistance(device)
+					  , robotModel.info().sensorImagePath(device)
+					  , robotModel.info().sensorImageRect(device)
+					  )
 			: new SensorItem(robotModel.configuration()
 					, port
 					, robotModel.info().sensorImagePath(device)

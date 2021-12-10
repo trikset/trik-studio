@@ -52,7 +52,6 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 		lightSensorInfo()
 		, infraredSensorInfo()
 		, touchSensorInfo()
-		, lidarSensorInfo()
 	};
 
 	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
@@ -94,6 +93,7 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 			, PortInfo::ReservedVariableType::vector), { lineSensorInfo() });
 
 	addAllowedConnection(video2Port(), { videoCameraInfo() });
+	addAllowedConnection(lidarPort(), { lidarSensorInfo() });
 
 	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), { objectSensorInfo() });
 	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
@@ -133,8 +133,8 @@ QList<PortInfo> TrikRobotModelBase::configurablePorts() const
 			, PortInfo("D2", input, {}, "sensorD2")
 			};
 
-	QList<PortInfo> const videoPorts = {video2Port()};
-	return CommonRobotModel::configurablePorts() + digitalPorts + videoPorts;
+	QList<PortInfo> const additionalPorts = {video2Port(), lidarPort()};
+	return CommonRobotModel::configurablePorts() + digitalPorts + additionalPorts;
 }
 
 QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
@@ -294,4 +294,8 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 
 PortInfo TrikRobotModelBase::video2Port() const {
 	return PortInfo("Video2Port", tr("Video 2"), input);
+}
+
+PortInfo TrikRobotModelBase::lidarPort() const {
+	return PortInfo("LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector);
 }

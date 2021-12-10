@@ -12,24 +12,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/lidar.h"
+#pragma once
 
-#include "twoDModel/engine/twoDModelEngineInterface.h"
+#include "rangeSensorItem.h"
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
+namespace twoDModel {
+namespace view {
 
-Lidar::Lidar(const DeviceInfo &info, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine, QPair<qreal, int> angleAndRange)
-	: robotParts::LidarSensor(info, port)
-	, mEngine(engine)
-	, mAngle(angleAndRange.first)
-	, mRange(angleAndRange.second)
+/// Lidar sensor that can draw its scanning area.
+class LidarSensorItem : public RangeSensorItem
 {
-	setLastData(QVector<int>(360, 0));
+	Q_OBJECT
+	Q_INTERFACES(QGraphicsItem)
+
+public:
+	LidarSensorItem(const model::WorldModel &worldModel
+			, model::SensorsConfiguration &configuration
+			, const kitBase::robotModel::PortInfo &port
+			, QPair<qreal, int> physicalParams
+			, const QString &pathToImage
+			, const QRect &imageSize
+			);
+
+protected:
+	QPainterPath scanningRegion() const override;
+	void customizePainter(QPainter *painter) const override;
+};
+
 }
-
-void Lidar::read()
-{
-	setLastData(mEngine.readLidarSensor(port(), mRange, mAngle));
 }

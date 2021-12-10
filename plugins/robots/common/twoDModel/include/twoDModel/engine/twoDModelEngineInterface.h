@@ -55,7 +55,7 @@ public:
 
 	/// Returns the array of distance values scanned by the lidar sensor.
 	/// @returns The distance in cm till the closest object object in the scanning one degree sector or -1 if no such
-	/// for each angle from -scanningAngle/2 to scanningAngle/2 clockwise
+	/// for each angle from 0 to scanningAngle clockwise
 	virtual QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port
 			, int maxDistance, qreal scanningAngle) const = 0;
 
