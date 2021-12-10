@@ -80,6 +80,7 @@ HEADERS += \
 	$$PWD/src/blocks/details/removeFileBlock.h \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.h \
 	$$PWD/src/blocks/details/trikPrintTextBlock.h \
+	$$PWD/src/blocks/details/readLidarBlock.h \
 
 SOURCES += \
 	$$PWD/src/robotModel/trikRobotModelBase.cpp \
@@ -137,6 +138,7 @@ SOURCES += \
 	$$PWD/src/blocks/details/removeFileBlock.cpp \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.cpp \
 	$$PWD/src/blocks/details/trikPrintTextBlock.cpp \
+	$$PWD/src/blocks/details/readLidarBlock.cpp \
 
 TRANSLATIONS += \
 	$$PWD/../../../../qrtranslations/ru/plugins/robots/trikKit_ru.ts \
