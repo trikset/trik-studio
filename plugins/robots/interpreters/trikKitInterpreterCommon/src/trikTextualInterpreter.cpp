@@ -74,7 +74,9 @@ trik::TrikTextualInterpreter::~TrikTextualInterpreter()
 
 void trik::TrikTextualInterpreter::setMailboxHullNumber()
 {
-	mMailbox->setHullNumber(qReal::SettingsManager::value("TRIK2DHullNumber", "999").toInt());
+	if (mMailbox) {
+		mMailbox->setHullNumber(qReal::SettingsManager::value("TRIK2DHullNumber", "999").toInt());
+	}
 }
 
 void trik::TrikTextualInterpreter::interpretCommand(const QString &script)
