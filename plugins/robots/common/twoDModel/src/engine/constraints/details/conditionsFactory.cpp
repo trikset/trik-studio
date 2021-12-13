@@ -130,6 +130,8 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
 				return region->mapToScene(region->shape()).contains(robotModel->robotBoundingPath(false));
+			} else if (objectPoint == "any") {
+				return region->mapToScene(region->shape()).intersects(robotModel->robotBoundingPath(false));
 			}
 			return region->containsPoint(robotModel->robotCenter());
 		}
@@ -148,10 +150,13 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			}
 
 			if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
+				auto deviceShape = robotModel->robotsTransform().map(
+						robotModel->sensorBoundingPath(device->port()));
 				if (objectPoint == "all") {
-					auto deviceShape = robotModel->robotsTransform().map(
-							robotModel->sensorBoundingPath(device->port()));
 					return region->mapToScene(region->shape()).contains(
+							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
+				} else if (objectPoint == "any") {
+					return region->mapToScene(region->shape()).intersects(
 							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
 				}
 				return region->containsPoint(
