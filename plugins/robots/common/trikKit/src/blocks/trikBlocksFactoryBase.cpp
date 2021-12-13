@@ -197,7 +197,7 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 			<< id("TrikDetectorToVariable")
 			<< id("TrikInitVideoStreaming")
 			<< id("TrikStopVideoStreaming")
-			<< id("TrikReadLidar")
+//			<< id("TrikReadLidar")
 			<< id("TrikSendMessage")
 			<< id("TrikWaitForMessage")
 			;
