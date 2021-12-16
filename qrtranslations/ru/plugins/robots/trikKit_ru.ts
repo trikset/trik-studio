@@ -12,10 +12,15 @@
 <context>
     <name>trik::robotModel::TrikRobotModelBase</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+91"/>
-        <location line="+197"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+92"/>
+        <location line="+204"/>
         <source>Video 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Lidar</source>
+        <translation type="unfinished">Лидар</translation>
     </message>
 </context>
 <context>

@@ -137,28 +137,33 @@
     <name>trik::TrikBrick</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+82"/>
-        <location line="+75"/>
+        <location line="+76"/>
         <source>2d model shell part was not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-30"/>
-        <location line="+267"/>
+        <location line="+283"/>
         <source>Trying to read from file %1 failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-207"/>
+        <location line="-223"/>
         <source>No configured motor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+31"/>
-        <source>No configured sensor on port: %1</source>
+        <source>No configured scalar sensor on port: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+15"/>
+        <source>No configured lidar on port: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
         <source>No configured accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
