@@ -20,8 +20,7 @@ namespace trik {
 namespace blocks {
 namespace details {
 
-/// IKHON
-/// An interpreter`s implementation for SAY block.
+/// An interpreter`s implementation for Read Lidar block.
 class ReadLidarBlock : public kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::LidarSensor>
 {
 	Q_OBJECT
