@@ -11,7 +11,7 @@
     <message>
         <location line="+24"/>
         <location line="+226"/>
-        <location line="+1358"/>
+        <location line="+1402"/>
         <location line="+413"/>
         <location line="+119"/>
         <location line="+71"/>
@@ -21,20 +21,20 @@
         <translation>Порт</translation>
     </message>
     <message>
-        <location line="-2380"/>
-        <location line="+1424"/>
+        <location line="-2424"/>
+        <location line="+1468"/>
         <source>Angular Servo</source>
         <translation>Угловой сервомотор</translation>
     </message>
     <message>
-        <location line="-1422"/>
-        <location line="+1424"/>
+        <location line="-1466"/>
+        <location line="+1468"/>
         <source>Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.</source>
         <translation>Управление угловым сервомотором. Устанавливает угол поворота вала мотора на данном порту (в градусах). Значения от 0 до 90 соотвествуют повороту по часовой, значения от -90 до 0 --- повороту против часовой.</translation>
     </message>
     <message>
-        <location line="-1417"/>
-        <location line="+1424"/>
+        <location line="-1461"/>
+        <location line="+1468"/>
         <location line="+54"/>
         <location line="+108"/>
         <location line="+81"/>
@@ -44,26 +44,26 @@
         <translation>Порты:</translation>
     </message>
     <message>
-        <location line="-1769"/>
-        <location line="+1424"/>
+        <location line="-1813"/>
+        <location line="+1468"/>
         <location line="+1101"/>
         <source>Angle:</source>
         <translation>Угол:</translation>
     </message>
     <message>
-        <location line="-2524"/>
-        <location line="+1424"/>
+        <location line="-2568"/>
+        <location line="+1468"/>
         <source>°</source>
         <translation>°</translation>
     </message>
     <message>
-        <location line="-1400"/>
+        <location line="-1444"/>
         <source>E1</source>
         <translation>E1</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+1424"/>
+        <location line="+1468"/>
         <location line="+46"/>
         <location line="+108"/>
         <location line="+35"/>
@@ -74,7 +74,7 @@
         <translation>Порты</translation>
     </message>
     <message>
-        <location line="-1776"/>
+        <location line="-1820"/>
         <location line="+261"/>
         <location line="+1"/>
         <location line="+72"/>
@@ -83,7 +83,7 @@
         <location line="+2"/>
         <location line="+127"/>
         <location line="+1"/>
-        <location line="+890"/>
+        <location line="+934"/>
         <location line="+412"/>
         <location line="+162"/>
         <location line="+63"/>
@@ -94,13 +94,13 @@
         <translation>0</translation>
     </message>
     <message>
-        <location line="-2531"/>
-        <location line="+1424"/>
+        <location line="-2575"/>
+        <location line="+1468"/>
         <source>Angle (degrees)</source>
         <translation>Угол (градусы)</translation>
     </message>
     <message>
-        <location line="-1378"/>
+        <location line="-1422"/>
         <location line="+11"/>
         <source>Detect by Videocamera</source>
         <translation>Детектировать по камере</translation>
@@ -113,20 +113,20 @@
     <message>
         <location line="+7"/>
         <location line="+499"/>
-        <location line="+697"/>
+        <location line="+741"/>
         <source>Mode:</source>
         <translation>Режим:</translation>
     </message>
     <message>
-        <location line="-1165"/>
+        <location line="-1209"/>
         <location line="+500"/>
-        <location line="+696"/>
+        <location line="+740"/>
         <location line="+493"/>
         <source>Mode</source>
         <translation>Режим</translation>
     </message>
     <message>
-        <location line="-1678"/>
+        <location line="-1722"/>
         <location line="+3"/>
         <source>Line Detector into Variable</source>
         <translation>Датчик линии в переменную</translation>
@@ -138,22 +138,24 @@
     </message>
     <message>
         <location line="+14"/>
-        <location line="+2041"/>
+        <location line="+755"/>
+        <location line="+1330"/>
         <source>Variable:</source>
         <translation>Переменная:</translation>
     </message>
     <message>
-        <location line="-2017"/>
+        <location line="-2061"/>
         <source>err</source>
         <translation>err</translation>
     </message>
     <message>
         <location line="+0"/>
+        <location line="+755"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-744"/>
         <source>TrikDigitalSensorBlock</source>
         <translation>Базовый блок цифровых сенсоров TRIK</translation>
     </message>
@@ -189,12 +191,12 @@
         <location line="-595"/>
         <location line="+90"/>
         <location line="+199"/>
-        <location line="+673"/>
+        <location line="+717"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
     <message>
-        <location line="-954"/>
+        <location line="-998"/>
         <location line="+90"/>
         <location line="+199"/>
         <source>Height:</source>
@@ -236,12 +238,12 @@
         <location line="+56"/>
         <location line="+72"/>
         <location line="+315"/>
-        <location line="+260"/>
+        <location line="+304"/>
         <source>Redraw</source>
         <translation>Обновить картинку</translation>
     </message>
     <message>
-        <location line="-848"/>
+        <location line="-892"/>
         <source>SpanAngle</source>
         <translation>Размах</translation>
     </message>
@@ -254,12 +256,12 @@
         <location line="+1"/>
         <location line="+73"/>
         <location line="+199"/>
-        <location line="+662"/>
+        <location line="+706"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location line="-933"/>
+        <location line="-977"/>
         <location line="+73"/>
         <location line="+126"/>
         <location line="+73"/>
@@ -412,20 +414,20 @@
     </message>
     <message>
         <location line="+7"/>
-        <location line="+431"/>
+        <location line="+475"/>
         <location line="+45"/>
         <source>Color:</source>
         <translation>Цвет:</translation>
     </message>
     <message>
-        <location line="-451"/>
-        <location line="+430"/>
+        <location line="-495"/>
+        <location line="+474"/>
         <location line="+45"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
     <message>
-        <location line="-419"/>
+        <location line="-463"/>
         <source>Play Tone</source>
         <translation>Играть звук</translation>
     </message>
@@ -511,7 +513,7 @@
         <translation>Частота</translation>
     </message>
     <message>
-        <location line="+84"/>
+        <location line="+128"/>
         <source>Remove File</source>
         <translation>Удалить файл</translation>
     </message>
@@ -559,15 +561,15 @@
         <translation>Воспроизводит заданную фразу на роботе. Если свойство &amp;quot;Вычислять&amp;quot; имеет значение &amp;quot;Истина&amp;quot;, значение свойства &amp;quot;Текст&amp;quot; будет вычислено как формула, иначе оно воспроизводится как есть.</translation>
     </message>
     <message>
-        <location line="-131"/>
-        <location line="+138"/>
+        <location line="-175"/>
+        <location line="+182"/>
         <location line="+1662"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
     <message>
-        <location line="-1768"/>
-        <location line="+130"/>
+        <location line="-1812"/>
+        <location line="+174"/>
         <location line="+397"/>
         <source>Evaluate</source>
         <translation>Вычислять</translation>
@@ -578,8 +580,8 @@
         <translation>Привет!</translation>
     </message>
     <message>
-        <location line="-129"/>
-        <location line="+129"/>
+        <location line="-173"/>
+        <location line="+173"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
@@ -639,14 +641,14 @@
         <translation>Устанавливает толщину кисти.</translation>
     </message>
     <message>
-        <location line="-316"/>
+        <location line="-360"/>
         <location line="+1"/>
-        <location line="+346"/>
+        <location line="+390"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location line="-408"/>
+        <location line="-452"/>
         <source>Print Text</source>
         <translation>Напечатать текст</translation>
     </message>
@@ -676,7 +678,22 @@
         <translation>Введите текст</translation>
     </message>
     <message>
-        <location line="+360"/>
+        <location line="+14"/>
+        <source>Read Lidar To Variable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Assigns a value from lidar to a given variable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+357"/>
         <source>Smile</source>
         <translation>Смайлик</translation>
     </message>
@@ -1167,12 +1184,13 @@
         <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+156"/>
+        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+158"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
