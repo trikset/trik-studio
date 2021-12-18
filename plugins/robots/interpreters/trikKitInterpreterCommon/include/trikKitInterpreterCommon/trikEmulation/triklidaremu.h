@@ -29,6 +29,8 @@ public:
 
 	Status status() const override {return Status::ready;}
 
+	QVector<int> readRaw() const override;
+
 public slots:
 	QVector<int> read() const override;
 

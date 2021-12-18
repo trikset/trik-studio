@@ -24,3 +24,13 @@ QVector<int> TrikLidarEmu::read() const
 {
 	return mLidar->lastData();
 }
+
+QVector<int> TrikLidarEmu::readRaw() const
+{
+	auto data = mLidar->lastData();
+	QVector<int> res;
+	for (auto val : data) {
+		res.append(QVector<int>(100, val));
+	}
+	return res;
+}
