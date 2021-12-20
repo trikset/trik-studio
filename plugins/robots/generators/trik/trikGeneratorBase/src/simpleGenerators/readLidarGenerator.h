@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 20201 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/lightSensor.h"
+#pragma once
 
-#include "twoDModel/engine/twoDModelEngineInterface.h"
+#include <generatorBase/simpleGenerators/bindingGenerator.h>
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
+namespace trik {
+namespace simple {
 
-LightSensor::LightSensor(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
-	: robotParts::LightSensor(info, port)
-	, mEngine(engine)
+/// Generator for 'ReadLidar' block.
+class ReadLidarGenerator : public generatorBase::simple::BindingGenerator
 {
-	setLastData(0);
+public:
+	ReadLidarGenerator(const qrRepo::RepoApi &repo
+			, generatorBase::GeneratorCustomizer &customizer
+			, const qReal::Id &id
+			, QObject *parent);
+};
+
 }
-
-void LightSensor::read()
-{
-	emit newData(mEngine.readLightSensor(port()));
 }

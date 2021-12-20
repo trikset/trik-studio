@@ -102,6 +102,7 @@ void TrikBrick::init()
 	mEncoders.clear();
 	mLineSensors.clear();
 	mColorSensors.clear();
+	mLidars.clear();
 	mTimers.clear();
 	mGyroscope.reset(); // for some reason it won't reconnect to the robot parts otherwise.
 	mAccelerometer.reset();
@@ -215,13 +216,29 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 		robotParts::ScalarSensor * sens =
 				RobotModelUtils::findDevice<robotParts::ScalarSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
-			emit error(tr("No configured sensor on port: %1").arg(port));
+			emit error(tr("No configured scalar sensor on port: %1").arg(port));
 			return nullptr;
 		}
 		mSensors[port].reset(new TrikSensorEmu(sens));
 	}
 	return mSensors[port].get();
 }
+
+trikControl::LidarInterface *TrikBrick::lidar()
+{
+	using namespace kitBase::robotModel;
+	auto & port = "LidarPort";
+	if (!mLidars.contains(port)) {
+		auto * lidar = RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
+		if (!lidar) {
+			emit error(tr("No configured lidar on port: %1").arg(port));
+			return nullptr;
+		}
+		mLidars[port].reset(new TrikLidarEmu(lidar));
+	}
+	return mLidars[port].get();
+}
+
 
 QStringList TrikBrick::motorPorts(trikControl::MotorInterface::Type type) const
 {
@@ -234,7 +251,7 @@ QStringList TrikBrick::sensorPorts(trikControl::SensorInterface::Type type) cons
 {
 	Q_UNUSED(type)
 //	QLOG_INFO() << "Sensor type is ignored";
-	return mMotors.keys();
+	return mSensors.keys();
 }
 
 QStringList TrikBrick::encoderPorts() const {

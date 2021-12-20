@@ -374,7 +374,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+183"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+38"/>
@@ -396,7 +396,7 @@
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+73"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+74"/>
         <location line="+3"/>
         <source>2D Model</source>
         <translation>Modèle 2D</translation>
@@ -656,7 +656,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+716"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+718"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>

@@ -183,6 +183,14 @@
     </message>
 </context>
 <context>
+    <name>kitBase::robotModel::robotParts::LidarSensor</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/lidarSensor.h" line="+29"/>
+        <source>Lidar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>kitBase::robotModel::robotParts::LightSensor</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/lightSensor.h" line="+29"/>

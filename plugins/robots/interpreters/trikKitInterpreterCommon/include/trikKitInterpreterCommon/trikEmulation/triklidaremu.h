@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/lightSensor.h"
+#pragma once
 
-#include "twoDModel/engine/twoDModelEngineInterface.h"
+#include <trikControl/lidarInterface.h>
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
+#include <kitBase/robotModel/robotParts/vectorSensor.h>
 
-LightSensor::LightSensor(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
-	: robotParts::LightSensor(info, port)
-	, mEngine(engine)
+namespace trik {
+
+class TrikLidarEmu : public trikControl::LidarInterface
 {
-	setLastData(0);
-}
+	Q_OBJECT
 
-void LightSensor::read()
-{
-	emit newData(mEngine.readLightSensor(port()));
+public:
+	explicit TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar);
+
+	Status status() const override {return Status::ready;}
+
+	QVector<int> readRaw() const override;
+
+public slots:
+	QVector<int> read() const override;
+
+private:
+	kitBase::robotModel::robotParts::VectorSensor *mLidar {}; // Doesn't have ownership
+};
+
 }

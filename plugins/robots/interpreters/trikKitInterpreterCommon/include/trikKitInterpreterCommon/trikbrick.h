@@ -33,6 +33,7 @@
 #include "trikEmulation/trikaccelerometeradapter.h"
 #include "trikEmulation/trikGyroscopeAdapter.h" /// @todo: replace with forward refs
 #include "trikEmulation/trikProxyMarker.h"
+#include "trikEmulation/triklidaremu.h"
 
 namespace utils {
 class AbstractTimer;
@@ -86,6 +87,7 @@ public slots:
 	trikControl::LineSensorInterface *lineSensor(const QString &port) override;
 	trikControl::ColorSensorInterface *colorSensor(const QString &port) override;
 	trikControl::ObjectSensorInterface *objectSensor(const QString &port) override;
+	trikControl::LidarInterface *lidar() override;
 	trikControl::SoundSensorInterface *soundSensor(const QString &) override {return nullptr;}
 	trikControl::EncoderInterface *encoder(const QString &port) override;
 	trikControl::BatteryInterface *battery() override {return nullptr;}
@@ -125,6 +127,7 @@ private:
 	QHash<QString, QSharedPointer<TrikEncoderAdapter>> mEncoders;
 	QHash<QString, QSharedPointer<TrikLineSensorAdapter>> mLineSensors;
 	QHash<QString, QSharedPointer<TrikColorSensorAdapter>> mColorSensors;
+	QHash<QString, QSharedPointer<TrikLidarEmu>> mLidars;
 	QScopedPointer<TrikLedAdapter> mLed;
 	QScopedPointer<TrikAccelerometerAdapter> mAccelerometer;
 	QScopedPointer<TrikGyroscopeAdapter> mGyroscope;

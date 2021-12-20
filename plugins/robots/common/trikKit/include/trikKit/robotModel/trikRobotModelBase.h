@@ -51,7 +51,7 @@ protected:
 	virtual kitBase::robotModel::DeviceInfo touchSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo lightSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo infraredSensorInfo() const;
-
+	virtual kitBase::robotModel::DeviceInfo lidarSensorInfo() const;
 	virtual kitBase::robotModel::DeviceInfo sonarSensorInfo() const;
 
 	virtual kitBase::robotModel::DeviceInfo motionSensorInfo() const;
@@ -74,6 +74,7 @@ protected:
 	virtual kitBase::robotModel::DeviceInfo gamepadConnectionIndicatorInfo() const;
 
 	virtual kitBase::robotModel::PortInfo video2Port() const;
+	virtual kitBase::robotModel::PortInfo lidarPort() const;
 };
 
 }

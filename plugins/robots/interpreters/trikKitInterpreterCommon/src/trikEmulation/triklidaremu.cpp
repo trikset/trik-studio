@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/lightSensor.h"
+#include "trikKitInterpreterCommon/trikEmulation/triklidaremu.h"
 
-#include "twoDModel/engine/twoDModelEngineInterface.h"
+using namespace trik;
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
-
-LightSensor::LightSensor(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
-	: robotParts::LightSensor(info, port)
-	, mEngine(engine)
+TrikLidarEmu::TrikLidarEmu(kitBase::robotModel::robotParts::VectorSensor *lidar) : mLidar(lidar)
 {
-	setLastData(0);
 }
 
-void LightSensor::read()
+QVector<int> TrikLidarEmu::read() const
 {
-	emit newData(mEngine.readLightSensor(port()));
+	return mLidar->lastData();
+}
+
+QVector<int> TrikLidarEmu::readRaw() const
+{
+	auto data = mLidar->lastData();
+	QVector<int> res;
+	for (auto val : data) {
+		res.append(QVector<int>(100, val));
+	}
+	return res;
 }

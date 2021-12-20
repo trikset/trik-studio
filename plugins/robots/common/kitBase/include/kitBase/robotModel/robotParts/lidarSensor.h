@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "twoDModel/robotModel/parts/lightSensor.h"
+#pragma once
 
-#include "twoDModel/engine/twoDModelEngineInterface.h"
+#include "vectorSensor.h"
+#include "kitBase/kitBaseDeclSpec.h"
 
-using namespace twoDModel::robotModel::parts;
-using namespace kitBase::robotModel;
+namespace kitBase {
+namespace robotModel {
+namespace robotParts {
 
-LightSensor::LightSensor(const DeviceInfo &info
-		, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
-	: robotParts::LightSensor(info, port)
-	, mEngine(engine)
+/// Base class for lidar sensors.
+class ROBOTS_KIT_BASE_EXPORT LidarSensor : public VectorSensor
 {
-	setLastData(0);
+	Q_OBJECT
+	Q_CLASSINFO("name", "lidar")
+	Q_CLASSINFO("friendlyName", tr("Lidar"))
+	Q_CLASSINFO("simulated", "true")
+
+public:
+	/// Constructor, takes device type info and port on which this sensor is configured.
+	LidarSensor(const DeviceInfo &info, const PortInfo &port);
+};
+
 }
-
-void LightSensor::read()
-{
-	emit newData(mEngine.readLightSensor(port()));
+}
 }
