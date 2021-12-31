@@ -31,10 +31,6 @@ TwoDExecutionControl::TwoDExecutionControl(
 	qRegisterMetaType<QVector<int32_t>>("QVector<int32_t>");
 }
 
-TwoDExecutionControl::~TwoDExecutionControl()
-{
-}
-
 int TwoDExecutionControl::random(int from, int to) const
 {
 	using namespace kitBase::robotModel;

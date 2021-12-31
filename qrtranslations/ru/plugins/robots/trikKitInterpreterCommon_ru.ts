@@ -161,7 +161,7 @@
 <context>
     <name>TwoDExecutionControl</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+44"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+40"/>
         <source>No cofigured random device</source>
         <translation>Генератор случайных чисел не сконфигурирован</translation>
     </message>
@@ -307,7 +307,7 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+52"/>
+        <location line="+55"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>

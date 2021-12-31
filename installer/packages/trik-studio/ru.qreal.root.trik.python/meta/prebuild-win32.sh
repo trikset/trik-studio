@@ -27,5 +27,5 @@ rm -f python.zip
 # end of download python
 fi
 
-cd "$(dirname "$0")"/../data
-cp -r "$cache_dir"/"PYTHON_$python_ver"/{python*.zip,unicodedata.pyd} .
+mkdir -p "$(dirname "$0")/../data/python-runtime/"
+rsync -avR "$cache_dir"/"PYTHON_$python_ver"/./{python*.zip,unicodedata.pyd} "$(dirname "$0")/../data/python-runtime/"
