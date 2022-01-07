@@ -435,29 +435,49 @@
         <translation>Selectionnez les parties non modifiables de l&apos;exercice</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>2d model world is read only</source>
-        <translation>Le monde 2D ne peut pas être modifié </translation>
+        <translation type="vanished">Le monde 2D ne peut pas être modifié </translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Sensors are read only</source>
-        <translation>La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
+        <translation type="vanished">La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>2d model robot position is read only</source>
-        <translation>La position du début ne peut pas être modifié en 2D</translation>
+        <translation type="vanished">La position du début ne peut pas être modifié en 2D</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Motors to wheels binding is read only</source>
-        <translation>La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
+        <translation type="vanished">La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
+    </message>
+    <message>
+        <source>2d model simulation settings are read only</source>
+        <translation type="vanished">La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>2D model world is read-only</source>
+        <translation type="unfinished">Le monde 2D ne peut pas être modifié</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>2d model simulation settings are read only</source>
-        <translation>La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
+        <source>Sensors are read-only</source>
+        <translation type="unfinished">La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>2D model robot position is read-only</source>
+        <translation type="unfinished">La position du début ne peut pas être modifié en 2D</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Motors to wheels binding is read-only</source>
+        <translation type="unfinished">La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>2D model simulation settings are read-only</source>
+        <translation type="unfinished">La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
     </message>
     <message>
         <location line="+21"/>
