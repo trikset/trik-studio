@@ -502,12 +502,17 @@ void AbstractItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
 void AbstractItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
+	updateCursor(event);
+	QGraphicsItem::hoverMoveEvent(event);
+}
+
+void AbstractItem::updateCursor(QGraphicsSceneHoverEvent *event)
+{
 	if (resizeArea().contains(event->pos())) {
 		setCursor(mResizeCursor);
 	} else {
 		setCursor(mHoverCursor);
 	}
-	QGraphicsItem::hoverMoveEvent(event);
 }
 
 void AbstractItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
