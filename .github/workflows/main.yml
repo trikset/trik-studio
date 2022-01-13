@@ -37,7 +37,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - qt-version: '5.12.11'
+          - qt-version: '5.12.12'
             mingw-version: 7.3
             mingw-short-version: 73
             python-version: 3.8
