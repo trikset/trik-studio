@@ -156,8 +156,9 @@ QString PioneerLuaGeneratorPlugin::defaultSettingsFile() const
 void PioneerLuaGeneratorPlugin::onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model)
 {
 	RobotsGeneratorPluginBase::onCurrentRobotModelChanged(model);
-	mGenerateCodeAction->setVisible(model.kitId() == kitId());
-	mUploadProgramAction->setVisible(model.kitId() == kitId());
+	bool ourModel = robotModels().contains(&model);
+	mGenerateCodeAction->setVisible(ourModel);
+	mUploadProgramAction->setVisible(ourModel);
 }
 
 void PioneerLuaGeneratorPlugin::onCurrentDiagramChanged(const qReal::TabInfo &info)

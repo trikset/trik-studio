@@ -59,7 +59,6 @@ public:
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
 protected:
-	void onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model) override;
 	void regenerateExtraFiles(const QFileInfo &newFileInfo) override;
 	QSharedPointer<communication::Ev3RobotCommunicationThread> currentCommunicator();
 
