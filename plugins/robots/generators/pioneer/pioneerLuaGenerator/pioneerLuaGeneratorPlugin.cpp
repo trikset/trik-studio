@@ -16,6 +16,7 @@
 
 #include <qrkernel/logging.h>
 #include <qrkernel/settingsManager.h>
+#include <qrkernel/settingsListener.h>
 #include <pioneerKit/blocks/pioneerBlocksFactory.h>
 #include <pioneerKit/constants.h>
 
@@ -23,6 +24,8 @@
 #include "communicator/communicationManager.h"
 #include "robotModel/pioneerGeneratorRobotModel.h"
 #include "widgets/pioneerAdditionalPreferences.h"
+
+#include <QLineEdit>
 
 using namespace pioneer;
 using namespace pioneer::lua;
@@ -40,8 +43,9 @@ PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
 					, tr("Pioneer model (real copter)")
 					, 9
 			))
+	, mUploader()
 {
-	mAdditionalPreferences = new PioneerAdditionalPreferences;
+//	mAdditionalPreferences = new PioneerAdditionalPreferences;
 
 	mGenerateCodeAction->setText(tr("Generate to Pioneer Lua"));
 	mGenerateCodeAction->setIcon(QIcon(":/pioneer/lua/images/generateLuaCode.svg"));
@@ -52,6 +56,10 @@ PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
 			, [this](){ PioneerLuaGeneratorPlugin::generateCode(true); }
 			, Qt::UniqueConnection
 	);
+
+	mUploader.setProgram("cmd.exe");
+	connect(&mUploader, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
+			, this, &PioneerLuaGeneratorPlugin::uploadFinished);
 
 	mUploadProgramAction->setText(tr("Upload generated program to Pioneer"));
 	mUploadProgramAction->setIcon(QIcon(":/pioneer/lua/images/upload.svg"));
@@ -76,17 +84,6 @@ void PioneerLuaGeneratorPlugin::init(const kitBase::KitPluginConfigurator &confi
 	generatorBase::RobotsGeneratorPluginBase::init(configurator);
 
 	mMetamodel = &configurator.qRealConfigurator().logicalModelApi().editorManagerInterface();
-
-	mCommunicationManager.reset(
-			new CommunicationManager(*mMainWindowInterface->errorReporter(), *mRobotModelManager)
-	);
-
-	connect(
-			mCommunicationManager.data()
-			, &CommunicationManager::uploadCompleted
-			, this
-			, [this]() { setActionsEnabled(true); }
-	);
 }
 
 QList<ActionInfo> PioneerLuaGeneratorPlugin::customActions()
@@ -148,6 +145,76 @@ QList<kitBase::AdditionalPreferences *> PioneerLuaGeneratorPlugin::settingsWidge
 	return { mAdditionalPreferences };
 }
 
+QList<QWidget *>PioneerLuaGeneratorPlugin::listOfQuickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model)
+{
+	Q_UNUSED(model)
+	return {ipSelector(), portSelector(), modeSelector()};
+}
+
+QWidget * PioneerLuaGeneratorPlugin::modeSelector()
+{
+	auto selector = new QComboBox;
+	selector->addItems({"usb", "wifi"});
+	connectSelector(selector, settings::pioneerBaseStationMode);
+	selector->setToolTip(tr("Choose robot`s mode"));
+	selector->setEditable(false);
+	selector->setMinimumContentsLength(4);
+	return selector;
+}
+
+QWidget * PioneerLuaGeneratorPlugin::ipSelector()
+{
+	auto selector = new QComboBox;
+	connectSelector(selector, settings::pioneerBaseStationIP);
+	selector->setToolTip(tr("Robot`s IP-address"));
+	selector->setMinimumContentsLength(15);
+	return selector;
+}
+
+QWidget * PioneerLuaGeneratorPlugin::portSelector()
+{
+	auto selector = new QComboBox;
+	connectSelector(selector, settings::pioneerBaseStationPort);
+	selector->setToolTip(tr("Robot`s port"));
+	selector->setMinimumContentsLength(4);
+	return selector;
+}
+
+void PioneerLuaGeneratorPlugin::connectSelector(QComboBox * selector, QString settings)
+{
+	selector->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+	selector->setEditable(true);
+	selector->setSizeAdjustPolicy(QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLength);
+	selector->lineEdit()->setAlignment(Qt::AlignRight);
+	const auto updateQuickPreferences = [selector, settings]() {
+		const QString value = qReal::SettingsManager::value(settings).toString();
+
+		// Handle duplicates
+		auto found = false;
+		for(int i = 0; i < selector->count(); ++i) {
+			if (selector->itemText(i) == value) {
+				found = true;
+				break;
+			}
+		}
+
+		if (!found) {
+			selector->insertItem(0, value);
+		}
+
+		// Focus on new value
+		if (selector->currentText() != value) {
+			selector->setCurrentText(value);
+		}
+	};
+
+	updateQuickPreferences();
+	qReal::SettingsListener::listen(settings, updateQuickPreferences, this);
+	connect(selector->lineEdit(), &QLineEdit::editingFinished, this, [selector, settings]() {
+		qReal::SettingsManager::setValue(settings, selector->lineEdit()->text().trimmed());
+	});
+}
+
 QString PioneerLuaGeneratorPlugin::defaultSettingsFile() const
 {
 	return ":/pioneer/lua/pioneerLuaDefaultSettings.ini";
@@ -201,8 +268,34 @@ void PioneerLuaGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInf
 void PioneerLuaGeneratorPlugin::uploadProgram()
 {
 	const QFileInfo program = generateCodeForProcessing();
+	if (!program.exists()) return;
 	setActionsEnabled(false);
-	mCommunicationManager->uploadProgram(program);
+	mUploader.setArguments({"/c", "uploadPioneer.cmd", program.path()
+			, qReal::SettingsManager::value(settings::pioneerBaseStationIP).toString()
+			, qReal::SettingsManager::value(settings::pioneerBaseStationPort).toString()
+			, qReal::SettingsManager::value(settings::pioneerBaseStationMode).toString()});
+	mUploader.start();
+}
+
+void PioneerLuaGeneratorPlugin::uploadFinished()
+{
+	const auto & reporter = mMainWindowInterface->errorReporter();
+	const QString output = mUploader.readAllStandardOutput();
+	const QString error = mUploader.readAllStandardError();
+	const int exitCode = mUploader.exitCode();
+	if (!output.isEmpty()) {
+		for (const auto & line : output.split(QRegExp("[\r\n]"),QString::SkipEmptyParts)) {
+			reporter->addInformation(line);
+			qDebug() << "Info: " << line;
+		}
+	}
+	if (!error.isEmpty()) {
+		for (const auto & line : error.split(QRegExp("[\r\n]"),QString::SkipEmptyParts)) {
+			reporter->addError(line);
+		}
+	}
+	if (exitCode != 0) reporter->addCritical(tr("Exit code ") + QString::number(exitCode));
+	setActionsEnabled(true);
 }
 
 void PioneerLuaGeneratorPlugin::setActionsEnabled(bool isEnabled)

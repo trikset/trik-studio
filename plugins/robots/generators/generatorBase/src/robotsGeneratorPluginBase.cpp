@@ -63,8 +63,8 @@ bool RobotsGeneratorPluginBase::canGenerateTo(const QString &project)
 
 void RobotsGeneratorPluginBase::onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model)
 {
+	bool ourModel = robotModels().contains(&model);
 	for (const ActionInfo &action : customActions()) {
-		bool ourModel = robotModels().contains(&model);
 		if (action.isAction()) {
 			action.action()->setVisible(ourModel);
 		} else {
