@@ -30,6 +30,11 @@ qReal::IdList PioneerBlocksFactory::providedBlocks() const
 			, id("GoToPoint")
 //			, id("GoToGPSPoint")
 			, id("PioneerGetLPSPosition")
+			, id("PioneerGetLPSVelocity")
+			, id("PioneerGetLPSYaw")
+			, id("PioneerGetOrientation")
+			, id("PioneerGetAccel")
+			, id("PioneerGetGyro")
 			, id("PioneerPrint")
 			, id("PioneerSystem")
 			, id("PioneerLed")
@@ -46,11 +51,8 @@ qReal::IdList PioneerBlocksFactory::blocksToDisable() const
 
 qReal::IdList PioneerBlocksFactory::blocksToHide() const
 {
-	return {
-			id("Function")
-			, id("SwitchBlock")
+	return { id("SwitchBlock")
 			, id("Loop")
-			, id("PreconditionalLoop")
 			, id("Subprogram")
 			, id("Fork")
 			, id("Join")
@@ -64,5 +66,7 @@ qReal::IdList PioneerBlocksFactory::blocksToHide() const
 			, id("ClearScreen")
 			, id("MarkerDown")
 			, id("MarkerUp")
+
+			, id("Input")
 	};
 }

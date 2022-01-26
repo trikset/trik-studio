@@ -14,6 +14,8 @@
         <file>templates/nativeCode.t</file>
         <file>templates/conditional/if.t</file>
         <file>templates/conditional/ifElse.t</file>
+        <file>templates/conditional/for.t</file>
+        <file>templates/conditional/whileDo.t</file>
         <file>templates/functions/abs.t</file>
         <file>templates/functions/acos.t</file>
         <file>templates/functions/asin.t</file>
@@ -85,6 +87,11 @@
         <file>templates/quadcopterCommands/goToLocalPoint.t</file>
         <file>templates/quadcopterCommands/goToPoint.t</file>
         <file>templates/quadcopterCommands/getLPSPosition.t</file>
+        <file>templates/quadcopterCommands/getLPSVelocity.t</file>
+        <file>templates/quadcopterCommands/getLPSYaw.t</file>
+        <file>templates/quadcopterCommands/getOrientation.t</file>
+        <file>templates/quadcopterCommands/getAccel.t</file>
+        <file>templates/quadcopterCommands/getGyro.t</file>
         <file>templates/quadcopterCommands/readTofSensor.t</file>
         <file>templates/signs/equals.t</file>
         <file>templates/signs/greater.t</file>
