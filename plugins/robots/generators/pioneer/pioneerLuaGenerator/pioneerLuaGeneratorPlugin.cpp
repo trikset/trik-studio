@@ -145,7 +145,8 @@ QList<kitBase::AdditionalPreferences *> PioneerLuaGeneratorPlugin::settingsWidge
 	return { mAdditionalPreferences };
 }
 
-QList<QWidget *>PioneerLuaGeneratorPlugin::listOfQuickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model)
+QList<QWidget *>PioneerLuaGeneratorPlugin::listOfQuickPreferencesFor(
+		const kitBase::robotModel::RobotModelInterface &model)
 {
 	Q_UNUSED(model)
 	return {ipSelector(), portSelector(), modeSelector()};
