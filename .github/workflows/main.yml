@@ -213,7 +213,7 @@ jobs:
             exit 1
 
       - name: Get tag
-        run: echo "CURRENT_TAG=$(git tag --contains HEAD)" >> $GITHUB_ENV
+        run: echo "CURRENT_TAG=$(git tag --contains HEAD | sort -Vr | head -n1)" >> $GITHUB_ENV
       - name: Check tag
         if: ${{ env.CURRENT_TAG != ''}}
         run: echo "GITHUB_REF_SLUG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
