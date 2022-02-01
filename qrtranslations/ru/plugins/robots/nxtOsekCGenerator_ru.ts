@@ -169,7 +169,7 @@
         <translation>Генерация (C)</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <location line="+129"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>

@@ -258,7 +258,7 @@
         <translation type="vanished">Квадрокоптер &quot;Пионер&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="+43"/>
         <source>Pioneer model (real copter)</source>
         <translation>Реальный квадрокоптер</translation>
     </message>
@@ -267,14 +267,34 @@
         <translation type="vanished">Симулятор</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Generate to Pioneer Lua</source>
         <translation>Генерировать в .lua для Пионера</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+14"/>
         <source>Upload generated program to Pioneer</source>
         <translation>Загрузить программу на Пионер</translation>
+    </message>
+    <message>
+        <location line="+96"/>
+        <source>Choose robot`s mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Robot`s IP-address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Robot`s port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+119"/>
+        <source>Exit code </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Run program on a Pioneer</source>
@@ -289,7 +309,7 @@
         <translation type="vanished">Язык Lua</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="-195"/>
         <source>Generate Lua script for Pioneer Quadcopter</source>
         <translation>Генерировать скрипт на Lua для квадрокоптера &quot;Пионер&quot;</translation>
     </message>
