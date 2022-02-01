@@ -4,7 +4,12 @@
 	<file>generated/shapes/GeoTakeoffClass.sdf</file>
 	<file>generated/shapes/GoToGPSPointClass.sdf</file>
 	<file>generated/shapes/GoToPointClass.sdf</file>
+	<file>generated/shapes/PioneerGetAccelClass.sdf</file>
+	<file>generated/shapes/PioneerGetGyroClass.sdf</file>
 	<file>generated/shapes/PioneerGetLPSPositionClass.sdf</file>
+	<file>generated/shapes/PioneerGetLPSVelocityClass.sdf</file>
+	<file>generated/shapes/PioneerGetLPSYawClass.sdf</file>
+	<file>generated/shapes/PioneerGetOrientationClass.sdf</file>
 	<file>generated/shapes/PioneerLedClass.sdf</file>
 	<file>generated/shapes/PioneerMagnetClass.sdf</file>
 	<file>generated/shapes/PioneerPrintClass.sdf</file>

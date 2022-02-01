@@ -46,7 +46,12 @@ void PioneerMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new GeoTakeoff(*mMetamodel));
 	mMetamodel->addNode(new GoToGPSPoint(*mMetamodel));
 	mMetamodel->addNode(new GoToPoint(*mMetamodel));
+	mMetamodel->addNode(new PioneerGetAccel(*mMetamodel));
+	mMetamodel->addNode(new PioneerGetGyro(*mMetamodel));
 	mMetamodel->addNode(new PioneerGetLPSPosition(*mMetamodel));
+	mMetamodel->addNode(new PioneerGetLPSVelocity(*mMetamodel));
+	mMetamodel->addNode(new PioneerGetLPSYaw(*mMetamodel));
+	mMetamodel->addNode(new PioneerGetOrientation(*mMetamodel));
 	mMetamodel->addNode(new PioneerLed(*mMetamodel));
 	mMetamodel->addNode(new PioneerMagnet(*mMetamodel));
 	mMetamodel->addNode(new PioneerPrint(*mMetamodel));
@@ -57,7 +62,12 @@ void PioneerMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GeoTakeoff"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GoToGPSPoint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GoToPoint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetAccel"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetGyro"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetLPSPosition"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetLPSVelocity"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetLPSYaw"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetOrientation"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerLed"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerMagnet"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerPrint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -81,6 +91,11 @@ void PioneerMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("GeoLanding"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("GoToPoint"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetLPSPosition"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetLPSVelocity"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetLPSYaw"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetOrientation"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetAccel"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetGyro"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerLed"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerMagnet"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerSystem"));
