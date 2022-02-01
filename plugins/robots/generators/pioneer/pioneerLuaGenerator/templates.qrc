@@ -14,7 +14,6 @@
         <file>templates/nativeCode.t</file>
         <file>templates/conditional/if.t</file>
         <file>templates/conditional/ifElse.t</file>
-        <file>templates/conditional/for.t</file>
         <file>templates/conditional/whileDo.t</file>
         <file>templates/functions/abs.t</file>
         <file>templates/functions/acos.t</file>
