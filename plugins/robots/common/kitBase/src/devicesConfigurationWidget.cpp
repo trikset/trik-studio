@@ -66,7 +66,7 @@ void DevicesConfigurationWidget::selectRobotModel(RobotModelInterface &robotMode
 	takeWidget();
 	if (mRobotModels.contains(mCurrentModelType)) {
 		setWidget(mRobotModelConfigurers[mCurrentModelType]);
-		parentWidget()->setVisible(!mRobotModelConfigurers[mCurrentModelType]->layout()->isEmpty());
+//		parentWidget()->setVisible(!mRobotModelConfigurers[mCurrentModelType]->layout()->isEmpty());
 		refresh();
 	}
 }
