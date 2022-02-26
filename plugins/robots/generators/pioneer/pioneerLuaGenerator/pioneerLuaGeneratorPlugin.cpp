@@ -17,6 +17,7 @@
 #include <qrkernel/logging.h>
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
+#include <qrkernel/platformInfo.h>
 #include <pioneerKit/blocks/pioneerBlocksFactory.h>
 #include <pioneerKit/constants.h>
 
@@ -57,7 +58,7 @@ PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
 			, Qt::UniqueConnection
 	);
 
-	mUploader.setProgram("cmd.exe");
+	mUploader.setProgram("pioneer-uploader.exe");
 	connect(&mUploader, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
 			, this, &PioneerLuaGeneratorPlugin::uploadFinished);
 
@@ -270,11 +271,21 @@ void PioneerLuaGeneratorPlugin::uploadProgram()
 {
 	const QFileInfo program = generateCodeForProcessing();
 	if (!program.exists()) return;
+	if (!PlatformInfo::osType().startsWith("windows")) {
+		mMainWindowInterface->errorReporter()->addError(tr("Sorry, but uploading works only on Windows"));
+		return;
+	}
+	if (!QFile::exists(mUploader.program())) {
+		auto link = "<a href=\"https://docs.geoscan.aero/ru/master/programming/trik/trik_main.html\">"
+				+ tr("site") + "</a>";
+		mMainWindowInterface->errorReporter()->addInformation(tr("Please download uploader from ") + link);
+		return;
+	}
 	setActionsEnabled(false);
-	mUploader.setArguments({"/c", "uploadPioneer.cmd", program.path()
+	mUploader.setArguments({ program.path()
 			, qReal::SettingsManager::value(settings::pioneerBaseStationIP).toString()
 			, qReal::SettingsManager::value(settings::pioneerBaseStationPort).toString()
-			, qReal::SettingsManager::value(settings::pioneerBaseStationMode).toString()});
+			, qReal::SettingsManager::value(settings::pioneerBaseStationMode).toString() });
 	mUploader.start();
 }
 

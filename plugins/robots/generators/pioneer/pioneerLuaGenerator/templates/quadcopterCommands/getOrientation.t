@@ -1,2 +1,2 @@
 		-- получаем ???
-		@@ROLL@@, @@PITCH@@, @@AZIMUTH@@ = Sensors.orienation()
+		@@ROLL@@, @@PITCH@@, @@AZIMUTH@@ = Sensors.orientation()

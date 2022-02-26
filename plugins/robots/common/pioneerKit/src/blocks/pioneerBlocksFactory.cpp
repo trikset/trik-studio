@@ -52,6 +52,7 @@ qReal::IdList PioneerBlocksFactory::blocksToDisable() const
 qReal::IdList PioneerBlocksFactory::blocksToHide() const
 {
 	return { id("SwitchBlock")
+			, id("PreconditionalLoop")
 			, id("Loop")
 			, id("Subprogram")
 			, id("Fork")
