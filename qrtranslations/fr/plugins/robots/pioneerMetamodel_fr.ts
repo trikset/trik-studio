@@ -4,7 +4,7 @@
 <context>
     <name>PioneerMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+123"/>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+132"/>
         <source>Concurrent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -74,7 +74,47 @@
         <translation>interrompre</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+8"/>
+        <source>Altfu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Package</source>
         <translation type="unfinished"></translation>
     </message>
@@ -94,7 +134,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-6"/>
+        <location line="-10"/>
         <source>greater</source>
         <translation type="unfinished"></translation>
     </message>
@@ -129,7 +169,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+16"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
@@ -166,7 +206,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-18"/>
         <source>float</source>
         <translation type="unfinished"></translation>
     </message>
@@ -222,12 +262,12 @@
         <location line="+96"/>
         <location line="+1"/>
         <location line="+1"/>
-        <location line="+425"/>
+        <location line="+496"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-499"/>
+        <location line="-570"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
@@ -268,7 +308,7 @@
     </message>
     <message>
         <location line="+9"/>
-        <location line="+72"/>
+        <location line="+143"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -276,8 +316,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-250"/>
-        <location line="+72"/>
+        <location line="-321"/>
+        <location line="+143"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -285,8 +325,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-250"/>
-        <location line="+72"/>
+        <location line="-321"/>
+        <location line="+143"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -294,13 +334,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-250"/>
+        <location line="-321"/>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+26"/>
-        <location line="+62"/>
+        <location line="+133"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -308,8 +348,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-247"/>
-        <location line="+62"/>
+        <location line="-318"/>
+        <location line="+133"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -317,8 +357,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-247"/>
-        <location line="+62"/>
+        <location line="-318"/>
+        <location line="+133"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -326,7 +366,70 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-237"/>
+        <location line="-308"/>
+        <source>GPIO Initialization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+578"/>
+        <location line="+99"/>
+        <source>---</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-670"/>
+        <location line="+578"/>
+        <location line="+99"/>
+        <source>Pin name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-669"/>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+560"/>
+        <location line="+91"/>
+        <source>pin_name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-651"/>
+        <location line="+560"/>
+        <location line="+91"/>
+        <source>Pin name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-650"/>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>Get Accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -387,11 +490,12 @@
     </message>
     <message>
         <location line="+47"/>
+        <location line="+376"/>
         <source>x</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-375"/>
         <source>y</source>
         <translation type="unfinished"></translation>
     </message>
@@ -529,12 +633,12 @@
         <location line="+25"/>
         <location line="+1"/>
         <location line="+2"/>
-        <location line="+216"/>
+        <location line="+314"/>
         <source>0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-219"/>
+        <location line="-317"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
@@ -555,6 +659,11 @@
     </message>
     <message>
         <location line="+92"/>
+        <source>Read GPIO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+53"/>
         <source>Read Range Sensor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -564,17 +673,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-38"/>
+        <location line="+45"/>
         <source>Variable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+160"/>
         <source>Angle (degrees)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-89"/>
+        <location line="-180"/>
+        <location line="+46"/>
         <source>Variable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -585,6 +696,11 @@
     </message>
     <message>
         <location line="+11"/>
+        <source>Set GPIO state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -609,8 +725,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-305"/>
-        <location line="+317"/>
+        <location line="-403"/>
+        <location line="+415"/>
         <source>Yaw</source>
         <translation type="unfinished"></translation>
     </message>
@@ -625,13 +741,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-112"/>
-        <location line="+92"/>
+        <location line="-210"/>
+        <location line="+190"/>
         <source>Evaluate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-161"/>
+        <location line="-259"/>
         <source>Magnet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -642,11 +758,12 @@
     </message>
     <message>
         <location line="+23"/>
+        <location line="+189"/>
         <source>State on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-178"/>
         <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
@@ -676,12 +793,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-39"/>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-42"/>
         <source>RobotsDiagram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -703,7 +823,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-368"/>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-439"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>

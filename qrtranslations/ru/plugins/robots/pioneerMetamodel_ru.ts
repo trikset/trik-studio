@@ -4,7 +4,7 @@
 <context>
     <name>PioneerMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+123"/>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+132"/>
         <source>Concurrent</source>
         <translation>Параллельно</translation>
     </message>
@@ -74,7 +74,47 @@
         <translation>торможение</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+8"/>
+        <source>Altfu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>B</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Package</source>
         <translation>Пакетный</translation>
     </message>
@@ -94,7 +134,7 @@
         <translation>Публичный</translation>
     </message>
     <message>
-        <location line="-6"/>
+        <location line="-10"/>
         <source>greater</source>
         <translation>больше</translation>
     </message>
@@ -129,7 +169,7 @@
         <translation>Агрегация</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+16"/>
         <source>In</source>
         <translation>Входной</translation>
     </message>
@@ -170,7 +210,7 @@
         <translation type="vanished">break</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-18"/>
         <source>float</source>
         <translation>float</translation>
     </message>
@@ -226,12 +266,12 @@
         <location line="+96"/>
         <location line="+1"/>
         <location line="+1"/>
-        <location line="+425"/>
+        <location line="+496"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-499"/>
+        <location line="-570"/>
         <source>Altitude</source>
         <translation>Высота</translation>
     </message>
@@ -246,12 +286,17 @@
         <translation>Долгота</translation>
     </message>
     <message>
-        <location line="+625"/>
+        <location line="+749"/>
         <source>dist</source>
         <translation></translation>
     </message>
     <message>
         <location line="+11"/>
+        <source>Set GPIO state</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+45"/>
         <source>System</source>
         <translation>Команда</translation>
     </message>
@@ -276,13 +321,13 @@
         <translation>Команда</translation>
     </message>
     <message>
-        <location line="-91"/>
-        <location line="+92"/>
+        <location line="-189"/>
+        <location line="+190"/>
         <source>Evaluate</source>
         <translation>Вычислять</translation>
     </message>
     <message>
-        <location line="-719"/>
+        <location line="-888"/>
         <source>Orders quadcopter to fly to given GPS coordinates.</source>
         <translation>Указывает квадрокоптеру лететь в указанные координаты.</translation>
     </message>
@@ -308,7 +353,7 @@
     </message>
     <message>
         <location line="+9"/>
-        <location line="+72"/>
+        <location line="+143"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -316,8 +361,8 @@
         <translation></translation>
     </message>
     <message>
-        <location line="-250"/>
-        <location line="+72"/>
+        <location line="-321"/>
+        <location line="+143"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -325,8 +370,8 @@
         <translation></translation>
     </message>
     <message>
-        <location line="-250"/>
-        <location line="+72"/>
+        <location line="-321"/>
+        <location line="+143"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -334,13 +379,13 @@
         <translation></translation>
     </message>
     <message>
-        <location line="-250"/>
+        <location line="-321"/>
         <source>Time:</source>
         <translation>Время:</translation>
     </message>
     <message>
         <location line="+26"/>
-        <location line="+62"/>
+        <location line="+133"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -348,8 +393,8 @@
         <translation></translation>
     </message>
     <message>
-        <location line="-247"/>
-        <location line="+62"/>
+        <location line="-318"/>
+        <location line="+133"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -357,8 +402,8 @@
         <translation></translation>
     </message>
     <message>
-        <location line="-247"/>
-        <location line="+62"/>
+        <location line="-318"/>
+        <location line="+133"/>
         <location line="+62"/>
         <location line="+62"/>
         <location line="+62"/>
@@ -366,7 +411,70 @@
         <translation></translation>
     </message>
     <message>
-        <location line="-237"/>
+        <location line="-308"/>
+        <source>GPIO Initialization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+578"/>
+        <location line="+99"/>
+        <source>---</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-670"/>
+        <location line="+578"/>
+        <location line="+99"/>
+        <source>Pin name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-669"/>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Pin:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Pin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location line="+560"/>
+        <location line="+91"/>
+        <source>pin_name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-651"/>
+        <location line="+560"/>
+        <location line="+91"/>
+        <source>Pin name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-650"/>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>Get Accelerometer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -427,11 +535,12 @@
     </message>
     <message>
         <location line="+47"/>
+        <location line="+376"/>
         <source>x</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-375"/>
         <source>y</source>
         <translation></translation>
     </message>
@@ -569,12 +678,12 @@
         <location line="+25"/>
         <location line="+1"/>
         <location line="+2"/>
-        <location line="+216"/>
+        <location line="+314"/>
         <source>0.0</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-219"/>
+        <location line="-317"/>
         <source>Blue</source>
         <translation>Синий</translation>
     </message>
@@ -605,11 +714,12 @@
     </message>
     <message>
         <location line="+23"/>
+        <location line="+189"/>
         <source>State on</source>
         <translation>Включён</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="-178"/>
         <source>Print</source>
         <translation>Печать</translation>
     </message>
@@ -635,6 +745,11 @@
     </message>
     <message>
         <location line="+11"/>
+        <source>Read GPIO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+53"/>
         <source>Read Range Sensor</source>
         <translation>Прочитать дальномер</translation>
     </message>
@@ -644,18 +759,20 @@
         <translation>Считывает информацию с дальномера.</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-38"/>
+        <location line="+45"/>
         <source>Variable:</source>
         <translation>Переменная:</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="-20"/>
+        <location line="+46"/>
         <source>Variable</source>
         <translation>Переменная</translation>
     </message>
     <message>
-        <location line="-261"/>
-        <location line="+317"/>
+        <location line="-314"/>
+        <location line="+415"/>
         <source>Yaw</source>
         <translation>Рыскание</translation>
     </message>
@@ -675,17 +792,20 @@
         <translation>Угол (градусы)</translation>
     </message>
     <message>
-        <location line="-277"/>
+        <location line="-375"/>
         <source>Led</source>
         <translation>Светодиод</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-39"/>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-42"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма</translation>
     </message>
     <message>
         <location line="+7"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -707,7 +827,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-368"/>
+        <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-439"/>
         <source>Time</source>
         <translation>Время</translation>
     </message>

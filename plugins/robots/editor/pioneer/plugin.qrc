@@ -4,6 +4,7 @@
 	<file>generated/shapes/GeoTakeoffClass.sdf</file>
 	<file>generated/shapes/GoToGPSPointClass.sdf</file>
 	<file>generated/shapes/GoToPointClass.sdf</file>
+	<file>generated/shapes/PioneerGPIOInitClass.sdf</file>
 	<file>generated/shapes/PioneerGetAccelClass.sdf</file>
 	<file>generated/shapes/PioneerGetGyroClass.sdf</file>
 	<file>generated/shapes/PioneerGetLPSPositionClass.sdf</file>
@@ -13,7 +14,9 @@
 	<file>generated/shapes/PioneerLedClass.sdf</file>
 	<file>generated/shapes/PioneerMagnetClass.sdf</file>
 	<file>generated/shapes/PioneerPrintClass.sdf</file>
+	<file>generated/shapes/PioneerReadGPIOClass.sdf</file>
 	<file>generated/shapes/PioneerReadRangeSensorClass.sdf</file>
+	<file>generated/shapes/PioneerSetGPIOClass.sdf</file>
 	<file>generated/shapes/PioneerSystemClass.sdf</file>
 	<file>generated/shapes/PioneerYawClass.sdf</file>
 </qresource>

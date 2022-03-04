@@ -220,6 +220,77 @@
 		}
 	};
 
+	class PioneerGPIOInit : public qReal::NodeElementType
+	{
+	public:
+		explicit PioneerGPIOInit(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("PioneerGPIOInit");
+			setFriendlyName(QObject::tr("GPIO Initialization"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("---"));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.7, -0.7, "PinName", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(true);
+			label_1->setPlainTextMode(false);
+			label_1->setPrefix(QObject::tr("Pin name:"));
+			addLabel(label_1);
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.7, 1.2, "Port", false, 0));
+			label_2->setBackground(Qt::white);
+			label_2->setScalingX(false);
+			label_2->setScalingY(false);
+			label_2->setHard(false);
+			label_2->setPlainTextMode(false);
+			label_2->setPrefix(QObject::tr("Port:"));
+			addLabel(label_2);
+			QSharedPointer<qReal::LabelProperties> label_3(new qReal::LabelProperties(3, 0.7, 1.8, "Pin", false, 0));
+			label_3->setBackground(Qt::white);
+			label_3->setScalingX(false);
+			label_3->setScalingY(false);
+			label_3->setHard(false);
+			label_3->setPlainTextMode(false);
+			label_3->setPrefix(QObject::tr("Pin:"));
+			addLabel(label_3);
+			QSharedPointer<qReal::LabelProperties> label_4(new qReal::LabelProperties(4, 0.7, 2.4, "Mode", false, 0));
+			label_4->setBackground(Qt::white);
+			label_4->setScalingX(false);
+			label_4->setScalingY(false);
+			label_4->setHard(false);
+			label_4->setPlainTextMode(false);
+			label_4->setPrefix(QObject::tr("Mode:"));
+			addLabel(label_4);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/PioneerGPIOInitClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("Mode", "GPIOMode", QString::fromUtf8("INPUT"), QObject::tr("Mode"), QObject::tr(""), false);
+			addProperty("Pin", "int", QString::fromUtf8("0"), QObject::tr("Pin"), QObject::tr(""), false);
+			addProperty("PinName", "string", QObject::tr("pin_name"), QObject::tr("Pin name"), QObject::tr(""), false);
+			addProperty("Port", "GPIOPort", QString::fromUtf8("A"), QObject::tr("Port"), QObject::tr(""), false);
+		}
+	};
+
 	class PioneerGetAccel : public qReal::NodeElementType
 	{
 	public:
@@ -727,6 +798,59 @@
 		}
 	};
 
+	class PioneerReadGPIO : public qReal::NodeElementType
+	{
+	public:
+		explicit PioneerReadGPIO(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("PioneerReadGPIO");
+			setFriendlyName(QObject::tr("Read GPIO"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("---"));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.7, -0.7, "PinName", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(true);
+			label_1->setPlainTextMode(false);
+			label_1->setPrefix(QObject::tr("Pin name:"));
+			addLabel(label_1);
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.7, 1.2, "Variable", false, 0));
+			label_2->setBackground(Qt::white);
+			label_2->setScalingX(false);
+			label_2->setScalingY(false);
+			label_2->setHard(false);
+			label_2->setPlainTextMode(false);
+			label_2->setPrefix(QObject::tr("Variable:"));
+			addLabel(label_2);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/PioneerReadGPIOClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("PinName", "string", QObject::tr("pin_name"), QObject::tr("Pin name"), QObject::tr(""), false);
+			addProperty("Variable", "string", QObject::tr("x"), QObject::tr("Variable"), QObject::tr(""), false);
+		}
+	};
+
 	class PioneerReadRangeSensor : public qReal::NodeElementType
 	{
 	public:
@@ -770,6 +894,51 @@
 		void initProperties()
 		{
 			addProperty("Variable", "string", QObject::tr("dist"), QObject::tr("Variable"), QObject::tr(""), false);
+		}
+	};
+
+	class PioneerSetGPIO : public qReal::NodeElementType
+	{
+	public:
+		explicit PioneerSetGPIO(qReal::Metamodel &metamodel)
+			: NodeElementType(metamodel)
+		{
+			setName("PioneerSetGPIO");
+			setFriendlyName(QObject::tr("Set GPIO state"));
+			setDiagram("RobotsDiagram");
+			setDescription(QObject::tr("---"));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.7, -0.7, "PinName", false, 0));
+			label_1->setBackground(Qt::white);
+			label_1->setScalingX(false);
+			label_1->setScalingY(false);
+			label_1->setHard(true);
+			label_1->setPlainTextMode(false);
+			label_1->setPrefix(QObject::tr("Pin name:"));
+			addLabel(label_1);
+			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/PioneerSetGPIOClass.sdf").documentElement());
+			setSize(QSizeF(50, 50));
+			initProperties();
+			setMouseGesture("");
+			addLinePort(qReal::LinePortInfo(QLineF(0, 0.1, 0, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 0, 0.9, 0), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(1, 0.1, 1, 0.9), false, false, false, false, 50, 50, "NonTyped"));
+			addLinePort(qReal::LinePortInfo(QLineF(0.1, 1, 0.9, 1), false, false, false, false, 50, 50, "NonTyped"));
+			setResizable(false);
+			setContainer(false);
+			setSortingContainer(false);
+			setSizeOfForestalling({0, 0, 0, 0});
+			setSizeOfChildrenForestalling(0);
+			setChildrenMovable(true);
+			setMinimizesToChildren(false);
+			setMaximizesChildren(false);
+			setCreateChildrenFromMenu(false);
+			setBorder({});
+		}
+
+		void initProperties()
+		{
+			addProperty("PinName", "string", QObject::tr("pin_name"), QObject::tr("Pin name"), QObject::tr(""), false);
+			addProperty("State", "bool", QString::fromUtf8("false"), QObject::tr("State on"), QObject::tr(""), false);
 		}
 	};
 

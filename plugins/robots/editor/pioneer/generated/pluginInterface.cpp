@@ -46,6 +46,7 @@ void PioneerMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new GeoTakeoff(*mMetamodel));
 	mMetamodel->addNode(new GoToGPSPoint(*mMetamodel));
 	mMetamodel->addNode(new GoToPoint(*mMetamodel));
+	mMetamodel->addNode(new PioneerGPIOInit(*mMetamodel));
 	mMetamodel->addNode(new PioneerGetAccel(*mMetamodel));
 	mMetamodel->addNode(new PioneerGetGyro(*mMetamodel));
 	mMetamodel->addNode(new PioneerGetLPSPosition(*mMetamodel));
@@ -55,13 +56,16 @@ void PioneerMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new PioneerLed(*mMetamodel));
 	mMetamodel->addNode(new PioneerMagnet(*mMetamodel));
 	mMetamodel->addNode(new PioneerPrint(*mMetamodel));
+	mMetamodel->addNode(new PioneerReadGPIO(*mMetamodel));
 	mMetamodel->addNode(new PioneerReadRangeSensor(*mMetamodel));
+	mMetamodel->addNode(new PioneerSetGPIO(*mMetamodel));
 	mMetamodel->addNode(new PioneerSystem(*mMetamodel));
 	mMetamodel->addNode(new PioneerYaw(*mMetamodel));
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GeoLanding"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GeoTakeoff"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GoToGPSPoint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "GoToPoint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGPIOInit"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetAccel"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetGyro"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerGetLPSPosition"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -71,7 +75,9 @@ void PioneerMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerLed"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerMagnet"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerPrint"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerReadGPIO"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerReadRangeSensor"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerSetGPIO"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerSystem"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "PioneerYaw"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 }
@@ -96,6 +102,9 @@ void PioneerMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetOrientation"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetAccel"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGetGyro"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerGPIOInit"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerSetGPIO"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerReadGPIO"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerLed"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerMagnet"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("PioneerSystem"));
@@ -126,6 +135,10 @@ void PioneerMetamodelPlugin::initEnums()
 	mMetamodel->setEnumEditable("Color", false);
 	mMetamodel->addEnum("DistanceSign", { qMakePair(QString("greater"), tr("greater")), qMakePair(QString("less"), tr("less")), qMakePair(QString("notGreater"), tr("not greater")), qMakePair(QString("notLess"), tr("not less")) });
 	mMetamodel->setEnumEditable("DistanceSign", false);
+	mMetamodel->addEnum("GPIOMode", { qMakePair(QString("ALTFU"), tr("Altfu")), qMakePair(QString("INPUT"), tr("Input")), qMakePair(QString("OUTPUT"), tr("Output")) });
+	mMetamodel->setEnumEditable("GPIOMode", false);
+	mMetamodel->addEnum("GPIOPort", { qMakePair(QString("A"), tr("A")), qMakePair(QString("B"), tr("B")), qMakePair(QString("C"), tr("C")), qMakePair(QString("D"), tr("D")), qMakePair(QString("E"), tr("E")) });
+	mMetamodel->setEnumEditable("GPIOPort", false);
 	mMetamodel->addEnum("GuardType", { qMakePair(QString("false"), tr("false")), qMakePair(QString("iteration"), tr("body")), qMakePair(QString("true"), tr("true")) });
 	mMetamodel->setEnumEditable("GuardType", true);
 	mMetamodel->addEnum("ParameterDirectionKind", { qMakePair(QString("in"), tr("In")), qMakePair(QString("inout"), tr("Inout")), qMakePair(QString("out"), tr("Out")), qMakePair(QString("return"), tr("Return")) });
