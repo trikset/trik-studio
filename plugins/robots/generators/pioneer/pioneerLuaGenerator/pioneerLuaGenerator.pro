@@ -70,6 +70,7 @@ HEADERS += \
 	$$PWD/simpleGenerators/pioneerGetAccel.h \
 	$$PWD/simpleGenerators/pioneerGetGyro.h \
 	$$PWD/simpleGenerators/pioneerGPIOInit.h \
+	$$PWD/simpleGenerators/pioneerSetGPIO.h \
 	$$PWD/simpleGenerators/pioneerLedGenerator.h \
 	$$PWD/simpleGenerators/pioneerYawGenerator.h \
 	$$PWD/simpleGenerators/randomInitGenerator.h \
@@ -108,6 +109,7 @@ SOURCES += \
 	$$PWD/simpleGenerators/pioneerGetAccel.cpp \
 	$$PWD/simpleGenerators/pioneerGetGyro.cpp \
 	$$PWD/simpleGenerators/pioneerGPIOInit.cpp \
+	$$PWD/simpleGenerators/pioneerSetGPIO.cpp \
 	$$PWD/simpleGenerators/pioneerPrintGenerator.cpp \
 	$$PWD/simpleGenerators/pioneerSystemGenerator.cpp \
 	$$PWD/simpleGenerators/pioneerLedGenerator.cpp \

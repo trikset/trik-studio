@@ -43,6 +43,7 @@
 #include "simpleGenerators/randomInitGenerator.h"
 #include "simpleGenerators/pioneerReadRangeSensor.h"
 #include "simpleGenerators/pioneerGPIOInit.h"
+#include "simpleGenerators/pioneerSetGPIO.h"
 
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
@@ -94,6 +95,8 @@ generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::simp
 		return new PioneerGetGyro(mRepo, customizer, id, this);
 	} else if (elementType == "PioneerGPIOInit") {
 		return new PioneerGPIOInit(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerSetGPIO") {
+		return new PioneerSetGPIO(mRepo, customizer, id, this);
 	} else if (elementType == "PioneerMagnet") {
 		return new PioneerMagnetGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "PioneerPrint") {

@@ -437,6 +437,32 @@
 				</logic>
 			</node>
 
+			<node displayedName="Set GPIO state" name="PioneerSetGPIO" description="---">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/setGPIO.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<properties>
+						<property displayedName="State on" type="bool" name="State">
+							<default>false</default>
+						</property>
+						<property displayedName="Pin name" type="string" name="PinName">
+							<default>pin_name</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
 			<node displayedName="System" name="PioneerSystem" description="Executes given Lua script.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -501,6 +527,7 @@
 				<element name="PioneerGetAccel"/>
 				<element name="PioneerGetGyro"/>
 				<element name="PioneerGPIOInit"/>
+				<element name="PioneerSetGPIO"/>
 				<element name="PioneerLed"/>
 <!--				<element name="PioneerPrint"/>-->
 				<element name="PioneerMagnet"/>
