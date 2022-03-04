@@ -5,6 +5,21 @@
 
 	<diagram name="RobotsDiagram">
 
+		<nonGraphicTypes>
+			<enum name="GPIOPort">
+				<value name="A" displayedName="A"/>
+				<value name="B" displayedName="B"/>
+				<value name="C" displayedName="C"/>
+				<value name="D" displayedName="D"/>
+				<value name="E" displayedName="E"/>
+			</enum>
+			<enum name="GPIOMode">
+				<value name="INPUT" displayedName="Input"/>
+				<value name="OUTPUT" displayedName="Output"/>
+				<value name="ALTFU" displayedName="Altfu"/>
+			</enum>
+		</nonGraphicTypes>
+
 		<graphicTypes>
 
 			<node displayedName="Takeoff" name="GeoTakeoff" description="Orders quadcopter to takeoff.">
@@ -283,6 +298,41 @@
 				</logic>
 			</node>
 
+			<node displayedName="GPIO Initialization" name="PioneerGPIOInit" description="---">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/initGPIO.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
+						<label x="35" y="60" textBinded="Port" background="white" prefix="Port:"/>
+						<label x="35" y="90" textBinded="Pin" background="white" prefix="Pin:"/>
+						<label x="35" y="120" textBinded="Mode" background="white" prefix="Mode:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="Pin name" type="string" name="PinName">
+								<default>pin_name</default>
+							</property>
+							<property displayedName="Port" type="GPIOPort" name="Port">
+								<default>A</default>
+							</property>
+							<property displayedName="Pin" type="int" name="Pin">
+								<default>0</default>
+							</property>
+							<property displayedName="Mode" type="GPIOMode" name="Mode">
+								<default>INPUT</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
 			<node displayedName="Led" name="PioneerLed" path="70, 79 : 70, 121 :  | 25, 78 : 25, 122 :  | 12, 12 : 86, 12 : 86, 78 : 12, 78 : 12, 12 : " description="Sets the color of the specified LED on a quadcopter.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -450,6 +500,7 @@
 				<element name="PioneerGetOrientation"/>
 				<element name="PioneerGetAccel"/>
 				<element name="PioneerGetGyro"/>
+				<element name="PioneerGPIOInit"/>
 				<element name="PioneerLed"/>
 <!--				<element name="PioneerPrint"/>-->
 				<element name="PioneerMagnet"/>
