@@ -37,6 +37,7 @@ qReal::IdList PioneerBlocksFactory::providedBlocks() const
 			, id("PioneerGetGyro")
 			, id("PioneerGPIOInit")
 			, id("PioneerSetGPIO")
+			, id("PioneerReadGPIO")
 			, id("PioneerPrint")
 			, id("PioneerSystem")
 			, id("PioneerLed")

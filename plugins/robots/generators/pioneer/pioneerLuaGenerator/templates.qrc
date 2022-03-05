@@ -123,5 +123,6 @@
         <file>templates/initialization/GPIO.t</file>
         <file>templates/quadcopterCommands/gpioOff.t</file>
         <file>templates/quadcopterCommands/gpioOn.t</file>
+        <file>templates/quadcopterCommands/gpioRead.t</file>
     </qresource>
 </RCC>
