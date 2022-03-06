@@ -27,6 +27,7 @@
 #include "widgets/pioneerAdditionalPreferences.h"
 
 #include <QLineEdit>
+#include <QComboBox>
 
 using namespace pioneer;
 using namespace pioneer::lua;
@@ -46,7 +47,7 @@ PioneerLuaGeneratorPlugin::PioneerLuaGeneratorPlugin()
 			))
 	, mUploader()
 {
-//	mAdditionalPreferences = new PioneerAdditionalPreferences;
+	mAdditionalPreferences = new PioneerAdditionalPreferences;
 
 	mGenerateCodeAction->setText(tr("Generate to Pioneer Lua"));
 	mGenerateCodeAction->setIcon(QIcon(":/pioneer/lua/images/generateLuaCode.svg"));
@@ -157,10 +158,22 @@ QWidget * PioneerLuaGeneratorPlugin::modeSelector()
 {
 	auto selector = new QComboBox;
 	selector->addItems({"usb", "wifi"});
-	connectSelector(selector, settings::pioneerBaseStationMode);
+	selector->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+	selector->setSizeAdjustPolicy(QComboBox::SizeAdjustPolicy::AdjustToMinimumContentsLength);
 	selector->setToolTip(tr("Choose robot`s mode"));
-	selector->setEditable(false);
 	selector->setMinimumContentsLength(4);
+
+	const auto settings = settings::pioneerBaseStationMode;
+	const auto updateMode = [selector, settings]() {
+		selector->setCurrentText(qReal::SettingsManager::value(settings).toString());
+	};
+
+	updateMode();
+	qReal::SettingsListener::listen(settings, updateMode, this);
+	connect(selector, &QComboBox::currentTextChanged, this, [selector, settings]() {
+		qReal::SettingsManager::setValue(settings, selector->currentText());
+	});
+
 	return selector;
 }
 
