@@ -25,6 +25,8 @@
 
 #include "twoDModel/twoDModelDeclSpec.h"
 
+#include "plugins/robots/common/twoDModel/src/engine/trajectorySaver.h"
+
 class QGraphicsItem;
 
 namespace twoDModel {
@@ -76,7 +78,7 @@ public:
 	};
 
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
-			, const Settings &settings, QObject *parent = nullptr);
+            , const Settings &settings, QObject *parent = nullptr);
 
 	~RobotModel();
 
@@ -183,7 +185,18 @@ signals:
 	void playingSoundChanged(bool playing);
 
 	/// Emitted when left or right wheel was reconnected to another port.
-	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+    void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+
+    /// Emitted when robot starts or ends play beep sound
+    void trajectorySoundStateChanged(QString id, int time);
+
+    /// Emitted when robot starts or ends draw
+    void trajectoryMarkerColorChanged(QString id, QColor color);
+
+    /// Emitted when robot position and/or rotation changed
+    void trajectoryPosOrAngleChanged(QString id, QPointF position, qreal rotation);
+
+    void trajectorySave();
 
 private:
 	QVector2D robotDirectionVector() const;

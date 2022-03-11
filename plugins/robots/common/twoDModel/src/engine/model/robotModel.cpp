@@ -40,15 +40,15 @@ const int positionStampsCount = 50;
 
 RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 		, const Settings &settings
-		, QObject *parent)
-	: QObject(parent)
+        , QObject *parent)
+    : QObject(parent)
 	, mSettings(settings)
 	, mRobotModel(robotModel)
 	, mSensorsConfiguration(robotModel.robotId(), robotModel.size())
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
-	, mStartPositionMarker(new items::StartPosition(info().size()))
-{
+    , mStartPositionMarker(new items::StartPosition(info().size())){
+
 	reinit();
 }
 
@@ -111,6 +111,7 @@ RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees
 void RobotModel::playSound(int timeInMs)
 {
 	mBeepTime = qMax(mBeepTime, timeInMs);
+    emit trajectorySoundStateChanged(mRobotModel.robotId(), mBeepTime);
 }
 
 void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
@@ -123,7 +124,7 @@ void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool
 		mMotors[port]->activeTimeType = DoByLimit;
 	} else {
 		mMotors[port]->activeTimeType = DoInf;
-	}
+    }
 }
 
 void RobotModel::countMotorTurnover()
@@ -179,19 +180,20 @@ void RobotModel::stopRobot()
 	mIsFirstAngleStamp = true;
 	mPosStamps.clear();
 	emit playingSoundChanged(false);
+    emit trajectorySave();
 	for (auto &&engine : mMotors) {
 		engine->speed = 0;
 		engine->breakMode = true;
-	}
+    }
 }
 
 void RobotModel::countBeep()
 {
 	if (mBeepTime > 0) {
-		emit playingSoundChanged(true);
+        emit playingSoundChanged(true);
 		mBeepTime -= Timeline::timeInterval;
-	} else {
-		emit playingSoundChanged(false);
+    } else {
+        emit playingSoundChanged(false);
 	}
 }
 
@@ -301,11 +303,13 @@ QColor RobotModel::markerColor() const
 void RobotModel::markerDown(const QColor &color)
 {
 	mMarker = color;
+    emit trajectoryMarkerColorChanged(mRobotModel.robotId(), color);
 }
 
 void RobotModel::markerUp()
 {
 	mMarker = Qt::transparent;
+    emit trajectoryMarkerColorChanged(mRobotModel.robotId(), Qt::transparent);
 }
 
 QVector<int> RobotModel::accelerometerReading() const
@@ -333,6 +337,7 @@ void RobotModel::nextStep()
 	mPos += mPhysicsEngine->positionShift(*this).toPointF();
 	mAngle += mPhysicsEngine->rotation(*this);
 	emit positionRecalculated(mPos, mAngle);
+    emit trajectoryPosOrAngleChanged(mRobotModel.robotId(), mPos, mAngle);
 }
 
 void RobotModel::recalculateParams()
@@ -372,6 +377,7 @@ void RobotModel::nextFragment()
 	}
 
 	emit robotRided(mPos, mAngle);
+    //emit trajectoryPosOrAngleChanged(mRobotModel.robotId(), mPos, mAngle);
 }
 
 QPointF RobotModel::position() const
@@ -383,7 +389,7 @@ void RobotModel::setPosition(const QPointF &newPos)
 {
 	if (newPos != mPos) {
 		mPos = newPos;
-		emit positionChanged(newPos);
+        emit positionChanged(newPos);
 	}
 }
 
@@ -396,7 +402,7 @@ void RobotModel::setRotation(qreal angle)
 {
 	if (!mathUtils::Math::eq(mAngle, angle)) {
 		mAngle = angle;
-		emit rotationChanged(angle);
+        emit rotationChanged(angle);
 	}
 }
 

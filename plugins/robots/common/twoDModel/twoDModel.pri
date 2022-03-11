@@ -64,7 +64,8 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/marker.h \
 	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
-	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
+	$$PWD/include/twoDModel/blocks/markerUpBlock.h \ \
+    $$PWD/src/engine/trajectorySaver.h
 
 HEADERS += \
 	$$PWD/src/engine/twoDModelEngineApi.h \
@@ -130,6 +131,7 @@ HEADERS += \
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
+    $$PWD/src/engine/trajectorySaver.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \
 	$$PWD/src/engine/twoDModelGuiFacade.cpp \

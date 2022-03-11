@@ -33,8 +33,7 @@ Timeline::Timeline(QObject *parent)
 		// For queued signals with argument of this type
 		qRegisterMetaType<qReal::interpretation::StopReason>();
 		registered = true;
-	}
-
+    }
 	connect(&mTimer, &QTimer::timeout, this, &Timeline::onTimer);
 	mTimer.setInterval(defaultRealTimeInterval);
 }
@@ -55,7 +54,7 @@ void Timeline::stop(qReal::interpretation::StopReason reason)
 		QCoreApplication::processEvents();
 		emit beforeStop(reason);
 		mTimer.stop();
-		emit stopped(reason);
+        emit stopped(reason);
 	}
 }
 

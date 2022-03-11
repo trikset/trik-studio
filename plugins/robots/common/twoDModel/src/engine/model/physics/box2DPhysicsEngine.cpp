@@ -30,6 +30,7 @@
 #include "parts/box2DWheel.h"
 #include "parts/box2DRobot.h"
 #include "parts/box2DItem.h"
+#include "plugins/robots/common/twoDModel/src/engine/trajectorySaver.h"
 
 using namespace twoDModel::model::physics;
 using namespace parts;
@@ -38,21 +39,25 @@ using namespace mathUtils;
 const qreal scaleCoeff = 0.001;
 
 Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
-		, const QList<RobotModel *> &robots)
-	: PhysicsEngineBase(worldModel, robots)
+        , const QList<RobotModel *> &robots)
+    : PhysicsEngineBase(worldModel, robots)
 	, mPixelsInCm(worldModel.pixelsInCm() * scaleCoeff)
 	, mWorld(new b2World(b2Vec2(0, 0)))
 	, mPrevPosition(b2Vec2(0, 0))
-	, mPrevAngle(0)
+    , mPrevAngle(0)
+    , trajSaver(new TrajectorySaver(nullptr))
 {
-	connect(&worldModel, &model::WorldModel::wallAdded,
+    connect(&worldModel, &model::WorldModel::wallAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::skittleAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::ballAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::itemRemoved,
-			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
+            this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
+
+    connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::SaveItemPosOrAngle);
+    //connect(this, &Box2DPhysicsEngine::trajectorySave, trajSaver, &TrajectorySaver::SaveToFile);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -145,6 +150,13 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 		});
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
+
+
+        connect(robot, &RobotModel::trajectorySoundStateChanged, trajSaver, &TrajectorySaver::SaveBeepState);
+        connect(robot, &RobotModel::trajectoryMarkerColorChanged, trajSaver, &TrajectorySaver::SaveMarkerState);
+        connect(robot, &RobotModel::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::SaveRobotPosOrAngle);
+
+        connect(robot, &RobotModel::trajectorySave, trajSaver, &TrajectorySaver::SaveToFile);
 	});
 }
 
@@ -342,7 +354,7 @@ void Box2DPhysicsEngine::wakeUp()
 	for (Box2DRobot *robot : mBox2DRobots) {
 		onRobotStartPositionChanged(robot->getRobotModel()->position(), robot->getRobotModel());
 		onRobotStartAngleChanged(robot->getRobotModel()->rotation(), robot->getRobotModel());
-	}
+    }
 }
 
 void Box2DPhysicsEngine::nextFrame()
@@ -351,8 +363,27 @@ void Box2DPhysicsEngine::nextFrame()
 		if (mBox2DDynamicItems[item]->getBody()->IsEnabled() && mBox2DDynamicItems[item]->angleOrPositionChanged()) {
 			QPointF scenePos = positionToScene(mBox2DDynamicItems[item]->getPosition());
 			item->setPos(scenePos - item->boundingRect().center());
-			item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
-		}
+            item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
+
+
+//            auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
+//            bool wasMoving = inMoveItems.contains(mBox2DDynamicItems[item]);
+//            if (!wasMoving)
+//            {
+//                inMoveItems.append(mBox2DDynamicItems[item]);
+//            }
+//            emit trajectoryPosOrAngleChanged(abstractItem, wasMoving);
+        }
+//        else if (!mBox2DDynamicItems[item]->angleOrPositionChanged() && inMoveItems.contains(mBox2DDynamicItems[item]))
+//        {
+//            inMoveItems.removeOne(mBox2DDynamicItems[item]);
+//        }
+
+        if (mBox2DDynamicItems[item]->getBody()->IsEnabled())
+        {
+            auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
+            emit trajectoryPosOrAngleChanged(abstractItem);
+        }
 	}
 }
 
@@ -364,6 +395,7 @@ void Box2DPhysicsEngine::clearForcesAndStop()
 		body->SetLinearVelocity({0, 0});
 		body->SetAngularVelocity(0);
 	}
+    //emit trajectorySave();
 }
 
 bool Box2DPhysicsEngine::isRobotStuck() const
