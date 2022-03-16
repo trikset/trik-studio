@@ -154,7 +154,7 @@
 			<node displayedName="Get LPS Velocity" name="PioneerGetLPSVelocity" description="Returns velocity (local position system).">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/getVelocityBlock.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/pioneerGetLPSVelocityBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="60" textBinded="X" background="white" prefix="X:"/>
@@ -185,7 +185,7 @@
 			<node displayedName="Get LPS Yaw" name="PioneerGetLPSYaw" description="Returns yaw (local position system).">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/getYawBlock.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/pioneerGetLPSYawBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="60" textBinded="Yaw" background="white" prefix="Yaw:"/>
@@ -208,7 +208,7 @@
 			<node displayedName="Get Orientation" name="PioneerGetOrientation" description="Returns orientation.">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/getOrientationBlock.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/pioneerGetOrientationBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="60" textBinded="Roll" background="white" prefix="Roll:"/>
@@ -239,7 +239,7 @@
 			<node displayedName="Get Accelerometer" name="PioneerGetAccel" description="Returns accelerometer.">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/getAccelBlock.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/pioneerGetAccelBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="60" textBinded="X" background="white" prefix="X:"/>
@@ -270,7 +270,7 @@
 			<node displayedName="Get Gyroscope" name="PioneerGetGyro" description="Returns gyroscope.">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/getGyroBlock.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/pioneerGetGyroBlock.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="60" textBinded="X" background="white" prefix="X:"/>
@@ -301,7 +301,7 @@
 			<node displayedName="GPIO Initialization" name="PioneerGPIOInit" description="---">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/initGPIO.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/GPIOinit.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
@@ -440,7 +440,7 @@
 			<node displayedName="Set GPIO state" name="PioneerSetGPIO" description="---">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/setGPIO.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/GPIOset.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
@@ -466,7 +466,7 @@
 			<node displayedName="Read GPIO" name="PioneerReadGPIO" description="---">
 				<graphics>
 					<picture sizex="50" sizey="50">
-						<image y1="0" name="images/readGPIO.svg" x1="0" y2="50" x2="50"/>
+						<image y1="0" name="images/GPIOread.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
