@@ -371,14 +371,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+578"/>
-        <location line="+99"/>
-        <source>---</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-670"/>
+        <location line="+9"/>
         <location line="+578"/>
         <location line="+99"/>
         <source>Pin name:</source>
@@ -663,7 +656,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+2"/>
+        <source>Returns GPIO value.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+51"/>
         <source>Read Range Sensor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -700,7 +698,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+2"/>
+        <source>Set GPIO value in &quot;true/false&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -747,7 +750,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-259"/>
+        <location line="-754"/>
+        <source>Create GPIO in settings port.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+495"/>
         <source>Magnet</source>
         <translation type="unfinished"></translation>
     </message>

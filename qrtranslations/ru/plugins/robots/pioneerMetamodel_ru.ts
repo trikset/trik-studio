@@ -76,42 +76,42 @@
     <message>
         <location line="+8"/>
         <source>Altfu</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+2"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+6"/>
@@ -286,17 +286,27 @@
         <translation>Долгота</translation>
     </message>
     <message>
-        <location line="+749"/>
+        <location line="+85"/>
+        <source>Create GPIO in settings port.</source>
+        <translation>Cоздает GPIO на порте с заданными настройками.</translation>
+    </message>
+    <message>
+        <location line="+664"/>
         <source>dist</source>
         <translation></translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Set GPIO state</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить значение GPIO</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+2"/>
+        <source>Set GPIO value in &quot;true/false&quot;.</source>
+        <translation>Устанавливает GPIO в состояние &quot;истина/ложь&quot;.</translation>
+    </message>
+    <message>
+        <location line="+43"/>
         <source>System</source>
         <translation>Команда</translation>
     </message>
@@ -413,115 +423,108 @@
     <message>
         <location line="-308"/>
         <source>GPIO Initialization</source>
-        <translation type="unfinished"></translation>
+        <translation>Инициализация GPIO</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+578"/>
-        <location line="+99"/>
-        <source>---</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-670"/>
+        <location line="+9"/>
         <location line="+578"/>
         <location line="+99"/>
         <source>Pin name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <location line="-669"/>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пин:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Номер пина</translation>
     </message>
     <message>
         <location line="+1"/>
         <location line="+560"/>
         <location line="+91"/>
         <source>pin_name</source>
-        <translation type="unfinished"></translation>
+        <translation>pin_name</translation>
     </message>
     <message>
         <location line="-651"/>
         <location line="+560"/>
         <location line="+91"/>
         <source>Pin name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location line="-650"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get Accelerometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать акселерометр</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns accelerometer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает данные с акселерометра квадрокоптера по трём осям.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>aX</source>
-        <translation type="unfinished"></translation>
+        <translation>aX</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>aY</source>
-        <translation type="unfinished"></translation>
+        <translation>aY</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>aZ</source>
-        <translation type="unfinished"></translation>
+        <translation>aZ</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get Gyroscope</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать гироскоп</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns gyroscope.</source>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает данные с гироскопа квадрокоптера по трём осям.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>gX</source>
-        <translation type="unfinished"></translation>
+        <translation>gX</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>gY</source>
-        <translation type="unfinished"></translation>
+        <translation>gY</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>gZ</source>
-        <translation type="unfinished"></translation>
+        <translation>gZ</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -552,102 +555,102 @@
     <message>
         <location line="+11"/>
         <source>Get LPS Velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать вектор скорости (ЛК)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns velocity (local position system).</source>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает текущие значения скоростей в локальной системе координат.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>velX</source>
-        <translation type="unfinished"></translation>
+        <translation>velX</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>velY</source>
-        <translation type="unfinished"></translation>
+        <translation>velY</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>velZ</source>
-        <translation type="unfinished"></translation>
+        <translation>velZ</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get LPS Yaw</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать угол рысканья (ЛК)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns yaw (local position system).</source>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает текущий угол рысканья в локальной системе координат.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Yaw:</source>
-        <translation type="unfinished"></translation>
+        <translation>Yaw:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>yaw</source>
-        <translation type="unfinished"></translation>
+        <translation>yaw</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать данные положения</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns orientation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Возвращает данные положения квадрокоптера в пространстве - крен, тангаж, рыскание.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Roll:</source>
-        <translation type="unfinished"></translation>
+        <translation>Крен:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тангаж:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Azimuth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Рысканье:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>azimuth</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Azimuth</source>
-        <translation type="unfinished"></translation>
+        <translation>Рысканье</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>pitch</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Тангаж</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>roll</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Крен</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -746,10 +749,15 @@
     <message>
         <location line="+11"/>
         <source>Read GPIO</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать значение GPIO</translation>
     </message>
     <message>
-        <location line="+53"/>
+        <location line="+2"/>
+        <source>Returns GPIO value.</source>
+        <translation>Возвращает значение состояния GPIO.</translation>
+    </message>
+    <message>
+        <location line="+51"/>
         <source>Read Range Sensor</source>
         <translation>Прочитать дальномер</translation>
     </message>

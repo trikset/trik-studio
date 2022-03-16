@@ -229,7 +229,7 @@
 			setName("PioneerGPIOInit");
 			setFriendlyName(QObject::tr("GPIO Initialization"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("---"));
+			setDescription(QObject::tr("Create GPIO in settings port."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.7, -0.7, "PinName", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
@@ -807,7 +807,7 @@
 			setName("PioneerReadGPIO");
 			setFriendlyName(QObject::tr("Read GPIO"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("---"));
+			setDescription(QObject::tr("Returns GPIO value."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.7, -0.7, "PinName", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
@@ -906,7 +906,7 @@
 			setName("PioneerSetGPIO");
 			setFriendlyName(QObject::tr("Set GPIO state"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("---"));
+			setDescription(QObject::tr("Set GPIO value in \"true/false\"."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.7, -0.7, "PinName", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
