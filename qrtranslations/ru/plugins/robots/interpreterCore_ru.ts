@@ -179,7 +179,12 @@
         <translation>Файл сохранения TRIK Studio (*.qrs)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+52"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+57"/>
+        <source>%2 has been auto configured to port %1</source>
+        <translation>%2 был автоматически сгонфигурирован на порту %1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Sensor on port %1 does not correspond to blocks on the diagram.</source>
         <translation>Выставленный на порту %1 сенсор не соответствует блокам на диаграмме.</translation>
     </message>

@@ -258,7 +258,12 @@
         <translation>temps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+52"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+57"/>
+        <source>%2 has been auto configured to port %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Sensor on port %1 does not correspond to blocks on the diagram.</source>
         <translation type="unfinished"></translation>
     </message>
