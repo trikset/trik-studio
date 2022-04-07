@@ -327,26 +327,6 @@
         <translation>Выберите неизменяемые части упражнения</translation>
     </message>
     <message>
-        <source>2d model world is read only</source>
-        <translation type="vanished">Двумерная модель неизменяема</translation>
-    </message>
-    <message>
-        <source>Sensors are read only</source>
-        <translation type="vanished">Положение и конфигурация сенсоров неизменяемы</translation>
-    </message>
-    <message>
-        <source>2d model robot position is read only</source>
-        <translation type="vanished">Начальное положение робота в двумерной модели неизменяемо</translation>
-    </message>
-    <message>
-        <source>Motors to wheels binding is read only</source>
-        <translation type="vanished">Соответствие портов моторов и колёс неизменяемо</translation>
-    </message>
-    <message>
-        <source>2d model simulation settings are read only</source>
-        <translation type="vanished">Настройки симуляции двумерной модели (физика, шумы и т.д.) неизменяемы</translation>
-    </message>
-    <message>
         <location line="+2"/>
         <source>2D model world is read-only</source>
         <translation type="unfinished">Двумерная модель неизменяема</translation>
