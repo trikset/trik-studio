@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package trajectory;
+
+message Trajectory {
+	repeated string state = 1;
+}
+
+message DynObject {
+	required string id = 1;
+	required Trajectory trajectory = 2;
+}
+
+message DynObjects {
+	repeated DynObject dynObject = 1;
+}

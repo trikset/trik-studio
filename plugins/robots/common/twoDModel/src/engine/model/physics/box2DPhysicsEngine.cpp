@@ -30,7 +30,6 @@
 #include "parts/box2DWheel.h"
 #include "parts/box2DRobot.h"
 #include "parts/box2DItem.h"
-#include "plugins/robots/common/twoDModel/src/engine/trajectorySaver.h"
 
 using namespace twoDModel::model::physics;
 using namespace parts;
@@ -57,7 +56,8 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
             this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
     connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::SaveItemPosOrAngle);
-    //connect(this, &Box2DPhysicsEngine::trajectorySave, trajSaver, &TrajectorySaver::SaveToFile);
+    connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, trajSaver, &TrajectorySaver::OnItemDragged);
+    connect(this, &Box2DPhysicsEngine::sendNextFrame, trajSaver, &TrajectorySaver::SendFrame);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -154,9 +154,12 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 
         connect(robot, &RobotModel::trajectorySoundStateChanged, trajSaver, &TrajectorySaver::SaveBeepState);
         connect(robot, &RobotModel::trajectoryMarkerColorChanged, trajSaver, &TrajectorySaver::SaveMarkerState);
-        connect(robot, &RobotModel::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::SaveRobotPosOrAngle);
+        connect(robot, &RobotModel::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::SaveItemPosOrAngle);
+        connect(robot, &RobotModel::trajectoryOnitemDragged, trajSaver, &TrajectorySaver::OnItemDragged);
 
         connect(robot, &RobotModel::trajectorySave, trajSaver, &TrajectorySaver::SaveToFile);
+//        connect(robot, &RobotModel::OnStartPlaying, trajSaver, &TrajectorySaver::OnStartInterpretation);
+        connect(robot, &RobotModel::OnStopPlaying, trajSaver, &TrajectorySaver::OnStopInterpretation);
 	});
 }
 
@@ -365,26 +368,11 @@ void Box2DPhysicsEngine::nextFrame()
 			item->setPos(scenePos - item->boundingRect().center());
             item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
 
-
-//            auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
-//            bool wasMoving = inMoveItems.contains(mBox2DDynamicItems[item]);
-//            if (!wasMoving)
-//            {
-//                inMoveItems.append(mBox2DDynamicItems[item]);
-//            }
-//            emit trajectoryPosOrAngleChanged(abstractItem, wasMoving);
-        }
-//        else if (!mBox2DDynamicItems[item]->angleOrPositionChanged() && inMoveItems.contains(mBox2DDynamicItems[item]))
-//        {
-//            inMoveItems.removeOne(mBox2DDynamicItems[item]);
-//        }
-
-        if (mBox2DDynamicItems[item]->getBody()->IsEnabled())
-        {
             auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
-            emit trajectoryPosOrAngleChanged(abstractItem);
+            emit trajectoryPosOrAngleChanged(abstractItem->id(), abstractItem->pos(), abstractItem->rotation());
         }
 	}
+    emit sendNextFrame();
 }
 
 void Box2DPhysicsEngine::clearForcesAndStop()
@@ -459,7 +447,8 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 				QPointF localCenter = localBoundingRect.center();
 				bItem->setRotation(0);
 				bItem->moveToPosition(positionToBox2D(localScenePos + localCenter));
-				bItem->setRotation(angleToBox2D(localRotation));
+                bItem->setRotation(angleToBox2D(localRotation));
+                emit trajectoryItemDragged(item->id(), item->pos(), item->rotation());
 			}
 		} else {
 			b2Vec2 pos = positionToBox2D(collidingPolygon.boundingRect().center());

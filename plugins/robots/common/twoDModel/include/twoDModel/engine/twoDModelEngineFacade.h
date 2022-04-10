@@ -24,6 +24,7 @@
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
 #include "twoDModel/twoDModelDeclSpec.h"
+#include "plugins/robots/common/twoDModel/src/engine/trajectory/trajectorySender.h"
 
 namespace utils {
 class SmartDock;
@@ -79,6 +80,7 @@ private:
 	utils::SmartDock *mDock;  // Transfers ownership to main window indirectly
 
 	qReal::TabInfo::TabType mCurrentTabInfo { qReal::TabInfo::TabType::other }; // temp hack
+    TrajectorySender *mTrajSender;
 };
 
 }

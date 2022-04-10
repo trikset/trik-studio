@@ -25,7 +25,7 @@
 
 #include "twoDModel/twoDModelDeclSpec.h"
 
-#include "plugins/robots/common/twoDModel/src/engine/trajectorySaver.h"
+#include "plugins/robots/common/twoDModel/src/engine/trajectory/trajectorySaver.h"
 
 class QGraphicsItem;
 
@@ -195,8 +195,12 @@ signals:
 
     /// Emitted when robot position and/or rotation changed
     void trajectoryPosOrAngleChanged(QString id, QPointF position, qreal rotation);
+    void trajectoryOnitemDragged(QString id, QPointF position, qreal rotation);
 
     void trajectorySave();
+
+//    void OnStartPlaying();
+    void OnStopPlaying();
 
 private:
 	QVector2D robotDirectionVector() const;

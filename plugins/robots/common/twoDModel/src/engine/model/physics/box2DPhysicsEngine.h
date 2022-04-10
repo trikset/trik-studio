@@ -19,6 +19,7 @@
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/worldModel.h"
+#include "plugins/robots/common/twoDModel/src/engine/trajectory/trajectorySaver.h"
 
 class b2World;
 class b2Body;
@@ -86,11 +87,12 @@ public slots:
     void onRecoverRobotPosition(const QPointF &pos);
 
     signals:
-    ///void trajectoryPosOrAngleChanged(graphicsUtils::AbstractItem *item);
-    void trajectoryPosOrAngleChanged(graphicsUtils::AbstractItem *item, bool wasMoving = true);
+    void trajectoryPosOrAngleChanged(QString id, QPointF pos, qreal rotation);
+    void trajectoryItemDragged(QString id, QPointF pos, qreal rotation);
 
     /// Emitted when program stops
     void trajectorySave();
+    void sendNextFrame();
 
 protected:
 	void onPixelsInCmChanged(qreal value) override;

@@ -32,12 +32,16 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView))
+    , mTrajSender(new TrajectorySender())
 {
 	mModel->addRobotModel(robotModel);
 	connect(mView, &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
 	connect(mView, &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
 	connect(mView, &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
 	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
+    connect(mTrajSender, &TrajectorySender::stopRequested, mView, &view::TwoDModelWidget::stopButtonPressed);
+    connect(mTrajSender, &TrajectorySender::runRequested, mView, &view::TwoDModelWidget::runButtonPressed);
+    connect(mTrajSender, &TrajectorySender::restartRequested, mView, &view::TwoDModelWidget::restartRequested);
 }
 
 TwoDModelEngineFacade::~TwoDModelEngineFacade(){
@@ -88,6 +92,10 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		loadReadOnlyFlags(logicalModel);
 		QLOG_DEBUG() << "Reloading 2D world done";
+
+        mTrajSender->setIp("10.0.5.2");
+        mTrajSender->setPort(9000);
+        mTrajSender->init();
 	};
 
 	const auto connectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {
@@ -114,7 +122,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		connect(this,
 				&TwoDModelEngineFacade::stopButtonPressed,
 				&interpreterControl,
-				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); },
+                [&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); },
 				Qt::UniqueConnection);
 	};
 
@@ -184,6 +192,7 @@ void TwoDModelEngineFacade::onStartInterpretation()
 		mModel->errorReporter()->addWarning(tr("Realistic physics' must be turned on to enjoy skittles and balls"));
 	}
 	mModel->timeline().start();
+    mTrajSender->connectToHost();
 }
 
 void TwoDModelEngineFacade::onStopInterpretation(qReal::interpretation::StopReason reason)

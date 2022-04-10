@@ -68,6 +68,7 @@ void RobotModel::reinit()
 	mBeepTime = 0;
 	mDeltaDegreesOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
+    //emit OnStartPlaying();
 }
 
 void RobotModel::clear()
@@ -180,6 +181,7 @@ void RobotModel::stopRobot()
 	mIsFirstAngleStamp = true;
 	mPosStamps.clear();
 	emit playingSoundChanged(false);
+    emit OnStopPlaying();
     emit trajectorySave();
 	for (auto &&engine : mMotors) {
 		engine->speed = 0;
@@ -336,8 +338,7 @@ void RobotModel::nextStep()
 	// Changing position quietly, they must not be caught by UI here.
 	mPos += mPhysicsEngine->positionShift(*this).toPointF();
 	mAngle += mPhysicsEngine->rotation(*this);
-	emit positionRecalculated(mPos, mAngle);
-    emit trajectoryPosOrAngleChanged(mRobotModel.robotId(), mPos, mAngle);
+    emit positionRecalculated(mPos, mAngle);
 }
 
 void RobotModel::recalculateParams()
@@ -377,7 +378,10 @@ void RobotModel::nextFragment()
 	}
 
 	emit robotRided(mPos, mAngle);
-    //emit trajectoryPosOrAngleChanged(mRobotModel.robotId(), mPos, mAngle);
+    if (isRiding())
+    {
+        emit trajectoryPosOrAngleChanged(mRobotModel.robotId(), mPos, mAngle);
+    }
 }
 
 QPointF RobotModel::position() const
@@ -390,6 +394,7 @@ void RobotModel::setPosition(const QPointF &newPos)
 	if (newPos != mPos) {
 		mPos = newPos;
         emit positionChanged(newPos);
+        emit trajectoryOnitemDragged(mRobotModel.robotId(), mPos, mAngle);
 	}
 }
 
@@ -403,6 +408,8 @@ void RobotModel::setRotation(qreal angle)
 	if (!mathUtils::Math::eq(mAngle, angle)) {
 		mAngle = angle;
         emit rotationChanged(angle);
+        emit trajectoryOnitemDragged(mRobotModel.robotId(), mPos, mAngle);
+//        qDebug(mIsOnTheGround ? "true" : "false");
 	}
 }
 

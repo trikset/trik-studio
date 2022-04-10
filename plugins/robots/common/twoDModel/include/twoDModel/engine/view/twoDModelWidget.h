@@ -129,6 +129,9 @@ signals:
 	/// Emitted when user has stopped intepretation from the 2D model window.
 	void stopButtonPressed();
 
+    /// Emitted when user has stopped intepretation from the remote vizualizator
+    void restartRequested();
+
 protected:
 	void changeEvent(QEvent *e) override;
 	void showEvent(QShowEvent *e) override;
@@ -169,7 +172,7 @@ private slots:
 
 	void trainingModeChanged(bool enabled);
 
-	void updateUIPhysicsSettings();
+    void updateUIPhysicsSettings();
 
 private:
 	enum CursorType
