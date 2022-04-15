@@ -42,7 +42,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 			, this, &RobotItem::updateSensorRotation);
 
 	connect(&mRobotModel.info(), &twoDModel::robotModel::TwoDRobotModel::settingsChanged
-            , this, &RobotItem::updateImage);
+			, this, &RobotItem::updateImage);
 
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
@@ -165,12 +165,12 @@ QMap<kitBase::robotModel::PortInfo, SensorItem *> const &RobotItem::sensors() co
 
 void RobotItem::setPos(const QPointF &newPos)
 {
-    QGraphicsItem::setPos(newPos);
+	QGraphicsItem::setPos(newPos);
 }
 
 void RobotItem::setRotation(qreal rotation)
 {
-    QGraphicsItem::setRotation(rotation);
+	QGraphicsItem::setRotation(rotation);
 }
 
 void RobotItem::ride(const QPointF &newPos, qreal rotation)

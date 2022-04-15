@@ -81,7 +81,7 @@ signals:
 	void recoverRobotPosition(QPointF oldPos);
 	void sensorAdded(SensorItem *sensor);
 	void sensorRemoved(SensorItem *sensor);
-    void sensorUpdated(SensorItem *sensor);
+	void sensorUpdated(SensorItem *sensor);
 
 private:
 	class BeepItem : public QGraphicsItem

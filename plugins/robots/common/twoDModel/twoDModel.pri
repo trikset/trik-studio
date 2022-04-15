@@ -65,8 +65,8 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
 	$$PWD/include/twoDModel/blocks/markerUpBlock.h \ \
-    $$PWD/src/engine/trajectory/trajectorySaver.h \
-    $$PWD/src/engine/trajectory/trajectorySender.h \
+	$$PWD/src/engine/trajectory/connectionToVizualizator.h \
+	$$PWD/src/engine/trajectory/trajectorySaver.h \
 
 HEADERS += \
 	$$PWD/src/engine/twoDModelEngineApi.h \
@@ -132,8 +132,8 @@ HEADERS += \
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
-    $$PWD/src/engine/trajectory/trajectorySaver.cpp \
-    $$PWD/src/engine/trajectory/trajectorySender.cpp \
+	$$PWD/src/engine/trajectory/connectionToVizualizator.cpp \
+	$$PWD/src/engine/trajectory/trajectorySaver.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \
 	$$PWD/src/engine/twoDModelGuiFacade.cpp \
@@ -228,5 +228,5 @@ FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
 
 DISTFILES += \
-    $$PWD/src/engine/trajectory/frames.proto
+	$$PWD/src/engine/trajectory/frames.proto
 

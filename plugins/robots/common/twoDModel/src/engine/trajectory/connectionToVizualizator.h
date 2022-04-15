@@ -12,61 +12,61 @@
 /// TODO description
 class alignas(8) ConnectionToVizualizator : public QObject
 {
-    Q_OBJECT
-    Q_DISABLE_COPY(ConnectionToVizualizator)
+	Q_OBJECT
+	Q_DISABLE_COPY(ConnectionToVizualizator)
 
 public:
-//    ConnectionToVizualizator(QString ip, int port);
-    ConnectionToVizualizator();
-    ~ConnectionToVizualizator();
+//	ConnectionToVizualizator(QString ip, int port);
+	ConnectionToVizualizator();
+	~ConnectionToVizualizator();
 
-    /// inits manager after moved to correct thread
-    void init();
+	/// inits manager after moved to correct thread
+	void init();
 
-    /// checks connection
-    bool isConnected() const;
+	/// checks connection
+	bool isConnected() const;
 
-    /// sets ip
-    void setIp(const QString &value);
+	/// sets ip
+	void setIp(const QString &value);
 
-    /// sets port
-    void setPort(const quint16 &value);
+	/// sets port
+	void setPort(const quint16 &value);
 
-    void onReadyRead();
+	void onReadyRead();
 
-    /// returns ip
-    QString getIp() const;
+	/// returns ip
+	QString getIp() const;
 
-    /// returns port
-    quint16 getPort() const;
+	/// returns port
+	quint16 getPort() const;
 
 public slots:
-    void connectToHost();
-    void write(const QString &);
+	void connectToHost();
+	void write(const QString &);
 
-    /// Disconnect
-    void reset();
+	/// Disconnect
+	void reset();
 
 signals:
-    void stopRequested();
-    void runRequested();
-    void restartRequested();
-    /// TODO description
-//    void stateChanged(QAbstractSocket::SocketState socketState);
+	void stopRequested();
+	void runRequested();
+	void restartRequested();
+	/// TODO description
+//	void stateChanged(QAbstractSocket::SocketState socketState);
 
-//    /// TODO description
-//    void dataWasWritten(int);
+//	/// TODO description
+//	void dataWasWritten(int);
 
-//    /// TODO description
-//    void connectionFailed();
+//	/// TODO description
+//	void connectionFailed();
 
 private:
-    QTcpSocket *socket;
-    QTimer *keepaliveTimer;
+	QTcpSocket *socket;
+	QTimer *keepaliveTimer;
 
-    QString Ip;
-    quint16 Port { 4444 };
-    QByteArray mBuffer;
+	QString Ip;
+	quint16 Port { 4444 };
+	QByteArray mBuffer;
 };
 
 

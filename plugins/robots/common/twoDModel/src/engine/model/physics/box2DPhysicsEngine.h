@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	 http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -45,7 +45,7 @@ namespace twoDModel {
 
 class Box2DPhysicsEngine : public PhysicsEngineBase
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
 	Box2DPhysicsEngine(const WorldModel &worldModel, const QList<RobotModel *> &robots);
 	~Box2DPhysicsEngine();
@@ -84,15 +84,13 @@ public slots:
 	void onRobotStartAngleChanged(const qreal newAngle, twoDModel::model::RobotModel *robot);
 	void onMouseReleased(const QPointF &newPos, qreal newAngle);
 	void onMousePressed();
-    void onRecoverRobotPosition(const QPointF &pos);
+	void onRecoverRobotPosition(const QPointF &pos);
 
-    signals:
-    void trajectoryPosOrAngleChanged(QString id, QPointF pos, qreal rotation);
-    void trajectoryItemDragged(QString id, QPointF pos, qreal rotation);
-
-    /// Emitted when program stops
-    void trajectorySave();
-    void sendNextFrame();
+	signals:
+	void trajectoryPosOrAngleChanged(QString id, QPointF pos, qreal rotation);
+	void trajectoryItemDragged(QString id, QPointF pos, qreal rotation);
+	void trajectorySave();
+	void sendNextFrame();
 
 protected:
 	void onPixelsInCmChanged(qreal value) override;
@@ -114,11 +112,11 @@ private:
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DResizableItems;  // Takes ownership on b2Body instances
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DDynamicItems;  // Doesn't take ownership
 	QMap<RobotModel *, QSet<twoDModel::view::SensorItem *>> mRobotSensors; // Doesn't take ownership
-    QList<parts::Box2DItem *> inMoveItems;
+	QList<parts::Box2DItem *> inMoveItems;
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
-    TrajectorySaver const *trajSaver;
+	TrajectorySaver const *trajSaver;
 };
 
 }

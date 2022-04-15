@@ -2,145 +2,129 @@
 #include <iostream>
 #include <fstream>
 #include <QFile>
-#include "plugins/robots/thirdparty/trikRuntime/trikRuntime/trikNetwork/include/trikNetwork/connection.h"
+#include "connectionToVizualizator.h"
+
+/// Saves trajectory like sequence of frames
 
 TrajectorySaver::TrajectorySaver(QObject *parent)
-    : QObject(parent) {}
+	: QObject(parent) {}
+
+void TrajectorySaver::saveBeepState(QString robotId, int time)
+{
+	stringstream value;
+	value << "beepState=" << time;
+	currStates.append(createState(robotId.toStdString(), value.str()));
+}
+
+void TrajectorySaver::saveMarkerState(QString robotId, QColor color)
+{
+	stringstream value;
+	value << "markerState=" << color.red() << " " << color.green() << " " << color.blue() << " " << color.alpha();
+	currStates.append(createState(robotId.toStdString(), value.str()));
+}
+
+void TrajectorySaver::saveItemPosOrAngle(QString id, QPointF pos, qreal rotation)
+{
+	addState(id, pos, rotation);
+	isPlaying = true;
+}
 
 QJsonObject TrajectorySaver::createState(string id, string stateStr)
 {
-    QJsonObject state;
-    state.insert("id", id.c_str());
-    state.insert("state", stateStr.c_str());
-    return state;
+	QJsonObject state;
+	state.insert("id", id.c_str());
+	state.insert("state", stateStr.c_str());
+	return state;
 }
 
-void TrajectorySaver::SaveBeepState(QString robotId, int time)
+void TrajectorySaver::onItemDragged(QString id, QPointF pos, qreal rotation)
 {
-    stringstream value;
-    value << "beepState=" << time;
-    currStates.append(createState(robotId.toStdString(), value.str()));
-}
-
-void TrajectorySaver::SaveMarkerState(QString robotId, QColor color)
-{
-    stringstream value;
-    value << "markerState=" << color.red() << " " << color.green() << " " << color.blue() << " " << color.alpha();
-//    movableObjStream[robotId].back().append(value.str());
-    currStates.append(createState(robotId.toStdString(), value.str()));
-}
-
-void TrajectorySaver::SaveItemPosOrAngle(QString id, QPointF pos, qreal rotation)
-{
-    addState(id, pos, rotation);
-    isPlaying = true;
-}
-
-void TrajectorySaver::OnItemDragged(QString id, QPointF pos, qreal rotation)
-{
-    addState(id, pos, rotation);
-    if (!isPlaying)
-    {
-        SendFrame();
-    }
+	addState(id, pos, rotation);
+	if (!isPlaying) {
+		sendFrame();
+	}
 }
 
 void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 {
-    stringstream value;
-    value << "pos=" << pos.x() << " " << -pos.y();
-    value << "|rot=" << rotation;
-    auto state = createState(id.toStdString(), value.str());
-    if (!currStates.contains(state)) {
-        currStates.append(state);
-    }
+	stringstream value;
+	value << "pos=" << pos.x() << " " << -pos.y();
+	value << "|rot=" << rotation;
+
+	auto state = createState(id.toStdString(), value.str());
+	if (!currStates.contains(state)) {
+		/// to avoid duplicates, it can be because onItemDragged calls when
+		///objects is moved by other object or by user
+		currStates.append(state);
+	}
 }
 
-void TrajectorySaver::SendFrame()
+void TrajectorySaver::sendFrame()
 {
-    if (sendData) {
-        auto frame = SaveFrame();
-        QJsonDocument doc;
-        doc.setObject(frame);
-        QString data (doc.toJson( QJsonDocument::Indented));
-        SendTrajectory(data);
-    }
+	if (sendData) {
+		auto frame = saveFrame();
+		QJsonDocument doc;
+		doc.setObject(frame);
+		QString data (doc.toJson( QJsonDocument::Indented));
+		sendTrajectory(data);
+	}
 }
 
-QJsonObject TrajectorySaver::SaveFrame()
+QJsonObject TrajectorySaver::saveFrame()
 {
-    QJsonObject frame;
-    frame.insert("frame", currStates);
-    frames.append(frame);
-    currStates = *new QJsonArray();
-    return frame;
+	QJsonObject frame;
+	frame.insert("frame", currStates);
+	frames.append(frame);
+	/// updating current states every frame
+	currStates = *new QJsonArray();
+	return frame;
 }
 
-QJsonObject TrajectorySaver::SaveFrames()
+void TrajectorySaver::saveToFile()
 {
-    QJsonObject root;
-//    QJsonArray frames_array;
-    //auto it = movableObjStream.begin();
-    //int len = it->second.size();
-//    for (qreal i = 0; i < len; ++i) {
-//        auto frame = SaveFrame();
-//        frames_array.append(frame);
-//        it = movableObjStream.begin();
-//    }
-    root.insert("frames", frames);
-    return root;
+	/// creating json document
+	QJsonDocument doc;
+	QJsonObject root;
+	root.insert("frames", frames);
+	doc.setObject(root);
+	QByteArray bytes = doc.toJson( QJsonDocument::Compact );
+
+	/// saving it to file
+	QFile file("trajectory.json");
+	if( file.open( QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate ) ) {
+		QTextStream iStream( &file );
+		iStream.setCodec( "utf-8" );
+		iStream << bytes;
+		file.close();
+	}
 }
 
-//frame1: { "ball1: ".."
-//}
-
-void TrajectorySaver::SaveToFile()
+void TrajectorySaver::sendTrajectory(QString data = nullptr)
 {
-    QJsonDocument doc;
+	if (connToVizualizator == nullptr) {
+		connToVizualizator = new ConnectionToVizualizator();
+		connToVizualizator->init();
+		connToVizualizator->setIp("10.0.5.2");
+		connToVizualizator->setPort(8080);
+		connToVizualizator->connectToHost();
+	} else if (!connToVizualizator->isConnected()) {
+		connToVizualizator->connectToHost();
+	}
 
-    auto frames = SaveFrames();
-    doc.setObject(frames);
-    QByteArray bytes = doc.toJson( QJsonDocument::Indented );
-    QFile file("trajectory.json");
-    if( file.open( QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate ) ) {
-        QTextStream iStream( &file );
-        iStream.setCodec( "utf-8" );
-        iStream << bytes;
-        file.close();
-    }
+	if (data != nullptr) {
+		connToVizualizator->write(data);
+	} else {
+		QFile file("trajectory.json");
+		if (file.open(QIODevice::ReadOnly)) {
+			QString fileData = file.readAll();
+			connToVizualizator->write(fileData);
+			file.close();
+		}
+		connToVizualizator->reset();
+	}
 }
 
-void TrajectorySaver::SendTrajectory(QString data = nullptr)
+void TrajectorySaver::onStopInterpretation()
 {
-    if (trajSender == nullptr) {
-        trajSender = new TrajectorySender();
-        trajSender->init();
-        trajSender->setIp("10.0.5.2");
-        trajSender->setPort(8080);
-        trajSender->connectToHost();
-    } else if (!trajSender->isConnected()) {
-        trajSender->connectToHost();
-    }
-
-    if (data != nullptr) {
-        trajSender->write(data);
-    } else {
-        QFile file("trajectory.json"); // 192.168.1.7 192.168.56.1 10.0.2.2:9000 10.10.10.72 192.168.56.105
-        if (file.open(QIODevice::ReadOnly)) {
-            QString fileData = file.readAll();
-            trajSender->write(fileData);
-            file.close();
-        }
-        trajSender->reset();
-    }
-}
-
-//void TrajectorySaver::OnStartInterpretation()
-//{
-//    isPlaying = true;
-//}
-
-void TrajectorySaver::OnStopInterpretation()
-{
-    isPlaying = false;
+	isPlaying = false;
 }

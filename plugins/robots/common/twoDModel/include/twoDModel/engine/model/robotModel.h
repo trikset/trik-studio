@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	 http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -78,7 +78,7 @@ public:
 	};
 
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
-            , const Settings &settings, QObject *parent = nullptr);
+			, const Settings &settings, QObject *parent = nullptr);
 
 	~RobotModel();
 
@@ -185,22 +185,22 @@ signals:
 	void playingSoundChanged(bool playing);
 
 	/// Emitted when left or right wheel was reconnected to another port.
-    void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
-    /// Emitted when robot starts or ends play beep sound
-    void trajectorySoundStateChanged(QString id, int time);
+	/// Emitted when robot starts or ends play beep sound
+	void trajectorySoundStateChanged(QString id, int time);
 
-    /// Emitted when robot starts or ends draw
-    void trajectoryMarkerColorChanged(QString id, QColor color);
+	/// Emitted when robot starts or ends draw
+	void trajectoryMarkerColorChanged(QString id, QColor color);
 
-    /// Emitted when robot position and/or rotation changed
-    void trajectoryPosOrAngleChanged(QString id, QPointF position, qreal rotation);
-    void trajectoryOnitemDragged(QString id, QPointF position, qreal rotation);
+	/// Emitted when robot position and/or rotation changed
+	void trajectoryPosOrAngleChanged(QString id, QPointF position, qreal rotation);
+	void trajectoryOnitemDragged(QString id, QPointF position, qreal rotation);
 
-    void trajectorySave();
+	void trajectorySave();
 
-//    void OnStartPlaying();
-    void OnStopPlaying();
+//	void OnStartPlaying();
+	void onStopPlaying();
 
 private:
 	QVector2D robotDirectionVector() const;
