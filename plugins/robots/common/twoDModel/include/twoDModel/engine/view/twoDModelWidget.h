@@ -82,7 +82,7 @@ public:
 	SensorItem *sensorItem(const kitBase::robotModel::PortInfo &port);
 	void setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible);
 
-	void loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo = false);
+	void loadXmls(const QDomDocument &model, bool withUndo = false);
 
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;

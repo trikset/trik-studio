@@ -16,6 +16,7 @@
 
 #include <qrkernel/settingsManager.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
+#include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
 #include <kitBase/interpreterControlInterface.h>
 
 #include "src/engine/constraints/constraintsChecker.h"
@@ -44,13 +45,15 @@ Model::~Model()
 {
 	delete mRealisticPhysicsEngine;
 	delete mSimplePhysicsEngine;
-	qDeleteAll(mRobotModels);
+	delete mRobotModel;
 }
 
 void Model::init(qReal::ErrorReporterInterface &errorReporter
-		, kitBase::InterpreterControlInterface &interpreterControl)
+		, kitBase::InterpreterControlInterface &interpreterControl
+		, qReal::LogicalModelAssistInterface &logicalModel)
 {
 	mErrorReporter = &errorReporter;
+	mLogicalModel = &logicalModel;
 	mWorldModel.init(errorReporter);
 	connect(&timeline(), &Timeline::started, this, [&]() { mStartTimestamp = timeline().timestamp(); });
 	mChecker.reset(new constraints::ConstraintsChecker(errorReporter, *this));
@@ -87,7 +90,11 @@ Timeline &Model::timeline()
 
 QList<RobotModel *> Model::robotModels() const
 {
-	return mRobotModels;
+	if (mRobotModel) {
+		return {mRobotModel};
+	} else {
+		return {};
+	}
 }
 
 Settings &Model::settings()
@@ -109,11 +116,19 @@ QDomDocument Model::serialize() const
 
 	mWorldModel.serializeWorld(root);
 
-	QDomElement robots = save.createElement("robots");
-	for (RobotModel *robotModel : mRobotModels) {
-		robotModel->serialize(robots);
+	QDomElement robots;
+	const QString xml = mLogicalModel->logicalRepoApi().metaInformation("worldModel").toString();
+	QDomDocument worldModel;
+	if (!xml.isEmpty() && worldModel.setContent(xml)) {
+		robots = worldModel.firstChildElement("root").firstChildElement("robots");
 	}
-
+	else {
+		robots = save.createElement("robots");
+	}
+	if (mRobotModel) {
+		mRobotModel->serialize(robots);
+		mRobotModel->serializeWorldModel(root);
+	}
 	root.appendChild(robots);
 
 	mSettings.serialize(root);
@@ -122,136 +137,77 @@ QDomDocument Model::serialize() const
 	return save;
 }
 
-void Model::deserialize(const QDomDocument &worldModel, const QDomDocument &blobs)
+void Model::deserialize(const QDomDocument &model)
 {
-	const auto &worldList = worldModel.elementsByTagName("world");
-	const auto &robotsList = worldModel.elementsByTagName("robots");
-	const auto &constraints = worldModel.documentElement().firstChildElement("constraints");
-	const auto &settings = worldModel.documentElement().firstChildElement("settings");
-
+	const auto &settings = model.documentElement().firstChildElement("settings");
 	mSettings.deserialize(settings);
 
 	if (mChecker) {
+		const auto &constraints = model.documentElement().firstChildElement("constraints");
 		/// @todo: should we handle if it returned false?
 		mChecker->parseConstraints(constraints);
 	}
 
-	if (worldList.count() == 0 && !mRobotModels.empty()) {
-		for (auto *model : mRobotModels) {
-			QSizeF modelSize = model->info().size() / 2;
-			model->startPositionMarker()->setPos(modelSize.height(), modelSize.width());
-			model->startPositionMarker()->setRotation(0);
-		}
-	}
+	const auto &worldList = model.elementsByTagName("world");
+	const auto &world = worldList.isEmpty() ? QDomElement() : worldList.at(0).toElement();
+	const auto &blobsList = model.elementsByTagName("blobs");
+	mWorldModel.deserialize(world, blobsList.isEmpty() ? QDomElement() : blobsList.at(0).toElement());
 
-	if (worldList.count() != 1) {
-		return;
-	}
-
-	mWorldModel.deserialize(worldList.at(0).toElement(), blobs.documentElement().firstChildElement("blobs"));
-
-	if (robotsList.count() != 1) {
-		// need for backward compatibility with old format
-		const QDomNodeList robotList = worldModel.elementsByTagName("robot");
-
-		if (robotList.count() != 1) {
-			/// @todo Report error
-			return;
-		}
-
-		mRobotModels.at(0)->deserialize(robotList.at(0).toElement());
-		mRobotModels.at(0)->configuration().deserialize(robotList.at(0).toElement());
-
-		return;
-	}
-
-	QMutableListIterator<RobotModel *> iterator(mRobotModels);
-
-	const bool oneRobot = robotsList.at(0).toElement().elementsByTagName("robot").size() == 1
-			&& mRobotModels.size() == 1;
-
-	while (iterator.hasNext()) {
-		bool exist = false;
-		RobotModel *robotModel = iterator.next();
-
-		for (QDomElement element = robotsList.at(0).firstChildElement("robot"); !element.isNull();
-				element = element.nextSiblingElement("robot")) {
-			if (robotModel->info().robotId() == element.toElement().attribute("id")) {
-				robotModel->deserialize(element);
-				robotModel->configuration().deserialize(element);
-				exist = true;
-				robotsList.at(0).removeChild(static_cast<QDomNode>(element));
-				break;
-			}
-		}
-
-		if (!exist && !oneRobot) {
-			iterator.remove();
-			emit robotRemoved(robotModel);
-			delete robotModel;
-		}
-	}
-
-	if (oneRobot && !robotsList.at(0).firstChildElement("robot").isNull()) {
-		QDomElement element = robotsList.at(0).firstChildElement("robot");
-		mRobotModels.at(0)->deserialize(element);
+	if (!mRobotModel) return;
+	const auto &robotsList = model.elementsByTagName("robots");
+	if (robotsList.isEmpty()) {
+		mRobotModel->deserializeWorldModel(world);
+		mRobotModel->deserialize(world.firstChildElement("robot"));
 	} else {
-		for (QDomElement element = robotsList.at(0).firstChildElement("robot"); !element.isNull();
-				element = element.nextSiblingElement("robot")) {
-			twoDModel::robotModel::NullTwoDRobotModel *robotModel = new twoDModel::robotModel::NullTwoDRobotModel(
-					element.attribute("id"));
-			addRobotModel(*robotModel);
-			mRobotModels.last()->deserialize(element);
+		bool loadFromWorld = !world.firstChildElement("robot").isNull();
+		if (loadFromWorld) mRobotModel->deserializeWorldModel(world);
+		for (QDomElement element = robotsList.isEmpty() ? QDomElement()
+				: robotsList.at(0).firstChildElement("robot"); !element.isNull()
+				; element = element.nextSiblingElement("robot")) {
+			if (mRobotModel->info().robotId() == element.toElement().attribute("id")) {
+				if (!loadFromWorld) mRobotModel->deserializeWorldModel(element.parentNode().toElement());
+				mRobotModel->deserialize(element);
+				return;
+			}
 		}
 	}
 }
 
 void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF &pos)
 {
-	RobotModel *robot = new RobotModel(robotModel, mSettings, this);
-	robot->setPosition(pos);
-
-	connect(&mTimeline, &Timeline::started, robot, &RobotModel::reinit);
-	connect(&mTimeline, &Timeline::stopped, robot, &RobotModel::stopRobot);
-	connect(&mTimeline, &Timeline::stopped, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::clearForcesAndStop);
-
-	connect(&mTimeline, &Timeline::tick, robot, &RobotModel::recalculateParams);
-	connect(&mTimeline, &Timeline::nextFrame, robot, &RobotModel::nextFragment);
-	connect(&mTimeline, &Timeline::nextFrame
-			, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame, Qt::UniqueConnection);
-
-	robot->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
-
-	mRobotModels.append(robot);
-
-	emit robotAdded(robot);
-}
-
-void Model::removeRobotModel(const twoDModel::robotModel::TwoDRobotModel &robotModel)
-{
-	const int index = findModel(robotModel);
-
-	if (index == -1) {
+	if (mRobotModel) {
+		mErrorReporter->addCritical(tr("This robot model already exists"));
 		return;
 	}
 
-	RobotModel *robot = mRobotModels.at(index);
-	mRobotModels.removeOne(mRobotModels.at(index));
-	emit robotRemoved(robot);
-	delete robot;
+	mRobotModel = new RobotModel(robotModel, mSettings, this);
+	mRobotModel->setPosition(pos);
+
+	connect(&mTimeline, &Timeline::started, mRobotModel, &RobotModel::reinit);
+	connect(&mTimeline, &Timeline::stopped, mRobotModel, &RobotModel::stopRobot);
+
+	connect(&mTimeline, &Timeline::tick, mRobotModel, &RobotModel::recalculateParams);
+	connect(&mTimeline, &Timeline::nextFrame, mRobotModel, &RobotModel::nextFragment);
+
+	mRobotModel->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
+
+	emit robotAdded(mRobotModel);
 }
 
-void Model::replaceRobotModel(const twoDModel::robotModel::TwoDRobotModel &oldModel
-		, twoDModel::robotModel::TwoDRobotModel &newModel)
+void Model::removeRobotModel()
 {
-	const int index = findModel(oldModel);
-
-	if (index == -1) {
+	if (!mRobotModel) {
 		return;
 	}
 
-	const QPointF pos = mRobotModels.at(index)->position();
-	removeRobotModel(oldModel);
+	emit robotRemoved(mRobotModel);
+	delete mRobotModel;
+}
+
+void Model::replaceRobotModel(twoDModel::robotModel::TwoDRobotModel &newModel)
+{
+	const QPointF pos = mRobotModel ? mRobotModel->position() : QPointF();
+	removeRobotModel();
 	addRobotModel(newModel, pos);
 }
 
@@ -268,33 +224,21 @@ void Model::setConstraintsEnabled(bool enabled)
 void Model::resetPhysics()
 {
 	auto engine = mSettings.realisticPhysics() ? mRealisticPhysicsEngine : mSimplePhysicsEngine;
-	for (RobotModel * const robot : mRobotModels) {
-		robot->setPhysicalEngine(*engine);
-	}
+	if (mRobotModel) mRobotModel->setPhysicalEngine(*engine);
 
 	engine->wakeUp();
 }
 
-int Model::findModel(const twoDModel::robotModel::TwoDRobotModel &robotModel)
-{
-	for (int i = 0; i < mRobotModels.count(); i++) {
-		if (mRobotModels.at(i)->info().robotId() == robotModel.robotId()) {
-			return i;
-		}
-	}
-
-	return -1;
-}
-
 void Model::initPhysics()
 {
-	mRealisticPhysicsEngine = new physics::Box2DPhysicsEngine(mWorldModel, mRobotModels);
-	mSimplePhysicsEngine = new physics::SimplePhysicsEngine(mWorldModel, mRobotModels);
+	mRealisticPhysicsEngine = new physics::Box2DPhysicsEngine(mWorldModel, robotModels());
+	mSimplePhysicsEngine = new physics::SimplePhysicsEngine(mWorldModel, robotModels());
 	connect(this, &model::Model::robotAdded, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 	connect(this, &model::Model::robotAdded, mSimplePhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mSimplePhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 
+	connect(&mTimeline, &Timeline::stopped, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::clearForcesAndStop);
 	connect(&mTimeline, &Timeline::tick, this, &Model::recalculatePhysicsParams);
 	connect(&mTimeline, &Timeline::nextFrame
 			, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame, Qt::UniqueConnection);

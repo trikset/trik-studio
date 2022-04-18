@@ -523,14 +523,13 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 	}
 
-	// TODO: Split saves and remove temporary hack
-	auto saveRobot = save.firstChildElement("root").firstChildElement("robots").firstChildElement("robot");
-	auto currentRobot = generateWorldModelXml().firstChildElement("root")
-			.firstChildElement("robots").firstChildElement("robot");
-
-	saveRobot.replaceChild(currentRobot.firstChildElement("sensors"), saveRobot.firstChildElement("sensors"));
-	saveRobot.replaceChild(currentRobot.firstChildElement("wheels"), saveRobot.firstChildElement("wheels"));
-	saveRobot.setAttribute("id", currentRobot.attribute("id"));
+	auto newWorld = save.firstChildElement("root");
+	auto oldWorld = generateWorldModelXml().firstChildElement("root");
+	if (newWorld.firstChildElement("robots").isNull()) {
+		newWorld.appendChild(oldWorld.firstChildElement("robots"));
+	} else {
+		newWorld.replaceChild(oldWorld.firstChildElement("robots"), newWorld.firstChildElement("robots"));
+	}
 
 	auto command = new commands::LoadWorldCommand(*this, save);
 	if (mController) {
@@ -685,13 +684,13 @@ QDomDocument TwoDModelWidget::generateBlobsXml() const
 
 QDomDocument TwoDModelWidget::generateWorldModelWithBlobsXml() const
 {
-	QDomDocument wordModelXml = generateWorldModelXml();
+	QDomDocument worldModelXml = generateWorldModelXml();
 	QDomDocument blobsXml = generateBlobsXml();
-	wordModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
-	return wordModelXml;
+	worldModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
+	return worldModelXml;
 }
 
-void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo)
+void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
 {
 	if (mController && !withUndo) {
 		// Clearing 2D model undo stack...
@@ -700,7 +699,7 @@ void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocumen
 	}
 
 	mScene->clearScene(true, Reason::loading);
-	mModel.deserialize(worldModel, blobs);
+	mModel.deserialize(model);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
 }
