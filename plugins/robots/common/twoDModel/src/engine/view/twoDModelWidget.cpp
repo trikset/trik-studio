@@ -78,6 +78,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mCurrentSpeed(defaultSpeedFactorIndex)
+	, mConnToVizualizator(new ConnectionToVizualizator())
 {
 	setWindowIcon(QIcon(":/icons/2d-model.svg"));
 
@@ -129,6 +130,17 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 		// Setting value in percents
 		mSpeedPopup->setSpeed(100 / speedFactors[defaultSpeedFactorIndex] * value);
 	});
+
+
+	mConnToVizualizator->setPort(9000);
+	mConnToVizualizator->init();
+	mConnToVizualizator->connectToHost();
+	connect(mConnToVizualizator, &ConnectionToVizualizator::stopRequested, this, &TwoDModelWidget::stopButtonPressed);
+	connect(mConnToVizualizator, &ConnectionToVizualizator::runRequested, this, &TwoDModelWidget::runButtonPressed);
+	connect(mConnToVizualizator, &ConnectionToVizualizator::restartRequested, this, &TwoDModelWidget::restartRequested);
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVizualizator, &ConnectionToVizualizator::startPressed);
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVizualizator, &ConnectionToVizualizator::stopPressed);
+
 	setRunStopButtonsVisibility();
 
 	mUi->palette->unselect();
@@ -341,6 +353,7 @@ void TwoDModelWidget::connectUiButtons()
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
 
 	connect(mUi->trainingModeButton, &QAbstractButton::toggled, this, &TwoDModelWidget::trainingModeChanged);
+
 	mUi->trainingModeButton->setChecked(false);
 
 	initRunStopButtons();
@@ -400,6 +413,7 @@ void TwoDModelWidget::returnToStartMarker()
 		ball->returnToStartPosition();
 	}
 	saveWorldModelToRepo();
+	mConnToVizualizator->restartPressed();
 }
 
 void TwoDModelWidget::trainingModeChanged(bool enabled)

@@ -368,10 +368,9 @@ void Box2DPhysicsEngine::nextFrame()
 			QPointF scenePos = positionToScene(mBox2DDynamicItems[item]->getPosition());
 			item->setPos(scenePos - item->boundingRect().center());
 			item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
-
-			auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
-			emit trajectoryPosOrAngleChanged(abstractItem->id(), abstractItem->pos(), abstractItem->rotation());
 		}
+		auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
+		emit trajectoryPosOrAngleChanged(abstractItem->id(), abstractItem->pos(), abstractItem->rotation());
 	}
 	emit sendNextFrame();
 }

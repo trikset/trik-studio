@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <QFile>
+#include <QtGlobal>
 #include "connectionToVizualizator.h"
 
 /// Saves trajectory like sequence of frames
@@ -52,9 +53,10 @@ void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 	value << "|rot=" << rotation;
 
 	auto state = createState(id.toStdString(), value.str());
-	if (!currStates.contains(state)) {
+	if (!currStates.contains(QJsonValue(state))) {
+		//qDebug(qUtf8Printable(id));
 		/// to avoid duplicates, it can be because onItemDragged calls when
-		///objects is moved by other object or by user
+		/// objects is moved by other object or by user
 		currStates.append(state);
 	}
 }
@@ -65,8 +67,12 @@ void TrajectorySaver::sendFrame()
 		auto frame = saveFrame();
 		QJsonDocument doc;
 		doc.setObject(frame);
-		QString data (doc.toJson( QJsonDocument::Indented));
-		sendTrajectory(data);
+		QString data (doc.toJson( QJsonDocument::Compact));
+		try {
+			//qDebug(qPrintable(doc.toJson()));
+			sendTrajectory(data);
+		} catch (exception e) {
+			}
 	}
 }
 
@@ -82,6 +88,8 @@ QJsonObject TrajectorySaver::saveFrame()
 
 void TrajectorySaver::saveToFile()
 {
+	sendFrame();
+
 	/// creating json document
 	QJsonDocument doc;
 	QJsonObject root;
@@ -104,7 +112,6 @@ void TrajectorySaver::sendTrajectory(QString data = nullptr)
 	if (connToVizualizator == nullptr) {
 		connToVizualizator = new ConnectionToVizualizator();
 		connToVizualizator->init();
-		connToVizualizator->setIp("10.0.5.2");
 		connToVizualizator->setPort(8080);
 		connToVizualizator->connectToHost();
 	} else if (!connToVizualizator->isConnected()) {
@@ -120,7 +127,7 @@ void TrajectorySaver::sendTrajectory(QString data = nullptr)
 			connToVizualizator->write(fileData);
 			file.close();
 		}
-		connToVizualizator->reset();
+		//connToVizualizator->reset();
 	}
 }
 

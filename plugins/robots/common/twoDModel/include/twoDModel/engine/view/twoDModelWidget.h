@@ -28,6 +28,7 @@
 #include "twoDModel/engine/twoDModelDisplayWidget.h"
 
 #include "twoDModel/twoDModelDeclSpec.h"
+#include "plugins/robots/common/twoDModel/src/engine/trajectory/connectionToVizualizator.h"
 
 class QComboBox;
 class QPushButton;
@@ -86,6 +87,8 @@ public:
 
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;
+
+	ConnectionToVizualizator *mConnToVizualizator;
 
 	/// Passes into view a reference to controller object that will execute commands.
 	void setController(qReal::ControllerInterface &controller);

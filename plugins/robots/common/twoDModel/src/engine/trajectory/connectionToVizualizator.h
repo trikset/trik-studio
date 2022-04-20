@@ -47,6 +47,11 @@ public slots:
 	/// Disconnect
 	void reset();
 
+
+	void stopPressed();
+	void startPressed();
+	void restartPressed();
+
 signals:
 	void stopRequested();
 	void runRequested();
@@ -64,8 +69,8 @@ private:
 	QTcpSocket *socket;
 	QTimer *keepaliveTimer;
 
-	QString Ip;
-	quint16 Port { 4444 };
+	QString Ip {"10.0.5.2"};
+	quint16 Port { 8080 };
 	QByteArray mBuffer;
 };
 

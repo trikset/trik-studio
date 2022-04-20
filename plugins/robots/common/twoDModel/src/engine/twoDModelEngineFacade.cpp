@@ -32,16 +32,12 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView))
-	, mConnToVizualizator(new ConnectionToVizualizator())
 {
 	mModel->addRobotModel(robotModel);
 	connect(mView, &view::TwoDModelWidget::runButtonPressed, this, &TwoDModelEngineFacade::runButtonPressed);
 	connect(mView, &view::TwoDModelWidget::stopButtonPressed, this, &TwoDModelEngineFacade::stopButtonPressed);
 	connect(mView, &view::TwoDModelWidget::widgetClosed, this, &TwoDModelEngineFacade::stopButtonPressed);
 	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
-	connect(mConnToVizualizator, &ConnectionToVizualizator::stopRequested, mView, &view::TwoDModelWidget::stopButtonPressed);
-	connect(mConnToVizualizator, &ConnectionToVizualizator::runRequested, mView, &view::TwoDModelWidget::runButtonPressed);
-	connect(mConnToVizualizator, &ConnectionToVizualizator::restartRequested, mView, &view::TwoDModelWidget::restartRequested);
 }
 
 TwoDModelEngineFacade::~TwoDModelEngineFacade(){
@@ -93,9 +89,6 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		loadReadOnlyFlags(logicalModel);
 		QLOG_DEBUG() << "Reloading 2D world done";
 
-		mConnToVizualizator->setIp("10.0.5.2");
-		mConnToVizualizator->setPort(9000);
-		mConnToVizualizator->init();
 	};
 
 	const auto connectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {
@@ -192,7 +185,7 @@ void TwoDModelEngineFacade::onStartInterpretation()
 		mModel->errorReporter()->addWarning(tr("Realistic physics' must be turned on to enjoy skittles and balls"));
 	}
 	mModel->timeline().start();
-	mConnToVizualizator->connectToHost();
+	mView->mConnToVizualizator->connectToHost();
 }
 
 void TwoDModelEngineFacade::onStopInterpretation(qReal::interpretation::StopReason reason)

@@ -409,7 +409,6 @@ void RobotModel::setRotation(qreal angle)
 		mAngle = angle;
 		emit rotationChanged(angle);
 		emit trajectoryOnitemDragged(mRobotModel.robotId(), mPos, mAngle);
-//		qDebug(mIsOnTheGround ? "true" : "false");
 	}
 }
 

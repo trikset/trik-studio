@@ -55,6 +55,21 @@ void ConnectionToVizualizator::onReadyRead()
 	}
 }
 
+void ConnectionToVizualizator::stopPressed()
+{
+	write("Stop");
+}
+
+void ConnectionToVizualizator::startPressed()
+{
+	write("Run");
+}
+
+void ConnectionToVizualizator::restartPressed()
+{
+	write("Restart");
+}
+
 void ConnectionToVizualizator::reset()
 {
 	if (!keepaliveTimer->isActive())

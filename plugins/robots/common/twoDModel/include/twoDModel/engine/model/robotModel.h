@@ -198,8 +198,6 @@ signals:
 	void trajectoryOnitemDragged(QString id, QPointF position, qreal rotation);
 
 	void trajectorySave();
-
-//	void OnStartPlaying();
 	void onStopPlaying();
 
 private:
