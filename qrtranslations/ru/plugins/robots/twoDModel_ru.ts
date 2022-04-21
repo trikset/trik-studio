@@ -553,7 +553,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+184"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+187"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -637,7 +637,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+58"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+61"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
@@ -645,6 +645,11 @@
         <location line="+16"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
+    </message>
+    <message>
+        <location line="+102"/>
+        <source>This robot model already exists</source>
+        <translation>Эта модель робота уже существует</translation>
     </message>
 </context>
 <context>
@@ -1094,7 +1099,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+316"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
