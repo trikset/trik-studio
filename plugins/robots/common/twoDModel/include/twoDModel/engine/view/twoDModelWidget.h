@@ -88,8 +88,6 @@ public:
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;
 
-	ConnectionToVizualizator *mConnToVizualizator;
-
 	/// Passes into view a reference to controller object that will execute commands.
 	void setController(qReal::ControllerInterface &controller);
 
@@ -111,6 +109,7 @@ public:
 	QDomDocument generateWorldModelWithBlobsXml() const;
 	QDomDocument generateWorldModelXml() const;
 	QDomDocument generateBlobsXml() const;
+	ConnectionToVizualizator *mConnToVizualizator;
 
 public slots:
 	void zoomIn() override;

@@ -72,13 +72,13 @@ const int defaultSpeedFactorIndex = 3;
 
 TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	: QWidget(parent)
+	, mConnToVizualizator(new ConnectionToVizualizator())
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
 	, mModel(model)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mCurrentSpeed(defaultSpeedFactorIndex)
-	, mConnToVizualizator(new ConnectionToVizualizator())
 {
 	setWindowIcon(QIcon(":/icons/2d-model.svg"));
 

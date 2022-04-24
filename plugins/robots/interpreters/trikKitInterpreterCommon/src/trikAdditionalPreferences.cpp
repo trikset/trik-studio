@@ -74,6 +74,8 @@ void TrikAdditionalPreferences::save()
 	SettingsManager::setValue("TrikWebCameraRealName", mUi->cameraNameLineEdit->text());
 	SettingsManager::setValue("TRIK2DMailbox", mUi->mailboxCheckBox->isChecked());
 	SettingsManager::setValue("TRIK2DHullNumber", mUi->mailboxHullNumber->text());
+	SettingsManager::setValue("UnityTcpServer", mUi->unityTcpServerLineEdit->currentText());
+	SettingsManager::setValue("UnitySendData", mUi->unitySendDataCheckBox->isChecked());
 	mUi->robotImagePicker->save();
 
 	if (mailboxSavedState != mUi->mailboxCheckBox->isChecked()) {
@@ -95,6 +97,10 @@ void TrikAdditionalPreferences::restoreSettings()
 	mUi->simulatedCameraFrame->setVisible(not mUi->realCameraCheckBox->isChecked());
 	mUi->realCameraFrame->setVisible(mUi->realCameraCheckBox->isChecked());
 	mUi->mailboxCheckBox->setChecked(SettingsManager::value("TRIK2DMailbox").toBool());
+	const auto &unityAddr = SettingsManager::value("UnityTcpServer").toString();
+	mUi->unitySendDataCheckBox->setChecked(SettingsManager::value("UnitySendData").toBool());
+	mUi->unityTcpServerLineEdit->insertItem(0, unityAddr);
+	mUi->unityTcpServerLineEdit->setCurrentText(unityAddr);
 	mailboxSavedState = mUi->mailboxCheckBox->isChecked();
 	mUi->robotImagePicker->restore();
 }

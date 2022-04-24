@@ -1,12 +1,31 @@
 #include <QEventLoop>
 #include <QtNetwork/QNetworkProxy>
 #include "connectionToVizualizator.h"
+#include <qrkernel/settingsManager.h>
+#include <qrkernel/settingsListener.h>
 
 ConnectionToVizualizator::ConnectionToVizualizator()
 //ConnectionToVizualizator::ConnectionToVizualizator(QString ip, int port)
 //	: Ip(ip)
 //	, Port(port)
 {
+	setIp(qReal::SettingsManager::value("UnityTcpServer").toString());
+	sendData = qReal::SettingsManager::value("UnitySendData").toBool();
+	qReal::SettingsListener::listen("UnitySendData", [this](bool send){
+		sendData = send;
+//		if (!sendData) {
+//			disconnectFromHost();
+//		}
+//		else {
+//			connectToHost();
+//		}
+	}, this);
+	qReal::SettingsListener::listen("UnityTcpServer", [this](){
+		setIp(qReal::SettingsManager::value(("UnityTcpServer")).toString());
+		if (sendData){
+			connectToHost();
+		}
+	}, this);
 }
 
 ConnectionToVizualizator::~ConnectionToVizualizator()
@@ -20,12 +39,8 @@ void ConnectionToVizualizator::init()
 {
 	keepaliveTimer = new QTimer();
 	socket = new QTcpSocket();
-	/// passing this to QTcpSocket allows `socket` to be moved
-	/// to another thread with the parent
-	/// when ConnectionToVizualizator.moveToThread() is called
 	qRegisterMetaType<QAbstractSocket::SocketState>();
-//	connect(socket, &QTcpSocket::stateChanged, this, &ConnectionToVizualizator::stateChanged);
-	connect(keepaliveTimer, &QTimer::timeout, this, [this]() { write("keepalive 4000\n"); } );
+	connect(keepaliveTimer, &QTimer::timeout, this, [this]() { write("keepalive \n"); } );
 	connect(socket, &QTcpSocket::readyRead, this, &ConnectionToVizualizator::onReadyRead);
 }
 
@@ -36,8 +51,10 @@ bool ConnectionToVizualizator::isConnected() const
 
 void ConnectionToVizualizator::write(const QString &data)
 {
-	socket->write(data.toLatin1().data());
-//	emit dataWasWritten(static_cast<int>(result));
+	if (sendData)
+	{
+		socket->write(data.toLatin1().data());
+	}
 }
 
 void ConnectionToVizualizator::onReadyRead()
@@ -76,7 +93,6 @@ void ConnectionToVizualizator::reset()
 		return;
 	keepaliveTimer->stop();
 	socket->disconnectFromHost();
-//	emit dataWasWritten(-1); // simulate disconnect
 }
 
 quint16 ConnectionToVizualizator::getPort() const
@@ -101,23 +117,40 @@ void ConnectionToVizualizator::setIp(const QString &value)
 
 void ConnectionToVizualizator::connectToHost()
 {
-	reset();
-	constexpr auto timeout = 3 * 1000 * 10;
-	QEventLoop loop;
-	QTimer::singleShot(timeout, &loop, &QEventLoop::quit);
-	connect(socket, &QTcpSocket::connected, &loop, &QEventLoop::quit);
-	connect(socket
-			, static_cast<void(QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error)
-			, &loop
-			, [&loop](QAbstractSocket::SocketError) { loop.quit(); });
-	socket->setProxy(QNetworkProxy::NoProxy);
-	socket->connectToHost(Ip, Port);
-	loop.exec();
+	if (sendData)
+	{
+		reset();
+		constexpr auto timeout = 3 * 1000;
+		QEventLoop loop;
+		QTimer::singleShot(timeout, &loop, &QEventLoop::quit);
+		connect(socket, &QTcpSocket::connected, &loop, &QEventLoop::quit);
+		connect(socket
+				, static_cast<void(QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error)
+				, &loop
+				, [&loop](QAbstractSocket::SocketError) { loop.quit(); });
+		socket->setProxy(QNetworkProxy::NoProxy);
+		socket->connectToHost(Ip, Port);
+		loop.exec();
 
-	if (socket->state() == QTcpSocket::ConnectedState) {
-		keepaliveTimer->start(3000 * 10);
-	} else {
-		socket->abort();
-//		emit connectionFailed();
+		if (socket->state() == QTcpSocket::ConnectedState) {
+			keepaliveTimer->start(3000);
+		} else {
+			socket->abort();
+		}
 	}
+}
+
+void ConnectionToVizualizator::disconnectFromHost()
+{
+	if (isConnected()) {
+		socket->disconnectFromHost();
+		if (socket->state() != QAbstractSocket::UnconnectedState) {
+			socket->waitForDisconnected(3000);
+		}
+	}
+}
+
+bool ConnectionToVizualizator::isSendingData()
+{
+	return sendData;
 }

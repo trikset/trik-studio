@@ -5,10 +5,13 @@
 #include <QtGlobal>
 #include "connectionToVizualizator.h"
 
-/// Saves trajectory like sequence of frames
-
 TrajectorySaver::TrajectorySaver(QObject *parent)
-	: QObject(parent) {}
+	: QObject(parent)
+{
+	connToVizualizator = new ConnectionToVizualizator();
+	connToVizualizator->setPort(8080);
+	connToVizualizator->init();
+}
 
 void TrajectorySaver::saveBeepState(QString robotId, int time)
 {
@@ -30,14 +33,6 @@ void TrajectorySaver::saveItemPosOrAngle(QString id, QPointF pos, qreal rotation
 	isPlaying = true;
 }
 
-QJsonObject TrajectorySaver::createState(string id, string stateStr)
-{
-	QJsonObject state;
-	state.insert("id", id.c_str());
-	state.insert("state", stateStr.c_str());
-	return state;
-}
-
 void TrajectorySaver::onItemDragged(QString id, QPointF pos, qreal rotation)
 {
 	addState(id, pos, rotation);
@@ -46,6 +41,7 @@ void TrajectorySaver::onItemDragged(QString id, QPointF pos, qreal rotation)
 	}
 }
 
+/// Syntactic sugar for onItemDragged and saveItemPosOrState
 void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 {
 	stringstream value;
@@ -61,21 +57,30 @@ void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 	}
 }
 
+QJsonObject TrajectorySaver::createState(string id, string stateStr)
+{
+	QJsonObject state;
+	state.insert("id", id.c_str());
+	state.insert("state", stateStr.c_str());
+	return state;
+}
+
 void TrajectorySaver::sendFrame()
 {
-	if (sendData) {
+	if (connToVizualizator->isSendingData())
+	{
 		auto frame = saveFrame();
 		QJsonDocument doc;
 		doc.setObject(frame);
 		QString data (doc.toJson( QJsonDocument::Compact));
+
 		try {
-			//qDebug(qPrintable(doc.toJson()));
 			sendTrajectory(data);
-		} catch (exception e) {
-			}
+		} catch (exception e) {}
 	}
 }
 
+/// Appends current frame to all frames
 QJsonObject TrajectorySaver::saveFrame()
 {
 	QJsonObject frame;
@@ -107,17 +112,24 @@ void TrajectorySaver::saveToFile()
 	}
 }
 
-void TrajectorySaver::sendTrajectory(QString data = nullptr)
+void TrajectorySaver::reinitConnection()
 {
 	if (connToVizualizator == nullptr) {
 		connToVizualizator = new ConnectionToVizualizator();
-		connToVizualizator->init();
 		connToVizualizator->setPort(8080);
-		connToVizualizator->connectToHost();
-	} else if (!connToVizualizator->isConnected()) {
-		connToVizualizator->connectToHost();
+		connToVizualizator->init();
+	}
+	connToVizualizator->connectToHost();
+//	qDebug(qPrintable(connToVizualizator->getIp()));
+}
+
+void TrajectorySaver::sendTrajectory(QString data = nullptr)
+{
+	if (connToVizualizator == nullptr || !connToVizualizator->isConnected()) {
+		reinitConnection();
 	}
 
+//	qDebug(qPrintable(data));
 	if (data != nullptr) {
 		connToVizualizator->write(data);
 	} else {
@@ -127,7 +139,6 @@ void TrajectorySaver::sendTrajectory(QString data = nullptr)
 			connToVizualizator->write(fileData);
 			file.close();
 		}
-		//connToVizualizator->reset();
 	}
 }
 

@@ -34,6 +34,8 @@ public:
 
 	void onReadyRead();
 
+	bool isSendingData();
+
 	/// returns ip
 	QString getIp() const;
 
@@ -42,6 +44,7 @@ public:
 
 public slots:
 	void connectToHost();
+	void disconnectFromHost();
 	void write(const QString &);
 
 	/// Disconnect
@@ -72,6 +75,7 @@ private:
 	QString Ip {"10.0.5.2"};
 	quint16 Port { 8080 };
 	QByteArray mBuffer;
+	bool sendData = true;
 };
 
 
