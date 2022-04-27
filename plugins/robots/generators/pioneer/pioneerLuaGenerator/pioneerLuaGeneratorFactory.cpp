@@ -28,6 +28,11 @@
 #include "simpleGenerators/goToPointGenerator.h"
 #include "simpleGenerators/goToGPSPointGenerator.h"
 #include "simpleGenerators/pioneerGetLPSPosition.h"
+#include "simpleGenerators/pioneerGetLPSVelocity.h"
+#include "simpleGenerators/pioneerGetLPSYaw.h"
+#include "simpleGenerators/pioneerGetOrientation.h"
+#include "simpleGenerators/pioneerGetAccel.h"
+#include "simpleGenerators/pioneerGetGyro.h"
 #include "simpleGenerators/initialNodeGenerator.h"
 #include "simpleGenerators/labelGenerator.h"
 #include "simpleGenerators/pioneerMagnetGenerator.h"
@@ -37,6 +42,9 @@
 #include "simpleGenerators/pioneerYawGenerator.h"
 #include "simpleGenerators/randomInitGenerator.h"
 #include "simpleGenerators/pioneerReadRangeSensor.h"
+#include "simpleGenerators/pioneerGPIOInit.h"
+#include "simpleGenerators/pioneerSetGPIO.h"
+#include "simpleGenerators/pioneerReadGPIO.h"
 
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
@@ -76,6 +84,22 @@ generatorBase::simple::AbstractSimpleGenerator *PioneerLuaGeneratorFactory::simp
 		return new GoToGPSPointGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "PioneerGetLPSPosition") {
 		return new PioneerGetLPSPosition(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerGetLPSVelocity") {
+		return new PioneerGetLPSVelocity(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerGetLPSYaw") {
+		return new PioneerGetLPSYaw(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerGetOrientation") {
+		return new PioneerGetOrientation(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerGetAccel") {
+		return new PioneerGetAccel(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerGetGyro") {
+		return new PioneerGetGyro(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerGPIOInit") {
+		return new PioneerGPIOInit(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerSetGPIO") {
+		return new PioneerSetGPIO(mRepo, customizer, id, this);
+	} else if (elementType == "PioneerReadGPIO") {
+		return new PioneerReadGPIO(mRepo, customizer, id, this);
 	} else if (elementType == "PioneerMagnet") {
 		return new PioneerMagnetGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "PioneerPrint") {

@@ -5,6 +5,21 @@
 
 	<diagram name="RobotsDiagram">
 
+		<nonGraphicTypes>
+			<enum name="GPIOPort">
+				<value name="A" displayedName="A"/>
+				<value name="B" displayedName="B"/>
+				<value name="C" displayedName="C"/>
+				<value name="D" displayedName="D"/>
+				<value name="E" displayedName="E"/>
+			</enum>
+			<enum name="GPIOMode">
+				<value name="INPUT" displayedName="Input"/>
+				<value name="OUTPUT" displayedName="Output"/>
+				<value name="ALTFU" displayedName="Altfu"/>
+			</enum>
+		</nonGraphicTypes>
+
 		<graphicTypes>
 
 			<node displayedName="Takeoff" name="GeoTakeoff" description="Orders quadcopter to takeoff.">
@@ -136,6 +151,188 @@
 				</logic>
 			</node>
 
+			<node displayedName="Get LPS Velocity" name="PioneerGetLPSVelocity" description="Returns velocity (local position system).">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/pioneerGetLPSVelocityBlock.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="60" textBinded="X" background="white" prefix="X:"/>
+						<label x="35" y="90" textBinded="Y" background="white" prefix="Y:"/>
+						<label x="35" y="120" textBinded="Z" background="white" prefix="Z:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="X" type="string" name="X">
+								<default>velX</default>
+							</property>
+							<property displayedName="Y" type="string" name="Y">
+								<default>velY</default>
+							</property>
+							<property displayedName="Z" type="string" name="Z">
+								<default>velZ</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
+			<node displayedName="Get LPS Yaw" name="PioneerGetLPSYaw" description="Returns yaw (local position system).">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/pioneerGetLPSYawBlock.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="60" textBinded="Yaw" background="white" prefix="Yaw:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="Yaw" type="string" name="Yaw">
+								<default>yaw</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
+			<node displayedName="Get Orientation" name="PioneerGetOrientation" description="Returns orientation.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/pioneerGetOrientationBlock.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="60" textBinded="Roll" background="white" prefix="Roll:"/>
+						<label x="35" y="90" textBinded="Pitch" background="white" prefix="Pitch:"/>
+						<label x="35" y="120" textBinded="Azimuth" background="white" prefix="Azimuth:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="Roll" type="string" name="Roll">
+								<default>roll</default>
+							</property>
+							<property displayedName="Pitch" type="string" name="Pitch">
+								<default>pitch</default>
+							</property>
+							<property displayedName="Azimuth" type="string" name="Azimuth">
+								<default>azimuth</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
+			<node displayedName="Get Accelerometer" name="PioneerGetAccel" description="Returns accelerometer.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/pioneerGetAccelBlock.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="60" textBinded="X" background="white" prefix="X:"/>
+						<label x="35" y="90" textBinded="Y" background="white" prefix="Y:"/>
+						<label x="35" y="120" textBinded="Z" background="white" prefix="Z:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="X" type="string" name="X">
+								<default>aX</default>
+							</property>
+							<property displayedName="Y" type="string" name="Y">
+								<default>aY</default>
+							</property>
+							<property displayedName="Z" type="string" name="Z">
+								<default>aZ</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
+			<node displayedName="Get Gyroscope" name="PioneerGetGyro" description="Returns gyroscope.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/pioneerGetGyroBlock.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="60" textBinded="X" background="white" prefix="X:"/>
+						<label x="35" y="90" textBinded="Y" background="white" prefix="Y:"/>
+						<label x="35" y="120" textBinded="Z" background="white" prefix="Z:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="X" type="string" name="X">
+								<default>gX</default>
+							</property>
+							<property displayedName="Y" type="string" name="Y">
+								<default>gY</default>
+							</property>
+							<property displayedName="Z" type="string" name="Z">
+								<default>gZ</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
+			<node displayedName="GPIO Initialization" name="PioneerGPIOInit" description="Create GPIO in settings port.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/GPIOinit.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
+						<label x="35" y="60" textBinded="Port" background="white" prefix="Port:"/>
+						<label x="35" y="90" textBinded="Pin" background="white" prefix="Pin:"/>
+						<label x="35" y="120" textBinded="Mode" background="white" prefix="Mode:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<container/>
+						<properties>
+							<property displayedName="Pin name" type="string" name="PinName">
+								<default>pin_name</default>
+							</property>
+							<property displayedName="Port" type="GPIOPort" name="Port">
+								<default>A</default>
+							</property>
+							<property displayedName="Pin" type="int" name="Pin">
+								<default>0</default>
+							</property>
+							<property displayedName="Mode" type="GPIOMode" name="Mode">
+								<default>INPUT</default>
+							</property>
+						</properties>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
 			<node displayedName="Led" name="PioneerLed" path="70, 79 : 70, 121 :  | 25, 78 : 25, 122 :  | 12, 12 : 86, 12 : 86, 78 : 12, 78 : 12, 12 : " description="Sets the color of the specified LED on a quadcopter.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -240,6 +437,59 @@
 				</logic>
 			</node>
 
+			<node displayedName="Set GPIO state" name="PioneerSetGPIO" description="Set GPIO value in \&quot;true/false\&quot;.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/GPIOset.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<properties>
+						<property displayedName="State on" type="bool" name="State">
+							<default>false</default>
+						</property>
+						<property displayedName="Pin name" type="string" name="PinName">
+							<default>pin_name</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
+			<node displayedName="Read GPIO" name="PioneerReadGPIO" description="Returns GPIO value.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/GPIOread.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="35" y="-35" textBinded="PinName" hard="true" background="white" prefix="Pin name:"/>
+						<label x="35" y="60" textBinded="Variable" background="white" prefix="Variable:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<properties>
+						<property displayedName="Variable" type="string" name="Variable">
+							<default>x</default>
+						</property>
+						<property displayedName="Pin name" type="string" name="PinName">
+							<default>pin_name</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+
 			<node displayedName="System" name="PioneerSystem" description="Executes given Lua script.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -298,6 +548,14 @@
 				<element name="GoToPoint"/>
 <!--				<element name="GoToGPSPoint"/>-->
 				<element name="PioneerGetLPSPosition"/>
+				<element name="PioneerGetLPSVelocity"/>
+				<element name="PioneerGetLPSYaw"/>
+				<element name="PioneerGetOrientation"/>
+				<element name="PioneerGetAccel"/>
+				<element name="PioneerGetGyro"/>
+				<element name="PioneerGPIOInit"/>
+				<element name="PioneerSetGPIO"/>
+				<element name="PioneerReadGPIO"/>
 				<element name="PioneerLed"/>
 <!--				<element name="PioneerPrint"/>-->
 				<element name="PioneerMagnet"/>

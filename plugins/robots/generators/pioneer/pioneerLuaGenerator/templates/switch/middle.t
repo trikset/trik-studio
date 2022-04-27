@@ -1,0 +1,2 @@
+		elseif @@CONDITION@@ then
+@@BODY@@

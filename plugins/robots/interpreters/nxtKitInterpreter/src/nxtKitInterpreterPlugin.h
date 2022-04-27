@@ -63,9 +63,7 @@ private:
 	robotModel::real::BluetoothRealRobotModel mBluetoothRealRobotModel;
 	robotModel::twoD::TwoDRobotModel mTwoDRobotModel;
 
-	/// @todo Use shared pointers instead of this sh~.
-	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
-	bool mOwnsBlocksFactory = true;
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;	// Doesn't have ownership
 
 	NxtAdditionalPreferences *mAdditionalPreferences = nullptr;  // Transfers ownership
 	bool mOwnsAdditionalPreferences = true;
