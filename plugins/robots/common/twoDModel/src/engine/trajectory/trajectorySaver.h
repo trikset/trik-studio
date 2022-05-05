@@ -25,7 +25,6 @@
 
 #include <qrutils/graphicsUtils/abstractItem.h>
 #include "connectionToVizualizator.h"
-
 using namespace std;
 
 /// Main class for saving trajectories of all dynamic objects on scene (robot, ball, skittle)
@@ -38,7 +37,6 @@ public:
 	TrajectorySaver(QObject *parent);
 
 private:
-
 	ConnectionToVizualizator *connToVizualizator = nullptr;
 
 	bool isPlaying = false;

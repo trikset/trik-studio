@@ -553,7 +553,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+187"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+188"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -1037,7 +1037,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+312"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+324"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1055,7 +1055,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+97"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
