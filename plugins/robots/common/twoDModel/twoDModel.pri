@@ -13,6 +13,7 @@
 # limitations under the License.
 
 QT += widgets xml svg
+QT += network
 
 DEFINES += TWO_D_MODEL_LIBRARY
 

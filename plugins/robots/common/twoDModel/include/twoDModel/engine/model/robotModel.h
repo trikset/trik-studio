@@ -118,7 +118,7 @@ public:
 
 	bool isRiding() const;
 
-	void serialize(QDomElement &parent) const;
+	QDomElement serialize(QDomElement &parent) const;
 	void serializeWorldModel(QDomElement &parent) const;
 	void deserialize(const QDomElement &robotElement);
 	void deserializeWorldModel(const QDomElement &world);

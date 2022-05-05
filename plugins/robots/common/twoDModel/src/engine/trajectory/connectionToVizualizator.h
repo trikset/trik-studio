@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include <QtNetwork/QNetworkProxy>
 #include <QtNetwork/QTcpSocket>
 #include <QtCore/QIODevice>
 #include <QScopedPointer>

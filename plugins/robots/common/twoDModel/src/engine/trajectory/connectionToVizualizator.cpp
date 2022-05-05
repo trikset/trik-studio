@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include <QEventLoop>
-#include <QtNetwork/QNetworkProxy>
 #include "connectionToVizualizator.h"
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>

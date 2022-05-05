@@ -427,23 +427,19 @@ bool RobotModel::onTheGround() const
 	return mIsOnTheGround;
 }
 
-void RobotModel::serialize(QDomElement &parent) const
+QDomElement RobotModel::serialize(QDomElement &parent) const
 {
-	QDomElement curRobot = parent.ownerDocument().createElement("robot");
-	curRobot.setAttribute("id", mRobotModel.robotId());	
-	mSensorsConfiguration.serialize(curRobot);
-	serializeWheels(curRobot);
+	QDomElement robot = parent.ownerDocument().createElement("robot");
+	parent.appendChild(robot);
+	robot.setAttribute("id", mRobotModel.robotId());
+	robot.setAttribute("position", QString::number(mPos.x()) + ":" + QString::number(mPos.y()));
+	robot.setAttribute("direction", QString::number(mAngle));
 
-	bool replaced = false;
-	for (QDomElement robot = parent.firstChildElement("robot"); !robot.isNull()
-			; robot = robot.nextSiblingElement("robot")) {
-		if (robot.attribute("id") == mRobotModel.robotId()) {
-			parent.replaceChild(curRobot, robot);
-			replaced = true;
-			break;
-		}
-	}
-	if (!replaced) parent.appendChild(curRobot);
+	mSensorsConfiguration.serialize(robot);
+	mStartPositionMarker->serialize(robot);
+	serializeWheels(robot);
+
+	return robot;
 }
 
 void RobotModel::serializeWorldModel(QDomElement &parent) const
@@ -483,8 +479,16 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 
 void RobotModel::deserialize(const QDomElement &robotElement)
 {
+	const QString positionStr = robotElement.attribute("position", "0:0");
+	const QStringList splittedStr = positionStr.split(":");
+	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
+	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
+	onRobotReturnedOnGround();
+	setPosition(QPointF(x, y));
+	setRotation(robotElement.attribute("direction", "0").toDouble());
+	mStartPositionMarker->deserializeCompatibly(robotElement);
 	deserializeWheels(robotElement);
-	configuration().deserialize(robotElement);
+	emit deserialized(QPointF(x, y), robotElement.attribute("direction", "0").toDouble());
 	nextFragment();
 }
 
