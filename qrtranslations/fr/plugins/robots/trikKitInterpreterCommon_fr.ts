@@ -37,37 +37,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+73"/>
         <source>Use real camera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+10"/>
         <source>Network Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+20"/>
         <source>Enable Mailbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+10"/>
+        <source>Unity Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Enter Unity IP here...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Send Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-45"/>
         <source>Hull number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-7"/>
         <source>999</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-88"/>
+        <location line="-74"/>
         <source>Camera:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+22"/>
         <source>Use images from project</source>
         <translation type="unfinished"></translation>
     </message>
@@ -123,7 +138,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+31"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>

@@ -47,8 +47,8 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mSensorsConfiguration(robotModel.robotId(), robotModel.size())
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
-	, mStartPositionMarker(new items::StartPosition(info().size())){
-
+	, mStartPositionMarker(new items::StartPosition(info().size()))
+{
 	reinit();
 }
 

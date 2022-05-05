@@ -116,7 +116,7 @@ private:
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
-	TrajectorySaver const *trajSaver;
+	TrajectorySaver const *trajSaver {};
 };
 
 }
