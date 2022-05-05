@@ -118,8 +118,10 @@ public:
 
 	bool isRiding() const;
 
-	QDomElement serialize(QDomElement &parent) const;
+	void serialize(QDomElement &parent) const;
+	void serializeWorldModel(QDomElement &parent) const;
 	void deserialize(const QDomElement &robotElement);
+	void deserializeWorldModel(const QDomElement &world);
 
 	void onRobotLiftedFromGround();
 	void onRobotReturnedOnGround();

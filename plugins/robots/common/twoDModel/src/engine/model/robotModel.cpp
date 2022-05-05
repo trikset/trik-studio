@@ -427,23 +427,49 @@ bool RobotModel::onTheGround() const
 	return mIsOnTheGround;
 }
 
-QDomElement RobotModel::serialize(QDomElement &parent) const
+void RobotModel::serialize(QDomElement &parent) const
 {
-	QDomElement robot = parent.ownerDocument().createElement("robot");
-	parent.appendChild(robot);
-	robot.setAttribute("id", mRobotModel.robotId());
-	robot.setAttribute("position", QString::number(mPos.x()) + ":" + QString::number(mPos.y()));
-	robot.setAttribute("direction", QString::number(mAngle));
+	QDomElement curRobot = parent.ownerDocument().createElement("robot");
+	curRobot.setAttribute("id", mRobotModel.robotId());	
+	mSensorsConfiguration.serialize(curRobot);
+	serializeWheels(curRobot);
 
-	mSensorsConfiguration.serialize(robot);
-	mStartPositionMarker->serialize(robot);
-	serializeWheels(robot);
-
-	return robot;
+	bool replaced = false;
+	for (QDomElement robot = parent.firstChildElement("robot"); !robot.isNull()
+			; robot = robot.nextSiblingElement("robot")) {
+		if (robot.attribute("id") == mRobotModel.robotId()) {
+			parent.replaceChild(curRobot, robot);
+			replaced = true;
+			break;
+		}
+	}
+	if (!replaced) parent.appendChild(curRobot);
 }
 
-void RobotModel::deserialize(const QDomElement &robotElement)
+void RobotModel::serializeWorldModel(QDomElement &parent) const
 {
+	QDomElement world = parent.firstChildElement("world");
+	if (world.isNull()) {
+		world = parent.ownerDocument().createElement("world");
+		parent.appendChild(world);
+	}
+
+	QDomElement robot = world.ownerDocument().createElement("robot");
+	robot.setAttribute("position", QString::number(mPos.x()) + ":" + QString::number(mPos.y()));
+	robot.setAttribute("direction", QString::number(mAngle));
+	mStartPositionMarker->serialize(robot);
+	world.appendChild(robot);
+}
+
+void RobotModel::deserializeWorldModel(const QDomElement &world)
+{
+	QDomElement robotElement = world.firstChildElement("robot");
+	if (robotElement.isNull()) {
+		robotElement.setTagName("robot");
+		robotElement.setAttribute("position", "0:0");
+		robotElement.setAttribute("direction", "0");
+	}
+
 	const QString positionStr = robotElement.attribute("position", "0:0");
 	const QStringList splittedStr = positionStr.split(":");
 	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
@@ -452,8 +478,13 @@ void RobotModel::deserialize(const QDomElement &robotElement)
 	setPosition(QPointF(x, y));
 	setRotation(robotElement.attribute("direction", "0").toDouble());
 	mStartPositionMarker->deserializeCompatibly(robotElement);
+	emit deserialized(QPointF(mPos.x(), mPos.y()), mAngle);
+}
+
+void RobotModel::deserialize(const QDomElement &robotElement)
+{
 	deserializeWheels(robotElement);
-	emit deserialized(QPointF(x, y), robotElement.attribute("direction", "0").toDouble());
+	configuration().deserialize(robotElement);
 	nextFragment();
 }
 

@@ -133,8 +133,6 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	};
 	connectDisconnection(mRobotModelManager.model());
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, &mProxyInterpreter, connectDisconnection);
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, &mProxyInterpreter, &kitBase::InterpreterInterface::userStopRobot);
 
 	initKitPlugins(configurer);
 
@@ -408,7 +406,9 @@ void RobotsPluginFacade::initSensorWidgets()
 			, *mUiManager->robotConsole().toggleViewAction());
 	for (kitBase::robotModel::RobotModelInterface * const model : mKitPluginManager.allRobotModels()) {
 		for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(model->kitId())) {
-			mUiManager->addWidgetToToolbar(*model, kit->quickPreferencesFor(*model));
+			for (auto && widget : kit->listOfQuickPreferencesFor(*model)) {
+				mUiManager->addWidgetToToolbar(*model, widget);
+			}
 		}
 	}
 

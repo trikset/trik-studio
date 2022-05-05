@@ -1,0 +1,1 @@
+		@@PIN_NAME@@:reset()

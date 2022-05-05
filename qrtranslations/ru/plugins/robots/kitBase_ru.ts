@@ -12,7 +12,7 @@
 <context>
     <name>kitBase::DevicesConfigurationWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="+103"/>
         <source>%1:</source>
         <translation>%1:</translation>
     </message>

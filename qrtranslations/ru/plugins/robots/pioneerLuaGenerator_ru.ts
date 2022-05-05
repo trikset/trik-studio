@@ -9,6 +9,11 @@
         <translation>Форма</translation>
     </message>
     <message>
+        <location line="+64"/>
+        <source>Base station connection mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Use &quot;controller.py&quot; to upload and run programs</source>
         <translation type="vanished">Использовать &quot;controller.py&quot; для загрузки и выполнения программы</translation>
     </message>
@@ -29,7 +34,7 @@
         <translation type="vanished">Использовать &quot;controller&quot; для загрузки и выполнения программы</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="-43"/>
         <source>Connection Settings</source>
         <translation>Настройки соединения</translation>
     </message>
@@ -42,43 +47,38 @@
         <translation type="vanished">COM1</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+29"/>
         <source>Base station port:</source>
         <translation>Порт базовой станции:</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>00000</source>
-        <translation>00000</translation>
+        <translation type="vanished">00000</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>8000</source>
-        <translation>8000</translation>
+        <translation type="vanished">8000</translation>
     </message>
     <message>
         <source>Base Station Settings</source>
         <translation type="vanished">Настройки базовой станции</translation>
     </message>
     <message>
-        <location line="-30"/>
+        <location line="-14"/>
         <source>Base station IP:</source>
         <translation>IP-адрес базовой станции:</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>009.009.009.009</source>
-        <translation>009.009.009.009</translation>
+        <translation type="vanished">009.009.009.009</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>127.0.0.1</source>
-        <translation>127.0.0.1</translation>
+        <translation type="vanished">127.0.0.1</translation>
     </message>
     <message>
         <source>192.168.0.1</source>
@@ -258,7 +258,7 @@
         <translation type="vanished">Квадрокоптер &quot;Пионер&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="+45"/>
         <source>Pioneer model (real copter)</source>
         <translation>Реальный квадрокоптер</translation>
     </message>
@@ -267,14 +267,49 @@
         <translation type="vanished">Симулятор</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>Generate to Pioneer Lua</source>
         <translation>Генерировать в .lua для Пионера</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+14"/>
         <source>Upload generated program to Pioneer</source>
         <translation>Загрузить программу на Пионер</translation>
+    </message>
+    <message>
+        <location line="+97"/>
+        <source>Choose robot`s mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Robot`s IP-address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Robot`s port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+95"/>
+        <source>Sorry, but uploading works only on Windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>site</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Please download uploader from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Exit code </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Run program on a Pioneer</source>
@@ -289,7 +324,7 @@
         <translation type="vanished">Язык Lua</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="-217"/>
         <source>Generate Lua script for Pioneer Quadcopter</source>
         <translation>Генерировать скрипт на Lua для квадрокоптера &quot;Пионер&quot;</translation>
     </message>
