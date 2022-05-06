@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *	 http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -95,8 +95,8 @@ RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees
 	mMotors[port].reset(motor);
 
 	/// @todo We need some mechanism to set correspondence between motors and encoders. In NXT motors and encoders are
-	///	   physically plugged into one port, so we can find corresponding port by name. But in TRIK encoders can be
-	///	   connected differently.
+	///       physically plugged into one port, so we can find corresponding port by name. But in TRIK encoders can be
+	///       connected differently.
 	for (const Device * const device : mRobotModel.configuration().devices()) {
 		if (device->deviceInfo().isA<EncoderSensor>()
 				&& (device->port().name() == port.name() || device->port().nameAliases().contains(port.name())))
@@ -255,9 +255,9 @@ QPainterPath RobotModel::sensorBoundingPath(const PortInfo &port) const
 	QPainterPath tempSensorPath;
 	tempSensorPath.addRect(sensorRect(port, sensorPos));
 	const QTransform transformSensor = QTransform()
-			.translate(sensorPos.x(), sensorPos.y())		// /\  And going back again
+			.translate(sensorPos.x(), sensorPos.y())        // /\  And going back again
 			.rotate(mSensorsConfiguration.direction(port))  // ||  Then rotating
-			.translate(-sensorPos.x(), -sensorPos.y());	 // ||  First translating to zero
+			.translate(-sensorPos.x(), -sensorPos.y());     // ||  First translating to zero
 	return transformSensor.map(tempSensorPath);
 }
 
@@ -427,19 +427,24 @@ bool RobotModel::onTheGround() const
 	return mIsOnTheGround;
 }
 
-QDomElement RobotModel::serialize(QDomElement &parent) const
+
+void RobotModel::serialize(QDomElement &parent) const
 {
-	QDomElement robot = parent.ownerDocument().createElement("robot");
-	parent.appendChild(robot);
-	robot.setAttribute("id", mRobotModel.robotId());
-	robot.setAttribute("position", QString::number(mPos.x()) + ":" + QString::number(mPos.y()));
-	robot.setAttribute("direction", QString::number(mAngle));
+	QDomElement curRobot = parent.ownerDocument().createElement("robot");
+	curRobot.setAttribute("id", mRobotModel.robotId());
+	mSensorsConfiguration.serialize(curRobot);
+	serializeWheels(curRobot);
 
-	mSensorsConfiguration.serialize(robot);
-	mStartPositionMarker->serialize(robot);
-	serializeWheels(robot);
-
-	return robot;
+	bool replaced = false;
+	for (QDomElement robot = parent.firstChildElement("robot"); !robot.isNull()
+			; robot = robot.nextSiblingElement("robot")) {
+		if (robot.attribute("id") == mRobotModel.robotId()) {
+			parent.replaceChild(curRobot, robot);
+			replaced = true;
+			break;
+		}
+	}
+	if (!replaced) parent.appendChild(curRobot);
 }
 
 void RobotModel::serializeWorldModel(QDomElement &parent) const
@@ -479,16 +484,8 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 
 void RobotModel::deserialize(const QDomElement &robotElement)
 {
-	const QString positionStr = robotElement.attribute("position", "0:0");
-	const QStringList splittedStr = positionStr.split(":");
-	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
-	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
-	onRobotReturnedOnGround();
-	setPosition(QPointF(x, y));
-	setRotation(robotElement.attribute("direction", "0").toDouble());
-	mStartPositionMarker->deserializeCompatibly(robotElement);
 	deserializeWheels(robotElement);
-	emit deserialized(QPointF(x, y), robotElement.attribute("direction", "0").toDouble());
+	configuration().deserialize(robotElement);
 	nextFragment();
 }
 

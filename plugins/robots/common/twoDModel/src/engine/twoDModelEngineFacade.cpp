@@ -90,7 +90,6 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 		loadReadOnlyFlags(logicalModel);
 		QLOG_DEBUG() << "Reloading 2D world done";
-
 	};
 
 	const auto connectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {

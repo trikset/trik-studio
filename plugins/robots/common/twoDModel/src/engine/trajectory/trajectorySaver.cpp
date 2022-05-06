@@ -88,9 +88,7 @@ void TrajectorySaver::sendFrame()
 		doc.setObject(frame);
 		QString data (doc.toJson( QJsonDocument::Compact));
 
-		try {
-			sendTrajectory(data);
-		} catch (exception &e) {}
+		sendTrajectory(data);
 	}
 }
 
@@ -153,10 +151,14 @@ void TrajectorySaver::sendTrajectory(QString data = nullptr)
 		connToVizualizator->write(data);
 	} else {
 		QFile file("trajectory.json");
-		if (file.open(QIODevice::ReadOnly)) {
+		try {
+			file.open(QIODevice::ReadOnly);
 			QString fileData = file.readAll();
 			connToVizualizator->write(fileData);
 			file.close();
+		} catch (const ofstream::failure& e){
+			QLOG_ERROR() << "Exception occured when opening/writing to file"
+			<< e.what();
 		}
 	}
 }

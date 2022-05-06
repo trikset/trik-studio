@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *	 http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,7 +33,6 @@
 #include "parts/box2DItem.h"
 
 using namespace twoDModel::model::physics;
-
 using namespace parts;
 using namespace mathUtils;
 
@@ -150,17 +149,12 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 			auto model = &rItem->robotModel();
 			mBox2DRobots[model]->reinitSensor(sensor);
 		});
-
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
-
-
 		connect(robot, &RobotModel::trajectorySoundStateChanged, mTrajSaver, &TrajectorySaver::saveBeepState);
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged, mTrajSaver, &TrajectorySaver::saveMarkerState);
 		connect(robot, &RobotModel::trajectoryPosOrAngleChanged, mTrajSaver, &TrajectorySaver::saveItemPosOrAngle);
 		connect(robot, &RobotModel::trajectoryOnitemDragged, mTrajSaver, &TrajectorySaver::onItemDragged);
-
 		connect(robot, &RobotModel::trajectorySave, mTrajSaver, &TrajectorySaver::saveToFile);
-//		connect(robot, &RobotModel::OnStartPlaying, mTrajSaver, &TrajectorySaver::OnStartInterpretation);
 		connect(robot, &RobotModel::onStopPlaying, mTrajSaver, &TrajectorySaver::onStopInterpretation);
 	});
 }

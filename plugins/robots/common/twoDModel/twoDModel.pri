@@ -64,7 +64,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/marker.h \
 	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
-	$$PWD/include/twoDModel/blocks/markerUpBlock.h \ \
+	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
 	$$PWD/src/engine/trajectory/connectionToVizualizator.h \
 	$$PWD/src/engine/trajectory/trajectorySaver.h \
 

@@ -34,6 +34,7 @@ Timeline::Timeline(QObject *parent)
 		qRegisterMetaType<qReal::interpretation::StopReason>();
 		registered = true;
 	}
+
 	connect(&mTimer, &QTimer::timeout, this, &Timeline::onTimer);
 	mTimer.setInterval(defaultRealTimeInterval);
 }

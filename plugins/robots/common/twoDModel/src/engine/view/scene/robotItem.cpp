@@ -17,7 +17,6 @@
 #include "twoDModel/engine/model/constants.h"
 #include "src/engine/items/startPosition.h"
 
-
 using namespace twoDModel::view;
 using namespace graphicsUtils;
 using namespace twoDModel::model;

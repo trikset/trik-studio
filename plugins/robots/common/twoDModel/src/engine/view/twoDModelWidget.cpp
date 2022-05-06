@@ -130,8 +130,6 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 		// Setting value in percents
 		mSpeedPopup->setSpeed(100 / speedFactors[defaultSpeedFactorIndex] * value);
 	});
-
-
 	mConnToVizualizator->setPort(9000);
 	mConnToVizualizator->init();
 	mConnToVizualizator->connectToHost();
@@ -355,7 +353,6 @@ void TwoDModelWidget::connectUiButtons()
 	connect(mUi->trainingModeButton, &QAbstractButton::toggled, this, &TwoDModelWidget::trainingModeChanged);
 
 	mUi->trainingModeButton->setChecked(false);
-
 	initRunStopButtons();
 }
 
