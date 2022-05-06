@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-QT += widgets xml svg
-QT += network
+QT += widgets xml svg network
 
 DEFINES += TWO_D_MODEL_LIBRARY
 
@@ -227,7 +226,4 @@ SOURCES += \
 
 FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
-
-DISTFILES += \
-	$$PWD/src/engine/trajectory/frames.proto
 

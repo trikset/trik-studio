@@ -17,7 +17,7 @@
 #include <fstream>
 #include <QFile>
 #include <QtGlobal>
-#include "connectionToVizualizator.h"
+#include <QsLog.h>
 
 TrajectorySaver::TrajectorySaver(QObject *parent)
 	: QObject(parent)
@@ -31,14 +31,14 @@ void TrajectorySaver::saveBeepState(QString robotId, int time)
 {
 	stringstream value;
 	value << "beepState=" << time;
-	currStates.append(createState(robotId.toStdString(), value.str()));
+	currStates.append(createState(robotId, value.str().c_str()));
 }
 
 void TrajectorySaver::saveMarkerState(QString robotId, QColor color)
 {
 	stringstream value;
 	value << "markerState=" << color.red() << " " << color.green() << " " << color.blue() << " " << color.alpha();
-	currStates.append(createState(robotId.toStdString(), value.str()));
+	currStates.append(createState(robotId, value.str().c_str()));
 }
 
 void TrajectorySaver::saveItemPosOrAngle(QString id, QPointF pos, qreal rotation)
@@ -62,7 +62,7 @@ void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 	value << "pos=" << pos.x() << " " << -pos.y();
 	value << "|rot=" << rotation;
 
-	auto state = createState(id.toStdString(), value.str());
+	auto state = createState(id, value.str().c_str());
 	if (!currStates.contains(QJsonValue(state))) {
 		//qDebug(qUtf8Printable(id));
 		/// to avoid duplicates, it can be because onItemDragged calls when
@@ -71,11 +71,11 @@ void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 	}
 }
 
-QJsonObject TrajectorySaver::createState(string id, string stateStr)
+QJsonObject TrajectorySaver::createState(QString id, QString stateStr)
 {
 	QJsonObject state;
-	state.insert("id", id.c_str());
-	state.insert("state", stateStr.c_str());
+	state.insert("id", id);
+	state.insert("state", stateStr);
 	return state;
 }
 
@@ -90,7 +90,7 @@ void TrajectorySaver::sendFrame()
 
 		try {
 			sendTrajectory(data);
-		} catch (exception e) {}
+		} catch (exception &e) {}
 	}
 }
 
@@ -118,11 +118,16 @@ void TrajectorySaver::saveToFile()
 
 	/// saving it to file
 	QFile file("trajectory.json");
-	if( file.open( QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate ) ) {
+	try {
+		file.open( QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate );
 		QTextStream iStream( &file );
 		iStream.setCodec( "utf-8" );
 		iStream << bytes;
 		file.close();
+	}
+	catch (const ofstream::failure& e){
+		QLOG_ERROR() << "Exception occured when opening/writing to file"
+		<< e.what();
 	}
 }
 

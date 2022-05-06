@@ -48,6 +48,10 @@ class ControllerInterface;
 
 namespace twoDModel {
 
+//namespace trajectory {
+//class ConnectionToVizualizator;
+//}
+
 namespace model {
 class Model;
 class RobotModel;

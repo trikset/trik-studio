@@ -20,6 +20,7 @@
 #include <QScopedPointer>
 #include <QTimer>
 
+//namespace trajectory {
 /// Connection to Unity to send frames and run/stop/restart
 class alignas(8) ConnectionToVizualizator : public QObject
 {
@@ -61,7 +62,6 @@ public slots:
 	/// Disconnect
 	void reset();
 
-
 	void stopPressed();
 	void startPressed();
 	void restartPressed();
@@ -72,14 +72,12 @@ signals:
 	void restartRequested();
 
 private:
-	QTcpSocket *socket;
-	QTimer *keepaliveTimer;
+	QTcpSocket *mSocket;
+	QTimer *mKeepaliveTimer;
 
-	QString Ip {"10.0.5.2"};
-	quint16 Port { 8080 };
+	QString mIp {"10.0.5.2"};
+	quint16 mPort { 8080 };
 	QByteArray mBuffer;
-	bool sendData = true;
+	bool mSendData = true;
 };
-
-
-
+//}

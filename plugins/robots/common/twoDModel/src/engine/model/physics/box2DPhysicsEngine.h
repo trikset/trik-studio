@@ -35,6 +35,10 @@ namespace twoDModel {
 		class SensorItem;
 	}
 
+	namespace trajectory {
+	class TrajectorySaver;
+	}
+
 	namespace model {
 	namespace physics {
 	namespace parts {
@@ -116,7 +120,7 @@ private:
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
-	TrajectorySaver const *trajSaver {};
+	TrajectorySaver const *mTrajSaver {};
 };
 
 }

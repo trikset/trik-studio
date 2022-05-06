@@ -46,7 +46,7 @@ private:
 	void sendTrajectory(QString data);
 	void addState(QString id, QPointF pos, qreal rotation);
 
-	QJsonObject createState(string id, string stateStr);
+	QJsonObject createState(QString id, QString stateStr);
 	QJsonObject saveFrame();
 
 	void reinitConnection();

@@ -25,8 +25,6 @@
 
 #include "twoDModel/twoDModelDeclSpec.h"
 
-#include "plugins/robots/common/twoDModel/src/engine/trajectory/trajectorySaver.h"
-
 class QGraphicsItem;
 
 namespace twoDModel {

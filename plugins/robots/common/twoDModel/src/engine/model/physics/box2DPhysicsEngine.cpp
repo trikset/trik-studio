@@ -17,6 +17,7 @@
 #include <qrutils/graphicsUtils/abstractItem.h>
 
 #include "twoDModel/engine/model/robotModel.h"
+#include "src/engine/trajectory/trajectorySaver.h"
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/worldModel.h"
 #include "src/engine/view/scene/twoDModelScene.h"
@@ -45,7 +46,7 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	, mWorld(new b2World(b2Vec2(0, 0)))
 	, mPrevPosition(b2Vec2(0, 0))
 	, mPrevAngle(0)
-	, trajSaver(new TrajectorySaver(nullptr))
+	, mTrajSaver(new TrajectorySaver(nullptr))
 {
 	connect(&worldModel, &model::WorldModel::wallAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
@@ -56,9 +57,9 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
-	connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::saveItemPosOrAngle);
-	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, trajSaver, &TrajectorySaver::onItemDragged);
-	connect(this, &Box2DPhysicsEngine::sendNextFrame, trajSaver, &TrajectorySaver::sendFrame);
+	connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged, mTrajSaver, &TrajectorySaver::saveItemPosOrAngle);
+	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver, &TrajectorySaver::onItemDragged);
+	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver, &TrajectorySaver::sendFrame);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -153,14 +154,14 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
 
 
-		connect(robot, &RobotModel::trajectorySoundStateChanged, trajSaver, &TrajectorySaver::saveBeepState);
-		connect(robot, &RobotModel::trajectoryMarkerColorChanged, trajSaver, &TrajectorySaver::saveMarkerState);
-		connect(robot, &RobotModel::trajectoryPosOrAngleChanged, trajSaver, &TrajectorySaver::saveItemPosOrAngle);
-		connect(robot, &RobotModel::trajectoryOnitemDragged, trajSaver, &TrajectorySaver::onItemDragged);
+		connect(robot, &RobotModel::trajectorySoundStateChanged, mTrajSaver, &TrajectorySaver::saveBeepState);
+		connect(robot, &RobotModel::trajectoryMarkerColorChanged, mTrajSaver, &TrajectorySaver::saveMarkerState);
+		connect(robot, &RobotModel::trajectoryPosOrAngleChanged, mTrajSaver, &TrajectorySaver::saveItemPosOrAngle);
+		connect(robot, &RobotModel::trajectoryOnitemDragged, mTrajSaver, &TrajectorySaver::onItemDragged);
 
-		connect(robot, &RobotModel::trajectorySave, trajSaver, &TrajectorySaver::saveToFile);
-//		connect(robot, &RobotModel::OnStartPlaying, trajSaver, &TrajectorySaver::OnStartInterpretation);
-		connect(robot, &RobotModel::onStopPlaying, trajSaver, &TrajectorySaver::onStopInterpretation);
+		connect(robot, &RobotModel::trajectorySave, mTrajSaver, &TrajectorySaver::saveToFile);
+//		connect(robot, &RobotModel::OnStartPlaying, mTrajSaver, &TrajectorySaver::OnStartInterpretation);
+		connect(robot, &RobotModel::onStopPlaying, mTrajSaver, &TrajectorySaver::onStopInterpretation);
 	});
 }
 
