@@ -127,7 +127,6 @@ QDomDocument Model::serialize() const
 	}
 	if (mRobotModel) {
 		mRobotModel->serialize(robots);
-		mRobotModel->serializeWorldModel(root);
 	}
 	root.appendChild(robots);
 
@@ -191,6 +190,8 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF 
 
 	mRobotModel->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
 
+	mWorldModel.setRobotModel(mRobotModel);
+
 	emit robotAdded(mRobotModel);
 }
 
@@ -200,6 +201,7 @@ void Model::removeRobotModel()
 		return;
 	}
 
+	mWorldModel.setRobotModel(nullptr);
 	emit robotRemoved(mRobotModel);
 	delete mRobotModel;
 }

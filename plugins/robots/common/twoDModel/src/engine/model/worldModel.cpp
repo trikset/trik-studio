@@ -21,6 +21,7 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/worldModel.h"
 #include "twoDModel/engine/model/image.h"
+#include "twoDModel/engine/model/robotModel.h"
 
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
@@ -302,6 +303,11 @@ void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 	emit blobsChanged();
 }
 
+void WorldModel::setRobotModel(RobotModel * robotModel)
+{
+	mRobotModel = robotModel;
+}
+
 void WorldModel::clear()
 {
 	while (!mWalls.isEmpty()) {
@@ -470,6 +476,10 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 		QDomElement regionElement = parent.ownerDocument().createElement("region");
 		mRegions[region]->serialize(regionElement);
 		regions.appendChild(regionElement);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->serializeWorldModel(parent);
 	}
 
 	// Robot trace saving is disabled
