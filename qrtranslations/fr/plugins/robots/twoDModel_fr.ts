@@ -281,7 +281,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+188"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+187"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,7 +694,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+324"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+322"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -712,7 +712,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+96"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>

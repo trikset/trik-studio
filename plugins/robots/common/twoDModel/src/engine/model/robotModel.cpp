@@ -427,7 +427,6 @@ bool RobotModel::onTheGround() const
 	return mIsOnTheGround;
 }
 
-
 void RobotModel::serialize(QDomElement &parent) const
 {
 	QDomElement curRobot = parent.ownerDocument().createElement("robot");
