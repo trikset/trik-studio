@@ -149,6 +149,7 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 			auto model = &rItem->robotModel();
 			mBox2DRobots[model]->reinitSensor(sensor);
 		});
+
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
 		connect(robot, &RobotModel::trajectorySoundStateChanged, mTrajSaver, &TrajectorySaver::saveBeepState);
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged, mTrajSaver, &TrajectorySaver::saveMarkerState);

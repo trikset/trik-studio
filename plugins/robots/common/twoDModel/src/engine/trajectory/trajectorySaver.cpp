@@ -27,27 +27,27 @@ TrajectorySaver::TrajectorySaver(QObject *parent)
 	connToVizualizator->init();
 }
 
-void TrajectorySaver::saveBeepState(QString robotId, int time)
+void TrajectorySaver::saveBeepState(const QString &robotId, int time)
 {
 	stringstream value;
 	value << "beepState=" << time;
 	currStates.append(createState(robotId, value.str().c_str()));
 }
 
-void TrajectorySaver::saveMarkerState(QString robotId, QColor color)
+void TrajectorySaver::saveMarkerState(const QString &robotId, const QColor &color)
 {
 	stringstream value;
 	value << "markerState=" << color.red() << " " << color.green() << " " << color.blue() << " " << color.alpha();
 	currStates.append(createState(robotId, value.str().c_str()));
 }
 
-void TrajectorySaver::saveItemPosOrAngle(QString id, QPointF pos, qreal rotation)
+void TrajectorySaver::saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation)
 {
 	addState(id, pos, rotation);
 	isPlaying = true;
 }
 
-void TrajectorySaver::onItemDragged(QString id, QPointF pos, qreal rotation)
+void TrajectorySaver::onItemDragged(const QString &id, const QPointF &pos, const qreal &rotation)
 {
 	addState(id, pos, rotation);
 	if (!isPlaying) {
@@ -56,7 +56,7 @@ void TrajectorySaver::onItemDragged(QString id, QPointF pos, qreal rotation)
 }
 
 /// Syntactic sugar for onItemDragged and saveItemPosOrState
-void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
+void TrajectorySaver::addState(const QString &id, const QPointF &pos, const qreal &rotation)
 {
 	stringstream value;
 	value << "pos=" << pos.x() << " " << -pos.y();
@@ -71,7 +71,7 @@ void TrajectorySaver::addState(QString id, QPointF pos, qreal rotation)
 	}
 }
 
-QJsonObject TrajectorySaver::createState(QString id, QString stateStr)
+QJsonObject TrajectorySaver::createState(const QString &id, const QString &stateStr)
 {
 	QJsonObject state;
 	state.insert("id", id);
@@ -140,7 +140,7 @@ void TrajectorySaver::reinitConnection()
 //	qDebug(qPrintable(connToVizualizator->getIp()));
 }
 
-void TrajectorySaver::sendTrajectory(QString data = nullptr)
+void TrajectorySaver::sendTrajectory(const QString &data = nullptr)
 {
 	if (connToVizualizator == nullptr || !connToVizualizator->isConnected()) {
 		reinitConnection();

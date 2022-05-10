@@ -43,29 +43,29 @@ private:
 	QJsonArray frames;
 	QJsonArray currStates;
 
-	void sendTrajectory(QString data);
-	void addState(QString id, QPointF pos, qreal rotation);
+	void sendTrajectory(const QString &data);
+	void addState(const QString &id, const QPointF &pos, const qreal &rotation);
 
-	QJsonObject createState(QString id, QString stateStr);
+	QJsonObject createState(const QString &id, const QString &stateStr);
 	QJsonObject saveFrame();
 
 	void reinitConnection();
 
 public slots:
 	/// Emitted when robot/ball/skittle is moved by user. It can happen while playing or not.
-	void onItemDragged(QString id, QPointF pos, qreal rotation);
+	void onItemDragged(const QString &id, const QPointF &pos, const qreal &rotation);
 
 	/// Saves position and angle of robot. Emitted when nextFragment is playing,
 	/// saves position and angle of balls/skittles. Emitted when nextFrame is playing
-	void saveItemPosOrAngle(QString id, QPointF pos, qreal rotation);
+	void saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation);
 
 	/// Emitted when robot plays beep sound, saves beeping time in ms
-	void saveBeepState(QString robotId, int time);
+	void saveBeepState(const QString &robotId, int time);
 
 	/// Emitted when robot places marker up or down, saves marker color:
 	/// if marker is down, color is equal to marker color, if marker is ip,
 	/// color is transparent
-	void saveMarkerState(QString robotId, QColor color);
+	void saveMarkerState(const QString &robotId, const QColor &color);
 
 	/// Emitted when robot stops
 	void saveToFile();
