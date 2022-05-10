@@ -22,7 +22,7 @@
         <translation>Настройки TRIK</translation>
     </message>
     <message>
-        <location line="+21"/>
+        <location line="+27"/>
         <source>TCP Settings</source>
         <translation>Настройки TCP</translation>
     </message>
@@ -36,7 +36,7 @@
         <translation type="vanished">Настройки мультимедия</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>Camera Settings</source>
         <translation>Настройки камеры</translation>
     </message>
@@ -71,32 +71,32 @@
         <translation>Настройки сети</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+13"/>
         <source>Enable Mailbox</source>
         <translation>Активировать Mailbox</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+17"/>
         <source>Unity Connection Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
-        <source>Enter Unity IP here...</source>
+        <location line="+16"/>
+        <source>Enter Unity IP here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-10"/>
         <source>Send Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-45"/>
+        <location line="-16"/>
         <source>Hull number:</source>
         <translation>Бортномер:</translation>
     </message>
     <message>
-        <location line="-7"/>
+        <location line="-14"/>
         <source>999</source>
         <translation type="unfinished"></translation>
     </message>
