@@ -22,7 +22,7 @@
         <translation>Préférences TRIK</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="+21"/>
         <source>TCP Settings</source>
         <translation>Configuration de TCP</translation>
     </message>
@@ -32,7 +32,7 @@
         <translation>Tapez l&apos;adresse IP du robot ici</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+13"/>
         <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,37 +47,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+6"/>
         <source>Enable Mailbox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+24"/>
         <source>Unity Connection Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+9"/>
         <source>Enter Unity IP here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-10"/>
+        <location line="+7"/>
         <source>Send Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-16"/>
+        <location line="-33"/>
         <source>Hull number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="+7"/>
         <source>999</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-74"/>
+        <location line="-88"/>
         <source>Camera:</source>
         <translation type="unfinished"></translation>
     </message>

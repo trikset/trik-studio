@@ -28,7 +28,6 @@
 #include "twoDModel/engine/twoDModelDisplayWidget.h"
 
 #include "twoDModel/twoDModelDeclSpec.h"
-#include "plugins/robots/common/twoDModel/src/engine/trajectory/connectionToVizualizator.h"
 
 class QComboBox;
 class QPushButton;
@@ -48,9 +47,9 @@ class ControllerInterface;
 
 namespace twoDModel {
 
-//namespace trajectory {
-//class ConnectionToVizualizator;
-//}
+namespace trajectory {
+class ConnectionToVizualizator;
+}
 
 namespace model {
 class Model;
@@ -106,6 +105,9 @@ public:
 
 	void setBackgroundMode();
 
+	/// Returns a reference to a connection to vizualizer tool
+	twoDModel::trajectory::ConnectionToVizualizator *connToVizualizer();
+
 	QString editorId() const override;
 	bool supportsZooming() const override;
 	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste
@@ -113,7 +115,6 @@ public:
 	QDomDocument generateWorldModelWithBlobsXml() const;
 	QDomDocument generateWorldModelXml() const;
 	QDomDocument generateBlobsXml() const;
-	ConnectionToVizualizator *mConnToVizualizator;
 
 public slots:
 	void zoomIn() override;
@@ -252,6 +253,7 @@ private:
 
 	RobotItem *mSelectedRobotItem {};
 	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};
+	twoDModel::trajectory::ConnectionToVizualizator *mConnToVizualizator {};
 
 	model::Model &mModel;
 	qReal::ControllerInterface *mController {};

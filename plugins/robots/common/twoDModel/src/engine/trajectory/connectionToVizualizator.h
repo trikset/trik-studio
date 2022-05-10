@@ -20,7 +20,8 @@
 #include <QScopedPointer>
 #include <QTimer>
 
-//namespace trajectory {
+namespace twoDModel {
+namespace trajectory {
 /// Connection to Unity to send frames and run/stop/restart
 class alignas(8) ConnectionToVizualizator : public QObject
 {
@@ -80,4 +81,5 @@ private:
 	QByteArray mBuffer;
 	bool mSendData = true;
 };
-//}
+}
+}

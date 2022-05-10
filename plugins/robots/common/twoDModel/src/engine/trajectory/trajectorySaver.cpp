@@ -19,6 +19,8 @@
 #include <QtGlobal>
 #include <QsLog.h>
 
+using namespace twoDModel::trajectory;
+
 TrajectorySaver::TrajectorySaver(QObject *parent)
 	: QObject(parent)
 {
@@ -81,13 +83,12 @@ QJsonObject TrajectorySaver::createState(const QString &id, const QString &state
 
 void TrajectorySaver::sendFrame()
 {
+	auto frame = saveFrame();
+	QJsonDocument doc;
+	doc.setObject(frame);
+	QString data (doc.toJson( QJsonDocument::Compact));
 	if (connToVizualizator->isSendingData())
 	{
-		auto frame = saveFrame();
-		QJsonDocument doc;
-		doc.setObject(frame);
-		QString data (doc.toJson( QJsonDocument::Compact));
-
 		sendTrajectory(data);
 	}
 }

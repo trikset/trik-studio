@@ -21,6 +21,7 @@
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/view/twoDModelWidget.h"
 #include "twoDModelEngineApi.h"
+#include "src/engine/trajectory/connectionToVizualizator.h"
 
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
@@ -187,7 +188,7 @@ void TwoDModelEngineFacade::onStartInterpretation()
 		mModel->errorReporter()->addWarning(tr("Realistic physics' must be turned on to enjoy skittles and balls"));
 	}
 	mModel->timeline().start();
-	mView->mConnToVizualizator->connectToHost();
+	mView->connToVizualizer()->connectToHost();
 }
 
 void TwoDModelEngineFacade::onStopInterpretation(qReal::interpretation::StopReason reason)

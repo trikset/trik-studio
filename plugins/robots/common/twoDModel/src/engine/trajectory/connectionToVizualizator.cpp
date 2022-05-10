@@ -13,11 +13,13 @@
  * limitations under the License. */
 
 #include <QEventLoop>
+#include <QsLog.h>
 #include "connectionToVizualizator.h"
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
 
-//namespace trajectory {
+using namespace twoDModel::trajectory;
+
 /// Connection to Unity to send frames, run/stop/restart signals
 ConnectionToVizualizator::ConnectionToVizualizator()
 //ConnectionToVizualizator::ConnectionToVizualizator(QString ip, int port)
@@ -60,9 +62,12 @@ bool ConnectionToVizualizator::isConnected() const
 
 void ConnectionToVizualizator::write(const QString &data)
 {
+	int result = 0;
 	if (mSendData)
 	{
-		mSocket->write(data.toLatin1().data());
+		if (result == mSocket->write(data.toLatin1().data()) != 0){
+			QLOG_ERROR() << "Exception occured when sending data";
+		}
 	}
 }
 
@@ -129,7 +134,7 @@ void ConnectionToVizualizator::connectToHost()
 	if (mSendData)
 	{
 		reset();
-		constexpr auto timeout = 3 * 1000;
+		constexpr auto timeout = 30000;
 		QEventLoop loop;
 		QTimer::singleShot(timeout, &loop, &QEventLoop::quit);
 		connect(mSocket, &QTcpSocket::connected, &loop, &QEventLoop::quit);
@@ -142,7 +147,7 @@ void ConnectionToVizualizator::connectToHost()
 		loop.exec();
 
 		if (mSocket->state() == QTcpSocket::ConnectedState) {
-			mKeepaliveTimer->start(3000);
+			mKeepaliveTimer->start(30000);
 		} else {
 			mSocket->abort();
 		}

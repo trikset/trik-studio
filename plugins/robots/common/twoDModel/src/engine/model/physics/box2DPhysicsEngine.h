@@ -19,7 +19,6 @@
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/worldModel.h"
-#include "plugins/robots/common/twoDModel/src/engine/trajectory/trajectorySaver.h"
 
 class b2World;
 class b2Body;
@@ -120,7 +119,7 @@ private:
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
-	TrajectorySaver const *mTrajSaver {};
+	trajectory::TrajectorySaver *mTrajSaver {};
 };
 
 }

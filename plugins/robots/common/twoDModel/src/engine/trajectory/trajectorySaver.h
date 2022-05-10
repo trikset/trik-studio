@@ -27,6 +27,8 @@
 #include "connectionToVizualizator.h"
 using namespace std;
 
+namespace twoDModel {
+namespace trajectory {
 /// Main class for saving trajectories of all dynamic objects on scene (robot, ball, skittle)
 /// Saves trajectory as a sequence of frames. Frame is a scene state in particular moment.
 /// Every frame consists of states. State describes status of a single object
@@ -34,7 +36,7 @@ class TrajectorySaver : public QObject
 {
 	Q_OBJECT
 public:
-	TrajectorySaver(QObject *parent);
+	explicit TrajectorySaver(QObject *parent = nullptr);
 
 private:
 	ConnectionToVizualizator *connToVizualizator = nullptr;
@@ -77,3 +79,5 @@ public slots:
 	/// Emitted when user presses "Stop" button in vizualizator
 	void onStopInterpretation();
 };
+}
+}
