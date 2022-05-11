@@ -14,15 +14,15 @@
 
 #include <QEventLoop>
 #include <QsLog.h>
-#include "connectionToVizualizator.h"
+#include "connectionToVisualizer.h"
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
 
 using namespace twoDModel::trajectory;
 
 /// Connection to Unity to send frames, run/stop/restart signals
-ConnectionToVizualizator::ConnectionToVizualizator()
-//ConnectionToVizualizator::ConnectionToVizualizator(QString ip, int port)
+ConnectionToVisualizer::ConnectionToVisualizer()
+//ConnectionToVisualizer::ConnectionToVisualizer(QString ip, int port)
 //	: mIp(ip)
 //	, mPort(port)
 {
@@ -39,28 +39,28 @@ ConnectionToVizualizator::ConnectionToVizualizator()
 	}, this);
 }
 
-ConnectionToVizualizator::~ConnectionToVizualizator()
+ConnectionToVisualizer::~ConnectionToVisualizer()
 {
 	reset();
 	mKeepaliveTimer->deleteLater();
 	mSocket->deleteLater();
 }
 
-void ConnectionToVizualizator::init()
+void ConnectionToVisualizer::init()
 {
 	mKeepaliveTimer = new QTimer();
 	mSocket = new QTcpSocket();
 	qRegisterMetaType<QAbstractSocket::SocketState>();
 	connect(mKeepaliveTimer, &QTimer::timeout, this, [this]() { write("keepalive \n"); } );
-	connect(mSocket, &QTcpSocket::readyRead, this, &ConnectionToVizualizator::onReadyRead);
+	connect(mSocket, &QTcpSocket::readyRead, this, &ConnectionToVisualizer::onReadyRead);
 }
 
-bool ConnectionToVizualizator::isConnected() const
+bool ConnectionToVisualizer::isConnected() const
 {
 	return mSocket->state() == QTcpSocket::ConnectedState;
 }
 
-void ConnectionToVizualizator::write(const QString &data)
+void ConnectionToVisualizer::write(const QString &data)
 {
 	int result = 0;
 	if (mSendData)
@@ -71,7 +71,7 @@ void ConnectionToVizualizator::write(const QString &data)
 	}
 }
 
-void ConnectionToVizualizator::onReadyRead()
+void ConnectionToVisualizer::onReadyRead()
 {
 	const QByteArray &data = mSocket->readAll();
 	mBuffer = data;
@@ -86,22 +86,22 @@ void ConnectionToVizualizator::onReadyRead()
 	}
 }
 
-void ConnectionToVizualizator::stopPressed()
+void ConnectionToVisualizer::stopPressed()
 {
 	write("Stop");
 }
 
-void ConnectionToVizualizator::startPressed()
+void ConnectionToVisualizer::startPressed()
 {
 	write("Run");
 }
 
-void ConnectionToVizualizator::restartPressed()
+void ConnectionToVisualizer::restartPressed()
 {
 	write("Restart");
 }
 
-void ConnectionToVizualizator::reset()
+void ConnectionToVisualizer::reset()
 {
 	if (!mKeepaliveTimer->isActive())
 		return;
@@ -109,27 +109,27 @@ void ConnectionToVizualizator::reset()
 	mSocket->disconnectFromHost();
 }
 
-quint16 ConnectionToVizualizator::getPort() const
+quint16 ConnectionToVisualizer::getPort() const
 {
 	return mPort;
 }
 
-QString ConnectionToVizualizator::getIp() const
+QString ConnectionToVisualizer::getIp() const
 {
 	return mIp;
 }
 
-void ConnectionToVizualizator::setPort(const quint16 &value)
+void ConnectionToVisualizer::setPort(const quint16 &value)
 {
 	mPort = value;
 }
 
-void ConnectionToVizualizator::setIp(const QString &value)
+void ConnectionToVisualizer::setIp(const QString &value)
 {
 	mIp = value;
 }
 
-void ConnectionToVizualizator::connectToHost()
+void ConnectionToVisualizer::connectToHost()
 {
 	if (mSendData)
 	{
@@ -154,7 +154,7 @@ void ConnectionToVizualizator::connectToHost()
 	}
 }
 
-void ConnectionToVizualizator::disconnectFromHost()
+void ConnectionToVisualizer::disconnectFromHost()
 {
 	if (isConnected()) {
 		mSocket->disconnectFromHost();
@@ -164,7 +164,7 @@ void ConnectionToVizualizator::disconnectFromHost()
 	}
 }
 
-bool ConnectionToVizualizator::isSendingData()
+bool ConnectionToVisualizer::isSendingData()
 {
 	return mSendData;
 }

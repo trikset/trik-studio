@@ -23,15 +23,15 @@
 namespace twoDModel {
 namespace trajectory {
 /// Connection to Unity to send frames and run/stop/restart
-class alignas(8) ConnectionToVizualizator : public QObject
+class alignas(8) ConnectionToVisualizer : public QObject
 {
 	Q_OBJECT
-	Q_DISABLE_COPY(ConnectionToVizualizator)
+	Q_DISABLE_COPY(ConnectionToVisualizer)
 
 public:
-//	ConnectionToVizualizator(QString ip, int port);
-	ConnectionToVizualizator();
-	~ConnectionToVizualizator();
+//	ConnectionToVisualizer(QString ip, int port);
+	ConnectionToVisualizer();
+	~ConnectionToVisualizer();
 
 	/// inits manager after moved to correct thread
 	void init();

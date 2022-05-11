@@ -24,7 +24,7 @@
 #include <QJsonArray>
 
 #include <qrutils/graphicsUtils/abstractItem.h>
-#include "connectionToVizualizator.h"
+#include "connectionToVisualizer.h"
 using namespace std;
 
 namespace twoDModel {
@@ -39,7 +39,7 @@ public:
 	explicit TrajectorySaver(QObject *parent = nullptr);
 
 private:
-	ConnectionToVizualizator *connToVizualizator = nullptr;
+	ConnectionToVisualizer *mConnToVisualizer = nullptr;
 
 	bool isPlaying = false;
 	QJsonArray frames;
@@ -76,7 +76,7 @@ public slots:
 	/// (depends on perfomance) to server in Json Compact format
 	void sendFrame();
 
-	/// Emitted when user presses "Stop" button in vizualizator
+	/// Emitted when user presses "Stop" button in visualizator
 	void onStopInterpretation();
 };
 }

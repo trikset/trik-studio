@@ -65,7 +65,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
 	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
-	$$PWD/src/engine/trajectory/connectionToVizualizator.h \
+	$$PWD/src/engine/trajectory/connectionToVisualizer.h \
 	$$PWD/src/engine/trajectory/trajectorySaver.h \
 
 HEADERS += \
@@ -132,7 +132,7 @@ HEADERS += \
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
-	$$PWD/src/engine/trajectory/connectionToVizualizator.cpp \
+	$$PWD/src/engine/trajectory/connectionToVisualizer.cpp \
 	$$PWD/src/engine/trajectory/trajectorySaver.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \

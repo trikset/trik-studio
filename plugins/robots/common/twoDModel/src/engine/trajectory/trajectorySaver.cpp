@@ -24,9 +24,9 @@ using namespace twoDModel::trajectory;
 TrajectorySaver::TrajectorySaver(QObject *parent)
 	: QObject(parent)
 {
-	connToVizualizator = new ConnectionToVizualizator();
-	connToVizualizator->setPort(8080);
-	connToVizualizator->init();
+	mConnToVisualizer = new ConnectionToVisualizer();
+	mConnToVisualizer->setPort(8080);
+	mConnToVisualizer->init();
 }
 
 void TrajectorySaver::saveBeepState(const QString &robotId, int time)
@@ -87,7 +87,7 @@ void TrajectorySaver::sendFrame()
 	QJsonDocument doc;
 	doc.setObject(frame);
 	QString data (doc.toJson( QJsonDocument::Compact));
-	if (connToVizualizator->isSendingData())
+	if (mConnToVisualizer->isSendingData())
 	{
 		sendTrajectory(data);
 	}
@@ -132,30 +132,30 @@ void TrajectorySaver::saveToFile()
 
 void TrajectorySaver::reinitConnection()
 {
-	if (connToVizualizator == nullptr) {
-		connToVizualizator = new ConnectionToVizualizator();
-		connToVizualizator->setPort(8080);
-		connToVizualizator->init();
+	if (mConnToVisualizer == nullptr) {
+		mConnToVisualizer = new ConnectionToVisualizer();
+		mConnToVisualizer->setPort(8080);
+		mConnToVisualizer->init();
 	}
-	connToVizualizator->connectToHost();
-//	qDebug(qPrintable(connToVizualizator->getIp()));
+	mConnToVisualizer->connectToHost();
+//	qDebug(qPrintable(mConnToVisualizer->getIp()));
 }
 
 void TrajectorySaver::sendTrajectory(const QString &data = nullptr)
 {
-	if (connToVizualizator == nullptr || !connToVizualizator->isConnected()) {
+	if (mConnToVisualizer == nullptr || !mConnToVisualizer->isConnected()) {
 		reinitConnection();
 	}
 
 //	qDebug(qPrintable(data));
 	if (data != nullptr) {
-		connToVizualizator->write(data);
+		mConnToVisualizer->write(data);
 	} else {
 		QFile file("trajectory.json");
 		try {
 			file.open(QIODevice::ReadOnly);
 			QString fileData = file.readAll();
-			connToVizualizator->write(fileData);
+			mConnToVisualizer->write(fileData);
 			file.close();
 		} catch (const ofstream::failure& e){
 			QLOG_ERROR() << "Exception occured when opening/writing to file"

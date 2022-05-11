@@ -50,7 +50,7 @@
 #include "src/engine/items/imageItem.h"
 #include "src/engine/commands/changePropertyCommand.h"
 #include "src/engine/commands/loadWorldCommand.h"
-#include "src/engine/trajectory/connectionToVizualizator.h"
+#include "src/engine/trajectory/connectionToVisualizer.h"
 
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/model.h"
@@ -75,7 +75,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	: QWidget(parent)
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
-	, mConnToVizualizator(new twoDModel::trajectory::ConnectionToVizualizator())
+	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer())
 	, mModel(model)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
@@ -131,19 +131,19 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 		// Setting value in percents
 		mSpeedPopup->setSpeed(100 / speedFactors[defaultSpeedFactorIndex] * value);
 	});
-	mConnToVizualizator->setPort(9000);
-	mConnToVizualizator->init();
-	mConnToVizualizator->connectToHost();
-	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::stopRequested,
+	mConnToVisualizer->setPort(9000);
+	mConnToVisualizer->init();
+	mConnToVisualizer->connectToHost();
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
 			this, &TwoDModelWidget::stopButtonPressed);
-	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::runRequested,
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
 			this, &TwoDModelWidget::runButtonPressed);
-	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::restartRequested,
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
 			this, &TwoDModelWidget::restartRequested);
-	connect(mUi->runButton, &QPushButton::clicked, mConnToVizualizator,
-			&twoDModel::trajectory::ConnectionToVizualizator::startPressed);
-	connect(mUi->stopButton, &QPushButton::clicked, mConnToVizualizator,
-			&twoDModel::trajectory::ConnectionToVizualizator::stopPressed);
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer,
+			&twoDModel::trajectory::ConnectionToVisualizer::startPressed);
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer,
+			&twoDModel::trajectory::ConnectionToVisualizer::stopPressed);
 
 	setRunStopButtonsVisibility();
 
@@ -416,7 +416,7 @@ void TwoDModelWidget::returnToStartMarker()
 		ball->returnToStartPosition();
 	}
 	saveWorldModelToRepo();
-	mConnToVizualizator->restartPressed();
+	mConnToVisualizer->restartPressed();
 }
 
 void TwoDModelWidget::trainingModeChanged(bool enabled)
@@ -727,9 +727,9 @@ Model &TwoDModelWidget::model() const
 	return mModel;
 }
 
-twoDModel::trajectory::ConnectionToVizualizator *TwoDModelWidget::connToVizualizer()
+twoDModel::trajectory::ConnectionToVisualizer *TwoDModelWidget::connToVisualizer()
 {
-	return mConnToVizualizator;
+	return mConnToVisualizer;
 }
 
 void TwoDModelWidget::setController(ControllerInterface &controller)
