@@ -131,6 +131,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 		// Setting value in percents
 		mSpeedPopup->setSpeed(100 / speedFactors[defaultSpeedFactorIndex] * value);
 	});
+<<<<<<< HEAD
 	mConnToVisualizer->setPort(9000);
 	mConnToVisualizer->init();
 	mConnToVisualizer->connectToHost();
@@ -144,6 +145,21 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 			&twoDModel::trajectory::ConnectionToVisualizer::startPressed);
 	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer.data(),
 			&twoDModel::trajectory::ConnectionToVisualizer::stopPressed);
+=======
+	mConnToVizualizator->setPort(9000);
+	mConnToVizualizator->init();
+	mConnToVizualizator->connectToHost();
+	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::stopRequested,
+			this, &TwoDModelWidget::stopButtonPressed);
+	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::runRequested,
+			this, &TwoDModelWidget::runButtonPressed);
+	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::restartRequested,
+			this, &TwoDModelWidget::restartRequested);
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVizualizator,
+			&twoDModel::trajectory::ConnectionToVizualizator::startPressed);
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVizualizator,
+			&twoDModel::trajectory::ConnectionToVizualizator::stopPressed);
+>>>>>>> changed lines length
 
 	setRunStopButtonsVisibility();
 

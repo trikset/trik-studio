@@ -56,6 +56,7 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
+<<<<<<< HEAD
 	connect(this, &Box2DPhysicsEngine::trajectoryPosChanged,
 			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
 	connect(this, &Box2DPhysicsEngine::trajectoryRotChanged,
@@ -63,6 +64,13 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver.data(),
 			&trajectory::TrajectorySaver::onItemDragged);
 	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver.data(), &trajectory::TrajectorySaver::sendFrame);
+=======
+	connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged,
+			mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
+	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver,
+			&trajectory::TrajectorySaver::onItemDragged);
+	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver, &trajectory::TrajectorySaver::sendFrame);
+>>>>>>> changed lines length
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -156,6 +164,7 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
 		connect(robot, &RobotModel::trajectorySoundStateChanged,
+<<<<<<< HEAD
 				mTrajSaver.data(), &trajectory::TrajectorySaver::saveBeepState);
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
 				mTrajSaver.data(), &trajectory::TrajectorySaver::saveMarkerState);
@@ -171,6 +180,17 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 				mTrajSaver.data(), &trajectory::TrajectorySaver::saveToFile);
 		connect(robot, &RobotModel::onStopPlaying,
 				mTrajSaver.data(), &trajectory::TrajectorySaver::onStopInterpretation);
+=======
+				mTrajSaver, &trajectory::TrajectorySaver::saveBeepState);
+		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
+				mTrajSaver, &trajectory::TrajectorySaver::saveMarkerState);
+		connect(robot, &RobotModel::trajectoryPosOrAngleChanged,
+				mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
+		connect(robot, &RobotModel::trajectoryOnitemDragged,
+				mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
+		connect(robot, &RobotModel::trajectorySave, mTrajSaver, &trajectory::TrajectorySaver::saveToFile);
+		connect(robot, &RobotModel::onStopPlaying, mTrajSaver, &trajectory::TrajectorySaver::onStopInterpretation);
+>>>>>>> changed lines length
 	});
 }
 
