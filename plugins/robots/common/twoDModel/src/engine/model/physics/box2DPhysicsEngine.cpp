@@ -56,8 +56,10 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
-	connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged, mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
-	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
+	connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged,
+			mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
+	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver,
+			&trajectory::TrajectorySaver::onItemDragged);
 	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver, &trajectory::TrajectorySaver::sendFrame);
 }
 
@@ -151,10 +153,14 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 		});
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
-		connect(robot, &RobotModel::trajectorySoundStateChanged, mTrajSaver, &trajectory::TrajectorySaver::saveBeepState);
-		connect(robot, &RobotModel::trajectoryMarkerColorChanged, mTrajSaver, &trajectory::TrajectorySaver::saveMarkerState);
-		connect(robot, &RobotModel::trajectoryPosOrAngleChanged, mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
-		connect(robot, &RobotModel::trajectoryOnitemDragged, mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
+		connect(robot, &RobotModel::trajectorySoundStateChanged,
+				mTrajSaver, &trajectory::TrajectorySaver::saveBeepState);
+		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
+				mTrajSaver, &trajectory::TrajectorySaver::saveMarkerState);
+		connect(robot, &RobotModel::trajectoryPosOrAngleChanged,
+				mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
+		connect(robot, &RobotModel::trajectoryOnitemDragged,
+				mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
 		connect(robot, &RobotModel::trajectorySave, mTrajSaver, &trajectory::TrajectorySaver::saveToFile);
 		connect(robot, &RobotModel::onStopPlaying, mTrajSaver, &trajectory::TrajectorySaver::onStopInterpretation);
 	});

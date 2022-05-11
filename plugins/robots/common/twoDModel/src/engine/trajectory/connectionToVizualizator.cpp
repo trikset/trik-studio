@@ -134,7 +134,7 @@ void ConnectionToVizualizator::connectToHost()
 	if (mSendData)
 	{
 		reset();
-		constexpr auto timeout = 30000;
+		constexpr auto timeout = 3000;
 		QEventLoop loop;
 		QTimer::singleShot(timeout, &loop, &QEventLoop::quit);
 		connect(mSocket, &QTcpSocket::connected, &loop, &QEventLoop::quit);
@@ -147,7 +147,7 @@ void ConnectionToVizualizator::connectToHost()
 		loop.exec();
 
 		if (mSocket->state() == QTcpSocket::ConnectedState) {
-			mKeepaliveTimer->start(30000);
+			mKeepaliveTimer->start(3000);
 		} else {
 			mSocket->abort();
 		}
