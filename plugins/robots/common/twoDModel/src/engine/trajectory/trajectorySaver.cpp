@@ -26,6 +26,10 @@ TrajectorySaver::TrajectorySaver(QObject *parent)
 	: QObject(parent)
 	, mConnToVisualizer(new ConnectionToVisualizer(this))
 {
+<<<<<<< HEAD
+=======
+	mConnToVisualizer = new ConnectionToVisualizer();
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 	mConnToVisualizer->setPort(8080);
 	mConnToVisualizer->init();
 }
@@ -144,7 +148,11 @@ void TrajectorySaver::saveToFile()
 void TrajectorySaver::reinitConnection()
 {
 	if (mConnToVisualizer == nullptr) {
+<<<<<<< HEAD
 //		mConnToVisualizer = new ConnectionToVisualizer();
+=======
+		mConnToVisualizer = new ConnectionToVisualizer();
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 		mConnToVisualizer->setPort(8080);
 		mConnToVisualizer->init();
 	}

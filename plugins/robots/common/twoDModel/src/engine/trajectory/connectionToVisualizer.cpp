@@ -21,8 +21,14 @@
 using namespace twoDModel::trajectory;
 
 /// Connection to Unity to send frames, run/stop/restart signals
+<<<<<<< HEAD:plugins/robots/common/twoDModel/src/engine/trajectory/connectionToVisualizer.cpp
 ConnectionToVisualizer::ConnectionToVisualizer(QObject *parent)
 	: QObject(parent)
+=======
+ConnectionToVisualizer::ConnectionToVisualizer()
+//ConnectionToVisualizer::ConnectionToVisualizer(QString ip, int port)
+//	: mIp(ip)
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer:plugins/robots/common/twoDModel/src/engine/trajectory/connectionToVizualizator.cpp
 //	, mPort(port)
 {
 	setIp(qReal::SettingsManager::value("UnityTcpServer").toString());

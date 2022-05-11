@@ -75,7 +75,11 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	: QWidget(parent)
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
+<<<<<<< HEAD
 	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer(this))
+=======
+	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer())
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 	, mModel(model)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
@@ -132,6 +136,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 		mSpeedPopup->setSpeed(100 / speedFactors[defaultSpeedFactorIndex] * value);
 	});
 <<<<<<< HEAD
+<<<<<<< HEAD
 	mConnToVisualizer->setPort(9000);
 	mConnToVisualizer->init();
 	mConnToVisualizer->connectToHost();
@@ -150,16 +155,29 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mConnToVizualizator->init();
 	mConnToVizualizator->connectToHost();
 	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::stopRequested,
+=======
+	mConnToVisualizer->setPort(9000);
+	mConnToVisualizer->init();
+	mConnToVisualizer->connectToHost();
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 			this, &TwoDModelWidget::stopButtonPressed);
-	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::runRequested,
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
 			this, &TwoDModelWidget::runButtonPressed);
-	connect(mConnToVizualizator, &twoDModel::trajectory::ConnectionToVizualizator::restartRequested,
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
 			this, &TwoDModelWidget::restartRequested);
+<<<<<<< HEAD
 	connect(mUi->runButton, &QPushButton::clicked, mConnToVizualizator,
 			&twoDModel::trajectory::ConnectionToVizualizator::startPressed);
 	connect(mUi->stopButton, &QPushButton::clicked, mConnToVizualizator,
 			&twoDModel::trajectory::ConnectionToVizualizator::stopPressed);
 >>>>>>> changed lines length
+=======
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer,
+			&twoDModel::trajectory::ConnectionToVisualizer::startPressed);
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer,
+			&twoDModel::trajectory::ConnectionToVisualizer::stopPressed);
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 
 	setRunStopButtonsVisibility();
 
@@ -745,7 +763,11 @@ Model &TwoDModelWidget::model() const
 
 twoDModel::trajectory::ConnectionToVisualizer *TwoDModelWidget::connToVisualizer()
 {
+<<<<<<< HEAD
 	return mConnToVisualizer.data();
+=======
+	return mConnToVisualizer;
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 }
 
 void TwoDModelWidget::setController(ControllerInterface &controller)

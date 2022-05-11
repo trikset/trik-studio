@@ -40,7 +40,11 @@ public:
 	~TrajectorySaver();
 
 private:
+<<<<<<< HEAD
 	QScopedPointer<ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
+=======
+	ConnectionToVisualizer *mConnToVisualizer = nullptr;
+>>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 
 	bool isPlaying = false;
 	QJsonArray frames;
