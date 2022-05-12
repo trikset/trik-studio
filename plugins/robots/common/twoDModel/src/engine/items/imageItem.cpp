@@ -174,6 +174,7 @@ void ImageItem::setBackgroundRole(bool background)
 {
 	mBackgroundRole = background;
 	if (!isSelected()) {
+		setEditable(!mBackgroundRole);
 		setFlag(ItemIsSelectable, !mBackgroundRole);
 	}
 	setZValue(background ? ZValue::Background : ZValue::Picture);
@@ -190,6 +191,7 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 		emit selectedChanged(value.toBool());
 		if (!value.toBool() && isBackground()) {
 			setFlag(ItemIsSelectable, false);
+			setEditable(false);
 			unsetCursor();
 		}
 	}
@@ -197,7 +199,7 @@ QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 	return AbstractItem::itemChange(change, value);
 }
 
-void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+void ImageItem::updateCursor(QGraphicsSceneHoverEvent *event)
 {
 	if (isSelected() || !isBackground()) {
 		if (resizeArea().contains(event->pos())) {
@@ -205,41 +207,13 @@ void ImageItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 		} else {
 			unsetCursor();
 		}
-		// TODO: Why not AstractItem::hoverMoveEvent()
-		QGraphicsItem::hoverMoveEvent(event);
-	}
-}
-
-void ImageItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-	if (isSelected() || !isBackground()) {
-		AbstractItem::mousePressEvent(event);
-	} else {
-		event->accept();
-	}
-}
-
-void ImageItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-	if (isSelected() || !isBackground()) {
-		AbstractItem::mouseMoveEvent(event);
-	} else {
-		event->accept();
-	}
-}
-
-void ImageItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-	if (isSelected() || !isBackground()) {
-		AbstractItem::mouseReleaseEvent(event);
-	} else {
-		event->accept();
 	}
 }
 
 void ImageItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
 	if (isBackground()) {
+		setEditable(true);
 		setFlag(ItemIsSelectable);
 	}
 	AbstractItem::mousePressEvent(event);

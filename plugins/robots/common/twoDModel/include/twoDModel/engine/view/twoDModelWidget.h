@@ -176,6 +176,7 @@ private slots:
 	void toggleDetailsVisibility();
 
 	void returnToStartMarker();
+	void setStartMarker();
 
 	void trainingModeChanged(bool enabled);
 

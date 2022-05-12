@@ -48,6 +48,7 @@
 #include "src/engine/items/ellipseItem.h"
 #include "src/engine/items/stylusItem.h"
 #include "src/engine/items/imageItem.h"
+#include "src/engine/items/startPosition.h"
 #include "src/engine/commands/changePropertyCommand.h"
 #include "src/engine/commands/loadWorldCommand.h"
 #include "src/engine/trajectory/connectionToVisualizer.h"
@@ -352,6 +353,7 @@ void TwoDModelWidget::connectUiButtons()
 			, this, &TwoDModelWidget::onMultiselectionCursorActionTriggered);
 
 	connect(mRobotItemPopup, &RobotItemPopup::restoreRobotPositionClicked, this, &TwoDModelWidget::returnToStartMarker);
+	connect(mRobotItemPopup, &RobotItemPopup::setRobotPositionClicked, this, &TwoDModelWidget::setStartMarker);
 	connect(mUi->initialStateButton, &QAbstractButton::clicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(this, &TwoDModelWidget::restartRequested, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
@@ -419,6 +421,13 @@ void TwoDModelWidget::returnToStartMarker()
 	mConnToVisualizer->restartPressed();
 }
 
+void TwoDModelWidget::setStartMarker()
+{
+	for (auto &&model : mModel.robotModels()) {
+		model->startPositionMarker()->setPos(model->robotCenter());
+		model->startPositionMarker()->setRotation(mScene->robot(*model)->rotation());
+	}
+}
 void TwoDModelWidget::trainingModeChanged(bool enabled)
 {
 	mUi->trainingModeButton->setToolTip(enabled

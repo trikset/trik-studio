@@ -24,9 +24,11 @@ using namespace qReal;
 using namespace kitBase::robotModel;
 
 Autoconfigurer::Autoconfigurer(const GraphicalModelAssistInterface &graphicalModelApi
+		, const LogicalModelAssistInterface &logicalModelApi
 		, BlocksTable &blocksTable
 		, qReal::ErrorReporterInterface &errorReporter)
 	: mGraphicalModelApi(graphicalModelApi)
+	, mLogicalModelApi(logicalModelApi)
 	, mBlocksTable(blocksTable)
 	, mErrorReporter(errorReporter)
 {
@@ -48,13 +50,17 @@ bool Autoconfigurer::configure(QList<qReal::Id> const &diagrams, const QString &
 			for (const PortInfo &port : usedDevices.keys()) {
 				const DeviceInfo device = usedDevices[port];
 				const DeviceInfo existingDevice = currentConfiguration(robotId, port);
-				if (!existingDevice.isNull() && !existingDevice.isA(device)) {
+				if (existingDevice.isA(device)) {
+					// Do nothing
+				} else if (!mLogicalModelApi.mutableLogicalRepoApi()
+						.metaInformation("twoDModelSensorsReadOnly").toBool() && existingDevice.isNull()) {
+					mErrorReporter.addInformation(QObject::tr("%2 has been auto configured to "\
+							"port %1").arg(port.name(), device.friendlyName()), child);
+					deviceConfigurationChanged(robotId, port, device, Reason::automaticConfiguration);
+				} else {
 					mErrorReporter.addError(QObject::tr("Sensor on port %1 does not correspond to blocks "\
 							"on the diagram.").arg(port.name()), child);
 					return false;
-				} else if (existingDevice.isNull()) {
-					/// @todo: Do it loudly, user must notice it
-					deviceConfigurationChanged(robotId, port, device, Reason::automaticConfiguration);
 				}
 			}
 		}
