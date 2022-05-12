@@ -380,7 +380,8 @@ void RobotModel::nextFragment()
 	emit robotRided(mPos, mAngle);
 	if (isRiding())
 	{
-		emit trajectoryPosOrAngleChanged(mRobotModel.robotId(), mPos, mAngle);
+		emit trajectoryPosChanged(mRobotModel.robotId(), mPos);
+		emit trajectoryRotChanged(mRobotModel.robotId(), mAngle);
 	}
 }
 
@@ -394,7 +395,9 @@ void RobotModel::setPosition(const QPointF &newPos)
 	if (newPos != mPos) {
 		mPos = newPos;
 		emit positionChanged(newPos);
-		emit trajectoryOnitemDragged(mRobotModel.robotId(), mPos, mAngle);
+		emit trajectoryCleanTrace(mRobotModel.robotId());
+		emit trajectoryPosChanged(mRobotModel.robotId(), newPos);
+		emit trajectoryOnitemDragged();
 	}
 }
 
@@ -408,7 +411,8 @@ void RobotModel::setRotation(qreal angle)
 	if (!mathUtils::Math::eq(mAngle, angle)) {
 		mAngle = angle;
 		emit rotationChanged(angle);
-		emit trajectoryOnitemDragged(mRobotModel.robotId(), mPos, mAngle);
+		emit trajectoryRotChanged(mRobotModel.robotId(), mAngle);
+		emit trajectoryOnitemDragged();
 	}
 }
 

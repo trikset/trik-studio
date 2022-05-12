@@ -75,7 +75,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	: QWidget(parent)
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
-	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer())
+	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer(this))
 	, mModel(model)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
@@ -134,15 +134,15 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mConnToVisualizer->setPort(9000);
 	mConnToVisualizer->init();
 	mConnToVisualizer->connectToHost();
-	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
+	connect(mConnToVisualizer.data(), &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
 			this, &TwoDModelWidget::stopButtonPressed);
-	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
+	connect(mConnToVisualizer.data(), &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
 			this, &TwoDModelWidget::runButtonPressed);
-	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
+	connect(mConnToVisualizer.data(), &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
 			this, &TwoDModelWidget::restartRequested);
-	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer,
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer.data(),
 			&twoDModel::trajectory::ConnectionToVisualizer::startPressed);
-	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer,
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer.data(),
 			&twoDModel::trajectory::ConnectionToVisualizer::stopPressed);
 
 	setRunStopButtonsVisibility();
@@ -729,7 +729,7 @@ Model &TwoDModelWidget::model() const
 
 twoDModel::trajectory::ConnectionToVisualizer *TwoDModelWidget::connToVisualizer()
 {
-	return mConnToVisualizer;
+	return mConnToVisualizer.data();
 }
 
 void TwoDModelWidget::setController(ControllerInterface &controller)

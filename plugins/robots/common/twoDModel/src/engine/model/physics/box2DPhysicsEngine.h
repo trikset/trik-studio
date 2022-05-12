@@ -90,8 +90,9 @@ public slots:
 	void onRecoverRobotPosition(const QPointF &pos);
 
 	signals:
-	void trajectoryPosOrAngleChanged(QString id, QPointF pos, qreal rotation);
-	void trajectoryItemDragged(QString id, QPointF pos, qreal rotation);
+	void trajectoryPosChanged(QString id, QPointF pos);
+	void trajectoryRotChanged(QString id, qreal rotation);
+	void trajectoryItemDragged();
 	void trajectorySave();
 	void sendNextFrame();
 
@@ -119,7 +120,7 @@ private:
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
-	trajectory::TrajectorySaver *mTrajSaver {};
+	QScopedPointer<trajectory::TrajectorySaver> mTrajSaver {}; // Takes ownership
 };
 
 }

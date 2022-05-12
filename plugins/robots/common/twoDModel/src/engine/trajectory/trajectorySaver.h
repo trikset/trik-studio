@@ -37,16 +37,18 @@ class TrajectorySaver : public QObject
 	Q_OBJECT
 public:
 	explicit TrajectorySaver(QObject *parent = nullptr);
+	~TrajectorySaver();
 
 private:
-	ConnectionToVisualizer *mConnToVisualizer = nullptr;
+	QScopedPointer<ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
 
 	bool isPlaying = false;
 	QJsonArray frames;
 	QJsonArray currStates;
 
 	void sendTrajectory(const QString &data);
-	void addState(const QString &id, const QPointF &pos, const qreal &rotation);
+//	void addState(const QString &id, const QPointF &pos, const qreal &rotation);
+	void addState(const QString &id, const QString &value);
 
 	QJsonObject createState(const QString &id, const QString &stateStr);
 	QJsonObject saveFrame();
@@ -55,11 +57,13 @@ private:
 
 public slots:
 	/// Emitted when robot/ball/skittle is moved by user. It can happen while playing or not.
-	void onItemDragged(const QString &id, const QPointF &pos, const qreal &rotation);
+	void onItemDragged();
 
-	/// Saves position and angle of robot. Emitted when nextFragment is playing,
-	/// saves position and angle of balls/skittles. Emitted when nextFrame is playing
-	void saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation);
+	/// Save position and angle of robot. Emitted when nextFragment is playing,
+	/// save position and angle of balls/skittles. Emitted when nextFrame is playing
+	void saveItemPosition(const QString &id, const QPointF &pos);
+	void saveItemRotation(const QString &id, const qreal &rotation);
+	//	void saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation);
 
 	/// Emitted when robot plays beep sound, saves beeping time in ms
 	void saveBeepState(const QString &robotId, int time);
@@ -78,6 +82,8 @@ public slots:
 
 	/// Emitted when user presses "Stop" button in visualizator
 	void onStopInterpretation();
+
+	void onCleanRobotTrace(const QString &robotId);
 };
 }
 }

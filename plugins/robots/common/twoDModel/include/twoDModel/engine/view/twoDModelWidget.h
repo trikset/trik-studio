@@ -253,7 +253,7 @@ private:
 
 	RobotItem *mSelectedRobotItem {};
 	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};
-	twoDModel::trajectory::ConnectionToVisualizer *mConnToVisualizer {};
+	QScopedPointer<twoDModel::trajectory::ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
 
 	model::Model &mModel;
 	qReal::ControllerInterface *mController {};

@@ -29,8 +29,7 @@ class alignas(8) ConnectionToVisualizer : public QObject
 	Q_DISABLE_COPY(ConnectionToVisualizer)
 
 public:
-//	ConnectionToVisualizer(QString ip, int port);
-	ConnectionToVisualizer();
+	explicit ConnectionToVisualizer(QObject *parent = nullptr);
 	~ConnectionToVisualizer();
 
 	/// inits manager after moved to correct thread

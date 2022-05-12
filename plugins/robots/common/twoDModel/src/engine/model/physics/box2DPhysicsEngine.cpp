@@ -45,7 +45,7 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	, mWorld(new b2World(b2Vec2(0, 0)))
 	, mPrevPosition(b2Vec2(0, 0))
 	, mPrevAngle(0)
-	, mTrajSaver(new trajectory::TrajectorySaver())
+	, mTrajSaver(new trajectory::TrajectorySaver(this))
 {
 	connect(&worldModel, &model::WorldModel::wallAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
@@ -56,11 +56,13 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
-	connect(this, &Box2DPhysicsEngine::trajectoryPosOrAngleChanged,
-			mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
-	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver,
+	connect(this, &Box2DPhysicsEngine::trajectoryPosChanged,
+			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
+	connect(this, &Box2DPhysicsEngine::trajectoryRotChanged,
+			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemRotation);
+	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver.data(),
 			&trajectory::TrajectorySaver::onItemDragged);
-	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver, &trajectory::TrajectorySaver::sendFrame);
+	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver.data(), &trajectory::TrajectorySaver::sendFrame);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -154,15 +156,21 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
 		connect(robot, &RobotModel::trajectorySoundStateChanged,
-				mTrajSaver, &trajectory::TrajectorySaver::saveBeepState);
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveBeepState);
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
-				mTrajSaver, &trajectory::TrajectorySaver::saveMarkerState);
-		connect(robot, &RobotModel::trajectoryPosOrAngleChanged,
-				mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveMarkerState);
+		connect(robot, &RobotModel::trajectoryPosChanged,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
+		connect(robot, &RobotModel::trajectoryRotChanged,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemRotation);
 		connect(robot, &RobotModel::trajectoryOnitemDragged,
-				mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
-		connect(robot, &RobotModel::trajectorySave, mTrajSaver, &trajectory::TrajectorySaver::saveToFile);
-		connect(robot, &RobotModel::onStopPlaying, mTrajSaver, &trajectory::TrajectorySaver::onStopInterpretation);
+				mTrajSaver.data(), &trajectory::TrajectorySaver::onItemDragged);
+		connect(robot, &RobotModel::trajectoryCleanTrace,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::onCleanRobotTrace);
+		connect(robot, &RobotModel::trajectorySave,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveToFile);
+		connect(robot, &RobotModel::onStopPlaying,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::onStopInterpretation);
 	});
 }
 
@@ -230,6 +238,7 @@ void Box2DPhysicsEngine::onRecoverRobotPosition(const QPointF &pos)
 	stop(mBox2DRobots.first()->getWheelAt(1)->getBody());
 
 	onMouseReleased(pos, mBox2DRobots.keys().first()->startPositionMarker()->rotation());
+	mTrajSaver->onCleanRobotTrace(mBox2DRobots.keys().first()->info().robotId());
 }
 
 void Box2DPhysicsEngine::removeRobot(model::RobotModel * const robot)
@@ -370,9 +379,11 @@ void Box2DPhysicsEngine::nextFrame()
 			QPointF scenePos = positionToScene(mBox2DDynamicItems[item]->getPosition());
 			item->setPos(scenePos - item->boundingRect().center());
 			item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
+
+			auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
+			emit trajectoryPosChanged(abstractItem->id(), abstractItem->pos());
+			emit trajectoryRotChanged(abstractItem->id(), abstractItem->rotation());
 		}
-		auto *abstractItem = dynamic_cast<graphicsUtils::AbstractItem *>(item);
-		emit trajectoryPosOrAngleChanged(abstractItem->id(), abstractItem->pos(), abstractItem->rotation());
 	}
 	emit sendNextFrame();
 }
@@ -450,7 +461,9 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 				bItem->setRotation(0);
 				bItem->moveToPosition(positionToBox2D(localScenePos + localCenter));
 				bItem->setRotation(angleToBox2D(localRotation));
-				emit trajectoryItemDragged(item->id(), item->pos(), item->rotation());
+				emit trajectoryPosChanged(item->id(), item->pos());
+				emit trajectoryRotChanged(item->id(), item->rotation());
+				emit trajectoryItemDragged();
 			}
 		} else {
 			b2Vec2 pos = positionToBox2D(collidingPolygon.boundingRect().center());

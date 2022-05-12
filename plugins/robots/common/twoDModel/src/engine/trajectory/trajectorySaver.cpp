@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "trajectorySaver.h"
+#include "connectionToVisualizer.h"
 #include <iostream>
 #include <fstream>
 #include <QFile>
@@ -23,10 +24,15 @@ using namespace twoDModel::trajectory;
 
 TrajectorySaver::TrajectorySaver(QObject *parent)
 	: QObject(parent)
+	, mConnToVisualizer(new ConnectionToVisualizer(this))
 {
-	mConnToVisualizer = new ConnectionToVisualizer();
 	mConnToVisualizer->setPort(8080);
 	mConnToVisualizer->init();
+}
+
+TrajectorySaver::~TrajectorySaver()
+{
+	mConnToVisualizer->disconnectFromHost();
 }
 
 void TrajectorySaver::saveBeepState(const QString &robotId, int time)
@@ -43,28 +49,33 @@ void TrajectorySaver::saveMarkerState(const QString &robotId, const QColor &colo
 	currStates.append(createState(robotId, value.str().c_str()));
 }
 
-void TrajectorySaver::saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation)
+void TrajectorySaver::saveItemPosition(const QString &id, const QPointF &pos)
 {
-	addState(id, pos, rotation);
+	stringstream value;
+	value << "pos=" << pos.x() << " " << -pos.y();
+	addState(id, value.str().c_str());
 	isPlaying = true;
 }
 
-void TrajectorySaver::onItemDragged(const QString &id, const QPointF &pos, const qreal &rotation)
+void TrajectorySaver::saveItemRotation(const QString &id, const qreal &rotation)
 {
-	addState(id, pos, rotation);
+	stringstream value;
+	value << "rot=" << rotation;
+	addState(id, value.str().c_str());
+	isPlaying = true;
+}
+
+void TrajectorySaver::onItemDragged()
+{
 	if (!isPlaying) {
 		sendFrame();
 	}
 }
 
 /// Syntactic sugar for onItemDragged and saveItemPosOrState
-void TrajectorySaver::addState(const QString &id, const QPointF &pos, const qreal &rotation)
+void TrajectorySaver::addState(const QString &id, const QString &value)
 {
-	stringstream value;
-	value << "pos=" << pos.x() << " " << -pos.y();
-	value << "|rot=" << rotation;
-
-	auto state = createState(id, value.str().c_str());
+	auto state = createState(id, value);
 	if (!currStates.contains(QJsonValue(state))) {
 		//qDebug(qUtf8Printable(id));
 		/// to avoid duplicates, it can be because onItemDragged calls when
@@ -133,7 +144,7 @@ void TrajectorySaver::saveToFile()
 void TrajectorySaver::reinitConnection()
 {
 	if (mConnToVisualizer == nullptr) {
-		mConnToVisualizer = new ConnectionToVisualizer();
+//		mConnToVisualizer = new ConnectionToVisualizer();
 		mConnToVisualizer->setPort(8080);
 		mConnToVisualizer->init();
 	}
@@ -167,4 +178,9 @@ void TrajectorySaver::sendTrajectory(const QString &data = nullptr)
 void TrajectorySaver::onStopInterpretation()
 {
 	isPlaying = false;
+}
+
+void TrajectorySaver::onCleanRobotTrace(const QString &robotId)
+{
+	saveMarkerState(robotId, Qt::GlobalColor::transparent);
 }
