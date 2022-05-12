@@ -43,10 +43,14 @@ TrajectorySaver::~TrajectorySaver()
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void TrajectorySaver::saveBeepState(const QString &robotId, const qreal &time)
 =======
 void TrajectorySaver::saveBeepState(const QString &robotId, int time)
 >>>>>>> added QScopedPointers, separated saving position and rotation
+=======
+void TrajectorySaver::saveBeepState(const QString &robotId, const qreal &time)
+>>>>>>> added comments
 {
 	stringstream value;
 	value << "beepState=" << time;

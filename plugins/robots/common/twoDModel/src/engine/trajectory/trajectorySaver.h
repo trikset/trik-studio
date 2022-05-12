@@ -71,10 +71,14 @@ public slots:
 	/// save position and angle of balls/skittles. Emitted when nextFrame is playing
 	void saveItemPosition(const QString &id, const QPointF &pos);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void saveItemRotation(const QString &id, const qreal rotation);
 =======
 	void saveItemRotation(const QString &id, const qreal &rotation);
 >>>>>>> added QScopedPointers, separated saving position and rotation
+=======
+	void saveItemRotation(const QString &id, const qreal rotation);
+>>>>>>> added comments
 	//	void saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation);
 
 	/// Emitted when robot plays beep sound, saves beeping time in ms
@@ -96,10 +100,15 @@ public slots:
 	void onStopInterpretation();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/// Emitted when robot was dragged or returned to start position
 	/// Stops drawing a line
 =======
 >>>>>>> added QScopedPointers, separated saving position and rotation
+=======
+	/// Emitted when robot was dragged or returned to start position
+	/// Stops drawing a line
+>>>>>>> added comments
 	void onCleanRobotTrace(const QString &robotId);
 };
 }

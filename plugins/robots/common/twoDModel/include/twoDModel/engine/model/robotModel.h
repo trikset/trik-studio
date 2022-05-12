@@ -189,10 +189,14 @@ signals:
 
 	/// Emitted when robot starts or ends play beep sound
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void trajectorySoundStateChanged(const QString &id, const qreal time);
 =======
 	void trajectorySoundStateChanged(const QString &id, const int &time);
 >>>>>>> added QScopedPointers, separated saving position and rotation
+=======
+	void trajectorySoundStateChanged(const QString &id, const qreal time);
+>>>>>>> added comments
 
 	/// Emitted when robot starts or ends draw
 	void trajectoryMarkerColorChanged(const QString &id, const QColor &color);
@@ -200,10 +204,14 @@ signals:
 	/// Emitted when robot position and/or rotation changed
 	void trajectoryPosChanged(const QString &id, const QPointF &position);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void trajectoryRotChanged(const QString &id, const qreal rotation);
 =======
 	void trajectoryRotChanged(const QString &id, const qreal &rotation);
 >>>>>>> added QScopedPointers, separated saving position and rotation
+=======
+	void trajectoryRotChanged(const QString &id, const qreal rotation);
+>>>>>>> added comments
 	void trajectoryOnitemDragged();
 	void trajectoryCleanTrace(const QString &robotId);
 
