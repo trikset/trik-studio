@@ -564,8 +564,9 @@ void TwoDModelScene::pasteItemsFromClipboard()
 	mController->execute(command);
 
 	for (auto &&id : newIds) {
-		findItem(id)->setSelected(true);
-		findItem(id)->setPos(findItem(id)->pos() + QPointF(20, 20));
+		const auto & item = findItem(id);
+		item->setSelected(true);
+		item->moveBy(20, 20);
 		findItem(id)->savePos();
 	}
 }

@@ -964,7 +964,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+75"/>
         <source>Camera folowing robot: %1</source>
         <translation>Следовать за роботом: %1</translation>
     </message>
@@ -982,6 +982,11 @@
         <location line="+7"/>
         <source>Return robot to the initial position</source>
         <translation>Вернуть робота в исходное положение</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Move start position here</source>
+        <translation type="unfinished">Передвинуть стартовое положение робота сюда</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -1004,7 +1009,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+718"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+719"/>
         <source>Select images</source>
         <translation type="unfinished">Выберите картинки</translation>
     </message>
@@ -1037,7 +1042,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+312"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+313"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1055,7 +1060,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+102"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>

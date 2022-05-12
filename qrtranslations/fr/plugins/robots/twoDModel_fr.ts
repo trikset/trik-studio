@@ -625,7 +625,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+74"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+75"/>
         <source>Camera folowing robot: %1</source>
         <translation>Suivre le robot : %1</translation>
     </message>
@@ -645,6 +645,11 @@
         <translation>Retourner le robot à la position initiale</translation>
     </message>
     <message>
+        <location line="+7"/>
+        <source>Move start position here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+18"/>
         <source>Marker thickness</source>
         <translation>Épaisseur du marqueur</translation>
@@ -661,7 +666,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+718"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+719"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,7 +699,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+312"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+313"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -712,7 +717,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+102"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
