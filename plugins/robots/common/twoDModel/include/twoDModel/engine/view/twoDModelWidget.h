@@ -253,15 +253,7 @@ private:
 
 	RobotItem *mSelectedRobotItem {};
 	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};
-<<<<<<< HEAD
-<<<<<<< HEAD
 	QScopedPointer<twoDModel::trajectory::ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
-=======
-	twoDModel::trajectory::ConnectionToVisualizer *mConnToVisualizer {};
->>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
-=======
-	QScopedPointer<twoDModel::trajectory::ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
->>>>>>> added QScopedPointers, separated saving position and rotation
 
 	model::Model &mModel;
 	qReal::ControllerInterface *mController {};

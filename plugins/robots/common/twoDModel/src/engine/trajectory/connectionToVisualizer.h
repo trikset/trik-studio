@@ -29,16 +29,7 @@ class alignas(8) ConnectionToVisualizer : public QObject
 	Q_DISABLE_COPY(ConnectionToVisualizer)
 
 public:
-<<<<<<< HEAD
-<<<<<<< HEAD:plugins/robots/common/twoDModel/src/engine/trajectory/connectionToVisualizer.h
 	explicit ConnectionToVisualizer(QObject *parent = nullptr);
-=======
-//	ConnectionToVisualizer(QString ip, int port);
-	ConnectionToVisualizer();
->>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer:plugins/robots/common/twoDModel/src/engine/trajectory/connectionToVizualizator.h
-=======
-	explicit ConnectionToVisualizer(QObject *parent = nullptr);
->>>>>>> added QScopedPointers, separated saving position and rotation
 	~ConnectionToVisualizer();
 
 	/// inits manager after moved to correct thread

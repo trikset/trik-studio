@@ -26,13 +26,6 @@ TrajectorySaver::TrajectorySaver(QObject *parent)
 	: QObject(parent)
 	, mConnToVisualizer(new ConnectionToVisualizer(this))
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-	mConnToVisualizer = new ConnectionToVisualizer();
->>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
-=======
->>>>>>> added QScopedPointers, separated saving position and rotation
 	mConnToVisualizer->setPort(8080);
 	mConnToVisualizer->init();
 }
@@ -42,15 +35,7 @@ TrajectorySaver::~TrajectorySaver()
 	mConnToVisualizer->disconnectFromHost();
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-void TrajectorySaver::saveBeepState(const QString &robotId, const qreal &time)
-=======
-void TrajectorySaver::saveBeepState(const QString &robotId, int time)
->>>>>>> added QScopedPointers, separated saving position and rotation
-=======
-void TrajectorySaver::saveBeepState(const QString &robotId, const qreal &time)
->>>>>>> added comments
+void TrajectorySaver::saveBeepState(const QString &robotId, const qreal time)
 {
 	stringstream value;
 	value << "beepState=" << time;
@@ -72,7 +57,7 @@ void TrajectorySaver::saveItemPosition(const QString &id, const QPointF &pos)
 	isPlaying = true;
 }
 
-void TrajectorySaver::saveItemRotation(const QString &id, const qreal &rotation)
+void TrajectorySaver::saveItemRotation(const QString &id, const qreal rotation)
 {
 	stringstream value;
 	value << "rot=" << rotation;
@@ -159,15 +144,7 @@ void TrajectorySaver::saveToFile()
 void TrajectorySaver::reinitConnection()
 {
 	if (mConnToVisualizer == nullptr) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 //		mConnToVisualizer = new ConnectionToVisualizer();
-=======
-		mConnToVisualizer = new ConnectionToVisualizer();
->>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
-=======
-//		mConnToVisualizer = new ConnectionToVisualizer();
->>>>>>> added QScopedPointers, separated saving position and rotation
 		mConnToVisualizer->setPort(8080);
 		mConnToVisualizer->init();
 	}
