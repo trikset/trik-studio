@@ -57,11 +57,15 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	connect(this, &Box2DPhysicsEngine::trajectoryPosChanged,
 			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
 	connect(this, &Box2DPhysicsEngine::trajectoryRotChanged,
 			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemRotation);
 	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver.data(),
+<<<<<<< HEAD
 			&trajectory::TrajectorySaver::onItemDragged);
 	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver.data(), &trajectory::TrajectorySaver::sendFrame);
 =======
@@ -71,6 +75,10 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 			&trajectory::TrajectorySaver::onItemDragged);
 	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver, &trajectory::TrajectorySaver::sendFrame);
 >>>>>>> changed lines length
+=======
+			&trajectory::TrajectorySaver::onItemDragged);
+	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver.data(), &trajectory::TrajectorySaver::sendFrame);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -165,6 +173,7 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
 		connect(robot, &RobotModel::trajectorySoundStateChanged,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				mTrajSaver.data(), &trajectory::TrajectorySaver::saveBeepState);
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
 				mTrajSaver.data(), &trajectory::TrajectorySaver::saveMarkerState);
@@ -182,15 +191,30 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 				mTrajSaver.data(), &trajectory::TrajectorySaver::onStopInterpretation);
 =======
 				mTrajSaver, &trajectory::TrajectorySaver::saveBeepState);
+=======
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveBeepState);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
-				mTrajSaver, &trajectory::TrajectorySaver::saveMarkerState);
-		connect(robot, &RobotModel::trajectoryPosOrAngleChanged,
-				mTrajSaver, &trajectory::TrajectorySaver::saveItemPosOrAngle);
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveMarkerState);
+		connect(robot, &RobotModel::trajectoryPosChanged,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
+		connect(robot, &RobotModel::trajectoryRotChanged,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemRotation);
 		connect(robot, &RobotModel::trajectoryOnitemDragged,
+<<<<<<< HEAD
 				mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
 		connect(robot, &RobotModel::trajectorySave, mTrajSaver, &trajectory::TrajectorySaver::saveToFile);
 		connect(robot, &RobotModel::onStopPlaying, mTrajSaver, &trajectory::TrajectorySaver::onStopInterpretation);
 >>>>>>> changed lines length
+=======
+				mTrajSaver.data(), &trajectory::TrajectorySaver::onItemDragged);
+		connect(robot, &RobotModel::trajectoryCleanTrace,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::onCleanRobotTrace);
+		connect(robot, &RobotModel::trajectorySave,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::saveToFile);
+		connect(robot, &RobotModel::onStopPlaying,
+				mTrajSaver.data(), &trajectory::TrajectorySaver::onStopInterpretation);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	});
 }
 

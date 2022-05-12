@@ -188,14 +188,22 @@ signals:
 	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
 	/// Emitted when robot starts or ends play beep sound
+<<<<<<< HEAD
 	void trajectorySoundStateChanged(const QString &id, const qreal time);
+=======
+	void trajectorySoundStateChanged(const QString &id, const int &time);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 
 	/// Emitted when robot starts or ends draw
 	void trajectoryMarkerColorChanged(const QString &id, const QColor &color);
 
 	/// Emitted when robot position and/or rotation changed
 	void trajectoryPosChanged(const QString &id, const QPointF &position);
+<<<<<<< HEAD
 	void trajectoryRotChanged(const QString &id, const qreal rotation);
+=======
+	void trajectoryRotChanged(const QString &id, const qreal &rotation);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	void trajectoryOnitemDragged();
 	void trajectoryCleanTrace(const QString &robotId);
 

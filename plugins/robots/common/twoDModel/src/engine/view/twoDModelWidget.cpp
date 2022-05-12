@@ -76,10 +76,14 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer(this))
 =======
 	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer())
 >>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
+=======
+	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer(this))
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	, mModel(model)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
@@ -159,13 +163,18 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mConnToVisualizer->setPort(9000);
 	mConnToVisualizer->init();
 	mConnToVisualizer->connectToHost();
+<<<<<<< HEAD
 	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
 >>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
+=======
+	connect(mConnToVisualizer.data(), &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
+>>>>>>> added QScopedPointers, separated saving position and rotation
 			this, &TwoDModelWidget::stopButtonPressed);
-	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
+	connect(mConnToVisualizer.data(), &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
 			this, &TwoDModelWidget::runButtonPressed);
-	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
+	connect(mConnToVisualizer.data(), &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
 			this, &TwoDModelWidget::restartRequested);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	connect(mUi->runButton, &QPushButton::clicked, mConnToVizualizator,
 			&twoDModel::trajectory::ConnectionToVizualizator::startPressed);
@@ -174,8 +183,11 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 >>>>>>> changed lines length
 =======
 	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer,
+=======
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer.data(),
+>>>>>>> added QScopedPointers, separated saving position and rotation
 			&twoDModel::trajectory::ConnectionToVisualizer::startPressed);
-	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer,
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer.data(),
 			&twoDModel::trajectory::ConnectionToVisualizer::stopPressed);
 >>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
 
@@ -764,10 +776,14 @@ Model &TwoDModelWidget::model() const
 twoDModel::trajectory::ConnectionToVisualizer *TwoDModelWidget::connToVisualizer()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return mConnToVisualizer.data();
 =======
 	return mConnToVisualizer;
 >>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
+=======
+	return mConnToVisualizer.data();
+>>>>>>> added QScopedPointers, separated saving position and rotation
 }
 
 void TwoDModelWidget::setController(ControllerInterface &controller)

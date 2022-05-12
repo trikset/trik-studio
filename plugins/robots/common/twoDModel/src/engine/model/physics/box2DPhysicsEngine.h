@@ -90,8 +90,13 @@ public slots:
 	void onRecoverRobotPosition(const QPointF &pos);
 
 	signals:
+<<<<<<< HEAD
 	void trajectoryPosChanged(const QString &id, const QPointF &pos);
 	void trajectoryRotChanged(const QString &id, const qreal &rotation);
+=======
+	void trajectoryPosChanged(QString id, QPointF pos);
+	void trajectoryRotChanged(QString id, qreal rotation);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	void trajectoryItemDragged();
 	void trajectorySave();
 	void sendNextFrame();

@@ -41,10 +41,14 @@ public:
 
 private:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	QScopedPointer<ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
 =======
 	ConnectionToVisualizer *mConnToVisualizer = nullptr;
 >>>>>>> renamed ConnectionToVizualizator -> ConnectionToVisualizer
+=======
+	QScopedPointer<ConnectionToVisualizer> mConnToVisualizer {}; // Takes ownership
+>>>>>>> added QScopedPointers, separated saving position and rotation
 
 	bool isPlaying = false;
 	QJsonArray frames;
@@ -66,7 +70,11 @@ public slots:
 	/// Save position and angle of robot. Emitted when nextFragment is playing,
 	/// save position and angle of balls/skittles. Emitted when nextFrame is playing
 	void saveItemPosition(const QString &id, const QPointF &pos);
+<<<<<<< HEAD
 	void saveItemRotation(const QString &id, const qreal rotation);
+=======
+	void saveItemRotation(const QString &id, const qreal &rotation);
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	//	void saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation);
 
 	/// Emitted when robot plays beep sound, saves beeping time in ms
@@ -87,8 +95,11 @@ public slots:
 	/// Emitted when user presses "Stop" button in visualizator
 	void onStopInterpretation();
 
+<<<<<<< HEAD
 	/// Emitted when robot was dragged or returned to start position
 	/// Stops drawing a line
+=======
+>>>>>>> added QScopedPointers, separated saving position and rotation
 	void onCleanRobotTrace(const QString &robotId);
 };
 }
