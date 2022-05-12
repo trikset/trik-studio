@@ -29,6 +29,10 @@ SensorsConfiguration::SensorsConfiguration(const QString &robotModelName, const 
 {
 }
 
+void SensorsConfiguration::clear() {
+	clearConfiguration(Reason::loading);
+}
+
 void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 		, const PortInfo &port, const DeviceInfo &device, Reason reason)
 {

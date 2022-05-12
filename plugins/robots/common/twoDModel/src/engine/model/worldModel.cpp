@@ -336,6 +336,10 @@ void WorldModel::clear()
 		emit itemRemoved(toRemove);
 	}
 
+	if (mRobotModel) {
+		mRobotModel->deserializeWorldModel(QDomElement());
+	}
+
 	mOrder.clear();
 
 	mImages.clear();
@@ -623,6 +627,10 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 			; regionNode = regionNode.nextSiblingElement("region"))
 	{
 		createRegion(regionNode);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->deserializeWorldModel(element);
 	}
 }
 

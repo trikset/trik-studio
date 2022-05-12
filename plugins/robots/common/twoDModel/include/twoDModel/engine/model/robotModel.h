@@ -81,8 +81,9 @@ public:
 	~RobotModel();
 
 	void reinit();
-
 	void clear();
+	void returnToStartMarker();
+
 	void stopRobot();
 	void playSound(int timeInMs);
 
