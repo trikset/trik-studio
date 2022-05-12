@@ -1042,7 +1042,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+328"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+329"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1060,7 +1060,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+104"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
