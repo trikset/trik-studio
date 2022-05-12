@@ -62,11 +62,11 @@ public slots:
 	/// Save position and angle of robot. Emitted when nextFragment is playing,
 	/// save position and angle of balls/skittles. Emitted when nextFrame is playing
 	void saveItemPosition(const QString &id, const QPointF &pos);
-	void saveItemRotation(const QString &id, const qreal &rotation);
+	void saveItemRotation(const QString &id, const qreal rotation);
 	//	void saveItemPosOrAngle(const QString &id, const QPointF &pos, const qreal &rotation);
 
 	/// Emitted when robot plays beep sound, saves beeping time in ms
-	void saveBeepState(const QString &robotId, int time);
+	void saveBeepState(const QString &robotId, const qreal time);
 
 	/// Emitted when robot places marker up or down, saves marker color:
 	/// if marker is down, color is equal to marker color, if marker is ip,
@@ -83,6 +83,8 @@ public slots:
 	/// Emitted when user presses "Stop" button in visualizator
 	void onStopInterpretation();
 
+	/// Emitted when robot was dragged or returned to start position
+	/// Stops drawing a line
 	void onCleanRobotTrace(const QString &robotId);
 };
 }

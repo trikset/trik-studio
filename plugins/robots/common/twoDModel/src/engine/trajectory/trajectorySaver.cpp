@@ -35,7 +35,7 @@ TrajectorySaver::~TrajectorySaver()
 	mConnToVisualizer->disconnectFromHost();
 }
 
-void TrajectorySaver::saveBeepState(const QString &robotId, int time)
+void TrajectorySaver::saveBeepState(const QString &robotId, const qreal &time)
 {
 	stringstream value;
 	value << "beepState=" << time;
