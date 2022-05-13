@@ -57,12 +57,12 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
 
 	connect(this, &Box2DPhysicsEngine::trajectoryPosChanged,
-			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
+			mTrajSaver, &trajectory::TrajectorySaver::saveItemPosition);
 	connect(this, &Box2DPhysicsEngine::trajectoryRotChanged,
-			mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemRotation);
-	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver.data(),
+			mTrajSaver, &trajectory::TrajectorySaver::saveItemRotation);
+	connect(this, &Box2DPhysicsEngine::trajectoryItemDragged, mTrajSaver,
 			&trajectory::TrajectorySaver::onItemDragged);
-	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver.data(), &trajectory::TrajectorySaver::sendFrame);
+	connect(this, &Box2DPhysicsEngine::sendNextFrame, mTrajSaver, &trajectory::TrajectorySaver::sendFrame);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -156,21 +156,21 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
 		connect(robot, &RobotModel::trajectorySoundStateChanged,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::saveBeepState);
+				mTrajSaver, &trajectory::TrajectorySaver::saveBeepState);
 		connect(robot, &RobotModel::trajectoryMarkerColorChanged,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::saveMarkerState);
+				mTrajSaver, &trajectory::TrajectorySaver::saveMarkerState);
 		connect(robot, &RobotModel::trajectoryPosChanged,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemPosition);
+				mTrajSaver, &trajectory::TrajectorySaver::saveItemPosition);
 		connect(robot, &RobotModel::trajectoryRotChanged,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::saveItemRotation);
+				mTrajSaver, &trajectory::TrajectorySaver::saveItemRotation);
 		connect(robot, &RobotModel::trajectoryOnitemDragged,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::onItemDragged);
+				mTrajSaver, &trajectory::TrajectorySaver::onItemDragged);
 		connect(robot, &RobotModel::trajectoryCleanTrace,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::onCleanRobotTrace);
+				mTrajSaver, &trajectory::TrajectorySaver::onCleanRobotTrace);
 		connect(robot, &RobotModel::trajectorySave,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::saveToFile);
+				mTrajSaver, &trajectory::TrajectorySaver::saveToFile);
 		connect(robot, &RobotModel::onStopPlaying,
-				mTrajSaver.data(), &trajectory::TrajectorySaver::onStopInterpretation);
+				mTrajSaver, &trajectory::TrajectorySaver::onStopInterpretation);
 	});
 }
 

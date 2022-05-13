@@ -120,7 +120,7 @@ private:
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
-	QScopedPointer<trajectory::TrajectorySaver> mTrajSaver {}; // Takes ownership
+	trajectory::TrajectorySaver *mTrajSaver {}; // Takes ownership
 };
 
 }
