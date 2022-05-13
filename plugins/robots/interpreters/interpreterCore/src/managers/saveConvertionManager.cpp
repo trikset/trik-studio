@@ -55,7 +55,7 @@ QList<ProjectConverter> SaveConvertionManager::converters()
 		, from320to330Converter()
 		, from330to20204Converter()
 		, from20204to20205Converter()
-		, from20205to20213Converter()
+		, from20205to20222Converter()
 	};
 }
 
@@ -337,9 +337,9 @@ ProjectConverter SaveConvertionManager::from20204to20205Converter()
 	});
 }
 
-ProjectConverter SaveConvertionManager::from20205to20213Converter()
+ProjectConverter SaveConvertionManager::from20205to20222Converter()
 {
-	return ProjectConverter(editor(), Version::fromString("2020.5"), Version::fromString("2021.3")
+	return ProjectConverter(editor(), Version::fromString("2020.5"), Version::fromString("2022.2")
 			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
 	{
 		QString xml = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
