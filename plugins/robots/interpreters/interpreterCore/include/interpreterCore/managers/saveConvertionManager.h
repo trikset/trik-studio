@@ -69,6 +69,9 @@ private:
 	/// Replaces "PrintText" with "TrikPrintText" in trikKit
 	static qReal::ProjectConverter from20204to20205Converter();
 
+	/// Moves robot position and direction from robots section to world section
+	static qReal::ProjectConverter from20205to20213Converter();
+
 	static bool isRobotsDiagram(const qReal::Id &element);
 	static bool isDiagramType(const qReal::Id &element);
 	static bool isEdgeType(const qReal::Id &element);

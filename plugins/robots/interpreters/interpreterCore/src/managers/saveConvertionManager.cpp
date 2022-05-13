@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "interpreterCore/managers/saveConvertionManager.h"
+#include "QDomDocument"
 
 using namespace interpreterCore;
 using namespace qReal;
@@ -54,6 +55,7 @@ QList<ProjectConverter> SaveConvertionManager::converters()
 		, from320to330Converter()
 		, from330to20204Converter()
 		, from20204to20205Converter()
+		, from20205to20213Converter()
 	};
 }
 
@@ -332,6 +334,40 @@ ProjectConverter SaveConvertionManager::from20204to20205Converter()
 		}
 
 		return modificationsMade ? ProjectConverter::Success : ProjectConverter::NoModificationsMade;
+	});
+}
+
+ProjectConverter SaveConvertionManager::from20205to20213Converter()
+{
+	return ProjectConverter(editor(), Version::fromString("2020.5"), Version::fromString("2021.3")
+			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
+	{
+		QString xml = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+
+		if (xml.isEmpty()) return ProjectConverter::NoModificationsMade;
+		QDomDocument worldModel;
+		if (!worldModel.setContent(xml)) return ProjectConverter::SaveInvalid;
+		QDomElement root = worldModel.firstChildElement("root");
+
+		QDomElement world = root.firstChildElement("world");
+		if (world.isNull()) {
+			world = root.ownerDocument().createElement("world");
+			root.appendChild(world);
+		}
+
+		QDomElement oldRobot = root.firstChildElement("robots").firstChildElement("robot");
+		QDomElement robot = world.ownerDocument().createElement("robot");
+		robot.setAttribute("position", oldRobot.attribute("position", "0:0"));
+		robot.setAttribute("direction", oldRobot.attribute("direction", "0"));
+		robot.appendChild(oldRobot.firstChildElement("startPosition"));
+		world.appendChild(robot);
+
+		oldRobot.removeAttribute("position");
+		oldRobot.removeAttribute("direction");
+		// start position reparented automatically
+
+		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel.toString(4));
+		return ProjectConverter::Success;
 	});
 }
 
