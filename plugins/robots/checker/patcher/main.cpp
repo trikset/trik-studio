@@ -81,10 +81,11 @@ int main(int argc, char *argv[])
 		newWorld.setContent(&fieldFile);
 
 		const auto & blobs = newWorld.firstChildElement("root").firstChildElement("blobs");
-		QString blobsStr;
-		QTextStream stream(&blobsStr);
-		blobs.save(stream, 4);
-		repo.setMetaInformation("blobs", blobsStr);
+		QDomDocument blobsDoc;
+		QDomElement blobsRoot = blobsDoc.createElement("root");
+		blobsRoot.appendChild(blobs);
+		blobsDoc.appendChild(blobsRoot);
+		repo.setMetaInformation("blobs", blobsDoc.toString(4));
 
 		newWorld.firstChildElement("root").removeChild(blobs);
 		if (!wholeWorld) {
