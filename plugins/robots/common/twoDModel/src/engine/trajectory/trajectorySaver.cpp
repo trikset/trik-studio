@@ -118,6 +118,8 @@ QJsonObject TrajectorySaver::saveFrame()
 void TrajectorySaver::saveToFile()
 {
 	sendFrame();
+	addState("endState", "");
+	sendFrame();
 
 	/// creating json document
 	QJsonDocument doc;
