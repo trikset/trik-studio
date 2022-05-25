@@ -18,6 +18,7 @@
 
 #include <kitBase/blocksBase/robotsBlock.h>
 #include <kitBase/robotModel/robotModelInterface.h>
+#include <kitBase/robotModel/robotParts/motor.h>
 
 using namespace interpreterCore::interpreter::details;
 using namespace qReal;
@@ -50,7 +51,7 @@ bool Autoconfigurer::configure(QList<qReal::Id> const &diagrams, const QString &
 			for (const PortInfo &port : usedDevices.keys()) {
 				const DeviceInfo device = usedDevices[port];
 				const DeviceInfo existingDevice = currentConfiguration(robotId, port);
-				if (existingDevice.isA(device)) {
+				if (device.isA<robotParts::Motor>() || existingDevice.isA(device)) {
 					// Do nothing
 				} else if (!mLogicalModelApi.mutableLogicalRepoApi()
 						.metaInformation("twoDModelSensorsReadOnly").toBool() && existingDevice.isNull()) {
