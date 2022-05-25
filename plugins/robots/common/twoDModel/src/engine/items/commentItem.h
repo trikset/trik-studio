@@ -40,6 +40,11 @@ public:
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
+
+private:
+	void setPrivateData();
+	void updateTextPos();
+	QGraphicsTextItem mText;
 };
 
 }

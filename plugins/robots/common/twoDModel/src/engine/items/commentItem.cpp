@@ -25,18 +25,13 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
+	: mText(this)
 {
+	setPrivateData();
 	setX1(begin.x());
 	setY1(begin.y());
 	setX2(end.x());
 	setY2(end.y());
-	// setPrivateData
-	// IKHON zValue ?
-	setZValue(ZValue::Shape);
-	QPen pen(this->pen());
-	pen.setColor(Qt::darkGray);
-	pen.setStyle(Qt::DashLine);
-	setPen(pen);
 }
 
 QAction *CommentItem::commentTool()
@@ -55,7 +50,13 @@ QRectF CommentItem::boundingRect() const
 QPainterPath CommentItem::shape() const
 {
 	QPainterPath result;
-	result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	result.setFillRule(Qt::WindingFill);
+
+	QPainterPathStroker ps;
+	ps.setWidth(pen().width());
+	result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
+	result = ps.createStroke(result);
+
 	if (isSelected()) {
 		result.addPath(resizeArea());
 	}
@@ -89,17 +90,20 @@ QDomElement CommentItem::serialize(QDomElement &parent) const
 {
 	QDomElement commentNode = AbstractItem::serialize(parent);
 	commentNode.setTagName("comment");
-//	setPenBrushToElement(commentNode, "comment");
 	commentNode.setAttribute("begin", QString::number(x1() + scenePos().x())
 			 + ":" + QString::number(y1() + scenePos().y()));
 	commentNode.setAttribute("end", QString::number(x2() + scenePos().x())
 			 + ":" + QString::number(y2() + scenePos().y()));
+	commentNode.setAttribute("text", mText.toHtml());
 	return commentNode;
 }
 
 void CommentItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
+
+	mText.setHtml(element.attribute("text"));
+
 	const QString beginStr = element.attribute("begin", "0:0");
 	QStringList splittedStr = beginStr.split(":");
 	auto x = splittedStr[0].toDouble();
@@ -117,4 +121,31 @@ void CommentItem::deserialize(const QDomElement &element)
 	setY1(begin.y());
 	setX2(end.x());
 	setY2(end.y());
+}
+
+void CommentItem::setPrivateData()
+{
+	// IKHON zValue ?
+	setZValue(ZValue::Shape);
+	QPen pen(this->pen());
+	pen.setColor(Qt::darkGray);
+	pen.setStyle(Qt::DashLine);
+	setPen(pen);
+
+	connect(this, &AbstractItem::x1Changed, this, &CommentItem::updateTextPos);
+	connect(this, &AbstractItem::y1Changed, this, &CommentItem::updateTextPos);
+	connect(this, &AbstractItem::x2Changed, this, &CommentItem::updateTextPos);
+	connect(this, &AbstractItem::y2Changed, this, &CommentItem::updateTextPos);
+
+	mText.setPlainText("Your comment can be here");
+	mText.setTextInteractionFlags(Qt::TextEditorInteraction);
+	auto font = mText.font();
+	font.setPixelSize(20);
+	mText.setFont(font);
+}
+
+void CommentItem::updateTextPos()
+{
+	mText.setX(resizeDrift + qMin(x1(), x2()));
+	mText.setY(resizeDrift + qMin(y1(), y2()));
 }
