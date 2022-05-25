@@ -258,7 +258,7 @@
         <translation>temps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+57"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+58"/>
         <source>%2 has been auto configured to port %1</source>
         <translation type="unfinished"></translation>
     </message>
