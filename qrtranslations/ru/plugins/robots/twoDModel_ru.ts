@@ -553,7 +553,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+187"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+188"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -1042,7 +1042,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+313"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+329"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1060,7 +1060,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+104"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1104,7 +1104,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+321"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

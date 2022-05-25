@@ -47,6 +47,10 @@ class ControllerInterface;
 
 namespace twoDModel {
 
+namespace trajectory {
+class ConnectionToVisualizer;
+}
+
 namespace model {
 class Model;
 class RobotModel;
@@ -101,6 +105,9 @@ public:
 
 	void setBackgroundMode();
 
+	/// Returns a reference to a connection to vizualizer tool
+	twoDModel::trajectory::ConnectionToVisualizer *connToVisualizer();
+
 	QString editorId() const override;
 	bool supportsZooming() const override;
 	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy, QAction &paste
@@ -128,6 +135,9 @@ signals:
 
 	/// Emitted when user has stopped intepretation from the 2D model window.
 	void stopButtonPressed();
+
+	/// Emitted when user has stopped intepretation from the remote visualizator
+	void restartRequested();
 
 protected:
 	void changeEvent(QEvent *e) override;
@@ -244,6 +254,7 @@ private:
 
 	RobotItem *mSelectedRobotItem {};
 	kitBase::DevicesConfigurationWidget *mCurrentConfigurer {};
+	twoDModel::trajectory::ConnectionToVisualizer *mConnToVisualizer {}; // Takes ownership
 
 	model::Model &mModel;
 	qReal::ControllerInterface *mController {};

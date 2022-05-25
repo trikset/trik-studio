@@ -51,6 +51,7 @@
 #include "src/engine/items/startPosition.h"
 #include "src/engine/commands/changePropertyCommand.h"
 #include "src/engine/commands/loadWorldCommand.h"
+#include "src/engine/trajectory/connectionToVisualizer.h"
 
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/model.h"
@@ -75,6 +76,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	: QWidget(parent)
 	, mUi(new Ui::TwoDModelWidget)
 	, mActions(new ActionsBox)
+	, mConnToVisualizer(new twoDModel::trajectory::ConnectionToVisualizer(this))
 	, mModel(model)
 	, mDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
 	, mNullDisplay(new twoDModel::engine::NullTwoDModelDisplayWidget(this))
@@ -130,6 +132,20 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 		// Setting value in percents
 		mSpeedPopup->setSpeed(100 / speedFactors[defaultSpeedFactorIndex] * value);
 	});
+	mConnToVisualizer->setPort(9000);
+	mConnToVisualizer->init();
+	mConnToVisualizer->connectToHost();
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::stopRequested,
+			this, &TwoDModelWidget::stopButtonPressed);
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::runRequested,
+			this, &TwoDModelWidget::runButtonPressed);
+	connect(mConnToVisualizer, &twoDModel::trajectory::ConnectionToVisualizer::restartRequested,
+			this, &TwoDModelWidget::restartRequested);
+	connect(mUi->runButton, &QPushButton::clicked, mConnToVisualizer,
+			&twoDModel::trajectory::ConnectionToVisualizer::startPressed);
+	connect(mUi->stopButton, &QPushButton::clicked, mConnToVisualizer,
+			&twoDModel::trajectory::ConnectionToVisualizer::stopPressed);
+
 	setRunStopButtonsVisibility();
 
 	mUi->palette->unselect();
@@ -339,11 +355,12 @@ void TwoDModelWidget::connectUiButtons()
 	connect(mRobotItemPopup, &RobotItemPopup::restoreRobotPositionClicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mRobotItemPopup, &RobotItemPopup::setRobotPositionClicked, this, &TwoDModelWidget::setStartMarker);
 	connect(mUi->initialStateButton, &QAbstractButton::clicked, this, &TwoDModelWidget::returnToStartMarker);
+	connect(this, &TwoDModelWidget::restartRequested, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
 
 	connect(mUi->trainingModeButton, &QAbstractButton::toggled, this, &TwoDModelWidget::trainingModeChanged);
-	mUi->trainingModeButton->setChecked(false);
 
+	mUi->trainingModeButton->setChecked(false);
 	initRunStopButtons();
 }
 
@@ -401,6 +418,7 @@ void TwoDModelWidget::returnToStartMarker()
 		ball->returnToStartPosition();
 	}
 	saveWorldModelToRepo();
+	mConnToVisualizer->restartPressed();
 }
 
 void TwoDModelWidget::setStartMarker()
@@ -716,6 +734,11 @@ void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
 Model &TwoDModelWidget::model() const
 {
 	return mModel;
+}
+
+twoDModel::trajectory::ConnectionToVisualizer *TwoDModelWidget::connToVisualizer()
+{
+	return mConnToVisualizer;
 }
 
 void TwoDModelWidget::setController(ControllerInterface &controller)

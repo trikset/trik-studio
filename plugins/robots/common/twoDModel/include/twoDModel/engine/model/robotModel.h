@@ -187,6 +187,21 @@ signals:
 	/// Emitted when left or right wheel was reconnected to another port.
 	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
+	/// Emitted when robot starts or ends play beep sound
+	void trajectorySoundStateChanged(const QString &id, const qreal time);
+
+	/// Emitted when robot starts or ends draw
+	void trajectoryMarkerColorChanged(const QString &id, const QColor &color);
+
+	/// Emitted when robot position and/or rotation changed
+	void trajectoryPosChanged(const QString &id, const QPointF &position);
+	void trajectoryRotChanged(const QString &id, const qreal rotation);
+	void trajectoryOnitemDragged();
+	void trajectoryCleanTrace(const QString &robotId);
+
+	void trajectorySave();
+	void onStopPlaying();
+
 private:
 	QVector2D robotDirectionVector() const;
 

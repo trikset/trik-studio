@@ -41,17 +41,17 @@
         <translation>Настройки камеры</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+73"/>
         <source>Use real camera</source>
         <translation>Использовать камеру</translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-58"/>
         <source>Camera:</source>
         <translation>Камера:</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+22"/>
         <source>Use images from project</source>
         <translation>Использовать запакованные в проект изображения</translation>
     </message>
@@ -66,7 +66,7 @@
         <translation>Запаковывать изображения в проект</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+23"/>
         <source>Network Settings</source>
         <translation>Настройки сети</translation>
     </message>
@@ -76,7 +76,22 @@
         <translation>Активировать Mailbox</translation>
     </message>
     <message>
+        <location line="+24"/>
+        <source>Unity Connection Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Enter Unity IP here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+7"/>
+        <source>Send Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-33"/>
         <source>Hull number:</source>
         <translation>Бортномер:</translation>
     </message>
@@ -86,7 +101,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-52"/>
+        <location line="-59"/>
         <source>Images:</source>
         <translation>Изображения:</translation>
     </message>
@@ -179,7 +194,7 @@
         <translation>Выберите папку</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+31"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>

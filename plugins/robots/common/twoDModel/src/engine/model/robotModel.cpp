@@ -68,6 +68,7 @@ void RobotModel::reinit()
 	mBeepTime = 0;
 	mDeltaDegreesOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
+	//emit OnStartPlaying();
 }
 
 void RobotModel::clear()
@@ -111,6 +112,7 @@ RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees
 void RobotModel::playSound(int timeInMs)
 {
 	mBeepTime = qMax(mBeepTime, timeInMs);
+	emit trajectorySoundStateChanged(mRobotModel.robotId(), mBeepTime);
 }
 
 void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
@@ -179,6 +181,8 @@ void RobotModel::stopRobot()
 	mIsFirstAngleStamp = true;
 	mPosStamps.clear();
 	emit playingSoundChanged(false);
+	emit onStopPlaying();
+	emit trajectorySave();
 	for (auto &&engine : mMotors) {
 		engine->speed = 0;
 		engine->breakMode = true;
@@ -301,11 +305,13 @@ QColor RobotModel::markerColor() const
 void RobotModel::markerDown(const QColor &color)
 {
 	mMarker = color;
+	emit trajectoryMarkerColorChanged(mRobotModel.robotId(), color);
 }
 
 void RobotModel::markerUp()
 {
 	mMarker = Qt::transparent;
+	emit trajectoryMarkerColorChanged(mRobotModel.robotId(), Qt::transparent);
 }
 
 QVector<int> RobotModel::accelerometerReading() const
@@ -372,6 +378,11 @@ void RobotModel::nextFragment()
 	}
 
 	emit robotRided(mPos, mAngle);
+	if (isRiding())
+	{
+		emit trajectoryPosChanged(mRobotModel.robotId(), mPos);
+		emit trajectoryRotChanged(mRobotModel.robotId(), mAngle);
+	}
 }
 
 QPointF RobotModel::position() const
@@ -384,6 +395,9 @@ void RobotModel::setPosition(const QPointF &newPos)
 	if (newPos != mPos) {
 		mPos = newPos;
 		emit positionChanged(newPos);
+		emit trajectoryCleanTrace(mRobotModel.robotId());
+		emit trajectoryPosChanged(mRobotModel.robotId(), newPos);
+		emit trajectoryOnitemDragged();
 	}
 }
 
@@ -397,6 +411,8 @@ void RobotModel::setRotation(qreal angle)
 	if (!mathUtils::Math::eq(mAngle, angle)) {
 		mAngle = angle;
 		emit rotationChanged(angle);
+		emit trajectoryRotChanged(mRobotModel.robotId(), mAngle);
+		emit trajectoryOnitemDragged();
 	}
 }
 
@@ -418,7 +434,7 @@ bool RobotModel::onTheGround() const
 void RobotModel::serialize(QDomElement &parent) const
 {
 	QDomElement curRobot = parent.ownerDocument().createElement("robot");
-	curRobot.setAttribute("id", mRobotModel.robotId());	
+	curRobot.setAttribute("id", mRobotModel.robotId());
 	mSensorsConfiguration.serialize(curRobot);
 	serializeWheels(curRobot);
 

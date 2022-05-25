@@ -34,6 +34,10 @@ namespace twoDModel {
 		class SensorItem;
 	}
 
+	namespace trajectory {
+	class TrajectorySaver;
+	}
+
 	namespace model {
 	namespace physics {
 	namespace parts {
@@ -44,6 +48,7 @@ namespace twoDModel {
 
 class Box2DPhysicsEngine : public PhysicsEngineBase
 {
+	Q_OBJECT
 public:
 	Box2DPhysicsEngine(const WorldModel &worldModel, const QList<RobotModel *> &robots);
 	~Box2DPhysicsEngine();
@@ -84,6 +89,13 @@ public slots:
 	void onMousePressed();
 	void onRecoverRobotPosition(const QPointF &pos);
 
+	signals:
+	void trajectoryPosChanged(const QString &id, const QPointF &pos);
+	void trajectoryRotChanged(const QString &id, const qreal &rotation);
+	void trajectoryItemDragged();
+	void trajectorySave();
+	void sendNextFrame();
+
 protected:
 	void onPixelsInCmChanged(qreal value) override;
 	void itemAdded(QGraphicsItem *item) override;
@@ -104,9 +116,11 @@ private:
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DResizableItems;  // Takes ownership on b2Body instances
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DDynamicItems;  // Doesn't take ownership
 	QMap<RobotModel *, QSet<twoDModel::view::SensorItem *>> mRobotSensors; // Doesn't take ownership
+	QList<parts::Box2DItem *> inMoveItems;
 
 	b2Vec2 mPrevPosition;
 	float mPrevAngle;
+	trajectory::TrajectorySaver *mTrajSaver {}; // Takes ownership
 };
 
 }
