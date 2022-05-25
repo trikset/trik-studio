@@ -47,6 +47,7 @@
 #include "src/engine/items/rectangleItem.h"
 #include "src/engine/items/ellipseItem.h"
 #include "src/engine/items/stylusItem.h"
+#include "src/engine/items/commentItem.h"
 #include "src/engine/items/imageItem.h"
 #include "src/engine/items/startPosition.h"
 #include "src/engine/commands/changePropertyCommand.h"
@@ -254,6 +255,7 @@ void TwoDModelWidget::initPalette()
 	QAction * const rectangleTool = items::RectangleItem::rectangleTool();
 	QAction * const ellipseTool = items::EllipseItem::ellipseTool();
 	QAction * const stylusTool = items::StylusItem::stylusTool();
+	QAction * const commentTool = items::CommentItem::commentTool();
 	QAction * const imageTool = items::ImageItem::imageTool();
 
 	mUi->palette->registerTool(wallTool);
@@ -264,6 +266,7 @@ void TwoDModelWidget::initPalette()
 	mUi->palette->registerTool(rectangleTool);
 	mUi->palette->registerTool(ellipseTool);
 	mUi->palette->registerTool(stylusTool);
+	mUi->palette->registerTool(commentTool);
 	mUi->palette->registerTool(imageTool);
 
 	qReal::SettingsListener::listen("toolbarSize", [this](int size){ mUi->palette->setSize({size, size}); }, this);
@@ -278,6 +281,7 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, &*mScene, &TwoDModelScene::addRectangle);
 	connect(ellipseTool, &QAction::triggered, &*mScene, &TwoDModelScene::addEllipse);
 	connect(stylusTool, &QAction::triggered, &*mScene, &TwoDModelScene::addStylus);
+	connect(commentTool, &QAction::triggered, &*mScene, &TwoDModelScene::addComment);
 	connect(imageTool, &QAction::triggered, &*mScene, &TwoDModelScene::addImage);
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, &*mScene, &TwoDModelScene::setNoneStatus);
 
@@ -289,6 +293,7 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); });
 	connect(ellipseTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawEllipse); });
 	connect(stylusTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawStylus); });
+	connect(commentTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); }); // IKHON drawComment
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, this
 			, [this](){ setCursorTypeForDrawing(mNoneCursorType); });
 

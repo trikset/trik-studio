@@ -47,6 +47,7 @@ class CurveItem;
 class StylusItem;
 class RectangleItem;
 class EllipseItem;
+class CommentItem;
 class ImageItem;
 }
 
@@ -110,6 +111,9 @@ public slots:
 	/// Sets a flag that next user mouse actions should draw an ellipse on the scene.
 	void addEllipse();
 
+	/// Sets a flag that next user mouse actions should draw an comment on the scene.
+	void addComment();
+
 	/// Shows dialog proposing user to add image on a scene.
 	void addImage();
 
@@ -166,11 +170,11 @@ private slots:
 	/// Called after new ball is added to a world model.
 	void onBallAdded(const QSharedPointer<items::BallItem> &ball);
 
-	/// Called after new color field item is added to a world model.
-	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
+//	/// Called after new color field item is added to a world model.
+//	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
-	/// Called after new image item is added to a world model.
-	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
+//	/// Called after new image item is added to a world model.
+//	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
 	void onAbstractItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
 
@@ -191,6 +195,7 @@ private:
 		, stylus
 		, rectangle
 		, ellipse
+		, comment
 		, image
 	};
 
@@ -216,6 +221,7 @@ private:
 	void reshapeStylus(QGraphicsSceneMouseEvent *event);
 	void reshapeRectangle(QGraphicsSceneMouseEvent *event);
 	void reshapeEllipse(QGraphicsSceneMouseEvent *event);
+	void reshapeComment(QGraphicsSceneMouseEvent *event);
 
 	void registerInUndoStack(graphicsUtils::AbstractItem *item);
 	void subscribeItem(graphicsUtils::AbstractItem *item);
@@ -248,6 +254,7 @@ private:
 	QSharedPointer<items::StylusItem> mCurrentStylus;
 	QSharedPointer<items::RectangleItem> mCurrentRectangle;
 	QSharedPointer<items::EllipseItem> mCurrentEllipse;
+	QSharedPointer<items::CommentItem> mCurrentComment;
 
 	commands::ReshapeCommand *mCurrentReshapeCommand = nullptr;
 

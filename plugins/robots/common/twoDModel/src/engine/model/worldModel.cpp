@@ -32,6 +32,7 @@
 #include "src/engine/items/ellipseItem.h"
 #include "src/engine/items/stylusItem.h"
 #include "src/engine/items/imageItem.h"
+#include "src/engine/items/commentItem.h"
 #include "src/engine/items/regions/ellipseRegion.h"
 #include "src/engine/items/regions/rectangularRegion.h"
 #include "src/engine/items/regions/boundRegion.h"
@@ -232,6 +233,24 @@ void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 	emit itemRemoved(ball);
 }
 
+void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
+{
+	const QString id = comment->id();
+	if (mComments.contains(id)) {
+		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
+		return; // probably better than having no way to delete those duplicate items on the scene
+	}
+
+	mComments[id] = comment;
+	emit commentAdded(comment);
+}
+
+void WorldModel::removeComment(QSharedPointer<items::CommentItem> comment)
+{
+	mComments.remove(comment->id());
+	emit itemRemoved(comment);
+}
+
 const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFields() const
 {
 	return mColorFields;
@@ -240,6 +259,11 @@ const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFie
 const QMap<QString, QSharedPointer<items::ImageItem>> &WorldModel::imageItems() const
 {
 	return mImageItems;
+}
+
+const QMap<QString, QSharedPointer<items::CommentItem> > &WorldModel::commentItems() const
+{
+	return mComments;
 }
 
 const QMap<QString, QSharedPointer<items::RegionItem>> &WorldModel::regions() const
@@ -333,6 +357,12 @@ void WorldModel::clear()
 	while (!mRegions.isEmpty()) {
 		auto toRemove = mRegions.last();
 		mRegions.remove(toRemove->id());
+		emit itemRemoved(toRemove);
+	}
+
+	while (!mComments.isEmpty()) {
+		auto toRemove = mComments.last();
+		mComments.remove(toRemove->id());
 		emit itemRemoved(toRemove);
 	}
 
@@ -474,12 +504,18 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 
 	QDomElement regions = parent.ownerDocument().createElement("regions");
 	result.appendChild(regions);
-	QList<QString> regionIds = mRegions.keys();
-	std::sort(regionIds.begin(), regionIds.end(), comparator);
-	for (const QString &region : regionIds) {
+	for (auto &&region : mRegions) {
 		QDomElement regionElement = parent.ownerDocument().createElement("region");
-		mRegions[region]->serialize(regionElement);
+		region->serialize(regionElement);
 		regions.appendChild(regionElement);
+	}
+
+	// IKHON do we need mOrder? if yes, add mOrder to addComment
+	// IKHON what about deserialize
+	QDomElement comments = parent.ownerDocument().createElement("comments");
+	result.appendChild(comments);
+	for (auto &&comment : mComments) {
+		comment->serialize(comments);
 	}
 
 	if (mRobotModel) {
@@ -664,6 +700,10 @@ QSharedPointer<QGraphicsObject> WorldModel::findId(const QString &id) const
 		return mRegions[id];
 	}
 
+	if (mComments.contains(id)) {
+		return mComments[id];
+	}
+
 	return nullptr;
 }
 
@@ -689,6 +729,8 @@ void WorldModel::createElement(const QDomElement &element)
 		createBall(element);
 	} else if (element.tagName() == "region") {
 		createRegion(element);
+	} else if (element.tagName() == "comment") {
+		createComment(element);
 	}
 }
 
@@ -746,6 +788,13 @@ void WorldModel::createStylus(const QDomElement &element)
 	auto stylusItem = QSharedPointer<items::StylusItem>::create(0, 0);
 	stylusItem->deserialize(element);
 	addColorField(stylusItem);
+}
+
+void WorldModel::createComment(const QDomElement &element)
+{
+	auto commentItem = QSharedPointer<items::CommentItem>::create(QPointF(), QPointF());
+	commentItem->deserialize(element);
+	addComment(commentItem);
 }
 
 QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &element, bool background)
@@ -806,5 +855,7 @@ void WorldModel::removeItem(const QString &id)
 		removeBall(ballItem);
 	} else if (auto image = qSharedPointerDynamicCast<items::ImageItem>(item)) {
 		removeImageItem(image);
+	} else if (auto comment = qSharedPointerDynamicCast<items::CommentItem>(item)) {
+		removeComment(comment);
 	}
 }
