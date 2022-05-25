@@ -14,12 +14,11 @@
 
 #pragma once
 
-#include "models/logicalModelAssistApi.h"
-#include "plugins/toolPluginInterface/projectConverter.h"
+#include "qrgui/models/models.h"
+#include "qrgui/plugins/toolPluginInterface/projectConverter.h"
+#include "qrgui/plugins/pluginManager/toolPluginManager.h"
 
 namespace qReal {
-
-class MainWindow;
 
 /// Performs validation and convertion of models due to editor versions that created them.
 /// @todo: This class is not implemented at the moment.
@@ -27,10 +26,14 @@ class MainWindow;
 class VersionsConverterManager
 {
 public:
-	explicit VersionsConverterManager(MainWindow &mainWindow);
+	explicit VersionsConverterManager(models::Models &models, ToolPluginManager &toolManager);
 
 	/// Performs validation and convertion of models due to editor versions that created them.
 	bool validateCurrentProject();
+
+	QString errorMessage() const;
+
+	bool converted() const;
 
 private:
 	bool convertProject(const Version &enviromentVersion
@@ -43,7 +46,10 @@ private:
 
 	void showError(const QString &errorMessage);
 
-	MainWindow &mMainWindow;
+	models::Models &mModels;
+	const std::multimap<QString, ProjectConverter> mConverters;
+	QString mErrorMessage;
+	bool mConverted {false};
 };
 
 }

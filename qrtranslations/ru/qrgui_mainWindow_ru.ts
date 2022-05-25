@@ -518,37 +518,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="+118"/>
-        <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
-        <translation>Проект был автоматически пробразован из версии %1 до версии %2. Пожалуйста, проверьте его содержимое.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>The attempt to automaticly convert this project to the current enviroment version failed and thus save file can`t be opened. </source>
-        <translation>Попытка автоматического преобразования проекта до версии среды закончилась неудачно, файл сохранения не может быть открыт.</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>This project was created by version %1 of the editor.</source>
-        <translation>Данный проект был создан редактором версии %1.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>This project was created by too old version of the editor.</source>
-        <translation>Данный проект был создан редактором слишком старой версии.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source> It is now considered outdated and cannot be opened.</source>
-        <translation> Он устарел и не может быть открыт.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>The save you are trying to open is made by version %1 of editor, whitch is newer than currently installed enviroment. Update your version before opening this save.</source>
-        <translation>Проект был создан версией %1 редактора, которая новее, чем версия данной среды, обновитесь.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+160"/>
         <source>Can`t open project file</source>
         <translation>Не могу открыть проект</translation>
     </message>
@@ -1024,7 +994,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+71"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="-89"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -1049,7 +1019,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Сохранить текущий проект?</translation>
     </message>
     <message>
-        <location line="+123"/>
+        <location line="+130"/>
         <source>Unsaved project</source>
         <translation>Несохраненный проект</translation>
     </message>
