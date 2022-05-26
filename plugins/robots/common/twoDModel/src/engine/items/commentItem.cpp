@@ -37,7 +37,7 @@ CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
 
 QAction *CommentItem::commentTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Comment (M)"), nullptr);
+	QAction * const result = new QAction(QIcon(":/icons/2d_comment.svg"), tr("Comment (M)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_M), QKeySequence(Qt::Key_0)});
 	result->setCheckable(true);
 	return result;

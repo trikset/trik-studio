@@ -68,5 +68,6 @@
         <file>icons/home.svg</file>
         <file>icons/TRIKStudioLogo.png</file>
         <file>icons/2d_drawCommentCursor.png</file>
+        <file>icons/2d_comment.svg</file>
     </qresource>
 </RCC>
