@@ -186,6 +186,7 @@ private:
 		, drawEllipse
 		, drawRectangle
 		, drawBezier
+		, drawComment
 	};
 
 	static const int defaultPenWidth = 6;

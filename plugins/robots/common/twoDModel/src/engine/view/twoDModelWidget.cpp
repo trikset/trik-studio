@@ -293,7 +293,7 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); });
 	connect(ellipseTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawEllipse); });
 	connect(stylusTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawStylus); });
-	connect(commentTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); }); // IKHON drawComment
+	connect(commentTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawComment); });
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, this
 			, [this](){ setCursorTypeForDrawing(mNoneCursorType); });
 
@@ -861,6 +861,7 @@ QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) c
 	case drawBall:
 	case drawBezier:
 	case drawRectangle:
+	case drawComment:
 		return QGraphicsView::NoDrag;
 	case hand:
 		return QGraphicsView::ScrollHandDrag;
@@ -896,6 +897,8 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 		return QCursor(QPixmap(":/icons/2d_drawBezierCursor.png"), 0, 0);
 	case drawRectangle:
 		return QCursor(QPixmap(":/icons/2d_drawRectangleCursor.png"), 0, 0);
+	case drawComment:
+		return QCursor(QPixmap(":/icons/2d_drawCommentCursor.png"), 0, 0);
 	default:
 		return Qt::ArrowCursor;
 	}
