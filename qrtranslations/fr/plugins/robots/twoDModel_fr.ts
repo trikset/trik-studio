@@ -295,6 +295,14 @@
     </message>
 </context>
 <context>
+    <name>twoDModel::items::CommentItem</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+40"/>
+        <source>Comment (M)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>twoDModel::items::CurveItem</name>
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
@@ -382,7 +390,8 @@
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+184"/>
         <location line="+19"/>
         <location line="+18"/>
-        <location line="+38"/>
+        <location line="+18"/>
+        <location line="+43"/>
         <location line="+19"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation type="unfinished"></translation>
@@ -393,7 +402,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+467"/>
+        <location line="+475"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -666,7 +675,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+719"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+736"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
@@ -699,7 +708,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+313"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -759,7 +768,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+168"/>
+        <location line="+171"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

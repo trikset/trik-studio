@@ -567,6 +567,14 @@
     </message>
 </context>
 <context>
+    <name>twoDModel::items::CommentItem</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+40"/>
+        <source>Comment (M)</source>
+        <translation type="unfinished">Комментарий (M)</translation>
+    </message>
+</context>
+<context>
     <name>twoDModel::items::CurveItem</name>
     <message>
         <source>Bezier Curve (B)</source>
@@ -658,7 +666,8 @@
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+184"/>
         <location line="+19"/>
         <location line="+18"/>
-        <location line="+38"/>
+        <location line="+18"/>
+        <location line="+43"/>
         <location line="+19"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Попытка добавить элемент с существующим идентификатором: %1</translation>
@@ -669,7 +678,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+467"/>
+        <location line="+475"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>
@@ -1009,7 +1018,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+719"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+736"/>
         <source>Select images</source>
         <translation type="unfinished">Выберите картинки</translation>
     </message>
@@ -1042,7 +1051,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+313"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1114,7 +1123,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+168"/>
+        <location line="+171"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>
