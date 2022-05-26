@@ -928,13 +928,9 @@ void TwoDModelScene::reshapeEllipse(QGraphicsSceneMouseEvent *event)
 
 void TwoDModelScene::reshapeComment(QGraphicsSceneMouseEvent *event)
 {
-	const QPointF pos = event->scenePos();
 	if (mCurrentComment) {
-		mCurrentComment->setX2(pos.x());
-		mCurrentComment->setY2(pos.y());
-		if (event->modifiers() & Qt::ShiftModifier) {
-			mCurrentComment->reshapeRectWithShift();
-		}
+		mCurrentComment->setDragState(AbstractItem::DragState::BottomRight);
+		mCurrentComment->resizeItem(event);
 	}
 }
 

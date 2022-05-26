@@ -36,14 +36,21 @@ public:
 
 	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	void drawExtractionForItem(QPainter* painter) override;
+
+	void calcResizeItem(QGraphicsSceneMouseEvent *event) override;
 	QPainterPath resizeArea() const override;
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
 
 private:
+	QRectF moveRect() const;
+	QRectF textBoundingRect() const;
+
 	void setPrivateData();
 	void updateTextPos();
+	void updateSize();
+
 	QGraphicsTextItem mText;
 };
 

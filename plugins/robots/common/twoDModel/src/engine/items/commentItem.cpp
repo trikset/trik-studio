@@ -16,6 +16,7 @@
 
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
+#include <QTextDocument>
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
 
@@ -27,11 +28,11 @@ using namespace graphicsUtils;
 CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
 	: mText(this)
 {
+	setX1(qMin(begin.x(), end.x()));
+	setY1(qMin(begin.y(), end.y()));
+	setX2(qMax(begin.x(), end.x()));
+	setY2(qMax(begin.y(), end.y()));
 	setPrivateData();
-	setX1(begin.x());
-	setY1(begin.y());
-	setX2(end.x());
-	setY2(end.y());
 }
 
 QAction *CommentItem::commentTool()
@@ -44,18 +45,14 @@ QAction *CommentItem::commentTool()
 
 QRectF CommentItem::boundingRect() const
 {
-	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), resizeDrift);
 }
 
 QPainterPath CommentItem::shape() const
 {
 	QPainterPath result;
-	result.setFillRule(Qt::WindingFill);
 
-	QPainterPathStroker ps;
-	ps.setWidth(pen().width());
-	result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
-	result = ps.createStroke(result);
+	result.addRect(moveRect());
 
 	if (isSelected()) {
 		result.addPath(resizeArea());
@@ -68,12 +65,48 @@ void CommentItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
+	painter->drawRect(moveRect());
 	RectangleImpl::drawRectItem(painter, x1(), y1(), x2(), y2());
 }
 
 void CommentItem::drawExtractionForItem(QPainter* painter)
 {
 	AbstractItem::drawExtractionForItem(painter);
+}
+
+void CommentItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
+{
+	setFlag(QGraphicsItem::ItemIsMovable, false);
+	const auto x = mapFromScene(event->scenePos()).x();
+	const auto y = mapFromScene(event->scenePos()).y();
+	const auto textRect = textBoundingRect();
+	const auto state = dragState();
+
+	switch (state) {
+	case TopLeft:
+	case BottomLeft:
+		if (x <= x2() - textRect.width()) setX1(x);
+		break;
+	case TopRight:
+	case BottomRight:
+		if (x >= x1() + textRect.width()) setX2(x);
+		break;
+	default:
+		break;
+	}
+
+	switch (state) {
+	case TopLeft:
+	case TopRight:
+		if (y <= y2() - textRect.height()) setY1(y);
+		break;
+	case BottomLeft:
+	case BottomRight:
+		if (y >= y1() + textRect.height()) setY2(y);
+		break;
+	default:
+		break;
+	}
 }
 
 QPainterPath CommentItem::resizeArea() const
@@ -117,10 +150,20 @@ void CommentItem::deserialize(const QDomElement &element)
 	const QPointF end = QPointF(x, y);
 
 	setPos(QPointF());
-	setX1(begin.x());
-	setY1(begin.y());
-	setX2(end.x());
-	setY2(end.y());
+	setX1(qMin(begin.x(), end.x()));
+	setY1(qMin(begin.y(), end.y()));
+	setX2(qMax(begin.x(), end.x()));
+	setY2(qMax(begin.y(), end.y()));
+}
+
+QRectF CommentItem::moveRect() const
+{
+	return QRectF((x1() + x2())/2, y1(), 0, 0).adjusted(-2*resizeDrift, -resizeDrift, 2*resizeDrift, resizeDrift);
+}
+
+QRectF CommentItem::textBoundingRect() const
+{
+	return mText.sceneBoundingRect().adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift);
 }
 
 void CommentItem::setPrivateData()
@@ -134,18 +177,27 @@ void CommentItem::setPrivateData()
 
 	connect(this, &AbstractItem::x1Changed, this, &CommentItem::updateTextPos);
 	connect(this, &AbstractItem::y1Changed, this, &CommentItem::updateTextPos);
-	connect(this, &AbstractItem::x2Changed, this, &CommentItem::updateTextPos);
-	connect(this, &AbstractItem::y2Changed, this, &CommentItem::updateTextPos);
 
-	mText.setPlainText("Your comment can be here");
+	connect(mText.document(), &QTextDocument::contentsChanged, this, &CommentItem::updateSize);
+
 	mText.setTextInteractionFlags(Qt::TextEditorInteraction);
 	auto font = mText.font();
 	font.setPixelSize(20);
 	mText.setFont(font);
+	mText.setPlainText("Your comment can be here");
+	updateTextPos();
+	updateSize();
 }
 
 void CommentItem::updateTextPos()
 {
-	mText.setX(resizeDrift + qMin(x1(), x2()));
-	mText.setY(resizeDrift + qMin(y1(), y2()));
+	mText.setX(resizeDrift + x1());
+	mText.setY(resizeDrift + y1());
+}
+
+void CommentItem::updateSize()
+{
+	const auto rect = textBoundingRect();
+	setX2(qMax(x2(), x1() + rect.width()));
+	setY2(qMax(y2(), y1() + rect.height()));
 }
