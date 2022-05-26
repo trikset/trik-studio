@@ -402,7 +402,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+475"/>
+        <location line="+482"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>

@@ -678,7 +678,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+475"/>
+        <location line="+482"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>

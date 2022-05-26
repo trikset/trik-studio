@@ -511,7 +511,6 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	}
 
 	// IKHON do we need mOrder? if yes, add mOrder to addComment
-	// IKHON what about deserialize
 	QDomElement comments = parent.ownerDocument().createElement("comments");
 	result.appendChild(comments);
 	for (auto &&comment : mComments) {
@@ -637,6 +636,14 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		for (QDomElement elementNode = colorFieldsNode.firstChildElement(); !elementNode.isNull()
 				; elementNode = elementNode.nextSiblingElement()) {
 			createElement(elementNode);
+		}
+	}
+
+	for (QDomElement commentsNode = element.firstChildElement("comments"); !commentsNode.isNull()
+			; commentsNode = commentsNode.nextSiblingElement("comments")) {
+		for (QDomElement elementNode = commentsNode.firstChildElement(); !elementNode.isNull()
+				; elementNode = elementNode.nextSiblingElement()) {
+			createComment(elementNode);
 		}
 	}
 
