@@ -29,12 +29,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+241"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
         <source>Can`t open project file</source>
         <translation type="unfinished">Le fichier du projet ne peut pas être ouvert</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/versionsConverterManager.cpp" line="+117"/>
+        <location filename="../../qrgui/systemFacade/components/versionsConverterManager.cpp" line="+114"/>
         <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
         <translation type="unfinished"></translation>
     </message>
