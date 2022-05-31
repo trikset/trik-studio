@@ -281,7 +281,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+187"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -371,7 +371,7 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+93"/>
         <source>This robot model already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -379,7 +379,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+183"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+184"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+38"/>
@@ -393,7 +393,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+450"/>
+        <location line="+467"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>

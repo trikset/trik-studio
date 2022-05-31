@@ -43,6 +43,8 @@ class RegionItem;
 
 namespace model {
 
+class RobotModel;
+
 class TWO_D_MODEL_EXPORT WorldModel : public QObject
 {
 	Q_OBJECT
@@ -123,6 +125,9 @@ public:
 
 	/// Removes image item from 2D model.
 	void removeImageItem(QSharedPointer<items::ImageItem> imageItem);
+
+	/// Sets using robot model
+	void setRobotModel(RobotModel * robotModel);
 
 	/// Removes all walls, colored items, regions and robot traces from the world model.
 	void clear();
@@ -240,6 +245,7 @@ private:
 	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
 	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;
 	QMap<QString, QSharedPointer<model::Image>> mImages;
+	RobotModel * mRobotModel {}; // Doesn't take ownership
 	QMap<QString, int> mOrder;
 	QList<QSharedPointer<QGraphicsPathItem>> mRobotTrace;
 	QRect mBackgroundRect;

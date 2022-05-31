@@ -47,7 +47,6 @@ HEADERS += \
 	$$PWD/referenceList.h \
 	$$PWD/externBrowser.h \
 	$$PWD/projectManager/projectManagerWrapper.h \
-	$$PWD/projectManager/versionsConverterManager.h \
 	$$PWD/palette/paletteTree.h \
 	$$PWD/palette/paletteTreeWidget.h \
 	$$PWD/palette/draggableElement.h \
@@ -72,7 +71,6 @@ SOURCES += \
 	$$PWD/modelExplorer.cpp \
 	$$PWD/referenceList.cpp \
 	$$PWD/projectManager/projectManagerWrapper.cpp \
-	$$PWD/projectManager/versionsConverterManager.cpp \
 	$$PWD/palette/paletteTree.cpp \
 	$$PWD/palette/paletteTreeWidget.cpp \
 	$$PWD/palette/draggableElement.cpp \

@@ -21,6 +21,7 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/worldModel.h"
 #include "twoDModel/engine/model/image.h"
+#include "twoDModel/engine/model/robotModel.h"
 
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
@@ -302,6 +303,11 @@ void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 	emit blobsChanged();
 }
 
+void WorldModel::setRobotModel(RobotModel * robotModel)
+{
+	mRobotModel = robotModel;
+}
+
 void WorldModel::clear()
 {
 	while (!mWalls.isEmpty()) {
@@ -328,6 +334,10 @@ void WorldModel::clear()
 		auto toRemove = mRegions.last();
 		mRegions.remove(toRemove->id());
 		emit itemRemoved(toRemove);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->deserializeWorldModel(QDomElement());
 	}
 
 	mOrder.clear();
@@ -472,6 +482,10 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 		regions.appendChild(regionElement);
 	}
 
+	if (mRobotModel) {
+		mRobotModel->serializeWorldModel(parent);
+	}
+
 	// Robot trace saving is disabled
 
 	return result;
@@ -613,6 +627,10 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 			; regionNode = regionNode.nextSiblingElement("region"))
 	{
 		createRegion(regionNode);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->deserializeWorldModel(element);
 	}
 }
 

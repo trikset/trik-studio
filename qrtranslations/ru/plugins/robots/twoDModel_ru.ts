@@ -553,7 +553,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+187"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -647,7 +647,7 @@
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+93"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>
@@ -655,7 +655,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+183"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+184"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+38"/>
@@ -669,7 +669,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+450"/>
+        <location line="+467"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>

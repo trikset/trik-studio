@@ -57,14 +57,13 @@ RobotModel::~RobotModel() = default;
 void RobotModel::reinit()
 {
 	mMotors.clear();
-	mMarker = Qt::transparent;
-
 	for (const Device * const device : mRobotModel.configuration().devices()) {
 		if (device->deviceInfo().isA<robotParts::Motor>()) {
 			initMotor(robotWheelDiameterInPx / 2, 0, 0, device->port(), false);
 		}
 	}
 
+	mMarker = Qt::transparent;
 	mBeepTime = 0;
 	mDeltaDegreesOfAngle = 0;
 	mAcceleration = QPointF(0, 0);
@@ -73,8 +72,13 @@ void RobotModel::reinit()
 void RobotModel::clear()
 {
 	reinit();
-	setPosition(QPointF());
-	setRotation(0);
+	returnToStartMarker();
+}
+
+void RobotModel::returnToStartMarker()
+{
+	setRotation(mStartPositionMarker->rotation());
+	setPosition(mStartPositionMarker->pos() - mRobotModel.robotCenter());
 }
 
 RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees, const PortInfo &port, bool isUsed)

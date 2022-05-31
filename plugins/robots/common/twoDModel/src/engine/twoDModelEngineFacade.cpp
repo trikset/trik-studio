@@ -83,8 +83,10 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			interpretersInterface.errorReporter()->addError(
 				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 		}
-		// IKHON check with errors
-		worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
+
+		if (!worldModel.firstChild().isNull()) {
+			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
+		}
 
 		mView->loadXmls(worldModel);
 

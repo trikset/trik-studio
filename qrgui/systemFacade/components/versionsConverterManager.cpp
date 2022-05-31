@@ -14,34 +14,30 @@
 
 #include "versionsConverterManager.h"
 
-#include <QtWidgets/QMessageBox>
-
-#include <qrgui/models/models.h>
-#include <qrgui/plugins/pluginManager/toolPluginManager.h>
-#include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
-
-#include "mainWindow/mainWindow.h"
-
 using namespace qReal;
 
-VersionsConverterManager::VersionsConverterManager(MainWindow &mainWindow)
-	: mMainWindow(mainWindow)
+VersionsConverterManager::VersionsConverterManager(models::Models &models, ToolPluginManager &toolManager)
+	: mModels(models)
+	, mConverters(toolManager.projectConverters())
 {
 }
 
 bool VersionsConverterManager::validateCurrentProject()
 {
+	mConverted = false;
+	mErrorMessage = QString();
+
 	QSet<QString> editorsToCheck;
-	const IdList allElements = mMainWindow.models().logicalModelAssistApi().children(Id::rootId());
+	const IdList allElements = mModels.logicalModelAssistApi().children(Id::rootId());
 	for (const Id &element : allElements) {
 		editorsToCheck << element.editor();
 	}
 
-	const QMap<Id, Version> savedVersions = mMainWindow.models().logicalModelAssistApi().editorVersions();
-	const auto &converters = mMainWindow.toolManager().projectConverters();
+	const QMap<Id, Version> savedVersions = mModels.logicalModelAssistApi().editorVersions();
 
 	for (const QString &editor : editorsToCheck) {
-		const Version currentVersion = mMainWindow.editorManager().version(Id(editor));
+		const Version currentVersion = mModels.logicalModelAssistApi()
+				.editorManagerInterface().version(Id(editor));
 		const Version savedVersion = savedVersions[Id(editor)];
 
 		if (currentVersion == savedVersion) {
@@ -54,9 +50,9 @@ bool VersionsConverterManager::validateCurrentProject()
 		}
 
 		QList<ProjectConverter> l;
-		auto const &cs = converters.equal_range(editor);
+		auto const &cs = mConverters.equal_range(editor);
 
-		for(auto i = cs.first; i != cs.second && i!=converters.end(); ++i) {
+		for(auto i = cs.first; i != cs.second && i!=mConverters.end(); ++i) {
 			l.push_back(i->second);
 		}
 
@@ -94,8 +90,8 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 	for (ProjectConverter &converter : sortedConverters) {
 		if (converter.fromVersion() >= saveVersion && converter.toVersion() <= enviromentVersion) {
 			const ProjectConverter::ConvertionResult result = converter.convert(
-					mMainWindow.models().graphicalModelAssistApi()
-					, mMainWindow.models().logicalModelAssistApi());
+					mModels.graphicalModelAssistApi()
+					, mModels.logicalModelAssistApi());
 			switch (result) {
 			case ProjectConverter::Success:
 				converterApplied = true;
@@ -114,10 +110,10 @@ bool VersionsConverterManager::convertProject(const Version &enviromentVersion
 
 	// Stage IV: Notifying user
 	if (converterApplied) {
-		mMainWindow.errorReporter()->addInformation(
-				QObject::tr("Project was automaticly converted from version %1 to version %2."\
-				" Please check its contents.").arg(saveVersion.toString(), enviromentVersion.toString()));
-		mMainWindow.models().mutableLogicalRepoApi().setMetaInformation(
+		mConverted = true;
+		mErrorMessage = QObject::tr("Project was automaticly converted from version %1 to version %2."\
+				" Please check its contents.").arg(saveVersion.toString(), enviromentVersion.toString());
+		mModels.mutableLogicalRepoApi().setMetaInformation(
 				converters.first().editor() + "Version", enviromentVersion.toString());
 	}
 
@@ -155,5 +151,15 @@ void VersionsConverterManager::displayTooOldEnviromentError(const Version &saveV
 
 void VersionsConverterManager::showError(const QString &errorMessage)
 {
-	QMessageBox::information(&mMainWindow, QObject::tr("Can`t open project file"), errorMessage);
+	mErrorMessage = errorMessage;
+}
+
+bool VersionsConverterManager::converted() const
+{
+	return mConverted;
+}
+
+QString VersionsConverterManager::errorMessage() const
+{
+	return mErrorMessage;
 }

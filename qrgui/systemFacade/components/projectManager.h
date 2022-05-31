@@ -19,10 +19,9 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/projectManagementInterface.h>
 #include <qrgui/models/models.h>
 #include "qrgui/systemFacade/components/autosaver.h"
+#include <qrgui/systemFacade/components/versionsConverterManager.h>
 
 namespace qReal {
-
-class MainWindow;
 
 /// ProjectManagementInterface implementation
 class QRGUI_SYSTEM_FACADE_EXPORT ProjectManager : public ProjectManagementInterface
@@ -70,6 +69,8 @@ public:
 	/// May be overrided to prompt user a path to file to open.
 	virtual QString openFileName(const QString &promptPhrase) const;
 
+	ToolPluginManager &toolManager() const;
+
 protected:
 	bool openProject(const QString &fileName);
 	bool import(const QString &fileName);
@@ -99,6 +100,8 @@ protected:
 	bool mUnsavedIndicator;
 	QString mSaveFilePath;
 	bool mSomeProjectOpened;
+	QScopedPointer<ToolPluginManager> mToolManager;
+	VersionsConverterManager mVersionsConverter;
 };
 
 }

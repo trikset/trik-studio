@@ -127,7 +127,6 @@ QDomDocument Model::serialize() const
 	}
 	if (mRobotModel) {
 		mRobotModel->serialize(robots);
-		mRobotModel->serializeWorldModel(root);
 	}
 	root.appendChild(robots);
 
@@ -153,22 +152,14 @@ void Model::deserialize(const QDomDocument &model)
 	const auto &blobsList = model.elementsByTagName("blobs");
 	mWorldModel.deserialize(world, blobsList.isEmpty() ? QDomElement() : blobsList.at(0).toElement());
 
-	if (!mRobotModel) return;
 	const auto &robotsList = model.elementsByTagName("robots");
-	if (robotsList.isEmpty()) {
-		mRobotModel->deserializeWorldModel(world);
-		mRobotModel->deserialize(world.firstChildElement("robot"));
-	} else {
-		bool loadFromWorld = !world.firstChildElement("robot").isNull();
-		if (loadFromWorld) mRobotModel->deserializeWorldModel(world);
-		for (QDomElement element = robotsList.isEmpty() ? QDomElement()
-				: robotsList.at(0).firstChildElement("robot"); !element.isNull()
-				; element = element.nextSiblingElement("robot")) {
-			if (mRobotModel->info().robotId() == element.toElement().attribute("id")) {
-				if (!loadFromWorld) mRobotModel->deserializeWorldModel(element.parentNode().toElement());
-				mRobotModel->deserialize(element);
-				return;
-			}
+	if (!mRobotModel || robotsList.isEmpty()) return;
+	mRobotModel->reinit();
+	for (QDomElement element = robotsList.at(0).firstChildElement("robot")
+			; !element.isNull(); element = element.nextSiblingElement("robot")) {
+		if (mRobotModel->info().robotId() == element.toElement().attribute("id")) {
+			mRobotModel->deserialize(element);
+			return;
 		}
 	}
 }
@@ -191,6 +182,8 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF 
 
 	mRobotModel->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
 
+	mWorldModel.setRobotModel(mRobotModel);
+
 	emit robotAdded(mRobotModel);
 }
 
@@ -200,6 +193,7 @@ void Model::removeRobotModel()
 		return;
 	}
 
+	mWorldModel.setRobotModel(nullptr);
 	emit robotRemoved(mRobotModel);
 	delete mRobotModel;
 }
