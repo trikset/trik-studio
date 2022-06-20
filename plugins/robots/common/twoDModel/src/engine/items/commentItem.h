@@ -43,7 +43,12 @@ public:
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
 
+protected:
+	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+
 private:
+	void endEditing();
+	void startEditing();
 	QRectF moveRect() const;
 	QRectF textBoundingRect() const;
 
@@ -51,7 +56,9 @@ private:
 	void updateTextPos();
 	void updateSize();
 
-	QGraphicsTextItem mText;
+	QGraphicsTextItem mTextItem;
+	QString mHtmlText;
+	bool mIsEditing {false};
 };
 
 }

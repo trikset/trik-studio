@@ -168,6 +168,21 @@
         <source>Object %1 has no property %2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+177"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -297,7 +312,7 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-136"/>
         <source>Comment (M)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -387,7 +402,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+184"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+185"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+18"/>
@@ -402,7 +417,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+482"/>
+        <location line="+499"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -675,7 +690,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+736"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+738"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>

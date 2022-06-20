@@ -17,6 +17,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QTextDocument>
+#include <QMenu>
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
 
@@ -26,7 +27,8 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
-	: mText(this)
+	: mTextItem(this)
+	, mHtmlText("Your comment can be here")
 {
 	setX1(qMin(begin.x(), end.x()));
 	setY1(qMin(begin.y(), end.y()));
@@ -66,6 +68,7 @@ void CommentItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* op
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	painter->drawRect(moveRect());
+	painter->setBrush(Qt::transparent);
 	RectangleImpl::drawRectItem(painter, x1(), y1(), x2(), y2());
 }
 
@@ -127,15 +130,16 @@ QDomElement CommentItem::serialize(QDomElement &parent) const
 			 + ":" + QString::number(y1() + scenePos().y()));
 	commentNode.setAttribute("end", QString::number(x2() + scenePos().x())
 			 + ":" + QString::number(y2() + scenePos().y()));
-	commentNode.setAttribute("text", mText.toHtml());
+	commentNode.setAttribute("text", mIsEditing ? mTextItem.toPlainText() : mHtmlText);
 	return commentNode;
 }
 
 void CommentItem::deserialize(const QDomElement &element)
 {
+	mIsEditing = false;
 	AbstractItem::deserialize(element);
 
-	mText.setHtml(element.attribute("text"));
+	mTextItem.setHtml(element.attribute("text"));
 
 	const QString beginStr = element.attribute("begin", "0:0");
 	QStringList splittedStr = beginStr.split(":");
@@ -156,6 +160,55 @@ void CommentItem::deserialize(const QDomElement &element)
 	setY2(qMax(begin.y(), end.y()));
 }
 
+void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	if (!editable()) {
+		return;
+	}
+
+	if (!isSelected()) {
+		scene()->clearSelection();
+		setSelected(true);
+	}
+
+	event->accept();
+
+	QMenu *menu = new QMenu();
+	QAction *removeAction = menu->addAction(QObject::tr("Remove"));
+	QAction *editAction = menu->addAction(mIsEditing ? QObject::tr("Save") : QObject::tr("Edit"));
+	QAction *selectedAction = menu->exec(event->screenPos());
+	delete menu;
+	if (selectedAction == removeAction) {
+		emit deletedWithContextMenu();
+	} else if (selectedAction == editAction) {
+		if (mIsEditing) {
+			endEditing();
+		} else {
+			startEditing();
+		}
+	}
+}
+
+void CommentItem::startEditing() {
+	mIsEditing = true;
+	setBrushStyle("Solid");
+	mTextItem.setTextInteractionFlags(Qt::TextEditorInteraction);
+	mTextItem.setPlainText(mHtmlText);
+	mTextItem.setFocus();
+	update();
+}
+
+void CommentItem::endEditing()
+{
+	mIsEditing = false;
+	setBrushStyle("None");
+	mTextItem.setTextInteractionFlags(Qt::NoTextInteraction);
+	mHtmlText = mTextItem.toPlainText();
+	mTextItem.setHtml(mHtmlText);
+	updateSize();
+	update();
+}
+
 QRectF CommentItem::moveRect() const
 {
 	return QRectF((x1() + x2())/2, y1(), 0, 0).adjusted(-2*resizeDrift, -resizeDrift, 2*resizeDrift, resizeDrift);
@@ -163,36 +216,33 @@ QRectF CommentItem::moveRect() const
 
 QRectF CommentItem::textBoundingRect() const
 {
-	return mText.sceneBoundingRect().adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift);
+	return mTextItem.sceneBoundingRect().adjusted(-resizeDrift, -resizeDrift, resizeDrift, resizeDrift);
 }
 
 void CommentItem::setPrivateData()
 {
 	// IKHON zValue ?
 	setZValue(ZValue::Shape);
-	QPen pen(this->pen());
-	pen.setColor(Qt::darkGray);
-	pen.setStyle(Qt::DashLine);
-	setPen(pen);
+	setPenColor("darkGray");
+	setPenStyle("Dash");
+	setBrush("None", "red");
 
 	connect(this, &AbstractItem::x1Changed, this, &CommentItem::updateTextPos);
 	connect(this, &AbstractItem::y1Changed, this, &CommentItem::updateTextPos);
 
-	connect(mText.document(), &QTextDocument::contentsChanged, this, &CommentItem::updateSize);
-
-	mText.setTextInteractionFlags(Qt::TextEditorInteraction);
-	auto font = mText.font();
+	mTextItem.setTextInteractionFlags(Qt::NoTextInteraction);
+	auto font = mTextItem.font();
 	font.setPixelSize(20);
-	mText.setFont(font);
-	mText.setPlainText("Your comment can be here");
+	mTextItem.setFont(font);
+	mTextItem.setPlainText(mHtmlText);
 	updateTextPos();
 	updateSize();
 }
 
 void CommentItem::updateTextPos()
 {
-	mText.setX(resizeDrift + x1());
-	mText.setY(resizeDrift + y1());
+	mTextItem.setX(resizeDrift + x1());
+	mTextItem.setY(resizeDrift + y1());
 }
 
 void CommentItem::updateSize()

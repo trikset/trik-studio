@@ -374,6 +374,21 @@
         <source>Object %1 has no property %2</source>
         <translation>Объект %1 не имеет свойства %2</translation>
     </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+177"/>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save</source>
+        <translation type="unfinished">Сохранить</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Edit</source>
+        <translation type="unfinished">Редактировать</translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -569,7 +584,7 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-136"/>
         <source>Comment (M)</source>
         <translation type="unfinished">Комментарий (M)</translation>
     </message>
@@ -663,7 +678,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+184"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+185"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+18"/>
@@ -678,7 +693,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+482"/>
+        <location line="+499"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>
@@ -1018,7 +1033,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+736"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+738"/>
         <source>Select images</source>
         <translation type="unfinished">Выберите картинки</translation>
     </message>
