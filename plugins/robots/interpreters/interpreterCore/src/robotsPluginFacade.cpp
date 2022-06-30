@@ -258,6 +258,11 @@ ActionsManager &RobotsPluginFacade::actionsManager()
 	return mActionsManager;
 }
 
+RobotModelManager &RobotsPluginFacade::robotModelManager()
+{
+	return mRobotModelManager;
+}
+
 QObject *RobotsPluginFacade::guiScriptFacade() const
 {
 	const auto robotModel = dynamic_cast<twoDModel::robotModel::TwoDRobotModel *>(&mRobotModelManager.model());

@@ -64,6 +64,9 @@ public:
 	/// Returns an object of the class responsible for managing plugin`s toolbar actions.
 	ActionsManager &actionsManager();
 
+	/// Returns an object of the class responsible for managing robot's models.
+	RobotModelManager &robotModelManager();
+
 	/// A convenience method that travels around all loaded kit plugins,
 	/// collects all non-empty default settings file paths and returns them.
 	QStringList defaultSettingsFiles() const;

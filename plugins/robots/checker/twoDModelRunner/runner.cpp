@@ -112,6 +112,8 @@ bool Runner::interpret(const QString &saveFile, const bool background
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 
+	const auto robotName = mPluginFacade->robotModelManager().model().name();
+
 	for (auto &&twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &*mMainWindow
 				, [this]() { this->mMainWindow->emulateClose(); });
@@ -124,6 +126,11 @@ bool Runner::interpret(const QString &saveFile, const bool background
 		t.setImmediateMode(background);
 		if (customSpeedFactor >= model::Timeline::normalSpeedFactor) {
 			t.setSpeedFactor(customSpeedFactor);
+		}
+
+		const auto models = twoDModelWindow->model().robotModels();
+		if (!models.isEmpty() && models[0]->info().name() == robotName) {
+			twoDModelWindow->bringToFront();
 		}
 	}
 
