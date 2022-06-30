@@ -482,6 +482,13 @@ void RobotsPluginFacade::connectEventsForKitPlugin()
 			);
 
 	QObject::connect(
+			&mProxyInterpreter
+			, &kitBase::InterpreterInterface::errored
+			, &mEventsForKitPlugin
+			, &kitBase::EventsForKitPluginInterface::interpretationErrored
+			);
+
+	QObject::connect(
 				&mEventsForKitPlugin
 				, &kitBase::EventsForKitPluginInterface::interpretationStarted
 				, [this](){ /// @todo

@@ -112,6 +112,11 @@ bool Runner::interpret(const QString &saveFile, const bool background
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 
+	if (background) {
+		connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationErrored
+				, this, [this]() { QTimer::singleShot(0, this, &Runner::close); });
+	}
+
 	const auto robotName = mPluginFacade->robotModelManager().model().name();
 
 	for (auto &&twoDModelWindow : twoDModelWindows) {
