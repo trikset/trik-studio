@@ -72,6 +72,9 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 		QTimer::singleShot(0, &interpreterControl,
 				[&interpreterControl](){ Q_EMIT interpreterControl.stopAllInterpretation(); });
 	});
+	connect(mChecker.data(), &constraints::ConstraintsChecker::message, this, [&](const QString &message) {
+		errorReporter.addInformation(message);
+	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::checkerError
 			, this, [&errorReporter](const QString &message) {
 				errorReporter.addCritical(tr("Error in checker: %1").arg(message));

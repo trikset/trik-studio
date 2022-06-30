@@ -46,6 +46,7 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 	});
 	connect(&mStatus, &details::StatusReporter::fail, this, [this]() { mFailTriggered = true; });
 	connect(&mStatus, &details::StatusReporter::fail, this, &ConstraintsChecker::fail);
+	connect(&mStatus, &details::StatusReporter::message, this, &ConstraintsChecker::message);
 	connect(&mStatus, &details::StatusReporter::checkerError, this, &ConstraintsChecker::checkerError);
 
 	connect(&mModel.timeline(), &model::Timeline::started, this, &ConstraintsChecker::programStarted);
