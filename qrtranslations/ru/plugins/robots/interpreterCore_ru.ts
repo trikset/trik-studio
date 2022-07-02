@@ -228,7 +228,7 @@
         <translation>Экспорт упражнения по заданному пути не удался (попробуйте другой путь)</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+111"/>
         <source>No saved code found in the qrs file</source>
         <translation>В qrs не найден сохраннёный код</translation>
     </message>
@@ -283,18 +283,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+91"/>
-        <location line="+72"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
+        <location line="+74"/>
         <source>No connection to robot</source>
         <translation>Нет соединения с роботом</translation>
     </message>
     <message>
-        <location line="-67"/>
+        <location line="-68"/>
         <source>Interpreter is already running</source>
         <translation>Программа уже запущена</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Connected successfully</source>
         <translation>Подключение к роботу выполнено</translation>
     </message>
