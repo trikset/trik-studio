@@ -183,6 +183,11 @@
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Annuler</translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -312,8 +317,8 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-136"/>
-        <source>Comment (M)</source>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-137"/>
+        <source>Text (T)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

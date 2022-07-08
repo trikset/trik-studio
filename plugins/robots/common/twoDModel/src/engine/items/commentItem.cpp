@@ -39,8 +39,8 @@ CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
 
 QAction *CommentItem::commentTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_comment.svg"), tr("Comment (M)"), nullptr);
-	result->setShortcuts({QKeySequence(Qt::Key_M), QKeySequence(Qt::Key_0)});
+	QAction * const result = new QAction(QIcon(":/icons/2d_comment.svg"), tr("Text (T)"), nullptr);
+	result->setShortcuts({QKeySequence(Qt::Key_T), QKeySequence(Qt::Key_0)});
 	result->setCheckable(true);
 	return result;
 }
@@ -176,16 +176,21 @@ void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	QMenu *menu = new QMenu();
 	QAction *removeAction = menu->addAction(QObject::tr("Remove"));
 	QAction *editAction = menu->addAction(mIsEditing ? QObject::tr("Save") : QObject::tr("Edit"));
+	QAction *cancelAction = menu->addAction(QObject::tr("Cancel"));
+	if (!mIsEditing) menu->removeAction(cancelAction);
 	QAction *selectedAction = menu->exec(event->screenPos());
 	delete menu;
 	if (selectedAction == removeAction) {
 		emit deletedWithContextMenu();
 	} else if (selectedAction == editAction) {
 		if (mIsEditing) {
+			mHtmlText = mTextItem.toPlainText();
 			endEditing();
 		} else {
 			startEditing();
 		}
+	} else if (selectedAction == cancelAction) {
+		endEditing();
 	}
 }
 
@@ -203,7 +208,6 @@ void CommentItem::endEditing()
 	mIsEditing = false;
 	setBrushStyle("None");
 	mTextItem.setTextInteractionFlags(Qt::NoTextInteraction);
-	mHtmlText = mTextItem.toPlainText();
 	mTextItem.setHtml(mHtmlText);
 	updateSize();
 	update();
