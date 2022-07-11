@@ -476,6 +476,10 @@ Trigger ConstraintsParser::parseTriggerContents(const QDomElement &element)
 		return parseFailTag(element);
 	}
 
+	if (tag == "message") {
+		return parseMessageTag(element);
+	}
+
 	if (tag == "success") {
 		return parseSuccessTag(element);
 	}
@@ -503,6 +507,15 @@ Trigger ConstraintsParser::parseFailTag(const QDomElement &element)
 	}
 
 	return mTriggers.fail(element.attribute("message"));
+}
+
+Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
+{
+	if (!assertAttributeNonEmpty(element, "text")) {
+		return mTriggers.doNothing();
+	}
+
+	return mTriggers.message(element.attribute("text"));
 }
 
 Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)

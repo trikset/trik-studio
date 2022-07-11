@@ -36,6 +36,9 @@ public:
 	/// Produces new trigger that sends back to the environment fail signal and passes the given message as the reason.
 	Trigger fail(const QString &message) const;
 
+	/// Produces new trigger that sends back to the environment message signal.
+	Trigger message(const QString &message) const;
+
 	/// Produces new trigger that sends back to the environment sucess signal (i.e. that the program worked correctly
 	/// and all conditions were satisfied).
 	/// @param deferred If true then the program execution will not be stopped immediately.

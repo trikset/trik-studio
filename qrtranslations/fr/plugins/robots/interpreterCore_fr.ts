@@ -314,7 +314,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+111"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -365,18 +365,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+91"/>
-        <location line="+72"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
+        <location line="+74"/>
         <source>No connection to robot</source>
         <translation type="unfinished">Pas de connexion au robot</translation>
     </message>
     <message>
-        <location line="-67"/>
+        <location line="-68"/>
         <source>Interpreter is already running</source>
         <translation type="unfinished">L&apos;interprétateur est deja lancé</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Connected successfully</source>
         <translation type="unfinished">Connexion reussie</translation>
     </message>

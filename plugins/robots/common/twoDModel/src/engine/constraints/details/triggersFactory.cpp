@@ -35,6 +35,11 @@ Trigger TriggersFactory::fail(const QString &message) const
 	return [this, message]() { emit mStatus.fail(message); };
 }
 
+Trigger TriggersFactory::message(const QString &messsage) const
+{
+	return [this, messsage]() { emit mStatus.message(messsage); };
+}
+
 Trigger TriggersFactory::success(bool deferred) const
 {
 	return [this, deferred]() { emit mStatus.success(deferred); };

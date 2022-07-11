@@ -100,6 +100,7 @@ public:
 	void setCompactMode(bool enabled);
 
 	void setBackgroundMode();
+	void bringToFront();
 
 	QString editorId() const override;
 	bool supportsZooming() const override;
@@ -142,8 +143,6 @@ protected:
 			, Reason reason) override;
 
 private slots:
-	void bringToFront();
-
 	void saveWorldModelToRepo();
 	void saveBlobsToRepo();
 
