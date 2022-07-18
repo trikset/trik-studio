@@ -107,6 +107,7 @@ HEADERS += \
 	$$PWD/src/engine/items/imageItem.h \
 	$$PWD/src/engine/items/skittleItem.h \
 	$$PWD/src/engine/items/ballItem.h \
+	$$PWD/src/engine/items/commentItem.h \
 	$$PWD/src/engine/items/startPosition.h \
 	$$PWD/src/engine/items/regions/regionItem.h \
 	$$PWD/src/engine/items/regions/ellipseRegion.h \
@@ -174,6 +175,7 @@ SOURCES += \
 	$$PWD/src/engine/items/imageItem.cpp \
 	$$PWD/src/engine/items/skittleItem.cpp \
 	$$PWD/src/engine/items/ballItem.cpp \
+	$$PWD/src/engine/items/commentItem.cpp \
 	$$PWD/src/engine/items/startPosition.cpp \
 	$$PWD/src/engine/items/regions/regionItem.cpp \
 	$$PWD/src/engine/items/regions/ellipseRegion.cpp \

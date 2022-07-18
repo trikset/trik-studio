@@ -48,6 +48,7 @@
 #include "src/engine/items/stylusItem.h"
 #include "src/engine/items/rectangleItem.h"
 #include "src/engine/items/ellipseItem.h"
+#include "src/engine/items/commentItem.h"
 #include "src/engine/items/imageItem.h"
 #include "src/engine/items/regions/regionItem.h"
 #include "src/engine/items/startPosition.h"
@@ -80,8 +81,9 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::wallAdded, this, &TwoDModelScene::onWallAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded, this, &TwoDModelScene::onSkittleAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded, this, &TwoDModelScene::onBallAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onImageItemAdded);
+	connect(&mModel.worldModel(), &model::WorldModel::commentAdded, this, &TwoDModelScene::onAbstractItemAdded);
+	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
+	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
 			, this, [=](const QSharedPointer<items::RegionItem> &item) { addItem(item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
@@ -125,6 +127,10 @@ TwoDModelScene::~TwoDModelScene()
 	}
 
 	for(auto &&x: mModel.worldModel().trace()) {
+		removeItem(x.data());
+	}
+
+	for(auto &&x: mModel.worldModel().commentItems()) {
 		removeItem(x.data());
 	}
 }
@@ -242,10 +248,7 @@ void TwoDModelScene::onRobotRemove(model::RobotModel *robotModel)
 
 void TwoDModelScene::onWallAdded(QSharedPointer<items::WallItem> wall)
 {
-	addItem(wall.data());
-	subscribeItem(wall.data());
-	connect(&*wall, &items::WallItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
-	wall->setEditable(!mWorldReadOnly);
+	onAbstractItemAdded(wall);
 }
 
 void TwoDModelScene::onSkittleAdded(QSharedPointer<items::SkittleItem> skittle)
@@ -271,16 +274,6 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 			skittle->saveStartPosition();
 		}
 	}
-}
-
-void TwoDModelScene::onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item)
-{
-	onAbstractItemAdded(item);
-}
-
-void TwoDModelScene::onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item)
-{
-	onAbstractItemAdded(item);
 }
 
 void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
@@ -388,6 +381,11 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 				mCurrentEllipse.reset(new items::EllipseItem(position, position));
 				initColorField(mCurrentEllipse);
 				break;
+			case comment:
+				mCurrentComment.reset(new items::CommentItem(position, position));
+				initItem(mCurrentComment);
+				mModel.worldModel().addComment(mCurrentComment);
+				break;
 			default:
 				break;
 			}
@@ -422,6 +420,9 @@ void TwoDModelScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		break;
 	case ellipse:
 		reshapeEllipse(mouseEvent);
+		break;
+	case comment:
+		reshapeComment(mouseEvent);
 		break;
 	default:
 		needUpdate = false;
@@ -494,6 +495,12 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		reshapeEllipse(mouseEvent);
 		createdItem = mCurrentEllipse;
 		mCurrentEllipse = nullptr;
+		break;
+	}
+	case comment: {
+		reshapeComment(mouseEvent);
+		createdItem = mCurrentComment;
+		mCurrentComment = nullptr;
 		break;
 	}
 	default:
@@ -583,6 +590,7 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 		items::ImageItem * const image = dynamic_cast<items::ImageItem *>(item);
 		items::SkittleItem * const skittle = dynamic_cast<items::SkittleItem *>(item);
 		items::BallItem * const ball = dynamic_cast<items::BallItem *>(item);
+		items::CommentItem * const comment = dynamic_cast<items::CommentItem *>(item);
 
 		if (sensor && !mSensorsReadOnly) {
 			for (auto &&robotItem : mRobots.values()) {
@@ -601,6 +609,8 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 			worldItems << colorField->id();
 		} else if (image && !mWorldReadOnly) {
 			worldItems << image->id();
+		} else if (comment && !mWorldReadOnly) {
+			worldItems << comment->id();
 		}
 	}
 	return {worldItems, sensors};
@@ -619,6 +629,7 @@ void TwoDModelScene::deleteSelectedItems()
 	mCurrentEllipse = nullptr;
 	mCurrentRectangle = nullptr;
 	mCurrentCurve = nullptr;
+	mCurrentComment = nullptr;
 
 	deleteWithCommand(ids.first, ids.second, {});
 }
@@ -646,7 +657,10 @@ void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
 
 void TwoDModelScene::keyPressEvent(QKeyEvent *event)
 {
-	if (event->matches(QKeySequence::Delete) || event->key() == Qt::Key_Backspace) {
+	if (dynamic_cast<QGraphicsTextItem*>(focusItem())) {
+		QGraphicsScene::keyPressEvent(event);
+	} else if ((event->matches(QKeySequence::Delete) || event->key() == Qt::Key_Backspace)
+			&& !selectedItems().isEmpty()) {
 		deleteSelectedItems();
 	} else if (event->matches(QKeySequence::Copy)) {
 		copySelectedItems();
@@ -710,6 +724,11 @@ void TwoDModelScene::addRectangle()
 void TwoDModelScene::addEllipse()
 {
 	mDrawingAction = ellipse;
+}
+
+void TwoDModelScene::addComment()
+{
+	mDrawingAction = comment;
 }
 
 void TwoDModelScene::addImage()
@@ -791,6 +810,10 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 
 		for (auto &&image : mModel.worldModel().imageItems()) {
 			worldItemsToDelete << image->id();
+		}
+
+		for (auto &&comment : mModel.worldModel().commentItems()) {
+			worldItemsToDelete << comment->id();
 		}
 
 		QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensorsToDelete;
@@ -902,6 +925,14 @@ void TwoDModelScene::reshapeEllipse(QGraphicsSceneMouseEvent *event)
 		if (event->modifiers() & Qt::ShiftModifier) {
 			mCurrentEllipse->reshapeRectWithShift();
 		}
+	}
+}
+
+void TwoDModelScene::reshapeComment(QGraphicsSceneMouseEvent *event)
+{
+	if (mCurrentComment) {
+		mCurrentComment->setDragState(AbstractItem::DragState::BottomRight);
+		mCurrentComment->resizeItem(event);
 	}
 }
 

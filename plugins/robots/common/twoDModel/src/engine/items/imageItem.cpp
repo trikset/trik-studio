@@ -76,7 +76,7 @@ QPainterPath ImageItem::resizeArea() const
 QAction *ImageItem::imageTool()
 {
 	QAction * const result = new QAction(QIcon(":/icons/2d_image.svg"), tr("Image (I)"), nullptr);
-	result->setShortcuts({QKeySequence(Qt::Key_I), QKeySequence(Qt::Key_0)});
+	result->setShortcuts({QKeySequence(Qt::Key_I), QKeySequence(Qt::Key_Minus)});
 	result->setCheckable(false);
 	return result;
 }
