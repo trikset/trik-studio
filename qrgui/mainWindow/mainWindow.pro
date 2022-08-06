@@ -162,6 +162,7 @@ macx {
 	QMAKE_INFO_PLIST = mainWindow.plist
 }
 
+OTHER_FILES += lsan.supp
 include(scriptAPI/scriptAPI.pri)
 copyToDestdir($$PWD/lsan.supp, now)
 
