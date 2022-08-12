@@ -73,7 +73,7 @@ static QString versionInfo()
 
 int main(int argc, char *argv[])
 {
-	PlatformInfo::enableHiDPISupport();
+	const auto &dpiInfo = PlatformInfo::enableHiDPISupport();
 	QScopedPointer<QRealApplication> app(new QRealApplication(argc, argv));
 
 	if (app->arguments().contains("--clear-conf")) {
@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app->arguments();
 	QLOG_INFO() << "Setting default locale to" << QLocale().name();
+	for (auto &&i: dpiInfo) { QLOG_INFO() << i ; }
 
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 

@@ -114,6 +114,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mSceneCustomizer(new SceneCustomizer())
 	, mInitialFileToOpen(fileToOpen)
 {
+	QLOG_INFO() << "MainWindow: screen DPI is" << logicalDpiX();
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
 	setWindowTitle("QReal");
