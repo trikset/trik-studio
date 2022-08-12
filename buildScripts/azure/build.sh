@@ -1,13 +1,14 @@
 #!/bin/bash
-set -ueo pipefail
+set -uxeo pipefail
 
 CODECOV=true
 case $AGENT_OS in
   Darwin)
-     export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
-     export PATH="/usr/local/opt/qt@5/bin:$PATH"
+     QT_DIR=$(ls -dv "$HOME"/Qt/${TRIK_QT_VERSION}*/*/bin | head -n 1)
+     [ -d "$QT_DIR" ] && export PATH="$QT_DIR:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+     echo "Now path is $PATH"
     ;;
   Linux)
      # if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
