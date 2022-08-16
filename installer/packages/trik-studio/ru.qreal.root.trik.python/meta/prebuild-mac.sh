@@ -11,5 +11,5 @@ cp -fpR   $BIN_DIR/librobots-trik-python-generator-library*.dylib               
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-python-generator-library.1.0.0.dylib"
 
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins"
-cp -f    $BIN_DIR/plugins/tools/kitPlugins/librobots-trik-v62-python-generator.dylib    "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
+cp -fp   $BIN_DIR/plugins/tools/kitPlugins/librobots-trik-v62-python-generator.dylib    "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-trik-v62-python-generator.dylib"

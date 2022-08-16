@@ -12,12 +12,12 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-pioneer-kit.1.0.0.dylib"
 
 
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins"
-cp -f    $BIN_DIR/plugins/tools/kitPlugins/librobots-pioneer-interpreter.dylib	"$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
+cp -fp   $BIN_DIR/plugins/tools/kitPlugins/librobots-pioneer-interpreter.dylib	"$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-pioneer-interpreter.dylib"
-cp -f    $BIN_DIR/plugins/tools/kitPlugins/librobots-pioneer-lua-generator.dylib	"$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
+cp -fp   $BIN_DIR/plugins/tools/kitPlugins/librobots-pioneer-lua-generator.dylib	"$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-pioneer-lua-generator.dylib"
 
 
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/editors"
-cp  -f $BIN_DIR/plugins/editors/libpioneerMetamodel.dylib				"$BUNDLE_CONTENTS/Lib/plugins/editors/"
+cp -pf $BIN_DIR/plugins/editors/libpioneerMetamodel.dylib				"$BUNDLE_CONTENTS/Lib/plugins/editors/"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libpioneerMetamodel.dylib"

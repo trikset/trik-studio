@@ -6,8 +6,8 @@ source $INSTALLER_ROOT/utils/mac_utils.sh
 
 rm -rf "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app"
 rsync -a $BIN_DIR/trik-studio.app/                                        "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/"
-cp    "$INSTALLER_ROOT/platform/qt.conf"				  "$BUNDLE_CONTENTS/Resources/qt.conf"
-cp    $INSTALLER_ROOT/platform/$PRODUCT-mac-platform.config               "$BUNDLE_CONTENTS/MacOS/platform.config"
+cp -p    "$INSTALLER_ROOT/platform/qt.conf"				  "$BUNDLE_CONTENTS/Resources/qt.conf"
+cp -p    $INSTALLER_ROOT/platform/$PRODUCT-mac-platform.config               "$BUNDLE_CONTENTS/MacOS/platform.config"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
 cp -fpR $BIN_DIR/libqrkernel*.dylib                                        "$BUNDLE_CONTENTS/Lib"
@@ -32,8 +32,8 @@ cp -fpR $BIN_DIR/libqrgui-text-editor*.dylib                               "$BUN
 cp -fpR $BIN_DIR/libqrgui-thirdparty*.dylib                                "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqrgui-tool-plugin-interface*.dylib                     "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqrgui-facade*.dylib                                    "$BUNDLE_CONTENTS/Lib"
-cp  -f   $BIN_DIR/plugins/tools/libupdatesChecker.dylib                     "$BUNDLE_CONTENTS/Lib/plugins/tools"
-cp  -f   $BIN_DIR/plugins/tools/libsubprogramsImporterExporter.dylib           "$BUNDLE_CONTENTS/Lib/plugins/tools"
+cp -pf   $BIN_DIR/plugins/tools/libupdatesChecker.dylib                     "$BUNDLE_CONTENTS/Lib/plugins/tools"
+cp -pf   $BIN_DIR/plugins/tools/libsubprogramsImporterExporter.dylib           "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqrkernel.1.0.0.dylib"
@@ -61,7 +61,7 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libupdatesChecker.dyl
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/libsubprogramsImporterExporter.dylib"
 
 mv "$BUNDLE_CONTENTS/MacOS/trik-studio" "$BUNDLE_CONTENTS/MacOS/trik-studio.bin"
-cp     "$INSTALLER_ROOT/platform/$PRODUCT" "$BUNDLE_CONTENTS/MacOS/"
+cp -p     "$INSTALLER_ROOT/platform/$PRODUCT" "$BUNDLE_CONTENTS/MacOS/"
 sed -i.bak s/qreal/trik-studio/g "$BUNDLE_CONTENTS/Info.plist"
 sed -i.bak s/yourcompany/cybertech/g "$BUNDLE_CONTENTS/Info.plist"
 rm -f "$BUNDLE_CONTENTS/Info.plist.bak"
@@ -83,10 +83,10 @@ mkdir "$BUNDLE_CONTENTS/MacOS/platforms"
 mkdir "$BUNDLE_CONTENTS/MacOS/imageformats"
 mkdir "$BUNDLE_CONTENTS/MacOS/iconengines"
 
-cp -f    "$QT_PLUGINS"/platforms/libq{cocoa,minimal,offscreen}.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
-cp -f    "$QT_PLUGINS"/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
-cp -f    "$QT_PLUGINS"/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
-cp -f    "$QT_PLUGINS"/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
+cp -fp   "$QT_PLUGINS"/platforms/libq{cocoa,minimal,offscreen}.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
+cp -fp   "$QT_PLUGINS"/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
+cp -fp   "$QT_PLUGINS"/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
+cp -fp   "$QT_PLUGINS"/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqminimal.dylib"       "$QT_LIB/lib" "$LIB_PATH"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqoffscreen.dylib"       "$QT_LIB/lib" "$LIB_PATH"
