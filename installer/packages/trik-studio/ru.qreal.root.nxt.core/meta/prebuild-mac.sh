@@ -8,9 +8,9 @@ source $INSTALLER_ROOT/utils/mac_utils.sh
 
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/editors/"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
-cp -f    $BIN_DIR/plugins/editors/libnxtMetamodel.dylib                                      "$BUNDLE_CONTENTS/Lib/plugins/editors/"
-cp -f    $BIN_DIR/plugins/tools/kitPlugins/librobots-nxt-interpreter.dylib                   "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
-cp -f   $BIN_DIR/plugins/tools/kitPlugins/librobots-nxt-osek-c-generator.dylib              "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
+cp -fp   $BIN_DIR/plugins/editors/libnxtMetamodel.dylib                                      "$BUNDLE_CONTENTS/Lib/plugins/editors/"
+cp -fp   $BIN_DIR/plugins/tools/kitPlugins/librobots-nxt-interpreter.dylib                   "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
+cp -fp  $BIN_DIR/plugins/tools/kitPlugins/librobots-nxt-osek-c-generator.dylib              "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
 cp -fpR $BIN_DIR/librobots-nxt-generator-base*.dylib                                        "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/librobots-nxt-kit*.dylib                                                   "$BUNDLE_CONTENTS/Lib"
 cp -fpR $BIN_DIR/libqextserialport*.dylib                                                   "$BUNDLE_CONTENTS/Lib"

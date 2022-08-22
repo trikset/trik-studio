@@ -4,6 +4,7 @@
 #uses static local variable to store Mutex
 leak:QTWTF::Mutex::Mutex()
 #
+leak:QXcbGlxWindow::createVisual()
 leak:QApplicationPrivate::initializeWidgetFontHash
 leak:QFontconfigDatabase::defaultFont() const
 leak:QGuiApplicationPrivate::createPlatformIntegration()
