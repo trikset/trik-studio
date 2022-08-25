@@ -43,7 +43,7 @@ rm dist/trik/trik
 rsync -avRm --delete --delete-after dist/trik/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
 
 #Add Python runtime libraries
-PYTHON_LIBNAME=$("python3.${TRIK_PYTHON3_VERSION_MINOR}" -config --prefix)/Python
+PYTHON_LIBNAME=$("python3.${TRIK_PYTHON3_VERSION_MINOR}-config" --prefix)/Python
 #rsync -a "$PYTHON_LIBNAME" "$BUNDLE_CONTENTS/Lib"
 find "$BUNDLE_CONTENTS/Lib" -type f -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/Python
 
