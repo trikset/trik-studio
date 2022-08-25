@@ -2,38 +2,38 @@
 set -o nounset
 set -o errexit
 cd "$(dirname "$0")"
-source $INSTALLER_ROOT/utils/mac_utils.sh
+source "$INSTALLER_ROOT"/utils/mac_utils.sh
 
 rm -rf "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app"
-rsync -a $BIN_DIR/trik-studio.app/                                        "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/"
-cp -p    "$INSTALLER_ROOT/platform/qt.conf"				  "$BUNDLE_CONTENTS/Resources/qt.conf"
-cp -p    $INSTALLER_ROOT/platform/$PRODUCT-mac-platform.config               "$BUNDLE_CONTENTS/MacOS/platform.config"
+rsync -a "$BIN_DIR"/trik-studio.app/                                        "$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/"
+cp -p    "$INSTALLER_ROOT/platform/qt.conf"				    "$BUNDLE_CONTENTS/Resources/qt.conf"
+cp -p    "$INSTALLER_ROOT/platform/$PRODUCT-mac-platform.config"            "$BUNDLE_CONTENTS/MacOS/platform.config"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
-cp -fpR $BIN_DIR/libqrkernel*.dylib                                        "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgraph*.dylib                                         "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrrepo*.dylib                                          "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrkernel*.dylib                                        "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgraph*.dylib                                         "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrrepo*.dylib                                          "$BUNDLE_CONTENTS/Lib"
 cp -fpR "$BIN_DIR/patcher"                                                 "$BUNDLE_CONTENTS/MacOS/"
-cp -fpR $BIN_DIR/libqrutils*.dylib                                         "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrtext*.dylib                                          "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqscintilla2*.dylib                                     "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libtrikQsLog*.dylib                                           "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-brand-manager*.dylib                             "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-controller*.dylib                                "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-dialogs*.dylib                                   "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-editor*.dylib                                    "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-hotkey-manager*.dylib                            "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-models*.dylib                                    "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-mouse-gestures*.dylib                            "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-plugin-manager*.dylib                            "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-meta-meta-model*.dylib                           "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-preferences-dialog*.dylib                        "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-text-editor*.dylib                               "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-thirdparty*.dylib                                "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-tool-plugin-interface*.dylib                     "$BUNDLE_CONTENTS/Lib"
-cp -fpR $BIN_DIR/libqrgui-facade*.dylib                                    "$BUNDLE_CONTENTS/Lib"
-cp -pf   $BIN_DIR/plugins/tools/libupdatesChecker.dylib                     "$BUNDLE_CONTENTS/Lib/plugins/tools"
-cp -pf   $BIN_DIR/plugins/tools/libsubprogramsImporterExporter.dylib           "$BUNDLE_CONTENTS/Lib/plugins/tools"
+cp -fpR "$BIN_DIR"/libqrutils*.dylib                                         "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrtext*.dylib                                          "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqscintilla2*.dylib                                     "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libtrikQsLog*.dylib                                           "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-brand-manager*.dylib                             "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-controller*.dylib                                "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-dialogs*.dylib                                   "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-editor*.dylib                                    "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-hotkey-manager*.dylib                            "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-models*.dylib                                    "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-mouse-gestures*.dylib                            "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-plugin-manager*.dylib                            "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-meta-meta-model*.dylib                           "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-preferences-dialog*.dylib                        "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-text-editor*.dylib                               "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-thirdparty*.dylib                                "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-tool-plugin-interface*.dylib                     "$BUNDLE_CONTENTS/Lib"
+cp -fpR "$BIN_DIR"/libqrgui-facade*.dylib                                    "$BUNDLE_CONTENTS/Lib"
+cp -pf   "$BIN_DIR"/plugins/tools/libupdatesChecker.dylib                     "$BUNDLE_CONTENTS/Lib/plugins/tools"
+cp -pf   "$BIN_DIR"/plugins/tools/libsubprogramsImporterExporter.dylib           "$BUNDLE_CONTENTS/Lib/plugins/tools"
 
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqrkernel.1.0.0.dylib"
@@ -96,9 +96,9 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqjpeg.dylib"     
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/iconengines/libqsvgicon.dylib"   "$QT_LIB/lib" "$LIB_PATH"
 
 # Cleaning up prebuild-common.sh results…
-rm -rf $PWD/../data/platforms/
-rm -rf $PWD/../data/imageformats/
-rm -rf $PWD/../data/iconengines/
-rm -rf $PWD/../data/plugins/
+rm -rf "$PWD"/../data/platforms/
+rm -rf "$PWD"/../data/imageformats/
+rm -rf "$PWD"/../data/iconengines/
+rm -rf "$PWD"/../data/plugins/
 mv "$PWD/../data/acknowledgements.txt" "$BUNDLE_CONTENTS/Resources"
 mv "$PWD/../data/changelog.txt" "$BUNDLE_CONTENTS/Resources"

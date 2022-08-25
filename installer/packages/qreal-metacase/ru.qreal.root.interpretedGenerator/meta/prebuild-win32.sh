@@ -4,4 +4,4 @@ set -o errexit
 
 cd "$(dirname "$0")"
 
-cp    $BIN_DIR/plugins/interpreted/generationRulesTool.dll                        $PWD/../data/plugins/interpreted/
+cp    "$BIN_DIR"/plugins/interpreted/generationRulesTool.dll                        "$PWD"/../data/plugins/interpreted/

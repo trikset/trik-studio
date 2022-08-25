@@ -4,5 +4,5 @@ set -o errexit
 
 cd "$(dirname "$0")"
 
-mkdir -p $PWD/../data/plugins/editors
-mkdir -p $PWD/../data/plugins/tools/kitPlugins
+mkdir -p "$PWD"/../data/plugins/editors
+mkdir -p "$PWD"/../data/plugins/tools/kitPlugins

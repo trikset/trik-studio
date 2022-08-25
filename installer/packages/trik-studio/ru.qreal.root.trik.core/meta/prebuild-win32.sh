@@ -3,28 +3,28 @@ set -xueo pipefail
 
 cd "$(dirname "$0")"
 
-mkdir -p $PWD/../data/plugins/editors
-cp    $BIN_DIR/plugins/editors/trikMetamodel.dll                                  $PWD/../data/plugins/editors/
-cp    $BIN_DIR/robots-trik-qts-generator-library.dll                              $PWD/../data/
-cp    $BIN_DIR/robots-trik-generator-base.dll                                     $PWD/../data/
-cp    $BIN_DIR/robots-trik-kit.dll                                                $PWD/../data/
-cp    $BIN_DIR/robots-trik-kit-interpreter-common.dll                             $PWD/../data/
+mkdir -p "$PWD"/../data/plugins/editors
+cp    "$BIN_DIR"/plugins/editors/trikMetamodel.dll                                  "$PWD"/../data/plugins/editors/
+cp    "$BIN_DIR"/robots-trik-qts-generator-library.dll                              "$PWD"/../data/
+cp    "$BIN_DIR"/robots-trik-generator-base.dll                                     "$PWD"/../data/
+cp    "$BIN_DIR"/robots-trik-kit.dll                                                "$PWD"/../data/
+cp    "$BIN_DIR"/robots-trik-kit-interpreter-common.dll                             "$PWD"/../data/
 
 cp    "$BIN_DIR"/trikPythonQt*.dll                                                "$PWD"/../data/
-cp    $BIN_DIR/trikControl.dll                                                    $PWD/../data/
-cp    $BIN_DIR/trikScriptRunner.dll                                               $PWD/../data/
-cp    $BIN_DIR/trikHal.dll                                                        $PWD/../data/
-cp    $BIN_DIR/trikKernel.dll                                                     $PWD/../data/
-cp    $BIN_DIR/trikNetwork.dll                                                    $PWD/../data/
-cp    $BIN_DIR/python3*.dll                                                       $PWD/../data/
-cp    $BIN_DIR/vcruntime*.dll                                                     $PWD/../data/
+cp    "$BIN_DIR"/trikControl.dll                                                    "$PWD"/../data/
+cp    "$BIN_DIR"/trikScriptRunner.dll                                               "$PWD"/../data/
+cp    "$BIN_DIR"/trikHal.dll                                                        "$PWD"/../data/
+cp    "$BIN_DIR"/trikKernel.dll                                                     "$PWD"/../data/
+cp    "$BIN_DIR"/trikNetwork.dll                                                    "$PWD"/../data/
+cp    "$BIN_DIR"/python3*.dll                                                       "$PWD"/../data/
+cp    "$BIN_DIR"/vcruntime*.dll                                                     "$PWD"/../data/
 
 cp    "$BIN_DIR"/{system.js,TRIK.py,2D-model.exe,checkapp.exe}                    "$PWD/../data/"
 cp    "$QT_LIB"/Qt5SerialPort.dll                                                 "$PWD"/../data
 
 winscp_ver=5.17.10
 putty_ver=0.75
-cache_dir="$(cygpath $APPDATA)"/$PRODUCT/installer_cache
+cache_dir="$(cygpath "$APPDATA")"/"$PRODUCT"/installer_cache
 mkdir -p "$cache_dir"
 cd "$cache_dir"
 
@@ -56,7 +56,7 @@ fi
 
 WAIT_EXIT_CODE=0
 wait || WAIT_EXIT_CODE=$?
-if (( $WAIT_EXIT_CODE != 0 && $WAIT_EXIT_CODE != 127 )) ; then ( exit $W ) ; fi
+if (( WAIT_EXIT_CODE != 0 && WAIT_EXIT_CODE != 127 )) ; then ( exit "$W" ) ; fi
 
 cd "$(dirname "$0")"/../data
 cp -r "$cache_dir"/winscp_$winscp_ver winscp
