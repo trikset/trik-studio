@@ -32,7 +32,7 @@ CONFIG(clang) {
 	QMAKE_CXXFLAGS += -Wno-error=zero-length-array -Wno-error=vla-extension
 } else {
 	QMAKE_CXXFLAGS += -Wno-error=vla
-	# libusb uses zero-sized arrays :(
+	# libusb uses zero-sized arrays :(, and gcc-10 complains
 	QMAKE_CXXFLAGS += -Wno-error=pedantic
 }
 
