@@ -20,6 +20,7 @@ cp    $BIN_DIR/python3*.dll                                                     
 cp    $BIN_DIR/vcruntime*.dll                                                     $PWD/../data/
 
 cp    "$BIN_DIR"/{system.js,TRIK.py,2D-model.exe,checkapp.exe}                    "$PWD/../data/"
+cp    "$QT_LIB"/Qt5SerialPort.dll                                                 "$PWD"/../data
 
 winscp_ver=5.17.10
 putty_ver=0.75
