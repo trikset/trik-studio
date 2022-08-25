@@ -12,46 +12,46 @@ mkdir -p "$PWD"/../data/bin/imageformats/
 mkdir -p "$PWD"/../data/bin/iconengines/
 mkdir -p "$PWD"/../data/lib/plugins/tools/
 
-cp     "$INSTALLER_ROOT"/platform/"$PRODUCT"                              "$PWD"/../data/
-cp     "$INSTALLER_ROOT/platform/$PRODUCT-linux-gnu-platform.config"      "$PWD"/../data/bin/platform.config || :
+rsync -a "$INSTALLER_ROOT"/platform/"$PRODUCT"                              "$PWD"/../data/
+rsync -a "$INSTALLER_ROOT/platform/$PRODUCT-linux-gnu-platform.config"      "$PWD"/../data/bin/platform.config || :
 
-cp -pr "$BIN_DIR"/libqrkernel.so*                                         "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgraph.so*                                          "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrrepo.so*                                           "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrutils.so*                                          "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrtext.so*                                           "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqscintilla2.so*                                      "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libtrikQsLog.so*                                        "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-brand-manager.so*                              "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-controller.so*                                 "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-dialogs.so*                                    "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-editor.so*                                     "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-hotkey-manager.so*                             "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-models.so*                                     "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-mouse-gestures.so*                             "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-plugin-manager.so*                             "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-meta-meta-model.so*                            "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-preferences-dialog.so*                         "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-text-editor.so*                                "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-thirdparty.so*                                 "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-tool-plugin-interface.so*                      "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/libqrgui-facade.so*                                     "$PWD"/../data/lib/
-cp     "$BIN_DIR"/patcher                                                 "$PWD"/../data/bin/
-cp     "$BIN_DIR"/trik-studio                                             "$PWD/../data/bin/${PRODUCT}.bin"
-cp     "$BIN_DIR"/plugins/tools/libupdatesChecker.so                      "$PWD"/../data/lib/plugins/tools/
-cp     "$BIN_DIR"/plugins/tools/libsubprogramsImporterExporter.so         "$PWD"/../data/lib/plugins/tools/
+rsync -a "$BIN_DIR"/libqrkernel.so*                                         "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgraph.so*                                          "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrrepo.so*                                           "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrutils.so*                                          "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrtext.so*                                           "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqscintilla2.so*                                      "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libtrikQsLog.so*                                        "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-brand-manager.so*                              "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-controller.so*                                 "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-dialogs.so*                                    "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-editor.so*                                     "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-hotkey-manager.so*                             "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-models.so*                                     "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-mouse-gestures.so*                             "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-plugin-manager.so*                             "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-meta-meta-model.so*                            "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-preferences-dialog.so*                         "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-text-editor.so*                                "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-thirdparty.so*                                 "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-tool-plugin-interface.so*                      "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libqrgui-facade.so*                                     "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/patcher                                                 "$PWD"/../data/bin/
+rsync -a "$BIN_DIR"/trik-studio                                             "$PWD/../data/bin/${PRODUCT}.bin"
+rsync -a "$BIN_DIR"/plugins/tools/libupdatesChecker.so                      "$PWD"/../data/lib/plugins/tools/
+rsync -a "$BIN_DIR"/plugins/tools/libsubprogramsImporterExporter.so         "$PWD"/../data/lib/plugins/tools/
 
-cp -pr "$QT_LIB"/libQt5Core.so*                                       "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5DBus.so*                                       "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5Gui.so*                                        "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5PrintSupport.so*                               "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5Svg.so*                                        "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5Widgets.so*                                    "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5Xml.so*                                        "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5Script.so*                                     "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5Test.so*                                       "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5XcbQpa.so*                                     "$PWD"/../data/lib/
-cp -pr "$QT_LIB"/libQt5WaylandC{lient,ompositor}.so*                  "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Core.so*                                       "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5DBus.so*                                       "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Gui.so*                                        "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5PrintSupport.so*                               "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Svg.so*                                        "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Widgets.so*                                    "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Xml.so*                                        "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Script.so*                                     "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Test.so*                                       "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5XcbQpa.so*                                     "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5WaylandC{lient,ompositor}.so*                  "$PWD"/../data/lib/
 
 rsync -avR "$QT_PLUGINS"/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
 

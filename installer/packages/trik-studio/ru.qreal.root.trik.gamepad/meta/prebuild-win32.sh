@@ -4,6 +4,6 @@ set -o errexit
 
 cd "$(dirname "$0")"
 
-cp    "$QT_LIB"/Qt5MultimediaWidgets.dll  "$PWD"/../data
-cp    "$QT_LIB"/Qt5OpenGL.dll             "$PWD"/../data
-cp    "$BIN_DIR"/gamepad.exe					"$PWD"/../data
+rsync -a "$QT_LIB"/Qt5MultimediaWidgets.dll  "$PWD"/../data
+rsync -a "$QT_LIB"/Qt5OpenGL.dll             "$PWD"/../data
+rsync -a "$BIN_DIR"/gamepad.exe					"$PWD"/../data

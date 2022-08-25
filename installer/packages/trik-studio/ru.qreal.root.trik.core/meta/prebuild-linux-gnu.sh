@@ -6,17 +6,17 @@ cd "$(dirname "$0")"
 
 mkdir -p "$PWD/../data/lib/python-runtime"
 mkdir -p "$PWD"/../data/lib/plugins/editors
-cp     "$BIN_DIR"/plugins/editors/libtrikMetamodel.so                                "$PWD"/../data/lib/plugins/editors
-cp -pr "$BIN_DIR"/librobots-trik-qts-generator-library.so*                           "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/librobots-trik-generator-base.so*                                  "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/librobots-trik-kit.so*                                             "$PWD"/../data/lib/
-cp -pr "$BIN_DIR"/librobots-trik-kit-interpreter-common.so*                          "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/plugins/editors/libtrikMetamodel.so                                "$PWD"/../data/lib/plugins/editors
+rsync -a "$BIN_DIR"/librobots-trik-qts-generator-library.so*                           "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/librobots-trik-generator-base.so*                                  "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/librobots-trik-kit.so*                                             "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/librobots-trik-kit-interpreter-common.so*                          "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libtrikPythonQt{,_QtAll}-Qt*-Python*.so*                       "$PWD"/../data/lib/
 
 rsync -a "$BIN_DIR"/libtrik*.so*                                                   "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5SerialPort.so*                                            "$PWD"/../data/lib/
 
-cp     "$BIN_DIR"/{system.js,TRIK.py,2D-model,checkapp}            			"$PWD/../data/bin/"
+rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model,checkapp}            			"$PWD/../data/bin/"
 
 #Add Python runtime libraries
 

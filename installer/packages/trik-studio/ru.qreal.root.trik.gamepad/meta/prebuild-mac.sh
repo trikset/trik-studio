@@ -11,6 +11,6 @@ mkdir -p "$BUNDLE_CONTENTS/MacOS"
 copy_qt_lib QtMultimediaWidgets
 copy_qt_lib QtOpenGL
 
-cp -p   "$BIN_DIR/gamepad" "$BUNDLE_CONTENTS/MacOS"
+rsync -a   "$BIN_DIR/gamepad" "$BUNDLE_CONTENTS/MacOS"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/gamepad"
 

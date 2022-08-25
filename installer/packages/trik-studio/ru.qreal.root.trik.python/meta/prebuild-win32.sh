@@ -4,8 +4,8 @@ set -o errexit
 
 cd "$(dirname "$0")"
 
-cp    "$BIN_DIR"/robots-trik-python-generator-library.dll                              "$PWD"/../data/
-cp    "$BIN_DIR"/plugins/tools/kitPlugins/robots-trik-v62-python-generator.dll         "$PWD"/../data/plugins/tools/kitPlugins/
+rsync -a "$BIN_DIR"/robots-trik-python-generator-library.dll                              "$PWD"/../data/
+rsync -a "$BIN_DIR"/plugins/tools/kitPlugins/robots-trik-v62-python-generator.dll         "$PWD"/../data/plugins/tools/kitPlugins/
 
 unix_path="$BIN_DIR"/python3.dll
 win_path=$(cygpath -w "$unix_path")
