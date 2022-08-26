@@ -4,5 +4,5 @@ set -o errexit
 
 cd "$(dirname "$0")"
 
-mkdir -p $PWD/../data/examples
-cp -r $BIN_DIR/examples/pioneer $PWD/../data/examples
+mkdir -p "$PWD"/../data/examples
+rsync -a "$BIN_DIR"/examples/pioneer "$PWD"/../data/examples

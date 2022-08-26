@@ -20,9 +20,9 @@ case $(uname -s) in
  Linux|Darwin) qt_query_key=QT_INSTALL_LIBS ;;
  *) qt_query_key=QT_INSTALL_BINS ;;
 esac
-export QT_LIB=$("$QT_DIR"/qmake -query $qt_query_key)
+export QT_LIB=$(cygpath -u $("$QT_DIR"/qmake -query "$qt_query_key"))
 
-export QT_PLUGINS=$("$QT_DIR"/qmake -query QT_INSTALL_PLUGINS)
+export QT_PLUGINS=$(cygpath -u $("$QT_DIR"/qmake -query QT_INSTALL_PLUGINS))
 export QTIFW_DIR=$(realpath $(cygpath -u "$2"))
 export PRODUCT="$3"
 export OS="$OSTYPE"
