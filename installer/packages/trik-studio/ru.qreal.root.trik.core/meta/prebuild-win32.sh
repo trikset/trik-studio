@@ -48,7 +48,7 @@ then
 # download winscp
 winscp_zip="https://sourceforge.net/projects/winscp/files/WinSCP/$winscp_ver/WinSCP-$winscp_ver-Portable.zip"
 
-curl -v -L -s -o winscp.zip $winscp_zip
+curl -v -L -s -o winscp.zip "$winscp_zip"
 unzip -o winscp.zip -d winscp_$winscp_ver
 rm -f winscp.zip
 # end of download winscp
@@ -59,6 +59,5 @@ wait || WAIT_EXIT_CODE=$?
 if (( WAIT_EXIT_CODE != 0 && WAIT_EXIT_CODE != 127 )) ; then ( exit "$W" ) ; fi
 
 cd "$(dirname "$0")"/../data
-rsync -a "$cache_dir"/winscp_$winscp_ver winscp
-rsync -a "$cache_dir"/PuTTY_$putty_ver winscp/PuTTY
-rsync -a winscp/license.txt "$(dirname "$0")"/WinScp-license.txt
+rsync -a "$cache_dir"/winscp_$winscp_ver/ winscp/
+rsync -a "$cache_dir"/PuTTY_$putty_ver/ winscp/PuTTY/
