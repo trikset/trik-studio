@@ -44,6 +44,9 @@ public:
 	/// Upload and run program from given file on a robot.
 	void run(const QFileInfo &fileToRun);
 
+	/// Run uploaded program from given file on robot.
+	void runUploaded(const QFileInfo &fileToRun);
+
 signals:
 	/// Emitted when protocol completed successfully.
 	void success();
