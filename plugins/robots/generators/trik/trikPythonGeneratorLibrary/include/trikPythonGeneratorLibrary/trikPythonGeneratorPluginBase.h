@@ -84,6 +84,9 @@ private slots:
 	/// Reenables buttons when program uploading or robot stopping is complete (sucessfully or with error).
 	void onProtocolFinished();
 
+	/// Runs after upload if needed
+	void onUploadSuccess();
+
 private:
 	/// Disables "run", "upload" and "stop" buttons when there is pending command to a robot.
 	void disableButtons();
@@ -116,6 +119,8 @@ private:
 
 	/// Protocol that is used to stop robot.
 	QScopedPointer<utils::robotCommunication::StopRobotProtocol> mStopRobotProtocol;
+
+	QFileInfo mMainFile;
 };
 
 }
