@@ -43,7 +43,7 @@ public:
 
 	kitBase::robotModel::DeviceInfo type(const kitBase::robotModel::PortInfo &port) const;
 
-	void clearSensor(const kitBase::robotModel::PortInfo &port);
+	void clear();
 
 	void serialize(QDomElement &robot) const;
 	void deserialize(const QDomElement &element);

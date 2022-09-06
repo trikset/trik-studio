@@ -20,6 +20,7 @@
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 #include <kitBase/robotModel/robotParts/accelerometerSensor.h>
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
 
 #include "trikKit/robotModel/parts/trikLightSensor.h"
 #include "trikKit/robotModel/parts/trikTouchSensor.h"
@@ -144,6 +145,7 @@ QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
 		, DeviceInfo::create<parts::TrikMotionSensor>()
 		, DeviceInfo::create<parts::TrikLineSensor>()
 		, DeviceInfo::create<parts::TrikVideoCamera>()
+		, DeviceInfo::create<robotParts::LidarSensor>()
 	};
 }
 
@@ -210,6 +212,11 @@ DeviceInfo TrikRobotModelBase::motionSensorInfo() const
 DeviceInfo TrikRobotModelBase::gyroscopeInfo() const
 {
 	return DeviceInfo::create<robotParts::GyroscopeSensor>();
+}
+
+DeviceInfo TrikRobotModelBase::lidarSensorInfo() const
+{
+	return DeviceInfo::create<robotParts::LidarSensor>();
 }
 
 DeviceInfo TrikRobotModelBase::accelerometerInfo() const
@@ -286,4 +293,8 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 
 PortInfo TrikRobotModelBase::video2Port() const {
 	return PortInfo("Video2Port", tr("Video 2"), input);
+}
+
+PortInfo TrikRobotModelBase::lidarPort() const {
+	return PortInfo("LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector);
 }

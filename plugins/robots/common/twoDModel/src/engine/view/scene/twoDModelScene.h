@@ -48,6 +48,7 @@ class CurveItem;
 class StylusItem;
 class RectangleItem;
 class EllipseItem;
+class CommentItem;
 class ImageItem;
 }
 
@@ -110,6 +111,9 @@ public slots:
 
 	/// Sets a flag that next user mouse actions should draw an ellipse on the scene.
 	void addEllipse();
+
+	/// Sets a flag that next user mouse actions should draw an comment on the scene.
+	void addComment();
 
 	/// Shows dialog proposing user to add image on a scene.
 	void addImage();
@@ -189,6 +193,7 @@ private:
 		, stylus
 		, rectangle
 		, ellipse
+		, comment
 		, image
 	};
 
@@ -216,6 +221,7 @@ private:
 	void reshapeEllipse(QGraphicsSceneMouseEvent *event);
 	void reshapeBall(QGraphicsSceneMouseEvent *event);
 	void reshapeCube(QGraphicsSceneMouseEvent *event);
+	void reshapeComment(QGraphicsSceneMouseEvent *event);
 
 	void registerInUndoStack(graphicsUtils::AbstractItem *item);
 	void subscribeItem(graphicsUtils::AbstractItem *item);
@@ -248,6 +254,7 @@ private:
 	QSharedPointer<items::StylusItem> mCurrentStylus;
 	QSharedPointer<items::RectangleItem> mCurrentRectangle;
 	QSharedPointer<items::EllipseItem> mCurrentEllipse;
+	QSharedPointer<items::CommentItem> mCurrentComment;
 
 	commands::ReshapeCommand *mCurrentReshapeCommand = nullptr;
 

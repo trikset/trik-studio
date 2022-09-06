@@ -48,7 +48,9 @@
 #include "src/engine/items/rectangleItem.h"
 #include "src/engine/items/ellipseItem.h"
 #include "src/engine/items/stylusItem.h"
+#include "src/engine/items/commentItem.h"
 #include "src/engine/items/imageItem.h"
+#include "src/engine/items/startPosition.h"
 #include "src/engine/commands/changePropertyCommand.h"
 #include "src/engine/commands/loadWorldCommand.h"
 
@@ -263,6 +265,7 @@ void TwoDModelWidget::initPalette()
 	QAction * const rectangleTool = items::RectangleItem::rectangleTool();
 	QAction * const ellipseTool = items::EllipseItem::ellipseTool();
 	QAction * const stylusTool = items::StylusItem::stylusTool();
+	QAction * const commentTool = items::CommentItem::commentTool();
 	QAction * const imageTool = items::ImageItem::imageTool();
 
 	mUi->palette->registerTool(wallTool);
@@ -273,6 +276,7 @@ void TwoDModelWidget::initPalette()
 	mUi->palette->registerTool(rectangleTool);
 	mUi->palette->registerTool(ellipseTool);
 	mUi->palette->registerTool(stylusTool);
+	mUi->palette->registerTool(commentTool);
 	mUi->palette->registerTool(imageTool);
 
 	qReal::SettingsListener::listen("toolbarSize", [this](int size){ mUi->palette->setSize({size, size}); }, this);
@@ -287,6 +291,7 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, &*mScene, &TwoDModelScene::addRectangle);
 	connect(ellipseTool, &QAction::triggered, &*mScene, &TwoDModelScene::addEllipse);
 	connect(stylusTool, &QAction::triggered, &*mScene, &TwoDModelScene::addStylus);
+	connect(commentTool, &QAction::triggered, &*mScene, &TwoDModelScene::addComment);
 	connect(imageTool, &QAction::triggered, &*mScene, &TwoDModelScene::addImage);
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, &*mScene, &TwoDModelScene::setNoneStatus);
 
@@ -298,6 +303,7 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); });
 	connect(ellipseTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawEllipse); });
 	connect(stylusTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawStylus); });
+	connect(commentTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawComment); });
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, this
 			, [this](){ setCursorTypeForDrawing(mNoneCursorType); });
 
@@ -346,6 +352,7 @@ void TwoDModelWidget::connectUiButtons()
 			, this, &TwoDModelWidget::onMultiselectionCursorActionTriggered);
 
 	connect(mRobotItemPopup, &RobotItemPopup::restoreRobotPositionClicked, this, &TwoDModelWidget::returnToStartMarker);
+	connect(mRobotItemPopup, &RobotItemPopup::setRobotPositionClicked, this, &TwoDModelWidget::setStartMarker);
 	connect(mUi->initialStateButton, &QAbstractButton::clicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
 
@@ -408,6 +415,13 @@ void TwoDModelWidget::returnToStartMarker()
 	saveWorldModelToRepo();
 }
 
+void TwoDModelWidget::setStartMarker()
+{
+	for (auto &&model : mModel.robotModels()) {
+		model->startPositionMarker()->setPos(model->robotCenter());
+		model->startPositionMarker()->setRotation(mScene->robot(*model)->rotation());
+	}
+}
 void TwoDModelWidget::trainingModeChanged(bool enabled)
 {
 	mUi->trainingModeButton->setToolTip(enabled
@@ -530,14 +544,13 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 	}
 
-	// TODO: Split saves and remove temporary hack
-	auto saveRobot = save.firstChildElement("root").firstChildElement("robots").firstChildElement("robot");
-	auto currentRobot = generateWorldModelXml().firstChildElement("root")
-			.firstChildElement("robots").firstChildElement("robot");
-
-	saveRobot.replaceChild(currentRobot.firstChildElement("sensors"), saveRobot.firstChildElement("sensors"));
-	saveRobot.replaceChild(currentRobot.firstChildElement("wheels"), saveRobot.firstChildElement("wheels"));
-	saveRobot.setAttribute("id", currentRobot.attribute("id"));
+	auto newWorld = save.firstChildElement("root");
+	auto oldWorld = generateWorldModelXml().firstChildElement("root");
+	if (newWorld.firstChildElement("robots").isNull()) {
+		newWorld.appendChild(oldWorld.firstChildElement("robots"));
+	} else {
+		newWorld.replaceChild(oldWorld.firstChildElement("robots"), newWorld.firstChildElement("robots"));
+	}
 
 	auto command = new commands::LoadWorldCommand(*this, save);
 	if (mController) {
@@ -692,13 +705,13 @@ QDomDocument TwoDModelWidget::generateBlobsXml() const
 
 QDomDocument TwoDModelWidget::generateWorldModelWithBlobsXml() const
 {
-	QDomDocument wordModelXml = generateWorldModelXml();
+	QDomDocument worldModelXml = generateWorldModelXml();
 	QDomDocument blobsXml = generateBlobsXml();
-	wordModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
-	return wordModelXml;
+	worldModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
+	return worldModelXml;
 }
 
-void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo)
+void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
 {
 	if (mController && !withUndo) {
 		// Clearing 2D model undo stack...
@@ -707,7 +720,7 @@ void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocumen
 	}
 
 	mScene->clearScene(true, Reason::loading);
-	mModel.deserialize(worldModel, blobs);
+	mModel.deserialize(model);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
 }
@@ -855,6 +868,7 @@ QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) c
 	case drawBall:
 	case drawBezier:
 	case drawRectangle:
+	case drawComment:
 		return QGraphicsView::NoDrag;
 	case hand:
 		return QGraphicsView::ScrollHandDrag;
@@ -890,6 +904,8 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 		return QCursor(QPixmap(":/icons/2d_drawBezierCursor.png"), 0, 0);
 	case drawRectangle:
 		return QCursor(QPixmap(":/icons/2d_drawRectangleCursor.png"), 0, 0);
+	case drawComment:
+		return QCursor(QPixmap(":/icons/2d_drawCommentCursor.png"), 0, 0);
 	default:
 		return Qt::ArrowCursor;
 	}

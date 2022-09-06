@@ -6,7 +6,7 @@ case $AGENT_OS in
   Darwin)
     QTIFWBIN=$HOME/qtifw/bin
     TSNAME=trik-studio-installer-mac-$BRANCH_NAME.dmg
-    export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
+#    export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python 3\.\([0-9]+\)\.[0-9]+$#\1#g')"
     ;;
   Linux)
     QTIFWBIN=/opt/qtifw/bin

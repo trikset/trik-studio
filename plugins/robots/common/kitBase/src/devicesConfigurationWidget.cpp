@@ -66,6 +66,7 @@ void DevicesConfigurationWidget::selectRobotModel(RobotModelInterface &robotMode
 	takeWidget();
 	if (mRobotModels.contains(mCurrentModelType)) {
 		setWidget(mRobotModelConfigurers[mCurrentModelType]);
+//		parentWidget()->setVisible(!mRobotModelConfigurers[mCurrentModelType]->layout()->isEmpty());
 		refresh();
 	}
 }
@@ -179,7 +180,7 @@ void DevicesConfigurationWidget::propagateChangesFromBox(QComboBox *box)
 {
 	const PortInfo &port = box->property("port").value<PortInfo>();
 	const DeviceInfo &device = box->itemData(box->currentIndex()).value<DeviceInfo>();
-	if (currentConfiguration(mCurrentRobotId, port) != device) {
+	if (!device.isA(currentConfiguration(mCurrentRobotId, port))) {
 		propagateChanges(mCurrentRobotId, port, device, Reason::userAction);
 	}
 }

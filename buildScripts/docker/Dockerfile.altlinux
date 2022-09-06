@@ -1,0 +1,19 @@
+FROM altlinux/base:latest
+MAINTAINER Iakov Kirilenko <Iakov.Kirilenko@trikset.com>
+#ENV DEBIAN_FRONTEND noninteractive
+#ARG CHECKER_TAG=latest
+#Run everything at once to create a single layer
+#ENV TRIK_PYTHON3_VERSION_MINOR 9
+#Since LANG has the lowest priority (of LC_ALL, LC_CTYPE) and can be overrided by other vars, we prefer to use LANG
+ENV LANG C.UTF-8
+RUN set -eu \
+    && apt-get update \
+    && apt-get -y dist-upgrade \
+    && true
+RUN true  && apt-get install -y \
+		curl xz p7zip-standalone \
+		rsync qt5-multimedia-devel qt5-svg-devel qt5-script-devel qt5-tools libusb-devel python3-dev \
+    && apt-get autoremove -y && apt-get clean
+RUN true  && apt-get install -y zlib-devel make qt5-serialport-devel \
+    && apt-get autoremove -y && apt-get clean
+RUN du -csh /* 2>/dev/null | sort -h || :

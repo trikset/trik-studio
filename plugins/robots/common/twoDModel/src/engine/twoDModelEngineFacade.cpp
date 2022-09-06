@@ -53,7 +53,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 								 const qReal::ProjectManagementInterface &projectManager,
 								 kitBase::InterpreterControlInterface &interpreterControl)
 {
-	mModel->init(*interpretersInterface.errorReporter(), interpreterControl);
+	mModel->init(*interpretersInterface.errorReporter(), interpreterControl, logicalModel);
 	dockInterface.registerEditor(*mView);
 	mView->setController(controller);
 
@@ -84,7 +84,11 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 		}
 
-		mView->loadXmls(worldModel, blobs);
+		if (!worldModel.firstChild().isNull()) {
+			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
+		}
+
+		mView->loadXmls(worldModel);
 
 		loadReadOnlyFlags(logicalModel);
 		QLOG_DEBUG() << "Reloading 2D world done";
@@ -155,11 +159,12 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 	connect(&eventsForKitPlugin,
 			&kitBase::EventsForKitPluginInterface::robotModelChanged,
 			this,
-			[this, connectTwoDModel, disconnectTwoDModel](const QString &modelName) {
+			[this, connectTwoDModel, disconnectTwoDModel, reloadWorld](const QString &modelName) {
 				const bool isCurrentModel = modelName == mRobotModelName;
 				if (isCurrentModel) {
 					connectTwoDModel();
 					mDock->attachToMainWindow(Qt::TopDockWidgetArea);
+					reloadWorld();
 				} else {
 					disconnectTwoDModel();
 					mDock->detachFromMainWindow();

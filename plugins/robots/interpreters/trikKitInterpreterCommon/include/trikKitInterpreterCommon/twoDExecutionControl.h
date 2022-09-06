@@ -24,11 +24,12 @@
 
 class TwoDExecutionControl : public trikScriptRunner::TrikScriptControlInterface
 {
+	Q_OBJECT
 public:
 	TwoDExecutionControl(trik::TrikBrick &brick,
 			const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model);
 
-	~TwoDExecutionControl() override;
+	~TwoDExecutionControl() override = default;
 
 	int random(int from, int to) const override;
 

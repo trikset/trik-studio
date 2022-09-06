@@ -13,6 +13,8 @@ variables:
   EXECUTOR: "time docker exec -i builder"
   PROJECT: studio
   TESTS: true
+  TRIK_PYTHON3_VERSION_MINOR: 9
+  TRIK_QT_VERSION: 5.12
   BUILD_TIMEOUT: 2800
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
   CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
@@ -57,7 +59,7 @@ parameters:
     type: step
     default:
       bash: |
-        buildScripts/azure/buildNoTests.sh & WPID=$!
+        buildScripts/azure/build.sh & WPID=$!
         sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
         wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
       displayName: 'Build with buildNoTests.sh'
@@ -65,7 +67,7 @@ parameters:
   - name: buildWithTestsStep
     type: step
     default:
-      bash: buildScripts/azure/buildWithTests.sh
+      bash: buildScripts/azure/build.sh
       displayName: 'Build with buildWithTests.sh'
 
   - name: buildInstallerStep
@@ -140,11 +142,11 @@ stages:
     strategy:
       matrix:
         MacOS release:
-          imageName: 'macOS-10.15'
+          imageName: 'macOS-11'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         MacOS debug:
-          imageName: 'macOS-10.15'
+          imageName: 'macOS-11'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           EXECUTOR: "time"
@@ -193,11 +195,11 @@ stages:
     strategy:
       matrix:
         MacOS release + tests:
-          imageName: 'macOS-10.15'
+          imageName: 'macOS-11'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         macOS debug + tests:
-          imageName: 'macOS-10.15'
+          imageName: 'macOS-11'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           EXECUTOR: "time"
@@ -242,7 +244,7 @@ stages:
       QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       EXECUTOR: "time"
     pool:
-      vmImage: 'macOS-10.15'
+      vmImage: 'macOS-11'
 
     steps:
     - ${{ parameters.checkoutStep }}

@@ -251,11 +251,11 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 	SubprogramsCollectionDialog dialog(map);
 	dialog.exec();
-	QHash<QString, QVariant> oldMeta;
-	for (auto const &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
-		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
-	}
 	if (dialog.result() == QDialog::Accepted) {
+		QHash<QString, QVariant> oldMeta;
+		for (auto const &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
+			oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
+		}
 		const auto &openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
 				+ QDir::separator() + mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString()

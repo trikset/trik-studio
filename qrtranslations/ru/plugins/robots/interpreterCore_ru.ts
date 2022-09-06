@@ -183,7 +183,12 @@
         <translation type="vanished">Файл сохранения TRIK Studio (*.qrs)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+52"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+60"/>
+        <source>%2 has been auto configured to port %1</source>
+        <translation>%2 был автоматически сгонфигурирован на порту %1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Sensor on port %1 does not correspond to blocks on the diagram.</source>
         <translation>Выставленный на порту %1 сенсор не соответствует блокам на диаграмме.</translation>
     </message>
@@ -217,7 +222,7 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+158"/>
         <source>Robots</source>
         <translation>Роботы</translation>
     </message>
@@ -227,7 +232,7 @@
         <translation>Экспорт упражнения по заданному пути не удался (попробуйте другой путь)</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+111"/>
         <source>No saved code found in the qrs file</source>
         <translation>В qrs не найден сохраннёный код</translation>
     </message>
@@ -282,18 +287,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
-        <location line="+72"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+93"/>
+        <location line="+74"/>
         <source>No connection to robot</source>
         <translation>Нет соединения с роботом</translation>
     </message>
     <message>
-        <location line="-67"/>
+        <location line="-68"/>
         <source>Interpreter is already running</source>
         <translation>Программа уже запущена</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Connected successfully</source>
         <translation>Подключение к роботу выполнено</translation>
     </message>
@@ -327,28 +332,28 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>2d model world is read only</source>
-        <translation>Двумерная модель неизменяема</translation>
+        <source>2D model world is read-only</source>
+        <translation type="unfinished">Двумерная модель неизменяема</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Sensors are read only</source>
-        <translation>Положение и конфигурация сенсоров неизменяемы</translation>
+        <source>Sensors are read-only</source>
+        <translation type="unfinished">Положение и конфигурация сенсоров неизменяемы</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>2d model robot position is read only</source>
-        <translation>Начальное положение робота в двумерной модели неизменяемо</translation>
+        <source>2D model robot position is read-only</source>
+        <translation type="unfinished">Начальное положение робота в двумерной модели неизменяемо</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Motors to wheels binding is read only</source>
-        <translation>Соответствие портов моторов и колёс неизменяемо</translation>
+        <source>Motors to wheels binding is read-only</source>
+        <translation type="unfinished">Соответствие портов моторов и колёс неизменяемо</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>2d model simulation settings are read only</source>
-        <translation>Настройки симуляции двумерной модели (физика, шумы и т.д.) неизменяемы</translation>
+        <source>2D model simulation settings are read-only</source>
+        <translation type="unfinished">Настройки симуляции двумерной модели (физика, шумы и т.д.) неизменяемы</translation>
     </message>
     <message>
         <location line="+21"/>

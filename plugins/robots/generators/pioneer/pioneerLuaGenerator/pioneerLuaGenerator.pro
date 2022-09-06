@@ -64,6 +64,14 @@ HEADERS += \
 	$$PWD/simpleGenerators/pioneerPrintGenerator.h \
 	$$PWD/simpleGenerators/pioneerSystemGenerator.h \
 	$$PWD/simpleGenerators/pioneerGetLPSPosition.h \
+	$$PWD/simpleGenerators/pioneerGetLPSVelocity.h \
+	$$PWD/simpleGenerators/pioneerGetLPSYaw.h \
+	$$PWD/simpleGenerators/pioneerGetOrientation.h \
+	$$PWD/simpleGenerators/pioneerGetAccel.h \
+	$$PWD/simpleGenerators/pioneerGetGyro.h \
+	$$PWD/simpleGenerators/pioneerGPIOInit.h \
+	$$PWD/simpleGenerators/pioneerSetGPIO.h \
+	$$PWD/simpleGenerators/pioneerReadGPIO.h \
 	$$PWD/simpleGenerators/pioneerLedGenerator.h \
 	$$PWD/simpleGenerators/pioneerYawGenerator.h \
 	$$PWD/simpleGenerators/randomInitGenerator.h \
@@ -96,6 +104,14 @@ SOURCES += \
 	$$PWD/simpleGenerators/initialNodeGenerator.cpp \
 	$$PWD/simpleGenerators/labelGenerator.cpp \
 	$$PWD/simpleGenerators/pioneerGetLPSPosition.cpp \
+	$$PWD/simpleGenerators/pioneerGetLPSVelocity.cpp \
+	$$PWD/simpleGenerators/pioneerGetLPSYaw.cpp \
+	$$PWD/simpleGenerators/pioneerGetOrientation.cpp \
+	$$PWD/simpleGenerators/pioneerGetAccel.cpp \
+	$$PWD/simpleGenerators/pioneerGetGyro.cpp \
+	$$PWD/simpleGenerators/pioneerGPIOInit.cpp \
+	$$PWD/simpleGenerators/pioneerSetGPIO.cpp \
+	$$PWD/simpleGenerators/pioneerReadGPIO.cpp \
 	$$PWD/simpleGenerators/pioneerPrintGenerator.cpp \
 	$$PWD/simpleGenerators/pioneerSystemGenerator.cpp \
 	$$PWD/simpleGenerators/pioneerLedGenerator.cpp \

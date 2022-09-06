@@ -28,6 +28,8 @@ ProjectManager::ProjectManager(models::Models &models)
 	, mAutosaver(*this)
 	, mUnsavedIndicator(false)
 	, mSomeProjectOpened(false)
+	, mToolManager(new ToolPluginManager())
+	, mVersionsConverter(models, *mToolManager)
 {
 	setSaveFilePath();
 }
@@ -236,7 +238,13 @@ void ProjectManager::checkNeededPluginsRecursive(const details::ModelsAssistInte
 
 bool ProjectManager::checkVersions()
 {
-	/// @todo: Versions validation must occure in console mode too
+	if (!mVersionsConverter.validateCurrentProject()) {
+		showMessage(QObject::tr("Can`t open project file"), mVersionsConverter.errorMessage());
+		return false;
+	}
+	if (mVersionsConverter.converted()) {
+		showMessage(QString(), mVersionsConverter.errorMessage());
+	}
 	return true;
 }
 
@@ -356,8 +364,7 @@ QString ProjectManager::openFileName(const QString &promptPhrase) const
 void ProjectManager::showMessage(const QString &title, const QString &message) const
 {
 	Q_UNUSED(title);
-	Q_UNUSED(message);
-	// q Debug() << qPrintable(message);
+	QTextStream(stdout) << message;
 }
 
 QString ProjectManager::saveFileName(const QString &promptPhrase) const
@@ -374,4 +381,9 @@ void ProjectManager::setUnsavedIndicator(bool isUnsaved)
 void ProjectManager::fileNotFoundMessage(const QString &fileName) const
 {
 	showMessage(tr("File not found"), tr("File %1 not found. Try again").arg(fileName));
+}
+
+ToolPluginManager &ProjectManager::toolManager() const
+{
+	return *mToolManager;
 }

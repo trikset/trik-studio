@@ -4,6 +4,10 @@
 <context>
     <name>QObject</name>
     <message>
+        <source>Bogus input values</source>
+        <translation type="vanished">Неподходящие значения аргументов</translation>
+    </message>
+    <message>
         <source>Error: File %1 couldn&apos;t be opened!</source>
         <translation type="vanished">Ошибка: Не удаётся открыть файл %1!</translation>
     </message>
@@ -153,6 +157,13 @@
     </message>
 </context>
 <context>
+    <name>TwoDExecutionControl</name>
+    <message>
+        <source>No cofigured random device</source>
+        <translation type="vanished">Генератор случайных чисел не сконфигурирован</translation>
+    </message>
+</context>
+<context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+33"/>
@@ -196,6 +207,14 @@
     <message>
         <source>No configured sensor on port: %1</source>
         <translation type="vanished">Не найден сконфигурированный  сенсор на порту: %1</translation>
+    </message>
+    <message>
+        <source>No configured scalar sensor on port: %1</source>
+        <translation type="obsolete">Не найден скалярный сенсор на порту: %1</translation>
+    </message>
+    <message>
+        <source>No configured lidar on port: %1</source>
+        <translation type="obsolete">Не найден скалярный лидар на порту: %1</translation>
     </message>
     <message>
         <source>No configured accelerometer</source>

@@ -32,9 +32,9 @@ function fix_dependencies {
 	done
 	popd
 	if [[ -n "$change" ]] ; then
-		chmod a+w "$target"
-		eval "install_name_tool $change \"$target\""
-		chmod a-w "$target"
+		chmod 0666 "$target" || echo "Failed to 'chmod 0666' on \"$target\" with 'ls -l':$(ls -l $target)"
+		eval "install_name_tool $change \"$target\"" || ls -l "$target"
+		chmod 0444 "$target"
 	fi
 }
 

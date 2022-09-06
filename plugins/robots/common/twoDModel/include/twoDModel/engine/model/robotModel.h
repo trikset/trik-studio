@@ -82,8 +82,9 @@ public:
 	~RobotModel();
 
 	void reinit();
-
 	void clear();
+	void returnToStartMarker();
+
 	void stopRobot();
 	void playSound(int timeInMs);
 	QPointF alignToGrid(QPointF pos) const;
@@ -118,8 +119,10 @@ public:
 
 	bool isRiding() const;
 
-	QDomElement serialize(QDomElement &parent) const;
+	void serialize(QDomElement &parent) const;
+	void serializeWorldModel(QDomElement &parent) const;
 	void deserialize(const QDomElement &robotElement);
+	void deserializeWorldModel(const QDomElement &world);
 
 	void onRobotLiftedFromGround();
 	void onRobotReturnedOnGround();

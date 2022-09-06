@@ -71,12 +71,12 @@ void StartPosition::deserializeCompatibly(const QDomElement &robotElement)
 {
 	const QDomElement startPositionElement = robotElement.firstChildElement("startPosition");
 	if (startPositionElement.isNull()) {
-		const QStringList robotPositionParts = robotElement.attribute("position").split(":");
+		const QStringList robotPositionParts = robotElement.attribute("position", "0:0").split(":");
 		const QString robotX = robotPositionParts.count() != 2 ? "0" : robotPositionParts[0];
 		const QString robotY = robotPositionParts.count() != 2 ? "0" : robotPositionParts[1];
 		setX(robotX.toDouble() + mRobotSize.width() / 2);
 		setY(robotY.toDouble() + mRobotSize.height() / 2);
-		setRotation(robotElement.attribute("direction").toDouble());
+		setRotation(robotElement.attribute("direction", "0").toDouble());
 	} else {
 		deserialize(startPositionElement);
 	}

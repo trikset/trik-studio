@@ -518,41 +518,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Project was automaticly converted to version %1. Please check its contents.</source>
-        <translation type="vanished">Le projet a été automatiquement converti en version %1. Vérifiez son contenu, s&apos;il vous plait.</translation>
-    </message>
-    <message>
-        <location filename="../../qrgui/mainWindow/projectManager/versionsConverterManager.cpp" line="+118"/>
-        <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>The attempt to automaticly convert this project to the current enviroment version failed and thus save file can`t be opened. </source>
-        <translation>La conversion automatique du projet en version d&apos;environnement courant a échoué, le fichier de sauvgarde ne peut pas être ouvert.</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>This project was created by version %1 of the editor.</source>
-        <translation>Le projet a été crée par la version %1 de l&apos;editeur.</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>This project was created by too old version of the editor.</source>
-        <translation>Ce projet a été crée par une version trop ancienne de l&apos;editeur.</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source> It is now considered outdated and cannot be opened.</source>
-        <translation>Il est considéré comme obsolet et ne peut pas être ouvert.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>The save you are trying to open is made by version %1 of editor, whitch is newer than currently installed enviroment. Update your version before opening this save.</source>
-        <translation>Le projet a été crée par une version %1 de l&apos;editeur, elle est plus moderne que l&apos;environnement courant, il faut effectuer une mise à jour.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+160"/>
         <source>Can`t open project file</source>
         <translation>Le projet ne peut pas être ouvert</translation>
     </message>
@@ -742,7 +708,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+618"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+620"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -751,7 +717,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-424"/>
+        <location line="-425"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,7 +729,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+672"/>
+        <location line="+673"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -891,7 +857,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+195"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
     </message>
@@ -914,7 +880,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+71"/>
+        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="-89"/>
         <source>Save</source>
         <translation>Enregister</translation>
     </message>
@@ -939,7 +905,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Voulez-vous sauvegarder le projet courant ?</translation>
     </message>
     <message>
-        <location line="+123"/>
+        <location line="+130"/>
         <source>Unsaved project</source>
         <translation>Projet non sauvegardé</translation>
     </message>

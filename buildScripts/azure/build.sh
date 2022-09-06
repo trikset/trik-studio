@@ -1,13 +1,14 @@
 #!/bin/bash
-set -ueo pipefail
+set -uxeo pipefail
 
 CODECOV=true
 case $AGENT_OS in
   Darwin)
-     export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python [0-9]\.\([0-9]\)\.[0-9]*$#\1#g')"
-     export PATH="/usr/local/opt/qt@5/bin:$PATH"
+     QT_DIR=$(ls -dv "$HOME"/Qt/${TRIK_QT_VERSION}*/*/bin | head -n 1)
+     [ -d "$QT_DIR" ] && export PATH="$QT_DIR:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+     echo "Now path is $PATH"
     ;;
   Linux)
      # if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
@@ -50,7 +51,10 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
      export ASAN_OPTIONS=$(if [[ $AGENT_OS == Linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
      export LSAN_OPTIONS=suppressions=$PWD/bin/$CONFIG/lsan.supp:print_suppressions=0 ; \
      export DISPLAY=:0 ; \
-     env QT_QPA_PLATFORM=minimal make check -k -s && ( set +eux ; cd bin/$CONFIG && $TESTS ) ; \
+     export TRIK_PYTHONPATH=\${TRIK_PYTHONPATH:-\$(python3.\${TRIK_PYTHON3_VERSION_MINOR} -c 'import sys; import os; print(os.pathsep.join(sys.path))')} ;\
+     export PYTHONMALLOC=malloc ; \
+     env ; \
+     make check -k -s && ( set +eux ; cd bin/$CONFIG && $TESTS ) ; \
    }\
 "
 

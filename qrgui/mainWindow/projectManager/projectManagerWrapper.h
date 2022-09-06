@@ -19,7 +19,6 @@
 #include <qrgui/systemFacade/components/projectManager.h>
 
 #include "textEditor/textManagerInterface.h"
-#include "versionsConverterManager.h"
 
 namespace qReal {
 
@@ -76,7 +75,6 @@ private:
 
 	MainWindow *mMainWindow;
 	TextManagerInterface *mTextManager;
-	VersionsConverterManager mVersionsConverter;
 	bool mStackUnsaved { false };
 
 	bool openQRProject(const QFileInfo &fileInfo); //move to public?

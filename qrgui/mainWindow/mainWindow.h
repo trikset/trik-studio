@@ -345,7 +345,7 @@ private:
 	QString getNextDirName(const QString &name);
 
 	void initMiniMap();
-	void initToolManager();
+	void customizeWindow();
 	void initTabs();
 	void initDocks();
 	void initExplorers();
@@ -377,7 +377,6 @@ private:
 	QScopedPointer<text::TextManager> mTextManager;
 	QScopedPointer<ProjectManagerWrapper> mProjectManager;
 	QScopedPointer<Controller> mController;
-	QScopedPointer<ToolPluginManager> mToolManager;
 
 	EditorInterface* mCurrentEditor {}; // No ownership
 

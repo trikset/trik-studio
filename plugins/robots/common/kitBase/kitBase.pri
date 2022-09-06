@@ -94,6 +94,7 @@ HEADERS += \
 	$$PWD/include/kitBase/robotModel/robotParts/vectorSensor.h \
 	$$PWD/include/kitBase/robotModel/robotParts/shell.h \
 	$$PWD/include/kitBase/robotModel/robotParts/motorsAggregator.h \
+	$$PWD/include/kitBase/robotModel/robotParts/lidarSensor.h \
 
 SOURCES += \
 	$$PWD/src/devicesConfigurationProvider.cpp \
@@ -151,3 +152,4 @@ SOURCES += \
 	$$PWD/src/robotModel/robotParts/vectorSensor.cpp \
 	$$PWD/src/robotModel/robotParts/shell.cpp \
 	$$PWD/src/robotModel/robotParts/motorsAggregator.cpp \
+	$$PWD/src/robotModel/robotParts/lidarSensor.cpp \

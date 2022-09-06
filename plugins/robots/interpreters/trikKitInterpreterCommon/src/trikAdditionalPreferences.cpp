@@ -86,7 +86,9 @@ void TrikAdditionalPreferences::save()
 void TrikAdditionalPreferences::restoreSettings()
 {
 	const auto &addr = SettingsManager::value("TrikTcpServer").toString();
-	mUi->tcpServerLineEdit->insertItem(0, addr);
+	if (mUi->tcpServerLineEdit->findText(addr) < 0) {
+		mUi->tcpServerLineEdit->insertItem(0, addr);
+	}
 	mUi->tcpServerLineEdit->setCurrentText(addr);
 	mUi->realCameraCheckBox->setChecked(SettingsManager::value("TrikWebCameraReal").toBool());
 	mUi->imagesPathlineEdit->setText(SettingsManager::value("TrikSimulatedCameraImagesPath").toString());

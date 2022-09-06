@@ -28,6 +28,41 @@
         <source>Bubble:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
+        <source>Can`t open project file</source>
+        <translation>Не могу открыть проект</translation>
+    </message>
+    <message>
+        <location filename="../../qrgui/systemFacade/components/versionsConverterManager.cpp" line="+114"/>
+        <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
+        <translation>Проект был автоматически пробразован из версии %1 до версии %2. Пожалуйста, проверьте его содержимое.</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>The attempt to automaticly convert this project to the current enviroment version failed and thus save file can`t be opened. </source>
+        <translation>Попытка автоматического преобразования проекта до версии среды закончилась неудачно, файл сохранения не может быть открыт. </translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>This project was created by version %1 of the editor.</source>
+        <translation>Данный проект был создан редактором версии %1.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>This project was created by too old version of the editor.</source>
+        <translation>Данный проект был создан редактором слишком старой версии.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source> It is now considered outdated and cannot be opened.</source>
+        <translation> Он устарел и не может быть открыт.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>The save you are trying to open is made by version %1 of editor, whitch is newer than currently installed enviroment. Update your version before opening this save.</source>
+        <translation>Проект был создан версией %1 редактора, которая новее, чем версия данной среды, обновитесь.</translation>
+    </message>
 </context>
 <context>
     <name>qReal::Autosaver</name>
@@ -55,7 +90,7 @@
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+74"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>
@@ -88,7 +123,7 @@
 </translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+51"/>
         <source>This project contains unknown element %1 and thus can`t be opened. Probably it was created by old or incorrectly working version of QReal.</source>
         <translation>Данный проект содержит неизвестный элемент %1 и потому не может быть открыт. Возможно он был создан старой или некорректной версией QReal.</translation>
     </message>
@@ -103,7 +138,7 @@
         <translation>Выберите файл для сохранения модели</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="+45"/>
         <source>File not found</source>
         <translation>Файл не найден</translation>
     </message>
