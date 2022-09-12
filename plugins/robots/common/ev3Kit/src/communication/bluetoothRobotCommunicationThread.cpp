@@ -20,7 +20,7 @@
 #include <QtCore/QFileInfo>
 
 #include <qrkernel/settingsManager.h>
-#include <plugins/robots/thirdparty/qextserialport/src/qextserialport.h>
+#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
 
 #include "ev3Kit/communication/commandConstants.h"
 #include "ev3Kit/communication/ev3DirectCommand.h"
