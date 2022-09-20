@@ -25,8 +25,7 @@
 #include "exceptions/couldNotOpenDestinationFileException.h"
 #include "exceptions/couldNotOpenInputFileException.h"
 
-#define QUAZIP_STATIC
-#include "thirdparty/quazip/quazip/quazip/JlCompress.h"
+#include "quazip/JlCompress.h"
 
 using namespace qrRepo;
 using namespace qrRepo::details;
