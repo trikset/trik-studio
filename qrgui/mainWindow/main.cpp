@@ -16,6 +16,7 @@
 
 #include <QtCore/QtPlugin>
 #include <QtCore/QTranslator>
+#include <QtCore/QLibraryInfo>
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
 #include <QStyleFactory>
@@ -49,6 +50,17 @@ void loadTranslators(const QString &locale)
 			QCoreApplication::installTranslator(translator);
 		}
 	}
+
+	/// Load Qt's system translations
+	auto *t = new QTranslator();
+	QDirIterator files(QLibraryInfo::location(QLibraryInfo::TranslationsPath), {"*_"+locale+".qm"}, QDir::Files);
+	while(files.hasNext()) {
+		const auto &f = files.next();
+		if (!t->load(f)) {
+			QLOG_ERROR() << "Failed to load translation file" << f;
+		}
+	}
+	QCoreApplication::installTranslator(t);
 }
 
 void setDefaultLocale(bool localizationDisabled)
