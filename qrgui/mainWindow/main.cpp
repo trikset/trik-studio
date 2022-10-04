@@ -41,6 +41,19 @@ void clearConfig()
 
 void loadTranslators(const QString &locale)
 {
+	/// Load Qt's system translations before application translations
+	auto *t = new QTranslator();
+	QDirIterator files(QLibraryInfo::location(QLibraryInfo::TranslationsPath), {"*_"+locale+".qm"}, QDir::Files);
+	while(files.hasNext()) {
+		const auto &f = files.next();
+		qDebug() << f;
+		if (t->load(f)) {
+			QCoreApplication::installTranslator(t);
+		} else {
+			QLOG_ERROR() << "Failed to load translation file" << f;
+		}
+	}
+
 	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + locale);
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	while (directories.hasNext()) {
@@ -50,17 +63,6 @@ void loadTranslators(const QString &locale)
 			QCoreApplication::installTranslator(translator);
 		}
 	}
-
-	/// Load Qt's system translations
-	auto *t = new QTranslator();
-	QDirIterator files(QLibraryInfo::location(QLibraryInfo::TranslationsPath), {"*_"+locale+".qm"}, QDir::Files);
-	while(files.hasNext()) {
-		const auto &f = files.next();
-		if (!t->load(f)) {
-			QLOG_ERROR() << "Failed to load translation file" << f;
-		}
-	}
-	QCoreApplication::installTranslator(t);
 }
 
 void setDefaultLocale(bool localizationDisabled)
