@@ -12,6 +12,7 @@ leak:QApplication::desktop()
 leak:*/libfontconfig.so.1*
 leak:*/libfreetype.so.6*
 leak:*/libglib-2.0.so.0*
+leak:xdg_mime_init
 # From unit tests. These should be fixed one by one.
 leak:QPlatformIntegrationFactory::create
 leak:QFontconfigDatabase::addApplicationFont(QByteArray const&, QString const&)
