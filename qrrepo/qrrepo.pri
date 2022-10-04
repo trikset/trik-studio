@@ -25,6 +25,7 @@ links(qrkernel qrutils)
 
 use_system_quazip {
     PKGCONFIG *= quazip
+    DEFINES += TS_USE_SYSTEM_QUAZIP
 } else {
     links(quazip)
     INCLUDEPATH += $$GLOBAL_PWD/thirdparty/quazip/quazip/

@@ -25,7 +25,11 @@
 #include "exceptions/couldNotOpenDestinationFileException.h"
 #include "exceptions/couldNotOpenInputFileException.h"
 
+#ifdef TS_USE_SYSTEM_QUAZIP
+#include "quazip5/JlCompress.h"
+#else
 #include "quazip/JlCompress.h"
+#endif
 
 using namespace qrRepo;
 using namespace qrRepo::details;
