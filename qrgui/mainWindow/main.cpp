@@ -42,15 +42,18 @@ void clearConfig()
 void loadTranslators(const QString &locale)
 {
 	/// Load Qt's system translations before application translations
-	auto *t = new QTranslator();
-	QDirIterator files(QLibraryInfo::location(QLibraryInfo::TranslationsPath), {"*_"+locale+".qm"}, QDir::Files);
-	while(files.hasNext()) {
-		const auto &f = files.next();
-		qDebug() << f;
-		if (t->load(f)) {
+	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript" };
+	static const auto qtAppsTranslationsDir = QLibraryInfo::location(QLibraryInfo::LibraryLocation::TranslationsPath);
+	QLocale loc(locale);
+
+	for (auto &&module: qtModules) {
+		auto *t = new QTranslator(qApp);
+		if (t->load(loc, module, "_", qtAppsTranslationsDir)) {
 			QCoreApplication::installTranslator(t);
 		} else {
-			QLOG_ERROR() << "Failed to load translation file" << f;
+			QLOG_ERROR() << QString(R"(Failed to load translation file for "%1" (%2) from %3)")
+							.arg(module, loc.bcp47Name(), qtAppsTranslationsDir);
+			delete t;
 		}
 	}
 
