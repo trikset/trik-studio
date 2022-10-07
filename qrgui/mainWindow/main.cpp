@@ -16,6 +16,7 @@
 
 #include <QtCore/QtPlugin>
 #include <QtCore/QTranslator>
+#include <QtCore/QLibraryInfo>
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
 #include <QStyleFactory>
@@ -40,6 +41,22 @@ void clearConfig()
 
 void loadTranslators(const QString &locale)
 {
+	/// Load Qt's system translations before application translations
+	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript" };
+	static const auto qtAppsTranslationsDir = QLibraryInfo::location(QLibraryInfo::LibraryLocation::TranslationsPath);
+	QLocale loc(locale);
+
+	for (auto &&module: qtModules) {
+		auto *t = new QTranslator(qApp);
+		if (t->load(loc, module, "_", qtAppsTranslationsDir)) {
+			QCoreApplication::installTranslator(t);
+		} else {
+			QLOG_ERROR() << QString(R"(Failed to load translation file for "%1" (%2) from %3)")
+							.arg(module, loc.bcp47Name(), qtAppsTranslationsDir);
+			delete t;
+		}
+	}
+
 	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + locale);
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	while (directories.hasNext()) {
