@@ -35,7 +35,6 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
 && which qmake \
 && qmake -query \
 && ccache -sz \
-&& pkg-config --list-all \
 && { which python3 && python3 -V || true ; } \
 && { which python && python -V || true ; } \
 && eval 'export PKG_CONFIG_PATH=\`python3.\${TRIK_PYTHON3_VERSION_MINOR}-config --prefix\`/lib/pkgconfig' \
