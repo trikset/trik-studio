@@ -78,9 +78,9 @@ static void setDefaultLocale(bool localizationDisabled)
 	auto const &languageName = SettingsManager::value("systemLocale").toString();
 	QLocale locale = languageName.isEmpty()? QLocale() : QLocale(languageName); // Empty string results to "C" locale
 	QLocale::setDefault(locale);
-	QLocale defaultLocale;
-	if (locale != defaultLocale) {
-			QLOG_ERROR() << "Requested locale was" << locale.bcp47Name() << ", but" << defaultLocale.bcp47Name() << "is set";
+	QLocale dfltLocale;
+	if (locale != dfltLocale) {
+		QLOG_ERROR() << "Requested locale was" << locale.bcp47Name() << ", but" << dfltLocale.bcp47Name() << "is set";
 	}
 	auto language = locale.language();
 	if (language != QLocale::Language::C && language != QLocale::Language::English) {
