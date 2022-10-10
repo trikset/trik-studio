@@ -33,31 +33,31 @@ using namespace qReal;
 
 const int maxLogSize = 10 * 1024 * 1024;  // 10 MB
 
-void clearConfig()
+static void clearConfig()
 {
 	SettingsManager::clearSettings();
 	SettingsManager::instance()->saveData();
 }
 
-void loadTranslators(const QString &locale)
+static void loadTranslators(QLocale &locale)
 {
 	/// Load Qt's system translations before application translations
 	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript" };
 	static const auto qtAppsTranslationsDir = QLibraryInfo::location(QLibraryInfo::LibraryLocation::TranslationsPath);
-	QLocale loc(locale);
 
 	for (auto &&module: qtModules) {
 		auto *t = new QTranslator(qApp);
-		if (t->load(loc, module, "_", qtAppsTranslationsDir)) {
+		if (t->load(locale, module, "_", qtAppsTranslationsDir)) {
 			QCoreApplication::installTranslator(t);
 		} else {
 			QLOG_ERROR() << QString(R"(Failed to load translation file for "%1" (%2) from %3)")
-							.arg(module, loc.bcp47Name(), qtAppsTranslationsDir);
+							.arg(module, locale.bcp47Name(), qtAppsTranslationsDir);
 			delete t;
 		}
 	}
 
-	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + locale);
+	auto const &language = locale.bcp47Name().left(2);
+	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + language);
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	while (directories.hasNext()) {
 		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
@@ -68,17 +68,22 @@ void loadTranslators(const QString &locale)
 	}
 }
 
-void setDefaultLocale(bool localizationDisabled)
+static void setDefaultLocale(bool localizationDisabled)
 {
 	if (localizationDisabled) {
 		QLocale::setDefault(QLocale::English);
 		return;
 	}
 
-	const QString localeInSettings = SettingsManager::value("systemLocale").toString();
-	const QString locale = localeInSettings.isEmpty() ? QLocale().name().left(2) : localeInSettings;
-	if (!locale.isEmpty()) {
-		QLocale::setDefault(QLocale(locale));
+	auto const &languageName = SettingsManager::value("systemLocale").toString();
+	QLocale locale = languageName.isEmpty()? QLocale() : QLocale(languageName); // Empty string results to "C" locale
+	QLocale::setDefault(locale);
+	QLocale defaultLocale;
+	if (locale != defaultLocale) {
+			QLOG_ERROR() << "Requested locale was" << locale.bcp47Name() << ", but" << defaultLocale.bcp47Name() << "is set";
+	}
+	auto language = locale.language();
+	if (language != QLocale::Language::C && language != QLocale::Language::English) {
 		loadTranslators(locale);
 	}
 }
