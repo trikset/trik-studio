@@ -95,6 +95,8 @@ static QString versionInfo()
 
 int main(int argc, char *argv[])
 {
+	qReal::Logger logger; // uses initial temporary log target
+
 	const auto &dpiInfo = PlatformInfo::enableHiDPISupport();
 	QScopedPointer<QRealApplication> app(new QRealApplication(argc, argv));
 
@@ -134,10 +136,10 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	qReal::Logger logger;
 	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
 	if (logsDir.mkpath(logsDir.absolutePath())) {
 		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2);
+		logger.removeDefaultInitialLogTarget();
 	}
 
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
@@ -145,7 +147,6 @@ int main(int argc, char *argv[])
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture()
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app->arguments();
-	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 	for (auto &&i: dpiInfo) { QLOG_INFO() << i ; }
 
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
