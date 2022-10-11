@@ -515,7 +515,13 @@ Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 		return mTriggers.doNothing();
 	}
 
-	return mTriggers.message(element.attribute("text"));
+	QMap<QString, Value> map;
+	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull()
+			; replace = replace.nextSiblingElement("replace")) {
+		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
+	}
+
+	return mTriggers.message(element.attribute("text"), map);
 }
 
 Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)
