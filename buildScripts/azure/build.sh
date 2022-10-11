@@ -18,17 +18,17 @@ esac
 
 mkdir -p $CCACHE_DIR || sudo chown -R $USER $CCACHE_DIR || :
 cat << EOF > $CCACHE_CONFIGPATH
-compiler_check=none
+compiler_check=content
 run_second_cpp=true
 cache_dir=$CCACHE_DIR
 compression=true
-compression_level=3
-sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
+compression_level=1
+sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches,system_headers
 max_size=1200M
 EOF
 
 $EXECUTOR bash -lic " set -xueo pipefail; \
-   export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH \
+   export CCACHE_CONFIGPATH=$CCACHE_CONFIGPATH LANG=C \
 && ccache -V && ccache -p \
 && which g++ \
 && g++ --version \
@@ -44,7 +44,7 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
 && make -j2 qmake_all 2>&1 | tee -a build.log \
 && ccache -s \
 && make -j2 all 2>&1 | tee -a build.log \
-&& ccache -s \
+&& ccache -sx \
 && ls bin/$CONFIG \
 && { export QT_QPA_PLATFORM=minimal ; \
      export ASAN_OPTIONS=$(if [[ $AGENT_OS == Linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
