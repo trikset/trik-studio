@@ -61,8 +61,8 @@ parameters:
     default:
       bash: |
         buildScripts/azure/build.sh & WPID=$!
-        sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
+        sleep $BUILD_TIMEOUT && {  pkill -TERM -P $WPID ; echo "***KILLED ON TIMEOUT***" ; echo "##vso[task.setvariable variable=isTimeout;isOutput=true]Yes" ; } & KPID=$!
+        wait $WPID ; kill $KPID > /dev/null && sleep || true
       displayName: 'Build with buildNoTests.sh'
 
   - name: buildWithTestsStep
@@ -165,7 +165,7 @@ stages:
 - stage: linuxBuildWithTestsStage
   displayName: Linux build with tests
   dependsOn: linuxCacheableBuildStage
-  condition: succeeded()
+  condition: and(succeeded(),ne(dependencies.linuxCacheableBuildStage.outputs['BuildWithNoTests.isTimeout'],'Yes'))
   jobs:
   - job: Build
     strategy:
@@ -193,7 +193,7 @@ stages:
 - stage: macOSBuildWithTestsStage
   displayName: MacOs build with tests
   dependsOn: macOSCacheableBuildStage
-  condition: succeeded()
+  condition: and(succeeded(),ne(dependencies.macOSCacheableBuildStage.outputs['BuildWithNoTests.isTimeout'],'Yes'))
   jobs:
   - job: Build
     strategy:
