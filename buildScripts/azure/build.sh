@@ -44,7 +44,7 @@ $EXECUTOR bash -lic " set -xueo pipefail; \
 && make -j2 qmake_all 2>&1 | tee -a build.log \
 && ccache -s \
 && make -j2 all 2>&1 | tee -a build.log \
-&& ccache -sx \
+&& ccache -s \
 && ls bin/$CONFIG \
 && { export QT_QPA_PLATFORM=minimal ; \
      export ASAN_OPTIONS=$(if [[ $AGENT_OS == Linux ]]; then echo 'detect_leaks=1:'; else echo -n ''; fi)detect_stack_use_after_return=1:fast_unwind_on_malloc=0:use_sigaltstack=0 ; \
