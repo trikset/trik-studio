@@ -16,7 +16,7 @@ variables:
   ALL_TESTS: "./run-simulator-tests.sh"
   TRIK_PYTHON3_VERSION_MINOR: 9
   TRIK_QT_VERSION: 5.12
-  BUILD_TIMEOUT: 2800
+  BUILD_TIMEOUT: 2400
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
   CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 

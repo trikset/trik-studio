@@ -23,7 +23,7 @@ run_second_cpp=true
 cache_dir=$CCACHE_DIR
 compression=true
 compression_level=1
-sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches,system_headers
+sloppiness=time_macros,pch_defines,include_file_ctime,include_file_mtime,file_stat_matches
 max_size=1200M
 EOF
 
