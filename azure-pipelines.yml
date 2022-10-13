@@ -16,7 +16,7 @@ variables:
   ALL_TESTS: "./run-simulator-tests.sh"
   TRIK_PYTHON3_VERSION_MINOR: 9
   TRIK_QT_VERSION: 5.12
-  BUILD_TIMEOUT: 2800
+  BUILD_TIMEOUT: 2400
   CCACHE_CONFIGPATH: "$(Pipeline.Workspace)/ccache.conf"
   CCACHE_DIR: "$(Pipeline.Workspace)/.ccache/$(Agent.OS)-$(CONFIG)"
 
@@ -61,9 +61,9 @@ parameters:
     default:
       bash: |
         buildScripts/azure/build.sh & WPID=$!
-        sleep $BUILD_TIMEOUT && { kill $WPID || true ; echo "***KILLED ON TIMEOUT***" ; } & KPID=$!
-        wait $WPID ; RES=$?; kill -0 $KPID && kill $KPID > /dev/null || true ;
-      displayName: 'Build with buildNoTests.sh'
+        sleep $BUILD_TIMEOUT && {  echo -e "\033[31;1;7m***KILLED ON TIMEOUT***\033[0m" ; echo "##vso[task.setvariable variable=isTimeout;isOutput=true]Yes" ; pkill -TERM -P $WPID ; } & KPID=$!
+        wait $WPID ; kill $KPID > /dev/null || true
+      displayName: 'Build without tests'
 
   - name: buildWithTestsStep
     type: step
@@ -118,10 +118,10 @@ stages:
   - job: Build
     strategy:
       matrix:
-        Linux release:
+        LinuxRelease:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-        Linux debug:
+        LinuxDebug:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
@@ -143,11 +143,11 @@ stages:
   - job: Build
     strategy:
       matrix:
-        MacOS release:
+        macOSRelease:
           imageName: 'macOS-11'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
-        MacOS debug:
+        macOSDebug:
           imageName: 'macOS-11'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
@@ -165,7 +165,7 @@ stages:
 - stage: linuxBuildWithTestsStage
   displayName: Linux build with tests
   dependsOn: linuxCacheableBuildStage
-  condition: succeeded()
+  condition: and(succeeded(),and(ne(stageDependencies.linuxCacheableBuildStage.Build.outputs['LinuxRelease.BuildNoTestsStep.isTimeout'],'Yes'),ne(stageDependencies.linuxCacheableBuildStage.Build.outputs['LinuxDebug.BuildNoTestsStep.isTimeout'],'Yes')))
   jobs:
   - job: Build
     strategy:
@@ -193,7 +193,7 @@ stages:
 - stage: macOSBuildWithTestsStage
   displayName: MacOs build with tests
   dependsOn: macOSCacheableBuildStage
-  condition: succeeded()
+  condition: and(succeeded(),and(ne(stageDependencies.macOSCacheableBuildStage.Build.outputs['macOSRelease.BuildNoTestsStep.isTimeout'],'Yes'),ne(stageDependencies.macOSCacheableBuildStage.Build.outputs['macOSDebug.BuildNoTestsStep.isTimeout'],'Yes')))
   jobs:
   - job: Build
     strategy:
