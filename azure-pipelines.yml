@@ -60,12 +60,9 @@ parameters:
     type: step
     default:
       bash: |
-        $SHELL --version
-        exec {lock}<>$(mktemp -t trik-build-lock.XXXX)
         buildScripts/azure/build.sh & WPID=$!
         sleep $BUILD_TIMEOUT && {  echo -e "\033[31;1;7m***KILLED ON TIMEOUT***\033[0m" ; echo "##vso[task.setvariable variable=isTimeout;isOutput=true]Yes" ; pkill -TERM -P $WPID ; } & KPID=$!
         wait $WPID ; kill $KPID > /dev/null || true
-        while [ -e /proc/$$/fd/$lock ] && [ $(lsof /proc/$$/fd/$lock | wc -l) -ne 1 ] ; do echo "Sleep to wait ..." ; lsof /proc/$$/fd/$lock ; sleep 5 ; done
       displayName: 'Build without tests'
 
   - name: buildWithTestsStep
