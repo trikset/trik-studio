@@ -33,6 +33,7 @@ CONFIG="$CONFIG" \
 QMAKE_EXTRA="$QMAKE_EXTRA" \
 PROJECT="$PROJECT" \
 AGENT_OS="$AGENT_OS" \
+TESTS="$TESTS" \
 buildScripts/azure/build_internal.sh
 
 
