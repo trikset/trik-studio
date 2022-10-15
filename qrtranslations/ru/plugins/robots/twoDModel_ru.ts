@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+237"/>
+        <location line="+243"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
@@ -324,7 +324,7 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+85"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+91"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>Нет такого события: %1</translation>
