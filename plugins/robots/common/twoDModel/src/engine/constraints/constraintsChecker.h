@@ -89,6 +89,10 @@ signals:
 	/// @param message The message that may be reported to user.
 	void message(const QString &message);
 
+	/// Emitted when program execution meets <log/> trigger
+	/// @param message The message that may be reported to log.
+	void log(const QString &message);
+
 	/// Emitted when checker program written incorrectly with the reason as parameter.
 	void checkerError(const QString &message);
 
