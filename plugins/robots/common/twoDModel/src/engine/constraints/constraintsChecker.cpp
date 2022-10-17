@@ -41,7 +41,7 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 			mDefferedSuccessTriggered = true;
 		} else {
 			mSuccessTriggered = true;
-			emit success();
+			onSuccess();
 		}
 	});
 	connect(&mStatus, &details::StatusReporter::fail, this, [this]() { mFailTriggered = true; });
@@ -293,9 +293,21 @@ void ConstraintsChecker::programFinished(qReal::interpretation::StopReason reaso
 {
 	if (!mSuccessTriggered && !mFailTriggered && mEnabled) {
 		if (mDefferedSuccessTriggered && reason == qReal::interpretation::StopReason::finised) {
-			emit success();
+			onSuccess();
 		} else {
 			emit fail(tr("Program has finished, but the task is not accomplished."));
 		}
 	}
+}
+
+void ConstraintsChecker::onSuccess()
+{
+	for (const auto &event : mEvents) {
+		if (event->id() == "on_success") {
+			event->setUp();
+			event->check();
+			break;
+		}
+	}
+	emit success();
 }
