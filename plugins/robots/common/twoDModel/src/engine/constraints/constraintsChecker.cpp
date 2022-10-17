@@ -303,10 +303,9 @@ void ConstraintsChecker::programFinished(qReal::interpretation::StopReason reaso
 void ConstraintsChecker::onSuccess()
 {
 	for (const auto &event : mEvents) {
-		if (event->id() == "on_success") {
+		if (event->id().startsWith("on_success")) {
 			event->setUp();
 			event->check();
-			break;
 		}
 	}
 	emit success();
