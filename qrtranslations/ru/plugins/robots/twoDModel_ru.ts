@@ -237,7 +237,7 @@
         <translation>Аттрибут &quot;glue&quot; должен иметь значение &quot;and&quot; или &quot;or&quot;.</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+59"/>
         <location line="+183"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>

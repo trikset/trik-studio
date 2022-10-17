@@ -68,7 +68,7 @@
         <translation>Attribut &quot;glue&quot; doit avoir une valeur &quot;and&quot; ou &quot;or&quot;.</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+59"/>
         <location line="+183"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Balise inconnue &quot;%1&quot;.</translation>

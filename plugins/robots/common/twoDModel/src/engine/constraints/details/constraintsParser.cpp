@@ -294,6 +294,10 @@ Condition ConstraintsParser::parseConditionContents(const QDomElement &element, 
 		return parseNegationTag(element, event);
 	}
 
+	if (tag == "true") {
+		return mConditions.constant(true);
+	}
+
 	if (tag == "equals" || tag.startsWith("notequal")
 			|| tag == "greater" || tag == "less"
 			|| tag == "notgreater" || tag == "notless")
