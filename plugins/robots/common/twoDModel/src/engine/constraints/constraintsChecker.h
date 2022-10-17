@@ -119,6 +119,8 @@ private:
 	void programStarted();
 	void programFinished(qReal::interpretation::StopReason reason);
 
+	void onSuccess();
+
 	qReal::ErrorReporterInterface &mErrorReporter;
 	model::Model &mModel;
 	details::StatusReporter mStatus;
