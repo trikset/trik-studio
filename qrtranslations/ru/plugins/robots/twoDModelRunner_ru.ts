@@ -57,6 +57,11 @@ In background mode the session will be terminated just after the execution ended
         <translation>Закрыть окно если диаграмма/скрипт были выполнены без ошибок.</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Close the window and exit after diagram/script finishes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+2"/>
         <source>Shows robot&apos;s console.</source>
         <translation>Отображает консоль робота.</translation>
@@ -69,7 +74,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+202"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+203"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>

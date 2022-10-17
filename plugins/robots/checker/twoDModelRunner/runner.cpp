@@ -88,7 +88,8 @@ Runner::~Runner()
 }
 
 bool Runner::interpret(const QString &saveFile, const bool background
-					   , const int customSpeedFactor, const bool closeOnSuccess, const bool showConsole)
+					   , const int customSpeedFactor, bool closeOnFinish
+					   , const bool closeOnSuccess, const bool showConsole)
 {
 	if (!mProjectManager->open(saveFile)) {
 		return false;
@@ -108,12 +109,12 @@ bool Runner::interpret(const QString &saveFile, const bool background
 	}
 
 	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
-			, this, [this, background, closeOnSuccess](qReal::interpretation::StopReason reason) {
-		if (background || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
+			, this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
+		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 
-	if (background) {
+	if (closeOnFinish) {
 		connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationErrored
 				, this, [this]() { QTimer::singleShot(0, this, &Runner::close); });
 	}
