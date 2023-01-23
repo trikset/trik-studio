@@ -23,10 +23,11 @@
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/mainWindowDockInterface.h>
 #include <qrgui/controller/controllerInterface.h>
 #include <qrgui/editor/sceneCustomizationInterface.h>
-#include <qrgui/textEditor/textManagerInterface.h>
 #include <qrgui/plugins/toolPluginInterface/systemEvents.h>
 
 namespace qReal {
+class TextManagerInterface;
+
 
 /// A container class for convenient passing different system parts into plugins.
 class PluginConfigurator

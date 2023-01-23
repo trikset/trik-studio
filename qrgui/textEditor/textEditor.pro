@@ -18,7 +18,9 @@ TEMPLATE = lib
 
 include(../../global.pri)
 
-links(qrkernel qrutils qscintilla2 qrgui-tool-plugin-interface qrgui-brand-manager)
+links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-brand-manager)
+
+CONFIG += trikqscintilla2
 
 QT += widgets
 
@@ -28,11 +30,9 @@ TRANSLATIONS = \
 	$$PWD/../../qrtranslations/ru/qrgui_textEditor_ru.ts \
 	$$PWD/../../qrtranslations/fr/qrgui_textEditor_fr.ts \
 
-INCLUDEPATH = \
-	$$PWD/ \
+INCLUDEPATH += \
 	$$PWD/../ \
-	$$PWD/../../ \
-	$$PWD/../../thirdparty/qscintilla/Qt4Qt5 \
+	$$GLOBAL_PWD
 
 HEADERS += \
 	$$PWD/textEditorDeclSpec.h \

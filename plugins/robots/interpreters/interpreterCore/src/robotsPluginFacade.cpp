@@ -24,6 +24,7 @@
 #include <twoDModel/robotModel/twoDRobotModel.h>
 
 #include <qrgui/textEditor/qscintillaTextEdit.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 
 #include "interpreterCore/managers/kitAutoSwitcher.h"
 #include "interpreterCore/interpreter/blockInterpreter.h"

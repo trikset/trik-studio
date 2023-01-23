@@ -16,7 +16,7 @@ include(../common.pri)
 
 links(qrkernel qrutils)
 
-include(../../../plugins/blockDiagram/visualDebugSupport/visualDebugSupport.pri)
+#include(../../../plugins/blockDiagram/visualDebugSupport/visualDebugSupport.pri)
 
 HEADERS += \
 	testClass.h \

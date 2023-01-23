@@ -20,7 +20,7 @@ rsync -a "$BIN_DIR"/libqrgraph.so*                                          "$PW
 rsync -a "$BIN_DIR"/libqrrepo.so*                                           "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrutils.so*                                          "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrtext.so*                                           "$PWD"/../data/lib/
-rsync -a "$BIN_DIR"/libqscintilla2.so*                                      "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libtrikqscintilla2.so*                                  "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libtrikQsLog.so*                                        "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrgui-brand-manager.so*                              "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrgui-controller.so*                                 "$PWD"/../data/lib/

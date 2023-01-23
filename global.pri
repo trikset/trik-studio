@@ -27,7 +27,7 @@ macx {
 	PLATFORM = mac
 }
 
-CONFIG *= qt
+CONFIG *= qt thread exceptions
 
 !win32:CONFIG *= use_gold_linker
 #CONFIG *= fat-lto
@@ -206,13 +206,13 @@ DEFINES *= QT_FORCE_ASSERTS
 
 DEFINES *= QT_NO_ACCESSIBILITY
 
-!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
+!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
 !warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 
-gcc:versionAtLeast(QT_VERSION, 5.15.0):QMAKE_CXXFLAGS *= -Wno-error=deprecated-declarations
+gcc:versionAtLeast(QT_VERSION, 5.15.0):QMAKE_CXXFLAGS *= -Wno-deprecated-declarations
 
 clang {
 	#treat git submodules as system path

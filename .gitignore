@@ -26,7 +26,6 @@ bin/*
 *.sdf
 *.Debug
 *.Release
-*.prf
 usabilityFiles/*
 **/.build/*
 **/uic_wrapper.sh

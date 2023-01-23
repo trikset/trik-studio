@@ -24,24 +24,10 @@ TEMPLATE = lib
 
 CONFIG += qt warn_off thread exceptions hide_symbols
 
-CONFIG(debug, debug|release) {
-    mac: {
-        TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}_debug
-    } else {
-        win32: {
-            TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}d
-        } else {
-            TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
-        }
-    }
-} else {
-    TARGET = qscintilla2_qt$${QT_MAJOR_VERSION}
-}
-
-TARGET = qscintilla2
+TARGET = trikqscintilla2
 include(../../../global.pri)
 LIBS -= -ltrikQsLog
-INCLUDEPATH += thirdparty/qscintilla/Qt4Qt5/
+INCLUDEPATH += $$PWD/Qt4Qt5/
 
 
 #macx:!CONFIG(staticlib) {

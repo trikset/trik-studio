@@ -21,10 +21,12 @@ DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
 
 QT += widgets printsupport xml svg
 
-links(qrkernel qrutils qrtext qrrepo qscintilla2 qrgui-models qrgui-editor qrgui-controller qrgui-dialogs qrgui-preferences-dialog \
+links(qrkernel qrutils qrtext qrrepo qrgui-models qrgui-editor qrgui-controller qrgui-dialogs qrgui-preferences-dialog \
 		qrgui-text-editor qrgui-mouse-gestures qrgui-hotkey-manager qrgui-brand-manager  \
 		qrgui-facade qrgui-plugin-manager qrgui-tool-plugin-interface qrgui-thirdparty \
 )
+
+CONFIG += trikqscintilla2
 
 includes(qrgraph qrgui qrgui/plugins/metaMetaModel)
 

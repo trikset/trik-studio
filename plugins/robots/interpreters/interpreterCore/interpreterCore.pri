@@ -13,6 +13,7 @@
 # limitations under the License.
 
 QT += svg xml widgets
+CONFIG += trikqscintilla2
 
 includes(plugins/robots/interpreters/interpreterCore \
 		plugins/robots/common/kitBase \
