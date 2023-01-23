@@ -14,6 +14,8 @@
 
 QT += widgets network
 
+CONFIG += trikqscintilla2
+
 includes( \
 		plugins/robots/generators/trik/trikPythonGeneratorLibrary \
 		plugins/robots/generators/trik/trikGeneratorBase \
@@ -24,7 +26,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base \
+links(qrkernel qrutils qrrepo robots-generator-base robots-trik-generator-base \
 		robots-kit-base robots-trik-kit robots-utils robots-trik-python-generator-library \
 )
 

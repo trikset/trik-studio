@@ -11,7 +11,7 @@ rsync -a "$BIN_DIR"/zlib1.dll                                            "$PWD"/
 rsync -a "$BIN_DIR"/qrrepo.dll                                           "$PWD"/../data
 rsync -a "$BIN_DIR"/qrutils.dll                                          "$PWD"/../data
 rsync -a "$BIN_DIR"/qrtext.dll                                           "$PWD"/../data
-rsync -a "$BIN_DIR"/qscintilla2.dll                                      "$PWD"/../data
+rsync -a "$BIN_DIR"/trikqscintilla2.dll                                  "$PWD"/../data
 rsync -a "$BIN_DIR"/trikQsLog.dll                                        "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-brand-manager.dll                              "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-controller.dll                                 "$PWD"/../data

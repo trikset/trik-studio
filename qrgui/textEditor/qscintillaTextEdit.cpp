@@ -17,7 +17,7 @@
 #include <QtWidgets/QShortcut>
 #include <QtCore/QRegularExpression>
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciapis.h>
+#include <Qsci/qsciapis.h>
 #include <brandManager/brandManager.h>
 #include <qrutils/widgets/searchLinePanel.h>
 

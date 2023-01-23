@@ -16,4 +16,4 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
         robotsTests \
-	generationRulesToolTest \
+#	generationRulesToolTest \

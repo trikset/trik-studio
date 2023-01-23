@@ -123,7 +123,7 @@ $qRealDir/libqrkernel.so* \
 $qRealDir/libqrrepo.so* \
 $qRealDir/libqrtext.so* \
 $qRealDir/libqrutils.so* \
-$qRealDir/libqscintilla2.so* \
+$qRealDir/libtrikqscintilla2.so* \
 $qRealDir/libqrtext.so* .
 
 # Copying TRIKStudio plugins

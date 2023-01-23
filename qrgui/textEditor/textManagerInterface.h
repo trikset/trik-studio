@@ -13,10 +13,8 @@
  * limitations under the License. */
 
 #pragma once
-
+#include "textEditorDeclSpec.h"
 #include <qrkernel/ids.h>
-
-#include "qrgui/textEditor/languageInfo.h"
 
 class QFileInfo;
 
@@ -26,6 +24,7 @@ class SystemEvents;
 
 namespace text {
 class QScintillaTextEdit;
+class LanguageInfo;
 }
 
 class QRGUI_TEXT_EDITOR_EXPORT TextManagerInterface : public QObject

@@ -46,8 +46,8 @@
 #include <qrutils/smartDock.h>
 #include <qrutils/graphicsUtils/animatedEffects.h>
 #include <qrutils/xmlUtils.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciprinter.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintillabase.h>
+#include <Qsci/qsciprinter.h>
+#include <Qsci/qsciscintillabase.h>
 
 #include <qrgui/controller/controller.h>
 #include <qrgui/dialogs/findReplaceDialog.h>

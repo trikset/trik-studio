@@ -16,11 +16,11 @@
 
 #include <QtCore/QObject>
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerpython.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexercpp.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerjavascript.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerpascal.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qscilexerlua.h>
+#include <Qsci/qscilexerpython.h>
+#include <Qsci/qscilexercpp.h>
+#include <Qsci/qscilexerjavascript.h>
+#include <Qsci/qscilexerpascal.h>
+#include <Qsci/qscilexerlua.h>
 
 #include "qrgui/textEditor/textEditorDeclSpec.h"
 

@@ -30,6 +30,7 @@
 #include <utils/robotCommunication/uploadProgramProtocol.h>
 #include <utils/robotCommunication/networkCommunicationErrorReporter.h>
 #include <qrgui/textEditor/qscintillaTextEdit.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 
 #include "trikPythonMasterGenerator.h"
 #include "emptyShell.h"
