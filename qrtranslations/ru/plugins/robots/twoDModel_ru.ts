@@ -237,13 +237,13 @@
         <translation>Аттрибут &quot;glue&quot; должен иметь значение &quot;and&quot; или &quot;or&quot;.</translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location line="+179"/>
+        <location line="+59"/>
+        <location line="+183"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location line="-83"/>
+        <location line="-87"/>
         <source>There must be only one tag &quot;return&quot; in &quot;using&quot; expression.</source>
         <translation>Тэг &quot;return&quot; может быть только один.</translation>
     </message>
@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+237"/>
+        <location line="+262"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
@@ -329,7 +329,7 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+85"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>Нет такого события: %1</translation>
@@ -569,7 +569,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+111"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+112"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
@@ -685,7 +685,7 @@
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+22"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>

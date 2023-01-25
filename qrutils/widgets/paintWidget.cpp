@@ -25,10 +25,15 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 {
 	QWidget::paintEvent(event);
 
+	if (mPainter) {
+		QPainter painter(this);
+		mPainter->paint(&painter, geometry());
+	}
 	QPainter painter(this);
 	auto rect = geometry();
 	rect.translate(-rect.topLeft());
 	mPainter->paint(&painter, rect);
+    // IKHON FIX CONFLICT
 }
 
 void PaintWidget::setPainter(PainterInterface *painter)

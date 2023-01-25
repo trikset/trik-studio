@@ -75,6 +75,9 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 	connect(mChecker.data(), &constraints::ConstraintsChecker::message, this, [&](const QString &message) {
 		errorReporter.addInformation(message);
 	});
+	connect(mChecker.data(), &constraints::ConstraintsChecker::log, this, [&](const QString &message) {
+		errorReporter.addLog(message);
+	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::checkerError
 			, this, [&errorReporter](const QString &message) {
 				errorReporter.addCritical(tr("Error in checker: %1").arg(message));

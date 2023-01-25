@@ -21,5 +21,8 @@ SUBDIRS = \
 	qscintilla/Qt4Qt5/qscintilla.pro \
 	qslog/QsLogSharedLibrary.pro \
 	gamepad/gamepad.pro \
-	quazip/quazip.pro \
 	checkapp/checkapp.pro \
+
+!use_system_quazip {
+    SUBDIRS += quazip/quazip.pro
+}

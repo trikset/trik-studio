@@ -41,12 +41,13 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 			mDefferedSuccessTriggered = true;
 		} else {
 			mSuccessTriggered = true;
-			emit success();
+			onSuccess();
 		}
 	});
 	connect(&mStatus, &details::StatusReporter::fail, this, [this]() { mFailTriggered = true; });
 	connect(&mStatus, &details::StatusReporter::fail, this, &ConstraintsChecker::fail);
 	connect(&mStatus, &details::StatusReporter::message, this, &ConstraintsChecker::message);
+	connect(&mStatus, &details::StatusReporter::log, this, &ConstraintsChecker::log);
 	connect(&mStatus, &details::StatusReporter::checkerError, this, &ConstraintsChecker::checkerError);
 
 	connect(&mModel.timeline(), &model::Timeline::started, this, &ConstraintsChecker::programStarted);
@@ -290,9 +291,20 @@ void ConstraintsChecker::programFinished(qReal::interpretation::StopReason reaso
 {
 	if (!mSuccessTriggered && !mFailTriggered && mEnabled) {
 		if (mDefferedSuccessTriggered && reason == qReal::interpretation::StopReason::finised) {
-			emit success();
+			onSuccess();
 		} else {
 			emit fail(tr("Program has finished, but the task is not accomplished."));
 		}
 	}
+}
+
+void ConstraintsChecker::onSuccess()
+{
+	for (const auto &event : mEvents) {
+		if (event->id().startsWith("on_success")) {
+			event->setUp();
+			event->check();
+		}
+	}
+	emit success();
 }

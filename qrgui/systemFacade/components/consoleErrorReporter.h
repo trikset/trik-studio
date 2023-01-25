@@ -30,6 +30,7 @@ public:
 	void addWarning(const QString &message, const Id &position = Id::rootId()) override;
 	void addError(const QString &message, const Id &position = Id::rootId()) override;
 	void addCritical(const QString &message, const Id &position = Id::rootId()) override;
+	void addLog(const QString &message) override;
 
 	void sendBubblingMessage(const QString &message, int duration, QWidget *parent = nullptr) override;
 
@@ -52,6 +53,8 @@ signals:
 	/// Emitted when new message with level 'Critical' added to error reporter.
 	void criticalAdded(const QString &message, const Id &position);
 
+	/// Emitted when new message with level 'Log' added to error reporter.
+	void logAdded(const QString &message);
 private:
 	bool mWereErrors = false;
 };
