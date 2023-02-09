@@ -232,7 +232,7 @@ after_test:
   - bash -c "env LC_ALL=C date -u"
   # deployment
   #- ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
-  - IF "x%server%" NEQ "x" (sshpass -p %password% rsync -avze 'ssh -o StrictHostKeyChecking=no' %INSTALLER_NAME% %server%:dl/ts/fresh/installer/)
+  - IF "x%server%" NEQ "x" ( echo %password%| script -E never -q -c "rsync -avze 'ssh -o StrictHostKeyChecking=no' %INSTALLER_NAME% %server%:dl/ts/fresh/installer/")
 
 before_deploy:
   - ps: if ( $artifacts.Count -eq 0 ) { exit 1 }
