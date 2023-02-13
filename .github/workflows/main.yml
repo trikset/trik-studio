@@ -69,7 +69,7 @@ jobs:
         run: |
             ARCH=32
             PLATFORM=i686
-            pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
+            pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip openssh mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
 
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v3.x
@@ -233,10 +233,9 @@ jobs:
       - name: Deploy installer
         if: ${{ matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
         run: |
-            INSTALLER_PATH=$(ls -1b installer/trik-studio*installer*.exe | head -n 1)
-            [ -r "$INSTALLER_PATH" ] || INSTALLER_PATH=/dev/null
-            export INSTALLER_PATH
-            echo "${{ secrets.DL_PASSWORD }}"| script -E never -q -c "rsync -ve 'ssh -o StrictHostKeyChecking=no' $INSTALLER_PATH ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe"
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+            rsync -v --rsh="ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
 
       - name: Prepare for RDP connection
         if: false #comment this line to create RDP session
