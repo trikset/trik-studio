@@ -39,6 +39,9 @@ public:
 	/// Produces new trigger that sends back to the environment message signal.
 	Trigger message(const QString &message, const QMap<QString, Value> &replaces) const;
 
+	/// Produces new trigger that sends back to the environment log signal.
+	Trigger log(const QString &message, const QMap<QString, Value> &replaces) const;
+
 	/// Produces new trigger that sends back to the environment sucess signal (i.e. that the program worked correctly
 	/// and all conditions were satisfied).
 	/// @param deferred If true then the program execution will not be stopped immediately.

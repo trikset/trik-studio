@@ -143,6 +143,15 @@ jobs:
              which g++
              g++ --version
 
+      - name: Deploy installer
+        if: ${{ matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
+        run: |
+            set -x
+            INSTALLER_PATH=$(ls -1b installer/*.sh | head -n 1)
+            [ -r "$INSTALLER_PATH" ] || INSTALLER_PATH=/dev/null
+            export INSTALLER_PATH
+            { sleep 5 ; echo "${{ secrets.DL_PASSWORD }}" ; } | timeout -k 10s 30s script -E never -q -c "rsync -ve 'ssh -vvt -o StrictHostKeyChecking=no' $INSTALLER_PATH ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe"
+
       - name: QMake
         timeout-minutes: 1
         run: |

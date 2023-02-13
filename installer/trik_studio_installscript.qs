@@ -63,7 +63,8 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 }
 
 Controller.prototype.LicenseAgreementPageCallback = function() {
-  gui.currentPageWidget().AcceptLicenseCheckBox.setChecked(true);
+  var x = gui.currentPageWidget().AcceptLicenseRadioButton || gui.currentPageWidget().AcceptLicenseCheckBox;
+  x.setChecked(true);
   gui.clickButton(buttons.NextButton);  
 }
 
