@@ -506,16 +506,7 @@ void TwoDModelWidget::loadWorldModel()
 		return;
 	}
 
-	QString errorMessage;
-	int errorLine = 0;
-	int errorColumn = 0;
-	const QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
-	if (!errorMessage.isEmpty()) {
-		mModel.errorReporter()->addError(QString("%1:%2: %3")
-				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
-	}
-
-	auto command = new commands::LoadWorldCommand(*this, save);
+	auto command = new commands::LoadWorldCommand(*this, loadXmlWithConversion(loadFileName));
 	if (mController) {
 		mController->execute(command);
 	}
@@ -528,14 +519,7 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 		return;
 	}
 
-	QString errorMessage;
-	int errorLine = 0;
-	int errorColumn = 0;
-	QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
-	if (!errorMessage.isEmpty()) {
-		mModel.errorReporter()->addError(QString("%1:%2: %3")
-				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
-	}
+	QDomDocument save = loadXmlWithConversion(loadFileName);
 
 	auto newWorld = save.firstChildElement("root");
 	auto oldWorld = generateWorldModelXml().firstChildElement("root");
@@ -1130,4 +1114,41 @@ void TwoDModelWidget::unsetSelectedRobotItem()
 void TwoDModelWidget::incrementTimelineCounter()
 {
 	mUi->timelineBox->stepBy(1);
+}
+
+const QDomDocument TwoDModelWidget::loadXmlWithConversion(const QString &loadFileName) const
+{
+	QString errorMessage;
+	int errorLine = 0;
+	int errorColumn = 0;
+	const QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
+	if (!errorMessage.isEmpty()) {
+		mModel.errorReporter()->addError(QString("%1:%2: %3")
+				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+		return save;
+	}
+
+	QDomElement root = save.firstChildElement("root");
+
+	QDomElement oldRobot = root.firstChildElement("robots").firstChildElement("robot");
+	if (oldRobot.hasAttribute("position") || oldRobot.hasAttribute("direction")
+			|| !oldRobot.firstChildElement("startPosition").isNull()) {
+		QDomElement world = root.firstChildElement("world");
+		if (world.isNull()) {
+			world = root.ownerDocument().createElement("world");
+			root.appendChild(world);
+		}
+
+		QDomElement robot = world.ownerDocument().createElement("robot");
+		robot.setAttribute("position", oldRobot.attribute("position", "0:0"));
+		robot.setAttribute("direction", oldRobot.attribute("direction", "0"));
+		robot.appendChild(oldRobot.firstChildElement("startPosition"));
+		world.appendChild(robot);
+
+		oldRobot.removeAttribute("position");
+		oldRobot.removeAttribute("direction");
+		// start position reparented automatically
+	}
+
+	return save;
 }
