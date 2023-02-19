@@ -1171,17 +1171,17 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="-22"/>
+        <location line="-13"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>Loading world without robot model</source>
         <translation>Загрузка модели мира без модели робота</translation>
     </message>
@@ -1198,7 +1198,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+309"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

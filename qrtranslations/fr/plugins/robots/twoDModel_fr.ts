@@ -806,22 +806,22 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>2D model saves (*.xml)</source>
         <translation>Fichiers de sauvegarde du modèle 2D (*.xml) </translation>
     </message>
     <message>
-        <location line="-22"/>
+        <location line="-13"/>
         <source>Loading world and robot model</source>
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>Loading world without robot model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+309"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

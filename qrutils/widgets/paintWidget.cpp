@@ -33,7 +33,6 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 	auto rect = geometry();
 	rect.translate(-rect.topLeft());
 	mPainter->paint(&painter, rect);
-    // IKHON FIX CONFLICT
 }
 
 void PaintWidget::setPainter(PainterInterface *painter)
