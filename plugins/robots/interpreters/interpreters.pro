@@ -25,8 +25,6 @@ SUBDIRS = \
 	pioneerKitInterpreter \
 
 CONFIG(trik_retired_features) {
-	SUBDIRS += trikV6KitInterpreter
-	trikV6KitInterpreter.depends = trikKitInterpreterCommon
 }
 
 robotsPlugin.depends = interpreterCore

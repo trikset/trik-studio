@@ -1,4 +1,0 @@
-@@CONDITION@@
-begin
-@@BODY@@
-end;

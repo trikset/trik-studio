@@ -1,3 +1,0 @@
-let @@NAME@@ (@@ARGUMENTS@@) =
-@@BODY@@
-

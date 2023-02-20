@@ -1,1 +1,0 @@
-Sqrt(@@ARGUMENT@@)

@@ -1,1 +1,0 @@
-Power(@@LEFT@@, @@RIGHT@@)
