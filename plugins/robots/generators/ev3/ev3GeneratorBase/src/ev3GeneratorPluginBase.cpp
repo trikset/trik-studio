@@ -65,17 +65,6 @@ QList<kitBase::AdditionalPreferences *> Ev3GeneratorPluginBase::settingsWidgets(
 	return {};
 }
 
-void Ev3GeneratorPluginBase::onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model)
-{
-	for (const qReal::ActionInfo &action : customActions()) {
-		if (action.isAction()) {
-			action.action()->setVisible(mUsbRobotModel.data() == &model || mBluetoothRobotModel.data() == &model);
-		} else {
-			action.menu()->setVisible(mUsbRobotModel.data() == &model || mBluetoothRobotModel.data() == &model);
-		}
-	}
-}
-
 void Ev3GeneratorPluginBase::regenerateExtraFiles(const QFileInfo &newFileInfo)
 {
 	Q_UNUSED(newFileInfo)

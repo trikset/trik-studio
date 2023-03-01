@@ -262,7 +262,12 @@
         <translation>temps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+52"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+60"/>
+        <source>%2 has been auto configured to port %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Sensor on port %1 does not correspond to blocks on the diagram.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -303,7 +308,7 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+160"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+158"/>
         <source>Robots</source>
         <translation>Robots</translation>
     </message>
@@ -313,7 +318,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+111"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -364,18 +369,18 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
-        <location line="+72"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+93"/>
+        <location line="+74"/>
         <source>No connection to robot</source>
         <translation type="unfinished">Pas de connexion au robot</translation>
     </message>
     <message>
-        <location line="-67"/>
+        <location line="-68"/>
         <source>Interpreter is already running</source>
         <translation type="unfinished">L&apos;interprétateur est deja lancé</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Connected successfully</source>
         <translation type="unfinished">Connexion reussie</translation>
     </message>
@@ -440,28 +445,28 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>2d model world is read only</source>
-        <translation>Le monde 2D ne peut pas être modifié </translation>
+        <source>2D model world is read-only</source>
+        <translation type="unfinished">Le monde 2D ne peut pas être modifié</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Sensors are read only</source>
-        <translation>La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
+        <source>Sensors are read-only</source>
+        <translation type="unfinished">La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>2d model robot position is read only</source>
-        <translation>La position du début ne peut pas être modifié en 2D</translation>
+        <source>2D model robot position is read-only</source>
+        <translation type="unfinished">La position du début ne peut pas être modifié en 2D</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Motors to wheels binding is read only</source>
-        <translation>La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
+        <source>Motors to wheels binding is read-only</source>
+        <translation type="unfinished">La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>2d model simulation settings are read only</source>
-        <translation>La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
+        <source>2D model simulation settings are read-only</source>
+        <translation type="unfinished">La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
     </message>
     <message>
         <location line="+21"/>

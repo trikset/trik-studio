@@ -37,7 +37,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - qt-version: '5.12.11'
+          - qt-version: '5.12.12'
             mingw-version: 7.3
             mingw-short-version: 73
             python-version: 3.8
@@ -69,14 +69,7 @@ jobs:
         run: |
             ARCH=32
             PLATFORM=i686
-            pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip sshpass mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
-
-# https://github.com/msys2/MSYS2-packages/issues/2485 - sshpass failed with strange error
-      - name: Get older sshpass
-        run: |
-            wget http://repo.msys2.org/msys/x86_64/sshpass-1.06-1-x86_64.pkg.tar.xz
-            pacman --verbose --noconfirm -U ./sshpass-1.06-1-x86_64.pkg.tar.xz
-            rm ./sshpass-1.06-1-x86_64.pkg.tar.xz
+            pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip openssh mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
 
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v3.x
@@ -103,8 +96,24 @@ jobs:
           version: ${{matrix.qt-version}}
           arch: win32_mingw${{matrix.mingw-short-version}}
           modules: 'qtscript'
-          tools: 'tools_ifw,4.2.0-0-202111080926,qt.tools.ifw.42 tools_mingw,${{matrix.mingw-version}}.0,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
+          tools: 'tools_mingw,${{matrix.mingw-version}}.0,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
           extra: '--external 7z'
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Install proper version for QtIfw
+        run: |
+             cd "$RUNNER_TEMP"
+             curl -Lo qtifw.exe "https://download.qt.io/official_releases/qt-installer-framework/4.2.0/QtInstallerFramework-windows-x86-4.2.0.exe"
+             export TRIK_QT_INSTALL_DIR="${IQTA_TOOLS}/QtInstallerFramework/4.2.0"
+             mkdir -p $TRIK_QT_INSTALL_DIR
+             "$RUNNER_TEMP"/qtifw.exe --verbose --no-force-installations --show-virtual-components --script "${GITHUB_WORKSPACE}\\plugins\\robots\\thirdparty\\trikRuntime\\trikRuntime\\docker\\qt_scriptinstall.qs"
+             rm -rf "$TRIK_QT_INSTALL_DIR"/{doc,examples,Uninstaller.app,Uninstaller.dat}
+
 
 # After Qt install action, that spoils pythonLocation variable
       - name: Set up Python ${{matrix.python-version}}
@@ -122,12 +131,6 @@ jobs:
 
       - name: Check PATH
         run: echo PATH="$PATH"
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          submodules: recursive
-          fetch-depth: 0
 
       - name: Check available tools
         run: |
@@ -197,7 +200,7 @@ jobs:
       - name: Build installer
         run: |
             cd $GITHUB_WORKSPACE/installer
-            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.2/bin" "${{ env.BUILD_DIR }}"
+            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.2.0/bin" "${{ env.BUILD_DIR }}"
 
       - name: Push installer
         uses: actions/upload-artifact@v2
@@ -215,14 +218,17 @@ jobs:
             exit 1
 
       - name: Get tag
-        run: echo "CURRENT_TAG=$(git tag --contains HEAD)" >> $GITHUB_ENV
+        run: echo "CURRENT_TAG=$(git tag --contains HEAD | sort -Vr | head -n1)" >> $GITHUB_ENV
       - name: Check tag
         if: ${{ env.CURRENT_TAG != ''}}
         run: echo "GITHUB_REF_SLUG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
 
       - name: Deploy installer
         if: ${{ matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
-        run: sshpass -p ${{ secrets.DL_PASSWORD }} rsync -ve "ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
+        run: |
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+            rsync -v --rsh="ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
 
       - name: Prepare for RDP connection
         if: false #comment this line to create RDP session

@@ -237,13 +237,13 @@
         <translation>Аттрибут &quot;glue&quot; должен иметь значение &quot;and&quot; или &quot;or&quot;.</translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location line="+175"/>
+        <location line="+59"/>
+        <location line="+183"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location line="-79"/>
+        <location line="-87"/>
         <source>There must be only one tag &quot;return&quot; in &quot;using&quot; expression.</source>
         <translation>Тэг &quot;return&quot; может быть только один.</translation>
     </message>
@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+224"/>
+        <location line="+262"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
@@ -329,7 +329,7 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+80"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>Нет такого события: %1</translation>
@@ -378,6 +378,26 @@
         <location line="+6"/>
         <source>Object %1 has no property %2</source>
         <translation>Объект %1 не имеет свойства %2</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+177"/>
+        <source>Remove</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Save</source>
+        <translation type="unfinished">Сохранить</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Edit</source>
+        <translation type="unfinished">Редактировать</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отменить</translation>
     </message>
 </context>
 <context>
@@ -549,7 +569,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+110"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+112"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
@@ -572,6 +592,14 @@
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+45"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::items::CommentItem</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-137"/>
+        <source>Text (T)</source>
+        <translation type="unfinished">Текст (Т)</translation>
     </message>
 </context>
 <context>
@@ -652,22 +680,28 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+58"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+61"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+22"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
+    </message>
+    <message>
+        <location line="+93"/>
+        <source>This robot model already exists</source>
+        <translation>Эта модель робота уже существует</translation>
     </message>
 </context>
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+155"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+180"/>
         <location line="+19"/>
-        <location line="+38"/>
+        <location line="+18"/>
+        <location line="+43"/>
         <location line="+19"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Попытка добавить элемент с существующим идентификатором: %1</translation>
@@ -678,7 +712,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+461"/>
+        <location line="+510"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -686,7 +720,7 @@
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+73"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+74"/>
         <location line="+3"/>
         <source>2D Model</source>
         <translation>2D модель</translation>
@@ -991,7 +1025,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+84"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+85"/>
         <source>Camera following robot: %1</source>
         <translation>Следовать за роботом: %1</translation>
     </message>
@@ -1009,6 +1043,11 @@
         <location line="+7"/>
         <source>Return robot to the initial position</source>
         <translation>Вернуть робота в исходное положение</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Move start position here</source>
+        <translation type="unfinished">Передвинуть стартовое положение робота сюда</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -1060,7 +1099,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+689"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+721"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1097,7 +1136,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+322"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+328"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1115,7 +1154,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+91"/>
+        <location line="+99"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1132,19 +1171,19 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="-22"/>
+        <location line="-13"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>Loading world without robot model</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка модели мира без модели робота</translation>
     </message>
     <message>
         <source>Select background image</source>
@@ -1159,7 +1198,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+309"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
@@ -1169,7 +1208,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+168"/>
+        <location line="+171"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

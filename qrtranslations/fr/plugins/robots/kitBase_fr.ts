@@ -12,7 +12,7 @@
 <context>
     <name>kitBase::DevicesConfigurationWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/common/kitBase/src/devicesConfigurationWidget.cpp" line="+103"/>
         <source>%1:</source>
         <translation>%1 :</translation>
     </message>
@@ -180,6 +180,14 @@
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/gyroscopeSensor.h" line="+29"/>
         <source>Gyroscope</source>
         <translation>Gyroscope</translation>
+    </message>
+</context>
+<context>
+    <name>kitBase::robotModel::robotParts::LidarSensor</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/lidarSensor.h" line="+29"/>
+        <source>Lidar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

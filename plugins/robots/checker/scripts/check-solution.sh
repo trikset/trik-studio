@@ -91,8 +91,9 @@ else
 	patcher=$binFolder/patcher-d
 fi
 
-if [ -z ${TRIK_PYTHONPATH+x} ] && which -a python3 &> /dev/null ; then
-    export TRIK_PYTHONPATH=$(python3 -c 'import sys; import os; print(os.pathsep.join(sys.path))')
+PYTHON3=python3${TRIK_PYTHON3_VERSION_MINOR+.${TRIK_PYTHON3_VERSION_MINOR}}
+if [ -z ${TRIK_PYTHONPATH+x} ] && which -a $PYTHON3 &> /dev/null ; then
+    export TRIK_PYTHONPATH=$($PYTHON3 -c 'import sys; import os; print(os.pathsep.join(sys.path))')
 fi
 
 export LD_LIBRARY_PATH=$binFolder:$LD_LIBRARY_PATH

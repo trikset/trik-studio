@@ -4,7 +4,7 @@ SUBDIRS=
 #DESTDIR = $$absolute_path($$DESTDIR)
 
 # ATM we use xenial 16.04 as main linux builder, and it lacks new git with --broken option.
-REPO_GIT_VERSION_STRING=$$system(git describe --tags --always --dirty --abbrev=6 || true)
+REPO_GIT_VERSION_STRING=$$system(git -C $$PWD -c $$system_quote(safe.directory=*) describe --tags --always --dirty --abbrev=6 || true)
 REPO_GIT_VERSION_LIST=$$replace(REPO_GIT_VERSION_STRING, [-.], ":")
 REPO_GIT_VERSION_LIST=$$replace(REPO_GIT_VERSION_LIST, [a-zA-Z], "")
 REPO_GIT_VERSION_LIST=$$split(REPO_GIT_VERSION_LIST, :)

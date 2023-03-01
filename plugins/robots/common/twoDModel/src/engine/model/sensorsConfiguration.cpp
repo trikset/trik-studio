@@ -18,6 +18,7 @@
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/sensorsConfiguration.h"
+#include "kitBase/robotModel/robotParts/lidarSensor.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
@@ -26,6 +27,10 @@ SensorsConfiguration::SensorsConfiguration(const QString &robotModelName, const 
 	: mRobotSize(robotSize)
 	, mRobotId(robotModelName)
 {
+}
+
+void SensorsConfiguration::clear() {
+	clearConfiguration(Reason::loading);
 }
 
 void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId

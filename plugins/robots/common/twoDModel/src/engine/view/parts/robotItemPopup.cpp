@@ -66,11 +66,12 @@ bool RobotItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 void RobotItemPopup::initWidget()
 {
 	QGridLayout * const layout = new QGridLayout(this);
-	layout->addWidget(initFollowButton(), 0, 0);
+	layout->addWidget(initFollowButton(), 0, 0, Qt::AlignCenter);
 	layout->addWidget(initReturnButton(), 0, 1);
 	layout->addWidget(initImagePicker(), 1, 1);
 	layout->addWidget(initSaveImageButton(), 1, 0, Qt::AlignCenter);
-	layout->addWidget(initSpinBox(), 2, 0, 1, 2);
+	layout->addWidget(initSpinBox(), 2, 0);
+	layout->addWidget(initSetStartButton(), 2, 1);
 
 	updateDueToLayout();
 }
@@ -92,6 +93,13 @@ QWidget *RobotItemPopup::initReturnButton()
 	mReturnButton = initButton(":/icons/2d_robot_back.png", tr("Return robot to the initial position"));
 	connect(mReturnButton, &QAbstractButton::clicked, this, &RobotItemPopup::restoreRobotPositionClicked);
 	return mReturnButton;
+}
+
+QWidget *RobotItemPopup::initSetStartButton()
+{
+	mSetStartButton = initButton(":/icons/2d_target.png", tr("Move start position here"));
+	connect(mSetStartButton, &QAbstractButton::clicked, this, &RobotItemPopup::setRobotPositionClicked);
+	return mSetStartButton;
 }
 
 QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &toolTip)

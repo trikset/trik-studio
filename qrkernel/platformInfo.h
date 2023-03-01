@@ -15,6 +15,7 @@
 #pragma once
 
 #include <qrkernel/kernelDeclSpec.h>
+#include <QStringList>
 
 namespace qReal {
 
@@ -49,8 +50,8 @@ public:
 	/// Returns true if current OS and process architecture reported by currentCpuArchitecture contains '64'.
 	static bool isX64();
 
-	/// Designed to make an attempt to set proper flags for HiDPI screens
-	static void enableHiDPISupport();
+	/// Designed to make an attempt to set proper flags for HiDPI screens, returns info for logging
+	static QStringList enableHiDPISupport();
 };
 
 }

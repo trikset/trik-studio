@@ -53,6 +53,7 @@
 #include "simpleGenerators/removeFileGenerator.h"
 #include "simpleGenerators/markerDownGenerator.h"
 #include "simpleGenerators/markerUpGenerator.h"
+#include "simpleGenerators/readLidarGenerator.h"
 #include "parts/trikDeviceVariables.h"
 
 using namespace trik;
@@ -157,6 +158,8 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 		return new MarkerDownGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "MarkerUp") {
 		return new MarkerUpGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "TrikReadLidar") {
+		return new ReadLidarGenerator(mRepo, customizer, id, this);
 	}
 
 	return GeneratorFactoryBase::simpleGenerator(id, customizer);

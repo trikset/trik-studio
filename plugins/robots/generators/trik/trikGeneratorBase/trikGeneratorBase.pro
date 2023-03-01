@@ -83,6 +83,7 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/markerDownGenerator.h \
 	$$PWD/src/simpleGenerators/markerUpGenerator.h \
 	$$PWD/src/simpleGenerators/printTextGenerator.h \
+	$$PWD/src/simpleGenerators/readLidarGenerator.h \
 
 SOURCES += \
 	$$PWD/src/trikBlocksValidator.cpp \
@@ -130,3 +131,4 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/markerDownGenerator.cpp \
 	$$PWD/src/simpleGenerators/markerUpGenerator.cpp \
 	$$PWD/src/simpleGenerators/printTextGenerator.cpp \
+	$$PWD/src/simpleGenerators/readLidarGenerator.cpp \

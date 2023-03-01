@@ -80,6 +80,7 @@ HEADERS += \
 	$$PWD/src/blocks/details/removeFileBlock.h \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.h \
 	$$PWD/src/blocks/details/trikPrintTextBlock.h \
+	$$PWD/src/blocks/details/readLidarBlock.h \
 	$$PWD/src/blocks/details/trikForwardOneCellBlock.h \
 	$$PWD/src/blocks/details/trikBackwardOneCellBlock.h \
 	$$PWD/src/blocks/details/trikTurnRightBlock.h \
@@ -141,6 +142,7 @@ SOURCES += \
 	$$PWD/src/blocks/details/removeFileBlock.cpp \
 	$$PWD/src/blocks/details/trikWaitForGyroscopeBlock.cpp \
 	$$PWD/src/blocks/details/trikPrintTextBlock.cpp \
+	$$PWD/src/blocks/details/readLidarBlock.cpp \
 	$$PWD/src/blocks/details/trikForwardOneCellBlock.cpp \
 	$$PWD/src/blocks/details/trikBackwardOneCellBlock.cpp \
 	$$PWD/src/blocks/details/trikTurnRightBlock.cpp \

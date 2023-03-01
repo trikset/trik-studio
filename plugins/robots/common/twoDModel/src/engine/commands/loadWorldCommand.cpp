@@ -38,17 +38,7 @@ bool LoadWorldCommand::restoreState()
 
 void LoadWorldCommand::loadWorld(const QDomDocument &world)
 {
-	QDomDocument blobs;
-	QDomNodeList blobsList = world.elementsByTagName("blobs");
-	if (blobsList.length()) {
-		QDomElement root = blobs.createElement("root");
-		root.appendChild(blobsList.at(0));
-		blobs.appendChild(root);
-	} else {
-		blobs = QDomDocument();
-	}
-
-	mWidget.loadXmls(world, blobs, true);
+	mWidget.loadXmls(world, true);
 	Q_EMIT mWidget.model().modelChanged(mWidget.generateWorldModelXml());
 	Q_EMIT mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }

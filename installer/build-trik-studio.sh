@@ -3,7 +3,7 @@
 
 set -xueo pipefail
 
-build_dir=
+build_dir=.
 [ -z ${3+x} ] || build_dir="$3"
 
 SCRIPT_DIR="$0"
@@ -14,4 +14,4 @@ SCRIPT_DIR=$(dirname "$SCRIPT_DIR")
 [ $OSTYPE == "linux-gnu" ] && EXCLUDE="-e ru.qreal.root.associations" || EXCLUDE=
 grep -q "darwin" <<< $OSTYPE && EXCLUDE="-e ru.qreal.root.nxt.tools,ru.qreal.root.associations" || :
 grep -q "darwin" <<< $OSTYPE && export PRODUCT_DISPLAYED_NAME="TRIK Studio Jr" || :
-chmod +x "$SCRIPT_DIR/build-installer.sh" && "$SCRIPT_DIR/build-installer.sh" "$1" "$2" trik-studio "$build_dir"
+chmod +x "$SCRIPT_DIR/build-installer.sh" && "$SCRIPT_DIR/build-installer.sh" "${1:-$(dirname $(which qmake 2>/dev/null))}" "${2:-$(dirname $(which binarycreator 2>/dev/null))}" trik-studio "$build_dir"

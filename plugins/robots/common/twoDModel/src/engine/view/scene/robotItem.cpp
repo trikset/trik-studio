@@ -411,15 +411,9 @@ RobotModel &RobotItem::robotModel()
 void RobotItem::returnToStartPosition()
 {
 	mRobotModel.onRobotLiftedFromGround();
-	mRobotModel.setRotation(mRobotModel.startPositionMarker()->rotation());
-	// Here we want the center of the robot to be the position of the marker.
-	const QPointF shiftFromPicture = mapFromScene(pos());
-	const QPointF markerPos = mRobotModel.startPositionMarker()->scenePos();
-	const QPointF shiftToCenter = mapToScene(QPointF()) - mapToScene(boundingRect().center() - shiftFromPicture);
-	mRobotModel.setPosition(markerPos + shiftToCenter);
+	mRobotModel.returnToStartMarker();
 	mRobotModel.onRobotReturnedOnGround();
-
-	emit recoverRobotPosition(markerPos + shiftToCenter);
+	emit recoverRobotPosition(mRobotModel.position());
 }
 
 QPolygonF RobotItem::collidingPolygon() const

@@ -21,6 +21,7 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/worldModel.h"
 #include "twoDModel/engine/model/image.h"
+#include "twoDModel/engine/model/robotModel.h"
 
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/cubeItem.h"
@@ -31,6 +32,7 @@
 #include "src/engine/items/ellipseItem.h"
 #include "src/engine/items/stylusItem.h"
 #include "src/engine/items/imageItem.h"
+#include "src/engine/items/commentItem.h"
 #include "src/engine/items/regions/ellipseRegion.h"
 #include "src/engine/items/regions/rectangularRegion.h"
 #include "src/engine/items/regions/boundRegion.h"
@@ -61,6 +63,29 @@ void WorldModel::init(qReal::ErrorReporterInterface &errorReporter)
 qreal WorldModel::pixelsInCm() const
 {
 	return twoDModel::pixelsInCm;
+}
+
+QVector<int> WorldModel::lidarReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const
+{
+	QVector<int> res;
+	const auto solidItemsPath = buildSolidItemsPath();
+	auto angleAndRange = QPair<qreal, int>(1, maxDistance);
+	for (int i = 0; i < maxAngle; i++) {
+		auto laserPath = rangeSensorScanningRegion(position, direction + i, angleAndRange);
+		const auto intersection = solidItemsPath.intersected(laserPath);
+		int currentRangeInCm = INT_MAX;
+		for (int j = 0; j < intersection.elementCount(); j++) {
+			auto el = intersection.elementAt(j);
+			if (el.type != QPainterPath::CurveToDataElement) {
+				auto lenght = QLineF(position, QPointF(el)).length() / pixelsInCm();
+				if (lenght < currentRangeInCm) {
+					currentRangeInCm = static_cast<int>(lenght);
+				}
+			}
+		}
+		res.append(currentRangeInCm <= maxDistance ? currentRangeInCm : 0);
+	}
+	return res;
 }
 
 int WorldModel::rangeReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const
@@ -185,6 +210,24 @@ void WorldModel::removeMovable(QSharedPointer<items::MovableItem> movable)
 	emit itemRemoved(movable);
 }
 
+void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
+{
+	const QString id = comment->id();
+	if (mComments.contains(id)) {
+		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
+		return; // probably better than having no way to delete those duplicate items on the scene
+	}
+
+	mComments[id] = comment;
+	emit commentAdded(comment);
+}
+
+void WorldModel::removeComment(QSharedPointer<items::CommentItem> comment)
+{
+	mComments.remove(comment->id());
+	emit itemRemoved(comment);
+}
+
 const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFields() const
 {
 	return mColorFields;
@@ -193,6 +236,11 @@ const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFie
 const QMap<QString, QSharedPointer<items::ImageItem>> &WorldModel::imageItems() const
 {
 	return mImageItems;
+}
+
+const QMap<QString, QSharedPointer<items::CommentItem> > &WorldModel::commentItems() const
+{
+	return mComments;
 }
 
 const QMap<QString, QSharedPointer<items::RegionItem>> &WorldModel::regions() const
@@ -256,6 +304,11 @@ void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 	emit blobsChanged();
 }
 
+void WorldModel::setRobotModel(RobotModel * robotModel)
+{
+	mRobotModel = robotModel;
+}
+
 void WorldModel::clear()
 {
 	while (!mWalls.isEmpty()) {
@@ -278,6 +331,16 @@ void WorldModel::clear()
 		auto toRemove = mRegions.last();
 		mRegions.remove(toRemove->id());
 		emit itemRemoved(toRemove);
+	}
+
+	while (!mComments.isEmpty()) {
+		auto toRemove = mComments.last();
+		mComments.remove(toRemove->id());
+		emit itemRemoved(toRemove);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->deserializeWorldModel(QDomElement());
 	}
 
 	mOrder.clear();
@@ -417,12 +480,21 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 
 	QDomElement regions = parent.ownerDocument().createElement("regions");
 	result.appendChild(regions);
-	QList<QString> regionIds = mRegions.keys();
-	std::sort(regionIds.begin(), regionIds.end(), comparator);
-	for (const QString &region : regionIds) {
+	for (auto &&region : mRegions) {
 		QDomElement regionElement = parent.ownerDocument().createElement("region");
-		mRegions[region]->serialize(regionElement);
+		region->serialize(regionElement);
 		regions.appendChild(regionElement);
+	}
+
+	// IKHON do we need mOrder? if yes, add mOrder to addComment
+	QDomElement comments = parent.ownerDocument().createElement("comments");
+	result.appendChild(comments);
+	for (auto &&comment : mComments) {
+		comment->serialize(comments);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->serializeWorldModel(parent);
 	}
 
 	// Robot trace saving is disabled
@@ -547,6 +619,14 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
+	for (QDomElement commentsNode = element.firstChildElement("comments"); !commentsNode.isNull()
+			; commentsNode = commentsNode.nextSiblingElement("comments")) {
+		for (QDomElement elementNode = commentsNode.firstChildElement(); !elementNode.isNull()
+				; elementNode = elementNode.nextSiblingElement()) {
+			createComment(elementNode);
+		}
+	}
+
 	for (QDomElement imagesNode = element.firstChildElement("images"); !imagesNode.isNull()
 			; imagesNode = imagesNode.nextSiblingElement("images")) {
 		for (QDomElement imageNode = imagesNode.firstChildElement("image"); !imageNode.isNull()
@@ -570,6 +650,10 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 			; regionNode = regionNode.nextSiblingElement("region"))
 	{
 		createRegion(regionNode);
+	}
+
+	if (mRobotModel) {
+		mRobotModel->deserializeWorldModel(element);
 	}
 }
 
@@ -599,6 +683,10 @@ QSharedPointer<QGraphicsObject> WorldModel::findId(const QString &id) const
 		return mRegions[id];
 	}
 
+	if (mComments.contains(id)) {
+		return mComments[id];
+	}
+
 	return nullptr;
 }
 
@@ -622,6 +710,8 @@ void WorldModel::createElement(const QDomElement &element)
 		createMovable(element);
 	} else if (element.tagName() == "region") {
 		createRegion(element);
+	} else if (element.tagName() == "comment") {
+		createComment(element);
 	}
 }
 
@@ -695,6 +785,13 @@ void WorldModel::createStylus(const QDomElement &element)
 	addColorField(stylusItem);
 }
 
+void WorldModel::createComment(const QDomElement &element)
+{
+	auto commentItem = QSharedPointer<items::CommentItem>::create(QPointF(), QPointF());
+	commentItem->deserialize(element);
+	addComment(commentItem);
+}
+
 QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &element, bool background)
 {
 	auto imageId = element.attribute("imageId");
@@ -751,6 +848,8 @@ void WorldModel::removeItem(const QString &id)
 		removeMovable(movableItem);
 	} else if (auto image = qSharedPointerDynamicCast<items::ImageItem>(item)) {
 		removeImageItem(image);
+	} else if (auto comment = qSharedPointerDynamicCast<items::CommentItem>(item)) {
+		removeComment(comment);
 	}
 }
 

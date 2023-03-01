@@ -60,6 +60,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::informationAdded, &*mReporter, &Reporter::addInformation);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::errorAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &*mReporter, &Reporter::addError);
+	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
 }
 
 Runner::Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode)
@@ -87,7 +88,8 @@ Runner::~Runner()
 }
 
 bool Runner::interpret(const QString &saveFile, const bool background
-					   , const int customSpeedFactor, const bool closeOnSuccess, const bool showConsole)
+					   , const int customSpeedFactor, bool closeOnFinish
+					   , const bool closeOnSuccess, const bool showConsole)
 {
 	if (!mProjectManager->open(saveFile)) {
 		return false;
@@ -107,10 +109,17 @@ bool Runner::interpret(const QString &saveFile, const bool background
 	}
 
 	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
-			, this, [this, background, closeOnSuccess](qReal::interpretation::StopReason reason) {
-		if (background || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
+			, this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
+		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
 			QTimer::singleShot(0, this, &Runner::close);
 	});
+
+	if (closeOnFinish) {
+		connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationErrored
+				, this, [this]() { QTimer::singleShot(0, this, &Runner::close); });
+	}
+
+	const auto robotName = mPluginFacade->robotModelManager().model().name();
 
 	for (auto &&twoDModelWindow : twoDModelWindows) {
 		connect(twoDModelWindow, &view::TwoDModelWidget::widgetClosed, &*mMainWindow
@@ -124,6 +133,11 @@ bool Runner::interpret(const QString &saveFile, const bool background
 		t.setImmediateMode(background);
 		if (customSpeedFactor >= model::Timeline::normalSpeedFactor) {
 			t.setSpeedFactor(customSpeedFactor);
+		}
+
+		const auto models = twoDModelWindow->model().robotModels();
+		if (!models.isEmpty() && models[0]->info().name() == robotName) {
+			twoDModelWindow->bringToFront();
 		}
 	}
 
