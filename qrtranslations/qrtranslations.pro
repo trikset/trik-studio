@@ -16,15 +16,16 @@ TEMPLATE = subdirs
 
 include(../global.pri)
 
-win32 {
-	system(cmd /C "DEL /s *.qm")
-	system(cmd /C "for /R %G in (*.ts) do lrelease -nounfinished -removeidentical %G")
-        !silent:verboseXCOPY=/f
-        system(cmd.exe /C "xcopy $$system_quote(*.qm) $$system_quote($$system_path($$GLOBAL_DESTDIR/translations/)) /s /e /y /i $$verboseXCOPY")
-}
+QMAKE_LRELEASE_FLAGS = -nounfinished -removeidentical
+TRANSLATIONS = $$files($$PWD/*.ts, true)
+OTHER_FILES = $$TRANSLATIONS
 
-unix {
-        system(mkdir -p $$system_quote($$GLOBAL_DESTDIR/translations/); find $$system_quote($$PWD/) -name '*.qm' -delete)
-        system(find $$system_quote($$PWD) -name '*.ts' -print0 | xargs -0 $$[QT_HOST_BINS]/lrelease -nounfinished -removeidentical)
-        system(find $$system_quote($$PWD/./) -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$system_quote($$GLOBAL_DESTDIR/translations/))
-}
+#TODO: Migrate to 'CONFIG+=lrelease' feature
+# Obsolete but working...
+TRANSLATIONS_DIR=$$system_quote($$GLOBAL_DESTDIR/translations/)
+win32:TRANSLATIONS_DIR=$$system(cygpath -u $$TRANSLATIONS_DIR)
+SHELL_PWD=$$PWD
+win32:SHELL_PWD=$$system(cygpath -u $$SHELL_PWD)
+system(bash -c $$system_quote(find $$shell_quote($$SHELL_PWD) -name '*.ts' -print0 | xargs -0 $$[QT_HOST_BINS/get]/lrelease $$QMAKE_LRELEASE_FLAGS ))
+system(bash -c $$system_quote(find $$shell_quote($$SHELL_PWD/./) -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$TRANSLATIONS_DIR))
+system(bash -c $$system_quote(rsync -vrdmR  --include='*/' --include='*.ini' --exclude='*' ./ $$TRANSLATIONS_DIR))
