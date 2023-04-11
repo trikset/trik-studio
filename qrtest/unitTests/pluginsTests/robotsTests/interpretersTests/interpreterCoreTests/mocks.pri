@@ -15,7 +15,6 @@
 HEADERS += \
 	$$PWD/../../../../mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/mainWindowInterpretersInterfaceMock.h \
 	$$PWD/../../../../mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/mainWindowDockInterfaceMock.h \
-	$$PWD/../../../../mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterMock.h \
 	$$PWD/../../../../mocks/qrgui/mainWindow/projectManager/projectManagementInterfaceMock.h \
 	$$PWD/../../../../mocks/qrgui/view/sceneCustomizationInterfaceMock.h \
 
