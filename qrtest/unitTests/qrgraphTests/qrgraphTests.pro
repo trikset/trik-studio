@@ -15,7 +15,7 @@
 TARGET = qrgraph_unittests
 
 include(../common.pri)
-
+links(qrkernel)
 include(../../../qrgraph/qrgraph.pri)
 
 INCLUDEPATH += $$PWD/../../../
