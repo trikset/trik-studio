@@ -281,12 +281,7 @@ defineTest(copyToDestdir) {
 			FILE = $$FILE/*
 		}
 
-		DDIR = $$quote($$system_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
-		FILE = $$quote($$system_path($$FILE))
-
-		mkpath($$DDIR)
-
-		win32 {
+		win32:if(!isEmpty(NOW)|isEmpty(QMAKE_SH)) {
 			# probably, xcopy needs /s and /e for directories
 			COPY_DIR = "cmd.exe /C xcopy /y /i /s /e "
 			!silent: COPY_DIR += /f
@@ -295,11 +290,16 @@ defineTest(copyToDestdir) {
 			!silent: COPY_DIR += -v
 		}
 
-		COPY_COMMAND = $$COPY_DIR $$FILE $$DDIR
-		isEmpty(NOW) {
-			QMAKE_POST_LINK += $$COPY_COMMAND $$escape_expand(\\n\\t)
+		!isEmpty(NOW):if(!build_pass|isEmpty(BUILDS)) {
+		    DDIR = $$quote($$system_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
+		    FILE = $$quote($$system_path($$FILE))
+		    mkpath($$DDIR)
+		    system($$COPY_DIR $$FILE $$DDIR)
 		} else {
-			system($$COPY_COMMAND)
+		    DDIR = $$quote($$shell_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
+		    FILE = $$quote($$shell_path($$FILE))
+		    QMAKE_POST_LINK += $(MKDIR) $$DDIR $$escape_expand(\\n\\t)
+		    QMAKE_POST_LINK += $$COPY_DIR $$FILE $$DDIR $$escape_expand(\\n\\t)
 		}
 	}
 
