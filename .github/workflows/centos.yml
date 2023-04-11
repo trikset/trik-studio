@@ -1,0 +1,206 @@
+name: Check with CentOS 7
+on:
+  push:
+    branches-ignore:
+      - 'dependabot**'
+    tags:
+      - '*'
+    paths-ignore:
+      - '**/lsan.supp'
+      - 'buildScripts/travis/*'
+      - 'buildScripts/azure/*'
+      - 'buildScripts/docker/*'
+      - 'azure-pipelines.yml'
+      - '.cirrus.yml'
+      - '.travis.yml'
+      - '.mergify.yml'
+      - 'Brewfile'
+      - '**/*.html'
+      - '**/*.txt'
+      - '**/*.md'
+      - 'installer/packages/**/meta/prebuild-win32.sh'
+      - '**/*.dockerfile'
+      - '**/*.Dockerfile'
+      - '**/Dockerfile'
+      - '**/Dockerfile.*'
+      - 'plugins/robots/checker/scripts/build-checker-installer.sh'
+      - '.github/workflows/main.yml'
+  pull_request:
+    branches-ignore:
+      - 'dependabot**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: centos:7
+    defaults:
+      run:
+        shell: bash -l {0} # to force import of ~/.bash_profile
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - qt-version: '5.12'
+            python-minor: 8
+            gcc-version: 11
+            deploy-installer: true
+
+    steps:
+
+      - name: Cancel Previous Workflow Runs
+        uses: n1hility/cancel-previous-runs@v2.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install CentOS packages
+        run: |
+          yum install -y epel-release centos-release-scl
+          yum install -y libusbx-devel curl wget devtoolset-${{ matrix.gcc-version }}-{gcc-c++,make,libasan-devel,libubsan-devel} \
+                         rh-git227-git-core ccache zlib-devel rsync rh-python3${{ matrix.python-minor }}-python-{devel,pip} mesa-libGL-devel systemd-devel fontconfig p7zip which
+
+          yum install -y libxkbcommon-x11 qt5-qtbase-gui #no desire to enumerate all required libraries for QtIFw
+          yum install -y pulseaudio-libs-glib2 # to run TS and 2D-model even with `minimal` platform
+
+          echo "source scl_source enable devtoolset-${{ matrix.gcc-version }} rh-python3${{ matrix.python-minor }} rh-git227" >> ~/.bash_profile
+
+      - name: Prepare environment variables
+        run: |
+            DIR=$(realpath "$GITHUB_WORKSPACE"/../build)
+            echo "BUILD_DIR=$DIR" >> $GITHUB_ENV
+            echo "LC_ALL=en_US.utf8" >> $GITHUB_ENV
+
+      - name: Configure git
+        run: |
+            git --version
+            git config --global core.symlinks true
+            git config --global core.autocrlf false
+
+            #prepare for actions/checkout, otherwise it fails
+            echo "$(dirname $(realpath $(which git)))" >> $GITHUB_PATH
+            echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH" >> $GITHUB_ENV
+            echo "PERL5LIB=$PERL5LIB" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+          submodules: recursive
+
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+
+      - name: Create build directory
+        run: mkdir -vp ${{ env.BUILD_DIR }}
+
+      - name: Install Qt
+        run: |
+            python3 -m pip install -U pip
+            python3 -m pip install aqtinstall
+            aqt install-qt linux desktop ${{ matrix.qt-version }} -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
+            aqt install-tool linux desktop tools_ifw -O /Qt
+            echo "Qt5_Dir=$(ls -1d /Qt/5*/* | head -n 1)" >> $GITHUB_ENV
+            echo "IQTA_TOOLS=/Qt/Tools" >> $GITHUB_ENV
+
+      - name: Install proper version for QtIfw
+        if: false
+        run: |
+
+
+      - name: Update PATH
+        run: |
+             set -xue
+             echo "${Qt5_Dir}/bin" >> $GITHUB_PATH
+
+      - name: Check PATH
+        run: echo PATH="$PATH"
+
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+
+      - name: Check available tools
+        run: |
+             set -xueo pipefail
+             uname -a
+             rsync --version
+             ls "$IQTA_TOOLS/" "$Qt5_Dir/"
+             qmake --version && qmake -query
+             python3 --version
+             which g++
+             g++ --version
+             ccache --version
+
+      - name: QMake
+        timeout-minutes: 1
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            qmake $GITHUB_WORKSPACE/studio.pro CONFIG+=release CONFIG+=tests PYTHON3_VERSION_MINOR=${{ matrix.python-minor }} CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined
+
+      - name: QMake all
+        timeout-minutes: 5
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            make -j $(nproc) qmake_all
+
+      - name: Make all
+        timeout-minutes: 70
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            make -j $(nproc) all
+
+      - name: Unit tests
+        timeout-minutes: 5
+        run: |
+            cd ${{ env.BUILD_DIR }}
+            make -k check TESTARGS="-platform offscreen"
+
+      - name: Download tests
+        run: |
+            curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
+            7za x tests.7z
+            ls $GITHUB_WORKSPACE/testing_small
+
+      - name: Tests
+        id: tests
+        timeout-minutes: 2
+        continue-on-error: true
+        run: |
+            echo "$PATH"
+            echo ------
+            cd ${{ env.BUILD_DIR }}/bin/release
+            env QT_QPA_PLATFORM=minimal python3 "${GITHUB_WORKSPACE}/buildScripts/tests/fieldstest.py" ./2D-model "${GITHUB_WORKSPACE}/testing_small"
+
+      - name: Build installer
+        run: |
+            set -vx
+            cd "$GITHUB_WORKSPACE"/installer
+            export TRIK_PYTHON3_VERSION_MINOR="${{ matrix.python-minor }}"
+            bash -xv ./build-trik-studio.sh "${Qt5_Dir}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
+
+      - name: Push installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: trik-studio-auto-installer-linux-qt${{ matrix.qt-version }}
+          path: |
+            installer/trik-studio*installer*.run
+            installer/trik_studio*.qs
+            installer/reinstall*
+
+      - name: Check errors
+        if: ${{ steps.tests.outcome == 'failure' }}
+        run: |
+            echo Errors occurred in the step Tests
+            exit 1
+
+      - name: Get tag
+        run: echo "CURRENT_TAG=$(git tag --contains HEAD | sort -Vr | head -n1)" >> $GITHUB_ENV
+      - name: Check tag
+        if: ${{ env.CURRENT_TAG != ''}}
+        run: echo "GITHUB_REF_SLUG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
+
+      - name: Deploy installer
+        if: ${{ matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
+        run: |
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+            rsync -v --rsh="ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.run ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-linux-generic-installer.run
