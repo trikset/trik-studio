@@ -25,6 +25,7 @@ on:
       - '**/Dockerfile'
       - '**/Dockerfile.*'
       - 'plugins/robots/checker/scripts/build-checker-installer.sh'
+      - '.github/workflows/centos.yml'
   pull_request:
     branches-ignore:
       - 'dependabot**'
