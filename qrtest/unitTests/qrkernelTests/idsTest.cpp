@@ -101,7 +101,7 @@ TEST(IdsTest, idInputOutputStreamTest) {
 }
 
 // Do not run death tests with ASan in debug build to prevent incorrect reports with stack overflow
-#if !defined(__SANITIZE_ADDRESS__) || defined(__OPTIMIZE__)
+#if !defined(__SANITIZE_ADDRESS__)
 
 TEST(IdsTest, checkGTestDeathTestSupport) {
 	GTEST_FLAG_SET(death_test_style, "threadsafe");
