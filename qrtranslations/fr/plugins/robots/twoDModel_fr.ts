@@ -293,7 +293,7 @@
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+187"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Le programme est terminé, mais la tache n&apos;est pas accomplie.</translation>
     </message>

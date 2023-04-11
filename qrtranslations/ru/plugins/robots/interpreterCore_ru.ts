@@ -197,7 +197,7 @@
         <translation>На главную</translation>
     </message>
     <message>
-        <location line="+241"/>
+        <location line="+246"/>
         <source>Real robot</source>
         <translation>Реальный робот</translation>
     </message>

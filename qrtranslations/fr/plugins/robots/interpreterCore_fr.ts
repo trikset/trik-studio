@@ -283,7 +283,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+241"/>
+        <location line="+246"/>
         <source>Real robot</source>
         <translation>Robot réel</translation>
     </message>
