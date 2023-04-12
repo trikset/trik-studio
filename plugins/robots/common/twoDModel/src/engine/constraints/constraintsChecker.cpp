@@ -285,6 +285,7 @@ void ConstraintsChecker::programStarted()
 	mDefferedSuccessTriggered = false;
 	mFailTriggered = false;
 	if (mParsedSuccessfully) {
+		mVariables.clear();
 		prepareEvents();
 	}
 }
