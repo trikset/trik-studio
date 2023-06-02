@@ -37,7 +37,7 @@
 <context>
     <name>nxt::communication::UsbRobotCommunicationThread</name>
     <message>
-        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/usbRobotCommunicationThread.cpp" line="+159"/>
+        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/usbRobotCommunicationThread.cpp" line="+169"/>
         <source>USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT.</source>
         <translation>Проблема конфигурации USB-устройства. Попробуйте перезапустить TRIK Studio и перевоткнуть NXT в компьютер.</translation>
     </message>
@@ -52,7 +52,7 @@
         <translation>Процедура рукопожатия с NXT не была успешной. Пожалуйста, попробуйте еще раз, если эта ошибка снова появится, обратитесь к разработчикам.</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+17"/>
         <source>Cannot find NXT device. Check robot connected and turned on and try again.</source>
         <translation>Устройство NXT не найдено. Проверьте, что робот включен и подключен к компьютеру и попробуйте еще раз.</translation>
     </message>
