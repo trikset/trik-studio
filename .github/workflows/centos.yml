@@ -57,7 +57,7 @@ jobs:
         run: |
           yum install -y epel-release centos-release-scl
           yum install -y libusbx-devel curl wget devtoolset-${{ matrix.gcc-version }}-{gcc-c++,make,libasan-devel,libubsan-devel} \
-                         rh-git227-git-core ccache zlib-devel rsync rh-python3${{ matrix.python-minor }}-python-{devel,pip} mesa-libGL-devel systemd-devel fontconfig p7zip which
+                         rh-git227-git-core ccache zlib-devel rsync rh-python3${{ matrix.python-minor }}-python-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip which
 
           yum install -y libxkbcommon-x11 qt5-qtbase-gui #no desire to enumerate all required libraries for QtIFw
           yum install -y pulseaudio-libs-glib2 # to run TS and 2D-model even with `minimal` platform
