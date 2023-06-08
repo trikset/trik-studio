@@ -116,15 +116,22 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 
 	// old tool libnxt says that it should be 1
 	const int possibleConfigurations = device_descriptor.bNumConfigurations;
-	bool configurationFound = false;
+	int configurationFound = 0;
 	bool interfaceFound = false;
 	for (int configuration = 0; configuration <= possibleConfigurations; configuration++) {
 		const int err = libusb_set_configuration(mHandle, configuration);
-		if (err < 0 && err != LIBUSB_ERROR_NOT_FOUND && err != LIBUSB_ERROR_INVALID_PARAM) {
+		if (err < 0) {
 			QLOG_ERROR() << "libusb_set_configuration for NXT returned" << err << "for configuration" << configuration;
-		} else if (err >= 0) {
-			configurationFound = true;
-			libusb_config_descriptor *config_descriptor = new libusb_config_descriptor;
+		}
+		if (err >= 0
+				|| err != LIBUSB_ERROR_NOT_FOUND
+				|| err != LIBUSB_ERROR_INVALID_PARAM
+// Seems like a WinUSB driver supports only one configuration
+// and sometimes even complains on libusb_set_configuration API call
+// Probably, this line for LIBUSB_ERROR_NOT_SUPPORTED is redundant or obsolete in 2023
+				|| err != LIBUSB_ERROR_NOT_SUPPORTED) {
+			configurationFound = configuration + 1; // Encode number as boolean value
+			auto config_descriptor = new libusb_config_descriptor;
 			const int err = libusb_get_active_config_descriptor(devices[i], &config_descriptor);
 			if (err >= 0) {
 				const int possibleInterfaces = config_descriptor->bNumInterfaces;
@@ -155,20 +162,20 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 	}
 
 	if (!configurationFound) {
-		QLOG_ERROR() << "No appropriate configuration found among all possible configurations. Giving up.";
-		emit connected(false, tr("USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT."));
+		QLOG_ERROR() << "No appropriate configuration found among all possible configurations. Giving up.";		
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
+		emit connected(false, tr("USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT."));
 		return false;
 	}
 
 	if (!interfaceFound) {
 		QLOG_ERROR() << "No appropriate interface found among possible interfaces. Giving up.";
-		emit connected(false, tr("NXT device is already used by another software."));
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
+		emit connected(false, tr("NXT device is already used by another software."));
 		return false;
 	}
 
@@ -186,14 +193,14 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 	const bool correctFirmwareResponce = !firmwareMode ||
 			(handshakeResponse.length() == 4 && handshakeResponse[2] == '\n' && handshakeResponse[3] == '\r');
 	if (handshakeResponse.isEmpty() || !correctFirmwareResponce) {
-		emit connected(false, tr("NXT handshake procedure failed. Please contact developers."));
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
+		emit connected(false, tr("NXT handshake procedure failed. Please contact developers."));
 		return false;
 	}
 
-	QLOG_INFO() << "Connected successfully!";
+	QLOG_INFO() << "NXTUSB: Connected successfully with configuration" << (configurationFound - 1);
 	emit connected(true, QString());
 
 	if (!firmwareMode) {

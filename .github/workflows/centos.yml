@@ -57,7 +57,7 @@ jobs:
         run: |
           yum install -y epel-release centos-release-scl
           yum install -y libusbx-devel curl wget devtoolset-${{ matrix.gcc-version }}-{gcc-c++,make,libasan-devel,libubsan-devel} \
-                         rh-git227-git-core ccache zlib-devel rsync rh-python3${{ matrix.python-minor }}-python-{devel,pip} mesa-libGL-devel systemd-devel fontconfig p7zip which
+                         rh-git227-git-core ccache zlib-devel rsync rh-python3${{ matrix.python-minor }}-python-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip which
 
           yum install -y libxkbcommon-x11 qt5-qtbase-gui #no desire to enumerate all required libraries for QtIFw
           yum install -y pulseaudio-libs-glib2 # to run TS and 2D-model even with `minimal` platform
@@ -98,7 +98,7 @@ jobs:
             python3 -m pip install -U pip
             python3 -m pip install aqtinstall
             aqt install-qt linux desktop ${{ matrix.qt-version }} -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
-            aqt install-tool linux desktop tools_ifw -O /Qt
+            #            aqt install-tool linux desktop tools_ifw -O /Qt
             echo "Qt5_Dir=$(ls -1d /Qt/5*/* | head -n 1)" >> $GITHUB_ENV
             echo "IQTA_TOOLS=/Qt/Tools" >> $GITHUB_ENV
 
@@ -123,7 +123,8 @@ jobs:
              set -xueo pipefail
              uname -a
              rsync --version
-             ls "$IQTA_TOOLS/" "$Qt5_Dir/"
+             #             ls "$IQTA_TOOLS/"
+             ls "$Qt5_Dir/"
              qmake --version && qmake -query
              python3 --version
              which g++
@@ -174,10 +175,11 @@ jobs:
         run: |
             set -vx
             cd "$GITHUB_WORKSPACE"/installer
-            export TRIK_PYTHON3_VERSION_MINOR="${{ matrix.python-minor }}"
-            bash -xv ./build-trik-studio.sh "${Qt5_Dir}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
+            export TRIK_PYTHON3_VERSION_MINOR=${{ matrix.python-minor }}
+            #            bash -xv ./build-trik-studio.sh "${Qt5_Dir}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
 
       - name: Push installer
+        if: false
         uses: actions/upload-artifact@v2
         with:
           name: trik-studio-auto-installer-linux-qt${{ matrix.qt-version }}
@@ -199,7 +201,7 @@ jobs:
         run: echo "GITHUB_REF_SLUG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
 
       - name: Deploy installer
-        if: ${{ matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
+        if: ${{ false && matrix.deploy-installer && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
         run: |
             install -m 600 -D /dev/null ~/.ssh/id_rsa
             echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
