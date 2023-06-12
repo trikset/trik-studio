@@ -25,6 +25,8 @@ class QRUTILS_EXPORT xmlUtils
 public:
 	static QDomDocument loadDocument(const QString &fileName
 		, QString *errorMessage = nullptr, int *errorLine = nullptr, int *errorColumn = nullptr);
+	static QDomDocument loadDocumentWithConversion(const QString &fileName
+		, QString *errorMessage = nullptr, int *errorLine = nullptr, int *errorColumn = nullptr);
 };
 
 }
