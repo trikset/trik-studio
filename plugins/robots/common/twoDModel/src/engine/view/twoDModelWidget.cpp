@@ -1121,7 +1121,8 @@ const QDomDocument TwoDModelWidget::loadXmlWithConversion(const QString &loadFil
 	QString errorMessage;
 	int errorLine = 0;
 	int errorColumn = 0;
-	const QDomDocument save = utils::xmlUtils::loadDocumentWithConversion(loadFileName, &errorMessage, &errorLine, &errorColumn);
+	const QDomDocument save = utils::xmlUtils::loadDocumentWithConversion(
+			loadFileName, &errorMessage, &errorLine, &errorColumn);
 	if (!errorMessage.isEmpty()) {
 		mModel.errorReporter()->addError(QString("%1:%2: %3")
 				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));

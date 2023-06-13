@@ -37,7 +37,8 @@ QDomDocument xmlUtils::loadDocument(const QString &fileName, QString *errorMessa
 	return doc;
 }
 
-QDomDocument xmlUtils::loadDocumentWithConversion(const QString &loadFileName, QString *errorMessage, int *errorLine, int *errorColumn)
+QDomDocument xmlUtils::loadDocumentWithConversion(const QString &loadFileName
+		, QString *errorMessage, int *errorLine, int *errorColumn)
 {
 	const QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, errorMessage, errorLine, errorColumn);
 	if (errorMessage && !errorMessage->isEmpty()) {
