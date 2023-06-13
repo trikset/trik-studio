@@ -16,7 +16,7 @@ TARGET = patcher
 
 include(../../../../global.pri)
 
-links(qrrepo)
+links(qrrepo qrutils)
 
 includes(qrrepo)
 
