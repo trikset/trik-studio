@@ -14,6 +14,11 @@
 
 QT += widgets network script xml multimedia
 CONFIG += trikqscintilla2
+
+trik_nopython {
+    DEFINES += TRIK_NOPYTHON
+}
+
 includes( \
 		plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \

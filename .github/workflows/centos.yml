@@ -154,6 +154,7 @@ jobs:
         timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
+            export TRIK_PYTHONPATH=$(python3 -c "import sys; import os; print(os.pathsep.join(sys.path))")
             make -k check TESTARGS="-platform offscreen"
 
       - name: Download tests

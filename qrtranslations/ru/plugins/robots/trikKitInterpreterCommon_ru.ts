@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+171"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+172"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
@@ -307,7 +307,7 @@
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+56"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>

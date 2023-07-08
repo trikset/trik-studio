@@ -1,4 +1,4 @@
-qrtest/unitTests/**/target_wrapper.sh
+/**/target_wrapper.sh
 qrtest/unitTests/**/moc_wrapper.sh
 qrtest/unitTests/**/rcc_wrapper.sh
 #Qt autgenerated resource file for executable

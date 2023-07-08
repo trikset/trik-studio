@@ -13,11 +13,11 @@ mergeable:
           enabled: true
         must_include:
           regex: '20[0-9][0-9]\.[0-9]+$'
-      - do: approvals
-        min:
-          count: 1
-        required:
-          assignees: true
+#      - do: approvals
+#        min:
+#          count: 1
+#        required:
+#          assignees: true
 #    error:
 #      - do: checks
 #        status: 'failure'
