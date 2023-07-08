@@ -167,6 +167,7 @@ jobs:
         timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
+            export TRIK_PYTHONPATH=$(cygpath -w "${pythonLocation}/Lib")
             mingw32-make -k check
 
       - name: Prepare all dlls

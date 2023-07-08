@@ -1,6 +1,6 @@
 /**/target_wrapper.sh
-qrtest/unitTests/**/moc_wrapper.sh
-qrtest/unitTests/**/rcc_wrapper.sh
+/**/moc_wrapper.sh
+/**/rcc_wrapper.sh
 #Qt autgenerated resource file for executable
 **/*_resource.rc
 **/object_script.*
