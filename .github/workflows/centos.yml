@@ -95,9 +95,10 @@ jobs:
 
       - name: Install Qt
         run: |
+            set -ueo pipefail
             python3 -m pip install -U pip
             python3 -m pip install aqtinstall
-            aqt install-qt linux desktop ${{ matrix.qt-version }} -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
+            aqt install-qt linux desktop "${{ matrix.qt-version }}.*" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
             #            aqt install-tool linux desktop tools_ifw -O /Qt
             echo "Qt5_Dir=$(ls -1d /Qt/5*/* | head -n 1)" >> $GITHUB_ENV
             echo "IQTA_TOOLS=/Qt/Tools" >> $GITHUB_ENV
@@ -153,6 +154,7 @@ jobs:
         timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
+            export TRIK_PYTHONPATH=$(python3 -c "import sys; import os; print(os.pathsep.join(sys.path))")
             make -k check TESTARGS="-platform offscreen"
 
       - name: Download tests

@@ -38,7 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - qt-version: '5.12.12'
+          - qt-version: '5.12'
             mingw-version: 7.3
             mingw-short-version: 73
             python-version: 3.8
@@ -56,7 +56,7 @@ jobs:
     steps:
 
       - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v2.0
+        uses: n1hility/cancel-previous-runs@v3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -91,13 +91,14 @@ jobs:
             git config --global core.autocrlf true
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           dir: C:\
-          version: ${{matrix.qt-version}}
+          version: '${{matrix.qt-version}}.*'
           arch: win32_mingw${{matrix.mingw-short-version}}
           modules: 'qtscript'
-          tools: 'tools_mingw,${{matrix.mingw-version}}.0,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
+          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats qtwinextras'
+          tools: 'tools_mingw,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
           extra: '--external 7z'
 
       - name: Checkout repository
@@ -166,6 +167,7 @@ jobs:
         timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
+            export TRIK_PYTHONPATH=$(cygpath -w "${pythonLocation}/Lib")
             mingw32-make -k check
 
       - name: Prepare all dlls

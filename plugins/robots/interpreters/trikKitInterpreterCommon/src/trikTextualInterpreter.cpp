@@ -61,10 +61,11 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	using qReal::text::Languages;
 	using trikScriptRunner::ScriptType;
 	Languages::registerLanguage(Languages::javaScript(mScriptRunner.knownMethodNamesFor(ScriptType::JAVASCRIPT)));
-
+#ifndef TRIK_NOPYTHON
 	if (enablePython) {
 		Languages::registerLanguage(Languages::python(mScriptRunner.knownMethodNamesFor(ScriptType::PYTHON)));
 	}
+#endif
 }
 
 trik::TrikTextualInterpreter::~TrikTextualInterpreter()
