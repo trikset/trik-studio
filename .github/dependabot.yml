@@ -6,6 +6,10 @@ updates:
       interval: "monthly"
     reviewers:
       - "iakov"
+    groups:
+      submodules:
+        patterns:
+          - "*" # All submodules updates
 
   - package-ecosystem: "gitsubmodule"
     directory: "/"
@@ -17,3 +21,7 @@ updates:
       - "dependencies"
     reviewers:
       - "iakov"
+    groups:
+      submodules-junior:
+        patterns:
+          - "*" # All submodules updates
