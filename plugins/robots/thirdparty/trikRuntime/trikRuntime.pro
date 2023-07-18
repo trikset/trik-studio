@@ -13,30 +13,41 @@
 # limitations under the License.
 
 TEMPLATE = subdirs
-
 include(../../../../global.pri)
 
 SUBDIRS += \
-	PythonQt \
 	trikKernel \
 	trikNetwork \
 	trikControl \
 	trikHal \
+	trikCommunicator \
 	trikScriptRunner \
+#	translations \
 
-# qslog.file = $$PWD/../../../../thirdparty/qslog/QsLogSharedLibrary.pro
-# qslog.subdir = $$PWD/../../../../thirdparty/qslog/
+tests {
+	SUBDIRS *= tests
+	tests.depends = trikScriptRunner trikCommunicator trikKernel
+	tests.subdir = $$PWD/trikRuntime/tests
+}
 
-PythonQt.subdir = $$PWD/trikRuntime/PythonQt
+!trik_nopython {
+    SUBDIRS += PythonQt
+    trikScriptRunner.depends += PythonQt
+    PythonQt.subdir = $$PWD/trikRuntime/PythonQt
+}
+
 trikScriptRunner.subdir = $$PWD/trikRuntime/trikScriptRunner
+trikCommunicator.subdir = $$PWD/trikRuntime/trikCommunicator
 trikKernel.subdir = $$PWD/trikRuntime/trikKernel
 trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
 trikControl.subdir = $$PWD/trikRuntime/trikControl
+translations.subdir = $$PWD/trikRuntime/translations
 trikHal.subdir = $$PWD/trikRuntime/trikHal
 trikControl.depends = trikKernel trikHal
 trikKernel.depends =
 trikNetwork.depends = trikKernel
-trikScriptRunner.depends = trikControl trikKernel trikNetwork PythonQt
+trikScriptRunner.depends = trikControl trikKernel trikNetwork
 trikHal.depends = trikKernel
-PythonQt.depends =
+trikCommunicator.depends = trikScriptRunner
 
+OTHER_FILES += trikRuntime/trikRuntime.pro

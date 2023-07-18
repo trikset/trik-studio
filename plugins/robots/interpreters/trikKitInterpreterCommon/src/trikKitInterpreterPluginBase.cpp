@@ -64,6 +64,7 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 	mAdditionalPreferences = new TrikAdditionalPreferences({ mRealRobotModel->name() });
 
 	bool enablePython = false;
+#ifndef TRIK_NOPYTHON
 	if (!friendlyKitName().contains("2014")) {
 		if (!qEnvironmentVariableIsEmpty("TRIK_PYTHONPATH")) {
 			enablePython = true;
@@ -82,7 +83,7 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 			}
 		}
 	}
-
+#endif
 	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, enablePython));
 	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged
 			, mTextualInterpreter.data(), &TrikTextualInterpreter::setMailboxHullNumber);
