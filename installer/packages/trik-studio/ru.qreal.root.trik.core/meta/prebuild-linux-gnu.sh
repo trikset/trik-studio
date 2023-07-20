@@ -34,6 +34,9 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 	--hidden-import=time \
 	--hidden-import=os \
 	--hidden-import=types \
+	--hidden-import=pip \
+	--hidden-import=venv \
+	--hidden-import=site \
 	--hidden-import=numpy \
 	"$BIN_DIR"/TRIK.py
 
