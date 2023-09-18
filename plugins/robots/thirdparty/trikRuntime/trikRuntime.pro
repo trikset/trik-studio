@@ -46,7 +46,7 @@ trikHal.subdir = $$PWD/trikRuntime/trikHal
 trikControl.depends = trikKernel trikHal
 trikKernel.depends =
 trikNetwork.depends = trikKernel
-trikScriptRunner.depends = trikControl trikKernel trikNetwork
+trikScriptRunner.depends += trikControl trikKernel trikNetwork
 trikHal.depends = trikKernel
 trikCommunicator.depends = trikScriptRunner
 
