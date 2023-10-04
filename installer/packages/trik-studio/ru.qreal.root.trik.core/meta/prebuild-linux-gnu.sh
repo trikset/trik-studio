@@ -42,10 +42,10 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 
 deactivate # exit python's venv
 
-rsync -avR --remove-source-files dist/trik/./*.so* "$PWD/../data/lib/"
+rsync -avR --remove-source-files dist/trik/_internal/./*.so* "$PWD/../data/lib/"
 # Remove before copying other files
 rm dist/trik/trik
-rsync -avRm --ignore-missing-args --delete --delete-after dist/trik/./* "$PWD/../data/lib/python-runtime"
+rsync -avRm --ignore-missing-args --delete --delete-after dist/trik/_internal/./* "$PWD/../data/lib/python-runtime"
 
 #PythonQt requires for dlopen'ing
 pushd "$PWD/../data/lib" && for f in libpython3.*.so.* ; do ln -svf "$f" "$(echo "$f" | cut -d . -f 1-3)" ; done ; popd

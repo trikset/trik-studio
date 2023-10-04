@@ -44,10 +44,10 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 
 deactivate # exit python's venv
 
-rsync -avR --remove-source-files dist/trik/./{*.dylib,Python} "$BUNDLE_CONTENTS/Lib"
+rsync -avR --remove-source-files dist/trik/_internal/./{*.dylib,Python} "$BUNDLE_CONTENTS/Lib"
 # Remove before copying other files
 rm dist/trik/trik
-rsync -avRm --delete --delete-after dist/trik/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
+rsync -avRm --delete --delete-after dist/trik/_internal/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
 
 #Add Python runtime libraries
 PYTHON_LIBNAME=$("python3.${TRIK_PYTHON3_VERSION_MINOR}-config" --prefix)/Python
