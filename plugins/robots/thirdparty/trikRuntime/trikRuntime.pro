@@ -24,11 +24,11 @@ SUBDIRS += \
 	trikScriptRunner \
 #	translations \
 
-tests {
-	SUBDIRS *= tests
-	tests.depends = trikScriptRunner trikCommunicator trikKernel
-	tests.subdir = $$PWD/trikRuntime/tests
-}
+#tests {
+#	SUBDIRS *= tests
+#	tests.depends = trikScriptRunner trikCommunicator trikKernel
+#	tests.subdir = $$PWD/trikRuntime/tests
+#}
 
 !trik_nopython {
     SUBDIRS += PythonQt

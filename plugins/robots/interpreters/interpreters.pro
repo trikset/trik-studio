@@ -18,11 +18,11 @@ SUBDIRS = \
 	interpreterCore \
 	nullKitInterpreter \
 	nxtKitInterpreter \
-	trikKitInterpreterCommon \
-	trikV62KitInterpreter \
-	ev3KitInterpreter \
+#	trikKitInterpreterCommon \
+#	trikV62KitInterpreter \
+#	ev3KitInterpreter \
 	robotsPlugin \
-	pioneerKitInterpreter \
+#	pioneerKitInterpreter \
 
 CONFIG(trik_retired_features) {
 	SUBDIRS += trikV6KitInterpreter

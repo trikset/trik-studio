@@ -16,16 +16,8 @@ TEMPLATE = subdirs
 
 SUBDIRS = \
 	generatorBase \
-	trikGeneratorBase \
-	trikQtsGeneratorLibrary \
-	trikV62QtsGenerator \
-	trikPythonGeneratorLibrary \
-	trikV62PythonGenerator \
-	nxtGeneratorBase \
+        nxtGeneratorBase \
 	nxtOsekCGenerator \
-	ev3GeneratorBase \
-	ev3RbfGenerator \
-	pioneerLuaGenerator \
 
 trikGeneratorBase.subdir = $$PWD/trik/trikGeneratorBase
 trikQtsGeneratorLibrary.subdir = $$PWD/trik/trikQtsGeneratorLibrary

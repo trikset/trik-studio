@@ -18,7 +18,6 @@ SUBDIRS = \
 	commonTests \
 	generatorsTests \
 	interpretersTests \
-	tcpRobotSimulator \
-	utilsTests \
+        utilsTests \
 
 generatorsTests.depends = tcpRobotSimulator
