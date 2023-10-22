@@ -112,9 +112,11 @@ void SkittleItem::deserialize(const QDomElement &element)
 
 void SkittleItem::saveStartPosition()
 {
-	mStartPosition = pos();
-	mStartRotation = rotation();
-	emit x1Changed(x1());
+	if (this->editable()) {
+		mStartPosition = pos();
+		mStartRotation = rotation();
+		emit x1Changed(x1());
+	}
 }
 
 void SkittleItem::returnToStartPosition()
