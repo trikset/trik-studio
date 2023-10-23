@@ -119,9 +119,11 @@ QPainterPath BallItem::shape() const
 
 void BallItem::saveStartPosition()
 {
-	mStartPosition = pos();
-	mStartRotation = rotation();
-	emit x1Changed(x1());
+	if (this->editable()) {
+		mStartPosition = pos();
+		mStartRotation = rotation();
+		emit x1Changed(x1());
+	}
 }
 
 void BallItem::returnToStartPosition()
