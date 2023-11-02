@@ -222,15 +222,17 @@ bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
 	mCompileState = idle;
 	mSource = fileInfo;
 
-#ifdef Q_OS_WIN
 	mCompileProcess.setWorkingDirectory(path());
+	information(path());
+#ifdef Q_OS_WIN
 	mCompileProcess.start("cmd", { "/c", path("compile.bat")
 			+ " " + fileInfo.completeBaseName()
 			+ " " + fileInfo.absolutePath() });
 #else
-	mCompileProcess.start("sh", { path("compile.sh") , fileInfo.absolutePath()});
+	auto line = "./compile.sh " + fileInfo.absolutePath().toStdString() + " GNUARM_ROOT="+path().toStdString()+"gnuarm/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi";
+	information(line.c_str());
+	mCompileProcess.start("/bin/bash", {"-c", line.c_str()});
 #endif
-
 	information(tr("Uploading program started. Please don't disconnect robot during the process"));
 	return true;
 }

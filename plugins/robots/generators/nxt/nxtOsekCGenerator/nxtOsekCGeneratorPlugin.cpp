@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "nxtOsekCGeneratorPlugin.h"
-
 #include <QtCore/QDir>
 #include <QtCore/QDateTime>
 #include <QtWidgets/QApplication>
@@ -222,13 +221,19 @@ void NxtOsekCGeneratorPlugin::uploadProgram()
 
 void NxtOsekCGeneratorPlugin::checkNxtTools()
 {
+
 	const QDir dir(PlatformInfo::invariantSettingsPath("pathToNxtTools"));
+
 	if (!dir.exists()) {
+
 		mNxtToolsPresent = false;
 	} else {
-		QDir gnuarm(dir.absolutePath() + "/gnuarm/bin");
+		QDir gnuarm(dir.absolutePath() + "/gnuarm");
 		QDir nexttool(dir.absolutePath() + "/nexttool");
 		QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
+
+//		QDir gnuarm("/home/maria/Code/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi");
+
 
 #ifdef Q_OS_WIN
 		QFile compile1(dir.absolutePath() + "/compile.bat");
@@ -238,6 +243,7 @@ void NxtOsekCGeneratorPlugin::checkNxtTools()
 #else
 		QFile compile(dir.absolutePath() + "/compile.sh");
 		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists() && compile.exists();
+
 #endif
 	}
 }
