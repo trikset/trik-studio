@@ -23,7 +23,8 @@ GetButtonCodeGenerator::GetButtonCodeGenerator(const qrRepo::RepoApi &repo
 		, const qReal::Id &id
 		, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "wait/buttonCode.t"
-			, { Binding::createDirect("@@VARIABLE@@", "Variable")
+			, { Binding::createConverting("@@VARIABLE@@", "Variable"
+						, customizer.factory()->functionBlockConverter(id, "Variable"))
 				, Binding::createConverting("@@WAIT@@", "Wait"
 						, customizer.factory()->boolPropertyConverter(id, "Wait", false)) }
 			, parent)
