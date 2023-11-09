@@ -27,6 +27,7 @@
 #include <thirdparty/runExtensions.h>
 #include <nxtKit/communication/nxtCommandConstants.h>
 #include <nxtKit/communication/usbRobotCommunicationThread.h>
+#include <QOperatingSystemVersion>
 
 using namespace nxt;
 using namespace qReal;
@@ -224,15 +225,24 @@ bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
 
 	mCompileProcess.setWorkingDirectory(path());
 	information(path());
-#ifdef Q_OS_WIN
-	mCompileProcess.start("cmd", { "/c", path("compile.bat")
-			+ " " + fileInfo.completeBaseName()
-			+ " " + fileInfo.absolutePath() });
-#else
-	auto line = "./compile.sh " + fileInfo.absolutePath().toStdString() + " GNUARM_ROOT="+path().toStdString()+"gnuarm/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi";
-	information(line.c_str());
-	mCompileProcess.start("/bin/bash", {"-c", line.c_str()});
-#endif
+
+	switch(QOperatingSystemVersion::currentType()) {
+	default:
+		break;
+	case QOperatingSystemVersion::OSType::Windows: {
+
+		mCompileProcess.start("cmd", { "/c", path("compile.bat")
+									   + " " + fileInfo.completeBaseName()
+									   + " " + fileInfo.absolutePath() });
+	}
+		break;
+	case QOperatingSystemVersion::OSType::Unknown: {
+		auto line = "./compile.sh " + fileInfo.absolutePath() + " . "+path() + "gnuarm/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi";
+		information(line);
+		mCompileProcess.start("/bin/bash", {"-c", line});
+	}
+		break;
+	}
 	information(tr("Uploading program started. Please don't disconnect robot during the process"));
 	return true;
 }

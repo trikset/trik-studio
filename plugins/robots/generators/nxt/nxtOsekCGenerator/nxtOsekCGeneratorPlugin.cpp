@@ -20,7 +20,9 @@
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/platformInfo.h>
 #include <qrutils/singleton.h>
+#include <QOperatingSystemVersion>
 
+#include "QsLog.h"
 #include "nxtOsekCMasterGenerator.h"
 
 using namespace nxt::osekC;
@@ -223,27 +225,30 @@ void NxtOsekCGeneratorPlugin::checkNxtTools()
 {
 
 	const QDir dir(PlatformInfo::invariantSettingsPath("pathToNxtTools"));
+	const QDir gnuarm(dir.absolutePath() + "/gnuarm");
+	const QDir nexttool(dir.absolutePath() + "/nexttool");
+	const QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
 
-	if (!dir.exists()) {
-
+	if (!dir.exists() || !gnuarm.exists() || !nexttool.exists() || !nxtOSEK.exists()) {
 		mNxtToolsPresent = false;
+		QLOG_ERROR() << "Missing" << dir.absolutePath() << "or mandatory subdirectory" << dir.entryList(QDir::Filter::NoFilter, QDir::SortFlag::DirsFirst | QDir::SortFlag::Name);
 	} else {
-		QDir gnuarm(dir.absolutePath() + "/gnuarm");
-		QDir nexttool(dir.absolutePath() + "/nexttool");
-		QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
+		switch(QOperatingSystemVersion::currentType()) {
+		default:
+			break;
 
-//		QDir gnuarm("/home/maria/Code/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi");
-
-
-#ifdef Q_OS_WIN
-		QFile compile1(dir.absolutePath() + "/compile.bat");
-		QFile compile2(dir.absolutePath() + "/compile.sh");
-		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists()
-				&& compile1.exists() && compile2.exists();
-#else
-		QFile compile(dir.absolutePath() + "/compile.sh");
-		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists() && compile.exists();
-
-#endif
+		case QOperatingSystemVersion::OSType::Windows: {
+			QFile compile1(dir.absolutePath() + "/compile.bat");
+			QFile compile2(dir.absolutePath() + "/compile.sh");
+			mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists()
+					&& compile1.exists() && compile2.exists();
+		}
+			break;
+		case QOperatingSystemVersion::OSType::Unknown: {
+			QFile compile(dir.absolutePath() + "/compile.sh");
+			mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists() && compile.exists();
+		}
+			break;
+		}
 	}
 }
