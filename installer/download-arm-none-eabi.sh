@@ -2,7 +2,7 @@
 
 help()
 {
-    echo "Usage: download-arm-none-eabi.sh [ -p | --path ]
+    echo "Usage: download-arm-none-eabi.sh [ -p | --path ] /path/to/dir
                [ -h | --help  ]"
     exit 0
 }
@@ -36,7 +36,7 @@ fi
 
 case "$1" in
 -p | --path )
-    PATH=$1
+    PATH=$2
     if [[ ! -d "$PATH" ]]
     then
         echo "$PATH doesn't exists on your filesystem."
