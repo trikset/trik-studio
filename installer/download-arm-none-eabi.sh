@@ -1,5 +1,5 @@
 #!/usr/bin/bash -x
-
+sudo apt install wget
 help()
 {
     echo "Usage: download-arm-none-eabi.sh [ -p | --path ] /path/to/dir
