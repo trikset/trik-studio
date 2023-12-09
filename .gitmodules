@@ -25,7 +25,8 @@
 	url = https://bitbucket.org/codeimproved/qslog.git
 [submodule "installer/nxt-tools"]
 	path = installer/nxt-tools
-	url = https://github.com/trikset/nxt-tools
+	url = https://github.com/zhitm/nxt-tools.git
+	branch = main
 [submodule "trik-checkapp"]
 	path = thirdparty/checkapp/checkapp
 	url = https://github.com/trikset/trik-checkapp
