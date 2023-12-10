@@ -42,6 +42,7 @@ Create and go to the folder where you want to build the project:
 4. **Configuring the environment**.
 Use the `qmake` command to configure the environment, set various configuration flags and generate build files. You need to add to command parameters the main configuration file - **studio.pro**. This file usually locates in root directory of TRIK Studio project. Also you need to add **PYTHON_PATH** with the path to Python version (that you added to PATH in step 1) to the command parameters.
 
+
 Here is an example of configuration, where TRIK Studio is located in folder **C:\trik-studio**:
    ```
    qmake C:\trik-studio\studio.pro -spec win32-g++ "CONFIG+=qtquickcompiler" CONFIG+=no-sanitizers CONFIG+=force_debug_info PYTHON_PATH=C:\Python\Python310-32 CONFIG+=tests && mingw32-make qmake_all
