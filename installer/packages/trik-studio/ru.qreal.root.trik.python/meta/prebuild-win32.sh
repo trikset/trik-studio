@@ -1,0 +1,32 @@
+#!/bin/bash
+set -o nounset
+set -o errexit
+
+cd "$(dirname "$0")"
+
+rsync -a "$BIN_DIR"/robots-trik-python-generator-library.dll                              "$PWD"/../data/
+rsync -a "$BIN_DIR"/plugins/tools/kitPlugins/robots-trik-v62-python-generator.dll         "$PWD"/../data/plugins/tools/kitPlugins/
+
+unix_path="$BIN_DIR"/python3.dll
+win_path=$(cygpath -w "$unix_path")
+python_ver=$(powershell -command "(Get-Item $win_path).VersionInfo.ProductVersion")
+cache_dir="$(cygpath "$APPDATA")"/"$PRODUCT"/installer_cache
+PY_BIT=amd64
+if file -b "$BIN_DIR"/trik-studio | grep -q "^PE32 " ; then PY_BIT=win32 ; fi
+mkdir -p "$cache_dir"
+cd "$cache_dir"
+
+if [ ! -d "PYTHON_$python_ver" ]
+then
+# download python
+echo Download python ver "$python_ver"
+python_zip="https://www.python.org/ftp/python/$python_ver/python-$python_ver-embed-$PY_BIT.zip"
+
+curl -L -s -o python.zip "$python_zip"
+unzip -o python.zip -d "PYTHON_$python_ver"
+rm -f python.zip
+# end of download python
+fi
+
+mkdir -p "$(dirname "$0")/../data/python-runtime/"
+rsync -avR "$cache_dir"/"PYTHON_$python_ver"/./{python*.zip,unicodedata.pyd} "$(dirname "$0")/../data/python-runtime/"
