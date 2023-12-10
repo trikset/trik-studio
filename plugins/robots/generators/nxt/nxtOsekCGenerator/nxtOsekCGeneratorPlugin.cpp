@@ -38,6 +38,9 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	, mMasterGenerator(nullptr)
 	, mCommunicator(utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
 {
+    const QString key = "pathToArmNoneEabi";
+    const QString defaultPath = QDir(PlatformInfo::invariantSettingsPath("pathToNxtTools")).absolutePath()+"/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi";
+    qReal::SettingsManager::setValue(key, defaultPath);
 	initActions();
 	initHotKeyActions();
 }
@@ -96,8 +99,8 @@ void NxtOsekCGeneratorPlugin::onCurrentDiagramChanged(const TabInfo &info)
 
 void NxtOsekCGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configurator)
 {
-	RobotsGeneratorPluginBase::init(configurator);
 
+    RobotsGeneratorPluginBase::init(configurator);
 	mFlashTool.reset(new NxtFlashTool(*mMainWindowInterface->errorReporter(), *mCommunicator));
 	connect(&*mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
 }

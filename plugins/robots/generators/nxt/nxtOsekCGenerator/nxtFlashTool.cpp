@@ -224,20 +224,24 @@ bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
 	mSource = fileInfo;
 
 	mCompileProcess.setWorkingDirectory(path());
-	information(path());
+    information(path());
 
 	switch(QOperatingSystemVersion::currentType()) {
 	default:
 		break;
 	case QOperatingSystemVersion::OSType::Windows: {
-
-		mCompileProcess.start("cmd", { "/c", path("compile.bat")
-									   + " " + fileInfo.completeBaseName()
-									   + " " + fileInfo.absolutePath() });
+        auto pathToNxtTools = path().replace("\\", "/");
+        auto line = path("compile.bat")
+                    + " " + fileInfo.completeBaseName()
+                    + " " + fileInfo.absolutePath() + " " + pathToNxtTools+"gnuarm";
+        information(line);
+        mCompileProcess.start("cmd", { "/c", line});
 	}
 		break;
 	case QOperatingSystemVersion::OSType::Unknown: {
-		auto line = "./compile.sh " + fileInfo.absolutePath() + " . "+path() + "gnuarm/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi";
+
+        auto line = "./compile.sh . " + fileInfo.absolutePath() + " GNUARM_ROOT="+SettingsManager::value("pathToArmNoneEabi").toString();
+
 		information(line);
 		mCompileProcess.start("/bin/bash", {"-c", line});
 	}

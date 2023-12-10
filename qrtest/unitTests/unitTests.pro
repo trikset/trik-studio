@@ -16,7 +16,8 @@ TEMPLATE = subdirs
 
 SUBDIRS = \
 	exampleTests \
-        qrguiTests \
+#	pluginsTests \
+	qrguiTests \
 	qrkernelTests \
 	qrgraphTests \
 	qrrepoTests \

@@ -101,6 +101,7 @@ public:
 
 	void setBackgroundMode();
 	void bringToFront();
+	void resetDrawAction();
 
 	QString editorId() const override;
 	bool supportsZooming() const override;

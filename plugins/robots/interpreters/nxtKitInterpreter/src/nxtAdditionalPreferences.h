@@ -43,8 +43,10 @@ private slots:
 private:
 	QString selectedPortName() const;
 
+    void setTextOnGeneratorLabel();
 	Ui::NxtAdditionalPreferences *mUi;
-	const QString mBluetoothRobotName;
+    const QString mBluetoothRobotName;
+
 };
 
 }

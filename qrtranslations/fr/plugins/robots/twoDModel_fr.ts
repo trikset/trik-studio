@@ -301,7 +301,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+190"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -728,7 +728,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>

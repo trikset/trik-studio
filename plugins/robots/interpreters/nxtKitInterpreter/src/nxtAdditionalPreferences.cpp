@@ -14,9 +14,10 @@
 
 #include "nxtAdditionalPreferences.h"
 #include "ui_nxtAdditionalPreferences.h"
-
 #include <qrkernel/settingsManager.h>
 #include <utils/widgets/comPortPicker.h>
+#include "QsLog.h"
+
 
 using namespace nxt;
 using namespace qReal;
@@ -27,7 +28,9 @@ NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName,
 	, mBluetoothRobotName(realRobotName)
 {
 	mUi->setupUi(this);
-	mUi->robotImagePicker->configure("nxtRobot2DImage", tr("2D robot image:"));
+    mUi->robotImagePicker->configure("nxtRobot2DImage", tr("2D robot image:"));
+    mUi->compilerPicker->configure("pathToArmNoneEabi", tr("Path to arm-none-eabi:"));
+    setTextOnGeneratorLabel();
 	connect(mUi->manualComPortCheckbox, &QCheckBox::toggled
 			, this, &NxtAdditionalPreferences::manualComPortCheckboxChecked);
 }
@@ -37,18 +40,32 @@ NxtAdditionalPreferences::~NxtAdditionalPreferences()
 	delete mUi;
 }
 
+
+void NxtAdditionalPreferences::setTextOnGeneratorLabel(){
+    if (!mUi->compilerPicker->isSavedDirExist()){
+        mUi->generatorLabel->setText("WARNING: Current directory doesn't exist.");
+    }
+    else {
+        mUi->generatorLabel->setText("Current directory exist.");
+    }
+}
+
 void NxtAdditionalPreferences::save()
 {
 	SettingsManager::setValue("NxtBluetoothPortName", selectedPortName());
 	SettingsManager::setValue("NxtManualComPortCheckboxChecked", mUi->manualComPortCheckbox->isChecked());
 	mUi->robotImagePicker->save();
+    mUi->compilerPicker->save();
+    setTextOnGeneratorLabel();
 	emit settingsChanged();
 }
 
 void NxtAdditionalPreferences::restoreSettings()
 {
 	ui::ComPortPicker::populate(*mUi->comPortComboBox, "NxtBluetoothPortName");
-	mUi->robotImagePicker->restore();
+    mUi->robotImagePicker->restore();
+    mUi->compilerPicker->restore();
+    setTextOnGeneratorLabel();
 
 	if (mUi->comPortComboBox->count() == 0) {
 		mUi->comPortComboBox->hide();
@@ -72,7 +89,10 @@ void NxtAdditionalPreferences::restoreSettings()
 
 void NxtAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)
 {
-	mUi->bluetoothSettingsGroupBox->setVisible(robotModel->name() == mBluetoothRobotName);
+    QLOG_DEBUG() << robotModel->name();
+    mUi->bluetoothSettingsGroupBox->setVisible(robotModel->name() == mBluetoothRobotName);
+    mUi->generatorSettingsGroupBox->setVisible(robotModel->name() == "NxtOsekCGeneratorRobotModel");
+
 }
 
 void NxtAdditionalPreferences::manualComPortCheckboxChecked(bool state)
