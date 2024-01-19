@@ -21,6 +21,12 @@
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <twoDModel/engine/model/timeline.h>
 #include <trikControl/utilities.h>
+#include <QsLog.h>
+
+#define NOTIFY_DISABLED(methodName) do {\
+	QLOG_WARN() << "Script tried to use disabled method:" << #methodName;  \
+	(Q_EMIT textInStdOut(tr("'%1' is disabled\n").arg(#methodName))); \
+	} while(0)
 
 TwoDExecutionControl::TwoDExecutionControl(
 		trik::TrikBrick &brick
@@ -117,21 +123,23 @@ void TwoDExecutionControl::system(const QString &command, bool synchronously)
 {
 	Q_UNUSED(command)
 	Q_UNUSED(synchronously)
-	emit textInStdOut("system is disabled\n");
+	NOTIFY_DISABLED(system);
 }
 
 void TwoDExecutionControl::writeToFile(const QString &file, const QString &text)
 {
 	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
-	out.open(QIODevice::WriteOnly | QIODevice::Append);
-	out.write(text.toUtf8());
+	Q_UNUSED(out)
+	Q_UNUSED(text)
+	NOTIFY_DISABLED(writeToFile);
 }
 
 void TwoDExecutionControl::writeData(const QString &file, const QVector<uint8_t> &bytes)
 {
 	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
-	out.open(QIODevice::WriteOnly | QIODevice::Append);
-	out.write(reinterpret_cast<const char*>(bytes.data()), bytes.size());
+	Q_UNUSED(out)
+	Q_UNUSED(bytes)
+	NOTIFY_DISABLED(writeData);
 }
 
 QStringList TwoDExecutionControl::readAll(const QString &file) const
@@ -142,7 +150,8 @@ QStringList TwoDExecutionControl::readAll(const QString &file) const
 void TwoDExecutionControl::removeFile(const QString &file)
 {
 	QFile out(mBrick.getCurrentDir().absoluteFilePath(file));
-	out.remove();
+	Q_UNUSED(out)
+	NOTIFY_DISABLED(removeFile);
 }
 
 int TwoDExecutionControl::timeInterval(int packedTimeLeft, int packedTimeRight)
