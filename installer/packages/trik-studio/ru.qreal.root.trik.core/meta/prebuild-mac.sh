@@ -44,7 +44,7 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 
 deactivate # exit python's venv
 
-rsync -avR --remove-source-files dist/trik/_internal/./{*.dylib,Python} "$BUNDLE_CONTENTS/Lib"
+rsync -avR --remove-source-files dist/trik/_internal/./{*.dylib} "$BUNDLE_CONTENTS/Lib"
 # Remove before copying other files
 rm dist/trik/trik
 rsync -avRm --delete --delete-after dist/trik/_internal/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
@@ -52,7 +52,7 @@ rsync -avRm --delete --delete-after dist/trik/_internal/./* "$BUNDLE_CONTENTS/Li
 #Add Python runtime libraries
 PYTHON_LIBNAME=$("python3.${TRIK_PYTHON3_VERSION_MINOR}-config" --prefix)/Python
 #rsync -a "$PYTHON_LIBNAME" "$BUNDLE_CONTENTS/Lib"
-find "$BUNDLE_CONTENTS/Lib" -type f -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/Python
+find "$BUNDLE_CONTENTS/Lib" -type f -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/python-runtime/Python
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libtrikMetamodel.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-qts-generator-library.1.0.0.dylib"
