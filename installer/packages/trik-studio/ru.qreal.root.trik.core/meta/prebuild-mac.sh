@@ -44,7 +44,7 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 
 deactivate # exit python's venv
 
-rsync -avR --remove-source-files --ignore-missing-args dist/trik/_internal/./*.dylib "$BUNDLE_CONTENTS/Lib"
+rsync -avR --remove-source-files dist/trik/_internal/./*.dylib "$BUNDLE_CONTENTS/Lib"
 # Remove before copying other files
 rm dist/trik/trik
 rsync -avRm --delete --delete-after dist/trik/_internal/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
