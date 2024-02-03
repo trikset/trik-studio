@@ -201,14 +201,10 @@ void QScintillaTextEdit::setDefaultSettings()
 	setMatchedBraceBackgroundColor(Qt::yellow);
 	setUnmatchedBraceForegroundColor(Qt::blue);
 
-	// EOL symbol
-#if defined Q_OS_LINUX
+	// EOL symbol, always use LF for all platforms
+	// Because TRIK robot is linux based
+	// we hope other tools (for NXT and EV3) accept it
 	setEolMode(QsciScintilla::EolUnix);
-#elif defined Q_OS_WIN
-	setEolMode(QsciScintilla::EolWindows);
-#elif defined Q_OS_MAC
-	setEolMode(QsciScintilla::EolMac);
-#endif
 
 	// Input encoding
 	setUtf8(true);
