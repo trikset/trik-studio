@@ -161,7 +161,9 @@ void RobotsBlockParser::addIntrinsicFuctions()
 			, std::function<qreal(qreal)> const &function)
 	{
 		add1aryFunction(name, new types::Float, new types::Float
-				, [function](const QVariant &arg) { return function(arg.toReal()); });
+				, [function](const QVariant &arg) {
+			return QString::number(function(arg.toReal()), 'f').toDouble();
+		});
 	};
 
 	const auto addIntegerFunction = [add1aryFunction] (const QString &name
