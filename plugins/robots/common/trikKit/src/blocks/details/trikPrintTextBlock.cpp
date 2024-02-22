@@ -30,9 +30,7 @@ void TrikPrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display
 	const int x = eval<int>("XCoordinateText");
 	const int y = eval<int>("YCoordinateText");
 	const int fontSize = eval<int>("FontSize");
-	const QString result = boolProperty("Evaluate")
-			? QString::number(QString::number(eval<qreal>("PrintText"), 'f', 6).toDouble())
-			: stringProperty("PrintText");
+	const QString result = boolProperty("Evaluate") ? eval<QString>("PrintText") : stringProperty("PrintText");
 	const bool redraw = boolProperty("Redraw");
 
 	if (!errorsOccured()) {
