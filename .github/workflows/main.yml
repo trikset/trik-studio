@@ -110,8 +110,8 @@ jobs:
       - name: Install proper version for QtIfw
         run: |
              cd "$RUNNER_TEMP"
-             curl -Lo qtifw.exe "https://download.qt.io/official_releases/qt-installer-framework/4.2.0/QtInstallerFramework-windows-x86-4.2.0.exe"
-             export TRIK_QT_INSTALL_DIR="${IQTA_TOOLS}/QtInstallerFramework/4.2.0"
+             curl -Lo qtifw.exe "https://download.qt.io/official_releases/qt-installer-framework/4.6.1/QtInstallerFramework-windows-x64-4.6.1.exe"
+             export TRIK_QT_INSTALL_DIR="${IQTA_TOOLS}/QtInstallerFramework/4.6.1"
              mkdir -p $TRIK_QT_INSTALL_DIR
              "$RUNNER_TEMP"/qtifw.exe --verbose --no-force-installations --show-virtual-components --script "${GITHUB_WORKSPACE}\\plugins\\robots\\thirdparty\\trikRuntime\\trikRuntime\\docker\\qt_scriptinstall.qs"
              rm -rf "$TRIK_QT_INSTALL_DIR"/{doc,examples,Uninstaller.app,Uninstaller.dat}
@@ -201,7 +201,7 @@ jobs:
       - name: Build installer
         run: |
             cd $GITHUB_WORKSPACE/installer
-            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.2.0/bin" "${{ env.BUILD_DIR }}"
+            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.6.1/bin" "${{ env.BUILD_DIR }}"
 
       - name: Push installer
         uses: actions/upload-artifact@v2
