@@ -1250,7 +1250,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="obsolete">Добавить элемент</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+143"/>
+        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+145"/>
         <source>Add Entity</source>
         <translation>Добавить сущность</translation>
     </message>

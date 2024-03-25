@@ -41,6 +41,8 @@ void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &
 		, const QString &diagramFriendlyName
 		, bool sort)
 {
+	qDeleteAll(mPaletteItems);
+	qDeleteAll(mPaletteElements);
 	mPaletteItems.clear();
 	mPaletteElements.clear();
 	mElementsSet.clear();
