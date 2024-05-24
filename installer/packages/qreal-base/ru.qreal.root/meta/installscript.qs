@@ -53,56 +53,6 @@ var directoryNotEmpty = [
 		// "Каталог установки должен быть пустым."];
 		"\u041a\u0430\u0442\u0430\u043b\u043e\u0433 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438 \u0434\u043e\u043b\u0436\u0435\u043d \u0431\u044b\u0442\u044c \u043f\u0443\u0441\u0442\u044b\u043c."];
 
-
-
-// Constructor
-function Component()
-{
-	// Executable names must be lower-case product name with hyphens instead of spaces
-	installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
-	installer.linkExtension = installer.value("os") === "win" ? ".lnk" : "";
-	installer.execExtension = installer.value("os") === "win" ? ".vbs" : installer.value("os") === "mac" ? ".app" : "";
-	installer.maintenanceName = "maintenance" + (installer.value("os") === "win" ? ".exe" : installer.execExtension);
-	installer.shouldDeinstallPrevious = false;
-
-	component.loaded.connect(this, Component.prototype.installerLoaded);
-	installer.setDefaultPageVisible(QInstaller.TargetDirectory, false);
-}
-
-Component.prototype.createOperations = function()
-{
-	if (installer.shouldDeinstallPrevious) {
-		component.addOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
-		if (installer.value("os") == "win") {
-			var timeoutBatch = "ping localhost -n 4 > nul";
-			component.addOperation("Execute", "cmd", "/c", timeoutBatch);
-			var joinBatch = "for /l %N in () do (tasklist | find \"cscript\" >nul && ping localhost -n 2 >nul || exit 0) ";
-			component.addOperation("Execute", "cmd", "/c", joinBatch);
-		}
-	}
-	component.createOperations();
-	if (installer.value("os") == "win") {
-		component.addOperation("CreateShortcut"
-				, "@TargetDir@\\" + installer.executableName + installer.execExtension
-				, "@StartMenuDir@\\@ProductName@ @Version@" + installer.linkExtension
-				,  "iconPath=@TargetDir@\\trik-studio.ico");
-		component.addOperation("CreateShortcut"
-				, "@TargetDir@\\" + installer.maintenanceName
-				, "@StartMenuDir@\\Uninstall @ProductName@" + installer.linkExtension);
-		component.addOperation("Execute"
-				, "@TargetDir@\\" + installer.executableName + ".cmd"
-				, "--clear-conf");
-	} else if (installer.value("os") == "mac") {
-		component.addOperation("Execute"
-				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--clear-conf");
-	} else {
-		component.addOperation("Execute"
-				, "bash"
-				, "-c"
-				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@/" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
-	}
-}
-
 // Utility function like QString QDir::toNativeSeparators(const QString & pathName)
 var Dir = new function () {
 	this.toNativeSeparator = function (path) {
@@ -175,6 +125,53 @@ var Dir = new function () {
 		return "";
 	}
 };
+
+
+// Constructor
+function Component()
+{
+	// Executable names must be lower-case product name with hyphens instead of spaces
+	installer.executableName = installer.value("ProductName").toLowerCase().replace(/\s/g, "-");
+	installer.linkExtension = installer.value("os") === "win" ? ".lnk" : "";
+	installer.execExtension = installer.value("os") === "win" ? ".vbs" : installer.value("os") === "mac" ? ".app" : "";
+	installer.maintenanceName = "maintenance" + (installer.value("os") === "win" ? ".exe" : installer.execExtension);
+	installer.shouldDeinstallPrevious = false;
+
+	component.loaded.connect(this, Component.prototype.installerLoaded);
+	installer.setDefaultPageVisible(QInstaller.TargetDirectory, false);
+
+	installer.installationStarted.connect(function() {
+            if (installer.shouldDeinstallPrevious) {
+                installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
+		}
+	});
+}
+
+Component.prototype.createOperations = function()
+{
+	component.createOperations();
+	if (installer.value("os") == "win") {
+		component.addOperation("CreateShortcut"
+				, "@TargetDir@\\" + installer.executableName + installer.execExtension
+				, "@StartMenuDir@\\@ProductName@ @Version@" + installer.linkExtension
+				,  "iconPath=@TargetDir@\\trik-studio.ico");
+		component.addOperation("CreateShortcut"
+				, "@TargetDir@\\" + installer.maintenanceName
+				, "@StartMenuDir@\\Uninstall @ProductName@" + installer.linkExtension);
+		component.addOperation("Execute"
+				, "@TargetDir@\\" + installer.executableName + ".cmd"
+				, "--clear-conf");
+	} else if (installer.value("os") == "mac") {
+		component.addOperation("Execute"
+				, "@TargetDir@/" + installer.value("ProductName") + ".app/Contents/MacOS/" + installer.executableName, "--clear-conf");
+	} else {
+		component.addOperation("Execute"
+				, "bash"
+				, "-c"
+				, "LD_LIBRARY_PATH=@TargetDir@ @TargetDir@/" + installer.executableName + installer.execExtension + " --platform minimal --clear-conf");
+	}
+}
+
 
 // Called as soon as the component was loaded
 Component.prototype.installerLoaded = function()
