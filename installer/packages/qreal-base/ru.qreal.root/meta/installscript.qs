@@ -141,8 +141,8 @@ function Component()
 	installer.setDefaultPageVisible(QInstaller.TargetDirectory, false);
 
 	installer.installationStarted.connect(function() {
-            if (installer.shouldDeinstallPrevious) {
-                installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
+		if (installer.shouldDeinstallPrevious) {
+        		installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
 		}
 	});
 }
