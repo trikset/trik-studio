@@ -39,17 +39,17 @@ jobs:
       matrix:
         include:
           - qt-version: '5.12'
-            mingw-version: 7.3
-            mingw-short-version: 73
-            python-version: 3.10
-            mingw-bitness: 32
+            mingw-version: '7.3'
+            mingw-short-version: '73'
+            python-version: '3.10'
+            mingw-bitness: '32'
  #           deploy-installer: true
 
           - qt-version: '5.15'
-            mingw-version: 8.1
-            mingw-bitness: 64
-            mingw-short-version: 81
-            python-version: 3.10
+            mingw-version: '8.1'
+            mingw-bitness: '64'
+            mingw-short-version: '81'
+            python-version: '3.10'
             deploy-installer: true
 
 
