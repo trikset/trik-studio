@@ -39,15 +39,19 @@ jobs:
       matrix:
         include:
           - qt-version: '5.12'
-            mingw-version: 7.3
-            mingw-short-version: 73
-            python-version: 3.8
+            mingw-version: '7.3'
+            mingw-short-version: '73'
+            python-version: '3.8'
+            mingw-bitness: '64'
             deploy-installer: true
 
-#          - qt-version: '5.15.2'
-#            mingw-version: 8.1
-#            mingw-short-version: 81
-#            python-version: 3.8
+          - qt-version: '5.15'
+            mingw-version: '8.1'
+            mingw-bitness: '64'
+            mingw-short-version: '81'
+            python-version: '3.8'
+#            deploy-installer: true
+
 
     defaults:
       run:
@@ -64,12 +68,12 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           path-type: inherit
-          msystem: MINGW32
+          msystem: MINGW${{ matrix.mingw-bitness }}
 
       - name: Download packages to msys2
         run: |
-            ARCH=32
-            PLATFORM=i686
+            ARCH=${{ matrix.mingw-bitness }}
+            PLATFORM=${{ matrix.mingw-bitness == '32' && 'i686' || 'x86_64' }}
             pacman --verbose --noconfirm -S msys/zlib-devel dos2unix ccache rsync unzip openssh mingw$ARCH/mingw-w64-$PLATFORM-libzip mingw$ARCH/mingw-w64-$PLATFORM-libusb mingw$ARCH/mingw-w64-$PLATFORM-zlib mingw$ARCH/mingw-w64-$PLATFORM-pkg-config
 
       - name: Inject slug/short variables
@@ -91,14 +95,16 @@ jobs:
             git config --global core.autocrlf true
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           dir: C:\
-          version: '${{matrix.qt-version}}.*'
-          arch: win32_mingw${{matrix.mingw-short-version}}
+          version: '${{matrix.qt-version}}'
+          arch: win${{ matrix.mingw-bitness }}_mingw${{matrix.mingw-short-version}}
           modules: 'qtscript'
           archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats qtwinextras'
-          tools: 'tools_mingw,qt.tools.win32_mingw${{matrix.mingw-short-version}}0'
+          tools: 'tools_mingw,qt.tools.win${{ matrix.mingw-bitness }}_mingw${{matrix.mingw-short-version}}0 tools_ifw'
+          add-tools-to-path: true
+          cache: true
           extra: '--external 7z'
 
       - name: Checkout repository
@@ -107,29 +113,12 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Install proper version for QtIfw
-        run: |
-             cd "$RUNNER_TEMP"
-             curl -Lo qtifw.exe "https://download.qt.io/official_releases/qt-installer-framework/4.6.1/QtInstallerFramework-windows-x64-4.6.1.exe"
-             export TRIK_QT_INSTALL_DIR="${IQTA_TOOLS}/QtInstallerFramework/4.6.1"
-             mkdir -p $TRIK_QT_INSTALL_DIR
-             "$RUNNER_TEMP"/qtifw.exe --verbose --no-force-installations --show-virtual-components --script "${GITHUB_WORKSPACE}\\plugins\\robots\\thirdparty\\trikRuntime\\trikRuntime\\docker\\qt_scriptinstall.qs"
-             rm -rf "$TRIK_QT_INSTALL_DIR"/{doc,examples,Uninstaller.app,Uninstaller.dat}
-
-
 # After Qt install action, that spoils pythonLocation variable
       - name: Set up Python ${{matrix.python-version}}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{matrix.python-version}}
-          architecture: 'x86'
-
-      - name: Update PATH
-        run: |
-             set -xue
-             cygpath -w "${IQTA_TOOLS}/mingw${{matrix.mingw-short-version}}0_32/bin" >> $GITHUB_PATH
-             cygpath -w "${pythonLocation}" >> $GITHUB_PATH
-             cygpath -w "${Qt5_Dir}/bin" >> $GITHUB_PATH
+          architecture: ${{ matrix.mingw-bitness == '32' && 'x86' || 'x64' }}
 
       - name: Check PATH
         run: echo PATH="$PATH"
@@ -139,7 +128,7 @@ jobs:
              set -xueo pipefail
              uname -a
              rsync --version
-             ls "$IQTA_TOOLS/" "$Qt5_Dir/"
+             ls "$IQTA_TOOLS/" "$QT_ROOT_DIR/"
              qmake --version && qmake -query
              python3 --version
              which g++
@@ -193,7 +182,7 @@ jobs:
 
       - name: Push binaries
         if: false
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: binaries-${{ matrix.qt-version}}
           path: ${{ env.BUILD_DIR }}/bin/release
@@ -201,10 +190,10 @@ jobs:
       - name: Build installer
         run: |
             cd $GITHUB_WORKSPACE/installer
-            ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.6.1/bin" "${{ env.BUILD_DIR }}"
+            ./build-trik-studio.sh "${QT_ROOT_DIR}/bin" "${IQTA_TOOLS}/QtInstallerFramework/*/bin" "${{ env.BUILD_DIR }}"
 
       - name: Push installer
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: trik-studio-auto-installer-qt${{ matrix.qt-version}}
           path: |

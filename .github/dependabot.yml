@@ -25,3 +25,8 @@ updates:
       submodules-junior:
         patterns:
           - "*" # All submodules updates
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
