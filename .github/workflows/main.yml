@@ -91,7 +91,7 @@ jobs:
             git config --global core.autocrlf true
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: jurplel/install-qt-action@v4
         with:
           dir: C:\
           version: '${{matrix.qt-version}}.*'
