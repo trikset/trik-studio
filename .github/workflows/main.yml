@@ -193,7 +193,7 @@ jobs:
 
       - name: Push binaries
         if: false
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: binaries-${{ matrix.qt-version}}
           path: ${{ env.BUILD_DIR }}/bin/release
@@ -204,7 +204,7 @@ jobs:
             ./build-trik-studio.sh "${Qt5_Dir}/bin" "${IQTA_TOOLS}/QtInstallerFramework/4.6.1/bin" "${{ env.BUILD_DIR }}"
 
       - name: Push installer
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: trik-studio-auto-installer-qt${{ matrix.qt-version}}
           path: |
