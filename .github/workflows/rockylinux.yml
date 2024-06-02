@@ -175,10 +175,9 @@ jobs:
             bash -xv ./build-trik-studio.sh "${QT_ROOT_DIR}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
 
       - name: Push installer
-        if: false
         uses: actions/upload-artifact@v4
         with:
-          name: trik-studio-auto-installer-linux-qt${{ matrix.qt-version }}
+          name: trik-studio-auto-installer-rockylinux-qt${{ matrix.qt-version }}
           path: |
             installer/trik-studio*installer*.run
             installer/trik_studio*.qs
