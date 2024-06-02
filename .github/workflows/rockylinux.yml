@@ -57,13 +57,6 @@ jobs:
           yum update -y # useless?
           yum install --allowerasing -y \
           sudo which \
-          qt5-qtbase-* \
-          qt5-qttools* \
-          qt5-qtsvg \
-          qt5-qtxmlpatterns \
-          qt5-qtmultimedia \
-          qt5-qt3d \
-          qt5-*-devel \
           libusbx-devel curl wget make gcc-toolset-${{ matrix.gcc-version }}-{gcc-c++,libasan-devel,libubsan-devel,gdb} \
                          git-core ccache zlib-devel rsync python3-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip
 
@@ -100,19 +93,22 @@ jobs:
 
       - name: Create build directory
         run: mkdir -vp ${{ env.BUILD_DIR }}
-
+      
       - name: Install Qt
-        uses: jurplel/install-qt-action@v4
-        with:
-          dir: /Qt
-          version: '${{matrix.qt-version}}'
-          arch: gcc64
-          modules: 'qtscript'
-          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland'
-          tools: 'tools_ifw'
-          add-tools-to-path: true
-          cache: true          
-
+        run: |
+            set -ueo pipefail
+            python3 -m pip install -U pip
+            python3 -m pip install aqtinstall
+            aqt install-qt linux desktop "${{ matrix.qt-version }}" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
+            aqt install-tool linux desktop tools_ifw -O /Qt
+            
+            QT_ROOT_DIR=$(ls -1d /Qt/${{ matrix.qt-version }}*/gcc_64 | head -n 1)
+            
+            echo "IQTA_TOOLS=/Qt/Tools" >> $GITHUB_ENV
+            echo "QT_ROOT_DIR=$QT_ROOT_DIR" >> $GITHUB_ENV
+            echo "$QT_ROOT_DIR/bin" >> $GITHUB_PATH
+            
+      
       - name: Check PATH
         run: echo PATH="$PATH"
 
