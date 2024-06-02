@@ -56,7 +56,7 @@ jobs:
           yum install -y epel-release # for ccache and p7zip
           yum update -y # useless?
           yum install --allowerasing -y \
-          which \
+          sudo which \
           qt5-qtbase-* \
           qt5-qttools* \
           qt5-qtsvg \
