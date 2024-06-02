@@ -105,10 +105,9 @@ void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
 	mBrick.processSensors(true);
 	mBrick.setCurrentInputs(inputs);
 	if (languageExtension.contains("js")) {
-		mScriptRunner.run(jsOverrides + "script.writeToFile = null;\n" + script);
+		mScriptRunner.run(jsOverrides + script);
 	} else if (languageExtension.contains("py")) {
-		auto updatedScript = script;
-		mScriptRunner.run(updatedScript.insert(0, "\nscript.writeToFile = None\n"), "dummyFile.py");
+		mScriptRunner.run(script, "dummyFile.py");
 	} else {
 		reportError(tr("Unsupported script file type"));
 	}
