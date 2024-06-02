@@ -1,4 +1,4 @@
-name: Check with CentOS 7
+name: Check with RockyLinux
 on:
   push:
     branches-ignore:
@@ -26,14 +26,12 @@ on:
       - 'plugins/robots/checker/scripts/build-checker-installer.sh'
       - '.github/workflows/main.yml'
   pull_request:
-    branches-ignore:
-      - 'dependabot**'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: centos:7
+    container: rockylinux:9
     defaults:
       run:
         shell: bash -l {0} # to force import of ~/.bash_profile
@@ -42,8 +40,8 @@ jobs:
       matrix:
         include:
           - qt-version: '5.12'
-            python-minor: 8
-            gcc-version: 11
+            python-minor: 9
+            gcc-version: 13
             deploy-installer: true
 
     steps:
@@ -53,22 +51,25 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install CentOS packages
+      - name: Install packages
         run: |
-          yum install -y epel-release centos-release-scl
-          yum install -y libusbx-devel curl wget devtoolset-${{ matrix.gcc-version }}-{gcc-c++,make,libasan-devel,libubsan-devel} \
-                         rh-git227-git-core ccache zlib-devel rsync rh-python3${{ matrix.python-minor }}-python-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip which
+          yum install -y epel-release # for ccache and p7zip
+          yum update -y # useless?
+          yum install --allowerasing -y \
+          sudo which \
+          libusbx-devel curl wget make gcc-toolset-${{ matrix.gcc-version }}-{gcc-c++,libasan-devel,libubsan-devel,gdb} \
+                         git-core ccache zlib-devel rsync python3-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip
 
           yum install -y libxkbcommon-x11 qt5-qtbase-gui #no desire to enumerate all required libraries for QtIFw
           yum install -y pulseaudio-libs-glib2 # to run TS and 2D-model even with `minimal` platform
 
-          echo "source scl_source enable devtoolset-${{ matrix.gcc-version }} rh-python3${{ matrix.python-minor }} rh-git227" >> ~/.bash_profile
+          echo "source scl_source enable gcc-toolset-${{ matrix.gcc-version }}" >> ~/.bash_profile
 
       - name: Prepare environment variables
         run: |
             DIR=$(realpath "$GITHUB_WORKSPACE"/../build)
             echo "BUILD_DIR=$DIR" >> $GITHUB_ENV
-            echo "LC_ALL=en_US.utf8" >> $GITHUB_ENV
+            echo "LC_ALL=C.UTF-8" >> $GITHUB_ENV
 
       - name: Configure git
         run: |
@@ -77,12 +78,12 @@ jobs:
             git config --global core.autocrlf false
 
             #prepare for actions/checkout, otherwise it fails
-            echo "$(dirname $(realpath $(which git)))" >> $GITHUB_PATH
-            echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH" >> $GITHUB_ENV
-            echo "PERL5LIB=$PERL5LIB" >> $GITHUB_ENV
+            #echo "$(dirname $(realpath $(which git)))" >> $GITHUB_PATH
+            #echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH" >> $GITHUB_ENV
+            #echo "PERL5LIB=$PERL5LIB" >> $GITHUB_ENV
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
           submodules: recursive
@@ -92,27 +93,22 @@ jobs:
 
       - name: Create build directory
         run: mkdir -vp ${{ env.BUILD_DIR }}
-
+      
       - name: Install Qt
         run: |
             set -ueo pipefail
             python3 -m pip install -U pip
             python3 -m pip install aqtinstall
-            aqt install-qt linux desktop "${{ matrix.qt-version }}.*" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
-            #            aqt install-tool linux desktop tools_ifw -O /Qt
-            echo "Qt5_Dir=$(ls -1d /Qt/5*/* | head -n 1)" >> $GITHUB_ENV
+            aqt install-qt linux desktop "${{ matrix.qt-version }}" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
+            aqt install-tool linux desktop tools_ifw -O /Qt
+            
+            QT_ROOT_DIR=$(ls -1d /Qt/${{ matrix.qt-version }}*/gcc_64 | head -n 1)
+            
             echo "IQTA_TOOLS=/Qt/Tools" >> $GITHUB_ENV
-
-      - name: Install proper version for QtIfw
-        if: false
-        run: |
-
-
-      - name: Update PATH
-        run: |
-             set -xue
-             echo "${Qt5_Dir}/bin" >> $GITHUB_PATH
-
+            echo "QT_ROOT_DIR=$QT_ROOT_DIR" >> $GITHUB_ENV
+            echo "$QT_ROOT_DIR/bin" >> $GITHUB_PATH
+            
+      
       - name: Check PATH
         run: echo PATH="$PATH"
 
@@ -124,8 +120,6 @@ jobs:
              set -xueo pipefail
              uname -a
              rsync --version
-             #             ls "$IQTA_TOOLS/"
-             ls "$Qt5_Dir/"
              qmake --version && qmake -query
              python3 --version
              which g++
@@ -154,7 +148,7 @@ jobs:
         timeout-minutes: 5
         run: |
             cd ${{ env.BUILD_DIR }}
-            export TRIK_PYTHONPATH=$(python3 -c "import sys; import os; print(os.pathsep.join(sys.path))")
+            export TRIK_PYTHONPATH=$(python3.${{ matrix.python-minor }} -c "import sys; import os; print(os.pathsep.join(sys.path))")
             make -k check TESTARGS="-platform offscreen"
 
       - name: Download tests
@@ -178,7 +172,7 @@ jobs:
             set -vx
             cd "$GITHUB_WORKSPACE"/installer
             export TRIK_PYTHON3_VERSION_MINOR=${{ matrix.python-minor }}
-            #            bash -xv ./build-trik-studio.sh "${Qt5_Dir}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
+            bash -xv ./build-trik-studio.sh "${QT_ROOT_DIR}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
 
       - name: Push installer
         if: false
