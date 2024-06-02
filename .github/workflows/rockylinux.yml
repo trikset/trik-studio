@@ -69,7 +69,7 @@ jobs:
         run: |
             DIR=$(realpath "$GITHUB_WORKSPACE"/../build)
             echo "BUILD_DIR=$DIR" >> $GITHUB_ENV
-            echo "LC_ALL=C" >> $GITHUB_ENV
+            echo "LC_ALL=C.UTF-8" >> $GITHUB_ENV
 
       - name: Configure git
         run: |
