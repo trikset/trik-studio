@@ -53,8 +53,8 @@ jobs:
 
       - name: Install packages
         run: |
-          yum install -y epel-release # is it useful?
-          yum update -y
+          #yum install -y epel-release # is it useful?
+          #yum update -y
           yum install -y \
           which \
           qt5-qtbase-* \
