@@ -142,7 +142,13 @@ function Component()
 
 	installer.installationStarted.connect(function() {
 		if (installer.shouldDeinstallPrevious) {
-        		installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
+			installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
+			if (installer.value("os") == "win") {
+				var timeoutBatch = "ping localhost -n 4 > nul";
+				installer.performOperation("Execute", ["cmd", "/c", timeoutBatch]);
+				var joinBatch = "for /I %N in () do (tasklist | find \"cscript\" >nul && ping localhost -n 2 >nul || exit 0) ";
+				installer.performOperation("Execute", ["cmd", "/c", joinBatch]);
+			}
 		}
 	});
 }
