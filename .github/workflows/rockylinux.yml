@@ -47,7 +47,7 @@ jobs:
     steps:
 
       - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v2.0
+        uses: n1hility/cancel-previous-runs@v3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
