@@ -54,7 +54,7 @@ jobs:
       - name: Install packages
         run: |
           yum install -y epel-release # for ccache and p7zip
-          #yum update -y
+          yum update -y # useless?
           yum install --allowerasing -y \
           which \
           qt5-qtbase-* \
@@ -64,17 +64,19 @@ jobs:
           qt5-qtmultimedia \
           qt5-qt3d \
           qt5-*-devel \
-          libusbx-devel curl wget make gcc-toolset-${{ matrix.gcc-version }}-{gcc-c++,libasan-devel,libubsan-devel} \
+          libusbx-devel curl wget make gcc-toolset-${{ matrix.gcc-version }}-{gcc-c++,libasan-devel,libubsan-devel,gdb} \
                          git-core ccache zlib-devel rsync python3-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip
 
           yum install -y libxkbcommon-x11 qt5-qtbase-gui #no desire to enumerate all required libraries for QtIFw
           yum install -y pulseaudio-libs-glib2 # to run TS and 2D-model even with `minimal` platform
 
+          echo "source scl_source enable gcc-toolset-${{ matrix.gcc-version }}" >> ~/.bash_profile
+
       - name: Prepare environment variables
         run: |
             DIR=$(realpath "$GITHUB_WORKSPACE"/../build)
             echo "BUILD_DIR=$DIR" >> $GITHUB_ENV
-            echo "LC_ALL=en_US.utf8" >> $GITHUB_ENV
+            echo "LC_ALL=C" >> $GITHUB_ENV
 
       - name: Configure git
         run: |
@@ -100,22 +102,17 @@ jobs:
         run: mkdir -vp ${{ env.BUILD_DIR }}
 
       - name: Install Qt
-        run: |
-            set -ueo pipefail
-            python3 -m pip install -U pip
-            python3 -m pip install aqtinstall
-            aqt install-qt linux desktop "${{ matrix.qt-version }}.*" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
-            #            aqt install-tool linux desktop tools_ifw -O /Qt
-            
-      - name: Install proper version for QtIfw
-        if: false
-        run: |
+        uses: jurplel/install-qt-action@v4
+        with:
+          dir: /Qt
+          version: '${{matrix.qt-version}}'
+          arch: gcc64
+          modules: 'qtscript'
+          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland'
+          tools: 'tools_ifw'
+          add-tools-to-path: true
+          cache: true          
 
-
-      - name: Update PATH
-        run: |
-             set -xue
-            
       - name: Check PATH
         run: echo PATH="$PATH"
 
@@ -179,7 +176,7 @@ jobs:
             set -vx
             cd "$GITHUB_WORKSPACE"/installer
             export TRIK_PYTHON3_VERSION_MINOR=${{ matrix.python-minor }}
-            #            bash -xv ./build-trik-studio.sh "${QT_ROOT_DIR}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
+            bash -xv ./build-trik-studio.sh "${QT_ROOT_DIR}/bin" $(ls -1d "${IQTA_TOOLS}"/QtInstallerFramework/*/bin | head -n 1) "${{ env.BUILD_DIR }}"
 
       - name: Push installer
         if: false
