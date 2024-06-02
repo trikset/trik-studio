@@ -7,10 +7,18 @@ updates:
     reviewers:
       - "iakov"
     groups:
-      submodules:
+      3rd-party:
+        exclude-patterns:
+          - "*trikRuntime*"
+          - "*nxt-tools*"
+          - "*checkapp*"
+          - "*gamepad*"
+      small-apps:
         patterns:
-          - "*" # All submodules updates
-
+          - "*nxt-tools*"
+          - "*checkapp*"
+          - "*gamepad*"
+ 
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
