@@ -133,7 +133,7 @@ equals(TEMPLATE, lib) {
 	CONFIG += sanitizer
 }
 
-unix:!nosanitizers {
+!nosanitizers {
 
 	# seems like we want USan always, but are afraid of ....
 	!CONFIG(sanitize_address):!CONFIG(sanitize_thread):!CONFIG(sanitize_memory):!CONFIG(sanitize_kernel_address) {
@@ -143,20 +143,25 @@ unix:!nosanitizers {
 
 
 	#LSan can be used without performance degrade even in release build
-	#But at the moment we can not, because of Qt  problems
-        !macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_memory):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
+	#But at the moment we can not, because of Qt and MinGW problems
+        !win32:!macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_memory):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
-		QMAKE_CFLAGS += -fsanitize=leak
-		QMAKE_CXXFLAGS += -fsanitize=leak
-		QMAKE_LFLAGS += -fsanitize=leak
+		QMAKE_CFLAGS *= -fsanitize=leak
+		QMAKE_CXXFLAGS *= -fsanitize=leak
+		QMAKE_LFLAGS *= -fsanitize=leak
 	}
 
-	sanitize_undefined:macx-clang {
-		# sometimes runtime is missing in clang. this hack allows to avoid runtime dependency.
-		#QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fsanitize-trap=undefined
-		#QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
-		#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
+        sanitize_undefined {
+		TRIK_SANITIZE_UNDEFINED_FLAGS += \
+               -fsanitize=undefined,float-divide-by-zero,unsigned-integer-overflow,implicit-conversion,local-bounds
+
+		# This hack allows to avoid runtime dependency.
+	        win32:TRIK_SANITIZE_UNDEFINED_FLAGS += -fsanitize-trap=undefined 
+                
+                QMAKE_SANITIZE_UNDEFINED_CFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
+		QMAKE_SANITIZE_UNDEFINED_CXXFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
+		QMAKE_SANITIZE_UNDEFINED_LFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
 	}
 
         sanitize_memory {
@@ -165,15 +170,16 @@ unix:!nosanitizers {
 
         }
 
+        unix {
+                QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
+                QMAKE_CXXFLAGS_RELEASE += -fsanitize-recover=all
 
-        QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
-        QMAKE_CXXFLAGS_RELEASE += -fsanitize-recover=all
+                QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
+                QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
 
-        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
-        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
-
-        QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover=all
-        QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover=all
+                QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover=all
+                QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover=all
+        }
 }
 
 OBJECTS_DIR = .build/$$CONFIGURATION/obj
