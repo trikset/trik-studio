@@ -153,11 +153,11 @@ equals(TEMPLATE, lib) {
 	}
 
         sanitize_undefined {
-		TRIK_SANITIZE_UNDEFINED_FLAGS += \
-               -fsanitize=undefined,float-divide-by-zero,unsigned-integer-overflow,implicit-conversion,local-bounds
+	        #TRIK_SANITIZE_UNDEFINED_FLAGS += \
+                #-fsanitize=undefined,float-divide-by-zero,unsigned-integer-overflow,implicit-conversion,local-bounds
 
 		# This hack allows to avoid runtime dependency.
-	        win32:TRIK_SANITIZE_UNDEFINED_FLAGS += -fsanitize-trap=undefined 
+	        win32:TRIK_SANITIZE_UNDEFINED_FLAGS += -fsanitize-trap=all 
                 
                 QMAKE_SANITIZE_UNDEFINED_CFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
 		QMAKE_SANITIZE_UNDEFINED_CXXFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
