@@ -19,7 +19,6 @@
 namespace pioneer {
 namespace lua {
 
-class GotoLabelManager;
 class LedPart;
 class TofPart;
 class MagnetPart;
@@ -33,8 +32,8 @@ public:
 			, qReal::ErrorReporterInterface &errorReporter
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName
-			, GotoLabelManager &gotoLabelManager);
+			, generatorBase::ReadableLabelManager &readableLabelManager
+			, const QString &generatorName);
 
 	~PioneerLuaGeneratorFactory() override;
 
@@ -71,10 +70,6 @@ private:
 
 	/// Generator name is used as a prefix to a path to templates in resources.
 	const QString mGeneratorName;
-
-	/// Storage and generator for human-readable goto labels. Used in label ganerator and goto generator created by
-	/// this factory.
-	GotoLabelManager &mGotoLabelManager;
 
 	/// Generator part that tracks LED usage and initializes it if needed.
 	QScopedPointer<LedPart> mLedPart;
