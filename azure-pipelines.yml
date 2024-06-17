@@ -120,7 +120,7 @@ stages:
       matrix:
         LinuxRelease:
           imageName: 'ubuntu-latest'
-          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=warn_off"
         LinuxDebug:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
@@ -145,7 +145,7 @@ stages:
       matrix:
         macOSRelease:
           imageName: 'macOS-11'
-          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         macOSDebug:
           imageName: 'macOS-11'
@@ -172,10 +172,10 @@ stages:
       matrix:
         Linux release + tests:
           imageName: 'ubuntu-latest'
-          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=warn_off"
         Linux release with retired features:
           imageName: 'ubuntu-latest'
-          QMAKE_EXTRA: "CONFIG+=trik_retired_features CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent"
+          QMAKE_EXTRA: "CONFIG+=trik_retired_features CONFIG+=noPch CONFIG+=ccache CONFIG+=silent"
         Linux debug + tests:
           imageName: 'ubuntu-latest'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
@@ -200,7 +200,7 @@ stages:
       matrix:
         MacOS release + tests:
           imageName: 'macOS-11'
-          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+          QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         macOS debug + tests:
           imageName: 'macOS-11'
@@ -225,7 +225,7 @@ stages:
   - job: installer
     displayName: "Test, installer, deploy"
     variables:
-      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=warn_off"
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -246,7 +246,7 @@ stages:
   - job: installer
     displayName: "Test, installer, deploy"
     variables:
-      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=warn_off"
       EXECUTOR: "time"
     pool:
       vmImage: 'macOS-11'
