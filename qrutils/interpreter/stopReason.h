@@ -21,7 +21,7 @@ namespace interpretation {
 enum class StopReason
 {
 	/// Program finished correctly
-    finished = 0
+	finished = 0
 	/// Program finished incorrectly, error occured
 	, error
 	/// User stopped program execution (explicitly or implicitly)
