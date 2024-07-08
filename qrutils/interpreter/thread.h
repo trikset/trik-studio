@@ -73,7 +73,7 @@ public:
 	void interpret();
 
 	/// Stops interpretation. Optionally reason may be specified.
-	void stop(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::finised);
+	void stop(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::finished);
 
 	/// Inserts a message to a message queue.
 	void newMessage(const QString &message);

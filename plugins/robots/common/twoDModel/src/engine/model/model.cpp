@@ -63,7 +63,7 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
 		QTimer::singleShot(0, &interpreterControl,
-				[&interpreterControl](){ Q_EMIT interpreterControl.stopAllInterpretation(); });
+				[&interpreterControl](){ Q_EMIT interpreterControl.stopAllInterpretation(qReal::interpretation::StopReason::finished); });
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::fail, this, [&](const QString &message) {
 		errorReporter.addError(message);

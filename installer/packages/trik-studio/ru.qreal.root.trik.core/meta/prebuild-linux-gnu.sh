@@ -15,7 +15,6 @@ rsync -a "$BIN_DIR"/libtrikPythonQt{,_QtAll}-Qt*-Python*.so*                    
 
 rsync -a "$BIN_DIR"/libtrik*.so*                                                   "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5SerialPort.so*                                            "$PWD"/../data/lib/
-rsync -a "$QT_LIB"/libQt5Concurrent.so*                                            "$PWD"/../data/lib/
 
 rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model,checkapp}            			"$PWD/../data/bin/"
 
