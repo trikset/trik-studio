@@ -110,7 +110,7 @@ bool Runner::interpret(const QString &saveFile, const bool background
 
 	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
 			, this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
-		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
+		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finished))
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 

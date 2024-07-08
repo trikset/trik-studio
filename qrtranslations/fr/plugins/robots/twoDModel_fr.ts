@@ -394,7 +394,7 @@
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+23"/>
         <source>Error in checker: %1</source>
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>

@@ -330,7 +330,7 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 			, &TrikTextualInterpreter::completed
 			, this
 			, [this](){
-		this->testStop(qReal::interpretation::StopReason::finised);
+		this->testStop(qReal::interpretation::StopReason::finished);
 	});
 	// refactor?
 	connect(this
