@@ -144,11 +144,11 @@ stages:
     strategy:
       matrix:
         macOSRelease:
-          imageName: 'macOS-11'
+          imageName: 'macOS-12'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         macOSDebug:
-          imageName: 'macOS-11'
+          imageName: 'macOS-12'
           QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
@@ -199,11 +199,11 @@ stages:
     strategy:
       matrix:
         MacOS release + tests:
-          imageName: 'macOS-11'
+          imageName: 'macOS-12'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
           EXECUTOR: "time"
         macOS debug + tests:
-          imageName: 'macOS-11'
+          imageName: 'macOS-12'
           QMAKE_EXTRA: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
           CONFIG: debug
           TESTS: $ALL_TESTS
@@ -249,7 +249,7 @@ stages:
       QMAKE_EXTRA: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       EXECUTOR: "time"
     pool:
-      vmImage: 'macOS-11'
+      vmImage: 'macOS-12'
 
     steps:
     - ${{ parameters.checkoutStep }}
