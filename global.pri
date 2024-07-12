@@ -225,8 +225,7 @@ clang {
 	for(module, QT) {
 	    equals(module, "testlib"): module = test
 	    moduleList = $$split(module, )
-	    SYSTEM_INCLUDE_PREFIX_OPTION += \
-		--system-header-prefix=Qt$$upper($$take_first(moduleList))$$join(moduleList, )
+	    SYSTEM_INCLUDE_PREFIX_OPTION += --system-header-prefix=Qt$$upper($$take_first(moduleList))$$join(moduleList, )
 	}
 	unset(moduleList)
 
