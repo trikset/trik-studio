@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 #This is a magic fix for macOS, but old Linux /usr/bin/env has no -S option, thus we cannot use shabang line
 #An obsolete bash (v3) does not support `exec {varname}<>`, thus we want to use zsh
 if ! ( eval 'exec {somevar}<>$(mktemp)' ) ; then
