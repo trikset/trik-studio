@@ -220,7 +220,7 @@ clang {
 
 	#treat Qt includes as system headers
 	SYSTEM_INCLUDE_PREFIX_OPTION *= --system-header-prefix=$$[QT_INSTALL_HEADERS]
-	QMAKE_CXXFLAG += -Wno-nullability-completeness -Wno-error=nullability-extension
+	# QMAKE_CXXFLAG += -Wno-nullability-completeness -Wno-error=nullability-extension
 }
 
 #gcc {
@@ -238,7 +238,7 @@ false:clang {
 
 !warn_off:QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
 			-Werror=non-virtual-dtor -Wno-error=overloaded-virtual \
-			-Werror=uninitialized -Werror=init-self
+			-Werror=uninitialized -Werror=init-self -Werror=deprecate
 
 # Hack to log build time.
 # ------------------------
