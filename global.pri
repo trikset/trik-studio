@@ -221,6 +221,23 @@ clang {
 	#treat Qt includes as system headers
 	SYSTEM_INCLUDE_PREFIX_OPTION *= --system-header-prefix=$$[QT_INSTALL_HEADERS]
 	# QMAKE_CXXFLAG += -Wno-nullability-completeness -Wno-error=nullability-extension
+
+	for(module, QT) {
+	    equals(module, "testlib"): module = test
+	    moduleList = $$split(module, )
+	    SYSTEM_INCLUDE_PREFIX_OPTION += \
+		--system-header-prefix=Qt$$upper($$take_first(moduleList))$$join(moduleList, )
+	}
+	unset(moduleList)
+
+	for(module, QT) {
+	    equals(module, "testlib"): module = test
+	    moduleList = $$split(module, )
+	    SYSTEM_INCLUDE_PREFIX_OPTION += \
+		-isystem$$shell_quote($$[QT_INSTALL_LIBS]/Qt$$upper(\
+			      $$take_first(moduleList))$$join(moduleList, )).framework/Headers/
+	}
+	unset(moduleList)
 }
 
 #gcc {
