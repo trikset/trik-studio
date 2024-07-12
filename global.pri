@@ -239,7 +239,7 @@ false:clang {
 
 !warn_off:QMAKE_CXXFLAGS += -Werror=cast-qual -Werror=write-strings -Werror=redundant-decls -Werror=unreachable-code \
 			-Werror=non-virtual-dtor -Wno-error=overloaded-virtual \
-			-Werror=uninitialized -Werror=init-self -Werror=deprecate
+			-Werror=uninitialized -Werror=init-self
 
 # Hack to log build time.
 # ------------------------
