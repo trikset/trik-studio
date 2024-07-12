@@ -15,6 +15,7 @@
     "$TRIK_PYTHON" -m aqt install-qt -m qtscript -O "$HOME/Qt" mac desktop "${TRIK_QT_VERSION}"
     [ -d $HOME/qtifw ] || env TRIK_QT_INSTALL_DIR="$HOME/qtifw" "$(dirname $(realpath ${BASH_SOURCE[0]}))"/install_qtifw_mac.sh
     # Force SDK version compatible with Qt 5.12
-    sudo xcode-select -s /Applications/Xcode_11.7.app/Contents/Developer
+    system_profiler -json SPDeveloperToolsDataType | jq '.SPDeveloperToolsDataType[].spdevtools_path' || :
+    sudo xcode-select -s /Applications/Xcode_13.1.app/Contents/Develope
     xcodebuild -showsdks
     xcrun -sdk macosx --show-sdk-path
