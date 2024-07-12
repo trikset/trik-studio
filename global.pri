@@ -228,6 +228,7 @@ clang {
 	SYSTEM_INCLUDE_PREFIX_OPTION *= -isystem $$[QT_INSTALL_HEADERS]
 #}
 
+QMAKE_CXXFLAGS += -pedantic-errors -Wextra -Werror
 QMAKE_CXXFLAGS *= $$SYSTEM_INCLUDE_PREFIX_OPTION
 
 false:clang {
