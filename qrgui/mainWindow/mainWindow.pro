@@ -15,11 +15,11 @@
 TARGET = trik-studio
 TEMPLATE = app
 
+QT += widgets printsupport xml svg
+
 include(../../global.pri)
 
 DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
-
-QT += widgets printsupport xml svg
 
 links(qrkernel qrutils qrtext qrrepo qrgui-models qrgui-editor qrgui-controller qrgui-dialogs qrgui-preferences-dialog \
 		qrgui-text-editor qrgui-mouse-gestures qrgui-hotkey-manager qrgui-brand-manager  \

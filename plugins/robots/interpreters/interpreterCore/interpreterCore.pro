@@ -16,6 +16,8 @@ TARGET = robots-interpreter-core
 
 TEMPLATE = lib
 
+QT += svg xml widgets
+
 include(../../../../global.pri)
 
 copyToDestdir($$PWD/icons/splashscreen.png)

@@ -14,9 +14,9 @@
 
 TARGET = qrmc
 
-include(../global.pri)
-
 QT += xml
+
+include(../global.pri)
 
 CONFIG += console
 

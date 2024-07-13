@@ -16,9 +16,9 @@ TARGET = robots-trik-qts-generator-library
 
 TEMPLATE = lib
 
-include(../../../../../global.pri)
-
 QT += widgets network
+
+include(../../../../../global.pri)
 
 CONFIG += trikqscintilla2
 

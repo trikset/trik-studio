@@ -14,6 +14,8 @@
 
 QT += widgets
 
+include(../../../../global.pri)
+
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
 		robots-utils robots-kit-base robots-2d-model qextserialport \
 		)

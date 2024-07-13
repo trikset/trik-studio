@@ -14,6 +14,8 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
+QT += widgets
+
 include(../../global.pri)
 
 # after global.pri sets DESTDIR
@@ -24,8 +26,6 @@ TEST_TARGET_DIR = .
 equals(TEMPLATE, app) {
     CONFIG += testcase testcase_no_bundle no_testcase_installs
 }
-
-QT += widgets
 
 #clang complains about GTest headers, but error is produced for macro expansion and -isystem does not help
 #probably, this can be fixed if we stop using old-school obsolete MOCK_METHOD{0-9} instead of newer MOCK_METHOD

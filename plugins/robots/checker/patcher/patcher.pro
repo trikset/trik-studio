@@ -14,6 +14,9 @@
 
 TARGET = patcher
 
+QT -= gui
+QT += xml
+
 include(../../../../global.pri)
 
 links(qrrepo qrutils)
@@ -21,9 +24,6 @@ links(qrrepo qrutils)
 includes(qrrepo)
 
 TEMPLATE = app
-
-QT -= gui
-QT += xml
 
 CONFIG += cmdline
 

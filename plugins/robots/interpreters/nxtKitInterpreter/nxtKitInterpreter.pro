@@ -17,6 +17,8 @@ TARGET = robots-nxt-interpreter
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets
+
 include(../../../../global.pri)
 
 copyToDestdir(icons/nxt-robot.png, now, images/)

@@ -14,6 +14,8 @@
 
 QT += widgets
 
+include(../../../../global.pri)
+
 includes(plugins/robots/common/nxtKit \
 		plugins/robots/common/kitBase \
 		plugins/robots/common/twoDModel \

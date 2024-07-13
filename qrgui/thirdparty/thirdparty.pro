@@ -16,11 +16,11 @@ TARGET = qrgui-thirdparty
 
 TEMPLATE = lib
 
+QT += widgets
+
 include(../../global.pri)
 
 DEFINES += QRGUI_THIRDPARTY_LIBRARY
-
-QT += widgets
 
 TRANSLATIONS = \
 	$$PWD/../../qrtranslations/ru/qrgui_thirdparty_ru.ts \

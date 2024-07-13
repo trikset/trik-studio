@@ -17,6 +17,8 @@ TARGET = robots-null-interpreter
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets
+
 include(../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/

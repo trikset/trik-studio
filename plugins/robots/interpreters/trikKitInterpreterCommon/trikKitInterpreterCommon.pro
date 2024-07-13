@@ -15,6 +15,8 @@
 TARGET = robots-trik-kit-interpreter-common
 TEMPLATE = lib
 
+QT += widgets network script xml multimedia
+
 include(../../../../global.pri)
 
 DEFINES += ROBOTS_TRIK_KIT_INTERPRETER_COMMON_LIBRARY

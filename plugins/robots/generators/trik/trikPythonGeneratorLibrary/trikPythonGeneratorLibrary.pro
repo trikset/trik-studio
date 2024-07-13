@@ -16,11 +16,11 @@ TARGET = robots-trik-python-generator-library
 
 TEMPLATE = lib
 
+QT += widgets network
+
 include(../../../../../global.pri)
 
 CONFIG += trikqscintilla2
-
-QT += widgets network
 
 includes(plugins/robots/generators/trik/trikGeneratorBase \
 		plugins/robots/generators/generatorBase \

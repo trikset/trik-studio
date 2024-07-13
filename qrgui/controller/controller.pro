@@ -16,11 +16,11 @@ TARGET = qrgui-controller
 
 TEMPLATE = lib
 
+QT += widgets
+
 include(../../global.pri)
 
 includes(qrgui)
-
-QT += widgets
 
 DEFINES += QRGUI_CONTROLLER_LIBRARY
 

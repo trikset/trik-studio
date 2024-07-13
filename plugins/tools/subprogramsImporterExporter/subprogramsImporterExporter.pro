@@ -15,13 +15,13 @@
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets core
+
 include(../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/
 
 links(qrkernel qrrepo qrutils qrgui-tool-plugin-interface)
-
-QT += widgets core
 
 TRANSLATIONS = \
 	$$PWD/../../../qrtranslations/ru/plugins/subprogramsImporterExporter_ru.ts \

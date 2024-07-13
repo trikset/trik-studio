@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+QT += xml gui
+
 include(../global.pri)
 
 CONFIG *= cmdline
@@ -66,7 +68,6 @@ SOURCES += \
 	roleType.cpp \
 
 TEMPLATE = app
-QT += xml gui
 CONFIG += console
 
 links(qrutils)

@@ -16,9 +16,9 @@ TARGET = qrgui-dialogs
 
 TEMPLATE = lib
 
-include(../../global.pri)
-
 QT += xml widgets
+
+include(../../global.pri)
 
 links(qrkernel qrutils qrgui-models qrgui-plugin-manager qrgui-controller)
 includes(qrgui)

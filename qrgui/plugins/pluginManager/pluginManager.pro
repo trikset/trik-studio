@@ -16,9 +16,9 @@ TARGET = qrgui-plugin-manager
 
 TEMPLATE = lib
 
-include(../../../global.pri)
-
 QT += xml svg
+
+include(../../../global.pri)
 
 links(qrkernel qrgraph qrutils qrrepo qrgui-tool-plugin-interface qrgui-meta-meta-model)
 

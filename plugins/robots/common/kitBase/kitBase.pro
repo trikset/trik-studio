@@ -15,6 +15,4 @@
 TARGET = robots-kit-base
 TEMPLATE = lib
 
-include(../../../../global.pri)
-
 include(kitBase.pri)

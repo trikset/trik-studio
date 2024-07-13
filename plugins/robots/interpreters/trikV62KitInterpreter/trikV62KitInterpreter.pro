@@ -17,6 +17,8 @@ TARGET = robots-trik-v62-interpreter
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets network
+
 include(../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/

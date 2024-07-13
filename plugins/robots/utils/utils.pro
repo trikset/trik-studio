@@ -16,6 +16,4 @@ TARGET = robots-utils
 
 TEMPLATE = lib
 
-include(../../../global.pri)
-
 include(utils.pri)

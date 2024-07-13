@@ -16,9 +16,9 @@ TARGET = tcp-robot-simulator
 
 TEMPLATE = lib
 
-include($$PWD/../../../../../global.pri)
-
 QT += network
+
+include($$PWD/../../../../../global.pri)
 
 DEFINES += TCP_ROBOT_SIMULATOR_LIBRARY
 

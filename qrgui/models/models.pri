@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-QT += xml widgets
-
 links(qrkernel qrutils qrrepo qrgraph qrgui-meta-meta-model qrgui-controller qrgui-plugin-manager)
 includes(qrgui qrgraph qrgui/plugins/metaMetaModel)
 

@@ -16,13 +16,13 @@ TARGET = qrgui-text-editor
 
 TEMPLATE = lib
 
+QT += widgets
+
 include(../../global.pri)
 
 links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-brand-manager)
 
 CONFIG += trikqscintilla2
-
-QT += widgets
 
 DEFINES += QRGUI_TEXT_EDITOR_LIBRARY
 

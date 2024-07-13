@@ -16,6 +16,4 @@ TARGET = robots-pioneer-kit
 
 TEMPLATE = lib
 
-include(../../../../global.pri)
-
 include(pioneerKit.pri)

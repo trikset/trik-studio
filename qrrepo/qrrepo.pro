@@ -14,8 +14,6 @@
 
 TEMPLATE = lib
 
-include(../global.pri)
-
 win32: copyToDestdir($$system($$pkgConfigExecutable() zlib --variable=prefix)\bin\zlib1.dll, NOW)
 
 include(qrrepo.pri)

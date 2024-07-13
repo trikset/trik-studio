@@ -15,6 +15,8 @@
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets xml
+
 include(../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/
@@ -23,8 +25,6 @@ links(qrkernel qrgui-preferences-dialog)
 
 INCLUDEPATH += \
 	$$PWD/../../../qrgui/ \
-
-QT += widgets xml
 
 TRANSLATIONS = \
 	$$PWD/../../../qrtranslations/ru/plugins/updatesChecker_ru.ts \

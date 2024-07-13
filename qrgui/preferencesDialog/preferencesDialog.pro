@@ -16,9 +16,9 @@ TARGET = qrgui-preferences-dialog
 
 TEMPLATE = lib
 
-include(../../global.pri)
-
 QT += widgets
+
+include(../../global.pri)
 
 links(qrkernel qrutils)
 

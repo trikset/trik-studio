@@ -16,6 +16,8 @@ TARGET = qrgui-editor
 
 TEMPLATE = lib
 
+QT += widgets xml
+
 include(../../global.pri)
 
 links(qrkernel qrutils qrgraph \
@@ -25,8 +27,6 @@ links(qrkernel qrutils qrgraph \
 )
 
 includes(qrgraph qrgui qrgui/plugins/metaMetaModel)
-
-QT += widgets xml
 
 DEFINES += QRGUI_EDITOR_LIBRARY
 

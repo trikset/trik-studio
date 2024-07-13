@@ -14,6 +14,8 @@
 
 QT += widgets network
 
+include(../../../global.pri)
+
 links(qrkernel qrutils qextserialport qrtext)
 includes(qrtext)
 

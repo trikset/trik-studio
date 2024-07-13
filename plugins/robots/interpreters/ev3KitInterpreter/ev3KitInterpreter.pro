@@ -17,6 +17,8 @@ TARGET = robots-ev3-interpreter
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets
+
 include(../../../../global.pri)
 
 copyToDestdir(images/ev3-robot.png, now, images/)

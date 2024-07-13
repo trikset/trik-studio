@@ -14,6 +14,8 @@
 
 QT += xml
 
+include(../global.pri)
+
 clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
 
 DEFINES += QRREPO_LIBRARY

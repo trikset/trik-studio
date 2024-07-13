@@ -12,6 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+QT += xml widgets svg
+
+include(../global.pri)
+
 HEADERS += \
 	$$PWD/outFile.h \
 	$$PWD/utilsDeclSpec.h \
@@ -62,8 +66,6 @@ RESOURCES = $$PWD/qrutils.qrc
 TRANSLATIONS = \
 	$$PWD/../qrtranslations/ru/qrutils_ru.ts \
 	$$PWD/../qrtranslations/fr/qrutils_fr.ts \
-
-QT += xml widgets svg
 
 includes(qrtext qrgraph)
 

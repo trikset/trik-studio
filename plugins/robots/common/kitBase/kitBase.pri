@@ -14,6 +14,8 @@
 
 QT += widgets xml
 
+include(../../../../global.pri)
+
 links(qrkernel qrutils qrtext qrgui-preferences-dialog robots-utils)
 includes(qrtext plugins/robots/utils)
 

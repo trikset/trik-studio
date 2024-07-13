@@ -16,9 +16,9 @@ TARGET = qrgui-meta-meta-model
 
 TEMPLATE = lib
 
-include(../../../global.pri)
-
 QT += xml
+
+include(../../../global.pri)
 
 includes(qrgui qrgraph)
 

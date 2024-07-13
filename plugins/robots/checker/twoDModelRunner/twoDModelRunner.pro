@@ -15,9 +15,10 @@
 TARGET = 2D-model
 TEMPLATE = app
 CONFIG += cmdline
-include(../../../../global.pri)
 
 QT += widgets
+
+include(../../../../global.pri)
 
 includes(plugins/robots/interpreters/interpreterCore \
 		plugins/robots/common/kitBase \

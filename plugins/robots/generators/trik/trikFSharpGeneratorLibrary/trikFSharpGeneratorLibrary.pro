@@ -18,9 +18,9 @@ TEMPLATE = lib
 
 CONFIG += trikqscintilla2
 
-include(../../../../../global.pri)
-
 QT += widgets network
+
+include(../../../../../global.pri)
 
 DEFINES += ROBOTS_TRIK_FSHARP_GENERATOR_LIBRARY
 

@@ -14,6 +14,8 @@
 
 QT += widgets
 
+include(../../../../global.pri)
+
 includes(plugins/robots/common/trikKit \
 		plugins/robots/common/kitBase \
 		plugins/robots/utils \

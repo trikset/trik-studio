@@ -16,9 +16,9 @@ TARGET = qrgui-facade
 
 TEMPLATE = lib
 
-include(../../global.pri)
-
 QT += widgets
+
+include(../../global.pri)
 
 links(qrkernel qrutils qrgui-models qrgui-plugin-manager qrgui-text-editor qrgui-tool-plugin-interface)
 

@@ -16,12 +16,12 @@ TARGET = qrgui-mouse-gestures
 
 TEMPLATE = lib
 
+QT += widgets
+
 include(../../global.pri)
 
 links(qrkernel qrutils)
 includes(qrgui qrgraph)
-
-QT += widgets
 
 DEFINES += QRGUI_MOUSE_GESTURES_LIBRARY
 

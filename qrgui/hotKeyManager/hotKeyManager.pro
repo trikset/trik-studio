@@ -16,12 +16,12 @@ TARGET = qrgui-hotkey-manager
 
 TEMPLATE = lib
 
+QT += widgets
+
 include(../../global.pri)
 
 links(qrgui-preferences-dialog qrutils)
 includes(qrgui)
-
-QT += widgets
 
 DEFINES += QRGUI_HOTKEY_MANAGER_LIBRARY
 

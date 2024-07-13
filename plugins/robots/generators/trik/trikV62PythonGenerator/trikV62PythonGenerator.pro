@@ -17,8 +17,6 @@ TARGET = robots-trik-v62-python-generator
 TEMPLATE = lib
 CONFIG += plugin
 
-include(../../../../../global.pri)
-
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 
 include(trikV62PythonGenerator.pri)

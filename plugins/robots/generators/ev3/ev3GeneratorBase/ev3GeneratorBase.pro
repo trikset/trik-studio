@@ -16,9 +16,9 @@ TARGET = robots-ev3-generator-base
 
 TEMPLATE = lib
 
-include(../../../../../global.pri)
-
 QT += widgets
+
+include(../../../../../global.pri)
 
 CONFIG += trikqscintilla2
 

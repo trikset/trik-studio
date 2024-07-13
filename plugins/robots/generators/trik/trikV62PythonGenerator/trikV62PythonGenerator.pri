@@ -14,6 +14,8 @@
 
 QT += widgets network
 
+include(../../../../../global.pri)
+
 CONFIG += trikqscintilla2
 
 includes( \

@@ -17,9 +17,9 @@ TARGET = robots-nxt-osek-c-generator
 TEMPLATE = lib
 CONFIG += plugin trikqscintilla2
 
-include(../../../../../global.pri)
-
 QT += widgets
+
+include(../../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

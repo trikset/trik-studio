@@ -17,9 +17,9 @@ TARGET = robots-pioneer-lua-generator
 TEMPLATE = lib
 CONFIG += plugin trikqscintilla2
 
-include(../../../../../global.pri)
-
 QT += widgets network
+
+include(../../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 

@@ -17,11 +17,11 @@ TARGET = robots-plugin
 TEMPLATE = lib
 CONFIG += plugin
 
+QT += widgets
+
 include(../../../../global.pri)
 
 DESTDIR = $$DESTDIR/plugins/tools/
-
-QT += widgets
 
 includes(plugins/robots/interpreters/interpreterCore \
 		plugins/robots/common/kitBase \
