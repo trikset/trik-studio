@@ -241,6 +241,17 @@ void PaletteTreeWidgets::customizeExplosionTitles(const QString &userGroupTitle,
 	mUserGroupDescription = userGroupDescription;
 }
 
+void PaletteTreeWidgets::refreshUserPaletteHandler(bool force)
+{
+	if (mUserTree->readyToRefresh()) {
+		refreshUserPalette(force);
+		return;
+	}
+	connect(mUserTree, &PaletteTreeWidget::signalReadyToRefresh, this, [=]() {
+		refreshUserPalette(force);
+	});
+}
+
 void PaletteTreeWidgets::refreshUserPalette(bool force)
 {
 	QList<QPair<QString, QList<gui::PaletteElement>>> groups;
