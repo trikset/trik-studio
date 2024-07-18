@@ -112,7 +112,7 @@ void PaletteTreeWidgets::initUserTree()
 {
 	refreshUserPalette();
 	connect(&mMainWindow->models().exploser(), &models::Exploser::explosionsSetCouldChange
-			, this, [&](){refreshUserPalette(true);});
+			, this, [&](){refreshUserPaletteHandler(true);});
 }
 
 void PaletteTreeWidgets::addTopItemType(const PaletteElement &data, QTreeWidget *tree)
