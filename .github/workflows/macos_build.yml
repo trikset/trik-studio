@@ -1,0 +1,96 @@
+name: macOS CI
+on:
+  push:
+    branches-ignore:
+      - 'dependabot**'
+    tags:
+      - '*'
+    paths-ignore:
+      - '**/lsan.supp'
+      - 'buildScripts/travis/*'
+      - 'buildScripts/azure/*'
+      - 'buildScripts/docker/*'
+      - 'azure-pipelines.yml'
+      - '.cirrus.yml'
+      - '.travis.yml'
+      - '.mergify.yml'
+      - 'Brewfile'
+      - '**/*.html'
+      - '**/*.txt'
+      - '**/*.md'
+      - 'installer/packages/**/meta/prebuild-mac.sh'
+      - 'installer/packages/**/meta/prebuild-linux-gnu.sh'
+      - '**/*.dockerfile'
+      - '**/*.Dockerfile'
+      - '**/Dockerfile'
+      - '**/Dockerfile.*'
+      - 'plugins/robots/checker/scripts/build-checker-installer.sh'
+      - '.github/workflows/centos.yml'
+  pull_request:
+    branches-ignore:
+      - 'dependabot**'
+  workflow_dispatch:
+  
+jobs:
+  lint:
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: ubuntu-latest
+      lint: true
+      build: false
+      build_installer: false
+
+  build-macos-release-ccache:
+    needs: lint
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: macos-12
+      executor: "time"
+      build: true
+      build_installer: false
+      qmake_extra: "CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      tests: true
+      
+  build-macos-debug-ccache:
+    needs: lint
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: macos-12
+      executor: "time"
+      build: true
+      build_installer: false
+      config: debug
+      qmake_extra: "CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+
+  build-macos-release-tests:
+    needs: build-macos-release-ccache
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: macos-12
+      executor: "time"
+      build: true
+      build_installer: false
+      qmake_extra: "CONFIG+=trik_nopython CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      tests: true
+
+  build-macos-debug-tests:
+    needs: build-macos-debug-ccache
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: macos-12
+      executor: "time"
+      build: true
+      build_installer: false
+      config: debug
+      qmake_extra: "CONFIG+=trik_nopython CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      
+  build-macos-installer:
+    needs: [build-macos-debug-tests, build-macos-release-tests]
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: macos-12
+      executor: "time"
+      build: true
+      build_installer: true
+      qmake_extra: "CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      tests: true
