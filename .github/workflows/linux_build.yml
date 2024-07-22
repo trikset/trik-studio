@@ -47,7 +47,7 @@ jobs:
       os: ubuntu-latest
       build: true
       build_installer: false
-      qmake_extra: "CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       tests: true
       
   build-ubuntu-debug-ccache:
@@ -58,7 +58,7 @@ jobs:
       build: true
       build_installer: false
       config: debug
-      qmake_extra: "CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       tests: true
 
   build-ubuntu-release-tests:
@@ -68,7 +68,7 @@ jobs:
       os: ubuntu-latest
       build: true
       build_installer: false
-      qmake_extra: "CONFIG+=trik_nopython CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
 
   build-ubuntu-debug-tests:
     needs: build-ubuntu-debug-ccache
@@ -78,7 +78,7 @@ jobs:
       build: true
       build_installer: false
       config: debug
-      qmake_extra: "CONFIG+=trik_nopython CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       
   build-ubuntu-installer:
     needs: [build-ubuntu-debug-tests, build-ubuntu-release-tests]
@@ -87,5 +87,5 @@ jobs:
       os: ubuntu-latest
       build: true
       build_installer: true
-      qmake_extra: "CONFIG+=trik_nopython CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       tests: true
