@@ -19,7 +19,7 @@ df -h .
 
 NEED_DEPLOY=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
 
-if [[ $AGENT_OS == Linux ]] ; then
+if [[ $RUNNER_OS == Linux ]] ; then
       echo Start build checker archive
       $EXECUTOR bash -ic "bin/$CONFIG/build-checker-installer.sh"
       if $NEED_DEPLOY ; then
