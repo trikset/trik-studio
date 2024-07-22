@@ -116,7 +116,7 @@ jobs:
         TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
         CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
-        CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf"
+        CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
