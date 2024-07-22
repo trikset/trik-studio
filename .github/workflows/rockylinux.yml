@@ -29,7 +29,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  lint:
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: ubuntu-latest
+      lint: true
+      build: false
+      build_installer: false
   build:
+    needs: lint
     runs-on: ubuntu-latest
     container: rockylinux:9
     defaults:
