@@ -111,7 +111,7 @@ jobs:
       if: ${{ inputs.build == 'true' }}
     
     - name: Build Installer
-      run: buildScripts/azure/test.sh && buildScripts/github/build_installer.sh
+      run: ${{ inputs.executor }} env CONFIG=${{ inputs.config }} buildScripts/github/test.sh && buildScripts/github/build_installer.sh
       env:
         TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
