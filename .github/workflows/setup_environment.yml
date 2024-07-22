@@ -48,31 +48,31 @@ on:
         required: false
         type: string
         default: "./run-simulator-tests.sh"
-            
+
 jobs:
   job:
     defaults:
       run:
         shell: bash
-        
+
     runs-on: ${{ inputs.os }}
     steps:
     - name: Cancel Previous Workflow Runs
       uses: n1hility/cancel-previous-runs@v3.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        
+
     - name: Configure git
       run: |
           git config --global core.symlinks true
           git config --global core.autocrlf input
-        
+
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 0
-        
+
     - name: Set up environment
       run: buildScripts/github/install_${{ runner.os }}.sh
       env:
@@ -80,7 +80,7 @@ jobs:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
         QTIFW_VERSION: ${{ inputs.qtifw-version }}
         XCODE_VERSION: ${{ inputs.xcode-version }}
-        
+
     - name: Lint
       run: ${{ inputs.executor }} buildScripts/github/vera_translation.sh
       if: ${{ inputs.lint == 'true' }}
@@ -88,7 +88,7 @@ jobs:
     - name: Restore cache
       uses: actions/cache@v4
       with:
-        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        path: $HOME/.ccache/${{ inputs.os }}-${{ inputs.config }}
         key: ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
         restore-keys: |
           ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-
@@ -101,7 +101,7 @@ jobs:
       env:
         TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        CCACHE_DIR: $HOME/.ccache/${{ inputs.os }}-${{ inputs.config }}
         CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}
@@ -109,13 +109,15 @@ jobs:
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
         TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == 'true' }}
-    
+
     - name: Build Installer
-      run: ${{ inputs.executor }} env CONFIG=${{ inputs.config }} buildScripts/github/test.sh && buildScripts/github/build_installer.sh
+      run: |
+        BRANCH_NAME=${BRANCH_NAME//\//-}
+        ${{ inputs.executor }} env CONFIG=${{ inputs.config }} buildScripts/github/test.sh && buildScripts/github/build_installer.sh
       env:
         TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        CCACHE_DIR: $HOME/.ccache/${{ inputs.os }}-${{ inputs.config }}
         CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}

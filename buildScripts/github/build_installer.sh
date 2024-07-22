@@ -3,7 +3,7 @@ set -euxo pipefail
 BRANCH_NAME="${BRANCH_NAME:-${GITHUB_REF#refs/heads/}}"
 QTBIN=${QTBIN:-$($EXECUTOR  bash -c 'eval $(make qmake -n | cut -f 1 -d " ") -query QT_INSTALL_BINS')}
 case $RUNNER_OS in
-  Darwin)
+  macOS)
     QTIFWBIN=$HOME/qtifw/bin
     TSNAME=trik-studio-installer-mac-$BRANCH_NAME.dmg
 #    export TRIK_PYTHON3_VERSION_MINOR="$(python3 -V | sed 's#^Python 3\.\([0-9]+\)\.[0-9]+$#\1#g')"
