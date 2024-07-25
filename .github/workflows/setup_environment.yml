@@ -126,8 +126,9 @@ jobs:
         TESTS: ${{ inputs.tests }}
         BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         PULLREQUESTNUMBER: ${{ github.event.pull_request.number }}
-        password: ${{ secrets.password }}
-        server: ${{ secrets.server }}
+        ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
+        username: ${{ secrets.DL_USERNAME }}
+        host: ${{ secrets.DL_HOST }}
       if: ${{ inputs.build_installer == 'true' }}
 
     - name: Upload installer artifact
