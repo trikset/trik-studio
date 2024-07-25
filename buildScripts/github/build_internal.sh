@@ -1,18 +1,6 @@
-#!/bin/sh
-
-#This is a magic fix for macOS, but old Linux /usr/bin/env has no -S option, thus we cannot use shabang line
-#An obsolete bash (v3) does not support `exec {varname}<>`, thus we want to use zsh
-if ! ( eval 'exec {somevar}<>$(mktemp)' ) ; then
-    COMPATIBLE_SHELL=/bin/zsh
-    [ ! -x $COMPATIBLE_SHELL ] && COMPATIBLE_SHELL=/bin/bash || :
-    exec $COMPATIBLE_SHELL "$0" "$@"
-fi
-
-# enable kinda `bash compatibility` in zsh
-if [ -n "$ZSH_VERSION" ] ; then setopt SH_WORD_SPLIT ; fi
+#!/bin/bash
 
 set -xueo pipefail
-exec {lock}<>$(mktemp -t trik-build-lock.XXXX) && trap 'while [ -e /proc/$$/fd/$lock ] && [ $(lsof -t /proc/$$/fd/$lock | wc -l) -ne 3 ] ; do echo "Sleep to wait ..." ; lsof /proc/$$/fd/$lock ; sleep 5 ; done' EXIT
 export LANG=C
 ccache -V && ccache -p
 which g++
