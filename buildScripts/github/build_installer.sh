@@ -20,22 +20,22 @@ df -h .
 NEED_DEPLOY=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
 
 if $NEED_DEPLOY ; then
-    $EXECUTOR bash -ic "mkdir -p ~/.ssh && touch ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa && echo $ssh_key > ~/.ssh/id_rsa"
+    $EXECUTOR bash -c "mkdir -p ~/.ssh && touch ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa && echo \"$ssh_key\" > ~/.ssh/id_rsa"
 fi
           
 if [[ $RUNNER_OS == Linux ]] ; then
       echo Start build checker archive
-      $EXECUTOR bash -ic "bin/$CONFIG/build-checker-installer.sh"
+      $EXECUTOR bash -c "bin/$CONFIG/build-checker-installer.sh"
       if $NEED_DEPLOY ; then
-          $EXECUTOR bash -ic "rsync -v --rsh='ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$host:~/dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
+          $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$host:~/dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
       fi
 fi
 
 echo Start build installer
-$EXECUTOR bash -ic "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
+$EXECUTOR bash -c "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
 
 if $NEED_DEPLOY ; then
-    $EXECUTOR bash -ic "\
+    $EXECUTOR bash -c "\
           mv installer/trik-studio*installer* installer/$TSNAME \
           && rsync -v --rsh='ssh -o StrictHostKeyChecking=no' installer/$TSNAME $username@$host:~/dl/ts/fresh/installer/$TSNAME"
 fi
