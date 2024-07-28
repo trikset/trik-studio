@@ -94,3 +94,4 @@ jobs:
       build_installer: true
       qmake_extra: " CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       tests: true
+    secrets: inherit
