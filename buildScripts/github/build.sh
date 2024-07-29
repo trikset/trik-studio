@@ -2,8 +2,8 @@
 set -uxeo pipefail
 
 CODECOV=true
-case $AGENT_OS in
-  Darwin)
+case $RUNNER_OS in
+  macOS)
      QT_DIR=$(ls -dv "$HOME"/Qt/${TRIK_QT_VERSION}*/*/bin | head -n 1)
      [ -d "$QT_DIR" ] && export PATH="$QT_DIR:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
@@ -11,7 +11,6 @@ case $AGENT_OS in
      echo "Now path is $PATH"
     ;;
   Linux)
-     # if [[ "$TESTS" != "true" ]] ; then CODECOV="$EXECUTOR bash -ic \" python -m codecov \" " ; fi
    ;;
   *) exit 1 ;;
 esac
@@ -29,15 +28,15 @@ EOF
 
 $EXECUTOR env \
 CCACHE_CONFIGPATH="$CCACHE_CONFIGPATH" \
+CCACHE_DIR="$CCACHE_DIR" \
 CONFIG="$CONFIG" \
 QMAKE_EXTRA="$QMAKE_EXTRA" \
 PROJECT="$PROJECT" \
-AGENT_OS="$AGENT_OS" \
+RUNNER_OS="$RUNNER_OS" \
 TESTS="$TESTS" \
-buildScripts/azure/build_internal.sh
+buildScripts/github/build_internal.sh
 
 
 df -h .
-$EXECUTOR bash -ic buildScripts/azure/checkStatus.sh
 
 $CODECOV
