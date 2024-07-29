@@ -129,7 +129,7 @@ void Thread::stepInto(const Id &diagram)
 void Thread::finishedSteppingInto()
 {
 	if (mStack.isEmpty()) {
-		emit stopped(qReal::interpretation::StopReason::finised);
+		emit stopped(qReal::interpretation::StopReason::finished);
 		return;
 	}
 

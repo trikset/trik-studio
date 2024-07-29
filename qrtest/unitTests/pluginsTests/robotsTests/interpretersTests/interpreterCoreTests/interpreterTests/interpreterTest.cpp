@@ -159,5 +159,5 @@ TEST_F(InterpreterTest, stopRobot)
 		mEventLoop.exec();
 	}
 
-	mInterpreter->stopRobot(qReal::interpretation::StopReason::finised);
+	mInterpreter->stopRobot(qReal::interpretation::StopReason::finished);
 }

@@ -1,0 +1,143 @@
+name: Set up Action
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      executor:
+        required: false
+        type: string
+        default: "time docker exec -i builder"
+      lint:
+        required: false
+        type: string
+        default: 'false'
+      build:
+        required: true
+        type: string
+      build_installer:
+        required: true
+        type: string
+      trik-qt-version:
+        required: false
+        type: string
+        default: '5.12'
+      trik-python3-version-minor:
+        required: false
+        type: string
+        default: '9'
+      qtifw-version:
+        required: false
+        type: string
+        default: '4.6.1'
+      xcode-version:
+        required: false
+        type: string
+        default: '13.4'
+      config:
+        required: false
+        type: string
+        default: 'release'
+      qmake_extra:
+        required: false
+        type: string
+        default: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
+      tests:
+        required: false
+        type: string
+        default: "./run-simulator-tests.sh"
+
+jobs:
+  job:
+    defaults:
+      run:
+        shell: bash
+
+    runs-on: ${{ inputs.os }}
+    steps:
+    - name: Cancel Previous Workflow Runs
+      uses: n1hility/cancel-previous-runs@v3.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Configure git
+      run: |
+          git config --global core.symlinks true
+          git config --global core.autocrlf input
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Set up environment
+      run: buildScripts/github/install_${{ runner.os }}.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
+        QTIFW_VERSION: ${{ inputs.qtifw-version }}
+        XCODE_VERSION: ${{ inputs.xcode-version }}
+
+    - name: Lint
+      run: ${{ inputs.executor }} buildScripts/github/vera_translation.sh
+      if: ${{ inputs.lint == 'true' }}
+
+    - name: Restore cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        key: ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+        restore-keys: |
+          ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-
+          ccache-${{ inputs.os }}-${{ inputs.config }}-
+          ccache-${{ inputs.os }}-
+      if: ${{ inputs.build == 'true' }}
+
+    - name: Build
+      run: buildScripts/github/build.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
+        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
+        PROJECT: "studio"
+        CONFIG: ${{ inputs.config }}
+        EXECUTOR: ${{ inputs.executor }}
+        QMAKE_EXTRA: ${{ inputs.qmake_extra }}
+        TESTS: ${{ inputs.tests }}
+      if: ${{ inputs.build == 'true' }}
+
+    - name: Build Installer
+      run: |
+        BRANCH_NAME=${BRANCH_NAME//\//-}
+        ${{ inputs.executor }} env CONFIG=${{ inputs.config }} buildScripts/github/test.sh && buildScripts/github/build_installer.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
+        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
+        PROJECT: "studio"
+        CONFIG: ${{ inputs.config }}
+        EXECUTOR: ${{ inputs.executor }}
+        QMAKE_EXTRA: ${{ inputs.qmake_extra }}
+        TESTS: ${{ inputs.tests }}
+        BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+        PULLREQUESTNUMBER: ${{ github.event.pull_request.number }}
+        ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
+        username: ${{ secrets.DL_USERNAME }}
+        host: ${{ secrets.DL_HOST }}
+      if: ${{ inputs.build_installer == 'true' }}
+
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ runner.os }}-installer
+        path: |
+          installer/*.exe
+          installer/*.run
+          installer/*.dmg
+      if: ${{ inputs.build_installer == 'true' }}
+

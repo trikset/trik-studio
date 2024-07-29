@@ -3,7 +3,7 @@ TRIK_QT_INSTALL_DIR=${TRIK_QT_INSTALL_DIR:-$HOME/TRIK_QtIfw}
 SCRIPT_DIR=$(dirname ${BASH_SOURCE[0]})
 set -ueo pipefail
 #The latest with Qt 5.12 as minimal required, 4.3.0 requires Qt 5.15
-QTIFW_VERSION=4.6.1
+QTIFW_VERSION=${QTIFW_VERSION:-4.6.1}
 D=/tmp/qtifw-installer.dmg
 test -r "$D" || curl -L -o "$D" "http://download.qt-project.org/official_releases/qt-installer-framework/$QTIFW_VERSION/QtInstallerFramework-macOS-x64-${QTIFW_VERSION}.dmg"
 P=$(hdiutil attach "$D" -noverify -noautofsck | grep -o '/Volumes/.*$')

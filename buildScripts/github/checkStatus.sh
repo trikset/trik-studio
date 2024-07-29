@@ -9,5 +9,3 @@ then
 else
 	true
 fi
-
-
