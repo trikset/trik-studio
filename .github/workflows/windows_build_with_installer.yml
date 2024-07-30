@@ -1,4 +1,4 @@
-name: GHA CI
+name: Windows build
 on:
   push:
     branches-ignore:
@@ -138,7 +138,7 @@ jobs:
         timeout-minutes: 1
         run: |
             cd ${{ env.BUILD_DIR }}
-            qmake $GITHUB_WORKSPACE/studio.pro -spec win32-g++ CONFIG+=release CONFIG+=tests CONFIG+=noPch PYTHON_PATH="${pythonLocation}" # CONFIG+=silent
+            qmake $GITHUB_WORKSPACE/studio.pro -spec win32-g++ CONFIG+=release CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=tests CONFIG+=noPch PYTHON_PATH="${pythonLocation}" # CONFIG+=silent
 
       - name: QMake all
         timeout-minutes: 5

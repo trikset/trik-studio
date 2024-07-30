@@ -16,6 +16,7 @@ TEMPLATE = subdirs
 include(../../../../global.pri)
 
 SUBDIRS += \
+	trikRuntimeQsLog \
 	trikKernel \
 	trikNetwork \
 	trikControl \
@@ -26,7 +27,7 @@ SUBDIRS += \
 
 tests {
 	SUBDIRS *= tests
-	tests.depends = trikScriptRunner trikCommunicator trikKernel
+	tests.depends = trikScriptRunner trikCommunicator trikKernel trikRuntimeQsLog
 	tests.subdir = $$PWD/trikRuntime/tests
 }
 
@@ -43,8 +44,9 @@ trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
 trikControl.subdir = $$PWD/trikRuntime/trikControl
 translations.subdir = $$PWD/trikRuntime/translations
 trikHal.subdir = $$PWD/trikRuntime/trikHal
+trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
 trikControl.depends = trikKernel trikHal
-trikKernel.depends =
+trikKernel.depends = trikRuntimeQsLog
 trikNetwork.depends = trikKernel
 trikScriptRunner.depends += trikControl trikKernel trikNetwork
 trikHal.depends = trikKernel
