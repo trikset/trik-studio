@@ -25,7 +25,7 @@
 
 #define NOTIFY_DISABLED(methodName) do {\
 	QLOG_WARN() << "Script tried to use disabled method:" << #methodName;  \
-	(Q_EMIT textInStdOut(tr("'%1' is disabled\n").arg(#methodName))); \
+	(Q_EMIT textInStdOut(TwoDExecutionControl::tr("'%1' is disabled\n").arg(#methodName))); \
 	} while(0)
 
 TwoDExecutionControl::TwoDExecutionControl(

@@ -161,7 +161,13 @@
 <context>
     <name>TwoDExecutionControl</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+46"/>
+        <location filename="../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+28"/>
+        <source>&apos;%1&apos; is disabled
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
         <source>No cofigured random device</source>
         <translation>Генератор случайных чисел не сконфигурирован</translation>
     </message>
