@@ -61,7 +61,7 @@ jobs:
 
     runs-on: ${{ inputs.os }}
     container: ${{ inputs.container_name }}
-    volumes:
+      volumes:
         - ${{ github.workspace }}:$HOME
     
     steps:
