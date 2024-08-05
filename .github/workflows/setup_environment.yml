@@ -48,6 +48,10 @@ on:
         required: false
         type: string
         default: "./run-simulator-tests.sh"
+      container_name:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   job:
@@ -56,7 +60,13 @@ jobs:
         shell: bash
 
     runs-on: ${{ inputs.os }}
+    container: ${{ inputs.container_name }}
+    
     steps:
+    - name: Install dependencies
+      run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git
+      if: startsWith(inputs.container_name, 'altlinux') == true
+      
     - name: Cancel Previous Workflow Runs
       uses: n1hility/cancel-previous-runs@v3.0
       with:
@@ -88,12 +98,12 @@ jobs:
     - name: Restore cache
       uses: actions/cache@v4
       with:
-        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
-        key: ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+        path: ${{ github.workspace }}/.ccache/${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}
+        key: ccache-${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
         restore-keys: |
-          ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-
-          ccache-${{ inputs.os }}-${{ inputs.config }}-
-          ccache-${{ inputs.os }}-
+          ccache-${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}
+          ccache-${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}
+          ccache-${{ inputs.container_name }}-${{ inputs.os }}
       if: ${{ inputs.build == 'true' }}
 
     - name: Build
@@ -140,4 +150,3 @@ jobs:
           installer/*.run
           installer/*.dmg
       if: ${{ inputs.build_installer == 'true' }}
-
