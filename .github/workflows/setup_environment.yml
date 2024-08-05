@@ -60,7 +60,8 @@ jobs:
         shell: bash
 
     runs-on: ${{ inputs.os }}
-    container: ${{ inputs.container_name }}
+    container:
+      image: ${{ inputs.container_name }}
       volumes:
         - ${{ github.workspace }}:$HOME
     
