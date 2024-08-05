@@ -62,8 +62,7 @@ jobs:
     runs-on: ${{ inputs.os }}
     container:
       image: ${{ inputs.container_name }}
-      volumes:
-        - ${{ github.workspace }}:$HOME
+      options: -v ${{ github.workspace }}:$HOME
     
     steps:
     - name: Install dependencies
