@@ -11,6 +11,10 @@ case $RUNNER_OS in
      echo "Now path is $PATH"
     ;;
   Linux)
+    ID=$(grep '^ID=' /etc/os-release | cut -d'=' -f2)
+    if [ "$ID" = "altlinux" ]; then
+        ln -s /usr/bin/qmake-qt5 /usr/bin/qmake
+    fi
    ;;
   *) exit 1 ;;
 esac
