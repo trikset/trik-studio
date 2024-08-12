@@ -24,10 +24,10 @@ includes(plugins/robots/interpreters/interpreterCore \
 		qrtext \
 )
 
-LIBS += -L$$GLOBAL_PWD/plugins/robots/thirdparty/trikRuntime/trikRuntime/bin/x86-$$CONFIGURATION
+LIBS += -L$$GLOBAL_PWD/plugins/robots/thirdparty/trikRuntime/trikRuntime/bin
 
 links(qrkernel qrrepo qrutils qrtext qrgui-models qrgui-controller qrgui-preferences-dialog qrgui-plugin-manager \
-                qrgui-tool-plugin-interface qrgui-text-editor robots-kit-base robots-utils robots-2d-model)
+		qrgui-tool-plugin-interface qrgui-text-editor robots-kit-base robots-utils robots-2d-model)
 
 DEFINES += TRIK_STUDIO_VERSION=$$shell_quote('"'$$TRIK_STUDIO_VERSION'"')
 

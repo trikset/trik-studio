@@ -172,7 +172,7 @@ jobs:
         run: |
             echo "$PATH"
             echo ------
-            cd ${{ env.BUILD_DIR }}/bin/release
+            cd ${{ env.BUILD_DIR }}/bin
             env QT_QPA_PLATFORM=minimal python3 "${GITHUB_WORKSPACE}/buildScripts/tests/fieldstest.py" ./2D-model "${GITHUB_WORKSPACE}/testing_small"
 
       - name: Build installer

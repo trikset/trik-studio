@@ -15,18 +15,6 @@
 !isEmpty(_PRO_FILE_):!isEmpty(CONFIG):isEmpty(GLOBAL_PRI_INCLUDED){
 #GLOBAL_PRI_INCLUDED = $$PWD
 
-win32 {
-	PLATFORM = windows
-}
-
-unix:!macx {
-	PLATFORM = linux
-}
-
-macx {
-	PLATFORM = mac
-}
-
 CONFIG *= qt thread exceptions
 
 !win32:CONFIG *= use_gold_linker
@@ -43,16 +31,9 @@ CONFIG = $$unique(CONFIG)
 macx:QT_CONFIG -= no-pkg-config
 QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -Og
 
-CONFIG(debug) {
-	CONFIGURATION = debug
-	CONFIGURATION_SUFFIX =
-	unix {
+unix:debug {
 		QMAKE_CXXFLAGS += -coverage
 		QMAKE_LFLAGS += -coverage
-	}
-} else {
-	CONFIGURATION = release
-	CONFIGURATION_SUFFIX =
 }
 
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<5\\.[0-9]+\\."' ){ CONFIG += gcc5 }
@@ -63,7 +44,7 @@ GLOBAL_OUTPWD = $$absolute_path($$OUT_PWD)
 
 
 isEmpty(GLOBAL_DESTDIR) {
-	GLOBAL_DESTDIR = $$GLOBAL_OUTPWD/bin/$$CONFIGURATION
+	GLOBAL_DESTDIR = $$GLOBAL_OUTPWD/bin
 }
 
 isEmpty(DESTDIR) {
@@ -81,7 +62,7 @@ isEmpty(TARGET) {
 }
 
 equals(TEMPLATE, app) {
-        VERSION = $${PROJECT_GIT_VERSION_MAJOR}$${PROJECT_GIT_VERSION_MINOR}.$${PROJECT_GIT_VERSION_PATCH}.$${PROJECT_GIT_VERSION_BUILD}
+	VERSION = $${PROJECT_GIT_VERSION_MAJOR}$${PROJECT_GIT_VERSION_MINOR}.$${PROJECT_GIT_VERSION_PATCH}.$${PROJECT_GIT_VERSION_BUILD}
 	!no_rpath {
 		#reset default rpath before setting new one
 		#but this clears path to Qt libraries
@@ -109,7 +90,7 @@ use_gold_linker:!clang: QMAKE_LFLAGS += -Wl,--disable-new-dtags
 macx:QMAKE_TARGET_BUNDLE_PREFIX = com.cybertech
 
 macx-clang {
-        QMAKE_MACOSX_DEPLOYMENT_TARGET=10.12
+	QMAKE_MACOSX_DEPLOYMENT_TARGET=10.12
 	QMAKE_LFLAGS_SONAME = -Wl,-install_name,@rpath/
 }
 
@@ -164,11 +145,11 @@ equals(TEMPLATE, lib) {
 		QMAKE_SANITIZE_UNDEFINED_LFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
 	}
 
-        sanitize_memory {
-                QMAKE_CFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
-                QMAKE_CXXFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
+	sanitize_memory {
+		QMAKE_CFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
+		QMAKE_CXXFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
 
-        }
+	}
 
         unix {
                 QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
@@ -182,16 +163,11 @@ equals(TEMPLATE, lib) {
         }
 }
 
-OBJECTS_DIR = .build/$$CONFIGURATION/obj
-MOC_DIR = .build/$$CONFIGURATION/moc
-RCC_DIR = .build/$$CONFIGURATION/rcc
-UI_DIR = .build/$$CONFIGURATION/ui
-
 !noPch:CONFIG *= precompile_header
 
 precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
 precompile_header:!isEmpty(PRECOMPILED_HEADER) {
-	QMAKE_CXXFLAGS += -include $$PRECOMPILED_HEADER -fpch-preprocess
+	QMAKE_CXXFLAGS *= -include $$PRECOMPILED_HEADER -fpch-preprocess
 }
 
 !warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
@@ -351,7 +327,7 @@ defineTest(enableFlagIfCan) {
 }
 
 defineReplace(fullSystemPath) {
-        return($$system_path($$clean_path($$absolute_path($$1))))
+	return($$system_path($$clean_path($$absolute_path($$1))))
 }
 
 CONFIG(noPch) {

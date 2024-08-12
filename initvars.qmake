@@ -1,7 +1,11 @@
 include($$PWD/global.pri)
 TEMPLATE=subdirs
 SUBDIRS=
-#DESTDIR = $$absolute_path($$DESTDIR)
+QMAKE_SUBSTITUTES += .qmake.cache.in
+DISTFILES += .qmake.cache.in
+
+GLOBAL_DESTDIR = $$absolute_path($$GLOBAL_OUTPWD/bin)
+cache(GLOBAL_DESTDIR, set super)
 
 # ATM we use xenial 16.04 as main linux builder, and it lacks new git with --broken option.
 REPO_GIT_VERSION_STRING=$$system(git -C $$PWD -c $$system_quote(safe.directory=*) describe --tags --always --dirty --abbrev=6 || true)
@@ -20,16 +24,21 @@ isEmpty(PROJECT_GIT_VERSION_PATCH):PROJECT_GIT_VERSION_PATCH=0
 isEmpty(PROJECT_GIT_VERSION_MINOR):PROJECT_GIT_VERSION_MINOR=0
 isEmpty(PROJECT_GIT_VERSION_MAJOR):PROJECT_GIT_VERSION_MAJOR=0
 
+cache(PROJECT_GIT_VERSION_BUILD, set super)
+cache(PROJECT_GIT_VERSION_PATCH, set super)
+cache(PROJECT_GIT_VERSION_MINOR, set super)
+cache(PROJECT_GIT_VERSION_MAJOR, set super)
+
 TRIK_STUDIO_VERSION=$$REPO_GIT_VERSION_STRING
 isEmpty(TRIK_STUDIO_VERSION):TRIK_STUDIO_VERSION=UNDEFINED.999
 
 message(Version is "$$TRIK_STUDIO_VERSION with codes" \
       $$PROJECT_GIT_VERSION_MAJOR/$$PROJECT_GIT_VERSION_MINOR/$$PROJECT_GIT_VERSION_PATCH/$$PROJECT_GIT_VERSION_BUILD)
+cache(TRIK_STUDIO_VERSION, set super)
 
 #obsolete???
 TRIK_STUDIO_YEAR = 2021
+cache(TRIK_STUDIO_YEAR, set super)
 
-#message($$DESTDIR)
-QMAKE_SUBSTITUTES += .qmake.cache.in
-
-DISTFILES += .qmake.cache.in
+########
+cache(CONFIG, set super)
