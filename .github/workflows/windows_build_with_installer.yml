@@ -162,7 +162,7 @@ jobs:
       - name: Prepare all dlls
         if: false
         run: |
-            for file in $(ls ${{ env.BUILD_DIR }}/bin/release/*.exe || :) ; do windeployqt --release $file ; done
+            for file in $(ls ${{ env.BUILD_DIR }}/bin/*.exe || :) ; do windeployqt --release $file ; done
 
       - name: Download tests
         run: |
@@ -177,7 +177,7 @@ jobs:
         run: |
             echo "$PATH"
             echo ------
-            cd ${{ env.BUILD_DIR }}/bin/release
+            cd ${{ env.BUILD_DIR }}/bin
             python "${{ github.workspace }}\buildScripts\tests\fieldstest.py" 2D-model.exe "${{ github.workspace }}\testing_small"
 
       - name: Push binaries
@@ -185,7 +185,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: binaries-${{ matrix.qt-version}}
-          path: ${{ env.BUILD_DIR }}/bin/release
+          path: ${{ env.BUILD_DIR }}/bin
 
       - name: Build installer
         run: |

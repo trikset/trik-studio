@@ -51,7 +51,7 @@ fi
 
 pushd $qRealDir
 
-QMAKE=$(check_qmake_version $qRealDir/../..)
+QMAKE=$(check_qmake_version $qRealDir/..)
 echo "Using qmake: $QMAKE"
 QT_HOST_DATA=$($QMAKE -query QT_HOST_DATA)
 QT_INSTALL_PLUGINS=$($QMAKE -query QT_INSTALL_PLUGINS)
