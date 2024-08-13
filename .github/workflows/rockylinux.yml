@@ -121,7 +121,7 @@ jobs:
         run: echo PATH="$PATH"
 
       - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2.13
+        uses: hendrikmuhs/ccache-action@v1.2.14
 
       - name: Check available tools
         run: |
