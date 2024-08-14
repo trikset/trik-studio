@@ -47,7 +47,7 @@ jobs:
       os: ubuntu-latest
       build: true
       build_installer: false
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent"
   
   build-altlinux-release-tests:
     needs: lint
@@ -57,7 +57,7 @@ jobs:
       container_name: "altlinux/base:latest"
       build: true
       build_installer: false
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent"
       tests: true
       executor: time
 
