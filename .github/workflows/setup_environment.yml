@@ -1,5 +1,5 @@
 name: Set up Action
-
+   
 on:
   workflow_call:
     inputs:
@@ -70,11 +70,6 @@ jobs:
     - name: Install dependencies
       run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git
       if: startsWith(inputs.container_name, 'altlinux') == true
-      
-    - name: Cancel Previous Workflow Runs
-      uses: n1hility/cancel-previous-runs@v3.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Configure git
       run: |
@@ -121,9 +116,22 @@ jobs:
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
-        TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == 'true' }}
 
+    - name: Save build cache
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+      if: ${{ inputs.build == 'true' }}
+        
+    - name: Run tests
+      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh
+      env:
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
+        TESTS: ${{ inputs.tests }}
+      if: ${{ inputs.build == 'true' }}
+      
     - name: Build Installer
       run: |
         BRANCH_NAME=${BRANCH_NAME//\//-}
