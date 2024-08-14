@@ -1,5 +1,9 @@
 name: Set up Action
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+   
 on:
   workflow_call:
     inputs:
@@ -70,11 +74,6 @@ jobs:
     - name: Install dependencies
       run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git
       if: startsWith(inputs.container_name, 'altlinux') == true
-      
-    - name: Cancel Previous Workflow Runs
-      uses: n1hility/cancel-previous-runs@v3.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Configure git
       run: |
