@@ -1,4 +1,5 @@
 name: macOS CI
+
 on:
   push:
     branches-ignore:
@@ -30,6 +31,10 @@ on:
     branches-ignore:
       - 'dependabot**'
   workflow_dispatch:
+  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
   
 jobs:
   lint:

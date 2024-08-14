@@ -31,6 +31,10 @@ on:
       - 'dependabot**'
   workflow_dispatch:
   
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   lint:
     uses: ./.github/workflows/setup_environment.yml
