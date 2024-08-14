@@ -40,29 +40,6 @@ jobs:
       build: false
       build_installer: false
 
-  build-macos-release-ccache:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: macos-12
-      executor: "time"
-      build: true
-      build_installer: false
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-      tests: true
-      
-  build-macos-debug-ccache:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: macos-12
-      executor: "time"
-      build: true
-      build_installer: false
-      config: debug
-      qmake_extra: "CONFIG+=warn_off CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-      tests: true
-
   build-macos-release-tests:
     needs: build-macos-release-ccache
     uses: ./.github/workflows/setup_environment.yml

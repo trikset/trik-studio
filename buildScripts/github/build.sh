@@ -37,7 +37,6 @@ CONFIG="$CONFIG" \
 QMAKE_EXTRA="$QMAKE_EXTRA" \
 PROJECT="$PROJECT" \
 RUNNER_OS="$RUNNER_OS" \
-TESTS="$TESTS" \
 buildScripts/github/build_internal.sh
 
 

@@ -40,39 +40,6 @@ jobs:
       build: false
       build_installer: false
 
-  build-ubuntu-release-ccache:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      build: true
-      build_installer: false
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-      tests: true
- 
-  build-altlinux-release-ccache:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      container_name: "altlinux/base:latest"
-      build: true
-      build_installer: false
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-      tests: true
-      executor: time
-           
-  build-ubuntu-debug-ccache:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      build: true
-      build_installer: false
-      config: debug
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-      tests: true
-
   build-ubuntu-release-tests:
     needs: build-ubuntu-release-ccache
     uses: ./.github/workflows/setup_environment.yml
