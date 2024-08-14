@@ -100,7 +100,6 @@ jobs:
       if: ${{ inputs.lint == 'true' }}
 
     - name: Restore cache
-      id: build-cache-restore
       uses: actions/cache@v4
       with:
         path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
@@ -128,7 +127,7 @@ jobs:
       uses: actions/cache/save@v4
       with:
         path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
-        key: ${{ steps.build-cache-restore.outputs.cache-primary-key }}
+        key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
       if: ${{ inputs.build == 'true' }}
         
     - name: Run tests
