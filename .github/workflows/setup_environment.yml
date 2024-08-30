@@ -1,5 +1,5 @@
 name: Set up Action
-
+   
 on:
   workflow_call:
     inputs:
@@ -48,6 +48,10 @@ on:
         required: false
         type: string
         default: "./run-simulator-tests.sh"
+      container_name:
+        required: false
+        type: string
+        default: ""
 
 jobs:
   job:
@@ -56,11 +60,16 @@ jobs:
         shell: bash
 
     runs-on: ${{ inputs.os }}
+    container:
+      image: ${{ inputs.container_name }}
+      options: >
+        -v ${{ github.workspace }}:${{ github.workspace }} 
+        -w ${{ github.workspace }}
+    
     steps:
-    - name: Cancel Previous Workflow Runs
-      uses: n1hility/cancel-previous-runs@v3.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Install dependencies
+      run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git
+      if: startsWith(inputs.container_name, 'altlinux') == true
 
     - name: Configure git
       run: |
@@ -88,12 +97,12 @@ jobs:
     - name: Restore cache
       uses: actions/cache@v4
       with:
-        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
-        key: ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
         restore-keys: |
-          ccache-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-
-          ccache-${{ inputs.os }}-${{ inputs.config }}-
-          ccache-${{ inputs.os }}-
+          ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}
+          ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}
+          ccache-c${{ inputs.container_name }}-${{ inputs.os }}
       if: ${{ inputs.build == 'true' }}
 
     - name: Build
@@ -101,15 +110,28 @@ jobs:
       env:
         TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
         CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
-        TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == 'true' }}
 
+    - name: Save build cache
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+      if: ${{ inputs.build == 'true' }}
+        
+    - name: Run tests
+      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh
+      env:
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
+        TESTS: ${{ inputs.tests }}
+      if: ${{ inputs.build == 'true' }}
+      
     - name: Build Installer
       run: |
         BRANCH_NAME=${BRANCH_NAME//\//-}
@@ -117,7 +139,7 @@ jobs:
       env:
         TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-${{ inputs.config }}
+        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
         CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}
@@ -140,4 +162,3 @@ jobs:
           installer/*.run
           installer/*.dmg
       if: ${{ inputs.build_installer == 'true' }}
-

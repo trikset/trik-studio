@@ -31,6 +31,10 @@ on:
       - 'dependabot**'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   build:
     runs-on: windows-latest
@@ -58,12 +62,7 @@ jobs:
         shell: msys2 {0}
 
     steps:
-
-      - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+    
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
         with:

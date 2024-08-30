@@ -28,6 +28,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   lint:
     uses: ./.github/workflows/setup_environment.yml
@@ -53,11 +57,6 @@ jobs:
             deploy-installer: true
 
     steps:
-
-      - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install packages
         run: |
@@ -121,7 +120,7 @@ jobs:
         run: echo PATH="$PATH"
 
       - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2.13
+        uses: hendrikmuhs/ccache-action@v1.2.14
 
       - name: Check available tools
         run: |
