@@ -137,7 +137,9 @@ jobs:
         timeout-minutes: 1
         run: |
             cd ${{ env.BUILD_DIR }}
-            qmake $GITHUB_WORKSPACE/studio.pro CONFIG+=release CONFIG+=tests PYTHON3_VERSION_MINOR=${{ matrix.python-minor }} CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined
+            qmake $GITHUB_WORKSPACE/studio.pro CONFIG+=release CONFIG+=tests \
+              PYTHON_VERSION=3.${{ matrix.python-minor }} PYTHON_DIR=$(python-3.${{ matrix.python-minor }}-config --prefix) \
+              CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined
 
       - name: QMake all
         timeout-minutes: 5
