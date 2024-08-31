@@ -45,7 +45,7 @@ jobs:
           - qt-version: '5.12'
             mingw-version: '7.3'
             mingw-short-version: '73'
-            python-version: '3.8'
+            python-version: '3.11'
             mingw-bitness: '64'
             deploy-installer: true
 
@@ -53,7 +53,7 @@ jobs:
             mingw-version: '8.1'
             mingw-bitness: '64'
             mingw-short-version: '81'
-            python-version: '3.8'
+            python-version: '3.11'
 #            deploy-installer: true
 
 
