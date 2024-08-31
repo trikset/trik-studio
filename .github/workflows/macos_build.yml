@@ -54,6 +54,7 @@ jobs:
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      trik-python3-version-minor: "11"
 
   build-macos-debug-tests:
     needs: lint
@@ -65,6 +66,7 @@ jobs:
       build_installer: false
       config: debug
       qmake_extra: "CONFIG+=warn_off CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=silent CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      trik-python3-version-minor: "11"
       
   build-macos-installer:
     needs: [build-macos-debug-tests, build-macos-release-tests]
@@ -75,5 +77,6 @@ jobs:
       build: true
       build_installer: true
       qmake_extra: " CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      trik-python3-version-minor: "11"
       tests: true
     secrets: inherit
