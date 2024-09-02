@@ -13,6 +13,7 @@ rsync -a "$BIN_DIR"/qrutils.dll                                          "$PWD"/
 rsync -a "$BIN_DIR"/qrtext.dll                                           "$PWD"/../data
 rsync -a "$BIN_DIR"/trikqscintilla2.dll                                  "$PWD"/../data
 rsync -a "$BIN_DIR"/trikQsLog.dll                                        "$PWD"/../data
+rsync -a "$BIN_DIR"/trikRuntimeQsLog.dll                                 "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-brand-manager.dll                              "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-controller.dll                                 "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-dialogs.dll                                    "$PWD"/../data
