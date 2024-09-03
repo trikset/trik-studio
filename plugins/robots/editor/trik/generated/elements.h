@@ -745,7 +745,7 @@
 			setFriendlyName(QObject::tr("Join Network"));
 			setDiagram("RobotsDiagram");
 			setDescription(QObject::tr("Sets hull number of this robot and connects to robot by IP and port."));
-			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.9, 1.8, "Address", false, 0));
+			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.9, 1.2, "Address", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
 			label_1->setScalingY(false);
@@ -753,7 +753,7 @@
 			label_1->setPlainTextMode(false);
 			label_1->setPrefix(QObject::tr("Address:"));
 			addLabel(label_1);
-			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.9, 1.2, "Port", false, 0));
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.9, 1.8, "Port", false, 0));
 			label_2->setBackground(Qt::white);
 			label_2->setScalingX(false);
 			label_2->setScalingY(false);
@@ -791,9 +791,9 @@
 
 		void initProperties()
 		{
-			addProperty("Address", "string", QObject::tr(""""""), QObject::tr("Address"), QObject::tr(""), false);
-			addProperty("HullNumber", "string", QObject::tr(""), QObject::tr("Hull Number"), QObject::tr(""), false);
-			addProperty("Port", "int", QString::fromUtf8(""), QObject::tr("Port"), QObject::tr(""), false);
+			addProperty("Address", "string", QObject::tr("192.168.77.1"), QObject::tr("Address"), QObject::tr(""), false);
+			addProperty("HullNumber", "string", QObject::tr("-1"), QObject::tr("Hull Number"), QObject::tr(""), false);
+			addProperty("Port", "int", QString::fromUtf8("-1"), QObject::tr("Port"), QObject::tr(""), false);
 		}
 	};
 
