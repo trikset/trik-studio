@@ -1275,6 +1275,36 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Join Network" name="TrikJoinNetwork" description="Sets hull number of this robot and connects to robot by IP and port.">
+			        <graphics>
+				        <picture sizex="50" sizey="50">
+					        <image y1="0" name="images/joinNetwork.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+					        <label x="45" y="60" textBinded="Address" hard="false" prefix="Address:"/>
+						<label x="45" y="90" textBinded="Port" hard="false" prefix="Port:"/>
+						<label x="45" y="120" textBinded="HullNumber" hard="false" prefix="Hull number:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+				        <properties>
+					        <property displayedName="Address" type="string" name="Address">
+						        <default>192.168.77.1</default>
+						</property>
+						<property displayedName="Port" type="int" name="Port">
+						        <default>-1</default>
+						</property>
+						<property displayedName="Hull Number" type="string" name="HullNumber">
+						        <default>-1</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+					        <parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 
 			<!-- TRIK version 6.2 (new case) specifics -->
 			<node displayedName="Angular Servo" name="TrikV62AngularServo" description="Manages angular servomotor. Sets up rotation angle on the given port in degrees. Values from 0 to 90 are correspond to a clockwise rotation and values from -90 to 0 correspond to counterclockwise rotation.">
@@ -1395,6 +1425,7 @@
 				<element name="TrikRemoveFile"/>
 				<element name="TrikCalibrateGyroscope"/>
 				<element name="TrikReadLidar"/>
+				<element name="TrikJoinNetwork"/>
 			</group>
 			<group name="Wait">
 				<element name="TrikWaitForGyroscope" />
