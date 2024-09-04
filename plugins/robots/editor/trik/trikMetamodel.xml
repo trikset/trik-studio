@@ -1295,7 +1295,7 @@
 						<property displayedName="Port" type="int" name="Port">
 						        <default>-1</default>
 						</property>
-						<property displayedName="Hull Number" type="string" name="HullNumber">
+						<property displayedName="Hull Number" type="int" name="HullNumber">
 						        <default>-1</default>
 						</property>
 					</properties>

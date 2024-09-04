@@ -14,6 +14,7 @@
 
 #include "trikJoinNetworkGenerator.h"
 #include <generatorBase/generatorCustomizer.h>
+#include <qrutils/stringUtils.h>
 
 using namespace trik::simple;
 using namespace generatorBase::simple;
@@ -25,7 +26,7 @@ TrikJoinNetworkGenerator::TrikJoinNetworkGenerator(const qrRepo::RepoApi &repo
 						   , QObject *parent)
 	: BindingGenerator(repo, customizer, id
 			  , "messages/joinNetwork.t"
-			  , { Binding::createDirect("@@IP@@", "Address")
+			  , { Binding::createStatic("@@IP@@", utils::StringUtils::wrap(repo.property(id, "Address").toString()))
 					, Binding::createDirect("@@PORT@@", "Port")
 					, Binding::createDirect("@@HULL_NUMBER@@", "HullNumber") }
 			  , parent)
