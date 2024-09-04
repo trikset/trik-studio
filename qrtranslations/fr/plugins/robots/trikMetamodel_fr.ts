@@ -829,11 +829,6 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>-1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
         <source>Hull Number</source>
         <translation type="unfinished"></translation>
     </message>

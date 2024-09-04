@@ -27,7 +27,8 @@ TrikJoinNetworkGenerator::TrikJoinNetworkGenerator(const qrRepo::RepoApi &repo
 	: BindingGenerator(repo, customizer, id
 			  , "messages/joinNetwork.t"
 			  , { Binding::createStaticConverting("@@IP@@"
-								,  utils::StringUtils::wrap(utils::StringUtils::dequote(repo.stringProperty(id, "Address")))
+								,  utils::StringUtils::wrap(
+								      utils::StringUtils::dequote(repo.stringProperty(id, "Address")))
 								, customizer.factory()->stringPropertyConverter(id, "Address"))
 					, Binding::createDirect("@@PORT@@", "Port")
 					, Binding::createDirect("@@HULL_NUMBER@@", "HullNumber") }
