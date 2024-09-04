@@ -105,7 +105,7 @@ equals(TEMPLATE, lib) {
 	}
 }
 
-win32: QMAKE_LFLAGS *= -Wl,--dynamicbase
+win32: QMAKE_LFLAGS *= -Wl,--dynamicbase,--high-entropy-va,--nxcompat
 
 !nosanitizers:!clang:gcc:*-g++*:gcc4{
 	warning("Disabled sanitizers, failed to detect compiler version or too old compiler: $$QMAKE_CXX")
