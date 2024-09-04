@@ -792,7 +792,7 @@
 		void initProperties()
 		{
 			addProperty("Address", "string", QObject::tr("192.168.77.1"), QObject::tr("Address"), QObject::tr(""), false);
-			addProperty("HullNumber", "string", QObject::tr("-1"), QObject::tr("Hull Number"), QObject::tr(""), false);
+			addProperty("HullNumber", "int", QString::fromUtf8("-1"), QObject::tr("Hull Number"), QObject::tr(""), false);
 			addProperty("Port", "int", QString::fromUtf8("-1"), QObject::tr("Port"), QObject::tr(""), false);
 		}
 	};
