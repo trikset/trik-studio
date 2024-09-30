@@ -18,6 +18,7 @@ using namespace utils;
 
 RealTimer::RealTimer()
 {
+	mTimer.setTimerType(Qt::TimerType::PreciseTimer);
 	setSingleShot(true);
 	connect(&mTimer, &QTimer::timeout, this, &RealTimer::timeout);
 }
