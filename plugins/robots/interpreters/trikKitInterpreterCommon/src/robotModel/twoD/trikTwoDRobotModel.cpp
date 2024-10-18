@@ -45,6 +45,7 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDLightSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
+#include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h"
 
 using namespace trik::robotModel;
 using namespace trik::robotModel::twoD;
@@ -79,6 +80,11 @@ QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
 
 robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
+	if (deviceInfo.isA<robotParts::Communicator>()) {
+		return new parts::TwoDNetworkCommunicator(deviceInfo, port);
+	}
+
+
 	if (deviceInfo.isA<robotParts::Display>()) {
 		return new parts::Display(deviceInfo, port, *engine());
 	}
@@ -139,6 +145,13 @@ void TrikTwoDRobotModel::onInterpretationStarted()
 		shell->reset();
 	} else {
 		QLOG_WARN() << "TRIK shell is not configured before intepretation start!";
+	}
+
+	auto * const mailbox = RobotModelUtils::findDevice<parts::TwoDNetworkCommunicator>(*this, "CommunicatorPort");
+	if (mailbox) {
+		mailbox->release();
+	} else {
+		QLOG_WARN() << "TRIK network is not configured before intepretation start!";
 	}
 }
 

@@ -1282,7 +1282,7 @@
 					</picture>
 					<labels>
 					        <label x="45" y="60" textBinded="Address" hard="false" prefix="Address:"/>
-						<label x="45" y="90" textBinded="Port" hard="false" prefix="Port:"/>
+						<label x="45" y="90" textBinded="IPPort" hard="false" prefix="Port:"/>
 						<label x="45" y="120" textBinded="HullNumber" hard="false" prefix="Hull number:"/>
 					</labels>
 					<nonResizeable/>
@@ -1292,7 +1292,7 @@
 					        <property displayedName="Address" type="string" name="Address">
 						        <default>192.168.77.1</default>
 						</property>
-						<property displayedName="Port" type="int" name="Port">
+						<property displayedName="Port" type="int" name="IPPort">
 						        <default>-1</default>
 						</property>
 						<property displayedName="Hull Number" type="int" name="HullNumber">

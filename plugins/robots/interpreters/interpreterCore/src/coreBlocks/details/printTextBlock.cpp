@@ -28,9 +28,19 @@ void PrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 {
 	const int x = eval<int>("XCoordinateText");
 	const int y = eval<int>("YCoordinateText");
-	const QString result = boolProperty("Evaluate")
-			? QString::number(QString::number(eval<qreal>("PrintText"), 'f', 6).toDouble())
-			: stringProperty("PrintText");
+
+	QString result = stringProperty("PrintText");
+	if (boolProperty("Evaluate")) {
+	     bool ok;
+	     eval<QString>("PrintText").toDouble(&ok);
+	     if (ok) {
+		     result = QString::number(QString::number(eval<qreal>("PrintText"), 'f', 6).toDouble());
+	     }
+	     else {
+		     result =  eval<QString>("PrintText");
+	     }
+	}
+
 	const bool redraw = boolProperty("Redraw");
 
 	if (!errorsOccured()) {
