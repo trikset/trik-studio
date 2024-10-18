@@ -25,7 +25,8 @@ namespace twoD {
 namespace parts {
 
 /// Class for implementing 2D-model network communication between robots
-class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDNetworkCommunicator : public robotModel::parts::TrikNetworkCommunicator
+class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDNetworkCommunicator
+		: public robotModel::parts::TrikNetworkCommunicator
 {
 	Q_OBJECT
 

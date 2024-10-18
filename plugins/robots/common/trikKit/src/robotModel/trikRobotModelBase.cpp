@@ -284,7 +284,7 @@ DeviceInfo TrikRobotModelBase::videoCameraInfo() const {
 
 DeviceInfo TrikRobotModelBase::networkInfo() const
 {
-       return DeviceInfo::create<robotParts::Communicator>();
+	return DeviceInfo::create<robotParts::Communicator>();
 }
 
 

@@ -22,7 +22,7 @@ namespace parts {
 /// Class for TRIK robot network communication.
 class TrikNetworkCommunicator : public kitBase::robotModel::robotParts::Communicator
 {
-       Q_OBJECT
+	Q_OBJECT
 
 public:
 	TrikNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info
