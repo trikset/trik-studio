@@ -28,8 +28,8 @@ namespace robotModel {
 namespace twoD {
 
 /// @todo Refactor common code out of here.
-///       It needs ceoncerns separation: robot model is device factory and container for device-port configuration.
-///       So, for diffrent TRIK cases devices are the same, but mappings between ports and devices are
+///       It needs concerns separation: robot model is device factory and container for device-port configuration.
+///       So, for different TRIK cases devices are the same, but mappings between ports and devices are
 ///       different. And across models devices are different (2d and real) but port mappings are the same.
 ///       Clearly we need to separate this into two hierarchies.
 class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikTwoDRobotModel : public twoDModel::robotModel::TwoDRobotModel
