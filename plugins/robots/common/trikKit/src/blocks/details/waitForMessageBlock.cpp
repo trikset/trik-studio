@@ -28,7 +28,6 @@ WaitForMessageBlock::WaitForMessageBlock(kitBase::robotModel::RobotModelInterfac
 {
 	mActiveWaitingTimer->setSingleShot(true);
 	mActiveWaitingTimer->setInterval(100);
-
 }
 
 void WaitForMessageBlock::handle()

@@ -43,7 +43,6 @@ public:
 
 	/// Clean the incoming message queue
 	virtual void clearQueue() = 0;
-
 };
 
 }

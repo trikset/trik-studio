@@ -37,8 +37,7 @@ private:
 	kitBase::robotModel::DeviceInfo device() const override;
 
 	robotModel::parts::TrikNetworkCommunicator *mNetwork {};
-	QString mMessage;
-
+	QString mMessage {};
 };
 
 }

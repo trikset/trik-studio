@@ -4,7 +4,7 @@
 <context>
     <name>trik::blocks::details::WaitForMessageBlock</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/waitForMessageBlock.cpp" line="+47"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/waitForMessageBlock.cpp" line="+46"/>
         <source>Device not found for port name CommunicatorPort</source>
         <translation type="unfinished"></translation>
     </message>

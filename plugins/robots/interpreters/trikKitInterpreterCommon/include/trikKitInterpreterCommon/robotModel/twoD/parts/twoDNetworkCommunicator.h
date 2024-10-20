@@ -55,7 +55,6 @@ public:
 	void release() override;
 private:
 	trikNetwork::MailboxInterface *mMailbox {}; // ownership --- TrikKitInterpreterPluginBase
-
 };
 
 }

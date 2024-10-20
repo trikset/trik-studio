@@ -35,7 +35,6 @@ public:
 
 	/// Deinitializing a network communicator
 	virtual void release() = 0;
-
 };
 }
 }
