@@ -46,7 +46,6 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDLightSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h"
-
 using namespace trik::robotModel;
 using namespace trik::robotModel::twoD;
 using namespace kitBase::robotModel;
@@ -81,7 +80,7 @@ QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
 robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
 	if (deviceInfo.isA<robotParts::Communicator>()) {
-		return new parts::TwoDNetworkCommunicator(deviceInfo, port);
+		return new parts::TwoDNetworkCommunicator(deviceInfo, port, mMailbox);
 	}
 
 
@@ -276,4 +275,9 @@ QHash<QString, int> TrikTwoDRobotModel::buttonCodes() const
 void TrikTwoDRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
 {
 	mErrorReporter = &errorReporter;
+}
+
+void TrikTwoDRobotModel::setMailbox(trikNetwork::MailboxInterface &mailbox)
+{
+	mMailbox = &mailbox;
 }

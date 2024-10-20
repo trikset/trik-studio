@@ -33,6 +33,7 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikTextualInterpreter
 
 public:
 	TrikTextualInterpreter(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model
+			       , trikNetwork::MailboxInterface *mailbox
 						   , bool enablePython = false);
 	~TrikTextualInterpreter() override;
 
@@ -46,7 +47,6 @@ public:
 	bool isRunning() const;
 	void setRunning(bool running);
 	void setCurrentDir(const QString &dir, const QString &languageExtension);
-	void setMailboxHullNumber();
 	QStringList supportedRobotModelNames() const;
 	QStringList knownMethodNames() const;
 
@@ -67,7 +67,7 @@ private:
 	bool mRunning { false };
 
 	TrikBrick mBrick;
-	QSharedPointer<trikNetwork::MailboxInterface> mMailbox;
+	trikNetwork::MailboxInterface *mMailbox {}; // ownership --- TrikKitInterpreterPluginBase
 	TwoDExecutionControl *mExecutionControl {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
 	qReal::ErrorReporterInterface *mErrorReporter {};

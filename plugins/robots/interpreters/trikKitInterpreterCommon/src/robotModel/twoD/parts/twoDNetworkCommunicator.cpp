@@ -14,17 +14,16 @@
 
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h"
 #include <qrkernel/settingsManager.h>
-#include <trikNetwork/mailboxFactory.h>
 #include <trikNetwork/mailboxInterface.h>
 
 using namespace trik::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
 
 TwoDNetworkCommunicator::TwoDNetworkCommunicator(const DeviceInfo &info
-		, const PortInfo &port)
+		, const PortInfo &port
+		,trikNetwork::MailboxInterface *mailbox)
 	: robotModel::parts::TrikNetworkCommunicator(info, port)
-	, mMailbox(qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()
-		   ? trikNetwork::MailboxFactory::create(8889): nullptr)
+	, mMailbox(mailbox)
 {}
 
 

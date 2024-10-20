@@ -32,7 +32,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TwoDNetworkCommunicator
 
 public:
 	TwoDNetworkCommunicator(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+			, const kitBase::robotModel::PortInfo &port
+			, trikNetwork::MailboxInterface *mailbox);
 	~TwoDNetworkCommunicator();
 
 	/// Send a message to a robot
@@ -53,7 +54,7 @@ public:
 	/// Deinitializing a TRIK network communicator
 	void release() override;
 private:
-	QSharedPointer<trikNetwork::MailboxInterface> mMailbox;
+	trikNetwork::MailboxInterface *mMailbox {}; // ownership --- TrikKitInterpreterPluginBase
 
 };
 
