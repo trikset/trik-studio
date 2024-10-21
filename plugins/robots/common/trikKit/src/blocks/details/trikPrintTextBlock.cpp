@@ -33,13 +33,11 @@ void TrikPrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display
 
 	QString result = stringProperty("PrintText");
 	if (boolProperty("Evaluate")) {
+	     result = eval<QString>("PrintText");
 	     bool ok;
-	     eval<QString>("PrintText").toDouble(&ok);
+	     auto doubleResult = result.toDouble(&ok);
 	     if (ok) {
-		     result = QString::number(QString::number(eval<qreal>("PrintText"), 'f', 6).toDouble());
-	     }
-	     else {
-		     result =  eval<QString>("PrintText");
+		     result = QString::number(QString::number(doubleResult, 'f', 6).toDouble());
 	     }
 	}
 
