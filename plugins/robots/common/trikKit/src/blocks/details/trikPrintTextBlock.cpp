@@ -45,7 +45,6 @@ void TrikPrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display
 
 	const bool redraw = boolProperty("Redraw");
 
-
 	if (!errorsOccured()) {
 		trikDisplay->printText(x, y, result, fontSize);
 		if (redraw) {
