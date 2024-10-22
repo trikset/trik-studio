@@ -40,6 +40,7 @@ public:
 	MOCK_METHOD0(openEmptyWithSuggestToSaveChanges, bool());
 	MOCK_METHOD1(open, bool(const QString &fileName));
 	MOCK_METHOD0(suggestToSaveChangesOrCancel, bool());
+	MOCK_METHOD2(saveScriptToProject, bool(const QString &code, const QString &extension));
 	MOCK_METHOD1(setUnsavedIndicator, void(bool isUnsaved));
 };
 

@@ -191,6 +191,7 @@ bool ProjectManager::import(const QString &fileName)
 
 bool ProjectManager::saveFileExists(const QString &fileName) const
 {
+	qDebug() << __PRETTY_FUNCTION__ << "saveFileExists";
 	if (!QFile::exists(fileName)) {
 		fileNotFoundMessage(fileName);
 		return false;
@@ -304,6 +305,7 @@ bool ProjectManager::saveTo(const QString &fileName)
 
 bool ProjectManager::save()
 {
+	qDebug() << __PRETTY_FUNCTION__ << "SAVE";
 	// Do not change the method to saveAll - in the current implementation, an empty project in the repository is
 	// created to initialize the file name with an empty string, which allows the internal state of the file
 	// name = "" Attempt to save the project in this case result in
@@ -313,6 +315,24 @@ bool ProjectManager::save()
 		return true;
 	}
 
+	return false;
+}
+
+bool ProjectManager::saveScriptToProject(const QString &script, const QString &extension)
+{
+	if (!script.isEmpty()) {
+		auto& repo = mModels.mutableLogicalRepoApi();
+		repo.setMetaInformation("activeCode", script);
+		repo.setMetaInformation("activeCodeLanguageExtension", extension);
+		if (!mModels.repoControlApi().saveAll()) {
+			QLOG_INFO() << "";
+			return false;
+		}
+
+		return true;
+	}
+
+	QLOG_INFO() << "";
 	return false;
 }
 

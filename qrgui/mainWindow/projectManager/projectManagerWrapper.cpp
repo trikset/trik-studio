@@ -294,6 +294,10 @@ bool ProjectManagerWrapper::saveText() {
 	return mTextManager->saveText(false);
 }
 
+bool ProjectManagerWrapper::saveScriptToProject(const QString &code, const QString &extension) {
+	return ProjectManager::saveScriptToProject(code, extension) && ProjectManagerWrapper::saveText();
+}
+
 bool ProjectManagerWrapper::suggestToSaveAs()
 {
 	if (mTextManager->saveText(true)) {

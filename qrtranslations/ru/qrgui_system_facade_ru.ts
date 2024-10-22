@@ -29,7 +29,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+243"/>
         <source>Can`t open project file</source>
         <translation>Не могу открыть проект</translation>
     </message>
@@ -90,7 +90,7 @@
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="-167"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>
@@ -111,7 +111,7 @@
         <translation>Выберите файл для импорта</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+35"/>
         <source>There are missing plugins</source>
         <translation>Не хватает плагинов</translation>
     </message>
@@ -133,7 +133,7 @@
         <translation>Не могу открыть проект</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+98"/>
         <source>Select file to save current model to</source>
         <translation>Выберите файл для сохранения модели</translation>
     </message>

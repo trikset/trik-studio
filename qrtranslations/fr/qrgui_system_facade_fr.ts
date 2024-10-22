@@ -29,7 +29,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+243"/>
         <source>Can`t open project file</source>
         <translation type="unfinished">Le fichier du projet ne peut pas être ouvert</translation>
     </message>
@@ -90,7 +90,7 @@
         <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
+        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="-167"/>
         <source>Open project</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,7 +111,7 @@
         <translation>Choisir le fichier avec la sauvegarde pour importer</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+35"/>
         <source>There are missing plugins</source>
         <translation>Manque d&apos;extensions</translation>
     </message>
@@ -132,7 +132,7 @@
         <translation>Le fichier du projet ne peut pas être ouvert</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+98"/>
         <source>Select file to save current model to</source>
         <translation>Choisissez le ficher pour enregister le modèle</translation>
     </message>
