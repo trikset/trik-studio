@@ -101,6 +101,8 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 		return new qReal::interpretation::blocks::EmptyBlock();
 	} else if (elementMetatypeIs(element, "TrikWaitForMessage")) {
 		return new qReal::interpretation::blocks::EmptyBlock();
+	} else if (elementMetatypeIs(element, "TrikJoinNetwork")) {
+		return new qReal::interpretation::blocks::EmptyBlock();
 	} else if (elementMetatypeIs(element, "TrikLed")) {
 		return new LedBlock(mRobotModelManager->model());
 
@@ -200,6 +202,7 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 //			<< id("TrikReadLidar")
 			<< id("TrikSendMessage")
 			<< id("TrikWaitForMessage")
+			<< id("TrikJoinNetwork")
 			;
 
 	result
@@ -274,6 +277,7 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 			result
 				<< id("TrikSendMessage")
 				<< id("TrikWaitForMessage")
+				<< id("TrikJoinNetwork")
 				;
 		}
 	} else {

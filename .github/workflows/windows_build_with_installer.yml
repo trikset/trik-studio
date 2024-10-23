@@ -31,6 +31,10 @@ on:
       - 'dependabot**'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   build:
     runs-on: windows-latest
@@ -41,7 +45,7 @@ jobs:
           - qt-version: '5.12'
             mingw-version: '7.3'
             mingw-short-version: '73'
-            python-version: '3.8'
+            python-version: '3.11'
             mingw-bitness: '64'
             deploy-installer: true
 
@@ -49,7 +53,7 @@ jobs:
             mingw-version: '8.1'
             mingw-bitness: '64'
             mingw-short-version: '81'
-            python-version: '3.8'
+            python-version: '3.11'
 #            deploy-installer: true
 
 
@@ -58,12 +62,7 @@ jobs:
         shell: msys2 {0}
 
     steps:
-
-      - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+    
       - name: Setup msys2
         uses: msys2/setup-msys2@v2
         with:
@@ -138,7 +137,7 @@ jobs:
         timeout-minutes: 1
         run: |
             cd ${{ env.BUILD_DIR }}
-            qmake $GITHUB_WORKSPACE/studio.pro -spec win32-g++ CONFIG+=release CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=tests CONFIG+=noPch PYTHON_PATH="${pythonLocation}" # CONFIG+=silent
+            qmake $GITHUB_WORKSPACE/studio.pro -spec win32-g++ CONFIG+=release CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=tests CONFIG+=noPch PYTHON_PATH="${pythonLocation}" PYTHON_VERSION=${{matrix.python-version}}
 
       - name: QMake all
         timeout-minutes: 5
@@ -162,7 +161,7 @@ jobs:
       - name: Prepare all dlls
         if: false
         run: |
-            for file in $(ls ${{ env.BUILD_DIR }}/bin/release/*.exe || :) ; do windeployqt --release $file ; done
+            for file in $(ls ${{ env.BUILD_DIR }}/bin/*.exe || :) ; do windeployqt --release $file ; done
 
       - name: Download tests
         run: |
@@ -177,7 +176,7 @@ jobs:
         run: |
             echo "$PATH"
             echo ------
-            cd ${{ env.BUILD_DIR }}/bin/release
+            cd ${{ env.BUILD_DIR }}/bin
             python "${{ github.workspace }}\buildScripts\tests\fieldstest.py" 2D-model.exe "${{ github.workspace }}\testing_small"
 
       - name: Push binaries
@@ -185,7 +184,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: binaries-${{ matrix.qt-version}}
-          path: ${{ env.BUILD_DIR }}/bin/release
+          path: ${{ env.BUILD_DIR }}/bin
 
       - name: Build installer
         run: |

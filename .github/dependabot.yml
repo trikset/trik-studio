@@ -38,3 +38,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      
+  - package-ecosystem: "pip"
+    directory: "/installer/packages/trik-studio/ru.qreal.root.trik.core/meta/"
+    schedule:
+      interval: "weekly"
+    groups:
+      pip-dependencies:
+        patterns:
+          - "*"

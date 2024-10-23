@@ -23,11 +23,12 @@ rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model,checkapp}            			"$PWD/..
 [ -r venv/bin/activate ] || "python3.${TRIK_PYTHON3_VERSION_MINOR}" -m venv venv
 . venv/bin/activate
 python3 -m pip install -U pip
-python3 -m pip install pyinstaller numpy
+python3 -m pip install -r requirements.txt
 
 #PyInstaller provides all required modules
 #So we need to handle this garbage of files later (below) with proper rsync
-pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
+#Determine python behavior when searching pythonlib
+PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
 	--hidden-import=math \
 	--hidden-import=random \
 	--hidden-import=sys \

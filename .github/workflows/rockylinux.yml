@@ -28,6 +28,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   lint:
     uses: ./.github/workflows/setup_environment.yml
@@ -53,11 +57,6 @@ jobs:
             deploy-installer: true
 
     steps:
-
-      - name: Cancel Previous Workflow Runs
-        uses: n1hility/cancel-previous-runs@v3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install packages
         run: |
@@ -121,7 +120,7 @@ jobs:
         run: echo PATH="$PATH"
 
       - name: ccache
-        uses: hendrikmuhs/ccache-action@v1.2.13
+        uses: hendrikmuhs/ccache-action@v1.2.14
 
       - name: Check available tools
         run: |
@@ -138,7 +137,9 @@ jobs:
         timeout-minutes: 1
         run: |
             cd ${{ env.BUILD_DIR }}
-            qmake $GITHUB_WORKSPACE/studio.pro CONFIG+=release CONFIG+=tests PYTHON3_VERSION_MINOR=${{ matrix.python-minor }} CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined
+            qmake $GITHUB_WORKSPACE/studio.pro CONFIG+=release CONFIG+=tests \
+              PYTHON_VERSION=3.${{ matrix.python-minor }} PYTHON_DIR=$(python-3.${{ matrix.python-minor }}-config --prefix) \
+              CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined
 
       - name: QMake all
         timeout-minutes: 5
@@ -172,7 +173,7 @@ jobs:
         run: |
             echo "$PATH"
             echo ------
-            cd ${{ env.BUILD_DIR }}/bin/release
+            cd ${{ env.BUILD_DIR }}/bin
             env QT_QPA_PLATFORM=minimal python3 "${GITHUB_WORKSPACE}/buildScripts/tests/fieldstest.py" ./2D-model "${GITHUB_WORKSPACE}/testing_small"
 
       - name: Build installer

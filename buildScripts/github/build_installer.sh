@@ -25,9 +25,9 @@ fi
           
 if [[ $RUNNER_OS == Linux ]] ; then
       echo Start build checker archive
-      $EXECUTOR bash -c "bin/$CONFIG/build-checker-installer.sh"
+      $EXECUTOR bash -c "bin/build-checker-installer.sh"
       if $NEED_DEPLOY ; then
-          $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no' bin/$CONFIG/trik_checker.tar.xz $username@$host:~/dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
+          $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no' bin/trik_checker.tar.xz $username@$host:~/dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
       fi
 fi
 
