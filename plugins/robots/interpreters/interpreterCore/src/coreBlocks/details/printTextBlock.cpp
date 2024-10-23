@@ -16,6 +16,7 @@
 
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <kitBase/robotModel/robotParts/display.h>
+#include <QRegularExpression>
 
 using namespace interpreterCore::coreBlocks::details;
 
@@ -35,7 +36,7 @@ void PrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 	     bool ok;
 	     auto doubleResult = result.toDouble(&ok);
 	     if (ok) {
-		     result = QString::number(QString::number(doubleResult, 'f', 6).toDouble());
+		     result = QString::number(doubleResult, 'f', 6).remove(QRegularExpression("\\.?0+$"));
 	     }
 	}
 

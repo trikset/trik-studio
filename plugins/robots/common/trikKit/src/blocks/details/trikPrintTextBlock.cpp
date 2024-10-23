@@ -14,6 +14,7 @@
 
 #include "trikPrintTextBlock.h"
 #include "trikKit/robotModel/parts/trikDisplay.h"
+#include <QRegularExpression>
 
 using namespace trik;
 using namespace blocks::details;
@@ -37,7 +38,7 @@ void TrikPrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display
 	     bool ok;
 	     auto doubleResult = result.toDouble(&ok);
 	     if (ok) {
-		     result = QString::number(QString::number(doubleResult, 'f', 6).toDouble());
+		     result = QString::number(doubleResult, 'f', 6).remove(QRegularExpression("\\.?0+$"));
 	     }
 	}
 
