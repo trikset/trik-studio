@@ -34,5 +34,5 @@ fi
 if [ "$BUILD_INSTALLER" = "true" ]; then
   "$TRIK_PYTHON" -m pip install -U pip
   "$TRIK_PYTHON" -m pip install aqtinstall
-  "$TRIK_PYTHON" -m aqt install-tool -O /Qt linux desktop tools_ifw
+  sudo "$TRIK_PYTHON" -m aqt install-tool -O /Qt linux desktop tools_ifw
 fi
