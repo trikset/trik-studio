@@ -9,7 +9,7 @@ on:
       executor:
         required: false
         type: string
-        default: "time docker exec -i builder"
+        default: "time"
       lint:
         required: false
         type: string
@@ -20,19 +20,19 @@ on:
       build_installer:
         required: true
         type: string
-      trik-qt-version:
+      trik_qt_version:
         required: false
         type: string
         default: '5.12'
-      trik-python3-version-minor:
+      trik_python3_version_minor:
         required: false
         type: string
         default: '9'
-      qtifw-version:
+      qtifw_version:
         required: false
         type: string
         default: '4.6.1'
-      xcode-version:
+      xcode_version:
         required: false
         type: string
         default: '13.4'
@@ -52,25 +52,30 @@ on:
         required: false
         type: string
         default: ""
+      gcc_version:
+        required: false
+        type: string
+        default: "13"
 
 jobs:
   job:
     defaults:
       run:
-        shell: bash
+        shell: bash -l {0}
 
     runs-on: ${{ inputs.os }}
-    container:
-      image: ${{ inputs.container_name }}
-      options: >
-        -v ${{ github.workspace }}:${{ github.workspace }} 
-        -w ${{ github.workspace }}
+    container: ${{ inputs.container_name }}
     
     steps:
     - name: Install dependencies
       run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git
       if: startsWith(inputs.container_name, 'altlinux') == true
 
+
+    - name: Install dependencies
+      run: yum update -y && yum install -y git-core
+      if: startsWith(inputs.container_name, 'rocky') == true
+      
     - name: Configure git
       run: |
           git config --global core.symlinks true
@@ -80,18 +85,23 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 0
+        fetch-depth: 1
 
     - name: Set up environment
       run: buildScripts/github/install_${{ runner.os }}.sh
       env:
-        TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
-        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        QTIFW_VERSION: ${{ inputs.qtifw-version }}
-        XCODE_VERSION: ${{ inputs.xcode-version }}
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        QTIFW_VERSION: ${{ inputs.qtifw_version }}
+        XCODE_VERSION: ${{ inputs.xcode_version }}
+        BUILD_INSTALLER: ${{ inputs.build_installer }}
+        GCC_VERSION: ${{ inputs.gcc_version }}
+      if: ${{ inputs.build == 'true' }}
 
     - name: Lint
-      run: ${{ inputs.executor }} buildScripts/github/vera_translation.sh
+      run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
+          ${{ inputs.executor }} buildScripts/github/vera_translation.sh
       if: ${{ inputs.lint == 'true' }}
 
     - name: Restore cache
@@ -108,9 +118,9 @@ jobs:
     - name: Build
       run: buildScripts/github/build.sh
       env:
-        TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
-        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        CACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
         CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}
@@ -126,26 +136,22 @@ jobs:
       if: ${{ inputs.build == 'true' }}
         
     - name: Run tests
-      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh
+      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh && ${{ inputs.executor }} buildScripts/github/test.sh
       env:
-        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == 'true' }}
       
     - name: Build Installer
       run: |
         BRANCH_NAME=${BRANCH_NAME//\//-}
-        ${{ inputs.executor }} env CONFIG=${{ inputs.config }} buildScripts/github/test.sh && buildScripts/github/build_installer.sh
+        buildScripts/github/build_installer.sh
       env:
-        TRIK_QT_VERSION: ${{ inputs.trik-qt-version }}
-        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik-python3-version-minor }}
-        CCACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
-        CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         PROJECT: "studio"
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
-        QMAKE_EXTRA: ${{ inputs.qmake_extra }}
-        TESTS: ${{ inputs.tests }}
         BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         PULLREQUESTNUMBER: ${{ github.event.pull_request.number }}
         ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
@@ -156,7 +162,7 @@ jobs:
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ runner.os }}-installer
+        name: ${{ runner.os }}-${{ inputs.container_name }}-installer
         path: |
           installer/*.exe
           installer/*.run
