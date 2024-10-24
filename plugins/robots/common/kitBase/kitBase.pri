@@ -70,6 +70,7 @@ HEADERS += \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorAmbient.h \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorReflected.h \
 	$$PWD/include/kitBase/robotModel/robotParts/speaker.h \
+	$$PWD/include/kitBase/robotModel/robotParts/communicator.h \
 	$$PWD/include/kitBase/robotModel/robotParts/motor.h \
 	$$PWD/include/kitBase/robotModel/robotParts/display.h \
 	$$PWD/include/kitBase/robotModel/robotParts/button.h \
@@ -126,6 +127,7 @@ SOURCES += \
 	$$PWD/src/robotModel/portInfo.cpp \
 	$$PWD/src/robotModel/deviceInfo.cpp \
 	$$PWD/src/robotModel/robotParts/speaker.cpp \
+	$$PWD/src/robotModel/robotParts/communicator.cpp \
 	$$PWD/src/robotModel/robotParts/motor.cpp \
 	$$PWD/src/robotModel/robotParts/display.cpp \
 	$$PWD/src/robotModel/robotParts/button.cpp \

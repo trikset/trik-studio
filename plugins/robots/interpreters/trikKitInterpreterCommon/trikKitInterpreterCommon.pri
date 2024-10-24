@@ -73,6 +73,7 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDObjectSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDShell.h \
+	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/trikTwoDRobotModel.h \
 	$$PWD/include/trikKitInterpreterCommon/trikAdditionalPreferences.h \
@@ -128,6 +129,7 @@ SOURCES += \
 	$$PWD/src/robotModel/twoD/parts/twoDColorSensor.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDLed.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDShell.cpp \
+	$$PWD/src/robotModel/twoD/parts/twoDNetworkCommunicator.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDGyroscopeSensor.cpp \
 	$$PWD/src/robotModel/twoD/trikTwoDRobotModel.cpp \
 	$$PWD/src/trikAdditionalPreferences.cpp \
