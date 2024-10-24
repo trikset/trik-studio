@@ -27,7 +27,7 @@ class StylusItem : public ColorFieldItem
 
 public:
 	StylusItem(qreal x1, qreal y1);
-
+	~StylusItem() override;
 	AbstractItem *clone() const override;
 
 	/// Creates and returns colored stylus item for 2D model palette.
