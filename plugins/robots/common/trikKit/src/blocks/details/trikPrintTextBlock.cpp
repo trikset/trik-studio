@@ -14,6 +14,7 @@
 
 #include "trikPrintTextBlock.h"
 #include "trikKit/robotModel/parts/trikDisplay.h"
+#include <QRegularExpression>
 
 using namespace trik;
 using namespace blocks::details;
@@ -30,9 +31,17 @@ void TrikPrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display
 	const int x = eval<int>("XCoordinateText");
 	const int y = eval<int>("YCoordinateText");
 	const int fontSize = eval<int>("FontSize");
-	const QString result = boolProperty("Evaluate")
-			? QString::number(QString::number(eval<qreal>("PrintText"), 'f', 6).toDouble())
-			: stringProperty("PrintText");
+
+	QString result = stringProperty("PrintText");
+	if (boolProperty("Evaluate")) {
+	     result = eval<QString>("PrintText");
+	     bool ok;
+	     auto doubleResult = result.toDouble(&ok);
+	     if (ok) {
+		     result = QString::number(doubleResult, 'f', 6).remove(QRegularExpression("\\.?0+$"));
+	     }
+	}
+
 	const bool redraw = boolProperty("Redraw");
 
 	if (!errorsOccured()) {
