@@ -52,6 +52,7 @@ jobs:
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
+      trik_python3_version_minor: 10
   
   build-altlinux-release-tests:
     needs: lint
