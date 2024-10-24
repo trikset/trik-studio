@@ -62,6 +62,8 @@ public slots:
 	/// Similarly @see save(), if specified project-file, similarly @see suggestToSaveAs() o/w
 	virtual bool saveOrSuggestToSaveAs() = 0;
 
+	virtual bool saveScriptToProject(const QString &code, const QString &extension) = 0;
+
 public:
 	/// Returns true if some .qrs project is currently opened in system. Otherwise returns false.
 	virtual bool somethingOpened() const = 0;

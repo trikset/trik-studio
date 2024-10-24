@@ -53,6 +53,7 @@ public:
 
 	void refreshWindowTitleAccordingToSaveFile();
 	bool saveText();
+	bool saveScriptToProject(const QString &code, const QString &extension) override;
 
 	bool askQuestion(const QString &title, const QString &question) const override;
 
