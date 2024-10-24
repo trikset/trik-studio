@@ -8,7 +8,7 @@ case $RUNNER_OS in
     TSNAME="trik-studio-installer-mac-$BRANCH_NAME.dmg"
     ;;
   Linux)
-    QTIFWBIN=$(find /Qt/Tools -name "bin" | head -n 1)
+    QTIFWBIN=$(find $PWD/Qt/Tools -name "bin" | head -n 1)
     ID=$(grep '^ID=' /etc/os-release | cut -d'=' -f2)
     TSNAME="trik-studio-installer-linux-$BRANCH_NAME-$ID.run"
     ;;
