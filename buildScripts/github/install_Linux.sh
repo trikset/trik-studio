@@ -24,8 +24,8 @@ elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
   # yum install -y qt5-qtscript-devel qt5-qttools-devel qt5-qtmultimedia-devel qt5-qtserialport-devel qt5-qtsvg-devel qt5-qtbase-devel
   "$TRIK_PYTHON" -m pip install -U pip
   "$TRIK_PYTHON" -m pip install aqtinstall
-  aqt install-qt linux desktop "$TRIK_QT_VERSION" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
-  QT_ROOT_DIR=$(ls -1d /Qt/"$TRIK_QT_VERSION"*/gcc_64 | head -n 1)
+  aqt install-qt linux desktop "$TRIK_QT_VERSION" -O $PWD/Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
+  QT_ROOT_DIR=$(ls -1d $PWD/Qt/"$TRIK_QT_VERSION"*/gcc_64 | head -n 1)
 
   echo "$QT_ROOT_DIR/bin" >> $GITHUB_PATH
   echo "source scl_source enable gcc-toolset-$GCC_VERSION" >> ~/.bash_profile
@@ -34,5 +34,5 @@ fi
 if [ "$BUILD_INSTALLER" = "true" ]; then
   "$TRIK_PYTHON" -m pip install -U pip
   "$TRIK_PYTHON" -m pip install aqtinstall
-  sudo "$TRIK_PYTHON" -m aqt install-tool -O /Qt linux desktop tools_ifw
+  "$TRIK_PYTHON" -m aqt install-tool -O $PWD/Qt linux desktop tools_ifw
 fi
