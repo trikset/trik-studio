@@ -141,7 +141,7 @@ jobs:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == 'true' }}
-      
+
     - name: Build Installer
       run: |
         BRANCH_NAME=${BRANCH_NAME//\//-}
@@ -161,10 +161,10 @@ jobs:
 
     - name: Eval artifact name
       run: |
-      	CONTAINER_NAME=${{ inputs.container_name }}
-      	PATCH_CONTAINER_NAME=${CONTAINER_NAME//[^a-zA-Z0-9_-]/} 
-      	echo "PATCH_CONTAINER_NAME=$PATCH_CONTAINER_NAME" >> $GITHUB_ENV
-      	
+        CONTAINER_NAME=${{ inputs.container_name }}
+        PATCH_CONTAINER_NAME=${CONTAINER_NAME//[^a-zA-Z0-9_-]/}
+        echo "PATCH_CONTAINER_NAME=$PATCH_CONTAINER_NAME" >> $GITHUB_ENV
+
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
