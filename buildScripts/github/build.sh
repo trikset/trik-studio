@@ -2,6 +2,8 @@
 set -uxeo pipefail
 
 CODECOV=true
+CCACHE_DIR="$CACHE_DIR"
+
 case $RUNNER_OS in
   macOS)
      QT_DIR=$(ls -dv "$HOME"/Qt/${TRIK_QT_VERSION}*/*/bin | head -n 1)
@@ -11,8 +13,8 @@ case $RUNNER_OS in
      echo "Now path is $PATH"
     ;;
   Linux)
-    ID=$(grep '^ID=' /etc/os-release | cut -d'=' -f2)
-    if [ "$ID" = "altlinux" ]; then
+    ID=$(grep '^ID=' /etc/*release | cut -d'=' -f2)
+    if [[ "$ID" = "altlinux" || "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
         ln -s /usr/bin/qmake-qt5 /usr/bin/qmake
     fi
    ;;
