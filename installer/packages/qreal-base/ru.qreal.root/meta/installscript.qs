@@ -144,7 +144,7 @@ function Component()
 		if (installer.shouldDeinstallPrevious) {
 		        additionalOptions = installer.environmentVariable("UNINSTALL_SCRIPT_PATH");
 		        if (additionalOptions != "") {
-		        	additionalOptions = " --sript" + additionalOptions;
+		        	additionalOptions = " --sript " + additionalOptions;
 		        }
 			installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName) + additionalOptions);
 			if (installer.value("os") == "win") {

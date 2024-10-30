@@ -17,6 +17,9 @@ echo "source scl_source enable gcc-toolset-$GCC_VERSION" >> ~/.bash_profile
 "$TRIK_PYTHON" -m pip install aqtinstall
 "$TRIK_PYTHON" -m aqt install-qt linux desktop "$TRIK_QT_VERSION" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
             
+QT_ROOT_DIR=$(ls -1d /Qt/$TRIK_QT_VERSION*/gcc_64 | head -n 1)
+echo "$QT_ROOT_DIR/bin" >> $GITHUB_PATH
+            
 if [ "$BUILD_INSTALLER" = "true" ]; then
   "$TRIK_PYTHON" -m pip install -U pip
   "$TRIK_PYTHON" -m pip install aqtinstall
