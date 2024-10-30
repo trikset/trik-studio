@@ -12,17 +12,17 @@ on:
         default: "time"
       lint:
         required: false
-        type: string
+        type: boolean
         default: false
       build:
         required: true
-        type: string
+        type: boolean
       build_installer:
         required: true
-        type: string
+        type: boolean
       linux_installer_environment:
         required: false
-        type: string
+        type: boolean
         default: false
       trik_qt_version:
         required: false
@@ -100,7 +100,7 @@ jobs:
         XCODE_VERSION: ${{ inputs.xcode_version }}
         BUILD_INSTALLER: ${{ inputs.build_installer }}
         GCC_VERSION: ${{ inputs.gcc_version }}
-      if: ${{ inputs.build == true && inputs.linux_installer_environment != true}}
+      if: ${{ inputs.build == true && inputs.linux_installer_environment != true }}
 
     - name: Set up installer environment
       run: buildScripts/github/install_installer_environment.sh
@@ -109,7 +109,7 @@ jobs:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         GCC_VERSION: ${{ inputs.gcc_version }}
         BUILD_INSTALLER: ${{ inputs.build_installer }}
-      if: ${{ inputs.linux_installer_environment == true}}
+      if: ${{ inputs.linux_installer_environment == true }}
       
     - name: Lint
       run: |
