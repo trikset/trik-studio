@@ -15,4 +15,10 @@ echo "source scl_source enable gcc-toolset-$GCC_VERSION" >> ~/.bash_profile
 
 "$TRIK_PYTHON" -m pip install -U pip
 "$TRIK_PYTHON" -m pip install aqtinstall
-"$TRIK_PYTHON" -m aqt install-tool -O $PWD/Qt linux desktop tools_ifw
+"$TRIK_PYTHON" -m aqt install-qt linux desktop "$TRIK_QT_VERSION" -O /Qt -m qtscript --archives qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats icu qtwayland
+            
+if [ "$BUILD_INSTALLER" = "true" ]; then
+  "$TRIK_PYTHON" -m pip install -U pip
+  "$TRIK_PYTHON" -m pip install aqtinstall
+  "$TRIK_PYTHON" -m aqt install-tool -O /Qt linux desktop tools_ifw
+fi
