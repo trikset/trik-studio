@@ -13,13 +13,17 @@ on:
       lint:
         required: false
         type: string
-        default: 'false'
+        default: false
       build:
         required: true
         type: string
       build_installer:
         required: true
         type: string
+      linux_installer_environment:
+        required: false
+        type: string
+        default: false
       trik_qt_version:
         required: false
         type: string
@@ -31,15 +35,15 @@ on:
       qtifw_version:
         required: false
         type: string
-        default: '4.6.1'
+        default: 4.6.1
       xcode_version:
         required: false
         type: string
-        default: '13.4'
+        default: 13.4
       config:
         required: false
         type: string
-        default: 'release'
+        default: release
       qmake_extra:
         required: false
         type: string
@@ -55,7 +59,7 @@ on:
       gcc_version:
         required: false
         type: string
-        default: "13"
+        default: 13
 
 jobs:
   job:
@@ -96,8 +100,16 @@ jobs:
         XCODE_VERSION: ${{ inputs.xcode_version }}
         BUILD_INSTALLER: ${{ inputs.build_installer }}
         GCC_VERSION: ${{ inputs.gcc_version }}
-      if: ${{ inputs.build == 'true' }}
+      if: ${{ inputs.build == true && inputs.linux_installer_environment != true}}
 
+    - name: Set up installer environment
+      run: buildScripts/github/install_installer_environment.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        GCC_VERSION: ${{ inputs.gcc_version }}
+      if: ${{ linux_installer_environment == "true"}}
+      
     - name: Lint
       run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 

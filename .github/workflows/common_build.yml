@@ -52,7 +52,7 @@ jobs:
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=warn_off"
-      trik_python3_version_minor: "11"
+      trik_python3_version_minor: 11
 
   build-macos-debug-tests:
     needs: lint
@@ -63,7 +63,7 @@ jobs:
       build_installer: false
       config: debug
       qmake_extra: "CONFIG+=warn_off CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-      trik_python3_version_minor: "11"
+      trik_python3_version_minor: 11
       
   build-macos-installer:
     needs: [build-macos-debug-tests, build-macos-release-tests]
@@ -73,7 +73,7 @@ jobs:
       build: true
       build_installer: true
       qmake_extra: " CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
-      trik_python3_version_minor: "11"
+      trik_python3_version_minor: 11
       tests: true
     secrets: inherit
     
@@ -92,22 +92,37 @@ jobs:
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
-      container_name: "altlinux/base:latest"
+      container_name: altlinux/base:latest
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
       tests: true
       
-  build-rockylinux-release-tests:
+  build-rockylinux-distro-release-tests:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
-      container_name: "rockylinux:9"
+      container_name: rockylinux:9
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined"
-      gcc_version: "13"
+      gcc_version: 13
+      
+  # Use Python 3.11, as the Python 3.12 package in Rocky Linux AppStream x86_64 crashes 
+  # with a segmentation fault when restarting the interpreter during the import of asyncio 
+  # (specifically when loading _ssl) in PythonQt::init().
+  build-rockylinux-installer-release-tests:
+    needs: lint
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: ubuntu-latest
+      container_name: rockylinux:9
+      build: true
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
+      gcc_version: 13
+      trik_qt_version: 5.15
+      trik_python3_version_minor: 3.11
 
   build-ubuntu-debug-tests:
     needs: lint
@@ -119,21 +134,9 @@ jobs:
       config: debug
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       trik_python3_version_minor: 10
-      
-  build-ubuntu-installer:
-    needs: [build-ubuntu-debug-tests, build-ubuntu-release-tests]
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      build: true
-      build_installer: true
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache"
-      tests: true
-      trik_python3_version_minor: 10
-    secrets: inherit
     
   build-rockylinux-installer:
-    needs: [build-rockylinux-release-tests]
+    needs: [build-rockylinux-installer-release-tests]
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
@@ -142,5 +145,7 @@ jobs:
       build_installer: true
       tests: true
       qmake_extra: "CONFIG+=noPch CONFIG+=ccache"
-      gcc_version: "13"
+      gcc_version: 13
+      trik_qt_version: 5.15
+      trik_python3_version_minor: 3.11
     secrets: inherit
