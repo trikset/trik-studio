@@ -123,7 +123,7 @@ jobs:
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
       gcc_version: 13
       trik_qt_version: 5.15
-      trik_python3_version_minor: 3.11
+      trik_python3_version_minor: 11
       linux_installer_environment: true
 
   build-ubuntu-debug-tests:
@@ -149,6 +149,6 @@ jobs:
       qmake_extra: "CONFIG+=noPch CONFIG+=ccache"
       gcc_version: 13
       trik_qt_version: 5.15
-      trik_python3_version_minor: 3.11
+      trik_python3_version_minor: 11
       linux_installer_environment: true
     secrets: inherit
