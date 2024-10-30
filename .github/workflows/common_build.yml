@@ -123,6 +123,7 @@ jobs:
       gcc_version: 13
       trik_qt_version: 5.15
       trik_python3_version_minor: 3.11
+      linux_installer_environment: true
 
   build-ubuntu-debug-tests:
     needs: lint
@@ -148,4 +149,5 @@ jobs:
       gcc_version: 13
       trik_qt_version: 5.15
       trik_python3_version_minor: 3.11
+      linux_installer_environment: true
     secrets: inherit

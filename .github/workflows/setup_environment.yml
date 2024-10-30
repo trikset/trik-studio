@@ -108,13 +108,14 @@ jobs:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         GCC_VERSION: ${{ inputs.gcc_version }}
-      if: ${{ linux_installer_environment == "true"}}
+        BUILD_INSTALLER: ${{ inputs.build_installer }}
+      if: ${{ inputs.linux_installer_environment == true}}
       
     - name: Lint
       run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
           ${{ inputs.executor }} buildScripts/github/vera_translation.sh
-      if: ${{ inputs.lint == 'true' }}
+      if: ${{ inputs.lint == true }}
 
     - name: Restore cache
       uses: actions/cache@v4
@@ -125,7 +126,7 @@ jobs:
           ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}
           ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}
           ccache-c${{ inputs.container_name }}-${{ inputs.os }}
-      if: ${{ inputs.build == 'true' }}
+      if: ${{ inputs.build == true }}
 
     - name: Build
       run: buildScripts/github/build.sh
@@ -138,7 +139,7 @@ jobs:
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
-      if: ${{ inputs.build == 'true' }}
+      if: ${{ inputs.build == true }}
 
     - name: Save build cache
       uses: actions/cache/save@v4
@@ -152,7 +153,7 @@ jobs:
       env:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         TESTS: ${{ inputs.tests }}
-      if: ${{ inputs.build == 'true' }}
+      if: ${{ inputs.build == true }}
 
     - name: Build Installer
       run: |
@@ -169,7 +170,7 @@ jobs:
         ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
         username: ${{ secrets.DL_USERNAME }}
         host: ${{ secrets.DL_HOST }}
-      if: ${{ inputs.build_installer == 'true' }}
+      if: ${{ inputs.build_installer == true }}
 
     - name: Eval artifact name
       run: |
@@ -185,4 +186,4 @@ jobs:
           installer/*.exe
           installer/*.run
           installer/*.dmg
-      if: ${{ inputs.build_installer == 'true' }}
+      if: ${{ inputs.build_installer == true }}
