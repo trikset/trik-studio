@@ -142,7 +142,11 @@ function Component()
 
 	installer.installationStarted.connect(function() {
 		if (installer.shouldDeinstallPrevious) {
-			installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName));
+		        additionalOptions = installer.environmentVariable("UNINSTALL_SCRIPT_PATH");
+		        if (additionalOptions != "") {
+		        	additionalOptions = " --sript" + additionalOptions;
+		        }
+			installer.performOperation("Execute", Dir.toNativeSeparator("@TargetDir@/" + installer.maintenanceName) + additionalOptions);
 			if (installer.value("os") == "win") {
 				var timeoutBatch = "ping localhost -n 4 > nul";
 				installer.performOperation("Execute", ["cmd", "/c", timeoutBatch]);

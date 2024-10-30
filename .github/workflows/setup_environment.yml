@@ -186,4 +186,5 @@ jobs:
           installer/*.exe
           installer/*.run
           installer/*.dmg
+          installer/trik_studio_uninstallscript.qs
       if: ${{ inputs.build_installer == true }}

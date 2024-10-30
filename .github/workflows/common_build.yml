@@ -119,6 +119,7 @@ jobs:
       os: ubuntu-latest
       container_name: rockylinux:9
       build: true
+      build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
       gcc_version: 13
       trik_qt_version: 5.15
