@@ -83,7 +83,7 @@ public:
 	const kitBase::EventsForKitPluginInterface &eventsForKitPlugins() const;
 
 	//tempory solution
-	bool interpretCode(const QString &inputs);
+	bool interpretCode(const QString &inputs, const QString &filepath = QString());
 
 public slots:
 	void saveCode(const QString &code, const QString &languageExtension);

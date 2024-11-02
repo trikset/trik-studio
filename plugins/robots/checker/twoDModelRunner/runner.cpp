@@ -39,7 +39,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 
 	mController.reset(new qReal::Controller());
 	mSceneCustomizer.reset(new qReal::gui::editor::SceneCustomizer());
-	mTextManager.reset(new qReal::NullTextManager());
+	mTextManager.reset(new qReal::text::TextManager(mQRealFacade->events(), *mMainWindow));
 	mConfigurator.reset(new qReal::PluginConfigurator(mQRealFacade->models().repoControlApi()
 							 , mQRealFacade->models().graphicalModelAssistApi()
 							 , mQRealFacade->models().logicalModelAssistApi()
@@ -63,12 +63,22 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
 }
 
-Runner::Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode)
+Runner::Runner(const QString &report, const QString &trajectory,
+	       const QString &input, const QString &mode, const QString &qrsFile)
 	: Runner(report, trajectory)
 
 {
 	mInputsFile = input;
 	mMode = mode;
+	mSaveFile = qrsFile;
+}
+
+bool Runner::openProject()
+{
+	if (!mProjectManager->open(mSaveFile)) {
+		return false;
+	}
+	return true;
 }
 
 Runner::~Runner()
@@ -87,14 +97,36 @@ Runner::~Runner()
 	mQRealFacade.reset();
 }
 
-bool Runner::interpret(const QString &saveFile, const bool background
-					   , const int customSpeedFactor, bool closeOnFinish
-					   , const bool closeOnSuccess, const bool showConsole)
+bool Runner::generate(const QString &generatePath, const QString &generateMode)
 {
-	if (!mProjectManager->open(saveFile)) {
+	if (generateMode != "python" and generateMode != "javascript") {
 		return false;
 	}
 
+	for (auto action: mPluginFacade->actionsManager().actions()){
+		if (generateMode == "python") {
+			if (action.action()->objectName() == "generatePythonTrikCode") {
+				emit action.action()->triggered();
+			}
+		}
+		if (generateMode == "javascript") {
+			if (action.action()->objectName() == "generateJavaScriptTrikCode") {
+				emit action.action()->triggered();
+			}
+		}
+	}
+
+	auto codes = mTextManager->code(mMainWindow->activeDiagram());
+	if (codes.empty()) {
+		return false;
+	}
+	auto path = mTextManager->path(codes.first());
+	return QFile::copy(path, generatePath);
+}
+
+bool Runner::interpret(const bool background, const int customSpeedFactor, bool closeOnFinish
+			, const bool closeOnSuccess, const bool showConsole, const QString &filePath)
+{
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
 	QList<view::TwoDModelWidget *> twoDModelWindows;
@@ -143,7 +175,7 @@ bool Runner::interpret(const QString &saveFile, const bool background
 
 	mReporter->onInterpretationStart();
 	if (mMode == "script") {
-		return mPluginFacade->interpretCode(mInputsFile);
+		return mPluginFacade->interpretCode(mInputsFile, filePath);
 	} else if (mMode == "diagram") {
 		mPluginFacade->actionsManager().runAction().trigger();
 	}

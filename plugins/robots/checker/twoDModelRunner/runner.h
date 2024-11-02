@@ -20,7 +20,7 @@
 #include <qrgui/systemFacade/components/consoleErrorReporter.h>
 #include <qrgui/systemFacade/components/nullMainWindow.h>
 #include <qrgui/systemFacade/components/projectManager.h>
-#include <qrgui/systemFacade/components/nullTextManager.h>
+#include <textEditor/textManager.h>
 #include <qrgui/controller/controller.h>
 #include <qrgui/editor/sceneCustomizer.h>
 #include <qrgui/plugins/toolPluginInterface/pluginConfigurator.h>
@@ -56,7 +56,8 @@ public:
 	/// @param trajectory A path to a file where robot`s trajectory will be written during the session.
 	/// @param input A path to a file where JSON with inputs for JavaScript.
 	/// @param mode Interpret mode.
-	Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode);
+	/// @param qrsFile Path to TRIK Studio project
+	Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode, const QString &qrsFile);
 
 	~Runner();
 
@@ -67,8 +68,17 @@ public:
 	/// @param speedFactor can be used when not in background mode to tune interpretation speed
 	/// @param closeOnSuccessMode If true then model will be closed if the program finishes without errors.
 	/// @param showConsole If true then robot's console will be showed.
-	bool interpret(const QString &saveFile, bool background, int speedFactor
-				   , bool closeOnFinish, bool closeOnSuccess, bool showConsole);
+	/// @param filePath If not QString() interpret code on this path instead of the code in the TRIK Studio file format.
+	bool interpret(bool background, int speedFactor
+				   , bool closeOnFinish, bool closeOnSuccess, bool showConsole, const QString &filePath);
+
+	/// Generate code from TRIK Studio save file
+	/// @param generatePath The path to save the generated code
+	/// @param generateMode "python" or "javascript"
+	bool generate(const QString &generatePath, const QString &generateMode);
+
+	/// Open TRIK Studio project
+	bool openProject();
 
 private slots:
 	void close();
@@ -85,7 +95,7 @@ private:
 	QScopedPointer<qReal::ConsoleErrorReporter> mErrorReporter;
 	QScopedPointer<qReal::ProjectManager> mProjectManager;
 	QScopedPointer<qReal::NullMainWindow> mMainWindow;
-	QScopedPointer<qReal::NullTextManager> mTextManager;
+	QScopedPointer<qReal::text::TextManager> mTextManager;
 	QScopedPointer<qReal::gui::editor::SceneCustomizer> mSceneCustomizer;
 	QScopedPointer<qReal::PluginConfigurator> mConfigurator;
 	QScopedPointer<Reporter> mReporter;
@@ -93,6 +103,7 @@ private:
 	QList<qReal::ui::ConsoleDock *> mRobotConsoles;
 	QString mInputsFile;
 	QString mMode;
+	QString mSaveFile;
 };
 
 }
