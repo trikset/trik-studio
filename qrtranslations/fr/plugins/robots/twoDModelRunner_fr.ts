@@ -41,6 +41,21 @@ In background mode the session will be terminated just after the execution ended
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+10"/>
+        <source>File for save generated python or javascript code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Path to &quot;python&quot; or &quot;javascript&quot; script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
         <translation type="vanished">Mettez &quot;minimal&quot; dans cette option pour désactiver la connexion au serveur X</translation>
     </message>
@@ -49,7 +64,7 @@ In background mode the session will be terminated just after the execution ended
         <translation type="vanished">Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
     </message>
     <message>
-        <location line="-10"/>
+        <location line="-25"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Le chemin au ficher ou la trajectoire du robot sera enregistrée. L&apos;enregistrement ne sera pas fait immediatement, chaque point de trajectoire sera écrit dès lors qu&apos;il est obteneur par le checker, donc FIFO sont récommandés pour cette option.</translation>
     </message>
@@ -72,7 +87,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+203"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+235"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>

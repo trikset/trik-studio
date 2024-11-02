@@ -124,12 +124,14 @@ int main(int argc, char *argv[])
 								   , QObject::tr("Close the window and exit after diagram/script"\
 												 " finishes."));
 	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
-	QCommandLineOption generatePathOption("generate-path", QObject::tr("File for save generated python or javascript code.")
+	QCommandLineOption generatePathOption("generate-path",
+					      QObject::tr("File for save generated python or javascript code.")
 					      , "path-to-save-code", "report.py");
 	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
 					      , "generate-mode", "python");
-	QCommandLineOption directScriptExecutionPathOption("direct-script-path", QObject::tr("Path to \"python\" or \"javascript\" script")
-					      , "direct-script-path");
+	QCommandLineOption directScriptExecutionPathOption("direct-script-path"
+						, QObject::tr("Path to \"python\" or \"javascript\" script")
+						, "direct-script-path");
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
@@ -157,9 +159,11 @@ int main(int argc, char *argv[])
 	const bool closeOnFinishMode = backgroundMode || parser.isSet(closeOnFinishOption);
 	const bool showConsoleMode = parser.isSet(showConsoleOption);
 	const QString generatePath = parser.isSet(generatePathOption) ? parser.value(generatePathOption) : QString();
-	const QString generateMode = parser.isSet(generateModeOption) ? parser.value(generateModeOption) : QString("python");
+	const QString generateMode = parser.isSet(generateModeOption)
+					? parser.value(generateModeOption) : QString("python");
 	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode, qrsFile));
-	const QString filePath = parser.isSet(directScriptExecutionPathOption) ? parser.value(directScriptExecutionPathOption) : QString();
+	const QString filePath = parser.isSet(directScriptExecutionPathOption)
+					? parser.value(directScriptExecutionPathOption) : QString();
 	auto speedFactor = parser.value(speedOption).toInt();
 
 	if (!runner->openProject()) {

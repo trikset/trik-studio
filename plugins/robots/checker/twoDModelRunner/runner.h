@@ -57,7 +57,8 @@ public:
 	/// @param input A path to a file where JSON with inputs for JavaScript.
 	/// @param mode Interpret mode.
 	/// @param qrsFile Path to TRIK Studio project
-	Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode, const QString &qrsFile);
+	Runner(const QString &report, const QString &trajectory, const QString &input,
+	       const QString &mode, const QString &qrsFile);
 
 	~Runner();
 

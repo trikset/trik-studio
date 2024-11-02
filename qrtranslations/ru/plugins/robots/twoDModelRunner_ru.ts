@@ -47,7 +47,22 @@ In background mode the session will be terminated just after the execution ended
         <translation>Ускорение, попробуйте от 5 до 20, но можно пробовать и 1000.</translation>
     </message>
     <message>
-        <location line="-10"/>
+        <location line="+10"/>
+        <source>File for save generated python or javascript code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Path to &quot;python&quot; or &quot;javascript&quot; script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-25"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Путь к файлу, куда будет выводиться траектори робота. Запись не будет осуществлена единомоментно, каждый узел траектории будет записан по факту его просчета проверяющей системой. Поэтому разумно использования FIFO-файлов в качестве значения этого параметра.</translation>
     </message>
@@ -74,7 +89,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+203"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+235"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>
