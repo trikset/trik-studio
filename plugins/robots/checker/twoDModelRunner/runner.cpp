@@ -23,7 +23,7 @@
 #include <qrutils/widgets/consoleDock.h>
 #include <kitBase/robotModel/robotParts/shell.h>
 #include <kitBase/robotModel/robotModelUtils.h>
-
+#include <qrkernel/logging.h>
 #include <twoDModel/engine/model/model.h>
 #include <twoDModel/engine/model/timeline.h>
 
@@ -110,7 +110,7 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 			}
 		}
 		if (generateMode == "javascript") {
-			if (action.action()->objectName() == "generateJavaScriptTrikCode") {
+			if (action.action()->objectName() == "generateTRIKCode") {
 				emit action.action()->triggered();
 			}
 		}
@@ -121,7 +121,11 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 		return false;
 	}
 	auto path = mTextManager->path(codes.first());
-	return QFile::copy(path, generatePath);
+	if (!QFile::copy(path, generatePath)) {
+		QLOG_ERROR() << "File with name " << generatePath << "already exist";
+		return false;
+	}
+	return true;
 }
 
 bool Runner::interpret(const bool background, const int customSpeedFactor, bool closeOnFinish

@@ -172,6 +172,7 @@ int main(int argc, char *argv[])
 
 	if (generatePath != QString()) {
 		if (!runner->generate(generatePath, generateMode)) {
+			QLOG_ERROR() << "Problem with generate code to " << generatePath;
 			return 4;
 		}
 	}
