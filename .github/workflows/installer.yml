@@ -81,12 +81,12 @@ jobs:
         
     - name: Run minimal tests
       run: |
-        TWOD_EXEC_NAME=$(ls -1d $BIN_DIR/2D-model* | head -n 1)
+        TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         for i in $GITHUB_WORKSPACE/testing_small/*; do "$TWOD_EXEC_NAME" -b -s 5 "$i" --platform minimal; done
         
     - name: Run minimal JavaScript interpeter tests
       run: |
-        TWOD_EXEC_NAME=$(ls -1d $BIN_DIR/2D-model* | head -n 1)
+        TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         for i in $GITHUB_WORKSPACE/testing_small/*; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript \
          -b -s 5 --direct-script-path "$i".js "$i" --platform minimal; done
         
