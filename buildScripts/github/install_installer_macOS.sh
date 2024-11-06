@@ -14,7 +14,7 @@ ls "/Applications/TRIKStudio/TRIK Studio.app/Contents/MacOS"
 export DYLD_LIBRARY_PATH="$LIB_DIR"
 "$BIN_DIR"/2D-model --version
 "$BIN_DIR"/patcher --version
-"$APP_DIR"/maintenance --version
+/Applications/TRIKStudio/maintenance.app/Contents/MacOS/maintenance --version
 "$APP_DIR"/trik-studio --version
 
 cd "$LIB_DIR"
