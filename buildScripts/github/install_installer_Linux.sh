@@ -43,5 +43,10 @@ export LD_LIBRARY_PATH="$LIB_DIR"
 "$BIN_DIR"/patcher --version
 
 cd "$LIB_DIR"
+
+ls *.so* | xargs ldd | grep -Ev "not found$" | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
+         | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(c|dl|m|pthread|rt)\.so.*" \
+         | grep -Ev "$LD_LIBRARY_PATH" | grep -Ev "ld|linux-vdso"
+
 ls *.so* | xargs ldd | grep "not found" || exit 0
 exit 1
