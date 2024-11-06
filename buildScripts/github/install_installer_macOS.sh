@@ -10,6 +10,7 @@ BIN_DIR="/Applications/TRIKStudio/TRIK Studio.app/Contents/MacOS" && echo "BIN_D
 LIB_DIR="/Applications/TRIKStudio/TRIK Studio.app/Contents/Lib" && echo "LIB_DIR=$LIB_DIR" >> $GITHUB_ENV
 APP_DIR="/Applications/TRIKStudio/TRIK Studio.app/Contents/MacOS" && echo "APP_DIR=$APP_DIR" >> $GITHUB_ENV
 
+sudo rm -rf $INSTALLER_NAME.app
 ls "/Applications/TRIKStudio/TRIK Studio.app/Contents/MacOS"
 export DYLD_LIBRARY_PATH="$LIB_DIR"
 "$BIN_DIR"/2D-model --version
