@@ -40,6 +40,10 @@ jobs:
       run: pacman -Sy && pacman -S git p7zip --noconfirm
       if: startsWith(inputs.container_name, 'arch') == true
 
+    - name: Install dependencies
+      run: HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_AUTO_UPDATE=1 brew install p7zip || brew upgrade p7zip
+      if: startsWith(inputs.os, 'mac') == true
+      
     - name: Checkout repository
       uses: actions/checkout@v4
       with:

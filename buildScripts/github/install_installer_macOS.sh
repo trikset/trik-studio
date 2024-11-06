@@ -13,7 +13,6 @@ APP_DIR="/Applications/TRIKStudio/TRIK Studio.app/Contents/MacOS" && echo "APP_D
 ls "/Applications/TRIKStudio/TRIK Studio.app/Contents/MacOS"
 export DYLD_LIBRARY_PATH="$LIB_DIR"
 "$BIN_DIR"/2D-model --version
-"$BIN_DIR"/checkapp --version
 "$BIN_DIR"/patcher --version
 "$APP_DIR"/maintenance --version
 "$APP_DIR"/trik-studio --version
