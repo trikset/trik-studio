@@ -19,6 +19,6 @@ elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
   yum install -y libxkbcommon-x11 qt5-qtbase-gui #no desire to enumerate all required libraries for QtIFw
   yum install -y pulseaudio-libs-glib2 # to run TS and 2D-model even with `minimal` platform
   yum install -y qt5-qtscript-devel qt5-qttools-devel qt5-qtmultimedia-devel qt5-qtserialport-devel qt5-qtsvg-devel qt5-qtbase-devel qt5-qtbase-private-devel \
-  qt5-qtwayland-devel
+  qt5-qtwayland
   echo "source scl_source enable gcc-toolset-$GCC_VERSION" >> ~/.bash_profile
 fi

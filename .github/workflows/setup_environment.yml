@@ -39,7 +39,7 @@ on:
       xcode_version:
         required: false
         type: string
-        default: 13.4
+        default: 14.3
       config:
         required: false
         type: string
@@ -60,12 +60,16 @@ on:
         required: false
         type: string
         default: 13
+      shell:
+        required: false
+        type: string
+        default: bash
 
 jobs:
-  job:
+  build:
     defaults:
       run:
-        shell: bash -l {0}
+        shell: ${{ inputs.shell }}
 
     runs-on: ${{ inputs.os }}
     container: ${{ inputs.container_name }}
@@ -146,7 +150,7 @@ jobs:
       with:
         path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
         key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
-      if: ${{ inputs.build == 'true' }}
+      if: ${{ inputs.build == true }}
         
     - name: Run tests
       run: ${{ inputs.executor }} buildScripts/github/run_tests.sh && ${{ inputs.executor }} buildScripts/github/test.sh
@@ -172,19 +176,13 @@ jobs:
         host: ${{ secrets.DL_HOST }}
       if: ${{ inputs.build_installer == true }}
 
-    - name: Eval artifact name
-      run: |
-        CONTAINER_NAME=${{ inputs.container_name }}
-        PATCH_CONTAINER_NAME=${CONTAINER_NAME//[^a-zA-Z0-9_-]/}
-        echo "PATCH_CONTAINER_NAME=$PATCH_CONTAINER_NAME" >> $GITHUB_ENV
-
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ runner.os }}-${{ env.PATCH_CONTAINER_NAME }}-installer
+        name: ${{ inputs.os }}-installer
         path: |
           installer/*.exe
           installer/*.run
           installer/*.dmg
-          installer/trik_studio_uninstallscript.qs
+          installer/*.qs
       if: ${{ inputs.build_installer == true }}

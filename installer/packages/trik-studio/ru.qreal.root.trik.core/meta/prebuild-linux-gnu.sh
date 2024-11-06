@@ -3,6 +3,7 @@ set -o nounset
 set -o errexit
 
 cd "$(dirname "$0")"
+source "$INSTALLER_ROOT"/utils/linux-gnu_utils.sh
 
 mkdir -p "$PWD/../data/lib/python-runtime"
 mkdir -p "$PWD"/../data/lib/plugins/editors
@@ -47,6 +48,8 @@ rsync -avR --remove-source-files dist/trik/_internal/./*.so* "$PWD/../data/lib/"
 # Remove before copying other files
 rm dist/trik/trik
 rsync -avRm --ignore-missing-args --delete --delete-after dist/trik/_internal/./* "$PWD/../data/lib/python-runtime"
+
+add_required_libs "$PWD/../data/lib"
 
 #PythonQt requires for dlopen'ing
 pushd "$PWD/../data/lib" && for f in libpython3.*.so.* ; do ln -svf "$f" "$(echo "$f" | cut -d . -f 1-3)" ; done ; popd

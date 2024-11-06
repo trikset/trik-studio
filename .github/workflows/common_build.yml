@@ -1,4 +1,4 @@
-name: ubuntu CI
+name: Common CI
 on:
   push:
     branches-ignore:
@@ -30,11 +30,11 @@ on:
     branches-ignore:
       - 'dependabot**'
   workflow_dispatch:
-  
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
-  
+
 jobs:
   lint:
     uses: ./.github/workflows/setup_environment.yml
@@ -48,7 +48,7 @@ jobs:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: macos-12
+      os: macos-13
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=warn_off"
@@ -58,25 +58,32 @@ jobs:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: macos-12
+      os: macos-13
       build: true
       build_installer: false
       config: debug
       qmake_extra: "CONFIG+=warn_off CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       trik_python3_version_minor: 11
-      
+
   build-macos-installer:
     needs: [build-macos-debug-tests, build-macos-release-tests]
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: macos-12
+      os: macos-13
       build: true
       build_installer: true
       qmake_extra: " CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       trik_python3_version_minor: 11
       tests: true
     secrets: inherit
-    
+
+  install-macos-installer:
+    needs: build-macos-installer   
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: macos-13
+      artifact_name: macos-13-installer
+
   build-ubuntu-release-tests:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
@@ -86,45 +93,6 @@ jobs:
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
       trik_python3_version_minor: 10
-  
-  build-altlinux-release-tests:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      container_name: altlinux/base:latest
-      build: true
-      build_installer: false
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
-      tests: true
-      
-  build-rockylinux-distro-release-tests:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      container_name: rockylinux:9
-      build: true
-      build_installer: false
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined"
-      gcc_version: 13
-      
-  # Use Python 3.11, as the Python 3.12 package in Rocky Linux AppStream x86_64 crashes 
-  # with a segmentation fault when restarting the interpreter during the import of asyncio 
-  # (specifically when loading _ssl) in PythonQt::init().
-  build-rockylinux-installer-release-tests:
-    needs: lint
-    uses: ./.github/workflows/setup_environment.yml
-    with:
-      os: ubuntu-latest
-      container_name: rockylinux:9
-      build: true
-      build_installer: false
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
-      gcc_version: 13
-      trik_qt_version: 5.15
-      trik_python3_version_minor: 11
-      linux_installer_environment: true
 
   build-ubuntu-debug-tests:
     needs: lint
@@ -136,19 +104,100 @@ jobs:
       config: debug
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       trik_python3_version_minor: 10
-    
+
+  build-altlinux-release-tests:
+    needs: lint
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: ubuntu-latest
+      container_name: altlinux/base:latest
+      build: true
+      build_installer: false
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
+      tests: true
+
+  build-rockylinux-distro-release-tests:
+    needs: lint
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: ubuntu-latest
+      container_name: rockylinux:8
+      build: true
+      build_installer: false
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined"
+      gcc_version: 13
+      shell: bash -l {0}
+
+  # Use Python 3.11, as the Python 3.12 package in Rocky Linux AppStream x86_64 crashes 
+  # with a segmentation fault when restarting the interpreter during the import of asyncio 
+  # (specifically when loading _ssl) in PythonQt::init().
+  build-rockylinux-installer-release-tests:
+    needs: lint
+    uses: ./.github/workflows/setup_environment.yml
+    with:
+      os: ubuntu-latest
+      container_name: rockylinux:8
+      build: true
+      build_installer: false
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
+      gcc_version: 13
+      trik_qt_version: 5.15
+      trik_python3_version_minor: 11
+      linux_installer_environment: true
+      shell: bash -l {0}
+
   build-rockylinux-installer:
     needs: [build-rockylinux-installer-release-tests]
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
-      container_name: "rockylinux:9"
+      container_name: rockylinux:8
       build: true
       build_installer: true
       tests: true
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache"
+      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=warn_off"
       gcc_version: 13
       trik_qt_version: 5.15
       trik_python3_version_minor: 11
       linux_installer_environment: true
+      shell: bash -l {0}
     secrets: inherit
+
+  install-ubuntu-installer:
+    needs: [build-rockylinux-installer]  
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: ubuntu-latest
+      artifact_name: ubuntu-latest-installer
+
+  install-ubuntu-installer-1-concurrency:
+    needs: [build-rockylinux-installer]  
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: ubuntu-latest
+      artifact_name: ubuntu-latest-installer
+      concurrency: 1
+
+  install-rockylinux-installer:
+    needs: [build-rockylinux-installer]  
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: ubuntu-latest
+      container_name: rockylinux:8
+      artifact_name: ubuntu-latest-installer
+
+  install-altlinux-installer:
+    needs: [build-rockylinux-installer]  
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: ubuntu-latest
+      container_name: altlinux/base:latest
+      artifact_name: ubuntu-latest-installer
+
+  install-archlinux-installer:
+    needs: [build-rockylinux-installer]  
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: ubuntu-latest
+      container_name: archlinux:latest
+      artifact_name: ubuntu-latest-installer
