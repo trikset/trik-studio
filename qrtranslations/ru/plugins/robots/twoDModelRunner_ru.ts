@@ -49,17 +49,17 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+10"/>
         <source>File for save generated python or javascript code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь для сохранения сгенерированного Python или JavaScript кода</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите &quot;python&quot; или &quot;javascript&quot;</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Path to &quot;python&quot; or &quot;javascript&quot; script</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к &quot;python&quot; или &quot;javascript&quot; файлу для исполнения</translation>
     </message>
     <message>
         <location line="-25"/>
