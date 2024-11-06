@@ -127,6 +127,7 @@ jobs:
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined"
       gcc_version: 13
       shell: bash -l {0}
+      trik_python3_version_minor: 11
 
   # Use Python 3.11, as the Python 3.12 package in Rocky Linux AppStream x86_64 crashes 
   # with a segmentation fault when restarting the interpreter during the import of asyncio 
