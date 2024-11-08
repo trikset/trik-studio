@@ -20,21 +20,16 @@ fi
 INSTALLER_NAME="$INSTALLER_NAME.run"
 chmod +x "$INSTALLER_NAME"
 
-if [[ -z "$CONCURRENCY" ]]; then
-  ./$INSTALLER_NAME --verbose --script trik_studio_installscript.qs --platform minimal --mco "$CONCURRENCY"
-else
-  ./$INSTALLER_NAME --verbose --script trik_studio_installscript.qs --platform minimal
+./$INSTALLER_NAME --verbose --script trik_studio_installscript.qs --platform minimal --mco "$CONCURRENCY"
+  
+PREFIX=/opt
+if [ "$ID" = "ubuntu" ]; then
+  PREFIX=$HOME
 fi
 
-if [ "$ID" = "ubuntu" ]; then
-  BIN_DIR=$HOME/TRIKStudio/bin && echo "BIN_DIR=$BIN_DIR" >> $GITHUB_ENV
-  LIB_DIR=$HOME/TRIKStudio/lib && echo "LIB_DIR=$LIB_DIR" >> $GITHUB_ENV
-  APP_DIR=$HOME/TRIKStudio && echo "APP_DIR=$APP_DIR" >> $GITHUB_ENV
-else
-  BIN_DIR=/opt/TRIKStudio/bin && echo "BIN_DIR=$BIN_DIR" >> $GITHUB_ENV
-  LIB_DIR=/opt/TRIKStudio/lib && echo "LIB_DIR=$LIB_DIR" >> $GITHUB_ENV
-  APP_DIR=/opt/TRIKStudio && echo "APP_DIR=$APP_DIR" >> $GITHUB_ENV
-fi
+BIN_DIR=$PREFIX/TRIKStudio/bin && echo "BIN_DIR=$BIN_DIR" >> $GITHUB_ENV
+LIB_DIR=$PREFIX/TRIKStudio/lib && echo "LIB_DIR=$LIB_DIR" >> $GITHUB_ENV
+APP_DIR=$PREFIX/TRIKStudio && echo "APP_DIR=$APP_DIR" >> $GITHUB_ENV
 
 export LD_LIBRARY_PATH="$LIB_DIR"
 "$BIN_DIR"/2D-model --version --platform minimal
