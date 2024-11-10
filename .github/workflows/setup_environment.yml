@@ -76,12 +76,12 @@ jobs:
     
     steps:
     - name: Install dependencies
-      run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git
+      run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git sudo
       if: startsWith(inputs.container_name, 'altlinux') == true
 
 
     - name: Install dependencies
-      run: yum update -y && yum install -y git-core
+      run: yum update -y && yum install -y git-core sudo
       if: startsWith(inputs.container_name, 'rocky') == true
       
     - name: Configure git
