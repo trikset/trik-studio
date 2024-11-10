@@ -42,17 +42,17 @@ In background mode the session will be terminated just after the execution ended
     </message>
     <message>
         <location line="+10"/>
-        <source>File for save generated python or javascript code.</source>
+        <source>The complete file path, including the filename, to save the generated JavaScript or Python code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+5"/>
+        <source>The path to the Python or JavaScript file that will be used for interpretation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-3"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Path to &quot;python&quot; or &quot;javascript&quot; script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -64,7 +64,7 @@ In background mode the session will be terminated just after the execution ended
         <translation type="vanished">Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
     </message>
     <message>
-        <location line="-25"/>
+        <location line="-22"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Le chemin au ficher ou la trajectoire du robot sera enregistrée. L&apos;enregistrement ne sera pas fait immediatement, chaque point de trajectoire sera écrit dès lors qu&apos;il est obteneur par le checker, donc FIFO sont récommandés pour cette option.</translation>
     </message>
@@ -87,7 +87,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+239"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+225"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>

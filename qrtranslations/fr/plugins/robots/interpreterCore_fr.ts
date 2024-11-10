@@ -314,7 +314,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+127"/>
+        <location line="+115"/>
+        <source>The specified script file could not be opened for reading </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>No saved code found in the qrs file</source>
         <translation type="unfinished"></translation>
     </message>

@@ -13,19 +13,19 @@
  * limitations under the License. */
 
 #include <ctime>
-
 #include <QtCore/QDir>
 #include <QtCore/QCommandLineParser>
 #include <QtCore/QTranslator>
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
-
 #include <qrkernel/logging.h>
 #include <qrkernel/platformInfo.h>
-
 #include "runner.h"
 
-const int maxLogSize = 10 * 1024 * 1024;  // 10 MB
+constexpr int maxLogSize = 10 * 1024 * 1024;  // 10 MB
+constexpr int TWO_D_MODEL_RUNNER_INTERPRET_ERROR = 2;
+constexpr int TWO_D_MODEL_RUNNER_GENERATE_ERROR = 3;
+constexpr int TWO_D_MODEL_RUNNER_GENERATE_MODE_NOT_EXIST = 4;
 
 const QString description = QObject::tr(
 		"Emulates robot`s behaviour on TRIK Studio 2D model separately from programming environment. "\
@@ -125,13 +125,13 @@ int main(int argc, char *argv[])
 												 " finishes."));
 	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
 	QCommandLineOption generatePathOption("generate-path",
-					      QObject::tr("File for save generated python or javascript code.")
-					      , "path-to-save-code", "report.py");
+					      QObject::tr("The complete file path, including the filename, to save the generated JavaScript or Python code.")
+					      , "path-to-save-code", QString());
 	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
 					      , "generate-mode", "python");
-	QCommandLineOption directScriptExecutionPathOption("direct-script-path"
-						, QObject::tr("Path to \"python\" or \"javascript\" script")
-						, "direct-script-path");
+	QCommandLineOption directScriptExecutionPathOption("script-path"
+						, QObject::tr("The path to the Python or JavaScript file that will be used for interpretation.")
+						, "script-path", QString());
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
@@ -158,28 +158,28 @@ int main(int argc, char *argv[])
 	const bool closeOnSuccessMode = parser.isSet(closeOnSuccessOption);
 	const bool closeOnFinishMode = backgroundMode || parser.isSet(closeOnFinishOption);
 	const bool showConsoleMode = parser.isSet(showConsoleOption);
-	const QString generatePath = parser.isSet(generatePathOption) ? parser.value(generatePathOption) : QString();
-	const QString generateMode = parser.isSet(generateModeOption)
-					? parser.value(generateModeOption) : QString("python");
+	const QString generatePath = parser.value(generatePathOption);
+	const QString generateMode = parser.value(generateModeOption);
+	const QString scriptFilePath = parser.value(directScriptExecutionPathOption);
+
 	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode, qrsFile));
-	const QString filePath = parser.isSet(directScriptExecutionPathOption)
-					? parser.value(directScriptExecutionPathOption) : QString();
 	auto speedFactor = parser.value(speedOption).toInt();
 
-	if (!runner->openProject()) {
-		return 3;
-	}
-
-	if (generatePath != QString()) {
+	if (!generatePath.isEmpty()) {
+		if (generateMode != "python" and generateMode != "javascript") {
+			parser.showHelp();
+			QLOG_ERROR() << "Problem with generate code to " << generatePath;
+			return TWO_D_MODEL_RUNNER_GENERATE_MODE_NOT_EXIST;
+		}
 		if (!runner->generate(generatePath, generateMode)) {
 			QLOG_ERROR() << "Problem with generate code to " << generatePath;
-			return 4;
+			return TWO_D_MODEL_RUNNER_GENERATE_ERROR;
 		}
 	}
 
 	if (!runner->interpret(backgroundMode, speedFactor, closeOnFinishMode,
-			       closeOnSuccessMode, showConsoleMode, filePath)) {
-		return 2;
+			       closeOnSuccessMode, showConsoleMode, scriptFilePath)) {
+		return TWO_D_MODEL_RUNNER_INTERPRET_ERROR;
 	}
 
 	const int exitCode = app->exec();

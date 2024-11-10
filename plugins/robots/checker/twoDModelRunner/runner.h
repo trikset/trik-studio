@@ -49,11 +49,6 @@ public:
 	/// Constructor.
 	/// @param report A path to a file where JSON report about the session will be written after it ends.
 	/// @param trajectory A path to a file where robot`s trajectory will be written during the session.
-	Runner(const QString &report, const QString &trajectory);
-
-	/// Constructor.
-	/// @param report A path to a file where JSON report about the session will be written after it ends.
-	/// @param trajectory A path to a file where robot`s trajectory will be written during the session.
 	/// @param input A path to a file where JSON with inputs for JavaScript.
 	/// @param mode Interpret mode.
 	/// @param qrsFile Path to TRIK Studio project
@@ -77,9 +72,6 @@ public:
 	/// @param generatePath The path to save the generated code
 	/// @param generateMode "python" or "javascript"
 	bool generate(const QString &generatePath, const QString &generateMode);
-
-	/// Open TRIK Studio project
-	bool openProject();
 
 private slots:
 	void close();

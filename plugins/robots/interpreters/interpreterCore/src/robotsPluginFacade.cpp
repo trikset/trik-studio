@@ -306,15 +306,15 @@ const kitBase::EventsForKitPluginInterface &RobotsPluginFacade::eventsForKitPlug
 
 bool RobotsPluginFacade::interpretCode(const QString &inputs, const QString &filepath)
 {
-	QString code {};
-	QString extension {};
-	if (filepath != QString()) {
+	QString code;
+	QString extension;
+	if (filepath.isEmpty()) {
 		QFile file(filepath);
 		QFileInfo fileInfo(file);
 
 		if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
 			mMainWindow->errorReporter()->addError(
-						"Trying to read from script file failed");
+						tr("The specified script file could not be opened for reading ") + filepath);
 			return false;
 		}
 		code = file.readAll();

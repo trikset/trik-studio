@@ -29,7 +29,11 @@
 
 using namespace twoDModel;
 
-Runner::Runner(const QString &report, const QString &trajectory)
+Runner::Runner(const QString &report, const QString &trajectory,
+	       const QString &input, const QString &mode, const QString &qrsFile):
+	mInputsFile(input)
+	, mMode(mode)
+	, mSaveFile(qrsFile)
 {
 	mQRealFacade.reset(new qReal::SystemFacade());
 	mProjectManager.reset(new qReal::ProjectManager(mQRealFacade->models()));
@@ -61,24 +65,8 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::errorAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
-}
 
-Runner::Runner(const QString &report, const QString &trajectory,
-	       const QString &input, const QString &mode, const QString &qrsFile)
-	: Runner(report, trajectory)
-
-{
-	mInputsFile = input;
-	mMode = mode;
-	mSaveFile = qrsFile;
-}
-
-bool Runner::openProject()
-{
-	if (!mProjectManager->open(mSaveFile)) {
-		return false;
-	}
-	return true;
+	mProjectManager->open(mSaveFile);
 }
 
 Runner::~Runner()
@@ -99,11 +87,7 @@ Runner::~Runner()
 
 bool Runner::generate(const QString &generatePath, const QString &generateMode)
 {
-	if (generateMode != "python" and generateMode != "javascript") {
-		return false;
-	}
-
-	for (auto action: mPluginFacade->actionsManager().actions()){
+	for (auto&& action: mPluginFacade->actionsManager().actions()){
 		if (generateMode == "python") {
 			if (action.action()->objectName() == "generatePythonTrikCode") {
 				emit action.action()->triggered();
@@ -118,11 +102,13 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 
 	auto codes = mTextManager->code(mMainWindow->activeDiagram());
 	if (codes.empty()) {
+		// The application has already logged a
+		// description of the problem that prevented script generation.
 		return false;
 	}
 	auto path = mTextManager->path(codes.first());
 	if (!QFile::copy(path, generatePath)) {
-		QLOG_ERROR() << "File with name " << generatePath << "already exist";
+		QLOG_ERROR() << "File with name " << generatePath << " already exist";
 		return false;
 	}
 	return true;
