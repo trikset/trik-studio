@@ -124,9 +124,10 @@ int main(int argc, char *argv[])
 								   , QObject::tr("Close the window and exit after diagram/script"\
 												 " finishes."));
 	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
-	QCommandLineOption generatePathOption("generate-path",
-					      QObject::tr("The complete file path, including the filename, to save the generated JavaScript or Python code.")
-					      , "path-to-save-code", QString());
+	QCommandLineOption generatePathOption("generate-path"
+				, QObject::tr("The complete file path, including the filename"\
+					      ", to save the generated JavaScript or Python code.")
+				, "path-to-save-code", QString());
 	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
 					      , "generate-mode", "python");
 	QCommandLineOption directScriptExecutionPathOption("script-path"
