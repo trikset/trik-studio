@@ -76,7 +76,9 @@ jobs:
     
     steps:
     - name: Install dependencies
-      run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git sudo
+      run: |
+        apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git sudo
+        sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
       if: startsWith(inputs.container_name, 'alt') == true
 
 
