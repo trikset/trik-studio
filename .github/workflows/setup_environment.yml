@@ -81,7 +81,7 @@ jobs:
 
 
     - name: Install dependencies
-      run: yum update -y && yum install -y git-core sudo
+      run: yum update -y && yum install -y --setopt=install_weak_deps=False git-core sudo
       if: startsWith(inputs.container_name, 'rocky') == true
       
     - name: Configure git

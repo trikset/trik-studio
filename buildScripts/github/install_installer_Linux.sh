@@ -13,7 +13,7 @@ elif [ "$ID" = "ubuntu" ]; then
 elif [ "$ID" = "arch" ]; then
   sudo pacman -Sy && sudo pacman -S libxkbcommon-x11 xcb-util-wm xcb-util-image xcb-util-keysyms xcb-util-renderutil fontconfig libx11 --noconfirm
 elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
-  sudo yum update -y && sudo yum install -y libxkbcommon-x11 xcb-util-wm libX11 xcb-util-image \
+  sudo yum update -y && sudo yum install -y --setopt=install_weak_deps=False libxkbcommon-x11 xcb-util-wm libX11 xcb-util-image \
   dbus-libs xcb-util-keysyms xcb-util-renderutil fontconfig libX11-xcb
 fi
 
@@ -32,7 +32,7 @@ BIN_DIR="$PREFIX"/TRIKStudio/bin && echo "BIN_DIR=$BIN_DIR" >> $GITHUB_ENV
 LIB_DIR="$PREFIX"/TRIKStudio/lib && echo "LIB_DIR=$LIB_DIR" >> $GITHUB_ENV
 APP_DIR="$PREFIX"/TRIKStudio && echo "APP_DIR=$APP_DIR" >> $GITHUB_ENV
 
-export QT_PLATFORM_QPA=minimal
+export QT_QPA_PLATFORM=minimal
 export LD_LIBRARY_PATH="$LIB_DIR"
 "$BIN_DIR"/2D-model --version
 "$APP_DIR"/maintenance --version
