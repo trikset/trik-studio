@@ -79,12 +79,12 @@ jobs:
       run: |
         apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git sudo
         sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
-      if: startsWith(inputs.container_name, 'alt') == true
+      if: startsWith(inputs.container_name, 'alt')
 
 
     - name: Install dependencies
       run: yum update -y && yum install -y --setopt=install_weak_deps=False git-core sudo
-      if: startsWith(inputs.container_name, 'rocky') == true
+      if: startsWith(inputs.container_name, 'rocky')
       
     - name: Configure git
       run: |
@@ -106,7 +106,7 @@ jobs:
         XCODE_VERSION: ${{ inputs.xcode_version }}
         BUILD_INSTALLER: ${{ inputs.build_installer }}
         GCC_VERSION: ${{ inputs.gcc_version }}
-      if: ${{ inputs.build == true && inputs.linux_installer_environment != true }}
+      if: ${{ inputs.build && !inputs.linux_installer_environment }}
 
     - name: Set up installer environment
       run: buildScripts/github/install_installer_environment.sh
@@ -115,13 +115,13 @@ jobs:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         GCC_VERSION: ${{ inputs.gcc_version }}
         BUILD_INSTALLER: ${{ inputs.build_installer }}
-      if: ${{ inputs.linux_installer_environment == true }}
+      if: ${{ inputs.linux_installer_environment }}
       
     - name: Lint
       run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
           ${{ inputs.executor }} buildScripts/github/vera_translation.sh
-      if: ${{ inputs.lint == true }}
+      if: ${{ inputs.lint }}
 
     - name: Restore cache
       uses: actions/cache@v4
@@ -132,7 +132,7 @@ jobs:
           ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}
           ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}
           ccache-c${{ inputs.container_name }}-${{ inputs.os }}
-      if: ${{ inputs.build == true }}
+      if: ${{ inputs.build }}
 
     - name: Build
       run: buildScripts/github/build.sh
@@ -145,14 +145,14 @@ jobs:
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
-      if: ${{ inputs.build == true }}
+      if: ${{ inputs.build }}
 
     - name: Save build cache
       uses: actions/cache/save@v4
       with:
         path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
         key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
-      if: ${{ inputs.build == true }}
+      if: ${{ inputs.build }}
         
     - name: Run tests
       run: ${{ inputs.executor }} buildScripts/github/run_tests.sh && ${{ inputs.executor }} buildScripts/github/test.sh
@@ -176,7 +176,7 @@ jobs:
         ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
         username: ${{ secrets.DL_USERNAME }}
         host: ${{ secrets.DL_HOST }}
-      if: ${{ inputs.build_installer == true }}
+      if: ${{ inputs.build_installer }}
 
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
@@ -187,4 +187,4 @@ jobs:
           installer/*.run
           installer/*.dmg
           installer/*.qs
-      if: ${{ inputs.build_installer == true }}
+      if: ${{ inputs.build_installer }}
