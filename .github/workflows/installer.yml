@@ -89,6 +89,7 @@ jobs:
         
     - name: Run minimal JavaScript interpeter tests
       run: |
+        export QT_QPA_PLATFORM=minimal
         if [[ "$RUNNER_OS" == Linux ]]; then
           export QT_QPA_PLATFORM=offscreen
         fi
@@ -99,6 +100,7 @@ jobs:
         
     - name: Run minimal Python interpeter tests
       run: |
+        export QT_QPA_PLATFORM=minimal
         if [[ "$RUNNER_OS" == Linux ]]; then
           export QT_QPA_PLATFORM=offscreen
         fi
