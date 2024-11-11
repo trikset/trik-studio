@@ -88,7 +88,7 @@ jobs:
       run: |
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript \
-         -b -s 5 --script-path "$i".js "$i" --platform minimal; done
+         -b -s 5 --script-path "$i".js "$i" --platform offscreen; done
         
     - name: Run minimal Python interpeter tests
       run: |
@@ -96,4 +96,4 @@ jobs:
         export TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
         TWOD_EXEC_NAME=$(ls -1d $BIN_DIR/2D-model* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
-         -b -s 5 --script-path "$i".py "$i" --platform minimal; done
+         -b -s 5 --script-path "$i".py "$i" --platform offscreen; done
