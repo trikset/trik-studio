@@ -77,7 +77,7 @@ jobs:
     steps:
     - name: Install dependencies
       run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git sudo
-      if: startsWith(inputs.container_name, 'altlinux') == true
+      if: startsWith(inputs.container_name, 'alt') == true
 
 
     - name: Install dependencies

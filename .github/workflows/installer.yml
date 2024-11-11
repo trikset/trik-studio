@@ -30,7 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git-core p7zip curl sudo
-      if: startsWith(inputs.container_name, 'altlinux') == true
+      if: startsWith(inputs.container_name, 'alt') == true
 
     - name: Install dependencies
       run: yum install -y epel-release && yum update -y && yum install -y --setopt=install_weak_deps=False git-core findutils p7zip sudo
@@ -81,19 +81,22 @@ jobs:
         
     - name: Run minimal tests
       run: |
+        export QT_QPA_PLATFORM=minimal
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" -b -s 5 "$i" --platform minimal; done
+        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" -b -s 5 "$i"; done
         
     - name: Run minimal JavaScript interpeter tests
       run: |
+        export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/testing_small/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript \
-         -b -s 5 --script-path "$i".js "$i" --platform offscreen; done
+         -b -s 5 --script-path "$i".js "$i"; done
         
     - name: Run minimal Python interpeter tests
       run: |
+        export QT_QPA_PLATFORM=offscreen
         TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
         export TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
         TWOD_EXEC_NAME=$(ls -1d $BIN_DIR/2D-model* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/testing_small/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
-         -b -s 5 --script-path "$i".py "$i" --platform offscreen; done
+         -b -s 5 --script-path "$i".py "$i"; done
