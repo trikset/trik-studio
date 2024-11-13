@@ -6,8 +6,8 @@ GCC_VERSION=${GCC_VERSION:-13}
 TRIK_PYTHON="python3.${TRIK_PYTHON3_VERSION_MINOR}"
 TRIK_QT_VERSION=${TRIK_QT_VERSION:-5.15}
 
-sudo yum update -y && sudo yum install -y epel-release
-sudo yum install --allowerasing -y --setopt=install_weak_deps=False sudo which libusbx-devel curl wget make gcc-toolset-"$GCC_VERSION"-{gcc-c++,libasan-devel,libubsan-devel,gdb} \
+sudo yum update -y && sudo yum install -y --setopt=install_weak_deps=False epel-release
+sudo yum install --allowerasing -y --setopt=install_weak_deps=False which libusbx-devel curl wget make gcc-toolset-"$GCC_VERSION"-{gcc-c++,libasan-devel,libubsan-devel,gdb} \
 git-core ccache zlib-devel rsync "$TRIK_PYTHON"-{devel,pip,urllib3} mesa-libGL-devel systemd-devel fontconfig p7zip xz time findutils
 sudo yum install -y --setopt=install_weak_deps=False pulseaudio-libs-glib2 qt5-qtbase-gui libwayland-{server,client,cursor} libxkbcommon-x11
 echo "source scl_source enable gcc-toolset-$GCC_VERSION" >> ~/.bash_profile
