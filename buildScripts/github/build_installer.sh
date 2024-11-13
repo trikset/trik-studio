@@ -18,14 +18,14 @@ df -h .
 NEED_DEPLOY=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
 
 if $NEED_DEPLOY ; then
-    $EXECUTOR bash -c "mkdir -p ~/.ssh && install -m 600 /dev/null ~/.ssh/id_rsa && echo \"$ssh_key\" > ~/.ssh/id_rsa"
+    $EXECUTOR bash -c "mkdir -p $HOME/.ssh && install -m 600 /dev/null $HOME/.ssh/id_rsa && echo \"$ssh_key\" > $HOME/.ssh/id_rsa"
 fi
           
 if [[ $RUNNER_OS == Linux ]] ; then
       echo Start build checker archive
       $EXECUTOR bash -c "bin/build-checker-installer.sh"
       if $NEED_DEPLOY ; then
-          $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no' bin/trik_checker.tar.xz $username@$host:~/dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
+          $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no -vvv -i $HOME/.ssh/id_rsa' bin/trik_checker.tar.xz $username@$host:~/dl/ts/fresh/checker/checker-linux-$CONFIG-$BRANCH_NAME.tar.xz"
       fi
 fi
 
@@ -35,5 +35,5 @@ $EXECUTOR bash -c "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
 INSTALLER_NAME=$(find installer -name "trik-studio*installer*" -print -quit)
 
 if $NEED_DEPLOY ; then
-    $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no' $INSTALLER_NAME $username@$host:~/dl/ts/fresh/installer/$TSNAME"
+    $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no -vvv -i $HOME/.ssh/id_rsa' $INSTALLER_NAME $username@$host:~/dl/ts/fresh/installer/$TSNAME"
 fi
