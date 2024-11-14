@@ -31,57 +31,69 @@ public:
 	{
 	}
 
+	QPalette systemPalette = QApplication::palette();
 	virtual ~Styles() = default;
 
 	/// Returns json stylesheet for start tab background
 	virtual QString startTabBackgroundStyle() const
 	{
-		return utils::InFile::readAll(startTabBackgroundStylePath());
+		return utils::InFile::readAll(startTabBackgroundStylePath())
+				.replace("@@Window@@", systemPalette.color(QPalette::Window).name());
 	}
 
 	/// Returns json stylesheet for start tab substrate background
 	virtual QString startTabSubstrateBackgroundStyle() const
 	{
-		return utils::InFile::readAll(startTabSubstrateBackgroundStylePath());
+		return utils::InFile::readAll(startTabSubstrateBackgroundStylePath())
+				.replace("@@Window@@", systemPalette.color(QPalette::Window).name());
 	}
 
 	/// Returns json stylesheet for start tab header background
 	virtual QString startTabHeaderBackgroundStyle() const
 	{
-		return utils::InFile::readAll(startTabHeaderBackgroundStylePath());
+		return utils::InFile::readAll(startTabHeaderBackgroundStylePath())
+				.replace("@@Window@@", systemPalette.color(QPalette::Window).name())
+				.replace("@@Light@@", systemPalette.color(QPalette::Light).name());
 	}
 
 	/// Returns json stylesheet for recent projects section background on start tab
 	virtual QString startTabRecentProjectsBackgroundStyle() const
 	{
-		return utils::InFile::readAll(startTabRecentProjectsBackgroundStylePath());
+		return utils::InFile::readAll(startTabRecentProjectsBackgroundStylePath())
+				.replace("@@Light@@", systemPalette.color(QPalette::Light).name());
 	}
 
 	/// Returns json stylesheet for projects management section background on start tab
 	virtual QString startTabProjectsManagementBackgroundStyle() const
 	{
-		return utils::InFile::readAll(startTabProjectsManagementBackgroundStylePath());
+		return utils::InFile::readAll(startTabProjectsManagementBackgroundStylePath())
+				.replace("@@Light@@", systemPalette.color(QPalette::Light).name());
 	}
 
 	/// Returns json stylesheet for command buttons on start tab
 	virtual QString startTabButtonStyle() const
 	{
 		return utils::InFile::readAll(startTabButtonStylePath())
-				.replace("@@FONT@@", mFonts.commandButtonsFont());
+				.replace("@@FONT@@", mFonts.commandButtonsFont())
+				.replace("@@Light@@", systemPalette.color(QPalette::Light).name())
+				.replace("@@Highlight@@", systemPalette.color(QPalette::Highlight).name())
+				.replace("@@Text@@", systemPalette.color(QPalette::Text).name());
 	}
 
 	/// Returns json stylesheet for styled text on start tab  of level 1 heading
 	virtual QString startTabLabelLevel1Style() const
 	{
 		return utils::InFile::readAll(startTabLabelLevel1StylePath())
-				.replace("@@FONT@@", mFonts.styledTextFont());
+				.replace("@@FONT@@", mFonts.styledTextFont())
+				.replace("@@Text@@", systemPalette.color(QPalette::Text).name());
 	}
 
 	/// Returns json stylesheet for styled text on start tab of level 2 heading
 	virtual QString startTabLabelLevel2Style() const
 	{
 		return utils::InFile::readAll(startTabLabelLevel2StylePath())
-				.replace("@@FONT@@", mFonts.styledTextFont());
+				.replace("@@FONT@@", mFonts.styledTextFont())
+				.replace("@@Text@@", systemPalette.color(QPalette::Text).name());
 	}
 
 	virtual QString splashscreenStyle() const
