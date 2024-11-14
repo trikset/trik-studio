@@ -308,7 +308,7 @@ bool RobotsPluginFacade::interpretCode(const QString &inputs, const QString &fil
 {
 	QString code;
 	QString extension;
-	if (filepath.isEmpty()) {
+	if (!filepath.isEmpty()) {
 		QFile file(filepath);
 		QFileInfo fileInfo(file);
 
