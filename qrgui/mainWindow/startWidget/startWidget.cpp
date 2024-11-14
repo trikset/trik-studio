@@ -37,6 +37,7 @@ StartWidget::StartWidget(MainWindow *mainWindow, ProjectManager *projectManager,
 	, mProjectManager(projectManager)
 	, mProjectListSize(SettingsManager::value("recentProjectsLimit", 5).toInt())  // TODO: Why 5?
 {
+	
 	setStyleSheet(BrandManager::styles()->startTabSubstrateBackgroundStyle());
 	QWidget * const mainWidget = createMainWidget();
 
