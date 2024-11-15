@@ -39,6 +39,7 @@ public:
 		QString new_style = style;
 		return new_style
 		.replace("@@Window@@", systemPalette.color(QPalette::Window).name())
+		.replace("@@Base@@", systemPalette.color(QPalette::Base).name())
 		.replace("@@Font@@", mFonts.commandButtonsFont())
 		.replace("@@Light@@", systemPalette.color(QPalette::Light).name())
 		.replace("@@Highlight@@", systemPalette.color(QPalette::Highlight).name())

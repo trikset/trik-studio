@@ -12,8 +12,8 @@ QLabel#withoutIcon {
 
 QPushButton {
     border-style: solid;
-    border-color: @@Light@@;
-    background-color: @@Light@@;
+    border-color: @@Window@@;
+    background-color: @@Window@@;
 }
 
 QPushButton#withIcon {
