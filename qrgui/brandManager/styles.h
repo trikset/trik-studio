@@ -49,8 +49,7 @@ public:
 	/// Returns json stylesheet for start tab background
 	virtual QString startTabBackgroundStyle() const
 	{
-		return place_stype(utils::InFile::readAll(startTabBackgroundStylePath()));
-				
+		return place_stype(utils::InFile::readAll(startTabBackgroundStylePath()));	
 	}
 
 	/// Returns json stylesheet for start tab substrate background
@@ -81,7 +80,6 @@ public:
 	virtual QString startTabButtonStyle() const
 	{
 		return place_stype(utils::InFile::readAll(startTabButtonStylePath()));
-				
 	}
 
 	/// Returns json stylesheet for styled text on start tab  of level 1 heading
