@@ -950,7 +950,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
+        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+136"/>
         <source>New project</source>
         <translation>Nouveau projet</translation>
     </message>
@@ -1006,7 +1006,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+87"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+88"/>
         <source>Mouse gesture</source>
         <translation>Geste souris</translation>
     </message>
