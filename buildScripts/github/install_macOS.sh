@@ -7,7 +7,7 @@ TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass p7zip pyt
 for pkg in $TRIK_BREW_PACKAGES ; do
   p="${pkg##*/}"
   p="${p%.*}"
-  brew install "$pkg" || brew upgrade "$pkg" || brew link --force "$pkg" || echo "Failed to install/upgrade $pkg"
+  brew install --quiet "$pkg" || brew upgrade "$pkg" || brew link --force "$pkg" || echo "Failed to install/upgrade $pkg"
 done
 TRIK_PYTHON=python3.${TRIK_PYTHON3_VERSION_MINOR}
 "$TRIK_PYTHON" -m pip install -U pip
