@@ -111,11 +111,22 @@ jobs:
          --close -s 5 --script-path "$i".py -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
       
-    - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
+    - name: Run minimal Javascript interpeter tests as fields in .qrs (For backward compatibility)
       run: |
         export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".js "$i" \
+         && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
+      if: startsWith(inputs.os, 'ubuntu')
+      
+    - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
+      run: |
+        export QT_QPA_PLATFORM=offscreen
+        TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
+        export TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
+        TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
+        PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1)
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
