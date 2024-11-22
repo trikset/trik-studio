@@ -148,7 +148,6 @@ jobs:
       shell: bash -l {0}
 
   build-rockylinux-installer:
-    needs: [build-rockylinux-installer-release-tests]
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
@@ -156,7 +155,7 @@ jobs:
       build: true
       build_installer: true
       tests: true
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=no-sanitizers CONFIG+=warn_off"
       gcc_version: 13
       trik_qt_version: 5.15
       trik_python3_version_minor: 11
