@@ -95,7 +95,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
-        fetch-depth: 1
+        fetch-depth: 0
 
     - name: Set up environment
       run: buildScripts/github/install_${{ runner.os }}.sh
