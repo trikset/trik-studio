@@ -42,19 +42,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - qt-version: '5.12'
-            mingw-version: '7.3'
-            mingw-short-version: '73'
-            python-version: '3.11'
-            mingw-bitness: '64'
-            deploy-installer: true
-
           - qt-version: '5.15'
             mingw-version: '8.1'
             mingw-bitness: '64'
             mingw-short-version: '81'
             python-version: '3.11'
-#            deploy-installer: true
+            deploy-installer: true
 
 
     defaults:
@@ -217,7 +210,7 @@ jobs:
         run: |
             install -m 600 -D /dev/null ~/.ssh/id_rsa
             echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
-            rsync -v --rsh="ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-i686-installer.exe
+            rsync -v --rsh="ssh -o StrictHostKeyChecking=no" installer/trik-studio*installer*.exe ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-${{ env.GITHUB_REF_SLUG }}-x86_64-installer.exe
 
       - name: Prepare for RDP connection
         if: false #comment this line to create RDP session
