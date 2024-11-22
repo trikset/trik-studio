@@ -83,9 +83,9 @@ jobs:
         
     - name: Run minimal tests in diagram mode
       run: |
-        export QT_QPA_PLATFORM=minimal
+        export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" -b -s 5 "$i"; done
+        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --close 5 "$i"; done
         rm -rf tests.7z testing_small
         
     - name: Downloads minimal tests for script mode
@@ -97,8 +97,8 @@ jobs:
       run: |
         export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript \
-         -b -s 5 --script-path "$i".js -m script "$i"; done
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript --close \
+         -s 5 --script-path "$i".js -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
        
     - name: Run minimal Python interpeter tests in direct script mode
@@ -108,7 +108,7 @@ jobs:
         export TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
         TWOD_EXEC_NAME=$(ls -1d $BIN_DIR/2D-model* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
-         -b -s 5 --script-path "$i".py -m script "$i"; done
+         --close -s 5 --script-path "$i".py -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
       
     - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
@@ -117,5 +117,5 @@ jobs:
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
-         && "$TWOD_EXEC_NAME" -b -s 5 -m script "$i"
+         && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
