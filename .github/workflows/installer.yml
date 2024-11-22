@@ -116,6 +116,6 @@ jobs:
         export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".js "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
