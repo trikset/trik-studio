@@ -76,7 +76,7 @@ jobs:
       env:
         CONCURRENCY: ${{ inputs.concurrency }}
 
-    - name: Downloads minimal tests
+    - name: Downloads minimal tests for Diagram mode
       run: |
         curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
         7z x tests.7z || 7za x tests.7z
@@ -86,12 +86,18 @@ jobs:
         export QT_QPA_PLATFORM=minimal
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" -b -s 5 "$i"; done
+        rm -rf tests.7z testing_small
+        
+    - name: Downloads minimal tests for script mode
+      run: |
+        curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200706-patched/solutions.7z"
+        7z x tests.7z || 7za x tests.7z
         
     - name: Run minimal JavaScript interpeter tests in direct script mode
       run: |
         export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/testing_small/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript \
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript \
          -b -s 5 --script-path "$i".js -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
        
@@ -101,7 +107,7 @@ jobs:
         TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
         export TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
         TWOD_EXEC_NAME=$(ls -1d $BIN_DIR/2D-model* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/testing_small/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
          -b -s 5 --script-path "$i".py -m script "$i"; done
       if: startsWith(inputs.os, 'ubuntu')
       
@@ -110,6 +116,6 @@ jobs:
         export QT_QPA_PLATFORM=offscreen
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1)
         PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1)
-        for i in "$GITHUB_WORKSPACE"/testing_small/*.qrs; do PATCHER_NAME -s "$i".py "$i" \
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" -b -s 5 -m script "$i"
       if: startsWith(inputs.os, 'ubuntu')
