@@ -90,7 +90,6 @@ use_gold_linker:!clang: QMAKE_LFLAGS += -Wl,--disable-new-dtags
 macx:QMAKE_TARGET_BUNDLE_PREFIX = com.cybertech
 
 macx-clang {
-	QMAKE_MACOSX_DEPLOYMENT_TARGET=10.12
 	QMAKE_LFLAGS_SONAME = -Wl,-install_name,@rpath/
 }
 
