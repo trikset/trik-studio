@@ -88,7 +88,7 @@ jobs:
         TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
         TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
         echo "TRIK_PYTHONPATH=$TRIK_PYTHONPATH" >> $GITHUB_ENV
-        PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1) && "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
+        PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1) && echo "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
         
     - name: Run minimal tests in diagram mode
       run: |
