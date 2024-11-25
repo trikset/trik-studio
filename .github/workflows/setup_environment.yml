@@ -163,7 +163,6 @@ jobs:
 
     - name: Build Installer
       run: |
-        BRANCH_NAME=${BRANCH_NAME//\//-}
         buildScripts/github/build_installer.sh
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
