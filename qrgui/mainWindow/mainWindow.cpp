@@ -210,6 +210,7 @@ void MainWindow::connectActions()
 	connect(mUi->actionSave, &QAction::triggered, this, &MainWindow::tryToSave);
 	connect(mUi->actionSave_as, &QAction::triggered, &*mProjectManager, &ProjectManagerWrapper::suggestToSaveAs);
 	connect(mUi->actionSave_diagram_as_a_picture, &QAction::triggered, this, &MainWindow::saveDiagramAsAPicture);
+	connect(mUi->actionSave_script, &QAction::triggered, this, &MainWindow::saveScript);
 	connect(mUi->actionPrint, &QAction::triggered, this, &MainWindow::print);
 	connect(mUi->actionMakeSvg, &QAction::triggered, this, &MainWindow::makeSvg);
 
@@ -1270,15 +1271,16 @@ void MainWindow::currentTabChanged(int newIndex)
 	const bool isStartTab = dynamic_cast<StartWidget *>(mUi->tabs->widget(newIndex));
 	const bool isGesturesTab = dynamic_cast<gestures::GesturesWidget *>(mUi->tabs->widget(newIndex));
 	const bool isDecorativeTab = isStartTab || isGesturesTab;
+	const bool isCodeTab = dynamic_cast<text::QScintillaTextEdit *>(mUi->tabs->widget(newIndex));
 
-	mUi->actionSave->setEnabled(!isDecorativeTab);
+	mUi->actionSave->setEnabled(!isDecorativeTab && !isCodeTab);
 	mUi->actionSave_as->setEnabled(!isDecorativeTab);
 	mUi->actionSave_diagram_as_a_picture->setEnabled(isEditorTab);
 	mUi->actionPrint->setEnabled(!isDecorativeTab);
 	mUi->actionFind->setEnabled(!isDecorativeTab);
 	mUi->actionFind_and_replace->setEnabled(!isDecorativeTab);
 	mUi->actionGesturesShow->setEnabled(qReal::SettingsManager::value("gesturesEnabled").toBool());
-
+	mUi->actionSave_script->setEnabled(isCodeTab);
 	updateUndoRedoState();
 
 	if (isEditorTab) {
@@ -2377,3 +2379,20 @@ void MainWindow::endPaletteModification()
 		scene->update();
 	}
 }
+
+void MainWindow::saveScript()
+{
+	auto * const area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
+	if (!area) {
+		mErrorReporter->addWarning(tr(""));
+		return;
+	}
+
+	auto extension = area->currentLanguage().extension;
+	auto code = area->text();
+	if (!mProjectManager->saveScriptToProject(code, extension)) {
+		mErrorReporter->addWarning(tr(""));
+		return;
+	}
+}
+
