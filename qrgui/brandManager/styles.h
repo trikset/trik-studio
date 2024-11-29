@@ -34,10 +34,65 @@ public:
 	
 	virtual ~Styles() = default;
 
-	QPalette systemPalette = QApplication::palette();
-	virtual QString place_stype(QString style) const {
-		QString new_style = style;
-		return new_style
+	/// Returns json stylesheet for start tab background
+	virtual QString startTabBackgroundStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabBackgroundStylePath()));	
+	}
+
+	/// Returns json stylesheet for start tab substrate background
+	virtual QString startTabSubstrateBackgroundStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabSubstrateBackgroundStylePath()));
+	}
+
+	/// Returns json stylesheet for start tab header background
+	virtual QString startTabHeaderBackgroundStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabHeaderBackgroundStylePath()));
+	}
+
+	/// Returns json stylesheet for recent projects section background on start tab
+	virtual QString startTabRecentProjectsBackgroundStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabRecentProjectsBackgroundStylePath()));
+	}
+
+	/// Returns json stylesheet for projects management section background on start tab
+	virtual QString startTabProjectsManagementBackgroundStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabProjectsManagementBackgroundStylePath()));
+	}
+
+	/// Returns json stylesheet for command buttons on start tab
+	virtual QString startTabButtonStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabButtonStylePath()));
+	}
+
+	/// Returns json stylesheet for styled text on start tab  of level 1 heading
+	virtual QString startTabLabelLevel1Style() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabLabelLevel1StylePath()));
+	}
+
+	/// Returns json stylesheet for styled text on start tab of level 2 heading
+	virtual QString startTabLabelLevel2Style() const
+	{
+		return placeStyle(utils::InFile::readAll(startTabLabelLevel2StylePath()));
+	}
+
+	virtual QString splashscreenStyle() const
+	{
+		return placeStyle(utils::InFile::readAll(splashscreenStylePath()));
+	}
+
+protected:
+
+	/// 
+	QString placeStyle(QString style) const {
+		auto systemPalette(QApplication::palette());
+		return style
 		.replace("@@Window@@", systemPalette.color(QPalette::Window).name())
 		.replace("@@Base@@", systemPalette.color(QPalette::Base).name())
 		.replace("@@Font@@", mFonts.commandButtonsFont())
@@ -46,60 +101,6 @@ public:
 		.replace("@@Text@@", systemPalette.color(QPalette::Text).name());
 	}
 
-	/// Returns json stylesheet for start tab background
-	virtual QString startTabBackgroundStyle() const
-	{
-		return place_stype(utils::InFile::readAll(startTabBackgroundStylePath()));	
-	}
-
-	/// Returns json stylesheet for start tab substrate background
-	virtual QString startTabSubstrateBackgroundStyle() const
-	{
-		return place_stype(utils::InFile::readAll(startTabSubstrateBackgroundStylePath()));
-	}
-
-	/// Returns json stylesheet for start tab header background
-	virtual QString startTabHeaderBackgroundStyle() const
-	{
-		return place_stype(utils::InFile::readAll(startTabHeaderBackgroundStylePath()));
-	}
-
-	/// Returns json stylesheet for recent projects section background on start tab
-	virtual QString startTabRecentProjectsBackgroundStyle() const
-	{
-		return place_stype(utils::InFile::readAll(startTabRecentProjectsBackgroundStylePath()));
-	}
-
-	/// Returns json stylesheet for projects management section background on start tab
-	virtual QString startTabProjectsManagementBackgroundStyle() const
-	{
-		return place_stype(utils::InFile::readAll(startTabProjectsManagementBackgroundStylePath()));
-	}
-
-	/// Returns json stylesheet for command buttons on start tab
-	virtual QString startTabButtonStyle() const
-	{
-		return place_stype(utils::InFile::readAll(startTabButtonStylePath()));
-	}
-
-	/// Returns json stylesheet for styled text on start tab  of level 1 heading
-	virtual QString startTabLabelLevel1Style() const
-	{
-		return place_stype(utils::InFile::readAll(startTabLabelLevel1StylePath()));
-	}
-
-	/// Returns json stylesheet for styled text on start tab of level 2 heading
-	virtual QString startTabLabelLevel2Style() const
-	{
-		return place_stype(utils::InFile::readAll(startTabLabelLevel2StylePath()));
-	}
-
-	virtual QString splashscreenStyle() const
-	{
-		return place_stype(utils::InFile::readAll(splashscreenStylePath()));
-	}
-
-protected:
 	/// Returns a path to a file with json stylesheet for start tab background
 	virtual QString startTabBackgroundStylePath() const
 	{
