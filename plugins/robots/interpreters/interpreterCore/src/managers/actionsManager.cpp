@@ -32,8 +32,16 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 	, mConnectToRobotAction(new QAction(QIcon(":/icons/robots_connect.svg"), QObject::tr("Connect to robot"), this))
 	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), this)
 	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), this)
-	, mDebugModeAction(new QAction(loadThemedIcon(":/icons/main_tabbar_debug.svg", QApplication::palette().color(QPalette::Text)), QObject::tr("Debug"), this))
-	, mEditModeAction(new QAction(loadThemedIcon(":/icons/main_tabbar_edit.svg", QApplication::palette().color(QPalette::Text)), QObject::tr("Edit"), this))
+	, mDebugModeAction(new QAction(
+		loadThemedIcon(":/icons/main_tabbar_debug.svg", QApplication::palette().color(QPalette::Text)), 
+		QObject::tr("Debug"), 
+		this)
+	)
+	, mEditModeAction(new QAction(
+		loadThemedIcon(":/icons/main_tabbar_edit.svg", QApplication::palette().color(QPalette::Text)), 
+		QObject::tr("Edit"), 
+		this)
+	)
 	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), this))
 	, mSeparator1(this)
 	, mSeparator2(this)
