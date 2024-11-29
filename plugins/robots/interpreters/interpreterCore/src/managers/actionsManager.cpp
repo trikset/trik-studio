@@ -15,7 +15,8 @@
 #include "interpreterCore/managers/actionsManager.h"
 
 #include <QtCore/QSignalMapper>
-
+#include <QtWidgets/QApplication>
+#include <QPainter>
 #include <qrkernel/settingsManager.h>
 #include <kitBase/robotModel/robotModelUtils.h>
 
@@ -33,15 +34,13 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), this)
 	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), this)
 	, mDebugModeAction(new QAction(
-		loadThemedIcon(":/icons/main_tabbar_debug.svg", QApplication::palette().color(QPalette::Text)), 
+		loadThemedIcon(":/icons/main_tabbar_debug.svg", QApplication::palette().color(QPalette::Text)),  
 		QObject::tr("Debug"), 
-		this)
-	)
+		this))
 	, mEditModeAction(new QAction(
 		loadThemedIcon(":/icons/main_tabbar_edit.svg", QApplication::palette().color(QPalette::Text)), 
 		QObject::tr("Edit"), 
-		this)
-	)
+		this))
 	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), this))
 	, mSeparator1(this)
 	, mSeparator2(this)
