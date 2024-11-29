@@ -32,8 +32,8 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 	, mConnectToRobotAction(new QAction(QIcon(":/icons/robots_connect.svg"), QObject::tr("Connect to robot"), this))
 	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), this)
 	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), this)
-	, mDebugModeAction(new QAction(QIcon(":/icons/main_tabbar_debug.svg"), QObject::tr("Debug"), this))
-	, mEditModeAction(new QAction(QIcon(":/icons/main_tabbar_edit.svg"), QObject::tr("Edit"), this))
+	, mDebugModeAction(new QAction(loadThemedIcon(":/icons/main_tabbar_debug.svg", QApplication::palette().color(QPalette::Text)), QObject::tr("Debug"), this))
+	, mEditModeAction(new QAction(loadThemedIcon(":/icons/main_tabbar_edit.svg", QApplication::palette().color(QPalette::Text)), QObject::tr("Edit"), this))
 	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), this))
 	, mSeparator1(this)
 	, mSeparator2(this)
@@ -61,6 +61,15 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 
 	mStopRobotAction->setShortcut(QKeySequence(Qt::SHIFT + Qt::Key_F5));
 	mRunAction->setShortcut(QKeySequence(Qt::Key_F5));
+}
+
+QIcon ActionsManager::loadThemedIcon(QString svg_path, QColor color) {
+	QPixmap image(svg_path);
+	QPainter pt(&image);
+	pt.setCompositionMode(QPainter::CompositionMode_SourceIn);
+	pt.fillRect(image.rect(), color);
+	pt.end();
+	return QIcon(image);
 }
 
 void ActionsManager::giveObjectNames()

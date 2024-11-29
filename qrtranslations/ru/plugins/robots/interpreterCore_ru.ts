@@ -144,7 +144,7 @@
         <translation>Редактор</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+79"/>
         <source>Switch to debug mode</source>
         <translation>Переключиться в режим отладки</translation>
     </message>
@@ -164,7 +164,7 @@
         <translation>Остановить интерпретацию</translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="-84"/>
         <source>Robot settings</source>
         <translation>Настройки</translation>
     </message>
@@ -197,7 +197,7 @@
         <translation>На главную</translation>
     </message>
     <message>
-        <location line="+246"/>
+        <location line="+255"/>
         <source>Real robot</source>
         <translation>Реальный робот</translation>
     </message>
