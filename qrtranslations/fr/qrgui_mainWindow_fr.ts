@@ -708,7 +708,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+619"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+620"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1006,12 +1006,12 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+87"/>
         <source>Mouse gesture</source>
         <translation>Geste souris</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+93"/>
         <source>Deleting an element: </source>
         <translation>Supression d&apos;un élément :</translation>
     </message>
@@ -1121,7 +1121,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="obsolete">Ajouter un élément</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+143"/>
+        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+157"/>
         <source>Add Entity</source>
         <translation type="unfinished"></translation>
     </message>

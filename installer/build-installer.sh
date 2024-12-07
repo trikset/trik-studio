@@ -31,7 +31,7 @@ BUILD_DIR=$(dirname $(cygpath -u "$0"))
 [ -z "${4+x}" ] || BUILD_DIR="$4"
 BUILD_DIR=$(realpath $(cygpath -u "$BUILD_DIR"))
 
-[ -z $BUILD_DIR ] && exit 1 ||  { [ -d "$BUILD_DIR/bin/release" ] && export BIN_DIR="$BUILD_DIR/bin/release" ; } || { [ -d "$BUILD_DIR/bin/debug" ] && export BIN_DIR="$BUILD_DIR/bin/debug" ; }
+[ -z $BUILD_DIR ] && exit 1 || [ -d "$BUILD_DIR/bin" ] && export BIN_DIR="$BUILD_DIR/bin"
 echo "$BIN_DIR"
 if [ -x $BIN_DIR/trik-studio ] ; then
     binary_path=$BIN_DIR/trik-studio

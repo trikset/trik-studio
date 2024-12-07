@@ -237,13 +237,13 @@
         <translation>Аттрибут &quot;glue&quot; должен иметь значение &quot;and&quot; или &quot;or&quot;.</translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location line="+179"/>
+        <location line="+59"/>
+        <location line="+183"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location line="-83"/>
+        <location line="-87"/>
         <source>There must be only one tag &quot;return&quot; in &quot;using&quot; expression.</source>
         <translation>Тэг &quot;return&quot; может быть только один.</translation>
     </message>
@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+237"/>
+        <location line="+262"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
@@ -324,7 +324,7 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+85"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>Нет такого события: %1</translation>
@@ -560,12 +560,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+111"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+112"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+187"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
     </message>
@@ -573,7 +573,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+190"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -649,7 +649,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+59"/>
         <source>Stylus (S)</source>
         <translation>Стилус (S)</translation>
     </message>
@@ -670,7 +670,7 @@
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+23"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
@@ -1071,7 +1071,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1106,17 +1106,17 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="-22"/>
+        <location line="-13"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>Loading world without robot model</source>
         <translation>Загрузка модели мира без модели робота</translation>
     </message>
@@ -1133,7 +1133,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+309"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

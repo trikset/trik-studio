@@ -16,14 +16,14 @@ TEMPLATE = subdirs
 
 include(../global.pri)
 
-win32 {
+win32:if(!build_pass|isEmpty(BUILDS)) {
 	system(cmd /C "DEL /s *.qm")
 	system(cmd /C "for /R %G in (*.ts) do lrelease -nounfinished -removeidentical %G")
         !silent:verboseXCOPY=/f
         system(cmd.exe /C "xcopy $$system_quote(*.qm) $$system_quote($$system_path($$GLOBAL_DESTDIR/translations/)) /s /e /y /i $$verboseXCOPY")
 }
 
-unix {
+unix:if(!build_pass|isEmpty(BUILDS)) {
         system(mkdir -p $$system_quote($$GLOBAL_DESTDIR/translations/); find $$system_quote($$PWD/) -name '*.qm' -delete)
         system(find $$system_quote($$PWD) -name '*.ts' -print0 | xargs -0 $$[QT_HOST_BINS]/lrelease -nounfinished -removeidentical)
         system(find $$system_quote($$PWD/./) -name '*.qm' -print0 | rsync -avRi --remove-source-files --files-from=- --from0 / $$system_quote($$GLOBAL_DESTDIR/translations/))

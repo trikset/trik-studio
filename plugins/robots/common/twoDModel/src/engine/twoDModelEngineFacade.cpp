@@ -89,6 +89,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		}
 
 		mView->loadXmls(worldModel);
+		mView->resetDrawAction();
 
 		loadReadOnlyFlags(logicalModel);
 		QLOG_DEBUG() << "Reloading 2D world done";

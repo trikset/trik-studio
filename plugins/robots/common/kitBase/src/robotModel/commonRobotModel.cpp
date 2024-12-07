@@ -21,6 +21,7 @@
 
 #include "kitBase/robotModel/robotParts/motor.h"
 #include "kitBase/robotModel/robotParts/random.h"
+#include "kitBase/robotModel/robotParts/communicator.h"
 
 const int updateInterval = 200;
 
@@ -72,9 +73,13 @@ void CommonRobotModel::connectToRobot()
 void CommonRobotModel::stopRobot()
 {
 	for (robotParts::Device * const device : mConfiguration.devices()) {
-		robotParts::Motor * const motor = dynamic_cast<robotParts::Motor *>(device);
+		auto* const motor = qobject_cast<robotParts::Motor *>(device);
 		if (motor) {
 			motor->off();
+		}
+		auto* const communicator = qobject_cast<robotParts::Communicator *>(device);
+		if (communicator) {
+			communicator->release();
 		}
 	}
 	/// @todo: add known deinitialization methods here (for example sensors termination after extending their inteface)

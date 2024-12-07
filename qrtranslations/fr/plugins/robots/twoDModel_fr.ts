@@ -27,7 +27,7 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+85"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>événement inexistant : %1</translation>
@@ -68,13 +68,13 @@
         <translation>Attribut &quot;glue&quot; doit avoir une valeur &quot;and&quot; ou &quot;or&quot;.</translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location line="+179"/>
+        <location line="+59"/>
+        <location line="+183"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Balise inconnue &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location line="-83"/>
+        <location line="-87"/>
         <source>There must be only one tag &quot;return&quot; in &quot;using&quot; expression.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -84,7 +84,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+237"/>
+        <location line="+262"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Valeur inconnue &quot;%1&quot;.</translation>
     </message>
@@ -288,12 +288,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+111"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+112"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
     <message>
-        <location line="+186"/>
+        <location line="+187"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Le programme est terminé, mais la tache n&apos;est pas accomplie.</translation>
     </message>
@@ -301,7 +301,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+190"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,7 +373,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+59"/>
         <source>Stylus (S)</source>
         <translation>Stylo (S)</translation>
     </message>
@@ -394,7 +394,7 @@
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+23"/>
         <source>Error in checker: %1</source>
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
@@ -728,7 +728,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -763,22 +763,22 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>2D model saves (*.xml)</source>
         <translation>Fichiers de sauvegarde du modèle 2D (*.xml) </translation>
     </message>
     <message>
-        <location line="-22"/>
+        <location line="-13"/>
         <source>Loading world and robot model</source>
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+13"/>
         <source>Loading world without robot model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+316"/>
+        <location line="+309"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

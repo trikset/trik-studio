@@ -130,7 +130,7 @@ QDomElement CommentItem::serialize(QDomElement &parent) const
 			 + ":" + QString::number(y1() + scenePos().y()));
 	commentNode.setAttribute("end", QString::number(x2() + scenePos().x())
 			 + ":" + QString::number(y2() + scenePos().y()));
-	commentNode.setAttribute("text", mIsEditing ? mTextItem.toPlainText() : mHtmlText);
+	commentNode.setAttribute("text", mTextItem.toHtml());
 	return commentNode;
 }
 
@@ -140,7 +140,7 @@ void CommentItem::deserialize(const QDomElement &element)
 	AbstractItem::deserialize(element);
 
 	mTextItem.setHtml(element.attribute("text"));
-
+	mHtmlText = mTextItem.toHtml();
 	const QString beginStr = element.attribute("begin", "0:0");
 	QStringList splittedStr = beginStr.split(":");
 	auto x = splittedStr[0].toDouble();
@@ -183,12 +183,7 @@ void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	if (selectedAction == removeAction) {
 		emit deletedWithContextMenu();
 	} else if (selectedAction == editAction) {
-		if (mIsEditing) {
-			mHtmlText = mTextItem.toPlainText();
-			endEditing();
-		} else {
-			startEditing();
-		}
+		mIsEditing ? endEditing() : startEditing();
 	} else if (selectedAction == cancelAction) {
 		endEditing();
 	}
@@ -198,7 +193,7 @@ void CommentItem::startEditing() {
 	mIsEditing = true;
 	setBrushStyle("Solid");
 	mTextItem.setTextInteractionFlags(Qt::TextEditorInteraction);
-	mTextItem.setPlainText(mHtmlText);
+	mTextItem.setHtml(mHtmlText);
 	mTextItem.setFocus();
 	update();
 }
@@ -208,6 +203,7 @@ void CommentItem::endEditing()
 	mIsEditing = false;
 	setBrushStyle("None");
 	mTextItem.setTextInteractionFlags(Qt::NoTextInteraction);
+	mHtmlText = mTextItem.toHtml();
 	mTextItem.setHtml(mHtmlText);
 	updateSize();
 	update();
@@ -238,7 +234,7 @@ void CommentItem::setPrivateData()
 	auto font = mTextItem.font();
 	font.setPixelSize(20);
 	mTextItem.setFont(font);
-	mTextItem.setPlainText(mHtmlText);
+	mTextItem.setHtml(mHtmlText);
 	updateTextPos();
 	updateSize();
 }

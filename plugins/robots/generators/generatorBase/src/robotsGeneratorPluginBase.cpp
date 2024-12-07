@@ -21,6 +21,7 @@
 #include <qrutils/nameNormalizer.h>
 #include <qrutils/parserErrorReporter.h>
 #include <qrgui/textEditor/qscintillaTextEdit.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 
 using namespace generatorBase;
 using namespace qReal;

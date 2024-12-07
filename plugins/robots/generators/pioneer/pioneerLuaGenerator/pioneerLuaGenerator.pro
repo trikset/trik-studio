@@ -15,7 +15,7 @@
 TARGET = robots-pioneer-lua-generator
 
 TEMPLATE = lib
-CONFIG += plugin
+CONFIG += plugin trikqscintilla2
 
 include(../../../../../global.pri)
 
@@ -31,7 +31,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 qrgui-text-editor qrgui-preferences-dialog qrtext robots-kit-base \
+links(qrkernel qrutils qrrepo qrgui-text-editor qrgui-preferences-dialog qrtext robots-kit-base \
 		robots-generator-base robots-pioneer-kit robots-utils)
 
 TRANSLATIONS = $$PWD/../../../../../qrtranslations/ru/plugins/robots/pioneerLuaGenerator_ru.ts

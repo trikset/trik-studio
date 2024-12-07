@@ -30,6 +30,8 @@ enum class Level
 	information = 0
 	/// Error message if something went wrong.
 	, error
+	/// Log message
+	, log
 };
 
 /// Collects information about the interpretation process and writes it into the given file as JSON report.
@@ -56,6 +58,9 @@ public slots:
 
 	/// Reports the error message reported to user during the interpretation process.
 	void addError(const QString &message);
+
+	/// Reports the log message not showed to user during the interpretation process.
+	void addLog(const QString &message);
 
 	/// Resets inner state for new interpretation instance.
 	void onInterpretationStart();
@@ -87,6 +92,7 @@ public slots:
 private:
 	QJsonValue variantToJson(const QVariant &value) const;
 	void report(const QString &message, const QScopedPointer<utils::OutFile> &file);
+	QString levelToString(const Level level) const;
 
 	QList<QPair<Level, QString>> mMessages;
 	const QScopedPointer<utils::OutFile> mMessagesFile;

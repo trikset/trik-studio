@@ -17,6 +17,7 @@
 #include <QtCore/QFile>
 
 #include <qrrepo/repoApi.h>
+#include <qrutils/xmlUtils.h>
 
 #include <QFileInfo>
 #include <QDomElement>
@@ -77,8 +78,7 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 
-		QDomDocument newWorld;
-		newWorld.setContent(&fieldFile);
+		QDomDocument newWorld = utils::xmlUtils::loadDocumentWithConversion(fieldFile.fileName());
 
 		const auto & blobs = newWorld.firstChildElement("root").firstChildElement("blobs");
 		QDomDocument blobsDoc;

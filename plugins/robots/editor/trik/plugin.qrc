@@ -50,5 +50,6 @@
 	<file>generated/shapes/TrikWaitGamepadWheelClass.sdf</file>
 	<file>generated/shapes/TrikWaitPadPressClass.sdf</file>
 	<file>generated/shapes/TrikWriteToFileClass.sdf</file>
+	<file>generated/shapes/TrikJoinNetworkClass.sdf</file>
 </qresource>
 </RCC>

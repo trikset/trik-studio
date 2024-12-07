@@ -112,7 +112,7 @@ void PaletteTreeWidgets::initUserTree()
 {
 	refreshUserPalette();
 	connect(&mMainWindow->models().exploser(), &models::Exploser::explosionsSetCouldChange
-			, this, [&](){refreshUserPalette(true);});
+			, this, [&](){refreshUserPaletteHandler(true);});
 }
 
 void PaletteTreeWidgets::addTopItemType(const PaletteElement &data, QTreeWidget *tree)
@@ -239,6 +239,17 @@ void PaletteTreeWidgets::customizeExplosionTitles(const QString &userGroupTitle,
 {
 	mUserGroupTitle = userGroupTitle;
 	mUserGroupDescription = userGroupDescription;
+}
+
+void PaletteTreeWidgets::refreshUserPaletteHandler(bool force)
+{
+	if (mUserTree->readyToRefresh()) {
+		refreshUserPalette(force);
+		return;
+	}
+	connect(mUserTree, &PaletteTreeWidget::signalReadyToRefresh, this, [=]() {
+		refreshUserPalette(force);
+	});
 }
 
 void PaletteTreeWidgets::refreshUserPalette(bool force)

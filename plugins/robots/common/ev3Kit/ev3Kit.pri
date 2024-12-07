@@ -38,7 +38,7 @@ macx: LIBS += -framework CoreFoundation -framework AppKit
 
 linux {
     CONFIG *= link_pkgconfig
-    PKGCONFIG += libudev
+    PKGCONFIG += libudev #for hidapi
 }
 
 HEADERS += \

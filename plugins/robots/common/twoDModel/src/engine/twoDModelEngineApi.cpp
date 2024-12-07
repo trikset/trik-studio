@@ -352,8 +352,9 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	// then NXT and TRIK 2D fake scenes will be shown.
 	QGraphicsView * const fakeScene = new QGraphicsView;
 	fakeScene->setScene(mFakeScene.data());
-	QTimer * const timer = new QTimer;
+	QTimer * const timer = new QTimer(fakeScene);
 	QObject::connect(timer, &QTimer::timeout, &*mFakeScene, [this](){mFakeScene->update();});
+	timer->setTimerType(Qt::TimerType::PreciseTimer);
 	timer->setInterval(300);
 	timer->setSingleShot(false);
 	fakeScene->setMinimumWidth(700);

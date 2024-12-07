@@ -35,6 +35,7 @@ HEADERS += \
 	$$PWD/include/trikKit/robotModel/parts/trikGamepadPadPressSensor.h \
 	$$PWD/include/trikKit/robotModel/parts/trikGamepadWheel.h \
 	$$PWD/include/trikKit/robotModel/parts/trikSpeaker.h \
+	$$PWD/include/trikKit/robotModel/parts/trikNetworkCommunicator.h \
 	$$PWD/include/trikKit/robotModel/parts/trikPowerMotor.h \
 	$$PWD/include/trikKit/robotModel/parts/trikServoMotor.h \
 	$$PWD/include/trikKit/robotModel/parts/trikInfraredSensor.h \
@@ -53,6 +54,9 @@ HEADERS += \
 	$$PWD/include/trikKit/blocks/trikV62BlocksFactory.h \
 	$$PWD/src/blocks/details/setBackgroundBlock.h \
 	$$PWD/src/blocks/details/smileBlock.h \
+	$$PWD/src/blocks/details/sendMessageBlock.h \
+	$$PWD/src/blocks/details/joinNetworkBlock.h \
+	$$PWD/src/blocks/details/waitForMessageBlock.h \
 	$$PWD/src/blocks/details/trikEnginesForwardBlock.h \
 	$$PWD/src/blocks/details/trikEnginesBackwardBlock.h \
 	$$PWD/src/blocks/details/waitForMotionBlock.h \
@@ -102,6 +106,7 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/trikServoMotor.cpp \
 	$$PWD/src/robotModel/parts/trikSonarSensor.cpp \
 	$$PWD/src/robotModel/parts/trikSpeaker.cpp \
+	$$PWD/src/robotModel/parts/trikNetworkCommunicator.cpp \
 	$$PWD/src/robotModel/parts/trikShell.cpp \
 	$$PWD/src/robotModel/parts/trikMotorsAggregator.cpp \
 	$$PWD/src/robotModel/parts/trikTouchSensor.cpp \
@@ -111,6 +116,9 @@ SOURCES += \
 	$$PWD/src/blocks/trikV62BlocksFactory.cpp \
 	$$PWD/src/blocks/details/setBackgroundBlock.cpp \
 	$$PWD/src/blocks/details/smileBlock.cpp \
+	$$PWD/src/blocks/details/sendMessageBlock.cpp \
+	$$PWD/src/blocks/details/joinNetworkBlock.cpp \
+	$$PWD/src/blocks/details/waitForMessageBlock.cpp \
 	$$PWD/src/blocks/details/trikEnginesForwardBlock.cpp \
 	$$PWD/src/blocks/details/trikEnginesBackwardBlock.cpp \
 	$$PWD/src/blocks/details/waitForMotionBlock.cpp \

@@ -300,6 +300,11 @@ void TwoDModelWidget::initPalette()
 	connect(imageTool, &QAction::triggered, this, [this](){ mUi->palette->unselect(); });
 }
 
+void TwoDModelWidget::resetDrawAction()
+{
+	mUi->palette->unselect();
+}
+
 void TwoDModelWidget::initDetailsTab()
 {
 }
@@ -506,16 +511,7 @@ void TwoDModelWidget::loadWorldModel()
 		return;
 	}
 
-	QString errorMessage;
-	int errorLine = 0;
-	int errorColumn = 0;
-	const QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
-	if (!errorMessage.isEmpty()) {
-		mModel.errorReporter()->addError(QString("%1:%2: %3")
-				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
-	}
-
-	auto command = new commands::LoadWorldCommand(*this, save);
+	auto command = new commands::LoadWorldCommand(*this, loadXmlWithConversion(loadFileName));
 	if (mController) {
 		mController->execute(command);
 	}
@@ -528,14 +524,7 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 		return;
 	}
 
-	QString errorMessage;
-	int errorLine = 0;
-	int errorColumn = 0;
-	QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
-	if (!errorMessage.isEmpty()) {
-		mModel.errorReporter()->addError(QString("%1:%2: %3")
-				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
-	}
+	QDomDocument save = loadXmlWithConversion(loadFileName);
 
 	auto newWorld = save.firstChildElement("root");
 	auto oldWorld = generateWorldModelXml().firstChildElement("root");
@@ -1130,4 +1119,19 @@ void TwoDModelWidget::unsetSelectedRobotItem()
 void TwoDModelWidget::incrementTimelineCounter()
 {
 	mUi->timelineBox->stepBy(1);
+}
+
+const QDomDocument TwoDModelWidget::loadXmlWithConversion(const QString &loadFileName) const
+{
+	QString errorMessage;
+	int errorLine = 0;
+	int errorColumn = 0;
+	const QDomDocument save = utils::xmlUtils::loadDocumentWithConversion(
+			loadFileName, &errorMessage, &errorLine, &errorColumn);
+	if (!errorMessage.isEmpty()) {
+		mModel.errorReporter()->addError(QString("%1:%2: %3")
+				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+	}
+
+	return save;
 }

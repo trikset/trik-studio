@@ -15,7 +15,8 @@
 TARGET = robots-trik-v6-pascal-abc-generator
 
 TEMPLATE = lib
-CONFIG += plugin
+
+CONFIG += plugin trikqscintilla2
 
 include(../../../../../global.pri)
 

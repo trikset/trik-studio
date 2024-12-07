@@ -35,9 +35,26 @@ Trigger TriggersFactory::fail(const QString &message) const
 	return [this, message]() { emit mStatus.fail(message); };
 }
 
-Trigger TriggersFactory::message(const QString &messsage) const
+Trigger TriggersFactory::message(const QString &message, const QMap<QString, Value> &replaces) const
 {
-	return [this, messsage]() { emit mStatus.message(messsage); };
+	return [this, message, replaces]() {
+		auto resMessage = message;
+		for (const auto &key: replaces.keys()) {
+			resMessage.replace("%" + key + "%", replaces[key]().toString());
+		}
+		emit mStatus.message(resMessage);
+	};
+}
+
+Trigger TriggersFactory::log(const QString &message, const QMap<QString, Value> &replaces) const
+{
+	return [this, message, replaces]() {
+		auto resMessage = message;
+		for (const auto &key: replaces.keys()) {
+			resMessage.replace("%" + key + "%", replaces[key]().toString());
+		}
+		emit mStatus.log(resMessage);
+	};
 }
 
 Trigger TriggersFactory::success(bool deferred) const

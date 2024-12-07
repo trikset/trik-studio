@@ -128,6 +128,3 @@ SOURCES += \
 	$$PWD/commands/reshapeEdgeCommand.cpp \
 	$$PWD/commands/expandCommand.cpp \
 	$$PWD/commands/replaceByCommand.cpp \
-
-RESOURCES += \
-	$$PWD/contextIcons.qrc \

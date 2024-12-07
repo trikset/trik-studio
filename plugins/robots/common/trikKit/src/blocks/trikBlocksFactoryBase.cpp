@@ -58,6 +58,9 @@
 #include "details/waitGamepadWheelBlock.h"
 #include "details/waitPadPressBlock.h"
 #include "details/trikWaitForGyroscopeBlock.h"
+#include "details/joinNetworkBlock.h"
+#include "details/sendMessageBlock.h"
+#include "details/waitForMessageBlock.h"
 
 #include "details/writeToFileBlock.h"
 #include "details/removeFileBlock.h"
@@ -98,9 +101,11 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 	} else if (elementMetatypeIs(element, "TrikInitVideoStreaming")) {
 		return new InitVideoStreamingBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikSendMessage")) {
-		return new qReal::interpretation::blocks::EmptyBlock();
+		return new SendMessageBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForMessage")) {
-		return new qReal::interpretation::blocks::EmptyBlock();
+		return new WaitForMessageBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikJoinNetwork")) {
+		return new JoinNetworkBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikLed")) {
 		return new LedBlock(mRobotModelManager->model());
 
@@ -200,6 +205,7 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 //			<< id("TrikReadLidar")
 			<< id("TrikSendMessage")
 			<< id("TrikWaitForMessage")
+			<< id("TrikJoinNetwork")
 			;
 
 	result
@@ -274,6 +280,7 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 			result
 				<< id("TrikSendMessage")
 				<< id("TrikWaitForMessage")
+				<< id("TrikJoinNetwork")
 				;
 		}
 	} else {

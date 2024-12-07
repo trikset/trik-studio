@@ -44,6 +44,9 @@ signals:
 	/// Emitted when <message> tag triggered.
 	void message(const QString &message);
 
+	/// Emitted when <log> tag triggered.
+	void log(const QString &message);
+
 	/// Emitted when checker program written incorrectly with the reason as parameter.
 	void checkerError(const QString &message);
 };

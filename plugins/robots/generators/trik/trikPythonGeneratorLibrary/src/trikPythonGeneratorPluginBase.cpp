@@ -32,6 +32,7 @@
 #include <qrgui/textEditor/qscintillaTextEdit.h>
 #include <qrkernel/settingsManager.h>
 #include <qrutils/widgets/qRealMessageBox.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 
 #include "trikPythonMasterGenerator.h"
 #include "emptyShell.h"

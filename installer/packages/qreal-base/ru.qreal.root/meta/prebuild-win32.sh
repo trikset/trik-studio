@@ -1,7 +1,7 @@
 #!/bin/bash
 set -o nounset
 set -o errexit
-
+set -x
 cd "$(dirname "$0")"
 
 
@@ -11,7 +11,7 @@ rsync -a "$BIN_DIR"/zlib1.dll                                            "$PWD"/
 rsync -a "$BIN_DIR"/qrrepo.dll                                           "$PWD"/../data
 rsync -a "$BIN_DIR"/qrutils.dll                                          "$PWD"/../data
 rsync -a "$BIN_DIR"/qrtext.dll                                           "$PWD"/../data
-rsync -a "$BIN_DIR"/qscintilla2.dll                                      "$PWD"/../data
+rsync -a "$BIN_DIR"/trikqscintilla2.dll                                  "$PWD"/../data
 rsync -a "$BIN_DIR"/trikQsLog.dll                                        "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-brand-manager.dll                              "$PWD"/../data
 rsync -a "$BIN_DIR"/qrgui-controller.dll                                 "$PWD"/../data
@@ -46,9 +46,10 @@ rsync -a "$QT_LIB"/Qt5Xml.dll                                        "$PWD"/../d
 rsync -a "$QT_LIB"/Qt5Script.dll                                     "$PWD"/../data
 rsync -a "$QT_LIB"/Qt5Test.dll                                       "$PWD"/../data
 rsync -a "$QT_LIB"/Qt5Concurrent.dll                                 "$PWD"/../data
-rsync -a "$QT_LIB"/libgcc_s_*-1.dll                                  "$PWD"/../data
-rsync -a "$QT_LIB"/libwinpthread-1.dll                               "$PWD"/../data
-rsync -a "$QT_LIB"/libstdc++-6.dll                                   "$PWD"/../data
+where \$path:lib{gcc_s_,winpthread-,stdc\+\+-}\*\.dll \
+	| dos2unix \
+	| xargs -rd \\n cygpath -au \
+	| rsync -a --no-relative --files-from=- / "$PWD"/../data
 
 rsync -a "$QT_LIB"/../plugins/platforms/q{windows,offscreen,minimal}.dll                        "$PWD"/../data/platforms
 rsync -a "$QT_LIB"/../plugins/imageformats/qsvg.dll                         "$PWD"/../data/imageformats

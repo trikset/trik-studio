@@ -294,6 +294,10 @@ Condition ConstraintsParser::parseConditionContents(const QDomElement &element, 
 		return parseNegationTag(element, event);
 	}
 
+	if (tag == "true") {
+		return mConditions.constant(true);
+	}
+
 	if (tag == "equals" || tag.startsWith("notequal")
 			|| tag == "greater" || tag == "less"
 			|| tag == "notgreater" || tag == "notless")
@@ -496,6 +500,10 @@ Trigger ConstraintsParser::parseTriggerContents(const QDomElement &element)
 		return parseSetObjectStateTag(element);
 	}
 
+	if (tag == "log") {
+		return parseLogTag(element);
+	}
+
 	error(QObject::tr("Unknown tag \"%1\".").arg(element.tagName()));
 	return mTriggers.doNothing();
 }
@@ -515,7 +523,28 @@ Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 		return mTriggers.doNothing();
 	}
 
-	return mTriggers.message(element.attribute("text"));
+	QMap<QString, Value> map;
+	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull()
+			; replace = replace.nextSiblingElement("replace")) {
+		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
+	}
+
+	return mTriggers.message(element.attribute("text"), map);
+}
+
+Trigger ConstraintsParser::parseLogTag(const QDomElement &element)
+{
+	if (!assertAttributeNonEmpty(element, "text")) {
+		return mTriggers.doNothing();
+	}
+
+	QMap<QString, Value> map;
+	for (QDomElement replace = element.firstChildElement("replace"); !replace.isNull()
+			; replace = replace.nextSiblingElement("replace")) {
+		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
+	}
+
+	return mTriggers.log(element.attribute("text"), map);
 }
 
 Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)

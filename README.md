@@ -10,7 +10,8 @@ An opensource cross-platform educational programming environment for future robo
 [Here](https://github.com/trikset/trik-studio/issues)
 
 ## Build
-...
+### How to build locally
+* [Windows x32 from console](https://github.com/kleo-53/trik-studio/blob/master/BUILD.win32.en.md)
 
 
 

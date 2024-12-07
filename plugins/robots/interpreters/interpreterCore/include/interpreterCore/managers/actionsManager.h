@@ -84,6 +84,7 @@ public:
 
 	void setEnableRobotActions(bool enableRobotActions);
 
+	void setRunActionVisible(bool isModelInterpreted);
 public slots:
 	/// Reacts to selection of another robot model.
 	/// @param model - newly selected robot model.

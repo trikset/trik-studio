@@ -26,7 +26,7 @@
 
 #include "robotModel/twoD/trikTwoDRobotModel.h"
 #include "trikAdditionalPreferences.h"
-
+#include <trikNetwork/mailboxInterface.h>
 #include <trikKitInterpreterCommon/trikTextualInterpreter.h>
 
 /// @todo: refactor
@@ -55,7 +55,6 @@ public:
 
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> blocksFactoryFor(
 			const kitBase::robotModel::RobotModelInterface *model) override;
-
 	QList<kitBase::AdditionalPreferences *> settingsWidgets() override;
 
 	QWidget *quickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model) override;
@@ -105,6 +104,7 @@ private:
 	QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 
 	QScopedPointer<TrikTextualInterpreter> mTextualInterpreter;
+	QScopedPointer<trikNetwork::MailboxInterface> mMailbox;
 
 	QAction mStart;
 	QAction mStop;

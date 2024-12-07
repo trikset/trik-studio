@@ -5,8 +5,8 @@ include(../../../../global.pri)
 unix:QT = core
 else:QT = core gui
 
-include(src/qextserialport.pri)
-include(doc/doc.pri)
+include(qextserialport/src/qextserialport.pri)
+#include(qextserialport/doc/doc.pri)
 
 CONFIG += warn_off
 

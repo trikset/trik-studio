@@ -15,22 +15,25 @@
 #pragma once
 
 #include <qrutils/expressionsParser/expressionsParser.h>
-#include <mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterMock.h>
 
 #include <gtest/gtest.h>
 
 namespace qrTest {
-
+class ErrorReporterMock;
 class ExpressionsParserTest : public testing::Test
 {
+public:
+	ExpressionsParserTest();
 
 protected:
 	virtual void SetUp();
 
 	virtual void TearDown();
 
-	utils::ExpressionsParser *mParser;
-	ErrorReporterMock mErrorReporter;
+	virtual ~ExpressionsParserTest() override;
+
+	utils::ExpressionsParser *mParser {};
+	ErrorReporterMock *mErrorReporter {};
 };
 
 }

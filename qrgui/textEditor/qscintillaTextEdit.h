@@ -16,7 +16,7 @@
 
 #include <QtCore/QPersistentModelIndex>
 
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintilla.h>
+#include <Qsci/qsciscintilla.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/editorInterface.h>
 
 #include "qrgui/textEditor/textEditorDeclSpec.h"

@@ -159,6 +159,14 @@
     </message>
 </context>
 <context>
+    <name>kitBase::robotModel::robotParts::Communicator</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/communicator.h" line="+29"/>
+        <source>Communicator</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>kitBase::robotModel::robotParts::Display</name>
     <message>
         <location filename="../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/display.h" line="+29"/>

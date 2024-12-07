@@ -35,6 +35,18 @@ PaletteTreeWidget::PaletteTreeWidget(PaletteTree &palette, MainWindow &mainWindo
 	mEditorManager = &editorManagerProxy;
 }
 
+bool PaletteTreeWidget::readyToRefresh()
+{
+	for (auto& draggableElement: mDraggableElements) {
+		if (!draggableElement->getReadyForDelete()) {
+			connect(draggableElement, &DraggableElement::signalReadyForDelete,
+				this, &PaletteTreeWidget::signalReadyToRefresh);
+			return false;
+		}
+	}
+	return true;
+}
+
 void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &groups
 		, QMap<QString, QString> const &descriptions
 		, bool hideIfEmpty
@@ -45,6 +57,7 @@ void PaletteTreeWidget::addGroups(QList<QPair<QString, QList<PaletteElement>>> &
 	mPaletteElements.clear();
 	mElementsSet.clear();
 	mItemsVisible.clear();
+	mDraggableElements.clear();
 
 	if (groups.isEmpty() && hideIfEmpty) {
 		hide();
@@ -96,6 +109,7 @@ void PaletteTreeWidget::addItemType(const PaletteElement &data, QTreeWidgetItem 
 	mElementsSet.insert(data);
 	mPaletteElements.insert(data.id(), element);
 	mPaletteItems.insert(data.id(), leaf);
+	mDraggableElements.append(element);
 
 	parent->addChild(leaf);
 	setItemWidget(leaf, 0, element);

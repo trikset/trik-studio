@@ -10,12 +10,7 @@ rsync -a "$BIN_DIR"/robots-trik-generator-base.dll                              
 rsync -a "$BIN_DIR"/robots-trik-kit.dll                                                "$PWD"/../data/
 rsync -a "$BIN_DIR"/robots-trik-kit-interpreter-common.dll                             "$PWD"/../data/
 
-rsync -a "$BIN_DIR"/trikPythonQt*.dll                                                "$PWD"/../data/
-rsync -a "$BIN_DIR"/trikControl.dll                                                    "$PWD"/../data/
-rsync -a "$BIN_DIR"/trikScriptRunner.dll                                               "$PWD"/../data/
-rsync -a "$BIN_DIR"/trikHal.dll                                                        "$PWD"/../data/
-rsync -a "$BIN_DIR"/trikKernel.dll                                                     "$PWD"/../data/
-rsync -a "$BIN_DIR"/trikNetwork.dll                                                    "$PWD"/../data/
+rsync -a "$BIN_DIR"/trik*.dll                                                          "$PWD"/../data/
 rsync -a "$BIN_DIR"/python3*.dll                                                       "$PWD"/../data/
 rsync -a "$BIN_DIR"/vcruntime*.dll                                                     "$PWD"/../data/
 

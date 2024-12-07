@@ -20,7 +20,7 @@ rsync -a "$BIN_DIR"/libqrgraph.so*                                          "$PW
 rsync -a "$BIN_DIR"/libqrrepo.so*                                           "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrutils.so*                                          "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrtext.so*                                           "$PWD"/../data/lib/
-rsync -a "$BIN_DIR"/libqscintilla2.so*                                      "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libtrikqscintilla2.so*                                  "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libtrikQsLog.so*                                        "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrgui-brand-manager.so*                              "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/libqrgui-controller.so*                                 "$PWD"/../data/lib/
@@ -52,6 +52,7 @@ rsync -a "$QT_LIB"/libQt5Script.so*                                     "$PWD"/.
 rsync -a "$QT_LIB"/libQt5Test.so*                                       "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5XcbQpa.so*                                     "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5WaylandC{lient,ompositor}.so*                  "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Concurrent.so*                                 "$PWD"/../data/lib/
 
 rsync -avR "$QT_PLUGINS"/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
 

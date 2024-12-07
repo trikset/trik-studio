@@ -68,6 +68,8 @@ public:
 	/// Rereads user blocks information.
 	void refreshUserPalette(bool force = false);
 
+	void refreshUserPaletteHandler(bool force = false);
+
 	/// Sets user palette header and description.
 	void customizeExplosionTitles(const QString &userGroupTitle
 			, const QString &userGroupDescription);

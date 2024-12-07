@@ -101,6 +101,7 @@ public:
 
 	void setBackgroundMode();
 	void bringToFront();
+	void resetDrawAction();
 
 	QString editorId() const override;
 	bool supportsZooming() const override;
@@ -233,6 +234,8 @@ private:
 	void unsetSelectedRobotItem();
 
 	void incrementTimelineCounter();
+
+	const QDomDocument loadXmlWithConversion(const QString &loadFileName) const;
 
 	Ui::TwoDModelWidget *mUi {};
 	QScopedPointer<TwoDModelScene> mScene;

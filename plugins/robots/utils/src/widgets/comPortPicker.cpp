@@ -16,7 +16,7 @@
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
-#include <plugins/robots/thirdparty/qextserialport/src/qextserialenumerator.h>
+#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialenumerator.h>
 
 using namespace qReal::ui;
 

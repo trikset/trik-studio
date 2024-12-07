@@ -16,6 +16,7 @@
 
 #include <QtCore/QtPlugin>
 #include <QtCore/QTranslator>
+#include <QtCore/QLibraryInfo>
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
 #include <QStyleFactory>
@@ -32,15 +33,31 @@ using namespace qReal;
 
 const int maxLogSize = 10 * 1024 * 1024;  // 10 MB
 
-void clearConfig()
+static void clearConfig()
 {
 	SettingsManager::clearSettings();
 	SettingsManager::instance()->saveData();
 }
 
-void loadTranslators(const QString &locale)
+static void loadTranslators(QLocale &locale)
 {
-	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + locale);
+	/// Load Qt's system translations before application translations
+	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript" };
+	static const auto qtAppsTranslationsDir = QLibraryInfo::location(QLibraryInfo::LibraryLocation::TranslationsPath);
+
+	for (auto &&module: qtModules) {
+		auto *t = new QTranslator(qApp);
+		if (t->load(locale, module, "_", qtAppsTranslationsDir)) {
+			QCoreApplication::installTranslator(t);
+		} else {
+			QLOG_ERROR() << QString(R"(Failed to load translation file for "%1" (%2) from %3)")
+							.arg(module, locale.bcp47Name(), qtAppsTranslationsDir);
+			delete t;
+		}
+	}
+
+	auto const &language = locale.bcp47Name().left(2);
+	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + language);
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	while (directories.hasNext()) {
 		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
@@ -51,17 +68,22 @@ void loadTranslators(const QString &locale)
 	}
 }
 
-void setDefaultLocale(bool localizationDisabled)
+static void setDefaultLocale(bool localizationDisabled)
 {
 	if (localizationDisabled) {
 		QLocale::setDefault(QLocale::English);
 		return;
 	}
 
-	const QString localeInSettings = SettingsManager::value("systemLocale").toString();
-	const QString locale = localeInSettings.isEmpty() ? QLocale().name().left(2) : localeInSettings;
-	if (!locale.isEmpty()) {
-		QLocale::setDefault(QLocale(locale));
+	auto const &languageName = SettingsManager::value("systemLocale").toString();
+	QLocale locale = languageName.isEmpty()? QLocale() : QLocale(languageName); // Empty string results to "C" locale
+	QLocale::setDefault(locale);
+	QLocale dfltLocale;
+	if (locale != dfltLocale) {
+		QLOG_ERROR() << "Requested locale was" << locale.bcp47Name() << ", but" << dfltLocale.bcp47Name() << "is set";
+	}
+	auto language = locale.language();
+	if (language != QLocale::Language::C && language != QLocale::Language::English) {
 		loadTranslators(locale);
 	}
 }
@@ -73,6 +95,8 @@ static QString versionInfo()
 
 int main(int argc, char *argv[])
 {
+	qReal::Logger logger; // uses initial temporary log target
+
 	const auto &dpiInfo = PlatformInfo::enableHiDPISupport();
 	QScopedPointer<QRealApplication> app(new QRealApplication(argc, argv));
 
@@ -112,10 +136,10 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	qReal::Logger logger;
 	const QDir logsDir(PlatformInfo::invariantSettingsPath("pathToLogs"));
 	if (logsDir.mkpath(logsDir.absolutePath())) {
 		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2);
+		logger.removeDefaultInitialLogTarget();
 	}
 
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
@@ -123,7 +147,6 @@ int main(int argc, char *argv[])
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture()
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app->arguments();
-	QLOG_INFO() << "Setting default locale to" << QLocale().name();
 	for (auto &&i: dpiInfo) { QLOG_INFO() << i ; }
 
 	QApplication::setStyle(QStyleFactory::create("Fusion"));

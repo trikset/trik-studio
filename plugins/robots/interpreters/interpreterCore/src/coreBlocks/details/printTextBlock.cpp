@@ -16,6 +16,7 @@
 
 #include <kitBase/robotModel/robotModelUtils.h>
 #include <kitBase/robotModel/robotParts/display.h>
+#include <QRegularExpression>
 
 using namespace interpreterCore::coreBlocks::details;
 
@@ -28,9 +29,18 @@ void PrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 {
 	const int x = eval<int>("XCoordinateText");
 	const int y = eval<int>("YCoordinateText");
-	const QString result = boolProperty("Evaluate") ? eval<QString>("PrintText") : stringProperty("PrintText");
-	const bool redraw = boolProperty("Redraw");
 
+	QString result = stringProperty("PrintText");
+	if (boolProperty("Evaluate")) {
+	     result = eval<QString>("PrintText");
+	     bool ok;
+	     auto doubleResult = result.toDouble(&ok);
+	     if (ok) {
+		     result = QString::number(doubleResult, 'f', 6).remove(QRegularExpression("\\.?0+$"));
+	     }
+	}
+
+	const bool redraw = boolProperty("Redraw");
 	if (!errorsOccured()) {
 		display.printText(x, y, result);
 		if (redraw) {

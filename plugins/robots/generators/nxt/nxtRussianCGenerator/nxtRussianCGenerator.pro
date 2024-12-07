@@ -15,7 +15,7 @@
 TARGET = robots-nxt-russian-c-generator
 
 TEMPLATE = lib
-CONFIG += plugin
+CONFIG += plugin trikqscintilla2
 
 include(../../../../../global.pri)
 
@@ -29,7 +29,7 @@ includes(plugins/robots/generators/nxt/nxtGeneratorBase \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 robots-generator-base robots-nxt-generator-base)
+links(qrkernel qrutils qrrepo robots-generator-base robots-nxt-generator-base)
 
 TRANSLATIONS = \
 	$$PWD/../../../../../qrtranslations/ru/plugins/robots/nxtRussianCGenerator_ru.ts \

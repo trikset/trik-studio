@@ -36,6 +36,7 @@ Timeline::Timeline(QObject *parent)
 	}
 
 	connect(&mTimer, &QTimer::timeout, this, &Timeline::onTimer);
+	mTimer.setTimerType(Qt::TimerType::PreciseTimer);
 	mTimer.setInterval(defaultRealTimeInterval);
 }
 

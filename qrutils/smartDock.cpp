@@ -34,8 +34,8 @@ SmartDock::SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindo
 	, mDialog(new QRealDialog(objectName, this))
 	, mCurrentMode(Mode::Docked)
 {
+	setParent(mMainWindow);
 	setObjectName(objectName);
-
 	initDock();
 	initDialog();
 }
