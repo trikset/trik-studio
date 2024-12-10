@@ -406,32 +406,32 @@
     <message>
         <location line="+11"/>
         <source>Join Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Присоедениться к сети</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Sets hull number of this robot and connects to robot by IP and port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Устаналивает бортовой номер для работа и присоединяется к роботу с заданным IP-адресом и портом.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-адрес</translation>
     </message>
     <message>
         <location line="+40"/>
         <source>192.168.77.1</source>
-        <translation type="unfinished">192.168.77.1</translation>
+        <translation>192.168.77.1</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-адрес</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Hull Number</source>
-        <translation type="unfinished">Бортномер</translation>
+        <translation>Бортномер</translation>
     </message>
     <message>
         <location line="+12"/>
