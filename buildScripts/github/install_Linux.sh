@@ -11,7 +11,7 @@ if [ "$ID" = "altlinux" ]; then
 elif [ "$ID" = "ubuntu" ]; then
   sudo apt-get update && sudo apt-get install -y --no-install-recommends \
   ccache curl libusb-1.0-0-dev make qtscript5-dev qttools5-dev-tools qtmultimedia5-dev libqt5serialport5-dev libqt5svg5-dev \
-  libudev-dev python3.${TRIK_PYTHON3_VERSION_MINOR}-dev qtbase5-private-dev qtwayland5
+  libudev-dev python3-dev qtbase5-private-dev qtwayland5
 elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
   sudo yum update -y &&  sudo yum install -y --setopt=install_weak_deps=False epel-release
   sudo yum install --allowerasing -y --setopt=install_weak_deps=False sudo which libusbx-devel curl wget make gcc-toolset-"$GCC_VERSION"-{gcc-c++,libasan-devel,libubsan-devel,gdb} \
