@@ -38,7 +38,6 @@ public:
 		PropertyInfo(Type t, const QStringList &v)
 			: type(t), values(v)
 		{}
-
 	};
 
 	explicit VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &enumValues
