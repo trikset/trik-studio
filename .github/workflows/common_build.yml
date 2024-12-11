@@ -92,7 +92,7 @@ jobs:
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
-      trik_python3_version_minor: 10
+      trik_python3_version_minor: 12
 
   build-ubuntu-debug-tests:
     needs: lint
@@ -103,7 +103,7 @@ jobs:
       build_installer: false
       config: debug
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
-      trik_python3_version_minor: 10
+      trik_python3_version_minor: 12
 
   build-altlinux-release-tests:
     needs: lint
