@@ -112,6 +112,7 @@ void SdfRenderer::render(QPainter *painter, const QRectF &bounds, bool isIcon)
 	mStartX = static_cast<int>(bounds.x());
 	mStartY = static_cast<int>(bounds.y());
 	this->painter = painter;
+
 	QDomElement docElem = doc.documentElement();
 	QDomNode node = docElem.firstChild();
 	while(!node.isNull())
@@ -821,6 +822,7 @@ void SdfIconEngineV2::paint(QPainter *painter, const QRect &rect, QIcon::Mode mo
 	Q_UNUSED(mode)
 	Q_UNUSED(state)
 	painter->eraseRect(rect);
+
 	int rh = rect.height();
 	int rw = rect.width();
 
@@ -839,6 +841,11 @@ void SdfIconEngineV2::paint(QPainter *painter, const QRect &rect, QIcon::Mode mo
 		resRect.setTop(rect.top() + (rh - rw * ph / pw) / 2);
 		resRect.setBottom(rect.bottom() - (rh - rw * ph / pw) / 2);
 	}
+
+	QPixmap image(rh, rw);
+	image.fill(QApplication::palette().color(QPalette::Base));
+	painter->drawPixmap(0, 0, image);
+
 	painter->setRenderHint(QPainter::Antialiasing, true);
 	mRenderer.render(painter, resRect, true);
 }
