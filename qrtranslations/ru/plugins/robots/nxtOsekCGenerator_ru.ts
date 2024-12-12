@@ -4,7 +4,7 @@
 <context>
     <name>nxt::NxtFlashTool</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+72"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+73"/>
         <source>Robot is already being flashed</source>
         <translation>Робот уже прошивается</translation>
     </message>
@@ -67,7 +67,7 @@
         <translation>Программа уже загружается</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+28"/>
         <source>Uploading program started. Please don&apos;t disconnect robot during the process</source>
         <translation>Начат процесс загрузки программы в робота. Пожалуйста, не отсоединяйте робота, пока процесс не будет завершен</translation>
     </message>
@@ -82,7 +82,7 @@
         <translation>Не удалось загрузить программу в робота. Убедитесь, что робот включен и подсоединен к компьютеру</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+43"/>
         <source>Error in reading from firmware file: %1</source>
         <translation>Ошибка чтения из файла с прошивкой %1</translation>
     </message>
@@ -112,12 +112,12 @@
         <translation>Загрузка программы завершена успешно</translation>
     </message>
     <message>
-        <location line="-299"/>
+        <location line="-303"/>
         <source>Compilation error occured. Please check your function blocks syntax. If you sure in their validness contact developers</source>
         <translation>Произошла ошибка компиляции. Проверьте синтаксис выражений внутри блоков &quot;Функция&quot;;. Если Вы уверены в их корректности, обратитесь к разработчикам</translation>
     </message>
     <message>
-        <location line="-176"/>
+        <location line="-187"/>
         <source>Could not open %1 for reading.</source>
         <translation>Не могу открыть файл %1 для чтения.</translation>
     </message>
@@ -147,12 +147,21 @@
         <translation>Прошиваю робота...</translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+107"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
         <translation>Загрузка программы не удалась. Возможно, стоит попробовать перезапустить среду с правами суперпользователя</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <source>Could not upload program. Make sure the robot is connected and ON.</source>
+        <translation type="vanished">Не удалось загрузить программу. Убедитесь, что робот подключен и включен.</translation>
+    </message>
+    <message>
+        <location line="+48"/>
+        <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
+        <translation>Если вы пользователь ОС GNU/Linux, перейдите по ссылке https://help.trikset.com/nxt/run-upload-programs для получения инструкций.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>QReal requires superuser privileges to upload programs on NXT robot</source>
         <translation>Для загрузки программ в робота требуется запустить TRIKStudio с правами администратора</translation>
     </message>
@@ -164,13 +173,13 @@
         <translation type="vanished">Файл исходного кода Lego NXT OSEK C</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+32"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+33"/>
         <source>Generation (NXT OSEK C)</source>
         <translation>Генерация (C)</translation>
     </message>
     <message>
-        <location line="+52"/>
-        <location line="+129"/>
+        <location line="+58"/>
+        <location line="+128"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>
     </message>
