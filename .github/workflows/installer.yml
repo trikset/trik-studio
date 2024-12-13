@@ -109,10 +109,12 @@ jobs:
       run: |
         echo "QT_QPA_PLATFORM=offscreen" >> $GITHUB_ENV
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1) && echo "TWOD_EXEC_NAME=$TWOD_EXEC_NAME" >> $GITHUB_ENV
-        TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
-        TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
-        echo "TRIK_PYTHONPATH=$TRIK_PYTHONPATH" >> $GITHUB_ENV
         PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1) && echo "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
+        if [[ "$RUNNER_OS" != "Windows" ]]; then
+          TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
+          TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
+          echo "TRIK_PYTHONPATH=$TRIK_PYTHONPATH" >> $GITHUB_ENV
+        fi
         
     - name: Run minimal tests in diagram mode
       run: |
