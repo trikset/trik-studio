@@ -76,14 +76,13 @@ jobs:
         CONCURRENCY: ${{ inputs.concurrency }}
 
     - name: Push zip archive to dl
-      if: ${{ inputs.deploy_archive && github.event_name != 'pull_request' && github.repository_owner == 'trikset' }}
+      if: ${{ inputs.deploy_archive && github.event_name != 'pull_request' && github.repository_owner == 'trikset' && startsWith(inputs.os, 'windows') }}
       run: |
         BRANCH_NAME="${GITHUB_REF#refs/*/}" && BRANCH_NAME=${BRANCH_NAME//\//-}
         zip -r trik-studio.zip "$APP_DIR"
         install -m 600 -D /dev/null ~/.ssh/id_rsa
         echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
         rsync -v --rsh="ssh -o StrictHostKeyChecking=no" trik-studio.zip ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-"$BRANCH_NAME"-x86_64.zip
-      if: startsWith(inputs.os, 'windows')
 
     - name: Reinstall trik-studio and dll search
       run: |
