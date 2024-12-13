@@ -19,7 +19,7 @@ cd "$LIB_DIR"
 
 # Find dependencies that have not been packaged, but are still in the system
 ls -- *.dll* | xargs ldd | grep -Ev "not found$" | grep dll | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
-	| sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "(System|SYSTEM)32.*dll.*" \ 
+	| sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(System|SYSTEM)32.*dll" \
 	| grep -Ev "$LD_LIBRARY_PATH"
 
 ls -- *.dll* | xargs ldd | grep "not found" || exit 0
