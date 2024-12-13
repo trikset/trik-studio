@@ -20,7 +20,7 @@ on:
       shell:
         required: false
         type: string
-        default: shell
+        default: bash
       deploy_archive:
         required: false
         type: boolean
