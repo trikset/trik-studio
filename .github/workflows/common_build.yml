@@ -88,7 +88,7 @@ jobs:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
@@ -98,7 +98,7 @@ jobs:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
       build: true
       build_installer: false
       config: debug
