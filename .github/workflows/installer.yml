@@ -41,6 +41,7 @@ jobs:
       with:
         path-type: inherit
         msystem: MINGW64
+      if: startsWith(inputs.shell, 'msys')
 
     - name: Install dependencies
       run: |
@@ -115,7 +116,7 @@ jobs:
         
     - name: Run minimal tests in diagram mode
       run: |
-        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --close 5 "$i"; done
+        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --close -s 5 "$i"; done
         rm -rf tests.7z testing_small
         
     - name: Downloads minimal tests for script mode
