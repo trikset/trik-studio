@@ -130,22 +130,22 @@ jobs:
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript --close \
          -s 5 --script-path "$i".js -m script "$i"; done
-      if: startsWith(inputs.os, 'ubuntu')
+      if: ${{ !startsWith(inputs.os, 'macos') }}
        
     - name: Run minimal Python interpeter tests in direct script mode
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
          --close -s 5 --script-path "$i".py -m script "$i"; done
-      if: startsWith(inputs.os, 'ubuntu')
+      if: ${{ !startsWith(inputs.os, 'macos') }}
       
     - name: Run minimal Javascript interpeter tests as fields in .qrs (For backward compatibility)
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".js "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
-      if: startsWith(inputs.os, 'ubuntu')
+      if: ${{ !startsWith(inputs.os, 'macos') }}
       
     - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
-      if: startsWith(inputs.os, 'ubuntu')
+      if: ${{ !startsWith(inputs.os, 'macos') }}
