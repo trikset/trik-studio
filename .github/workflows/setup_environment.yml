@@ -180,7 +180,7 @@ jobs:
     - name: Evaluate artifact name
       run: |
         set -x
-        export "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')" >> $GITHUB_ENV
+        export "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer" >> $GITHUB_ENV
 
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
