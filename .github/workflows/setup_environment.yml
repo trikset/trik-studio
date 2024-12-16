@@ -177,10 +177,15 @@ jobs:
         host: ${{ secrets.DL_HOST }}
       if: ${{ inputs.build_installer }}
 
+    - name: Evaluate artifact name
+      run: |
+        set -x
+        export "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')" >> $GITHUB_ENV
+
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
-        name: "${RUNNER_OS@L}-installer"
+        name: "$ARTIFACT_INSTALLER_NAME"
         path: |
           installer/*.exe
           installer/*.run
