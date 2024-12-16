@@ -180,7 +180,7 @@ jobs:
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ inputs.os }}-installer
+        name: "${RUNNER_OS@L}-installer"
         path: |
           installer/*.exe
           installer/*.run
