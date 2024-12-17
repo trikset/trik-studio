@@ -82,13 +82,13 @@ jobs:
     uses: ./.github/workflows/installer.yml
     with:
       os: macos-13
-      artifact_name: macos-13-installer
+      artifact_name: macos-installer
 
   build-ubuntu-release-tests:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
       build: true
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
@@ -98,7 +98,7 @@ jobs:
     needs: lint
     uses: ./.github/workflows/setup_environment.yml
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
       build: true
       build_installer: false
       config: debug
@@ -169,14 +169,14 @@ jobs:
     uses: ./.github/workflows/installer.yml
     with:
       os: ubuntu-latest
-      artifact_name: ubuntu-latest-installer
+      artifact_name: linux-installer
 
   install-ubuntu-installer-1-concurrency:
     needs: [build-rockylinux-installer]  
     uses: ./.github/workflows/installer.yml
     with:
       os: ubuntu-latest
-      artifact_name: ubuntu-latest-installer
+      artifact_name: linux-installer
       concurrency: 1
 
   install-rockylinux-installer:
@@ -185,7 +185,7 @@ jobs:
     with:
       os: ubuntu-latest
       container_name: rockylinux:8
-      artifact_name: ubuntu-latest-installer
+      artifact_name: linux-installer
 
   install-altlinux-installer:
     needs: [build-rockylinux-installer]  
@@ -193,7 +193,7 @@ jobs:
     with:
       os: ubuntu-latest
       container_name: alt:latest
-      artifact_name: ubuntu-latest-installer
+      artifact_name: linux-installer
 
   install-archlinux-installer:
     needs: [build-rockylinux-installer]  
@@ -201,4 +201,4 @@ jobs:
     with:
       os: ubuntu-latest
       container_name: archlinux:latest
-      artifact_name: ubuntu-latest-installer
+      artifact_name: linux-installer
