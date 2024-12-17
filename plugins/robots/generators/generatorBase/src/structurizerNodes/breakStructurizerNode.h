@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,19 @@
 
 #pragma once
 
-#include "intermediateStructurizatorNode.h"
+#include "simpleStructurizerNode.h"
 
 namespace generatorBase {
 
-class BlockStructurizatorNode : public IntermediateStructurizatorNode
+class BreakStructurizerNode : public SimpleStructurizerNode
 {
-	Q_OBJECT
-
 public:
-	explicit BlockStructurizatorNode(IntermediateStructurizatorNode *firstNode
-			, IntermediateStructurizatorNode *secondNode
-			, QObject *parent);
+	explicit BreakStructurizerNode(QObject *parent = nullptr);
 
-	IntermediateStructurizatorNode *firstNode() const;
-	IntermediateStructurizatorNode *secondNode() const;
-
-	bool analyzeBreak();
 	Type type() const;
-	qReal::Id firstId() const;
-private:
-	IntermediateStructurizatorNode *mFirstNode;
-	IntermediateStructurizatorNode *mSecondNode;
-};
+	bool isEqual(StructurizerNode *other) const;
+	bool hasBreakOnUpperLevel() const;
 
+	StructurizerNode *clone() const;
+};
 }
