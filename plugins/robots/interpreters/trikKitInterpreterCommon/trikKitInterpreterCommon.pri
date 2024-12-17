@@ -33,14 +33,11 @@ includes( \
 		)
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-                robots-utils robots-kit-base robots-2d-model robots-trik-kit \
-                trikControl trikNetwork trikScriptRunner trikKernel qrgui-text-editor \
+		robots-utils robots-kit-base robots-2d-model robots-trik-kit \
+		trikControl trikNetwork trikScriptRunner trikKernel qrgui-text-editor \
 		)
 
 copyToDestdir(./icons/trik-robot.svg, now, images/)
-#LIBS += -L$$GLOBAL_PWD/plugins/robots/thirdparty/trikRuntime/trikRuntime/bin/x86-$$CONFIGURATION
-# it's here because it looks like it can't be placed in a subdirs project (where is nothing to link)
-#copyToDestdir($$GLOBAL_PWD/plugins/robots/thirdparty/trikRuntime/trikRuntime/bin/x86-$$CONFIGURATION/*)
 
 HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/declSpec.h \
@@ -76,6 +73,7 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDObjectSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDShell.h \
+	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/trikTwoDRobotModel.h \
 	$$PWD/include/trikKitInterpreterCommon/trikAdditionalPreferences.h \
@@ -131,6 +129,7 @@ SOURCES += \
 	$$PWD/src/robotModel/twoD/parts/twoDColorSensor.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDLed.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDShell.cpp \
+	$$PWD/src/robotModel/twoD/parts/twoDNetworkCommunicator.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDGyroscopeSensor.cpp \
 	$$PWD/src/robotModel/twoD/trikTwoDRobotModel.cpp \
 	$$PWD/src/trikAdditionalPreferences.cpp \

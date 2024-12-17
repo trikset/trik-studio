@@ -25,11 +25,12 @@ copy_qt_lib QtSerialPort
 [ -r venv/bin/activate ] || python3."${TRIK_PYTHON3_VERSION_MINOR}" -m venv venv
 . venv/bin/activate
 python3 -m pip install -U pip
-python3 -m pip install pyinstaller numpy
+python3 -m pip install -r requirements.txt
 
 #PyInstaller provides all required modules
 #So we need to handle this garbage of files later (below) with proper rsync
-pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
+#Determine python behavior when searching pythonlib
+PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
 	--hidden-import=math \
 	--hidden-import=random \
 	--hidden-import=sys \
@@ -44,15 +45,15 @@ pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --n
 
 deactivate # exit python's venv
 
-rsync -avR --remove-source-files dist/trik/./{*.dylib,Python} "$BUNDLE_CONTENTS/Lib"
+rsync -avR --remove-source-files dist/trik/_internal/./*.dylib "$BUNDLE_CONTENTS/Lib"
 # Remove before copying other files
 rm dist/trik/trik
-rsync -avRm --delete --delete-after dist/trik/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
+rsync -avRm --delete --delete-after dist/trik/_internal/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
 
 #Add Python runtime libraries
 PYTHON_LIBNAME=$("python3.${TRIK_PYTHON3_VERSION_MINOR}-config" --prefix)/Python
 #rsync -a "$PYTHON_LIBNAME" "$BUNDLE_CONTENTS/Lib"
-find "$BUNDLE_CONTENTS/Lib" -type f -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/Python
+find "$BUNDLE_CONTENTS/Lib" -type f -name '*.dylib' -print0 | xargs -0n1 install_name_tool -change "$PYTHON_LIBNAME" @rpath/../Lib/python-runtime/Python
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libtrikMetamodel.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-trik-qts-generator-library.1.0.0.dylib"

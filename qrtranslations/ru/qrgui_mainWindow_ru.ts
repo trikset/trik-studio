@@ -1120,12 +1120,12 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+86"/>
+        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+87"/>
         <source>Mouse gesture</source>
         <translation>Жест мышью</translation>
     </message>
     <message>
-        <location line="+88"/>
+        <location line="+93"/>
         <source>Deleting an element: </source>
         <translation>Удаление элемента: </translation>
     </message>
@@ -1250,7 +1250,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="obsolete">Добавить элемент</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+143"/>
+        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+157"/>
         <source>Add Entity</source>
         <translation>Добавить сущность</translation>
     </message>

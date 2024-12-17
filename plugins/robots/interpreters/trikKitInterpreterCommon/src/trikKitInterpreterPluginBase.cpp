@@ -25,9 +25,9 @@
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
 #include <qrkernel/platformInfo.h>
-
 #include <qrgui/textEditor/qscintillaTextEdit.h>
 #include <qrgui/textEditor/languageInfo.h>
+#include "trikNetwork/mailboxFactory.h"
 
 using namespace trik;
 using namespace qReal;
@@ -51,8 +51,15 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
 		)
 {
+	auto isMailboxEnabled = qReal::SettingsManager::value("TRIK2DMailbox", "").toBool();
+	if (isMailboxEnabled) {
+		mMailbox.reset(trikNetwork::MailboxFactory::create(8889));
+	}
 	mRealRobotModel.reset(realRobotModel);
 	mTwoDRobotModel.reset(twoDRobotModel);
+	if (mMailbox) {
+		mTwoDRobotModel->setMailbox(*mMailbox);
+	}
 	mBlocksFactory = blocksFactory;
 
 	const auto modelEngine = new twoDModel::engine::TwoDModelEngineFacade(*mTwoDRobotModel);
@@ -84,9 +91,7 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		}
 	}
 #endif
-	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, enablePython));
-	connect(mAdditionalPreferences, &TrikAdditionalPreferences::settingsChanged
-			, mTextualInterpreter.data(), &TrikTextualInterpreter::setMailboxHullNumber);
+	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, mMailbox.data(), enablePython));
 }
 
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)
@@ -330,7 +335,7 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 			, &TrikTextualInterpreter::completed
 			, this
 			, [this](){
-		this->testStop(qReal::interpretation::StopReason::finised);
+		this->testStop(qReal::interpretation::StopReason::finished);
 	});
 	// refactor?
 	connect(this

@@ -293,7 +293,7 @@ void ConstraintsChecker::programStarted()
 void ConstraintsChecker::programFinished(qReal::interpretation::StopReason reason)
 {
 	if (!mSuccessTriggered && !mFailTriggered && mEnabled) {
-		if (mDefferedSuccessTriggered && reason == qReal::interpretation::StopReason::finised) {
+		if (mDefferedSuccessTriggered && reason == qReal::interpretation::StopReason::finished) {
 			onSuccess();
 		} else {
 			emit fail(tr("Program has finished, but the task is not accomplished."));

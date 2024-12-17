@@ -52,6 +52,7 @@ rsync -a "$QT_LIB"/libQt5Script.so*                                     "$PWD"/.
 rsync -a "$QT_LIB"/libQt5Test.so*                                       "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5XcbQpa.so*                                     "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5WaylandC{lient,ompositor}.so*                  "$PWD"/../data/lib/
+rsync -a "$QT_LIB"/libQt5Concurrent.so*                                 "$PWD"/../data/lib/
 
 rsync -avR "$QT_PLUGINS"/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
 

@@ -120,11 +120,22 @@ void Reporter::reportMessages()
 }
 
 QString Reporter::levelToString(const Level level) const {
+	// GCC 10.3.1 in AltLinux has problems understanding enums
+	// Thus we need this redundant code with a temporary variable
+	QString tmp;
+	
 	switch (level) {
-	case Level::information: return "info";
-	case Level::error: return "error";
-	case Level::log: return "log";
+	case Level::information:
+	    tmp = "info";
+	    break;
+	case Level::error:
+	    tmp = "error";
+	    break;
+	case Level::log:
+	    tmp = "log";
+	    break;
 	}
+	return tmp;
 }
 
 QJsonValue Reporter::variantToJson(const QVariant &value) const

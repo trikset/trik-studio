@@ -15,8 +15,8 @@
 TEMPLATE = app
 CONFIG -= app_bundle
 
-include (../../global.pri)
+include ($$PWD/../../global.pri)
 
 TARGET = checkapp
 
-include (checkapp/checkapp.pri)
+include ($$PWD/checkapp/checkapp.pri)

@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>trik::blocks::details::WaitForMessageBlock</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/waitForMessageBlock.cpp" line="+46"/>
+        <source>Device not found for port name CommunicatorPort</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>trik::blocks::details::WaitGamepadButtonBlock</name>
     <message>
         <location filename="../../../../plugins/robots/common/trikKit/src/blocks/details/waitGamepadButtonBlock.cpp" line="+41"/>
@@ -12,8 +20,8 @@
 <context>
     <name>trik::robotModel::TrikRobotModelBase</name>
     <message>
-        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+92"/>
-        <location line="+204"/>
+        <location filename="../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+93"/>
+        <location line="+212"/>
         <source>Video 2</source>
         <translation type="unfinished"></translation>
     </message>
