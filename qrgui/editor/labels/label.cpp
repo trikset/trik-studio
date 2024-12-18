@@ -56,8 +56,9 @@ const LabelProperties &Label::info() const
 void Label::init()
 {
 	QGraphicsTextItem::setFlags(ItemIsSelectable);
+	QGraphicsTextItem::setDefaultTextColor(Qt::black);
 	connect(document(), &QTextDocument::contentsChanged, this, &Label::saveToRepo);
-
+	
 	reinitFont();
 	setRotation(mProperties->rotation());
 	if (!mProperties->isStatic()) {
@@ -471,6 +472,7 @@ void Label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 	// Default dashed frame is drawn arround the whole bounding rect (arround prefix and suffix too). Disabling it.
 	const_cast<QStyleOptionGraphicsItem *>(option)->state &= ~QStyle::State_Selected & ~QStyle::State_HasFocus;
+	
 	QGraphicsTextItem::paint(painter, option, widget);
 }
 
