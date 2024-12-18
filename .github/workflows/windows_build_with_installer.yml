@@ -228,3 +228,13 @@ jobs:
             .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
             choco install far dependencies
             .\ngrok\ngrok.exe tcp 3389
+
+  install-windows-installer:
+    needs: [build]
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: windows-latest
+      artifact_name: trik-studio-auto-installer-qt5.15
+      shell: msys2 {0}
+      deploy_archive: true
+    secrets: inherit
