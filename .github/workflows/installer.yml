@@ -108,6 +108,7 @@ jobs:
     - name: Prepare environment variable
       run: |
         echo "QT_QPA_PLATFORM=offscreen" >> $GITHUB_ENV
+        echo "QT_DEBUG_PLUGINS=1" >> $GITHUB_ENV
         TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1) && echo "TWOD_EXEC_NAME=$TWOD_EXEC_NAME" >> $GITHUB_ENV
         PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1) && echo "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
         if [[ "$RUNNER_OS" != "Windows" ]]; then
@@ -120,6 +121,7 @@ jobs:
       run: |
         for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --close -s 5 "$i"; done
         rm -rf tests.7z testing_small
+      timeout-minutes: 15
         
     - name: Downloads minimal tests for script mode
       run: |
@@ -131,21 +133,25 @@ jobs:
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript --close \
          -s 5 --script-path "$i".js -m script "$i"; done
       if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
        
     - name: Run minimal Python interpeter tests in direct script mode
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
          --close -s 5 --script-path "$i".py -m script "$i"; done
       if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
       
     - name: Run minimal Javascript interpeter tests as fields in .qrs (For backward compatibility)
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".js "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
       
     - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
