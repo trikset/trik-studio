@@ -47,7 +47,9 @@
 #include "src/engine/items/rectangleItem.h"
 #include "src/engine/items/ellipseItem.h"
 #include "src/engine/items/stylusItem.h"
+#include "src/engine/items/commentItem.h"
 #include "src/engine/items/imageItem.h"
+#include "src/engine/items/startPosition.h"
 #include "src/engine/commands/changePropertyCommand.h"
 #include "src/engine/commands/loadWorldCommand.h"
 
@@ -253,6 +255,7 @@ void TwoDModelWidget::initPalette()
 	QAction * const rectangleTool = items::RectangleItem::rectangleTool();
 	QAction * const ellipseTool = items::EllipseItem::ellipseTool();
 	QAction * const stylusTool = items::StylusItem::stylusTool();
+	QAction * const commentTool = items::CommentItem::commentTool();
 	QAction * const imageTool = items::ImageItem::imageTool();
 
 	mUi->palette->registerTool(wallTool);
@@ -263,6 +266,7 @@ void TwoDModelWidget::initPalette()
 	mUi->palette->registerTool(rectangleTool);
 	mUi->palette->registerTool(ellipseTool);
 	mUi->palette->registerTool(stylusTool);
+	mUi->palette->registerTool(commentTool);
 	mUi->palette->registerTool(imageTool);
 
 	qReal::SettingsListener::listen("toolbarSize", [this](int size){ mUi->palette->setSize({size, size}); }, this);
@@ -277,6 +281,7 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, &*mScene, &TwoDModelScene::addRectangle);
 	connect(ellipseTool, &QAction::triggered, &*mScene, &TwoDModelScene::addEllipse);
 	connect(stylusTool, &QAction::triggered, &*mScene, &TwoDModelScene::addStylus);
+	connect(commentTool, &QAction::triggered, &*mScene, &TwoDModelScene::addComment);
 	connect(imageTool, &QAction::triggered, &*mScene, &TwoDModelScene::addImage);
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, &*mScene, &TwoDModelScene::setNoneStatus);
 
@@ -288,10 +293,16 @@ void TwoDModelWidget::initPalette()
 	connect(rectangleTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawRectangle); });
 	connect(ellipseTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawEllipse); });
 	connect(stylusTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawStylus); });
+	connect(commentTool, &QAction::triggered, this, [this](){ setCursorTypeForDrawing(drawComment); });
 	connect(&mUi->palette->cursorAction(), &QAction::triggered, this
 			, [this](){ setCursorTypeForDrawing(mNoneCursorType); });
 
 	connect(imageTool, &QAction::triggered, this, [this](){ mUi->palette->unselect(); });
+}
+
+void TwoDModelWidget::resetDrawAction()
+{
+	mUi->palette->unselect();
 }
 
 void TwoDModelWidget::initDetailsTab()
@@ -336,6 +347,7 @@ void TwoDModelWidget::connectUiButtons()
 			, this, &TwoDModelWidget::onMultiselectionCursorActionTriggered);
 
 	connect(mRobotItemPopup, &RobotItemPopup::restoreRobotPositionClicked, this, &TwoDModelWidget::returnToStartMarker);
+	connect(mRobotItemPopup, &RobotItemPopup::setRobotPositionClicked, this, &TwoDModelWidget::setStartMarker);
 	connect(mUi->initialStateButton, &QAbstractButton::clicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
 
@@ -401,6 +413,13 @@ void TwoDModelWidget::returnToStartMarker()
 	saveWorldModelToRepo();
 }
 
+void TwoDModelWidget::setStartMarker()
+{
+	for (auto &&model : mModel.robotModels()) {
+		model->startPositionMarker()->setPos(model->robotCenter());
+		model->startPositionMarker()->setRotation(mScene->robot(*model)->rotation());
+	}
+}
 void TwoDModelWidget::trainingModeChanged(bool enabled)
 {
 	mUi->trainingModeButton->setToolTip(enabled
@@ -492,16 +511,7 @@ void TwoDModelWidget::loadWorldModel()
 		return;
 	}
 
-	QString errorMessage;
-	int errorLine = 0;
-	int errorColumn = 0;
-	const QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
-	if (!errorMessage.isEmpty()) {
-		mModel.errorReporter()->addError(QString("%1:%2: %3")
-				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
-	}
-
-	auto command = new commands::LoadWorldCommand(*this, save);
+	auto command = new commands::LoadWorldCommand(*this, loadXmlWithConversion(loadFileName));
 	if (mController) {
 		mController->execute(command);
 	}
@@ -514,23 +524,15 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 		return;
 	}
 
-	QString errorMessage;
-	int errorLine = 0;
-	int errorColumn = 0;
-	QDomDocument save = utils::xmlUtils::loadDocument(loadFileName, &errorMessage, &errorLine, &errorColumn);
-	if (!errorMessage.isEmpty()) {
-		mModel.errorReporter()->addError(QString("%1:%2: %3")
-				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+	QDomDocument save = loadXmlWithConversion(loadFileName);
+
+	auto newWorld = save.firstChildElement("root");
+	auto oldWorld = generateWorldModelXml().firstChildElement("root");
+	if (newWorld.firstChildElement("robots").isNull()) {
+		newWorld.appendChild(oldWorld.firstChildElement("robots"));
+	} else {
+		newWorld.replaceChild(oldWorld.firstChildElement("robots"), newWorld.firstChildElement("robots"));
 	}
-
-	// TODO: Split saves and remove temporary hack
-	auto saveRobot = save.firstChildElement("root").firstChildElement("robots").firstChildElement("robot");
-	auto currentRobot = generateWorldModelXml().firstChildElement("root")
-			.firstChildElement("robots").firstChildElement("robot");
-
-	saveRobot.replaceChild(currentRobot.firstChildElement("sensors"), saveRobot.firstChildElement("sensors"));
-	saveRobot.replaceChild(currentRobot.firstChildElement("wheels"), saveRobot.firstChildElement("wheels"));
-	saveRobot.setAttribute("id", currentRobot.attribute("id"));
 
 	auto command = new commands::LoadWorldCommand(*this, save);
 	if (mController) {
@@ -685,13 +687,13 @@ QDomDocument TwoDModelWidget::generateBlobsXml() const
 
 QDomDocument TwoDModelWidget::generateWorldModelWithBlobsXml() const
 {
-	QDomDocument wordModelXml = generateWorldModelXml();
+	QDomDocument worldModelXml = generateWorldModelXml();
 	QDomDocument blobsXml = generateBlobsXml();
-	wordModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
-	return wordModelXml;
+	worldModelXml.firstChild().appendChild(blobsXml.firstChild().firstChild());
+	return worldModelXml;
 }
 
-void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo)
+void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
 {
 	if (mController && !withUndo) {
 		// Clearing 2D model undo stack...
@@ -700,7 +702,7 @@ void TwoDModelWidget::loadXmls(const QDomDocument &worldModel, const QDomDocumen
 	}
 
 	mScene->clearScene(true, Reason::loading);
-	mModel.deserialize(worldModel, blobs);
+	mModel.deserialize(model);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
 }
@@ -722,7 +724,7 @@ void TwoDModelWidget::setController(ControllerInterface &controller)
 
 	auto setItemsProperty = [=](const QStringList &items, const QString &property, const QVariant &value) {
 		if (mController) {
-			mController->execute(new commands::ChangePropertyCommand(*mScene, mModel, items, property, value));
+			mController->execute(new commands::ChangePropertyCommand(*mScene, items, property, value));
 		}
 	};
 
@@ -738,51 +740,29 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 	mUi->palette->setVisible(!worldReadOnly);
 	mActions->setWorldModelActionsVisible(!worldReadOnly);
 	mColorFieldItemPopup->setEnabled(!worldReadOnly);
-
-	const auto hasSpacer = [this]() {
-		for (int i = 0; i < mUi->sceneHeaderWidget->layout()->count(); ++i) {
-			if (mUi->sceneHeaderWidget->layout()->itemAt(i) == mUi->horizontalSpacer) {
-				return true;
-			}
-		}
-
-		return false;
-	};
-
-	mUi->gridParametersBox->setVisible(!worldReadOnly);
-	if (!worldReadOnly && hasSpacer()) {
-		mUi->sceneHeaderWidget->layout()->removeItem(mUi->horizontalSpacer);
-		delete mUi->horizontalSpacer;
-		mUi->horizontalSpacer = nullptr;
-	} else if (worldReadOnly && !hasSpacer()){
-		static_cast<QHBoxLayout *>(mUi->sceneHeaderWidget->layout())->insertItem(1, mUi->horizontalSpacer);
-	}
+	mImageItemPopup->setEnabled(!worldReadOnly);
 
 	const bool sensorsReadOnly = flags.testFlag(ReadOnly::Sensors);
-	const bool robotConfigurationReadOnly = flags.testFlag(ReadOnly::RobotSetup);
-
 	mUi->detailsTab->setDevicesSectionsVisible(!sensorsReadOnly);
-	mUi->detailsTab->setMotorsSectionsVisible(!robotConfigurationReadOnly);
-
 	mCurrentConfigurer->setEnabled(!sensorsReadOnly);
+
+	const bool robotConfigurationReadOnly = flags.testFlag(ReadOnly::RobotSetup);
+	mUi->detailsTab->setMotorsSectionsVisible(!robotConfigurationReadOnly);
 	mUi->leftWheelComboBox->setEnabled(!robotConfigurationReadOnly);
 	mUi->rightWheelComboBox->setEnabled(!robotConfigurationReadOnly);
 
 	const bool simulationSettingsReadOnly = flags.testFlag(ReadOnly::SimulationSettings);
-
 	mUi->detailsTab->setPhysicsSectionsVisible(!simulationSettingsReadOnly);
 
-	mSensorsReadOnly = sensorsReadOnly;
 	mRobotPositionReadOnly = flags.testFlag(ReadOnly::RobotPosition);
+	if (mRobotPositionReadOnly) returnToStartMarker();
 
 	mScene->setInteractivityFlags(flags);
 }
 
 void TwoDModelWidget::setCompactMode(bool enabled)
 {
-	mCompactMode = enabled;
-	setRunStopButtonsVisibility();
-	mActions->setSaveLoadActionsShortcutsEnabled(!mCompactMode);
+	mActions->setSaveLoadActionsShortcutsEnabled(!enabled);
 }
 
 QString TwoDModelWidget::editorId() const
@@ -854,8 +834,8 @@ void TwoDModelWidget::setDetailsVisibility(bool visible)
 
 void TwoDModelWidget::setRunStopButtonsVisibility()
 {
-	mUi->runButton->setVisible(!mCompactMode && !mModel.timeline().isStarted());
-	mUi->stopButton->setVisible(!mCompactMode && mModel.timeline().isStarted());
+	mUi->runButton->setVisible(!mModel.timeline().isStarted());
+	mUi->stopButton->setVisible(mModel.timeline().isStarted());
 }
 
 QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) const
@@ -870,6 +850,7 @@ QGraphicsView::DragMode TwoDModelWidget::cursorTypeToDragType(CursorType type) c
 	case drawBall:
 	case drawBezier:
 	case drawRectangle:
+	case drawComment:
 		return QGraphicsView::NoDrag;
 	case hand:
 		return QGraphicsView::ScrollHandDrag;
@@ -905,6 +886,8 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 		return QCursor(QPixmap(":/icons/2d_drawBezierCursor.png"), 0, 0);
 	case drawRectangle:
 		return QCursor(QPixmap(":/icons/2d_drawRectangleCursor.png"), 0, 0);
+	case drawComment:
+		return QCursor(QPixmap(":/icons/2d_drawCommentCursor.png"), 0, 0);
 	default:
 		return Qt::ArrowCursor;
 	}
@@ -955,6 +938,11 @@ void TwoDModelWidget::onDeviceConfigurationChanged(const QString &robotId
 	}
 }
 
+void TwoDModelWidget::setBackgroundMode()
+{
+	mBackgroundMode = true;
+}
+
 void TwoDModelWidget::bringToFront()
 {
 #ifdef Q_OS_DARWIN
@@ -963,6 +951,10 @@ void TwoDModelWidget::bringToFront()
 	if (!QApplication::platformNativeInterface())
 		return;
 #endif
+
+	if (mBackgroundMode) {
+		return;
+	}
 
 	if (isHidden()) {
 		show();
@@ -1127,4 +1119,19 @@ void TwoDModelWidget::unsetSelectedRobotItem()
 void TwoDModelWidget::incrementTimelineCounter()
 {
 	mUi->timelineBox->stepBy(1);
+}
+
+const QDomDocument TwoDModelWidget::loadXmlWithConversion(const QString &loadFileName) const
+{
+	QString errorMessage;
+	int errorLine = 0;
+	int errorColumn = 0;
+	const QDomDocument save = utils::xmlUtils::loadDocumentWithConversion(
+			loadFileName, &errorMessage, &errorLine, &errorColumn);
+	if (!errorMessage.isEmpty()) {
+		mModel.errorReporter()->addError(QString("%1:%2: %3")
+				.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+	}
+
+	return save;
 }

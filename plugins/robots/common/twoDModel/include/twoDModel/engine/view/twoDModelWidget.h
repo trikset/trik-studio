@@ -82,7 +82,7 @@ public:
 	SensorItem *sensorItem(const kitBase::robotModel::PortInfo &port);
 	void setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible);
 
-	void loadXmls(const QDomDocument &worldModel, const QDomDocument &blobs, bool withUndo = false);
+	void loadXmls(const QDomDocument &model, bool withUndo = false);
 
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;
@@ -98,6 +98,10 @@ public:
 	/// Enables or disables compact 2D model mode.
 	/// In a compact mode 2D model window has less controls, they may seem in another way.
 	void setCompactMode(bool enabled);
+
+	void setBackgroundMode();
+	void bringToFront();
+	void resetDrawAction();
 
 	QString editorId() const override;
 	bool supportsZooming() const override;
@@ -140,8 +144,6 @@ protected:
 			, Reason reason) override;
 
 private slots:
-	void bringToFront();
-
 	void saveWorldModelToRepo();
 	void saveBlobsToRepo();
 
@@ -164,6 +166,7 @@ private slots:
 	void toggleDetailsVisibility();
 
 	void returnToStartMarker();
+	void setStartMarker();
 
 	void trainingModeChanged(bool enabled);
 
@@ -183,6 +186,7 @@ private:
 		, drawEllipse
 		, drawRectangle
 		, drawBezier
+		, drawComment
 	};
 
 	static const int defaultPenWidth = 6;
@@ -231,6 +235,8 @@ private:
 
 	void incrementTimelineCounter();
 
+	const QDomDocument loadXmlWithConversion(const QString &loadFileName) const;
+
 	Ui::TwoDModelWidget *mUi {};
 	QScopedPointer<TwoDModelScene> mScene;
 	QScopedPointer<ActionsBox> mActions;
@@ -257,10 +263,9 @@ private:
 	bool mDetailsAreVisible {};
 	bool mFirstShow { true };
 
-	bool mSensorsReadOnly {};
 	bool mRobotPositionReadOnly {};
 
-	bool mCompactMode {};
+	bool mBackgroundMode {false};
 };
 
 }

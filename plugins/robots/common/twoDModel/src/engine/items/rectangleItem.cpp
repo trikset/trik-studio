@@ -60,14 +60,14 @@ QRectF RectangleItem::calcNecessaryBoundingRect() const
 
 QRectF RectangleItem::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
 void RectangleItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	mRectangleImpl.drawRectItem(painter, x1(), y1(), x2(), y2());
+	RectangleImpl::drawRectItem(painter, x1(), y1(), x2(), y2());
 }
 
 void RectangleItem::drawExtractionForItem(QPainter *painter)
@@ -75,9 +75,9 @@ void RectangleItem::drawExtractionForItem(QPainter *painter)
 	AbstractItem::drawExtractionForItem(painter);
 	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
-	painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	painter->drawRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	if (!filled()) {
-		painter->drawRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+		painter->drawRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
 	}
 }
 
@@ -123,10 +123,10 @@ QPainterPath RectangleItem::shape() const
 	if (!filled()) {
 		QPainterPathStroker ps;
 		ps.setWidth(pen().width());
-		result.addRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), 0));
+		result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
 		result = ps.createStroke(result);
 	} else {
-		result.addRect(mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+		result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	}
 
 	if (isSelected()) {

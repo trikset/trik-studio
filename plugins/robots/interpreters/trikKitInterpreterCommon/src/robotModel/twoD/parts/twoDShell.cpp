@@ -46,7 +46,7 @@ void Shell::say(const QString &text)
 {
 	mLastPhrase = text;
 	if (mErrorReporter) {
-		mErrorReporter->sendBubblingMessage(text, 4000, mEngine.guiFacade().separateTwoDModelWindow());
+		mErrorReporter->sendBubblingMessage(text, 8000, mEngine.guiFacade().twoDModelSceneViewport()->parentWidget());
 	}
 
 	emit phraseTold(text);

@@ -77,6 +77,7 @@ UiManager::UiManager(QAction &debugModeAction
 
 	mRobotConsole->hide();
 	initTab();
+	mCustomWidgetsBar->setVisible(true);
 	mCustomWidgetsBar->setObjectName("robotsMiscellaneousBar");
 	mMainWindow.addToolBar(Qt::TopToolBarArea, mCustomWidgetsBar);
 	mMainWindow.addDockWidget(Qt::BottomDockWidgetArea, mRobotConsole);
@@ -138,17 +139,6 @@ void UiManager::addWidgetToToolbar(kitBase::robotModel::RobotModelInterface &rob
 
 	QAction * const action = mCustomWidgetsBar->addWidget(widget);
 	mToolBarWidgets[action] = &robotModel;
-
-	connect(action, &QAction::changed, this, [this]() {
-		for (QAction * const action : mCustomWidgetsBar->actions()) {
-			if (action->isVisible()) {
-				mCustomWidgetsBar->setVisible(true);
-				return;
-			}
-		}
-
-		mCustomWidgetsBar->hide();
-	});
 }
 
 qReal::ui::ConsoleDock &UiManager::robotConsole()

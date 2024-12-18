@@ -21,6 +21,7 @@
 #include <qrutils/nameNormalizer.h>
 #include <qrutils/parserErrorReporter.h>
 #include <qrgui/textEditor/qscintillaTextEdit.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 
 using namespace generatorBase;
 using namespace qReal;
@@ -63,14 +64,12 @@ bool RobotsGeneratorPluginBase::canGenerateTo(const QString &project)
 
 void RobotsGeneratorPluginBase::onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model)
 {
-	if (robotModels().count() == 1) {
-		kitBase::robotModel::RobotModelInterface * const ourModel = robotModels()[0];
-		for (const ActionInfo &action : customActions()) {
-			if (action.isAction()) {
-				action.action()->setVisible(ourModel == &model);
-			} else {
-				action.menu()->setVisible(ourModel == &model);
-			}
+	bool ourModel = robotModels().contains(&model);
+	for (const ActionInfo &action : customActions()) {
+		if (action.isAction()) {
+			action.action()->setVisible(ourModel);
+		} else {
+			action.menu()->setVisible(ourModel);
 		}
 	}
 }
@@ -129,19 +128,7 @@ QFileInfo RobotsGeneratorPluginBase::generateCodeForProcessing()
 	const Id &activeDiagram = mMainWindowInterface->activeDiagram();
 
 	if (!activeDiagram.isNull()) {
-		if (generateCode(false)) {
-			for (const QFileInfo &path : mCodePath.values(activeDiagram)) {
-				if (mTextManager->isDefaultPath(path.absoluteFilePath())
-					&& (!mTextManager->isModifiedEver(path.absoluteFilePath()))
-					&& !mTextManager->generatorName(path.absoluteFilePath()).compare(generatorName()))
-				{
-					fileInfo = path;
-					break;
-				}
-			}
-		} else {
-			return QFileInfo();
-		}
+		fileInfo = QFileInfo(generateCode(false));
 	} else if (auto code = dynamic_cast<text::QScintillaTextEdit *>(mMainWindowInterface->currentTab())) {
 		fileInfo = QFileInfo(mTextManager->path(code));
 		mTextManager->saveText(false);
@@ -182,7 +169,7 @@ QString RobotsGeneratorPluginBase::friendlyKitName() const
 	return QString();
 }
 
-bool RobotsGeneratorPluginBase::generateCode(bool openTab)
+QString RobotsGeneratorPluginBase::generateCode(bool openTab)
 {
 	mMainWindowInterface->errorReporter()->clearErrors();
 	mMainWindowInterface->errorReporter()->clear();
@@ -196,7 +183,7 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 	const QString generatedSrcPath = generator->generate(language().indent());
 
 	if (mMainWindowInterface->errorReporter()->wereErrors()) {
-		return false;
+		return QString();
 	}
 
 	const Id activeDiagram = mMainWindowInterface->activeDiagram();
@@ -210,7 +197,7 @@ bool RobotsGeneratorPluginBase::generateCode(bool openTab)
 		mMainWindowInterface->activateItemOrDiagram(activeDiagram);
 	}
 
-	return true;
+	return generatedSrcPath;
 }
 
 void RobotsGeneratorPluginBase::regenerateCode(const qReal::Id &diagram

@@ -17,6 +17,7 @@
 #include <twoDModel/robotModel/twoDRobotModel.h>
 
 #include "trikKitInterpreterCommon/declSpec.h"
+#include "trikNetwork/mailboxInterface.h"
 
 namespace qReal {
 class ErrorReporterInterface;
@@ -68,6 +69,9 @@ public:
 	/// Sets the error reporter for writing bubbling messages by shell emulator.
 	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter);
 
+	/// Sets the trik mailbox for twoDNetworkCommunicator execution.
+	void setMailbox(trikNetwork::MailboxInterface &mailbox);
+
 private:
 	kitBase::robotModel::robotParts::Device *createDevice(
 			const kitBase::robotModel::PortInfo &port
@@ -81,6 +85,7 @@ private:
 	twoDModel::engine::TwoDModelDisplayWidget *mDisplayWidget;
 	qReal::ErrorReporterInterface *mErrorReporter {};
 	QPolygonF mCollidingPolygon;
+	trikNetwork::MailboxInterface *mMailbox {}; //ownership TrikKitInterpreterPluginBase
 };
 
 }

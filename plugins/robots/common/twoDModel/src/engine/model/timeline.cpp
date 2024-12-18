@@ -36,6 +36,7 @@ Timeline::Timeline(QObject *parent)
 	}
 
 	connect(&mTimer, &QTimer::timeout, this, &Timeline::onTimer);
+	mTimer.setTimerType(Qt::TimerType::PreciseTimer);
 	mTimer.setInterval(defaultRealTimeInterval);
 }
 
@@ -44,8 +45,6 @@ void Timeline::start()
 	if (!mIsStarted) {
 		mIsStarted = true;
 		emit started();
-		emit tick(); /// hack so that constraints init-on would start immediatly
-		/// ideally they should be triggered on started()
 		gotoNextFrame();
 	}
 }
@@ -123,11 +122,7 @@ quint64 Timeline::timestamp() const
 
 utils::AbstractTimer *Timeline::produceTimer()
 {
-	auto connection = (QThread::currentThread() != this->thread()) ?
-				Qt::BlockingQueuedConnection : Qt::DirectConnection;
-	utils::AbstractTimer *t = nullptr;
-	QMetaObject::invokeMethod(this, [this, &t](){ t = produceTimerImpl();}, connection);
-	return t;
+	return produceTimerImpl();
 }
 
 void Timeline::setImmediateMode(bool immediateMode)

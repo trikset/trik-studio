@@ -14,8 +14,10 @@
 
 #include "rectangle.h"
 
+using namespace graphicsUtils;
+
 QRealRectangle::QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent)
-	:Item(parent), mRectangleImpl()
+	:Item(parent)
 {
 	mNeedScalingRect = true;
 	setPen(QPen(Qt::black));
@@ -29,14 +31,14 @@ QRealRectangle::QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item* par
 
 QRectF QRealRectangle::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
 }
 
 void QRealRectangle::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
-	mRectangleImpl.drawRectItem(painter, x1(), y1(), x2(), y2());
+	RectangleImpl::drawRectItem(painter, x1(), y1(), x2(), y2());
 }
 
 QPair<QDomElement, Item::DomElementTypes> QRealRectangle::generateItem(QDomDocument &document

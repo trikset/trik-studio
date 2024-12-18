@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2007-2021 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,10 @@ WaitForMessageGenerator::WaitForMessageGenerator(const qrRepo::RepoApi &repo
 		, QObject *parent)
 	: BindingGenerator(repo, customizer, id
 			, "messages/waitForMessage.t"
-			, { Binding::createDirect("@@VARIABLE@@", "Variable")
-				, Binding::createConverting("@@WAIT@@", "Synchronized"
-						, customizer.factory()->boolPropertyConverter(id, "Synchronized", false)) }
+			, { Binding::createConverting("@@WAIT@@", "Synchronized"
+					, customizer.factory()->boolPropertyConverter(id, "Synchronized", false))
+				, Binding::createConverting("@@VARIABLE@@", "Variable"
+					, customizer.factory()->functionBlockConverter(id, "Variable"))}
 			, parent)
 {
 }

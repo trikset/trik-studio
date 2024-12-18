@@ -67,7 +67,7 @@ bool InsertIntoEdgeCommand::execute()
 	if (mCreateCommand) {
 		mCreateCommand->redo();
 		mFirstId = mCreateCommand->results().first().id();
-		mLastId = mCreateCommand->results().first().id();
+		mLastId = mCreateCommand->results().last().id();
 	}
 
 	NodeElement *firstNode = mScene.getNodeById(mFirstId);

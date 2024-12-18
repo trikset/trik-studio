@@ -43,4 +43,4 @@ QMAKE_CXXFLAGS += \
     -isystem $$PWD/../thirdparty/googletest/googletest/googletest/include \
     -isystem $$PWD/../thirdparty/googletest/googletest/googlemock/include \
 
-links(googletest qrkernel)
+links(googletest)

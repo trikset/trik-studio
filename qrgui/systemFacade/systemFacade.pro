@@ -22,6 +22,8 @@ QT += widgets
 
 links(qrkernel qrutils qrgui-models qrgui-plugin-manager qrgui-text-editor qrgui-tool-plugin-interface)
 
+includes(qrgui)
+
 TRANSLATIONS = \
 	$$PWD/../../qrtranslations/ru/qrgui_system_facade_ru.ts \
 	$$PWD/../../qrtranslations/fr/qrgui_system_facade_fr.ts \
@@ -37,6 +39,7 @@ HEADERS += \
 	$$PWD/components/projectManager.h \
 	$$PWD/components/autosaver.h \
 	$$PWD/components/nullMainWindow.h \
+	$$PWD/components/versionsConverterManager.h \
 
 SOURCES += \
 	$$PWD/systemFacade.cpp \
@@ -46,3 +49,4 @@ SOURCES += \
 	$$PWD/components/projectManager.cpp \
 	$$PWD/components/autosaver.cpp \
 	$$PWD/components/nullMainWindow.cpp \
+	$$PWD/components/versionsConverterManager.cpp \

@@ -40,13 +40,16 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	connect(&mRobotModel.configuration(), &model::SensorsConfiguration::rotationChanged
 			, this, &RobotItem::updateSensorRotation);
 
+	connect(&mRobotModel.info(), &twoDModel::robotModel::TwoDRobotModel::settingsChanged
+			, this, &RobotItem::updateImage);
+
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
 	setZValue(ZValue::Robot);
 	const QSizeF robotSize = mRobotModel.info().size();
 	setX2(x1() + robotSize.width());
 	setY2(y1() + robotSize.height());
-	mMarkerPoint = QPointF(0, y2() / 2);  // Marker is situated behind the robot
+	mMarkerPoint = mRobotModel.info().rotationCenter();
 	QPen pen(this->pen());
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
@@ -80,7 +83,7 @@ void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* opti
 	Q_UNUSED(widget)
 	painter->setRenderHint(QPainter::Antialiasing);
 	painter->setRenderHint(QPainter::SmoothPixmapTransform);
-	mImage.draw(*painter, graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()).toRect());
+	mImage.draw(*painter, RectangleImpl::calcRect(x1(), y1(), x2(), y2()).toRect());
 }
 
 void RobotItem::drawExtractionForItem(QPainter* painter)
@@ -91,7 +94,7 @@ void RobotItem::drawExtractionForItem(QPainter* painter)
 
 QRectF RobotItem::boundingRect() const
 {
-	return mRectangleImpl.boundingRect(x1(), y1(), x2(), y2(), border);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), border);
 }
 
 QRectF RobotItem::calcNecessaryBoundingRect() const
@@ -258,14 +261,8 @@ RobotModel &RobotItem::robotModel()
 
 void RobotItem::returnToStartPosition()
 {
-	mRobotModel.setRotation(mRobotModel.startPositionMarker()->rotation());
-	// Here we want the center of the robot to be the position of the marker.
-	const QPointF shiftFromPicture = mapFromScene(pos());
-	const QPointF markerPos = mRobotModel.startPositionMarker()->scenePos();
-	const QPointF shiftToCenter = mapToScene(QPointF()) - mapToScene(boundingRect().center() - shiftFromPicture);
-	mRobotModel.setPosition(markerPos + shiftToCenter);
-
-	emit recoverRobotPosition(markerPos + shiftToCenter);
+	mRobotModel.returnToStartMarker();
+	emit recoverRobotPosition(mRobotModel.position());
 }
 
 QPolygonF RobotItem::collidingPolygon() const
@@ -323,4 +320,9 @@ void RobotItem::BeepItem::drawBeepArcs(QPainter *painter, const QPointF &center,
 	painter->drawArc(rect, 45 * 16, 90 * 16);
 	painter->drawArc(rect, 225 * 16, 90 * 16);
 	painter->restore();
+}
+
+void RobotItem::updateImage()
+{
+	mImage.loadFrom(mRobotModel.info().robotImage());
 }

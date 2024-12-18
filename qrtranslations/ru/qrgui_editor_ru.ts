@@ -185,23 +185,23 @@
         <translation>Создать новый элемент</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+64"/>
         <location line="+9"/>
         <source>Connect with the current item</source>
         <translation>Соединить с данным элементом</translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+308"/>
         <source>Replace by...</source>
         <translation>Заменить на...</translation>
     </message>
     <message>
-        <location line="+241"/>
+        <location line="+232"/>
         <source>Add child</source>
         <translation>Добавить элемент</translation>
     </message>
     <message>
-        <location line="+495"/>
+        <location line="+492"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>

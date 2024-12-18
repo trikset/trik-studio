@@ -32,6 +32,7 @@
 #include <qrgui/models/models.h>
 #include <qrgui/models/propertyEditorModel.h>
 #include <qrgui/plugins/pluginManager/toolPluginManager.h>
+#include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
 using namespace qReal;
 using namespace utils;
@@ -40,7 +41,6 @@ ProjectManagerWrapper::ProjectManagerWrapper(MainWindow *mainWindow, TextManager
 	: ProjectManager(mainWindow->models())
 	, mMainWindow(mainWindow)
 	, mTextManager(textManager)
-	, mVersionsConverter(*mMainWindow)
 {
 	setSaveFilePath();
 }
@@ -156,7 +156,14 @@ QString ProjectManagerWrapper::textFileFilters() const
 
 bool ProjectManagerWrapper::checkVersions()
 {
-	return mVersionsConverter.validateCurrentProject();
+	if (!mVersionsConverter.validateCurrentProject()) {
+		showMessage(QObject::tr("Can`t open project file"), mVersionsConverter.errorMessage());
+		return false;
+	}
+	if (mVersionsConverter.converted()) {
+		mMainWindow->errorReporter()->addInformation(mVersionsConverter.errorMessage());
+	}
+	return true;
 }
 
 void ProjectManagerWrapper::refreshApplicationStateAfterSave()
@@ -196,7 +203,9 @@ void ProjectManagerWrapper::refreshWindowTitleAccordingToSaveFile()
 {
 	const QString windowTitle = mMainWindow->toolManager().customizer()->windowTitle();
 	const QString saveFile = mAutosaver.isTempFile(mSaveFilePath) ? tr("Unsaved project") : mSaveFilePath;
-	mMainWindow->setWindowTitle(windowTitle + " " + saveFile);
+	if (qReal::SettingsManager::value("MainWindowTitle").toString().isEmpty()) {
+		mMainWindow->setWindowTitle(windowTitle + " " + saveFile);
+	}
 	refreshTitleModifiedSuffix();
 }
 

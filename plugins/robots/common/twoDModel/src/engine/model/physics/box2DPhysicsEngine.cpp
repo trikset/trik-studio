@@ -31,13 +31,6 @@
 #include "parts/box2DRobot.h"
 #include "parts/box2DItem.h"
 
-//#define BOX2D_DEBUG_PATH
-
-#ifdef BOX2D_DEBUG_PATH
-QGraphicsPathItem *debugPathBox2D = nullptr;
-#endif
-
-
 using namespace twoDModel::model::physics;
 using namespace parts;
 using namespace mathUtils;
@@ -236,80 +229,87 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 	const int positionIterations = 6;
 
 	model::RobotModel * const robot = mRobots.first();
-	if (mBox2DRobots[robot]) {
-		b2Body *rBody = mBox2DRobots[robot]->getBody();
-		float secondsInterval = timeInterval / 1000.0f;
+	if (!mBox2DRobots[robot]) {
+		return;
+	}
 
-		if (mBox2DRobots[robot]->isStopping()){
+	b2Body *rBody = mBox2DRobots[robot]->getBody();
+	float secondsInterval = timeInterval / 1000.0f;
+
+	if (mBox2DRobots[robot]->isStopping()){
+		mBox2DRobots[robot]->stop();
+	} else {
+		// sAdpt is the speed adaptation coefficient for physics engines
+		const int sAdpt = 10;
+		const qreal speed1 = pxToM(wheelLinearSpeed(*robot, robot->leftWheel())) / secondsInterval * sAdpt;
+		const qreal speed2 = pxToM(wheelLinearSpeed(*robot, robot->rightWheel())) / secondsInterval * sAdpt;
+
+		if (qAbs(speed1) + qAbs(speed2) < b2_epsilon) {
 			mBox2DRobots[robot]->stop();
-		} else {
-			// sAdpt is the speed adaptation coefficient for physics engines
-			const int sAdpt = 10;
-			const qreal speed1 = pxToM(wheelLinearSpeed(*robot, robot->leftWheel())) / secondsInterval * sAdpt;
-			const qreal speed2 = pxToM(wheelLinearSpeed(*robot, robot->rightWheel())) / secondsInterval * sAdpt;
-
-			if (qAbs(speed1) + qAbs(speed2) < b2_epsilon) {
-				mBox2DRobots[robot]->stop();
-				mLeftWheels[robot]->stop();
-				mRightWheels[robot]->stop();
-			}
-			else {
-				mLeftWheels[robot]->keepConstantSpeed(speed1);
-				mRightWheels[robot]->keepConstantSpeed(speed2);
-			}
+			mLeftWheels[robot]->stop();
+			mRightWheels[robot]->stop();
 		}
-
-		mPrevPosition = rBody->GetPosition();
-		mPrevAngle = rBody->GetAngle();
-
-		mWorld->Step(secondsInterval, velocityIterations, positionIterations);
-
-#ifdef BOX2D_DEBUG_PATH
-		delete debugPathBox2D;
-		QPainterPath path;
-
-		for(QGraphicsItem *item : mBox2DDynamicItems.keys()) {
-			if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
-				QPolygonF localCollidingPolygon = solidItem->collidingPolygon();
-				qreal lsceneAngle = angleToScene(mBox2DDynamicItems[item]->getRotation());
-				QMatrix m;
-				m.rotate(lsceneAngle);
-
-				QPointF firstP = localCollidingPolygon.at(0);
-				localCollidingPolygon.translate(-firstP.x(), -firstP.y());
-
-				QPainterPath lpath;
-				lpath.addPolygon(localCollidingPolygon);
-				QPainterPath lpathTR = m.map(lpath);
-				lpathTR.translate(firstP.x(), firstP.y());
-
-				path.addPath(lpathTR);
-			}
+		else {
+			mLeftWheels[robot]->keepConstantSpeed(speed1);
+			mRightWheels[robot]->keepConstantSpeed(speed2);
 		}
+	}
 
-		qreal angleRobot= angleToScene(mBox2DRobots[robot]->getBody()->GetAngle());
-		QPointF posRobot = positionToScene(mBox2DRobots[robot]->getBody()->GetPosition());
-		QGraphicsRectItem *rect1 = new QGraphicsRectItem(-25, -25, 60, 50);
-		QGraphicsRectItem *rect2 = new QGraphicsRectItem(-10, -6, 20, 10);
-		QGraphicsRectItem *rect3 = new QGraphicsRectItem(-10, -6, 20, 10);
+	mPrevPosition = rBody->GetPosition();
+	mPrevAngle = rBody->GetAngle();
 
-		rect1->setTransformOriginPoint(0, 0);
-		rect1->setRotation(angleRobot);
-		rect1->setPos(posRobot);
-		rect2->setTransformOriginPoint(0, 0);
-		rect2->setRotation(angleToScene(mBox2DRobots[robot]->getWheelAt(0)->getBody()->GetAngle()));
-		rect2->setPos(positionToScene(mBox2DRobots[robot]->getWheelAt(0)->getBody()->GetPosition()));
-		rect3->setTransformOriginPoint(0, 0);
-		rect3->setRotation(angleToScene(mBox2DRobots[robot]->getWheelAt(1)->getBody()->GetAngle()));
-		rect3->setPos(positionToScene(mBox2DRobots[robot]->getWheelAt(1)->getBody()->GetPosition()));
-		mScene->addItem(rect1);
-		mScene->addItem(rect2);
-		mScene->addItem(rect3);
-		QTimer::singleShot(20, [=](){
-			delete rect1;
-			delete rect2;
-			delete rect3;
-		});
+	mWorld->Step(secondsInterval, velocityIterations, positionIterations);
+
+	static volatile auto sThisFlagHelpsToAvoidClangError = true;
+	if ("If you want debug BOX2D, fix this expression to be false" && sThisFlagHelpsToAvoidClangError) {
+		return;
+	}
+
+	QPainterPath path;
+
+	for(QGraphicsItem *item : mBox2DDynamicItems.keys()) {
+		if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
+			QPolygonF localCollidingPolygon = solidItem->collidingPolygon();
+			qreal lsceneAngle = angleToScene(mBox2DDynamicItems[item]->getRotation());
+			QMatrix m;
+			m.rotate(lsceneAngle);
+
+			QPointF firstP = localCollidingPolygon.at(0);
+			localCollidingPolygon.translate(-firstP.x(), -firstP.y());
+
+			QPainterPath lpath;
+			lpath.addPolygon(localCollidingPolygon);
+			QPainterPath lpathTR = m.map(lpath);
+			lpathTR.translate(firstP.x(), firstP.y());
+
+			path.addPath(lpathTR);
+		}
+	}
+
+	qreal angleRobot= angleToScene(mBox2DRobots[robot]->getBody()->GetAngle());
+	QPointF posRobot = positionToScene(mBox2DRobots[robot]->getBody()->GetPosition());
+	QGraphicsRectItem *rect1 = new QGraphicsRectItem(-25, -25, 60, 50);
+	QGraphicsRectItem *rect2 = new QGraphicsRectItem(-10, -6, 20, 10);
+	QGraphicsRectItem *rect3 = new QGraphicsRectItem(-10, -6, 20, 10);
+
+	rect1->setTransformOriginPoint(0, 0);
+	rect1->setRotation(angleRobot);
+	rect1->setPos(posRobot);
+	rect2->setTransformOriginPoint(0, 0);
+	rect2->setRotation(angleToScene(mBox2DRobots[robot]->getWheelAt(0)->getBody()->GetAngle()));
+	rect2->setPos(positionToScene(mBox2DRobots[robot]->getWheelAt(0)->getBody()->GetPosition()));
+	rect3->setTransformOriginPoint(0, 0);
+	rect3->setRotation(angleToScene(mBox2DRobots[robot]->getWheelAt(1)->getBody()->GetAngle()));
+	rect3->setPos(positionToScene(mBox2DRobots[robot]->getWheelAt(1)->getBody()->GetPosition()));
+	mScene->addItem(rect1);
+	mScene->addItem(rect2);
+	mScene->addItem(rect3);
+	QTimer::singleShot(20, [this, rect1, rect2, rect3](){
+		for (auto &&rect: {rect1, rect2, rect3}) {
+			mScene->removeItem(rect);
+			delete rect;
+		}
+	});
 
 
 //		 uncomment it for watching mutual position of robot and wheels (polygon form)
@@ -317,22 +317,24 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(0)->mDebuggingDrawPolygon);
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(1)->mDebuggingDrawPolygon);
 
-		const QMap<const view::SensorItem *, Box2DItem *> sensors = mBox2DRobots[robot]->getSensors();
-		for (Box2DItem * sensor : sensors.values()) {
-			const b2Vec2 position = sensor->getBody()->GetPosition();
-			QPointF scenePos = positionToScene(position);
-			path.addEllipse(scenePos, 10, 10);
-		}
-
-		debugPathBox2D = new QGraphicsPathItem(path);
-		debugPathBox2D->setBrush(Qt::blue);
-		debugPathBox2D->setPen(QPen(QColor(Qt::red)));
-		debugPathBox2D->setZValue(101);
-		mScene->addItem(debugPathBox2D);
-		mScene->update();
-
-#endif
+	const QMap<const view::SensorItem *, Box2DItem *> sensors = mBox2DRobots[robot]->getSensors();
+	for (Box2DItem * sensor : sensors.values()) {
+		const b2Vec2 position = sensor->getBody()->GetPosition();
+		QPointF scenePos = positionToScene(position);
+		path.addEllipse(scenePos, 10, 10);
 	}
+
+	static QGraphicsPathItem *debugPathBox2D = nullptr;
+	if (debugPathBox2D) {
+		mScene->removeItem(debugPathBox2D);
+		delete debugPathBox2D;
+	}
+	debugPathBox2D = new QGraphicsPathItem(path);
+	debugPathBox2D->setBrush(Qt::blue);
+	debugPathBox2D->setPen(QPen(QColor(Qt::red)));
+	debugPathBox2D->setZValue(101);
+	mScene->addItem(debugPathBox2D);
+	mScene->update();
 }
 
 void Box2DPhysicsEngine::wakeUp()
@@ -411,9 +413,7 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 		Box2DItem *box2dItem = new Box2DItem(this, wallItem, pos, angleToBox2D(item->rotation()));
 		mBox2DResizableItems[item] = box2dItem;
 		return;
-	}
-
-	if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
+	} else if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
 		QPolygonF collidingPolygon = solidItem->collidingPolygon();
 		if (itemTracked(item)) {
 			if (solidItem->bodyType() == items::SolidItem::DYNAMIC) {
@@ -444,14 +444,9 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 
 void Box2DPhysicsEngine::itemRemoved(QGraphicsItem * const item)
 {
-	if (mBox2DResizableItems.contains(item)) {
-		delete mBox2DResizableItems[item];
-		mBox2DResizableItems.remove(item);
-	}
-
-	if (mBox2DDynamicItems.contains(item)) {
-		mBox2DDynamicItems.remove(item);
-	}
+	delete mBox2DResizableItems.value(item);
+	mBox2DResizableItems.remove(item);
+	mBox2DDynamicItems.remove(item);
 }
 
 b2World &Box2DPhysicsEngine::box2DWorld()

@@ -21,7 +21,7 @@
 
 #include "preferencesPages/behaviourPage.h"
 #include "preferencesPages/editorPage.h"
-#include "preferencesPages/miscellaniousPage.h"
+#include "preferencesPages/miscellaneousPage.h"
 #include "preferencesPages/featuresPage.h"
 
 using namespace qReal::gui;
@@ -44,7 +44,7 @@ void PreferencesDialog::init()
 {
 	PreferencesPage *behaviourPage = new PreferencesBehaviourPage(mUi->pageContentWidget);
 	// Debugger page removed due to #736
-	PreferencesMiscellaniousPage *miscellaniousPage = new PreferencesMiscellaniousPage(mUi->pageContentWidget);
+	PreferencesMiscellaneousPage *miscellaneousPage = new PreferencesMiscellaneousPage(mUi->pageContentWidget);
 	PreferencesPage *editorPage = new PreferencesEditorPage(mUi->pageContentWidget);
 
 	connect(mUi->listWidget, &QListWidget::clicked, this, &PreferencesDialog::chooseTab);
@@ -56,7 +56,7 @@ void PreferencesDialog::init()
 	connect(mUi->importButton, &QAbstractButton::clicked, this, &PreferencesDialog::importSettings);
 
 	registerPage(tr("Behaviour"), behaviourPage);
-	registerPage(tr("Miscellanious"), miscellaniousPage);
+	registerPage(tr("Miscellaneous"), miscellaneousPage);
 	registerPage(tr("Editor"), editorPage);
 
 	const int currentTab = SettingsManager::value("currentPreferencesTab").toInt();

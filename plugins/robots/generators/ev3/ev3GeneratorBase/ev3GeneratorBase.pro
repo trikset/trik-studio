@@ -20,6 +20,7 @@ include(../../../../../global.pri)
 
 QT += widgets
 
+CONFIG += trikqscintilla2
 
 includes(plugins/robots/generators/ev3/ev3GeneratorBase \
 		plugins/robots/generators/generatorBase \

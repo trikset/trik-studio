@@ -74,6 +74,11 @@ public:
 	/// Returns set that may let quickly determine should we update palette or no.
 	const QSet<PaletteElement> &elementsSet() const;
 
+	bool readyToRefresh();
+
+signals:
+	void signalReadyToRefresh();
+
 protected:
 	void mousePressEvent(QMouseEvent *event);
 
@@ -122,6 +127,7 @@ private:
 	QHash<Id, DraggableElement *> mPaletteElements;  // Takes ownership.
 	QHash<Id, QTreeWidgetItem *> mPaletteItems;  // Takes ownership.
 	QHash<QTreeWidgetItem *, bool> mItemsVisible;
+	QList<DraggableElement *> mDraggableElements; // Takes ownership
 };
 
 }

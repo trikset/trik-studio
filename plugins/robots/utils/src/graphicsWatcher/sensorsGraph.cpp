@@ -64,7 +64,7 @@ void SensorsGraph::setTimeline(utils::TimelineInterface &timeline)
 {
 	mUpdateTimer.reset(timeline.produceTimer());
 	mUpdateTimer->setInterval(mUpdateInterval);
-	mUpdateTimer->setRepeatable(true);
+	mUpdateTimer->setSingleShot(false);
 	mPlotFrame->setTimeline(timeline);
 	connect(&*mUpdateTimer, &AbstractTimer::timeout, this, &SensorsGraph::updateValues);
 }

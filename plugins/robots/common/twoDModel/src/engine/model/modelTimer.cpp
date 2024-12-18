@@ -22,16 +22,16 @@ ModelTimer::ModelTimer(const Timeline *timeline)
 	, mListening(false)
 	, mTimePast(0)
 	, mInterval(0)
-	, mRepeatable(false)
+	, mSingleShot(true)
 {
-	connect(timeline, SIGNAL(tick()), this, SLOT(onTick()));
+	connect(timeline, &Timeline::tick, this, &ModelTimer::onTick);
 }
 
 ModelTimer::~ModelTimer()
 {
 }
 
-bool ModelTimer::isTicking() const
+bool ModelTimer::isActive() const
 {
 	return mListening;
 }
@@ -79,15 +79,20 @@ void ModelTimer::setInterval(int ms)
 	mInterval = ms;
 }
 
-void ModelTimer::setRepeatable(bool repeatable)
+void ModelTimer::setSingleShot(bool isSingleShot)
 {
-	mRepeatable = repeatable;
+	mSingleShot = isSingleShot;
+}
+
+bool ModelTimer::isSingleShot()
+{
+	return mSingleShot;
 }
 
 void ModelTimer::onTimeout()
 {
 	AbstractTimer::onTimeout();
-	if (mRepeatable) {
+	if (!mSingleShot) {
 		start();
 	}
 }

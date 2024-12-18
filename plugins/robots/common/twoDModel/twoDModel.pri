@@ -62,6 +62,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/gyroscope.h \
 	$$PWD/include/twoDModel/robotModel/parts/accelerometer.h \
 	$$PWD/include/twoDModel/robotModel/parts/marker.h \
+	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
 	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
 
@@ -73,6 +74,7 @@ HEADERS += \
 	$$PWD/src/engine/view/scene/robotItem.h \
 	$$PWD/src/engine/view/scene/sensorItem.h \
 	$$PWD/src/engine/view/scene/rangeSensorItem.h \
+	$$PWD/src/engine/view/scene/lidarSensorItem.h \
 	$$PWD/src/engine/view/parts/palette.h \
 	$$PWD/src/engine/view/parts/actionsBox.h \
 	$$PWD/src/engine/view/parts/gridParameters.h \
@@ -105,6 +107,7 @@ HEADERS += \
 	$$PWD/src/engine/items/imageItem.h \
 	$$PWD/src/engine/items/skittleItem.h \
 	$$PWD/src/engine/items/ballItem.h \
+	$$PWD/src/engine/items/commentItem.h \
 	$$PWD/src/engine/items/startPosition.h \
 	$$PWD/src/engine/items/regions/regionItem.h \
 	$$PWD/src/engine/items/regions/ellipseRegion.h \
@@ -139,6 +142,7 @@ SOURCES += \
 	$$PWD/src/engine/view/scene/robotItem.cpp \
 	$$PWD/src/engine/view/scene/sensorItem.cpp \
 	$$PWD/src/engine/view/scene/rangeSensorItem.cpp \
+	$$PWD/src/engine/view/scene/lidarSensorItem.cpp \
 	$$PWD/src/engine/view/parts/palette.cpp \
 	$$PWD/src/engine/view/parts/actionsBox.cpp \
 	$$PWD/src/engine/view/parts/gridParameters.cpp \
@@ -171,6 +175,7 @@ SOURCES += \
 	$$PWD/src/engine/items/imageItem.cpp \
 	$$PWD/src/engine/items/skittleItem.cpp \
 	$$PWD/src/engine/items/ballItem.cpp \
+	$$PWD/src/engine/items/commentItem.cpp \
 	$$PWD/src/engine/items/startPosition.cpp \
 	$$PWD/src/engine/items/regions/regionItem.cpp \
 	$$PWD/src/engine/items/regions/ellipseRegion.cpp \
@@ -211,6 +216,7 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/gyroscope.cpp \
 	$$PWD/src/robotModel/parts/accelerometer.cpp \
 	$$PWD/src/robotModel/parts/marker.cpp \
+	$$PWD/src/robotModel/parts/lidar.cpp \
 	$$PWD/src/blocks/markerDownBlock.cpp \
 	$$PWD/src/blocks/markerUpBlock.cpp \
 	$$PWD/src/engine/model/physics/box2DPhysicsEngine.cpp \

@@ -56,6 +56,7 @@ DraggableElement::DraggableElement(MainWindow &mainWindow
 	, mEditorManagerProxy(editorManagerProxy)
 	, mMainWindow(mainWindow)
 {
+	readyForDelete = true;
 	QHBoxLayout *layout = new QHBoxLayout(this);
 	layout->setContentsMargins(0, 4, 0, 4);
 
@@ -95,6 +96,11 @@ DraggableElement::DraggableElement(MainWindow &mainWindow
 	setCursor(Qt::OpenHandCursor);
 	setAttribute(Qt::WA_AcceptTouchEvents);
 	setObjectName(mData.name());
+}
+
+bool DraggableElement::getReadyForDelete() const
+{
+	return readyForDelete;
 }
 
 QIcon DraggableElement::icon() const
@@ -375,6 +381,7 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 			menu->exec(QCursor::pos());
 		}
 	} else {
+		readyForDelete = false;
 		QDrag *drag = new QDrag(this);
 		drag->setMimeData(mimeData(elementId));
 
@@ -385,6 +392,8 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 		}
 
 		drag->exec(Qt::CopyAction);
+		readyForDelete = true;
+		emit signalReadyForDelete();
 	}
 }
 

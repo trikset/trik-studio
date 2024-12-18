@@ -1,0 +1,157 @@
+name: Installer action
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      container_name:
+        required: false
+        type: string
+        default: ""
+      artifact_name:
+        required: true
+        type: string
+      concurrency:
+        required: false
+        type: number
+        default: 0
+      shell:
+        required: false
+        type: string
+        default: bash
+      deploy_archive:
+        required: false
+        type: boolean
+        default: false
+jobs:
+  job:
+    defaults:
+      run:
+        shell: ${{ inputs.shell }}
+
+    runs-on: ${{ inputs.os }}
+    container: ${{ inputs.container_name }}
+
+    steps:
+
+    - name: Setup msys2
+      uses: msys2/setup-msys2@v2
+      with:
+        path-type: inherit
+        msystem: MINGW64
+      if: startsWith(inputs.shell, 'msys')
+
+    - name: Install dependencies
+      run: |
+        apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git-core p7zip curl sudo
+        sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
+      if: startsWith(inputs.container_name, 'alt')
+
+    - name: Install dependencies
+      run: yum install -y epel-release && yum update -y && yum install -y --setopt=install_weak_deps=False git-core findutils p7zip sudo
+      if: startsWith(inputs.container_name, 'rocky')
+
+    - name: Install dependencies
+      run: pacman -Sy && pacman -S git p7zip sudo --noconfirm
+      if: startsWith(inputs.container_name, 'arch')
+
+    - name: Install dependencies
+      run: HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_AUTO_UPDATE=1 brew install p7zip || brew upgrade p7zip
+      if: startsWith(inputs.os, 'mac')
+      
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - name: Download installer artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.artifact_name }}
+
+    - name: Install trik-studio and dll search
+      run: |
+        ls
+        export UNINSTALL_SCRIPT_PATH=$GITHUB_WORKSPACE/trik_studio_uninstallscript.qs
+        export INSTALLER_EXT_NAME=$(ls -1d *-installer-* | head -n 1)
+        export INSTALLER_NAME="${INSTALLER_EXT_NAME%.*}"
+        buildScripts/github/install_installer_${{ runner.os }}.sh
+      env:
+        CONCURRENCY: ${{ inputs.concurrency }}
+
+    - name: Push zip archive to dl
+      if: ${{ inputs.deploy_archive && github.event_name != 'pull_request' && github.repository_owner == 'trikset' && startsWith(inputs.os, 'windows') }}
+      run: |
+        BRANCH_NAME="${GITHUB_REF#refs/*/}" && BRANCH_NAME=${BRANCH_NAME//\//-}
+        7z a -r trik-studio.zip "$APP_DIR"
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
+        rsync -v --rsh="ssh -o StrictHostKeyChecking=no" trik-studio.zip ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-"$BRANCH_NAME"-x86_64.zip
+
+    - name: Reinstall trik-studio and dll search
+      run: |
+        export UNINSTALL_SCRIPT_PATH=$GITHUB_WORKSPACE/trik_studio_uninstallscript.qs
+        export INSTALLER_EXT_NAME=$(ls -1d *-installer-* | head -n 1)
+        export INSTALLER_NAME="${INSTALLER_EXT_NAME%.*}"
+        buildScripts/github/install_installer_${{ runner.os }}.sh
+      env:
+        CONCURRENCY: ${{ inputs.concurrency }}
+
+    - name: Downloads minimal tests for Diagram mode
+      run: |
+        curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
+        7z x tests.7z || 7za x tests.7z
+        
+    - name: Prepare environment variable
+      run: |
+        echo "QT_QPA_PLATFORM=offscreen" >> $GITHUB_ENV
+        echo "QT_DEBUG_PLUGINS=1" >> $GITHUB_ENV
+        TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1) && echo "TWOD_EXEC_NAME=$TWOD_EXEC_NAME" >> $GITHUB_ENV
+        PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1) && echo "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
+        if [[ "$RUNNER_OS" != "Windows" ]]; then
+          TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
+          TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
+          echo "TRIK_PYTHONPATH=$TRIK_PYTHONPATH" >> $GITHUB_ENV
+        fi
+        
+    - name: Run minimal tests in diagram mode
+      run: |
+        for i in "$GITHUB_WORKSPACE"/testing_small/*; do "$TWOD_EXEC_NAME" --close -s 5 "$i"; done
+        rm -rf tests.7z testing_small
+      timeout-minutes: 15
+        
+    - name: Downloads minimal tests for script mode
+      run: |
+        curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200706-patched/solutions.7z"
+        7z x tests.7z || 7za x tests.7z
+        
+    - name: Run minimal JavaScript interpeter tests in direct script mode
+      run: |
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".js --generate-mode javascript --close \
+         -s 5 --script-path "$i".js -m script "$i"; done
+      if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
+       
+    - name: Run minimal Python interpeter tests in direct script mode
+      run: |
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
+         --close -s 5 --script-path "$i".py -m script "$i"; done
+      if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
+      
+    - name: Run minimal Javascript interpeter tests as fields in .qrs (For backward compatibility)
+      run: |
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".js "$i" \
+         && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
+      if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15
+      
+    - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
+      run: |
+        for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
+         && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
+      if: ${{ !startsWith(inputs.os, 'macos') }}
+      timeout-minutes: 15

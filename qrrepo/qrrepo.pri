@@ -12,11 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-links(qrkernel qrutils quazip)
+QT += xml
 
 clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
+
+DEFINES += QRREPO_LIBRARY
+
 CONFIG *= link_pkgconfig
 PKGCONFIG *= zlib
+
+links(qrkernel qrutils)
+
+use_system_quazip {
+    PKGCONFIG *= quazip
+    DEFINES += TS_USE_SYSTEM_QUAZIP
+} else {
+    links(quazip)
+    INCLUDEPATH += $$GLOBAL_PWD/thirdparty/quazip/quazip/
+    DEFINES += QUAZIP_STATIC
+}
 
 HEADERS += \
 	$$PWD/private/repository.h \
@@ -59,6 +73,3 @@ HEADERS += \
 	$$PWD/exceptions/couldNotOpenDestinationFileException.h \
 	$$PWD/exceptions/couldNotOpenInputFileException.h \
 
-DEFINES += QRREPO_LIBRARY
-
-QT += xml

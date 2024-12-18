@@ -33,6 +33,7 @@
 #include "trikEmulation/trikaccelerometeradapter.h"
 #include "trikEmulation/trikGyroscopeAdapter.h" /// @todo: replace with forward refs
 #include "trikEmulation/trikProxyMarker.h"
+#include "trikEmulation/triklidaremu.h"
 
 namespace utils {
 class AbstractTimer;
@@ -65,9 +66,12 @@ public:
 
 	void reinitImitationCamera();
 
+	QDir getCurrentDir() const;
+
 public slots:
 	void configure(const QString &, const QString &) override {}
 	void playSound(const QString &) override {}
+	void playTone(int, int msDuration) override;
 	void say(const QString &msg) override;
 	void stop() override;
 	trikControl::MotorInterface *motor(const QString &port) override;
@@ -83,6 +87,7 @@ public slots:
 	trikControl::LineSensorInterface *lineSensor(const QString &port) override;
 	trikControl::ColorSensorInterface *colorSensor(const QString &port) override;
 	trikControl::ObjectSensorInterface *objectSensor(const QString &port) override;
+	trikControl::LidarInterface *lidar() override;
 	trikControl::SoundSensorInterface *soundSensor(const QString &) override {return nullptr;}
 	trikControl::EncoderInterface *encoder(const QString &port) override;
 	trikControl::BatteryInterface *battery() override {return nullptr;}
@@ -92,26 +97,21 @@ public slots:
 	trikControl::GamepadInterface *gamepad() override {return nullptr;}
 	trikControl::FifoInterface *fifo(const QString &) override {return nullptr;}
 	trikControl::I2cDeviceInterface *i2c(int, int) override {return nullptr;}
+	trikControl::IrCameraInterface *irCamera() override {return nullptr;}
 
-	void playTone(int, int) override {}
 	QVector<uint8_t> getStillImage() override;
 	trikControl::EventDeviceInterface *eventDevice(const QString &) override {return nullptr;}
 	void stopEventDevice(const QString &) override {}
 
 	/// some ScriptExecution control replacements. @todo: factor out in the separate class
-	int random(int from, int to);
-	void wait(int milliseconds);
-	quint64 time() const;
 	QStringList readAll(const QString &path);
-	/// In trikRuntime returns QTimer, but we need timer with emulated 2D time. Hopefully this is enough
-	utils::AbstractTimer *timer(int milliseconds);
+
 	void processSensors(bool isRunning = true);
 
 signals:
 	void error(const QString &msg);
 	void warning(const QString &msg);
 	void log(const QString &msg);
-	void stopWaiting();
 
 private:
 	void printToShell(const QString &msg);
@@ -128,6 +128,7 @@ private:
 	QHash<QString, QSharedPointer<TrikEncoderAdapter>> mEncoders;
 	QHash<QString, QSharedPointer<TrikLineSensorAdapter>> mLineSensors;
 	QHash<QString, QSharedPointer<TrikColorSensorAdapter>> mColorSensors;
+	QHash<QString, QSharedPointer<TrikLidarEmu>> mLidars;
 	QScopedPointer<TrikLedAdapter> mLed;
 	QScopedPointer<TrikAccelerometerAdapter> mAccelerometer;
 	QScopedPointer<TrikGyroscopeAdapter> mGyroscope;

@@ -20,6 +20,7 @@
 #include "trikKitInterpreterCommon/trikbrick.h"
 #include "trikScriptRunner/trikScriptRunner.h"
 #include <trikNetwork/mailboxInterface.h>
+#include "twoDExecutionControl.h"
 
 #include "declSpec.h"
 
@@ -32,6 +33,7 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT TrikTextualInterpreter
 
 public:
 	TrikTextualInterpreter(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model
+			       , trikNetwork::MailboxInterface *mailbox
 						   , bool enablePython = false);
 	~TrikTextualInterpreter() override;
 
@@ -59,12 +61,14 @@ private slots:
 
 private:
 	QString initInputs(const QString &inputs) const;
+	QString addCodeAfterImport(const QString &script, const QString &addCode) const;
 
 	//QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
 	bool mRunning { false };
 
 	TrikBrick mBrick;
-	trikNetwork::MailboxInterface *mMailbox {};
+	trikNetwork::MailboxInterface *mMailbox {}; // ownership --- TrikKitInterpreterPluginBase
+	TwoDExecutionControl *mExecutionControl {};
 	trikScriptRunner::TrikScriptRunner mScriptRunner;
 	qReal::ErrorReporterInterface *mErrorReporter {};
 };

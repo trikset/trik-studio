@@ -23,7 +23,9 @@ using namespace interpreterCore;
 
 QString Customizer::windowTitle() const
 {
-	return QObject::tr("TRIK Studio") + " " + productVersion();
+	return qReal::SettingsManager::value("MainWindowTitle"
+				  , QObject::tr("TRIK Studio") + " " + productVersion())
+		.toString();
 }
 
 QIcon Customizer::applicationIcon() const

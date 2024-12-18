@@ -282,7 +282,7 @@ void NxtFlashTool::readNxtCompileData()
 			mCompileState = qMax(link, mCompileState);
 		}
 
-		if (message.contains("Compiling NXT program done")) {
+		if (message.contains("Finished compiling NXT program")) {
 			if (mCompileState == link) {
 				mCompileState = done;
 				uploadToBrick(mSource);

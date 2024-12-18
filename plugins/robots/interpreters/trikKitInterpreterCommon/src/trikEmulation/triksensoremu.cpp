@@ -24,6 +24,18 @@ TrikSensorEmu::TrikSensorEmu(kitBase::robotModel::robotParts::ScalarSensor *sens
 int TrikSensorEmu::read()
 {
 	//mSensor->read(); test crash fixes
-	QMetaObject::invokeMethod(mSensor, "read");
+
+	/* Sensor values are calculated by timer in the UI Thread
+	 * (subscription in plugins/robots/interpreters/trikKitInterpreterCommon/src/TrikBrick)
+	 * and are also forced through TrikScriptRunner when calculating sensor values (except for Gyroscope::read).
+	 * This heavily loads the UI thread, and in incorrect code like
+	 *	while (true) { brick.sensor("A1").read() }
+	 * the UI thread gets blocked by sensor reading tasks, making the user interface non-functional.
+	 * As a hot-fix, it is proposed to calculate values using Qt::BlockingQueuedConnection,
+	 * which will force waiting for the sensor value calculation instead of queuing new tasks
+	 * in the UI thread every few milliseconds (this is critical for reading from sensors
+	 * whose handlers take a relatively long time, as the queue contains many reading tasks
+	 * while returning old (already calculated) sensor values, which forces new tasks to be queued). */
+	QMetaObject::invokeMethod(mSensor, "read", Qt::BlockingQueuedConnection);
 	return mSensor->lastData(); // not best, race conditions?
 }

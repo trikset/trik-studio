@@ -15,7 +15,6 @@
 #pragma once
 
 #include <kitBase/devicesConfigurationProvider.h>
-#include <qrgui/plugins/toolPluginInterface/usedInterfaces/graphicalModelAssistInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
 #include "blocksTable.h"
@@ -36,6 +35,7 @@ public:
 	/// @param blocksTable - contains "code-behind" objects for blocks.
 	/// @param errorReporter - error reporter to report errors to.
 	Autoconfigurer(const qReal::GraphicalModelAssistInterface &graphicalModelApi
+			, const qReal::LogicalModelAssistInterface &logicalModelApi
 			, BlocksTable &blocksTable
 			, qReal::ErrorReporterInterface &errorReporter);
 
@@ -46,6 +46,7 @@ public:
 
 private:
 	const qReal::GraphicalModelAssistInterface &mGraphicalModelApi;
+	const qReal::LogicalModelAssistInterface &mLogicalModelApi;
 	BlocksTable &mBlocksTable;
 	qReal::ErrorReporterInterface &mErrorReporter;
 };

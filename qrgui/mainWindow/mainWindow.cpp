@@ -46,8 +46,8 @@
 #include <qrutils/smartDock.h>
 #include <qrutils/graphicsUtils/animatedEffects.h>
 #include <qrutils/xmlUtils.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciprinter.h>
-#include <thirdparty/qscintilla/Qt4Qt5/Qsci/qsciscintillabase.h>
+#include <Qsci/qsciprinter.h>
+#include <Qsci/qsciscintillabase.h>
 
 #include <qrgui/controller/controller.h>
 #include <qrgui/dialogs/findReplaceDialog.h>
@@ -114,6 +114,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mSceneCustomizer(new SceneCustomizer())
 	, mInitialFileToOpen(fileToOpen)
 {
+	QLOG_INFO() << "MainWindow: screen DPI is" << logicalDpiX();
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
 	setWindowTitle("QReal");
@@ -129,7 +130,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	mProjectManager.reset(new ProjectManagerWrapper(this, &*mTextManager));
 
 	initRecentProjectsMenu();
-	initToolManager();
+	customizeWindow();
 	initTabs();
 
 	mSplashScreen->setProgress(20);
@@ -306,7 +307,8 @@ void MainWindow::connectActions()
 
 	connect(mUi->actionHelp, &QAction::triggered, this, &MainWindow::showHelp);
 	mUi->actionAbout->setText(mUi->actionAbout->text()
-			+ mToolManager->customizer()->windowTitle().remove(mToolManager->customizer()->productVersion()));
+			+ mProjectManager->toolManager().customizer()->windowTitle().remove(
+			mProjectManager->toolManager().customizer()->productVersion()));
 	connect(mUi->actionAbout, &QAction::triggered, this, &MainWindow::showAbout);
 	connect(mUi->actionOpenLogs, &QAction::triggered, this, &MainWindow::openLogs);
 
@@ -336,6 +338,7 @@ void MainWindow::connectActions()
 	connect(&*mController, &Controller::modifiedChanged, &*mProjectManager, &ProjectManagerWrapper::setStackUnsaved);
 
 	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::changeWindowTitle);
+	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::sceneSelectionChanged);
 	connect(&*mTextManager, &text::TextManager::textChanged, this, &MainWindow::setTextChanged);
 	connect(&*mTextManager, &text::TextManager::textChanged, mUi->actionUndo, &QAction::setEnabled);
 
@@ -399,7 +402,7 @@ MainWindow::~MainWindow()
 	SettingsManager::instance()->saveData();
 	SettingsListener::disconnectSource(this);
 	delete mUi; mUi = nullptr;
-	mToolManager.reset();
+
 	// TODO: This is a workaround for crash on macOS.
 	// Seems like this crash is caused by memory corruption somewhere else.
 	// If the statusBar with children is deleted before other controls, this helps.
@@ -508,7 +511,7 @@ void MainWindow::activateItemOrDiagram(const QModelIndex &idx, bool setSelected)
 	if (numTab != -1) {
 		mUi->tabs->setCurrentIndex(numTab);
 		const Id currentTabId = getCurrentTab()->editorViewScene().rootItemId();
-		mToolManager->activeTabChanged(TabInfo(currentTabId, getCurrentTab()));
+		mProjectManager->toolManager().activeTabChanged(TabInfo(currentTabId, getCurrentTab()));
 	} else {
 		openNewTab(idx);
 	}
@@ -556,13 +559,12 @@ void MainWindow::sceneSelectionChanged()
 	if (!getCurrentTab()) {
 		return;
 	}
+	const IdList selectedIds = getCurrentTab()->editorViewScene().selectedIds();
 
-	const IdList selectedIds = dynamic_cast<EditorViewScene *>(sender())->selectedIds();
-
-	if (selectedIds.isEmpty()) {
+	if (selectedIds.length() != 1) {
 		mUi->graphicalModelExplorer->setCurrentIndex(QModelIndex());
 		mPropertyModel->clearModelIndexes();
-	} else if (selectedIds.length() == 1) {
+	} else {
 		const Id &singleSelected = selectedIds.first();
 		setIndexesOfPropertyEditor(singleSelected);
 
@@ -786,7 +788,7 @@ void MainWindow::deleteFromGraphicalExplorer()
 
 void MainWindow::changeWindowTitle()
 {
-	const QString windowTitle = mToolManager->customizer()->windowTitle();
+	const QString windowTitle = mProjectManager->toolManager().customizer()->windowTitle();
 
 	text::QScintillaTextEdit *area = dynamic_cast<text::QScintillaTextEdit *>(currentTab());
 	if (area) {
@@ -823,11 +825,11 @@ void MainWindow::registerEditor(EditorInterface &editor)
 void MainWindow::setTextChanged(text::QScintillaTextEdit *editor, bool changed)
 {
 	static QByteArray CHANGED_MARK = "*";
-	const QString windowTitle = mToolManager->customizer()->windowTitle();
+	const QString windowTitle = mProjectManager->toolManager().customizer()->windowTitle();
 	const QString chIndicator = changed ? CHANGED_MARK : "";
 	const QString filePath = mTextManager->path(editor);
 	setWindowTitle(windowTitle + " " + chIndicator + filePath);
-	const int index = mUi->tabs->currentIndex();
+	const int index = mUi->tabs->indexOf(editor);
 	mUi->tabs->setTabText(index, mUi->tabs->tabText(index).remove(CHANGED_MARK, Qt::CaseInsensitive) + chIndicator);
 }
 
@@ -839,7 +841,7 @@ void MainWindow::removeReferences(const Id &id)
 
 void MainWindow::showAbout() const
 {
-	QDesktopServices::openUrl(QUrl(mToolManager->customizer()->aboutText()));
+	QDesktopServices::openUrl(QUrl(mProjectManager->toolManager().customizer()->aboutText()));
 }
 
 void MainWindow::showHelp()
@@ -954,7 +956,7 @@ void MainWindow::closeTab(int index)
 void MainWindow::showPreferencesDialog()
 {
 	if (mPreferencesDialog->exec() == QDialog::Accepted) {
-		mToolManager->updateSettings();
+		mProjectManager->toolManager().updateSettings();
 	}
 
 	mProjectManager->reinitAutosaver();
@@ -1281,11 +1283,11 @@ void MainWindow::currentTabChanged(int newIndex)
 
 	if (isEditorTab) {
 		const Id currentTabId = getCurrentTab()->mvIface().rootId();
-		mToolManager->activeTabChanged(TabInfo(currentTabId, getCurrentTab()));
+		mProjectManager->toolManager().activeTabChanged(TabInfo(currentTabId, getCurrentTab()));
 	} else if (text::QScintillaTextEdit * const text = dynamic_cast<text::QScintillaTextEdit *>(currentTab())) {
-		mToolManager->activeTabChanged(TabInfo(mTextManager->path(text), text));
+		mProjectManager->toolManager().activeTabChanged(TabInfo(mTextManager->path(text), text));
 	} else {
-		mToolManager->activeTabChanged(TabInfo(currentTab()));
+		mProjectManager->toolManager().activeTabChanged(TabInfo(currentTab()));
 	}
 
 	emit rootDiagramChanged();
@@ -1364,7 +1366,7 @@ PropertyEditorModel &MainWindow::propertyModel()
 
 ToolPluginManager &MainWindow::toolManager()
 {
-	return *mToolManager;
+	return mProjectManager->toolManager();
 }
 
 void MainWindow::showGrid(bool isChecked)
@@ -1794,7 +1796,7 @@ void MainWindow::initPluginsAndStartWidget()
 		initScriptAPI();
 	}
 
-	BrandManager::configure(mToolManager.data());
+	BrandManager::configure(&mProjectManager->toolManager());
 	mPreferencesDialog->setWindowIcon(BrandManager::applicationIcon());
 	PreferencesPage *hotKeyManagerPage = new PreferencesHotKeyManagerPage(this);
 	mPreferencesDialog->registerPage(tr("Shortcuts"), hotKeyManagerPage);
@@ -1942,7 +1944,7 @@ QList<QAction *> MainWindow::optionalMenuActionsForInterpretedPlugins()
 
 void MainWindow::initToolPlugins()
 {
-	mToolManager->init(PluginConfigurator(models().repoControlApi()
+	mProjectManager->toolManager().init(PluginConfigurator(models().repoControlApi()
 		, models().graphicalModelAssistApi()
 		, models().logicalModelAssistApi()
 		, *mController
@@ -1953,11 +1955,11 @@ void MainWindow::initToolPlugins()
 		, mFacade->events()
 		, *mTextManager));
 
-	QList<ActionInfo> const actions = mToolManager->actions();
+	QList<ActionInfo> const actions = mProjectManager->toolManager().actions();
 	traverseListOfActions(actions);
 	addExternalToolActions();
 
-	for (const HotKeyActionInfo &actionInfo : mToolManager->hotKeyActions()) {
+	for (const HotKeyActionInfo &actionInfo : mProjectManager->toolManager().hotKeyActions()) {
 		HotKeyManager::setCommand(actionInfo.id(), actionInfo.label(), actionInfo.action());
 	}
 
@@ -1969,7 +1971,7 @@ void MainWindow::initToolPlugins()
 		mUi->interpretersToolbar->hide();
 	}
 
-	for (auto &&page : mToolManager->preferencesPages()) {
+	for (auto &&page : mProjectManager->toolManager().preferencesPages()) {
 		mPreferencesDialog->registerPage(page.first, page.second);
 	}
 
@@ -2043,10 +2045,9 @@ QWidget *MainWindow::windowWidget()
 	return this;
 }
 
-void MainWindow::initToolManager()
+void MainWindow::customizeWindow()
 {
-	mToolManager.reset(new ToolPluginManager());
-	const Customizer * const customizer = mToolManager->customizer();
+	const Customizer * const customizer = mProjectManager->toolManager().customizer();
 	if (customizer) {
 		setWindowTitle(customizer->windowTitle());
 		setWindowIcon(customizer->applicationIcon());
@@ -2307,7 +2308,8 @@ void MainWindow::openStartTab()
 	const bool hadTabs = mUi->tabs->count() > 0;
 	mUi->tabs->insertTab(0, mStartWidget, tr("Getting Started"));
 	mUi->tabs->setTabUnclosable(hadTabs);
-	mStartWidget->setVisibleForInterpreterButton(mToolManager->customizer()->showInterpeterButton());
+	mStartWidget->setVisibleForInterpreterButton(
+			mProjectManager->toolManager().customizer()->showInterpeterButton());
 }
 
 void MainWindow::initScriptAPI()

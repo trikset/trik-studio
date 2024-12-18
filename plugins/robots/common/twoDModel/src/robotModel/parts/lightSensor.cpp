@@ -25,6 +25,7 @@ LightSensor::LightSensor(const DeviceInfo &info
 	: robotParts::LightSensor(info, port)
 	, mEngine(engine)
 {
+	setLastData(0);
 }
 
 void LightSensor::read()

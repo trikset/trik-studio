@@ -66,7 +66,7 @@
     </message>
     <message>
         <location line="+32"/>
-        <source>Add Argumet</source>
+        <source>Add Argument</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -590,7 +590,7 @@
         <translation type="unfinished">Valeur</translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="+104"/>
         <location line="+15"/>
         <source>Error</source>
         <translation type="unfinished">Erreur</translation>
@@ -606,8 +606,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
-        <source>Name should start with a lowercase letter(row %1)</source>
+        <location line="+4"/>
+        <source>Name should start with a letter(row %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -626,8 +626,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-270"/>
-        <location line="+278"/>
+        <location line="-269"/>
+        <location line="+277"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>

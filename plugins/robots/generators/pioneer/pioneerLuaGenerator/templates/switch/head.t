@@ -1,0 +1,2 @@
+		if @@CONDITION@@ then
+@@BODY@@

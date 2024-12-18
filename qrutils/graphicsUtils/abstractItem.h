@@ -133,7 +133,7 @@ public:
 	/// Sets a unique identifier of an item.
 	void setId(const QString &id);
 
-	void setEditable(bool editable);
+	virtual void setEditable(bool editable);
 	bool editable() const;
 	bool isHovered() const;
 
@@ -185,7 +185,10 @@ protected:
 	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
+	virtual void updateCursor(QGraphicsSceneHoverEvent *event);
 	void copyTo(AbstractItem * const other) const;
+	qreal alignedCoordinate(qreal coord, const int indexGrid) const;
+	void setXYWithDragState(const QPointF pos);
 
 private:
 	DragState mDragState {None};

@@ -35,7 +35,6 @@ SOURCES += \
 HEADERS += \
 	$$PWD/../../../../mocks/plugins/robots/common/kitBase/include/kitBase/robotModel/robotModelManagerInterfaceMock.h \
 	$$PWD/../../../../mocks/plugins/robots/common/kitBase/include/kitBase/robotModel/interpreterControlInterfaceMock.h \
-	$$PWD/../../../../mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterMock.h \
 	$$PWD/../../support/testRobotModel.h \
 
 copyToDestdir($$PWD/support/testData/unittests, NOW)

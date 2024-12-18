@@ -77,8 +77,10 @@ private:
 			, const robotModel::DeviceInfo &sensor
 			, Reason reason) override;
 
-	void propagateChanges(const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &sensor);
+	void propagateChanges(const QString &robotId, const robotModel::PortInfo &port
+			, const robotModel::DeviceInfo &sensor, Reason reason);
+
+	void propagateChangesFromBox(QComboBox *box);
 
 	bool areConvertible(const robotModel::PortInfo &port1
 			, const robotModel::PortInfo &port2) const;

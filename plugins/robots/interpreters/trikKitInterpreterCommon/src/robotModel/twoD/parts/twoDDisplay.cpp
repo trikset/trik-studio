@@ -172,8 +172,9 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 	painter->setPen(mBackground);
 	painter->setBrush(mBackground);
 	painter->drawRect(displayRect);
-	painter->drawImage(displayRect, mCurrentImage);
-	if (mBackground != Qt::transparent && mCurrentImage.isNull()) {
+	painter->drawImage(QRect(0, scaledTopMenuHeight
+			, displayRect.width(), displayRect.height() - scaledTopMenuHeight), mCurrentImage);
+	if (mBackground != Qt::transparent) {
 		painter->setBrush(QBrush(Qt::darkRed, Qt::BDiagPattern));
 		painter->drawRect(0, 0, mEngine.display()->displayWidth(), scaledTopMenuHeight);
 	}

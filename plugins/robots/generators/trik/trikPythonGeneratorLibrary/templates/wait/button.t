@@ -1,2 +1,2 @@
-while not brick.keys().wasPressed(@@BUTTON@@):
+while not brick.keys().wasPressed(KeysEnum.@@BUTTON@@):
   script.wait(100)

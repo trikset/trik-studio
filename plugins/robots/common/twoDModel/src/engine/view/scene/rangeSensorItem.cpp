@@ -28,7 +28,6 @@ RangeSensorItem::RangeSensorItem(const model::WorldModel &worldModel
 		)
 	: SensorItem(configuration, port, pathToImage, imageSize)
 	, mWorldModel(worldModel)
-	, mIcon(":/icons/sensors/2d_sonar.png")
 	, mAngle(angleAndRange.first)
 	, mRange(angleAndRange.second)
 {
@@ -41,12 +40,17 @@ void RangeSensorItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem
 	Q_UNUSED(widget)
 
 	painter->save();
-	painter->setOpacity(0.2);
-	painter->setBrush(Qt::black);
+	customizePainter(painter);
 	painter->drawPath(scanningRegion());
 	painter->restore();
 
 	SensorItem::drawItem(painter, style, widget);
+}
+
+void RangeSensorItem::customizePainter(QPainter *painter) const
+{
+	painter->setOpacity(0.2);
+	painter->setBrush(Qt::black);
 }
 
 void RangeSensorItem::drawExtractionForItem(QPainter *painter)

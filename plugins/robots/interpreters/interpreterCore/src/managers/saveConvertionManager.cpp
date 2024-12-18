@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "interpreterCore/managers/saveConvertionManager.h"
+#include "QDomDocument"
 
 using namespace interpreterCore;
 using namespace qReal;
@@ -23,21 +24,21 @@ QString SaveConvertionManager::editor()
 }
 
 void SaveConvertionManager::reconnectEdges(const Id &newBlock, const Id &block
-										   , GraphicalModelAssistInterface &graphicalApi)
+										   , details::ModelsAssistInterface &api)
 {
 	const bool isEdge = isEdgeType(block);
 	if (isEdge) {
 		// If out element is edge then connecting it to same elements as the old one was connected
-		graphicalApi.setFrom(newBlock, graphicalApi.from(block));
-		graphicalApi.setTo(newBlock, graphicalApi.to(block));
+		api.setFrom(newBlock, api.from(block));
+		api.setTo(newBlock, api.to(block));
 	} else {
 		// Replacing old node in all incomming and outgoing edges of the old node with the new one.
-		for (const Id &edge : graphicalApi.graphicalRepoApi().outgoingLinks(block)) {
-			graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "from", newBlock.toVariant());
+		for (const Id &edge : api.mutableRepoApi().outgoingLinks(block)) {
+			api.mutableRepoApi().setProperty(edge, "from", newBlock.toVariant());
 		}
 
-		for (const Id &edge : graphicalApi.graphicalRepoApi().incomingLinks(block)) {
-			graphicalApi.mutableGraphicalRepoApi().setProperty(edge, "to", newBlock.toVariant());
+		for (const Id &edge : api.mutableRepoApi().incomingLinks(block)) {
+			api.mutableRepoApi().setProperty(edge, "to", newBlock.toVariant());
 		}
 	}
 }
@@ -54,6 +55,7 @@ QList<ProjectConverter> SaveConvertionManager::converters()
 		, from320to330Converter()
 		, from330to20204Converter()
 		, from20204to20205Converter()
+		, from20205to20222Converter()
 	};
 }
 
@@ -306,32 +308,66 @@ ProjectConverter SaveConvertionManager::from20204to20205Converter()
 			}
 
 			if (graphicalBlock.element() == "PrintText") {
-				Id newBlock = Id::createElementId(graphicalBlock.editor(), graphicalBlock.diagram(), "TrikPrintText");
-				newBlock = graphicalApi.createElement(graphicalApi.parent(graphicalBlock)
-						, newBlock
+				const auto newType = Id(graphicalBlock.editor(), graphicalBlock.diagram(), "TrikPrintText");
+				const auto newGraphicalBlock = graphicalApi.createElement(graphicalApi.parent(graphicalBlock)
+						, newType.sameTypeId()
 						, false
 						, graphicalApi.name(graphicalBlock)
 						, graphicalApi.position(graphicalBlock)
-						, logicalApi.createElement(logicalApi.parent(logicalBlock), newBlock.type()));
-				graphicalApi.copyProperties(newBlock, graphicalBlock);
+						, logicalApi.createElement(logicalApi.parent(logicalBlock), newType));
+				graphicalApi.copyProperties(newGraphicalBlock, graphicalBlock);
+				const auto newLogicalBlock = graphicalApi.logicalId(newGraphicalBlock);
 
-				auto newLogicalId = graphicalApi.logicalId(newBlock);
 				auto iterator = logicalApi.logicalRepoApi().propertiesIterator(logicalBlock);
 				while (iterator.hasNext()) {
 					iterator.next();
-					const auto name = iterator.key();
-					auto value = iterator.value().toString();
-					logicalApi.setPropertyByRoleName(newLogicalId, value, name);
+					logicalApi.mutableLogicalRepoApi().setProperty(newLogicalBlock, iterator.key(), iterator.value());
 				}
-				logicalApi.setPropertyByRoleName(graphicalApi.logicalId(newBlock), 20, "FontSize");
 
-				reconnectEdges(newBlock, graphicalBlock, graphicalApi);
-				modificationsMade = true;
+				logicalApi.setPropertyByRoleName(newLogicalBlock, 20, "FontSize");
+				reconnectEdges(newGraphicalBlock, graphicalBlock, graphicalApi);
+				reconnectEdges(newLogicalBlock, logicalBlock, logicalApi);
 				graphicalApi.removeElement(graphicalBlock);
+				logicalApi.removeElement(logicalBlock);
+				modificationsMade = true;
 			}
 		}
 
 		return modificationsMade ? ProjectConverter::Success : ProjectConverter::NoModificationsMade;
+	});
+}
+
+ProjectConverter SaveConvertionManager::from20205to20222Converter()
+{
+	return ProjectConverter(editor(), Version::fromString("2020.5"), Version::fromString("2022.2")
+			, [=](GraphicalModelAssistInterface &, LogicalModelAssistInterface &logicalApi)
+	{
+		QString xml = logicalApi.logicalRepoApi().metaInformation("worldModel").toString();
+
+		if (xml.isEmpty()) return ProjectConverter::NoModificationsMade;
+		QDomDocument worldModel;
+		if (!worldModel.setContent(xml)) return ProjectConverter::SaveInvalid;
+		QDomElement root = worldModel.firstChildElement("root");
+
+		QDomElement world = root.firstChildElement("world");
+		if (world.isNull()) {
+			world = root.ownerDocument().createElement("world");
+			root.appendChild(world);
+		}
+
+		QDomElement oldRobot = root.firstChildElement("robots").firstChildElement("robot");
+		QDomElement robot = world.ownerDocument().createElement("robot");
+		robot.setAttribute("position", oldRobot.attribute("position", "0:0"));
+		robot.setAttribute("direction", oldRobot.attribute("direction", "0"));
+		robot.appendChild(oldRobot.firstChildElement("startPosition"));
+		world.appendChild(robot);
+
+		oldRobot.removeAttribute("position");
+		oldRobot.removeAttribute("direction");
+		// start position reparented automatically
+
+		logicalApi.mutableLogicalRepoApi().setMetaInformation("worldModel", worldModel.toString(4));
+		return ProjectConverter::Success;
 	});
 }
 

@@ -73,13 +73,12 @@ void DevicesConfigurationProvider::deviceConfigurationChanged(const QString &rob
 {
 	if (mCurrentConfiguration[robotId][port] != device) {
 		mCurrentConfiguration[robotId][port] = device;
+		// Allow provider to react on configuration change.
+		onDeviceConfigurationChanged(robotId, port, device, reason);
 
 		for (DevicesConfigurationProvider * const provider : mConnectedProviders) {
 			// Broadcast change.
 			provider->deviceConfigurationChanged(robotId, port, device, reason);
-
-			// Allow connected providers to react on configuration change.
-			provider->onDeviceConfigurationChanged(robotId, port, device, reason);
 		}
 	}
 }
@@ -88,9 +87,9 @@ void DevicesConfigurationProvider::onDeviceConfigurationChanged(const QString &r
 		, const PortInfo &port, const DeviceInfo &sensor, Reason reason)
 {
 	Q_UNUSED(robotId)
-	Q_UNUSED(port);
-	Q_UNUSED(sensor);
-	Q_UNUSED(reason);
+	Q_UNUSED(port)
+	Q_UNUSED(sensor)
+	Q_UNUSED(reason)
 }
 
 void DevicesConfigurationProvider::clearConfiguration(Reason reason)

@@ -17,11 +17,15 @@
     <StartMenuDir>TRIK Studio</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
-    <AllowSpaceInPath>false</AllowSpaceInPath>
-    <AllowNonAsciiCharacters>false</AllowNonAsciiCharacters>
 
-    <TargetDir>@RootDir@TRIKStudio</TargetDir>
-    <AdminTargetDir>@RootDir@TRIKStudio</AdminTargetDir>
+    <TargetDir>@RootDir@TRIKStudio\</TargetDir>
+    <AdminTargetDir>@ApplicationsDirX86@TRIKStudio\</AdminTargetDir>
 
-    <RunProgram>@TargetDir@/trik-studio</RunProgram>
+    <RunProgram>wscript.exe</RunProgram>
+    <RunProgramArguments>
+	    <Argument>//nologo</Argument>
+	    <Argument>//b</Argument>
+	    <Argument>//</Argument>
+	    <Argument>@TargetDir@\trik-studio.vbs</Argument>
+    </RunProgramArguments>
 </Installer>

@@ -55,10 +55,12 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->addNode(new TrikDrawRect(*mMetamodel));
 	mMetamodel->addNode(new TrikInitCamera(*mMetamodel));
 	mMetamodel->addNode(new TrikInitVideoStreaming(*mMetamodel));
+	mMetamodel->addNode(new TrikJoinNetwork(*mMetamodel));
 	mMetamodel->addNode(new TrikLed(*mMetamodel));
 	mMetamodel->addNode(new TrikPlayTone(*mMetamodel));
 	mMetamodel->addNode(new TrikPlayToneHz(*mMetamodel));
 	mMetamodel->addNode(new TrikPrintText(*mMetamodel));
+	mMetamodel->addNode(new TrikReadLidar(*mMetamodel));
 	mMetamodel->addNode(new TrikRemoveFile(*mMetamodel));
 	mMetamodel->addNode(new TrikSadSmile(*mMetamodel));
 	mMetamodel->addNode(new TrikSay(*mMetamodel));
@@ -108,10 +110,12 @@ void TrikMetamodelPlugin::initMultigraph()
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikDrawRect"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikInitCamera"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikInitVideoStreaming"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikJoinNetwork"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikLed"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikPlayTone"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikPlayToneHz"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikPrintText"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
+	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikReadLidar"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikRemoveFile"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikSadSmile"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
 	mMetamodel->produceEdge(mMetamodel->elementType("RobotsDiagram", "TrikSay"), mMetamodel->elementType("RobotsDiagram", "AbstractNode"), qReal::ElementType::generalizationLinkType);
@@ -183,6 +187,8 @@ void TrikMetamodelPlugin::initPaletteGroupsMap()
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikWriteToFile"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikRemoveFile"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikCalibrateGyroscope"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikReadLidar"));
+	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Actions"), QString::fromUtf8("TrikJoinNetwork"));
 	mMetamodel->appendDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForGyroscope"));
 	mMetamodel->addElementToDiagramPaletteGroup("RobotsDiagram", QObject::tr("Wait"), QString::fromUtf8("TrikWaitForTouchSensor"));

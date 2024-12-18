@@ -47,6 +47,7 @@ public:
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 	void drawExtractionForItem(QPainter* painter) override;
 	QPainterPath resizeArea() const override;
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
@@ -80,10 +81,7 @@ signals:
 	void internalImageChanged();
 
 protected:
-	void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
-	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
+	void updateCursor(QGraphicsSceneHoverEvent *event) override;
 	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
@@ -91,10 +89,10 @@ private:
 
 	QRectF deserializeRect(const QString &string) const;
 
-	graphicsUtils::RectangleImpl mImpl;
 	QSharedPointer<model::Image> mImage;
 
 	bool mBackgroundRole {};
+	QPointF mEstimatedPos;
 };
 
 }

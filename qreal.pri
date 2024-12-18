@@ -66,6 +66,4 @@ qrtext.depends = qrkernel
 qrtranslations.depends = initvars
 
 OTHER_FILES += \
-	$$PWD/.travis.yml \
-	$$PWD/appveyor.yml \
 	$$PWD/global.pri \

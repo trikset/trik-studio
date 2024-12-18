@@ -20,6 +20,8 @@ include(../../../../../global.pri)
 
 QT += widgets
 
+CONFIG += trikqscintilla2
+
 includes(plugins/robots/generators/generatorBase \
 		plugins/robots/common/kitBase \
 		plugins/robots/common/trikKit \
@@ -83,6 +85,8 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/markerDownGenerator.h \
 	$$PWD/src/simpleGenerators/markerUpGenerator.h \
 	$$PWD/src/simpleGenerators/printTextGenerator.h \
+	$$PWD/src/simpleGenerators/readLidarGenerator.h \
+	$$PWD/src/simpleGenerators/trikJoinNetworkGenerator.h \
 
 SOURCES += \
 	$$PWD/src/trikBlocksValidator.cpp \
@@ -130,3 +134,5 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/markerDownGenerator.cpp \
 	$$PWD/src/simpleGenerators/markerUpGenerator.cpp \
 	$$PWD/src/simpleGenerators/printTextGenerator.cpp \
+	$$PWD/src/simpleGenerators/readLidarGenerator.cpp \
+	$$PWD/src/simpleGenerators/trikJoinNetworkGenerator.cpp \

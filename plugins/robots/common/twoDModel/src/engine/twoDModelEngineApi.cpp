@@ -119,6 +119,24 @@ int TwoDModelEngineApi::readRangeSensor(const PortInfo &port, int maxDistance, q
 	return mModel.settings().realisticSensors() ? spoilRangeReading(res) : res;
 }
 
+QVector<int> TwoDModelEngineApi::readLidarSensor(const PortInfo &port, int maxDistance, qreal scanningAngle) const
+{
+	QPair<QPointF, qreal> neededPosDir = countPositionAndDirection(port);
+
+	QVector<int> res;
+	auto && target = &mModel.worldModel();
+	QMetaObject::invokeMethod(target, [&](){res = target->lidarReading(
+	neededPosDir.first, neededPosDir.second, maxDistance, scanningAngle);}
+	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
+
+	if (mModel.settings().realisticSensors()) {
+		for (int i = 0; i < res.size(); i++) {
+			res[i] = spoilRangeReading(res[i]);
+		}
+	}
+	return res;
+}
+
 QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 {
 	QVector<int> t;
@@ -154,7 +172,7 @@ int TwoDModelEngineApi::spoilRangeReading(const int distance) const
 
 QColor TwoDModelEngineApi::readColorSensor(const PortInfo &port) const
 {
-	const QImage image = areaUnderSensor(port, 1.0);
+	const QImage image = areaUnderSensor(port, 0.3);
 	if (image.isNull()) return QColor();
 
 	qreal averageB = 0, averageG = 0, averageR = 0;
@@ -334,8 +352,9 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	// then NXT and TRIK 2D fake scenes will be shown.
 	QGraphicsView * const fakeScene = new QGraphicsView;
 	fakeScene->setScene(mFakeScene.data());
-	QTimer * const timer = new QTimer;
+	QTimer * const timer = new QTimer(fakeScene);
 	QObject::connect(timer, &QTimer::timeout, &*mFakeScene, [this](){mFakeScene->update();});
+	timer->setTimerType(Qt::TimerType::PreciseTimer);
 	timer->setInterval(300);
 	timer->setSingleShot(false);
 	fakeScene->setMinimumWidth(700);

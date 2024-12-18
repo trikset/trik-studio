@@ -44,9 +44,9 @@ public:
 	QString friendlyKitName() const override;
 
 protected slots:
-	/// Calls code generator. Returns true if operation was successful.
+	/// Calls code generator. Returns file path if operation was successful and an empty string otherwise.
 	/// @param openTab If true after code generation a tab with generated code will be opened.
-	virtual bool generateCode(bool openTab = true);
+	virtual QString generateCode(bool openTab = true);
 
 	/// Changes path to code source file and regenerate necessary extra files.
 	void regenerateCode(const qReal::Id &diagram, const QFileInfo &oldFileInfo, const QFileInfo &newFileInfo);

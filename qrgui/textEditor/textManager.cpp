@@ -44,10 +44,10 @@ bool TextManager::openFile(const QString &filePath, const QString &generatorName
 		QTextStream inStream(&file);
 		inStream.setCodec(QTextCodec::codecForName("UTF-8"));
 		const auto &area = new QScintillaTextEdit();
-		connect(&*area, &QScintillaTextEdit::textWasModified, this
-				, [this](QScintillaTextEdit *t) { setModified(t, true); });
 		area->setCurrentLanguage(language);
 		area->setText(inStream.readAll());
+		connect(&*area, &QScintillaTextEdit::textWasModified, this
+				, [this](QScintillaTextEdit *t) { setModified(t, true); });
 		mText.insert(filePath, area);
 		mPath.insert(area, filePath);
 		mPathType.insert(filePath, true);

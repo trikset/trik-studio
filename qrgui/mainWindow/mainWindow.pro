@@ -21,10 +21,12 @@ DEFINES += TRIK_STUDIO_VERSION='\\"$$TRIK_STUDIO_VERSION\\"'
 
 QT += widgets printsupport xml svg
 
-links(qrkernel qrutils qrtext qrrepo qscintilla2 qrgui-models qrgui-editor qrgui-controller qrgui-dialogs qrgui-preferences-dialog \
+links(qrkernel qrutils qrtext qrrepo qrgui-models qrgui-editor qrgui-controller qrgui-dialogs qrgui-preferences-dialog \
 		qrgui-text-editor qrgui-mouse-gestures qrgui-hotkey-manager qrgui-brand-manager  \
 		qrgui-facade qrgui-plugin-manager qrgui-tool-plugin-interface qrgui-thirdparty \
 )
+
+CONFIG += trikqscintilla2
 
 includes(qrgraph qrgui qrgui/plugins/metaMetaModel)
 
@@ -47,7 +49,6 @@ HEADERS += \
 	$$PWD/referenceList.h \
 	$$PWD/externBrowser.h \
 	$$PWD/projectManager/projectManagerWrapper.h \
-	$$PWD/projectManager/versionsConverterManager.h \
 	$$PWD/palette/paletteTree.h \
 	$$PWD/palette/paletteTreeWidget.h \
 	$$PWD/palette/draggableElement.h \
@@ -72,7 +73,6 @@ SOURCES += \
 	$$PWD/modelExplorer.cpp \
 	$$PWD/referenceList.cpp \
 	$$PWD/projectManager/projectManagerWrapper.cpp \
-	$$PWD/projectManager/versionsConverterManager.cpp \
 	$$PWD/palette/paletteTree.cpp \
 	$$PWD/palette/paletteTreeWidget.cpp \
 	$$PWD/palette/draggableElement.cpp \
@@ -154,15 +154,17 @@ FORMS += \
 RESOURCES = $$PWD/mainWindow.qrc
 
 win32 {
-	RC_FILE = $$PWD/mainWindow.rc
-        QMAKE_MANIFEST = $$PWD/application.exe.manifest
-        DISTFILES += $$QMAKE_MANIFEST
+	QMAKE_MANIFEST = $$PWD/application.exe.manifest
+        RC_ICONS = icon.ico
+	DISTFILES += $$QMAKE_MANIFEST $$RC_ICONS
 }
 
 macx {
-        ICON = icon.icns
+	ICON = icon.icns
+	QMAKE_INFO_PLIST = mainWindow.plist
 }
 
+DISTFILES += lsan.supp
 include(scriptAPI/scriptAPI.pri)
 copyToDestdir($$PWD/lsan.supp, now)
 

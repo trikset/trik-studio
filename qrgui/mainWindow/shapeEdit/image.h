@@ -33,5 +33,4 @@ private:
 	QGraphicsPixmapItem* mPixmapItem;
 	QImage mImage;
 	QString mFileName;
-	graphicsUtils::RectangleImpl mRectangleImpl;
 };

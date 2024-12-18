@@ -102,6 +102,7 @@ private:
 	void ride(const QPointF &newPos, qreal rotation);
 
 	void onLanded();
+	void updateImage();
 
 	/** @brief Image of a robot drawn on scene */
 	// Use utilitary class that can handle PNG & SVG properly.
@@ -113,7 +114,6 @@ private:
 	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors;  // Does not have ownership
 
 	QPointF mDragStart;
-	graphicsUtils::RectangleImpl mRectangleImpl;
 	QPointF mMarkerPoint;
 
 	model::RobotModel &mRobotModel;

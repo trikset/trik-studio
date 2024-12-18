@@ -26,6 +26,7 @@ class GraphicalModelAssistInterface : public details::ModelsAssistInterface
 public:
 	virtual const qrRepo::GraphicalRepoApi &graphicalRepoApi() const = 0;
 	virtual qrRepo::GraphicalRepoApi &mutableGraphicalRepoApi() const = 0;
+	virtual qrRepo::CommonRepoApi &mutableRepoApi() const {return mutableGraphicalRepoApi();}
 	virtual Id createElement(const Id &parent, const Id &type) = 0;
 	virtual Id createElement(const Id &parent, const Id &id, bool isFromLogicalModel
 		, const QString &name, const QPointF &position

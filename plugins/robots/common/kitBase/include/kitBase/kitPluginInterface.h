@@ -92,6 +92,11 @@ public:
 		return nullptr;
 	}
 
+	virtual QList<QWidget *>listOfQuickPreferencesFor(const robotModel::RobotModelInterface &model)
+	{
+		return {quickPreferencesFor(model)};
+	}
+
 	/// List of additional actions supported by plugin, to be added to toolbar and menus. Showing 2d model widget
 	/// goes here.
 	/// @todo: what about ownership of underlying QAction objects?

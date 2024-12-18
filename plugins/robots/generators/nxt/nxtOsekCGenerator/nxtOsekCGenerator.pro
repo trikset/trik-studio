@@ -15,7 +15,7 @@
 TARGET = robots-nxt-osek-c-generator
 
 TEMPLATE = lib
-CONFIG += plugin
+CONFIG += plugin trikqscintilla2
 
 include(../../../../../global.pri)
 
@@ -31,7 +31,7 @@ includes(plugins/robots/generators/nxt/nxtGeneratorBase \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 robots-utils robots-nxt-kit \
+links(qrkernel qrutils qrrepo robots-utils robots-nxt-kit \
 		robots-generator-base robots-nxt-generator-base)
 
 TRANSLATIONS = \

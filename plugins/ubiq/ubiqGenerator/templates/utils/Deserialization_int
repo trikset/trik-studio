@@ -1,3 +1,0 @@
-            int @@Name@@_temp = iRdr.ReadInt16();
-            if (iBigEndianFlag) @@Name@@_temp = Convert32(@@Name@@_temp);
-            @@Name@@ = @@Name@@_temp;

@@ -16,16 +16,12 @@
 
 using namespace graphicsUtils;
 
-RectangleImpl::RectangleImpl()
-{
-}
-
-QRectF RectangleImpl::boundingRect(qreal x1, qreal y1, qreal x2, qreal y2, const int scalingDrift) const
+QRectF RectangleImpl::boundingRect(qreal x1, qreal y1, qreal x2, qreal y2, const int scalingDrift)
 {
 	return calcRect(x1, y1, x2, y2).adjusted(-scalingDrift, -scalingDrift, scalingDrift, scalingDrift);
 }
 
-QPainterPath RectangleImpl::shape(qreal x1, qreal y1, qreal x2, qreal y2, const int drift) const
+QPainterPath RectangleImpl::shape(qreal x1, qreal y1, qreal x2, qreal y2, const int drift)
 {
 	QPainterPath path;
 	path.setFillRule(Qt::WindingFill);
@@ -75,7 +71,7 @@ void RectangleImpl::drawImageItem(QPainter *painter, qreal x1, qreal y1, qreal x
 	painter->drawImage(calcRect(x1, y1, x2, y2), myImage);
 }
 
-QPointF RectangleImpl::deserializePoint(const QString &string) const
+QPointF RectangleImpl::deserializePoint(const QString &string)
 {
 	const QStringList splittedStr = string.split(":");
 	if (splittedStr.count() == 2) {

@@ -34,11 +34,11 @@ gcc:QMAKE_CXXFLAGS += -fpermissive
 win32: QMAKE_CXXFLAGS += -Wno-error=cast-qual
 win32: LIBS += -lsetupapi
 
-macx: LIBS += -framework CoreFoundation
+macx: LIBS += -framework CoreFoundation -framework AppKit
 
 linux {
     CONFIG *= link_pkgconfig
-    PKGCONFIG += libudev
+    PKGCONFIG += libudev #for hidapi
 }
 
 HEADERS += \

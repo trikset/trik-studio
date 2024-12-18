@@ -60,14 +60,14 @@ QRectF EllipseItem::calcNecessaryBoundingRect() const
 
 QRectF EllipseItem::boundingRect() const
 {
-	return mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
+	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
 void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	mEllipseImpl.drawEllipseItem(painter, x1(), y1(), x2(), y2());
+	RectangleImpl::drawEllipseItem(painter, x1(), y1(), x2(), y2());
 }
 
 void EllipseItem::drawExtractionForItem(QPainter *painter)
@@ -75,9 +75,9 @@ void EllipseItem::drawExtractionForItem(QPainter *painter)
 	AbstractItem::drawExtractionForItem(painter);
 	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
-	painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	painter->drawEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	if (!filled()) {
-		painter->drawEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+		painter->drawEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
 	}
 }
 
@@ -123,10 +123,10 @@ QPainterPath EllipseItem::shape() const
 	if (!filled()) {
 		QPainterPathStroker ps;
 		ps.setWidth(pen().width());
-		result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), 0));
+		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
 		result = ps.createStroke(result);
 	} else {
-		result.addEllipse(mEllipseImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
 	}
 
 	if (isSelected()) {

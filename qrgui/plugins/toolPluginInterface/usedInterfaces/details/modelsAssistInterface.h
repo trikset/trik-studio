@@ -21,6 +21,8 @@
 
 #include <qrkernel/ids.h>
 
+#include <qrrepo/commonRepoApi.h>
+
 namespace qReal {
 
 class EditorManagerInterface;
@@ -64,6 +66,8 @@ public:
 	virtual int childrenOfDiagram(const Id &parent) const = 0;
 
 	virtual void removeElement(const Id &id) = 0;
+
+	virtual qrRepo::CommonRepoApi &mutableRepoApi() const = 0;
 
 	/// Returns reference to Editor Manager object providing information about language metamodel.
 	virtual const EditorManagerInterface &editorManagerInterface() const = 0;

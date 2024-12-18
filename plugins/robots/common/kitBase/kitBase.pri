@@ -70,6 +70,7 @@ HEADERS += \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorAmbient.h \
 	$$PWD/include/kitBase/robotModel/robotParts/colorSensorReflected.h \
 	$$PWD/include/kitBase/robotModel/robotParts/speaker.h \
+	$$PWD/include/kitBase/robotModel/robotParts/communicator.h \
 	$$PWD/include/kitBase/robotModel/robotParts/motor.h \
 	$$PWD/include/kitBase/robotModel/robotParts/display.h \
 	$$PWD/include/kitBase/robotModel/robotParts/button.h \
@@ -94,6 +95,7 @@ HEADERS += \
 	$$PWD/include/kitBase/robotModel/robotParts/vectorSensor.h \
 	$$PWD/include/kitBase/robotModel/robotParts/shell.h \
 	$$PWD/include/kitBase/robotModel/robotParts/motorsAggregator.h \
+	$$PWD/include/kitBase/robotModel/robotParts/lidarSensor.h \
 
 SOURCES += \
 	$$PWD/src/devicesConfigurationProvider.cpp \
@@ -125,6 +127,7 @@ SOURCES += \
 	$$PWD/src/robotModel/portInfo.cpp \
 	$$PWD/src/robotModel/deviceInfo.cpp \
 	$$PWD/src/robotModel/robotParts/speaker.cpp \
+	$$PWD/src/robotModel/robotParts/communicator.cpp \
 	$$PWD/src/robotModel/robotParts/motor.cpp \
 	$$PWD/src/robotModel/robotParts/display.cpp \
 	$$PWD/src/robotModel/robotParts/button.cpp \
@@ -151,3 +154,4 @@ SOURCES += \
 	$$PWD/src/robotModel/robotParts/vectorSensor.cpp \
 	$$PWD/src/robotModel/robotParts/shell.cpp \
 	$$PWD/src/robotModel/robotParts/motorsAggregator.cpp \
+	$$PWD/src/robotModel/robotParts/lidarSensor.cpp \

@@ -115,8 +115,7 @@ QList<kitBase::robotModel::RobotModelInterface *> NxtKitInterpreterPlugin::robot
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> NxtKitInterpreterPlugin::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
-	Q_UNUSED(model);
-	mOwnsBlocksFactory = false;
+	Q_UNUSED(model)
 	return mBlocksFactory;
 }
 

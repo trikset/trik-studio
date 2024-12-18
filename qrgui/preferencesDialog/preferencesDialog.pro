@@ -35,7 +35,7 @@ HEADERS += \
 	$$PWD/preferencesPages/behaviourPage.h \
 	$$PWD/preferencesPages/debuggerPage.h \
 	$$PWD/preferencesPages/editorPage.h \
-	$$PWD/preferencesPages/miscellaniousPage.h \
+	$$PWD/preferencesPages/miscellaneousPage.h \
 	$$PWD/preferencesPages/featuresPage.h \
 
 SOURCES += \
@@ -44,12 +44,12 @@ SOURCES += \
 	$$PWD/preferencesPages/behaviourPage.cpp \
 	$$PWD/preferencesPages/debuggerPage.cpp \
 	$$PWD/preferencesPages/editorPage.cpp \
-	$$PWD/preferencesPages/miscellaniousPage.cpp \
+	$$PWD/preferencesPages/miscellaneousPage.cpp \
 	$$PWD/preferencesPages/featuresPage.cpp \
 
 FORMS += \
 	$$PWD/preferencesDialog.ui \
-	$$PWD/preferencesPages/miscellaniousPage.ui \
+	$$PWD/preferencesPages/miscellaneousPage.ui \
 	$$PWD/preferencesPages/editorPage.ui \
 	$$PWD/preferencesPages/debuggerPage.ui \
 	$$PWD/preferencesPages/behaviourPage.ui \
