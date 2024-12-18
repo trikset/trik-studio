@@ -236,4 +236,5 @@ jobs:
       os: windows-latest
       artifact_name: trik-studio-auto-installer-qt5.15
       shell: msys2 {0}
+      deploy_archive: true
     secrets: inherit
