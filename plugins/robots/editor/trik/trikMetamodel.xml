@@ -1275,15 +1275,14 @@
 					</generalizations>
 				</logic>
 			</node>
-			<node displayedName="Join Network" name="TrikJoinNetwork" description="Sets hull number of this robot and connects to robot by IP and port.">
+			<node displayedName="Join Network" name="TrikJoinNetwork" description="Sets the hull number and connects with a peer by a (host)name or an IP-address. Target IP-port can be changed too if required.">
 			        <graphics>
 				        <picture sizex="50" sizey="50">
 					        <image y1="0" name="images/joinNetwork.svg" x1="0" y2="50" x2="50"/>
 					</picture>
 					<labels>
 					        <label x="45" y="60" textBinded="Address" hard="false" prefix="Address:"/>
-						<label x="45" y="90" textBinded="IPPort" hard="false" prefix="Port:"/>
-						<label x="45" y="120" textBinded="HullNumber" hard="false" prefix="Hull number:"/>
+						<label x="45" y="90" textBinded="HullNumber" hard="false" prefix="Hull number:"/>
 					</labels>
 					<nonResizeable/>
 				</graphics>
@@ -1293,10 +1292,10 @@
 						        <default>192.168.77.1</default>
 						</property>
 						<property displayedName="Port" type="int" name="IPPort">
-						        <default>-1</default>
+						        <default>8889</default>
 						</property>
 						<property displayedName="Hull Number" type="int" name="HullNumber">
-						        <default>-1</default>
+						        <default>1</default>
 						</property>
 					</properties>
 					<container/>

@@ -744,7 +744,7 @@
 			setName("TrikJoinNetwork");
 			setFriendlyName(QObject::tr("Join Network"));
 			setDiagram("RobotsDiagram");
-			setDescription(QObject::tr("Sets hull number of this robot and connects to robot by IP and port."));
+			setDescription(QObject::tr("Sets the hull number and connects with a peer by a (host)name or an IP-address. Target IP-port can be changed too if required."));
 			QSharedPointer<qReal::LabelProperties> label_1(new qReal::LabelProperties(1, 0.9, 1.2, "Address", false, 0));
 			label_1->setBackground(Qt::white);
 			label_1->setScalingX(false);
@@ -753,22 +753,14 @@
 			label_1->setPlainTextMode(false);
 			label_1->setPrefix(QObject::tr("Address:"));
 			addLabel(label_1);
-			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.9, 1.8, "IPPort", false, 0));
+			QSharedPointer<qReal::LabelProperties> label_2(new qReal::LabelProperties(2, 0.9, 1.8, "HullNumber", false, 0));
 			label_2->setBackground(Qt::white);
 			label_2->setScalingX(false);
 			label_2->setScalingY(false);
 			label_2->setHard(false);
 			label_2->setPlainTextMode(false);
-			label_2->setPrefix(QObject::tr("Port:"));
+			label_2->setPrefix(QObject::tr("Hull number:"));
 			addLabel(label_2);
-			QSharedPointer<qReal::LabelProperties> label_3(new qReal::LabelProperties(3, 0.9, 2.4, "HullNumber", false, 0));
-			label_3->setBackground(Qt::white);
-			label_3->setScalingX(false);
-			label_3->setScalingY(false);
-			label_3->setHard(false);
-			label_3->setPlainTextMode(false);
-			label_3->setPrefix(QObject::tr("Hull number:"));
-			addLabel(label_3);
 			loadSdf(utils::xmlUtils::loadDocument(":/generated/shapes/TrikJoinNetworkClass.sdf").documentElement());
 			setSize(QSizeF(50, 50));
 			initProperties();
@@ -792,8 +784,8 @@
 		void initProperties()
 		{
 			addProperty("Address", "string", QObject::tr("192.168.77.1"), QObject::tr("Address"), QObject::tr(""), false);
-			addProperty("HullNumber", "int", QString::fromUtf8("-1"), QObject::tr("Hull Number"), QObject::tr(""), false);
-			addProperty("IPPort", "int", QString::fromUtf8("-1"), QObject::tr("Port"), QObject::tr(""), false);
+			addProperty("HullNumber", "int", QString::fromUtf8("1"), QObject::tr("Hull Number"), QObject::tr(""), false);
+			addProperty("IPPort", "int", QString::fromUtf8("8889"), QObject::tr("Port"), QObject::tr(""), false);
 		}
 	};
 
