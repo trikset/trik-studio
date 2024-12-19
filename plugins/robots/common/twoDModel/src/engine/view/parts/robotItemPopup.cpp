@@ -94,7 +94,9 @@ QWidget *RobotItemPopup::initSetStartButton()
 
 QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &toolTip)
 {
-	QPushButton * const result = new QPushButton(graphicsUtils::AbstractItem::loadThemedIcon(icon, Qt::red), QString(), this);
+	QPushButton * const result = new QPushButton(
+		graphicsUtils::AbstractItem::loadThemedIcon(icon, Qt::red), QString(), this
+	);
 	result->setToolTip(toolTip);
 	result->setFlat(true);
 	result->setFixedSize(24, 24);
