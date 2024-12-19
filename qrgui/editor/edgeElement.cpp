@@ -17,6 +17,7 @@
 #include <QtWidgets/QStyle>
 #include <QtGui/QTextDocument>
 #include <QtWidgets/QMenu>
+#include <QApplication>
 
 #include <math.h>
 #include <qrkernel/logging.h>
