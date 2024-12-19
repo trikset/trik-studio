@@ -306,6 +306,10 @@ private:
 	void switchToTab(int index);
 	int getTabIndex(const QModelIndex &index);
 
+	bool windowsDarkThemeAvailiable();
+	bool windowsIsInDarkTheme();
+	void initPalette();
+
 	void initGridProperties();
 	void clickErrorListWidget();
 

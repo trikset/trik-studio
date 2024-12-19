@@ -129,6 +129,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	mTextManager.reset(new text::TextManager(mFacade->events(), *this));
 	mProjectManager.reset(new ProjectManagerWrapper(this, &*mTextManager));
 
+	initPalette();
 	initRecentProjectsMenu();
 	customizeWindow();
 	initTabs();
@@ -640,6 +641,58 @@ void MainWindow::setReference(const QStringList &data, const QPersistentModelInd
 		if (!target.isEmpty()) {
 			setBackReference(index, target);
 		}
+	}
+}
+
+bool MainWindow::windowsDarkThemeAvailiable()
+{
+	if ( QOperatingSystemVersion::current().majorVersion() == 10 )
+	{
+		return QOperatingSystemVersion::current().microVersion() >= 17763;
+    }
+    else if ( QOperatingSystemVersion::current().majorVersion() > 10 )
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool MainWindow::windowsIsInDarkTheme()
+{
+    QSettings settings( 
+		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
+		, QSettings::NativeFormat );
+    return settings.value( "AppsUseLightTheme", 1 ).toInt() == 0;
+}
+
+void MainWindow::initPalette() {
+	if (QSysInfo::productType() != "windows") return ;
+	if (windowsDarkThemeAvailiable() && windowsIsInDarkTheme()) {
+		auto palette = QApplication::palette();
+		palette.setColor(QPalette::Window,QColor(53,53,53));
+		palette.setColor(QPalette::WindowText,Qt::white);
+		palette.setColor(QPalette::Disabled,QPalette::WindowText,QColor(127,127,127));
+		palette.setColor(QPalette::Base,QColor(42,42,42));
+		palette.setColor(QPalette::AlternateBase,QColor(66,66,66));
+		palette.setColor(QPalette::ToolTipBase,Qt::white);
+		palette.setColor(QPalette::ToolTipText,Qt::white);
+		palette.setColor(QPalette::Text,Qt::white);
+		palette.setColor(QPalette::Disabled,QPalette::Text,QColor(127,127,127));
+		palette.setColor(QPalette::Dark,QColor(35,35,35));
+		palette.setColor(QPalette::Shadow,QColor(20,20,20));
+		palette.setColor(QPalette::Button,QColor(53,53,53));
+		palette.setColor(QPalette::ButtonText,Qt::white);
+		palette.setColor(QPalette::Disabled,QPalette::ButtonText,QColor(127,127,127));
+		palette.setColor(QPalette::BrightText,Qt::red);
+		palette.setColor(QPalette::Link,QColor(42,130,218));
+		palette.setColor(QPalette::Highlight,QColor(42,130,218));
+		palette.setColor(QPalette::Disabled,QPalette::Highlight,QColor(80,80,80));
+		palette.setColor(QPalette::HighlightedText,Qt::white);
+		palette.setColor(QPalette::Disabled,QPalette::HighlightedText,QColor(127,127,127));
+		QApplication::setPalette(palette);
 	}
 }
 
