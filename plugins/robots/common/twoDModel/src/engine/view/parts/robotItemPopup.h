@@ -15,6 +15,7 @@
 #pragma once
 
 #include <qrutils/graphicsUtils/itemPopup.h>
+#include <qrutils/graphicsUtils/abstractItem.h>
 
 class QAbstractButton;
 class QSpinBox;

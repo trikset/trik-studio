@@ -17,7 +17,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
-
+#include <qrutils/graphicsUtils/abstractItem.h>
 #include <qrkernel/settingsManager.h>
 
 #include "src/engine/view/scene/robotItem.h"
@@ -94,7 +94,7 @@ QWidget *RobotItemPopup::initSetStartButton()
 
 QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &toolTip)
 {
-	QPushButton * const result = new QPushButton(QIcon(icon), QString(), this);
+	QPushButton * const result = new QPushButton(graphicsUtils::AbstractItem::loadThemedIcon(icon, Qt::red), QString(), this);
 	result->setToolTip(toolTip);
 	result->setFlat(true);
 	result->setFixedSize(24, 24);
