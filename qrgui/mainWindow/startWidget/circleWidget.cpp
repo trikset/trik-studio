@@ -71,8 +71,8 @@ void CircleWidget::paintEvent(QPaintEvent *event)
 	QPainter painter(this);
 	painter.setRenderHint(QPainter::Antialiasing);
 
-	const QColor backgroundColor = Qt::white;
-	QPen borderPen(property("enabled").toBool() ? palette().foreground().color() : backgroundColor);
+	const QColor backgroundColor = palette().color(QPalette::Light);
+	QPen borderPen(property("enabled").toBool() ? palette().highlight().color() : backgroundColor);
 	borderPen.setWidth(3);
 	const QBrush backgroundBrush(backgroundColor);
 	painter.setBrush(backgroundBrush);
