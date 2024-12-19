@@ -34,6 +34,7 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtSvg/QSvgGenerator>
+#include <QOperatingSystemVersion>
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>

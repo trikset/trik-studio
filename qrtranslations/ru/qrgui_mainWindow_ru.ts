@@ -735,7 +735,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+922"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+923"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
