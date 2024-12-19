@@ -483,6 +483,20 @@ QStringList AbstractItem::getBrushStyleList()
 	return { "None", "Solid" };
 }
 
+QIcon AbstractItem::loadThemedIcon(QString path, QColor color) {
+    QPixmap image(path);
+	QPainter pt(&image);
+	pt.setCompositionMode(QPainter::CompositionMode_SourceIn);
+	pt.fillRect(image.rect(), color);
+	pt.end();
+	return QIcon(image);
+}
+
+QIcon AbstractItem::loadTextColorIcon(QString path) {
+	auto text_color = QApplication::palette().color(QPalette::Text);
+	return loadThemedIcon(path, text_color);
+}
+
 void AbstractItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
 {
 	// When selecting a robot item on the scene than display widget may appear.

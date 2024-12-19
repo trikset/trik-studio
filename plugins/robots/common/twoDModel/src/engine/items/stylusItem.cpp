@@ -55,8 +55,8 @@ AbstractItem *StylusItem::clone() const
 }
 
 QAction *StylusItem::stylusTool()
-{
-	QAction * const result = new QAction(QIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
+{	
+	QAction * const result = new QAction(loadTextColorIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_S), QKeySequence(Qt::Key_9)});
 	result->setCheckable(true);
 	return result;

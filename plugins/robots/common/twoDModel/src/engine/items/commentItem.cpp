@@ -39,7 +39,7 @@ CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
 
 QAction *CommentItem::commentTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_comment.svg"), tr("Text (T)"), nullptr);
+	QAction * const result = new QAction(loadTextColorIcon(":/icons/2d_comment.svg"), tr("Text (T)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_T), QKeySequence(Qt::Key_0)});
 	result->setCheckable(true);
 	return result;
