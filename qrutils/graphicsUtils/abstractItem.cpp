@@ -484,7 +484,7 @@ QStringList AbstractItem::getBrushStyleList()
 }
 
 QIcon AbstractItem::loadThemedIcon(QString path, QColor color) {
-    QPixmap image(path);
+	QPixmap image(path);
 	QPainter pt(&image);
 	pt.setCompositionMode(QPainter::CompositionMode_SourceIn);
 	pt.fillRect(image.rect(), color);
