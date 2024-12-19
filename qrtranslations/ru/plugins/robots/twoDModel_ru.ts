@@ -787,7 +787,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+22"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+24"/>
         <source>Hand dragging mode</source>
         <translation>Режим таскания сцены</translation>
     </message>
