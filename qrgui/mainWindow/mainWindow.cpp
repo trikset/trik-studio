@@ -649,23 +649,23 @@ bool MainWindow::windowsDarkThemeAvailiable()
 	if ( QOperatingSystemVersion::current().majorVersion() == 10 )
 	{
 		return QOperatingSystemVersion::current().microVersion() >= 17763;
-    }
-    else if ( QOperatingSystemVersion::current().majorVersion() > 10 )
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+	}
+	else if ( QOperatingSystemVersion::current().majorVersion() > 10 )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool MainWindow::windowsIsInDarkTheme()
 {
-    QSettings settings( 
+	QSettings settings( 
 		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
 		, QSettings::NativeFormat );
-    return settings.value( "AppsUseLightTheme", 1 ).toInt() == 0;
+	return settings.value( "AppsUseLightTheme", 1 ).toInt() == 0;
 }
 
 void MainWindow::initPalette() {
