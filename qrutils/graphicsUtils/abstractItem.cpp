@@ -21,6 +21,7 @@
 #include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QStyleOptionGraphicsItem>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
+#include <QApplication>
 
 using namespace graphicsUtils;
 
