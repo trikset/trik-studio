@@ -48,7 +48,7 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 	: Element(type, id, models)
 	, mPenStyle(Qt::SolidLine)
 	, mPenWidth(1)
-	, mPenColor(Qt::black)
+	, mPenColor(QApplication::palette().color(QPalette::Text))
 	, mType(type)
 	, mSrc(nullptr)
 	, mDst(nullptr)
@@ -66,7 +66,7 @@ EdgeElement::EdgeElement(const EdgeElementType &type, const Id &id, const models
 {
 	mPenStyle = mType.penStyle();
 	mPenWidth = mType.penWidth();
-	mPenColor = mType.penColor();
+	// mPenColor = mType.penColor();
 	setZValue(100);
 	setFlag(ItemIsMovable, true);
 	// if flag is true then draws strangely...
