@@ -93,7 +93,7 @@ jobs:
         7z a trik-studio.zip "$APP_DIR"
         install -m 600 -D /dev/null $HOME/.ssh/id_rsa
         echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" >  $HOME/.ssh/id_rsa
-        rsync -vvv --rsh="ssh -o StrictHostKeyChecking=no" trik-studio.zip ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-"$BRANCH_NAME"-x86_64.zip
+        rsync -v --rsh="ssh -o StrictHostKeyChecking=no -vvv -i $HOME/.ssh/id_rsa" trik-studio.zip ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-"$BRANCH_NAME"-x86_64.zip
       timeout-minutes: 15
       
     - name: Reinstall trik-studio and dll search
