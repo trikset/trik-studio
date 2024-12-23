@@ -91,10 +91,11 @@ jobs:
       run: |
         BRANCH_NAME="${GITHUB_REF#refs/*/}" && BRANCH_NAME=${BRANCH_NAME//\//-}
         7z a trik-studio.zip "$APP_DIR"
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" > ~/.ssh/id_rsa
-        rsync -v --rsh="ssh -o StrictHostKeyChecking=no" trik-studio.zip ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-"$BRANCH_NAME"-x86_64.zip
-
+        install -m 600 -D /dev/null $HOME/.ssh/id_rsa
+        echo "${{ secrets.DL_PRIVATE_SSH_KEY }}" >  $HOME/.ssh/id_rsa
+        rsync -vvv --rsh="ssh -o StrictHostKeyChecking=no" trik-studio.zip ${{ secrets.DL_USERNAME }}@${{ secrets.DL_HOST }}:~/dl/ts/fresh/installer/trik-studio-"$BRANCH_NAME"-x86_64.zip
+      timeout-minutes: 15
+      
     - name: Reinstall trik-studio and dll search
       run: |
         export UNINSTALL_SCRIPT_PATH=$GITHUB_WORKSPACE/trik_studio_uninstallscript.qs
@@ -151,11 +152,11 @@ jobs:
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".js "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: ${{ !startsWith(inputs.os, 'macos') }}
-      timeout-minutes: 15
+      timeout-minutes: 5
       
     - name: Run minimal Python interpeter tests as fields in .qrs (For backward compatibility)
       run: |
         for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done
       if: ${{ !startsWith(inputs.os, 'macos') }}
-      timeout-minutes: 15
+      timeout-minutes: 5
