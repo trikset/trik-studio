@@ -1,7 +1,7 @@
 QLabel {
     background-color: transparent;
     font-family: "Segoe UI";
-    color: black;
+    color: @@Text@@;
     font: 20px;
     text-align: left;
 }
@@ -12,8 +12,8 @@ QLabel#withoutIcon {
 
 QPushButton {
     border-style: solid;
-    border-color: rgb(236, 236, 236);
-    background-color: rgb(236, 236, 236);
+    border-color: @@Window@@;
+    background-color: @@Window@@;
 }
 
 QPushButton#withIcon {
@@ -21,5 +21,5 @@ QPushButton#withIcon {
 }
 
 QPushButton:hover, QPushButton:pressed {
-    background-color: rgb(216, 216, 216);
+    background-color: @@Highlight@@;
 }
