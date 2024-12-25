@@ -54,7 +54,7 @@ jobs:
       if: startsWith(inputs.container_name, 'rocky')
 
     - name: Install dependencies
-      run: pacman --verbose --noconfirm -S rsync
+      run: pacman --verbose --noconfirm -S rsync openssh
       if: startsWith(inputs.os, 'windows')
 
     - name: Install dependencies
