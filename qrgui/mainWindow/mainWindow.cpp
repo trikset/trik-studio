@@ -116,6 +116,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mInitialFileToOpen(fileToOpen)
 {
 	QLOG_INFO() << "MainWindow: screen DPI is" << logicalDpiX();
+	initPalette();
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
 	setWindowTitle("QReal");
@@ -130,7 +131,6 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	mTextManager.reset(new text::TextManager(mFacade->events(), *this));
 	mProjectManager.reset(new ProjectManagerWrapper(this, &*mTextManager));
 
-	initPalette();
 	initRecentProjectsMenu();
 	customizeWindow();
 	initTabs();

@@ -58,7 +58,6 @@ void Label::init()
 	QGraphicsTextItem::setFlags(ItemIsSelectable);
 	QGraphicsTextItem::setDefaultTextColor(Qt::black);
 	connect(document(), &QTextDocument::contentsChanged, this, &Label::saveToRepo);
-	
 	reinitFont();
 	setRotation(mProperties->rotation());
 	if (!mProperties->isStatic()) {
