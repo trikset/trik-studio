@@ -66,6 +66,9 @@ Runner::Runner(const QString &report, const QString &trajectory,
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
 
+	QEventLoop loop;
+	QTimer::singleShot(0, &loop, &QEventLoop::quit);
+	loop.exec();
 	mProjectManager->open(mSaveFile);
 }
 
