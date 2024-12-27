@@ -98,7 +98,7 @@ jobs:
         fetch-depth: 0
 
     - name: Set up environment
-      run: buildScripts/github/install_${{ runner.os }}.sh
+      run: buildScripts/github/install.sh
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
