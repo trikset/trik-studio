@@ -10,7 +10,7 @@ case $RUNNER_OS in
     TSNAME="trik-studio-installer-mac-$BRANCH_NAME.dmg"
     ;;
   Linux)
-    QTIFWBIN=$(find "$HOME"/Qt/Tools -name "bin" | head -n 1)
+    QTIFWBIN="${QTIFWBIN:-$(find "$HOME"/Qt/Tools -name "bin" | head -n 1)}"
     TSNAME="trik-studio-installer-linux-$BRANCH_NAME.run"
     ;;
   *) exit 1 ;;
