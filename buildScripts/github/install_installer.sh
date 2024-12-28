@@ -2,7 +2,7 @@
 set -eux
 
 prepare_environment(){
-  case "`uname`" in
+  case "$(uname)" in
     Linux)
       ID=$(grep '^ID=' /etc/os-release | cut -d'=' -f2)
       if [ "$ID" = "altlinux" ]; then
@@ -22,7 +22,7 @@ prepare_environment(){
 }
 
 install_installer(){
-  case "`uname`" in
+  case "$(uname)" in
     Darwin)
       sudo hdiutil attach "$INSTALLER_EXT_NAME"
       sudo cp -rf "/Volumes/$INSTALLER_NAME/$INSTALLER_NAME.app" $GITHUB_WORKSPACE
@@ -44,7 +44,7 @@ install_installer(){
 
 prepare_environment_variable_and_check_tools(){  
   EXT=""   
-  case "`uname`" in
+  case "$(uname)" in
     Darwin)
       PREFIX="/Applications"
       LIB_DIR="$PREFIX/TRIKStudio/TRIK Studio.app/Contents/Lib"
@@ -86,7 +86,7 @@ prepare_environment_variable_and_check_tools(){
 
 dll_search(){
   cd "$LIB_DIR"
-  case "`uname`" in
+  case "$(uname)" in
     Darwin)
       ls -- *.dylib | xargs otool -L | grep "not found" || exit 0
       ;;
