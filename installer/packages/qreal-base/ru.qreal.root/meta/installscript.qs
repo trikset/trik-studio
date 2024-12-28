@@ -168,8 +168,9 @@ Component.prototype.createOperations = function()
 		component.addOperation("CreateShortcut"
 				, "@TargetDir@\\" + installer.maintenanceName
 				, "@StartMenuDir@\\Uninstall @ProductName@" + installer.linkExtension);
+		// Rename trik-studio.cmd to trik-studio-safe.cmd to unambiguously interpret the file that users need to run
 		component.addOperation("Execute"
-				, "@TargetDir@\\" + installer.executableName + ".cmd"
+				, "@TargetDir@\\" + installer.executableName + "-safe.cmd"
 				, "--clear-conf");
 	} else if (installer.value("os") == "mac") {
 		component.addOperation("Execute"
