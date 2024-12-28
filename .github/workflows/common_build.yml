@@ -171,14 +171,6 @@ jobs:
       os: ubuntu-latest
       artifact_name: linux-installer
 
-  install-ubuntu-installer-1-concurrency:
-    needs: [build-rockylinux-installer]  
-    uses: ./.github/workflows/installer.yml
-    with:
-      os: ubuntu-latest
-      artifact_name: linux-installer
-      concurrency: 1
-
   install-rockylinux-installer:
     needs: [build-rockylinux-installer]  
     uses: ./.github/workflows/installer.yml

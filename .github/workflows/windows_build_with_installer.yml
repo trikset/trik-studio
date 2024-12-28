@@ -54,6 +54,9 @@ jobs:
       run:
         shell: msys2 {0}
 
+    outputs:
+      set-artifact: ${{ steps.set-artifact.outputs.set-artifact }}
+      
     steps:
     
       - name: Setup msys2
@@ -192,6 +195,10 @@ jobs:
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
             installer/reinstall*
+  
+      - name: Set a flag when uploading an artifact
+        id: set-artifact
+        run: echo "set-artifact=true" >> "$GITHUB_OUTPUT"
 
       - name: Check errors
         if: ${{ steps.tests.outcome == 'failure' }}
@@ -231,6 +238,7 @@ jobs:
 
   install-windows-installer:
     needs: [build]
+    if: ${{ always() && needs.build.outputs.set-artifact == 'true' }}
     uses: ./.github/workflows/installer.yml
     with:
       os: windows-latest

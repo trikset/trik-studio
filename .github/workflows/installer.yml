@@ -13,10 +13,6 @@ on:
       artifact_name:
         required: true
         type: string
-      concurrency:
-        required: false
-        type: number
-        default: 0
       shell:
         required: false
         type: string
@@ -82,9 +78,7 @@ jobs:
         export UNINSTALL_SCRIPT_PATH=$GITHUB_WORKSPACE/trik_studio_uninstallscript.qs
         export INSTALLER_EXT_NAME=$(ls -1d *-installer-* | head -n 1)
         export INSTALLER_NAME="${INSTALLER_EXT_NAME%.*}"
-        buildScripts/github/install_installer_${{ runner.os }}.sh
-      env:
-        CONCURRENCY: ${{ inputs.concurrency }}
+        buildScripts/github/install_installer.sh
 
     - name: Push zip archive to dl
       if: ${{ inputs.deploy_archive && github.event_name != 'pull_request' && github.repository_owner == 'trikset' && startsWith(inputs.os, 'windows') }}
@@ -101,9 +95,7 @@ jobs:
         export UNINSTALL_SCRIPT_PATH=$GITHUB_WORKSPACE/trik_studio_uninstallscript.qs
         export INSTALLER_EXT_NAME=$(ls -1d *-installer-* | head -n 1)
         export INSTALLER_NAME="${INSTALLER_EXT_NAME%.*}"
-        buildScripts/github/install_installer_${{ runner.os }}.sh
-      env:
-        CONCURRENCY: ${{ inputs.concurrency }}
+        buildScripts/github/install_installer.sh
 
     - name: Downloads minimal tests for Diagram mode
       run: |
@@ -113,9 +105,6 @@ jobs:
     - name: Prepare environment variable
       run: |
         echo "QT_QPA_PLATFORM=offscreen" >> $GITHUB_ENV
-        echo "QT_DEBUG_PLUGINS=1" >> $GITHUB_ENV
-        TWOD_EXEC_NAME=$(ls -1d "$BIN_DIR"/2D-model* | head -n 1) && echo "TWOD_EXEC_NAME=$TWOD_EXEC_NAME" >> $GITHUB_ENV
-        PATCHER_NAME=$(ls -1d "$BIN_DIR"/patcher* | head -n 1) && echo "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
         if [[ "$RUNNER_OS" != "Windows" ]]; then
           TRIK_PYTHONPATH_BUNDLE_DIR="$LIB_DIR"/python-runtime
           TRIK_PYTHONPATH=.:"${TRIK_PYTHONPATH_BUNDLE_DIR}/base_library.zip:${TRIK_PYTHONPATH_BUNDLE_DIR}/lib-dynload:${TRIK_PYTHONPATH_BUNDLE_DIR}"
