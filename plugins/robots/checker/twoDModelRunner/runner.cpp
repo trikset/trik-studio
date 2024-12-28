@@ -67,7 +67,7 @@ Runner::Runner(const QString &report, const QString &trajectory,
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
 
 	/* 
-	Upon initialization of the EV3 kit plugin, a subscription to the sensorAdded event in the Box2DPhysicsEngine 
+	HACK: Upon initialization of the EV3 kit plugin, a subscription to the sensorAdded event in the Box2DPhysicsEngine 
 	is registered with a delay using QTimerSingleShot(10). While this does not pose an issue when 
 	utilizing TRIK Studio, it becomes problematic when using the 2D-model projectManager->open function, 
 	as the subscription is established too late. As a consequence, the sensors are not properly processed by Box2D.
