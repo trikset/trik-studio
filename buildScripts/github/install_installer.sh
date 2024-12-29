@@ -93,7 +93,7 @@ dll_search(){
       ;;
     Linux)
       # Find dependencies that have not been packaged, but are still in the system
-      find . -namr  '*.so*' -print0 | xargs -0 -nl ldd | grep -Ev "not found$" | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
+      find . -name  '*.so*' -print0 | xargs -0 -nl ldd | grep -Ev "not found$" | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
          | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(c|dl|m|pthread|rt)\.so.*" \
          | grep -Ev "$LD_LIBRARY_PATH" | grep -Ev "ld|linux-vdso"
 
