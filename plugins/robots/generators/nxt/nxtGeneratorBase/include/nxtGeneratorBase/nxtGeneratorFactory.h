@@ -28,6 +28,7 @@ public:
 			, qReal::ErrorReporterInterface &errorReporter
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 			, generatorBase::lua::LuaProcessor &luaProcessor
+			, generatorBase::ReadableLabelManager &readableLabelManager
 			, const QString &generatorName);
 	~NxtGeneratorFactory() override;
 

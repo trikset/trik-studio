@@ -4,6 +4,7 @@
         <file>templates/break.t</file>
         <file>templates/comment.t</file>
         <file>templates/continue.t</file>
+        <file>templates/pass.t</file>
         <file>templates/finalNodeMain.t</file>
         <file>templates/finalNodeSubprogram.t</file>
         <file>templates/function.t</file>
