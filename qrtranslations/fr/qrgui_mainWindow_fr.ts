@@ -80,7 +80,7 @@
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>&amp;View</source>
         <translation>&amp;Affichage</translation>
     </message>
@@ -258,11 +258,12 @@
     </message>
     <message>
         <location line="+3"/>
+        <location line="+181"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-176"/>
         <source>Save as...</source>
         <translation>Enregistrer sous...</translation>
     </message>
@@ -415,6 +416,11 @@
     </message>
     <message>
         <location line="+5"/>
+        <source>Save script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
         <source>Close project</source>
         <translation>Fermer le projet</translation>
     </message>
@@ -708,7 +714,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+620"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+621"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -717,7 +723,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-425"/>
+        <location line="-426"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -729,7 +735,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+673"/>
+        <location line="+674"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -837,7 +843,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+202"/>
+        <location line="+203"/>
         <source>Gestures Show</source>
         <translation>Afficher les gestes</translation>
     </message>
@@ -915,7 +921,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>[modifié]</translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location line="+94"/>
         <source>Select file to save current metamodel to</source>
         <translation>Choisir un fichier pour enregister le metamodèle courant</translation>
     </message>

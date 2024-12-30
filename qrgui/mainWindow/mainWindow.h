@@ -276,6 +276,7 @@ private slots:
 
 	void updatePaletteIcons();
 	void setTextChanged(qReal::text::QScintillaTextEdit *editor, bool changed);
+	void saveScript();
 
 private:
 	/// Initializes a tab if it is a diagram --- sets its logical and graphical
