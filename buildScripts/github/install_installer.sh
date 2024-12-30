@@ -48,19 +48,16 @@ prepare_environment_variable_and_check_tools(){
     Darwin)
       PREFIX="/Applications"
       LIB_DIR="$PREFIX/TRIKStudio/TRIK Studio.app/Contents/Lib"
-      export DYLD_LIBRARY_PATH="$LIB_DIR" 
       ;; 
     Linux)
       ID=$(grep '^ID=' /etc/os-release | cut -d'=' -f2)
       if [[ $ID = ubuntu ]]; then PREFIX="$HOME"; else PREFIX="/opt"; fi
-      LIB_DIR="$PREFIX/TRIKStudio/lib"
-      export LD_LIBRARY_PATH="$LIB_DIR"
+      LIB_DIR="$PREFIX/TRIKStudio/lib"      
       export QT_QPA_PLATFORM=minimal
       ;;
     MINGW64*)
       PREFIX="/C"
       LIB_DIR="$PREFIX/TRIKStudio"
-      export LD_LIBRARY_PATH="LIB_DIR"
       EXT=".exe"
       ;;
     *) exit 1 ;; 
@@ -73,10 +70,10 @@ prepare_environment_variable_and_check_tools(){
   TRIK_STUDIO_NAME=$(find "$APP_DIR" -name "trik-studio$EXT" -print -quit)
   MAINTENANCE=$(find "$APP_DIR" -name "maintenance$EXT" -print -quit)
   
-  "$TWOD_EXEC_NAME" --version
-  "$PATCHER_NAME" --version
-  "$TRIK_STUDIO_NAME" --version
-  "$MAINTENANCE" --version
+  env DYLD_LIBRARY_PATH="$LIB_DIR" LD_LIBRARY_PATH="$LIB_DIR" "$TWOD_EXEC_NAME" --version
+  env DYLD_LIBRARY_PATH="$LIB_DIR" LD_LIBRARY_PATH="$LIB_DIR" "$PATCHER_NAME" --version
+  env DYLD_LIBRARY_PATH="$LIB_DIR" LD_LIBRARY_PATH="$LIB_DIR" "$TRIK_STUDIO_NAME" --version
+  env DYLD_LIBRARY_PATH="$LIB_DIR" LD_LIBRARY_PATH="$LIB_DIR" "$MAINTENANCE" --version
   
   echo "TWOD_EXEC_NAME=$TWOD_EXEC_NAME" >> $GITHUB_ENV
   echo "PATCHER_NAME=$PATCHER_NAME" >> $GITHUB_ENV
@@ -89,23 +86,23 @@ dll_search(){
   ls -l1
   case "$(uname)" in
     Darwin)
-      find . -name '*.dylib*' -print0 | xargs -0 -n1 otool -L | grep "not found" || exit 0
+      find . -name '*.dylib*' -print0 | xargs -0 -n1 env DYLD_LIBRARY_PATH="$LIB_DIR" otool -L | grep "not found" || exit 0
       ;;
     Linux)
       # Find dependencies that have not been packaged, but are still in the system
-      find . -name  '*.so*' -print0 | xargs -0 -nl ldd | grep -Ev "not found$" | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
+      find . -name  '*.so*' -print0 | xargs -0 -nl env LD_LIBRARY_PATH="$LIB_DIR" ldd | grep -Ev "not found$" | grep so | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
          | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(c|dl|m|pthread|rt)\.so.*" \
-         | grep -Ev "$LD_LIBRARY_PATH" | grep -Ev "ld|linux-vdso"
+         | grep -Ev "$LIB_DIR" | grep -Ev "ld|linux-vdso"
 
-      find . -name '*.so*' -print0 | xargs -0 -n1 ldd | grep "not found" || exit 0
+      find . -name '*.so*' -print0 | xargs -0 -n1 env LD_LIBRARY_PATH="$LIB_DIR" ldd | grep "not found" || exit 0
       ;;
     MINGW64*)
       # Find dependencies that have not been packaged, but are still in the system
-      find . -name '*.dll*' -print0 | xargs -0 -n1 ldd | grep -Ev "not found$" | grep dll | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
+      find . -name '*.dll*' -print0 | xargs -0 -n1 env LD_LIBRARY_PATH="$LIB_DIR" ldd | grep -Ev "not found$" | grep dll | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
 	| sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(System|SYSTEM)32.*dll" \
 	| grep -Ev "$LD_LIBRARY_PATH"
 
-      find . -name '*.dll*' -print0 | xargs -0 -n1 ldd | grep "not found" || exit 0
+      find . -name '*.dll*' -print0 | xargs -0 -n1 env LD_LIBRARY_PATH="$LIB_DIR" ldd | grep "not found" || exit 0
       ;;
     *) exit 1 ;;
   esac
