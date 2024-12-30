@@ -100,7 +100,7 @@ dll_search(){
       # Find dependencies that have not been packaged, but are still in the system
       find . -name '*.dll*' -print0 | xargs -0 -n1 env LD_LIBRARY_PATH="$LIB_DIR" ldd | grep -Ev "not found$" | grep dll | sed -e '/^[^\t]/ d' | sed -e 's/\t//' \
 	| sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -Ev "lib(System|SYSTEM)32.*dll" \
-	| grep -Ev "$LD_LIBRARY_PATH"
+	| grep -Ev "$LIB_DIR"
 
       find . -name '*.dll*' -print0 | xargs -0 -n1 env LD_LIBRARY_PATH="$LIB_DIR" ldd | grep "not found" || exit 0
       ;;
