@@ -100,6 +100,8 @@ private slots:
 private:
 	QString kitIdOf(kitBase::robotModel::RobotModelInterface &model) const;
 
+	QIcon loadThemedIcon(QString svg_path, QColor color);
+
 	bool mEnableRobotActions {};
 
 	/// if the run action should be visible

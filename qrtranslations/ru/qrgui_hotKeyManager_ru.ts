@@ -4,7 +4,7 @@
 <context>
     <name>PreferencesHotKeyManagerPage</name>
     <message>
-        <location filename="../../qrgui/hotKeyManager/hotKeyManagerPage.cpp" line="+99"/>
+        <location filename="../../qrgui/hotKeyManager/hotKeyManagerPage.cpp" line="+98"/>
         <source>Question</source>
         <translation>Вопрос</translation>
     </message>
