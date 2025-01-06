@@ -27,7 +27,7 @@ Controller.prototype.StartMenuDirectoryPageCallback = function() {
 Controller.prototype.ComponentSelectionPageCallback = function() {
   var widget = gui.currentPageWidget();
   
-//  widget.deselectAll();
+  widget.selectAll();
   
 //  widget.selectComponent("ru.qreal.root.trik");
 //    widget.selectComponent("ru.qreal.root.trik.core");
