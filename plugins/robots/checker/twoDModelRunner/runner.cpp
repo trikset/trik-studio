@@ -73,7 +73,7 @@ Runner::Runner(const QString &report, const QString &trajectory,
 	as the subscription is established too late. As a consequence, the sensors are not properly processed by Box2D.
 	*/
 	QEventLoop loop;
-	QTimer::singleShot(0, &loop, &QEventLoop::quit);
+	QTimer::singleShot(10, &loop, &QEventLoop::quit);
 	loop.exec();
 	mProjectManager->open(mSaveFile);
 }
