@@ -99,7 +99,7 @@ jobs:
 
     - name: Downloads minimal tests for Diagram mode
       run: |
-        curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small.7z"
+        curl --output tests.7z "https://dl.trikset.com/edu/.solutions20200701/testing_small_with_nxt.7z"
         7z x tests.7z || 7za x tests.7z
         
     - name: Prepare environment variable
