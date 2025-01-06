@@ -43,11 +43,11 @@ case "$(uname)" in
     if [ "$ID" = "altlinux" ]; then
       sudo apt-get update && sudo apt-get install -y gcc-c++ curl xz p7zip-standalone rsync libusb-devel \
       libudev-devel libGL-devel libGLX-mesa python3-dev zlib-devel make ccache python3-module-pip time \
-      qt5-multimedia-devel qt5-svg-devel qt5-script-devel qt5-tools qt5-serialport-devel libqscintilla2-qt5-devel
+      qt5-multimedia-devel qt5-svg-devel qt5-script-devel qt5-tools qt5-serialport-devel
     elif [ "$ID" = "ubuntu" ]; then
       sudo apt-get update && sudo apt-get install -y --no-install-recommends ccache curl libusb-1.0-0-dev \
       make qtscript5-dev qttools5-dev-tools qtmultimedia5-dev libqt5serialport5-dev libqt5svg5-dev \
-      libudev-dev "$TRIK_PYTHON"-dev qtbase5-private-dev qtwayland5 libqscintilla2-qt5-dev
+      libudev-dev "$TRIK_PYTHON"-dev qtbase5-private-dev qtwayland5 libqscintilla2-qt5-dev libquazip5-dev
     elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
       GCC_VERSION=${GCC_VERSION:-13}
       sudo yum update -y &&  sudo yum install -y --setopt=install_weak_deps=False epel-release
