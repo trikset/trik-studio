@@ -20,7 +20,6 @@
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/platformInfo.h>
 #include <qrutils/singleton.h>
-#include <QOperatingSystemVersion>
 
 #include "QsLog.h"
 #include "nxtOsekCMasterGenerator.h"
@@ -229,31 +228,27 @@ void NxtOsekCGeneratorPlugin::uploadProgram()
 void NxtOsekCGeneratorPlugin::checkNxtTools()
 {
 	const QDir dir(PlatformInfo::invariantSettingsPath("pathToNxtTools"));
-	const QDir gnuarm(dir.absolutePath() + "/gnuarm");
-	const QDir nexttool(dir.absolutePath() + "/nexttool");
-	const QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
+	auto compilePath = dir.absolutePath() + "/compile.sh";
 
-	if (!dir.exists() || !gnuarm.exists() || !nexttool.exists() || !nxtOSEK.exists()) {
-		mNxtToolsPresent = false;
+	auto nxtToolsPresent = dir.exists()
+			&& QFileInfo::exists(dir.absolutePath() + "/gnuarm")
+			&& QFileInfo::exists(dir.absolutePath() + "/nexttool")
+			&& QFileInfo::exists(dir.absolutePath() + "/nxtOSEK")
+			&& QFileInfo::exists(compilePath) && QFileInfo(compilePath).isFile();
+
+	if (!nxtToolsPresent) {
+		mNxtToolsPresent  = false;
 		QLOG_ERROR() << "Missing" << dir.absolutePath() << "or mandatory subdirectory" <<
 			dir.entryList(QDir::Filter::NoFilter, QDir::SortFlag::DirsFirst | QDir::SortFlag::Name);
-	} else {
-		switch(QOperatingSystemVersion::currentType()) {
-		default:
-			break;
+		return;
+	}
 
-		case QOperatingSystemVersion::OSType::Windows: {
-			QFile compile1(dir.absolutePath() + "/compile.bat");
-			QFile compile2(dir.absolutePath() + "/compile.sh");
-			mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists()
-					&& compile1.exists() && compile2.exists();
-		}
-			break;
-		case QOperatingSystemVersion::OSType::Unknown: {
-			QFile compile(dir.absolutePath() + "/compile.sh");
-			mNxtToolsPresent = nexttool.exists() && nxtOSEK.exists() && compile.exists();
-		}
-			break;
-		}
+	auto osType = PlatformInfo::osType();
+	if (osType == "linux") {
+		mNxtToolsPresent = true;
+	}
+	else if (osType == "windows") {
+		auto compileBatPath = dir.absolutePath() + "/compile.bat";
+		mNxtToolsPresent = QFileInfo::exists(compileBatPath) && QFileInfo(compileBatPath).isFile();
 	}
 }

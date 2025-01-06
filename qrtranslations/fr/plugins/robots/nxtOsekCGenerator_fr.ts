@@ -4,7 +4,7 @@
 <context>
     <name>nxt::NxtFlashTool</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+73"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+72"/>
         <source>Robot is already being flashed</source>
         <translation>Le robot est en train d&apos;être flashé</translation>
     </message>
@@ -67,7 +67,7 @@
         <translation>Le téléversement est deja lancé</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+27"/>
         <source>Uploading program started. Please don&apos;t disconnect robot during the process</source>
         <translation>Le téléversement du programme est commencé. S&apos;il vous plait, ne déconnectéz pas le robot jusqu&apos;à ce que le processus se termine</translation>
     </message>
@@ -117,7 +117,7 @@
         <translation>Une erreur de compilation s&apos;est produite. Vérifiez le syntaxe à l&apos;intérieur des blocs &quot;fonction&quot;. S&apos;ils sont valides, contactez les developpeurs</translation>
     </message>
     <message>
-        <location line="-187"/>
+        <location line="-186"/>
         <source>Could not open %1 for reading.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -147,7 +147,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+107"/>
+        <location line="+106"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,7 +165,7 @@
 <context>
     <name>nxt::osekC::NxtOsekCGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+33"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+32"/>
         <source>Generation (NXT OSEK C)</source>
         <translation>Génération (NXT OSEK C)</translation>
     </message>

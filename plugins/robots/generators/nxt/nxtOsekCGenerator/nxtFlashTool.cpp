@@ -27,7 +27,6 @@
 #include <thirdparty/runExtensions.h>
 #include <nxtKit/communication/nxtCommandConstants.h>
 #include <nxtKit/communication/usbRobotCommunicationThread.h>
-#include <QOperatingSystemVersion>
 
 using namespace nxt;
 using namespace qReal;
@@ -225,23 +224,22 @@ bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
 
 	mCompileProcess.setWorkingDirectory(path());
 
-	switch(QOperatingSystemVersion::currentType()) {
-	default:
-		break;
-	case QOperatingSystemVersion::OSType::Windows: {
-		auto pathToNxtTools = path().replace("\\", "/");
+	auto osType = PlatformInfo::osType();
+	if (osType == "windows") {
 		auto line = path("compile.bat")
-					+ " " + fileInfo.completeBaseName()
-					+ " " + fileInfo.absolutePath() + " " + pathToNxtTools+"gnuarm";
+			+ " " + fileInfo.completeBaseName()
+			+ " " + fileInfo.absolutePath()
+			+ " " + path("gnuarm");
 		mCompileProcess.start("cmd", { "/c", line});
 	}
-		break;
-	case QOperatingSystemVersion::OSType::Unknown: {
+	else if (osType == "linux") {
 		auto line = "./compile.sh . " + fileInfo.absolutePath() +
 					" GNUARM_ROOT="+SettingsManager::value("pathToArmNoneEabi").toString();
 		mCompileProcess.start("/bin/bash", {"-c", line});
 	}
-		break;
+	else {
+		QLOG_INFO() << "Platform: " << osType << "not supported for upload program";
+		return false;
 	}
 	information(tr("Uploading program started. Please don't disconnect robot during the process"));
 	return true;
@@ -303,7 +301,7 @@ void NxtFlashTool::readNxtCompileData()
 						"If you sure in their validness contact developers"));
 			} else {
 				error(tr("Could not upload program. Make sure the robot is connected and ON"));
-				if (QOperatingSystemVersion::currentType() == QOperatingSystemVersion::OSType::Unknown) {
+				if (PlatformInfo::osType() == "linux") {
 					error(tr("If you are using GNU/Linux visit "
 							 "https://help.trikset.com/nxt/run-upload-programs to get instructions"));
 				}

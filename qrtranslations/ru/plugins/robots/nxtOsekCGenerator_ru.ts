@@ -4,7 +4,7 @@
 <context>
     <name>nxt::NxtFlashTool</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+73"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+72"/>
         <source>Robot is already being flashed</source>
         <translation>Робот уже прошивается</translation>
     </message>
@@ -67,7 +67,7 @@
         <translation>Программа уже загружается</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+27"/>
         <source>Uploading program started. Please don&apos;t disconnect robot during the process</source>
         <translation>Начат процесс загрузки программы в робота. Пожалуйста, не отсоединяйте робота, пока процесс не будет завершен</translation>
     </message>
@@ -117,7 +117,7 @@
         <translation>Произошла ошибка компиляции. Проверьте синтаксис выражений внутри блоков &quot;Функция&quot;;. Если Вы уверены в их корректности, обратитесь к разработчикам</translation>
     </message>
     <message>
-        <location line="-187"/>
+        <location line="-186"/>
         <source>Could not open %1 for reading.</source>
         <translation>Не могу открыть файл %1 для чтения.</translation>
     </message>
@@ -147,7 +147,7 @@
         <translation>Прошиваю робота...</translation>
     </message>
     <message>
-        <location line="+107"/>
+        <location line="+106"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
         <translation>Загрузка программы не удалась. Возможно, стоит попробовать перезапустить среду с правами суперпользователя</translation>
     </message>
@@ -173,7 +173,7 @@
         <translation type="vanished">Файл исходного кода Lego NXT OSEK C</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+33"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+32"/>
         <source>Generation (NXT OSEK C)</source>
         <translation>Генерация (C)</translation>
     </message>

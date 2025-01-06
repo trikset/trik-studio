@@ -18,7 +18,7 @@
 #include <utils/widgets/comPortPicker.h>
 #include "QsLog.h"
 #include <QOperatingSystemVersion>
-
+#include <qrkernel/platformInfo.h>
 
 using namespace nxt;
 using namespace qReal;
@@ -104,8 +104,8 @@ void NxtAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotMod
 {
 	QLOG_DEBUG() << robotModel->name();
 	mUi->bluetoothSettingsGroupBox->setVisible(robotModel->name() == mBluetoothRobotName);
-	if (QOperatingSystemVersion::currentType() == QOperatingSystemVersion::OSType::Unknown) {
-	mUi->generatorSettingsGroupBox->setVisible(robotModel->name() == "NxtOsekCGeneratorRobotModel");
+	if (PlatformInfo::osType()  == "linux") {
+		mUi->generatorSettingsGroupBox->setVisible(robotModel->name() == "NxtOsekCGeneratorRobotModel");
 	}
 }
 
