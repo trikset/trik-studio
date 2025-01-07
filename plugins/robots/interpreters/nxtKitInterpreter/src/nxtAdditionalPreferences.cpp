@@ -30,8 +30,13 @@ NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName,
 {
 	mUi->setupUi(this);
 	mUi->robotImagePicker->configure("nxtRobot2DImage", tr("2D robot image:"));
-	mUi->compilerPicker->configure("pathToArmNoneEabi", tr("Path to arm-none-eabi:"));
-	setTextOnGeneratorLabel();
+	if (PlatformInfo::osType()  == "linux") {
+		mUi->compilerPicker->configure("pathToArmNoneEabi", tr("Path to arm-none-eabi:"));
+		setTextOnGeneratorLabel();
+	}
+	else {
+		mUi->generatorSettingsGroupBox->setVisible(false);
+	}
 	connect(mUi->manualComPortCheckbox, &QCheckBox::toggled
 			, this, &NxtAdditionalPreferences::manualComPortCheckboxChecked);
 }

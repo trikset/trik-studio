@@ -56,12 +56,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Path to arm-none-eabi:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+23"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
         <translation type="unfinished"></translation>
