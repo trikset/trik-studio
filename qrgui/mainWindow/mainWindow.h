@@ -230,6 +230,7 @@ private slots:
 	void hideBottomDocks();
 
 	void openRecentProjectsMenu();
+	void openRecentFilesMenu();
 
 	void tryToSave();
 	void saveDiagramAsAPicture();
@@ -399,7 +400,9 @@ private:
 	qReal::gui::PreferencesDialog *mPreferencesDialog; //Has ownership
 
 	int mRecentProjectsLimit {};
+	int mRecentFilesLimit {};
 	QMenu *mRecentProjectsMenu {}; // Has ownership
+	QMenu *mRecentFilesMenu {}; // Has ownership
 
 	QScopedPointer<FindManager> mFindHelper;
 	StartWidget *mStartWidget {}; // Has ownership

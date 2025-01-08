@@ -30,7 +30,8 @@ using namespace qReal;
 using namespace text;
 
 TextManager::TextManager(SystemEvents &systemEvents, gui::MainWindowInterpretersInterface &mainWindow)
-	: mMainWindow(mainWindow)
+	: mRecentFilesLimit(SettingsManager::value("recentFilesLimit").toInt())
+	, mMainWindow(mainWindow)
 	, mSystemEvents(systemEvents)
 {
 	connect(&mSystemEvents, &SystemEvents::codeTabClosed, this, &TextManager::onTabClosed);
@@ -238,6 +239,31 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo
 	}
 }
 
+void TextManager::refreshRecentFilesList(const QString &fileName) {
+	QString previousString = SettingsManager::value("recentFiles").toString();
+	QStringList previousList = previousString.split(";", QString::SkipEmptyParts);
+	previousList.removeOne(fileName);
+
+	if (!previousList.isEmpty() && (previousList.size() == mRecentFilesLimit)) {
+		previousList.removeLast();
+	}
+
+	previousString.clear();
+	if (mRecentFilesLimit > 0) {
+		previousList.push_front(fileName);
+		QStringListIterator iterator(previousList);
+		while (iterator.hasNext()) {
+			const auto recentFileName = iterator.next();
+			const QFileInfo fileInfo(recentFileName);
+			if (fileInfo.exists() && fileInfo.isFile()) {
+				previousString = previousString + recentFileName + ";";
+			}
+		}
+	}
+
+	SettingsManager::setValue("recentFiles", previousString);
+}
+
 void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::LanguageInfo &language)
 {
 	Q_ASSERT(!fileInfo.completeBaseName().isEmpty());
@@ -254,6 +280,7 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 		return;
 	}
 
+	refreshRecentFilesList(filePath);
 	area->show();
 
 	// Need to bind diagram and code file only if code is just generated
@@ -289,7 +316,6 @@ bool TextManager::saveText(bool saveAs)
 
 	if (!fileInfo.fileName().isEmpty()) {
 		mMainWindow.setTabText(area, fileInfo.fileName());
-
 		utils::OutFile out(fileInfo.absoluteFilePath());
 
 		out() << area->text();
@@ -304,6 +330,8 @@ bool TextManager::saveText(bool saveAs)
 		if (saveAs && !diagram.isNull()) {
 			emit mSystemEvents.codePathChanged(diagram, path(area), fileInfo);
 		}
+
+		refreshRecentFilesList(fileInfo.absoluteFilePath());
 	}
 
 	return true;
