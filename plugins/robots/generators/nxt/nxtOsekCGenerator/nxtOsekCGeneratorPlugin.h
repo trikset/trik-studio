@@ -89,8 +89,6 @@ private:
 	bool mNxtToolsPresent { false };
 	/// Flasher object
 	QScopedPointer<NxtFlashTool> mFlashTool;
-
-	NxtOsekCMasterGenerator *mMasterGenerator;
 	const QSharedPointer<communication::UsbRobotCommunicationThread> mCommunicator;
 };
 
