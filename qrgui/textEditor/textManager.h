@@ -17,7 +17,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QMultiHash>
-
+#include <qrkernel/settingsManager.h>
 #include "qrgui/textEditor/textEditorDeclSpec.h"
 #include "qrgui/textEditor/textManagerInterface.h"
 #include "qrgui/textEditor/codeBlockManager.h"
@@ -82,12 +82,14 @@ private slots:
 	void onTabClosed(const QFileInfo &file);
 
 private:
+
+	void refreshRecentFilesList(const QString &fileName);
 	QMap<QString, text::QScintillaTextEdit*> mText; // No ownership
 	QMap<text::QScintillaTextEdit*, QString> mPath; // No ownership
 
 	/// If default path - true.
 	QMap<QString, bool> mPathType;
-
+	int mRecentFilesLimit {};
 	/// Contains names of generator, which generate each file
 	QMap<QString, QString> mGeneratorName;
 

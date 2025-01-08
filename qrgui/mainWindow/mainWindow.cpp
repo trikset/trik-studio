@@ -111,6 +111,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mRootIndex(QModelIndex())
 	, mPreferencesDialog(new gui::PreferencesDialog(this))
 	, mRecentProjectsLimit(SettingsManager::value("recentProjectsLimit").toInt())
+	, mRecentFilesLimit(SettingsManager::value("recentFilesLimit").toInt())
 	, mSceneCustomizer(new SceneCustomizer())
 	, mInitialFileToOpen(fileToOpen)
 {
@@ -611,6 +612,26 @@ void MainWindow::openRecentProjectsMenu()
 		mRecentProjectsMenu->addAction(projectPath);
 		QObject::connect(mRecentProjectsMenu->actions().last(), &QAction::triggered
 				, &*mProjectManager, [this, projectPath](){ mProjectManager->openExisting(projectPath);});
+	}
+}
+
+void MainWindow::openRecentFilesMenu()
+{
+	mRecentFilesMenu->clear();
+	const QString stringList = SettingsManager::value("recentFiles").toString();
+	QStringList recentFiles = stringList.split(";", QString::SkipEmptyParts);
+	mRecentFilesLimit = SettingsManager::value("recentFilesLimit", mRecentFilesLimit).toInt();
+	while (recentFiles.size() > mRecentFilesLimit) {
+		recentFiles.pop_front();
+	}
+
+	for (const QString &filePath : recentFiles) {
+		const QFileInfo fileInfo(filePath);
+		if (fileInfo.exists() && fileInfo.isFile()) {
+			mRecentFilesMenu->addAction(filePath);
+			QObject::connect(mRecentFilesMenu->actions().last(), &QAction::triggered
+					, &*mProjectManager, [this, filePath](){ mProjectManager->openExisting(filePath);});
+		}
 	}
 }
 
@@ -2117,6 +2138,10 @@ void MainWindow::initRecentProjectsMenu()
 	mRecentProjectsMenu = new QMenu(tr("Recent projects"), mUi->menu_File);
 	mUi->menu_File->insertMenu(mUi->menu_File->actions().at(1), mRecentProjectsMenu);
 	connect(mRecentProjectsMenu, &QMenu::aboutToShow, this, &MainWindow::openRecentProjectsMenu);
+
+	mRecentFilesMenu = new QMenu(tr("Recent files"), mUi->menu_File);
+	mUi->menu_File->insertMenu(mUi->menu_File->actions().at(2), mRecentFilesMenu);
+	connect(mRecentFilesMenu, &QMenu::aboutToShow, this, &MainWindow::openRecentFilesMenu);
 }
 
 void MainWindow::saveDiagramAsAPictureToFile(const QString &fileName)

@@ -67,6 +67,7 @@ pythonPath=python
 generationTimeout=100
 nodesStateButtonExpands=true
 recentProjectsLimit=5
+recentFilesLimit=7
 dragArea = 12
 touchMode=false
 scriptInterpretation=false
