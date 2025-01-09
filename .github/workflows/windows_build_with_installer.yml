@@ -96,7 +96,7 @@ jobs:
           version: '${{matrix.qt-version}}'
           arch: win${{ matrix.mingw-bitness }}_mingw${{matrix.mingw-short-version}}
           modules: 'qtscript'
-          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats qtwinextras'
+          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats qtwinextras qttranslations'
           tools: 'tools_mingw,qt.tools.win${{ matrix.mingw-bitness }}_mingw${{matrix.mingw-short-version}}0 tools_ifw'
           add-tools-to-path: true
           cache: true
