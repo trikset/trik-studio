@@ -46,6 +46,12 @@ jobs:
       if: startsWith(inputs.container_name, 'alt')
 
     - name: Install dependencies
+      run: |
+        apt-get update && apt-get install -y --no-install-recommends git-core p7zip-full curl sudo
+        sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
+      if: contains(inputs.container_name, 'astra')
+
+    - name: Install dependencies
       run: yum install -y epel-release && yum update -y && yum install -y --setopt=install_weak_deps=False git-core findutils p7zip sudo
       if: startsWith(inputs.container_name, 'rocky')
 
