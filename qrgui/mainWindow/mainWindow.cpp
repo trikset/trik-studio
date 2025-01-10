@@ -620,14 +620,14 @@ void MainWindow::openRecentProjectsMenu()
 void MainWindow::openRecentFilesMenu()
 {
 	mRecentFilesMenu->clear();
-	const QString stringList = SettingsManager::value("recentFiles").toString();
-	QStringList recentFiles = stringList.split(";", QString::SkipEmptyParts);
+	const auto stringList = SettingsManager::value("recentFiles").toString();
+	auto recentFiles = stringList.split(";", QString::SkipEmptyParts);
 	mRecentFilesLimit = SettingsManager::value("recentFilesLimit", mRecentFilesLimit).toInt();
 	while (recentFiles.size() > mRecentFilesLimit) {
 		recentFiles.pop_front();
 	}
 
-	for (const QString &filePath : recentFiles) {
+	for (auto &&filePath : recentFiles) {
 		const QFileInfo fileInfo(filePath);
 		if (fileInfo.exists() && fileInfo.isFile()) {
 			mRecentFilesMenu->addAction(filePath);
