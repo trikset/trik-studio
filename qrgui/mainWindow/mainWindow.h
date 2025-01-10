@@ -195,6 +195,7 @@ public slots:
 	void closeStartTab();
 	void closeAllTabs();
 	void refreshRecentProjectsList(const QString &fileName);
+	void refreshRecentFilesList(const QString &fileName);
 	void createDiagram(const QString &idString);
 	/// Creates project with specified root diagram
 	bool createProject(const QString &diagramIdString);
