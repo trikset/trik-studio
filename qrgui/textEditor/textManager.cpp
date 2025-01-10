@@ -240,8 +240,8 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo
 }
 
 void TextManager::refreshRecentFilesList(const QString &fileName) {
-	QString previousString = SettingsManager::value("recentFiles").toString();
-	QStringList previousList = previousString.split(";", QString::SkipEmptyParts);
+	auto previousString = SettingsManager::value("recentFiles").toString();
+	auto previousList = previousString.split(";", QString::SkipEmptyParts);
 	previousList.removeOne(fileName);
 
 	if (!previousList.isEmpty() && (previousList.size() == mRecentFilesLimit)) {
