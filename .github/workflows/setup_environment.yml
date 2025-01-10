@@ -97,7 +97,7 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
-    - name: Remove thirparty submodules
+    - name: Remove thirdparty submodules (use from libs from distro)
       run: |
         set -xeu
         if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_quazip" ]]; then
