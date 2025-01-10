@@ -624,7 +624,12 @@
     <message>
         <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
         <source>Browse...</source>
-        <translation type="unfinished">Обзор...</translation>
+        <translation>Обзор...</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Select directory</source>
+        <translation>Выберите директорию</translation>
     </message>
 </context>
 <context>

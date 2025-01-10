@@ -1,4 +1,4 @@
-/* Copyright 2017 CyberTech Labs Ltd.
+/* Copyright 2025 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ using namespace qReal::ui;
 
 dirPicker::dirPicker(QWidget *parent)
 	: QWidget(parent)
+	, mLabel(new QLabel(this))
+	, mPathEditor(new QLineEdit(this))
 {
-	mLabel = new QLabel(this);
-	mPathEditor = new QLineEdit(this);
 	QPushButton *button = new QPushButton(style()->standardIcon(QStyle::SP_DirIcon), tr("Browse..."), this);
 	QHBoxLayout *layout = new QHBoxLayout(this);
 	layout->addWidget(mLabel);
@@ -44,7 +44,8 @@ void dirPicker::configure(const QString &settingsKey, const QString &title)
 	mLabel->setText(title);
 }
 
-bool dirPicker::isSavedDirExist(){
+bool dirPicker::isSavedDirExist()
+{
 	return QDir(SettingsManager::value(mSettingsKey).toString()).exists();
 }
 
@@ -64,7 +65,7 @@ void dirPicker::restore()
 
 void dirPicker::pick()
 {
-	QDir dirPath=QFileDialog::getExistingDirectory(this, "Get Any File");
+	QDir dirPath = QFileDialog::getExistingDirectory(this, tr("Select directory"));
 	SettingsManager::setValue(mSettingsKey, dirPath.absolutePath());
 	mPathEditor->setText(dirPath.absolutePath());
 }

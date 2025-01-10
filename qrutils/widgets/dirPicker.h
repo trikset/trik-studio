@@ -1,4 +1,4 @@
-/* Copyright 2017 CyberTech Labs Ltd.
+/* Copyright 2025 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-
 #include <qrutils/utilsDeclSpec.h>
 
 class QLabel;
@@ -41,6 +40,7 @@ public:
 	/// Restores last picked value.
 	void restore();
 
+	/// Determines whether the picked location exists or not
 	bool isSavedDirExist();
 
 

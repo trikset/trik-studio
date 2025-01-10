@@ -514,6 +514,11 @@
         <source>Browse...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location line="+35"/>
+        <source>Select directory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>utils::MetamodelGeneratorSupport</name>
