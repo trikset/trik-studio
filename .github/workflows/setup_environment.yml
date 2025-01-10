@@ -97,6 +97,17 @@ jobs:
         submodules: recursive
         fetch-depth: 0
 
+    - name: Remove thirdparty submodules (use from libs from distro)
+      run: |
+        set -xeu
+        if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_quazip" ]]; then
+          rm -rf thirdparty/quazip
+        fi
+        if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_qscintilla2" ]]; then
+          rm -rf thirdparty/qscintilla
+        fi
+        ls thirdparty
+
     - name: Set up environment
       run: buildScripts/github/install.sh
       env:
