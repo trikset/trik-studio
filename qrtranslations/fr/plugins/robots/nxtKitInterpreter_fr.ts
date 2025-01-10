@@ -9,23 +9,33 @@
         <translation>Configuration de NXT</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+21"/>
+        <source>nxtOSEK Generator Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>Bluetooth Settings</source>
         <translation>Paramètres Bluetooth</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location line="+17"/>
+        <location line="+36"/>
+        <location line="+7"/>
         <source>COM Port:</source>
         <translation>Port série :</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-27"/>
         <source>No COM ports found. If you have a Bluetooth connection with active virtual COM port, please enter its name. Example: COM3</source>
         <translation>Aucu port série n&apos;est détecté. Si vous avez une connexion Bluetooth avec un port série virtuel actif, tapez son nom. Par exemple : COM3</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+13"/>
         <source>Specify COM port manually</source>
         <translation>Spécifiez le port en série manuellement</translation>
     </message>
@@ -41,8 +51,19 @@
 <context>
     <name>nxt::NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+30"/>
+        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+32"/>
         <source>2D robot image:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Path to arm-none-eabi:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>WARNING: Current directory doesn&apos;t exist. 
+Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
