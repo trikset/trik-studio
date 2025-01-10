@@ -25,7 +25,7 @@
 using namespace qReal::ui;
 
 
-dirPicker::dirPicker(QWidget *parent)
+DirPicker::DirPicker(QWidget *parent)
 	: QWidget(parent)
 	, mLabel(new QLabel(this))
 	, mPathEditor(new QLineEdit(this))
@@ -35,35 +35,35 @@ dirPicker::dirPicker(QWidget *parent)
 	layout->addWidget(mLabel);
 	layout->addWidget(mPathEditor);
 	layout->addWidget(button);
-	connect(button, &QPushButton::clicked, this, &dirPicker::pick);
+	connect(button, &QPushButton::clicked, this, &DirPicker::pick);
 }
 
-void dirPicker::configure(const QString &settingsKey, const QString &title)
+void DirPicker::configure(const QString &settingsKey, const QString &title)
 {
 	mSettingsKey = settingsKey;
 	mLabel->setText(title);
 }
 
-bool dirPicker::isSavedDirExist()
+bool DirPicker::isSavedDirExist()
 {
 	return QDir(SettingsManager::value(mSettingsKey).toString()).exists();
 }
 
-void dirPicker::save() const
+void DirPicker::save() const
 {
 	if (!mPathEditor->text().isEmpty() && !mSettingsKey.isEmpty()) {
 		SettingsManager::setValue(mSettingsKey, mPathEditor->text());
 	}
 }
 
-void dirPicker::restore()
+void DirPicker::restore()
 {
 	if (!mSettingsKey.isEmpty()) {
 		mPathEditor->setText(SettingsManager::value(mSettingsKey).toString());
 	}
 }
 
-void dirPicker::pick()
+void DirPicker::pick()
 {
 	QDir dirPath = QFileDialog::getExistingDirectory(this, tr("Select directory"));
 	SettingsManager::setValue(mSettingsKey, dirPath.absolutePath());

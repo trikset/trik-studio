@@ -24,12 +24,12 @@ namespace qReal {
 namespace ui {
 
 /// Picks some image from disk, saves into settings.
-class QRUTILS_EXPORT dirPicker : public QWidget
+class QRUTILS_EXPORT DirPicker : public QWidget
 {
 	Q_OBJECT
 
 public:
-	explicit dirPicker(QWidget *parent = nullptr);
+	explicit DirPicker(QWidget *parent = nullptr);
 
 	/// Sets parameters of the image picker.
 	void configure(const QString &settingsKey, const QString &title);
