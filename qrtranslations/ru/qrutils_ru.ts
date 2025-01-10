@@ -560,6 +560,19 @@
     </message>
 </context>
 <context>
+    <name>qReal::ui::DirPicker</name>
+    <message>
+        <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
+        <source>Browse...</source>
+        <translation>Обзор...</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Select directory</source>
+        <translation>Выберите директорию</translation>
+    </message>
+</context>
+<context>
     <name>qReal::ui::ImagePicker</name>
     <message>
         <location filename="../../qrutils/widgets/imagePicker.cpp" line="+35"/>
@@ -617,19 +630,6 @@
         <location line="+11"/>
         <source>&lt;line&gt;:&lt;column&gt;</source>
         <translation>&lt;строка&gt;:&lt;столбец&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>qReal::ui::dirPicker</name>
-    <message>
-        <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
-        <source>Browse...</source>
-        <translation>Обзор...</translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Select directory</source>
-        <translation>Выберите директорию</translation>
     </message>
 </context>
 <context>

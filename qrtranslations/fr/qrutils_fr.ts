@@ -448,6 +448,19 @@
     </message>
 </context>
 <context>
+    <name>qReal::ui::DirPicker</name>
+    <message>
+        <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Select directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>qReal::ui::ImagePicker</name>
     <message>
         <location filename="../../qrutils/widgets/imagePicker.cpp" line="+35"/>
@@ -504,19 +517,6 @@
     <message>
         <location line="+11"/>
         <source>&lt;line&gt;:&lt;column&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>qReal::ui::dirPicker</name>
-    <message>
-        <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
-        <source>Select directory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
