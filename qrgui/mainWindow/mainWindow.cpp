@@ -344,6 +344,7 @@ void MainWindow::connectActions()
 	connect(mUi->tabs, &QTabWidget::currentChanged, this, &MainWindow::sceneSelectionChanged);
 	connect(&*mTextManager, &text::TextManager::textChanged, this, &MainWindow::setTextChanged);
 	connect(&*mTextManager, &text::TextManager::textChanged, mUi->actionUndo, &QAction::setEnabled);
+	connect(&*mTextManager, &text::TextManager::needRefreshRecentFileList, this, &MainWindow::refreshRecentFilesList);
 
 	connect(&*mProjectManager, &ProjectManager::afterOpen, mUi->paletteTree, &PaletteTree::refreshUserPalettes);
 	connect(&*mProjectManager, &ProjectManager::closed, mUi->paletteTree, &PaletteTree::refreshUserPalettes);
@@ -597,6 +598,31 @@ void MainWindow::refreshRecentProjectsList(const QString &fileName)
 	}
 
 	SettingsManager::setValue("recentProjects", previousString);
+}
+
+void MainWindow::refreshRecentFilesList(const QString &fileName) {
+	auto previousString = SettingsManager::value("recentFiles").toString();
+	auto previousList = previousString.split(";", QString::SkipEmptyParts);
+	previousList.removeOne(fileName);
+
+	if (!previousList.isEmpty() && (previousList.size() == mRecentFilesLimit)) {
+		previousList.removeLast();
+	}
+
+	previousString.clear();
+	if (mRecentFilesLimit > 0) {
+		previousList.push_front(fileName);
+		QStringListIterator iterator(previousList);
+		while (iterator.hasNext()) {
+			const auto recentFileName = iterator.next();
+			const QFileInfo fileInfo(recentFileName);
+			if (fileInfo.exists() && fileInfo.isFile()) {
+				previousString = previousString + recentFileName + ";";
+			}
+		}
+	}
+
+	SettingsManager::setValue("recentFiles", previousString);
 }
 
 void MainWindow::openRecentProjectsMenu()

@@ -30,8 +30,7 @@ using namespace qReal;
 using namespace text;
 
 TextManager::TextManager(SystemEvents &systemEvents, gui::MainWindowInterpretersInterface &mainWindow)
-	: mRecentFilesLimit(SettingsManager::value("recentFilesLimit").toInt())
-	, mMainWindow(mainWindow)
+	: mMainWindow(mainWindow)
 	, mSystemEvents(systemEvents)
 {
 	connect(&mSystemEvents, &SystemEvents::codeTabClosed, this, &TextManager::onTabClosed);
@@ -239,31 +238,6 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo
 	}
 }
 
-void TextManager::refreshRecentFilesList(const QString &fileName) {
-	auto previousString = SettingsManager::value("recentFiles").toString();
-	auto previousList = previousString.split(";", QString::SkipEmptyParts);
-	previousList.removeOne(fileName);
-
-	if (!previousList.isEmpty() && (previousList.size() == mRecentFilesLimit)) {
-		previousList.removeLast();
-	}
-
-	previousString.clear();
-	if (mRecentFilesLimit > 0) {
-		previousList.push_front(fileName);
-		QStringListIterator iterator(previousList);
-		while (iterator.hasNext()) {
-			const auto recentFileName = iterator.next();
-			const QFileInfo fileInfo(recentFileName);
-			if (fileInfo.exists() && fileInfo.isFile()) {
-				previousString = previousString + recentFileName + ";";
-			}
-		}
-	}
-
-	SettingsManager::setValue("recentFiles", previousString);
-}
-
 void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::LanguageInfo &language)
 {
 	Q_ASSERT(!fileInfo.completeBaseName().isEmpty());
@@ -280,7 +254,7 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 		return;
 	}
 
-	refreshRecentFilesList(filePath);
+	emit needRefreshRecentFileList(filePath);
 	area->show();
 
 	// Need to bind diagram and code file only if code is just generated
@@ -331,7 +305,7 @@ bool TextManager::saveText(bool saveAs)
 			emit mSystemEvents.codePathChanged(diagram, path(area), fileInfo);
 		}
 
-		refreshRecentFilesList(fileInfo.absoluteFilePath());
+		emit needRefreshRecentFileList(fileInfo.absoluteFilePath());
 	}
 
 	return true;
