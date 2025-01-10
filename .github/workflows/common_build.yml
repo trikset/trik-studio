@@ -187,6 +187,14 @@ jobs:
       container_name: alt:latest
       artifact_name: linux-installer
 
+  install-astralinux18-installer:
+    needs: [build-rockylinux-installer]
+    uses: ./.github/workflows/installer.yml
+    with:
+      os: ubuntu-latest
+      container_name: registry.astralinux.ru/library/astra/ubi18:latest
+      artifact_name: linux-installer
+
   install-archlinux-installer:
     needs: [build-rockylinux-installer]  
     uses: ./.github/workflows/installer.yml

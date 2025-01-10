@@ -13,6 +13,9 @@ prepare_environment(){
         sudo pacman -Sy && sudo pacman -S fontconfig libx11 libxrender libxext libxkbcommon-x11 --noconfirm
       elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
         sudo yum install -y --setopt=install_weak_deps=False libX11-xcb libXext libxkbcommon-x11 fontconfig freetype libXrender
+      elif [ "$ID" = "astra" ]; then
+        sudo apt-get update && sudo apt-get install -y --no-install-recommends fontconfig libdbus-1-3 libx11-xcb1 libxkbcommon-x11-0 \
+        libxrender1 libxext6
       fi 
       return 0 ;;
     Darwin) return 0 ;;
