@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "nxtOsekCGeneratorPlugin.h"
-
 #include <QtCore/QDir>
 #include <QtCore/QDateTime>
 #include <QtWidgets/QApplication>
@@ -21,7 +20,9 @@
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/platformInfo.h>
 #include <qrutils/singleton.h>
+#include <QOperatingSystemVersion>
 
+#include "QsLog.h"
 #include "nxtOsekCMasterGenerator.h"
 
 using namespace nxt::osekC;
@@ -37,6 +38,12 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	, mMasterGenerator(nullptr)
 	, mCommunicator(utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
 {
+	const QString key = "pathToArmNoneEabi";
+	const QString defaultPath = QDir(PlatformInfo::invariantSettingsPath("pathToNxtTools")).absolutePath()
+								+"/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi";
+	if (qReal::SettingsManager::value(key).isNull()) {
+		qReal::SettingsManager::setValue(key, defaultPath);
+	}
 	initActions();
 	initHotKeyActions();
 }
@@ -96,7 +103,6 @@ void NxtOsekCGeneratorPlugin::onCurrentDiagramChanged(const TabInfo &info)
 void NxtOsekCGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configurator)
 {
 	RobotsGeneratorPluginBase::init(configurator);
-
 	mFlashTool.reset(new NxtFlashTool(*mMainWindowInterface->errorReporter(), *mCommunicator));
 	connect(&*mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
 }
@@ -223,21 +229,31 @@ void NxtOsekCGeneratorPlugin::uploadProgram()
 void NxtOsekCGeneratorPlugin::checkNxtTools()
 {
 	const QDir dir(PlatformInfo::invariantSettingsPath("pathToNxtTools"));
-	if (!dir.exists()) {
-		mNxtToolsPresent = false;
-	} else {
-		QDir gnuarm(dir.absolutePath() + "/gnuarm/bin");
-		QDir nexttool(dir.absolutePath() + "/nexttool");
-		QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
+	const QDir gnuarm(dir.absolutePath() + "/gnuarm");
+	const QDir nexttool(dir.absolutePath() + "/nexttool");
+	const QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
 
-#ifdef Q_OS_WIN
-		QFile compile1(dir.absolutePath() + "/compile.bat");
-		QFile compile2(dir.absolutePath() + "/compile.sh");
-		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists()
-				&& compile1.exists() && compile2.exists();
-#else
-		QFile compile(dir.absolutePath() + "/compile.sh");
-		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists() && compile.exists();
-#endif
+	if (!dir.exists() || !gnuarm.exists() || !nexttool.exists() || !nxtOSEK.exists()) {
+		mNxtToolsPresent = false;
+		QLOG_ERROR() << "Missing" << dir.absolutePath() << "or mandatory subdirectory" <<
+			dir.entryList(QDir::Filter::NoFilter, QDir::SortFlag::DirsFirst | QDir::SortFlag::Name);
+	} else {
+		switch(QOperatingSystemVersion::currentType()) {
+		default:
+			break;
+
+		case QOperatingSystemVersion::OSType::Windows: {
+			QFile compile1(dir.absolutePath() + "/compile.bat");
+			QFile compile2(dir.absolutePath() + "/compile.sh");
+			mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists()
+					&& compile1.exists() && compile2.exists();
+		}
+			break;
+		case QOperatingSystemVersion::OSType::Unknown: {
+			QFile compile(dir.absolutePath() + "/compile.sh");
+			mNxtToolsPresent = nexttool.exists() && nxtOSEK.exists() && compile.exists();
+		}
+			break;
+		}
 	}
 }
