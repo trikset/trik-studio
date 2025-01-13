@@ -22,6 +22,7 @@ namespace details {
 
 class WaitForMotionBlock : public kitBase::blocksBase::common::WaitForSensorBlock
 {
+	Q_OBJECT
 public:
 	explicit WaitForMotionBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

@@ -84,22 +84,6 @@ protected:
 	virtual void mousePressEvent(QMouseEvent *event);
 
 private:
-	/// This class performs win8 drag manager hack for workaround of
-	/// https://github.com/qreal/qreal/issues/1014
-	class HackTouchDragThread : public QThread
-	{
-	public:
-		explicit HackTouchDragThread(QObject *parent = nullptr);
-
-		static void simulateSystemPress();
-		static void simulateSystemMove();
-		static void simulateSystemRelease();
-
-	protected:
-		virtual void run();
-	};
-
-
 	void checkElementForChildren();
 	void hackTouchDrag();
 

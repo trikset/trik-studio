@@ -22,7 +22,7 @@
 
 class QRealEllipse : public Item
 {
-	Q_DISABLE_COPY(QRealEllipse)
+	Q_OBJECT
 public:
 	QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
 	virtual QRectF boundingRect() const;

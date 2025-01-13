@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Function' block
 class FunctionElementGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	FunctionElementGenerator(const qrRepo::RepoApi &repo
 		, GeneratorCustomizer &customizer

@@ -24,6 +24,7 @@ namespace commands {
 /// Creates element in 2D model world.
 class CreateSensorCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// Creates and configures sensor for the \a robotModel on port \a port of the type \a device.
 	/// Sensor will be placed at \a position and oriented at \a direction degrees.

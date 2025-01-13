@@ -24,6 +24,7 @@ namespace utils {
 /// Timer implementation for real-life time
 class ROBOTS_UTILS_EXPORT RealTimer : public AbstractTimer
 {
+	Q_OBJECT
 public:
 	RealTimer();
 

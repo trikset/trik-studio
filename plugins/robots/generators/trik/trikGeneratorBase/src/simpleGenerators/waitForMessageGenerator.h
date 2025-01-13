@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Send message' block.
 class WaitForMessageGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForMessageGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

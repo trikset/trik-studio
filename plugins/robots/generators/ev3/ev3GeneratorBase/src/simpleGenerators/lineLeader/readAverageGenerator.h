@@ -24,6 +24,7 @@ namespace lineLeader {
 /// Generator for 'Read Average to Variable' block
 class ReadAverageGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReadAverageGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

@@ -24,6 +24,7 @@ namespace commands {
 /// Assigns to element with given id given name using given model (logical or graphical)
 class QRGUI_MODELS_EXPORT RenameCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// This overload gets old name automatically using models api
 	RenameCommand(details::ModelsAssistInterface &model

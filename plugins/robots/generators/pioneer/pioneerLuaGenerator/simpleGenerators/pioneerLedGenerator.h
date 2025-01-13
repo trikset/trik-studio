@@ -22,6 +22,7 @@ namespace lua {
 /// Generates setup of specified color to given LED
 class PioneerLedGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerLedGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

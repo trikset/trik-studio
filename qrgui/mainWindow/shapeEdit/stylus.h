@@ -23,7 +23,7 @@
 
 class Stylus : public Item
 {
-	Q_DISABLE_COPY(Stylus)
+	Q_OBJECT
 public:
 	QList<Line *> mListLine;
 	Stylus(qreal x1, qreal y1, Item* parent);

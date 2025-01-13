@@ -22,6 +22,7 @@ namespace details {
 
 class WaitPadPressBlock : public kitBase::blocksBase::common::WaitForSensorBlock
 {
+	Q_OBJECT
 public:
 	explicit WaitPadPressBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

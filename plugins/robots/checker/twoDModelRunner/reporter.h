@@ -37,6 +37,7 @@ enum class Level
 /// Collects information about the interpretation process and writes it into the given file as JSON report.
 class Reporter : public QObject
 {
+	Q_OBJECT
 public:
 	/// Constructor.
 	/// @param messagesFile If non-empty the information about all error reporter messages will be stored there in JSON.

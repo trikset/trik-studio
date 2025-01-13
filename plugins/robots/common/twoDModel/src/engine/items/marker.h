@@ -1,4 +1,4 @@
-/* Copyright 2015-2016 CyberTech Labs Ltd.
+/* Copyright 2015 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,32 +13,23 @@
  * limitations under the License. */
 
 #pragma once
-
-#include <qrgui/controller/commands/abstractCommand.h>
-#include <QtXml/QDomElement>
-#include "twoDModel/engine/view/twoDModelWidget.h"
-
+#include <QGraphicsObject>
 namespace twoDModel {
-namespace commands {
+namespace items {
 
-/// Load 2D model world.
-class LoadWorldCommand : public qReal::commands::AbstractCommand
+class Marker : public QGraphicsObject
 {
 	Q_OBJECT
 public:
-	/// Creates instance of command using XML \a data.
-	LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data);
+	explicit Marker(QGraphicsItem *parent = nullptr);
+	QRectF boundingRect() const override;
 
 private:
-	bool execute() override;
-	bool restoreState() override;
-
-	void loadWorld(const QDomDocument &world);
-
-	view::TwoDModelWidget &mWidget;
-	const QDomDocument mNewWorld;
-	const QDomDocument mOldWorld;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 };
-
 }
 }

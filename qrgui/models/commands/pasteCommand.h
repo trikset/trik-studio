@@ -26,6 +26,7 @@ namespace commands {
 /// Implements pasting elements from clipboard into the scene.
 class QRGUI_MODELS_EXPORT PasteCommand : public qReal::commands::CreateElementsCommand
 {
+	Q_OBJECT
 public:
 	/// @param isGraphicalCopy If true only graphical part will be pasted, logical part will not be created.
 	/// @param mousePosition Mouse cursor position in scene coordinates in moment of paste action triggering.

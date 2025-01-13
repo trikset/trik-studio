@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for "stop camera" block.
 class StopCameraGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	StopCameraGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

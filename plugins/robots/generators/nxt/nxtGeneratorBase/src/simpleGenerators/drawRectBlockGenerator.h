@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'DrawRect' block in NXT kit.
 class DrawRectBlockGenerator : public DrawBlockGenerator
 {
+	Q_OBJECT
 public:
 	DrawRectBlockGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

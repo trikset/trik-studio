@@ -33,6 +33,7 @@ typedef utils::DeepFirstSearcher::LinkInfo LinkInfo;
 /// simplest info about diagram (like initial node id, if/then branches and so on).
 class ROBOTS_GENERATOR_EXPORT PrimaryControlFlowValidator : public QObject, public RobotsDiagramVisitor
 {
+	Q_OBJECT
 public:
 	PrimaryControlFlowValidator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

@@ -24,6 +24,7 @@ class GotoLabelManager;
 /// Generates human-readable label for a node.
 class LabelGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	LabelGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

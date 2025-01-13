@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'VariableInit' block
 class VariableInitGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	VariableInitGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for "Enable Video Streaming" block.
 class InitVideoStreamingGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	InitVideoStreamingGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

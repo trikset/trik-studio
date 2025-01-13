@@ -35,6 +35,7 @@ namespace semantics {
 /// Also provides some factory methods for nodes.
 class ROBOTS_GENERATOR_EXPORT SemanticTree : public QObject
 {
+	Q_OBJECT
 public:
 	SemanticTree(GeneratorCustomizer &customizer, const qReal::Id &initialBlock
 			, bool isMainTree, QObject *parent = nullptr);

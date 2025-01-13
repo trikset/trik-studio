@@ -23,6 +23,7 @@ namespace commands {
 
 class RemoveSensorCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	RemoveSensorCommand(model::SensorsConfiguration &configurator
 			, const QString &robotModel

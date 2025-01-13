@@ -22,6 +22,7 @@ namespace details {
 
 class WaitGamepadWheelBlock : public kitBase::blocksBase::common::WaitForSensorBlock
 {
+	Q_OBJECT
 public:
 	explicit WaitGamepadWheelBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

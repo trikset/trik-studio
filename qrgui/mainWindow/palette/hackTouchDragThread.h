@@ -1,4 +1,4 @@
-/* Copyright 2022 CyberTech Labs Ltd.
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,23 @@
  * limitations under the License. */
 
 #pragma once
+#include <QtCore/QThread>
 
-#include <generatorBase/simpleGenerators/bindingGenerator.h>
 
-namespace pioneer {
-namespace lua {
-
-/// Generates magnet on/off state
-class PioneerReadGPIO : public generatorBase::simple::BindingGenerator
+/// This class performs win8 drag manager hack for workaround of
+/// https://github.com/qreal/qreal/issues/1014
+class HackTouchDragThread : public QThread
 {
 	Q_OBJECT
 public:
-	PioneerReadGPIO(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	explicit HackTouchDragThread(QObject *parent = nullptr);
+
+	static void simulateSystemPress();
+	static void simulateSystemMove();
+	static void simulateSystemRelease();
+
+protected:
+	virtual void run();
 };
 
-}
-}
+

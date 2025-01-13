@@ -232,19 +232,19 @@ void CurveItem::setEditable(bool editable)
 	mMarker2.setFlag(QGraphicsItem::ItemIsMovable, editable);
 }
 
-CurveItem::Marker::Marker(QGraphicsItem *parent)
+Marker::Marker(QGraphicsItem *parent)
 	: QGraphicsObject(parent)
 {
 	setCursor(Qt::SizeAllCursor);
 	setFlag(ItemSendsGeometryChanges);
 }
 
-QRectF CurveItem::Marker::boundingRect() const
+QRectF Marker::boundingRect() const
 {
 	return QRectF(-markerSize.width() / 2, -markerSize.height() / 2, markerSize.width(), markerSize.height());
 }
 
-void CurveItem::Marker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Marker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
@@ -258,7 +258,7 @@ void CurveItem::Marker::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 	painter->restore();
 }
 
-QVariant CurveItem::Marker::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant Marker::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
 	if (change == ItemPositionHasChanged) {
 		parentItem()->update();
@@ -267,19 +267,19 @@ QVariant CurveItem::Marker::itemChange(QGraphicsItem::GraphicsItemChange change,
 	return QGraphicsItem::itemChange(change, value);
 }
 
-void CurveItem::Marker::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Marker::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
 	emit static_cast<AbstractItem *>(parentItem())->mouseInteractionStarted();
 }
 
-void CurveItem::Marker::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void Marker::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
 	if (flags() & ItemIsMovable) setPos(parentItem()->mapFromScene(event->scenePos()));
 }
 
-void CurveItem::Marker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void Marker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
 	emit static_cast<AbstractItem *>(parentItem())->mouseInteractionStopped();

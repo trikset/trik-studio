@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'PlayTone' block
 class PlayToneGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	PlayToneGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

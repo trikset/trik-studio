@@ -24,6 +24,7 @@ namespace lineLeader {
 /// Generator for 'Calibrate Black' block
 class CalibrateBlackGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	CalibrateBlackGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

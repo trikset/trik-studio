@@ -24,6 +24,7 @@ namespace commands {
 /// A base for all commands using concrete node element instance on some scene
 class NodeElementCommand : public ElementCommand
 {
+	Q_OBJECT
 public:
 	NodeElementCommand(const EditorViewScene *scene, const Id &id);
 	NodeElementCommand(const EditorView *view, const Id &id);

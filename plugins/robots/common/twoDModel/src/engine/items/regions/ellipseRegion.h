@@ -22,6 +22,7 @@ namespace items {
 /// Ellipse-shaped zone in 2D model.
 class EllipseRegion : public RegionItem
 {
+	Q_OBJECT
 public:
 	explicit EllipseRegion(QGraphicsItem *parent = nullptr);
 

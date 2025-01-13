@@ -24,6 +24,7 @@ namespace details {
 /// Interpreter implementation for "Detect by Videocamera" block.
 class DetectLineBlock : public kitBase::blocksBase::common::DeviceBlock<trik::robotModel::parts::TrikLineSensor>
 {
+	Q_OBJECT
 public:
 	DetectLineBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

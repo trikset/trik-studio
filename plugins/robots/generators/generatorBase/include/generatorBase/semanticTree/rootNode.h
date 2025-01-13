@@ -24,6 +24,7 @@ namespace semantics {
 /// A root node for all semantic tree
 class ROBOTS_GENERATOR_EXPORT RootNode : public SemanticNode
 {
+	Q_OBJECT
 public:
 	explicit RootNode(SemanticNode * const initialBlock, QObject *parent = nullptr);
 

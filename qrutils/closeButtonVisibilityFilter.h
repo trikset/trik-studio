@@ -1,4 +1,4 @@
-/* Copyright 2022 CyberTech Labs Ltd.
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,11 @@
  * limitations under the License. */
 
 #pragma once
+#include <QtCore/QObject>
+#include <QtCore/QEvent>
 
-#include <generatorBase/simpleGenerators/bindingGenerator.h>
-
-namespace pioneer {
-namespace lua {
-
-/// Generates magnet on/off state
-class PioneerReadGPIO : public generatorBase::simple::BindingGenerator
+class CloseButtonVisibilityFilter : public QObject
 {
 	Q_OBJECT
-public:
-	PioneerReadGPIO(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	bool eventFilter(QObject *obj, QEvent *event) override;
 };
-
-}
-}

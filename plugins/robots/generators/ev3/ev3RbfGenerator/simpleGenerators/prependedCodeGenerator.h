@@ -23,6 +23,7 @@ namespace simple {
 /// Generator for goto label declaration. Also prepends additional code collected in factory for the given id.
 class PrependedCodeGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PrependedCodeGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

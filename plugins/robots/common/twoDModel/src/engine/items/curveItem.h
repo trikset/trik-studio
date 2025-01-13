@@ -17,6 +17,7 @@
 #include <qrutils/graphicsUtils/lineImpl.h>
 
 #include "colorFieldItem.h"
+#include "marker.h"
 
 namespace twoDModel {
 namespace items {
@@ -52,19 +53,6 @@ public:
 	void setEditable(bool editable) override;
 
 private:
-	class Marker : public QGraphicsObject
-	{
-	public:
-		explicit Marker(QGraphicsItem *parent = nullptr);
-		QRectF boundingRect() const override;
-
-	private:
-		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-		QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
-		void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-		void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-		void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-	};
 
 	void setPrivateData();
 	QPainterPath curveLine() const;
@@ -74,8 +62,8 @@ private:
 
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
-	Marker mMarker1;
-	Marker mMarker2;
+	twoDModel::items::Marker mMarker1;
+	twoDModel::items::Marker mMarker2;
 };
 
 }

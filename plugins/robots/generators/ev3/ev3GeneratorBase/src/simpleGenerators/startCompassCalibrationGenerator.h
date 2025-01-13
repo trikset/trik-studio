@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Start Compass Calibration' block
 class StartCompassCalibrationGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	StartCompassCalibrationGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

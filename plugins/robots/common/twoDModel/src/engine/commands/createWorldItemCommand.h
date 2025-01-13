@@ -24,6 +24,7 @@ namespace commands {
 /// Creates element in 2D model world.
 class CreateWorldItemCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// Creates instance of command using XML \a data.
 	CreateWorldItemCommand(model::Model &model, const QDomElement &data);
