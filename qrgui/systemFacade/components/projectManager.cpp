@@ -161,7 +161,7 @@ bool ProjectManager::openProject(const QString &fileName)
 	QLOG_INFO() << "Opened project" << fileName;
 	QLOG_DEBUG() << "Sending after open signal...";
 
-	emit afterOpen(fileName);
+	Q_EMIT afterOpen(fileName);
 
 	return true;
 }

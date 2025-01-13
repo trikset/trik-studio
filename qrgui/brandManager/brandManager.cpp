@@ -22,12 +22,6 @@ BrandManager::BrandManager()
 {
 }
 
-BrandManager::~BrandManager()
-{
-	delete mFonts;
-	delete mStyles;
-}
-
 BrandManager &BrandManager::instance()
 {
 	static BrandManager instance;
@@ -41,12 +35,12 @@ void BrandManager::configure(const ToolPluginManager *toolPluginManager)
 
 const Fonts *BrandManager::fonts()
 {
-	return instance().mFonts;
+	return &*instance().mFonts;
 }
 
 const Styles *BrandManager::styles()
 {
-	return instance().mStyles;
+	return &*instance().mStyles;
 }
 
 QString BrandManager::applicationName()
