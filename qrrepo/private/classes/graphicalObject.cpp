@@ -53,7 +53,7 @@ GraphicalObject::GraphicalObject(const QDomElement &element)
 
 GraphicalObject::~GraphicalObject()
 {
-	qDeleteAll(mGraphicalParts.values());
+	qDeleteAll(mGraphicalParts);
 }
 
 QDomElement GraphicalObject::serialize(QDomDocument &document) const

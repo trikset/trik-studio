@@ -29,6 +29,7 @@ namespace utils {
 
 class XmlCompiler
 {
+	Q_DISABLE_COPY_MOVE(XmlCompiler)
 public:
 	XmlCompiler();
 	~XmlCompiler();

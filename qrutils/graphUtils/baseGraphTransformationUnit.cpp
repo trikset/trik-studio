@@ -176,12 +176,12 @@ bool BaseGraphTransformationUnit::checkNodeForAddingToMatch(const Id &nodeInMode
 		return false;
 	}
 
-	QHash<Id, Id> *linksToAddToMatch = new QHash<Id, Id>();
+	QHash<Id, Id> linksToAddToMatch;
 
-	bool res = checkExistingLinks(nodeInModel, nodeInRule, linksToAddToMatch);
+	bool res = checkExistingLinks(nodeInModel, nodeInRule, &linksToAddToMatch);
 
 	if (res) {
-		mMatch.unite(*linksToAddToMatch);
+		mMatch.unite(linksToAddToMatch);
 		mMatch.insert(nodeInRule, nodeInModel);
 		mCurrentMatchedGraphInRule.append(nodeInRule);
 		mCurrentMatchedGraphInModel.append(nodeInModel);

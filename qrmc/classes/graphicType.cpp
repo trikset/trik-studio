@@ -513,20 +513,13 @@ QString GraphicType::generatePossibleEdges(const QString &lineTemplate) const
 
 	QString edgesList;
 	QString line = lineTemplate;
-	const QString templ = "qMakePair(qMakePair(QString(\"%1\"),QString(\"%2\")),qMakePair(%3,QString(\"%4\")))";
+	static const QString templ = "<< qMakePair(qMakePair(QString(\"%1\"),QString(\"%2\")),qMakePair(%3,QString(\"%4\"))) ";
 	QString directed = "false";
 	for (const PossibleEdge &edge : mPossibleEdges) {
 		if (edge.second.first) {
 			directed = "true";
 		}
-
-		const QString current = templ
-				.arg(edge.first.first)
-				.arg(edge.first.second)
-				.arg(directed)
-				.arg(edge.second.second);
-
-		edgesList += "<< " + current  + " ";
+		edgesList += templ.arg(edge.first.first, edge.first.second, directed, edge.second.second);
 	}
 
 	line.replace(possibleEdgesListTag, edgesList).replace(elementNameTag, name());
