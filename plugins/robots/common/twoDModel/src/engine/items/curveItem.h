@@ -53,7 +53,6 @@ public:
 	void setEditable(bool editable) override;
 
 private:
-
 	void setPrivateData();
 	QPainterPath curveLine() const;
 
