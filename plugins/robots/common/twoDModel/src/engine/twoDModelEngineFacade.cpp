@@ -41,6 +41,9 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 }
 
 TwoDModelEngineFacade::~TwoDModelEngineFacade(){
+	if (mDock && !mDock->parent()) {
+		delete mDock;
+	}
 	delete mView;
 }
 

@@ -85,8 +85,8 @@ void SubprogramsCollectionDialog::accept()
 void SubprogramsCollectionDialog::highlightItem(QListWidgetItem *item)
 {
 	if(item->checkState() == Qt::Checked) {
-		item->setBackgroundColor(QColor("#ADFF2F"));
+		item->setBackgroundColor(QColor(0xAD, 0xFF, 0x2F));
 	} else {
-		item->setBackgroundColor(QColor("#ffffff"));
+		item->setBackgroundColor(QColorConstants::White);
 	}
 }

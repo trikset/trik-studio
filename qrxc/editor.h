@@ -34,6 +34,7 @@ namespace utils {
 
 class Editor
 {
+	Q_DISABLE_COPY_MOVE(Editor)
 public:
 	Editor(const QDomDocument &domDocument, XmlCompiler *xmlCompiler);
 	~Editor();

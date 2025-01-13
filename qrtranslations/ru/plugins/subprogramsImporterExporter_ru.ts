@@ -81,17 +81,17 @@
     </message>
     <message>
         <location line="+1"/>
-        <location line="+44"/>
+        <location line="+43"/>
         <source>QReal Save File(*.qrs)</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-23"/>
+        <location line="-22"/>
         <source>There are no subprograms in your project.</source>
         <translation>В проекте нет подпрограмм.</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+78"/>
         <source>There are not subprograms in your project</source>
         <translation>В проекте нет подпрограмм</translation>
     </message>

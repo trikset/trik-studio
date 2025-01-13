@@ -50,6 +50,7 @@ struct AutoreleaseRecursiveGrammarParser : ParserInterface<TokenTypes>
 		}
 
 private:
+		Q_DISABLE_COPY_MOVE(AutoreleaseRecursiveGrammarParser)
 		QList<ParserRef<TokenTypes>> mParsers;
 };
 }
