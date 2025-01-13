@@ -11,7 +11,7 @@ ELSE (
 )
 rem Clear PATH after Java detection attempt
 SET "PATH=%SystemRoot%;%SystemRoot%\system32"
-IF "%JAVA_PATH%" == "" ( ECHO Failed to detect Java/JRE ) ELSE (SET "PATH=%PATH%;%JAVA_PATH%&&" java -version)
+IF "%JAVA_PATH%" == "" ( ECHO Failed to detect Java/JRE ) ELSE (SET "PATH=%PATH%;%JAVA_PATH%" && java -version)
 ENDLOCAL
 
 %~dp0trik-studio.exe "%*"
