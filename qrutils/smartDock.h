@@ -77,7 +77,6 @@ private Q_SLOTS:
 	void checkCentralWidget();
 
 private:
-
 	QMainWindow *findMainWindow() const;
 
 	bool event(QEvent *event) override;
