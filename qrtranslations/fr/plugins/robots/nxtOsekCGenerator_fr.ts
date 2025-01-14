@@ -165,13 +165,13 @@
         <translation>Génération (NXT OSEK C)</translation>
     </message>
     <message>
-        <location line="+52"/>
-        <location line="+129"/>
+        <location line="+51"/>
+        <location line="+132"/>
         <source>NXT tools package is not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-85"/>
         <source>Generate code</source>
         <translation>Générer le code</translation>
     </message>
@@ -196,7 +196,7 @@
         <translation>Téléverser le programme sur le dispositif NXT</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>flash.sh not found. Make sure it is present in QReal installation directory</source>
         <translation>flash.sh n&apos;est pas trouvé. Assurez-vous qu&apos;il soit présent dans le repertoire de  QReal</translation>
     </message>
