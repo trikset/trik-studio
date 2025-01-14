@@ -24,6 +24,7 @@ namespace lineLeader {
 /// Generator for 'Calibrate PID' block
 class CalibratePIDGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	CalibratePIDGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

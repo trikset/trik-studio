@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Calibrate Gyroscope' block
 class CalibrateGyroscopeGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	CalibrateGyroscopeGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

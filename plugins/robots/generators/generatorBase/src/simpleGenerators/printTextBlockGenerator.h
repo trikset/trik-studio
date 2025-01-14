@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'PrintText' block
 class PrintTextBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	PrintTextBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

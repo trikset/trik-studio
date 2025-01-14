@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for infinite loops
 class InfiniteLoopGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	InfiniteLoopGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

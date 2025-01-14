@@ -23,6 +23,7 @@ namespace trik {
 /// Master generator base implementation for every generator from TRIK kit
 class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikMasterGeneratorBase : public generatorBase::MasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	TrikMasterGeneratorBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

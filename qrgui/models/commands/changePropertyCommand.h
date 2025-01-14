@@ -27,6 +27,7 @@ namespace commands {
 /// Sets given property to a given value
 class QRGUI_MODELS_EXPORT ChangePropertyCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// Use this overload to modify properties via models api with automatic assigning current value as old one.
 	ChangePropertyCommand(models::LogicalModelAssistApi * const model

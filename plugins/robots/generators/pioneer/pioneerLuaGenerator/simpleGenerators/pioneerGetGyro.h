@@ -22,6 +22,7 @@ namespace lua {
 /// Generates "sensors.gyro" command for quadcopter.
 class PioneerGetGyro : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerGetGyro(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

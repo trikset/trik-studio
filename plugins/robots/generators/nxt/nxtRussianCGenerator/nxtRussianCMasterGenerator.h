@@ -21,6 +21,7 @@ namespace russianC {
 
 class NxtRussianCMasterGenerator : public NxtMasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	NxtRussianCMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

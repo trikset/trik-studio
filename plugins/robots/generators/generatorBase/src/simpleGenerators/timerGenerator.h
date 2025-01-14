@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Timer' block
 class TimerGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	TimerGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

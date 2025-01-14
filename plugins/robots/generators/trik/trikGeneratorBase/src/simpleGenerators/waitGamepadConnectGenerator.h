@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'TrikWaitGamepadConnect' block
 class WaitGamepadConnectGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitGamepadConnectGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

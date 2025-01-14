@@ -22,6 +22,7 @@ namespace lua {
 /// Generates order to takeoff for quadcopter.
 class GeoTakeoffGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	GeoTakeoffGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

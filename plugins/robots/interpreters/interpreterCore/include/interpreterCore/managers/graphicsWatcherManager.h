@@ -28,6 +28,7 @@ class RobotModelManager;
 /// Incapsulates inner operations on managing graphics watcher in the dock window.
 class GraphicsWatcherManager : public QObject, public kitBase::DevicesConfigurationProvider
 {
+	Q_OBJECT
 public:
 	/// Constructor.
 	/// @param parser - blocks parser, used to show values of variables on graphs.

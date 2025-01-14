@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for conditional construnctions
 class IfElementGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	IfElementGenerator(const qrRepo::RepoApi &repo
 		, GeneratorCustomizer &customizer

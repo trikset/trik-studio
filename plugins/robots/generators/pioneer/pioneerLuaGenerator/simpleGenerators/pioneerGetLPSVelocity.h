@@ -22,6 +22,7 @@ namespace lua {
 /// Generates "sensors.lpsVelocity" command for quadcopter.
 class PioneerGetLPSVelocity : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerGetLPSVelocity(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

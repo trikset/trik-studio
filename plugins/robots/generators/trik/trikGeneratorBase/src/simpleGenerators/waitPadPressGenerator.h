@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'TrikWaitPadPress' block
 class WaitPadPressGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitPadPressGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

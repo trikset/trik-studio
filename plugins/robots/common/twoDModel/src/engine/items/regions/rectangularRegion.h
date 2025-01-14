@@ -22,6 +22,7 @@ namespace items {
 /// Rectangle-shaped zone in 2D model.
 class RectangularRegion : public RegionItem
 {
+	Q_OBJECT
 public:
 	explicit RectangularRegion(QGraphicsItem *parent = nullptr);
 

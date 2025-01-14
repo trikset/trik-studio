@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for subprogram call block
 class SubprogramsSimpleGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	SubprogramsSimpleGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

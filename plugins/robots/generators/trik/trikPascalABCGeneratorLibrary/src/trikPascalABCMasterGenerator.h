@@ -22,6 +22,7 @@ namespace pascalABC {
 /// Master generator implementation for generator into PascalABC for TRIK platform
 class TrikPascalABCMasterGenerator : public TrikMasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	TrikPascalABCMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

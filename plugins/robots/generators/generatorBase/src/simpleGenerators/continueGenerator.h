@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'continue' construction
 class ContinueGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	ContinueGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

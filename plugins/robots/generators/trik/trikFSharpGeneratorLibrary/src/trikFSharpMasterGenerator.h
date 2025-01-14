@@ -22,6 +22,7 @@ namespace fSharp {
 /// Master generator implementation for TRIK platform
 class TrikFSharpMasterGenerator : public TrikMasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	TrikFSharpMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

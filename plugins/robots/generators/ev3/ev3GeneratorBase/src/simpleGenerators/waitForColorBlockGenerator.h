@@ -21,6 +21,7 @@ namespace simple {
 
 class WaitForColorBlockGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForColorBlockGenerator(const qrRepo::RepoApi &repo
 							   , generatorBase::GeneratorCustomizer &customizer

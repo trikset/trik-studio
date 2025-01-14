@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Say' block.
 class SayGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	SayGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

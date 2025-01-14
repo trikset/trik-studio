@@ -20,7 +20,7 @@
 
 class Image : public Item
 {
-	Q_DISABLE_COPY(Image)
+	Q_OBJECT
 public:
 	Image(const QString &fileName, qreal x, qreal y, Item* parent = nullptr);
 	virtual QRectF boundingRect() const;

@@ -22,6 +22,7 @@ namespace details {
 
 class WaitGamepadDisconnectBlock : public kitBase::blocksBase::common::WaitForSensorBlock
 {
+	Q_OBJECT
 public:
 	explicit WaitGamepadDisconnectBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

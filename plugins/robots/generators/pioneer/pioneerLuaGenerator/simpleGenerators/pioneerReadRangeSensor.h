@@ -22,6 +22,7 @@ namespace lua {
 /// Generates range sensor reading
 class PioneerReadRangeSensor : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerReadRangeSensor(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

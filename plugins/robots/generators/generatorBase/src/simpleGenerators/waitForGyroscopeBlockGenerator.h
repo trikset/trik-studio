@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForGyroscope' block
 class WaitForGyroscopeBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForGyroscopeBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

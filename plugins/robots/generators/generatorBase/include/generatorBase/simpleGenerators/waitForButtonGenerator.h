@@ -23,6 +23,7 @@ namespace simple {
 /// Generator for various waitings for button press.
 class ROBOTS_GENERATOR_EXPORT WaitForButtonGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForButtonGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer
