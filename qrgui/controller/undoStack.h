@@ -22,6 +22,7 @@ namespace qReal {
 
 class UndoStack : public QUndoStack
 {
+	Q_OBJECT
 public:
 	UndoStack(QObject *parent = nullptr);
 

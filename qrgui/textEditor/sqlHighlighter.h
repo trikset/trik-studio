@@ -22,6 +22,7 @@ namespace text {
 /// Syntax Highlighter for sql code.
 class SQLHighlighter : public QSyntaxHighlighter
 {
+	Q_OBJECT
 public:
 	SQLHighlighter(QTextDocument *document);
 	void highlightBlock(const QString &text);

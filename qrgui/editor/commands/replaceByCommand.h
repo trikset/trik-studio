@@ -27,6 +27,7 @@ namespace commands {
 
 class ReplaceByCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	ReplaceByCommand(const models::Models &models, gui::editor::EditorViewScene &scene
 			, NodeElement *elementToRemove, const ElementInfo &elementToCreate);

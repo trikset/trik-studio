@@ -22,6 +22,7 @@ namespace details {
 
 class DrawArcBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	DrawArcBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

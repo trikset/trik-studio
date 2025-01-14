@@ -22,6 +22,7 @@ namespace simple {
 /// Generates code that gets a code of a pressed button.
 class GetButtonCodeGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	GetButtonCodeGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

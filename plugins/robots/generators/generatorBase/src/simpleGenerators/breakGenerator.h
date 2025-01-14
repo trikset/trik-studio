@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'break' construction
 class BreakGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	BreakGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

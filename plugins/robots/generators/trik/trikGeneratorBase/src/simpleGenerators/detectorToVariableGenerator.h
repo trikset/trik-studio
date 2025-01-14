@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for "line detector reading to variable" block.
 class DetectorToVariableGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	DetectorToVariableGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

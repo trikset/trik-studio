@@ -22,6 +22,7 @@ namespace gui {
 
 class RenameDialog : public QDialog
 {
+	Q_OBJECT
 public:
 	static QString selectNewName(const QString &currentName, QWidget *parent = nullptr);
 

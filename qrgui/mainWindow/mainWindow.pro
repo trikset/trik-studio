@@ -57,6 +57,7 @@ HEADERS += \
 	$$PWD/startWidget/startWidget.h \
 	$$PWD/startWidget/circleWidget.h \
 	$$PWD/startWidget/styledButton.h \
+	$$PWD/palette/hackTouchDragThread.h \
 
 SOURCES += \
 	$$PWD/main.cpp \

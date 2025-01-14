@@ -22,6 +22,7 @@ namespace details {
 
 class SetPainterWidthBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	SetPainterWidthBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

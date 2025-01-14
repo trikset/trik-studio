@@ -18,7 +18,7 @@
 
 class TextPicture : public Text
 {
-	Q_DISABLE_COPY(TextPicture)
+	Q_OBJECT
 public:
 	TextPicture();
 	TextPicture(int x, int y, const QString &text = "text");

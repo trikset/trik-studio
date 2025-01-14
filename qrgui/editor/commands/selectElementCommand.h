@@ -24,6 +24,7 @@ namespace commands {
 /// This command selects or deselects element on the scene
 class SelectElementCommand : public ElementCommand
 {
+	Q_OBJECT
 public:
 	/// @param shouldSelect A selection state to be setted to our element
 	/// @param forceValueChange Should selection state be setted to opposite

@@ -22,6 +22,7 @@ namespace details {
 
 class SetBackgroundBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	explicit SetBackgroundBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

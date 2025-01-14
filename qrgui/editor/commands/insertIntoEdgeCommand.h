@@ -27,6 +27,7 @@ namespace commands {
 
 class InsertIntoEdgeCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	InsertIntoEdgeCommand(EditorViewScene &scene
 			, const models::Models &models

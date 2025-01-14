@@ -23,6 +23,7 @@ namespace nxt {
 
 class ROBOTS_NXT_GENERATOR_BASE_EXPORT NxtGeneratorFactory : public generatorBase::GeneratorFactoryBase
 {
+	Q_OBJECT
 public:
 	NxtGeneratorFactory(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

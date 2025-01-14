@@ -22,6 +22,7 @@ namespace lua {
 /// Generates arbitrary code into target Lua file.
 class PioneerSystemGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerSystemGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

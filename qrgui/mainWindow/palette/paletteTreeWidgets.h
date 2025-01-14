@@ -26,6 +26,7 @@ namespace gui {
 /// (which is visible always) and time-to-time appearing user palette
 class PaletteTreeWidgets : public QSplitter
 {
+	Q_OBJECT
 public:
 	PaletteTreeWidgets(PaletteTree &parent, MainWindow *mainWindow
 			, EditorManagerInterface &editorManagerProxy);

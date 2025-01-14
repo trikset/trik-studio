@@ -22,6 +22,7 @@ namespace simple {
 /// Generates receiving a message sent to this thread by another one.
 class ReceiveMessageThreadsGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReceiveMessageThreadsGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

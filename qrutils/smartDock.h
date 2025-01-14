@@ -77,11 +77,6 @@ private Q_SLOTS:
 	void checkCentralWidget();
 
 private:
-	class CloseButtonVisibilityFilter : public QObject
-	{
-		bool eventFilter(QObject *obj, QEvent *event) override;
-	};
-
 	QMainWindow *findMainWindow() const;
 
 	bool event(QEvent *event) override;

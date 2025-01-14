@@ -23,6 +23,7 @@ namespace ev3 {
 /// Master generator base implementation for every generator from Ev3 kit
 class ROBOTS_EV3_GENERATOR_BASE_EXPORT Ev3MasterGeneratorBase : public generatorBase::MasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	Ev3MasterGeneratorBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

@@ -28,6 +28,7 @@ namespace commands {
 /// Accepts a list of world items ids and adds them to model.
 class CreateWorldItemsCommand : public qReal::commands::DoNothingCommand
 {
+	Q_OBJECT
 public:
 	CreateWorldItemsCommand(model::Model &model, const QList<QDomElement> &itemsToCreate);
 };

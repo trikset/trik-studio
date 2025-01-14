@@ -13,6 +13,7 @@
 # limitations under the License.
 
 HEADERS += \
+	$$PWD/closeButtonVisibilityFilter.h \
 	$$PWD/outFile.h \
 	$$PWD/utilsDeclSpec.h \
 	$$PWD/xmlUtils.h \

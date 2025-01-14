@@ -35,6 +35,7 @@ namespace trik {
 
 class TrikKeysInterfaceStub : public trikControl::KeysInterface
 {
+	Q_OBJECT
 
 public:
 	TrikKeysInterfaceStub(const QSharedPointer<kitBase::robotModel::CommonRobotModel> &model);

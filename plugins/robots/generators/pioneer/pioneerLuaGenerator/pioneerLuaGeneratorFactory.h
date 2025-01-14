@@ -28,6 +28,7 @@ class RandomGeneratorPart;
 /// Factory that creates simple generators for Pioneer-specific blocks.
 class PioneerLuaGeneratorFactory : public generatorBase::GeneratorFactoryBase
 {
+	Q_OBJECT
 public:
 	PioneerLuaGeneratorFactory(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

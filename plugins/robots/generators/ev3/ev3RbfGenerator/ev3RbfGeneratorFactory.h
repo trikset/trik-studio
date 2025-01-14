@@ -22,6 +22,7 @@ namespace rbf {
 /// Generator factory adding ability to prepend code to blocks.
 class Ev3RbfGeneratorFactory : public Ev3GeneratorFactory
 {
+	Q_OBJECT
 public:
 	Ev3RbfGeneratorFactory(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

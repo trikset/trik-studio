@@ -24,6 +24,7 @@ namespace semantics {
 /// A semantic node for the block with if semantics
 class ROBOTS_GENERATOR_EXPORT IfNode : public ConditionalNode
 {
+	Q_OBJECT
 public:
 	explicit IfNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

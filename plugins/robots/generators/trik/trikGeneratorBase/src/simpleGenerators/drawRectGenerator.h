@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for Draw Rect block.
 class DrawRectGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	DrawRectGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

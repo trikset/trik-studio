@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'DrawCircle' block in NXT kit.
 class DrawCircleBlockGenerator : public DrawBlockGenerator
 {
+	Q_OBJECT
 public:
 	DrawCircleBlockGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

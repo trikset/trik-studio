@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'ReadLidar' block.
 class ReadLidarGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReadLidarGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

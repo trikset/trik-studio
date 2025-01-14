@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for LED control block.
 class LedGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	LedGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

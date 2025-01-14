@@ -26,6 +26,9 @@
 #include <qrutils/widgets/qRealDialog.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/editorInterface.h>
 
+#include "closeButtonVisibilityFilter.h"
+
+
 using namespace utils;
 
 SmartDock::SmartDock(const QString &objectName, QWidget *innerWidget, QMainWindow *parent)
@@ -251,7 +254,7 @@ void SmartDock::initDialog()
 	});
 }
 
-bool SmartDock::CloseButtonVisibilityFilter::eventFilter(QObject *obj, QEvent *event)
+bool CloseButtonVisibilityFilter::eventFilter(QObject *obj, QEvent *event)
 {
 	if (event->type() == QEvent::Show) {
 		dynamic_cast<QWidget *>(obj)->hide();
