@@ -48,10 +48,10 @@ AbstractItem *CurveItem::clone() const
 {
 	const auto cloned = new CurveItem({x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
-	connect(&mMarker1, &Marker::xChanged, &cloned->mMarker1, [=]() { cloned->mMarker1.setX(mMarker1.x()); });
-	connect(&mMarker1, &Marker::yChanged, &cloned->mMarker1, [=]() { cloned->mMarker1.setY(mMarker1.y()); });
-	connect(&mMarker2, &Marker::xChanged, &cloned->mMarker2, [=]() { cloned->mMarker2.setX(mMarker2.x()); });
-	connect(&mMarker2, &Marker::yChanged, &cloned->mMarker2, [=]() { cloned->mMarker2.setY(mMarker2.y()); });
+	connect(&mMarker1, &MarkerItem::xChanged, &cloned->mMarker1, [=]() { cloned->mMarker1.setX(mMarker1.x()); });
+	connect(&mMarker1, &MarkerItem::yChanged, &cloned->mMarker1, [=]() { cloned->mMarker1.setY(mMarker1.y()); });
+	connect(&mMarker2, &MarkerItem::xChanged, &cloned->mMarker2, [=]() { cloned->mMarker2.setX(mMarker2.x()); });
+	connect(&mMarker2, &MarkerItem::yChanged, &cloned->mMarker2, [=]() { cloned->mMarker2.setY(mMarker2.y()); });
 	cloned->mMarker1.setPos(mMarker1.pos());
 	cloned->mMarker2.setPos(mMarker2.pos());
 	return cloned;
@@ -232,19 +232,19 @@ void CurveItem::setEditable(bool editable)
 	mMarker2.setFlag(QGraphicsItem::ItemIsMovable, editable);
 }
 
-Marker::Marker(QGraphicsItem *parent)
+MarkerItem::MarkerItem(QGraphicsItem *parent)
 	: QGraphicsObject(parent)
 {
 	setCursor(Qt::SizeAllCursor);
 	setFlag(ItemSendsGeometryChanges);
 }
 
-QRectF Marker::boundingRect() const
+QRectF MarkerItem::boundingRect() const
 {
 	return QRectF(-markerSize.width() / 2, -markerSize.height() / 2, markerSize.width(), markerSize.height());
 }
 
-void Marker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void MarkerItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
@@ -258,7 +258,7 @@ void Marker::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 	painter->restore();
 }
 
-QVariant Marker::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
+QVariant MarkerItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
 	if (change == ItemPositionHasChanged) {
 		parentItem()->update();
@@ -267,19 +267,19 @@ QVariant Marker::itemChange(QGraphicsItem::GraphicsItemChange change, const QVar
 	return QGraphicsItem::itemChange(change, value);
 }
 
-void Marker::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void MarkerItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
 	emit static_cast<AbstractItem *>(parentItem())->mouseInteractionStarted();
 }
 
-void Marker::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void MarkerItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
 	if (flags() & ItemIsMovable) setPos(parentItem()->mapFromScene(event->scenePos()));
 }
 
-void Marker::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void MarkerItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
 	emit static_cast<AbstractItem *>(parentItem())->mouseInteractionStopped();

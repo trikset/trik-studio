@@ -101,7 +101,7 @@ HEADERS += \
 	$$PWD/src/engine/items/stylusItem.h \
 	$$PWD/src/engine/items/lineItem.h \
 	$$PWD/src/engine/items/curveItem.h \
-	$$PWD/src/engine/items/marker.h \
+	$$PWD/src/engine/items/markerItem.h \
 	$$PWD/src/engine/items/colorFieldItem.h \
 	$$PWD/src/engine/items/rectangleItem.h \
 	$$PWD/src/engine/items/ellipseItem.h \

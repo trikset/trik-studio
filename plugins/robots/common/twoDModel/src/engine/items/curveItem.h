@@ -17,7 +17,7 @@
 #include <qrutils/graphicsUtils/lineImpl.h>
 
 #include "colorFieldItem.h"
-#include "marker.h"
+#include "markerItem.h"
 
 namespace twoDModel {
 namespace items {
@@ -61,8 +61,8 @@ private:
 
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
-	twoDModel::items::Marker mMarker1;
-	twoDModel::items::Marker mMarker2;
+	MarkerItem mMarker1;
+	MarkerItem mMarker2;
 };
 
 }

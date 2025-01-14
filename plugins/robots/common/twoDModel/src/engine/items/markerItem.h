@@ -17,11 +17,11 @@
 namespace twoDModel {
 namespace items {
 
-class Marker : public QGraphicsObject
+class MarkerItem : public QGraphicsObject
 {
 	Q_OBJECT
 public:
-	explicit Marker(QGraphicsItem *parent = nullptr);
+	explicit MarkerItem(QGraphicsItem *parent = nullptr);
 	QRectF boundingRect() const override;
 
 private:
