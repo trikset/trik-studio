@@ -14,7 +14,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+192"/>
+        <location line="+193"/>
         <source>All files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>
