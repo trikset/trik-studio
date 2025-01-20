@@ -4,7 +4,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *	 http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,42 +22,42 @@
 using namespace qReal;
 
 QPalette Styles::loadPalette(QString pathToPalette) const {
-    QSettings settings(pathToPalette, QSettings::IniFormat);
-    QPalette palette;
+	QSettings settings(pathToPalette, QSettings::IniFormat);
+	QPalette palette;
 
-    if (!QFile::exists(pathToPalette)) {    
-        qInfo() << "File not found:" << pathToPalette;
-    }
+	if (!QFile::exists(pathToPalette)) {
+		qInfo() << "File not found:" << pathToPalette;
+	}
 
-    const QMap<QString, QPalette::ColorRole> colorRoles = {
-        {"Window", QPalette::Window},
-        {"WindowText", QPalette::WindowText},
-        {"Base", QPalette::Base},
-        {"AlternateBase", QPalette::AlternateBase},
-        {"ToolTipBase", QPalette::ToolTipBase},
-        {"ToolTipText", QPalette::ToolTipText},
-        {"Text", QPalette::Text},
-        {"Dark", QPalette::Dark},
-        {"Shadow", QPalette::Shadow},
-        {"Button", QPalette::Button},
-        {"ButtonText", QPalette::ButtonText},
-        {"BrightText", QPalette::BrightText},
-        {"Link", QPalette::Link},
-        {"Highlight", QPalette::Highlight},
-        {"HighlightedText", QPalette::HighlightedText}
-    };
+	const QMap<QString, QPalette::ColorRole> colorRoles = {
+		{"Window", QPalette::Window},
+		{"WindowText", QPalette::WindowText},
+		{"Base", QPalette::Base},
+		{"AlternateBase", QPalette::AlternateBase},
+		{"ToolTipBase", QPalette::ToolTipBase},
+		{"ToolTipText", QPalette::ToolTipText},
+		{"Text", QPalette::Text},
+		{"Dark", QPalette::Dark},
+		{"Shadow", QPalette::Shadow},
+		{"Button", QPalette::Button},
+		{"ButtonText", QPalette::ButtonText},
+		{"BrightText", QPalette::BrightText},
+		{"Link", QPalette::Link},
+		{"Highlight", QPalette::Highlight},
+		{"HighlightedText", QPalette::HighlightedText}
+	};
 
-    for (const auto &group : {"PaletteActive", "PaletteDisabled"}) {
-        QPalette::ColorGroup colorGroup = (QString(group) == "PaletteDisabled") ? QPalette::Disabled : QPalette::Active;
+	for (const auto &group : {"PaletteActive", "PaletteDisabled"}) {
+		QPalette::ColorGroup colorGroup = (QString(group) == "PaletteDisabled") ? QPalette::Disabled : QPalette::Active;
 
-        for (auto it = colorRoles.begin(); it != colorRoles.end(); ++it) {
-            QStringList rgb = settings.value(QString(group) + "/" + it.key()).toStringList();
-            if (!rgb.isEmpty()) {
-                QColor color(rgb[0].toInt(), rgb[1].toInt(), rgb[2].toInt());
-                palette.setColor(colorGroup, it.value(), color);
-            }
-        }
-    }
+		for (auto it = colorRoles.begin(); it != colorRoles.end(); ++it) {
+			QStringList rgb = settings.value(QString(group) + "/" + it.key()).toStringList();
+			if (!rgb.isEmpty()) {
+				QColor color(rgb[0].toInt(), rgb[1].toInt(), rgb[2].toInt());
+				palette.setColor(colorGroup, it.value(), color);
+			}
+		}
+	}
 
-    return palette;
+	return palette;
 }
