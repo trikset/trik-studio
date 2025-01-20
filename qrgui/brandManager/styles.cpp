@@ -25,10 +25,6 @@ QPalette Styles::loadPalette(QString pathToPalette) const {
 	QSettings settings(pathToPalette, QSettings::IniFormat);
 	QPalette palette;
 
-	if (!QFile::exists(pathToPalette)) {
-		qInfo() << "File not found:" << pathToPalette;
-	}
-
 	const QMap<QString, QPalette::ColorRole> colorRoles = {
 		{"Window", QPalette::Window},
 		{"WindowText", QPalette::WindowText},

@@ -15,6 +15,7 @@
 #pragma once
 
 #include <QtWidgets/QApplication>
+#include <QPalette>
 
 #include <qrutils/inFile.h>
 #include "fonts.h"
