@@ -114,7 +114,7 @@
         <translation>time</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+31"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
         <source>Run</source>
         <translation>Выполнить</translation>
     </message>
@@ -144,7 +144,7 @@
         <translation>Редактор</translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+71"/>
         <source>Switch to debug mode</source>
         <translation>Переключиться в режим отладки</translation>
     </message>
@@ -164,7 +164,7 @@
         <translation>Остановить интерпретацию</translation>
     </message>
     <message>
-        <location line="-90"/>
+        <location line="-81"/>
         <source>Robot settings</source>
         <translation>Настройки</translation>
     </message>
@@ -197,7 +197,7 @@
         <translation>На главную</translation>
     </message>
     <message>
-        <location line="+255"/>
+        <location line="+246"/>
         <source>Real robot</source>
         <translation>Реальный робот</translation>
     </message>

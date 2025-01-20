@@ -163,7 +163,7 @@
         <translation type="vanished">Conflit de configuration des capteurs, verifiez que les ports des capteurs soient utilisés de manière consistente dans le programme</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+31"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
         <source>Run</source>
         <translation>Executer</translation>
     </message>
@@ -198,7 +198,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+71"/>
         <source>Switch to debug mode</source>
         <translation>Passer en mode de débogage</translation>
     </message>
@@ -278,12 +278,12 @@
 <context>
     <name>interpreterCore::ActionsManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="-80"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="-71"/>
         <source>To main page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+255"/>
+        <location line="+246"/>
         <source>Real robot</source>
         <translation>Robot réel</translation>
     </message>
