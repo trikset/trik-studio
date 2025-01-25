@@ -21,7 +21,9 @@
 
 using namespace kitBase::robotModel;
 
-QMap<QString, DeviceInfo> DeviceInfo::mCreatedInfos = QMap<QString, DeviceInfo>();
+QMap<QString, DeviceInfo> DeviceInfo::mCreatedInfos = {{QString(), DeviceInfo()}};
+QReadWriteLock DeviceInfo::mRWLock;
+
 
 DeviceInfo::DeviceInfo()
 	: mDeviceType(nullptr)
@@ -90,17 +92,15 @@ QString DeviceInfo::toString() const
 	return QString(mDeviceType ? mDeviceType->className() : QString());
 }
 
-DeviceInfo DeviceInfo::fromString(const QString &string)
+DeviceInfo &DeviceInfo::fromString(const QString &string)
 {
-	if (string.isEmpty()) {
-		return DeviceInfo();
-	}
-
-	if (!mCreatedInfos.contains(string)) {
+	QReadLocker r(&mRWLock);
+	auto i = mCreatedInfos.find(string);
+	if (i == mCreatedInfos.end()) {
 		throw qReal::Exception(QString("QMetaObject for %1 not found").arg(string));
 	}
 
-	return mCreatedInfos[string];
+	return *i;
 }
 
 QString DeviceInfo::property(const QMetaObject * const metaObject, const QString &name)
