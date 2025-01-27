@@ -32,6 +32,7 @@ namespace common {
 class ROBOTS_KIT_BASE_EXPORT CalibrateGyroscopeBlock :
 		public kitBase::blocksBase::common::DeviceBlock<kitBase::robotModel::robotParts::GyroscopeSensor>
 {
+	Q_OBJECT
 public:
 	explicit CalibrateGyroscopeBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

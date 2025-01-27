@@ -23,7 +23,7 @@
 
 class Text : public Item
 {
-	Q_DISABLE_COPY(Text)
+	Q_OBJECT
 public:
 	Text(bool isDynamic = false);
 	Text(int x, int y, const QString &text = "text", bool isDynamic = false);

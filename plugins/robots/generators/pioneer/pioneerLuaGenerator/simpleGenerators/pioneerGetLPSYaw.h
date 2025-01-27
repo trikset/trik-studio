@@ -22,6 +22,7 @@ namespace lua {
 /// Generates "sensors.lpsYaw" command for quadcopter.
 class PioneerGetLPSYaw : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerGetLPSYaw(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

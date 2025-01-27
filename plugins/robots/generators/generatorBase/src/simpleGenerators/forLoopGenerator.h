@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'for' loops
 class ForLoopGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	ForLoopGenerator(int index
 			, const qrRepo::RepoApi &repo

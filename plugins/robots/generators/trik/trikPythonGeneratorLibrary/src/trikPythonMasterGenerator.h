@@ -22,6 +22,7 @@ namespace python {
 /// Master generator implementation for generator into Python for TRIK platform
 class TrikPythonMasterGenerator : public TrikMasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	TrikPythonMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForTouch' block
 class WaitForTouchSensorBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForTouchSensorBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

@@ -22,6 +22,7 @@ namespace details {
 
 class SmileBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	SmileBlock(kitBase::robotModel::RobotModelInterface &robotModel, bool isSmileSad);
 

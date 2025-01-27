@@ -125,7 +125,6 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 	}
 
 	nameToId.remove("");
-	QSet<qReal::Id> set(subprograms.toSet());
 	QHash<QString, qReal::IdList> toSave;
 	toSave.insert(fileName, nameToId.values());
 
@@ -274,7 +273,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		for (const auto &metaKey : oldMeta.keys()) {
 			mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 		}
-		mProjectManager->afterOpen(mRepo->workingFile());
+		Q_EMIT mProjectManager->afterOpen(mRepo->workingFile());
 		mProjectManager->setUnsavedIndicator(true);
 
 		checkSubprogramsForUniqueNames();

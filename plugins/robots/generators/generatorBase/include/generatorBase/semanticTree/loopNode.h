@@ -24,6 +24,7 @@ namespace semantics {
 /// A semantic node for loops inside program
 class ROBOTS_GENERATOR_EXPORT LoopNode : public ConditionalNode
 {
+	Q_OBJECT
 public:
 	explicit LoopNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

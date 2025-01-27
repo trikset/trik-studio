@@ -19,6 +19,8 @@
 #include <QtCore/QMetaObject>
 #include <QtCore/QMetaProperty>
 
+#include <QReadWriteLock>
+
 #include "direction.h"
 #include "kitBase/kitBaseDeclSpec.h"
 
@@ -30,12 +32,15 @@ namespace robotModel {
 class ROBOTS_KIT_BASE_EXPORT DeviceInfo
 {
 public:
+	/// Constructs invalid DeviceInfo instance.
+	DeviceInfo();
+
 	/// Creates a new instance of a Device descriptor. The resulting object will
 	/// correspond to a given type only if Q_OBJECT macro is used inside its declaration.
 	/// @warning Given device type must contain friendlyName() and direction() static functions
 	/// and Q_OBJECT macro.
 	template <typename T>
-	static DeviceInfo create()
+	static DeviceInfo &create()
 	{
 		// This line performs Q_OBJECT macro checking in the given type declaration.
 		// Without Q_OBJECT macro incorrect metaObject will be passed and it will lead
@@ -47,15 +52,13 @@ public:
 		const bool simulated = property(metaObject, "simulated") == "true";
 		const Direction direction = property(metaObject, "direction").toLower() == "input" ? input : output;
 		DeviceInfo result(metaObject, name, friendlyName, simulated, direction);
-		mCreatedInfos[QString(metaObject->className())] = result;
-		return result;
+		QWriteLocker w(&mRWLock);
+		auto &r = mCreatedInfos[QString(metaObject->className())] = std::move(result);
+		return r;
 	}
 
 	/// Deserializes inner string representation obtained by toString().
-	static DeviceInfo fromString(const QString &string);
-
-	/// Constructs invalid DeviceInfo instance.
-	DeviceInfo();
+	static DeviceInfo &fromString(const QString &string);
 
 	/// Serializes given device info into inner string representation.
 	QString toString() const;
@@ -115,6 +118,7 @@ private:
 
 	static QString property(const QMetaObject * const metaObject, const QString &name);
 
+	static QReadWriteLock mRWLock;
 	static QMap<QString, DeviceInfo> mCreatedInfos;
 
 	const QMetaObject *mDeviceType;

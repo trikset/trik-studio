@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'SadSmile' block.
 class SadSmileGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	SadSmileGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

@@ -24,6 +24,7 @@ class Editor;
 
 class Diagram
 {
+	Q_DISABLE_COPY_MOVE(Diagram)
 public:
 	Diagram(const QString &name, const QString &nodeName, const QString &displayedName, Editor *editor);
 	~Diagram();

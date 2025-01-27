@@ -22,6 +22,7 @@ namespace details {
 
 class DrawLineBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	DrawLineBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for the first case of the 'Switch' block.
 class SwitchGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	SwitchGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

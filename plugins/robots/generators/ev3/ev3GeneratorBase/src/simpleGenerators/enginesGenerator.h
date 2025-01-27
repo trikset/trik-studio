@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'EnginesForward' and 'EnginesBackward' block
 class EnginesGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	EnginesGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

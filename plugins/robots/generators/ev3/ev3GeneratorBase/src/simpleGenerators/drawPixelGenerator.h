@@ -21,6 +21,7 @@ namespace simple {
 
 class DrawPixelGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	DrawPixelGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

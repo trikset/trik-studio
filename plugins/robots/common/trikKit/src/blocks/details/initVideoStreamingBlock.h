@@ -24,6 +24,7 @@ namespace details {
 /// Interpreter implementation for "Enable Video Streaming" block.
 class InitVideoStreamingBlock : public kitBase::blocksBase::common::DeviceBlock<trik::robotModel::parts::TrikShell>
 {
+	Q_OBJECT
 public:
 	InitVideoStreamingBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

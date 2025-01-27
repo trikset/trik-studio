@@ -22,6 +22,7 @@ namespace details {
 
 class DrawEllipseBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	DrawEllipseBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

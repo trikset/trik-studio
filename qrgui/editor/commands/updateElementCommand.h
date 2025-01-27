@@ -23,6 +23,7 @@ namespace commands {
 
 class UpdateElementCommand : public ElementCommand
 {
+	Q_OBJECT
 public:
 	UpdateElementCommand(const EditorViewScene *scene, const Id &id);
 	UpdateElementCommand(const EditorView *view, const Id &id);

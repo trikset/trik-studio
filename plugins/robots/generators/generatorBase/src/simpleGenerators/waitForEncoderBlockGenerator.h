@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForEncoder' block
 class WaitForEncoderBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForEncoderBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

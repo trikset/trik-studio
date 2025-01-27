@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for goto label declaration
 class LabelGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	LabelGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

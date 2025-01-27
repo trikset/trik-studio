@@ -22,6 +22,7 @@ namespace lua {
 /// Generates "print" call in Lua, which prints given string to a console.
 class PioneerPrintGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerPrintGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

@@ -27,6 +27,7 @@ namespace commands {
 /// Accepts a list of world items ids and removes them from model.
 class RemoveWorldItemsCommand : public qReal::commands::DoNothingCommand
 {
+	Q_OBJECT
 public:
 	RemoveWorldItemsCommand(model::Model &model, const QStringList &itemsToDelete);
 };

@@ -25,6 +25,7 @@ namespace generatorBase {
 /// but it works always, so it can be used for uploading into robot.
 class ROBOTS_GENERATOR_EXPORT GotoControlFlowGenerator : public ControlFlowGeneratorBase
 {
+	Q_OBJECT
 public:
 	GotoControlFlowGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

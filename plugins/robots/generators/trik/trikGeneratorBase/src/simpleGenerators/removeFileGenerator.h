@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Remove File' block.
 class RemoveFileGenerator  : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	RemoveFileGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for Set Painter Width block.
 class SetPainterWidthGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	SetPainterWidthGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

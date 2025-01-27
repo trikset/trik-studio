@@ -30,7 +30,7 @@ TrikJoinNetworkGenerator::TrikJoinNetworkGenerator(const qrRepo::RepoApi &repo
 								,  utils::StringUtils::wrap(
 								      utils::StringUtils::dequote(repo.stringProperty(id, "Address")))
 								, customizer.factory()->stringPropertyConverter(id, "Address"))
-					, Binding::createDirect("@@PORT@@", "Port")
+					, Binding::createDirect("@@PORT@@", "IPPort")
 					, Binding::createDirect("@@HULL_NUMBER@@", "HullNumber") }
 			  , parent)
 {

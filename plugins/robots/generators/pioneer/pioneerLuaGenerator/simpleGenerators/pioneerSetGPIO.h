@@ -22,6 +22,7 @@ namespace lua {
 /// Generates magnet on/off state
 class PioneerSetGPIO : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerSetGPIO(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

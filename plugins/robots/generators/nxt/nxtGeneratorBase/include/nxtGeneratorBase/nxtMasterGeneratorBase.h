@@ -23,6 +23,7 @@ namespace nxt {
 /// Master generator base implementation for every generator from NXT kit
 class ROBOTS_NXT_GENERATOR_BASE_EXPORT NxtMasterGeneratorBase : public generatorBase::MasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	NxtMasterGeneratorBase(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

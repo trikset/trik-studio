@@ -22,6 +22,7 @@ namespace lua {
 /// Generates order to land for quadcopter.
 class GeoLandingGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	GeoLandingGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

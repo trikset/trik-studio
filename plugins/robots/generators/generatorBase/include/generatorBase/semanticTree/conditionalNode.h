@@ -24,6 +24,7 @@ namespace semantics {
 /// A base for all nodes with condition (like ifs and loops)
 class ROBOTS_GENERATOR_EXPORT ConditionalNode : public NonZoneNode
 {
+	Q_OBJECT
 public:
 	explicit ConditionalNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

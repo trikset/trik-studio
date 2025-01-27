@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'FinalNode' block
 class FinalNodeGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	FinalNodeGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

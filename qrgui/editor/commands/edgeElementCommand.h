@@ -24,6 +24,7 @@ namespace commands {
 /// A base for all commands using concrete edge element instance on some scene
 class EdgeElementCommand : public ElementCommand
 {
+	Q_OBJECT
 public:
 	EdgeElementCommand(const EditorViewScene *scene, const Id &id);
 	EdgeElementCommand(const EditorView *view, const Id &id);

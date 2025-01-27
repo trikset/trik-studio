@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'ClearScreen' block in NXT kit.
 class ClearScreenBlockGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ClearScreenBlockGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

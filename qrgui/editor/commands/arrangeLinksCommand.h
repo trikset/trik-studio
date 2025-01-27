@@ -24,6 +24,7 @@ namespace commands {
 /// Arranges links of specified node element
 class ArrangeLinksCommand : public ElementCommand
 {
+	Q_OBJECT
 public:
 	ArrangeLinksCommand(const EditorViewScene *scene, const Id &id, bool needAdjusting = false);
 	ArrangeLinksCommand(const EditorView *view, const Id &id, bool needAdjusting = false);

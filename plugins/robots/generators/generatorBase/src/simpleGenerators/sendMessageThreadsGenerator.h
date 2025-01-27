@@ -22,6 +22,7 @@ namespace simple {
 /// Generates sending a message to another thread.
 class SendMessageThreadsGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	SendMessageThreadsGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

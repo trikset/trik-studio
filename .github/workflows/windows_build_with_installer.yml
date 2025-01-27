@@ -54,6 +54,9 @@ jobs:
       run:
         shell: msys2 {0}
 
+    outputs:
+      set-artifact: ${{ steps.set-artifact.outputs.set-artifact }}
+      
     steps:
     
       - name: Setup msys2
@@ -93,7 +96,7 @@ jobs:
           version: '${{matrix.qt-version}}'
           arch: win${{ matrix.mingw-bitness }}_mingw${{matrix.mingw-short-version}}
           modules: 'qtscript'
-          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats qtwinextras'
+          archives: 'qtbase qtmultimedia qtsvg qtscript qttools qtserialport qtimageformats qtwinextras qttranslations'
           tools: 'tools_mingw,qt.tools.win${{ matrix.mingw-bitness }}_mingw${{matrix.mingw-short-version}}0 tools_ifw'
           add-tools-to-path: true
           cache: true
@@ -192,6 +195,10 @@ jobs:
             installer/trik-studio*installer*.exe
             installer/trik_studio*.qs
             installer/reinstall*
+  
+      - name: Set a flag when uploading an artifact
+        id: set-artifact
+        run: echo "set-artifact=true" >> "$GITHUB_OUTPUT"
 
       - name: Check errors
         if: ${{ steps.tests.outcome == 'failure' }}
@@ -231,9 +238,11 @@ jobs:
 
   install-windows-installer:
     needs: [build]
+    if: ${{ always() && needs.build.outputs.set-artifact == 'true' }}
     uses: ./.github/workflows/installer.yml
     with:
       os: windows-latest
       artifact_name: trik-studio-auto-installer-qt5.15
       shell: msys2 {0}
+      deploy_archive: true
     secrets: inherit

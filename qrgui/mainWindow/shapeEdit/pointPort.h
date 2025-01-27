@@ -21,7 +21,7 @@
 
 class PointPort : public Item
 {
-	Q_DISABLE_COPY(PointPort)
+	Q_OBJECT
 public:
 	PointPort(qreal x, qreal y, Item *parent = nullptr);
 	virtual QRectF boundingRect() const;

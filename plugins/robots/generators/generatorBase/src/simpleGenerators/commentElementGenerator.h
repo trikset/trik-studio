@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'CommentBlock' block
 class CommentElementGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	CommentElementGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

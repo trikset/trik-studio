@@ -40,6 +40,8 @@
 
 #include <plugins/pluginManager/toolPluginManager.h>
 
+#include "hackTouchDragThread.h"
+
 using namespace qReal;
 using namespace gui;
 
@@ -407,27 +409,27 @@ constexpr auto MOUSEEVENTF_LEFTUP = 0;
 constexpr auto MOUSEEVENTF_MOVE = 0;
 #endif
 
-DraggableElement::HackTouchDragThread::HackTouchDragThread(QObject *parent)
+HackTouchDragThread::HackTouchDragThread(QObject *parent)
 	: QThread(parent)
 {
 }
 
-void DraggableElement::HackTouchDragThread::simulateSystemPress()
+void HackTouchDragThread::simulateSystemPress()
 {
 	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 }
 
-void DraggableElement::HackTouchDragThread::simulateSystemMove()
+void HackTouchDragThread::simulateSystemMove()
 {
 	mouse_event(MOUSEEVENTF_MOVE, -1, -1, 0, 0);
 }
 
-void DraggableElement::HackTouchDragThread::simulateSystemRelease()
+void HackTouchDragThread::simulateSystemRelease()
 {
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 }
 
-void DraggableElement::HackTouchDragThread::run()
+void HackTouchDragThread::run()
 {
 	// Simulating press for windows drag manager not to terminate drag as inconsistent
 	// when it would be unfrozen

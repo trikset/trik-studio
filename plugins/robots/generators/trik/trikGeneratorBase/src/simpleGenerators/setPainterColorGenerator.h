@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for Set Painter Color block.
 class SetPainterColorGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	SetPainterColorGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

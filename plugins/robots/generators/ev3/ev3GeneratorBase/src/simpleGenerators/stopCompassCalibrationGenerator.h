@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Stop Compass Calibration' block
 class StopCompassCalibrationGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	StopCompassCalibrationGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

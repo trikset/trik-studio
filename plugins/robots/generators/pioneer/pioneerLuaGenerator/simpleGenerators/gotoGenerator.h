@@ -24,6 +24,7 @@ class GotoLabelManager;
 /// Generates goto to a human-readable label.
 class GotoGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	GotoGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer
