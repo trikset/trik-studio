@@ -128,7 +128,7 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 
 		const PortInfo port = PortInfo::fromString(sensorNode.attribute("port"));
 
-		const DeviceInfo type = DeviceInfo::fromString(sensorNode.attribute("type"));
+		const DeviceInfo &type = DeviceInfo::fromString(sensorNode.attribute("type"));
 
 		const QString positionStr = sensorNode.attribute("position", "0:0");
 		const QStringList splittedStr = positionStr.split(":");

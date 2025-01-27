@@ -71,6 +71,8 @@ void TrikBrick::reset()
 	}
 
 	mTimers.clear();
+
+	Q_EMIT resetCompleted();
 }
 
 void TrikBrick::printToShell(const QString &msg)
