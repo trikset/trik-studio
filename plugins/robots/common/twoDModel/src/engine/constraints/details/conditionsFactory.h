@@ -26,7 +26,7 @@ namespace details {
 class ConditionsFactory
 {
 public:
-	ConditionsFactory(Events &events, const Variables &variables, const Objects &objects, StatusReporter &status);
+	ConditionsFactory(Events &events, const Objects &objects, StatusReporter &status);
 
 	/// Produces new condition instance that always returnes \a value.
 	Condition constant(bool value) const;
@@ -81,7 +81,6 @@ private:
 	void reportError(const QString &message) const;
 
 	Events &mEvents;
-	const Variables &mVariables;
 	const Objects &mObjects;
 	StatusReporter &mStatus;
 };

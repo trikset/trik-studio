@@ -38,7 +38,7 @@
 #include <QStyle>
 #include <QTextCodec>
 
-#include "SciAccessibility.h"
+//#include "SciAccessibility.h"
 #include "ScintillaQt.h"
 
 

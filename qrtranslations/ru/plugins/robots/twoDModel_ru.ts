@@ -303,7 +303,7 @@
         <translation>Атрибут &quot;%1&quot; тэга &quot;%2&quot; не может быть пустым.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+107"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+105"/>
         <source>No such region: %1</source>
         <translation>Нет такого региона: %1</translation>
     </message>
