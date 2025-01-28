@@ -81,7 +81,7 @@ find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash -xe
 find . -type d -empty -delete
 
 #echo "Building online installer..."
-#$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
+#$QTIFW_DIR/binarycreator --verbose --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
 case $(uname -s || echo None) in
@@ -89,11 +89,11 @@ case $(uname -s || echo None) in
   Darwin) INSTALLER_EXT=.dmg;;
   *) INSTALLER_EXT=.exe;;
 esac
-$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-${FULL_VERSION}${INSTALLER_EXT}
+"$QTIFW_DIR"/binarycreator --verbose --offline-only -c "config/$PRODUCT-$OS_EXT.xml" -p packages/qreal-base -p "packages/$PRODUCT" "$PRODUCT-offline-$OS_EXT-installer$ADD_BIT-${FULL_VERSION}${INSTALLER_EXT}"
 
 grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
-[ -f $SSH_DIR/id_rsa ] && : || { echo "Done"; exit 0; }
+[ -f "$SSH_DIR/id_rsa" ] && : || { echo "Done"; exit 0; }
 
 #echo "Building updates repository... This step can be safely skipped, the offline installer is already ready, press Ctrl+C if you are not sure what to do next."
 #rm -rf $PRODUCT-repository
@@ -103,6 +103,6 @@ grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i
 #scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -r $PRODUCT-repository/* qrealproject@195.19.241.150:/home/qrealproject/public/packages/$PRODUCT-repo-$OS_EXT
 
 echo "Removing temporary files..."
-rm -rf $PRODUCT-repository
+rm -rf "$PRODUCT-repository"
 
 echo "Done"
