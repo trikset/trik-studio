@@ -22,6 +22,7 @@ namespace qts {
 /// Ensures that a diagram may be correctly generated into Qt Script code.
 class TrikQtsControlFlowValidator : public generatorBase::PrimaryControlFlowValidator
 {
+	Q_OBJECT
 public:
 	TrikQtsControlFlowValidator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

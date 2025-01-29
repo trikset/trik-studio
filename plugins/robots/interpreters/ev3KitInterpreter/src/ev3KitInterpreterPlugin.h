@@ -63,8 +63,7 @@ private:
 	robotModel::real::BluetoothRealRobotModel mBluetoothRealRobotModel;
 	robotModel::twoD::TwoDRobotModel mTwoDRobotModel;
 
-	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;  // Transfers ownership
-	bool mOwnsBlocksFactory = true;
+	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;  // Doesn't have ownership
 
 	Ev3AdditionalPreferences *mAdditionalPreferences = nullptr;  // Transfers ownership
 	bool mOwnsAdditionalPreferences = true;

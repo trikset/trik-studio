@@ -22,6 +22,7 @@ namespace details {
 
 class DrawPixelBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	DrawPixelBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

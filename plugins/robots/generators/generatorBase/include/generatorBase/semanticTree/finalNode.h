@@ -24,6 +24,7 @@ namespace semantics {
 /// A semantic node for the block with final semantics
 class ROBOTS_GENERATOR_EXPORT FinalNode : public NonZoneNode
 {
+	Q_OBJECT
 public:
 	/// @param inMainDiagram Is corresponding final node placed on the main diagram.
 	/// It is important to differentiate theese cases because generated code for

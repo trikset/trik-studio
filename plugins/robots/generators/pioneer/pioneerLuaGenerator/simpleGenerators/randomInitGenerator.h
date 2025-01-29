@@ -23,6 +23,7 @@ namespace lua {
 /// to initialize RNG only if it is used in a program.
 class RandomInitGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	RandomInitGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

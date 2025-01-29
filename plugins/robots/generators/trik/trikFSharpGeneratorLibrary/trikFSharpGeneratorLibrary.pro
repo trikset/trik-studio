@@ -16,6 +16,8 @@ TARGET = robots-trik-f-sharp-generator-library
 
 TEMPLATE = lib
 
+CONFIG += trikqscintilla2
+
 include(../../../../../global.pri)
 
 QT += widgets network
@@ -30,7 +32,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base robots-utils \
+links(qrkernel qrutils qrrepo robots-generator-base robots-trik-generator-base robots-utils \
 		qrgui-preferences-dialog robots-kit-base \
 )
 

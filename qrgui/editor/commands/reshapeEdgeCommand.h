@@ -26,6 +26,7 @@ namespace commands
 
 class ReshapeEdgeCommand : public EdgeElementCommand, public qReal::commands::TrackingEntity
 {
+	Q_OBJECT
 public:
 	ReshapeEdgeCommand(const EdgeElement *edge);
 	ReshapeEdgeCommand(const EditorViewScene *scene, const Id &id);

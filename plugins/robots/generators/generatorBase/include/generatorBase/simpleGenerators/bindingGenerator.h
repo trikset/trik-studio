@@ -24,6 +24,7 @@ namespace simple {
 /// A base for all generators that use bindings and templates for generating code
 class ROBOTS_GENERATOR_EXPORT BindingGenerator : public AbstractSimpleGenerator
 {
+	Q_OBJECT
 public:
 	BindingGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

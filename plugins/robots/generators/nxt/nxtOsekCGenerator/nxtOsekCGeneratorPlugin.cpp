@@ -76,8 +76,9 @@ void NxtOsekCGeneratorPlugin::onCurrentRobotModelChanged(kitBase::robotModel::Ro
 {
 	RobotsGeneratorPluginBase::onCurrentRobotModelChanged(model);
 	checkNxtTools();
-	mUploadProgramAction->setVisible(&model == robotModels()[0]);
-	mFlashRobotAction->setVisible(&model == robotModels()[0]);
+	bool ourModel = robotModels().contains(&model);
+	mUploadProgramAction->setVisible(ourModel);
+	mFlashRobotAction->setVisible(ourModel);
 	mUploadProgramAction->setEnabled(mNxtToolsPresent);
 	mFlashRobotAction->setEnabled(mNxtToolsPresent);
 	const QString tooltip = mNxtToolsPresent ? QString() : tr("NXT tools package is not installed");

@@ -220,6 +220,11 @@ void ActionsManager::setEnableRobotActions(bool enableRobotActions)
 	mEnableRobotActions = enableRobotActions;
 }
 
+void ActionsManager::setRunActionVisible(bool isModelInterpreted)
+{
+	mRunAction->setVisible(mIsOnEditorTab && isModelInterpreted);
+}
+
 void ActionsManager::updateEnabledActions()
 {
 	const qReal::Id &rootElementId = mMainWindowInterpretersInterface->activeDiagram();

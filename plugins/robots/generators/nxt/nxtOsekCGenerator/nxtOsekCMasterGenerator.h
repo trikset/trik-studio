@@ -21,6 +21,7 @@ namespace osekC {
 
 class NxtOsekCMasterGenerator : public NxtMasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	NxtOsekCMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

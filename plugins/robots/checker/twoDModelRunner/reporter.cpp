@@ -48,6 +48,11 @@ void Reporter::addError(const QString &message)
 	mMessages << qMakePair(Level::error, message);
 }
 
+void Reporter::addLog(const QString &message)
+{
+	mMessages << qMakePair(Level::log, message);
+}
+
 void Reporter::onInterpretationStart()
 {
 	mFirstMessage = true;
@@ -104,7 +109,7 @@ void Reporter::reportMessages()
 	QJsonArray messages;
 	for (const QPair<Level, QString> &message : mMessages) {
 		messages.append(QJsonObject::fromVariantMap({
-			{ "level", message.first == Level::information ? "info" : "error" }
+			{ "level", levelToString(message.first) }
 			, { "message", message.second }
 		}));
 	}
@@ -112,6 +117,25 @@ void Reporter::reportMessages()
 	QJsonDocument document;
 	document.setArray(messages);
 	report(document.toJson(), mMessagesFile);
+}
+
+QString Reporter::levelToString(const Level level) const {
+	// GCC 10.3.1 in AltLinux has problems understanding enums
+	// Thus we need this redundant code with a temporary variable
+	QString tmp;
+	
+	switch (level) {
+	case Level::information:
+	    tmp = "info";
+	    break;
+	case Level::error:
+	    tmp = "error";
+	    break;
+	case Level::log:
+	    tmp = "log";
+	    break;
+	}
+	return tmp;
 }
 
 QJsonValue Reporter::variantToJson(const QVariant &value) const

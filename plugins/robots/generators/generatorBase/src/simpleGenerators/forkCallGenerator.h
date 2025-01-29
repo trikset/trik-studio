@@ -22,6 +22,7 @@ namespace simple {
 /// Generates code that instantiates new threads.
 class ForkCallGenerator : public AbstractSimpleGenerator
 {
+	Q_OBJECT
 public:
 	ForkCallGenerator(const qrRepo::RepoApi &repo
 		, GeneratorCustomizer &customizer

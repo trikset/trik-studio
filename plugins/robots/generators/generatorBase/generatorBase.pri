@@ -13,6 +13,7 @@
 # limitations under the License.
 
 QT += widgets
+CONFIG += trikqscintilla2
 
 includes(plugins/robots/generators/generatorBase \
 		qrutils \

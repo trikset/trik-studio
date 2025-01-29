@@ -22,6 +22,7 @@ namespace lua {
 /// Generates "Go to point" command for quadcopter.
 class GoToGPSPointGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	GoToGPSPointGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

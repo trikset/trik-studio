@@ -24,6 +24,7 @@ namespace lineLeader {
 /// Generator for 'Read Sensor to Array' block
 class ReadSensorArrayGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReadSensorArrayGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

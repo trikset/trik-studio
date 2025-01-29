@@ -25,6 +25,7 @@ class Ev3LuaProcessor;
 
 class Ev3RbfMasterGenerator : public Ev3MasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	Ev3RbfMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

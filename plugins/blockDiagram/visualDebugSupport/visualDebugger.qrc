@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>icons/preferences/bug.png</file>
-    </qresource>
-</RCC>

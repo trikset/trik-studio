@@ -22,6 +22,7 @@ namespace details {
 
 class SetPainterColorBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	SetPainterColorBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

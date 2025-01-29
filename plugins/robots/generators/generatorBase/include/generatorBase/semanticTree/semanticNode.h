@@ -28,6 +28,7 @@ namespace semantics {
 /// A base for all semantic nodes
 class ROBOTS_GENERATOR_EXPORT SemanticNode : public QObject
 {
+	Q_OBJECT
 public:
 	/// Returns an id of the binded to this semantic node block
 	virtual qReal::Id id() const;

@@ -24,6 +24,7 @@ namespace qReal {
 /// Measures time interval between its creation and deletion, writes results to qDebug. Used for profiling.
 class QRKERNEL_EXPORT TimeMeasurer
 {
+	Q_DISABLE_COPY_MOVE(TimeMeasurer)
 public:
 	/// Constructor.
 	/// @param methodName A name of a method or part of program to be measured.

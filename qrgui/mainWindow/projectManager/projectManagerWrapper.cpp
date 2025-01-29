@@ -32,6 +32,7 @@
 #include <qrgui/models/models.h>
 #include <qrgui/models/propertyEditorModel.h>
 #include <qrgui/plugins/pluginManager/toolPluginManager.h>
+#include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 
 using namespace qReal;
 using namespace utils;
@@ -40,7 +41,6 @@ ProjectManagerWrapper::ProjectManagerWrapper(MainWindow *mainWindow, TextManager
 	: ProjectManager(mainWindow->models())
 	, mMainWindow(mainWindow)
 	, mTextManager(textManager)
-	, mVersionsConverter(*mMainWindow)
 {
 	setSaveFilePath();
 }
@@ -108,7 +108,7 @@ bool ProjectManagerWrapper::open(const QString &fileName)
 		mMainWindow->closeStartTab();
 		mTextManager->showInTextEditor(fileInfo, text::Languages::pickByExtension(fileInfo.suffix()));
 		if (localActiveDiagram.isNull() && !mMainWindow->activeDiagram().isNull()) {
-			emit afterOpen(fileName);
+			Q_EMIT afterOpen(fileName);
 		}
 	}
 
@@ -156,7 +156,14 @@ QString ProjectManagerWrapper::textFileFilters() const
 
 bool ProjectManagerWrapper::checkVersions()
 {
-	return mVersionsConverter.validateCurrentProject();
+	if (!mVersionsConverter.validateCurrentProject()) {
+		showMessage(QObject::tr("Can`t open project file"), mVersionsConverter.errorMessage());
+		return false;
+	}
+	if (mVersionsConverter.converted()) {
+		mMainWindow->errorReporter()->addInformation(mVersionsConverter.errorMessage());
+	}
+	return true;
 }
 
 void ProjectManagerWrapper::refreshApplicationStateAfterSave()

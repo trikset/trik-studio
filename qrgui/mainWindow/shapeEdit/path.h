@@ -20,7 +20,7 @@
 
 class Path : public Item
 {
-	Q_DISABLE_COPY(Path)
+	Q_OBJECT
 public:
 	Path(const QPainterPath &path);
 	virtual QRectF boundingRect() const;

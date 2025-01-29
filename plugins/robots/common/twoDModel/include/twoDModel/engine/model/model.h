@@ -24,6 +24,7 @@
 
 namespace qReal {
 class ErrorReporterInterface;
+class LogicalModelAssistInterface;
 }
 
 namespace kitBase {
@@ -49,7 +50,8 @@ public:
 	~Model();
 
 	void init(qReal::ErrorReporterInterface &errorReporter
-			, kitBase::InterpreterControlInterface &interpreterControl);
+			, kitBase::InterpreterControlInterface &interpreterControl
+			, qReal::LogicalModelAssistInterface &logicalModel);
 
 	/// Returns a reference to a world map.
 	WorldModel &worldModel();
@@ -67,7 +69,7 @@ public:
 	qReal::ErrorReporterInterface *errorReporter();
 
 	QDomDocument serialize() const;
-	void deserialize(const QDomDocument &worldModel, const QDomDocument &blobs);
+	void deserialize(const QDomDocument &model);
 
 	/// Add new robot model
 	/// @param robotModel Model to be added
@@ -75,12 +77,10 @@ public:
 	void addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF &pos = QPointF());
 
 	/// Remove robot model
-	/// @param robotMode Model to be removed
-	void removeRobotModel(const twoDModel::robotModel::TwoDRobotModel &robotModel);
+	void removeRobotModel();
 
 	/// Delete old model and add new model with the same coordinates that old model
-	void replaceRobotModel(const twoDModel::robotModel::TwoDRobotModel &oldModel
-			, robotModel::TwoDRobotModel &newModel);
+	void replaceRobotModel(robotModel::TwoDRobotModel &newModel);
 
 	/// Returns true if constraints checker is active (constraints list in the model is non-empty).
 	bool hasConstraints() const;
@@ -110,15 +110,15 @@ private slots:
 	void recalculatePhysicsParams();
 
 private:
-	int findModel(const twoDModel::robotModel::TwoDRobotModel &robotModel);
 	void initPhysics();
 
 	Settings mSettings;
 	WorldModel mWorldModel;
 	Timeline mTimeline;
 	QScopedPointer<constraints::ConstraintsChecker> mChecker;
-	QList<RobotModel *> mRobotModels; //Has ownership
+	RobotModel * mRobotModel {}; //Has ownership
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
+	qReal::LogicalModelAssistInterface *mLogicalModel;  // Doesn`t take ownership.
 	physics::PhysicsEngineBase *mRealisticPhysicsEngine;  // Takes ownership.
 	physics::PhysicsEngineBase *mSimplePhysicsEngine;  // Takes ownership.
 	quint64 mStartTimestamp {0};

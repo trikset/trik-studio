@@ -18,8 +18,18 @@ HEADERS += \
 	runExtensions.h \
 
 SUBDIRS = \
-	qscintilla/Qt4Qt5/qscintilla.pro \
-	qslog/QsLogSharedLibrary.pro \
-	gamepad/gamepad.pro \
-	quazip/quazip.pro \
+	qslog \
+	gamepad \
+	checkapp \
 
+qslog.file = qslog/QsLogSharedLibrary.pro
+gamepad.depends = qslog
+checkapp.depends = qslog
+
+!use_system_qscintilla2 {
+    SUBDIRS += qscintilla/Qt4Qt5/qscintilla.pro
+}
+
+!use_system_quazip {
+    SUBDIRS += quazip/quazip.pro
+}

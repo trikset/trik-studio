@@ -17,6 +17,7 @@
 
 #include <QtWidgets/QStyle>
 
+#include <QMessageBox>
 #include <qrkernel/settingsManager.h>
 #include <qrutils/widgets/qRealFileDialog.h>
 
@@ -68,14 +69,22 @@ void TrikAdditionalPreferences::save()
 	SettingsManager::setValue("TrikSimulatedCameraImagesPath", mUi->imagesPathlineEdit->text());
 	SettingsManager::setValue("TrikSimulatedCameraImagesFromProject", mUi->imagesFromProjectCheckBox->isChecked());
 	SettingsManager::setValue("TrikWebCameraRealName", mUi->cameraNameLineEdit->text());
+	SettingsManager::setValue("TRIK2DMailbox", mUi->mailboxCheckBox->isChecked());
 	mUi->robotImagePicker->save();
+
+	if (mailboxSavedState != mUi->mailboxCheckBox->isChecked()) {
+		QMessageBox::information(this, tr("Information"), tr("You should restart the program to apply changes"));
+		mailboxSavedState = mUi->mailboxCheckBox->isChecked();
+	}
 	emit settingsChanged();
 }
 
 void TrikAdditionalPreferences::restoreSettings()
 {
 	const auto &addr = SettingsManager::value("TrikTcpServer").toString();
-	mUi->tcpServerLineEdit->insertItem(0, addr);
+	if (mUi->tcpServerLineEdit->findText(addr) < 0) {
+		mUi->tcpServerLineEdit->insertItem(0, addr);
+	}
 	mUi->tcpServerLineEdit->setCurrentText(addr);
 	mUi->realCameraCheckBox->setChecked(SettingsManager::value("TrikWebCameraReal").toBool());
 	mUi->imagesPathlineEdit->setText(SettingsManager::value("TrikSimulatedCameraImagesPath").toString());
@@ -83,6 +92,8 @@ void TrikAdditionalPreferences::restoreSettings()
 	mUi->imagesFromProjectCheckBox->setChecked(SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool());
 	mUi->simulatedCameraFrame->setVisible(not mUi->realCameraCheckBox->isChecked());
 	mUi->realCameraFrame->setVisible(mUi->realCameraCheckBox->isChecked());
+	mUi->mailboxCheckBox->setChecked(SettingsManager::value("TRIK2DMailbox").toBool());
+	mailboxSavedState = mUi->mailboxCheckBox->isChecked();
 	mUi->robotImagePicker->restore();
 }
 

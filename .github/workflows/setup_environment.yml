@@ -1,0 +1,198 @@
+name: Set up Action
+   
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      executor:
+        required: false
+        type: string
+        default: "time"
+      lint:
+        required: false
+        type: boolean
+        default: false
+      build:
+        required: true
+        type: boolean
+      build_installer:
+        required: true
+        type: boolean
+      linux_installer_environment:
+        required: false
+        type: boolean
+        default: false
+      trik_qt_version:
+        required: false
+        type: string
+        default: '5.15'
+      trik_python3_version_minor:
+        required: false
+        type: string
+        default: '9'
+      qtifw_version:
+        required: false
+        type: string
+        default: 4.6.1
+      xcode_version:
+        required: false
+        type: string
+        default: 14.3
+      config:
+        required: false
+        type: string
+        default: release
+      qmake_extra:
+        required: false
+        type: string
+        default: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache"
+      tests:
+        required: false
+        type: string
+        default: "./run-simulator-tests.sh"
+      container_name:
+        required: false
+        type: string
+        default: ""
+      gcc_version:
+        required: false
+        type: string
+        default: 13
+      shell:
+        required: false
+        type: string
+        default: bash
+
+jobs:
+  build:
+    defaults:
+      run:
+        shell: ${{ inputs.shell }}
+
+    runs-on: ${{ inputs.os }}
+    container: ${{ inputs.container_name }}
+    
+    steps:
+    - name: Install dependencies
+      run: |
+        apt-get update && apt-get -y dist-upgrade && apt-get install -y glibc git sudo
+        sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
+      if: startsWith(inputs.container_name, 'alt')
+
+
+    - name: Install dependencies
+      run: yum update -y && yum install -y --setopt=install_weak_deps=False git-core sudo
+      if: startsWith(inputs.container_name, 'rocky')
+      
+    - name: Configure git
+      run: |
+          git config --global core.symlinks true
+          git config --global core.autocrlf input
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Remove thirdparty submodules (use from libs from distro)
+      run: |
+        set -xeu
+        if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_quazip" ]]; then
+          rm -rf thirdparty/quazip
+        fi
+        if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_qscintilla2" ]]; then
+          rm -rf thirdparty/qscintilla
+        fi
+        ls thirdparty
+
+    - name: Set up environment
+      run: buildScripts/github/install.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        QTIFW_VERSION: ${{ inputs.qtifw_version }}
+        XCODE_VERSION: ${{ inputs.xcode_version }}
+        BUILD_INSTALLER: ${{ inputs.build_installer }}
+        GCC_VERSION: ${{ inputs.gcc_version }}
+        INSTALL_INSTALLER_ENVIRONMENT: ${{ inputs.linux_installer_environment }}
+      if: ${{ inputs.build }}
+      
+    - name: Lint
+      run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
+          ${{ inputs.executor }} buildScripts/github/vera_translation.sh
+      if: ${{ inputs.lint }}
+
+    - name: Restore cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+        restore-keys: |
+          ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}
+          ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}
+          ccache-c${{ inputs.container_name }}-${{ inputs.os }}
+      if: ${{ inputs.build }}
+
+    - name: Build
+      run: buildScripts/github/build.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        CACHE_DIR: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        CCACHE_CONFIGPATH: ${{ github.workspace }}/ccache.conf
+        PROJECT: "studio"
+        CONFIG: ${{ inputs.config }}
+        EXECUTOR: ${{ inputs.executor }}
+        QMAKE_EXTRA: ${{ inputs.qmake_extra }}
+      if: ${{ inputs.build }}
+
+    - name: Save build cache
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ github.workspace }}/.ccache/${{ inputs.os }}-c${{ inputs.container_name }}-${{ inputs.config }}
+        key: ccache-c${{ inputs.container_name }}-${{ inputs.os }}-${{ inputs.config }}-${{ inputs.qmake_extra }}-${{ github.sha }}
+      if: ${{ inputs.build }}
+        
+    - name: Run tests
+      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh
+      env:
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        TESTS: ${{ inputs.tests }}
+      if: ${{ inputs.build == true }}
+
+    - name: Build Installer
+      run: |
+        buildScripts/github/build_installer.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        PROJECT: "studio"
+        CONFIG: ${{ inputs.config }}
+        EXECUTOR: ${{ inputs.executor }}
+        BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
+        PULLREQUESTNUMBER: ${{ github.event.pull_request.number }}
+        ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
+        username: ${{ secrets.DL_USERNAME }}
+        host: ${{ secrets.DL_HOST }}
+      if: ${{ inputs.build_installer }}
+
+    - name: Evaluate artifact name
+      run: |
+        set -x
+        echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer" >> $GITHUB_ENV
+        env
+
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.ARTIFACT_INSTALLER_NAME }}
+        path: |
+          installer/*.exe
+          installer/*.run
+          installer/*.dmg
+          installer/*.qs
+      if: ${{ inputs.build_installer }}

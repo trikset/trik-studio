@@ -27,6 +27,7 @@ class SemanticTree;
 /// other represented as separate semantic trees whitch will be generated as separate task.
 class ROBOTS_GENERATOR_EXPORT ForkNode : public NonZoneNode
 {
+	Q_OBJECT
 public:
 	explicit ForkNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

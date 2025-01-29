@@ -25,6 +25,7 @@ namespace parts {
 
 class TwoDMotor : public robotModel::parts::NxtMotor
 {
+	Q_OBJECT
 public:
 	TwoDMotor(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port

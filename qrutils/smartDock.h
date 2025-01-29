@@ -64,12 +64,12 @@ public slots:
 	/// Hides this dock and removes it from the list of main window`s docks.
 	void detachFromMainWindow();
 
-signals:
+Q_SIGNALS:
 	/// Emitted with 'true' value when this dock is in regular (docked) form.
 	/// Otherwise (when it floats in QDialog form) emitted with 'false' value.
 	void dockedChanged(bool docked);
 
-private slots:
+private Q_SLOTS:
 	/// Overrides default behaviour to float in QDialog shape.
 	void checkFloating();
 
@@ -77,11 +77,6 @@ private slots:
 	void checkCentralWidget();
 
 private:
-	class CloseButtonVisibilityFilter : public QObject
-	{
-		bool eventFilter(QObject *obj, QEvent *event) override;
-	};
-
 	QMainWindow *findMainWindow() const;
 
 	bool event(QEvent *event) override;

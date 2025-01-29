@@ -21,6 +21,7 @@ namespace text {
 
 class TextHighlighter : public QSyntaxHighlighter
 {
+	Q_OBJECT
 public:
 	TextHighlighter(QTextDocument *document);
 	void highlightBlock(const QString &text);

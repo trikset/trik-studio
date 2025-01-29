@@ -59,6 +59,7 @@ private:
 	QString pathToElement(const qReal::Id &id) const;
 	QString createDirectory(const qReal::Id &id, bool logical) const;
 
+	const QStringList mFileNames {"worldModel", "blobs"};
 	QString mWorkingDir;
 	QString mWorkingFile;
 };

@@ -23,6 +23,7 @@ namespace commands {
 
 class FoldCommand : public NodeElementCommand
 {
+	Q_OBJECT
 public:
 	FoldCommand(const NodeElement *element);
 	virtual ~FoldCommand() {}

@@ -24,6 +24,7 @@
 #include <twoDModel/robotModel/twoDRobotModel.h>
 
 #include <qrgui/textEditor/qscintillaTextEdit.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 
 #include "interpreterCore/managers/kitAutoSwitcher.h"
 #include "interpreterCore/interpreter/blockInterpreter.h"
@@ -133,8 +134,6 @@ void RobotsPluginFacade::init(const qReal::PluginConfigurator &configurer)
 	};
 	connectDisconnection(mRobotModelManager.model());
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged, &mProxyInterpreter, connectDisconnection);
-	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
-			, &mProxyInterpreter, &kitBase::InterpreterInterface::userStopRobot);
 
 	initKitPlugins(configurer);
 
@@ -260,6 +259,11 @@ ActionsManager &RobotsPluginFacade::actionsManager()
 	return mActionsManager;
 }
 
+RobotModelManager &RobotsPluginFacade::robotModelManager()
+{
+	return mRobotModelManager;
+}
+
 QObject *RobotsPluginFacade::guiScriptFacade() const
 {
 	const auto robotModel = dynamic_cast<twoDModel::robotModel::TwoDRobotModel *>(&mRobotModelManager.model());
@@ -300,11 +304,27 @@ const kitBase::EventsForKitPluginInterface &RobotsPluginFacade::eventsForKitPlug
 	return mEventsForKitPlugin;
 }
 
-bool RobotsPluginFacade::interpretCode(const QString &inputs)
+bool RobotsPluginFacade::interpretCode(const QString &inputs, const QString &filepath)
 {
-	auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
-	QString code = logicalRepo->metaInformation("activeCode").toString();
-	QString extension = logicalRepo->metaInformation("activeCodeLanguageExtension").toString();
+	QString code;
+	QString extension;
+	if (!filepath.isEmpty()) {
+		QFile file(filepath);
+		QFileInfo fileInfo(file);
+
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			mMainWindow->errorReporter()->addError(
+						tr("The specified script file could not be opened for reading ") + filepath);
+			return false;
+		}
+		code = file.readAll();
+		extension = fileInfo.suffix().toLower();
+	}
+	else {
+		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
+		code = logicalRepo->metaInformation("activeCode").toString();
+		extension = logicalRepo->metaInformation("activeCodeLanguageExtension").toString();
+	}
 	if (code.isEmpty()) {
 		mMainWindow->errorReporter()->addError(tr("No saved code found in the qrs file"));
 		return false;
@@ -397,7 +417,7 @@ void RobotsPluginFacade::initSensorWidgets()
 		if (!dynamic_cast<qReal::text::QScintillaTextEdit *>(mMainWindow->currentTab())) {
 			// since userStop fires on any tab/model switch even when the code tab is opened
 			// and nothing is running, but this whole visibility mumbo-jumbo has become a mess
-			mActionsManager.runAction().setVisible(mRobotModelManager.model().interpretedModel());
+			mActionsManager.setRunActionVisible(mRobotModelManager.model().interpretedModel());
 			mActionsManager.stopRobotAction().setVisible(false);
 		}
 	});
@@ -408,7 +428,9 @@ void RobotsPluginFacade::initSensorWidgets()
 			, *mUiManager->robotConsole().toggleViewAction());
 	for (kitBase::robotModel::RobotModelInterface * const model : mKitPluginManager.allRobotModels()) {
 		for (kitBase::KitPluginInterface * const kit : mKitPluginManager.kitsById(model->kitId())) {
-			mUiManager->addWidgetToToolbar(*model, kit->quickPreferencesFor(*model));
+			for (auto && widget : kit->listOfQuickPreferencesFor(*model)) {
+				mUiManager->addWidgetToToolbar(*model, widget);
+			}
 		}
 	}
 
@@ -474,6 +496,13 @@ void RobotsPluginFacade::connectEventsForKitPlugin()
 			, &kitBase::InterpreterInterface::stopped
 			, &mEventsForKitPlugin
 			, &kitBase::EventsForKitPluginInterface::interpretationStopped
+			);
+
+	QObject::connect(
+			&mProxyInterpreter
+			, &kitBase::InterpreterInterface::errored
+			, &mEventsForKitPlugin
+			, &kitBase::EventsForKitPluginInterface::interpretationErrored
 			);
 
 	QObject::connect(

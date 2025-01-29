@@ -29,6 +29,7 @@ PioneerAdditionalPreferences::PioneerAdditionalPreferences(QWidget *parent)
 	, mUi(new Ui::PioneerAdditionalPreferences)
 {
 	mUi->setupUi(this);
+	mUi->baseStationModeComboBox->addItems({"usb", "wifi"});
 
 	restoreSettings();
 }
@@ -40,16 +41,26 @@ PioneerAdditionalPreferences::~PioneerAdditionalPreferences()
 
 void PioneerAdditionalPreferences::save()
 {
-	SettingsManager::setValue(settings::pioneerBaseStationIP, mUi->baseStationIpLineEdit->text());
-	SettingsManager::setValue(settings::pioneerBaseStationPort, mUi->baseStationPortLineEdit->text());
+	SettingsManager::setValue(settings::pioneerBaseStationIP, mUi->baseStationIpComboBox->currentText());
+	SettingsManager::setValue(settings::pioneerBaseStationPort, mUi->baseStationPortComboBox->currentText());
+	SettingsManager::setValue(settings::pioneerBaseStationMode, mUi->baseStationModeComboBox->currentText());
 
 	emit settingsChanged();
 }
 
+void PioneerAdditionalPreferences::updateComboBox(QComboBox *selector, QString settings)
+{
+	const auto &value = SettingsManager::value(settings).toString();
+	if (selector->findText(value) < 0) {
+		selector->insertItem(0, value);
+	}
+	selector->setCurrentText(value);
+}
 void PioneerAdditionalPreferences::restoreSettings()
 {
-	mUi->baseStationIpLineEdit->setText(SettingsManager::value(settings::pioneerBaseStationIP).toString());
-	mUi->baseStationPortLineEdit->setText(SettingsManager::value(settings::pioneerBaseStationPort).toString());
+	updateComboBox(mUi->baseStationIpComboBox, settings::pioneerBaseStationIP);
+	updateComboBox(mUi->baseStationPortComboBox, settings::pioneerBaseStationPort);
+	updateComboBox(mUi->baseStationModeComboBox, settings::pioneerBaseStationMode);
 }
 
 void PioneerAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)

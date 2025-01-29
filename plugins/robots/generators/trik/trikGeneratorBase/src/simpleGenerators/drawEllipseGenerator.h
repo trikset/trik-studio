@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for Draw Ellipse block.
 class DrawEllipseGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	DrawEllipseGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

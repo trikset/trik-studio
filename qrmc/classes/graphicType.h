@@ -91,8 +91,9 @@ protected:
 
 private:
 	class ResolvingHelper {
+	Q_DISABLE_COPY_MOVE(ResolvingHelper)
 	public:
-		ResolvingHelper(bool &resolvingFlag);
+		explicit ResolvingHelper(bool &resolvingFlag);
 		~ResolvingHelper();
 	private:
 		bool &mResolvingFlag;

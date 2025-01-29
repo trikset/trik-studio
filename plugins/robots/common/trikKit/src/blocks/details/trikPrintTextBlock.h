@@ -22,6 +22,7 @@ namespace details {
 
 class TrikPrintTextBlock : public kitBase::blocksBase::common::DisplayBlock
 {
+	Q_OBJECT
 public:
 	TrikPrintTextBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

@@ -40,6 +40,8 @@
 
 #include <plugins/pluginManager/toolPluginManager.h>
 
+#include "hackTouchDragThread.h"
+
 using namespace qReal;
 using namespace gui;
 
@@ -56,6 +58,7 @@ DraggableElement::DraggableElement(MainWindow &mainWindow
 	, mEditorManagerProxy(editorManagerProxy)
 	, mMainWindow(mainWindow)
 {
+	readyForDelete = true;
 	QHBoxLayout *layout = new QHBoxLayout(this);
 	layout->setContentsMargins(0, 4, 0, 4);
 
@@ -95,6 +98,11 @@ DraggableElement::DraggableElement(MainWindow &mainWindow
 	setCursor(Qt::OpenHandCursor);
 	setAttribute(Qt::WA_AcceptTouchEvents);
 	setObjectName(mData.name());
+}
+
+bool DraggableElement::getReadyForDelete() const
+{
+	return readyForDelete;
 }
 
 QIcon DraggableElement::icon() const
@@ -375,6 +383,7 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 			menu->exec(QCursor::pos());
 		}
 	} else {
+		readyForDelete = false;
 		QDrag *drag = new QDrag(this);
 		drag->setMimeData(mimeData(elementId));
 
@@ -385,6 +394,8 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 		}
 
 		drag->exec(Qt::CopyAction);
+		readyForDelete = true;
+		emit signalReadyForDelete();
 	}
 }
 
@@ -398,27 +409,27 @@ constexpr auto MOUSEEVENTF_LEFTUP = 0;
 constexpr auto MOUSEEVENTF_MOVE = 0;
 #endif
 
-DraggableElement::HackTouchDragThread::HackTouchDragThread(QObject *parent)
+HackTouchDragThread::HackTouchDragThread(QObject *parent)
 	: QThread(parent)
 {
 }
 
-void DraggableElement::HackTouchDragThread::simulateSystemPress()
+void HackTouchDragThread::simulateSystemPress()
 {
 	mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 }
 
-void DraggableElement::HackTouchDragThread::simulateSystemMove()
+void HackTouchDragThread::simulateSystemMove()
 {
 	mouse_event(MOUSEEVENTF_MOVE, -1, -1, 0, 0);
 }
 
-void DraggableElement::HackTouchDragThread::simulateSystemRelease()
+void HackTouchDragThread::simulateSystemRelease()
 {
 	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 }
 
-void DraggableElement::HackTouchDragThread::run()
+void HackTouchDragThread::run()
 {
 	// Simulating press for windows drag manager not to terminate drag as inconsistent
 	// when it would be unfrozen

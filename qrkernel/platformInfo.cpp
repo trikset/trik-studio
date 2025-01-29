@@ -119,13 +119,25 @@ bool PlatformInfo::isX64()
 	return cpuArchitecture().contains("64");
 }
 
-void PlatformInfo::enableHiDPISupport()
+QStringList PlatformInfo::enableHiDPISupport()
 {
-	if (!qEnvironmentVariableIsSet("QT_DEVICE_PIXEL_RATIO")
-			&& !qEnvironmentVariableIsSet("QT_AUTO_SCREEN_SCALE_FACTOR")
-			&& !qEnvironmentVariableIsSet("QT_SCALE_FACTOR")
-			&& !qEnvironmentVariableIsSet("QT_SCREEN_SCALE_FACTORS")) {
-		// Only if there is no attempt to set from the system environment	
-			QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	static const QList<const char*> envVars { "QT_DEVICE_PIXEL_RATIO"
+									   , "QT_AUTO_SCREEN_SCALE_FACTOR"
+									   , "QT_SCALE_FACTOR"
+									   , "QT_SCREEN_SCALE_FACTORS"
+									 };
+	bool anyIsSet = false;
+	QStringList result;
+	for (auto &&e: envVars) {
+		if (qEnvironmentVariableIsSet(e)) {
+			result << QString("Scaling variable %1=%2").arg(e, qEnvironmentVariable(e));
+			anyIsSet = true;
+		}
 	}
+	if (!anyIsSet) {
+		// Only if there is no attempt to set from the system environment
+		QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+		result << "Using Qt::AA_EnableHighDpiScaling";
+	}
+	return result;
 }

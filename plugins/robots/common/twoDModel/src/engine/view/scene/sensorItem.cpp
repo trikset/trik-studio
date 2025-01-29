@@ -20,6 +20,7 @@
 #include <kitBase/robotModel/robotParts/touchSensor.h>
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/lightSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
 
 #include "twoDModel/robotModel/parts/colorSensorFull.h"
 #include "twoDModel/robotModel/parts/colorSensorPassive.h"
@@ -171,6 +172,8 @@ QString SensorItem::name() const
 		return "color_blue";
 	} else if (sensor.isA<robotParts::RangeSensor>()) {
 		return "range";
+	} else if (sensor.isA<robotParts::LidarSensor>()) {
+		return "range";
 	} else if (sensor.isA<robotParts::LightSensor>()
 		|| sensor.isA<robotParts::ColorSensorAmbient>()
 		|| sensor.isA<robotParts::ColorSensorReflected>()) {
@@ -191,7 +194,8 @@ QRectF SensorItem::calculateImageRect() const
 			|| sensor.isA<robotParts::LightSensor>()) {
 		return QRectF(-6, -6, 12, 12);
 	}
-	if (sensor.isA<robotParts::RangeSensor>()) {
+	if (sensor.isA<robotParts::RangeSensor>()
+			|| sensor.isA<robotParts::LidarSensor>()) {
 		return QRectF(-20, -10, 40, 20);
 	} else {
 		Q_ASSERT(!"Unknown sensor type");

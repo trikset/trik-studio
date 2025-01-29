@@ -36,6 +36,7 @@ namespace commands {
 /// Tracks item`s shape (position, size, rotation, etc.), undoes and redoes its changes.
 class ReshapeCommand : public qReal::commands::AbstractCommand, public qReal::commands::TrackingEntity
 {
+	Q_OBJECT
 public:
 	ReshapeCommand(graphicsUtils::AbstractScene &scene, const model::Model &, const QStringList &ids);
 

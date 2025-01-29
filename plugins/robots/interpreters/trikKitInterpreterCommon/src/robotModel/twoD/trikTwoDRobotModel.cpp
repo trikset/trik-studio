@@ -25,6 +25,7 @@
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/touchSensor.h>
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
 
 #include <trikKit/robotModel/parts/trikVideoCamera.h>
 #include <trikKit/robotModel/parts/trikLineSensor.h>
@@ -44,7 +45,7 @@
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDLightSensor.h"
 #include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h"
-
+#include "trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h"
 using namespace trik::robotModel;
 using namespace trik::robotModel::twoD;
 using namespace kitBase::robotModel;
@@ -72,11 +73,17 @@ QPair<qreal, int> TrikTwoDRobotModel::rangeSensorAngleAndDistance
 {
 	return deviceType.isA<robotModel::parts::TrikInfraredSensor>() ? QPair<qreal, int>(5, 80) :
 			deviceType.isA<robotModel::parts::TrikSonarSensor>() ? QPair<qreal, int>(20, 300) :
+			deviceType.isA<robotParts::LidarSensor>() ? QPair<qreal,int>(360, 400) :
 			TwoDRobotModel::rangeSensorAngleAndDistance(deviceType);
 }
 
 robotParts::Device *TrikTwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
+	if (deviceInfo.isA<robotParts::Communicator>()) {
+		return new parts::TwoDNetworkCommunicator(deviceInfo, port, mMailbox);
+	}
+
+
 	if (deviceInfo.isA<robotParts::Display>()) {
 		return new parts::Display(deviceInfo, port, *engine());
 	}
@@ -138,6 +145,13 @@ void TrikTwoDRobotModel::onInterpretationStarted()
 	} else {
 		QLOG_WARN() << "TRIK shell is not configured before intepretation start!";
 	}
+
+	auto * const mailbox = RobotModelUtils::findDevice<parts::TwoDNetworkCommunicator>(*this, "CommunicatorPort");
+	if (mailbox) {
+		mailbox->release();
+	} else {
+		QLOG_WARN() << "TRIK network is not configured before intepretation start!";
+	}
 }
 
 QString TrikTwoDRobotModel::robotImage() const
@@ -177,6 +191,8 @@ QString TrikTwoDRobotModel::sensorImagePath(const DeviceInfo &deviceType) const
 		return ":icons/twoDUsRangeSensor.svg";
 	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
 		return ":icons/twoDVideoModule.svg";
+	} else if (deviceType.isA<robotParts::LidarSensor>()) {
+		return ":icons/twoDIrRangeSensor.svg";
 	}
 
 	return QString();
@@ -200,6 +216,8 @@ QRect TrikTwoDRobotModel::sensorImageRect(const kitBase::robotModel::DeviceInfo 
 		return QRect(-18, -18, 36, 36);
 	} else if (deviceType.isA<robotModel::parts::TrikVideoCamera>()) {
 		return QRect(-9, -9, 18, 18);
+	} else if (deviceType.isA<robotParts::LidarSensor>()) {
+		return QRect(-18, -18, 36, 36);
 	}
 
 	return QRect();
@@ -257,4 +275,9 @@ QHash<QString, int> TrikTwoDRobotModel::buttonCodes() const
 void TrikTwoDRobotModel::setErrorReporter(qReal::ErrorReporterInterface &errorReporter)
 {
 	mErrorReporter = &errorReporter;
+}
+
+void TrikTwoDRobotModel::setMailbox(trikNetwork::MailboxInterface &mailbox)
+{
+	mMailbox = &mailbox;
 }

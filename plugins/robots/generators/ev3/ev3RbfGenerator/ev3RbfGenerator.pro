@@ -20,7 +20,7 @@ include(../../../../../global.pri)
 
 QT += widgets
 
-CONFIG += plugin
+CONFIG += plugin trikqscintilla2
 
 DESTDIR = $$DESTDIR/plugins/tools/kitPlugins/
 
@@ -32,7 +32,7 @@ includes(plugins/robots/generators/ev3/ev3GeneratorBase \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 qrgui-text-editor qrtext \
+links(qrkernel qrutils qrrepo qrgui-text-editor qrtext \
 		robots-generator-base robots-ev3-generator-base robots-ev3-kit robots-kit-base robots-utils)
 
 TRANSLATIONS = $$PWD/../../../../../qrtranslations/ru/plugins/robots/ev3RbfGenerator_ru.ts

@@ -24,6 +24,7 @@ namespace commands {
 /// Adds or removes explosion between specified elements
 class QRGUI_MODELS_EXPORT ExplosionCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// Creates new instance of a command that creates or removes explosions.
 	/// If graphical assist api parameter specified then it is allowed to

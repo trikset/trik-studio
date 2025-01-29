@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Beep' block
 class BeepGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	BeepGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

@@ -23,6 +23,7 @@ namespace commands {
 
 class RemoveWorldItemCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	RemoveWorldItemCommand(model::Model &model, const QString &id);
 

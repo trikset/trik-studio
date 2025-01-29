@@ -21,7 +21,7 @@
 
 class Curve : public Path
 {
-	Q_DISABLE_COPY(Curve)
+	Q_OBJECT
 public:
 	Curve(const QPointF &start, const QPointF &end, const QPointF &c1);
 	void  setCXandCY(qreal x, qreal y);

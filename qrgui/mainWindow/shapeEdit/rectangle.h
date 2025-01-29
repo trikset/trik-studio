@@ -22,7 +22,7 @@
 
 class QRealRectangle : public Item
 {
-	Q_DISABLE_COPY(QRealRectangle)
+	Q_OBJECT
 public:
 	QRealRectangle(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
 	virtual QRectF boundingRect() const;

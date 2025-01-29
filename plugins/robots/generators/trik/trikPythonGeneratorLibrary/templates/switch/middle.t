@@ -1,2 +1,2 @@
-else: if (@@CONDITION@@):
+elif (@@CONDITION@@):
 @@BODY@@

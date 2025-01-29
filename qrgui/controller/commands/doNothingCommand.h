@@ -23,6 +23,7 @@ namespace commands {
 /// having no actions itself
 class QRGUI_CONTROLLER_EXPORT DoNothingCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	DoNothingCommand();
 

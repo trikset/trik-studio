@@ -15,6 +15,7 @@
 	<file>generated/shapes/TrikPlayToneClass.sdf</file>
 	<file>generated/shapes/TrikPlayToneHzClass.sdf</file>
 	<file>generated/shapes/TrikPrintTextClass.sdf</file>
+	<file>generated/shapes/TrikReadLidarClass.sdf</file>
 	<file>generated/shapes/TrikRemoveFileClass.sdf</file>
 	<file>generated/shapes/TrikSadSmileClass.sdf</file>
 	<file>generated/shapes/TrikSayClass.sdf</file>
@@ -49,5 +50,6 @@
 	<file>generated/shapes/TrikWaitGamepadWheelClass.sdf</file>
 	<file>generated/shapes/TrikWaitPadPressClass.sdf</file>
 	<file>generated/shapes/TrikWriteToFileClass.sdf</file>
+	<file>generated/shapes/TrikJoinNetworkClass.sdf</file>
 </qresource>
 </RCC>

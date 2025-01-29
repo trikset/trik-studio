@@ -37,6 +37,8 @@ signals:
 	/// @param reason The reason why the interpretation stopped.
 	void interpretationStopped(qReal::interpretation::StopReason reason);
 
+	void interpretationErrored();
+
 	/// Robot model is changed in settings (or selected in a toolbar).
 	void robotModelChanged(const QString &newModelName);
 

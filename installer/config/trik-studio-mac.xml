@@ -17,9 +17,11 @@
     <StartMenuDir>TRIK Studio</StartMenuDir>
     <MaintenanceToolName>maintenance</MaintenanceToolName>
     <RemoveTargetDir>true</RemoveTargetDir>
-
-    <TargetDir>@HomeDir@/TRIKStudio/</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@/TRIKStudio/</AdminTargetDir>
+    <!--
+        Until (at least) QtIFW 4.1 @ApplicationsDir@ incorrectly returns $HOME/Applications instead of the /Applications
+        as promised in the documentation, so use the raw directory name as a workaround
+    -->
+    <TargetDir>/Applications/TRIKStudio/</TargetDir>
 
     <RunProgram>open</RunProgram>
     <RunProgramArguments>

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'NullifyEncoder' block
 class NullificationEncoderGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	NullificationEncoderGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

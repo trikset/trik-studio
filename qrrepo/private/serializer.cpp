@@ -22,6 +22,7 @@
 #include <qrkernel/platformInfo.h>
 #include <qrkernel/exception/exception.h>
 #include <qrutils/outFile.h>
+#include <qrutils/inFile.h>
 #include <qrutils/xmlUtils.h>
 #include <qrutils/fileSystemUtils.h>
 
@@ -175,16 +176,21 @@ void Serializer::saveMetaInfo(QHash<QString, QVariant> const &metaInfo) const
 	QDomElement root = document.createElement("metaInformation");
 	document.appendChild(root);
 	for (const QString &key : metaInfo.keys()) {
-		QDomElement element = document.createElement("info");
-		element.setAttribute("key", key);
-		element.setAttribute("type", metaInfo[key].typeName());
-		element.setAttribute("value", ValuesSerializer::serializeQVariant(metaInfo[key]));
-		root.appendChild(element);
+		if (mFileNames.contains(key)) {
+			const QString filePath = mWorkingDir + "/" + key + ".xml";
+			OutFile out(filePath);
+			out() << ValuesSerializer::serializeQVariant(metaInfo[key]);
+		} else {
+			QDomElement element = document.createElement("info");
+			element.setAttribute("key", key);
+			element.setAttribute("type", metaInfo[key].typeName());
+			element.setAttribute("value", ValuesSerializer::serializeQVariant(metaInfo[key]));
+			root.appendChild(element);
+		}
 	}
 
-	const QString filePath = mWorkingDir + "/metaInfo.xml";
-	OutFile out(filePath);
-	out() << document.toString(4);
+	OutFile meta(mWorkingDir + "/metaInfo.xml");
+	meta() << document.toString(4);
 }
 
 void Serializer::loadMetaInfo(QHash<QString, QVariant> &metaInfo) const
@@ -203,6 +209,14 @@ void Serializer::loadMetaInfo(QHash<QString, QVariant> &metaInfo) const
 	{
 		metaInfo[child.attribute("key")] = ValuesSerializer::deserializeQVariant(
 				child.attribute("type"), child.attribute("value"));
+	}
+
+	for (const auto & file : mFileNames) {
+		const QString path = mWorkingDir + "/" + file + ".xml";
+		if (!QFile::exists(path)) {
+			continue;
+		}
+		metaInfo[file] = InFile::readAll(path);
 	}
 }
 

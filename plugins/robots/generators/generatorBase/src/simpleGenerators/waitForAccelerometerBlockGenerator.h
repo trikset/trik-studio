@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForAccelerometer' block
 class WaitForAccelerometerBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForAccelerometerBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

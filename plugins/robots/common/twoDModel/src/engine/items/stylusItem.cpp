@@ -31,6 +31,11 @@ StylusItem::StylusItem(qreal x1, qreal y1)
 	mTmpY1 = y1;
 }
 
+StylusItem::~StylusItem()
+{
+	qDeleteAll(mAbstractListLine);
+}
+
 AbstractItem *StylusItem::clone() const
 {
 	const auto cloned = new StylusItem(x1(), y1());
@@ -148,6 +153,7 @@ QDomElement StylusItem::serialize(QDomElement &parent) const
 void StylusItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
+	qDeleteAll(mAbstractListLine);
 	mAbstractListLine.clear();
 	recalculateProperties();
 
