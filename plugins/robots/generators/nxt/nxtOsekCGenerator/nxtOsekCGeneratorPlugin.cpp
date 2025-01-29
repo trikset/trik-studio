@@ -190,7 +190,7 @@ generatorBase::MasterGeneratorBase *NxtOsekCGeneratorPlugin::masterGenerator()
 void NxtOsekCGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)
 {
 	// Static cast is possible and correct, but dynamic will be more flexible.
-	if (auto nxtGenerator = dynamic_cast<NxtOsekCMasterGenerator*>(masterGenerator())) {
+	if (auto nxtGenerator = qobject_cast<NxtOsekCMasterGenerator*>(masterGenerator())) {
 		QScopedPointer<NxtOsekCMasterGenerator> generator(nxtGenerator);
 		generator->initialize();
 		generator->setProjectDir(newFileInfo);
