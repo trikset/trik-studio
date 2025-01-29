@@ -635,9 +635,8 @@
 <context>
     <name>qReal::ui::dirPicker</name>
     <message>
-        <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
         <source>Browse...</source>
-        <translation>Обзор...</translation>
+        <translation type="vanished">Обзор...</translation>
     </message>
 </context>
 <context>

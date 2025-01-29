@@ -24,7 +24,7 @@ class SystemEvents;
 
 namespace text {
 class QScintillaTextEdit;
-class LanguageInfo;
+struct LanguageInfo;
 }
 
 class QRGUI_TEXT_EDITOR_EXPORT TextManagerInterface : public QObject
