@@ -39,9 +39,12 @@ class BallItem;
 class ColorFieldItem;
 class ImageItem;
 class RegionItem;
+class CommentItem;
 }
 
 namespace model {
+
+class RobotModel;
 
 class TWO_D_MODEL_EXPORT WorldModel : public QObject
 {
@@ -58,6 +61,10 @@ public:
 
 	/// Measures the distance between robot and wall
 	Q_INVOKABLE int rangeReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const;
+
+	/// Measures the distance between robot and solid object for each angle in maxAngle and maxDistance scanning region
+	Q_INVOKABLE QVector<int> lidarReading(const QPointF &position, qreal direction
+			, int maxDistance, qreal maxAngle) const;
 
 	/// Returns area which is seen by sonar sensor.
 	QPainterPath rangeSensorScanningRegion(const QPointF &position, qreal direction,
@@ -87,6 +94,9 @@ public:
 	/// Returns a list of image items in the world model.
 	const QMap<QString, QSharedPointer<items::ImageItem>> &imageItems() const;
 
+	/// Returns a set of comments in the world model. Result is mapping of comments ids to comments themselves.
+	const QMap<QString, QSharedPointer<items::CommentItem>> &commentItems() const;
+
 	/// Returns a list of trace items on the floor.
 	const QList<QSharedPointer<QGraphicsPathItem>> &trace() const;
 
@@ -108,6 +118,12 @@ public:
 	/// Removes \a ball from the world model.
 	void removeBall(QSharedPointer<items::BallItem> ball);
 
+	/// Appends \a comment into world model.
+	void addComment(const QSharedPointer<items::CommentItem> &comment);
+
+	/// Removes \a comment from the world model.
+	void removeComment(QSharedPointer<items::CommentItem> comment);
+
 	/// Appends colored item \a colorField into the world model.
 	void addColorField(const QSharedPointer<items::ColorFieldItem> &colorField);
 
@@ -119,6 +135,9 @@ public:
 
 	/// Removes image item from 2D model.
 	void removeImageItem(QSharedPointer<items::ImageItem> imageItem);
+
+	/// Sets using robot model
+	void setRobotModel(RobotModel * robotModel);
 
 	/// Removes all walls, colored items, regions and robot traces from the world model.
 	void clear();
@@ -174,6 +193,9 @@ public:
 	/// Creates stylus colored item described by \a element in the world model.
 	void createStylus(const QDomElement &element);
 
+	/// Creates comment item described by \a element in the world model.
+	void createComment(const QDomElement &element);
+
 	/// Creates image item described by \a element in the world model.
 	QSharedPointer<items::ImageItem> createImageItem(const QDomElement &element, bool background=false);
 
@@ -195,6 +217,9 @@ signals:
 
 	/// Emitted each time when model is appended with some new skittle.
 	void ballAdded(const QSharedPointer<items::BallItem> &item);
+
+	/// Emitted each time when model is appended with some new color field item.
+	void commentAdded(const QSharedPointer<items::CommentItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
 	void colorItemAdded(const QSharedPointer<items::ColorFieldItem> &item);
@@ -236,6 +261,8 @@ private:
 	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
 	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;
 	QMap<QString, QSharedPointer<model::Image>> mImages;
+	QMap<QString, QSharedPointer<items::CommentItem>> mComments;
+	RobotModel * mRobotModel {}; // Doesn't take ownership
 	QMap<QString, int> mOrder;
 	QList<QSharedPointer<QGraphicsPathItem>> mRobotTrace;
 	QRect mBackgroundRect;

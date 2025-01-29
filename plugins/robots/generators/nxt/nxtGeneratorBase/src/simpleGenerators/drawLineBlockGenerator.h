@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'DrawLine' block in NXT kit.
 class DrawLineBlockGenerator : public DrawBlockGenerator
 {
+	Q_OBJECT
 public:
 	DrawLineBlockGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

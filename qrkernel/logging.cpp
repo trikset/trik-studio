@@ -26,6 +26,19 @@ void Logger::addLogTarget(const QString &path, int maxSize, int maxOldLogsCount)
 	QsLogging::Logger::instance().addDestination(std::move(dest));
 }
 
+void Logger::removeDefaultInitialLogTarget()
+{
+	QsLogging::Logger::instance().removeDestination(mDefaultInitialLoggerType);
+}
+
+Logger::Logger()
+{
+	auto dest = QsLogging::DestinationFactory::MakeDebugOutputDestination();
+	mDefaultInitialLoggerType = dest->type();
+	QsLogging::Logger::instance().setLoggingLevel(QsLogging::DebugLevel);
+	QsLogging::Logger::instance().addDestination(std::move(dest));
+}
+
 Logger::~Logger()
 {
 #if defined(Q_OS_WIN)

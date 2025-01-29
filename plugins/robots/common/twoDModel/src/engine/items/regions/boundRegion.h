@@ -22,6 +22,7 @@ namespace items {
 /// Zone in 2D model that is drawn above some other item, maybe with some expanded bounds.
 class BoundRegion : public RegionItem
 {
+	Q_OBJECT
 public:
 	explicit BoundRegion(const QGraphicsObject &boundItem, const QString &boundId, QGraphicsItem *parent = nullptr);
 

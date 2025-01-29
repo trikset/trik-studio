@@ -31,8 +31,10 @@ VisibilityConditionsDialog::VisibilityConditionsDialog(QMap<QString, PropertyInf
 
 	setWidgetValues();
 
-	connect(ui->propertyComboBox, SIGNAL(activated(const QString &)), this, SLOT(changeProperty(const QString &)));
-	connect(ui->buttonBox->button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(okClicked()));
+	connect(ui->propertyComboBox, QOverload<const QString&>::of(&QComboBox::activated)
+			, this, &VisibilityConditionsDialog::changeProperty);
+	auto *btnOk = ui->buttonBox->button(QDialogButtonBox::Ok);
+	connect( btnOk, &QPushButton::clicked, this, &VisibilityConditionsDialog::okClicked);
 }
 
 VisibilityConditionsDialog::~VisibilityConditionsDialog()
@@ -42,9 +44,11 @@ VisibilityConditionsDialog::~VisibilityConditionsDialog()
 
 void VisibilityConditionsDialog::changeProperty(const QString &propertyName)
 {
-	PropertyInfo propertyInfo = mProperties[propertyName];
-	ui->valueWidget->setPropertyInfo(propertyInfo);
-	changeOperators(propertyInfo.type);
+	auto i = mProperties.find(propertyName);
+	if (i != mProperties.end()) {
+		ui->valueWidget->setPropertyInfo(*i);
+		changeOperators(i->type);
+	}
 }
 
 void VisibilityConditionsDialog::changeOperators(Type type)
@@ -64,7 +68,7 @@ void VisibilityConditionsDialog::changeOperators(Type type)
 
 void VisibilityConditionsDialog::okClicked()
 {
-	for (auto item : mItems) {
+	for (auto &&item : mItems) {
 		item->setVisibilityCondition(ui->propertyComboBox->currentText()
 				, ui->operatorComboBox->currentText(), ui->valueWidget->value());
 	}
@@ -85,14 +89,10 @@ void VisibilityConditionsDialog::setWidgetValues()
 bool VisibilityConditionsDialog::areValuesEqual() const
 {
 	Item::VisibilityCondition value = mItems.first()->visibilityCondition();
-	for (auto item : mItems) {
+	for (auto &&item : mItems) {
 		if (item->visibilityCondition() != value) {
 			return false;
 		}
 	}
 	return true;
 }
-
-VisibilityConditionsDialog::PropertyInfo::PropertyInfo(VisibilityConditionsDialog::Type t, const QStringList &v)
-		: type(t), values(v)
-{}

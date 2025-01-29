@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForSonar' block
 class WaitForSonarBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForSonarBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

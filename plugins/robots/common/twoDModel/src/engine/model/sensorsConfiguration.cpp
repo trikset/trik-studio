@@ -18,6 +18,7 @@
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/sensorsConfiguration.h"
+#include "kitBase/robotModel/robotParts/lidarSensor.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
@@ -26,6 +27,10 @@ SensorsConfiguration::SensorsConfiguration(const QString &robotModelName, const 
 	: mRobotSize(robotSize)
 	, mRobotId(robotModelName)
 {
+}
+
+void SensorsConfiguration::clear() {
+	clearConfiguration(Reason::loading);
 }
 
 void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
@@ -42,17 +47,19 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 		return;
 	}
 
-	emit deviceAdded(port, reason == Reason::loading);
-
 	// If there was no sensor before then placing it right in front of the robot;
 	// else putting it instead of old one.
-	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(), 0) : mSensorsInfo[port];
+	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(device), 0) : mSensorsInfo[port];
+
+	emit deviceAdded(port, reason == Reason::loading);
 }
 
-QPointF SensorsConfiguration::defaultPosition() const
+QPointF SensorsConfiguration::defaultPosition(const DeviceInfo &device) const
 {
 	/// @todo: Move it somewhere?
-	return QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
+	return  !device.simulated() || device.isA<kitBase::robotModel::robotParts::LidarSensor>()
+			? QPointF(mRobotSize.width() / 2, mRobotSize.height() / 2)
+			: QPointF(mRobotSize.width() * 3 / 2, mRobotSize.height() / 2);
 }
 
 QPointF SensorsConfiguration::position(const PortInfo &port) const
@@ -121,7 +128,7 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 
 		const PortInfo port = PortInfo::fromString(sensorNode.attribute("port"));
 
-		const DeviceInfo type = DeviceInfo::fromString(sensorNode.attribute("type"));
+		const DeviceInfo &type = DeviceInfo::fromString(sensorNode.attribute("type"));
 
 		const QString positionStr = sensorNode.attribute("position", "0:0");
 		const QStringList splittedStr = positionStr.split(":");

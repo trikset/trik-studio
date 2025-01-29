@@ -41,6 +41,9 @@ signals:
 	/// Emitted when user clicked restore robot position button.
 	void restoreRobotPositionClicked();
 
+	/// Emitted when user clicked set robot position here button.
+	void setRobotPositionClicked();
+
 private:
 	bool suits(QGraphicsItem *item) override;
 	bool attachTo(QGraphicsItem *item) override;
@@ -51,10 +54,12 @@ private:
 	QWidget *initReturnButton();
 	QAbstractButton *initButton(const QString &icon, const QString &toolTip);
 	QWidget *initSpinBox();
+	QWidget *initSetStartButton();
 
 	QAbstractButton *mFollowButton {};  // Takes ownership
 	QAbstractButton *mReturnButton {};  // Takes ownership
 	QSpinBox *mSpinBox {};  // Takes ownership
+	QAbstractButton *mSetStartButton {};  // Takes ownership
 	RobotItem *mCurrentItem {};  // Does not take ownership
 };
 

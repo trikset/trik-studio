@@ -43,6 +43,9 @@ signals:
 	/// Emitted when program is finished or stopped by user.
 	void stopped(qReal::interpretation::StopReason reason);
 
+	/// Emitted when program is finished or stopped by user.
+	void errored();
+
 	/// @todo: temporary hack while js interpreter is separated from regular interpreter logic
 	void stopAllInterpretation(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop);
 

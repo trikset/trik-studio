@@ -44,12 +44,11 @@ public:
 	QPainterPath shape() const override;
 	QRectF rect() const override;
 
-private:
+protected:
 	/// Returns scanning region of a sensor as painter path, in relative to sensor coordinates.
-	QPainterPath scanningRegion() const;
-
+	virtual QPainterPath scanningRegion() const;
+	virtual void customizePainter(QPainter *painter) const;
 	const model::WorldModel &mWorldModel;
-	const QImage mIcon;
 	qreal mAngle;
 	int mRange;
 };

@@ -1207,6 +1207,28 @@
 					</generalizations>
 				</logic>
 			</node>
+			<node displayedName="Read Lidar To Variable" name="TrikReadLidar" description="Assigns a value from lidar to a given variable.">
+				<graphics>
+					<picture sizex="50" sizey="50">
+						<image y1="0" name="images/readLidarBlock.png" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+						<label x="33" y="60" textBinded="variable" background="white" prefix="Variable:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+					<properties>
+						<property displayedName="Variable" type="string" name="variable">
+							<default>x</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
 			<node displayedName="Send message" name="TrikSendMessage" description="Sends message to another robot.">
 				<graphics>
 					<picture sizex="50" sizey="50">
@@ -1250,6 +1272,35 @@
 					<container/>
 					<generalizations>
 						<parent parentName="AbstractNode"/>
+					</generalizations>
+				</logic>
+			</node>
+			<node displayedName="Join Network" name="TrikJoinNetwork" description="Sets the hull number and connects with a peer by a (host)name or an IP-address. Target IP-port can be changed too if required.">
+			        <graphics>
+				        <picture sizex="50" sizey="50">
+					        <image y1="0" name="images/joinNetwork.svg" x1="0" y2="50" x2="50"/>
+					</picture>
+					<labels>
+					        <label x="45" y="60" textBinded="Address" hard="false" prefix="Address:"/>
+						<label x="45" y="90" textBinded="HullNumber" hard="false" prefix="Hull number:"/>
+					</labels>
+					<nonResizeable/>
+				</graphics>
+				<logic>
+				        <properties>
+					        <property displayedName="Address" type="string" name="Address">
+						        <default>192.168.77.1</default>
+						</property>
+						<property displayedName="Port" type="int" name="IPPort">
+						        <default>8889</default>
+						</property>
+						<property displayedName="Hull Number" type="int" name="HullNumber">
+						        <default>1</default>
+						</property>
+					</properties>
+					<container/>
+					<generalizations>
+					        <parent parentName="AbstractNode"/>
 					</generalizations>
 				</logic>
 			</node>
@@ -1372,6 +1423,8 @@
 				<element name="TrikWriteToFile"/>
 				<element name="TrikRemoveFile"/>
 				<element name="TrikCalibrateGyroscope"/>
+				<element name="TrikReadLidar"/>
+				<element name="TrikJoinNetwork"/>
 			</group>
 			<group name="Wait">
 				<element name="TrikWaitForGyroscope" />

@@ -32,7 +32,7 @@ void WaitForSensorBlock::run()
 {
 	const QString port = this->port();
 
-	mPort = std::move(RobotModelUtils::findPort(mRobotModel, port, input));
+	mPort = RobotModelUtils::findPort(mRobotModel, port, input);
 	auto const sensor = RobotModelUtils::findDevice<robotParts::AbstractSensor>(mRobotModel, mPort);
 	if (sensor) {
 		mConnections << connect(sensor, &robotParts::AbstractSensor::newData

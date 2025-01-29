@@ -15,19 +15,7 @@
 !isEmpty(_PRO_FILE_):!isEmpty(CONFIG):isEmpty(GLOBAL_PRI_INCLUDED){
 #GLOBAL_PRI_INCLUDED = $$PWD
 
-win32 {
-	PLATFORM = windows
-}
-
-unix:!macx {
-	PLATFORM = linux
-}
-
-macx {
-	PLATFORM = mac
-}
-
-CONFIG *= qt
+CONFIG *= qt thread exceptions
 
 !win32:CONFIG *= use_gold_linker
 #CONFIG *= fat-lto
@@ -43,16 +31,9 @@ CONFIG = $$unique(CONFIG)
 macx:QT_CONFIG -= no-pkg-config
 QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -Og
 
-CONFIG(debug) {
-	CONFIGURATION = debug
-	CONFIGURATION_SUFFIX =
-	unix {
+unix:debug {
 		QMAKE_CXXFLAGS += -coverage
 		QMAKE_LFLAGS += -coverage
-	}
-} else {
-	CONFIGURATION = release
-	CONFIGURATION_SUFFIX =
 }
 
 !gcc4:!gcc5:!clang:!win32:gcc:*-g++*:system($$QMAKE_CXX --version | grep -qEe '"\\<5\\.[0-9]+\\."' ){ CONFIG += gcc5 }
@@ -63,7 +44,7 @@ GLOBAL_OUTPWD = $$absolute_path($$OUT_PWD)
 
 
 isEmpty(GLOBAL_DESTDIR) {
-	GLOBAL_DESTDIR = $$GLOBAL_OUTPWD/bin/$$CONFIGURATION
+	GLOBAL_DESTDIR = $$GLOBAL_OUTPWD/bin
 }
 
 isEmpty(DESTDIR) {
@@ -81,7 +62,7 @@ isEmpty(TARGET) {
 }
 
 equals(TEMPLATE, app) {
-        VERSION = $${PROJECT_GIT_VERSION_MAJOR}$${PROJECT_GIT_VERSION_MINOR}.$${PROJECT_GIT_VERSION_PATCH}.$${PROJECT_GIT_VERSION_BUILD}
+	VERSION = $${PROJECT_GIT_VERSION_MAJOR}$${PROJECT_GIT_VERSION_MINOR}.$${PROJECT_GIT_VERSION_PATCH}.$${PROJECT_GIT_VERSION_BUILD}
 	!no_rpath {
 		#reset default rpath before setting new one
 		#but this clears path to Qt libraries
@@ -109,7 +90,6 @@ use_gold_linker:!clang: QMAKE_LFLAGS += -Wl,--disable-new-dtags
 macx:QMAKE_TARGET_BUNDLE_PREFIX = com.cybertech
 
 macx-clang {
-        QMAKE_MACOSX_DEPLOYMENT_TARGET=10.12
 	QMAKE_LFLAGS_SONAME = -Wl,-install_name,@rpath/
 }
 
@@ -124,6 +104,8 @@ equals(TEMPLATE, lib) {
 	}
 }
 
+win32: QMAKE_LFLAGS *= -Wl,--dynamicbase,--high-entropy-va,--nxcompat
+
 !nosanitizers:!clang:gcc:*-g++*:gcc4{
 	warning("Disabled sanitizers, failed to detect compiler version or too old compiler: $$QMAKE_CXX")
 	CONFIG += nosanitizers
@@ -133,7 +115,7 @@ equals(TEMPLATE, lib) {
 	CONFIG += sanitizer
 }
 
-unix:!nosanitizers {
+!nosanitizers {
 
 	# seems like we want USan always, but are afraid of ....
 	!CONFIG(sanitize_address):!CONFIG(sanitize_thread):!CONFIG(sanitize_memory):!CONFIG(sanitize_kernel_address) {
@@ -143,49 +125,50 @@ unix:!nosanitizers {
 
 
 	#LSan can be used without performance degrade even in release build
-	#But at the moment we can not, because of Qt  problems
-        !macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_memory):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
+	#But at the moment we can not, because of Qt and MinGW problems
+        !win32:!macx-clang:CONFIG(debug):!CONFIG(sanitize_address):!CONFIG(sanitize_memory):!CONFIG(sanitize_thread) { CONFIG += sanitize_leak }
 
 	sanitize_leak {
-		QMAKE_CFLAGS += -fsanitize=leak
-		QMAKE_CXXFLAGS += -fsanitize=leak
-		QMAKE_LFLAGS += -fsanitize=leak
+		QMAKE_CFLAGS *= -fsanitize=leak
+		QMAKE_CXXFLAGS *= -fsanitize=leak
+		QMAKE_LFLAGS *= -fsanitize=leak
 	}
 
-	sanitize_undefined:macx-clang {
-		# sometimes runtime is missing in clang. this hack allows to avoid runtime dependency.
-		#QMAKE_SANITIZE_UNDEFINED_CFLAGS += -fsanitize-trap=undefined
-		#QMAKE_SANITIZE_UNDEFINED_CXXFLAGS += -fsanitize-trap=undefined
-		#QMAKE_SANITIZE_UNDEFINED_LFLAGS += -fsanitize-trap=undefined
+        sanitize_undefined {
+	        #TRIK_SANITIZE_UNDEFINED_FLAGS += \
+                #-fsanitize=undefined,float-divide-by-zero,unsigned-integer-overflow,implicit-conversion,local-bounds
+
+		# This hack allows to avoid runtime dependency.
+	        win32:isEmpty(TRIK_SANITIZE_UNDEFINED_FLAGS):TRIK_SANITIZE_UNDEFINED_FLAGS = -fsanitize-undefined-trap-on-error
+                
+                QMAKE_SANITIZE_UNDEFINED_CFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
+		QMAKE_SANITIZE_UNDEFINED_CXXFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
+		QMAKE_SANITIZE_UNDEFINED_LFLAGS *= $$TRIK_SANITIZE_UNDEFINED_FLAGS
 	}
 
-        sanitize_memory {
-                QMAKE_CFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
-                QMAKE_CXXFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
+	sanitize_memory {
+		QMAKE_CFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
+		QMAKE_CXXFLAGS *= -fsanitize-memory-use-after-dtor -fsanitize-memory-track-origins
 
+	}
+
+        unix {
+                QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
+                QMAKE_CXXFLAGS_RELEASE += -fsanitize-recover=all
+
+                QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
+                QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
+
+                QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover=all
+                QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover=all
         }
-
-
-        QMAKE_CFLAGS_RELEASE += -fsanitize-recover=all
-        QMAKE_CXXFLAGS_RELEASE += -fsanitize-recover=all
-
-        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
-        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += -fno-sanitize-recover=all
-
-        QMAKE_CFLAGS_DEBUG  += -fno-sanitize-recover=all
-        QMAKE_CXXFLAGS_DEBUG += -fno-sanitize-recover=all
 }
-
-OBJECTS_DIR = .build/$$CONFIGURATION/obj
-MOC_DIR = .build/$$CONFIGURATION/moc
-RCC_DIR = .build/$$CONFIGURATION/rcc
-UI_DIR = .build/$$CONFIGURATION/ui
 
 !noPch:CONFIG *= precompile_header
 
 precompile_header:isEmpty(PRECOMPILED_HEADER):PRECOMPILED_HEADER = $$PWD/pch.h
 precompile_header:!isEmpty(PRECOMPILED_HEADER) {
-	QMAKE_CXXFLAGS += -include $$PRECOMPILED_HEADER -fpch-preprocess
+	QMAKE_CXXFLAGS *= -include $$PRECOMPILED_HEADER -fpch-preprocess
 }
 
 !warn_off:QMAKE_CXXFLAGS *= -Wno-error=invalid-pch
@@ -206,13 +189,13 @@ DEFINES *= QT_FORCE_ASSERTS
 
 DEFINES *= QT_NO_ACCESSIBILITY
 
-!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra #-Werror -Wno-error=reorder
+!warn_off:QMAKE_CXXFLAGS += -pedantic-errors -Wextra
 
 !clang: QMAKE_CXXFLAGS += -ansi
 
 !warn_off:QMAKE_CXXFLAGS +=-Werror=pedantic -Werror=delete-incomplete
 
-gcc:versionAtLeast(QT_VERSION, 5.15.0):QMAKE_CXXFLAGS *= -Wno-error=deprecated-declarations
+gcc:versionAtLeast(QT_VERSION, 5.15.0):QMAKE_CXXFLAGS *= -Wno-deprecated-declarations
 
 clang {
 	#treat git submodules as system path
@@ -281,12 +264,7 @@ defineTest(copyToDestdir) {
 			FILE = $$FILE/*
 		}
 
-		DDIR = $$quote($$system_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
-		FILE = $$quote($$system_path($$FILE))
-
-		mkpath($$DDIR)
-
-		win32 {
+		win32:if(!isEmpty(NOW)|isEmpty(QMAKE_SH)) {
 			# probably, xcopy needs /s and /e for directories
 			COPY_DIR = "cmd.exe /C xcopy /y /i /s /e "
 			!silent: COPY_DIR += /f
@@ -295,11 +273,16 @@ defineTest(copyToDestdir) {
 			!silent: COPY_DIR += -v
 		}
 
-		COPY_COMMAND = $$COPY_DIR $$FILE $$DDIR
-		isEmpty(NOW) {
-			QMAKE_POST_LINK += $$COPY_COMMAND $$escape_expand(\\n\\t)
+		!isEmpty(NOW):if(!build_pass|isEmpty(BUILDS)) {
+		    DDIR = $$quote($$system_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
+		    FILE = $$quote($$system_path($$FILE))
+		    mkpath($$DDIR)
+		    system($$COPY_DIR $$FILE $$DDIR)
 		} else {
-			system($$COPY_COMMAND)
+		    DDIR = $$quote($$shell_path($$DESTDIR/$$3$$DESTDIR_SUFFIX))
+		    FILE = $$quote($$shell_path($$FILE))
+		    QMAKE_POST_LINK += $(MKDIR) $$DDIR $$escape_expand(\\n\\t)
+		    QMAKE_POST_LINK += $$COPY_DIR $$FILE $$DDIR $$escape_expand(\\n\\t)
 		}
 	}
 
@@ -345,7 +328,7 @@ defineTest(enableFlagIfCan) {
 }
 
 defineReplace(fullSystemPath) {
-        return($$system_path($$clean_path($$absolute_path($$1))))
+	return($$system_path($$clean_path($$absolute_path($$1))))
 }
 
 CONFIG(noPch) {

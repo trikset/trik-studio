@@ -15,6 +15,8 @@
 #pragma once
 
 #include <QtCore/QScopedPointer>
+#include <QProcess>
+#include <QComboBox>
 
 #include <generatorBase/robotsGeneratorPluginBase.h>
 
@@ -54,6 +56,8 @@ public:
 
 	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
 
+	QList<QWidget *>listOfQuickPreferencesFor(const kitBase::robotModel::RobotModelInterface &model) override;
+
 	int priority() const override;
 
 	QString kitId() const override;
@@ -76,6 +80,9 @@ private slots:
 	/// Uploads current program to a quadcopter.
 	void uploadProgram();
 
+	/// Displays errors and output
+	void uploadFinished();
+
 private:
 	generatorBase::MasterGeneratorBase *masterGenerator() override;
 
@@ -89,6 +96,11 @@ private:
 
 	/// Set "enabled" state of "upload" and "run" actions to a given value.
 	void setActionsEnabled(bool isEnabled);
+
+	void connectSelector(QComboBox * selector, QString settings);
+	QWidget *ipSelector();
+	QWidget *portSelector();
+	QWidget *modeSelector();
 
 	/// Action that launches code generator.
 	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
@@ -110,12 +122,11 @@ private:
 	/// an ownership, so it is needed to avoid memleak). Need to use smart pointers instead of this.
 	bool mOwnsAdditionalPreferences = true;
 
-	/// Communicator object that communicates with robot using "controller" stand-alone program or direct HTTP queries.
-	QScopedPointer<CommunicationManager> mCommunicationManager;
-
 	/// Metamodel object with visual language infomation.
 	/// Does not have ownership.
 	const qReal::EditorManagerInterface *mMetamodel {};
+
+	QProcess mUploader;
 };
 
 }

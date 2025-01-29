@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'goto' construction
 class GotoSimpleGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	GotoSimpleGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

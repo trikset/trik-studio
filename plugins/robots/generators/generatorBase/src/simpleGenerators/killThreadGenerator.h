@@ -22,6 +22,7 @@ namespace simple {
 /// Generates code that stops a particular thread.
 class KillThreadGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	KillThreadGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

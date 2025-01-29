@@ -48,7 +48,7 @@ BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphica
 	, mState(idle)
 	, mRobotModelManager(robotModelManager)
 	, mBlocksTable(new details::BlocksTable(blocksFactoryManager, robotModelManager))
-	, mAutoconfigurer(mGraphicalModelApi, *mBlocksTable, *mInterpretersInterface.errorReporter())
+	, mAutoconfigurer(mGraphicalModelApi, mLogicalModelApi, *mBlocksTable, *mInterpretersInterface.errorReporter())
 	, mLanguageToolbox(languageToolbox)
 {
 	// Other components may want to subscribe to allDevicesConfigured() signal because
@@ -88,11 +88,13 @@ void BlockInterpreter::interpret()
 	mInterpretersInterface.errorReporter()->clear();
 
 	if (mRobotModelManager.model().connectionState() != RobotModelInterface::connectedState) {
+		emit errored();
 		mInterpretersInterface.errorReporter()->addInformation(tr("No connection to robot"));
 		return;
 	}
 
 	if (mState != idle) {
+		emit errored();
 		mInterpretersInterface.errorReporter()->addInformation(tr("Interpreter is already running"));
 		return;
 	}
@@ -102,6 +104,7 @@ void BlockInterpreter::interpret()
 	mState = waitingForDevicesConfiguredToLaunch;
 
 	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()), mRobotModelManager.model().robotId())) {
+		emit errored();
 		mState = idle;
 		return;
 	}

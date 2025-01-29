@@ -19,6 +19,7 @@
 #include "qrgui/brandManager/brandManagerDeclSpec.h"
 #include "qrgui/brandManager/fonts.h"
 #include "qrgui/brandManager/styles.h"
+#include <QtCore/QScopedPointer>
 
 namespace qReal {
 
@@ -50,11 +51,10 @@ public:
 
 private:
 	BrandManager();
-	~BrandManager();
 
 	const Customizer *mCustomizer {};  // Doesn`t take ownership
-	const Fonts *mFonts;  // Takes ownership
-	const Styles *mStyles;  // Takes ownership
+	QScopedPointer<Fonts> mFonts;
+	QScopedPointer<Styles> mStyles;
 };
 
 }

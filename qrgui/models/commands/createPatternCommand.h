@@ -25,6 +25,7 @@ namespace commands {
 /// @see qReal::EditorManagerInteface::pattern().
 class QRGUI_MODELS_EXPORT CreatePatternCommand : public CreateElementsCommand
 {
+	Q_OBJECT
 public:
 	CreatePatternCommand(const models::Models &models, const ElementInfo &pattern);
 

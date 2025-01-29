@@ -50,6 +50,7 @@ class TWO_D_MODEL_EXPORT RobotModel : public QObject
 	Q_PROPERTY(qreal rotation READ rotation WRITE setRotation)
 	Q_PROPERTY(qreal x READ x)
 	Q_PROPERTY(qreal y READ y)
+	Q_PROPERTY(bool isRiding READ isRiding)
 
 public:
 	enum ATime {
@@ -80,8 +81,9 @@ public:
 	~RobotModel();
 
 	void reinit();
-
 	void clear();
+	void returnToStartMarker();
+
 	void stopRobot();
 	void playSound(int timeInMs);
 
@@ -113,8 +115,12 @@ public:
 	/// Returns false if robot item is dragged by user at the moment.
 	bool onTheGround() const;
 
-	QDomElement serialize(QDomElement &parent) const;
+	bool isRiding() const;
+
+	void serialize(QDomElement &parent) const;
+	void serializeWorldModel(QDomElement &parent) const;
 	void deserialize(const QDomElement &robotElement);
+	void deserializeWorldModel(const QDomElement &world);
 
 	void onRobotLiftedFromGround();
 	void onRobotReturnedOnGround();
@@ -122,6 +128,8 @@ public:
 	void setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
 
 	QRectF sensorRect(const kitBase::robotModel::PortInfo &port, const QPointF sensorPos) const;
+	QPainterPath sensorBoundingPath(const kitBase::robotModel::PortInfo &port) const;
+	QTransform robotsTransform() const;
 
 	/// Returns the color of the trace that robot should draw. Transparent color may also be returned
 	/// (then it is highly recommended not to draw trace at all in preformance thoughts).
@@ -153,7 +161,7 @@ public:
 	Q_INVOKABLE QVector<int> gyroscopeCalibrate();
 
 	/// Returns a bounding path of robot and its sensors in scene coordinates.
-	QPainterPath robotBoundingPath() const;
+	QPainterPath robotBoundingPath(const bool withSensors = true) const;
 
 	/// Sets a physical engine. Robot recalculates its position using this engine.
 	void setPhysicalEngine(physics::PhysicsEngineBase &engine);

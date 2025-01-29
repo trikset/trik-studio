@@ -13,6 +13,11 @@
 # limitations under the License.
 
 QT += widgets network script xml multimedia
+CONFIG += trikqscintilla2
+
+trik_nopython {
+    DEFINES += TRIK_NOPYTHON
+}
 
 includes( \
 		plugins/robots/common/kitBase \
@@ -27,15 +32,12 @@ includes( \
 		plugins/robots/thirdparty/trikRuntime/trikRuntime/trikScriptRunner \
 		)
 
-links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface qscintilla2 \
-                robots-utils robots-kit-base robots-2d-model robots-trik-kit \
-                trikControl trikNetwork trikScriptRunner trikKernel qrgui-text-editor \
+links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
+		robots-utils robots-kit-base robots-2d-model robots-trik-kit \
+		trikControl trikNetwork trikScriptRunner trikKernel qrgui-text-editor \
 		)
 
 copyToDestdir(./icons/trik-robot.svg, now, images/)
-#LIBS += -L$$GLOBAL_PWD/plugins/robots/thirdparty/trikRuntime/trikRuntime/bin/x86-$$CONFIGURATION
-# it's here because it looks like it can't be placed in a subdirs project (where is nothing to link)
-#copyToDestdir($$GLOBAL_PWD/plugins/robots/thirdparty/trikRuntime/trikRuntime/bin/x86-$$CONFIGURATION/*)
 
 HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/declSpec.h \
@@ -71,6 +73,7 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDObjectSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDColorSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDShell.h \
+	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDNetworkCommunicator.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/parts/twoDGyroscopeSensor.h \
 	$$PWD/include/trikKitInterpreterCommon/robotModel/twoD/trikTwoDRobotModel.h \
 	$$PWD/include/trikKitInterpreterCommon/trikAdditionalPreferences.h \
@@ -89,6 +92,7 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikaccelerometeradapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikGyroscopeAdapter.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikProxyMarker.h \
+	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triklidaremu.h \
 	$$PWD/include/trikKitInterpreterCommon/trikTextualInterpreter.h \
 	$$PWD/include/trikKitInterpreterCommon/twoDExecutionControl.h \
 
@@ -125,6 +129,7 @@ SOURCES += \
 	$$PWD/src/robotModel/twoD/parts/twoDColorSensor.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDLed.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDShell.cpp \
+	$$PWD/src/robotModel/twoD/parts/twoDNetworkCommunicator.cpp \
 	$$PWD/src/robotModel/twoD/parts/twoDGyroscopeSensor.cpp \
 	$$PWD/src/robotModel/twoD/trikTwoDRobotModel.cpp \
 	$$PWD/src/trikAdditionalPreferences.cpp \
@@ -142,6 +147,7 @@ SOURCES += \
 	$$PWD/src/trikEmulation/trikaccelerometeradapter.cpp \
 	$$PWD/src/trikEmulation/trikGyroscopeAdapter.cpp \
 	$$PWD/src/trikEmulation/trikProxyMarker.cpp \
+	$$PWD/src/trikEmulation/triklidaremu.cpp \
 	$$PWD/src/trikTextualInterpreter.cpp \
 	$$PWD/src/twoDExecutionControl.cpp \
 

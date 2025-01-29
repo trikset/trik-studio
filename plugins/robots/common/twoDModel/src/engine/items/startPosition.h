@@ -21,6 +21,7 @@ namespace items {
 
 class StartPosition : public graphicsUtils::RotateItem
 {
+	Q_OBJECT
 public:
 	explicit StartPosition(const QSizeF &robotSize, QGraphicsItem *parent = nullptr);
 

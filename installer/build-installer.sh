@@ -14,7 +14,16 @@ $GNU_SED_COMMAND --version | grep -q GNU || GNU_SED_COMMAND="gsed"
 
 #[ -z "${PRODUCT_DISPLAYED_NAME+x}" ] && echo -e "\x1b[93;41mUse corresponding helper script, do not run this one directly\x1b[0m" && exit 3
 
-export QT_DIR=$(realpath $(cygpath -u "$1")/../)
+export QT_DIR=$(realpath $(cygpath -u "$1"))
+
+case $(uname -s) in
+ Linux|Darwin) qt_query_key=QT_INSTALL_LIBS ;;
+ *) qt_query_key=QT_INSTALL_BINS ;;
+esac
+export QT_LIB=$(cygpath -u $("$QT_DIR"/qmake -query "$qt_query_key"))
+
+export QT_PLUGINS=$(cygpath -u $("$QT_DIR"/qmake -query QT_INSTALL_PLUGINS))
+export QT_TRANSLATIONS=$(cygpath -u $("$QT_DIR"/qmake -query QT_INSTALL_TRANSLATIONS))
 export QTIFW_DIR=$(realpath $(cygpath -u "$2"))
 export PRODUCT="$3"
 export OS="$OSTYPE"
@@ -23,7 +32,7 @@ BUILD_DIR=$(dirname $(cygpath -u "$0"))
 [ -z "${4+x}" ] || BUILD_DIR="$4"
 BUILD_DIR=$(realpath $(cygpath -u "$BUILD_DIR"))
 
-[ -z $BUILD_DIR ] && exit 1 ||  { [ -d "$BUILD_DIR/bin/release" ] && export BIN_DIR="$BUILD_DIR/bin/release" ; } || { [ -d "$BUILD_DIR/bin/debug" ] && export BIN_DIR="$BUILD_DIR/bin/debug" ; }
+[ -z $BUILD_DIR ] && exit 1 || [ -d "$BUILD_DIR/bin" ] && export BIN_DIR="$BUILD_DIR/bin"
 echo "$BIN_DIR"
 if [ -x $BIN_DIR/trik-studio ] ; then
     binary_path=$BIN_DIR/trik-studio
@@ -35,9 +44,9 @@ fi
 [ -e $(basename $(cygpath -u "$0")) ] || cd $(dirname $(realpath $(cygpath -u "$0")))
 export INSTALLER_ROOT=$PWD/
 
-PATH=$QT_DIR/bin:$PATH
+#PATH=$QT_DIR:$PATH
 # FULL_VERSION is like v3.3.0[-rc9][-20-abc123][-dirty]
-FULL_VERSION=$(env ASAN_OPTIONS=detect_leaks=0 "$binary_path" -platform minimal --version | grep -Eo '[^ ]+$')
+FULL_VERSION=$(env LSAN_OPTIONS=detect_leaks=0 ASAN_OPTIONS=detect_leaks=0 "$binary_path" -platform minimal --version | grep -Eo '[^ ]+$')
 #QT IFW want version like [0-9]+((.|-)[0-9]+)*
 VERSION=$(echo $FULL_VERSION | sed -e 's/[^0-9.-]//g' -e 's/[.-]*$//g' -e 's/^[.-]*//g')
 grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/"
@@ -72,7 +81,7 @@ find $PWD/packages/$PRODUCT -name prebuild-$OS.sh | bash -xe
 find . -type d -empty -delete
 
 #echo "Building online installer..."
-#$QTIFW_DIR/binarycreator --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
+#$QTIFW_DIR/binarycreator --verbose --online-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT ${*:4} $PRODUCT-online-$OS_EXT-installer
 
 echo "Building offline installer..."
 case $(uname -s || echo None) in
@@ -80,11 +89,11 @@ case $(uname -s || echo None) in
   Darwin) INSTALLER_EXT=.dmg;;
   *) INSTALLER_EXT=.exe;;
 esac
-$QTIFW_DIR/binarycreator --offline-only -c config/$PRODUCT-$OS_EXT.xml -p packages/qreal-base -p packages/$PRODUCT $PRODUCT-offline-$OS_EXT-installer$ADD_BIT-${FULL_VERSION}${INSTALLER_EXT}
+"$QTIFW_DIR"/binarycreator --verbose --offline-only -c "config/$PRODUCT-$OS_EXT.xml" -p packages/qreal-base -p "packages/$PRODUCT" "$PRODUCT-offline-$OS_EXT-installer$ADD_BIT-${FULL_VERSION}${INSTALLER_EXT}"
 
 grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i -e "s/<Version>.*<\/Version>/<Version><\/Version>/"
 
-[ -f $SSH_DIR/id_rsa ] && : || { echo "Done"; exit 0; }
+[ -f "$SSH_DIR/id_rsa" ] && : || { echo "Done"; exit 0; }
 
 #echo "Building updates repository... This step can be safely skipped, the offline installer is already ready, press Ctrl+C if you are not sure what to do next."
 #rm -rf $PRODUCT-repository
@@ -94,6 +103,6 @@ grep -r -l --include=*.xml '<Version>.*</Version>' . | xargs $GNU_SED_COMMAND -i
 #scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -r $PRODUCT-repository/* qrealproject@195.19.241.150:/home/qrealproject/public/packages/$PRODUCT-repo-$OS_EXT
 
 echo "Removing temporary files..."
-rm -rf $PRODUCT-repository
+rm -rf "$PRODUCT-repository"
 
 echo "Done"

@@ -43,6 +43,8 @@ signals:
 private:
 	Ui::TrikAdditionalPreferences *mUi;
 	const QStringList mRealRobotNames;
+
+	bool mailboxSavedState = false;
 };
 
 }

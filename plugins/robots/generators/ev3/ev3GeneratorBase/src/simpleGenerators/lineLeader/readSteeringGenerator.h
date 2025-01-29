@@ -24,6 +24,7 @@ namespace lineLeader {
 /// Generator for 'Read Steering to Variable' block
 class ReadSteeringGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReadSteeringGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

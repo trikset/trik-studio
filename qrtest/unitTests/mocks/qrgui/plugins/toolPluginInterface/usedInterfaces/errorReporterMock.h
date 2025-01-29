@@ -29,6 +29,7 @@ class ErrorReporterMock : public QObject, public qReal::ErrorReporterInterface
 	Q_OBJECT
 
 public:
+	explicit ErrorReporterMock(QObject *parent = nullptr): QObject(parent) {}
 	MOCK_METHOD2(addInformation, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addWarning, void(const QString &message, const qReal::Id &position));
 	MOCK_METHOD2(addError, void(const QString &message, const qReal::Id &position));

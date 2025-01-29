@@ -22,6 +22,7 @@ namespace lua {
 /// Generates magnet on/off state
 class PioneerMagnetGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerMagnetGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

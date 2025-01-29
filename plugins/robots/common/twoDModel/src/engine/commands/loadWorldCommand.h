@@ -24,6 +24,7 @@ namespace commands {
 /// Load 2D model world.
 class LoadWorldCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// Creates instance of command using XML \a data.
 	LoadWorldCommand(view::TwoDModelWidget &twoDwidget, const QDomDocument &data);

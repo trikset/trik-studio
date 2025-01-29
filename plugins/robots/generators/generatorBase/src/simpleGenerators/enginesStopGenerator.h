@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'EnginesStop' block
 class EnginesStopGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	EnginesStopGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

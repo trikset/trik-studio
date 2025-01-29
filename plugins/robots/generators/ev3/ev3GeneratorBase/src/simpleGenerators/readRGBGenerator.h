@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'Read RGB into Variables' block
 class ReadRGBGenerator: public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	ReadRGBGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

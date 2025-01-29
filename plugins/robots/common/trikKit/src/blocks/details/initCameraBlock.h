@@ -24,6 +24,7 @@ namespace details {
 /// Interpreter implementation for "Initialize Videocamera" block.
 class InitCameraBlock : public kitBase::blocksBase::common::DeviceBlock<trik::robotModel::parts::TrikLineSensor>
 {
+	Q_OBJECT
 public:
 	InitCameraBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForSound' block
 class WaitForSoundBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForSoundBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

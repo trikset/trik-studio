@@ -117,7 +117,6 @@ QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> Ev3KitInterpreterPlu
 		const kitBase::robotModel::RobotModelInterface *model)
 {
 	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {
-		mOwnsBlocksFactory = false;
 		return mBlocksFactory;
 	} else {
 		return nullptr;

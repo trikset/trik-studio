@@ -47,7 +47,22 @@ In background mode the session will be terminated just after the execution ended
         <translation>Ускорение, попробуйте от 5 до 20, но можно пробовать и 1000.</translation>
     </message>
     <message>
-        <location line="-10"/>
+        <location line="+10"/>
+        <source>The complete file path, including the filename, to save the generated JavaScript or Python code.</source>
+        <translation>Полный путь, включающий имя файла, для сохранения сгенерированного Javascript или Python кода.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>The path to the Python or JavaScript file that will be used for interpretation.</source>
+        <translation>Путь к Python или Javascript файлу, который будет использоваться для интерпретации.</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
+        <translation>Выберите &quot;python&quot; или &quot;javascript&quot;.</translation>
+    </message>
+    <message>
+        <location line="-23"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Путь к файлу, куда будет выводиться траектори робота. Запись не будет осуществлена единомоментно, каждый узел траектории будет записан по факту его просчета проверяющей системой. Поэтому разумно использования FIFO-файлов в качестве значения этого параметра.</translation>
     </message>
@@ -55,6 +70,11 @@ In background mode the session will be terminated just after the execution ended
         <location line="+13"/>
         <source>Close the window and exit if the diagram/script finishes without errors.</source>
         <translation>Закрыть окно если диаграмма/скрипт были выполнены без ошибок.</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Close the window and exit after diagram/script finishes.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -69,7 +89,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+234"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>

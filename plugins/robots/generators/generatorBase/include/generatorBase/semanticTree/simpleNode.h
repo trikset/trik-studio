@@ -24,6 +24,7 @@ namespace semantics {
 /// A semantic node for the block with simple semantics
 class ROBOTS_GENERATOR_EXPORT SimpleNode : public NonZoneNode
 {
+	Q_OBJECT
 public:
 	/// Represents all options that may be added by control flow generator
 	/// artificially for more smart generation

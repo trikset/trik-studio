@@ -125,7 +125,6 @@ void SubprogramsImporterExporterPlugin::exportToFile() const
 	}
 
 	nameToId.remove("");
-	QSet<qReal::Id> set(subprograms.toSet());
 	QHash<QString, qReal::IdList> toSave;
 	toSave.insert(fileName, nameToId.values());
 
@@ -251,11 +250,11 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 
 	SubprogramsCollectionDialog dialog(map);
 	dialog.exec();
-	QHash<QString, QVariant> oldMeta;
-	for (auto const &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
-		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
-	}
 	if (dialog.result() == QDialog::Accepted) {
+		QHash<QString, QVariant> oldMeta;
+		for (auto const &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
+			oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
+		}
 		const auto &openedDiagrams = mMainWindowInterpretersInterface->openedDiagrams();
 		const QString directoryPath = PROGRAM_DIRECTORY + QDir::separator() + SUBPROGRAMS_COLLECTION_DIRECTORY
 				+ QDir::separator() + mLogicalModel->logicalRepoApi().metaInformation("lastKitId").toString()
@@ -274,7 +273,7 @@ void SubprogramsImporterExporterPlugin::importFromCollectionTriggered() const
 		for (const auto &metaKey : oldMeta.keys()) {
 			mLogicalModel->mutableLogicalRepoApi().setMetaInformation(metaKey, oldMeta[metaKey]);
 		}
-		mProjectManager->afterOpen(mRepo->workingFile());
+		Q_EMIT mProjectManager->afterOpen(mRepo->workingFile());
 		mProjectManager->setUnsavedIndicator(true);
 
 		checkSubprogramsForUniqueNames();

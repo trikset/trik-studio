@@ -45,6 +45,8 @@ public:
 	int readTouchSensor(const kitBase::robotModel::PortInfo &port) const override;
 	int readRangeSensor(const kitBase::robotModel::PortInfo &port
 			, int maxDistance, qreal scanningAngle) const override;
+	QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port
+			, int maxDistance, qreal scanningAngle) const override;
 	QVector<int> readAccelerometerSensor() const override;
 	QVector<int> readGyroscopeSensor() const override;
 	QVector<int> calibrateGyroscopeSensor() override;

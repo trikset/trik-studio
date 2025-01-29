@@ -44,6 +44,7 @@ namespace twoDModel {
 
 class Box2DPhysicsEngine : public PhysicsEngineBase
 {
+	Q_OBJECT
 public:
 	Box2DPhysicsEngine(const WorldModel &worldModel, const QList<RobotModel *> &robots);
 	~Box2DPhysicsEngine();

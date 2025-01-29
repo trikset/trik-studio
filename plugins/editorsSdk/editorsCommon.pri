@@ -37,9 +37,6 @@ macx {
 QRXC_DIR = $$DESTDIR
 DESTDIR = $$DESTDIR/plugins/editors/
 
-# Needed because somehow QMake fails to create .rcc directory if RESOURCES is in extra compiler output.
-RCC_DIR = .build/$$CONFIGURATION/obj
-
 links(qrkernel qrgraph qrutils qrgui-meta-meta-model)
 
 includes(qrgraph qrgui/plugins/metaMetaModel)

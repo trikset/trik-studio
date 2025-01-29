@@ -20,6 +20,7 @@ namespace trik {
 
 class DisplayWidgetEmu : trikControl::DisplayWidgetInterface
 {
+	Q_OBJECT
 };
 
 }

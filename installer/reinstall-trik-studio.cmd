@@ -101,7 +101,7 @@ if exist %TRIK_STUDIO_INSTALL_DIR%\maintenance.exe (
 if exist %TRIK_STUDIO_INSTALL_DIR% goto waitFullUninstall
 :endUninstall
 echo Installing new version of TRIK Studio. Please wait...
-"%INSTALLER_EXE%" --script "%TRIK_STUDIO_INSTALL_SCRIPT%"
+START /W %INSTALLER_EXE% --script "%TRIK_STUDIO_INSTALL_SCRIPT%"
 
 if %errorlevel% EQU 0 (echo Done) else (echo Installation Error. See messages above.)
 :end

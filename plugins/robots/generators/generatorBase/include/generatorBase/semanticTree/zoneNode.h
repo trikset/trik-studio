@@ -24,6 +24,7 @@ namespace semantics {
 /// Stores a list of semantic nodes. In fact an analogue of block operator in c++
 class ROBOTS_GENERATOR_EXPORT ZoneNode : public SemanticNode
 {
+	Q_OBJECT
 public:
 	explicit ZoneNode(QObject *parent = nullptr);
 

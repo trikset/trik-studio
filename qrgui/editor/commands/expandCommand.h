@@ -24,6 +24,7 @@ namespace commands {
 
 class ExpandCommand : public NodeElementCommand
 {
+	Q_OBJECT
 public:
 	ExpandCommand(const NodeElement *node);
 	virtual ~ExpandCommand();

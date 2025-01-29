@@ -92,7 +92,7 @@
         <translation>Целичисленное деление на ноль</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+574"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+580"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
@@ -557,6 +557,19 @@
         <location filename="../../qrutils/widgets/consoleDock.cpp" line="+54"/>
         <source>Reset shell</source>
         <translation>Очистить консоль</translation>
+    </message>
+</context>
+<context>
+    <name>qReal::ui::DirPicker</name>
+    <message>
+        <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
+        <source>Browse...</source>
+        <translation>Обзор...</translation>
+    </message>
+    <message>
+        <location line="+35"/>
+        <source>Select directory</source>
+        <translation>Выберите директорию</translation>
     </message>
 </context>
 <context>

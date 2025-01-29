@@ -22,6 +22,7 @@ namespace python {
 /// Ensures that a diagram may be correctly generated into Qt Script code.
 class TrikPythonControlFlowValidator : public generatorBase::PrimaryControlFlowValidator
 {
+	Q_OBJECT
 public:
 	TrikPythonControlFlowValidator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

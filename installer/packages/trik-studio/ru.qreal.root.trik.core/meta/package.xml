@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <Package>
-    <DisplayName>Necessary Files</DisplayName>
+    <DisplayName>Core TRIK support components</DisplayName>
     <DisplayName xml:lang="ru_ru">Поддержка ТРИК</DisplayName>
-    <Description>Enables support of TRIK in TRIK Studio</Description>
-    <Description xml:lang="ru_ru">Поддержка конструктора ТРИК</Description>
+    <Description>Mandatory components for TRIK</Description>
+    <Description xml:lang="ru_ru">Обязательные компоненты для конструктора ТРИК</Description>
     <Version></Version>
     <ReleaseDate>2017-11-14</ReleaseDate>
     <Licenses>
@@ -11,5 +11,5 @@
     </Licenses>
     <SortingPriority>10</SortingPriority>
     <Default>true</Default>
-    <ForcedInstallation>false</ForcedInstallation>
+    <ForcedInstallation>true</ForcedInstallation>
 </Package>

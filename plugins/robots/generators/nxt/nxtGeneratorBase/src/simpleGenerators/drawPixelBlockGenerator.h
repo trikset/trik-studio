@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'DrawPixel' block in NXT kit.
 class DrawPixelBlockGenerator : public DrawBlockGenerator
 {
+	Q_OBJECT
 public:
 	DrawPixelBlockGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

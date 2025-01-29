@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for "Disable Video Streaming" block.
 class StopVideoStreamingGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	StopVideoStreamingGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

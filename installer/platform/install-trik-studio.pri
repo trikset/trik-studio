@@ -27,17 +27,17 @@ unix:!macx {
 	#MAKE INSTALL
 
 	res.path = $$PROGRAMDIR
-	res.extra = install -Dp -m0755 bin/release/trik-studio $(INSTALL_ROOT)$$BINDIR/trik-studio;\
+	res.extra = install -Dp -m0755 bin/trik-studio $(INSTALL_ROOT)$$BINDIR/trik-studio;\
 	install -Dp -m0755 installer/platform/trikStudio.sh $(INSTALL_ROOT)$$BINDIR/trikStudio;\
 	test -d $(INSTALL_ROOT)$$LIBDIR/ || mkdir -p $(INSTALL_ROOT)$$LIBDIR/;\
-	cp -a bin/release/*.so* $(INSTALL_ROOT)$$LIBDIR;\
+	cp -a bin/*.so* $(INSTALL_ROOT)$$LIBDIR;\
 	test -d $(INSTALL_ROOT)$$PLUGINDIR || mkdir -p $(INSTALL_ROOT)$$PLUGINDIR;\
-	cp -a bin/release/plugins/* $(INSTALL_ROOT)$$PLUGINDIR/;\
-	cp -a bin/release/translations $(INSTALL_ROOT)$$PROGRAMDIR/;\
-	cp -a bin/release/help $(INSTALL_ROOT)$$PROGRAMDIR/;\
-	cp -a bin/release/images $(INSTALL_ROOT)$$PROGRAMDIR/;\
-	cp -a bin/release/examples $(INSTALL_ROOT)$$PROGRAMDIR/;\
-	cp -a bin/release/splashscreen.png $(INSTALL_ROOT)$$PROGRAMDIR/images;\
+	cp -a bin/plugins/* $(INSTALL_ROOT)$$PLUGINDIR/;\
+	cp -a bin/translations $(INSTALL_ROOT)$$PROGRAMDIR/;\
+	cp -a bin/help $(INSTALL_ROOT)$$PROGRAMDIR/;\
+	cp -a bin/images $(INSTALL_ROOT)$$PROGRAMDIR/;\
+	cp -a bin/examples $(INSTALL_ROOT)$$PROGRAMDIR/;\
+	cp -a bin/splashscreen.png $(INSTALL_ROOT)$$PROGRAMDIR/images;\
 	test -d $(INSTALL_ROOT)/etc || mkdir -p $(INSTALL_ROOT)/etc;\
 	echo 'pathToLogs=.config/trikStudio/logs/' > $(INSTALL_ROOT)$$CONFFILE;\
 	echo "pathToImages=$$PROGRAMDIR/images/iconset1/" >> $(INSTALL_ROOT)$$CONFFILE;\

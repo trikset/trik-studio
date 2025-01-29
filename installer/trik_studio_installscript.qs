@@ -27,7 +27,7 @@ Controller.prototype.StartMenuDirectoryPageCallback = function() {
 Controller.prototype.ComponentSelectionPageCallback = function() {
   var widget = gui.currentPageWidget();
   
-//  widget.deselectAll();
+  widget.selectAll();
   
 //  widget.selectComponent("ru.qreal.root.trik");
 //    widget.selectComponent("ru.qreal.root.trik.core");
@@ -63,7 +63,8 @@ Controller.prototype.ComponentSelectionPageCallback = function() {
 }
 
 Controller.prototype.LicenseAgreementPageCallback = function() {
-  gui.currentPageWidget().AcceptLicenseRadioButton.setChecked(true);
+  var x = gui.currentPageWidget().AcceptLicenseRadioButton || gui.currentPageWidget().AcceptLicenseCheckBox;
+  x.setChecked(true);
   gui.clickButton(buttons.NextButton);  
 }
 

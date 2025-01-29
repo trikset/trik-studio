@@ -33,3 +33,5 @@ tests {
 
         trikStudioSimulatorTests.depends =  plugins
 }
+
+DISTFILES += features/trikqscintilla2.prf

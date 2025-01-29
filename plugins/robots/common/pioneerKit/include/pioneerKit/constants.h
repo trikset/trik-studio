@@ -39,6 +39,9 @@ const auto pioneerBaseStationIP = "pioneerBaseStationIP";
 /// String parameter. Port of a Pioneer base station.
 const auto pioneerBaseStationPort = "pioneerBaseStationPort";
 
+/// String parameter. Mode of a Pioneer base station.
+const auto pioneerBaseStationMode = "pioneerBaseStationMode";
+
 /// String parameter. Path to a Python interpreter. Default is empty string, which is treated as "use python from PATH".
 const auto pioneerPythonPath = "pioneerPythonPath";
 

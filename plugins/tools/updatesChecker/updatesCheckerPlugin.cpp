@@ -33,7 +33,7 @@ UpdatesCheckerPlugin::UpdatesCheckerPlugin()
 	, mCheckForUpdatesAction(new QAction(tr("Check for updates"), this))
 {
 	mSeparator->setSeparator(true);
-	connect(mCheckForUpdatesAction, &QAction::triggered, [this](){ checkForUpdates(); });
+	connect(mCheckForUpdatesAction, &QAction::triggered, this, &UpdatesCheckerPlugin::checkForUpdates);
 }
 
 QList<qReal::ActionInfo> UpdatesCheckerPlugin::actions()

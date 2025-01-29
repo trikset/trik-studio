@@ -17,8 +17,8 @@
 
 #include "utils/robotCommunication/robotCommunicator.h"
 
-#include <plugins/robots/thirdparty/qextserialport/src/qextserialenumerator.h>
-#include <plugins/robots/thirdparty/qextserialport/src/qextserialport.h>
+#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialenumerator.h>
+#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
 
 using namespace utils::robotCommunication;
 

@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for "init camera" block.
 class InitCameraGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	InitCameraGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

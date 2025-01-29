@@ -26,6 +26,7 @@ namespace commands {
 /// In other words this command adds view part into the MulipleRemoveCommand.
 class RemoveAndUpdateCommand : public qReal::commands::RemoveElementsCommand
 {
+	Q_OBJECT
 public:
 	RemoveAndUpdateCommand(EditorViewScene &scene, const models::Models &models);
 

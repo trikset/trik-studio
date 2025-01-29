@@ -34,6 +34,7 @@
 #include "twoDModel/robotModel/parts/gyroscope.h"
 #include "twoDModel/robotModel/parts/accelerometer.h"
 #include "twoDModel/robotModel/parts/marker.h"
+#include "twoDModel/robotModel/parts/lidar.h"
 
 #include "twoDModel/engine/twoDModelEngineInterface.h"
 
@@ -213,6 +214,10 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 
 	if (deviceInfo.isA(markerInfo())) {
 		return new parts::Marker(deviceInfo, port, *mEngine);
+	}
+
+	if (deviceInfo.isA<robotParts::LidarSensor>()) {
+		return new parts::Lidar(deviceInfo, port, *mEngine, rangeSensorAngleAndDistance(deviceInfo));
 	}
 
 	return CommonRobotModel::createDevice(port, deviceInfo);

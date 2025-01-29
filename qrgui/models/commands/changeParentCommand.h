@@ -23,6 +23,7 @@ namespace commands {
 
 class QRGUI_MODELS_EXPORT ChangeParentCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	ChangeParentCommand(models::LogicalModelAssistApi &logicalApi
 			, models::GraphicalModelAssistApi &graphicalApi

@@ -18,6 +18,8 @@ include(../common.pri)
 
 include(../../../qrutils/qrutils.pri)
 
+links(test-utils)
+
 INCLUDEPATH += ../../../qrutils
 
 HEADERS += \
@@ -31,8 +33,3 @@ SOURCES += \
 	inFileTest.cpp \
 	outFileTest.cpp \
 	xmlUtilsTest.cpp \
-
-# Mocks
-HEADERS += \
-	$$PWD/../mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterMock.h \
-

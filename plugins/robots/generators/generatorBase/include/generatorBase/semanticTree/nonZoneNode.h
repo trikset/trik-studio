@@ -24,6 +24,7 @@ namespace semantics {
 /// A base for all semantic nodes except zones
 class ROBOTS_GENERATOR_EXPORT NonZoneNode : public SemanticNode
 {
+	Q_OBJECT
 public:
 	explicit NonZoneNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

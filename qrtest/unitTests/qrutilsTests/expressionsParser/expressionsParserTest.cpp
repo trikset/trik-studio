@@ -14,7 +14,8 @@
 
 #include "expressionsParserTest.h"
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
+#include <mocks/qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterMock.h>
 
 using namespace utils;
 using namespace qrTest;
@@ -22,12 +23,22 @@ using namespace qrTest;
 using ::testing::Exactly;
 using ::testing::_;
 
+ExpressionsParserTest::ExpressionsParserTest()
+{
+	mErrorReporter = new ErrorReporterMock();
+}
+
 void ExpressionsParserTest::SetUp() {
-	mParser = new ExpressionsParser(&mErrorReporter);
+	mParser = new ExpressionsParser(mErrorReporter);
 }
 
 void ExpressionsParserTest::TearDown() {
 	delete mParser;
+}
+
+ExpressionsParserTest::~ExpressionsParserTest()
+{
+	delete mErrorReporter;
 }
 
 TEST_F(ExpressionsParserTest, priorityTest) {
@@ -108,7 +119,7 @@ TEST_F(ExpressionsParserTest, negationTest) {
 }
 
 TEST_F(ExpressionsParserTest, parseErrorTest1) {
-	EXPECT_CALL(mErrorReporter, addCritical(_, _)).Times(Exactly(1));
+	EXPECT_CALL(*mErrorReporter, addCritical(_, _)).Times(Exactly(1));
 
 	QString const stream = "((2+2)*5";
 	int pos = 0;
@@ -117,7 +128,7 @@ TEST_F(ExpressionsParserTest, parseErrorTest1) {
 }
 
 TEST_F(ExpressionsParserTest, parseErrorTest2) {
-	EXPECT_CALL(mErrorReporter, addCritical(_, _)).Times(Exactly(1));
+	EXPECT_CALL(*mErrorReporter, addCritical(_, _)).Times(Exactly(1));
 
 	QString const stream = "2**2";
 	int pos = 0;
@@ -126,7 +137,7 @@ TEST_F(ExpressionsParserTest, parseErrorTest2) {
 }
 
 TEST_F(ExpressionsParserTest, parseErrorTest3) {
-	EXPECT_CALL(mErrorReporter, addCritical(_, _)).Times(Exactly(1));
+	EXPECT_CALL(*mErrorReporter, addCritical(_, _)).Times(Exactly(1));
 
 	QString const stream = "abc + 2";
 	int pos = 0;

@@ -15,7 +15,8 @@
 TARGET = robots-trik-v6-qts-generator
 
 TEMPLATE = lib
-CONFIG += plugin
+
+CONFIG += plugin trikqscintilla2
 
 include(../../../../../global.pri)
 
@@ -33,7 +34,7 @@ includes( \
 		qrtext \
 )
 
-links(qrkernel qrutils qrrepo qscintilla2 robots-generator-base robots-trik-generator-base \
+links(qrkernel qrutils qrrepo robots-generator-base robots-trik-generator-base \
 		robots-kit-base robots-trik-kit robots-utils robots-trik-qts-generator-library \
 )
 

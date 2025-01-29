@@ -24,6 +24,7 @@ includes(plugins/robots/interpreters/interpreterCore \
 		plugins/robots/common/twoDModel \
 		plugins/robots/utils \
 		qrtext \
+		qrgui \
 )
 
 links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-preferences-dialog qrgui-facade \

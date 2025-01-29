@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for Draw Arc block.
 class DrawArcGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	DrawArcGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

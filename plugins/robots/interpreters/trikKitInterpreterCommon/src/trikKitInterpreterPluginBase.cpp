@@ -25,9 +25,9 @@
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
 #include <qrkernel/platformInfo.h>
-
 #include <qrgui/textEditor/qscintillaTextEdit.h>
 #include <qrgui/textEditor/languageInfo.h>
+#include "trikNetwork/mailboxFactory.h"
 
 using namespace trik;
 using namespace qReal;
@@ -51,8 +51,15 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 		, const QSharedPointer<blocks::TrikBlocksFactoryBase> &blocksFactory
 		)
 {
+	auto isMailboxEnabled = qReal::SettingsManager::value("TRIK2DMailbox", "").toBool();
+	if (isMailboxEnabled) {
+		mMailbox.reset(trikNetwork::MailboxFactory::create(8889));
+	}
 	mRealRobotModel.reset(realRobotModel);
 	mTwoDRobotModel.reset(twoDRobotModel);
+	if (mMailbox) {
+		mTwoDRobotModel->setMailbox(*mMailbox);
+	}
 	mBlocksFactory = blocksFactory;
 
 	const auto modelEngine = new twoDModel::engine::TwoDModelEngineFacade(*mTwoDRobotModel);
@@ -64,33 +71,27 @@ void TrikKitInterpreterPluginBase::initKitInterpreterPluginBase
 	mAdditionalPreferences = new TrikAdditionalPreferences({ mRealRobotModel->name() });
 
 	bool enablePython = false;
+#ifndef TRIK_NOPYTHON
 	if (!friendlyKitName().contains("2014")) {
 		if (!qEnvironmentVariableIsEmpty("TRIK_PYTHONPATH")) {
 			enablePython = true;
 		} else if (PlatformInfo::osType().startsWith("windows")) {
-			auto dir = QDir(QCoreApplication::applicationDirPath());
+			auto dir = QDir(QCoreApplication::applicationDirPath()+"/python-runtime/");
 			dir.makeAbsolute();
-			auto isOne = false;
-			QByteArray value;
-			for (auto &&file : dir.entryList()) {
-				if (file.endsWith(".zip") && file.startsWith("python"))
-				{
-					if (isOne) {
-						isOne = false;
-						value.clear();
-						break;
-					}
-					isOne = true;
-					value = dir.filePath(file).toLatin1();
-				}
-			}
-			if (isOne && !value.isNull()) {
-				qputenv("TRIK_PYTHONPATH", value);
+			if (dir.exists()) {
 				enablePython = true;
+				auto path = dir.path();
+				const auto &zips = dir.entryInfoList({"python*.zip"}, QDir::Files | QDir::Readable);
+				if (zips.size() == 1) {
+					const auto &zip = zips.first();
+					path += ';' + zip.absoluteFilePath();
+				}
+				qputenv("TRIK_PYTHONPATH", path.toLocal8Bit());
 			}
 		}
 	}
-	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, enablePython));
+#endif
+	mTextualInterpreter.reset(new TrikTextualInterpreter(mTwoDRobotModel, mMailbox.data(), enablePython));
 }
 
 void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, const QString &extension)
@@ -334,7 +335,7 @@ void TrikKitInterpreterPluginBase::init(const kitBase::KitPluginConfigurator &co
 			, &TrikTextualInterpreter::completed
 			, this
 			, [this](){
-		this->testStop(qReal::interpretation::StopReason::finised);
+		this->testStop(qReal::interpretation::StopReason::finished);
 	});
 	// refactor?
 	connect(this

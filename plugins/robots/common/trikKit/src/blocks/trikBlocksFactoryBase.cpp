@@ -50,6 +50,7 @@
 #include "details/ledBlock.h"
 #include "details/sayBlock.h"
 #include "details/systemCommandBlock.h"
+#include "details/readLidarBlock.h"
 
 #include "details/waitGamepadButtonBlock.h"
 #include "details/waitGamepadConnectBlock.h"
@@ -57,12 +58,16 @@
 #include "details/waitGamepadWheelBlock.h"
 #include "details/waitPadPressBlock.h"
 #include "details/trikWaitForGyroscopeBlock.h"
+#include "details/joinNetworkBlock.h"
+#include "details/sendMessageBlock.h"
+#include "details/waitForMessageBlock.h"
 
 #include "details/writeToFileBlock.h"
 #include "details/removeFileBlock.h"
 
 #include "trikKit/robotModel/parts/trikInfraredSensor.h"
 #include "trikKit/robotModel/parts/trikSonarSensor.h"
+#include <qrkernel/settingsManager.h>
 
 using namespace trik::blocks;
 using namespace trik::blocks::details;
@@ -96,9 +101,11 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 	} else if (elementMetatypeIs(element, "TrikInitVideoStreaming")) {
 		return new InitVideoStreamingBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikSendMessage")) {
-		return new qReal::interpretation::blocks::EmptyBlock();
+		return new SendMessageBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikWaitForMessage")) {
-		return new qReal::interpretation::blocks::EmptyBlock();
+		return new WaitForMessageBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikJoinNetwork")) {
+		return new JoinNetworkBlock(mRobotModelManager->model());
 	} else if (elementMetatypeIs(element, "TrikLed")) {
 		return new LedBlock(mRobotModelManager->model());
 
@@ -165,6 +172,8 @@ qReal::interpretation::Block *TrikBlocksFactoryBase::produceBlock(const qReal::I
 
 	} else if (elementMetatypeIs(element, "TrikCalibrateGyroscope")) {
 		return new CalibrateGyroscopeBlock(mRobotModelManager->model());
+	} else if (elementMetatypeIs(element, "TrikReadLidar")) {
+		return new ReadLidarBlock(mRobotModelManager->model());
 	}
 
 	return nullptr;
@@ -193,8 +202,10 @@ qReal::IdList TrikBlocksFactoryBase::providedBlocks() const
 			<< id("TrikDetectorToVariable")
 			<< id("TrikInitVideoStreaming")
 			<< id("TrikStopVideoStreaming")
+//			<< id("TrikReadLidar")
 			<< id("TrikSendMessage")
 			<< id("TrikWaitForMessage")
+			<< id("TrikJoinNetwork")
 			;
 
 	result
@@ -256,8 +267,6 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikWaitForAccelerometer")
 				<< id("TrikSystem")
 				<< id("TrikWaitForMotion")
-				<< id("TrikSendMessage")
-				<< id("TrikWaitForMessage")
 				<< id("TrikWaitGamepadButton")
 				<< id("TrikWaitPadPress")
 				<< id("TrikWaitGamepadWheel")
@@ -267,6 +276,13 @@ qReal::IdList TrikBlocksFactoryBase::blocksToDisable() const
 				<< id("TrikStopCamera")
 				<< id("TrikStopVideoStreaming")
 				;
+		if (!qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()) {
+			result
+				<< id("TrikSendMessage")
+				<< id("TrikWaitForMessage")
+				<< id("TrikJoinNetwork")
+				;
+		}
 	} else {
 		result
 				<< id("TrikCalibrateGyroscope")

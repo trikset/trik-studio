@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'SetBackground' block.
 class SetBackgroundGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	SetBackgroundGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

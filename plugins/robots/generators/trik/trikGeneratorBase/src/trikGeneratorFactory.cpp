@@ -53,7 +53,9 @@
 #include "simpleGenerators/removeFileGenerator.h"
 #include "simpleGenerators/markerDownGenerator.h"
 #include "simpleGenerators/markerUpGenerator.h"
+#include "simpleGenerators/readLidarGenerator.h"
 #include "parts/trikDeviceVariables.h"
+#include "simpleGenerators/trikJoinNetworkGenerator.h"
 
 using namespace trik;
 using namespace trik::simple;
@@ -117,6 +119,8 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 		return new SendMessageGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikWaitForMessage") {
 		return new WaitForMessageGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "TrikJoinNetwork") {
+		return new TrikJoinNetworkGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikSetBackground") {
 		return new SetBackgroundGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "TrikSystem") {
@@ -157,6 +161,8 @@ AbstractSimpleGenerator *TrikGeneratorFactory::simpleGenerator(const qReal::Id &
 		return new MarkerDownGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "MarkerUp") {
 		return new MarkerUpGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "TrikReadLidar") {
+		return new ReadLidarGenerator(mRepo, customizer, id, this);
 	}
 
 	return GeneratorFactoryBase::simpleGenerator(id, customizer);

@@ -21,6 +21,7 @@ namespace trik {
 /// Generator factory implemtation for TRIK platform
 class TrikGeneratorFactory : public generatorBase::GeneratorFactoryBase
 {
+	Q_OBJECT
 public:
 	TrikGeneratorFactory(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter

@@ -34,6 +34,7 @@ namespace commands {
 /// Accepts a list of graphical or logical ids and removes them from model.
 class QRGUI_MODELS_EXPORT RemoveElementsCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	explicit RemoveElementsCommand(const models::Models &models);
 

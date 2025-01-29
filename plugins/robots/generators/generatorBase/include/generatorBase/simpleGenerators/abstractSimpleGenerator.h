@@ -28,6 +28,7 @@ namespace simple {
 /// A base for all code generators generating code for one block.
 class ROBOTS_GENERATOR_EXPORT AbstractSimpleGenerator : public QObject, public TemplateParametrizedEntity
 {
+	Q_OBJECT
 public:
 	AbstractSimpleGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

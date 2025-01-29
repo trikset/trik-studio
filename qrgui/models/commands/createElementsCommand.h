@@ -24,6 +24,7 @@ namespace commands {
 
 class QRGUI_MODELS_EXPORT CreateElementsCommand : public AbstractCommand
 {
+	Q_OBJECT
 public:
 	CreateElementsCommand(const models::Models &models, const QList<ElementInfo> &elements);
 

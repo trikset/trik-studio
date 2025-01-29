@@ -22,6 +22,7 @@ namespace lua {
 /// Generates "sensors.lpsPosition" command for quadcopter.
 class PioneerGetLPSPosition : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	PioneerGetLPSPosition(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

@@ -20,6 +20,8 @@
 #include <kitBase/robotModel/robotParts/gyroscopeSensor.h>
 #include <kitBase/robotModel/robotParts/accelerometerSensor.h>
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
+#include <kitBase/robotModel/robotParts/lidarSensor.h>
+#include <kitBase/robotModel/robotParts/communicator.h>
 
 #include "trikKit/robotModel/parts/trikLightSensor.h"
 #include "trikKit/robotModel/parts/trikTouchSensor.h"
@@ -92,6 +94,7 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 			, PortInfo::ReservedVariableType::vector), { lineSensorInfo() });
 
 	addAllowedConnection(video2Port(), { videoCameraInfo() });
+	addAllowedConnection(lidarPort(), { lidarSensorInfo() });
 
 	addAllowedConnection(PortInfo("ObjectSensorXPort", input, {}, "objectSensorX"), { objectSensorInfo() });
 	addAllowedConnection(PortInfo("ObjectSensorYPort", input, {}, "objectSensorY"), { objectSensorInfo() });
@@ -122,6 +125,8 @@ TrikRobotModelBase::TrikRobotModelBase(const QString &kitId, const QString &robo
 
 	addAllowedConnection(PortInfo("GamepadConnectionIndicatorPort", input, {}, "gamepadConnected")
 			, { gamepadConnectionIndicatorInfo() });
+
+	addAllowedConnection(PortInfo("CommunicatorPort", output), { networkInfo() });
 }
 
 QList<PortInfo> TrikRobotModelBase::configurablePorts() const
@@ -131,8 +136,8 @@ QList<PortInfo> TrikRobotModelBase::configurablePorts() const
 			, PortInfo("D2", input, {}, "sensorD2")
 			};
 
-	QList<PortInfo> const videoPorts = {video2Port()};
-	return CommonRobotModel::configurablePorts() + digitalPorts + videoPorts;
+	QList<PortInfo> const additionalPorts = {video2Port(), lidarPort()};
+	return CommonRobotModel::configurablePorts() + digitalPorts + additionalPorts;
 }
 
 QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
@@ -144,6 +149,7 @@ QList<DeviceInfo> TrikRobotModelBase::convertibleBases() const
 		, DeviceInfo::create<parts::TrikMotionSensor>()
 		, DeviceInfo::create<parts::TrikLineSensor>()
 		, DeviceInfo::create<parts::TrikVideoCamera>()
+		, DeviceInfo::create<robotParts::LidarSensor>()
 	};
 }
 
@@ -212,6 +218,11 @@ DeviceInfo TrikRobotModelBase::gyroscopeInfo() const
 	return DeviceInfo::create<robotParts::GyroscopeSensor>();
 }
 
+DeviceInfo TrikRobotModelBase::lidarSensorInfo() const
+{
+	return DeviceInfo::create<robotParts::LidarSensor>();
+}
+
 DeviceInfo TrikRobotModelBase::accelerometerInfo() const
 {
 	return DeviceInfo::create<robotParts::AccelerometerSensor>();
@@ -271,6 +282,12 @@ DeviceInfo TrikRobotModelBase::videoCameraInfo() const {
 	return DeviceInfo::create<parts::TrikVideoCamera>();
 }
 
+DeviceInfo TrikRobotModelBase::networkInfo() const
+{
+	return DeviceInfo::create<robotParts::Communicator>();
+}
+
+
 QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 {
 	QHash<QString, int> result;
@@ -286,4 +303,8 @@ QHash<QString, int> TrikRobotModelBase::buttonCodes() const
 
 PortInfo TrikRobotModelBase::video2Port() const {
 	return PortInfo("Video2Port", tr("Video 2"), input);
+}
+
+PortInfo TrikRobotModelBase::lidarPort() const {
+	return PortInfo("LidarPort", tr("Lidar"), input, {}, "lidar", PortInfo::ReservedVariableType::vector);
 }

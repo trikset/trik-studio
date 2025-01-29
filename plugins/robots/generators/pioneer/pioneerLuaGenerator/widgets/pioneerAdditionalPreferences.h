@@ -15,6 +15,7 @@
 #pragma once
 
 #include <kitBase/additionalPreferences.h>
+#include <QComboBox>
 
 namespace Ui {
 class PioneerAdditionalPreferences;
@@ -41,6 +42,7 @@ signals:
 	void settingsChanged();
 
 private:
+	void updateComboBox(QComboBox *selector, QString settings);
 	Ui::PioneerAdditionalPreferences *mUi;
 };
 

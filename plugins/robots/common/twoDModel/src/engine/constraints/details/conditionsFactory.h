@@ -26,7 +26,7 @@ namespace details {
 class ConditionsFactory
 {
 public:
-	ConditionsFactory(Events &events, const Variables &variables, const Objects &objects, StatusReporter &status);
+	ConditionsFactory(Events &events, const Objects &objects, StatusReporter &status);
 
 	/// Produces new condition instance that always returnes \a value.
 	Condition constant(bool value) const;
@@ -57,7 +57,7 @@ public:
 
 	/// Produces new condition instance that returnes true if item with id \a objectId lays inside of
 	/// the region with id \a regionId at the call moment.
-	Condition inside(const QString &objectId, const QString &regionId) const;
+	Condition inside(const QString &objectId, const QString &regionId, const QString &objectPoint) const;
 
 	/// Produces new condition instance that returnes true if the event with id \a eventId
 	/// is alive at the call moment and false otherwise.
@@ -81,7 +81,6 @@ private:
 	void reportError(const QString &message) const;
 
 	Events &mEvents;
-	const Variables &mVariables;
 	const Objects &mObjects;
 	StatusReporter &mStatus;
 };

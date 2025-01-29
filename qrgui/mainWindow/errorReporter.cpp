@@ -179,8 +179,8 @@ void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorL
 
 	QListWidgetItem *item = new QListWidgetItem(errorListWidget);
 	item->setData(ErrorListWidget::positionRole, error.position().toString());
-	const QString message = QString(" <font color='gray'>%1</font> <u>%2</u> %3").arg(
-			error.timestamp(), severityMessage(error), error.message());
+	QString message = QString(" <font color='gray'>%1</font> <u>%2</u> %3").arg(
+			error.timestamp(), severityMessage(error), error.message()).trimmed();
 	switch (error.severity()) {
 	case Error::information:
 		item->setIcon(QIcon(":/mainWindow/images/information.png"));
@@ -198,9 +198,12 @@ void ErrorReporter::showError(const Error &error, ErrorListWidget * const errorL
 		throw Exception("Incorrect total severity");
 	}
 
-	auto *label = new QLabel(message.trimmed(), errorListWidget);
+	message.replace("\n", "<br/>");
+	auto *label = new QLabel(message, errorListWidget);
+
 	label->setAlignment(Qt::AlignVCenter);
 	label->setOpenExternalLinks(true);
+	item->setSizeHint(label->sizeHint());
 	errorListWidget->setItemWidget(item, label);
 	errorListWidget->setCurrentItem(item);
 }

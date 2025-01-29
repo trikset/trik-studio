@@ -21,7 +21,7 @@
 #include <ctime>
 
 #include <qrkernel/settingsManager.h>
-#include <plugins/robots/thirdparty/qextserialport/src/qextserialport.h>
+#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
 
 #include "nxtKit/communication/nxtCommandConstants.h"
 
