@@ -34,7 +34,6 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	, mFlashRobotAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
 	, mNxtToolsPresent(false)
-	, mMasterGenerator(nullptr)
 	, mCommunicator(utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
 {
 	initActions();
@@ -179,21 +178,24 @@ void NxtOsekCGeneratorPlugin::onUploadingComplete(bool success)
 
 generatorBase::MasterGeneratorBase *NxtOsekCGeneratorPlugin::masterGenerator()
 {
-	mMasterGenerator = new NxtOsekCMasterGenerator(*mRepo
+	return new NxtOsekCMasterGenerator(*mRepo
 			, *mMainWindowInterface->errorReporter()
 			, *mParserErrorReporter
 			, *mRobotModelManager
 			, *mTextLanguage
 			, mMainWindowInterface->activeDiagram()
 			, generatorName());
-	return mMasterGenerator;
 }
 
 void NxtOsekCGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)
 {
-	mMasterGenerator->initialize();
-	mMasterGenerator->setProjectDir(newFileInfo);
-	mMasterGenerator->generateOilAndMakeFiles();
+	// Static cast is possible and correct, but dynamic will be more flexible.
+	if (auto nxtGenerator = qobject_cast<NxtOsekCMasterGenerator*>(masterGenerator())) {
+		QScopedPointer<NxtOsekCMasterGenerator> generator(nxtGenerator);
+		generator->initialize();
+		generator->setProjectDir(newFileInfo);
+		generator->generateOilAndMakeFiles();
+	}
 }
 
 void NxtOsekCGeneratorPlugin::flashRobot()

@@ -169,13 +169,13 @@
         <translation>Генерация (C)</translation>
     </message>
     <message>
-        <location line="+52"/>
-        <location line="+129"/>
+        <location line="+51"/>
+        <location line="+132"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-85"/>
         <source>Generate code</source>
         <translation>Генерировать код</translation>
     </message>
@@ -200,7 +200,7 @@
         <translation>Загрузить программу на устройство NXT</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>flash.sh not found. Make sure it is present in QReal installation directory</source>
         <translation>Не найден скрипт flash.sh. Убедитесь, что пакет nxt-tools установлен корректно</translation>
     </message>
