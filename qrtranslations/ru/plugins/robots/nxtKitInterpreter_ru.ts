@@ -39,12 +39,12 @@
     <message>
         <location line="-35"/>
         <source>nxtOSEK Generator Settings</source>
-        <translation>Настройки генерации кода nxtOSEK</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <source>TextLabel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+42"/>
@@ -77,14 +77,13 @@
     <message>
         <location line="+2"/>
         <source>Path to arm-none-eabi:</source>
-        <translation>Путь к кросс-компилятору</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+23"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
-        <translation>ВНИМАНИЕ: Выбранная директория не существует.
-        Откройте &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;ссылку&lt;/a&gt; для дальнейших инструкций</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

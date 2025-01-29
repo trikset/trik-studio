@@ -82,7 +82,12 @@
         <translation>Не удалось загрузить программу в робота. Убедитесь, что робот включен и подсоединен к компьютеру</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+2"/>
+        <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
         <source>Error in reading from firmware file: %1</source>
         <translation>Ошибка чтения из файла с прошивкой %1</translation>
     </message>
@@ -152,16 +157,7 @@
         <translation>Загрузка программы не удалась. Возможно, стоит попробовать перезапустить среду с правами суперпользователя</translation>
     </message>
     <message>
-        <source>Could not upload program. Make sure the robot is connected and ON.</source>
-        <translation type="vanished">Не удалось загрузить программу. Убедитесь, что робот подключен и включен.</translation>
-    </message>
-    <message>
-        <location line="+48"/>
-        <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
-        <translation>Если вы пользователь ОС GNU/Linux, перейдите по ссылке https://help.trikset.com/nxt/run-upload-programs для получения инструкций.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+55"/>
         <source>QReal requires superuser privileges to upload programs on NXT robot</source>
         <translation>Для загрузки программ в робота требуется запустить TRIKStudio с правами администратора</translation>
     </message>
@@ -178,13 +174,13 @@
         <translation>Генерация (C)</translation>
     </message>
     <message>
-        <location line="+58"/>
-        <location line="+128"/>
+        <location line="+57"/>
+        <location line="+131"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-85"/>
         <source>Generate code</source>
         <translation>Генерировать код</translation>
     </message>
@@ -209,7 +205,7 @@
         <translation>Загрузить программу на устройство NXT</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>flash.sh not found. Make sure it is present in QReal installation directory</source>
         <translation>Не найден скрипт flash.sh. Убедитесь, что пакет nxt-tools установлен корректно</translation>
     </message>

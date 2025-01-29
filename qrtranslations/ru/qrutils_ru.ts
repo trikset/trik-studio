@@ -633,13 +633,6 @@
     </message>
 </context>
 <context>
-    <name>qReal::ui::dirPicker</name>
-    <message>
-        <source>Browse...</source>
-        <translation type="vanished">Обзор...</translation>
-    </message>
-</context>
-<context>
     <name>utils::MetamodelGeneratorSupport</name>
     <message>
         <location filename="../../qrutils/metamodelGeneratorSupport.cpp" line="+72"/>
