@@ -300,6 +300,11 @@ void TwoDModelWidget::initPalette()
 	connect(imageTool, &QAction::triggered, this, [this](){ mUi->palette->unselect(); });
 }
 
+void TwoDModelWidget::resetDrawAction()
+{
+	mUi->palette->unselect();
+}
+
 void TwoDModelWidget::initDetailsTab()
 {
 }

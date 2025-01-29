@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+100"/>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
         <source>No such object: %1</source>
         <translation>Objet inexistant : %1</translation>
@@ -301,7 +301,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+193"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,7 +373,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+59"/>
         <source>Stylus (S)</source>
         <translation>Stylo (S)</translation>
     </message>
@@ -394,7 +394,7 @@
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+23"/>
         <source>Error in checker: %1</source>
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
@@ -728,7 +728,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>

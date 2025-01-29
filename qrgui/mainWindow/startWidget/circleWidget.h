@@ -22,6 +22,7 @@ namespace qReal {
 /// with palette foreground color (manually or through brand manager stylesheet)
 class CircleWidget : public QWidget
 {
+	Q_OBJECT
 public:
 	CircleWidget(const QSize &size, const QString &icon, QWidget *parent = nullptr);
 

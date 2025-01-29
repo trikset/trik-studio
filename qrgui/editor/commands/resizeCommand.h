@@ -28,6 +28,7 @@ namespace commands {
 
 class ResizeCommand : public NodeElementCommand, public qReal::commands::TrackingEntity
 {
+	Q_OBJECT
 public:
 	/// Creating new instance of command in tracking-based style
 	ResizeCommand(const EditorViewScene *scene, const Id &id);

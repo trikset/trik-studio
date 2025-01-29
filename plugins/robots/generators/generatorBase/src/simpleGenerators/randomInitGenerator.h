@@ -21,6 +21,7 @@ namespace simple {
 
 class RandomInitGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	RandomInitGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

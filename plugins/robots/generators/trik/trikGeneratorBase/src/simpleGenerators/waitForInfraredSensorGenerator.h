@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForIRDistance' block
 class WaitForInfraredSensorGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForInfraredSensorGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

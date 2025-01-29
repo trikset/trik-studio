@@ -19,11 +19,11 @@ QRXC_GENERATED_PATH = $$OUT_PWD
 # QT_NO_CPU_FEATURE=sse4.2 and QT_HASH_SEED=0 as an attempt ot get predictable qHash
 
 win32 {
-	QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && set QT_NO_CPU_FEATURE=sse4.2 && set QT_HASH_SEED=0 && $$QRXC
+	QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && set QT_HASH_SEED=0 && $$QRXC
 } else:!macx {
-	QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && env ASAN_OPTIONS=detect_leaks=0 LD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
+	QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && env ASAN_OPTIONS=detect_leaks=0 LD_LIBRARY_PATH=$$QRXC_DIR QT_HASH_SEED=0 $$QRXC
 } else {
-	QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && env ASAN_OPTIONS=detect_leaks=0 DYLD_LIBRARY_PATH=$$QRXC_DIR QT_NO_CPU_FEATURE=sse4.2 QT_HASH_SEED=0 $$QRXC
+	QRXC_COMMAND = cd $$QRXC_GENERATED_PATH && env ASAN_OPTIONS=detect_leaks=0 DYLD_LIBRARY_PATH=$$QRXC_DIR QT_HASH_SEED=0 $$QRXC
 }
 
 qrxc_source.commands = $$QRXC_COMMAND $$EDITOR_PATH/$$QREAL_XML
@@ -63,7 +63,7 @@ qrxc_resource.variable_out = NEW_RESOURCES
 QMAKE_EXTRA_COMPILERS += qrxc_resource
 
 # Here we need to call moc explicitly because by default it will be called before any files were generated
-new_moc.output  = $$MOC_DIR/moc_${QMAKE_FILE_BASE}.cpp
+new_moc.output  = moc_${QMAKE_FILE_BASE}.cpp
 new_moc.commands = $$[QT_HOST_BINS/get]/moc -I $$GLOBAL_PWD/qrgui/plugins/metaMetaModel/include/ ${QMAKE_FILE_NAME} -o ${QMAKE_FILE_OUT}
 new_moc.input = MOC_HEADERS
 new_moc.variable_out = SOURCES
@@ -71,7 +71,7 @@ new_moc.variable_out = SOURCES
 QMAKE_EXTRA_COMPILERS += new_moc
 
 # Here we need to call rcc explicitly because by tefault it will be called before any files were generated
-new_rcc.output  = $$RCC_DIR/rcc_${QMAKE_FILE_BASE}.cpp
+new_rcc.output  = rcc_${QMAKE_FILE_BASE}.cpp
 new_rcc.commands = $$[QT_HOST_BINS/get]/rcc ${QMAKE_FILE_NAME} -o ${QMAKE_FILE_OUT}
 new_rcc.input = NEW_RESOURCES
 new_rcc.variable_out = SOURCES

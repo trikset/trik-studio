@@ -34,15 +34,17 @@ public:
 		Type type;
 		QStringList values;
 
-		PropertyInfo() {}
-		PropertyInfo(Type t, const QStringList &v);
+		//PropertyInfo() = default;
+		PropertyInfo(Type t, const QStringList &v)
+			: type(t), values(v)
+		{}
 	};
 
 	explicit VisibilityConditionsDialog(QMap<QString, PropertyInfo> const &enumValues
 			, QList<QSharedPointer<Item>> const &items, QWidget *parent = nullptr);
-	~VisibilityConditionsDialog();
+	~VisibilityConditionsDialog() override;
 
-private slots:
+private Q_SLOTS:
 	void changeProperty(const QString &propertyName);
 	void okClicked();
 

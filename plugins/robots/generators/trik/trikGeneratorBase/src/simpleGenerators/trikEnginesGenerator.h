@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'EnginesForward', 'EnginesBackward' and 'AngularServo' block
 class TrikEnginesGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	TrikEnginesGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

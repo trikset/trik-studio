@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'SetBackground' block.
 class MarkerUpGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	MarkerUpGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

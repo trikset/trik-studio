@@ -304,11 +304,27 @@ const kitBase::EventsForKitPluginInterface &RobotsPluginFacade::eventsForKitPlug
 	return mEventsForKitPlugin;
 }
 
-bool RobotsPluginFacade::interpretCode(const QString &inputs)
+bool RobotsPluginFacade::interpretCode(const QString &inputs, const QString &filepath)
 {
-	auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
-	QString code = logicalRepo->metaInformation("activeCode").toString();
-	QString extension = logicalRepo->metaInformation("activeCodeLanguageExtension").toString();
+	QString code;
+	QString extension;
+	if (!filepath.isEmpty()) {
+		QFile file(filepath);
+		QFileInfo fileInfo(file);
+
+		if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			mMainWindow->errorReporter()->addError(
+						tr("The specified script file could not be opened for reading ") + filepath);
+			return false;
+		}
+		code = file.readAll();
+		extension = fileInfo.suffix().toLower();
+	}
+	else {
+		auto logicalRepo = &mLogicalModelApi->logicalRepoApi();
+		code = logicalRepo->metaInformation("activeCode").toString();
+		extension = logicalRepo->metaInformation("activeCodeLanguageExtension").toString();
+	}
 	if (code.isEmpty()) {
 		mMainWindow->errorReporter()->addError(tr("No saved code found in the qrs file"));
 		return false;

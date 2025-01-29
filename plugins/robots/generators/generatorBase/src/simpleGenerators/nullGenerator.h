@@ -22,6 +22,7 @@ namespace simple {
 /// This generator always returns an empty string
 class NullGenerator : public AbstractSimpleGenerator
 {
+	Q_OBJECT
 public:
 	NullGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

@@ -26,6 +26,7 @@ namespace commands {
 /// In other words this command adds view part into the CreateGroupCommand.
 class CreateAndUpdatePatternCommand : public qReal::commands::CreatePatternCommand
 {
+	Q_OBJECT
 public:
 	CreateAndUpdatePatternCommand(EditorViewScene &scene
 			, const models::Models &models

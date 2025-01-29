@@ -6,7 +6,19 @@ updates:
       interval: "monthly"
     reviewers:
       - "iakov"
-
+    groups:
+      3rd-party:
+        exclude-patterns:
+          - "*trikRuntime*"
+          - "*nxt-tools*"
+          - "*checkapp*"
+          - "*gamepad*"
+      small-apps:
+        patterns:
+          - "*nxt-tools*"
+          - "*checkapp*"
+          - "*gamepad*"
+ 
   - package-ecosystem: "gitsubmodule"
     directory: "/"
     schedule:
@@ -17,3 +29,21 @@ updates:
       - "dependencies"
     reviewers:
       - "iakov"
+    groups:
+      submodules-junior:
+        patterns:
+          - "*" # All submodules updates
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      
+  - package-ecosystem: "pip"
+    directory: "/installer/packages/trik-studio/ru.qreal.root.trik.core/meta/"
+    schedule:
+      interval: "weekly"
+    groups:
+      pip-dependencies:
+        patterns:
+          - "*"

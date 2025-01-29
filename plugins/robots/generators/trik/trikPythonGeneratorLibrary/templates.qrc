@@ -165,6 +165,7 @@
         <file>templates/engines/brakeMode/float.t</file>
         <file>templates/messages/waitForMessage.t</file>
         <file>templates/messages/sendMessage.t</file>
+        <file>templates/messages/joinNetwork.t</file>
         <file>templates/luaPrinting/addition.t</file>
         <file>templates/luaPrinting/argumentsSeparator.t</file>
         <file>templates/luaPrinting/assignment.t</file>

@@ -3,6 +3,7 @@ set -o nounset
 set -o errexit
 
 cd "$(dirname "$0")"
+source "$INSTALLER_ROOT"/utils/linux-gnu_utils.sh
 
 mkdir -p "$PWD/../data/lib/python-runtime"
 mkdir -p "$PWD"/../data/lib/plugins/editors
@@ -22,23 +23,33 @@ rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model,checkapp}            			"$PWD/..
 
 [ -r venv/bin/activate ] || "python3.${TRIK_PYTHON3_VERSION_MINOR}" -m venv venv
 . venv/bin/activate
-python3 -m pip install pyinstaller
+python3 -m pip install -U pip
+python3 -m pip install -r requirements.txt
 
 #PyInstaller provides all required modules
 #So we need to handle this garbage of files later (below) with proper rsync
-pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
+#Determine python behavior when searching pythonlib
+PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
 	--hidden-import=math \
 	--hidden-import=random \
 	--hidden-import=sys \
 	--hidden-import=time \
 	--hidden-import=os \
 	--hidden-import=types \
+	--hidden-import=pip \
+	--hidden-import=venv \
+	--hidden-import=site \
+	--hidden-import=numpy \
 	"$BIN_DIR"/TRIK.py
 
-rsync -avR --remove-source-files dist/trik/./*.so* "$PWD/../data/lib/"
+deactivate # exit python's venv
+
+rsync -avR --remove-source-files dist/trik/_internal/./*.so* "$PWD/../data/lib/"
 # Remove before copying other files
 rm dist/trik/trik
-rsync -avRm --ignore-missing-args --delete --delete-after dist/trik/./* "$PWD/../data/lib/python-runtime"
+rsync -avRm --ignore-missing-args --delete --delete-after dist/trik/_internal/./* "$PWD/../data/lib/python-runtime"
+
+add_required_libs "$PWD/../data/lib"
 
 #PythonQt requires for dlopen'ing
 pushd "$PWD/../data/lib" && for f in libpython3.*.so.* ; do ln -svf "$f" "$(echo "$f" | cut -d . -f 1-3)" ; done ; popd

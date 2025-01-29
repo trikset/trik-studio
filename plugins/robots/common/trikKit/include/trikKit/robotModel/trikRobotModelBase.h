@@ -75,6 +75,7 @@ protected:
 
 	virtual kitBase::robotModel::PortInfo video2Port() const;
 	virtual kitBase::robotModel::PortInfo lidarPort() const;
+	virtual kitBase::robotModel::DeviceInfo networkInfo() const;
 };
 
 }

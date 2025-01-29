@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'ClearScreen' block
 class ClearScreenBlockGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	ClearScreenBlockGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

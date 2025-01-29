@@ -303,7 +303,7 @@
         <translation>Атрибут &quot;%1&quot; тэга &quot;%2&quot; не может быть пустым.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+107"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+105"/>
         <source>No such region: %1</source>
         <translation>Нет такого региона: %1</translation>
     </message>
@@ -573,7 +573,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+193"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -649,7 +649,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+54"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+59"/>
         <source>Stylus (S)</source>
         <translation>Стилус (S)</translation>
     </message>
@@ -670,7 +670,7 @@
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+23"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
@@ -1071,7 +1071,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+318"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>

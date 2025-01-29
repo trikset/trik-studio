@@ -22,6 +22,7 @@ namespace simple {
 /// Generates code that joins a number of threads into one, `main` thread.
 class JoinGenerator : public AbstractSimpleGenerator
 {
+	Q_OBJECT
 public:
 	JoinGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

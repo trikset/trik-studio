@@ -26,8 +26,7 @@
 
 class Item : public graphicsUtils::AbstractItem
 {
-	Q_DISABLE_COPY(Item)
-
+	Q_OBJECT
 public:
 	enum DomElementTypes {
 		noneType

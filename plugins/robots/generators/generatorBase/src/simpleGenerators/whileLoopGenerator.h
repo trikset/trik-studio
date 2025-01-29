@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for loops in 'while-do' and 'do-while' forms
 class WhileLoopGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WhileLoopGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

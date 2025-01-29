@@ -34,6 +34,7 @@ namespace commands {
 /// Sets property for a group of items on 2D model scene.
 class ChangePropertyCommand : public qReal::commands::AbstractCommand
 {
+	Q_OBJECT
 public:
 	/// Use this overload to modify properties via models api
 	ChangePropertyCommand(const graphicsUtils::AbstractScene &scene

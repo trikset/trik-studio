@@ -24,6 +24,7 @@ namespace semantics {
 /// A semantic node for a block of join semantics.
 class ROBOTS_GENERATOR_EXPORT JoinNode : public NonZoneNode
 {
+	Q_OBJECT
 public:
 	explicit JoinNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

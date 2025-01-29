@@ -56,6 +56,7 @@ HEADERS += \
 	$$PWD/robotModel/twoD/parts/twoDObjectSensor.h \
 	$$PWD/robotModel/twoD/parts/twoDColorSensor.h \
 	$$PWD/robotModel/twoD/parts/twoDShell.h \
+	$$PWD/robotModel/twoD/parts/twoDNetworkCommunicator.h \
 	$$PWD/robotModel/real/trikV62RealRobotModel.h \
 	$$PWD/robotModel/twoD/trikV62TwoDRobotModel.h \
 	$$PWD/trikV62AdditionalPreferences.h \
@@ -93,6 +94,7 @@ SOURCES += \
 	$$PWD/robotModel/twoD/parts/twoDColorSensor.cpp \
 	$$PWD/robotModel/twoD/parts/twoDLed.cpp \
 	$$PWD/robotModel/twoD/parts/twoDShell.cpp \
+	$$PWD/robotModel/twoD/parts/twoDNetworkCommunicator.cpp \
 	$$PWD/trikV62AdditionalPreferences.cpp \
 	$$PWD/trikV62DisplayWidget.cpp \
 	$$PWD/trikV62KitInterpreterPlugin.cpp \

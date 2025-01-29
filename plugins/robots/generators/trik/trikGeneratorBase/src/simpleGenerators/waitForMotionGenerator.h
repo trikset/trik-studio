@@ -22,6 +22,7 @@ namespace simple {
 /// Generator for 'WaitForMotion' block
 class WaitForMotionGenerator : public BindingGenerator
 {
+	Q_OBJECT
 public:
 	WaitForMotionGenerator(const qrRepo::RepoApi &repo
 			, GeneratorCustomizer &customizer

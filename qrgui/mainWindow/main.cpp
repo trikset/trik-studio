@@ -43,7 +43,7 @@ static void loadTranslators(QLocale &locale)
 {
 	/// Load Qt's system translations before application translations
 	static const QStringList qtModules {"qtbase", "qtmultimedia", "qtserialport", "qtxmlpatterns", "qtscript" };
-	static const auto qtAppsTranslationsDir = QLibraryInfo::location(QLibraryInfo::LibraryLocation::TranslationsPath);
+	static const auto qtAppsTranslationsDir = PlatformInfo::invariantSettingsPath("pathToTranslations");
 
 	for (auto &&module: qtModules) {
 		auto *t = new QTranslator(qApp);

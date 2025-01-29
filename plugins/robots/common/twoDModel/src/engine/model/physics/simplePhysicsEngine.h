@@ -23,6 +23,7 @@ namespace physics {
 /// An implementation of 2D model physical engine without any realistic effects
 class SimplePhysicsEngine : public PhysicsEngineBase
 {
+	Q_OBJECT
 public:
 	SimplePhysicsEngine(const WorldModel &worldModel, const QList<RobotModel *> &robots);
 

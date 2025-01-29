@@ -23,13 +23,17 @@
 #include <qrutils/widgets/consoleDock.h>
 #include <kitBase/robotModel/robotParts/shell.h>
 #include <kitBase/robotModel/robotModelUtils.h>
-
+#include <qrkernel/logging.h>
 #include <twoDModel/engine/model/model.h>
 #include <twoDModel/engine/model/timeline.h>
 
 using namespace twoDModel;
 
-Runner::Runner(const QString &report, const QString &trajectory)
+Runner::Runner(const QString &report, const QString &trajectory,
+	       const QString &input, const QString &mode, const QString &qrsFile):
+	mInputsFile(input)
+	, mMode(mode)
+	, mSaveFile(qrsFile)
 {
 	mQRealFacade.reset(new qReal::SystemFacade());
 	mProjectManager.reset(new qReal::ProjectManager(mQRealFacade->models()));
@@ -39,7 +43,7 @@ Runner::Runner(const QString &report, const QString &trajectory)
 
 	mController.reset(new qReal::Controller());
 	mSceneCustomizer.reset(new qReal::gui::editor::SceneCustomizer());
-	mTextManager.reset(new qReal::NullTextManager());
+	mTextManager.reset(new qReal::text::TextManager(mQRealFacade->events(), *mMainWindow));
 	mConfigurator.reset(new qReal::PluginConfigurator(mQRealFacade->models().repoControlApi()
 							 , mQRealFacade->models().graphicalModelAssistApi()
 							 , mQRealFacade->models().logicalModelAssistApi()
@@ -61,14 +65,17 @@ Runner::Runner(const QString &report, const QString &trajectory)
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::errorAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::criticalAdded, &*mReporter, &Reporter::addError);
 	connect(&*mErrorReporter, &qReal::ConsoleErrorReporter::logAdded, &*mReporter, &Reporter::addLog);
-}
 
-Runner::Runner(const QString &report, const QString &trajectory, const QString &input, const QString &mode)
-	: Runner(report, trajectory)
-
-{
-	mInputsFile = input;
-	mMode = mode;
+	/* 
+	HACK: Upon initialization of the EV3 kit plugin, a subscription to the sensorAdded event in the Box2DPhysicsEngine 
+	is registered with a delay using QTimerSingleShot(10). While this does not pose an issue when 
+	utilizing TRIK Studio, it becomes problematic when using the 2D-model projectManager->open function, 
+	as the subscription is established too late. As a consequence, the sensors are not properly processed by Box2D.
+	*/
+	QEventLoop loop;
+	QTimer::singleShot(10, &loop, &QEventLoop::quit);
+	loop.exec();
+	mProjectManager->open(mSaveFile);
 }
 
 Runner::~Runner()
@@ -87,14 +94,38 @@ Runner::~Runner()
 	mQRealFacade.reset();
 }
 
-bool Runner::interpret(const QString &saveFile, const bool background
-					   , const int customSpeedFactor, bool closeOnFinish
-					   , const bool closeOnSuccess, const bool showConsole)
+bool Runner::generate(const QString &generatePath, const QString &generateMode)
 {
-	if (!mProjectManager->open(saveFile)) {
-		return false;
+	for (auto&& action: mPluginFacade->actionsManager().actions()){
+		if (generateMode == "python") {
+			if (action.action()->objectName() == "generatePythonTrikCode") {
+				emit action.action()->triggered();
+			}
+		}
+		if (generateMode == "javascript") {
+			if (action.action()->objectName() == "generateTRIKCode") {
+				emit action.action()->triggered();
+			}
+		}
 	}
 
+	auto codes = mTextManager->code(mMainWindow->activeDiagram());
+	if (codes.empty()) {
+		// The application has already logged a
+		// description of the problem that prevented script generation.
+		return false;
+	}
+	auto path = mTextManager->path(codes.first());
+	if (!QFile::copy(path, generatePath)) {
+		QLOG_ERROR() << "File with name " << generatePath << " already exist";
+		return false;
+	}
+	return true;
+}
+
+bool Runner::interpret(const bool background, const int customSpeedFactor, bool closeOnFinish
+			, const bool closeOnSuccess, const bool showConsole, const QString &filePath)
+{
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
 	QList<view::TwoDModelWidget *> twoDModelWindows;
@@ -110,7 +141,7 @@ bool Runner::interpret(const QString &saveFile, const bool background
 
 	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
 			, this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
-		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finised))
+		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finished))
 			QTimer::singleShot(0, this, &Runner::close);
 	});
 
@@ -143,7 +174,7 @@ bool Runner::interpret(const QString &saveFile, const bool background
 
 	mReporter->onInterpretationStart();
 	if (mMode == "script") {
-		return mPluginFacade->interpretCode(mInputsFile);
+		return mPluginFacade->interpretCode(mInputsFile, filePath);
 	} else if (mMode == "diagram") {
 		mPluginFacade->actionsManager().runAction().trigger();
 	}

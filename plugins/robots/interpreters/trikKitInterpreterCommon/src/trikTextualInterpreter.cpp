@@ -36,10 +36,10 @@ const QString jsOverrides = "Date.now = script.time;";
 
 trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model
+		, trikNetwork::MailboxInterface *mailbox
 		, bool enablePython)
 	: mBrick(model)
-	, mMailbox(qReal::SettingsManager::value("TRIK2DMailbox", "").toBool()
-			   ? trikNetwork::MailboxFactory::create(8889): nullptr)
+	, mMailbox(mailbox)
 	, mScriptRunner(mBrick, mMailbox, new TwoDExecutionControl(mBrick, model))
 {
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
@@ -73,13 +73,6 @@ trik::TrikTextualInterpreter::~TrikTextualInterpreter()
 	abort();
 }
 
-void trik::TrikTextualInterpreter::setMailboxHullNumber()
-{
-	if (mMailbox) {
-		mMailbox->setHullNumber(qReal::SettingsManager::value("TRIK2DHullNumber", "999").toInt());
-	}
-}
-
 void trik::TrikTextualInterpreter::interpretCommand(const QString &script)
 {
 	mScriptRunner.runDirectCommand(script);
@@ -105,10 +98,9 @@ void trik::TrikTextualInterpreter::interpretScriptExercise(const QString &script
 	mBrick.processSensors(true);
 	mBrick.setCurrentInputs(inputs);
 	if (languageExtension.contains("js")) {
-		mScriptRunner.run(jsOverrides + "script.writeToFile = null;\n" + script);
+		mScriptRunner.run(jsOverrides + script);
 	} else if (languageExtension.contains("py")) {
-		auto updatedScript = script;
-		mScriptRunner.run(updatedScript.insert(0, "\nscript.writeToFile = None\n"), "dummyFile.py");
+		mScriptRunner.run(script, "dummyFile.py");
 	} else {
 		reportError(tr("Unsupported script file type"));
 	}

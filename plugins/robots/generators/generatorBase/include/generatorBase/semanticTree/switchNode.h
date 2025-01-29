@@ -24,6 +24,7 @@ namespace semantics {
 /// A semantic node for the block with 'switch' semantics
 class ROBOTS_GENERATOR_EXPORT SwitchNode : public NonZoneNode
 {
+	Q_OBJECT
 public:
 	explicit SwitchNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 

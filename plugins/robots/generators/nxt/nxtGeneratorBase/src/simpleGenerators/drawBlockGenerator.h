@@ -25,6 +25,7 @@ namespace simple {
 /// A base for all generators for drawing blocks in NXT kit.
 class DrawBlockGenerator : public generatorBase::simple::BindingGenerator
 {
+	Q_OBJECT
 public:
 	DrawBlockGenerator(const qrRepo::RepoApi &repo
 			, generatorBase::GeneratorCustomizer &customizer

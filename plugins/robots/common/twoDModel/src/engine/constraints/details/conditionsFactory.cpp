@@ -26,11 +26,9 @@ using namespace twoDModel::constraints::details;
 using namespace kitBase;
 
 ConditionsFactory::ConditionsFactory(Events &events
-		, const Variables &variables
 		, const Objects &objects
 		, StatusReporter &status)
 	: mEvents(events)
-	, mVariables(variables)
 	, mObjects(objects)
 	, mStatus(status)
 {

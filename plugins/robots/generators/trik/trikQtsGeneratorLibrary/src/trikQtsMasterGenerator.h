@@ -22,6 +22,7 @@ namespace qts {
 /// Master generator implementation for generator into QtScript for TRIK platform
 class TrikQtsMasterGenerator : public TrikMasterGeneratorBase
 {
+	Q_OBJECT
 public:
 	TrikQtsMasterGenerator(const qrRepo::RepoApi &repo
 			, qReal::ErrorReporterInterface &errorReporter
