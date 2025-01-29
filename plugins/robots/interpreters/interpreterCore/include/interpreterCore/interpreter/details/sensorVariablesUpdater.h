@@ -55,8 +55,8 @@ public slots:
 
 private slots:
 	void onTimerTimeout();
-	void onScalarSensorResponse(int reading);
-	void onVectorSensorResponse(const QVector<int> &reading);
+	void onScalarSensorResponse(const QVariant &reading);
+	void onVectorSensorResponse(const QVariant &reading);
 	void onFailure();
 
 private:

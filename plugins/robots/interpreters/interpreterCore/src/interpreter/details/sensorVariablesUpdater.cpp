@@ -37,7 +37,9 @@ SensorVariablesUpdater::~SensorVariablesUpdater()
 void SensorVariablesUpdater::run()
 {
 	mUpdateTimer.reset(mRobotModelManager.model().timeline().produceTimer());
-	connect(mUpdateTimer.data(), &utils::AbstractTimer::timeout, this, &SensorVariablesUpdater::onTimerTimeout);
+	connect(mUpdateTimer.data(), &utils::AbstractTimer::timeout
+			,this, &SensorVariablesUpdater::onTimerTimeout
+			,Qt::QueuedConnection);
 	resetVariables();
 
 	for (robotParts::Device * const device : mRobotModelManager.model().configuration().devices()) {
@@ -49,14 +51,12 @@ void SensorVariablesUpdater::run()
 				continue;
 			}
 
-			using namespace std::placeholders;
 			connect(
 					scalarSensor
 					, &robotParts::ScalarSensor::newData
 					, this
-					, std::bind(&SensorVariablesUpdater::onScalarSensorResponse, this,
-									std::bind(&QVariant::value<int>, _1))
-					, Qt::UniqueConnection
+					, &SensorVariablesUpdater::onScalarSensorResponse
+					, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection)
 					);
 
 			connect(
@@ -64,7 +64,7 @@ void SensorVariablesUpdater::run()
 					, &robotParts::AbstractSensor::failure
 					, this
 					, &SensorVariablesUpdater::onFailure
-					, Qt::UniqueConnection
+					, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection)
 					);
 
 			continue;
@@ -78,14 +78,12 @@ void SensorVariablesUpdater::run()
 				continue;
 			}
 
-			using namespace std::placeholders;
 			connect(
 					vectorSensor
 					, &robotParts::VectorSensor::newData
 					, this
-					, std::bind(&SensorVariablesUpdater::onVectorSensorResponse,
-								this, std::bind(&QVariant::value<QVector<int>>, _1))
-					, Qt::UniqueConnection
+					, &SensorVariablesUpdater::onVectorSensorResponse
+					, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection)
 					);
 
 			connect(
@@ -93,7 +91,7 @@ void SensorVariablesUpdater::run()
 					, &robotParts::AbstractSensor::failure
 					, this
 					, &SensorVariablesUpdater::onFailure
-					, Qt::UniqueConnection
+					, static_cast<Qt::ConnectionType>(Qt::UniqueConnection | Qt::QueuedConnection)
 					);
 
 			continue;
@@ -112,7 +110,7 @@ void SensorVariablesUpdater::suspend()
 	}
 }
 
-void SensorVariablesUpdater::onScalarSensorResponse(int reading)
+void SensorVariablesUpdater::onScalarSensorResponse(const QVariant &reading)
 {
 	robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(sender());
 	if (!scalarSensor) {
@@ -120,10 +118,10 @@ void SensorVariablesUpdater::onScalarSensorResponse(int reading)
 		return;
 	}
 
-	updateScalarSensorVariables(scalarSensor->port(), reading);
+	updateScalarSensorVariables(scalarSensor->port(), reading.toInt());
 }
 
-void SensorVariablesUpdater::onVectorSensorResponse(const QVector<int> &reading)
+void SensorVariablesUpdater::onVectorSensorResponse(const QVariant &reading)
 {
 	robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(sender());
 	if (!vectorSensor) {
@@ -131,7 +129,7 @@ void SensorVariablesUpdater::onVectorSensorResponse(const QVector<int> &reading)
 		return;
 	}
 
-	updateVectorSensorVariables(vectorSensor->port(), reading);
+	updateVectorSensorVariables(vectorSensor->port(), reading.value<QVector<int>>());
 }
 
 void SensorVariablesUpdater::onTimerTimeout()
