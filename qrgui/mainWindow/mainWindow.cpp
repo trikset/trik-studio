@@ -34,6 +34,7 @@
 #include <QtPrintSupport/QPrinter>
 #include <QtPrintSupport/QPrintDialog>
 #include <QtSvg/QSvgGenerator>
+#include <QOperatingSystemVersion>
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
@@ -115,6 +116,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mInitialFileToOpen(fileToOpen)
 {
 	QLOG_INFO() << "MainWindow: screen DPI is" << logicalDpiX();
+	initPalette();
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
 	setWindowTitle("QReal");
@@ -641,6 +643,37 @@ void MainWindow::setReference(const QStringList &data, const QPersistentModelInd
 			setBackReference(index, target);
 		}
 	}
+}
+
+bool MainWindow::windowsDarkThemeAvailiable()
+{
+	if ( QOperatingSystemVersion::current().majorVersion() == 10 )
+	{
+		return QOperatingSystemVersion::current().microVersion() >= 17763;
+	} else {
+		return QOperatingSystemVersion::current().majorVersion() > 10;
+	}
+}
+
+bool MainWindow::windowsIsInDarkTheme()
+{
+	QSettings settings( 
+		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
+		, QSettings::NativeFormat );
+	return settings.value( "AppsUseLightTheme", 1 ).toInt() == 0;
+}
+
+void MainWindow::initPalette() {
+	if (QSysInfo::productType() != "windows") {
+		return;
+	} if (!windowsDarkThemeAvailiable() || !windowsIsInDarkTheme()) {
+		return;
+	}
+	QApplication::setPalette(BrandManager::styles()->loadPalette(
+		QCoreApplication::applicationDirPath() +
+		"/palettes/darkWindowsPalette.ini"
+		)
+	);
 }
 
 void MainWindow::setData(const QString &data, const QPersistentModelIndex &index, const int &role)

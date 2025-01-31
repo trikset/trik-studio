@@ -787,7 +787,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+22"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
         <source>Hand dragging mode</source>
         <translation>Режим таскания сцены</translation>
     </message>
@@ -816,12 +816,12 @@
         <translation type="vanished">Установить фон...</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Clear items</source>
         <translation>Очистить всё</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Clear floor</source>
         <translation>Очистить пол от следов робота</translation>
     </message>
@@ -1018,7 +1018,7 @@
         <translation type="unfinished">Передвинуть стартовое положение робота сюда</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+20"/>
         <source>Marker thickness</source>
         <translation>Толщина маркера</translation>
     </message>
@@ -1071,7 +1071,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+329"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>

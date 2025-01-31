@@ -1254,7 +1254,7 @@ void EditorViewScene::drawBackground(QPainter *painter, const QRectF &rect)
 {
 	if (mNeedDrawGrid) {
 		mWidthOfGrid = SettingsManager::value("GridWidth").toDouble() / 100;
-		painter->setPen(QPen(Qt::black, mWidthOfGrid));
+		painter->setPen(QPen(QApplication::palette().color(QPalette::Text), mWidthOfGrid));
 
 		const int indexGrid = SettingsManager::value("IndexGrid").toInt();
 		mGridDrawer.drawGrid(painter, rect, indexGrid);

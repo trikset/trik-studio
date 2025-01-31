@@ -72,6 +72,9 @@ public:
 	static QStringList getPenStyleList();
 	static QStringList getBrushStyleList();
 
+	static QIcon loadThemedIcon(const QString& path, QColor color);
+	static QIcon loadTextColorIcon(const QString& path);
+
 	QPen pen() const;
 	QBrush brush() const;
 	void setBrush(const QBrush &brush);

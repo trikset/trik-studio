@@ -62,9 +62,10 @@ SearchLineEdit::SearchLineEdit(QWidget *parent, bool borderEnabled)
 void SearchLineEdit::setBorderEnabled(bool enabled)
 {
 	if (enabled) {
-		setStyleSheet("QFrame { background: white; border: 1px solid black; border-radius: 2px; }");
+		setStyleSheet(QString("QFrame { background: %1; border: 1px solid %2; border-radius: 2px; }")
+				.arg(palette().color(QPalette::Light).name(), palette().color(QPalette::Dark).name()));
 	} else {
-		setStyleSheet("QFrame { background: white; }");
+		setStyleSheet(QString("QFrame { background: %1; }").arg(palette().color(QPalette::Light).name()));
 	}
 }
 
