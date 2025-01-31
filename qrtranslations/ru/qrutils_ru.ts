@@ -92,7 +92,7 @@
         <translation>Целичисленное деление на ноль</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+580"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+595"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>

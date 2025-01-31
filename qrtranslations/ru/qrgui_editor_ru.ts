@@ -167,7 +167,7 @@
 <context>
     <name>qReal::gui::editor::EdgeElement</name>
     <message>
-        <location filename="../../qrgui/editor/edgeElement.cpp" line="+61"/>
+        <location filename="../../qrgui/editor/edgeElement.cpp" line="+62"/>
         <source>Reverse</source>
         <translation>Развернуть</translation>
     </message>

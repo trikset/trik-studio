@@ -9,5 +9,6 @@
         <file>startTab/projectsManagementBackground.css</file>
         <file>startTab/recentProjectsBackground.css</file>
         <file>startTab/substrate.css</file>
+        <file>palettes/darkWindowsPalette.ini</file>
     </qresource>
 </RCC>
