@@ -127,8 +127,7 @@ $qRealDir/libtrikqscintilla2.so* \
 $qRealDir/libqrtext.so* .
 
 # Copying TRIKStudio plugins
-rsync -av $qRealDir/libqextserialport.so* \
-$qRealDir/librobots-2d-model.so* \
+rsync -av $qRealDir/librobots-2d-model.so* \
 $qRealDir/librobots-interpreter-core.so* \
 $qRealDir/librobots-trik-kit-interpreter-common.so* \
 $qRealDir/librobots-kit-base.so* \
@@ -136,8 +135,7 @@ $qRealDir/librobots-trik-kit.so* \
 $qRealDir/librobots-utils.so* \
 $qRealDir/libBox2D.so* .
 
-rsync -av $qRealDir/libqextserialport.so* \
-$qRealDir/librobots-ev3-kit.so* \
+rsync -av $qRealDir/librobots-ev3-kit.so* \
 $qRealDir/librobots-utils.so* \
 $qRealDir/librobots-kit-base.so* \
 .

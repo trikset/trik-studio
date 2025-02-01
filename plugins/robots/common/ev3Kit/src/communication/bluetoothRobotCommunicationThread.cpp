@@ -18,9 +18,8 @@
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
 #include <QtCore/QFileInfo>
-
+#include <QtSerialPort/QSerialPort>
 #include <qrkernel/settingsManager.h>
-#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
 
 #include "ev3Kit/communication/commandConstants.h"
 #include "ev3Kit/communication/ev3DirectCommand.h"
@@ -28,6 +27,7 @@
 #include <QsLog.h>
 
 const int keepAliveResponseSize = 5;
+const int readTimeoutMsec = 3000;
 
 using namespace ev3::communication;
 
@@ -68,13 +68,12 @@ bool BluetoothRobotCommunicationThread::connect()
 	}
 
 	const QString portName = qReal::SettingsManager::value("Ev3BluetoothPortName").toString();
-	mPort = new QextSerialPort(portName, QextSerialPort::Polling, this);
-	mPort->setBaudRate(BAUD9600);
-	mPort->setFlowControl(FLOW_OFF);
-	mPort->setParity(PAR_NONE);
-	mPort->setDataBits(DATA_8);
-	mPort->setStopBits(STOP_2);
-	mPort->setTimeout(3000);
+	mPort = new QSerialPort(portName, this);
+	mPort->setBaudRate(QSerialPort::BaudRate::Baud9600);
+	mPort->setFlowControl(QSerialPort::FlowControl::NoFlowControl);
+	mPort->setParity(QSerialPort::Parity::NoParity);
+	mPort->setDataBits(QSerialPort::DataBits::Data8);
+	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
 	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
 
@@ -123,7 +122,10 @@ bool BluetoothRobotCommunicationThread::send1(const QByteArray &buffer) const
 
 QByteArray BluetoothRobotCommunicationThread::receive(int size) const
 {
-	return mPort ? mPort->read(size) : QByteArray();
+	if (!mPort || !mPort->waitForReadyRead(readTimeoutMsec)) {
+		return {};
+	}
+	return mPort->read(size);
 }
 
 void BluetoothRobotCommunicationThread::checkForConnection()

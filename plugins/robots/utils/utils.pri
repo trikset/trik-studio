@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-QT += widgets network
+QT += widgets network serialport
 
-links(qrkernel qrutils qextserialport qrtext)
+links(qrkernel qrutils qrtext)
 includes(qrtext)
 
 DEFINES += ROBOTS_UTILS_LIBRARY

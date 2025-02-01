@@ -13,7 +13,6 @@ rsync -a "$BIN_DIR"/Box2D.dll                                             "$PWD"
 rsync -a "$BIN_DIR"/robots-generator-base.dll                             "$PWD"/../data
 rsync -a "$BIN_DIR"/robots-kit-base.dll                                   "$PWD"/../data
 rsync -a "$BIN_DIR"/robots-utils.dll                                      "$PWD"/../data
-rsync -a "$BIN_DIR/qextserialport.dll"                                    "$PWD/../data/"
 
 
 rsync -a "$QT_LIB/Qt5Network.dll"			"$PWD/../data"

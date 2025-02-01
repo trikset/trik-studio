@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
+#include <QtSerialPort/QSerialPortInfo>
 #include "utils/widgets/comPortPicker.h"
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
-#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialenumerator.h>
 
 using namespace qReal::ui;
 
@@ -33,13 +33,13 @@ ComPortPicker::ComPortPicker(const QString &key, QObject *parent)
 
 void ComPortPicker::populate(QComboBox &box, const QString &settingsKey)
 {
-	const QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
+	auto ports = QSerialPortInfo::availablePorts();
 	const QString defaultPortName = SettingsManager::value(settingsKey).toString();
 	box.clear();
 
-	for (const QextPortInfo &info : ports) {
+	for (auto &&info : ports) {
 		const QRegExp portNameRegexp("COM\\d+", Qt::CaseInsensitive);
-		if (portNameRegexp.indexIn(info.portName) != -1) {
+		if (portNameRegexp.indexIn(info.portName()) != -1) {
 			const QString portName = portNameRegexp.cap();
 			box.addItem(portName);
 		}

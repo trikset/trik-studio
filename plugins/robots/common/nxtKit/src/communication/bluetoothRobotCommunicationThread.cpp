@@ -21,12 +21,12 @@
 #include <ctime>
 
 #include <qrkernel/settingsManager.h>
-#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
-
+#include <QtSerialPort/QSerialPort>
 #include "nxtKit/communication/nxtCommandConstants.h"
 
 const int keepAliveResponseSize = 9;
 const int getFirmwareVersionResponseSize = 9;
+const int readTimeoutMsec = 3000;
 
 using namespace nxt::communication;
 
@@ -71,13 +71,12 @@ bool BluetoothRobotCommunicationThread::connect()
 	}
 
 	const QString portName = qReal::SettingsManager::value("NxtBluetoothPortName").toString();
-	mPort = new QextSerialPort(portName, QextSerialPort::Polling);
-	mPort->setBaudRate(BAUD9600);
-	mPort->setFlowControl(FLOW_OFF);
-	mPort->setParity(PAR_NONE);
-	mPort->setDataBits(DATA_8);
-	mPort->setStopBits(STOP_2);
-	mPort->setTimeout(3000);
+	mPort = new QSerialPort(portName, this);
+	mPort->setBaudRate(QSerialPort::BaudRate::Baud9600);
+	mPort->setFlowControl(QSerialPort::FlowControl::NoFlowControl);
+	mPort->setParity(QSerialPort::Parity::NoParity);
+	mPort->setDataBits(QSerialPort::DataBits::Data8);
+	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
 	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
 
@@ -128,6 +127,9 @@ bool BluetoothRobotCommunicationThread::send(const QByteArray &buffer) const
 
 QByteArray BluetoothRobotCommunicationThread::receive(int size) const
 {
+	if (!mPort || !mPort->waitForReadyRead(readTimeoutMsec)) {
+		return {};
+	}
 	return mPort->read(size);
 }
 
