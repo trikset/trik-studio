@@ -67,7 +67,7 @@
         <translation>Программа уже загружается</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+27"/>
         <source>Uploading program started. Please don&apos;t disconnect robot during the process</source>
         <translation>Начат процесс загрузки программы в робота. Пожалуйста, не отсоединяйте робота, пока процесс не будет завершен</translation>
     </message>
@@ -82,7 +82,12 @@
         <translation>Не удалось загрузить программу в робота. Убедитесь, что робот включен и подсоединен к компьютеру</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+2"/>
+        <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
         <source>Error in reading from firmware file: %1</source>
         <translation>Ошибка чтения из файла с прошивкой %1</translation>
     </message>
@@ -112,12 +117,12 @@
         <translation>Загрузка программы завершена успешно</translation>
     </message>
     <message>
-        <location line="-299"/>
+        <location line="-303"/>
         <source>Compilation error occured. Please check your function blocks syntax. If you sure in their validness contact developers</source>
         <translation>Произошла ошибка компиляции. Проверьте синтаксис выражений внутри блоков &quot;Функция&quot;;. Если Вы уверены в их корректности, обратитесь к разработчикам</translation>
     </message>
     <message>
-        <location line="-176"/>
+        <location line="-186"/>
         <source>Could not open %1 for reading.</source>
         <translation>Не могу открыть файл %1 для чтения.</translation>
     </message>
@@ -147,12 +152,12 @@
         <translation>Прошиваю робота...</translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+106"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
         <translation>Загрузка программы не удалась. Возможно, стоит попробовать перезапустить среду с правами суперпользователя</translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+55"/>
         <source>QReal requires superuser privileges to upload programs on NXT robot</source>
         <translation>Для загрузки программ в робота требуется запустить TRIKStudio с правами администратора</translation>
     </message>
@@ -169,13 +174,13 @@
         <translation>Генерация (C)</translation>
     </message>
     <message>
-        <location line="+52"/>
-        <location line="+129"/>
+        <location line="+57"/>
+        <location line="+131"/>
         <source>NXT tools package is not installed</source>
         <translation>Пакет &quot;Инструменты NXT&quot; не установлен</translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-85"/>
         <source>Generate code</source>
         <translation>Генерировать код</translation>
     </message>
@@ -200,7 +205,7 @@
         <translation>Загрузить программу на устройство NXT</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>flash.sh not found. Make sure it is present in QReal installation directory</source>
         <translation>Не найден скрипт flash.sh. Убедитесь, что пакет nxt-tools установлен корректно</translation>
     </message>

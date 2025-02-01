@@ -17,8 +17,9 @@ rsync -a "$BIN_DIR"/vcruntime*.dll                                              
 rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model.exe,checkapp.exe}                    "$PWD/../data/"
 rsync -a "$QT_LIB"/Qt5SerialPort.dll                                                 "$PWD"/../data
 
-winscp_ver=5.17.10
-putty_ver=0.75
+winscp_ver=6.3.6
+putty_ver=0.82
+
 cache_dir="$(cygpath "$APPDATA")"/"$PRODUCT"/installer_cache
 mkdir -p "$cache_dir"
 cd "$cache_dir"

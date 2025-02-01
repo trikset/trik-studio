@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
-    <height>164</height>
+    <width>401</width>
+    <height>284</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,25 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="qReal::ui::ImagePicker" name="robotImagePicker">
+    <widget class="qReal::ui::ImagePicker" name="robotImagePicker" native="true"/>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="generatorSettingsGroupBox">
+     <property name="title">
+      <string>nxtOSEK Generator Settings</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0">
+       <widget class="QLabel" name="generatorLabel">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="qReal::ui::DirPicker" name="compilerPicker" native="true"/>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
@@ -36,13 +54,6 @@
       <string>Bluetooth Settings</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
-      <item row="1" column="0">
-       <widget class="QLabel" name="comPortLabel">
-        <property name="text">
-         <string>COM Port:</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QComboBox" name="comPortComboBox">
         <property name="sizePolicy">
@@ -52,16 +63,6 @@
          </sizepolicy>
         </property>
        </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="directInputComPortLabel">
-        <property name="text">
-         <string>COM Port:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="directInputComPortLineEdit"/>
       </item>
       <item row="0" column="0" colspan="2">
        <widget class="QLabel" name="noComPortsFoundLabel">
@@ -73,10 +74,27 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="directInputComPortLineEdit"/>
+      </item>
       <item row="3" column="0" colspan="2">
        <widget class="QCheckBox" name="manualComPortCheckbox">
         <property name="text">
          <string>Specify COM port manually</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="comPortLabel">
+        <property name="text">
+         <string>COM Port:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="directInputComPortLabel">
+        <property name="text">
+         <string>COM Port:</string>
         </property>
        </widget>
       </item>
@@ -90,6 +108,12 @@
    <class>qReal::ui::ImagePicker</class>
    <extends>QWidget</extends>
    <header>qrutils/widgets/imagePicker.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qReal::ui::DirPicker</class>
+   <extends>QWidget</extends>
+   <header>qrutils/widgets/dirPicker.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
