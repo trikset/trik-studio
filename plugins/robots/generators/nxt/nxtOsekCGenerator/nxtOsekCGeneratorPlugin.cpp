@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "nxtOsekCGeneratorPlugin.h"
-
 #include <QtCore/QDir>
 #include <QtCore/QDateTime>
 #include <QtWidgets/QApplication>
@@ -22,6 +21,7 @@
 #include <qrkernel/platformInfo.h>
 #include <qrutils/singleton.h>
 
+#include "QsLog.h"
 #include "nxtOsekCMasterGenerator.h"
 
 using namespace nxt::osekC;
@@ -34,9 +34,14 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	, mFlashRobotAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
 	, mNxtToolsPresent(false)
-	, mMasterGenerator(nullptr)
 	, mCommunicator(utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
 {
+	const QString key = "pathToArmNoneEabi";
+	const QString defaultPath = QDir(PlatformInfo::invariantSettingsPath("pathToNxtTools")).absolutePath()
+								+"/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi";
+	if (qReal::SettingsManager::value(key).isNull()) {
+		qReal::SettingsManager::setValue(key, defaultPath);
+	}
 	initActions();
 	initHotKeyActions();
 }
@@ -96,7 +101,6 @@ void NxtOsekCGeneratorPlugin::onCurrentDiagramChanged(const TabInfo &info)
 void NxtOsekCGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configurator)
 {
 	RobotsGeneratorPluginBase::init(configurator);
-
 	mFlashTool.reset(new NxtFlashTool(*mMainWindowInterface->errorReporter(), *mCommunicator));
 	connect(&*mFlashTool, &NxtFlashTool::uploadingComplete, this, &NxtOsekCGeneratorPlugin::onUploadingComplete);
 }
@@ -179,21 +183,24 @@ void NxtOsekCGeneratorPlugin::onUploadingComplete(bool success)
 
 generatorBase::MasterGeneratorBase *NxtOsekCGeneratorPlugin::masterGenerator()
 {
-	mMasterGenerator = new NxtOsekCMasterGenerator(*mRepo
+	return new NxtOsekCMasterGenerator(*mRepo
 			, *mMainWindowInterface->errorReporter()
 			, *mParserErrorReporter
 			, *mRobotModelManager
 			, *mTextLanguage
 			, mMainWindowInterface->activeDiagram()
 			, generatorName());
-	return mMasterGenerator;
 }
 
 void NxtOsekCGeneratorPlugin::regenerateExtraFiles(const QFileInfo &newFileInfo)
 {
-	mMasterGenerator->initialize();
-	mMasterGenerator->setProjectDir(newFileInfo);
-	mMasterGenerator->generateOilAndMakeFiles();
+	// Static cast is possible and correct, but dynamic will be more flexible.
+	if (auto nxtGenerator = qobject_cast<NxtOsekCMasterGenerator*>(masterGenerator())) {
+		QScopedPointer<NxtOsekCMasterGenerator> generator(nxtGenerator);
+		generator->initialize();
+		generator->setProjectDir(newFileInfo);
+		generator->generateOilAndMakeFiles();
+	}
 }
 
 void NxtOsekCGeneratorPlugin::flashRobot()
@@ -223,21 +230,27 @@ void NxtOsekCGeneratorPlugin::uploadProgram()
 void NxtOsekCGeneratorPlugin::checkNxtTools()
 {
 	const QDir dir(PlatformInfo::invariantSettingsPath("pathToNxtTools"));
-	if (!dir.exists()) {
-		mNxtToolsPresent = false;
-	} else {
-		QDir gnuarm(dir.absolutePath() + "/gnuarm/bin");
-		QDir nexttool(dir.absolutePath() + "/nexttool");
-		QDir nxtOSEK(dir.absolutePath() + "/nxtOSEK");
+	auto compilePath = dir.absolutePath() + "/compile.sh";
 
-#ifdef Q_OS_WIN
-		QFile compile1(dir.absolutePath() + "/compile.bat");
-		QFile compile2(dir.absolutePath() + "/compile.sh");
-		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists()
-				&& compile1.exists() && compile2.exists();
-#else
-		QFile compile(dir.absolutePath() + "/compile.sh");
-		mNxtToolsPresent = gnuarm.exists() && nexttool.exists() && nxtOSEK.exists() && compile.exists();
-#endif
+	auto nxtToolsPresent = dir.exists()
+			&& QFileInfo::exists(dir.absolutePath() + "/gnuarm")
+			&& QFileInfo::exists(dir.absolutePath() + "/nexttool")
+			&& QFileInfo::exists(dir.absolutePath() + "/nxtOSEK")
+			&& QFileInfo::exists(compilePath) && QFileInfo(compilePath).isFile();
+
+	if (!nxtToolsPresent) {
+		mNxtToolsPresent  = false;
+		QLOG_ERROR() << "Missing" << dir.absolutePath() << "or mandatory subdirectory" <<
+			dir.entryList(QDir::Filter::NoFilter, QDir::SortFlag::DirsFirst | QDir::SortFlag::Name);
+		return;
+	}
+
+	auto osType = PlatformInfo::osType();
+	if (osType == "linux") {
+		mNxtToolsPresent = true;
+	}
+	else if (osType == "windows") {
+		auto compileBatPath = dir.absolutePath() + "/compile.bat";
+		mNxtToolsPresent = QFileInfo::exists(compileBatPath) && QFileInfo(compileBatPath).isFile();
 	}
 }

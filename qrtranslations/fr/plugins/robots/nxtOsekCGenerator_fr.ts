@@ -67,7 +67,7 @@
         <translation>Le téléversement est deja lancé</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+27"/>
         <source>Uploading program started. Please don&apos;t disconnect robot during the process</source>
         <translation>Le téléversement du programme est commencé. S&apos;il vous plait, ne déconnectéz pas le robot jusqu&apos;à ce que le processus se termine</translation>
     </message>
@@ -82,7 +82,12 @@
         <translation>Échec de téléversement du programme. Assurez-vous que le robot soit connecté et qu&apos;il ne soit pas éteint</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+2"/>
+        <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
         <source>Error in reading from firmware file: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -112,12 +117,12 @@
         <translation>Téléversement réussi</translation>
     </message>
     <message>
-        <location line="-299"/>
+        <location line="-303"/>
         <source>Compilation error occured. Please check your function blocks syntax. If you sure in their validness contact developers</source>
         <translation>Une erreur de compilation s&apos;est produite. Vérifiez le syntaxe à l&apos;intérieur des blocs &quot;fonction&quot;. S&apos;ils sont valides, contactez les developpeurs</translation>
     </message>
     <message>
-        <location line="-176"/>
+        <location line="-186"/>
         <source>Could not open %1 for reading.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -147,12 +152,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+106"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+55"/>
         <source>QReal requires superuser privileges to upload programs on NXT robot</source>
         <translation>QReal necessite les droits de superutilisateur pour mettre à jour le programme du robot NXT</translation>
     </message>
@@ -165,13 +170,13 @@
         <translation>Génération (NXT OSEK C)</translation>
     </message>
     <message>
-        <location line="+52"/>
-        <location line="+129"/>
+        <location line="+57"/>
+        <location line="+131"/>
         <source>NXT tools package is not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-82"/>
+        <location line="-85"/>
         <source>Generate code</source>
         <translation>Générer le code</translation>
     </message>
@@ -196,7 +201,7 @@
         <translation>Téléverser le programme sur le dispositif NXT</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+53"/>
         <source>flash.sh not found. Make sure it is present in QReal installation directory</source>
         <translation>flash.sh n&apos;est pas trouvé. Assurez-vous qu&apos;il soit présent dans le repertoire de  QReal</translation>
     </message>
