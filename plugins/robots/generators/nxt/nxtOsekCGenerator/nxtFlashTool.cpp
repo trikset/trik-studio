@@ -222,15 +222,25 @@ bool NxtFlashTool::uploadProgram(const QFileInfo &fileInfo)
 	mCompileState = idle;
 	mSource = fileInfo;
 
-#ifdef Q_OS_WIN
 	mCompileProcess.setWorkingDirectory(path());
-	mCompileProcess.start("cmd", { "/c", path("compile.bat")
-			+ " " + fileInfo.completeBaseName()
-			+ " " + fileInfo.absolutePath() });
-#else
-	mCompileProcess.start("sh", { path("compile.sh") , fileInfo.absolutePath()});
-#endif
 
+	auto osType = PlatformInfo::osType();
+	if (osType == "windows") {
+		auto line = path("compile.bat")
+			+ " " + fileInfo.completeBaseName()
+			+ " " + fileInfo.absolutePath()
+			+ " " + path("gnuarm");
+		mCompileProcess.start("cmd", { "/c", line});
+	}
+	else if (osType == "linux") {
+		auto line = "./compile.sh . " + fileInfo.absolutePath() +
+					" GNUARM_ROOT="+SettingsManager::value("pathToArmNoneEabi").toString();
+		mCompileProcess.start("/bin/bash", {"-c", line});
+	}
+	else {
+		QLOG_INFO() << "Platform: " << osType << "not supported for upload program";
+		return false;
+	}
 	information(tr("Uploading program started. Please don't disconnect robot during the process"));
 	return true;
 }
@@ -291,6 +301,10 @@ void NxtFlashTool::readNxtCompileData()
 						"If you sure in their validness contact developers"));
 			} else {
 				error(tr("Could not upload program. Make sure the robot is connected and ON"));
+				if (PlatformInfo::osType() == "linux") {
+					error(tr("If you are using GNU/Linux visit "
+							 "https://help.trikset.com/nxt/run-upload-programs to get instructions"));
+				}
 			}
 		}
 

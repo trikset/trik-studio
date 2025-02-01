@@ -116,7 +116,7 @@ QsciScintillaBase::QsciScintillaBase(QWidget *parent)
 
     triple_click.setSingleShot(true);
 
-#if DISABLED_BECAUSE_IS_OBSOLETE_AND_CRAHES && ((QT_VERSION >= 0x040200 && QT_VERSION < 0x050000 && defined(Q_OS_MAC)) || (QT_VERSION >= 0x050200 && defined(Q_OS_OSX)))
+#if (DISABLED_BECAUSE_IS_OBSOLETE_AND_CRASHES+0) && ((QT_VERSION >= 0x040200 && QT_VERSION < 0x050000 && defined(Q_OS_MAC)) || (QT_VERSION >= 0x050200 && defined(Q_OS_OSX)))
     initialiseRectangularPasteboardMime();
 #endif
 
