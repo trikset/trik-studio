@@ -22,7 +22,7 @@ includes(plugins/robots/common/kitBase \
 		plugins/robots/interpreters/trikKitInterpreter/src)
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-		robots-utils robots-kit-base robots-2d-model robots-trik-kit qextserialport qslog \
+		robots-utils robots-kit-base robots-2d-model robots-trik-kit qslog \
 		)
 
 HEADERS += \
