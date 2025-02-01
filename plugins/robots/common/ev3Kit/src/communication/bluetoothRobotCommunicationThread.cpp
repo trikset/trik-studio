@@ -73,8 +73,6 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setParity(QSerialPort::Parity::NoParity);
 	mPort->setDataBits(QSerialPort::DataBits::Data8);
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
-	// ??? mPort->setTimeout(3000);
-
 
 	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
 
@@ -122,7 +120,7 @@ bool BluetoothRobotCommunicationThread::send1(const QByteArray &buffer) const
 
 QByteArray BluetoothRobotCommunicationThread::receive(int size) const
 {
-	return mPort ? mPort->read(size) : QByteArray();
+	return mPort && mPort->waitForReadyRead(3000) ? mPort->read(size) : QByteArray();
 }
 
 void BluetoothRobotCommunicationThread::checkForConnection()

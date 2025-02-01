@@ -76,7 +76,6 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setParity(QSerialPort::Parity::NoParity);
 	mPort->setDataBits(QSerialPort::DataBits::Data8);
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
-	// ??? mPort->setTimeout(3000);
 
 	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
 
