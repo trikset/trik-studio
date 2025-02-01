@@ -16,7 +16,8 @@
 
 #include "ev3RobotCommunicationThread.h"
 
-class QextSerialPort;
+#include <QtSerialPort/QSerialPort>
+
 class QTimer;
 
 namespace ev3 {
@@ -49,7 +50,7 @@ private:
 
 	QByteArray receive(int size) const override;
 
-	QextSerialPort *mPort;
+	QScopedPointer<QSerialPort> mPort;
 
 	/// Timer that sends messages to robot to check that connection is still alive
 	QTimer *mKeepAliveTimer;

@@ -16,7 +16,8 @@
 
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>
-#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialenumerator.h>
+
+#include <QtSerialPort/QSerialPortInfo>
 
 using namespace qReal::ui;
 
@@ -33,15 +34,14 @@ ComPortPicker::ComPortPicker(const QString &key, QObject *parent)
 
 void ComPortPicker::populate(QComboBox &box, const QString &settingsKey)
 {
-	const QList<QextPortInfo> ports = QextSerialEnumerator::getPorts();
 	const QString defaultPortName = SettingsManager::value(settingsKey).toString();
 	box.clear();
 
-	for (const QextPortInfo &info : ports) {
-		const QRegExp portNameRegexp("COM\\d+", Qt::CaseInsensitive);
-		if (portNameRegexp.indexIn(info.portName) != -1) {
-			const QString portName = portNameRegexp.cap();
-			box.addItem(portName);
+	for (auto &&info : QSerialPortInfo::availablePorts()) {
+		const static QRegularExpression portNameRegexp("COM\\d+", QRegularExpression::CaseInsensitiveOption);
+		auto m = portNameRegexp.match(info.portName());
+		if (m.hasMatch()) {
+			box.addItem(m.captured());
 		}
 	}
 

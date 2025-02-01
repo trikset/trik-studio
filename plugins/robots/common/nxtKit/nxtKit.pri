@@ -22,7 +22,7 @@ includes(plugins/robots/common/nxtKit \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-                robots-utils robots-kit-base qextserialport )
+		robots-utils robots-kit-base)
 
 PKGCONFIG *= libusb-1.0
 CONFIG += link_pkgconfig

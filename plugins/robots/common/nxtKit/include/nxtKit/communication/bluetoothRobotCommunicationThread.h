@@ -16,7 +16,9 @@
 
 #include <utils/robotCommunication/robotCommunicationThreadInterface.h>
 
-class QextSerialPort;
+#include <QtSerialPort/QSerialPort>
+#include <QtCore/QScopedPointer>
+
 class QTimer;
 
 namespace nxt {
@@ -47,7 +49,7 @@ private:
 	bool send(const QByteArray &buffer) const;
 	QByteArray receive(int size) const;
 
-	QextSerialPort *mPort;
+	QScopedPointer<QSerialPort> mPort;
 
 	/// Timer that sends messages to robot to check that connection is still alive
 	QTimer *mKeepAliveTimer;

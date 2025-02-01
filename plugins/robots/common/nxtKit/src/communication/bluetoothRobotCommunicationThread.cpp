@@ -21,7 +21,6 @@
 #include <ctime>
 
 #include <qrkernel/settingsManager.h>
-#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
 
 #include "nxtKit/communication/nxtCommandConstants.h"
 
@@ -71,13 +70,13 @@ bool BluetoothRobotCommunicationThread::connect()
 	}
 
 	const QString portName = qReal::SettingsManager::value("NxtBluetoothPortName").toString();
-	mPort = new QextSerialPort(portName, QextSerialPort::Polling);
-	mPort->setBaudRate(BAUD9600);
-	mPort->setFlowControl(FLOW_OFF);
-	mPort->setParity(PAR_NONE);
-	mPort->setDataBits(DATA_8);
-	mPort->setStopBits(STOP_2);
-	mPort->setTimeout(3000);
+	mPort.reset(new QSerialPort(portName));
+	mPort->setBaudRate(QSerialPort::BaudRate::Baud9600);
+	mPort->setFlowControl(QSerialPort::FlowControl::NoFlowControl);
+	mPort->setParity(QSerialPort::Parity::NoParity);
+	mPort->setDataBits(QSerialPort::DataBits::Data8);
+	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
+	// ??? mPort->setTimeout(3000);
 
 	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
 
@@ -104,8 +103,7 @@ void BluetoothRobotCommunicationThread::reconnect()
 
 void BluetoothRobotCommunicationThread::disconnect()
 {
-	delete mPort;
-	mPort = nullptr;
+	mPort.reset();
 	emit disconnected();
 }
 
