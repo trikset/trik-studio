@@ -254,6 +254,7 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 		return;
 	}
 
+	emit needRefreshRecentFileList(filePath);
 	area->show();
 
 	// Need to bind diagram and code file only if code is just generated
@@ -289,7 +290,6 @@ bool TextManager::saveText(bool saveAs)
 
 	if (!fileInfo.fileName().isEmpty()) {
 		mMainWindow.setTabText(area, fileInfo.fileName());
-
 		utils::OutFile out(fileInfo.absoluteFilePath());
 
 		out() << area->text();
@@ -304,6 +304,8 @@ bool TextManager::saveText(bool saveAs)
 		if (saveAs && !diagram.isNull()) {
 			emit mSystemEvents.codePathChanged(diagram, path(area), fileInfo);
 		}
+
+		emit needRefreshRecentFileList(fileInfo.absoluteFilePath());
 	}
 
 	return true;

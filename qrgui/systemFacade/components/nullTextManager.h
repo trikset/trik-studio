@@ -46,6 +46,7 @@ public:
 
 	void showInTextEditor(const QFileInfo &fileInfo, const QString &genName
 			, const text::LanguageInfo &language) override;
+
 	void showInTextEditor(const QFileInfo &fileInfo, const text::LanguageInfo &language) override;
 
 	bool saveText(bool saveAs) override;
