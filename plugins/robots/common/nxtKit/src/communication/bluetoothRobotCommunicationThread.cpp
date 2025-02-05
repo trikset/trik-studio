@@ -23,6 +23,7 @@
 #include <qrkernel/settingsManager.h>
 #include <QtSerialPort/QSerialPort>
 #include "nxtKit/communication/nxtCommandConstants.h"
+#include <QsLog.h>
 
 const int keepAliveResponseSize = 9;
 const int getFirmwareVersionResponseSize = 9;
@@ -78,7 +79,13 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setDataBits(QSerialPort::DataBits::Data8);
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
-	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
+	if( !mPort->open(QIODevice::ReadWrite)) {
+		QLOG_INFO() << "Failed to open actual port" << portName
+			    << "with error" << mPort->error()
+			    << "with error string" << mPort->errorString();
+		emit connected(false, tr("Cannot open port ") + portName);
+		return false;
+	}
 
 	// Sending "Get firmware version" system command to check connection.
 	QByteArray command(4, 0);

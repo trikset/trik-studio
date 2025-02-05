@@ -75,7 +75,13 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setDataBits(QSerialPort::DataBits::Data8);
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
-	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
+	if( !mPort->open(QIODevice::ReadWrite)) {
+		QLOG_INFO() << "Failed to open actual port" << portName
+			    << "with error" << mPort->error()
+			    << "with error string" << mPort->errorString();
+		emit connected(false, tr("Cannot open port ") + portName);
+		return false;
+	}
 
 	// Sending "Keep alive" command to check connection.
 	keepAlive();
