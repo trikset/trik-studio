@@ -27,7 +27,7 @@
 #include <QsLog.h>
 
 const int keepAliveResponseSize = 5;
-const int readTimeoutMsec = 3000;
+const int serialPortTimeoutMsec = 3000;
 
 using namespace ev3::communication;
 
@@ -76,7 +76,7 @@ bool BluetoothRobotCommunicationThread::connect()
 	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
 	if( !mPort->open(QIODevice::ReadWrite)) {
-		QLOG_INFO() << "Failed to open actual port" << portName
+		QLOG_ERROR() << "Failed to open actual port" << portName
 			    << "with error" << mPort->error()
 			    << "with error string" << mPort->errorString();
 		emit connected(false, tr("Cannot open port ") + portName);
@@ -123,12 +123,12 @@ bool BluetoothRobotCommunicationThread::send(const QByteArray &buffer, int respo
 
 bool BluetoothRobotCommunicationThread::send1(const QByteArray &buffer) const
 {
-	return mPort && (mPort->write(buffer) > 0);
+	return mPort && (mPort->write(buffer) > 0) && mPort->waitForBytesWritten(serialPortTimeoutMsec);
 }
 
 QByteArray BluetoothRobotCommunicationThread::receive(int size) const
 {
-	if (!mPort || !mPort->waitForReadyRead(readTimeoutMsec)) {
+	if (!mPort || !mPort->waitForReadyRead(serialPortTimeoutMsec)) {
 		return {};
 	}
 	return mPort->read(size);
