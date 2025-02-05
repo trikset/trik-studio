@@ -21,12 +21,13 @@
 #include <ctime>
 
 #include <qrkernel/settingsManager.h>
-#include <plugins/robots/thirdparty/qextserialport/qextserialport/src/qextserialport.h>
-
+#include <QtSerialPort/QSerialPort>
 #include "nxtKit/communication/nxtCommandConstants.h"
+#include <QsLog.h>
 
 const int keepAliveResponseSize = 9;
 const int getFirmwareVersionResponseSize = 9;
+const int serialPortTimeoutMsec = 3000;
 
 using namespace nxt::communication;
 
@@ -71,15 +72,20 @@ bool BluetoothRobotCommunicationThread::connect()
 	}
 
 	const QString portName = qReal::SettingsManager::value("NxtBluetoothPortName").toString();
-	mPort = new QextSerialPort(portName, QextSerialPort::Polling);
-	mPort->setBaudRate(BAUD9600);
-	mPort->setFlowControl(FLOW_OFF);
-	mPort->setParity(PAR_NONE);
-	mPort->setDataBits(DATA_8);
-	mPort->setStopBits(STOP_2);
-	mPort->setTimeout(3000);
+	mPort = new QSerialPort(portName, this);
+	mPort->setBaudRate(QSerialPort::BaudRate::Baud9600);
+	mPort->setFlowControl(QSerialPort::FlowControl::NoFlowControl);
+	mPort->setParity(QSerialPort::Parity::NoParity);
+	mPort->setDataBits(QSerialPort::DataBits::Data8);
+	mPort->setStopBits(QSerialPort::StopBits::TwoStop);
 
-	mPort->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
+	if( !mPort->open(QIODevice::ReadWrite)) {
+		QLOG_ERROR() << "Failed to open actual port" << portName
+			    << "with error" << mPort->error()
+			    << "with error string" << mPort->errorString();
+		emit connected(false, tr("Cannot open port ") + portName);
+		return false;
+	}
 
 	// Sending "Get firmware version" system command to check connection.
 	QByteArray command(4, 0);
@@ -123,11 +129,14 @@ bool BluetoothRobotCommunicationThread::send(const QByteArray &buffer, int respo
 
 bool BluetoothRobotCommunicationThread::send(const QByteArray &buffer) const
 {
-	return mPort->write(buffer) > 0;
+	return mPort && (mPort->write(buffer) > 0) && mPort->waitForBytesWritten(serialPortTimeoutMsec);
 }
 
 QByteArray BluetoothRobotCommunicationThread::receive(int size) const
 {
+	if (!mPort || !mPort->waitForReadyRead(serialPortTimeoutMsec)) {
+		return {};
+	}
 	return mPort->read(size);
 }
 

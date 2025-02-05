@@ -20,7 +20,6 @@ rsync -a "$BIN_DIR"/libBox2D.so*                                            "$PW
 rsync -a "$BIN_DIR"/librobots-generator-base.so*                            "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/librobots-kit-base.so*                                  "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/librobots-utils.so*                                     "$PWD"/../data/lib/
-rsync -a "$BIN_DIR"/libqextserialport.so*                                 "$PWD/../data/lib"
 rsync -a --remove-source-files "$PWD"/../data/externalToolsConfig/                                 "$PWD"/../data/bin/externalToolsConfig/
 rsync -a "$BIN_DIR/run_maze_generator.sh"                                 "$PWD/../data/bin/"
 

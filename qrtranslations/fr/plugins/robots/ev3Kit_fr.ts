@@ -20,6 +20,14 @@
     </message>
 </context>
 <context>
+    <name>ev3::communication::BluetoothRobotCommunicationThread</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/bluetoothRobotCommunicationThread.cpp" line="+82"/>
+        <source>Cannot open port </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ev3::communication::Ev3RobotCommunicationThread</name>
     <message>
         <location filename="../../../../plugins/robots/common/ev3Kit/src/communication/ev3RobotCommunicationThread.cpp" line="+55"/>

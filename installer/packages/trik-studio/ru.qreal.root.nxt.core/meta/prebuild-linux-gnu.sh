@@ -12,7 +12,6 @@ rsync -a "$BIN_DIR"/plugins/tools/kitPlugins/librobots-nxt-interpreter.so       
 rsync -a "$BIN_DIR"/plugins/tools/kitPlugins/librobots-nxt-osek-c-generator.so       "$PWD"/../data/lib/plugins/tools/kitPlugins/
 rsync -a "$BIN_DIR"/librobots-nxt-generator-base.so*                                 "$PWD"/../data/lib
 rsync -a "$BIN_DIR"/librobots-nxt-kit.so*                                            "$PWD"/../data/lib
-rsync -a "$BIN_DIR"/libqextserialport.so*                                            "$PWD"/../data/lib
 
 # Cleaning up prebuild-common.sh results...
 rm -rf "$PWD"/../data/plugins

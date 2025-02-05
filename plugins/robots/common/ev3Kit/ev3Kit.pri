@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-QT += widgets
+QT += widgets serialport
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-		robots-utils robots-kit-base robots-2d-model qextserialport \
-		)
+                robots-utils robots-kit-base robots-2d-model)
 
 includes(plugins/robots/common/ev3Kit \
 		plugins/robots/common/kitBase \

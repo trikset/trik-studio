@@ -23,7 +23,7 @@ includes(plugins/robots/common/kitBase \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-                robots-utils robots-kit-base robots-ev3-kit robots-2d-model qextserialport)
+                robots-utils robots-kit-base robots-ev3-kit robots-2d-model)
 
 win32: QMAKE_CXXFLAGS += -Wno-error=pedantic
 

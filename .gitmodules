@@ -30,6 +30,3 @@
 [submodule "trik-checkapp"]
 	path = thirdparty/checkapp/checkapp
 	url = https://github.com/trikset/trik-checkapp
-[submodule "plugins/robots/thirdparty/qextserialport/qextserialport"]
-	path = plugins/robots/thirdparty/qextserialport/qextserialport
-	url = https://github.com/qextserialport/qextserialport

@@ -13,7 +13,6 @@ rsync -a   "$BIN_DIR"/plugins/tools/kitPlugins/librobots-ev3-interpreter.dylib  
 rsync -a   "$BIN_DIR"/plugins/tools/kitPlugins/librobots-ev3-rbf-generator.dylib "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/"
 rsync -a "$BIN_DIR"/librobots-ev3-kit*.dylib                                   "$BUNDLE_CONTENTS/Lib/"
 rsync -a "$BIN_DIR"/librobots-ev3-generator-base*.dylib                        "$BUNDLE_CONTENTS/Lib/"
-rsync -a "$BIN_DIR"/libqextserialport*.dylib                                   "$BUNDLE_CONTENTS/Lib/"
 rsync -a "$BIN_DIR"/libusb-1.*.dylib                                           "$BUNDLE_CONTENTS/Lib/"
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/editors/libev3Metamodel.dylib"
@@ -21,7 +20,6 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins/librobots-
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/plugins/tools/kitplugins/librobots-ev3-rbf-generator.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-ev3-kit.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/librobots-ev3-generator-base.1.0.0.dylib"
-fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libqextserialport.1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.0.dylib"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libusb-1.0.dylib"
 

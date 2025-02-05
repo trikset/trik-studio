@@ -5,8 +5,6 @@ This software may use following third-party components:
 * QtPropertyBrowser by Digia Plc, licensed under BSD License. Copy of this license can be found in installer/licenses/QtPropertyBrowser-license.txt.
 * QsKineticScroller by Razvan Petru, licensed under BSD License. Copy of this license can be found in installer/licenses/QsKineticScroller-license.txt.
 * WindowsModernStyle by Michał Męciński, licensed under BSD License. Copy of this license can be found in installer/licenses/WindowsModernStyle-license.txt.
-* QextSerialPort, by Wayne Roth, Stefan Sander, Michal Policht, Brandon Fosdick, Liam Staskawicz, Debao Zhang. 
-  It is licensed under MIT License. Copy of this license can be found in installer/licenses/QextSerialPort-license.txt.
 
 It also uses Pfennig font by Daniel Johnson, licensed under SIL Open Font License (OFL). Copy of this license can be found in installer/licenses/OFL.txt.
 
