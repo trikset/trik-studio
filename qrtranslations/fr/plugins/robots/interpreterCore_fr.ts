@@ -163,7 +163,7 @@
         <translation type="vanished">Conflit de configuration des capteurs, verifiez que les ports des capteurs soient utilisés de manière consistente dans le programme</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+30"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
         <source>Run</source>
         <translation>Executer</translation>
     </message>
@@ -188,17 +188,17 @@
         <translation>Enregistrer comme une tache...</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Debug</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+71"/>
         <source>Switch to debug mode</source>
         <translation>Passer en mode de débogage</translation>
     </message>

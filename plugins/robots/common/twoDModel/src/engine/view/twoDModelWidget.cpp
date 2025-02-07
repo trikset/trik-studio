@@ -223,6 +223,12 @@ void TwoDModelWidget::initWidget()
 	};
 	toggleRulers();
 
+	mUi->speedUpButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_plus.svg"));
+	mUi->speedDownButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_minus.svg"));
+	mUi->initialStateButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_robot_back.png"));
+	mUi->trainingModeButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_training.svg"));
+	mUi->toggleDetailsButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_left.png"));
+
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, &*mScene, [&]() { mScene->update(); });
 	connect(mUi->gridParametersBox, &GridParameters::parametersChanged, this, toggleRulers);

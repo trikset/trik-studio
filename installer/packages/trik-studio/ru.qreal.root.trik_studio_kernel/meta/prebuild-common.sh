@@ -10,5 +10,6 @@ mkdir -p "$PWD"/../data/plugins/editors
 mkdir -p "$PWD"/../data/plugins/tools
 rsync -a  "$BIN_DIR"/help                                                    "$PWD"/../data
 rsync -a  "$BIN_DIR"/images                                                  "$PWD"/../data
+rsync -a  "$BIN_DIR"/palettes                                                "$PWD"/../data
 rsync -a  "$BIN_DIR"/externalToolsConfig                                     "$PWD"/../data
 rsync -a "$BIN_DIR"/splashscreen.png                                        "$PWD"/../data
