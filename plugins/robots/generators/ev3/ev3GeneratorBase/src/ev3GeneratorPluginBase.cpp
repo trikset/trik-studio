@@ -28,10 +28,10 @@ Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, cons
 		, const QString &bluetoothRobotFriendlyName, int bluetoothPriority)
 	: mUsbRobotModel(new robotModel::Ev3GeneratorRobotModel(kitId(), "ev3UsbGeneratorRobot"
 			, usbRobotName, usbRobotFriendlyName, usbPriority
-			, utils::Singleton<communication::UsbRobotCommunicationThread>::instance()))
+			, utils::Singleton::instance<communication::UsbRobotCommunicationThread>()))
 	, mBluetoothRobotModel(new robotModel::Ev3GeneratorRobotModel(kitId(), "ev3BluetoothGeneratorRobot"
 			, bluetoothRobotName, bluetoothRobotFriendlyName, bluetoothPriority
-			, utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance()))
+			, utils::Singleton::instance<communication::BluetoothRobotCommunicationThread>()))
 	, mBlocksFactory(new blocks::Ev3BlocksFactory({}))
 {
 }

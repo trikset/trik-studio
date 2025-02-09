@@ -34,14 +34,14 @@ Image::~Image() = default;
 
 Image::Image(const QString &id)
 	: mImageId(id)
-	, mImagesCache(utils::ImagesCache::instance())
+	, mImagesCache(utils::ImagesCache::instance<utils::ImagesCache>())
 {
 }
 
 Image::Image(const QString &path, bool memorize)
 	: mExternal(!memorize)
 	, mImageId(QUuid::createUuid().toString())
-	, mImagesCache(utils::ImagesCache::instance())
+	, mImagesCache(utils::ImagesCache::instance<utils::ImagesCache>())
 {
 	loadFrom(path);
 }
