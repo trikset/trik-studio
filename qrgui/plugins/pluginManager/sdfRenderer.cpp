@@ -33,7 +33,7 @@ using namespace qReal;
 
 SdfRenderer::SdfRenderer()
 	: mWorkingDirName (SettingsManager::value("workingDir").toString())
-	, mImagesCache(utils::ImagesCache::instance())
+	, mImagesCache(utils::ImagesCache::instance<utils::ImagesCache>())
 {
 }
 

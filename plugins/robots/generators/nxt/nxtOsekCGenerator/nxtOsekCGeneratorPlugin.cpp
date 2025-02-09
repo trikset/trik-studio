@@ -34,7 +34,7 @@ NxtOsekCGeneratorPlugin::NxtOsekCGeneratorPlugin()
 	, mFlashRobotAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
 	, mNxtToolsPresent(false)
-	, mCommunicator(utils::Singleton<communication::UsbRobotCommunicationThread>::instance())
+	, mCommunicator(utils::Singleton::instance<communication::UsbRobotCommunicationThread>())
 {
 	const QString key = "pathToArmNoneEabi";
 	const QString defaultPath = QDir(PlatformInfo::invariantSettingsPath("pathToNxtTools")).absolutePath()

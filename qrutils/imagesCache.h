@@ -26,8 +26,9 @@ namespace utils {
 
 /// Cache for images that contains them pre-loaded and parsed and is able to quickly draw it on a painter.
 /// Pixmaps and svg images are contained separately as they are rendered differently.
-class QRUTILS_EXPORT ImagesCache: public utils::Singleton<ImagesCache>
+class QRUTILS_EXPORT ImagesCache: public utils::Singleton
 {
+	Q_OBJECT
 public:
 	~ImagesCache() = default;
 
@@ -42,7 +43,7 @@ public:
 	void drawImageWithoutCachingSize(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom);
 
 private:
-	friend utils::Singleton<ImagesCache>;
+	friend utils::Singleton;
 	ImagesCache() = default;
 
 	/// Selects "best available" image file, using following rules:
