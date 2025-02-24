@@ -30,6 +30,7 @@ ActionsBox::ActionsBox(QObject *parent)
 	, mDeleteAllAction(new QAction(QIcon(":/icons/2d_clear.png"), tr("Clear items"), this))
 	, mClearFloorAction(new QAction(QIcon(":/icons/2d_clear_floor.svg"), tr("Clear floor"), this))
 {
+	mLoadWorldModelAction->setShortcut(Qt::CTRL + Qt::Key_I);
 	mScrollHandModeAction->setCheckable(true);
 	mMultiSelectionModeAction->setCheckable(true);
 	mSceneModeActions.addAction(mScrollHandModeAction.data());
