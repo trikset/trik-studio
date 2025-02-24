@@ -107,6 +107,12 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 				emit action.action()->triggered();
 			}
 		}
+		if (generateMode == "nxt") {
+			qDebug() << action.action()->objectName();
+			if (action.action()->objectName() == "generateCode") {
+				emit action.action()->triggered();
+			}
+		}
 	}
 
 	auto codes = mTextManager->code(mMainWindow->activeDiagram());
