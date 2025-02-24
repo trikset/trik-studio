@@ -37,12 +37,20 @@ RobotCommunicator::~RobotCommunicator()
 
 void RobotCommunicator::send(QObject *addressee, const QByteArray &buffer, const unsigned responseSize)
 {
-	mRobotCommunicationThreadObject->send(addressee, buffer, responseSize);
+	auto blockingConnectionType = mRobotCommunicationThreadObject->thread() == QThread::currentThread()
+			? Qt::DirectConnection : Qt::BlockingQueuedConnection;
+	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), [&](){
+		mRobotCommunicationThreadObject->send(addressee, buffer, responseSize);},
+	blockingConnectionType);
 }
 
 void RobotCommunicator::send(const QByteArray &buffer, const unsigned responseSize, QByteArray &outputBuffer)
 {
-	mRobotCommunicationThreadObject->send(buffer, responseSize, outputBuffer);
+	auto blockingConnectionType = mRobotCommunicationThreadObject->thread() == QThread::currentThread()
+			? Qt::DirectConnection : Qt::BlockingQueuedConnection;
+	QMetaObject::invokeMethod(mRobotCommunicationThreadObject.get(), [&](){
+		mRobotCommunicationThreadObject->send(buffer, responseSize, outputBuffer);},
+	blockingConnectionType);
 }
 
 void RobotCommunicator::connect()
