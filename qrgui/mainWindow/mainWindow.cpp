@@ -647,7 +647,7 @@ void MainWindow::setReference(const QStringList &data, const QPersistentModelInd
 
 bool MainWindow::windowsDarkThemeAvailiable()
 {
-	if ( QOperatingSystemVersion::current().majorVersion() == 10 )
+	if (QOperatingSystemVersion::current().majorVersion() == 10)
 	{
 		return QOperatingSystemVersion::current().microVersion() >= 17763;
 	}
@@ -658,20 +658,20 @@ bool MainWindow::windowsIsInDarkTheme()
 {
 	QSettings settings( 
 		"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"
-		, QSettings::NativeFormat );
-	return settings.value( "AppsUseLightTheme", 1 ).toInt() == 0;
+		, QSettings::NativeFormat);
+	return settings.value("AppsUseLightTheme", 1).toInt() == 0;
 }
 
 void MainWindow::initPalette() {
 	if (QSysInfo::productType() != "windows") {
 		return;
-	} if (!windowsDarkThemeAvailiable() || !windowsIsInDarkTheme()) {
+	}
+	if (!windowsDarkThemeAvailiable() || !windowsIsInDarkTheme()) {
 		return;
 	}
 	QApplication::setPalette(BrandManager::styles()->loadPalette(
 		QCoreApplication::applicationDirPath() +
-		"/palettes/darkWindowsPalette.ini"
-		)
+		"/palettes/darkWindowsPalette.ini")
 	);
 }
 
