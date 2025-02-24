@@ -28,8 +28,9 @@ namespace utils {
 /// Pixmaps and svg images are contained separately as they are rendered differently.
 class QRUTILS_EXPORT ImagesCache: public utils::Singleton<ImagesCache>
 {
+	Q_OBJECT
 public:
-	~ImagesCache() = default;
+	~ImagesCache() override {};
 
 	/// Draws image with given file name with a given painter in given rectangle. Note that actual file, from which
 	/// an image will be loaded may be different from fileName, as described in selectBestImageFile.
