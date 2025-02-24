@@ -47,7 +47,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt-get update && apt-get install -y --no-install-recommends git-core p7zip-full curl sudo
+        apt-get update && apt-get install -y --no-install-recommends git-core p7zip-full curl sudo locales
         sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
       if: contains(inputs.container_name, 'astra')
 
@@ -66,12 +66,15 @@ jobs:
     - name: Install dependencies
       run: HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_AUTO_UPDATE=1 brew install p7zip || brew upgrade p7zip
       if: startsWith(inputs.os, 'mac')
-      
+
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
         submodules: recursive
         fetch-depth: 1
+
+    - name: Set locale
+      run: echo "LANG=C.UTF-8" >> $GITHUB_ENV
 
     - name: Download installer artifact
       uses: actions/download-artifact@v4
