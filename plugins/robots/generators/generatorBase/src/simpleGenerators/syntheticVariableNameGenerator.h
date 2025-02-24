@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
 
 #pragma once
 
-#include "intermediateStructurizatorNode.h"
+#include "generatorBase/simpleGenerators/bindingGenerator.h"
+#include "src/readableLabelManager.h"
 
 namespace generatorBase {
+namespace simple {
 
-class BreakStructurizatorNode : public IntermediateStructurizatorNode
+//class ReadableLabelManager;
+
+class SyntheticVariableNameGenerator : public BindingGenerator
 {
-	Q_OBJECT
-
 public:
-	explicit BreakStructurizatorNode(const qReal::Id &id, QObject *parent);
-
-	Type type() const;
-	qReal::Id firstId() const;
-	bool analyzeBreak();
-
-private:
-	const qReal::Id mId;
+	SyntheticVariableNameGenerator(const qrRepo::RepoApi &repo
+			, GeneratorCustomizer &customizer
+			, const qReal::Id &id
+			, ReadableLabelManager &nameManager
+			, QObject *parent);
 };
 
+}
 }
