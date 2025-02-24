@@ -54,6 +54,7 @@ SOURCES += \
 	$$PWD/generator/abstractGenerator.cpp \
 	$$PWD/widgetFinder.cpp \
 	$$PWD/imagesCache.cpp \
+	$$PWD/singleton.cpp \
 
 FORMS += \
 	$$PWD/watchListWindow.ui
