@@ -90,7 +90,6 @@ void PreferencesHotKeyManagerPage::resetShortcuts()
 
 		mCurrentItem->setText("");
 		mUi->shortcutLineEdit->setText("");
-		setTextColor(Qt::black);
 	}
 }
 
@@ -129,7 +128,7 @@ void PreferencesHotKeyManagerPage::loadHotKeys()
 		int j = 0;
 		for (const QString &sequence : sequences) {
 			mUi->hotKeysTable->item(k, 2 + j)->setText(sequence);
-			mUi->hotKeysTable->item(k, 2 + j)->setForeground(Qt::black);
+			mUi->hotKeysTable->item(k, 2 + j)->setForeground(QApplication::palette().color(QPalette::Text));
 
 			if (++j >= maxShortcuts) {
 				break;
@@ -162,20 +161,18 @@ void PreferencesHotKeyManagerPage::activateShortcutLineEdit(const int row, const
 	// Columns with shortcuts start from index 2
 	if (column > 1) {
 		if (mCurrentItem) {
-			mCurrentItem->setBackground(Qt::white);
+			mCurrentItem->setBackground(QApplication::palette().color(QPalette::Base));
 		}
 
 		mCurrentId = mUi->hotKeysTable->item(row, 0)->text();
 		mCurrentItem = mUi->hotKeysTable->item(row, column);
-		mCurrentItem->setBackground(Qt::lightGray);
+		mCurrentItem->setBackground(QApplication::palette().color(QPalette::Highlight));
 
 		mUi->shortcutLineEdit->setText(mCurrentItem->text());
 		mUi->shortcutLineEdit->setEnabled(true);
 
-		setTextColor(mCurrentItem->foreground().color());
-
 		if (HotKeyManager::setShortcut(mCurrentId, mCurrentItem->text())) {
-			setTextColor(Qt::black);
+			setTextColor(QApplication::palette().color(QPalette::Text));
 		}
 	} else {
 		mCurrentId = "";
@@ -194,7 +191,7 @@ void PreferencesHotKeyManagerPage::newKey(const int key)
 	if (!mCurrentId.isEmpty()) {
 		if (mCurrentItem->text().isEmpty()) {
 			if (HotKeyManager::setShortcut(mCurrentId, QKeySequence(mCurrentModifiers + key))) {
-				setTextColor(Qt::black);
+				setTextColor(QApplication::palette().color(QPalette::Text));
 			} else {
 				setTextColor(Qt::red);
 			}
@@ -214,7 +211,7 @@ void PreferencesHotKeyManagerPage::newKey(const int key)
 				}
 
 				if (HotKeyManager::setShortcut(mCurrentId, QKeySequence(shortcut))) {
-					setTextColor(Qt::black);
+					setTextColor(QApplication::palette().color(QPalette::Text));
 					mCurrentItem->setText(shortcut);
 					mUi->shortcutLineEdit->setText(mCurrentItem->text());
 				} else {

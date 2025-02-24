@@ -114,7 +114,7 @@
         <translation>time</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+30"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
         <source>Run</source>
         <translation>Выполнить</translation>
     </message>
@@ -134,17 +134,17 @@
         <translation>Сохранить как упражнение...</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Debug</source>
         <translation>Отладка</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Edit</source>
         <translation>Редактор</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+71"/>
         <source>Switch to debug mode</source>
         <translation>Переключиться в режим отладки</translation>
     </message>
@@ -164,7 +164,7 @@
         <translation>Остановить интерпретацию</translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="-81"/>
         <source>Robot settings</source>
         <translation>Настройки</translation>
     </message>
@@ -192,7 +192,7 @@
 <context>
     <name>interpreterCore::ActionsManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+4"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+10"/>
         <source>To main page</source>
         <translation>На главную</translation>
     </message>

@@ -26,6 +26,7 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/brandManager.cpp \
+	$$PWD/styles.cpp \
 
 RESOURCES += \
 	$$PWD/fonts/fonts.qrc \
@@ -38,3 +39,4 @@ DEFINES += QRGUI_BRAND_MANAGER_LIBRARY
 links(qrkernel qrutils qrgui-plugin-manager)
 includes(qrgui)
 
+copyToDestdir(styles/palettes, now)
