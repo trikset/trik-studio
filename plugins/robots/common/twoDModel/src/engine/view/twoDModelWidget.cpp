@@ -348,6 +348,8 @@ void TwoDModelWidget::connectUiButtons()
 
 	connect(mRobotItemPopup, &RobotItemPopup::restoreRobotPositionClicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mRobotItemPopup, &RobotItemPopup::setRobotPositionClicked, this, &TwoDModelWidget::setStartMarker);
+
+	mUi->initialStateButton->setShortcut(Qt::CTRL + Qt::Key_R);
 	connect(mUi->initialStateButton, &QAbstractButton::clicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
 

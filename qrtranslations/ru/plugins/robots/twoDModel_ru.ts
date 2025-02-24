@@ -1089,7 +1089,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+105"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
