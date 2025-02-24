@@ -56,7 +56,7 @@ cd ..
 
 grep -q "darwin" <<< $OSTYPE && export OS="mac" || :
 # All windows platforms can be enumerated below
-[ $OSTYPE == "msys" ] && export OS="win32" || :
+[[ $OSTYPE == "msys" || $OSTYPE == "cygwin" ]] && export OS="win32" || :
 [ $OSTYPE == "linux-gnu" ] && OS_EXT=$OS`getconf LONG_BIT` || OS_EXT=$OS
 
 if [ $OS == "win32" ] ; then
