@@ -43,6 +43,7 @@ public slots:
 	bool saveAs(const QString &fileName) override;
 	bool suggestToSaveAs() override;
 	bool saveOrSuggestToSaveAs() override;
+	bool saveScriptToProject(const QString &code, const QString &extension) override;
 
 	void setUnsavedIndicator(bool isUnsaved) override;
 
