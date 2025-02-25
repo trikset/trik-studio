@@ -140,7 +140,7 @@ jobs:
     - name: Run minimal Python interpeter tests in direct script mode
       run: |
         PATH="" $SHELL -c 'for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
-         --close -s 5 --script-path "$i".py -m script "$i"; done'
+        --generate-mode python --close -s 5 --script-path "$i".py -m script "$i"; done'
       timeout-minutes: 15
       
     - name: Run minimal Javascript interpeter tests as fields in .qrs (For backward compatibility)
@@ -153,4 +153,14 @@ jobs:
       run: |
         PATH="" $SHELL -c 'for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done'
+      timeout-minutes: 5
+
+    - name: Run nxt generation tests
+      run: |
+        curl --output nxt_tests.7z "https://dl.trikset.com/edu/.solutions20200701/nxt_generation.7z"
+        7z x nxt_tests.7z || 7za x nxt_tests.7z
+
+        PATH="" $SHELL -c 'for i in "$GITHUB_WORKSPACE"/nxt/*.qrs; do "$TWOD_EXEC_NAME" --generate-mode nxt \
+        --generate-path "$i".c --only-generate "$i" && cat "$i".c; done'
+
       timeout-minutes: 5
