@@ -58,8 +58,12 @@ In background mode the session will be terminated just after the execution ended
     </message>
     <message>
         <location line="+3"/>
+        <source>Do not run the interpretation in any mode, this is a parameter that is only used to generate a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Do not run the interpretation in any mode, this is a parameter used only to generate a file.</source>
-        <translation>Не запускайте интерпретацию ни в каком режиме, этот параметр используется только для генерации файла.</translation>
+        <translation type="vanished">Не запускайте интерпретацию ни в каком режиме, этот параметр используется только для генерации файла.</translation>
     </message>
     <message>
         <location line="-6"/>
