@@ -22,18 +22,18 @@ class SingletonImpl
 {
 public:
 	template <typename T> static QSharedPointer<T> instance(const std::function<T*()>& factory) {
-		QMutexLocker lock(&_m);
-		auto &instance = _typeToObject[&T::staticMetaObject];
+		QMutexLocker lock(&staticMutex);
+		auto &instance = staticTypeToObject[&T::staticMetaObject];
 		if (auto result = instance.lock()) {
-			return qWeakPointerCast<T, QObject>(result);
+			return qSharedPointerCast<T, QObject>(result);
 		}
 		auto result = QSharedPointer<T>(factory());
-		_typeToObject[&T::staticMetaObject] = qSharedPointerCast<QObject, T>(result);
+		staticTypeToObject[&T::staticMetaObject] = qSharedPointerCast<QObject, T>(result);
 		return result;
 	}
 private:
-	static QHash<const void *, QWeakPointer<QObject>> _typeToObject;
-	static QMutex _m;
+	static QHash<const void *, QWeakPointer<QObject>> staticTypeToObject;
+	static QMutex staticMutex;
 };
 
 

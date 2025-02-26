@@ -16,5 +16,5 @@
 
 using namespace utils;
 
-QHash<const void *, QWeakPointer<QObject>> SingletonImpl::_typeToObject;
-QMutex SingletonImpl::_m;
+QHash<const void *, QWeakPointer<QObject>> SingletonImpl::staticTypeToObject;
+QMutex SingletonImpl::staticMutex;
