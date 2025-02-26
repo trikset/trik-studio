@@ -148,7 +148,6 @@ jobs:
       shell: bash -l {0}
 
   build-rockylinux-installer:
-    needs: [build-rockylinux-installer-release-tests]
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
