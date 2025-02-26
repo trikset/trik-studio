@@ -108,7 +108,6 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 			}
 		}
 		if (generateMode == "nxt") {
-			qDebug() << action.action()->objectName();
 			if (action.action()->objectName() == "generateCode") {
 				emit action.action()->triggered();
 			}
