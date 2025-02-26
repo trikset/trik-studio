@@ -160,6 +160,11 @@ jobs:
         curl --output nxt_tests.7z "https://dl.trikset.com/edu/.solutions20200701/nxt_generation.7z"
         7z x nxt_tests.7z || 7za x nxt_tests.7z
         set -x
-        PATH="" $SHELL -c 'for i in "$GITHUB_WORKSPACE"/nxt/*.qrs; do "$TWOD_EXEC_NAME" --generate-mode nxt \
-        --generate-path "$i".c --only-generate "$i" && ls "$GITHUB_WORKSPACE"/nxt/ && cat "$i".c; done'
+
+        for i in "$GITHUB_WORKSPACE"/nxt/*.qrs;
+        do
+          "$TWOD_EXEC_NAME" --generate-mode nxt --generate-path "$i".c --only-generate "$i"
+          ls "$GITHUB_WORKSPACE"/nxt/
+          cat "$i".c
+        done
       timeout-minutes: 5
