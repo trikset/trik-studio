@@ -13,13 +13,16 @@
  * limitations under the License. */
 
 #include "actionsBox.h"
+#include <qrutils/graphicsUtils/abstractItem.h>
 
+using namespace graphicsUtils;
 using namespace twoDModel::view;
 
 ActionsBox::ActionsBox(QObject *parent)
 	: QObject(parent)
 	, mSceneModeActions(this)
-	, mScrollHandModeAction(new QAction(QIcon(":/icons/2d_hand.png"), tr("Hand dragging mode"), this))
+	, mScrollHandModeAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_hand.png")
+			, tr("Hand dragging mode"), this))
 	, mMultiSelectionModeAction(new QAction(QIcon(":/icons/2d_multiselection.png"), tr("Multiselection mode"), this))
 	, mSeparator1(new QAction(this))
 	, mSaveWorldModelAction(new QAction(QIcon(":/icons/2d_save.png"), tr("Save world model..."), this))
@@ -27,8 +30,10 @@ ActionsBox::ActionsBox(QObject *parent)
 	, mLoadWorldWithoutRobotAction(new QAction(QIcon(":/icons/2d_open.png")
 			, tr("Load world model without robot configuration..."), this))
 	, mSeparator2(new QAction(this))
-	, mDeleteAllAction(new QAction(QIcon(":/icons/2d_clear.png"), tr("Clear items"), this))
-	, mClearFloorAction(new QAction(QIcon(":/icons/2d_clear_floor.svg"), tr("Clear floor"), this))
+	, mDeleteAllAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear.png")
+			, tr("Clear items"), this))
+	, mClearFloorAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear_floor.svg")
+			, tr("Clear floor"), this))
 {
 	mScrollHandModeAction->setCheckable(true);
 	mMultiSelectionModeAction->setCheckable(true);

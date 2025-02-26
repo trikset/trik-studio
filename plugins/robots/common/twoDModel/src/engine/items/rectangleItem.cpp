@@ -37,7 +37,7 @@ AbstractItem *RectangleItem::clone() const
 
 QAction *RectangleItem::rectangleTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_rectangle.svg"), tr("Rectangle (R)"), nullptr);
+	QAction * const result = new QAction(loadTextColorIcon(":/icons/2d_rectangle.svg"), tr("Rectangle (R)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_R), QKeySequence(Qt::Key_7)});
 	result->setCheckable(true);
 	return result;

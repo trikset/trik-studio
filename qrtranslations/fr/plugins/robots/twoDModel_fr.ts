@@ -511,7 +511,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+22"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
         <source>Hand dragging mode</source>
         <translation>Le mode de glissement manuel</translation>
     </message>
@@ -536,12 +536,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Clear items</source>
         <translation>Tout effacer</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Clear floor</source>
         <translation>Effacer le sol des traces du robot</translation>
     </message>
@@ -679,7 +679,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+20"/>
         <source>Marker thickness</source>
         <translation>Épaisseur du marqueur</translation>
     </message>
@@ -728,7 +728,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+323"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+329"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
