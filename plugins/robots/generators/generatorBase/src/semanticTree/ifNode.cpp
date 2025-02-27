@@ -21,11 +21,24 @@ using namespace qReal;
 
 IfNode::IfNode(const Id &idBinded, QObject *parent)
 	: ConditionalNode(idBinded, parent)
-	, mThenZone(new ZoneNode(this))
-	, mElseZone(new ZoneNode(this))
-	, mIsSimple(false)
+	, mIsSynthetic(false)
 {
+	init();
+}
+
+IfNode::IfNode(QObject *parent)
+	: ConditionalNode(qReal::Id(), parent)
+	, mIsSynthetic(true)
+{
+	init();
+}
+
+void IfNode::init()
+{
+	mThenZone = new ZoneNode(parent());
 	mThenZone->setParentNode(this);
+
+	mElseZone = new ZoneNode(parent());
 	mElseZone->setParentNode(this);
 }
 
@@ -44,6 +57,13 @@ void IfNode::transformToSimple()
 	mIsSimple = true;
 }
 
+void IfNode::setSyntheticCondition(const QString &s, const QMap<qReal::Id, bool> &l)
+{
+	mIsSynthetic = true;
+	mSyntheticCondition = s;
+	mIdWasUsedBefore = l;
+}
+
 QString IfNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const
 {
 	if (mIsSimple) {
@@ -55,7 +75,11 @@ QString IfNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const 
 	}
 
 	const bool elseIsEmpty = mElseZone->isEmpty();
-	QString result = utils::StringUtils::addIndent(customizer.factory()->
+	QString result = mIsSynthetic ?
+		utils::StringUtils::addIndent(customizer.factory()->
+			syntheticIfGenerator(mId, mIdWasUsedBefore, customizer, elseIsEmpty
+					, mSyntheticCondition, mAddNotToCondition)->generate(), indent, indentString)
+		: utils::StringUtils::addIndent(customizer.factory()->
 			ifGenerator(mId, customizer, elseIsEmpty, mAddNotToCondition)->generate(), indent, indentString);
 
 	const QString thenBlock = mThenZone->toString(customizer, indent + 1, indentString);
