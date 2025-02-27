@@ -35,6 +35,7 @@ ActionsBox::ActionsBox(QObject *parent)
 	, mClearFloorAction(new QAction(AbstractItem::loadTextColorIcon(":/icons/2d_clear_floor.svg")
 			, tr("Clear floor"), this))
 {
+	mLoadWorldModelAction->setShortcut(Qt::CTRL + Qt::Key_I);
 	mScrollHandModeAction->setCheckable(true);
 	mMultiSelectionModeAction->setCheckable(true);
 	mSceneModeActions.addAction(mScrollHandModeAction.data());
