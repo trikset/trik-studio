@@ -62,7 +62,8 @@ void RunProgramProtocol::run(const QFileInfo &fileToRun, bool needUpload)
 		communicator.requestCasingVersion();
 	});
 
-	mProtocol->setAction(mWaitingForUploadingComplete, [fileToRun, needUpload](TcpRobotCommunicatorInterface &communicator) {
+	mProtocol->setAction(mWaitingForUploadingComplete,
+			     [fileToRun, needUpload](TcpRobotCommunicatorInterface &communicator) {
 		if (needUpload) {
 			communicator.uploadProgram(fileToRun.canonicalFilePath());
 		} else {
