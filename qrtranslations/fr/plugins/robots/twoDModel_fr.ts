@@ -746,7 +746,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+102"/>
+        <location line="+104"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
