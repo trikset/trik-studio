@@ -30,6 +30,7 @@
 #include <utils/robotCommunication/uploadProgramProtocol.h>
 #include <utils/robotCommunication/networkCommunicationErrorReporter.h>
 #include <qrgui/textEditor/qscintillaTextEdit.h>
+#include <qrgui/textEditor/textManagerInterface.h>
 #include <qrkernel/settingsManager.h>
 #include <qrutils/widgets/qRealMessageBox.h>
 
@@ -271,12 +272,11 @@ void TrikPythonGeneratorPluginBase::onProtocolFinished()
 void TrikPythonGeneratorPluginBase::onUploadSuccess()
 {
 	auto runPolicy = static_cast<RunPolicy>(SettingsManager::value("trikRunPolicy").toInt());
-	QFileInfo fileInfo;
 	switch (runPolicy) {
 	case RunPolicy::Ask:
 		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget()
-											, tr("The program has been uploaded")
-											, tr("Do you want to run it?")
+							, tr("The program has been uploaded")
+							, tr("Do you want to run it?")
 		) != QMessageBox::Yes) {
 			break;
 		}
@@ -284,7 +284,7 @@ void TrikPythonGeneratorPluginBase::onUploadSuccess()
 	case RunPolicy::AlwaysRun:
 		if (mMainFile != QFileInfo()) {
 			if (mRunProgramProtocol) {
-				mRunProgramProtocol->runUploaded(mMainFile);
+				mRunProgramProtocol->run(mMainFile);
 				return;
 			} else {
 				QLOG_ERROR() << "Run program protocol is not initialized";
