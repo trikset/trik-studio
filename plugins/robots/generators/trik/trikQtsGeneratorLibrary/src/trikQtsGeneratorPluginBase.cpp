@@ -31,7 +31,8 @@
 #include <utils/robotCommunication/networkCommunicationErrorReporter.h>
 #include <qrgui/textEditor/qscintillaTextEdit.h>
 #include <qrgui/textEditor/textManagerInterface.h>
-
+#include <qrkernel/settingsManager.h>
+#include <qrutils/widgets/qRealMessageBox.h>
 #include "trikQtsMasterGenerator.h"
 #include "emptyShell.h"
 
@@ -86,7 +87,7 @@ void TrikQtsGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &conf
 			, this, &TrikQtsGeneratorPluginBase::onProtocolFinished);
 
 	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::success
-			, this, &TrikQtsGeneratorPluginBase::onProtocolFinished);
+			, this, &TrikQtsGeneratorPluginBase::onUploadSuccess);
 	connect(mRunProgramProtocol.data(), &RunProgramProtocol::success
 			, this, &TrikQtsGeneratorPluginBase::onProtocolFinished);
 	connect(mStopRobotProtocol.data(), &StopRobotProtocol::success
@@ -215,6 +216,9 @@ void TrikQtsGeneratorPluginBase::uploadProgram()
 			}
 			if (!files.isEmpty()) {
 				disableButtons();
+				if (auto code = dynamic_cast<text::QScintillaTextEdit *>(mMainWindowInterface->currentTab())) {
+					mMainFile = QFileInfo(mTextManager->path(code));
+				}
 				mUploadProgramProtocol->run(files);
 			} else {
 				mMainWindowInterface->errorReporter()->addError(
@@ -254,8 +258,41 @@ void TrikQtsGeneratorPluginBase::stopRobot()
 	}
 }
 
+void TrikQtsGeneratorPluginBase::onUploadSuccess()
+{
+	auto runPolicy = static_cast<RunPolicy>(SettingsManager::value("trikRunPolicy").toInt());
+	switch (runPolicy) {
+	case RunPolicy::Ask:
+		if (utils::QRealMessageBox::question(mMainWindowInterface->windowWidget()
+							, tr("The program has been uploaded")
+							, tr("Do you want to run it?")
+		) != QMessageBox::Yes) {
+			break;
+		}
+		Q_FALLTHROUGH();
+	case RunPolicy::AlwaysRun:
+		if (mMainFile != QFileInfo()) {
+			if (mRunProgramProtocol) {
+				mRunProgramProtocol->run(mMainFile);
+				return;
+			} else {
+				QLOG_ERROR() << "Run program protocol is not initialized";
+			}
+		} else {
+			utils::QRealMessageBox::question(mMainWindowInterface->windowWidget()
+					,tr("Error"), tr("Unknown file to run after upload, please run manually"),
+					QMessageBox::Ok);
+		}
+		break;
+	case RunPolicy::NeverRun:
+		break;
+	}
+	onProtocolFinished();
+}
+
 void TrikQtsGeneratorPluginBase::onProtocolFinished()
 {
+	mMainFile = QFileInfo();
 	mUploadProgramAction->setEnabled(true);
 	mRunProgramAction->setEnabled(true);
 	mStopRobotAction->setEnabled(true);
