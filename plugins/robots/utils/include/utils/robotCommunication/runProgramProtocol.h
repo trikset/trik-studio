@@ -42,10 +42,7 @@ public:
 	~RunProgramProtocol() override;
 
 	/// Upload and run program from given file on a robot.
-	void run(const QFileInfo &fileToRun);
-
-	/// Run uploaded program from given file on robot.
-	void runUploaded(const QFileInfo &fileToRun);
+	void run(const QFileInfo &fileToRun, bool needUpload = true);
 
 signals:
 	/// Emitted when protocol completed successfully.
