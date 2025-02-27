@@ -56,7 +56,7 @@
         <translation>Сохранить перед закрытием?</translation>
     </message>
     <message>
-        <location line="+192"/>
+        <location line="+193"/>
         <source>All files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>

@@ -17,7 +17,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QMap>
 #include <QtCore/QMultiHash>
-
 #include "qrgui/textEditor/textEditorDeclSpec.h"
 #include "qrgui/textEditor/textManagerInterface.h"
 #include "qrgui/textEditor/codeBlockManager.h"
