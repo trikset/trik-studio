@@ -51,7 +51,12 @@ In background mode the session will be terminated just after the execution ended
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-3"/>
+        <location line="+3"/>
+        <source>Do not run the interpretation in any mode, this is a parameter that is only used to generate a file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-6"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -87,7 +92,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+234"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+239"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>
