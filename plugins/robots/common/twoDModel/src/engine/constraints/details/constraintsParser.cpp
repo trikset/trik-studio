@@ -605,6 +605,10 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 		return mValues.sum(leftValue, rightValue);
 	}
 
+	if (operation == "mul") {
+		return mValues.mul(leftValue, rightValue);
+	}
+
 	if (operation.startsWith("difference")) {
 		return mValues.difference(leftValue, rightValue);
 	}
@@ -687,7 +691,7 @@ Value ConstraintsParser::parseValue(const QDomElement &element)
 		return parseUnaryValueTag(element);
 	}
 
-	if (tag == "sum" || tag == "difference" || tag == "min" || tag == "max" || tag == "distance") {
+	if (tag == "mul" || tag == "sum" || tag == "difference" || tag == "min" || tag == "max" || tag == "distance") {
 		return parseBinaryValueTag(element);
 	}
 
