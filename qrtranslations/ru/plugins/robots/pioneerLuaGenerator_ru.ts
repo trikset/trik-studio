@@ -88,7 +88,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaMasterGenerator.cpp" line="+111"/>
+        <location filename="../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaMasterGenerator.cpp" line="+109"/>
         <source>There is no opened diagram</source>
         <translation>Диаграмма не открыта</translation>
     </message>
