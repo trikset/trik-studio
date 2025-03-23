@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+262"/>
+        <location line="+266"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
@@ -350,7 +350,7 @@
         <translation>Путь до объекта пуст!</translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+126"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Неизвестный тип объекта &quot;%1&quot;</translation>
     </message>
