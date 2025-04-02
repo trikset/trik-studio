@@ -133,6 +133,12 @@ Value ValuesFactory::sum(const Value &left, const Value &right) const
 	return [left, right]() { return left().toInt() + right().toInt(); };
 }
 
+Value ValuesFactory::mul(const Value &left, const Value &right) const
+{
+	return [left, right]() { return left().toInt() * right().toInt(); };
+}
+
+
 Value ValuesFactory::difference(const Value &left, const Value &right) const
 {
 	return [left, right]() { return left().toInt() - right().toInt(); };
