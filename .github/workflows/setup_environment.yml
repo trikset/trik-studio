@@ -183,7 +183,11 @@ jobs:
     - name: Evaluate artifact name
       run: |
         set -x
-        echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer" >> $GITHUB_ENV
+        if [[ "${{ inputs.qmake_extra }}" =~ "+=sanitize_address" ]]; then
+          echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer-asan" >> $GITHUB_ENV
+        else
+          echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer" >> $GITHUB_ENV
+        fi
         env
 
     - name: Upload installer artifact
