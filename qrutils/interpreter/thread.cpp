@@ -83,8 +83,8 @@ void Thread::initTimer()
 	connect(mProcessEventsTimer, SIGNAL(timeout())
 			, mProcessEventsMapper, SLOT(map()));
 
-	connect(mProcessEventsMapper, SIGNAL(mapped(QObject*))
-			, this, SLOT(interpretAfterEventsProcessing(QObject*)));
+	connect(mProcessEventsMapper, &QSignalMapper::mappedObject
+			, this, &Thread::interpretAfterEventsProcessing);
 }
 
 void Thread::interpret()
