@@ -192,7 +192,7 @@ jobs:
     uses: ./.github/workflows/installer.yml
     with:
       os: ubuntu-latest
-      container_name: registry.astralinux.ru/library/astra/ubi18:latest
+      container_name: registry.astralinux.ru/library/astra/ubi18-python311:1.8.1
       artifact_name: linux-installer
 
   install-archlinux-installer:
