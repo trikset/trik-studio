@@ -609,7 +609,7 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 		return mValues.mul(leftValue, rightValue);
 	}
 
-	if (operation.startsWith("difference")) {
+	if (operation == "difference") {
 		return mValues.difference(leftValue, rightValue);
 	}
 
@@ -625,7 +625,7 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 		return mValues.distance(leftValue, rightValue);
 	}
 
-	return mValues.sum(leftValue, rightValue);
+	qFatal("Unknown operator: %s\n", qPrintable(operation));
 }
 
 Trigger ConstraintsParser::parseEventSetDropTag(const QDomElement &element)
