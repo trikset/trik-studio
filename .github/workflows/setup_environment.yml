@@ -14,6 +14,10 @@ on:
         required: false
         type: boolean
         default: false
+      need_deploy:
+        required: false
+        type: boolean
+        default: true
       build:
         required: true
         type: boolean
@@ -175,6 +179,7 @@ jobs:
         EXECUTOR: ${{ inputs.executor }}
         BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         PULLREQUESTNUMBER: ${{ github.event.pull_request.number }}
+        NEED_DEPLOY: ${{ inputs.need_deploy }}
         ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
         username: ${{ secrets.DL_USERNAME }}
         host: ${{ secrets.DL_HOST }}

@@ -17,7 +17,8 @@ case "$RUNNER_OS" in
 esac
 df -h .
 
-NEED_DEPLOY=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
+IS_ORIGIN_MASTER=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
+NEED_DEPLOY=$([[ "$IS_ORIGIN_MASTER" == "true" && "$NEED_DEPLOY" == "true" ]] && echo true || echo false )
 
 if "$NEED_DEPLOY" ; then
     $EXECUTOR bash -c "mkdir -p $HOME/.ssh && install -m 600 /dev/null $HOME/.ssh/id_rsa && echo \"$ssh_key\" > $HOME/.ssh/id_rsa"
