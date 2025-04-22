@@ -74,6 +74,10 @@ public:
 	/// If values cannot be implicitly converted to integers 0 will be returned.
 	Value sum(const Value &left, const Value &right) const;
 
+	/// Produces functor that returns a multiplication of two given integer values
+	/// If values cannot be implicitly converted to integers 0 will be returned.
+	Value mul(const Value &left, const Value &right) const;
+
 	/// Produces functor that returns a difference of two given numeric values.
 	/// If values cannot be implicitly converted to integers 0 will be returned.
 	Value difference(const Value &left, const Value &right) const;
