@@ -183,8 +183,8 @@ jobs:
     - name: Evaluate artifact name
       run: |
         set -x
-        echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer" >> $GITHUB_ENV
-        env
+        ldd "$GITHUB_WORKSPACE/bin/trik-studio" | grep -q libasan && SUFFIX="-asan" || SUFFIX=
+        echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer${SUFFIX}" >> $GITHUB_ENV
 
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4

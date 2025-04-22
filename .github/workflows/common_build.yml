@@ -139,7 +139,7 @@ jobs:
       os: ubuntu-latest
       container_name: rockylinux:8
       build: true
-      build_installer: false
+      build_installer: true
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
       gcc_version: 13
       trik_qt_version: 5.15
@@ -192,7 +192,7 @@ jobs:
     uses: ./.github/workflows/installer.yml
     with:
       os: ubuntu-latest
-      container_name: registry.astralinux.ru/library/astra/ubi18:latest
+      container_name: registry.astralinux.ru/library/astra/ubi18-python311:1.8.1
       artifact_name: linux-installer
 
   install-archlinux-installer:
