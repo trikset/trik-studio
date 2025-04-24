@@ -140,6 +140,7 @@ jobs:
       container_name: rockylinux:8
       build: true
       build_installer: true
+      need_deploy: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
       gcc_version: 13
       trik_qt_version: 5.15
