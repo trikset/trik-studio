@@ -15,6 +15,7 @@ function fix_dependencies {
 	local change
 	local short_id
 	local install_name
+        local thislibdir
 	install_name=$(otool -D "$target" | tail -n +2 | grep -v '^@' || : )
 	if [[ -n "$install_name" ]] ; then
 		short_id=$(grealpath -e --relative-to "$prefix" "$install_name" || echo "@rpath/"$(basename "$install_name"))
@@ -24,7 +25,11 @@ function fix_dependencies {
 		if [[ "$dep" == /System/Library/Frameworks/* || "$dep" == /usr/lib/*  || "$dep" == "$install_name" ]] ; then
 			continue;
 		fi
-		normalized=$(grealpath -e "$dep")
+		thislibdir=$(dirname "$dep")
+		normalized=$(grealpath -e --relative-to "$thislibdir" "$dep")
+		if [[ $? != 0 ]] ; then
+  			echo "Failed to normalize path \"$dep\" relative to \"$thislibdir\" for prefix \"$prefix\" in working directory \"$PWD\""
+		fi
 		if [[ "$normalized" == "$prefix"/* ]] ; then
 			relative=$(grealpath -e --relative-to "$prefix" "$normalized")
 			change="$change -change \"$dep\" \"$subst/$relative\""
