@@ -27,16 +27,16 @@ function fix_dependencies {
 		fi
 		
 		normalized=$(grealpath -e "$dep")
-                echo "normalized path: $normalized for dep: $dep and prefix: $prefix"
+                echo "normalized path: $normalized for dep: $dep and prefix: $prefix" 
   		if [[ "$normalized" == "/usr/local"/* ]] ; then
-			relative=$(echo "@rpath/"$(basename "$normalized"))
-			change="$change -change \"$dep\" \"$relative\""
+			relative=$(basename "$normalized")
 		fi
   
 		if [[ "$normalized" == "$prefix"/* ]] ; then
 			relative=$(grealpath -e --relative-to "$prefix" "$normalized")
-			change="$change -change \"$dep\" \"$subst/$relative\""
 		fi
+		
+		change="$change -change \"$dep\" \"$subst/$relative\""
 	done
 	popd
 	if [[ -n "$change" ]] ; then
