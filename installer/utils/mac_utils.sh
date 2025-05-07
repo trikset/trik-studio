@@ -16,8 +16,7 @@ function fix_dependencies {
 	local short_id
 	local install_name
 	install_name=$(otool -D "$target" | tail -n +2 | grep -v '^@' || : )
-        echo "install_name $install_name for target: $target"
-	if [[ -n "$install_name" ]] ; then
+        if [[ -n "$install_name" ]] ; then
 		short_id=$(grealpath -e --relative-to "$prefix" "$install_name" || echo "@rpath/"$(basename "$install_name"))
 		change="-id \"$short_id\""
 	fi
@@ -27,8 +26,7 @@ function fix_dependencies {
 		fi
 		
 		normalized=$(grealpath -e "$dep")
-                echo "normalized path: $normalized for dep: $dep and prefix: $prefix" 
-  		if [[ "$normalized" == "/usr/local"/* ]] ; then
+                if [[ "$normalized" == "/usr/local"/* ]] ; then
 			relative=$(basename "$normalized")
 		fi
   
@@ -41,8 +39,7 @@ function fix_dependencies {
 	popd
 	if [[ -n "$change" ]] ; then
 		chmod 0666 "$target" || echo "Failed to 'chmod 0666' on \"$target\" with 'ls -l':$(ls -l $target)"
-                echo "final install_name_tool command prefix: $change"
-		eval "install_name_tool $change \"$target\"" || ls -l "$target"
+                eval "install_name_tool $change \"$target\"" || ls -l "$target"
 		chmod 0444 "$target"
 	fi
 }
