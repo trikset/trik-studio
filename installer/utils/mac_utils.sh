@@ -6,7 +6,7 @@ export BUNDLE_CONTENTS=$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/Contents/
 export LIB_PATH=@executable_path/../Lib
 
 function fix_dependencies {
-	set -ueo pipefail
+	set -ueox pipefail
 	local target="$1"
 	pushd "$(dirname "$target")"
 	local prefix=$(grealpath -e "$2")
@@ -25,15 +25,17 @@ function fix_dependencies {
 		if [[ "$dep" == /System/Library/Frameworks/* || "$dep" == /usr/lib/*  || "$dep" == "$install_name" ]] ; then
 			continue;
 		fi
-		thislibdir=$(dirname "$dep")
-		normalized=$(grealpath -e --relative-to "$thislibdir" "$dep")
-		if [[ $? != 0 ]] ; then
-  			echo "Failed to normalize path \"$dep\" relative to \"$thislibdir\" for prefix \"$prefix\" in working directory \"$PWD\""
-		fi
+
+    normalized=$(grealpath -e "$dep")
+    if [[ "$normalized" == "/usr/local"/* ]] ; then
+      relative=$(basename "$normalized")
+    fi
+    
 		if [[ "$normalized" == "$prefix"/* ]] ; then
 			relative=$(grealpath -e --relative-to "$prefix" "$normalized")
-			change="$change -change \"$dep\" \"$subst/$relative\""
 		fi
+		
+		change="$change -change \"$dep\" \"$subst/$relative\""
 	done
 	popd
 	if [[ -n "$change" ]] ; then
