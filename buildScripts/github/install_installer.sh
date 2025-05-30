@@ -89,7 +89,7 @@ dll_search(){
   ls -l1
   case "$(uname)" in
     Darwin)
-      find . -name '*.dylib*' -print0 | xargs -0 -n1 env DYLD_LIBRARY_PATH="$LIB_DIR" otool -L | grep "not found" || exit 0
+      find . -name '*.dylib*' -print0 | xargs -0 -n1 env DYLD_LIBRARY_PATH="$LIB_DIR" otool -L | grep -E "not found|/usr/local/" || exit 0
       ;;
     Linux)
       # Find dependencies that have not been packaged, but are still in the system
