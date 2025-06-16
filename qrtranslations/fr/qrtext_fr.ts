@@ -93,12 +93,17 @@
     </message>
     <message>
         <location line="+12"/>
-        <location line="+32"/>
+        <location line="+38"/>
         <source>This construction is not supported by interpreter</source>
         <translation>Cette construction n&apos;est pas supportée par l&apos;interpréteur</translation>
     </message>
     <message>
-        <location line="+105"/>
+        <location line="-28"/>
+        <source>Seems like accessing an uninitialized variable %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+133"/>
         <location line="+10"/>
         <location line="+13"/>
         <source>Division by zero</source>
