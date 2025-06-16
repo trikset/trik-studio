@@ -560,7 +560,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+112"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
