@@ -380,7 +380,6 @@ void Box2DPhysicsEngine::nextFrame()
 
 void Box2DPhysicsEngine::clearForcesAndStop()
 {
-	// FIXME: mWorld->ClearForces();
 	for (auto item : mBox2DDynamicItems) {
 		b2BodyId bodyId = item->getBodyId();
 		b2Body_SetLinearVelocity(bodyId, {0, 0});
