@@ -63,7 +63,7 @@
         <translation>Несоответствие типов.</translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaInterpreter.cpp" line="+416"/>
+        <location filename="../../qrtext/src/lua/luaInterpreter.cpp" line="+417"/>
         <source>Explicit table indexes of non-integer type are not supported</source>
         <translation>Явное указание индексов нечисловых типов в таблицах не поддержано</translation>
     </message>
@@ -72,14 +72,14 @@
         <translation type="vanished">Эта переменная только для чтения</translation>
     </message>
     <message>
-        <location line="-309"/>
+        <location line="-310"/>
         <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+378"/>
         <source>Variable %1 is read-only</source>
         <translation>Переменная %1 только для чтения</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location line="+38"/>
+        <location line="+39"/>
         <source>This construction is not supported by interpreter</source>
         <translation>Конструкция не поддерживается интерпретатором</translation>
     </message>

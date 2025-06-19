@@ -93,7 +93,7 @@
     </message>
     <message>
         <location line="+12"/>
-        <location line="+38"/>
+        <location line="+39"/>
         <source>This construction is not supported by interpreter</source>
         <translation>Cette construction n&apos;est pas supportée par l&apos;interpréteur</translation>
     </message>
