@@ -31,39 +31,38 @@ Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
 	, mWheelWidthM(engine->pxToM(twoDModel::robotWheelDiameterInPx))
 	, mPolygon(new b2Vec2[8])
 {
-	b2BodyDef bodyDef;
+	b2BodyDef bodyDef = b2DefaultBodyDef();
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position = positionBox2D;
-	bodyDef.angle = rotationBox2D;
-	mBody = engine->box2DWorld().CreateBody(&bodyDef);
+	bodyDef.rotation = b2MakeRot(rotationBox2D);
+	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 
-	b2FixtureDef fixtureDef;
-	fixtureDef.restitution = 0.5;
-	fixtureDef.friction = mWheelFriction;
-	b2PolygonShape polygonShape;
-
-	b2Vec2 center = b2Vec2(0.5 * mWheelWidthM, 0.5 * mWheelHeightM);
-	mPolygon[0] = b2Vec2(0.2 * mWheelWidthM, mWheelHeightM) - center;
-	mPolygon[1] = b2Vec2(0.8 * mWheelWidthM, mWheelHeightM) - center;
-	mPolygon[2] = b2Vec2(mWheelWidthM, 0.6 * mWheelHeightM) - center;
-	mPolygon[3] = b2Vec2(mWheelWidthM, 0.4 * mWheelHeightM) - center;
-	mPolygon[4] = b2Vec2(0.8 * mWheelWidthM, 0.0) - center;
-	mPolygon[5] = b2Vec2(0.2 * mWheelWidthM, 0.0) - center;
-	mPolygon[6] = b2Vec2(0.0, 0.4 * mWheelHeightM) - center;
-	mPolygon[7] = b2Vec2(0.0, 0.6 * mWheelHeightM) - center;
-
-	polygonShape.Set(mPolygon, 8);
-	fixtureDef.shape = &polygonShape;
+	b2ShapeDef fixtureDef = b2DefaultShapeDef();
+	fixtureDef.material.restitution = 0.5;
+	fixtureDef.material.friction = mWheelFriction;
 	fixtureDef.density = engine->computeDensity(
 			QPolygonF(QRectF(0, 0, twoDModel::robotWheelDiameterInPx / 2, twoDModel::robotWheelDiameterInPx))
 			, mWheelMass);
 
-	mBody->CreateFixture(&fixtureDef);
+	b2Vec2 center = b2Vec2{0.5f * mWheelWidthM, 0.5f * mWheelHeightM};
+	mPolygon[0] = b2Vec2{0.2f * mWheelWidthM, mWheelHeightM} - center;
+	mPolygon[1] = b2Vec2{0.8f * mWheelWidthM, mWheelHeightM} - center;
+	mPolygon[2] = b2Vec2{mWheelWidthM, 0.6f * mWheelHeightM} - center;
+	mPolygon[3] = b2Vec2{mWheelWidthM, 0.4f * mWheelHeightM} - center;
+	mPolygon[4] = b2Vec2{0.8f * mWheelWidthM, 0.0f} - center;
+	mPolygon[5] = b2Vec2{0.2f * mWheelWidthM, 0.0f} - center;
+	mPolygon[6] = b2Vec2{0.0f, 0.4f * mWheelHeightM} - center;
+	mPolygon[7] = b2Vec2{0.0f, 0.6f * mWheelHeightM} - center;
 
-	mBody->SetUserData(this);
+	b2Hull hull = b2ComputeHull(mPolygon, 8);
+	b2Polygon polygon = b2MakePolygon(&hull, 0.0f);
+	b2ShapeId polygonShapeId = b2CreatePolygonShape(mBodyId, &fixtureDef, &polygon);
+	b2Body_SetUserData(mBodyId, this);
 
-	for (int i = 0; i < polygonShape.m_count; ++i) {
-		mDebuggingDrawPolygon.append(mEngine->positionToScene(polygonShape.m_vertices[i] + mBody->GetPosition()));
+	auto finalPolygon = b2Shape_GetPolygon(polygonShapeId);
+	for (int i = 0; i < finalPolygon.count; ++i) {
+		auto position = b2Body_GetPosition(mBodyId);
+		mDebuggingDrawPolygon.append(mEngine->positionToScene(finalPolygon.vertices[i] + position));
 	}
 
 	if (!mDebuggingDrawPolygon.isEmpty() && !mDebuggingDrawPolygon.isClosed()) {
@@ -72,34 +71,43 @@ Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
 }
 
 Box2DWheel::~Box2DWheel() {
-	mBody->GetWorld()->DestroyBody(mBody);
+	b2DestroyBody(mBodyId);
+	mBodyId = b2_nullBodyId;
 	delete[] mPolygon;
 }
 
+b2BodyId Box2DWheel::getBodyId() {
+	return mBodyId;
+}
+
 b2Vec2 Box2DWheel::getLateralVelocity() const {
-	b2Vec2 currentRightNormal = mBody->GetWorldVector(b2Vec2(0, 1));
-	return b2Dot(currentRightNormal, mBody->GetLinearVelocity()) * currentRightNormal;
+	b2Vec2 currentRightNormal = b2Body_GetWorldVector(mBodyId, {0, 1});
+	return b2Dot(currentRightNormal, b2Body_GetLinearVelocity(mBodyId)) * currentRightNormal;
 }
 
 b2Vec2 Box2DWheel::getForwardVelocity() const {
-	b2Vec2 currentForwardNormal = mBody->GetWorldVector(b2Vec2(1, 0));
-	return b2Dot(currentForwardNormal, mBody->GetLinearVelocity()) * currentForwardNormal;
+	b2Vec2 currentForwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
+	return b2Dot(currentForwardNormal, b2Body_GetLinearVelocity(mBodyId)) * currentForwardNormal;
 }
 
 void Box2DWheel::keepConstantSpeed(float speed) {
 	const int acceleration = 1;//20;
-	if (qAbs(prevSpeed - speed) > b2_epsilon){
-		mRobot.applyForceToCenter(mBody->GetWorldVector(b2Vec2(0.1f * mathUtils::Math::sign(speed), 0)), true);
+	if (qAbs(prevSpeed - speed) > FLT_EPSILON){
+		mRobot.applyForceToCenter(
+			b2Body_GetWorldVector(mBodyId, b2Vec2{0.1f * mathUtils::Math::sign(speed), 0}), true);
 		prevSpeed = speed;
 	}
 
 	// clears lateral velocity
-	b2Vec2 lateralImpulse = mBody->GetMass() * -getLateralVelocity();
-	mBody->ApplyLinearImpulse(lateralImpulse, mBody->GetWorldCenter(), true);
+	b2Vec2 lateralImpulse = b2Body_GetMass(mBodyId) * -getLateralVelocity();
+	auto center = b2Body_GetWorldCenterOfMass(mBodyId);
+	b2Body_ApplyLinearImpulse(mBodyId, lateralImpulse, center, true);
 
 	b2Vec2 forwardVelocity = getForwardVelocity();
-	float scalar = b2Dot(forwardVelocity, mBody->GetWorldVector(b2Vec2(1, 0))) < 0 ? -1 : 1;
-	float currentForwardSpeed = forwardVelocity.Normalize() * scalar;
+	float scalar = b2Dot(forwardVelocity,
+		b2Body_GetWorldVector(mBodyId, {1, 0})) < 0 ? -1 : 1;
+
+	float currentForwardSpeed = b2Length(forwardVelocity) * scalar;
 
 	if (mathUtils::Math::eq(currentForwardSpeed, speed)) {
 		return;
@@ -109,23 +117,21 @@ void Box2DWheel::keepConstantSpeed(float speed) {
 	float desiredSpeed = currentForwardSpeed + speedDelta;
 
 	float speedDiff = desiredSpeed - currentForwardSpeed;
-	b2Vec2 forwardNormal = mBody->GetWorldVector(b2Vec2(1, 0));
-	b2Vec2 linearImpulse = speedDiff * mBody->GetMass() * forwardNormal;
+	b2Vec2 forwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
+	b2Vec2 linearImpulse = speedDiff * b2Body_GetMass(mBodyId) * forwardNormal;
 
 	//break stop
-	if (qAbs(speedDiff) < b2_epsilon) {
+	if (qAbs(speedDiff) < FLT_EPSILON) {
 		stop();
 		return;
 	}
-	mBody->ApplyLinearImpulse(linearImpulse, mBody->GetWorldCenter(), true);
+
+	center = b2Body_GetWorldCenterOfMass(mBodyId);
+	b2Body_ApplyLinearImpulse(mBodyId, linearImpulse, center, true);
 }
 
-b2Body *Box2DWheel::getBody()
-{
-	return mBody;
-}
 
 void Box2DWheel::stop() {
-	mBody->SetLinearVelocity(b2Vec2(0, 0));
-	mBody->SetAngularVelocity(0);
+	b2Body_SetLinearVelocity(mBodyId, {0, 0});
+	b2Body_SetAngularVelocity(mBodyId, 0);
 }
