@@ -125,8 +125,9 @@ QVariant LuaInterpreter::interpret(const QSharedPointer<core::ast::Node> &root
 	} else if (root->is<ast::Identifier>()) {
 		auto name = as<ast::Identifier>(root)->name();
 		auto value = mIdentifierValues.value(as<ast::Identifier>(root)->name());
-		if (value.isNull()) {
-			mErrors.append(core::Error(root->start(), QObject::tr("Seems like accessing an uninitialized variable %1").arg(name)
+		if (!value.isValid()) {
+			mErrors.append(core::Error(root->start(),
+					QObject::tr("Seems like accessing an uninitialized variable %1").arg(name)
 					, core::ErrorType::runtimeError, core::Severity::error));
 		}
 		return value;
