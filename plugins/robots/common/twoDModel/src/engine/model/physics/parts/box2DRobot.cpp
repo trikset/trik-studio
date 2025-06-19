@@ -245,8 +245,10 @@ void Box2DRobot::connectWheels() {
 	///@todo: adapt it for more than 2 wheels
 	QPointF posLeftWheelFromRobot = mModel->info().wheelsPosition().first();
 	QPointF posRightWheelFromRobot = mModel->info().wheelsPosition().last();
-	b2Vec2 posLeftWheel = b2Body_GetWorldPoint(mBodyId, mEngine->positionToBox2D(posLeftWheelFromRobot + leftUpCorner));
-	b2Vec2 posRightWheel =  b2Body_GetWorldPoint(mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
+	b2Vec2 posLeftWheel = b2Body_GetWorldPoint(
+				mBodyId, mEngine->positionToBox2D(posLeftWheelFromRobot + leftUpCorner));
+	b2Vec2 posRightWheel =  b2Body_GetWorldPoint(
+				mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
 	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
 	Box2DWheel *leftWheel = new Box2DWheel(mEngine, posLeftWheel, angle, *this);
 	Box2DWheel *rightWheel = new Box2DWheel(mEngine, posRightWheel, angle, *this);
