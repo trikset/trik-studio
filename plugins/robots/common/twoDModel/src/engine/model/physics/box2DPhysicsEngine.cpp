@@ -234,7 +234,7 @@ void Box2DPhysicsEngine::removeRobot(model::RobotModel * const robot)
 
 void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 {
-	const int subStepCount = 4;
+	const int subStepCount = 10;
 
 	model::RobotModel * const robot = mRobots.first();
 	if (!mBox2DRobots[robot]) {
