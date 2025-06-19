@@ -75,7 +75,7 @@ public:
 	qreal computeDensity(const QPolygonF &shape, qreal mass);
 	qreal computeDensity(qreal radius, qreal mass);
 
-	b2World &box2DWorld();
+	b2WorldId box2DWorldId();
 
 public slots:
 	void onItemDragged(graphicsUtils::AbstractItem *item);
@@ -97,7 +97,7 @@ private:
 
 	twoDModel::view::TwoDModelScene *mScene {}; // Doesn't take ownership
 	qreal mPixelsInCm;
-	QScopedPointer<b2World> mWorld;
+	b2WorldId mWorldId;
 
 	QMap<RobotModel *, parts::Box2DRobot *> mBox2DRobots;  // Takes ownership on b2Body instances
 	QMap<RobotModel *, parts::Box2DWheel *> mLeftWheels;  // Does not take ownership

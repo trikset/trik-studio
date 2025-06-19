@@ -42,14 +42,14 @@ public:
 
 	void keepConstantSpeed(float speed);
 	void stop();
-	b2Body *getBody();
+	b2BodyId getBodyId();
 
 	QPolygonF mDebuggingDrawPolygon;
 protected:
 	float prevSpeed = 0;
 
 private:
-	b2Body *mBody;
+	b2BodyId mBodyId;
 	Box2DRobot &mRobot;
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
 	const float mWheelHeightM;
