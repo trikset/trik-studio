@@ -36,7 +36,6 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	bodyDef.rotation = b2MakeRot(angle);
 	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.enableContactEvents = true;
 	fixtureDef.material.restitution = 0.6f;
 	fixtureDef.material.friction = mModel->info().friction();
 	QPolygonF collidingPolygon = mModel->info().collidingPolygon();
@@ -154,7 +153,8 @@ void Box2DRobot::setRotation(float angle)
 		std::vector<b2JointId> joints(1);
 		b2Body_GetJoints(wheelBodyId, joints.data(), 1);
 		auto position = b2Joint_GetLocalFrameB(joints[0]);
-		b2Body_SetTransform(wheelBodyId, position.p, rotation);
+		auto point = b2Body_GetWorldPoint(b2Joint_GetBodyB(joints[0]), position.p);
+		b2Body_SetTransform(wheelBodyId, point , rotation);
 	}
 
 	reinitSensors();
@@ -249,7 +249,7 @@ void Box2DRobot::connectWheels() {
 				mBodyId, mEngine->positionToBox2D(posLeftWheelFromRobot + leftUpCorner));
 	b2Vec2 posRightWheel =  b2Body_GetWorldPoint(
 				mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
-	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
+	auto angle = b2Body_GetRotation(mBodyId);
 	Box2DWheel *leftWheel = new Box2DWheel(mEngine, posLeftWheel, angle, *this);
 	Box2DWheel *rightWheel = new Box2DWheel(mEngine, posRightWheel, angle, *this);
 	mWheels.append(leftWheel);
@@ -264,9 +264,9 @@ void Box2DRobot::connectWheel(Box2DWheel &wheel){
 	revDef.base.bodyIdB = mBodyId;
 	revDef.base.collideConnected = false;
 	revDef.base.localFrameA.p = b2Body_GetLocalCenterOfMass(wheel.getBodyId());
-	auto referenceAngle = 0.0f;
-	revDef.base.localFrameA.q = b2MakeRot(referenceAngle);
+	revDef.base.localFrameA.q = b2MakeRot(0.0f);
 	revDef.base.localFrameB.p = b2Body_GetLocalPoint(mBodyId, b2Body_GetWorldCenterOfMass(wheel.getBodyId()));
+	revDef.base.localFrameB.q = b2MakeRot(0.0f);
 	revDef.enableLimit = true;
 	revDef.lowerAngle = 0;
 	revDef.upperAngle = 0;
@@ -281,11 +281,11 @@ void Box2DRobot::connectSensor(const Box2DItem &sensor)
 	jointDef.base.bodyIdA = mBodyId;
 	jointDef.base.bodyIdB = sensor.getBodyId();
 	jointDef.base.localFrameA.p = b2Body_GetLocalCenterOfMass(mBodyId);
-	auto referenceAngle = 0.0f;
-	jointDef.base.localFrameA.q = b2MakeRot(referenceAngle);
+	jointDef.base.localFrameA.q = b2MakeRot(0.0f);
 	jointDef.base.localFrameB.p =
 			b2Body_GetLocalPoint(sensor.getBodyId(),
 					     b2Body_GetWorldCenterOfMass(mBodyId));
+	jointDef.base.localFrameB.q = b2MakeRot(0.0f);
 	jointDef.linearDampingRatio = 1.0f;
 	jointDef.angularDampingRatio = 1.0f;
 

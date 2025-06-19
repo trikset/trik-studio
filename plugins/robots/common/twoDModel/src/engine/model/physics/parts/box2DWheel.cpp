@@ -24,7 +24,7 @@
 using namespace twoDModel::model::physics::parts;
 
 Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
-		, const b2Vec2 &positionBox2D, const float rotationBox2D, Box2DRobot &robot)
+		, const b2Vec2 &positionBox2D, const b2Rot &rotationBox2D, Box2DRobot &robot)
 	: mRobot(robot)
 	, mEngine(engine)
 	, mWheelHeightM(engine->pxToM(twoDModel::robotWheelDiameterInPx / 2))
@@ -34,7 +34,7 @@ Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
 	b2BodyDef bodyDef = b2DefaultBodyDef();
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position = positionBox2D;
-	bodyDef.rotation = b2MakeRot(rotationBox2D);
+	bodyDef.rotation = rotationBox2D;
 	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();

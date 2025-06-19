@@ -33,7 +33,7 @@ class Box2DWheel
 public:
 	Box2DWheel(twoDModel::model::physics::Box2DPhysicsEngine *engine
 			, const b2Vec2 &positionBox2D
-			, const float rotationBox2D
+			, const b2Rot &rotationBox2D
 			, Box2DRobot &mRobot);
 	~Box2DWheel();
 
