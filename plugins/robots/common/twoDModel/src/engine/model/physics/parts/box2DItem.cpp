@@ -25,9 +25,9 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 	: mIsCircle(false)
 	, mEngine(*engine)
 {
-	b2BodyDef bodyDef;
+	b2BodyDef bodyDef = b2DefaultBodyDef();
 	bodyDef.position = pos;
-	bodyDef.angle = angle;
+	bodyDef.rotation = b2MakeRot(angle);
 	if (item->bodyType() == SolidItem::DYNAMIC) {
 		bodyDef.type = b2_dynamicBody;
 	} else if (item->bodyType() == SolidItem::KINEMATIC) {
@@ -36,22 +36,21 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 		bodyDef.type = b2_staticBody;
 	}
 
-	mBody = this->mEngine.box2DWorld().CreateBody(&bodyDef);
-	mBody->SetAngularDamping(item->angularDamping());
-	mBody->SetLinearDamping(item->linearDamping());
-
-	b2FixtureDef fixture;
-	fixture.restitution = 0.8;
+	auto worldId = this->mEngine.box2DWorldId();
+	mBodyId = b2CreateBody(worldId, &bodyDef);
+	b2Body_SetAngularDamping(mBodyId, item->angularDamping());
+	b2Body_SetLinearDamping(mBodyId, item->linearDamping());
+	b2ShapeDef fixtureDef = b2DefaultShapeDef();
+	fixtureDef.material.restitution = 0.8f;
 	QPolygonF collidingPolygon = item->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
-	b2CircleShape circleShape;
-	b2PolygonShape polygonShape;
+	b2Circle circleShape = {};
+	b2Polygon polygonShape = {};
 	if (item->isCircle()) {
 		mIsCircle = true;
 		qreal radius = collidingPolygon.boundingRect().height() / 2;
-		circleShape.m_radius = this->mEngine.pxToM(radius);
-		fixture.shape = &circleShape;
-		fixture.density = engine->computeDensity(radius, item->mass());
+		circleShape.radius = this->mEngine.pxToM(radius);
+		fixtureDef.density = engine->computeDensity(radius, item->mass());
 	} else {
 		if (collidingPolygon.isClosed()) {
 			collidingPolygon.removeLast();
@@ -62,19 +61,23 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 			mPolygon[i] = engine->positionToBox2D(collidingPolygon.at(i) - localCenter);
 		}
 
-		polygonShape.Set(mPolygon, collidingPolygon.size());
-		fixture.shape = &polygonShape;
-		fixture.density = engine->computeDensity(collidingPolygon, item->mass());
+		b2Hull hull = b2ComputeHull(mPolygon, collidingPolygon.size());
+		polygonShape = b2MakePolygon(&hull, 0.0f);
+		fixtureDef.density = engine->computeDensity(collidingPolygon, item->mass());
 	}
 
-	fixture.friction = item->friction();
-	mBody->CreateFixture(&fixture);
-	mBody->SetUserData(this);
+	fixtureDef.material.friction = item->friction();
+	if (item->isCircle()) {
+		b2CreateCircleShape(mBodyId, &fixtureDef, &circleShape);
+	} else {
+		b2CreatePolygonShape(mBodyId, &fixtureDef, &polygonShape);
+	}
+	b2Body_SetUserData(mBodyId, this);
 }
 
 Box2DItem::~Box2DItem()
 {
-	mBody->GetWorld()->DestroyBody(mBody);
+	b2DestroyBody(mBodyId);
 	if (!mIsCircle) {
 		delete[] mPolygon;
 	}
@@ -82,35 +85,37 @@ Box2DItem::~Box2DItem()
 
 void Box2DItem::moveToPosition(const b2Vec2 &pos)
 {
-	mBody->SetTransform(pos, mBody->GetAngle());
-	mPreviousPosition = mBody->GetPosition();
+	b2Body_SetTransform(mBodyId, pos, b2Body_GetRotation(mBodyId));
+	mPreviousPosition = b2Body_GetPosition(mBodyId);
 }
 
 void Box2DItem::setRotation(float angle)
 {
-	mBody->SetTransform(mBody->GetPosition(), angle);
-	mPreviousRotation = mBody->GetAngle();
+	b2Body_SetTransform(mBodyId, b2Body_GetPosition(mBodyId), b2MakeRot(angle));
+	mPreviousRotation = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
 }
 
 const b2Vec2 &Box2DItem::getPosition()
 {
-	mPreviousPosition = mBody->GetPosition();
+	mPreviousPosition = b2Body_GetPosition(mBodyId);
 	return mPreviousPosition;
 }
 
 float Box2DItem::getRotation()
 {
-	mPreviousRotation = mBody->GetAngle();
+	mPreviousRotation = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
 	return mPreviousRotation;
 }
 
-b2Body *Box2DItem::getBody() const
+b2BodyId Box2DItem::getBodyId() const
 {
-	return mBody;
+	return mBodyId;
 }
 
 bool Box2DItem::angleOrPositionChanged() const
 {
-	return b2Distance(mPreviousPosition, mBody->GetPosition()) > b2_epsilon
-			|| qAbs(mPreviousRotation - mBody->GetAngle()) > b2_epsilon;
+	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
+	auto position = b2Body_GetPosition(mBodyId);
+	return b2Distance(mPreviousPosition, position) > FLT_EPSILON
+			|| qAbs(mPreviousRotation - angle) > FLT_EPSILON;
 }
