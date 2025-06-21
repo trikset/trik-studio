@@ -63,7 +63,7 @@
         <translation>Несоответствие типов.</translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaInterpreter.cpp" line="+410"/>
+        <location filename="../../qrtext/src/lua/luaInterpreter.cpp" line="+417"/>
         <source>Explicit table indexes of non-integer type are not supported</source>
         <translation>Явное указание индексов нечисловых типов в таблицах не поддержано</translation>
     </message>
@@ -72,19 +72,24 @@
         <translation type="vanished">Эта переменная только для чтения</translation>
     </message>
     <message>
-        <location line="-303"/>
+        <location line="-310"/>
         <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+378"/>
         <source>Variable %1 is read-only</source>
         <translation>Переменная %1 только для чтения</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location line="+32"/>
+        <location line="+39"/>
         <source>This construction is not supported by interpreter</source>
         <translation>Конструкция не поддерживается интерпретатором</translation>
     </message>
     <message>
-        <location line="+202"/>
+        <location line="-28"/>
+        <source>Seems like accessing an uninitialized variable %1</source>
+        <translation>Обращение к неинициализированной переменной %1</translation>
+    </message>
+    <message>
+        <location line="+230"/>
         <source>Currently interpreter allows only tables denoted by identifier and by integer expression index, as in &apos;a[1 + 2][3]&apos;</source>
         <translation>Сейчас интерпретатор поддерживает именованные таблицы с целочисленным выражением в качестве индекса, например, &apos;a[1 + 2][3]&apos;</translation>
     </message>
