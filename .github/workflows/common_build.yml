@@ -113,6 +113,7 @@ jobs:
       container_name: alt:latest
       build: true
       build_installer: false
+      trik_python3_version_minor: 12
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
       tests: true
 
