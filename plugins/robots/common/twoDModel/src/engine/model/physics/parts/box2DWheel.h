@@ -33,7 +33,7 @@ class Box2DWheel
 public:
 	Box2DWheel(twoDModel::model::physics::Box2DPhysicsEngine *engine
 			, const b2Vec2 &positionBox2D
-			, const float rotationBox2D
+			, const b2Rot &rotationBox2D
 			, Box2DRobot &mRobot);
 	~Box2DWheel();
 
@@ -42,14 +42,14 @@ public:
 
 	void keepConstantSpeed(float speed);
 	void stop();
-	b2Body *getBody();
+	b2BodyId getBodyId();
 
 	QPolygonF mDebuggingDrawPolygon;
 protected:
 	float prevSpeed = 0;
 
 private:
-	b2Body *mBody;
+	b2BodyId mBodyId;
 	Box2DRobot &mRobot;
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
 	const float mWheelHeightM;

@@ -59,7 +59,7 @@ public:
 
 	void applyForceToCenter(const b2Vec2 &force, bool wake);
 
-	b2Body *getBody();
+	b2BodyId getBodyId();
 	twoDModel::model::RobotModel *getRobotModel() const;
 	Box2DWheel *getWheelAt(int i) const;
 
@@ -72,13 +72,13 @@ private:
 	void connectWheel(Box2DWheel &wheel);
 	void connectSensor(const Box2DItem &sensor);
 
-	b2Body *mBody; // Takes ownership
+	b2BodyId mBodyId; // Takes ownership
 	QList<Box2DWheel *> mWheels; // Takes ownership
-	QList<b2Joint *> mJoints; // Takes ownership
+	QList<int32_t> mJoints; // Takes ownership
 	QMap<const twoDModel::view::SensorItem *, parts::Box2DItem *> mSensors;  // Takes ownership on b2Sensor instances
 	twoDModel::model::RobotModel * const mModel; // Doesn't take ownership
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
-	b2World &mWorld; // Doesn't take ownership
+	b2WorldId mWorldId; // Doesn't take ownership
 
 	QScopedArrayPointer<b2Vec2> mPolygon; // Takes ownership
 
