@@ -3,7 +3,7 @@ TEMPLATE = lib
 include(../../../../global.pri)
 
 CONFIG += warn_off
-
+TARGET=trikBox2D
 INCLUDEPATH += $$PWD/Box2D/include $$PWD/Box2D/src
 
 HEADERS = \
