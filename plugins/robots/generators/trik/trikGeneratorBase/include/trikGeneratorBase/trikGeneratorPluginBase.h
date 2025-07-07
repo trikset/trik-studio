@@ -32,6 +32,12 @@ class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikGeneratorPluginBase : public generat
 	Q_OBJECT
 
 public:
+	enum class RunPolicy {
+		Ask
+		, AlwaysRun
+		, NeverRun
+	};
+
 	TrikGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
 			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
 			);
