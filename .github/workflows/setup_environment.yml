@@ -174,10 +174,11 @@ jobs:
       if: ${{ inputs.build == true }}
 
     - name: Clazy-standalone
-      uses: MinyazevR/clazy-standalone-action@v0.2.1
+      uses: MinyazevR/clazy-standalone-action@v0.3.2
       with:
         checks: 'level0,level1,level2'
-        database: '.'
+        database: './compile_commands.json'
+        fail-on-warning: true
         install-stable: true
         only-diff: true
         ignore-dirs: '^(buildScripts|thirdparty|installer)$'
