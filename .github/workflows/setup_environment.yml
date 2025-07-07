@@ -179,6 +179,7 @@ jobs:
         checks: 'level0,level1,no-connect-by-name,no-non-pod-global-static'
         database: '.'
         install-stable: true
+        ignore-dirs: '^(buildScripts|thirdparty|installer)$'
       if: ${{ inputs.lint_clazy }}
 
     - name: Build Installer
