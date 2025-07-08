@@ -22,7 +22,7 @@ links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-controller robots-utils
 	links(trikBox2D)
 	includes(plugins/robots/thirdparty/Box2D/Box2D)
 } else {
-	PKGCONFIG *= box2D
+	PKGCONFIG *= box2d
 }
 
 includes(plugins/robots/common/kitBase)
