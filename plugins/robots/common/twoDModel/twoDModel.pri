@@ -16,7 +16,7 @@ QT += widgets xml svg
 
 DEFINES += TWO_D_MODEL_LIBRARY
 
-links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-controller robots-utils robots-kit-base Box2D)
+links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-controller robots-utils robots-kit-base trikBox2D)
 
 includes(plugins/robots/common/kitBase)
 includes(plugins/robots/utils qrtext)
