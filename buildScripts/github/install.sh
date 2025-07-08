@@ -53,7 +53,7 @@ case "$(uname)" in
     elif [ "$ID" = "ubuntu" ]; then
       sudo apt-get update && sudo apt-get install -y --no-install-recommends ccache curl libusb-1.0-0-dev \
       make qtscript5-dev qttools5-dev-tools qtmultimedia5-dev libqt5serialport5-dev libqt5svg5-dev \
-      libudev-dev "$TRIK_PYTHON"-dev qtbase5-private-dev qtwayland5 libqscintilla2-qt5-dev libquazip5-dev
+      libudev-dev "$TRIK_PYTHON"-dev qtbase5-private-dev qtwayland5 libqscintilla2-qt5-dev libquazip5-dev bear
     elif [[ "$ID" = "rocky" || "$ID" = '"rocky"' ]]; then
       GCC_VERSION=${GCC_VERSION:-13}
       sudo yum update -y &&  sudo yum install -y --setopt=install_weak_deps=False epel-release

@@ -40,7 +40,7 @@ jobs:
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
-      lint: true
+      lint_vera: true
       build: false
       build_installer: false
 
@@ -93,6 +93,7 @@ jobs:
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=use_system_qscintilla2 CONFIG+=use_system_quazip"
       trik_python3_version_minor: 10
+      lint_clazy: true
 
   build-ubuntu-debug-tests:
     needs: lint
