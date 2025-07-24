@@ -78,8 +78,17 @@ qreal Box2DPhysicsEngine::rotation(model::RobotModel &robot) const
 		return 0;
 	}
 
-	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBox2DRobots[&robot]->getBodyId()));
-	return angleToScene(angle - mPrevAngle);
+	auto currentAngle = b2Rot_GetAngle(b2Body_GetRotation(mBox2DRobots[&robot]->getBodyId()));
+	qreal deltaAngle = currentAngle - mPrevAngle;
+
+	const qreal epsilon = 1e-6;
+
+	if (deltaAngle > mathUtils::pi + epsilon) {
+	    deltaAngle -= 2 * mathUtils::pi;
+	} else if (deltaAngle < -mathUtils::pi - epsilon) {
+	    deltaAngle += 2 * mathUtils::pi;
+	}
+	return angleToScene(deltaAngle);
 }
 
 void Box2DPhysicsEngine::onPressedReleasedSelectedItems(bool active)
