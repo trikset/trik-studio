@@ -116,6 +116,14 @@ bool Box2DItem::angleOrPositionChanged() const
 {
 	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
 	auto position = b2Body_GetPosition(mBodyId);
+
+	const qreal epsilon = 1e-6;
+	auto deltaAngle = mPreviousRotation - angle;
+	if (deltaAngle > mathUtils::pi + epsilon) {
+	    deltaAngle -= 2 * mathUtils::pi;
+	} else if (deltaAngle < -mathUtils::pi - epsilon) {
+	    deltaAngle += 2 * mathUtils::pi;
+	}
 	return b2Distance(mPreviousPosition, position) > FLT_EPSILON
 			|| qAbs(mPreviousRotation - angle) > FLT_EPSILON;
 }
