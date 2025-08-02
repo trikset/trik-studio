@@ -154,7 +154,7 @@ void Box2DRobot::setRotation(float angle)
 		b2Body_GetJoints(wheelBodyId, joints.data(), 1);
 		auto position = b2Joint_GetLocalFrameB(joints[0]);
 		auto point = b2Body_GetWorldPoint(b2Joint_GetBodyB(joints[0]), position.p);
-		b2Body_SetTransform(wheelBodyId, point , rotation);
+		b2Body_SetTransform(wheelBodyId, point, rotation);
 	}
 
 	reinitSensors();
