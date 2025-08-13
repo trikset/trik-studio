@@ -27,6 +27,7 @@ class ROBOTS_GENERATOR_EXPORT IfNode : public ConditionalNode
 	Q_OBJECT
 public:
 	explicit IfNode(const qReal::Id &idBinded, QObject *parent = nullptr);
+	explicit IfNode(QObject *parent = nullptr);
 
 	ZoneNode *thenZone();
 	ZoneNode *elseZone();
@@ -34,14 +35,21 @@ public:
 	/// Will be called when both branches link to same block, making thus if statement unnesesary.
 	void transformToSimple();
 
+	void setSyntheticCondition(const QString &s, const QMap<qReal::Id, bool> &l);
+
 protected:
 	QLinkedList<SemanticNode *> children() const override;
 	QString toStringImpl(GeneratorCustomizer &customizer, int indent, const QString &indentString) const override;
 
 private:
+	void init();
+
 	ZoneNode *mThenZone;  // Takes ownership
 	ZoneNode *mElseZone;  // Takes ownership
-	bool mIsSimple;
+	bool mIsSimple {false};
+	bool mIsSynthetic;
+	QString mSyntheticCondition;
+	QMap<qReal::Id, bool> mIdWasUsedBefore;
 };
 
 }
