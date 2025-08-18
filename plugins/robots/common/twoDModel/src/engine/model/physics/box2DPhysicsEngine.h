@@ -76,7 +76,19 @@ public:
 	qreal computeDensity(qreal radius, qreal mass);
 
 	b2WorldId box2DWorldId();
-	static qreal countAngle(const qreal previousAngle, const qreal currentAngle);
+
+	static inline qreal countAngle(const qreal previousAngle, const qreal currentAngle) {
+		qreal deltaAngle = currentAngle - previousAngle;
+
+		if (deltaAngle > mathUtils::pi) {
+			deltaAngle -= 2 * mathUtils::pi;
+		} else if (deltaAngle < -mathUtils::pi) {
+			deltaAngle += 2 * mathUtils::pi;
+		}
+
+		return deltaAngle;
+	}
+
 public slots:
 	void onItemDragged(graphicsUtils::AbstractItem *item);
 	void onRobotStartPositionChanged(const QPointF &newPos, twoDModel::model::RobotModel *robot);

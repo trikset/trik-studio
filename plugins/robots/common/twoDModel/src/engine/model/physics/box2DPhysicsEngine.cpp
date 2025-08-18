@@ -476,19 +476,6 @@ b2WorldId Box2DPhysicsEngine::box2DWorldId()
 	return mWorldId;
 }
 
-qreal Box2DPhysicsEngine::countAngle(const qreal previousAngle, const qreal currentAngle)
-{
-	qreal deltaAngle = currentAngle - previousAngle;
-
-	if (deltaAngle > mathUtils::pi) {
-	    deltaAngle -= 2 * mathUtils::pi;
-	} else if (deltaAngle < -mathUtils::pi) {
-	    deltaAngle += 2 * mathUtils::pi;
-	}
-
-	return deltaAngle;
-}
-
 float Box2DPhysicsEngine::pxToCm(qreal px) const
 {
 	return static_cast<float>(px / mPixelsInCm);
