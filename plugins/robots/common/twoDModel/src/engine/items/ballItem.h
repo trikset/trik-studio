@@ -15,7 +15,6 @@
 #pragma once
 
 #include <qrutils/graphicsUtils/abstractItem.h>
-
 #include "src/engine/items/solidItem.h"
 
 class QSvgRenderer;
@@ -29,7 +28,8 @@ class BallItem : public graphicsUtils::AbstractItem, public SolidItem
 	Q_DISABLE_COPY(BallItem)
 
 public:
-	explicit BallItem(const QPointF &position);
+	explicit BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	                  const QPointF &position);
 	~BallItem();
 
 	/// Creates and returns ball item for 2D model palette.

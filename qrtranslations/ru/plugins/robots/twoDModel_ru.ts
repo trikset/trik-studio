@@ -375,7 +375,7 @@
         <translation>Объект %1 не имеет свойства %2</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+177"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
         <source>Remove</source>
         <translation type="unfinished">Удалить</translation>
     </message>
@@ -425,7 +425,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+571"/>
         <source>Decrease speed</source>
         <translation>Уменьшить скорость</translation>
     </message>
@@ -445,7 +445,7 @@
         <translation>Увеличить скорость</translation>
     </message>
     <message>
-        <location line="+216"/>
+        <location line="-402"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -455,7 +455,17 @@
         <translation>Правое колесо:</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+31"/>
+        <source>Metric system units:</source>
+        <translation>Единицы измерения</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Pixels in cm:</source>
+        <translation>Кол-во пиксей в см</translation>
+    </message>
+    <message>
+        <location line="+38"/>
         <source>Realistic physics</source>
         <translation>Реалистичная физика</translation>
     </message>
@@ -480,17 +490,17 @@
         <translation>Высота робота:</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+40"/>
         <source>Robot mass:</source>
         <translation>Масса робота:</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-20"/>
         <source>Robot width:</source>
         <translation>Ширина робота:</translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+43"/>
         <source>Robot track:</source>
         <translation>Колея робота:</translation>
     </message>
@@ -573,7 +583,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+193"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+195"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
     </message>
@@ -581,7 +591,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+43"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
     </message>
@@ -589,7 +599,7 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-137"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
         <source>Text (T)</source>
         <translation type="unfinished">Текст (Т)</translation>
     </message>
@@ -601,7 +611,7 @@
         <translation type="vanished">Кривая Безье (B)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+64"/>
         <source>Bezier Curve (Z)</source>
         <translation>Кривая Безье (Z)</translation>
     </message>
@@ -609,7 +619,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
         <source>Ellipse (E)</source>
         <translation>Эллипс (E)</translation>
     </message>
@@ -625,7 +635,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+46"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
         <source>Line (L)</source>
         <translation>Линия (L)</translation>
     </message>
@@ -633,7 +643,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
         <source>Rectangle (R)</source>
         <translation>Прямоугольник (R)</translation>
     </message>
@@ -641,7 +651,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
         <source>Can (C)</source>
         <translation>Банка (C)</translation>
     </message>
@@ -649,7 +659,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+59"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+61"/>
         <source>Stylus (S)</source>
         <translation>Стилус (S)</translation>
     </message>
@@ -657,7 +667,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+59"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+61"/>
         <source>Wall (W)</source>
         <translation>Стена (W)</translation>
     </message>
@@ -665,7 +675,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+61"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+66"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
@@ -675,7 +685,7 @@
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+103"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>
@@ -683,7 +693,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+185"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+188"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+18"/>
@@ -698,7 +708,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+499"/>
+        <location line="+508"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>
@@ -911,7 +921,7 @@
 <context>
     <name>twoDModel::view::DetailsTab</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+36"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+38"/>
         <source>Display</source>
         <translation>Дисплей</translation>
     </message>
@@ -934,6 +944,11 @@
         <location line="+1"/>
         <source>Model parameters</source>
         <translation>Параметры модели</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Metric system parameters</source>
+        <translation>Параметры метрической системы</translation>
     </message>
 </context>
 <context>
@@ -1038,7 +1053,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+738"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+739"/>
         <source>Select images</source>
         <translation type="unfinished">Выберите картинки</translation>
     </message>
@@ -1071,7 +1086,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+329"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+328"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1143,7 +1158,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+171"/>
+        <location line="+201"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

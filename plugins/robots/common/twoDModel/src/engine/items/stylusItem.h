@@ -26,7 +26,8 @@ class StylusItem : public ColorFieldItem
 	Q_OBJECT
 
 public:
-	StylusItem(qreal x1, qreal y1);
+	StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	           qreal x1, qreal y1);
 	~StylusItem() override;
 	AbstractItem *clone() const override;
 

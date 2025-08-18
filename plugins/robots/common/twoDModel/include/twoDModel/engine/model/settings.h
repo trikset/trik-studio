@@ -15,7 +15,7 @@
 #pragma once
 
 #include <QtCore/QObject>
-
+#include "metricSystem.h"
 #include "twoDModel/twoDModelDeclSpec.h"
 
 class QDomElement;
@@ -36,6 +36,12 @@ public:
 
 	/// Returns true is user wants to add some noise to sensors values.
 	bool realisticSensors() const;
+
+	/// To simplify the already overloaded WorldModel xml,
+	/// it was decided to use a tag in the existing <settings> tag
+	MetricSystem &metricSystem();
+
+	qreal pixelsInCm() const;
 
 	/// Returns true is user wants to add some noise to motors work.
 	bool realisticMotors() const;
@@ -58,6 +64,7 @@ private:
 	bool mRealisticPhysics { false };
 	bool mRealisticSensors { false };
 	bool mRealisticMotors { false };
+	MetricSystem mMetricSystem;
 };
 
 }

@@ -18,6 +18,7 @@
 #include "robotModel.h"
 #include "timeline.h"
 #include "settings.h"
+#include "metricCoordinateSystem.h"
 #include <twoDModel/robotModel/twoDRobotModel.h>
 
 #include "twoDModel/twoDModelDeclSpec.h"
@@ -39,6 +40,10 @@ class ConstraintsChecker;
 
 namespace model {
 
+namespace physics {
+class PhysicsEngineFactory;
+}
+
 /// A main class managing model part of 2D emulator. Creates and maintains different parts
 /// such as world map, robot model, timelines and physical engines.
 class TWO_D_MODEL_EXPORT Model : public QObject
@@ -46,7 +51,9 @@ class TWO_D_MODEL_EXPORT Model : public QObject
 	Q_OBJECT
 
 public:
-	explicit Model(QObject *parent = nullptr);
+	/// Dependency injection for the physics engine
+	explicit Model(physics::PhysicsEngineFactory *engineFactory,
+	               QObject *parent = nullptr);
 	~Model();
 
 	void init(qReal::ErrorReporterInterface &errorReporter
@@ -64,6 +71,12 @@ public:
 
 	/// Returns a reference to a 2D model`s settings storage.
 	Settings &settings();
+
+	/// Metric coordinate system for usage in twoDModelWidget
+	MetricCoordinateSystem &coordinateMetricSystem();
+
+	/// Metric system for usage in twoDModelWidget (and Grid)
+	MetricSystem &metricSystem();
 
 	/// Returns a pointer to an object that reports system errors.
 	qReal::ErrorReporterInterface *errorReporter();
@@ -113,14 +126,16 @@ private:
 	void initPhysics();
 
 	Settings mSettings;
+	MetricCoordinateSystem mMetricCoordinateSystem;
 	WorldModel mWorldModel;
 	Timeline mTimeline;
 	QScopedPointer<constraints::ConstraintsChecker> mChecker;
 	RobotModel * mRobotModel {}; //Has ownership
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
 	qReal::LogicalModelAssistInterface *mLogicalModel;  // Doesn`t take ownership.
-	physics::PhysicsEngineBase *mRealisticPhysicsEngine;  // Takes ownership.
-	physics::PhysicsEngineBase *mSimplePhysicsEngine;  // Takes ownership.
+	QScopedPointer<physics::PhysicsEngineFactory> mEngineFactory;
+	physics::PhysicsEngineBase *mRealisticPhysicsEngine {};  // Takes ownership.
+	physics::PhysicsEngineBase *mSimplePhysicsEngine {};  // Takes ownership.
 	quint64 mStartTimestamp {0};
 };
 

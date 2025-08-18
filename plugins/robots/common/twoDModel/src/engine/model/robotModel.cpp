@@ -17,7 +17,6 @@
 #include <qmath.h>
 #include <QtCore/QtMath>
 #include <QtGui/QTransform>
-
 #include <qrutils/mathUtils/math.h>
 
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
@@ -27,7 +26,7 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/settings.h"
 #include "twoDModel/engine/model/timeline.h"
-
+#include "twoDModel/engine/model/metricCoordinateSystem.h"
 #include "physics/physicsEngineBase.h"
 
 #include "src/engine/items/startPosition.h"
@@ -39,15 +38,18 @@ using namespace kitBase::robotModel::robotParts;
 const int positionStampsCount = 50;
 
 RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
-		, const Settings &settings
+                , const Settings &settings
+                , twoDModel::model::MetricCoordinateSystem &metricSystem
 		, QObject *parent)
 	: QObject(parent)
 	, mSettings(settings)
 	, mRobotModel(robotModel)
-	, mSensorsConfiguration(robotModel.robotId(), robotModel.size())
+        , mSensorsConfiguration(metricSystem, robotModel.robotId(), robotModel.size())
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
-	, mStartPositionMarker(new items::StartPosition(info().size()))
+        , mStartPositionMarker(
+                  new items::StartPosition(&metricSystem, info().size()))
+        , mMetricSystem(metricSystem)
 {
 	reinit();
 }
@@ -447,7 +449,9 @@ void RobotModel::serializeWorldModel(QDomElement &parent) const
 	}
 
 	QDomElement robot = world.ownerDocument().createElement("robot");
-	robot.setAttribute("position", QString::number(mPos.x()) + ":" + QString::number(mPos.y()));
+	robot.setAttribute("position",
+	                   QString::number(mMetricSystem.toUnit(mPos.x()))
+	                   + ":" + QString::number(mMetricSystem.toUnit(mPos.y())));
 	robot.setAttribute("direction", QString::number(mAngle));
 	mStartPositionMarker->serialize(robot);
 	world.appendChild(robot);
@@ -467,7 +471,7 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
 	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
 	onRobotReturnedOnGround();
-	setPosition(QPointF(x, y));
+	setPosition(mMetricSystem.toPx({x, y}));
 	setRotation(robotElement.attribute("direction", "0").toDouble());
 	mStartPositionMarker->deserializeCompatibly(robotElement);
 	emit deserialized(QPointF(mPos.x(), mPos.y()), mAngle);
@@ -504,6 +508,11 @@ void RobotModel::setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel:
 		mWheelsToMotorPortsMap[wheel] = port;
 		emit wheelOnPortChanged(wheel, port);
 	}
+}
+
+kitBase::robotModel::PortInfo RobotModel::getPortInfoOnWheel(WheelEnum wheel) const
+{
+	return mWheelsToMotorPortsMap[wheel];
 }
 
 int RobotModel::varySpeed(const int speed) const

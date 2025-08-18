@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "twoDModel/engine/model/model.h"
-
+#include "twoDModel/engine/model/metricCoordinateSystem.h"
 #include <qrkernel/settingsManager.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
@@ -22,6 +22,7 @@
 #include "src/engine/constraints/constraintsChecker.h"
 #include "src/robotModel/nullTwoDRobotModel.h"
 #include "src/engine/items/startPosition.h"
+#include "physics/physicsEngineFactory.h"
 #include "physics/simplePhysicsEngine.h"
 #include "physics/box2DPhysicsEngine.h"
 
@@ -29,12 +30,16 @@ using namespace twoDModel::model;
 
 static auto XML_VERSION = "20190819";
 
-Model::Model(QObject *parent)
+Model::Model(physics::PhysicsEngineFactory *engineFactory,
+             QObject *parent)
 	: QObject(parent)
-	, mChecker(nullptr)
-	, mErrorReporter(nullptr)
-	, mRealisticPhysicsEngine(nullptr)
-	, mSimplePhysicsEngine(nullptr)
+        , mMetricCoordinateSystem(mSettings.metricSystem())
+        , mWorldModel(mSettings, mMetricCoordinateSystem)
+        , mChecker(nullptr)
+        , mErrorReporter(nullptr)
+        , mEngineFactory(engineFactory)
+        , mRealisticPhysicsEngine(nullptr)
+        , mSimplePhysicsEngine(nullptr)
 {
 	initPhysics();
 	connect(&mSettings, &Settings::physicsChanged, this, &Model::resetPhysics);
@@ -109,6 +114,16 @@ Settings &Model::settings()
 	return mSettings;
 }
 
+MetricCoordinateSystem &Model::coordinateMetricSystem()
+{
+	return mMetricCoordinateSystem;
+}
+
+MetricSystem &Model::metricSystem()
+{
+	return mMetricCoordinateSystem.metricSystem();
+}
+
 qReal::ErrorReporterInterface *Model::errorReporter()
 {
 	return mErrorReporter;
@@ -178,7 +193,8 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF 
 		return;
 	}
 
-	mRobotModel = new RobotModel(robotModel, mSettings, this);
+	mRobotModel = new RobotModel(robotModel, mSettings,
+	                             mMetricCoordinateSystem, this);
 	mRobotModel->setPosition(pos);
 
 	connect(&mTimeline, &Timeline::started, mRobotModel, &RobotModel::reinit);
@@ -232,8 +248,12 @@ void Model::resetPhysics()
 
 void Model::initPhysics()
 {
-	mRealisticPhysicsEngine = new physics::Box2DPhysicsEngine(mWorldModel, robotModels());
-	mSimplePhysicsEngine = new physics::SimplePhysicsEngine(mWorldModel, robotModels());
+	mRealisticPhysicsEngine
+	                = mEngineFactory->create(true)(mWorldModel, robotModels());
+
+	mSimplePhysicsEngine
+	                = mEngineFactory->create(false)(mWorldModel, robotModels());
+
 	connect(this, &model::Model::robotAdded, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 	connect(this, &model::Model::robotAdded, mSimplePhysicsEngine, &physics::PhysicsEngineBase::addRobot);

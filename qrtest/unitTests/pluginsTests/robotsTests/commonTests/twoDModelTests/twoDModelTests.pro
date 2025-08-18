@@ -15,21 +15,26 @@
 TARGET = robots_twoDModel_unittests
 
 include(../../../../common.pri)
-
 include(../../../../../../plugins/robots/common/twoDModel/twoDModel.pri)
+include(mocks.pri)
 
 links(qrgui-preferences-dialog qrgui-text-editor qrgui-controller)
 
 INCLUDEPATH += \
-	../../../../../../plugins/robots/common/twoDModel \
-	../../../../../../plugins/robots/common/twoDModel/include \
+	../../../../mocks/plugins/robots/common/kitBase/include/ \
+	../../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/include/ \
+	../../../../../../plugins/robots/common/twoDModel/ \
+	../../../../../../plugins/robots/common/twoDModel/include/ \
+	../../../../mocks/plugins/robots/common/twoDModel/include/  \
 
 # Tests
 HEADERS += \
 	$$PWD/engineTests/constraintsTests/constraintsParserTests.h \
+	$$PWD/engineTests/modelTests/modelParserTests.h \
 
 SOURCES += \
 	$$PWD/engineTests/constraintsTests/constraintsParserTests.cpp \
+	$$PWD/engineTests/modelTests/modelParserTests.cpp \
 
 # Support classes
 HEADERS += \

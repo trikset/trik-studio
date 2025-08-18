@@ -20,6 +20,11 @@ class QDomElement;
 class QGraphicsTextItem;
 
 namespace twoDModel {
+
+namespace model {
+        class MetricCoordinateSystem;
+}
+
 namespace items {
 
 /// Represents some zone on the 2D model world, probably with some text like "Start zone".
@@ -28,7 +33,9 @@ class RegionItem : public QGraphicsObject
 	Q_OBJECT
 
 public:
-	explicit RegionItem(QGraphicsItem *parent = nullptr);
+	explicit RegionItem(
+	                twoDModel::model::MetricCoordinateSystem *metricSystem,
+	                QGraphicsItem *parent = nullptr);
 
 	/// Returns a unique identifier of the region.
 	QString id() const;
@@ -68,6 +75,8 @@ public:
 
 	QRectF boundingRect() const override;
 
+	twoDModel::model::MetricCoordinateSystem *metricSystem() const;
+
 	virtual void serialize(QDomElement &element) const;
 	virtual void deserialize(const QDomElement &element);
 
@@ -86,6 +95,7 @@ private:
 	bool mFilled;
 	QColor mColor;
 	QSizeF mSize;
+	twoDModel::model::MetricCoordinateSystem *mMetricSystem;
 };
 
 }

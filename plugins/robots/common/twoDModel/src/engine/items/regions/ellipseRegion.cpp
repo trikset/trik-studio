@@ -16,8 +16,9 @@
 
 using namespace twoDModel::items;
 
-EllipseRegion::EllipseRegion(QGraphicsItem *parent)
-	: RegionItem(parent)
+EllipseRegion::EllipseRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+                             QGraphicsItem *parent)
+        : RegionItem(metricSystem, parent)
 {
 }
 

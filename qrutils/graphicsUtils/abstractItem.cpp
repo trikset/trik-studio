@@ -29,7 +29,9 @@ const qreal epsilon = 0.0000001;
 
 AbstractItem::AbstractItem(QGraphicsItem* parent)
 	: QGraphicsObject(parent)
-	, mId(QUuid::createUuid().toString())
+        , mId(QUuid::createUuid().toString())
+        , mCoordinateSystem(nullptr)
+        , mDefaultCoordinateSystem(new CoordinateSystem)
 {
 	setAcceptHoverEvents(true);
 	setCursor(mHoverCursor);
@@ -40,7 +42,7 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 }
 
 AbstractItem::AbstractItem(Qt::CursorShape resizeCursor, QGraphicsItem *parent)
-	: AbstractItem(parent)
+        : AbstractItem(parent)
 {
 	mResizeCursor = resizeCursor;
 }
@@ -130,6 +132,20 @@ void AbstractItem::setPen(const QPen &pen)
 {
 	mPen = pen;
 	emit penChanged(pen);
+}
+
+void AbstractItem::setCoordinateSystem(AbstractCoordinateSystem *coordinateSystem)
+{
+	mCoordinateSystem = coordinateSystem;
+}
+
+AbstractCoordinateSystem *AbstractItem::coordinateSystem() const
+{
+	if (mCoordinateSystem) {
+		return mCoordinateSystem;
+	}
+
+	return mDefaultCoordinateSystem.data();
 }
 
 void AbstractItem::setCoordinates(const QRectF &pos)
@@ -404,7 +420,11 @@ QDomElement AbstractItem::setPenBrushToElement(QDomElement &target, const QStrin
 	}
 
 	target.setAttribute("stroke", mPen.color().name(QColor::HexArgb));
-	target.setAttribute("stroke-width", mPen.width());
+	qreal width = mPen.widthF();
+	if (mCoordinateSystem) {
+		width = mCoordinateSystem->toUnit(mPen.widthF());
+	}
+	target.setAttribute("stroke-width", QString::number(width));
 
 	QString penStyle;
 	switch (mPen.style()) {
@@ -454,7 +474,12 @@ void AbstractItem::readPenBrush(const QDomElement &docItem)
 
 	mBrush.setColor(QColor(docItem.attribute("fill", "")));
 	mPen.setColor(QColor(docItem.attribute("stroke", "")));
-	mPen.setWidth(static_cast<int>(docItem.attribute("stroke-width", "").toDouble()));
+	auto value = docItem.attribute("stroke-width", "").toDouble();
+	if (mCoordinateSystem) {
+		value = mCoordinateSystem->toPx(value);
+	}
+
+	mPen.setWidthF(value);
 
 	QString penStyle = docItem.attribute("stroke-style", "");
 	if (penStyle == "solid") {

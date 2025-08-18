@@ -25,7 +25,8 @@ class CommentItem : public graphicsUtils::AbstractItem
 	Q_DISABLE_COPY(CommentItem)
 
 public:
-	explicit CommentItem(const QPointF &begin, const QPointF &end);
+	explicit CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	                     const QPointF &begin, const QPointF &end);
 
 	/// Creates and returns comment item for 2D model palette.
 	/// Transfers ownership.

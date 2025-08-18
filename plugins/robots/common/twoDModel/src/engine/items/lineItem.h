@@ -26,7 +26,8 @@ class LineItem : public ColorFieldItem
 	Q_OBJECT
 
 public:
-	LineItem(const QPointF &begin, const QPointF &end, int cornerRadius = 0);
+	LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	         const QPointF &begin, const QPointF &end, int cornerRadius = 0);
 
 	AbstractItem *clone() const override;
 

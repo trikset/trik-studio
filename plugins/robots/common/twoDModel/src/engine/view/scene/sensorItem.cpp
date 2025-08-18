@@ -37,7 +37,8 @@ using namespace kitBase::robotModel;
 
 const int selectionDrift = 7;
 
-SensorItem::SensorItem(model::SensorsConfiguration &configuration
+SensorItem::SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+                       model::SensorsConfiguration &configuration
 		, const PortInfo &port, const QString &pathToImage, const QRect &imageRect)
 	: mConfiguration(configuration)
 	, mPort(port)
@@ -47,6 +48,7 @@ SensorItem::SensorItem(model::SensorsConfiguration &configuration
 	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, true)
 	, mPortItem(new PortItem(port))
 {
+	setCoordinateSystem(metricSystem);
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 
 	setAcceptDrops(true);
@@ -112,18 +114,22 @@ void SensorItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 QDomElement SensorItem::serialize(QDomElement &parent) const
 {
 	QDomElement result = RotateItem::serialize(parent);
+	auto *coordSystem = coordinateSystem();
 	result.setTagName("sensor");
-	result.setAttribute("position", QString::number(x()) + ":" + QString::number(y()));
+	result.setAttribute("position",
+	                    QString::number(coordSystem->toUnit(x()))
+	                    + ":" + QString::number(coordSystem->toUnit(y())));
 	result.setAttribute("direction", QString::number(rotation()));
 	return result;
 }
 
 void SensorItem::deserialize(const QDomElement &element)
 {
+	auto *coordSystem = coordinateSystem();
 	const QString positionStr = element.attribute("position", "0:0");
 	const QStringList splittedStr = positionStr.split(":");
-	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
-	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
+	const qreal x = coordSystem->toPx(static_cast<qreal>(splittedStr[0].toDouble()));
+	const qreal y = coordSystem->toPx(static_cast<qreal>(splittedStr[1].toDouble()));
 	setPos(x, y);
 
 	setRotation(element.attribute("direction", "0").toDouble());

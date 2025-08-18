@@ -28,7 +28,7 @@ const int frequency = 150;  // The text on the ruler will not be met more often 
 Ruler::Ruler(QWidget *parent)
 	: QFrame(parent)
 	, mOrientation(Qt::Horizontal)
-	, mPixelsInCm(1.0)
+        , mMetricFactor(1.0)
 {
 	mFont.setPixelSize(8);
 }
@@ -40,6 +40,11 @@ Ruler::~Ruler()
 Qt::Orientation Ruler::orientation() const
 {
 	return mOrientation;
+}
+
+void Ruler::setMetricFactor(const qreal factor)
+{
+	mMetricFactor = factor;
 }
 
 void Ruler::setOrientation(Qt::Orientation orientation)
@@ -55,11 +60,6 @@ void Ruler::setOrientation(Qt::Orientation orientation)
 	}
 }
 
-void Ruler::setPixelsInCm(qreal pixelsInCm)
-{
-	mPixelsInCm = pixelsInCm;
-}
-
 void Ruler::paintEvent(QPaintEvent *event)
 {
 	QFrame::paintEvent(event);
@@ -73,12 +73,11 @@ void Ruler::paintEvent(QPaintEvent *event)
 	// Without making first cell being multiple of shift the first marker will be always upon the first
 	// line and that looks horrible when user scrolls the scene.
 	const int realFirstCell = firstCell / shift * shift * gridSize;
-
 	for (int coordinate = realFirstCell
 			; coordinate < relevantCoordinate(sceneRect.bottomRight())
 			; coordinate += shift * gridSize)
 	{
-		const QString text = QString::number(coordinate / mPixelsInCm);
+		const QString text = QString::number(coordinate / mMetricFactor);
 		const QRectF boundingRect = textBoundingRect(text);
 		const qreal relevantPosition = relevantCoordinate(mView->mapFromScene(makePoint(coordinate, 0)));
 		const QPointF position = drawingPoint(relevantPosition, boundingRect.size());

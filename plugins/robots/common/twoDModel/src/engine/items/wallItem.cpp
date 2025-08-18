@@ -19,15 +19,17 @@
 
 #include <qrkernel/settingsManager.h>
 #include <qrutils/mathUtils/geometry.h>
-#include <twoDModel/engine/model/constants.h>
+#include <twoDModel/engine/model/metricCoordinateSystem.h>
 
 using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-WallItem::WallItem(const QPointF &begin, const QPointF &end)
-	: mImage(":/icons/2d_wall.png")
+WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+                   const QPointF &begin, const QPointF &end)
+        : mImage(":/icons/2d_wall.png")
 {
+	setCoordinateSystem(metricSystem);
 	setX1(begin.x());
 	setY1(begin.y());
 	setX2(end.x());
@@ -42,7 +44,7 @@ WallItem::WallItem(const QPointF &begin, const QPointF &end)
 
 WallItem *WallItem::clone() const
 {
-	WallItem * const cloned = new WallItem({x1(), y1()}, {x2(), y2()});
+	WallItem * const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	connect(this, &AbstractItem::positionChanged, cloned, &WallItem::recalculateBorders);
 	connect(this, &AbstractItem::x1Changed, cloned, &WallItem::recalculateBorders);
@@ -141,8 +143,12 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	wallNode.setTagName("wall");
 	setPenBrushToElement(wallNode, "wall");
 	auto pos = scenePos();
-	mLineImpl.serialize(wallNode, x1() + pos.x(), y1() + pos.y()
-			, x2() + pos.x(), y2() + pos.y());
+	const auto *coordSystem = coordinateSystem();
+	mLineImpl.serialize(wallNode,
+	                    coordSystem->toUnit(x1() + pos.x()),
+	                    coordSystem->toUnit(y1() + pos.y()),
+	                    coordSystem->toUnit(x2() + pos.x()),
+	                    coordSystem->toUnit(y2() + pos.y()));
 	return wallNode;
 }
 
@@ -150,8 +156,9 @@ void WallItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
 	const QPair<QPointF, QPointF> points = mLineImpl.deserialize(element);
-	const QPointF begin = points.first;
-	const QPointF end = points.second;
+	const auto *coordSystem = coordinateSystem();
+	const QPointF begin = coordSystem->toPx(points.first);
+	const QPointF end = coordSystem->toPx(points.second);
 
 	setPos(QPointF());
 	setX1(begin.x());
@@ -160,8 +167,8 @@ void WallItem::deserialize(const QDomElement &element)
 	setY2(end.y());
 
 	readPenBrush(element);
-	if (pen().width()) {
-		mWallWidth = pen().width();
+	if (pen().widthF()) {
+		mWallWidth = pen().widthF();
 	}
 
 	recalculateBorders();

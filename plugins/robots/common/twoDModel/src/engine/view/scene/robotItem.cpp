@@ -25,10 +25,12 @@ using namespace kitBase::robotModel::robotParts;
 const int border = 0;
 const int defaultTraceWidth = 6;
 
-RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel)
+RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+                     const QString &robotImageFileName, model::RobotModel &robotModel)
 	: mImage(robotImageFileName, true)
 	, mRobotModel(robotModel)
 {
+	setCoordinateSystem(metricSystem);
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
 	connect(&mRobotModel, &model::RobotModel::rotationChanged, this, &RobotItem::setRotation);
@@ -64,7 +66,7 @@ RobotItem::RobotItem(const QString &robotImageFileName, model::RobotModel &robot
 	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> sensors = robotModel.info().specialDevices();
 	for (const kitBase::robotModel::PortInfo &port : sensors.keys()) {
 		const kitBase::robotModel::DeviceInfo device = sensors[port];
-		SensorItem *sensorItem = new SensorItem(robotModel.configuration(), port
+		SensorItem *sensorItem = new SensorItem(coordinateSystem(), robotModel.configuration(), port
 				, robotModel.info().sensorImagePath(device), robotModel.info().sensorImageRect(device));
 		addSensor(port, sensorItem);
 
@@ -140,19 +142,23 @@ void RobotItem::resizeItem(QGraphicsSceneMouseEvent *event)
 QDomElement RobotItem::serialize(QDomElement &parent) const
 {
 	QDomElement result = RotateItem::serialize(parent);
+	auto *coordSystem = coordinateSystem();
 	result.setTagName("robot");
-	result.setAttribute("position", QString::number(x()) + ":" + QString::number(y()));
+	result.setAttribute("position",
+	                    QString::number(coordSystem->toUnit(x()))
+	                    + ":" + QString::number(coordSystem->toUnit(y())));
 	result.setAttribute("direction", QString::number(rotation()));
 	return result;
 }
 
 void RobotItem::deserialize(const QDomElement &element)
 {
+	auto *coordSystem = coordinateSystem();
 	const QString positionStr = element.attribute("position", "0:0");
 	const QStringList splittedStr = positionStr.split(":");
 	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
 	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
-	setPos(QPointF(x, y));
+	setPos(coordSystem->toPx(QPointF(x, y)));
 
 	setRotation(element.attribute("direction", "0").toDouble());
 }

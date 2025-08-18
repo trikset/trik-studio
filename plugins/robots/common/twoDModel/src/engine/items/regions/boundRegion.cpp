@@ -22,8 +22,10 @@ using namespace twoDModel::items;
 
 const int defaultStroke = 0;
 
-BoundRegion::BoundRegion(const QGraphicsObject &boundItem, const QString &boundId, QGraphicsItem *parent)
-	: RegionItem(parent)
+BoundRegion::BoundRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+                         const QGraphicsObject &boundItem,
+                         const QString &boundId, QGraphicsItem *parent)
+        : RegionItem(metricSystem, parent)
 	, mBoundItem(boundItem)
 	, mBoundId(boundId)
 	, mStroke(defaultStroke)

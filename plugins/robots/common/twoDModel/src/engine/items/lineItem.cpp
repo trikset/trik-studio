@@ -24,8 +24,10 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-LineItem::LineItem(const QPointF &begin, const QPointF &end, int cornerRadius)
-	: mCornerRadius(cornerRadius)
+LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+                   const QPointF &begin, const QPointF &end, int cornerRadius)
+        : ColorFieldItem(metricSystem),
+          mCornerRadius(cornerRadius)
 {
 	setX1(begin.x());
 	setY1(begin.y());
@@ -36,7 +38,7 @@ LineItem::LineItem(const QPointF &begin, const QPointF &end, int cornerRadius)
 
 AbstractItem *LineItem::clone() const
 {
-	const auto cloned = new LineItem({x1(), y1()}, {x2(), y2()}, mCornerRadius);
+	const auto cloned = new LineItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()}, mCornerRadius);
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
@@ -142,11 +144,12 @@ QDomElement LineItem::serializeWithIndent(QDomElement &parent, const QPointF &to
 {
 	QDomElement lineNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(lineNode, mSerializeName);
+	auto *coordSystem = coordinateSystem();
 	mLineImpl.serialize(lineNode
-			, x1() + scenePos().x() - topLeftPicture.x()
-			, y1() + scenePos().y() - topLeftPicture.y()
-			, x2() + scenePos().x() - topLeftPicture.x()
-			, y2() + scenePos().y() - topLeftPicture.y());
+	                , coordSystem->toUnit(x1() + scenePos().x() - topLeftPicture.x())
+	                , coordSystem->toUnit(y1() + scenePos().y() - topLeftPicture.y())
+	                , coordSystem->toUnit(x2() + scenePos().x() - topLeftPicture.x())
+	                , coordSystem->toUnit(y2() + scenePos().y() - topLeftPicture.y()));
 	return lineNode;
 }
 
@@ -159,8 +162,9 @@ void LineItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
 	const QPair<QPointF, QPointF> points = mLineImpl.deserialize(element);
-	const QPointF begin = points.first;
-	const QPointF end = points.second;
+	auto *coordSystem = coordinateSystem();
+	const QPointF begin = coordSystem->toPx(points.first);
+	const QPointF end = coordSystem->toPx(points.second);
 
 	setPos(QPointF());
 	setX1(begin.x());

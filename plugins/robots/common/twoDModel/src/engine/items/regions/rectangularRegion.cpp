@@ -16,8 +16,9 @@
 
 using namespace twoDModel::items;
 
-RectangularRegion::RectangularRegion(QGraphicsItem *parent)
-	: RegionItem(parent)
+RectangularRegion::RectangularRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+                                     QGraphicsItem *parent)
+        : RegionItem(metricSystem, parent)
 {
 }
 

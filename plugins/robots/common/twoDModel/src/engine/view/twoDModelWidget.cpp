@@ -143,9 +143,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 
 	mUi->horizontalRuler->setScene(mUi->graphicsView);
 	mUi->verticalRuler->setScene(mUi->graphicsView);
-	mUi->horizontalRuler->setPixelsInCm(pixelsInCm);
-	mUi->verticalRuler->setPixelsInCm(pixelsInCm);
 
+	auto pixelsInCm = mModel.settings().pixelsInCm();
 	/// @todo: make some values editable
 	mUi->detailsTab->setParamsSettings(mUi->physicsParamsFrame);
 	mUi->wheelDiamInCm->setValue(robotWheelDiameterInCm);
@@ -157,7 +156,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->robotMassInGr->setValue(robotMass);
 	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
 
-	connect(&mModel, &model::Model::robotAdded, [this](){
+	connect(&mModel, &model::Model::robotAdded, [this, pixelsInCm](){
 		auto robotModels = mModel.robotModels();
 		auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
 				: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
@@ -979,16 +978,46 @@ void TwoDModelWidget::initRunStopButtons()
 	connect(mUi->stopButton, &QPushButton::clicked, this, &TwoDModelWidget::stopButtonPressed);
 }
 
-bool TwoDModelWidget::setSelectedPort(QComboBox * const comboBox, const PortInfo &port)
+template<class T>
+bool TwoDModelWidget::setSelectedValue(QComboBox * const comboBox, const T &port)
 {
 	for (int i = 0; i < comboBox->count(); ++i) {
-		if (comboBox->itemData(i).value<PortInfo>() == port) {
+		if (comboBox->itemData(i).value<T>() == port) {
 			comboBox->setCurrentIndex(i);
 			return true;
 		}
 	}
 
 	return false;
+}
+
+void TwoDModelWidget::connectMetricComboBoxes()
+{
+	connect(&mModel.metricSystem(), &MetricSystem::metricUnitChanged
+	        , this, [=](const MetricSystem::Unit &unit) {
+		setSelectedValue(mUi->metricComboBox, unit);
+	});
+
+	connect(mUi->metricComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
+	        , this, [this](int index) {
+		const auto unitValue = mUi->metricComboBox->itemData(index)
+		                        .value<MetricSystem::Unit>();
+		mModel.metricSystem().setUnit(unitValue);
+		const auto realValue = mModel.metricSystem().countFactor();
+		mUi->horizontalRuler->setMetricFactor(realValue);
+		mUi->verticalRuler->setMetricFactor(realValue);
+		Q_EMIT mUi->gridParametersBox->parametersChanged();
+	});
+
+	const auto availableUnits = mModel.metricSystem().currentValues();
+	const auto beginIter = availableUnits.begin();
+	mModel.metricSystem().setUnit(beginIter->second);
+
+	for (auto currentUnit = beginIter;
+	     currentUnit != availableUnits.end(); currentUnit++) {
+		mUi->metricComboBox->addItem(currentUnit->first,
+		                             QVariant::fromValue(currentUnit->second));
+	}
 }
 
 void TwoDModelWidget::updateWheelComboBoxes()
@@ -1021,8 +1050,8 @@ void TwoDModelWidget::updateWheelComboBoxes()
 		}
 	}
 
-	if (!setSelectedPort(mUi->leftWheelComboBox, leftWheelOldPort)) {
-		if (!setSelectedPort(mUi->leftWheelComboBox
+	if (!setSelectedValue(mUi->leftWheelComboBox, leftWheelOldPort)) {
+		if (!setSelectedValue(mUi->leftWheelComboBox
 				, mSelectedRobotItem->robotModel().info().defaultLeftWheelPort())) {
 			qWarning() << "Incorrect defaultLeftWheelPort set in configurer:"
 					<< mSelectedRobotItem->robotModel().info().defaultLeftWheelPort().toString();
@@ -1033,8 +1062,8 @@ void TwoDModelWidget::updateWheelComboBoxes()
 		}
 	}
 
-	if (!setSelectedPort(mUi->rightWheelComboBox, rightWheelOldPort)) {
-		if (!setSelectedPort(mUi->rightWheelComboBox
+	if (!setSelectedValue(mUi->rightWheelComboBox, rightWheelOldPort)) {
+		if (!setSelectedValue(mUi->rightWheelComboBox
 				, mSelectedRobotItem->robotModel().info().defaultRightWheelPort())) {
 
 			qWarning() << "Incorrect defaultRightWheelPort set in configurer:"
@@ -1079,10 +1108,17 @@ void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 				, this, [=](RobotModel::WheelEnum wheel, const PortInfo &port)
 		{
 			if (port.isValid()) {
-				setSelectedPort(wheel == RobotModel::WheelEnum::left
+				setSelectedValue(wheel == RobotModel::WheelEnum::left
 						? mUi->leftWheelComboBox : mUi->rightWheelComboBox, port);
 			}
 		});
+	}
+}
+
+namespace {
+        static bool isTrikModel(const QString &name) {
+		return name.contains("TrikV62");
+
 	}
 }
 
@@ -1095,6 +1131,16 @@ void TwoDModelWidget::setSelectedRobotItem(RobotItem *robotItem)
 
 	setPortsGroupBoxAndWheelComboBoxes();
 	updateWheelComboBoxes();
+
+	if (isTrikModel(mSelectedRobotItem->robotModel().info().name())) {
+		mUi->detailsTab->setMetricSettings(mUi->metricFrame);
+		connectMetricComboBoxes();
+		mUi->pixelsInCmDoubleSpinBox->setValue(
+		                        mModel.settings().pixelsInCm());
+	} else {
+		mUi->detailsTab->setMetricSectionsVisible(false);
+		mUi->metricFrame->hide();
+	}
 
 	mUi->detailsTab->setDisplay(nullptr);
 	mDisplay = mSelectedRobotItem->robotModel().info().displayWidget();

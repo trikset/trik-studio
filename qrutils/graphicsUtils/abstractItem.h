@@ -20,6 +20,7 @@
 #include <QGraphicsSceneHoverEvent>
 
 #include "qrutils/utilsDeclSpec.h"
+#include "coordinateSystem.h"
 
 const int drift = 15;
 const int resizeDrift = 10;
@@ -79,7 +80,8 @@ public:
 	QBrush brush() const;
 	void setBrush(const QBrush &brush);
 	void setPen(const QPen &pen);
-
+	void setCoordinateSystem(AbstractCoordinateSystem *coordinateSystem);
+	AbstractCoordinateSystem *coordinateSystem() const;
 	virtual void setPenStyle(const QString &text);
 	virtual void setPenWidth(int width);
 	virtual void setPenColor(const QString &text);
@@ -214,6 +216,8 @@ private:
 	QPen mStrokePen {Qt::green};
 	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
 	const Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
+	AbstractCoordinateSystem *mCoordinateSystem {};
+	QScopedPointer<CoordinateSystem> mDefaultCoordinateSystem;
 };
 
 }

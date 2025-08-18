@@ -31,7 +31,8 @@ class RobotItem : public graphicsUtils::RotateItem, public items::SolidItem
 	Q_OBJECT
 
 public:
-	RobotItem(const QString &robotImageFileName, model::RobotModel &robotModel);
+	RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	          const QString &robotImageFileName, model::RobotModel &robotModel);
 
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;

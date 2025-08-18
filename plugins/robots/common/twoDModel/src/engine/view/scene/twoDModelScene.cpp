@@ -33,7 +33,6 @@
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/vectorSensor.h>
 #include <kitBase/robotModel/robotParts/lidarSensor.h>
-
 #include "robotItem.h"
 
 #include "twoDModel/engine/model/model.h"
@@ -222,7 +221,8 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
-	auto robotItem = QSharedPointer<RobotItem>(new RobotItem(robotModel->info().robotImage(), *robotModel));
+	auto robotItem = QSharedPointer<RobotItem>(
+	        new RobotItem(&mModel.coordinateMetricSystem(), robotModel->info().robotImage(), *robotModel));
 
 	connect(&*robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
 	connect(&*robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
@@ -231,7 +231,7 @@ void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 
 	addItem(robotItem.data());
 	robotItem->robotModel().startPositionMarker()->setZValue(robotItem->zValue() - lowPrecision);
-	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership	
+	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership
 	subscribeItem(robotModel->startPositionMarker());
 
 	mRobots.insert(robotModel, robotItem);
@@ -343,46 +343,47 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		}
 	}
 
+	auto &metricSystem = mModel.coordinateMetricSystem();
 	for (auto &&robotItem : mRobots.values()) {
 		if (!robotItem->realBoundingRect().contains(position)) {
 			switch (mDrawingAction) {
 			case wall:
-				mCurrentWall.reset(new items::WallItem(position, position));
+				mCurrentWall.reset(new items::WallItem(&metricSystem, position, position));
 				initItem(mCurrentWall);
 				mModel.worldModel().addWall(mCurrentWall);
 				break;
 			case skittle:
-				mCurrentSkittle.reset(new items::SkittleItem(position));
+				mCurrentSkittle.reset(new items::SkittleItem(&metricSystem, position));
 				initItem(mCurrentSkittle);
 				mModel.worldModel().addSkittle(mCurrentSkittle);
 				break;
 			case ball:
-				mCurrentBall.reset(new items::BallItem(position));
+				mCurrentBall.reset(new items::BallItem(&metricSystem, position));
 				initItem(mCurrentBall);
 				mModel.worldModel().addBall(mCurrentBall);
 				break;
 			case line:
-				mCurrentLine.reset(new items::LineItem(position, position));
+				mCurrentLine.reset(new items::LineItem(&metricSystem, position, position));
 				initColorField(mCurrentLine);
 				break;
 			case bezier:
-				mCurrentCurve.reset(new items::CurveItem(position, position));
+				mCurrentCurve.reset(new items::CurveItem(&metricSystem, position, position));
 				initColorField(mCurrentCurve);
 				break;
 			case stylus:
-				mCurrentStylus.reset(new items::StylusItem(position.x(), position.y()));
+				mCurrentStylus.reset(new items::StylusItem(&metricSystem, position.x(), position.y()));
 				initColorField(mCurrentStylus);
 				break;
 			case rectangle:
-				mCurrentRectangle.reset(new items::RectangleItem(position, position));
+				mCurrentRectangle.reset(new items::RectangleItem(&metricSystem, position, position));
 				initColorField(mCurrentRectangle);
 				break;
 			case ellipse:
-				mCurrentEllipse.reset(new items::EllipseItem(position, position));
+				mCurrentEllipse.reset(new items::EllipseItem(&metricSystem, position, position));
 				initColorField(mCurrentEllipse);
 				break;
 			case comment:
-				mCurrentComment.reset(new items::CommentItem(position, position));
+				mCurrentComment.reset(new items::CommentItem(&metricSystem, position, position));
 				initItem(mCurrentComment);
 				mModel.worldModel().addComment(mCurrentComment);
 				break;
@@ -1030,20 +1031,25 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
-			? new RangeSensorItem(mModel.worldModel(), robotModel.configuration()
+	                ? new RangeSensorItem(mModel.worldModel()
+	                                , &mModel.coordinateMetricSystem()
+	                                , robotModel.configuration()
 					, port
 					, robotModel.info().rangeSensorAngleAndDistance(device)
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)
 					)
 			: device.isA<kitBase::robotModel::robotParts::LidarSensor>()
-			? new LidarSensorItem(mModel.worldModel(), robotModel.configuration()
+	                ? new LidarSensorItem(mModel.worldModel()
+	                                  , &mModel.coordinateMetricSystem()
+	                                  , robotModel.configuration()
 					  , port
 					  , robotModel.info().rangeSensorAngleAndDistance(device)
 					  , robotModel.info().sensorImagePath(device)
 					  , robotModel.info().sensorImageRect(device)
 					  )
-			: new SensorItem(robotModel.configuration()
+	                : new SensorItem(&mModel.coordinateMetricSystem()
+	                                , robotModel.configuration()
 					, port
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)

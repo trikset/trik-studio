@@ -19,13 +19,16 @@
 
 #include "twoDModel/engine/model/sensorsConfiguration.h"
 #include "kitBase/robotModel/robotParts/lidarSensor.h"
+#include "twoDModel/engine/model/metricCoordinateSystem.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
-SensorsConfiguration::SensorsConfiguration(const QString &robotModelName, const QSizeF &robotSize)
+SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem &metricSystem,
+                                           const QString &robotModelName, const QSizeF &robotSize)
 	: mRobotSize(robotSize)
 	, mRobotId(robotModelName)
+        , mMetricSystem(metricSystem)
 {
 }
 
@@ -107,7 +110,9 @@ void SensorsConfiguration::serialize(QDomElement &robot) const
 		sensorElem.setAttribute("type", device.toString());
 
 		sensorElem.setAttribute("position"
-				, QString::number(sensor.position.x()) + ":" + QString::number(sensor.position.y()));
+		                , QString::number(
+		                        mMetricSystem.toUnit(sensor.position.x()))
+		                        + ":" + QString::number(mMetricSystem.toUnit(sensor.position.y())));
 
 		sensorElem.setAttribute("direction", QString::number(sensor.direction));
 	}
@@ -134,7 +139,7 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 		const QStringList splittedStr = positionStr.split(":");
 		const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
 		const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
-		const QPointF position = QPoint(x, y);
+		const QPointF position = mMetricSystem.toPx({x, y});
 
 		const qreal direction = sensorNode.attribute("direction", "0").toDouble();
 

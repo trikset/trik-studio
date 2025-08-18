@@ -29,8 +29,10 @@ const QSizeF markerSize(12, 12);
 const QColor markerColor1 = "#ffcc66";
 const QColor markerColor2 = "#ff6666";
 
-CurveItem::CurveItem(const QPointF &begin, const QPointF &end)
-	: mMarker1(this)
+CurveItem::CurveItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+                     const QPointF &begin, const QPointF &end)
+        : ColorFieldItem(metricSystem)
+        , mMarker1(this)
 	, mMarker2(this)
 {
 	setX1(begin.x());
@@ -46,7 +48,7 @@ CurveItem::CurveItem(const QPointF &begin, const QPointF &end)
 
 AbstractItem *CurveItem::clone() const
 {
-	const auto cloned = new CurveItem({x1(), y1()}, {x2(), y2()});
+	const auto cloned = new CurveItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	connect(&mMarker1, &MarkerItem::xChanged, &cloned->mMarker1, [=]() { cloned->mMarker1.setX(mMarker1.x()); });
 	connect(&mMarker1, &MarkerItem::yChanged, &cloned->mMarker1, [=]() { cloned->mMarker1.setY(mMarker1.y()); });
@@ -142,12 +144,13 @@ QDomElement CurveItem::serialize(QDomElement &parent) const
 {
 	QDomElement curveNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(curveNode, "cubicBezier");
-	const qreal x1 = this->x1() + scenePos().x();
-	const qreal y1 = this->y1() + scenePos().y();
-	const qreal x2 = this->x2() + scenePos().x();
-	const qreal y2 = this->y2() + scenePos().y();
-	const QPointF cp1 = mMarker1.pos() + scenePos();
-	const QPointF cp2 = mMarker2.pos() + scenePos();
+	auto *coordSystem = coordinateSystem();
+	const qreal x1 = coordSystem->toUnit(this->x1() + scenePos().x());
+	const qreal y1 = coordSystem->toUnit(this->y1() + scenePos().y());
+	const qreal x2 = coordSystem->toUnit(this->x2() + scenePos().x());
+	const qreal y2 = coordSystem->toUnit(this->y2() + scenePos().y());
+	const QPointF cp1 = coordSystem->toUnit(mMarker1.pos() + scenePos());
+	const QPointF cp2 = coordSystem->toUnit(mMarker2.pos() + scenePos());
 	curveNode.setAttribute("begin", QString::number(x1) + ":" + QString::number(y1));
 	curveNode.setAttribute("end", QString::number(x2) + ":" + QString::number(y2));
 	curveNode.setAttribute("cp1", QString::number(cp1.x()) + ":" + QString::number(cp1.y()));
@@ -182,10 +185,11 @@ void CurveItem::deserializePenBrush(const QDomElement &element)
 QPointF CurveItem::deserializePoint(const QString &string) const
 {
 	const QStringList splittedStr = string.split(":");
+	auto *coordSystem = coordinateSystem();
 	if (splittedStr.count() == 2) {
 		const qreal x = splittedStr[0].toDouble();
 		const qreal y = splittedStr[1].toDouble();
-		return QPointF(x, y);
+		return coordSystem->toPx({x, y});
 	}
 
 	return QPointF();
