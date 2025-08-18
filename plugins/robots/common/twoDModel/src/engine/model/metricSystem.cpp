@@ -68,8 +68,9 @@ void MetricSystem::deserialize(const QDomElement &parent)
 {
 	if (!parent.isNull()) {
 		setUnit(stringToUnit(parent.attribute("metricUnit", "")));
+	} else {
+		setUnit(defaultUnit());
 	}
-
 	emit metricUnitChanged(mMetricUnit);
 }
 
@@ -114,4 +115,8 @@ std::map<QString, MetricSystem::Unit> MetricSystem::currentValues() const
 		, {"Meters", Unit::Meters}
 		, {"Millimeters", Unit::Millimeters}
 	};
+}
+
+MetricSystem::Unit MetricSystem::defaultUnit() const {
+	return Unit::Pixels;
 }

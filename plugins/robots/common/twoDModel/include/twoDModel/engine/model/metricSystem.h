@@ -59,6 +59,8 @@ public:
 
 	std::map<QString, Unit> currentValues() const;
 
+	Unit defaultUnit() const;
+
 signals:
 	/// Emit when the <metricUnit> tag is serialized
 	void metricUnitChanged(const Unit &unit);

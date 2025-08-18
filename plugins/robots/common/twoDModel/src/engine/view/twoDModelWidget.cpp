@@ -1010,14 +1010,14 @@ void TwoDModelWidget::connectMetricComboBoxes()
 	});
 
 	const auto availableUnits = mModel.metricSystem().currentValues();
-	const auto beginIter = availableUnits.begin();
-	mModel.metricSystem().setUnit(beginIter->second);
-
-	for (auto currentUnit = beginIter;
+	for (auto currentUnit = availableUnits.begin();
 	     currentUnit != availableUnits.end(); currentUnit++) {
 		mUi->metricComboBox->addItem(currentUnit->first,
 		                             QVariant::fromValue(currentUnit->second));
 	}
+
+	setSelectedValue(mUi->metricComboBox, mModel.metricSystem().defaultUnit());
+
 }
 
 void TwoDModelWidget::updateWheelComboBoxes()
