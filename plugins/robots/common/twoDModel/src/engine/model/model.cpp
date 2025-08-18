@@ -31,15 +31,15 @@ using namespace twoDModel::model;
 static auto XML_VERSION = "20190819";
 
 Model::Model(physics::PhysicsEngineFactory *engineFactory,
-             QObject *parent)
+		QObject *parent)
 	: QObject(parent)
-        , mMetricCoordinateSystem(mSettings.metricSystem())
-        , mWorldModel(mSettings, mMetricCoordinateSystem)
-        , mChecker(nullptr)
-        , mErrorReporter(nullptr)
-        , mEngineFactory(engineFactory)
-        , mRealisticPhysicsEngine(nullptr)
-        , mSimplePhysicsEngine(nullptr)
+	, mMetricCoordinateSystem(mSettings.metricSystem())
+	, mWorldModel(mSettings, mMetricCoordinateSystem)
+	, mChecker(nullptr)
+	, mErrorReporter(nullptr)
+	, mEngineFactory(engineFactory)
+	, mRealisticPhysicsEngine(nullptr)
+	, mSimplePhysicsEngine(nullptr)
 {
 	initPhysics();
 	connect(&mSettings, &Settings::physicsChanged, this, &Model::resetPhysics);

@@ -20,8 +20,8 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 StylusItem::StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                       qreal x1, qreal y1)
-        : ColorFieldItem(metricSystem)
+			qreal x1, qreal y1)
+	: ColorFieldItem(metricSystem)
 {
 	QPen pen(this->pen());
 	pen.setColor(Qt::black);

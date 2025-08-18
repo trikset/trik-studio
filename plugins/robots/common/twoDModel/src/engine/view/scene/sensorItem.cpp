@@ -38,7 +38,7 @@ using namespace kitBase::robotModel;
 const int selectionDrift = 7;
 
 SensorItem::SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                       model::SensorsConfiguration &configuration
+			model::SensorsConfiguration &configuration
 		, const PortInfo &port, const QString &pathToImage, const QRect &imageRect)
 	: mConfiguration(configuration)
 	, mPort(port)

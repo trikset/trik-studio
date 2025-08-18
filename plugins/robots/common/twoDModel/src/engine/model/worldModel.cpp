@@ -48,11 +48,11 @@ QGraphicsPathItem *debugPath = nullptr;
 #endif
 
 WorldModel::WorldModel(Settings &settings,
-                       twoDModel::model::MetricCoordinateSystem &metricSystem)
-        : mSettings(settings)
-        , mXmlFactory(new QDomDocument)
+			twoDModel::model::MetricCoordinateSystem &metricSystem)
+	: mSettings(settings)
+	, mXmlFactory(new QDomDocument)
 	, mErrorReporter(nullptr)
-        , mMetricCoordinateSystem(metricSystem)
+	, mMetricCoordinateSystem(metricSystem)
 {
 }
 

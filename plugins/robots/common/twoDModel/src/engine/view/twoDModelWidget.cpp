@@ -1116,9 +1116,8 @@ void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 }
 
 namespace {
-        static bool isTrikModel(const QString &name) {
+	static bool isTrikModel(const QString &name) {
 		return name.contains("TrikV62");
-
 	}
 }
 

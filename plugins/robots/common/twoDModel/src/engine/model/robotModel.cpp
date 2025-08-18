@@ -38,18 +38,18 @@ using namespace kitBase::robotModel::robotParts;
 const int positionStampsCount = 50;
 
 RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
-                , const Settings &settings
-                , twoDModel::model::MetricCoordinateSystem &metricSystem
+		, const Settings &settings
+		, twoDModel::model::MetricCoordinateSystem &metricSystem
 		, QObject *parent)
 	: QObject(parent)
 	, mSettings(settings)
 	, mRobotModel(robotModel)
-        , mSensorsConfiguration(metricSystem, robotModel.robotId(), robotModel.size())
+	, mSensorsConfiguration(metricSystem, robotModel.robotId(), robotModel.size())
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
-        , mStartPositionMarker(
-                  new items::StartPosition(&metricSystem, info().size()))
-        , mMetricSystem(metricSystem)
+	, mStartPositionMarker(
+		new items::StartPosition(&metricSystem, info().size()))
+	, mMetricSystem(metricSystem)
 {
 	reinit();
 }

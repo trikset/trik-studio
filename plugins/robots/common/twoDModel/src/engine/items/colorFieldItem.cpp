@@ -18,9 +18,9 @@
 using namespace twoDModel::items;
 
 ColorFieldItem::ColorFieldItem(
-                graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                QGraphicsItem* parent)
-        : AbstractItem(parent)
+		graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		QGraphicsItem* parent)
+	: AbstractItem(parent)
 {
 	setCoordinateSystem(metricSystem);
 	setZValue(ZValue::Shape);

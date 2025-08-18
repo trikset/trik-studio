@@ -27,7 +27,7 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 CommentItem::CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                         const QPointF &begin, const QPointF &end)
+			const QPointF &begin, const QPointF &end)
 	: mTextItem(this)
 	, mHtmlText("Your comment can be here")
 {

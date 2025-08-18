@@ -28,7 +28,7 @@ const int frequency = 150;  // The text on the ruler will not be met more often 
 Ruler::Ruler(QWidget *parent)
 	: QFrame(parent)
 	, mOrientation(Qt::Horizontal)
-        , mMetricFactor(1.0)
+	, mMetricFactor(1.0)
 {
 	mFont.setPixelSize(8);
 }

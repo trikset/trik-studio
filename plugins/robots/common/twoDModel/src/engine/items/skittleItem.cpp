@@ -23,8 +23,8 @@
 using namespace twoDModel::items;
 
 SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                         const QPointF &position)
-        : mSvgRenderer(new QSvgRenderer)
+			const QPointF &position)
+	: mSvgRenderer(new QSvgRenderer)
 {
 	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));

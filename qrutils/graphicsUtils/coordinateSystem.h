@@ -25,9 +25,9 @@ class QRUTILS_EXPORT CoordinateSystem : public AbstractCoordinateSystem
 
 public:
 	CoordinateSystem() = default;
-	virtual qreal toPx(const qreal size) const override;
-	virtual QPointF toPx(const QPointF &size) const override;
-	virtual qreal toUnit(const qreal size) const override;
-	virtual QPointF toUnit(const QPointF &size) const override;
+	qreal toPx(const qreal size) const override;
+	QPointF toPx(const QPointF &size) const override;
+	qreal toUnit(const qreal size) const override;
+	QPointF toUnit(const QPointF &size) const override;
 };
-};
+}

@@ -29,9 +29,9 @@ const qreal epsilon = 0.0000001;
 
 AbstractItem::AbstractItem(QGraphicsItem* parent)
 	: QGraphicsObject(parent)
-        , mId(QUuid::createUuid().toString())
-        , mCoordinateSystem(nullptr)
-        , mDefaultCoordinateSystem(new CoordinateSystem)
+	, mId(QUuid::createUuid().toString())
+	, mCoordinateSystem(nullptr)
+	, mDefaultCoordinateSystem(new CoordinateSystem)
 {
 	setAcceptHoverEvents(true);
 	setCursor(mHoverCursor);
@@ -42,7 +42,7 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 }
 
 AbstractItem::AbstractItem(Qt::CursorShape resizeCursor, QGraphicsItem *parent)
-        : AbstractItem(parent)
+	: AbstractItem(parent)
 {
 	mResizeCursor = resizeCursor;
 }

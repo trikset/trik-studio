@@ -1,5 +1,18 @@
-#include "modelParserTests.h"
+/* Copyright 2025 CyberTech Labs Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
 
+#include "modelParserTests.h"
 #include <twoDModel/robotModel/physicsEngineFactoryMock.h>
 #include <kitBase/robotModel/robotModelInterfaceMock.h>
 #include <twoDModel/robotModel/twoDRobotModelMock.h>
@@ -12,9 +25,27 @@
 #include "src/engine/items/ballItem.h"
 #include "src/engine/items/commentItem.h"
 #include <cmath>
+#include <QFile>
+#include <QTextStream>
 
 using namespace ::testing;
 using namespace qrTest::robotsTests::commonTwoDModelTests;
+
+namespace {
+
+static QString readAll(const QString &fileName) {
+	QFile file(fileName);
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+		return QString();
+	}
+
+	QTextStream input;
+	input.setDevice(&file);
+	input.setCodec("UTF-8");
+	const QString text = input.readAll();
+	return text;
+}
+}
 
 void ModelParserTests::SetUp()
 {
@@ -40,42 +71,8 @@ TEST_F(ModelParserTests, defaultConfugurationTest)
 	EXPECT_CALL(*mTwoDRobotModel, robotId()).Times(AtLeast(1));
 
 	QDomDocument doc;
-	const auto xml = R"(
-<root version="20190819">
-    <world>
-	<walls>
-	    <wall fill="#ff000000" begin="-350:-250" stroke="#ff000000" stroke-style="none" end="0:-250" id="{1bd5379e-e8bb-449a-b91d-4da031309bc3}" stroke-width="2.1"/>
-	</walls>
-	<skittles>
-	    <skittle y="-250" markerX="10" x="50" markerY="-25" id="{af2bf97f-90cd-49a2-a201-b3f6e57497bb}" rotation="0" startRotation="10"/>
-	</skittles>
-	<balls>
-	    <ball y="-250" markerX="-102" x="-402" markerY="-25" id="{6573d515-983f-439e-a3df-dee6e9ea8e73}" rotation="0" startRotation="10"/>
-	</balls>
-	<colorFields>
-	    <line fill="#ff000000" begin="-202:-101" stroke="#ff000000" stroke-style="solid" end="250:-99" id="{b8ef1043-4bf4-42bf-8f61-841217cc3318}" fill-style="none" stroke-width="6.5"/>
-	    <cubicBezier cp1="85:-38" cp2="9:297" fill="#ff000000" begin="251:102" stroke="#ff000000" stroke-style="solid" end="-198:101" id="{1b4bb76e-1aff-4d9b-aebb-d6f4fc581e28}" fill-style="none" stroke-width="6"/>
-	    <rectangle fill="#ff000000" begin="-452:-102" stroke="#ff000000" stroke-style="solid" end="-248:103" id="{3f73d96c-7f93-4aac-beb2-ab73832ed556}" fill-style="none" stroke-width="6"/>
-	</colorFields>
-	<images/>
-	<regions/>
-	<comments>
-	    <comment text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Ubuntu'; font-size:20px; font-weight:400; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Your comment can be here&lt;/p>&lt;/body>&lt;/html>" begin="212:-258" end="481.938:-207" id="{ad3169f2-7d29-4f44-99a6-91041dc04f06}"/>
-	</comments>
-	<robot direction="0" position="10:25">
-	    <startPosition y="25" x="25" direction="0" id="{6d728cf5-b803-4750-b4e4-c17929c316c5}"/>
-	</robot>
-    </world>
-    <robots>
-	<robot id="mockRobot">
-	    <wheels right="M3###output###М3###" left="M4###output###М4###"/>
-	</robot>
-    </robots>
-    <settings realisticPhysics="false" realisticMotors="false" realisticSensors="false"/>
-</root>
-	)";
-
-	doc.setContent(QString(xml));
+	const auto xml = readAll("./data/pixelWorldModel.xml");
+	doc.setContent(xml);
 	mModel->deserialize(doc);
 	const auto &setting = mModel->settings();
 	EXPECT_EQ(setting.realisticMotors(), false);
@@ -167,42 +164,8 @@ TEST_F(ModelParserTests, cmConfugurationTest)
 	EXPECT_CALL(*mTwoDRobotModel, robotId()).Times(AtLeast(1));
 
 	QDomDocument doc;
-	const auto xml = R"(
-<root version="20190819">
-    <world>
-	<walls>
-	    <wall fill="#ff000000" begin="-350:-250" stroke="#ff000000" stroke-style="none" end="0:-250" id="{1bd5379e-e8bb-449a-b91d-4da031309bc3}" stroke-width="2.1"/>
-	</walls>
-	<skittles>
-	    <skittle y="-250" markerX="10" x="50" markerY="-25" id="{af2bf97f-90cd-49a2-a201-b3f6e57497bb}" rotation="0" startRotation="10"/>
-	</skittles>
-	<balls>
-	    <ball y="-250" markerX="-102" x="-402" markerY="-25" id="{6573d515-983f-439e-a3df-dee6e9ea8e73}" rotation="0" startRotation="10"/>
-	</balls>
-	<colorFields>
-	    <line fill="#ff000000" begin="-202:-101" stroke="#ff000000" stroke-style="solid" end="250:-99" id="{b8ef1043-4bf4-42bf-8f61-841217cc3318}" fill-style="none" stroke-width="6.5"/>
-	    <cubicBezier cp1="85:-38" cp2="9:297" fill="#ff000000" begin="251:102" stroke="#ff000000" stroke-style="solid" end="-198:101" id="{1b4bb76e-1aff-4d9b-aebb-d6f4fc581e28}" fill-style="none" stroke-width="6"/>
-	    <rectangle fill="#ff000000" begin="-452:-102" stroke="#ff000000" stroke-style="solid" end="-248:103" id="{3f73d96c-7f93-4aac-beb2-ab73832ed556}" fill-style="none" stroke-width="6"/>
-	</colorFields>
-	<images/>
-	<regions/>
-	<comments>
-	    <comment text="&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;>&#xa;&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;style type=&quot;text/css&quot;>&#xa;p, li { white-space: pre-wrap; }&#xa;&lt;/style>&lt;/head>&lt;body style=&quot; font-family:'Ubuntu'; font-size:20px; font-weight:400; font-style:normal;&quot;>&#xa;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Your comment can be here&lt;/p>&lt;/body>&lt;/html>" begin="212:-258" end="481.938:-207" id="{ad3169f2-7d29-4f44-99a6-91041dc04f06}"/>
-	</comments>
-	<robot direction="0" position="10:25">
-	    <startPosition y="25" x="25" direction="0" id="{6d728cf5-b803-4750-b4e4-c17929c316c5}"/>
-	</robot>
-    </world>
-    <robots>
-	<robot id="mockRobot">
-	    <wheels right="M3###output###М3###" left="M4###output###М4###"/>
-	</robot>
-    </robots>
-    <settings metricUnit="cm" realisticPhysics="false" realisticMotors="false" realisticSensors="false"/>
-</root>
-	)";
-
-	doc.setContent(QString(xml));
+	const auto xml = readAll("./data/cmWorldModel.xml");
+	doc.setContent(xml);
 	mModel->deserialize(doc);
 	const auto &setting = mModel->settings();
 

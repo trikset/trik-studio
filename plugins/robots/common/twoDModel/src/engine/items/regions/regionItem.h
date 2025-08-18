@@ -22,7 +22,7 @@ class QGraphicsTextItem;
 namespace twoDModel {
 
 namespace model {
-        class MetricCoordinateSystem;
+class MetricCoordinateSystem;
 }
 
 namespace items {

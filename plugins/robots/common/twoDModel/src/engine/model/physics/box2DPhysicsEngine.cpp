@@ -40,7 +40,7 @@ const qreal scaleCoeff = 0.001;
 Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 		, const QList<RobotModel *> &robots)
 	: PhysicsEngineBase(worldModel, robots)
-        , mPixelsInCm(worldModel.settings().pixelsInCm() * scaleCoeff)
+	, mPixelsInCm(worldModel.settings().pixelsInCm() * scaleCoeff)
 	, mPrevPosition(b2Vec2{0, 0})
 	, mPrevAngle(0)
 {

@@ -27,13 +27,13 @@ DetailsTab::DetailsTab(QWidget *parent)
 	, mMotorsRoot(new QTreeWidgetItem(this))
 	, mPhysicsRoot(new QTreeWidgetItem(this))
 	, mParamsRoot(new QTreeWidgetItem(this))
-        , mMetricRoot(new QTreeWidgetItem(this))
+	, mMetricRoot(new QTreeWidgetItem(this))
 	, mDisplayItem(new QTreeWidgetItem(mDisplayRoot))
 	, mDevicesItem(new QTreeWidgetItem(mDevicesRoot))
 	, mMotorsItem(new QTreeWidgetItem(mMotorsRoot))
 	, mPhysicsItem(new QTreeWidgetItem(mPhysicsRoot))
 	, mParamsItem(new QTreeWidgetItem(mParamsRoot))
-        , mMetricItem(new QTreeWidgetItem(mMetricRoot))
+	, mMetricItem(new QTreeWidgetItem(mMetricRoot))
 {
 	initItem(mDisplayRoot, tr("Display"), true);
 	initItem(mDevicesRoot, tr("Ports configuration"), true);

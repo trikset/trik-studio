@@ -19,10 +19,9 @@
 using namespace twoDModel::model;
 
 MetricCoordinateSystem::MetricCoordinateSystem(
-                twoDModel::model::MetricSystem &metricSystem)
-        : mMetricSystem(metricSystem)
+		twoDModel::model::MetricSystem &metricSystem)
+	: mMetricSystem(metricSystem)
 {
-
 }
 
 MetricCoordinateSystem::~MetricCoordinateSystem()

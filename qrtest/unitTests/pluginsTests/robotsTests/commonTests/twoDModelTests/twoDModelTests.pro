@@ -44,3 +44,10 @@ HEADERS += \
 SOURCES += \
 	$$PWD/support/testTimeline.cpp \
 	$$PWD/support/testObject.cpp \
+
+OTHER_FILES += \
+	$$PWD/data/pixelWorldModel.xml \
+	$$PWD/data/cmWorldModel.xml \
+
+message("JJJJJJJJJJJJJJJJJ: $$PWD/data/")
+copyToDestdir($$PWD/data/, now)

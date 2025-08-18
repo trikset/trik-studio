@@ -25,10 +25,10 @@ using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
 SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem &metricSystem,
-                                           const QString &robotModelName, const QSizeF &robotSize)
+			const QString &robotModelName, const QSizeF &robotSize)
 	: mRobotSize(robotSize)
 	, mRobotId(robotModelName)
-        , mMetricSystem(metricSystem)
+	, mMetricSystem(metricSystem)
 {
 }
 

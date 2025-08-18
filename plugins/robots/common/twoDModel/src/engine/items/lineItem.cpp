@@ -25,9 +25,9 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                   const QPointF &begin, const QPointF &end, int cornerRadius)
-        : ColorFieldItem(metricSystem),
-          mCornerRadius(cornerRadius)
+			const QPointF &begin, const QPointF &end, int cornerRadius)
+	: ColorFieldItem(metricSystem)
+	,mCornerRadius(cornerRadius)
 {
 	setX1(begin.x());
 	setY1(begin.y());

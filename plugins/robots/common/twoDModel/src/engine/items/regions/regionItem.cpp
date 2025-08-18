@@ -27,14 +27,14 @@ const QSizeF defaultSize = QSizeF(200, 200);
 using namespace twoDModel::items;
 
 RegionItem::RegionItem(twoDModel::model::MetricCoordinateSystem *metricSystem,
-                       QGraphicsItem *parent)
-        : QGraphicsObject(parent)
+			QGraphicsItem *parent)
+	: QGraphicsObject(parent)
 	, mTextItem(new QGraphicsTextItem(this))
 	, mId(QUuid::createUuid().toString())
 	, mFilled(true)
 	, mColor(defaultColor)
 	, mSize(defaultSize)
-        , mMetricSystem(metricSystem)
+	, mMetricSystem(metricSystem)
 
 {
 	setZValue(graphicsUtils::AbstractItem::ZValue::Region);

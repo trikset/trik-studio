@@ -26,7 +26,7 @@ const int border = 0;
 const int defaultTraceWidth = 6;
 
 RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                     const QString &robotImageFileName, model::RobotModel &robotModel)
+		const QString &robotImageFileName, model::RobotModel &robotModel)
 	: mImage(robotImageFileName, true)
 	, mRobotModel(robotModel)
 {

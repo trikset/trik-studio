@@ -30,9 +30,9 @@ const QColor markerColor1 = "#ffcc66";
 const QColor markerColor2 = "#ff6666";
 
 CurveItem::CurveItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-                     const QPointF &begin, const QPointF &end)
-        : ColorFieldItem(metricSystem)
-        , mMarker1(this)
+			const QPointF &begin, const QPointF &end)
+	: ColorFieldItem(metricSystem)
+	, mMarker1(this)
 	, mMarker2(this)
 {
 	setX1(begin.x());
