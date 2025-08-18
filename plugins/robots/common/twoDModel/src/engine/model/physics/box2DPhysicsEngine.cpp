@@ -79,16 +79,8 @@ qreal Box2DPhysicsEngine::rotation(model::RobotModel &robot) const
 	}
 
 	auto currentAngle = b2Rot_GetAngle(b2Body_GetRotation(mBox2DRobots[&robot]->getBodyId()));
-	qreal deltaAngle = currentAngle - mPrevAngle;
-
-	const qreal epsilon = 1e-6;
-
-	if (deltaAngle > mathUtils::pi + epsilon) {
-	    deltaAngle -= 2 * mathUtils::pi;
-	} else if (deltaAngle < -mathUtils::pi - epsilon) {
-	    deltaAngle += 2 * mathUtils::pi;
-	}
-	return angleToScene(deltaAngle);
+	const auto angle = countAngle(mPrevAngle, currentAngle);
+	return angleToScene(angle);
 }
 
 void Box2DPhysicsEngine::onPressedReleasedSelectedItems(bool active)
@@ -482,6 +474,19 @@ void Box2DPhysicsEngine::itemRemoved(QGraphicsItem * const item)
 b2WorldId Box2DPhysicsEngine::box2DWorldId()
 {
 	return mWorldId;
+}
+
+qreal Box2DPhysicsEngine::countAngle(const qreal previousAngle, const qreal currentAngle)
+{
+	qreal deltaAngle = currentAngle - previousAngle;
+
+	if (deltaAngle > mathUtils::pi) {
+	    deltaAngle -= 2 * mathUtils::pi;
+	} else if (deltaAngle < -mathUtils::pi) {
+	    deltaAngle += 2 * mathUtils::pi;
+	}
+
+	return deltaAngle;
 }
 
 float Box2DPhysicsEngine::pxToCm(qreal px) const
