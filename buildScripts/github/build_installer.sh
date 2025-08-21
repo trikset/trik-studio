@@ -33,10 +33,14 @@ if [[ "$RUNNER_OS" == Linux ]] ; then
 fi
 
 echo Start build installer
-$EXECUTOR bash -c "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
+$EXECUTOR bash -c "$ROOT_DIR/installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
+
+pushd "$ROOT_DIR"
 
 INSTALLER_NAME=$(find installer -name "trik-studio*installer*" -print -quit | grep . ) 
 
 if "$NEED_DEPLOY" ; then
     $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no -vvv -i $HOME/.ssh/id_rsa' $INSTALLER_NAME $username@$host:~/dl/ts/fresh/installer/$TSNAME"
 fi
+
+popd

@@ -98,6 +98,7 @@ jobs:
       run: |
           git config --global core.symlinks true
           git config --global core.autocrlf input
+          echo "BUILD_DIR=${{ github.workspace }}/build" >> $GITHUB_ENV
 
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -146,7 +147,7 @@ jobs:
       if: ${{ inputs.build }}
 
     - name: Build
-      run: buildScripts/github/build.sh
+      run: "$GITHUB_WORKSPACE/buildScripts/github/build.sh"
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
@@ -157,6 +158,8 @@ jobs:
         EXECUTOR: ${{ inputs.executor }}
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
         NEED_COMPILE_DATABASE: ${{ inputs.lint_clazy }}
+        BUILD_DIR: ${{ env.BUILD_DIR }}
+        ROOT_DIR: ${{ github.workspace }}
       if: ${{ inputs.build }}
 
     - name: Save build cache
@@ -167,7 +170,8 @@ jobs:
       if: ${{ inputs.build }}
         
     - name: Run tests
-      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh
+      run: ${{ inputs.executor }} "$GITHUB_WORKSPACE/buildScripts/github/run_tests.sh"
+      working-directory: ${{ env.BUILD_DIR }}
       env:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         TESTS: ${{ inputs.tests }}
@@ -177,7 +181,7 @@ jobs:
       uses: MinyazevR/clazy-standalone-action@v0.3.2
       with:
         checks: 'level0,level1,level2'
-        database: './compile_commands.json'
+        database: 'build'
         fail-on-warning: true
         install-stable: true
         only-diff: true
@@ -186,7 +190,8 @@ jobs:
 
     - name: Build Installer
       run: |
-        buildScripts/github/build_installer.sh
+         "$GITHUB_WORKSPACE/buildScripts/github/build_installer.sh"
+      working-directory: ${{ env.BUILD_DIR }}
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
@@ -199,6 +204,7 @@ jobs:
         ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
         username: ${{ secrets.DL_USERNAME }}
         host: ${{ secrets.DL_HOST }}
+        ROOT_DIR: ${{ github.workspace }}
       if: ${{ inputs.build_installer }}
 
     - name: Evaluate artifact name
