@@ -37,7 +37,7 @@ qreal MetricCoordinateSystem::toUnit(const qreal size) const
 {
 	auto result = size / mMetricSystem.countFactor();
 	/// todo: move round to WorldModel settings
-	return std::round(result * 1000.0f) / 1000.0f;
+	return std::round(result * 10000.0f) / 10000.0f;
 }
 
 QPointF MetricCoordinateSystem::toUnit(const QPointF &size) const
@@ -45,8 +45,8 @@ QPointF MetricCoordinateSystem::toUnit(const QPointF &size) const
 	auto xResult = size.x() / mMetricSystem.countFactor();
 	auto yResult = size.y() / mMetricSystem.countFactor();
 	/// todo: move round to WorldModel settings
-	return {std::round(xResult * 1000.0f) / 1000.0f,
-		std::round(yResult * 1000.0f) / 1000.0f};
+	return {std::round(xResult * 10000.0f) / 10000.0f,
+		std::round(yResult * 10000.0f) / 10000.0f};
 }
 
 twoDModel::model::SizeUnit &MetricCoordinateSystem::metricSystem() {

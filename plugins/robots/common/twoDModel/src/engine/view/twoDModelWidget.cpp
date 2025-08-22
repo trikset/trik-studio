@@ -1065,7 +1065,6 @@ void TwoDModelWidget::updateWheelComboBoxes()
 	if (!setSelectedValue(mUi->rightWheelComboBox, rightWheelOldPort)) {
 		if (!setSelectedValue(mUi->rightWheelComboBox
 				, mSelectedRobotItem->robotModel().info().defaultRightWheelPort())) {
-
 			qWarning() << "Incorrect defaultRightWheelPort set in configurer:"
 					<< mSelectedRobotItem->robotModel().info().defaultRightWheelPort().toString();
 
