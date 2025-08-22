@@ -20,7 +20,7 @@ using namespace twoDModel::model;
 
 namespace {
 	/// Translation of a string representation into a unit
-        static SizeUnit::Unit stringToUnit(const QString &unit) {
+	static SizeUnit::Unit stringToUnit(const QString &unit) {
 		if (unit.isEmpty()) {
 			return SizeUnit::Unit::Pixels;
 		}

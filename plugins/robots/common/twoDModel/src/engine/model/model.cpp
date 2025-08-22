@@ -33,7 +33,7 @@ static auto XML_VERSION = "20190819";
 Model::Model(physics::PhysicsEngineFactory *engineFactory,
 		QObject *parent)
 	: QObject(parent)
-        , mMetricCoordinateSystem(mSettings.sizeUnit())
+	, mMetricCoordinateSystem(mSettings.sizeUnit())
 	, mWorldModel(mSettings, mMetricCoordinateSystem)
 	, mChecker(nullptr)
 	, mErrorReporter(nullptr)
