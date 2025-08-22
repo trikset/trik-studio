@@ -20,94 +20,94 @@ using namespace twoDModel::model;
 
 namespace {
 	/// Translation of a string representation into a unit
-	static MetricSystem::Unit stringToUnit(const QString &unit) {
+        static SizeUnit::Unit stringToUnit(const QString &unit) {
 		if (unit.isEmpty()) {
-			return MetricSystem::Unit::Pixels;
+			return SizeUnit::Unit::Pixels;
 		}
 		if (unit == "cm") {
-			return MetricSystem::Unit::Centimeters;
+			return SizeUnit::Unit::Centimeters;
 		}
 		if (unit == "mm") {
-			return MetricSystem::Unit::Millimeters;
+			return SizeUnit::Unit::Millimeters;
 		}
 		if (unit == "m") {
-			return MetricSystem::Unit::Meters;
+			return SizeUnit::Unit::Meters;
 		}
-		return MetricSystem::Unit::Pixels;
+		return SizeUnit::Unit::Pixels;
 	}
 
 	/// Translation of a unit into a string representation
-	static QString unitToString(const MetricSystem::Unit &unit) {
-		if (unit == MetricSystem::Unit::Centimeters) {
+	static QString unitToString(const SizeUnit::Unit &unit) {
+		if (unit == SizeUnit::Unit::Centimeters) {
 			return "cm";
 		}
-		if (unit == MetricSystem::Unit::Millimeters) {
+		if (unit == SizeUnit::Unit::Millimeters) {
 			return "mm";
 		}
-		if (unit == MetricSystem::Unit::Meters) {
+		if (unit == SizeUnit::Unit::Meters) {
 			return "m";
 		}
 		return {};
 	}
 }
 
-qreal MetricSystem::pixelsInCm() const
+qreal SizeUnit::pixelsInCm() const
 {
 	return mPixelsInCm;
 }
 
 
-void MetricSystem::serialize(QDomElement &parent) const
+void SizeUnit::serialize(QDomElement &parent) const
 {
-	if (mMetricUnit != Unit::Pixels) {
-		parent.setAttribute("metricUnit", unitToString(mMetricUnit));
+	if (mSizeUnit != Unit::Pixels) {
+		parent.setAttribute("sizeUnit", unitToString(mSizeUnit));
 	}
 }
 
-void MetricSystem::deserialize(const QDomElement &parent)
+void SizeUnit::deserialize(const QDomElement &parent)
 {
 	if (!parent.isNull()) {
-		setUnit(stringToUnit(parent.attribute("metricUnit", "")));
+		setUnit(stringToUnit(parent.attribute("sizeUnit", "")));
 	} else {
 		setUnit(defaultUnit());
 	}
-	emit metricUnitChanged(mMetricUnit);
+	emit sizeUnitChanged(mSizeUnit);
 }
 
-void MetricSystem::setUnit(const Unit &unit)
+void SizeUnit::setUnit(const Unit &unit)
 {
-	mMetricUnit = unit;
+	mSizeUnit = unit;
 }
 
-qreal MetricSystem::countFactor() const
+qreal SizeUnit::countFactor() const
 {
-	if (mMetricUnit == Unit::Meters) {
+	if (mSizeUnit == Unit::Meters) {
 		return mPixelsInCm * 100.0f;
 	}
-	if (mMetricUnit == Unit::Millimeters) {
+	if (mSizeUnit == Unit::Millimeters) {
 		return mPixelsInCm * 0.1f;
 	}
-	if (mMetricUnit == Unit::Centimeters) {
+	if (mSizeUnit == Unit::Centimeters) {
 		return mPixelsInCm;
 	}
 	return 1.0f;
 }
 
-qreal MetricSystem::toPx(const qreal size) const
+qreal SizeUnit::toPx(const qreal size) const
 {
-	if (mMetricUnit == Unit::Meters) {
+	if (mSizeUnit == Unit::Meters) {
 		return size * mPixelsInCm * 100.0f;
 	}
-	if (mMetricUnit == Unit::Millimeters) {
+	if (mSizeUnit == Unit::Millimeters) {
 		return size * mPixelsInCm * 0.1f;
 	}
-	if (mMetricUnit == Unit::Centimeters) {
+	if (mSizeUnit == Unit::Centimeters) {
 		return size * mPixelsInCm;
 	}
 	return size;
 }
 
-std::map<QString, MetricSystem::Unit> MetricSystem::currentValues() const
+std::map<QString, SizeUnit::Unit> SizeUnit::currentValues() const
 {
 	return {
 		{"Pixels", Unit::Pixels }
@@ -117,6 +117,6 @@ std::map<QString, MetricSystem::Unit> MetricSystem::currentValues() const
 	};
 }
 
-MetricSystem::Unit MetricSystem::defaultUnit() const {
+SizeUnit::Unit SizeUnit::defaultUnit() const {
 	return Unit::Pixels;
 }

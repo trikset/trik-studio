@@ -18,7 +18,7 @@
 namespace twoDModel {
 
 namespace model {
-class MetricSystem;
+class SizeUnit;
 }
 
 namespace items {

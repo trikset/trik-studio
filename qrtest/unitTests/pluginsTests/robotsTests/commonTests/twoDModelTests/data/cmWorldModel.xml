@@ -28,5 +28,5 @@
 	    <wheels right="M3###output###М3###" left="M4###output###М4###"/>
 	</robot>
     </robots>
-    <settings metricUnit="cm" realisticPhysics="false" realisticMotors="false" realisticSensors="false"/>
+    <settings sizeUnit="cm" realisticPhysics="false" realisticMotors="false" realisticSensors="false"/>
 </root>

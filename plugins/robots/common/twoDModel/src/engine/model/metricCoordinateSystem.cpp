@@ -19,7 +19,7 @@
 using namespace twoDModel::model;
 
 MetricCoordinateSystem::MetricCoordinateSystem(
-		twoDModel::model::MetricSystem &metricSystem)
+		twoDModel::model::SizeUnit &metricSystem)
 	: mMetricSystem(metricSystem)
 {
 }
@@ -49,7 +49,7 @@ QPointF MetricCoordinateSystem::toUnit(const QPointF &size) const
 		std::round(yResult * 1000.0f) / 1000.0f};
 }
 
-twoDModel::model::MetricSystem &MetricCoordinateSystem::metricSystem() {
+twoDModel::model::SizeUnit &MetricCoordinateSystem::metricSystem() {
 	return mMetricSystem;
 }
 

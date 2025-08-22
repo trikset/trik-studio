@@ -39,7 +39,7 @@ public:
 
 	/// To simplify the already overloaded WorldModel xml,
 	/// it was decided to use a tag in the existing <settings> tag
-	MetricSystem &metricSystem();
+	SizeUnit &sizeUnit();
 
 	qreal pixelsInCm() const;
 
@@ -64,7 +64,7 @@ private:
 	bool mRealisticPhysics { false };
 	bool mRealisticSensors { false };
 	bool mRealisticMotors { false };
-	MetricSystem mMetricSystem;
+	SizeUnit mSizeUnitSystem;
 };
 
 }

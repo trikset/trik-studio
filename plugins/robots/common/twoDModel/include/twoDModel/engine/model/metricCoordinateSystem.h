@@ -20,7 +20,7 @@ namespace twoDModel {
 
 namespace model {
 
-class MetricSystem;
+class SizeUnit;
 
 /// The metric system, which is an implementation of the qrutils
 /// AbstractCoordinateSystem interface for using the metric system in 2D model items, Abstract
@@ -29,7 +29,7 @@ class MetricCoordinateSystem: public graphicsUtils::AbstractCoordinateSystem
 public:
 	/// Dependency injection to use custom settings in all items
 	explicit MetricCoordinateSystem(
-	                twoDModel::model::MetricSystem &metricSystem);
+	                twoDModel::model::SizeUnit &metricSystem);
 
 	~MetricCoordinateSystem();
 
@@ -46,10 +46,10 @@ public:
 	QPointF toUnit(const QPointF &size) const override;
 
 	/// Interface method for use in TwoDModelWidget to reduce complexity
-	twoDModel::model::MetricSystem &metricSystem();
+	twoDModel::model::SizeUnit &metricSystem();
 
 private:
-	twoDModel::model::MetricSystem &mMetricSystem;
+	twoDModel::model::SizeUnit &mMetricSystem;
 };
 
 }

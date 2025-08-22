@@ -993,15 +993,15 @@ bool TwoDModelWidget::setSelectedValue(QComboBox * const comboBox, const T &port
 
 void TwoDModelWidget::connectMetricComboBoxes()
 {
-	connect(&mModel.metricSystem(), &MetricSystem::metricUnitChanged
-	        , this, [=](const MetricSystem::Unit &unit) {
+	connect(&mModel.metricSystem(), &SizeUnit::sizeUnitChanged
+	        , this, [=](const SizeUnit::Unit &unit) {
 		setSelectedValue(mUi->metricComboBox, unit);
 	});
 
 	connect(mUi->metricComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
 	        , this, [this](int index) {
 		const auto unitValue = mUi->metricComboBox->itemData(index)
-		                        .value<MetricSystem::Unit>();
+		                        .value<SizeUnit::Unit>();
 		mModel.metricSystem().setUnit(unitValue);
 		const auto realValue = mModel.metricSystem().countFactor();
 		mUi->horizontalRuler->setMetricFactor(realValue);

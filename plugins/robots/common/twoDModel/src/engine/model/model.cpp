@@ -33,7 +33,7 @@ static auto XML_VERSION = "20190819";
 Model::Model(physics::PhysicsEngineFactory *engineFactory,
 		QObject *parent)
 	: QObject(parent)
-	, mMetricCoordinateSystem(mSettings.metricSystem())
+        , mMetricCoordinateSystem(mSettings.sizeUnit())
 	, mWorldModel(mSettings, mMetricCoordinateSystem)
 	, mChecker(nullptr)
 	, mErrorReporter(nullptr)
@@ -119,7 +119,7 @@ MetricCoordinateSystem &Model::coordinateMetricSystem()
 	return mMetricCoordinateSystem;
 }
 
-MetricSystem &Model::metricSystem()
+SizeUnit &Model::metricSystem()
 {
 	return mMetricCoordinateSystem.metricSystem();
 }

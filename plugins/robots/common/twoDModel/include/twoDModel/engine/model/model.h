@@ -76,7 +76,7 @@ public:
 	MetricCoordinateSystem &coordinateMetricSystem();
 
 	/// Metric system for usage in twoDModelWidget (and Grid)
-	MetricSystem &metricSystem();
+	SizeUnit &metricSystem();
 
 	/// Returns a pointer to an object that reports system errors.
 	qReal::ErrorReporterInterface *errorReporter();

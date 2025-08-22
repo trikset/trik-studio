@@ -23,8 +23,8 @@ class QDomElement;
 namespace twoDModel {
 namespace model {
 
-/// Incapsulates metric system settings used by 2D model.
-class TWO_D_MODEL_EXPORT MetricSystem : public QObject
+/// Incapsulates size unit settings used by 2D model.
+class TWO_D_MODEL_EXPORT SizeUnit : public QObject
 {
 	Q_OBJECT
 
@@ -37,15 +37,15 @@ public:
 		, Millimeters
 	};
 
-	MetricSystem() = default;
+	SizeUnit() = default;
 
 	/// The current pixel value in centimeters
 	qreal pixelsInCm() const;
 
-	/// Serialize the <metricUnit> tag in the WorldModel
+	/// Serialize the sizeUnit in the WorldModel
 	void serialize(QDomElement &parent) const;
 
-	/// Derialize the <metricUnit> tag in the WorldModel
+	/// Derialize the sizeUnit in the WorldModel
 	void deserialize(const QDomElement &parent);
 
 	/// Set the current unit of measurement
@@ -62,15 +62,15 @@ public:
 	Unit defaultUnit() const;
 
 signals:
-	/// Emit when the <metricUnit> tag is serialized
-	void metricUnitChanged(const Unit &unit);
+	/// Emit when the sizeUnit is serialized
+	void sizeUnitChanged(const Unit &unit);
 
 private:
-	Unit mMetricUnit { Unit::Pixels };
+	Unit mSizeUnit { Unit::Pixels };
 	qreal mPixelsInCm { twoDModel::pixelsInCm };
 };
 
 }
 }
 
-Q_DECLARE_METATYPE(twoDModel::model::MetricSystem::Unit)
+Q_DECLARE_METATYPE(twoDModel::model::SizeUnit::Unit)
