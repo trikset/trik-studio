@@ -210,7 +210,7 @@ jobs:
     - name: Evaluate artifact name
       run: |
         set -x
-        ldd "$GITHUB_WORKSPACE/bin/trik-studio" | grep -q libasan && SUFFIX="-asan" || SUFFIX=
+        ldd "${{ env.BUILD_DIR }}/bin/trik-studio" | grep -q libasan && SUFFIX="-asan" || SUFFIX=
         echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer${SUFFIX}" >> $GITHUB_ENV
 
     - name: Upload installer artifact
