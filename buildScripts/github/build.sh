@@ -38,6 +38,8 @@ CCACHE_DIR="$CCACHE_DIR" \
 CONFIG="$CONFIG" \
 QMAKE_EXTRA="$QMAKE_EXTRA" \
 PROJECT="$PROJECT" \
+BUILD_DIR="$BUILD_DIR" \
+ROOT_DIR="$ROOT_DIR" \
 RUNNER_OS="$RUNNER_OS" \
 buildScripts/github/build_internal.sh
 
