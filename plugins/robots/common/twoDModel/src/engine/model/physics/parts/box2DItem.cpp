@@ -114,8 +114,10 @@ b2BodyId Box2DItem::getBodyId() const
 
 bool Box2DItem::angleOrPositionChanged() const
 {
-	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
+	auto currentAngle = b2Rot_GetAngle(b2Body_GetRotation(mBodyId));
 	auto position = b2Body_GetPosition(mBodyId);
+
+	auto angle = Box2DPhysicsEngine::countAngle(mPreviousRotation, currentAngle);
 	return b2Distance(mPreviousPosition, position) > FLT_EPSILON
-			|| qAbs(mPreviousRotation - angle) > FLT_EPSILON;
+	                || qAbs(angle) > FLT_EPSILON;
 }

@@ -78,8 +78,9 @@ qreal Box2DPhysicsEngine::rotation(model::RobotModel &robot) const
 		return 0;
 	}
 
-	auto angle = b2Rot_GetAngle(b2Body_GetRotation(mBox2DRobots[&robot]->getBodyId()));
-	return angleToScene(angle - mPrevAngle);
+	auto currentAngle = b2Rot_GetAngle(b2Body_GetRotation(mBox2DRobots[&robot]->getBodyId()));
+	const auto angle = countAngle(mPrevAngle, currentAngle);
+	return angleToScene(angle);
 }
 
 void Box2DPhysicsEngine::onPressedReleasedSelectedItems(bool active)
