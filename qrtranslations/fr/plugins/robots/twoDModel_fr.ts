@@ -169,7 +169,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+177"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
@@ -215,7 +215,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+112"/>
+        <location line="+571"/>
         <source>Decrease speed</source>
         <translation>Diminuer la vitesse</translation>
     </message>
@@ -235,7 +235,7 @@
         <translation>Augmenter la vitesse</translation>
     </message>
     <message>
-        <location line="+216"/>
+        <location line="-402"/>
         <source>Left wheel:</source>
         <translation>Roue gauche :</translation>
     </message>
@@ -245,7 +245,17 @@
         <translation>Roue droite :</translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+31"/>
+        <source>Metric system units:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Pixels in cm:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+38"/>
         <source>Realistic physics</source>
         <translation>Physique réaliste</translation>
     </message>
@@ -270,17 +280,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+40"/>
         <source>Robot mass:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+57"/>
+        <location line="+23"/>
         <source>Robot track:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-44"/>
+        <location line="-43"/>
         <source>Robot width:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -301,7 +311,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+193"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+195"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -309,7 +319,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+43"/>
         <source>Ball (B)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -317,7 +327,7 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-137"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
         <source>Text (T)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -325,7 +335,7 @@
 <context>
     <name>twoDModel::items::CurveItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+62"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+64"/>
         <source>Bezier Curve (Z)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -333,7 +343,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
         <source>Ellipse (E)</source>
         <translation>Ellipse (E)</translation>
     </message>
@@ -349,7 +359,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+46"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
         <source>Line (L)</source>
         <translation>Ligne (L)</translation>
     </message>
@@ -357,7 +367,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+40"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
         <source>Rectangle (R)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -365,7 +375,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+41"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+43"/>
         <source>Can (C)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,7 +383,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+59"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+61"/>
         <source>Stylus (S)</source>
         <translation>Stylo (S)</translation>
     </message>
@@ -381,7 +391,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+59"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+61"/>
         <source>Wall (W)</source>
         <translation>Mur (W)</translation>
     </message>
@@ -389,7 +399,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+61"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+66"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
@@ -399,7 +409,7 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+103"/>
         <source>This robot model already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -407,7 +417,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+185"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+188"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+18"/>
@@ -422,7 +432,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+499"/>
+        <location line="+508"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -572,7 +582,7 @@
 <context>
     <name>twoDModel::view::DetailsTab</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+36"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+38"/>
         <source>Display</source>
         <translation>Écran</translation>
     </message>
@@ -594,6 +604,11 @@
     <message>
         <location line="+1"/>
         <source>Model parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Metric system parameters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -695,7 +710,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+738"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+739"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>
@@ -728,7 +743,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+329"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+328"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -788,7 +803,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+171"/>
+        <location line="+201"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

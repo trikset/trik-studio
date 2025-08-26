@@ -27,17 +27,20 @@ DetailsTab::DetailsTab(QWidget *parent)
 	, mMotorsRoot(new QTreeWidgetItem(this))
 	, mPhysicsRoot(new QTreeWidgetItem(this))
 	, mParamsRoot(new QTreeWidgetItem(this))
+	, mMetricRoot(new QTreeWidgetItem(this))
 	, mDisplayItem(new QTreeWidgetItem(mDisplayRoot))
 	, mDevicesItem(new QTreeWidgetItem(mDevicesRoot))
 	, mMotorsItem(new QTreeWidgetItem(mMotorsRoot))
 	, mPhysicsItem(new QTreeWidgetItem(mPhysicsRoot))
 	, mParamsItem(new QTreeWidgetItem(mParamsRoot))
+	, mMetricItem(new QTreeWidgetItem(mMetricRoot))
 {
 	initItem(mDisplayRoot, tr("Display"), true);
 	initItem(mDevicesRoot, tr("Ports configuration"), true);
 	initItem(mMotorsRoot, tr("Motors"), false);
 	initItem(mPhysicsRoot, tr("Physics"), false);
 	initItem(mParamsRoot, tr("Model parameters"), false);
+	initItem(mMetricRoot, tr("Metric system parameters"), false);
 }
 
 DetailsTab::~DetailsTab()
@@ -89,6 +92,12 @@ void DetailsTab::setParamsSettings(QWidget *widget)
 	setItemWidget(mParamsItem, 0, widget);
 }
 
+void DetailsTab::setMetricSettings(QWidget *widget)
+{
+	mMetric = widget;
+	setItemWidget(mMetricItem, 0 , widget);
+}
+
 void DetailsTab::setDevicesSectionsVisible(bool visible)
 {
 	mDevicesRoot->setHidden(!visible);
@@ -97,6 +106,11 @@ void DetailsTab::setDevicesSectionsVisible(bool visible)
 void DetailsTab::setMotorsSectionsVisible(bool visible)
 {
 	mMotorsRoot->setHidden(!visible);
+}
+
+void DetailsTab::setMetricSectionsVisible(bool visible)
+{
+	mMetricRoot->setHidden(!visible);
 }
 
 void DetailsTab::setPhysicsSectionsVisible(bool visible)

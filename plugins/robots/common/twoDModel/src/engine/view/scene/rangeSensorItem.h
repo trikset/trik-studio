@@ -31,6 +31,7 @@ class RangeSensorItem : public SensorItem
 
 public:
 	RangeSensorItem(const model::WorldModel &worldModel
+	                , graphicsUtils::AbstractCoordinateSystem *metricSystem
 			, model::SensorsConfiguration &configuration
 			, const kitBase::robotModel::PortInfo &port
 			, QPair<qreal, int> physicalParams

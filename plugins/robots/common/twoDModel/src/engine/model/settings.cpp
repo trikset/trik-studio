@@ -30,6 +30,16 @@ bool Settings::realisticSensors() const
 	return mRealisticSensors;
 }
 
+qreal Settings::pixelsInCm() const
+{
+	return mSizeUnitSystem.pixelsInCm();
+}
+
+SizeUnit &Settings::sizeUnit()
+{
+	return mSizeUnitSystem;
+}
+
 bool Settings::realisticMotors() const
 {
 	return mRealisticMotors;
@@ -42,6 +52,7 @@ void Settings::serialize(QDomElement &parent) const
 	result.setAttribute("realisticPhysics", mRealisticPhysics ? "true" : "false");
 	result.setAttribute("realisticSensors", mRealisticSensors ? "true" : "false");
 	result.setAttribute("realisticMotors", mRealisticMotors ? "true" : "false");
+	mSizeUnitSystem.serialize(result);
 }
 
 void Settings::deserialize(const QDomElement &parent)
@@ -49,6 +60,7 @@ void Settings::deserialize(const QDomElement &parent)
 	mRealisticPhysics = parent.attribute("realisticPhysics") == "true";
 	mRealisticSensors = parent.attribute("realisticSensors") == "true";
 	mRealisticMotors = parent.attribute("realisticMotors") == "true";
+	mSizeUnitSystem.deserialize(parent);
 	emit physicsChanged(mRealisticPhysics);
 }
 

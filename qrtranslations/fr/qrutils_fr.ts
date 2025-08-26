@@ -88,7 +88,7 @@
         <translation>Division entière par zéro</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+595"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="+620"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>

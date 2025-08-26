@@ -19,11 +19,12 @@
 namespace twoDModel {
 namespace items {
 
-class StartPosition : public graphicsUtils::RotateItem
+class StartPosition: public graphicsUtils::RotateItem
 {
 	Q_OBJECT
 public:
-	explicit StartPosition(const QSizeF &robotSize, QGraphicsItem *parent = nullptr);
+	explicit StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	                       const QSizeF &robotSize, QGraphicsItem *parent = nullptr);
 
 	QRectF boundingRect() const override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;

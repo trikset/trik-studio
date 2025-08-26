@@ -17,10 +17,13 @@
 #include <twoDModel/robotModel/twoDRobotModel.h>
 
 #include "trikKitInterpreterCommon/declSpec.h"
-#include "trikNetwork/mailboxInterface.h"
 
 namespace qReal {
 class ErrorReporterInterface;
+}
+
+namespace trikNetwork {
+class MailboxInterface;
 }
 
 namespace trik {

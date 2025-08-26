@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #pragma once
-
 #include "src/engine/items/solidItem.h"
 #include <qrutils/graphicsUtils/abstractItem.h>
 
@@ -28,7 +27,8 @@ class SkittleItem : public graphicsUtils::AbstractItem, public SolidItem
 	Q_DISABLE_COPY(SkittleItem)
 
 public:
-	explicit SkittleItem(const QPointF &position);
+	explicit SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	                     const QPointF &position);
 	~SkittleItem();
 
 	/// Creates and returns skittle item for 2D model palette.

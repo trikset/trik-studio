@@ -19,7 +19,9 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-StylusItem::StylusItem(qreal x1, qreal y1)
+StylusItem::StylusItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			qreal x1, qreal y1)
+	: ColorFieldItem(metricSystem)
 {
 	QPen pen(this->pen());
 	pen.setColor(Qt::black);
@@ -38,7 +40,7 @@ StylusItem::~StylusItem()
 
 AbstractItem *StylusItem::clone() const
 {
-	const auto cloned = new StylusItem(x1(), y1());
+	const auto cloned = new StylusItem(coordinateSystem(), x1(), y1());
 	AbstractItem::copyTo(cloned);
 	connect(this, &StylusItem::segmentAdded, this, [=](LineItem * const segment) {
 		cloned->mAbstractListLine << segment->clone();
@@ -66,7 +68,7 @@ void StylusItem::addLine(qreal x2, qreal y2)
 {
 	setX2(x2);
 	setY2(y2);
-	LineItem * const line = new LineItem(QPointF(mTmpX1, mTmpY1), QPointF(this->x2(), this->y2()));
+	LineItem * const line = new LineItem(coordinateSystem(), QPointF(mTmpX1, mTmpY1), QPointF(this->x2(), this->y2()));
 	line->setPen(pen());
 	line->setBrush(brush());
 	line->setSerializeName(QString("stylusLine"));
@@ -142,9 +144,9 @@ QDomElement StylusItem::serialize(QDomElement &parent) const
 	QDomElement stylusNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(stylusNode, "stylus");
 	for (AbstractItem * const abstractItem : mAbstractListLine) {
-			LineItem * const line = static_cast<LineItem *>(abstractItem);
-			line->setSerializeName("stylusLine");
-			line->serializeWithIndent(stylusNode, -scenePos());
+		LineItem * const line = static_cast<LineItem *>(abstractItem);
+		line->setSerializeName("stylusLine");
+		line->serializeWithIndent(stylusNode, -scenePos());
 	}
 
 	return stylusNode;
@@ -166,7 +168,7 @@ void StylusItem::deserialize(const QDomElement &element)
 	for (int i = 0; i < stylusAttributes.length(); ++i) {
 			QDomElement type = stylusAttributes.at(i).toElement();
 			if (type.tagName() == "stylusLine") {
-				LineItem * const line = new LineItem(QPointF(0, 0), QPointF(0, 0));
+				LineItem * const line = new LineItem(coordinateSystem(), QPointF(0, 0), QPointF(0, 0));
 				line->deserialize(type);
 				line->setPen(this->pen());
 				mAbstractListLine.append(line);

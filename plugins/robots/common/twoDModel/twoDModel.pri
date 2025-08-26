@@ -37,6 +37,8 @@ HEADERS += \
 	$$PWD/include/twoDModel/engine/twoDModelEngineInterface.h \
 	$$PWD/include/twoDModel/engine/twoDModelGuiFacade.h \
 	$$PWD/include/twoDModel/engine/view/twoDModelWidget.h \
+	$$PWD/include/twoDModel/engine/model/metricSystem.h \
+	$$PWD/include/twoDModel/engine/model/metricCoordinateSystem.h \
 	$$PWD/include/twoDModel/engine/model/constants.h \
 	$$PWD/include/twoDModel/engine/model/model.h \
 	$$PWD/include/twoDModel/engine/model/worldModel.h \
@@ -93,6 +95,7 @@ HEADERS += \
 	$$PWD/src/engine/constraints/details/valuesFactory.h \
 	$$PWD/src/engine/model/modelTimer.h \
 	$$PWD/src/engine/model/physics/physicsEngineBase.h \
+	$$PWD/src/engine/model/physics/physicsEngineFactory.h \
 	$$PWD/src/engine/model/physics/simplePhysicsEngine.h \
 	$$PWD/src/engine/model/physics/parts/box2DRobot.h \
 	$$PWD/src/engine/model/physics/parts/box2DWheel.h \
@@ -154,6 +157,8 @@ SOURCES += \
 	$$PWD/src/engine/view/parts/speedPopup.cpp \
 	$$PWD/src/engine/view/parts/ruler.cpp \
 	$$PWD/src/engine/model/model.cpp \
+	$$PWD/src/engine/model/metricSystem.cpp \
+	$$PWD/src/engine/model/metricCoordinateSystem.cpp \
 	$$PWD/src/engine/model/settings.cpp \
 	$$PWD/src/engine/model/robotModel.cpp \
 	$$PWD/src/engine/model/modelTimer.cpp \
@@ -162,6 +167,7 @@ SOURCES += \
 	$$PWD/src/engine/model/timeline.cpp \
 	$$PWD/src/engine/model/image.cpp \
 	$$PWD/src/engine/model/physics/physicsEngineBase.cpp \
+	$$PWD/src/engine/model/physics/physicsEngineFactory.cpp \
 	$$PWD/src/engine/model/physics/simplePhysicsEngine.cpp \
 	$$PWD/src/engine/model/physics/parts/box2DRobot.cpp \
 	$$PWD/src/engine/model/physics/parts/box2DWheel.cpp \

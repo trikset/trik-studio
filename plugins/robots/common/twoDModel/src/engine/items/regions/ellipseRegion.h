@@ -24,7 +24,8 @@ class EllipseRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit EllipseRegion(QGraphicsItem *parent = nullptr);
+	explicit EllipseRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+	                       QGraphicsItem *parent = nullptr);
 
 private:
 	QPainterPath shape() const override;

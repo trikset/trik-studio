@@ -24,7 +24,9 @@ class BoundRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit BoundRegion(const QGraphicsObject &boundItem, const QString &boundId, QGraphicsItem *parent = nullptr);
+	explicit BoundRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+	                     const QGraphicsObject &boundItem,
+	                     const QString &boundId, QGraphicsItem *parent = nullptr);
 
 	/// Returns a width of the stripe on which region item wider than item it is bound to.
 	int stroke() const;

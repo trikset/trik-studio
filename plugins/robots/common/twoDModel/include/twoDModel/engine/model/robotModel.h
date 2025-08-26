@@ -35,6 +35,7 @@ class StartPosition;
 
 namespace model {
 
+class MetricCoordinateSystem;
 class Settings;
 namespace physics {
 class PhysicsEngineBase;
@@ -76,7 +77,9 @@ public:
 	};
 
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
-			, const Settings &settings, QObject *parent = nullptr);
+	           , const Settings &settings
+	           , twoDModel::model::MetricCoordinateSystem &metricSystem
+	           , QObject *parent = nullptr);
 
 	~RobotModel();
 
@@ -126,6 +129,7 @@ public:
 	void onRobotReturnedOnGround();
 
 	void setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+	kitBase::robotModel::PortInfo getPortInfoOnWheel(WheelEnum wheel) const;
 
 	QRectF sensorRect(const kitBase::robotModel::PortInfo &port, const QPointF sensorPos) const;
 	QPainterPath sensorBoundingPath(const kitBase::robotModel::PortInfo &port) const;
@@ -238,6 +242,7 @@ private:
 	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
 
 	QPointer<items::StartPosition> mStartPositionMarker;
+	twoDModel::model::MetricCoordinateSystem &mMetricSystem;
 };
 
 }

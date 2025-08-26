@@ -13,12 +13,16 @@
  * limitations under the License. */
 
 #include "colorFieldItem.h"
+#include <cmath>
 
 using namespace twoDModel::items;
 
-ColorFieldItem::ColorFieldItem(QGraphicsItem* parent)
-	: graphicsUtils::AbstractItem(parent)
+ColorFieldItem::ColorFieldItem(
+		graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		QGraphicsItem* parent)
+	: AbstractItem(parent)
 {
+	setCoordinateSystem(metricSystem);
 	setZValue(ZValue::Shape);
 }
 

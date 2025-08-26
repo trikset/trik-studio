@@ -14,6 +14,8 @@
 
 HEADERS += \
 	$$PWD/abstractItem.h \
+	$$PWD/abstractCoordinateSystem.h \
+	$$PWD/coordinateSystem.h \
 	$$PWD/lineImpl.h \
 	$$PWD/abstractScene.h \
 	$$PWD/abstractItemView.h \
@@ -28,6 +30,7 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/abstractItem.cpp \
+	$$PWD/coordinateSystem.cpp \
 	$$PWD/lineImpl.cpp \
 	$$PWD/abstractScene.cpp \
 	$$PWD/abstractItemView.cpp \

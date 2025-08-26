@@ -13,10 +13,14 @@
  * limitations under the License. */
 
 #pragma once
-
 #include <qrutils/graphicsUtils/abstractItem.h>
 
 namespace twoDModel {
+
+namespace model {
+class SizeUnit;
+}
+
 namespace items {
 
 class ColorFieldItem : public graphicsUtils::AbstractItem
@@ -29,7 +33,9 @@ class ColorFieldItem : public graphicsUtils::AbstractItem
 	Q_DISABLE_COPY(ColorFieldItem)
 
 public:
-	explicit ColorFieldItem(QGraphicsItem *parent = nullptr);
+	explicit ColorFieldItem(
+	                graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	                QGraphicsItem *parent = nullptr);
 	~ColorFieldItem() override;
 
 	/// Returns a color of this item.
