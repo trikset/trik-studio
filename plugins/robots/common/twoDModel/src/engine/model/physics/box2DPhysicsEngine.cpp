@@ -35,12 +35,10 @@ using namespace twoDModel::model::physics;
 using namespace parts;
 using namespace mathUtils;
 
-const qreal scaleCoeff = 0.001;
-
 Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 		, const QList<RobotModel *> &robots)
 	: PhysicsEngineBase(worldModel, robots)
-	, mPixelsInCm(worldModel.pixelsInCm() * scaleCoeff)
+	, mPixelsInCm(worldModel.pixelsInCm())
 	, mPrevPosition(b2Vec2{0, 0})
 	, mPrevAngle(0)
 {
@@ -55,6 +53,8 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
+	static constexpr qreal restitutionTreshold = 0.05f;
+	b2World_SetRestitutionThreshold(mWorldId, restitutionTreshold);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -395,7 +395,7 @@ bool Box2DPhysicsEngine::isRobotStuck() const
 
 void Box2DPhysicsEngine::onPixelsInCmChanged(qreal value)
 {
-	mPixelsInCm = value * scaleCoeff;
+	mPixelsInCm = value;
 }
 
 void Box2DPhysicsEngine::itemAdded(QGraphicsItem *item)
