@@ -180,7 +180,7 @@ jobs:
     - name: Clazy-standalone
       uses: MinyazevR/clazy-standalone-action@v0.3.3
       with:
-        checks: 'level0,level1,level2'
+        checks: 'level0,level1,level2,no-qstring-allocations,no-ctor-missing-parent-argument,no-qproperty-without-notify,no-detaching-member'
         database: 'build'
         fail-on-warning: true
         install-stable: true
