@@ -360,7 +360,9 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(0)->mDebuggingDrawPolygon);
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(1)->mDebuggingDrawPolygon);
 
-	const QMap<const view::SensorItem *, Box2DItem *> sensors = mBox2DRobots[robot]->getSensors(); // clazy:exclude=qmap-with-pointer-key
+	// clazy:excludeall=qmap-with-pointer-key
+	const QMap<const view::SensorItem *, Box2DItem *> sensors = mBox2DRobots[robot]->getSensors();
+	// clazy:enable
 	for (auto it = sensors.constBegin(); it != sensors.constEnd(); ++it) {
 		auto* sensor = it.value();
 		const b2Vec2 position = b2Body_GetPosition(sensor->getBodyId());
@@ -393,14 +395,12 @@ void Box2DPhysicsEngine::nextFrame()
 {
 	for (auto it = mBox2DDynamicItems.constBegin(); it != mBox2DDynamicItems.constEnd(); ++it) {
 		auto *item = it.key();
-		// clazy:excludeall=detaching-member
 		auto isEnabled = b2Body_IsEnabled(mBox2DDynamicItems[item]->getBodyId());
 		if (isEnabled && mBox2DDynamicItems[item]->angleOrPositionChanged()) {
 			QPointF scenePos = positionToScene(mBox2DDynamicItems[item]->getPosition());
 			item->setPos(scenePos - item->boundingRect().center());
 			item->setRotation(angleToScene(mBox2DDynamicItems[item]->getRotation()));
 		}
-		// clazy:enable
 	}
 }
 
