@@ -23,7 +23,7 @@ LidarSensorItem::LidarSensorItem(const model::WorldModel &worldModel
 		, const PortInfo &port
 		, QPair<qreal, int> angleAndRange
 		, const QString &pathToImage
-		, const QRect &imageSize
+		, QRect imageSize
 		)
 	: RangeSensorItem(worldModel, metricSystem, configuration, port, angleAndRange, pathToImage, imageSize)
 {

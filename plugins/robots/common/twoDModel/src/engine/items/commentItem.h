@@ -26,7 +26,7 @@ class CommentItem : public graphicsUtils::AbstractItem
 
 public:
 	explicit CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                     const QPointF &begin, const QPointF &end);
+	                     QPointF begin, QPointF end);
 
 	/// Creates and returns comment item for 2D model palette.
 	/// Transfers ownership.

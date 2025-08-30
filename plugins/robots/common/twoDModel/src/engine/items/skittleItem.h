@@ -28,7 +28,7 @@ class SkittleItem : public graphicsUtils::AbstractItem, public SolidItem
 
 public:
 	explicit SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                     const QPointF &position);
+	                     QPointF position);
 	~SkittleItem();
 
 	/// Creates and returns skittle item for 2D model palette.

@@ -1,4 +1,4 @@
-/* Copyright 2025 QReal Research Group
+/* Copyright 2025 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ class SizeUnit;
 /// AbstractCoordinateSystem interface for using the metric system in 2D model items, Abstract
 class MetricCoordinateSystem: public graphicsUtils::AbstractCoordinateSystem
 {
+	Q_OBJECT
 public:
 	/// Dependency injection to use custom settings in all items
 	explicit MetricCoordinateSystem(

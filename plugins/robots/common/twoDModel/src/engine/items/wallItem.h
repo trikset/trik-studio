@@ -28,7 +28,7 @@ class WallItem : public graphicsUtils::AbstractItem, public SolidItem
 
 public:
 	WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	         const QPointF &begin, const QPointF &end);
+	         QPointF begin, QPointF end);
 
 	/// Creates a copy of this wall item. Transfers ownership to the caller.
 	WallItem *clone() const;

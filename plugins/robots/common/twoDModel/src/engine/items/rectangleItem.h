@@ -28,7 +28,7 @@ class RectangleItem : public ColorFieldItem
 
 public:
 	RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	              const QPointF &begin, const QPointF &end);
+	              QPointF begin, QPointF end);
 
 	AbstractItem *clone() const override;
 

@@ -117,15 +117,14 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			if (mCurrentTabInfo == qReal::TabInfo::TabType::editor) {
 				interpreterControl.interpret();
 			} else {
-				emit interpreterControl.startScriptInterpretation();
+				Q_EMIT interpreterControl.startScriptInterpretation();
 			}
 		});
 
 		connect(this,
 				&TwoDModelEngineFacade::stopButtonPressed,
 				&interpreterControl,
-				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); },
-				Qt::UniqueConnection);
+				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
 	};
 
 	auto disconnectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {

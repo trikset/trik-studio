@@ -25,7 +25,7 @@ RangeSensorItem::RangeSensorItem(const model::WorldModel &worldModel
 		, const PortInfo &port
 		, QPair<qreal, int> angleAndRange
 		, const QString &pathToImage
-		, const QRect &imageSize
+		, QRect imageSize
 		)
 	: SensorItem(metricSystem, configuration, port, pathToImage, imageSize)
 	, mWorldModel(worldModel)

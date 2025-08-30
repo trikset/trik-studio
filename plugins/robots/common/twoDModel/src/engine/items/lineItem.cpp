@@ -25,7 +25,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			const QPointF &begin, const QPointF &end, int cornerRadius)
+			const QPointF begin, const QPointF end, int cornerRadius)
 	: ColorFieldItem(metricSystem)
 	,mCornerRadius(cornerRadius)
 {
@@ -140,7 +140,7 @@ void LineItem::reshapeRectWithShift()
 	}
 }
 
-QDomElement LineItem::serializeWithIndent(QDomElement &parent, const QPointF &topLeftPicture) const
+QDomElement LineItem::serializeWithIndent(QDomElement &parent, const QPointF topLeftPicture) const
 {
 	QDomElement lineNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(lineNode, mSerializeName);

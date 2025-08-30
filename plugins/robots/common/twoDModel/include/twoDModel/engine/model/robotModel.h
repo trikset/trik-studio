@@ -107,7 +107,7 @@ public:
 	Q_INVOKABLE void resetEncoder(const kitBase::robotModel::PortInfo &port);
 
 	QPointF position() const;
-	void setPosition(const QPointF &newPos);
+	void setPosition(QPointF newPos);
 
 	qreal rotation() const;
 	void setRotation(qreal angle);

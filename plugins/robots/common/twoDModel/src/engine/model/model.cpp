@@ -186,7 +186,7 @@ void Model::deserialize(const QDomDocument &model)
 	}
 }
 
-void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF &pos)
+void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 {
 	if (mRobotModel) {
 		mErrorReporter->addCritical(tr("This robot model already exists"));

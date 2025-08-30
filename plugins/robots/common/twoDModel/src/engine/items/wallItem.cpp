@@ -26,7 +26,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		const QPointF &begin, const QPointF &end)
+		QPointF begin, QPointF end)
 	: mImage(":/icons/2d_wall.png")
 {
 	setCoordinateSystem(metricSystem);

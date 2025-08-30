@@ -27,7 +27,7 @@ class LineItem : public ColorFieldItem
 
 public:
 	LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	         const QPointF &begin, const QPointF &end, int cornerRadius = 0);
+		 const QPointF begin, const QPointF end, int cornerRadius = 0);
 
 	AbstractItem *clone() const override;
 
@@ -45,7 +45,7 @@ public:
 	QPainterPath resizeArea() const override;
 	void reshapeRectWithShift() override;
 
-	QDomElement serializeWithIndent(QDomElement &parent, const QPointF &topLeftPicture) const;
+	QDomElement serializeWithIndent(QDomElement &parent, const QPointF topLeftPicture) const;
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
 

@@ -51,7 +51,7 @@ public:
 	QVector2D positionShift(RobotModel &robot) const override;
 	qreal rotation(RobotModel &robot) const override;
 	void addRobot(RobotModel * const robot) override;
-	void addRobot(RobotModel * const robot, const QPointF &pos, qreal angle);
+	void addRobot(RobotModel * const robot, QPointF pos, qreal angle);
 	void removeRobot(RobotModel * const robot) override;
 	void recalculateParameters(qreal timeInterval) override;
 	void wakeUp() override;
@@ -60,13 +60,13 @@ public:
 	bool isRobotStuck() const override;
 
 	float pxToCm(qreal px) const;
-	b2Vec2 pxToCm(const QPointF &posInPx) const;
+	b2Vec2 pxToCm(QPointF posInPx) const;
 	qreal cmToPx(float cm) const;
 	QPointF cmToPx(const b2Vec2 posInCm) const;
 	float pxToM(qreal px) const;
 	qreal mToPx(float m) const;
 
-	b2Vec2 positionToBox2D(const QPointF &sceneCoords) const;
+	b2Vec2 positionToBox2D(QPointF sceneCoords) const;
 	b2Vec2 positionToBox2D(float x, float y) const;
 	QPointF positionToScene(b2Vec2 boxCoords) const;
 	QPointF positionToScene(float x, float y) const;
@@ -91,11 +91,11 @@ public:
 
 public slots:
 	void onItemDragged(graphicsUtils::AbstractItem *item);
-	void onRobotStartPositionChanged(const QPointF &newPos, twoDModel::model::RobotModel *robot);
+	void onRobotStartPositionChanged(QPointF newPos, twoDModel::model::RobotModel *robot);
 	void onRobotStartAngleChanged(const qreal newAngle, twoDModel::model::RobotModel *robot);
-	void onMouseReleased(const QPointF &newPos, qreal newAngle);
+	void onMouseReleased(QPointF newPos, qreal newAngle);
 	void onMousePressed();
-	void onRecoverRobotPosition(const QPointF &pos);
+	void onRecoverRobotPosition(QPointF pos);
 
 protected:
 	void onPixelsInCmChanged(qreal value) override;

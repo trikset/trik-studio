@@ -22,7 +22,7 @@ const QSizeF size = QSizeF(13, 13);
 const int lineWidth = 3;
 
 StartPosition::StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-				const QSizeF &robotSize, QGraphicsItem *parent)
+				QSizeF robotSize, QGraphicsItem *parent)
 	: RotateItem(parent)
 	, mRobotSize(robotSize)
 {

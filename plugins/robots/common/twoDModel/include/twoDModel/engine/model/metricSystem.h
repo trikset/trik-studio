@@ -49,7 +49,7 @@ public:
 	void deserialize(const QDomElement &parent);
 
 	/// Set the current unit of measurement
-	void setUnit(const Unit &unit);
+	void setUnit(twoDModel::model::SizeUnit::Unit unit);
 
 	/// Multiplier for conversion to pixels
 	qreal countFactor() const;
@@ -61,9 +61,9 @@ public:
 
 	Unit defaultUnit() const;
 
-signals:
+Q_SIGNALS:
 	/// Emit when the sizeUnit is serialized
-	void sizeUnitChanged(const Unit &unit);
+	void sizeUnitChanged(const twoDModel::model::SizeUnit::Unit &unit);
 
 private:
 	Unit mSizeUnit { Unit::Pixels };

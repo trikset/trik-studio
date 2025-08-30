@@ -36,7 +36,7 @@ public:
 			, const kitBase::robotModel::PortInfo &port
 			, QPair<qreal, int> physicalParams
 			, const QString &pathToImage
-			, const QRect &imageSize
+			, QRect imageSize
 			);
 
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *style, QWidget *widget) override;

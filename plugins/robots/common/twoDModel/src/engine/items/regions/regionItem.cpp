@@ -77,7 +77,7 @@ QPointF RegionItem::textPosition() const
 	return mTextItem->pos();
 }
 
-void RegionItem::setTextPosition(const QPointF &pos)
+void RegionItem::setTextPosition(QPointF pos)
 {
 	mTextItem->setPos(pos);
 }
@@ -93,12 +93,12 @@ void RegionItem::setColor(const QColor &color)
 	setText(text());  // To update text color
 }
 
-void RegionItem::setSize(const QSizeF &size)
+void RegionItem::setSize(QSizeF size)
 {
 	mSize = size;
 }
 
-bool RegionItem::containsPoint(const QPointF &point) const
+bool RegionItem::containsPoint(QPointF point) const
 {
 	return QGraphicsItem::contains(mapFromScene(point));
 }

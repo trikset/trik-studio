@@ -23,7 +23,7 @@
 using namespace twoDModel::items;
 
 BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		const QPointF &position)
+		QPointF position)
 	: mSvgRenderer(new QSvgRenderer)
 {
 	setCoordinateSystem(metricSystem);

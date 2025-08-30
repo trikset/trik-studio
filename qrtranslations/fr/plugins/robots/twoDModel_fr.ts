@@ -311,7 +311,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+195"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+194"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
         <translation type="unfinished"></translation>
     </message>
@@ -417,7 +417,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+188"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+189"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+18"/>
@@ -778,22 +778,22 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>2D model saves (*.xml)</source>
         <translation>Fichiers de sauvegarde du modèle 2D (*.xml) </translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-14"/>
         <source>Loading world and robot model</source>
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+14"/>
         <source>Loading world without robot model</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+317"/>
         <source>Hide details</source>
         <translation type="unfinished"></translation>
     </message>

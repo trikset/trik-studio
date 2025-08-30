@@ -28,7 +28,7 @@ class EllipseItem : public ColorFieldItem
 
 public:
 	EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	            const QPointF &begin, const QPointF &end);
+	            QPointF begin, QPointF end);
 
 	AbstractItem *clone() const override;
 

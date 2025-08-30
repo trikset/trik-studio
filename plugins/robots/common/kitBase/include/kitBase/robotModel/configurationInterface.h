@@ -53,7 +53,7 @@ public:
 	/// Removes device on a given port from configuration.
 	virtual void clearDevice(const PortInfo &port) = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when some device is ready to be used.
 	void deviceConfigured(robotParts::Device *device);
 };

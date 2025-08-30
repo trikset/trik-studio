@@ -39,7 +39,7 @@ const int selectionDrift = 7;
 
 SensorItem::SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			model::SensorsConfiguration &configuration
-		, const PortInfo &port, const QString &pathToImage, const QRect &imageRect)
+		, const PortInfo &port, const QString &pathToImage, QRect imageRect)
 	: mConfiguration(configuration)
 	, mPort(port)
 	, mImageRect(imageRect.isEmpty() ? this->calculateImageRect() : imageRect)

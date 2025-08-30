@@ -64,8 +64,10 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	RotateItem::init();
 
 	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> sensors = robotModel.info().specialDevices();
-	for (const kitBase::robotModel::PortInfo &port : sensors.keys()) {
-		const kitBase::robotModel::DeviceInfo device = sensors[port];
+	for (auto it = sensors.begin(); it != sensors.end(); it++) {
+		auto port = it.key();
+		auto device = it.value();
+
 		SensorItem *sensorItem = new SensorItem(coordinateSystem(), robotModel.configuration(), port
 				, robotModel.info().sensorImagePath(device), robotModel.info().sensorImageRect(device));
 		addSensor(port, sensorItem);
@@ -106,7 +108,7 @@ QRectF RobotItem::calcNecessaryBoundingRect() const
 
 void RobotItem::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
-	emit mousePressed();
+	Q_EMIT mousePressed();
 	AbstractItem::mousePressEvent(event);
 
 	if (editable()) {
@@ -131,7 +133,7 @@ void RobotItem::mouseReleaseEvent(QGraphicsSceneMouseEvent * event)
 void RobotItem::onLanded()
 {
 	mRobotModel.onRobotReturnedOnGround();
-	emit changedPosition(this);
+	Q_EMIT changedPosition(this);
 }
 
 void RobotItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -168,7 +170,7 @@ QMap<kitBase::robotModel::PortInfo, SensorItem *> const &RobotItem::sensors() co
 	return mSensors;
 }
 
-void RobotItem::setPos(const QPointF &newPos)
+void RobotItem::setPos(QPointF newPos)
 {
 	QGraphicsItem::setPos(newPos);
 }
@@ -178,7 +180,7 @@ void RobotItem::setRotation(qreal rotation)
 	QGraphicsItem::setRotation(rotation);
 }
 
-void RobotItem::ride(const QPointF &newPos, qreal rotation)
+void RobotItem::ride(QPointF newPos, qreal rotation)
 {
 	const QPointF oldMarker = mapToScene(mMarkerPoint);
 	setPos(newPos);
@@ -187,7 +189,7 @@ void RobotItem::ride(const QPointF &newPos, qreal rotation)
 	QPen pen;
 	pen.setColor(mRobotModel.markerColor());
 	pen.setWidth(this->pen().width());
-	emit drawTrace(pen, oldMarker, newMarker);
+	Q_EMIT drawTrace(pen, oldMarker, newMarker);
 }
 
 void RobotItem::addSensor(const kitBase::robotModel::PortInfo &port, SensorItem *sensor)
@@ -197,7 +199,7 @@ void RobotItem::addSensor(const kitBase::robotModel::PortInfo &port, SensorItem 
 
 	sensor->setPos(mRobotModel.configuration().position(port));
 	sensor->setRotation(mRobotModel.configuration().direction(port));
-	emit sensorAdded(sensor);
+	Q_EMIT sensorAdded(sensor);
 }
 
 void RobotItem::removeSensor(const kitBase::robotModel::PortInfo &port)
@@ -211,7 +213,7 @@ void RobotItem::removeSensor(const kitBase::robotModel::PortInfo &port)
 	mSensors[port] = nullptr;
 	delete sensor;
 	// Only pointer itself, not the pointee can be used after deletion
-	emit sensorRemoved(sensor);
+	Q_EMIT sensorRemoved(sensor);
 
 }
 
@@ -219,7 +221,7 @@ void RobotItem::updateSensorPosition(const kitBase::robotModel::PortInfo &port)
 {
 	if (mSensors[port]) {
 		mSensors[port]->setPos(mRobotModel.configuration().position(port));
-		emit sensorUpdated(mSensors[port]);
+		Q_EMIT sensorUpdated(mSensors[port]);
 	}
 }
 
@@ -227,7 +229,7 @@ void RobotItem::updateSensorRotation(const kitBase::robotModel::PortInfo &port)
 {
 	if (mSensors[port]) {
 		mSensors[port]->setRotation(mRobotModel.configuration().direction(port));
-		emit sensorUpdated(mSensors[port]);
+		Q_EMIT sensorUpdated(mSensors[port]);
 	}
 }
 
@@ -239,7 +241,7 @@ void RobotItem::setNeededBeep(bool isNeededBeep)
 QVariant RobotItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
 	if (change == ItemPositionHasChanged) {
-		mRobotModel.setPosition(value.value<QPointF>());
+		mRobotModel.setPosition(value.toPointF());
 	}
 
 	if (change == ItemRotationHasChanged) {
@@ -268,7 +270,7 @@ RobotModel &RobotItem::robotModel()
 void RobotItem::returnToStartPosition()
 {
 	mRobotModel.returnToStartMarker();
-	emit recoverRobotPosition(mRobotModel.position());
+	Q_EMIT recoverRobotPosition(mRobotModel.position());
 }
 
 QPolygonF RobotItem::collidingPolygon() const
@@ -314,7 +316,7 @@ void RobotItem::BeepItem::drawBeep(QPainter *painter)
 	drawBeepArcs(painter, center, 60);
 }
 
-void RobotItem::BeepItem::drawBeepArcs(QPainter *painter, const QPointF &center, qreal radius)
+void RobotItem::BeepItem::drawBeepArcs(QPainter *painter, QPointF center, qreal radius)
 {
 	painter->save();
 	QPen pen;

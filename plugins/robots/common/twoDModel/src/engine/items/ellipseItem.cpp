@@ -20,7 +20,7 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			const QPointF &begin, const QPointF &end)
+			QPointF begin, QPointF end)
 	: ColorFieldItem(metricSystem)
 {
 	setX1(begin.x());

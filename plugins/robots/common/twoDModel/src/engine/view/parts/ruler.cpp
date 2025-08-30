@@ -87,17 +87,17 @@ void Ruler::paintEvent(QPaintEvent *event)
 	}
 }
 
-qreal Ruler::relevantCoordinate(const QPointF &point) const
+qreal Ruler::relevantCoordinate(QPointF point) const
 {
 	return orientation() == Qt::Horizontal ? point.x() : point.y();
 }
 
-qreal Ruler::relevantDimension(const QSizeF &size) const
+qreal Ruler::relevantDimension(QSizeF size) const
 {
 	return orientation() == Qt::Horizontal ? size.width() : size.height();
 }
 
-qreal Ruler::irrelevantDimension(const QSizeF &size) const
+qreal Ruler::irrelevantDimension(QSizeF size) const
 {
 	return orientation() == Qt::Horizontal ? size.height() : size.width();
 }
@@ -109,7 +109,7 @@ QPointF Ruler::makePoint(qreal relevantCoordinate, qreal irrelevantCoordinate) c
 			: QPointF(irrelevantCoordinate, relevantCoordinate);
 }
 
-QPointF Ruler::drawingPoint(qreal relevantCoordinate, const QSizeF &textSize) const
+QPointF Ruler::drawingPoint(qreal relevantCoordinate, QSizeF textSize) const
 {
 	return makePoint(relevantCoordinate, (irrelevantDimension(size()) - irrelevantDimension(textSize)) / 2);
 }

@@ -118,7 +118,7 @@ public:
 
 	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
-	void reverseOldResizingItem(const QPointF &begin, const QPointF &end);
+	void reverseOldResizingItem(QPointF begin, QPointF end);
 
 	virtual void restorePos();
 	virtual void savePos();
@@ -127,7 +127,7 @@ public:
 	virtual void setXandY(QDomElement& dom, const QRectF &rect);
 	QDomElement setPenBrushToDoc(QDomDocument &document, const QString &domName) const;
 	QDomElement setPenBrushToElement(QDomElement &target, const QString &domName) const;
-	virtual QRectF sceneBoundingRectCoord(const QPoint &topLeftPicture);
+	virtual QRectF sceneBoundingRectCoord(const QPoint topLeftPicture);
 	void readPenBrush(const QDomElement &docItem);
 
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;

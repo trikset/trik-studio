@@ -29,7 +29,7 @@ class BallItem : public graphicsUtils::AbstractItem, public SolidItem
 
 public:
 	explicit BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                  const QPointF &position);
+	                  QPointF position);
 	~BallItem();
 
 	/// Creates and returns ball item for 2D model palette.

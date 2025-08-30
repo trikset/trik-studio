@@ -26,11 +26,11 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 const QSizeF markerSize(12, 12);
-const QColor markerColor1 = "#ffcc66";
-const QColor markerColor2 = "#ff6666";
+const QColor markerColor1 = QColor(0xff, 0xcc, 0x66);
+const QColor markerColor2 = QColor(0xff, 0x66, 0x66);
 
 CurveItem::CurveItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			const QPointF &begin, const QPointF &end)
+			QPointF begin, QPointF end)
 	: ColorFieldItem(metricSystem)
 	, mMarker1(this)
 	, mMarker2(this)

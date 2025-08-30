@@ -93,14 +93,14 @@ private:
 
 	private:
 		void drawBeep(QPainter *painter);
-		void drawBeepArcs(QPainter *painter, const QPointF &center, qreal radius);
+		void drawBeepArcs(QPainter *painter, QPointF center, qreal radius);
 	};
 
 	/// Same as QGraphicsItem::setPos(). Needed as slot for connection.
-	void setPos(const QPointF &newPos);
+	void setPos(QPointF newPos);
 	/// Same as QGraphicsItem::setRotation(). Needed as slot for connection.
 	void setRotation(qreal rotation);
-	void ride(const QPointF &newPos, qreal rotation);
+	void ride(QPointF newPos, qreal rotation);
 
 	void onLanded();
 	void updateImage();

@@ -28,7 +28,7 @@ class CurveItem : public ColorFieldItem
 
 public:
 	CurveItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	          const QPointF &begin, const QPointF &end);
+	          QPointF begin, QPointF end);
 
 	AbstractItem *clone() const override;
 

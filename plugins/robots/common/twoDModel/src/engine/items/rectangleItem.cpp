@@ -20,7 +20,7 @@ using namespace twoDModel::items;
 using namespace graphicsUtils;
 
 RectangleItem::RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-				const QPointF &begin, const QPointF &end)
+				QPointF begin, QPointF end)
 	: ColorFieldItem(metricSystem)
 {
 	setX1(begin.x());

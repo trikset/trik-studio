@@ -156,7 +156,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->robotMassInGr->setValue(robotMass);
 	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
 
-	connect(&mModel, &model::Model::robotAdded, [this, pixelsInCm](){
+	connect(&mModel, &model::Model::robotAdded, this, [this, pixelsInCm](){
 		auto robotModels = mModel.robotModels();
 		auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
 				: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
@@ -498,7 +498,7 @@ void TwoDModelWidget::saveWorldModel()
 		return;
 	}
 
-	if (!saveFileName.toLower().endsWith(".xml")) {
+	if(!saveFileName.endsWith(".xml", Qt::CaseInsensitive)) {
 		saveFileName += ".xml";
 	}
 
@@ -523,6 +523,7 @@ void TwoDModelWidget::loadWorldModel()
 		mController->execute(command);
 	}
 }
+
 void TwoDModelWidget::loadWorldModelWithoutRobot()
 {
 	const QString loadFileName = QRealFileDialog::getOpenFileName("Open2DModelWidget", this
@@ -546,19 +547,20 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 		mController->execute(command);
 	}
 }
+
 bool TwoDModelWidget::isColorItem(AbstractItem * const item) const
 {
-	return dynamic_cast<items::ColorFieldItem *>(item)
-			&& !dynamic_cast<items::WallItem *>(item);
+	return qobject_cast<items::ColorFieldItem *>(item)
+			&& !qobject_cast<items::WallItem *>(item);
 }
 
 QList<AbstractItem *> TwoDModelWidget::selectedColorItems() const
 {
 	QList<AbstractItem *> resList;
-	for (QGraphicsItem * const graphicsItem : mScene->selectedItems()) {
+	for (auto &&graphicsItem : mScene->selectedItems()) {
 		AbstractItem *item = dynamic_cast<AbstractItem*>(graphicsItem);
-		if (item && (isColorItem(item) || dynamic_cast<RobotItem *>(item))) {
-			resList << item;
+		if (item && (isColorItem(item) || qobject_cast<RobotItem *>(item))) {
+			resList << item; // clazy:exclude=reserve-candidates
 		}
 	}
 
@@ -644,17 +646,20 @@ engine::TwoDModelDisplayWidget *TwoDModelWidget::display()
 
 void TwoDModelWidget::setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible)
 {
-	RobotModel *robotModel = mModel.robotModels()[0];
+	auto robotModels = mModel.robotModels();
 
-	if (mScene->robot(*robotModel)->sensors()[port]) {
-		mScene->robot(*robotModel)->sensors()[port]->setVisible(isVisible);
+	if (robotModels.size() > 0) {
+		auto robotModel = robotModels[0];
+		if (mScene->robot(*robotModel)->sensors()[port]) {
+			mScene->robot(*robotModel)->sensors()[port]->setVisible(isVisible);
+		}
 	}
 }
 
 void TwoDModelWidget::closeEvent(QCloseEvent *event)
 {
 	Q_UNUSED(event)
-	emit widgetClosed();
+	Q_EMIT widgetClosed();
 }
 
 void TwoDModelWidget::focusInEvent(QFocusEvent *event)
@@ -665,17 +670,21 @@ void TwoDModelWidget::focusInEvent(QFocusEvent *event)
 
 SensorItem *TwoDModelWidget::sensorItem(const kitBase::robotModel::PortInfo &port)
 {
-	return mScene->robot(*mModel.robotModels()[0])->sensors().value(port);
+	auto robotModels = mModel.robotModels();
+	if (robotModels.size() > 0) {
+		return mScene->robot(*robotModels[0])->sensors().value(port);
+	}
+	return nullptr;
 }
 
 void TwoDModelWidget::saveWorldModelToRepo()
 {
-	emit mModel.modelChanged(generateWorldModelXml());
+	Q_EMIT mModel.modelChanged(generateWorldModelXml());
 }
 
 void TwoDModelWidget::saveBlobsToRepo()
 {
-	emit mModel.blobsChanged(generateBlobsXml());
+	Q_EMIT mModel.blobsChanged(generateBlobsXml());
 }
 
 QDomDocument TwoDModelWidget::generateWorldModelXml() const
@@ -994,7 +1003,7 @@ bool TwoDModelWidget::setSelectedValue(QComboBox * const comboBox, const T &port
 void TwoDModelWidget::connectMetricComboBoxes()
 {
 	connect(&mModel.metricSystem(), &SizeUnit::sizeUnitChanged
-	        , this, [=](const SizeUnit::Unit &unit) {
+		, this, [=](SizeUnit::Unit unit) {
 		setSelectedValue(mUi->metricComboBox, unit);
 	});
 
@@ -1040,8 +1049,8 @@ void TwoDModelWidget::updateWheelComboBoxes()
 	mUi->rightWheelComboBox->addItem(tr("No wheel"), QVariant::fromValue(PortInfo("None", output)));
 #endif
 
-	for (const PortInfo &port : mSelectedRobotItem->robotModel().info().availablePorts()) {
-		for (const DeviceInfo &device : mSelectedRobotItem->robotModel().info().allowedDevices(port)) {
+	for (auto &&port : mSelectedRobotItem->robotModel().info().availablePorts()) {
+		for (auto &&device : mSelectedRobotItem->robotModel().info().allowedDevices(port)) {
 			if (device.isA<Motor>()) {
 				const QString item = tr("%1 (port %2)").arg(device.friendlyName(), port.userFriendlyName());
 				mUi->leftWheelComboBox->addItem(item, QVariant::fromValue(port));
@@ -1080,7 +1089,10 @@ void TwoDModelWidget::updateWheelComboBoxes()
 void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 {
 	if (mScene->oneRobot()) {
-		setSelectedRobotItem(mScene->robot(*mModel.robotModels()[0]));
+		auto robotModels = mModel.robotModels();
+		if (robotModels.size() > 0) {
+			setSelectedRobotItem(mScene->robot(*robotModels[0]));
+		}
 	} else {
 		if (mSelectedRobotItem) {
 			unsetSelectedRobotItem();

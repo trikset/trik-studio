@@ -39,7 +39,7 @@ class SensorItem : public graphicsUtils::RotateItem, public items::SolidItem
 public:
 	SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	           model::SensorsConfiguration &configuration
-			, const kitBase::robotModel::PortInfo &port, const QString &pathToImage, const QRect &imageSize);
+			, const kitBase::robotModel::PortInfo &port, const QString &pathToImage, QRect imageSize);
 
 	/// Draws selection rect around sensorBoundingBox
 	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;

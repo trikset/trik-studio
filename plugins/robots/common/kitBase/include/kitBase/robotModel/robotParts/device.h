@@ -54,7 +54,7 @@ public:
 	/// Configure device.
 	void configure();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when device finished its configuration, successfully or by failure. Note that configuration can be
 	/// synchronous or asynchronous for various devices (configure() can be in a stack when this signal is emitted).
 	/// Shall not be emitted directly from descendants, use configurationCompleted() instead due to timeout handling
@@ -73,7 +73,7 @@ protected:
 	/// Concrete devices shall call this method when they finish their configuration.
 	void configurationCompleted(bool success);
 
-private slots:
+private Q_SLOTS:
 	/// Called when configuration takes more than timeout time. Note that if configuration is done synchronously,
 	/// timer signal will never be emitted and this slot will not be called.
 	void configurationTimerTimeoutSlot();

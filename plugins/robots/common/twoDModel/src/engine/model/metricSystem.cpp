@@ -37,7 +37,7 @@ namespace {
 	}
 
 	/// Translation of a unit into a string representation
-	static QString unitToString(const SizeUnit::Unit &unit) {
+	static QString unitToString(SizeUnit::Unit unit) {
 		if (unit == SizeUnit::Unit::Centimeters) {
 			return "cm";
 		}
@@ -74,7 +74,7 @@ void SizeUnit::deserialize(const QDomElement &parent)
 	emit sizeUnitChanged(mSizeUnit);
 }
 
-void SizeUnit::setUnit(const Unit &unit)
+void SizeUnit::setUnit(twoDModel::model::SizeUnit::Unit unit)
 {
 	mSizeUnit = unit;
 }

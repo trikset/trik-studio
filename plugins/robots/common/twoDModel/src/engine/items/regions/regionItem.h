@@ -56,7 +56,7 @@ public:
 	QPointF textPosition() const;
 
 	/// Sets the upper-left corner of the text relatively to upper-left corner of the item.
-	void setTextPosition(const QPointF &pos);
+	void setTextPosition(QPointF pos);
 
 	/// Returns the color of the item`s borders, text and hatching.
 	QColor color() const;
@@ -65,10 +65,10 @@ public:
 	void setColor(const QColor &color);
 
 	/// Sets the size of an item on the scene.
-	void setSize(const QSizeF &size);
+	void setSize(QSizeF size);
 
 	/// Returns true if the given point in scene coordinates is contained by this region.
-	bool containsPoint(const QPointF &point) const;
+	bool containsPoint(QPointF point) const;
 
 	/// Returns true if the center of the bounding rect of the given item is contained by this region.
 	bool containsItem(QGraphicsItem *item) const;

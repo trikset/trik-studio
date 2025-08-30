@@ -49,11 +49,11 @@ public slots:
 private:
 	void paintEvent(QPaintEvent *event) override;
 
-	qreal relevantCoordinate(const QPointF &point) const;
-	qreal relevantDimension(const QSizeF &size) const;
-	qreal irrelevantDimension(const QSizeF &size) const;
+	qreal relevantCoordinate(QPointF point) const;
+	qreal relevantDimension(QSizeF size) const;
+	qreal irrelevantDimension(QSizeF size) const;
 	QPointF makePoint(qreal relevantCoordinate, qreal irrelevantCoordinate) const;
-	QPointF drawingPoint(qreal relevantCoordinate, const QSizeF &textSize) const;
+	QPointF drawingPoint(qreal relevantCoordinate, QSizeF textSize) const;
 	QRectF textBoundingRect(const QString &text) const;
 	Qt::Orientation mOrientation;
 	qreal mMetricFactor;

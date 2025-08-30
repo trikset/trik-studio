@@ -87,7 +87,7 @@ public:
 	/// Add new robot model
 	/// @param robotModel Model to be added
 	/// @param pos Initial positon of robot model
-	void addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF &pos = QPointF());
+	void addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos = QPointF());
 
 	/// Remove robot model
 	void removeRobotModel();
@@ -101,7 +101,7 @@ public:
 	/// Activates or deactivates constraints checker.
 	void setConstraintsEnabled(bool enabled);
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when some user actions lead to world model modifications
 	/// @param xml World model description in xml format
 	void modelChanged(const QDomDocument &xml);
@@ -112,13 +112,13 @@ signals:
 
 	/// Emitted after new robot model added
 	/// @param robotModel Pointer to robot model which was removed
-	void robotAdded(RobotModel *robotModel);
+	void robotAdded(twoDModel::model::RobotModel *robotModel);
 
 	/// Emitted after robot model removed
 	/// @param robotModel Pointer to robot model which was added
-	void robotRemoved(RobotModel *robotModel);
+	void robotRemoved(twoDModel::model::RobotModel *robotModel);
 
-private slots:
+private Q_SLOTS:
 	void resetPhysics();
 	void recalculatePhysicsParams();
 

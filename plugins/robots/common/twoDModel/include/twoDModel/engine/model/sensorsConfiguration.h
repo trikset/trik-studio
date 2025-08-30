@@ -35,9 +35,9 @@ class TWO_D_MODEL_EXPORT SensorsConfiguration : public QObject, public kitBase::
 
 public:
 	SensorsConfiguration(twoDModel::model::MetricCoordinateSystem &metricSystem,
-	                     const QString &robotModelName, const QSizeF &robotSize);
+	                     const QString &robotModelName, QSizeF robotSize);
 
-	void setPosition(const kitBase::robotModel::PortInfo &port, const QPointF &position);
+	void setPosition(const kitBase::robotModel::PortInfo &port, QPointF position);
 	QPointF position(const kitBase::robotModel::PortInfo &port) const;
 
 	void setDirection(const kitBase::robotModel::PortInfo &port, qreal direction);
@@ -68,7 +68,7 @@ private:
 	struct SensorInfo
 	{
 		SensorInfo();
-		SensorInfo(const QPointF &position, qreal direction);
+		SensorInfo(QPointF position, qreal direction);
 
 		QPointF position;
 		qreal direction;
