@@ -53,8 +53,8 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
-	static constexpr qreal restitutionTreshold = 0.05f;
-	b2World_SetRestitutionThreshold(mWorldId, restitutionTreshold);
+	constexpr qreal restitutionThreshold = 0.05f;
+	b2World_SetRestitutionThreshold(mWorldId, restitutionThreshold);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
