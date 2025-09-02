@@ -53,7 +53,7 @@ class TWO_D_MODEL_EXPORT WorldModel : public QObject
 
 public:
 	WorldModel(Settings &settings,
-	           twoDModel::model::MetricCoordinateSystem &metricSystem);
+		   twoDModel::model::MetricCoordinateSystem &metricSystem);
 	~WorldModel();
 
 	void init(qReal::ErrorReporterInterface &errorReporter);

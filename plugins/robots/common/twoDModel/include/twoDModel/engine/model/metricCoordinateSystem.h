@@ -14,6 +14,7 @@
 
 #pragma once
 #include <QObject>
+#include <QPointer>
 #include <qrutils/graphicsUtils/abstractCoordinateSystem.h>
 
 namespace twoDModel {
@@ -23,21 +24,19 @@ namespace model {
 class SizeUnit;
 
 /// The metric system, which is an implementation of the qrutils
-/// AbstractCoordinateSystem interface for using the metric system in 2D model items, Abstract
+/// AbstractCoordinateSystem interface for using the metric system in 2D model items
 class MetricCoordinateSystem: public graphicsUtils::AbstractCoordinateSystem
 {
 	Q_OBJECT
 public:
-	/// Dependency injection to use custom settings in all items
-	explicit MetricCoordinateSystem(
-	                twoDModel::model::SizeUnit &metricSystem);
+	explicit MetricCoordinateSystem(twoDModel::model::SizeUnit *metricSystem);
 
 	~MetricCoordinateSystem();
 
-	/// Converе of units of measurement into pixels
+	/// Conversе of units of measurement into pixels
 	qreal toPx(const qreal size) const override;
 
-	/// Converе of QPointF into pixels
+	/// Conversе of QPointF into pixels
 	QPointF toPx(const QPointF &size) const override;
 
 	/// Converting pixels to units of measurement
@@ -45,12 +44,8 @@ public:
 
 	/// Converting pixels to QPointF
 	QPointF toUnit(const QPointF &size) const override;
-
-	/// Interface method for use in TwoDModelWidget to reduce complexity
-	twoDModel::model::SizeUnit &metricSystem();
-
 private:
-	twoDModel::model::SizeUnit &mMetricSystem;
+	QPointer<twoDModel::model::SizeUnit> mMetricSystem;
 };
 
 }

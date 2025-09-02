@@ -242,6 +242,9 @@ private:
 	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
 
 	QPointer<items::StartPosition> mStartPositionMarker;
+
+	// Required for correct deserialization of robot parameters to the desired measurement system.
+	// The owner of this object is WorldModel, and its lifetime is longer than that of RobotModel.
 	twoDModel::model::MetricCoordinateSystem &mMetricSystem;
 };
 

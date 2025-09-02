@@ -19,7 +19,7 @@
 using namespace twoDModel::model;
 
 MetricCoordinateSystem::MetricCoordinateSystem(
-		twoDModel::model::SizeUnit &metricSystem)
+		twoDModel::model::SizeUnit *metricSystem)
 	: mMetricSystem(metricSystem)
 {
 }
@@ -30,31 +30,30 @@ MetricCoordinateSystem::~MetricCoordinateSystem()
 
 qreal MetricCoordinateSystem::toPx(const qreal size) const
 {
-	return mMetricSystem.toPx(size);
+	if (mMetricSystem.isNull()) {
+		return size;
+	}
+
+	return mMetricSystem->toPx(size);
 }
 
 qreal MetricCoordinateSystem::toUnit(const qreal size) const
 {
-	auto result = size / mMetricSystem.countFactor();
+	if (mMetricSystem.isNull()) {
+		return size;
+	}
+
+	auto result = size / mMetricSystem->countFactor();
 	/// todo: move round to WorldModel settings
 	return std::round(result * 10000.0f) / 10000.0f;
 }
 
 QPointF MetricCoordinateSystem::toUnit(const QPointF &size) const
 {
-	auto xResult = size.x() / mMetricSystem.countFactor();
-	auto yResult = size.y() / mMetricSystem.countFactor();
-	/// todo: move round to WorldModel settings
-	return {std::round(xResult * 10000.0f) / 10000.0f,
-		std::round(yResult * 10000.0f) / 10000.0f};
-}
-
-twoDModel::model::SizeUnit &MetricCoordinateSystem::metricSystem() {
-	return mMetricSystem;
+	return {this->toUnit(size.x()), this->toUnit(size.y())};
 }
 
 QPointF MetricCoordinateSystem::toPx(const QPointF &size) const
 {
-	return QPointF{mMetricSystem.toPx(size.x()),
-		                mMetricSystem.toPx(size.y())};
+	return QPointF{this->toPx(size.x()), this->toPx(size.y())};
 }

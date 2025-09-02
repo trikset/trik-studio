@@ -29,7 +29,7 @@ class TWO_D_MODEL_EXPORT Settings : public QObject
 	Q_OBJECT
 
 public:
-	Settings() = default;
+	explicit Settings();
 
 	/// Returns true is user selected realistic physical engine.
 	bool realisticPhysics() const;
@@ -39,7 +39,7 @@ public:
 
 	/// To simplify the already overloaded WorldModel xml,
 	/// it was decided to use a tag in the existing <settings> tag
-	SizeUnit &sizeUnit();
+	SizeUnit *sizeUnit();
 
 	qreal pixelsInCm() const;
 
@@ -56,6 +56,8 @@ public:
 
 	void setRealisticMotors(bool set);
 
+	SizeUnit *sizeUnit() const;
+
 signals:
 	/// Emitted each time when user modifies physical preferences.
 	void physicsChanged(bool isRealistic);
@@ -64,7 +66,7 @@ private:
 	bool mRealisticPhysics { false };
 	bool mRealisticSensors { false };
 	bool mRealisticMotors { false };
-	SizeUnit mSizeUnitSystem;
+	QScopedPointer<SizeUnit> mSizeUnitSystem;
 };
 
 }

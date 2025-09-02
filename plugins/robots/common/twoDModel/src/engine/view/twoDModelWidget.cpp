@@ -1002,30 +1002,32 @@ bool TwoDModelWidget::setSelectedValue(QComboBox * const comboBox, const T &port
 
 void TwoDModelWidget::connectMetricComboBoxes()
 {
-	connect(&mModel.metricSystem(), &SizeUnit::sizeUnitChanged
+	connect(mModel.settings().sizeUnit(), &SizeUnit::sizeUnitChanged
 		, this, [=](SizeUnit::Unit unit) {
 		setSelectedValue(mUi->metricComboBox, unit);
 	});
 
 	connect(mUi->metricComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
-	        , this, [this](int index) {
+		, this, [this](int index) {
 		const auto unitValue = mUi->metricComboBox->itemData(index)
-		                        .value<SizeUnit::Unit>();
-		mModel.metricSystem().setUnit(unitValue);
-		const auto realValue = mModel.metricSystem().countFactor();
+					.value<SizeUnit::Unit>();
+		const auto sizeUnit = mModel.settings().sizeUnit();
+		sizeUnit->setUnit(unitValue);
+		const auto realValue = sizeUnit->countFactor();
 		mUi->horizontalRuler->setMetricFactor(realValue);
 		mUi->verticalRuler->setMetricFactor(realValue);
 		Q_EMIT mUi->gridParametersBox->parametersChanged();
 	});
 
-	const auto availableUnits = mModel.metricSystem().currentValues();
+	const auto sizeUnit = mModel.settings().sizeUnit();
+	const auto availableUnits = sizeUnit->currentValues();
 	for (auto currentUnit = availableUnits.begin();
 	     currentUnit != availableUnits.end(); currentUnit++) {
 		mUi->metricComboBox->addItem(currentUnit->first,
-		                             QVariant::fromValue(currentUnit->second));
+			QVariant::fromValue(currentUnit->second));
 	}
 
-	setSelectedValue(mUi->metricComboBox, mModel.metricSystem().defaultUnit());
+	setSelectedValue(mUi->metricComboBox, sizeUnit->defaultUnit());
 
 }
 

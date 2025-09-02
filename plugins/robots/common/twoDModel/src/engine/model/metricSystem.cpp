@@ -71,7 +71,7 @@ void SizeUnit::deserialize(const QDomElement &parent)
 	} else {
 		setUnit(defaultUnit());
 	}
-	emit sizeUnitChanged(mSizeUnit);
+	Q_EMIT sizeUnitChanged(mSizeUnit);
 }
 
 void SizeUnit::setUnit(twoDModel::model::SizeUnit::Unit unit)

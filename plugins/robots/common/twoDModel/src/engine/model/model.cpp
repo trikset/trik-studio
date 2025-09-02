@@ -119,11 +119,6 @@ MetricCoordinateSystem &Model::coordinateMetricSystem()
 	return mMetricCoordinateSystem;
 }
 
-SizeUnit &Model::metricSystem()
-{
-	return mMetricCoordinateSystem.metricSystem();
-}
-
 qReal::ErrorReporterInterface *Model::errorReporter()
 {
 	return mErrorReporter;

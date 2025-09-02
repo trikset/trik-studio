@@ -20,6 +20,10 @@
 
 using namespace twoDModel::model;
 
+Settings::Settings()
+	: mSizeUnitSystem(new SizeUnit())
+{}
+
 bool Settings::realisticPhysics() const
 {
 	return mRealisticPhysics;
@@ -32,12 +36,12 @@ bool Settings::realisticSensors() const
 
 qreal Settings::pixelsInCm() const
 {
-	return mSizeUnitSystem.pixelsInCm();
+	return mSizeUnitSystem->pixelsInCm();
 }
 
-SizeUnit &Settings::sizeUnit()
+SizeUnit *Settings::sizeUnit()
 {
-	return mSizeUnitSystem;
+	return mSizeUnitSystem.data();
 }
 
 bool Settings::realisticMotors() const
@@ -52,7 +56,7 @@ void Settings::serialize(QDomElement &parent) const
 	result.setAttribute("realisticPhysics", mRealisticPhysics ? "true" : "false");
 	result.setAttribute("realisticSensors", mRealisticSensors ? "true" : "false");
 	result.setAttribute("realisticMotors", mRealisticMotors ? "true" : "false");
-	mSizeUnitSystem.serialize(result);
+	mSizeUnitSystem->serialize(result);
 }
 
 void Settings::deserialize(const QDomElement &parent)
@@ -60,7 +64,7 @@ void Settings::deserialize(const QDomElement &parent)
 	mRealisticPhysics = parent.attribute("realisticPhysics") == "true";
 	mRealisticSensors = parent.attribute("realisticSensors") == "true";
 	mRealisticMotors = parent.attribute("realisticMotors") == "true";
-	mSizeUnitSystem.deserialize(parent);
+	mSizeUnitSystem->deserialize(parent);
 	emit physicsChanged(mRealisticPhysics);
 }
 
@@ -78,4 +82,9 @@ void Settings::setRealisticSensors(bool set)
 void Settings::setRealisticMotors(bool set)
 {
 	mRealisticMotors = set;
+}
+
+SizeUnit *Settings::sizeUnit() const
+{
+	return mSizeUnitSystem.data();
 }
