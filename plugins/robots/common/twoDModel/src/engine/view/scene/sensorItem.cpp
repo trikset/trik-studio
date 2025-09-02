@@ -240,7 +240,7 @@ QVariant SensorItem::itemChange(GraphicsItemChange change, const QVariant &value
 
 void SensorItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-	QGraphicsItem::contextMenuEvent(event);
+	QGraphicsItem::contextMenuEvent(event); // clazy:exclude=skipped-base-method
 }
 
 SensorItem::PortItem::PortItem(const PortInfo &port)

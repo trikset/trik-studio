@@ -77,12 +77,12 @@ protected:
 
 signals:
 	void mousePressed();
-	void changedPosition(RobotItem *robotItem);
+	void changedPosition(twoDModel::view::RobotItem *robotItem);
 	void drawTrace(const QPen &pen, const QPointF &from, const QPointF &to);
 	void recoverRobotPosition(QPointF oldPos);
-	void sensorAdded(SensorItem *sensor);
-	void sensorRemoved(SensorItem *sensor);
-	void sensorUpdated(SensorItem *sensor);
+	void sensorAdded(twoDModel::view::SensorItem *sensor);
+	void sensorRemoved(twoDModel::view::SensorItem *sensor);
+	void sensorUpdated(twoDModel::view::SensorItem *sensor);
 
 private:
 	class BeepItem : public QGraphicsItem

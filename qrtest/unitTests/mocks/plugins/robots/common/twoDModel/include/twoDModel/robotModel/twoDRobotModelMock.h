@@ -26,6 +26,7 @@ class TwoDRobotModelMock : public twoDModel::robotModel::TwoDRobotModel
 public:
 	TwoDRobotModelMock(const RobotModelInterface &realModel):
 	        twoDModel::robotModel::TwoDRobotModel(realModel) {};
+	// clazy:excludeall=function-args-by-value,returning-void-expression
 	MOCK_CONST_METHOD0(robotId, QString());
 	MOCK_CONST_METHOD0(name, QString());
 	MOCK_CONST_METHOD0(friendlyName, QString());
@@ -49,5 +50,6 @@ public:
 	MOCK_CONST_METHOD0(robotCenter, QPointF());
 	MOCK_CONST_METHOD0(wheelsPosition, QList<QPointF>());
 	MOCK_CONST_METHOD0(onePercentAngularVelocity, qreal());
+	// clazy:enable
 };
 }

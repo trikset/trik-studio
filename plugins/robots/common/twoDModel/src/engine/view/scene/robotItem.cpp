@@ -253,7 +253,7 @@ QVariant RobotItem::itemChange(GraphicsItemChange change, const QVariant &value)
 
 void RobotItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-	QGraphicsItem::contextMenuEvent(event);
+	QGraphicsItem::contextMenuEvent(event); // clazy:exclude=skipped-base-method
 }
 
 void RobotItem::recoverDragStartPosition()

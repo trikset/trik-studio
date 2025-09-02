@@ -190,7 +190,8 @@ signals:
 	void playingSoundChanged(bool playing);
 
 	/// Emitted when left or right wheel was reconnected to another port.
-	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+	void wheelOnPortChanged(twoDModel::model::RobotModel::WheelEnum wheel,
+				const kitBase::robotModel::PortInfo &port);
 
 private:
 	QVector2D robotDirectionVector() const;

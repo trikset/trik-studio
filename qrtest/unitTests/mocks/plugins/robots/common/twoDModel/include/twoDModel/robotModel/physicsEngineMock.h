@@ -28,6 +28,7 @@ public:
 	PhysicsEngineMock(const twoDModel::model::WorldModel &worldModel,
 	                  const QList<twoDModel::model::RobotModel *> &robots)
 	        : PhysicsEngineBase(worldModel, robots) {};
+	// clazy:excludeall=function-args-by-value,returning-void-expression
 	MOCK_CONST_METHOD1(positionShift, QVector2D(twoDModel::model::RobotModel &));
 	MOCK_CONST_METHOD1(rotation, qreal(twoDModel::model::RobotModel &));
 	MOCK_METHOD1(addRobot, void(twoDModel::model::RobotModel * const));
@@ -37,5 +38,6 @@ public:
 	MOCK_METHOD0(wakeUp, void());
 	MOCK_METHOD0(clearForcesAndStop, void());
 	MOCK_METHOD0(nextFrame, void());
+	// clazy:enable
 };
 }

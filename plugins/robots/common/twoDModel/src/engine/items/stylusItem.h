@@ -57,7 +57,7 @@ public:
 
 signals:
 	/// Emitted when user draws new segment in this stylus line.
-	void segmentAdded(LineItem *segment);
+	void segmentAdded(twoDModel::items::LineItem *segment);
 
 private:
 	void recalculateProperties();
