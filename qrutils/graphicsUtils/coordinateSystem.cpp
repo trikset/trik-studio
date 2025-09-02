@@ -16,6 +16,9 @@
 #include <QPointF>
 using namespace graphicsUtils;
 
+CoordinateSystem::CoordinateSystem(QObject *parent)
+	: AbstractCoordinateSystem(parent) {}
+
 qreal CoordinateSystem::toPx(const qreal size) const
 {
 	return size;

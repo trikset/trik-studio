@@ -15,6 +15,7 @@
 #pragma once
 
 #include <QtWidgets/QGraphicsItem>
+#include <QPointer>
 
 class QDomElement;
 class QGraphicsTextItem;
@@ -75,8 +76,6 @@ public:
 
 	QRectF boundingRect() const override;
 
-	twoDModel::model::MetricCoordinateSystem *metricSystem() const;
-
 	virtual void serialize(QDomElement &element) const;
 	virtual void deserialize(const QDomElement &element);
 
@@ -95,7 +94,7 @@ private:
 	bool mFilled;
 	QColor mColor;
 	QSizeF mSize;
-	twoDModel::model::MetricCoordinateSystem *mMetricSystem;
+	QPointer<twoDModel::model::MetricCoordinateSystem> mMetricSystem;
 };
 
 }

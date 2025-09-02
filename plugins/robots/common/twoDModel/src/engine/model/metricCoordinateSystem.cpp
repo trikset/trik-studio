@@ -19,8 +19,10 @@
 using namespace twoDModel::model;
 
 MetricCoordinateSystem::MetricCoordinateSystem(
-		twoDModel::model::SizeUnit *metricSystem)
-	: mMetricSystem(metricSystem)
+		twoDModel::model::SizeUnit *metricSystem,
+		QObject* parent)
+	: graphicsUtils::AbstractCoordinateSystem(parent)
+	,  mMetricSystem(metricSystem)
 {
 }
 

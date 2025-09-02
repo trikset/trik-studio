@@ -52,14 +52,13 @@ class TWO_D_MODEL_EXPORT WorldModel : public QObject
 	Q_OBJECT
 
 public:
-	WorldModel(Settings &settings,
-		   twoDModel::model::MetricCoordinateSystem &metricSystem);
+	WorldModel(Settings *settings,
+		   twoDModel::model::MetricCoordinateSystem *metricSystem);
 	~WorldModel();
 
 	void init(qReal::ErrorReporterInterface &errorReporter);
 
-	/// Returns a number of pixels in 1 cm. This value may change, pixelsInCmChanged() signal will then be emitted.
-	Settings &settings() const;
+	qreal pixelsInCm() const;
 
 	/// Measures the distance between robot and wall
 	Q_INVOKABLE int rangeReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const;
@@ -265,13 +264,18 @@ private:
 	QMap<QString, QSharedPointer<model::Image>> mImages;
 	QMap<QString, QSharedPointer<items::CommentItem>> mComments;
 	RobotModel * mRobotModel {}; // Doesn't take ownership
-	Settings &mSettings;
+
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	// The lifetime of this object is greater than WorldModel (see Model.h)
+	QPointer<Settings> mSettings;
 	QMap<QString, int> mOrder;
 	QList<QSharedPointer<QGraphicsPathItem>> mRobotTrace;
 	QRect mBackgroundRect;
 	QScopedPointer<QDomDocument> mXmlFactory;
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
-	MetricCoordinateSystem &mMetricCoordinateSystem;
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	// The lifetime of this object is greater than WorldModel (see Model.h)
+	QPointer<MetricCoordinateSystem> mMetricCoordinateSystem;
 };
 
 }

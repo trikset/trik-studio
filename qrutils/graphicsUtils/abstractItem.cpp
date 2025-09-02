@@ -31,7 +31,7 @@ AbstractItem::AbstractItem(QGraphicsItem* parent)
 	: QGraphicsObject(parent)
 	, mId(QUuid::createUuid().toString())
 	, mCoordinateSystem(nullptr)
-	, mDefaultCoordinateSystem(new CoordinateSystem)
+	, mDefaultCoordinateSystem(new CoordinateSystem(this))
 {
 	setAcceptHoverEvents(true);
 	setCursor(mHoverCursor);

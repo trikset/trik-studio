@@ -29,7 +29,7 @@ class TWO_D_MODEL_EXPORT Settings : public QObject
 	Q_OBJECT
 
 public:
-	explicit Settings();
+	explicit Settings(QObject *parent = nullptr);
 
 	/// Returns true is user selected realistic physical engine.
 	bool realisticPhysics() const;

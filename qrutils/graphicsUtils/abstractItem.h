@@ -18,7 +18,7 @@
 #include <QtWidgets/QGraphicsView>
 #include <QtXml/QDomDocument>
 #include <QGraphicsSceneHoverEvent>
-
+#include <QPointer>
 #include "qrutils/utilsDeclSpec.h"
 #include "coordinateSystem.h"
 
@@ -216,8 +216,8 @@ private:
 	QPen mStrokePen {Qt::green};
 	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
 	const Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
-	AbstractCoordinateSystem *mCoordinateSystem {};
-	QScopedPointer<CoordinateSystem> mDefaultCoordinateSystem;
+	QPointer<AbstractCoordinateSystem> mCoordinateSystem {};
+	QPointer<CoordinateSystem> mDefaultCoordinateSystem;
 };
 
 }

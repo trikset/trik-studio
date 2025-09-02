@@ -20,8 +20,9 @@
 
 using namespace twoDModel::model;
 
-Settings::Settings()
-	: mSizeUnitSystem(new SizeUnit())
+Settings::Settings(QObject *parent)
+	: QObject(parent)
+	,  mSizeUnitSystem(new SizeUnit())
 {}
 
 bool Settings::realisticPhysics() const

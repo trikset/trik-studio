@@ -122,8 +122,8 @@ private Q_SLOTS:
 private:
 	void initPhysics();
 
-	Settings mSettings;
-	MetricCoordinateSystem mMetricCoordinateSystem;
+	QPointer<Settings> mSettings; //Has ownership
+	QPointer<MetricCoordinateSystem> mMetricCoordinateSystem; //Has ownership
 	WorldModel mWorldModel;
 	Timeline mTimeline;
 	QScopedPointer<constraints::ConstraintsChecker> mChecker;

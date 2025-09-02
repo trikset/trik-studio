@@ -47,8 +47,8 @@ using namespace model;
 QGraphicsPathItem *debugPath = nullptr;
 #endif
 
-WorldModel::WorldModel(Settings &settings,
-			twoDModel::model::MetricCoordinateSystem &metricSystem)
+WorldModel::WorldModel(Settings *settings,
+			twoDModel::model::MetricCoordinateSystem *metricSystem)
 	: mSettings(settings)
 	, mXmlFactory(new QDomDocument)
 	, mErrorReporter(nullptr)
@@ -63,9 +63,9 @@ void WorldModel::init(qReal::ErrorReporterInterface &errorReporter)
 	mErrorReporter = &errorReporter;
 }
 
-Settings &WorldModel::settings() const
+qreal WorldModel::pixelsInCm() const
 {
-	return mSettings;
+	return mSettings->pixelsInCm();
 }
 
 QVector<int> WorldModel::lidarReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const
@@ -81,7 +81,7 @@ QVector<int> WorldModel::lidarReading(QPointF position, qreal direction, int max
 		for (int j = 0; j < intersection.elementCount(); j++) {
 			auto el = intersection.elementAt(j);
 			if (el.type != QPainterPath::CurveToDataElement) {
-				auto lenght = QLineF(position, QPointF(el)).length() / mSettings.pixelsInCm();
+				auto lenght = QLineF(position, QPointF(el)).length() / mSettings->pixelsInCm();
 				if (lenght < currentRangeInCm) {
 					currentRangeInCm = static_cast<int>(lenght);
 				}
@@ -133,7 +133,7 @@ QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, qreal direc
 		, QPair<qreal,int> angleAndRange) const
 {
 	const qreal rayWidthDegrees = angleAndRange.first;
-	const qreal rangeInPixels = angleAndRange.second * mSettings.pixelsInCm();
+	const qreal rangeInPixels = angleAndRange.second * mSettings->pixelsInCm();
 
 	QPainterPath rayPath;
 	rayPath.arcTo(QRectF(-rangeInPixels, -rangeInPixels, 2 * rangeInPixels, 2 * rangeInPixels)
@@ -748,7 +748,7 @@ void WorldModel::createElement(const QDomElement &element)
 void WorldModel::createWall(const QDomElement &element)
 {
 	auto wall = QSharedPointer<items::WallItem>::create(
-	                        &mMetricCoordinateSystem, QPointF(), QPointF());
+				mMetricCoordinateSystem, QPointF(), QPointF());
 	wall->deserialize(element);
 	addWall(wall);
 }
@@ -756,7 +756,7 @@ void WorldModel::createWall(const QDomElement &element)
 void WorldModel::createSkittle(const QDomElement &element)
 {
 	auto skittle = QSharedPointer<items::SkittleItem>::create(
-	                        &mMetricCoordinateSystem, QPointF());
+				mMetricCoordinateSystem, QPointF());
 	skittle->deserialize(element);
 	addSkittle(skittle);
 }
@@ -764,7 +764,7 @@ void WorldModel::createSkittle(const QDomElement &element)
 void WorldModel::createBall(const QDomElement &element)
 {
 	auto ball = QSharedPointer<items::BallItem>::create(
-	                        &mMetricCoordinateSystem, QPointF());
+				mMetricCoordinateSystem, QPointF());
 	ball->deserialize(element);
 	addBall(ball);
 }
@@ -772,7 +772,7 @@ void WorldModel::createBall(const QDomElement &element)
 void WorldModel::createLine(const QDomElement &element)
 {
 	auto lineItem = QSharedPointer<items::LineItem>::create(
-	                        &mMetricCoordinateSystem, QPointF(), QPointF());
+				mMetricCoordinateSystem, QPointF(), QPointF());
 	lineItem->deserialize(element);
 	addColorField(lineItem);
 }
@@ -780,7 +780,7 @@ void WorldModel::createLine(const QDomElement &element)
 void WorldModel::createRectangle(const QDomElement &element)
 {
 	auto rectangleItem = QSharedPointer<items::RectangleItem>::create(
-	                         &mMetricCoordinateSystem, QPointF(), QPointF());
+				 mMetricCoordinateSystem, QPointF(), QPointF());
 	rectangleItem->deserialize(element);
 	addColorField(rectangleItem);
 }
@@ -788,7 +788,7 @@ void WorldModel::createRectangle(const QDomElement &element)
 void WorldModel::createEllipse(const QDomElement &element)
 {
 	auto ellipseItem = QSharedPointer<items::EllipseItem>::create(
-	                         &mMetricCoordinateSystem, QPointF(), QPointF());
+				 mMetricCoordinateSystem, QPointF(), QPointF());
 	ellipseItem->deserialize(element);
 	addColorField(ellipseItem);
 }
@@ -796,7 +796,7 @@ void WorldModel::createEllipse(const QDomElement &element)
 void WorldModel::createCubicBezier(const QDomElement &element)
 {
 	auto curveItem = QSharedPointer<items::CurveItem>::create(
-	                         &mMetricCoordinateSystem, QPointF(), QPointF());
+				 mMetricCoordinateSystem, QPointF(), QPointF());
 	curveItem->deserialize(element);
 	addColorField(curveItem);
 }
@@ -804,7 +804,7 @@ void WorldModel::createCubicBezier(const QDomElement &element)
 void WorldModel::createStylus(const QDomElement &element)
 {
 	auto stylusItem = QSharedPointer<items::StylusItem>::create(
-	                         &mMetricCoordinateSystem, 0, 0);
+				 mMetricCoordinateSystem, 0, 0);
 	stylusItem->deserialize(element);
 	addColorField(stylusItem);
 }
@@ -812,7 +812,7 @@ void WorldModel::createStylus(const QDomElement &element)
 void WorldModel::createComment(const QDomElement &element)
 {
 	auto commentItem = QSharedPointer<items::CommentItem>::create(
-	                        &mMetricCoordinateSystem, QPointF(), QPointF());
+				mMetricCoordinateSystem, QPointF(), QPointF());
 	commentItem->deserialize(element);
 	addComment(commentItem);
 }
@@ -839,14 +839,14 @@ void WorldModel::createRegion(const QDomElement &element)
 	QSharedPointer<items::RegionItem> item;
 	QSharedPointer<QGraphicsObject> boundItem;
 	if (type == "ellipse") {
-		item.reset(new items::EllipseRegion(&mMetricCoordinateSystem));
+		item.reset(new items::EllipseRegion(mMetricCoordinateSystem));
 	} else if (type == "rectangle") {
-		item.reset(new items::RectangularRegion(&mMetricCoordinateSystem));
+		item.reset(new items::RectangularRegion(mMetricCoordinateSystem));
 	} else if (type == "bound") {
 		auto id = element.attribute("boundItem");
 		boundItem = findId(id);
 		if (boundItem) {
-			item.reset(new items::BoundRegion(&mMetricCoordinateSystem, *boundItem, id));
+			item.reset(new items::BoundRegion(mMetricCoordinateSystem, *boundItem, id));
 		} /// @todo: else report error
 	}
 

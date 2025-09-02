@@ -18,7 +18,7 @@
 #include <QtCore/QSizeF>
 #include <QtCore/QHash>
 #include <QtXml/QDomDocument>
-
+#include <QPointer>
 #include <kitBase/devicesConfigurationProvider.h>
 
 #include "twoDModel/twoDModelDeclSpec.h"
@@ -34,8 +34,8 @@ class TWO_D_MODEL_EXPORT SensorsConfiguration : public QObject, public kitBase::
 	Q_OBJECT
 
 public:
-	SensorsConfiguration(twoDModel::model::MetricCoordinateSystem &metricSystem,
-	                     const QString &robotModelName, QSizeF robotSize);
+	SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
+			     const QString &robotModelName, QSizeF robotSize, QObject *parent = nullptr);
 
 	void setPosition(const kitBase::robotModel::PortInfo &port, QPointF position);
 	QPointF position(const kitBase::robotModel::PortInfo &port) const;
@@ -85,7 +85,7 @@ private:
 	const QSizeF mRobotSize;
 	QString mRobotId;
 	QHash<kitBase::robotModel::PortInfo, SensorInfo> mSensorsInfo;
-	twoDModel::model::MetricCoordinateSystem &mMetricSystem;
+	QPointer<twoDModel::model::MetricCoordinateSystem> mMetricSystem;
 };
 
 }

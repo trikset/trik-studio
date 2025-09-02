@@ -27,7 +27,7 @@ using namespace graphicsUtils;
 LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			const QPointF begin, const QPointF end, int cornerRadius)
 	: ColorFieldItem(metricSystem)
-	,mCornerRadius(cornerRadius)
+	, mCornerRadius(cornerRadius)
 {
 	setX1(begin.x());
 	setY1(begin.y());

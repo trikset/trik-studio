@@ -24,9 +24,10 @@
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
-SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem &metricSystem,
-			const QString &robotModelName, QSizeF robotSize)
-	: mRobotSize(robotSize)
+SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
+			const QString &robotModelName, QSizeF robotSize, QObject *parent)
+	: QObject(parent)
+	, mRobotSize(robotSize)
 	, mRobotId(robotModelName)
 	, mMetricSystem(metricSystem)
 {
@@ -110,11 +111,12 @@ void SensorsConfiguration::serialize(QDomElement &robot) const
 		sensorElem.setAttribute("port", port.toString());
 		sensorElem.setAttribute("type", device.toString());
 
-		sensorElem.setAttribute("position"
+		if (mMetricSystem) {
+			sensorElem.setAttribute("position"
 		                , QString::number(
-		                        mMetricSystem.toUnit(sensor.position.x()))
-		                        + ":" + QString::number(mMetricSystem.toUnit(sensor.position.y())));
-
+					mMetricSystem->toUnit(sensor.position.x()))
+					+ ":" + QString::number(mMetricSystem->toUnit(sensor.position.y())));
+		}
 		sensorElem.setAttribute("direction", QString::number(sensor.direction));
 	}
 }
@@ -140,7 +142,10 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 		const QStringList splittedStr = positionStr.split(":");
 		const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
 		const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
-		const QPointF position = mMetricSystem.toPx({x, y});
+		auto position = QPointF{x, y};
+		if (mMetricSystem) {
+			position = mMetricSystem->toPx({x, y});
+		}
 
 		const qreal direction = sensorNode.attribute("direction", "0").toDouble();
 

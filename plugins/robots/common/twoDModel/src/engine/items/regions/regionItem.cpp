@@ -113,11 +113,6 @@ QRectF RegionItem::boundingRect() const
 	return QRectF(QPointF(), mSize);
 }
 
-twoDModel::model::MetricCoordinateSystem *RegionItem::metricSystem() const
-{
-	return mMetricSystem;
-}
-
 void RegionItem::serialize(QDomElement &element) const
 {
 	if (!id().isEmpty()) {

@@ -77,8 +77,8 @@ public:
 	};
 
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
-	           , const Settings &settings
-	           , twoDModel::model::MetricCoordinateSystem &metricSystem
+		   , Settings *settings
+		   , twoDModel::model::MetricCoordinateSystem *metricSystem
 	           , QObject *parent = nullptr);
 
 	~RobotModel();
@@ -222,10 +222,11 @@ private:
 	/// Describes which wheel is driven by which motor.
 	QHash<WheelEnum, kitBase::robotModel::PortInfo> mWheelsToMotorPortsMap;
 	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::PortInfo> mMotorToEncoderPortMap;
-
-	const Settings &mSettings;
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	QPointer<Settings> mSettings;
 	twoDModel::robotModel::TwoDRobotModel &mRobotModel;
-	SensorsConfiguration mSensorsConfiguration;
+	// Takes ownership.
+	QPointer<SensorsConfiguration> mSensorsConfiguration;
 
 	QPointF mPos { 0, 0 };
 	qreal mAngle { 0 };
@@ -242,10 +243,8 @@ private:
 	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
 
 	QPointer<items::StartPosition> mStartPositionMarker;
-
-	// Required for correct deserialization of robot parameters to the desired measurement system.
-	// The owner of this object is WorldModel, and its lifetime is longer than that of RobotModel.
-	twoDModel::model::MetricCoordinateSystem &mMetricSystem;
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	QPointer<twoDModel::model::MetricCoordinateSystem> mMetricSystem;
 };
 
 }

@@ -38,17 +38,18 @@ using namespace kitBase::robotModel::robotParts;
 const int positionStampsCount = 50;
 
 RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
-		, const Settings &settings
-		, twoDModel::model::MetricCoordinateSystem &metricSystem
+		, Settings *settings
+		, twoDModel::model::MetricCoordinateSystem *metricSystem
 		, QObject *parent)
 	: QObject(parent)
 	, mSettings(settings)
 	, mRobotModel(robotModel)
-	, mSensorsConfiguration(metricSystem, robotModel.robotId(), robotModel.size())
+	, mSensorsConfiguration(new twoDModel::model::SensorsConfiguration(metricSystem,
+					robotModel.robotId(), robotModel.size(), this))
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
 	, mStartPositionMarker(
-		new items::StartPosition(&metricSystem, info().size()))
+		new items::StartPosition(metricSystem, info().size()))
 	, mMetricSystem(metricSystem)
 {
 	reinit();
@@ -160,7 +161,7 @@ void RobotModel::resetEncoder(const PortInfo &port)
 
 SensorsConfiguration &RobotModel::configuration()
 {
-	return mSensorsConfiguration;
+	return *mSensorsConfiguration;
 }
 
 const RobotModel::Wheel &RobotModel::leftWheel() const
@@ -249,16 +250,16 @@ QTransform RobotModel::robotsTransform() const
 
 QPainterPath RobotModel::sensorBoundingPath(const PortInfo &port) const
 {
-	if (mSensorsConfiguration.type(port).isNull() || !mSensorsConfiguration.type(port).simulated())
+	if (mSensorsConfiguration->type(port).isNull() || !mSensorsConfiguration->type(port).simulated())
 	{
 		return QPainterPath();
 	}
-	const QPointF sensorPos = mSensorsConfiguration.position(port);
+	const QPointF sensorPos = mSensorsConfiguration->position(port);
 	QPainterPath tempSensorPath;
 	tempSensorPath.addRect(sensorRect(port, sensorPos));
 	const QTransform transformSensor = QTransform()
 			.translate(sensorPos.x(), sensorPos.y())        // /\  And going back again
-			.rotate(mSensorsConfiguration.direction(port))  // ||  Then rotating
+			.rotate(mSensorsConfiguration->direction(port))  // ||  Then rotating
 			.translate(-sensorPos.x(), -sensorPos.y());     // ||  First translating to zero
 	return transformSensor.map(tempSensorPath);
 }
@@ -285,9 +286,9 @@ void RobotModel::setPhysicalEngine(physics::PhysicsEngineBase &engine)
 
 QRectF RobotModel::sensorRect(const PortInfo &port, const QPointF sensorPos) const
 {
-	if (!mSensorsConfiguration.type(port).isNull()) {
-		auto device = mSensorsConfiguration.type(port);
-		const QSizeF size = mRobotModel.sensorImageRect(mSensorsConfiguration.type(port)).size();
+	if (!mSensorsConfiguration->type(port).isNull()) {
+		auto device = mSensorsConfiguration->type(port);
+		const QSizeF size = mRobotModel.sensorImageRect(mSensorsConfiguration->type(port)).size();
 		// We don't need part with radiating waves from range sensor in bounding rect of sensor
 		if (device.isA<robotParts::RangeSensor>()) {
 			return QRectF(sensorPos.x() - size.width()/2, sensorPos.y() - size.height()/2
@@ -359,7 +360,7 @@ void RobotModel::recalculateParams()
 			return;
 		}
 
-		engine->spoiledSpeed = mSettings.realisticMotors() ? varySpeed(engine->speed) : engine->speed;
+		engine->spoiledSpeed = mSettings->realisticMotors() ? varySpeed(engine->speed) : engine->speed;
 	};
 
 	calculateMotorOutput(left);
@@ -425,7 +426,7 @@ void RobotModel::serialize(QDomElement &parent) const
 {
 	QDomElement curRobot = parent.ownerDocument().createElement("robot");
 	curRobot.setAttribute("id", mRobotModel.robotId());	
-	mSensorsConfiguration.serialize(curRobot);
+	mSensorsConfiguration->serialize(curRobot);
 	serializeWheels(curRobot);
 
 	bool replaced = false;
@@ -450,8 +451,8 @@ void RobotModel::serializeWorldModel(QDomElement &parent) const
 
 	QDomElement robot = world.ownerDocument().createElement("robot");
 	robot.setAttribute("position",
-	                   QString::number(mMetricSystem.toUnit(mPos.x()))
-	                   + ":" + QString::number(mMetricSystem.toUnit(mPos.y())));
+			   QString::number(mMetricSystem->toUnit(mPos.x()))
+			   + ":" + QString::number(mMetricSystem->toUnit(mPos.y())));
 	robot.setAttribute("direction", QString::number(mAngle));
 	mStartPositionMarker->serialize(robot);
 	world.appendChild(robot);
@@ -471,7 +472,7 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
 	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
 	onRobotReturnedOnGround();
-	setPosition(mMetricSystem.toPx({x, y}));
+	setPosition(mMetricSystem->toPx({x, y}));
 	setRotation(robotElement.attribute("direction", "0").toDouble());
 	mStartPositionMarker->deserializeCompatibly(robotElement);
 	Q_EMIT deserialized(QPointF(mPos.x(), mPos.y()), mAngle);

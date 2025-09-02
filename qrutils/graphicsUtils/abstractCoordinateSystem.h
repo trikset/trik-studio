@@ -23,6 +23,9 @@ class QRUTILS_EXPORT AbstractCoordinateSystem: public QObject
 	Q_OBJECT
 
 public:
+	AbstractCoordinateSystem(QObject *parent = nullptr)
+		: QObject(parent) {}
+
 	virtual qreal toPx(const qreal size) const = 0;
 
 	virtual QPointF toPx(const QPointF &size) const = 0;

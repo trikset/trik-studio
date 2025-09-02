@@ -33,8 +33,9 @@ static auto XML_VERSION = "20190819";
 Model::Model(physics::PhysicsEngineFactory *engineFactory,
 		QObject *parent)
 	: QObject(parent)
-	, mMetricCoordinateSystem(mSettings.sizeUnit())
-	, mWorldModel(mSettings, mMetricCoordinateSystem)
+	, mSettings(new Settings(this))
+	, mMetricCoordinateSystem(new MetricCoordinateSystem(mSettings->sizeUnit(), this))
+	, mWorldModel(mSettings.data(), mMetricCoordinateSystem.data())
 	, mChecker(nullptr)
 	, mErrorReporter(nullptr)
 	, mEngineFactory(engineFactory)
@@ -42,7 +43,7 @@ Model::Model(physics::PhysicsEngineFactory *engineFactory,
 	, mSimplePhysicsEngine(nullptr)
 {
 	initPhysics();
-	connect(&mSettings, &Settings::physicsChanged, this, &Model::resetPhysics);
+	connect(mSettings.data(), &Settings::physicsChanged, this, &Model::resetPhysics);
 	resetPhysics();
 }
 
@@ -111,12 +112,12 @@ QList<RobotModel *> Model::robotModels() const
 
 Settings &Model::settings()
 {
-	return mSettings;
+	return *mSettings;
 }
 
 MetricCoordinateSystem &Model::coordinateMetricSystem()
 {
-	return mMetricCoordinateSystem;
+	return *mMetricCoordinateSystem;
 }
 
 qReal::ErrorReporterInterface *Model::errorReporter()
@@ -147,7 +148,7 @@ QDomDocument Model::serialize() const
 	}
 	root.appendChild(robots);
 
-	mSettings.serialize(root);
+	mSettings->serialize(root);
 	mChecker->serializeConstraints(root);
 
 	return save;
@@ -156,7 +157,7 @@ QDomDocument Model::serialize() const
 void Model::deserialize(const QDomDocument &model)
 {
 	const auto &settings = model.documentElement().firstChildElement("settings");
-	mSettings.deserialize(settings);
+	mSettings->deserialize(settings);
 
 	if (mChecker) {
 		const auto &constraints = model.documentElement().firstChildElement("constraints");
@@ -188,8 +189,8 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 		return;
 	}
 
-	mRobotModel = new RobotModel(robotModel, mSettings,
-	                             mMetricCoordinateSystem, this);
+	mRobotModel = new RobotModel(robotModel, mSettings.data(),
+				     mMetricCoordinateSystem.data(), this);
 	mRobotModel->setPosition(pos);
 
 	connect(&mTimeline, &Timeline::started, mRobotModel, &RobotModel::reinit);
@@ -198,7 +199,7 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 	connect(&mTimeline, &Timeline::tick, mRobotModel, &RobotModel::recalculateParams);
 	connect(&mTimeline, &Timeline::nextFrame, mRobotModel, &RobotModel::nextFragment);
 
-	mRobotModel->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
+	mRobotModel->setPhysicalEngine(mSettings->realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
 
 	mWorldModel.setRobotModel(mRobotModel);
 
@@ -235,7 +236,7 @@ void Model::setConstraintsEnabled(bool enabled)
 
 void Model::resetPhysics()
 {
-	auto engine = mSettings.realisticPhysics() ? mRealisticPhysicsEngine : mSimplePhysicsEngine;
+	auto engine = mSettings->realisticPhysics() ? mRealisticPhysicsEngine : mSimplePhysicsEngine;
 	if (mRobotModel) mRobotModel->setPhysicalEngine(*engine);
 
 	engine->wakeUp();
@@ -262,7 +263,7 @@ void Model::initPhysics()
 
 void Model::recalculatePhysicsParams()
 {
-	if (mSettings.realisticPhysics()) {
+	if (mSettings->realisticPhysics()) {
 		mRealisticPhysicsEngine->recalculateParameters(Timeline::timeInterval);
 	} else {
 		mSimplePhysicsEngine->recalculateParameters(Timeline::timeInterval);
