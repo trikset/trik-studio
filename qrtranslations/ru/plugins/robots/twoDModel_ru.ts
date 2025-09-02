@@ -675,7 +675,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+66"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+67"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
@@ -685,7 +685,7 @@
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+98"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>
@@ -1158,7 +1158,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+201"/>
+        <location line="+203"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>
