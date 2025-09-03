@@ -35,12 +35,10 @@ using namespace twoDModel::model::physics;
 using namespace parts;
 using namespace mathUtils;
 
-const qreal scaleCoeff = 0.001;
-
 Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 		, const QList<RobotModel *> &robots)
 	: PhysicsEngineBase(worldModel, robots)
-	, mPixelsInCm(worldModel.pixelsInCm() * scaleCoeff)
+	, mPixelsInCm(worldModel.pixelsInCm())
 	, mPrevPosition(b2Vec2{0, 0})
 	, mPrevAngle(0)
 {
@@ -55,6 +53,8 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});
+	constexpr qreal restitutionThreshold = 0.05f;
+	b2World_SetRestitutionThreshold(mWorldId, restitutionThreshold);
 }
 
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
@@ -236,10 +236,11 @@ void Box2DPhysicsEngine::onRecoverRobotPosition(QPointF pos)
 	stop(mBox2DRobots.first()->getWheelAt(1)->getBodyId());
 
 	if (!mBox2DRobots.isEmpty()) {
-	    auto* firstRobot = mBox2DRobots.firstKey();
-	    if (firstRobot && firstRobot->startPositionMarker()) {
-		onMouseReleased(pos, firstRobot->startPositionMarker()->rotation());
-	    }
+		if (auto &&firstRobot = mBox2DRobots.firstKey()) {
+			if (auto &&spm = firstRobot->startPositionMarker()) {
+				onMouseReleased(pos, spm->rotation());
+			}
+		}
 	}
 }
 
@@ -262,13 +263,13 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 	}
 
 	b2BodyId rBodyId = mBox2DRobots[robot]->getBodyId();
-	float secondsInterval = timeInterval / 1000.0f;
+	const float secondsInterval = timeInterval / 1000.0f;
 
 	if (mBox2DRobots[robot]->isStopping()){
 		mBox2DRobots[robot]->stop();
 	} else {
 		// sAdpt is the speed adaptation coefficient for physics engines
-		const int sAdpt = 10;
+		constexpr int sAdpt = 10;
 		const qreal speed1 = pxToM(wheelLinearSpeed(*robot, robot->leftWheel())) / secondsInterval * sAdpt;
 		const qreal speed2 = pxToM(wheelLinearSpeed(*robot, robot->rightWheel())) / secondsInterval * sAdpt;
 
@@ -294,13 +295,12 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 	}
 
 	QPainterPath path;
-
-	for (auto it = mBox2DDynamicItems.constBegin(); it != mBox2DDynamicItems.constEnd(); ++it) {
-		auto *item = it.key();
+	for (auto it = mBox2DDynamicItems.cbegin(); it != mBox2DDynamicItems.cend(); ++it) {
+		const auto item = it.key();
 		if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
 			QPolygonF localCollidingPolygon = solidItem->collidingPolygon();
-			auto* dynamicItem = it.value();
-			qreal lsceneAngle = angleToScene(dynamicItem->getRotation());
+			const auto value = it.value();
+			qreal lsceneAngle = angleToScene(value->getRotation());
 			QMatrix m;
 			m.rotate(lsceneAngle);
 
@@ -360,11 +360,9 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(0)->mDebuggingDrawPolygon);
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(1)->mDebuggingDrawPolygon);
 
-	// clazy:excludeall=qmap-with-pointer-key
-	const QMap<const view::SensorItem *, Box2DItem *> sensors = mBox2DRobots[robot]->getSensors();
-	// clazy:enable
-	for (auto it = sensors.constBegin(); it != sensors.constEnd(); ++it) {
-		auto* sensor = it.value();
+	const auto &sensors = mBox2DRobots[robot]->getSensors();
+	for (auto it = sensors.cbegin(); it != sensors.cend(); ++it) {
+		auto sensor = it.value();
 		const b2Vec2 position = b2Body_GetPosition(sensor->getBodyId());
 		QPointF scenePos = positionToScene(position);
 		path.addEllipse(scenePos, 10, 10);
@@ -393,7 +391,7 @@ void Box2DPhysicsEngine::wakeUp()
 
 void Box2DPhysicsEngine::nextFrame()
 {
-	for (auto it = mBox2DDynamicItems.constBegin(); it != mBox2DDynamicItems.constEnd(); ++it) {
+	for (auto it = mBox2DDynamicItems.cbegin(); it != mBox2DDynamicItems.cend(); ++it) {
 		auto *item = it.key();
 		auto isEnabled = b2Body_IsEnabled(mBox2DDynamicItems[item]->getBodyId());
 		if (isEnabled && mBox2DDynamicItems[item]->angleOrPositionChanged()) {
@@ -404,7 +402,7 @@ void Box2DPhysicsEngine::nextFrame()
 	}
 }
 
-void Box2DPhysicsEngine::clearForcesAndStop()
+void Box2DPhysicsEngine::cesAndStop()
 {
 	for (auto &&item : mBox2DDynamicItems) {
 		b2BodyId bodyId = item->getBodyId();
@@ -420,7 +418,7 @@ bool Box2DPhysicsEngine::isRobotStuck() const
 
 void Box2DPhysicsEngine::onPixelsInCmChanged(qreal value)
 {
-	mPixelsInCm = value * scaleCoeff;
+	mPixelsInCm = value;
 }
 
 void Box2DPhysicsEngine::itemAdded(QGraphicsItem *item)
