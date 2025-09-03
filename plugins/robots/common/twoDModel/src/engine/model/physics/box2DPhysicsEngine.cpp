@@ -402,7 +402,7 @@ void Box2DPhysicsEngine::nextFrame()
 	}
 }
 
-void Box2DPhysicsEngine::cesAndStop()
+void Box2DPhysicsEngine::clearForcesAndStop()
 {
 	for (auto &&item : mBox2DDynamicItems) {
 		b2BodyId bodyId = item->getBodyId();
