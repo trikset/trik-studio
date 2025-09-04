@@ -19,6 +19,7 @@
 #include <qrutils/smartDock.h>
 
 #include "twoDModel/engine/model/model.h"
+#include "src/engine/model/physics/physicsEngineFactory.h"
 #include "twoDModel/engine/view/twoDModelWidget.h"
 #include "twoDModelEngineApi.h"
 
@@ -28,7 +29,8 @@ using namespace twoDModel::engine;
 
 TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotModel &robotModel)
 	: mRobotModelName(robotModel.name())
-	, mModel(new model::Model())
+	, mModel(new model::Model(
+		new twoDModel::model::physics::PhysicsEngineFactory()))
 	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView))
@@ -115,15 +117,14 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			if (mCurrentTabInfo == qReal::TabInfo::TabType::editor) {
 				interpreterControl.interpret();
 			} else {
-				emit interpreterControl.startScriptInterpretation();
+				Q_EMIT interpreterControl.startScriptInterpretation();
 			}
 		});
 
 		connect(this,
 				&TwoDModelEngineFacade::stopButtonPressed,
 				&interpreterControl,
-				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); },
-				Qt::UniqueConnection);
+				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
 	};
 
 	auto disconnectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {

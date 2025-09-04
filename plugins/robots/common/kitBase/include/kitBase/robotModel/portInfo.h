@@ -97,7 +97,7 @@ inline bool operator !=(const PortInfo &left, const PortInfo &right)
 	return !(left == right);
 }
 
-inline uint qHash(const PortInfo &key)
+inline size_t qHash(const PortInfo &key)
 {
 	return qHash(key.name()) ^ qHash(QString(key.direction() == input ? "input" : "output"));
 }

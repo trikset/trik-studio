@@ -107,7 +107,12 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 	PhysicsEngineBase::addRobot(robot);
 	addRobot(robot, robot->robotCenter(), robot->rotation());
 
-	auto bodyId = mBox2DRobots[robot]->getBodyId();
+	auto it = mBox2DRobots.constFind(robot);
+	if (it == mBox2DRobots.constEnd()) {
+		return;
+	}
+
+	auto bodyId = it.value()->getBodyId();
 	mPrevPosition = b2Body_GetPosition(bodyId);
 	mPrevAngle = b2Rot_GetAngle(b2Body_GetRotation(bodyId));
 
@@ -139,19 +144,28 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 			auto rItem = qobject_cast<view::RobotItem *>(sender());
 			auto model = &rItem->robotModel();
 			mRobotSensors[model].insert(sensor);
-			mBox2DRobots[model]->addSensor(sensor);
+			auto it = mBox2DRobots.constFind(model);
+			if (it != mBox2DRobots.constEnd()) {
+				it.value()->addSensor(sensor);
+			}
 		});
 		connect(mScene->robot(*robot), &view::RobotItem::sensorRemoved, this, [&](twoDModel::view::SensorItem *sensor) {
 			auto rItem = qobject_cast<view::RobotItem *>(sender());
 			auto model = &rItem->robotModel();
 			mRobotSensors[model].remove(sensor);
-			mBox2DRobots[model]->removeSensor(sensor);
+			auto it = mBox2DRobots.constFind(model);
+			if (it != mBox2DRobots.constEnd()) {
+				it.value()->removeSensor(sensor);
+			}
 		});
 		connect(mScene->robot(*robot), &view::RobotItem::sensorUpdated
 				, this, [&](twoDModel::view::SensorItem *sensor) {
 			auto rItem = qobject_cast<view::RobotItem *>(sender());
 			auto model = &rItem->robotModel();
-			mBox2DRobots[model]->reinitSensor(sensor);
+			auto it = mBox2DRobots.constFind(model);
+			if (it != mBox2DRobots.constEnd()) {
+				it.value()->reinitSensor(sensor);
+			}
 		});
 
 		connect(robot, &model::RobotModel::deserialized, this, &Box2DPhysicsEngine::onMouseReleased);
@@ -221,7 +235,13 @@ void Box2DPhysicsEngine::onRecoverRobotPosition(QPointF pos)
 	stop(mBox2DRobots.first()->getWheelAt(0)->getBodyId());
 	stop(mBox2DRobots.first()->getWheelAt(1)->getBodyId());
 
-	onMouseReleased(pos, mBox2DRobots.firstKey()->startPositionMarker()->rotation());
+	if (!mBox2DRobots.isEmpty()) {
+		if (auto &&firstRobot = mBox2DRobots.firstKey()) {
+			if (auto &&spm = firstRobot->startPositionMarker()) {
+				onMouseReleased(pos, spm->rotation());
+			}
+		}
+	}
 }
 
 void Box2DPhysicsEngine::removeRobot(model::RobotModel * const robot)
@@ -243,13 +263,13 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 	}
 
 	b2BodyId rBodyId = mBox2DRobots[robot]->getBodyId();
-	float secondsInterval = timeInterval / 1000.0f;
+	const float secondsInterval = timeInterval / 1000.0f;
 
 	if (mBox2DRobots[robot]->isStopping()){
 		mBox2DRobots[robot]->stop();
 	} else {
 		// sAdpt is the speed adaptation coefficient for physics engines
-		const int sAdpt = 10;
+		constexpr int sAdpt = 10;
 		const qreal speed1 = pxToM(wheelLinearSpeed(*robot, robot->leftWheel())) / secondsInterval * sAdpt;
 		const qreal speed2 = pxToM(wheelLinearSpeed(*robot, robot->rightWheel())) / secondsInterval * sAdpt;
 
@@ -275,7 +295,6 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 	}
 
 	QPainterPath path;
-	// 	for(QGraphicsItem *item : mBox2DDynamicItems.keys()) {
 	for (auto it = mBox2DDynamicItems.cbegin(); it != mBox2DDynamicItems.cend(); ++it) {
 		const auto item = it.key();
 		if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
@@ -341,9 +360,7 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(0)->mDebuggingDrawPolygon);
 //		path.addPolygon(mBox2DRobots[robot]->getWheelAt(1)->mDebuggingDrawPolygon);
 
-	// clazy:excludeall=qmap-with-pointer-key
-	const QMap<const view::SensorItem *, Box2DItem *> sensors = mBox2DRobots[robot]->getSensors();
-	// clazy:enable
+	const auto &sensors = mBox2DRobots[robot]->getSensors();
 	for (auto it = sensors.cbegin(); it != sensors.cend(); ++it) {
 		auto sensor = it.value();
 		const b2Vec2 position = b2Body_GetPosition(sensor->getBodyId());
@@ -441,7 +458,7 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 		Box2DItem *box2dItem = new Box2DItem(this, wallItem, pos, angleToBox2D(item->rotation()));
 		mBox2DResizableItems[item] = box2dItem;
 		return;
-	} else if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) {
+	} else if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) { // clazy:exclude=unneeded-cast
 		QPolygonF collidingPolygon = solidItem->collidingPolygon();
 		if (itemTracked(item)) {
 			if (solidItem->bodyType() == items::SolidItem::DYNAMIC) {

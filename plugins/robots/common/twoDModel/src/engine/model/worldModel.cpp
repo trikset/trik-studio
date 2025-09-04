@@ -47,9 +47,12 @@ using namespace model;
 QGraphicsPathItem *debugPath = nullptr;
 #endif
 
-WorldModel::WorldModel()
-	: mXmlFactory(new QDomDocument)
+WorldModel::WorldModel(Settings *settings,
+			twoDModel::model::MetricCoordinateSystem *metricSystem)
+	: mSettings(settings)
+	, mXmlFactory(new QDomDocument)
 	, mErrorReporter(nullptr)
+	, mMetricCoordinateSystem(metricSystem)
 {
 }
 
@@ -62,14 +65,15 @@ void WorldModel::init(qReal::ErrorReporterInterface &errorReporter)
 
 qreal WorldModel::pixelsInCm() const
 {
-	return twoDModel::pixelsInCm;
+	return mSettings->pixelsInCm();
 }
 
-QVector<int> WorldModel::lidarReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const
+QVector<int> WorldModel::lidarReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const
 {
 	QVector<int> res;
 	const auto solidItemsPath = buildSolidItemsPath();
 	auto angleAndRange = QPair<qreal, int>(1, maxDistance);
+	res.reserve(static_cast<int>(maxAngle));
 	for (int i = 0; i < maxAngle; i++) {
 		auto laserPath = rangeSensorScanningRegion(position, direction + i, angleAndRange);
 		const auto intersection = solidItemsPath.intersected(laserPath);
@@ -77,7 +81,7 @@ QVector<int> WorldModel::lidarReading(const QPointF &position, qreal direction, 
 		for (int j = 0; j < intersection.elementCount(); j++) {
 			auto el = intersection.elementAt(j);
 			if (el.type != QPainterPath::CurveToDataElement) {
-				auto lenght = QLineF(position, QPointF(el)).length() / pixelsInCm();
+				auto lenght = QLineF(position, QPointF(el)).length() / mSettings->pixelsInCm();
 				if (lenght < currentRangeInCm) {
 					currentRangeInCm = static_cast<int>(lenght);
 				}
@@ -88,7 +92,7 @@ QVector<int> WorldModel::lidarReading(const QPointF &position, qreal direction, 
 	return res;
 }
 
-int WorldModel::rangeReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const
+int WorldModel::rangeReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const
 {
 	int maxRangeCms = maxDistance;
 	int minRangeCms = 0;
@@ -112,7 +116,7 @@ int WorldModel::rangeReading(const QPointF &position, qreal direction, int maxDi
 	return currentRangeInCm;
 }
 
-bool WorldModel::checkRangeDistance(const int distance, const QPointF &position
+bool WorldModel::checkRangeDistance(const int distance, QPointF position
 		, const qreal direction, const qreal scanningAngle, const QPainterPath &wallPath) const
 {
 	const QPainterPath rayPath = rangeSensorScanningRegion(position, direction
@@ -120,16 +124,16 @@ bool WorldModel::checkRangeDistance(const int distance, const QPointF &position
 	return rayPath.intersects(wallPath);
 }
 
-QPainterPath WorldModel::rangeSensorScanningRegion(const QPointF &position, QPair<qreal,int> angleAndRange) const
+QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, QPair<qreal,int> angleAndRange) const
 {
 	return rangeSensorScanningRegion(position, 0, angleAndRange);
 }
 
-QPainterPath WorldModel::rangeSensorScanningRegion(const QPointF &position, qreal direction
+QPainterPath WorldModel::rangeSensorScanningRegion(QPointF position, qreal direction
 		, QPair<qreal,int> angleAndRange) const
 {
 	const qreal rayWidthDegrees = angleAndRange.first;
-	const qreal rangeInPixels = angleAndRange.second * pixelsInCm();
+	const qreal rangeInPixels = angleAndRange.second * mSettings->pixelsInCm();
 
 	QPainterPath rayPath;
 	rayPath.arcTo(QRectF(-rangeInPixels, -rangeInPixels, 2 * rangeInPixels, 2 * rangeInPixels)
@@ -188,13 +192,13 @@ void WorldModel::addWall(const QSharedPointer<items::WallItem> &wall)
 
 	mWalls[id] = wall;
 	mOrder[id] = mOrder.size();
-	emit wallAdded(wall);
+	Q_EMIT wallAdded(wall);
 }
 
 void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 {
 	mWalls.remove(wall->id());
-	emit itemRemoved(wall);
+	Q_EMIT itemRemoved(wall);
 }
 
 void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
@@ -206,13 +210,13 @@ void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
 	}
 
 	mSkittles[id] = skittle;
-	emit skittleAdded(skittle);
+	Q_EMIT skittleAdded(skittle);
 }
 
 void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
 {
 	mSkittles.remove(skittle->id());
-	emit itemRemoved(skittle);
+	Q_EMIT itemRemoved(skittle);
 }
 
 void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
@@ -224,13 +228,13 @@ void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
 	}
 
 	mBalls[id] = ball;
-	emit ballAdded(ball);
+	Q_EMIT ballAdded(ball);
 }
 
 void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 {
 	mBalls.remove(ball->id());
-	emit itemRemoved(ball);
+	Q_EMIT itemRemoved(ball);
 }
 
 void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
@@ -242,13 +246,13 @@ void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
 	}
 
 	mComments[id] = comment;
-	emit commentAdded(comment);
+	Q_EMIT commentAdded(comment);
 }
 
 void WorldModel::removeComment(QSharedPointer<items::CommentItem> comment)
 {
 	mComments.remove(comment->id());
-	emit itemRemoved(comment);
+	Q_EMIT itemRemoved(comment);
 }
 
 const QMap<QString, QSharedPointer<items::ColorFieldItem>> &WorldModel::colorFields() const
@@ -286,13 +290,13 @@ void WorldModel::addColorField(const QSharedPointer<items::ColorFieldItem> &colo
 
 	mColorFields[id] = colorField;
 	mOrder[id] = mOrder.size();
-	emit colorItemAdded(colorField);
+	Q_EMIT colorItemAdded(colorField);
 }
 
 void WorldModel::removeColorField(QSharedPointer<items::ColorFieldItem> colorField)
 {
 	mColorFields.remove(colorField->id());
-	emit itemRemoved(colorField);
+	Q_EMIT itemRemoved(colorField);
 }
 
 void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
@@ -315,16 +319,16 @@ void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
 				}
 			}
 		});
-	emit imageItemAdded(imageItem);
-	emit blobsChanged();
+	Q_EMIT imageItemAdded(imageItem);
+	Q_EMIT blobsChanged();
 }
 
 void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 {
 	mImageItems.remove(imageItem->id());
 
-	emit itemRemoved(imageItem);
-	emit blobsChanged();
+	Q_EMIT itemRemoved(imageItem);
+	Q_EMIT blobsChanged();
 }
 
 void WorldModel::setRobotModel(RobotModel * robotModel)
@@ -357,13 +361,13 @@ void WorldModel::clear()
 	while (!mRegions.isEmpty()) {
 		auto toRemove = mRegions.last();
 		mRegions.remove(toRemove->id());
-		emit itemRemoved(toRemove);
+		Q_EMIT itemRemoved(toRemove);
 	}
 
 	while (!mComments.isEmpty()) {
 		auto toRemove = mComments.last();
 		mComments.remove(toRemove->id());
-		emit itemRemoved(toRemove);
+		Q_EMIT itemRemoved(toRemove);
 	}
 
 	if (mRobotModel) {
@@ -376,10 +380,10 @@ void WorldModel::clear()
 
 	clearRobotTrace();
 
-	emit blobsChanged();
+	Q_EMIT blobsChanged();
 }
 
-void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const QPointF &end)
+void WorldModel::appendRobotTrace(const QPen &pen, QPointF begin, QPointF end)
 {
 	if (pen.color() == QColor(Qt::transparent)) {
 		return;
@@ -390,15 +394,15 @@ void WorldModel::appendRobotTrace(const QPen &pen, const QPointF &begin, const Q
 		auto traceItem = QSharedPointer<QGraphicsPathItem>::create(path);
 		traceItem->setPen(pen);
 		traceItem->setZValue(graphicsUtils::AbstractItem::ZValue::Marker);
-		emit robotTraceAppearedOrDisappeared(true);
+		Q_EMIT robotTraceAppearedOrDisappeared(true);
 		mRobotTrace << traceItem;
-		emit traceItemAddedOrChanged(traceItem, false);
+		Q_EMIT traceItemAddedOrChanged(traceItem, false);
 	} else {
 		auto path = mRobotTrace.last()->path();
 		path.moveTo(begin);
 		path.lineTo(end);
 		mRobotTrace.last()->setPath(path);
-		emit traceItemAddedOrChanged(mRobotTrace.last(), true);
+		Q_EMIT traceItemAddedOrChanged(mRobotTrace.last(), true);
 	}
 }
 
@@ -407,10 +411,10 @@ void WorldModel::clearRobotTrace()
 	while (!mRobotTrace.isEmpty()) {
 		auto const toRemove = mRobotTrace.first();
 		mRobotTrace.removeOne(toRemove);
-		emit itemRemoved(toRemove);
+		Q_EMIT itemRemoved(toRemove);
 	}
 
-	emit robotTraceAppearedOrDisappeared(false);
+	Q_EMIT robotTraceAppearedOrDisappeared(false);
 }
 
 QPainterPath WorldModel::buildSolidItemsPath() const
@@ -433,7 +437,7 @@ QPainterPath WorldModel::buildSolidItemsPath() const
 	return path;
 }
 
-void WorldModel::serializeBackground(QDomElement &background, const QRect &rect, const Image * const img) const
+void WorldModel::serializeBackground(QDomElement &background, QRect rect, const Image * const img) const
 {
 	background.setAttribute("backgroundRect", QString("%1:%2:%3:%4").arg(
 			QString::number(rect.x())
@@ -470,7 +474,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	result.appendChild(walls);
 	QList<QString> wallsIds = mWalls.keys();
 	std::sort(wallsIds.begin(), wallsIds.end(), comparator);
-	for (const QString &wall : wallsIds) {
+	for (auto &&wall: wallsIds) {
 		mWalls[wall]->serialize(walls);
 	}
 
@@ -490,7 +494,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	result.appendChild(colorFields);
 	QList<QString> colorFieldsIds = mColorFields.keys();
 	std::sort(colorFieldsIds.begin(), colorFieldsIds.end(), comparator);
-	for (const QString &colorField : colorFieldsIds) {
+	for (auto &&colorField : colorFieldsIds) {
 		mColorFields[colorField]->serialize(colorFields);
 	}
 
@@ -498,7 +502,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	result.appendChild(images);
 	QList<QString> imageIds = mImageItems.keys();
 	std::sort(imageIds.begin(), imageIds.end(), comparator);
-	for (const QString &image : imageIds) {
+	for (auto &&image : imageIds) {
 		mImageItems[image]->serialize(images);
 	}
 
@@ -532,7 +536,7 @@ QDomElement WorldModel::serializeBlobs(QDomElement &parent) const
 	QDomElement images = parent.ownerDocument().createElement("images");
 
 	QList<QString> imageIds = mImageItems.keys();
-	for (const QString &imageItem : imageIds) {
+	for (auto &&imageItem : imageIds) {
 		QDomElement image = parent.ownerDocument().createElement("image");
 		mImageItems[imageItem]->image()->serialize(image);
 		images.appendChild(image);
@@ -743,63 +747,72 @@ void WorldModel::createElement(const QDomElement &element)
 
 void WorldModel::createWall(const QDomElement &element)
 {
-	auto wall = QSharedPointer<items::WallItem>::create(QPointF(), QPointF());
+	auto wall = QSharedPointer<items::WallItem>::create(
+				mMetricCoordinateSystem, QPointF(), QPointF());
 	wall->deserialize(element);
 	addWall(wall);
 }
 
 void WorldModel::createSkittle(const QDomElement &element)
 {
-	auto skittle = QSharedPointer<items::SkittleItem>::create(QPointF());
+	auto skittle = QSharedPointer<items::SkittleItem>::create(
+				mMetricCoordinateSystem, QPointF());
 	skittle->deserialize(element);
 	addSkittle(skittle);
 }
 
 void WorldModel::createBall(const QDomElement &element)
 {
-	auto ball = QSharedPointer<items::BallItem>::create(QPointF());
+	auto ball = QSharedPointer<items::BallItem>::create(
+				mMetricCoordinateSystem, QPointF());
 	ball->deserialize(element);
 	addBall(ball);
 }
 
 void WorldModel::createLine(const QDomElement &element)
 {
-	auto lineItem = QSharedPointer<items::LineItem>::create(QPointF(), QPointF());
+	auto lineItem = QSharedPointer<items::LineItem>::create(
+				mMetricCoordinateSystem, QPointF(), QPointF());
 	lineItem->deserialize(element);
 	addColorField(lineItem);
 }
 
 void WorldModel::createRectangle(const QDomElement &element)
 {
-	auto rectangleItem = QSharedPointer<items::RectangleItem>::create(QPointF(), QPointF());
+	auto rectangleItem = QSharedPointer<items::RectangleItem>::create(
+				 mMetricCoordinateSystem, QPointF(), QPointF());
 	rectangleItem->deserialize(element);
 	addColorField(rectangleItem);
 }
 
 void WorldModel::createEllipse(const QDomElement &element)
 {
-	auto ellipseItem = QSharedPointer<items::EllipseItem>::create(QPointF(), QPointF());
+	auto ellipseItem = QSharedPointer<items::EllipseItem>::create(
+				 mMetricCoordinateSystem, QPointF(), QPointF());
 	ellipseItem->deserialize(element);
 	addColorField(ellipseItem);
 }
 
 void WorldModel::createCubicBezier(const QDomElement &element)
 {
-	auto curveItem = QSharedPointer<items::CurveItem>::create(QPointF(), QPointF());
+	auto curveItem = QSharedPointer<items::CurveItem>::create(
+				 mMetricCoordinateSystem, QPointF(), QPointF());
 	curveItem->deserialize(element);
 	addColorField(curveItem);
 }
 
 void WorldModel::createStylus(const QDomElement &element)
 {
-	auto stylusItem = QSharedPointer<items::StylusItem>::create(0, 0);
+	auto stylusItem = QSharedPointer<items::StylusItem>::create(
+				 mMetricCoordinateSystem, 0, 0);
 	stylusItem->deserialize(element);
 	addColorField(stylusItem);
 }
 
 void WorldModel::createComment(const QDomElement &element)
 {
-	auto commentItem = QSharedPointer<items::CommentItem>::create(QPointF(), QPointF());
+	auto commentItem = QSharedPointer<items::CommentItem>::create(
+				mMetricCoordinateSystem, QPointF(), QPointF());
 	commentItem->deserialize(element);
 	addComment(commentItem);
 }
@@ -826,14 +839,14 @@ void WorldModel::createRegion(const QDomElement &element)
 	QSharedPointer<items::RegionItem> item;
 	QSharedPointer<QGraphicsObject> boundItem;
 	if (type == "ellipse") {
-		item.reset(new items::EllipseRegion);
+		item.reset(new items::EllipseRegion(mMetricCoordinateSystem));
 	} else if (type == "rectangle") {
-		item.reset(new items::RectangularRegion);
+		item.reset(new items::RectangularRegion(mMetricCoordinateSystem));
 	} else if (type == "bound") {
 		auto id = element.attribute("boundItem");
 		boundItem = findId(id);
 		if (boundItem) {
-			item.reset(new items::BoundRegion(*boundItem, id));
+			item.reset(new items::BoundRegion(mMetricCoordinateSystem, *boundItem, id));
 		} /// @todo: else report error
 	}
 
@@ -845,7 +858,7 @@ void WorldModel::createRegion(const QDomElement &element)
 			// Item itself will be deleted with its parent, see BoundRegion constructor.
 			connect(&*item, &QObject::destroyed, this, [this, itemId]() { mRegions.remove(itemId); });
 		}
-		emit regionItemAdded(item);
+		Q_EMIT regionItemAdded(item);
 	}
 }
 

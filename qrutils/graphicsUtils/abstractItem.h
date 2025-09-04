@@ -18,8 +18,9 @@
 #include <QtWidgets/QGraphicsView>
 #include <QtXml/QDomDocument>
 #include <QGraphicsSceneHoverEvent>
-
+#include <QPointer>
 #include "qrutils/utilsDeclSpec.h"
+#include "coordinateSystem.h"
 
 const int drift = 15;
 const int resizeDrift = 10;
@@ -79,7 +80,8 @@ public:
 	QBrush brush() const;
 	void setBrush(const QBrush &brush);
 	void setPen(const QPen &pen);
-
+	void setCoordinateSystem(AbstractCoordinateSystem *coordinateSystem);
+	AbstractCoordinateSystem *coordinateSystem() const;
 	virtual void setPenStyle(const QString &text);
 	virtual void setPenWidth(int width);
 	virtual void setPenColor(const QString &text);
@@ -116,7 +118,7 @@ public:
 
 	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
-	void reverseOldResizingItem(const QPointF &begin, const QPointF &end);
+	void reverseOldResizingItem(QPointF begin, QPointF end);
 
 	virtual void restorePos();
 	virtual void savePos();
@@ -125,7 +127,7 @@ public:
 	virtual void setXandY(QDomElement& dom, const QRectF &rect);
 	QDomElement setPenBrushToDoc(QDomDocument &document, const QString &domName) const;
 	QDomElement setPenBrushToElement(QDomElement &target, const QString &domName) const;
-	virtual QRectF sceneBoundingRectCoord(const QPoint &topLeftPicture);
+	virtual QRectF sceneBoundingRectCoord(const QPoint topLeftPicture);
 	void readPenBrush(const QDomElement &docItem);
 
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
@@ -214,6 +216,8 @@ private:
 	QPen mStrokePen {Qt::green};
 	Qt::CursorShape mResizeCursor {Qt::SizeAllCursor};
 	const Qt::CursorShape mHoverCursor {Qt::PointingHandCursor};
+	QPointer<AbstractCoordinateSystem> mCoordinateSystem {};
+	QPointer<CoordinateSystem> mDefaultCoordinateSystem;
 };
 
 }

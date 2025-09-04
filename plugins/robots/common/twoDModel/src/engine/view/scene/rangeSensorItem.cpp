@@ -20,13 +20,14 @@ using namespace twoDModel::view;
 using namespace kitBase::robotModel;
 
 RangeSensorItem::RangeSensorItem(const model::WorldModel &worldModel
+		,graphicsUtils::AbstractCoordinateSystem *metricSystem
 		, model::SensorsConfiguration &configuration
 		, const PortInfo &port
 		, QPair<qreal, int> angleAndRange
 		, const QString &pathToImage
-		, const QRect &imageSize
+		, QRect imageSize
 		)
-	: SensorItem(configuration, port, pathToImage, imageSize)
+	: SensorItem(metricSystem, configuration, port, pathToImage, imageSize)
 	, mWorldModel(worldModel)
 	, mAngle(angleAndRange.first)
 	, mRange(angleAndRange.second)

@@ -35,6 +35,7 @@ class StartPosition;
 
 namespace model {
 
+class MetricCoordinateSystem;
 class Settings;
 namespace physics {
 class PhysicsEngineBase;
@@ -76,7 +77,9 @@ public:
 	};
 
 	RobotModel(twoDModel::robotModel::TwoDRobotModel &robotModel
-			, const Settings &settings, QObject *parent = nullptr);
+		   , Settings *settings
+		   , twoDModel::model::MetricCoordinateSystem *metricSystem
+	           , QObject *parent = nullptr);
 
 	~RobotModel();
 
@@ -104,7 +107,7 @@ public:
 	Q_INVOKABLE void resetEncoder(const kitBase::robotModel::PortInfo &port);
 
 	QPointF position() const;
-	void setPosition(const QPointF &newPos);
+	void setPosition(QPointF newPos);
 
 	qreal rotation() const;
 	void setRotation(qreal angle);
@@ -126,6 +129,7 @@ public:
 	void onRobotReturnedOnGround();
 
 	void setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+	kitBase::robotModel::PortInfo getPortInfoOnWheel(WheelEnum wheel) const;
 
 	QRectF sensorRect(const kitBase::robotModel::PortInfo &port, const QPointF sensorPos) const;
 	QPainterPath sensorBoundingPath(const kitBase::robotModel::PortInfo &port) const;
@@ -186,7 +190,8 @@ signals:
 	void playingSoundChanged(bool playing);
 
 	/// Emitted when left or right wheel was reconnected to another port.
-	void wheelOnPortChanged(WheelEnum wheel, const kitBase::robotModel::PortInfo &port);
+	void wheelOnPortChanged(twoDModel::model::RobotModel::WheelEnum wheel,
+				const kitBase::robotModel::PortInfo &port);
 
 private:
 	QVector2D robotDirectionVector() const;
@@ -218,10 +223,11 @@ private:
 	/// Describes which wheel is driven by which motor.
 	QHash<WheelEnum, kitBase::robotModel::PortInfo> mWheelsToMotorPortsMap;
 	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::PortInfo> mMotorToEncoderPortMap;
-
-	const Settings &mSettings;
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	QPointer<Settings> mSettings;
 	twoDModel::robotModel::TwoDRobotModel &mRobotModel;
-	SensorsConfiguration mSensorsConfiguration;
+	// Takes ownership.
+	QPointer<SensorsConfiguration> mSensorsConfiguration;
 
 	QPointF mPos { 0, 0 };
 	qreal mAngle { 0 };
@@ -238,6 +244,8 @@ private:
 	physics::PhysicsEngineBase *mPhysicsEngine {};  // Does not take ownership
 
 	QPointer<items::StartPosition> mStartPositionMarker;
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	QPointer<twoDModel::model::MetricCoordinateSystem> mMetricSystem;
 };
 
 }

@@ -44,11 +44,17 @@ public slots:
 	/// Shows 2d model parameters widget in corresponding section.
 	void setParamsSettings(QWidget *widget);
 
+	/// Shows metric settings widget in corresponding section.
+	void setMetricSettings(QWidget *widget);
+
 	/// Shows or hides all sections related to robot`s devices configuration (not motors).
 	void setDevicesSectionsVisible(bool visible);
 
 	/// Shows or hides all sections related to robot`s motors configuration.
 	void setMotorsSectionsVisible(bool visible);
+
+	/// Shows or hides all sections related to metric configuration.
+	void setMetricSectionsVisible(bool visible);
 
 	/// Shows or hides all sections related to model physics configuration.
 	void setPhysicsSectionsVisible(bool visible);
@@ -61,16 +67,19 @@ private:
 	QTreeWidgetItem *mMotorsRoot;   // Takes ownership
 	QTreeWidgetItem *mPhysicsRoot;  // Takes ownership
 	QTreeWidgetItem *mParamsRoot;  // Takes ownership
+	QTreeWidgetItem *mMetricRoot;  // Takes ownership
 	QTreeWidgetItem *mDisplayItem;  // Takes ownership
 	QTreeWidgetItem *mDevicesItem;  // Takes ownership
 	QTreeWidgetItem *mMotorsItem;   // Takes ownership
 	QTreeWidgetItem *mPhysicsItem;  // Takes ownership
 	QTreeWidgetItem *mParamsItem;  // Takes ownership
+	QTreeWidgetItem *mMetricItem;  // Takes ownership
 	QWidget *mDisplay {};  // Doesn`t take ownership
 	QWidget *mDevices {};  // Doesn`t take ownership
 	QWidget *mMotors {};   // Doesn`t take ownership
 	QWidget *mPhysics {};  // Doesn`t take ownership
 	QWidget *mParams {};  // Doesn`t take ownership
+	QWidget *mMetric {};  // Doesn`t take ownership
 };
 
 }

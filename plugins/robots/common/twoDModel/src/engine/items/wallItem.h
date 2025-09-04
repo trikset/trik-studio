@@ -21,14 +21,14 @@
 
 namespace twoDModel {
 namespace items {
-
 class WallItem : public graphicsUtils::AbstractItem, public SolidItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(WallItem)
 
 public:
-	WallItem(const QPointF &begin, const QPointF &end);
+	WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+	         QPointF begin, QPointF end);
 
 	/// Creates a copy of this wall item. Transfers ownership to the caller.
 	WallItem *clone() const;
@@ -81,7 +81,7 @@ private:
 	const QImage mImage;
 
 	QPainterPath mPath;
-	int mWallWidth {10};
+	qreal mWallWidth {10};
 	QPointF mEstimatedPos;
 };
 

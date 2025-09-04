@@ -15,7 +15,7 @@
 #pragma once
 
 #include <QtCore/QObject>
-
+#include "metricSystem.h"
 #include "twoDModel/twoDModelDeclSpec.h"
 
 class QDomElement;
@@ -29,13 +29,19 @@ class TWO_D_MODEL_EXPORT Settings : public QObject
 	Q_OBJECT
 
 public:
-	Settings() = default;
+	explicit Settings(QObject *parent = nullptr);
 
 	/// Returns true is user selected realistic physical engine.
 	bool realisticPhysics() const;
 
 	/// Returns true is user wants to add some noise to sensors values.
 	bool realisticSensors() const;
+
+	/// To simplify the already overloaded WorldModel xml,
+	/// it was decided to use a tag in the existing <settings> tag
+	SizeUnit *sizeUnit();
+
+	qreal pixelsInCm() const;
 
 	/// Returns true is user wants to add some noise to motors work.
 	bool realisticMotors() const;
@@ -50,6 +56,8 @@ public:
 
 	void setRealisticMotors(bool set);
 
+	SizeUnit *sizeUnit() const;
+
 signals:
 	/// Emitted each time when user modifies physical preferences.
 	void physicsChanged(bool isRealistic);
@@ -58,6 +66,7 @@ private:
 	bool mRealisticPhysics { false };
 	bool mRealisticSensors { false };
 	bool mRealisticMotors { false };
+	QScopedPointer<SizeUnit> mSizeUnitSystem;
 };
 
 }

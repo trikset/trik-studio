@@ -26,10 +26,12 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-CommentItem::CommentItem(const QPointF &begin, const QPointF &end)
+CommentItem::CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			QPointF begin, QPointF end)
 	: mTextItem(this)
 	, mHtmlText("Your comment can be here")
 {
+	setCoordinateSystem(metricSystem);
 	setX1(qMin(begin.x(), end.x()));
 	setY1(qMin(begin.y(), end.y()));
 	setX2(qMax(begin.x(), end.x()));
@@ -124,12 +126,15 @@ QPainterPath CommentItem::resizeArea() const
 
 QDomElement CommentItem::serialize(QDomElement &parent) const
 {
+	auto *coordSystem = coordinateSystem();
 	QDomElement commentNode = AbstractItem::serialize(parent);
 	commentNode.setTagName("comment");
-	commentNode.setAttribute("begin", QString::number(x1() + scenePos().x())
-			 + ":" + QString::number(y1() + scenePos().y()));
-	commentNode.setAttribute("end", QString::number(x2() + scenePos().x())
-			 + ":" + QString::number(y2() + scenePos().y()));
+	commentNode.setAttribute("begin",
+	                         QString::number(coordSystem->toUnit(x1() + scenePos().x()))
+	                 + ":" + QString::number(coordSystem->toUnit(y1() + scenePos().y())));
+	commentNode.setAttribute("end",
+	                         QString::number(coordSystem->toUnit(x2() + scenePos().x()))
+	                 + ":" + QString::number(coordSystem->toUnit(y2() + scenePos().y())));
 	commentNode.setAttribute("text", mTextItem.toHtml());
 	return commentNode;
 }
@@ -141,17 +146,18 @@ void CommentItem::deserialize(const QDomElement &element)
 
 	mTextItem.setHtml(element.attribute("text"));
 	mHtmlText = mTextItem.toHtml();
+	auto *coordSystem = coordinateSystem();
 	const QString beginStr = element.attribute("begin", "0:0");
 	QStringList splittedStr = beginStr.split(":");
 	auto x = splittedStr[0].toDouble();
 	auto y = splittedStr[1].toDouble();
-	const QPointF begin = QPointF(x, y);
+	const QPointF begin = coordSystem->toPx(QPointF(x, y));
 
 	const QString endStr = element.attribute("end", "0:0");
 	splittedStr = endStr.split(":");
 	x = splittedStr[0].toDouble();
 	y = splittedStr[1].toDouble();
-	const QPointF end = QPointF(x, y);
+	const QPointF end = coordSystem->toPx(QPointF(x, y));
 
 	setPos(QPointF());
 	setX1(qMin(begin.x(), end.x()));

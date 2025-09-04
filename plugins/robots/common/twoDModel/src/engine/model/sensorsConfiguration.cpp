@@ -19,13 +19,17 @@
 
 #include "twoDModel/engine/model/sensorsConfiguration.h"
 #include "kitBase/robotModel/robotParts/lidarSensor.h"
+#include "twoDModel/engine/model/metricCoordinateSystem.h"
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
-SensorsConfiguration::SensorsConfiguration(const QString &robotModelName, const QSizeF &robotSize)
-	: mRobotSize(robotSize)
+SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
+			const QString &robotModelName, QSizeF robotSize, QObject *parent)
+	: QObject(parent)
+	, mRobotSize(robotSize)
 	, mRobotId(robotModelName)
+	, mMetricSystem(metricSystem)
 {
 }
 
@@ -43,7 +47,7 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 
 	if (device.isNull()) {
 		mSensorsInfo[port] = SensorInfo();
-		emit deviceRemoved(port, reason == Reason::loading);
+		Q_EMIT deviceRemoved(port, reason == Reason::loading);
 		return;
 	}
 
@@ -51,7 +55,7 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 	// else putting it instead of old one.
 	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(device), 0) : mSensorsInfo[port];
 
-	emit deviceAdded(port, reason == Reason::loading);
+	Q_EMIT deviceAdded(port, reason == Reason::loading);
 }
 
 QPointF SensorsConfiguration::defaultPosition(const DeviceInfo &device) const
@@ -67,11 +71,11 @@ QPointF SensorsConfiguration::position(const PortInfo &port) const
 	return mSensorsInfo[port].position;
 }
 
-void SensorsConfiguration::setPosition(const PortInfo &port, const QPointF &position)
+void SensorsConfiguration::setPosition(const PortInfo &port, QPointF position)
 {
 	if (!mathUtils::Geometry::eq(mSensorsInfo[port].position, position)) {
 		mSensorsInfo[port].position = position;
-		emit positionChanged(port);
+		Q_EMIT positionChanged(port);
 	}
 }
 
@@ -84,7 +88,7 @@ void SensorsConfiguration::setDirection(const PortInfo &port, qreal direction)
 {
 	if (!mathUtils::Math::eq(mSensorsInfo[port].direction, direction)) {
 		mSensorsInfo[port].direction = direction;
-		emit rotationChanged(port);
+		Q_EMIT rotationChanged(port);
 	}
 }
 
@@ -98,17 +102,21 @@ void SensorsConfiguration::serialize(QDomElement &robot) const
 	QDomElement sensorsElem = robot.ownerDocument().createElement("sensors");
 	robot.appendChild(sensorsElem);
 
-	for (const PortInfo &port: mSensorsInfo.keys()) {
+	for (auto it = mSensorsInfo.begin(); it != mSensorsInfo.end(); ++it) {
+		const auto port = it.key();
+		const auto sensor = it.value();
 		const DeviceInfo device = currentConfiguration(mRobotId, port);
-		const SensorInfo sensor = mSensorsInfo.value(port);
 		QDomElement sensorElem = robot.ownerDocument().createElement("sensor");
 		sensorsElem.appendChild(sensorElem);
 		sensorElem.setAttribute("port", port.toString());
 		sensorElem.setAttribute("type", device.toString());
 
-		sensorElem.setAttribute("position"
-				, QString::number(sensor.position.x()) + ":" + QString::number(sensor.position.y()));
-
+		if (mMetricSystem) {
+			sensorElem.setAttribute("position"
+		                , QString::number(
+					mMetricSystem->toUnit(sensor.position.x()))
+					+ ":" + QString::number(mMetricSystem->toUnit(sensor.position.y())));
+		}
 		sensorElem.setAttribute("direction", QString::number(sensor.direction));
 	}
 }
@@ -134,7 +142,10 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 		const QStringList splittedStr = positionStr.split(":");
 		const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
 		const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
-		const QPointF position = QPoint(x, y);
+		auto position = QPointF{x, y};
+		if (mMetricSystem) {
+			position = mMetricSystem->toPx({x, y});
+		}
 
 		const qreal direction = sensorNode.attribute("direction", "0").toDouble();
 
@@ -151,7 +162,7 @@ SensorsConfiguration::SensorInfo::SensorInfo()
 {
 }
 
-SensorsConfiguration::SensorInfo::SensorInfo(const QPointF &position, qreal direction)
+SensorsConfiguration::SensorInfo::SensorInfo(QPointF position, qreal direction)
 	: position(position)
 	, direction(direction)
 	, isNull(false)

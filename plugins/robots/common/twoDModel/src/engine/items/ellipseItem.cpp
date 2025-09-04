@@ -19,7 +19,9 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-EllipseItem::EllipseItem(const QPointF &begin, const QPointF &end)
+EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			QPointF begin, QPointF end)
+	: ColorFieldItem(metricSystem)
 {
 	setX1(begin.x());
 	setY1(begin.y());
@@ -30,7 +32,7 @@ EllipseItem::EllipseItem(const QPointF &begin, const QPointF &end)
 
 AbstractItem *EllipseItem::clone() const
 {
-	EllipseItem * const cloned = new EllipseItem({x1(), y1()}, {x2(), y2()});
+	EllipseItem * const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
@@ -85,27 +87,33 @@ QDomElement EllipseItem::serialize(QDomElement &parent) const
 {
 	QDomElement ellipseNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(ellipseNode, "ellipse");
-	ellipseNode.setAttribute("begin", QString::number(x1() + scenePos().x())
-			 + ":" + QString::number(y1() + scenePos().y()));
-	ellipseNode.setAttribute("end", QString::number(x2() + scenePos().x())
-			 + ":" + QString::number(y2() + scenePos().y()));
+	auto *coordSystem = coordinateSystem();
+	const auto beginX = coordSystem->toUnit(x1() + scenePos().x());
+	const auto beginY = coordSystem->toUnit(y1() + scenePos().y());
+	const auto endX = coordSystem->toUnit(x2() + scenePos().x());
+	const auto endY = coordSystem->toUnit(y2() + scenePos().y());
+	ellipseNode.setAttribute("begin", QString::number(beginX)
+	                 + ":" + QString::number(beginY));
+	ellipseNode.setAttribute("end", QString::number(endX)
+	                 + ":" + QString::number(endY));
 	return ellipseNode;
 }
 
 void EllipseItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
+	auto *coordSystem = coordinateSystem();
 	const QString beginStr = element.attribute("begin", "0:0");
 	QStringList splittedStr = beginStr.split(":");
 	auto x = splittedStr[0].toFloat();
 	auto y = splittedStr[1].toFloat();
-	const QPointF begin = QPointF(x, y);
+	const QPointF begin = coordSystem->toPx({x, y});
 
 	const QString endStr = element.attribute("end", "0:0");
 	splittedStr = endStr.split(":");
 	x = splittedStr[0].toFloat();
 	y = splittedStr[1].toFloat();
-	const QPointF end = QPointF(x, y);
+	const QPointF end = coordSystem->toPx({x, y});
 
 	setPos(QPointF());
 	setX1(begin.x());

@@ -33,7 +33,6 @@
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/vectorSensor.h>
 #include <kitBase/robotModel/robotParts/lidarSensor.h>
-
 #include "robotItem.h"
 
 #include "twoDModel/engine/model/model.h"
@@ -98,8 +97,8 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 
 TwoDModelScene::~TwoDModelScene()
 {
-	for (auto &&r: mRobots.values()) {
-		removeItem(r.data());
+	for (auto it = mRobots.begin(); it != mRobots.end(); ++it) {
+		removeItem(it.value().data());
 	}
 
 	for(auto &&x: mModel.worldModel().balls()) {
@@ -151,7 +150,7 @@ void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 	mRobotReadOnly = (flags & kitBase::ReadOnly::RobotPosition) != 0;
 	mSensorsReadOnly = (flags & kitBase::ReadOnly::Sensors) != 0;
 
-	for (const auto item : items()) {
+	for (auto &&item : items()) {
 		if (const auto &&robotItem = dynamic_cast<RobotItem *>(item)) {
 			robotItem->setEditable(!mRobotReadOnly);
 		} else if (const auto &&sensorItem = dynamic_cast<SensorItem *>(item)) {
@@ -189,7 +188,8 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 			for (auto &&wall : mModel.worldModel().walls()) {
 				if (hasIntersect(ball, wall.data())) return false;
 			}
-			for (auto &&robot : mRobots.values()) {
+			for (auto it = mRobots.begin(); it != mRobots.end(); ++it) {
+				const auto &robot = it.value();
 				if (hasIntersect(ball, robot.data())) return false;
 			}
 			for (auto &&skittle : mModel.worldModel().skittles()) {
@@ -199,7 +199,8 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 			for (auto &&wall : mModel.worldModel().walls()) {
 				if (hasIntersect(skittle, wall.data())) return false;
 			}
-			for (auto &&robot : mRobots.values()) {
+			for (auto it = mRobots.begin(); it != mRobots.end(); ++it) {
+				const auto &robot = it.value();
 				if (hasIntersect(skittle, robot.data())) return false;
 			}
 			for (auto &&ball : mModel.worldModel().balls()) {
@@ -212,7 +213,8 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 			for (auto &&skittle : mModel.worldModel().skittles()) {
 				if (hasIntersect(wall, skittle.data())) return false;
 			}
-			for (auto &&robot : mRobots.values()) {
+			for (auto it = mRobots.begin(); it != mRobots.end(); ++it) {
+				const auto &robot = it.value();
 				if (hasIntersect(wall, robot.data())) return false;
 			}
 		}
@@ -222,7 +224,8 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
-	auto robotItem = QSharedPointer<RobotItem>(new RobotItem(robotModel->info().robotImage(), *robotModel));
+	auto robotItem = QSharedPointer<RobotItem>(
+	        new RobotItem(&mModel.coordinateMetricSystem(), robotModel->info().robotImage(), *robotModel));
 
 	connect(&*robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
 	connect(&*robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
@@ -231,7 +234,7 @@ void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 
 	addItem(robotItem.data());
 	robotItem->robotModel().startPositionMarker()->setZValue(robotItem->zValue() - lowPrecision);
-	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership	
+	addItem(robotItem->robotModel().startPositionMarker()); // Steal ownership
 	subscribeItem(robotModel->startPositionMarker());
 
 	mRobots.insert(robotModel, robotItem);
@@ -267,7 +270,7 @@ void TwoDModelScene::onBallAdded(const QSharedPointer<items::BallItem> &ball)
 
 void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 {
-	for (QGraphicsItem *item : selectedItems()) {
+	for (auto &&item : selectedItems()) {
 		if (auto ball = dynamic_cast<items::BallItem *>(item)) {
 			ball->saveStartPosition();
 		} else if (auto skittle = dynamic_cast<items::SkittleItem *>(item)) {
@@ -295,7 +298,8 @@ void TwoDModelScene::drawAxes(QPainter *painter)
 	painter->save();
 
 	const int arrowSize = 5;
-	const QRectF visibleRect = views().first()->mapToScene(views().first()->viewport()->geometry()).boundingRect();
+	const QRectF visibleRect = views().constFirst()->mapToScene(
+				views().constFirst()->viewport()->geometry()).boundingRect();
 
 	QPen pen = painter->pen();
 	pen.setColor(Qt::gray);
@@ -337,52 +341,54 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		mModel.worldModel().addColorField(item);
 	};
 
-	for (auto selectedItem : selectedItems()) {
+	for (auto &&selectedItem : selectedItems()) {
 		if (auto item = dynamic_cast<AbstractItem *>(selectedItem)) {
 			item->savePos();
 		}
 	}
 
-	for (auto &&robotItem : mRobots.values()) {
+	auto &metricSystem = mModel.coordinateMetricSystem();
+	for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
+		const auto &robotItem = it.value();
 		if (!robotItem->realBoundingRect().contains(position)) {
 			switch (mDrawingAction) {
 			case wall:
-				mCurrentWall.reset(new items::WallItem(position, position));
+				mCurrentWall.reset(new items::WallItem(&metricSystem, position, position));
 				initItem(mCurrentWall);
 				mModel.worldModel().addWall(mCurrentWall);
 				break;
 			case skittle:
-				mCurrentSkittle.reset(new items::SkittleItem(position));
+				mCurrentSkittle.reset(new items::SkittleItem(&metricSystem, position));
 				initItem(mCurrentSkittle);
 				mModel.worldModel().addSkittle(mCurrentSkittle);
 				break;
 			case ball:
-				mCurrentBall.reset(new items::BallItem(position));
+				mCurrentBall.reset(new items::BallItem(&metricSystem, position));
 				initItem(mCurrentBall);
 				mModel.worldModel().addBall(mCurrentBall);
 				break;
 			case line:
-				mCurrentLine.reset(new items::LineItem(position, position));
+				mCurrentLine.reset(new items::LineItem(&metricSystem, position, position));
 				initColorField(mCurrentLine);
 				break;
 			case bezier:
-				mCurrentCurve.reset(new items::CurveItem(position, position));
+				mCurrentCurve.reset(new items::CurveItem(&metricSystem, position, position));
 				initColorField(mCurrentCurve);
 				break;
 			case stylus:
-				mCurrentStylus.reset(new items::StylusItem(position.x(), position.y()));
+				mCurrentStylus.reset(new items::StylusItem(&metricSystem, position.x(), position.y()));
 				initColorField(mCurrentStylus);
 				break;
 			case rectangle:
-				mCurrentRectangle.reset(new items::RectangleItem(position, position));
+				mCurrentRectangle.reset(new items::RectangleItem(&metricSystem, position, position));
 				initColorField(mCurrentRectangle);
 				break;
 			case ellipse:
-				mCurrentEllipse.reset(new items::EllipseItem(position, position));
+				mCurrentEllipse.reset(new items::EllipseItem(&metricSystem, position, position));
 				initColorField(mCurrentEllipse);
 				break;
 			case comment:
-				mCurrentComment.reset(new items::CommentItem(position, position));
+				mCurrentComment.reset(new items::CommentItem(&metricSystem, position, position));
 				initItem(mCurrentComment);
 				mModel.worldModel().addComment(mCurrentComment);
 				break;
@@ -593,7 +599,8 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 		items::CommentItem * const comment = dynamic_cast<items::CommentItem *>(item);
 
 		if (sensor && !mSensorsReadOnly) {
-			for (auto &&robotItem : mRobots.values()) {
+			for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
+				const auto &robotItem = it.value();
 				auto port = robotItem->sensors().key(sensor);
 				if (port.isValid()) {
 					sensors << qMakePair(&robotItem->robotModel(), port);
@@ -734,7 +741,7 @@ void TwoDModelScene::addComment()
 void TwoDModelScene::addImage()
 {
 	// Loads world and robot models simultaneously.
-	const auto loadImages = utils::QRealFileDialog::getOpenFileNames("2DSelectImage", views().first()
+	const auto loadImages = utils::QRealFileDialog::getOpenFileNames("2DSelectImage", views().constFirst()
 			, tr("Select images")
 			, qReal::PlatformInfo::invariantSettingsPath("pathToImages") + "/../fields"
 			, tr("Graphics (*.*)"));
@@ -818,15 +825,18 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 
 		QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensorsToDelete;
 		QList<qReal::commands::AbstractCommand *> additionalCommands;
-		for (model::RobotModel *robotModel : mRobots.keys()) {
+		for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
+			const auto &robotModel = it.key();
+			const auto &value = it.value();
 			commands::ReshapeCommand * const reshapeCommand = new commands::ReshapeCommand(*this, mModel
-					, {mRobots[robotModel]->id()});
+					, {value->id()});
 			reshapeCommand->startTracking();
 			robotModel->clear();
 			reshapeCommand->stopTracking();
 			additionalCommands << reshapeCommand;
 			if (removeRobot) {
-				for (const kitBase::robotModel::PortInfo &port : robot(*robotModel)->sensors().keys()) {
+				const auto &keys = robot(*robotModel)->sensors().keys();
+				for (auto &&port : keys) {
 					sensorsToDelete << qMakePair(robotModel, port);
 				}
 			}
@@ -841,11 +851,12 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 		// The model is being reloaded, we can make it without undo-redo, so a bit faster
 
 		mModel.worldModel().clear();
-
-		for (model::RobotModel *robotModel : mRobots.keys()) {
+		const auto &robotKeys = mRobots.keys();
+		for (auto &&robotModel : robotKeys) {
 			robotModel->clear();
 			if (removeRobot) {
-				for (const kitBase::robotModel::PortInfo &port : configuredPorts(robotModel->info().robotId())) {
+				const auto &ports = configuredPorts(robotModel->info().robotId());
+				for (auto &&port : ports) {
 					deviceConfigurationChanged(robotModel->info().robotId()
 							, port, kitBase::robotModel::DeviceInfo(), reason);
 				}
@@ -983,7 +994,7 @@ void TwoDModelScene::subscribeItem(AbstractItem *item)
 
 qreal TwoDModelScene::currentZoom() const
 {
-	return views().isEmpty() ? 1.0 : views().first()->transform().m11();
+	return views().isEmpty() ? 1.0 : views().constFirst()->transform().m11();
 }
 
 void TwoDModelScene::alignWalls()
@@ -1008,7 +1019,7 @@ void TwoDModelScene::centerOnRobot(RobotItem *selectedItem)
 	auto x = std::find(mRobots.begin(), mRobots.end(), selectedItem);
 	auto robotItem = (!selectedItem || x == mRobots.end()) ? robots.first() : x.value();
 
-	for (QGraphicsView * const view : views()) {
+	for (auto &&view: views()) {
 		const QRectF viewPortRect = view->mapToScene(view->viewport()->rect()).boundingRect();
 		if (!viewPortRect.contains(robotItem->sceneBoundingRect().toRect())) {
 			const QRectF requiredViewPort = viewPortRect.translated(robotItem->scenePos() - viewPortRect.center());
@@ -1030,20 +1041,25 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
-			? new RangeSensorItem(mModel.worldModel(), robotModel.configuration()
+	                ? new RangeSensorItem(mModel.worldModel()
+	                                , &mModel.coordinateMetricSystem()
+	                                , robotModel.configuration()
 					, port
 					, robotModel.info().rangeSensorAngleAndDistance(device)
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)
 					)
 			: device.isA<kitBase::robotModel::robotParts::LidarSensor>()
-			? new LidarSensorItem(mModel.worldModel(), robotModel.configuration()
+	                ? new LidarSensorItem(mModel.worldModel()
+	                                  , &mModel.coordinateMetricSystem()
+	                                  , robotModel.configuration()
 					  , port
 					  , robotModel.info().rangeSensorAngleAndDistance(device)
 					  , robotModel.info().sensorImagePath(device)
 					  , robotModel.info().sensorImageRect(device)
 					  )
-			: new SensorItem(robotModel.configuration()
+	                : new SensorItem(&mModel.coordinateMetricSystem()
+	                                , robotModel.configuration()
 					, port
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)

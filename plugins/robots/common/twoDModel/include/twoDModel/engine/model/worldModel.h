@@ -21,7 +21,8 @@
 #include <QtGui/QPolygon>
 #include <QtWidgets/QGraphicsPathItem>
 #include <QtXml/QDomDocument>
-
+#include "settings.h"
+#include "metricCoordinateSystem.h"
 #include "twoDModel/engine/model/image.h"
 #include "twoDModel/twoDModelDeclSpec.h"
 
@@ -51,27 +52,27 @@ class TWO_D_MODEL_EXPORT WorldModel : public QObject
 	Q_OBJECT
 
 public:
-	WorldModel();
+	WorldModel(Settings *settings,
+		   twoDModel::model::MetricCoordinateSystem *metricSystem);
 	~WorldModel();
 
 	void init(qReal::ErrorReporterInterface &errorReporter);
 
-	/// Returns a number of pixels in 1 cm. This value may change, pixelsInCmChanged() signal will then be emitted.
 	qreal pixelsInCm() const;
 
 	/// Measures the distance between robot and wall
-	Q_INVOKABLE int rangeReading(const QPointF &position, qreal direction, int maxDistance, qreal maxAngle) const;
+	Q_INVOKABLE int rangeReading(QPointF position, qreal direction, int maxDistance, qreal maxAngle) const;
 
 	/// Measures the distance between robot and solid object for each angle in maxAngle and maxDistance scanning region
-	Q_INVOKABLE QVector<int> lidarReading(const QPointF &position, qreal direction
+	Q_INVOKABLE QVector<int> lidarReading(QPointF position, qreal direction
 			, int maxDistance, qreal maxAngle) const;
 
 	/// Returns area which is seen by sonar sensor.
-	QPainterPath rangeSensorScanningRegion(const QPointF &position, qreal direction,
+	QPainterPath rangeSensorScanningRegion(QPointF position, qreal direction,
 			QPair<qreal,int> angleAndRange) const;
 
 	/// Returns area which is seen by sonar sensor with zero rotation.
-	QPainterPath rangeSensorScanningRegion(const QPointF &position, QPair<qreal,int> angleAndRange) const;
+	QPainterPath rangeSensorScanningRegion(QPointF position, QPair<qreal,int> angleAndRange) const;
 
 	/// Checks if the given path intersects some wall.
 	bool checkCollision(const QPainterPath &path) const;
@@ -143,7 +144,7 @@ public:
 	void clear();
 
 	/// Appends one more segment of the given to the robot`s trace.
-	void appendRobotTrace(const QPen &pen, const QPointF &begin, const QPointF &end);
+	void appendRobotTrace(const QPen &pen, QPointF begin, QPointF end);
 
 	/// Removes all the segments from the current robot`s trace.
 	void clearRobotTrace();
@@ -247,11 +248,11 @@ signals:
 
 private:
 	/// Returns true if ray intersects some wall.
-	bool checkRangeDistance(const int distance, const QPointF &position
+	bool checkRangeDistance(const int distance, QPointF position
 			, const qreal direction, const qreal scanningAngle, const QPainterPath &wallPath) const;
 	QPainterPath buildSolidItemsPath() const;
 
-	void serializeBackground(QDomElement &background, const QRect &rect, const Image * const img) const;
+	void serializeBackground(QDomElement &background, QRect rect, const Image * const img) const;
 	QRectF deserializeRect(const QString &string) const;
 
 	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
@@ -263,11 +264,18 @@ private:
 	QMap<QString, QSharedPointer<model::Image>> mImages;
 	QMap<QString, QSharedPointer<items::CommentItem>> mComments;
 	RobotModel * mRobotModel {}; // Doesn't take ownership
+
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	// The lifetime of this object is greater than WorldModel (see Model.h)
+	QPointer<Settings> mSettings;
 	QMap<QString, int> mOrder;
 	QList<QSharedPointer<QGraphicsPathItem>> mRobotTrace;
 	QRect mBackgroundRect;
 	QScopedPointer<QDomDocument> mXmlFactory;
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
+	// Doesn't take ownership, ownership is twoDModel::model::Model.
+	// The lifetime of this object is greater than WorldModel (see Model.h)
+	QPointer<MetricCoordinateSystem> mMetricCoordinateSystem;
 };
 
 }
