@@ -62,6 +62,9 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 		}
 
 		b2Hull hull = b2ComputeHull(mPolygon, collidingPolygon.size());
+		if (!b2ValidateHull(&hull)) {
+			return;
+		}
 		polygonShape = b2MakePolygon(&hull, 0.0f);
 		fixtureDef.density = engine->computeDensity(collidingPolygon, item->mass());
 	}
