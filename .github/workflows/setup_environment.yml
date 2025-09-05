@@ -10,10 +10,18 @@ on:
         required: false
         type: string
         default: "time"
-      lint:
+      lint_vera:
         required: false
         type: boolean
         default: false
+      lint_clazy:
+        required: false
+        type: boolean
+        default: false
+      need_deploy:
+        required: false
+        type: boolean
+        default: true
       build:
         required: true
         type: boolean
@@ -90,12 +98,13 @@ jobs:
       run: |
           git config --global core.symlinks true
           git config --global core.autocrlf input
+          echo "BUILD_DIR=${{ github.workspace }}/build" >> $GITHUB_ENV
 
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         submodules: recursive
-        fetch-depth: 0
+        fetch-depth: 2
 
     - name: Remove thirdparty submodules (use from libs from distro)
       run: |
@@ -120,11 +129,11 @@ jobs:
         INSTALL_INSTALLER_ENVIRONMENT: ${{ inputs.linux_installer_environment }}
       if: ${{ inputs.build }}
       
-    - name: Lint
+    - name: Lint Vera
       run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
           ${{ inputs.executor }} buildScripts/github/vera_translation.sh
-      if: ${{ inputs.lint }}
+      if: ${{ inputs.lint_vera }}
 
     - name: Restore cache
       uses: actions/cache@v4
@@ -138,7 +147,7 @@ jobs:
       if: ${{ inputs.build }}
 
     - name: Build
-      run: buildScripts/github/build.sh
+      run: "$GITHUB_WORKSPACE/buildScripts/github/build.sh"
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
@@ -148,6 +157,9 @@ jobs:
         CONFIG: ${{ inputs.config }}
         EXECUTOR: ${{ inputs.executor }}
         QMAKE_EXTRA: ${{ inputs.qmake_extra }}
+        NEED_COMPILE_DATABASE: ${{ inputs.lint_clazy }}
+        BUILD_DIR: ${{ env.BUILD_DIR }}
+        ROOT_DIR: ${{ github.workspace }}
       if: ${{ inputs.build }}
 
     - name: Save build cache
@@ -158,15 +170,31 @@ jobs:
       if: ${{ inputs.build }}
         
     - name: Run tests
-      run: ${{ inputs.executor }} buildScripts/github/run_tests.sh
+      run: ${{ inputs.executor }} "$GITHUB_WORKSPACE/buildScripts/github/run_tests.sh"
+      working-directory: ${{ env.BUILD_DIR }}
       env:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == true }}
 
+    - name: Clazy-standalone
+      uses: MinyazevR/clazy-standalone-action@v0.3.3
+      with:
+        checks: 'level0,level1,level2,no-qstring-allocations,no-ctor-missing-parent-argument,no-qproperty-without-notify,no-detaching-member'
+        database: 'build'
+        fail-on-warning: true
+        install-stable: true
+        only-diff: true
+        ignore-dirs: '^(buildScripts|thirdparty|installer)$'
+        root-dir: ${{ github.workspace }}
+        ignore-header-deps: true
+        ignore-external-files: true
+      if: ${{ inputs.lint_clazy }}
+
     - name: Build Installer
       run: |
-        buildScripts/github/build_installer.sh
+         "$GITHUB_WORKSPACE/buildScripts/github/build_installer.sh"
+      working-directory: ${{ env.BUILD_DIR }}
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
@@ -175,16 +203,20 @@ jobs:
         EXECUTOR: ${{ inputs.executor }}
         BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
         PULLREQUESTNUMBER: ${{ github.event.pull_request.number }}
+        NEED_DEPLOY: ${{ inputs.need_deploy }}
         ssh_key: ${{ secrets.DL_PRIVATE_SSH_KEY }}
         username: ${{ secrets.DL_USERNAME }}
         host: ${{ secrets.DL_HOST }}
+        ROOT_DIR: ${{ github.workspace }}
       if: ${{ inputs.build_installer }}
 
     - name: Evaluate artifact name
       run: |
         set -x
-        echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer" >> $GITHUB_ENV
-        env
+        ldd "./bin/trik-studio" | grep -q libasan && SUFFIX="-asan" || SUFFIX=
+        echo "ARTIFACT_INSTALLER_NAME=$(echo "$RUNNER_OS" | awk '{print tolower($0)}')-installer${SUFFIX}" >> $GITHUB_ENV
+      working-directory: ${{ env.BUILD_DIR }}
+      if: ${{ inputs.build_installer }}
 
     - name: Upload installer artifact
       uses: actions/upload-artifact@v4

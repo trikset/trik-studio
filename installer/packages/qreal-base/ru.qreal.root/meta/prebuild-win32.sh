@@ -33,6 +33,7 @@ rsync -a "$BIN_DIR"/trik-studio.exe                                      "$PWD/.
 rsync -a "$INSTALLER_ROOT/platform/$PRODUCT-safe.cmd"                    "$PWD"/../data/
 rsync -a "$INSTALLER_ROOT/platform/$PRODUCT.vbs"                         "$PWD/../data/"
 rsync -a "$INSTALLER_ROOT/images/trik-studio.ico"                        "$PWD/../data/"
+rsync -a "$INSTALLER_ROOT/reinstall-trik-studio.cmd"                     "$PWD/../data/scripts"
 rsync -a "$BIN_DIR"/plugins/tools/updatesChecker.dll                     "$PWD"/../data/plugins/tools/
 rsync -a "$BIN_DIR"/plugins/tools/subprogramsImporterExporter.dll        "$PWD"/../data/plugins/tools/
 

@@ -180,11 +180,11 @@ public:
 	///       failures in common code.
 	virtual utils::TimelineInterface &timeline() = 0;
 
-public slots:
+public Q_SLOTS:
 	/// Called each time when interpretation starts its work. Implementation must reset robot to its default state.
 	virtual void onInterpretationStarted() = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when model is connected to a robot. If there is no need to connect (for example, 2d model), emitted
 	/// immediately after connectToRobot() call.
 	/// @param success - true, if connected successfully.

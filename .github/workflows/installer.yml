@@ -47,7 +47,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt-get update && apt-get install -y --no-install-recommends git-core p7zip-full curl sudo
+        apt-get update && apt-get install -y --no-install-recommends git-core p7zip-full curl sudo locales
         sed -i 's/^# \(WHEEL_USERS.*\)/\1/' /etc/sudoers
       if: contains(inputs.container_name, 'astra')
 
@@ -66,15 +66,18 @@ jobs:
     - name: Install dependencies
       run: HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_AUTO_UPDATE=1 brew install p7zip || brew upgrade p7zip
       if: startsWith(inputs.os, 'mac')
-      
+
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         submodules: recursive
         fetch-depth: 1
 
+    - name: Set locale
+      run: echo "LANG=C.UTF-8" >> $GITHUB_ENV
+
     - name: Download installer artifact
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: ${{ inputs.artifact_name }}
 
@@ -137,7 +140,7 @@ jobs:
     - name: Run minimal Python interpeter tests in direct script mode
       run: |
         PATH="" $SHELL -c 'for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$TWOD_EXEC_NAME" --generate-path "$i".py \
-         --close -s 5 --script-path "$i".py -m script "$i"; done'
+          --generate-mode python --close -s 5 --script-path "$i".py -m script "$i"; done'
       timeout-minutes: 15
       
     - name: Run minimal Javascript interpeter tests as fields in .qrs (For backward compatibility)
@@ -150,4 +153,17 @@ jobs:
       run: |
         PATH="" $SHELL -c 'for i in "$GITHUB_WORKSPACE"/tests/*.qrs; do "$PATCHER_NAME" -s "$i".py "$i" \
          && "$TWOD_EXEC_NAME" --close -s 5 -m script "$i"; done'
+      timeout-minutes: 5
+
+    - name: Run nxt generation tests
+      run: |
+        curl --output nxt_tests.7z "https://dl.trikset.com/edu/.solutions20200701/nxt_generation.7z"
+        7z x nxt_tests.7z || 7za x nxt_tests.7z
+        set -x
+        for i in "$GITHUB_WORKSPACE"/nxt/*.qrs;
+        do
+          "$TWOD_EXEC_NAME" --generate-mode nxt --generate-path "$i".c --only-generate "$i"
+          ls "$GITHUB_WORKSPACE"/nxt/
+          cat "$i".c
+        done
       timeout-minutes: 5

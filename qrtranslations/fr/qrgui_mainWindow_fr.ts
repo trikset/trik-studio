@@ -708,7 +708,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+620"/>
+        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+669"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -717,7 +717,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-425"/>
+        <location line="-471"/>
         <source>Restore default settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -729,7 +729,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+673"/>
+        <location line="+749"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -860,6 +860,11 @@ WARNING: The settings will be restored after application restart</source>
         <location line="+195"/>
         <source>Recent projects</source>
         <translation>Projets récents</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Recent files</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+31"/>

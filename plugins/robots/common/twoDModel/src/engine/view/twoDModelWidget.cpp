@@ -143,9 +143,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 
 	mUi->horizontalRuler->setScene(mUi->graphicsView);
 	mUi->verticalRuler->setScene(mUi->graphicsView);
-	mUi->horizontalRuler->setPixelsInCm(pixelsInCm);
-	mUi->verticalRuler->setPixelsInCm(pixelsInCm);
 
+	auto pixelsInCm = mModel.settings().pixelsInCm();
 	/// @todo: make some values editable
 	mUi->detailsTab->setParamsSettings(mUi->physicsParamsFrame);
 	mUi->wheelDiamInCm->setValue(robotWheelDiameterInCm);
@@ -157,7 +156,7 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->robotMassInGr->setValue(robotMass);
 	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
 
-	connect(&mModel, &model::Model::robotAdded, [this](){
+	connect(&mModel, &model::Model::robotAdded, this, [this, pixelsInCm](){
 		auto robotModels = mModel.robotModels();
 		auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
 				: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
@@ -222,6 +221,12 @@ void TwoDModelWidget::initWidget()
 		mUi->verticalRuler->setVisible(gridVisible);
 	};
 	toggleRulers();
+
+	mUi->speedUpButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_plus.svg"));
+	mUi->speedDownButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_minus.svg"));
+	mUi->initialStateButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_robot_back.png"));
+	mUi->trainingModeButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_training.svg"));
+	mUi->toggleDetailsButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_left.png"));
 
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, &*mScene, [&]() { mScene->update(); });
@@ -348,6 +353,8 @@ void TwoDModelWidget::connectUiButtons()
 
 	connect(mRobotItemPopup, &RobotItemPopup::restoreRobotPositionClicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mRobotItemPopup, &RobotItemPopup::setRobotPositionClicked, this, &TwoDModelWidget::setStartMarker);
+
+	mUi->initialStateButton->setShortcut(Qt::CTRL + Qt::Key_R);
 	connect(mUi->initialStateButton, &QAbstractButton::clicked, this, &TwoDModelWidget::returnToStartMarker);
 	connect(mUi->toggleDetailsButton, &QAbstractButton::clicked, this, &TwoDModelWidget::toggleDetailsVisibility);
 
@@ -491,7 +498,7 @@ void TwoDModelWidget::saveWorldModel()
 		return;
 	}
 
-	if (!saveFileName.toLower().endsWith(".xml")) {
+	if(!saveFileName.endsWith(".xml", Qt::CaseInsensitive)) {
 		saveFileName += ".xml";
 	}
 
@@ -516,6 +523,7 @@ void TwoDModelWidget::loadWorldModel()
 		mController->execute(command);
 	}
 }
+
 void TwoDModelWidget::loadWorldModelWithoutRobot()
 {
 	const QString loadFileName = QRealFileDialog::getOpenFileName("Open2DModelWidget", this
@@ -539,19 +547,20 @@ void TwoDModelWidget::loadWorldModelWithoutRobot()
 		mController->execute(command);
 	}
 }
+
 bool TwoDModelWidget::isColorItem(AbstractItem * const item) const
 {
-	return dynamic_cast<items::ColorFieldItem *>(item)
-			&& !dynamic_cast<items::WallItem *>(item);
+	return qobject_cast<items::ColorFieldItem *>(item)
+			&& !qobject_cast<items::WallItem *>(item);
 }
 
 QList<AbstractItem *> TwoDModelWidget::selectedColorItems() const
 {
 	QList<AbstractItem *> resList;
-	for (QGraphicsItem * const graphicsItem : mScene->selectedItems()) {
+	for (auto &&graphicsItem : mScene->selectedItems()) {
 		AbstractItem *item = dynamic_cast<AbstractItem*>(graphicsItem);
-		if (item && (isColorItem(item) || dynamic_cast<RobotItem *>(item))) {
-			resList << item;
+		if (item && (isColorItem(item) || qobject_cast<RobotItem *>(item))) {
+			resList << item; // clazy:exclude=reserve-candidates
 		}
 	}
 
@@ -637,17 +646,20 @@ engine::TwoDModelDisplayWidget *TwoDModelWidget::display()
 
 void TwoDModelWidget::setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible)
 {
-	RobotModel *robotModel = mModel.robotModels()[0];
+	auto robotModels = mModel.robotModels();
 
-	if (mScene->robot(*robotModel)->sensors()[port]) {
-		mScene->robot(*robotModel)->sensors()[port]->setVisible(isVisible);
+	if (robotModels.size() > 0) {
+		auto robotModel = robotModels[0];
+		if (mScene->robot(*robotModel)->sensors()[port]) {
+			mScene->robot(*robotModel)->sensors()[port]->setVisible(isVisible);
+		}
 	}
 }
 
 void TwoDModelWidget::closeEvent(QCloseEvent *event)
 {
 	Q_UNUSED(event)
-	emit widgetClosed();
+	Q_EMIT widgetClosed();
 }
 
 void TwoDModelWidget::focusInEvent(QFocusEvent *event)
@@ -658,17 +670,21 @@ void TwoDModelWidget::focusInEvent(QFocusEvent *event)
 
 SensorItem *TwoDModelWidget::sensorItem(const kitBase::robotModel::PortInfo &port)
 {
-	return mScene->robot(*mModel.robotModels()[0])->sensors().value(port);
+	auto robotModels = mModel.robotModels();
+	if (robotModels.size() > 0) {
+		return mScene->robot(*robotModels[0])->sensors().value(port);
+	}
+	return nullptr;
 }
 
 void TwoDModelWidget::saveWorldModelToRepo()
 {
-	emit mModel.modelChanged(generateWorldModelXml());
+	Q_EMIT mModel.modelChanged(generateWorldModelXml());
 }
 
 void TwoDModelWidget::saveBlobsToRepo()
 {
-	emit mModel.blobsChanged(generateBlobsXml());
+	Q_EMIT mModel.blobsChanged(generateBlobsXml());
 }
 
 QDomDocument TwoDModelWidget::generateWorldModelXml() const
@@ -971,16 +987,48 @@ void TwoDModelWidget::initRunStopButtons()
 	connect(mUi->stopButton, &QPushButton::clicked, this, &TwoDModelWidget::stopButtonPressed);
 }
 
-bool TwoDModelWidget::setSelectedPort(QComboBox * const comboBox, const PortInfo &port)
+template<class T>
+bool TwoDModelWidget::setSelectedValue(QComboBox * const comboBox, const T &port)
 {
 	for (int i = 0; i < comboBox->count(); ++i) {
-		if (comboBox->itemData(i).value<PortInfo>() == port) {
+		if (comboBox->itemData(i).value<T>() == port) {
 			comboBox->setCurrentIndex(i);
 			return true;
 		}
 	}
 
 	return false;
+}
+
+void TwoDModelWidget::connectMetricComboBoxes()
+{
+	connect(mModel.settings().sizeUnit(), &SizeUnit::sizeUnitChanged
+		, this, [=](SizeUnit::Unit unit) {
+		setSelectedValue(mUi->metricComboBox, unit);
+	});
+
+	connect(mUi->metricComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
+		, this, [this](int index) {
+		const auto unitValue = mUi->metricComboBox->itemData(index)
+					.value<SizeUnit::Unit>();
+		const auto sizeUnit = mModel.settings().sizeUnit();
+		sizeUnit->setUnit(unitValue);
+		const auto realValue = sizeUnit->countFactor();
+		mUi->horizontalRuler->setMetricFactor(realValue);
+		mUi->verticalRuler->setMetricFactor(realValue);
+		Q_EMIT mUi->gridParametersBox->parametersChanged();
+	});
+
+	const auto sizeUnit = mModel.settings().sizeUnit();
+	const auto availableUnits = sizeUnit->currentValues();
+	for (auto currentUnit = availableUnits.begin();
+	     currentUnit != availableUnits.end(); currentUnit++) {
+		mUi->metricComboBox->addItem(currentUnit->first,
+			QVariant::fromValue(currentUnit->second));
+	}
+
+	setSelectedValue(mUi->metricComboBox, sizeUnit->defaultUnit());
+
 }
 
 void TwoDModelWidget::updateWheelComboBoxes()
@@ -1003,8 +1051,8 @@ void TwoDModelWidget::updateWheelComboBoxes()
 	mUi->rightWheelComboBox->addItem(tr("No wheel"), QVariant::fromValue(PortInfo("None", output)));
 #endif
 
-	for (const PortInfo &port : mSelectedRobotItem->robotModel().info().availablePorts()) {
-		for (const DeviceInfo &device : mSelectedRobotItem->robotModel().info().allowedDevices(port)) {
+	for (auto &&port : mSelectedRobotItem->robotModel().info().availablePorts()) {
+		for (auto &&device : mSelectedRobotItem->robotModel().info().allowedDevices(port)) {
 			if (device.isA<Motor>()) {
 				const QString item = tr("%1 (port %2)").arg(device.friendlyName(), port.userFriendlyName());
 				mUi->leftWheelComboBox->addItem(item, QVariant::fromValue(port));
@@ -1013,8 +1061,8 @@ void TwoDModelWidget::updateWheelComboBoxes()
 		}
 	}
 
-	if (!setSelectedPort(mUi->leftWheelComboBox, leftWheelOldPort)) {
-		if (!setSelectedPort(mUi->leftWheelComboBox
+	if (!setSelectedValue(mUi->leftWheelComboBox, leftWheelOldPort)) {
+		if (!setSelectedValue(mUi->leftWheelComboBox
 				, mSelectedRobotItem->robotModel().info().defaultLeftWheelPort())) {
 			qWarning() << "Incorrect defaultLeftWheelPort set in configurer:"
 					<< mSelectedRobotItem->robotModel().info().defaultLeftWheelPort().toString();
@@ -1025,10 +1073,9 @@ void TwoDModelWidget::updateWheelComboBoxes()
 		}
 	}
 
-	if (!setSelectedPort(mUi->rightWheelComboBox, rightWheelOldPort)) {
-		if (!setSelectedPort(mUi->rightWheelComboBox
+	if (!setSelectedValue(mUi->rightWheelComboBox, rightWheelOldPort)) {
+		if (!setSelectedValue(mUi->rightWheelComboBox
 				, mSelectedRobotItem->robotModel().info().defaultRightWheelPort())) {
-
 			qWarning() << "Incorrect defaultRightWheelPort set in configurer:"
 					<< mSelectedRobotItem->robotModel().info().defaultRightWheelPort().toString();
 
@@ -1044,7 +1091,10 @@ void TwoDModelWidget::updateWheelComboBoxes()
 void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 {
 	if (mScene->oneRobot()) {
-		setSelectedRobotItem(mScene->robot(*mModel.robotModels()[0]));
+		auto robotModels = mModel.robotModels();
+		if (robotModels.size() > 0) {
+			setSelectedRobotItem(mScene->robot(*robotModels[0]));
+		}
 	} else {
 		if (mSelectedRobotItem) {
 			unsetSelectedRobotItem();
@@ -1071,10 +1121,16 @@ void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 				, this, [=](RobotModel::WheelEnum wheel, const PortInfo &port)
 		{
 			if (port.isValid()) {
-				setSelectedPort(wheel == RobotModel::WheelEnum::left
+				setSelectedValue(wheel == RobotModel::WheelEnum::left
 						? mUi->leftWheelComboBox : mUi->rightWheelComboBox, port);
 			}
 		});
+	}
+}
+
+namespace {
+	static bool isTrikModel(const QString &name) {
+		return name.contains("TrikV62");
 	}
 }
 
@@ -1087,6 +1143,16 @@ void TwoDModelWidget::setSelectedRobotItem(RobotItem *robotItem)
 
 	setPortsGroupBoxAndWheelComboBoxes();
 	updateWheelComboBoxes();
+
+	if (isTrikModel(mSelectedRobotItem->robotModel().info().name())) {
+		mUi->detailsTab->setMetricSettings(mUi->metricFrame);
+		connectMetricComboBoxes();
+		mUi->pixelsInCmDoubleSpinBox->setValue(
+		                        mModel.settings().pixelsInCm());
+	} else {
+		mUi->detailsTab->setMetricSectionsVisible(false);
+		mUi->metricFrame->hide();
+	}
 
 	mUi->detailsTab->setDisplay(nullptr);
 	mDisplay = mSelectedRobotItem->robotModel().info().displayWidget();

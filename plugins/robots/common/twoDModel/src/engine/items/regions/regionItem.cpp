@@ -18,19 +18,24 @@
 #include <QtXml/QDomElement>
 #include <QtGui/QPainter>
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include <twoDModel/engine/model/metricCoordinateSystem.h>
+#include <cmath>
 
 const QColor defaultColor = QColor(135, 206, 250);
 const QSizeF defaultSize = QSizeF(200, 200);
 
 using namespace twoDModel::items;
 
-RegionItem::RegionItem(QGraphicsItem *parent)
+RegionItem::RegionItem(twoDModel::model::MetricCoordinateSystem *metricSystem,
+			QGraphicsItem *parent)
 	: QGraphicsObject(parent)
 	, mTextItem(new QGraphicsTextItem(this))
 	, mId(QUuid::createUuid().toString())
 	, mFilled(true)
 	, mColor(defaultColor)
 	, mSize(defaultSize)
+	, mMetricSystem(metricSystem)
+
 {
 	setZValue(graphicsUtils::AbstractItem::ZValue::Region);
 }
@@ -72,7 +77,7 @@ QPointF RegionItem::textPosition() const
 	return mTextItem->pos();
 }
 
-void RegionItem::setTextPosition(const QPointF &pos)
+void RegionItem::setTextPosition(QPointF pos)
 {
 	mTextItem->setPos(pos);
 }
@@ -88,12 +93,12 @@ void RegionItem::setColor(const QColor &color)
 	setText(text());  // To update text color
 }
 
-void RegionItem::setSize(const QSizeF &size)
+void RegionItem::setSize(QSizeF size)
 {
 	mSize = size;
 }
 
-bool RegionItem::containsPoint(const QPointF &point) const
+bool RegionItem::containsPoint(QPointF point) const
 {
 	return QGraphicsItem::contains(mapFromScene(point));
 }
@@ -119,15 +124,21 @@ void RegionItem::serialize(QDomElement &element) const
 
 	if (!text().isEmpty()) {
 		element.setAttribute("text", text());
-		element.setAttribute("textX", QString::number(textPosition().x()));
-		element.setAttribute("textY", QString::number(textPosition().y()));
+		element.setAttribute("textX",
+		                     QString::number(mMetricSystem->toUnit(textPosition().x())));
+		element.setAttribute("textY",
+		                     QString::number(mMetricSystem->toUnit(textPosition().y())));
 	}
 
 	QSizeF const size = boundingRect().size();
-	element.setAttribute("height", QString::number(size.height()));
-	element.setAttribute("width", QString::number(size.width()));
-	element.setAttribute("x", QString::number(pos().x()));
-	element.setAttribute("y", QString::number(pos().y()));
+	element.setAttribute("height",
+	                     QString::number(mMetricSystem->toUnit(size.height())));
+	element.setAttribute("width",
+	                     QString::number(mMetricSystem->toUnit(size.width())));
+	element.setAttribute("x",
+	                     QString::number(mMetricSystem->toUnit(pos().x())));
+	element.setAttribute("y",
+	                     QString::number(mMetricSystem->toUnit(pos().y())));
 
 	element.setAttribute("visible", isVisible() ? "true" : "false");
 
@@ -172,7 +183,8 @@ void RegionItem::deserialize(const QDomElement &element)
 		const qreal height = heightText.toDouble(&heightOk);
 		const qreal width = widthText.toDouble(&widthOk);
 		if (heightOk && widthOk) {
-			setSize(QSizeF(width, height));
+			setSize(QSizeF(mMetricSystem->toPx(width),
+			               mMetricSystem->toPx(height)));
 		} /// @todo: else report error
 	}
 }
@@ -197,7 +209,7 @@ QPointF RegionItem::deserializePoint(const QDomElement &element, const QString &
 	const qreal x = textX.toDouble(&xOk);
 	const qreal y = textY.toDouble(&yOk);
 	if (xOk && yOk) {
-		return QPointF(x, y);
+		return mMetricSystem->toPx({x, y});
 	} /// @todo: else report error
 
 	return QPointF();

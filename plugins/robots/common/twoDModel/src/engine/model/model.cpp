@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "twoDModel/engine/model/model.h"
-
+#include "twoDModel/engine/model/metricCoordinateSystem.h"
 #include <qrkernel/settingsManager.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
@@ -22,6 +22,7 @@
 #include "src/engine/constraints/constraintsChecker.h"
 #include "src/robotModel/nullTwoDRobotModel.h"
 #include "src/engine/items/startPosition.h"
+#include "physics/physicsEngineFactory.h"
 #include "physics/simplePhysicsEngine.h"
 #include "physics/box2DPhysicsEngine.h"
 
@@ -29,15 +30,20 @@ using namespace twoDModel::model;
 
 static auto XML_VERSION = "20190819";
 
-Model::Model(QObject *parent)
+Model::Model(physics::PhysicsEngineFactory *engineFactory,
+		QObject *parent)
 	: QObject(parent)
+	, mSettings(new Settings(this))
+	, mMetricCoordinateSystem(new MetricCoordinateSystem(mSettings->sizeUnit(), this))
+	, mWorldModel(mSettings.data(), mMetricCoordinateSystem.data())
 	, mChecker(nullptr)
 	, mErrorReporter(nullptr)
+	, mEngineFactory(engineFactory)
 	, mRealisticPhysicsEngine(nullptr)
 	, mSimplePhysicsEngine(nullptr)
 {
 	initPhysics();
-	connect(&mSettings, &Settings::physicsChanged, this, &Model::resetPhysics);
+	connect(mSettings.data(), &Settings::physicsChanged, this, &Model::resetPhysics);
 	resetPhysics();
 }
 
@@ -106,7 +112,12 @@ QList<RobotModel *> Model::robotModels() const
 
 Settings &Model::settings()
 {
-	return mSettings;
+	return *mSettings;
+}
+
+MetricCoordinateSystem &Model::coordinateMetricSystem()
+{
+	return *mMetricCoordinateSystem;
 }
 
 qReal::ErrorReporterInterface *Model::errorReporter()
@@ -137,7 +148,7 @@ QDomDocument Model::serialize() const
 	}
 	root.appendChild(robots);
 
-	mSettings.serialize(root);
+	mSettings->serialize(root);
 	mChecker->serializeConstraints(root);
 
 	return save;
@@ -146,7 +157,7 @@ QDomDocument Model::serialize() const
 void Model::deserialize(const QDomDocument &model)
 {
 	const auto &settings = model.documentElement().firstChildElement("settings");
-	mSettings.deserialize(settings);
+	mSettings->deserialize(settings);
 
 	if (mChecker) {
 		const auto &constraints = model.documentElement().firstChildElement("constraints");
@@ -171,14 +182,15 @@ void Model::deserialize(const QDomDocument &model)
 	}
 }
 
-void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF &pos)
+void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 {
 	if (mRobotModel) {
 		mErrorReporter->addCritical(tr("This robot model already exists"));
 		return;
 	}
 
-	mRobotModel = new RobotModel(robotModel, mSettings, this);
+	mRobotModel = new RobotModel(robotModel, mSettings.data(),
+				     mMetricCoordinateSystem.data(), this);
 	mRobotModel->setPosition(pos);
 
 	connect(&mTimeline, &Timeline::started, mRobotModel, &RobotModel::reinit);
@@ -187,7 +199,7 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, const QPointF 
 	connect(&mTimeline, &Timeline::tick, mRobotModel, &RobotModel::recalculateParams);
 	connect(&mTimeline, &Timeline::nextFrame, mRobotModel, &RobotModel::nextFragment);
 
-	mRobotModel->setPhysicalEngine(mSettings.realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
+	mRobotModel->setPhysicalEngine(mSettings->realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
 
 	mWorldModel.setRobotModel(mRobotModel);
 
@@ -224,7 +236,7 @@ void Model::setConstraintsEnabled(bool enabled)
 
 void Model::resetPhysics()
 {
-	auto engine = mSettings.realisticPhysics() ? mRealisticPhysicsEngine : mSimplePhysicsEngine;
+	auto engine = mSettings->realisticPhysics() ? mRealisticPhysicsEngine : mSimplePhysicsEngine;
 	if (mRobotModel) mRobotModel->setPhysicalEngine(*engine);
 
 	engine->wakeUp();
@@ -232,8 +244,12 @@ void Model::resetPhysics()
 
 void Model::initPhysics()
 {
-	mRealisticPhysicsEngine = new physics::Box2DPhysicsEngine(mWorldModel, robotModels());
-	mSimplePhysicsEngine = new physics::SimplePhysicsEngine(mWorldModel, robotModels());
+	mRealisticPhysicsEngine
+	                = mEngineFactory->create(true)(mWorldModel, robotModels());
+
+	mSimplePhysicsEngine
+	                = mEngineFactory->create(false)(mWorldModel, robotModels());
+
 	connect(this, &model::Model::robotAdded, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 	connect(this, &model::Model::robotAdded, mSimplePhysicsEngine, &physics::PhysicsEngineBase::addRobot);
@@ -247,7 +263,7 @@ void Model::initPhysics()
 
 void Model::recalculatePhysicsParams()
 {
-	if (mSettings.realisticPhysics()) {
+	if (mSettings->realisticPhysics()) {
 		mRealisticPhysicsEngine->recalculateParameters(Timeline::timeInterval);
 	} else {
 		mSimplePhysicsEngine->recalculateParameters(Timeline::timeInterval);

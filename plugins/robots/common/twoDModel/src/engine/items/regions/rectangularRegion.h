@@ -24,7 +24,8 @@ class RectangularRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit RectangularRegion(QGraphicsItem *parent = nullptr);
+	explicit RectangularRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+	                           QGraphicsItem *parent = nullptr);
 
 protected:
 	QString regionType() const override;

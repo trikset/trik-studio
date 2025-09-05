@@ -195,6 +195,7 @@ public slots:
 	void closeStartTab();
 	void closeAllTabs();
 	void refreshRecentProjectsList(const QString &fileName);
+	void refreshRecentFilesList(const QString &fileName);
 	void createDiagram(const QString &idString);
 	/// Creates project with specified root diagram
 	bool createProject(const QString &diagramIdString);
@@ -230,6 +231,7 @@ private slots:
 	void hideBottomDocks();
 
 	void openRecentProjectsMenu();
+	void openRecentFilesMenu();
 
 	void tryToSave();
 	void saveDiagramAsAPicture();
@@ -305,6 +307,10 @@ private:
 	void selectItemInLogicalModel(const Id &id);
 	void switchToTab(int index);
 	int getTabIndex(const QModelIndex &index);
+
+	bool windowsDarkThemeAvailiable();
+	bool windowsIsInDarkTheme();
+	void initPalette();
 
 	void initGridProperties();
 	void clickErrorListWidget();
@@ -395,7 +401,9 @@ private:
 	qReal::gui::PreferencesDialog *mPreferencesDialog; //Has ownership
 
 	int mRecentProjectsLimit {};
+	int mRecentFilesLimit {};
 	QMenu *mRecentProjectsMenu {}; // Has ownership
+	QMenu *mRecentFilesMenu {}; // Has ownership
 
 	QScopedPointer<FindManager> mFindHelper;
 	StartWidget *mStartWidget {}; // Has ownership

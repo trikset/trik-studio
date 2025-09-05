@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>nxt::communication::BluetoothRobotCommunicationThread</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/nxtKit/src/communication/bluetoothRobotCommunicationThread.cpp" line="+86"/>
+        <source>Cannot open port </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>nxt::communication::NxtUsbDriverInstaller</name>
     <message>
         <location filename="../../../../plugins/robots/common/nxtKit/src/communication/nxtUsbDriverInstaller.cpp" line="+54"/>

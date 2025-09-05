@@ -1,35 +1,39 @@
 [submodule "plugins/robots/thirdparty/trikRuntime"]
 	path = plugins/robots/thirdparty/trikRuntime/trikRuntime
 	url = https://github.com/trikset/trikRuntime
+	branch = master
 [submodule "qrtest/thirdparty/googletest/googletest"]
 	path = qrtest/thirdparty/googletest/googletest
 	url = https://github.com/google/googletest
+	branch = main
 [submodule "qrgui/thirdparty/qt-solutions"]
 	path = qrgui/thirdparty/qt-solutions
 	url = https://github.com/trikset/qt-solutions
+	branch = master
 [submodule "thirdparty/gamepad/gamepad"]
 	path = thirdparty/gamepad/gamepad
 	url = https://github.com/trikset/trik-desktop-gamepad
+	branch = master
 [submodule "plugins/robots/thirdparty/hidapi"]
 	path = plugins/robots/thirdparty/hidapi
 	url = https://github.com/libusb/hidapi
 [submodule "thirdparty/quazip/quazip"]
 	path = thirdparty/quazip/quazip
 	url = https://github.com/stachenov/quazip.git
+	branch = master
 [submodule "plugins/robots/thirdparty/Box2D/Box2D"]
 	path = plugins/robots/thirdparty/Box2D/Box2D
-	url = https://github.com/iakov/Box2D
+	url = https://github.com/erincatto/box2d
 	branch = "trik-studio"
 [submodule "thirdparty/qslog/qslog"]
 	path = thirdparty/qslog/qslog
-	url = https://bitbucket.org/codeimproved/qslog.git
+	url = https://github.com/trikset/trik-qslog.git
+	branch = codeimproved-master
 [submodule "installer/nxt-tools"]
 	path = installer/nxt-tools
 	url = https://github.com/trikset/nxt-tools.git
-	branch = main
+	branch = master
 [submodule "trik-checkapp"]
 	path = thirdparty/checkapp/checkapp
 	url = https://github.com/trikset/trik-checkapp
-[submodule "plugins/robots/thirdparty/qextserialport/qextserialport"]
-	path = plugins/robots/thirdparty/qextserialport/qextserialport
-	url = https://github.com/qextserialport/qextserialport
+	branch = master

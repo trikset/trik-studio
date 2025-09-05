@@ -17,7 +17,8 @@ case "$RUNNER_OS" in
 esac
 df -h .
 
-NEED_DEPLOY=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
+IS_ORIGIN_MASTER=$([[ "$GITHUB_REPOSITORY" == "trikset/trik-studio" && "${PULLREQUESTNUMBER:-false}" == "false" ]] && echo true || echo false )
+NEED_DEPLOY=$([[ "$IS_ORIGIN_MASTER" == "true" && "$NEED_DEPLOY" == "true" ]] && echo true || echo false )
 
 if "$NEED_DEPLOY" ; then
     $EXECUTOR bash -c "mkdir -p $HOME/.ssh && install -m 600 /dev/null $HOME/.ssh/id_rsa && echo \"$ssh_key\" > $HOME/.ssh/id_rsa"
@@ -32,10 +33,14 @@ if [[ "$RUNNER_OS" == Linux ]] ; then
 fi
 
 echo Start build installer
-$EXECUTOR bash -c "installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
+$EXECUTOR bash -c "$ROOT_DIR/installer/build-trik-studio.sh $QTBIN $QTIFWBIN ."
+
+pushd "$ROOT_DIR"
 
 INSTALLER_NAME=$(find installer -name "trik-studio*installer*" -print -quit | grep . ) 
 
 if "$NEED_DEPLOY" ; then
     $EXECUTOR bash -c "rsync -v --rsh='ssh -o StrictHostKeyChecking=no -vvv -i $HOME/.ssh/id_rsa' $INSTALLER_NAME $username@$host:~/dl/ts/fresh/installer/$TSNAME"
 fi
+
+popd

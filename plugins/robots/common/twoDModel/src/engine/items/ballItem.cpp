@@ -22,9 +22,11 @@
 
 using namespace twoDModel::items;
 
-BallItem::BallItem(const QPointF &position)
+BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		QPointF position)
 	: mSvgRenderer(new QSvgRenderer)
 {
+	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
 	setPos(position);
 	setZValue(ZValue::Moveable);
@@ -82,11 +84,16 @@ void BallItem::savePos()
 QDomElement BallItem::serialize(QDomElement &element) const
 {
 	QDomElement ballNode = AbstractItem::serialize(element);
+	auto *coordSystem = coordinateSystem();
 	ballNode.setTagName("ball");
-	ballNode.setAttribute("x", QString::number(x1() + scenePos().x()));
-	ballNode.setAttribute("y", QString::number(y1() + scenePos().y()));
-	ballNode.setAttribute("markerX", QString::number(x1() + mStartPosition.x()));
-	ballNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
+	ballNode.setAttribute("x",
+	                      QString::number(coordSystem->toUnit(x1() + scenePos().x())));
+	ballNode.setAttribute("y",
+	                      QString::number(coordSystem->toUnit(y1() + scenePos().y())));
+	ballNode.setAttribute("markerX",
+	                      QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
+	ballNode.setAttribute("markerY",
+	                      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	ballNode.setAttribute("rotation", QString::number(rotation()));
 	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
 	return ballNode;
@@ -95,11 +102,11 @@ QDomElement BallItem::serialize(QDomElement &element) const
 void BallItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-
-	qreal x = element.attribute("x", "0").toDouble();
-	qreal y = element.attribute("y", "0").toDouble();
-	qreal markerX = element.attribute("markerX", "0").toDouble();
-	qreal markerY = element.attribute("markerY", "0").toDouble();
+	auto *coordSystem = coordinateSystem();
+	qreal x = coordSystem->toPx(element.attribute("x", "0").toDouble());
+	qreal y = coordSystem->toPx(element.attribute("y", "0").toDouble());
+	qreal markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
+	qreal markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
 	qreal rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 

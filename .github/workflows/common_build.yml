@@ -40,7 +40,7 @@ jobs:
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: ubuntu-latest
-      lint: true
+      lint_vera: true
       build: false
       build_installer: false
 
@@ -93,6 +93,7 @@ jobs:
       build_installer: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=use_system_qscintilla2 CONFIG+=use_system_quazip"
       trik_python3_version_minor: 10
+      lint_clazy: true
 
   build-ubuntu-debug-tests:
     needs: lint
@@ -113,6 +114,7 @@ jobs:
       container_name: alt:latest
       build: true
       build_installer: false
+      trik_python3_version_minor: 12
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers"
       tests: true
 
@@ -139,7 +141,8 @@ jobs:
       os: ubuntu-latest
       container_name: rockylinux:8
       build: true
-      build_installer: false
+      build_installer: true
+      need_deploy: false
       qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=sanitizer CONFIG+=sanitize-undefined CONFIG+=sanitize_address"
       gcc_version: 13
       trik_qt_version: 5.15
@@ -192,7 +195,7 @@ jobs:
     uses: ./.github/workflows/installer.yml
     with:
       os: ubuntu-latest
-      container_name: registry.astralinux.ru/library/astra/ubi18:latest
+      container_name: registry.astralinux.ru/library/astra/ubi18-python311:1.8.1
       artifact_name: linux-installer
 
   install-archlinux-installer:

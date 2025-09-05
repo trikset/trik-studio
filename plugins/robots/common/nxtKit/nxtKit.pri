@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-QT += widgets
+QT += widgets serialport
 
 includes(plugins/robots/common/nxtKit \
 		plugins/robots/common/kitBase \
@@ -22,7 +22,7 @@ includes(plugins/robots/common/nxtKit \
 )
 
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
-                robots-utils robots-kit-base qextserialport )
+                robots-utils robots-kit-base)
 
 PKGCONFIG *= libusb-1.0
 CONFIG += link_pkgconfig

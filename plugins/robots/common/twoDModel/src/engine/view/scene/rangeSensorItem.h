@@ -31,11 +31,12 @@ class RangeSensorItem : public SensorItem
 
 public:
 	RangeSensorItem(const model::WorldModel &worldModel
+	                , graphicsUtils::AbstractCoordinateSystem *metricSystem
 			, model::SensorsConfiguration &configuration
 			, const kitBase::robotModel::PortInfo &port
 			, QPair<qreal, int> physicalParams
 			, const QString &pathToImage
-			, const QRect &imageSize
+			, QRect imageSize
 			);
 
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *style, QWidget *widget) override;

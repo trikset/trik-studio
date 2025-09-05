@@ -40,8 +40,8 @@ public slots:
 	void setOrientation(Qt::Orientation orientation);
 
 	/// Reconfigures ruller to calculate distances in other metrics. The distance between grid lines in pixels
-	/// stays the same, but values in centimeters modified.
-	void setPixelsInCm(qreal pixelsInCm);
+	/// stays the same, but values in centimeters modified
+	void setMetricFactor(const qreal factor);
 
 	/// Configures this ruller to work with the given graphics view.
 	void setScene(QGraphicsView *scene);
@@ -49,15 +49,14 @@ public slots:
 private:
 	void paintEvent(QPaintEvent *event) override;
 
-	qreal relevantCoordinate(const QPointF &point) const;
-	qreal relevantDimension(const QSizeF &size) const;
-	qreal irrelevantDimension(const QSizeF &size) const;
+	qreal relevantCoordinate(QPointF point) const;
+	qreal relevantDimension(QSizeF size) const;
+	qreal irrelevantDimension(QSizeF size) const;
 	QPointF makePoint(qreal relevantCoordinate, qreal irrelevantCoordinate) const;
-	QPointF drawingPoint(qreal relevantCoordinate, const QSizeF &textSize) const;
+	QPointF drawingPoint(qreal relevantCoordinate, QSizeF textSize) const;
 	QRectF textBoundingRect(const QString &text) const;
-
 	Qt::Orientation mOrientation;
-	qreal mPixelsInCm;
+	qreal mMetricFactor;
 	QGraphicsView *mView {};  // Doesn`t take owership
 	QFont mFont;
 };

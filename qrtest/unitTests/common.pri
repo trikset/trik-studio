@@ -14,6 +14,8 @@
 
 isEmpty(TEMPLATE): TEMPLATE = app
 
+CONFIG += force_asserts # force Q_ASSERT in tests
+
 include(../../global.pri)
 
 # after global.pri sets DESTDIR

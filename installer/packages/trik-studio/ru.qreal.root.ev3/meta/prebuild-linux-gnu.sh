@@ -12,7 +12,6 @@ rsync -a "$BIN_DIR"/plugins/tools/kitPlugins/librobots-ev3-interpreter.so   "$PW
 rsync -a "$BIN_DIR"/plugins/tools/kitPlugins/librobots-ev3-rbf-generator.so "$PWD"/../data/lib/plugins/tools/kitPlugins/
 rsync -a "$BIN_DIR"/librobots-ev3-kit.so*                                   "$PWD"/../data/lib
 rsync -a "$BIN_DIR"/librobots-ev3-generator-base.so*                        "$PWD"/../data/lib
-rsync -a "$BIN_DIR"/libqextserialport.so*                                   "$PWD"/../data/lib
 
 cp -L  "$(pkg-config --variable=libdir libusb-1.0)/libusb-1.0.so"         "$PWD"/../data/lib/libusb-1.0.so
 

@@ -42,11 +42,11 @@ public:
 
 	void clearDevice(const PortInfo &port) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when all pending devices are configured (or failed to configure).
 	void allDevicesConfigured();
 
-private slots:
+private Q_SLOTS:
 	/// Called when some device is finished configuring.
 	/// @param success - true if configuration was successful.
 	void onDeviceConfigured(bool success);

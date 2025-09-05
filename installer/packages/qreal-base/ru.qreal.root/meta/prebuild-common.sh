@@ -22,4 +22,8 @@ mkdir -p "$PWD"/../data/platforms
 mkdir -p "$PWD"/../data/imageformats
 mkdir -p "$PWD"/../data/iconengines
 mkdir -p "$PWD"/../data/plugins/tools
+mkdir -p "$PWD"/../data/scripts/
+
 rsync -a "$BIN_DIR"/changelog.txt                                            "$PWD"/../data
+rsync -a "$INSTALLER_ROOT/trik_studio_installscript.qs"                      "$PWD/../data/scripts"
+rsync -a "$INSTALLER_ROOT/trik_studio_uninstallscript.qs"                    "$PWD/../data/scripts"

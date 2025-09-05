@@ -605,7 +605,11 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 		return mValues.sum(leftValue, rightValue);
 	}
 
-	if (operation.startsWith("difference")) {
+	if (operation == "mul") {
+		return mValues.mul(leftValue, rightValue);
+	}
+
+	if (operation == "difference") {
 		return mValues.difference(leftValue, rightValue);
 	}
 
@@ -621,7 +625,7 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 		return mValues.distance(leftValue, rightValue);
 	}
 
-	return mValues.sum(leftValue, rightValue);
+	qFatal("Unknown operator: %s\n", qPrintable(operation));
 }
 
 Trigger ConstraintsParser::parseEventSetDropTag(const QDomElement &element)
@@ -687,7 +691,7 @@ Value ConstraintsParser::parseValue(const QDomElement &element)
 		return parseUnaryValueTag(element);
 	}
 
-	if (tag == "sum" || tag == "difference" || tag == "min" || tag == "max" || tag == "distance") {
+	if (tag == "mul" || tag == "sum" || tag == "difference" || tag == "min" || tag == "max" || tag == "distance") {
 		return parseBinaryValueTag(element);
 	}
 

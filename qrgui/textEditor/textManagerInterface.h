@@ -56,6 +56,7 @@ public:
 
 signals:
 	void textChanged(text::QScintillaTextEdit *editor, bool changed);
+	void needRefreshRecentFileList(const QString &fileName);
 };
 
 }

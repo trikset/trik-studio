@@ -129,10 +129,13 @@ int main(int argc, char *argv[])
 					      ", to save the generated JavaScript or Python code.")
 				, "path-to-save-code", QString());
 	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
-					      , "generate-mode", "python");
+					      , "generate-mode", "javascript");
 	QCommandLineOption directScriptExecutionPathOption("script-path"
 						, QObject::tr("The path to the Python or JavaScript file that will be used for interpretation.")
 						, "script-path", QString());
+	QCommandLineOption onlyGenerateOption("only-generate"
+						, QObject::tr("Do not run the interpretation in any mode, "\
+							      "this is a parameter that is only used to generate a file."));
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
@@ -145,6 +148,7 @@ int main(int argc, char *argv[])
 	parser.addOption(generatePathOption);
 	parser.addOption(generateModeOption);
 	parser.addOption(directScriptExecutionPathOption);
+	parser.addOption(onlyGenerateOption);
 	parser.process(*app);
 	const QStringList positionalArgs = parser.positionalArguments();
 	if (positionalArgs.size() != 1) {
@@ -162,12 +166,14 @@ int main(int argc, char *argv[])
 	const QString generatePath = parser.value(generatePathOption);
 	const QString generateMode = parser.value(generateModeOption);
 	const QString scriptFilePath = parser.value(directScriptExecutionPathOption);
+	const bool onlyGenerate = parser.isSet(onlyGenerateOption);
 
 	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode, qrsFile));
 	auto speedFactor = parser.value(speedOption).toInt();
 
 	if (!generatePath.isEmpty()) {
-		if (generateMode != "python" and generateMode != "javascript") {
+		if (generateMode != "python" and generateMode != "javascript"
+			and generateMode != "nxt") {
 			parser.showHelp();
 			QLOG_ERROR() << "Problem with generate code to " << generatePath;
 			return TWO_D_MODEL_RUNNER_GENERATE_MODE_NOT_EXIST;
@@ -176,6 +182,10 @@ int main(int argc, char *argv[])
 			QLOG_ERROR() << "Problem with generate code to " << generatePath;
 			return TWO_D_MODEL_RUNNER_GENERATE_ERROR;
 		}
+	}
+
+	if (onlyGenerate || mode == "nxt") {
+		return 0;
 	}
 
 	if (!runner->interpret(backgroundMode, speedFactor, closeOnFinishMode,

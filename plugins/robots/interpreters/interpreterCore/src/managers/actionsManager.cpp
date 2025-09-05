@@ -15,9 +15,11 @@
 #include "interpreterCore/managers/actionsManager.h"
 
 #include <QtCore/QSignalMapper>
-
+#include <QtWidgets/QApplication>
+#include <QPainter>
 #include <qrkernel/settingsManager.h>
 #include <kitBase/robotModel/robotModelUtils.h>
+#include <qrutils/graphicsUtils/abstractItem.h>
 
 using namespace interpreterCore;
 
@@ -32,8 +34,14 @@ ActionsManager::ActionsManager(KitPluginManager &kitPluginManager, RobotModelMan
 	, mConnectToRobotAction(new QAction(QIcon(":/icons/robots_connect.svg"), QObject::tr("Connect to robot"), this))
 	, mRobotSettingsAction(QIcon(":/icons/robots_settings.png"), QObject::tr("Robot settings"), this)
 	, mExportExerciseAction(QIcon(), QObject::tr("Save as task..."), this)
-	, mDebugModeAction(new QAction(QIcon(":/icons/main_tabbar_debug.svg"), QObject::tr("Debug"), this))
-	, mEditModeAction(new QAction(QIcon(":/icons/main_tabbar_edit.svg"), QObject::tr("Edit"), this))
+	, mDebugModeAction(new QAction(
+		graphicsUtils::AbstractItem::loadTextColorIcon(":/icons/main_tabbar_debug.svg"),  
+		QObject::tr("Debug"), 
+		this))
+	, mEditModeAction(new QAction(
+		graphicsUtils::AbstractItem::loadTextColorIcon(":/icons/main_tabbar_edit.svg"), 
+		QObject::tr("Edit"), 
+		this))
 	, mHomeAction(new QAction(QIcon(":/icons/home.svg"), tr("To main page"), this))
 	, mSeparator1(this)
 	, mSeparator2(this)

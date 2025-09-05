@@ -27,11 +27,12 @@ class LidarSensorItem : public RangeSensorItem
 
 public:
 	LidarSensorItem(const model::WorldModel &worldModel
+	                , graphicsUtils::AbstractCoordinateSystem *metricSystem
 			, model::SensorsConfiguration &configuration
 			, const kitBase::robotModel::PortInfo &port
 			, QPair<qreal, int> physicalParams
 			, const QString &pathToImage
-			, const QRect &imageSize
+			, QRect imageSize
 			);
 
 protected:

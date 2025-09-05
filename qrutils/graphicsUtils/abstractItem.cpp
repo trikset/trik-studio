@@ -21,6 +21,7 @@
 #include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QStyleOptionGraphicsItem>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
+#include <QApplication>
 
 using namespace graphicsUtils;
 
@@ -29,6 +30,8 @@ const qreal epsilon = 0.0000001;
 AbstractItem::AbstractItem(QGraphicsItem* parent)
 	: QGraphicsObject(parent)
 	, mId(QUuid::createUuid().toString())
+	, mCoordinateSystem(nullptr)
+	, mDefaultCoordinateSystem(new CoordinateSystem(this))
 {
 	setAcceptHoverEvents(true);
 	setCursor(mHoverCursor);
@@ -122,13 +125,27 @@ QBrush AbstractItem::brush() const
 void AbstractItem::setBrush(const QBrush &brush)
 {
 	mBrush = brush;
-	emit brushChanged(mBrush);
+	Q_EMIT brushChanged(mBrush);
 }
 
 void AbstractItem::setPen(const QPen &pen)
 {
 	mPen = pen;
-	emit penChanged(pen);
+	Q_EMIT penChanged(pen);
+}
+
+void AbstractItem::setCoordinateSystem(AbstractCoordinateSystem *coordinateSystem)
+{
+	mCoordinateSystem = coordinateSystem;
+}
+
+AbstractCoordinateSystem *AbstractItem::coordinateSystem() const
+{
+	if (mCoordinateSystem) {
+		return mCoordinateSystem;
+	}
+
+	return mDefaultCoordinateSystem.data();
 }
 
 void AbstractItem::setCoordinates(const QRectF &pos)
@@ -220,7 +237,7 @@ void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
 	}
 }
 
-void AbstractItem::reverseOldResizingItem(const QPointF &begin, const QPointF &end)
+void AbstractItem::reverseOldResizingItem(QPointF begin, QPointF end)
 {
 	if (mDragState == TopLeft) {
 		setX1(begin.x());
@@ -253,19 +270,19 @@ void AbstractItem::setPenStyle(const QString &text)
 		mPen.setStyle(Qt::NoPen);
 	}
 
-	emit penChanged(mPen);
+	Q_EMIT penChanged(mPen);
 }
 
 void AbstractItem::setPenWidth(int width)
 {
 	mPen.setWidth(width);
-	emit penChanged(mPen);
+	Q_EMIT penChanged(mPen);
 }
 
 void AbstractItem::setPenColor(const QString &text)
 {
 	mPen.setColor(QColor(text));
-	emit penChanged(mPen);
+	Q_EMIT penChanged(mPen);
 }
 
 void AbstractItem::setBrushStyle(const QString &text)
@@ -276,13 +293,13 @@ void AbstractItem::setBrushStyle(const QString &text)
 		mBrush.setStyle(Qt::NoBrush);
 	}
 
-	emit brushChanged(mBrush);
+	Q_EMIT brushChanged(mBrush);
 }
 
 void AbstractItem::setBrushColor(const QString &text)
 {
 	mBrush.setColor(QColor(text));
-	emit brushChanged(mBrush);
+	Q_EMIT brushChanged(mBrush);
 }
 
 void AbstractItem::setPen(const QString &penStyle, int width, const QString &penColor)
@@ -329,7 +346,7 @@ void AbstractItem::setX1(qreal x1)
 {
 	if (qAbs(mX1 - x1) > epsilon) {
 		mX1 = x1;
-		emit x1Changed(x1);
+		Q_EMIT x1Changed(x1);
 	}
 }
 
@@ -337,7 +354,7 @@ void AbstractItem::setY1(qreal y1)
 {
 	if (qAbs(mY1 - y1) > epsilon) {
 		mY1 = y1;
-		emit y1Changed(y1);
+		Q_EMIT y1Changed(y1);
 	}
 }
 
@@ -345,7 +362,7 @@ void AbstractItem::setX2(qreal x2)
 {
 	if (qAbs(mX2 - x2) > epsilon) {
 		mX2 = x2;
-		emit x2Changed(x2);
+		Q_EMIT x2Changed(x2);
 	}
 }
 
@@ -353,7 +370,7 @@ void AbstractItem::setY2(qreal y2)
 {
 	if (qAbs(mY2 - y2) > epsilon) {
 		mY2 = y2;
-		emit y2Changed(y2);
+		Q_EMIT y2Changed(y2);
 	}
 }
 
@@ -403,7 +420,11 @@ QDomElement AbstractItem::setPenBrushToElement(QDomElement &target, const QStrin
 	}
 
 	target.setAttribute("stroke", mPen.color().name(QColor::HexArgb));
-	target.setAttribute("stroke-width", mPen.width());
+	qreal width = mPen.widthF();
+	if (mCoordinateSystem) {
+		width = mCoordinateSystem->toUnit(mPen.widthF());
+	}
+	target.setAttribute("stroke-width", QString::number(width));
 
 	QString penStyle;
 	switch (mPen.style()) {
@@ -434,7 +455,7 @@ QDomElement AbstractItem::setPenBrushToElement(QDomElement &target, const QStrin
 	return target;
 }
 
-QRectF AbstractItem::sceneBoundingRectCoord(const QPoint &topLeftPicture)
+QRectF AbstractItem::sceneBoundingRectCoord(const QPoint topLeftPicture)
 {
 	QRectF itemBoundingRect = calcNecessaryBoundingRect();
 	const qreal x1 = scenePos().x() + itemBoundingRect.x() - topLeftPicture.x();
@@ -453,7 +474,12 @@ void AbstractItem::readPenBrush(const QDomElement &docItem)
 
 	mBrush.setColor(QColor(docItem.attribute("fill", "")));
 	mPen.setColor(QColor(docItem.attribute("stroke", "")));
-	mPen.setWidth(static_cast<int>(docItem.attribute("stroke-width", "").toDouble()));
+	auto value = docItem.attribute("stroke-width", "").toDouble();
+	if (mCoordinateSystem) {
+		value = mCoordinateSystem->toPx(value);
+	}
+
+	mPen.setWidthF(value);
 
 	QString penStyle = docItem.attribute("stroke-style", "");
 	if (penStyle == "solid") {
@@ -470,7 +496,7 @@ void AbstractItem::readPenBrush(const QDomElement &docItem)
 		mPen.setStyle(Qt::NoPen);
 	}
 
-	emit penChanged(mPen);
+	Q_EMIT penChanged(mPen);
 }
 
 QStringList AbstractItem::getPenStyleList()
@@ -481,6 +507,20 @@ QStringList AbstractItem::getPenStyleList()
 QStringList AbstractItem::getBrushStyleList()
 {
 	return { "None", "Solid" };
+}
+
+QIcon AbstractItem::loadThemedIcon(const QString& path, const QColor& color) {
+	QPixmap image(path);
+	QPainter pt(&image);
+	pt.setCompositionMode(QPainter::CompositionMode_SourceIn);
+	pt.fillRect(image.rect(), color);
+	pt.end();
+	return QIcon(image);
+}
+
+QIcon AbstractItem::loadTextColorIcon(const QString& path) {
+	auto text_color = QApplication::palette().color(QPalette::Text);
+	return loadThemedIcon(path, text_color);
 }
 
 void AbstractItem::mouseMoveEvent(QGraphicsSceneMouseEvent * event)
@@ -581,14 +621,14 @@ void AbstractItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	QAction *selectedAction = menu->exec(event->screenPos());
 	delete menu;
 	if (selectedAction == removeAction) {
-		emit deletedWithContextMenu();
+		Q_EMIT deletedWithContextMenu();
 	}
 }
 
 QVariant AbstractItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
 	if (change == QGraphicsItem::ItemPositionHasChanged) {
-		emit positionChanged(value.toPointF());
+		Q_EMIT positionChanged(value.toPointF());
 	}
 
 	return QGraphicsItem::itemChange(change, value);
@@ -597,14 +637,14 @@ QVariant AbstractItem::itemChange(QGraphicsItem::GraphicsItemChange change, cons
 void AbstractItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	QGraphicsItem::mousePressEvent(event);
-	emit mouseInteractionStarted();
+	Q_EMIT mouseInteractionStarted();
 }
 
 void AbstractItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	setFlag(QGraphicsItem::ItemIsMovable, mEditable);
 	QGraphicsItem::mouseReleaseEvent(event);
-	emit mouseInteractionStopped();
+	Q_EMIT mouseInteractionStopped();
 }
 
 Qt::CursorShape AbstractItem::getResizeCursor()

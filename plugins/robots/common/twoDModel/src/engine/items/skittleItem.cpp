@@ -22,9 +22,11 @@
 
 using namespace twoDModel::items;
 
-SkittleItem::SkittleItem(const QPointF &position)
+SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			QPointF position)
 	: mSvgRenderer(new QSvgRenderer)
 {
+	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
 	setPos(position);
 	setZValue(ZValue::Moveable);
@@ -83,10 +85,15 @@ QDomElement SkittleItem::serialize(QDomElement &element) const
 {
 	QDomElement skittleNode = AbstractItem::serialize(element);
 	skittleNode.setTagName("skittle");
-	skittleNode.setAttribute("x", QString::number(x1() + scenePos().x()));
-	skittleNode.setAttribute("y", QString::number(y1() + scenePos().y()));
-	skittleNode.setAttribute("markerX", QString::number(x1() + mStartPosition.x()));
-	skittleNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
+	auto *coordSystem = coordinateSystem();
+	skittleNode.setAttribute("x",
+	                         QString::number(coordSystem->toUnit(x1() + scenePos().x())));
+	skittleNode.setAttribute("y",
+	                         QString::number(coordSystem->toUnit(y1() + scenePos().y())));
+	skittleNode.setAttribute("markerX",
+	                         QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
+	skittleNode.setAttribute("markerY",
+	                         QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	skittleNode.setAttribute("rotation", QString::number(rotation()));
 	skittleNode.setAttribute("startRotation", QString::number(mStartRotation));
 	return skittleNode;
@@ -95,11 +102,11 @@ QDomElement SkittleItem::serialize(QDomElement &element) const
 void SkittleItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-
-	qreal x = element.attribute("x", "0").toDouble();
-	qreal y = element.attribute("y", "0").toDouble();
-	qreal markerX = element.attribute("markerX", "0").toDouble();
-	qreal markerY = element.attribute("markerY", "0").toDouble();
+	auto *coordSystem = coordinateSystem();
+	qreal x = coordSystem->toPx(element.attribute("x", "0").toDouble());
+	qreal y = coordSystem->toPx(element.attribute("y", "0").toDouble());
+	qreal markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
+	qreal markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
 	qreal rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 

@@ -18,13 +18,14 @@ using namespace twoDModel::view;
 using namespace kitBase::robotModel;
 
 LidarSensorItem::LidarSensorItem(const model::WorldModel &worldModel
+		, graphicsUtils::AbstractCoordinateSystem *metricSystem
 		, model::SensorsConfiguration &configuration
 		, const PortInfo &port
 		, QPair<qreal, int> angleAndRange
 		, const QString &pathToImage
-		, const QRect &imageSize
+		, QRect imageSize
 		)
-	: RangeSensorItem(worldModel, configuration, port, angleAndRange, pathToImage, imageSize)
+	: RangeSensorItem(worldModel, metricSystem, configuration, port, angleAndRange, pathToImage, imageSize)
 {
 }
 

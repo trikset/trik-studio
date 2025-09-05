@@ -43,14 +43,13 @@ public:
 
 	const b2Vec2 &getPosition();
 	float getRotation();
-
-	b2Body *getBody() const;
+	b2BodyId getBodyId() const;
 
 	/// Returns true if the position or angle were changed since previous get or set calls.
 	bool angleOrPositionChanged() const;
 
 private:
-	b2Body *mBody; // Takes ownership
+	b2BodyId mBodyId; // Takes ownership
 	b2Vec2 *mPolygon; // Takes ownership
 
 	bool mIsCircle;

@@ -18,6 +18,7 @@ TEMPLATE = lib
 
 include(../../../global.pri)
 LIBS -= -ltrikQsLog
+CONFIG += c++17
 
 # CONFIG += warn_off
 

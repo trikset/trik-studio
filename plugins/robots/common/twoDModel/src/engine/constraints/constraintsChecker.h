@@ -136,6 +136,7 @@ private:
 
 	QList<details::Event *> mActiveEvents; //No ownership
 
+	QDomDocument mCurrentConstraintDocument;
 	QDomElement mCurrentXml;
 	bool mEnabled { true };
 };

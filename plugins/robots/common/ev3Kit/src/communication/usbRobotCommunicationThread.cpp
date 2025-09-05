@@ -95,7 +95,7 @@ bool UsbRobotCommunicationThread::connect()
 	mHandle = hid_open(EV3_VID, EV3_PID, nullptr);
 	if (!mHandle) {
 		QLOG_ERROR() << "hid_open failed for "
-				<< QString::number(EV3_VID) << QString::number(EV3_PID);
+				<< QString::number(EV3_VID, 16) << QString::number(EV3_PID, 16);
 		emit connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
 		return false;
 	}

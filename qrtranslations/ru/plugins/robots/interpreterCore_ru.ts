@@ -114,7 +114,7 @@
         <translation>time</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+30"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
         <source>Run</source>
         <translation>Выполнить</translation>
     </message>
@@ -134,17 +134,17 @@
         <translation>Сохранить как упражнение...</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Debug</source>
         <translation>Отладка</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+4"/>
         <source>Edit</source>
         <translation>Редактор</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+71"/>
         <source>Switch to debug mode</source>
         <translation>Переключиться в режим отладки</translation>
     </message>
@@ -164,7 +164,7 @@
         <translation>Остановить интерпретацию</translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="-81"/>
         <source>Robot settings</source>
         <translation>Настройки</translation>
     </message>
@@ -192,7 +192,7 @@
 <context>
     <name>interpreterCore::ActionsManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+4"/>
+        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+10"/>
         <source>To main page</source>
         <translation>На главную</translation>
     </message>
@@ -334,27 +334,27 @@
     <message>
         <location line="+2"/>
         <source>2D model world is read-only</source>
-        <translation type="unfinished">Двумерная модель неизменяема</translation>
+        <translation>2D модель мира неизменяема</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Sensors are read-only</source>
-        <translation type="unfinished">Положение и конфигурация сенсоров неизменяемы</translation>
+        <translation>Датчики неизменяемы</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>2D model robot position is read-only</source>
-        <translation type="unfinished">Начальное положение робота в двумерной модели неизменяемо</translation>
+        <translation>Позиция 2D модели робота неизменяема</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Motors to wheels binding is read-only</source>
-        <translation type="unfinished">Соответствие портов моторов и колёс неизменяемо</translation>
+        <translation>Редукция мотор-колесо неизменяема</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>2D model simulation settings are read-only</source>
-        <translation type="unfinished">Настройки симуляции двумерной модели (физика, шумы и т.д.) неизменяемы</translation>
+        <translation>Параметры симуляции неизменяемы</translation>
     </message>
     <message>
         <location line="+21"/>

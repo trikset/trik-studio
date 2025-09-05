@@ -16,11 +16,10 @@ rsync -a "$BIN_DIR"/plugins/editors/librobotsMetamodel.so                   "$PW
 rsync -a "$BIN_DIR"/librobots-interpreter-core.so*                          "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/plugins/tools/librobots-plugin.so                       "$PWD"/../data/lib/plugins/tools/
 rsync -a "$BIN_DIR"/librobots-2d-model.so*                                  "$PWD"/../data/lib/
-rsync -a "$BIN_DIR"/libBox2D.so*                                            "$PWD"/../data/lib/
+rsync -a "$BIN_DIR"/libtrikBox2D.so*                                            "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/librobots-generator-base.so*                            "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/librobots-kit-base.so*                                  "$PWD"/../data/lib/
 rsync -a "$BIN_DIR"/librobots-utils.so*                                     "$PWD"/../data/lib/
-rsync -a "$BIN_DIR"/libqextserialport.so*                                 "$PWD/../data/lib"
 rsync -a --remove-source-files "$PWD"/../data/externalToolsConfig/                                 "$PWD"/../data/bin/externalToolsConfig/
 rsync -a "$BIN_DIR/run_maze_generator.sh"                                 "$PWD/../data/bin/"
 

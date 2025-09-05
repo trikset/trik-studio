@@ -28,7 +28,7 @@ const int frequency = 150;  // The text on the ruler will not be met more often 
 Ruler::Ruler(QWidget *parent)
 	: QFrame(parent)
 	, mOrientation(Qt::Horizontal)
-	, mPixelsInCm(1.0)
+	, mMetricFactor(1.0)
 {
 	mFont.setPixelSize(8);
 }
@@ -40,6 +40,11 @@ Ruler::~Ruler()
 Qt::Orientation Ruler::orientation() const
 {
 	return mOrientation;
+}
+
+void Ruler::setMetricFactor(const qreal factor)
+{
+	mMetricFactor = factor;
 }
 
 void Ruler::setOrientation(Qt::Orientation orientation)
@@ -55,11 +60,6 @@ void Ruler::setOrientation(Qt::Orientation orientation)
 	}
 }
 
-void Ruler::setPixelsInCm(qreal pixelsInCm)
-{
-	mPixelsInCm = pixelsInCm;
-}
-
 void Ruler::paintEvent(QPaintEvent *event)
 {
 	QFrame::paintEvent(event);
@@ -73,12 +73,11 @@ void Ruler::paintEvent(QPaintEvent *event)
 	// Without making first cell being multiple of shift the first marker will be always upon the first
 	// line and that looks horrible when user scrolls the scene.
 	const int realFirstCell = firstCell / shift * shift * gridSize;
-
 	for (int coordinate = realFirstCell
 			; coordinate < relevantCoordinate(sceneRect.bottomRight())
 			; coordinate += shift * gridSize)
 	{
-		const QString text = QString::number(coordinate / mPixelsInCm);
+		const QString text = QString::number(coordinate / mMetricFactor);
 		const QRectF boundingRect = textBoundingRect(text);
 		const qreal relevantPosition = relevantCoordinate(mView->mapFromScene(makePoint(coordinate, 0)));
 		const QPointF position = drawingPoint(relevantPosition, boundingRect.size());
@@ -88,17 +87,17 @@ void Ruler::paintEvent(QPaintEvent *event)
 	}
 }
 
-qreal Ruler::relevantCoordinate(const QPointF &point) const
+qreal Ruler::relevantCoordinate(QPointF point) const
 {
 	return orientation() == Qt::Horizontal ? point.x() : point.y();
 }
 
-qreal Ruler::relevantDimension(const QSizeF &size) const
+qreal Ruler::relevantDimension(QSizeF size) const
 {
 	return orientation() == Qt::Horizontal ? size.width() : size.height();
 }
 
-qreal Ruler::irrelevantDimension(const QSizeF &size) const
+qreal Ruler::irrelevantDimension(QSizeF size) const
 {
 	return orientation() == Qt::Horizontal ? size.height() : size.width();
 }
@@ -110,7 +109,7 @@ QPointF Ruler::makePoint(qreal relevantCoordinate, qreal irrelevantCoordinate) c
 			: QPointF(irrelevantCoordinate, relevantCoordinate);
 }
 
-QPointF Ruler::drawingPoint(qreal relevantCoordinate, const QSizeF &textSize) const
+QPointF Ruler::drawingPoint(qreal relevantCoordinate, QSizeF textSize) const
 {
 	return makePoint(relevantCoordinate, (irrelevantDimension(size()) - irrelevantDimension(textSize)) / 2);
 }

@@ -6,7 +6,7 @@ export BUNDLE_CONTENTS=$PWD/../data/$PRODUCT_DISPLAYED_NAME.app/Contents/
 export LIB_PATH=@executable_path/../Lib
 
 function fix_dependencies {
-	set -ueo pipefail
+	set -ueox pipefail
 	local target="$1"
 	pushd "$(dirname "$target")"
 	local prefix=$(grealpath -e "$2")
@@ -16,7 +16,10 @@ function fix_dependencies {
 	local short_id
 	local install_name
 	install_name=$(otool -D "$target" | tail -n +2 | grep -v '^@' || : )
-	if [[ -n "$install_name" ]] ; then
+	if [[ "$install_name" == "/usr/local"/* ]] ; then
+		short_id="@rpath/$(basename "$install_name")"
+		change="-id \"$short_id\""
+	elif [[ -n "$install_name" ]] ; then
 		short_id=$(grealpath -e --relative-to "$prefix" "$install_name" || echo "@rpath/"$(basename "$install_name"))
 		change="-id \"$short_id\""
 	fi
@@ -25,10 +28,15 @@ function fix_dependencies {
 			continue;
 		fi
 		normalized=$(grealpath -e "$dep")
+                if [[ "$normalized" == "/usr/local"/* ]] ; then
+			relative=$(basename "$normalized")
+		fi
+
 		if [[ "$normalized" == "$prefix"/* ]] ; then
 			relative=$(grealpath -e --relative-to "$prefix" "$normalized")
-			change="$change -change \"$dep\" \"$subst/$relative\""
 		fi
+		
+		change="$change -change \"$dep\" \"$subst/$relative\""
 	done
 	popd
 	if [[ -n "$change" ]] ; then
