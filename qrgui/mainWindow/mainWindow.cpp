@@ -117,7 +117,7 @@ MainWindow::MainWindow(const QString &fileToOpen)
 	, mInitialFileToOpen(fileToOpen)
 {
 	QLOG_INFO() << "MainWindow: screen DPI is" << logicalDpiX();
-	initPalette();
+	initDarkPalette();
 	mUi->setupUi(this);
 	mUi->paletteTree->initMainWindow(this);
 	setWindowTitle("QReal");
@@ -709,13 +709,26 @@ bool MainWindow::windowsIsInDarkTheme()
 	return settings.value("AppsUseLightTheme", 1).toInt() == 0;
 }
 
-void MainWindow::initPalette() {
+void MainWindow::initDarkPalette() {
 	if (QSysInfo::productType() != "windows") {
 		return;
 	}
+
+	const auto &platform = QString::fromUtf8(qgetenv("QT_QPA_PLATFORM"));
+	const static QRegExp rx("windows:.*darkmode=(\\d)");
+
+	if (rx.indexIn(platform) != -1) {
+		// if darkmode=0, dont use dark theme
+		if (rx.cap(1).toInt() == 0) {
+			return;
+		}
+	}
+
+	// if darkmode!=0, make sure that the apps use a dark theme
 	if (!windowsDarkThemeAvailiable() || !windowsIsInDarkTheme()) {
 		return;
 	}
+
 	QApplication::setPalette(BrandManager::styles()->loadPalette(
 		QCoreApplication::applicationDirPath() +
 		"/palettes/darkWindowsPalette.ini")
