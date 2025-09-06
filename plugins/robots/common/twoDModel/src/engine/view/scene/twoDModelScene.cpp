@@ -838,7 +838,8 @@ void TwoDModelScene::addImage()
 		}
 		mDrawingAction = image;
 		const QRect rect(topLeft, size);
-		QSharedPointer<twoDModel::items::ImageItem> result(new twoDModel::items::ImageItem(newImage, rect));
+		QSharedPointer<twoDModel::items::ImageItem> result(new twoDModel::items::ImageItem(
+						&mModel.coordinateMetricSystem(), newImage, rect));
 		result->setMemorize(true);
 		mModel.worldModel().addImageItem(result);
 		registerInUndoStack(result.data());
