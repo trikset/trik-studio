@@ -25,7 +25,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		     const QSharedPointer<model::Image> &image, const QRect &geometry)
+		     const QSharedPointer<model::Image> &image, QRect geometry)
 	: mImage(image)
 {
 	setCoordinateSystem(metricSystem);

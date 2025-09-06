@@ -33,7 +33,7 @@ class ImageItem : public graphicsUtils::AbstractItem
 
 public:
 	ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		  const QSharedPointer<model::Image> &image, const QRect &geometry);
+		  const QSharedPointer<model::Image> &image, QRect geometry);
 
 	AbstractItem *clone() const;
 
