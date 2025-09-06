@@ -171,6 +171,7 @@ private slots:
 	void trainingModeChanged(bool enabled);
 
 	void updateUIPhysicsSettings();
+	void updateRobotInfoWidget(const qreal factor, const QString& unitString);
 
 private:
 	enum CursorType

@@ -56,7 +56,7 @@ void DetailsTab::initItem(QTreeWidgetItem *item, const QString &text, bool expan
 	layout->addWidget(label);
 	layout->addStretch();
 	setItemWidget(item, 0, widget);
-	item->setSizeHint(0, QSize(100, 50));
+	item->setSizeHint(0, QSize(300, 50));
 	item->setExpanded(expanded);
 }
 
@@ -90,6 +90,7 @@ void DetailsTab::setParamsSettings(QWidget *widget)
 {
 	mParams = widget;
 	setItemWidget(mParamsItem, 0, widget);
+	resizeColumnToContents(0);
 }
 
 void DetailsTab::setMetricSettings(QWidget *widget)

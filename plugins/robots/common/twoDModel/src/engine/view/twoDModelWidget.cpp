@@ -146,24 +146,16 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 
 	auto pixelsInCm = mModel.settings().pixelsInCm();
 	/// @todo: make some values editable
-	mUi->detailsTab->setParamsSettings(mUi->physicsParamsFrame);
-	mUi->wheelDiamInCm->setValue(robotWheelDiameterInCm);
-	mUi->wheelDiamInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
-	mUi->robotHeightInCm->setValue(robotHeight / pixelsInCm); // Not sure if correct
-	mUi->robotHeightInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
-	mUi->robotWidthInCm->setValue(robotWidth / pixelsInCm);
-	mUi->robotWidthInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
-	mUi->robotMassInGr->setValue(robotMass);
-	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
 
+	mUi->detailsTab->setParamsSettings(mUi->physicsParamsFrame);
+
+	updateRobotInfoWidget(pixelsInCm, tr("cm"));
 	connect(&mModel, &model::Model::robotAdded, this, [this, pixelsInCm](){
 		auto robotModels = mModel.robotModels();
 		auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
 				: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
 		mUi->robotTrackInCm->setValue(robotTrack / pixelsInCm);
 	});
-	mUi->robotTrackInCm->setValue(robotWidth / pixelsInCm);
-	mUi->robotTrackInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
 }
 
 TwoDModelWidget::~TwoDModelWidget()
@@ -171,6 +163,29 @@ TwoDModelWidget::~TwoDModelWidget()
 	mSelectedRobotItem = nullptr;
 	mScene.reset();
 	delete mUi;
+}
+
+void TwoDModelWidget::updateRobotInfoWidget(const qreal factor, const QString& unitString)
+{
+	mUi->wheelDiamInCm->setValue(robotWheelDiameterInPx / factor);
+	mUi->wheelDiameterUnit->setText(unitString);
+	mUi->wheelDiamInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
+	mUi->robotHeightInCm->setValue(robotHeight / factor);
+	mUi->robotHeightUnit ->setText(unitString);
+	mUi->robotHeightInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
+	mUi->robotWidthInCm->setValue(robotWidth / factor);
+	mUi->robotWidthUnit->setText(unitString);
+	mUi->robotWidthInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
+	mUi->robotMassInGr->setValue(robotMass);
+	mUi->robotMassUnit->setText(tr("kg"));
+	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
+
+	auto robotModels = mModel.robotModels();
+	auto robotTrack = robotModels.isEmpty() || robotModels[0]->info().wheelsPosition().size() < 2 ? robotWidth
+			: qAbs(robotModels[0]->info().wheelsPosition()[0].y() - robotModels[0]->info().wheelsPosition()[1].y());
+	mUi->robotTrackInCm->setValue(robotTrack / factor);
+	mUi->robotTrackUnit->setText(unitString);
+	mUi->robotTrackInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
 }
 
 void TwoDModelWidget::initWidget()
@@ -1016,6 +1031,7 @@ void TwoDModelWidget::connectMetricComboBoxes()
 		const auto realValue = sizeUnit->countFactor();
 		mUi->horizontalRuler->setMetricFactor(realValue);
 		mUi->verticalRuler->setMetricFactor(realValue);
+		updateRobotInfoWidget(realValue, sizeUnit->toStr());
 		Q_EMIT mUi->gridParametersBox->parametersChanged();
 	});
 
@@ -1148,7 +1164,7 @@ void TwoDModelWidget::setSelectedRobotItem(RobotItem *robotItem)
 		mUi->detailsTab->setMetricSettings(mUi->metricFrame);
 		connectMetricComboBoxes();
 		mUi->pixelsInCmDoubleSpinBox->setValue(
-		                        mModel.settings().pixelsInCm());
+					mModel.settings().pixelsInCm());
 	} else {
 		mUi->detailsTab->setMetricSectionsVisible(false);
 		mUi->metricFrame->hide();
