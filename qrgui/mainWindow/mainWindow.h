@@ -310,7 +310,7 @@ private:
 
 	bool windowsDarkThemeAvailiable();
 	bool windowsIsInDarkTheme();
-	void initPalette();
+	void initDarkPalette();
 
 	void initGridProperties();
 	void clickErrorListWidget();
