@@ -73,12 +73,12 @@ public:
 	/// @param generateMode "python" or "javascript"
 	bool generate(const QString &generatePath, const QString &generateMode);
 
-private slots:
+private Q_SLOTS:
 	void close();
 
 private:
 	void connectRobotModel(const model::RobotModel *robotModel, const qReal::ui::ConsoleDock* console);
-	void onRobotRided(const QPointF &newPosition, const qreal newRotation);
+	void onRobotRided(QPointF newPosition, const qreal newRotation);
 	void onDeviceStateChanged(const QString &robotId, const kitBase::robotModel::robotParts::Device *device
 			, const QString &property, const QVariant &value);
 	void attachNewConsoleTo(view::TwoDModelWidget *twoDModelWindow);

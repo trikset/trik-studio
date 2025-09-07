@@ -41,7 +41,7 @@ bool loadTranslators(const QString &locale)
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	bool hasTranslations = false;
 	while (directories.hasNext()) {
-		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
+		for (auto &&translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);

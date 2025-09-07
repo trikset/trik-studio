@@ -209,7 +209,7 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal:
 	});
 }
 
-void Runner::onRobotRided(const QPointF &newPosition, const qreal newRotation)
+void Runner::onRobotRided(QPointF newPosition, const qreal newRotation)
 {
 	mReporter->newTrajectoryPoint(
 			static_cast<model::RobotModel *>(sender())->info().robotId()
