@@ -14,7 +14,7 @@
 #pragma once
 
 #include <box2d/box2d.h>
-
+#include <QObject>
 class QPolygonF;
 
 namespace twoDModel{
@@ -31,14 +31,15 @@ namespace parts {
 
 class Box2DItem
 {
+	Q_DISABLE_COPY(Box2DItem)
 public:
 	Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *mEngine
-			, const items::SolidItem *mItem, const b2Vec2 &pos, float angle);
+			, const items::SolidItem *mItem, b2Vec2 pos, float angle);
 
 	~Box2DItem();
 
 	/// Transform item to a new position, IMPORTANT: \a pos is a center point of box2d object.
-	void moveToPosition(const b2Vec2 &pos);
+	void moveToPosition(b2Vec2 pos);
 	void setRotation(float angle);
 
 	const b2Vec2 &getPosition();
