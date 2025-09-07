@@ -316,7 +316,7 @@
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+191"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Le programme est terminé, mais la tache n&apos;est pas accomplie.</translation>
     </message>
@@ -808,7 +808,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+343"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+348"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -826,7 +826,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-192"/>
+        <location line="-196"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -836,7 +836,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+268"/>
+        <location line="+277"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -878,7 +878,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+204"/>
+        <location line="+207"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

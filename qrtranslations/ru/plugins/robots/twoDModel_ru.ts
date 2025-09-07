@@ -588,7 +588,7 @@
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
     <message>
-        <location line="+188"/>
+        <location line="+191"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
     </message>
@@ -1151,7 +1151,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+343"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+348"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1169,7 +1169,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-192"/>
+        <location line="-196"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -1179,7 +1179,7 @@
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+268"/>
+        <location line="+277"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1233,7 +1233,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+204"/>
+        <location line="+207"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>
