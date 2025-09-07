@@ -53,7 +53,7 @@ public:
 	/// @param mode Interpret mode.
 	/// @param qrsFile Path to TRIK Studio project
 	Runner(const QString &report, const QString &trajectory, const QString &input,
-	       const QString &mode, const QString &qrsFile);
+	       const QString &mode, const QString &qrsFile, uint32_t delayBeforeExit);
 
 	~Runner();
 
@@ -97,6 +97,7 @@ private:
 	QString mInputsFile;
 	QString mMode;
 	QString mSaveFile;
+	uint32_t mDelayBeforeExit;
 };
 
 }
