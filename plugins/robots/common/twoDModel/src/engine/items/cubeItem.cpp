@@ -48,7 +48,7 @@ CubeItem::~CubeItem()
 
 QAction *CubeItem::cubeTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_cube.svg"), tr("Cube (X)"), nullptr);
+	const auto &result = new QAction(QIcon(":/icons/2d_cube.svg"), tr("Cube (X)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_X), QKeySequence(Qt::Key_4)});
 	result->setCheckable(true);
 	return result;
@@ -92,31 +92,31 @@ void CubeItem::savePos()
 
 QDomElement CubeItem::serialize(QDomElement &element) const
 {
-	QDomElement ballNode = AbstractItem::serialize(element);
-	auto *coordSystem = coordinateSystem();
-	ballNode.setTagName("cube");
-	ballNode.setAttribute("x",
+	QDomElement cubeNode = AbstractItem::serialize(element);
+	const auto &coordSystem = coordinateSystem();
+	cubeNode.setTagName("cube");
+	cubeNode.setAttribute("x",
 			      QString::number(coordSystem->toUnit(x1() + scenePos().x())));
-	ballNode.setAttribute("y",
+	cubeNode.setAttribute("y",
 			      QString::number(coordSystem->toUnit(y1() + scenePos().y())));
-	ballNode.setAttribute("markerX",
+	cubeNode.setAttribute("markerX",
 			      QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
-	ballNode.setAttribute("markerY",
+	cubeNode.setAttribute("markerY",
 			      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
-	ballNode.setAttribute("rotation", QString::number(rotation()));
-	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
-	return ballNode;
+	cubeNode.setAttribute("rotation", QString::number(rotation()));
+	cubeNode.setAttribute("startRotation", QString::number(mStartRotation));
+	return cubeNode;
 }
 
 void CubeItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-	auto *coordSystem = coordinateSystem();
-	qreal x = coordSystem->toPx(element.attribute("x", "0").toDouble());
-	qreal y = coordSystem->toPx(element.attribute("y", "0").toDouble());
-	qreal markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
-	qreal markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
-	qreal rotation = element.attribute("rotation", "0").toDouble();
+	const auto &coordSystem = coordinateSystem();
+	const auto x = coordSystem->toPx(element.attribute("x", "0").toDouble());
+	const auto y = coordSystem->toPx(element.attribute("y", "0").toDouble());
+	const auto markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
+	const auto markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
+	const auto rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 
 	setPos(QPointF(x, y));

@@ -245,7 +245,7 @@ void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 
 void WorldModel::addCube(const QSharedPointer<items::CubeItem> &cube)
 {
-	const QString id = cube->id();
+	const auto &id = cube->id();
 	if (mCubes.contains(id)) {
 		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
 		return; // probably better than having no way to delete those duplicate items on the scene
@@ -522,7 +522,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 		ball->serialize(balls);
 	}
 
-	QDomElement cubes = parent.ownerDocument().createElement("cubes");
+	auto cubes = parent.ownerDocument().createElement("cubes");
 	result.appendChild(cubes);
 	for (auto &&cube : mCubes) {
 		cube->serialize(cubes);
@@ -673,9 +673,9 @@ void WorldModel::deserialize(const QDomElement &element, const QDomElement &blob
 		}
 	}
 
-	for (QDomElement cubesNode = element.firstChildElement("cubes"); !cubesNode.isNull()
+	for (auto cubesNode = element.firstChildElement("cubes"); !cubesNode.isNull()
 			; cubesNode = cubesNode.nextSiblingElement("cubes")) {
-		for (QDomElement cubeNode = cubesNode.firstChildElement("cube"); !cubeNode.isNull()
+		for (auto cubeNode = cubesNode.firstChildElement("cube"); !cubeNode.isNull()
 				; cubeNode = cubeNode.nextSiblingElement("cube")) {
 			createCube(cubeNode);
 		}

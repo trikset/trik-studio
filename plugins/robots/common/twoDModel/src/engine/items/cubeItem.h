@@ -33,7 +33,7 @@ public:
 			  QPointF position);
 	~CubeItem();
 
-	/// Creates and returns ball item for 2D model palette.
+	/// Creates and returns cube item for 2D model palette.
 	/// Transfers ownership.
 	static QAction *cubeTool();
 

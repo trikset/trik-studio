@@ -311,12 +311,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+119"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
     <message>
-        <location line="+187"/>
+        <location line="+188"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Le programme est terminé, mais la tache n&apos;est pas accomplie.</translation>
     </message>
@@ -324,8 +324,8 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+194"/>
-        <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+195"/>
+        <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -342,6 +342,14 @@
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
         <source>Text (T)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::items::CubeItem</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+51"/>
+        <source>Cube (X)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -473,8 +481,9 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+195"/>
         <location line="+19"/>
+        <location line="+18"/>
         <location line="+18"/>
         <location line="+18"/>
         <location line="+43"/>
@@ -488,7 +497,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+508"/>
+        <location line="+544"/>
         <source>Unknown image with imageId %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,7 +775,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+745"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+808"/>
         <source>Select images</source>
         <translation type="unfinished"></translation>
     </message>

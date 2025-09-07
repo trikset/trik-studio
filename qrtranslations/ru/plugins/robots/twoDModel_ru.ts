@@ -583,12 +583,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+119"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
     <message>
-        <location line="+187"/>
+        <location line="+188"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
     </message>
@@ -596,9 +596,13 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+194"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles and balls</source>
-        <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
+        <translation type="vanished">Реалистичная физика должна быть включена для взаимодействия с кеглями и мячами</translation>
+    </message>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+195"/>
+        <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
+        <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями, кубами и мячами</translation>
     </message>
 </context>
 <context>
@@ -615,6 +619,14 @@
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
         <source>Text (T)</source>
         <translation>Текст (Т)</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::items::CubeItem</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+51"/>
+        <source>Cube (X)</source>
+        <translation>Куб (X)</translation>
     </message>
 </context>
 <context>
@@ -749,8 +761,9 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+189"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+195"/>
         <location line="+19"/>
+        <location line="+18"/>
         <location line="+18"/>
         <location line="+18"/>
         <location line="+43"/>
@@ -764,7 +777,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+508"/>
+        <location line="+544"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>
@@ -1109,7 +1122,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+745"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+808"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
