@@ -133,13 +133,13 @@ void SkittleItem::deserialize(const QDomElement &element)
 
 	if (element.hasAttribute("diameter")) {
 		setDiameter(coordSystem->toPx(
-				element.attribute("diameter", "").toDouble()));
+				element.attribute("diameter").toDouble()));
 	}
 	if (element.hasAttribute("mass")) {
 		mMass = element.attribute("mass").toDouble();
 	}
 	if (element.hasAttribute("friction")) {
-		mFriction = element.attribute("friction", "").toDouble();
+		mFriction = element.attribute("friction").toDouble();
 	}
 	if (element.hasAttribute("angularDamping")) {
 		mAngularDamping = element.attribute("angularDamping").toDouble();

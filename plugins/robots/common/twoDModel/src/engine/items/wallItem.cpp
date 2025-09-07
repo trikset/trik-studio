@@ -181,11 +181,11 @@ void WallItem::deserialize(const QDomElement &element)
 	}
 
 	if (element.hasAttribute(QStringLiteral("friction"))) {
-		mFriction = element.attribute("friction", "0").toDouble();
+		mFriction = element.attribute("friction").toDouble();
 	}
 
 	if (element.hasAttribute(QStringLiteral("restitution"))) {
-		mRestitution = element.attribute("restitution", "0").toDouble();
+		mRestitution = element.attribute("restitution").toDouble();
 	}
 
 	recalculateBorders();
