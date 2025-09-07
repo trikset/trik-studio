@@ -21,7 +21,7 @@ using namespace twoDModel::items;
 using namespace parts;
 
 Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
-		, const SolidItem *item, const b2Vec2 &pos, float angle)
+		, const SolidItem *item, b2Vec2 pos, float angle)
 	: mIsCircle(false)
 	, mEngine(*engine)
 {

@@ -33,7 +33,7 @@ class Box2DItem
 {
 public:
 	Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *mEngine
-			, const items::SolidItem *mItem, const b2Vec2 &pos, float angle);
+			, const items::SolidItem *mItem, b2Vec2 pos, float angle);
 
 	~Box2DItem();
 

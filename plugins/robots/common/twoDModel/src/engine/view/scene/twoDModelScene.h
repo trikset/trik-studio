@@ -87,7 +87,7 @@ public:
 	/// Categories of items include world model (walls, lines, etc.), sensors, robot position.
 	void setInteractivityFlags(kitBase::ReadOnlyFlags flags);
 
-public slots:
+public Q_SLOTS:
 	/// Sets a flag that next user mouse actions should draw a wall on the scene.
 	void addWall();
 
@@ -128,22 +128,22 @@ public slots:
 	/// @param removeRobot - if true robot graphics item will be fully recreated, its position will be nullified.
 	/// @param reason - reason for scene clearing --- user action or internal needs. Depending on this we can decide
 	///        whether to save changes into model.
-	void clearScene(bool removeRobot, Reason reason);
+	void clearScene(bool removeRobot, DevicesConfigurationProvider::Reason reason);
 
 	/// Aligns existing walls on the grid.
 	/// @todo: Walls that do not fit on the grid must not be removed.
 	void alignWalls();
 
 	/// Returns a pointer to a robot graphics item.
-	RobotItem *robot(model::RobotModel &robotModel);
+	twoDModel::view::RobotItem *robot(twoDModel::model::RobotModel &robotModel);
 
 	/// Focuses all graphics views on the robot if it is not visible.
-	void centerOnRobot(RobotItem *selectedItem = nullptr);
+	void centerOnRobot(twoDModel::view::RobotItem *selectedItem = nullptr);
 
 	/// Reread sensor configuration on given port, delete old sensor item and create new.
-	void reinitSensor(RobotItem *robotItem, const kitBase::robotModel::PortInfo &port);
+	void reinitSensor(twoDModel::view::RobotItem *robotItem, const kitBase::robotModel::PortInfo &port);
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when user presses mouse button somewhere on the scene.
 	void mousePressed();
 
@@ -154,9 +154,9 @@ signals:
 	void robotPressed();
 
 	/// Emitted at any changes of robot list (adding or removing)
-	void robotListChanged(RobotItem *robotItem);
+	void robotListChanged(twoDModel::view::RobotItem *robotItem);
 
-private slots:
+private Q_SLOTS:
 	/// Called after robot model was added and create new robot item
 	/// @param robotModel Robot model which was added
 	void onRobotAdd(model::RobotModel *robotModel);

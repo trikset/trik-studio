@@ -85,7 +85,7 @@ bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
 		}
 	}
 
-	for (const QString &error : mParser->errors()) {
+	for (auto &&error : mParser->errors()) {
 		reportParserError(error);
 	}
 
@@ -140,7 +140,7 @@ void ConstraintsChecker::prepareEvents()
 
 void ConstraintsChecker::setUpEvent()
 {
-	if (details::Event * const event = dynamic_cast<details::Event *>(sender())) {
+	if (details::Event * const event = qobject_cast<details::Event *>(sender())) {
 		if (!mActiveEvents.contains(event)) {
 			mActiveEvents << event;
 		}
@@ -152,7 +152,7 @@ void ConstraintsChecker::setUpEvent()
 
 void ConstraintsChecker::dropEvent()
 {
-	if (details::Event * const event = dynamic_cast<details::Event *>(sender())) {
+	if (details::Event * const event = qobject_cast<details::Event *>(sender())) {
 		mActiveEvents.removeAll(event);
 	}
 }
@@ -173,7 +173,8 @@ void ConstraintsChecker::bindToWorldModelObjects()
 			, this, [this](const QSharedPointer<items::CubeItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
 			, this, [this](const QSharedPointer<QGraphicsItem> &item) {
-		for (const QString &key : mObjects.keys(dynamic_cast<QObject*>(item.data()))) {
+		const auto& keys = mObjects.keys(dynamic_cast<QObject*>(item.data()));
+		for (auto &&key : keys) {
 			mObjects.remove(key);
 		}
 	});
@@ -181,7 +182,7 @@ void ConstraintsChecker::bindToWorldModelObjects()
 
 void ConstraintsChecker::bindToRobotObjects()
 {
-	for (model::RobotModel * const robotModel : mModel.robotModels()) {
+	for (auto &&robotModel : mModel.robotModels()) {
 		bindRobotObject(robotModel);
 	}
 
@@ -189,7 +190,8 @@ void ConstraintsChecker::bindToRobotObjects()
 	connect(&mModel, &model::Model::robotRemoved, this, [this](model::RobotModel * const robot) {
 		const QStringList keys = mObjects.keys(robot);
 		for (const QString &keyToRemove : keys) {
-			for (const QString &key : mObjects.keys()) {
+			const auto &keys = mObjects.keys();
+			for (auto &&key : keys) {
 				if (key.startsWith(keyToRemove)) {
 					mObjects.remove(key);
 				}
@@ -202,7 +204,8 @@ void ConstraintsChecker::bindObject(const QString &id, QObject * const object)
 {
 	mObjects[id] = object;
 	connect(object, &QObject::destroyed, this, [=]() {
-		for (const QString &key : mObjects.keys(object)) {
+		const auto &keys = mObjects.keys(object);
+		for (auto &&key : keys) {
 			mObjects.remove(key);
 		}
 	});
@@ -276,7 +279,7 @@ void ConstraintsChecker::programStarted()
 	}
 
 	// Actually not all devices were configured during binding to robot, so iterating through them here...
-	for (model::RobotModel * const robot : mModel.robotModels()) {
+	for (auto &&robot : mModel.robotModels()) {
 		const QStringList robotIds = mObjects.keys(robot);
 		if (robotIds.isEmpty()) {
 			continue;
@@ -304,18 +307,18 @@ void ConstraintsChecker::programFinished(qReal::interpretation::StopReason reaso
 		if (mDefferedSuccessTriggered && reason == qReal::interpretation::StopReason::finished) {
 			onSuccess();
 		} else {
-			emit fail(tr("Program has finished, but the task is not accomplished."));
+			Q_EMIT fail(tr("Program has finished, but the task is not accomplished."));
 		}
 	}
 }
 
 void ConstraintsChecker::onSuccess()
 {
-	for (const auto &event : mEvents) {
+	for (auto &&event : mEvents) {
 		if (event->id().startsWith("on_success")) {
 			event->setUp();
 			event->check();
 		}
 	}
-	emit success();
+	Q_EMIT success();
 }
