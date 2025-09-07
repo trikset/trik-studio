@@ -28,6 +28,9 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 	b2BodyDef bodyDef = b2DefaultBodyDef();
 	bodyDef.position = pos;
 	bodyDef.rotation = b2MakeRot(angle);
+	bodyDef.angularDamping = item->angularDamping();
+	bodyDef.linearDamping = item->linearDamping();
+
 	if (item->bodyType() == SolidItem::DYNAMIC) {
 		bodyDef.type = b2_dynamicBody;
 	} else if (item->bodyType() == SolidItem::KINEMATIC) {
@@ -38,8 +41,6 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 
 	auto worldId = this->mEngine.box2DWorldId();
 	mBodyId = b2CreateBody(worldId, &bodyDef);
-	b2Body_SetAngularDamping(mBodyId, item->angularDamping());
-	b2Body_SetLinearDamping(mBodyId, item->linearDamping());
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
 	fixtureDef.material.restitution = 0.8f;
 	QPolygonF collidingPolygon = item->collidingPolygon();

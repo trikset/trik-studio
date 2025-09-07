@@ -17,45 +17,58 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtSvg/QSvgRenderer>
+#include <qrutils/graphicsUtils/rectangleImpl.h>
+#include <twoDModel/engine/model/constants.h>
+
+namespace {
+	const auto cubeSize = twoDModel::pixelsInCm * 4.0f;
+}
 
 using namespace twoDModel::items;
 
-CubeItem::CubeItem(const QPointF &position)
+CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		QPointF position)
 	: mSvgRenderer(new QSvgRenderer)
 {
-	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
+	setCoordinateSystem(metricSystem);
+	mSvgRenderer->load(QString(":/icons/2d_cube.svg"));
 	setPos(position);
 	setZValue(ZValue::Moveable);
+	setX2(x1() + cubeSize);
+	setY2(y1() + cubeSize);
 	setTransformOriginPoint(boundingRect().center());
+	RotateItem::init();
+	savePos();
 }
 
-BallItem::~BallItem()
+CubeItem::~CubeItem()
 {
 	delete mSvgRenderer;
 }
 
-QAction *BallItem::ballTool()
+QAction *CubeItem::cubeTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
-	result->setShortcuts({QKeySequence(Qt::Key_B), QKeySequence(Qt::Key_4)});
+	QAction * const result = new QAction(QIcon(":/icons/2d_cube.svg"), tr("Cube (X)"), nullptr);
+	result->setShortcuts({QKeySequence(Qt::Key_X), QKeySequence(Qt::Key_4)});
 	result->setCheckable(true);
 	return result;
 }
 
-QRectF BallItem::boundingRect() const
+QRectF CubeItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(ballSize.width() / 2.0), -static_cast<qreal>(ballSize.height() / 2.0)}
-				  , ballSize);
+	return graphicsUtils::RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0);
 }
 
-void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void CubeItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
-	mSvgRenderer->render(painter, boundingRect());
+	mSvgRenderer->render(painter,
+		graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()));
+
 }
 
-void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
+void CubeItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
 {
 	Q_UNUSED(option)
 	painter->setPen(getStrokePen());
@@ -66,38 +79,43 @@ void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGra
 	}
 }
 
-void BallItem::drawExtractionForItem(QPainter *painter)
+void CubeItem::drawExtractionForItem(QPainter *painter)
 {
-	painter->drawEllipse(boundingRect());
+	painter->drawRect(graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()));
 }
 
-void BallItem::savePos()
+void CubeItem::savePos()
 {
 	saveStartPosition();
 	AbstractItem::savePos();
 }
 
-QDomElement BallItem::serialize(QDomElement &element) const
+QDomElement CubeItem::serialize(QDomElement &element) const
 {
 	QDomElement ballNode = AbstractItem::serialize(element);
-	ballNode.setTagName("ball");
-	ballNode.setAttribute("x", QString::number(x1() + scenePos().x()));
-	ballNode.setAttribute("y", QString::number(y1() + scenePos().y()));
-	ballNode.setAttribute("markerX", QString::number(x1() + mStartPosition.x()));
-	ballNode.setAttribute("markerY", QString::number(y1() + mStartPosition.y()));
+	auto *coordSystem = coordinateSystem();
+	ballNode.setTagName("cube");
+	ballNode.setAttribute("x",
+			      QString::number(coordSystem->toUnit(x1() + scenePos().x())));
+	ballNode.setAttribute("y",
+			      QString::number(coordSystem->toUnit(y1() + scenePos().y())));
+	ballNode.setAttribute("markerX",
+			      QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
+	ballNode.setAttribute("markerY",
+			      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	ballNode.setAttribute("rotation", QString::number(rotation()));
 	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
 	return ballNode;
 }
 
-void BallItem::deserialize(const QDomElement &element)
+void CubeItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-
-	qreal x = element.attribute("x", "0").toDouble();
-	qreal y = element.attribute("y", "0").toDouble();
-	qreal markerX = element.attribute("markerX", "0").toDouble();
-	qreal markerY = element.attribute("markerY", "0").toDouble();
+	auto *coordSystem = coordinateSystem();
+	qreal x = coordSystem->toPx(element.attribute("x", "0").toDouble());
+	qreal y = coordSystem->toPx(element.attribute("y", "0").toDouble());
+	qreal markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
+	qreal markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
 	qreal rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 
@@ -108,77 +126,67 @@ void BallItem::deserialize(const QDomElement &element)
 	emit x1Changed(x1());
 }
 
-QPainterPath BallItem::shape() const
+QPainterPath CubeItem::shape() const
 {
 	QPainterPath result;
-	result.addEllipse(boundingRect());
+	result.addRect(boundingRect());
 	return result;
 }
 
-void BallItem::saveStartPosition()
+void CubeItem::saveStartPosition()
 {
 	if (this->editable()) {
 		mStartPosition = pos();
 		mStartRotation = rotation();
-		emit x1Changed(x1());
+		Q_EMIT x1Changed(x1());
 	}
 }
 
-void BallItem::returnToStartPosition()
+void CubeItem::returnToStartPosition()
 {
 	setPos(mStartPosition);
 	setRotation(mStartRotation);
-	emit x1Changed(x1());
+	Q_EMIT x1Changed(x1());
 }
 
-QPolygonF BallItem::collidingPolygon() const
+QPolygonF CubeItem::collidingPolygon() const
 {
 	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
-qreal BallItem::angularDamping() const
+qreal CubeItem::angularDamping() const
 {
-	return 0.09f;
+	return 6.0f;
 }
 
-qreal BallItem::linearDamping() const
+qreal CubeItem::linearDamping() const
 {
-	return 0.09f;
+	return 6.0f;
 }
 
-QPainterPath BallItem::path() const
+QPainterPath CubeItem::path() const
 {
 	QPainterPath path;
-	QPolygonF collidingPlgn = collidingPolygon();
-	QMatrix m;
-	m.rotate(rotation());
-
-	QPointF firstP = collidingPlgn.at(0);
-	collidingPlgn.translate(-firstP.x(), -firstP.y());
-
-	path.addEllipse(collidingPlgn.boundingRect());
-	path = m.map(path);
-	path.translate(firstP.x(), firstP.y());
-
-	return path;
+	path.addRect(boundingRect());
+	return sceneTransform().map(path);
 }
 
-bool BallItem::isCircle() const
+bool CubeItem::isCircle() const
 {
-	return true;
+	return false;
 }
 
-qreal BallItem::mass() const
+qreal CubeItem::mass() const
 {
-	return 0.015f;
+	return 0.100f;
 }
 
-qreal BallItem::friction() const
+qreal CubeItem::friction() const
 {
-	return 1.0f;
+	return 0.3f;
 }
 
-SolidItem::BodyType BallItem::bodyType() const
+SolidItem::BodyType CubeItem::bodyType() const
 {
 	return SolidItem::DYNAMIC;
 }

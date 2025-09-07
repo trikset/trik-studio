@@ -25,6 +25,7 @@
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/ballItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/startPosition.h"
 #include "qrutils/mathUtils/math.h"
 #include "parts/box2DWheel.h"
@@ -50,6 +51,8 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 	connect(&worldModel, &model::WorldModel::skittleAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::ballAdded,
+			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
+	connect(&worldModel, &model::WorldModel::cubeAdded,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemAdded(i.data());});
 	connect(&worldModel, &model::WorldModel::itemRemoved,
 			this, [this](const QSharedPointer<QGraphicsItem> &i) {itemRemoved(i.data());});

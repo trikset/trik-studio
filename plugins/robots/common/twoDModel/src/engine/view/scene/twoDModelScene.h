@@ -49,6 +49,7 @@ class RectangleItem;
 class EllipseItem;
 class CommentItem;
 class ImageItem;
+class CubeItem;
 }
 
 namespace model {
@@ -95,6 +96,9 @@ public slots:
 
 	/// Sets a flag that next user mouse actions should draw a ball on the scene.
 	void addBall();
+
+	/// Sets a flag that next user mouse actions should draw a cube on the scene.
+	void addCube();
 
 	/// Sets a flag that next user mouse actions should draw a colored line on the scene.
 	void addLine();
@@ -170,6 +174,9 @@ private slots:
 	/// Called after new ball is added to a world model.
 	void onBallAdded(const QSharedPointer<items::BallItem> &ball);
 
+	/// Called after new cube is added to a world model.
+	void onCubeAdded(const QSharedPointer<items::CubeItem> &cube);
+
 //	/// Called after new color field item is added to a world model.
 //	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
@@ -190,6 +197,7 @@ private:
 		, wall
 		, skittle
 		, ball
+		, cube
 		, line
 		, bezier
 		, stylus
@@ -249,6 +257,7 @@ private:
 	QSharedPointer<items::WallItem> mCurrentWall;
 	QSharedPointer<items::SkittleItem> mCurrentSkittle;
 	QSharedPointer<items::BallItem> mCurrentBall;
+	QSharedPointer<items::CubeItem> mCurrentCube;
 	QSharedPointer<items::LineItem> mCurrentLine;
 	QSharedPointer<items::CurveItem> mCurrentCurve;
 	QSharedPointer<items::StylusItem> mCurrentStylus;

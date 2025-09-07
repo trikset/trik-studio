@@ -1,4 +1,4 @@
-/* Copyright 20w5 CyberTech Labs Ltd.
+/* Copyright 2025 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ class CubeItem : public graphicsUtils::RotateItem, public SolidItem
 	Q_DISABLE_COPY(CubeItem)
 
 public:
-	explicit CubeItem(const QPointF &position);
+	explicit CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			  QPointF position);
 	~CubeItem();
 
 	/// Creates and returns ball item for 2D model palette.

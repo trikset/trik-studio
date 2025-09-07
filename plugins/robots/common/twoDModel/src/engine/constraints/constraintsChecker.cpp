@@ -24,6 +24,7 @@
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/ballItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/regions/regionItem.h"
 
@@ -168,7 +169,8 @@ void ConstraintsChecker::bindToWorldModelObjects()
 			, this, [this](const QSharedPointer<items::SkittleItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
 			, this, [this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
-
+	connect(&mModel.worldModel(), &model::WorldModel::cubeAdded
+			, this, [this](const QSharedPointer<items::CubeItem> &item) { bindObject(item->id(), item.data()); });
 	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
 			, this, [this](const QSharedPointer<QGraphicsItem> &item) {
 		for (const QString &key : mObjects.keys(dynamic_cast<QObject*>(item.data()))) {

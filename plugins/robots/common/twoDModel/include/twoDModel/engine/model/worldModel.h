@@ -41,6 +41,7 @@ class ColorFieldItem;
 class ImageItem;
 class RegionItem;
 class CommentItem;
+class CubeItem;
 }
 
 namespace model {
@@ -86,6 +87,9 @@ public:
 	/// Returns a set of balls in the world model. Result is mapping of ball ids to balls themselves.
 	const QMap<QString, QSharedPointer<items::BallItem>> &balls() const;
 
+	/// Returns a set of cubes in the world model. Result is mapping of cube ids to cubes themselves.
+	const QMap<QString, QSharedPointer<items::CubeItem>> &cubes() const;
+
 	/// Returns a set of color field items in the world model. Result is mapping of field ids to fields themselves.
 	const QMap<QString, QSharedPointer<items::ColorFieldItem>> &colorFields() const;
 
@@ -118,6 +122,12 @@ public:
 
 	/// Removes \a ball from the world model.
 	void removeBall(QSharedPointer<items::BallItem> ball);
+
+	/// Appends \a cube into world model.
+	void addCube(const QSharedPointer<items::CubeItem> &cube);
+
+	/// Removes \a cube from the world model.
+	void removeCube(QSharedPointer<items::CubeItem> cube);
 
 	/// Appends \a comment into world model.
 	void addComment(const QSharedPointer<items::CommentItem> &comment);
@@ -179,6 +189,9 @@ public:
 	/// Creates ball item described by \a element in the world model.
 	void createBall(const QDomElement &element);
 
+	/// Creates cube item described by \a element in the world model.
+	void createCube(const QDomElement &element);
+
 	/// Creates line colored item described by \a element in the world model.
 	void createLine(const QDomElement &element);
 
@@ -216,8 +229,11 @@ signals:
 	/// Emitted each time when model is appended with some new skittle.
 	void skittleAdded(const QSharedPointer<items::SkittleItem> &item);
 
-	/// Emitted each time when model is appended with some new skittle.
+	/// Emitted each time when model is appended with some new ball.
 	void ballAdded(const QSharedPointer<items::BallItem> &item);
+
+	/// Emitted each time when model is appended with some new cube.
+	void cubeAdded(const QSharedPointer<items::CubeItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
 	void commentAdded(const QSharedPointer<items::CommentItem> &item);
@@ -258,6 +274,7 @@ private:
 	QMap<QString, QSharedPointer<items::WallItem>> mWalls;
 	QMap<QString, QSharedPointer<items::SkittleItem>> mSkittles;
 	QMap<QString, QSharedPointer<items::BallItem>> mBalls;
+	QMap<QString, QSharedPointer<items::CubeItem>> mCubes;
 	QMap<QString, QSharedPointer<items::ColorFieldItem>> mColorFields;
 	QMap<QString, QSharedPointer<items::ImageItem>> mImageItems;
 	QMap<QString, QSharedPointer<items::RegionItem>> mRegions;
