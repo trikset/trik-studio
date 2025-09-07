@@ -377,22 +377,22 @@
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Edit</source>
-        <translation type="unfinished">Редактировать</translation>
+        <translation>Редактировать</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
 </context>
 <context>
@@ -425,7 +425,20 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+571"/>
+        <location line="+523"/>
+        <location line="+7"/>
+        <location line="+7"/>
+        <location line="+14"/>
+        <source>cm</source>
+        <translation>см</translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>kg</source>
+        <translation>кг</translation>
+    </message>
+    <message>
+        <location line="+63"/>
         <source>Decrease speed</source>
         <translation>Уменьшить скорость</translation>
     </message>
@@ -445,7 +458,7 @@
         <translation>Увеличить скорость</translation>
     </message>
     <message>
-        <location line="-402"/>
+        <location line="-463"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -462,7 +475,7 @@
     <message>
         <location line="+20"/>
         <source>Pixels in cm:</source>
-        <translation>Кол-во пиксей в см</translation>
+        <translation>Кол-во пикселей в см</translation>
     </message>
     <message>
         <location line="+38"/>
@@ -480,27 +493,27 @@
         <translation>Реалистичные моторы</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+79"/>
         <source>Wheel diameter:</source>
         <translation>Диаметр колеса:</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="-26"/>
         <source>Robot height:</source>
         <translation>Высота робота:</translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+13"/>
         <source>Robot mass:</source>
         <translation>Масса робота:</translation>
     </message>
     <message>
-        <location line="-20"/>
+        <location line="+115"/>
         <source>Robot width:</source>
         <translation>Ширина робота:</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="-51"/>
         <source>Robot track:</source>
         <translation>Колея робота:</translation>
     </message>
@@ -601,7 +614,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
         <source>Text (T)</source>
-        <translation type="unfinished">Текст (Т)</translation>
+        <translation>Текст (Т)</translation>
     </message>
 </context>
 <context>
@@ -688,6 +701,49 @@
         <location line="+98"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::model::SizeUnit</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
+        <source>cm</source>
+        <translation>см</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>mm</source>
+        <translation>мм</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>m</source>
+        <translation>м</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>px</source>
+        <translation>пкс</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pixels</source>
+        <translation>Пиксели</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Centimeters</source>
+        <translation>Сантиметры</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Meters</source>
+        <translation>Метры</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Millimeters</source>
+        <translation>Миллиметры</translation>
     </message>
 </context>
 <context>
@@ -1030,7 +1086,7 @@
     <message>
         <location line="+7"/>
         <source>Move start position here</source>
-        <translation type="unfinished">Передвинуть стартовое положение робота сюда</translation>
+        <translation>Передвинуть стартовое положение робота сюда</translation>
     </message>
     <message>
         <location line="+20"/>
@@ -1055,7 +1111,7 @@
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+745"/>
         <source>Select images</source>
-        <translation type="unfinished">Выберите картинки</translation>
+        <translation>Выберите картинки</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1080,13 +1136,13 @@
     <message>
         <location line="+1"/>
         <source>Cannot load %1. Try another file.</source>
-        <translation type="unfinished">Невозможно загрузить %1. Попробуйте другой файл.</translation>
+        <translation>Невозможно загрузить %1. Попробуйте другой файл.</translation>
     </message>
 </context>
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+328"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+343"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1104,7 +1160,17 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="-192"/>
+        <source>cm</source>
+        <translation>см</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>kg</source>
+        <translation>кг</translation>
+    </message>
+    <message>
+        <location line="+268"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1158,7 +1224,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+203"/>
+        <location line="+204"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

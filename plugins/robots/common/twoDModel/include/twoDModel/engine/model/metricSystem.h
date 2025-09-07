@@ -57,6 +57,9 @@ public:
 	/// Convert size from WorldModel to pixels
 	qreal toPx(const qreal size) const;
 
+	/// Get current unit string representation
+	QString toStr() const;
+
 	std::map<QString, Unit> currentValues() const;
 
 	Unit defaultUnit() const;
