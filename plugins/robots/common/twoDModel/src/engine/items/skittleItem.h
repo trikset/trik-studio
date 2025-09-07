@@ -54,6 +54,7 @@ public:
 	qreal mass() const override;
 	BodyType bodyType() const override;
 	qreal friction() const override;
+	qreal restitution() const override;
 	QPolygonF collidingPolygon() const override;
 	qreal angularDamping() const override;
 	qreal linearDamping() const override;
@@ -61,10 +62,17 @@ public:
 	QPainterPath path() const;
 
 private:
+	void setDiameter(const qreal diameter);
 	QPointF mStartPosition;
 	qreal mStartRotation {0.0};
 
 	QSvgRenderer *mSvgRenderer;
+	qreal mDiameterPx;
+	qreal mMass;
+	qreal mFriction;
+	qreal mRestitution;
+	qreal mAngularDamping;
+	qreal mLinearDamping;
 };
 
 }

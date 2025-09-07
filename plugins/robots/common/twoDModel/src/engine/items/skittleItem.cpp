@@ -22,9 +22,24 @@
 
 using namespace twoDModel::items;
 
+namespace {
+	constexpr int skittleDiameter = 20;
+	constexpr qreal skittleMass = 0.05f;
+	constexpr qreal skittleFriction = 0.2f;
+	constexpr qreal skittleRestituion = 0.8f;
+	constexpr qreal skittleAngularDamping = 6.0f;
+	constexpr qreal skittleLinearDamping = 6.0f;
+}
+
 SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			QPointF position)
 	: mSvgRenderer(new QSvgRenderer)
+	, mDiameterPx(skittleDiameter)
+	, mMass(skittleMass)
+	, mFriction(skittleFriction)
+	, mRestitution(skittleRestituion)
+	, mAngularDamping(skittleAngularDamping)
+	, mLinearDamping(skittleLinearDamping)
 {
 	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
@@ -48,8 +63,8 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(skittleSize.width()) / 2, -static_cast<qreal>(skittleSize.height()) / 2}
-				  , skittleSize);
+	return QRectF({ -mDiameterPx / 2, -mDiameterPx / 2 }
+			, QSizeF{mDiameterPx, mDiameterPx});
 }
 
 void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -96,6 +111,12 @@ QDomElement SkittleItem::serialize(QDomElement &element) const
 	                         QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	skittleNode.setAttribute("rotation", QString::number(rotation()));
 	skittleNode.setAttribute("startRotation", QString::number(mStartRotation));
+	skittleNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
+	skittleNode.setAttribute("mass", QString::number(mMass));
+	skittleNode.setAttribute("friction", QString::number(mFriction));
+	skittleNode.setAttribute("restitution", QString::number(mRestitution));
+	skittleNode.setAttribute("angularDamping", QString::number(mAngularDamping));
+	skittleNode.setAttribute("linearDamping", QString::number(mLinearDamping));
 	return skittleNode;
 }
 
@@ -110,6 +131,22 @@ void SkittleItem::deserialize(const QDomElement &element)
 	qreal rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 
+	if (element.hasAttribute("diameter")) {
+		setDiameter(coordSystem->toPx(
+				element.attribute("diameter", "").toDouble()));
+	}
+	if (element.hasAttribute("mass")) {
+		mMass = element.attribute("mass").toDouble();
+	}
+	if (element.hasAttribute("friction")) {
+		mFriction = element.attribute("friction", "").toDouble();
+	}
+	if (element.hasAttribute("angularDamping")) {
+		mAngularDamping = element.attribute("angularDamping").toDouble();
+	}
+	if (element.hasAttribute("linearDamping")) {
+		mLinearDamping = element.attribute("linearDamping").toDouble();
+	}
 	setPos(QPointF(x, y));
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
@@ -140,12 +177,12 @@ QPolygonF SkittleItem::collidingPolygon() const
 
 qreal SkittleItem::angularDamping() const
 {
-	return 6.0f;
+	return mAngularDamping;
 }
 
 qreal SkittleItem::linearDamping() const
 {
-	return 6.0f;
+	return mLinearDamping;
 }
 
 QPainterPath SkittleItem::path() const
@@ -172,12 +209,23 @@ bool SkittleItem::isCircle() const
 
 qreal SkittleItem::mass() const
 {
-	return 0.05;
+	return mMass;
 }
 
 qreal SkittleItem::friction() const
 {
-	return 0.2;
+	return mFriction;
+}
+
+qreal SkittleItem::restitution() const
+{
+	return mRestitution;
+}
+
+void SkittleItem::setDiameter(const qreal diameter)
+{
+	prepareGeometryChange();
+	mDiameterPx = diameter;
 }
 
 SolidItem::BodyType SkittleItem::bodyType() const

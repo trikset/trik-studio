@@ -51,6 +51,9 @@ public:
 	/// Returns body's friction.
 	virtual qreal friction() const = 0;
 
+	/// Returns body's restitution.
+	virtual qreal restitution() const = 0;
+
 	/// Returns body's type.
 	virtual BodyType bodyType() const = 0;
 

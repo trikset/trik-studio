@@ -41,7 +41,7 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 	b2Body_SetAngularDamping(mBodyId, item->angularDamping());
 	b2Body_SetLinearDamping(mBodyId, item->linearDamping());
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = 0.8f;
+	fixtureDef.material.restitution = item->restitution();
 	QPolygonF collidingPolygon = item->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
 	b2Circle circleShape = {};

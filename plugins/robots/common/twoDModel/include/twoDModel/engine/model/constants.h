@@ -22,8 +22,6 @@ namespace twoDModel {
 const qreal lowPrecision = 0.00001;
 
 const qreal robotMass = 800;
-const QSize skittleSize(20, 20);
-const QSize ballSize(30, 30);
 const qreal robotWidth = 50;
 const qreal robotHeight = 50;
 const QSize displaySize(200, 300);
