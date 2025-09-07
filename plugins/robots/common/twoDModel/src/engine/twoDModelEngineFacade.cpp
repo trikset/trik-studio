@@ -192,7 +192,8 @@ void TwoDModelEngineFacade::onStartInterpretation()
 	if (!mModel->settings().realisticPhysics() &&
 			(!mModel->worldModel().balls().isEmpty() || !mModel->worldModel().skittles().isEmpty()
 			 || !mModel->worldModel().cubes().isEmpty())) {
-		mModel->errorReporter()->addWarning(tr("Realistic physics' must be turned on to enjoy skittles, cubes and balls"));
+		mModel->errorReporter()->addWarning(
+					tr("Realistic physics' must be turned on to enjoy skittles, cubes and balls"));
 	}
 	mModel->timeline().start();
 }

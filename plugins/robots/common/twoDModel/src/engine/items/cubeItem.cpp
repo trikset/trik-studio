@@ -65,7 +65,6 @@ void CubeItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	Q_UNUSED(widget)
 	mSvgRenderer->render(painter,
 		graphicsUtils::RectangleImpl::calcRect(x1(), y1(), x2(), y2()));
-
 }
 
 void CubeItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option)
