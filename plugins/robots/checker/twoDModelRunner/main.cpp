@@ -137,7 +137,8 @@ int main(int argc, char *argv[])
 						, QObject::tr("Do not run the interpretation in any mode, "\
 							      "this is a parameter that is only used to generate a file."));
 	QCommandLineOption delayOption("delay-before-exit"
-						, QObject::tr("Add a delay in milliseconds after the script is executed before closing the window")
+						, QObject::tr("Add a delay in milliseconds after executing "
+									"the script before closing the window")
 						, "Delay in ms", "0");
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
@@ -178,7 +179,8 @@ int main(int argc, char *argv[])
 		delay = 0;
 	}
 
-	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode, qrsFile, delay));
+	QScopedPointer<twoDModel::Runner> runner(
+				new twoDModel::Runner(report, trajectory, input, mode, qrsFile, delay));
 	auto speedFactor = parser.value(speedOption).toInt();
 
 	if (!generatePath.isEmpty()) {

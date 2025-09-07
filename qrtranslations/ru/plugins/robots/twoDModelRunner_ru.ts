@@ -62,11 +62,16 @@ In background mode the session will be terminated just after the execution ended
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>Add a delay in milliseconds after executing the script before closing the window</source>
+        <translation>Добавить задержку в миллисекундах после выполнения скрипта перед закрытием окна</translation>
+    </message>
+    <message>
         <source>Do not run the interpretation in any mode, this is a parameter used only to generate a file.</source>
         <translation type="vanished">Не запускайте интерпретацию ни в каком режиме, этот параметр используется только для генерации файла.</translation>
     </message>
     <message>
-        <location line="-6"/>
+        <location line="-9"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
         <translation>Выберите &quot;python&quot; или &quot;javascript&quot;.</translation>
     </message>
@@ -98,7 +103,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+239"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+240"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>
