@@ -87,7 +87,7 @@ Box2DItem::~Box2DItem()
 	}
 }
 
-void Box2DItem::moveToPosition(const b2Vec2 &pos)
+void Box2DItem::moveToPosition(b2Vec2 pos)
 {
 	b2Body_SetTransform(mBodyId, pos, b2Body_GetRotation(mBodyId));
 	mPreviousPosition = b2Body_GetPosition(mBodyId);

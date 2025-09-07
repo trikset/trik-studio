@@ -286,7 +286,7 @@ void ConstraintsChecker::programStarted()
 		}
 
 		const QString robotId = robotIds[0];
-		for (kitBase::robotModel::robotParts::Device * const device : robot->info().configuration().devices()) {
+		for (auto &&device : robot->info().configuration().devices()) {
 			bindDeviceObject(robotId, robot, device->port());
 		}
 	}
