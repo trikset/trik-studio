@@ -215,7 +215,20 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+571"/>
+        <location line="+523"/>
+        <location line="+7"/>
+        <location line="+7"/>
+        <location line="+14"/>
+        <source>cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-7"/>
+        <source>kg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+63"/>
         <source>Decrease speed</source>
         <translation>Diminuer la vitesse</translation>
     </message>
@@ -235,7 +248,7 @@
         <translation>Augmenter la vitesse</translation>
     </message>
     <message>
-        <location line="-402"/>
+        <location line="-463"/>
         <source>Left wheel:</source>
         <translation>Roue gauche :</translation>
     </message>
@@ -270,27 +283,27 @@
         <translation>Moteurs réalistes</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+79"/>
         <source>Wheel diameter:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="-26"/>
         <source>Robot height:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+13"/>
         <source>Robot mass:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+64"/>
         <source>Robot track:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-43"/>
+        <location line="+51"/>
         <source>Robot width:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -411,6 +424,49 @@
     <message>
         <location line="+98"/>
         <source>This robot model already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::model::SizeUnit</name>
+    <message>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
+        <source>cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>mm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pixels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Centimeters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Meters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Millimeters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -743,7 +799,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+328"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+343"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -761,7 +817,17 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="-192"/>
+        <source>cm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>kg</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+268"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -803,7 +869,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+203"/>
+        <location line="+204"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

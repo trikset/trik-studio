@@ -107,13 +107,27 @@ qreal SizeUnit::toPx(const qreal size) const
 	return size;
 }
 
+QString SizeUnit::toStr() const
+{
+	if (mSizeUnit == SizeUnit::Unit::Centimeters) {
+		return tr("cm");
+	}
+	if (mSizeUnit == SizeUnit::Unit::Millimeters) {
+		return tr("mm");
+	}
+	if (mSizeUnit == SizeUnit::Unit::Meters) {
+		return tr("m");
+	}
+	return tr("px");
+}
+
 std::map<QString, SizeUnit::Unit> SizeUnit::currentValues() const
 {
 	return {
-		{"Pixels", Unit::Pixels }
-		, {"Centimeters", Unit::Centimeters}
-		, {"Meters", Unit::Meters}
-		, {"Millimeters", Unit::Millimeters}
+		{tr("Pixels"), Unit::Pixels }
+		, {tr("Centimeters"), Unit::Centimeters}
+		, {tr("Meters"), Unit::Meters}
+		, {tr("Millimeters"), Unit::Millimeters}
 	};
 }
 
