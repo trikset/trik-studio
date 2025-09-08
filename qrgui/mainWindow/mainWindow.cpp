@@ -714,21 +714,37 @@ void MainWindow::initDarkPalette() {
 		return;
 	}
 
-	const auto &platform = QString::fromUtf8(qgetenv("QT_QPA_PLATFORM"));
-	const static QRegExp rx("windows:.*darkmode=(\\d)");
+	const auto &platform = QString::fromUtf8(qgetenv("TRIK_STUDIO_THEME"));
+	constexpr auto lightThemeMessage = "A LIGHT THEME HAS BEEN SELECTED";
+	QLOG_INFO() << "TRIK_STUDIO_THEME IS" << platform;
 
-	if (rx.indexIn(platform) != -1) {
-		// if darkmode=0, dont use dark theme
-		if (rx.cap(1).toInt() == 0) {
-			return;
-		}
-	}
-
-	// if darkmode!=0, make sure that the apps use a dark theme
-	if (!windowsDarkThemeAvailiable() || !windowsIsInDarkTheme()) {
+	if (platform == "light") {
+		QLOG_INFO() << lightThemeMessage;
 		return;
 	}
 
+	if (platform != "auto" && platform != "dark" && !platform.isEmpty()) {
+		QLOG_INFO() << "INVALID VALUE" << platform << "FOR VARIABLE TRIK_STUDIO_THEME";
+		QLOG_INFO() << "THE THEME WILL BE SELECTED AUTOMATICALLY";
+	}
+
+	auto darkThemeAvailiable = windowsDarkThemeAvailiable();
+	QLOG_INFO() << "windowsDarkThemeAvailiable RETURNS" << darkThemeAvailiable;
+
+	if (!darkThemeAvailiable) {
+		QLOG_INFO() << lightThemeMessage;
+		return;
+	}
+
+	auto isInDarkTheme = windowsIsInDarkTheme();
+	QLOG_INFO() << "windowsIsInDarkTheme RETURNS" << isInDarkTheme;
+
+	if (!isInDarkTheme) {
+		QLOG_INFO() << lightThemeMessage;
+		return;
+	}
+
+	QLOG_INFO() << "A DARK THEME HAS BEEN SELECTED";
 	QApplication::setPalette(BrandManager::styles()->loadPalette(
 		QCoreApplication::applicationDirPath() +
 		"/palettes/darkWindowsPalette.ini")
