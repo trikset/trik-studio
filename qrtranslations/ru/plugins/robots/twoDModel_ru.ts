@@ -620,7 +620,7 @@
 <context>
     <name>twoDModel::items::CubeItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+51"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+62"/>
         <source>Cube (X)</source>
         <translation>Куб (X)</translation>
     </message>
