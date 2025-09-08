@@ -26,8 +26,8 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 namespace {
-	static constexpr qreal wallFriction = 1.0f;
-	static constexpr qreal wallRestituion = 0.8f;
+	constexpr qreal wallFriction = 1.0f;
+	constexpr qreal wallRestituion = 0.8f;
 }
 
 WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
