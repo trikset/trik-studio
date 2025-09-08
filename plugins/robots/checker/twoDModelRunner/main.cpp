@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
 	const auto &delayStr = parser.value(delayOption);
 	auto delayIsCorrect = false;
 	auto delay = delayStr.toInt(&delayIsCorrect);
-	if (!delayIsCorrect || (delayIsCorrect && delay < 0)) {
+	if (!delayIsCorrect || delay < 0) {
 		delay = 0;
 	}
 
