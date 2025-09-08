@@ -56,7 +56,12 @@ In background mode the session will be terminated just after the execution ended
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-6"/>
+        <location line="+3"/>
+        <source>Add a delay in milliseconds after executing the script before closing the window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-9"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -92,7 +97,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+239"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+240"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>
