@@ -22,9 +22,24 @@
 
 using namespace twoDModel::items;
 
+namespace {
+	constexpr int defaultBallDiameterPx = 30;
+	constexpr qreal ballMass = 0.015f;
+	constexpr qreal ballFriction = 1.0f;
+	constexpr qreal ballRestituion = 0.8f;
+	constexpr qreal ballAngularDamping = 0.09f;
+	constexpr qreal ballLinearDamping = 0.09f;
+}
+
 BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QPointF position)
 	: mSvgRenderer(new QSvgRenderer)
+	, mDiameterPx(defaultBallDiameterPx)
+	, mMass(ballMass)
+	, mFriction(ballFriction)
+	, mRestitution(ballRestituion)
+	, mAngularDamping(ballAngularDamping)
+	, mLinearDamping(ballLinearDamping)
 {
 	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_ball.svg"));
@@ -48,8 +63,8 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return QRectF({-static_cast<qreal>(ballSize.width() / 2.0), -static_cast<qreal>(ballSize.height() / 2.0)}
-				  , ballSize);
+	return QRectF({ -mDiameterPx / 2.0, -mDiameterPx / 2.0}
+			, QSizeF{mDiameterPx, mDiameterPx});
 }
 
 void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -96,6 +111,12 @@ QDomElement BallItem::serialize(QDomElement &element) const
 	                      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	ballNode.setAttribute("rotation", QString::number(rotation()));
 	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
+	ballNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
+	ballNode.setAttribute("mass", QString::number(mMass));
+	ballNode.setAttribute("friction", QString::number(mFriction));
+	ballNode.setAttribute("restitution", QString::number(mRestitution));
+	ballNode.setAttribute("angularDamping", QString::number(mAngularDamping));
+	ballNode.setAttribute("linearDamping", QString::number(mLinearDamping));
 	return ballNode;
 }
 
@@ -110,11 +131,27 @@ void BallItem::deserialize(const QDomElement &element)
 	qreal rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
 
+	if (element.hasAttribute("diameter")) {
+		setDiameter(coordSystem->toPx(
+				element.attribute("diameter").toDouble()));
+	}
+	if (element.hasAttribute("mass")) {
+		mMass = element.attribute("mass").toDouble();
+	}
+	if (element.hasAttribute("friction")) {
+		mFriction = element.attribute("friction").toDouble();
+	}
+	if (element.hasAttribute("angularDamping")) {
+		mAngularDamping = element.attribute("angularDamping").toDouble();
+	}
+	if (element.hasAttribute("linearDamping")) {
+		mLinearDamping = element.attribute("linearDamping").toDouble();
+	}
 	setPos(QPointF(x, y));
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
 	setRotation(rotation);
-	emit x1Changed(x1());
+	Q_EMIT x1Changed(x1());
 }
 
 QPainterPath BallItem::shape() const
@@ -147,12 +184,12 @@ QPolygonF BallItem::collidingPolygon() const
 
 qreal BallItem::angularDamping() const
 {
-	return 0.09f;
+	return mAngularDamping;
 }
 
 qreal BallItem::linearDamping() const
 {
-	return 0.09f;
+	return mLinearDamping;
 }
 
 QPainterPath BallItem::path() const
@@ -179,15 +216,26 @@ bool BallItem::isCircle() const
 
 qreal BallItem::mass() const
 {
-	return 0.015f;
+	return mMass;
 }
 
 qreal BallItem::friction() const
 {
-	return 1.0f;
+	return mFriction;
+}
+
+qreal BallItem::restitution() const
+{
+	return mRestitution;
 }
 
 SolidItem::BodyType BallItem::bodyType() const
 {
 	return SolidItem::DYNAMIC;
+}
+
+void BallItem::setDiameter(const qreal diameter)
+{
+	prepareGeometryChange();
+	mDiameterPx = diameter;
 }

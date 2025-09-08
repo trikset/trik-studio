@@ -25,9 +25,16 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
+namespace {
+	constexpr qreal wallFriction = 1.0f;
+	constexpr qreal wallRestituion = 0.8f;
+}
+
 WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QPointF begin, QPointF end)
 	: mImage(":/icons/2d_wall.png")
+	, mFriction(wallFriction)
+	, mRestitution(wallRestituion)
 {
 	setCoordinateSystem(metricSystem);
 	setX1(begin.x());
@@ -149,6 +156,8 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	                    coordSystem->toUnit(y1() + pos.y()),
 	                    coordSystem->toUnit(x2() + pos.x()),
 	                    coordSystem->toUnit(y2() + pos.y()));
+	wallNode.setAttribute("friction", QString::number(mFriction));
+	wallNode.setAttribute("restitution", QString::number(mRestitution));
 	return wallNode;
 }
 
@@ -169,6 +178,14 @@ void WallItem::deserialize(const QDomElement &element)
 	readPenBrush(element);
 	if (pen().widthF()) {
 		mWallWidth = pen().widthF();
+	}
+
+	if (element.hasAttribute(QStringLiteral("friction"))) {
+		mFriction = element.attribute("friction").toDouble();
+	}
+
+	if (element.hasAttribute(QStringLiteral("restitution"))) {
+		mRestitution = element.attribute("restitution").toDouble();
 	}
 
 	recalculateBorders();
@@ -323,7 +340,12 @@ qreal WallItem::mass() const
 
 qreal WallItem::friction() const
 {
-	return 1.0;
+	return mFriction;
+}
+
+qreal WallItem::restitution() const
+{
+	return mRestitution;
 }
 
 SolidItem::BodyType WallItem::bodyType() const

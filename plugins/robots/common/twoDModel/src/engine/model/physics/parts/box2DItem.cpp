@@ -21,7 +21,7 @@ using namespace twoDModel::items;
 using namespace parts;
 
 Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
-		, const SolidItem *item, const b2Vec2 &pos, float angle)
+		, const SolidItem *item, b2Vec2 pos, float angle)
 	: mIsCircle(false)
 	, mEngine(*engine)
 {
@@ -41,7 +41,7 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 	b2Body_SetAngularDamping(mBodyId, item->angularDamping());
 	b2Body_SetLinearDamping(mBodyId, item->linearDamping());
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = 0.8f;
+	fixtureDef.material.restitution = item->restitution();
 	QPolygonF collidingPolygon = item->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
 	b2Circle circleShape = {};
@@ -86,7 +86,7 @@ Box2DItem::~Box2DItem()
 	}
 }
 
-void Box2DItem::moveToPosition(const b2Vec2 &pos)
+void Box2DItem::moveToPosition(b2Vec2 pos)
 {
 	b2Body_SetTransform(mBodyId, pos, b2Body_GetRotation(mBodyId));
 	mPreviousPosition = b2Body_GetPosition(mBodyId);
