@@ -24,9 +24,11 @@ using namespace twoDModel::items;
 using namespace qReal;
 using namespace graphicsUtils;
 
-ImageItem::ImageItem(const QSharedPointer<model::Image> &image, const QRect &geometry)
+ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		     const QSharedPointer<model::Image> &image, QRect geometry)
 	: mImage(image)
 {
+	setCoordinateSystem(metricSystem);
 	setX(0);
 	setY(0);
 	setX1(geometry.left());
@@ -42,7 +44,7 @@ ImageItem::ImageItem(const QSharedPointer<model::Image> &image, const QRect &geo
 
 AbstractItem *ImageItem::clone() const
 {
-	const auto cloned = new ImageItem(mImage, QRect(x1(), y1(), x2() - x1(), y2() - y1()));
+	const auto cloned = new ImageItem(coordinateSystem(), mImage, QRect(x1(), y1(), x2() - x1(), y2() - y1()));
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
@@ -112,12 +114,14 @@ QDomElement ImageItem::serialize(QDomElement &parent) const
 	imageNode.setTagName("image");
 
 //	mImage.serialize(imageNode);
+	const auto &system = coordinateSystem();
 	imageNode.setAttribute("rect", QString("%1:%2:%3:%4").arg(
-			QString::number(x1())
-			, QString::number(y1())
-			, QString::number(x2() - x1())
-			, QString::number(y2() - y1())));
-	imageNode.setAttribute("position", QString::number(x()) + ":" + QString::number(y()));
+			QString::number(system->toUnit(x1()))
+			, QString::number(system->toUnit(y1()))
+			, QString::number(system->toUnit(x2() - x1()))
+			, QString::number(system->toUnit(y2() - y1()))));
+	imageNode.setAttribute("position", QString::number(system->toUnit(x()))
+					+ ":" + QString::number(system->toUnit(y())));
 	imageNode.setAttribute("imageId", mImage->imageId());
 	imageNode.setAttribute("isBackground", mBackgroundRole ? "true" : "false");
 	return imageNode;
@@ -127,19 +131,20 @@ void ImageItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
 	QRectF rect;
+	const auto& system = coordinateSystem();
 	if (element.hasAttribute("backgroundRect")) {
 		rect = deserializeRect(element.attribute("backgroundRect"));
 		setPos(0, 0);
 		setBackgroundRole(true);
 	} else {
 		rect = deserializeRect(element.attribute("rect"));
-		setPos(RectangleImpl::deserializePoint(element.attribute("position")));
+		setPos(system->toPx(RectangleImpl::deserializePoint(element.attribute("position"))));
 		setBackgroundRole(element.attribute("isBackground", "false") == "true");
 	}
-	setX1(rect.left());
-	setX2(rect.right());
-	setY1(rect.top());
-	setY2(rect.bottom());
+	setX1(system->toPx(rect.left()));
+	setX2(system->toPx(rect.right()));
+	setY1(system->toPx(rect.top()));
+	setY2(system->toPx(rect.bottom()));
 }
 
 QSharedPointer<twoDModel::model::Image> ImageItem::image() const

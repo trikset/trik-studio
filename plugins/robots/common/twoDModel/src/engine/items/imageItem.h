@@ -32,7 +32,8 @@ class ImageItem : public graphicsUtils::AbstractItem
 	Q_DISABLE_COPY(ImageItem)
 
 public:
-	ImageItem(const QSharedPointer<model::Image> &image, const QRect &geometry);
+	ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		  const QSharedPointer<model::Image> &image, QRect geometry);
 
 	AbstractItem *clone() const;
 

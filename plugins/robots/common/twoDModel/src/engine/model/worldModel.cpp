@@ -885,7 +885,8 @@ QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &
 		image.reset(new Image(imageId));
 		mErrorReporter->addError(tr("Unknown image with imageId %1").arg(imageId));
 	}
-	auto imageItem = QSharedPointer<items::ImageItem>::create(image, QRect());
+	auto imageItem = QSharedPointer<items::ImageItem>::create(
+					mMetricCoordinateSystem.data(), image, QRect());
 	imageItem->deserialize(element);
 	imageItem->setBackgroundRole(background || element.attribute("isBackground") == "true");
 	addImageItem(imageItem);
