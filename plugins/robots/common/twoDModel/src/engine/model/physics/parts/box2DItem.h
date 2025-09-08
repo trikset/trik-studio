@@ -37,8 +37,7 @@ public:
 			, const items::SolidItem *mItem, b2Vec2 pos, float angle);
 
 	~Box2DItem();
-
-	/// Transform item tb2Vec2 pos IMPORTANT: \a pos is a center point of box2d object.
+	/// Transform item to a new position, IMPORTANT: \a pos is a center point of box2d object.
 	void moveToPosition(b2Vec2 pos);
 	void setRotation(float angle);
 

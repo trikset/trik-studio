@@ -42,7 +42,7 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 	auto worldId = this->mEngine.box2DWorldId();
 	mBodyId = b2CreateBody(worldId, &bodyDef);
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = 0.8f;
+	fixtureDef.material.restitution = item->restitution();
 	QPolygonF collidingPolygon = item->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
 	b2Circle circleShape = {};

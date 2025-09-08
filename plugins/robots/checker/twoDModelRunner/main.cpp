@@ -41,7 +41,7 @@ bool loadTranslators(const QString &locale)
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	bool hasTranslations = false;
 	while (directories.hasNext()) {
-		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
+		for (auto &&translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
 			QTranslator *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);
@@ -136,6 +136,10 @@ int main(int argc, char *argv[])
 	QCommandLineOption onlyGenerateOption("only-generate"
 						, QObject::tr("Do not run the interpretation in any mode, "\
 							      "this is a parameter that is only used to generate a file."));
+	QCommandLineOption delayOption("delay-before-exit"
+						, QObject::tr("Add a delay in milliseconds after executing "
+									"the script before closing the window")
+						, "Delay in ms", "0");
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
@@ -149,6 +153,7 @@ int main(int argc, char *argv[])
 	parser.addOption(generateModeOption);
 	parser.addOption(directScriptExecutionPathOption);
 	parser.addOption(onlyGenerateOption);
+	parser.addOption(delayOption);
 	parser.process(*app);
 	const QStringList positionalArgs = parser.positionalArguments();
 	if (positionalArgs.size() != 1) {
@@ -167,8 +172,15 @@ int main(int argc, char *argv[])
 	const QString generateMode = parser.value(generateModeOption);
 	const QString scriptFilePath = parser.value(directScriptExecutionPathOption);
 	const bool onlyGenerate = parser.isSet(onlyGenerateOption);
+	const auto &delayStr = parser.value(delayOption);
+	auto delayIsCorrect = false;
+	auto delay = delayStr.toInt(&delayIsCorrect);
+	if (!delayIsCorrect || delay < 0) {
+		delay = 0;
+	}
 
-	QScopedPointer<twoDModel::Runner> runner(new twoDModel::Runner(report, trajectory, input, mode, qrsFile));
+	QScopedPointer<twoDModel::Runner> runner(
+				new twoDModel::Runner(report, trajectory, input, mode, qrsFile, delay));
 	auto speedFactor = parser.value(speedOption).toInt();
 
 	if (!generatePath.isEmpty()) {

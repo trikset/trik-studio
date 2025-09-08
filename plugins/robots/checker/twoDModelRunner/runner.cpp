@@ -30,10 +30,11 @@
 using namespace twoDModel;
 
 Runner::Runner(const QString &report, const QString &trajectory,
-	       const QString &input, const QString &mode, const QString &qrsFile):
+	       const QString &input, const QString &mode, const QString &qrsFile, uint32_t delayBeforeExit):
 	mInputsFile(input)
 	, mMode(mode)
 	, mSaveFile(qrsFile)
+	, mDelayBeforeExit(delayBeforeExit)
 {
 	mQRealFacade.reset(new qReal::SystemFacade());
 	mProjectManager.reset(new qReal::ProjectManager(mQRealFacade->models()));
@@ -147,12 +148,12 @@ bool Runner::interpret(const bool background, const int customSpeedFactor, bool 
 	connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationStopped
 			, this, [this, closeOnFinish, closeOnSuccess](qReal::interpretation::StopReason reason) {
 		if (closeOnFinish || (closeOnSuccess && reason == qReal::interpretation::StopReason::finished))
-			QTimer::singleShot(0, this, &Runner::close);
+			QTimer::singleShot(mDelayBeforeExit, this, &Runner::close);
 	});
 
 	if (closeOnFinish) {
 		connect(&mPluginFacade->eventsForKitPlugins(), &kitBase::EventsForKitPluginInterface::interpretationErrored
-				, this, [this]() { QTimer::singleShot(0, this, &Runner::close); });
+				, this, [this]() { QTimer::singleShot(mDelayBeforeExit, this, &Runner::close); });
 	}
 
 	const auto robotName = mPluginFacade->robotModelManager().model().name();
@@ -208,7 +209,7 @@ void Runner::connectRobotModel(const model::RobotModel *robotModel, const qReal:
 	});
 }
 
-void Runner::onRobotRided(const QPointF &newPosition, const qreal newRotation)
+void Runner::onRobotRided(QPointF newPosition, const qreal newRotation)
 {
 	mReporter->newTrajectoryPoint(
 			static_cast<model::RobotModel *>(sender())->info().robotId()

@@ -288,6 +288,11 @@ qreal RobotItem::friction() const
 	return mRobotModel.info().friction();
 }
 
+qreal RobotItem::restitution() const
+{
+	return 0.6f;
+}
+
 twoDModel::items::SolidItem::BodyType RobotItem::bodyType() const
 {
 	return BodyType::DYNAMIC;

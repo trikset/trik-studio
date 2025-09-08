@@ -146,6 +146,11 @@ qreal SensorItem::friction() const
 	return 0.0;
 }
 
+qreal SensorItem::restitution() const
+{
+	return 0.8f;
+}
+
 bool SensorItem::isCircle() const
 {
 	return true;
