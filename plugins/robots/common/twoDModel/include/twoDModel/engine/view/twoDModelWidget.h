@@ -182,6 +182,7 @@ private:
 		, drawWall
 		, drawSkittle
 		, drawBall
+		, drawCube
 		, drawLine
 		, drawStylus
 		, drawEllipse
