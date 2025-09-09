@@ -729,7 +729,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+779"/>
+        <location line="+783"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
