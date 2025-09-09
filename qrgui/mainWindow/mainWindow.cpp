@@ -682,8 +682,10 @@ void MainWindow::closeAllTabs()
 		closeTab(tab);
 }
 
-void MainWindow::setReference(const QStringList &data, const QPersistentModelIndex &index, const int &role) // clazy:exclude=function-args-by-value
+// clazy:excludeall=function-args-by-value
+void MainWindow::setReference(const QStringList &data, const QPersistentModelIndex &index, const int &role)
 {
+// clazy:enable
 	removeOldBackReference(index, role);
 	setData(data.join(','), index, role);
 	for (const QString &target : data) {
@@ -752,8 +754,10 @@ void MainWindow::initDarkPalette() {
 	);
 }
 
-void MainWindow::setData(const QString &data, const QPersistentModelIndex &index, const int &role) // clazy:exclude=function-args-by-value
+// clazy:excludeall=function-args-by-value
+void MainWindow::setData(const QString &data, const QPersistentModelIndex &index, const int &role)
 {
+// clazy:enable
 	// const_cast here is ok, since we need to set data in a correct model, and
 	// not going to use this index anymore.
 	QAbstractItemModel * const model = const_cast<QAbstractItemModel *>(index.model());
