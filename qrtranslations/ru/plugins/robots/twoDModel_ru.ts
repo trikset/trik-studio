@@ -425,7 +425,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+523"/>
+        <location line="+532"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
