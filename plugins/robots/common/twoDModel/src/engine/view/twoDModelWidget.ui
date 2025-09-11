@@ -291,6 +291,15 @@
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOn</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
               <property name="showDropIndicator" stdset="0">
                <bool>false</bool>
               </property>
@@ -491,7 +500,7 @@
                 <number>0</number>
                </property>
                <item row="2" column="1">
-                <widget class="QDoubleSpinBox" name="robotHeightInCm">
+                <widget class="twoDModel::view::RobotInfoSpinBox" name="robotHeightInCm">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -549,7 +558,7 @@
                 </widget>
                </item>
                <item row="5" column="1">
-                <widget class="QDoubleSpinBox" name="robotTrackInCm">
+                <widget class="twoDModel::view::RobotInfoSpinBox" name="robotTrackInCm">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -568,7 +577,7 @@
                 </widget>
                </item>
                <item row="4" column="1">
-                <widget class="QDoubleSpinBox" name="robotMassInGr">
+                <widget class="twoDModel::view::RobotInfoSpinBox" name="robotMassInGr">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -600,7 +609,7 @@
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QDoubleSpinBox" name="wheelDiamInCm">
+                <widget class="twoDModel::view::RobotInfoSpinBox" name="wheelDiamInCm">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -619,7 +628,7 @@
                 </widget>
                </item>
                <item row="3" column="1">
-                <widget class="QDoubleSpinBox" name="robotWidthInCm">
+                <widget class="twoDModel::view::RobotInfoSpinBox" name="robotWidthInCm">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -923,6 +932,11 @@
    <extends>QFrame</extends>
    <header>src/engine/view/parts/ruler.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>twoDModel::view::RobotInfoSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>src/engine/view/parts/robotInfoSpinBox.h</header>
   </customwidget>
  </customwidgets>
  <resources>

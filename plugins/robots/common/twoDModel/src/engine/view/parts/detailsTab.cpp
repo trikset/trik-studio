@@ -56,7 +56,7 @@ void DetailsTab::initItem(QTreeWidgetItem *item, const QString &text, bool expan
 	layout->addWidget(label);
 	layout->addStretch();
 	setItemWidget(item, 0, widget);
-	item->setSizeHint(0, QSize(300, 50));
+	item->setSizeHint(0, QSize(250, 50));
 	item->setExpanded(expanded);
 }
 

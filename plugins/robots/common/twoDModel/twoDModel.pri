@@ -79,6 +79,7 @@ HEADERS += \
 	$$PWD/src/engine/view/scene/rangeSensorItem.h \
 	$$PWD/src/engine/view/scene/lidarSensorItem.h \
 	$$PWD/src/engine/view/parts/palette.h \
+	$$PWD/src/engine/view/parts/robotInfoSpinBox.h \
 	$$PWD/src/engine/view/parts/actionsBox.h \
 	$$PWD/src/engine/view/parts/gridParameters.h \
 	$$PWD/src/engine/view/parts/detailsTab.h \
