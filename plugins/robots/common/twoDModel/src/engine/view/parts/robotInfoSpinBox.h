@@ -18,16 +18,17 @@
 namespace twoDModel {
 namespace view {
 
-class RobotInfoSpinBox : public QDoubleSpinBox {
+class RobotInfoSpinBox : public QDoubleSpinBox
+{
 	Q_OBJECT
 	Q_DISABLE_COPY(RobotInfoSpinBox)
 public:
-    using QDoubleSpinBox::QDoubleSpinBox;
+	using QDoubleSpinBox::QDoubleSpinBox;
 
 protected:
-     QString textFromValue(double value) const override {
-	return QString::number(value, 'g');
-    }
+	QString textFromValue(double value) const override {
+		return QString::number(value, 'g');
+	}
 };
 }
 }
