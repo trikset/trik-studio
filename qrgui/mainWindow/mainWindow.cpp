@@ -2011,7 +2011,7 @@ void MainWindow::addExternalToolActions()
 					auto processedArguments = arguments;
 					static QRegularExpressionMatch match;
 					for (auto &arg : processedArguments) {
-						while (arg.contains(re, &match)) {
+						while (arg.contains(re, &match)) { // clazy:exclude=use-static-qregularexpression
 							auto const &newVal = SettingsManager::value(match.captured(1)).toString();
 							arg.replace(match.captured(0), newVal);
 						}
@@ -2100,7 +2100,7 @@ void MainWindow::initToolPlugins()
 void MainWindow::customizeActionsVisibility()
 {
 	QList<QAction *> actions = findChildren<QAction *>();
-	for (const QPair<QString, ActionVisibility> &info : toolManager().customizer()->actionsVisibility()) {
+	for (auto &&info : toolManager().customizer()->actionsVisibility()) {
 		QAction *action = nullptr;
 		for (auto &&currentAction : actions) {
 			if (currentAction->objectName() == info.first) {
