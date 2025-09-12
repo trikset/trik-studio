@@ -215,7 +215,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+532"/>
+        <location line="+523"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -673,7 +673,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Metric system parameters</source>
+        <source>Metric system</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

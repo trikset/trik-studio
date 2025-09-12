@@ -291,15 +291,6 @@
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
               </property>
-              <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAlwaysOn</enum>
-              </property>
-              <property name="horizontalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
-              </property>
               <property name="showDropIndicator" stdset="0">
                <bool>false</bool>
               </property>
@@ -491,7 +482,7 @@
               </property>
               <layout class="QGridLayout" name="gridLayout_2">
                <property name="sizeConstraint">
-                <enum>QLayout::SetFixedSize</enum>
+                <enum>QLayout::SetDefaultConstraint</enum>
                </property>
                <property name="topMargin">
                 <number>0</number>
