@@ -673,7 +673,7 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Metric system parameters</source>
+        <source>Metric system</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
