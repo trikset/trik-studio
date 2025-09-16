@@ -596,7 +596,7 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 	}
 	for (auto &&cube : mModel.worldModel().cubes()) {
 		setSceneRect(sceneRect().united(cube->sceneBoundingRect()));
-	{
+	}
 	for (auto &&colorField : mModel.worldModel().colorFields()) {
 		setSceneRect(sceneRect().united(colorField->sceneBoundingRect()));
 	}
