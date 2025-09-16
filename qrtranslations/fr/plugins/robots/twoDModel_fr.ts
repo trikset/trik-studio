@@ -215,7 +215,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+523"/>
+        <location line="+535"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -248,7 +248,7 @@
         <translation>Augmenter la vitesse</translation>
     </message>
     <message>
-        <location line="-463"/>
+        <location line="-469"/>
         <source>Left wheel:</source>
         <translation>Roue gauche :</translation>
     </message>
@@ -283,7 +283,7 @@
         <translation>Moteurs réalistes</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+85"/>
         <source>Wheel diameter:</source>
         <translation type="unfinished"></translation>
     </message>

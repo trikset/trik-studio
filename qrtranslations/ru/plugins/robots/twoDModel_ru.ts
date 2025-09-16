@@ -425,7 +425,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+523"/>
+        <location line="+535"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -458,7 +458,7 @@
         <translation>Увеличить скорость</translation>
     </message>
     <message>
-        <location line="-463"/>
+        <location line="-469"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -493,7 +493,7 @@
         <translation>Реалистичные моторы</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+85"/>
         <source>Wheel diameter:</source>
         <translation>Диаметр колеса:</translation>
     </message>
