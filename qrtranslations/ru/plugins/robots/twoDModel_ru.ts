@@ -377,22 +377,22 @@
     <message>
         <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
         <source>Remove</source>
-        <translation>Удалить</translation>
+        <translation type="unfinished">Удалить</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Edit</source>
-        <translation>Редактировать</translation>
+        <translation type="unfinished">Редактировать</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation type="unfinished">Отмена</translation>
     </message>
 </context>
 <context>
@@ -425,7 +425,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+523"/>
+        <location line="+535"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -458,7 +458,7 @@
         <translation>Увеличить скорость</translation>
     </message>
     <message>
-        <location line="-463"/>
+        <location line="-469"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -493,7 +493,7 @@
         <translation>Реалистичные моторы</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+85"/>
         <source>Wheel diameter:</source>
         <translation>Диаметр колеса:</translation>
     </message>
@@ -1012,8 +1012,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Metric system parameters</source>
-        <translation>Параметры метрической системы</translation>
+        <source>Metric system</source>
+        <translation>Метрическая система</translation>
     </message>
 </context>
 <context>
