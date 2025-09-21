@@ -22,6 +22,7 @@ Makefile*
 *.Release
 usabilityFiles/*
 **/.build/*
+/build
 **/uic_wrapper.sh
 *.log
 *.time.txt
