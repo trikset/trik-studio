@@ -713,45 +713,31 @@ bool MainWindow::windowsIsInDarkTheme()
 }
 
 void MainWindow::initDarkPalette() {
-	if (QSysInfo::productType() != "windows") {
-		return;
+	constexpr auto logPrefix = "Initializing color theme";
+	const auto &explicitTheme = QProcessEnvironment::systemEnvironment().value("TRIK_STUDIO_THEME", "auto");
+	QLOG_INFO() << logPrefix << "with" << explicitTheme;
+	bool useDarkTheme;
+
+	if (explicitTheme == "light") {
+		useDarkTheme = false;
+	} else if (explicitTheme == "auto") {
+		// It is hard to guess, but ...
+		useDarkTheme = PlatformInfo::osType() == "windows" && windowsIsInDarkTheme();
+	} else if (explicitTheme != "dark") {
+		QLOG_INFO() << logPrefix << ":" << explicitTheme << "is not a correct option";
+		useDarkTheme = false;
+	} else {
+		useDarkTheme = true;
 	}
 
-	const auto &platform = QString::fromUtf8(qgetenv("TRIK_STUDIO_THEME"));
-	constexpr auto lightThemeMessage = "A LIGHT THEME HAS BEEN SELECTED";
-	QLOG_INFO() << "TRIK_STUDIO_THEME IS" << platform;
-
-	if (platform == "light") {
-		QLOG_INFO() << lightThemeMessage;
-		return;
+	if (useDarkTheme) {
+		QLOG_INFO() << logPrefix <<": enforcing dark mode";
+		QApplication::setPalette(BrandManager::styles()->loadPalette(
+			QCoreApplication::applicationDirPath() +
+			"/palettes/darkWindowsPalette.ini")
+		);
 	}
-
-	if (platform != "auto" && platform != "dark" && !platform.isEmpty()) {
-		QLOG_INFO() << "INVALID VALUE" << platform << "FOR VARIABLE TRIK_STUDIO_THEME";
-		QLOG_INFO() << "THE THEME WILL BE SELECTED AUTOMATICALLY";
-	}
-
-	auto darkThemeAvailiable = windowsDarkThemeAvailiable();
-	QLOG_INFO() << "windowsDarkThemeAvailiable RETURNS" << darkThemeAvailiable;
-
-	if (!darkThemeAvailiable) {
-		QLOG_INFO() << lightThemeMessage;
-		return;
-	}
-
-	auto isInDarkTheme = windowsIsInDarkTheme();
-	QLOG_INFO() << "windowsIsInDarkTheme RETURNS" << isInDarkTheme;
-
-	if (!isInDarkTheme) {
-		QLOG_INFO() << lightThemeMessage;
-		return;
-	}
-
-	QLOG_INFO() << "A DARK THEME HAS BEEN SELECTED";
-	QApplication::setPalette(BrandManager::styles()->loadPalette(
-		QCoreApplication::applicationDirPath() +
-		"/palettes/darkWindowsPalette.ini")
-	);
+	// Light is the default one, just return
 }
 
 // clazy:excludeall=function-args-by-value
