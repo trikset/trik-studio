@@ -177,18 +177,18 @@ public:
 	/// Additional actions for interpreter palette.
 	QList<QAction *> optionalMenuActionsForInterpretedPlugins();
 
-signals:
+Q_SIGNALS:
 	void rootDiagramChanged();
 
-public slots:
+public Q_SLOTS:
 	void propertyEditorScrollTo(const QModelIndex &index);
 
-	void activateItemOrDiagram(const Id &id, bool setSelected = true) override;
+	void activateItemOrDiagram(const qReal::Id &id, bool setSelected = true) override;
 	void activateItemOrDiagram(const QModelIndex &idx, bool setSelected = true);
-	void selectItem(const Id &id) override;
-	void selectItemOrDiagram(const Id &graphicalId) override;
+	void selectItem(const qReal::Id &id) override;
+	void selectItemOrDiagram(const qReal::Id &graphicalId) override;
 
-	void selectItemWithError(const Id &id);
+	void selectItemWithError(const qReal::Id &id);
 	void showErrors(const gui::ErrorReporter * const errorReporter);
 
 	void changePaletteRepresentation();
@@ -203,9 +203,9 @@ public slots:
 	void openFirstDiagram();
 	void changeWindowTitle();
 
-	void registerEditor(EditorInterface &editor) override;
+	void registerEditor(qReal::EditorInterface &editor) override;
 
-private slots:
+private Q_SLOTS:
 	/// Suggests user to select a root diagram for the new project
 	/// if more than one diagram loaded or creates project with the only diagram
 	/// as root otherwise
@@ -221,7 +221,7 @@ private slots:
 
 	void adjustMinimapZoom(int zoom);
 
-	void updateTabName(const Id &id);
+	void updateTabName(const qReal::Id &id);
 
 	void showAbout() const;
 	void showHelp();
@@ -257,7 +257,7 @@ private slots:
 	void connectSystemEvents();
 	void initActionsFromSettings();
 
-	void centerOn(const Id &id);
+	void centerOn(const qReal::Id &id);
 	void graphicalModelExplorerClicked(const QModelIndex &index);
 	void logicalModelExplorerClicked(const QModelIndex &index);
 
@@ -310,7 +310,7 @@ private:
 
 	bool windowsDarkThemeAvailiable();
 	bool windowsIsInDarkTheme();
-	void initPalette();
+	void initDarkPalette();
 
 	void initGridProperties();
 	void clickErrorListWidget();

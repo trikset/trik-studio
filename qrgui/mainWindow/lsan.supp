@@ -8,6 +8,7 @@ leak:QXcbGlxWindow::createVisual()
 leak:QApplicationPrivate::initializeWidgetFontHash
 leak:QFontconfigDatabase::defaultFont() const
 leak:QGuiApplicationPrivate::createPlatformIntegration()
+leak:QtWaylandClient::QWaylandDisplay::initialize()
 leak:QApplication::desktop()
 leak:*/libfontconfig.so.1*
 leak:*/libfreetype.so.6*
