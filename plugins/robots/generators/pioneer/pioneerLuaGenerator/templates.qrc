@@ -3,6 +3,7 @@
         <file>templates/break.t</file>
         <file>templates/comment.t</file>
         <file>templates/continue.t</file>
+        <file>templates/pass.t</file>
         <file>templates/endOfHandler.t</file>
         <file>templates/finalNodeMain.t</file>
         <file>templates/finalNodeSubprogram.t</file>

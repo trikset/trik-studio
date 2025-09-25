@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,38 +14,30 @@
 
 #pragma once
 
+#include <QtCore/QHash>
+#include <QtCore/QString>
+
 #include <qrkernel/ids.h>
 
 namespace generatorBase {
 
-class IntermediateStructurizatorNode : public QObject
+/// Class that stores and produces human-readable labels for goto statements.
+class ReadableLabelManager
 {
-	Q_OBJECT
-
 public:
+	/// Returns existing or generates new label for a node with given id.
+	/// For new ids label starts with given prefix or uses node type.
+	QString labelFor(const qReal::Id &id, const QString &prefix = "");
 
-	enum Type {
-		simple
-		, block
-		, ifThenElseCondition
-		, switchCondition
-		, infiniteloop
-		, whileloop
-		, breakNode
-		, nodeWithBreaks
-	};
+	/// Clears all stored labels.
+	void reinit();
 
-	explicit IntermediateStructurizatorNode(QObject *parent);
-	virtual ~IntermediateStructurizatorNode();
+private:
+	/// Makes given string CAPS_WITH_UNDERSCORES.
+	static QString beautify(const QString &label);
 
-	virtual Type type() const = 0;
-	virtual qReal::Id firstId() const = 0;
-	virtual bool analyzeBreak() = 0;
-	bool hasBreakInside() const;
-
-protected:
-	bool mHasBreakInside;
-	bool mBreakWasAnalyzed;
+	QHash<QString, int> mNodeTypesCount;
+	QHash<qReal::Id, QString> mLabels;
 };
 
 }

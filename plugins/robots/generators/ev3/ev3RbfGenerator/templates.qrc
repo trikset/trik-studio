@@ -5,6 +5,7 @@
         <file>templates/beep.t</file>
         <file>templates/break.t</file>
         <file>templates/continue.t</file>
+        <file>templates/pass.t</file>
         <file>templates/initialNode.t</file>
         <file>templates/finalNodeMain.t</file>
         <file>templates/finalNodeSubprogram.t</file>

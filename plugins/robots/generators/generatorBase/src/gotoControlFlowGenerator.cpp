@@ -100,7 +100,8 @@ void GotoControlFlowGenerator::visitSwitch(const Id &id, const QList<LinkInfo> &
 	SwitchNode * const thisNode = static_cast<SwitchNode *>(mSemanticTree->findNodeFor(id));
 	for (const LinkInfo &branch : links) {
 		const QString value = mRepo.property(branch.linkId, "Guard").toString();
-		thisNode->addBranch(value, produceGotoNode(branch.target));
+		thisNode->addBranch(value);
+		thisNode->branchZoneByValue(value)->appendChild(produceGotoNode(branch.target));
 		produceNextNodeIfNeeded(branch, thisNode);
 	}
 }

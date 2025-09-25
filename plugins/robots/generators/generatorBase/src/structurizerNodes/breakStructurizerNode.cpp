@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,29 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "breakStructurizatorNode.h"
+#include "breakStructurizerNode.h"
 
 using namespace generatorBase;
 
-BreakStructurizatorNode::BreakStructurizatorNode(const qReal::Id &id, QObject *parent)
-	: IntermediateStructurizatorNode(parent)
-	, mId(id)
+BreakStructurizerNode::BreakStructurizerNode(QObject *parent)
+	: SimpleStructurizerNode(qReal::Id(), parent)
 {
 }
 
-IntermediateStructurizatorNode::Type BreakStructurizatorNode::type() const
+StructurizerNode::Type BreakStructurizerNode::type() const
 {
-	return breakNode;
+	return breakFromLoop;
 }
 
-qReal::Id BreakStructurizatorNode::firstId() const
+bool BreakStructurizerNode::isEqual(StructurizerNode * other) const
 {
-	return mId;
+	return other->type() == breakFromLoop;
 }
 
-bool BreakStructurizatorNode::analyzeBreak()
+StructurizerNode *BreakStructurizerNode::clone() const
 {
-	mHasBreakInside = true;
-	mBreakWasAnalyzed = true;
-	return mHasBreakInside;
+	return new BreakStructurizerNode(parent());
+}
+
+bool BreakStructurizerNode::hasBreakOnUpperLevel() const
+{
+	return true;
 }

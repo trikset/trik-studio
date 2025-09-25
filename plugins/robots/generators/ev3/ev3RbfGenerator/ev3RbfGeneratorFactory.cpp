@@ -22,8 +22,9 @@ Ev3RbfGeneratorFactory::Ev3RbfGeneratorFactory(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
+		, generatorBase::ReadableLabelManager &readableLabelManager
 		, const QString &generatorName)
-	: Ev3GeneratorFactory(repo, errorReporter, robotModelManager, luaProcessor, generatorName)
+	: Ev3GeneratorFactory(repo, errorReporter, robotModelManager, luaProcessor, readableLabelManager, generatorName)
 {
 }
 

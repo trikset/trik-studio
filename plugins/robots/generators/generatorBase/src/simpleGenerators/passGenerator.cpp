@@ -1,4 +1,4 @@
-/* Copyright 2018 Konstantin Batoev
+/* Copyright 2013-2021 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,26 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#pragma once
+#include "passGenerator.h"
 
-#include "intermediateStructurizatorNode.h"
+using namespace generatorBase::simple;
+using namespace qReal;
 
-namespace generatorBase {
-
-class SelfLoopStructurizatorNode : public IntermediateStructurizatorNode
+PassGenerator::PassGenerator(const qrRepo::RepoApi &repo
+		, GeneratorCustomizer &customizer
+		, const Id &id
+		, QObject *parent)
+	: BindingGenerator(repo, customizer, id, "pass.t", QList<Binding *>(), parent)
 {
-	Q_OBJECT
-
-public:
-	explicit SelfLoopStructurizatorNode(IntermediateStructurizatorNode *bodyNode, QObject *parent = nullptr);
-
-	IntermediateStructurizatorNode *bodyNode() const;
-
-	bool analyzeBreak();
-	Type type() const;
-	qReal::Id firstId() const;
-private:
-	IntermediateStructurizatorNode *mBodyNode;
-};
-
 }

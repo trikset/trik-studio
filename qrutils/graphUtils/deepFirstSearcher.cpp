@@ -69,7 +69,7 @@ void DeepFirstSearcher::dfs(const Id &id, const QList<VisitorInterface *> &visit
 	}
 
 	for (const LinkInfo &link : linkInfos) {
-		if (!link.targetVisited && link.connected && !mSearchTerminated) {
+		if (!mVisitedNodes.contains(link.target) && link.connected && !mSearchTerminated) {
 			dfs(link.target, visitors);
 		}
 	}

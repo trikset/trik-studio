@@ -25,6 +25,8 @@
 #include "templateParametrizedEntity.h"
 #include "primaryControlFlowValidator.h"
 
+#include "src/readableLabelManager.h"
+
 class QFileInfo;
 
 namespace utils {
@@ -114,6 +116,9 @@ protected:
 	QString mProjectDir;
 	int mCurInitialNodeNumber {};
 	const utils::ParserErrorReporter &mParserErrorReporter;
+
+	/// Storage and generator for human-readable goto labels.
+	QScopedPointer<ReadableLabelManager> mReadableLabelManager;
 };
 
 }

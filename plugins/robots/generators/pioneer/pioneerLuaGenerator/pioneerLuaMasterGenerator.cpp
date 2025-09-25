@@ -29,7 +29,6 @@
 #include "pioneerLuaGeneratorCustomizer.h"
 #include "pioneerLuaGeneratorFactory.h"
 #include "generators/pioneerStateMachineGenerator.h"
-#include "generators/gotoLabelManager.h"
 #include "generators/randomFunctionChecker.h"
 
 using namespace pioneer::lua;
@@ -48,7 +47,6 @@ PioneerLuaMasterGenerator::PioneerLuaMasterGenerator(const qrRepo::RepoApi &repo
 	: MasterGeneratorBase(repo, errorReporter, robotModelManager, textLanguage, parserErrorReporter, diagramId)
 	, mGeneratorName(generatorName)
 	, mMetamodel(metamodel)
-	, mGotoLabelManager(new GotoLabelManager())
 {
 }
 
@@ -82,8 +80,8 @@ generatorBase::GeneratorCustomizer *PioneerLuaMasterGenerator::createCustomizer(
 			, mErrorReporter
 			, mRobotModelManager
 			, *createLuaProcessor()
+			, *mReadableLabelManager
 			, mGeneratorName
-			, *mGotoLabelManager
 			, supportsSwitchUnstableToBreaks());
 }
 
@@ -114,7 +112,7 @@ QString PioneerLuaMasterGenerator::generate(const QString &indentString)
 
 	QLOG_INFO() << "Starting Pioneer program generation to " << mProjectDir;
 
-	mGotoLabelManager->reinit();
+	mReadableLabelManager->reinit();
 
 	beforeGeneration();
 
