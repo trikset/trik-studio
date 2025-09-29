@@ -154,7 +154,8 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	updateRobotInfoWidget(pixelsInCm, tr("cm"));
 	connect(&mModel, &model::Model::robotAdded, this, [this, pixelsInCm](){
 		auto robotModels = mModel.robotModels();
-		auto robotTrack = robotModels.isEmpty() || robotModels[0]->parameters()->wheelsPosition().size() < 2 ? robotWidth
+		auto robotTrack = robotModels.isEmpty() ||
+					robotModels[0]->parameters()->wheelsPosition().size() < 2 ? robotWidth
 				: qAbs(robotModels[0]->parameters()->wheelsPosition()[0].y()
 						- robotModels[0]->parameters()->wheelsPosition()[1].y());
 		mUi->robotTrackInCm->setValue(robotTrack / pixelsInCm);

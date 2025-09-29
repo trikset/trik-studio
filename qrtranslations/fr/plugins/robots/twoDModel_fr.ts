@@ -808,7 +808,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+351"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+352"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -826,12 +826,12 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-198"/>
+        <location line="-199"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+30"/>
         <source>kg</source>
         <translation type="unfinished"></translation>
     </message>

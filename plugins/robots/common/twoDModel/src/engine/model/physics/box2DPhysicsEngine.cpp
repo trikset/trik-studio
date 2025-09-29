@@ -144,7 +144,8 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 			connect(mScene->robot(*robot), &view::RobotItem::recoverRobotPosition
 					, this, &Box2DPhysicsEngine::onRecoverRobotPosition);
 
-			connect(mScene->robot(*robot), &view::RobotItem::sensorAdded, this, [&](twoDModel::view::SensorItem *sensor) {
+			connect(mScene->robot(*robot), &view::RobotItem::sensorAdded, this,
+								[&](twoDModel::view::SensorItem *sensor) {
 				auto rItem = qobject_cast<view::RobotItem *>(sender());
 				auto model = &rItem->robotModel();
 				mRobotSensors[model].insert(sensor);
@@ -153,7 +154,8 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot)
 					it.value()->addSensor(sensor);
 				}
 			});
-			connect(mScene->robot(*robot), &view::RobotItem::sensorRemoved, this, [&](twoDModel::view::SensorItem *sensor) {
+			connect(mScene->robot(*robot), &view::RobotItem::sensorRemoved,
+								this, [&](twoDModel::view::SensorItem *sensor) {
 				auto rItem = qobject_cast<view::RobotItem *>(sender());
 				auto model = &rItem->robotModel();
 				mRobotSensors[model].remove(sensor);

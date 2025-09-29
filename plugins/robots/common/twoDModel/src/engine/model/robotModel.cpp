@@ -54,7 +54,8 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mMetricSystem(metricSystem)
 {
 	connect(this, &RobotModel::sizeChanged, mStartPositionMarker, &twoDModel::items::StartPosition::onSizeUpdated);
-	connect(this, &RobotModel::sizeChanged, mSensorsConfiguration, &twoDModel::model::SensorsConfiguration::onSizeUpdated);
+	connect(this, &RobotModel::sizeChanged, mSensorsConfiguration,
+							&twoDModel::model::SensorsConfiguration::onSizeUpdated);
 	reinit();
 }
 
