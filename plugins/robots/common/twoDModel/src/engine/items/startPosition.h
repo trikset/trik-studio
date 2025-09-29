@@ -32,14 +32,15 @@ public:
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &startPositionElement) override;
 	void deserializeCompatibly(const QDomElement &robotElement);
-
+public Q_SLOTS:
+	void onSizeUpdated(const QSizeF size);
 private:
 	void drawFieldForResizeItem(QPainter* painter) override;
 	void changeDragState(qreal x, qreal y) override;
 
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
-	const QSizeF mRobotSize;
+	QSizeF mRobotSize;
 };
 
 }

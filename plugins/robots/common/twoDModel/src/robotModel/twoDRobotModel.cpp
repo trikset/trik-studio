@@ -122,6 +122,36 @@ QPolygonF TwoDRobotModel::collidingPolygon() const
 	return QPolygonF(QRectF({0, 0}, size()));
 }
 
+qreal TwoDRobotModel::restitution() const
+{
+	return 0.6f;
+}
+
+qreal TwoDRobotModel::linearDamping() const
+{
+	return 1.0f;
+}
+
+qreal TwoDRobotModel::angularDamping() const
+{
+	return 1.0f;
+}
+
+qreal TwoDRobotModel::wheelRestitution() const
+{
+	return 0.5f;
+}
+
+qreal TwoDRobotModel::wheelFriction() const
+{
+	return 1.0f;
+}
+
+qreal TwoDRobotModel::wheelMass() const
+{
+	return 0.1f;
+}
+
 QSizeF TwoDRobotModel::size() const
 {
 	return QSizeF(50, 50);

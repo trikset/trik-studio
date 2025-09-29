@@ -28,7 +28,7 @@
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/view/twoDModelWidget.h"
-
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "view/scene/twoDModelScene.h"
 #include "view/scene/robotItem.h"
 #include "view/scene/fakeScene.h"
@@ -336,7 +336,7 @@ uint TwoDModelEngineApi::spoilLight(const uint color) const
 QPair<QPointF, qreal> TwoDModelEngineApi::countPositionAndDirection(const PortInfo &port) const
 {
 	RobotModel * const robotModel = mModel.robotModels()[0];
-	const QPointF robotCenter = robotModel->info().robotCenter();
+	const QPointF robotCenter = robotModel->parameters()->robotCenter();
 	const QVector2D sensorVector = QVector2D(robotModel->configuration().position(port) - robotCenter);
 	const QPointF rotatedVector = mathUtils::Geometry::rotateVector(sensorVector, robotModel->rotation()).toPointF();
 	const QPointF position = robotModel->position() + robotCenter + rotatedVector;

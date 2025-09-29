@@ -47,6 +47,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/engine/model/sensorsConfiguration.h \
 	$$PWD/include/twoDModel/engine/model/settings.h \
 	$$PWD/include/twoDModel/engine/model/image.h \
+	$$PWD/include/twoDModel/engine/model/twoDModelRobotParameters.h \
 	$$PWD/include/twoDModel/robotModel/twoDRobotModel.h \
 	$$PWD/include/twoDModel/robotModel/parts/button.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorBlue.h \
@@ -169,6 +170,7 @@ SOURCES += \
 	$$PWD/src/engine/model/worldModel.cpp \
 	$$PWD/src/engine/model/timeline.cpp \
 	$$PWD/src/engine/model/image.cpp \
+	$$PWD/src/engine/model/twoDModelRobotParameters.cpp \
 	$$PWD/src/engine/model/physics/physicsEngineBase.cpp \
 	$$PWD/src/engine/model/physics/physicsEngineFactory.cpp \
 	$$PWD/src/engine/model/physics/simplePhysicsEngine.cpp \

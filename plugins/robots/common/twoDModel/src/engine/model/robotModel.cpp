@@ -18,7 +18,6 @@
 #include <QtCore/QtMath>
 #include <QtGui/QTransform>
 #include <qrutils/mathUtils/math.h>
-
 #include <kitBase/robotModel/robotParts/encoderSensor.h>
 #include <kitBase/robotModel/robotParts/motor.h>
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
@@ -27,6 +26,7 @@
 #include "twoDModel/engine/model/settings.h"
 #include "twoDModel/engine/model/timeline.h"
 #include "twoDModel/engine/model/metricCoordinateSystem.h"
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "physics/physicsEngineBase.h"
 
 #include "src/engine/items/startPosition.h"
@@ -44,28 +44,36 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	: QObject(parent)
 	, mSettings(settings)
 	, mRobotModel(robotModel)
+	, mRobotModelParameters(new TwoDRobotModelParameters(mRobotModel, this))
 	, mSensorsConfiguration(new twoDModel::model::SensorsConfiguration(metricSystem,
-					robotModel.robotId(), robotModel.size(), this))
+					robotModel.robotId(), parameters()->size(), this))
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
 	, mStartPositionMarker(
-		new items::StartPosition(metricSystem, info().size()))
+		new items::StartPosition(metricSystem, parameters()->size()))
 	, mMetricSystem(metricSystem)
 {
+	connect(this, &RobotModel::sizeChanged, mStartPositionMarker, &twoDModel::items::StartPosition::onSizeUpdated);
+	connect(this, &RobotModel::sizeChanged, mSensorsConfiguration, &twoDModel::model::SensorsConfiguration::onSizeUpdated);
 	reinit();
 }
 
 RobotModel::~RobotModel() = default;
 
-void RobotModel::reinit()
+void RobotModel::reinitMotors()
 {
 	mMotors.clear();
 	for (auto &&device : mRobotModel.configuration().devices()) {
 		if (device->deviceInfo().isA<robotParts::Motor>()) {
-			initMotor(robotWheelDiameterInPx / 2, 0, 0, device->port(), false);
+			const auto wheelDiameter = mRobotModelParameters->wheelDiameter();
+			initMotor(wheelDiameter / 2, 0, 0, device->port(), false);
 		}
 	}
+}
 
+void RobotModel::reinit()
+{
+	reinitMotors();
 	mMarker = Qt::transparent;
 	mBeepTime = 0;
 	mDeltaDegreesOfAngle = 0;
@@ -81,7 +89,7 @@ void RobotModel::clear()
 void RobotModel::returnToStartMarker()
 {
 	setRotation(mStartPositionMarker->rotation());
-	setPosition(mStartPositionMarker->pos() - mRobotModel.robotCenter());
+	setPosition(mStartPositionMarker->pos() - mRobotModelParameters->robotCenter());
 }
 
 RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees, const PortInfo &port, bool isUsed)
@@ -137,7 +145,8 @@ void RobotModel::countMotorTurnover()
 {
 	for (auto &&motor : mMotors) {
 		const PortInfo &port = mMotors.key(motor);
-		const qreal degrees = Timeline::timeInterval * motor->spoiledSpeed * mRobotModel.onePercentAngularVelocity();
+		const qreal degrees = Timeline::timeInterval * motor->spoiledSpeed
+						* mRobotModelParameters->onePercentAngularVelocity();
 		const qreal actualDegrees = mPhysicsEngine->isRobotStuck() ? -degrees : degrees;
 		mTurnoverEngines[mMotorToEncoderPortMap[port]] += actualDegrees;
 		if (motor->isUsed && (motor->activeTimeType == DoByLimit)
@@ -177,6 +186,11 @@ const RobotModel::Wheel &RobotModel::rightWheel() const
 twoDModel::robotModel::TwoDRobotModel &RobotModel::info() const
 {
 	return mRobotModel;
+}
+
+QPointer<twoDModel::model::TwoDRobotModelParameters> RobotModel::parameters() const
+{
+	return mRobotModelParameters;
 }
 
 void RobotModel::stopRobot()
@@ -235,12 +249,12 @@ QPointF RobotModel::averageAcceleration() const
 
 QPointF RobotModel::robotCenter() const
 {
-	return mPos + mRobotModel.robotCenter();
+	return mPos + mRobotModelParameters->robotCenter();
 }
 
 QTransform RobotModel::robotsTransform() const
 {
-	const QRectF boundingRect(QPointF(), mRobotModel.size());
+	const QRectF boundingRect(QPointF(), mRobotModelParameters->size());
 	const QPointF realRotatePoint = QPointF(boundingRect.width() / 2, boundingRect.height() / 2);
 	const QPointF translationToZero = -realRotatePoint - boundingRect.topLeft();
 	const QPointF finalTranslation = mPos + realRotatePoint + boundingRect.topLeft();
@@ -267,7 +281,7 @@ QPainterPath RobotModel::sensorBoundingPath(const PortInfo &port) const
 QPainterPath RobotModel::robotBoundingPath(const bool withSensors) const
 {
 	QPainterPath path;
-	const QRectF boundingRect(QPointF(), mRobotModel.size());
+	const QRectF boundingRect(QPointF(), mRobotModelParameters->size());
 	path.addRect(boundingRect);
 
 	if (withSensors) {
@@ -454,12 +468,21 @@ void RobotModel::serializeWorldModel(QDomElement &parent) const
 			   QString::number(mMetricSystem->toUnit(mPos.x()))
 			   + ":" + QString::number(mMetricSystem->toUnit(mPos.y())));
 	robot.setAttribute("direction", QString::number(mAngle));
+	const auto size = mRobotModelParameters->size();
+	robot.setAttribute("width", QString::number(mMetricSystem->toUnit(size.width())));
+	robot.setAttribute("height", QString::number(mMetricSystem->toUnit(size.height())));
+	robot.setAttribute("mass", QString::number(mRobotModelParameters->mass()));
+	robot.setAttribute("friction", QString::number(mRobotModelParameters->friction()));
+	robot.setAttribute("restitution", QString::number(mRobotModelParameters->restitution()));
+	robot.setAttribute("angularDamping", QString::number(mRobotModelParameters->angularDamping()));
+	robot.setAttribute("linearDamping", QString::number(mRobotModelParameters->linearDamping()));
 	mStartPositionMarker->serialize(robot);
 	world.appendChild(robot);
 }
 
 void RobotModel::deserializeWorldModel(const QDomElement &world)
 {
+	mRobotModelParameters->reinit();
 	QDomElement robotElement = world.firstChildElement("robot");
 	if (robotElement.isNull()) {
 		robotElement.setTagName("robot");
@@ -474,7 +497,39 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 	onRobotReturnedOnGround();
 	setPosition(mMetricSystem->toPx({x, y}));
 	setRotation(robotElement.attribute("direction", "0").toDouble());
+	if (robotElement.hasAttribute("width")
+			&& robotElement.hasAttribute("height")) {
+		const auto width
+			= mMetricSystem->toPx(robotElement.attribute("width").toDouble());
+		const auto height
+			= mMetricSystem->toPx(robotElement.attribute("height").toDouble());
+		mRobotModelParameters->setSize({width, height});
+	}
+	Q_EMIT sizeChanged(mRobotModelParameters->size());
 	mStartPositionMarker->deserializeCompatibly(robotElement);
+	if (robotElement.hasAttribute("mass")) {
+		const auto mass = robotElement.attribute("mass").toDouble();
+		mRobotModelParameters->setMass(mass);
+	}
+	if (robotElement.hasAttribute("friction")) {
+		const auto friction = robotElement.attribute("friction").toDouble();
+		mRobotModelParameters->setFriction(friction);
+	}
+	if (robotElement.hasAttribute("restitution")) {
+		const auto friction = robotElement.attribute("restitution").toDouble();
+		mRobotModelParameters->setRestitution(friction);
+	}
+	if (robotElement.hasAttribute("angularDamping")) {
+		const auto angularDamping
+			= robotElement.attribute("angularDamping").toDouble();
+		mRobotModelParameters->setAngularDamping(angularDamping);
+	}
+	if (robotElement.hasAttribute("linearDamping")) {
+		const auto linearDamping
+			= robotElement.attribute("linearDamping").toDouble();
+		mRobotModelParameters->setLinearDamping(linearDamping);
+	}
+	reinitMotors();
 	Q_EMIT deserialized(QPointF(mPos.x(), mPos.y()), mAngle);
 }
 

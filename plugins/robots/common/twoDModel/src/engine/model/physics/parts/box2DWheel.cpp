@@ -19,16 +19,18 @@
 #include <qrutils/mathUtils/math.h>
 #include <box2d/box2d.h>
 #include "twoDModel/engine/model/constants.h"
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "box2DRobot.h"
 
 using namespace twoDModel::model::physics::parts;
 
-Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
+Box2DWheel::Box2DWheel(twoDModel::model::RobotModel * const robotModel,
+		Box2DPhysicsEngine *engine
 		, const b2Vec2 &positionBox2D, const b2Rot &rotationBox2D, Box2DRobot &robot)
 	: mRobot(robot)
 	, mEngine(engine)
-	, mWheelHeightM(engine->pxToM(twoDModel::robotWheelDiameterInPx / 2))
-	, mWheelWidthM(engine->pxToM(twoDModel::robotWheelDiameterInPx))
+	, mWheelHeightM(engine->pxToM(robotModel->parameters()->wheelDiameter() / 2))
+	, mWheelWidthM(engine->pxToM(robotModel->parameters()->wheelDiameter()))
 	, mPolygon(new b2Vec2[8])
 {
 	b2BodyDef bodyDef = b2DefaultBodyDef();
@@ -38,11 +40,12 @@ Box2DWheel::Box2DWheel(Box2DPhysicsEngine *engine
 	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = 0.5;
-	fixtureDef.material.friction = mWheelFriction;
+	fixtureDef.material.restitution = robotModel->parameters()->wheelRestitution();
+	fixtureDef.material.friction = robotModel->parameters()->wheelFriction();
 	fixtureDef.density = engine->computeDensity(
-			QPolygonF(QRectF(0, 0, twoDModel::robotWheelDiameterInPx / 2, twoDModel::robotWheelDiameterInPx))
-			, mWheelMass);
+			QPolygonF(QRectF(0, 0, robotModel->parameters()->wheelDiameter() / 2,
+						robotModel->parameters()->wheelDiameter()))
+			, robotModel->parameters()->wheelMass());
 
 	b2Vec2 center = b2Vec2{0.5f * mWheelWidthM, 0.5f * mWheelHeightM};
 	mPolygon[0] = b2Vec2{0.2f * mWheelWidthM, mWheelHeightM} - center;

@@ -42,14 +42,14 @@ public:
 
 	void setDirection(const kitBase::robotModel::PortInfo &port, qreal direction);
 	qreal direction(const kitBase::robotModel::PortInfo &port) const;
-
 	kitBase::robotModel::DeviceInfo type(const kitBase::robotModel::PortInfo &port) const;
 
 	void clear();
 
 	void serialize(QDomElement &robot) const;
 	void deserialize(const QDomElement &element);
-
+public Q_SLOTS:
+	void onSizeUpdated(const QSizeF size);
 signals:
 	/// Emitted when new device is added to configuration.
 	/// @param port - port where new device is added.
@@ -82,7 +82,7 @@ private:
 
 	QPointF defaultPosition(const kitBase::robotModel::DeviceInfo &device) const;
 
-	const QSizeF mRobotSize;
+	QSizeF mRobotSize;
 	QString mRobotId;
 	QHash<kitBase::robotModel::PortInfo, SensorInfo> mSensorsInfo;
 	QPointer<twoDModel::model::MetricCoordinateSystem> mMetricSystem;

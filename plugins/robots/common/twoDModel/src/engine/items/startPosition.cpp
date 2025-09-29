@@ -63,6 +63,14 @@ QDomElement StartPosition::serialize(QDomElement &parent) const
 	return startPositionElement;
 }
 
+void StartPosition::onSizeUpdated(QSizeF size)
+{
+	prepareGeometryChange();
+	mRobotSize = size;
+	setX(mRobotSize.width() / 2);
+	setY(mRobotSize.height() / 2);
+}
+
 void StartPosition::deserialize(const QDomElement &startPositionElement)
 {
 	auto *coordSystem = coordinateSystem();

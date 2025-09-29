@@ -102,7 +102,7 @@ private:
 	/// Same as QGraphicsItem::setRotation(). Needed as slot for connection.
 	void setRotation(qreal rotation);
 	void ride(QPointF newPos, qreal rotation);
-
+	void updateGraphicParams();
 	void onLanded();
 	void updateImage();
 
