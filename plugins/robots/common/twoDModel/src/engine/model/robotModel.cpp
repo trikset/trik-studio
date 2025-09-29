@@ -468,20 +468,38 @@ void RobotModel::serializeWorldModel(QDomElement &parent) const
 			   QString::number(mMetricSystem->toUnit(mPos.x()))
 			   + ":" + QString::number(mMetricSystem->toUnit(mPos.y())));
 	robot.setAttribute("direction", QString::number(mAngle));
-	const auto size = mRobotModelParameters->size();
-	robot.setAttribute("width", QString::number(mMetricSystem->toUnit(size.width())));
-	robot.setAttribute("height", QString::number(mMetricSystem->toUnit(size.height())));
-	robot.setAttribute("mass", QString::number(mRobotModelParameters->mass()));
-	robot.setAttribute("friction", QString::number(mRobotModelParameters->friction()));
-	robot.setAttribute("restitution", QString::number(mRobotModelParameters->restitution()));
-	robot.setAttribute("angularDamping", QString::number(mRobotModelParameters->angularDamping()));
-	robot.setAttribute("linearDamping", QString::number(mRobotModelParameters->linearDamping()));
+	if (mRobotModelParameters->propertyChanged("size")) {
+		const auto size = mRobotModelParameters->size();
+		robot.setAttribute("width", QString::number(mMetricSystem->toUnit(size.width())));
+		robot.setAttribute("height", QString::number(mMetricSystem->toUnit(size.height())));
+	}
+	if (mRobotModelParameters->propertyChanged("mass")) {
+		robot.setAttribute("mass", QString::number(mRobotModelParameters->mass()));
+	}
+	if (mRobotModelParameters->propertyChanged("friction")) {
+		robot.setAttribute("friction", QString::number(mRobotModelParameters->friction()));
+	}
+	if (mRobotModelParameters->propertyChanged("restitution")) {
+		robot.setAttribute("restitution", QString::number(mRobotModelParameters->restitution()));
+	}
+	if (mRobotModelParameters->propertyChanged("angularDamping")) {
+		robot.setAttribute("angularDamping", QString::number(mRobotModelParameters->angularDamping()));
+	}
+	if (mRobotModelParameters->propertyChanged("linearDamping")) {
+		robot.setAttribute("linearDamping", QString::number(mRobotModelParameters->linearDamping()));
+	}
 	mStartPositionMarker->serialize(robot);
 	world.appendChild(robot);
 	QDomElement wheel = world.ownerDocument().createElement("wheels");
-	wheel.setAttribute("friction", QString::number(mRobotModelParameters->wheelFriction()));
-	wheel.setAttribute("restitution", QString::number(mRobotModelParameters->wheelRestitution()));
-	wheel.setAttribute("mass", QString::number(mRobotModelParameters->wheelMass()));
+	if (mRobotModelParameters->propertyChanged("wheelFriction")) {
+		wheel.setAttribute("friction", QString::number(mRobotModelParameters->wheelFriction()));
+	}
+	if (mRobotModelParameters->propertyChanged("wheelRestitution")) {
+		wheel.setAttribute("restitution", QString::number(mRobotModelParameters->wheelRestitution()));
+	}
+	if (mRobotModelParameters->propertyChanged("wheelMass")) {
+		wheel.setAttribute("mass", QString::number(mRobotModelParameters->wheelMass()));
+	}
 	world.appendChild(wheel);
 }
 

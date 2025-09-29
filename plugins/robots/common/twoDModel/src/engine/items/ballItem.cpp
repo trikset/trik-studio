@@ -26,7 +26,7 @@ namespace {
 	constexpr int defaultBallDiameterPx = 30;
 	constexpr qreal ballMass = 0.015f;
 	constexpr qreal ballFriction = 1.0f;
-	constexpr qreal ballRestituion = 0.8f;
+	constexpr qreal ballRestitution = 0.8f;
 	constexpr qreal ballAngularDamping = 0.09f;
 	constexpr qreal ballLinearDamping = 0.09f;
 }
@@ -37,7 +37,7 @@ BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	, mDiameterPx(defaultBallDiameterPx)
 	, mMass(ballMass)
 	, mFriction(ballFriction)
-	, mRestitution(ballRestituion)
+	, mRestitution(ballRestitution)
 	, mAngularDamping(ballAngularDamping)
 	, mLinearDamping(ballLinearDamping)
 {
@@ -111,12 +111,10 @@ QDomElement BallItem::serialize(QDomElement &element) const
 	                      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	ballNode.setAttribute("rotation", QString::number(rotation()));
 	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
-	ballNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
-	ballNode.setAttribute("mass", QString::number(mMass));
-	ballNode.setAttribute("friction", QString::number(mFriction));
-	ballNode.setAttribute("restitution", QString::number(mRestitution));
-	ballNode.setAttribute("angularDamping", QString::number(mAngularDamping));
-	ballNode.setAttribute("linearDamping", QString::number(mLinearDamping));
+	SolidItem::serialize(ballNode);
+	if (propertyChanged(mDiameterPx, defaultBallDiameterPx)) {
+		ballNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
+	}
 	return ballNode;
 }
 
@@ -182,14 +180,14 @@ QPolygonF BallItem::collidingPolygon() const
 	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
-qreal BallItem::angularDamping() const
+qreal BallItem::angularDamping(bool getDefault) const
 {
-	return mAngularDamping;
+	return getDefault ? ballAngularDamping : mAngularDamping;
 }
 
-qreal BallItem::linearDamping() const
+qreal BallItem::linearDamping(bool getDefault) const
 {
-	return mLinearDamping;
+	return getDefault ? ballLinearDamping : mLinearDamping;
 }
 
 QPainterPath BallItem::path() const
@@ -214,19 +212,19 @@ bool BallItem::isCircle() const
 	return true;
 }
 
-qreal BallItem::mass() const
+qreal BallItem::mass(bool getDefault) const
 {
-	return mMass;
+	return getDefault ? ballMass : mMass;
 }
 
-qreal BallItem::friction() const
+qreal BallItem::friction(bool getDefault) const
 {
-	return mFriction;
+	return getDefault ? ballFriction : mFriction;
 }
 
-qreal BallItem::restitution() const
+qreal BallItem::restitution(bool getDefault) const
 {
-	return mRestitution;
+	return getDefault ? ballRestitution : mRestitution;
 }
 
 SolidItem::BodyType BallItem::bodyType() const

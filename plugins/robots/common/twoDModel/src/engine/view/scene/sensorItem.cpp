@@ -141,13 +141,15 @@ QPolygonF SensorItem::collidingPolygon() const
 	return QPolygonF(QRectF(-7, -7, 15, 15));
 }
 
-qreal SensorItem::friction() const
+qreal SensorItem::friction(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return 0.0;
 }
 
-qreal SensorItem::restitution() const
+qreal SensorItem::restitution(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return 0.8f;
 }
 
@@ -161,8 +163,9 @@ twoDModel::items::SolidItem::BodyType SensorItem::bodyType() const
 	return BodyType::DYNAMIC;
 }
 
-qreal SensorItem::mass() const
+qreal SensorItem::mass(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return 0.01; /// @todo
 }
 

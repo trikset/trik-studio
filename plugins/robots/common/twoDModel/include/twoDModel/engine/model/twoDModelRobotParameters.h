@@ -15,7 +15,15 @@ namespace model {
 class TWO_D_MODEL_EXPORT TwoDRobotModelParameters: public QObject
 {
 	Q_OBJECT
-
+	Q_PROPERTY(qreal mass READ mass WRITE setMass)
+	Q_PROPERTY(qreal friction READ friction WRITE setFriction)
+	Q_PROPERTY(qreal restitution READ restitution WRITE setRestitution)
+	Q_PROPERTY(qreal linearDamping READ linearDamping WRITE setLinearDamping)
+	Q_PROPERTY(qreal angularDamping READ angularDamping WRITE setAngularDamping)
+	Q_PROPERTY(QSizeF size READ size WRITE setSize)
+	Q_PROPERTY(qreal wheelRestitution READ wheelRestitution WRITE setWheelRestitution)
+	Q_PROPERTY(qreal wheelFriction READ wheelFriction WRITE setWheelFriction)
+	Q_PROPERTY(qreal wheelMass READ wheelMass WRITE setWheelMass)
 public:
 	TwoDRobotModelParameters(const twoDModel::robotModel::TwoDRobotModel &twoDRobotModel, QObject *parent = nullptr);
 
@@ -23,6 +31,8 @@ public:
 	///  Useful when loading an empty project, when all robot parameters should have a default value, or
 	/// when the corresponding fields are missing during deserialization.
 	void reinit();
+
+	bool propertyChanged(const char *propertyName) const;
 
 	/// Recalculate the collision polygon based on the current size of the robot.
 	QPolygonF collidingPolygon() const;
@@ -34,7 +44,7 @@ public:
 	void setWheelMass(const qreal mass);
 
 	/// Get the mass for the robot wheel.
-	qreal wheelMass();
+	qreal wheelMass() const;
 
 	/// Set the restitution coefficient for the robot's wheel.
 	void setWheelRestitution(const qreal restitution);

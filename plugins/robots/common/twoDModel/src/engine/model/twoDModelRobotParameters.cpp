@@ -1,5 +1,6 @@
 #include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "twoDModel/engine/model/constants.h"
+#include <cmath>
 
 using namespace twoDModel::model;
 
@@ -32,6 +33,30 @@ void TwoDRobotModelParameters::reinit() {
 	mWheelMass = mRobotModel.wheelMass();
 }
 
+namespace {
+static bool valueChanged(const qreal defaultValue, const qreal actualValue) {
+	constexpr auto precision = 1e-5;
+	return std::abs(defaultValue - actualValue) > precision;
+}
+}
+
+bool TwoDRobotModelParameters::propertyChanged(const char *propertyName) const {
+	const auto &defaultPropertyValue = mRobotModel.property(propertyName);
+	const auto &propertyValue = property(propertyName);
+	if (propertyValue.canConvert<qreal>()
+				&& defaultPropertyValue.canConvert<qreal>()) {
+		return valueChanged(defaultPropertyValue.toDouble(), propertyValue.toDouble());
+	}
+	if (propertyValue.canConvert<QSizeF>()
+				&& defaultPropertyValue.canConvert<QSizeF>()) {
+		const auto &defaultSize = defaultPropertyValue.toSizeF();
+		const auto &size = propertyValue.toSizeF();
+		return valueChanged(defaultSize.width(), size.width()) ||
+				valueChanged(defaultSize.height(), size.height());
+	}
+	qFatal("Unexpected type for TwoDRobotModelParameters property");
+}
+
 QPolygonF TwoDRobotModelParameters::collidingPolygon() const {
 	const auto &collPolygon = mRobotModel.collidingPolygon();
 	QPolygonF scaledPolygon;
@@ -54,7 +79,7 @@ void TwoDRobotModelParameters::setWheelMass(const qreal mass) {
 	mWheelMass = mass;
 }
 
-qreal TwoDRobotModelParameters::wheelMass() {
+qreal TwoDRobotModelParameters::wheelMass() const {
 	return mWheelMass;
 }
 

@@ -52,13 +52,13 @@ public:
 	void returnToStartPosition();
 
 	bool isCircle() const override;
-	qreal mass() const override;
+	qreal mass(bool getDefault) const override;
 	BodyType bodyType() const override;
-	qreal friction() const override;
-	qreal restitution() const override;
+	qreal friction(bool getDefault) const override;
+	qreal restitution(bool getDefault) const override;
 	QPolygonF collidingPolygon() const override;
-	qreal angularDamping() const override;
-	qreal linearDamping() const override;
+	qreal angularDamping(bool getDefault) const override;
+	qreal linearDamping(bool getDefault) const override;
 	QPainterPath shape () const override;
 
 	QPainterPath path() const;

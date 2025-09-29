@@ -291,18 +291,21 @@ QPolygonF RobotItem::collidingPolygon() const
 	return mRobotModel.parameters()->collidingPolygon();
 }
 
-qreal RobotItem::mass() const
+qreal RobotItem::mass(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return mRobotModel.parameters()->mass();
 }
 
-qreal RobotItem::friction() const
+qreal RobotItem::friction(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return mRobotModel.parameters()->friction();
 }
 
-qreal RobotItem::restitution() const
+qreal RobotItem::restitution(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return mRobotModel.parameters()->restitution();
 }
 

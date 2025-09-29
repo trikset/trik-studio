@@ -34,7 +34,12 @@ namespace robotModel {
 class TWO_D_MODEL_EXPORT TwoDRobotModel : public kitBase::robotModel::CommonRobotModel
 {
 	Q_OBJECT
-
+	Q_PROPERTY(qreal mass READ mass)
+	Q_PROPERTY(qreal friction READ friction)
+	Q_PROPERTY(qreal restitution READ restitution)
+	Q_PROPERTY(qreal linearDamping READ linearDamping)
+	Q_PROPERTY(qreal angularDamping READ angularDamping)
+	Q_PROPERTY(QSizeF size READ size)
 public:
 	explicit TwoDRobotModel(const RobotModelInterface &realModel);
 	explicit TwoDRobotModel(const QString &robotId);
