@@ -40,6 +40,9 @@ class TWO_D_MODEL_EXPORT TwoDRobotModel : public kitBase::robotModel::CommonRobo
 	Q_PROPERTY(qreal linearDamping READ linearDamping)
 	Q_PROPERTY(qreal angularDamping READ angularDamping)
 	Q_PROPERTY(QSizeF size READ size)
+	Q_PROPERTY(qreal wheelRestitution READ wheelRestitution)
+	Q_PROPERTY(qreal wheelFriction READ wheelFriction)
+	Q_PROPERTY(qreal wheelMass READ wheelMass)
 public:
 	explicit TwoDRobotModel(const RobotModelInterface &realModel);
 	explicit TwoDRobotModel(const QString &robotId);

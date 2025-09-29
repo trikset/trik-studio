@@ -68,7 +68,7 @@ bool TwoDRobotModelParameters::propertyChanged(const char *propertyName) const {
 		return valueChanged(defaultSize.width(), size.width()) ||
 				valueChanged(defaultSize.height(), size.height());
 	}
-	qFatal("Unexpected type for TwoDRobotModelParameters property");
+	qFatal("Unknown property or unexpected type for TwoDRobotModelParameters property");
 }
 
 QPolygonF TwoDRobotModelParameters::collidingPolygon() const {
