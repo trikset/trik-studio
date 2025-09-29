@@ -36,9 +36,10 @@ QPolygonF TwoDRobotModelParameters::collidingPolygon() const {
 	const auto &collPolygon = mRobotModel.collidingPolygon();
 	QPolygonF scaledPolygon;
 
-	const auto widthScale = mWidth / size().width();
-	const auto heightScale = mHeight / size().height();
+	const auto widthScale = mWidth / mRobotModel.size().width();
+	const auto heightScale = mHeight / mRobotModel.size().height();
 
+	scaledPolygon.reserve(collPolygon.size());
 	for (auto &&point : collPolygon) {
 	    scaledPolygon << QPointF{point.x() * widthScale, point.y() * heightScale};
 	}
@@ -73,7 +74,7 @@ qreal TwoDRobotModelParameters::wheelFriction() const {
 	return mWheelFriction;
 }
 
-void TwoDRobotModelParameters::setSize(const QSizeF &size) {
+void TwoDRobotModelParameters::setSize(QSizeF size) {
 	mWidth = size.width();
 	mHeight = size.height();
 }
@@ -142,8 +143,8 @@ qreal TwoDRobotModelParameters::onePercentAngularVelocity() const
 QList<QPointF> TwoDRobotModelParameters::wheelsPosition() const
 {
 	const auto &defaultWheelPosition = mRobotModel.wheelsPosition();
-	const auto widthScale = mWidth / size().width();
-	const auto heightScale = mHeight / size().height();
+	const auto widthScale = mWidth / mRobotModel.size().width();
+	const auto heightScale = mHeight / mRobotModel.size().height();
 
 	QList<QPointF> list;
 	list.reserve(defaultWheelPosition.size());

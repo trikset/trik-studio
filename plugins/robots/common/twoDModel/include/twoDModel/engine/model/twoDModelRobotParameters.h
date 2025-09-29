@@ -49,7 +49,7 @@ public:
 	qreal wheelFriction() const;
 
 	/// Set robot size.
-	void setSize(const QSizeF &size);
+	void setSize(QSizeF size);
 
 	/// Set the friction coefficient for the robot.
 	void setFriction(const qreal friction);

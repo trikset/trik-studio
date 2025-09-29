@@ -478,6 +478,11 @@ void RobotModel::serializeWorldModel(QDomElement &parent) const
 	robot.setAttribute("linearDamping", QString::number(mRobotModelParameters->linearDamping()));
 	mStartPositionMarker->serialize(robot);
 	world.appendChild(robot);
+	QDomElement wheel = world.ownerDocument().createElement("wheels");
+	wheel.setAttribute("friction", QString::number(mRobotModelParameters->wheelFriction()));
+	wheel.setAttribute("restitution", QString::number(mRobotModelParameters->wheelRestitution()));
+	wheel.setAttribute("mass", QString::number(mRobotModelParameters->wheelMass()));
+	world.appendChild(wheel);
 }
 
 void RobotModel::deserializeWorldModel(const QDomElement &world)
@@ -530,6 +535,16 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 		mRobotModelParameters->setLinearDamping(linearDamping);
 	}
 	reinitMotors();
+	QDomElement wheelElement = world.firstChildElement("wheels");
+	if (wheelElement.hasAttribute("friction")) {
+		mRobotModelParameters->setWheelFriction(wheelElement.attribute("friction").toDouble());
+	}
+	if (wheelElement.hasAttribute("restitution")) {
+		mRobotModelParameters->setWheelRestitution(wheelElement.attribute("restitution").toDouble());
+	}
+	if (wheelElement.hasAttribute("mass")) {
+		mRobotModelParameters->setWheelMass(wheelElement.attribute("mass").toDouble());
+	}
 	Q_EMIT deserialized(QPointF(mPos.x(), mPos.y()), mAngle);
 }
 
