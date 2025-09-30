@@ -124,7 +124,7 @@ void Box2DRobot::removeSensor(const twoDModel::view::SensorItem *sensor)
 	mSensors.remove(sensor);
 }
 
-void Box2DRobot::moveToPoint(const b2Vec2 &destination)
+void Box2DRobot::moveToPoint(b2Vec2 destination)
 {
 	// it is just a parallel transport, there is no need to reinit joints and etc
 	const b2Vec2 oldPosition = b2Body_GetPosition(mBodyId);
@@ -136,14 +136,14 @@ void Box2DRobot::moveToPoint(const b2Vec2 &destination)
 	b2Body_SetTransform(mBodyId, destination, rotation);
 	const b2Vec2 shift = destination - oldPosition;
 
-	for (auto wheel : mWheels) {
+	for (auto &&wheel : mWheels) {
 		b2BodyId wheelBodyID = wheel->getBodyId();
 		auto position = b2Body_GetPosition(wheelBodyID);
 		auto wheelRotation = b2Body_GetRotation(wheelBodyID);
 		b2Body_SetTransform(wheelBodyID, position + shift, wheelRotation);
 	}
 
-	for (auto sensor: mSensors) {
+	for (auto &&sensor: mSensors) {
 		b2BodyId sensorBody = sensor->getBodyId();
 		b2Body_SetTransform(sensorBody, b2Body_GetPosition(sensorBody) + shift,
 					 b2Body_GetRotation(sensorBody));
@@ -155,7 +155,7 @@ void Box2DRobot::setRotation(float angle)
 	auto rotation = b2MakeRot(angle);
 	b2Body_SetTransform(mBodyId, b2Body_GetPosition(mBodyId), rotation);
 
-	for (auto wheel : mWheels) {
+	for (auto &&wheel : mWheels) {
 		b2BodyId wheelBodyId = wheel->getBodyId();
 		std::vector<b2JointId> joints(1);
 		b2Body_GetJoints(wheelBodyId, joints.data(), 1);
@@ -212,8 +212,8 @@ void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem *sensor)
 
 void Box2DRobot::reinitSensors()
 {
-	for (auto *sensor : mSensors.keys()) {
-		reinitSensor(sensor);
+	for (auto it = mSensors.cbegin() ; it != mSensors.cend(); ++it) {
+		reinitSensor(it.key());
 	}
 }
 

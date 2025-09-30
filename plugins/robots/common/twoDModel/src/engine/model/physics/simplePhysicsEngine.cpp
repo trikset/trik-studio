@@ -45,7 +45,7 @@ qreal SimplePhysicsEngine::rotation(RobotModel &robot) const
 
 void SimplePhysicsEngine::recalculateParameters(qreal timeInterval)
 {
-	for (RobotModel * const robot : mRobots) {
+	for (auto &&robot : mRobots) {
 		recalculateParameters(timeInterval, *robot);
 	}
 }

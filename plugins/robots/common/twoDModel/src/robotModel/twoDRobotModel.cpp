@@ -47,7 +47,7 @@ TwoDRobotModel::TwoDRobotModel(const RobotModelInterface &realModel)
 	: CommonRobotModel(realModel.kitId(), realModel.robotId())
 	, mRealModel(&realModel)
 {
-	for (const PortInfo &port : realModel.availablePorts()) {
+	for (auto &&port : realModel.availablePorts()) {
 		if (!port.name().toLower().contains("gamepad")) {
 			addAllowedConnection(port, realModel.allowedDevices(port));
 		}
@@ -164,10 +164,11 @@ QPointF TwoDRobotModel::robotCenter() const
 
 QPointF TwoDRobotModel::rotationCenter() const
 {
-	if (wheelsPosition().size() < 2) {
+	const auto &wheelsPos = wheelsPosition();
+	if (wheelsPos.size() < 2) {
 		return robotCenter();
 	}
-	return (wheelsPosition()[0] + wheelsPosition()[1]) / 2;
+	return (wheelsPos[0] + wheelsPos[1]) / 2;
 }
 
 QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const
@@ -178,7 +179,8 @@ QPair<qreal, int> TwoDRobotModel::rangeSensorAngleAndDistance (const kitBase::ro
 robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const DeviceInfo &deviceInfo)
 {
 	if (deviceInfo.isA<robotParts::Button>()) {
-		return new parts::Button(deviceInfo, port, buttonCodes()[port.name() + "Button"], *mEngine);
+		const auto codes = buttonCodes();
+		return new parts::Button(deviceInfo, port, codes[port.name() + "Button"], *mEngine);
 	}
 
 	if (deviceInfo.isA<robotParts::Motor>()) {

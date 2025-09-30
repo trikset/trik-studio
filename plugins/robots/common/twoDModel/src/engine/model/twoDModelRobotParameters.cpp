@@ -195,16 +195,18 @@ QList<QPointF> TwoDRobotModelParameters::wheelsPosition() const
 
 QPointF TwoDRobotModelParameters::rotationCenter() const
 {
-	if (wheelsPosition().size() < 2) {
+	const auto &wheelsPos = wheelsPosition();
+	if (wheelsPos.size() < 2) {
 		return robotCenter();
 	}
 
-	return (wheelsPosition()[0] + wheelsPosition()[1]) / 2;
+	return (wheelsPos[0] + wheelsPos[1]) / 2;
 }
 
 qreal TwoDRobotModelParameters::robotTrack() const {
-	if (wheelsPosition().size() < 2) {
+	const auto &wheelsPos = wheelsPosition();
+	if (wheelsPos.size() < 2) {
 		return mWidth;
 	}
-	return qAbs(wheelsPosition()[0].y() - wheelsPosition()[1].y());
+	return qAbs(wheelsPos[0].y() - wheelsPos[1].y());
 }

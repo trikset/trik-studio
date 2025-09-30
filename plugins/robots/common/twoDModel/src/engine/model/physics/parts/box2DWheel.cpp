@@ -26,7 +26,7 @@ using namespace twoDModel::model::physics::parts;
 
 Box2DWheel::Box2DWheel(twoDModel::model::RobotModel * const robotModel,
 		Box2DPhysicsEngine *engine
-		, const b2Vec2 &positionBox2D, const b2Rot &rotationBox2D, Box2DRobot &robot)
+		, b2Vec2 positionBox2D, b2Rot rotationBox2D, Box2DRobot &robot)
 	: mRobot(robot)
 	, mEngine(engine)
 	, mWheelHeightM(engine->pxToM(robotModel->parameters()->wheelDiameter() / 2))

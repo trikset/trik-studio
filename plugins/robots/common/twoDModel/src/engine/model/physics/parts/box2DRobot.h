@@ -50,7 +50,7 @@ public:
 
 	void addSensor(const view::SensorItem *sensor);
 	void removeSensor(const view::SensorItem *sensor);
-	void moveToPoint(const b2Vec2 &destination);
+	void moveToPoint(b2Vec2 destination);
 	void setRotation(float angle);
 
 	void reinitSensor(const view::SensorItem *sensor);

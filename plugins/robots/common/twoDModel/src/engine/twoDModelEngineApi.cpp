@@ -63,7 +63,8 @@ TwoDModelEngineApi::~TwoDModelEngineApi()
 
 void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
 {
-	auto target = mModel.robotModels()[0];
+	const auto &robotModels = mModel.robotModels();
+	auto target = robotModels[0];
 	QMetaObject::invokeMethod(target, [&](){target->setNewMotor(speed, degrees, port, breakMode);}
 	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 }
@@ -71,7 +72,8 @@ void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &po
 int TwoDModelEngineApi::readEncoder(const PortInfo &port) const
 {
 	int t;
-	auto target = mModel.robotModels()[0];
+	const auto &robotModels = mModel.robotModels();
+	auto target = robotModels[0];
 	QMetaObject::invokeMethod(target, [&](){t = target->readEncoder(port);}
 	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
@@ -79,21 +81,23 @@ int TwoDModelEngineApi::readEncoder(const PortInfo &port) const
 
 void TwoDModelEngineApi::resetEncoder(const PortInfo &port)
 {
-	auto target = mModel.robotModels()[0];
+	const auto &robotModels = mModel.robotModels();
+	auto target = robotModels[0];
 	QMetaObject::invokeMethod(target, [&](){target->resetEncoder(port);}
 	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 }
 
 int TwoDModelEngineApi::readTouchSensor(const PortInfo &port) const
 {
-	if (!mModel.robotModels()[0]->configuration().type(port).isA<robotParts::TouchSensor>()) {
+	const auto &robotModels = mModel.robotModels();
+	if (!robotModels[0]->configuration().type(port).isA<robotParts::TouchSensor>()) {
 		return touchSensorNotPressedSignal;
 	}
 
 	QPair<QPointF, qreal> const neededPosDir = countPositionAndDirection(port);
 	const QPointF position(neededPosDir.first);
 	const qreal rotation = neededPosDir.second / 180 * mathUtils::pi;
-	const QRectF rect = mModel.robotModels()[0]->sensorRect(port, position);
+	const QRectF rect = robotModels[0]->sensorRect(port, position);
 
 	QPainterPath sensorPath;
 	const qreal touchRegionRadius = qCeil(rect.height() / qSqrt(2));
@@ -140,7 +144,8 @@ QVector<int> TwoDModelEngineApi::readLidarSensor(const PortInfo &port, int maxDi
 QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 {
 	QVector<int> t;
-	auto target = mModel.robotModels()[0];
+	const auto &robotModels = mModel.robotModels();
+	auto target = robotModels[0];
 	QMetaObject::invokeMethod(target, [&](){t = target->accelerometerReading();}
 	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
@@ -149,7 +154,8 @@ QVector<int> TwoDModelEngineApi::readAccelerometerSensor() const
 QVector<int> TwoDModelEngineApi::readGyroscopeSensor() const
 {
 	QVector<int> t;
-	auto target = mModel.robotModels()[0];
+	const auto &robotModels = mModel.robotModels();
+	auto target = robotModels[0];
 	QMetaObject::invokeMethod(target, [&](){t = target->gyroscopeReading();}
 	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
@@ -158,7 +164,8 @@ QVector<int> TwoDModelEngineApi::readGyroscopeSensor() const
 QVector<int> TwoDModelEngineApi::calibrateGyroscopeSensor()
 {
 	QVector<int> t;
-	auto target = mModel.robotModels()[0];
+	const auto &robotModels = mModel.robotModels();
+	auto target = robotModels[0];
 	QMetaObject::invokeMethod(target, [&](){t = target->gyroscopeCalibrate();}
 	, QThread::currentThread() != target->thread() ? Qt::BlockingQueuedConnection : Qt::DirectConnection);
 	return t;
@@ -219,9 +226,10 @@ uint TwoDModelEngineApi::spoilColor(const uint color) const
 
 QImage TwoDModelEngineApi::areaUnderSensor(const PortInfo &port, qreal widthFactor) const
 {
-	DeviceInfo device = mModel.robotModels()[0]->configuration().type(port);
+	const auto &robotModels = mModel.robotModels();
+	DeviceInfo device = robotModels[0]->configuration().type(port);
 	if (device.isNull()) {
-		device = mModel.robotModels()[0]->info().specialDevices()[port];
+		device = robotModels[0]->info().specialDevices()[port];
 		if (device.isNull()) {
 			return QImage();
 		}
@@ -230,7 +238,7 @@ QImage TwoDModelEngineApi::areaUnderSensor(const PortInfo &port, qreal widthFact
 	const QPair<QPointF, qreal> neededPosDir = countPositionAndDirection(port);
 	const QPointF position = neededPosDir.first;
 	const qreal direction = neededPosDir.second;
-	const QRect imageRect = mModel.robotModels()[0]->info().sensorImageRect(device);
+	const QRect imageRect = robotModels[0]->info().sensorImageRect(device);
 	const qreal width = imageRect.width() * widthFactor / 2.0;
 
 	const QRectF sensorRectangle = QTransform().rotate(direction).map(QPolygonF(QRectF(imageRect))).boundingRect();
@@ -287,22 +295,26 @@ int TwoDModelEngineApi::readLightSensor(const PortInfo &port) const
 
 void TwoDModelEngineApi::playSound(int timeInMs)
 {
-	mModel.robotModels()[0]->playSound(timeInMs);
+	const auto& robotModels = mModel.robotModels();
+	robotModels[0]->playSound(timeInMs);
 }
 
 bool TwoDModelEngineApi::isMarkerDown() const
 {
-	return mModel.robotModels()[0]->markerColor() != Qt::transparent;
+	const auto& robotModels = mModel.robotModels();
+	return robotModels[0]->markerColor() != Qt::transparent;
 }
 
 void TwoDModelEngineApi::markerDown(const QColor &color)
 {
-	mModel.robotModels()[0]->markerDown(color);
+	const auto& robotModels = mModel.robotModels();
+	robotModels[0]->markerDown(color);
 }
 
 void TwoDModelEngineApi::markerUp()
 {
-	mModel.robotModels()[0]->markerUp();
+	const auto& robotModels = mModel.robotModels();
+	robotModels[0]->markerUp();
 }
 
 utils::TimelineInterface &TwoDModelEngineApi::modelTimeline()
@@ -335,7 +347,8 @@ uint TwoDModelEngineApi::spoilLight(const uint color) const
 
 QPair<QPointF, qreal> TwoDModelEngineApi::countPositionAndDirection(const PortInfo &port) const
 {
-	RobotModel * const robotModel = mModel.robotModels()[0];
+	const auto& robotModels = mModel.robotModels();
+	RobotModel * const robotModel = robotModels[0];
 	const QPointF robotCenter = robotModel->parameters()->robotCenter();
 	const QVector2D sensorVector = QVector2D(robotModel->configuration().position(port) - robotCenter);
 	const QPointF rotatedVector = mathUtils::Geometry::rotateVector(sensorVector, robotModel->rotation()).toPointF();
@@ -360,13 +373,15 @@ void TwoDModelEngineApi::enableBackgroundSceneDebugging()
 	fakeScene->setMinimumWidth(700);
 	fakeScene->setMinimumHeight(600);
 	fakeScene->setWindowFlags(fakeScene->windowFlags() | Qt::WindowStaysOnTopHint);
-	fakeScene->setVisible(mModel.robotModels().isEmpty()
+	const auto& robotModels = mModel.robotModels();
+	fakeScene->setVisible(robotModels.isEmpty()
 			? true
-			: mModel.robotModels()[0]->info().robotId().contains("trik"));
+			: robotModels[0]->info().robotId().contains("trik"));
 	timer->start();
 }
 
 kitBase::robotModel::PortInfo TwoDModelEngineApi::videoPort() const
 {
-	return RobotModelUtils::findPort(mModel.robotModels()[0]->info(), "Video2Port", input);
+	const auto& robotModels = mModel.robotModels();
+	return RobotModelUtils::findPort(robotModels[0]->info(), "Video2Port", input);
 }
