@@ -75,14 +75,13 @@ bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
 	mEvents.clear();
 	mActiveEvents.clear();
 	mVariables.clear();
+	mCurrentConstraintDocument.clear();
 	mParsedSuccessfully = mParser->parse(constraintsXml);
 
 	if (mParsedSuccessfully) {
 		auto importNode = mCurrentConstraintDocument.importNode(constraintsXml, true);
-		if (!importNode.isNull()) {
-			mCurrentXml = importNode.toElement();
-			mCurrentConstraintDocument.appendChild(mCurrentXml);
-		}
+		mCurrentXml = importNode.toElement();
+		mCurrentConstraintDocument.appendChild(mCurrentXml);
 	}
 
 	for (auto &&error : mParser->errors()) {
