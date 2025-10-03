@@ -103,6 +103,7 @@ protected:
 	void itemRemoved(QGraphicsItem * const item) override;
 
 private:
+	bool mAlreadyConnected = false;
 	void onPressedReleasedSelectedItems(bool active);
 
 	bool itemTracked(QGraphicsItem * const item);

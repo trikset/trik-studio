@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include <QDomElement>
 #include <QtGui/QPolygonF>
 #include <QtCore/qglobal.h>
 
@@ -45,23 +46,30 @@ public:
 	/// Returns true if body form is circle, in such case, radius is a half of collidingPolygon() bounding rect size
 	virtual bool isCircle() const;
 
+	void serialize(QDomElement &element) const;
+
+	inline bool propertyChanged(const qreal actualValue, const qreal defaultValue) const {
+		constexpr auto precision = 1e-5;
+		return std::abs(defaultValue - actualValue) > precision;
+	}
+
 	/// Returns body's mass in kg.
-	virtual qreal mass() const = 0;
+	virtual qreal mass(bool getDefault = false) const = 0;
 
 	/// Returns body's friction.
-	virtual qreal friction() const = 0;
+	virtual qreal friction(bool getDefault = false) const = 0;
 
 	/// Returns body's restitution.
-	virtual qreal restitution() const = 0;
+	virtual qreal restitution(bool getDefault = false) const = 0;
 
 	/// Returns body's type.
 	virtual BodyType bodyType() const = 0;
 
 	/// Returns body's angular damping.
-	virtual qreal angularDamping() const;
+	virtual qreal angularDamping(bool getDefault = false) const;
 
 	/// Returns body's linear damping.
-	virtual qreal linearDamping() const;
+	virtual qreal linearDamping(bool getDefault = false) const;
 };
 
 }

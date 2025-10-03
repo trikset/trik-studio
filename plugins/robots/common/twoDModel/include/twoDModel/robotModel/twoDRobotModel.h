@@ -34,7 +34,15 @@ namespace robotModel {
 class TWO_D_MODEL_EXPORT TwoDRobotModel : public kitBase::robotModel::CommonRobotModel
 {
 	Q_OBJECT
-
+	Q_PROPERTY(qreal mass READ mass)
+	Q_PROPERTY(qreal friction READ friction)
+	Q_PROPERTY(qreal restitution READ restitution)
+	Q_PROPERTY(qreal linearDamping READ linearDamping)
+	Q_PROPERTY(qreal angularDamping READ angularDamping)
+	Q_PROPERTY(QSizeF size READ size)
+	Q_PROPERTY(qreal wheelRestitution READ wheelRestitution)
+	Q_PROPERTY(qreal wheelFriction READ wheelFriction)
+	Q_PROPERTY(qreal wheelMass READ wheelMass)
 public:
 	explicit TwoDRobotModel(const RobotModelInterface &realModel);
 	explicit TwoDRobotModel(const QString &robotId);
@@ -74,6 +82,24 @@ public:
 
 	/// Returns robot`s fixture friction coefficient.
 	virtual qreal friction() const = 0;
+
+	/// Returns robot`s fixture restitution coefficient.
+	virtual qreal restitution() const;
+
+	/// Returns robot`s fixture linear damping coefficient.
+	virtual qreal linearDamping() const;
+
+	/// Returns robot`s fixture angular damping coefficient.
+	virtual qreal angularDamping() const;
+
+	/// Returns the default restitution coefficient of the robot's wheel.
+	virtual qreal wheelRestitution() const;
+
+	/// Returns the default friction coefficient of the robot's wheel.
+	virtual qreal wheelFriction() const;
+
+	/// Returns the default mass of the robot's wheel.
+	virtual qreal wheelMass() const;
 
 	/// Returns robot`s rectangle size in pixels.
 	/// By default returns (50, 50).

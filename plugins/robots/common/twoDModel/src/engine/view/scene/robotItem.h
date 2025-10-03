@@ -66,9 +66,9 @@ public:
 	bool isDragged() const;
 
 	QPolygonF collidingPolygon() const override;
-	qreal mass() const override;
-	qreal friction() const override;
-	qreal restitution() const override;
+	qreal mass(bool getDefault) const override;
+	qreal friction(bool getDefault) const override;
+	qreal restitution(bool getDefault) const override;
 	BodyType bodyType() const override;
 
 protected:
@@ -102,7 +102,7 @@ private:
 	/// Same as QGraphicsItem::setRotation(). Needed as slot for connection.
 	void setRotation(qreal rotation);
 	void ride(QPointF newPos, qreal rotation);
-
+	void updateGraphicParams();
 	void onLanded();
 	void updateImage();
 

@@ -18,6 +18,7 @@
 #include "src/engine/view/scene/rangeSensorItem.h"
 #include "twoDModel/engine/model/robotModel.h"
 #include "twoDModel/engine/model/constants.h"
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "box2DWheel.h"
 #include "box2DItem.h"
 
@@ -34,23 +35,24 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position = pos;
 	bodyDef.rotation = b2MakeRot(angle);
+	bodyDef.angularDamping = mModel->parameters()->angularDamping();
+	bodyDef.linearDamping = mModel->parameters()->linearDamping();
 	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = 0.6f;
-	fixtureDef.material.friction = mModel->info().friction();
-	QPolygonF collidingPolygon = mModel->info().collidingPolygon();
+	fixtureDef.material.restitution = mModel->parameters()->restitution();
+	fixtureDef.material.friction = mModel->parameters()->friction();
+	QPolygonF collidingPolygon = mModel->parameters()->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
 	mPolygon.reset(new b2Vec2[collidingPolygon.size()]);
 	for (int i = 0; i < collidingPolygon.size(); ++i) {
 		mPolygon[i] = engine->positionToBox2D(collidingPolygon.at(i) - localCenter);
 	}
-	fixtureDef.density = engine->computeDensity(collidingPolygon, mModel->info().mass());
+	fixtureDef.density = engine->computeDensity(collidingPolygon,
+			mModel->parameters()->mass());
 	b2Hull hull = b2ComputeHull(mPolygon.get(), collidingPolygon.size());
 	b2Polygon polygon = b2MakePolygon(&hull, 0.0f);
 	b2ShapeId polygonShapeId = b2CreatePolygonShape(mBodyId, &fixtureDef, &polygon);
 	b2Body_SetUserData(mBodyId, this);
-	b2Body_SetAngularDamping(mBodyId, 1.0f);
-	b2Body_SetLinearDamping(mBodyId, 1.0f);
 	connectWheels();
 	auto finalPolygon = b2Shape_GetPolygon(polygonShapeId);
 
@@ -71,10 +73,10 @@ Box2DRobot::~Box2DRobot() {
 	for (auto i = 0; i < jointCount; i++) {
 		b2DestroyJoint(joints[i]);
 	}
-
 	qDeleteAll(mWheels);
 	qDeleteAll(mSensors);
 	b2DestroyBody(mBodyId);
+	mBodyId = b2_nullBodyId;
 }
 
 void Box2DRobot::stop()
@@ -107,6 +109,11 @@ void Box2DRobot::addSensor(const twoDModel::view::SensorItem *sensor)
 
 void Box2DRobot::removeSensor(const twoDModel::view::SensorItem *sensor)
 {
+	const auto &it = mSensors.constFind(sensor);
+	if (it == mSensors.constEnd()) {
+		return;
+	}
+
 	b2BodyId bodyId = mSensors[sensor]->getBodyId();
 	std::vector<b2JointId> joints(1);
 	auto count = b2Body_GetJoints(bodyId, joints.data(), 1);
@@ -117,7 +124,7 @@ void Box2DRobot::removeSensor(const twoDModel::view::SensorItem *sensor)
 	mSensors.remove(sensor);
 }
 
-void Box2DRobot::moveToPoint(const b2Vec2 &destination)
+void Box2DRobot::moveToPoint(b2Vec2 destination)
 {
 	// it is just a parallel transport, there is no need to reinit joints and etc
 	const b2Vec2 oldPosition = b2Body_GetPosition(mBodyId);
@@ -129,14 +136,14 @@ void Box2DRobot::moveToPoint(const b2Vec2 &destination)
 	b2Body_SetTransform(mBodyId, destination, rotation);
 	const b2Vec2 shift = destination - oldPosition;
 
-	for (auto wheel : mWheels) {
+	for (auto &&wheel : mWheels) {
 		b2BodyId wheelBodyID = wheel->getBodyId();
 		auto position = b2Body_GetPosition(wheelBodyID);
 		auto wheelRotation = b2Body_GetRotation(wheelBodyID);
 		b2Body_SetTransform(wheelBodyID, position + shift, wheelRotation);
 	}
 
-	for (auto sensor: mSensors) {
+	for (auto &&sensor: mSensors) {
 		b2BodyId sensorBody = sensor->getBodyId();
 		b2Body_SetTransform(sensorBody, b2Body_GetPosition(sensorBody) + shift,
 					 b2Body_GetRotation(sensorBody));
@@ -148,7 +155,7 @@ void Box2DRobot::setRotation(float angle)
 	auto rotation = b2MakeRot(angle);
 	b2Body_SetTransform(mBodyId, b2Body_GetPosition(mBodyId), rotation);
 
-	for (auto wheel : mWheels) {
+	for (auto &&wheel : mWheels) {
 		b2BodyId wheelBodyId = wheel->getBodyId();
 		std::vector<b2JointId> joints(1);
 		b2Body_GetJoints(wheelBodyId, joints.data(), 1);
@@ -205,12 +212,12 @@ void Box2DRobot::reinitSensor(const twoDModel::view::SensorItem *sensor)
 
 void Box2DRobot::reinitSensors()
 {
-	for (auto *sensor : mSensors.keys()) {
-		reinitSensor(sensor);
+	for (auto it = mSensors.cbegin() ; it != mSensors.cend(); ++it) {
+		reinitSensor(it.key());
 	}
 }
 
-void Box2DRobot::applyForceToCenter(const b2Vec2 &force, bool wake)
+void Box2DRobot::applyForceToCenter(b2Vec2 force, bool wake)
 {
 	b2Body_ApplyForceToCenter(mBodyId, force, wake);
 }
@@ -241,17 +248,18 @@ const QMap<const twoDModel::view::SensorItem *, Box2DItem *> &Box2DRobot::getSen
 }
 
 void Box2DRobot::connectWheels() {
-	QPointF leftUpCorner = QPointF(-mModel->info().size().width() / 2, -mModel->info().size().height() / 2);
+	QPointF leftUpCorner = QPointF(-mModel->parameters()->size().width() / 2,
+				       -mModel->parameters()->size().height() / 2);
 	///@todo: adapt it for more than 2 wheels
-	QPointF posLeftWheelFromRobot = mModel->info().wheelsPosition().first();
-	QPointF posRightWheelFromRobot = mModel->info().wheelsPosition().last();
+	QPointF posLeftWheelFromRobot = mModel->parameters()->wheelsPosition().first();
+	QPointF posRightWheelFromRobot = mModel->parameters()->wheelsPosition().last();
 	b2Vec2 posLeftWheel = b2Body_GetWorldPoint(
 				mBodyId, mEngine->positionToBox2D(posLeftWheelFromRobot + leftUpCorner));
 	b2Vec2 posRightWheel =  b2Body_GetWorldPoint(
 				mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
 	auto angle = b2Body_GetRotation(mBodyId);
-	Box2DWheel *leftWheel = new Box2DWheel(mEngine, posLeftWheel, angle, *this);
-	Box2DWheel *rightWheel = new Box2DWheel(mEngine, posRightWheel, angle, *this);
+	Box2DWheel *leftWheel = new Box2DWheel(mModel, mEngine, posLeftWheel, angle, *this);
+	Box2DWheel *rightWheel = new Box2DWheel(mModel, mEngine, posRightWheel, angle, *this);
 	mWheels.append(leftWheel);
 	mWheels.append(rightWheel);
 	connectWheel(*leftWheel);

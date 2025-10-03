@@ -17,6 +17,7 @@
 #include <qrutils/mathUtils/math.h>
 
 #include "twoDModel/engine/model/worldModel.h"
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 
 using namespace twoDModel::model::physics;
 
@@ -73,5 +74,6 @@ void PhysicsEngineBase::itemRemoved(QGraphicsItem * const item)
 
 qreal PhysicsEngineBase::wheelLinearSpeed(RobotModel &robot, const RobotModel::Wheel &wheel) const
 {
-	return wheel.spoiledSpeed * 2 * mathUtils::pi * wheel.radius * robot.info().onePercentAngularVelocity() / 360;
+	return wheel.spoiledSpeed * 2 * mathUtils::pi *
+					wheel.radius * robot.parameters()->onePercentAngularVelocity() / 360;
 }

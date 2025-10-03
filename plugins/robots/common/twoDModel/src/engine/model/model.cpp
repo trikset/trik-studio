@@ -14,6 +14,7 @@
 
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/metricCoordinateSystem.h"
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include <qrkernel/settingsManager.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
@@ -168,11 +169,10 @@ void Model::deserialize(const QDomDocument &model)
 	const auto &worldList = model.elementsByTagName("world");
 	const auto &world = worldList.isEmpty() ? QDomElement() : worldList.at(0).toElement();
 	const auto &blobsList = model.elementsByTagName("blobs");
+	mRobotModel->reinit();
 	mWorldModel.deserialize(world, blobsList.isEmpty() ? QDomElement() : blobsList.at(0).toElement());
-
 	const auto &robotsList = model.elementsByTagName("robots");
 	if (!mRobotModel || robotsList.isEmpty()) return;
-	mRobotModel->reinit();
 	for (QDomElement element = robotsList.at(0).firstChildElement("robot")
 			; !element.isNull(); element = element.nextSiblingElement("robot")) {
 		if (mRobotModel->info().robotId() == element.toElement().attribute("id")) {

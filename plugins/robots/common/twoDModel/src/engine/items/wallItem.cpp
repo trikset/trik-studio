@@ -156,8 +156,7 @@ QDomElement WallItem::serialize(QDomElement &parent) const
 	                    coordSystem->toUnit(y1() + pos.y()),
 	                    coordSystem->toUnit(x2() + pos.x()),
 	                    coordSystem->toUnit(y2() + pos.y()));
-	wallNode.setAttribute("friction", QString::number(mFriction));
-	wallNode.setAttribute("restitution", QString::number(mRestitution));
+	SolidItem::serialize(wallNode);
 	return wallNode;
 }
 
@@ -333,19 +332,20 @@ QPolygonF WallItem::collidingPolygon() const
 	return abcdBoundingRect;
 }
 
-qreal WallItem::mass() const
+qreal WallItem::mass(bool getDefault) const
 {
+	Q_UNUSED(getDefault)
 	return 0.0;
 }
 
-qreal WallItem::friction() const
+qreal WallItem::friction(bool getDefault) const
 {
-	return mFriction;
+	return getDefault ? wallFriction : mFriction;
 }
 
-qreal WallItem::restitution() const
+qreal WallItem::restitution(bool getDefault) const
 {
-	return mRestitution;
+	return getDefault ? wallRestituion : mRestitution;
 }
 
 SolidItem::BodyType WallItem::bodyType() const

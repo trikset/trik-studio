@@ -420,7 +420,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+67"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+68"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
@@ -430,7 +430,7 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+98"/>
+        <location line="+97"/>
         <source>This robot model already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -808,7 +808,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+348"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+352"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -826,17 +826,17 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-199"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+30"/>
         <source>kg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+277"/>
+        <location line="+278"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>

@@ -115,12 +115,13 @@ QDomElement CubeItem::serialize(QDomElement &element) const
 			      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
 	cubeNode.setAttribute("rotation", QString::number(rotation()));
 	cubeNode.setAttribute("startRotation", QString::number(mStartRotation));
-	cubeNode.setAttribute("edgeSize", QString::number(coordSystem->toUnit(mEdgeSizePx)));
-	cubeNode.setAttribute("mass", QString::number(mMass));
-	cubeNode.setAttribute("friction", QString::number(mFriction));
-	cubeNode.setAttribute("restitution", QString::number(mRestitution));
-	cubeNode.setAttribute("angularDamping", QString::number(mAngularDamping));
-	cubeNode.setAttribute("linearDamping", QString::number(mLinearDamping));
+
+	SolidItem::serialize(cubeNode);
+
+	if (propertyChanged(mEdgeSizePx, defaultCubeEdgePx)) {
+		cubeNode.setAttribute("edgeSize", QString::number(coordSystem->toUnit(mEdgeSizePx)));
+	}
+
 	return cubeNode;
 }
 
@@ -185,14 +186,14 @@ QPolygonF CubeItem::collidingPolygon() const
 	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
-qreal CubeItem::angularDamping() const
+qreal CubeItem::angularDamping(bool getDefault) const
 {
-	return mAngularDamping;
+	return getDefault ? cubeAngularDamping : mAngularDamping;
 }
 
-qreal CubeItem::linearDamping() const
+qreal CubeItem::linearDamping(bool getDefault) const
 {
-	return mLinearDamping;
+	return getDefault ? cubeLinearDamping : mLinearDamping;
 }
 
 QPainterPath CubeItem::path() const
@@ -207,19 +208,19 @@ bool CubeItem::isCircle() const
 	return false;
 }
 
-qreal CubeItem::mass() const
+qreal CubeItem::mass(bool getDefault) const
 {
-	return mMass;
+	return getDefault ? cubeMass : mMass;
 }
 
-qreal CubeItem::friction() const
+qreal CubeItem::friction(bool getDefault) const
 {
-	return mFriction;
+	return getDefault ? cubeFriction : mFriction;
 }
 
-qreal CubeItem::restitution() const
+qreal CubeItem::restitution(bool getDefault) const
 {
-	return mRestitution;
+	return getDefault ? cubeRestituion : mRestitution;
 }
 
 void CubeItem::setEdgeSize(const qreal edge)

@@ -16,6 +16,7 @@
 
 #include "twoDModel/engine/model/constants.h"
 #include "src/engine/items/startPosition.h"
+#include "twoDModel/engine/model/twoDModelRobotParameters.h"
 
 using namespace twoDModel::view;
 using namespace graphicsUtils;
@@ -48,20 +49,20 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setAcceptHoverEvents(true);
 	setAcceptDrops(true);
 	setZValue(ZValue::Robot);
-	const QSizeF robotSize = mRobotModel.info().size();
-	setX2(x1() + robotSize.width());
-	setY2(y1() + robotSize.height());
-	mMarkerPoint = mRobotModel.info().rotationCenter();
+
+	connect(&mRobotModel, &model::RobotModel::deserialized, this, [this](QPointF newPos, qreal newAngle){
+		Q_UNUSED(newPos)
+		Q_UNUSED(newAngle)
+		prepareGeometryChange();
+		updateGraphicParams();
+		savePos();
+	});
+
 	QPen pen(this->pen());
 	pen.setWidth(defaultTraceWidth);
 	setPen(pen);
-
-	setTransformOriginPoint(mRobotModel.info().robotCenter());
 	mBeepItem.setParentItem(this);
-	mBeepItem.setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
-	mBeepItem.setVisible(false);
-
-	RotateItem::init();
+	updateGraphicParams();
 
 	QHash<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> sensors = robotModel.info().specialDevices();
 	for (auto it = sensors.begin(); it != sensors.end(); it++) {
@@ -79,6 +80,18 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		sensorItem->setRotation(configuration.second);
 	}
 	savePos();
+}
+
+void RobotItem::updateGraphicParams()
+{
+	const QSizeF robotSize = mRobotModel.parameters()->size();
+	setX2(x1() + robotSize.width());
+	setY2(y1() + robotSize.height());
+	mMarkerPoint = mRobotModel.parameters()->rotationCenter();
+	setTransformOriginPoint(mRobotModel.parameters()->robotCenter());
+	mBeepItem.setPos((robotSize.width() - beepWavesSize) / 2, (robotSize.height() - beepWavesSize) / 2);
+	mBeepItem.setVisible(false);
+	RotateItem::init();
 }
 
 void RobotItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -275,22 +288,25 @@ void RobotItem::returnToStartPosition()
 
 QPolygonF RobotItem::collidingPolygon() const
 {
-	return mRobotModel.info().collidingPolygon();
+	return mRobotModel.parameters()->collidingPolygon();
 }
 
-qreal RobotItem::mass() const
+qreal RobotItem::mass(bool getDefault) const
 {
-	return mRobotModel.info().mass();
+	Q_UNUSED(getDefault)
+	return mRobotModel.parameters()->mass();
 }
 
-qreal RobotItem::friction() const
+qreal RobotItem::friction(bool getDefault) const
 {
-	return mRobotModel.info().friction();
+	Q_UNUSED(getDefault)
+	return mRobotModel.parameters()->friction();
 }
 
-qreal RobotItem::restitution() const
+qreal RobotItem::restitution(bool getDefault) const
 {
-	return 0.6f;
+	Q_UNUSED(getDefault)
+	return mRobotModel.parameters()->restitution();
 }
 
 twoDModel::items::SolidItem::BodyType RobotItem::bodyType() const
