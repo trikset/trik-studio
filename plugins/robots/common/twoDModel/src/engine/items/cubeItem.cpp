@@ -97,6 +97,7 @@ void CubeItem::drawExtractionForItem(QPainter *painter)
 void CubeItem::savePos()
 {
 	saveStartPosition();
+	rotater().savePos();
 	AbstractItem::savePos();
 }
 
