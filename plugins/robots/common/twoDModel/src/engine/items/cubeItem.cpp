@@ -145,6 +145,9 @@ void CubeItem::deserialize(const QDomElement &element)
 	if (element.hasAttribute("friction")) {
 		mFriction = element.attribute("friction").toDouble();
 	}
+	if (element.hasAttribute("restitution")) {
+		mRestitution = element.attribute("restitution").toDouble();
+	}
 	if (element.hasAttribute("angularDamping")) {
 		mAngularDamping = element.attribute("angularDamping").toDouble();
 	}
