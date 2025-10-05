@@ -46,8 +46,10 @@ PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarc
 deactivate # exit python's venv
 
 rsync -avR --remove-source-files dist/trik/_internal/./*.dylib "$BUNDLE_CONTENTS/Lib"
+rsync -avR --remove-source-files dist/trik/_internal/python3.*/* "$BUNDLE_CONTENTS/Lib/python-runtime"
 # Remove before copying other files
 rm dist/trik/trik
+rm -rf dist/trik/_internal/python3.*
 rsync -avRm --delete --delete-after dist/trik/_internal/./* "$BUNDLE_CONTENTS/Lib/python-runtime"
 
 #Add Python runtime libraries
