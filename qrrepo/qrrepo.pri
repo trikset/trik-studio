@@ -30,6 +30,7 @@ use_system_quazip {
     links(quazip)
     INCLUDEPATH += $$GLOBAL_PWD/thirdparty/quazip/quazip/
     DEFINES += QUAZIP_STATIC
+    !versionAtLeast(QT_MAJOR_VERSION, 6):DEFINES += QUAZIP_CAN_USE_QTEXTCODEC #force QTextCodec for Qt5
 }
 
 HEADERS += \
