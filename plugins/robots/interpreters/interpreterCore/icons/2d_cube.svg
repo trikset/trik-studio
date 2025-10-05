@@ -19,7 +19,7 @@
     </rdf:RDF>
   </metadata>
 
-  <rect x="0" y="0" width="300" height="300" fill="#e74c3c" stroke="#c0392b" stroke-width="3"/>
+  <rect x="0" y="0" width="300" height="300" fill="#e74c3c"/>
 
 </svg>
 
