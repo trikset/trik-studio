@@ -198,8 +198,8 @@ void RobotsBlockParser::addIntrinsicFuctions()
 		return text;
 	});
 
-	addFloatFunction("sin", [](qreal x) { return qSin(M_PI / 180 * x); });
-	addFloatFunction("cos", [](qreal x) { return qCos(M_PI / 180 * x); });
+	addFloatFunction("sin", [](qreal x) { return qSin(x); });
+	addFloatFunction("cos", [](qreal x) { return qCos(x); });
 	addFloatFunction("ln", [](qreal x) {return qLn(x); });
 	addFloatFunction("exp", [](qreal x) {return qExp(x); });
 	addFloatFunction("asin", [](qreal x) {return qAsin(x); });

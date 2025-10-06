@@ -1,1 +1,1 @@
-math.sin(@@ARGUMENT@@*pi/180)
+math.sin(@@ARGUMENT@@)
