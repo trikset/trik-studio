@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include <qrutils/interpreter/block.h>
-
+#include <QCoreApplication>
 #include <QsLog.h>
 #include <qrtext/languageToolboxInterface.h>
 #include <qrgui/plugins/pluginManager/editorManagerInterface.h>
@@ -110,7 +110,7 @@ void Block::interpret(Thread *thread)
 	if (mState == failed) {
 		return;
 	}
-
+	QCoreApplication::processEvents();
 	mState = running;
 	mThread = thread;
 	if (initNextBlocks()) {
