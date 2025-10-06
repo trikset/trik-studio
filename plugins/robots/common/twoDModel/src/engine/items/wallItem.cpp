@@ -179,11 +179,11 @@ void WallItem::deserialize(const QDomElement &element)
 		mWallWidth = pen().widthF();
 	}
 
-	if (element.hasAttribute(QStringLiteral("friction"))) {
+	if (element.hasAttribute("friction")) {
 		mFriction = element.attribute("friction").toDouble();
 	}
 
-	if (element.hasAttribute(QStringLiteral("restitution"))) {
+	if (element.hasAttribute("restitution")) {
 		mRestitution = element.attribute("restitution").toDouble();
 	}
 

@@ -21,11 +21,11 @@ include(mocks.pri)
 links(qrgui-preferences-dialog qrgui-text-editor qrgui-controller)
 
 INCLUDEPATH += \
-	../../../../mocks/plugins/robots/common/kitBase/include/ \
-	../../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/include/ \
-	../../../../../../plugins/robots/common/twoDModel/ \
-	../../../../../../plugins/robots/common/twoDModel/include/ \
-	../../../../mocks/plugins/robots/common/twoDModel/include/  \
+	$$PWD/../../../../mocks/plugins/robots/common/kitBase/include/ \
+	$$PWD/../../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/include/ \
+	$$PWD/../../../../../../plugins/robots/common/twoDModel/ \
+	$$PWD/../../../../../../plugins/robots/common/twoDModel/include/ \
+	$$PWD/../../../../mocks/plugins/robots/common/twoDModel/include/  \
 
 # Tests
 HEADERS += \
