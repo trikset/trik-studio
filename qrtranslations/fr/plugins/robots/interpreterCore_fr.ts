@@ -243,19 +243,16 @@
         <translation>État des capteurs</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/textLanguage/robotsBlockParser.cpp" line="+34"/>
         <source>sensor</source>
-        <translation>capteur</translation>
+        <translation type="vanished">capteur</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>encoder</source>
-        <translation>encodeur</translation>
+        <translation type="vanished">encodeur</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>time</source>
-        <translation>temps</translation>
+        <translation type="vanished">temps</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+60"/>
