@@ -97,21 +97,18 @@
         <translation>Список всех объявленных в проекте подпрограмм</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/textLanguage/robotsBlockParser.cpp" line="+34"/>
         <source>sensor</source>
         <oldsource>Sensor</oldsource>
-        <translation>sensor</translation>
+        <translation type="vanished">sensor</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>encoder</source>
         <oldsource>Encoder</oldsource>
-        <translation>encoder</translation>
+        <translation type="vanished">encoder</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>time</source>
-        <translation>time</translation>
+        <translation type="vanished">time</translation>
     </message>
     <message>
         <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
