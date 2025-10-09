@@ -13,7 +13,7 @@
         <translation type="vanished">/* Внимание: преобразование типа из строки в целое число пока не поддерживается. Пожалуйста, обратитесь к разработчикам с запросом. */ 0</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/lua/ev3LuaPrinter.cpp" line="+791"/>
+        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/lua/ev3LuaPrinter.cpp" line="+807"/>
         <source>/* Warning: cast from string to numeric type is not supported */ 0</source>
         <translation>/* Внимание: преобразование типа из строки в числовой тип пока не поддерживается. Пожалуйста, обратитесь к разработчикам с запросом. */ 0</translation>
     </message>
