@@ -676,7 +676,6 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 					additionalResults << mReservedFunctionsConverter.translateArg(nodeName, oldValue, argChanged);
 					*it = argChanged;
 				}
-
 			}
 
 			reservedFunctionCall = addRandomIds(mReservedFunctionsConverter.convert(nodeName, arguments));

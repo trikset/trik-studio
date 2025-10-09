@@ -36,12 +36,14 @@ public:
 	}
 
 	inline QString translateArg(const QString &functionName, const QString &argName, const QString &newArgName) const {
-		return needChangeArg(functionName) ? QString("MULF(%1, %2, %3)").arg(argName, s180dividedByPi, newArgName) : QString();
+		return needChangeArg(functionName) ? QString("MULF(%1, %2, %3)")
+						     .arg(argName, s180dividedByPi, newArgName) : QString();
 	}
 
 
 	inline QString translateResult(const QString &functionName, const QString &argName) const {
-		return needChangeResult(functionName) ? QString("DIVF(%1, %2, %1)").arg(argName, s180dividedByPi) : QString();
+		return needChangeResult(functionName) ? QString("DIVF(%1, %2, %1)")
+							.arg(argName, s180dividedByPi) : QString();
 	}
 private:
 	static constexpr auto s180dividedByPi = "57.29577951308232F";
