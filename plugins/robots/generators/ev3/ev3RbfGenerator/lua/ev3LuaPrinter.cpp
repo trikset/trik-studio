@@ -652,13 +652,16 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	QStringList arguments;
 	QString reservedFunctionCall;
 	Ev3RbfType type = Ev3RbfType::dataF;
-
+	QStringList additionalResults;
+	QString nodeName;
+	constexpr auto m180dividedByPi = "57.29577951308232F";
 	if (auto idNode = dynamic_cast<qrtext::lua::ast::Identifier *>(node->function().data())) {
-		if (unused.contains(idNode->name())) {
+		nodeName = idNode->name();
+		if (unused.contains(nodeName)) {
 			arguments = popResults(qrtext::as<qrtext::lua::ast::Node>(node->arguments()));
 		} else {
-			shouldCastToIntAfter = shouldCastToIntAfterFunctions.contains(idNode->name());
-			if (int32Functions.contains(idNode->name())) {
+			shouldCastToIntAfter = shouldCastToIntAfterFunctions.contains(nodeName);
+			if (int32Functions.contains(nodeName)) {
 				type = Ev3RbfType::data32;
 			}
 
@@ -667,7 +670,12 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 				arguments << castTo(Ev3RbfType::dataF, qrtext::as<qrtext::lua::ast::Node>(argument));
 			}
 
-			reservedFunctionCall = addRandomIds(mReservedFunctionsConverter.convert(idNode->name(), arguments));
+			reservedFunctionCall = addRandomIds(mReservedFunctionsConverter.convert(nodeName, arguments));
+			if (mReservedFunctionsConverter.needChangeArg(nodeName)) {
+				const auto &firstArgChanged = newRegister(Ev3RbfType::dataF);
+				additionalResults << QString("MULF(%1, %2, %3)").arg(arguments[0], m180dividedByPi, firstArgChanged);
+				additionalResults << QString("MOVEF_F(%1, %2)").arg(firstArgChanged, arguments[0]);
+			}
 		}
 	}
 
@@ -680,7 +688,11 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 				.replace("@@ARGUMENTS@@", arguments.join(readTemplate("argumentsSeparator.t")))
 				.replace("@@RESULT@@", functionResult));
 	} else {
-		pushResult(node, result, reservedFunctionCall.replace("@@RESULT@@", functionResult));
+		additionalResults << reservedFunctionCall.replace("@@RESULT@@", functionResult);
+		pushResult(node, result, additionalResults.join("\n"));
+		if (mReservedFunctionsConverter.needChangeResult(nodeName)) {
+			mAdditionalCode[node.data()] << QString("DIVF(%1, %2, %1)").arg(result, m180dividedByPi, result);
+		}
 		if (shouldCastToIntAfter) {
 			mAdditionalCode[node.data()] << QString("MOVEF_32(%1, %2)").arg(functionResult, result);
 		}

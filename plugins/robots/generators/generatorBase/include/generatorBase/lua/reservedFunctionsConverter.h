@@ -26,6 +26,14 @@ public:
 	explicit ReservedFunctionsConverter(const QStringList &pathsToTemplates);
 
 	QString convert(const QString &name, const QStringList &args) const;
+
+	inline bool needChangeArg(const QString &name) const {
+		return name == "cos" || name == "sin";
+	}
+
+	inline bool needChangeResult(const QString &name) const {
+		return name == "atan2" || name == "acos" || name == "asin" || name == "acos";
+	}
 };
 
 }
