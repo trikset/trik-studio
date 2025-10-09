@@ -46,7 +46,7 @@ public:
 							.arg(argName, s180dividedByPi) : QString();
 	}
 private:
-	static constexpr auto s180dividedByPi = "57.29577951308232F";
+	static constexpr const char* s180dividedByPi = "57.29577951308232F";
 };
 
 }

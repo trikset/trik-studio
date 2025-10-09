@@ -66,7 +66,7 @@
 
 using namespace ev3::rbf::lua;
 
-const QMap<Ev3RbfType, QString> registerNames = {
+const QMap<Ev3RbfType, QString> registerNames = {  // clazy:exclude=non-pod-global-static
 	{ Ev3RbfType::data8, "_bool_temp_result_" }
 	, { Ev3RbfType::data16, "_small_int_temp_result_" }
 	, { Ev3RbfType::data32, "_int_temp_result_" }
@@ -78,7 +78,7 @@ const QMap<Ev3RbfType, QString> registerNames = {
 	, { Ev3RbfType::arrayF, "_arrayF_temp_result_" }
 };
 
-const QMap<Ev3RbfType, QString> typeNames = {
+const QMap<Ev3RbfType, QString> typeNames = {  // clazy:exclude=non-pod-global-static
 	{ Ev3RbfType::data8, "8" }
 	, { Ev3RbfType::data16, "16" }
 	, { Ev3RbfType::data32, "32" }
@@ -112,6 +112,7 @@ void Ev3LuaPrinter::configure(const generatorBase::simple::Binding::ConverterInt
 QStringList Ev3LuaPrinter::addSuffix(const QStringList &list)
 {
 	QStringList result;
+	result.reserve(list.size());
 	for (const QString &path : list) {
 		result << path + "/luaPrinting";
 	}
@@ -257,7 +258,8 @@ QString Ev3LuaPrinter::arraysEvaluation()
 	const QString tableConstuctorTemplate = readTemplate("tableConstructor.t");
 	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression> > variables
 			= mTextLanguage.variableTypes();
-	for (const QString &arrayVariable : variables.keys()) {
+	for (auto it = variables.cbegin(); it != variables.cend(); it++) {
+		const auto &arrayVariable = it.key();
 		if (variables[arrayVariable].data()->is<qrtext::lua::types::Table>()
 				&& !mTextLanguage.specialIdentifiers().contains(arrayVariable)) {
 			Ev3RbfType ev3Type = toEv3Type(
@@ -267,7 +269,8 @@ QString Ev3LuaPrinter::arraysEvaluation()
 		}
 	}
 
-	for (auto arrayType : mArrayDeclarationCount.keys()) {
+	for (auto it = mArrayDeclarationCount.cbegin(); it != mArrayDeclarationCount.cend(); it++) {
+		const auto &arrayType = it.key();
 		for (int i = 1; i <= mArrayDeclarationCount[arrayType]; ++i) {
 			QString constuctorTemplate = tableConstuctorTemplate;
 			code << constuctorTemplate
@@ -306,7 +309,7 @@ QStringList Ev3LuaPrinter::popResults(const QList<QSharedPointer<qrtext::lua::as
 
 void Ev3LuaPrinter::pushChildrensAdditionalCode(const QSharedPointer<qrtext::lua::ast::Node> &node)
 {
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		mAdditionalCode[node.data()] += mAdditionalCode.take(child.data());
 	}
 }
@@ -318,10 +321,10 @@ bool Ev3LuaPrinter::printWithoutPop(const QSharedPointer<qrtext::lua::ast::Node>
 	}
 
 	node->acceptRecursively(*this, node, qrtext::wrap(nullptr));
-	if (mGeneratedCode.keys().count() != 1 || mGeneratedCode.keys().first() != node.data()) {
+	if (mGeneratedCode.keys().count() != 1 || mGeneratedCode.firstKey() != node.data()) {
 		QLOG_WARN() << "Lua printer got into the inconsistent state during printing."
 				<< mGeneratedCode.keys().count() << "pieces of code:";
-		for (const QString &code : mGeneratedCode.values()) {
+		for (auto &&code : mGeneratedCode.values()) {
 			QLOG_INFO() << code;
 		}
 
@@ -345,11 +348,13 @@ void Ev3LuaPrinter::processTemplate(const QSharedPointer<qrtext::lua::ast::Node>
 		computation.replace("@@RESULT@@", result);
 	}
 
-	for (const QString &toReplace : bindings.keys()) {
+	for (auto it = bindings.cbegin(); it != bindings.cend(); it++) {
+		const auto &toReplace = it.key();
 		computation.replace(toReplace, popResult(bindings[toReplace]));
 	}
 
-	for (const QString &toReplace : staticBindings.keys()) {
+	for (auto it = staticBindings.cbegin(); it != staticBindings.cend(); it++) {
+		const auto &toReplace = it.key();
 		computation.replace(toReplace, staticBindings[toReplace]);
 	}
 
