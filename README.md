@@ -1,5 +1,5 @@
 
-![GHA build status](https://github.com/trikset/trik-studio/actions/workflows/common_build.yml/badge.svg)
+![GHA build status](https://github.com/trikset/trik-studio/actions/workflows/common_build.yml/badge.svg?branch=master)
 
 # [![TRIK Studio logo from master branch](https://github.com/trikset/trik-studio/raw/master/installer/images/trik-studio-32x32.png)TRIK Studio](https://dl.trikset.com/ts/fresh)
 
