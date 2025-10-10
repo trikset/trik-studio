@@ -1,2 +1,9 @@
 DIVF(@@ARGUMENT1@@, @@ARGUMENT2@@, _temp_sensor_value_f)
 MATH(ATAN, _temp_sensor_value_f, @@RESULT@@)
+JR_GTF(@@ARGUMENT2@@, 0.0F, @@RANDOM_ID@@)
+JR_GTEQF(@@ARGUMENT1@@, 0.0F, @@RANDOM_ID_1@@)
+SUBF(@@RESULT@@, pi, @@RESULT@@)
+JR(@@RANDOM_ID@@)
+@@RANDOM_ID_1@@:
+ADDF(@@RESULT@@, pi, @@RESULT@@)
+@@RANDOM_ID@@:
