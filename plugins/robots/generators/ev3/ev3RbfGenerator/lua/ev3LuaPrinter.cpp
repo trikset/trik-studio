@@ -321,11 +321,11 @@ bool Ev3LuaPrinter::printWithoutPop(const QSharedPointer<qrtext::lua::ast::Node>
 	}
 
 	node->acceptRecursively(*this, node, qrtext::wrap(nullptr));
-	if (mGeneratedCode.keys().count() != 1 || mGeneratedCode.firstKey() != node.data()) {
+	if (mGeneratedCode.count() != 1 || mGeneratedCode.firstKey() != node.data()) {
 		QLOG_WARN() << "Lua printer got into the inconsistent state during printing."
-				<< mGeneratedCode.keys().count() << "pieces of code:";
-		for (auto &&code : mGeneratedCode.values()) {
-			QLOG_INFO() << code;
+				<< mGeneratedCode.count() << "pieces of code:";
+		for (auto it = mGeneratedCode.cbegin(); it != mGeneratedCode.cbegin(); it++) {
+			QLOG_INFO() << it.value();
 		}
 
 		mGeneratedCode.clear();
