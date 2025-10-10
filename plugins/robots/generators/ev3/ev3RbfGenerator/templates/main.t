@@ -36,6 +36,25 @@ __programEnd:
 
 @@THREADS@@
 
+subcall atan2wrap_EV3_KERNEL_util
+{
+	IN_F y
+	IN_F x
+	OUT_F z
+
+	DATAF yDividedByX
+	DIVF(y, x, yDividedByX)
+	MATH(ATAN, yDividedByX, z)
+	DIVF(z, 57.29577951308232F, z)
+	JR_GTF(x, 0.0F, endLabel)
+	JR_GTEQF(y, 0.0F, yGreatEqualZero)
+	SUBF(z, pi, z)
+	JR(endLabel)
+yGreatEqualZero:
+	ADDF(z, pi, z)
+endLabel:
+}
+
 // utils functions block start
 subcall motors_overflow_check_EV3_KERNEL_util
 {
