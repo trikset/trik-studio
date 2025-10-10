@@ -1,1 +1,1 @@
-Math.cos(@@ARGUMENT@@*pi/180)
+Math.cos(@@ARGUMENT@@)

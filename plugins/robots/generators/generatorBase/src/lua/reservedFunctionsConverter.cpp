@@ -18,6 +18,8 @@
 
 using namespace generatorBase::lua;
 
+constexpr const char* ReservedFunctionsConverter::s180dividedByPi;
+
 ReservedFunctionsConverter::ReservedFunctionsConverter(const QStringList &pathsToTemplates)
 	: TemplateParametrizedEntity(pathsToTemplates)
 {

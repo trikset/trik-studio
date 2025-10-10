@@ -31,9 +31,11 @@ using namespace qReal;
 using namespace interpreterCore::textLanguage;
 using namespace qrtext::lua;
 
+/*
 const QString sensorVariablePerfix = QObject::tr("sensor");
 const QString encoderVariablePerfix = QObject::tr("encoder");
 const QString timeVariableName = QObject::tr("time");
+*/
 
 RobotsBlockParser::RobotsBlockParser(
 		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
@@ -56,7 +58,7 @@ void RobotsBlockParser::setReservedVariables()
 	setVariableValue("pi", M_PI);
 	markAsSpecialConstant("pi");
 
-	for (const kitBase::robotModel::PortInfo &port : mRobotModelManager.model().availablePorts()) {
+	for (auto &&port : mRobotModelManager.model().availablePorts()) {
 		setVariableValue(port.name(), QString("'%1'").arg(port.name()));
 
 		markAsSpecial(port.name());
@@ -85,7 +87,8 @@ void RobotsBlockParser::setReservedVariables()
 	}
 
 	const QHash<QString, int> buttons = mRobotModelManager.model().buttonCodes();
-	for (const QString &button : buttons.keys()) {
+	for (auto it = buttons.cbegin(); it != buttons.cend(); it++) {
+		const auto &button = it.key();
 		setVariableValue(button, buttons[button]);
 		markAsSpecial(button);
 		mHiddenVariables << button;
@@ -198,8 +201,8 @@ void RobotsBlockParser::addIntrinsicFuctions()
 		return text;
 	});
 
-	addFloatFunction("sin", [](qreal x) { return qSin(M_PI / 180 * x); });
-	addFloatFunction("cos", [](qreal x) { return qCos(M_PI / 180 * x); });
+	addFloatFunction("sin", [](qreal x) { return qSin(x); });
+	addFloatFunction("cos", [](qreal x) { return qCos(x); });
 	addFloatFunction("ln", [](qreal x) {return qLn(x); });
 	addFloatFunction("exp", [](qreal x) {return qExp(x); });
 	addFloatFunction("asin", [](qreal x) {return qAsin(x); });

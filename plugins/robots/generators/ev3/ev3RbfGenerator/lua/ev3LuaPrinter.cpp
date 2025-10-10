@@ -66,7 +66,7 @@
 
 using namespace ev3::rbf::lua;
 
-const QMap<Ev3RbfType, QString> registerNames = {
+const QMap<Ev3RbfType, QString> registerNames = {  // clazy:exclude=non-pod-global-static
 	{ Ev3RbfType::data8, "_bool_temp_result_" }
 	, { Ev3RbfType::data16, "_small_int_temp_result_" }
 	, { Ev3RbfType::data32, "_int_temp_result_" }
@@ -78,7 +78,7 @@ const QMap<Ev3RbfType, QString> registerNames = {
 	, { Ev3RbfType::arrayF, "_arrayF_temp_result_" }
 };
 
-const QMap<Ev3RbfType, QString> typeNames = {
+const QMap<Ev3RbfType, QString> typeNames = {  // clazy:exclude=non-pod-global-static
 	{ Ev3RbfType::data8, "8" }
 	, { Ev3RbfType::data16, "16" }
 	, { Ev3RbfType::data32, "32" }
@@ -112,6 +112,7 @@ void Ev3LuaPrinter::configure(const generatorBase::simple::Binding::ConverterInt
 QStringList Ev3LuaPrinter::addSuffix(const QStringList &list)
 {
 	QStringList result;
+	result.reserve(list.size());
 	for (const QString &path : list) {
 		result << path + "/luaPrinting";
 	}
@@ -257,7 +258,8 @@ QString Ev3LuaPrinter::arraysEvaluation()
 	const QString tableConstuctorTemplate = readTemplate("tableConstructor.t");
 	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression> > variables
 			= mTextLanguage.variableTypes();
-	for (const QString &arrayVariable : variables.keys()) {
+	for (auto it = variables.cbegin(); it != variables.cend(); it++) {
+		const auto &arrayVariable = it.key();
 		if (variables[arrayVariable].data()->is<qrtext::lua::types::Table>()
 				&& !mTextLanguage.specialIdentifiers().contains(arrayVariable)) {
 			Ev3RbfType ev3Type = toEv3Type(
@@ -267,7 +269,8 @@ QString Ev3LuaPrinter::arraysEvaluation()
 		}
 	}
 
-	for (auto arrayType : mArrayDeclarationCount.keys()) {
+	for (auto it = mArrayDeclarationCount.cbegin(); it != mArrayDeclarationCount.cend(); it++) {
+		const auto &arrayType = it.key();
 		for (int i = 1; i <= mArrayDeclarationCount[arrayType]; ++i) {
 			QString constuctorTemplate = tableConstuctorTemplate;
 			code << constuctorTemplate
@@ -306,7 +309,7 @@ QStringList Ev3LuaPrinter::popResults(const QList<QSharedPointer<qrtext::lua::as
 
 void Ev3LuaPrinter::pushChildrensAdditionalCode(const QSharedPointer<qrtext::lua::ast::Node> &node)
 {
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		mAdditionalCode[node.data()] += mAdditionalCode.take(child.data());
 	}
 }
@@ -318,11 +321,11 @@ bool Ev3LuaPrinter::printWithoutPop(const QSharedPointer<qrtext::lua::ast::Node>
 	}
 
 	node->acceptRecursively(*this, node, qrtext::wrap(nullptr));
-	if (mGeneratedCode.keys().count() != 1 || mGeneratedCode.keys().first() != node.data()) {
+	if (mGeneratedCode.count() != 1 || mGeneratedCode.firstKey() != node.data()) {
 		QLOG_WARN() << "Lua printer got into the inconsistent state during printing."
-				<< mGeneratedCode.keys().count() << "pieces of code:";
-		for (const QString &code : mGeneratedCode.values()) {
-			QLOG_INFO() << code;
+				<< mGeneratedCode.count() << "pieces of code:";
+		for (auto it = mGeneratedCode.cbegin(); it != mGeneratedCode.cbegin(); it++) {
+			QLOG_INFO() << it.value();
 		}
 
 		mGeneratedCode.clear();
@@ -345,11 +348,13 @@ void Ev3LuaPrinter::processTemplate(const QSharedPointer<qrtext::lua::ast::Node>
 		computation.replace("@@RESULT@@", result);
 	}
 
-	for (const QString &toReplace : bindings.keys()) {
+	for (auto it = bindings.cbegin(); it != bindings.cend(); it++) {
+		const auto &toReplace = it.key();
 		computation.replace(toReplace, popResult(bindings[toReplace]));
 	}
 
-	for (const QString &toReplace : staticBindings.keys()) {
+	for (auto it = staticBindings.cbegin(); it != staticBindings.cend(); it++) {
+		const auto &toReplace = it.key();
 		computation.replace(toReplace, staticBindings[toReplace]);
 	}
 
@@ -652,13 +657,15 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	QStringList arguments;
 	QString reservedFunctionCall;
 	Ev3RbfType type = Ev3RbfType::dataF;
-
+	QStringList additionalResults;
+	QString nodeName;
 	if (auto idNode = dynamic_cast<qrtext::lua::ast::Identifier *>(node->function().data())) {
-		if (unused.contains(idNode->name())) {
+		nodeName = idNode->name();
+		if (unused.contains(nodeName)) {
 			arguments = popResults(qrtext::as<qrtext::lua::ast::Node>(node->arguments()));
 		} else {
-			shouldCastToIntAfter = shouldCastToIntAfterFunctions.contains(idNode->name());
-			if (int32Functions.contains(idNode->name())) {
+			shouldCastToIntAfter = shouldCastToIntAfterFunctions.contains(nodeName);
+			if (int32Functions.contains(nodeName)) {
 				type = Ev3RbfType::data32;
 			}
 
@@ -667,7 +674,16 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 				arguments << castTo(Ev3RbfType::dataF, qrtext::as<qrtext::lua::ast::Node>(argument));
 			}
 
-			reservedFunctionCall = addRandomIds(mReservedFunctionsConverter.convert(idNode->name(), arguments));
+			if (mReservedFunctionsConverter.needChangeArg(nodeName)) {
+				for (auto it = arguments.begin(); it != arguments.end(); it++) {
+					const auto &oldValue = *it;
+					const auto &argChanged = newRegister(Ev3RbfType::dataF);
+					additionalResults << mReservedFunctionsConverter.translateArg(nodeName, oldValue, argChanged);
+					*it = argChanged;
+				}
+			}
+
+			reservedFunctionCall = addRandomIds(mReservedFunctionsConverter.convert(nodeName, arguments));
 		}
 	}
 
@@ -680,7 +696,11 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 				.replace("@@ARGUMENTS@@", arguments.join(readTemplate("argumentsSeparator.t")))
 				.replace("@@RESULT@@", functionResult));
 	} else {
-		pushResult(node, result, reservedFunctionCall.replace("@@RESULT@@", functionResult));
+		additionalResults << reservedFunctionCall.replace("@@RESULT@@", functionResult);
+		pushResult(node, result, additionalResults.join("\n"));
+		if (mReservedFunctionsConverter.needChangeResult(nodeName)) {
+			mAdditionalCode[node.data()] << mReservedFunctionsConverter.translateResult(nodeName, result);
+		}
 		if (shouldCastToIntAfter) {
 			mAdditionalCode[node.data()] << QString("MOVEF_32(%1, %2)").arg(functionResult, result);
 		}
