@@ -698,9 +698,6 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 	} else {
 		additionalResults << reservedFunctionCall.replace("@@RESULT@@", functionResult);
 		pushResult(node, result, additionalResults.join("\n"));
-		if (mReservedFunctionsConverter.needChangeResult(nodeName)) {
-			mAdditionalCode[node.data()] << mReservedFunctionsConverter.translateResult(nodeName, result);
-		}
 		if (shouldCastToIntAfter) {
 			mAdditionalCode[node.data()] << QString("MOVEF_32(%1, %2)").arg(functionResult, result);
 		}
