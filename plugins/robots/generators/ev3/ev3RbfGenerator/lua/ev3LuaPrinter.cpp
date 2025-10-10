@@ -674,11 +674,11 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 				arguments << castTo(Ev3RbfType::dataF, qrtext::as<qrtext::lua::ast::Node>(argument));
 			}
 
-			if (mReservedFunctionsConverter.needChangeArg(nodeName)) {
+			if (mReservedFunctionsConverter.isCosOrSin(nodeName)) {
 				for (auto it = arguments.begin(); it != arguments.end(); it++) {
 					const auto &oldValue = *it;
 					const auto &argChanged = newRegister(Ev3RbfType::dataF);
-					additionalResults << mReservedFunctionsConverter.translateArg(nodeName, oldValue, argChanged);
+					additionalResults << QString("MULF(%1, %2, %3)").arg(oldValue, "57.29577951308232F", argChanged);
 					*it = argChanged;
 				}
 			}

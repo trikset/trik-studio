@@ -27,14 +27,8 @@ public:
 
 	QString convert(const QString &name, const QStringList &args) const;
 
-	inline bool needChangeArg(const QString &name) const {
+	inline bool isCosOrSin(const QString &name) const {
 		return name == "cos" || name == "sin";
-	}
-
-	inline QString translateArg(const QString &functionName, const QString &argName, const QString &newArgName) const {
-		constexpr auto s180dividedByPi = "57.29577951308232F";
-		return needChangeArg(functionName) ? QString("MULF(%1, %2, %3)")
-						     .arg(argName, s180dividedByPi, newArgName) : QString();
 	}
 };
 
