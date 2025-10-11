@@ -29,7 +29,7 @@
 
 using namespace twoDModel::model;
 
-static auto XML_VERSION = "20190819";
+static auto XML_VERSION = "20251011";
 
 Model::Model(physics::PhysicsEngineFactory *engineFactory,
 		QObject *parent)
