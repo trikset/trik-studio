@@ -1,2 +1,1 @@
-DIVF(@@ARGUMENT1@@, @@ARGUMENT2@@, _temp_sensor_value_f)
-MATH(ATAN, _temp_sensor_value_f, @@RESULT@@)
+CALL(atan2wrap_EV3_KERNEL_util, @@ARGUMENT1@@, @@ARGUMENT2@@, @@RESULT@@)
