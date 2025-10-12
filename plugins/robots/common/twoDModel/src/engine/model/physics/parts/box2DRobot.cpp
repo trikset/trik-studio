@@ -73,6 +73,10 @@ Box2DRobot::~Box2DRobot() {
 	for (auto i = 0; i < jointCount; i++) {
 		b2DestroyJoint(joints[i]);
 	}
+	const auto &sensorItems = mSensors.keys();
+	for (auto &&sensor: sensorItems) {
+		removeSensor(sensor);
+	}
 	qDeleteAll(mWheels);
 	qDeleteAll(mSensors);
 	b2DestroyBody(mBodyId);
