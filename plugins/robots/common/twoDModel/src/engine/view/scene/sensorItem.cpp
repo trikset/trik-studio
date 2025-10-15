@@ -21,8 +21,7 @@
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/lidarSensor.h>
-
-#include "twoDModel/robotModel/parts/colorSensorFull.h"
+#include "kitBase/robotModel/robotParts/colorSensorFull.h"
 #include "twoDModel/robotModel/parts/colorSensorPassive.h"
 #include "twoDModel/robotModel/parts/colorSensorRed.h"
 #include "twoDModel/robotModel/parts/colorSensorGreen.h"
