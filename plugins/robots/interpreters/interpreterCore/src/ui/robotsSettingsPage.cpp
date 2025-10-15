@@ -126,6 +126,8 @@ void RobotsSettingsPage::save()
 		SettingsManager::setValue("nxtFlashToolRunPolicy", mUi->runningAfterUploadingComboBox->currentIndex());
 	} else if (mRobotModelManager.model().kitId().contains("ev3", Qt::CaseInsensitive)) {
 		SettingsManager::setValue("ev3RunPolicy", mUi->runningAfterUploadingComboBox->currentIndex());
+	} else if (mRobotModelManager.model().kitId().contains("trik", Qt::CaseInsensitive)) {
+		SettingsManager::setValue("trikRunPolicy", mUi->runningAfterUploadingComboBox->currentIndex());
 	}
 
 	mUi->devicesConfigurer->save();
@@ -169,6 +171,8 @@ void RobotsSettingsPage::restoreSettings()
 		mUi->runningAfterUploadingComboBox->setCurrentIndex(SettingsManager::value("nxtFlashToolRunPolicy").toInt());
 	} else if (mRobotModelManager.model().kitId().contains("ev3", Qt::CaseInsensitive)) {
 		mUi->runningAfterUploadingComboBox->setCurrentIndex(SettingsManager::value("ev3RunPolicy").toInt());
+	} else if (mRobotModelManager.model().kitId().contains("trik", Qt::CaseInsensitive)) {
+		mUi->runningAfterUploadingComboBox->setCurrentIndex(SettingsManager::value("trikRunPolicy").toInt());
 	}
 	mUi->devicesConfigurer->refresh();
 

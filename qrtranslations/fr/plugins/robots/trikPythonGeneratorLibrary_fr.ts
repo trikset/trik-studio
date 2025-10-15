@@ -68,7 +68,7 @@
 <context>
     <name>trik::python::TrikPythonGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+73"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+75"/>
         <source>Network operation timed out</source>
         <translation type="unfinished"></translation>
     </message>
@@ -118,9 +118,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+76"/>
         <source>There are no files to upload. You must open or generate at least one *.js or *.py file.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+51"/>
+        <source>The program has been uploaded</source>
+        <translation>Le téléversement du programme est terminé</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Do you want to run it?</source>
+        <translation>Est-ce que vous voulez l&apos;executer ?</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Error</source>
+        <translation>Erreur</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Unknown file to run after upload, please run manually</source>
+        <translation>Fichier inconnu à exécuter après le téléchargement, veuillez l&apos;exécuter manuellement</translation>
     </message>
 </context>
 </TS>

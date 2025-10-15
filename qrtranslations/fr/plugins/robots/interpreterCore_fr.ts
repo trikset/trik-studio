@@ -493,7 +493,7 @@
         <translation>Aucune extension n&apos;est chargée</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+138"/>
         <source>No robot models available for </source>
         <translation>Modèle de robot n&apos;est pas défini dans l&apos;extension</translation>
     </message>

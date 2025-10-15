@@ -123,7 +123,7 @@
 <context>
     <name>trik::qts::TrikQtsGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikQtsGeneratorLibrary/src/trikQtsGeneratorPluginBase.cpp" line="+73"/>
+        <location filename="../../../../plugins/robots/generators/trik/trikQtsGeneratorLibrary/src/trikQtsGeneratorPluginBase.cpp" line="+74"/>
         <source>Network operation timed out</source>
         <translation>Не удалось получить ответ от робота, проверьте настройки, проверьте, включён ли робот</translation>
     </message>
@@ -173,9 +173,29 @@
         <translation>Остановить выполнение программы для TRIK</translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+75"/>
         <source>There are no files to upload. You must open or generate at least one *.js or *.py file.</source>
         <translation>Нет файлов для загрузки. Вы должны открыть или сгенерировать хотя бы один *.js или *.py файл.</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>The program has been uploaded</source>
+        <translation>Загрузка завершена</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Do you want to run it?</source>
+        <translation>Хотите ли Вы запустить эту программу?</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Unknown file to run after upload, please run manually</source>
+        <translation>Не удалось запустить программу после загрузки, пожалуйста, попробуйте запустить программу напрямую</translation>
     </message>
     <message>
         <source>No connection to robot</source>
