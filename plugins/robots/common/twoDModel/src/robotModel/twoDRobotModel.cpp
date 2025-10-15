@@ -208,10 +208,6 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 		return new parts::ColorSensorPassive(deviceInfo, port, *mEngine);
 	}
 
-	if (deviceInfo.isA<robotParts::ColorSensorFull>()) {
-		return new parts::ColorSensorFull(deviceInfo, port, *mEngine);
-	}
-
 	if (deviceInfo.isA<robotParts::ColorSensorRed>()) {
 		return new parts::ColorSensorRed(deviceInfo, port, *mEngine);
 	}

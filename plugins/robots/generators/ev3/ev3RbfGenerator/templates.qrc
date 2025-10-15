@@ -19,6 +19,7 @@
         <file>templates/colors/red.t</file>
         <file>templates/colors/white.t</file>
         <file>templates/colors/yellow.t</file>
+        <file>templates/colors/brown.t</file>
         <file>templates/led/led.t</file>
         <file>templates/led/off.t</file>
         <file>templates/led/green.t</file>

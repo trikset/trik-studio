@@ -42,14 +42,14 @@ const qreal robotWheelDiameterInPx = 16;
 const qreal robotWheelDiameterInCm = 5.6;
 const qreal pixelsInCm = robotWheelDiameterInPx / robotWheelDiameterInCm;
 
-const uint black   = 0xFF000000;
-const uint white   = 0xFFFFFFFF;
-const uint red     = 0xFFFF0000;
-const uint green   = 0xFF00FF00;
-const uint blue    = 0xFF0000FF;
-const uint yellow  = 0xFFFFFF00;
-const uint cyan    = 0xFF00FFFF;
-const uint magenta = 0xFFFF00FF;
+constexpr uint black   = 0xFF000000;
+constexpr uint white   = 0xFFFFFFFF;
+constexpr uint red     = 0xFFFF0000;
+constexpr uint green   = 0xFF00FF00;
+constexpr uint blue    = 0xFF0000FF;
+constexpr uint yellow  = 0xFFFFFF00;
+constexpr uint cyan    = 0xFF00FFFF;
+constexpr uint magenta = 0xFFFF00FF;
 
 const qreal spoilColorDispersion = 2.0;
 const qreal spoilLightDispersion = 1.0;

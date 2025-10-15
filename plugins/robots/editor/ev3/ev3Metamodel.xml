@@ -10,6 +10,15 @@
 				<value name="3" displayedName="3"/>
 				<value name="4" displayedName="4"/>
 			</enum>
+			<enum name="Ev3Color">
+				<value name="black" displayedName="black"/>
+				<value name="blue" displayedName="blue"/>
+				<value name="green" displayedName="green"/>
+				<value name="yellow" displayedName="yellow"/>
+				<value name="brown" displayedName="brown"/>
+				<value name="red" displayedName="red"/>
+				<value name="white" displayedName="white"/>
+			</enum>
 			<enum name="Ev3MotorPort">
 				<value name="A" displayedName="A"/>
 				<value name="B" displayedName="B"/>
@@ -649,7 +658,7 @@
 				<logic>
 					<container/>
 					<properties>
-						<property displayedName="Color" type="Color" name="Color">
+						<property displayedName="Color" type="Ev3Color" name="Color">
 							<default>red</default>
 						</property>
 					</properties>

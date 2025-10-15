@@ -38,6 +38,7 @@
 #include "src/robotModel/twoD/parts/twoDSpeaker.h"
 #include "src/robotModel/twoD/parts/twoDMotor.h"
 #include "src/robotModel/twoD/parts/twoDLed.h"
+#include "src/robotModel/twoD/parts/twoDColorSensorFull.h"
 #include "src/robotModel/twoD/parts/twoDGyroscopeSensor.h"
 
 using namespace ev3::robotModel;
@@ -68,6 +69,10 @@ robotParts::Device *TwoDRobotModel::createDevice(PortInfo const &port, DeviceInf
 
 	if (deviceInfo.isA<ev3::robotModel::parts::Ev3Led>()) {
 		return new parts::TwoDLed(deviceInfo, port, *engine());
+	}
+
+	if (deviceInfo.isA<robotParts::ColorSensorFull>()) {
+		return new parts::ColorSensorFull(deviceInfo, port, *engine());
 	}
 
 	if (deviceInfo.isA<robotParts::GyroscopeSensor>()) {

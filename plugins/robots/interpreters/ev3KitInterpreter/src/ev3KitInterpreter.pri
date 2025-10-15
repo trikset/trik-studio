@@ -52,6 +52,7 @@ HEADERS += \
 	$$PWD/robotModel/real/parts/colorSensorGreen.h \
 	$$PWD/robotModel/real/parts/colorSensorBlue.h \
 	$$PWD/robotModel/real/parts/gyroscope.h \
+	$$PWD/robotModel/twoD/parts/twoDColorSensorFull.h \
 	$$PWD/robotModel/twoD/twoDRobotModel.h \
 	$$PWD/robotModel/twoD/parts/twoDDisplay.h \
 	$$PWD/robotModel/twoD/parts/twoDSpeaker.h \
@@ -84,6 +85,7 @@ SOURCES += \
 	$$PWD/robotModel/real/parts/colorSensorGreen.cpp \
 	$$PWD/robotModel/real/parts/colorSensorBlue.cpp \
 	$$PWD/robotModel/real/parts/gyroscope.cpp \
+	$$PWD/robotModel/twoD/parts/twoDColorSensorFull.cpp \
 	$$PWD/robotModel/twoD/twoDRobotModel.cpp \
 	$$PWD/robotModel/twoD/parts/twoDDisplay.cpp \
 	$$PWD/robotModel/twoD/parts/twoDSpeaker.cpp \

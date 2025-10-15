@@ -49,6 +49,7 @@ HEADERS += \
 	$$PWD/robotModel/real/parts/sonarSensor.h \
 	$$PWD/robotModel/real/parts/soundSensor.h \
 	$$PWD/robotModel/real/parts/implementations/colorSensorImpl.h \
+	$$PWD/robotModel/twoD/parts/twoDColorSensorFull.h \
 	$$PWD/robotModel/twoD/twoDRobotModel.h \
 	$$PWD/robotModel/twoD/parts/twoDDisplay.h \
 	$$PWD/robotModel/twoD/parts/twoDSpeaker.h \
@@ -78,6 +79,7 @@ SOURCES += \
 	$$PWD/robotModel/real/parts/sonarSensor.cpp \
 	$$PWD/robotModel/real/parts/soundSensor.cpp \
 	$$PWD/robotModel/real/parts/implementations/colorSensorImpl.cpp \
+	$$PWD/robotModel/twoD/parts/twoDColorSensorFull.cpp \
 	$$PWD/robotModel/twoD/twoDRobotModel.cpp \
 	$$PWD/robotModel/twoD/parts/twoDDisplay.cpp \
 	$$PWD/robotModel/twoD/parts/twoDSpeaker.cpp \

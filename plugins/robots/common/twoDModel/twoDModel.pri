@@ -51,7 +51,6 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/twoDRobotModel.h \
 	$$PWD/include/twoDModel/robotModel/parts/button.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorBlue.h \
-	$$PWD/include/twoDModel/robotModel/parts/colorSensorFull.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorGreen.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorPassive.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorRed.h \
@@ -214,7 +213,6 @@ SOURCES += \
 	$$PWD/src/robotModel/nullTwoDRobotModel.cpp \
 	$$PWD/src/robotModel/parts/button.cpp \
 	$$PWD/src/robotModel/parts/colorSensorBlue.cpp \
-	$$PWD/src/robotModel/parts/colorSensorFull.cpp \
 	$$PWD/src/robotModel/parts/colorSensorGreen.cpp \
 	$$PWD/src/robotModel/parts/colorSensorPassive.cpp \
 	$$PWD/src/robotModel/parts/colorSensorRed.cpp \

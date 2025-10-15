@@ -535,9 +535,8 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorFull</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorFull.h" line="+37"/>
         <source>Color sensor (full)</source>
-        <translation>Capteur de couleurs (reconnaissance de couleurs)</translation>
+        <translation type="vanished">Capteur de couleurs (reconnaissance de couleurs)</translation>
     </message>
 </context>
 <context>

@@ -25,7 +25,6 @@
 #include <kitBase/robotModel/robotParts/rangeSensor.h>
 #include <kitBase/robotModel/robotParts/lightSensor.h>
 #include <kitBase/robotModel/robotParts/colorSensorBlue.h>
-#include <kitBase/robotModel/robotParts/colorSensorFull.h>
 #include <kitBase/robotModel/robotParts/colorSensorGreen.h>
 #include <kitBase/robotModel/robotParts/colorSensorPassive.h>
 #include <kitBase/robotModel/robotParts/colorSensorRed.h>
@@ -33,6 +32,7 @@
 
 #include "nxtDisplayWidget.h"
 #include "robotModel/twoD/parts/twoDDisplay.h"
+#include "robotModel/twoD/parts/twoDColorSensorFull.h"
 #include "robotModel/twoD/parts/twoDSpeaker.h"
 #include "robotModel/twoD/parts/twoDMotor.h"
 
@@ -60,6 +60,10 @@ robotParts::Device *TwoDRobotModel::createDevice(const PortInfo &port, const Dev
 
 	if (deviceInfo.isA<robotParts::Motor>()) {
 		return new parts::TwoDMotor(deviceInfo, port, *engine());
+	}
+
+	if (deviceInfo.isA<robotParts::ColorSensorFull>()) {
+		return new parts::ColorSensorFull(deviceInfo, port, *mEngine);
 	}
 
 	return twoDModel::robotModel::TwoDRobotModel::createDevice(port, deviceInfo);
