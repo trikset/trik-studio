@@ -41,6 +41,8 @@ void WaitForColorBlock::responseSlot(const QVariant &reading)
 		break;
 	case 6: color = "white";
 		break;
+	case 9: color = "brown";
+		break;
 	default:
 		return;
 	}
