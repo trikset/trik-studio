@@ -41,7 +41,12 @@ In background mode the session will be terminated just after the execution ended
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+9"/>
+        <source>Shows robot&apos;s display.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>The complete file path, including the filename, to save the generated JavaScript or Python code.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -74,7 +79,7 @@ In background mode the session will be terminated just after the execution ended
         <translation type="vanished">Le chemin au fichier de sauvegarde des resultats (JSON)</translation>
     </message>
     <message>
-        <location line="-23"/>
+        <location line="-24"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Le chemin au ficher ou la trajectoire du robot sera enregistrée. L&apos;enregistrement ne sera pas fait immediatement, chaque point de trajectoire sera écrit dès lors qu&apos;il est obteneur par le checker, donc FIFO sont récommandés pour cette option.</translation>
     </message>
@@ -97,7 +102,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+240"/>
+        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+241"/>
         <source>Robot console</source>
         <translation type="unfinished"></translation>
     </message>

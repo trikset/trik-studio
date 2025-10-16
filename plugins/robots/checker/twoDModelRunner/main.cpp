@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
 								   , QObject::tr("Close the window and exit after diagram/script"\
 												 " finishes."));
 	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
+	QCommandLineOption showDisplayOption({"d", "display"}, QObject::tr("Shows robot's display."));
 	QCommandLineOption generatePathOption("generate-path"
 				, QObject::tr("The complete file path, including the filename"\
 					      ", to save the generated JavaScript or Python code.")
@@ -149,6 +150,7 @@ int main(int argc, char *argv[])
 	parser.addOption(closeOnFinishOption);
 	parser.addOption(closeOnSuccessOption);
 	parser.addOption(showConsoleOption);
+	parser.addOption(showDisplayOption);
 	parser.addOption(generatePathOption);
 	parser.addOption(generateModeOption);
 	parser.addOption(directScriptExecutionPathOption);
@@ -168,6 +170,7 @@ int main(int argc, char *argv[])
 	const bool closeOnSuccessMode = parser.isSet(closeOnSuccessOption);
 	const bool closeOnFinishMode = backgroundMode || parser.isSet(closeOnFinishOption);
 	const bool showConsoleMode = parser.isSet(showConsoleOption);
+	const auto showDisplayMode = parser.isSet(showDisplayOption);
 	const QString generatePath = parser.value(generatePathOption);
 	const QString generateMode = parser.value(generateModeOption);
 	const QString scriptFilePath = parser.value(directScriptExecutionPathOption);
@@ -201,7 +204,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (!runner->interpret(backgroundMode, speedFactor, closeOnFinishMode,
-			       closeOnSuccessMode, showConsoleMode, scriptFilePath)) {
+			       closeOnSuccessMode, showConsoleMode, showDisplayMode, scriptFilePath)) {
 		return TWO_D_MODEL_RUNNER_INTERPRET_ERROR;
 	}
 

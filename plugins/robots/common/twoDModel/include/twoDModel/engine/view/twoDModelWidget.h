@@ -110,6 +110,7 @@ public:
 	QDomDocument generateWorldModelWithBlobsXml() const;
 	QDomDocument generateWorldModelXml() const;
 	QDomDocument generateBlobsXml() const;
+	void setDetailsVisibility(bool visible);
 
 public slots:
 	void zoomIn() override;
@@ -196,8 +197,6 @@ private:
 	void connectUiButtons();
 	void setPortsGroupBoxAndWheelComboBoxes();
 	void unsetPortsGroupBoxAndWheelComboBoxes();
-
-	void setDetailsVisibility(bool visible);
 	void setRunStopButtonsVisibility();
 
 	/// Set active panel toggle button and deactivate all others
