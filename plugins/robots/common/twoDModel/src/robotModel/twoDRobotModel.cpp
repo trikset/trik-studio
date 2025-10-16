@@ -17,7 +17,6 @@
 #include <qrkernel/exception/exception.h>
 
 #include "twoDModel/robotModel/parts/button.h"
-#include "twoDModel/robotModel/parts/colorSensorFull.h"
 #include "twoDModel/robotModel/parts/colorSensorPassive.h"
 #include "twoDModel/robotModel/parts/colorSensorRed.h"
 #include "twoDModel/robotModel/parts/colorSensorGreen.h"
