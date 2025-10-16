@@ -269,7 +269,7 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>301</width>
+             <width>315</width>
              <height>0</height>
             </size>
            </property>
@@ -488,7 +488,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>290</width>
+                <width>300</width>
                 <height>0</height>
                </size>
               </property>
@@ -901,6 +901,48 @@
         <property name="orientation" stdset="0">
          <number>2</number>
         </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QFrame" name="rulerUnitFrame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="rulerUnitLabel">
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>px</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
