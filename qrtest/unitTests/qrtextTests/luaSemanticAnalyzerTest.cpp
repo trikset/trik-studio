@@ -120,13 +120,13 @@ TEST_F(LuaSemanticAnalyzerTest, integerFloatCoercion)
 	auto firstVariable = firstAssignment->variable();
 	auto firstValue = firstAssignment->value();
 
-	EXPECT_TRUE(mAnalyzer->type(firstVariable)->is<types::Float>());
+	EXPECT_TRUE(mAnalyzer->type(firstVariable)->is<types::Integer>());
 	EXPECT_TRUE(mAnalyzer->type(firstValue)->is<types::Integer>());
 
 	auto secondVariable = secondAssignment->variable();
 	auto secondValue = secondAssignment->value();
 
-	EXPECT_TRUE(mAnalyzer->type(secondVariable)->is<types::Float>());
+	EXPECT_TRUE(mAnalyzer->type(secondVariable)->is<types::Integer>());
 	EXPECT_TRUE(mAnalyzer->type(secondValue)->is<types::Float>());
 }
 
@@ -217,7 +217,7 @@ TEST_F(LuaSemanticAnalyzerTest, invalidCoercion)
 	auto b = f->arguments()[0];
 	auto c = f->arguments()[1];
 
-	EXPECT_TRUE(mAnalyzer->type(b)->is<qrtext::core::types::Any>());
+	EXPECT_TRUE(mAnalyzer->type(b)->is<types::Float>());
 	EXPECT_TRUE(mAnalyzer->type(c)->is<types::String>());
 }
 

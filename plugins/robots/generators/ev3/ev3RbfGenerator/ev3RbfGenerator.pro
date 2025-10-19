@@ -58,4 +58,3 @@ SOURCES += \
 RESOURCES += \
 	$$PWD/ev3RbfGenerator.qrc \
 	$$PWD/templates.qrc \
-	$$PWD/thirdparty.qrc \

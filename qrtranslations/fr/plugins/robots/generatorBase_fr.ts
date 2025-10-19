@@ -24,7 +24,7 @@
         <translation>L&apos;instance graphique du diagramme n&apos;est pas trouvé</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+136"/>
         <source>Please enter valid c-style name for subprogram &quot;</source>
         <translation>Entrez un identificateur valide de style C pour le sous-programme &quot;</translation>
     </message>
