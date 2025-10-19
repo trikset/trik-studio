@@ -102,8 +102,9 @@ void TypeVariable::constrainAssignment(const QSharedPointer<TypeVariable> &other
 		if (allowedForType.isEmpty()) {
 			for (auto const &otherType : other->mAllowedTypes) {
 				if (generalizationsTable.isGeneralization(type, otherType)) {
-					result << otherType;
-					*wasCoercion = true;
+					result << type;
+					/* result << otherType;
+					*wasCoercion = true;*/
 				}
 			}
 		}

@@ -1,4 +1,4 @@
-subcall @@NAME@@()
+subcall @@NAME@@
 {
 	@@ARGUMENTS@@
 

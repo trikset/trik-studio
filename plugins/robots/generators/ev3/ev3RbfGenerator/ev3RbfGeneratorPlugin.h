@@ -56,6 +56,7 @@ private:
 
 	bool copySystemFiles(const QString &destination);
 	bool compile(const QFileInfo &lmsFile);
+	QString getLmsasmExecutable() const;
 	/// @returns path to uploaded file on EV3 brick if it was uploaded successfully or empty string otherwise.
 	QString upload(const QFileInfo &lmsFile);
 

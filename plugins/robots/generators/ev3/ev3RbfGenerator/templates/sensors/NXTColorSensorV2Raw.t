@@ -1,5 +1,5 @@
 // return raw data in format ARRAY32 4 [R,G,B,W]
-ARRAY8 ar@@RANDOM_ID_1@@ 4
+HANDLE ar@@RANDOM_ID_1@@
 ARRAY(CREATE8, 4, ar@@RANDOM_ID_1@@)
 
 //enables raw
@@ -13,14 +13,14 @@ TIMER_READY(timer)
 ARRAY_WRITE(ar@@RANDOM_ID_1@@, 0, 1)
 ARRAY_WRITE(ar@@RANDOM_ID_1@@, 1, 66)
 
-ARRAY8 answer@@RANDOM_ID_2@@ 8
+HANDLE answer@@RANDOM_ID_2@@
 ARRAY(CREATE8, 8, answer@@RANDOM_ID_2@@)
 
-ARRAY32 answerBuf@@RANDOM_ID_3@@ 8
+HANDLE answerBuf@@RANDOM_ID_3@@
 ARRAY(CREATE32, 8, answerBuf@@RANDOM_ID_3@@)
 DATA8 tmp@@RANDOM_ID_4@@
 DATA32 tmp32@@RANDOM_ID_5@@
-ARRAY32 answerRes@@RANDOM_ID_6@@ 4
+HANDLE answerRes@@RANDOM_ID_6@@
 ARRAY(CREATE32, 4, answerRes@@RANDOM_ID_6@@)
 
 //read raw 8 byte

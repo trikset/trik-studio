@@ -1,1 +1,1 @@
-IN_S @@NAME@@ @@TYPE@@
+IN_@@TYPE@@ @@NAME@@

@@ -100,8 +100,19 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 					; !element.isNull()
 					; element = element.nextSiblingElement("label"))
 			{
-				mLuaToolbox.interpret(QString("%1=%2")
-						.arg(mNameNormalizer->convert(element.attribute("text"))).arg(element.attribute("value")));
+				const auto type = element.attribute("type");
+				auto result = element.attribute("value");
+				bool okDouble = false;
+				bool okInt = false;
+				const auto floatValue = result.toDouble(&okDouble);
+				const auto intValue = result.toInt(&okInt);
+				if (type == "int" && okDouble && !okInt) {
+					result = QString::number(static_cast<int>(floatValue));
+				}
+				if (type == "float" && okInt) {
+					result = QString::number(intValue, 'f', 1);
+				}
+				mLuaToolbox.setVariableValue(mNameNormalizer->convert(element.attribute("text")), result);
 			}
 		}
 

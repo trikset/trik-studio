@@ -29,6 +29,7 @@
 #include "simpleGenerators/stopCompassCalibrationGenerator.h"
 #include "simpleGenerators/readRGBGenerator.h"
 #include "simpleGenerators/waitForColorBlockGenerator.h"
+#include "simpleGenerators/subprogramCallGenerator.h"
 
 #include "simpleGenerators/lineLeader/calibrateBlackGenerator.h"
 #include "simpleGenerators/lineLeader/calibratePIDGenerator.h"
@@ -115,8 +116,9 @@ generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGener
 		return new ReadRGBGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Ev3WaitForColor") {
 		return new WaitForColorBlockGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "Subprogram") {
+		return new SubprogramCallGenerator(mRepo, customizer, id, this);
 	}
-
 	else if (elementType == "Ev3CalibrateWhiteLL") {
 		return new lineLeader::CalibrateWhiteGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Ev3CalibrateBlackLL") {

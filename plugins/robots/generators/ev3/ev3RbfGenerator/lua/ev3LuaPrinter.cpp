@@ -209,7 +209,7 @@ QString Ev3LuaPrinter::newRegister(Ev3RbfType type)
 
 	const QString declarationTemplate = (type == Ev3RbfType::dataS)
 			? "DATA%1 %2 255"
-			: (isArray(type) ? QString("ARRAY%1 %2 4").arg(typeNames[elementType(type)], result) : "DATA%1 %2");
+			: (isArray(type) ? QString("HANDLE %2").arg(result): "DATA%1 %2");
 	mVariables.appendManualDeclaration(declarationTemplate.arg(typeNames[type], result));
 	return result;
 }
@@ -583,11 +583,23 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FloatNumber> &n
 }
 
 void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitialization> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+		, const QSharedPointer<qrtext::core::ast::Node> &parent)
 {
+	QString value;
+	const auto tableType = mTextLanguage.type(parent);
+	QString indexerType = typeNames[Ev3RbfType::data32];
+	if (const auto *table = dynamic_cast<qrtext::lua::types::Table *>(tableType.data())) {
+		const auto ev3TableType = toEv3Type(table->elementType());
+		value = castTo(ev3TableType, node->value());
+		indexerType = typeNames[ev3TableType];
+	} else {
+		value = popResult(node->value());
+	}
+
 	const QString initializer = readTemplate("writeIndexer.t")
 			.replace("@@INDEX@@", node->key() ? popResult(node->key()) : QString::number(++mTableInitializersCount))
-			.replace("@@VALUE@@", popResult(node->value()));
+			.replace("@@VALUE@@", value)
+			.replace("@@EV3_TYPE@@", indexerType);
 	pushResult(node, initializer, QString());
 }
 
@@ -731,7 +743,9 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &no
 			mAdditionalCode[node->variable().data()].pop_back();
 		}
 
-		QString value = popResult(node->value());
+		const auto indexerType = typeNames[typeOf(node->variable())];
+		writeTemplate.replace("@@EV3_TYPE@@", indexerType);
+		QString value = castTo(typeOf(node->variable()), node->value());
 		popResults({node->value(), node->variable()});
 		pushResult(node, writeTemplate.replace("@@VALUE@@", value), QString());
 		return;

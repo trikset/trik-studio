@@ -1,1 +1,1 @@
-@@TYPE@@ @@NAME@@ 4
+@@TYPE@@ @@NAME@@

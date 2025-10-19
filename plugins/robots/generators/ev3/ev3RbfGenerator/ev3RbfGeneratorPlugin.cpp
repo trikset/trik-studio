@@ -23,6 +23,7 @@
 #include <ev3Kit/communication/ev3RobotCommunicationThread.h>
 #include <ev3GeneratorBase/robotModel/ev3GeneratorRobotModel.h>
 #include <qrkernel/settingsManager.h>
+#include <qrkernel/platformInfo.h>
 #include "ev3RbfMasterGenerator.h"
 #include <QsLog.h>
 
@@ -213,6 +214,26 @@ bool Ev3RbfGeneratorPlugin::copySystemFiles(const QString &destination)
 	return true;
 }
 
+QString Ev3RbfGeneratorPlugin::getLmsasmExecutable() const
+{
+	const QDir dir(PlatformInfo::invariantSettingsPath("pathToEv3Tools"));
+
+	if (!dir.exists()) {
+		QLOG_ERROR() << "Directory for ev3 tools with name" << dir << "does not exist";
+		return {};
+	}
+
+	const auto &toolName = PlatformInfo::osType() == "windows" ? "lmsasm.exe": "lmsasm";
+	const auto &toolPath = dir.filePath(toolName);
+
+	QFileInfo toolFile(toolPath);
+	if (!toolFile.exists() || !toolFile.isFile()) {
+		QLOG_ERROR() << "Tool not found at path:" << toolPath;
+		return {};
+	}
+	return toolPath;
+}
+
 bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 {
 	if (!mJavaDetected) {
@@ -227,29 +248,33 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 		rbfFile.remove();
 	}
 
-	QProcess java;
+	const auto &lmsasmExecutable = getLmsasmExecutable();
+	QProcess lmsasm;
 	QEventLoop loop;
-	java.setEnvironment(QProcess::systemEnvironment());
-	java.setWorkingDirectory(lmsFile.absolutePath());
-	java.setProgram("java");
-	java.setArguments({"-jar", "assembler.jar", lmsFile.baseName()});
-
-	connect(&java, &QProcess::readyRead, &loop, [&java]() { QLOG_INFO() << java.readAll(); });
-	connect(&java, &QProcess::errorOccurred, &loop, [&java, &loop](QProcess::ProcessError e) {
+	lmsasm.setEnvironment(QProcess::systemEnvironment());
+	lmsasm.setWorkingDirectory(lmsFile.absolutePath());
+	lmsasm.setProgram(lmsasmExecutable);
+#ifdef EV3_COMPILE_DEBUG_MODE
+	lmsasm.setArguments({"-debug", lmsFile.baseName()});
+#else
+	lmsasm.setArguments({lmsFile.baseName()});
+#endif
+	connect(&lmsasm, &QProcess::readyRead, &loop, [&lmsasm]() { QLOG_INFO() << lmsasm.readAll(); });
+	connect(&lmsasm, &QProcess::errorOccurred, &loop, [&lmsasm, &loop](QProcess::ProcessError e) {
 		QLOG_ERROR() << "Failed to start process (status" << e << "):"
-					 << java.program() << java.arguments();
+					 << lmsasm.program() << lmsasm.arguments();
 		loop.quit();
 	});
-	connect(&java, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
-		, &loop, [&loop, &java](int e, QProcess::ExitStatus s) {
+	connect(&lmsasm, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
+		, &loop, [&loop, &lmsasm](int e, QProcess::ExitStatus s) {
 		if (e || s != QProcess::ExitStatus::NormalExit) {
 			QLOG_ERROR() << "Failed to execute process (errCode:" << e << ", exitStatus:" << s << "):"
-						 << java.program() << java.arguments();
+						 << lmsasm.program() << lmsasm.arguments();
 		}
 		loop.quit();
 	});
 
-	java.start();
+	lmsasm.start();
 	loop.exec();
 	return true;
 }
