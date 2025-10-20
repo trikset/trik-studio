@@ -51,9 +51,6 @@ private Q_SLOTS:
 	void stopRobot();
 
 private:
-	/// Function that checks installed JRE or not
-	bool javaInstalled();
-
 	bool copySystemFiles(const QString &destination);
 	bool compile(const QFileInfo &lmsFile);
 	QString getLmsasmExecutable() const;
@@ -71,8 +68,6 @@ private:
 
 	/// Action that stops current program on a robot
 	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
-
-	bool mJavaDetected {};
 };
 
 }

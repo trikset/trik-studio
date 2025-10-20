@@ -77,8 +77,6 @@ Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 			, nullptr
 			, {}
 	});
-
-	mJavaDetected = javaInstalled();
 }
 
 QList<ActionInfo> Ev3RbfGeneratorPlugin::customActions()
@@ -186,20 +184,6 @@ void Ev3RbfGeneratorPlugin::stopRobot()
 	}
 }
 
-bool Ev3RbfGeneratorPlugin::javaInstalled()
-{
-	QProcess java;
-	java.setEnvironment(QProcess::systemEnvironment());
-
-	java.start("java", {"-version"});
-	auto started = java.waitForStarted(5000);
-	// do not check the result, because it is false when process already finished
-	java.waitForFinished();
-	auto version = java.readAllStandardError();
-	QLOG_INFO() << "Java test says:" << version;
-	return started && !version.isEmpty();
-}
-
 bool Ev3RbfGeneratorPlugin::copySystemFiles(const QString &destination)
 {
 	QDirIterator iterator(":/ev3/rbf/thirdparty");
@@ -236,13 +220,6 @@ QString Ev3RbfGeneratorPlugin::getLmsasmExecutable() const
 
 bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 {
-	if (!mJavaDetected) {
-		mMainWindowInterface->errorReporter()->addError(
-					tr("<a href=\"https://java.com/ru/download/\">Java</a> is "\
-				"not installed properly, but is required to upload programs to EV3."));
-		return false;
-	}
-
 	QFile rbfFile(lmsFile.absolutePath() + "/" + lmsFile.baseName() + ".rbf");
 	if (rbfFile.exists()) {
 		rbfFile.remove();

@@ -110,7 +110,7 @@
         <translation>Графическая модель диаграммы с подпрограммой не найдена</translation>
     </message>
     <message>
-        <location line="+136"/>
+        <location line="+137"/>
         <source>Please enter valid c-style name for subprogram &quot;</source>
         <translation>Введите корректный идентификатор подпрограммы &quot;</translation>
     </message>
