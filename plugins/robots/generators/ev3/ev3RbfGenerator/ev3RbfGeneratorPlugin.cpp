@@ -255,9 +255,9 @@ bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
 	lmsasm.setWorkingDirectory(lmsFile.absolutePath());
 	lmsasm.setProgram(lmsasmExecutable);
 #ifdef EV3_COMPILE_DEBUG_MODE
-	lmsasm.setArguments({"-debug", lmsFile.baseName()});
+	lmsasm.setArguments({"-debug", "-output", rbfFile.fileName(), lmsFile.fileName()});
 #else
-	lmsasm.setArguments({lmsFile.baseName()});
+	lmsasm.setArguments({"-output", rbfFile.fileName(), lmsFile.fileName()});
 #endif
 	connect(&lmsasm, &QProcess::readyRead, &loop, [&lmsasm]() { QLOG_INFO() << lmsasm.readAll(); });
 	connect(&lmsasm, &QProcess::errorOccurred, &loop, [&lmsasm, &loop](QProcess::ProcessError e) {
