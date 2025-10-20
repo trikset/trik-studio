@@ -39,13 +39,13 @@ protected:
 	qReal::text::LanguageInfo language() const override;
 	QString generatorName() const override;
 
-private slots:
+private Q_SLOTS:
 	/// Generates and uploads script to a EV3 robot.
 	/// @return Empty string if operation was unsuccessfull or path to uploaded file on the EV3 robot otherwise.
 	QString uploadProgram();
 
 	/// Generates and uploads script to a EV3 robot. Runs uploaded program basing on run policy.
-	void uploadAndRunProgram(RunPolicy runPolicy);
+	void uploadAndRunProgram(ev3::Ev3GeneratorPluginBase::RunPolicy runPolicy);
 
 	/// Stops curretly executing program on the EV3 robot;
 	void stopRobot();

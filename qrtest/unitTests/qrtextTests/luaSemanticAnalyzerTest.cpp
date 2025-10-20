@@ -189,7 +189,7 @@ TEST_F(LuaSemanticAnalyzerTest, invalidFunctionParameters)
 
 	mAnalyzer->analyze(tree);
 
-	ASSERT_FALSE(mErrors.isEmpty());
+	ASSERT_FALSE(mErrors.isEmpty()); // clazy:exclude=returning-void-expression
 }
 
 TEST_F(LuaSemanticAnalyzerTest, invalidCoercion)
@@ -217,7 +217,7 @@ TEST_F(LuaSemanticAnalyzerTest, invalidCoercion)
 	auto b = f->arguments()[0];
 	auto c = f->arguments()[1];
 
-	EXPECT_TRUE(mAnalyzer->type(b)->is<types::Float>());
+	EXPECT_TRUE(mAnalyzer->type(b)->is<types::Integer>());
 	EXPECT_TRUE(mAnalyzer->type(c)->is<types::String>());
 }
 

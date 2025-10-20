@@ -139,22 +139,22 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 void Subprograms::obtainCode(QMap<Id, QString> const &declarations
 		, QMap<Id, QString> const &implementations)
 {
-	if (!declarations.keys().isEmpty()) {
+	if (!declarations.isEmpty()) {
 		mForwardDeclarationsCode << readTemplate("subprograms/declarationsSectionHeader.t");
 	}
 
-	for (const Id &id : declarations.keys()) {
-		mForwardDeclarationsCode << declarations[id];
+	for (auto it = declarations.cbegin(); it != declarations.cend(); it++) {
+		mForwardDeclarationsCode << it.value();
 	}
 
-	if (!implementations.keys().isEmpty()) {
+	if (!implementations.isEmpty()) {
 		mImplementationsCode << readTemplate("subprograms/implementationsSectionHeader.t");
 	}
 
-	for (const Id &id : implementations.keys()) {
-		const QString signature = readSubprogramSignature(id, "subprograms/implementation.t");
+	for (auto it = implementations.cbegin(); it != implementations.cend(); it++) {
+		const QString signature = readSubprogramSignature(it.key(), "subprograms/implementation.t");
 		QString subprogramCode = signature;
-		subprogramCode.replace("@@BODY@@", implementations[id]);
+		subprogramCode.replace("@@BODY@@", it.value());
 		mImplementationsCode << subprogramCode;
 	}
 
@@ -163,7 +163,8 @@ void Subprograms::obtainCode(QMap<Id, QString> const &declarations
 
 QString Subprograms::generateManualDeclarations() const
 {
-	return QStringList(mManualDeclarations.values()).join("\n\n");
+	const QStringList &list = mManualDeclarations.values();
+	return list.join("\n\n");
 }
 
 QString Subprograms::readSubprogramSignature(const Id &id, const QString &pathToTemplate)

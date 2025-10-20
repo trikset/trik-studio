@@ -1,9 +1,10 @@
 #!/bin/bash
-set -o nounset
-set -o errexit
+set -eux
 
 cd "$(dirname "$0")"
 
+source utils.sh
+install_lmsasm https://github.com/ev3dev/lmsasm/releases/download/v1.5.0/lmsasm-v1.5.0-linux-amd64.zip "$PWD/../data/bin/ev3-tools"
 
 mkdir -p "$PWD"/../data/lib/plugins/editors
 mkdir -p "$PWD"/../data/lib/plugins/tools/kitPlugins
