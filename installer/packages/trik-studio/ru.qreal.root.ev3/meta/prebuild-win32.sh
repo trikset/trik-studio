@@ -3,6 +3,7 @@ set -eux
 
 cd "$(dirname "$0")"
 
+source utils.sh
 install_lmsasm https://github.com/ev3dev/lmsasm/releases/download/v1.5.0/lmsasm-v1.5.0-windows-amd64.zip "$PWD/../data/ev3-tools"
 
 rsync -a "$BIN_DIR"/plugins/editors/ev3Metamodel.dll                      "$PWD"/../data/plugins/editors/
