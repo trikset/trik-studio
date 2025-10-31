@@ -219,7 +219,7 @@ jobs:
       if: ${{ inputs.build_installer }}
 
     - name: Upload installer artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: ${{ env.ARTIFACT_INSTALLER_NAME }}
         path: |
