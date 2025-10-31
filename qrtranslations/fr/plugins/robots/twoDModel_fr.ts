@@ -248,7 +248,12 @@
         <translation>Augmenter la vitesse</translation>
     </message>
     <message>
-        <location line="-469"/>
+        <location line="+108"/>
+        <source>px</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-577"/>
         <source>Left wheel:</source>
         <translation>Roue gauche :</translation>
     </message>

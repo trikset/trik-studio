@@ -183,7 +183,7 @@ void TwoDModelWidget::updateRobotInfoWidget(const qreal factor, const QString& u
 	mUi->robotMassInGr->setValue(robotMass);
 	mUi->robotMassUnit->setText(tr("kg"));
 	mUi->robotMassInGr->setButtonSymbols(QAbstractSpinBox::NoButtons);
-
+	mUi->rulerUnitLabel->setText(unitString);
 	auto robotModels = mModel.robotModels();
 	auto robotTrack = robotModels.isEmpty() || robotModels[0]->parameters()->wheelsPosition().size() < 2 ? robotWidth
 			: qAbs(robotModels[0]->parameters()->wheelsPosition()[0].y()
