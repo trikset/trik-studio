@@ -66,7 +66,8 @@ public:
 	/// @param showConsole If true then robot's console will be showed.
 	/// @param filePath If not QString() interpret code on this path instead of the code in the TRIK Studio file format.
 	bool interpret(bool background, int speedFactor
-				   , bool closeOnFinish, bool closeOnSuccess, bool showConsole, const QString &filePath);
+				   , bool closeOnFinish, bool closeOnSuccess, bool showConsole,
+					bool showDisplay, const QString &filePath);
 
 	/// Generate code from TRIK Studio save file
 	/// @param generatePath The path to save the generated code

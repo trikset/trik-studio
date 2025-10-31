@@ -130,7 +130,7 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 }
 
 bool Runner::interpret(const bool background, const int customSpeedFactor, bool closeOnFinish
-			, const bool closeOnSuccess, const bool showConsole, const QString &filePath)
+			, const bool closeOnSuccess, const bool showConsole, bool showDisplay, const QString &filePath)
 {
 	/// @todo: A bit hacky way to get 2D model window. Actually we must not have need in this.
 	/// GUI must be separated from logic and not appear here at all.
@@ -165,6 +165,7 @@ bool Runner::interpret(const bool background, const int customSpeedFactor, bool 
 		if (showConsole) {
 			attachNewConsoleTo(twoDModelWindow);
 		}
+		twoDModelWindow->setDetailsVisibility(showDisplay);
 
 		auto &t = twoDModelWindow->model().timeline();
 		t.setImmediateMode(background);
