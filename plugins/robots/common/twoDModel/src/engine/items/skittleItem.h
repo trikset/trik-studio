@@ -61,7 +61,6 @@ private:
 	qreal mStartRotation {0.0};
 	ItemProperty<qreal> mDiameterPx;
 	std::unique_ptr<QSvgRenderer> mSvgRenderer;
-
 };
 }
 }

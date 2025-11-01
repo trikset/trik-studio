@@ -281,13 +281,13 @@ QVariant ValuesFactory::propertyOf(const QObject *object, const QString &propert
 	return object->property(qPrintable(property));
 }
 
-QVariant ValuesFactory::propertyOf(items::SolidItem* item, const QString &property, bool *ok) const
+QVariant ValuesFactory::propertyOf(const items::SolidItem* item, const QString &property, bool *ok) const
 {
 	ok && (*ok = true);
 	if (!item) {
 		return QVariant();
 	}
-	const QMetaObject &mo = items::SolidItem::staticMetaObject;
+	const auto &mo = items::SolidItem::staticMetaObject;
 	const auto index = mo.indexOfProperty(qPrintable(property));
 	if (index < 0) {
 		ok && (*ok = false);

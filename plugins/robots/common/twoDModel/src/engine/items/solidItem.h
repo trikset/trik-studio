@@ -81,7 +81,6 @@ protected:
 	ItemProperty<qreal> mRestitution {"restitution", 0.0f};
 	ItemProperty<qreal> mAngularDamping {"angularDamping", 0.0f};
 	ItemProperty<qreal> mLinearDamping {"linearDamping", 0.0f};
-
 };
 
 }

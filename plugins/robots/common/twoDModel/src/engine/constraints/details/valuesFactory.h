@@ -110,7 +110,7 @@ private:
 	QVariant propertyOf(const QVariant &value, const QString &property
 			, bool *hasProperty = 0, bool *unknownType = nullptr) const;
 	QVariant propertyOf(const QObject *object, const QString &property, bool *ok = nullptr) const;
-	QVariant propertyOf(items::SolidItem* item, const QString &property, bool *ok = nullptr) const;
+	QVariant propertyOf(const items::SolidItem* item, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const QPoint &point, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const QRect &rect, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const QVariantList &list, const QString &property, bool *ok = nullptr) const;
