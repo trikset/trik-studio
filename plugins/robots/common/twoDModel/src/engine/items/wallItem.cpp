@@ -33,9 +33,9 @@ namespace {
 WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QPointF begin, QPointF end)
 	: mImage(":/icons/2d_wall.png")
-	, mFriction(wallFriction)
-	, mRestitution(wallRestituion)
 {
+	mFriction.setValue(wallFriction);
+	mRestitution.setValue(wallRestituion);
 	setCoordinateSystem(metricSystem);
 	setX1(begin.x());
 	setY1(begin.y());
@@ -179,14 +179,7 @@ void WallItem::deserialize(const QDomElement &element)
 		mWallWidth = pen().widthF();
 	}
 
-	if (element.hasAttribute("friction")) {
-		mFriction = element.attribute("friction").toDouble();
-	}
-
-	if (element.hasAttribute("restitution")) {
-		mRestitution = element.attribute("restitution").toDouble();
-	}
-
+	SolidItem::deserialize(element);
 	recalculateBorders();
 }
 
@@ -330,22 +323,6 @@ QPolygonF WallItem::collidingPolygon() const
 
 	// else we have the same polygon as abcdBoundingRect
 	return abcdBoundingRect;
-}
-
-qreal WallItem::mass(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return 0.0;
-}
-
-qreal WallItem::friction(bool getDefault) const
-{
-	return getDefault ? wallFriction : mFriction;
-}
-
-qreal WallItem::restitution(bool getDefault) const
-{
-	return getDefault ? wallRestituion : mRestitution;
 }
 
 SolidItem::BodyType WallItem::bodyType() const

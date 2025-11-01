@@ -23,7 +23,7 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class CubeItem : public graphicsUtils::RotateItem, public SolidItem
+class CubeItem final: public graphicsUtils::RotateItem, public SolidItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(CubeItem)
@@ -53,15 +53,9 @@ public:
 	void returnToStartPosition();
 
 	bool isCircle() const override;
-	qreal mass(bool getDefault) const override;
 	BodyType bodyType() const override;
-	qreal friction(bool getDefault) const override;
-	qreal restitution(bool getDefault) const override;
 	QPolygonF collidingPolygon() const override;
-	qreal angularDamping(bool getDefault) const override;
-	qreal linearDamping(bool getDefault) const override;
 	QPainterPath shape () const override;
-
 	QPainterPath path() const;
 
 private:
@@ -69,13 +63,8 @@ private:
 	QPointF mStartPosition;
 	qreal mStartRotation {0.0};
 
-	QSvgRenderer *mSvgRenderer;
-	qreal mEdgeSizePx;
-	qreal mMass;
-	qreal mFriction;
-	qreal mRestitution;
-	qreal mAngularDamping;
-	qreal mLinearDamping;
+	std::unique_ptr<QSvgRenderer> mSvgRenderer;
+	ItemProperty<qreal> mEdgeSizePx;
 };
 
 }

@@ -15,10 +15,11 @@
 #include "valuesFactory.h"
 
 #include <QtCore/QRect>
-
+#include <QMetaProperty>
 #include <qrutils/mathUtils/geometry.h>
 #include <utils/objectsSet.h>
 #include <utils/timelineInterface.h>
+#include "src/engine/items/solidItem.h"
 
 using namespace twoDModel::constraints::details;
 
@@ -252,7 +253,15 @@ QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &propert
 	} else {
 		unknownType && (*unknownType = true);
 	}
-
+	if (result.isNull()) {
+		QVariant fallback;
+		if (auto *solidItem = dynamic_cast<items::SolidItem *>(value.value<QObject *>())) {
+			fallback = propertyOf(solidItem, property, hasProperty);
+		}
+		if (fallback.isValid()) {
+			result = fallback;
+		}
+	}
 	return result;
 }
 
@@ -270,6 +279,22 @@ QVariant ValuesFactory::propertyOf(const QObject *object, const QString &propert
 	}
 
 	return object->property(qPrintable(property));
+}
+
+QVariant ValuesFactory::propertyOf(items::SolidItem* item, const QString &property, bool *ok) const
+{
+	ok && (*ok = true);
+	if (!item) {
+		return QVariant();
+	}
+	const QMetaObject &mo = items::SolidItem::staticMetaObject;
+	const auto index = mo.indexOfProperty(qPrintable(property));
+	if (index < 0) {
+		ok && (*ok = false);
+		return QVariant();
+	}
+
+	return mo.property(index).readOnGadget(item);
 }
 
 QVariant ValuesFactory::propertyOf(const QPoint &point, const QString &property, bool *ok) const

@@ -66,9 +66,6 @@ public:
 	void alignTheWall(int indexGrid);
 
 	QPolygonF collidingPolygon() const override;
-	qreal mass(bool getDefault) const override;
-	qreal friction(bool getDefault) const override;
-	qreal restitution(bool getDefault) const override;
 	BodyType bodyType() const override;
 
 protected:
@@ -83,8 +80,6 @@ private:
 
 	QPainterPath mPath;
 	qreal mWallWidth {10};
-	qreal mFriction;
-	qreal mRestitution;
 	QPointF mEstimatedPos;
 };
 

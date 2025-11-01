@@ -33,14 +33,14 @@ namespace {
 
 SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			QPointF position)
-	: mSvgRenderer(new QSvgRenderer)
-	, mDiameterPx(skittleDiameter)
-	, mMass(skittleMass)
-	, mFriction(skittleFriction)
-	, mRestitution(skittleRestituion)
-	, mAngularDamping(skittleAngularDamping)
-	, mLinearDamping(skittleLinearDamping)
+	: mDiameterPx("diameter", skittleDiameter)
+	, mSvgRenderer(new QSvgRenderer)
 {
+	mMass.setValue(skittleMass);
+	mFriction.setValue(skittleFriction);
+	mRestitution.setValue(skittleRestituion);
+	mAngularDamping.setValue(skittleAngularDamping);
+	mLinearDamping.setValue(skittleLinearDamping);
 	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_can.svg"));
 	setPos(position);
@@ -50,7 +50,6 @@ SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 SkittleItem::~SkittleItem()
 {
-	delete mSvgRenderer;
 }
 
 QAction *SkittleItem::skittleTool()
@@ -112,7 +111,7 @@ QDomElement SkittleItem::serialize(QDomElement &element) const
 	skittleNode.setAttribute("rotation", QString::number(rotation()));
 	skittleNode.setAttribute("startRotation", QString::number(mStartRotation));
 	SolidItem::serialize(skittleNode);
-	if (propertyChanged(mDiameterPx, skittleDiameter)) {
+	if (mDiameterPx.wasChanged()) {
 		skittleNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
 	}
 	return skittleNode;
@@ -133,21 +132,7 @@ void SkittleItem::deserialize(const QDomElement &element)
 		setDiameter(coordSystem->toPx(
 				element.attribute("diameter").toDouble()));
 	}
-	if (element.hasAttribute("mass")) {
-		mMass = element.attribute("mass").toDouble();
-	}
-	if (element.hasAttribute("friction")) {
-		mFriction = element.attribute("friction").toDouble();
-	}
-	if (element.hasAttribute("restitution")) {
-		mRestitution = element.attribute("restitution").toDouble();
-	}
-	if (element.hasAttribute("angularDamping")) {
-		mAngularDamping = element.attribute("angularDamping").toDouble();
-	}
-	if (element.hasAttribute("linearDamping")) {
-		mLinearDamping = element.attribute("linearDamping").toDouble();
-	}
+	SolidItem::deserialize(element);
 	setPos(QPointF(x, y));
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
@@ -176,16 +161,6 @@ QPolygonF SkittleItem::collidingPolygon() const
 	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
-qreal SkittleItem::angularDamping(bool getDefault) const
-{
-	return getDefault ? skittleAngularDamping : mAngularDamping;
-}
-
-qreal SkittleItem::linearDamping(bool getDefault) const
-{
-	return getDefault ? skittleLinearDamping : mLinearDamping;
-}
-
 QPainterPath SkittleItem::path() const
 {
 	QPainterPath path;
@@ -208,28 +183,13 @@ bool SkittleItem::isCircle() const
 	return true;
 }
 
-qreal SkittleItem::mass(bool getDefault) const
-{
-	return getDefault ? skittleMass : mMass;
-}
-
-qreal SkittleItem::friction(bool getDefault) const
-{
-	return getDefault ? skittleFriction : mFriction;
-}
-
-qreal SkittleItem::restitution(bool getDefault) const
-{
-	return getDefault ? skittleRestituion : mRestitution;
-}
-
 void SkittleItem::setDiameter(const qreal diameter)
 {
 	prepareGeometryChange();
-	mDiameterPx = diameter;
+	mDiameterPx.changeValue(diameter);
 }
 
 SolidItem::BodyType SkittleItem::bodyType() const
 {
-	return SolidItem::DYNAMIC;
+	return SolidItem::BodyType::DYNAMIC;
 }

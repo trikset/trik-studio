@@ -21,7 +21,7 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class SkittleItem : public graphicsUtils::AbstractItem, public SolidItem
+class SkittleItem final: public graphicsUtils::AbstractItem, public SolidItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(SkittleItem)
@@ -51,29 +51,17 @@ public:
 	void returnToStartPosition();
 
 	bool isCircle() const override;
-	qreal mass(bool getDefault) const override;
 	BodyType bodyType() const override;
-	qreal friction(bool getDefault) const override;
-	qreal restitution(bool getDefault) const override;
 	QPolygonF collidingPolygon() const override;
-	qreal angularDamping(bool getDefault) const override;
-	qreal linearDamping(bool getDefault) const override;
-
 	QPainterPath path() const;
 
 private:
 	void setDiameter(const qreal diameter);
 	QPointF mStartPosition;
 	qreal mStartRotation {0.0};
+	ItemProperty<qreal> mDiameterPx;
+	std::unique_ptr<QSvgRenderer> mSvgRenderer;
 
-	QSvgRenderer *mSvgRenderer;
-	qreal mDiameterPx;
-	qreal mMass;
-	qreal mFriction;
-	qreal mRestitution;
-	qreal mAngularDamping;
-	qreal mLinearDamping;
 };
-
 }
 }

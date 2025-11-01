@@ -476,9 +476,8 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 	} else if (auto solidItem = dynamic_cast<items::SolidItem *>(item)) { // clazy:exclude=unneeded-cast
 		QPolygonF collidingPolygon = solidItem->collidingPolygon();
 		if (itemTracked(item)) {
-			if (solidItem->bodyType() == items::SolidItem::DYNAMIC) {
+			if (solidItem->bodyType() == items::SolidItem::BodyType::DYNAMIC) {
 				auto *bItem = mBox2DDynamicItems[item];
-
 				qreal localRotation = item->rotation();
 				item->setRotation(0);
 				QPointF localScenePos = item->scenePos();
@@ -493,7 +492,7 @@ void Box2DPhysicsEngine::onItemDragged(graphicsUtils::AbstractItem *item)
 			b2Vec2 pos = positionToBox2D(collidingPolygon.boundingRect().center());
 			Box2DItem *box2dItem = new Box2DItem(this, solidItem, pos, angleToBox2D(item->rotation()));
 			mBox2DResizableItems[item] = box2dItem;
-			if (solidItem->bodyType() == items::SolidItem::DYNAMIC) {
+			if (solidItem->bodyType() == items::SolidItem::BodyType::DYNAMIC) {
 				mBox2DDynamicItems[item] = box2dItem;
 			}
 		}

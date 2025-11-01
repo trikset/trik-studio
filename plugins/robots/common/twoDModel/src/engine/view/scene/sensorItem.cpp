@@ -48,6 +48,8 @@ SensorItem::SensorItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	, mImage(pathToImage.isEmpty() ? this->pathToImage() : pathToImage, true)
 	, mPortItem(new PortItem(port))
 {
+	mMass.setValue(0.01f);
+	mRestitution.setValue(0.8f);
 	setCoordinateSystem(metricSystem);
 	setFlags(ItemIsSelectable | ItemIsMovable | ItemSendsGeometryChanges);
 
@@ -141,18 +143,6 @@ QPolygonF SensorItem::collidingPolygon() const
 	return QPolygonF(QRectF(-7, -7, 15, 15));
 }
 
-qreal SensorItem::friction(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return 0.0;
-}
-
-qreal SensorItem::restitution(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return 0.8f;
-}
-
 bool SensorItem::isCircle() const
 {
 	return true;
@@ -161,12 +151,6 @@ bool SensorItem::isCircle() const
 twoDModel::items::SolidItem::BodyType SensorItem::bodyType() const
 {
 	return BodyType::DYNAMIC;
-}
-
-qreal SensorItem::mass(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return 0.01; /// @todo
 }
 
 QString SensorItem::name() const

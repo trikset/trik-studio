@@ -17,6 +17,7 @@
 #include <QDomElement>
 #include <QtGui/QPolygonF>
 #include <QtCore/qglobal.h>
+#include "itemProperty.h"
 
 namespace twoDModel {
 namespace items {
@@ -24,12 +25,18 @@ namespace items {
 /// Provides information for physics such as friction, mass, form, etc.
 class SolidItem
 {
+	Q_GADGET
 	Q_DISABLE_COPY(SolidItem)
+	Q_PROPERTY(qreal mass READ mass)
+	Q_PROPERTY(qreal friction READ friction)
+	Q_PROPERTY(qreal restitution READ restitution)
+	Q_PROPERTY(qreal linearDamping READ linearDamping)
+	Q_PROPERTY(qreal angularDamping READ angularDamping)
 public:
 	/// static: zero mass, zero velocity, may be manually moved
 	/// kinematic: zero mass, non-zero velocity set by user
 	/// dynamic: positive mass, non-zero velocity determined by forces
-	enum BodyType
+	enum class BodyType
 	{
 		DYNAMIC,
 		STATIC,
@@ -48,28 +55,33 @@ public:
 
 	void serialize(QDomElement &element) const;
 
-	inline bool propertyChanged(const qreal actualValue, const qreal defaultValue) const {
-		constexpr auto precision = 1e-5;
-		return std::abs(defaultValue - actualValue) > precision;
-	}
+	void deserialize(const QDomElement &element);
 
 	/// Returns body's mass in kg.
-	virtual qreal mass(bool getDefault = false) const = 0;
+	qreal mass() const { return mMass; }
 
 	/// Returns body's friction.
-	virtual qreal friction(bool getDefault = false) const = 0;
+	qreal friction() const { return mFriction; }
 
 	/// Returns body's restitution.
-	virtual qreal restitution(bool getDefault = false) const = 0;
+	qreal restitution() const { return mRestitution; }
 
 	/// Returns body's type.
 	virtual BodyType bodyType() const = 0;
 
 	/// Returns body's angular damping.
-	virtual qreal angularDamping(bool getDefault = false) const;
+	qreal angularDamping() const { return mAngularDamping; }
 
 	/// Returns body's linear damping.
-	virtual qreal linearDamping(bool getDefault = false) const;
+	qreal linearDamping() const {return mLinearDamping; }
+
+protected:
+	ItemProperty<qreal> mMass {"mass", 0.0f};
+	ItemProperty<qreal> mFriction {"friction", 0.0f};
+	ItemProperty<qreal> mRestitution {"restitution", 0.0f};
+	ItemProperty<qreal> mAngularDamping {"angularDamping", 0.0f};
+	ItemProperty<qreal> mLinearDamping {"linearDamping", 0.0f};
+
 };
 
 }
