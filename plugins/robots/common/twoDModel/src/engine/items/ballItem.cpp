@@ -33,7 +33,7 @@ namespace {
 
 BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QPointF position)
-	: mSvgRenderer(new QSvgRenderer)
+	: mSvgRenderer(std::make_unique<QSvgRenderer>())
 	, mDiameterPx("diameter", defaultBallDiameterPx)
 {
 	mMass.setValue(ballMass);

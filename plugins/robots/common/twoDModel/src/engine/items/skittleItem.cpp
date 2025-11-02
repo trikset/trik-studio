@@ -34,7 +34,7 @@ namespace {
 SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			QPointF position)
 	: mDiameterPx("diameter", skittleDiameter)
-	, mSvgRenderer(new QSvgRenderer)
+	, mSvgRenderer(std::make_unique<QSvgRenderer>())
 {
 	mMass.setValue(skittleMass);
 	mFriction.setValue(skittleFriction);

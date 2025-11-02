@@ -111,8 +111,8 @@ private:
 			, bool *hasProperty = 0, bool *unknownType = nullptr) const;
 	QVariant propertyOf(const QObject *object, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const items::SolidItem* item, const QString &property, bool *ok = nullptr) const;
-	QVariant propertyOf(const QPoint &point, const QString &property, bool *ok = nullptr) const;
-	QVariant propertyOf(const QRect &rect, const QString &property, bool *ok = nullptr) const;
+	QVariant propertyOf(QPoint point, const QString &property, bool *ok = nullptr) const;
+	QVariant propertyOf(QRect rect, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const QVariantList &list, const QString &property, bool *ok = nullptr) const;
 	void iterate(const QVariant &collection, const std::function<void(const QVariant &)> &visitor) const;
 

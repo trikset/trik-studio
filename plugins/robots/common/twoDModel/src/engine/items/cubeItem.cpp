@@ -33,7 +33,7 @@ using namespace twoDModel::items;
 
 CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QPointF position)
-	: mSvgRenderer(new QSvgRenderer)
+	: mSvgRenderer(std::make_unique<QSvgRenderer>())
 	, mEdgeSizePx("edgeSize", defaultCubeEdgePx)
 
 {
