@@ -15,10 +15,11 @@
 #include "valuesFactory.h"
 
 #include <QtCore/QRect>
-
+#include <QMetaProperty>
 #include <qrutils/mathUtils/geometry.h>
 #include <utils/objectsSet.h>
 #include <utils/timelineInterface.h>
+#include "src/engine/items/solidItem.h"
 
 using namespace twoDModel::constraints::details;
 
@@ -252,7 +253,15 @@ QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &propert
 	} else {
 		unknownType && (*unknownType = true);
 	}
-
+	if (result.isNull()) {
+		QVariant fallback;
+		if (auto *solidItem = dynamic_cast<items::SolidItem *>(value.value<QObject *>())) {
+			fallback = propertyOf(solidItem, property, hasProperty);
+		}
+		if (fallback.isValid()) {
+			result = fallback;
+		}
+	}
 	return result;
 }
 
@@ -272,7 +281,23 @@ QVariant ValuesFactory::propertyOf(const QObject *object, const QString &propert
 	return object->property(qPrintable(property));
 }
 
-QVariant ValuesFactory::propertyOf(const QPoint &point, const QString &property, bool *ok) const
+QVariant ValuesFactory::propertyOf(const items::SolidItem* item, const QString &property, bool *ok) const
+{
+	ok && (*ok = true);
+	if (!item) {
+		return QVariant();
+	}
+	const auto &mo = items::SolidItem::staticMetaObject;
+	const auto index = mo.indexOfProperty(qPrintable(property));
+	if (index < 0) {
+		ok && (*ok = false);
+		return QVariant();
+	}
+
+	return mo.property(index).readOnGadget(item);
+}
+
+QVariant ValuesFactory::propertyOf(QPoint point, const QString &property, bool *ok) const
 {
 	ok && (*ok = true);
 	if (property == "x") {
@@ -287,7 +312,7 @@ QVariant ValuesFactory::propertyOf(const QPoint &point, const QString &property,
 	return QVariant();
 }
 
-QVariant ValuesFactory::propertyOf(const QRect &rect, const QString &property, bool *ok) const
+QVariant ValuesFactory::propertyOf(QRect rect, const QString &property, bool *ok) const
 {
 	ok && (*ok = true);
 	if (property == "x") {
@@ -347,7 +372,7 @@ void ValuesFactory::iterate(const QVariant &collection, const std::function<void
 		collection.value<utils::ObjectsSetBase *>()->iterate(visitor);
 	} else if (collection.canConvert<QVariantList>()) {
 		// Warning: the whole list will be copied here!
-		for (const QVariant &item : collection.value<QVariantList>()) {
+		for (auto &&item : collection.value<QVariantList>()) {
 			visitor(item);
 		}
 	} else {
@@ -358,5 +383,5 @@ void ValuesFactory::iterate(const QVariant &collection, const std::function<void
 
 void ValuesFactory::reportError(const QString &message) const
 {
-	emit mStatus.checkerError(message);
+	Q_EMIT mStatus.checkerError(message);
 }

@@ -66,9 +66,6 @@ public:
 	bool isDragged() const;
 
 	QPolygonF collidingPolygon() const override;
-	qreal mass(bool getDefault) const override;
-	qreal friction(bool getDefault) const override;
-	qreal restitution(bool getDefault) const override;
 	BodyType bodyType() const override;
 
 protected:

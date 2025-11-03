@@ -33,14 +33,15 @@ using namespace twoDModel::items;
 
 CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QPointF position)
-	: mSvgRenderer(new QSvgRenderer)
-	, mEdgeSizePx(defaultCubeEdgePx)
-	, mMass(cubeMass)
-	, mFriction(cubeFriction)
-	, mRestitution(cubeRestituion)
-	, mAngularDamping(cubeAngularDamping)
-	, mLinearDamping(cubeLinearDamping)
+	: mSvgRenderer(std::make_unique<QSvgRenderer>())
+	, mEdgeSizePx("edgeSize", defaultCubeEdgePx)
+
 {
+	mMass.setValue(cubeMass);
+	mFriction.setValue(cubeFriction);
+	mRestitution.setValue(cubeRestituion);
+	mAngularDamping.setValue(cubeAngularDamping);
+	mLinearDamping.setValue(cubeLinearDamping);
 	setCoordinateSystem(metricSystem);
 	mSvgRenderer->load(QString(":/icons/2d_cube.svg"));
 	setPos(position);
@@ -54,7 +55,6 @@ CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 CubeItem::~CubeItem()
 {
-	delete mSvgRenderer;
 }
 
 QAction *CubeItem::cubeTool()
@@ -119,7 +119,7 @@ QDomElement CubeItem::serialize(QDomElement &element) const
 
 	SolidItem::serialize(cubeNode);
 
-	if (propertyChanged(mEdgeSizePx, defaultCubeEdgePx)) {
+	if (mEdgeSizePx.wasChanged()) {
 		cubeNode.setAttribute("edgeSize", QString::number(coordSystem->toUnit(mEdgeSizePx)));
 	}
 
@@ -140,21 +140,7 @@ void CubeItem::deserialize(const QDomElement &element)
 		setEdgeSize(coordSystem->toPx(
 				element.attribute("edgeSize").toDouble()));
 	}
-	if (element.hasAttribute("mass")) {
-		mMass = element.attribute("mass").toDouble();
-	}
-	if (element.hasAttribute("friction")) {
-		mFriction = element.attribute("friction").toDouble();
-	}
-	if (element.hasAttribute("restitution")) {
-		mRestitution = element.attribute("restitution").toDouble();
-	}
-	if (element.hasAttribute("angularDamping")) {
-		mAngularDamping = element.attribute("angularDamping").toDouble();
-	}
-	if (element.hasAttribute("linearDamping")) {
-		mLinearDamping = element.attribute("linearDamping").toDouble();
-	}
+	SolidItem::deserialize(element);
 	setPos(QPointF(x, y));
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
@@ -190,16 +176,6 @@ QPolygonF CubeItem::collidingPolygon() const
 	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
 }
 
-qreal CubeItem::angularDamping(bool getDefault) const
-{
-	return getDefault ? cubeAngularDamping : mAngularDamping;
-}
-
-qreal CubeItem::linearDamping(bool getDefault) const
-{
-	return getDefault ? cubeLinearDamping : mLinearDamping;
-}
-
 QPainterPath CubeItem::path() const
 {
 	QPainterPath path;
@@ -212,25 +188,10 @@ bool CubeItem::isCircle() const
 	return false;
 }
 
-qreal CubeItem::mass(bool getDefault) const
-{
-	return getDefault ? cubeMass : mMass;
-}
-
-qreal CubeItem::friction(bool getDefault) const
-{
-	return getDefault ? cubeFriction : mFriction;
-}
-
-qreal CubeItem::restitution(bool getDefault) const
-{
-	return getDefault ? cubeRestituion : mRestitution;
-}
-
 void CubeItem::setEdgeSize(const qreal edge)
 {
 	prepareGeometryChange();
-	mEdgeSizePx = edge;
+	mEdgeSizePx.changeValue(edge);
 	setX2(x1() + mEdgeSizePx);
 	setY2(y1() + mEdgeSizePx);
 	setTransformOriginPoint(boundingRect().center());
@@ -241,5 +202,5 @@ void CubeItem::setEdgeSize(const qreal edge)
 
 SolidItem::BodyType CubeItem::bodyType() const
 {
-	return SolidItem::DYNAMIC;
+	return SolidItem::BodyType::DYNAMIC;
 }

@@ -31,11 +31,11 @@ Box2DItem::Box2DItem(twoDModel::model::physics::Box2DPhysicsEngine *engine
 	bodyDef.angularDamping = item->angularDamping();
 	bodyDef.linearDamping = item->linearDamping();
 
-	if (item->bodyType() == SolidItem::DYNAMIC) {
+	if (item->bodyType() == SolidItem::BodyType::DYNAMIC) {
 		bodyDef.type = b2_dynamicBody;
-	} else if (item->bodyType() == SolidItem::KINEMATIC) {
+	} else if (item->bodyType() == SolidItem::BodyType::KINEMATIC) {
 		bodyDef.type = b2_kinematicBody;
-	} else if (item->bodyType() == SolidItem::STATIC) {
+	} else if (item->bodyType() == SolidItem::BodyType::STATIC) {
 		bodyDef.type = b2_staticBody;
 	}
 

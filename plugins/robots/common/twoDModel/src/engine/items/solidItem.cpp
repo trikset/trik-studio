@@ -19,42 +19,45 @@ using namespace twoDModel::items;
 void SolidItem::serialize(QDomElement &element) const
 {
 	if (bodyType() == BodyType::DYNAMIC) {
-		const auto itemAngularDamping = angularDamping();
-		if (propertyChanged(itemAngularDamping, angularDamping(true))) {
-			element.setAttribute("angularDamping", QString::number(itemAngularDamping));
+		if (mAngularDamping.wasChanged()) {
+			element.setAttribute(mAngularDamping.name(), QString::number(mAngularDamping));
 		}
-		const auto itemLinearDamping = linearDamping();
-		if (propertyChanged(itemLinearDamping, linearDamping(true))) {
-			element.setAttribute("linearDamping", QString::number(itemLinearDamping));
+		if (mLinearDamping.wasChanged()) {
+			element.setAttribute(mLinearDamping.name(), QString::number(mLinearDamping));
 		}
-		const auto itemMass = mass();
-		if (propertyChanged(itemMass, mass(true))) {
-			element.setAttribute("mass", QString::number(itemMass));
+		if (mMass.wasChanged()) {
+			element.setAttribute(mMass.name(), QString::number(mMass));
 		}
 	}
-	const auto itemFriction = friction();
-	if (propertyChanged(itemFriction, friction(true))) {
-		element.setAttribute("friction", QString::number(itemFriction));
+	if (mFriction.wasChanged()) {
+		element.setAttribute(mFriction.name(), QString::number(mFriction));
 	}
-	const auto itemRestitution = restitution();
-	if (propertyChanged(itemRestitution, restitution(true))) {
-		element.setAttribute("restitution", QString::number(itemRestitution));
+	if (mRestitution.wasChanged()) {
+		element.setAttribute(mRestitution.name(), QString::number(mRestitution));
 	}
 }
+
+void SolidItem::deserialize(const QDomElement &element)
+{
+	if (element.hasAttribute("mass")) {
+		mMass.changeValue(element.attribute("mass").toDouble());
+	}
+	if (element.hasAttribute("friction")) {
+		mFriction.changeValue(element.attribute("friction").toDouble());
+	}
+	if (element.hasAttribute("restitution")) {
+		mRestitution.changeValue(element.attribute("restitution").toDouble());
+	}
+	if (element.hasAttribute("angularDamping")) {
+		mAngularDamping.changeValue(element.attribute("angularDamping").toDouble());
+	}
+	if (element.hasAttribute("linearDamping")) {
+		mLinearDamping.changeValue(element.attribute("linearDamping").toDouble());
+	}
+}
+
 
 bool SolidItem::isCircle() const
 {
 	return false;
-}
-
-qreal SolidItem::angularDamping(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return 0.0;
-}
-
-qreal SolidItem::linearDamping(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return 0.0;
 }

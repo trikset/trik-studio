@@ -31,6 +31,9 @@ RobotItem::RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	: mImage(robotImageFileName, true)
 	, mRobotModel(robotModel)
 {
+	mMass.setValue(mRobotModel.parameters()->mass());
+	mFriction.setValue(mRobotModel.parameters()->friction());
+	mRestitution.setValue(mRobotModel.parameters()->restitution());
 	setCoordinateSystem(metricSystem);
 	connect(&mRobotModel, &model::RobotModel::robotRided, this, &RobotItem::ride);
 	connect(&mRobotModel, &model::RobotModel::positionChanged, this, &RobotItem::setPos);
@@ -289,24 +292,6 @@ void RobotItem::returnToStartPosition()
 QPolygonF RobotItem::collidingPolygon() const
 {
 	return mRobotModel.parameters()->collidingPolygon();
-}
-
-qreal RobotItem::mass(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return mRobotModel.parameters()->mass();
-}
-
-qreal RobotItem::friction(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return mRobotModel.parameters()->friction();
-}
-
-qreal RobotItem::restitution(bool getDefault) const
-{
-	Q_UNUSED(getDefault)
-	return mRobotModel.parameters()->restitution();
 }
 
 twoDModel::items::SolidItem::BodyType RobotItem::bodyType() const

@@ -68,7 +68,8 @@ HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/lidar.h \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
 	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
-	$$PWD/src/engine/items/cubeItem.h
+	$$PWD/src/engine/items/cubeItem.h \
+	$$PWD/src/engine/items/itemProperty.h
 
 HEADERS += \
 	$$PWD/src/engine/twoDModelEngineApi.h \

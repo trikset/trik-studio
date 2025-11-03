@@ -54,9 +54,6 @@ public:
 	void deserialize(const QDomElement &element) override;
 
 	QPolygonF collidingPolygon() const override;
-	qreal mass(bool getDefault) const override;
-	qreal friction(bool getDefault) const override;
-	qreal restitution(bool getDefault) const override;
 	bool isCircle() const override;
 	BodyType bodyType() const override;
 

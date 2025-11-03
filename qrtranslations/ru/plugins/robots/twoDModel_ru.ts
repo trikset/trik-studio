@@ -331,7 +331,7 @@
     </message>
     <message>
         <location line="-88"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+102"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
     </message>
@@ -609,7 +609,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+58"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+57"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
     </message>
@@ -677,7 +677,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+58"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+57"/>
         <source>Can (C)</source>
         <translation>Банка (C)</translation>
     </message>
