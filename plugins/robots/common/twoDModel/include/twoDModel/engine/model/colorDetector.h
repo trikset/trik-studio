@@ -18,19 +18,20 @@
 namespace twoDModel {
 namespace model {
 
-class ColorDetector {
+class ColorDetector
+{
 public:
 	enum class ColorCode : uint8_t {
-	    Unknown  = 0,
-	    Black    = 1,
-	    Blue     = 2,
-	    Green    = 3,
-	    Yellow   = 4,
-	    Red      = 5,
-	    White    = 6,
-	    Cyan     = 7,
-	    Magenta  = 8,
-	    Brown    = 9,
+		Unknown  = 0,
+		Black    = 1,
+		Blue     = 2,
+		Green    = 3,
+		Yellow   = 4,
+		Red      = 5,
+		White    = 6,
+		Cyan     = 7,
+		Magenta  = 8,
+		Brown    = 9,
 	};
 
 	static ColorCode detect(uint16_t hue, uint8_t sat, uint8_t val) noexcept;

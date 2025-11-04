@@ -19,55 +19,54 @@ using namespace twoDModel::model;
 namespace {
 	using ColorCode = ColorDetector::ColorCode;
 	struct ColorRange {
-	    uint16_t hueMin;
-	    uint16_t hueMax;
-	    uint8_t satMin;
-	    uint8_t satMax;
-	    uint8_t valMin;
-	    uint8_t valMax;
-	    ColorCode code;
+		uint16_t hueMin;
+		uint16_t hueMax;
+		uint8_t satMin;
+		uint8_t satMax;
+		uint8_t valMin;
+		uint8_t valMax;
+		ColorCode code;
 
-	    constexpr ColorCode match(uint16_t hue, uint8_t sat, uint8_t val) const noexcept {
-		if (val < valMin || val > valMax) {
-			return ColorCode::Unknown;
+		constexpr ColorCode match(uint16_t hue, uint8_t sat, uint8_t val) const noexcept {
+			if (val < valMin || val > valMax) {
+				return ColorCode::Unknown;
+			}
+
+			if (sat < satMin || sat > satMax) {
+				return ColorCode::Unknown;
+			}
+
+			if (code == ColorCode::Black || code == ColorCode::White) {
+				return code;
+			}
+
+			const auto hueOk = (hueMin <= hueMax)
+			    ? (hue >= hueMin && hue <= hueMax)
+			    : (hue >= hueMin || hue <= hueMax);
+
+			return hueOk ? code : ColorCode::Unknown;
 		}
-
-		if (sat < satMin || sat > satMax) {
-			return ColorCode::Unknown;
-		}
-
-		if (code == ColorCode::Black || code == ColorCode::White) {
-		    return code;
-		}
-
-		const auto hueOk = (hueMin <= hueMax)
-		    ? (hue >= hueMin && hue <= hueMax)
-		    : (hue >= hueMin || hue <= hueMax);
-
-		return hueOk ? code : ColorCode::Unknown;
-	    }
 	};
 
 	constexpr ColorRange sColorTable[] = {
-	    {   0,    0,    0, 255, 0,   90,  ColorCode::Black   },
-	    {   0,    0,    0, 25,  200, 255, ColorCode::White   },
-	    { 342,   18,  200, 255, 200, 255, ColorCode::Red     },
-	    {  15,   45,  200, 255, 130, 180, ColorCode::Brown   },
-	    {  42,   78,  200, 255, 200, 255, ColorCode::Yellow  },
-	    { 102,  138,  180, 255, 200, 255, ColorCode::Green   },
-	    { 162,  198,  200, 255, 200, 255, ColorCode::Cyan    },
-	    { 222,  258,  200, 255, 200, 255, ColorCode::Blue    },
-	    { 282,  318,  200, 255, 200, 255, ColorCode::Magenta }
+		{   0,    0,    0, 255, 0,   90,  ColorCode::Black   },
+		{   0,    0,    0, 25,  200, 255, ColorCode::White   },
+		{ 342,   18,  200, 255, 200, 255, ColorCode::Red     },
+		{  15,   45,  200, 255, 130, 180, ColorCode::Brown   },
+		{  42,   78,  200, 255, 200, 255, ColorCode::Yellow  },
+		{ 102,  138,  180, 255, 200, 255, ColorCode::Green   },
+		{ 162,  198,  200, 255, 200, 255, ColorCode::Cyan    },
+		{ 222,  258,  200, 255, 200, 255, ColorCode::Blue    },
+		{ 282,  318,  200, 255, 200, 255, ColorCode::Magenta }
 	};
-
 }
 
 ColorDetector::ColorCode ColorDetector::detect(uint16_t hue, uint8_t sat, uint8_t val) noexcept {
 	for (auto &&range : sColorTable) {
-	    const auto code = range.match(hue, sat, val);
-	    if (code != ColorCode::Unknown) {
-		return code;
-	    }
+		const auto code = range.match(hue, sat, val);
+		if (code != ColorCode::Unknown) {
+			return code;
+		}
 	}
 	return ColorCode::Unknown;
 }
