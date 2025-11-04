@@ -29,9 +29,11 @@ public:
 		Yellow   = 4,
 		Red      = 5,
 		White    = 6,
-		Cyan     = 7,
-		Magenta  = 8,
-		Brown    = 9,
+		Brown    = 7,
+#if 0
+		Cyan     = 8,
+		Magenta  = 9,
+#endif
 	};
 
 	static ColorCode detect(uint16_t hue, uint8_t sat, uint8_t val) noexcept;

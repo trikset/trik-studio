@@ -55,9 +55,11 @@ namespace {
 		{  15,   45,  200, 255, 130, 180, ColorCode::Brown   },
 		{  42,   78,  200, 255, 200, 255, ColorCode::Yellow  },
 		{ 102,  138,  180, 255, 200, 255, ColorCode::Green   },
-		{ 162,  198,  200, 255, 200, 255, ColorCode::Cyan    },
 		{ 222,  258,  200, 255, 200, 255, ColorCode::Blue    },
+#if 0
+		{ 162,  198,  200, 255, 200, 255, ColorCode::Cyan    },
 		{ 282,  318,  200, 255, 200, 255, ColorCode::Magenta }
+#endif
 	};
 }
 
