@@ -49,7 +49,7 @@ namespace {
 	};
 
 	constexpr ColorRange sColorTable[] = {
-	    {   0,    0,    0, 255, 0,   76,  ColorCode::Black   },
+	    {   0,    0,    0, 255, 0,   90,  ColorCode::Black   },
 	    {   0,    0,    0, 25,  200, 255, ColorCode::White   },
 	    { 342,   18,  200, 255, 200, 255, ColorCode::Red     },
 	    {  15,   45,  200, 255, 130, 180, ColorCode::Brown   },
