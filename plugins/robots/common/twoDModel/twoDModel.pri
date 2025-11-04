@@ -38,6 +38,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/engine/twoDModelGuiFacade.h \
 	$$PWD/include/twoDModel/engine/view/twoDModelWidget.h \
 	$$PWD/include/twoDModel/engine/model/metricSystem.h \
+	$$PWD/include/twoDModel/engine/colorDetector.h \
 	$$PWD/include/twoDModel/engine/model/metricCoordinateSystem.h \
 	$$PWD/include/twoDModel/engine/model/constants.h \
 	$$PWD/include/twoDModel/engine/model/model.h \
@@ -139,7 +140,8 @@ HEADERS += \
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
-        $$PWD/src/engine/items/cubeItem.cpp \
+	$$PWD/src/engine/items/cubeItem.cpp \
+	$$PWD/src/engine/model/colorDetector.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \
 	$$PWD/src/engine/twoDModelGuiFacade.cpp \

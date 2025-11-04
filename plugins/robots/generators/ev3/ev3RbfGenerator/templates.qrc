@@ -226,5 +226,6 @@
         <file>templates/conditional/whileDo.t</file>
         <file>templates/sensors/colorReflected.t</file>
         <file>templates/sensors/colorAmbient.t</file>
+        <file>templates/colors/brown.t</file>
     </qresource>
 </RCC>
