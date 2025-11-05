@@ -77,7 +77,8 @@ void TypeVariable::constrain(const QList<QSharedPointer<TypeExpression>> &types
 
 void TypeVariable::constrainAssignment(const QSharedPointer<TypeVariable> &other
 		, const GeneralizationsTableInterface &generalizationsTable
-		, bool *wasCoercion)
+		, bool *wasCoercion
+		, bool needGeneralize)
 {
 	*wasCoercion = false;
 	QSet<QSharedPointer<TypeExpression>> result;
@@ -102,7 +103,11 @@ void TypeVariable::constrainAssignment(const QSharedPointer<TypeVariable> &other
 		if (allowedForType.isEmpty()) {
 			for (auto const &otherType : other->mAllowedTypes) {
 				if (generalizationsTable.isGeneralization(type, otherType)) {
-					result << otherType;
+					if (needGeneralize) {
+						result << otherType;
+					} else {
+						result << type;
+					}
 					*wasCoercion = true;
 				}
 			}

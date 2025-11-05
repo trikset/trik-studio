@@ -141,6 +141,11 @@ const QStringList &LuaToolbox::specialConstants() const
 	return mSpecialConstants;
 }
 
+void LuaToolbox::setNeedGeneralization(bool needGeneralization)
+{
+	mAnalyzer->setNeedGeneralization(needGeneralization);
+}
+
 void LuaToolbox::forgetIdentifier(const QString &identifier)
 {
 	mInterpreter->forgetIdentifier(identifier);

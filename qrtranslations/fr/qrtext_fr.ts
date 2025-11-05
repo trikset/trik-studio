@@ -75,7 +75,7 @@
         <translation>Le type ne peut pas être déduit, l&apos;expression peut être de types suivants : %1</translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+98"/>
         <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+193"/>
         <source>This construction is not supported by semantic analysis</source>
         <translation>Cette construction n&apos;est pas supportée par l&apos;analyse sémantique</translation>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <location filename="../../qrtext/src/lua/luaInterpreter.cpp" line="+107"/>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+185"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+193"/>
         <source>Variable %1 is read-only</source>
         <translation>Variable %1 est en lecture seule</translation>
     </message>
@@ -198,7 +198,7 @@
         <translation>Le nœud d&apos;une action sémantique &apos;field&apos; est de type inattendu</translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-265"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-273"/>
         <source>Intrinsic function used as an identifier</source>
         <translation type="unfinished"></translation>
     </message>
@@ -208,12 +208,17 @@
         <translation>Affectation erronée, seules les variables et les tableaux peuvent être affectés.</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+15"/>
         <source>Left and right operand have mismatched types.</source>
         <translation>Les operandes gauche et droite ont des types incompatibles.</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+6"/>
+        <source>An attempt will be made to implicitly cast the right operand to the type &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+32"/>
         <source>Indirect function calls are not supported</source>
         <translation>Appels de fonction indirects ne sont pas supportés</translation>
     </message>

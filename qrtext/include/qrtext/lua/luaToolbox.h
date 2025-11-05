@@ -98,6 +98,8 @@ public:
 
 	const QStringList &specialConstants() const override;
 
+	void setNeedGeneralization(bool needGeneralization) override;
+
 	/// Reintroduced method from DebuggerInterface, returns value of identifier with given name.
 	template<typename T>
 	T value(const QString &identifier) const

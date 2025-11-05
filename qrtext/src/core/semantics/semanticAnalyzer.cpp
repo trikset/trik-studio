@@ -112,6 +112,7 @@ QMap<QString, QSharedPointer<types::TypeExpression> > SemanticAnalyzer::variable
 
 void SemanticAnalyzer::clear()
 {
+	mNeedGeneralization = true;
 	mTypes.clear();
 	mIdentifierDeclarations.clear();
 }
@@ -180,6 +181,11 @@ void SemanticAnalyzer::constrain(QSharedPointer<ast::Node> const &operation
 void SemanticAnalyzer::reportError(QSharedPointer<ast::Node> const &node, const QString &errorMessage)
 {
 	mErrors << Error(node->start(), errorMessage, ErrorType::semanticError, Severity::error);
+}
+
+void SemanticAnalyzer::reportWarning(QSharedPointer<ast::Node> const &node, const QString &warningMessage)
+{
+	mErrors << Error(node->start(), warningMessage, ErrorType::semanticError, Severity::warning);
 }
 
 bool SemanticAnalyzer::hasDeclaration(const QString &identifierName) const

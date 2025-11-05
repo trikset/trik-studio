@@ -58,7 +58,7 @@
         <translation>Не могу вывести тип, это выражение может быть следующих типов: %1</translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+104"/>
         <source>Type mismatch.</source>
         <translation>Несоответствие типов.</translation>
     </message>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <location line="-310"/>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+378"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+386"/>
         <source>Variable %1 is read-only</source>
         <translation>Переменная %1 только для чтения</translation>
     </message>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <location filename="../../qrtext/src/core/semantics/semanticAnalyzer.cpp" line="-6"/>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-185"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-193"/>
         <source>This construction is not supported by semantic analysis</source>
         <translation>Конструкция не поддерживается семантическим анализатором</translation>
     </message>
@@ -164,12 +164,17 @@
         <translation>Неправильное присваивание, присваивать можно только переменным и таблицам.</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+15"/>
         <source>Left and right operand have mismatched types.</source>
         <translation>Левый и правый операнд имеют несовпадающие типы.</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+6"/>
+        <source>An attempt will be made to implicitly cast the right operand to the type &apos;%1&apos;</source>
+        <translation>Будет предпринята попытка неявно привести правый операнд к типу &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location line="+32"/>
         <source>Indirect function calls are not supported</source>
         <translation>Непрямые вызовы функций не поддержаны</translation>
     </message>

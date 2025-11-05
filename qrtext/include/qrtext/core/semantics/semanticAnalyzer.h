@@ -97,6 +97,8 @@ public:
 	/// types of identifiers declared there.
 	void forget(QSharedPointer<ast::Node> const &root);
 
+	void setNeedGeneralization(bool needGeneralization) { mNeedGeneralization = needGeneralization; }
+
 protected:
 	/// Assigns given type to given expression.
 	void assign(QSharedPointer<ast::Node> const &expression, const QSharedPointer<types::TypeExpression> &type);
@@ -112,6 +114,8 @@ protected:
 
 	/// Reports given semantic error on a given node.
 	void reportError(QSharedPointer<ast::Node> const &node, const QString &errorMessage);
+
+	void reportWarning(QSharedPointer<ast::Node> const &node, const QString &warningMessage);
 
 	/// Returns true, if given identifier was declared (or seen before).
 	bool hasDeclaration(const QString &identifierName) const;
@@ -134,6 +138,8 @@ protected:
 	/// Mark current inferred types as dirty (for example, when type of a variable was changed by generalization)
 	/// and request another pass on AST to recheck type constraints.
 	void requestRecheck();
+
+	bool needGeneralization() const { return mNeedGeneralization; }
 
 private:
 	/// Collects type information on a subtree.
@@ -169,6 +175,8 @@ private:
 
 	/// True when we need to traverse AST and check type constraints again.
 	bool mRecheckNeeded = true;
+
+	bool mNeedGeneralization = true;
 };
 
 }
