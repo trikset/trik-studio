@@ -73,7 +73,7 @@
     </message>
     <message>
         <location line="-310"/>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+386"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+387"/>
         <source>Variable %1 is read-only</source>
         <translation>Переменная %1 только для чтения</translation>
     </message>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <location filename="../../qrtext/src/core/semantics/semanticAnalyzer.cpp" line="-6"/>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-193"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-194"/>
         <source>This construction is not supported by semantic analysis</source>
         <translation>Конструкция не поддерживается семантическим анализатором</translation>
     </message>
@@ -174,7 +174,7 @@
         <translation>Будет предпринята попытка неявно привести правый операнд к типу &apos;%1&apos;</translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+33"/>
         <source>Indirect function calls are not supported</source>
         <translation>Непрямые вызовы функций не поддержаны</translation>
     </message>

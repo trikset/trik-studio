@@ -298,7 +298,8 @@ void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::No
 			if (!needGeneralize) {
 				const auto typeName = lhsType->toString();
 				reportWarning(operation,
-					QObject::tr("An attempt will be made to implicitly cast the right operand to the type '%1'").arg(typeName));
+					QObject::tr("An attempt will be made to implicitly"
+						    " cast the right operand to the type '%1'").arg(typeName));
 				return;
 			}
 			if (lhs->is<ast::IndexingExpression>()) {

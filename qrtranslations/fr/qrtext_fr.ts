@@ -87,7 +87,7 @@
     </message>
     <message>
         <location filename="../../qrtext/src/lua/luaInterpreter.cpp" line="+107"/>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+193"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+194"/>
         <source>Variable %1 is read-only</source>
         <translation>Variable %1 est en lecture seule</translation>
     </message>
@@ -198,7 +198,7 @@
         <translation>Le nœud d&apos;une action sémantique &apos;field&apos; est de type inattendu</translation>
     </message>
     <message>
-        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-273"/>
+        <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-274"/>
         <source>Intrinsic function used as an identifier</source>
         <translation type="unfinished"></translation>
     </message>
@@ -218,7 +218,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+32"/>
+        <location line="+33"/>
         <source>Indirect function calls are not supported</source>
         <translation>Appels de fonction indirects ne sont pas supportés</translation>
     </message>
