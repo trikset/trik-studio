@@ -742,7 +742,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &no
 			writeTemplate = mAdditionalCode[node->variable().data()].last();
 			mAdditionalCode[node->variable().data()].pop_back();
 		}
-    
+
 		const auto indexerType = typeNames[typeOf(node->variable())];
 		writeTemplate.replace("@@EV3_TYPE@@", indexerType);
 		QString value = castTo(typeOf(node->variable()), node->value());
