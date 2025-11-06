@@ -586,7 +586,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitializa
 		, const QSharedPointer<qrtext::core::ast::Node> &parent)
 {
 	QString value;
-	const auto tableType = mTextLanguage.type(parent);
+	const auto &tableType = mTextLanguage.type(parent);
 	QString indexerType = typeNames[Ev3RbfType::data32];
 	if (const auto *table = dynamic_cast<qrtext::lua::types::Table *>(tableType.data())) {
 		const auto ev3TableType = toEv3Type(table->elementType());
@@ -598,7 +598,8 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitializa
 
 	const QString initializer = readTemplate("writeIndexer.t")
 			.replace("@@INDEX@@", node->key() ? popResult(node->key()) : QString::number(++mTableInitializersCount))
-			.replace("@@VALUE@@", value)
+
+.replace("@@VALUE@@", value)
 			.replace("@@EV3_TYPE@@", indexerType);
 	pushResult(node, initializer, QString());
 }
@@ -742,7 +743,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &no
 			writeTemplate = mAdditionalCode[node->variable().data()].last();
 			mAdditionalCode[node->variable().data()].pop_back();
 		}
-
+    
 		const auto indexerType = typeNames[typeOf(node->variable())];
 		writeTemplate.replace("@@EV3_TYPE@@", indexerType);
 		QString value = castTo(typeOf(node->variable()), node->value());
