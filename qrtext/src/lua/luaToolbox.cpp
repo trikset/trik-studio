@@ -64,7 +64,7 @@ QSharedPointer<Node> const &LuaToolbox::parse(const qReal::Id &id, const QString
 
 		ast = mParser->parse(tokenStream, mLexer->userFriendlyTokenNames());
 
-		if (mErrors.isEmpty()) {
+		if (!hasErrors()) {
 			mAnalyzer->forget(mAstRoots[id][propertyName]);
 			mAstRoots[id][propertyName] = ast;
 		}
@@ -74,11 +74,11 @@ QSharedPointer<Node> const &LuaToolbox::parse(const qReal::Id &id, const QString
 		ast = mAstRoots[id][propertyName];
 	}
 
-	if (mErrors.isEmpty()) {
+	if (!hasErrors()) {
 		mAnalyzer->analyze(ast);
 	}
 
-	if (!mErrors.isEmpty()) {
+	if (hasErrors()) {
 		mParsedCache[id].remove(propertyName);
 		reportErrors();
 	}
@@ -96,9 +96,19 @@ QSharedPointer<qrtext::core::types::TypeExpression> LuaToolbox::type(QSharedPoin
 	return mAnalyzer->type(expression);
 }
 
-QList<Error> const &LuaToolbox::errors() const
+QList<Error> const &LuaToolbox::diagnosticMessages() const
 {
 	return mErrors;
+}
+
+bool LuaToolbox::hasErrors() const
+{
+	for (auto &&error: mErrors) {
+		if (error.severity() != Severity::warning) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void LuaToolbox::addIntrinsicFunction(const QString &name
@@ -139,6 +149,11 @@ const QStringList &LuaToolbox::specialIdentifiers() const
 const QStringList &LuaToolbox::specialConstants() const
 {
 	return mSpecialConstants;
+}
+
+void LuaToolbox::setNeedGeneralization(bool needGeneralization)
+{
+	mAnalyzer->setNeedGeneralization(needGeneralization);
 }
 
 void LuaToolbox::forgetIdentifier(const QString &identifier)
@@ -194,14 +209,14 @@ bool LuaToolbox::isGeneralization(const QSharedPointer<qrtext::core::types::Type
 
 void LuaToolbox::reportErrors()
 {
-	for (const qrtext::core::Error &error : mErrors) {
+	for (const qrtext::core::Error &error : qAsConst(mErrors)) {
 		if (error.severity() == Severity::internalError) {
 			QLOG_ERROR() << QString("Parser internal error at %1:%2 when parsing %3:%4: %5")
-					.arg(error.connection().line())
-					.arg(error.connection().column())
-					.arg(error.connection().id().toString())
-					.arg(error.connection().propertyName())
-					.arg(error.errorMessage());
+					.arg(QString::number(error.connection().line())
+					, QString::number(error.connection().column())
+					, error.connection().id().toString()
+					, error.connection().propertyName()
+					, error.errorMessage());
 		}
 	}
 }

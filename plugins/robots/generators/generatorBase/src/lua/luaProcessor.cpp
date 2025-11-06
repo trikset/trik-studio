@@ -60,8 +60,10 @@ QSharedPointer<qrtext::core::ast::Node> LuaProcessor::parse(const QString &data
 		, const QString &propertyName) const
 {
 	const QSharedPointer<qrtext::core::ast::Node> tree = mTextLanguage.parse(id, propertyName, data);
-	if (!mTextLanguage.errors().isEmpty()) {
+	if (!mTextLanguage.diagnosticMessages().isEmpty()) {
 		mParserErrorReporter.reportErrors(id, propertyName);
+	}
+	if (mTextLanguage.hasErrors()) {
 		return qrtext::wrap(nullptr);
 	}
 

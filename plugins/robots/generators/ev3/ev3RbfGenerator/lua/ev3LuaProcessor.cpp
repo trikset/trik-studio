@@ -57,6 +57,7 @@ QString Ev3LuaProcessor::translate(const QString &data
 		return QString();
 	}
 
+	mTextLanguage.setNeedGeneralization(false);
 	const QSharedPointer<qrtext::core::ast::Node> tree = parse(data, id, propertyName);
 	mPrinter->configure(reservedVariablesConverter);
 	const QString result = mPrinter->print(tree, id);

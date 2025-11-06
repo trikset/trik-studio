@@ -114,7 +114,7 @@ void LuaSemanticAnalyzer::checkReservedIdentifiersUsage(const QSharedPointer<cor
 		}
 	}
 
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		if (!child.isNull()) {
 			checkReservedIdentifiersUsage(child, node);
 		}
@@ -289,11 +289,19 @@ void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::No
 		return;
 	}
 
-	lhsType->constrainAssignment(rhsType, generalizationsTable(), &wasCoercion);
+	const auto needGeneralize = needGeneralization();
+	lhsType->constrainAssignment(rhsType, generalizationsTable(), &wasCoercion, needGeneralize);
 	if (lhsType->isEmpty()) {
 		reportError(operation, QObject::tr("Left and right operand have mismatched types."));
 	} else {
 		if (wasCoercion) {
+			if (!needGeneralize) {
+				const auto typeName = lhsType->toString();
+				reportWarning(operation,
+					QObject::tr("An attempt will be made to implicitly"
+						    " cast the right operand to the type '%1'").arg(typeName));
+				return;
+			}
 			if (lhs->is<ast::IndexingExpression>()) {
 				// We need to coerce table itself.
 				const auto table = as<ast::IndexingExpression>(lhs)->table();
@@ -308,7 +316,8 @@ void LuaSemanticAnalyzer::constrainAssignment(const QSharedPointer<core::ast::No
 					tableType->constrainAssignment(
 							tableTypePattern
 							, generalizationsTable()
-							, &wasCoercion);
+							, &wasCoercion
+							, needGeneralize);
 				}
 			}
 
@@ -356,7 +365,7 @@ void LuaSemanticAnalyzer::analyzeFunctionCall(const QSharedPointer<core::ast::No
 
 void LuaSemanticAnalyzer::checkForUndeclaredIdentifiers(const QSharedPointer<core::ast::Node> &node)
 {
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		if (!child.isNull()) {
 			checkForUndeclaredIdentifiers(child);
 		}
@@ -386,8 +395,8 @@ bool LuaSemanticAnalyzer::checkForReadOnlyVariables(const QSharedPointer<core::a
 QMap<QString, QSharedPointer<types::TypeExpression>> LuaSemanticAnalyzer::variableTypes() const
 {
 	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> result = SemanticAnalyzer::variableTypes();
-	for (const QString &identifier : mIntrinsicFunctions.keys()) {
-		result.remove(identifier);
+	for (auto it = mIntrinsicFunctions.cbegin(), end = mIntrinsicFunctions.cend(); it != end; ++it) {
+		result.remove(it.key());
 	}
 
 	return result;
