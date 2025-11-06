@@ -75,7 +75,7 @@
         <translation>Le type ne peut pas être déduit, l&apos;expression peut être de types suivants : %1</translation>
     </message>
     <message>
-        <location line="+98"/>
+        <location line="+99"/>
         <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="+193"/>
         <source>This construction is not supported by semantic analysis</source>
         <translation>Cette construction n&apos;est pas supportée par l&apos;analyse sémantique</translation>

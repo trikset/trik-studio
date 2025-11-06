@@ -58,7 +58,7 @@
         <translation>Не могу вывести тип, это выражение может быть следующих типов: %1</translation>
     </message>
     <message>
-        <location line="+104"/>
+        <location line="+105"/>
         <source>Type mismatch.</source>
         <translation>Несоответствие типов.</translation>
     </message>

@@ -114,7 +114,7 @@ void LuaSemanticAnalyzer::checkReservedIdentifiersUsage(const QSharedPointer<cor
 		}
 	}
 
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		if (!child.isNull()) {
 			checkReservedIdentifiersUsage(child, node);
 		}
@@ -365,7 +365,7 @@ void LuaSemanticAnalyzer::analyzeFunctionCall(const QSharedPointer<core::ast::No
 
 void LuaSemanticAnalyzer::checkForUndeclaredIdentifiers(const QSharedPointer<core::ast::Node> &node)
 {
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		if (!child.isNull()) {
 			checkForUndeclaredIdentifiers(child);
 		}
@@ -395,8 +395,8 @@ bool LuaSemanticAnalyzer::checkForReadOnlyVariables(const QSharedPointer<core::a
 QMap<QString, QSharedPointer<types::TypeExpression>> LuaSemanticAnalyzer::variableTypes() const
 {
 	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> result = SemanticAnalyzer::variableTypes();
-	for (const QString &identifier : mIntrinsicFunctions.keys()) {
-		result.remove(identifier);
+	for (auto it = mIntrinsicFunctions.cbegin(), end = mIntrinsicFunctions.cend(); it != end; ++it) {
+		result.remove(it.key());
 	}
 
 	return result;

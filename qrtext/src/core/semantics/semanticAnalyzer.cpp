@@ -49,7 +49,7 @@ QSharedPointer<ast::Node> SemanticAnalyzer::analyze(QSharedPointer<ast::Node> co
 
 void SemanticAnalyzer::collect(QSharedPointer<ast::Node> const &node)
 {
-	for (const auto &child : node->children()) {
+	for (auto &&child : node->children()) {
 		if (!child.isNull()) {
 			collect(child);
 		}
@@ -103,8 +103,8 @@ QStringList SemanticAnalyzer::identifiers() const
 QMap<QString, QSharedPointer<types::TypeExpression> > SemanticAnalyzer::variableTypes() const
 {
 	QMap<QString, QSharedPointer<qrtext::core::types::TypeExpression>> result;
-	for (const QString &identifier : mIdentifierDeclarations.keys()) {
-		result[identifier] = type(mIdentifierDeclarations[identifier]);
+	for (auto it = mIdentifierDeclarations.begin(), end = mIdentifierDeclarations.end(); it != end; ++it) {
+		result[it.key()] = type(it.value());
 	}
 
 	return result;
@@ -123,14 +123,15 @@ void SemanticAnalyzer::forget(const QSharedPointer<ast::Node> &root)
 		return;
 	}
 
-	if (!mIdentifierDeclarations.values().contains(root)) {
+	const auto values = mIdentifierDeclarations.values();
+	if (!values.contains(root)) {
 		const auto expression = root.dynamicCast<ast::Expression>();
 		if (expression) {
 			mTypes.remove(expression);
 		}
 	}
 
-	for (const auto &child : root->children()) {
+	for (auto &&child : root->children()) {
 		if (!child.isNull()) {
 			forget(child);
 		}

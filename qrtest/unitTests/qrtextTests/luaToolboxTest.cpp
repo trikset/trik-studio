@@ -29,6 +29,8 @@ void LuaToolboxTest::SetUp()
 	mToolbox.reset(new LuaToolbox());
 }
 
+// clazy:excludeall=returning-void-expression
+
 TEST_F(LuaToolboxTest, sanityCheck)
 {
 	qReal::Id const testId = qReal::Id("1", "2", "3", "test");
@@ -178,3 +180,4 @@ TEST_F(LuaToolboxTest, twoFunctions)
 	mToolbox->interpret<int>("cos(1)");
 	ASSERT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 }
+// clazy:enable
