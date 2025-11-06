@@ -35,7 +35,7 @@ public:
 	T interpret(const qReal::Id &id, const QString &propertyName, const QString &code)
 	{
 		const auto &root = parse(id, propertyName, code);
-		if (errors().isEmpty()) {
+		if (!hasErrors()) {
 			return interpret(root).value<T>();
 		} else {
 			return {};
@@ -68,7 +68,9 @@ public:
 			const QSharedPointer<core::ast::Node> &expression) const = 0;
 
 	/// Returns list of errors that were reported during parsing or interpretation.
-	virtual QList<core::Error> const &errors() const = 0;
+	virtual QList<core::Error> const &diagnosticMessages() const = 0;
+
+	virtual bool hasErrors() const = 0;
 
 	/// Register intrinsic function.
 	/// @param name - name of a function.

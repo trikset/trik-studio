@@ -34,7 +34,7 @@ TEST_F(LuaToolboxTest, sanityCheck)
 	qReal::Id const testId = qReal::Id("1", "2", "3", "test");
 	int result = mToolbox->interpret<int>(testId, "test", "123");
 	EXPECT_EQ(123, result);
-	EXPECT_TRUE(mToolbox->errors().isEmpty());
+	EXPECT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 	EXPECT_TRUE(mToolbox->ast(testId, "test")->is<ast::IntegerNumber>());
 	EXPECT_TRUE(mToolbox->type(mToolbox->ast(testId, "test"))->is<types::Integer>());
 }
@@ -44,7 +44,7 @@ TEST_F(LuaToolboxTest, easyTableInitializationSyntax)
 	qReal::Id const testId = qReal::Id("1", "2", "3", "test");
 	QStringList result = mToolbox->interpret<QStringList>(testId, "test", "'M1', 'M2', 'M3'");
 	ASSERT_EQ(3, result.size());
-	EXPECT_TRUE(mToolbox->errors().isEmpty());
+	EXPECT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 
 	EXPECT_EQ("M1", result[0]);
 	EXPECT_EQ("M2", result[1]);
@@ -60,7 +60,7 @@ TEST_F(LuaToolboxTest, intrinsicFunction)
 	qReal::Id const testId = qReal::Id("1", "2", "3", "test");
 
 	auto result = mToolbox->interpret<int>(testId, "test", "f(1)");
-	EXPECT_TRUE(mToolbox->errors().isEmpty());
+	EXPECT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 
 	EXPECT_EQ(3, result);
 }
@@ -75,13 +75,13 @@ TEST_F(LuaToolboxTest, intrinsicFunctionAsIdentifier)
 
 	mToolbox->interpret<int>(testId, "test", "f = 1");
 
-	EXPECT_EQ(2, mToolbox->errors().size());
+	EXPECT_EQ(2, mToolbox->diagnosticMessages().size());
 }
 
 TEST_F(LuaToolboxTest, errorProcessingSanityCheck)
 {
 	mToolbox->interpret<int>("true ||| false");
-	EXPECT_FALSE(mToolbox->errors().isEmpty());
+	EXPECT_FALSE(mToolbox->diagnosticMessages().isEmpty());
 }
 
 TEST_F(LuaToolboxTest, tables)
@@ -89,11 +89,11 @@ TEST_F(LuaToolboxTest, tables)
 	mToolbox->interpret<int>("a = {10; 15}");
 
 	int result = mToolbox->interpret<int>("a[0]");
-	EXPECT_TRUE(mToolbox->errors().isEmpty());
+	EXPECT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 	EXPECT_EQ(10, result);
 
 	result = mToolbox->interpret<int>("a[1]");
-	EXPECT_TRUE(mToolbox->errors().isEmpty());
+	EXPECT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 	EXPECT_EQ(15, result);
 }
 
@@ -101,7 +101,7 @@ TEST_F(LuaToolboxTest, concatenation)
 {
 	mToolbox->interpret<int>("s = \"a = \" .. \"1\"");
 	auto result = mToolbox->interpret<QString>("s");
-	ASSERT_TRUE(mToolbox->errors().isEmpty());
+	ASSERT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 	EXPECT_EQ("a = 1", result);
 }
 
@@ -138,7 +138,7 @@ TEST_F(LuaToolboxTest, integerDivision)
 {
 	mToolbox->interpret<int>("s = 5 // 2");
 	auto result = mToolbox->interpret<int>("s");
-	ASSERT_TRUE(mToolbox->errors().isEmpty());
+	ASSERT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 	EXPECT_EQ(2, result);
 }
 
@@ -146,7 +146,7 @@ TEST_F(LuaToolboxTest, twoDTables)
 {
 	mToolbox->interpret<int>("a = {{1}}");
 	int result = mToolbox->interpret<int>("a[0][0]");
-	ASSERT_TRUE(mToolbox->errors().isEmpty());
+	ASSERT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 	EXPECT_EQ(1, result);
 }
 
@@ -176,5 +176,5 @@ TEST_F(LuaToolboxTest, twoFunctions)
 
 	mToolbox->interpret<int>("cos(1)");
 	mToolbox->interpret<int>("cos(1)");
-	ASSERT_TRUE(mToolbox->errors().isEmpty());
+	ASSERT_TRUE(mToolbox->diagnosticMessages().isEmpty());
 }

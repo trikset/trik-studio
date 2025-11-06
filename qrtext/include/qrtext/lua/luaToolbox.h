@@ -83,7 +83,9 @@ public:
 
 	QSharedPointer<core::types::TypeExpression> type(const QSharedPointer<core::ast::Node> &expression) const override;
 
-	QList<core::Error> const &errors() const override;
+	QList<core::Error> const &diagnosticMessages() const override;
+
+	bool hasErrors() const override;
 
 	void addIntrinsicFunction(const QString &name
 			, core::types::TypeExpression * const returnType
