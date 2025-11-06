@@ -58,24 +58,24 @@ endLabel:
 // utils functions block start
 subcall motors_overflow_check_EV3_KERNEL_util
 {
-	IN_8 src
-	OUT_8 dst
+	IN_32 src
+	OUT_32 dst
 
-	MOVE8_8(src,dst)
+	MOVE32_32(src,dst)
 
-	DATA8 lowerBound
-	MOVE8_8(-100,lowerBound)
-	DATA8 upperBound
-	MOVE8_8(100,upperBound)
+	DATA32 lowerBound
+	MOVE32_32(-100,lowerBound)
+	DATA32 upperBound
+	MOVE32_32(100,upperBound)
 
-	JR_LT8(src, 0, lowThenZero)
-	JR_LT8(src, upperBound, endLabel)
-	MOVE8_8(upperBound,dst)
+	JR_LT32(src, 0, lowThenZero)
+	JR_LT32(src, upperBound, endLabel)
+	MOVE32_32(upperBound,dst)
 	JR(endLabel)
 
 lowThenZero:
-	JR_GTEQ8(src, lowerBound, endLabel)
-	MOVE8_8(lowerBound,dst)
+	JR_GTEQ32(src, lowerBound, endLabel)
+	MOVE32_32(lowerBound,dst)
 
 endLabel:
 }
