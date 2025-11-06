@@ -598,8 +598,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitializa
 
 	const QString initializer = readTemplate("writeIndexer.t")
 			.replace("@@INDEX@@", node->key() ? popResult(node->key()) : QString::number(++mTableInitializersCount))
-
-.replace("@@VALUE@@", value)
+			.replace("@@VALUE@@", value)
 			.replace("@@EV3_TYPE@@", indexerType);
 	pushResult(node, initializer, QString());
 }
