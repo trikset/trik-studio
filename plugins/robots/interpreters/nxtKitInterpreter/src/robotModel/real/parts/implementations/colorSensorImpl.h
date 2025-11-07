@@ -35,12 +35,12 @@ public:
 	void read();
 	void doConfiguration();
 
-signals:
+Q_SIGNALS:
 	void newData(int reading);
 	void configurationCompleted(bool success);
 	void failure();
 
-private slots:
+private Q_SLOTS:
 	void sensorSpecificProcessResponse(const QByteArray &reading);
 
 private:

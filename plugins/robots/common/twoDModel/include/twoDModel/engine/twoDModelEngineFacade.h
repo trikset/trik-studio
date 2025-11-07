@@ -64,7 +64,7 @@ public:
 
 	TwoDModelEngineInterface &engine();
 
-public slots:
+public Q_SLOTS:
 	void onStartInterpretation() override;
 	void onStopInterpretation(qReal::interpretation::StopReason reason) override;
 

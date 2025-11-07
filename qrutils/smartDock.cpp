@@ -73,7 +73,7 @@ void SmartDock::switchToDocked()
 	switchToDockedQuietly();
 	show();
 	checkCentralWidget();
-	emit dockedChanged(true);
+	Q_EMIT dockedChanged(true);
 }
 
 void SmartDock::switchToDockedQuietly()
@@ -94,7 +94,7 @@ void SmartDock::switchToFloating()
 	switchToFloatingQuietly();
 	mDialog->show();
 	checkCentralWidget();
-	emit dockedChanged(false);
+	Q_EMIT dockedChanged(false);
 }
 
 void SmartDock::switchToFloatingQuietly()

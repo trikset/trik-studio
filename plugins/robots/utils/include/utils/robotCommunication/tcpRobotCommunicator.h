@@ -55,7 +55,7 @@ public:
 
 	void disconnect() override;
 
-private slots:
+private Q_SLOTS:
 	/// Processes message from robot --- classifies it as info, error or text from stdout.
 	void onMessageFromRobot(const MessageKind &messageKind, const QString &message);
 

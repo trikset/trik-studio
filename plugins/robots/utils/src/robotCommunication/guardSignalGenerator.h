@@ -26,15 +26,15 @@ class GuardSignalGenerator : public QObject
 {
 	Q_OBJECT
 
-signals:
+Q_SIGNALS:
 	/// Emitted when somebody calls onTrigger() slot.
 	void guardSatisfied();
 
-public slots:
+public Q_SLOTS:
 	/// Emit guardSatisfied() signal.
 	void onTrigger()
 	{
-		emit guardSatisfied();
+		Q_EMIT guardSatisfied();
 	}
 };
 

@@ -48,7 +48,7 @@ void I2CCommunicator::sendI2C(QObject *addressee
 
 	if (!waitForI2CBytes(responseSize, port)) {
 		/// @todo: Violates incapsuation
-		emit mRobotCommunicator.response(addressee, QByteArray());
+		Q_EMIT mRobotCommunicator.response(addressee, QByteArray());
 		return;
 	}
 
@@ -67,12 +67,12 @@ void I2CCommunicator::sendI2C(QObject *addressee
 
 		QByteArray decodedResult = result.right(result.length() - 5);
 		/// @todo: Violates incapsuation
-		emit mRobotCommunicator.response(addressee, decodedResult);
+		Q_EMIT mRobotCommunicator.response(addressee, decodedResult);
 	} else {
 		/// @todo Correctly process empty required response
 		QByteArray result(1, 0);
 		/// @todo: Violates incapsuation
-		emit mRobotCommunicator.response(addressee, result);
+		Q_EMIT mRobotCommunicator.response(addressee, result);
 	}
 }
 

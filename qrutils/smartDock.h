@@ -51,7 +51,7 @@ public:
 	/// Hides close button leaving dock widget closable.
 	static void hideCloseButton(QDockWidget *dock);
 
-public slots:
+public Q_SLOTS:
 	/// Embeds inner widget into this dock widget instance, docks it to some panel.
 	void switchToDocked();
 

@@ -76,7 +76,7 @@ public:
 
 	void onCurrentDiagramChanged(const qReal::TabInfo &info) override;
 
-private slots:
+private Q_SLOTS:
 	/// Uploads current program to a quadcopter.
 	void uploadProgram();
 

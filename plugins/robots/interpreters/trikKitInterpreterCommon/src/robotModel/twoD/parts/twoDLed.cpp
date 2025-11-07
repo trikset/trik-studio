@@ -25,7 +25,7 @@ TwoDLed::TwoDLed(const DeviceInfo &info
 	: robotModel::parts::TrikLed(info, port)
 	, mEngine(engine)
 {
-	connect(this, &TwoDLed::colorChanged, this, [=](const QColor &color) { emit propertyChanged("color", color); });
+	connect(this, &TwoDLed::colorChanged, this, [=](const QColor &color) { Q_EMIT propertyChanged("color", color); });
 }
 
 QColor TwoDLed::color() const
@@ -40,7 +40,7 @@ void TwoDLed::setColor(const QColor &color)
 	auto display = dynamic_cast<TrikDisplayWidget *>(mEngine.display());
 	Q_ASSERT(display);
 	display->setLedColor(color);
-	emit colorChanged(color);
+	Q_EMIT colorChanged(color);
 }
 
 void TwoDLed::setColor(const QString &color)

@@ -50,7 +50,7 @@ public:
 	void deserialize(const QDomElement &element);
 public Q_SLOTS:
 	void onSizeUpdated(const QSizeF size);
-signals:
+Q_SIGNALS:
 	/// Emitted when new device is added to configuration.
 	/// @param port - port where new device is added.
 	/// @param isLoading - true, if we are loading configuration now, so shall not save this device in a diagram.

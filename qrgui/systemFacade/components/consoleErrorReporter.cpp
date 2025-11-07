@@ -24,14 +24,14 @@ void ConsoleErrorReporter::addInformation(const QString &message, const Id &posi
 {
 	Q_UNUSED(position)
 	std::cerr << qUtf8Printable(QObject::tr("Information:")) << qUtf8Printable(message) << std::endl;
-	emit informationAdded(message, position);
+	Q_EMIT informationAdded(message, position);
 }
 
 void ConsoleErrorReporter::addWarning(const QString &message, const Id &position)
 {
 	Q_UNUSED(position)
 	std::cerr << qUtf8Printable(QObject::tr("Warning:")) << qUtf8Printable(message) << std::endl;
-	emit warningAdded(message, position);
+	Q_EMIT warningAdded(message, position);
 }
 
 void ConsoleErrorReporter::addError(const QString &message, const Id &position)
@@ -39,7 +39,7 @@ void ConsoleErrorReporter::addError(const QString &message, const Id &position)
 	Q_UNUSED(position)
 	std::cerr << qUtf8Printable(QObject::tr("Error:")) << qUtf8Printable(message) << std::endl;
 	mWereErrors = true;
-	emit errorAdded(message, position);
+	Q_EMIT errorAdded(message, position);
 }
 
 void ConsoleErrorReporter::addCritical(const QString &message, const Id &position)
@@ -47,12 +47,12 @@ void ConsoleErrorReporter::addCritical(const QString &message, const Id &positio
 	Q_UNUSED(position)
 	std::cerr << qUtf8Printable(QObject::tr("Critical:")) << qUtf8Printable(message) << std::endl;
 	mWereErrors = true;
-	emit criticalAdded(message, position);
+	Q_EMIT criticalAdded(message, position);
 }
 
 void ConsoleErrorReporter::addLog(const QString &message)
 {
-	emit logAdded(message);
+	Q_EMIT logAdded(message);
 }
 
 void ConsoleErrorReporter::sendBubblingMessage(const QString &message, int duration, QWidget *parent)

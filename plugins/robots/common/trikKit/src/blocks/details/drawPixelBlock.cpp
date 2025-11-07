@@ -36,6 +36,6 @@ void DrawPixelBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 			trikDisplay->redraw();
 		}
 
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

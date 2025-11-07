@@ -54,7 +54,7 @@ public:
 	QString getText() const;
 	void clearText();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when the text in the text field is modified.
 	/// @param text A ready for matching regular expression.
 	void textChanged(const QRegExp &text);

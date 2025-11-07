@@ -68,7 +68,7 @@ public:
 
 	QDir getCurrentDir() const;
 
-public slots:
+public Q_SLOTS:
 	void configure(const QString &, const QString &) override {}
 	void playSound(const QString &) override {}
 	void playTone(int, int msDuration) override;
@@ -109,7 +109,7 @@ public slots:
 
 	void processSensors(bool isRunning = true);
 
-signals:
+Q_SIGNALS:
 	void error(const QString &msg);
 	void warning(const QString &msg);
 	void log(const QString &msg);

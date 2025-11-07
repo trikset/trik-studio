@@ -34,7 +34,7 @@ public:
 	/// Returns current selected robot model.
 	virtual RobotModelInterface &model() const = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted every time when user selected other robot model.
 	/// @param model - newly selected robot model.
 	void robotModelChanged(RobotModelInterface &model);

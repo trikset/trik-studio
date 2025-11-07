@@ -198,7 +198,7 @@ void ExploserView::addExplosionActionTriggered()
 
 void ExploserView::goToActionTriggered()
 {
-	emit goTo(static_cast<QAction *>(sender())->data().value<Id>());
+	Q_EMIT goTo(static_cast<QAction *>(sender())->data().value<Id>());
 }
 
 void ExploserView::removeExplosionActionTriggered()
@@ -214,7 +214,7 @@ void ExploserView::expandExplosionActionTriggered()
 {
 	QAction *action = static_cast<QAction *>(sender());
 	const Id elem = action->data().value<Id>();
-	emit expandElement(elem);
+	Q_EMIT expandElement(elem);
 }
 
 void ExploserView::changePropertiesActionTriggered()
@@ -251,7 +251,7 @@ void ExploserView::changeAppearanceActionTriggered()
 	const QAction * const action = static_cast<const QAction *>(sender());
 	const Id id = action->data().value<Id>();
 	const QString propertyValue = mLogicalApi.editorManagerInterface().shape(id);
-	emit openShapeEditor(id, propertyValue, &mLogicalApi.editorManagerInterface(), false);
+	Q_EMIT openShapeEditor(id, propertyValue, &mLogicalApi.editorManagerInterface(), false);
 }
 
 void ExploserView::addElementToPaletteActionTriggered()
@@ -259,5 +259,5 @@ void ExploserView::addElementToPaletteActionTriggered()
 	const QAction * const action = static_cast<const QAction *>(sender());
 	const Id id = action->data().value<Id>();
 	mLogicalApi.editorManagerInterface().resetIsHidden(id);
-	emit refreshPalette();
+	Q_EMIT refreshPalette();
 }

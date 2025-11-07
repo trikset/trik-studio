@@ -37,7 +37,7 @@ public:
 
 	void calibrate() override;
 
-public slots:
+public Q_SLOTS:
 	void onIncomingData(const QString &portName, const QVector<int> &value);
 
 private:

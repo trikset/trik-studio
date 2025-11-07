@@ -49,11 +49,11 @@ public:
 	/// Stops background polling process.
 	void suspend();
 
-public slots:
+public Q_SLOTS:
 	/// Starts background polling process.
 	void run();
 
-private slots:
+private Q_SLOTS:
 	void onTimerTimeout();
 	void onScalarSensorResponse(int reading);
 	void onVectorSensorResponse(const QVector<int> &reading);

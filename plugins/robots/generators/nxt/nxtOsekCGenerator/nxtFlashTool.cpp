@@ -34,6 +34,9 @@ using namespace qReal;
 static const quint32 lockRegionCommand = 0x2;
 static const quint32 unlockRegionCommand = 0x4;
 
+//static const quint32 lockRegionCommand   = 0x5;  // Set Lock Bit
+//static const quint32 unlockRegionCommand = 0x4;  // Clear Lock Bit
+
 NxtFlashTool::NxtFlashTool(qReal::ErrorReporterInterface &errorReporter
 		, utils::robotCommunication::RobotCommunicationThreadInterface &communicator)
 	: mErrorReporter(errorReporter)
@@ -258,7 +261,7 @@ void NxtFlashTool::nxtCompilationFinished(int exitCode, QProcess::ExitStatus exi
 	}
 
 	if (mCompileState != done) {
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 	}
 }
 
@@ -558,7 +561,7 @@ bool NxtFlashTool::uploadToBrick(const QFileInfo &fileOnHost)
 {
 	const QString executableOnHost = fileOnHost.absolutePath() + "/" + fileOnHost.completeBaseName() + ".rxe";
 	if (!mCommunicator.connect()) {
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 		return false;
 	}
 
@@ -567,7 +570,7 @@ bool NxtFlashTool::uploadToBrick(const QFileInfo &fileOnHost)
 	QDataStream stream(&file);
 	if (!file.open(QFile::ReadOnly)) {
 		error(tr("Could not find %1. Check your program was compiled and try again.").arg(executableOnHost));
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 		return false;
 	}
 
@@ -576,32 +579,32 @@ bool NxtFlashTool::uploadToBrick(const QFileInfo &fileOnHost)
 
 	if (!deleteFileFromBrick(fileOnBrick)) {
 		error(tr("Could not delete old file. Make sure the robot is connected, turned on."));
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 		return false;
 	}
 
 	if (!createFileOnBrick(fileOnBrick, file.size(), handle)) {
 		error(tr("Could not upload program. Make sure the robot is connected, turned on and has "\
 				"enough free memory."));
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 		return false;
 	}
 
 	if (!downloadStreamToBrick(handle, stream, file.size())) {
 		error("Could not write file data to a robot.  Make sure robot is connected and turned on.");
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 		return false;
 	}
 
 	if (!closeFileOnBrick(handle)) {
 		error(tr("Could not close file on brick. Probably connection to NXT lost at "\
 				"the last stage of uploading"));
-		emit uploadingComplete(false);
+		Q_EMIT uploadingComplete(false);
 		return false;
 	}
 
 	information(tr("Uploading completed successfully"));
-	emit uploadingComplete(true);
+	Q_EMIT uploadingComplete(true);
 	return true;
 }
 

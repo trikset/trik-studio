@@ -28,15 +28,15 @@ class TEST_UTILS_EXPORT FakeSender : public QObject
 {
 	Q_OBJECT
 
-signals:
+Q_SIGNALS:
 	/// A signal that is emitted when object receives something on a "receive()" slot.
 	void send();
 
-public slots:
+public Q_SLOTS:
 	/// A slot that triggers send() signal, used to relay signal with this object as a sender.
 	void receive()
 	{
-		emit send();
+		Q_EMIT send();
 	}
 };
 

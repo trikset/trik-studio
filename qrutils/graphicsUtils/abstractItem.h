@@ -148,7 +148,7 @@ public:
 
 	QPen getStrokePen();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when QGraphicsItem has repositioned.
 	void positionChanged(const QPointF &pos);
 

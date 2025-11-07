@@ -31,7 +31,7 @@ public:
 	/// @note This object must be in GUI thread cause it may produce message boxes prompted to user.
 	bool installUsbDriver();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when drivers installion process has finished, successfully or not.
 	void installationFinished(bool success);
 

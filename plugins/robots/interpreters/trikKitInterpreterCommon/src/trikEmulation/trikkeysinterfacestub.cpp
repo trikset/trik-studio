@@ -47,7 +47,7 @@ void TrikKeysInterfaceStub::start()
 }
 
 void TrikKeysInterfaceStub::reset() {
-	emit buttonPressed(-1, -1); // hack to stop waiting
+	Q_EMIT buttonPressed(-1, -1); // hack to stop waiting
 	for (auto &&button : mButtons) {
 		button->read(); // hack to clear lastReadState
 	}
@@ -95,7 +95,7 @@ void TrikKeysInterfaceStub::handleNewData(robotParts::Button *button, int value)
 	bool previousValue = mWasPressed[code];
 	mWasPressed[code] = value;
 	if (previousValue != value) {
-		emit buttonPressed(code, value);
+		Q_EMIT buttonPressed(code, value);
 	}
 }
 

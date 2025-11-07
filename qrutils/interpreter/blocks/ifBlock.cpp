@@ -20,7 +20,7 @@ void IfBlock::run()
 {
 	const bool expressionValue = eval<bool>("Condition");
 	if (!errorsOccured()) {
-		emit done(expressionValue ? mNextBlockId : mElseBlockId);
+		Q_EMIT done(expressionValue ? mNextBlockId : mElseBlockId);
 	}
 }
 

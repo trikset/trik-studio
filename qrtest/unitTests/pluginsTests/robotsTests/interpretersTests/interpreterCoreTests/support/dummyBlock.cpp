@@ -20,7 +20,7 @@ using namespace qReal;
 
 void DummyBlock::run()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 bool DummyBlock::initNextBlocks()

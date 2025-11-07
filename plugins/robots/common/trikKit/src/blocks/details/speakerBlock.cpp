@@ -34,5 +34,5 @@ void SpeakerBlock::doJob(robotModel::parts::TrikSpeaker &speaker)
 		speaker.play(toSpeak);
 	}
 
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

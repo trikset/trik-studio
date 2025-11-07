@@ -50,7 +50,7 @@ public:
 	/// Check that server received "version" command.
 	bool versionRequestReceived() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when "run" command received.
 	void runProgramRequestReceivedSignal();
 

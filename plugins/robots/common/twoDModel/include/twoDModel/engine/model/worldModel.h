@@ -219,7 +219,7 @@ public:
 	/// Removes item with the \a id from the world model.
 	void removeItem(const QString &id);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when current metrics system conversion constant has changed.
 	void pixelsInCmChanged(qreal newValue);
 

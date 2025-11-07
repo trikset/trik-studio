@@ -484,7 +484,7 @@ void MainWindow::selectItemWithError(const Id &id)
 		graphicalId = graphicalIds.isEmpty() ? Id() : graphicalIds.at(0);
 	}
 
-	emit mFacade->events().ensureDiagramVisible();
+	Q_EMIT mFacade->events().ensureDiagramVisible();
 	selectItemOrDiagram(graphicalId);
 	setIndexesOfPropertyEditor(graphicalId);
 	centerOn(graphicalId);
@@ -1037,7 +1037,7 @@ void MainWindow::closeTab(int index)
 	} else if (auto const possibleCodeTab = dynamic_cast<text::QScintillaTextEdit *>(widget)) {
 		if (mTextManager->suggestToSaveCode(possibleCodeTab) && mTextManager->unbindCode(possibleCodeTab)) {
 			isClosed = true;
-			emit mFacade->events().codeTabClosed(QFileInfo(mTextManager->path(possibleCodeTab)));
+			Q_EMIT mFacade->events().codeTabClosed(QFileInfo(mTextManager->path(possibleCodeTab)));
 		}
 	} else {
 		QLOG_ERROR() << "Unknown type of tab " << widget->objectName();

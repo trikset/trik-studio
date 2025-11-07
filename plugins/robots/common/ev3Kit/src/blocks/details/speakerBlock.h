@@ -38,7 +38,7 @@ public:
 protected:
 	virtual int duration() = 0;
 
-private slots:
+private Q_SLOTS:
 	void timeout();
 
 private:

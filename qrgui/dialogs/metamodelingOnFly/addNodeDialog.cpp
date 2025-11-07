@@ -69,6 +69,6 @@ void AddNodeDialog::okButtonClicked()
 void AddNodeDialog::addNode()
 {
 	mEditorManagerProxy.addNodeElement(mDiagram, mNodeName, mUi->nameEdit->text(), mUi->checkBox->isChecked());
-	emit jobDone();
+	Q_EMIT jobDone();
 	done(QDialog::Accepted);
 }

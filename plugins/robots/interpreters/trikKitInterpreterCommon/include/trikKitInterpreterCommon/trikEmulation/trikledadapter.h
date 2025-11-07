@@ -29,7 +29,7 @@ public:
 
 	virtual Status status() const override { return Status::ready; }
 
-public slots:
+public Q_SLOTS:
 	virtual void red() override;
 	virtual void green() override;
 	virtual void orange() override;

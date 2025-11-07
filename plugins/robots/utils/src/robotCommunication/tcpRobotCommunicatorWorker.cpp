@@ -67,7 +67,7 @@ void TcpRobotCommunicatorWorker::uploadProgram(const QString &programName, const
 	}
 
 	mControlConnection->send("file:" + programName + ":" + programContents);
-	emit uploadProgramDone();
+	Q_EMIT uploadProgramDone();
 }
 
 void TcpRobotCommunicatorWorker::runProgram(const QString &programName)
@@ -79,7 +79,7 @@ void TcpRobotCommunicatorWorker::runProgram(const QString &programName)
 	}
 
 	mControlConnection->send("run:" + programName);
-	emit startedRunning();
+	Q_EMIT startedRunning();
 }
 
 void TcpRobotCommunicatorWorker::runDirectCommand(const QString &directCommand, bool asScript)
@@ -91,7 +91,7 @@ void TcpRobotCommunicatorWorker::runDirectCommand(const QString &directCommand, 
 
 	const QString command = asScript ? "directScript" : "direct";
 	mControlConnection->send(command + ":" + directCommand);
-	emit runDirectCommandDone();
+	Q_EMIT runDirectCommandDone();
 }
 
 void TcpRobotCommunicatorWorker::stopRobot()
@@ -102,7 +102,7 @@ void TcpRobotCommunicatorWorker::stopRobot()
 	}
 
 	mControlConnection->send("stop");
-	emit stopRobotDone();
+	Q_EMIT stopRobotDone();
 }
 
 void TcpRobotCommunicatorWorker::requestCasingVersion()
@@ -147,23 +147,23 @@ void TcpRobotCommunicatorWorker::processControlMessage(const QString &message)
 		mVersionTimer->stop();
 		const QString currentVersion = message.mid(versionMarker.length());
 		if (currentVersion != requiredVersion) {
-			emit trikRuntimeVersionError();
+			Q_EMIT trikRuntimeVersionError();
 		}
 	} else if (message.startsWith(errorMarker)) {
-		emit messageFromRobot(MessageKind::error, message.mid(errorMarker.length()));
+		Q_EMIT messageFromRobot(MessageKind::error, message.mid(errorMarker.length()));
 	} else if (message.startsWith(infoMarker)) {
-		emit messageFromRobot(MessageKind::info, message.mid(infoMarker.length()));
+		Q_EMIT messageFromRobot(MessageKind::info, message.mid(infoMarker.length()));
 	} else if (message.startsWith(printMarker)) {
-		emit messageFromRobot(MessageKind::text, message.mid(printMarker.length()));
+		Q_EMIT messageFromRobot(MessageKind::text, message.mid(printMarker.length()));
 	} else if (message.startsWith(fileContentsMarker)) {
-		emit messageFromRobot(MessageKind::fileContents, message.mid(fileContentsMarker.length()));
+		Q_EMIT messageFromRobot(MessageKind::fileContents, message.mid(fileContentsMarker.length()));
 	} else if (message.startsWith(mailMarker)) {
-		emit messageFromRobot(MessageKind::mail, message.mid(mailMarker.length()));
+		Q_EMIT messageFromRobot(MessageKind::mail, message.mid(mailMarker.length()));
 	} else if (message == "keepalive") {
 		// Just ignoring it
 	} else if (message.startsWith(configVersionMarker)) {
 		const QString configVersion = message.mid(configVersionMarker.length());
-		emit casingVersionReceived(configVersion);
+		Q_EMIT casingVersionReceived(configVersion);
 	} else {
 		QLOG_INFO() << "Incoming message of unknown type: " << message;
 	}
@@ -205,16 +205,16 @@ void TcpRobotCommunicatorWorker::handleValue(const QString &data)
 			values.push_back(value.toInt());
 		}
 
-		emit newVectorSensorData(portAndValue[0], values);
+		Q_EMIT newVectorSensorData(portAndValue[0], values);
 	} else {
-		emit newScalarSensorData(portAndValue[0], portAndValue[1].toInt());
+		Q_EMIT newScalarSensorData(portAndValue[0], portAndValue[1].toInt());
 	}
 }
 
 void TcpRobotCommunicatorWorker::onVersionTimeOut()
 {
 	mVersionTimer->stop();
-	emit trikRuntimeVersionGettingError();
+	Q_EMIT trikRuntimeVersionGettingError();
 }
 
 void TcpRobotCommunicatorWorker::versionRequest()
@@ -229,7 +229,7 @@ void TcpRobotCommunicatorWorker::connect()
 	const QHostAddress hostAddress(server);
 	if (hostAddress.isNull()) {
 		QLOG_ERROR() << "Unable to resolve host.";
-		emit connectionError(tr("Unable to resolve host."));
+		Q_EMIT connectionError(tr("Unable to resolve host."));
 		return;
 	}
 
@@ -245,9 +245,9 @@ void TcpRobotCommunicatorWorker::connect()
 	const bool result = mControlConnection->connect(hostAddress) && mTelemetryConnection->connect(hostAddress);
 	if (result) {
 		versionRequest();
-		emit connected();
+		Q_EMIT connected();
 	} else {
-		emit connectionError(tr("Connection failed. IP: %1").arg(server));
+		Q_EMIT connectionError(tr("Connection failed. IP: %1").arg(server));
 	}
 }
 
@@ -256,5 +256,5 @@ void TcpRobotCommunicatorWorker::disconnectConnection()
 	mControlConnection->disconnect();
 	mTelemetryConnection->disconnect();
 
-	emit disconnected();
+	Q_EMIT disconnected();
 }

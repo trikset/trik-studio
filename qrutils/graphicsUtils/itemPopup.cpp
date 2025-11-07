@@ -110,7 +110,7 @@ void ItemPopup::setPropertyMassively(const QString &property, const QVariant &va
 		}
 	}
 
-	emit propertyChanged(idsForExternalProcessing, property, value);
+	Q_EMIT propertyChanged(idsForExternalProcessing, property, value);
 }
 
 void ItemPopup::onMousePressedScene()

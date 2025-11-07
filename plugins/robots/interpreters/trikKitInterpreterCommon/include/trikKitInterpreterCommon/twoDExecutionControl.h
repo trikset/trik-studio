@@ -60,7 +60,7 @@ public:
 
 	int timeInterval(int packedTimeLeft, int packedTimeRight) override;
 
-public slots:
+public Q_SLOTS:
 	void reset() override;
 	void run() override;
 	void quit() override;

@@ -41,7 +41,7 @@ robotParts::MotorsAggregator *EngineCommandBlock::findMotorsAggregator() const
 
 void EngineCommandBlock::timeout()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 QList<PortInfo> EngineCommandBlock::parsePorts(ReportErrors reportErrors)

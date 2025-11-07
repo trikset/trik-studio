@@ -55,7 +55,7 @@ protected:
 	void onCurrentRobotModelChanged(kitBase::robotModel::RobotModelInterface &model) override;
 	void onCurrentDiagramChanged(const qReal::TabInfo &info) override;
 
-private slots:
+private Q_SLOTS:
 	/// Uploads and installs nxtOSEK on a robot. Requires nxt-tools.
 	void flashRobot();
 

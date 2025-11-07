@@ -57,7 +57,7 @@ public:
 	/// Calls down() with black color if \a isDown is true or up() otherwise.
 	void setDown(bool isDown);
 
-signals:
+Q_SIGNALS:
 	/// Emitted with 'true' parameter when marker activated and 'false' when it was lifted.
 	void isDownChanged(bool isDown);
 

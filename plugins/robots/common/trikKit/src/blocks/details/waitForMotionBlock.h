@@ -26,7 +26,7 @@ class WaitForMotionBlock : public kitBase::blocksBase::common::WaitForSensorBloc
 public:
 	explicit WaitForMotionBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 private:

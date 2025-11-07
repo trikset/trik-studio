@@ -65,7 +65,7 @@ public:
 	static const int autoscalingDefault = 3000;
 	static const int textUpdateDefault = 500;
 
-public slots:
+public Q_SLOTS:
 	void setTimeline(TimelineInterface &timeline);
 	void sensorsInput(const int slotIndex, const qreal value);
 	void setCurrentSensor(const int newSlotIndex);
@@ -89,7 +89,7 @@ protected:
 	void makeConnections();
 	void watchListChanged();
 
-private slots:
+private Q_SLOTS:
 	void updateValues();
 
 private:

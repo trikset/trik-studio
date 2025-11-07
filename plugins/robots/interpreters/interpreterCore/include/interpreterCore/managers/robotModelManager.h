@@ -33,7 +33,7 @@ public:
 
 	kitBase::robotModel::RobotModelInterface &model() const override;
 
-public slots:
+public Q_SLOTS:
 	/// Changes currently selected robot model and notifies all about change by robotModelChanged signal.
 	void setModel(kitBase::robotModel::RobotModelInterface * const robotModel);
 

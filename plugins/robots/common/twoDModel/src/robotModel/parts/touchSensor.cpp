@@ -29,5 +29,5 @@ TouchSensor::TouchSensor(const DeviceInfo &info
 
 void TouchSensor::read()
 {
-	emit newData(mEngine.readTouchSensor(port()));
+	Q_EMIT newData(mEngine.readTouchSensor(port()));
 }

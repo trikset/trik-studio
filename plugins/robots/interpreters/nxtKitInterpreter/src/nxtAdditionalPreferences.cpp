@@ -75,7 +75,7 @@ void NxtAdditionalPreferences::save()
 	mUi->robotImagePicker->save();
 	mUi->compilerPicker->save();
 	setTextOnGeneratorLabel();
-	emit settingsChanged();
+	Q_EMIT settingsChanged();
 }
 
 void NxtAdditionalPreferences::restoreSettings()

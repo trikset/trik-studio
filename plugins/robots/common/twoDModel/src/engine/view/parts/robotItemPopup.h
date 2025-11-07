@@ -34,7 +34,7 @@ public:
 	explicit RobotItemPopup(graphicsUtils::AbstractScene &scene, QWidget *parent = nullptr);
 	~RobotItemPopup();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user decides to follow or unfollow robot item.
 	void followingChanged(bool enabled);
 

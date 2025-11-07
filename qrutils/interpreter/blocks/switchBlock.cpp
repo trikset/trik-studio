@@ -20,9 +20,9 @@ void SwitchBlock::run()
 {
 	const QString expressionValue = eval<QString>("Expression");
 	if (mBranches.contains(expressionValue)) {
-		emit done(mBranches[expressionValue]);
+		Q_EMIT done(mBranches[expressionValue]);
 	} else {
-		emit done(mDefaultBranch);
+		Q_EMIT done(mDefaultBranch);
 	}
 }
 

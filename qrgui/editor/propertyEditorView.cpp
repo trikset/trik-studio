@@ -292,11 +292,11 @@ void PropertyEditorView::buttonClicked(QtProperty *property)
 
 	// there are only four types of buttons: shape, reference, text and directory path
 	if (name == "shape") {
-		emit shapeEditorRequested(actualIndex, role, propertyValue, false);
+		Q_EMIT shapeEditorRequested(actualIndex, role, propertyValue, false);
 	} else {
 		const QString typeName = mModel->typeName(index).toLower();
 		if (typeName == "code") {
-			emit textEditorRequested(actualIndex, role, propertyValue);
+			Q_EMIT textEditorRequested(actualIndex, role, propertyValue);
 		} else if (typeName == "directorypath") {
 			const QString startPath = propertyValue.isEmpty()
 					? QDir::homePath()
@@ -312,7 +312,7 @@ void PropertyEditorView::buttonClicked(QtProperty *property)
 					, this, tr("Select file:"), startPath);
 			mModel->setData(index, location);
 		} else {
-			emit referenceListRequested(actualIndex, typeName, propertyValue, role);
+			Q_EMIT referenceListRequested(actualIndex, typeName, propertyValue, role);
 		}
 	}
 }

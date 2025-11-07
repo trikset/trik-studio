@@ -60,11 +60,11 @@ void Updater::readAnswer()
 
 	if (!errorOutput.isEmpty()) {
 		if (errorOutput.contains("There are currently no updates available.")) {
-			emit noNewVersionAvailable();
+			Q_EMIT noNewVersionAvailable();
 		} else if (errorOutput.contains("Cannot retrieve remote tree")) {
-			emit networkError();
+			Q_EMIT networkError();
 		} else {
-			emit unidentifiedError();
+			Q_EMIT unidentifiedError();
 		}
 
 		return;
@@ -76,8 +76,8 @@ void Updater::readAnswer()
 	parser.setContent(output);
 	QLOG_INFO() << "Updater output:" << output;
 	if (!output.isEmpty() && !parser.isNull() && output.trimmed().startsWith("<")) {
-		emit newVersionAvailable();
+		Q_EMIT newVersionAvailable();
 	} else {
-		emit noNewVersionAvailable();
+		Q_EMIT noNewVersionAvailable();
 	}
 }

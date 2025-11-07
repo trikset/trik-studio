@@ -56,7 +56,7 @@ public:
 	/// Disconnects from robot.
 	virtual void disconnect() = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when TCP socket with robot was opened or failed to open.
 	void connected(bool success, const QString &errorMessage);
 

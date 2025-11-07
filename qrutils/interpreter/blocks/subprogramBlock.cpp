@@ -52,13 +52,13 @@ void SubprogramBlock::run()
 	const Id logicalDiagram = mLogicalModelApi->logicalRepoApi().outgoingExplosion(logicalId);
 	const IdList diagrams = mGraphicalModelApi->graphicalIdsByLogicalId(logicalDiagram);
 	if (!diagrams.isEmpty()) {
-		emit stepInto(diagrams[0]);
+		Q_EMIT stepInto(diagrams[0]);
 	}
 }
 
 void SubprogramBlock::finishedSteppingInto()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 QList<SubprogramBlock::DynamicParameter> SubprogramBlock::dynamicParameters() const

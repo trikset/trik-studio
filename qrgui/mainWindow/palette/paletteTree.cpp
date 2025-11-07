@@ -281,7 +281,7 @@ void PaletteTree::changeRepresentation()
 	loadPalette(!mIconsView, mItemsCountInARow, mEditorManager);
 	SettingsManager::setValue("PaletteRepresentation", mIconsView);
 	SettingsManager::setValue("PaletteIconsInARowCount", mItemsCountInARow);
-	emit paletteParametersChanged();
+	Q_EMIT paletteParametersChanged();
 }
 
 void PaletteTree::loadPalette(bool isIconsView, int itemsCount, EditorManagerInterface *editorManagerProxy)

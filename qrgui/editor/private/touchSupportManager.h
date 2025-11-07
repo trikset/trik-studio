@@ -35,14 +35,14 @@ public:
 	bool processTouchEvent(QTouchEvent *event);
 	bool isGestureRunning() const;
 
-signals:
+Q_SIGNALS:
 	void gestureStarted();
 	void gestureFinished();
 
 protected:
 	virtual bool eventFilter(QObject* object, QEvent* event);
 
-private slots:
+private Q_SLOTS:
 	void grabTapAndHold();
 
 private:

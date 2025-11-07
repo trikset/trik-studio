@@ -243,11 +243,11 @@ void ShapeEdit::keyPressEvent(QKeyEvent *event)
 {
 	QWidget::keyPressEvent(event);
 	if (event->matches(QKeySequence::Save)) {
-		emit saveToXmlSignal();
+		Q_EMIT saveToXmlSignal();
 	} else if (event->key() == Qt::Key_F2) {
-		emit saveSignal();
+		Q_EMIT saveSignal();
 	} if (event->matches(QKeySequence::Open)) {
-		emit openSignal();
+		Q_EMIT openSignal();
 	} if (event->matches(QKeySequence::ZoomIn)) {
 		mScene->mainView()->zoomIn();
 	} else if (event->matches(QKeySequence::ZoomOut)) {
@@ -333,7 +333,7 @@ void ShapeEdit::save()
 {
 	generateDom();
 	if (mIndex.isValid()) {
-		emit shapeSaved(mDocument.toString(4), mIndex, mRole);
+		Q_EMIT shapeSaved(mDocument.toString(4), mIndex, mRole);
 	} else {
 		mEditorManager->updateShape(mId, mDocument.documentElement());
 		for (const Id &graphicalElement : mGraphicalElements) {

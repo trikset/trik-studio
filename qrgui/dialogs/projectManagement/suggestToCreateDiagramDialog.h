@@ -30,7 +30,7 @@ public:
 	explicit SuggestToCreateDiagramDialog(const EditorManagerInterface &editorManager
 			, QWidget *parent = 0, bool isClosable = true);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user selects some item in diagrams list wishing thus to create
 	/// new diagram of the type @arg diagramIdString.
 	void diagramSelected(const QString &diagramIdString);

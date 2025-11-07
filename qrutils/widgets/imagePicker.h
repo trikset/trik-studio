@@ -41,7 +41,7 @@ public:
 	/// Restores last picked value.
 	void restore();
 
-private slots:
+private Q_SLOTS:
 	void pick();
 
 private:

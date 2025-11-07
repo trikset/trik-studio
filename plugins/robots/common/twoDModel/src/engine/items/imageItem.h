@@ -74,7 +74,7 @@ public:
 	/// Returns role.
 	bool isBackground() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user selects or unselects
 	void selectedChanged(bool selected);
 

@@ -56,7 +56,7 @@ public:
 			, const qReal::ProjectManagementInterface &projectManager
 			, kitBase::InterpreterControlInterface &interpreterControl) = 0;
 
-public slots:
+public Q_SLOTS:
 	/// Starts interpretation process in 2D model.
 	virtual void onStartInterpretation() = 0;
 
@@ -64,7 +64,7 @@ public slots:
 	/// @param reason The reason why the interpretation stopped.
 	virtual void onStopInterpretation(qReal::interpretation::StopReason reason) = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when user requests interpretation start from 2D model window.
 	void runButtonPressed();
 

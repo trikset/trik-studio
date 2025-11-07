@@ -66,7 +66,7 @@ public:
 	void zoomIn() override;
 	void zoomOut() override;
 
-signals:
+Q_SIGNALS:
 	void shapeSaved(const QString &shape, const QPersistentModelIndex &index, const int &role);
 	void saveSignal();
 	void saveToXmlSignal();
@@ -76,7 +76,7 @@ protected:
 	void changeEvent(QEvent *e) override;
 	void keyPressEvent(QKeyEvent *event) override;
 
-private slots:
+private Q_SLOTS:
 	void drawLine(bool checked);
 	void drawEllipse(bool checked);
 	void drawCurve(bool checked);

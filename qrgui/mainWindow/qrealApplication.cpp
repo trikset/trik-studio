@@ -60,7 +60,7 @@ bool QRealApplication::notify(QObject *obj, QEvent *e)
 		qDebug() << obj << obj->metaObject()->className();
 	}
 #endif
-	emit lowLevelEvent(obj, e);
+	Q_EMIT lowLevelEvent(obj, e);
 	return QApplication::notify(obj, e);
 }
 

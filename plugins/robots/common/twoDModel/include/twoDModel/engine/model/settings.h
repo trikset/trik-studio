@@ -58,7 +58,7 @@ public:
 
 	SizeUnit *sizeUnit() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when user modifies physical preferences.
 	void physicsChanged(bool isRealistic);
 

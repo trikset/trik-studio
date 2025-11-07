@@ -25,7 +25,7 @@ public:
 
 	bool event(QEvent *event);
 	
-signals:
+Q_SIGNALS:
 	void newKey(const int key);
 	void newModifiers(Qt::KeyboardModifiers modifiers);
 };

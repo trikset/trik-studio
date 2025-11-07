@@ -154,7 +154,7 @@ void SearchLineEdit::makeContextMenu()
 
 void SearchLineEdit::notifyTextChanged()
 {
-	emit textChanged(regexpFromText(mLineEdit->text(), mCurrentOption));
+	Q_EMIT textChanged(regexpFromText(mLineEdit->text(), mCurrentOption));
 }
 
 QRegExp SearchLineEdit::regexpFromText(const QString &text, SearchOptions option) const

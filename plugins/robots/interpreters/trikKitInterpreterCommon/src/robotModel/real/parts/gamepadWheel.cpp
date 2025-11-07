@@ -28,13 +28,13 @@ GamepadWheel::GamepadWheel(const DeviceInfo &info, const PortInfo &port
 
 void GamepadWheel::read()
 {
-	emit newData(mOldValue);
+	Q_EMIT newData(mOldValue);
 }
 
 void GamepadWheel::onIncomingData(const QString &portName, int value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		Q_EMIT newData(mOldValue);
 	}
 }

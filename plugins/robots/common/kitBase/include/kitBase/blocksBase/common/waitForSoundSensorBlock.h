@@ -28,7 +28,7 @@ class ROBOTS_KIT_BASE_EXPORT WaitForSoundSensorBlock : public WaitForSensorBlock
 public:
 	explicit WaitForSoundSensorBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-protected slots:
+protected Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 protected:

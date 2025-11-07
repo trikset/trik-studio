@@ -59,7 +59,7 @@ public:
 	GraphicalModelAssistApi &graphicalModelAssistApi() const;
 	virtual void stackBefore(const QModelIndex &element, const QModelIndex &sibling) override;
 
-signals:
+Q_SIGNALS:
 	void nameChanged(const Id &id);
 
 private:

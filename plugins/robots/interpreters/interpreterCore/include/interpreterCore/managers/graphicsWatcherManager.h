@@ -41,7 +41,7 @@ public:
 	/// Returns the graphics watcher widget itself for placing it into dock. Takes ownership over result.
 	QWidget *widget();
 
-public slots:
+public Q_SLOTS:
 	/// Starts graphics watcher`s job even if user stopped it himself.
 	void forceStart();
 

@@ -30,5 +30,5 @@ LightSensor::LightSensor(const DeviceInfo &info
 
 void LightSensor::read()
 {
-	emit newData(mEngine.readLightSensor(port()));
+	Q_EMIT newData(mEngine.readLightSensor(port()));
 }

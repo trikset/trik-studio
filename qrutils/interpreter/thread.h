@@ -85,7 +85,7 @@ public:
 	/// Returns string id of a thread.
 	QString id() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when interpretation process was terminated (correctly or due to errors).
 	void stopped(qReal::interpretation::StopReason reason);
 
@@ -98,7 +98,7 @@ signals:
 	/// Emitted when one of the blocks wants to send message to another thread.
 	void sendMessage(const QString &threadId, const QString &message);
 
-private slots:
+private Q_SLOTS:
 	void nextBlock(const qReal::Id &blockId);
 
 	void stepInto(const qReal::Id &diagram);

@@ -52,16 +52,16 @@ UsbRobotCommunicationThread::~UsbRobotCommunicationThread()
 bool UsbRobotCommunicationThread::send(QObject *addressee, const QByteArray &buffer, int responseSize)
 {
 	if (!mHandle) {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 		return false;
 	}
 
 	const bool result = send1(buffer);
 	if (buffer.size() >= 5 && buffer[4] == enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY) {
 		const QByteArray result = receive(responseSize);
-		emit response(addressee, result);
+		Q_EMIT response(addressee, result);
 	} else {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 	}
 
 	return result;
@@ -71,7 +71,7 @@ bool UsbRobotCommunicationThread::connect()
 {
 	if (mHandle) {
 		QLOG_INFO() << "EV3USB" << "Handle reused";
-		emit connected(true, QString());
+		Q_EMIT connected(true, QString());
 		return true;
 	}
 
@@ -96,11 +96,11 @@ bool UsbRobotCommunicationThread::connect()
 	if (!mHandle) {
 		QLOG_ERROR() << "hid_open failed for "
 				<< QString::number(EV3_VID, 16) << QString::number(EV3_PID, 16);
-		emit connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
+		Q_EMIT connected(false, tr("Cannot find EV3 device. Check robot connected and turned on and try again."));
 		return false;
 	}
 
-	emit connected(true, QString());
+	Q_EMIT connected(true, QString());
 	mKeepAliveTimer->disconnect();
 	QObject::connect(mKeepAliveTimer, &QTimer::timeout, this, &UsbRobotCommunicationThread::checkForConnection);
 	QObject::connect(this, &UsbRobotCommunicationThread::disconnected, mKeepAliveTimer, &QTimer::stop);
@@ -120,7 +120,7 @@ void UsbRobotCommunicationThread::disconnect()
 		hid_close(mHandle);
 		mHandle = nullptr;
 	}
-	emit disconnected();
+	Q_EMIT disconnected();
 }
 
 void UsbRobotCommunicationThread::allowLongJobs(bool allow)

@@ -27,9 +27,9 @@ void LoopBlock::run()
 	--mIterations;
 	if (mIterations < 0) {
 		mFirstRun = true;
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	} else {
-		emit done(mIterationStartBlockId);
+		Q_EMIT done(mIterationStartBlockId);
 	}
 }
 

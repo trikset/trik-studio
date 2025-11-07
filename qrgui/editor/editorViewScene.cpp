@@ -1316,9 +1316,9 @@ void EditorViewScene::wheelEvent(QGraphicsSceneWheelEvent *wheelEvent)
 {
 	if (wheelEvent->modifiers() == Qt::ControlModifier) {
 		if (wheelEvent->delta() > 0) {
-			emit zoomIn();
+			Q_EMIT zoomIn();
 		} else {
-			emit zoomOut();
+			Q_EMIT zoomOut();
 		}
 		wheelEvent->accept();
 	}

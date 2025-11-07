@@ -83,7 +83,7 @@ public:
 	/// Disconnects from robot.
 	Q_INVOKABLE void disconnectConnection();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when TCP socket with robot was opened or failed to open.
 	void connected();
 
@@ -127,7 +127,7 @@ signals:
 	/// Emitted when received TRIK casing version (model 2014 or model 2015) from robot.
 	void casingVersionReceived(const QString &casingVersion);
 
-private slots:
+private Q_SLOTS:
 	/// Process message from control connection, emits signals when something interesting is received from robot.
 	void processControlMessage(const QString &message);
 

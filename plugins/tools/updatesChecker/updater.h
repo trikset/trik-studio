@@ -36,7 +36,7 @@ public:
 	/// shutted down before this operation will be started.
 	void start();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when new version was found on remote server
 	void newVersionAvailable();
 	/// Emitted when no new version was found on remote server
@@ -46,7 +46,7 @@ signals:
 	/// Emitted when there is an output in stderr but not recognised
 	void unidentifiedError();
 
-private slots:
+private Q_SLOTS:
 	void readAnswer();
 
 private:

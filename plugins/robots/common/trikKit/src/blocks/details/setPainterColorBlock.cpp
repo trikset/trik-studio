@@ -27,5 +27,5 @@ void SetPainterColorBlock::doJob(kitBase::robotModel::robotParts::Display &displ
 {
 	auto trikDisplay = static_cast<robotModel::parts::TrikDisplay *>(&display);
 	trikDisplay->setPainterColor(propertyToColor(stringProperty("Color")));
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

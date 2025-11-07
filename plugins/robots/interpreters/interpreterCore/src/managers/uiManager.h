@@ -65,7 +65,7 @@ public:
 	/// Returns a pointer to widget where robot standard output is displayed.
 	qReal::ui::ConsoleDock &robotConsole();
 
-private slots:
+private Q_SLOTS:
 	void onActiveTabChanged(const qReal::TabInfo &tab);
 	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface &model);
 	void switchToEditorMode();

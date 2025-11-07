@@ -26,7 +26,7 @@ class RenameDialog : public QDialog
 public:
 	static QString selectNewName(const QString &currentName, QWidget *parent = nullptr);
 
-private slots:
+private Q_SLOTS:
 	virtual void accept();
 	virtual void reject();
 

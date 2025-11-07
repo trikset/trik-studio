@@ -39,7 +39,7 @@ protected:
 	qReal::text::LanguageInfo language() const override;
 	QString generatorName() const override;
 
-private slots:
+private Q_SLOTS:
 	/// Generates and uploads script to a EV3 robot.
 	/// @return Empty string if operation was unsuccessfull or path to uploaded file on the EV3 robot otherwise.
 	QString uploadProgram();

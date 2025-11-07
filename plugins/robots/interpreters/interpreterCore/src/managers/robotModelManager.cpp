@@ -49,11 +49,11 @@ void RobotModelManager::setModel(RobotModelInterface * const robotModel)
 
 		mRobotModel->init();
 
-		emit robotModelChanged(*mRobotModel);
+		Q_EMIT robotModelChanged(*mRobotModel);
 	}
 }
 
 void RobotModelManager::sync()
 {
-	emit robotModelChanged(*mRobotModel);
+	Q_EMIT robotModelChanged(*mRobotModel);
 }

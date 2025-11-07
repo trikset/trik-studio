@@ -41,7 +41,7 @@ public:
 
 	void read() override;
 
-private slots:
+private Q_SLOTS:
 	/// Called when new data arrived from robot.
 	void onIncomingData(const QString &portName, int value);
 

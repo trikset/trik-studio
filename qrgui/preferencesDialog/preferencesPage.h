@@ -40,7 +40,7 @@ public:
 	/// This method will be called before page is shown and when user pressed "Cancel"
 	virtual void restoreSettings() = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user pressed "OK" or "Apply" button in settings dialog.
 	void saved();
 

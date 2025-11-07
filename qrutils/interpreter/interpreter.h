@@ -51,18 +51,18 @@ public:
 
 	~Interpreter();
 
-public slots:
+public Q_SLOTS:
 	void startInterpretation();
 	void stopInterpretation();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when started.
 	void started();
 
 	/// Emitted when program is finished or stopped by user.
 	void stopped();
 
-private slots:
+private Q_SLOTS:
 	void threadStopped();
 	void newThread(const qReal::Id &startBlockId, const QString &threadId);
 	void killThread(const QString &threadId);

@@ -28,7 +28,7 @@ public:
 	explicit DetailsTab(QWidget *parent = nullptr);
 	~DetailsTab();
 
-public slots:
+public Q_SLOTS:
 	/// Shows display item in corresponding section. If nullptr is passed the whole section will be hidden.
 	void setDisplay(QWidget *widget);
 

@@ -207,7 +207,7 @@ void TextManager::setModified(text::QScintillaTextEdit *code, bool modified)
 		mCodeBlockManager.setActive(path, !(modified && code->isUndoAvailable()));
 	}
 
-	emit textChanged(code, modified && code->isUndoAvailable());
+	Q_EMIT textChanged(code, modified && code->isUndoAvailable());
 }
 
 void TextManager::onTabClosed(const QFileInfo &file)
@@ -232,7 +232,7 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo
 		QScintillaTextEdit *area = code(filePath);
 		area->show();
 		bindCode(mMainWindow.activeDiagram(), filePath);
-		emit mSystemEvents.newCodeAppeared(mMainWindow.activeDiagram(), QFileInfo(filePath));
+		Q_EMIT mSystemEvents.newCodeAppeared(mMainWindow.activeDiagram(), QFileInfo(filePath));
 
 		mMainWindow.openTab(area, fileInfo.fileName());
 	}
@@ -254,7 +254,7 @@ void TextManager::showInTextEditor(const QFileInfo &fileInfo, const text::Langua
 		return;
 	}
 
-	emit needRefreshRecentFileList(filePath);
+	Q_EMIT needRefreshRecentFileList(filePath);
 	area->show();
 
 	// Need to bind diagram and code file only if code is just generated
@@ -302,10 +302,10 @@ bool TextManager::saveText(bool saveAs)
 
 		const Id diagram = TextManager::diagram(area);
 		if (saveAs && !diagram.isNull()) {
-			emit mSystemEvents.codePathChanged(diagram, path(area), fileInfo);
+			Q_EMIT mSystemEvents.codePathChanged(diagram, path(area), fileInfo);
 		}
 
-		emit needRefreshRecentFileList(fileInfo.absoluteFilePath());
+		Q_EMIT needRefreshRecentFileList(fileInfo.absoluteFilePath());
 	}
 
 	return true;

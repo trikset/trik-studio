@@ -48,7 +48,7 @@ void ListWidget::highlightFirstItem()
 
 void ListWidget::doubleClickHandler(QListWidgetItem *item)
 {
-	emit userDataSelected(userData(item));
+	Q_EMIT userDataSelected(userData(item));
 }
 
 QString ListWidget::userData(QListWidgetItem *item)

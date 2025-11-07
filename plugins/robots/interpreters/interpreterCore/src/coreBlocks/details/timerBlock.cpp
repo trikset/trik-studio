@@ -41,5 +41,5 @@ void TimerBlock::run()
 void TimerBlock::timeout()
 {
 	mTimer->stop();
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

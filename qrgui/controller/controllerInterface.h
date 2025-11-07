@@ -39,7 +39,7 @@ public:
 	/// Returns true if next action can be repeater for current stack or global stack.
 	virtual bool canRedo() const = 0;
 
-public slots:
+public Q_SLOTS:
 	/// Tells controller that user swithed to some module with \a moduleId.
 	virtual void setActiveModule(const QString &moduleId) = 0;
 
@@ -66,7 +66,7 @@ public slots:
 	/// Rolls back the earliest command on one of the stacks: active module stack or global one.
 	virtual void undo() = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when at least one of the stacks has modifications.
 	void modifiedChanged(bool modified);
 

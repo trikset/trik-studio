@@ -25,5 +25,5 @@ void SendThreadMessageBlock::run()
 	}
 
 	sendMessage(thread, eval<QString>("Message"));
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

@@ -27,11 +27,11 @@ class QRUTILS_EXPORT AbstractView : public QGraphicsView
 public:
 	AbstractView(QWidget *parent = nullptr);
 
-public slots:
+public Q_SLOTS:
 	void zoomIn();
 	void zoomOut();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user pressed delete button when this view was in focus.
 	void deleteItem();
 

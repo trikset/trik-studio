@@ -34,7 +34,7 @@ public:
 	void read() override;
 	void nullify() override;
 
-private slots:
+private Q_SLOTS:
 	void readingDone(QObject *addressee, const QByteArray &reading);
 
 private:

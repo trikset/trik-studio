@@ -46,5 +46,5 @@ void RangeSensor::read()
 	floatFromBytesCast.b[0] = outputBuf.data()[5];
 
 	const int data = qIsNaN(floatFromBytesCast.f) ? 0 : static_cast<int>(floatFromBytesCast.f);
-	emit newData(data);
+	Q_EMIT newData(data);
 }

@@ -126,7 +126,7 @@ void AbstractScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
 	QGraphicsScene::mousePressEvent(mouseEvent);
 	if (mouseEvent->button() == Qt::LeftButton) {
-		emit leftButtonPressed();
+		Q_EMIT leftButtonPressed();
 	}
 }
 
@@ -134,7 +134,7 @@ void AbstractScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
 	QGraphicsScene::mouseReleaseEvent(mouseEvent);
 	if (mouseEvent->button() == Qt::LeftButton) {
-		emit leftButtonReleased();
+		Q_EMIT leftButtonReleased();
 	}
 }
 
@@ -371,5 +371,5 @@ void AbstractScene::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void AbstractScene::focusInEvent(QFocusEvent *event)
 {
 	QGraphicsScene::focusInEvent(event);
-	emit focused();
+	Q_EMIT focused();
 }

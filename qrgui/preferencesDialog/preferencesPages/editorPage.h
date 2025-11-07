@@ -38,7 +38,7 @@ public:
 protected:
 	void changeEvent(QEvent *e);
 
-private slots:
+private Q_SLOTS:
 	void widthGridSliderMoved(int value);
 	void indexGridSliderMoved(int value);
 	void dragAreaSliderMoved(int value);

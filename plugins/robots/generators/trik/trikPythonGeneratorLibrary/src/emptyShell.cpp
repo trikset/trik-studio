@@ -24,7 +24,7 @@ EmptyShell::EmptyShell(const kitBase::robotModel::DeviceInfo &info
 
 void EmptyShell::print(const QString &text)
 {
-	emit textPrinted(text);
+	Q_EMIT textPrinted(text);
 }
 
 void EmptyShell::runCommand(const QString &command)

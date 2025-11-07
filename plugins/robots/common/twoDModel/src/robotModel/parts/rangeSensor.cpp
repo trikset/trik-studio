@@ -30,5 +30,5 @@ RangeSensor::RangeSensor(const DeviceInfo &info, const PortInfo &port
 
 void RangeSensor::read()
 {
-	emit newData(mEngine.readRangeSensor(port(), mRange, mAngle));
+	Q_EMIT newData(mEngine.readRangeSensor(port(), mRange, mAngle));
 }

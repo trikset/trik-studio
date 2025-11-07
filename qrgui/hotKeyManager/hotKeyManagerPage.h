@@ -36,7 +36,7 @@ public:
 	void save();
 	void restoreSettings();
 
-private slots:
+private Q_SLOTS:
 	void doubleClicked(const int row, const int column);
 	void activateShortcutLineEdit(const int row, const int column);
 	void newModifiers(Qt::KeyboardModifiers modifiers);

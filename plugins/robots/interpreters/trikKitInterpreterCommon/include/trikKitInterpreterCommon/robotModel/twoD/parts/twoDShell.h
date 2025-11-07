@@ -62,7 +62,7 @@ public:
 	/// Resets shell instance preparing it to new interpretation time.
 	void reset();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when robot starts speaking some phrase; the told text is passed as argument.
 	void phraseTold(const QString &text);
 

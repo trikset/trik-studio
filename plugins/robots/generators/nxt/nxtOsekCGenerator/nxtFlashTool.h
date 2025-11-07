@@ -40,7 +40,7 @@ public:
 	NxtFlashTool(qReal::ErrorReporterInterface &errorReporter
 			, utils::robotCommunication::RobotCommunicationThreadInterface &communicator);
 
-public slots:
+public Q_SLOTS:
 	/// Searches for the firmware image in nxt-tools/nexttool directory and flashes it into NXT brick.
 	/// NXT brick must be reseted before this method is called. If multiple images found in nxt-tools/nexttool
 	/// then latest (greatest lexicographically) will be flashed. Flashing is performed through the raw libusb or
@@ -64,7 +64,7 @@ public slots:
 
 	bool askToRun(QWidget *parent);
 
-signals:
+Q_SIGNALS:
 	void flashingComplete(bool success);
 	void uploadingComplete(bool success);
 

@@ -41,7 +41,7 @@ public:
 	/// Select shape at index.
 	void selectShape(int index);
 
-private slots:
+private Q_SLOTS:
 	void shapeClicked();
 
 private:

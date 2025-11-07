@@ -37,11 +37,11 @@ public:
 
 	virtual bool isRunning() const = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when connection to robot established or was broken.
 	void connected(bool isConnected);
 
-public slots:
+public Q_SLOTS:
 	/// Called when establishing connection to a robot is requested. If connection is already established must
 	/// disconnect from robot. May do nothing if interpretation is running, to avoid leaving robot in with motors
 	/// turned on and without connection to stop it.

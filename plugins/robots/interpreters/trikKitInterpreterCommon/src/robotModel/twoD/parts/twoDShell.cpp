@@ -29,7 +29,7 @@ Shell::Shell(const kitBase::robotModel::DeviceInfo &info
 	, mEngine(engine)
 	, mErrorReporter(nullptr)
 {
-	connect(this, &Shell::phraseTold, this, [=](const QString &text) { emit propertyChanged("lastPhrase", text); });
+	connect(this, &Shell::phraseTold, this, [=](const QString &text) { Q_EMIT propertyChanged("lastPhrase", text); });
 }
 
 void Shell::runCommand(const QString &command)
@@ -49,7 +49,7 @@ void Shell::say(const QString &text)
 		mErrorReporter->sendBubblingMessage(text, 8000, mEngine.guiFacade().twoDModelSceneViewport()->parentWidget());
 	}
 
-	emit phraseTold(text);
+	Q_EMIT phraseTold(text);
 }
 
 void Shell::writeToFile(const QString &filePath, const QString &text)
@@ -70,12 +70,12 @@ void Shell::readFile(const QString &filePath)
 	QFile out(filePath);
 	out.open(QIODevice::ReadOnly);
 	QString text{out.readAll()};
-	emit fileContents(text);
+	Q_EMIT fileContents(text);
 }
 
 void Shell::print(const QString &text)
 {
-	emit textPrinted(text);
+	Q_EMIT textPrinted(text);
 }
 
 void Shell::initVideoStreaming(int qual, bool grayscaled)

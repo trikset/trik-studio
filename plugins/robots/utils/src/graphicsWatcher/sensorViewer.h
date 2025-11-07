@@ -44,7 +44,7 @@ public:
 
 	void resizeEvent(QResizeEvent *event = nullptr);
 
-public slots:
+public Q_SLOTS:
 	void setTimeline(TimelineInterface &timeline);
 	void setNextValue(const qreal newValue);
 	void startJob();
@@ -65,7 +65,7 @@ protected:
 	void leaveEvent(QEvent *);
 	void mouseDoubleClickEvent(QMouseEvent *event);
 
-private slots:
+private Q_SLOTS:
 	void visualTimerEvent();
 
 private:

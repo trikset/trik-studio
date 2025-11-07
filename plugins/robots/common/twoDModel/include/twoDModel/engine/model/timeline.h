@@ -53,14 +53,14 @@ public:
 	/// Thus the immediate process modeling may be performed in background.
 	void setImmediateMode(bool immediateMode);
 
-public slots:
+public Q_SLOTS:
 	void start();
 	void stop(qReal::interpretation::StopReason reason);
 
 	// Speed factor is also cycles per frame count
 	void setSpeedFactor(int factor);
 
-signals:
+Q_SIGNALS:
 	void tick();
 	void nextFrame();
 
@@ -78,7 +78,7 @@ signals:
 	/// Emitted when timeline speed factor value changes.
 	void speedFactorChanged(int value);
 
-private slots:
+private Q_SLOTS:
 	void onTimer();
 	void gotoNextFrame();
 	utils::AbstractTimer *produceTimerImpl();

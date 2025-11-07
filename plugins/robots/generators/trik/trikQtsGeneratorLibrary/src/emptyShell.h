@@ -27,7 +27,7 @@ public:
 	EmptyShell(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port);
 
-public slots:
+public Q_SLOTS:
 	void print(const QString &text) override;
 	void runCommand(const QString &command) override;
 	void runCode(const QString &code) override;

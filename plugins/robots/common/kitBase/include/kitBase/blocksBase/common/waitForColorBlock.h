@@ -29,7 +29,7 @@ public:
 	/// Constructor, takes current robot model as parameter.
 	explicit WaitForColorBlock(robotModel::RobotModelInterface &robotModel);
 
-protected slots:
+protected Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 private:

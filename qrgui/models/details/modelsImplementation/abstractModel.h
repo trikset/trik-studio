@@ -77,7 +77,7 @@ public:
 
 	void reinit();
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when new element was added into model.
 	void elementAdded(const Id &id);
 

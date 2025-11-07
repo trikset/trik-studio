@@ -23,11 +23,11 @@ class View : public QGraphicsView
 public:
 	View(QWidget *parent = nullptr);
 
-public slots:
+public Q_SLOTS:
 	void zoomIn();
 	void zoomOut();
 
-signals:
+Q_SIGNALS:
 	void deleteItem();
 
 protected:

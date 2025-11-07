@@ -24,7 +24,7 @@ void PreconditionalLoopBlock::run()
 {
 	const bool expressionValue = eval<bool>("Condition");
 	if (!errorsOccured()) {
-		emit done(expressionValue ? mLoopStartBlockId : mNextBlockId);
+		Q_EMIT done(expressionValue ? mLoopStartBlockId : mNextBlockId);
 	}
 }
 

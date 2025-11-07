@@ -32,10 +32,10 @@ public:
 	void setEventPos(const QPointF &pos);
 	QPointF eventPos() const;
 
-private slots:
+private Q_SLOTS:
 	void trigger();
 
-signals:
+Q_SIGNALS:
 	void triggered(const QPointF &pos);
 
 private:

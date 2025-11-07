@@ -31,11 +31,11 @@ class SpeedPopup : public QWidget
 public:
 	explicit SpeedPopup(QWidget *parent);
 
-public slots:
+public Q_SLOTS:
 
 	void setSpeed(int speed);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user wants to reset speed factor to default value.
 	void resetToDefault();
 

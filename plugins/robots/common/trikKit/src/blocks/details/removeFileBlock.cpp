@@ -24,5 +24,5 @@ RemoveFileBlock::RemoveFileBlock(kitBase::robotModel::RobotModelInterface &robot
 void RemoveFileBlock::doJob(robotModel::parts::TrikShell &shell)
 {
 	shell.removeFile(stringProperty(id(), "File"));
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

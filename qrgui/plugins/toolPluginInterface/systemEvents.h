@@ -29,7 +29,7 @@ class QRGUI_TOOL_PLUGIN_INTERFACE_EXPORT SystemEvents : public QObject
 {
 	Q_OBJECT
 
-signals:
+Q_SIGNALS:
 	void closedMainWindow();
 	void activeTabChanged(const TabInfo &info);
 	void settingsUpdated();

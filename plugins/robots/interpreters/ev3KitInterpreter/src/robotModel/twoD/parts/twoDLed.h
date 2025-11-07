@@ -44,7 +44,7 @@ public:
 	/// If "off" passed then led becomes gray.
 	void setColor(ev3::robotModel::parts::Ev3LedColor color) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when led color has changed.
 	/// @warning This signal will not be emitted on led color chage right before or right after the interpretation.
 	/// It notifies only about led`s color modification by led block.

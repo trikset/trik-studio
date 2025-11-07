@@ -386,7 +386,7 @@ QString QrsMetamodelSaver::penStyleToString(Qt::PenStyle style)
 	case Qt::DotLine:
 		return "dotLine";
 	default:
-		emit errorOccured(tr("Unknown link style type %1").arg(static_cast<int>(style)), Id());
+		Q_EMIT errorOccured(tr("Unknown link style type %1").arg(static_cast<int>(style)), Id());
 		return QString();
 	}
 }
@@ -402,7 +402,7 @@ QString QrsMetamodelSaver::linkShapeToString(LinkShape linkShape)
 		return "broken";
 	}
 
-	emit errorOccured(tr("Unknown link shape type %1").arg(static_cast<int>(linkShape)), Id());
+	Q_EMIT errorOccured(tr("Unknown link shape type %1").arg(static_cast<int>(linkShape)), Id());
 	return "broken";
 }
 

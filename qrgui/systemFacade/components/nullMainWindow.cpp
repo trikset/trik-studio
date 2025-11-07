@@ -252,7 +252,7 @@ void NullMainWindow::openFirstDiagram()
 void NullMainWindow::openTabWithEditor(const Id &id)
 {
 	mActiveId = id;
-	emit mEvents.activeTabChanged(TabInfo(id, nullptr));
+	Q_EMIT mEvents.activeTabChanged(TabInfo(id, nullptr));
 }
 
 QDockWidget *NullMainWindow::logicalModelDock() const
@@ -346,6 +346,6 @@ void NullMainWindow::emulateClose(int returnCode)
 	}
 
 	mClosed = true;
-	emit mEvents.closedMainWindow();
+	Q_EMIT mEvents.closedMainWindow();
 	QCoreApplication::exit(returnCode);
 }

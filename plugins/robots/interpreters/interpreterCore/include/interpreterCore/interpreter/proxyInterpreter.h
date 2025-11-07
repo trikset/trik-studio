@@ -35,7 +35,7 @@ public:
 	qReal::IdList supportedDiagrams() const override;
 	virtual bool isRunning() const override;
 
-public slots:
+public Q_SLOTS:
 	void connectToRobot() override;
 	void interpret() override;
 	void stopRobot(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop) override;

@@ -203,7 +203,7 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 
 	mWorldModel.setRobotModel(mRobotModel);
 
-	emit robotAdded(mRobotModel);
+	Q_EMIT robotAdded(mRobotModel);
 }
 
 void Model::removeRobotModel()
@@ -213,7 +213,7 @@ void Model::removeRobotModel()
 	}
 
 	mWorldModel.setRobotModel(nullptr);
-	emit robotRemoved(mRobotModel);
+	Q_EMIT robotRemoved(mRobotModel);
 	delete mRobotModel;
 }
 

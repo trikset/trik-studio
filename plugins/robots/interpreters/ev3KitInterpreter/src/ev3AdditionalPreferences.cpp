@@ -45,7 +45,7 @@ void Ev3AdditionalPreferences::save()
 	SettingsManager::setValue("Ev3CommonFolderChecboxChecked", mUi->commonFolderChecbox->isChecked());
 	SettingsManager::setValue("Ev3CommonFolderName", mUi->commonFolderNameLineEdit->text());
 	mUi->robotImagePicker->save();
-	emit settingsChanged();
+	Q_EMIT settingsChanged();
 }
 
 void Ev3AdditionalPreferences::restoreSettings()

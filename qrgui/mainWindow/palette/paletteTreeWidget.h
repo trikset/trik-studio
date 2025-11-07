@@ -76,7 +76,7 @@ public:
 
 	bool readyToRefresh();
 
-signals:
+Q_SIGNALS:
 	void signalReadyToRefresh();
 
 protected:

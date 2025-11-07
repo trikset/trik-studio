@@ -30,7 +30,7 @@ GyroscopeSensor::GyroscopeSensor(const DeviceInfo &info, const PortInfo &port
 void GyroscopeSensor::read()
 {
 	if (!mImplementation.isConfigured()) {
-		emit failure();
+		Q_EMIT failure();
 		return;
 	}
 
@@ -52,7 +52,7 @@ void GyroscopeSensor::read()
 void GyroscopeSensor::calibrate()
 {
 	/// @todo
-	emit failure();
+	Q_EMIT failure();
 }
 
 void GyroscopeSensor::doConfiguration()

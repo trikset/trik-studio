@@ -59,7 +59,7 @@ void PushButtonFactory::connectPropertyManager(PushButtonPropertyManager *)
 
 QWidget *PushButtonFactory::createEditor(PushButtonPropertyManager *manager, QtProperty *property, QWidget *)
 {
-	emit manager->buttonClicked(property);
+	Q_EMIT manager->buttonClicked(property);
 	return nullptr;
 }
 

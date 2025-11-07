@@ -34,5 +34,5 @@ void ColorSensorFull::read()
 	const QByteArray command = mImplementation.readyRawCommand(mImplementation.lowLevelPort(), 2);
 	QByteArray outputBuf;
 	mRobotCommunicator.send(command, colorSensorResponseSize, outputBuf);
-	emit newData(static_cast<int>(outputBuf.data()[5]));
+	Q_EMIT newData(static_cast<int>(outputBuf.data()[5]));
 }

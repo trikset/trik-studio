@@ -127,7 +127,7 @@ public:
 	/// Executes configured protocol asyncronously.
 	void run();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when protocol completed successfully.
 	void success();
 
@@ -138,7 +138,7 @@ signals:
 	/// or in communicator, since network timeouts will be reported as error() signal.
 	void timeout();
 
-private slots:
+private Q_SLOTS:
 	/// Called when protocol timeout reached.
 	void onTimeout();
 

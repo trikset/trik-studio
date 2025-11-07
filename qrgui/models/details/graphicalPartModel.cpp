@@ -74,7 +74,7 @@ bool GraphicalPartModel::setData(const QModelIndex &index, const QVariant &value
 		return false;
 	}
 
-	emit dataChanged(index, index);
+	Q_EMIT dataChanged(index, index);
 	return true;
 }
 

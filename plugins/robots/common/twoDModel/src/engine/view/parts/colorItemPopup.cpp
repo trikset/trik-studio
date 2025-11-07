@@ -102,7 +102,7 @@ QWidget *ColorItemPopup::initColorPicker()
 		setPropertyMassively("color", color);
 		if (mLastColor != color) {
 			mLastColor = color;
-			emit userPenChanged(pen());
+			Q_EMIT userPenChanged(pen());
 		}
 	});
 
@@ -123,7 +123,7 @@ QWidget *ColorItemPopup::initBrushPicker()
 		setPropertyMassively("filled", checked);
 		if (mLastFilled != checked) {
 			mLastFilled = checked;
-			emit isFilledChanged(mLastFilled);
+			Q_EMIT isFilledChanged(mLastFilled);
 		}
 	});
 
@@ -143,7 +143,7 @@ QWidget *ColorItemPopup::initSpinBox()
 		setPropertyMassively("thickness", value);
 		if (mLastThickness != value) {
 			mLastThickness = value;
-			emit userPenChanged(pen());
+			Q_EMIT userPenChanged(pen());
 		}
 	});
 

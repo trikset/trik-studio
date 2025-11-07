@@ -32,10 +32,10 @@ public:
 
 	void showWarningLabel(bool show);
 
-public slots:
+public Q_SLOTS:
 	void accept() override;
 
-private slots:
+private Q_SLOTS:
 	void highlightItem(QListWidgetItem *item);
 
 private:

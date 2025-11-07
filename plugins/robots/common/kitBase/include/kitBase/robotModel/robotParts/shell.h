@@ -35,7 +35,7 @@ public:
 	/// Prints the given text into virtual or real robot console.
 	virtual void print(const QString &text) = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when some text is added into robot`s console output.
 	void textPrinted(const QString &text);
 
