@@ -197,10 +197,12 @@ jobs:
       id: linter
       with:
          style: ''
-         tidy-checks: '*'
+         tidy-checks: ''
          version: 15
          database: 'build'
          verbosity: 'info'
+         files-changed-only: true
+         ignore-tidy: '^(buildScripts|thirdparty|installer)$'
          
     - name: Clang-tidy exit
       if: ${{ inputs.lint_clazy  && steps.linter.outputs.checks-failed > 0 }}
