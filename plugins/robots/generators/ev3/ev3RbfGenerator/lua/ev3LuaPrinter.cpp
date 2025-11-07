@@ -583,11 +583,20 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FloatNumber> &n
 }
 
 void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FieldInitialization> &node
-		, const QSharedPointer<qrtext::core::ast::Node> &)
+		, const QSharedPointer<qrtext::core::ast::Node> &parent)
 {
+	QString value;
+	const auto &tableType = mTextLanguage.type(parent);
+	if (const auto *table = dynamic_cast<qrtext::lua::types::Table *>(tableType.data())) {
+		const auto ev3TableType = toEv3Type(table->elementType());
+		value = castTo(ev3TableType, node->value());
+	} else {
+		value = popResult(node->value());
+	}
+
 	const QString initializer = readTemplate("writeIndexer.t")
 			.replace("@@INDEX@@", node->key() ? popResult(node->key()) : QString::number(++mTableInitializersCount))
-			.replace("@@VALUE@@", popResult(node->value()));
+			.replace("@@VALUE@@", value);
 	pushResult(node, initializer, QString());
 }
 
@@ -731,7 +740,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::Assignment> &no
 			mAdditionalCode[node->variable().data()].pop_back();
 		}
 
-		QString value = popResult(node->value());
+		QString value = castTo(typeOf(node->variable()), node->value());
 		popResults({node->value(), node->variable()});
 		pushResult(node, writeTemplate.replace("@@VALUE@@", value), QString());
 		return;

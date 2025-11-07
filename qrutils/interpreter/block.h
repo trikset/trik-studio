@@ -144,12 +144,14 @@ protected:
 	T evalCode(const QString &code, const QString &propertyName, ReportErrors reportErrors = ReportErrors::report)
 	{
 		T result = mParser->interpret<T>(mGraphicalId, propertyName, code);
-		if (!mParser->errors().isEmpty() && reportErrors == ReportErrors::report) {
+		if (!mParser->diagnosticMessages().isEmpty() && reportErrors == ReportErrors::report) {
 			if (!mParserErrorReporter.isNull()) {
 				mParserErrorReporter->reportErrors(id(), propertyName);
 			}
 
-			Q_EMIT failure();
+			if (mParser->hasErrors()) {
+				Q_EMIT failure();
+			}
 			return result;
 		}
 

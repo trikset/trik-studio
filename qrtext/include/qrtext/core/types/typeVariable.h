@@ -59,7 +59,8 @@ public:
 	/// type that can. For example, in "a<int> = 0.5<float>;" identifier "a" will be generalized to type "float".
 	void constrainAssignment(const QSharedPointer<TypeVariable> &other
 			, const GeneralizationsTableInterface &generalizationsTable
-			, bool *wasCoercion);
+			, bool *wasCoercion
+			, bool needGeneralize);
 
 	QString toString() const override;
 

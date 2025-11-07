@@ -206,7 +206,7 @@ void Block::eval(const QString &propertyName)
 
 bool Block::errorsOccured() const
 {
-	return !mParser->errors().isEmpty();
+	return mParser->hasErrors();
 }
 
 void Block::finishedSteppingInto()
