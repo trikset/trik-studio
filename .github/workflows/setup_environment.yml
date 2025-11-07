@@ -191,6 +191,21 @@ jobs:
         ignore-external-files: true
       if: ${{ inputs.lint_clazy }}
 
+    - name: Clang-tidy
+      if: ${{ inputs.lint_clazy }}
+      uses: cpp-linter/cpp-linter-action@v2.16.6
+      id: linter
+      with:
+         style: ''
+         tidy-checks: '*'
+         version: 15
+         database: 'build'
+         verbosity: 'info'
+         
+    - name: Clang-tidy exit
+      if: ${{ inputs.lint_clazy  && steps.linter.outputs.checks-failed > 0 }}
+      run: exit 1
+        
     - name: Build Installer
       run: |
          "$GITHUB_WORKSPACE/buildScripts/github/build_installer.sh"
