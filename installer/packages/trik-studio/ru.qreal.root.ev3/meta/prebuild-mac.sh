@@ -3,8 +3,11 @@ set -o nounset
 set -o errexit
 
 cd "$(dirname "$0")"
-source "$INSTALLER_ROOT"/utils/mac_utils.sh
 
+source utils.sh
+install_lmsasm https://github.com/ev3dev/lmsasm/releases/download/v1.5.0/lmsasm-v1.5.0-linux-amd64.zip "$BUNDLE_CONTENTS/MacOS/ev3-tools"
+
+source "$INSTALLER_ROOT"/utils/mac_utils.sh
 
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/editors"
 mkdir -p "$BUNDLE_CONTENTS/Lib/plugins/tools/kitPlugins"
