@@ -112,11 +112,11 @@ public:
 	QDomDocument generateBlobsXml() const;
 	void setDetailsVisibility(bool visible);
 
-public slots:
+public Q_SLOTS:
 	void zoomIn() override;
 	void zoomOut() override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when user closes 2D model window.
 	void widgetClosed();
 
@@ -144,7 +144,7 @@ protected:
 			, const kitBase::robotModel::DeviceInfo &device
 			, Reason reason) override;
 
-private slots:
+private Q_SLOTS:
 	void saveWorldModelToRepo();
 	void saveBlobsToRepo();
 

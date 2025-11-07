@@ -29,11 +29,11 @@ public:
 	explicit GridParameters(QWidget *parent = nullptr);
 	~GridParameters();
 
-public slots:
+public Q_SLOTS:
 	void showGrid(bool isGridEnabled);
 	void setCellSize(int cellSizeValue);
 
-signals:
+Q_SIGNALS:
 	void parametersChanged();
 
 private:

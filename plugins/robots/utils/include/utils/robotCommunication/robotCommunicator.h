@@ -43,7 +43,7 @@ public:
 	/// Sets object that implements communication with robot. Does not take ownership.
 	void setRobotCommunicationThreadObject(const QSharedPointer<RobotCommunicationThreadInterface> &robotCommunication);
 
-signals:
+Q_SIGNALS:
 	void errorOccured(const QString &message);
 	void messageArrived(const QString &message);
 	void connected(bool success, const QString &errorString);

@@ -178,7 +178,7 @@ protected:
 	qReal::Id mGraphicalId;
 	Thread *mThread {};
 
-private slots:
+private Q_SLOTS:
 	void finishedRunning();
 
 private:

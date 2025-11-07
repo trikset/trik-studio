@@ -84,7 +84,7 @@ public:
 	/// Returns a mapping of known editors used for current save creation to their versions.
 	QMap<Id, Version> editorVersions() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when new element was added into the logical model.
 	void elementAdded(const Id &id);
 

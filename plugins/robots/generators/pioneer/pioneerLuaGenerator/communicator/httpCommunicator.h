@@ -45,7 +45,7 @@ public:
 
 	void stopProgram() override;
 
-private slots:
+private Q_SLOTS:
 	/// Called when network POST request is finished.
 	void onPostRequestFinished(QNetworkReply *reply);
 

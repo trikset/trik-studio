@@ -45,7 +45,7 @@ void Ev3ReadRGBBlock::run()
 					evalCode(stringProperty("RVariable") + " = " + QString::number(color[0]));
 					evalCode(stringProperty("GVariable") + " = " + QString::number(color[1]));
 					evalCode(stringProperty("BVariable") + " = " + QString::number(color[2]));
-					emit done(mNextBlockId);
+					Q_EMIT done(mNextBlockId);
 				}
 			});
 		mConnections << connect(sensor, &robotParts::VectorSensor::failure, [this](){

@@ -61,7 +61,7 @@ public:
 	bool supportsSearching() const override;
 	bool supportsFindAndReplace() const override;
 
-public slots:
+public Q_SLOTS:
 	void zoomIn() override;
 	void zoomOut() override;
 
@@ -71,13 +71,13 @@ public slots:
 	void find() override;
 	void findAndReplace() override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted in destructor to save written text to according model element
 	void textSaved(const QString &text, const QPersistentModelIndex &index, const int &role);
 
 	void textWasModified(text::QScintillaTextEdit *code);
 
-private slots:
+private Q_SLOTS:
 	void emitTextWasModified();
 
 	void initFindModeConnections();

@@ -36,7 +36,7 @@ public:
 	/// @return List of context menu actions that may be done on a link at the point pos
 	virtual QList<ContextMenuAction *> extraActions(const QPointF &pos);
 
-protected slots:
+protected Q_SLOTS:
 	/// Delete non-end point at position pos (given in link's coordinates), if any
 	void deletePoint(const QPointF &pos);
 

@@ -35,10 +35,10 @@ public:
 	void addItem(const QString &text, const QString &userData, const QString &toolTip = "");
 	void highlightFirstItem();
 
-signals:
+Q_SIGNALS:
 	void userDataSelected(const QString &userData);
 
-private slots:
+private Q_SLOTS:
 	void doubleClickHandler(QListWidgetItem *item);
 
 private:

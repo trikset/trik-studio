@@ -143,7 +143,7 @@ void LogicalModel::updateElements(const Id &logicalId, const QString &name)
 
 	mApi.setName(logicalId, name);
 	const QModelIndex index = indexById(logicalId);
-	emit dataChanged(index, index);
+	Q_EMIT dataChanged(index, index);
 }
 
 QMimeData* LogicalModel::mimeData(const QModelIndexList &indexes) const
@@ -186,7 +186,7 @@ void LogicalModel::addElementToModel(ElementInfo &elementInfo)
 	initializeElement(elementInfo, parentItem, newItem);
 
 	endInsertRows();
-	emit elementAdded(elementInfo.id());
+	Q_EMIT elementAdded(elementInfo.id());
 }
 
 /// @todo: unify this with graphical model
@@ -236,7 +236,7 @@ void LogicalModel::addTree(const Id &parent, const QMultiMap<Id, ElementInfo> &c
 	endInsertRows();
 
 	for (const ElementInfo &child : children) {
-		emit elementAdded(child.id());
+		Q_EMIT elementAdded(child.id());
 		addTree(child.id(), childrenOfParents, visited);
 	}
 }
@@ -386,7 +386,7 @@ bool LogicalModel::setData(const QModelIndex &index, const QVariant &value, int 
 			Q_ASSERT(role < Qt::UserRole);
 			return false;
 		}
-		emit dataChanged(index, index);
+		Q_EMIT dataChanged(index, index);
 		return true;
 	}
 	return false;

@@ -34,7 +34,7 @@ public:
 protected:
 	void changeEvent(QEvent *e) override;
 
-private slots:
+private Q_SLOTS:
 	void showAutoSaveBox(bool show);
 	void updateGesturesSettings(bool gesturesEnabled);
 

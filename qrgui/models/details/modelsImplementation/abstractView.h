@@ -31,13 +31,13 @@ public:
 	explicit AbstractView(AbstractModel * const model);
 	virtual ~AbstractView();
 
-public slots:
+public Q_SLOTS:
 	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
 			, const QModelIndex &destinationParent, int destinationRow);
 	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
 			, const QModelIndex &destinationParent, int destinationRow);
 
-protected slots:
+protected Q_SLOTS:
 	virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
 			, QVector<int> const &roles = QVector<int>());
 	virtual void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end);

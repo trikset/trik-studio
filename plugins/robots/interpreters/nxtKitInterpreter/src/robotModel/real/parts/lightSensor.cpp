@@ -36,7 +36,7 @@ void LightSensor::read()
 		// If sensor is not configured, report failure and return immediately.
 		// It is not an error, it shall be possible to reconfigure sensor "on the fly",
 		// but when it is reconfiguring it shall not be available.
-		emit failure();
+		Q_EMIT failure();
 		return;
 	}
 
@@ -63,5 +63,5 @@ void LightSensor::sensorSpecificProcessResponse(const QByteArray &reading)
 {
 	mImplementation.setState(NxtInputDevice::idle);
 	const int sensorValue = (0xff & reading[13]) << 8 | (0xff & reading[14]);
-	emit newData(sensorValue * 100 / maxLightValue);
+	Q_EMIT newData(sensorValue * 100 / maxLightValue);
 }

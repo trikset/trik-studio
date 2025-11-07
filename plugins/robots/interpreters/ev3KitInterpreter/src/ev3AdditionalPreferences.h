@@ -34,10 +34,10 @@ public:
 	void restoreSettings() override;
 	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel) override;
 
-signals:
+Q_SIGNALS:
 	void settingsChanged();
 
-private slots:
+private Q_SLOTS:
 	void manualComPortCheckboxChecked(bool state);
 
 private:

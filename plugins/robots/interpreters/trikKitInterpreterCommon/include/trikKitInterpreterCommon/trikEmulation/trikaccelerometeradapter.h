@@ -27,7 +27,7 @@ public:
 
 	virtual Status status() const override { return Status::ready; }
 
-public slots:
+public Q_SLOTS:
 	virtual QVector<int> read() const override;
 
 private:

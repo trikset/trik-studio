@@ -41,7 +41,7 @@ public:
 	MOCK_METHOD0(clearErrors, void());
 	MOCK_CONST_METHOD0(wereErrors, bool());
 
-signals:
+Q_SIGNALS:
 	/// Intended to be emitted as a reaction to addError() call, but it is up to mock object configuration to do so.
 	/// Use QrguiFacade for a properly configured error reporter.
 	void error();

@@ -41,11 +41,11 @@ public:
 	/// Destructor.
 	~AddNodeDialog();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when node is added and editors must be reloaded.
 	void jobDone();
 
-private slots:
+private Q_SLOTS:
 	void okButtonClicked();
 	void addNode();
 

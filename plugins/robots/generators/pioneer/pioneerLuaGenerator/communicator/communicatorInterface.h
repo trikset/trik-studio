@@ -43,7 +43,7 @@ public:
 	/// Attempts to stop currently executed program.
 	virtual void stopProgram() = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when upload is finished (successfully or with errors). Is not emitted when uploading is a part of
 	/// running the program. uploadCompleted() is guaranteed to be sent after uploadProgram() call.
 	void uploadCompleted(bool isSuccessful);

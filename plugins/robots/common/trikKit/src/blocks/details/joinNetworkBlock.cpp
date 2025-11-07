@@ -28,5 +28,5 @@ void JoinNetworkBlock::doJob(robotModel::parts::TrikNetworkCommunicator &network
 	auto port = intProperty("IPPort");
 	auto hullNumber = intProperty("HullNumber");
 	network.joinNetwork(address, port, hullNumber);
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

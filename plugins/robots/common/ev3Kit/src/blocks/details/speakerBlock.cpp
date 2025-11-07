@@ -37,7 +37,7 @@ void SpeakerBlock::run()
 	}
 
 	if (!boolProperty("WaitForCompletion"))
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	else {
 		mTimer->start(duration());
 	}
@@ -45,5 +45,5 @@ void SpeakerBlock::run()
 
 void SpeakerBlock::timeout()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

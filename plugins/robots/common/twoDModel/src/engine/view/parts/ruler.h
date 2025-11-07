@@ -35,7 +35,7 @@ public:
 	/// Returns the orientation of this ruler.
 	Qt::Orientation orientation() const;
 
-public slots:
+public Q_SLOTS:
 	/// Returns the orientation of this ruler.
 	void setOrientation(Qt::Orientation orientation);
 

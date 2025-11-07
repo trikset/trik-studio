@@ -222,6 +222,6 @@ void trik::TrikTextualInterpreter::scriptFinished(const QString &error, int scri
 	if (mRunning) { /// @todo: figure out better place for this check - it should avoid double aborts
 	mRunning = false;
 	mBrick.processSensors(false);
-	emit completed();
+	Q_EMIT completed();
 	}
 }

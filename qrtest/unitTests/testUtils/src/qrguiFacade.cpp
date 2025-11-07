@@ -38,7 +38,7 @@ QrguiFacade::QrguiFacade(QString const &modelName)
 			[this](const QFileInfo &file, const QString & genName, const qReal::text::LanguageInfo &language) {
 				Q_UNUSED(genName)
 				Q_UNUSED(language)
-				emit mSystemEvents.newCodeAppeared(activeTab(), QFileInfo(file));
+				Q_EMIT mSystemEvents.newCodeAppeared(activeTab(), QFileInfo(file));
 			}
 			));
 
@@ -50,7 +50,7 @@ QrguiFacade::QrguiFacade(QString const &modelName)
 			[this](const QString &message, const qReal::Id &position) {
 				Q_UNUSED(message)
 				Q_UNUSED(position)
-				emit mErrorReporterMock.error();
+				Q_EMIT mErrorReporterMock.error();
 				mWereErrors = true;
 			}));
 
@@ -158,5 +158,5 @@ const qReal::Id &QrguiFacade::activeTab()
 void QrguiFacade::setActiveTab(qReal::Id const &id)
 {
 	mActiveTab = id;
-	emit systemEvents().activeTabChanged(qReal::TabInfo(id, nullptr));
+	Q_EMIT systemEvents().activeTabChanged(qReal::TabInfo(id, nullptr));
 }

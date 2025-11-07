@@ -262,5 +262,5 @@ DeviceInfo TwoDRobotModel::markerInfo() const
 
 void TwoDRobotModel::rereadSettings()
 {
-	emit settingsChanged();
+	Q_EMIT settingsChanged();
 }

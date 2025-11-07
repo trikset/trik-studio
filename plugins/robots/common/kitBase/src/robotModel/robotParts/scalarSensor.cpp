@@ -30,5 +30,5 @@ int ScalarSensor::lastData() const
 
 void ScalarSensor::setLastData(int data)
 {
-	emit newData(data);
+	Q_EMIT newData(data);
 }

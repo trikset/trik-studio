@@ -96,16 +96,16 @@ void InputBlock::onValueSelected(const QString &text) {
 	}
 	evalCode(stringProperty("variable") + " = " + value);
 	if (!errorsOccured()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }
 
 void InputBlock::onRejected() {
 	if (mCancelBlockId.isNull()) {
 		warning(tr("You must input some value!"));
-		emit done(id());
+		Q_EMIT done(id());
 	} else {
-		emit done(mCancelBlockId);
+		Q_EMIT done(mCancelBlockId);
 	}
 }
 

@@ -38,7 +38,7 @@ public:
 			, RobotModelManager &robotModelManager
 			, QObject *parent = nullptr);
 
-private slots:
+private Q_SLOTS:
 	void onProjectOpened();
 	bool tryToRestoreFromMetaInformation();
 	bool switchTo(const QString &kitId);

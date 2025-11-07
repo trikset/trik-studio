@@ -24,5 +24,5 @@ Button::Button(const DeviceInfo &info, const PortInfo &port)
 
 void Button::read()
 {
-	emit newData(1);
+	Q_EMIT newData(1);
 }

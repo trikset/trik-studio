@@ -31,7 +31,7 @@ Gyroscope::Gyroscope(const kitBase::robotModel::DeviceInfo &info
 void Gyroscope::calibrate()
 {
 	/// @todo
-	emit failure();
+	Q_EMIT failure();
 }
 
 void Gyroscope::read()

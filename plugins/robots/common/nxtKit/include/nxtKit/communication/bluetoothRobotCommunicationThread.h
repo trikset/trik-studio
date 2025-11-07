@@ -30,7 +30,7 @@ public:
 	BluetoothRobotCommunicationThread();
 	~BluetoothRobotCommunicationThread() override;
 
-public slots:
+public Q_SLOTS:
 	bool send(QObject *addressee, const QByteArray &buffer, int responseSize) override;
 	bool connect() override;
 	void reconnect() override;
@@ -38,7 +38,7 @@ public slots:
 
 	void allowLongJobs(bool allow = true) override;
 
-private slots:
+private Q_SLOTS:
 	/// Checks if robot is connected
 	void checkForConnection();
 

@@ -38,13 +38,13 @@ public:
 	/// Enables or disables automatic popping up.
 	void setEnabled(bool enabled);
 
-signals:
+Q_SIGNALS:
 	/// @todo: This is pretty ugly way to separate this popup from executing commands itself, should be worked on.
 	/// Emitted when \a property of \a items must be changed to \a value. External code may process this signal to
 	/// enable undo/redo for that actions.
 	void propertyChanged(const QStringList &items, const QString &property, const QVariant &value);
 
-protected slots:
+protected Q_SLOTS:
 	/// This will set fixed size of this window in consideration with layout.
 	/// Must be called each time when layout of this widget changes.
 	/// This is not performed automaticly cause this widget is not in parent layout, it floats
@@ -74,7 +74,7 @@ protected slots:
 	/// Default implementation clears items memorized last time.
 	virtual void detach();
 
-private slots:
+private Q_SLOTS:
 	void onMousePressedScene();
 	void onMouseReleasedScene();
 

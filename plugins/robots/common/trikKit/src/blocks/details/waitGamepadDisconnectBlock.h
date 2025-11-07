@@ -26,7 +26,7 @@ class WaitGamepadDisconnectBlock : public kitBase::blocksBase::common::WaitForSe
 public:
 	explicit WaitGamepadDisconnectBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 private:

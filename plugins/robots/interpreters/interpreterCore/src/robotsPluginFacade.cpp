@@ -330,7 +330,7 @@ bool RobotsPluginFacade::interpretCode(const QString &inputs, const QString &fil
 		return false;
 	}
 
-	emit mEventsForKitPlugin.interpretCode(code, inputs, extension);
+	Q_EMIT mEventsForKitPlugin.interpretCode(code, inputs, extension);
 	return true;
 }
 
@@ -538,7 +538,7 @@ void RobotsPluginFacade::connectEventsForKitPlugin()
 			&mRobotModelManager
 			, &RobotModelManager::robotModelChanged
 			, [this](kitBase::robotModel::RobotModelInterface &model) {
-				emit mEventsForKitPlugin.robotModelChanged(model.name());
+				Q_EMIT mEventsForKitPlugin.robotModelChanged(model.name());
 			}
 	);
 }

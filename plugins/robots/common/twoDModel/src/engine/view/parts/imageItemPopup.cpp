@@ -123,7 +123,7 @@ QWidget *ImageItemPopup::initMemorizationPicker()
 		setPropertyMassively("memorize", memorized);
 		if (mLastIsMemorized != memorized) {
 			mLastIsMemorized = memorized;
-			emit memorizingChanged(memorized);
+			Q_EMIT memorizingChanged(memorized);
 		}
 	});
 
@@ -142,7 +142,7 @@ QWidget *ImageItemPopup::initBackgroundPicker()
 		setPropertyMassively("background", isBackground);
 		if (mLastIsBackground != isBackground) {
 			mLastIsBackground = isBackground;
-			emit backgroundRoleChanged(isBackground);
+			Q_EMIT backgroundRoleChanged(isBackground);
 		}
 	});
 

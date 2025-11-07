@@ -33,15 +33,15 @@ public:
 	virtual void setSingleShot(bool isSingleShot) = 0;
 	virtual bool isSingleShot() = 0;
 
-public slots:
+public Q_SLOTS:
 	virtual void start() = 0;
 	virtual void start(int ms) = 0;
 	virtual void stop() = 0;
 
-signals:
+Q_SIGNALS:
 	void timeout() ;
 
-protected slots:
+protected Q_SLOTS:
 	virtual void onTimeout();
 };
 

@@ -37,6 +37,6 @@ void DrawCircleBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 			ev3Display->redraw();
 		}
 
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

@@ -30,15 +30,15 @@ public:
 	MOCK_CONST_METHOD0(model, kitBase::robotModel::RobotModelInterface &());
 
 	void emitConnected() {
-		emit connected(true, "");
+		Q_EMIT connected(true, "");
 	}
 
 	void emitAllDevicesConfigured() {
-		emit allDevicesConfigured();
+		Q_EMIT allDevicesConfigured();
 	}
 
 	void emitDisconnected() {
-		emit disconnected();
+		Q_EMIT disconnected();
 	}
 };
 

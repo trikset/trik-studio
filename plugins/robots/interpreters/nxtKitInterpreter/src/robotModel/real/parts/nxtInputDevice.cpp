@@ -52,7 +52,7 @@ void NxtInputDevice::processResponse(const QByteArray &reading)
 	} else if (reading.size() >= 5 && reading[3] == enums::commandCode::RESETINPUTSCALEDVALUE) {
 		mState = idle;
 		mResetDone = true;
-		emit configured(true);
+		Q_EMIT configured(true);
 	} else if (reading.size() >= 5 && reading[3] == enums::commandCode::SETINPUTMODE) {
 		mState = idle;
 		QByteArray command(5, 0);
@@ -65,7 +65,7 @@ void NxtInputDevice::processResponse(const QByteArray &reading)
 
 		mIsConfigured = true;
 	} else {
-		emit sensorSpecificProcessResponse(reading);
+		Q_EMIT sensorSpecificProcessResponse(reading);
 	}
 }
 

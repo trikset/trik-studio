@@ -37,7 +37,7 @@ void SonarSensor::read()
 		// If sensor is not configured, report failure and return immediately.
 		// It is not an error, it shall be possible to reconfigure sensor "on the fly",
 		// but when it is reconfiguring it shall not be available.
-		emit failure();
+		Q_EMIT failure();
 		return;
 	}
 
@@ -68,7 +68,7 @@ void SonarSensor::sensorSpecificProcessResponse(const QByteArray &reading)
 		/// @todo: log trace error?
 	} else {
 		mImplementation.setState(NxtInputDevice::idle);
-		emit newData(0xff & reading[1]);
+		Q_EMIT newData(0xff & reading[1]);
 	}
 }
 

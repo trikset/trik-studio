@@ -62,7 +62,7 @@ public:
 	/// Activates binded with explosion element or creates default explosed element
 	void handleDoubleClick(const Id &id);
 
-signals:
+Q_SIGNALS:
 	/// Activates first binded with explosion link graphical instance of the element
 	/// with given @arg id.
 	void goTo(const Id &id);
@@ -80,7 +80,7 @@ signals:
 	/// Emitted each time when scene must invoke ExpandCommand to the child instance with the given id.
 	void expandElement(const Id &element);
 
-private slots:
+private Q_SLOTS:
 	void addExplosionActionTriggered();
 	void goToActionTriggered();
 	void removeExplosionActionTriggered();

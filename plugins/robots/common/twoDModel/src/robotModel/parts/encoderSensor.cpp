@@ -29,12 +29,12 @@ EncoderSensor::EncoderSensor(const DeviceInfo &info
 
 void EncoderSensor::read()
 {
-	emit newData(mEngine.readEncoder(port()));
+	Q_EMIT newData(mEngine.readEncoder(port()));
 }
 
 void EncoderSensor::nullify()
 {
 	mEngine.resetEncoder(port());
 	// Sensors are updated by timer, so some values (especially, encoders) are missed between timer shots.
-	emit newData(0);
+	Q_EMIT newData(0);
 }

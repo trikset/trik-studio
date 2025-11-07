@@ -30,5 +30,5 @@ QVector<int> VectorSensor::lastData() const
 
 void VectorSensor::setLastData(const QVector<int> &data)
 {
-	emit newData(QVariant::fromValue(data));
+	Q_EMIT newData(QVariant::fromValue(data));
 }

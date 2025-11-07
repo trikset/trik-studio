@@ -145,7 +145,7 @@ void CubeItem::deserialize(const QDomElement &element)
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
 	setRotation(rotation);
-	emit x1Changed(x1());
+	Q_EMIT x1Changed(x1());
 }
 
 QPainterPath CubeItem::shape() const

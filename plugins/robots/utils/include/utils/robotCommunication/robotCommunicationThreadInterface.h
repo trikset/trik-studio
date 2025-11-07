@@ -30,7 +30,7 @@ class ROBOTS_UTILS_EXPORT RobotCommunicationThreadInterface : public QObject
 public:
 	virtual ~RobotCommunicationThreadInterface() {}
 
-public slots:
+public Q_SLOTS:
 	virtual bool send(QObject *addressee, const QByteArray &buffer, int responseSize) = 0;
 	virtual bool send(const QByteArray &buffer, int responseSize, QByteArray &outputBuffer) = 0;
 	virtual bool connect() = 0;
@@ -38,7 +38,7 @@ public slots:
 	virtual void reconnect() = 0;
 	virtual void allowLongJobs(bool allow = true) = 0;
 
-signals:
+Q_SIGNALS:
 	void connected(bool success, const QString &errorString);
 	void disconnected();
 	void response(QObject *addressee, const QByteArray &buffer);

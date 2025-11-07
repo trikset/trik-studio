@@ -45,7 +45,7 @@ void PioneerAdditionalPreferences::save()
 	SettingsManager::setValue(settings::pioneerBaseStationPort, mUi->baseStationPortComboBox->currentText());
 	SettingsManager::setValue(settings::pioneerBaseStationMode, mUi->baseStationModeComboBox->currentText());
 
-	emit settingsChanged();
+	Q_EMIT settingsChanged();
 }
 
 void PioneerAdditionalPreferences::updateComboBox(QComboBox *selector, QString settings)

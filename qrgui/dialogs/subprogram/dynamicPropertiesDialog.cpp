@@ -243,13 +243,13 @@ void DynamicPropertiesDialog::saveButtonClicked()
 	));
 
 	connect(command, &commands::ChangePropertyCommand::redoComplete, &mExploser, [=](){
-		emit mExploser.explosionTargetCouldChangeProperties(mId);
-		emit mExploser.explosionsSetCouldChange();
+		Q_EMIT mExploser.explosionTargetCouldChangeProperties(mId);
+		Q_EMIT mExploser.explosionsSetCouldChange();
 	});
 
 	connect(command, &commands::ChangePropertyCommand::undoComplete, &mExploser, [=](){
-		emit mExploser.explosionTargetCouldChangeProperties(mId);
-		emit mExploser.explosionsSetCouldChange();
+		Q_EMIT mExploser.explosionTargetCouldChangeProperties(mId);
+		Q_EMIT mExploser.explosionsSetCouldChange();
 	});
 
 	mController.execute(command);

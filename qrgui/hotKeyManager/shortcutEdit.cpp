@@ -35,11 +35,11 @@ bool ShortcutEdit::event(QEvent *event)
 			case Qt::Key_Control:
 			case Qt::Key_Alt:
 			case Qt::Key_AltGr:
-				emit newModifiers(keyevent->modifiers());
+				Q_EMIT newModifiers(keyevent->modifiers());
 				break;
 			default:
 				if (event->type() == QEvent::KeyPress) {
-					emit newKey(keyevent->key());
+					Q_EMIT newKey(keyevent->key());
 				}
 		}
 		return true;

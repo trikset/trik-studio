@@ -73,7 +73,7 @@ protected:
 
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
-signals:
+Q_SIGNALS:
 	void mousePressed();
 	void changedPosition(twoDModel::view::RobotItem *robotItem);
 	void drawTrace(const QPen &pen, const QPointF &from, const QPointF &to);

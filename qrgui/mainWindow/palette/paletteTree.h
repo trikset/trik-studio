@@ -102,10 +102,10 @@ public:
 	void customizeExplosionTitles(const QString &userGroupTitle
 			, const QString &userGroupDescription);
 
-signals:
+Q_SIGNALS:
 	void paletteParametersChanged();
 
-public slots:
+public Q_SLOTS:
 	/// Expand all nodes of current tree.
 	void expand();
 
@@ -128,7 +128,7 @@ private:
 	/// Returns maximum count of items in all rows of widget
 	int maxItemsCountInARow() const;
 
-private slots:
+private Q_SLOTS:
 	void onSearchTextChanged(const QRegExp &searchText);
 
 private:

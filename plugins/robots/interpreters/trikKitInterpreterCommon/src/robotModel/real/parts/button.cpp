@@ -27,13 +27,13 @@ Button::Button(const DeviceInfo &info, const PortInfo &port, int code
 
 void Button::read()
 {
-	emit newData(mOldValue);
+	Q_EMIT newData(mOldValue);
 }
 
 void Button::onIncomingData(const QString &portName, int value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		Q_EMIT newData(mOldValue);
 	}
 }

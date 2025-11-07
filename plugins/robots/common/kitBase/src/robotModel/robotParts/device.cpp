@@ -59,10 +59,10 @@ void Device::doConfiguration()
 void Device::configurationCompleted(bool success)
 {
 	mConfigurationTimeoutTimer.stop();
-	emit configured(success);
+	Q_EMIT configured(success);
 }
 
 void Device::configurationTimerTimeoutSlot()
 {
-	emit configured(false);
+	Q_EMIT configured(false);
 }

@@ -42,7 +42,7 @@ public:
 
 	void setScene(QGraphicsScene *scene);
 
-public slots:
+public Q_SLOTS:
 	/// makes the minimap display only items of the scene
 	void showScene();
 	void ensureVisible(const QList<QRectF> &region);

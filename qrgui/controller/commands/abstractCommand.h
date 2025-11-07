@@ -67,7 +67,7 @@ public:
 	/// Returns time of this command creation in ms since epoch
 	uint timestamp() const;
 
-signals:
+Q_SIGNALS:
 	void redoComplete(bool success);
 	void undoComplete(bool success);
 

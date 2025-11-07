@@ -29,7 +29,7 @@ class HintReporter : public QLabel
 public:
 	HintReporter(QWidget *parent, const QString &message, int lifeTime);
 
-private slots:
+private Q_SLOTS:
 	void disappear();
 
 private:

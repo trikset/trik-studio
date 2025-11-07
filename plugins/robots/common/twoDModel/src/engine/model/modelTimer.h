@@ -39,7 +39,7 @@ public:
 	void setSingleShot(bool isSingleShot) override;
 	bool isSingleShot() override;
 
-private slots:
+private Q_SLOTS:
 	void onTimeout() override;
 	void onTick();
 

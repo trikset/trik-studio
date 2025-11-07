@@ -79,7 +79,7 @@ public:
 	/// Check that server received "version" command.
 	bool versionRequestReceived() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted after connection becomes closed.
 	void disconnected();
 
@@ -93,7 +93,7 @@ protected:
 	/// @param port - target port.
 	void init(const QHostAddress &ip, int port);
 
-private slots:
+private Q_SLOTS:
 	/// New data is ready on a socket.
 	void onReadyRead();
 

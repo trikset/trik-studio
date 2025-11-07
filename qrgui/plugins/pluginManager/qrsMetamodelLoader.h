@@ -46,7 +46,7 @@ public:
 	/// @note Transfers owership to caller.
 	QList<QSharedPointer<Metamodel>> load(const QString &pathToQrs);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when metamodel parser found some error in metamodel.
 	/// @param message Localized message that can be shown to user via error reporter.
 	/// @param id The id of the element that contains this error, may be empty in general case.

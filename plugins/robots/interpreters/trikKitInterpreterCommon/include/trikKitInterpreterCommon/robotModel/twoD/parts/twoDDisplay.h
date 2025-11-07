@@ -57,7 +57,7 @@ public:
 	/// Returns true if robot draws sad smile at the moment.
 	bool sadSmiles() const;
 
-public slots: // needed for invokeMethod
+public Q_SLOTS: // needed for invokeMethod
 	void drawSmile(bool sad) override;
 	void setBackground(const QColor &color) override;
 	void clearScreen() override;
@@ -74,7 +74,7 @@ public slots: // needed for invokeMethod
 	void redraw() override;
 	void show(const QVector<int32_t> &array, int width, int height, const QString &format);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when bacground color has changed.
 	/// @param color The current (new) color of the background, may be transparent.
 	void backgroundChanged(const QColor &color);

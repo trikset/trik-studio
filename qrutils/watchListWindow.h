@@ -56,10 +56,10 @@ public:
 	QString editorId() const override;
 	bool supportsCopying() const override;
 
-public slots:
+public Q_SLOTS:
 	void copy() override;
 
-private slots:
+private Q_SLOTS:
 	void updateVariables();
 
 private:

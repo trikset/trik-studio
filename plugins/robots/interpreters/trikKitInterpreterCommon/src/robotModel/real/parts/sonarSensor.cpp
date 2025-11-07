@@ -28,13 +28,13 @@ SonarSensor::SonarSensor(const DeviceInfo &info, const PortInfo &port
 
 void SonarSensor::read()
 {
-	emit newData(mOldValue);
+	Q_EMIT newData(mOldValue);
 }
 
 void SonarSensor::onIncomingData(const QString &portName, int value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		Q_EMIT newData(mOldValue);
 	}
 }

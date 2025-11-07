@@ -26,5 +26,5 @@ MarkerUpBlock::MarkerUpBlock(RobotModelInterface &robotModel)
 void MarkerUpBlock::doJob(robotModel::parts::Marker &marker)
 {
 	marker.up();
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

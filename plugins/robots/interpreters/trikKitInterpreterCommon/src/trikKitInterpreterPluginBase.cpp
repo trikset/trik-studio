@@ -101,7 +101,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 		return;
 	}
 
-	emit codeInterpretationStarted(code, extension);
+	Q_EMIT codeInterpretationStarted(code, extension);
 
 	auto model = mTwoDRobotModel;
 	model->stopRobot(); // testStop?
@@ -121,7 +121,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code, 
 	auto savePath = texttab ? mCurrentTabPath : mProjectManager->saveFilePath();
 	textualInterpreter()->setCurrentDir(QFileInfo(savePath).absolutePath(), extension);
 	textualInterpreter()->setRunning(true);
-	emit started();
+	Q_EMIT started();
 	textualInterpreter()->interpretScript(code, extension);
 }
 
@@ -130,7 +130,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 {
 
 	// we are in exercise mode (maybe rename it later)
-	emit codeInterpretationStarted(code, extension);
+	Q_EMIT codeInterpretationStarted(code, extension);
 
 	auto model = mTwoDRobotModel;
 	model->stopRobot(); // testStop?
@@ -148,7 +148,7 @@ void TrikKitInterpreterPluginBase::startCodeInterpretation(const QString &code
 
 	textualInterpreter()->setCurrentDir(QFileInfo(mProjectManager->saveFilePath()).absolutePath(), extension);
 	textualInterpreter()->setRunning(true);
-	emit started();
+	Q_EMIT started();
 	textualInterpreter()->interpretScriptExercise(code, inputs, extension);
 }
 
@@ -540,7 +540,7 @@ void TrikKitInterpreterPluginBase::testStop(qReal::interpretation::StopReason re
 
 	textualInterpreter()->abort();
 	mTwoDRobotModel->stopRobot();
-	emit stopped(reason);
+	Q_EMIT stopped(reason);
 }
 
 void TrikKitInterpreterPluginBase::onTabChanged(const TabInfo &info)

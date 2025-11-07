@@ -76,7 +76,7 @@ public:
 	QString generatorName(const QString &filepath) const override;
 	CodeBlockManager &codeBlockManager();
 
-private slots:
+private Q_SLOTS:
 	void setModified(text::QScintillaTextEdit *code, bool modified = true);
 	void onTabClosed(const QFileInfo &file);
 

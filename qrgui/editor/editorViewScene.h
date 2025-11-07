@@ -150,7 +150,7 @@ public:
 	/// Connects to search panel's signals.
 	void setSearchPanel(ui::SearchLinePanel &searchPanel);
 
-public slots:
+public Q_SLOTS:
 	Id createElement(const QString &type);
 
 	void cut() override;
@@ -170,7 +170,7 @@ public slots:
 	/// Makes same as QGraphicsScene::update. Useful for c++11-styled connections.
 	void redraw();
 
-signals:
+Q_SIGNALS:
 	void zoomIn() override;
 	void zoomOut() override;
 
@@ -207,7 +207,7 @@ protected:
 	void focusInEvent(QFocusEvent *event) override;
 	void focusOutEvent(QFocusEvent *event) override;
 
-private slots:
+private Q_SLOTS:
 	void createEdge(const Id &id);
 
 	/// Creates an object on a diagram by currently drawn mouse gesture. Stops gesture timer.

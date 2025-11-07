@@ -43,6 +43,6 @@ void TrikEnginesBackwardBlock::run()
 			}
 		}
 
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

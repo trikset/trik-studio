@@ -26,7 +26,7 @@ class WaitPadPressBlock : public kitBase::blocksBase::common::WaitForSensorBlock
 public:
 	explicit WaitPadPressBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 private:

@@ -70,7 +70,7 @@ void HttpCommunicator::uploadProgram(const QFileInfo &program)
 	QFile programFile(program.canonicalFilePath());
 	if (!programFile.open(QIODevice::ReadOnly)) {
 		mErrorReporter.addError(tr("Generation failed, upload aborted."));
-		emit uploadCompleted(false);
+		Q_EMIT uploadCompleted(false);
 		return;
 	}
 
@@ -79,7 +79,7 @@ void HttpCommunicator::uploadProgram(const QFileInfo &program)
 
 	if (programData.isEmpty()) {
 		mErrorReporter.addError(tr("Generation failed, upload aborted."));
-		emit uploadCompleted(false);
+		Q_EMIT uploadCompleted(false);
 		return;
 	}
 
@@ -119,7 +119,7 @@ void HttpCommunicator::startProgram()
 void HttpCommunicator::stopProgram()
 {
 	mErrorReporter.addError(tr("Stopping program is not supported for HTTP communication mode."));
-	emit stopCompleted(false);
+	Q_EMIT stopCompleted(false);
 }
 
 void HttpCommunicator::onPostRequestFinished(QNetworkReply *reply)
@@ -129,18 +129,18 @@ void HttpCommunicator::onPostRequestFinished(QNetworkReply *reply)
 	if (reply->url().toString().endsWith("/upload")) {
 		if (reply->error() != QNetworkReply::NoError) {
 			mErrorReporter.addError(reply->errorString());
-			emit uploadCompleted(false);
+			Q_EMIT uploadCompleted(false);
 		} else {
 			mErrorReporter.addInformation(tr("Uploading finished."));
-			emit uploadCompleted(true);
+			Q_EMIT uploadCompleted(true);
 		}
 	} else if (reply->url().toString().endsWith("/start")) {
 		if (reply->error() != QNetworkReply::NoError) {
 			mErrorReporter.addError(reply->errorString());
-			emit startCompleted(false);
+			Q_EMIT startCompleted(false);
 		} else {
 			mErrorReporter.addInformation(tr("Start finished."));
-			emit startCompleted(true);
+			Q_EMIT startCompleted(true);
 		}
 	}
 

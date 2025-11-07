@@ -57,7 +57,7 @@ public:
 
 	void setElementRepo(ElementRepoInterface *elementRepo);
 
-public slots:
+public Q_SLOTS:
 	/// Sets current zoom in editor to render images in more suitable resolution.
 	void setZoom(qreal zoomFactor);
 

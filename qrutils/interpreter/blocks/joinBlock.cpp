@@ -40,6 +40,6 @@ void JoinBlock::run()
 
 	mIncomingTokens++;
 	if (mIncomingTokens == mGraphicalModelApi->graphicalRepoApi().incomingLinks(id()).size()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

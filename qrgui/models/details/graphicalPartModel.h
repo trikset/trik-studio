@@ -78,7 +78,7 @@ public:
 	/// Deletes model contents and reloads it from repo.
 	void reinit();
 
-public slots:
+public Q_SLOTS:
 	virtual void rowsAboutToBeRemovedInGraphicalModel(const QModelIndex &parent, int start, int end);
 
 private:

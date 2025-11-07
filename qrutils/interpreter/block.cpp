@@ -186,7 +186,7 @@ QColor Block::propertyToColor(const QString &property) const
 void Block::error(const QString &message)
 {
 	mErrorReporter->addError(message, id());
-	emit failure();
+	Q_EMIT failure();
 }
 
 void Block::warning(const QString &message)

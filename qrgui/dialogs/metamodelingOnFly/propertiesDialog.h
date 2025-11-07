@@ -42,7 +42,7 @@ public:
 	/// Destructor.
 	~PropertiesDialog();
 
-private slots:
+private Q_SLOTS:
 	void closeDialog();
 	void deleteProperty();
 	void addProperty();

@@ -275,7 +275,7 @@ void RobotItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 void RobotItem::recoverDragStartPosition()
 {
 	mRobotModel.setPosition(mDragStart);
-	emit recoverRobotPosition(mDragStart);
+	Q_EMIT recoverRobotPosition(mDragStart);
 }
 
 RobotModel &RobotItem::robotModel()

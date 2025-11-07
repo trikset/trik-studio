@@ -34,7 +34,7 @@ public:
 	void connectToRobot() override;
 	void disconnectFromRobot() override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when communicator throws an error to be displayed with error reporter.
 	void errorOccured(const QString &text);
 

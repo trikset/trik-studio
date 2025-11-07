@@ -42,12 +42,12 @@ public:
 	/// Sets the \a color of led emulator in 2D model.
 	void setColor(const QColor &color);
 
-public slots:
+public Q_SLOTS:
 	/// Sets the \a color of led emulator in 2D model.
 	/// If "off" passed then led becomes gray.
 	void setColor(const QString &color) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when led color has changed.
 	/// @warning This signal will not be emitted on led color chage right before or right after the interpretation.
 	/// It notifies only about led`s color modification by led block.

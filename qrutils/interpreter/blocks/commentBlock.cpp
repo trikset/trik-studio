@@ -18,7 +18,7 @@ using namespace qReal::interpretation::blocks;
 
 void CommentBlock::run()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 bool CommentBlock::initNextBlocks()

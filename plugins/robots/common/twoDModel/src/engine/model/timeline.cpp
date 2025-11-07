@@ -44,7 +44,7 @@ void Timeline::start()
 {
 	if (!mIsStarted) {
 		mIsStarted = true;
-		emit started();
+		Q_EMIT started();
 		gotoNextFrame();
 	}
 }
@@ -54,9 +54,9 @@ void Timeline::stop(qReal::interpretation::StopReason reason)
 	if (mIsStarted) {
 		mIsStarted = false;
 		QCoreApplication::processEvents();
-		emit beforeStop(reason);
+		Q_EMIT beforeStop(reason);
 		mTimer.stop();
-		emit stopped(reason);
+		Q_EMIT stopped(reason);
 	}
 }
 
@@ -71,7 +71,7 @@ void Timeline::onTimer()
 		QCoreApplication::processEvents();
 		if (mIsStarted) {
 			mTimestamp += timeInterval;
-			emit tick();
+			Q_EMIT tick();
 			++mCyclesCount;
 			if (mCyclesCount >= mSpeedFactor) {
 				mTimer.stop();
@@ -93,7 +93,7 @@ void Timeline::onTimer()
 
 void Timeline::gotoNextFrame()
 {
-	emit nextFrame();
+	Q_EMIT nextFrame();
 	mFrameStartTimestamp = QDateTime::currentMSecsSinceEpoch();
 	if (!mTimer.isActive()) {
 		mTimer.start();
@@ -136,6 +136,6 @@ void Timeline::setSpeedFactor(int factor)
 {
 	if (mSpeedFactor != factor) {
 		mSpeedFactor = factor;
-		emit speedFactorChanged(factor);
+		Q_EMIT speedFactorChanged(factor);
 	}
 }

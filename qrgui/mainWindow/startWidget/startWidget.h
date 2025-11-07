@@ -39,7 +39,7 @@ public:
 	/// This method can change layout of the buttons on start tab.
 	void setVisibleForInterpreterButton(const bool visible);
 
-private slots:
+private Q_SLOTS:
 	void openRecentProject(const QString &fileName);
 	void openExistingProject();
 	void createProjectWithDiagram(const QString &idString);

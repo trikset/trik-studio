@@ -32,7 +32,7 @@ public:
 	/// @param minimalistic If true then only colors will be shown; otherwise color will be written by text.
 	explicit ColorListEditor(QWidget *widget = 0, bool minimalistic = false);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user picked another color.
 	void colorChanged(const QColor &color);
 

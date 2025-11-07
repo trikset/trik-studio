@@ -48,7 +48,7 @@ public:
 	/// Prevously it was a private slot
 	void edgeButtonClicked();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when editing is complete and everything must be reloaded.
 	void jobDone();
 

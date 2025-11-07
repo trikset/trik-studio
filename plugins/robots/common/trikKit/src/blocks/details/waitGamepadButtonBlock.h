@@ -31,7 +31,7 @@ class WaitGamepadButtonBlock : public kitBase::blocksBase::common::WaitBlock
 public:
 	explicit WaitGamepadButtonBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	/// Called when new data about button state is received.
 	void responseSlot(int isPressed);
 

@@ -26,6 +26,6 @@ void CalibrateGyroscopeBlock::doJob(GyroscopeSensor &gyro)
 {
 	auto failSignal = connect(&gyro, &GyroscopeSensor::failure, this, [this]{this->warning("Can't calibrate");});
 	gyro.calibrate();
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 	disconnect(failSignal);
 }

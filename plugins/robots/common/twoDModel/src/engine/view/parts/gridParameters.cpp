@@ -61,11 +61,11 @@ GridParameters::~GridParameters()
 void GridParameters::showGrid(bool isGridEnabled)
 {
 	qReal::SettingsManager::setValue("2dShowGrid", isGridEnabled);
-	emit parametersChanged();
+	Q_EMIT parametersChanged();
 }
 
 void GridParameters::setCellSize(int cellSizeValue)
 {
 	qReal::SettingsManager::setValue("2dGridCellSize", cellSizeValue);
-	emit parametersChanged();
+	Q_EMIT parametersChanged();
 }

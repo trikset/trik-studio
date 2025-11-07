@@ -40,7 +40,7 @@ public:
 
 	virtual Status status() const override { return Status::ready; }
 
-public slots:
+public Q_SLOTS:
 	virtual QVector<int> read() const override;
 	virtual void calibrate(int msec) override;
 	virtual bool isCalibrated() const override;
@@ -48,7 +48,7 @@ public slots:
 	virtual void setCalibrationValues(const QVector<int> &) override {}
 	virtual QVector<int> getCalibrationValues() override { return QVector<int>(); }
 
-private slots:
+private Q_SLOTS:
 	void countTilt(const QVector<int> &oldFormat);
 
 private:

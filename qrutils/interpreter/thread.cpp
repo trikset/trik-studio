@@ -98,7 +98,7 @@ void Thread::interpret()
 
 void Thread::stop(qReal::interpretation::StopReason reason)
 {
-	emit stopped(reason);
+	Q_EMIT stopped(reason);
 }
 
 void Thread::nextBlock(const Id &blockId)
@@ -129,7 +129,7 @@ void Thread::stepInto(const Id &diagram)
 void Thread::finishedSteppingInto()
 {
 	if (mStack.isEmpty()) {
-		emit stopped(qReal::interpretation::StopReason::finished);
+		Q_EMIT stopped(qReal::interpretation::StopReason::finished);
 		return;
 	}
 
@@ -145,7 +145,7 @@ void Thread::finishedSteppingInto()
 
 void Thread::failure()
 {
-	emit stopped(qReal::interpretation::StopReason::error);
+	Q_EMIT stopped(qReal::interpretation::StopReason::error);
 }
 
 void Thread::error(const QString &message, const Id &source)

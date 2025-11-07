@@ -145,7 +145,7 @@ CommonRobotModelTest::CommonRobotModelDescendantMock::CommonRobotModelDescendant
 		mConnectionTimer.setInterval(100);
 		mConnectionTimer.setSingleShot(true);
 		QObject::connect(&mConnectionTimer, &QTimer::timeout, [&] () {
-			emit connected(true, "");
+			Q_EMIT connected(true, "");
 		});
 	}
 	EXPECT_CALL(*this, needsConnection()).Times(AtLeast(0));
@@ -156,7 +156,7 @@ void CommonRobotModelTest::CommonRobotModelDescendantMock::connectToRobot()
 	if (!mImmediateConnection) {
 		mConnectionTimer.start();
 	} else {
-		emit connected(true, "");
+		Q_EMIT connected(true, "");
 	}
 }
 

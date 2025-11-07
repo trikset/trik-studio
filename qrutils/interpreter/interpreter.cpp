@@ -66,7 +66,7 @@ void Interpreter::startInterpretation()
 	qReal::interpretation::Thread * const initialThread = new qReal::interpretation::Thread(&mGraphicalModelApi
 			, mInterpretersInterface, mInitialNodeType, currentDiagramId, mBlocksTable, "main");
 
-	emit started();
+	Q_EMIT started();
 	addThread(initialThread, "main");
 }
 
@@ -76,7 +76,7 @@ void Interpreter::stopInterpretation()
 	qDeleteAll(mThreads);
 	mThreads.clear();
 	mBlocksTable.setFailure();
-	emit stopped();
+	Q_EMIT stopped();
 }
 
 void Interpreter::threadStopped()

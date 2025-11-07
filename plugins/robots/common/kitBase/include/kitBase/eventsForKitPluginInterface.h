@@ -26,7 +26,7 @@ class ROBOTS_KIT_BASE_EXPORT EventsForKitPluginInterface : public QObject
 {
 	Q_OBJECT
 
-signals:
+Q_SIGNALS:
 	/// Program interpretation started.
 	void interpretationStarted();
 

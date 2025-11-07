@@ -42,7 +42,7 @@ public:
 	/// Redraws this widget without the graphical effect of selection.
 	void removeSelection();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user clicks this widget.
 	void clicked();
 

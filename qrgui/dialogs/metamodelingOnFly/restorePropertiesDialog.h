@@ -45,10 +45,10 @@ public:
 	/// @param propertyName name of property.
 	void fillSameNamePropertiesTW(const IdList &propertiesWithTheSameNameList, QString  const &propertyName);
 
-signals:
+Q_SIGNALS:
 	void createNewChosen();
 
-private slots:
+private Q_SLOTS:
 	void restoreButtonClicked();
 	void createButtonClicked();
 

@@ -35,7 +35,7 @@ public:
 	/// Returns a pointer to 'none' tool that triggered when no other tool selected.
 	const QAction &cursorAction() const;
 
-public slots:
+public Q_SLOTS:
 	/// Appends an item to 2D model`s palette.
 	void registerTool(QAction * const tool);
 

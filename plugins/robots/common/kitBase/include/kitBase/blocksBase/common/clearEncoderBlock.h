@@ -46,7 +46,7 @@ private:
 
 	robotModel::RobotModelInterface &mRobotModel;
 
-private slots:
+private Q_SLOTS:
 	void doneNextBlock();
 
 };

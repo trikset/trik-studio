@@ -38,5 +38,5 @@ void NxtEnginesBackwardBlock::run()
 		motor->on(power, breakMode);
 	}
 
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

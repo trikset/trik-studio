@@ -66,14 +66,14 @@ public:
 
 	bool isRunning() const override;
 
-public slots:
+public Q_SLOTS:
 	void connectToRobot() override;
 	void interpret() override;
 	void stopRobot(qReal::interpretation::StopReason reason = qReal::interpretation::StopReason::userStop) override;
 	int timeElapsed() const override;
 	qReal::IdList supportedDiagrams() const override;
 
-private slots:
+private Q_SLOTS:
 	void threadStopped(qReal::interpretation::StopReason reason);
 	void newThread(const qReal::Id &startBlockId, const QString &threadId);
 	void killThread(const QString &threadId);

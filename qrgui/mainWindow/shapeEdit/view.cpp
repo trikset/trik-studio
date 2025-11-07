@@ -46,6 +46,6 @@ void View::keyPressEvent(QKeyEvent *event)
 {
 	QGraphicsView::keyPressEvent(event);
 	if (event->matches(QKeySequence::Delete)) {
-		emit deleteItem();
+		Q_EMIT deleteItem();
 	}
 }

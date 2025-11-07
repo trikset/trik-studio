@@ -85,7 +85,7 @@ public:
 	void setEnableRobotActions(bool enableRobotActions);
 
 	void setRunActionVisible(bool isModelInterpreted);
-public slots:
+public Q_SLOTS:
 	/// Reacts to selection of another robot model.
 	/// @param model - newly selected robot model.
 	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface &model);
@@ -94,7 +94,7 @@ public slots:
 	/// @param info - the information about the new active tab.
 	void onActiveTabChanged(const qReal::TabInfo &info);
 
-private slots:
+private Q_SLOTS:
 	void onRobotModelActionChecked(QObject *robotModelObject);
 
 private:

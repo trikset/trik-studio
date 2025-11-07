@@ -58,14 +58,14 @@ public:
 	void configure(QAction &zoomIn, QAction &zoomOut, QAction &undo, QAction &redo, QAction &copy
 			, QAction &paste, QAction &cut, QAction &find, QAction &findAndReplace, QAction &replaceBy) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when for some reason root element was removed and editor must be closed.
 	void rootElementRemoved(const QModelIndex &rootGraphicsIndex);
 
 	/// Emitted when current zoom of editor was changed by user.
 	void zoomChanged(qreal zoomFactor);
 
-public slots:
+public Q_SLOTS:
 	void toggleAntialiasing(bool);
 	void zoomIn() override;
 	void zoomOut() override;
@@ -88,7 +88,7 @@ protected:
 
 	bool viewportEvent(QEvent *event) override;
 
-private slots:
+private Q_SLOTS:
 	void zoomInTime();
 	void zoomOutTime();
 	void animFinished();

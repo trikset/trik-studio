@@ -153,7 +153,7 @@ void BallItem::saveStartPosition()
 	if (this->editable()) {
 		mStartPosition = pos();
 		mStartRotation = rotation();
-		emit x1Changed(x1());
+		Q_EMIT x1Changed(x1());
 	}
 }
 

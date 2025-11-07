@@ -31,7 +31,7 @@ class QRGUI_SYSTEM_FACADE_EXPORT ProjectManager : public ProjectManagementInterf
 public:
 	explicit ProjectManager(models::Models &models);
 
-public slots:
+public Q_SLOTS:
 	bool openExisting(const QString &fileName) override;
 	bool suggestToOpenExisting() override;
 	bool openNewWithDiagram() override;

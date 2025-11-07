@@ -79,6 +79,6 @@ void EdgePropertiesDialog::addEdgeElement()
 			, mUi->endTypeComboBox->currentText()
 			);
 
-	emit jobDone();
+	Q_EMIT jobDone();
 	done(QDialog::Accepted);
 }

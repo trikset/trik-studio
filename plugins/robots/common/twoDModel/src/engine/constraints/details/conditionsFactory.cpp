@@ -225,5 +225,5 @@ Condition ConditionsFactory::usingCondition(const Condition &returns, const Trig
 
 void ConditionsFactory::reportError(const QString &message) const
 {
-	emit mStatus.checkerError(message);
+	Q_EMIT mStatus.checkerError(message);
 }

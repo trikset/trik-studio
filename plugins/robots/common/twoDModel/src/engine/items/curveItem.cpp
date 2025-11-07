@@ -274,7 +274,7 @@ QVariant MarkerItem::itemChange(QGraphicsItem::GraphicsItemChange change, const 
 void MarkerItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
-	emit static_cast<AbstractItem *>(parentItem())->mouseInteractionStarted();
+	Q_EMIT static_cast<AbstractItem *>(parentItem())->mouseInteractionStarted();
 }
 
 void MarkerItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -286,5 +286,5 @@ void MarkerItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 void MarkerItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 	Q_UNUSED(event)
-	emit static_cast<AbstractItem *>(parentItem())->mouseInteractionStopped();
+	Q_EMIT static_cast<AbstractItem *>(parentItem())->mouseInteractionStopped();
 }

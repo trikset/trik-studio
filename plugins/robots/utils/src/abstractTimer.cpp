@@ -18,5 +18,5 @@ using namespace utils;
 
 void AbstractTimer::onTimeout()
 {
-	emit timeout();
+	Q_EMIT timeout();
 }

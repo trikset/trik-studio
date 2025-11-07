@@ -63,7 +63,7 @@ void SettingsManager::set(const QString &name, const QVariant &value)
 	const QVariant oldValue = this->value(name);
 	if (oldValue != value) {
 		mData[name] = value;
-		emit settingsChanged(name, oldValue, value);
+		Q_EMIT settingsChanged(name, oldValue, value);
 	}
 }
 
@@ -131,7 +131,7 @@ void SettingsManager::mergeSettings(const QString &fileNameForImport, QHash<QStr
 		if (newValue != oldValue) {
 			target[name] = settings.value(name);
 			if (target == mData || !mData.contains(name)) {
-				emit settingsChanged(name, oldValue, newValue);
+				Q_EMIT settingsChanged(name, oldValue, newValue);
 			}
 		}
 	}

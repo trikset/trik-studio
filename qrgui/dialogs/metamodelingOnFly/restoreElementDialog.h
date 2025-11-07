@@ -42,13 +42,13 @@ public:
 	/// Destructor.
 	~RestoreElementDialog();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when element was restored and everything must be reloaded.
 	void jobDone();
 	void createNewChosen();
 	void restoreChosen(int result);
 
-private slots:
+private Q_SLOTS:
 	void restoreButtonClicked();
 	void createButtonClicked();
 

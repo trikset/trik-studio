@@ -138,7 +138,7 @@ void Controller::resetModifiedState()
 
 	if (wasModified != mModifiedState) {
 		mModifiedState = wasModified;
-		emit modifiedChanged(mModifiedState);
+		Q_EMIT modifiedChanged(mModifiedState);
 	}
 }
 
@@ -147,7 +147,7 @@ void Controller::resetCanUndoState()
 	const bool canUndo = (mActiveStack && mActiveStack->canUndo()) || mGlobalStack->canUndo();
 	if (canUndo != mCanUndoState) {
 		mCanUndoState = canUndo;
-		emit canUndoChanged(mCanUndoState);
+		Q_EMIT canUndoChanged(mCanUndoState);
 	}
 }
 
@@ -156,7 +156,7 @@ void Controller::resetCanRedoState()
 	const bool canRedo = (mActiveStack && mActiveStack->canRedo()) || mGlobalStack->canRedo();
 	if (canRedo != mCanRedoState) {
 		mCanRedoState = canRedo;
-		emit canRedoChanged(mCanRedoState);
+		Q_EMIT canRedoChanged(mCanRedoState);
 	}
 }
 

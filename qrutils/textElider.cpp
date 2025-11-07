@@ -37,6 +37,6 @@ void TextElider::setText(const QString &text)
 		}
 
 		const QString &elidedText = mWidget->fontMetrics().elidedText(text, mMode, width);
-		emit textChanged(elidedText);
+		Q_EMIT textChanged(elidedText);
 	}
 }

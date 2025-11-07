@@ -67,7 +67,7 @@ void CommonRobotModel::init()
 
 void CommonRobotModel::connectToRobot()
 {
-	emit connected(true, QString());
+	Q_EMIT connected(true, QString());
 }
 
 void CommonRobotModel::stopRobot()
@@ -87,7 +87,7 @@ void CommonRobotModel::stopRobot()
 
 void CommonRobotModel::disconnectFromRobot()
 {
-	emit disconnected();
+	Q_EMIT disconnected();
 }
 
 void CommonRobotModel::updateSensorsValues() const

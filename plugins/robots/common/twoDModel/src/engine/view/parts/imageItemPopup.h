@@ -41,7 +41,7 @@ public:
 	/// Returns last path to image entered by user.
 	QString lastPath() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when keeping image externally has changed.
 	void memorizingChanged(bool isMemorized);
 
@@ -51,7 +51,7 @@ signals:
 	/// Emitted when path to image picked by user has changed.
 	void pathChanged(const QString &path);
 
-private slots:
+private Q_SLOTS:
 	void updateMemorizationToolTip();
 	void updateBackgroundToolTip();
 

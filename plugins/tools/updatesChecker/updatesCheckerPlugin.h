@@ -34,7 +34,7 @@ public:
 
 	QStringList defaultSettingsFiles() override;
 
-private slots:
+private Q_SLOTS:
 	void checkForUpdates(bool reportNoUpdates = true);
 	void showUpdatesDialog();
 	void reportNoUpdates();

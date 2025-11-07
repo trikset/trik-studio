@@ -46,7 +46,7 @@ public:
 	/// Called each time when control flow has reached the end block of the requested for stepping into diagram.
 	virtual void finishedSteppingInto() = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when the block has finished its work.
 	/// @param nextBlock - an id of the block that was decided to follow next.
 	void done(const qReal::Id &nextBlock);

@@ -27,7 +27,7 @@ LedBlock::LedBlock(RobotModelInterface &robotModel)
 void LedBlock::doJob(robotModel::parts::Ev3Led &led)
 {
 	led.setColor(toLedColor(stringProperty("Color")));
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 robotModel::parts::Ev3LedColor LedBlock::toLedColor(const QString &color) const

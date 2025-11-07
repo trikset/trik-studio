@@ -34,7 +34,7 @@ void WaitForMessageBlock::handle()
 {
 	evalCode(stringProperty("Variable") + " = " + mMessage);
 	stop();
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 	return;
 }
 

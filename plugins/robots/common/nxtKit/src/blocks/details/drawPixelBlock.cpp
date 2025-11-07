@@ -36,6 +36,6 @@ void DrawPixelBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 			nxtDisplay->redraw();
 		}
 
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

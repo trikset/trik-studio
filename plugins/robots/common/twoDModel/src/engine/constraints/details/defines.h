@@ -30,7 +30,7 @@ class StatusReporter : public QObject
 {
 	Q_OBJECT
 
-signals:
+Q_SIGNALS:
 	/// Emitted when <success> tag triggered.
 	/// @param deferred If true then the program execution will not be stopped immediately.
 	/// Instead the success trigger will be emitted just when program execution is stopped.

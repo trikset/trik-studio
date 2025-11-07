@@ -18,5 +18,5 @@ using namespace qReal::interpretation::blocks;
 
 void InitialBlock::run()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

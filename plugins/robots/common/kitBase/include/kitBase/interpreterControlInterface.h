@@ -36,7 +36,7 @@ public:
 
 	virtual ~InterpreterControlInterface() {}
 
-signals:
+Q_SIGNALS:
 	/// Emitted when connection to robot is established, devices are configured and interpretation is started.
 	void started();
 
@@ -52,7 +52,7 @@ signals:
 	/// same
 	void startScriptInterpretation();
 
-public slots:
+public Q_SLOTS:
 	/// Starts interpteration process.
 	virtual void interpret() = 0;
 

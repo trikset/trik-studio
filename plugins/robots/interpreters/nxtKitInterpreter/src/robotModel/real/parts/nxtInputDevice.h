@@ -61,14 +61,14 @@ public:
 	/// Returns a value of port that can be used as corresponding byte in request packages.
 	char lowLevelPort() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when responce buffer has unknown data and must be processed by the concrete device.
 	void sensorSpecificProcessResponse(const QByteArray &reading);
 
 	/// Emitted when the configuration process is done.
 	void configured(bool success);
 
-private slots:
+private Q_SLOTS:
 	void readingDone(QObject *addressee, const QByteArray &reading);
 
 private:

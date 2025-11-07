@@ -62,11 +62,11 @@ public:
 	models::GraphicalModelAssistApi *graphicalAssistApi() const;
 	models::LogicalModelAssistApi *logicalAssistApi() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when for some reason root index was removed from the model.
 	void rootElementRemoved(const QModelIndex &graphicsIndex);
 
-public slots:
+public Q_SLOTS:
 	void reset() override;
 	void setRootIndex(const QModelIndex &index) override;
 	void rowsAboutToBeMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
@@ -74,7 +74,7 @@ public slots:
 	void rowsMoved(const QModelIndex &sourceParent, int sourceStart, int sourceEnd
 			, const QModelIndex &destinationParent, int destinationRow);
 
-private slots:
+private Q_SLOTS:
 	void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
 			, const QVector<int> &roles = QVector<int>()) override;
 	void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end) override;

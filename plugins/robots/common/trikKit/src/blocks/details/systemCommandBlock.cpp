@@ -36,5 +36,5 @@ void SystemCommandBlock::doJob(robotModel::parts::TrikShell &shell)
 		shell.runCommand(command);
 	}
 
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

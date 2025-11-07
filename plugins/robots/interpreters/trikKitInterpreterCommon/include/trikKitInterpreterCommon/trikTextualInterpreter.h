@@ -50,10 +50,10 @@ public:
 	QStringList supportedRobotModelNames() const;
 	QStringList knownMethodNames() const;
 
-signals:
+Q_SIGNALS:
 	void completed();
 
-private slots:
+private Q_SLOTS:
 	void scriptFinished(const QString &error, int scriptId);
 	void reportError(const QString &msg);
 	void reportWarning(const QString &msg);

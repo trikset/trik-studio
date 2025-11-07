@@ -34,7 +34,7 @@ void Gyroscope::read()
 void Gyroscope::calibrate()
 {
 	/// @todo
-	emit failure();
+	Q_EMIT failure();
 }
 
 void Gyroscope::onIncomingData(const QString &portName, const QVector<int> &value)

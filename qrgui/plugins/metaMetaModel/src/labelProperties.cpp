@@ -98,7 +98,7 @@ void LabelProperties::setIndex(int index)
 {
 	if (index != mIndex) {
 		mIndex = index;
-		emit indexChanged(index);
+		Q_EMIT indexChanged(index);
 	}
 }
 
@@ -111,7 +111,7 @@ void LabelProperties::setX(qreal x)
 {
 	if (mX != x) {
 		mX = x;
-		emit xChanged(x);
+		Q_EMIT xChanged(x);
 	}
 }
 
@@ -124,7 +124,7 @@ void LabelProperties::setY(qreal y)
 {
 	if (mY != y) {
 		mY = y;
-		emit yChanged(y);
+		Q_EMIT yChanged(y);
 	}
 }
 
@@ -142,7 +142,7 @@ void LabelProperties::setText(const QString &text)
 {
 	if (mText != text) {
 		mText = text;
-		emit textChanged(text);
+		Q_EMIT textChanged(text);
 	}
 }
 
@@ -169,7 +169,7 @@ void LabelProperties::setBinding(const QString &binding)
 {
 	if (mBinding != binding) {
 		mBinding = binding;
-		emit bindingChanged(binding);
+		Q_EMIT bindingChanged(binding);
 	}
 }
 
@@ -182,7 +182,7 @@ void LabelProperties::setReadOnly(bool readOnly)
 {
 	if (mReadOnly != readOnly) {
 		mReadOnly = readOnly;
-		emit readOnlyChanged(readOnly);
+		Q_EMIT readOnlyChanged(readOnly);
 	}
 }
 
@@ -205,7 +205,7 @@ void LabelProperties::setRotation(qreal degrees)
 {
 	if (mRotation != degrees) {
 		mRotation = degrees;
-		emit rotationChanged(degrees);
+		Q_EMIT rotationChanged(degrees);
 	}
 }
 
@@ -218,7 +218,7 @@ void LabelProperties::setBackground(const QColor &background)
 {
 	if (mBackground != background) {
 		mBackground = background;
-		emit backgroundChanged(background);
+		Q_EMIT backgroundChanged(background);
 	}
 }
 
@@ -231,7 +231,7 @@ void LabelProperties::setScalingX(bool enabled)
 {
 	if (mScalingX != enabled) {
 		mScalingX = enabled;
-		emit scalingXChanged(enabled);
+		Q_EMIT scalingXChanged(enabled);
 	}
 }
 
@@ -244,7 +244,7 @@ void LabelProperties::setScalingY(bool enabled)
 {
 	if (mScalingY != enabled) {
 		mScalingY = enabled;
-		emit scalingYChanged(enabled);
+		Q_EMIT scalingYChanged(enabled);
 	}
 }
 
@@ -257,7 +257,7 @@ void LabelProperties::setHard(bool hard)
 {
 	if (mIsHard != hard) {
 		mIsHard = hard;
-		emit isHardChanged(hard);
+		Q_EMIT isHardChanged(hard);
 	}
 }
 
@@ -270,7 +270,7 @@ void LabelProperties::setPrefix(const QString &text)
 {
 	if (mPrefix != text) {
 		mPrefix = text;
-		emit prefixChanged(text);
+		Q_EMIT prefixChanged(text);
 	}
 }
 
@@ -283,7 +283,7 @@ void LabelProperties::setSuffix(const QString &text)
 {
 	if (mSuffix != text) {
 		mSuffix = text;
-		emit suffixChanged(text);
+		Q_EMIT suffixChanged(text);
 	}
 }
 

@@ -36,7 +36,7 @@ public:
 
 	void run() override;
 
-private slots:
+private Q_SLOTS:
 	void timerTimeout() override;
 
 private:

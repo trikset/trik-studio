@@ -28,13 +28,13 @@ LightSensor::LightSensor(const DeviceInfo &info, const PortInfo &port
 
 void LightSensor::read()
 {
-	emit newData(mOldValue);
+	Q_EMIT newData(mOldValue);
 }
 
 void LightSensor::onIncomingData(const QString &portName, int value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		Q_EMIT newData(mOldValue);
 	}
 }

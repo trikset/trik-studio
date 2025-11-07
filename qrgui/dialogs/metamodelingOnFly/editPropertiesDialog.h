@@ -54,7 +54,7 @@ public:
 	/// @param elementsOnDiagram logical elements on the diagram.
 	void changeProperty(QListWidgetItem *propertyItem, const QString &propertyName
 				, const QString &propertyDisplayedName, qReal::IdList *elementsOnDiagram);
-private slots:
+private Q_SLOTS:
 	void okButtonClicked();
 	void messageBoxCancel();
 	void updateProperties();

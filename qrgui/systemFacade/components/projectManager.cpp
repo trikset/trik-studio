@@ -116,7 +116,7 @@ bool ProjectManager::openProject(const QString &fileName)
 		return false;
 	}
 
-	emit beforeOpen(fileName);
+	Q_EMIT beforeOpen(fileName);
 	// There is no way to verify sufficiency plugins without initializing repository
 	// that is stored in the save file. Initializing is impossible without closing current project.
 	const bool someProjectWasOpened = mSomeProjectOpened;
@@ -293,7 +293,7 @@ void ProjectManager::close()
 	mSomeProjectOpened = false;
 
 	QLOG_INFO() << "Project" << mSaveFilePath << "closed";
-	emit closed();
+	Q_EMIT closed();
 }
 
 bool ProjectManager::saveTo(const QString &fileName)

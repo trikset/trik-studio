@@ -68,7 +68,7 @@ public:
 	/// Similar to @see checkAutoSavedVersion, but searches for temp save
 	bool checkTempFile();
 
-private slots:
+private Q_SLOTS:
 	void saveAutoSave();
 	void saveTemp();
 

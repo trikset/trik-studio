@@ -36,6 +36,6 @@ void RandomInitBlock::run()
 
 	evalCode(stringProperty("Variable") + " = " + QString::number(result));
 	if (!errorsOccured()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

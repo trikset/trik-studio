@@ -141,7 +141,7 @@ void RobotsSettingsPage::save()
 		}
 	}
 
-	emit saved();
+	Q_EMIT saved();
 }
 
 void RobotsSettingsPage::restoreSettings()

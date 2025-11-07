@@ -47,7 +47,7 @@ protected:
 			, const kitBase::robotModel::DeviceInfo &device
 			, Reason reason) override;
 
-private slots:
+private Q_SLOTS:
 	void setReservedVariables();
 
 private:

@@ -30,7 +30,7 @@ public:
 	void closeEvent(QCloseEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 
-public slots:
+public Q_SLOTS:
 	void setClosability(bool isClosable);
 	bool forceClose();
 
