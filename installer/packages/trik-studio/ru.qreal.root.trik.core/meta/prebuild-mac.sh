@@ -14,6 +14,7 @@ rsync -a "$BIN_DIR"/librobots-trik-generator-base*.dylib                        
 rsync -a "$BIN_DIR"/librobots-trik-kit*.dylib                                             "$BUNDLE_CONTENTS/Lib"
 rsync -a "$BIN_DIR"/librobots-trik-kit-interpreter-common*.dylib                          "$BUNDLE_CONTENTS/Lib"
 rsync -a "$BIN_DIR"/libtrik*.dylib                                            	          "$BUNDLE_CONTENTS/Lib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libtrikRuntimeQsLog.2.1.0.dylib"
 
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
 rsync -a "$BIN_DIR"/{system.js,TRIK.py}	                                                "$PWD/../data/"
