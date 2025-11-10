@@ -44,7 +44,7 @@ then
 # download winscp
 winscp_zip="https://sourceforge.net/projects/winscp/files/WinSCP/$winscp_ver/WinSCP-$winscp_ver-Portable.zip"
 
-curl -v -L -s -o winscp.zip "$winscp_zip"
+curl -v -L --ipv4 -s -o winscp.zip "$winscp_zip"
 unzip -o winscp.zip -d winscp_$winscp_ver
 rm -f winscp.zip
 # end of download winscp
