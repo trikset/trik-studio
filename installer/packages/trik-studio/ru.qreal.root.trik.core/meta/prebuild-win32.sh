@@ -17,8 +17,8 @@ rsync -a "$BIN_DIR"/vcruntime*.dll                                              
 rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model.exe,checkapp.exe}                    "$PWD/../data/"
 rsync -a "$QT_LIB"/Qt5SerialPort.dll                                                 "$PWD"/../data
 
-winscp_ver=6.3.6
-putty_ver=0.82
+winscp_ver=6.5.4
+putty_ver=0.83
 
 cache_dir="$(cygpath "$APPDATA")"/"$PRODUCT"/installer_cache
 mkdir -p "$cache_dir"
@@ -44,7 +44,7 @@ then
 # download winscp
 winscp_zip="https://sourceforge.net/projects/winscp/files/WinSCP/$winscp_ver/WinSCP-$winscp_ver-Portable.zip"
 
-curl -v -L -s -o winscp.zip "$winscp_zip"
+curl -v -L --ipv4 -s -o winscp.zip "$winscp_zip"
 unzip -o winscp.zip -d winscp_$winscp_ver
 rm -f winscp.zip
 # end of download winscp
