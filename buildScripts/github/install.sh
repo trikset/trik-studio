@@ -39,7 +39,6 @@ case "$(uname)" in
     done
     modules=("qtscript")
     install_qt mac desktop "${TRIK_QT_VERSION}" "$HOME/Qt" $modules
-    ls -F /Applications | grep -E "^Xcode.*.app/$"
     sudo xcode-select -s /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
     xcodebuild -showsdks
     xcrun -sdk macosx --show-sdk-path
