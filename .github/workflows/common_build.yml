@@ -66,6 +66,7 @@ jobs:
       trik_python3_version_minor: 11
 
   build-macos-installer:
+    needs: [build-macos-debug-tests, build-macos-release-tests]
     uses: ./.github/workflows/setup_environment.yml
     with:
       os: macos-14
