@@ -30,7 +30,7 @@ python3 -m pip install -r requirements.txt
 #PyInstaller provides all required modules
 #So we need to handle this garbage of files later (below) with proper rsync
 #Determine python behavior when searching pythonlib
-PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
+PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --target-arch x86_64 --name trik \
 	--hidden-import=math \
 	--hidden-import=random \
 	--hidden-import=sys \
