@@ -10,6 +10,7 @@ case $RUNNER_OS in
      [ -d "$QT_DIR" ] && export PATH="$QT_DIR:$PATH"
      export PATH="/usr/local/opt/ccache/libexec:$PATH"
      export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+     export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
      echo "Now path is $PATH"
     ;;
   Linux)
@@ -41,6 +42,7 @@ PROJECT="$PROJECT" \
 BUILD_DIR="$BUILD_DIR" \
 ROOT_DIR="$ROOT_DIR" \
 RUNNER_OS="$RUNNER_OS" \
+PKG_CONFIG_PATH="${PKG_CONFIG_PATH:-}" \
 buildScripts/github/build_internal.sh
 
 
