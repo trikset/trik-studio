@@ -46,8 +46,8 @@ arch -x86_64 bash -c '
         --hidden-import=site \
         --hidden-import=numpy \
         "$BIN_DIR"/TRIK.py
+    deactivate
 '
-deactivate # exit python's venv
 
 rsync -avR --remove-source-files dist/trik/_internal/./*.dylib "$BUNDLE_CONTENTS/Lib"
 rsync -av dist/trik/_internal/python3.*/* "$BUNDLE_CONTENTS/Lib/python-runtime"
