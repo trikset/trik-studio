@@ -28,7 +28,7 @@ function fix_dependencies {
 			continue;
 		fi
 		normalized=$(grealpath -e "$dep")
-                if [[ "$normalized" == "/usr/local"/* ]] ; then
+                if [[ "$normalized" == "/usr/local"/* || "$normalized" == "/opt/local"/* ]] ; then
 			relative=$(basename "$normalized")
 		fi
 
