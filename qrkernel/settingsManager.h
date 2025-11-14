@@ -71,7 +71,7 @@ public:
 	/// Merges default settings from the given file in INI format.
 	static void loadDefaultSettings(const QString &filePath);
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when settings with the given key were modified.
 	/// For connection instance() method can be useful.
 	void settingsChanged(const QString &name, const QVariant &oldValue, const QVariant &newValue);

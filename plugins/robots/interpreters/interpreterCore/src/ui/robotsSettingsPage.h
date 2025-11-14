@@ -53,18 +53,18 @@ public:
 	void save() override;
 	void restoreSettings() override;
 
-public slots:
+public Q_SLOTS:
 	/// Called when current project changed, allows settings page to react on save-specific settings.
 	void onProjectOpened();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when uder saves settings on this page.
 	void saved();
 
 protected:
 	void changeEvent(QEvent *e) override;
 
-private slots:
+private Q_SLOTS:
 	void onKitRadioButtonToggled(bool checked);
 	void onRobotModelRadioButtonToggled(bool checked);
 

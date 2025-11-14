@@ -32,7 +32,7 @@ Trigger TriggersFactory::doNothing() const
 
 Trigger TriggersFactory::fail(const QString &message) const
 {
-	return [this, message]() { emit mStatus.fail(message); };
+	return [this, message]() { Q_EMIT mStatus.fail(message); };
 }
 
 Trigger TriggersFactory::message(const QString &message, const QMap<QString, Value> &replaces) const
@@ -42,7 +42,7 @@ Trigger TriggersFactory::message(const QString &message, const QMap<QString, Val
 		for (const auto &key: replaces.keys()) {
 			resMessage.replace("%" + key + "%", replaces[key]().toString());
 		}
-		emit mStatus.message(resMessage);
+		Q_EMIT mStatus.message(resMessage);
 	};
 }
 
@@ -53,13 +53,13 @@ Trigger TriggersFactory::log(const QString &message, const QMap<QString, Value> 
 		for (const auto &key: replaces.keys()) {
 			resMessage.replace("%" + key + "%", replaces[key]().toString());
 		}
-		emit mStatus.log(resMessage);
+		Q_EMIT mStatus.log(resMessage);
 	};
 }
 
 Trigger TriggersFactory::success(bool deferred) const
 {
-	return [this, deferred]() { emit mStatus.success(deferred); };
+	return [this, deferred]() { Q_EMIT mStatus.success(deferred); };
 }
 
 Trigger TriggersFactory::combined(const QList<Trigger> &triggers) const
@@ -121,5 +121,5 @@ Trigger TriggersFactory::dropEvent(const QString &id) const
 
 void TriggersFactory::reportError(const QString &message) const
 {
-	emit mStatus.checkerError(message);
+	Q_EMIT mStatus.checkerError(message);
 }

@@ -27,7 +27,7 @@ class Ev3RobotCommunicationThread : public utils::robotCommunication::RobotCommu
 public:
 	virtual ~Ev3RobotCommunicationThread();
 
-public slots:
+public Q_SLOTS:
 	/// Uploads file on the local machine to a remote device via Bluetooth.
 	/// @returns path to uploaded file on EV3 brick if it was uploaded successfully or empty string otherwise.
 	virtual QString uploadFile(const QString &sourceFile, const QString &targetDir);

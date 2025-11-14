@@ -43,9 +43,9 @@ void Button::read()
 	QByteArray outputBuf;
 	mRobotCommunicator.send(command, buttonResponseSize, outputBuf);
 	if (outputBuf.length() == buttonResponseSize && outputBuf.data()[5] == buttonPressed) {
-		emit newData(1);
+		Q_EMIT newData(1);
 	} else {
-		emit newData(0);
+		Q_EMIT newData(0);
 	}
 }
 

@@ -54,7 +54,7 @@ public:
 
 	void installEventFilter(QObject *obj);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user wants to edits 'Shape' property.
 	void shapeEditorRequested(const QPersistentModelIndex &index, int role
 		, const QString &propertyValue, bool useTypedPorts);
@@ -66,7 +66,7 @@ signals:
 	void referenceListRequested(const QPersistentModelIndex &index, const QString &referenceType
 			, const QString &propertyValue, int role);
 
-public slots:
+public Q_SLOTS:
 
 	// QAbstractItemView's methods
 	void update(const QModelIndex &index);
@@ -76,7 +76,7 @@ public slots:
 protected:
 	virtual void resizeEvent(QResizeEvent *event);
 
-protected slots:
+protected Q_SLOTS:
 	// QAbstractItemView's methods
 	void dataChanged(const QModelIndex &, const QModelIndex &);
 	void editorValueChanged(QtProperty *, QVariant);

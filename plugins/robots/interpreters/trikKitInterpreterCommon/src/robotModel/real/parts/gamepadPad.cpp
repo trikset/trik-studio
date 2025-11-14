@@ -35,6 +35,6 @@ void GamepadPad::onIncomingData(const QString &portName, const QVector<int> &val
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit setLastData(mOldValue);
+		Q_EMIT setLastData(mOldValue);
 	}
 }

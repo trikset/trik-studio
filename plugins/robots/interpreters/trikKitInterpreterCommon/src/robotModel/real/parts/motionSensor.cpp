@@ -35,13 +35,13 @@ void MotionSensor::read()
 	const QString directCommand = utils::InFile::readAll(pathToCommand) + "script.run()";
 	mRobotCommunicator.runDirectCommand(directCommand);
 
-	emit newData(mOldValue);
+	Q_EMIT newData(mOldValue);
 }
 
 void MotionSensor::onIncomingData(const QString &portName, int value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		Q_EMIT newData(mOldValue);
 	}
 }

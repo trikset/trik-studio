@@ -98,7 +98,7 @@ public:
 	/// Returns an instance of SceneAPI for extended work with scene.
 	SceneAPI &sceneAPI();
 
-public slots:
+public Q_SLOTS:
 	/// Breaks passive event loop.
 	void breakWaiting();
 

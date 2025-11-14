@@ -53,7 +53,7 @@ public:
 	/// Returns true if last reported to user message was an error.
 	bool lastMessageIsError();
 
-public slots:
+public Q_SLOTS:
 	/// Reports informational message reported to user during the interpretation process.
 	void addInformation(const QString &message);
 

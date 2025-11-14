@@ -34,7 +34,7 @@ public:
 	void read() override;
 	void doConfiguration() override;
 
-private slots:
+private Q_SLOTS:
 	void sensorSpecificProcessResponse(const QByteArray &reading);
 
 private:

@@ -24,5 +24,5 @@ InitCameraBlock::InitCameraBlock(kitBase::robotModel::RobotModelInterface &robot
 void InitCameraBlock::doJob(trik::robotModel::parts::TrikLineSensor &camera)
 {
 	camera.init();
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

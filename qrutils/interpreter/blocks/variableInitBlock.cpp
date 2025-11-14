@@ -20,6 +20,6 @@ void VariableInitBlock::run()
 {
 	evalCode(stringProperty("variable") + " = " + stringProperty("value"));
 	if (!errorsOccured()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

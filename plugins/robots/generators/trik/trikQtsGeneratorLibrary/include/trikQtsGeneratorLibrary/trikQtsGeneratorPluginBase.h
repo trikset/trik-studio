@@ -69,7 +69,7 @@ protected:
 
 	void addShellDevice(robotModel::GeneratorModelExtensionInterface &robotModel) const;
 
-private slots:
+private Q_SLOTS:
 	/// Generates and uploads script to a robot. Program then can be launched manually or remotely
 	/// by runCommand. Program is stored on robot as a file next to scriptRunner and named
 	/// as <qReal save name>.qts.

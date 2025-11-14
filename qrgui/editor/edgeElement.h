@@ -178,7 +178,7 @@ protected:
 	int mPenWidth;
 	QColor mPenColor;
 
-private slots:
+private Q_SLOTS:
 	void reverse();
 
 private:

@@ -40,7 +40,7 @@ public:
 
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when new message with level 'Info' added to error reporter.
 	void informationAdded(const QString &message, const Id &position);
 

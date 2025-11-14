@@ -190,7 +190,7 @@ void Rotater::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	/// @todo: This must be fixed in RotateItem itemChange method.
 	grabMouse();
 
-	emit mMaster->mouseInteractionStarted();
+	Q_EMIT mMaster->mouseInteractionStarted();
 }
 
 void Rotater::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -210,7 +210,7 @@ void Rotater::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		AbstractItem::mouseReleaseEvent(event);
 		ungrabMouse();
 
-		emit mMaster->mouseInteractionStopped();
+		Q_EMIT mMaster->mouseInteractionStopped();
 	}
 }
 

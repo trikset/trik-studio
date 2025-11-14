@@ -46,7 +46,7 @@ public:
 	void stateClear();
 	~FindReplaceDialog();
 
-signals:
+Q_SIGNALS:
 	/// Signal of find button clicked.
 	/// @param searchData - data for search.
 	void findModelByName(const QStringList &searchData);
@@ -59,7 +59,7 @@ signals:
 	/// @param searchData - data for search & replace.
 	void replaceClicked(QStringList &searchData);
 
-private slots:
+private Q_SLOTS:
 	/// Collects necessary information and emits signal of replace clicked.
 	void replaceHandler();
 

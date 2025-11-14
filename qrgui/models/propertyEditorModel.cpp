@@ -158,7 +158,7 @@ bool PropertyEditorModel::setData(const QModelIndex &index, const QVariant &valu
 	}
 
 	if (modelChanged) {
-		emit dataChanged(index, index);
+		Q_EMIT dataChanged(index, index);
 	}
 
 	return modelChanged;
@@ -220,7 +220,7 @@ QList<QPair<QString, QString>> PropertyEditorModel::enumValues(const QModelIndex
 
 void PropertyEditorModel::rereadData(const QModelIndex &topLeftIndex, const QModelIndex &bottomRightIndex)
 {
-	emit dataChanged(topLeftIndex, bottomRightIndex);
+	Q_EMIT dataChanged(topLeftIndex, bottomRightIndex);
 }
 
 void PropertyEditorModel::setSourceModels(QAbstractItemModel * const sourceLogicalModel

@@ -39,7 +39,7 @@ void EncoderSensor::read()
 		secondByte = static_cast<int>(outputBuf[6]) << 8;
 	}
 
-	emit newData(static_cast<quint8>(outputBuf[5]) | secondByte);
+	Q_EMIT newData(static_cast<quint8>(outputBuf[5]) | secondByte);
 }
 
 void EncoderSensor::nullify()

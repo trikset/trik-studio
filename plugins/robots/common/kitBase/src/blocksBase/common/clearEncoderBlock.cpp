@@ -39,7 +39,7 @@ void ClearEncoderBlock::run()
 
 void ClearEncoderBlock::doneNextBlock()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 QMap<PortInfo, DeviceInfo> ClearEncoderBlock::usedDevices()

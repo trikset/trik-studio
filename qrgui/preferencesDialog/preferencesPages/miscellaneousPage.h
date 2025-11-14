@@ -34,7 +34,7 @@ public:
 protected:
 	void changeEvent(QEvent *e);
 
-private slots:
+private Q_SLOTS:
 	void browseImagesPath();
 
 private:

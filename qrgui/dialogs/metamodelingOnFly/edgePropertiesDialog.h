@@ -42,11 +42,11 @@ public:
 	/// Destructor.
 	~EdgePropertiesDialog();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when edge`s properties were modified and everything must be reloaded.
 	void jobDone();
 
-private slots:
+private Q_SLOTS:
 	void okButtonClicked();
 	void addEdgeElement();
 

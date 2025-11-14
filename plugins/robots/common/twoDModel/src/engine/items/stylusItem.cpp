@@ -76,7 +76,7 @@ void StylusItem::addLine(qreal x2, qreal y2)
 	recalculateProperties();
 	mTmpX1 = this->x2();
 	mTmpY1 = this->y2();
-	emit segmentAdded(line);
+	Q_EMIT segmentAdded(line);
 }
 
 QPainterPath StylusItem::shape() const
@@ -172,7 +172,7 @@ void StylusItem::deserialize(const QDomElement &element)
 				line->deserialize(type);
 				line->setPen(this->pen());
 				mAbstractListLine.append(line);
-				emit segmentAdded(line);
+				Q_EMIT segmentAdded(line);
 				recalculateProperties();
 			}
 	}

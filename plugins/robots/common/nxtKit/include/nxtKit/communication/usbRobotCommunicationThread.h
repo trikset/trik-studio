@@ -35,7 +35,7 @@ public:
 	UsbRobotCommunicationThread();
 	~UsbRobotCommunicationThread();
 
-public slots:
+public Q_SLOTS:
 	bool send(QObject *addressee, const QByteArray &buffer, int responseSize) override;
 	bool connect() override;
 	void reconnect() override;
@@ -45,11 +45,11 @@ public slots:
 	/// Searches for NXT brick in formware mode, connects to it, returns success of this operation.
 	bool connectFirmware();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when attempt to connect failed because no NXT drivers installer on the machine.
 	void noDriversFound();
 
-private slots:
+private Q_SLOTS:
 	/// Checks if robot is connected
 	void checkForConnection();
 

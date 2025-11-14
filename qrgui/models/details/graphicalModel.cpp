@@ -110,7 +110,7 @@ void GraphicalModel::updateElements(const Id &logicalId, const QString &name)
 		GraphicalModelItem *graphicalItem = static_cast<GraphicalModelItem *>(item);
 		if (graphicalItem->logicalId() == logicalId) {
 			setNewName(graphicalItem->id(), name);
-			emit dataChanged(index(graphicalItem), index(graphicalItem));
+			Q_EMIT dataChanged(index(graphicalItem), index(graphicalItem));
 		}
 	}
 }
@@ -128,7 +128,7 @@ void GraphicalModel::addElementToModel(ElementInfo &elementInfo)
 	initializeElement(elementInfo, parentItem, newGraphicalModelItem);
 
 	endInsertRows();
-	emit elementAdded(elementInfo.id());
+	Q_EMIT elementAdded(elementInfo.id());
 }
 
 void GraphicalModel::addElementsToModel(QList<ElementInfo> &elementsInfo)
@@ -196,7 +196,7 @@ void GraphicalModel::addTree(const Id &parent, const QMultiMap<Id, ElementInfo *
 	endInsertRows();
 
 	for (const ElementInfo *child : children) {
-		emit elementAdded(child->id());
+		Q_EMIT elementAdded(child->id());
 		addTree(child->id(), childrenOfParents, visited);
 	}
 }
@@ -316,7 +316,7 @@ bool GraphicalModel::setData(const QModelIndex &index, const QVariant &value, in
 			Q_ASSERT(role < Qt::UserRole);
 			return false;
 		}
-		emit dataChanged(index, index);
+		Q_EMIT dataChanged(index, index);
 		return true;
 	}
 	return false;
@@ -325,7 +325,7 @@ bool GraphicalModel::setData(const QModelIndex &index, const QVariant &value, in
 void GraphicalModel::setNewName(const Id &id, const QString &newValue)
 {
 	mApi.setName(id, newValue);
-	emit nameChanged(id);
+	Q_EMIT nameChanged(id);
 }
 
 void GraphicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent, const QPointF &position)
@@ -353,7 +353,7 @@ void GraphicalModel::changeParent(const QModelIndex &element, const QModelIndex 
 		endMoveRows();
 
 		if (parent.row() != element.row()) {
-			emit dataChanged(parent, element);
+			Q_EMIT dataChanged(parent, element);
 		}
 	}
 }

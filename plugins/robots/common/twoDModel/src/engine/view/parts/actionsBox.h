@@ -55,7 +55,7 @@ public:
 	/// Returns a list of actions that can be shown in scene context menu.
 	QList<QAction *> sceneContextMenuActions() const;
 
-public slots:
+public Q_SLOTS:
 	/// Shows or hides all actions that can modify world model.
 	void setWorldModelActionsVisible(bool visible);
 

@@ -35,7 +35,7 @@ public:
 	ErrorReporter();
 	ErrorReporter(ErrorListWidget * const errorListWidget, QDockWidget * const errorList);
 
-public slots:
+public Q_SLOTS:
 	void addInformation(const QString &message, const Id &position = Id::rootId()) override;
 	void addWarning(const QString &message, const Id &position = Id::rootId()) override;
 	void addError(const QString &message, const Id &position = Id::rootId()) override;
@@ -49,7 +49,7 @@ public slots:
 
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when new message with level 'Info' added to error reporter.
 	void informationAdded(const QString &message, const Id &position);
 
@@ -62,7 +62,7 @@ signals:
 	/// Emitted when new message with level 'Critical' added to error reporter.
 	void criticalAdded(const QString &message, const Id &position);
 
-public slots:
+public Q_SLOTS:
 	/// Clears only widget with errors.
 	virtual void clear() override;
 	/// Clears only error list.

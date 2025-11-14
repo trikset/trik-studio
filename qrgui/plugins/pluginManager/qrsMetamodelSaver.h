@@ -45,7 +45,7 @@ public:
 	/// Serializes \a metamodels into .qrs-file located at \a path.
 	bool save(const QList<QSharedPointer<Metamodel>> &metamodels, const QString &path);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when metamodel traversal encountered some error in metamodel.
 	/// @param message Localized message that can be shown to user via error reporter.
 	/// @param id The id of the element that contains this error, may be empty in general case.

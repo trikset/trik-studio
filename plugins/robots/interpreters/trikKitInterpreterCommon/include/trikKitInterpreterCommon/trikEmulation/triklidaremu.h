@@ -31,7 +31,7 @@ public:
 
 	QVector<int> readRaw() const override;
 
-public slots:
+public Q_SLOTS:
 	QVector<int> read() const override;
 
 private:

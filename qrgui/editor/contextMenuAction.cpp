@@ -34,5 +34,5 @@ QPointF ContextMenuAction::eventPos() const
 
 void ContextMenuAction::trigger()
 {
-	emit triggered(mEventPos);
+	Q_EMIT triggered(mEventPos);
 }

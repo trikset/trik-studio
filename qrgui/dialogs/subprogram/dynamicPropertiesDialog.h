@@ -45,7 +45,7 @@ public:
 	/// Creates and returns SDF description using path to background and foreground images.
 	static QString generateShapeXml(const QString &foreground, const QString &background = QString());
 
-private slots:
+private Q_SLOTS:
 	void addLabelButtonClicked();
 	void saveButtonClicked();
 	void deleteButtonClicked();

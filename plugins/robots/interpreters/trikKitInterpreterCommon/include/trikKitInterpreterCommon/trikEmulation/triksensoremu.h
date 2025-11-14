@@ -35,7 +35,7 @@ public:
 	int minValue() const override {return 0;}
 	int maxValue() const override {return 100;}
 
-public slots:
+public Q_SLOTS:
 	int read() override;
 	int readRawData() override {return read();}
 

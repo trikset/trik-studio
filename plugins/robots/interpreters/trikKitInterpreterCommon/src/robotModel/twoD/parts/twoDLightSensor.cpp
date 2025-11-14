@@ -27,5 +27,5 @@ TwoDLightSensor::TwoDLightSensor(const kitBase::robotModel::DeviceInfo &info
 
 void TwoDLightSensor::read()
 {
-	emit newData(99 - mEngine.readLightSensor(port()));
+	Q_EMIT newData(99 - mEngine.readLightSensor(port()));
 }

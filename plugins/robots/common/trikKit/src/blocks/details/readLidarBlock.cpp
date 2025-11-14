@@ -27,6 +27,6 @@ void ReadLidarBlock::doJob(robotParts::LidarSensor &lidar)
 	Q_UNUSED(lidar)
 	evalCode(stringProperty("variable") + " = lidar");
 	if (!errorsOccured()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

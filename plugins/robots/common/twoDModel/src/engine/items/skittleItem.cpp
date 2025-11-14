@@ -137,7 +137,7 @@ void SkittleItem::deserialize(const QDomElement &element)
 	setTransformOriginPoint(boundingRect().center());
 	mStartPosition = {markerX, markerY};
 	setRotation(rotation);
-	emit x1Changed(x1());
+	Q_EMIT x1Changed(x1());
 }
 
 void SkittleItem::saveStartPosition()
@@ -145,7 +145,7 @@ void SkittleItem::saveStartPosition()
 	if (this->editable()) {
 		mStartPosition = pos();
 		mStartRotation = rotation();
-		emit x1Changed(x1());
+		Q_EMIT x1Changed(x1());
 	}
 }
 
@@ -153,7 +153,7 @@ void SkittleItem::returnToStartPosition()
 {
 	setPos(mStartPosition);
 	setRotation(mStartRotation);
-	emit x1Changed(x1());
+	Q_EMIT x1Changed(x1());
 }
 
 QPolygonF SkittleItem::collidingPolygon() const

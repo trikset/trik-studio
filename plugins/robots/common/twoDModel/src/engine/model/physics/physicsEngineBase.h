@@ -71,7 +71,7 @@ protected:
 	const WorldModel &mWorldModel;
 	QList<RobotModel *> mRobots;
 
-protected slots:
+protected Q_SLOTS:
 	/// Processes modification of metrics system.
 	virtual void onPixelsInCmChanged(qreal value);
 

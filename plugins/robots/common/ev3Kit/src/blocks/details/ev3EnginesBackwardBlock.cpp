@@ -36,5 +36,5 @@ void Ev3EnginesBackwardBlock::run()
 		motor->on(power);
 	}
 
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

@@ -176,9 +176,9 @@ bool TouchSupportManager::handleGesture(QGestureEvent *gestureEvent)
 void TouchSupportManager::processGestureState(QGesture *gesture)
 {
 	if (gesture->state() == Qt::GestureStarted) {
-		emit gestureStarted();
+		Q_EMIT gestureStarted();
 	} else if (gesture->state() == Qt::GestureFinished) {
-		emit gestureFinished();
+		Q_EMIT gestureFinished();
 	}
 }
 

@@ -25,7 +25,7 @@ TwoDLed::TwoDLed(const DeviceInfo &info
 	: robotModel::parts::Ev3Led(info, port)
 	, mEngine(engine)
 {
-	connect(this, &TwoDLed::colorChanged, this, [=](const QColor &color) { emit propertyChanged("color", color); });
+	connect(this, &TwoDLed::colorChanged, this, [=](const QColor &color) { Q_EMIT propertyChanged("color", color); });
 }
 
 QColor TwoDLed::color() const

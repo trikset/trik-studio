@@ -65,7 +65,7 @@ public:
 	/// @warning This function works lineary of scene size.
 	AbstractItem *findItem(const QString &id) const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user pressed left mouse button on this scene.
 	void leftButtonPressed();
 

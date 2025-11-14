@@ -39,7 +39,7 @@ QScintillaTextEdit::QScintillaTextEdit(const QPersistentModelIndex &index, const
 
 QScintillaTextEdit::~QScintillaTextEdit()
 {
-	emit textSaved(text(), mIndex, mRole);
+	Q_EMIT textSaved(text(), mIndex, mRole);
 }
 
 LanguageInfo QScintillaTextEdit::currentLanguage() const
@@ -362,7 +362,7 @@ void QScintillaTextEdit::emitTextWasModified()
 	cancelList();
 	setMarginWidth(1, QString::number(lines()).size() * mAverageCharWidth + 10);
 	mSearchLinePanel->update();
-	emit textWasModified(this);
+	Q_EMIT textWasModified(this);
 }
 
 void QScintillaTextEdit::initFindModeConnections()

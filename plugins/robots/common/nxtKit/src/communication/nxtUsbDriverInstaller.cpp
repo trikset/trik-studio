@@ -51,20 +51,20 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 	const QString validationError = checkWindowsDriverComponents();
 	if (!validationError.isEmpty()) {
 		QLOG_ERROR() << validationError << "Probably NXT tools are not installed.";
-		emit errorOccured(tr("Driver for NXT is not installed. An attempt to attach TRIK Studio "\
+		Q_EMIT errorOccured(tr("Driver for NXT is not installed. An attempt to attach TRIK Studio "\
 				"driver also failed (probably NXT tools package was not installer). No panic! Driver can still be "\
 				"installed manually, see documentation, chapter \"Installing NXT driver manually.\". Also TRIK Studio "\
 				"supports <a href='%1'>Lego Fantom driver</a>, you can just download and install it."));
-		emit installationFinished(false);
+		Q_EMIT installationFinished(false);
 		return false;
 	}
 
 	if (!promptDriverInstallation()) {
-		emit messageArrived(tr("Driver installation cancelled. Please note that TRIK Studio also supports "\
+		Q_EMIT messageArrived(tr("Driver installation cancelled. Please note that TRIK Studio also supports "\
 				"official <a href='%1'>Lego Fantom driver</a>, you can just download and install it.")
 				.arg(qReal::SettingsManager::value("fantomDownloadLink").toString()));
 		QLOG_WARN() << "User cancelled driver installation.";
-		emit installationFinished(false);
+		Q_EMIT installationFinished(false);
 		return false;
 	}
 
@@ -88,20 +88,20 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 	connect(&mInstallationProcess, QOverload<int>::of(&QProcess::finished), this, [this](int exitCode) {
 		QLOG_INFO() << "NXT drivers installation finished with exit code" << exitCode;
 		if (exitCode != 0) {
-			emit errorOccured(tr("An attempt to attach TRIK Studio driver failed. No panic! Driver can be still "\
+			Q_EMIT errorOccured(tr("An attempt to attach TRIK Studio driver failed. No panic! Driver can be still "\
 					"installed manually, see documentation, chapter \"Installing NXT driver manually.\". Also "\
 					"TRIK Studio supports <a href='%1'>Lego Fantom driver</a>, you can just download and install it.")
 					.arg(qReal::SettingsManager::value("fantomDownloadLink").toString()));
 		}
 
-		emit installationFinished(exitCode == 0);
+		Q_EMIT installationFinished(exitCode == 0);
 	});
 
 	mInstallationProcess.setEnvironment(QProcess::systemEnvironment());
 	mInstallationProcess.start(installDriversCmd);
 	if (!mInstallationProcess.waitForStarted()) {
 		QLOG_ERROR() << "Could not waitForStarted() elevate.exe.";
-		emit installationFinished(false);
+		Q_EMIT installationFinished(false);
 		return false;
 	}
 

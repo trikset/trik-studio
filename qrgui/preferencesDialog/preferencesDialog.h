@@ -51,11 +51,11 @@ protected:
 	void changeEvent(QEvent *e);
 	void showEvent(QShowEvent *e);
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when user presses "OK" or "Apply" button.
 	void settingsApplied();
 
-private slots:
+private Q_SLOTS:
 	void cancel();
 	void applyChanges();
 	void restoreSettings();

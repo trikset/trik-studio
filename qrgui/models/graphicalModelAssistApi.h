@@ -147,7 +147,7 @@ public:
 	/// @param index - index of a part, which uniquely identifies label in an element.
 	QSizeF labelSize(const Id &graphicalId, int index) const;
 
-signals:
+Q_SIGNALS:
 	void nameChanged(const Id &id);
 
 	/// Emitted each time when new element was added into the graphical model.

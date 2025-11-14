@@ -50,7 +50,7 @@ public:
 	/// If false values will be refreshed again. Ideologically lock must be removed before interpretation starts.
 	void setLocked(bool locked);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when sensor reading is failed for some reason. Note that it is possible that sensor will not emit any
 	/// signal in case of a failure, so if "failure()" is emitted, the sensor is failed, but if not, sensor may be still
 	/// preparing readings and it can take some time, or simply failed silently.

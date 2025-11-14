@@ -89,7 +89,7 @@ public:
 		return deltaAngle;
 	}
 
-public slots:
+public Q_SLOTS:
 	void onItemDragged(graphicsUtils::AbstractItem *item);
 	void onRobotStartPositionChanged(QPointF newPos, twoDModel::model::RobotModel *robot);
 	void onRobotStartAngleChanged(const qreal newAngle, twoDModel::model::RobotModel *robot);

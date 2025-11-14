@@ -40,7 +40,7 @@ public:
 
 	QMap<robotModel::PortInfo, robotModel::DeviceInfo> usedDevices() override;
 
-protected slots:
+protected Q_SLOTS:
 	/// Shall be called when something goes wrong and there will be no response from real device.
 	void failureSlot();
 
@@ -66,7 +66,7 @@ protected:
 	robotModel::RobotModelInterface &mRobotModel;
 	QScopedPointer<utils::AbstractTimer> mActiveWaitingTimer;
 
-private slots:
+private Q_SLOTS:
 	/// Shall be redefined in subclasses to request for a sensor or button to read its value.
 	virtual void timerTimeout() = 0;
 

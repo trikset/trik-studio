@@ -183,11 +183,11 @@ public:
 
 	void initExplosionConnections();
 
-public slots:
+public Q_SLOTS:
 	void switchGrid(bool isChecked);
 	void updateDynamicProperties(const Id &target);
 
-private slots:
+private Q_SLOTS:
 	void initRenderedDiagram();
 
 private:

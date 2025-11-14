@@ -27,5 +27,5 @@ LedBlock::LedBlock(RobotModelInterface &robotModel)
 void LedBlock::doJob(robotModel::parts::TrikLed &led)
 {
 	led.setColor(stringProperty("Color"));
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

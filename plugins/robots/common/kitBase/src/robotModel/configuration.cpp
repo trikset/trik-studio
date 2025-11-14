@@ -106,7 +106,7 @@ void Configuration::onDeviceConfigured(bool success)
 
 	mConfiguredDevices.insert(device->port(), device);
 
-	emit deviceConfigured(device);
+	Q_EMIT deviceConfigured(device);
 	checkAllDevicesConfigured();
 }
 
@@ -126,6 +126,6 @@ void Configuration::applyConfiguration()
 void Configuration::checkAllDevicesConfigured()
 {
 	if (mPendingDevices.isEmpty()) {
-		emit allDevicesConfigured();
+		Q_EMIT allDevicesConfigured();
 	}
 }

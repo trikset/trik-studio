@@ -85,7 +85,7 @@ void ErrorReporter::addInformation(const QString &message, const Id &position)
 	Error error(message, Error::information, position);
 	mErrors.append(error);
 	showError(error, mErrorListWidget);
-	emit informationAdded(message, position);
+	Q_EMIT informationAdded(message, position);
 }
 
 void ErrorReporter::addWarning(const QString &message, const Id &position)
@@ -93,7 +93,7 @@ void ErrorReporter::addWarning(const QString &message, const Id &position)
 	Error error(message, Error::warning, position);
 	mErrors.append(error);
 	showError(error, mErrorListWidget);
-	emit warningAdded(message, position);
+	Q_EMIT warningAdded(message, position);
 }
 
 void ErrorReporter::addError(const QString &message, const Id &position)
@@ -101,7 +101,7 @@ void ErrorReporter::addError(const QString &message, const Id &position)
 	Error error(message, Error::error, position);
 	mErrors.append(error);
 	showError(error, mErrorListWidget);
-	emit errorAdded(message, position);
+	Q_EMIT errorAdded(message, position);
 }
 
 void ErrorReporter::addCritical(const QString &message, const Id &position)
@@ -109,7 +109,7 @@ void ErrorReporter::addCritical(const QString &message, const Id &position)
 	Error error(message, Error::critical, position);
 	mErrors.append(error);
 	showError(error, mErrorListWidget);
-	emit criticalAdded(message, position);
+	Q_EMIT criticalAdded(message, position);
 }
 
 bool ErrorReporter::showErrors(ErrorListWidget* const errorListWidget, QDockWidget* const errorList) const

@@ -85,7 +85,7 @@ public:
 	//tempory solution
 	bool interpretCode(const QString &inputs, const QString &filepath);
 
-public slots:
+public Q_SLOTS:
 	void saveCode(const QString &code, const QString &languageExtension);
 //	void openSavedCode();
 

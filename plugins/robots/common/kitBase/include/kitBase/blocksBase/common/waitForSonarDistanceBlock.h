@@ -29,7 +29,7 @@ public:
 	/// Constructor, takes current robot model as parameter.
 	WaitForSonarDistanceBlock(robotModel::RobotModelInterface &robotModel, const robotModel::DeviceInfo &device);
 
-protected slots:
+protected Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 protected:

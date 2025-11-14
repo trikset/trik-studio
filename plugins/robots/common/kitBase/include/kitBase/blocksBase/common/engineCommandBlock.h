@@ -35,7 +35,7 @@ public:
 
 	QMap<robotModel::PortInfo, robotModel::DeviceInfo> usedDevices() override;
 
-protected slots:
+protected Q_SLOTS:
 	/// @todo Why it is needed and where it is used?
 	void timeout();
 

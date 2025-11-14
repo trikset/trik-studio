@@ -57,7 +57,7 @@ public:
 	/// Transfers ownership of QAction objects.
 	qReal::ActionInfo action() const;
 
-private slots:
+private Q_SLOTS:
 	void upload();
 	void onUploadStarted();
 	void onUploadError(QProcess::ProcessError reason);

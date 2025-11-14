@@ -242,7 +242,7 @@ public:
 		const QPersistentModelIndex mTargetGraphicalObject;
 	};
 
-private slots:
+private Q_SLOTS:
 	void rereadData(const QModelIndex &, const QModelIndex &);
 
 private:

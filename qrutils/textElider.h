@@ -29,11 +29,11 @@ class QRUTILS_EXPORT TextElider: public QObject
 public:
 	explicit TextElider(QWidget *widget, Qt::TextElideMode mode = Qt::ElideRight);
 
-signals:
+Q_SIGNALS:
 	/// Emitted after each time after text recalculation
 	void textChanged(const QString &text);
 
-public slots:
+public Q_SLOTS:
 	void setText(const QString &text);
 
 private:

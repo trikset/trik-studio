@@ -32,7 +32,7 @@ public:
 	QList<qReal::ActionInfo> actions() override;
 	void init(qReal::PluginConfigurator const &configurator) override;
 
-private slots:
+private Q_SLOTS:
 	void exportToFile() const;
 	void importToProject() const;
 	void saveToCollectionTriggered() const;

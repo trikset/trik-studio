@@ -26,5 +26,5 @@ MarkerDownBlock::MarkerDownBlock(RobotModelInterface &robotModel)
 void MarkerDownBlock::doJob(robotModel::parts::Marker &marker)
 {
 	marker.down(propertyToColor(stringProperty("Color")));
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

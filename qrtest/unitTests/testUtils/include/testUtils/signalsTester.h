@@ -76,7 +76,7 @@ public:
 	/// signals were emitted or signals were emitted in incorrect order.
 	void wait(int timeout);
 
-private slots:
+private Q_SLOTS:
 	void onSignal(const QString &signalName);
 	void onTimeout();
 

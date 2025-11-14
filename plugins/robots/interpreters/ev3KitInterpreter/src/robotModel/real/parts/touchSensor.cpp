@@ -35,8 +35,8 @@ void TouchSensor::read()
 	QByteArray outputBuf;
 	mRobotCommunicator.send(command, touchSensorResponseSize, outputBuf);
 	if (outputBuf.data()[8] == pressed) {
-		emit newData(1);
+		Q_EMIT newData(1);
 	} else {
-		emit newData(0);
+		Q_EMIT newData(0);
 	}
 }

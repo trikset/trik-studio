@@ -79,6 +79,6 @@ void RestorePropertiesDialog::restoreButtonClicked()
 
 void RestorePropertiesDialog::createButtonClicked()
 {
-	emit createNewChosen();
+	Q_EMIT createNewChosen();
 	done(QDialog::Accepted);
 }

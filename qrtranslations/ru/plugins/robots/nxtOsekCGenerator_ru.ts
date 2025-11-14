@@ -4,7 +4,7 @@
 <context>
     <name>nxt::NxtFlashTool</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+72"/>
+        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+75"/>
         <source>Robot is already being flashed</source>
         <translation>Робот уже прошивается</translation>
     </message>

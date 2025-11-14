@@ -20,6 +20,6 @@ void FunctionBlock::run()
 {
 	eval("Body");
 	if (!errorsOccured()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

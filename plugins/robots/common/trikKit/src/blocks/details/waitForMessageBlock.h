@@ -27,7 +27,7 @@ class WaitForMessageBlock: public kitBase::blocksBase::common::WaitBlock
 public:
 	explicit WaitForMessageBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	void timerTimeout() override;
 private:
 	void run() override;

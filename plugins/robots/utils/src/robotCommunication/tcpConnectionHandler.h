@@ -36,10 +36,10 @@ public:
 
 	void send(const QString &data);
 
-signals:
+Q_SIGNALS:
 	void messageReceived(const QString &message);
 
-private slots:
+private Q_SLOTS:
 	void onIncomingData();
 	void keepalive();
 

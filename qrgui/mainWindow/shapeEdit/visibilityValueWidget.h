@@ -29,9 +29,9 @@ public:
 	void setPropertyInfo(const VisibilityConditionsDialog::PropertyInfo &info);
 	void setValue(const QString &value);
 	QString value() const;
-signals:
+Q_SIGNALS:
 
-public slots:
+public Q_SLOTS:
 
 private:
 	void makeWidget(VisibilityConditionsDialog::Type type);

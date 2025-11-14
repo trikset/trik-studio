@@ -24,6 +24,6 @@ void KillThreadBlock::run()
 		error(tr("Need to specify a thread to be stopped"));
 	}
 
-	emit killThread(thread);
-	emit done(mNextBlockId);
+	Q_EMIT killThread(thread);
+	Q_EMIT done(mNextBlockId);
 }

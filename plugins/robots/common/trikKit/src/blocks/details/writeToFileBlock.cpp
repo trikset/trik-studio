@@ -26,6 +26,6 @@ void WriteToFileBlock::doJob(robotModel::parts::TrikShell &shell)
 	const QString text = eval<QString>("Text");
 	if (!errorsOccured()) {
 		shell.writeToFile(stringProperty(id(), "File"), text);
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

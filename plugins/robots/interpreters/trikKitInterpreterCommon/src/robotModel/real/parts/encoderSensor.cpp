@@ -30,14 +30,14 @@ EncoderSensor::EncoderSensor(const DeviceInfo &info, const PortInfo &port
 
 void EncoderSensor::read()
 {
-	emit newData(mOldValue);
+	Q_EMIT newData(mOldValue);
 }
 
 void EncoderSensor::onIncomingData(const QString &portName, int value)
 {
 	if (portName == port().name()) {
 		mOldValue = value;
-		emit newData(mOldValue);
+		Q_EMIT newData(mOldValue);
 	}
 }
 

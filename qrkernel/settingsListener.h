@@ -95,14 +95,14 @@ public:
 		}
 	}
 
-public slots:
+public Q_SLOTS:
 	/// Stops listening all settings keys for the given listener.
 	static void disconnectSource(QObject *listener);
 
 	/// Stops listening the given key for the given listener.
 	static void disconnectSource(const QString &key, QObject *listener);
 
-private slots:
+private Q_SLOTS:
 	void onSettingsChanged(const QString &name, const QVariant &oldValue, const QVariant &newValue);
 
 private:

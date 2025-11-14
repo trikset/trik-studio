@@ -44,7 +44,7 @@ public:
 	int const &rowsInsertedCalledWithIndex() const;
 	int const &rowsInsertedCalledWithIndexFirstTime() const;
 
-private slots:
+private Q_SLOTS:
 	virtual void dataChanged(QModelIndex const &topLeft, QModelIndex const &bottomRight);
 	virtual void rowsAboutToBeRemoved(QModelIndex const &parent, int start, int end);
 	virtual void rowsInserted(QModelIndex const &parent, int start, int end);

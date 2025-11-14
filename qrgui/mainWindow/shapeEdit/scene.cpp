@@ -343,7 +343,7 @@ void Scene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * event )
 	setMoveFlag(event);
 	setNullZValueItems();
 	if (mItemType != curve || mCount > 3) {
-		emit resetHighlightAllButtons();
+		Q_EMIT resetHighlightAllButtons();
 		mItemType = none;
 		mCount = 0;
 		mCurve = nullptr;
@@ -581,7 +581,7 @@ void Scene::changePalette()
 	if(mItemType == none) {
 		mListSelectedItems = selectedItems();
 		if (mListSelectedItems.isEmpty()) {
-			emit noSelectedItems();
+			Q_EMIT noSelectedItems();
 			setEmptyPenBrushItems();
 		}
 		else {
@@ -589,7 +589,7 @@ void Scene::changePalette()
 			if (item != nullptr) {
 				QPen penItem = item->pen();
 				QBrush brushItem = item->brush();
-				emit existSelectedItems(penItem, brushItem);
+				Q_EMIT existSelectedItems(penItem, brushItem);
 				setPenBrushItems(penItem, brushItem);
 			}
 		}
@@ -600,13 +600,13 @@ void Scene::changeFontPalette()
 {
 	mListSelectedTextPictureItems = selectedTextPictureItems();
 	if (mListSelectedTextPictureItems.isEmpty())
-		emit noSelectedTextPictureItems();
+		Q_EMIT noSelectedTextPictureItems();
 	else {
 		const auto &item = mListSelectedTextPictureItems.back();
 		if (item != nullptr) {
 			QPen penItem = item->pen();
 			QFont fontItem = item->font();
-			emit existSelectedTextPictureItems(penItem, fontItem, item->name());
+			Q_EMIT existSelectedTextPictureItems(penItem, fontItem, item->name());
 		}
 	}
 }
@@ -616,16 +616,16 @@ void Scene::changePortsComboBox()
 	for (auto &&item : selectedItems()) {
 		PointPort *point = dynamic_cast<PointPort *>(item);
 		if (point) {
-			emit existSelectedPortItems(point->getType());
+			Q_EMIT existSelectedPortItems(point->getType());
 			return;
 		}
 		LinePort *line = dynamic_cast<LinePort *>(item);
 		if (line) {
-			emit existSelectedPortItems(line->getType());
+			Q_EMIT existSelectedPortItems(line->getType());
 			return;
 		}
 	}
-	emit noSelectedPortItems();
+	Q_EMIT noSelectedPortItems();
 }
 
 void Scene::changeFontFamily(const QFont& font)

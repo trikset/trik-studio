@@ -44,7 +44,7 @@ public:
 	bool isSavedDirExist();
 
 
-private slots:
+private Q_SLOTS:
 	void pick();
 
 private:

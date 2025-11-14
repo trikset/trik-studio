@@ -67,13 +67,13 @@ void WaitBlock::stop()
 
 void WaitBlock::doneNextBlock()
 {
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 void WaitBlock::failureSlot()
 {
 	mActiveWaitingTimer->stop();
-	emit failure();
+	Q_EMIT failure();
 }
 
 void WaitBlock::stopActiveTimerInBlock()

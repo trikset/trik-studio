@@ -29,5 +29,5 @@ void SmileBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 {
 	auto trikDisplay = static_cast<robotModel::parts::TrikDisplay *>(&display);
 	trikDisplay->drawSmile(mIsSmileSad);
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

@@ -60,7 +60,7 @@ public:
 	QColor getSearchLineColor() const;
 	void setSearchLineColor(const QColor &color);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when the text in the find text field is modified.
 	/// @param text A ready for matching regular expression.
 	void findTextChanged(const QRegExp &text);

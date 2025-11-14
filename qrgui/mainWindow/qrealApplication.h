@@ -33,7 +33,7 @@ class QRealApplication : public QApplication
 public:
 	QRealApplication(int & argc, char ** argv);
 
-signals:
+Q_SIGNALS:
 	/// This event may be subscribed to obtain all low-level user actions, timer events and everything about
 	/// application`s event propagation subsystem. This is very powerful and dangerous tool, use it with care,
 	/// it can strongly harm application`s performance.
@@ -42,7 +42,7 @@ signals:
 protected:
 	bool notify(QObject *receiver, QEvent *event);
 
-private slots:
+private Q_SLOTS:
 	void logMouse(QWidget * const target, QMouseEvent * const event);
 	void logWheel(QWidget * const target, QWheelEvent * const event);
 	void logDrop(QWidget * const target, QDropEvent * const event);

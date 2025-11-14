@@ -155,7 +155,7 @@ public:
 	/// Returns scanning angle and max distance by given device type.
 	virtual QPair<qreal,int> rangeSensorAngleAndDistance (const kitBase::robotModel::DeviceInfo &deviceType) const;
 
-signals:
+Q_SIGNALS:
 	void settingsChanged();
 protected:
 	kitBase::robotModel::robotParts::Device *createDevice(

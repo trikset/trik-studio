@@ -33,5 +33,5 @@ void LightSensor::read()
 	QByteArray command = mImplementation.readyPercentCommand(mImplementation.lowLevelPort(), 0);
 	QByteArray outputBuf;
 	mRobotCommunicator.send(command, lightSensorResponseSize, outputBuf);
-	emit newData(static_cast<int>(outputBuf.data()[5]));
+	Q_EMIT newData(static_cast<int>(outputBuf.data()[5]));
 }

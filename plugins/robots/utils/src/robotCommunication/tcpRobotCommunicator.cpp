@@ -78,7 +78,7 @@ void TcpRobotCommunicator::uploadProgram(const QString &programName)
 {
 	if (programName.isEmpty()) {
 		QLOG_ERROR() << "Empty program name";
-		emit uploadProgramError(tr("Empty program name, can not upload"));
+		Q_EMIT uploadProgramError(tr("Empty program name, can not upload"));
 		return;
 	}
 
@@ -86,7 +86,7 @@ void TcpRobotCommunicator::uploadProgram(const QString &programName)
 	const QString fileContents = utils::InFile::readAll(programName, &errorString);
 	if (!errorString.isEmpty()) {
 		QLOG_ERROR() << "Reading file to transfer failed";
-		emit uploadProgramError(tr("Can not read generated file, uploading aborted"));
+		Q_EMIT uploadProgramError(tr("Can not read generated file, uploading aborted"));
 		return;
 	}
 
@@ -147,35 +147,35 @@ void TcpRobotCommunicator::onMessageFromRobot(const MessageKind &messageKind, co
 {
 	switch (messageKind) {
 	case MessageKind::error:
-		emit errorFromRobot(message);
+		Q_EMIT errorFromRobot(message);
 		break;
 	case MessageKind::info:
-		emit infoFromRobot(message);
+		Q_EMIT infoFromRobot(message);
 		break;
 	case MessageKind::text:
-		emit printText(message);
+		Q_EMIT printText(message);
 		break;
 	case MessageKind::fileContents:
-		emit fileContentsFromRobot(message);
+		Q_EMIT fileContentsFromRobot(message);
 		break;
 	case MessageKind::mail:
-		emit mailFromRobot(message);
+		Q_EMIT mailFromRobot(message);
 		break;
 	}
 }
 
 void TcpRobotCommunicator::onConnectionError(const QString &error)
 {
-	emit connectionError(error);
+	Q_EMIT connectionError(error);
 
 	// Insane protocol for robot model connection require that "connection failed" event is emitted as "connected"
 	// signal with "success" flag set to false and error string. Altering this protocol will lead to rewriting half
 	// of the interpreter, so we will emit "connectionError" for new robot communication protocol classes and
 	// "connected" for models.
-	emit connected(false, error);
+	Q_EMIT connected(false, error);
 }
 
 void TcpRobotCommunicator::onConnected()
 {
-	emit connected(true, "");
+	Q_EMIT connected(true, "");
 }

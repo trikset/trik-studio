@@ -69,7 +69,7 @@ void PreferencesDialog::applyChanges()
 	bool shouldRestart = false;
 	for (PreferencesPage * const page : mCustomPages.values()) {
 		page->save();
-		emit page->saved();
+		Q_EMIT page->saved();
 		shouldRestart |= page->mShouldRestartSystemToApply;
 		page->mShouldRestartSystemToApply = false;
 	}
@@ -80,14 +80,14 @@ void PreferencesDialog::applyChanges()
 		QMessageBox::information(this, tr("Information"), tr("You should restart the program to apply changes"));
 	}
 
-	emit settingsApplied();
+	Q_EMIT settingsApplied();
 }
 
 void PreferencesDialog::restoreSettings()
 {
 	for (PreferencesPage * const page : mCustomPages.values()) {
 		page->restoreSettings();
-		emit page->restored();
+		Q_EMIT page->restored();
 	}
 }
 

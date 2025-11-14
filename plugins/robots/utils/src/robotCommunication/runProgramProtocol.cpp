@@ -34,7 +34,7 @@ RunProgramProtocol::RunProgramProtocol(TcpRobotCommunicatorInterface &communicat
 			, [this, configVersion](const QString &casingModel)
 				{
 					if (casingModel != configVersion) {
-						emit configVersionMismatch(configVersion, casingModel);
+						Q_EMIT configVersionMismatch(configVersion, casingModel);
 						return false;
 					}
 

@@ -41,7 +41,7 @@ public:
 	Id currentElement() const;
 	void setElements(QList<QPair<QString, Id> > const &elements);
 
-signals:
+Q_SIGNALS:
 	void currentElementChanged();
 
 private:

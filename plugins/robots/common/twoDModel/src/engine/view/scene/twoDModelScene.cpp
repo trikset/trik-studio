@@ -271,14 +271,14 @@ void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 
 	mRobots.insert(robotModel, robotItem);
 
-	emit robotListChanged(robotItem.data());
+	Q_EMIT robotListChanged(robotItem.data());
 }
 
 void TwoDModelScene::onRobotRemove(model::RobotModel *robotModel)
 {
 	mRobots.remove(robotModel);
 
-	emit robotListChanged(nullptr);
+	Q_EMIT robotListChanged(nullptr);
 }
 
 void TwoDModelScene::onWallAdded(QSharedPointer<items::WallItem> wall)
@@ -367,7 +367,7 @@ void TwoDModelScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 	const QPointF position = mouseEvent->scenePos();
 
-	emit mousePressed();
+	Q_EMIT mousePressed();
 
 	auto initItem = [this, mouseEvent](const QSharedPointer<QGraphicsItem> &item) {
 		removeMoveFlag(mouseEvent, item.data());
@@ -498,7 +498,7 @@ void TwoDModelScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent)
 		return;
 	}
 
-	emit mouseReleased();
+	Q_EMIT mouseReleased();
 
 	// After dragging item may be null. We mustn`t select it in that case.
 	QSharedPointer<AbstractItem> createdItem;

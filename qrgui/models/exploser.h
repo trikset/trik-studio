@@ -84,7 +84,7 @@ public:
 	/// @param newNames The name which will bew assigned to all the elements in heirarchy
 	commands::AbstractCommand *renameCommands(const Id &oneOfIds, const QString &newNames) const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when automatically created explosion target was removed
 	void explosionTargetRemoved();
 

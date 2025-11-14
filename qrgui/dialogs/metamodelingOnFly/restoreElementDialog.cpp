@@ -96,15 +96,15 @@ void RestoreElementDialog::restoreButtonClicked()
 	const Id node = mElementsWithTheSameNameList[selectedRow];
 	if (mInterpreterEditorManager.isHidden(node)) {
 		mInterpreterEditorManager.resetIsHidden(node);
-		emit jobDone();
+		Q_EMIT jobDone();
 	}
 
-	emit restoreChosen(1);
+	Q_EMIT restoreChosen(1);
 	done(QDialog::Accepted);
 }
 
 void RestoreElementDialog::createButtonClicked()
 {
-	emit createNewChosen();
+	Q_EMIT createNewChosen();
 	done(QDialog::Accepted);
 }

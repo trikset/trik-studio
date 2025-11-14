@@ -14,6 +14,7 @@ rsync -a "$BIN_DIR"/librobots-trik-generator-base*.dylib                        
 rsync -a "$BIN_DIR"/librobots-trik-kit*.dylib                                             "$BUNDLE_CONTENTS/Lib"
 rsync -a "$BIN_DIR"/librobots-trik-kit-interpreter-common*.dylib                          "$BUNDLE_CONTENTS/Lib"
 rsync -a "$BIN_DIR"/libtrik*.dylib                                            	          "$BUNDLE_CONTENTS/Lib"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/Lib/libtrikRuntimeQsLog.2.1.0.dylib"
 
 mkdir -p "$BUNDLE_CONTENTS/MacOS"
 rsync -a "$BIN_DIR"/{system.js,TRIK.py}	                                                "$PWD/../data/"
@@ -21,29 +22,33 @@ rsync -a "$BIN_DIR"/{2D-model,checkapp}                                         
 
 copy_qt_lib QtSerialPort
 
+arch -x86_64 zsh
 
 [ -r venv/bin/activate ] || python3."${TRIK_PYTHON3_VERSION_MINOR}" -m venv venv
-. venv/bin/activate
-python3 -m pip install -U pip
-python3 -m pip install -r requirements.txt
 
-#PyInstaller provides all required modules
-#So we need to handle this garbage of files later (below) with proper rsync
-#Determine python behavior when searching pythonlib
-PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
-	--hidden-import=math \
-	--hidden-import=random \
-	--hidden-import=sys \
-	--hidden-import=time \
-	--hidden-import=os \
-	--hidden-import=types \
-	--hidden-import=pip \
-	--hidden-import=venv \
-	--hidden-import=site \
-	--hidden-import=numpy \
-	"$BIN_DIR"/TRIK.py
+arch -x86_64 bash -c '
+    . venv/bin/activate
 
-deactivate # exit python's venv
+    python3 -m pip install -U pip
+    python3 -m pip install -r requirements.txt
+
+    # PyInstaller provides all required modules
+    # So we need to handle this garbage of files later (below) with proper rsync
+    # Determine python behavior when searching pythonlib
+    PYTHONHASHSEED=1 pyinstaller --clean --noconfirm --log-level DEBUG --debug noarchive --onedir --name trik \
+        --hidden-import=math \
+        --hidden-import=random \
+        --hidden-import=sys \
+        --hidden-import=time \
+        --hidden-import=os \
+        --hidden-import=types \
+        --hidden-import=pip \
+        --hidden-import=venv \
+        --hidden-import=site \
+        --hidden-import=numpy \
+        "$BIN_DIR"/TRIK.py
+    deactivate
+'
 
 rsync -avR --remove-source-files dist/trik/_internal/./*.dylib "$BUNDLE_CONTENTS/Lib"
 rsync -av dist/trik/_internal/python3.*/* "$BUNDLE_CONTENTS/Lib/python-runtime"

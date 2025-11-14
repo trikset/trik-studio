@@ -52,7 +52,7 @@ jobs:
       if: contains(inputs.container_name, 'astra')
 
     - name: Install dependencies
-      run: yum install -y epel-release && yum update -y && yum install -y --setopt=install_weak_deps=False git-core findutils p7zip sudo
+      run: yum update -y ca-certificates openssl curl && yum install -y epel-release && yum update -y && yum install -y --setopt=install_weak_deps=False git-core findutils p7zip sudo
       if: startsWith(inputs.container_name, 'rocky')
 
     - name: Install dependencies

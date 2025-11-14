@@ -65,7 +65,7 @@ public:
 
 	QList<QSharedPointer<Item>> selectedSceneItems();
 
-signals:
+Q_SIGNALS:
 	void noSelectedItems();
 	void existSelectedItems(const QPen &penItem, const QBrush &brushItem);
 	void noSelectedTextPictureItems();
@@ -74,7 +74,7 @@ signals:
 	void existSelectedPortItems(const QString &type);
 	void resetHighlightAllButtons();
 
-private slots:
+private Q_SLOTS:
 	void changePenStyle(const QString &text);
 	void changePenWidth(int width);
 	void changePenColor(const QString &text);

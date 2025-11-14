@@ -31,7 +31,7 @@ public:
 			, FindReplaceDialog *findReplaceDialog
 			, QObject *paresnt = nullptr);
 
-public slots:
+public Q_SLOTS:
 	/// handler for find dialog 'button find' pressed
 	/// @param searchData - data was input to find
 	void handleFindDialog(const QStringList &searchData);

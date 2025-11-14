@@ -23,5 +23,5 @@ LineDetectorToVariableBlock::LineDetectorToVariableBlock()
 void LineDetectorToVariableBlock::run()
 {
 	evalCode(stringProperty("Variable") + " = lineSensor[0]");
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

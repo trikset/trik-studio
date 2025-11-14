@@ -165,14 +165,14 @@ QString ImageItem::path() const
 void ImageItem::setMemorize(bool memorize)
 {
 	mImage->setExternal(!memorize);
-	emit internalImageChanged();
+	Q_EMIT internalImageChanged();
 }
 
 void ImageItem::setPath(const QString &path)
 {
 	mImage->loadFrom(path);
 	update();
-	emit internalImageChanged();
+	Q_EMIT internalImageChanged();
 }
 
 void ImageItem::setBackgroundRole(bool background)
@@ -193,7 +193,7 @@ bool ImageItem::isBackground() const
 QVariant ImageItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &value)
 {
 	if (change == QGraphicsItem::ItemSelectedHasChanged) {
-		emit selectedChanged(value.toBool());
+		Q_EMIT selectedChanged(value.toBool());
 		if (!value.toBool() && isBackground()) {
 			setFlag(ItemIsSelectable, false);
 			setEditable(false);

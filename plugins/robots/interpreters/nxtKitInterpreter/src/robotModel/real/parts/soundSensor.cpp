@@ -32,7 +32,7 @@ SoundSensor::SoundSensor(const DeviceInfo &info, const PortInfo &port
 void SoundSensor::read()
 {
 	if (!mImplementation.isConfigured()) {
-		emit failure();
+		Q_EMIT failure();
 		return;
 	}
 
@@ -63,6 +63,6 @@ void SoundSensor::sensorSpecificProcessResponse(const QByteArray &reading)
 	} else {
 		const int sensorValue = (0xff & reading[13]) << 8 | (0xff & reading[14]);
 		mImplementation.setState(NxtInputDevice::idle);
-		emit newData(sensorValue * 100 / soundMaxValue);
+		Q_EMIT newData(sensorValue * 100 / soundMaxValue);
 	}
 }

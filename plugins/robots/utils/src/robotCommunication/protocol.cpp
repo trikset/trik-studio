@@ -60,18 +60,18 @@ void Protocol::run()
 void Protocol::onTimeout()
 {
 	mStateMachine->stop();
-	emit timeout();
+	Q_EMIT timeout();
 }
 
 void Protocol::onSuccess()
 {
-	emit success();
+	Q_EMIT success();
 	mTimeoutTimer->stop();
 }
 
 void Protocol::onError()
 {
-	emit error();
+	Q_EMIT error();
 	mTimeoutTimer->stop();
 }
 

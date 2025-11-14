@@ -34,21 +34,21 @@ void RunProgramProtocolTest::SetUp()
 
 	ON_CALL(*mCommunicator, requestCasingVersion()).WillByDefault(
 		Invoke([this]() {
-			delay([this](){ emit mCommunicator->casingVersionReceived("model-2015"); });
+			delay([this](){ Q_EMIT mCommunicator->casingVersionReceived("model-2015"); });
 		})
 	);
 
 	ON_CALL(*mCommunicator, uploadProgram(_)).WillByDefault(
 		Invoke([this](const QString &name) {
 			Q_UNUSED(name)
-			delay([this]() { emit mCommunicator->uploadProgramDone(); }, 50);
+			delay([this]() { Q_EMIT mCommunicator->uploadProgramDone(); }, 50);
 		})
 	);
 
 	ON_CALL(*mCommunicator, runProgram(_)).WillByDefault(
 		Invoke([this](const QString &name) {
 			Q_UNUSED(name)
-			delay([this]() { emit mCommunicator->startedRunning(); }, 50);
+			delay([this]() { Q_EMIT mCommunicator->startedRunning(); }, 50);
 		})
 	);
 }

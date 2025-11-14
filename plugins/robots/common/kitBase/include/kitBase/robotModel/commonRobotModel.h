@@ -85,7 +85,7 @@ public:
 	/// Returns real-time timeline implementation. Must be redefined for 2D model-based robot models.
 	utils::TimelineInterface &timeline() override;
 
-public slots:
+public Q_SLOTS:
 	/// Shall be reimplemented to update settings when user changes something on settings page. Default implementation
 	/// does nothing.
 	virtual void rereadSettings();
@@ -112,7 +112,7 @@ protected:
 	/// @todo: see what`s with ownership
 	virtual robotParts::Device *createDevice(const PortInfo &port, const DeviceInfo &deviceInfo);
 
-private slots:
+private Q_SLOTS:
 	void onConnected(bool success);
 
 	void onDisconnected();

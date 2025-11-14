@@ -37,9 +37,9 @@ void TouchSensor::sensorSpecificProcessResponse(const QByteArray &reading)
 	int sensorValue = (0xff & reading[13]) << 8 | (0xff & reading[14]);
 	if (reading[4] == 0 && sensorValue < 500) {
 		// Sensor is pressed.
-		emit newData(1);
+		Q_EMIT newData(1);
 	} else {
-		emit newData(0);
+		Q_EMIT newData(0);
 	}
 }
 
@@ -49,7 +49,7 @@ void TouchSensor::read()
 		// If sensor is not configured, report failure and return immediately.
 		// It is not an error, it shall be possible to reconfigure sensor "on the fly",
 		// but when it is reconfiguring it shall not be available.
-		emit failure();
+		Q_EMIT failure();
 		return;
 	}
 

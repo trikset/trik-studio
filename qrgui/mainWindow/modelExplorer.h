@@ -53,12 +53,12 @@ public:
 	bool supportsPasting() const override;
 	bool supportsCutting() const override;
 
-public slots:
+public Q_SLOTS:
 	void copy() override;
 	void paste() override;
 	void cut() override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user wants to remove an element from the model.
 	/// @todo: The implementation of the deletion process is currently placed to main window.
 	/// Model explorers must be an independent components (maybe even pluginized).

@@ -31,7 +31,7 @@ class LogicalModelView : public modelsImplementation::AbstractView
 public:
 	explicit LogicalModelView(GraphicalModel * const model);
 
-protected slots:
+protected Q_SLOTS:
 	virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
 			, QVector<int> const &roles = QVector<int>());
 	virtual void rowsAboutToBeRemoved(const QModelIndex &parent, int start, int end);

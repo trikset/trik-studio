@@ -31,7 +31,7 @@ class GraphicalModelView : public modelsImplementation::AbstractView
 public:
 	GraphicalModelView(LogicalModel * const model);
 
-protected slots:
+protected Q_SLOTS:
 	virtual void rowsInserted(const QModelIndex &parent, int start, int end);
 	virtual void dataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight
 			, QVector<int> const &roles = QVector<int>());

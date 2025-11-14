@@ -34,7 +34,7 @@ public:
 			, const BlocksFactoryManagerInterface &factoryManager
 			, QObject *parent = nullptr);
 
-public slots:
+public Q_SLOTS:
 	/// Called when selected robot model is changed, updates palette.
 	void updatePalette(kitBase::robotModel::RobotModelInterface &currentModel);
 

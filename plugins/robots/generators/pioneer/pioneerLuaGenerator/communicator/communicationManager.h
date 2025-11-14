@@ -53,7 +53,7 @@ public:
 
 	void stopProgram();
 
-signals:
+Q_SIGNALS:
 	/// Emitted when upload is finished (successfully or with errors). Is not emitted when uploading is a part of
 	/// running the program. uploadCompleted() is guaranteed to be sent after uploadProgram() call.
 	void uploadCompleted();
@@ -67,7 +67,7 @@ signals:
 	/// guaranteed to be sent after stopProgram() call.
 	void stopCompleted();
 
-private slots:
+private Q_SLOTS:
 	/// Called by upload process when it is done.
 	void onUploadCompleted(bool isSuccessful);
 

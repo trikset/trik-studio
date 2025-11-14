@@ -87,7 +87,7 @@ void ReferenceList::activateElement(QListWidgetItem *item)
 void ReferenceList::valueChanged()
 {
 	QStringList newValue = getNewValue();
-	emit referenceSet(newValue, mIndex, mRole);
+	Q_EMIT referenceSet(newValue, mIndex, mRole);
 }
 
 QStringList ReferenceList::getNewValue() const

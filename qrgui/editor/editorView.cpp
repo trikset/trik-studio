@@ -331,7 +331,7 @@ void EditorView::zoom(const qreal zoomFactor)
 	}
 
 	checkGrid();
-	emit zoomChanged(transform().m11());
+	Q_EMIT zoomChanged(transform().m11());
 }
 
 void EditorView::copy()

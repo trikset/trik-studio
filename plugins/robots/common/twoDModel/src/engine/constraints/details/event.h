@@ -67,7 +67,7 @@ public:
 	/// (like in case of "timer" condition).
 	void setCondition(const Condition &condition);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when this event was setted up by someone even if event was already alive.
 	void settedUp();
 

@@ -42,7 +42,7 @@ public:
 
 	bool run(const QString &algorithm);
 
-public slots:
+public Q_SLOTS:
 	void readFromProcess();
 
 private:

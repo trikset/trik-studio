@@ -36,7 +36,7 @@ public:
 	/// Create menu for choosing shape type
 	QMenu *shapeTypeMenu() const;
 
-private slots:
+private Q_SLOTS:
 	void setSquareLine() const;
 	void setBrokenLine() const;
 	void setCurveLine() const;

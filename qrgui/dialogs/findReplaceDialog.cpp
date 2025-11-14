@@ -77,7 +77,7 @@ void FindReplaceDialog::findClicked()
 		}
 		if (!searchData.isEmpty()) {
 			searchData.push_front(mUi->mFindEdit->text());
-			emit findModelByName(searchData);
+			Q_EMIT findModelByName(searchData);
 		}
 	}
 }
@@ -95,7 +95,7 @@ void FindReplaceDialog::replaceHandler()
 			searchData.push_front(mUi->mReplaceEdit->text());
 			searchData.push_front(mUi->mFindEdit->text());
 			hide();
-			emit replaceClicked(searchData);
+			Q_EMIT replaceClicked(searchData);
 			show();
 		}
 	}
@@ -103,7 +103,7 @@ void FindReplaceDialog::replaceHandler()
 
 void FindReplaceDialog::itemChosen(QListWidgetItem *item)
 {
-	emit chosenElement(qReal::Id::loadFromString(item->data(Qt::ToolTipRole).toString()));
+	Q_EMIT chosenElement(qReal::Id::loadFromString(item->data(Qt::ToolTipRole).toString()));
 }
 
 void FindReplaceDialog::initIds(QMap<QString, QString> foundData)

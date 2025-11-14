@@ -222,7 +222,7 @@ void Connection::doDisconnect()
 
 	mDisconnectReported = true;
 
-	emit disconnected();
+	Q_EMIT disconnected();
 
 	thread()->quit();
 }
@@ -258,7 +258,7 @@ void Connection::processData(const QByteArray &data)
 	if (command.startsWith("file:")) {
 	} else if (command.startsWith("run:")) {
 		mRunProgramRequestReceived = true;
-		emit runProgramRequestReceivedSignal();
+		Q_EMIT runProgramRequestReceivedSignal();
 	} else if (command == "stop") {
 	} else if (command.startsWith("direct:")) {
 	} else if (command.startsWith("directScript:")) {

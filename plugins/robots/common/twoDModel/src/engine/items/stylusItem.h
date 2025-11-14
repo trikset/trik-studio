@@ -55,7 +55,7 @@ public:
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user draws new segment in this stylus line.
 	void segmentAdded(twoDModel::items::LineItem *segment);
 

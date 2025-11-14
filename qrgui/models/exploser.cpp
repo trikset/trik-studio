@@ -110,7 +110,7 @@ void Exploser::handleCreationWithExplosions(AbstractCommand *createCommand, cons
 
 		connect(createCommand, &AbstractCommand::redoComplete, this, [&, target](bool success){
 			if (success) {
-				emit explosionTargetCouldChangeProperties(target);
+				Q_EMIT explosionTargetCouldChangeProperties(target);
 			}
 		});
 	}
@@ -137,7 +137,7 @@ void Exploser::handleRemoveCommand(const IdList &explosionSources, AbstractComma
 
 		connect(command, &AbstractCommand::undoComplete, this, [&, outgoing](bool success){
 			if (success) {
-				emit explosionTargetCouldChangeProperties(outgoing);
+				Q_EMIT explosionTargetCouldChangeProperties(outgoing);
 			}
 		});
 	}

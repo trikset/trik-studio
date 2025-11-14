@@ -25,7 +25,7 @@ public:
 	TrikColorSensorAdapter(trik::robotModel::parts::TrikColorSensor *sensor);
 	virtual Status status() const override;
 
-public slots:
+public Q_SLOTS:
 	void init(bool showOnDisplay) override;
 	QVector<int> read(int m, int n) override;
 	void stop() override;

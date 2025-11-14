@@ -43,7 +43,7 @@ public:
 	/// Stop robot and then execute "shutdownCommand" on it ("killall espeak", for example).
 	void run(const QString &shutdownCommand);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when protocol completed successfully.
 	void success();
 

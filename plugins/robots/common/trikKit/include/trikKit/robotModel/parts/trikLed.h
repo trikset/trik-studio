@@ -31,7 +31,7 @@ public:
 	TrikLed(const kitBase::robotModel::DeviceInfo &info
 			, const kitBase::robotModel::PortInfo &port);
 
-public slots:
+public Q_SLOTS:
 	/// @todo: led color enum here
 	virtual void setColor(const QString &color) = 0;
 };

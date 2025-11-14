@@ -2,7 +2,7 @@
 set -euxo pipefail
 BUILD_INSTALLER=${BUILD_INSTALLER:-true}
 TRIK_QT_VERSION=${TRIK_QT_VERSION:-5.15}
-XCODE_VERSION=${XCODE_VERSION:-14.3} # 14.3 on GHA worker is compatible with Qt5.15
+XCODE_VERSION=${XCODE_VERSION:-15.3}
 TRIK_PYTHON3_VERSION_MINOR=${TRIK_PYTHON3_VERSION_MINOR:-11}
 
 
@@ -30,14 +30,30 @@ case "$(uname)" in
   Darwin)
     export HOMEBREW_NO_INSTALL_CLEANUP=1
     export HOMEBREW_NO_AUTO_UPDATE=1
+    TRIK_PYTHON3_VERSION_PATCH=${TRIK_PYTHON3_VERSION_PATCH:-0}
     brew tap "hudochenkov/sshpass"
-    TRIK_BREW_PACKAGES="ccache coreutils libusb pkg-config gnu-sed sshpass p7zip python@3.${TRIK_PYTHON3_VERSION_MINOR}"
+    TRIK_BREW_PACKAGES="ccache coreutils pkg-config gnu-sed sshpass p7zip"
     for pkg in $TRIK_BREW_PACKAGES ; do
       p="${pkg##*/}"
       p="${p%.*}"
       brew install --quiet "$pkg" || brew upgrade "$pkg" || brew link --force "$pkg" || echo "Failed to install/upgrade $pkg"
     done
     modules=("qtscript")
+    
+    PYTHON_VERSION="3.${TRIK_PYTHON3_VERSION_MINOR}.$TRIK_PYTHON3_VERSION_PATCH"
+    PYTHON_INSTALLER_NAME="python-$PYTHON_VERSION-macos11.pkg"
+    PYTHON_DOWNLOAD_URL="https://www.python.org/ftp/python/$PYTHON_VERSION/${PYTHON_INSTALLER_NAME}"
+    curl -o "/tmp/${PYTHON_INSTALLER_NAME}" "${PYTHON_DOWNLOAD_URL}"
+    sudo installer -pkg "/tmp/${PYTHON_INSTALLER_NAME}" -target /
+
+    MACPORTS_PKG="MacPorts-2.11.6-14-Sonoma.pkg"
+    MACPORTS_URL="https://github.com/macports/macports-base/releases/download/v2.11.6/${MACPORTS_PKG}"
+    curl -L --fail --output "${MACPORTS_PKG}" "${MACPORTS_URL}"
+    sudo installer -pkg "${MACPORTS_PKG}" -target /
+    export PATH="/opt/local/bin:$PATH"
+    sudo port selfupdate
+    sudo port install libusb +universal
+
     install_qt mac desktop "${TRIK_QT_VERSION}" "$HOME/Qt" $modules
     sudo xcode-select -s /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
     xcodebuild -showsdks

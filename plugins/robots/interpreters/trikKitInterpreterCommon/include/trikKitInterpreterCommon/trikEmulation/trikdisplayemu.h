@@ -39,7 +39,7 @@ public:
 
 	void init();
 
-public slots:
+public Q_SLOTS:
 	void showImage(const QString &fileName) override;
 	void show(const QVector<int32_t> &array, int width, int height, const QString &format) override;
 	void addLabel(const QString &text, int x, int y, int fontSize = -1) override;

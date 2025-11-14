@@ -43,7 +43,7 @@ public:
 
 	QString friendlyKitName() const override;
 
-protected slots:
+protected Q_SLOTS:
 	/// Calls code generator. Returns file path if operation was successful and an empty string otherwise.
 	/// @param openTab If true after code generation a tab with generated code will be opened.
 	virtual QString generateCode(bool openTab = true);

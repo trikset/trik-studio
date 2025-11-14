@@ -35,7 +35,7 @@ public:
 
 	virtual Status status() const override {return Status::ready;}
 	// EncoderInterface interface
-public slots:
+public Q_SLOTS:
 	virtual int read() override;
 	virtual int readRawData() override { return read(); }
 	virtual void reset() override;

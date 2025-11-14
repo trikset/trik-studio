@@ -122,12 +122,12 @@ const Customizer *ToolPluginManager::customizer() const
 
 void ToolPluginManager::updateSettings()
 {
-	emit mSystemEvents->settingsUpdated();
+	Q_EMIT mSystemEvents->settingsUpdated();
 }
 
 void ToolPluginManager::activeTabChanged(const TabInfo &info)
 {
-	emit mSystemEvents->activeTabChanged(info);
+	Q_EMIT mSystemEvents->activeTabChanged(info);
 }
 
 QObject *ToolPluginManager::pluginGuiFacade(const QString &pluginName) const

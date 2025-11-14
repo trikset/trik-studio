@@ -146,7 +146,7 @@ public:
 	/// Assignment will copy contents of \a other into this instance.
 	/// LabelProperties &operator =(const LabelProperties &other);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when label`s index among other siblings changes.
 	void indexChanged(int index);
 

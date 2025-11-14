@@ -38,7 +38,7 @@ public:
 
 	bool isUnsaved(const QString &moduleId) const;
 
-public slots:
+public Q_SLOTS:
 	void setActiveModule(const QString &moduleId) override;
 	void moduleOpened(const QString &moduleId) override;
 	void moduleClosed(const QString &moduleId) override;
@@ -56,7 +56,7 @@ public slots:
 	/// Tells controller that current project was closed
 	void projectClosed();
 
-private slots:
+private Q_SLOTS:
 	void resetModifiedState();
 	void resetCanRedoState();
 	void resetCanUndoState();

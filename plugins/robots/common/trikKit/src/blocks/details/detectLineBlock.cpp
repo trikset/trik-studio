@@ -24,5 +24,5 @@ DetectLineBlock::DetectLineBlock(kitBase::robotModel::RobotModelInterface &robot
 void DetectLineBlock::doJob(trik::robotModel::parts::TrikLineSensor &camera)
 {
 	camera.detectLine();
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

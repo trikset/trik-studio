@@ -47,6 +47,6 @@ void PrintTextBlock::doJob(kitBase::robotModel::robotParts::Display &display)
 			display.redraw();
 		}
 
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

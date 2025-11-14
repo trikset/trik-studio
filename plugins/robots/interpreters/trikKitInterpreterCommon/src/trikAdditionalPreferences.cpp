@@ -76,7 +76,7 @@ void TrikAdditionalPreferences::save()
 		QMessageBox::information(this, tr("Information"), tr("You should restart the program to apply changes"));
 		mailboxSavedState = mUi->mailboxCheckBox->isChecked();
 	}
-	emit settingsChanged();
+	Q_EMIT settingsChanged();
 }
 
 void TrikAdditionalPreferences::restoreSettings()

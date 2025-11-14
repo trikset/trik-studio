@@ -76,7 +76,7 @@ public:
 	/// Enables or disables checker. Checker will be still disabled if true passed here but constraints list is empty.
 	void setEnabled(bool enabled);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when program execution meets <success/> trigger. That means that robot successfully accomplished its
 	/// task without violation any constraint.
 	void success();

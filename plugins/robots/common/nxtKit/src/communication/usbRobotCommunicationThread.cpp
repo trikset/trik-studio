@@ -65,7 +65,7 @@ UsbRobotCommunicationThread::~UsbRobotCommunicationThread()
 bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pid, const QString &notConnectedErrorText)
 {
 	if (mHandle) {
-		emit connected(true, QString());
+		Q_EMIT connected(true, QString());
 		return true;
 	}
 
@@ -86,7 +86,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 			const int err = libusb_open(devices[i], &mHandle);
 			if (err == LIBUSB_ERROR_NOT_SUPPORTED) {
 				QLOG_ERROR() << "libusb_open returned LIBUSB_ERROR_NOT_SUPPORTED";
-				emit noDriversFound();
+				Q_EMIT noDriversFound();
 				libusb_free_device_list(devices, 1);
 				if (mHandle) {
 					libusb_close(mHandle);
@@ -95,7 +95,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 				return false;
 			} else if (err < 0 || !mHandle) {
 				QLOG_ERROR() << "libusb_open returned" << err;
-				emit connected(false, notConnectedErrorText);
+				Q_EMIT connected(false, notConnectedErrorText);
 				libusb_free_device_list(devices, 1);
 				return false;
 			} else {
@@ -106,7 +106,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 
 	if (!mHandle) {
 		libusb_free_device_list(devices, 1);
-		emit connected(false, notConnectedErrorText);
+		Q_EMIT connected(false, notConnectedErrorText);
 		return false;
 	}
 
@@ -166,7 +166,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
-		emit connected(false, tr("USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT."));
+		Q_EMIT connected(false, tr("USB Device configuration problem. Try to restart TRIK Studio and re-plug NXT."));
 		return false;
 	}
 
@@ -175,7 +175,7 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
-		emit connected(false, tr("NXT device is already used by another software."));
+		Q_EMIT connected(false, tr("NXT device is already used by another software."));
 		return false;
 	}
 
@@ -196,12 +196,12 @@ bool UsbRobotCommunicationThread::connectImpl(bool firmwareMode, int vid, int pi
 		libusb_close(mHandle);
 		mHandle = nullptr;
 		libusb_free_device_list(devices, 1);
-		emit connected(false, tr("NXT handshake procedure failed. Please contact developers."));
+		Q_EMIT connected(false, tr("NXT handshake procedure failed. Please contact developers."));
 		return false;
 	}
 
 	QLOG_INFO() << "NXTUSB: Connected successfully with configuration" << (configurationFound - 1);
-	emit connected(true, QString());
+	Q_EMIT connected(true, QString());
 
 	if (!firmwareMode) {
 		mKeepAliveTimer->moveToThread(thread());
@@ -223,9 +223,9 @@ bool UsbRobotCommunicationThread::send(QObject *addressee, const QByteArray &buf
 	outputBuffer.resize(responseSize);
 	const bool result = send(buffer, responseSize, outputBuffer);
 	if (!isResponseNeeded(buffer)) {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 	} else {
-		emit response(addressee, outputBuffer);
+		Q_EMIT response(addressee, outputBuffer);
 	}
 
 	return result;
@@ -249,7 +249,7 @@ bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSiz
 			|| err == LIBUSB_ERROR_INTERRUPTED || err == LIBUSB_ERROR_NO_DEVICE)
 	{
 		QLOG_ERROR() << "Connection to NXT lost with code" << err << "during sending buffers";
-		emit errorOccured(tr("Connection to NXT lost"));
+		Q_EMIT errorOccured(tr("Connection to NXT lost"));
 		disconnect();
 		return false;
 	} else if (err < 0) {
@@ -268,7 +268,7 @@ bool UsbRobotCommunicationThread::send(const QByteArray &buffer, int responseSiz
 	err = libusb_bulk_transfer(mHandle, NXT_EP_IN, response, responseSize, &actualLength, NXT_USB_TIMEOUT);
 	if (err == LIBUSB_ERROR_IO || err == LIBUSB_ERROR_PIPE || err == LIBUSB_ERROR_INTERRUPTED) {
 		QLOG_ERROR() << "Connection to NXT lost with code" << err << "during recieving answer";
-		emit errorOccured(tr("Connection to NXT lost"));
+		Q_EMIT errorOccured(tr("Connection to NXT lost"));
 		disconnect();
 		return false;
 	} else if (err < 0) {
@@ -298,7 +298,7 @@ void UsbRobotCommunicationThread::disconnect()
 		libusb_exit(nullptr);
 		mHandle = nullptr;
 	}
-	emit disconnected();
+	Q_EMIT disconnected();
 }
 
 void UsbRobotCommunicationThread::allowLongJobs(bool allow)
@@ -326,7 +326,7 @@ void UsbRobotCommunicationThread::checkForConnection()
 	send(command, keepAliveResponseSize, response);
 
 	if (response[3] == '\0') {
-		emit disconnected();
+		Q_EMIT disconnected();
 	}
 }
 

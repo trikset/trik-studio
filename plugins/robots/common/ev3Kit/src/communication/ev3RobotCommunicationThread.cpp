@@ -52,7 +52,7 @@ QString Ev3RobotCommunicationThread::uploadFile(const QString &sourceFile, const
 
 	auto filenameLength = fileInfo.fileName().length();
 	if (filenameLength > EV3_MAX_ALLOWED_FILENAME_LENGTH) {
-		emit errorOccured(tr("EV3 limits filename length to %1 characters, "
+		Q_EMIT errorOccured(tr("EV3 limits filename length to %1 characters, "
 				"but you have %2, please, rename your project.").arg(EV3_MAX_ALLOWED_FILENAME_LENGTH)
 				.arg(filenameLength));
 		return QString();

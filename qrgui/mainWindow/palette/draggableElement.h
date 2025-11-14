@@ -68,10 +68,10 @@ public:
 
 	bool getReadyForDelete() const;
 
-signals:
+Q_SIGNALS:
 	void signalReadyForDelete();
 
-private slots:
+private Q_SLOTS:
 	void changePropertiesPaletteActionTriggered();
 	void changeDynamicPropertiesPaletteActionTriggered();
 	void changeAppearancePaletteActionTriggered();

@@ -36,7 +36,7 @@ void ColorSensorImpl::read()
 		// If sensor is not configured, report failure and return immediately.
 		// It is not an error, it shall be possible to reconfigure sensor "on the fly",
 		// but when it is reconfiguring it shall not be available.
-		emit failure();
+		Q_EMIT failure();
 		return;
 	}
 
@@ -67,9 +67,9 @@ void ColorSensorImpl::sensorSpecificProcessResponse(const QByteArray &reading)
 	} else {
 		mImplementation.setState(NxtInputDevice::idle);
 		if (mLowLevelType == enums::lowLevelSensorType::COLORFULL) {
-			emit newData(0xff & reading[14]);  // Scaled value, used in ColorFull mode.
+			Q_EMIT newData(0xff & reading[14]);  // Scaled value, used in ColorFull mode.
 		} else {
-			emit newData(((0xff & reading[10]) | ((0xff & reading[11]) << 8)) * 100 / maxColorValue);
+			Q_EMIT newData(((0xff & reading[10]) | ((0xff & reading[11]) << 8)) * 100 / maxColorValue);
 		}
 	}
 }

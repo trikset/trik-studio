@@ -30,6 +30,6 @@ void SetPainterWidthBlock::doJob(kitBase::robotModel::robotParts::Display &displ
 	const int width = eval<int>("Width");
 	if (!errorsOccured()) {
 		trikDisplay->setPainterWidth(width);
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

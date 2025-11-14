@@ -36,7 +36,7 @@ public:
 	void read() override;
 	void nullify() override;
 
-public slots:
+public Q_SLOTS:
 	void onIncomingData(const QString &portName, int value);
 
 private:

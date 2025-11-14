@@ -33,12 +33,12 @@ void ReceiveThreadMessageBlock::run()
 	}
 
 	if (!boolProperty("Synchronized")) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }
 
 void ReceiveThreadMessageBlock::receiveMessage(const QString &message)
 {
 	evalCode(mVariable + " = " + message);
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

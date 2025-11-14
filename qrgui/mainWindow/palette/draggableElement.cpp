@@ -395,7 +395,7 @@ void DraggableElement::mousePressEvent(QMouseEvent *event)
 
 		drag->exec(Qt::CopyAction);
 		readyForDelete = true;
-		emit signalReadyForDelete();
+		Q_EMIT signalReadyForDelete();
 	}
 }
 

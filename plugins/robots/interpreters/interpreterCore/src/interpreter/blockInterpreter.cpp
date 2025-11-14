@@ -88,13 +88,13 @@ void BlockInterpreter::interpret()
 	mInterpretersInterface.errorReporter()->clear();
 
 	if (mRobotModelManager.model().connectionState() != RobotModelInterface::connectedState) {
-		emit errored();
+		Q_EMIT errored();
 		mInterpretersInterface.errorReporter()->addInformation(tr("No connection to robot"));
 		return;
 	}
 
 	if (mState != idle) {
-		emit errored();
+		Q_EMIT errored();
 		mInterpretersInterface.errorReporter()->addInformation(tr("Interpreter is already running"));
 		return;
 	}
@@ -104,7 +104,7 @@ void BlockInterpreter::interpret()
 	mState = waitingForDevicesConfiguredToLaunch;
 
 	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()), mRobotModelManager.model().robotId())) {
-		emit errored();
+		Q_EMIT errored();
 		mState = idle;
 		return;
 	}
@@ -128,7 +128,7 @@ void BlockInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 	mState = idle;
 	mThreads.clear();
 	mBlocksTable->setFailure();
-	emit stopped(reason);
+	Q_EMIT stopped(reason);
 }
 
 int BlockInterpreter::timeElapsed() const
@@ -157,7 +157,7 @@ void BlockInterpreter::connectedSlot(bool success, const QString &errorString)
 		}
 	}
 
-	emit connected(success);
+	Q_EMIT connected(success);
 }
 
 void BlockInterpreter::devicesConfiguredSlot()
@@ -177,7 +177,7 @@ void BlockInterpreter::devicesConfiguredSlot()
 		auto initialThread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi
 				, mInterpretersInterface, startingElementType, currentDiagramId, *mBlocksTable, "main");
 
-		emit started();
+		Q_EMIT started();
 
 		addThread(initialThread, "main");
 	}
@@ -255,7 +255,7 @@ void BlockInterpreter::connectToRobot()
 		mRobotModelManager.model().connectToRobot();
 	}
 
-	emit connected(mRobotModelManager.model().connectionState() == RobotModelInterface::connectedState);
+	Q_EMIT connected(mRobotModelManager.model().connectionState() == RobotModelInterface::connectedState);
 }
 
 void BlockInterpreter::reportError(const QString &message)

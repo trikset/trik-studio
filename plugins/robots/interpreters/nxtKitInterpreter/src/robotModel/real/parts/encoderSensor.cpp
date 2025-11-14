@@ -75,7 +75,7 @@ void EncoderSensor::sensorSpecificProcessResponse(const QByteArray &reading)
 	} else {
 		unsigned int recieved = (0xff & reading[23]) | ((0xff & reading[24]) << 8)
 				| ((0xff & reading[25]) << 16) | ((0xff & reading[26]) << 24);
-		emit newData(recieved);
+		Q_EMIT newData(recieved);
 	}
 }
 

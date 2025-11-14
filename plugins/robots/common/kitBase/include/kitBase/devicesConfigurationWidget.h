@@ -56,7 +56,7 @@ public:
 	/// loadRobotModels() method must be called before this one.
 	void prependCustomWidget(robotModel::RobotModelInterface &robotModel, QWidget * const widget);
 
-public slots:
+public Q_SLOTS:
 	/// Updates widget from current model configuration.
 	void refresh();
 

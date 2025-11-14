@@ -46,14 +46,14 @@ public:
 			, const QString &refType, const QStringList &currentValue, int role, QWidget *parent = nullptr);
 	~ReferenceList();
 
-public slots:
+public Q_SLOTS:
 	void activateElement(QListWidgetItem *);
 
-signals:
+Q_SIGNALS:
 	/// emitted when OK pressed
 	void referenceSet(const QStringList &newValue, const QPersistentModelIndex &index, int role);
 
-private slots:
+private Q_SLOTS:
 	void valueChanged();
 	void restoreSelected();
 

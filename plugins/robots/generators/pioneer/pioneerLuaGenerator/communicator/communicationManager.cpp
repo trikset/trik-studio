@@ -109,13 +109,13 @@ void CommunicationManager::done()
 	case Action::none:
 		return;
 	case Action::starting:
-		emit runCompleted();
+		Q_EMIT runCompleted();
 		break;
 	case Action::stopping:
-		emit stopCompleted();
+		Q_EMIT stopCompleted();
 		break;
 	case Action::uploading:
-		emit uploadCompleted();
+		Q_EMIT uploadCompleted();
 	}
 
 	mCurrentAction = Action::none;

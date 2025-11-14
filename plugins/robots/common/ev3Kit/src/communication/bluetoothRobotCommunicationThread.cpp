@@ -45,16 +45,16 @@ BluetoothRobotCommunicationThread::~BluetoothRobotCommunicationThread()
 bool BluetoothRobotCommunicationThread::send(QObject *addressee, const QByteArray &buffer, int responseSize)
 {
 	if (!mPort) {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 		return false;
 	}
 
 	const bool result = send1(buffer);
 	if (buffer.size() >= 5 && buffer[4] == enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY) {
 		QByteArray const result = receive(responseSize);
-		emit response(addressee, result);
+		Q_EMIT response(addressee, result);
 	} else {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 	}
 
 	return result;
@@ -63,7 +63,7 @@ bool BluetoothRobotCommunicationThread::send(QObject *addressee, const QByteArra
 bool BluetoothRobotCommunicationThread::connect()
 {
 	if (mPort && mPort->isOpen()) {
-		emit connected(true, QString());
+		Q_EMIT connected(true, QString());
 		return true;
 	}
 
@@ -79,14 +79,14 @@ bool BluetoothRobotCommunicationThread::connect()
 		QLOG_ERROR() << "Failed to open actual port" << portName
 			    << "with error" << mPort->error()
 			    << "with error string" << mPort->errorString();
-		emit connected(false, tr("Cannot open port ") + portName);
+		Q_EMIT connected(false, tr("Cannot open port ") + portName);
 		return false;
 	}
 
 	// Sending "Keep alive" command to check connection.
 	keepAlive();
 	const QByteArray response = receive(keepAliveResponseSize);
-	emit connected(!response.isEmpty(), QString());
+	Q_EMIT connected(!response.isEmpty(), QString());
 
 	mKeepAliveTimer->moveToThread(this->thread());
 	mKeepAliveTimer->disconnect();
@@ -106,7 +106,7 @@ void BluetoothRobotCommunicationThread::disconnect()
 {
 	delete mPort;
 	mPort = nullptr;
-	emit disconnected();
+	Q_EMIT disconnected();
 }
 
 void BluetoothRobotCommunicationThread::allowLongJobs(bool allow)
@@ -144,7 +144,7 @@ void BluetoothRobotCommunicationThread::checkForConnection()
 	const QByteArray response = receive(keepAliveResponseSize);
 
 	if (response == QByteArray()) {
-		emit disconnected();
+		Q_EMIT disconnected();
 	}
 }
 

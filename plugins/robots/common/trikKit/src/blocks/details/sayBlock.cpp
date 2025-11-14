@@ -27,6 +27,6 @@ void SayBlock::doJob(robotModel::parts::TrikShell &shell)
 	const QString text = boolProperty("Evaluate") ? eval<QString>("Text") : stringProperty("Text");
 	if (!errorsOccured()) {
 		shell.say(text);
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

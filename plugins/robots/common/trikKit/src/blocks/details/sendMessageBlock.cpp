@@ -26,5 +26,5 @@ void SendMessageBlock::doJob(robotModel::parts::TrikNetworkCommunicator &network
 	auto message = stringProperty("Message");
 	auto hullNumber = intProperty("HullNumber");
 	network.send(message, hullNumber);
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }

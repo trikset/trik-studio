@@ -66,13 +66,13 @@ void Settings::deserialize(const QDomElement &parent)
 	mRealisticSensors = parent.attribute("realisticSensors") == "true";
 	mRealisticMotors = parent.attribute("realisticMotors") == "true";
 	mSizeUnitSystem->deserialize(parent);
-	emit physicsChanged(mRealisticPhysics);
+	Q_EMIT physicsChanged(mRealisticPhysics);
 }
 
 void Settings::setRealisticPhysics(bool set)
 {
 	mRealisticPhysics = set;
-	emit physicsChanged(mRealisticPhysics);
+	Q_EMIT physicsChanged(mRealisticPhysics);
 }
 
 void Settings::setRealisticSensors(bool set)

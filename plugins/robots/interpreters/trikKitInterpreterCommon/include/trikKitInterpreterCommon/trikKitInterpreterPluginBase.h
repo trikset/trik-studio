@@ -71,12 +71,12 @@ public:
 
 	TrikTextualInterpreter *textualInterpreter() const;
 
-signals:
+Q_SIGNALS:
 	void started();
 	void stopped(qReal::interpretation::StopReason reason);
 	void codeInterpretationStarted(const QString &code, const QString &languageExtension);
 
-private slots:
+private Q_SLOTS:
 	QWidget *produceIpAddressConfigurer();  // Transfers ownership
 
 	void testStart(); // QtS

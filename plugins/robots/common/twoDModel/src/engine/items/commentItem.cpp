@@ -187,7 +187,7 @@ void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 	QAction *selectedAction = menu->exec(event->screenPos());
 	delete menu;
 	if (selectedAction == removeAction) {
-		emit deletedWithContextMenu();
+		Q_EMIT deletedWithContextMenu();
 	} else if (selectedAction == editAction) {
 		mIsEditing ? endEditing() : startEditing();
 	} else if (selectedAction == cancelAction) {

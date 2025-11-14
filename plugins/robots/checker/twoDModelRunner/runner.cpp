@@ -100,17 +100,17 @@ bool Runner::generate(const QString &generatePath, const QString &generateMode)
 	for (auto&& action: mPluginFacade->actionsManager().actions()){
 		if (generateMode == "python") {
 			if (action.action()->objectName() == "generatePythonTrikCode") {
-				emit action.action()->triggered();
+				Q_EMIT action.action()->triggered();
 			}
 		}
 		if (generateMode == "javascript") {
 			if (action.action()->objectName() == "generateTRIKCode") {
-				emit action.action()->triggered();
+				Q_EMIT action.action()->triggered();
 			}
 		}
 		if (generateMode == "nxt") {
 			if (action.action()->objectName() == "generateCode") {
-				emit action.action()->triggered();
+				Q_EMIT action.action()->triggered();
 			}
 		}
 	}

@@ -36,7 +36,7 @@ public:
 	void restoreSettings() override;
 	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel) override;
 
-signals:
+Q_SIGNALS:
 	void settingsChanged();
 	void packImagesToProjectClicked();
 

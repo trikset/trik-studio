@@ -27,6 +27,6 @@ void RandomInitBlock::run()
 	const int result = from + qrand() % (to - from + 1);
 	evalCode(stringProperty("Variable") + " = " + QString::number(result));
 	if (!errorsOccured()) {
-		emit done(mNextBlockId);
+		Q_EMIT done(mNextBlockId);
 	}
 }

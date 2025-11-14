@@ -31,7 +31,7 @@ public:
 	/// Constructor, takes current robot model, determines port by 'Button' property of a port.
 	WaitForButtonBlock(robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	/// Called when new data about button state is received.
 	void responseSlot(const QVariant &isPressed);
 

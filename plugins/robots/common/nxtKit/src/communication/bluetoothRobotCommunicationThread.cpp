@@ -47,16 +47,16 @@ BluetoothRobotCommunicationThread::~BluetoothRobotCommunicationThread()
 bool BluetoothRobotCommunicationThread::send(QObject *addressee, const QByteArray &buffer, int responseSize)
 {
 	if (!mPort) {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 		return false;
 	}
 
 	const bool result = send(buffer);
 	if (buffer.size() >= 3 && buffer[2] == enums::errorCode::success) {
 		const QByteArray result = receive(responseSize);
-		emit response(addressee, result);
+		Q_EMIT response(addressee, result);
 	} else {
-		emit response(addressee, QByteArray());
+		Q_EMIT response(addressee, QByteArray());
 	}
 
 	return result;
@@ -83,7 +83,7 @@ bool BluetoothRobotCommunicationThread::connect()
 		QLOG_ERROR() << "Failed to open actual port" << portName
 			    << "with error" << mPort->error()
 			    << "with error string" << mPort->errorString();
-		emit connected(false, tr("Cannot open port ") + portName);
+		Q_EMIT connected(false, tr("Cannot open port ") + portName);
 		return false;
 	}
 
@@ -96,7 +96,7 @@ bool BluetoothRobotCommunicationThread::connect()
 
 	send(command);
 	const QByteArray response = receive(getFirmwareVersionResponseSize);
-	emit connected(!response.isEmpty(), QString());
+	Q_EMIT connected(!response.isEmpty(), QString());
 
 	mKeepAliveTimer->start(500);
 
@@ -112,7 +112,7 @@ void BluetoothRobotCommunicationThread::disconnect()
 {
 	delete mPort;
 	mPort = nullptr;
-	emit disconnected();
+	Q_EMIT disconnected();
 }
 
 void BluetoothRobotCommunicationThread::allowLongJobs(bool allow)
@@ -158,6 +158,6 @@ void BluetoothRobotCommunicationThread::checkForConnection()
 	const QByteArray response = receive(keepAliveResponseSize);
 
 	if (response == QByteArray()) {
-		emit disconnected();
+		Q_EMIT disconnected();
 	}
 }

@@ -32,7 +32,7 @@ class ProjectManagerWrapper : public ProjectManager
 public:
 	ProjectManagerWrapper(MainWindow *mainWindow, TextManagerInterface *textManager);
 
-public slots:
+public Q_SLOTS:
 	bool openNewWithDiagram() override;
 
 	/// Creating a new diagram

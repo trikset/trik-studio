@@ -29,7 +29,7 @@ class WaitGamepadConnectBlock
 public:
 	explicit WaitGamepadConnectBlock(kitBase::robotModel::RobotModelInterface &robotModel);
 
-private slots:
+private Q_SLOTS:
 	void responseSlot(const QVariant &reading) override;
 
 private:

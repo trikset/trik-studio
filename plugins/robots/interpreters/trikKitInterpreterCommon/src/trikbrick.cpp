@@ -81,7 +81,7 @@ void TrikBrick::printToShell(const QString &msg)
 	using namespace trik::robotModel;
 	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
-		emit error(tr("2d model shell part was not found"));
+		Q_EMIT error(tr("2d model shell part was not found"));
 		return;
 	}
 
@@ -127,7 +127,7 @@ void TrikBrick::setCurrentInputs(const QString &f)
 
 	QFile in(f);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		emit warning(tr("Trying to read from file %1 failed").arg(f)); // todo: remove? It's only in exercise.
+		Q_EMIT warning(tr("Trying to read from file %1 failed").arg(f)); // todo: remove? It's only in exercise.
 		//not really an error, usually
 	}
 
@@ -157,7 +157,7 @@ void TrikBrick::say(const QString &msg) {
 	using namespace trik::robotModel;
 	auto* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
-		emit error(tr("2d model shell part was not found"));
+		Q_EMIT error(tr("2d model shell part was not found"));
 		return;
 	}
 
@@ -187,7 +187,7 @@ trikControl::MotorInterface *TrikBrick::motor(const QString &port)
 		robotParts::Motor * motor =
 				RobotModelUtils::findDevice<robotParts::Motor>(*mTwoDRobotModel, port);
 		if (motor == nullptr) {
-			emit error(tr("No configured motor on port: %1").arg(port));
+			Q_EMIT error(tr("No configured motor on port: %1").arg(port));
 			return nullptr;
 		}
 		mMotors[port].reset(new TrikMotorEmu(motor));
@@ -218,7 +218,7 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 		robotParts::ScalarSensor * sens =
 				RobotModelUtils::findDevice<robotParts::ScalarSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
-			emit error(tr("No configured scalar sensor on port: %1").arg(port));
+			Q_EMIT error(tr("No configured scalar sensor on port: %1").arg(port));
 			return nullptr;
 		}
 		mSensors[port].reset(new TrikSensorEmu(sens));
@@ -233,7 +233,7 @@ trikControl::LidarInterface *TrikBrick::lidar()
 	if (!mLidars.contains(port)) {
 		auto * lidar = RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
 		if (!lidar) {
-			emit error(tr("No configured lidar on port: %1").arg(port));
+			Q_EMIT error(tr("No configured lidar on port: %1").arg(port));
 			return nullptr;
 		}
 		mLidars[port].reset(new TrikLidarEmu(lidar));
@@ -266,7 +266,7 @@ trikControl::VectorSensorInterface *TrikBrick::accelerometer() {
 		auto a = RobotModelUtils::findDevice<robotParts::AccelerometerSensor>(*mTwoDRobotModel
 				, "AccelerometerPort");
 		if (a == nullptr) {
-			emit error(tr("No configured accelerometer"));
+			Q_EMIT error(tr("No configured accelerometer"));
 			return nullptr;
 		}
 
@@ -282,7 +282,7 @@ trikControl::GyroSensorInterface *TrikBrick::gyroscope() {
 		auto a = RobotModelUtils::findDevice<robotParts::GyroscopeSensor>(*mTwoDRobotModel
 				, "GyroscopePort");
 		if (a == nullptr) {
-			emit error(tr("No configured gyroscope"));
+			Q_EMIT error(tr("No configured gyroscope"));
 			return nullptr;
 		}
 
@@ -302,7 +302,7 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 	if (!mLineSensors.contains(port)) {
 		auto sens = RobotModelUtils::findDevice<TrikLineSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
-			emit error(tr("No configured LineSensor on port: %1").arg(port));
+			Q_EMIT error(tr("No configured LineSensor on port: %1").arg(port));
 			return nullptr;
 		}
 		mLineSensors[port].reset(new TrikLineSensorAdapter(sens));
@@ -321,7 +321,7 @@ trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
 	if (!mColorSensors.contains(port)) {
 		auto sens = RobotModelUtils::findDevice<TrikColorSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
-			emit error(tr("No configured ColorSensor on port: %1").arg(port));
+			Q_EMIT error(tr("No configured ColorSensor on port: %1").arg(port));
 			return nullptr;
 		}
 		mColorSensors[port].reset(new TrikColorSensorAdapter(sens));
@@ -331,7 +331,7 @@ trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
 }
 
 trikControl::ObjectSensorInterface *TrikBrick::objectSensor(const QString &port) {
-	emit error(tr("Sensor not implemented in simulation mode. Used port: %1").arg(port));
+	Q_EMIT error(tr("Sensor not implemented in simulation mode. Used port: %1").arg(port));
 	return nullptr;
 }
 
@@ -341,7 +341,7 @@ trikControl::EncoderInterface *TrikBrick::encoder(const QString &port) {
 		robotParts::EncoderSensor * enc =
 				RobotModelUtils::findDevice<robotParts::EncoderSensor>(*mTwoDRobotModel, port);
 		if (enc == nullptr) {
-			emit error(tr("No configured encoder on port: %1").arg(port));
+			Q_EMIT error(tr("No configured encoder on port: %1").arg(port));
 			return nullptr;
 		}
 
@@ -362,7 +362,7 @@ trikControl::LedInterface *TrikBrick::led() {
 	if (mLed.isNull()) {
 		auto l = RobotModelUtils::findDevice<TrikLed>(*mTwoDRobotModel, "LedPort");
 		if (l == nullptr) {
-			emit error(tr("No configured led"));
+			Q_EMIT error(tr("No configured led"));
 			return nullptr;
 		}
 
@@ -410,7 +410,7 @@ QStringList TrikBrick::readAll(const QString &path)
 	QString file = normalizedPath.filePath();
 	QFile in(file);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		emit error(tr("Trying to read from file %1 failed").arg(file));
+		Q_EMIT error(tr("Trying to read from file %1 failed").arg(file));
 		return {};
 	}
 

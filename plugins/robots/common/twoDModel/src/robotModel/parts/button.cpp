@@ -31,5 +31,5 @@ Button::Button(const kitBase::robotModel::DeviceInfo &info
 
 void Button::read()
 {
-	emit newData(mEngine.display()->buttonIsDown(port().name()) ? 1 : 0);
+	Q_EMIT newData(mEngine.display()->buttonIsDown(port().name()) ? 1 : 0);
 }

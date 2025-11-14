@@ -34,10 +34,10 @@ public:
 	explicit ErrorListWidget(QWidget *parent = nullptr);
 	void init(qReal::MainWindow* mainWindow);
 
-signals:
+Q_SIGNALS:
 	void clearRequested();
 
-private slots:
+private Q_SLOTS:
 	void highlightElement(QListWidgetItem * const item);
 	void copyCurrentItem();
 	void showContextMenu(const QPoint &pos);

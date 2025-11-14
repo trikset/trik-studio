@@ -32,7 +32,7 @@ class QRGUI_DIALOGS_EXPORT SuggestToCreateProjectDialog : public QDialog
 public:
 	explicit SuggestToCreateProjectDialog(const EditorManagerInterface &editorManager, QWidget *parent = nullptr);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when user selects some item in diagrams list wishing thus to create
 	/// new project with root diagram of the type @arg diagramIdString.
 	void diagramSelected(const QString &diagramIdString);

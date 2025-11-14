@@ -44,14 +44,14 @@ public:
 	/// Returns last pen thickness entered by user.
 	int lastThickness() const;
 
-signals:
+Q_SIGNALS:
 	/// Emitted when pen configured by user changed.
 	void userPenChanged(const QPen &pen);
 
 	/// Emitted when brush configured by user changed.
 	void isFilledChanged(bool isFilled);
 
-private slots:
+private Q_SLOTS:
 	void setBrushPickerColor(const QColor &color);
 
 private:

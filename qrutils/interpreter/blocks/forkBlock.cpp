@@ -21,10 +21,10 @@ using namespace qReal::interpretation::blocks;
 void ForkBlock::run()
 {
 	for (const QString &threadId : mThreadStartBlocks.keys()) {
-		emit newThread(mThreadStartBlocks[threadId], threadId);
+		Q_EMIT newThread(mThreadStartBlocks[threadId], threadId);
 	}
 
-	emit done(mNextBlockId);
+	Q_EMIT done(mNextBlockId);
 }
 
 bool ForkBlock::initNextBlocks()

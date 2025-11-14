@@ -74,5 +74,5 @@ void ShapeWidget::paintEvent(QPaintEvent *)
 void ShapeWidget::mousePressEvent(QMouseEvent *)
 {
 	addSelection();
-	emit clicked();
+	Q_EMIT clicked();
 }

@@ -36,7 +36,7 @@ public:
 	/// Returns true if console contains no displayed text.
 	bool isEmpty() const;
 
-public slots:
+public Q_SLOTS:
 	/// Appends given text to the end of output.
 	void print(const QString &text);
 

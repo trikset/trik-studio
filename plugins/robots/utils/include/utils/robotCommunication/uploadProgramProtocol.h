@@ -43,7 +43,7 @@ public:
 	/// Upload program from given file to a robot.
 	void run(const QList<QFileInfo> &programToUpload);
 
-signals:
+Q_SIGNALS:
 	/// Emitted when protocol completed successfully.
 	void success();
 

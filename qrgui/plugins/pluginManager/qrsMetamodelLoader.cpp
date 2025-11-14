@@ -171,7 +171,7 @@ void QrsMetamodelLoader::parseEdge(const qrRepo::RepoApi &repo
 		} else if (labelType.contains("dynamic", Qt::CaseInsensitive)) {
 			label.reset(new LabelProperties(0, 0, 0, labelText, false, 0));
 		} else {
-			emit errorOccured(tr("Incorrect label type"), id);
+			Q_EMIT errorOccured(tr("Incorrect label type"), id);
 		}
 
 		label->setHard(boolProperty(repo, id, "hardLabel"));
@@ -595,7 +595,7 @@ QString QrsMetamodelLoader::validateRootNode(const qrRepo::RepoApi &repo, const 
 		}
 	}
 
-	emit errorOccured(QObject::tr("Root node for diagram %1 (which is %2) does not exist!")
+	Q_EMIT errorOccured(QObject::tr("Root node for diagram %1 (which is %2) does not exist!")
 			.arg(repo.name(diagram)).arg(rootNode), diagram);
 	return rootNode;
 }
@@ -604,12 +604,12 @@ QString QrsMetamodelLoader::validateName(const qrRepo::RepoApi &repo, const Id &
 {
 	const QString result = repo.name(id);
 	if (result.isEmpty()) {
-		emit errorOccured(tr("Name should not be empty"), id);
+		Q_EMIT errorOccured(tr("Name should not be empty"), id);
 	}
 
 	const QRegExp patten("[A-Za-z_]+([A-Za-z_0-9 :]*)");
 	if (!patten.exactMatch(result)) {
-		emit errorOccured(QObject::tr("Name should contain only latin letters, digits, spaces and underscores "
+		Q_EMIT errorOccured(QObject::tr("Name should contain only latin letters, digits, spaces and underscores "
 			"and should start with latin letter or underscore"), id);
 	}
 
@@ -628,7 +628,7 @@ QString QrsMetamodelLoader::validatePortName(const qrRepo::RepoApi &repo, const 
 		}
 	}
 
-	emit errorOccured(tr("Port type %1 not declared in metamodel"), id);
+	Q_EMIT errorOccured(tr("Port type %1 not declared in metamodel"), id);
 	return "NonTyped";
 }
 
@@ -662,7 +662,7 @@ Qt::PenStyle QrsMetamodelLoader::parsePenStyle(const QString &penStyle, const Id
 		return Qt::DotLine;
 	}
 
-	emit errorOccured(tr("Unknown link style type %1").arg(penStyle), id);
+	Q_EMIT errorOccured(tr("Unknown link style type %1").arg(penStyle), id);
 	return Qt::NoPen;
 }
 
@@ -676,7 +676,7 @@ LinkShape QrsMetamodelLoader::parseLinkShape(const QString &linkShape, const Id 
 		return LinkShape::broken;
 	}
 
-	emit errorOccured(tr("Unknown link shape type %1").arg(linkShape), id);
+	Q_EMIT errorOccured(tr("Unknown link shape type %1").arg(linkShape), id);
 	return LinkShape::broken;
 }
 
@@ -685,7 +685,7 @@ int QrsMetamodelLoader::parseInt(const QString &string, const Id &id)
 	bool ok;
 	const int result = string.toInt(&ok);
 	if (!ok) {
-		emit errorOccured(tr("%1 is not a valid integer number").arg(string), id);
+		Q_EMIT errorOccured(tr("%1 is not a valid integer number").arg(string), id);
 	}
 
 	return result;

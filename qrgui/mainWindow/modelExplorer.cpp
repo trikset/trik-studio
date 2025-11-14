@@ -101,7 +101,7 @@ void ModelExplorer::paste()
 void ModelExplorer::cut()
 {
 	copy();
-	emit elementRemoved();
+	Q_EMIT elementRemoved();
 }
 
 void ModelExplorer::commitData(QWidget *editor)

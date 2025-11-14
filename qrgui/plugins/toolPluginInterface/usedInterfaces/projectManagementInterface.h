@@ -32,7 +32,7 @@ class QRGUI_TOOL_PLUGIN_INTERFACE_EXPORT ProjectManagementInterface : public QOb
 public:
 	virtual ~ProjectManagementInterface() {}
 
-public slots:
+public Q_SLOTS:
 	/// Tries to open an existing file, prompts you to save changes, if any. Checks for the presence of a file and the
 	/// sufficiency of the plugins. In the event of any failure, leaving the project as is and returns false, o/w true.
 	virtual bool openExisting(const QString &fileName) = 0;
@@ -81,7 +81,7 @@ public:
 	/// Returns path to save file. If temp file it will return empty string.
 	virtual QString saveFilePath() const = 0;
 
-signals:
+Q_SIGNALS:
 	/// Emitted each time when project manager is going to open new project
 	/// @param fileName Project location
 	void beforeOpen(const QString &fileName);

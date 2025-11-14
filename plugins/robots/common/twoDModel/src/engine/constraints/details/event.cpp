@@ -48,13 +48,13 @@ bool Event::isAliveInitially() const
 void Event::setUp()
 {
 	mIsAlive = true;
-	emit settedUp();
+	Q_EMIT settedUp();
 }
 
 void Event::drop()
 {
 	mIsAlive = false;
-	emit dropped();
+	Q_EMIT dropped();
 }
 
 void Event::check()
@@ -63,7 +63,7 @@ void Event::check()
 		return;
 	}
 
-	emit fired();
+	Q_EMIT fired();
 	mTrigger();
 	if (mDropsOnFire) {
 		drop();
