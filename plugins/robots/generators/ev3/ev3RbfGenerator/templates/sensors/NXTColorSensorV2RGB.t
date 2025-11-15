@@ -1,5 +1,5 @@
 // return data in format ARRAY32 5 [C,R,G,B,W] 0-17, 0-255
-ARRAY8 ar@@RANDOM_ID_1@@ 4
+HANDLE ar@@RANDOM_ID_1@@
 ARRAY(CREATE8, 4, ar@@RANDOM_ID_1@@)
 
 //enables lights
@@ -13,10 +13,10 @@ TIMER_READY(timer)
 ARRAY_WRITE(ar@@RANDOM_ID_1@@, 0, 1)
 ARRAY_WRITE(ar@@RANDOM_ID_1@@, 1, 66)
 
-ARRAY8 answer@@RANDOM_ID_2@@ 8
+HANDLE answer@@RANDOM_ID_2@@
 ARRAY(CREATE8, 8, answer@@RANDOM_ID_2@@)
 
-ARRAY32 answerALL@@RANDOM_ID_3@@ 8
+HANDLE answerALL@@RANDOM_ID_3@@
 ARRAY(CREATE32, 8, answerALL@@RANDOM_ID_3@@)
 DATA8 tmp@@RANDOM_ID_4@@
 DATA32 tmp32@@RANDOM_ID_5@@

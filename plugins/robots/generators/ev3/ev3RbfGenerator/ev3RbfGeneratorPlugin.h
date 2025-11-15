@@ -45,17 +45,15 @@ private Q_SLOTS:
 	QString uploadProgram();
 
 	/// Generates and uploads script to a EV3 robot. Runs uploaded program basing on run policy.
-	void uploadAndRunProgram(RunPolicy runPolicy);
+	void uploadAndRunProgram(ev3::Ev3GeneratorPluginBase::RunPolicy runPolicy);
 
 	/// Stops curretly executing program on the EV3 robot;
 	void stopRobot();
 
 private:
-	/// Function that checks installed JRE or not
-	bool javaInstalled();
-
 	bool copySystemFiles(const QString &destination);
 	bool compile(const QFileInfo &lmsFile);
+	QString getLmsasmExecutable() const;
 	/// @returns path to uploaded file on EV3 brick if it was uploaded successfully or empty string otherwise.
 	QString upload(const QFileInfo &lmsFile);
 
@@ -70,8 +68,6 @@ private:
 
 	/// Action that stops current program on a robot
 	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
-
-	bool mJavaDetected {};
 };
 
 }

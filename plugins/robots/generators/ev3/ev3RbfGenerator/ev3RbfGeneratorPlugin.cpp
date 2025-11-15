@@ -23,6 +23,7 @@
 #include <ev3Kit/communication/ev3RobotCommunicationThread.h>
 #include <ev3GeneratorBase/robotModel/ev3GeneratorRobotModel.h>
 #include <qrkernel/settingsManager.h>
+#include <qrkernel/platformInfo.h>
 #include "ev3RbfMasterGenerator.h"
 #include <QsLog.h>
 
@@ -76,8 +77,6 @@ Ev3RbfGeneratorPlugin::Ev3RbfGeneratorPlugin()
 			, nullptr
 			, {}
 	});
-
-	mJavaDetected = javaInstalled();
 }
 
 QList<ActionInfo> Ev3RbfGeneratorPlugin::customActions()
@@ -135,18 +134,18 @@ QString Ev3RbfGeneratorPlugin::uploadProgram()
 {
 	QFileInfo const fileInfo = generateCodeForProcessing();
 	if (!fileInfo.exists()) {
-		return QString();
+		return {};
 	}
 
 	if (!copySystemFiles(fileInfo.absolutePath())) {
 		mMainWindowInterface->errorReporter()->addError(tr("Can't write source code files to disk!"));
-		return QString();
+		return {};
 	}
 
 	if (!compile(fileInfo)) {
 		QLOG_ERROR() << "EV3 bytecode compillation process failed!";
 		mMainWindowInterface->errorReporter()->addError(tr("Compilation error occured."));
-		return QString();
+		return {};
 	}
 
 	return upload(fileInfo);
@@ -185,20 +184,6 @@ void Ev3RbfGeneratorPlugin::stopRobot()
 	}
 }
 
-bool Ev3RbfGeneratorPlugin::javaInstalled()
-{
-	QProcess java;
-	java.setEnvironment(QProcess::systemEnvironment());
-
-	java.start("java", {"-version"});
-	auto started = java.waitForStarted(5000);
-	// do not check the result, because it is false when process already finished
-	java.waitForFinished();
-	auto version = java.readAllStandardError();
-	QLOG_INFO() << "Java test says:" << version;
-	return started && !version.isEmpty();
-}
-
 bool Ev3RbfGeneratorPlugin::copySystemFiles(const QString &destination)
 {
 	QDirIterator iterator(":/ev3/rbf/thirdparty");
@@ -213,43 +198,60 @@ bool Ev3RbfGeneratorPlugin::copySystemFiles(const QString &destination)
 	return true;
 }
 
-bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
+QString Ev3RbfGeneratorPlugin::getLmsasmExecutable() const
 {
-	if (!mJavaDetected) {
-		mMainWindowInterface->errorReporter()->addError(
-					tr("<a href=\"https://java.com/ru/download/\">Java</a> is "\
-				"not installed properly, but is required to upload programs to EV3."));
-		return false;
+	const QDir dir(PlatformInfo::invariantSettingsPath("pathToEv3Tools"));
+
+	if (!dir.exists()) {
+		QLOG_ERROR() << "Directory for ev3 tools with name" << dir << "does not exist";
+		return {};
 	}
 
+	const auto &toolName = PlatformInfo::osType() == "windows" ? "lmsasm.exe": "lmsasm";
+	const auto &toolPath = dir.filePath(toolName);
+
+	QFileInfo toolFile(toolPath);
+	if (!toolFile.exists() || !toolFile.isFile()) {
+		QLOG_ERROR() << "Tool not found at path:" << toolPath;
+		return {};
+	}
+	return toolPath;
+}
+
+bool Ev3RbfGeneratorPlugin::compile(const QFileInfo &lmsFile)
+{
 	QFile rbfFile(lmsFile.absolutePath() + "/" + lmsFile.baseName() + ".rbf");
 	if (rbfFile.exists()) {
 		rbfFile.remove();
 	}
 
-	QProcess java;
+	const auto &lmsasmExecutable = getLmsasmExecutable();
+	QProcess lmsasm;
 	QEventLoop loop;
-	java.setEnvironment(QProcess::systemEnvironment());
-	java.setWorkingDirectory(lmsFile.absolutePath());
-	java.setProgram("java");
-	java.setArguments({"-jar", "assembler.jar", lmsFile.baseName()});
-
-	connect(&java, &QProcess::readyRead, &loop, [&java]() { QLOG_INFO() << java.readAll(); });
-	connect(&java, &QProcess::errorOccurred, &loop, [&java, &loop](QProcess::ProcessError e) {
+	lmsasm.setEnvironment(QProcess::systemEnvironment());
+	lmsasm.setWorkingDirectory(lmsFile.absolutePath());
+	lmsasm.setProgram(lmsasmExecutable);
+#ifdef EV3_COMPILE_DEBUG_MODE
+	lmsasm.setArguments({"-debug", "-output", rbfFile.fileName(), lmsFile.fileName()});
+#else
+	lmsasm.setArguments({"-output", rbfFile.fileName(), lmsFile.fileName()});
+#endif
+	connect(&lmsasm, &QProcess::readyRead, &loop, [&lmsasm]() { QLOG_INFO() << lmsasm.readAll(); });
+	connect(&lmsasm, &QProcess::errorOccurred, &loop, [&lmsasm, &loop](QProcess::ProcessError e) {
 		QLOG_ERROR() << "Failed to start process (status" << e << "):"
-					 << java.program() << java.arguments();
+					 << lmsasm.program() << lmsasm.arguments();
 		loop.quit();
 	});
-	connect(&java, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
-		, &loop, [&loop, &java](int e, QProcess::ExitStatus s) {
+	connect(&lmsasm, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished)
+		, &loop, [&loop, &lmsasm](int e, QProcess::ExitStatus s) {
 		if (e || s != QProcess::ExitStatus::NormalExit) {
 			QLOG_ERROR() << "Failed to execute process (errCode:" << e << ", exitStatus:" << s << "):"
-						 << java.program() << java.arguments();
+						 << lmsasm.program() << lmsasm.arguments();
 		}
 		loop.quit();
 	});
 
-	java.start();
+	lmsasm.start();
 	loop.exec();
 	return true;
 }
@@ -263,7 +265,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	bool connected = false;
 	const auto &communicator = currentCommunicator();
 	if (!communicator) {
-		return QString();
+		return {};
 	}
 	auto errorReporter = connect(
 			communicator.get(), &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
@@ -279,7 +281,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
 		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "\
 				"Connect to a robot via %1.").arg(isUsb ? tr("USB") : tr("Bluetooth")));
-		return QString();
+		return {};
 	}
 
 	QString res;

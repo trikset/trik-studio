@@ -100,8 +100,19 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 					; !element.isNull()
 					; element = element.nextSiblingElement("label"))
 			{
-				mLuaToolbox.interpret(QString("%1=%2")
-						.arg(mNameNormalizer->convert(element.attribute("text"))).arg(element.attribute("value")));
+				const auto type = element.attribute("type");
+				auto result = element.attribute("value");
+				bool okDouble = false;
+				bool okInt = false;
+				const auto floatValue = result.toDouble(&okDouble);
+				const auto intValue = result.toInt(&okInt);
+				if (type == "int" && okDouble && !okInt) {
+					result = QString::number(static_cast<int>(floatValue));
+				}
+				if (type == "float" && okInt) {
+					result = QString::number(intValue, 'f', 1);
+				}
+				mLuaToolbox.setVariableValue(mNameNormalizer->convert(element.attribute("text")), result);
 			}
 		}
 
@@ -128,22 +139,22 @@ Subprograms::GenerationResult Subprograms::generate(ControlFlowGeneratorBase *ma
 void Subprograms::obtainCode(QMap<Id, QString> const &declarations
 		, QMap<Id, QString> const &implementations)
 {
-	if (!declarations.keys().isEmpty()) {
+	if (!declarations.isEmpty()) {
 		mForwardDeclarationsCode << readTemplate("subprograms/declarationsSectionHeader.t");
 	}
 
-	for (const Id &id : declarations.keys()) {
-		mForwardDeclarationsCode << declarations[id];
+	for (auto it = declarations.cbegin(); it != declarations.cend(); it++) {
+		mForwardDeclarationsCode << it.value();
 	}
 
-	if (!implementations.keys().isEmpty()) {
+	if (!implementations.isEmpty()) {
 		mImplementationsCode << readTemplate("subprograms/implementationsSectionHeader.t");
 	}
 
-	for (const Id &id : implementations.keys()) {
-		const QString signature = readSubprogramSignature(id, "subprograms/implementation.t");
+	for (auto it = implementations.cbegin(); it != implementations.cend(); it++) {
+		const QString signature = readSubprogramSignature(it.key(), "subprograms/implementation.t");
 		QString subprogramCode = signature;
-		subprogramCode.replace("@@BODY@@", implementations[id]);
+		subprogramCode.replace("@@BODY@@", it.value());
 		mImplementationsCode << subprogramCode;
 	}
 
@@ -152,7 +163,8 @@ void Subprograms::obtainCode(QMap<Id, QString> const &declarations
 
 QString Subprograms::generateManualDeclarations() const
 {
-	return QStringList(mManualDeclarations.values()).join("\n\n");
+	const QStringList &list = mManualDeclarations.values();
+	return list.join("\n\n");
 }
 
 QString Subprograms::readSubprogramSignature(const Id &id, const QString &pathToTemplate)
@@ -199,7 +211,7 @@ Id Subprograms::graphicalId(const Id &logicalId) const
 		}
 	}
 
-	return Id();
+	return {};
 }
 
 bool Subprograms::checkIdentifier(const QString &identifier, const QString &rawName)
@@ -223,12 +235,12 @@ bool Subprograms::checkIdentifier(const QString &identifier, const QString &rawN
 Id Subprograms::firstToGenerate() const
 {
 	while (!mDiscoveredSubprogramsOrder.isEmpty()) {
-		const Id id = mDiscoveredSubprogramsOrder.first();
+		auto id = mDiscoveredSubprogramsOrder.first();
 		mDiscoveredSubprogramsOrder.pop_front();
 		if (!mDiscoveredSubprograms[id]) {
 			return id;
 		}
 	}
 
-	return Id();
+	return {};
 }

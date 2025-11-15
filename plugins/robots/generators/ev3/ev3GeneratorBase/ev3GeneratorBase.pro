@@ -18,7 +18,7 @@ TEMPLATE = lib
 
 include(../../../../../global.pri)
 
-QT += widgets
+QT += widgets xml
 
 CONFIG += trikqscintilla2
 
@@ -70,6 +70,7 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/lineLeader/wakeUpGenerator.h \
 	$$PWD/src/simpleGenerators/waitForColorBlockGenerator.h \
 	$$PWD/src/converters/colorConverter.h \
+	$$PWD/src/simpleGenerators/subprogramCallGenerator.h \
 
 SOURCES += \
 	$$PWD/src/ev3GeneratorPluginBase.cpp \
@@ -104,5 +105,6 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/lineLeader/wakeUpGenerator.cpp \
 	$$PWD/src/simpleGenerators/waitForColorBlockGenerator.cpp \
 	$$PWD/src/converters/colorConverter.cpp \
+	$$PWD/src/simpleGenerators/subprogramCallGenerator.cpp \
 
 OTHER_FILES +=

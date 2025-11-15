@@ -29,6 +29,7 @@
 #include "simpleGenerators/stopCompassCalibrationGenerator.h"
 #include "simpleGenerators/readRGBGenerator.h"
 #include "simpleGenerators/waitForColorBlockGenerator.h"
+#include "simpleGenerators/subprogramCallGenerator.h"
 
 #include "simpleGenerators/lineLeader/calibrateBlackGenerator.h"
 #include "simpleGenerators/lineLeader/calibratePIDGenerator.h"
@@ -53,16 +54,14 @@ Ev3GeneratorFactory::Ev3GeneratorFactory(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName)
+		, const QString &generatorName) // NOLINT(modernize-pass-by-value)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mGeneratorName(generatorName)
 	, mMailboxes({":/" + mGeneratorName + "/templates"})
 {
 }
 
-Ev3GeneratorFactory::~Ev3GeneratorFactory()
-{
-}
+Ev3GeneratorFactory::~Ev3GeneratorFactory() = default;
 
 parts::Mailboxes &Ev3GeneratorFactory::mailboxes()
 {
@@ -115,8 +114,9 @@ generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGener
 		return new ReadRGBGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Ev3WaitForColor") {
 		return new WaitForColorBlockGenerator(mRepo, customizer, id, this);
+	} else if (elementType == "Subprogram") {
+		return new SubprogramCallGenerator(mRepo, customizer, id, this);
 	}
-
 	else if (elementType == "Ev3CalibrateWhiteLL") {
 		return new lineLeader::CalibrateWhiteGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Ev3CalibrateBlackLL") {

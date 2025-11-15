@@ -114,25 +114,42 @@ endLabel:
 
 subcall write32Array_EV3_KERNEL_util
 {
-	IN_32  array
+	IN_H array
+	IN_32 pos
+	IN_32 value
+
+	CALL(writeArray_EV3_KERNEL_util, array, pos)
+	ARRAY_WRITE(array, pos, value)
+}
+
+subcall writeFArray_EV3_KERNEL_util
+{
+	IN_H array
+	IN_32 pos
+	IN_F value
+
+	CALL(writeArray_EV3_KERNEL_util, array, pos)
+	ARRAY_WRITE(array, pos, value)
+}
+
+subcall writeArray_EV3_KERNEL_util
+{
+	IN_H  array
 	IN_32  pos
-	IN_32  value
 
 	DATA32 size
 	ARRAY(SIZE, array, size)
-	JR_LT32(pos, size, writing_label)
+	JR_LT32(pos, size, endLabel)
 	DATA32 newSize
 	CALL(clp2_EV3_KERNEL_util, size, newSize)
 	ARRAY(RESIZE, array, newSize)
-
-	writing_label:
-	ARRAY_WRITE(array, pos, value)
+endLabel:
 }
 
 subcall assign32Array_EV3_KERNEL_util
 {
-	IN_32 srcArray
-	IN_32 dstArray
+	IN_H srcArray
+	IN_H dstArray
 
 	DATA32 sizeSrc
 	DATA32 sizeDst

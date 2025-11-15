@@ -1,1 +1,1 @@
-CALL(write32Array_EV3_KERNEL_util, @@TABLE@@, @@INDEX@@, @@VALUE@@)
+CALL(write@@EV3_TYPE@@Array_EV3_KERNEL_util, @@TABLE@@, @@INDEX@@, @@VALUE@@)
