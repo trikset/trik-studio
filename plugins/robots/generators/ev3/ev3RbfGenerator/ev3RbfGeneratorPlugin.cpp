@@ -134,18 +134,18 @@ QString Ev3RbfGeneratorPlugin::uploadProgram()
 {
 	QFileInfo const fileInfo = generateCodeForProcessing();
 	if (!fileInfo.exists()) {
-		return QString();
+		return {};
 	}
 
 	if (!copySystemFiles(fileInfo.absolutePath())) {
 		mMainWindowInterface->errorReporter()->addError(tr("Can't write source code files to disk!"));
-		return QString();
+		return {};
 	}
 
 	if (!compile(fileInfo)) {
 		QLOG_ERROR() << "EV3 bytecode compillation process failed!";
 		mMainWindowInterface->errorReporter()->addError(tr("Compilation error occured."));
-		return QString();
+		return {};
 	}
 
 	return upload(fileInfo);
@@ -265,7 +265,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 	bool connected = false;
 	const auto &communicator = currentCommunicator();
 	if (!communicator) {
-		return QString();
+		return {};
 	}
 	auto errorReporter = connect(
 			communicator.get(), &utils::robotCommunication::RobotCommunicationThreadInterface::errorOccured,
@@ -281,7 +281,7 @@ QString Ev3RbfGeneratorPlugin::upload(const QFileInfo &lmsFile)
 		const bool isUsb = mRobotModelManager->model().name().contains("usb", Qt::CaseInsensitive);
 		mMainWindowInterface->errorReporter()->addError(tr("Could not upload file to robot. "\
 				"Connect to a robot via %1.").arg(isUsb ? tr("USB") : tr("Bluetooth")));
-		return QString();
+		return {};
 	}
 
 	QString res;

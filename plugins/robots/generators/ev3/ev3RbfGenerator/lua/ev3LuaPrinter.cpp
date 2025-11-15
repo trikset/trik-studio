@@ -100,9 +100,7 @@ Ev3LuaPrinter::Ev3LuaPrinter(const QStringList &pathsToTemplates
 	mArrayDeclarationCount[Ev3RbfType::arrayF] = 0;
 }
 
-Ev3LuaPrinter::~Ev3LuaPrinter()
-{
-}
+Ev3LuaPrinter::~Ev3LuaPrinter() = default;
 
 void Ev3LuaPrinter::configure(const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter)
 {
@@ -140,7 +138,8 @@ Ev3RbfType Ev3LuaPrinter::toEv3Type(const QSharedPointer<qrtext::core::types::Ty
 
 	if (type->is<qrtext::lua::types::Table>()) {
 		const QSharedPointer<qrtext::core::types::TypeExpression> &tableType
-				= static_cast<qrtext::lua::types::Table *>(type.data())->elementType();
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+			= static_cast<qrtext::lua::types::Table *>(type.data())->elementType();
 
 		if (tableType->is<qrtext::lua::types::Boolean>()) {
 			return Ev3RbfType::array8;
@@ -196,10 +195,10 @@ QString Ev3LuaPrinter::newRegister(const QSharedPointer<qrtext::lua::ast::Node> 
 QString Ev3LuaPrinter::newRegister(Ev3RbfType type)
 {
 	if (type == Ev3RbfType::other) {
-		return QString();
+		return {};
 	}
 
-	QString result = QString();
+	QString result {};
 	if (isArray(type)) {
 		++mArrayDeclarationCount[type];
 		result = registerNames[type] + QString::number(mArrayDeclarationCount[type]);
@@ -687,11 +686,11 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::FunctionCall> &
 			}
 
 			if (mReservedFunctionsConverter.isCosOrSin(nodeName)) {
-				for (auto it = arguments.begin(); it != arguments.end(); it++) {
-					const auto &oldValue = *it;
+				for (auto &&argument : arguments) {
+					const auto &oldValue = argument;
 					const auto &argChanged = newRegister(Ev3RbfType::dataF);
 					additionalResults << QString("MULF(%1, %2, %3)").arg(oldValue, "57.29577951308232F", argChanged);
-					*it = argChanged;
+					argument = argChanged;
 				}
 			}
 
@@ -784,7 +783,7 @@ void Ev3LuaPrinter::visit(const QSharedPointer<qrtext::lua::ast::IndexingExpress
 QString Ev3LuaPrinter::toString(const QSharedPointer<qrtext::lua::ast::Node> &node)
 {
 	const QSharedPointer<qrtext::core::types::TypeExpression> type = mTextLanguage.type(node);
-	const QString value = popResult(node);
+	auto value = popResult(node);
 	if (type->is<qrtext::lua::types::String>()) {
 		return value;
 	}
@@ -794,13 +793,13 @@ QString Ev3LuaPrinter::toString(const QSharedPointer<qrtext::lua::ast::Node> &no
 		code = readTemplate("intToString.t").replace("@@VALUE@@", value);
 	} else if (type->is<qrtext::lua::types::Float>()) {
 		code = readTemplate("floatToString.t").replace("@@VALUE@@", value);
-	} else if (type->is<qrtext::lua::types::Integer>()) {
+	} else if (type->is<qrtext::lua::types::Boolean>()) {
 		code = readTemplate("boolToString.t").replace("@@VALUE@@", value);
 	} else {
 		code = readTemplate("otherToString.t").replace("@@VALUE@@", value);
 	}
 
-	const QString result = newRegister(Ev3RbfType::dataS);
+	auto result = newRegister(Ev3RbfType::dataS);
 	pushChildrensAdditionalCode(node);
 	mAdditionalCode[node.data()] << code.replace("@@RESULT@@", result);
 	return result;
@@ -813,7 +812,7 @@ QString Ev3LuaPrinter::castTo(Ev3RbfType targetType, const QSharedPointer<qrtext
 		return toString(node);
 	}
 
-	const QString value = popResult(node);
+	auto value = popResult(node);
 	if (actualType == targetType) {
 		return value;
 	}
@@ -830,7 +829,7 @@ QString Ev3LuaPrinter::castTo(Ev3RbfType targetType, const QSharedPointer<qrtext
 		return QObject::tr("/* Warning: autocast is supported only for numeric types */ 0");
 	}
 
-	const QString result = newRegister(targetType);
+	auto result = newRegister(targetType);
 	pushChildrensAdditionalCode(node);
 	mAdditionalCode[node.data()] << QString("MOVE%1_%2(%3, %4)")
 			.arg(typeNames[actualType], typeNames[targetType], value, result);

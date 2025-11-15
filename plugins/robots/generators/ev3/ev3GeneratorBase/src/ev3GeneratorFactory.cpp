@@ -54,16 +54,14 @@ Ev3GeneratorFactory::Ev3GeneratorFactory(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName)
+		, const QString &generatorName) // NOLINT(modernize-pass-by-value)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mGeneratorName(generatorName)
 	, mMailboxes({":/" + mGeneratorName + "/templates"})
 {
 }
 
-Ev3GeneratorFactory::~Ev3GeneratorFactory()
-{
-}
+Ev3GeneratorFactory::~Ev3GeneratorFactory() = default;
 
 parts::Mailboxes &Ev3GeneratorFactory::mailboxes()
 {

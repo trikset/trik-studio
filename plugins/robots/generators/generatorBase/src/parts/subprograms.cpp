@@ -211,7 +211,7 @@ Id Subprograms::graphicalId(const Id &logicalId) const
 		}
 	}
 
-	return Id();
+	return {};
 }
 
 bool Subprograms::checkIdentifier(const QString &identifier, const QString &rawName)
@@ -235,12 +235,12 @@ bool Subprograms::checkIdentifier(const QString &identifier, const QString &rawN
 Id Subprograms::firstToGenerate() const
 {
 	while (!mDiscoveredSubprogramsOrder.isEmpty()) {
-		const Id id = mDiscoveredSubprogramsOrder.first();
+		auto id = mDiscoveredSubprogramsOrder.first();
 		mDiscoveredSubprogramsOrder.pop_front();
 		if (!mDiscoveredSubprograms[id]) {
 			return id;
 		}
 	}
 
-	return Id();
+	return {};
 }
