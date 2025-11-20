@@ -1072,8 +1072,8 @@ void TwoDModelWidget::updateWheelComboBoxes()
 		return;
 	}
 
-	const PortInfo leftWheelOldPort = mUi->leftWheelComboBox->currentData().value<PortInfo>();
-	const PortInfo rightWheelOldPort = mUi->rightWheelComboBox->currentData().value<PortInfo>();
+	const auto leftWheelOldPort = mUi->leftWheelComboBox->currentData().value<PortInfo>();
+	const auto rightWheelOldPort = mUi->rightWheelComboBox->currentData().value<PortInfo>();
 
 	mUi->leftWheelComboBox->clear();
 	mUi->rightWheelComboBox->clear();
