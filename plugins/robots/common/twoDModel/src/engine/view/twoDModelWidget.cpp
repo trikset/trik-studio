@@ -239,6 +239,7 @@ void TwoDModelWidget::initWidget()
 		const bool gridVisible = SettingsManager::value("2dShowGrid").toBool();
 		mUi->horizontalRuler->setVisible(gridVisible);
 		mUi->verticalRuler->setVisible(gridVisible);
+		mUi->rulerUnitFrame->setVisible(gridVisible);
 	};
 	toggleRulers();
 
