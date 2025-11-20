@@ -588,7 +588,7 @@ QList<AbstractItem *> TwoDModelWidget::selectedColorItems() const
 {
 	QList<AbstractItem *> resList;
 	for (auto &&graphicsItem : mScene->selectedItems()) {
-		AbstractItem *item = dynamic_cast<AbstractItem*>(graphicsItem);
+		auto *item = dynamic_cast<AbstractItem*>(graphicsItem);
 		if (item && (isColorItem(item) || qobject_cast<RobotItem *>(item))) {
 			resList << item; // clazy:exclude=reserve-candidates
 		}
@@ -678,7 +678,7 @@ void TwoDModelWidget::setSensorVisible(const kitBase::robotModel::PortInfo &port
 {
 	auto robotModels = mModel.robotModels();
 
-	if (robotModels.size() > 0) {
+	if (!robotModels.empty()) {
 		auto robotModel = robotModels[0];
 		if (mScene->robot(*robotModel)->sensors()[port]) {
 			mScene->robot(*robotModel)->sensors()[port]->setVisible(isVisible);
@@ -701,7 +701,7 @@ void TwoDModelWidget::focusInEvent(QFocusEvent *event)
 SensorItem *TwoDModelWidget::sensorItem(const kitBase::robotModel::PortInfo &port)
 {
 	auto robotModels = mModel.robotModels();
-	if (robotModels.size() > 0) {
+	if (!robotModels.empty()) {
 		return mScene->robot(*robotModels[0])->sensors().value(port);
 	}
 	return nullptr;
@@ -912,31 +912,31 @@ QCursor TwoDModelWidget::cursorTypeToCursor(CursorType type) const
 {
 	switch(type) {
 	case noDrag:
-		return QCursor(Qt::ArrowCursor);
+		return {Qt::ArrowCursor};
 	case hand:
-		return QCursor(Qt::OpenHandCursor);
+		return {Qt::OpenHandCursor};
 	case multiselection:
-		return QCursor(Qt::ArrowCursor);
+		return {Qt::ArrowCursor};
 	case drawLine:
-		return QCursor(QPixmap(":/icons/2d_drawLineCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawLineCursor.png"), 0, 0};
 	case drawWall:
-		return QCursor(QPixmap(":/icons/2d_drawWallCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawWallCursor.png"), 0, 0};
 	case drawSkittle:
-		return QCursor(QPixmap(":/icons/2d_drawCanCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawCanCursor.png"), 0, 0};
 	case drawBall:
-		return QCursor(QPixmap(":/icons/2d_drawBallCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawBallCursor.png"), 0, 0};
 	case drawCube:
-		return QCursor(QPixmap(":/icons/2d_none.png"), 0, 0);
+		return {QPixmap(":/icons/2d_none.png"), 0, 0};
 	case drawEllipse:
-		return QCursor(QPixmap(":/icons/2d_drawEllipseCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawEllipseCursor.png"), 0, 0};
 	case drawStylus:
-		return QCursor(QPixmap(":/icons/2d_drawStylusCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawStylusCursor.png"), 0, 0};
 	case drawBezier:
-		return QCursor(QPixmap(":/icons/2d_drawBezierCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawBezierCursor.png"), 0, 0};
 	case drawRectangle:
-		return QCursor(QPixmap(":/icons/2d_drawRectangleCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawRectangleCursor.png"), 0, 0};
 	case drawComment:
-		return QCursor(QPixmap(":/icons/2d_drawCommentCursor.png"), 0, 0);
+		return {QPixmap(":/icons/2d_drawCommentCursor.png"), 0, 0};
 	default:
 		return Qt::ArrowCursor;
 	}
@@ -1055,10 +1055,9 @@ void TwoDModelWidget::connectMetricComboBoxes()
 
 	const auto sizeUnit = mModel.settings().sizeUnit();
 	const auto availableUnits = sizeUnit->currentValues();
-	for (auto currentUnit = availableUnits.begin();
-	     currentUnit != availableUnits.end(); currentUnit++) {
-		mUi->metricComboBox->addItem(currentUnit->first,
-			QVariant::fromValue(currentUnit->second));
+	for (auto &&availableUnit : availableUnits) {
+		mUi->metricComboBox->addItem(availableUnit.first,
+			QVariant::fromValue(availableUnit.second));
 	}
 
 	setSelectedValue(mUi->metricComboBox, sizeUnit->defaultUnit());
@@ -1126,7 +1125,7 @@ void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 {
 	if (mScene->oneRobot()) {
 		auto robotModels = mModel.robotModels();
-		if (robotModels.size() > 0) {
+		if (!robotModels.empty()) {
 			setSelectedRobotItem(mScene->robot(*robotModels[0]));
 		}
 	} else {
@@ -1163,7 +1162,7 @@ void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 }
 
 namespace {
-	static bool isTrikModel(const QString &name) {
+	bool isTrikModel(const QString &name) {
 		return name.contains("TrikV62");
 	}
 }
@@ -1221,7 +1220,7 @@ void TwoDModelWidget::incrementTimelineCounter()
 	mUi->timelineBox->stepBy(1);
 }
 
-const QDomDocument TwoDModelWidget::loadXmlWithConversion(const QString &loadFileName) const
+QDomDocument TwoDModelWidget::loadXmlWithConversion(const QString &loadFileName) const
 {
 	QString errorMessage;
 	int errorLine = 0;

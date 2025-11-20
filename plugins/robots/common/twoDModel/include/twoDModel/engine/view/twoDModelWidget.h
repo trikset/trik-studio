@@ -238,7 +238,7 @@ private:
 
 	void incrementTimelineCounter();
 
-	const QDomDocument loadXmlWithConversion(const QString &loadFileName) const;
+	QDomDocument loadXmlWithConversion(const QString &loadFileName) const;
 
 	Ui::TwoDModelWidget *mUi {};
 	QScopedPointer<TwoDModelScene> mScene;

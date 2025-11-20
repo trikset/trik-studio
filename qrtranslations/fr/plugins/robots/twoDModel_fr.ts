@@ -883,7 +883,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+207"/>
+        <location line="+206"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>
