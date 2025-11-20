@@ -1,7 +1,7 @@
 [submodule "plugins/robots/thirdparty/trikRuntime"]
 	path = plugins/robots/thirdparty/trikRuntime/trikRuntime
 	url = https://github.com/MinyazevR/trikRuntime
-	branch = MinayzevR-fix-macOS-build
+	branch = MinyazevR-pythonqt-tests
 [submodule "qrtest/thirdparty/googletest/googletest"]
 	path = qrtest/thirdparty/googletest/googletest
 	url = https://github.com/google/googletest
