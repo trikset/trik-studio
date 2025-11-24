@@ -813,7 +813,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+352"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+353"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -831,7 +831,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-199"/>
+        <location line="-200"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -841,7 +841,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+278"/>
+        <location line="+279"/>
         <source>Training mode: solution will not be checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -883,7 +883,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+207"/>
+        <location line="+206"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>
