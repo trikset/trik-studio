@@ -9,4 +9,7 @@
     <SortingPriority>17</SortingPriority>
     <Default>true</Default>
     <ForcedInstallation>false</ForcedInstallation>
+    <Licenses>
+         <License name="Lmsasm License" file="Lmsasm-license.txt" />
+    </Licenses>
 </Package>
