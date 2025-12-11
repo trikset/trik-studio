@@ -66,6 +66,13 @@ QRectF SkittleItem::boundingRect() const
 			, QSizeF{mDiameterPx, mDiameterPx});
 }
 
+QPainterPath SkittleItem::shape() const
+{
+	QPainterPath result;
+	result.addEllipse(boundingRect());
+	return result;
+}
+
 void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)

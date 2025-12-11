@@ -49,7 +49,7 @@ public:
 
 	void saveStartPosition();
 	void returnToStartPosition();
-
+	QPainterPath shape() const override;
 	bool isCircle() const override;
 	BodyType bodyType() const override;
 	QPolygonF collidingPolygon() const override;
