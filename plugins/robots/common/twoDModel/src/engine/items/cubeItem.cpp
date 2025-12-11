@@ -46,6 +46,8 @@ CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	mSvgRenderer->load(QString(":/icons/2d_cube.svg"));
 	setPos(position);
 	setZValue(ZValue::Moveable);
+	setX1(-mEdgeSizePx / 2.0f);
+	setY1(-mEdgeSizePx / 2.0f);
 	setX2(x1() + mEdgeSizePx);
 	setY2(y1() + mEdgeSizePx);
 	setTransformOriginPoint(boundingRect().center());
@@ -53,9 +55,7 @@ CubeItem::CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	savePos();
 }
 
-CubeItem::~CubeItem()
-{
-}
+CubeItem::~CubeItem() = default;
 
 QAction *CubeItem::cubeTool()
 {
@@ -107,13 +107,13 @@ QDomElement CubeItem::serialize(QDomElement &element) const
 	const auto &coordSystem = coordinateSystem();
 	cubeNode.setTagName("cube");
 	cubeNode.setAttribute("x",
-			      QString::number(coordSystem->toUnit(x1() + scenePos().x())));
+			      QString::number(coordSystem->toUnit(scenePos().x())));
 	cubeNode.setAttribute("y",
-			      QString::number(coordSystem->toUnit(y1() + scenePos().y())));
+			      QString::number(coordSystem->toUnit(scenePos().y())));
 	cubeNode.setAttribute("markerX",
-			      QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
+			      QString::number(coordSystem->toUnit(mStartPosition.x())));
 	cubeNode.setAttribute("markerY",
-			      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
+			      QString::number(coordSystem->toUnit(mStartPosition.y())));
 	cubeNode.setAttribute("rotation", QString::number(rotation()));
 	cubeNode.setAttribute("startRotation", QString::number(mStartRotation));
 
@@ -136,15 +136,15 @@ void CubeItem::deserialize(const QDomElement &element)
 	const auto markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
 	const auto rotation = element.attribute("rotation", "0").toDouble();
 	mStartRotation = element.attribute("startRotation", "0").toDouble();
-	if (element.hasAttribute("edgeSize")) {
-		setEdgeSize(coordSystem->toPx(
-				element.attribute("edgeSize").toDouble()));
-	}
-	SolidItem::deserialize(element);
 	setPos(QPointF(x, y));
 	setTransformOriginPoint(boundingRect().center());
-	mStartPosition = {markerX, markerY};
 	setRotation(rotation);
+	if (element.hasAttribute("edgeSize")) {
+		setEdgeSize(coordSystem->toPx(
+				    element.attribute("edgeSize").toDouble()));
+	}
+	SolidItem::deserialize(element);
+	mStartPosition = {markerX, markerY};
 	Q_EMIT x1Changed(x1());
 }
 
@@ -192,6 +192,8 @@ void CubeItem::setEdgeSize(const qreal edge)
 {
 	prepareGeometryChange();
 	mEdgeSizePx.changeValue(edge);
+	setX1(-mEdgeSizePx / 2.0f);
+	setY1(-mEdgeSizePx / 2.0f);
 	setX2(x1() + mEdgeSizePx);
 	setY2(y1() + mEdgeSizePx);
 	setTransformOriginPoint(boundingRect().center());
