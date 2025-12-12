@@ -97,8 +97,7 @@ void CubeItem::drawExtractionForItem(QPainter *painter)
 void CubeItem::savePos()
 {
 	saveStartPosition();
-	rotater().savePos();
-	AbstractItem::savePos();
+	RotateItem::savePos();
 }
 
 QDomElement CubeItem::serialize(QDomElement &element) const
@@ -173,7 +172,7 @@ void CubeItem::returnToStartPosition()
 
 QPolygonF CubeItem::collidingPolygon() const
 {
-	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
+	return boundingRect().adjusted(1, 1, -1, -1).translated(scenePos());
 }
 
 QPainterPath CubeItem::path() const
