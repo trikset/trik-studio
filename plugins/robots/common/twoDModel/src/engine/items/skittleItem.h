@@ -29,7 +29,8 @@ class SkittleItem final: public graphicsUtils::AbstractItem, public SolidItem
 public:
 	explicit SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	                     QPointF position);
-	~SkittleItem();
+
+	~SkittleItem() override;
 
 	/// Creates and returns skittle item for 2D model palette.
 	/// Transfers ownership.
