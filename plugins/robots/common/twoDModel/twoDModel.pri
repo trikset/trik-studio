@@ -38,7 +38,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/engine/twoDModelGuiFacade.h \
 	$$PWD/include/twoDModel/engine/view/twoDModelWidget.h \
 	$$PWD/include/twoDModel/engine/model/metricSystem.h \
-	$$PWD/include/twoDModel/engine/colorDetector.h \
+	$$PWD/include/twoDModel/engine/model/colorDetector.h \
 	$$PWD/include/twoDModel/engine/model/metricCoordinateSystem.h \
 	$$PWD/include/twoDModel/engine/model/constants.h \
 	$$PWD/include/twoDModel/engine/model/model.h \
