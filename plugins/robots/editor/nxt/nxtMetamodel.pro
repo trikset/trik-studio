@@ -17,6 +17,6 @@ QREAL_XML_DEPENDS =  \
 		$$PWD/../common/robotsMetamodel.xml \
 
 QREAL_EDITOR_PATH = robots/editor/nxt
-ROOT = ../../../..
+ROOT = $$PWD/../../../..
 
 include($$PWD/../../../editorsSdk/editorsCommon.pri)

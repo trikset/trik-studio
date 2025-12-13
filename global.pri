@@ -344,8 +344,6 @@ defineTest(autoLupdate) {
 	    LUPDATE_ARGS += $$system_quote($$system_path($$FILE_TO_TRANSLATE))
 	}
 
-        # message("AUTOLUPDATE: CALLED")
-	# message("AUTOLUPDATE: FILES TO TRANSLATE $$LUPDATE_ARGS")
 	qtPrepareTool(QMAKE_LUPDATE, lupdate, _SYS)
 
         QRTRANSLATIONS_FILES = $$files($$GLOBAL_PWD/qrtranslations/*)
@@ -354,7 +352,6 @@ defineTest(autoLupdate) {
 		        QRTRANSLATIONS_LANGS += $$basename(QRTRANSLATIONS_FILE)
 		}
 	}
-	# message("AUTOLUPDATE: LANGS $$QRTRANSLATIONS_LANGS")
 
         for (LANG, GLOBAL_TRANSLATION_LANGS) {
 	# for (LANG, QRTRANSLATIONS_LANGS) {

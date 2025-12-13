@@ -19,6 +19,6 @@ QREAL_XML_DEPENDS =  \
 		$$PWD/../../../commonMetamodels/basicActionsMetamodel.xml \
 
 QREAL_EDITOR_PATH = robots/editor/common
-ROOT = ../../../..
+ROOT = $$PWD/../../../..
 
 include($$PWD/../../../editorsSdk/editorsCommon.pri)

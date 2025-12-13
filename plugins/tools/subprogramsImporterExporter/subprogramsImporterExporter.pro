@@ -30,12 +30,12 @@ INCLUDEPATH += \
 	$$PWD/../../../qrutils/ \
 
 HEADERS = \
-	subprogramsImporterExporterPlugin.h \
-	subprogramsCollectionDialog.h
+        $$PWD/subprogramsImporterExporterPlugin.h \
+	$$PWD/subprogramsCollectionDialog.h
 
 SOURCES = \
-	subprogramsImporterExporterPlugin.cpp \
-	subprogramsCollectionDialog.cpp
+        $$PWD/subprogramsImporterExporterPlugin.cpp \
+	$$PWD/subprogramsCollectionDialog.cpp
 
 FORMS += \
-	subprogramsCollectionDialog.ui
+        $$PWD/subprogramsCollectionDialog.ui
