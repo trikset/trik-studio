@@ -133,10 +133,10 @@
     .fil27 {fill:#FAE908}
     .fil32 {fill:url(#id1);fill-rule:nonzero}
     .fil31 {fill:url(#id2);fill-rule:nonzero}
-    .fil30 {fill:url(#id3);fill-rule:nonzero}
-    .fil29 {fill:url(#id4);fill-rule:nonzero}
-    .fil28 {fill:url(#id5);fill-rule:nonzero}
-    .fil33 {fill:url(#id6);fill-rule:nonzero}
+    .fil30 {fill-rule:nonzero}
+    .fil29 {fill-rule:nonzero}
+    .fil28 {fill-rule:nonzero}
+    .fil33 {fill-rule:nonzero}
    ]]></style>
     <linearGradient
        id="id1-6"
