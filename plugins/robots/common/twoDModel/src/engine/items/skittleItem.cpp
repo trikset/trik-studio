@@ -48,13 +48,11 @@ SkittleItem::SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setTransformOriginPoint(boundingRect().center());
 }
 
-SkittleItem::~SkittleItem()
-{
-}
+SkittleItem::~SkittleItem() = default;
 
 QAction *SkittleItem::skittleTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_can.svg"), tr("Can (C)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_C), QKeySequence(Qt::Key_3)});
 	result->setCheckable(true);
 	return result;
@@ -62,8 +60,15 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return QRectF({ -mDiameterPx / 2, -mDiameterPx / 2 }
-			, QSizeF{mDiameterPx, mDiameterPx});
+	return {{-mDiameterPx / 2, -mDiameterPx / 2}
+			, QSizeF{mDiameterPx, mDiameterPx}};
+}
+
+QPainterPath SkittleItem::shape() const
+{
+	QPainterPath result;
+	result.addEllipse(boundingRect());
+	return result;
 }
 
 void SkittleItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -158,7 +163,7 @@ void SkittleItem::returnToStartPosition()
 
 QPolygonF SkittleItem::collidingPolygon() const
 {
-	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
+	return boundingRect().adjusted(1, 1, -1, -1).translated(scenePos());
 }
 
 QPainterPath SkittleItem::path() const
