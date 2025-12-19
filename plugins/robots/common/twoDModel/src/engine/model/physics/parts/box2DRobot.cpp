@@ -35,20 +35,20 @@ Box2DRobot::Box2DRobot(Box2DPhysicsEngine *engine, twoDModel::model::RobotModel 
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position = pos;
 	bodyDef.rotation = b2MakeRot(angle);
-	bodyDef.angularDamping = mModel->parameters()->angularDamping();
-	bodyDef.linearDamping = mModel->parameters()->linearDamping();
+	bodyDef.angularDamping = static_cast<float>(mModel->parameters()->angularDamping());
+	bodyDef.linearDamping = static_cast<float>(mModel->parameters()->linearDamping());
 	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = mModel->parameters()->restitution();
-	fixtureDef.material.friction = mModel->parameters()->friction();
+	fixtureDef.material.restitution = static_cast<float>(mModel->parameters()->restitution());
+	fixtureDef.material.friction = static_cast<float>(mModel->parameters()->friction());
 	QPolygonF collidingPolygon = mModel->parameters()->collidingPolygon();
 	QPointF localCenter = collidingPolygon.boundingRect().center();
-	mPolygon.reset(new b2Vec2[collidingPolygon.size()]);
+	mPolygon = std::make_unique<b2Vec2[]>(collidingPolygon.size());
 	for (int i = 0; i < collidingPolygon.size(); ++i) {
 		mPolygon[i] = engine->positionToBox2D(collidingPolygon.at(i) - localCenter);
 	}
-	fixtureDef.density = engine->computeDensity(collidingPolygon,
-			mModel->parameters()->mass());
+	fixtureDef.density = static_cast<float>(engine->computeDensity(collidingPolygon,
+			mModel->parameters()->mass()));
 	b2Hull hull = b2ComputeHull(mPolygon.get(), collidingPolygon.size());
 	b2Polygon polygon = b2MakePolygon(&hull, 0.0f);
 	b2ShapeId polygonShapeId = b2CreatePolygonShape(mBodyId, &fixtureDef, &polygon);
