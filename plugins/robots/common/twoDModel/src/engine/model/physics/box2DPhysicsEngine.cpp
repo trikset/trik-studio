@@ -377,8 +377,7 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 
 	const auto &sensors = mBox2DRobots[robot]->getSensors();
 	for (auto it = sensors.cbegin(); it != sensors.cend(); ++it) {
-		auto sensor = it.value();
-		const b2Vec2 position = b2Body_GetPosition(sensor->getBodyId());
+		const b2Vec2 position = b2Body_GetPosition(it->second->getBodyId());
 		QPointF scenePos = positionToScene(position);
 		path.addEllipse(scenePos, 10, 10);
 	}

@@ -15,6 +15,7 @@
 #pragma once
 
 #include "src/engine/model/physics/box2DPhysicsEngine.h"
+#include <unordered_map>
 
 class b2World;
 class b2Joint;
@@ -46,7 +47,7 @@ public:
 	void stop();
 	void startStopping();
 	void finishStopping();
-	bool isStopping();
+	bool isStopping() const;
 
 	void addSensor(const view::SensorItem *sensor);
 	void removeSensor(const view::SensorItem *sensor);
@@ -58,31 +59,30 @@ public:
 
 	void applyForceToCenter(b2Vec2 force, bool wake);
 
-	b2BodyId getBodyId();
+	b2BodyId getBodyId() { return mBodyId; };
 	twoDModel::model::RobotModel *getRobotModel() const;
-	Box2DWheel *getWheelAt(int i) const;
+	std::shared_ptr<Box2DWheel> getWheelAt(int i) const;
 
 	// For debugging purpose
 	const QPolygonF & getDebuggingPolygon() const;
-	const QMap<const view::SensorItem *, Box2DItem *> &getSensors() const;
+	const std::unordered_map<const twoDModel::view::SensorItem*, std::unique_ptr<Box2DItem>> &getSensors() const;
 
 private:
 	void connectWheels();
 	void connectWheel(Box2DWheel &wheel);
 	void connectSensor(const Box2DItem &sensor);
+	void turnOffCollisionsBetweenWheelAndSensor(b2BodyId sensorId);
 
-	b2BodyId mBodyId; // Takes ownership
-	QList<Box2DWheel *> mWheels; // Takes ownership
-	QList<int32_t> mJoints; // Takes ownership
-	QMap<const twoDModel::view::SensorItem *, parts::Box2DItem *> mSensors;  // Takes ownership on b2Sensor instances
+	b2BodyId mBodyId {b2_nullBodyId};
+	std::vector<std::shared_ptr<Box2DWheel>> mWheels;
+	std::unordered_map<const twoDModel::view::SensorItem*,
+			      std::unique_ptr<Box2DItem>> mSensors;
+
 	twoDModel::model::RobotModel * const mModel; // Doesn't take ownership
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
 	b2WorldId mWorldId; // Doesn't take ownership
-
-	QScopedArrayPointer<b2Vec2> mPolygon; // Takes ownership
-
-	bool mIsStopping = false;
-
+	std::unique_ptr<b2Vec2[]> mPolygon;
+	bool mIsStopping {false};
 	QPolygonF mDebuggingDrawPolygon;
 };
 

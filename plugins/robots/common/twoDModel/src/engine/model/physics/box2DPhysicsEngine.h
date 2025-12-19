@@ -113,8 +113,8 @@ private:
 	b2WorldId mWorldId;
 
 	QMap<RobotModel *, parts::Box2DRobot *> mBox2DRobots;  // Takes ownership on b2Body instances
-	QMap<RobotModel *, parts::Box2DWheel *> mLeftWheels;  // Does not take ownership
-	QMap<RobotModel *, parts::Box2DWheel *> mRightWheels;  // Does not take ownership
+	QMap<RobotModel *, std::shared_ptr<parts::Box2DWheel>> mLeftWheels;  // Does not take ownership
+	QMap<RobotModel *, std::shared_ptr<parts::Box2DWheel>> mRightWheels;  // Does not take ownership
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DResizableItems;  // Takes ownership on b2Body instances
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DDynamicItems;  // Doesn't take ownership
 	QMap<RobotModel *, QSet<twoDModel::view::SensorItem *>> mRobotSensors; // Doesn't take ownership
