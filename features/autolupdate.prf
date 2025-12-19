@@ -23,8 +23,8 @@ defined(autoLupdate):!equals(TEMPLATE, subdirs) {
 
             autoLupdate($$FILES_TO_TRANSLATE)
         }
-    } else:if(!isEmpty(SOURCES)|!isEmpty(HEADERS)|!isEmpty(FORMS)) {
-        FILES_TO_TRANSLATE = $$HEADERS $$SOURCES $$FORMS
+    } else:if(!isEmpty(SOURCES)|!isEmpty(HEADERS)|!isEmpty(FORMS)!isEmpty(RESOURCES)) {
+        FILES_TO_TRANSLATE = $$HEADERS $$SOURCES $$FORMS $$RESOURCES
         autoLupdate($$FILES_TO_TRANSLATE)
     }
 }
