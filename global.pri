@@ -335,8 +335,6 @@ CONFIG(noPch) {
 	noPch()
 }
 
-GLOBAL_TRANSLATION_LANGS = es
-
 defineTest(autoLupdate) {
         FILES_TO_TRANSLATE = $$1
 
@@ -353,8 +351,7 @@ defineTest(autoLupdate) {
 		}
 	}
 
-        for (LANG, GLOBAL_TRANSLATION_LANGS) {
-	# for (LANG, QRTRANSLATIONS_LANGS) {
+        for (LANG, QRTRANSLATIONS_LANGS) {
 	        TRANSLATION_FILE = "$$GLOBAL_PWD/qrtranslations/$$LANG/$$relative_path($$_PRO_FILE_PWD_, $$GLOBAL_PWD)_$${LANG}.ts"
 		TRANSLATION_FILE_DIR = $$dirname(TRANSLATION_FILE)
 		mkpath($$TRANSLATION_FILE_DIR)
