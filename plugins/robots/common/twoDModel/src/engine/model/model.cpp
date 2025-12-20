@@ -29,7 +29,7 @@
 
 using namespace twoDModel::model;
 
-static auto XML_VERSION = "20251011";
+static auto XML_VERSION = "20251219";
 
 Model::Model(physics::PhysicsEngineFactory *engineFactory,
 		QObject *parent)
@@ -39,6 +39,7 @@ Model::Model(physics::PhysicsEngineFactory *engineFactory,
 	, mWorldModel(mSettings.data(), mMetricCoordinateSystem.data())
 	, mChecker(nullptr)
 	, mErrorReporter(nullptr)
+	, mLogicalModel(nullptr)
 	, mEngineFactory(engineFactory)
 	, mRealisticPhysicsEngine(nullptr)
 	, mSimplePhysicsEngine(nullptr)
@@ -66,7 +67,8 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 	mChecker.reset(new constraints::ConstraintsChecker(errorReporter, *this));
 	connect(mChecker.data(), &constraints::ConstraintsChecker::success, this, [&]() {
 		errorReporter.addInformation(tr("The task was accomplished in %1 sec!")
-									.arg(QString::number((timeline().timestamp() - mStartTimestamp) / 1000.0)));
+						.arg(QString::number(
+							static_cast<double>((timeline().timestamp() - mStartTimestamp)) / 1000.0)));
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
 		QTimer::singleShot(0, &interpreterControl,
@@ -157,6 +159,21 @@ QDomDocument Model::serialize() const
 
 void Model::deserialize(const QDomDocument &model)
 {
+	auto &&root = model.documentElement();
+	// TODO: Consider an xml model version converter
+	if (!root.isNull()) {
+		auto &&version = root.attribute("version", "");
+		if (version.isEmpty()) {
+			mErrorReporter->addCritical(tr(R"(The "version" field of the "root" tag must not be empty.)"));
+			return;
+		}
+
+		if (version != XML_VERSION) {
+			mErrorReporter->addInformation(tr("The world model has version %1. The current version is %2."
+						  " Please check that the world model behaves as expected.").arg(version, XML_VERSION));
+		}
+	}
+
 	const auto &settings = model.documentElement().firstChildElement("settings");
 	mSettings->deserialize(settings);
 

@@ -701,17 +701,27 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+68"/>
+        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+24"/>
         <source>Error in checker: %1</source>
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+74"/>
+        <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
+        <translation>Поле &quot;version&quot; тега &quot;root&quot; не должно быть пустым.</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
+        <translation>Модель мира имеет версию %1. Текущая версия %2. Пожалуйста, убедитесь, что модель мира ведет себя ожидаемым образом.</translation>
+    </message>
+    <message>
+        <location line="+33"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>
