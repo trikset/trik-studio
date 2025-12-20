@@ -132,7 +132,7 @@ jobs:
     - name: Lint Vera
       run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
-          ${{ inputs.executor }} buildScripts/github/vera_translation.sh
+          ${{ inputs.executor }} env COMMIT_RANGE="${{ github.event.before}}...${{ github.event.after}}" buildScripts/github/vera_translation.sh
       if: ${{ inputs.lint_vera }}
 
     - name: Restore cache
