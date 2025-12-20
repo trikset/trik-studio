@@ -65,8 +65,6 @@ Box2DPhysicsEngine::Box2DPhysicsEngine (const WorldModel &worldModel
 Box2DPhysicsEngine::~Box2DPhysicsEngine(){
 	qDeleteAll(mBox2DRobots);
 	qDeleteAll(mBox2DResizableItems);
-	mLeftWheels.clear();
-	mRightWheels.clear();
 	b2DestroyWorld(mWorldId);
 	mWorldId = b2_nullWorldId;
 }
@@ -192,8 +190,6 @@ void Box2DPhysicsEngine::addRobot(model::RobotModel * const robot, QPointF pos, 
 	}
 
 	mBox2DRobots[robot] = new Box2DRobot(this, robot, positionToBox2D(pos), angleToBox2D(angle));
-	mLeftWheels[robot] = mBox2DRobots[robot]->getWheelAt(0);
-	mRightWheels[robot] = mBox2DRobots[robot]->getWheelAt(1);
 }
 
 void Box2DPhysicsEngine::onRobotStartPositionChanged(QPointF newPos, model::RobotModel *robot)
@@ -239,15 +235,7 @@ void Box2DPhysicsEngine::onMousePressed()
 void Box2DPhysicsEngine::onRecoverRobotPosition(QPointF pos)
 {
 	clearForcesAndStop();
-
-	auto stop = [=](b2BodyId bodyId){
-		b2Body_SetAngularVelocity(bodyId, 0);
-		b2Body_SetLinearVelocity(bodyId, {0, 0});
-	};
-
-	stop(mBox2DRobots.first()->getBodyId());
-	stop(mBox2DRobots.first()->getWheelAt(0)->getBodyId());
-	stop(mBox2DRobots.first()->getWheelAt(1)->getBodyId());
+	mBox2DRobots.first()->stop();
 
 	if (!mBox2DRobots.isEmpty()) {
 		if (auto &&firstRobot = mBox2DRobots.firstKey()) {
@@ -266,8 +254,6 @@ void Box2DPhysicsEngine::removeRobot(model::RobotModel * const robot)
 	}
 	mRobotSensors.remove(robot);
 	mBox2DRobots.remove(robot);
-	mLeftWheels.remove(robot);
-	mRightWheels.remove(robot);
 }
 
 void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
@@ -292,12 +278,11 @@ void Box2DPhysicsEngine::recalculateParameters(qreal timeInterval)
 
 		if (qAbs(speed1) + qAbs(speed2) < FLT_EPSILON) {
 			mBox2DRobots[robot]->stop();
-			mLeftWheels[robot]->stop();
-			mRightWheels[robot]->stop();
 		}
 		else {
-			mLeftWheels[robot]->keepConstantSpeed(static_cast<float>(speed1));
-			mRightWheels[robot]->keepConstantSpeed(static_cast<float>(speed2));
+			mBox2DRobots[robot]->keepConstantSpeed(
+				static_cast<float>(speed1),
+				static_cast<float>(speed2));
 		}
 	}
 

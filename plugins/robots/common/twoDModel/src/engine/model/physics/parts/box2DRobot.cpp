@@ -93,6 +93,10 @@ void Box2DRobot::stop()
 {
 	b2Body_SetLinearVelocity(mBodyId, b2Vec2{0, 0});
 	b2Body_SetAngularVelocity(mBodyId, 0);
+
+	for (auto &&wheel: mWheels) {
+		wheel->stop();
+	}
 }
 
 void Box2DRobot::startStopping()
@@ -149,6 +153,12 @@ void Box2DRobot::moveToPoint(b2Vec2 destination)
 	}
 }
 
+void Box2DRobot::keepConstantSpeed(float speed1, float speed2) const
+{
+	getWheelAt(0)->keepConstantSpeed(speed1);
+	getWheelAt(1)->keepConstantSpeed(speed2);
+}
+
 void Box2DRobot::setRotation(float angle)
 {
 	auto rotation = b2MakeRot(angle);
@@ -168,7 +178,7 @@ void Box2DRobot::setRotation(float angle)
 
 			if (B2_ID_EQUALS(mBodyId, bodyB) && jointType == b2_revoluteJoint) {
 				const auto position = b2Joint_GetLocalFrameB(jointId);
-				const auto point = b2Body_GetWorldPoint(b2Joint_GetBodyB(jointId), position.p);
+				const auto point = b2Body_GetWorldPoint(bodyB, position.p);
 				b2Body_SetTransform(wheelBodyId, point, rotation);
 			}
 		});
@@ -241,9 +251,9 @@ twoDModel::model::RobotModel *Box2DRobot::getRobotModel() const
 	return mModel;
 }
 
-std::shared_ptr<Box2DWheel> Box2DRobot::getWheelAt(int i) const
+Box2DWheel *Box2DRobot::getWheelAt(int i) const
 {
-	return mWheels.at(i);
+	return mWheels.at(i).get();
 }
 
 const QPolygonF &Box2DRobot::getDebuggingPolygon() const
@@ -267,8 +277,8 @@ void Box2DRobot::connectWheels() {
 	b2Vec2 posRightWheel =  b2Body_GetWorldPoint(
 				mBodyId, mEngine->positionToBox2D(posRightWheelFromRobot + leftUpCorner));
 	auto angle = b2Body_GetRotation(mBodyId);
-	auto leftWheel = std::make_shared<Box2DWheel>(mModel, mEngine, posLeftWheel, angle, *this);
-	auto rightWheel = std::make_shared<Box2DWheel>(mModel, mEngine, posRightWheel, angle, *this);
+	auto leftWheel = std::make_unique<Box2DWheel>(mModel, mEngine, posLeftWheel, angle, *this);
+	auto rightWheel = std::make_unique<Box2DWheel>(mModel, mEngine, posRightWheel, angle, *this);
 	connectWheel(*leftWheel);
 	connectWheel(*rightWheel);
 	mWheels.emplace_back(std::move(leftWheel));

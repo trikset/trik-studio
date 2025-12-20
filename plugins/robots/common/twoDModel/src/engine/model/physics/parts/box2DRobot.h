@@ -53,7 +53,7 @@ public:
 	void removeSensor(const view::SensorItem *sensor);
 	void moveToPoint(b2Vec2 destination);
 	void setRotation(float angle);
-
+	void keepConstantSpeed(float speed1, float speed2) const;
 	void reinitSensor(const view::SensorItem *sensor);
 	void reinitSensors();
 
@@ -61,7 +61,7 @@ public:
 
 	b2BodyId getBodyId() { return mBodyId; };
 	twoDModel::model::RobotModel *getRobotModel() const;
-	std::shared_ptr<Box2DWheel> getWheelAt(int i) const;
+	Box2DWheel* getWheelAt(int i) const;
 
 	// For debugging purpose
 	const QPolygonF & getDebuggingPolygon() const;
@@ -74,9 +74,8 @@ private:
 	void turnOffCollisionsBetweenWheelAndSensor(b2BodyId sensorId);
 
 	b2BodyId mBodyId {b2_nullBodyId};
-	std::vector<std::shared_ptr<Box2DWheel>> mWheels;
-	std::unordered_map<const twoDModel::view::SensorItem*,
-			      std::unique_ptr<Box2DItem>> mSensors;
+	std::vector<std::unique_ptr<Box2DWheel>> mWheels;
+	std::unordered_map<const twoDModel::view::SensorItem*, std::unique_ptr<Box2DItem>> mSensors;
 
 	twoDModel::model::RobotModel * const mModel; // Doesn't take ownership
 	twoDModel::model::physics::Box2DPhysicsEngine *mEngine; // Doesn't take ownership
