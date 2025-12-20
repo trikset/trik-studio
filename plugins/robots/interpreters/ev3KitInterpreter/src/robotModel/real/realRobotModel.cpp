@@ -128,7 +128,7 @@ robotParts::Device *RealRobotModel::createDevice(const PortInfo &port, const Dev
 	}
 
 	if (deviceInfo.isA(colorReflectedSensorInfo())) {
-		return new parts::ColorSensorReflected(colorAmbientSensorInfo(), port, *mRobotCommunicator);
+		return new parts::ColorSensorReflected(colorReflectedSensorInfo(), port, *mRobotCommunicator);
 	}
 
 	if (deviceInfo.isA(gyroscopeSensorInfo())) {
