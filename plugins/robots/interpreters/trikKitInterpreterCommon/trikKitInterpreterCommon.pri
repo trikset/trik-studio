@@ -158,9 +158,5 @@ FORMS += \
 RESOURCES += \
 	$$PWD/trikKitInterpreterCommon.qrc \
 
-TRANSLATIONS += \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/trikKitInterpreterCommon_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/trikKitInterpreterCommon_fr.ts \
-
 OTHER_FILES += \
 	$$PWD/trikDefaultSettings.ini \

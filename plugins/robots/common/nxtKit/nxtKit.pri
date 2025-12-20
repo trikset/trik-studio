@@ -76,7 +76,3 @@ SOURCES += \
 	$$PWD/src/communication/usbRobotCommunicationThread.cpp \
 	$$PWD/src/communication/i2cCommunicator.cpp \
 	$$PWD/src/communication/nxtUsbDriverInstaller.cpp \
-
-TRANSLATIONS = \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/nxtKit_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/nxtKit_fr.ts \

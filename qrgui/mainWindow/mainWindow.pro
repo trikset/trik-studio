@@ -30,10 +30,6 @@ CONFIG += trikqscintilla2
 
 includes(qrgraph qrgui qrgui/plugins/metaMetaModel)
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_mainWindow_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_mainWindow_fr.ts \
-
 HEADERS += \
 	$$PWD/qrealApplication.h \
 	$$PWD/mainWindow.h \

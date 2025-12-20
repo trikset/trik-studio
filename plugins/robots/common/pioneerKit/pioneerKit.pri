@@ -29,7 +29,3 @@ SOURCES += \
 HEADERS += \
                 $$PWD/include/pioneerKit/blocks/pioneerBlocksFactory.h \
 		$$PWD/include/pioneerKit/constants.h \
-
-TRANSLATIONS += \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/pioneerKit_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/pioneerKit_fr.ts \

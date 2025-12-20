@@ -38,10 +38,6 @@ links(robots-trik-f-sharp-generator-library robots-trik-generator-base robots-ge
 		robots-kit-base \
 )
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/trikV62FSharpGenerator_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/trikV62FSharpGenerator_fr.ts \
-
 HEADERS += \
 	$$PWD/trikV62FSharpGeneratorPlugin.h \
 

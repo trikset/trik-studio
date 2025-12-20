@@ -30,10 +30,6 @@ QT += widgets xml
 
 DEFINES += QRGUI_EDITOR_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_editor_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_editor_fr.ts \
-
 HEADERS += \
 	$$PWD/editorDeclSpec.h \
 	$$PWD/editorView.h \

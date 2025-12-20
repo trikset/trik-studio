@@ -22,10 +22,6 @@ includes(plugins/robots/common/kitBase)
 includes(plugins/robots/utils qrtext)
 includes(plugins/robots/thirdparty/Box2D/Box2D)
 
-TRANSLATIONS = \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/twoDModel_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/twoDModel_fr.ts \
-
 HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.h \

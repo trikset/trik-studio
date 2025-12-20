@@ -39,7 +39,3 @@ SOURCES += \
 	$$PWD/src/trikV6KitInterpreterPlugin.cpp \
 	$$PWD/src/robotModel/real/trikV6RealRobotModel.cpp \
 	$$PWD/src/robotModel/twoD/trikV6TwoDRobotModel.cpp \
-
-TRANSLATIONS += \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/trikV6KitInterpreter_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/trikV6KitInterpreter_fr.ts \

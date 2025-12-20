@@ -91,8 +91,4 @@ SOURCES += \
 FORMS += \
 	$$PWD/src/graphicsWatcher/sensorsGraph.ui \
 
-TRANSLATIONS += \
-	$$PWD/../../../qrtranslations/ru/plugins/robots/robots_utils_ru.ts \
-	$$PWD/../../../qrtranslations/fr/plugins/robots/robots_utils_fr.ts \
-
 RESOURCES += $$PWD/utils.qrc

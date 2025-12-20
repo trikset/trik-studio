@@ -35,8 +35,6 @@ includes(plugins/robots/generators/ev3/ev3GeneratorBase \
 links(qrkernel qrutils qrrepo qrgui-text-editor qrtext \
 		robots-generator-base robots-ev3-generator-base robots-ev3-kit robots-kit-base robots-utils)
 
-TRANSLATIONS = $$PWD/../../../../../qrtranslations/ru/plugins/robots/ev3RbfGenerator_ru.ts
-
 HEADERS += \
 	$$PWD/ev3RbfGeneratorPlugin.h \
 	$$PWD/ev3RbfMasterGenerator.h \

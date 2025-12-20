@@ -95,9 +95,5 @@ FORMS += \
 	$$PWD/ev3AdditionalPreferences.ui \
 	$$PWD/ev3DisplayWidget.ui \
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/ev3KitInterpreter_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/ev3KitInterpreter_fr.ts \
-
 RESOURCES += \
 	$$PWD/../ev3KitInterpreter.qrc \

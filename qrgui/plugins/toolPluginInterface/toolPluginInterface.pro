@@ -23,10 +23,6 @@ includes(qrgui)
 
 DEFINES += QRGUI_TOOL_PLUGIN_INTERFACE_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../../qrtranslations/ru/qrgui_toolPluginInterface_ru.ts \
-	$$PWD/../../../qrtranslations/fr/qrgui_toolPluginInterface_fr.ts \
-
 HEADERS += \
 	$$PWD/toolPluginInterfaceDeclSpec.h \
 	$$PWD/toolPluginInterface.h \

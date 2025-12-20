@@ -24,10 +24,6 @@ links(qrkernel qrutils)
 
 DEFINES += QRGUI_PREFERENCES_DIALOG_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_preferencesDialog_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_preferencesDialog_fr.ts \
-
 HEADERS += \
 	$$PWD/preferencesDialogDeclSpec.h \
 	$$PWD/preferencesDialog.h \

@@ -24,8 +24,6 @@ links(qrkernel qslog qrgui-preferences-dialog qrgui-tool-plugin-interface)
 
 QT += widgets
 
-TRANSLATIONS = $$PWD/../../../qrtranslations/ru/plugins/uxInfo_ru.ts
-
 HEADERS = \
 	$$PWD/uxInfoPlugin.h \
 	$$PWD/uxInfo.h \

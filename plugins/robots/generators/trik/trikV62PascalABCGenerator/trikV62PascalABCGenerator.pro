@@ -38,11 +38,6 @@ links(robots-trik-pascal-abc-generator-library robots-trik-generator-base robots
 				robots-kit-base \
 )
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/trikV62PascalABCGenerator_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/trikV62PascalABCGenerator_fr.ts \
-
-
 HEADERS += \
 	$$PWD/trikV62PascalABCGeneratorPlugin.h
 

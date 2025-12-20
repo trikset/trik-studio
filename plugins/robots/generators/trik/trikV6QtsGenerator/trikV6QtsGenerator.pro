@@ -38,10 +38,6 @@ links(qrkernel qrutils qrrepo robots-generator-base robots-trik-generator-base \
 		robots-kit-base robots-trik-kit robots-utils robots-trik-qts-generator-library \
 )
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/trikV6QtsGenerator_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/trikV6QtsGenerator_fr.ts \
-
 HEADERS += \
 	$$PWD/trikV6QtsGeneratorPlugin.h \
 

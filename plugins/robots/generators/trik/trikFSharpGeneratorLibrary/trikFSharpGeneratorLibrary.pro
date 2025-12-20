@@ -36,10 +36,6 @@ links(qrkernel qrutils qrrepo robots-generator-base robots-trik-generator-base r
 		qrgui-preferences-dialog robots-kit-base \
 )
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/trikFSharpGeneratorLibrary_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/trikFSharpGeneratorLibrary_fr.ts \
-
 HEADERS += \
 	$$PWD/include/trikFSharpGeneratorLibrary/trikFSharpGeneratorPluginBase.h \
 	$$PWD/include/trikFSharpGeneratorLibrary/declSpec.h \

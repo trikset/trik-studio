@@ -28,8 +28,6 @@ INCLUDEPATH += \
 
 links(qrkernel qrutils qrgui-preferences-dialog qrgui-tool-plugin-interface qrtext)
 
-TRANSLATIONS = $$PWD/../../../qrtranslations/ru/plugins/deploymentInterpreter_ru.ts
-
 RESOURCES = deploymentInterpreter.qrc
 
 HEADERS += \

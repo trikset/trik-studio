@@ -25,10 +25,6 @@ QT += widgets
 
 DEFINES += QRGUI_HOTKEY_MANAGER_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_hotKeyManager_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_hotKeyManager_fr.ts \
-
 HEADERS += \
 	$$PWD/hotKeyManagerDeclSpec.h \
 	$$PWD/hotKeyManagerPage.h \

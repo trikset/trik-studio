@@ -23,9 +23,6 @@ links(qrkernel qrrepo qrutils qrgui-tool-plugin-interface)
 
 QT += widgets core
 
-TRANSLATIONS = \
-	$$PWD/../../../qrtranslations/ru/plugins/subprogramsImporterExporter_ru.ts \
-
 INCLUDEPATH += \
 	$$PWD/../../../qrutils/ \
 

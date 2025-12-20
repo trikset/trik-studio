@@ -24,10 +24,6 @@ links(qrkernel qrutils qrgui-models qrgui-plugin-manager qrgui-text-editor qrgui
 
 includes(qrgui)
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_system_facade_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_system_facade_fr.ts \
-
 DEFINES += QRGUI_SYSTEM_FACADE_LIBRARY
 
 HEADERS += \
