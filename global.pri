@@ -335,29 +335,6 @@ CONFIG(noPch) {
 	noPch()
 }
 
-defineTest(autoLupdate) {
-        FILES_TO_TRANSLATE = $$1
-
-        for (FILE_TO_TRANSLATE, FILES_TO_TRANSLATE) {
-	    LUPDATE_ARGS += $$system_quote($$system_path($$FILE_TO_TRANSLATE))
-	}
-
-	qtPrepareTool(QMAKE_LUPDATE, lupdate, _SYS)
-
-        QRTRANSLATIONS_FILES = $$files($$GLOBAL_PWD/qrtranslations/*)
-	for (QRTRANSLATIONS_FILE, QRTRANSLATIONS_FILES) {
-	        isDir($$QRTRANSLATIONS_FILE) {
-		        QRTRANSLATIONS_LANGS += $$basename(QRTRANSLATIONS_FILE)
-		}
-	}
-
-        for (LANG, QRTRANSLATIONS_LANGS) {
-	        TRANSLATION_FILE = "$$GLOBAL_PWD/qrtranslations/$$LANG/$$relative_path($$_PRO_FILE_PWD_, $$GLOBAL_PWD)_$${LANG}.ts"
-		TRANSLATION_FILE_DIR = $$dirname(TRANSLATION_FILE)
-		mkpath($$TRANSLATION_FILE_DIR)
-		system($$QMAKE_LUPDATE_SYS $$LUPDATE_ARGS -ts $$system_quote($$system_path($$TRANSLATION_FILE)))
-	}
-}
 
 includes(thirdparty/qslog/qslog)
 links(trikQsLog)

@@ -12,19 +12,58 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-defined(autoLupdate):!equals(TEMPLATE, subdirs) {
+defineTest(autoLupdateFiles) {
+        FILES_TO_TRANSLATE = $$1
 
-    !isEmpty(QREAL_EDITOR_PATH) { # Hack for plugins/robots/editor
-        exists($$_PRO_FILE_PWD_/generated) {
-            FILES_TO_TRANSLATE = \
-                $$_PRO_FILE_PWD_/generated/elements.h \
-                $$_PRO_FILE_PWD_/generated/pluginInterface.h \
-                $$_PRO_FILE_PWD_/generated/pluginInterface.cpp \
-
-            autoLupdate($$FILES_TO_TRANSLATE)
+        for (FILE_TO_TRANSLATE, FILES_TO_TRANSLATE) {
+                LUPDATE_ARGS += $$system_quote($$system_path($$FILE_TO_TRANSLATE))
         }
-    } else:if(!isEmpty(SOURCES)|!isEmpty(HEADERS)|!isEmpty(FORMS)!isEmpty(RESOURCES)) {
-        FILES_TO_TRANSLATE = $$HEADERS $$SOURCES $$FORMS $$RESOURCES
-        autoLupdate($$FILES_TO_TRANSLATE)
-    }
+
+        qtPrepareTool(QMAKE_LUPDATE, lupdate, _SYS)
+
+        QRTRANSLATIONS_FILES = $$files($$GLOBAL_PWD/qrtranslations/*)
+        for (QRTRANSLATIONS_FILE, QRTRANSLATIONS_FILES) {
+                exists($$system_path($$QRTRANSLATIONS_FILE/*)) { # check $$QRTRANSLATIONS_FILE is directory
+                        QRTRANSLATIONS_LANGS += $$basename(QRTRANSLATIONS_FILE)
+                }
+        }
+
+        for (LANG, QRTRANSLATIONS_LANGS) {
+                TRANSLATION_FILE = "$$GLOBAL_PWD/qrtranslations/$$LANG/$$relative_path($$_PRO_FILE_PWD_, $$GLOBAL_PWD)_$${LANG}.ts"
+                TRANSLATION_FILE_DIR = $$dirname(TRANSLATION_FILE)
+                mkpath($$TRANSLATION_FILE_DIR)
+                message("AUTOLUPDATE: update translations in $$TRANSLATION_FILE")
+                system($$QMAKE_LUPDATE_SYS $$LUPDATE_ARGS -ts $$system_quote($$system_path($$TRANSLATION_FILE)))
+        }
+}
+
+defineTest(autoLupdate) {
+        requires(!isEmpty(GLOBAL_PWD))
+        REL_PRO_FILE = $$relative_path($$_PRO_FILE_, $$GLOBAL_PWD)
+        contains(REL_PRO_FILE, ".*thirdparty.*")|contains(REL_PRO_FILE, ".*3dparty.*") {
+                # Do not process thirdparty
+                return(false)
+        }
+        !isEmpty(QREAL_EDITOR_PATH) { # Hack for plugins/robots/editor
+            exists($$_PRO_FILE_PWD_/generated) {
+                FILES_TO_TRANSLATE = \
+                        $$_PRO_FILE_PWD_/generated/elements.h \
+                        $$_PRO_FILE_PWD_/generated/pluginInterface.h \
+                        $$_PRO_FILE_PWD_/generated/pluginInterface.cpp \
+
+                autoLupdateFiles($$FILES_TO_TRANSLATE)
+                return(true)
+            }
+            return(false)
+        }
+        !isEmpty(SOURCES)|!isEmpty(HEADERS)|!isEmpty(FORMS)|!isEmpty(RESOURCES) {
+                FILES_TO_TRANSLATE = $$HEADERS $$SOURCES $$FORMS $$RESOURCES
+                autoLupdateFiles($$FILES_TO_TRANSLATE)
+                return(true)
+        }
+        return(false)
+}
+
+!equals(TEMPLATE, subdirs) {
+        autoLupdate()
 }
