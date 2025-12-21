@@ -435,17 +435,17 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+75"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+7"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+34"/>
         <source>This robot model already exists</source>
         <translation type="unfinished"></translation>
     </message>

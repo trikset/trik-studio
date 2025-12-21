@@ -164,13 +164,17 @@ void Model::deserialize(const QDomDocument &model)
 	if (!root.isNull()) {
 		auto &&version = root.attribute("version", "");
 		if (version.isEmpty()) {
-			mErrorReporter->addCritical(tr(R"(The "version" field of the "root" tag must not be empty.)"));
+			if (mErrorReporter) {
+				mErrorReporter->addCritical(tr(R"(The "version" field of the "root" tag must not be empty.)"));
+			}
 			return;
 		}
 
 		if (version != XML_VERSION) {
-			mErrorReporter->addInformation(tr("The world model has version %1. The current version is %2."
+			if (mErrorReporter) {
+				mErrorReporter->addInformation(tr("The world model has version %1. The current version is %2."
 						  " Please check that the world model behaves as expected.").arg(version, XML_VERSION));
+			}
 		}
 	}
 

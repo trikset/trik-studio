@@ -176,7 +176,7 @@ jobs:
         TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
         TESTS: ${{ inputs.tests }}
       if: ${{ inputs.build == true }}
-      timeout-minutes: 20
+      timeout-minutes: 25
 
     - name: Clazy-standalone
       uses: MinyazevR/clazy-standalone-action@v0.3.3
