@@ -78,4 +78,4 @@ FORMS += \
 	$$PWD/subprogram/dynamicPropertiesDialog.ui \
 
 RESOURCES += \
-	arrowIcons.qrc \
+        $$PWD/arrowIcons.qrc \

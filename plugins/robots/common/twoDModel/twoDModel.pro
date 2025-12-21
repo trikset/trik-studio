@@ -21,4 +21,4 @@ include(../../../../global.pri)
 include(twoDModel.pri)
 
 RESOURCES += \
-    ../../interpreters/interpreterCore/interpreterCore.qrc
+    $$PWD/../../interpreters/interpreterCore/interpreterCore.qrc
