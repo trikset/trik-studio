@@ -15,8 +15,12 @@
 defineTest(autoLupdateFiles) {
         FILES_TO_TRANSLATE = $$1
 
-        for (FILE_TO_TRANSLATE, FILES_TO_TRANSLATE) {
-                LUPDATE_ARGS += $$system_quote($$system_path($$FILE_TO_TRANSLATE))
+        for(LUPDATE_INCLUDEPATH, INCLUDEPATH) {
+                LUPDATE_ARGS += -I$$system_quote($$system_path($$LUPDATE_INCLUDEPATH))
+        }
+
+        for (LUPDATE_SOURCE_FILE, FILES_TO_TRANSLATE) {
+                LUPDATE_ARGS += $$system_quote($$system_path($$LUPDATE_SOURCE_FILE))
         }
 
         qtPrepareTool(QMAKE_LUPDATE, lupdate, _SYS)
