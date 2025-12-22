@@ -28,7 +28,7 @@ QT += xml
 CONFIG += cmdline
 
 SOURCES += \
-	main.cpp \
+        $$PWD/main.cpp \
 
 win32 {
 	QMAKE_MANIFEST = $$PWD/$${TARGET}.exe.manifest

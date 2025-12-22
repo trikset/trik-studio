@@ -34,8 +34,6 @@ links(qrkernel qrutils qrrepo robots-generator-base robots-ev3-kit robots-kit-ba
 
 DEFINES += ROBOTS_EV3_GENERATOR_BASE_LIBRARY
 
-TRANSLATIONS = $$PWD/../../../../../qrtranslations/ru/plugins/robots/ev3GeneratorBase_ru.ts
-
 HEADERS += \
 	$$PWD/include/ev3GeneratorBase/ev3GeneratorPluginBase.h \
 	$$PWD/include/ev3GeneratorBase/ev3GeneratorBaseDeclSpec.h \

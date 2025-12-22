@@ -22,10 +22,15 @@ SUBDIRS = \
 	generators \
 	utils \
 	checker \
-	thirdparty \
 
-utils.depends = thirdparty
-common.depends = thirdparty utils
-interpreters.depends = common thirdparty utils
-generators.depends = common utils
-checker.depends = interpreters
+!autolupdate {
+	SUBDIRS += thirdparty
+	utils.depends += thirdparty
+	common.depends += thirdparty
+	interpreters.depends += thirdparty
+}
+
+common.depends += utils
+interpreters.depends += common utils
+generators.depends += common utils
+checker.depends += interpreters

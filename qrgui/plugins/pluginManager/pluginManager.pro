@@ -26,10 +26,6 @@ includes(qrgui qrgraph qrgui/plugins/metaMetaModel)
 
 DEFINES += QRGUI_PLUGINS_MANAGER_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../../qrtranslations/ru/qrgui_pluginsManager_ru.ts \
-	$$PWD/../../../qrtranslations/fr/qrgui_pluginsManager_fr.ts \
-
 HEADERS += \
 	$$PWD/pluginsManagerDeclSpec.h \
 	$$PWD/editorManager.h \

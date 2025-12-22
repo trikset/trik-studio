@@ -34,10 +34,6 @@ links(qrkernel qrutils qrrepo robots-generator-base robots-nxt-kit robots-kit-ba
 
 DEFINES += ROBOTS_NXT_GENERATOR_BASE_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/nxtGeneratorBase_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/nxtGeneratorBase_fr.ts \
-
 HEADERS += \
 	$$PWD/include/nxtGeneratorBase/nxtGeneratorBaseDeclSpec.h \
 	$$PWD/include/nxtGeneratorBase/nxtGeneratorPluginBase.h \

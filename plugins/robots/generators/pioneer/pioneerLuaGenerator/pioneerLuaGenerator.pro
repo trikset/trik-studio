@@ -34,8 +34,6 @@ includes( \
 links(qrkernel qrutils qrrepo qrgui-text-editor qrgui-preferences-dialog qrtext robots-kit-base \
 		robots-generator-base robots-pioneer-kit robots-utils)
 
-TRANSLATIONS = $$PWD/../../../../../qrtranslations/ru/plugins/robots/pioneerLuaGenerator_ru.ts
-
 HEADERS += \
 	$$PWD/pioneerLuaGeneratorCustomizer.h \
 	$$PWD/pioneerLuaGeneratorFactory.h \

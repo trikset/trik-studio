@@ -22,10 +22,6 @@ includes(plugins/robots/common/kitBase)
 includes(plugins/robots/utils qrtext)
 includes(plugins/robots/thirdparty/Box2D/Box2D)
 
-TRANSLATIONS = \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/twoDModel_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/twoDModel_fr.ts \
-
 HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.h \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.h \
@@ -38,7 +34,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/engine/twoDModelGuiFacade.h \
 	$$PWD/include/twoDModel/engine/view/twoDModelWidget.h \
 	$$PWD/include/twoDModel/engine/model/metricSystem.h \
-	$$PWD/include/twoDModel/engine/colorDetector.h \
+	$$PWD/include/twoDModel/engine/model/colorDetector.h \
 	$$PWD/include/twoDModel/engine/model/metricCoordinateSystem.h \
 	$$PWD/include/twoDModel/engine/model/constants.h \
 	$$PWD/include/twoDModel/engine/model/model.h \

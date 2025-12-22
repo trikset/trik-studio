@@ -64,9 +64,6 @@ SOURCES += \
 	$$PWD/classes/scalableCoordinate.cpp \
 	$$PWD/utils/nameNormalizer.cpp \
 
-TRANSLATIONS += \
-	$$PWD/../qrtranslations/ru/qrmc_ru.ts \
-
 OTHER_FILES += \
 	$$PWD/qrmcTemplates/edge.template \
 	$$PWD/qrmcTemplates/elements.h.template \

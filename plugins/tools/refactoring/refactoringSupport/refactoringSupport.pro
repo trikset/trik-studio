@@ -26,8 +26,6 @@ links(qrkernel qrutils qrrepo qrgui-preferences-dialog)
 
 QT += widgets
 
-TRANSLATIONS = $$PWD/../../../../qrtranslations/ru/plugins/refactoringSupport_ru.ts
-
 HEADERS = \
 	refactoringPlugin.h \
 	refactoringWindow.h \

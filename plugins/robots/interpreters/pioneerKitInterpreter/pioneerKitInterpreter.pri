@@ -22,7 +22,3 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/src/pioneerKitInterpreterPlugin.cpp \
-
-TRANSLATIONS += \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/pioneerKitInterpreter_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/pioneerKitInterpreter_fr.ts \

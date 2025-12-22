@@ -24,8 +24,10 @@ includes(plugins/robots/common/nxtKit \
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
                 robots-utils robots-kit-base)
 
-PKGCONFIG *= libusb-1.0
-CONFIG += link_pkgconfig
+!autolupdate {
+	PKGCONFIG *= libusb-1.0
+	CONFIG += link_pkgconfig
+}
 
 # libusb headers contain dirty code
 CONFIG(clang) {
@@ -76,7 +78,3 @@ SOURCES += \
 	$$PWD/src/communication/usbRobotCommunicationThread.cpp \
 	$$PWD/src/communication/i2cCommunicator.cpp \
 	$$PWD/src/communication/nxtUsbDriverInstaller.cpp \
-
-TRANSLATIONS = \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/nxtKit_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/nxtKit_fr.ts \

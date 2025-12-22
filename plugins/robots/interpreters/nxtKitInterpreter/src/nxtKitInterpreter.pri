@@ -87,8 +87,4 @@ FORMS += \
 	$$PWD/nxtAdditionalPreferences.ui \
 	$$PWD/nxtDisplayWidget.ui \
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/nxtKitInterpreter_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/nxtKitInterpreter_fr.ts \
-
 RESOURCES += $$PWD/../nxtKitInterpreter.qrc

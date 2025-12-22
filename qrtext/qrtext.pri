@@ -133,10 +133,6 @@ SOURCES += \
 	$$PWD/src/lua/luaStringEscapeUtils.cpp \
 	$$PWD/src/lua/luaToolbox.cpp \
 
-TRANSLATIONS = \
-	$$PWD/../qrtranslations/ru/qrtext_ru.ts \
-	$$PWD/../qrtranslations/fr/qrtext_fr.ts \
-
 includes(qrkernel)
 links(qrkernel)
 

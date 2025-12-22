@@ -25,10 +25,6 @@ includes(qrgui)
 
 DEFINES += QRGUI_DIALOGS_LIBRARY
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_dialogs_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_dialogs_fr.ts \
-
 HEADERS += \
 	$$PWD/dialogsDeclSpec.h \
 	$$PWD/metamodelingOnFly/propertiesDialog.h \
@@ -82,4 +78,4 @@ FORMS += \
 	$$PWD/subprogram/dynamicPropertiesDialog.ui \
 
 RESOURCES += \
-	arrowIcons.qrc \
+        $$PWD/arrowIcons.qrc \

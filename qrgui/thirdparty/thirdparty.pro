@@ -22,10 +22,6 @@ DEFINES += QRGUI_THIRDPARTY_LIBRARY
 
 QT += widgets
 
-TRANSLATIONS = \
-	$$PWD/../../qrtranslations/ru/qrgui_thirdparty_ru.ts \
-	$$PWD/../../qrtranslations/fr/qrgui_thirdparty_fr.ts \
-
 # Some warnings are turned off because of problems specific to thirdparty code.
 
 win32 {

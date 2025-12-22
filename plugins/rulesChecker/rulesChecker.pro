@@ -26,8 +26,6 @@ INCLUDEPATH += \
 	../../ \
 	../../qrgui \
 
-TRANSLATIONS = $$PWD/../../qrtranslations/ru/plugins/bmpnRulesChecker_ru.ts
-
 HEADERS += \
 	rulesChecker.h \
 	rulesBPMNPlugin.h \
@@ -37,6 +35,3 @@ SOURCES += \
 	rulesChecker.cpp \
 	rulesBPMNPlugin.cpp \
 	bpmnCustomizer.cpp
-
-
-

@@ -23,19 +23,16 @@ links(qrkernel qrrepo qrutils qrgui-tool-plugin-interface)
 
 QT += widgets core
 
-TRANSLATIONS = \
-	$$PWD/../../../qrtranslations/ru/plugins/subprogramsImporterExporter_ru.ts \
-
 INCLUDEPATH += \
 	$$PWD/../../../qrutils/ \
 
 HEADERS = \
-	subprogramsImporterExporterPlugin.h \
-	subprogramsCollectionDialog.h
+        $$PWD/subprogramsImporterExporterPlugin.h \
+	$$PWD/subprogramsCollectionDialog.h
 
 SOURCES = \
-	subprogramsImporterExporterPlugin.cpp \
-	subprogramsCollectionDialog.cpp
+        $$PWD/subprogramsImporterExporterPlugin.cpp \
+	$$PWD/subprogramsCollectionDialog.cpp
 
 FORMS += \
-	subprogramsCollectionDialog.ui
+        $$PWD/subprogramsCollectionDialog.ui

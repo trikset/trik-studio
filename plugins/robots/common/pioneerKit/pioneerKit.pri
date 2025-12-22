@@ -23,9 +23,9 @@ includes(plugins/robots/common/pioneerKit \
 links(qrkernel qrutils qrtext qrgui-preferences-dialog qrgui-tool-plugin-interface \
 		robots-utils robots-kit-base)
 
-SOURCES += $$files(*.cpp, true)
-HEADERS += $$files(*.h, true)
+SOURCES += \
+                $$PWD/src/blocks/pioneerBlocksFactory.cpp \
 
-TRANSLATIONS += \
-	$$PWD/../../../../qrtranslations/ru/plugins/robots/pioneerKit_ru.ts \
-	$$PWD/../../../../qrtranslations/fr/plugins/robots/pioneerKit_fr.ts \
+HEADERS += \
+                $$PWD/include/pioneerKit/blocks/pioneerBlocksFactory.h \
+		$$PWD/include/pioneerKit/constants.h \

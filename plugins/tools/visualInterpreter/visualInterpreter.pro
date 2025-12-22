@@ -25,8 +25,6 @@ includes(thirdparty/qscintilla/Qt4Qt5 qrgui qrtext)
 
 links(qrkernel qrutils qrgui-preferences-dialog)
 
-TRANSLATIONS = $$PWD/../../../qrtranslations/ru/plugins/visualInterpreter_ru.ts
-
 HEADERS = \
 	visualInterpreterPlugin.h \
 	visualInterpreterPreferencesPage.h \

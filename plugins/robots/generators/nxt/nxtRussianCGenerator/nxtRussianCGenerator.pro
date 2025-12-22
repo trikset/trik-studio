@@ -31,10 +31,6 @@ includes(plugins/robots/generators/nxt/nxtGeneratorBase \
 
 links(qrkernel qrutils qrrepo robots-generator-base robots-nxt-generator-base)
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/nxtRussianCGenerator_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/nxtRussianCGenerator_fr.ts \
-
 HEADERS += \
 	$$PWD/nxtRussianCGeneratorPlugin.h \
 	$$PWD/nxtRussianCMasterGenerator.h \

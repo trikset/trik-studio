@@ -38,8 +38,5 @@ SOURCES += \
 FORMS += \
 	$$PWD/compilerPage.ui \
 
-TRANSLATIONS += \
-	$$PWD/../../../qrtranslations/ru/plugins/metaEditorSupport_ru.ts \
-
 RESOURCES += \
 	$$PWD/metaEditorSupport.qrc

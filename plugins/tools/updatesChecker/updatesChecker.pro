@@ -26,10 +26,6 @@ INCLUDEPATH += \
 
 QT += widgets xml
 
-TRANSLATIONS = \
-	$$PWD/../../../qrtranslations/ru/plugins/updatesChecker_ru.ts \
-	$$PWD/../../../qrtranslations/fr/plugins/updatesChecker_fr.ts \
-
 HEADERS = \
 	$$PWD/updatesCheckerPlugin.h \
 	$$PWD/updater.h \

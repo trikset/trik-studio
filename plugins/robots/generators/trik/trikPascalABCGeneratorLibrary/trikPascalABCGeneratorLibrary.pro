@@ -34,10 +34,6 @@ links(qrkernel qrutils qrrepo robots-generator-base robots-trik-generator-base \
 		robots-kit-base robots-trik-kit robots-utils qrgui-preferences-dialog \
 )
 
-TRANSLATIONS = \
-	$$PWD/../../../../../qrtranslations/ru/plugins/robots/trikPascalABCGeneratorLibrary_ru.ts \
-	$$PWD/../../../../../qrtranslations/fr/plugins/robots/trikPascalABCGeneratorLibrary_fr.ts \
-
 HEADERS += \
 	$$PWD/include/trikPascalABCGeneratorLibrary/trikPascalABCGeneratorPluginBase.h \
 	$$PWD/src/trikPascalABCAdditionalPreferences.h \
