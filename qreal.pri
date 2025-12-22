@@ -29,27 +29,34 @@ SUBDIRS = \
 	qrgraph \
 	qrutils \
 	qrtext \
-	thirdparty \
-	qrtranslations \
 
-thirdparty.depends = initvars
-qrkernel.depends = thirdparty
+!autolupdate {
+        SUBDIRS += \
+	        thirdparty \
+		qrtranslations \
+
+        thirdparty.depends = initvars
+	qrkernel.depends = thirdparty
+	qrrepo.depends += thirdparty
+	qrgui.depends += thirdparty
+	qrtranslations.depends = initvars
+}
+
 qrgraph.depends = qrkernel
 qrutils.depends = qrkernel qrtext
-qrrepo.depends = qrkernel qrutils thirdparty
+qrrepo.depends += qrkernel qrutils
 qrxc.depends = qrutils
 qrmc.depends = qrrepo
 qrmc.file = $$PWD/qrmc/qrmc-lib.pro
 initvars.file = initvars.qmake
 
-qrgui.depends = \
+qrgui.depends += \
 	qrxc \
 	qrrepo \
 	qrutils \
 	qrkernel \
 	qrgraph \
 	qrmc \
-	thirdparty \
 
 plugins.depends = \
 	qrxc \
@@ -62,8 +69,6 @@ plugins.depends = \
 	qrtext \
 
 qrtext.depends = qrkernel
-
-qrtranslations.depends = initvars
 
 OTHER_FILES += \
 	$$PWD/global.pri \

@@ -40,10 +40,6 @@ defineTest(autoLupdateFiles) {
 defineTest(autoLupdate) {
         requires(!isEmpty(GLOBAL_PWD))
         REL_PRO_FILE = $$relative_path($$_PRO_FILE_, $$GLOBAL_PWD)
-        contains(REL_PRO_FILE, ".*thirdparty.*")|contains(REL_PRO_FILE, ".*3dparty.*") {
-                # Do not process thirdparty
-                return(false)
-        }
         !isEmpty(QREAL_EDITOR_PATH) { # Hack for plugins/robots/editor
             exists($$_PRO_FILE_PWD_/generated) {
                 FILES_TO_TRANSLATE = \
@@ -56,8 +52,9 @@ defineTest(autoLupdate) {
             }
             return(false)
         }
-        !isEmpty(SOURCES)|!isEmpty(HEADERS)|!isEmpty(FORMS)|!isEmpty(RESOURCES) {
-                FILES_TO_TRANSLATE = $$HEADERS $$SOURCES $$FORMS $$RESOURCES
+        !isEmpty(SOURCES)|!isEmpty(HEADERS)|!isEmpty(FORMS) {
+                # TODO: support resources if required later, unused atm
+                FILES_TO_TRANSLATE = $$HEADERS $$SOURCES $$FORMS
                 autoLupdateFiles($$FILES_TO_TRANSLATE)
                 return(true)
         }

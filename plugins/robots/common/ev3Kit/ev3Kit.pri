@@ -35,7 +35,7 @@ win32: LIBS += -lsetupapi
 
 macx: LIBS += -framework CoreFoundation -framework AppKit
 
-linux {
+linux:!autolupdate {
     CONFIG *= link_pkgconfig
     PKGCONFIG += libudev #for hidapi
 }

@@ -18,8 +18,10 @@ clang:QMAKE_CXXFLAGS += -Wno-error=c++17-extensions
 
 DEFINES += QRREPO_LIBRARY
 
-CONFIG *= link_pkgconfig
-PKGCONFIG *= zlib
+!autolupdate {
+	CONFIG *= link_pkgconfig
+	PKGCONFIG *= zlib
+}
 
 links(qrkernel qrutils)
 
