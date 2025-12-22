@@ -55,8 +55,8 @@ public Q_SLOTS:
 
 private Q_SLOTS:
 	void onTimerTimeout();
-	void onScalarSensorResponse(int reading);
-	void onVectorSensorResponse(const QVector<int> &reading);
+	void onScalarSensorResponse(const QVariant &reading);
+	void onVectorSensorResponse(const QVariant &reading);
 	void onFailure();
 
 private:
