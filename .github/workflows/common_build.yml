@@ -43,6 +43,7 @@ jobs:
       lint_vera: true
       build: false
       build_installer: false
+      trik_python3_version_minor: 12
 
   build-macos-release-tests:
     needs: lint
