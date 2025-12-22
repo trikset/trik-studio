@@ -47,7 +47,7 @@ class Box2DPhysicsEngine : public PhysicsEngineBase
 	Q_OBJECT
 public:
 	Box2DPhysicsEngine(const WorldModel &worldModel, const QList<RobotModel *> &robots);
-	~Box2DPhysicsEngine();
+	~Box2DPhysicsEngine() override;
 	QVector2D positionShift(RobotModel &robot) const override;
 	qreal rotation(RobotModel &robot) const override;
 	void addRobot(RobotModel * const robot) override;
@@ -72,8 +72,8 @@ public:
 	QPointF positionToScene(float x, float y) const;
 	float angleToBox2D(qreal sceneAngle) const;
 	qreal angleToScene(float boxAngle) const;
-	qreal computeDensity(const QPolygonF &shape, qreal mass);
-	qreal computeDensity(qreal radius, qreal mass);
+	qreal computeDensity(const QPolygonF &shape, qreal mass) const;
+	qreal computeDensity(qreal radius, qreal mass) const;
 
 	b2WorldId box2DWorldId();
 
@@ -110,11 +110,9 @@ private:
 
 	twoDModel::view::TwoDModelScene *mScene {}; // Doesn't take ownership
 	qreal mPixelsInCm;
-	b2WorldId mWorldId;
+	b2WorldId mWorldId {b2_nullWorldId};
 
 	QMap<RobotModel *, parts::Box2DRobot *> mBox2DRobots;  // Takes ownership on b2Body instances
-	QMap<RobotModel *, parts::Box2DWheel *> mLeftWheels;  // Does not take ownership
-	QMap<RobotModel *, parts::Box2DWheel *> mRightWheels;  // Does not take ownership
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DResizableItems;  // Takes ownership on b2Body instances
 	QMap<QGraphicsItem *, parts::Box2DItem *> mBox2DDynamicItems;  // Doesn't take ownership
 	QMap<RobotModel *, QSet<twoDModel::view::SensorItem *>> mRobotSensors; // Doesn't take ownership
