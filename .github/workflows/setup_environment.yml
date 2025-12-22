@@ -117,6 +117,18 @@ jobs:
         fi
         ls thirdparty
 
+    - name: Lint Vera
+      run: |
+          buildScripts/github/install_linter.sh
+          LEFT="${{ github.event.pull_request.base.sha || github.event.before }}"
+          RIGHT="${{ github.event.pull_request.head.sha || github.event.after }}"
+          ${{ inputs.executor }} env COMMIT_RANGE="$LEFT...$RIGHT" buildScripts/github/vera_translation.sh
+      env:
+        TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
+        TRIK_PYTHON3_VERSION_MINOR: ${{ inputs.trik_python3_version_minor }}
+        BUILD_INSTALLER: ${{ inputs.build_installer }}
+      if: ${{ inputs.lint_vera }}
+
     - name: Set up environment
       run: buildScripts/github/install.sh
       env:
@@ -128,12 +140,6 @@ jobs:
         GCC_VERSION: ${{ inputs.gcc_version }}
         INSTALL_INSTALLER_ENVIRONMENT: ${{ inputs.linux_installer_environment }}
       if: ${{ inputs.build }}
-      
-    - name: Lint Vera
-      run: |
-          sudo apt-get update && sudo apt-get install -y --no-install-recommends qttools5-dev-tools qtbase5-dev vera++ 
-          ${{ inputs.executor }} env COMMIT_RANGE="${{ github.event.before}}...${{ github.event.after}}" buildScripts/github/vera_translation.sh
-      if: ${{ inputs.lint_vera }}
 
     - name: Restore cache
       uses: actions/cache@v5
