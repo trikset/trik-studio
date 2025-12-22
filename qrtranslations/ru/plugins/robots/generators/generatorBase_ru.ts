@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/primaryControlFlowValidator.cpp" line="+44"/>
+        <location filename="../../../../../plugins/robots/generators/generatorBase/src/primaryControlFlowValidator.cpp" line="+44"/>
         <source>There is nothing to generate, diagram doesn&apos;t have Initial Node</source>
         <translation>Генерация невозможна, на диаграмме нет начальных блоков</translation>
     </message>
@@ -95,17 +95,17 @@
         <translation>Неизвестный блок</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+79"/>
+        <location filename="../../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+79"/>
         <source>There is no opened diagram</source>
         <translation>Сначала откройте диаграмму</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/primaryControlFlowValidator.cpp" line="+32"/>
+        <location filename="../../../../../plugins/robots/generators/generatorBase/src/primaryControlFlowValidator.cpp" line="+32"/>
         <source>Outgoing link is not connected</source>
         <translation>Исходящая связь ни к чему не подключена</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/parts/subprograms.cpp" line="+83"/>
+        <location filename="../../../../../plugins/robots/generators/generatorBase/src/parts/subprograms.cpp" line="+83"/>
         <source>Graphical diagram instance not found</source>
         <translation>Графическая модель диаграммы с подпрограммой не найдена</translation>
     </message>
@@ -124,7 +124,7 @@
         <translation type="vanished">Такой идентификатор уже используется: </translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/converters/reservedVariablesConverter.cpp" line="+64"/>
+        <location filename="../../../../../plugins/robots/generators/generatorBase/src/converters/reservedVariablesConverter.cpp" line="+64"/>
         <source>Device on port %1 is not configured. Please select it on the &quot;Configure devices&quot; panel on the right-hand side.</source>
         <translation>Сенсор на порту %1 не сконфигурирован. Выберите его тип на панели &quot;Настройки сенсоров&quot; справа.</translation>
     </message>
@@ -137,7 +137,7 @@
 <context>
     <name>generatorBase::MasterGeneratorBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+40"/>
+        <location filename="../../../../../plugins/robots/generators/generatorBase/src/masterGeneratorBase.cpp" line="+40"/>
         <source>This diagram cannot be generated into the structured code. Generating it into the code with &apos;goto&apos; statements.</source>
         <translation>Данная диаграмма не может быть сгенерирована в структурированный код. Генерирую код с &apos;goto&apos;.</translation>
     </message>

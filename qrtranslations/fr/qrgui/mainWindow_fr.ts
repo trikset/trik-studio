@@ -4,7 +4,7 @@
 <context>
     <name>ErrorListWidget</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorListWidget.cpp" line="+60"/>
+        <location filename="../../../qrgui/mainWindow/errorListWidget.cpp" line="+60"/>
         <source>Clear</source>
         <translation>Effacer</translation>
     </message>
@@ -17,7 +17,7 @@
 <context>
     <name>FindManager</name>
     <message>
-        <location filename="../../qrgui/mainWindow/findManager.cpp" line="+39"/>
+        <location filename="../../../qrgui/mainWindow/findManager.cpp" line="+39"/>
         <location line="+42"/>
         <location line="+1"/>
         <source>by name</source>
@@ -70,7 +70,7 @@
 <context>
     <name>MainWindowUi</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.ui" line="+6"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="+6"/>
         <source>QReal</source>
         <translation>QReal</translation>
     </message>
@@ -518,7 +518,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+160"/>
+        <location filename="../../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="+160"/>
         <source>Can`t open project file</source>
         <translation>Le projet ne peut pas être ouvert</translation>
     </message>
@@ -526,7 +526,7 @@
 <context>
     <name>ReferenceList</name>
     <message>
-        <location filename="../../qrgui/mainWindow/referenceList.ui" line="+14"/>
+        <location filename="../../../qrgui/mainWindow/referenceList.ui" line="+14"/>
         <source>Choose a reference value</source>
         <translation>Choisissez une valeur de référence</translation>
     </message>
@@ -534,7 +534,7 @@
 <context>
     <name>ShapeEdit</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.ui" line="+14"/>
+        <location filename="../../../qrgui/mainWindow/shapeEdit/shapeEdit.ui" line="+14"/>
         <source>Form</source>
         <translation>Forme</translation>
     </message>
@@ -700,7 +700,7 @@
 <context>
     <name>VisibilityConditionsDialog</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/visibilityConditionsDialog.ui" line="+14"/>
+        <location filename="../../../qrgui/mainWindow/shapeEdit/visibilityConditionsDialog.ui" line="+14"/>
         <source>Specify conditions in which choosen element must be shown</source>
         <translation>Specifiez les conditions sous lesquelles l&apos;élément doit être affiché</translation>
     </message>
@@ -708,7 +708,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../qrgui/mainWindow/mainWindow.cpp" line="+670"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+670"/>
         <source>Could not save file, try to save it to another place</source>
         <translation type="unfinished"></translation>
     </message>
@@ -885,7 +885,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ProjectManagerWrapper</name>
     <message>
-        <location filename="../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="-89"/>
+        <location filename="../../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="-89"/>
         <source>Save</source>
         <translation>Enregister</translation>
     </message>
@@ -943,7 +943,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::ShapeEdit</name>
     <message>
-        <location filename="../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+352"/>
+        <location filename="../../../qrgui/mainWindow/shapeEdit/shapeEdit.cpp" line="+352"/>
         <source>Saving</source>
         <translation>Enregistrement</translation>
     </message>
@@ -955,7 +955,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
+        <location filename="../../../qrgui/mainWindow/startWidget/startWidget.cpp" line="+135"/>
         <source>New project</source>
         <translation>Nouveau projet</translation>
     </message>
@@ -1011,7 +1011,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::DraggableElement</name>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/draggableElement.cpp" line="+89"/>
+        <location filename="../../../qrgui/mainWindow/palette/draggableElement.cpp" line="+89"/>
         <source>Mouse gesture</source>
         <translation>Geste souris</translation>
     </message>
@@ -1091,7 +1091,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::ErrorReporter</name>
     <message>
-        <location filename="../../qrgui/mainWindow/errorReporter.cpp" line="+215"/>
+        <location filename="../../../qrgui/mainWindow/errorReporter.cpp" line="+215"/>
         <source>INFORMATION:</source>
         <translation>INFORMATION :</translation>
     </message>
@@ -1114,7 +1114,7 @@ WARNING: The settings will be restored after application restart</source>
 <context>
     <name>qReal::gui::ModelExplorer</name>
     <message>
-        <location filename="../../qrgui/mainWindow/modelExplorer.cpp" line="+35"/>
+        <location filename="../../../qrgui/mainWindow/modelExplorer.cpp" line="+35"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -1126,7 +1126,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation type="obsolete">Ajouter un élément</translation>
     </message>
     <message>
-        <location filename="../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+157"/>
+        <location filename="../../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+157"/>
         <source>Add Entity</source>
         <translation type="unfinished"></translation>
     </message>

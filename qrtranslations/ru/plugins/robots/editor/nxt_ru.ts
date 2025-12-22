@@ -4,7 +4,7 @@
 <context>
     <name>NxtMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="+138"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="+138"/>
         <source>In</source>
         <translation>Входной</translation>
     </message>
@@ -226,7 +226,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/elements.h" line="+26"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/elements.h" line="+26"/>
         <source>Beep</source>
         <translation>Гудок</translation>
     </message>
@@ -768,7 +768,7 @@
         <translation>Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="-41"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="-41"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -809,7 +809,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/elements.h" line="-212"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/elements.h" line="-212"/>
         <source>Tacho Limit</source>
         <translation>Предел оборотов</translation>
     </message>

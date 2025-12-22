@@ -4,7 +4,7 @@
 <context>
     <name>PioneerMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+132"/>
+        <location filename="../../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+132"/>
         <source>Concurrent</source>
         <translation>Параллельно</translation>
     </message>
@@ -218,7 +218,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="+26"/>
+        <location filename="../../../../../plugins/robots/editor/pioneer/generated/elements.h" line="+26"/>
         <source>Landing</source>
         <translation>Посадка</translation>
     </message>
@@ -805,7 +805,7 @@
         <translation>Светодиод</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-42"/>
+        <location filename="../../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-42"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма</translation>
     </message>
@@ -835,7 +835,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-439"/>
+        <location filename="../../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-439"/>
         <source>Time</source>
         <translation>Время</translation>
     </message>

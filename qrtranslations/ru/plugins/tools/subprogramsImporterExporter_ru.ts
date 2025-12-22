@@ -4,7 +4,7 @@
 <context>
     <name>SubprogramsCollectionDialog</name>
     <message>
-        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsCollectionDialog.cpp" line="+29"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsCollectionDialog.cpp" line="+29"/>
         <source>Subprograms collection manager</source>
         <translation>Менеджер коллекции подпрограмм</translation>
     </message>
@@ -22,7 +22,7 @@
 <context>
     <name>subprogramsCollectionDialog</name>
     <message>
-        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsCollectionDialog.ui" line="+14"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsCollectionDialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation>Диалог</translation>
     </message>
@@ -45,7 +45,7 @@
 <context>
     <name>subprogramsImporterExporter::SubprogramsImporterExporterPlugin</name>
     <message>
-        <location filename="../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="+38"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="+38"/>
         <source>Subprograms</source>
         <translation>Подпрограммы</translation>
     </message>

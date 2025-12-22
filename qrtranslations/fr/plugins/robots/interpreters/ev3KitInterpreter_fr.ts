@@ -4,7 +4,7 @@
 <context>
     <name>Ev3AdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="+14"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Paramètres EV3</translation>
     </message>
@@ -69,7 +69,7 @@
 <context>
     <name>Ev3DisplayWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3DisplayWidget.ui" line="+435"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3DisplayWidget.ui" line="+435"/>
         <source>tr(Ev3Display)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -77,7 +77,7 @@
 <context>
     <name>ev3::Ev3AdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.cpp" line="+29"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.cpp" line="+29"/>
         <source>2D robot image:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -85,7 +85,7 @@
 <context>
     <name>ev3::Ev3KitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3KitInterpreterPlugin.cpp" line="+108"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3KitInterpreterPlugin.cpp" line="+108"/>
         <source>Lego EV3</source>
         <translation>Lego EV3</translation>
     </message>
@@ -93,7 +93,7 @@
 <context>
     <name>ev3::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+34"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (Bluetooth)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -108,7 +108,7 @@
 <context>
     <name>ev3::robotModel::real::UsbRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (USB)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,7 +116,7 @@
 <context>
     <name>ev3::robotModel::real::parts::RangeSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/parts/rangeSensor.h" line="+31"/>
+        <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/parts/rangeSensor.h" line="+31"/>
         <source>Sonar sensor</source>
         <translation type="unfinished"></translation>
     </message>

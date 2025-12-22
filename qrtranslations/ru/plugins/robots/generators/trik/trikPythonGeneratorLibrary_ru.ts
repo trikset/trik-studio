@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/threadsValidator.cpp" line="+141"/>
+        <location filename="../../../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/threadsValidator.cpp" line="+141"/>
         <source>Trying to join a thread with an unknown id. Possible causes: calling fork from a subprogram or trying to merge two threads without a join</source>
         <translation>Попытка присоединиться к потоку с неизвестным идентификатором. Возможные причины: распараллеливание внутри подпрограммы или попытка склеить два потока без блока &quot;join&quot;</translation>
     </message>
@@ -60,7 +60,7 @@
         <translation>Исходящая связь ни к чему не присоединена</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonControlFlowValidator.cpp" line="+35"/>
+        <location filename="../../../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonControlFlowValidator.cpp" line="+35"/>
         <source>There is nothing to generate, diagram doesn&apos;t have Initial Node</source>
         <translation>На диаграмме нет блока &quot;Начало&quot;</translation>
     </message>
@@ -68,7 +68,7 @@
 <context>
     <name>trik::python::TrikPythonGeneratorPluginBase</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+73"/>
+        <location filename="../../../../../../plugins/robots/generators/trik/trikPythonGeneratorLibrary/src/trikPythonGeneratorPluginBase.cpp" line="+73"/>
         <source>Network operation timed out</source>
         <translation>Не удалось получить ответ от робота, проверьте настройки, проверьте, включён ли робот</translation>
     </message>

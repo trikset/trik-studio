@@ -4,7 +4,7 @@
 <context>
     <name>NxtMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="+138"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="+138"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
@@ -214,7 +214,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/elements.h" line="+26"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/elements.h" line="+26"/>
         <source>Beep</source>
         <translation type="unfinished"></translation>
     </message>
@@ -752,7 +752,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="-41"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="-41"/>
         <source>RobotsDiagram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -793,7 +793,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/nxt/generated/elements.h" line="-212"/>
+        <location filename="../../../../../plugins/robots/editor/nxt/generated/elements.h" line="-212"/>
         <source>Tacho Limit</source>
         <translation type="unfinished"></translation>
     </message>

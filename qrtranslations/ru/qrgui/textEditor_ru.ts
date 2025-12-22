@@ -4,32 +4,49 @@
 <context>
     <name>QObject</name>
     <message>
+        <location filename="../../../qrgui/textEditor/languageInfo.h" line="+91"/>
         <source>Text File</source>
-        <translation type="vanished">Текстовый файл</translation>
+        <translation>Текстовый файл</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>C Language Source File</source>
-        <translation type="vanished">Файл с исходным кодом на C</translation>
+        <translation>Файл с исходным кодом на C</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>Russian Algorithmic Language Source File</source>
-        <translation type="vanished">Файл с исходным кодом на ШАЯ</translation>
+        <translation>Файл с исходным кодом на ШАЯ</translation>
     </message>
     <message>
+        <location line="+18"/>
         <source>Python Source File</source>
-        <translation type="vanished">Файл с исходным кодом на Python</translation>
+        <translation>Файл с исходным кодом на Python</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>Java Script Language Source File</source>
-        <translation type="vanished">Файл с исходным кодом на Java Script</translation>
+        <translation>Файл с исходным кодом на Java Script</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>QtScript Language Source File</source>
-        <translation type="vanished">Файл с исходным кодом на QtScript</translation>
+        <translation>Файл с исходным кодом на QtScript</translation>
     </message>
     <message>
+        <location line="+17"/>
         <source>F# Language Source File</source>
-        <translation type="vanished">Файл с исходным кодом на F#</translation>
+        <translation>Файл с исходным кодом на F#</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>PascalABC Language Source File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Lua Language Source File</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -42,7 +59,7 @@
 <context>
     <name>qReal::text::TextManager</name>
     <message>
-        <location filename="../../qrgui/textEditor/textManager.cpp" line="+86"/>
+        <location filename="../../../qrgui/textEditor/textManager.cpp" line="+86"/>
         <source>Confirmation</source>
         <translation>Подтвердите</translation>
     </message>

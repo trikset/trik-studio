@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="+598"/>
+        <location filename="../../../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="+598"/>
         <source>Root node for diagram %1 (which is %2) does not exist!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -65,7 +65,7 @@
 <context>
     <name>qReal::QrsMetamodelSaver</name>
     <message>
-        <location filename="../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="+389"/>
+        <location filename="../../../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="+389"/>
         <source>Unknown link style type %1</source>
         <translation type="unfinished"></translation>
     </message>

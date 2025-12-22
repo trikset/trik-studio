@@ -22,7 +22,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/editor/sceneCustomizer.cpp" line="+23"/>
+        <location filename="../../../qrgui/editor/sceneCustomizer.cpp" line="+23"/>
         <source>Add connection</source>
         <translation>Rajouter une connexion</translation>
     </message>
@@ -145,7 +145,7 @@
 <context>
     <name>qReal::gui::editor::BrokenLine</name>
     <message>
-        <location filename="../../qrgui/editor/private/brokenLine.cpp" line="+24"/>
+        <location filename="../../../qrgui/editor/private/brokenLine.cpp" line="+24"/>
         <source>Delete point</source>
         <translation type="unfinished">Supprimer le point</translation>
     </message>
@@ -163,7 +163,7 @@
 <context>
     <name>qReal::gui::editor::EdgeElement</name>
     <message>
-        <location filename="../../qrgui/editor/edgeElement.cpp" line="+62"/>
+        <location filename="../../../qrgui/editor/edgeElement.cpp" line="+62"/>
         <source>Reverse</source>
         <translation type="unfinished">Retourner</translation>
     </message>
@@ -176,7 +176,7 @@
 <context>
     <name>qReal::gui::editor::EditorViewScene</name>
     <message>
-        <location filename="../../qrgui/editor/editorViewScene.cpp" line="+294"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="+294"/>
         <source>Create new element</source>
         <translation type="unfinished">Créer un nouvel élement</translation>
     </message>
@@ -221,7 +221,7 @@
 <context>
     <name>qReal::gui::editor::LineFactory</name>
     <message>
-        <location filename="../../qrgui/editor/private/lineFactory.cpp" line="+49"/>
+        <location filename="../../../qrgui/editor/private/lineFactory.cpp" line="+49"/>
         <source>Broken</source>
         <translation type="unfinished">Brisée</translation>
     </message>
@@ -239,7 +239,7 @@
 <context>
     <name>qReal::gui::editor::NodeElement</name>
     <message>
-        <location filename="../../qrgui/editor/nodeElement.cpp" line="+53"/>
+        <location filename="../../../qrgui/editor/nodeElement.cpp" line="+53"/>
         <source>Switch on grid</source>
         <translation type="unfinished">Afficher la grille</translation>
     </message>
@@ -247,7 +247,7 @@
 <context>
     <name>qReal::gui::editor::PropertyEditorView</name>
     <message>
-        <location filename="../../qrgui/editor/propertyEditorView.cpp" line="+305"/>
+        <location filename="../../../qrgui/editor/propertyEditorView.cpp" line="+305"/>
         <source>Specify directory:</source>
         <translation type="unfinished">Choisissez le répertoire :</translation>
     </message>
@@ -260,7 +260,7 @@
 <context>
     <name>qReal::gui::editor::PushButtonPropertyManager</name>
     <message>
-        <location filename="../../qrgui/editor/private/pushButtonProperty.cpp" line="+38"/>
+        <location filename="../../../qrgui/editor/private/pushButtonProperty.cpp" line="+38"/>
         <source>Click to choose</source>
         <translation type="unfinished">Cliquez pour choisir</translation>
     </message>
@@ -268,7 +268,7 @@
 <context>
     <name>qReal::gui::editor::SquareLine</name>
     <message>
-        <location filename="../../qrgui/editor/private/squareLine.cpp" line="+27"/>
+        <location filename="../../../qrgui/editor/private/squareLine.cpp" line="+27"/>
         <source>Lay out</source>
         <translation type="unfinished">Étaler</translation>
     </message>
@@ -276,7 +276,7 @@
 <context>
     <name>qReal::gui::editor::view::details::ExploserView</name>
     <message>
-        <location filename="../../qrgui/editor/private/exploserView.cpp" line="+80"/>
+        <location filename="../../../qrgui/editor/private/exploserView.cpp" line="+80"/>
         <location line="+111"/>
         <source>New </source>
         <translation type="unfinished">Nouveau</translation>

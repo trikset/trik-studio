@@ -8,7 +8,7 @@
         <translation type="vanished">Эмулирует поведение робота на 2D модели TRIK Studio отдельно от редактора программ. Указанный файл сохранения .qrs будет исполнен, как в случае нажатия на кнопку &quot;Запуск&quot; в среде.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="+30"/>
         <source>Emulates robot`s behaviour on TRIK Studio 2D model separately from programming environment. Passed .qrs will be interpreted just like when &apos;Run&apos; button was pressed in TRIK Studio. 
 In background mode the session will be terminated just after the execution ended and return code will then contain binary information about program correctness.Example: 
 </source>
@@ -108,7 +108,7 @@ In background mode the session will be terminated just after the execution ended
 <context>
     <name>twoDModel::Runner</name>
     <message>
-        <location filename="../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+241"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+241"/>
         <source>Robot console</source>
         <translation>Консоль робота</translation>
     </message>

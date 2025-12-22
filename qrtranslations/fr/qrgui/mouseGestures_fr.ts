@@ -4,7 +4,7 @@
 <context>
     <name>GesturesWidget</name>
     <message>
-        <location filename="../../qrgui/mouseGestures/gesturesWidget.ui" line="+20"/>
+        <location filename="../../../qrgui/mouseGestures/gesturesWidget.ui" line="+20"/>
         <source>Form</source>
         <translation>Forme</translation>
     </message>

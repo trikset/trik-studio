@@ -4,7 +4,7 @@
 <context>
     <name>NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="+14"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Configuration de NXT</translation>
     </message>
@@ -43,7 +43,7 @@
 <context>
     <name>NxtDisplayWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtDisplayWidget.ui" line="+435"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtDisplayWidget.ui" line="+435"/>
         <source>tr(NxtDisplay)</source>
         <translation>Écran NXT</translation>
     </message>
@@ -51,7 +51,7 @@
 <context>
     <name>nxt::NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+32"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+32"/>
         <source>2D robot image:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,7 +70,7 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::NxtKitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+107"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+107"/>
         <source>Lego NXT</source>
         <translation>Lego NXT</translation>
     </message>
@@ -100,7 +100,7 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+35"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+35"/>
         <source>Interpretation (Bluetooth)</source>
         <translation>Interprétation (Bluetooth)</translation>
     </message>
@@ -108,7 +108,7 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::robotModel::real::UsbRealRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (USB)</source>
         <translation>Interprétation (USB)</translation>
     </message>
@@ -116,7 +116,7 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::robotModel::real::parts::SonarSensor</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+31"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+31"/>
         <source>Sonar sensor</source>
         <translation>Capteur ultrasons</translation>
     </message>

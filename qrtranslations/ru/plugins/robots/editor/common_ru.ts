@@ -8,7 +8,7 @@
         <translation type="vanished">Функция:</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+486"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="+486"/>
         <location line="+354"/>
         <source>Condition:</source>
         <translation>Условие:</translation>
@@ -854,7 +854,7 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -1089,7 +1089,7 @@
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -1503,7 +1503,7 @@
         <translation>Значение</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -1546,7 +1546,7 @@
         <translation type="vanished">Тело функции</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
         <translation type="unfinished">Выражение</translation>
     </message>
@@ -2416,7 +2416,7 @@
         <translation type="vanished">Присвоить указанной переменной указанное значение.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+16"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+16"/>
         <source>Composite</source>
         <translation>Композиция</translation>
     </message>

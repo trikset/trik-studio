@@ -25,9 +25,9 @@
         <translation>Le parser ne peut pas décider quelle alternative à utiliser </translation>
     </message>
     <message>
-        <location line="+11"/>
-        <location filename="../../qrtext/include/qrtext/core/parser/operators/concatenationParser.h" line="+29"/>
         <location filename="../../qrtext/include/qrtext/core/parser/parser.h" line="+54"/>
+        <location filename="../../qrtext/include/qrtext/core/parser/operators/alternativeParser.h" line="+11"/>
+        <location filename="../../qrtext/include/qrtext/core/parser/operators/concatenationParser.h" line="+29"/>
         <source>Unexpected token</source>
         <translation>Token inattendu</translation>
     </message>
@@ -57,12 +57,14 @@
         <translation>Attendu &quot;%1&quot;, obtenu &quot;%2&quot;</translation>
     </message>
     <message>
+        <location filename="../../qrtext/include/qrtext/core/types/any.h" line="+28"/>
         <source>any</source>
-        <translation type="vanished">tout</translation>
+        <translation>tout</translation>
     </message>
     <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/nil.h" line="+28"/>
         <source>nil</source>
-        <translation type="vanished">nil</translation>
+        <translation>nil</translation>
     </message>
     <message>
         <location filename="../../qrtext/src/core/semantics/semanticAnalyzer.cpp" line="+68"/>
@@ -148,12 +150,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location filename="../../qrtext/include/qrtext/lua/types/string.h" line="+28"/>
+        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="+66"/>
         <source>string</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location filename="../../qrtext/src/lua/luaLexer.cpp" line="+5"/>
         <source>integer literal</source>
         <translation type="unfinished"></translation>
     </message>
@@ -241,6 +244,31 @@
         <location line="+20"/>
         <source>Undeclared identifier: %1</source>
         <translation>Identificateur non déclaré : %1</translation>
+    </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/boolean.h" line="+28"/>
+        <source>boolean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/float.h" line="+28"/>
+        <source>float</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/integer.h" line="+28"/>
+        <source>integer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/number.h" line="+28"/>
+        <source>number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../qrtext/include/qrtext/lua/types/table.h" line="+44"/>
+        <source>table[%1]</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

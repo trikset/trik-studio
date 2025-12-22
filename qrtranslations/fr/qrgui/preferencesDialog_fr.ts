@@ -4,7 +4,7 @@
 <context>
     <name>PreferencesBehaviourPage</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="+23"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="+23"/>
         <source>User Interface</source>
         <translation>Interface utilisateur</translation>
     </message>
@@ -69,7 +69,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+117"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+117"/>
         <source>&lt;System Language&gt;</source>
         <translation>&lt;Langage système&gt;</translation>
     </message>
@@ -77,7 +77,7 @@
 <context>
     <name>PreferencesDebuggerPage</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/debuggerPage.ui" line="+9"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/debuggerPage.ui" line="+9"/>
         <source>Presentation</source>
         <translation>Présentation</translation>
     </message>
@@ -95,7 +95,7 @@
 <context>
     <name>PreferencesDialog</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesDialog.ui" line="+32"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.ui" line="+32"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
@@ -128,7 +128,7 @@
 <context>
     <name>PreferencesEditorPage</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="+24"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/editorPage.ui" line="+24"/>
         <source>Font</source>
         <translation>Police</translation>
     </message>
@@ -273,7 +273,7 @@
 <context>
     <name>PreferencesFeaturesPage</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/featuresPage.ui" line="+23"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/featuresPage.ui" line="+23"/>
         <source>Element controls</source>
         <translation>Éléments de commande</translation>
     </message>
@@ -307,7 +307,7 @@
 <context>
     <name>PreferencesMiscellaneousPage</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/miscellaneousPage.ui" line="+109"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/miscellaneousPage.ui" line="+109"/>
         <source>Graphics</source>
         <translation>Graphes</translation>
     </message>
@@ -352,7 +352,7 @@
         <translation>Taille</translation>
     </message>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesPages/miscellaneousPage.cpp" line="+57"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/miscellaneousPage.cpp" line="+57"/>
         <source>Open Directory</source>
         <translation>Ouvrir le répertoire</translation>
     </message>
@@ -360,7 +360,7 @@
 <context>
     <name>qReal::gui::PreferencesDialog</name>
     <message>
-        <location filename="../../qrgui/preferencesDialog/preferencesDialog.cpp" line="+58"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="+58"/>
         <source>Behaviour</source>
         <translation>Comportement</translation>
     </message>

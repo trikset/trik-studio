@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfMasterGenerator.cpp" line="+60"/>
+        <location filename="../../../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfMasterGenerator.cpp" line="+60"/>
         <source>There is no opened diagram</source>
         <translation>Сначала откройте диаграмму</translation>
     </message>
@@ -13,7 +13,7 @@
         <translation type="vanished">/* Внимание: преобразование типа из строки в целое число пока не поддерживается. Пожалуйста, обратитесь к разработчикам с запросом. */ 0</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/lua/ev3LuaPrinter.cpp" line="+821"/>
+        <location filename="../../../../../../plugins/robots/generators/ev3/ev3RbfGenerator/lua/ev3LuaPrinter.cpp" line="+821"/>
         <source>/* Warning: cast from string to numeric type is not supported */ 0</source>
         <translation>/* Внимание: преобразование типа из строки в числовой тип пока не поддерживается. Пожалуйста, обратитесь к разработчикам с запросом. */ 0</translation>
     </message>
@@ -35,7 +35,7 @@
         <translation type="vanished">Генерация (Байткод)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="+34"/>
+        <location filename="../../../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="+34"/>
         <source>Autonomous mode (USB)</source>
         <translation>Автономный режим (USB)</translation>
     </message>

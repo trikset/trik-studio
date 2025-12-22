@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="+26"/>
+        <location filename="../../../../../plugins/robots/editor/trik/generated/elements.h" line="+26"/>
         <source>TrikAnalogSensorBlock</source>
         <translation>Аналоговый Сенсор</translation>
     </message>
@@ -1216,7 +1216,7 @@
         <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+160"/>
+        <location filename="../../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+160"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -1288,7 +1288,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/elements.h" line="-1570"/>
+        <location filename="../../../../../plugins/robots/editor/trik/generated/elements.h" line="-1570"/>
         <source>Hull Number</source>
         <translation>Бортномер</translation>
     </message>
@@ -1317,7 +1317,7 @@
 <context>
     <name>TrikMetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+40"/>
+        <location filename="../../../../../plugins/robots/editor/trik/generated/pluginInterface.cpp" line="+40"/>
         <source>E1</source>
         <translation>E1</translation>
     </message>

@@ -8,7 +8,7 @@
         <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="+884"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="+884"/>
         <source>X:</source>
         <translation>X :</translation>
     </message>
@@ -635,7 +635,7 @@
     </message>
     <message>
         <location line="-938"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -862,7 +862,7 @@
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Le diagramme de comportement du robot</translation>
     </message>
@@ -1171,7 +1171,7 @@
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
         <location line="+1"/>
         <location line="+1"/>
         <location line="+1"/>
@@ -1214,7 +1214,7 @@
         <translation type="obsolete">Corps</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
         <translation type="unfinished">Expression</translation>
     </message>
@@ -1984,7 +1984,7 @@
         <translation type="vanished">4</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+22"/>
+        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+22"/>
         <source>black</source>
         <translation>noire</translation>
     </message>

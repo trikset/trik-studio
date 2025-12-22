@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../qrgui/systemFacade/components/consoleErrorReporter.cpp" line="+26"/>
+        <location filename="../../../qrgui/systemFacade/components/consoleErrorReporter.cpp" line="+26"/>
         <source>Information:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -29,12 +29,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
         <source>Can`t open project file</source>
         <translation>Не могу открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/versionsConverterManager.cpp" line="+114"/>
+        <location filename="../../../qrgui/systemFacade/components/versionsConverterManager.cpp" line="+114"/>
         <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
         <translation>Проект был автоматически пробразован из версии %1 до версии %2. Пожалуйста, проверьте его содержимое.</translation>
     </message>
@@ -67,7 +67,7 @@
 <context>
     <name>qReal::Autosaver</name>
     <message>
-        <location filename="../../qrgui/systemFacade/components/autosaver.cpp" line="+145"/>
+        <location filename="../../../qrgui/systemFacade/components/autosaver.cpp" line="+145"/>
         <location line="+14"/>
         <source>Question</source>
         <translation>Вопрос</translation>
@@ -90,7 +90,7 @@
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>

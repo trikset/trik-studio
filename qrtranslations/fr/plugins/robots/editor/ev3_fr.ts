@@ -4,7 +4,7 @@
 <context>
     <name>Ev3MetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="+204"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="+204"/>
         <source>In</source>
         <translation type="unfinished"></translation>
     </message>
@@ -302,7 +302,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="+26"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/elements.h" line="+26"/>
         <source>Beep</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1258,7 +1258,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="-60"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="-60"/>
         <source>RobotsDiagram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1320,7 +1320,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="-762"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/elements.h" line="-762"/>
         <source>Receiver name</source>
         <translation type="unfinished"></translation>
     </message>

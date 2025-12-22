@@ -202,7 +202,7 @@
         <translation type="vanished">2D модель</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="+60"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="+60"/>
         <source>Root element must be &quot;constraints&quot; tag</source>
         <translation>Корневой элемент должен быть тэгом &quot;constraints&quot;</translation>
     </message>
@@ -303,7 +303,7 @@
         <translation>Атрибут &quot;%1&quot; тэга &quot;%2&quot; не может быть пустым.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+105"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+105"/>
         <source>No such region: %1</source>
         <translation>Нет такого региона: %1</translation>
     </message>
@@ -324,14 +324,14 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
         <location line="-88"/>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
     </message>
@@ -340,7 +340,7 @@
         <translation type="vanished">У объекта &quot;%1&quot; нет свойства &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="-38"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="-38"/>
         <source>Requesting variable value with empty name</source>
         <translation>Запрашивается переменная с пустым именем</translation>
     </message>
@@ -360,12 +360,12 @@
         <translation>У объекта &quot;%1&quot; нет свойства &quot;%2&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/speedPopup.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/speedPopup.cpp" line="+25"/>
         <source>Speed:&amp;nbsp;&amp;nbsp;&lt;b&gt;%1%&lt;/b&gt;</source>
         <translation>Скорость:&amp;nbsp;&amp;nbsp;&lt;b&gt;%1%&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="-30"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="-30"/>
         <source>Invalid &lt;setState&gt; object type %1</source>
         <translation>Неверный тип объекта %1 в элементе &lt;setState&gt;</translation>
     </message>
@@ -375,7 +375,7 @@
         <translation>Объект %1 не имеет свойства %2</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
         <source>Remove</source>
         <translation type="unfinished">Удалить</translation>
     </message>
@@ -398,7 +398,7 @@
 <context>
     <name>TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="+14"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="+14"/>
         <source>2D Robot Model</source>
         <translation>Двумерная модель</translation>
     </message>
@@ -588,7 +588,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
@@ -601,7 +601,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями, кубами и мячами</translation>
     </message>
@@ -609,7 +609,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+57"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+57"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
     </message>
@@ -617,7 +617,7 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="-141"/>
         <source>Text (T)</source>
         <translation>Текст (Т)</translation>
     </message>
@@ -625,7 +625,7 @@
 <context>
     <name>twoDModel::items::CubeItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+62"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/cubeItem.cpp" line="+62"/>
         <source>Cube (X)</source>
         <translation>Куб (X)</translation>
     </message>
@@ -637,7 +637,7 @@
         <translation type="vanished">Кривая Безье (B)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+64"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/curveItem.cpp" line="+64"/>
         <source>Bezier Curve (Z)</source>
         <translation>Кривая Безье (Z)</translation>
     </message>
@@ -645,7 +645,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
         <source>Ellipse (E)</source>
         <translation>Эллипс (E)</translation>
     </message>
@@ -653,7 +653,7 @@
 <context>
     <name>twoDModel::items::ImageItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+80"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/imageItem.cpp" line="+80"/>
         <source>Image (I)</source>
         <translation>Картинка (I)</translation>
     </message>
@@ -661,7 +661,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
         <source>Line (L)</source>
         <translation>Линия (L)</translation>
     </message>
@@ -669,7 +669,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
         <source>Rectangle (R)</source>
         <translation>Прямоугольник (R)</translation>
     </message>
@@ -677,7 +677,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+55"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+55"/>
         <source>Can (C)</source>
         <translation>Банка (C)</translation>
     </message>
@@ -685,7 +685,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+61"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+61"/>
         <source>Stylus (S)</source>
         <translation>Стилус (S)</translation>
     </message>
@@ -693,7 +693,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+68"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="+68"/>
         <source>Wall (W)</source>
         <translation>Стена (W)</translation>
     </message>
@@ -701,7 +701,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
@@ -729,7 +729,7 @@
 <context>
     <name>twoDModel::model::SizeUnit</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -772,7 +772,7 @@
 <context>
     <name>twoDModel::model::WorldModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+195"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+195"/>
         <location line="+19"/>
         <location line="+18"/>
         <location line="+18"/>
@@ -796,7 +796,7 @@
 <context>
     <name>twoDModel::robotModel::TwoDRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+74"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/robotModel/twoDRobotModel.cpp" line="+74"/>
         <location line="+3"/>
         <source>2D Model</source>
         <translation>2D модель</translation>
@@ -805,7 +805,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorAmbient</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorAmbient.h" line="+33"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorAmbient.h" line="+33"/>
         <source>EV3 color sensor (ambient)</source>
         <translation>Датчик цвета EV3 (рассеянный)</translation>
     </message>
@@ -813,7 +813,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorBlue</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorBlue.h" line="+36"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorBlue.h" line="+36"/>
         <source>Color sensor (blue)</source>
         <translation>Сенсор цвета (синий)</translation>
     </message>
@@ -821,7 +821,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorFull</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorFull.h" line="+37"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorFull.h" line="+37"/>
         <source>Color sensor (full)</source>
         <translation>Сенсор цвета (распознавание цветов)</translation>
     </message>
@@ -829,7 +829,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorGreen</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorGreen.h" line="+36"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorGreen.h" line="+36"/>
         <source>Color sensor (green)</source>
         <translation>Сенсор цвета (зеленый)</translation>
     </message>
@@ -837,7 +837,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorPassive</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorPassive.h" line="+37"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorPassive.h" line="+37"/>
         <source>Color sensor (passive)</source>
         <translation>Сенсор цвета (пассивный)</translation>
     </message>
@@ -845,7 +845,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorRaw</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRaw.h" line="+35"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRaw.h" line="+35"/>
         <source>Color sensor (raw)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -853,7 +853,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorRed</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRed.h" line="+36"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRed.h" line="+36"/>
         <source>Color sensor (red)</source>
         <translation>Сенсор цвета (красный)</translation>
     </message>
@@ -861,7 +861,7 @@
 <context>
     <name>twoDModel::robotModel::parts::ColorSensorReflected</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorReflected.h" line="+33"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorReflected.h" line="+33"/>
         <source>EV3 color sensor (reflected)</source>
         <translation>Датчик цвета EV3 (отраженный)</translation>
     </message>
@@ -869,7 +869,7 @@
 <context>
     <name>twoDModel::robotModel::parts::Marker</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/marker.h" line="+37"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/marker.h" line="+37"/>
         <source>Marker</source>
         <translation>Маркер</translation>
     </message>
@@ -877,7 +877,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
         <source>Hand dragging mode</source>
         <translation>Режим таскания сцены</translation>
     </message>
@@ -919,7 +919,7 @@
 <context>
     <name>twoDModel::view::ColorItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+97"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+97"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
@@ -1001,7 +1001,7 @@
 <context>
     <name>twoDModel::view::DetailsTab</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+38"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/detailsTab.cpp" line="+38"/>
         <source>Display</source>
         <translation>Дисплей</translation>
     </message>
@@ -1034,7 +1034,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+30"/>
         <source>Grid</source>
         <translation>Сетка</translation>
     </message>
@@ -1042,7 +1042,7 @@
 <context>
     <name>twoDModel::view::ImageItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+58"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/imageItemPopup.cpp" line="+58"/>
         <source>Image will be packed into save file. Warning: this will increase save file size.</source>
         <translation>Картинка будет запакована в проект. Внимание: это значительно увеличит размер файла сохранения.</translation>
     </message>
@@ -1080,7 +1080,7 @@
 <context>
     <name>twoDModel::view::Palette</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/palette.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/palette.cpp" line="+25"/>
         <source>Cursor (N)</source>
         <translation>Курсор (N)</translation>
     </message>
@@ -1088,7 +1088,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+75"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+75"/>
         <source>Camera folowing robot: %1</source>
         <translation>Следовать за роботом: %1</translation>
     </message>
@@ -1121,7 +1121,7 @@
 <context>
     <name>twoDModel::view::SpeedPopup</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/parts/speedPopup.cpp" line="+5"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/speedPopup.cpp" line="+5"/>
         <source>Reset to default</source>
         <translation>По умолчанию</translation>
     </message>
@@ -1133,7 +1133,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+811"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+811"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1166,7 +1166,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+353"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+353"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>

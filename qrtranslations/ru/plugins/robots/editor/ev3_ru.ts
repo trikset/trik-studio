@@ -4,7 +4,7 @@
 <context>
     <name>Ev3MetamodelPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="+204"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="+204"/>
         <source>In</source>
         <translation>Входной</translation>
     </message>
@@ -306,7 +306,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="+26"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/elements.h" line="+26"/>
         <source>Beep</source>
         <translation>Гудок</translation>
     </message>
@@ -1262,7 +1262,7 @@
         <translation>Ждать, пока не сработает датчик касания. Параметром указывается номер порта, к которому подключен датчик. Допустимые значения: 1, 2, 3, 4.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="-60"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/pluginInterface.cpp" line="-60"/>
         <source>RobotsDiagram</source>
         <translation>Диаграмма поведения робота</translation>
     </message>
@@ -1324,7 +1324,7 @@
 <context>
     <name>QObject::QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/editor/ev3/generated/elements.h" line="-762"/>
+        <location filename="../../../../../plugins/robots/editor/ev3/generated/elements.h" line="-762"/>
         <source>Receiver name</source>
         <translation>Имя получателя</translation>
     </message>

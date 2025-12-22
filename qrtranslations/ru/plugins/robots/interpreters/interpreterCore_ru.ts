@@ -4,7 +4,7 @@
 <context>
     <name>PreferencesRobotSettingsPage</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="+187"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="+187"/>
         <source>Sensors Settings</source>
         <translation>Настройки сенсоров</translation>
     </message>
@@ -67,12 +67,12 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+27"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+27"/>
         <source>TRIK Studio</source>
         <translation>TRIK Studio</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="+63"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="+63"/>
         <source>Blocks</source>
         <translation>Блоки</translation>
     </message>
@@ -87,7 +87,7 @@
         <translation>Графики</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+54"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/customizer.cpp" line="+54"/>
         <source>Subprograms</source>
         <translation>Подпрограммы</translation>
     </message>
@@ -111,7 +111,7 @@
         <translation type="vanished">time</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+32"/>
         <source>Run</source>
         <translation>Выполнить</translation>
     </message>
@@ -166,7 +166,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/exerciseExportManager.cpp" line="+53"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/exerciseExportManager.cpp" line="+53"/>
         <source>Select file to export save to</source>
         <translation>Укажите имя файла, в который будет сохранено упражнение</translation>
     </message>
@@ -176,7 +176,7 @@
         <translation>Файл сохранения TRIK Studio (*.qrs)</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+60"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+60"/>
         <source>%2 has been auto configured to port %1</source>
         <translation>%2 был автоматически сгонфигурирован на порту %1</translation>
     </message>
@@ -189,7 +189,7 @@
 <context>
     <name>interpreterCore::ActionsManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+10"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="+10"/>
         <source>To main page</source>
         <translation>На главную</translation>
     </message>
@@ -207,7 +207,7 @@
 <context>
     <name>interpreterCore::DefaultRobotModel</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/defaultRobotModel.cpp" line="+31"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/defaultRobotModel.cpp" line="+31"/>
         <source>Empty model</source>
         <translation>Пустая модель</translation>
     </message>
@@ -215,7 +215,7 @@
 <context>
     <name>interpreterCore::RobotsPluginFacade</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+159"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/robotsPluginFacade.cpp" line="+159"/>
         <source>Robots</source>
         <translation>Роботы</translation>
     </message>
@@ -247,7 +247,7 @@
 <context>
     <name>interpreterCore::UiManager</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-66"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-66"/>
         <source>Miscellaneous</source>
         <translation>Прочее</translation>
     </message>
@@ -285,7 +285,7 @@
 <context>
     <name>interpreterCore::interpreter::BlockInterpreter</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
         <location line="+74"/>
         <source>No connection to robot</source>
         <translation>Нет соединения с роботом</translation>
@@ -324,7 +324,7 @@
 <context>
     <name>interpreterCore::ui::ExerciseExportDialog</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="+31"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/exerciseExportDialog.cpp" line="+31"/>
         <source>Select non-modifiable parts of exercize</source>
         <translation>Выберите неизменяемые части упражнения</translation>
     </message>
@@ -367,7 +367,7 @@
 <context>
     <name>interpreterCore::ui::ModeStripe</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/modeStripe.cpp" line="+22"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/modeStripe.cpp" line="+22"/>
         <source>press %2 or click here to switch to %3</source>
         <translation>нажмите %2 или кликните здесь для переключения в %3</translation>
     </message>
@@ -375,7 +375,7 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+78"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+78"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Не загружено ни одного плагина с описанием робоплатформы</translation>
     </message>

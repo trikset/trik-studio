@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="+23"/>
+        <location filename="../../../../plugins/tools/updatesChecker/updateVersionDialog.cpp" line="+23"/>
         <source>New updates are available!</source>
         <translation>De nouvelles mises à jour sont disponibles !</translation>
     </message>
@@ -27,7 +27,7 @@
 <context>
     <name>updatesChecker::UpdatesCheckerPlugin</name>
     <message>
-        <location filename="../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="+33"/>
+        <location filename="../../../../plugins/tools/updatesChecker/updatesCheckerPlugin.cpp" line="+33"/>
         <source>Check for updates</source>
         <translation>Vérifier si des mises à jour sont disponibles</translation>
     </message>

@@ -4,7 +4,7 @@
 <context>
     <name>nxt::NxtFlashTool</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+75"/>
+        <location filename="../../../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+75"/>
         <source>Robot is already being flashed</source>
         <translation>Le robot est en train d&apos;être flashé</translation>
     </message>
@@ -165,7 +165,7 @@
 <context>
     <name>nxt::osekC::NxtOsekCGeneratorPlugin</name>
     <message>
-        <location filename="../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+32"/>
+        <location filename="../../../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+32"/>
         <source>Generation (NXT OSEK C)</source>
         <translation>Génération (NXT OSEK C)</translation>
     </message>

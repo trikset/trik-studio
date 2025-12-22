@@ -4,7 +4,7 @@
 <context>
     <name>QtBoolEdit</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="+233"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="+233"/>
         <location line="+10"/>
         <location line="+25"/>
         <source>true</source>
@@ -20,7 +20,7 @@
 <context>
     <name>QtBoolPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+1696"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+1696"/>
         <source>true</source>
         <translation>истина</translation>
     </message>
@@ -33,7 +33,7 @@
 <context>
     <name>QtCharEdit</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="+1700"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="+1700"/>
         <source>Clear Char</source>
         <translation>Очистить</translation>
     </message>
@@ -49,7 +49,7 @@
 <context>
     <name>QtColorPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+4799"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+4799"/>
         <source>Red</source>
         <translation>Красный</translation>
     </message>
@@ -72,7 +72,7 @@
 <context>
     <name>QtCursorDatabase</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-210"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-210"/>
         <source>Arrow</source>
         <translation type="unfinished"></translation>
     </message>
@@ -170,7 +170,7 @@
 <context>
     <name>QtFontEditWidget</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="+209"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qteditorfactory.cpp" line="+209"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -183,7 +183,7 @@
 <context>
     <name>QtFontPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="-350"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="-350"/>
         <source>Family</source>
         <translation>Семейство</translation>
     </message>
@@ -221,7 +221,7 @@
 <context>
     <name>QtKeySequenceEdit</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="+234"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="+234"/>
         <source>Clear Shortcut</source>
         <translation>Очистить</translation>
     </message>
@@ -229,7 +229,7 @@
 <context>
     <name>QtLocalePropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="-3608"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="-3608"/>
         <source>%1, %2</source>
         <translation>%1, %2</translation>
     </message>
@@ -283,7 +283,7 @@
 <context>
     <name>QtPropertyBrowserUtils</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-141"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-141"/>
         <source>[%1, %2, %3] (%4)</source>
         <translation>[%1, %2, %3] (%4)</translation>
     </message>
@@ -296,7 +296,7 @@
 <context>
     <name>QtRectFPropertyManager</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+1701"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertymanager.cpp" line="+1701"/>
         <source>[(%1, %2), %3 x %4]</source>
         <translation>[(%1, %2), %3 x %4]</translation>
     </message>
@@ -422,7 +422,7 @@
 <context>
     <name>QtTreePropertyBrowser</name>
     <message>
-        <location filename="../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qttreepropertybrowser.cpp" line="+478"/>
+        <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qttreepropertybrowser.cpp" line="+478"/>
         <source>Property</source>
         <translation>Свойство</translation>
     </message>
