@@ -19,4 +19,5 @@ install_qt(){
     [ -d $HOME/qtifw ] || env TRIK_QTIFW_INSTALL_DIR="$HOME/qtifw" "$(dirname $(realpath ${BASH_SOURCE[0]}))"/install_qtifw.sh
   fi
   deactivate
+  rm -rf venv
 }
