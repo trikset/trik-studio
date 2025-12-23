@@ -115,6 +115,9 @@ jobs:
         if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_qscintilla2" ]]; then
           rm -rf thirdparty/qscintilla
         fi
+        if [[ "${{ inputs.qmake_extra }}" =~ "+=use_system_box2D" ]]; then
+          rm -rf plugins/robots/thirdparty/Box2D
+        fi
         ls thirdparty
 
     - name: Lint Vera

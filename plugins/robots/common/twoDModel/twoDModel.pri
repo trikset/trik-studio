@@ -13,14 +13,20 @@
 # limitations under the License.
 
 QT += widgets xml svg
+CONFIG *= link_pkgconfig
 
 DEFINES += TWO_D_MODEL_LIBRARY
+links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-controller robots-utils robots-kit-base)
 
-links(qrkernel qrutils qrgui-tool-plugin-interface qrgui-controller robots-utils robots-kit-base trikBox2D)
+!use_system_box2D {
+	links(trikBox2D)
+	includes(plugins/robots/thirdparty/Box2D/Box2D)
+} else {
+	PKGCONFIG *= box2d
+}
 
 includes(plugins/robots/common/kitBase)
 includes(plugins/robots/utils qrtext)
-includes(plugins/robots/thirdparty/Box2D/Box2D)
 
 HEADERS += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.h \

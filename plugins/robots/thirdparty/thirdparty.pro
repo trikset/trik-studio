@@ -17,5 +17,8 @@ TEMPLATE = subdirs
 SUBDIRS += \
 	libusb-1.0 \
 	trikRuntime \
-	Box2D \
 	python \
+	
+!use_system_box2D {
+    SUBDIRS += Box2D
+}
