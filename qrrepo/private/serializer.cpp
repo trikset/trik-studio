@@ -18,6 +18,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QUuid>
 #include <QtCore/QFileInfo>
+#include <QXmlStreamReader>
 
 #include <qrkernel/platformInfo.h>
 #include <qrkernel/exception/exception.h>
@@ -34,6 +35,67 @@ using namespace qrRepo;
 using namespace details;
 using namespace utils;
 using namespace qReal;
+
+namespace  {
+
+QString ensureXmlFieldsOrder(const QString &xmlInput) {
+	if (xmlInput.isEmpty()) {
+		return {};
+	}
+
+	QXmlStreamReader reader(xmlInput);
+	QString result;
+	QXmlStreamWriter writer(&result);
+	writer.setAutoFormatting(false);
+	writer.setAutoFormattingIndent(4);
+	bool first = true;
+
+	while (!reader.atEnd() && !reader.hasError()) {
+		auto token = reader.readNext();
+
+		switch (token) {
+		case QXmlStreamReader::StartElement: {
+			writer.writeStartElement(reader.name().toString());
+			if (first) {
+				writer.setAutoFormatting(true);
+				first = false;
+			}
+			QMap<QString, QString> sortedAttrs;
+			for (auto &&attr : reader.attributes()) {
+				sortedAttrs.insert(attr.name().toString(), attr.value().toString());
+			}
+
+			for (auto it = sortedAttrs.constBegin(); it != sortedAttrs.constEnd(); ++it) {
+				writer.writeAttribute(it.key(), it.value());
+			}
+			break;
+		}
+		case QXmlStreamReader::EndElement:
+		    writer.writeEndElement();
+		    break;
+
+		case QXmlStreamReader::Characters:
+		    if (!reader.isWhitespace()) {
+			writer.writeCharacters(reader.text().toString());
+		    }
+		    break;
+
+		case QXmlStreamReader::Comment:
+		    writer.writeComment(reader.text().toString());
+		    break;
+
+		default:
+		    break;
+		}
+	}
+
+	if (reader.hasError()) {
+		return xmlInput;
+	}
+
+	return result;
+}
+}
 
 const QString unsavedDir = "%1/unsaved/%2";
 
@@ -179,6 +241,11 @@ void Serializer::saveMetaInfo(QHash<QString, QVariant> const &metaInfo) const
 		if (mFileNames.contains(key)) {
 			const QString filePath = mWorkingDir + "/" + key + ".xml";
 			OutFile out(filePath);
+			auto value = ValuesSerializer::serializeQVariant(metaInfo[key]);
+			if (key == "worldModel") {
+				out() << ensureXmlFieldsOrder(value);
+				continue;
+			}
 			out() << ValuesSerializer::serializeQVariant(metaInfo[key]);
 		} else {
 			QDomElement element = document.createElement("info");
