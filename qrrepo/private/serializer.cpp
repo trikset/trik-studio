@@ -18,6 +18,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QUuid>
 #include <QtCore/QFileInfo>
+#include <QXmlStreamReader>
 
 #include <qrkernel/platformInfo.h>
 #include <qrkernel/exception/exception.h>
@@ -35,12 +36,73 @@ using namespace details;
 using namespace utils;
 using namespace qReal;
 
-const QString unsavedDir = "%1/unsaved/%2";
+namespace  {
 
-Serializer::Serializer(const QString &workingFile)
+QString ensureXmlFieldsOrder(const QString &xmlInput) {
+	if (xmlInput.isEmpty()) {
+		return {};
+	}
+
+	QXmlStreamReader reader(xmlInput);
+	QString result;
+	QXmlStreamWriter writer(&result);
+	writer.setAutoFormatting(false);
+	writer.setAutoFormattingIndent(4);
+	bool first = true;
+
+	while (!reader.atEnd() && !reader.hasError()) {
+		auto token = reader.readNext();
+
+		switch (token) {
+		case QXmlStreamReader::StartElement: {
+			writer.writeStartElement(reader.name().toString());
+			if (first) {
+				writer.setAutoFormatting(true);
+				first = false;
+			}
+			QMap<QString, QString> sortedAttrs;
+			for (auto &&attr : reader.attributes()) {
+				sortedAttrs.insert(attr.name().toString(), attr.value().toString());
+			}
+
+			for (auto it = sortedAttrs.constBegin(); it != sortedAttrs.constEnd(); ++it) {
+				writer.writeAttribute(it.key(), it.value());
+			}
+			break;
+		}
+
+		case QXmlStreamReader::EndElement:
+			writer.writeEndElement();
+			break;
+
+		case QXmlStreamReader::Characters:
+			if (!reader.isWhitespace()) {
+				writer.writeCharacters(reader.text().toString());
+			}
+			break;
+
+		case QXmlStreamReader::Comment:
+			writer.writeComment(reader.text().toString());
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	if (reader.hasError()) {
+		return xmlInput;
+	}
+
+	return result;
+}
+}
+const char * const unsavedDir = "%1/unsaved/%2";
+
+Serializer::Serializer(const QString &workingFile) // NOLINT(modernize-pass-by-value)
 	// Syncroniously running instances of QReal can clear temp dirs of each other.
 	// So generating new UUID as temp dir name.
-	: mWorkingDir(unsavedDir.arg(PlatformInfo::invariantSettingsPath("pathToTempFolder")
+	: mWorkingDir(QString(unsavedDir).arg(PlatformInfo::invariantSettingsPath("pathToTempFolder")
 			, QUuid::createUuid().toString()))
 	, mWorkingFile(workingFile)
 {
@@ -146,9 +208,9 @@ void Serializer::loadFromDisk(const QString &currentPath, QHash<qReal::Id, Objec
 	}
 }
 
-void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHash)
+void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHash) // NOLINT(misc-no-recursion)
 {
-	for (const QFileInfo &fileInfo : dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
+	for (auto &&fileInfo : dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
 		const QString path = fileInfo.filePath();
 		if (fileInfo.isDir()) {
 			loadModel(path, objectsHash);
@@ -175,10 +237,16 @@ void Serializer::saveMetaInfo(QHash<QString, QVariant> const &metaInfo) const
 	QDomDocument document;
 	QDomElement root = document.createElement("metaInformation");
 	document.appendChild(root);
-	for (const QString &key : metaInfo.keys()) {
+	const auto &metaInfoKeys = metaInfo.keys();
+	for (auto &&key: metaInfoKeys) {
 		if (mFileNames.contains(key)) {
 			const QString filePath = mWorkingDir + "/" + key + ".xml";
 			OutFile out(filePath);
+			auto value = ValuesSerializer::serializeQVariant(metaInfo[key]);
+			if (key == "worldModel") {
+				out() << ensureXmlFieldsOrder(value);
+				continue;
+			}
 			out() << ValuesSerializer::serializeQVariant(metaInfo[key]);
 		} else {
 			QDomElement element = document.createElement("info");
@@ -225,7 +293,7 @@ QString Serializer::pathToElement(const Id &id) const
 	QString dirName = mWorkingDir;
 
 	QStringList partsList = id.toString().split('/');
-	Q_ASSERT(partsList.size() >=1 && partsList.size() <= 5);
+	Q_ASSERT(!partsList.empty() && partsList.size() <= 5);
 	for (int i = 1; i < partsList.size() - 1; ++i) {
 		dirName += "/" + partsList[i];
 	}
@@ -239,7 +307,7 @@ QString Serializer::createDirectory(const Id &id, bool logical) const
 	dirName += logical ? "/logical" : "/graphical";
 
 	const QStringList partsList = id.toString().split('/');
-	Q_ASSERT(partsList.size() >= 1 && partsList.size() <= 5);
+	Q_ASSERT(!partsList.empty() && partsList.size() <= 5);
 	for (int i = 1; i < partsList.size() - 1; ++i) {
 		dirName += "/" + partsList[i];
 	}
