@@ -96,13 +96,12 @@ QString ensureXmlFieldsOrder(const QString &xmlInput) {
 	return result;
 }
 }
+const char * const unsavedDir = "%1/unsaved/%2";
 
-const QString unsavedDir = "%1/unsaved/%2";
-
-Serializer::Serializer(const QString &workingFile)
+Serializer::Serializer(const QString &workingFile) // NOLINT(modernize-pass-by-value)
 	// Syncroniously running instances of QReal can clear temp dirs of each other.
 	// So generating new UUID as temp dir name.
-	: mWorkingDir(unsavedDir.arg(PlatformInfo::invariantSettingsPath("pathToTempFolder")
+	: mWorkingDir(QString(unsavedDir).arg(PlatformInfo::invariantSettingsPath("pathToTempFolder")
 			, QUuid::createUuid().toString()))
 	, mWorkingFile(workingFile)
 {
@@ -208,9 +207,9 @@ void Serializer::loadFromDisk(const QString &currentPath, QHash<qReal::Id, Objec
 	}
 }
 
-void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHash)
+void Serializer::loadModel(const QDir &dir, QHash<qReal::Id, Object*> &objectsHash) // NOLINT(misc-no-recursion)
 {
-	for (const QFileInfo &fileInfo : dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
+	for (auto &&fileInfo : dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot)) {
 		const QString path = fileInfo.filePath();
 		if (fileInfo.isDir()) {
 			loadModel(path, objectsHash);
@@ -237,7 +236,8 @@ void Serializer::saveMetaInfo(QHash<QString, QVariant> const &metaInfo) const
 	QDomDocument document;
 	QDomElement root = document.createElement("metaInformation");
 	document.appendChild(root);
-	for (const QString &key : metaInfo.keys()) {
+	const auto &metaInfoKeys = metaInfo.keys();
+	for (auto &&key: metaInfoKeys) {
 		if (mFileNames.contains(key)) {
 			const QString filePath = mWorkingDir + "/" + key + ".xml";
 			OutFile out(filePath);
@@ -292,7 +292,7 @@ QString Serializer::pathToElement(const Id &id) const
 	QString dirName = mWorkingDir;
 
 	QStringList partsList = id.toString().split('/');
-	Q_ASSERT(partsList.size() >=1 && partsList.size() <= 5);
+	Q_ASSERT(!partsList.empty() && partsList.size() <= 5);
 	for (int i = 1; i < partsList.size() - 1; ++i) {
 		dirName += "/" + partsList[i];
 	}
@@ -306,7 +306,7 @@ QString Serializer::createDirectory(const Id &id, bool logical) const
 	dirName += logical ? "/logical" : "/graphical";
 
 	const QStringList partsList = id.toString().split('/');
-	Q_ASSERT(partsList.size() >= 1 && partsList.size() <= 5);
+	Q_ASSERT(!partsList.empty() && partsList.size() <= 5);
 	for (int i = 1; i < partsList.size() - 1; ++i) {
 		dirName += "/" + partsList[i];
 	}
