@@ -70,22 +70,23 @@ QString ensureXmlFieldsOrder(const QString &xmlInput) {
 			}
 			break;
 		}
+
 		case QXmlStreamReader::EndElement:
-		    writer.writeEndElement();
-		    break;
+			writer.writeEndElement();
+			break;
 
 		case QXmlStreamReader::Characters:
-		    if (!reader.isWhitespace()) {
-			writer.writeCharacters(reader.text().toString());
-		    }
-		    break;
+			if (!reader.isWhitespace()) {
+				writer.writeCharacters(reader.text().toString());
+			}
+			break;
 
 		case QXmlStreamReader::Comment:
-		    writer.writeComment(reader.text().toString());
-		    break;
+			writer.writeComment(reader.text().toString());
+			break;
 
 		default:
-		    break;
+			break;
 		}
 	}
 
