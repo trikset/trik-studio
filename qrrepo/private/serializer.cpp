@@ -36,67 +36,6 @@ using namespace details;
 using namespace utils;
 using namespace qReal;
 
-namespace  {
-
-QString ensureXmlFieldsOrder(const QString &xmlInput) {
-	if (xmlInput.isEmpty()) {
-		return {};
-	}
-
-	QXmlStreamReader reader(xmlInput);
-	QString result;
-	QXmlStreamWriter writer(&result);
-	writer.setAutoFormatting(false);
-	writer.setAutoFormattingIndent(4);
-	bool first = true;
-
-	while (!reader.atEnd() && !reader.hasError()) {
-		auto token = reader.readNext();
-
-		switch (token) {
-		case QXmlStreamReader::StartElement: {
-			writer.writeStartElement(reader.name().toString());
-			if (first) {
-				writer.setAutoFormatting(true);
-				first = false;
-			}
-			QMap<QString, QString> sortedAttrs;
-			for (auto &&attr : reader.attributes()) {
-				sortedAttrs.insert(attr.name().toString(), attr.value().toString());
-			}
-
-			for (auto it = sortedAttrs.constBegin(); it != sortedAttrs.constEnd(); ++it) {
-				writer.writeAttribute(it.key(), it.value());
-			}
-			break;
-		}
-
-		case QXmlStreamReader::EndElement:
-			writer.writeEndElement();
-			break;
-
-		case QXmlStreamReader::Characters:
-			if (!reader.isWhitespace()) {
-				writer.writeCharacters(reader.text().toString());
-			}
-			break;
-
-		case QXmlStreamReader::Comment:
-			writer.writeComment(reader.text().toString());
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	if (reader.hasError()) {
-		return xmlInput;
-	}
-
-	return result;
-}
-}
 const char * const unsavedDir = "%1/unsaved/%2";
 
 Serializer::Serializer(const QString &workingFile) // NOLINT(modernize-pass-by-value)
@@ -244,7 +183,7 @@ void Serializer::saveMetaInfo(QHash<QString, QVariant> const &metaInfo) const
 			OutFile out(filePath);
 			auto value = ValuesSerializer::serializeQVariant(metaInfo[key]);
 			if (key == "worldModel") {
-				out() << ensureXmlFieldsOrder(value);
+				out() << xmlUtils::ensureXmlFieldsOrder(value);
 				continue;
 			}
 			out() << ValuesSerializer::serializeQVariant(metaInfo[key]);

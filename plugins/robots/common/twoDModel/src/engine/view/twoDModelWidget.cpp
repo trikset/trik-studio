@@ -536,7 +536,7 @@ void TwoDModelWidget::saveWorldModel()
 
 	utils::OutFile saveFile(saveFileName);
 	saveFile() << "<?xml version='1.0' encoding='utf-8'?>\n";
-	saveFile() << save.toString(4);
+	saveFile() << xmlUtils::ensureXmlFieldsOrder(save.toString(4));
 }
 
 void TwoDModelWidget::loadWorldModel()
