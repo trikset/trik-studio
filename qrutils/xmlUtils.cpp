@@ -16,6 +16,7 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
+#include <QXmlStreamReader>
 
 using namespace utils;
 
@@ -24,17 +25,77 @@ QDomDocument xmlUtils::loadDocument(const QString &fileName, QString *errorMessa
 	QFile file(fileName);
 	if (!file.open(QIODevice::ReadOnly)) {
 		qWarning() << "Cannot open" << fileName << "for reading";
-		return QDomDocument();
+		return {};
 	}
 
 	QDomDocument doc;
 	if (!doc.setContent(&file, false, errorMessage, errorLine, errorColumn)) {
 		file.close();
-		return QDomDocument();
+		return {};
 	}
 
 	file.close();
 	return doc;
+}
+
+QString xmlUtils::ensureXmlFieldsOrder(const QString &xmlInput)
+{
+	if (xmlInput.isEmpty()) {
+		return {};
+	}
+
+	QXmlStreamReader reader(xmlInput);
+	QString result;
+	QXmlStreamWriter writer(&result);
+	writer.setAutoFormatting(false);
+	writer.setAutoFormattingIndent(4);
+	bool first = true;
+
+	while (!reader.atEnd() && !reader.hasError()) {
+		auto token = reader.readNext();
+
+		switch (token) {
+		case QXmlStreamReader::StartElement: {
+			writer.writeStartElement(reader.name().toString());
+			if (first) {
+				writer.setAutoFormatting(true);
+				first = false;
+			}
+			QMap<QString, QString> sortedAttrs;
+			for (auto &&attr : reader.attributes()) {
+				sortedAttrs.insert(attr.name().toString(), attr.value().toString());
+			}
+
+			for (auto it = sortedAttrs.constBegin(); it != sortedAttrs.constEnd(); ++it) {
+				writer.writeAttribute(it.key(), it.value());
+			}
+			break;
+		}
+
+		case QXmlStreamReader::EndElement:
+			writer.writeEndElement();
+			break;
+
+		case QXmlStreamReader::Characters:
+			if (!reader.isWhitespace()) {
+				writer.writeCharacters(reader.text().toString());
+			}
+			break;
+
+		case QXmlStreamReader::Comment:
+			writer.writeComment(reader.text().toString());
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	if (reader.hasError()) {
+		return xmlInput;
+	}
+
+	return result;
 }
 
 QDomDocument xmlUtils::loadDocumentWithConversion(const QString &loadFileName

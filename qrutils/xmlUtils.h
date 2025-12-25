@@ -27,6 +27,7 @@ public:
 		, QString *errorMessage = nullptr, int *errorLine = nullptr, int *errorColumn = nullptr);
 	static QDomDocument loadDocumentWithConversion(const QString &fileName
 		, QString *errorMessage = nullptr, int *errorLine = nullptr, int *errorColumn = nullptr);
+	static QString ensureXmlFieldsOrder(const QString &xmlInput);
 };
 
 }
