@@ -1548,7 +1548,7 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
-        <translation type="unfinished">Выражение</translation>
+        <translation>Выражение</translation>
     </message>
     <message>
         <location line="+201"/>

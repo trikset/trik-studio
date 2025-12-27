@@ -64,7 +64,7 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+3"/>
         <source>Do not run the interpretation in any mode, this is a parameter that is only used to generate a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не запускайте интерпретацию ни в каком режиме, этот параметр используется только для создания файла.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -93,7 +93,7 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+3"/>
         <source>Close the window and exit after diagram/script finishes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть окно и выйти после завершения диаграммы/скрипта.</translation>
     </message>
     <message>
         <location line="+2"/>

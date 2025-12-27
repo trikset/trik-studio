@@ -16,7 +16,7 @@
     <message>
         <location line="+15"/>
         <source>ts</source>
-        <translation type="unfinished"></translation>
+        <translation>ts</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/parts/rangeSensor.h" line="+31"/>
         <source>Sonar sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Датчик сонара</translation>
     </message>
 </context>
 </TS>

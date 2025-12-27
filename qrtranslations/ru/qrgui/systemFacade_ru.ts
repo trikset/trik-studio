@@ -6,12 +6,12 @@
     <message>
         <location filename="../../../qrgui/systemFacade/components/consoleErrorReporter.cpp" line="+26"/>
         <source>Information:</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация:</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Warning:</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение:</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -21,12 +21,12 @@
     <message>
         <location line="+8"/>
         <source>Critical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Критическая ошибка:</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Bubble:</source>
-        <translation type="unfinished"></translation>
+        <translation>Всплывающее окно:</translation>
     </message>
     <message>
         <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>

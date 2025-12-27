@@ -6,17 +6,17 @@
     <message>
         <location filename="../../../../../plugins/robots/common/ev3Kit/src/blocks/details/ev3ReadRGBBlock.cpp" line="+43"/>
         <source>Sensor reading should consist of three components</source>
-        <translation type="unfinished"></translation>
+        <translation>Показания датчика должны состоять из трех компонентов</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Sensor reading failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось получить показания датчика</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Color raw sensor is not configured on port %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Сырой датчик цвета не настроен на порту %2</translation>
     </message>
 </context>
 <context>
@@ -64,7 +64,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3ACIRSeeker.h" line="+27"/>
         <source>NXT IRSeeker V2 (AC)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT IRSeeker V2 (AC)</translation>
     </message>
 </context>
 <context>
@@ -80,7 +80,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/ev3Kit/include/ev3Kit/robotModel/parts/ev3DCIRSeeker.h" line="+27"/>
         <source>NXT IRSeeker V2 (DC)</source>
-        <translation type="unfinished"></translation>
+        <translation>NXT IRSeeker V2 (DC)</translation>
     </message>
 </context>
 <context>

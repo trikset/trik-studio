@@ -180,7 +180,7 @@
     <message>
         <location line="+0"/>
         <source>Comma-Separated Values Files (*.csv)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы значений, разделённых запятыми (*.csv)</translation>
     </message>
     <message>
         <location line="+106"/>

@@ -712,17 +712,17 @@
     <message>
         <location line="+14"/>
         <source>Read Lidar To Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Считать данные лидара в переменную</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Assigns a value from lidar to a given variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Присваивает значение из лидара указанной переменной.</translation>
     </message>
     <message>
         <location line="+31"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location line="+357"/>

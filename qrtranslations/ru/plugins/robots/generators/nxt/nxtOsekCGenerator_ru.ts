@@ -84,7 +84,7 @@
     <message>
         <location line="+2"/>
         <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
-        <translation type="unfinished"></translation>
+        <translation>Если вы используете GNU/Linux, посетите https://help.trikset.com/nxt/run-upload-programs, чтобы получить инструкции</translation>
     </message>
     <message>
         <location line="+41"/>

@@ -6,12 +6,12 @@
     <message>
         <location filename="../../../../qrgui/plugins/pluginManager/qrsMetamodelLoader.cpp" line="+598"/>
         <source>Root node for diagram %1 (which is %2) does not exist!</source>
-        <translation type="unfinished"></translation>
+        <translation>Корневой узел диаграммы %1 (который является %2) не существует!</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Name should contain only latin letters, digits, spaces and underscores and should start with latin letter or underscore</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя должно содержать только латинские буквы, цифры, пробелы и подчёркивания, а также начинаться с латинской буквы или подчёркивания</translation>
     </message>
 </context>
 <context>
@@ -34,32 +34,32 @@
     <message>
         <location line="-438"/>
         <source>Incorrect label type</source>
-        <translation type="unfinished"></translation>
+        <translation>Некорректный тип метки</translation>
     </message>
     <message>
         <location line="+433"/>
         <source>Name should not be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя не должно быть пустым</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Port type %1 not declared in metamodel</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип порта %1 не объявлен в метамодели</translation>
     </message>
     <message>
         <location line="+34"/>
         <source>Unknown link style type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип стиля связи %1</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Unknown link shape type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип формы связи %1</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>%1 is not a valid integer number</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 не является допустимым целым числом</translation>
     </message>
 </context>
 <context>
@@ -67,12 +67,12 @@
     <message>
         <location filename="../../../../qrgui/plugins/pluginManager/qrsMetamodelSaver.cpp" line="+389"/>
         <source>Unknown link style type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип стиля связи %1</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Unknown link shape type %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный тип формы связи %1</translation>
     </message>
 </context>
 </TS>

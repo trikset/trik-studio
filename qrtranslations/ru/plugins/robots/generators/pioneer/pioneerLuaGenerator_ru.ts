@@ -11,7 +11,7 @@
     <message>
         <location line="+64"/>
         <source>Base station connection mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим подключения базовой станции:</translation>
     </message>
     <message>
         <source>Use &quot;controller.py&quot; to upload and run programs</source>
@@ -279,37 +279,37 @@
     <message>
         <location line="+97"/>
         <source>Choose robot`s mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите режим робота</translation>
     </message>
     <message>
         <location line="+21"/>
         <source>Robot`s IP-address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-адрес робота</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Robot`s port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт робота</translation>
     </message>
     <message>
         <location line="+95"/>
         <source>Sorry, but uploading works only on Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините, загрузка работает только на Windows</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>site</source>
-        <translation type="unfinished"></translation>
+        <translation>сайте</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Please download uploader from </source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, скачайте загрузчик с </translation>
     </message>
     <message>
         <location line="+28"/>
         <source>Exit code </source>
-        <translation type="unfinished"></translation>
+        <translation>Код завершения </translation>
     </message>
     <message>
         <source>Run program on a Pioneer</source>

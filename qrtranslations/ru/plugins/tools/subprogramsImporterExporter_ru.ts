@@ -108,7 +108,7 @@
     <message>
         <location line="+145"/>
         <source>Clear the collection</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить коллекцию</translation>
     </message>
     <message>
         <location line="+1"/>

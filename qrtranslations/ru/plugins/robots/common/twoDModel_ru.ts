@@ -377,22 +377,22 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Edit</source>
-        <translation type="unfinished">Редактировать</translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -847,7 +847,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/include/twoDModel/robotModel/parts/colorSensorRaw.h" line="+35"/>
         <source>Color sensor (raw)</source>
-        <translation type="unfinished"></translation>
+        <translation>Датчик цвета (сырой)</translation>
     </message>
 </context>
 <context>
