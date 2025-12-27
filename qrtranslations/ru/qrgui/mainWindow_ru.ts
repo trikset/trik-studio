@@ -879,7 +879,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+50"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Не получилось открыть %1</translation>
+        <translation>Не удалось открыть %1</translation>
     </message>
     <message>
         <location line="+195"/>

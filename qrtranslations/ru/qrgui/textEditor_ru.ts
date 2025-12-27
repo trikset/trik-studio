@@ -41,12 +41,12 @@
     <message>
         <location line="+18"/>
         <source>PascalABC Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходный файл на языке PascalABC</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Lua Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Исходный файл на языке Lua</translation>
     </message>
 </context>
 <context>

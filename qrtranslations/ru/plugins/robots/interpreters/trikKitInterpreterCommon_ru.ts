@@ -158,7 +158,8 @@
         <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+28"/>
         <source>&apos;%1&apos; is disabled
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;%1&apos; отключен
+</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -219,12 +220,12 @@
     <message>
         <location line="+31"/>
         <source>No configured scalar sensor on port: %1</source>
-        <translation type="unfinished">Не найден скалярный сенсор на порту: %1</translation>
+        <translation>Не настроен скалярный датчик на порту: %1</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>No configured lidar on port: %1</source>
-        <translation type="unfinished">Не найден скалярный лидар на порту: %1</translation>
+        <translation>Не настроен лидар на порту: %1</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -244,7 +245,7 @@
     <message>
         <location line="+19"/>
         <source>No configured ColorSensor on port: %1</source>
-        <translation type="unfinished">Не найден сконфигурированный сенсор цвета на порту: %1</translation>
+        <translation>Не настроен датчик цвета на порту: %1</translation>
     </message>
     <message>
         <location line="+10"/>

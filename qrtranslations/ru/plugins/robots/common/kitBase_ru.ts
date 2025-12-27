@@ -139,7 +139,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRaw.h" line="+29"/>
         <source>EV3 color sensor (raw)</source>
-        <translation type="unfinished"></translation>
+        <translation>Датчик цвета EV3 (сырой)</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/communicator.h" line="+29"/>
         <source>Communicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Коммуникатор</translation>
     </message>
 </context>
 <context>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/lidarSensor.h" line="+29"/>
         <source>Lidar</source>
-        <translation type="unfinished">Лидар</translation>
+        <translation>Лидар</translation>
     </message>
 </context>
 <context>
@@ -219,7 +219,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/motorsAggregator.h" line="+29"/>
         <source>Motors aggregator</source>
-        <translation type="unfinished"></translation>
+        <translation>Агрегатор моторов</translation>
     </message>
 </context>
 <context>

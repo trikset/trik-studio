@@ -74,97 +74,97 @@
     <message>
         <location filename="../../../qrgui/thirdparty/qt-solutions/qtpropertybrowser/src/qtpropertybrowserutils.cpp" line="-210"/>
         <source>Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Стрелка</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Up Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Стрелка вверх</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Cross</source>
-        <translation type="unfinished"></translation>
+        <translation>Крест</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидание</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>IBeam</source>
-        <translation type="unfinished"></translation>
+        <translation>Курсор в виде буквы I</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Size Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение размера по вертикали</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Size Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение размера по горизонтали</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Size Backslash</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение размера по диагонали (обратный слеш)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Size Slash</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение размера по диагонали (прямой слеш)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Size All</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменение размера во всех направлениях</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Blank</source>
-        <translation type="unfinished"></translation>
+        <translation>Пусто</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Split Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Вертикальное разделение</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Split Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Горизонтальное разделение</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Pointing Hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Указывающая рука</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Forbidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрещено</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Open Hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытая рука</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Closed Hand</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрытая рука</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Что это такое</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Занято</translation>
     </message>
 </context>
 <context>
