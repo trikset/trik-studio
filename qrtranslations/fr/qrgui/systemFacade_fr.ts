@@ -6,12 +6,12 @@
     <message>
         <location filename="../../../qrgui/systemFacade/components/consoleErrorReporter.cpp" line="+26"/>
         <source>Information:</source>
-        <translation type="unfinished"></translation>
+        <translation>Informations :</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Warning:</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement :</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -21,22 +21,22 @@
     <message>
         <location line="+8"/>
         <source>Critical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Critique :</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Bubble:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulle :</translation>
     </message>
     <message>
         <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
         <source>Can`t open project file</source>
-        <translation type="unfinished">Le fichier du projet ne peut pas être ouvert</translation>
+        <translation>Impossible d&apos;ouvrir le fichier du projet</translation>
     </message>
     <message>
         <location filename="../../../qrgui/systemFacade/components/versionsConverterManager.cpp" line="+114"/>
         <source>Project was automaticly converted from version %1 to version %2. Please check its contents.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le projet a été automatiquement converti de la version %1 à la version %2. Veuillez en vérifier le contenu.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -92,18 +92,18 @@
     <message>
         <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
         <source>Open project</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le projet</translation>
     </message>
     <message>
         <location line="+60"/>
         <location line="+7"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location line="-7"/>
         <source>Cannot open file, please try with another one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir le fichier, veuillez en essayer un autre.</translation>
     </message>
     <message>
         <location line="+35"/>

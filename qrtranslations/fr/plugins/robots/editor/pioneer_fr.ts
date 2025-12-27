@@ -6,67 +6,67 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="+132"/>
         <source>Concurrent</source>
-        <translation type="unfinished"></translation>
+        <translation>Concurrent</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Guarded</source>
-        <translation type="unfinished"></translation>
+        <translation>Protégé</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Sequential</source>
-        <translation type="unfinished"></translation>
+        <translation>Séquentiel</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>noir</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>bleu</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>vert</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>red</source>
-        <translation type="unfinished"></translation>
+        <translation>rouge</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>white</source>
-        <translation type="unfinished"></translation>
+        <translation>blanc</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>jaune</translation>
     </message>
     <message>
         <location line="-8"/>
         <source>norm</source>
-        <translation type="unfinished"></translation>
+        <translation>normal</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>x-axis</source>
-        <translation type="unfinished"></translation>
+        <translation>selon l&apos;axe x</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>y-axis</source>
-        <translation type="unfinished"></translation>
+        <translation>selon l&apos;axe y</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>z-axis</source>
-        <translation type="unfinished"></translation>
+        <translation>selon l&apos;axe z</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -76,139 +76,139 @@
     <message>
         <location line="+8"/>
         <source>Altfu</source>
-        <translation type="unfinished"></translation>
+        <translation>Altfu</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquet</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>Privé</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Protégé</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Public</source>
-        <translation type="unfinished"></translation>
+        <translation>Public</translation>
     </message>
     <message>
         <location line="-10"/>
         <source>greater</source>
-        <translation type="unfinished"></translation>
+        <translation>supérieur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>less</source>
-        <translation type="unfinished"></translation>
+        <translation>inférieur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>not greater</source>
-        <translation type="unfinished"></translation>
+        <translation>non supérieur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>not less</source>
-        <translation type="unfinished"></translation>
+        <translation>non inférieur</translation>
     </message>
     <message>
         <location line="-8"/>
         <source>Composite</source>
-        <translation type="unfinished"></translation>
+        <translation>Composition</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Shared</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrégation</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Inout</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée-sortie</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Return</source>
-        <translation type="unfinished"></translation>
+        <translation>Retour</translation>
     </message>
     <message>
         <location line="-2"/>
         <location line="+6"/>
         <source>false</source>
-        <translation type="unfinished"></translation>
+        <translation>faux</translation>
     </message>
     <message>
         <location line="-6"/>
         <source>body</source>
-        <translation type="unfinished"></translation>
+        <translation>corps de la boucle</translation>
     </message>
     <message>
         <location line="+0"/>
         <location line="+6"/>
         <source>true</source>
-        <translation type="unfinished"></translation>
+        <translation>vrai</translation>
     </message>
     <message>
         <location line="-18"/>
         <source>float</source>
-        <translation type="unfinished"></translation>
+        <translation>flottant</translation>
     </message>
 </context>
 <context>
@@ -216,47 +216,47 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/pioneer/generated/elements.h" line="+26"/>
         <source>Landing</source>
-        <translation type="unfinished"></translation>
+        <translation>Atterrissage</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Orders quadcopter to land.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordonne au quadricoptère d&apos;atterrir.</translation>
     </message>
     <message>
         <location line="+33"/>
         <source>Takeoff</source>
-        <translation type="unfinished"></translation>
+        <translation>Décollage</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Orders quadcopter to takeoff.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordonne au quadricoptère de décoller.</translation>
     </message>
     <message>
         <location line="+33"/>
         <source>Go to point</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller au point</translation>
     </message>
     <message>
         <location line="+64"/>
         <source>Orders quadcopter to fly to given coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordonne au quadricoptère de voler vers les coordonnées indiquées.</translation>
     </message>
     <message>
         <location line="-55"/>
         <source>Latitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitude&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Longitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitude&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Altitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitude&#xa0;:</translation>
     </message>
     <message>
         <location line="+96"/>
@@ -264,47 +264,47 @@
         <location line="+1"/>
         <location line="+496"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location line="-570"/>
         <source>Altitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Altitude</translation>
     </message>
     <message>
         <location line="-47"/>
         <source>Orders quadcopter to fly to given GPS coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordonne au quadricoptère de voler vers les coordonnées GPS indiquées.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>50</source>
-        <translation type="unfinished"></translation>
+        <translation>50</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Latitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitude</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>600859810</source>
-        <translation type="unfinished"></translation>
+        <translation>600859810</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Longitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitude</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>304206500</source>
-        <translation type="unfinished"></translation>
+        <translation>304206500</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Go to local point</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller au point (CSL)</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -313,7 +313,7 @@
         <location line="+62"/>
         <location line="+62"/>
         <source>X:</source>
-        <translation type="unfinished"></translation>
+        <translation>X&#xa0;:</translation>
     </message>
     <message>
         <location line="-321"/>
@@ -322,7 +322,7 @@
         <location line="+62"/>
         <location line="+62"/>
         <source>Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y&#xa0;:</translation>
     </message>
     <message>
         <location line="-321"/>
@@ -331,12 +331,12 @@
         <location line="+62"/>
         <location line="+62"/>
         <source>Z:</source>
-        <translation type="unfinished"></translation>
+        <translation>Z&#xa0;:</translation>
     </message>
     <message>
         <location line="-321"/>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps&#xa0;:</translation>
     </message>
     <message>
         <location line="+26"/>
@@ -345,7 +345,7 @@
         <location line="+62"/>
         <location line="+62"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location line="-318"/>
@@ -354,7 +354,7 @@
         <location line="+62"/>
         <location line="+62"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location line="-318"/>
@@ -363,264 +363,264 @@
         <location line="+62"/>
         <location line="+62"/>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location line="-308"/>
         <source>GPIO Initialization</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisation GPIO</translation>
     </message>
     <message>
         <location line="+9"/>
         <location line="+578"/>
         <location line="+99"/>
         <source>Pin name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom&#xa0;:</translation>
     </message>
     <message>
         <location line="-669"/>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Pin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Broche&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode&#xa0;:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro de la broche</translation>
     </message>
     <message>
         <location line="+1"/>
         <location line="+560"/>
         <location line="+91"/>
         <source>pin_name</source>
-        <translation type="unfinished"></translation>
+        <translation>nom_broche</translation>
     </message>
     <message>
         <location line="-651"/>
         <location line="+560"/>
         <location line="+91"/>
         <source>Pin name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location line="-650"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get Accelerometer</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire l&apos;accéléromètre</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns accelerometer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne les données de l&apos;accéléromètre du quadricoptère selon les trois axes.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>aX</source>
-        <translation type="unfinished"></translation>
+        <translation>aX</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>aY</source>
-        <translation type="unfinished"></translation>
+        <translation>aY</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>aZ</source>
-        <translation type="unfinished"></translation>
+        <translation>aZ</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get Gyroscope</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire le gyroscope</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns gyroscope.</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne les données du gyroscope du quadricoptère selon les trois axes.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>gX</source>
-        <translation type="unfinished"></translation>
+        <translation>gX</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>gY</source>
-        <translation type="unfinished"></translation>
+        <translation>gY</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>gZ</source>
-        <translation type="unfinished"></translation>
+        <translation>gZ</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get LPS Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtenir la position (CSL)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns position (local positioning system).</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne la position actuelle dans le système de coordonnées local.</translation>
     </message>
     <message>
         <location line="+47"/>
         <location line="+376"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location line="-375"/>
         <source>y</source>
-        <translation type="unfinished"></translation>
+        <translation>y</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>z</source>
-        <translation type="unfinished"></translation>
+        <translation>z</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get LPS Velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire le vecteur vitesse (CSL)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns velocity (local position system).</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne les valeurs actuelles de vitesse dans le système de coordonnées local.</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>velX</source>
-        <translation type="unfinished"></translation>
+        <translation>velX</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>velY</source>
-        <translation type="unfinished"></translation>
+        <translation>velY</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>velZ</source>
-        <translation type="unfinished"></translation>
+        <translation>velZ</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get LPS Yaw</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire l&apos;angle de lacet (CSL)</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns yaw (local position system).</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne l&apos;angle de lacet actuel dans le système de coordonnées local.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Yaw:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacet&#xa0;:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>yaw</source>
-        <translation type="unfinished"></translation>
+        <translation>lacet</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Get Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire les données d&apos;orientation</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns orientation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne les données d&apos;orientation du quadricoptère dans l&apos;espace - roulis, tangage, lacet.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Roll:</source>
-        <translation type="unfinished"></translation>
+        <translation>Roulis&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangage&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Azimuth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacet&#xa0;:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>azimuth</source>
-        <translation type="unfinished"></translation>
+        <translation>lacet</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Azimuth</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacet</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>tangage</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangage</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>roll</source>
-        <translation type="unfinished"></translation>
+        <translation>roulis</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Roll</source>
-        <translation type="unfinished"></translation>
+        <translation>Roulis</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Sets the color of the specified LED on a quadcopter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Définit la couleur de la LED spécifiée sur un quadricoptère.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert&#xa0;:</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Blue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu&#xa0;:</translation>
     </message>
     <message>
         <location line="+25"/>
@@ -628,182 +628,182 @@
         <location line="+2"/>
         <location line="+314"/>
         <source>0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0,0</translation>
     </message>
     <message>
         <location line="-317"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <location line="+92"/>
         <source>Read GPIO</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire la valeur GPIO</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Returns GPIO value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourne la valeur d&apos;état GPIO.</translation>
     </message>
     <message>
         <location line="+51"/>
         <source>Read Range Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Lire le télémètre</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Reads distance from rangefinder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lit les informations du télémètre.</translation>
     </message>
     <message>
         <location line="-38"/>
         <location line="+45"/>
         <source>Variable:</source>
-        <translation type="unfinished"></translation>
+        <translation>Variable&#xa0;:</translation>
     </message>
     <message>
         <location line="+160"/>
         <source>Angle (degrees)</source>
-        <translation type="unfinished"></translation>
+        <translation>Angle (degrés)</translation>
     </message>
     <message>
         <location line="-180"/>
         <location line="+46"/>
         <source>Variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Variable</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>dist</source>
-        <translation type="unfinished"></translation>
+        <translation>dist</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Set GPIO state</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir l&apos;état GPIO</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Set GPIO value in &quot;true/false&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Définit l&apos;état GPIO à &quot;vrai/faux&quot;.</translation>
     </message>
     <message>
         <location line="+43"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Executes given Lua script.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exécute la chaîne donnée en langage Lua sur le quadricoptère.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Command:</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande&#xa0;:</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>print(&apos;Hello&apos;)</source>
-        <translation type="unfinished"></translation>
+        <translation>print(&apos;Bonjour&apos;)</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande</translation>
     </message>
     <message>
         <location line="-403"/>
         <location line="+415"/>
         <source>Yaw</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacet</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Sets yaw for quadcopter</source>
-        <translation type="unfinished"></translation>
+        <translation>Définit le lacet du quadricoptère. Le paramètre &quot;angle&quot; est donné en degrés</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Angle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Angle&#xa0;:</translation>
     </message>
     <message>
         <location line="-210"/>
         <location line="+190"/>
         <source>Evaluate</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculer</translation>
     </message>
     <message>
         <location line="-754"/>
         <source>Create GPIO in settings port.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crée un GPIO sur le port avec les paramètres indiqués.</translation>
     </message>
     <message>
         <location line="+495"/>
         <source>Magnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Aimant</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Controls magnet on a quadcopter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle l&apos;aimant sur un quadricoptère.</translation>
     </message>
     <message>
         <location line="+23"/>
         <location line="+189"/>
         <source>State on</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé</translation>
     </message>
     <message>
         <location line="-178"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Prints given string on a console.</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche la chaîne fournie dans la console.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte&#xa0;:</translation>
     </message>
     <message>
         <location line="+25"/>
         <source>Enter some text here</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisissez un texte ici</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <location line="-142"/>
         <source>Led</source>
-        <translation type="unfinished"></translation>
+        <translation>LED</translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/editor/pioneer/generated/pluginInterface.cpp" line="-42"/>
         <source>RobotsDiagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagramme</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -825,7 +825,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions</translation>
     </message>
 </context>
 <context>
@@ -833,7 +833,7 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/pioneer/generated/elements.h" line="-439"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps</translation>
     </message>
 </context>
 </TS>

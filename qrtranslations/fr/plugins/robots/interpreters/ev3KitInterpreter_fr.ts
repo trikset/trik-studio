@@ -27,22 +27,22 @@
     <message>
         <location line="+22"/>
         <source>Robot&apos;s Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossiers du robot</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>ts</source>
-        <translation type="unfinished"></translation>
+        <translation>ts</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Common folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dossier commun :</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Use common folder for all projects</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser un dossier commun pour tous les projets</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -71,7 +71,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3DisplayWidget.ui" line="+435"/>
         <source>tr(Ev3Display)</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage EV3</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/ev3AdditionalPreferences.cpp" line="+29"/>
         <source>2D robot image:</source>
-        <translation type="unfinished"></translation>
+        <translation>Image 2D du robot :</translation>
     </message>
 </context>
 <context>
@@ -95,7 +95,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (Bluetooth)</source>
-        <translation type="unfinished"></translation>
+        <translation>Interprétation (Bluetooth)</translation>
     </message>
 </context>
 <context>
@@ -110,7 +110,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (USB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Interprétation (USB)</translation>
     </message>
 </context>
 <context>
@@ -118,7 +118,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/ev3KitInterpreter/src/robotModel/real/parts/rangeSensor.h" line="+31"/>
         <source>Sonar sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Capteur de sonar</translation>
     </message>
 </context>
 </TS>

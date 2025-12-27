@@ -135,7 +135,7 @@
         <location line="+5"/>
         <location line="+93"/>
         <source>Block has disappeared!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le bloc a disparu!</translation>
     </message>
     <message>
         <location line="-78"/>
@@ -191,7 +191,7 @@
     <message>
         <location line="+59"/>
         <source>Block has disappeared!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le bloc a disparu!</translation>
     </message>
 </context>
 <context>
@@ -258,27 +258,27 @@
     <message>
         <location filename="../../qrutils/interpreter/blocks/inputBlock.cpp" line="+27"/>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Input value for %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisir la valeur pour %1 :</translation>
     </message>
     <message>
         <location line="+29"/>
         <source>Only one link with &quot;%1&quot; is allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Un seul lien avec &quot;%1&quot; est autorisé</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>One of the outgoing links must be marked with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;un des liens sortants doit être marqué avec &quot;%1&quot;</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Link to the next statement is missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Le lien vers l&apos;instruction suivante est manquant</translation>
     </message>
     <message>
         <source>Control flow break detected, stopping</source>
@@ -287,24 +287,24 @@
     <message>
         <location line="+36"/>
         <source>No outgoing links, please connect this block to something or use Final Node to end program</source>
-        <translation type="unfinished">Aucun lien sortant, s&apos;il vous plait connectez ce bloc à un autre ou bien utilisez un nœud final pour terminer le programme</translation>
+        <translation>Aucun lien sortant, veuillez connecter ce bloc à autre chose ou utiliser le nœud Final pour terminer le programme</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>There should be a maximum of TWO links outgoing from input block</source>
-        <translation type="unfinished"></translation>
+        <translation>Il doit y avoir au maximum DEUX liens sortants depuis le bloc d&apos;entrée</translation>
     </message>
     <message>
         <location line="-63"/>
         <source>Outgoing link is not connected</source>
-        <translation type="unfinished">Le lien sortant n&apos;est pas connecté</translation>
+        <translation>Le lien sortant n&apos;est pas connecté</translation>
     </message>
     <message>
         <location line="+5"/>
         <location line="+4"/>
         <location line="+7"/>
         <source>cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>annuler</translation>
     </message>
     <message>
         <source>Two links marked with &apos;false&apos; found</source>
@@ -313,7 +313,7 @@
     <message>
         <location line="+33"/>
         <source>You must input some value!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez saisir une valeur !</translation>
     </message>
 </context>
 <context>
@@ -444,7 +444,7 @@
     <message>
         <location filename="../../qrutils/widgets/consoleDock.cpp" line="+50"/>
         <source>Reset shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser la console</translation>
     </message>
 </context>
 <context>
@@ -452,12 +452,12 @@
     <message>
         <location filename="../../qrutils/widgets/dirPicker.cpp" line="+33"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <location line="+35"/>
         <source>Select directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner un répertoire</translation>
     </message>
 </context>
 <context>
@@ -465,17 +465,17 @@
     <message>
         <location filename="../../qrutils/widgets/imagePicker.cpp" line="+35"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <location line="+35"/>
         <source>Select image</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner une image</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Images (*.png *.svg *.jpg *.gif *.bmp);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Images (*.png *.svg *.jpg *.gif *.bmp);;Tous les fichiers (*.*)</translation>
     </message>
 </context>
 <context>
@@ -512,12 +512,12 @@
         <location filename="../../qrutils/widgets/searchLinePanel.cpp" line="+134"/>
         <location line="+10"/>
         <source>Enter search text...</source>
-        <translation type="unfinished">Tapez le texte à rechercher...</translation>
+        <translation>Saisissez le texte de recherche...</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>&lt;line&gt;:&lt;column&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ligne&gt;:&lt;colonne&gt;</translation>
     </message>
 </context>
 <context>
@@ -548,97 +548,97 @@
     <message>
         <location filename="../../qrutils/widgets/qRealMessageBox.cpp" line="+30"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Save All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout enregistrer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Yes To All</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui pour tout</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>No To All</source>
-        <translation type="unfinished"></translation>
+        <translation>Non pour tout</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Abandonner</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Retry</source>
-        <translation type="unfinished"></translation>
+        <translation>Réessayer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>NoButton</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de bouton</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Restore Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer les valeurs par défaut</translation>
     </message>
 </context>
 <context>

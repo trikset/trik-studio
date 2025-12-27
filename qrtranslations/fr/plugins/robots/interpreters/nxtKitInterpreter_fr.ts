@@ -11,12 +11,12 @@
     <message>
         <location line="+21"/>
         <source>nxtOSEK Generator Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres du générateur nxtOSEK</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -53,18 +53,19 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+32"/>
         <source>2D robot image:</source>
-        <translation type="unfinished"></translation>
+        <translation>Image du robot en 2D :</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Path to arm-none-eabi:</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin vers arm-none-eabi :</translation>
     </message>
     <message>
         <location line="+23"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT : Le répertoire actuel n&apos;existe pas. 
+Ouvrez le &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;lien&lt;/a&gt; pour obtenir des instructions</translation>
     </message>
 </context>
 <context>

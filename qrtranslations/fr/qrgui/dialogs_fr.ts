@@ -52,37 +52,37 @@
     <message>
         <location filename="../../../qrgui/dialogs/subprogram/dynamicPropertiesDialog.ui" line="+35"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauration de la propriété</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Subprogram name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de la sous-programme :</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Subprogram arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arguments du sous-programme :</translation>
     </message>
     <message>
         <location line="+32"/>
         <source>Add Argument</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un argument</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Subprogram picture:</source>
-        <translation type="unfinished"></translation>
+        <translation>Image :</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Subprogram picture background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fond :</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Save All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout enregistrer</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
     <message>
         <location line="+10"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Étiquette</translation>
     </message>
     <message>
         <location line="+12"/>
@@ -125,7 +125,7 @@
     <message>
         <location line="+30"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligne</translation>
     </message>
     <message>
         <location line="+12"/>
@@ -156,37 +156,37 @@
         <location line="+17"/>
         <location line="+80"/>
         <source>no_arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>pas_de_flèche</translation>
     </message>
     <message>
         <location line="-71"/>
         <location line="+80"/>
         <source>open_arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>flèche_ouverte</translation>
     </message>
     <message>
         <location line="-71"/>
         <location line="+80"/>
         <source>empty_arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>flèche_vide</translation>
     </message>
     <message>
         <location line="-71"/>
         <location line="+80"/>
         <source>filled_arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>flèche_pleine</translation>
     </message>
     <message>
         <location line="-71"/>
         <location line="+80"/>
         <source>empty_rhomb</source>
-        <translation type="unfinished"></translation>
+        <translation>losange_vide</translation>
     </message>
     <message>
         <location line="-71"/>
         <location line="+80"/>
         <source>filled_rhomb</source>
-        <translation type="unfinished"></translation>
+        <translation>losange_plein</translation>
     </message>
     <message>
         <location line="-62"/>
@@ -340,7 +340,7 @@
         <location filename="../../../qrgui/dialogs/metamodelingOnFly/edgePropertiesDialog.cpp" line="+47"/>
         <location filename="../../../qrgui/dialogs/metamodelingOnFly/addNodeDialog.cpp" line="+47"/>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
@@ -419,7 +419,7 @@
     <message>
         <location line="+0"/>
         <source>All required properties should be filled</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les propriétés obligatoires doivent être remplies</translation>
     </message>
     <message>
         <source>All required properties should be filled!</source>
@@ -560,7 +560,7 @@
     <message>
         <location line="+0"/>
         <source>All required properties should be filled</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les propriétés obligatoires doivent être remplies</translation>
     </message>
     <message>
         <source>All required properties should be filled!</source>
@@ -572,64 +572,64 @@
     <message>
         <location filename="../../../qrgui/dialogs/subprogram/dynamicPropertiesDialog.cpp" line="+49"/>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Value</source>
-        <translation type="unfinished">Valeur</translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <location line="+104"/>
         <location line="+15"/>
         <source>Error</source>
-        <translation type="unfinished">Erreur</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>There is already a subprogram with that name</source>
-        <translation type="unfinished"></translation>
+        <translation>Un sous-programme portant ce nom existe déjà</translation>
     </message>
     <message>
         <location line="+187"/>
         <source>Name is not filled in row %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom du paramètre %1 n&apos;est pas renseigné</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Name should start with a letter(row %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nom de l&apos;argument doit commencer par une lettre (ligne %1)</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Value in row %1 is not integer</source>
-        <translation type="unfinished"></translation>
+        <translation>La valeur du paramètre %1 n&apos;est pas un entier</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Value in row %1 is not float</source>
-        <translation type="unfinished"></translation>
+        <translation>La valeur du paramètre %1 n&apos;est pas un nombre</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Duplicate names</source>
-        <translation type="unfinished"></translation>
+        <translation>Noms identiques</translation>
     </message>
     <message>
         <location line="-269"/>
         <location line="+277"/>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
@@ -642,7 +642,7 @@
     <message>
         <location line="+0"/>
         <source>All required properties should be filled</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les propriétés obligatoires doivent être remplies</translation>
     </message>
     <message>
         <source>All required properties should be filled!</source>

@@ -6,139 +6,139 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="+138"/>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Inout</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée-sortie</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Return</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur de retour</translation>
     </message>
     <message>
         <location line="-6"/>
         <location line="+10"/>
         <source>false</source>
-        <translation type="unfinished"></translation>
+        <translation>faux</translation>
     </message>
     <message>
         <location line="-10"/>
         <source>body</source>
-        <translation type="unfinished"></translation>
+        <translation>corps de la boucle</translation>
     </message>
     <message>
         <location line="+0"/>
         <location line="+10"/>
         <source>true</source>
-        <translation type="unfinished"></translation>
+        <translation>vrai</translation>
     </message>
     <message>
         <location line="-6"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <location line="-2"/>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrée</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Escape</source>
-        <translation type="unfinished"></translation>
+        <translation>Échap</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Droite</translation>
     </message>
     <message>
         <location line="-8"/>
         <source>Concurrent</source>
-        <translation type="unfinished"></translation>
+        <translation>En parallèle</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Guarded</source>
-        <translation type="unfinished"></translation>
+        <translation>Avec garde</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Sequential</source>
-        <translation type="unfinished"></translation>
+        <translation>Séquentiel</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>black</source>
-        <translation type="unfinished"></translation>
+        <translation>noir</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>blue</source>
-        <translation type="unfinished"></translation>
+        <translation>bleu</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>green</source>
-        <translation type="unfinished"></translation>
+        <translation>vert</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>red</source>
-        <translation type="unfinished"></translation>
+        <translation>rouge</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>white</source>
-        <translation type="unfinished"></translation>
+        <translation>blanc</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>jaune</translation>
     </message>
     <message>
         <location line="-6"/>
         <source>Composite</source>
-        <translation type="unfinished"></translation>
+        <translation>Composition</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Shared</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrégation</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -148,67 +148,67 @@
     <message>
         <location line="+6"/>
         <source>greater</source>
-        <translation type="unfinished"></translation>
+        <translation>supérieur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>less</source>
-        <translation type="unfinished"></translation>
+        <translation>inférieur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>not greater</source>
-        <translation type="unfinished"></translation>
+        <translation>non supérieur</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>not less</source>
-        <translation type="unfinished"></translation>
+        <translation>non inférieur</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Par paquet</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation>Privé</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Protégé</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Public</source>
-        <translation type="unfinished"></translation>
+        <translation>Public</translation>
     </message>
     <message>
         <location line="-16"/>
         <source>float</source>
-        <translation type="unfinished"></translation>
+        <translation>flottant</translation>
     </message>
     <message>
         <location line="-4"/>
         <source>norm</source>
-        <translation type="unfinished"></translation>
+        <translation>norme</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>x-axis</source>
-        <translation type="unfinished"></translation>
+        <translation>axe des x</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>y-axis</source>
-        <translation type="unfinished"></translation>
+        <translation>axe des y</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>z-axis</source>
-        <translation type="unfinished"></translation>
+        <translation>axe des z</translation>
     </message>
 </context>
 <context>
@@ -216,54 +216,54 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/nxt/generated/elements.h" line="+26"/>
         <source>Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Bip</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Plays on the robot a sound with the fixed frequency. There are two parameters. The first one is a loudness of the sound, the second means if program should wait for sound completion or go to next block right away.</source>
-        <translation type="unfinished"></translation>
+        <translation>Émet un son à fréquence fixe sur le robot. Deux paramètres sont disponibles : le premier correspond au volume du son, le second indique si le programme doit attendre la fin du son avant de passer au bloc suivant ou non.</translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+578"/>
         <location line="+485"/>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume :</translation>
     </message>
     <message>
         <location line="-1055"/>
         <location line="+588"/>
         <source>Wait for Completion:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre la fin :</translation>
     </message>
     <message>
         <location line="-555"/>
         <location line="+582"/>
         <source>50</source>
-        <translation type="unfinished"></translation>
+        <translation>50</translation>
     </message>
     <message>
         <location line="-582"/>
         <location line="+582"/>
         <location line="+475"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <location line="-1056"/>
         <location line="+582"/>
         <source>Wait for Completion</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre la fin</translation>
     </message>
     <message>
         <location line="-571"/>
         <source>Clear Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser l&apos;encodeur</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Nullifies tacho limit of the motors on the given ports.</source>
-        <translation type="unfinished"></translation>
+        <translation>Remet à zéro la valeur du compteur de tours des moteurs sur les ports indiqués.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -271,13 +271,13 @@
         <location line="+56"/>
         <location line="+56"/>
         <source>Ports:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ports :</translation>
     </message>
     <message>
         <location line="-430"/>
         <location line="+462"/>
         <source>A, B, C</source>
-        <translation type="unfinished"></translation>
+        <translation>A, B, C</translation>
     </message>
     <message>
         <location line="-462"/>
@@ -286,41 +286,41 @@
         <location line="+56"/>
         <location line="+53"/>
         <source>Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Ports</translation>
     </message>
     <message>
         <location line="-451"/>
         <source>Draw Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner un cercle</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Draws on the robot screen a circle with the given center and radius.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessine un cercle sur l&apos;écran du robot avec le centre et le rayon indiqués.</translation>
     </message>
     <message>
         <location line="+7"/>
         <location line="+135"/>
         <location line="+54"/>
         <source>X:</source>
-        <translation type="unfinished"></translation>
+        <translation>X :</translation>
     </message>
     <message>
         <location line="-181"/>
         <location line="+135"/>
         <location line="+54"/>
         <source>Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y :</translation>
     </message>
     <message>
         <location line="-181"/>
         <source>Radius:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon :</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -328,234 +328,234 @@
         <location line="+56"/>
         <location line="+71"/>
         <source>Redraw</source>
-        <translation type="unfinished"></translation>
+        <translation>Redessiner</translation>
     </message>
     <message>
         <location line="-196"/>
         <location line="+126"/>
         <location line="+72"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location line="-197"/>
         <location line="+126"/>
         <location line="+72"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location line="-187"/>
         <source>Draw Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner une ligne</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Draws a segment on the robot screen. The parameters specify the ends of the segment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessine un segment sur l&apos;écran du robot. Les paramètres indiquent les extrémités du segment.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>X1:</source>
-        <translation type="unfinished"></translation>
+        <translation>X1 :</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Y1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y1 :</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>X2:</source>
-        <translation type="unfinished"></translation>
+        <translation>X2 :</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Y2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y2 :</translation>
     </message>
     <message>
         <location line="+25"/>
         <source>X1</source>
-        <translation type="unfinished"></translation>
+        <translation>X1</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>X2</source>
-        <translation type="unfinished"></translation>
+        <translation>X2</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Y1</source>
-        <translation type="unfinished"></translation>
+        <translation>Y1</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Y2</source>
-        <translation type="unfinished"></translation>
+        <translation>Y2</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Draw Pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner un pixel</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Draws one pixel in the specified coordinates on the robot screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessine un pixel aux coordonnées spécifiées sur l&apos;écran du robot.</translation>
     </message>
     <message>
         <location line="+52"/>
         <source>Draw Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner un rectangle</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Draws a rectangle on the robot screen. The parameters specify the coordinates of top-left corner, the width and the height of the rectangle.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessine un rectangle sur l&apos;écran du robot. Les paramètres indiquent les coordonnées du coin supérieur gauche, la largeur et la hauteur du rectangle.</translation>
     </message>
     <message>
         <location line="+23"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur :</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur :</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>NxtEngineMovementCommand</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloc moteur de base NXT</translation>
     </message>
     <message>
         <location line="+24"/>
         <location line="+56"/>
         <location line="+56"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <location line="-111"/>
         <location line="+56"/>
         <location line="+56"/>
         <source>B, C</source>
-        <translation type="unfinished"></translation>
+        <translation>B, C</translation>
     </message>
     <message>
         <location line="-111"/>
         <location line="+56"/>
         <location line="+56"/>
         <source>100</source>
-        <translation type="unfinished"></translation>
+        <translation>100</translation>
     </message>
     <message>
         <location line="-112"/>
         <location line="+56"/>
         <location line="+56"/>
         <source>Power (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Puissance (%)</translation>
     </message>
     <message>
         <location line="-101"/>
         <source>Motors Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Moteurs arrière</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Enables motors on the given ports in reverse mode with the given power. Ports are specified with A, B or C letters divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the usual mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Active les moteurs sur les ports indiqués en mode inverse avec la puissance donnée. Les ports sont spécifiés par les lettres A, B ou C, séparées par des virgules. La puissance est indiquée en pourcentage, avec une valeur de -100 à 100 ; si une valeur négative est indiquée, le moteur est activé en mode normal.</translation>
     </message>
     <message>
         <location line="+15"/>
         <location line="+56"/>
         <source>Power:</source>
-        <translation type="unfinished"></translation>
+        <translation>Puissance :</translation>
     </message>
     <message>
         <location line="-55"/>
         <location line="+56"/>
         <location line="+109"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location line="-127"/>
         <source>Motors Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Moteurs avant</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Enables motors on the given ports with the given power. Ports are specified with A, B or C letters divided by commas. The power is specified in percents with the number from -100 to 100, if negative number is specified then the motor is enabled in the reverse mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Active les moteurs sur les ports indiqués avec la puissance donnée. Les ports sont spécifiés par les lettres A, B ou C, séparées par des virgules. La puissance est indiquée en pourcentage, avec une valeur de -100 à 100 ; si une valeur négative est indiquée, le moteur est activé en mode inverse.</translation>
     </message>
     <message>
         <location line="+54"/>
         <source>Stop Motors</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter les moteurs</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Disables motors on the given ports.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactive les moteurs sur les ports indiqués.</translation>
     </message>
     <message>
         <location line="+50"/>
         <source>Play Tone</source>
-        <translation type="unfinished"></translation>
+        <translation>Jouer un ton</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Plays on the robot a sound with the given frequency and duration. This block is similar to the &apos;Beep&apos; block wuth the only difference that here you can specify sound parameters.</source>
-        <translation type="unfinished"></translation>
+        <translation>Joue sur le robot un son avec la fréquence et la durée indiquées. Ce bloc est similaire au bloc &apos;Bip&apos;, à la différence près que vous pouvez ici spécifier les paramètres du son.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Frequency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fréquence :</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Hz</source>
-        <translation type="unfinished"></translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location line="+17"/>
         <location line="+34"/>
         <source>Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée</translation>
     </message>
     <message>
         <location line="-33"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <location line="+33"/>
         <location line="+1"/>
         <source>1000</source>
-        <translation type="unfinished"></translation>
+        <translation>1000</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Fréquence</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>NxtSensorBlock</source>
-        <translation type="unfinished"></translation>
+        <translation>Bloc capteur de base NXT</translation>
     </message>
     <message>
         <location line="+24"/>
@@ -567,37 +567,37 @@
         <location line="+62"/>
         <location line="+47"/>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location line="-473"/>
         <source>Wait for Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre l&apos;appui sur un bouton</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits for press of a button on a brick.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend l&apos;appui sur un bouton du bloc.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Button:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton :</translation>
     </message>
     <message>
         <location line="+24"/>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Wait for Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre la couleur</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the color sensor on the given port will recognize the given color.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que le capteur de couleur sur le port indiqué reconnaisse la couleur spécifiée.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -608,32 +608,32 @@
         <location line="+65"/>
         <location line="+63"/>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port :</translation>
     </message>
     <message>
         <location line="-387"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur :</translation>
     </message>
     <message>
         <location line="+25"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Wait for Color Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre l&apos;intensité de couleur</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the value returned by the color sensor on the given port will be greater or less than the given in the &apos;Intensity&apos; parameter value (the intensity is specified in percents, 0 to 100).</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que la valeur retournée par le capteur de couleur sur le port indiqué soit supérieure ou inférieure à celle du paramètre &apos;Intensité&apos; (l&apos;intensité est indiquée en pourcentage, de 0 à 100).</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensité :</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -642,7 +642,7 @@
         <location line="+72"/>
         <location line="+64"/>
         <source>Sign:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur lue :</translation>
     </message>
     <message>
         <location line="-237"/>
@@ -650,12 +650,12 @@
         <location line="+65"/>
         <location line="+65"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location line="-264"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensité</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -664,97 +664,97 @@
         <location line="+65"/>
         <location line="+62"/>
         <source>Sign</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur lue</translation>
     </message>
     <message>
         <location line="-250"/>
         <source>Wait for Encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre l&apos;encodeur</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the tacho limit of the motor on the given port will reach the value of the &apos;Tacho Limit&apos; parameter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que la limite du tachymètre du moteur sur le port indiqué atteigne la valeur du paramètre &apos;Limite du tachymètre&apos;.</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Tacho Limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite du tachymètre :</translation>
     </message>
     <message>
         <location line="+33"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Wait for Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre la lumière</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the value returned by the light sensor on the given port will be greater or less than the given in the &apos;Percents&apos; parameter value (0 to 100).</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que la valeur retournée par le capteur de lumière sur le port indiqué soit supérieure ou inférieure à celle du paramètre &apos;Pourcentages&apos; (0 à 100).</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Percents:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pourcentages :</translation>
     </message>
     <message>
         <location line="+41"/>
         <source>Percents</source>
-        <translation type="unfinished"></translation>
+        <translation>Pourcentages</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Wait for Sonar Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre la distance du sonar</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the value returned by the ultrasonic sensor on the given port will be greater or less than the given in the &apos;Distance&apos; parameter value (the distance is specified in centimeters, 0 to 255).</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que la valeur retournée par le capteur ultrasonore sur le port indiqué soit supérieure ou inférieure à celle du paramètre &apos;Distance&apos; (la distance est indiquée en centimètres, de 0 à 255).</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance :</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <location line="+34"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Wait for Sound Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre le capteur de son</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the loudness obtained by the sound sensor on the given port will be greater or less than the given value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que le niveau sonore mesuré par le capteur de son sur le port indiqué soit supérieur ou inférieur à la valeur donnée.</translation>
     </message>
     <message>
         <location line="+61"/>
         <source>Wait for Touch Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre le capteur de contact</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Waits till the touch sensor is pressed. The only parameter is a sensor`s port number (1, 2, 3 or 4).</source>
-        <translation type="unfinished"></translation>
+        <translation>Attend que le capteur de contact soit enfoncé. Le seul paramètre est le numéro du port du capteur (1, 2, 3 ou 4).</translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/editor/nxt/generated/pluginInterface.cpp" line="-41"/>
         <source>RobotsDiagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagramme de comportement du robot</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -765,7 +765,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -778,7 +778,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <source>Wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -787,7 +787,7 @@
         <location line="+1"/>
         <location line="+1"/>
         <source>Drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessin</translation>
     </message>
 </context>
 <context>
@@ -795,7 +795,7 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/nxt/generated/elements.h" line="-212"/>
         <source>Tacho Limit</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite du tachymètre</translation>
     </message>
 </context>
 </TS>

@@ -105,12 +105,12 @@
     <message>
         <location line="+46"/>
         <source>Robotics construction kit</source>
-        <translation type="unfinished"></translation>
+        <translation>Kit de construction robotique</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Robot model</source>
-        <translation type="unfinished"></translation>
+        <translation>Modèle de robot</translation>
     </message>
     <message>
         <source>Noise</source>
@@ -190,12 +190,12 @@
     <message>
         <location line="+3"/>
         <source>Debug</source>
-        <translation type="unfinished"></translation>
+        <translation>Débogage</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur</translation>
     </message>
     <message>
         <location line="+71"/>
@@ -257,12 +257,12 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/details/autoconfigurer.cpp" line="+60"/>
         <source>%2 has been auto configured to port %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%2 a été automatiquement configuré sur le port %1</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Sensor on port %1 does not correspond to blocks on the diagram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le capteur sur le port %1 ne correspond pas aux blocs du diagramme.</translation>
     </message>
 </context>
 <context>
@@ -277,7 +277,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/actionsManager.cpp" line="-71"/>
         <source>To main page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vers la page principale</translation>
     </message>
     <message>
         <location line="+246"/>
@@ -308,22 +308,22 @@
     <message>
         <location line="+43"/>
         <source>Cannot export exercise to the given location (try to change location)</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;exporter l&apos;exercice vers l&apos;emplacement indiqué (essayez de changer d&apos;emplacement)</translation>
     </message>
     <message>
         <location line="+115"/>
         <source>The specified script file could not be opened for reading </source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier de script spécifié n&apos;a pas pu être ouvert en lecture</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>No saved code found in the qrs file</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun code enregistré trouvé dans le fichier qrs</translation>
     </message>
     <message>
         <location line="+98"/>
         <source>Toggle robot console panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher/Masquer le panneau de la console du robot</translation>
     </message>
 </context>
 <context>
@@ -331,12 +331,12 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/managers/uiManager.cpp" line="-66"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Divers</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Robot console</source>
-        <translation type="unfinished"></translation>
+        <translation>Console du robot</translation>
     </message>
     <message>
         <location line="+32"/>
@@ -361,7 +361,7 @@
     <message>
         <location line="+146"/>
         <source>Modes</source>
-        <translation type="unfinished"></translation>
+        <translation>Modes</translation>
     </message>
 </context>
 <context>
@@ -370,37 +370,37 @@
         <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/interpreter/blockInterpreter.cpp" line="+92"/>
         <location line="+74"/>
         <source>No connection to robot</source>
-        <translation type="unfinished">Pas de connexion au robot</translation>
+        <translation>Aucune connexion au robot</translation>
     </message>
     <message>
         <location line="-68"/>
         <source>Interpreter is already running</source>
-        <translation type="unfinished">L&apos;interprétateur est deja lancé</translation>
+        <translation>L&apos;interpréteur est déjà en cours d&apos;exécution</translation>
     </message>
     <message>
         <location line="+52"/>
         <source>Connected successfully</source>
-        <translation type="unfinished">Connexion reussie</translation>
+        <translation>Connexion réussie</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Can&apos;t connect to a robot.</source>
-        <translation type="unfinished">La connexion au robot a échoué.</translation>
+        <translation>Impossible de se connecter au robot.</translation>
     </message>
     <message>
         <location line="+44"/>
         <source>Cannot create new thread with already occupied id %1</source>
-        <translation type="unfinished">Impossible de créer un nouveau thread avec un identificateur deja utilisé %1</translation>
+        <translation>Impossible de créer un nouveau fil avec l&apos;identifiant %1 déjà utilisé</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>Threads limit exceeded. Maximum threads count is %1</source>
-        <translation type="unfinished">Le nombre limite de threads est atteint. La limite est de %1 </translation>
+        <translation>Limite de fils dépassée. Le nombre maximum de fils est %1</translation>
     </message>
     <message>
         <location line="+22"/>
         <source>Killing non-existent thread %1</source>
-        <translation type="unfinished">Terminaison du thread non existant %1</translation>
+        <translation>Tentative de terminer un fil inexistant %1</translation>
     </message>
 </context>
 <context>
@@ -444,27 +444,27 @@
     <message>
         <location line="+2"/>
         <source>2D model world is read-only</source>
-        <translation type="unfinished">Le monde 2D ne peut pas être modifié</translation>
+        <translation>Le monde du modèle 2D est en lecture seule</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Sensors are read-only</source>
-        <translation type="unfinished">La position et la configuration des capteurs ne peuvent pas être modifiées</translation>
+        <translation>Les capteurs sont en lecture seule</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>2D model robot position is read-only</source>
-        <translation type="unfinished">La position du début ne peut pas être modifié en 2D</translation>
+        <translation>La position du robot dans le modèle 2D est en lecture seule</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Motors to wheels binding is read-only</source>
-        <translation type="unfinished">La correspondance des ports et des moteurs n&apos;est pas modifiable</translation>
+        <translation>La liaison moteurs-roues est en lecture seule</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>2D model simulation settings are read-only</source>
-        <translation type="unfinished">La configuration de simulation du modèle 2d ne peut pas être modifiée</translation>
+        <translation>Les paramètres de simulation du modèle 2D sont en lecture seule</translation>
     </message>
     <message>
         <location line="+21"/>

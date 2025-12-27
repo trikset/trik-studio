@@ -133,7 +133,7 @@
     <message>
         <location line="-273"/>
         <source>Reads a value into variable from an input dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lit une valeur dans une variable à partir d&apos;une boîte de dialogue de saisie.</translation>
     </message>
     <message>
         <location line="+104"/>
@@ -189,7 +189,7 @@
     <message>
         <location line="-440"/>
         <source>This block executes a sequence of blocks while condition in &apos;Condition&apos; is true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bloc exécute une séquence de blocs tant que la condition dans &apos;Condition&apos; est vraie. Ce bloc doit avoir deux liens sortants. L&apos;un d&apos;eux doit être marqué avec la garde &apos;body&apos; (cela signifie que la propriété &apos;Guard&apos; du lien doit être définie à la valeur &apos;body&apos;). L&apos;autre lien sortant doit rester non marqué : l&apos;exécution du programme se poursuivra par ce lien lorsque la condition deviendra fausse.</translation>
     </message>
     <message>
         <location line="+484"/>
@@ -308,7 +308,7 @@
         <location line="+23"/>
         <location line="+840"/>
         <source>Redraw</source>
-        <translation type="unfinished"></translation>
+        <translation>Redessiner</translation>
     </message>
     <message>
         <location line="-829"/>
@@ -319,12 +319,12 @@
     <message>
         <location line="-35"/>
         <source>This block can hold text notes that are ignored by generators and interpreters. Use it for improving the diagram readability.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bloc peut contenir des notes textuelles ignorées par les générateurs et interpréteurs. Utilisez-le pour améliorer la lisibilité du diagramme.</translation>
     </message>
     <message>
         <location line="+35"/>
         <source>Enter some text here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez du texte ici...</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -334,7 +334,7 @@
     <message>
         <location line="+2"/>
         <source>For creating a link between two elements A and B you can just hover a mouse above A, press the right mouse button and (without releasing it) draw a line to the element B. Alternatively you can just &apos;pull&apos; a link from a small blue circle next to the element.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour créer un lien entre deux éléments A et B, vous pouvez placer le curseur au-dessus de A, cliquer avec le bouton droit de la souris et (sans relâcher) tracer une ligne jusqu&apos;à l&apos;élément B. Sinon, vous pouvez simplement &apos;tirer&apos; un lien à partir du petit cercle bleu situé à côté de l&apos;élément.</translation>
     </message>
     <message>
         <location line="+47"/>
@@ -575,7 +575,7 @@
     <message>
         <location line="+2"/>
         <source>Unites control flow from different condition branches.</source>
-        <translation type="unfinished"></translation>
+        <translation>Réunit les flux de contrôle provenant de différentes branches conditionnelles.</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -585,7 +585,7 @@
     <message>
         <location line="+2"/>
         <source>The final node of the program. If the program consists of some parallel execution lines the reachment of this block terminates the corresponding execution line. This block can`t have outgoing links.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nœud final du programme. Si le programme comprend plusieurs lignes d&apos;exécution parallèles, l&apos;atteinte de ce bloc termine la ligne d&apos;exécution correspondante. Ce bloc ne peut pas avoir de liens sortants.</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -595,7 +595,7 @@
     <message>
         <location line="+2"/>
         <source>Separates program execution into a number of threads that will be executed concurrently from the programmers`s point of view. For example in such way signal from sensor and some time interval can be waited synchroniously. This block must have at least two outgoing links. &apos;Guard&apos; property of every link must contain unique thread identifiers, and one of those identifiers must be the same as the identifier of a thread where fork is placed (it must be &apos;main&apos; if it is the first fork in a program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sépare l&apos;exécution du programme en plusieurs threads qui seront exécutés simultanément du point de vue du programmeur. Par exemple, on peut ainsi attendre de façon synchrone un signal provenant d&apos;un capteur et un intervalle de temps donné. Ce bloc doit avoir au moins deux liens sortants. La propriété &apos;Guard&apos; de chaque lien doit contenir des identifiants de thread uniques, et l&apos;un de ces identifiants doit être identique à celui du thread dans lequel le fork est placé (il doit être &apos;main&apos; s&apos;il s&apos;agit du premier fork du programme).</translation>
     </message>
     <message>
         <source>Function</source>
@@ -604,7 +604,7 @@
     <message>
         <location line="+35"/>
         <source>Evaluates a value of the given expression. Also new variables can be defined in this block. See the &apos;Expressions Syntax&apos; chapter in help for more information about &apos;Function&apos; block syntax.</source>
-        <translation type="unfinished"></translation>
+        <translation>Évalue la valeur de l&apos;expression donnée. De nouvelles variables peuvent également être définies dans ce bloc. Consultez le chapitre &apos;Syntaxe des expressions&apos; dans l&apos;aide pour plus d&apos;informations sur la syntaxe du bloc &apos;Fonction&apos;.</translation>
     </message>
     <message>
         <source>Body</source>
@@ -618,12 +618,12 @@
     <message>
         <location line="+2"/>
         <source>Assigns a given variable a value of pressed button. If no button is pressed at the moment and &apos;Wait&apos; property is false when variable is set to -1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attribue à une variable donnée la valeur du bouton pressé. Si aucun bouton n&apos;est enfoncé au moment où la propriété &apos;Wait&apos; est fausse, la variable prend la valeur -1.</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Wait:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attendre :</translation>
     </message>
     <message>
         <location line="+24"/>
@@ -661,7 +661,7 @@
     <message>
         <location line="-385"/>
         <source>Separates program execution in correspondece with the given condition. The &apos;Condition&apos; parameter value must be some boolean expression that will determine subsequent program execution line. This block must have two outgoing links, at least one of them must have &apos;Guard&apos; parameter set to &apos;true&apos; or &apos;false&apos;. The execution will be proceed trough the link marked with the guard corresponding to &apos;Condition&apos; parameter of the block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sépare l&apos;exécution du programme selon la condition donnée. La valeur du paramètre &apos;Condition&apos; doit être une expression booléenne qui déterminera le prochain chemin d&apos;exécution. Ce bloc doit avoir deux liens sortants, dont au moins un doit avoir le paramètre &apos;Guard&apos; défini à &apos;true&apos; ou &apos;false&apos;. L&apos;exécution se poursuivra par le lien marqué avec la garde correspondant à la valeur du paramètre &apos;Condition&apos; du bloc.</translation>
     </message>
     <message>
         <location line="+32"/>
@@ -677,17 +677,17 @@
     <message>
         <location line="+2"/>
         <source>The entry point of the program execution. Each diagram should have only one such block, it must not have incomming links and it must have only one outgoing link. The interpretation process starts from exactly this block.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le point d&apos;entrée de l&apos;exécution du programme. Chaque diagramme ne doit contenir qu&apos;un seul bloc de ce type, il ne doit pas avoir de liens entrants et doit avoir exactement un lien sortant. Le processus d&apos;interprétation commence précisément à ce bloc.</translation>
     </message>
     <message>
         <location line="+41"/>
         <source>User Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisie utilisateur</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Default:</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut :</translation>
     </message>
     <message>
         <location line="+45"/>
@@ -697,7 +697,7 @@
     <message>
         <location line="+2"/>
         <source>Joins a number of threads into one. &apos;Guard&apos; property of the single outgoing link must contain an identifier of one of threads being joined. The specified thread would wait until the rest of them finish execution, and then proceed in a normal way.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fusionne plusieurs threads en un seul. La propriété &apos;Guard&apos; du lien sortant unique doit contenir l&apos;identifiant d&apos;un des threads fusionnés. Le thread spécifié attendra que les autres aient terminé leur exécution, puis poursuivra normalement.</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -707,7 +707,7 @@
     <message>
         <location line="+2"/>
         <source>Terminates execution of a specified thread.</source>
-        <translation type="unfinished"></translation>
+        <translation>Termine l&apos;exécution d&apos;un thread spécifié.</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -727,7 +727,7 @@
     <message>
         <location line="+2"/>
         <source>This block executes a sequence of blocks for a given number of times. The number of repetitions is specified by the &apos;Iterations&apos; parameter. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when it will go through our &apos;Loop&apos; block for the given number of times.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce bloc exécute une séquence de blocs un nombre donné de fois. Le nombre de répétitions est défini par le paramètre &apos;Itérations&apos;. Ce bloc doit avoir deux liens sortants. L&apos;un d&apos;eux doit être marqué avec la garde &apos;body&apos; (cela signifie que la propriété &apos;Guard&apos; du lien doit être définie à la valeur &apos;body&apos;). L&apos;autre lien sortant doit rester non marqué : l&apos;exécution du programme se poursuivra par ce lien une fois que le bloc &apos;Loop&apos; aura été exécuté le nombre de fois indiqué.</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -748,7 +748,7 @@
     <message>
         <location line="+2"/>
         <source>Moves the marker of the 2D model robot down to the floor: the robot will draw its trace on the floor after that. If the marker of another color is already drawing at the moment it will be replaced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Abaisse le marqueur du robot du modèle 2D jusqu&apos;au sol : le robot commencera à tracer sa trajectoire sur le sol. Si un marqueur d&apos;une autre couleur est déjà en cours d&apos;utilisation, il sera remplacé.</translation>
     </message>
     <message>
         <location line="+42"/>
@@ -758,12 +758,12 @@
     <message>
         <location line="+2"/>
         <source>Lifts the marker of the 2D model robot up: the robot stops drawing its trace on the floor after that.</source>
-        <translation type="unfinished"></translation>
+        <translation>Relève le marqueur du robot du modèle 2D : le robot cesse alors de tracer sa trajectoire sur le sol.</translation>
     </message>
     <message>
         <location line="+33"/>
         <source>Pre-conditional Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Boucle avec condition préalable</translation>
     </message>
     <message>
         <source>A, B, C</source>
@@ -797,12 +797,12 @@
     <message>
         <location line="+2"/>
         <source>Prints a given line in the specified coordinates on the robot`s screen. The value of &apos;Text&apos; property is interpreted as a plain text unless &apos;Evaluate&apos; property is set to true, then it will be interpreted as an expression (that may be useful for example when debugging variables values).</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche une ligne donnée aux coordonnées spécifiées sur l&apos;écran du robot. La valeur de la propriété &apos;Text&apos; est interprétée comme un texte brut, sauf si la propriété &apos;Evaluate&apos; est définie à vrai, auquel cas elle sera interprétée comme une expression (ce qui peut être utile, par exemple, lors du débogage des valeurs des variables).</translation>
     </message>
     <message>
         <location line="+47"/>
         <source>Evaluate</source>
-        <translation type="unfinished"></translation>
+        <translation>Évaluer</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -812,7 +812,7 @@
     <message>
         <location line="+0"/>
         <source>Enter some text here</source>
-        <translation type="unfinished"></translation>
+        <translation>Saisissez du texte ici</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -828,7 +828,7 @@
     <message>
         <location line="+2"/>
         <source>Sets a variable value to a random value inside given interval.</source>
-        <translation type="unfinished"></translation>
+        <translation>Attribue à une variable une valeur aléatoire comprise dans l&apos;intervalle donné.</translation>
     </message>
     <message>
         <location line="+47"/>
@@ -848,7 +848,7 @@
     <message>
         <location line="+2"/>
         <source>Receive a message sent to a thread from which this block is called.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reçoit un message envoyé à un thread depuis lequel ce bloc est appelé.</translation>
     </message>
     <message>
         <location line="+39"/>
@@ -892,7 +892,7 @@
     <message>
         <location line="+2"/>
         <source>Subprogram call. Subprograms are used for splitting repetitive program parts into a separate diagram and then calling it from main diagram or other subprograms. When this block is added into a diagram it will be suggested to enter subprogram name. The double click on subprogram call block may open the corresponding subprogram diagram. Moreover user palette will appear containing existing subrpograms, they can be dragged into a diagram like the usual blocks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Appel de sous-programme. Les sous-programmes permettent de séparer les parties répétitives d&apos;un programme dans un diagramme distinct, puis de les appeler depuis le diagramme principal ou d&apos;autres sous-programmes. Lorsque ce bloc est ajouté à un diagramme, il est demandé de saisir le nom du sous-programme. Un double-clic sur le bloc d&apos;appel du sous-programme peut ouvrir le diagramme correspondant. En outre, une palette utilisateur apparaît, contenant les sous-programmes existants, qui peuvent être glissés dans un diagramme comme des blocs ordinaires.</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -912,7 +912,7 @@
     <message>
         <location line="+2"/>
         <source>Selects the program execution branch in correspondence with some expression value. The value of the expression written in &apos;Expression&apos; property is compared to the values on the outgoing links. If equal value is found then execution will be proceeded by that branch. Else branch without a marker will be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionne la branche d&apos;exécution du programme en fonction de la valeur d&apos;une expression. La valeur de l&apos;expression indiquée dans la propriété &apos;Expression&apos; est comparée aux valeurs des liens sortants. Si une valeur égale est trouvée, l&apos;exécution se poursuit par cette branche. Sinon, la branche sans marqueur est sélectionnée.</translation>
     </message>
     <message>
         <location line="-887"/>
@@ -1216,37 +1216,37 @@
     <message>
         <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
-        <translation type="unfinished">Expression</translation>
+        <translation>Expression</translation>
     </message>
     <message>
         <location line="+201"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Text</source>
-        <translation type="unfinished">Texte</translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <location line="+428"/>
         <source>Variable</source>
-        <translation type="unfinished">Variable</translation>
+        <translation>Variable</translation>
     </message>
     <message>
         <location line="+58"/>
         <source>Devices configuration</source>
-        <translation type="unfinished">Paramétrage des périfériques</translation>
+        <translation>Configuration des dispositifs</translation>
     </message>
     <message>
         <location line="+52"/>
         <source>Message</source>
-        <translation type="unfinished">Message</translation>
+        <translation>Message</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Thread</source>
-        <translation type="unfinished">Fil</translation>
+        <translation>Tâche</translation>
     </message>
 </context>
 <context>

@@ -5,11 +5,11 @@
     <name>QObject</name>
     <message>
         <source>Existing connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexions existantes</translation>
     </message>
     <message>
         <source>Elements from this group exist for reusing all created connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Les éléments de ce groupe permettent de réutiliser toutes les connexions créées dans le projet</translation>
     </message>
 </context>
 </TS>

@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/trikKit/src/blocks/details/waitForMessageBlock.cpp" line="+46"/>
         <source>Device not found for port name CommunicatorPort</source>
-        <translation type="unfinished"></translation>
+        <translation>Périphérique non trouvé pour le nom de port CommunicatorPort</translation>
     </message>
 </context>
 <context>
@@ -23,12 +23,12 @@
         <location filename="../../../../../plugins/robots/common/trikKit/src/robotModel/trikRobotModelBase.cpp" line="+93"/>
         <location line="+212"/>
         <source>Video 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidéo 2</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Lidar</source>
-        <translation type="unfinished"></translation>
+        <translation>Lidar</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikLightSensor.h" line="+28"/>
         <source>Light sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Capteur de luminosité</translation>
     </message>
 </context>
 <context>
@@ -124,7 +124,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikMotorsAggregator.h" line="+27"/>
         <source>Trik Motors Aggregator</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrégateur de moteurs Trik</translation>
     </message>
 </context>
 <context>
@@ -164,7 +164,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikTouchSensor.h" line="+28"/>
         <source>Touch sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Capteur de toucher</translation>
     </message>
 </context>
 <context>
@@ -172,7 +172,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/trikKit/include/trikKit/robotModel/parts/trikVideoCamera.h" line="+27"/>
         <source>Video Camera</source>
-        <translation type="unfinished"></translation>
+        <translation>Caméra vidéo</translation>
     </message>
 </context>
 </TS>

@@ -61,12 +61,12 @@
     <message>
         <location line="+10"/>
         <source>Widgets</source>
-        <translation type="unfinished"></translation>
+        <translation>Widgets</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Dockable mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode fenêtres ancrables</translation>
     </message>
     <message>
         <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+117"/>

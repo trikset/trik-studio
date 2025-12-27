@@ -146,7 +146,7 @@
     <message>
         <location line="+52"/>
         <source>Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreurs</translation>
     </message>
     <message>
         <location line="+22"/>
@@ -244,12 +244,12 @@
     <message>
         <location line="-10"/>
         <source>Open Logs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir les journaux</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>About </source>
-        <translation type="unfinished"></translation>
+        <translation>À propos </translation>
     </message>
     <message>
         <location line="+14"/>
@@ -431,7 +431,7 @@
     <message>
         <location line="+5"/>
         <source>Replace by...</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer par...</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -472,47 +472,47 @@
         <location line="+5"/>
         <location line="+3"/>
         <source>Hide bottom docks</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer les panneaux en bas de la fenêtre</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Esc</source>
-        <translation type="unfinished"></translation>
+        <translation>Échap</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Copy</source>
-        <translation type="unfinished">Copier</translation>
+        <translation>Copier</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Ctrl+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+C</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Coller</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Ctrl+V</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+V</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Couper</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Ctrl+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+X</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Restore default settings and Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer les paramètres par défaut et quitter</translation>
     </message>
 </context>
 <context>
@@ -710,7 +710,7 @@
     <message>
         <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+670"/>
         <source>Could not save file, try to save it to another place</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enregistrer le fichier, essayez de l&apos;enregistrer à un autre emplacement</translation>
     </message>
     <message>
         <source>About QReal</source>
@@ -719,14 +719,16 @@
     <message>
         <location line="-472"/>
         <source>Restore default settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer les paramètres par défaut</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Do you realy want to restore default settings?
 WARNING: Settings restoring cannot be undone
 WARNING: The settings will be restored after application restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment restaurer les paramètres par défaut ?
+AVERTISSEMENT : La restauration des paramètres est irréversible
+AVERTISSEMENT : Les paramètres seront rétablis après le redémarrage de l&apos;application</translation>
     </message>
     <message>
         <location line="+769"/>
@@ -824,7 +826,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+1"/>
         <source>Find and replace</source>
-        <translation type="unfinished">Rechercher et remplacer</translation>
+        <translation>Rechercher et remplacer</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -834,7 +836,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+1"/>
         <source>Toggle errors panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher/masquer le panneau des erreurs</translation>
     </message>
     <message>
         <location line="+202"/>
@@ -849,12 +851,12 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+70"/>
         <source>External tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Outils externes</translation>
     </message>
     <message>
         <location line="+50"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;ouverture de %1</translation>
     </message>
     <message>
         <location line="+195"/>
@@ -864,7 +866,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+4"/>
         <source>Recent files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers récents</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -970,7 +972,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="-11"/>
         <source>Open project</source>
-        <translation type="unfinished">Ouvrir un projet</translation>
+        <translation>Ouvrir le projet</translation>
     </message>
     <message>
         <location line="+58"/>
@@ -1085,7 +1087,7 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location line="+24"/>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
@@ -1128,12 +1130,12 @@ WARNING: The settings will be restored after application restart</source>
     <message>
         <location filename="../../../qrgui/mainWindow/palette/paletteTreeWidget.cpp" line="+157"/>
         <source>Add Entity</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une entité</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Add Relastionship</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une relation</translation>
     </message>
 </context>
 </TS>

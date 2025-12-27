@@ -147,17 +147,17 @@
     <message>
         <location filename="../../../qrgui/editor/private/brokenLine.cpp" line="+24"/>
         <source>Delete point</source>
-        <translation type="unfinished">Supprimer le point</translation>
+        <translation>Supprimer le point</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Delete segment</source>
-        <translation type="unfinished">Supprimer le segment</translation>
+        <translation>Supprimer le segment</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Remove all points</source>
-        <translation type="unfinished">Supprimer tous les points</translation>
+        <translation>Supprimer tous les points</translation>
     </message>
 </context>
 <context>
@@ -165,12 +165,12 @@
     <message>
         <location filename="../../../qrgui/editor/edgeElement.cpp" line="+62"/>
         <source>Reverse</source>
-        <translation type="unfinished">Retourner</translation>
+        <translation>Inverser</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Change shape type</source>
-        <translation type="unfinished">Modifier le type de ligne</translation>
+        <translation>Changer le type de forme</translation>
     </message>
 </context>
 <context>
@@ -178,28 +178,28 @@
     <message>
         <location filename="../../../qrgui/editor/editorViewScene.cpp" line="+294"/>
         <source>Create new element</source>
-        <translation type="unfinished">Créer un nouvel élement</translation>
+        <translation>Créer un nouvel élément</translation>
     </message>
     <message>
         <location line="+64"/>
         <location line="+9"/>
         <source>Connect with the current item</source>
-        <translation type="unfinished">Relier avec l&apos;élement courant</translation>
+        <translation>Connecter à l&apos;élément actuel</translation>
     </message>
     <message>
         <location line="+308"/>
         <source>Replace by...</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer par...</translation>
     </message>
     <message>
         <location line="+232"/>
         <source>Add child</source>
-        <translation type="unfinished">Rajouter un élement</translation>
+        <translation>Ajouter un élément</translation>
     </message>
     <message>
         <location line="+492"/>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -223,17 +223,17 @@
     <message>
         <location filename="../../../qrgui/editor/private/lineFactory.cpp" line="+49"/>
         <source>Broken</source>
-        <translation type="unfinished">Brisée</translation>
+        <translation>Ligne brisée</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Square</source>
-        <translation type="unfinished">Rectiligne</translation>
+        <translation>Rectangulaire</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Curve</source>
-        <translation type="unfinished">Courbée</translation>
+        <translation>Courbe</translation>
     </message>
 </context>
 <context>
@@ -241,7 +241,7 @@
     <message>
         <location filename="../../../qrgui/editor/nodeElement.cpp" line="+53"/>
         <source>Switch on grid</source>
-        <translation type="unfinished">Afficher la grille</translation>
+        <translation>Activer la grille</translation>
     </message>
 </context>
 <context>
@@ -249,12 +249,12 @@
     <message>
         <location filename="../../../qrgui/editor/propertyEditorView.cpp" line="+305"/>
         <source>Specify directory:</source>
-        <translation type="unfinished">Choisissez le répertoire :</translation>
+        <translation>Spécifiez le répertoire :</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Select file:</source>
-        <translation type="unfinished">Choisissez le fichier :</translation>
+        <translation>Sélectionner le fichier :</translation>
     </message>
 </context>
 <context>
@@ -262,7 +262,7 @@
     <message>
         <location filename="../../../qrgui/editor/private/pushButtonProperty.cpp" line="+38"/>
         <source>Click to choose</source>
-        <translation type="unfinished">Cliquez pour choisir</translation>
+        <translation>Cliquez pour choisir</translation>
     </message>
 </context>
 <context>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../../../qrgui/editor/private/squareLine.cpp" line="+27"/>
         <source>Lay out</source>
-        <translation type="unfinished">Étaler</translation>
+        <translation>Réorganiser</translation>
     </message>
 </context>
 <context>
@@ -279,23 +279,23 @@
         <location filename="../../../qrgui/editor/private/exploserView.cpp" line="+80"/>
         <location line="+111"/>
         <source>New </source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau </translation>
     </message>
     <message>
         <location line="-61"/>
         <location line="+14"/>
         <source>Change Properties</source>
-        <translation type="unfinished">Modifier les propriétés</translation>
+        <translation>Modifier les propriétés</translation>
     </message>
     <message>
         <location line="-11"/>
         <source>Change Appearance</source>
-        <translation type="unfinished">Modifier l&apos;apparence</translation>
+        <translation>Modifier l&apos;apparence</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Add element to palette</source>
-        <translation type="unfinished">Rajouter un élement à la palette</translation>
+        <translation>Ajouter l&apos;élément à la palette</translation>
     </message>
 </context>
 <context>

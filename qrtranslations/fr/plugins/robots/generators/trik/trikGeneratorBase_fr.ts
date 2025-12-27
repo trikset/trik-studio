@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../../../plugins/robots/generators/trik/trikGeneratorBase/src/trikBlocksValidator.cpp" line="+111"/>
         <source>Property should not be empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>La propriété ne doit pas être vide.</translation>
     </message>
 </context>
 </TS>

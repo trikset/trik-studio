@@ -34,12 +34,12 @@
     <message>
         <location line="+33"/>
         <source>There is some connection problem, may be network is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Problème de connexion, il est possible que le réseau soit désactivé</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>There is some unrecognized error with updating process</source>
-        <translation type="unfinished"></translation>
+        <translation>Une erreur inconnue s&apos;est produite lors de la mise à jour (veuillez contacter les développeurs)</translation>
     </message>
     <message>
         <location line="+11"/>

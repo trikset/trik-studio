@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../qrgui/plugins/metaMetaModel/src/metamodel.cpp" line="+74"/>
         <source>Unknown element %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Élément inconnu %1</translation>
     </message>
 </context>
 </TS>
