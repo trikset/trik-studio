@@ -6,47 +6,47 @@
     <message>
         <location filename="../../../qrgui/textEditor/languageInfo.h" line="+91"/>
         <source>Text File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier texte</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>C Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage C</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Russian Algorithmic Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage algorithmique russe</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Python Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source Python</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Java Script Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage JavaScript</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>QtScript Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage QtScript</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>F# Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage F#</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>PascalABC Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage PascalABC</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Lua Language Source File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier source en langage Lua</translation>
     </message>
 </context>
 <context>
@@ -54,12 +54,12 @@
     <message>
         <location filename="../../../qrgui/textEditor/textManager.cpp" line="+86"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmation</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Save before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer avant de fermer ?</translation>
     </message>
     <message>
         <location line="+193"/>

@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/trikV62KitInterpreter/src/trikV62KitInterpreterPlugin.cpp" line="+47"/>
         <source>TRIK</source>
-        <translation type="unfinished"></translation>
+        <translation>TRIK</translation>
     </message>
 </context>
 <context>
@@ -14,7 +14,7 @@
     <message>
         <location filename="../../../../../plugins/robots/interpreters/trikV62KitInterpreter/src/robotModel/real/trikV62RealRobotModel.cpp" line="+69"/>
         <source>Interpretation (Wi-Fi)</source>
-        <translation type="unfinished"></translation>
+        <translation>Interprétation (Wi-Fi)</translation>
     </message>
 </context>
 </TS>

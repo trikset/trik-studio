@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
@@ -13,14 +13,14 @@
     </message>
     <message>
         <source>Enter robot IP-address here</source>
-        <translation type="vanished">Tapez l&apos;adresse IP du robot ici</translation>
+        <translation type="vanished">Tapez l'adresse IP du robot ici</translation>
     </message>
 </context>
 <context>
     <name>TrikDisplayWidget</name>
     <message>
         <source>Trik Display</source>
-        <translation type="vanished">L&apos;écran Trik</translation>
+        <translation type="vanished">L'écran Trik</translation>
     </message>
 </context>
 <context>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Enter robot`s IP-address here...</source>
-        <translation type="vanished">Tapez l&apos;adresse IP du robot ici...</translation>
+        <translation type="vanished">Tapez l'adresse IP du robot ici...</translation>
     </message>
 </context>
 <context>
@@ -39,7 +39,7 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/trikV6KitInterpreterPlugin.cpp" line="+42"/>
         <source>TRIK (model-2014)</source>
-        <translation type="unfinished"></translation>
+        <translation>TRIK (modèle 2014)</translation>
     </message>
 </context>
 <context>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../../../../plugins/robots/interpreters/trikV6KitInterpreter/src/robotModel/real/trikV6RealRobotModel.cpp" line="+69"/>
         <source>Interpretation (Wi-Fi)</source>
-        <translation type="unfinished">Intérprétation (Wi-Fi)</translation>
+        <translation>Interprétation (Wi-Fi)</translation>
     </message>
 </context>
 </TS>

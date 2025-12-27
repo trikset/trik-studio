@@ -7,12 +7,12 @@
         <location filename="../../../../../../plugins/robots/generators/ev3/ev3GeneratorBase/src/simpleGenerators/sendMailGenerator.cpp" line="35"/>
         <location filename="../../../../../../plugins/robots/generators/ev3/ev3GeneratorBase/src/simpleGenerators/receiveMailGenerator.cpp" line="38"/>
         <source>There is already mailbox with same name, but different msg type</source>
-        <translation type="unfinished"></translation>
+        <translation>Il existe déjà une boîte aux lettres portant le même nom, mais avec un type de message différent</translation>
     </message>
     <message>
         <location filename="../../../../../../plugins/robots/generators/ev3/ev3GeneratorBase/src/simpleGenerators/receiveMailGenerator.cpp" line="42"/>
         <source>There are too many mailboxes, max size is 30</source>
-        <translation type="unfinished"></translation>
+        <translation>Il y a trop de boîtes aux lettres, la taille maximale est de 30</translation>
     </message>
 </context>
 </TS>

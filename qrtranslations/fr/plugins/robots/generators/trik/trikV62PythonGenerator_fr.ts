@@ -6,7 +6,7 @@
     <message>
         <location filename="../../../../../../plugins/robots/generators/trik/trikV62PythonGenerator/trikV62PythonGeneratorPlugin.cpp" line="+29"/>
         <source>Generation (Python)</source>
-        <translation type="unfinished"></translation>
+        <translation>Génération (Python)</translation>
     </message>
 </context>
 </TS>

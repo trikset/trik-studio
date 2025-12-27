@@ -11,12 +11,12 @@
     <message>
         <location line="+8"/>
         <source>Firmware file not found in nxt-tools directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier de micrologiciel introuvable dans le répertoire nxt-tools.</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Flashing robot is possible only by USB. Please switch to USB mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>La mise à jour du robot n&apos;est possible qu&apos;en USB. Veuillez passer en mode USB.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -84,32 +84,32 @@
     <message>
         <location line="+2"/>
         <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
-        <translation type="unfinished"></translation>
+        <translation>Si vous utilisez GNU/Linux, rendez-vous sur https://help.trikset.com/nxt/run-upload-programs pour obtenir des instructions</translation>
     </message>
     <message>
         <location line="+41"/>
         <source>Error in reading from firmware file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la lecture du fichier de micrologiciel : %1</translation>
     </message>
     <message>
         <location line="+223"/>
         <source>Could not find %1. Check your program was compiled and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de trouver %1. Vérifiez que votre programme a été compilé et réessayez.</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Could not delete old file. Make sure the robot is connected, turned on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de supprimer l&apos;ancien fichier. Assurez-vous que le robot est connecté et allumé.</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Could not upload program. Make sure the robot is connected, turned on and has enough free memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de charger le programme. Vérifiez que le robot est connecté, allumé et dispose de suffisamment de mémoire libre.</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>Could not close file on brick. Probably connection to NXT lost at the last stage of uploading</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de fermer le fichier sur le brick. La connexion à NXT a probablement été perdue à la dernière étape du chargement.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -124,37 +124,37 @@
     <message>
         <location line="-186"/>
         <source>Could not open %1 for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir %1 en lecture.</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Firmware file is too large to fit into NXT brick memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier de micrologiciel est trop volumineux pour tenir dans la mémoire du brick NXT.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>Could not write firmware into NXT memory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;écrire le micrologiciel dans la mémoire NXT.</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Firmware successfully flashed into robot, but starting it failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le micrologiciel a été correctement chargé dans le robot, mais son démarrage a échoué. Essayez de redémarrer le robot.</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Flashing process completed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le processus de mise à jour a été terminé avec succès.</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Flashing NXT brick...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour du brick NXT en cours...</translation>
     </message>
     <message>
         <location line="+106"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez disposer des privilèges superutilisateur pour mettre à jour le robot NXT.</translation>
     </message>
     <message>
         <location line="+55"/>
@@ -173,7 +173,7 @@
         <location line="+57"/>
         <location line="+131"/>
         <source>NXT tools package is not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Le paquet d&apos;outils NXT n&apos;est pas installé.</translation>
     </message>
     <message>
         <location line="-85"/>

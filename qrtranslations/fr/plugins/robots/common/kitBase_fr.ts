@@ -99,7 +99,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorAmbient.h" line="+29"/>
         <source>EV3 color sensor (ambient)</source>
-        <translation type="unfinished"></translation>
+        <translation>Capteur de couleur EV3 (ambiant)</translation>
     </message>
 </context>
 <context>
@@ -139,7 +139,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorRaw.h" line="+29"/>
         <source>EV3 color sensor (raw)</source>
-        <translation type="unfinished"></translation>
+        <translation>Capteur de couleur EV3 (brut)</translation>
     </message>
 </context>
 <context>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/colorSensorReflected.h" line="+29"/>
         <source>EV3 color sensor (reflected)</source>
-        <translation type="unfinished"></translation>
+        <translation>Capteur de couleur EV3 (réfléchi)</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/communicator.h" line="+29"/>
         <source>Communicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Communicateur</translation>
     </message>
 </context>
 <context>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/lidarSensor.h" line="+29"/>
         <source>Lidar</source>
-        <translation type="unfinished"></translation>
+        <translation>Lidar</translation>
     </message>
 </context>
 <context>
@@ -219,7 +219,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/motorsAggregator.h" line="+29"/>
         <source>Motors aggregator</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrégateur de moteurs</translation>
     </message>
 </context>
 <context>
@@ -227,7 +227,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/random.h" line="+30"/>
         <source>Random</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre aléatoire</translation>
     </message>
 </context>
 <context>
@@ -243,7 +243,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/kitBase/include/kitBase/robotModel/robotParts/shell.h" line="+28"/>
         <source>Shell</source>
-        <translation type="unfinished"></translation>
+        <translation>Console</translation>
     </message>
 </context>
 <context>

@@ -31,7 +31,7 @@
     <message>
         <location line="+6"/>
         <source>Subprograms should have unique names, please rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Les sous-programmes doivent avoir des noms uniques, veuillez les renommer</translation>
     </message>
     <message>
         <source>Duplicate identifier: </source>
@@ -45,7 +45,7 @@
     <message>
         <location line="+5"/>
         <source>Initial node must not have incoming links</source>
-        <translation type="unfinished"></translation>
+        <translation>Le nœud initial ne doit pas avoir de liens entrants</translation>
     </message>
     <message>
         <location line="+34"/>

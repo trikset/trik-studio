@@ -23,52 +23,52 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+2"/>
         <source>A path to file where checker results will be written (JSON).</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin du fichier où les résultats du vérificateur seront écrits (JSON).</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Inputs for JavaScript solution.</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrées pour la solution en JavaScript.</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Set to &quot;script&quot; for execution of js/py from the project or set to &quot;diagram&quot; for block diagram.</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir sur &quot;script&quot; pour exécuter un script js/py depuis le projet ou sur &quot;diagram&quot; pour un diagramme en blocs.</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!).</source>
-        <translation type="unfinished"></translation>
+        <translation>Facteur de vitesse, essayez entre 5 et 20, voire même 1000 (à vos risques et périls !).</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Shows robot&apos;s display.</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche l&apos;écran du robot.</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>The complete file path, including the filename, to save the generated JavaScript or Python code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin complet du fichier, nom inclus, pour enregistrer le code JavaScript ou Python généré.</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>The path to the Python or JavaScript file that will be used for interpretation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemin vers le fichier Python ou JavaScript qui sera utilisé pour l&apos;interprétation.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Do not run the interpretation in any mode, this is a parameter that is only used to generate a file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas exécuter l&apos;interprétation dans aucun mode, ce paramètre sert uniquement à générer un fichier.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Add a delay in milliseconds after executing the script before closing the window</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un délai en millisecondes après l&apos;exécution du script avant de fermer la fenêtre</translation>
     </message>
     <message>
         <location line="-9"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez &quot;python&quot; ou &quot;javascript&quot;.</translation>
     </message>
     <message>
         <source>Use this option set to &quot;minimal&quot; to disable connection to X server</source>
@@ -86,17 +86,17 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location line="+13"/>
         <source>Close the window and exit if the diagram/script finishes without errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer la fenêtre et quitter si le diagramme/le script se termine sans erreur.</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Close the window and exit after diagram/script finishes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer la fenêtre et quitter après la fin du diagramme/du script.</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Shows robot&apos;s console.</source>
-        <translation type="unfinished"></translation>
+        <translation>Affiche la console du robot.</translation>
     </message>
 </context>
 <context>
@@ -104,7 +104,7 @@ In background mode the session will be terminated just after the execution ended
     <message>
         <location filename="../../../../../plugins/robots/checker/twoDModelRunner/runner.cpp" line="+241"/>
         <source>Robot console</source>
-        <translation type="unfinished"></translation>
+        <translation>Console du robot</translation>
     </message>
 </context>
 </TS>

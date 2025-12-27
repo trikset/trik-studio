@@ -102,7 +102,7 @@
     <message>
         <location line="-28"/>
         <source>Seems like accessing an uninitialized variable %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Il semble que l&apos;on accède à une variable non initialisée %1</translation>
     </message>
     <message>
         <location line="+133"/>
@@ -137,38 +137,38 @@
     <message>
         <location filename="../../qrtext/src/lua/luaLexer.cpp" line="+30"/>
         <source>whitespace</source>
-        <translation type="unfinished"></translation>
+        <translation>espace</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>newline</source>
-        <translation type="unfinished"></translation>
+        <translation>nouvelle ligne</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>identificateur</translation>
     </message>
     <message>
         <location filename="../../qrtext/include/qrtext/lua/types/string.h" line="+28"/>
         <location filename="../../qrtext/src/lua/luaLexer.cpp" line="+66"/>
         <source>string</source>
-        <translation type="unfinished"></translation>
+        <translation>chaîne</translation>
     </message>
     <message>
         <location filename="../../qrtext/src/lua/luaLexer.cpp" line="+5"/>
         <source>integer literal</source>
-        <translation type="unfinished"></translation>
+        <translation>littéral entier</translation>
     </message>
     <message>
         <location line="+14"/>
         <source>float literal</source>
-        <translation type="unfinished"></translation>
+        <translation>littéral flottant</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>comment</source>
-        <translation type="unfinished"></translation>
+        <translation>commentaire</translation>
     </message>
     <message>
         <location filename="../../qrtext/src/lua/luaParser.cpp" line="+158"/>
@@ -203,7 +203,7 @@
     <message>
         <location filename="../../qrtext/src/lua/luaSemanticAnalyzer.cpp" line="-274"/>
         <source>Intrinsic function used as an identifier</source>
-        <translation type="unfinished"></translation>
+        <translation>Une fonction intrinsèque ne peut pas être utilisée comme identificateur</translation>
     </message>
     <message>
         <location line="+167"/>
@@ -218,7 +218,7 @@
     <message>
         <location line="+6"/>
         <source>An attempt will be made to implicitly cast the right operand to the type &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Une tentative de conversion implicite du membre droit vers le type &apos;%1&apos; sera effectuée</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -248,27 +248,27 @@
     <message>
         <location filename="../../qrtext/include/qrtext/lua/types/boolean.h" line="+28"/>
         <source>boolean</source>
-        <translation type="unfinished"></translation>
+        <translation>booléen</translation>
     </message>
     <message>
         <location filename="../../qrtext/include/qrtext/lua/types/float.h" line="+28"/>
         <source>float</source>
-        <translation type="unfinished"></translation>
+        <translation>flottant</translation>
     </message>
     <message>
         <location filename="../../qrtext/include/qrtext/lua/types/integer.h" line="+28"/>
         <source>integer</source>
-        <translation type="unfinished"></translation>
+        <translation>entier</translation>
     </message>
     <message>
         <location filename="../../qrtext/include/qrtext/lua/types/number.h" line="+28"/>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation>nombre</translation>
     </message>
     <message>
         <location filename="../../qrtext/include/qrtext/lua/types/table.h" line="+44"/>
         <source>table[%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>tableau[%1]</translation>
     </message>
 </context>
 </TS>
