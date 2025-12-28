@@ -2,8 +2,11 @@
 <Package>
     <DisplayName>Languages</DisplayName>
     <DisplayName xml:lang="ru_ru">Языки</DisplayName>
+    <DisplayName xml:lang="fr_fr">Langues</DisplayName>
+    <DisplayName xml:lang="es_es">Idiomas</DisplayName>
     <Version></Version>
     <ReleaseDate>2017-11-14</ReleaseDate>
     <SortingPriority>9</SortingPriority>
+    <Default>true</Default>
     <ForcedInstallation>false</ForcedInstallation>
 </Package>
