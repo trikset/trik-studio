@@ -432,12 +432,12 @@
         <translation>El campo &quot;version&quot; de la etiqueta &quot;root&quot; no debe estar vacío.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="175"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="174"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>El modelo del mundo tiene versión %1. La versión actual es %2. Por favor, verifique que el modelo del mundo se comporte como se espera.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="209"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="208"/>
         <source>This robot model already exists</source>
         <translation>Este modelo de robot ya existe</translation>
     </message>
