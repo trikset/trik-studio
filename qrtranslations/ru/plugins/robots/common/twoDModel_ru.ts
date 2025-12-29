@@ -716,7 +716,7 @@
         <translation>Поле &quot;version&quot; тега &quot;root&quot; не должно быть пустым.</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>Модель мира имеет версию %1. Текущая версия %2. Пожалуйста, убедитесь, что модель мира ведет себя ожидаемым образом.</translation>
     </message>

@@ -440,7 +440,7 @@
         <translation>Le champ &quot;version&quot; de la balise &quot;root&quot; ne doit pas être vide.</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>Le modèle de monde a la version %1. La version actuelle est %2. Veuillez vérifier que le modèle de monde se comporte comme prévu.</translation>
     </message>

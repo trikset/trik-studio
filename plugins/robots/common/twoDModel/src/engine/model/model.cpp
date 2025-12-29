@@ -165,9 +165,8 @@ void Model::deserialize(const QDomDocument &model)
 		auto &&version = root.attribute("version", "");
 		if (version.isEmpty()) {
 			if (mErrorReporter) {
-				mErrorReporter->addCritical(tr(R"(The "version" field of the "root" tag must not be empty.)"));
+				mErrorReporter->addWarning(tr(R"(The "version" field of the "root" tag must not be empty.)"));
 			}
-			return;
 		}
 
 		if (version != XML_VERSION) {

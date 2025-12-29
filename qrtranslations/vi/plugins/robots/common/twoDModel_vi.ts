@@ -432,12 +432,12 @@
         <translation>Trường &quot;version&quot; của thẻ &quot;root&quot; không được để trống.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="175"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="174"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>Mô hình thế giới có phiên bản %1. Phiên bản hiện tại là %2. Vui lòng kiểm tra xem mô hình thế giới có hoạt động như mong đợi hay không.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="209"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="208"/>
         <source>This robot model already exists</source>
         <translation>Mô hình robot này đã tồn tại</translation>
     </message>
