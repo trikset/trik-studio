@@ -15,17 +15,18 @@
 #pragma once
 
 #include <QObject>
+#include <utility>
 
 template<typename T>
 class ItemProperty final
 {
 	Q_DISABLE_COPY_MOVE(ItemProperty)
 public:
-	explicit ItemProperty(const QString& name, const T& value)
-		: mName(name), mValue(value), mWasChanged(false) {}
+	explicit ItemProperty(QString name, const T& value)
+		: mName(std::move(name)), mValue(value), mWasChanged(false) {}
 
 	ItemProperty() = default;
-	operator const T() const & { return mValue; }
+	operator T() const & { return mValue; } // NOLINT(google-explicit-constructor)
 
 	QString name() const { return mName; }
 
@@ -41,5 +42,5 @@ public:
 private:
 	QString mName;
 	T mValue;
-	bool mWasChanged;
+	bool mWasChanged {};
 };

@@ -17,7 +17,7 @@
 #include <QDomElement>
 #include <QtGui/QPolygonF>
 #include <QtCore/qglobal.h>
-#include "itemProperty.h"
+#include "details/itemProperty.h"
 
 namespace twoDModel {
 namespace items {
