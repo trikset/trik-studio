@@ -16,6 +16,7 @@
 
 #include <qrutils/graphicsUtils/abstractItem.h>
 #include "src/engine/items/solidItem.h"
+#include "details/serializer.h"
 #include <memory>
 
 class QSvgRenderer;
@@ -23,15 +24,15 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class BallItem final: public graphicsUtils::AbstractItem, public SolidItem
+class BallItem final: public graphicsUtils::AbstractItem, public SolidItem, public Serializer<BallItem>
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(BallItem)
 
 public:
 	explicit BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                  QPointF position);
-	~BallItem();
+			  QPointF position);
+	~BallItem() override;
 
 	/// Creates and returns ball item for 2D model palette.
 	/// Transfers ownership.
@@ -51,6 +52,10 @@ public:
 
 	void saveStartPosition();
 	void returnToStartPosition();
+	void setStartPosition(QPointF startPosition);
+	void setStartRotation(qreal startPosition);
+	qreal startRotation() const;
+	QPointF startPosition() const;
 
 	bool isCircle() const override;
 	BodyType bodyType() const override;

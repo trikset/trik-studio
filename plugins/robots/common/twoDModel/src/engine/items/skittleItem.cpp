@@ -17,7 +17,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtSvg/QSvgRenderer>
-
+#include <QDebug>
 #include <twoDModel/engine/model/constants.h>
 
 using namespace twoDModel::items;
@@ -103,19 +103,11 @@ void SkittleItem::savePos()
 QDomElement SkittleItem::serialize(QDomElement &element) const
 {
 	QDomElement skittleNode = AbstractItem::serialize(element);
-	skittleNode.setTagName("skittle");
-	auto *coordSystem = coordinateSystem();
-	skittleNode.setAttribute("x",
-	                         QString::number(coordSystem->toUnit(x1() + scenePos().x())));
-	skittleNode.setAttribute("y",
-	                         QString::number(coordSystem->toUnit(y1() + scenePos().y())));
-	skittleNode.setAttribute("markerX",
-	                         QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
-	skittleNode.setAttribute("markerY",
-	                         QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
-	skittleNode.setAttribute("rotation", QString::number(rotation()));
-	skittleNode.setAttribute("startRotation", QString::number(mStartRotation));
+	Serializer<SkittleItem>::serialize(skittleNode);
 	SolidItem::serialize(skittleNode);
+	skittleNode.setTagName("skittle");
+
+	auto &&coordSystem = coordinateSystem();
 	if (mDiameterPx.wasChanged()) {
 		skittleNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
 	}
@@ -125,24 +117,36 @@ QDomElement SkittleItem::serialize(QDomElement &element) const
 void SkittleItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-	auto *coordSystem = coordinateSystem();
-	qreal x = coordSystem->toPx(element.attribute("x", "0").toDouble());
-	qreal y = coordSystem->toPx(element.attribute("y", "0").toDouble());
-	qreal markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
-	qreal markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
-	qreal rotation = element.attribute("rotation", "0").toDouble();
-	mStartRotation = element.attribute("startRotation", "0").toDouble();
+	SolidItem::deserialize(element);
 
+	auto *coordSystem = coordinateSystem();
 	if (element.hasAttribute("diameter")) {
 		setDiameter(coordSystem->toPx(
 				element.attribute("diameter").toDouble()));
 	}
-	SolidItem::deserialize(element);
-	setPos(QPointF(x, y));
-	setTransformOriginPoint(boundingRect().center());
-	mStartPosition = {markerX, markerY};
-	setRotation(rotation);
+
+	Serializer<SkittleItem>::deserialize(element);
 	Q_EMIT x1Changed(x1());
+}
+
+void SkittleItem::setStartPosition(QPointF startPosition)
+{
+	mStartPosition = startPosition;
+}
+
+void SkittleItem::setStartRotation(qreal startRotation)
+{
+	mStartRotation = startRotation;
+}
+
+qreal SkittleItem::startRotation() const
+{
+	return mStartRotation;
+}
+
+QPointF SkittleItem::startPosition() const
+{
+	return mStartPosition;
 }
 
 void SkittleItem::saveStartPosition()
