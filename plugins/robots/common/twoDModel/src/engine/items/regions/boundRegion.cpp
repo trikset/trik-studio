@@ -60,7 +60,8 @@ QDomElement BoundRegion::serialize(QDomElement &element) const
 {
 	auto &&regionNode = RegionItem::serialize(element);
 	regionNode.setAttribute("boundItem", mBoundId);
-	regionNode.setAttribute("stroke", mStroke);
+	const auto &metricSystem = coordinateSystem();
+	regionNode.setAttribute("stroke", metricSystem->toUnit(mStroke));
 	return regionNode;
 }
 
@@ -69,9 +70,10 @@ void BoundRegion::deserialize(const QDomElement &element)
 	RegionItem::deserialize(element);
 	if (element.hasAttribute("stroke")) {
 		bool ok = false;
+		const auto &metricSystem = coordinateSystem();
 		const int stroke = element.attribute("stroke").toInt(&ok);
 		if (ok) {
-			mStroke = stroke;
+			mStroke = metricSystem->toPx(stroke);
 		}
 	}
 }

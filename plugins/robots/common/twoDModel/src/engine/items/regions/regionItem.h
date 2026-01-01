@@ -63,7 +63,7 @@ public:
 	QPointF textPosition() const;
 
 	/// Sets the upper-left corner of the text relatively to upper-left corner of the item.
-	void setTextPosition(QPointF pos);
+	void setTextPosition();
 
 	/// Returns the color of the item`s borders, text and hatching.
 	QColor color() const;
@@ -109,6 +109,7 @@ private:
 	QPointF deserializePoint(const QDomElement &element, const QString &xAttribute, const QString &yAttribute);
 	bool mVisible {};
 	QGraphicsTextItem *mTextItem;  // Takes ownership
+	QPointF mTextPosition {};
 	bool mFilled;
 	bool mDumpPositionInfo {true};
 	QColor mColor;

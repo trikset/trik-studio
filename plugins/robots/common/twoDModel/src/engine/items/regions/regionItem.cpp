@@ -43,6 +43,18 @@ RegionItem::RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setPenColor(mColor.name());
 	setBrushColor(mColor.name());
 	setBrushStyle("Diag");
+	connect(this, &AbstractItem::positionChanged, this, [this](const QPointF &pos) {
+		Q_UNUSED(pos);
+		setTextPosition();
+	});
+	connect(this, &AbstractItem::x1Changed, this, [this](qreal x1) {
+		Q_UNUSED(x1);
+		setTextPosition();
+	});
+	connect(this, &AbstractItem::x2Changed, this, [this](qreal x2) {
+		Q_UNUSED(x2);
+		setTextPosition();
+	});
 }
 
 RegionItem::RegionItem(QSharedPointer<graphicsUtils::AbstractItem>& abstractItem,
@@ -106,12 +118,17 @@ void RegionItem::setText(const QString &text)
 
 QPointF RegionItem::textPosition() const
 {
-	return mTextItem->pos();
+	return mTextPosition;
 }
 
-void RegionItem::setTextPosition(QPointF pos)
+void RegionItem::setTextPosition()
 {
-	mTextItem->setPos(pos);
+	const auto x = qMin(x1(), x2());
+	const auto y = qMin(y1(), y2());
+	QPointF parentScenePosition {x + mTextPosition.x(),
+				    y + mTextPosition.y()};
+
+	mTextItem->setPos(parentScenePosition);
 }
 
 QColor RegionItem::color() const
@@ -155,13 +172,15 @@ QDomElement RegionItem::serialize(QDomElement &element) const
 	}
 
 	if (mDumpPositionInfo) {
+		const auto x = qMin(x1(), x2()) + scenePos().x();
+		const auto y = qMin(y1(), y2()) + scenePos().y();
 		regionNode.setAttribute("x",
-				     QString::number(mMetricSystem->toUnit(x1() + scenePos().x())));
+				     QString::number(mMetricSystem->toUnit(x)));
 		regionNode.setAttribute("y",
-				     QString::number(mMetricSystem->toUnit(y1() + scenePos().y())));
+				     QString::number(mMetricSystem->toUnit(y)));
 
-		const auto height = qAbs(x2() - x1());
-		const auto width = qAbs(y2() - y1());
+		const auto width = qAbs(x2() - x1());
+		const auto height = qAbs(y2() - y1());
 
 		regionNode.setAttribute("height",
 				     QString::number(mMetricSystem->toUnit(height)));
@@ -199,10 +218,6 @@ void RegionItem::deserialize(const QDomElement &element)
 		setText(element.attribute("text"));
 	}
 
-	if (element.hasAttribute("textX") && element.hasAttribute("textY")) {
-		setTextPosition(deserializePoint(element, "textX", "textY"));
-	}
-
 	if (element.hasAttribute("visible")) {
 		mVisible = element.attribute("visible") == "true";
 		setVisible(mVisible);
@@ -223,17 +238,20 @@ void RegionItem::deserialize(const QDomElement &element)
 			bool widthOk = false;
 			const auto height = heightText.toDouble(&heightOk);
 			const auto width = widthText.toDouble(&widthOk);
-			const auto &mMetricSystem = coordinateSystem();
+			const auto &metricSystem = coordinateSystem();
 			if (heightOk && widthOk) {
-				const auto &size = QSizeF(mMetricSystem->toPx(width),
-							  mMetricSystem->toPx(height));
-				setX2(x1() + size.height());
-				setY2(y1() + size.width());
+				setX2(x1() + metricSystem->toPx(width));
+				setY2(y1() + metricSystem->toPx(height));
 			} else {
-				setX2(x1() + defaultSize.height());
-				setY2(y1() + defaultSize.width());
+				setX2(x1() + defaultSize.width());
+				setY2(y1() + defaultSize.height());
 			}
 		}
+	}
+
+	if (element.hasAttribute("textX") && element.hasAttribute("textY")) {
+		mTextPosition = deserializePoint(element, "textX", "textY");
+		setTextPosition();
 	}
 }
 
