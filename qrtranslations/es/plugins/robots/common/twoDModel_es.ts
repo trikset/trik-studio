@@ -9,22 +9,33 @@
         <translation>Velocidad:&amp;nbsp;&amp;nbsp;&lt;b&gt;%1%&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="183"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="52"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="181"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="184"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="53"/>
+        <source>Convert to region</source>
+        <translation>Convertir a región</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="54"/>
+        <source>Bind to region</source>
+        <translation>Vincular a región</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="182"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="184"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="182"/>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="185"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="183"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -207,100 +218,100 @@
         <translation>Detener programa</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="361"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="384"/>
         <source>Left wheel:</source>
         <translation>Rueda izquierda:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="394"/>
         <source>Right wheel:</source>
         <translation>Rueda derecha:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="402"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="425"/>
         <source>Metric system units:</source>
         <translation>Unidades del sistema métrico:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="422"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="445"/>
         <source>Pixels in cm:</source>
         <translation>Píxeles por cm:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="460"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="483"/>
         <source>Realistic physics</source>
         <translation>Física realista</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="467"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="490"/>
         <source>Realistic sensors</source>
         <translation>Sensores realistas</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="474"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="497"/>
         <source>Realistic engines</source>
         <translation>Motores realistas</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="533"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="556"/>
         <source>Robot height:</source>
         <translation>Altura del robot:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="546"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="569"/>
         <source>Robot mass:</source>
         <translation>Masa del robot:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="559"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="582"/>
         <source>Wheel diameter:</source>
         <translation>Diámetro de la rueda:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="610"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="633"/>
         <source>Robot track:</source>
         <translation>Separación entre ruedas:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="661"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="684"/>
         <source>Robot width:</source>
         <translation>Ancho del robot:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="668"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="675"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="682"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="696"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="691"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="698"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="705"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="719"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="689"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="712"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="752"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="775"/>
         <source>Decrease speed</source>
         <translation>Disminuir velocidad</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="793"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="816"/>
         <source>Time in 2D model</source>
         <translation>Tiempo en el modelo 2D</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="802"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="825"/>
         <source> sec.</source>
         <translation> seg.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="830"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="853"/>
         <source>Increase speed</source>
         <translation>Aumentar velocidad</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="938"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="961"/>
         <source>px</source>
         <translation>px</translation>
     </message>
@@ -337,7 +348,7 @@
 <context>
     <name>twoDModel::items::CommentItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="44"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="42"/>
         <source>Text (T)</source>
         <translation>Texto (T)</translation>
     </message>
@@ -493,18 +504,19 @@
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="232"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="250"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="268"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="311"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="330"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="286"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="329"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="348"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Intentando agregar un elemento con ID duplicado: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="342"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="360"/>
         <source>Incorrect image, please try anouther one</source>
         <translation>Imagen incorrecta, por favor intente con otra</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="886"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="902"/>
         <source>Unknown image with imageId %1</source>
         <translation>Imagen desconocida con imageId %1</translation>
     </message>
@@ -782,32 +794,32 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="811"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="854"/>
         <source>Select images</source>
         <translation>Seleccionar imágenes</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="813"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="856"/>
         <source>Graphics (*.*)</source>
         <translation>Gráficos (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="827"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="870"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="828"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Está intentando cargar una imagen muy grande, lo que podría congelar la ejecución durante un tiempo. ¿Continuar?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="837"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="880"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="838"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="881"/>
         <source>Cannot load %1. Try another file.</source>
         <translation>No se puede cargar %1. Intente con otro archivo.</translation>
     </message>
@@ -825,65 +837,65 @@
         <translation>kg</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="353"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="361"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="354"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="362"/>
         <source>Do you really want to clear scene?</source>
         <translation>¿Realmente desea limpiar la escena?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="463"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="471"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Modo entrenamiento: la solución no será verificada</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="464"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="472"/>
         <source>Checking mode: solution will be checked, errors will be reported</source>
         <translation>Modo verificación: la solución será comprobada, se informará de errores</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="526"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="534"/>
         <source>Saving world and robot model</source>
         <translation>Guardando modelo del mundo y del robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="526"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="546"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="560"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="534"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="554"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="568"/>
         <source>2D model saves (*.xml)</source>
         <translation>Guardados del modelo 2D (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="546"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="554"/>
         <source>Loading world and robot model</source>
         <translation>Cargando modelo del mundo y del robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="560"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="568"/>
         <source>Loading world without robot model</source>
         <translation>Cargando modelo del mundo sin modelo de robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="877"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="885"/>
         <source>Hide details</source>
         <translation>Ocultar detalles</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="877"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="885"/>
         <source>Show details</source>
         <translation>Mostrar detalles</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1083"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1084"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1091"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1092"/>
         <source>No wheel</source>
         <translation>Ausente</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1090"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1098"/>
         <source>%1 (port %2)</source>
         <translation>%1 (puerto %2)</translation>
     </message>

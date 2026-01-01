@@ -41,7 +41,6 @@ void EllipseRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
 	graphicsUtils::RectangleImpl::drawEllipseItem(painter, x1(), y1(), x2(), y2());
-
 }
 
 QRectF EllipseRegion::boundingRect() const
