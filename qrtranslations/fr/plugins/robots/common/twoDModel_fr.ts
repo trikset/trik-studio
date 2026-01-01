@@ -169,12 +169,23 @@
         <translation>L&apos;objet %1 n&apos;a pas la propriété %2</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="+52"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+181"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Convert to region</source>
+        <translation>Convertir en région</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bind to region</source>
+        <translation>Lier à la région</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+1"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -215,7 +226,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+535"/>
+        <location line="+558"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -501,6 +512,7 @@
         <location line="+18"/>
         <location line="+18"/>
         <location line="+18"/>
+        <location line="+18"/>
         <location line="+43"/>
         <location line="+19"/>
         <source>Trying to add an item with a duplicate id: %1</source>
@@ -512,7 +524,7 @@
         <translation>Image incorrecte, veuillez en essayer une autre</translation>
     </message>
     <message>
-        <location line="+544"/>
+        <location line="+542"/>
         <source>Unknown image with imageId %1</source>
         <translation>Image inconnue avec imageId %1</translation>
     </message>
@@ -790,7 +802,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+811"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+854"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -823,7 +835,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+353"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+361"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -841,7 +853,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-200"/>
+        <location line="-208"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
@@ -851,7 +863,7 @@
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+279"/>
+        <location line="+287"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>

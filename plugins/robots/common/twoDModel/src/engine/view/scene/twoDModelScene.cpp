@@ -18,7 +18,6 @@
 #include <QtGui/QKeyEvent>
 #include <QtGui/QPainter>
 #include <QtWidgets/QApplication>
-
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/platformInfo.h>
 #include <qrutils/graphicsUtils/gridDrawer.h>
@@ -83,10 +82,14 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded, this, &TwoDModelScene::onBallAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::cubeAdded, this, &TwoDModelScene::onCubeAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::commentAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
+	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorFieldAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
-			, this, [=](const QSharedPointer<items::RegionItem> &item) { addItem(item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this, [this] (const QSharedPointer<items::RegionItem> &item) {
+			TwoDModelScene::onAbstractItemAdded(item);
+			if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
+				item->switchToEditorMode(true);
+			}
+		});
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
 			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
 		if (!justChanged) { addItem(item.data()); }
@@ -163,6 +166,8 @@ void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 			sensorItem->setEditable(!mSensorsReadOnly);
 		} else if (const auto &&startPosition = dynamic_cast<items::StartPosition *>(item)) {
 			startPosition->setEditable(!mRobotReadOnly);
+		} else if (const auto &&region = dynamic_cast<items::RegionItem *>(item)) {
+			region->setEditable(!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode);
 		} else if (const auto &&worldItem = dynamic_cast<graphicsUtils::AbstractItem *>(item)) {
 			worldItem->setEditable(!mWorldReadOnly);
 		}
@@ -318,6 +323,41 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 			cube->saveStartPosition();
 		}
 	}
+}
+
+void TwoDModelScene::onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item)
+{
+	connect(&*item, &items::ColorFieldItem::convertToRegionWithContextMenu,
+		this, [this](const items::ColorFieldItem &item){
+			const auto &result = mModel.worldModel().createRegionFromItem(item);
+			// When creating a region, the first step in undoing is to delete the region itself,
+			// and another undo will restore the original associated ColorFieldItem
+			deleteSelectedItems();
+			mDrawingAction = DrawingAction::region;
+			registerInUndoStack(result.data());
+			setNoneStatus();
+	});
+
+	connect(&*item, &items::ColorFieldItem::bindToRegionWithContextMenu,
+		this, [this](const items::ColorFieldItem &item){
+			const auto& region = mModel.worldModel().createRegionFromItem(item, true);
+			mDrawingAction = DrawingAction::region;
+			registerInUndoStack(region.data());
+			setNoneStatus();
+			const auto regionId = region->id();
+			// At the moment, deleting an object and its associated regions is two different operations,
+			// and this should be fixed to allow the simultaneous restoration of an object and its associated
+			// region using a single undo action instead of multiple ones.
+			connect(&item, &QObject::destroyed, this, [this, regionId]() {
+				deleteWithCommand(QStringList{regionId}, {}, {});
+			});
+	});
+
+	if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
+		item->switchToEditorMode(true);
+	}
+
+	onAbstractItemAdded(item);
 }
 
 void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
@@ -655,6 +695,7 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 		items::BallItem * const ball = dynamic_cast<items::BallItem *>(item);
 		items::CubeItem * const cube = dynamic_cast<items::CubeItem *>(item);
 		items::CommentItem * const comment = dynamic_cast<items::CommentItem *>(item);
+		items::RegionItem * const region = dynamic_cast<items::RegionItem *>(item);
 
 		if (sensor && !mSensorsReadOnly) {
 			for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
@@ -678,6 +719,8 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 			worldItems << image->id();
 		} else if (comment && !mWorldReadOnly) {
 			worldItems << comment->id();
+		} else if (region && !mWorldReadOnly) {
+			worldItems << region->id();
 		}
 	}
 	return {worldItems, sensors};
@@ -1098,6 +1141,50 @@ void TwoDModelScene::centerOnRobot(RobotItem *selectedItem)
 			view->centerOn(robotItem.data());
 		}
 	}
+}
+
+void TwoDModelScene::onEditorModeToggled(bool enable)
+{
+	if (!mWorldReadOnly && enable) {
+		switchToEditorMode(EditorMode::regionEditorMode);
+		return;
+	}
+	switchToEditorMode(EditorMode::defaultMode);
+}
+
+void TwoDModelScene::switchToEditorMode(EditorMode mode)
+{
+	if (mode == EditorMode::regionEditorMode) {
+		switchToRegionEditorMode();
+		return;
+	}
+	switchToDefaultMode();
+}
+
+void TwoDModelScene::restoreEditorState()
+{
+	const auto enable = mCurrentEditorMode == EditorMode::defaultMode ? false : true;
+	for (auto &&colorField: mModel.worldModel().colorFields()) {
+		colorField->switchToEditorMode(enable);
+	}
+}
+
+void TwoDModelScene::switchToDefaultMode()
+{
+	for (auto &&region: mModel.worldModel().regions()) {
+		region->switchToEditorMode(false);
+	}
+	mCurrentEditorMode = EditorMode::defaultMode;
+	restoreEditorState();
+}
+
+void TwoDModelScene::switchToRegionEditorMode()
+{
+	for (auto &&region: mModel.worldModel().regions()) {
+		region->switchToEditorMode(true);
+	}
+	mCurrentEditorMode = EditorMode::regionEditorMode;
+	restoreEditorState();
 }
 
 void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotModel::PortInfo &port)

@@ -289,6 +289,8 @@ void AbstractItem::setBrushStyle(const QString &text)
 {
 	if (text == "Solid") {
 		mBrush.setStyle(Qt::SolidPattern);
+	} else if (text == "Diag") {
+		mBrush.setStyle(Qt::BDiagPattern);
 	} else if (text == "None") {
 		mBrush.setStyle(Qt::NoBrush);
 	}

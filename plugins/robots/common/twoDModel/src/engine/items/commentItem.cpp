@@ -21,8 +21,6 @@
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
 
-#include <QDebug>
-
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 

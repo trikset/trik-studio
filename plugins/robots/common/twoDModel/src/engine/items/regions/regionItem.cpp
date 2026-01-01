@@ -26,28 +26,60 @@ const QSizeF defaultSize = QSizeF(200, 200);
 
 using namespace twoDModel::items;
 
-RegionItem::RegionItem(twoDModel::model::MetricCoordinateSystem *metricSystem,
+RegionItem::RegionItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			QGraphicsItem *parent)
-	: QGraphicsObject(parent)
+	: graphicsUtils::AbstractItem(parent)
+	, mVisible(false)
 	, mTextItem(new QGraphicsTextItem(this))
-	, mId(QUuid::createUuid().toString())
 	, mFilled(true)
+	, mDumpPositionInfo(true)
 	, mColor(defaultColor)
-	, mSize(defaultSize)
-	, mMetricSystem(metricSystem)
 
 {
+	// The default region is not editable, but this can be changed in the region editing mode
+	setEditable(false);
+	setCoordinateSystem(metricSystem);
 	setZValue(graphicsUtils::AbstractItem::ZValue::Region);
+	setPenColor(mColor.name());
+	setBrushColor(mColor.name());
+	setBrushStyle("Diag");
 }
 
-QString RegionItem::id() const
+RegionItem::RegionItem(QSharedPointer<graphicsUtils::AbstractItem>& abstractItem,
+		graphicsUtils::AbstractCoordinateSystem *metricSystem,
+		QGraphicsItem *parent)
+	: RegionItem(metricSystem, parent)
 {
-	return mId;
+	// When creating a region from an existing AbstractItem, we need to copy the position on the scene
+	// and other necessary information for creating the region
+	setX1(abstractItem->x1());
+	setX2(abstractItem->x2());
+	setY1(abstractItem->y1());
+	setY2(abstractItem->y2());
+	setPos(abstractItem->pos());
+	savePos();
+
+	// We save the color for the region. The stroke-width parameter is not supported yet because
+	// it was not available for regions, but it can be added if necessary (is there any point in doing so)?
+	auto &&abstractItemColor = abstractItem->pen().color();
+	setPenColor(abstractItemColor.name());
+	setBrushColor(abstractItemColor.name());
+	mColor = abstractItemColor;
+	update();
 }
 
-void RegionItem::setId(const QString &id)
+void RegionItem::switchToEditorMode(bool toEditor)
 {
-	mId = id;
+	// When you enter the region editing mode, the region becomes visible and editable
+	// (for example, you can change its shape like an ellipse or a rectangle),
+	// otherwise it should be non-editable and retain the visibility initially set by the user.
+	if (toEditor) {
+		setVisible(true);
+		setEditable(true);
+		return;
+	}
+	setVisible(mVisible);
+	setEditable(false);
 }
 
 bool RegionItem::filled() const
@@ -93,14 +125,10 @@ void RegionItem::setColor(const QColor &color)
 	setText(text());  // To update text color
 }
 
-void RegionItem::setSize(QSizeF size)
-{
-	mSize = size;
-}
-
 bool RegionItem::containsPoint(QPointF point) const
 {
-	return QGraphicsItem::contains(mapFromScene(point));
+	const auto localPoint = mapFromScene(point);
+	return shapeWihoutResizeArea().contains(localPoint);
 }
 
 bool RegionItem::containsItem(QGraphicsItem *item) const
@@ -108,55 +136,63 @@ bool RegionItem::containsItem(QGraphicsItem *item) const
 	return containsPoint(item->boundingRect().center() + item->scenePos());
 }
 
-QRectF RegionItem::boundingRect() const
+QDomElement RegionItem::serialize(QDomElement &element) const
 {
-	return QRectF(QPointF(), mSize);
-}
+	QDomElement regionNode = AbstractItem::serialize(element);
+	regionNode.setTagName("region");
 
-void RegionItem::serialize(QDomElement &element) const
-{
-	if (!id().isEmpty()) {
-		element.setAttribute("id", id());
-	}
+	regionNode.setAttribute("type", regionType());
+	regionNode.setAttribute("filled", filled() ? "true" : "false");
 
-	element.setAttribute("type", regionType());
-	element.setAttribute("filled", filled() ? "true" : "false");
+	const auto &mMetricSystem = coordinateSystem();
 
 	if (!text().isEmpty()) {
-		element.setAttribute("text", text());
-		element.setAttribute("textX",
-		                     QString::number(mMetricSystem->toUnit(textPosition().x())));
-		element.setAttribute("textY",
-		                     QString::number(mMetricSystem->toUnit(textPosition().y())));
+		regionNode.setAttribute("text", text());
+		regionNode.setAttribute("textX",
+				     QString::number(mMetricSystem->toUnit(textPosition().x())));
+		regionNode.setAttribute("textY",
+				     QString::number(mMetricSystem->toUnit(textPosition().y())));
 	}
 
-	QSizeF const size = boundingRect().size();
-	element.setAttribute("height",
-	                     QString::number(mMetricSystem->toUnit(size.height())));
-	element.setAttribute("width",
-	                     QString::number(mMetricSystem->toUnit(size.width())));
-	element.setAttribute("x",
-	                     QString::number(mMetricSystem->toUnit(pos().x())));
-	element.setAttribute("y",
-	                     QString::number(mMetricSystem->toUnit(pos().y())));
+	if (mDumpPositionInfo) {
+		regionNode.setAttribute("x",
+				     QString::number(mMetricSystem->toUnit(x1() + scenePos().x())));
+		regionNode.setAttribute("y",
+				     QString::number(mMetricSystem->toUnit(y1() + scenePos().y())));
 
-	element.setAttribute("visible", isVisible() ? "true" : "false");
+		const auto height = qAbs(x2() - x1());
+		const auto width = qAbs(y2() - y1());
 
-	element.setAttribute("color", color().name());
+		regionNode.setAttribute("height",
+				     QString::number(mMetricSystem->toUnit(height)));
+		regionNode.setAttribute("width",
+				     QString::number(mMetricSystem->toUnit(width)));
+	}
+
+	regionNode.setAttribute("visible", mVisible ? "true" : "false");
+
+	regionNode.setAttribute("color", color().name());
+	element.appendChild(regionNode);
+	return regionNode;
+}
+
+void RegionItem::setDumpPositionInfo(bool needDump)
+{
+	mDumpPositionInfo = needDump;
 }
 
 void RegionItem::deserialize(const QDomElement &element)
 {
-	if (element.hasAttribute("id")) {
-		setId(element.attribute("id"));
-	}
-
+	AbstractItem::deserialize(element);
 	if (element.hasAttribute("filled")) {
 		setFilled(element.attribute("filled") == "true");
+		setBrushStyle(mFilled ? "Diag" : "None");
 	}
 
 	if (element.hasAttribute("color")) {
 		setColor(QColor(element.attribute("color")));
+		setPenColor(mColor.name());
+		setBrushColor(mColor.name());
 	}
 
 	if (element.hasAttribute("text")) {
@@ -167,37 +203,38 @@ void RegionItem::deserialize(const QDomElement &element)
 		setTextPosition(deserializePoint(element, "textX", "textY"));
 	}
 
-	if (element.hasAttribute("x") && element.hasAttribute("y")) {
-		setPos(deserializePoint(element, "x", "y"));
-	}
-
 	if (element.hasAttribute("visible")) {
-		setVisible(element.attribute("visible") == "true");
+		mVisible = element.attribute("visible") == "true";
+		setVisible(mVisible);
 	}
 
-	if (element.hasAttribute("height") && element.hasAttribute("width")) {
-		const QString heightText = element.attribute("height");
-		const QString widthText = element.attribute("width");
-		bool heightOk = false;
-		bool widthOk = false;
-		const qreal height = heightText.toDouble(&heightOk);
-		const qreal width = widthText.toDouble(&widthOk);
-		if (heightOk && widthOk) {
-			setSize(QSizeF(mMetricSystem->toPx(width),
-			               mMetricSystem->toPx(height)));
-		} /// @todo: else report error
-	}
-}
+	if (mDumpPositionInfo) {
+		if (element.hasAttribute("x") && element.hasAttribute("y")) {
+			const auto &point = deserializePoint(element, "x", "y");
+			setPos(QPointF());
+			setX1(point.x());
+			setY1(point.y());
+		}
 
-void RegionItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-	Q_UNUSED(option)
-	Q_UNUSED(widget)
-	painter->save();
-	painter->setPen(mColor);
-	painter->setBrush(QBrush(mColor, mFilled ? Qt::BDiagPattern : Qt::NoBrush));
-	painter->drawPath(shape());
-	painter->restore();
+		if (element.hasAttribute("height") && element.hasAttribute("width")) {
+			auto &&heightText = element.attribute("height");
+			auto &&widthText = element.attribute("width");
+			bool heightOk = false;
+			bool widthOk = false;
+			const auto height = heightText.toDouble(&heightOk);
+			const auto width = widthText.toDouble(&widthOk);
+			const auto &mMetricSystem = coordinateSystem();
+			if (heightOk && widthOk) {
+				const auto &size = QSizeF(mMetricSystem->toPx(width),
+							  mMetricSystem->toPx(height));
+				setX2(x1() + size.height());
+				setY2(y1() + size.width());
+			} else {
+				setX2(x1() + defaultSize.height());
+				setY2(y1() + defaultSize.width());
+			}
+		}
+	}
 }
 
 QPointF RegionItem::deserializePoint(const QDomElement &element, const QString &xAttribute, const QString &yAttribute)
@@ -209,6 +246,7 @@ QPointF RegionItem::deserializePoint(const QDomElement &element, const QString &
 	const qreal x = textX.toDouble(&xOk);
 	const qreal y = textY.toDouble(&yOk);
 	if (xOk && yOk) {
+		const auto &mMetricSystem = coordinateSystem();
 		return mMetricSystem->toPx({x, y});
 	} /// @todo: else report error
 

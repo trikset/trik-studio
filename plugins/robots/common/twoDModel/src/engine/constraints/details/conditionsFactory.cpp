@@ -116,10 +116,10 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 		if (QGraphicsObject * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shape()).contains(
+				return region->mapToScene(region->shapeWihoutResizeArea()).contains(
 						graphicsObject->mapToScene(graphicsObject->shape()));
 			} else if (objectPoint == "any") {
-				return region->mapToScene(region->shape()).intersects(
+				return region->mapToScene(region->shapeWihoutResizeArea()).intersects(
 						graphicsObject->mapToScene(graphicsObject->shape()));
 			}
 			return region->containsItem(graphicsObject);
@@ -127,9 +127,9 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shape()).contains(robotModel->robotBoundingPath(false));
+				return region->mapToScene(region->shapeWihoutResizeArea()).contains(robotModel->robotBoundingPath(false));
 			} else if (objectPoint == "any") {
-				return region->mapToScene(region->shape()).intersects(robotModel->robotBoundingPath(false));
+				return region->mapToScene(region->shapeWihoutResizeArea()).intersects(robotModel->robotBoundingPath(false));
 			}
 			return region->containsPoint(robotModel->robotCenter());
 		}
@@ -151,10 +151,10 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 				auto deviceShape = robotModel->robotsTransform().map(
 						robotModel->sensorBoundingPath(device->port()));
 				if (objectPoint == "all") {
-					return region->mapToScene(region->shape()).contains(
+					return region->mapToScene(region->shapeWihoutResizeArea()).contains(
 							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
 				} else if (objectPoint == "any") {
-					return region->mapToScene(region->shape()).intersects(
+					return region->mapToScene(region->shapeWihoutResizeArea()).intersects(
 							deviceShape.isEmpty() ? robotModel->robotBoundingPath(false) : deviceShape);
 				}
 				return region->containsPoint(
