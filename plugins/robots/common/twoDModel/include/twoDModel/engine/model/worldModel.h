@@ -129,6 +129,12 @@ public:
 	/// Removes \a cube from the world model.
 	void removeCube(QSharedPointer<items::CubeItem> cube);
 
+	/// Appends \a region into world model.
+	void addRegion(const QSharedPointer<items::RegionItem> &region);
+
+	/// Removes \a region from the world model.
+	void removeRegion(QSharedPointer<items::RegionItem> region);
+
 	/// Appends \a comment into world model.
 	void addComment(const QSharedPointer<items::CommentItem> &comment);
 
@@ -215,6 +221,9 @@ public:
 
 	/// Creates region item described by \a element in the world model.
 	void createRegion(const QDomElement &element);
+
+	/// Creates region from \a ColorFieldItem.
+	QSharedPointer<items::RegionItem> createRegionFromItem(const items::ColorFieldItem &item, bool bound = false);
 
 	/// Removes item with the \a id from the world model.
 	void removeItem(const QString &id);

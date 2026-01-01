@@ -19,18 +19,28 @@
 namespace twoDModel {
 namespace items {
 
+class RectangleItem;
+
 /// Rectangle-shaped zone in 2D model.
 class RectangularRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit RectangularRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
-	                           QGraphicsItem *parent = nullptr);
+	explicit RectangularRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			       QGraphicsItem *parent = nullptr);
+
+	explicit RectangularRegion(QSharedPointer<graphicsUtils::AbstractItem> item,
+			graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			QGraphicsItem *parent = nullptr);
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	// Regions are editable by the user and can be expanded
+	QPainterPath resizeArea() const override;
+	QPainterPath shape() const override;
+	QRectF boundingRect() const override;
+	QPainterPath shapeWihoutResizeArea() const override;
 
 protected:
 	QString regionType() const override;
-private:
-	QPainterPath shape() const override;
 };
 
 }

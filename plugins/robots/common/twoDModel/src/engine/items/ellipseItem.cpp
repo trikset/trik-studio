@@ -123,6 +123,18 @@ void EllipseItem::deserialize(const QDomElement &element)
 	readPenBrush(element);
 }
 
+QPainterPath EllipseItem::shapeWihoutResizeArea() const
+{
+	QPainterPath result;
+	result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	return result;
+}
+
+void EllipseItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	ColorFieldItem::propagateSwitchToRegionMenu(event);
+}
+
 QPainterPath EllipseItem::shape() const
 {
 	QPainterPath result;

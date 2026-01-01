@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "rectangleItem.h"
-
+#include <QMenu>
 #include <QtWidgets/QAction>
 
 using namespace twoDModel::items;
@@ -32,14 +32,14 @@ RectangleItem::RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSyst
 
 AbstractItem *RectangleItem::clone() const
 {
-	RectangleItem * const cloned = new RectangleItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto * const cloned = new RectangleItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
 
 QAction *RectangleItem::rectangleTool()
 {
-	QAction * const result = new QAction(loadTextColorIcon(":/icons/2d_rectangle.svg"), tr("Rectangle (R)"), nullptr);
+	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_rectangle.svg"), tr("Rectangle (R)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_R), QKeySequence(Qt::Key_7)});
 	result->setCheckable(true);
 	return result;
@@ -121,6 +121,18 @@ void RectangleItem::deserialize(const QDomElement &element)
 	setX2(end.x());
 	setY2(end.y());
 	readPenBrush(element);
+}
+
+void RectangleItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	ColorFieldItem::propagateSwitchToRegionMenu(event);
+}
+
+QPainterPath RectangleItem::shapeWihoutResizeArea() const
+{
+	QPainterPath result;
+	result.addRect(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	return result;
 }
 
 QPainterPath RectangleItem::shape() const
