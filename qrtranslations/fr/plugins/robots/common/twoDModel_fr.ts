@@ -20,7 +20,7 @@
         <translation>%1 n&apos;est pas une région</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+56"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 n&apos;est pas d&apos;un type qui permet de l&apos;associer avec une région</translation>
     </message>
@@ -802,7 +802,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+854"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+855"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>

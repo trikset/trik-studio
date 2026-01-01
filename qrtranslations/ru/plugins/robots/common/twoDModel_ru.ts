@@ -313,7 +313,7 @@
         <translation>%1 - не регион</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+56"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 не сопоставить с регионом (не тот тип)</translation>
     </message>
@@ -330,7 +330,7 @@
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
-        <location line="-88"/>
+        <location line="-90"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
@@ -1145,7 +1145,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+854"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+855"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>

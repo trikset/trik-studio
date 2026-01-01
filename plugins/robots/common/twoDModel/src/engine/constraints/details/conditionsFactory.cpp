@@ -127,9 +127,11 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 
 		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
-				return region->mapToScene(region->shapeWihoutResizeArea()).contains(robotModel->robotBoundingPath(false));
+				return region->mapToScene(region->shapeWihoutResizeArea())
+						.contains(robotModel->robotBoundingPath(false));
 			} else if (objectPoint == "any") {
-				return region->mapToScene(region->shapeWihoutResizeArea()).intersects(robotModel->robotBoundingPath(false));
+				return region->mapToScene(region->shapeWihoutResizeArea())
+						.intersects(robotModel->robotBoundingPath(false));
 			}
 			return region->containsPoint(robotModel->robotCenter());
 		}

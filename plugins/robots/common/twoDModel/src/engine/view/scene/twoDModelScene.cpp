@@ -84,12 +84,13 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::commentAdded, this, &TwoDModelScene::onAbstractItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorFieldAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this, [this] (const QSharedPointer<items::RegionItem> &item) {
-			TwoDModelScene::onAbstractItemAdded(item);
-			if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
-				item->switchToEditorMode(true);
-			}
-		});
+	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded,
+			this, [this] (const QSharedPointer<items::RegionItem> &item) {
+				TwoDModelScene::onAbstractItemAdded(item);
+				if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
+					item->switchToEditorMode(true);
+				}
+			});
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
 			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
 		if (!justChanged) { addItem(item.data()); }

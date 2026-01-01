@@ -215,9 +215,10 @@ private:
 		, region
 	};
 
-	/// The region editing mode implies the following. If we use ReadOnlyWorldModel, the region editing mode should not make any changes to the behavior.
-	/// Otherwise, in the region editing mode, all regions (depending on their semantics) should be able to be edited.
-	/// For other elements on the scene, this may involve additional functionality that can be accessed in this mode.
+	/// The region editing mode implies the following. If we use ReadOnlyWorldModel, the region editing mode should
+	/// not make any changes to the behavior. Otherwise, in the region editing mode, all regions
+	/// (depending on their semantics) should be able to be edited.  For other elements on the scene,
+	/// this may involve additional functionality that can be accessed in this mode.
 	enum class EditorMode {
 		defaultMode,
 		regionEditorMode

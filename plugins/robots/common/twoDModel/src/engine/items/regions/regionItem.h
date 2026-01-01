@@ -79,14 +79,14 @@ public:
 
 	QDomElement serialize(QDomElement &element) const override;
 
-	/// A general function for deserializing regions. RegionItem is responsible for deserializing the color, text, filled,
-	/// and optionally the location of this region (not relevant in the case of BoundRegion)
+	/// A general function for deserializing regions. RegionItem is responsible for deserializing the color,
+	/// text, filled, and optionally the location of this region (not relevant in the case of BoundRegion)
 	void deserialize(const QDomElement &element) override;
 
 	void setDumpPositionInfo(bool needDump);
 
-	/// A function for managing the state of a region. By default, the region should be invisible to the user on the scene
-	/// (if the initial visibility was set to false during deserialization).
+	/// A function for managing the state of a region. By default, the region should be
+	/// (invisible to the user on the scene if the initial visibility was set to false during deserialization).
 	/// In the case of region editing mode, each region should be visible
 	virtual void switchToEditorMode(bool toEditor);
 

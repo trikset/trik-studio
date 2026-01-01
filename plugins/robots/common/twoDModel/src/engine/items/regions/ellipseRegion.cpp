@@ -56,8 +56,8 @@ QPainterPath EllipseRegion::shape() const
 	result.setFillRule(Qt::WindingFill);
 	// For the pen().width() region, it will always be 1 regardless of its parent ellipse.
 	// pen().width() / 2 is written if this behavior changes in the future.
-	// At the same time, we do not make a difference between filled and not filled parent shapes with QPainterPathStroker,
-	// as the region cannot be a path at the moment.
+	// At the same time, we do not make a difference between filled and not filled
+	// parent shapes with QPainterPathStroker, as the region cannot be a path at the moment.
 	result.addEllipse(graphicsUtils::RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	if (isSelected()) {
 		 result.addPath(resizeArea());

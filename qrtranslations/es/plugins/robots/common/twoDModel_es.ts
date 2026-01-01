@@ -157,13 +157,13 @@
         <translation>%1 no es una región</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="167"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="169"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 tiene un tipo incorrecto para asociarlo con una región</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="176"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="188"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="178"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="190"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="102"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="114"/>
         <source>No such event: %1</source>
@@ -794,32 +794,32 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="854"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="855"/>
         <source>Select images</source>
         <translation>Seleccionar imágenes</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="856"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="857"/>
         <source>Graphics (*.*)</source>
         <translation>Gráficos (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="870"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="872"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Está intentando cargar una imagen muy grande, lo que podría congelar la ejecución durante un tiempo. ¿Continuar?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="880"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="881"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="882"/>
         <source>Cannot load %1. Try another file.</source>
         <translation>No se puede cargar %1. Intente con otro archivo.</translation>
     </message>

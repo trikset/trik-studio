@@ -157,13 +157,13 @@
         <translation>%1 không phải là một vùng</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="167"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="169"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 có kiểu dữ liệu không phù hợp để so khớp với vùng</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="176"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="188"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="178"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="190"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="102"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="114"/>
         <source>No such event: %1</source>
@@ -794,32 +794,32 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="854"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="855"/>
         <source>Select images</source>
         <translation>Chọn hình ảnh</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="856"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="857"/>
         <source>Graphics (*.*)</source>
         <translation>Đồ họa (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="870"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
         <source>Warning</source>
         <translation>Cảnh báo</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="872"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Bạn đang cố tải một hình ảnh quá lớn, có thể làm chương trình treo trong một thời gian. Tiếp tục?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="880"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="881"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="882"/>
         <source>Cannot load %1. Try another file.</source>
         <translation>Không thể tải %1. Hãy thử tệp khác.</translation>
     </message>
