@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/xml-templates">
+        <file>templates/timer-success-event.xml</file>
+        <file>templates/set-object-warzone.xml</file>
+        <file>templates/object-region.xml</file>
+    </qresource>
+</RCC>

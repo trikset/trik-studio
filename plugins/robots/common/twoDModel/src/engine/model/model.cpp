@@ -181,9 +181,18 @@ void Model::deserialize(const QDomDocument &model)
 	mSettings->deserialize(settings);
 
 	if (mChecker) {
-		const auto &constraints = model.documentElement().firstChildElement("constraints");
 		/// @todo: should we handle if it returned false?
-		mChecker->parseConstraints(constraints);
+		const auto &templates = model.documentElement().firstChildElement("templates");
+		if (mChecker->parseTemplates(templates)) {
+			const auto &constraints = model.documentElement().firstChildElement("constraints");
+			QDomDocument newDoc;
+			auto &&importedNode = newDoc.importNode(constraints, true).toElement();
+			newDoc.appendChild(importedNode);
+			auto result = mChecker->proccessTemplates(importedNode);
+			if (result) {
+				mChecker->parseConstraints(constraints, importedNode);
+			}
+		}
 	}
 
 	const auto &worldList = model.elementsByTagName("world");

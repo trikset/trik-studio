@@ -69,6 +69,8 @@ HEADERS += \
 	$$PWD/src/engine/items/itemProperty.h
 
 HEADERS += \
+        $$PWD/src/engine/constraints/details/templatesParser.h \
+	$$PWD/src/engine/constraints/details/template.h \
 	$$PWD/src/engine/twoDModelEngineApi.h \
 	$$PWD/src/engine/view/nullTwoDModelDisplayWidget.h \
 	$$PWD/src/engine/view/scene/twoDModelScene.h \
@@ -137,6 +139,8 @@ HEADERS += \
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
+        $$PWD/src/engine/constraints/details/templatesParser.cpp \
+	$$PWD/src/engine/constraints/details/template.cpp \
 	$$PWD/src/engine/items/cubeItem.cpp \
 	$$PWD/src/engine/model/colorDetector.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
@@ -236,3 +240,6 @@ SOURCES += \
 
 FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
+
+RESOURCES += \
+$$PWD/src/engine/constraints/details/templates.qrc \

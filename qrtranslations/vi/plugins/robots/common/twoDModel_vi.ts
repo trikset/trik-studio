@@ -209,6 +209,73 @@
         <source>Object &quot;%1&quot; has no property &quot;%2&quot;</source>
         <translation>Đối tượng &quot;%1&quot; không có thuộc tính &quot;%2&quot;</translation>
     </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="52"/>
+        <source>The &lt;use&gt; tag must contain a &quot;template&quot; attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="58"/>
+        <source>Recursive template expansion detected: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="79"/>
+        <source>The &lt;use&gt; tag can only contain a child tag &lt;with&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="208"/>
+        <source>the &lt;templates&gt;; tag can only contain the &lt;template&gt;; tag as a child tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="281"/>
+        <source>The &lt;template&gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="289"/>
+        <source>Redefinition a template %1 that already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="301"/>
+        <source>the &lt;params&gt; tag can only contain the &lt;param&gt; tag as a child tag for template %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="309"/>
+        <source>The &lt;param&gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="328"/>
+        <source>The &lt;template&gt; of template %1 tag was provided, but the required child tag &lt;content&gt; was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="336"/>
+        <source>Currently, this method of setting &lt;content&gt; tag for the template %1 is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="357"/>
+        <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="382"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="383"/>
+        <source>line:column %1:%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="389"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="392"/>
+        <source>, line %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -329,14 +396,43 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="118"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="172"/>
+        <source>Error while template substitution: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="178"/>
+        <source>Error while parsing template: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="184"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Lỗi khi phân tích cú pháp các ràng buộc: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="309"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="375"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Chương trình đã kết thúc, nhưng nhiệm vụ chưa hoàn thành.</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::constraints::details::TemplatesParser</name>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="68"/>
+        <source>The &lt;use&gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="108"/>
+        <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="390"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="393"/>
+        <source>Substitution chain: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -458,7 +554,7 @@
         <translation>Mô hình thế giới có phiên bản %1. Phiên bản hiện tại là %2. Vui lòng kiểm tra xem mô hình thế giới có hoạt động như mong đợi hay không.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="208"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="218"/>
         <source>This robot model already exists</source>
         <translation>Mô hình robot này đã tồn tại</translation>
     </message>

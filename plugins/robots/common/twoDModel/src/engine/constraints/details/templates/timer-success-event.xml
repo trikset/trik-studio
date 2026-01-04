@@ -1,0 +1,19 @@
+<template name="timer-success-event">
+    <params>
+	<param name="timeout"/>
+	<param name="trigger"/>
+    </params>
+    <content>
+<![CDATA[
+<event settedUpInitially="true">
+    <condition>
+        <timer timeout="#{timeout}" forceDropOnTimeout="false"/>
+    </condition>
+    <triggers>
+        #{trigger}
+        <success/>
+    </triggers>
+</event>
+]]>
+    </content>
+</template>

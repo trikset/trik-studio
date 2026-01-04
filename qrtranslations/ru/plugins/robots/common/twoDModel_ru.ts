@@ -415,6 +415,73 @@
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+52"/>
+        <source>The &lt;use&gt; tag must contain a &quot;template&quot; attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Recursive template expansion detected: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>The &lt;use&gt; tag can only contain a child tag &lt;with&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+129"/>
+        <source>the &lt;templates&gt;; tag can only contain the &lt;template&gt;; tag as a child tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+73"/>
+        <source>The &lt;template&gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Redefinition a template %1 that already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>the &lt;params&gt; tag can only contain the &lt;param&gt; tag as a child tag for template %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>The &lt;param&gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>The &lt;template&gt; of template %1 tag was provided, but the required child tag &lt;content&gt; was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Currently, this method of setting &lt;content&gt; tag for the template %1 is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <location line="+1"/>
+        <source>line:column %1:%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+3"/>
+        <source>, line %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -609,7 +676,17 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+172"/>
+        <source>Error while template substitution: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Error while parsing template: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
@@ -617,6 +694,25 @@
         <location line="+191"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
+    </message>
+</context>
+<context>
+    <name>twoDModel::constraints::details::TemplatesParser</name>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="-324"/>
+        <source>The &lt;use&gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+282"/>
+        <location line="+3"/>
+        <source>Substitution chain: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -742,7 +838,7 @@
         <translation>Модель мира имеет версию %1. Текущая версия %2. Пожалуйста, убедитесь, что модель мира ведет себя ожидаемым образом.</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+43"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>

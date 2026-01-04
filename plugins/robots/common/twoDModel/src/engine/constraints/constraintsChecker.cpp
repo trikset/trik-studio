@@ -17,8 +17,9 @@
 #include <qrutils/stringUtils.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <utils/objectsSet.h>
-
+#include <QFile>
 #include "details/constraintsParser.h"
+#include "details/templatesParser.h"
 #include "details/event.h"
 #include "twoDModel/engine/model/model.h"
 #include "src/engine/items/wallItem.h"
@@ -27,7 +28,7 @@
 #include "src/engine/items/cubeItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/regions/regionItem.h"
-
+#include <QsLog.h>
 
 using namespace twoDModel::constraints;
 Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
@@ -35,6 +36,7 @@ Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
 ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model)
 	: mErrorReporter(errorReporter)
 	, mModel(model)
+	, mTemplatesParser(new details::TemplatesParser)
 	, mParser(new details::ConstraintsParser(mEvents, mVariables, mObjects, mModel.timeline(), mStatus))
 {
 	connect(&mStatus, &details::StatusReporter::success, this, [this](bool deferred) {
@@ -70,18 +72,70 @@ bool ConstraintsChecker::hasConstraints() const
 	return !mCurrentXml.isNull() && mParsedSuccessfully;
 }
 
-bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
+bool ConstraintsChecker::parseTemplates(const QDomElement &templatesXml)
+{
+	mTemplatesParser->clear();
+	mTemplatesParser->parseSystemTemplates();
+	const auto &parsingErrors = mTemplatesParser->parsingErrors();
+	const auto hasErrors = !parsingErrors.isEmpty();
+	for (auto &&error : parsingErrors) {
+		QLOG_ERROR() << error;
+	}
+
+	if (hasErrors) {
+		return false;
+	}
+
+	if (templatesXml.isNull()) {
+		// The user did not provide templates
+		return true;
+	}
+
+	auto result = mTemplatesParser->parse(templatesXml);
+	for (auto &&error : mTemplatesParser->parsingErrors()) {
+		reportTemplateParserError(error);
+	}
+	return result;
+}
+
+bool ConstraintsChecker::proccessTemplates(const QDomElement &constraintsXml)
+{
+	if (constraintsXml.isNull()) {
+		// The user did not provide constraints
+		return true;
+	}
+
+	auto result = mTemplatesParser->transform(constraintsXml);
+	for (auto &&error : mTemplatesParser->substituionErrors()) {
+		reportTemplateSubstitutionError(error);
+	}
+
+#if 0
+	QFile file("/path/to/file.xml");
+	if (file.open(QIODevice::WriteOnly)) {
+	    QTextStream stream(&file);
+	    stream << constraintsXml.ownerDocument().toString(4);
+	    file.close();
+	}
+#endif
+	return result;
+}
+bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
+					  const QDomElement &constraintsXmlAfterTemplateSubstitution)
 {
 	mEvents.clear();
 	mActiveEvents.clear();
 	mVariables.clear();
 	mCurrentConstraintDocument.clear();
-	mParsedSuccessfully = mParser->parse(constraintsXml);
+	mParsedSuccessfully = mParser->parse(constraintsXmlAfterTemplateSubstitution);
 
 	if (mParsedSuccessfully) {
-		auto importNode = mCurrentConstraintDocument.importNode(constraintsXml, true);
+		auto importNode = mCurrentConstraintDocument.
+				importNode(constraintsXmlBeforeTemplateSubstitution, true);
 		mCurrentXml = importNode.toElement();
-		mCurrentConstraintDocument.appendChild(mCurrentXml);
+		if (!mCurrentXml.isNull()) {
+			mCurrentConstraintDocument.appendChild(mCurrentXml);
+		}
 	}
 
 	for (auto &&error : mParser->errors()) {
@@ -111,6 +165,18 @@ void ConstraintsChecker::checkConstraints()
 void ConstraintsChecker::setEnabled(bool enabled)
 {
 	mEnabled = enabled;
+}
+
+void ConstraintsChecker::reportTemplateSubstitutionError(const QString &message)
+{
+	const QString fullMessage = tr("Error while template substitution: %1").arg(message);
+	mErrorReporter.addError(fullMessage);
+}
+
+void ConstraintsChecker::reportTemplateParserError(const QString &message)
+{
+	const QString fullMessage = tr("Error while parsing template: %1").arg(message);
+	mErrorReporter.addError(fullMessage);
 }
 
 void ConstraintsChecker::reportParserError(const QString &message)
