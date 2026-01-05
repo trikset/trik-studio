@@ -21,15 +21,13 @@ using namespace twoDModel::items;
 
 RectangularRegion::RectangularRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			     QGraphicsItem *parent)
-	: RegionItem(metricSystem, parent)
-{}
+	: RegionItem(metricSystem, parent) {}
 
 RectangularRegion::RectangularRegion(
 		QSharedPointer<graphicsUtils::AbstractItem> item,
 		graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QGraphicsItem *parent):
-	RegionItem(item, metricSystem, parent)
-{}
+	RegionItem(item, metricSystem, parent) {}
 
 void RectangularRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {

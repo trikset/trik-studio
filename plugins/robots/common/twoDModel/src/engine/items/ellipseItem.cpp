@@ -126,7 +126,7 @@ void EllipseItem::deserialize(const QDomElement &element)
 QPainterPath EllipseItem::shapeWihoutResizeArea() const
 {
 	QPainterPath result;
-	result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	return result;
 }
 
@@ -146,7 +146,7 @@ QPainterPath EllipseItem::shape() const
 		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
 		result = ps.createStroke(result);
 	} else {
-		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	}
 
 	if (isSelected()) {

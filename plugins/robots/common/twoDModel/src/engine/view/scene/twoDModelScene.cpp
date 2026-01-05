@@ -33,6 +33,7 @@
 #include <kitBase/robotModel/robotParts/vectorSensor.h>
 #include <kitBase/robotModel/robotParts/lidarSensor.h>
 #include "robotItem.h"
+#include "twoDSceneItem.h"
 
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/image.h"
@@ -84,13 +85,7 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::commentAdded, this, &TwoDModelScene::onAbstractItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorFieldAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded,
-			this, [this] (const QSharedPointer<items::RegionItem> &item) {
-				TwoDModelScene::onAbstractItemAdded(item);
-				if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
-					item->switchToEditorMode(true);
-				}
-			});
+	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
 			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
 		if (!justChanged) { addItem(item.data()); }
@@ -328,23 +323,18 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 
 void TwoDModelScene::onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item)
 {
-	connect(&*item, &items::ColorFieldItem::convertToRegionWithContextMenu,
-		this, [this](const items::ColorFieldItem &item){
-			const auto &result = mModel.worldModel().createRegionFromItem(item);
+	auto onColorFieldAddedLambda = [this](const items::ColorFieldItem &item,
+						bool bindToRegion = false) {
+		const auto &region = mModel.worldModel().createRegionFromItem(item, bindToRegion);
+		if (!bindToRegion) {
 			// When creating a region, the first step in undoing is to delete the region itself,
 			// and another undo will restore the original associated ColorFieldItem
 			deleteSelectedItems();
-			mDrawingAction = DrawingAction::region;
-			registerInUndoStack(result.data());
-			setNoneStatus();
-	});
-
-	connect(&*item, &items::ColorFieldItem::bindToRegionWithContextMenu,
-		this, [this](const items::ColorFieldItem &item){
-			const auto& region = mModel.worldModel().createRegionFromItem(item, true);
-			mDrawingAction = DrawingAction::region;
-			registerInUndoStack(region.data());
-			setNoneStatus();
+		}
+		mDrawingAction = DrawingAction::region;
+		registerInUndoStack(region.data());
+		setNoneStatus();
+		if (bindToRegion) {
 			const auto regionId = region->id();
 			// At the moment, deleting an object and its associated regions is two different operations,
 			// and this should be fixed to allow the simultaneous restoration of an object and its associated
@@ -352,11 +342,18 @@ void TwoDModelScene::onColorFieldAdded(QSharedPointer<items::ColorFieldItem> ite
 			connect(&item, &QObject::destroyed, this, [this, regionId]() {
 				deleteWithCommand(QStringList{regionId}, {}, {});
 			});
+		}
+	};
+
+	connect(&*item, &items::ColorFieldItem::convertToRegionWithContextMenu,
+		this, [onColorFieldAddedLambda](const items::ColorFieldItem &item){
+			onColorFieldAddedLambda(item, false);
 	});
 
-	if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
-		item->switchToEditorMode(true);
-	}
+	connect(&*item, &items::ColorFieldItem::bindToRegionWithContextMenu,
+		this, [onColorFieldAddedLambda](const items::ColorFieldItem &item){
+			onColorFieldAddedLambda(item, true);
+	});
 
 	onAbstractItemAdded(item);
 }
@@ -367,10 +364,29 @@ void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
 	subscribeItem(item.data());
 	connect(&*item, &graphicsUtils::AbstractItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
 	item->setEditable(!mWorldReadOnly);
+	onTwoDSceneItemAdded(item);
+}
+
+void TwoDModelScene::onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item)
+{
+	auto twoDSceneItem = qSharedPointerDynamicCast<view::TwoDSceneItem>(item);
+	if (!twoDSceneItem)  {
+		return;
+	}
+
+	if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
+		twoDSceneItem->switchToMode(mCurrentEditorMode);
+	}
+
+	mTwoDSceneItems.insert(twoDSceneItem->id(), twoDSceneItem);
 }
 
 void TwoDModelScene::onItemRemoved(const QSharedPointer<QGraphicsItem> &item)
 {
+	if (auto twoDSceneItem = qSharedPointerDynamicCast<view::TwoDSceneItem>(item)) {
+		mTwoDSceneItems.remove(twoDSceneItem->id());
+	}
+
 	mGraphicsItem = nullptr;
 	removeItem(item.data());
 }
@@ -1155,37 +1171,13 @@ void TwoDModelScene::onEditorModeToggled(bool enable)
 
 void TwoDModelScene::switchToEditorMode(EditorMode mode)
 {
-	if (mode == EditorMode::regionEditorMode) {
-		switchToRegionEditorMode();
-		return;
-	}
-	switchToDefaultMode();
-}
+	mCurrentEditorMode = mode;
 
-void TwoDModelScene::restoreEditorState()
-{
-	const auto enable = mCurrentEditorMode == EditorMode::defaultMode ? false : true;
-	for (auto &&colorField: mModel.worldModel().colorFields()) {
-		colorField->switchToEditorMode(enable);
+	for (auto &&item: mTwoDSceneItems) {
+		if (const auto &itemPtr = item.toStrongRef()) {
+			itemPtr->switchToMode(mode);
+		}
 	}
-}
-
-void TwoDModelScene::switchToDefaultMode()
-{
-	for (auto &&region: mModel.worldModel().regions()) {
-		region->switchToEditorMode(false);
-	}
-	mCurrentEditorMode = EditorMode::defaultMode;
-	restoreEditorState();
-}
-
-void TwoDModelScene::switchToRegionEditorMode()
-{
-	for (auto &&region: mModel.worldModel().regions()) {
-		region->switchToEditorMode(true);
-	}
-	mCurrentEditorMode = EditorMode::regionEditorMode;
-	restoreEditorState();
 }
 
 void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotModel::PortInfo &port)

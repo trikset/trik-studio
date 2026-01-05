@@ -22,14 +22,12 @@ using namespace twoDModel::items;
 
 EllipseRegion::EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			     QGraphicsItem *parent)
-	: RegionItem(metricSystem, parent)
-{}
+	: RegionItem(metricSystem, parent) {}
 
 EllipseRegion::EllipseRegion(QSharedPointer<graphicsUtils::AbstractItem> item,
 		graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QGraphicsItem *parent):
-	RegionItem(item, metricSystem, parent)
-{}
+	RegionItem(item, metricSystem, parent) {}
 
 QString EllipseRegion::regionType() const
 {

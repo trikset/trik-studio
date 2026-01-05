@@ -24,6 +24,7 @@
 #include <kitBase/readOnly.h>
 
 #include "twoDModel/engine/model/image.h"
+#include "twoDSceneItem.h"
 
 namespace qReal {
 class ControllerInterface;
@@ -192,6 +193,8 @@ private Q_SLOTS:
 
 	void onAbstractItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
 
+	void onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
+
 	/// Called after some item was kicked away from a world model.
 	void onItemRemoved(const QSharedPointer<QGraphicsItem> &item);
 
@@ -215,19 +218,7 @@ private:
 		, region
 	};
 
-	/// The region editing mode implies the following. If we use ReadOnlyWorldModel, the region editing mode should
-	/// not make any changes to the behavior. Otherwise, in the region editing mode, all regions
-	/// (depending on their semantics) should be able to be edited.  For other elements on the scene,
-	/// this may involve additional functionality that can be accessed in this mode.
-	enum class EditorMode {
-		defaultMode,
-		regionEditorMode
-	};
-
 	void switchToEditorMode(EditorMode mode);
-	void switchToDefaultMode();
-	void switchToRegionEditorMode();
-	void restoreEditorState();
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
@@ -286,13 +277,14 @@ private:
 	QSharedPointer<items::RectangleItem> mCurrentRectangle;
 	QSharedPointer<items::EllipseItem> mCurrentEllipse;
 	QSharedPointer<items::CommentItem> mCurrentComment;
+	QMap<QString, QWeakPointer<TwoDSceneItem>> mTwoDSceneItems;
 
 	commands::ReshapeCommand *mCurrentReshapeCommand = nullptr;
 
 	bool mWorldReadOnly = false;
 	bool mRobotReadOnly = false;
 	bool mSensorsReadOnly = false;
-	EditorMode mCurrentEditorMode = EditorMode::defaultMode;
+	EditorMode mCurrentEditorMode;
 
 	QList<QDomElement> mClipboard;
 };

@@ -44,6 +44,10 @@ BoundRegion::BoundRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem
 	connect(&*abstractItem, &AbstractItem::penChanged, this, [this](const QPen &pen){
 		setPenColor(pen.color().name());
 	});
+
+	if (auto colorFieldItem = qSharedPointerCast<items::ColorFieldItem>(abstractItem)) {
+		colorFieldItem->setBindedToRegion(true);
+	}
 }
 
 int BoundRegion::stroke() const
@@ -73,18 +77,19 @@ void BoundRegion::deserialize(const QDomElement &element)
 		const auto &metricSystem = coordinateSystem();
 		const int stroke = element.attribute("stroke").toInt(&ok);
 		if (ok) {
-			mStroke = metricSystem->toPx(stroke);
+			mStroke = static_cast<int>(metricSystem->toPx(stroke));
 		}
 	}
 }
 
-void BoundRegion::switchToEditorMode(bool toEditor)
+void BoundRegion::switchToMode(EditorMode mode)
 {
 	// Unlike the regular scenario, the region becomes uneditable
 	// (not movable or resizable, simply because the associated AbstractItem is editable,
 	// but this should not apply to other parameters if they are supported in the future,
 	// such as setting the boundRegion text)
-	if (toEditor) {
+	TwoDSceneItem::switchToMode(mode);
+	if (mode == EditorMode::regionEditorMode) {
 		setVisible(true);
 		setEditable(false);
 		return;
@@ -114,21 +119,25 @@ QPainterPath BoundRegion::shape() const
 	if (!strong) {
 		return {};
 	}
+
 	// We are not interested in whether the associated AbstractItem is filled.
 	// From our perspective, a region cannot be a path, and the shape of a region should not contain
 	// the resize area of the associated object.
 	if (auto *ellipseItem = dynamic_cast<items::EllipseItem *>(strong.data())) {
 		result = ellipseItem->shapeWihoutResizeArea();
 	}
-	else if (auto *ellipseItem = dynamic_cast<items::RectangleItem *>(strong.data())) {
-		result = ellipseItem->shapeWihoutResizeArea();
+	else if (auto *rectangleItem = dynamic_cast<items::RectangleItem *>(strong.data())) {
+		result = rectangleItem->shapeWihoutResizeArea();
 	} else {
-		QLOG_ERROR() << "This type of boundId is currently not supported";
+		QLOG_ERROR() << "This type of object that inherits AbstractItem is "
+				"not currently supported for creating a boundRegion";
 		return {};
 	}
+
 	if (!mStroke) {
-		return	result;
+		return result;
 	}
+
 	QPainterPathStroker stroker;
 	stroker.setWidth(mStroke);
 	return stroker.createStroke(result);

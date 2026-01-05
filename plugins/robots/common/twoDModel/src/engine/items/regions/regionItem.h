@@ -17,6 +17,7 @@
 #include <QtWidgets/QGraphicsItem>
 #include <QPointer>
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include "src/engine/view/scene/twoDSceneItem.h"
 
 class QDomElement;
 class QGraphicsTextItem;
@@ -30,7 +31,7 @@ class MetricCoordinateSystem;
 namespace items {
 
 /// Represents some zone on the 2D model world, probably with some text like "Start zone".
-class RegionItem : public graphicsUtils::AbstractItem
+class RegionItem : public view::TwoDSceneItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(RegionItem)
@@ -83,12 +84,13 @@ public:
 	/// text, filled, and optionally the location of this region (not relevant in the case of BoundRegion)
 	void deserialize(const QDomElement &element) override;
 
+	/// Set the serialization behavior for dumping information about the region's position.
 	void setDumpPositionInfo(bool needDump);
 
 	/// A function for managing the state of a region. By default, the region should be
 	/// (invisible to the user on the scene if the initial visibility was set to false during deserialization).
 	/// In the case of region editing mode, each region should be visible
-	virtual void switchToEditorMode(bool toEditor);
+	virtual void switchToMode(EditorMode mode) override;
 
 	/// The initial visibility of the region obtained during deserialization
 	///  (possibly explicitly set by the user in the region editing mode in the future)
@@ -106,7 +108,7 @@ protected:
 	virtual QString regionType() const = 0;
 
 private:
-	QPointF deserializePoint(const QDomElement &element, const QString &xAttribute, const QString &yAttribute);
+	QPointF deserializePoint(const QString &textX, const QString &textY);
 	bool mVisible {};
 	QGraphicsTextItem *mTextItem;  // Takes ownership
 	QPointF mTextPosition {};

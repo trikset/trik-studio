@@ -15,7 +15,6 @@
 #pragma once
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
-
 #include "colorFieldItem.h"
 
 namespace twoDModel {

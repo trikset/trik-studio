@@ -38,7 +38,7 @@ public:
 	void deserialize(const QDomElement &element) override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	QRectF boundingRect() const override;
-	void switchToEditorMode(bool toEditor) override;
+	void switchToMode(EditorMode mode) override;
 	QPainterPath shapeWihoutResizeArea() const override;
 
 private:
