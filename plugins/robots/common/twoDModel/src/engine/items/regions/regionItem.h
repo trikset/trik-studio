@@ -90,7 +90,7 @@ public:
 	/// A function for managing the state of a region. By default, the region should be
 	/// (invisible to the user on the scene if the initial visibility was set to false during deserialization).
 	/// In the case of region editing mode, each region should be visible
-	virtual void switchToMode(EditorMode mode) override;
+	void switchToMode(EditorMode mode) override;
 
 	/// The initial visibility of the region obtained during deserialization
 	///  (possibly explicitly set by the user in the region editing mode in the future)
