@@ -33,12 +33,7 @@ class TwoDSceneItem: public graphicsUtils::AbstractItem
 	Q_DISABLE_COPY(TwoDSceneItem)
 public:
 	explicit TwoDSceneItem(QGraphicsItem *parent = nullptr): AbstractItem(parent) {};
-	~TwoDSceneItem() override = default;
-	QRectF boundingRect() const override = 0;
-	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override = 0;
-	virtual void switchToMode(EditorMode mode) {
-		mCurrentEditorMode = mode;
-	};
+	virtual void switchToMode(EditorMode mode) { mCurrentEditorMode = mode; };
 protected:
 	using EditorMode = twoDModel::view::EditorMode;
 	EditorMode editorMode() const {return mCurrentEditorMode; }

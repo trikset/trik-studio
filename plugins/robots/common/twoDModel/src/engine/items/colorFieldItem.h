@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #pragma once
-#include <qrutils/graphicsUtils/abstractItem.h>
 #include "src/engine/view/scene/twoDSceneItem.h"
 
 namespace twoDModel {
