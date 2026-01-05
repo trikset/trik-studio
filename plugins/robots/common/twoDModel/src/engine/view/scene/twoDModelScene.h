@@ -284,7 +284,7 @@ private:
 	bool mWorldReadOnly = false;
 	bool mRobotReadOnly = false;
 	bool mSensorsReadOnly = false;
-	EditorMode mCurrentEditorMode;
+	EditorMode mCurrentEditorMode = EditorMode::defaultMode;
 
 	QList<QDomElement> mClipboard;
 };

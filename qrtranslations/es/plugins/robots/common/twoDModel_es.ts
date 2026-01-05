@@ -794,32 +794,32 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="874"/>
         <source>Select images</source>
         <translation>Seleccionar imágenes</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="873"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="876"/>
         <source>Graphics (*.*)</source>
         <translation>Gráficos (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="887"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="890"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="888"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="891"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Está intentando cargar una imagen muy grande, lo que podría congelar la ejecución durante un tiempo. ¿Continuar?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="897"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="900"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="898"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="901"/>
         <source>Cannot load %1. Try another file.</source>
         <translation>No se puede cargar %1. Intente con otro archivo.</translation>
     </message>

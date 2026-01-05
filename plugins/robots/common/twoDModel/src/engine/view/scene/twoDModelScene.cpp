@@ -34,7 +34,6 @@
 #include <kitBase/robotModel/robotParts/lidarSensor.h>
 #include "robotItem.h"
 #include "twoDSceneItem.h"
-
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/image.h"
 #include "src/engine/view/scene/sensorItem.h"
@@ -372,6 +371,10 @@ void TwoDModelScene::onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::Abstract
 	auto twoDSceneItem = qSharedPointerDynamicCast<view::TwoDSceneItem>(item);
 	if (!twoDSceneItem)  {
 		return;
+	}
+
+	if (mCurrentEditorMode == EditorMode::defaultMode) {
+		twoDSceneItem->switchToMode(mCurrentEditorMode);
 	}
 
 	if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {

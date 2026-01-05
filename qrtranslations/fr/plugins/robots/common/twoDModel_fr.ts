@@ -802,7 +802,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+871"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+874"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>

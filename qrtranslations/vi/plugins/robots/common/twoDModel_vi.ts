@@ -794,32 +794,32 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="871"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="874"/>
         <source>Select images</source>
         <translation>Chọn hình ảnh</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="873"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="876"/>
         <source>Graphics (*.*)</source>
         <translation>Đồ họa (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="887"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="890"/>
         <source>Warning</source>
         <translation>Cảnh báo</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="888"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="891"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Bạn đang cố tải một hình ảnh quá lớn, có thể làm chương trình treo trong một thời gian. Tiếp tục?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="897"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="900"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="898"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="901"/>
         <source>Cannot load %1. Try another file.</source>
         <translation>Không thể tải %1. Hãy thử tệp khác.</translation>
     </message>
