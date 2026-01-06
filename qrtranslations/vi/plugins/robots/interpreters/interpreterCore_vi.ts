@@ -24,42 +24,52 @@
         <translation>Thông tin văn bản (ms)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="146"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="223"/>
         <source>Uploading &amp;&amp; Running</source>
         <translation>Đang tải lên và thực thi</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="152"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="229"/>
         <source>Running after uploading:</source>
         <translation>Thực thi sau khi tải lên:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="160"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="237"/>
         <source>Ask</source>
         <translation>Hỏi người dùng</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="165"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="242"/>
         <source>Always run</source>
         <translation>Luôn thực thi</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="170"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="247"/>
         <source>Never run</source>
         <translation>Không bao giờ thực thi</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="187"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="258"/>
+        <source>2D-model Editor Settings</source>
+        <translation>Cài đặt Trình chỉnh sửa Mô hình 2D</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="264"/>
+        <source>Enable Region Editor Mode</source>
+        <translation>Bật Chế độ Chỉnh sửa Khu vực</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="192"/>
         <source>Sensors Settings</source>
         <translation>Cài đặt cảm biến</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="233"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="137"/>
         <source>Robotics construction kit</source>
         <translation>Nền tảng robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="247"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="151"/>
         <source>Robot model</source>
         <translation>Mô hình robot</translation>
     </message>
@@ -362,7 +372,7 @@
         <translation>Không có plugin nền tảng robot nào được tải</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="212"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="214"/>
         <source>No robot models available for </source>
         <translation>Không có mô hình robot nào khả dụng cho </translation>
     </message>

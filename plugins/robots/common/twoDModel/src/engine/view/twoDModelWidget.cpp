@@ -247,8 +247,26 @@ void TwoDModelWidget::initWidget()
 	mUi->speedDownButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_minus.svg"));
 	mUi->initialStateButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_robot_back.png"));
 	mUi->trainingModeButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_training.svg"));
+	mUi->editorModeButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_edit.svg"));
 	mUi->toggleDetailsButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_left.png"));
 
+	if (!SettingsManager::value("enableRegionEditorMode").toBool()) {
+		mUi->editorModeButton->hide();
+	}
+
+	qReal::SettingsListener::listen("enableRegionEditorMode", [this](bool enabled) {
+		if (enabled) {
+			mUi->editorModeButton->show();
+		}
+		else {
+			if (mUi->editorModeButton->isChecked()) {
+				mUi->editorModeButton->toggle();
+			}
+			mUi->editorModeButton->hide();
+		};
+	}, this);
+
+	connect(mUi->editorModeButton, &QPushButton::toggled,  &*mScene, &TwoDModelScene::onEditorModeToggled);
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, &*mScene, [&]() { mScene->update(); });
 	connect(mUi->gridParametersBox, &GridParameters::parametersChanged, this, toggleRulers);

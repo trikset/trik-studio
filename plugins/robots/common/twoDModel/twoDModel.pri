@@ -132,6 +132,7 @@ HEADERS += \
 	$$PWD/src/robotModel/nullTwoDRobotModel.h \
 	$$PWD/src/engine/model/physics/box2DPhysicsEngine.h \
 	$$PWD/src/engine/model/physics/parts/box2DItem.h \
+	$$PWD/src/engine/view/scene/twoDSceneItem.h \
 
 SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorAmbient.cpp \

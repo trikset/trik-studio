@@ -19,16 +19,28 @@
 namespace twoDModel {
 namespace items {
 
+class EllipseItem;
+
 /// Ellipse-shaped zone in 2D model.
 class EllipseRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit EllipseRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
+	explicit EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	                       QGraphicsItem *parent = nullptr);
 
-private:
+	explicit EllipseRegion(QSharedPointer<graphicsUtils::AbstractItem> ellipseItem,
+			graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			QGraphicsItem *parent = nullptr);
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+
+	// Regions are editable by the user and can be expanded
+	QPainterPath resizeArea() const override;
 	QPainterPath shape() const override;
+	QRectF boundingRect() const override;
+
+	QPainterPath shapeWihoutResizeArea() const override;
+private:
 	QString regionType() const override;
 };
 

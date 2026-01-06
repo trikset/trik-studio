@@ -167,6 +167,7 @@ void AbstractItem::reshapeRectWithShift()
 
 void AbstractItem::changeDragState(qreal x, qreal y)
 {
+	// NOLINTNEXTLINE(bugprone-branch-clone)
 	if (!mapToScene(resizeArea()).contains(QPointF(x, y))) {
 		mDragState = None;
 	} else if (QRectF(mapToScene(x1(), y1()), QSizeF(0, 0)).adjusted(-resizeDrift, -resizeDrift, resizeDrift
@@ -225,7 +226,7 @@ void AbstractItem::setXYWithDragState(const QPointF pos)
 
 QPainterPath AbstractItem::resizeArea() const
 {
-	return QPainterPath();
+	return {};
 }
 
 void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -270,6 +271,7 @@ void AbstractItem::setPenStyle(const QString &text)
 		mPen.setStyle(Qt::NoPen);
 	}
 
+	// NOLINTNEXTLINE(readability-misleading-indentation)
 	Q_EMIT penChanged(mPen);
 }
 
@@ -289,10 +291,13 @@ void AbstractItem::setBrushStyle(const QString &text)
 {
 	if (text == "Solid") {
 		mBrush.setStyle(Qt::SolidPattern);
+	} else if (text == "Diag") {
+		mBrush.setStyle(Qt::BDiagPattern);
 	} else if (text == "None") {
 		mBrush.setStyle(Qt::NoBrush);
 	}
 
+	// NOLINTNEXTLINE(readability-misleading-indentation)
 	Q_EMIT brushChanged(mBrush);
 }
 
@@ -460,7 +465,7 @@ QRectF AbstractItem::sceneBoundingRectCoord(const QPoint topLeftPicture)
 	QRectF itemBoundingRect = calcNecessaryBoundingRect();
 	const qreal x1 = scenePos().x() + itemBoundingRect.x() - topLeftPicture.x();
 	const qreal y1 = scenePos().y() + itemBoundingRect.y() - topLeftPicture.y();
-	return QRectF(x1, y1, itemBoundingRect.width(), itemBoundingRect.height());
+	return {x1, y1, itemBoundingRect.width(), itemBoundingRect.height()};
 }
 
 void AbstractItem::readPenBrush(const QDomElement &docItem)
@@ -496,6 +501,7 @@ void AbstractItem::readPenBrush(const QDomElement &docItem)
 		mPen.setStyle(Qt::NoPen);
 	}
 
+	// NOLINTNEXTLINE(readability-misleading-indentation)
 	Q_EMIT penChanged(mPen);
 }
 
@@ -515,7 +521,7 @@ QIcon AbstractItem::loadThemedIcon(const QString& path, const QColor& color) {
 	pt.setCompositionMode(QPainter::CompositionMode_SourceIn);
 	pt.fillRect(image.rect(), color);
 	pt.end();
-	return QIcon(image);
+	return image;
 }
 
 QIcon AbstractItem::loadTextColorIcon(const QString& path) {
@@ -616,7 +622,7 @@ void AbstractItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 	event->accept();
 
-	QMenu *menu = new QMenu();
+	auto *menu = new QMenu();
 	QAction *removeAction = menu->addAction(QObject::tr("Remove"));
 	QAction *selectedAction = menu->exec(event->screenPos());
 	delete menu;

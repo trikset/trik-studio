@@ -201,6 +201,7 @@ void WorldModel::addWall(const QSharedPointer<items::WallItem> &wall)
 	Q_EMIT wallAdded(wall);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 {
 	mWalls.remove(wall->id());
@@ -219,6 +220,7 @@ void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
 	Q_EMIT skittleAdded(skittle);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
 {
 	mSkittles.remove(skittle->id());
@@ -237,6 +239,7 @@ void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
 	Q_EMIT ballAdded(ball);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 {
 	mBalls.remove(ball->id());
@@ -255,10 +258,30 @@ void WorldModel::addCube(const QSharedPointer<items::CubeItem> &cube)
 	Q_EMIT cubeAdded(cube);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeCube(QSharedPointer<items::CubeItem> cube)
 {
 	mCubes.remove(cube->id());
 	Q_EMIT itemRemoved(cube);
+}
+
+void WorldModel::addRegion(const QSharedPointer<items::RegionItem> &region)
+{
+	const auto &id = region->id();
+	if (mRegions.contains(id)) {
+		mErrorReporter->addError(tr("Trying to add an item with a duplicate id: %1").arg(id));
+		return; // probably better than having no way to delete those duplicate items on the scene
+	}
+
+	mRegions[id] = region;
+	Q_EMIT regionItemAdded(region);
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void WorldModel::removeRegion(QSharedPointer<items::RegionItem> region)
+{
+	mRegions.remove(region->id());
+	Q_EMIT itemRemoved(region);
 }
 
 void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
@@ -273,6 +296,7 @@ void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
 	Q_EMIT commentAdded(comment);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeComment(QSharedPointer<items::CommentItem> comment)
 {
 	mComments.remove(comment->id());
@@ -317,6 +341,7 @@ void WorldModel::addColorField(const QSharedPointer<items::ColorFieldItem> &colo
 	Q_EMIT colorItemAdded(colorField);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeColorField(QSharedPointer<items::ColorFieldItem> colorField)
 {
 	mColorFields.remove(colorField->id());
@@ -347,6 +372,7 @@ void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
 	Q_EMIT blobsChanged();
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 {
 	mImageItems.remove(imageItem->id());
@@ -489,10 +515,10 @@ QRectF WorldModel::deserializeRect(const QString &string) const
 		const auto y = splittedStr[1].toDouble();
 		const auto w = splittedStr[2].toDouble();
 		const auto h = splittedStr[3].toDouble();
-		return QRectF(x, y, w, h);
+		return {x, y, w, h};
 	}
 
-	return QRectF();
+	return {};
 }
 
 QDomElement WorldModel::serializeWorld(QDomElement &parent) const
@@ -547,9 +573,7 @@ QDomElement WorldModel::serializeWorld(QDomElement &parent) const
 	QDomElement regions = parent.ownerDocument().createElement("regions");
 	result.appendChild(regions);
 	for (auto &&region : mRegions) {
-		QDomElement regionElement = parent.ownerDocument().createElement("region");
-		region->serialize(regionElement);
-		regions.appendChild(regionElement);
+		region->serialize(regions);
 	}
 
 	// IKHON do we need mOrder? if yes, add mOrder to addComment
@@ -594,7 +618,7 @@ QDomElement WorldModel::serializeItem(const QString &id) const
 		QDomElement temporalParent = mXmlFactory->createElement("temporalParent");
 		return item->serialize(temporalParent);
 	} else {
-		return QDomElement();
+		return {};
 	}
 }
 
@@ -894,9 +918,30 @@ QSharedPointer<items::ImageItem> WorldModel::createImageItem(const QDomElement &
 	return imageItem;
 }
 
+QSharedPointer<items::RegionItem> WorldModel::createRegionFromItem(const items::ColorFieldItem &item, bool bound)
+{
+	auto &&id = item.id();
+	auto &&it = mColorFields.find(id);
+	if (it == mColorFields.end()) {
+		return {};
+	}
+	const auto &value = it.value();
+	QSharedPointer<items::RegionItem> regionItem;
+
+	if (bound) {
+		regionItem.reset(new items::BoundRegion(mMetricCoordinateSystem, value, id));
+	} else if (qSharedPointerDynamicCast<items::EllipseItem >(value)) {
+		regionItem.reset(new items::EllipseRegion(value, mMetricCoordinateSystem));
+	} else if (qSharedPointerDynamicCast<items::RectangleItem>(value)) {
+		regionItem.reset(new items::RectangularRegion(value, mMetricCoordinateSystem));
+	}
+	addRegion(regionItem);
+	return regionItem;
+}
+
 void WorldModel::createRegion(const QDomElement &element)
 {
-	const QString type = element.attribute("type", "ellipse").toLower();
+	const auto type = element.attribute("type", "ellipse").toLower();
 	QSharedPointer<items::RegionItem> item;
 	QSharedPointer<QGraphicsObject> boundItem;
 	if (type == "ellipse") {
@@ -906,8 +951,10 @@ void WorldModel::createRegion(const QDomElement &element)
 	} else if (type == "bound") {
 		auto id = element.attribute("boundItem");
 		boundItem = findId(id);
-		if (boundItem) {
-			item.reset(new items::BoundRegion(mMetricCoordinateSystem, *boundItem, id));
+		if (boundItem && dynamic_cast<items::ColorFieldItem *>(boundItem.data())) {
+			item.reset(new items::BoundRegion(mMetricCoordinateSystem
+					, qSharedPointerCast<items::ColorFieldItem>(boundItem),
+							  id));
 		} /// @todo: else report error
 	}
 
@@ -916,8 +963,9 @@ void WorldModel::createRegion(const QDomElement &element)
 		auto itemId = item->id();
 		mRegions[itemId] = item;
 		if (boundItem) {
-			// Item itself will be deleted with its parent, see BoundRegion constructor.
-			connect(&*item, &QObject::destroyed, this, [this, itemId]() { mRegions.remove(itemId); });
+			connect(boundItem.data(), &QObject::destroyed, this, [this, item]() {
+				removeRegion(item);
+			});
 		}
 		Q_EMIT regionItemAdded(item);
 	}
@@ -940,5 +988,7 @@ void WorldModel::removeItem(const QString &id)
 		removeImageItem(image);
 	} else if (auto comment = qSharedPointerDynamicCast<items::CommentItem>(item)) {
 		removeComment(comment);
+	} else if (auto region = qSharedPointerDynamicCast<items::RegionItem>(item)) {
+		removeRegion(region);
 	}
 }

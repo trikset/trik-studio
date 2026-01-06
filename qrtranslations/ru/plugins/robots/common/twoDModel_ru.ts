@@ -313,7 +313,7 @@
         <translation>%1 - не регион</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+56"/>
         <source>%1 has incorrect type for matching it with region</source>
         <translation>%1 не сопоставить с регионом (не тот тип)</translation>
     </message>
@@ -330,7 +330,7 @@
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
-        <location line="-88"/>
+        <location line="-90"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
@@ -375,12 +375,23 @@
         <translation>Объект %1 не имеет свойства %2</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+183"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="+52"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+181"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Convert to region</source>
+        <translation>Сконвертировать в регион</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Bind to region</source>
+        <translation>Привязать к региону</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+1"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
@@ -425,7 +436,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+535"/>
+        <location line="+558"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -773,12 +784,13 @@
     <name>twoDModel::model::WorldModel</name>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+195"/>
+        <location line="+20"/>
         <location line="+19"/>
-        <location line="+18"/>
-        <location line="+18"/>
-        <location line="+18"/>
-        <location line="+43"/>
         <location line="+19"/>
+        <location line="+19"/>
+        <location line="+19"/>
+        <location line="+44"/>
+        <location line="+20"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Попытка добавить элемент с существующим идентификатором: %1</translation>
     </message>
@@ -788,7 +800,7 @@
         <translation>Некорректное изображение, попробуйте другое</translation>
     </message>
     <message>
-        <location line="+544"/>
+        <location line="+543"/>
         <source>Unknown image with imageId %1</source>
         <translation>Неизвестное изображение с imageId %1</translation>
     </message>
@@ -1133,7 +1145,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+811"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1166,7 +1178,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+353"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1184,7 +1196,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-200"/>
+        <location line="-218"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -1194,7 +1206,7 @@
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+279"/>
+        <location line="+297"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>

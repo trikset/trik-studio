@@ -18,7 +18,6 @@
 #include <QtGui/QKeyEvent>
 #include <QtGui/QPainter>
 #include <QtWidgets/QApplication>
-
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/platformInfo.h>
 #include <qrutils/graphicsUtils/gridDrawer.h>
@@ -34,7 +33,7 @@
 #include <kitBase/robotModel/robotParts/vectorSensor.h>
 #include <kitBase/robotModel/robotParts/lidarSensor.h>
 #include "robotItem.h"
-
+#include "twoDSceneItem.h"
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/image.h"
 #include "src/engine/view/scene/sensorItem.h"
@@ -83,10 +82,9 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::ballAdded, this, &TwoDModelScene::onBallAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::cubeAdded, this, &TwoDModelScene::onCubeAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::commentAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
+	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorFieldAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
-			, this, [=](const QSharedPointer<items::RegionItem> &item) { addItem(item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
 			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
 		if (!justChanged) { addItem(item.data()); }
@@ -163,6 +161,8 @@ void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 			sensorItem->setEditable(!mSensorsReadOnly);
 		} else if (const auto &&startPosition = dynamic_cast<items::StartPosition *>(item)) {
 			startPosition->setEditable(!mRobotReadOnly);
+		} else if (const auto &&region = dynamic_cast<items::RegionItem *>(item)) {
+			region->setEditable(!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode);
 		} else if (const auto &&worldItem = dynamic_cast<graphicsUtils::AbstractItem *>(item)) {
 			worldItem->setEditable(!mWorldReadOnly);
 		}
@@ -257,7 +257,7 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
 	auto robotItem = QSharedPointer<RobotItem>(
-	        new RobotItem(&mModel.coordinateMetricSystem(), robotModel->info().robotImage(), *robotModel));
+		new RobotItem(&mModel.coordinateMetricSystem(), robotModel->info().robotImage(), *robotModel));
 
 	connect(&*robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
 	connect(&*robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
@@ -281,11 +281,14 @@ void TwoDModelScene::onRobotRemove(model::RobotModel *robotModel)
 	Q_EMIT robotListChanged(nullptr);
 }
 
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onWallAdded(QSharedPointer<items::WallItem> wall)
 {
 	onAbstractItemAdded(wall);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onSkittleAdded(QSharedPointer<items::SkittleItem> skittle)
 {
 	onAbstractItemAdded(skittle);
@@ -320,16 +323,79 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 	}
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void TwoDModelScene::onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item)
+{
+	auto onColorFieldAddedLambda = [this](const items::ColorFieldItem &item,
+						bool bindToRegion = false) {
+		const auto &region = mModel.worldModel().createRegionFromItem(item, bindToRegion);
+		if (!bindToRegion) {
+			// When creating a region, the first step in undoing is to delete the region itself,
+			// and another undo will restore the original associated ColorFieldItem
+			deleteSelectedItems();
+		}
+		mDrawingAction = DrawingAction::region;
+		registerInUndoStack(region.data());
+		setNoneStatus();
+		if (bindToRegion) {
+			const auto regionId = region->id();
+			// At the moment, deleting an object and its associated regions is two different operations,
+			// and this should be fixed to allow the simultaneous restoration of an object and its associated
+			// region using a single undo action instead of multiple ones.
+			connect(&item, &QObject::destroyed, this, [this, regionId]() {
+				deleteWithCommand(QStringList{regionId}, {}, {});
+			});
+		}
+	};
+
+	connect(&*item, &items::ColorFieldItem::convertToRegionWithContextMenu,
+		this, [onColorFieldAddedLambda](const items::ColorFieldItem &item){
+			onColorFieldAddedLambda(item, false);
+	});
+
+	connect(&*item, &items::ColorFieldItem::bindToRegionWithContextMenu,
+		this, [onColorFieldAddedLambda](const items::ColorFieldItem &item){
+			onColorFieldAddedLambda(item, true);
+	});
+
+	onAbstractItemAdded(item);
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
 {
 	addItem(item.data());
 	subscribeItem(item.data());
 	connect(&*item, &graphicsUtils::AbstractItem::deletedWithContextMenu, this, &TwoDModelScene::deleteSelectedItems);
 	item->setEditable(!mWorldReadOnly);
+	onTwoDSceneItemAdded(item);
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void TwoDModelScene::onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item)
+{
+	auto twoDSceneItem = qSharedPointerDynamicCast<view::TwoDSceneItem>(item);
+	if (!twoDSceneItem)  {
+		return;
+	}
+
+	if (mCurrentEditorMode == EditorMode::defaultMode) {
+		twoDSceneItem->switchToMode(mCurrentEditorMode);
+	}
+
+	if (!mWorldReadOnly && mCurrentEditorMode == EditorMode::regionEditorMode) {
+		twoDSceneItem->switchToMode(mCurrentEditorMode);
+	}
+
+	mTwoDSceneItems.insert(twoDSceneItem->id(), twoDSceneItem);
 }
 
 void TwoDModelScene::onItemRemoved(const QSharedPointer<QGraphicsItem> &item)
 {
+	if (auto twoDSceneItem = qSharedPointerDynamicCast<view::TwoDSceneItem>(item)) {
+		mTwoDSceneItems.remove(twoDSceneItem->id());
+	}
+
 	mGraphicsItem = nullptr;
 	removeItem(item.data());
 }
@@ -647,14 +713,15 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 	QStringList worldItems;
 	QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensors;
 	for (QGraphicsItem * const item : items) {
-		SensorItem * const sensor = dynamic_cast<SensorItem *>(item);
-		items::WallItem * const wall = dynamic_cast<items::WallItem *>(item);
-		items::ColorFieldItem * const colorField = dynamic_cast<items::ColorFieldItem *>(item);
-		items::ImageItem * const image = dynamic_cast<items::ImageItem *>(item);
-		items::SkittleItem * const skittle = dynamic_cast<items::SkittleItem *>(item);
-		items::BallItem * const ball = dynamic_cast<items::BallItem *>(item);
-		items::CubeItem * const cube = dynamic_cast<items::CubeItem *>(item);
-		items::CommentItem * const comment = dynamic_cast<items::CommentItem *>(item);
+		auto * const sensor = dynamic_cast<SensorItem *>(item);
+		auto * const wall = dynamic_cast<items::WallItem *>(item);
+		auto * const colorField = dynamic_cast<items::ColorFieldItem *>(item);
+		auto * const image = dynamic_cast<items::ImageItem *>(item);
+		auto * const skittle = dynamic_cast<items::SkittleItem *>(item);
+		auto * const ball = dynamic_cast<items::BallItem *>(item);
+		auto * const cube = dynamic_cast<items::CubeItem *>(item);
+		auto * const comment = dynamic_cast<items::CommentItem *>(item);
+		auto * const region = dynamic_cast<items::RegionItem *>(item);
 
 		if (sensor && !mSensorsReadOnly) {
 			for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
@@ -678,6 +745,8 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 			worldItems << image->id();
 		} else if (comment && !mWorldReadOnly) {
 			worldItems << comment->id();
+		} else if (region && !mWorldReadOnly) {
+			worldItems << region->id();
 		}
 	}
 	return {worldItems, sensors};
@@ -725,6 +794,7 @@ void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
 
 void TwoDModelScene::keyPressEvent(QKeyEvent *event)
 {
+	// NOLINTNEXTLINE(bugprone-branch-clone)
 	if (dynamic_cast<QGraphicsTextItem*>(focusItem())) {
 		QGraphicsScene::keyPressEvent(event);
 	} else if ((event->matches(QKeySequence::Delete) || event->key() == Qt::Key_Backspace)
@@ -899,7 +969,7 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 		for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
 			const auto &robotModel = it.key();
 			const auto &value = it.value();
-			commands::ReshapeCommand * const reshapeCommand = new commands::ReshapeCommand(*this, mModel
+			auto * const reshapeCommand = new commands::ReshapeCommand(*this, mModel
 					, {value->id()});
 			reshapeCommand->startTracking();
 			robotModel->clear();
@@ -1023,7 +1093,7 @@ void TwoDModelScene::registerInUndoStack(AbstractItem *item)
 	if (item) {
 		item->setSelected(true);
 		if (mDrawingAction != none && mController) {
-			commands::CreateWorldItemCommand *command = new commands::CreateWorldItemCommand(mModel, item->id());
+			auto *command = new commands::CreateWorldItemCommand(mModel, item->id());
 			// Command was already executed when element was drawn by user. So we should create it in redone state.
 			command->setRedoEnabled(false);
 			mController->execute(command);
@@ -1100,6 +1170,26 @@ void TwoDModelScene::centerOnRobot(RobotItem *selectedItem)
 	}
 }
 
+void TwoDModelScene::onEditorModeToggled(bool enable)
+{
+	if (!mWorldReadOnly && enable) {
+		switchToEditorMode(EditorMode::regionEditorMode);
+		return;
+	}
+	switchToEditorMode(EditorMode::defaultMode);
+}
+
+void TwoDModelScene::switchToEditorMode(EditorMode mode)
+{
+	mCurrentEditorMode = mode;
+
+	for (auto &&item: mTwoDSceneItems) {
+		if (const auto &itemPtr = item.toStrongRef()) {
+			itemPtr->switchToMode(mode);
+		}
+	}
+}
+
 void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotModel::PortInfo &port)
 {
 	robotItem->removeSensor(port);
@@ -1112,25 +1202,25 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
-	                ? new RangeSensorItem(mModel.worldModel()
-	                                , &mModel.coordinateMetricSystem()
-	                                , robotModel.configuration()
+			? new RangeSensorItem(mModel.worldModel()
+					, &mModel.coordinateMetricSystem()
+					, robotModel.configuration()
 					, port
 					, robotModel.info().rangeSensorAngleAndDistance(device)
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)
 					)
 			: device.isA<kitBase::robotModel::robotParts::LidarSensor>()
-	                ? new LidarSensorItem(mModel.worldModel()
-	                                  , &mModel.coordinateMetricSystem()
-	                                  , robotModel.configuration()
+			? new LidarSensorItem(mModel.worldModel()
+					  , &mModel.coordinateMetricSystem()
+					  , robotModel.configuration()
 					  , port
 					  , robotModel.info().rangeSensorAngleAndDistance(device)
 					  , robotModel.info().sensorImagePath(device)
 					  , robotModel.info().sensorImageRect(device)
 					  )
-	                : new SensorItem(&mModel.coordinateMetricSystem()
-	                                , robotModel.configuration()
+			: new SensorItem(&mModel.coordinateMetricSystem()
+					, robotModel.configuration()
 					, port
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)

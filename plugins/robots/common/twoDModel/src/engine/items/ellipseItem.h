@@ -15,7 +15,6 @@
 #pragma once
 
 #include <qrutils/graphicsUtils/rectangleImpl.h>
-
 #include "colorFieldItem.h"
 
 namespace twoDModel {
@@ -38,13 +37,13 @@ public:
 
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;
-	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void drawExtractionForItem(QPainter *painter) override;
 	QPainterPath resizeArea() const override;
-
+	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
-
+	QPainterPath shapeWihoutResizeArea() const;
 	QPainterPath shape() const override;
 
 	/// Returns true if ellipse is filled with its pen color or false if it is "empty".

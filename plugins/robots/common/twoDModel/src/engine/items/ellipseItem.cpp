@@ -32,14 +32,14 @@ EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 AbstractItem *EllipseItem::clone() const
 {
-	EllipseItem * const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto * const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
 
 QAction *EllipseItem::ellipseTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_E), QKeySequence(Qt::Key_8)});
 	result->setCheckable(true);
 	return result;
@@ -123,6 +123,18 @@ void EllipseItem::deserialize(const QDomElement &element)
 	readPenBrush(element);
 }
 
+QPainterPath EllipseItem::shapeWihoutResizeArea() const
+{
+	QPainterPath result;
+	result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
+	return result;
+}
+
+void EllipseItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	ColorFieldItem::propagateSwitchToRegionMenu(event);
+}
+
 QPainterPath EllipseItem::shape() const
 {
 	QPainterPath result;
@@ -134,7 +146,7 @@ QPainterPath EllipseItem::shape() const
 		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), 0));
 		result = ps.createStroke(result);
 	} else {
-		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+		result.addEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	}
 
 	if (isSelected()) {

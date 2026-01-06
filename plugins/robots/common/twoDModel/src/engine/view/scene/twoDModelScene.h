@@ -24,6 +24,7 @@
 #include <kitBase/readOnly.h>
 
 #include "twoDModel/engine/model/image.h"
+#include "twoDSceneItem.h"
 
 namespace qReal {
 class ControllerInterface;
@@ -50,6 +51,8 @@ class EllipseItem;
 class CommentItem;
 class ImageItem;
 class CubeItem;
+class ColorFieldItem;
+class RegionItem;
 }
 
 namespace model {
@@ -143,6 +146,9 @@ public Q_SLOTS:
 	/// Reread sensor configuration on given port, delete old sensor item and create new.
 	void reinitSensor(twoDModel::view::RobotItem *robotItem, const kitBase::robotModel::PortInfo &port);
 
+	/// Change the configuration of objects on the stage by clicking the button to enter/exit the region editing mode.
+	void onEditorModeToggled(bool enable);
+
 Q_SIGNALS:
 	/// Emitted each time when user presses mouse button somewhere on the scene.
 	void mousePressed();
@@ -183,7 +189,11 @@ private Q_SLOTS:
 //	/// Called after new image item is added to a world model.
 //	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
+	void onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item);
+
 	void onAbstractItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
+
+	void onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
 
 	/// Called after some item was kicked away from a world model.
 	void onItemRemoved(const QSharedPointer<QGraphicsItem> &item);
@@ -205,7 +215,10 @@ private:
 		, ellipse
 		, comment
 		, image
+		, region
 	};
+
+	void switchToEditorMode(EditorMode mode);
 
 	void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
@@ -264,12 +277,14 @@ private:
 	QSharedPointer<items::RectangleItem> mCurrentRectangle;
 	QSharedPointer<items::EllipseItem> mCurrentEllipse;
 	QSharedPointer<items::CommentItem> mCurrentComment;
+	QMap<QString, QWeakPointer<TwoDSceneItem>> mTwoDSceneItems;
 
 	commands::ReshapeCommand *mCurrentReshapeCommand = nullptr;
 
 	bool mWorldReadOnly = false;
 	bool mRobotReadOnly = false;
 	bool mSensorsReadOnly = false;
+	EditorMode mCurrentEditorMode = EditorMode::defaultMode;
 
 	QList<QDomElement> mClipboard;
 };

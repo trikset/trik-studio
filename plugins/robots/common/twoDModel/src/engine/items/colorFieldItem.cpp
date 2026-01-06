@@ -14,25 +14,60 @@
 
 #include "colorFieldItem.h"
 #include <cmath>
+#include <QMenu>
+#include <memory>
 
 using namespace twoDModel::items;
 
 ColorFieldItem::ColorFieldItem(
 		graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QGraphicsItem* parent)
-	: AbstractItem(parent)
+	: TwoDSceneItem(parent)
 {
 	setCoordinateSystem(metricSystem);
 	setZValue(ZValue::Shape);
 }
 
-ColorFieldItem::~ColorFieldItem()
-{
-}
+ColorFieldItem::~ColorFieldItem() = default;
 
 QColor ColorFieldItem::color() const
 {
 	return pen().color();
+}
+
+void ColorFieldItem::propagateSwitchToRegionMenu(QGraphicsSceneContextMenuEvent *event)
+{
+	if (!editable()) {
+		return;
+	}
+
+	if (!isSelected()) {
+		scene()->clearSelection();
+		setSelected(true);
+	}
+
+	event->accept();
+
+	auto &&menu = std::make_unique<QMenu>();
+	auto &&removeAction = menu->addAction(QObject::tr("Remove"));
+	auto &&convertToRegionAction = menu->addAction(QObject::tr("Convert to region"));;
+	auto &&bindToRegionAction = menu->addAction(QObject::tr("Bind to region"));;
+	auto currentEditorMode = editorMode();
+
+	if (currentEditorMode != EditorMode::regionEditorMode || mBindedToRegion) {
+		menu->removeAction(convertToRegionAction);
+		menu->removeAction(bindToRegionAction);
+	}
+
+	auto &&selectedAction = menu->exec(event->screenPos());
+	if (selectedAction == removeAction) {
+		Q_EMIT deletedWithContextMenu();
+	} else if (selectedAction == convertToRegionAction) {
+		Q_EMIT convertToRegionWithContextMenu(*this);
+	} else if (selectedAction == bindToRegionAction) {
+		mBindedToRegion = true;
+		Q_EMIT bindToRegionWithContextMenu(*this);
+	}
 }
 
 void ColorFieldItem::setColor(const QColor &color)

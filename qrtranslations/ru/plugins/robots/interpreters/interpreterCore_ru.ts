@@ -4,12 +4,12 @@
 <context>
     <name>PreferencesRobotSettingsPage</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="+187"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="+192"/>
         <source>Sensors Settings</source>
         <translation>Настройки сенсоров</translation>
     </message>
     <message>
-        <location line="-41"/>
+        <location line="+31"/>
         <source>Uploading &amp;&amp; Running</source>
         <translation>Загрузка и запуск программ</translation>
     </message>
@@ -34,7 +34,17 @@
         <translation>Никогда не запускать</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+11"/>
+        <source>2D-model Editor Settings</source>
+        <translation>Настройки редактора 2D модели</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable Region Editor Mode</source>
+        <translation>Включить режим редактирования регионов</translation>
+    </message>
+    <message>
+        <location line="-127"/>
         <source>Robotics construction kit</source>
         <translation>Платформа</translation>
     </message>
@@ -44,7 +54,7 @@
         <translation>Модель робота</translation>
     </message>
     <message>
-        <location line="-224"/>
+        <location line="-128"/>
         <source>Graphics Watcher update intervals</source>
         <translation>Интервалы обновления графиков</translation>
     </message>
@@ -380,7 +390,7 @@
         <translation>Не загружено ни одного плагина с описанием робоплатформы</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+136"/>
         <source>No robot models available for </source>
         <translation>Ни одной модели робота не найдено в плагине </translation>
     </message>

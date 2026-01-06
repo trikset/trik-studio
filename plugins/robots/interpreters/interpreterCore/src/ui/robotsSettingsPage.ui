@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>423</width>
+    <width>481</width>
     <height>693</height>
    </rect>
   </property>
@@ -110,6 +110,52 @@
      </layout>
     </widget>
    </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QWidget" name="robotModelContainers" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QGroupBox" name="constructorKitGroupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Robotics construction kit</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2"/>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="typeOfModelGroupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="title">
+         <string>Robot model</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3"/>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="2" column="0" colspan="2">
     <widget class="QFrame" name="settingsExtensionFrame">
      <property name="sizePolicy">
@@ -133,6 +179,37 @@
       </property>
      </layout>
     </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QGroupBox" name="deviceSettingsGroupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Sensors Settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="devicesConfiguratorLayout">
+      <item>
+       <widget class="kitBase::DevicesConfigurationWidget" name="devicesConfigurer" native="true"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="7" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item row="4" column="0" colspan="2">
     <widget class="QGroupBox" name="uploadingRunningGroupBox">
@@ -175,78 +252,17 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QGroupBox" name="deviceSettingsGroupBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Sensors Settings</string>
-     </property>
-     <layout class="QVBoxLayout" name="devicesConfiguratorLayout">
-      <item>
-       <widget class="kitBase::DevicesConfigurationWidget" name="devicesConfigurer" native="true"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="6" column="0" colspan="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="QGroupBox" name="twoDModelEditorGroupBox">
+     <property name="title">
+      <string>2D-model Editor Settings</string>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QWidget" name="robotModelContainers" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QGroupBox" name="constructorKitGroupBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <widget class="QCheckBox" name="regionEditorModeCheckBox">
+        <property name="text">
+         <string>Enable Region Editor Mode</string>
         </property>
-        <property name="title">
-         <string>Robotics construction kit</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2"/>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="typeOfModelGroupBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="title">
-         <string>Robot model</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3"/>
        </widget>
       </item>
      </layout>

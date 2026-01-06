@@ -24,9 +24,9 @@ class BoundRegion : public RegionItem
 {
 	Q_OBJECT
 public:
-	explicit BoundRegion(twoDModel::model::MetricCoordinateSystem *metricSystem,
-	                     const QGraphicsObject &boundItem,
-	                     const QString &boundId, QGraphicsItem *parent = nullptr);
+	explicit BoundRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
+			    QSharedPointer<graphicsUtils::AbstractItem> abstractItem
+			     , QString boundId, QGraphicsItem *parent = nullptr);
 
 	/// Returns a width of the stripe on which region item wider than item it is bound to.
 	int stroke() const;
@@ -34,16 +34,18 @@ public:
 	/// Sets a width of the stripe on which region item wider than item it is bound to.
 	void setStroke(int stroke);
 
-	void serialize(QDomElement &element) const override;
+	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
-
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	QRectF boundingRect() const override;
+	void switchToMode(EditorMode mode) override;
+	QPainterPath shapeWihoutResizeArea() const override;
 
 private:
 	QPainterPath shape() const override;
 	QString regionType() const override;
 
-	const QGraphicsObject &mBoundItem;
+	QWeakPointer<graphicsUtils::AbstractItem> mBoundItem;
 	const QString mBoundId;
 	int mStroke;
 };

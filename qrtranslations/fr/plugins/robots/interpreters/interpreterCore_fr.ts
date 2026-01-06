@@ -73,7 +73,7 @@
         <translation>Information texte (ms)</translation>
     </message>
     <message>
-        <location line="+55"/>
+        <location line="+132"/>
         <source>Uploading &amp;&amp; Running</source>
         <translation>Téléversement et execution des programmes </translation>
     </message>
@@ -98,12 +98,22 @@
         <translation>Ne jamais executer</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+11"/>
+        <source>2D-model Editor Settings</source>
+        <translation>Paramètres de l&apos;Éditeur de Modèles 2D</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Enable Region Editor Mode</source>
+        <translation>Activer le Mode Éditeur de Régions</translation>
+    </message>
+    <message>
+        <location line="-72"/>
         <source>Sensors Settings</source>
         <translation>Configuration des capteurs</translation>
     </message>
     <message>
-        <location line="+46"/>
+        <location line="-55"/>
         <source>Robotics construction kit</source>
         <translation>Kit de construction robotique</translation>
     </message>
@@ -493,7 +503,7 @@
         <translation>Aucune extension n&apos;est chargée</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+136"/>
         <source>No robot models available for </source>
         <translation>Modèle de robot n&apos;est pas défini dans l&apos;extension</translation>
     </message>
