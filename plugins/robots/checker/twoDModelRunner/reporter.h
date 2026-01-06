@@ -16,6 +16,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QScopedPointer>
+#include <QPointF>
 
 namespace utils {
 class OutFile;
@@ -46,7 +47,7 @@ public:
 	/// @param trajectoryFile If non-empty the information about robot`s movement will be stored there
 	/// during the interpetation (so the factical data write will not be performed in one moment, it will be written
 	/// in chunks, each chunk with the new robot transition).
-	Reporter(const QString &messagesFile, const QString &trajectoryFile);
+	Reporter(const QString &messagesFile, const QString &trajectoryFile, QObject *parent = nullptr);
 
 	~Reporter() override;
 

@@ -23,11 +23,11 @@
 
 using namespace twoDModel;
 
-Reporter::Reporter(const QString &messagesFile, const QString &trajectoryFile)
-	: mMessagesFile(new utils::OutFile(messagesFile))
+Reporter::Reporter(const QString &messagesFile, const QString &trajectoryFile, QObject *parent)
+	: QObject(parent)
+	,  mMessagesFile(new utils::OutFile(messagesFile))
 	, mTrajectoryFile(new utils::OutFile(trajectoryFile))
-{
-}
+{}
 
 Reporter::~Reporter() = default;
 
