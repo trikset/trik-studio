@@ -32,14 +32,14 @@ EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 AbstractItem *EllipseItem::clone() const
 {
-	EllipseItem * const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto * const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
 
 QAction *EllipseItem::ellipseTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_E), QKeySequence(Qt::Key_8)});
 	result->setCheckable(true);
 	return result;

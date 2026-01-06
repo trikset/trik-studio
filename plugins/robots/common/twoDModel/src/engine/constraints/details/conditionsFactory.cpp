@@ -107,14 +107,14 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 		}
 
 		QObject * const object = mObjects[objectId];
-		items::RegionItem * const region = dynamic_cast<items::RegionItem *>(mObjects[regionId]);
+		auto* const region = dynamic_cast<items::RegionItem *>(mObjects[regionId]);
 
 		if (!region) {
 			reportError(QObject::tr("%1 is not a region").arg(regionId));
 			return false;
 		}
 
-		if (QGraphicsObject * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
+		if (auto * const graphicsObject = dynamic_cast<QGraphicsObject *>(object)) {
 			if (objectPoint == "all") {
 				return region->mapToScene(region->shapeWihoutResizeArea()).contains(
 						graphicsObject->mapToScene(graphicsObject->shape()));
@@ -125,7 +125,7 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			return region->containsItem(graphicsObject);
 		}
 
-		if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
+		if (auto * const robotModel = dynamic_cast<model::RobotModel *>(object)) {
 			if (objectPoint == "all") {
 				return region->mapToScene(region->shapeWihoutResizeArea())
 						.contains(robotModel->robotBoundingPath(false));
@@ -136,7 +136,7 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 			return region->containsPoint(robotModel->robotCenter());
 		}
 
-		if (kitBase::robotModel::robotParts::Device * const device
+		if (auto * const device
 				= dynamic_cast<kitBase::robotModel::robotParts::Device *>(object))
 		{
 			const QStringList parts = objectId.split('.');
@@ -144,12 +144,12 @@ Condition ConditionsFactory::inside(const QString &objectId, const QString &regi
 				return false;
 			}
 
-			const QString robotId = parts[0];
+			const QString& robotId = parts[0];
 			if (!mObjects.contains(robotId)) {
 				return false;
 			}
 
-			if (model::RobotModel * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
+			if (auto * const robotModel = dynamic_cast<model::RobotModel *>(mObjects[robotId])) {
 				auto deviceShape = robotModel->robotsTransform().map(
 						robotModel->sensorBoundingPath(device->port()));
 				if (objectPoint == "all") {

@@ -201,6 +201,7 @@ void WorldModel::addWall(const QSharedPointer<items::WallItem> &wall)
 	Q_EMIT wallAdded(wall);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeWall(QSharedPointer<items::WallItem> wall)
 {
 	mWalls.remove(wall->id());
@@ -219,6 +220,7 @@ void WorldModel::addSkittle(const QSharedPointer<items::SkittleItem> &skittle)
 	Q_EMIT skittleAdded(skittle);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeSkittle(QSharedPointer<items::SkittleItem> skittle)
 {
 	mSkittles.remove(skittle->id());
@@ -237,6 +239,7 @@ void WorldModel::addBall(const QSharedPointer<items::BallItem> &ball)
 	Q_EMIT ballAdded(ball);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeBall(QSharedPointer<items::BallItem> ball)
 {
 	mBalls.remove(ball->id());
@@ -255,6 +258,7 @@ void WorldModel::addCube(const QSharedPointer<items::CubeItem> &cube)
 	Q_EMIT cubeAdded(cube);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeCube(QSharedPointer<items::CubeItem> cube)
 {
 	mCubes.remove(cube->id());
@@ -273,6 +277,7 @@ void WorldModel::addRegion(const QSharedPointer<items::RegionItem> &region)
 	Q_EMIT regionItemAdded(region);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeRegion(QSharedPointer<items::RegionItem> region)
 {
 	mRegions.remove(region->id());
@@ -291,6 +296,7 @@ void WorldModel::addComment(const QSharedPointer<items::CommentItem> &comment)
 	Q_EMIT commentAdded(comment);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeComment(QSharedPointer<items::CommentItem> comment)
 {
 	mComments.remove(comment->id());
@@ -335,6 +341,7 @@ void WorldModel::addColorField(const QSharedPointer<items::ColorFieldItem> &colo
 	Q_EMIT colorItemAdded(colorField);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeColorField(QSharedPointer<items::ColorFieldItem> colorField)
 {
 	mColorFields.remove(colorField->id());
@@ -365,6 +372,7 @@ void WorldModel::addImageItem(const QSharedPointer<items::ImageItem> &imageItem)
 	Q_EMIT blobsChanged();
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void WorldModel::removeImageItem(QSharedPointer<items::ImageItem> imageItem)
 {
 	mImageItems.remove(imageItem->id());
@@ -507,10 +515,10 @@ QRectF WorldModel::deserializeRect(const QString &string) const
 		const auto y = splittedStr[1].toDouble();
 		const auto w = splittedStr[2].toDouble();
 		const auto h = splittedStr[3].toDouble();
-		return QRectF(x, y, w, h);
+		return {x, y, w, h};
 	}
 
-	return QRectF();
+	return {};
 }
 
 QDomElement WorldModel::serializeWorld(QDomElement &parent) const
@@ -610,7 +618,7 @@ QDomElement WorldModel::serializeItem(const QString &id) const
 		QDomElement temporalParent = mXmlFactory->createElement("temporalParent");
 		return item->serialize(temporalParent);
 	} else {
-		return QDomElement();
+		return {};
 	}
 }
 

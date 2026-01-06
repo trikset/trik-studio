@@ -508,13 +508,13 @@
     <name>twoDModel::model::WorldModel</name>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="+195"/>
+        <location line="+20"/>
         <location line="+19"/>
-        <location line="+18"/>
-        <location line="+18"/>
-        <location line="+18"/>
-        <location line="+18"/>
-        <location line="+43"/>
         <location line="+19"/>
+        <location line="+19"/>
+        <location line="+19"/>
+        <location line="+44"/>
+        <location line="+20"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Tentative d&apos;ajout d&apos;un élément avec un identifiant dupliqué : %1</translation>
     </message>
@@ -524,7 +524,7 @@
         <translation>Image incorrecte, veuillez en essayer une autre</translation>
     </message>
     <message>
-        <location line="+542"/>
+        <location line="+543"/>
         <source>Unknown image with imageId %1</source>
         <translation>Image inconnue avec imageId %1</translation>
     </message>
@@ -802,7 +802,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+874"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>

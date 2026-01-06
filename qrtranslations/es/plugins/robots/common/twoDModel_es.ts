@@ -500,23 +500,23 @@
     <name>twoDModel::model::WorldModel</name>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="195"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="214"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="232"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="250"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="268"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="286"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="329"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="348"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="215"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="234"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="253"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="272"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="291"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="335"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="355"/>
         <source>Trying to add an item with a duplicate id: %1</source>
         <translation>Intentando agregar un elemento con ID duplicado: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="360"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="367"/>
         <source>Incorrect image, please try anouther one</source>
         <translation>Imagen incorrecta, por favor intente con otra</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="902"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/worldModel.cpp" line="910"/>
         <source>Unknown image with imageId %1</source>
         <translation>Imagen desconocida con imageId %1</translation>
     </message>
@@ -794,32 +794,32 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="874"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="881"/>
         <source>Select images</source>
         <translation>Seleccionar imágenes</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="876"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="883"/>
         <source>Graphics (*.*)</source>
         <translation>Gráficos (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="890"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="897"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="891"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="898"/>
         <source>You are trying to load to big image, it may freeze execution for some time. Continue?</source>
         <translation>Está intentando cargar una imagen muy grande, lo que podría congelar la ejecución durante un tiempo. ¿Continuar?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="900"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="907"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="901"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="908"/>
         <source>Cannot load %1. Try another file.</source>
         <translation>No se puede cargar %1. Intente con otro archivo.</translation>
     </message>

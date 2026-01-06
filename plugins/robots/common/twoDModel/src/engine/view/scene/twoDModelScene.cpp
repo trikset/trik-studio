@@ -257,7 +257,7 @@ bool TwoDModelScene::isCorrectScene(const QList<QGraphicsItem *> &checkItems) co
 void TwoDModelScene::onRobotAdd(model::RobotModel *robotModel)
 {
 	auto robotItem = QSharedPointer<RobotItem>(
-	        new RobotItem(&mModel.coordinateMetricSystem(), robotModel->info().robotImage(), *robotModel));
+		new RobotItem(&mModel.coordinateMetricSystem(), robotModel->info().robotImage(), *robotModel));
 
 	connect(&*robotItem, &RobotItem::mousePressed, this, &TwoDModelScene::robotPressed);
 	connect(&*robotItem, &RobotItem::drawTrace, &mModel.worldModel(), &model::WorldModel::appendRobotTrace);
@@ -281,11 +281,14 @@ void TwoDModelScene::onRobotRemove(model::RobotModel *robotModel)
 	Q_EMIT robotListChanged(nullptr);
 }
 
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onWallAdded(QSharedPointer<items::WallItem> wall)
 {
 	onAbstractItemAdded(wall);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onSkittleAdded(QSharedPointer<items::SkittleItem> skittle)
 {
 	onAbstractItemAdded(skittle);
@@ -320,6 +323,7 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 	}
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item)
 {
 	auto onColorFieldAddedLambda = [this](const items::ColorFieldItem &item,
@@ -357,6 +361,7 @@ void TwoDModelScene::onColorFieldAdded(QSharedPointer<items::ColorFieldItem> ite
 	onAbstractItemAdded(item);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
 {
 	addItem(item.data());
@@ -366,6 +371,7 @@ void TwoDModelScene::onAbstractItemAdded(QSharedPointer<AbstractItem> item)
 	onTwoDSceneItemAdded(item);
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void TwoDModelScene::onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item)
 {
 	auto twoDSceneItem = qSharedPointerDynamicCast<view::TwoDSceneItem>(item);
@@ -707,15 +713,15 @@ QPair<QStringList, QList<QPair<model::RobotModel *
 	QStringList worldItems;
 	QList<QPair<model::RobotModel *, kitBase::robotModel::PortInfo>> sensors;
 	for (QGraphicsItem * const item : items) {
-		SensorItem * const sensor = dynamic_cast<SensorItem *>(item);
-		items::WallItem * const wall = dynamic_cast<items::WallItem *>(item);
-		items::ColorFieldItem * const colorField = dynamic_cast<items::ColorFieldItem *>(item);
-		items::ImageItem * const image = dynamic_cast<items::ImageItem *>(item);
-		items::SkittleItem * const skittle = dynamic_cast<items::SkittleItem *>(item);
-		items::BallItem * const ball = dynamic_cast<items::BallItem *>(item);
-		items::CubeItem * const cube = dynamic_cast<items::CubeItem *>(item);
-		items::CommentItem * const comment = dynamic_cast<items::CommentItem *>(item);
-		items::RegionItem * const region = dynamic_cast<items::RegionItem *>(item);
+		auto * const sensor = dynamic_cast<SensorItem *>(item);
+		auto * const wall = dynamic_cast<items::WallItem *>(item);
+		auto * const colorField = dynamic_cast<items::ColorFieldItem *>(item);
+		auto * const image = dynamic_cast<items::ImageItem *>(item);
+		auto * const skittle = dynamic_cast<items::SkittleItem *>(item);
+		auto * const ball = dynamic_cast<items::BallItem *>(item);
+		auto * const cube = dynamic_cast<items::CubeItem *>(item);
+		auto * const comment = dynamic_cast<items::CommentItem *>(item);
+		auto * const region = dynamic_cast<items::RegionItem *>(item);
 
 		if (sensor && !mSensorsReadOnly) {
 			for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
@@ -788,6 +794,7 @@ void TwoDModelScene::deleteWithCommand(const QStringList &worldItems
 
 void TwoDModelScene::keyPressEvent(QKeyEvent *event)
 {
+	// NOLINTNEXTLINE(bugprone-branch-clone)
 	if (dynamic_cast<QGraphicsTextItem*>(focusItem())) {
 		QGraphicsScene::keyPressEvent(event);
 	} else if ((event->matches(QKeySequence::Delete) || event->key() == Qt::Key_Backspace)
@@ -962,7 +969,7 @@ void TwoDModelScene::clearScene(bool removeRobot, Reason reason)
 		for (auto it = mRobots.cbegin(); it != mRobots.cend(); ++it) {
 			const auto &robotModel = it.key();
 			const auto &value = it.value();
-			commands::ReshapeCommand * const reshapeCommand = new commands::ReshapeCommand(*this, mModel
+			auto * const reshapeCommand = new commands::ReshapeCommand(*this, mModel
 					, {value->id()});
 			reshapeCommand->startTracking();
 			robotModel->clear();
@@ -1086,7 +1093,7 @@ void TwoDModelScene::registerInUndoStack(AbstractItem *item)
 	if (item) {
 		item->setSelected(true);
 		if (mDrawingAction != none && mController) {
-			commands::CreateWorldItemCommand *command = new commands::CreateWorldItemCommand(mModel, item->id());
+			auto *command = new commands::CreateWorldItemCommand(mModel, item->id());
 			// Command was already executed when element was drawn by user. So we should create it in redone state.
 			command->setRedoEnabled(false);
 			mController->execute(command);
@@ -1195,25 +1202,25 @@ void TwoDModelScene::reinitSensor(RobotItem *robotItem, const kitBase::robotMode
 	}
 
 	SensorItem *sensor = device.isA<kitBase::robotModel::robotParts::RangeSensor>()
-	                ? new RangeSensorItem(mModel.worldModel()
-	                                , &mModel.coordinateMetricSystem()
-	                                , robotModel.configuration()
+			? new RangeSensorItem(mModel.worldModel()
+					, &mModel.coordinateMetricSystem()
+					, robotModel.configuration()
 					, port
 					, robotModel.info().rangeSensorAngleAndDistance(device)
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)
 					)
 			: device.isA<kitBase::robotModel::robotParts::LidarSensor>()
-	                ? new LidarSensorItem(mModel.worldModel()
-	                                  , &mModel.coordinateMetricSystem()
-	                                  , robotModel.configuration()
+			? new LidarSensorItem(mModel.worldModel()
+					  , &mModel.coordinateMetricSystem()
+					  , robotModel.configuration()
 					  , port
 					  , robotModel.info().rangeSensorAngleAndDistance(device)
 					  , robotModel.info().sensorImagePath(device)
 					  , robotModel.info().sensorImageRect(device)
 					  )
-	                : new SensorItem(&mModel.coordinateMetricSystem()
-	                                , robotModel.configuration()
+			: new SensorItem(&mModel.coordinateMetricSystem()
+					, robotModel.configuration()
 					, port
 					, robotModel.info().sensorImagePath(device)
 					, robotModel.info().sensorImageRect(device)

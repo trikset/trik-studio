@@ -177,7 +177,7 @@ void CommentItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
 	event->accept();
 
-	QMenu *menu = new QMenu();
+	auto *menu = new QMenu();
 	QAction *removeAction = menu->addAction(QObject::tr("Remove"));
 	QAction *editAction = menu->addAction(mIsEditing ? QObject::tr("Save") : QObject::tr("Edit"));
 	QAction *cancelAction = menu->addAction(QObject::tr("Cancel"));

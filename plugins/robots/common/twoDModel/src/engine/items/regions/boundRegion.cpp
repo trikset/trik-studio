@@ -20,6 +20,7 @@
 #include <QsLog.h>
 #include <QtXml/QDomElement>
 #include <QSharedPointer>
+#include <utility>
 
 using namespace twoDModel::items;
 
@@ -27,10 +28,10 @@ const int defaultStroke = 0;
 
 BoundRegion::BoundRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem
 			, QSharedPointer<graphicsUtils::AbstractItem> abstractItem
-			, const QString &boundId, QGraphicsItem *parent)
+			, QString boundId, QGraphicsItem *parent)
 	: RegionItem(abstractItem, metricSystem, parent)
 	, mBoundItem(abstractItem)
-	, mBoundId(boundId)
+	, mBoundId(std::move(boundId))
 	, mStroke(defaultStroke)
 {
 	RegionItem::setDumpPositionInfo(false);
@@ -88,6 +89,7 @@ void BoundRegion::switchToMode(EditorMode mode)
 	// (not movable or resizable, simply because the associated AbstractItem is editable,
 	// but this should not apply to other parameters if they are supported in the future,
 	// such as setting the boundRegion text)
+	// NOLINTNEXTLINE(bugprone-parent-virtual-call)
 	TwoDSceneItem::switchToMode(mode);
 	if (mode == EditorMode::regionEditorMode) {
 		setVisible(true);

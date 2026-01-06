@@ -55,7 +55,7 @@ class TWO_D_MODEL_EXPORT WorldModel : public QObject
 public:
 	WorldModel(Settings *settings,
 		   twoDModel::model::MetricCoordinateSystem *metricSystem);
-	~WorldModel();
+	~WorldModel() override;
 
 	void init(qReal::ErrorReporterInterface &errorReporter);
 
