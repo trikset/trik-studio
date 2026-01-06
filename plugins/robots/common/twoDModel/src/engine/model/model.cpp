@@ -74,6 +74,8 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 		QTimer::singleShot(0, &interpreterControl,
 				[&interpreterControl]() {
 				Q_EMIT interpreterControl.stopAllInterpretation(qReal::interpretation::StopReason::finished); });
+		mChecker->dumpVariables();
+
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::fail, this, [&](const QString &message) {
 		errorReporter.addError(message);
@@ -81,6 +83,7 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
 		QTimer::singleShot(0, &interpreterControl,
 				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
+		mChecker->dumpVariables();
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::message, this, [&](const QString &message) {
 		errorReporter.addInformation(message);

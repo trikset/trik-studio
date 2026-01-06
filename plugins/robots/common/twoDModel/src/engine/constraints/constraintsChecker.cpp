@@ -17,7 +17,8 @@
 #include <qrutils/stringUtils.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <utils/objectsSet.h>
-
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "details/constraintsParser.h"
 #include "details/event.h"
 #include "twoDModel/engine/model/model.h"
@@ -117,6 +118,25 @@ void ConstraintsChecker::reportParserError(const QString &message)
 {
 	const QString fullMessage = tr("Error while parsing constraints: %1").arg(message);
 	mErrorReporter.addError(fullMessage);
+}
+
+void ConstraintsChecker::dumpVariables()
+{
+	QVariantMap variables = {
+	    {"variables", QVariantList{
+		QVariantMap{{"name", "total_score"}, {"value", mVariables["total_score"]}},
+	    }}
+	};
+
+	auto &&infoObject = QJsonObject::fromVariantMap(variables);
+	QJsonDocument doc(infoObject);
+	Q_EMIT log(doc.toJson());
+}
+
+void ConstraintsChecker::prepareVariables()
+{
+	mVariables.clear();
+	mVariables["total_score"] = 0;
 }
 
 void ConstraintsChecker::prepareEvents()
@@ -295,7 +315,7 @@ void ConstraintsChecker::programStarted()
 	mDefferedSuccessTriggered = false;
 	mFailTriggered = false;
 	if (mParsedSuccessfully) {
-		mVariables.clear();
+		prepareVariables();
 		prepareEvents();
 	}
 }

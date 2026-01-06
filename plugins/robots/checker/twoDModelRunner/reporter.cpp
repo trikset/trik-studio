@@ -108,10 +108,18 @@ void Reporter::reportMessages()
 
 	QJsonArray messages;
 	for (const QPair<Level, QString> &message : mMessages) {
-		messages.append(QJsonObject::fromVariantMap({
-			{ "level", levelToString(message.first) }
-			, { "message", message.second }
-		}));
+		auto document = QJsonDocument::fromJson(message.second.toUtf8());
+		if (!document.isNull() && document.isObject()) {
+			auto &&rootObject = document.object();
+			if (rootObject.contains("variables")) {
+				messages.append(rootObject);
+			}
+		} else {
+			messages.append(QJsonObject::fromVariantMap({
+				{ "level", levelToString(message.first) }
+				, { "message", message.second }
+			}));
+		}
 	}
 
 	QJsonDocument document;
