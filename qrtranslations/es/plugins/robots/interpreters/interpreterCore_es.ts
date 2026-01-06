@@ -372,7 +372,7 @@
         <translation>No se ha cargado ningún plugin de plataforma robótica</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="213"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="214"/>
         <source>No robot models available for </source>
         <translation>No hay modelos de robot disponibles para </translation>
     </message>

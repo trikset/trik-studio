@@ -372,7 +372,7 @@
         <translation>Không có plugin nền tảng robot nào được tải</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="213"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="214"/>
         <source>No robot models available for </source>
         <translation>Không có mô hình robot nào khả dụng cho </translation>
     </message>
