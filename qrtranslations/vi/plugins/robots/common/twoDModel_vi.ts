@@ -91,58 +91,58 @@
         <translation>Phải có thẻ &quot;return&quot; trong biểu thức &quot;using&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="698"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="713"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Giá trị không xác định &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="779"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="793"/>
         <source>Invalid integer value &quot;%1&quot;</source>
         <translation>Giá trị số nguyên không hợp lệ &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="793"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="807"/>
         <source>Invalid floating point value &quot;%1&quot;</source>
         <translation>Giá trị số thực không hợp lệ &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="806"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="820"/>
         <source>Invalid boolean value &quot;%1&quot; (expected &quot;true&quot; or &quot;false&quot;)</source>
         <translation>Giá trị boolean không hợp lệ &quot;%1&quot; (mong đợi &quot;true&quot; hoặc &quot;false&quot;)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="822"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="836"/>
         <source>Duplicate id: &quot;%1&quot;</source>
         <translation>ID bị trùng lặp: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="833"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="847"/>
         <source>%1 tag must have exactly %2 child tag(s)</source>
         <translation>Thẻ %1 phải có chính xác %2 thẻ con</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="844"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="858"/>
         <source>%1 tag must have at least %2 child tag(s)</source>
         <translation>Thẻ %1 phải có ít nhất %2 thẻ con</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="854"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="868"/>
         <source>&quot;%1&quot; tag must have &quot;%2&quot; attribute.</source>
         <translation>Thẻ &quot;%1&quot; phải có thuộc tính &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="864"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="878"/>
         <source>Expected &quot;%1&quot; tag, got &quot;%2&quot;.</source>
         <translation>Dự kiến thẻ &quot;%1&quot;, nhưng lại nhận được &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="878"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="892"/>
         <source>Attribute &quot;%1&quot; of the tag &quot;%2&quot; must not be empty.</source>
         <translation>Thuộc tính &quot;%1&quot; của thẻ &quot;%2&quot; không được để trống.</translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="100"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="103"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="125"/>
         <source>No such object: %1</source>
         <translation>Không tồn tại đối tượng: %1</translation>
     </message>
@@ -164,38 +164,48 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="178"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="190"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="102"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="114"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="107"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="119"/>
         <source>No such event: %1</source>
         <translation>Không tồn tại sự kiện: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="84"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="89"/>
         <source>Invalid &lt;setState&gt; object type %1</source>
         <translation>Loại đối tượng %1 trong &lt;setState&gt; không hợp lệ</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="90"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="95"/>
         <source>Object %1 has no property %2</source>
         <translation>Đối tượng %1 không có thuộc tính %2</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="65"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="64"/>
+        <source>Using special syntax with an empty variable name</source>
+        <translation>Sử dụng cú pháp đặc biệt với tên biến rỗng</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="74"/>
+        <source>The name %1 is not a valid variable name or property chain for an object</source>
+        <translation>Tên %1 không phải là tên biến hợp lệ hoặc chuỗi thuộc tính của đối tượng</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="86"/>
         <source>Requesting variable value with empty name</source>
         <translation>Yêu cầu giá trị biến với tên rỗng</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="97"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="118"/>
         <source>Object path is empty!</source>
         <translation>Đường dẫn đối tượng trống!</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="223"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="247"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Không biết kiểu đối tượng &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="228"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="254"/>
         <source>Object &quot;%1&quot; has no property &quot;%2&quot;</source>
         <translation>Đối tượng &quot;%1&quot; không có thuộc tính &quot;%2&quot;</translation>
     </message>

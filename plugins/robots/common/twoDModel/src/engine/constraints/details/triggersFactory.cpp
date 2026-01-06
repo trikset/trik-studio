@@ -89,7 +89,7 @@ Trigger TriggersFactory::setObjectState(const Value &object, const QString &prop
 			reportError(QObject::tr("Invalid <setState> object type %1").arg(variantObject.typeName()));
 		}
 
-		QObject * const objectInstance = variantObject.value<QObject *>();
+		auto * const objectInstance = variantObject.value<QObject *>();
 		const int index = objectInstance->metaObject()->indexOfProperty(qPrintable(property));
 		if (index < 0) {
 			reportError(QObject::tr("Object %1 has no property %2").arg(variantObject.typeName(), property));

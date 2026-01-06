@@ -253,12 +253,12 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+266"/>
+        <location line="+281"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location line="+81"/>
+        <location line="+80"/>
         <source>Invalid integer value &quot;%1&quot;</source>
         <translation>&quot;%1&quot; - не целое число</translation>
     </message>
@@ -324,14 +324,14 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+107"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>Нет такого события: %1</translation>
     </message>
     <message>
         <location line="-90"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+125"/>
         <source>No such object: %1</source>
         <translation>Нет такого объекта: %1</translation>
     </message>
@@ -340,7 +340,17 @@
         <translation type="vanished">У объекта &quot;%1&quot; нет свойства &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="-38"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="-61"/>
+        <source>Using special syntax with an empty variable name</source>
+        <translation>Использование специального синтаксиса с пустым именем переменной</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>The name %1 is not a valid variable name or property chain for an object</source>
+        <translation>Имя %1 не является валидным именем переменной или цепочкой свойств объекта</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Requesting variable value with empty name</source>
         <translation>Запрашивается переменная с пустым именем</translation>
     </message>
@@ -350,12 +360,12 @@
         <translation>Путь до объекта пуст!</translation>
     </message>
     <message>
-        <location line="+126"/>
+        <location line="+129"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Неизвестный тип объекта &quot;%1&quot;</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+7"/>
         <source>Object &quot;%1&quot; has no property &quot;%2&quot;</source>
         <translation>У объекта &quot;%1&quot; нет свойства &quot;%2&quot;</translation>
     </message>

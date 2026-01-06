@@ -48,6 +48,9 @@ public:
 	/// Produces functor that always returns string-type QVariant with the specified value.
 	Value stringValue(const QString &value) const;
 
+	/// produces a functor that tries to get the value of a variable with that name.
+	/// If the variable is not found, it tries to get the value as a property of the object.
+	/// Otherwise, it returns QVariant()
 	Value specialSyntaxValue(const QString &paramName) const;
 
 	/// Produces functor that returns value of the specified variable.
@@ -110,7 +113,7 @@ private:
 	QVariant propertyChain(const QVariant &value, const QStringList &properties, const QString &objectAlias, bool errorOnNotFound = true) const;
 	QVariant propertyOf(const QVariant &value, const QString &property, const QString &objectAlias, bool errorOnNotFound = true) const;
 	QVariant propertyOf(const QVariant &value, const QString &property
-			, bool *hasProperty = 0, bool *unknownType = nullptr) const;
+			, bool *hasProperty = nullptr, bool *unknownType = nullptr) const;
 	QVariant propertyOf(const QObject *object, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const items::SolidItem* item, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(QPoint point, const QString &property, bool *ok = nullptr) const;

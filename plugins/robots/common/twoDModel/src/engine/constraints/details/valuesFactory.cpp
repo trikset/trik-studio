@@ -59,15 +59,17 @@ Value ValuesFactory::stringValue(const QString &value) const
 
 Value ValuesFactory::specialSyntaxValue(const QString &paramName) const
 {
-
 	return [this, paramName]() {
 		if (paramName.isEmpty()) {
 			reportError(QObject::tr("Using special syntax with an empty variable name"));
 		}
+		// If it's a variable, then it's a variable.
 		auto&& variable = variableValue(paramName, false)();
 		if (variable.isNull()) {
+			// If it's an object property, then it's an object property.
 			variable = objectState(paramName, false)();
 		}
+		// It's neither one thing nor the other.
 		if (variable.isNull()) {
 			reportError(QObject::tr("The name %1 is not a valid variable "
 						"name or property chain for an object").arg(paramName));
@@ -227,7 +229,7 @@ QVariant ValuesFactory::propertyChain(const QVariant &value
 		currentValue = propertyOf(currentValue, property, currentObjectAlias, errorOnNotFound);
 		currentObjectAlias += "." + property;
 		if (!currentValue.isValid()) {
-			return QVariant();
+			return {};
 		}
 	}
 
@@ -238,20 +240,20 @@ QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &propert
 {
 	bool hasProperty{};
 	bool unknownType{};
-	const QVariant result = propertyOf(value, property, &hasProperty, &unknownType);
+	QVariant result = propertyOf(value, property, &hasProperty, &unknownType);
 
 	if (unknownType) {
 		if (errorOnNotFound) {
 			reportError(QObject::tr("Unknown type of object \"%1\"").arg(objectAlias));
 		}
-		return QVariant();
+		return {};
 	}
 
 	if (!hasProperty) {
 		if (errorOnNotFound) {
-			reportError(QObject::tr("Object \"%1\" has no property \"%2\"").arg(objectAlias, property));
+			reportError(QObject::tr(R"(Object "%1" has no property "%2")").arg(objectAlias, property));
 		}
-		return QVariant();
+		return {};
 	}
 
 	return result;
@@ -294,13 +296,13 @@ QVariant ValuesFactory::propertyOf(const QObject *object, const QString &propert
 {
 	ok && (*ok = true);
 	if (!object) {
-		return QVariant();
+		return {};
 	}
 
 	const int index = object->metaObject()->indexOfProperty(qPrintable(property));
 	if (index < 0) {
 		ok && (*ok = false);
-		return QVariant();
+		return {};
 	}
 
 	return object->property(qPrintable(property));
@@ -310,13 +312,13 @@ QVariant ValuesFactory::propertyOf(const items::SolidItem* item, const QString &
 {
 	ok && (*ok = true);
 	if (!item) {
-		return QVariant();
+		return {};
 	}
 	const auto &mo = items::SolidItem::staticMetaObject;
 	const auto index = mo.indexOfProperty(qPrintable(property));
 	if (index < 0) {
 		ok && (*ok = false);
-		return QVariant();
+		return {};
 	}
 
 	return mo.property(index).readOnGadget(item);
@@ -334,7 +336,7 @@ QVariant ValuesFactory::propertyOf(QPoint point, const QString &property, bool *
 	}
 
 	ok && (*ok = false);
-	return QVariant();
+	return {};
 }
 
 QVariant ValuesFactory::propertyOf(QRect rect, const QString &property, bool *ok) const
@@ -357,7 +359,7 @@ QVariant ValuesFactory::propertyOf(QRect rect, const QString &property, bool *ok
 	}
 
 	ok && (*ok = false);
-	return QVariant();
+	return {};
 }
 
 QVariant ValuesFactory::propertyOf(const QVariantList &list, const QString &property, bool *ok) const
@@ -387,7 +389,7 @@ QVariant ValuesFactory::propertyOf(const QVariantList &list, const QString &prop
 	}
 
 	ok && (*ok = false);
-	return QVariant();
+	return {};
 }
 
 void ValuesFactory::iterate(const QVariant &collection, const std::function<void (const QVariant &)> &visitor) const

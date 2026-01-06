@@ -5,7 +5,7 @@
     <name>QObject</name>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="+100"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+103"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="+125"/>
         <source>No such object: %1</source>
         <translation>Objet inexistant : %1</translation>
     </message>
@@ -27,7 +27,7 @@
     <message>
         <location line="+9"/>
         <location line="+12"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+102"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="+107"/>
         <location line="+12"/>
         <source>No such event: %1</source>
         <translation>événement inexistant : %1</translation>
@@ -84,12 +84,12 @@
         <translation>La balise &quot;return&quot; doit être présente dans l&apos;expression &quot;using&quot;.</translation>
     </message>
     <message>
-        <location line="+266"/>
+        <location line="+281"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Valeur inconnue &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location line="+81"/>
+        <location line="+80"/>
         <source>Invalid integer value &quot;%1&quot;</source>
         <translation>Valeur entière invalide &quot;%1&quot;</translation>
     </message>
@@ -134,7 +134,17 @@
         <translation>L&apos;attribut &quot;%1&quot; de la balise &quot;%2&quot; ne doit pas être vide.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="-38"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="-61"/>
+        <source>Using special syntax with an empty variable name</source>
+        <translation>Utilisation d&apos;une syntaxe spéciale avec un nom de variable vide</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>The name %1 is not a valid variable name or property chain for an object</source>
+        <translation>Le nom %1 n&apos;est pas un nom de variable valide ni une chaîne de propriétés pour un objet</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Requesting variable value with empty name</source>
         <translation>Demande de la valeur d&apos;une variable ayant un nom vide</translation>
     </message>
@@ -144,12 +154,12 @@
         <translation>Le chemin de l&apos;objet est vide !</translation>
     </message>
     <message>
-        <location line="+126"/>
+        <location line="+129"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Type d&apos;objet &quot;%1&quot; inconnu</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+7"/>
         <source>Object &quot;%1&quot; has no property &quot;%2&quot;</source>
         <translation>L&apos;objet &quot;%1&quot; n&apos;a pas de propriété &quot;%2&quot;</translation>
     </message>
