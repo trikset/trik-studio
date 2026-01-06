@@ -559,7 +559,7 @@ Trigger ConstraintsParser::parseLogTag(const QDomElement &element)
 		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
 	}
 
-	return mTriggers.log(element.attribute("text"), map);
+	return mTriggers.log(element.attribute("text"), map, parseMessageText(element.attribute("text")));
 }
 
 Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)

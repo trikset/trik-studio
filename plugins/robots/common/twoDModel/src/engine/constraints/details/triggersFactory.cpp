@@ -35,29 +35,34 @@ Trigger TriggersFactory::fail(const QString &message) const
 	return [this, message]() { Q_EMIT mStatus.fail(message); };
 }
 
+namespace  {
+void replace(const QMap<QString, Value> &replaces,
+	     const QString &prefix, const QString &postfix, QString &message) {
+	for (auto it = replaces.begin(), end = replaces.end(); it != end; ++it) {
+		message.replace(prefix + it.key() + postfix, it.value()().toString());
+	}
+}
+}
 Trigger TriggersFactory::message(const QString &message,
 				 const QMap<QString, Value> &replaces,
 				 QMap<QString, Value> &&additionalReplaces) const
 {
 	return [this, message, replaces, additionalReplaces]() {
 		auto resMessage = message;
-		for (const auto &key: replaces.keys()) {
-			resMessage.replace("%" + key + "%", replaces[key]().toString());
-		}
-		for (const auto &key: additionalReplaces.keys()) {
-			resMessage.replace("${" + key + "}", additionalReplaces[key]().toString());
-		}
+		replace(replaces, "%", "%", resMessage);
+		replace(additionalReplaces, "${", "}", resMessage);
 		Q_EMIT mStatus.message(resMessage);
 	};
 }
 
-Trigger TriggersFactory::log(const QString &message, const QMap<QString, Value> &replaces) const
+Trigger TriggersFactory::log(const QString &message,
+			     const QMap<QString, Value> &replaces,
+			     QMap<QString, Value> &&additionalReplaces) const
 {
-	return [this, message, replaces]() {
+	return [this, message, replaces, additionalReplaces]() {
 		auto resMessage = message;
-		for (const auto &key: replaces.keys()) {
-			resMessage.replace("%" + key + "%", replaces[key]().toString());
-		}
+		replace(replaces, "%", "%", resMessage);
+		replace(additionalReplaces, "${", "}", resMessage);
 		Q_EMIT mStatus.log(resMessage);
 	};
 }
