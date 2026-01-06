@@ -164,18 +164,18 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="178"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/conditionsFactory.cpp" line="190"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="107"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="119"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="112"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="124"/>
         <source>No such event: %1</source>
         <translation>Không tồn tại sự kiện: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="89"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="94"/>
         <source>Invalid &lt;setState&gt; object type %1</source>
         <translation>Loại đối tượng %1 trong &lt;setState&gt; không hợp lệ</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="95"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/triggersFactory.cpp" line="100"/>
         <source>Object %1 has no property %2</source>
         <translation>Đối tượng %1 không có thuộc tính %2</translation>
     </message>

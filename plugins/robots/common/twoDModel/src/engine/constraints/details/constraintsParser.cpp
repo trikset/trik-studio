@@ -524,8 +524,8 @@ QMap<QString, Value> ConstraintsParser::parseMessageText(const QString &text)
 	QMap<QString, Value> map;
 	QRegularExpressionMatchIterator it = paramRegex.globalMatch(text);
 	while (it.hasNext()) {
-	    QRegularExpressionMatch match = it.next();
-	    QString paramName = match.captured(1);
+	    const auto &match = it.next();
+	    const auto &paramName = match.captured(1);
 	    map.insert(paramName, mValues.specialSyntaxValue(paramName));
 	}
 
