@@ -74,7 +74,7 @@ public Q_SLOTS:
 	/// @param timestamp Count of milliseconds passed from the interpretation start when the event happened.
 	/// @param timestamp The position of the robot in scene coordinates.
 	/// @param rotation The rotation angle of the robot in degrees.
-	void newTrajectoryPoint(const QString &robotId, int timestamp, const QPointF &position, qreal rotation);
+	void newTrajectoryPoint(const QString &robotId, int timestamp, QPointF position, qreal rotation);
 
 	/// Writes JSON object representing modification of some robot`s device property into the trajectory stream.
 	/// @param robotId The id of the robot owning the device.

@@ -62,7 +62,7 @@ void Reporter::onInterpretationEnd()
 	report("]\n", mTrajectoryFile);
 }
 
-void Reporter::newTrajectoryPoint(const QString &robotId, int timestamp, const QPointF &position, qreal rotation)
+void Reporter::newTrajectoryPoint(const QString &robotId, int timestamp, QPointF position, qreal rotation)
 {
 	if (!mTrajectoryFile.isNull()) {
 		QJsonObject transition;
