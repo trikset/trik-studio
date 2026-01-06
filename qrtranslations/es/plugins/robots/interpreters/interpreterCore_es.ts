@@ -24,42 +24,52 @@
         <translation>Información de texto (ms)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="146"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="223"/>
         <source>Uploading &amp;&amp; Running</source>
         <translation>Cargando y ejecutando</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="152"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="229"/>
         <source>Running after uploading:</source>
         <translation>Ejecutar tras la carga:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="160"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="237"/>
         <source>Ask</source>
         <translation>Preguntar</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="165"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="242"/>
         <source>Always run</source>
         <translation>Ejecutar siempre</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="170"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="247"/>
         <source>Never run</source>
         <translation>Nunca ejecutar</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="187"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="258"/>
+        <source>2D-model Editor Settings</source>
+        <translation>Configuración del Editor de Modelos 2D</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="264"/>
+        <source>Enable Region Editor Mode</source>
+        <translation>Modo Editor de Regiones</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="192"/>
         <source>Sensors Settings</source>
         <translation>Configuración de sensores</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="233"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="137"/>
         <source>Robotics construction kit</source>
         <translation>Plataforma</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="247"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="151"/>
         <source>Robot model</source>
         <translation>Modelo de robot</translation>
     </message>
@@ -362,7 +372,7 @@
         <translation>No se ha cargado ningún plugin de plataforma robótica</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="212"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="213"/>
         <source>No robot models available for </source>
         <translation>No hay modelos de robot disponibles para </translation>
     </message>

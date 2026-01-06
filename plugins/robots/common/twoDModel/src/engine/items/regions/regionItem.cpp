@@ -210,7 +210,11 @@ void RegionItem::deserialize(const QDomElement &element)
 
 	if (element.hasAttribute("visible")) {
 		mVisible = element.attribute("visible") == "true";
-		setVisible(mVisible);
+		if (editorMode() == EditorMode::regionEditorMode) {
+			setVisible(true);
+		} else {
+			setVisible(mVisible);
+		}
 	}
 
 	if (mDumpPositionInfo) {

@@ -837,65 +837,65 @@
         <translation>kg</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="361"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="371"/>
         <source>Warning</source>
         <translation>Cảnh báo</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="362"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="372"/>
         <source>Do you really want to clear scene?</source>
         <translation>Bạn có thực sự muốn xóa toàn bộ cảnh?</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="471"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="481"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Chế độ luyện tập: lời giải sẽ không được kiểm tra</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="472"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="482"/>
         <source>Checking mode: solution will be checked, errors will be reported</source>
         <translation>Chế độ kiểm tra: lời giải sẽ được kiểm tra, các lỗi sẽ được báo cáo</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="534"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="544"/>
         <source>Saving world and robot model</source>
         <translation>Đang lưu mô hình thế giới và robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="534"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="554"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="568"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="544"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="564"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="578"/>
         <source>2D model saves (*.xml)</source>
         <translation>Tệp lưu mô hình 2D (*.xml)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="554"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="564"/>
         <source>Loading world and robot model</source>
         <translation>Đang tải mô hình thế giới và robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="568"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="578"/>
         <source>Loading world without robot model</source>
         <translation>Đang tải mô hình thế giới mà không có mô hình robot</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="885"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="895"/>
         <source>Hide details</source>
         <translation>Ẩn chi tiết</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="885"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="895"/>
         <source>Show details</source>
         <translation>Hiển thị chi tiết</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1091"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1092"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1101"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1102"/>
         <source>No wheel</source>
         <translation>Không có bánh xe</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1098"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="1108"/>
         <source>%1 (port %2)</source>
         <translation>%1 (cổng %2)</translation>
     </message>

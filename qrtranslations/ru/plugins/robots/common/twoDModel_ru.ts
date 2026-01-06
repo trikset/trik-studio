@@ -1178,7 +1178,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+361"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1196,7 +1196,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-208"/>
+        <location line="-218"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -1206,7 +1206,7 @@
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+287"/>
+        <location line="+297"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
