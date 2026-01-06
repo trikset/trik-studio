@@ -75,7 +75,6 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 				[&interpreterControl]() {
 				Q_EMIT interpreterControl.stopAllInterpretation(qReal::interpretation::StopReason::finished); });
 		mChecker->dumpVariables();
-
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::fail, this, [&](const QString &message) {
 		errorReporter.addError(message);

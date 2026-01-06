@@ -329,12 +329,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="118"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="119"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Lỗi khi phân tích cú pháp các ràng buộc: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="309"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="329"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Chương trình đã kết thúc, nhưng nhiệm vụ chưa hoàn thành.</translation>
     </message>
@@ -443,22 +443,22 @@
         <translation>Nhiệm vụ đã hoàn thành trong %1 giây!</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="93"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="95"/>
         <source>Error in checker: %1</source>
         <translation>Lỗi trong chương trình kiểm tra: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="168"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="170"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Trường &quot;version&quot; của thẻ &quot;root&quot; không được để trống.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="174"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="176"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>Mô hình thế giới có phiên bản %1. Phiên bản hiện tại là %2. Vui lòng kiểm tra xem mô hình thế giới có hoạt động như mong đợi hay không.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="208"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="210"/>
         <source>This robot model already exists</source>
         <translation>Mô hình robot này đã tồn tại</translation>
     </message>

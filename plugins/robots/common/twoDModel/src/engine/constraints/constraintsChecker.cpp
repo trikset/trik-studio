@@ -123,9 +123,9 @@ void ConstraintsChecker::reportParserError(const QString &message)
 void ConstraintsChecker::dumpVariables()
 {
 	QVariantMap variables = {
-	    {"variables", QVariantList{
-		QVariantMap{{"name", "total_score"}, {"value", mVariables["total_score"]}},
-	    }}
+		{"variables", QVariantList{
+			QVariantMap{{"name", "total_score"}, {"value", mVariables["total_score"]}},
+		}}
 	};
 
 	auto &&infoObject = QJsonObject::fromVariantMap(variables);

@@ -29,9 +29,7 @@ Reporter::Reporter(const QString &messagesFile, const QString &trajectoryFile)
 {
 }
 
-Reporter::~Reporter()
-{
-}
+Reporter::~Reporter() = default;
 
 bool Reporter::lastMessageIsError()
 {
@@ -131,7 +129,7 @@ QString Reporter::levelToString(const Level level) const {
 	// GCC 10.3.1 in AltLinux has problems understanding enums
 	// Thus we need this redundant code with a temporary variable
 	QString tmp;
-	
+
 	switch (level) {
 	case Level::information:
 	    tmp = "info";
