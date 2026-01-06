@@ -526,7 +526,7 @@ QMap<QString, Value> ConstraintsParser::parseMessageText(const QString &text)
 	while (it.hasNext()) {
 	    QRegularExpressionMatch match = it.next();
 	    QString paramName = match.captured(1);
-	    map.insert(paramName.trimmed(), mValues.specialSyntaxValue(paramName));
+	    map.insert(paramName, mValues.specialSyntaxValue(paramName));
 	}
 
 	return map;
