@@ -16,7 +16,7 @@
 
 #include <QtCore/QUuid>
 #include <QtXml/QDomDocument>
-
+#include <QRegularExpression>
 #include "event.h"
 
 using namespace twoDModel::constraints::details;
@@ -517,6 +517,21 @@ Trigger ConstraintsParser::parseFailTag(const QDomElement &element)
 	return mTriggers.fail(element.attribute("message"));
 }
 
+QMap<QString, Value> ConstraintsParser::parseMessageText(const QString &text)
+{
+	static const QRegularExpression paramRegex(R"(\$\{([^}]+)\})");
+
+	QMap<QString, Value> map;
+	QRegularExpressionMatchIterator it = paramRegex.globalMatch(text);
+	while (it.hasNext()) {
+	    QRegularExpressionMatch match = it.next();
+	    QString paramName = match.captured(1);
+	    map.insert(paramName, mValues.specialSyntaxValue(paramName));
+	}
+
+	return map;
+}
+
 Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 {
 	if (!assertAttributeNonEmpty(element, "text")) {
@@ -529,7 +544,7 @@ Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
 	}
 
-	return mTriggers.message(element.attribute("text"), map);
+	return mTriggers.message(element.attribute("text"), map, parseMessageText(element.attribute("text")));
 }
 
 Trigger ConstraintsParser::parseLogTag(const QDomElement &element)

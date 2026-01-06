@@ -57,9 +57,28 @@ Value ValuesFactory::stringValue(const QString &value) const
 	return [value]() { return value; };
 }
 
-Value ValuesFactory::variableValue(const QString &name) const
+Value ValuesFactory::specialSyntaxValue(const QString &paramName) const
 {
-	return [this, name]() {
+
+	return [this, paramName]() {
+		if (paramName.isEmpty()) {
+			reportError(QObject::tr("Using special syntax with an empty variable name"));
+		}
+		auto&& variable = variableValue(paramName, false)();
+		if (variable.isNull()) {
+			variable = objectState(paramName, false)();
+		}
+		if (variable.isNull()) {
+			reportError(QObject::tr("The name %1 is not a valid variable "
+						"name or property chain for an object").arg(paramName));
+		}
+		return variable;
+	};
+}
+
+Value ValuesFactory::variableValue(const QString &name, bool errorOnNotFound) const
+{
+	return [this, name, errorOnNotFound]() {
 		const QStringList parts = name.split('.');
 		if (parts.isEmpty()) {
 			reportError(QObject::tr("Requesting variable value with empty name"));
@@ -73,7 +92,7 @@ Value ValuesFactory::variableValue(const QString &name) const
 			return QVariant();
 		}
 
-		return propertyChain(mVariables[parts.first()], parts.mid(1), parts.first());
+		return propertyChain(mVariables[parts.first()], parts.mid(1), parts.first(), errorOnNotFound);
 	};
 }
 
@@ -89,9 +108,9 @@ Value ValuesFactory::typeOf(const QString &objectId) const
 	};
 }
 
-Value ValuesFactory::objectState(const QString &path) const
+Value ValuesFactory::objectState(const QString &path, bool errorOnNotFound) const
 {
-	return [this, path]() {
+	return [this, path, errorOnNotFound]() {
 		const QStringList parts = path.split('.', QString::SkipEmptyParts);
 		if (parts.isEmpty()) {
 			reportError(QObject::tr("Object path is empty!"));
@@ -100,7 +119,9 @@ Value ValuesFactory::objectState(const QString &path) const
 
 		QString objectId = parts.first();
 		if (!mObjects.contains(objectId)) {
-			reportError(QObject::tr("No such object: %1").arg(objectId));
+			if (errorOnNotFound) {
+				reportError(QObject::tr("No such object: %1").arg(objectId));
+			}
 			return QVariant();
 		}
 
@@ -110,7 +131,7 @@ Value ValuesFactory::objectState(const QString &path) const
 			++lastObjectPart;
 		}
 
-		return propertyChain(QVariant::fromValue<QObject *>(mObjects[objectId]), parts.mid(lastObjectPart), objectId);
+		return propertyChain(QVariant::fromValue<QObject *>(mObjects[objectId]), parts.mid(lastObjectPart), objectId, errorOnNotFound);
 	};
 }
 
@@ -198,12 +219,12 @@ Value ValuesFactory::boundingRect(const Value &items) const
 }
 
 QVariant ValuesFactory::propertyChain(const QVariant &value
-		, const QStringList &propertyChain, const QString &objectAlias) const
+		, const QStringList &propertyChain, const QString &objectAlias, bool errorOnNotFound) const
 {
 	QVariant currentValue = value;
 	QString currentObjectAlias = objectAlias;
 	for (const QString &property : propertyChain) {
-		currentValue = propertyOf(currentValue, property, currentObjectAlias);
+		currentValue = propertyOf(currentValue, property, currentObjectAlias, errorOnNotFound);
 		currentObjectAlias += "." + property;
 		if (!currentValue.isValid()) {
 			return QVariant();
@@ -213,19 +234,23 @@ QVariant ValuesFactory::propertyChain(const QVariant &value
 	return currentValue;
 }
 
-QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property, const QString &objectAlias) const
+QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property, const QString &objectAlias, bool errorOnNotFound) const
 {
 	bool hasProperty{};
 	bool unknownType{};
 	const QVariant result = propertyOf(value, property, &hasProperty, &unknownType);
 
 	if (unknownType) {
-		reportError(QObject::tr("Unknown type of object \"%1\"").arg(objectAlias));
+		if (errorOnNotFound) {
+			reportError(QObject::tr("Unknown type of object \"%1\"").arg(objectAlias));
+		}
 		return QVariant();
 	}
 
 	if (!hasProperty) {
-		reportError(QObject::tr("Object \"%1\" has no property \"%2\"").arg(objectAlias, property));
+		if (errorOnNotFound) {
+			reportError(QObject::tr("Object \"%1\" has no property \"%2\"").arg(objectAlias, property));
+		}
 		return QVariant();
 	}
 

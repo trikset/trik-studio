@@ -107,6 +107,7 @@ private:
 	Value parseBinaryValueTag(const QDomElement &element);
 
 	QString id(const QDomElement &element) const;
+	QMap<QString, Value> parseMessageText(const QString &text);
 	int intAttribute(const QDomElement &element, const QString &attributeName, int defaultValue = -1);
 	qreal doubleAttribute(const QDomElement &element, const QString &attributeName, qreal defaultValue = 0.0);
 	bool boolAttribute(const QDomElement &element, const QString &attributeName, bool defaultValue = false);
