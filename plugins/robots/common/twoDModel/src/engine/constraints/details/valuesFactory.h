@@ -110,8 +110,10 @@ public:
 	Value boundingRect(const Value &items) const;
 
 private:
-	QVariant propertyChain(const QVariant &value, const QStringList &properties, const QString &objectAlias, bool errorOnNotFound = true) const;
-	QVariant propertyOf(const QVariant &value, const QString &property, const QString &objectAlias, bool errorOnNotFound = true) const;
+	QVariant propertyChain(const QVariant &value, const QStringList &properties,
+					const QString &objectAlias, bool errorOnNotFound = true) const;
+	QVariant propertyOf(const QVariant &value, const QString &property, const QString &objectAlias,
+					bool errorOnNotFound = true) const;
 	QVariant propertyOf(const QVariant &value, const QString &property
 			, bool *hasProperty = nullptr, bool *unknownType = nullptr) const;
 	QVariant propertyOf(const QObject *object, const QString &property, bool *ok = nullptr) const;

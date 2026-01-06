@@ -154,7 +154,7 @@
         <translation>Le chemin de l&apos;objet est vide !</translation>
     </message>
     <message>
-        <location line="+129"/>
+        <location line="+131"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Type d&apos;objet &quot;%1&quot; inconnu</translation>
     </message>

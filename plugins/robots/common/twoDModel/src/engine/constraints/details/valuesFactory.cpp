@@ -133,7 +133,8 @@ Value ValuesFactory::objectState(const QString &path, bool errorOnNotFound) cons
 			++lastObjectPart;
 		}
 
-		return propertyChain(QVariant::fromValue<QObject *>(mObjects[objectId]), parts.mid(lastObjectPart), objectId, errorOnNotFound);
+		return propertyChain(QVariant::fromValue<QObject *>(mObjects[objectId]),
+						parts.mid(lastObjectPart), objectId, errorOnNotFound);
 	};
 }
 
@@ -236,7 +237,8 @@ QVariant ValuesFactory::propertyChain(const QVariant &value
 	return currentValue;
 }
 
-QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property, const QString &objectAlias, bool errorOnNotFound) const
+QVariant ValuesFactory::propertyOf(const QVariant &value, const QString &property,
+						const QString &objectAlias, bool errorOnNotFound) const
 {
 	bool hasProperty{};
 	bool unknownType{};

@@ -200,12 +200,12 @@
         <translation>¡La ruta del objeto está vacía!</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="247"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="249"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Tipo de objeto desconocido &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="254"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/valuesFactory.cpp" line="256"/>
         <source>Object &quot;%1&quot; has no property &quot;%2&quot;</source>
         <translation>El objeto &quot;%1&quot; no tiene la propiedad &quot;%2&quot;</translation>
     </message>

@@ -360,7 +360,7 @@
         <translation>Путь до объекта пуст!</translation>
     </message>
     <message>
-        <location line="+129"/>
+        <location line="+131"/>
         <source>Unknown type of object &quot;%1&quot;</source>
         <translation>Неизвестный тип объекта &quot;%1&quot;</translation>
     </message>
