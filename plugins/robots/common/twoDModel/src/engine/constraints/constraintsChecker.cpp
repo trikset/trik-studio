@@ -62,9 +62,7 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 	mObjects["trace"] = new utils::ObjectsSet<QSharedPointer<QGraphicsPathItem>>(mModel.worldModel().trace(), this);
 }
 
-ConstraintsChecker::~ConstraintsChecker()
-{
-}
+ConstraintsChecker::~ConstraintsChecker() = default;
 
 bool ConstraintsChecker::hasConstraints() const
 {
@@ -159,7 +157,7 @@ void ConstraintsChecker::prepareEvents()
 
 void ConstraintsChecker::setUpEvent()
 {
-	if (details::Event * const event = qobject_cast<details::Event *>(sender())) {
+	if (auto * const event = qobject_cast<details::Event *>(sender())) {
 		if (!mActiveEvents.contains(event)) {
 			mActiveEvents << event;
 		}
@@ -171,7 +169,7 @@ void ConstraintsChecker::setUpEvent()
 
 void ConstraintsChecker::dropEvent()
 {
-	if (details::Event * const event = qobject_cast<details::Event *>(sender())) {
+	if (auto * const event = qobject_cast<details::Event *>(sender())) {
 		mActiveEvents.removeAll(event);
 	}
 }
@@ -304,7 +302,7 @@ void ConstraintsChecker::programStarted()
 			continue;
 		}
 
-		const QString robotId = robotIds[0];
+		const QString& robotId = robotIds[0];
 		for (auto &&device : robot->info().configuration().devices()) {
 			bindDeviceObject(robotId, robot, device->port());
 		}

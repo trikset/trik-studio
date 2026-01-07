@@ -56,7 +56,7 @@ class ConstraintsChecker : public QObject
 
 public:
 	ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model);
-	~ConstraintsChecker();
+	~ConstraintsChecker() override;
 
 	/// Returns true if constraints checker is active now (constraints list passed into checker is non-empty).
 	bool hasConstraints() const;
