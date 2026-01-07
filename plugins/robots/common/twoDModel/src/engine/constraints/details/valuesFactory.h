@@ -48,8 +48,13 @@ public:
 	/// Produces functor that always returns string-type QVariant with the specified value.
 	Value stringValue(const QString &value) const;
 
+	/// produces a functor that tries to get the value of a variable with that name.
+	/// If the variable is not found, it tries to get the value as a property of the object.
+	/// Otherwise, it returns QVariant()
+	Value specialSyntaxValue(const QString &paramName) const;
+
 	/// Produces functor that returns value of the specified variable.
-	Value variableValue(const QString &name) const;
+	Value variableValue(const QString &name, bool errorOnNotFound = true) const;
 
 	/// Produces functor that returns Qt meta-type id of the object with the specified id.
 	Value typeOf(const QString &objectId) const;
@@ -60,7 +65,7 @@ public:
 	/// via Qt reflection.
 	/// If no object found in global map or on some stage object does not contain desired property
 	/// checker error will be emitted.
-	Value objectState(const QString &path) const;
+	Value objectState(const QString &path, bool errorOnNotFound = true) const;
 
 	/// Produces functor that returns a number of milliseconds passed from some point (no matter what point).
 	Value timestamp(const utils::TimelineInterface &timeline) const;
@@ -105,10 +110,12 @@ public:
 	Value boundingRect(const Value &items) const;
 
 private:
-	QVariant propertyChain(const QVariant &value, const QStringList &properties, const QString &objectAlias) const;
-	QVariant propertyOf(const QVariant &value, const QString &property, const QString &objectAlias) const;
+	QVariant propertyChain(const QVariant &value, const QStringList &properties,
+					const QString &objectAlias, bool errorOnNotFound = true) const;
+	QVariant propertyOf(const QVariant &value, const QString &property, const QString &objectAlias,
+					bool errorOnNotFound = true) const;
 	QVariant propertyOf(const QVariant &value, const QString &property
-			, bool *hasProperty = 0, bool *unknownType = nullptr) const;
+			, bool *hasProperty = nullptr, bool *unknownType = nullptr) const;
 	QVariant propertyOf(const QObject *object, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(const items::SolidItem* item, const QString &property, bool *ok = nullptr) const;
 	QVariant propertyOf(QPoint point, const QString &property, bool *ok = nullptr) const;

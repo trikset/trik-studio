@@ -35,24 +35,34 @@ Trigger TriggersFactory::fail(const QString &message) const
 	return [this, message]() { Q_EMIT mStatus.fail(message); };
 }
 
-Trigger TriggersFactory::message(const QString &message, const QMap<QString, Value> &replaces) const
+namespace  {
+void replace(const QMap<QString, Value> &replaces,
+	     const QString &prefix, const QString &postfix, QString &message) {
+	for (auto it = replaces.begin(), end = replaces.end(); it != end; ++it) {
+		message.replace(prefix + it.key() + postfix, it.value()().toString());
+	}
+}
+}
+Trigger TriggersFactory::message(const QString &message,
+				 const QMap<QString, Value> &replaces,
+				 QMap<QString, Value> &&additionalReplaces) const
 {
-	return [this, message, replaces]() {
+	return [this, message, replaces, additionalReplaces]() {
 		auto resMessage = message;
-		for (const auto &key: replaces.keys()) {
-			resMessage.replace("%" + key + "%", replaces[key]().toString());
-		}
+		replace(replaces, "%", "%", resMessage);
+		replace(additionalReplaces, "${", "}", resMessage);
 		Q_EMIT mStatus.message(resMessage);
 	};
 }
 
-Trigger TriggersFactory::log(const QString &message, const QMap<QString, Value> &replaces) const
+Trigger TriggersFactory::log(const QString &message,
+			     const QMap<QString, Value> &replaces,
+			     QMap<QString, Value> &&additionalReplaces) const
 {
-	return [this, message, replaces]() {
+	return [this, message, replaces, additionalReplaces]() {
 		auto resMessage = message;
-		for (const auto &key: replaces.keys()) {
-			resMessage.replace("%" + key + "%", replaces[key]().toString());
-		}
+		replace(replaces, "%", "%", resMessage);
+		replace(additionalReplaces, "${", "}", resMessage);
 		Q_EMIT mStatus.log(resMessage);
 	};
 }
@@ -84,7 +94,7 @@ Trigger TriggersFactory::setObjectState(const Value &object, const QString &prop
 			reportError(QObject::tr("Invalid <setState> object type %1").arg(variantObject.typeName()));
 		}
 
-		QObject * const objectInstance = variantObject.value<QObject *>();
+		auto * const objectInstance = variantObject.value<QObject *>();
 		const int index = objectInstance->metaObject()->indexOfProperty(qPrintable(property));
 		if (index < 0) {
 			reportError(QObject::tr("Object %1 has no property %2").arg(variantObject.typeName(), property));

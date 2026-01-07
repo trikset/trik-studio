@@ -16,7 +16,7 @@
 
 #include <QtCore/QUuid>
 #include <QtXml/QDomDocument>
-
+#include <QRegularExpression>
 #include "event.h"
 
 using namespace twoDModel::constraints::details;
@@ -147,13 +147,13 @@ Event *ConstraintsParser::parseEventTag(const QDomElement &element)
 	const QString triggerName = firstIsCondition ? child2Name : child1Name;
 
 	if (conditionName != "condition" && conditionName != "conditions") {
-		error(QObject::tr("Event tag must have \"condition\" or \"conditions\" child tag. \"%1\" found instead.")
+		error(QObject::tr(R"(Event tag must have "condition" or "conditions" child tag. "%1" found instead.)")
 				.arg(conditionTag.tagName()));
 		return nullptr;
 	}
 
 	if (triggerName != "trigger" && triggerName != "triggers") {
-		error(QObject::tr("Event tag must have \"trigger\" or \"triggers\" child tag. \"%1\" found instead.")
+		error(QObject::tr(R"(Event tag must have "trigger" or "triggers" child tag. "%1" found instead.)")
 				.arg(triggerTag.tagName()));
 		return nullptr;
 	}
@@ -163,7 +163,7 @@ Event *ConstraintsParser::parseEventTag(const QDomElement &element)
 
 	const Trigger trigger = parseTriggersAlternative(triggerTag);
 
-	Event * const result = new Event(id(element), mConditions.constant(true), trigger, dropsOnFire, setUpInitially);
+	auto * const result = new Event(id(element), mConditions.constant(true), trigger, dropsOnFire, setUpInitially);
 
 	const Condition condition = conditionName == "condition"
 			? parseConditionTag(conditionTag, *result)
@@ -193,7 +193,7 @@ Event *ConstraintsParser::parseConstraintTag(const QDomElement &element)
 	const QString checkOneAttribute = element.attribute("checkOnce", "false").toLower();
 	const bool checkOnce = checkOneAttribute == "true";
 
-	Event * const result = new Event(id(element), mConditions.constant(true), trigger, true, true);
+	auto * const result = new Event(id(element), mConditions.constant(true), trigger, true, true);
 
 	Condition condition = parseConditionsAlternative(element.firstChildElement(), *result);
 
@@ -221,7 +221,7 @@ Event *ConstraintsParser::parseTimeLimitTag(const QDomElement &element)
 
 	const QString timeLimitMessage = QObject::tr("Program worked for too long time");
 	const Value timestamp = mValues.timestamp(mTimeline);
-	Event * const event = new Event(id(element)
+	auto * const event = new Event(id(element)
 			, mConditions.constant(true)
 			, mTriggers.fail(timeLimitMessage)
 			, true
@@ -262,7 +262,7 @@ Condition ConstraintsParser::parseConditionsTag(const QDomElement &element, Even
 	} else if (glueAttribute == "or") {
 		glue = Glue::Or;
 	} else {
-		error(QObject::tr("\"Glue\" attribute must have value \"and\" or \"or\"."));
+		error(QObject::tr(R"("Glue" attribute must have value "and" or "or".)"));
 		return mConditions.constant(true);
 	}
 
@@ -417,7 +417,7 @@ Condition ConstraintsParser::parseUsingTag(const QDomElement &element, Event &ev
 	{
 		if (trigger.tagName().toLower() == "return") {
 			if (resultFound) {
-				error(QObject::tr("There must be only one tag \"return\" in \"using\" expression."));
+				error(QObject::tr(R"(There must be only one tag "return" in "using" expression.)"));
 				return mConditions.constant(true);
 			}
 
@@ -429,7 +429,7 @@ Condition ConstraintsParser::parseUsingTag(const QDomElement &element, Event &ev
 	}
 
 	if (!resultFound) {
-		error(QObject::tr("There must be \"return\" tag in \"using\" expression."));
+		error(QObject::tr(R"(There must be "return" tag in "using" expression.)"));
 		return mConditions.constant(true);
 	}
 
@@ -517,6 +517,21 @@ Trigger ConstraintsParser::parseFailTag(const QDomElement &element)
 	return mTriggers.fail(element.attribute("message"));
 }
 
+QMap<QString, Value> ConstraintsParser::parseMessageText(const QString &text)
+{
+	static const QRegularExpression paramRegex(R"(\$\{([^}]+)\})");
+
+	QMap<QString, Value> map;
+	QRegularExpressionMatchIterator it = paramRegex.globalMatch(text);
+	while (it.hasNext()) {
+	    const auto &match = it.next();
+	    const auto &paramName = match.captured(1);
+	    map.insert(paramName, mValues.specialSyntaxValue(paramName));
+	}
+
+	return map;
+}
+
 Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 {
 	if (!assertAttributeNonEmpty(element, "text")) {
@@ -529,7 +544,7 @@ Trigger ConstraintsParser::parseMessageTag(const QDomElement &element)
 		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
 	}
 
-	return mTriggers.message(element.attribute("text"), map);
+	return mTriggers.message(element.attribute("text"), map, parseMessageText(element.attribute("text")));
 }
 
 Trigger ConstraintsParser::parseLogTag(const QDomElement &element)
@@ -544,7 +559,7 @@ Trigger ConstraintsParser::parseLogTag(const QDomElement &element)
 		map.insert(replace.attribute("var"), parseValue(replace.firstChildElement()));
 	}
 
-	return mTriggers.log(element.attribute("text"), map);
+	return mTriggers.log(element.attribute("text"), map, parseMessageText(element.attribute("text")));
 }
 
 Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)
@@ -573,7 +588,7 @@ Value ConstraintsParser::parseUnaryValueTag(const QDomElement &element)
 
 	const QString operation = element.tagName().toLower();
 
-	const Value value = parseValue(element.firstChildElement());
+	Value value = parseValue(element.firstChildElement());
 
 	if (operation == "minus") {
 		return mValues.unaryMinus(value);
@@ -765,8 +780,7 @@ Value ConstraintsParser::parseObjectStateTag(const QDomElement &element)
 QString ConstraintsParser::id(const QDomElement &element) const
 {
 	const QString attribute = element.attribute("id");
-	const QString id = attribute.isEmpty() ? QUuid::createUuid().toString() : attribute;
-	return id;
+	return attribute.isEmpty() ? QUuid::createUuid().toString() : attribute;;
 }
 
 int ConstraintsParser::intAttribute(const QDomElement &element, const QString &attributeName, int defaultValue)
@@ -803,7 +817,7 @@ bool ConstraintsParser::boolAttribute(const QDomElement &element, const QString 
 	const QString stringValue = element.attribute(attributeName, defaultString).toLower();
 	if (stringValue != "true" && stringValue != "false") {
 		/// @todo: Make it warning
-		error(QObject::tr("Invalid boolean value \"%1\" (expected \"true\" or \"false\")")
+		error(QObject::tr(R"(Invalid boolean value "%1" (expected "true" or "false"))")
 				.arg(element.attribute(attributeName)));
 		return defaultValue;
 	}
@@ -851,7 +865,7 @@ bool ConstraintsParser::assertChildrenMoreThan(const QDomElement &element, int c
 bool ConstraintsParser::assertHasAttribute(const QDomElement &element, const QString &attribute)
 {
 	if (!element.hasAttribute(attribute)) {
-		error(QObject::tr("\"%1\" tag must have \"%2\" attribute.").arg(element.tagName(), attribute));
+		error(QObject::tr(R"("%1" tag must have "%2" attribute.)").arg(element.tagName(), attribute));
 		return false;
 	}
 
@@ -861,7 +875,7 @@ bool ConstraintsParser::assertHasAttribute(const QDomElement &element, const QSt
 bool ConstraintsParser::assertTagName(const QDomElement &element, const QString &nameInLowerCase)
 {
 	if (element.tagName().toLower() != nameInLowerCase) {
-		error(QObject::tr("Expected \"%1\" tag, got \"%2\".").arg(nameInLowerCase, element.tagName()));
+		error(QObject::tr(R"(Expected "%1" tag, got "%2".)").arg(nameInLowerCase, element.tagName()));
 		return false;
 	}
 
@@ -875,7 +889,7 @@ bool ConstraintsParser::assertAttributeNonEmpty(const QDomElement &element, cons
 	}
 
 	if (element.attribute(attribute).isEmpty()) {
-		error(QObject::tr("Attribute \"%1\" of the tag \"%2\" must not be empty.").arg(element.tagName(), attribute));
+		error(QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)").arg(element.tagName(), attribute));
 		return false;
 	}
 
