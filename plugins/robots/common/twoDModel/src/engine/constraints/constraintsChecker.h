@@ -57,7 +57,7 @@ class ConstraintsChecker : public QObject
 
 public:
 	ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model);
-	~ConstraintsChecker();
+	~ConstraintsChecker() override;
 
 	/// Returns true if constraints checker is active now (constraints list passed into checker is non-empty).
 	bool hasConstraints() const;
@@ -82,6 +82,8 @@ public:
 	/// Enables or disables checker. Checker will be still disabled if true passed here but constraints list is empty.
 	void setEnabled(bool enabled);
 
+	void dumpVariables();
+
 Q_SIGNALS:
 	/// Emitted when program execution meets <success/> trigger. That means that robot successfully accomplished its
 	/// task without violation any constraint.
@@ -101,7 +103,6 @@ Q_SIGNALS:
 
 	/// Emitted when checker program written incorrectly with the reason as parameter.
 	void checkerError(const QString &message);
-
 private:
 	void reportParserError(const QString &message);
 	void reportTemplateParserError(const QString &message);
@@ -126,7 +127,7 @@ private:
 
 	void programStarted();
 	void programFinished(qReal::interpretation::StopReason reason);
-
+	void prepareVariables();
 	void onSuccess();
 
 	qReal::ErrorReporterInterface &mErrorReporter;

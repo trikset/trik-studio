@@ -555,17 +555,17 @@
         <translation>¡La tarea se completó en %1 seg!</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="93"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="95"/>
         <source>Error in checker: %1</source>
         <translation>Error en el verificador: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="168"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="170"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>El campo &quot;version&quot; de la etiqueta &quot;root&quot; no debe estar vacío.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="174"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="176"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>El modelo del mundo tiene versión %1. La versión actual es %2. Por favor, verifique que el modelo del mundo se comporte como se espera.</translation>
     </message>

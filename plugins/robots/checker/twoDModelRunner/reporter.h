@@ -16,6 +16,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QScopedPointer>
+#include <QPointF>
 
 namespace utils {
 class OutFile;
@@ -46,7 +47,7 @@ public:
 	/// @param trajectoryFile If non-empty the information about robot`s movement will be stored there
 	/// during the interpetation (so the factical data write will not be performed in one moment, it will be written
 	/// in chunks, each chunk with the new robot transition).
-	Reporter(const QString &messagesFile, const QString &trajectoryFile);
+	Reporter(const QString &messagesFile, const QString &trajectoryFile, QObject *parent = nullptr);
 
 	~Reporter() override;
 
@@ -74,7 +75,7 @@ public Q_SLOTS:
 	/// @param timestamp Count of milliseconds passed from the interpretation start when the event happened.
 	/// @param timestamp The position of the robot in scene coordinates.
 	/// @param rotation The rotation angle of the robot in degrees.
-	void newTrajectoryPoint(const QString &robotId, int timestamp, const QPointF &position, qreal rotation);
+	void newTrajectoryPoint(const QString &robotId, int timestamp, QPointF position, qreal rotation);
 
 	/// Writes JSON object representing modification of some robot`s device property into the trajectory stream.
 	/// @param robotId The id of the robot owning the device.

@@ -428,7 +428,7 @@
         <translation>px</translation>
     </message>
 </context>
-<context>
+<conhttps://github.com/trikset/trik-studio/pull/2067/conflict?name=qrtranslations%252Fvi%252Fplugins%252Frobots%252Fcommon%252FtwoDModel_vi.ts&ancestor_oid=a0a1cde5f7dea5fc5f5d160bc0e3d95eb55c460a&base_oid=19d97080df4d1ae3dca733adcc5783f6ce841d10&head_oid=b8fb9192ce916a54e68dca01b8b56960b81a8f67text>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="173"/>
@@ -555,17 +555,17 @@
         <translation>Nhiệm vụ đã hoàn thành trong %1 giây!</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="93"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="95"/>
         <source>Error in checker: %1</source>
         <translation>Lỗi trong chương trình kiểm tra: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="168"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="170"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Trường &quot;version&quot; của thẻ &quot;root&quot; không được để trống.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="174"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="176"/>
         <source>The world model has version %1. The current version is %2. Please check that the world model behaves as expected.</source>
         <translation>Mô hình thế giới có phiên bản %1. Phiên bản hiện tại là %2. Vui lòng kiểm tra xem mô hình thế giới có hoạt động như mong đợi hay không.</translation>
     </message>
