@@ -17,7 +17,8 @@
 #include <qrutils/stringUtils.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <utils/objectsSet.h>
-
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "details/constraintsParser.h"
 #include "details/event.h"
 #include "twoDModel/engine/model/model.h"
@@ -61,9 +62,7 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 	mObjects["trace"] = new utils::ObjectsSet<QSharedPointer<QGraphicsPathItem>>(mModel.worldModel().trace(), this);
 }
 
-ConstraintsChecker::~ConstraintsChecker()
-{
-}
+ConstraintsChecker::~ConstraintsChecker() = default;
 
 bool ConstraintsChecker::hasConstraints() const
 {
@@ -119,6 +118,25 @@ void ConstraintsChecker::reportParserError(const QString &message)
 	mErrorReporter.addError(fullMessage);
 }
 
+void ConstraintsChecker::dumpVariables()
+{
+	QVariantMap variables = {
+		{"variables", QVariantList{
+			QVariantMap{{"name", "total_score"}, {"value", mVariables["total_score"]}},
+		}}
+	};
+
+	auto &&infoObject = QJsonObject::fromVariantMap(variables);
+	QJsonDocument doc(infoObject);
+	Q_EMIT log(doc.toJson());
+}
+
+void ConstraintsChecker::prepareVariables()
+{
+	mVariables.clear();
+	mVariables["total_score"] = 0;
+}
+
 void ConstraintsChecker::prepareEvents()
 {
 	mActiveEvents.clear();
@@ -139,7 +157,7 @@ void ConstraintsChecker::prepareEvents()
 
 void ConstraintsChecker::setUpEvent()
 {
-	if (details::Event * const event = qobject_cast<details::Event *>(sender())) {
+	if (auto * const event = qobject_cast<details::Event *>(sender())) {
 		if (!mActiveEvents.contains(event)) {
 			mActiveEvents << event;
 		}
@@ -151,7 +169,7 @@ void ConstraintsChecker::setUpEvent()
 
 void ConstraintsChecker::dropEvent()
 {
-	if (details::Event * const event = qobject_cast<details::Event *>(sender())) {
+	if (auto * const event = qobject_cast<details::Event *>(sender())) {
 		mActiveEvents.removeAll(event);
 	}
 }
@@ -284,7 +302,7 @@ void ConstraintsChecker::programStarted()
 			continue;
 		}
 
-		const QString robotId = robotIds[0];
+		const QString& robotId = robotIds[0];
 		for (auto &&device : robot->info().configuration().devices()) {
 			bindDeviceObject(robotId, robot, device->port());
 		}
@@ -295,7 +313,7 @@ void ConstraintsChecker::programStarted()
 	mDefferedSuccessTriggered = false;
 	mFailTriggered = false;
 	if (mParsedSuccessfully) {
-		mVariables.clear();
+		prepareVariables();
 		prepareEvents();
 	}
 }

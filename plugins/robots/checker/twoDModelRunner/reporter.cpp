@@ -23,15 +23,13 @@
 
 using namespace twoDModel;
 
-Reporter::Reporter(const QString &messagesFile, const QString &trajectoryFile)
-	: mMessagesFile(new utils::OutFile(messagesFile))
+Reporter::Reporter(const QString &messagesFile, const QString &trajectoryFile, QObject *parent)
+	: QObject(parent)
+	,  mMessagesFile(new utils::OutFile(messagesFile))
 	, mTrajectoryFile(new utils::OutFile(trajectoryFile))
-{
-}
+{}
 
-Reporter::~Reporter()
-{
-}
+Reporter::~Reporter() = default;
 
 bool Reporter::lastMessageIsError()
 {
@@ -64,7 +62,7 @@ void Reporter::onInterpretationEnd()
 	report("]\n", mTrajectoryFile);
 }
 
-void Reporter::newTrajectoryPoint(const QString &robotId, int timestamp, const QPointF &position, qreal rotation)
+void Reporter::newTrajectoryPoint(const QString &robotId, int timestamp, QPointF position, qreal rotation)
 {
 	if (!mTrajectoryFile.isNull()) {
 		QJsonObject transition;
@@ -108,10 +106,18 @@ void Reporter::reportMessages()
 
 	QJsonArray messages;
 	for (const QPair<Level, QString> &message : mMessages) {
-		messages.append(QJsonObject::fromVariantMap({
-			{ "level", levelToString(message.first) }
-			, { "message", message.second }
-		}));
+		auto document = QJsonDocument::fromJson(message.second.toUtf8());
+		if (!document.isNull() && document.isObject()) {
+			auto &&rootObject = document.object();
+			if (rootObject.contains("variables")) {
+				messages.append(rootObject);
+			}
+		} else {
+			messages.append(QJsonObject::fromVariantMap({
+				{ "level", levelToString(message.first) }
+				, { "message", message.second }
+			}));
+		}
 	}
 
 	QJsonDocument document;
@@ -123,7 +129,7 @@ QString Reporter::levelToString(const Level level) const {
 	// GCC 10.3.1 in AltLinux has problems understanding enums
 	// Thus we need this redundant code with a temporary variable
 	QString tmp;
-	
+
 	switch (level) {
 	case Level::information:
 	    tmp = "info";
