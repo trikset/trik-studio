@@ -61,11 +61,15 @@ ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorRepor
 	bindToWorldModelObjects();
 	bindToRobotObjects();
 	mObjects["trace"] = new utils::ObjectsSet<QSharedPointer<QGraphicsPathItem>>(mModel.worldModel().trace(), this);
+
+	mTemplatesParser->parseSystemTemplates();
+	const auto &parsingErrors = mTemplatesParser->parsingErrors();
+	for (auto &&error : parsingErrors) {
+		reportTemplateParserError(error);
+	}
 }
 
-ConstraintsChecker::~ConstraintsChecker()
-{
-}
+ConstraintsChecker::~ConstraintsChecker() = default;
 
 bool ConstraintsChecker::hasConstraints() const
 {
@@ -74,24 +78,13 @@ bool ConstraintsChecker::hasConstraints() const
 
 bool ConstraintsChecker::parseTemplates(const QDomElement &templatesXml)
 {
-	mTemplatesParser->clear();
-	mTemplatesParser->parseSystemTemplates();
-	const auto &parsingErrors = mTemplatesParser->parsingErrors();
-	const auto hasErrors = !parsingErrors.isEmpty();
-	for (auto &&error : parsingErrors) {
-		QLOG_ERROR() << error;
-	}
-
-	if (hasErrors) {
-		return false;
-	}
-
 	if (templatesXml.isNull()) {
 		// The user did not provide templates
 		return true;
 	}
 
-	auto result = mTemplatesParser->parse(templatesXml);
+	mTemplatesParser->clear();
+	auto result = mTemplatesParser->parseTemplates(templatesXml);
 	for (auto &&error : mTemplatesParser->parsingErrors()) {
 		reportTemplateParserError(error);
 	}
@@ -105,21 +98,29 @@ bool ConstraintsChecker::proccessTemplates(const QDomElement &constraintsXml)
 		return true;
 	}
 
-	auto result = mTemplatesParser->transform(constraintsXml);
-	for (auto &&error : mTemplatesParser->substituionErrors()) {
+	mTemplatesParser->substitute(constraintsXml);
+	const auto &errors = mTemplatesParser->substituionErrors();
+
+	for(auto &&error : mTemplatesParser->substituionErrors()) {
 		reportTemplateSubstitutionError(error);
 	}
 
-#if 0
-	QFile file("/path/to/file.xml");
-	if (file.open(QIODevice::WriteOnly)) {
-	    QTextStream stream(&file);
-	    stream << constraintsXml.ownerDocument().toString(4);
-	    file.close();
+	QByteArray debugPath = qgetenv("TRIK_PREPROCESSOR_XML_OUTPUT");
+	if (!debugPath.isEmpty()) {
+		QFile file(QString::fromUtf8(debugPath));
+		if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+			QTextStream stream(&file);
+			stream << constraintsXml.ownerDocument().toString(4);
+		}
 	}
-#endif
-	return result;
+
+	if (!errors.isEmpty()) {
+		return false;
+	}
+
+	return true;
 }
+
 bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
 					  const QDomElement &constraintsXmlAfterTemplateSubstitution)
 {
@@ -170,12 +171,14 @@ void ConstraintsChecker::setEnabled(bool enabled)
 void ConstraintsChecker::reportTemplateSubstitutionError(const QString &message)
 {
 	const QString fullMessage = tr("Error while template substitution: %1").arg(message);
+	QLOG_ERROR() << fullMessage;
 	mErrorReporter.addError(fullMessage);
 }
 
 void ConstraintsChecker::reportTemplateParserError(const QString &message)
 {
 	const QString fullMessage = tr("Error while parsing template: %1").arg(message);
+	QLOG_ERROR() << fullMessage;
 	mErrorReporter.addError(fullMessage);
 }
 

@@ -30,10 +30,12 @@ INCLUDEPATH += \
 # Tests
 HEADERS += \
 	$$PWD/engineTests/constraintsTests/constraintsParserTests.h \
+	$$PWD/engineTests/constraintsTests/templateParserTests.h \
 	$$PWD/engineTests/modelTests/modelParserTests.h \
 
 SOURCES += \
 	$$PWD/engineTests/constraintsTests/constraintsParserTests.cpp \
+	$$PWD/engineTests/constraintsTests/templateParserTests.cpp \
 	$$PWD/engineTests/modelTests/modelParserTests.cpp \
 
 # Support classes

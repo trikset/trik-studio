@@ -19,3 +19,10 @@ pushd "bin" && eval "$TESTS" && popd
 [ -r tests_qrs.7z ] || curl -Lo tests_qrs.7z https://dl.trikset.com/edu/.solutions20200701/testing_small.7z
 which 7z &> /dev/null && 7z -y x tests_qrs.7z || 7za x tests_qrs.7z
 python3.${TRIK_PYTHON3_VERSION_MINOR} "$(dirname $(realpath ${BASH_SOURCE[0]}))"/../tests/fieldstest.py bin/2D-model testing_small
+
+XML_PREPOCESSOR_TEST_DIR="$(dirname $(realpath ${BASH_SOURCE[0]}))"/../tests/xml-preprocessor-tests/
+XML_PREPOCESSOR_OUTPUT_FILE="$XML_PREPOCESSOR_TEST_DIR/system_library.xml"
+XML_PREPOCESSOR_TEST_FILE="$XML_PREPOCESSOR_TEST_DIR/system_library.qrs"
+XML_PREPOCESSOR_EXPECTED_FILE="$XML_PREPOCESSOR_TEST_DIR/system_library_expected.xml"
+TRIK_PREPROCESSOR_XML_OUTPUT="$XML_PREPOCESSOR_OUTPUT_FILE" bin/2D-model "$XML_PREPOCESSOR_TEST_FILE"
+diff "$XML_PREPOCESSOR_OUTPUT_FILE" "$XML_PREPOCESSOR_EXPECTED_FILE" || exit 1

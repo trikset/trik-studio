@@ -1,0 +1,61 @@
+<constraints>
+    <timelimit value="240000"/>
+    <event settedUpInitially="true">
+        <condition>
+            <timer timeout="5000" forceDropOnTimeout="false"/>
+        </condition>
+        <triggers>
+            <success/>
+        </triggers>
+    </event>
+    <event settedUpInitially="true">
+        <condition>
+            <timer timeout="10000" forceDropOnTimeout="false"/>
+        </condition>
+        <triggers>
+            <setUp id="mock_id"/>
+            <success/>
+        </triggers>
+    </event>
+    <event settedUpInitially="true">
+        <condition>
+            <not>
+                <inside regionId="zone1" objectPoint="all" objectId="skittle"/>
+            </not>
+        </condition>
+        <triggers>
+            <message text="Object skittle not inside zone"/>
+            <success/>
+        </triggers>
+    </event>
+    <event id="id_1" settedUpInitially="true">
+        <condition>
+            <not>
+                <inside regionId="zone1" objectPoint="any" objectId="object"/>
+            </not>
+        </condition>
+        <triggers>
+            <setter name="score">
+                <sum>
+                    <variableValue name="score"/>
+                    <variableValue name="sumVariable"/>
+                </sum>
+            </setter>
+            <message text="Points scored: ${score}"/>
+        </triggers>
+    </event>
+    <event id="id_2" settedUpInitially="true">
+        <condition>
+            <inside regionId="zone1" objectPoint="all" objectId="object"/>
+        </condition>
+        <triggers>
+            <setter name="score">
+                <sum>
+                    <variableValue name="score"/>
+                    <variableValue name="sumVariable"/>
+                </sum>
+            </setter>
+            <message text="Points scored: ${score}"/>
+        </triggers>
+    </event>
+</constraints>

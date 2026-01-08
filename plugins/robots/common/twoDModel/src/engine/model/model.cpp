@@ -183,7 +183,8 @@ void Model::deserialize(const QDomDocument &model)
 	if (mChecker) {
 		/// @todo: should we handle if it returned false?
 		const auto &templates = model.documentElement().firstChildElement("templates");
-		if (mChecker->parseTemplates(templates)) {
+		auto parseTemplateResult = mChecker->parseTemplates(templates);
+		if (parseTemplateResult) {
 			const auto &constraints = model.documentElement().firstChildElement("constraints");
 			QDomDocument newDoc;
 			auto &&importedNode = newDoc.importNode(constraints, true).toElement();
@@ -192,6 +193,11 @@ void Model::deserialize(const QDomDocument &model)
 			if (result) {
 				mChecker->parseConstraints(constraints, importedNode);
 			}
+		}
+		// If something goes wrong with the template system at some point, the user can simply not use Constraint Parser directly.
+		else if(templates.isNull()) {
+			const auto &constraints = model.documentElement().firstChildElement("constraints");
+			mChecker->parseConstraints(constraints, constraints);
 		}
 	}
 

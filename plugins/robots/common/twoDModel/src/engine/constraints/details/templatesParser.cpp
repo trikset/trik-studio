@@ -23,190 +23,57 @@
 
 using namespace twoDModel::constraints::details;
 
-static QString getAllChildContent(const QDomElement& parentElement)
+XmlTemplate* TemplatesParser::findTemplate(const QString& name)
 {
-	if (!parentElement.hasChildNodes()) {
-		return {};
+	auto &&systemIt = mSystemTemplates.find(name);
+	if (systemIt == mSystemTemplates.end()) {
+		auto &&it = mTemplates.find(name);
+		if (it == mTemplates.end()) {
+			return nullptr;
+		}
+		return &it->second;
 	}
+	return &systemIt->second;
 
-	QString result;
-	QTextStream stream(&result);
-
-	QDomNode child = parentElement.firstChild();
-	while(!child.isNull()) {
-		child.save(stream, 0);
-		child = child.nextSibling();
-	}
-	return result;
 }
-
-QDomElement TemplatesParser::processTemplate(const QDomElement &elements, ExpansionContext& context)
+bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 {
-	if (elements.tagName().toLower() != "use") {
-		return elements;
-	}
-
-	auto &&templateName = elements.attribute("template");
-
+	auto &&templateName = templateElement.attribute("name", "");
 	if (templateName.isEmpty()) {
-		substituteError(QObject::tr(R"(The <use> tag must contain a "template" attribute)")
-				, elements.lineNumber(), context);
-		return {};
-	}
-
-	if (context.mMacrosInProgress.contains(templateName)) {
-		substituteError(QObject::tr(
-		    "Recursive template expansion detected: %1 -> %2")
-		    .arg(context.mOrder.join(" -> "))
-		    .arg(templateName), elements. lineNumber(), context);
-		return {};
-	}
-
-	auto it = mTemplates.find(templateName);
-
-	if (it == mTemplates.end()) {
-		substituteError(tr(R"(The <use> tag contains a template=%1 attribute that is not the name of a declared template)")
-				.arg(templateName), elements.lineNumber(), context);
-		return {};
-	}
-
-	QHash<QString, QString> paramsForReplace;
-	for (QDomElement element = elements.firstChildElement()
-		; !element.isNull()
-		; element = element.nextSiblingElement())
-	{
-		if (element.tagName().toLower() != "with") {
-			substituteError(QObject::tr(
-				R"(The <use> tag can only contain a child tag <with>)"),
-				elements.lineNumber(), context);
-			return {};
-		}
-
-		auto &&param = element.attribute("param");
-
-		QString value;
-		if (!param.isEmpty()) {
-			value = getAllChildContent(element);
-			paramsForReplace.insert(param, value);
-		} else {
-			auto &&attributes = element.attributes();
-			for (int i = 0; i < attributes.length(); i++) {
-				auto &&attr = attributes.item(i).toAttr();
-				paramsForReplace.insert(attr.name(), attr.value());
-			}
-		}
-	}
-
-	auto &&xmlTemplate = it->second;
-	auto &&stringResult = xmlTemplate.proccess(paramsForReplace);
-
-	auto &&wrappedXml = QString("<root>%1</root>").arg(stringResult);
-	QDomDocument result;
-	QString errorMessage;
-	int errorLine, errorColumn;
-	result.setContent(wrappedXml, &errorMessage, &errorLine, &errorColumn);
-	const auto &message = tr("After substituting the parameters for the template %1, it did not become a valid xml node")
-			.arg(templateName);
-	if (!result.setContent(wrappedXml, &errorMessage, &errorLine, &errorColumn)) {
-		substituteError(QString("%1 %2").arg(message, errorMessage), errorLine, context);
-		return {};
-	}
-
-	context.mOrder.append(templateName);
-	context.mDepth++;
-	context.mMacrosInProgress.insert(templateName);
-	return result.documentElement();
-}
-
-bool TemplatesParser::transform(const QDomElement& constraintsXml) {
-	std::stack<StackItem> elementStack;
-	const auto &rootContext = ExpansionContext();
-	auto&& child = constraintsXml.firstChildElement();
-
-	while (!child.isNull()) {
-		elementStack.push(StackItem{child, rootContext.fork()});
-		child = child.nextSiblingElement();
-	}
-
-	while (!elementStack.empty()) {
-		const auto& currentItem = elementStack.top();
-		auto&& current = currentItem.mElement;
-		auto context = currentItem.mContext;
-
-		elementStack.pop();
-
-		if (current.tagName() != "use") {
-			auto&& child = current.firstChildElement();
-			while (!child.isNull()) {
-				elementStack.push(StackItem{child, context.fork()});
-				child = child.nextSiblingElement();
-			}
-			continue;
-		}
-
-		auto&& currentContext = context.fork();
-		auto&& replacement = processTemplate(current, currentContext);
-		auto&& parent = current.parentNode().toElement();
-
-		if (parent.isNull()) {
-			continue;
-		}
-
-		auto&& nextSibling = current.nextSibling();
-
-		if (replacement.isNull()) {
-			parent.removeChild(current);
-			return false;
-		}
-
-		parent.removeChild(current);
-
-		auto&& replChild = replacement.firstChildElement();
-		std::vector<StackItem> newlyInserted;
-
-		while (!replChild.isNull()) {
-			auto&& cloned = replChild.toElement();
-
-			if (nextSibling.isNull()) {
-				parent.appendChild(cloned);
-			} else {
-				parent.insertBefore(cloned, nextSibling);
-			}
-
-			newlyInserted.push_back(StackItem{cloned, currentContext});
-			replChild = replChild.nextSiblingElement();
-		}
-
-		for (auto it = newlyInserted.rbegin(); it != newlyInserted.rend(); ++it) {
-			elementStack.push(*it);
-		}
-	}
-	return true;
-}
-
-bool TemplatesParser::parse(const QDomElement &templatesXml)
-{
-	QDomDocument newDoc;
-	auto &&importedNode = newDoc.importNode(templatesXml, true).toElement();
-	newDoc.appendChild(importedNode);
-
-	const auto& templatesXmlString = newDoc.toString();
-	QDomDocument templatesXmlDocument;
-	QString errorMessage;
-	int errorLine, errorColumn;
-
-	if (!templatesXmlDocument.setContent(templatesXmlString, &errorMessage, &errorLine, &errorColumn)) {
+		parseError(QObject::tr(R"(The <template> tag was provided, but the required "name" attribute was missing.)"),
+			   templateElement.lineNumber(), ParserErrorCode::MissingTemplateNameAttribute);
 		return false;
 	}
 
-	auto firstChildElement = templatesXmlDocument
-			.firstChildElement("templates")
-			.firstChildElement();
+	const auto* foundTemplate = findTemplate(templateName);
+	if (foundTemplate) {
+		parseError(QObject::tr("Redefinition a template %1 that already exists").arg(templateName),
+			   templateElement.lineNumber(), ParserErrorCode::RedefinitionExistingTemplate);
+		return false;
+	}
+
+	XmlTemplate xmlTemplate(templateName);
+	xmlTemplate.processDeclaration(templateElement);
+
+	const auto &errors = xmlTemplate.declarationErrors();
+	for (auto &&declarationError: errors) {
+		mParsingErrors << declarationError;
+	}
+	if (!errors.isEmpty()) {
+		return false;
+	}
+	mTemplates.emplace(templateName, std::move(xmlTemplate));
+	return true;
+}
+
+bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
+{
+	auto firstChildElement = templatesXml.firstChildElement();
 
 	while (!firstChildElement.isNull()) {
 		if (firstChildElement.tagName().toLower() != "template") {
 			parseError(QObject::tr(R"(the <templates>; tag can only contain the <template>; tag as a child tag)")
-				   , firstChildElement.lineNumber(), firstChildElement.columnNumber());
+				   , firstChildElement.lineNumber(), ParserErrorCode::TemplatesTagContaintsOnlyTemplate);
 			return false;
 		}
 
@@ -220,18 +87,12 @@ bool TemplatesParser::parse(const QDomElement &templatesXml)
 	return true;
 }
 
-
-TemplatesParser::TemplatesParser():
-	mLibraryName("xml-templates") {}
-
-void TemplatesParser::parseSystemTemplates()
+void TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 {
-	QDir xmlTemplateDir(pathsToTemplates());
-
+	QDir xmlTemplateDir(dirPath);
 	if (!xmlTemplateDir.exists()) {
-		auto &&errorString = QString("System template library does not exist at path %1").arg(pathsToTemplates());
-		QLOG_ERROR() << errorString;
-		parseError(errorString, 0, 0);
+		auto &&errorString = QString("Template library does not exist at path %1").arg(xmlTemplateDir.path());
+		parseError(errorString, 0, ParserErrorCode::TemplateLibraryNotFound);
 	}
 
 	QStringList filters = {"*.xml"};
@@ -239,22 +100,18 @@ void TemplatesParser::parseSystemTemplates()
 
 	for (auto &&fileName : files) {
 		auto &&filePath = xmlTemplateDir.filePath(fileName);
+
 		QFileInfo fileInfo(filePath);
 		auto &&baseName = fileInfo.baseName();
-
-		if (mTemplates.find(baseName) != mTemplates.end()) {
-			continue;
-		}
-
 		auto &&templateCode = utils::InFile::readAll(filePath);
 
 		QDomDocument templates;
 		QString errorMessage;
-		int errorLine, errorColumn;
+		int errorLine;
 
-		const auto &&message = QString("Error parsing a system template from a file %1 with").arg(baseName);
-		if (!templateCode.isEmpty() && !templates.setContent(templateCode, &errorMessage, &errorLine, &errorColumn)) {
-			parseError(QString("%1 %2").arg(message, errorMessage), errorLine, errorColumn);
+		const auto &&message = QString("Error parsing template from a file %1 with").arg(baseName);
+		if (!templateCode.isEmpty() && !templates.setContent(templateCode, &errorMessage, &errorLine)) {
+			parseError(QString("%1 %2").arg(message, errorMessage), errorLine, ParserErrorCode::QtXmlParserError);
 			continue;
 		}
 
@@ -264,7 +121,7 @@ void TemplatesParser::parseSystemTemplates()
 			return;
 		}
 
-		parse(templatesXml);
+		parseTemplates(templatesXml);
 	}
 }
 
@@ -273,125 +130,142 @@ QString TemplatesParser::pathsToTemplates() const
 	return { ":/" + mLibraryName + "/templates" };
 }
 
-bool TemplatesParser::
-parseTemplate(const QDomElement &templateElement)
+void TemplatesParser::parseSystemTemplates()
 {
-	auto &&templateName = templateElement.attribute("name", "");
+	clear();
+	parseAllTemplatesFromDirectory(pathsToTemplates());
+	mSystemTemplates = std::move(mTemplates);
+	mTemplates.clear();
+}
+
+
+QDomElement TemplatesParser::processTemplate(const QDomElement &elements, ExpansionContext& context)
+{
+	auto &&templateName = elements.attribute("template");
+
 	if (templateName.isEmpty()) {
-		parseError(QObject::tr(R"(The <template> tag was provided, but the required "name" attribute was missing.)"),
-			   templateElement.lineNumber(), templateElement.columnNumber());
-		return false;
+		substituteError(QObject::tr(R"(The &lt;use&gt; tag must contain a "template" attribute)")
+				, elements.lineNumber(), context, SubstitutionErrorCode::UseTagContainsTemplateAttr);
+		return {};
 	}
 
-	auto &&it = mTemplates.find(templateName);
-
-	if (it != mTemplates.end()) {
-		parseError(QObject::tr("Redefinition a template %1 that already exists").arg(it->first),
-			   templateElement.lineNumber(), templateElement.columnNumber());
-		return false;
+	if (context.mMacrosInProgress.contains(templateName)) {
+		substituteError(QObject::tr(
+		    "Recursive template expansion detected: %1 -> %2")
+		    .arg(context.mOrder.join(" -> "), templateName), elements. lineNumber(), context, SubstitutionErrorCode::RecursiveTemplateExpansion);
+		return {};
 	}
 
-	auto &&params = templateElement.firstChildElement("params");
-	std::unordered_map<QString, QString> templateParams;
+	auto *foundTemplate = findTemplate(templateName);
 
-	if (!params.isNull()) {
-		auto &&firstParamDecl = params.firstChildElement("param");
-		while (!firstParamDecl.isNull()) {
-			if (firstParamDecl.tagName() != "param") {
-				parseError(QObject::tr(R"(the <params> tag can only contain the <param> tag as a child tag for template %1)")
-					   .arg(templateName), firstParamDecl.lineNumber(), firstParamDecl.columnNumber());
-				return false;
+	if (!foundTemplate) {
+		substituteError(QObject::tr(R"(The &lt;use&gt; tag contains a template=%1 attribute that is not the name of a declared template)")
+				.arg(templateName), elements.lineNumber(), context, SubstitutionErrorCode::UseUndeclaredTemplate);
+		return {};
+	}
+
+	auto &xmlTemplate = *foundTemplate;
+	auto substitutionResult = xmlTemplate.substitute(elements);
+	const auto &errors = xmlTemplate.substitutionErrors();
+	for (auto &&substitutionError: errors) {
+		mSubstituionErrors << substitutionError;
+	}
+	if (!errors.isEmpty()) {
+		return {};
+	}
+
+	auto &&wrappedXml = QString("<root>%1</root>").arg(substitutionResult);
+	QDomDocument result;
+	QString errorMessage;
+	int errorLine;
+	const auto &message =
+		QObject::tr("After substituting the parameters for"
+			    " the template %1, it did not become a valid xml node").arg(templateName);
+	if (!result.setContent(wrappedXml, &errorMessage, &errorLine)) {
+		substituteError(QString("%1 %2").arg(message, errorMessage), errorLine, context, SubstitutionErrorCode::QtXmlParserError);
+		return {};
+	}
+
+	context.mOrder.append(templateName);
+	context.mDepth++;
+	context.mMacrosInProgress.insert(templateName);
+	return result.documentElement();
+}
+
+bool TemplatesParser::substitute(const QDomElement& constraintsXml) {
+	std::stack<ExpansionItem> elementStack;
+	const auto &rootContext = ExpansionContext();
+	auto&& child = constraintsXml.firstChildElement();
+
+	while (!child.isNull()) {
+		elementStack.push(ExpansionItem{child, rootContext.fork()});
+		child = child.nextSiblingElement();
+	}
+
+	while (!elementStack.empty()) {
+		const auto& currentItem = elementStack.top();
+		auto&& current = currentItem.mElement;
+		auto context = currentItem.mContext;
+
+		elementStack.pop();
+
+		// If the current node is not equal to use, we just want to process its children later.
+		if (current.tagName() != "use") {
+			auto&& child = current.firstChildElement();
+			while (!child.isNull()) {
+				elementStack.push(ExpansionItem{child, context.fork()});
+				child = child.nextSiblingElement();
 			}
-
-			auto &&paramName = firstParamDecl.attribute("name");
-
-			if (paramName.isEmpty()) {
-				parseError(QObject::tr(
-					R"(The <param> tag of template %1 was provided, but the required "name" attribute was missing.)")
-					   .arg(templateName), firstParamDecl.lineNumber(), firstParamDecl.columnNumber());
-				return false;
-			}
-
-			auto &&defaultValue = firstParamDecl.attribute("default");
-			if (defaultValue.isEmpty()) {
-				defaultValue = getAllChildContent(firstParamDecl);
-			}
-
-			templateParams.emplace(std::move(paramName), std::move(defaultValue));
-			firstParamDecl = firstParamDecl.nextSiblingElement();
+			continue;
 		}
-	}
 
-	auto &&contentDecl = templateElement.firstChildElement("content");
+		// If it is a <use> node, we want to replace it with a template definition.
+		auto&& currentContext = context.fork();
+		auto&& replacement = processTemplate(current, currentContext);
+		auto&& parent = current.parentNode().toElement();
 
-	if (contentDecl.isNull()) {
-		parseError(QObject::tr(
-			R"(The <template> of template %1 tag was provided, but the required child tag <content> was missing.)")
-			   .arg(templateName), templateElement.lineNumber(), templateElement.columnNumber());
-		return false;
-	}
+		auto&& nextSibling = current.nextSibling();
 
-	auto &&content = contentDecl.firstChild();
-	if(!content.isCDATASection()) {
-		parseError(QObject::tr(
-			R"(Currently, this method of setting <content> tag for the template %1 is not supported.)")
-			   .arg(templateName), contentDecl.lineNumber(), contentDecl.columnNumber());
-		return false;
-	}
-
-	auto &&text = content.toCDATASection().data();
-	static const QRegularExpression paramRegex("#\\{([^}]+)\\}");
-	auto offset = 0;
-	QRegularExpressionMatch match;
-
-	auto &&xmlTemplate = XmlTemplate(templateName, text);
-
-	while ((match = paramRegex.match(text, offset)).hasMatch()) {
-		auto &&fullMatch = match.captured(0);
-		auto &&paramName = match.captured(1);
-
-		auto &&paramIt = templateParams.find(paramName);
-
-		if (paramIt == templateParams.end()) {
-			auto &&startPos = match.capturedStart(0);
-			parseError(QObject::tr(
-				"When defining the template %1,"
-				" the syntax %2 was used to substitute an"
-				" offset %3 for an undeclared parameter %4.")
-				.arg(templateName, fullMatch, QString(startPos), paramName),
-				contentDecl.lineNumber(), contentDecl.columnNumber());
+		// If the substitution is unsuccessful, we do not process the subtree,
+		// the user will see an error message.
+		if (replacement.isNull()) {
+			parent.removeChild(current);
 			return false;
 		}
-		xmlTemplate.emplaceParam(match.capturedStart(), fullMatch.length(), paramName, paramIt->second);
-		offset = match.capturedEnd();
-	}
 
-	mTemplates.emplace(templateName, std::move(xmlTemplate));
+		// Otherwise, we replace the use tag with a sequence of received nodes,
+		// the last of these nodes must have the next node as the node being replaced.
+		parent.removeChild(current);
+
+		auto &&replChild = replacement.firstChildElement();
+		std::vector<ExpansionItem> newlyInserted;
+
+		while (!replChild.isNull()) {
+			auto &&next = replChild.nextSiblingElement();
+			auto &&cloned = replChild.toElement();
+			if (nextSibling.isNull()) {
+				parent.appendChild(cloned);
+			} else {
+				parent.insertBefore(cloned, nextSibling);
+			}
+
+			newlyInserted.push_back(ExpansionItem{cloned, currentContext});
+			replChild = next;
+		}
+
+		for (auto it = newlyInserted.rbegin(); it != newlyInserted.rend(); ++it) {
+			elementStack.push(*it);
+		}
+	}
 	return true;
 }
+
 
 void TemplatesParser::clear()
 {
 	mTemplates.clear();
 	mParsingErrors.clear();
 	mSubstituionErrors.clear();
-}
-
-void TemplatesParser::parseError(const QString& message, int line, int column)
-{
-	QLOG_ERROR() << message + QObject::tr("line:column %1:%2").arg(line, column);
-	mParsingErrors << message + QObject::tr("line:column %1:%2").arg(line, column);
-}
-
-void TemplatesParser::substituteError(const QString& message, int line, const ExpansionContext &context)
-{
-	QLOG_ERROR() << message
-			+ QObject::tr(", line %1").arg(line)
-		     << tr(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
-	mSubstituionErrors << message
-			      + QObject::tr(", line %1").arg(line)
-			   << tr(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
-
 }
 
 QStringList TemplatesParser::parsingErrors() const
@@ -403,3 +277,22 @@ QStringList TemplatesParser::substituionErrors() const
 {
 	return mSubstituionErrors;
 }
+
+void TemplatesParser::parseError(const QString& message, int line, ParserErrorCode code)
+{
+	Q_UNUSED(code)
+	QLOG_ERROR() << message + " " + QString("line %1").arg(line);
+	mParsingErrors << message + " " + QObject::tr("line %1").arg(line);
+}
+
+void TemplatesParser::substituteError(const QString& message, int line, const ExpansionContext &context, SubstitutionErrorCode code)
+{
+	Q_UNUSED(code)
+	QLOG_ERROR() << message + " " + QObject::tr("line %1").arg(line)
+		     << QString(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
+	mSubstituionErrors << message + " "
+			      + QObject::tr("line %1").arg(line)
+			   << QObject::tr(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
+
+}
+
