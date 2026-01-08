@@ -235,24 +235,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="162"/>
-        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="163"/>
+        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute
+				that is not the name of a declared template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="182"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="185"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="285"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="291"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="294"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="289"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="296"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="299"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="295"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="300"/>
         <source>Substitution chain: %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -268,42 +269,45 @@
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="83"/>
-        <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1,
+        <source>the &amp;lt;params&amp;gt; tag can only contain
+					the &amp;lt;param&amp;gt; tag as a child tag for template %1,
 					actual tag is &amp;lt;%2&amp;gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="92"/>
-        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="94"/>
+        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided,
+				 but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="146"/>
-        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing.</source>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="150"/>
+        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided,
+			but the required child tag &amp;lt;content&amp;gt; was missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="158"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="163"/>
         <source>The using an undeclared parameter %1 for template %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="184"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="190"/>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="224"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="230"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="246"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="254"/>
         <source>line %1 relative template declaration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="253"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="261"/>
         <source>line %1 relative body of template %2</source>
         <translation type="unfinished"></translation>
     </message>

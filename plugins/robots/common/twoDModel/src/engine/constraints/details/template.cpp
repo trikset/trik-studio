@@ -80,9 +80,11 @@ void XmlTemplate::processParams(const QDomElement &params)
 	auto &&firstParamDecl = params.firstChildElement("param");
 	while (!firstParamDecl.isNull()) {
 		if (firstParamDecl.tagName() != "param") {
-			addDeclarationError(QObject::tr(R"(the &lt;params&gt; tag can only contain the &lt;param&gt; tag as a child tag for template %1,
+			addDeclarationError(QObject::tr(R"(the &lt;params&gt; tag can only contain
+					the &lt;param&gt; tag as a child tag for template %1,
 					actual tag is &lt;%2&gt;)")
-				   .arg(mId, firstParamDecl.tagName()), firstParamDecl.lineNumber(), TemplateParseErrorCode::ParamsTagContainOnlyParam);
+					.arg(mId, firstParamDecl.tagName()), firstParamDecl.lineNumber(),
+					TemplateParseErrorCode::ParamsTagContainOnlyParam);
 			return;
 		}
 
@@ -90,8 +92,10 @@ void XmlTemplate::processParams(const QDomElement &params)
 
 		if (paramName.isEmpty()) {
 			addDeclarationError(QObject::tr(
-				R"(The &lt;param&gt; tag of template %1 was provided, but the required "name" attribute was missing.)")
-				   .arg(mId), firstParamDecl.lineNumber(), TemplateParseErrorCode::MissingParamNameAttribute);
+				R"(The &lt;param&gt; tag of template %1 was provided,
+				 but the required "name" attribute was missing.)")
+				 .arg(mId), firstParamDecl.lineNumber(),
+				 TemplateParseErrorCode::MissingParamNameAttribute);
 			return;
 		}
 
@@ -144,8 +148,9 @@ void XmlTemplate::processDeclaration(const QDomElement &templateDeclaration)
 	auto &&contentDecl = templateDeclaration.firstChildElement("content");
 	if (contentDecl.isNull()) {
 		addDeclarationError(QObject::tr(
-			R"(The &lt;template&gt; of template %1 tag was provided, but the required child tag &lt;content&gt; was missing.)")
-			   .arg(mId), templateDeclaration.lineNumber(), TemplateParseErrorCode::MissingContentTag);
+			R"(The &lt;template&gt; of template %1 tag was provided,
+			but the required child tag &lt;content&gt; was missing.)")
+			.arg(mId), templateDeclaration.lineNumber(), TemplateParseErrorCode::MissingContentTag);
 		return;
 	}
 	processContent(contentDecl);
@@ -163,7 +168,8 @@ bool XmlTemplate::validateParam(const QDomNode &with, const QString &param)
 	return true;
 }
 
-void XmlTemplate::parseParams(const QDomElement &paramTag, QHash<QString, QString> &paramsForReplace, bool fromTemplate)
+void XmlTemplate::parseParams(const QDomElement &paramTag,
+			      QHash<QString, QString> &paramsForReplace, bool fromTemplate)
 {
 	auto &&attributes = paramTag.attributes();
 	for (int i = 0; i < attributes.length(); i++) {
@@ -221,8 +227,10 @@ QString XmlTemplate::substitute(const QDomElement &templateUsage)
 		if (value == paramsForReplace.end()) {
 			if (!declaredParam.mHasDefaultValue) {
 				addSubstitutionError(
-				QObject::tr("The parameter %1 of template %2 has no default value and was not explicitly specified by the user")
-						.arg(*it, mId), templateUsage.lineNumber(), TemplateSubstitutionErrorCode::MissingReqiuredParam);
+				QObject::tr("The parameter %1 of template %2 has no default"
+					    " value and was not explicitly specified by the user")
+					    .arg(*it, mId), templateUsage.lineNumber(),
+					    TemplateSubstitutionErrorCode::MissingReqiuredParam);
 				continue;
 			}
 			substitute(*it, declaredParam.mDefaultValue, result);

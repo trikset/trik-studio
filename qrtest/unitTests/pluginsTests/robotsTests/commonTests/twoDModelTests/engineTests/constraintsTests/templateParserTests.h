@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License. */
- 
+
 #pragma once
 
 #include <gtest/gtest.h>
@@ -24,7 +24,8 @@ class XmlTemplateParserMock;
 namespace robotsTests {
 namespace commonTwoDModelTests {
 
-class XmlTemplateTestBase : public ::testing::Test {
+class XmlTemplateTestBase : public ::testing::Test
+{
 protected:
 	void SetUp() override {};
 	void TearDown() override {};

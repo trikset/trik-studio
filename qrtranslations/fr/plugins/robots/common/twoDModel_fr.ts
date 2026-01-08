@@ -235,18 +235,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
-        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <location line="+16"/>
+        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute
+				that is not the name of a declared template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+22"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+103"/>
-        <location line="+6"/>
+        <location line="+104"/>
+        <location line="+7"/>
         <location line="+3"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
@@ -268,27 +269,30 @@
     </message>
     <message>
         <location line="+16"/>
-        <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1,
+        <source>the &amp;lt;params&amp;gt; tag can only contain
+					the &amp;lt;param&amp;gt; tag as a child tag for template %1,
 					actual tag is &amp;lt;%2&amp;gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+9"/>
-        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <location line="+11"/>
+        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided,
+				 but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+54"/>
-        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing.</source>
+        <location line="+56"/>
+        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided,
+			but the required child tag &amp;lt;content&amp;gt; was missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>The using an undeclared parameter %1 for template %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,7 +302,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+24"/>
         <source>line %1 relative template declaration</source>
         <translation type="unfinished"></translation>
     </message>

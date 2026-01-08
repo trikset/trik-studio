@@ -26,7 +26,8 @@ namespace details {
 
 /*!
  * \class XmlTemplate
- * \brief A class that describes a template and stores information about its parameters, default substitution value, substitution order, and more
+ * \brief A class that describes a template and stores information about its parameters, default substitution value,
+ * substitution order, and more
  * \inmodule twoDModel::constraints::details
  *
  * General view of template declaration:
@@ -60,7 +61,8 @@ namespace details {
  * The order in which parameters are defined in a template determines the order in which they are initialized.
  * In the example above, the nestedVariable parameter can be used in the default value for the xml_node parameter.
  */
-class XmlTemplate {
+class XmlTemplate
+{
 public:
 	XmlTemplate(const XmlTemplate&) = delete;
 	XmlTemplate& operator=(const XmlTemplate&) = delete;
@@ -131,7 +133,8 @@ private:
 	void parseWith(const QDomElement &with, QHash<QString, QString> &paramsForReplace);
 
 	bool validateParam(const QDomNode &with, const QString &param);
-	void parseParams(const QDomElement &paramTag, QHash<QString, QString> &paramsForReplace, bool fromTemplate = false);
+	void parseParams(const QDomElement &paramTag, QHash<QString, QString>
+			 &paramsForReplace, bool fromTemplate = false);
 	void substitute(const QString& name, const QString& value, QString &result);
 	void clear();
 

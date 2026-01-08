@@ -194,7 +194,8 @@ void Model::deserialize(const QDomDocument &model)
 				mChecker->parseConstraints(constraints, importedNode);
 			}
 		}
-		// If something goes wrong with the template system at some point, the user can simply not use Constraint Parser directly.
+		// If something goes wrong with the template system at some point, the user can
+		// simply not use Constraint Parser directly.
 		else if(templates.isNull()) {
 			const auto &constraints = model.documentElement().firstChildElement("constraints");
 			mChecker->parseConstraints(constraints, constraints);

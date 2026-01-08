@@ -129,9 +129,9 @@ const std::vector<ErrorTestCase> testCases = {
 		TemplateParseErrorCode::ContentFormatNotSuppoted,
 		2, // Non expected content on line 3 relative first string of template declaration
 R"(<template name="test_template">
-    <content>
-	<something-non-cdata-tag/>
-    </content>
+	<content>
+		<something-non-cdata-tag/>
+	</content>
 </template>
 )",
 		"ContentFormatNotSuppoted"
@@ -140,15 +140,15 @@ R"(<template name="test_template">
 		TemplateParseErrorCode::UseSpecialSyntaxForUndeclaredParam,
 		2,
 R"(<template name="test_template">
-    <content>
+	<content>
 <![CDATA[
 	<difference>
 		<int value="5"/>
-		<int value="12"/>
+	<int value="12"/>
 	</difference>
 	#{use_spec_syntax_for_undecl_param_on_line_8}
 ]]>
-    </content>
+	</content>
 </template>
 	)",
 		"UseSpecialSyntaxForUndeclaredParam"
@@ -157,27 +157,27 @@ R"(<template name="test_template">
 		TemplateParseErrorCode::ParamsTagContainOnlyParam,
 		6, // <trigger> on line 6
 R"(<template name="test_template">
-    <params>
+<params>
 	<param name="id"/>
 	<param name="settedUpInit" default="true"/>
 	<param name="trigger"/> <!-- typo, child tag is default param -->
-	    <trigger>
-		<success/>
-	    </trigger>
+	<trigger>
+			<success/>
+		</trigger>
 	<param name="conditions">
-	    <condition>
-		<true/>
-	    </condition>
+		<condition>
+			<true/>
+		</condition>
 	</param>
-    </params>
-    <content>
+</params>
+	<content>
 <![CDATA[
 	<difference>
 		<int value="5"/>
-		<int value="12"/>
+	<int value="12"/>
 	</difference>
 ]]>
-    </content>
+	</content>
 </template>
 	)",
 		"ParamsTagContainOnlyParam"
@@ -186,23 +186,23 @@ R"(<template name="test_template">
 		TemplateParseErrorCode::MissingParamNameAttribute,
 		5, // missing name on line
 R"(<template name="test_template">
-    <params>
-	<param name="id"/>
-	<param name="settedUpInit" default="true"/>
-	<param>
-	    <condition>
-		<true/>
-	    </condition>
-	</param>
-    </params>
-    <content>
+	<params>
+		<param name="id"/>
+		<param name="settedUpInit" default="true"/>
+		<param>
+			<condition>
+				<true/>
+			</condition>
+		</param>
+	</params>
+	<content>
 <![CDATA[
 	<difference>
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
 ]]>
-    </content>
+	</content>
 </template>
 	)",
 		"MissingParamNameAttribute"
@@ -213,9 +213,9 @@ R"(<template name="test_template">
 R"(
 
 <template name="test_template">
-    <params>
-	<param name="id"/>
-    </params>
+	<params>
+		<param name="id"/>
+	</params>
 </template>
 	)",
 		"MissingContentTag"
@@ -229,9 +229,9 @@ const std::vector<ErrorTestCase> parserTestCases = {
 R"(
 <templates>
 <template name="">
-    <content>
-	<something-non-cdata-tag/>
-    </content>
+	<content>
+		<something-non-cdata-tag/>
+	</content>
 </template>
 </templates>
 )",
@@ -243,25 +243,25 @@ R"(
 R"(
 <templates>
 <template name="name">
-    <content>
+	<content>
 	<![CDATA[
 		<difference>
 			<int value="5"/>
 			<int value="12"/>
 		</difference>
 	]]>
-    </content>
+	</content>
 </template>
 
 <template name="name">
-    <content>
+	<content>
 	<![CDATA[
 		<difference>
 			<int value="5"/>
 			<int value="12"/>
 		</difference>
 	]]>
-    </content>
+	</content>
 </template>
 
 </templates>
@@ -274,25 +274,25 @@ R"(
 R"(
 <templates>
 <bober name="name">
-    <content>
+	<content>
 	<![CDATA[
 		<difference>
 			<int value="5"/>
 			<int value="12"/>
 		</difference>
 	]]>
-    </content>
+	</content>
 </template>
 
 <template name="name">
-    <content>
+	<content>
 	<![CDATA[
 		<difference>
 			<int value="5"/>
 			<int value="12"/>
 		</difference>
 	]]>
-    </content>
+	</content>
 </template>
 
 </templates>
@@ -307,19 +307,19 @@ const std::vector<SubstitutionErrorTestCase> substitutionTestCases = {
 		3,
 R"(
 <template name="test_template">
-    <content>
+	<content>
 <![CDATA[
 	<difference>
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
 ]]>
-    </content>
+	</content>
 </template>
 )",
 R"(
 <use template="test_template">
-    <with id="278"/> <!-- line 3 -->
+	<with id="278"/> <!-- line 3 -->
 </use>
 )",
 		"UseUndeclaredParam"
@@ -330,22 +330,22 @@ R"(
 R"(
 <template name="test_template">
 <params>
-    <param name="id"/>
+	<param name="id"/>
 </params>
-    <content>
+	<content>
 <![CDATA[
 	<difference>
 		<int value=#{id}"/>
 		<int value="12"/>
 	</difference>
 ]]>
-    </content>
+	</content>
 </template>
 )",
 R"(
 <use template="test_template">
-    <with id="278"/> <!-- valid use -->
-    <strange-tag/>
+	<with id="278"/> <!-- valid use -->
+	<strange-tag/>
 </use>
 )",
 		"UseTagContainsOnlyWithTag"
@@ -356,13 +356,13 @@ R"(
 R"(
 <template name="test_template">
 <params>
-    <param name="requiredParamWithoutDefaultValue"/>
+	<param name="requiredParamWithoutDefaultValue"/>
 </params>
-    <content>
+	<content>
 <![CDATA[
 	#{xml_node}
 ]]>
-    </content>
+	</content>
 </template>
 )",
 R"(
@@ -379,21 +379,21 @@ const std::vector<SubstitutionErrorTestCase> substitutionParserTestCases = {
 R"(
 <templates>
 <template name="test_template">
-    <content>
+	<content>
 <![CDATA[
 	<difference>
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
 ]]>
-    </content>
+	</content>
 </template>
 </templates>
 )",
 R"(
 <constraints>
 <use>  <!-- template name not specified, line 3 relative constraint xml -->
-    <with id="278"/>
+	<with id="278"/>
 </use>
 </constraints>
 )",
@@ -406,21 +406,21 @@ R"(
 R"(
 <templates>
 <template name="A">
-    <content>
+	<content>
 <![CDATA[
 	<use template="B"/>
 ]]>
-    </content>
+	</content>
 </template>
 <template name="B">
-    <content>
+	<content>
 <![CDATA[
 	<use template="C"/>
 ]]>
-    </content>
+	</content>
 </template>
 <template name="C">
-    <content>
+	<content>
 <![CDATA[
 	<!-- comment -->
 	<difference>
@@ -429,7 +429,7 @@ R"(
 	</difference>
 	<use template="A"/>
 ]]>
-    </content>
+	</content>
 </template>
 </templates>
 )",
@@ -446,7 +446,7 @@ R"(
 R"(
 <templates>
 <template name="C">
-    <content>
+	<content>
 <![CDATA[
 	<difference>
 		<int value="5"/>
@@ -454,7 +454,7 @@ R"(
 	</difference>
 	<use template="bober"/>
 ]]>
-    </content>
+	</content>
 </template>
 </templates>
 )",

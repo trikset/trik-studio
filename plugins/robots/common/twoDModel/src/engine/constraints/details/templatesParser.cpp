@@ -151,16 +151,19 @@ QDomElement TemplatesParser::processTemplate(const QDomElement &elements, Expans
 
 	if (context.mMacrosInProgress.contains(templateName)) {
 		substituteError(QObject::tr(
-		    "Recursive template expansion detected: %1 -> %2")
-		    .arg(context.mOrder.join(" -> "), templateName), elements. lineNumber(), context, SubstitutionErrorCode::RecursiveTemplateExpansion);
+			"Recursive template expansion detected: %1 -> %2")
+			.arg(context.mOrder.join(" -> "), templateName), elements.lineNumber(),
+			context, SubstitutionErrorCode::RecursiveTemplateExpansion);
 		return {};
 	}
 
 	auto *foundTemplate = findTemplate(templateName);
 
 	if (!foundTemplate) {
-		substituteError(QObject::tr(R"(The &lt;use&gt; tag contains a template=%1 attribute that is not the name of a declared template)")
-				.arg(templateName), elements.lineNumber(), context, SubstitutionErrorCode::UseUndeclaredTemplate);
+		substituteError(QObject::tr(R"(The &lt;use&gt; tag contains a template=%1 attribute
+				that is not the name of a declared template)")
+				.arg(templateName), elements.lineNumber(), context,
+				SubstitutionErrorCode::UseUndeclaredTemplate);
 		return {};
 	}
 
@@ -182,7 +185,8 @@ QDomElement TemplatesParser::processTemplate(const QDomElement &elements, Expans
 		QObject::tr("After substituting the parameters for"
 			    " the template %1, it did not become a valid xml node").arg(templateName);
 	if (!result.setContent(wrappedXml, &errorMessage, &errorLine)) {
-		substituteError(QString("%1 %2").arg(message, errorMessage), errorLine, context, SubstitutionErrorCode::QtXmlParserError);
+		substituteError(QString("%1 %2").arg(message, errorMessage), errorLine, context,
+				SubstitutionErrorCode::QtXmlParserError);
 		return {};
 	}
 
@@ -285,7 +289,8 @@ void TemplatesParser::parseError(const QString& message, int line, ParserErrorCo
 	mParsingErrors << message + " " + QObject::tr("line %1").arg(line);
 }
 
-void TemplatesParser::substituteError(const QString& message, int line, const ExpansionContext &context, SubstitutionErrorCode code)
+void TemplatesParser::substituteError(const QString& message, int line,
+				      const ExpansionContext &context, SubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
 	QLOG_ERROR() << message + " " + QObject::tr("line %1").arg(line)

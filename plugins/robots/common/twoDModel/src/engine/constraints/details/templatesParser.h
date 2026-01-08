@@ -89,7 +89,8 @@ protected:
 			return newCtx;
 		}
 	};
-	virtual void substituteError(const QString& message, int line, const ExpansionContext &context, SubstitutionErrorCode code);
+	virtual void substituteError(const QString& message, int line,
+				     const ExpansionContext &context, SubstitutionErrorCode code);
 private:
 	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will be examined,
 	/// and each file will search for the top-level template or templates tag.
