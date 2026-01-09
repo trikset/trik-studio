@@ -40,8 +40,10 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 {
 	auto &&templateName = templateElement.attribute("name", "");
 	if (templateName.isEmpty()) {
-		parseError(QObject::tr(R"(The <template> tag was provided, but the required "name" attribute was missing.)"),
-			   templateElement.lineNumber(), ParserErrorCode::MissingTemplateNameAttribute);
+		parseError(QObject::tr(R"(The &lt;template&gt; tag was provided,
+				but the required "name" attribute was missing.)"),
+				templateElement.lineNumber(),
+				ParserErrorCode::MissingTemplateNameAttribute);
 		return false;
 	}
 
@@ -72,8 +74,10 @@ bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
 
 	while (!firstChildElement.isNull()) {
 		if (firstChildElement.tagName().toLower() != "template") {
-			parseError(QObject::tr(R"(the <templates>; tag can only contain the <template>; tag as a child tag)")
-				   , firstChildElement.lineNumber(), ParserErrorCode::TemplatesTagContaintsOnlyTemplate);
+			parseError(QObject::tr(R"(the &lt;templates&gt; tag can only
+					contain the &lt;template&gt; tag as a child tag)")
+					, firstChildElement.lineNumber()
+					, ParserErrorCode::TemplatesTagContaintsOnlyTemplate);
 			return false;
 		}
 
@@ -207,9 +211,9 @@ bool TemplatesParser::substitute(const QDomElement& constraintsXml) {
 	}
 
 	while (!elementStack.empty()) {
-		const auto& currentItem = elementStack.top();
+		auto currentItem = std::move(elementStack.top());
 		auto&& current = currentItem.mElement;
-		auto context = currentItem.mContext;
+		auto&& context = currentItem.mContext;
 
 		elementStack.pop();
 
@@ -285,19 +289,18 @@ QStringList TemplatesParser::substituionErrors() const
 void TemplatesParser::parseError(const QString& message, int line, ParserErrorCode code)
 {
 	Q_UNUSED(code)
-	QLOG_ERROR() << message + " " + QString("line %1").arg(line);
-	mParsingErrors << message + " " + QObject::tr("line %1").arg(line);
+	const auto &final =  message + " " + QObject::tr("line %1").arg(line);
+	QLOG_ERROR() << final;
+	mParsingErrors << final;
 }
 
 void TemplatesParser::substituteError(const QString& message, int line,
 				      const ExpansionContext &context, SubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
-	QLOG_ERROR() << message + " " + QObject::tr("line %1").arg(line)
-		     << QString(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
-	mSubstituionErrors << message + " "
-			      + QObject::tr("line %1").arg(line)
-			   << QObject::tr(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
-
+	const auto &final = message + " " + QObject::tr("line %1").arg(line);
+	const auto &substitutionChain = QObject::tr(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
+	QLOG_ERROR() << final << substitutionChain;
+	mSubstituionErrors << final << substitutionChain;
 }
 

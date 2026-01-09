@@ -250,14 +250,17 @@ void XmlTemplate::substitute(const QString& name, const QString& value, QString 
 void XmlTemplate::addDeclarationError(const QString& message, int lineNumber, TemplateParseErrorCode code)
 {
 	Q_UNUSED(code)
-	QLOG_ERROR() << message + " " + QString("line %1 relative template declaration").arg(lineNumber);
-	mDeclarationErrors << message + " " + QObject::tr("line %1 relative template declaration").arg(lineNumber);
+	const auto &final = message + " " + QObject::tr("line %1 relative declaration of template %2")
+				.arg(QString::number(lineNumber), mId);
+	QLOG_ERROR() << final;
+	mDeclarationErrors << final;
 }
 
 void XmlTemplate::addSubstitutionError(const QString& message, int lineNumber, TemplateSubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
-	QLOG_ERROR() << message + " " + QString("line relative template body %1").arg(lineNumber);
-	mSubstitutionErrors << message + " " + QObject::tr("line %1 relative body of template %2")
-							.arg(QString::number(lineNumber), mId);
+	const auto &final = message + " " + QObject::tr("line %1 relative body of template %2")
+			.arg(QString::number(lineNumber), mId);
+	QLOG_ERROR() << final;
+	mSubstitutionErrors << final;
 }

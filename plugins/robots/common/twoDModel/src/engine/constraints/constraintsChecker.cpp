@@ -15,9 +15,11 @@
 #include "constraintsChecker.h"
 
 #include <qrutils/stringUtils.h>
+#include <qrutils/xmlUtils.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <utils/objectsSet.h>
 #include <QFile>
+#include <QsLog.h>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "details/constraintsParser.h"
@@ -30,7 +32,6 @@
 #include "src/engine/items/cubeItem.h"
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/regions/regionItem.h"
-#include <QsLog.h>
 
 using namespace twoDModel::constraints;
 Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
@@ -112,7 +113,11 @@ bool ConstraintsChecker::proccessTemplates(const QDomElement &constraintsXml)
 		QFile file(QString::fromUtf8(debugPath));
 		if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
 			QTextStream stream(&file);
-			stream << constraintsXml.ownerDocument().toString(4);
+			// OUTPUT --- only constraint xml
+			QDomDocument constraintDoc;
+			auto importedNode =constraintDoc.importNode(constraintsXml, true).toElement();
+			constraintDoc.appendChild(importedNode);
+			stream << utils::xmlUtils::ensureXmlFieldsOrder(constraintDoc.toString(4));
 		}
 	}
 

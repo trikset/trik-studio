@@ -77,8 +77,10 @@ QString xmlUtils::ensureXmlFieldsOrder(const QString &xmlInput)
 			break;
 
 		case QXmlStreamReader::Characters:
-			if (!reader.isWhitespace()) {
-				writer.writeCharacters(reader.text().toString());
+			if (reader.isCDATA()) {
+			    writer.writeCDATA(reader.text().toString());
+			} else if (!reader.isWhitespace()) {
+			    writer.writeCharacters(reader.text().toString());
 			}
 			break;
 

@@ -1,8 +1,8 @@
 <constraints>
-    <timelimit value="240000"/>
+    <timelimit value="10000"/>
     <event settedUpInitially="true">
         <condition>
-            <timer timeout="5000" forceDropOnTimeout="false"/>
+            <timer forceDropOnTimeout="false" timeout="5000"/>
         </condition>
         <triggers>
             <success/>
@@ -10,7 +10,7 @@
     </event>
     <event settedUpInitially="true">
         <condition>
-            <timer timeout="10000" forceDropOnTimeout="false"/>
+            <timer forceDropOnTimeout="false" timeout="10000"/>
         </condition>
         <triggers>
             <setUp id="mock_id"/>
@@ -20,7 +20,7 @@
     <event settedUpInitially="true">
         <condition>
             <not>
-                <inside regionId="zone1" objectPoint="all" objectId="skittle"/>
+                <inside objectId="skittle" objectPoint="all" regionId="zone1"/>
             </not>
         </condition>
         <triggers>
@@ -31,7 +31,7 @@
     <event id="id_1" settedUpInitially="true">
         <condition>
             <not>
-                <inside regionId="zone1" objectPoint="any" objectId="object"/>
+                <inside objectId="object" objectPoint="any" regionId="zone1"/>
             </not>
         </condition>
         <triggers>
@@ -46,7 +46,7 @@
     </event>
     <event id="id_2" settedUpInitially="true">
         <condition>
-            <inside regionId="zone1" objectPoint="all" objectId="object"/>
+            <inside objectId="object" objectPoint="all" regionId="zone1"/>
         </condition>
         <triggers>
             <setter name="score">

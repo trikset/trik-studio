@@ -416,27 +416,29 @@
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+153"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+157"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-78"/>
-        <source>the &lt;templates&gt;; tag can only contain the &lt;template&gt;; tag as a child tag</source>
+        <location line="-114"/>
+        <source>The &amp;lt;template&amp;gt; tag was provided,
+				but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-32"/>
-        <source>The &lt;template&gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>Redefinition a template %1 that already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+97"/>
+        <location line="+25"/>
+        <source>the &amp;lt;templates&amp;gt; tag can only
+					contain the &amp;lt;template&amp;gt; tag as a child tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+74"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -452,9 +454,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+104"/>
-        <location line="+7"/>
-        <location line="+3"/>
+        <location line="+103"/>
+        <location line="+9"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -508,12 +509,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+24"/>
-        <source>line %1 relative template declaration</source>
+        <location line="+23"/>
+        <source>line %1 relative declaration of template %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+9"/>
         <source>line %1 relative body of template %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -711,7 +712,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+173"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+180"/>
         <source>Error while template substitution: %1</source>
         <translation type="unfinished"></translation>
     </message>
