@@ -31,7 +31,7 @@ class CubeItem final: public graphicsUtils::RotateItem, public SolidItem, public
 public:
 	explicit CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			  QPointF position);
-	~CubeItem();
+	~CubeItem() override;
 
 	/// Creates and returns cube item for 2D model palette.
 	/// Transfers ownership.

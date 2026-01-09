@@ -51,17 +51,18 @@ public:
 
 		const auto rotation = element.attribute("rotation", "0").toDouble();
 		const auto startRotation = element.attribute("startRotation", "0").toDouble();
+		auto &&boundingRect = derived->boundingRect();
+		derived->setTransformOriginPoint(boundingRect.center());
 		derived->setRotation(rotation);
 		derived->setStartRotation(startRotation);
-		auto &&boundingRect = derived->boundingRect();
 		if (mPreferLeftTopPoint) {
-			derived->setPos(QPointF{
-				x + boundingRect.width() / 2,
-				y + boundingRect.height() / 2});
+			const auto currentTopLeft = derived->mapToScene(boundingRect.topLeft());
+			const auto offsetX = x - currentTopLeft.x();
+			const auto offsetY = y - currentTopLeft.y();
+			derived->moveBy(offsetX, offsetY);
 		} else {
 			derived->setPos(QPointF{x, y});
 		}
-		derived->setTransformOriginPoint(boundingRect.center());
 		derived->setStartPosition({markerX, markerY});
 	}
 
@@ -78,9 +79,9 @@ public:
 			element.setAttribute("y",
 					 QString::number(coordSystem->toUnit(derivedScenePosition.y())));
 		} else {
-			auto &&boundingRectTopLeft= derived->boundingRect().topLeft();
-			auto x1InSystem = coordSystem->toUnit(derivedScenePosition.x() + boundingRectTopLeft.x());
-			auto y1InSystem = coordSystem->toUnit(derivedScenePosition.y() + boundingRectTopLeft.y());
+			auto &&boundingRectTopLeft = derived->mapToScene(derived->boundingRect().topLeft());
+			auto x1InSystem = coordSystem->toUnit(boundingRectTopLeft.x());
+			auto y1InSystem = coordSystem->toUnit(boundingRectTopLeft.y());
 			element.setAttribute("begin", QString::number(x1InSystem) + ":" + QString::number(y1InSystem));
 		}
 

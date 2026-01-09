@@ -17,7 +17,6 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction> //clazy:exclude=qt6-header-fixes
 #include <QtSvg/QSvgRenderer>
-#include <QDebug>
 #include <twoDModel/engine/model/constants.h>
 
 using namespace twoDModel::items;
