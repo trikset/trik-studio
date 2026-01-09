@@ -50,7 +50,9 @@ public:
 		const auto markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
 
 		const auto rotation = element.attribute("rotation", "0").toDouble();
+		const auto startRotation = element.attribute("startRotation", "0").toDouble();
 		derived->setRotation(rotation);
+		derived->setStartRotation(startRotation);
 		auto &&boundingRect = derived->boundingRect();
 		if (mPreferLeftTopPoint) {
 			derived->setPos(QPointF{
