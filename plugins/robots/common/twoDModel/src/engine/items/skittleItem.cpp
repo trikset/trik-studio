@@ -15,7 +15,7 @@
 #include "skittleItem.h"
 
 #include <QtGui/QIcon>
-#include <QtWidgets/QAction>
+#include <QtWidgets/QAction> //clazy:exclude=qt6-header-fixes
 #include <QtSvg/QSvgRenderer>
 #include <QDebug>
 #include <twoDModel/engine/model/constants.h>
@@ -60,8 +60,7 @@ QAction *SkittleItem::skittleTool()
 
 QRectF SkittleItem::boundingRect() const
 {
-	return {{-mDiameterPx / 2, -mDiameterPx / 2}
-			, QSizeF{mDiameterPx, mDiameterPx}};
+	return {{-mDiameterPx / 2, -mDiameterPx / 2} , QSizeF{mDiameterPx, mDiameterPx}};
 }
 
 QPainterPath SkittleItem::shape() const

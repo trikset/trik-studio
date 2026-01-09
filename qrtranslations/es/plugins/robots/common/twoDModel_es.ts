@@ -350,7 +350,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="57"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="54"/>
         <source>Ball (B)</source>
         <translation>Pelota (B)</translation>
     </message>

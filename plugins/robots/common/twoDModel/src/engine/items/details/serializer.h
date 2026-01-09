@@ -1,3 +1,17 @@
+/* Copyright 2025 CyberTech Labs Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
 #pragma once
 
 #include "itemProperty.h"
@@ -21,9 +35,10 @@ public:
 		qreal x {};
 		qreal y {};
 
-		if (element.hasAttribute("leftX") && element.hasAttribute("leftY")) {
-			x = coordSystem->toPx(element.attribute("leftX", "0").toDouble());
-			y = coordSystem->toPx(element.attribute("leftY", "0").toDouble());
+		if (element.hasAttribute("begin")) {
+			const auto &point = deserializePoint(element.attribute("begin"));
+			x = point.x();
+			y = point.y();
 			mPreferLeftTopPoint = true;
 		} else {
 			x = coordSystem->toPx(element.attribute("x", "0").toDouble());
@@ -35,6 +50,7 @@ public:
 		const auto markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
 
 		const auto rotation = element.attribute("rotation", "0").toDouble();
+		derived->setRotation(rotation);
 		auto &&boundingRect = derived->boundingRect();
 		if (mPreferLeftTopPoint) {
 			derived->setPos(QPointF{
@@ -45,7 +61,6 @@ public:
 		}
 		derived->setTransformOriginPoint(boundingRect.center());
 		derived->setStartPosition({markerX, markerY});
-		derived->setRotation(rotation);
 	}
 
 	void serialize(QDomElement &element) const
@@ -62,19 +77,30 @@ public:
 					 QString::number(coordSystem->toUnit(derivedScenePosition.y())));
 		} else {
 			auto &&boundingRectTopLeft= derived->boundingRect().topLeft();
-			element.setAttribute("leftX",
-					 QString::number(coordSystem->toUnit(
-					 derivedScenePosition.x() + boundingRectTopLeft.x())));
-			element.setAttribute("leftY",
-					 QString::number(coordSystem->toUnit(
-					 derivedScenePosition.y() + boundingRectTopLeft.y())));
+			auto x1InSystem = coordSystem->toUnit(derivedScenePosition.x() + boundingRectTopLeft.x());
+			auto y1InSystem = coordSystem->toUnit(derivedScenePosition.y() + boundingRectTopLeft.y());
+			element.setAttribute("begin", QString::number(x1InSystem) + ":" + QString::number(y1InSystem));
 		}
+
 		element.setAttribute("markerX",
 					 QString::number(coordSystem->toUnit(startPosition.x())));
 		element.setAttribute("markerY",
 					 QString::number(coordSystem->toUnit(startPosition.y())));
 		element.setAttribute("rotation", QString::number(derived->rotation()));
 		element.setAttribute("startRotation", QString::number(startRotation));
+	}
+
+	QPointF deserializePoint(const QString &string) const
+	{
+		auto &&derived = static_cast<const Derived *>(this);
+		auto &&coordSystem = derived->coordinateSystem();
+		const auto &splittedStr = string.split(":");
+		if (splittedStr.count() == 2) {
+			const qreal x = splittedStr[0].toDouble();
+			const qreal y = splittedStr[1].toDouble();
+			return coordSystem->toPx({x, y});
+		}
+		return {};
 	}
 
 private:

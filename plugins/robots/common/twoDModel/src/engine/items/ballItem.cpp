@@ -15,9 +15,8 @@
 #include "ballItem.h"
 
 #include <QtGui/QIcon>
-#include <QtWidgets/QAction>
+#include <QtWidgets/QAction> //clazy:exclude=qt6-header-fixes
 #include <QtSvg/QSvgRenderer>
-
 #include <twoDModel/engine/model/constants.h>
 
 using namespace twoDModel::items;
@@ -48,13 +47,11 @@ BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setTransformOriginPoint(boundingRect().center());
 }
 
-BallItem::~BallItem()
-{
-}
+BallItem::~BallItem() = default;
 
 QAction *BallItem::ballTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_B), QKeySequence(Qt::Key_4)});
 	result->setCheckable(true);
 	return result;
@@ -62,8 +59,7 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return QRectF({ -mDiameterPx / 2.0, -mDiameterPx / 2.0}
-			, QSizeF{mDiameterPx, mDiameterPx});
+	return {{ -mDiameterPx / 2.0, -mDiameterPx / 2.0}, QSizeF{mDiameterPx, mDiameterPx}};
 }
 
 void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -168,7 +164,7 @@ void BallItem::returnToStartPosition()
 
 QPolygonF BallItem::collidingPolygon() const
 {
-	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
+	return boundingRect().adjusted(1, 1, -1, -1).translated(scenePos());
 }
 
 QPainterPath BallItem::path() const
