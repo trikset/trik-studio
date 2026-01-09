@@ -73,7 +73,7 @@ public:
 	/// A constructor that accepts the template name.
 	/// At the moment, the name of the template must be unique throughout the project, there is no namespace,
 	/// and when the user redefines the library template, an appropriate warning will be issued.
-	explicit XmlTemplate(const QString &id) noexcept;
+	explicit XmlTemplate(QString id) noexcept;
 
 	/// It parses the template definition by collecting information about the order in which parameters are
 	/// defined and their default values. Performs optional checks for the template body to improve diagnostics.

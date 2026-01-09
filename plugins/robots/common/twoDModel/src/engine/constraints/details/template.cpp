@@ -22,8 +22,8 @@
 
 using namespace twoDModel::constraints::details;
 
-XmlTemplate::XmlTemplate(const QString &id) noexcept:
-	mId(id) {}
+XmlTemplate::XmlTemplate(QString id) noexcept:
+	mId(std::move(id)) {}
 
 namespace {
 
