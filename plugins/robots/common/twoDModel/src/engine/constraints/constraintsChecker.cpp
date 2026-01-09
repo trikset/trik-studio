@@ -36,8 +36,10 @@
 using namespace twoDModel::constraints;
 Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
 
-ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model)
-	: mErrorReporter(errorReporter)
+ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter,
+				       model::Model &model, QObject* parent)
+	: QObject(parent)
+	, mErrorReporter(errorReporter)
 	, mModel(model)
 	, mTemplatesParser(new details::TemplatesParser)
 	, mParser(new details::ConstraintsParser(mEvents, mVariables, mObjects, mModel.timeline(), mStatus))

@@ -34,8 +34,8 @@ XmlTemplate* TemplatesParser::findTemplate(const QString& name)
 		return &it->second;
 	}
 	return &systemIt->second;
-
 }
+
 bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 {
 	auto &&templateName = templateElement.attribute("name", "");
@@ -115,7 +115,8 @@ void TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 
 		const auto &&message = QString("Error parsing template from a file %1 with").arg(baseName);
 		if (!templateCode.isEmpty() && !templates.setContent(templateCode, &errorMessage, &errorLine)) {
-			parseError(QString("%1 %2").arg(message, errorMessage), errorLine, ParserErrorCode::QtXmlParserError);
+			parseError(QString("%1 %2").arg(message, errorMessage),
+				   errorLine, ParserErrorCode::QtXmlParserError);
 			continue;
 		}
 

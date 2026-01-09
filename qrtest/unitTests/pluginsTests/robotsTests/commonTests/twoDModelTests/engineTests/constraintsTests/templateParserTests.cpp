@@ -124,6 +124,7 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	EXPECT_EQ(actualLine, testCase.expectedLine);
 }
 
+// clazy:excludeall=non-pod-global-static
 const std::vector<ErrorTestCase> testCases = {
 	{
 		TemplateParseErrorCode::ContentFormatNotSuppoted,
@@ -465,8 +466,8 @@ R"(
 )",
 		"UseUndeclaredTemplate"
 	},
-
 };
+// clazy:enable
 
 INSTANTIATE_TEST_SUITE_P(
 	AllErrors,

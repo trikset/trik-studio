@@ -210,12 +210,12 @@
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+157"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+158"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-114"/>
+        <location line="-115"/>
         <source>The &amp;lt;template&amp;gt; tag was provided,
 				but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
@@ -232,7 +232,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+74"/>
+        <location line="+75"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,12 +298,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+40"/>
+        <location line="+38"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+22"/>
         <source>line %1 relative declaration of template %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,7 +440,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+180"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+182"/>
         <source>Error while template substitution: %1</source>
         <translation type="unfinished"></translation>
     </message>

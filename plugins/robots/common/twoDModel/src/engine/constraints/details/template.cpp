@@ -23,7 +23,7 @@
 using namespace twoDModel::constraints::details;
 
 XmlTemplate::XmlTemplate(const QString &id) noexcept:
-	mId(id) {};
+	mId(id) {}
 
 namespace {
 
@@ -193,7 +193,6 @@ void XmlTemplate::parseWith(const QDomElement &with, QHash<QString, QString> &pa
 		return;
 	}
 
-	QString value;
 	auto hasParam = with.hasAttribute("param");
 	if (!hasParam) {
 		parseParams(with, paramsForReplace);
@@ -201,7 +200,6 @@ void XmlTemplate::parseWith(const QDomElement &with, QHash<QString, QString> &pa
 		auto &&param = with.attribute("param");
 		paramsForReplace.insert(param, getAllChildContent(with));
 	}
-
 }
 
 QString XmlTemplate::substitute(const QDomElement &templateUsage)
@@ -243,7 +241,6 @@ QString XmlTemplate::substitute(const QDomElement &templateUsage)
 
 void XmlTemplate::substitute(const QString& name, const QString& value, QString &result)
 {
-
 	result.replace("#{" + name + "}", value);
 }
 

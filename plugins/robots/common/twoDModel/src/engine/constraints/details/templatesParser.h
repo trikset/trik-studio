@@ -92,9 +92,10 @@ protected:
 	virtual void substituteError(const QString& message, int line,
 				     const ExpansionContext &context, SubstitutionErrorCode code);
 private:
-	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will be examined,
-	/// and each file will search for the top-level template or templates tag.
-	/// In the future, this function should be used to allow the user to specify a directory with their own templates.
+	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will
+	/// be examined, and each file will search for the top-level template or templates tag.
+	/// In the future, this function should be used to allow the user to specify a directory with
+	/// their own templates.
 	void parseAllTemplatesFromDirectory(const QString &dirPath);
 
 	/// Parsing a separate template and checking the uniqueness of its name.

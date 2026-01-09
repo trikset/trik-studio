@@ -210,7 +210,7 @@
         <translation>El objeto &quot;%1&quot; no tiene la propiedad &quot;%2&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="157"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="158"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -232,29 +232,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="151"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="152"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="167"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="168"/>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute
 				that is not the name of a declared template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="189"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="190"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="292"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="301"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="293"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="302"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="302"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="303"/>
         <source>Substitution chain: %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -298,17 +298,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="230"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="228"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="253"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="250"/>
         <source>line %1 relative declaration of template %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="262"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="259"/>
         <source>line %1 relative body of template %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -432,22 +432,22 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="180"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="182"/>
         <source>Error while template substitution: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="187"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="189"/>
         <source>Error while parsing template: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="194"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="196"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Error al analizar restricciones: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="404"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="406"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>El programa ha finalizado, pero la tarea no se ha completado.</translation>
     </message>

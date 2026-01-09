@@ -20,6 +20,8 @@
 
 namespace qrTest {
 
+// clazy:excludeall=function-args-by-value
+
 class XmlTemplateMock : public twoDModel::constraints::details::XmlTemplate
 {
 public:
@@ -47,3 +49,5 @@ public:
 		    (const QString&, int, const ExpansionContext &, SubstitutionErrorCode), (override));
 };
 }
+
+// clazy:enable
