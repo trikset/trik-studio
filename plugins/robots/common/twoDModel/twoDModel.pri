@@ -242,4 +242,4 @@ FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
 
 RESOURCES += \
-	$$PWD/src/engine/constraints/details/templates.qrc \
+	$$PWD/src/engine/constraints/details/xml-templates.qrc \
