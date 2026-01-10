@@ -184,6 +184,14 @@ jobs:
       if: ${{ inputs.build == true }}
       timeout-minutes: 25
 
+    - name: Upload installer artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: compile_commands.json
+        path: |
+          build/*.json
+      if: ${{ inputs.lint_clazy }}
+
     - name: Clazy-standalone
       uses: MinyazevR/clazy-standalone-action@v0.3.3
       with:
