@@ -184,7 +184,7 @@ jobs:
       if: ${{ inputs.build == true }}
       timeout-minutes: 25
 
-    - name: Upload installer artifact
+    - name: Upload compile_commands.json
       uses: actions/upload-artifact@v6
       with:
         name: compile_commands.json
@@ -218,7 +218,7 @@ jobs:
          verbosity: 'info'
          files-changed-only: true
          ignore-tidy: 'thirdparty|buildScripts|installer'
-         ignore: '!qrtest/thirdparty/googletest/googletest'
+         # Despite having the correct isystem path for googletests in compile_commands.json, it throws [clang-dignostic-error] file "gmock/gmock.h" not found. A temporary solution is to explicitly use these options as command-line arguments for clang-tidy
          extra-args: '-isystem${{ github.workspace }}/qrtest/thirdparty/googletest/googletest/googlemock/include/ -isystem${{ github.workspace }}/qrtest/thirdparty/googletest/googletest/googletest/include/'
          
     - name: Clang-tidy exit
