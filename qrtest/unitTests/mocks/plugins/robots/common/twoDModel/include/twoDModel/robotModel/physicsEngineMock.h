@@ -26,6 +26,7 @@ class PhysicsEngineMock : public twoDModel::model::physics::PhysicsEngineBase
 	Q_OBJECT
 
 public:
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 	PhysicsEngineMock(const twoDModel::model::WorldModel &worldModel,
 	                  const QList<twoDModel::model::RobotModel *> &robots)
 	        : PhysicsEngineBase(worldModel, robots) {};

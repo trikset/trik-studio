@@ -24,6 +24,7 @@ class TwoDRobotModelMock : public twoDModel::robotModel::TwoDRobotModel
 	Q_OBJECT
 
 public:
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 	explicit TwoDRobotModelMock(const RobotModelInterface &realModel):
 	        twoDModel::robotModel::TwoDRobotModel(realModel) {};
 	// clazy:excludeall=function-args-by-value,returning-void-expression

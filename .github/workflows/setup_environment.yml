@@ -209,7 +209,8 @@ jobs:
          database: 'build'
          verbosity: 'info'
          files-changed-only: true
-         ignore-tidy: '^(buildScripts|thirdparty|installer)$'
+         ignore-tidy: 'thirdparty|buildScripts|installer'
+         ignore: '!qrtest/thirdparty/googletest/googletest'
          
     - name: Clang-tidy exit
       if: ${{ inputs.lint_clazy  && steps.linter.outputs.checks-failed > 0 }}
