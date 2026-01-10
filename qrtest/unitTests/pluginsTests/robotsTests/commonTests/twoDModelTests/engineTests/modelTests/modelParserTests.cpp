@@ -24,36 +24,21 @@
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/lineItem.h"
 #include "src/engine/items/ballItem.h"
+#include "src/engine/items/cubeItem.h"
 #include "src/engine/items/commentItem.h"
 #include <cmath>
 #include <QFile>
+#include <qrutils/inFile.h>
 #include <QTextStream>
 
 using namespace ::testing;
 using namespace qrTest::robotsTests::commonTwoDModelTests;
 
-namespace {
-
-static QString readAll(const QString &fileName) {
-	QFile file(fileName);
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		return QString();
-	}
-
-	QTextStream input;
-	input.setDevice(&file);
-	input.setCodec("UTF-8");
-	const QString text = input.readAll();
-	return text;
-}
-}
-
 void ModelParserTests::SetUp()
 {
-	mModel.reset(
-	        new twoDModel::model::Model(new PhysicsEngineFactoryMock()));
-	mRobotModel.reset(new RobotModelInterfaceMock());
-	mTwoDRobotModel.reset(new TwoDRobotModelMock(*mRobotModel.data()));
+	mModel.reset(new twoDModel::model::Model(new testing::NiceMock<PhysicsEngineFactoryMock>()));
+	mRobotModel.reset(new testing::NiceMock<RobotModelInterfaceMock>());
+	mTwoDRobotModel.reset(new testing::NiceMock<TwoDRobotModelMock>(*mRobotModel.data()));
 	mModel->addRobotModel(*mTwoDRobotModel.data());
 }
 
@@ -72,7 +57,7 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_CALL(*mTwoDRobotModel, robotId()).Times(AtLeast(1));
 
 	QDomDocument doc;
-	const auto xml = readAll("./data/pixelWorldModel.xml");
+	const auto xml = utils::InFile::readAll("./data/pixelWorldModel.xml");
 	doc.setContent(xml);
 	mModel->deserialize(doc);
 	const auto &setting = mModel->settings();
@@ -101,6 +86,12 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_FLOAT_EQ(skittleItem->y(), -25.0f);
 	EXPECT_FLOAT_EQ(skittleItem->rotation(), 10.0f);
 
+	const auto skittleWithBeginItem = skittles["skittle_with_begin"];
+	const auto skittleWidth = skittleWithBeginItem->boundingRect().width();
+	const auto skittleHeight = skittleWithBeginItem->boundingRect().height();
+	EXPECT_FLOAT_EQ(skittleWithBeginItem->x(), 250 + skittleWidth / 2);
+	EXPECT_FLOAT_EQ(skittleWithBeginItem->y(), 300 + skittleHeight / 2);
+
 	const auto skittleSolidItem = static_cast<twoDModel::items::SolidItem*>(skittleItem.data());
 	EXPECT_FLOAT_EQ(skittleSolidItem->friction(), 0.5f);
 	EXPECT_FLOAT_EQ(skittleSolidItem->restitution(), 0.2f);
@@ -117,6 +108,12 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_FLOAT_EQ(ballItem->x(), -102.0f);
 	EXPECT_FLOAT_EQ(ballItem->y(), -25.0f);
 	EXPECT_FLOAT_EQ(ballItem->rotation(), 10.0f);
+
+	const auto ballWithBeginItem = balls["ball_with_begin"];
+	const auto ballWidth = ballWithBeginItem->boundingRect().width();
+	const auto ballHeight = ballWithBeginItem->boundingRect().height();
+	EXPECT_FLOAT_EQ(ballWithBeginItem->x(), 250 + ballWidth / 2);
+	EXPECT_FLOAT_EQ(ballWithBeginItem->y(), 300 + ballHeight / 2);
 
 	const auto ballSolidItem = static_cast<twoDModel::items::SolidItem*>(ballItem.data());
 	EXPECT_FLOAT_EQ(ballSolidItem->friction(), 0.4f);
@@ -156,6 +153,12 @@ TEST_F(ModelParserTests, defaultMetricSystemCustomObjectParametersTest)
 	EXPECT_FLOAT_EQ(comment->x2(), 481.938f);
 	EXPECT_FLOAT_EQ(comment->y2(), -207.0f);
 
+	auto cubes = worldModel.cubes();
+	const auto cubeWithBeginItem = cubes["cube_with_begin"];
+	const auto worldPoint = cubeWithBeginItem->mapToScene({cubeWithBeginItem->x1(), cubeWithBeginItem->y1()});
+	EXPECT_FLOAT_EQ(worldPoint.x(), 250);
+	EXPECT_FLOAT_EQ(worldPoint.y(), 300);
+
 	auto robotModels = mModel->robotModels();
 	EXPECT_EQ(robotModels.size(), 1);
 	auto robotModel = robotModels[0];
@@ -181,7 +184,7 @@ constexpr auto epsilon = 1e-4;
 constexpr auto pixelsInCm = 16.0 / 5.6;
 
 #define EXPECT_LT_ABS(X, Y) \
-	EXPECT_NEAR(X, Y * pixelsInCm, epsilon)
+	EXPECT_NEAR(X, (Y) * pixelsInCm, epsilon)
 
 TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 {
@@ -191,7 +194,7 @@ TEST_F(ModelParserTests, cmConfugurationDefaultParametersTest)
 	EXPECT_CALL(*mTwoDRobotModel, robotId()).Times(AtLeast(1));
 
 	QDomDocument doc;
-	const auto xml = readAll("./data/cmWorldModel.xml");
+	const auto xml = utils::InFile::readAll("./data/cmWorldModel.xml");
 	doc.setContent(xml);
 	mModel->deserialize(doc);
 	const auto &setting = mModel->settings();

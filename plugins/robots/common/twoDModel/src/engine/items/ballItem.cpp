@@ -15,9 +15,8 @@
 #include "ballItem.h"
 
 #include <QtGui/QIcon>
-#include <QtWidgets/QAction>
+#include <QtWidgets/QAction> //clazy:exclude=qt6-header-fixes
 #include <QtSvg/QSvgRenderer>
-
 #include <twoDModel/engine/model/constants.h>
 
 using namespace twoDModel::items;
@@ -48,13 +47,11 @@ BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setTransformOriginPoint(boundingRect().center());
 }
 
-BallItem::~BallItem()
-{
-}
+BallItem::~BallItem() = default;
 
 QAction *BallItem::ballTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_B), QKeySequence(Qt::Key_4)});
 	result->setCheckable(true);
 	return result;
@@ -62,8 +59,7 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return QRectF({ -mDiameterPx / 2.0, -mDiameterPx / 2.0}
-			, QSizeF{mDiameterPx, mDiameterPx});
+	return {{ -mDiameterPx / 2.0, -mDiameterPx / 2.0}, QSizeF{mDiameterPx, mDiameterPx}};
 }
 
 void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -84,6 +80,26 @@ void BallItem::setPenBrushForExtraction(QPainter *painter, const QStyleOptionGra
 	}
 }
 
+void BallItem::setStartPosition(QPointF startPosition)
+{
+	mStartPosition = startPosition;
+}
+
+void BallItem::setStartRotation(qreal startRotation)
+{
+	mStartRotation = startRotation;
+}
+
+qreal BallItem::startRotation() const
+{
+	return mStartRotation;
+}
+
+QPointF BallItem::startPosition() const
+{
+	return mStartPosition;
+}
+
 void BallItem::drawExtractionForItem(QPainter *painter)
 {
 	painter->drawEllipse(boundingRect());
@@ -98,19 +114,11 @@ void BallItem::savePos()
 QDomElement BallItem::serialize(QDomElement &element) const
 {
 	QDomElement ballNode = AbstractItem::serialize(element);
+	Serializer<BallItem>::serialize(ballNode);
+	SolidItem::serialize(ballNode);
+
 	auto *coordSystem = coordinateSystem();
 	ballNode.setTagName("ball");
-	ballNode.setAttribute("x",
-	                      QString::number(coordSystem->toUnit(x1() + scenePos().x())));
-	ballNode.setAttribute("y",
-	                      QString::number(coordSystem->toUnit(y1() + scenePos().y())));
-	ballNode.setAttribute("markerX",
-	                      QString::number(coordSystem->toUnit(x1() + mStartPosition.x())));
-	ballNode.setAttribute("markerY",
-	                      QString::number(coordSystem->toUnit(y1() + mStartPosition.y())));
-	ballNode.setAttribute("rotation", QString::number(rotation()));
-	ballNode.setAttribute("startRotation", QString::number(mStartRotation));
-	SolidItem::serialize(ballNode);
 	if (mDiameterPx.wasChanged()) {
 		ballNode.setAttribute("diameter", QString::number(coordSystem->toUnit(mDiameterPx)));
 	}
@@ -120,24 +128,14 @@ QDomElement BallItem::serialize(QDomElement &element) const
 void BallItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
+	SolidItem::deserialize(element);
 	auto *coordSystem = coordinateSystem();
-	qreal x = coordSystem->toPx(element.attribute("x", "0").toDouble());
-	qreal y = coordSystem->toPx(element.attribute("y", "0").toDouble());
-	qreal markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
-	qreal markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
-	qreal rotation = element.attribute("rotation", "0").toDouble();
-	mStartRotation = element.attribute("startRotation", "0").toDouble();
-
 	if (element.hasAttribute("diameter")) {
 		setDiameter(coordSystem->toPx(
 				element.attribute("diameter").toDouble()));
 	}
 
-	SolidItem::deserialize(element);
-	setPos(QPointF(x, y));
-	setTransformOriginPoint(boundingRect().center());
-	mStartPosition = {markerX, markerY};
-	setRotation(rotation);
+	Serializer<BallItem>::deserialize(element);
 	Q_EMIT x1Changed(x1());
 }
 
@@ -166,7 +164,7 @@ void BallItem::returnToStartPosition()
 
 QPolygonF BallItem::collidingPolygon() const
 {
-	return QPolygonF(boundingRect().adjusted(1, 1, -1, -1).translated(scenePos()));
+	return boundingRect().adjusted(1, 1, -1, -1).translated(scenePos());
 }
 
 QPainterPath BallItem::path() const

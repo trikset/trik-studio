@@ -66,7 +66,6 @@ HEADERS += \
 	$$PWD/include/twoDModel/blocks/markerDownBlock.h \
 	$$PWD/include/twoDModel/blocks/markerUpBlock.h \
 	$$PWD/src/engine/items/cubeItem.h \
-	$$PWD/src/engine/items/itemProperty.h
 
 HEADERS += \
 	$$PWD/src/engine/twoDModelEngineApi.h \
@@ -100,6 +99,8 @@ HEADERS += \
 	$$PWD/src/engine/model/physics/simplePhysicsEngine.h \
 	$$PWD/src/engine/model/physics/parts/box2DRobot.h \
 	$$PWD/src/engine/model/physics/parts/box2DWheel.h \
+	$$PWD/src/engine/items/details/itemProperty.h \
+	$$PWD/src/engine/items/details/serializer.h \
 	$$PWD/src/engine/items/solidItem.h \
 	$$PWD/src/engine/items/wallItem.h \
 	$$PWD/src/engine/items/stylusItem.h \

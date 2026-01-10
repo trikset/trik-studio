@@ -23,5 +23,5 @@ SUBDIRS = \
 
 unitTests.depends = googletest
 
-googletest.file = thirdparty/googletest/googletest.pro
+googletest.file = $$PWD/thirdparty/googletest/googletest.pro
 

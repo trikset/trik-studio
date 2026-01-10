@@ -21,23 +21,22 @@
 namespace qrTest {
 
 class PhysicsEngineMock : public twoDModel::model::physics::PhysicsEngineBase
+
 {
 	Q_OBJECT
 
 public:
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
 	PhysicsEngineMock(const twoDModel::model::WorldModel &worldModel,
 	                  const QList<twoDModel::model::RobotModel *> &robots)
 	        : PhysicsEngineBase(worldModel, robots) {};
 	// clazy:excludeall=function-args-by-value,returning-void-expression
-	MOCK_CONST_METHOD1(positionShift, QVector2D(twoDModel::model::RobotModel &));
-	MOCK_CONST_METHOD1(rotation, qreal(twoDModel::model::RobotModel &));
-	MOCK_METHOD1(addRobot, void(twoDModel::model::RobotModel * const));
-	MOCK_METHOD1(removeRobot, void(twoDModel::model::RobotModel * const));
-	MOCK_METHOD1(recalculateParameters, void(qreal));
-	MOCK_CONST_METHOD0(isRobotStuck, bool());
-	MOCK_METHOD0(wakeUp, void());
-	MOCK_METHOD0(clearForcesAndStop, void());
-	MOCK_METHOD0(nextFrame, void());
+	MOCK_METHOD(void, addRobot, (twoDModel::model::RobotModel * const), (override));
+	MOCK_METHOD(QVector2D, positionShift, (twoDModel::model::RobotModel &), (const, override));
+	MOCK_METHOD(qreal, rotation, (twoDModel::model::RobotModel &), (const, override));
+	MOCK_METHOD(void, removeRobot, (twoDModel::model::RobotModel * const), (override));
+	MOCK_METHOD(void, recalculateParameters, (qreal), (override));
+	MOCK_METHOD(bool, isRobotStuck, (), (const, override));
 	// clazy:enable
 };
 }

@@ -5,10 +5,15 @@
 	</walls>
 	<skittles>
 	    <skittle friction="0.5" restitution="0.2" linearDamping="4.0" angularDamping="3.0" mass="0.5" y="-250" markerX="10" x="50" markerY="-25" id="{af2bf97f-90cd-49a2-a201-b3f6e57497bb}" rotation="0" startRotation="10"/>
+	    <skittle begin="250:300" id="skittle_with_begin"/>
 	</skittles>
 	<balls>
 	    <ball friction="0.4" restitution="0.7" linearDamping="6.0" angularDamping="5.0" mass="0.6" y="-250" markerX="-102" x="-402" markerY="-25" id="{6573d515-983f-439e-a3df-dee6e9ea8e73}" rotation="0" startRotation="10"/>
+	    <ball begin="250:300" id="ball_with_begin"/>
 	</balls>
+	<cubes>
+	    <cube begin="250:300" id="cube_with_begin" rotation="120"/>
+	</cubes>
 	<colorFields>
 	    <line fill="#ff000000" begin="-202:-101" stroke="#ff000000" stroke-style="solid" end="250:-99" id="{b8ef1043-4bf4-42bf-8f61-841217cc3318}" fill-style="none" stroke-width="6.5"/>
 	    <cubicBezier cp1="85:-38" cp2="9:297" fill="#ff000000" begin="251:102" stroke="#ff000000" stroke-style="solid" end="-198:101" id="{1b4bb76e-1aff-4d9b-aebb-d6f4fc581e28}" fill-style="none" stroke-width="6"/>

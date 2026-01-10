@@ -24,32 +24,32 @@ class TwoDRobotModelMock : public twoDModel::robotModel::TwoDRobotModel
 	Q_OBJECT
 
 public:
-	TwoDRobotModelMock(const RobotModelInterface &realModel):
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+	explicit TwoDRobotModelMock(const RobotModelInterface &realModel):
 	        twoDModel::robotModel::TwoDRobotModel(realModel) {};
 	// clazy:excludeall=function-args-by-value,returning-void-expression
-	MOCK_CONST_METHOD0(robotId, QString());
-	MOCK_CONST_METHOD0(name, QString());
-	MOCK_CONST_METHOD0(friendlyName, QString());
-	MOCK_CONST_METHOD0(needsConnection, bool());
-	MOCK_CONST_METHOD0(updateIntervalForInterpretation, int());
-	MOCK_METHOD0(timeline, utils::TimelineInterface &());
-	MOCK_CONST_METHOD0(configurablePorts, QList< kitBase::robotModel::PortInfo>());
-	MOCK_CONST_METHOD0(convertibleBases, QList< kitBase::robotModel::DeviceInfo>());
-	MOCK_CONST_METHOD0(priority, int());
-	MOCK_METHOD0(rereadSettings, void());
-	MOCK_METHOD1(setEngine, void(twoDModel::engine::TwoDModelEngineInterface &));
-	MOCK_CONST_METHOD0(robotImage, QString());
-	MOCK_CONST_METHOD0(defaultLeftWheelPort, kitBase::robotModel::PortInfo());
-	MOCK_CONST_METHOD0(defaultRightWheelPort, kitBase::robotModel::PortInfo());
-	MOCK_CONST_METHOD0(displayWidget, twoDModel::engine::TwoDModelDisplayWidget *());
-	MOCK_CONST_METHOD0(collidingPolygon, QPolygonF());
-	MOCK_CONST_METHOD0(mass, qreal());
-	MOCK_CONST_METHOD0(friction, qreal());
-	MOCK_CONST_METHOD0(size, QSizeF());
-	MOCK_CONST_METHOD0(rotationCenter, QPointF());
-	MOCK_CONST_METHOD0(robotCenter, QPointF());
-	MOCK_CONST_METHOD0(wheelsPosition, QList<QPointF>());
-	MOCK_CONST_METHOD0(onePercentAngularVelocity, qreal());
+	MOCK_METHOD(QString, robotId, (),(const, override));
+	MOCK_METHOD(QString, name, (), (const, override));
+	MOCK_METHOD(QString, friendlyName, (), (const, override));
+	MOCK_METHOD(bool, needsConnection, (), (const, override));
+	MOCK_METHOD(int, updateIntervalForInterpretation, (), (const, override));
+	MOCK_METHOD(utils::TimelineInterface &, timeline, (), (override));
+	MOCK_METHOD(QList< kitBase::robotModel::PortInfo>, configurablePorts, (), (const, override));
+	MOCK_METHOD(QList< kitBase::robotModel::DeviceInfo>, convertibleBases, (), (const, override));
+	MOCK_METHOD(int, priority, (), (const, override));
+	MOCK_METHOD(void, rereadSettings, (), (override));
+	MOCK_METHOD(QString, robotImage, (), (const, override));
+	MOCK_METHOD(kitBase::robotModel::PortInfo, defaultLeftWheelPort, (), (const, override));
+	MOCK_METHOD(kitBase::robotModel::PortInfo, defaultRightWheelPort, (), (const, override));
+	MOCK_METHOD(twoDModel::engine::TwoDModelDisplayWidget *, displayWidget,(), (const, override));
+	MOCK_METHOD(QPolygonF, collidingPolygon, (), (const, override));
+	MOCK_METHOD(qreal, mass, (), (const, override));
+	MOCK_METHOD(qreal, friction, (), (const, override));
+	MOCK_METHOD(QSizeF, size,(), (const, override));
+	MOCK_METHOD(QPointF, rotationCenter, (), (const, override));
+	MOCK_METHOD(QPointF, robotCenter, (), (const, override));
+	MOCK_METHOD(QList<QPointF>, wheelsPosition, (), (const, override));
+	MOCK_METHOD(qreal, onePercentAngularVelocity, (), (const, override));
 	// clazy:enable
 };
 }

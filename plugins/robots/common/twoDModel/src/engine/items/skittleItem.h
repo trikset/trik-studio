@@ -15,20 +15,21 @@
 #pragma once
 #include "src/engine/items/solidItem.h"
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include "details/serializer.h"
 
 class QSvgRenderer;
 
 namespace twoDModel {
 namespace items {
 
-class SkittleItem final: public graphicsUtils::AbstractItem, public SolidItem
+class SkittleItem final: public graphicsUtils::AbstractItem, public SolidItem, public Serializer<SkittleItem>
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(SkittleItem)
 
 public:
 	explicit SkittleItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                     QPointF position);
+			     QPointF position);
 
 	~SkittleItem() override;
 
@@ -47,7 +48,10 @@ public:
 
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
-
+	void setStartPosition(QPointF startPosition);
+	void setStartRotation(qreal startPosition);
+	qreal startRotation() const;
+	QPointF startPosition() const;
 	void saveStartPosition();
 	void returnToStartPosition();
 	QPainterPath shape() const override;
@@ -61,6 +65,7 @@ private:
 	QPointF mStartPosition;
 	qreal mStartRotation {0.0};
 	ItemProperty<qreal> mDiameterPx;
+	// bool mPreferLeftTopPoint {};
 	std::unique_ptr<QSvgRenderer> mSvgRenderer;
 };
 }
