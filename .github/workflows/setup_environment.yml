@@ -219,6 +219,7 @@ jobs:
          files-changed-only: true
          ignore-tidy: 'thirdparty|buildScripts|installer'
          ignore: '!qrtest/thirdparty/googletest/googletest'
+         extra-args: '-isystem${{ github.workspace }}/qrtest/thirdparty/googletest/googletest/googlemock/include/ -isystem${{ github.workspace }}/qrtest/thirdparty/googletest/googletest/googletest/include/'
          
     - name: Clang-tidy exit
       if: ${{ inputs.lint_clazy  && steps.linter.outputs.checks-failed > 0 }}
