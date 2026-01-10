@@ -414,7 +414,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="55"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="54"/>
         <source>Can (C)</source>
         <translation>Lata (C)</translation>
     </message>

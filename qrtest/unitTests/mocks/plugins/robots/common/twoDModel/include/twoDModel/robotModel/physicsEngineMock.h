@@ -20,7 +20,8 @@
 
 namespace qrTest {
 
-class PhysicsEngineMock : public twoDModel::model::physics::PhysicsEngineBase //clazy:exclude=ctor-missing-parent-argument
+class PhysicsEngineMock : public twoDModel::model::physics::PhysicsEngineBase
+
 {
 	Q_OBJECT
 
