@@ -44,7 +44,7 @@ public:
 	using TemplatesParser::TemplatesParser;
 	using ExpansionContext = TemplatesParser::ExpansionContext;
 	MOCK_METHOD(void, parseError,
-		    (const QString&, int, ParserErrorCode), (override));
+		    (const QString&, int, ParserErrorCode, QString), (override));
 	MOCK_METHOD(void, substituteError,
 		    (const QString&, int, const ExpansionContext &, SubstitutionErrorCode), (override));
 };

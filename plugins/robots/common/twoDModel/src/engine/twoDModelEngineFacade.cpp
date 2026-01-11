@@ -93,7 +93,12 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
 		}
 
-		mView->loadXmls(worldModel);
+		// check out the comment in LoadWorldCommand::loadWorld
+		const auto &worldString = worldModel.toString(4);
+		QDomDocument worldDocument;
+		worldDocument.setContent(worldString);
+
+		mView->loadXmls(worldDocument);
 		mView->resetDrawAction();
 
 		loadReadOnlyFlags(logicalModel);

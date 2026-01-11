@@ -63,12 +63,12 @@ void XmlTemplate::processContent(const QDomElement &contentDecl)
 		auto &&paramIt = mParameters.find(paramName);
 
 		if (paramIt == mParameters.end()) {
-			auto &&startPos = match.capturedStart(0);
+			const auto startPos = match.capturedStart(0);
 			addDeclarationError(QObject::tr(
 				"When defining the template %1,"
 				" the syntax %2 was used to substitute an"
 				" offset %3 for an undeclared parameter %4.")
-				.arg(mId, fullMatch, QString(startPos), paramName),
+				.arg(mId, fullMatch, QString::number(startPos), paramName),
 				contentDecl.lineNumber(), TemplateParseErrorCode::UseSpecialSyntaxForUndeclaredParam);
 		}
 		offset = match.capturedEnd();
@@ -122,12 +122,12 @@ void XmlTemplate::clear()
 }
 
 
-QStringList XmlTemplate::substitutionErrors() const
+XmlTemplate::SubstitutionErrors XmlTemplate::substitutionErrors() const
 {
 	return mSubstitutionErrors;
 }
 
-QStringList XmlTemplate::declarationErrors() const
+XmlTemplate::DeclarationErrors XmlTemplate::declarationErrors() const
 {
 	return mDeclarationErrors;
 }
@@ -247,17 +247,11 @@ void XmlTemplate::substitute(const QString& name, const QString& value, QString 
 void XmlTemplate::addDeclarationError(const QString& message, int lineNumber, TemplateParseErrorCode code)
 {
 	Q_UNUSED(code)
-	const auto &final = message + " " + QObject::tr("line %1 relative declaration of template %2")
-				.arg(QString::number(lineNumber), mId);
-	QLOG_ERROR() << final;
-	mDeclarationErrors << final;
+	mDeclarationErrors.push_back({lineNumber, message, code});
 }
 
 void XmlTemplate::addSubstitutionError(const QString& message, int lineNumber, TemplateSubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
-	const auto &final = message + " " + QObject::tr("line %1 relative body of template %2")
-			.arg(QString::number(lineNumber), mId);
-	QLOG_ERROR() << final;
-	mSubstitutionErrors << final;
+	mSubstitutionErrors.push_back({lineNumber, message, code});
 }

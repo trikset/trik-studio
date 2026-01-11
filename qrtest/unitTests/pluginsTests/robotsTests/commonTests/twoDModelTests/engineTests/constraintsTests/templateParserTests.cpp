@@ -48,10 +48,10 @@ TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
 	TemplateParseErrorCode actualCode;
 	int actualLine;
 
-	EXPECT_CALL(*mMockTemplateParser, parseError(::testing::_, ::testing::_, ::testing::_))
+	EXPECT_CALL(*mMockTemplateParser, parseError(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
 		.WillOnce(::testing::Invoke(
-			[&](const QString&, int line, TemplateParseErrorCode code) {
+			[&](const QString&, int line, TemplateParseErrorCode code, const QString&) {
 				actualCode = code;
 				actualLine = line;
 		}
@@ -128,7 +128,7 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 const std::vector<ErrorTestCase> testCases = {
 	{
 		TemplateParseErrorCode::ContentFormatNotSuppoted,
-		2, // Non expected content on line 3 relative first string of template declaration
+		2, // Non expected content on line 3 relative first string of input document
 R"(<template name="test_template">
 	<content>
 		<something-non-cdata-tag/>

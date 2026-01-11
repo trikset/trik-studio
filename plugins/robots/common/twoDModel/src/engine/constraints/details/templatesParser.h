@@ -70,7 +70,7 @@ protected:
 
 	/// The path to the system template library.
 	virtual QString pathsToTemplates() const;
-	virtual void parseError(const QString& message, int line, ParserErrorCode code);
+	virtual void parseError(const QString& message, int line, ParserErrorCode code, QString currentTemplate={});
 
 	/// During template disclosure, it is necessary to prevent cyclic references to other templates,
 	/// as well as to have a sufficiently detailed diagnosis (disclosure chains) in case of errors in
@@ -89,8 +89,10 @@ protected:
 			return newCtx;
 		}
 	};
-	virtual void substituteError(const QString& message, int line,
-				     const ExpansionContext &context, SubstitutionErrorCode code);
+	virtual void substituteError(const QString& message,
+				     int line,
+				     const ExpansionContext &context,
+				     SubstitutionErrorCode code);
 private:
 	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will
 	/// be examined, and each file will search for the top-level template or templates tag.

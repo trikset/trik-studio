@@ -59,7 +59,7 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 
 	const auto &errors = xmlTemplate.declarationErrors();
 	for (auto &&declarationError: errors) {
-		mParsingErrors << declarationError;
+		parseError(declarationError.error, declarationError.line, declarationError.errorCode, templateName);
 	}
 	if (!errors.isEmpty()) {
 		return false;
@@ -75,7 +75,8 @@ bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
 	while (!firstChildElement.isNull()) {
 		if (firstChildElement.tagName().toLower() != "template") {
 			parseError(QObject::tr(R"(the &lt;templates&gt; tag can only
-					contain the &lt;template&gt; tag as a child tag)")
+					contain the &lt;template&gt; tag as a child tag, actual %1)")
+					.arg(firstChildElement.tagName())
 					, firstChildElement.lineNumber()
 					, ParserErrorCode::TemplatesTagContaintsOnlyTemplate);
 			return false;
@@ -176,7 +177,8 @@ QDomElement TemplatesParser::processTemplate(const QDomElement &elements, Expans
 	auto substitutionResult = xmlTemplate.substitute(elements);
 	const auto &errors = xmlTemplate.substitutionErrors();
 	for (auto &&substitutionError: errors) {
-		mSubstituionErrors << substitutionError;
+		substituteError(substitutionError.error, substitutionError.line,
+					context, substitutionError.errorCode);
 	}
 	if (!errors.isEmpty()) {
 		return {};
@@ -287,21 +289,41 @@ QStringList TemplatesParser::substituionErrors() const
 	return mSubstituionErrors;
 }
 
-void TemplatesParser::parseError(const QString& message, int line, ParserErrorCode code)
+void TemplatesParser::parseError(const QString& message, int line, ParserErrorCode code, QString currentTemplate)
 {
 	Q_UNUSED(code)
-	const auto &final =  message + " " + QObject::tr("line %1").arg(line);
-	QLOG_ERROR() << final;
-	mParsingErrors << final;
+	QStringList messages = {message, QObject::tr("line %1").arg(line)};
+	if (!currentTemplate.isEmpty()) {
+		messages.append(QObject::tr("template %1").arg(currentTemplate));
+	}
+	const auto &finalMessage = messages.join(" ");
+	QLOG_ERROR() << finalMessage;
+	mParsingErrors << finalMessage;
 }
 
-void TemplatesParser::substituteError(const QString& message, int line,
-				      const ExpansionContext &context, SubstitutionErrorCode code)
+void TemplatesParser::substituteError(const QString& message,
+				      int line,
+				      const ExpansionContext &context,
+				      SubstitutionErrorCode code)
 {
 	Q_UNUSED(code)
-	const auto &final = message + " " + QObject::tr("line %1").arg(line);
-	const auto &substitutionChain = QObject::tr(R"(Substitution chain: %1.)").arg(context.mOrder.join(" -> "));
-	QLOG_ERROR() << final << substitutionChain;
-	mSubstituionErrors << final << substitutionChain;
+	QStringList messages = {message, QObject::tr("line %1").arg(line)};
+	const auto inTemplate = !context.mOrder.isEmpty();
+	if (!inTemplate) {
+		messages.append(QObject::tr("relative to the beginning of the WorldModel.xml"));
+	} else {
+		auto currentTemplateName = context.mOrder.last();
+		messages.append(QObject::tr("relative to the beginning of the %1 template body")
+				.arg(currentTemplateName));
+	}
+	const auto &finalMessage = messages.join(" ");
+	QLOG_ERROR() << finalMessage;
+	mSubstituionErrors << finalMessage;
+	if (inTemplate) {
+		const auto &substitutionChain = QObject::tr(R"(Substitution chain: %1.)")
+				.arg(context.mOrder.join(" -> "));
+		QLOG_ERROR() << substitutionChain;
+		mSubstituionErrors << substitutionChain;
+	}
 }
 

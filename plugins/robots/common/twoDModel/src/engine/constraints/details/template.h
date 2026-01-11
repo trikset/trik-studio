@@ -70,28 +70,6 @@ public:
 	XmlTemplate& operator=(XmlTemplate&&) noexcept = default;
 	virtual ~XmlTemplate() = default;
 
-	/// A constructor that accepts the template name.
-	/// At the moment, the name of the template must be unique throughout the project, there is no namespace,
-	/// and when the user redefines the library template, an appropriate warning will be issued.
-	explicit XmlTemplate(QString id) noexcept;
-
-	/// It parses the template definition by collecting information about the order in which parameters are
-	/// defined and their default values. Performs optional checks for the template body to improve diagnostics.
-	void processDeclaration(const QDomElement &templateDeclaration);
-
-	/// Returns errors received during the parsing of the template definition, which can later be displayed
-	/// to the user from the ConsoleReporterInterface or recorded in logs.
-	QStringList declarationErrors() const;
-
-	/// It is used to insert parameters into the template body. The parameters are inserted in the reverse order
-	/// relative to initialization, which means that the parameters declared earlier can be used
-	/// in the parameters declared later.
-	QString substitute(const QDomElement &templateUsage);
-
-	/// Returns errors received when substituting template parameters, which can later be displayed
-	/// to the user from the ConsoleReporter interface or recorded in logs.
-	QStringList substitutionErrors() const;
-
 	enum class TemplateParseErrorCode {
 		ContentFormatNotSuppoted,
 		UseSpecialSyntaxForUndeclaredParam,
@@ -115,6 +93,37 @@ public:
 		QtXmlParserError
 	};
 
+	template <typename T>
+	struct ErrorDescription {
+		int line {};
+		QString error {};
+		T errorCode;
+	};
+
+	using DeclarationErrors = QVector<ErrorDescription<TemplateParseErrorCode>>;
+	using SubstitutionErrors = QVector<ErrorDescription<TemplateSubstitutionErrorCode>>;
+
+	/// A constructor that accepts the template name.
+	/// At the moment, the name of the template must be unique throughout the project, there is no namespace,
+	/// and when the user redefines the library template, an appropriate warning will be issued.
+	explicit XmlTemplate(QString id) noexcept;
+
+	/// It parses the template definition by collecting information about the order in which parameters are
+	/// defined and their default values. Performs optional checks for the template body to improve diagnostics.
+	void processDeclaration(const QDomElement &templateDeclaration);
+
+	/// Returns errors received during the parsing of the template definition, which can later be displayed
+	/// to the user from the ConsoleReporterInterface or recorded in logs.
+	DeclarationErrors declarationErrors() const;
+
+	/// It is used to insert parameters into the template body. The parameters are inserted in the reverse order
+	/// relative to initialization, which means that the parameters declared earlier can be used
+	/// in the parameters declared later.
+	QString substitute(const QDomElement &templateUsage);
+
+	/// Returns errors received when substituting template parameters, which can later be displayed
+	/// to the user from the ConsoleReporter interface or recorded in logs.
+	SubstitutionErrors substitutionErrors() const;
 protected:
 	virtual void addDeclarationError(const QString& message, int lineNumber, TemplateParseErrorCode code);
 	virtual void addSubstitutionError(const QString& message, int lineNumber, TemplateSubstitutionErrorCode code);
@@ -155,8 +164,8 @@ private:
 	};
 
 
-	QStringList mDeclarationErrors;
-	QStringList mSubstitutionErrors;
+	DeclarationErrors mDeclarationErrors;
+	SubstitutionErrors mSubstitutionErrors;
 	QString mId;
 	QString mText;
 	std::vector<QString> mOrder;

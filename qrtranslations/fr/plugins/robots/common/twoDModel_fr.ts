@@ -210,12 +210,12 @@
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+158"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+159"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-115"/>
+        <location line="-116"/>
         <source>The &amp;lt;template&amp;gt; tag was provided,
 				but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
@@ -228,11 +228,11 @@
     <message>
         <location line="+25"/>
         <source>the &amp;lt;templates&amp;gt; tag can only
-					contain the &amp;lt;template&amp;gt; tag as a child tag</source>
+					contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+76"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -243,18 +243,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+22"/>
+        <location line="+23"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+103"/>
-        <location line="+9"/>
+        <location line="+15"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-13"/>
+        <source>template %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>relative to the beginning of the WorldModel.xml</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>relative to the beginning of the %1 template body</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Substitution chain: %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -300,16 +315,6 @@
     <message>
         <location line="+38"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+22"/>
-        <source>line %1 relative declaration of template %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>line %1 relative body of template %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -463,7 +468,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+201"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>La physique réaliste doit être activée pour interagir avec les quilles, les cubes et les balles</translation>
     </message>
