@@ -42,6 +42,7 @@ namespace constraints {
 
 namespace details {
 class ConstraintsParser;
+class TemplatesParser;
 }
 
 /// Checks robot`s behaviour in 2D model world.
@@ -55,7 +56,8 @@ class ConstraintsChecker : public QObject
 	Q_OBJECT
 
 public:
-	ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model);
+	ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter,
+				model::Model &model, QObject* parent = nullptr);
 	~ConstraintsChecker() override;
 
 	/// Returns true if constraints checker is active now (constraints list passed into checker is non-empty).
@@ -63,7 +65,12 @@ public:
 
 	/// Parses the given program on 2D model constraints language and returns the success of this operation.
 	/// All parser errors will be reported using errorReporter interface passed to constructor.
-	bool parseConstraints(const QDomElement &constraintsXml);
+	bool parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
+			      const QDomElement &constraintsXmlAfterTemplateSubstitution);
+
+	bool parseTemplates(const QDomElement &templatesXml);
+
+	bool proccessTemplates(const QDomElement &constraintsXml);
 
 	/// Adds constraints xml as a child to a given element.
 	void serializeConstraints(QDomElement &parent) const;
@@ -99,6 +106,8 @@ Q_SIGNALS:
 	void checkerError(const QString &message);
 private:
 	void reportParserError(const QString &message);
+	void reportTemplateParserError(const QString &message);
+	void reportTemplateSubstitutionError(const QString &message);
 
 	void prepareEvents();
 
@@ -125,6 +134,7 @@ private:
 	qReal::ErrorReporterInterface &mErrorReporter;
 	model::Model &mModel;
 	details::StatusReporter mStatus;
+	QScopedPointer<details::TemplatesParser> mTemplatesParser;
 	QScopedPointer<details::ConstraintsParser> mParser;
 	bool mParsedSuccessfully {};
 	bool mSuccessTriggered {};

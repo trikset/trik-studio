@@ -183,9 +183,24 @@ void Model::deserialize(const QDomDocument &model)
 	mSettings->deserialize(settings);
 
 	if (mChecker) {
-		const auto &constraints = model.documentElement().firstChildElement("constraints");
 		/// @todo: should we handle if it returned false?
-		mChecker->parseConstraints(constraints);
+		const auto &templates = model.documentElement().firstChildElement("templates");
+		// If something goes wrong with the template system at some point, the user can
+		// simply not use Constraint Parser directly.
+		if (templates.isNull()) {
+			const auto &constraints = model.documentElement().firstChildElement("constraints");
+			mChecker->parseConstraints(constraints, constraints);
+		}
+		if (mChecker->parseTemplates(templates)) {
+			const auto &constraints = model.documentElement().firstChildElement("constraints");
+			// We need to have two nodes. One for saving constraints
+			// (version before preprocessing)  and for parsing (after)
+			auto &&importedNode = constraints.cloneNode(true).toElement();
+			auto result = mChecker->proccessTemplates(constraints);
+			if (result) {
+				mChecker->parseConstraints(importedNode, constraints);
+			}
+		}
 	}
 
 	const auto &worldList = model.elementsByTagName("world");

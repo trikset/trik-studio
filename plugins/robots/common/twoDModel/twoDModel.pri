@@ -88,6 +88,8 @@ HEADERS += \
 	$$PWD/src/engine/view/parts/speedPopup.h \
 	$$PWD/src/engine/view/parts/ruler.h \
 	$$PWD/src/engine/constraints/constraintsChecker.h \
+	$$PWD/src/engine/constraints/details/templatesParser.h \
+	$$PWD/src/engine/constraints/details/template.h \
 	$$PWD/src/engine/constraints/details/defines.h \
 	$$PWD/src/engine/constraints/details/constraintsParser.h \
 	$$PWD/src/engine/constraints/details/event.h \
@@ -194,6 +196,8 @@ SOURCES += \
 	$$PWD/src/engine/items/regions/rectangularRegion.cpp \
 	$$PWD/src/engine/items/regions/boundRegion.cpp \
 	$$PWD/src/engine/constraints/constraintsChecker.cpp \
+	$$PWD/src/engine/constraints/details/templatesParser.cpp \
+	$$PWD/src/engine/constraints/details/template.cpp \
 	$$PWD/src/engine/constraints/details/constraintsParser.cpp \
 	$$PWD/src/engine/constraints/details/event.cpp \
 	$$PWD/src/engine/constraints/details/conditionsFactory.cpp \
@@ -236,3 +240,6 @@ SOURCES += \
 
 FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
+
+RESOURCES += \
+	$$PWD/src/engine/constraints/details/xml-templates.qrc \

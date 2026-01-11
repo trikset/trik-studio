@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/xml-templates">
+        <file>templates/system-library.xml</file>
+    </qresource>
+</RCC>
