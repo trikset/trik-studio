@@ -70,7 +70,8 @@ protected:
 
 	/// The path to the system template library.
 	virtual QString pathsToTemplates() const;
-	virtual void parseError(const QString& message, int line, ParserErrorCode code, QString currentTemplate={});
+	virtual void parseError(const QString& message, int line, ParserErrorCode code,
+						const QString &currentTemplate);
 
 	/// During template disclosure, it is necessary to prevent cyclic references to other templates,
 	/// as well as to have a sufficiently detailed diagnosis (disclosure chains) in case of errors in

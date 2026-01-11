@@ -43,14 +43,15 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 		parseError(QObject::tr(R"(The &lt;template&gt; tag was provided,
 				but the required "name" attribute was missing.)"),
 				templateElement.lineNumber(),
-				ParserErrorCode::MissingTemplateNameAttribute);
+				ParserErrorCode::MissingTemplateNameAttribute,
+				{});
 		return false;
 	}
 
 	const auto* foundTemplate = findTemplate(templateName);
 	if (foundTemplate) {
 		parseError(QObject::tr("Redefinition a template %1 that already exists").arg(templateName),
-			   templateElement.lineNumber(), ParserErrorCode::RedefinitionExistingTemplate);
+			   templateElement.lineNumber(), ParserErrorCode::RedefinitionExistingTemplate, {});
 		return false;
 	}
 
@@ -78,7 +79,7 @@ bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
 					contain the &lt;template&gt; tag as a child tag, actual %1)")
 					.arg(firstChildElement.tagName())
 					, firstChildElement.lineNumber()
-					, ParserErrorCode::TemplatesTagContaintsOnlyTemplate);
+				   , ParserErrorCode::TemplatesTagContaintsOnlyTemplate, {});
 			return false;
 		}
 
@@ -97,7 +98,7 @@ void TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 	QDir xmlTemplateDir(dirPath);
 	if (!xmlTemplateDir.exists()) {
 		auto &&errorString = QString("Template library does not exist at path %1").arg(xmlTemplateDir.path());
-		parseError(errorString, 0, ParserErrorCode::TemplateLibraryNotFound);
+		parseError(errorString, 0, ParserErrorCode::TemplateLibraryNotFound, {});
 	}
 
 	QStringList filters = {"*.xml"};
@@ -117,7 +118,7 @@ void TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 		const auto &&message = QString("Error parsing template from a file %1 with").arg(baseName);
 		if (!templateCode.isEmpty() && !templates.setContent(templateCode, &errorMessage, &errorLine)) {
 			parseError(QString("%1 %2").arg(message, errorMessage),
-				   errorLine, ParserErrorCode::QtXmlParserError);
+				   errorLine, ParserErrorCode::QtXmlParserError, {});
 			continue;
 		}
 
@@ -289,7 +290,7 @@ QStringList TemplatesParser::substituionErrors() const
 	return mSubstituionErrors;
 }
 
-void TemplatesParser::parseError(const QString& message, int line, ParserErrorCode code, QString currentTemplate)
+void TemplatesParser::parseError(const QString& message, int line, ParserErrorCode code, const QString &currentTemplate)
 {
 	Q_UNUSED(code)
 	QStringList messages = {message, QObject::tr("line %1").arg(line)};
@@ -297,7 +298,6 @@ void TemplatesParser::parseError(const QString& message, int line, ParserErrorCo
 		messages.append(QObject::tr("template %1").arg(currentTemplate));
 	}
 	const auto &finalMessage = messages.join(" ");
-	QLOG_ERROR() << finalMessage;
 	mParsingErrors << finalMessage;
 }
 
@@ -317,12 +317,10 @@ void TemplatesParser::substituteError(const QString& message,
 				.arg(currentTemplateName));
 	}
 	const auto &finalMessage = messages.join(" ");
-	QLOG_ERROR() << finalMessage;
 	mSubstituionErrors << finalMessage;
 	if (inTemplate) {
 		const auto &substitutionChain = QObject::tr(R"(Substitution chain: %1.)")
 				.arg(context.mOrder.join(" -> "));
-		QLOG_ERROR() << substitutionChain;
 		mSubstituionErrors << substitutionChain;
 	}
 }
