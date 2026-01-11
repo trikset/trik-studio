@@ -416,112 +416,105 @@
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+159"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/templatesParser.cpp" line="+161"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружено рекурсивное раскрытие шаблонов: %1 -&gt; %2</translation>
     </message>
     <message>
-        <location line="-116"/>
-        <source>The &amp;lt;template&amp;gt; tag was provided,
-				but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
+        <location line="-108"/>
         <source>Redefinition a template %1 that already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Переопределение шаблона %1, который уже существует</translation>
     </message>
     <message>
-        <location line="+25"/>
-        <source>the &amp;lt;templates&amp;gt; tag can only
-					contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+76"/>
+        <location line="+102"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;lt;use&amp;gt; тег должен содержать атрибут &quot;template&quot;</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute
-				that is not the name of a declared template</source>
-        <translation type="unfinished"></translation>
+        <location line="-112"/>
+        <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation>&amp;lt;template&amp;gt; тег был предоставлен, но не был предоставлен требуемый атрибут &quot;name&quot;</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+36"/>
+        <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
+        <translation>&amp;lt;templates&amp;gt; тег может содержать только &amp;lt;template&amp;gt; как дочерний тег, текущий %1</translation>
+    </message>
+    <message>
+        <location line="+92"/>
+        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <translation>&amp;lt;use&amp;gt; тег содержит template=%1 атрибут, который не является именем объявленного шаблона</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
-        <translation type="unfinished"></translation>
+        <translation>После подстановки параметров для шаблона %1, он не стал валидным xml узлом</translation>
     </message>
     <message>
         <location line="+103"/>
-        <location line="+15"/>
+        <location line="+14"/>
         <source>line %1</source>
-        <translation type="unfinished"></translation>
+        <translation>строка %1</translation>
     </message>
     <message>
-        <location line="-13"/>
+        <location line="-12"/>
         <source>template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>шаблон %1</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+15"/>
         <source>relative to the beginning of the WorldModel.xml</source>
-        <translation type="unfinished"></translation>
+        <translation>относительно начала WorldModel.xml</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>relative to the beginning of the %1 template body</source>
-        <translation type="unfinished"></translation>
+        <translation>относительно начала тела шаблона %1</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
         <source>Substitution chain: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Последовательность подстановки шаблонов: %1.</translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/template.cpp" line="+49"/>
         <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>На данный момент подобный метод установки тега &amp;lt;content&amp;gt; для шаблона %1 не поддерживается.</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>При определении шаблона %1, был использован специальный синтаксис %2 для подстановки параметра по смещению %3, для необъявленного параметра %4.</translation>
     </message>
     <message>
         <location line="+16"/>
-        <source>the &amp;lt;params&amp;gt; tag can only contain
-					the &amp;lt;param&amp;gt; tag as a child tag for template %1,
-					actual tag is &amp;lt;%2&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
+        <translation>the &amp;lt;params&amp;gt; тег может содержать только &amp;lt;param&amp;gt; как дочерний тег для шаблона %1, текущий тег &amp;lt;%2&amp;gt;</translation>
     </message>
     <message>
-        <location line="+11"/>
-        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided,
-				 but the required &quot;name&quot; attribute was missing.</source>
-        <translation type="unfinished"></translation>
+        <location line="+10"/>
+        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation>&amp;lt;param&amp;gt; тег шаблона %1 был предоставлен, но требуемый атрибут &quot;name&quot; не был указан.</translation>
     </message>
     <message>
-        <location line="+56"/>
-        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided,
-			but the required child tag &amp;lt;content&amp;gt; was missing.</source>
-        <translation type="unfinished"></translation>
+        <location line="+57"/>
+        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
+        <translation>&amp;lt;template&amp;gt; тег шаблона %1 был предоставлен, но требуемый дочерний тег &amp;lt;content&amp;gt; не был указан</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>The using an undeclared parameter %1 for template %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Использование необъявленного параметра %1 для шаблона %2</translation>
     </message>
     <message>
         <location line="+27"/>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;lt;use&amp;gt; тег может содержать только &amp;lt;with&amp;gt; как дочерний тег</translation>
     </message>
     <message>
         <location line="+38"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметр %1 шаблона %2 не имеет значения по умолчанию и не был выставлен явно</translation>
     </message>
 </context>
 <context>
@@ -719,12 +712,12 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+182"/>
         <source>Error while template substitution: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при раскрытии шаблона: %1</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Error while parsing template: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при разборе шаблона: %1</translation>
     </message>
     <message>
         <location line="+7"/>

@@ -80,9 +80,8 @@ void XmlTemplate::processParams(const QDomElement &params)
 	auto &&firstParamDecl = params.firstChildElement("param");
 	while (!firstParamDecl.isNull()) {
 		if (firstParamDecl.tagName() != "param") {
-			addDeclarationError(QObject::tr(R"(the &lt;params&gt; tag can only contain
-					the &lt;param&gt; tag as a child tag for template %1,
-					actual tag is &lt;%2&gt;)")
+			addDeclarationError(QObject::tr("the &lt;params&gt; tag can only contain the &lt;param&gt;"
+					" tag as a child tag for template %1, actual tag is &lt;%2&gt;")
 					.arg(mId, firstParamDecl.tagName()), firstParamDecl.lineNumber(),
 					TemplateParseErrorCode::ParamsTagContainOnlyParam);
 			return;
@@ -92,9 +91,10 @@ void XmlTemplate::processParams(const QDomElement &params)
 
 		if (paramName.isEmpty()) {
 			addDeclarationError(QObject::tr(
-				R"(The &lt;param&gt; tag of template %1 was provided,
-				 but the required "name" attribute was missing.)")
-				 .arg(mId), firstParamDecl.lineNumber(),
+				"The &lt;param&gt; tag of template %1 was provided,"
+				" but the required \"name\" attribute was missing.")
+				.arg(mId),
+				firstParamDecl.lineNumber(),
 				 TemplateParseErrorCode::MissingParamNameAttribute);
 			return;
 		}
@@ -148,8 +148,8 @@ void XmlTemplate::processDeclaration(const QDomElement &templateDeclaration)
 	auto &&contentDecl = templateDeclaration.firstChildElement("content");
 	if (contentDecl.isNull()) {
 		addDeclarationError(QObject::tr(
-			R"(The &lt;template&gt; of template %1 tag was provided,
-			but the required child tag &lt;content&gt; was missing.)")
+			"The &lt;template&gt; of template %1 tag was provided,"
+			" but the required child tag &lt;content&gt; was missing")
 			.arg(mId), templateDeclaration.lineNumber(), TemplateParseErrorCode::MissingContentTag);
 		return;
 	}
@@ -161,7 +161,7 @@ bool XmlTemplate::validateParam(const QDomNode &with, const QString &param)
 	auto it = mParameters.find(param);
 	if (it == mParameters.end()) {
 		addSubstitutionError(QObject::tr(
-			R"(The using an undeclared parameter %1 for template %2)").arg(param, mId),
+			"The using an undeclared parameter %1 for template %2").arg(param, mId),
 			with.lineNumber(), TemplateSubstitutionErrorCode::UseUndeclaredParam);
 		return false;
 	}
@@ -188,7 +188,7 @@ void XmlTemplate::parseWith(const QDomElement &with, QHash<QString, QString> &pa
 {
 	if (with.tagName().toLower() != "with") {
 		addSubstitutionError(QObject::tr(
-			R"(The &lt;use&gt; tag can only contain a child tag &lt;with&gt;)"),
+			"The &lt;use&gt; tag can only contain a child tag &lt;with&gt;"),
 			with.lineNumber(), TemplateSubstitutionErrorCode::UseTagContainsOnlyWithTag);
 		return;
 	}

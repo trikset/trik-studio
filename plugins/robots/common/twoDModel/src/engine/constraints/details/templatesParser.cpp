@@ -40,11 +40,11 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 {
 	auto &&templateName = templateElement.attribute("name", "");
 	if (templateName.isEmpty()) {
-		parseError(QObject::tr(R"(The &lt;template&gt; tag was provided,
-				but the required "name" attribute was missing.)"),
-				templateElement.lineNumber(),
-				ParserErrorCode::MissingTemplateNameAttribute,
-				{});
+		parseError(QObject::tr(
+			R"(The &lt;template&gt; tag was provided, but the required "name" attribute was missing.)"),
+			templateElement.lineNumber(),
+			ParserErrorCode::MissingTemplateNameAttribute,
+			{});
 		return false;
 	}
 
@@ -75,11 +75,12 @@ bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
 
 	while (!firstChildElement.isNull()) {
 		if (firstChildElement.tagName().toLower() != "template") {
-			parseError(QObject::tr(R"(the &lt;templates&gt; tag can only
-					contain the &lt;template&gt; tag as a child tag, actual %1)")
-					.arg(firstChildElement.tagName())
-					, firstChildElement.lineNumber()
-				   , ParserErrorCode::TemplatesTagContaintsOnlyTemplate, {});
+			parseError(
+				QObject::tr("the &lt;templates&gt; tag can only contain"
+					    " the &lt;template&gt; tag as a child tag, actual %1")
+				.arg(firstChildElement.tagName())
+				, firstChildElement.lineNumber()
+				, ParserErrorCode::TemplatesTagContaintsOnlyTemplate, {});
 			return false;
 		}
 
@@ -167,10 +168,11 @@ QDomElement TemplatesParser::processTemplate(const QDomElement &elements, Expans
 	auto *foundTemplate = findTemplate(templateName);
 
 	if (!foundTemplate) {
-		substituteError(QObject::tr(R"(The &lt;use&gt; tag contains a template=%1 attribute
-				that is not the name of a declared template)")
-				.arg(templateName), elements.lineNumber(), context,
-				SubstitutionErrorCode::UseUndeclaredTemplate);
+		substituteError(QObject::tr(
+			"The &lt;use&gt; tag contains a template=%1"
+			" attribute that is not the name of a declared template")
+			.arg(templateName), elements.lineNumber(), context,
+			SubstitutionErrorCode::UseUndeclaredTemplate);
 		return {};
 	}
 
@@ -319,7 +321,7 @@ void TemplatesParser::substituteError(const QString& message,
 	const auto &finalMessage = messages.join(" ");
 	mSubstituionErrors << finalMessage;
 	if (inTemplate) {
-		const auto &substitutionChain = QObject::tr(R"(Substitution chain: %1.)")
+		const auto &substitutionChain = QObject::tr("Substitution chain: %1.")
 				.arg(context.mOrder.join(" -> "));
 		mSubstituionErrors << substitutionChain;
 	}
