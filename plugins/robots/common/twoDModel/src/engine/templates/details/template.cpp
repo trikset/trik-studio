@@ -178,7 +178,9 @@ void XmlTemplate::parseWith(const QDomElement &with, QHash<QString, QString> &pa
 		parseParams(with, paramsForReplace);
 	} else {
 		auto &&param = with.attribute("param");
-		paramsForReplace.insert(param, utils::xmlUtils::getTagContent(with));
+		if (validateParam(with, param)) {
+			paramsForReplace.insert(param, utils::xmlUtils::getTagContent(with));
+		}
 	}
 }
 

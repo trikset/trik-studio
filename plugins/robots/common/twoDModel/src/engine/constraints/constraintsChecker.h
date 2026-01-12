@@ -102,6 +102,7 @@ Q_SIGNALS:
 	void checkerError(const QString &message);
 private:
 	void reportParserError(const QString &message);
+
 	void prepareEvents();
 
 	void setUpEvent();

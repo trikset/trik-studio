@@ -45,9 +45,7 @@ ActionsBox::ActionsBox(QObject *parent)
 	mSeparator2->setSeparator(true);
 }
 
-ActionsBox::~ActionsBox()
-{
-}
+ActionsBox::~ActionsBox() = default;
 
 QAction &ActionsBox::scrollHandModeAction() const
 {

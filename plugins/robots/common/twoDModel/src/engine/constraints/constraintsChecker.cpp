@@ -17,7 +17,6 @@
 #include <qrutils/stringUtils.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <utils/objectsSet.h>
-#include <QsLog.h>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "details/constraintsParser.h"

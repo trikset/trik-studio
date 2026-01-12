@@ -512,7 +512,7 @@
         <translation>&amp;lt;use&amp;gt; тег может содержать только &amp;lt;with&amp;gt; как дочерний тег</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+40"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
         <translation>Параметр %1 шаблона %2 не имеет значения по умолчанию и не был выставлен явно</translation>
     </message>
@@ -728,7 +728,7 @@
         <translation type="vanished">Ошибка при разборе шаблона: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+122"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>

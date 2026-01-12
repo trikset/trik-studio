@@ -97,7 +97,6 @@ protected:
 				     const ExpansionContext &context,
 				     SubstitutionErrorCode code);
 private:
-
 	/// Parsing a separate template and checking the uniqueness of its name.
 	/// If a user overrides a library template, an error should be thrown.
 	bool parseTemplate(const QDomElement &templateElement);

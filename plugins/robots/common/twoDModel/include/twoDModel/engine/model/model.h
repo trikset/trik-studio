@@ -58,7 +58,7 @@ public:
 	/// Dependency injection for the physics engine
 	explicit Model(physics::PhysicsEngineFactory *engineFactory,
 	               QObject *parent = nullptr);
-	~Model();
+	~Model() override;
 
 	void init(qReal::ErrorReporterInterface &errorReporter
 			, kitBase::InterpreterControlInterface &interpreterControl
