@@ -749,7 +749,7 @@
 <context>
     <name>twoDModel::items::BallItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+57"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ballItem.cpp" line="+54"/>
         <source>Ball (B)</source>
         <translation>Мяч (B)</translation>
     </message>
@@ -817,7 +817,7 @@
 <context>
     <name>twoDModel::items::SkittleItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+55"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/skittleItem.cpp" line="+54"/>
         <source>Can (C)</source>
         <translation>Банка (C)</translation>
     </message>

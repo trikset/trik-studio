@@ -15,7 +15,7 @@
 #pragma once
 
 #include <qrutils/graphicsUtils/rotateItem.h>
-
+#include "details/serializer.h"
 #include "src/engine/items/solidItem.h"
 
 class QSvgRenderer;
@@ -23,7 +23,7 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class CubeItem final: public graphicsUtils::RotateItem, public SolidItem
+class CubeItem final: public graphicsUtils::RotateItem, public SolidItem, public Serializer<CubeItem>
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(CubeItem)
@@ -31,7 +31,7 @@ class CubeItem final: public graphicsUtils::RotateItem, public SolidItem
 public:
 	explicit CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			  QPointF position);
-	~CubeItem();
+	~CubeItem() override;
 
 	/// Creates and returns cube item for 2D model palette.
 	/// Transfers ownership.
@@ -45,6 +45,10 @@ public:
 	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
 	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
 	void savePos() override;
+	void setStartPosition(QPointF startPosition);
+	void setStartRotation(qreal startPosition);
+	qreal startRotation() const;
+	QPointF startPosition() const;
 
 	QDomElement serialize(QDomElement &element) const override;
 	void deserialize(const QDomElement &element) override;
