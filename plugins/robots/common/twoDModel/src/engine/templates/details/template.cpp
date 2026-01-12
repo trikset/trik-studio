@@ -12,35 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "template.h"
-#include <QHash>
+#include <qrutils/xmlUtils.h>
 #include <QObject>
-#include <QTextStream>
 #include <QRegularExpression>
-#include <QSet>
-#include <QsLog.h>
+#include "template.h"
 
-using namespace twoDModel::constraints::details;
+using namespace twoDModel::templates::details;
 
 XmlTemplate::XmlTemplate(QString id) noexcept:
 	mId(std::move(id)) {}
-
-namespace {
-
-QString getAllChildContent(const QDomElement& parentElement)
-{
-	QString result;
-	QTextStream stream(&result);
-
-	auto &&child = parentElement.firstChild();
-	while(!child.isNull()) {
-		child.save(stream, 0);
-		child = child.nextSibling();
-	}
-	return result;
-}
-
-}
 
 void XmlTemplate::processContent(const QDomElement &contentDecl)
 {
@@ -103,7 +83,7 @@ void XmlTemplate::processParams(const QDomElement &params)
 		auto &&defaultValue = firstParamDecl.attribute("default");
 		if (!firstParamDecl.hasAttribute("default")) {
 			if (firstParamDecl.hasChildNodes()) {
-				defaultValue = getAllChildContent(firstParamDecl);
+				defaultValue = utils::xmlUtils::getTagContent(firstParamDecl);
 			} else {
 				hasDefaultValue = false;
 			}
@@ -198,7 +178,7 @@ void XmlTemplate::parseWith(const QDomElement &with, QHash<QString, QString> &pa
 		parseParams(with, paramsForReplace);
 	} else {
 		auto &&param = with.attribute("param");
-		paramsForReplace.insert(param, getAllChildContent(with));
+		paramsForReplace.insert(param, utils::xmlUtils::getTagContent(with));
 	}
 }
 

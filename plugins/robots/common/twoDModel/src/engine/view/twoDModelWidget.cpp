@@ -382,6 +382,7 @@ void TwoDModelWidget::connectUiButtons()
 
 	connect(&mActions->saveModelAction(), &QAction::triggered, this, &TwoDModelWidget::saveWorldModel);
 	connect(&mActions->loadModelAction(), &QAction::triggered, this, &TwoDModelWidget::loadWorldModel);
+	connect(&mActions->loadTemplatesAction(), &QAction::triggered, this, &TwoDModelWidget::loadTemplates);
 	connect(&mActions->loadModelWithoutRobotAction(), &QAction::triggered
 			, this, &TwoDModelWidget::loadWorldModelWithoutRobot);
 
@@ -572,6 +573,17 @@ void TwoDModelWidget::loadWorldModel()
 	}
 }
 
+void TwoDModelWidget::loadTemplates()
+{
+	const auto path = QRealFileDialog::getExistingDirectory("Open2DModelTemplates", this
+			, tr("Choose templates directory")).replace("\\", "/");
+	if (path.isEmpty()) {
+		return;
+	}
+
+	saveTemplatesToRepo(mModel.generateTemplates(path));
+}
+
 void TwoDModelWidget::loadWorldModelWithoutRobot()
 {
 	const QString loadFileName = QRealFileDialog::getOpenFileName("Open2DModelWidget", this
@@ -735,6 +747,11 @@ void TwoDModelWidget::saveBlobsToRepo()
 	Q_EMIT mModel.blobsChanged(generateBlobsXml());
 }
 
+void TwoDModelWidget::saveTemplatesToRepo(const QDomDocument &templates)
+{
+	Q_EMIT mModel.templatesChanged(templates);
+}
+
 QDomDocument TwoDModelWidget::generateWorldModelXml() const
 {
 	return mModel.serialize();
@@ -757,7 +774,7 @@ QDomDocument TwoDModelWidget::generateWorldModelWithBlobsXml() const
 	return worldModelXml;
 }
 
-void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
+void TwoDModelWidget::loadModelXmls(const QDomDocument &model, bool withUndo)
 {
 	if (mController && !withUndo) {
 		// Clearing 2D model undo stack...
@@ -769,6 +786,11 @@ void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
 	mModel.deserialize(model);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
+}
+
+void TwoDModelWidget::loadTemplatesXmls(const QDomDocument &templates)
+{
+	mModel.loadTemplates(templates);
 }
 
 Model &TwoDModelWidget::model() const

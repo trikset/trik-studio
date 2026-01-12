@@ -93,12 +93,17 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
 		}
 
-		// check out the comment in LoadWorldCommand::loadWorld
-		const auto &worldString = worldModel.toString(4);
-		QDomDocument worldDocument;
-		worldDocument.setContent(worldString);
+		const QString templatesXml = projectManager.somethingOpened()
+						? logicalModel.logicalRepoApi().metaInformation("templates").toString()
+						: QString();
+		QDomDocument templates;
+		if (!templatesXml.isEmpty() && !templates.setContent(templatesXml, &errorMessage, &errorLine, &errorColumn)) {
+			interpretersInterface.errorReporter()->addError(
+				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+		}
 
-		mView->loadXmls(worldDocument);
+		mView->loadTemplatesXmls(templates);
+		mView->loadModelXmls(worldModel);
 		mView->resetDrawAction();
 
 		loadReadOnlyFlags(logicalModel);
@@ -164,6 +169,10 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 	connect(mModel.data(), &model::Model::blobsChanged, this, [&logicalModel](const QDomDocument &xml) {
 		logicalModel.mutableLogicalRepoApi().setMetaInformation("blobs", xml.toString(4));
+	});
+
+	connect(mModel.data(), &model::Model::templatesChanged, this, [&logicalModel](const QDomDocument &xml) {
+		logicalModel.mutableLogicalRepoApi().setMetaInformation("templates", xml.toString(4));
 	});
 
 	connect(&eventsForKitPlugin,

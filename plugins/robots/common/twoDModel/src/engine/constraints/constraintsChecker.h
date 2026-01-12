@@ -68,10 +68,6 @@ public:
 	bool parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
 			      const QDomElement &constraintsXmlAfterTemplateSubstitution);
 
-	bool parseTemplates(const QDomElement &templatesXml);
-
-	bool proccessTemplates(const QDomElement &constraintsXml);
-
 	/// Adds constraints xml as a child to a given element.
 	void serializeConstraints(QDomElement &parent) const;
 
@@ -106,9 +102,6 @@ Q_SIGNALS:
 	void checkerError(const QString &message);
 private:
 	void reportParserError(const QString &message);
-	void reportTemplateParserError(const QString &message);
-	void reportTemplateSubstitutionError(const QString &message);
-
 	void prepareEvents();
 
 	void setUpEvent();
@@ -134,7 +127,6 @@ private:
 	qReal::ErrorReporterInterface &mErrorReporter;
 	model::Model &mModel;
 	details::StatusReporter mStatus;
-	QScopedPointer<details::TemplatesParser> mTemplatesParser;
 	QScopedPointer<details::ConstraintsParser> mParser;
 	bool mParsedSuccessfully {};
 	bool mSuccessTriggered {};

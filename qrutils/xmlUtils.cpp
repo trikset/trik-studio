@@ -38,6 +38,23 @@ QDomDocument xmlUtils::loadDocument(const QString &fileName, QString *errorMessa
 	return doc;
 }
 
+QString xmlUtils::getTagContent(const QDomElement& parentElement, bool withParent)
+{
+	QString result;
+	QTextStream stream(&result);
+
+	if (withParent) {
+		parentElement.save(stream, 0);
+		return result;
+	}
+	auto &&child = parentElement.firstChild();
+	while(!child.isNull()) {
+		child.save(stream, 4);
+		child = child.nextSibling();
+	}
+	return result;
+}
+
 QString xmlUtils::ensureXmlFieldsOrder(const QString &xmlInput)
 {
 	if (xmlInput.isEmpty()) {

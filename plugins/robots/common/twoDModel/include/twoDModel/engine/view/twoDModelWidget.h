@@ -82,7 +82,9 @@ public:
 	SensorItem *sensorItem(const kitBase::robotModel::PortInfo &port);
 	void setSensorVisible(const kitBase::robotModel::PortInfo &port, bool isVisible);
 
-	void loadXmls(const QDomDocument &model, bool withUndo = false);
+	void loadModelXmls(const QDomDocument &model, bool withUndo = false);
+
+	void loadTemplatesXmls(const QDomDocument &templates);
 
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;
@@ -147,9 +149,11 @@ protected:
 private Q_SLOTS:
 	void saveWorldModelToRepo();
 	void saveBlobsToRepo();
+	void saveTemplatesToRepo(const QDomDocument &templates);
 
 	void saveWorldModel();
 	void loadWorldModel();
+	void loadTemplates();
 	void loadWorldModelWithoutRobot();
 
 	void onSelectionChange();

@@ -17,7 +17,7 @@
 #include <QTimer>
 
 using namespace qrTest::robotsTests::commonTwoDModelTests;
-using namespace twoDModel::constraints::details;
+using namespace twoDModel::templates::details;
 
 TEST_P(XmlTemplateErrorTest, EachErrorScenario) {
 	const auto &testCase = GetParam();
@@ -59,7 +59,7 @@ TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
 
 	QDomDocument doc;
 	doc.setContent(testCase.testXml);
-	mMockTemplateParser->parseTemplates(doc.documentElement());
+	mMockTemplateParser->parseTemplates(doc);
 
 	EXPECT_EQ(actualCode, testCase.expectedCode);
 	EXPECT_EQ(actualLine, testCase.expectedLine);
@@ -113,7 +113,7 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	// template definition xml
 	QDomDocument templateDefinitions;
 	templateDefinitions.setContent(testCase.templatesDefinition);
-	mMockTemplateParser->parseTemplates(templateDefinitions.documentElement());
+	mMockTemplateParser->parseTemplates(templateDefinitions);
 
 	// Constraint xml
 	QDomDocument doc;

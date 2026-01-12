@@ -38,17 +38,7 @@ bool LoadWorldCommand::restoreState()
 
 void LoadWorldCommand::loadWorld(const QDomDocument &world)
 {
-	// This is a very dirty solution, but if we want any diagnostics in xml based on a row/column in
-	// the constraint parser, this information is lost during cloneNode.
-	// Moreover, this approach may display incorrect lines when parsing constrintXml in several cases:
-	// 1. The user uploaded the configuration without a robot and there really was no robots block in his xml,
-	// which we will add later, so all positions (in theory) should be shifted by the size of this block.
-	// 2.The user uses the old format, where certain information about the robot (such as rotation and startPosition)
-	// is not in the <world>, which also requires reformatting the xml tree.
-	const auto &worldString = world.toString(4);
-	QDomDocument worldDocument;
-	worldDocument.setContent(worldString);
-	mWidget.loadXmls(worldDocument, true);
+	mWidget.loadModelXmls(world, true);
 	Q_EMIT mWidget.model().modelChanged(mWidget.generateWorldModelXml());
 	Q_EMIT mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }

@@ -15,15 +15,13 @@
 #pragma once
 
 #include <QHash>
-#include <QString>
-#include <QStringList>
 #include <vector>
+#include <QString>
 #include <QDomElement>
 
 namespace twoDModel {
-namespace constraints {
+namespace templates {
 namespace details {
-
 /*!
  * \class XmlTemplate
  * \brief A class that describes a template and stores information about its parameters, default substitution value,
@@ -172,6 +170,6 @@ private:
 	QHash<QString, TemplateParamInfo> mParameters;
 };
 
-} // namespace details
-} // namespace constraints
-} // namespace twoDModel
+}
+}
+}

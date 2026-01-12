@@ -34,6 +34,10 @@ class InterpreterControlInterface;
 
 namespace twoDModel {
 
+namespace templates {
+class TemplatesParserApi;
+}
+
 namespace constraints {
 class ConstraintsChecker;
 }
@@ -81,6 +85,9 @@ public:
 	QDomDocument serialize() const;
 	void deserialize(const QDomDocument &model);
 
+	QDomDocument generateTemplates(const QString &path);
+	void loadTemplates(const QDomDocument &templates);
+
 	/// Add new robot model
 	/// @param robotModel Model to be added
 	/// @param pos Initial positon of robot model
@@ -107,6 +114,8 @@ Q_SIGNALS:
 	/// @param xml blobs description in xml format
 	void blobsChanged(const QDomDocument &xml);
 
+	void templatesChanged(const QDomDocument &xml);
+
 	/// Emitted after new robot model added
 	/// @param robotModel Pointer to robot model which was removed
 	void robotAdded(twoDModel::model::RobotModel *robotModel);
@@ -121,12 +130,15 @@ private Q_SLOTS:
 
 private:
 	void initPhysics();
+	bool parseTemplates(const QDomElement &templates);
+	bool proccessTemplates(const QDomElement &constraintsXml);
 
 	QPointer<Settings> mSettings; //Has ownership
 	QPointer<MetricCoordinateSystem> mMetricCoordinateSystem; //Has ownership
 	WorldModel mWorldModel;
 	Timeline mTimeline;
 	QScopedPointer<constraints::ConstraintsChecker> mChecker;
+	QScopedPointer<templates::TemplatesParserApi> mTemplatesParserApi;
 	RobotModel * mRobotModel {}; //Has ownership
 	qReal::ErrorReporterInterface *mErrorReporter;  // Doesn`t take ownership.
 	qReal::LogicalModelAssistInterface *mLogicalModel;  // Doesn`t take ownership.

@@ -14,15 +14,15 @@
 
 #pragma once
 
-#include <src/engine/constraints/details/template.h>
-#include <src/engine/constraints/details/templatesParser.h>
+#include <src/engine/templates/details/template.h>
+#include <src/engine/templates/details/templatesParser.h>
 #include <gmock/gmock.h>
 
 namespace qrTest {
 
 // clazy:excludeall=function-args-by-value
 
-class XmlTemplateMock : public twoDModel::constraints::details::XmlTemplate
+class XmlTemplateMock : public twoDModel::templates::details::XmlTemplate
 {
 public:
 	using XmlTemplate::XmlTemplate;
@@ -38,7 +38,7 @@ public:
 	}
 };
 
-class XmlTemplateParserMock : public twoDModel::constraints::details::TemplatesParser
+class XmlTemplateParserMock : public twoDModel::templates::details::TemplatesParser
 {
 public:
 	using TemplatesParser::TemplatesParser;

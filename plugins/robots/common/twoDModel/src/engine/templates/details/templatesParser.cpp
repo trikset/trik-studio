@@ -12,16 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include "templatesParser.h"
-#include "template.h"
-#include <unordered_set>
-#include <QRegularExpression>
 #include <stack>
-#include <QsLog.h>
 #include <QDir>
 #include <qrutils/inFile.h>
+#include "templatesParser.h"
+#include "template.h"
 
-using namespace twoDModel::constraints::details;
+using namespace twoDModel::templates::details;
 
 XmlTemplate* TemplatesParser::findTemplate(const QString& name)
 {
@@ -69,10 +66,17 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 	return true;
 }
 
-bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
+QDomDocument TemplatesParser::parseTemplates(const QDomDocument &templatesDocument)
 {
-	auto firstChildElement = templatesXml.firstChildElement();
+	auto &&templatesXml = templatesDocument.firstChildElement("templates");
+	QDomDocument result;
+	if (templatesXml.isNull()) {
+		// not found
+		return result;
+	}
 
+	QDomElement templatesContainer = result.createElement("templatesContainer");
+	auto firstChildElement = templatesXml.firstChildElement();
 	while (!firstChildElement.isNull()) {
 		if (firstChildElement.tagName().toLower() != "template") {
 			parseError(
@@ -81,20 +85,18 @@ bool TemplatesParser::parseTemplates(const QDomElement &templatesXml)
 				.arg(firstChildElement.tagName())
 				, firstChildElement.lineNumber()
 				, ParserErrorCode::TemplatesTagContaintsOnlyTemplate, {});
-			return false;
+		} else if (!parseTemplate(firstChildElement)) {
+			// already logged
+		} else {
+			templatesContainer.appendChild(firstChildElement.cloneNode());
 		}
-
-		if (!parseTemplate(firstChildElement)) {
-			return false;
-		}
-
 		firstChildElement = firstChildElement.nextSiblingElement();
 	}
-
-	return true;
+	result.appendChild(templatesContainer);
+	return result;
 }
 
-void TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
+QDomDocument TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 {
 	QDir xmlTemplateDir(dirPath);
 	if (!xmlTemplateDir.exists()) {
@@ -104,33 +106,33 @@ void TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 
 	QStringList filters = {"*.xml"};
 	QStringList files = xmlTemplateDir.entryList(filters, QDir::Files);
-
+	QDomDocument result;
+	QDomElement resultTemplates = result.createElement("templates");
 	for (auto &&fileName : files) {
 		auto &&filePath = xmlTemplateDir.filePath(fileName);
 
 		QFileInfo fileInfo(filePath);
 		auto &&baseName = fileInfo.baseName();
 		auto &&templateCode = utils::InFile::readAll(filePath);
-
 		QDomDocument templates;
 		QString errorMessage;
 		int errorLine;
 
 		const auto &&message = QString("Error parsing template from a file %1 with").arg(baseName);
-		if (!templateCode.isEmpty() && !templates.setContent(templateCode, &errorMessage, &errorLine)) {
+		if (!templates.setContent(templateCode, &errorMessage, &errorLine)) {
 			parseError(QString("%1 %2").arg(message, errorMessage),
 				   errorLine, ParserErrorCode::QtXmlParserError, {});
 			continue;
 		}
 
-		auto &&templatesXml = templates.firstChildElement("templates");
-		if (templatesXml.isNull()) {
-			parseTemplate(templates.firstChildElement("template"));
-			return;
+		const auto &parseResult = parseTemplates(templates).firstChildElement("templatesContainer");
+		for (auto xmlTemplate = parseResult.firstChildElement("template"); !xmlTemplate.isNull()
+				; xmlTemplate = xmlTemplate.nextSiblingElement("template")) {
+			resultTemplates.appendChild(xmlTemplate.cloneNode());
 		}
-
-		parseTemplates(templatesXml);
 	}
+	result.appendChild(resultTemplates);
+	return result;
 }
 
 QString TemplatesParser::pathsToTemplates() const
@@ -140,7 +142,6 @@ QString TemplatesParser::pathsToTemplates() const
 
 void TemplatesParser::parseSystemTemplates()
 {
-	clear();
 	parseAllTemplatesFromDirectory(pathsToTemplates());
 	mSystemTemplates = std::move(mTemplates);
 	mTemplates.clear();
@@ -312,7 +313,7 @@ void TemplatesParser::substituteError(const QString& message,
 	QStringList messages = {message, QObject::tr("line %1").arg(line)};
 	const auto inTemplate = !context.mOrder.isEmpty();
 	if (!inTemplate) {
-		messages.append(QObject::tr("relative to the beginning of the WorldModel.xml"));
+		messages.append(QObject::tr("relative the beginning of the &lt;constraints&gt; tag"));
 	} else {
 		auto currentTemplateName = context.mOrder.last();
 		messages.append(QObject::tr("relative to the beginning of the %1 template body")

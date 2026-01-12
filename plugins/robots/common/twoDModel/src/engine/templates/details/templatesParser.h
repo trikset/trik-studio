@@ -17,14 +17,11 @@
 #include <QDomElement>
 #include <QSet>
 #include <unordered_map>
-#include <memory>
 #include "template.h"
 
 namespace twoDModel {
-namespace constraints {
+namespace templates {
 namespace details {
-
-class XmlTemplate;
 
 class TemplatesParser
 {
@@ -42,8 +39,11 @@ public:
 	/// but they must also be accessible to the user for viewing.
 	void parseSystemTemplates();
 
-	/// Parses templates provided by the user using the <templates> tag in WorldModel.xml
-	bool parseTemplates(const QDomElement &templatesXml);
+	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will
+	/// be examined, and each file will search for the top-level template or templates tag.
+	/// In the future, this function should be used to allow the user to specify a directory with
+	/// their own templates.
+	QDomDocument parseAllTemplatesFromDirectory(const QString &dirPath);
 
 	/// Accepts xml as input using templates (<use> tags) as xml nodes. The function modifies the input
 	/// xml element constraintsXml  by transforming the tree. Each <use> in this tree will be replaced by
@@ -64,6 +64,8 @@ public:
 
 	/// Clear all error messages
 	void clear();
+
+	QDomDocument parseTemplates(const QDomDocument &templatesDocument);
 protected:
 	using ParserErrorCode = XmlTemplate::TemplateParseErrorCode;
 	using SubstitutionErrorCode = XmlTemplate::TemplateSubstitutionErrorCode;
@@ -95,11 +97,6 @@ protected:
 				     const ExpansionContext &context,
 				     SubstitutionErrorCode code);
 private:
-	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will
-	/// be examined, and each file will search for the top-level template or templates tag.
-	/// In the future, this function should be used to allow the user to specify a directory with
-	/// their own templates.
-	void parseAllTemplatesFromDirectory(const QString &dirPath);
 
 	/// Parsing a separate template and checking the uniqueness of its name.
 	/// If a user overrides a library template, an error should be thrown.

@@ -15,7 +15,7 @@
 #pragma once
 
 #include <gtest/gtest.h>
-#include <src/engine/constraints/details/template.h>
+#include <src/engine/templates/details/template.h>
 
 namespace qrTest {
 
@@ -32,8 +32,8 @@ protected:
 	~XmlTemplateTestBase() override = default;
 };
 
-using TemplateParseErrorCode = twoDModel::constraints::details::XmlTemplate::TemplateParseErrorCode;
-using TemplateSubstitutionErrorCode = twoDModel::constraints::details::XmlTemplate::TemplateSubstitutionErrorCode;
+using TemplateParseErrorCode = twoDModel::templates::details::XmlTemplate::TemplateParseErrorCode;
+using TemplateSubstitutionErrorCode = twoDModel::templates::details::XmlTemplate::TemplateSubstitutionErrorCode;
 
 struct ErrorTestCase {
 	TemplateParseErrorCode expectedCode;

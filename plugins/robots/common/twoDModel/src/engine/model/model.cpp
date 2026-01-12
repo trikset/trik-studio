@@ -16,11 +16,13 @@
 #include "twoDModel/engine/model/metricCoordinateSystem.h"
 #include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include <qrkernel/settingsManager.h>
+#include <qrutils/xmlUtils.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/errorReporterInterface.h>
 #include <qrgui/plugins/toolPluginInterface/usedInterfaces/logicalModelAssistInterface.h>
 #include <kitBase/interpreterControlInterface.h>
 
 #include "src/engine/constraints/constraintsChecker.h"
+#include "src/engine/templates/templateParserApi.h"
 #include "src/robotModel/nullTwoDRobotModel.h"
 #include "src/engine/items/startPosition.h"
 #include "physics/physicsEngineFactory.h"
@@ -38,6 +40,7 @@ Model::Model(physics::PhysicsEngineFactory *engineFactory,
 	, mMetricCoordinateSystem(new MetricCoordinateSystem(mSettings->sizeUnit(), this))
 	, mWorldModel(mSettings.data(), mMetricCoordinateSystem.data())
 	, mChecker(nullptr)
+	, mTemplatesParserApi(nullptr)
 	, mErrorReporter(nullptr)
 	, mLogicalModel(nullptr)
 	, mEngineFactory(engineFactory)
@@ -64,6 +67,8 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 	mLogicalModel = &logicalModel;
 	mWorldModel.init(errorReporter);
 	connect(&timeline(), &Timeline::started, this, [&]() { mStartTimestamp = timeline().timestamp(); });
+	mTemplatesParserApi.reset(new templates::TemplatesParserApi(errorReporter));
+	mTemplatesParserApi->parseSystemTemplates();
 	mChecker.reset(new constraints::ConstraintsChecker(errorReporter, *this));
 	connect(mChecker.data(), &constraints::ConstraintsChecker::success, this, [&]() {
 		errorReporter.addInformation(tr("The task was accomplished in %1 sec!")
@@ -159,6 +164,16 @@ QDomDocument Model::serialize() const
 	return save;
 }
 
+QDomDocument Model::generateTemplates(const QString &path)
+{
+	return mTemplatesParserApi->generateTemplatesFromDirectory(path);
+}
+
+void Model::loadTemplates(const QDomDocument &templates)
+{
+	mTemplatesParserApi->parseTemplates(templates);
+}
+
 void Model::deserialize(const QDomDocument &model)
 {
 	auto &&root = model.documentElement();
@@ -182,24 +197,18 @@ void Model::deserialize(const QDomDocument &model)
 	const auto &settings = model.documentElement().firstChildElement("settings");
 	mSettings->deserialize(settings);
 
-	if (mChecker) {
+	if (mChecker && mTemplatesParserApi) {
 		/// @todo: should we handle if it returned false?
-		const auto &templates = model.documentElement().firstChildElement("templates");
-		// If something goes wrong with the template system at some point, the user can
-		// simply not use Constraint Parser directly.
-		if (templates.isNull()) {
-			const auto &constraints = model.documentElement().firstChildElement("constraints");
-			mChecker->parseConstraints(constraints, constraints);
-		}
-		if (mChecker->parseTemplates(templates)) {
-			const auto &constraints = model.documentElement().firstChildElement("constraints");
-			// We need to have two nodes. One for saving constraints
-			// (version before preprocessing)  and for parsing (after)
-			auto &&importedNode = constraints.cloneNode(true).toElement();
-			auto result = mChecker->proccessTemplates(constraints);
-			if (result) {
-				mChecker->parseConstraints(importedNode, constraints);
-			}
+		const auto &constraints = model.documentElement().firstChildElement("constraints");
+		// We need to have two nodes. One for saving constraints
+		// (version before preprocessing) and for parsing (after)
+		QDomDocument constraintsDocument;
+		const auto &constraintsString = utils::xmlUtils::getTagContent(constraints, true);
+		constraintsDocument.setContent(constraintsString);
+		const auto &importedNode = constraintsDocument.firstChildElement("constraints");
+		auto result = mTemplatesParserApi->proccessTemplates(importedNode);
+		if (result) {
+			mChecker->parseConstraints(constraints, importedNode);
 		}
 	}
 

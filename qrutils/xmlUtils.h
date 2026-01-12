@@ -28,6 +28,7 @@ public:
 	static QDomDocument loadDocumentWithConversion(const QString &fileName
 		, QString *errorMessage = nullptr, int *errorLine = nullptr, int *errorColumn = nullptr);
 	static QString ensureXmlFieldsOrder(const QString &xmlInput);
+	static QString getTagContent(const QDomElement& parentElement, bool withParent = false);
 };
 
 }
