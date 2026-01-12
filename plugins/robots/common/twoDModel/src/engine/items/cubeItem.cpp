@@ -100,24 +100,33 @@ void CubeItem::savePos()
 	RotateItem::savePos();
 }
 
+void CubeItem::setStartPosition(QPointF startPosition)
+{
+	mStartPosition = startPosition;
+}
+
+void CubeItem::setStartRotation(qreal startRotation)
+{
+	mStartRotation = startRotation;
+}
+
+qreal CubeItem::startRotation() const
+{
+	return mStartRotation;
+}
+
+QPointF CubeItem::startPosition() const
+{
+	return mStartPosition;
+}
+
 QDomElement CubeItem::serialize(QDomElement &element) const
 {
 	QDomElement cubeNode = AbstractItem::serialize(element);
-	const auto &coordSystem = coordinateSystem();
-	cubeNode.setTagName("cube");
-	cubeNode.setAttribute("x",
-			      QString::number(coordSystem->toUnit(scenePos().x())));
-	cubeNode.setAttribute("y",
-			      QString::number(coordSystem->toUnit(scenePos().y())));
-	cubeNode.setAttribute("markerX",
-			      QString::number(coordSystem->toUnit(mStartPosition.x())));
-	cubeNode.setAttribute("markerY",
-			      QString::number(coordSystem->toUnit(mStartPosition.y())));
-	cubeNode.setAttribute("rotation", QString::number(rotation()));
-	cubeNode.setAttribute("startRotation", QString::number(mStartRotation));
-
+	Serializer<CubeItem>::serialize(cubeNode);
 	SolidItem::serialize(cubeNode);
-
+	cubeNode.setTagName("cube");
+	auto &&coordSystem = coordinateSystem();
 	if (mEdgeSizePx.wasChanged()) {
 		cubeNode.setAttribute("edgeSize", QString::number(coordSystem->toUnit(mEdgeSizePx)));
 	}
@@ -128,22 +137,18 @@ QDomElement CubeItem::serialize(QDomElement &element) const
 void CubeItem::deserialize(const QDomElement &element)
 {
 	AbstractItem::deserialize(element);
-	const auto &coordSystem = coordinateSystem();
-	const auto x = coordSystem->toPx(element.attribute("x", "0").toDouble());
-	const auto y = coordSystem->toPx(element.attribute("y", "0").toDouble());
-	const auto markerX = coordSystem->toPx(element.attribute("markerX", "0").toDouble());
-	const auto markerY = coordSystem->toPx(element.attribute("markerY", "0").toDouble());
-	const auto rotation = element.attribute("rotation", "0").toDouble();
-	mStartRotation = element.attribute("startRotation", "0").toDouble();
-	setPos(QPointF(x, y));
-	setTransformOriginPoint(boundingRect().center());
-	setRotation(rotation);
+	SolidItem::deserialize(element);
+
+	auto *coordSystem = coordinateSystem();
 	if (element.hasAttribute("edgeSize")) {
 		setEdgeSize(coordSystem->toPx(
 				    element.attribute("edgeSize").toDouble()));
 	}
-	SolidItem::deserialize(element);
-	mStartPosition = {markerX, markerY};
+
+	Serializer<CubeItem>::deserialize(element);
+	// Update rotater position
+	RotateItem::init();
+	savePos();
 	Q_EMIT x1Changed(x1());
 }
 
@@ -195,10 +200,6 @@ void CubeItem::setEdgeSize(const qreal edge)
 	setY1(-mEdgeSizePx / 2.0f);
 	setX2(x1() + mEdgeSizePx);
 	setY2(y1() + mEdgeSizePx);
-	setTransformOriginPoint(boundingRect().center());
-	// Update rotater position
-	RotateItem::init();
-	savePos();
 }
 
 SolidItem::BodyType CubeItem::bodyType() const

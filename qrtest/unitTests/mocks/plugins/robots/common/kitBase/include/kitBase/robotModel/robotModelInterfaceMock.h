@@ -29,48 +29,35 @@ class RobotModelInterfaceMock : public kitBase::robotModel::RobotModelInterface
 	Q_OBJECT
 
 public:
-	MOCK_CONST_METHOD0(robotId, QString());
-	MOCK_CONST_METHOD0(name, QString());
-	MOCK_CONST_METHOD0(friendlyName, QString());
-	MOCK_CONST_METHOD0(kitId, QString());
-	MOCK_CONST_METHOD0(priority, int());
-	MOCK_CONST_METHOD0(interpretedModel, bool());
-
-	MOCK_METHOD0(init, void());
-
-	MOCK_METHOD0(connectToRobot, void());
-	MOCK_METHOD0(stopRobot, void());
-	MOCK_METHOD0(disconnectFromRobot, void());
-
-	MOCK_CONST_METHOD0(connectionState, ConnectionState());
-
-	MOCK_CONST_METHOD0(needsConnection, bool());
-
-	MOCK_CONST_METHOD0(updateSensorsValues, void());
-	MOCK_CONST_METHOD0(updateIntervalForInterpretation, int());
-
-
-	MOCK_CONST_METHOD0(configuration
-			, kitBase::robotModel::ConfigurationInterface const &());
-	MOCK_METHOD0(mutableConfiguration, kitBase::robotModel::ConfigurationInterface&());
-
-	MOCK_CONST_METHOD0(availablePorts, QList< kitBase::robotModel::PortInfo>());
-	MOCK_CONST_METHOD1(getPortsBy, QList<kitBase::robotModel::PortInfo>(const QString &name));
-	MOCK_CONST_METHOD0(buttonCodes, StringIntHash());
-	MOCK_CONST_METHOD0(configurablePorts, QList< kitBase::robotModel::PortInfo>());
-	MOCK_CONST_METHOD1(allowedDevices, QList< kitBase::robotModel::DeviceInfo>(
-			kitBase::robotModel::PortInfo const &port));
-
-	MOCK_METHOD2(configureDevice, void( kitBase::robotModel::PortInfo const & port
-			, kitBase::robotModel::DeviceInfo const &deviceInfo));
-
-	MOCK_METHOD0(applyConfiguration, void());
-
-	MOCK_CONST_METHOD0(convertibleBases, QList< kitBase::robotModel::DeviceInfo>());
-
-	MOCK_METHOD0(timeline, utils::TimelineInterface &());
-
-	MOCK_METHOD0(onInterpretationStarted, void());
+	// clazy:excludeall=function-args-by-value,returning-void-expression
+	MOCK_METHOD(QString, robotId, (), (const, override));
+	MOCK_METHOD(QString, name, (), (const, override));
+	MOCK_METHOD(QString, friendlyName, (), (const, override));
+	MOCK_METHOD(QString, kitId, (), (const, override));
+	MOCK_METHOD(int, priority, (), (const, override));
+	MOCK_METHOD(bool, interpretedModel, (), (const, override));
+	MOCK_METHOD(void, init, (), (override));
+	MOCK_METHOD(void, connectToRobot, (), (override));
+	MOCK_METHOD(void, stopRobot, (), (override));
+	MOCK_METHOD(void, disconnectFromRobot, (), (override));
+	MOCK_METHOD(ConnectionState, connectionState, (), (const, override));
+	MOCK_METHOD(bool, needsConnection, (), (const, override));
+	MOCK_METHOD(void, updateSensorsValues, (), (const, override));
+	MOCK_METHOD(int, updateIntervalForInterpretation, (), (const, override));
+	MOCK_METHOD(kitBase::robotModel::ConfigurationInterface const &, configuration, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::PortInfo>, availablePorts, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::PortInfo>, getPortsBy, (const QString &), (const, override));
+	MOCK_METHOD(StringIntHash, buttonCodes, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::PortInfo>, configurablePorts, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::DeviceInfo>, allowedDevices,
+				(kitBase::robotModel::PortInfo const &), (const, override));
+	MOCK_METHOD(void, configureDevice, (kitBase::robotModel::PortInfo const &
+						, kitBase::robotModel::DeviceInfo const &), (override));
+	MOCK_METHOD(void, applyConfiguration, (), (override));
+	MOCK_METHOD(QList< kitBase::robotModel::DeviceInfo>, convertibleBases, (), (const, override));
+	MOCK_METHOD(utils::TimelineInterface &, timeline, (), (override));
+	MOCK_METHOD(void, onInterpretationStarted, (), (override));
+	// clazy:enable
 };
 
 }
