@@ -131,7 +131,7 @@ void RobotModel::playSound(int timeInMs)
 	mBeepTime = qMax(mBeepTime, timeInMs);
 }
 
-void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
+void RobotModel::setNewMotor(int speed, int degrees, const PortInfo &port, bool breakMode)
 {
 	mMotors[port]->speed = mathUtils::Math::truncateToInterval(-100, 100, speed);
 	mMotors[port]->degrees = degrees;

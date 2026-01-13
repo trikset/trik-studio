@@ -91,7 +91,7 @@ public:
 	void stopRobot();
 	void playSound(int timeInMs);
 
-	Q_INVOKABLE void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
+	Q_INVOKABLE void setNewMotor(int speed, int degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
 
 	SensorsConfiguration &configuration();
 
