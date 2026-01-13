@@ -640,10 +640,10 @@ void RobotModel::deserializeWheels(const QDomElement &robotElement)
 	}
 	const auto &leftPortInfo = PortInfo::fromString(wheels.attribute("left"));
 	const auto &rightPortInfo = PortInfo::fromString(wheels.attribute("right"));
-	setMotorPortOnWheel(WheelEnum::left, leftPortInfo);
-	setMotorPortOnWheel(WheelEnum::right, rightPortInfo);
 	mAliasConfiguration->addAliases(leftPortInfo);
 	mAliasConfiguration->addAliases(rightPortInfo);
+	setMotorPortOnWheel(WheelEnum::left, leftPortInfo);
+	setMotorPortOnWheel(WheelEnum::right, rightPortInfo);
 }
 
 twoDModel::items::StartPosition *RobotModel::startPositionMarker()
