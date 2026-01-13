@@ -329,12 +329,12 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="117"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="118"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Lỗi khi phân tích cú pháp các ràng buộc: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="327"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="350"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Chương trình đã kết thúc, nhưng nhiệm vụ chưa hoàn thành.</translation>
     </message>

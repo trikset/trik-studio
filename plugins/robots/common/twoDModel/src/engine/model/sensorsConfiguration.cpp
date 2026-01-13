@@ -18,6 +18,7 @@
 #include <qrutils/mathUtils/geometry.h>
 
 #include "twoDModel/engine/model/sensorsConfiguration.h"
+#include "twoDModel/engine/model/aliasConfiguration.h"
 #include "kitBase/robotModel/robotParts/lidarSensor.h"
 #include "twoDModel/engine/model/metricCoordinateSystem.h"
 
@@ -25,8 +26,11 @@ using namespace twoDModel::model;
 using namespace kitBase::robotModel;
 
 SensorsConfiguration::SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
+			QSharedPointer<twoDModel::model::AliasConfiguration> aliasConfiguration,
+			// NOLINTNEXTLINE(modernize-pass-by-value)
 			const QString &robotModelName, QSizeF robotSize, QObject *parent)
 	: QObject(parent)
+	, mAliasConfiguration(std::move(aliasConfiguration))
 	, mRobotSize(robotSize)
 	, mRobotId(robotModelName)
 	, mMetricSystem(metricSystem)
@@ -51,10 +55,13 @@ void SensorsConfiguration::onDeviceConfigurationChanged(const QString &robotId
 		return;
 	}
 
+	const auto &portWithAlias = mAliasConfiguration->createFromPort(port);
+	const auto sensrorInfo = mSensorsInfo[port];
+	mSensorsInfo.remove(port);
+	mSensorsInfo[portWithAlias] = sensrorInfo;
 	// If there was no sensor before then placing it right in front of the robot;
 	// else putting it instead of old one.
-	mSensorsInfo[port] = mSensorsInfo[port].isNull ? SensorInfo(defaultPosition(device), 0) : mSensorsInfo[port];
-
+	mSensorsInfo[port] = sensrorInfo.isNull ? SensorInfo(defaultPosition(device), 0) : mSensorsInfo[port];
 	Q_EMIT deviceAdded(port, reason == Reason::loading);
 }
 
@@ -108,10 +115,10 @@ void SensorsConfiguration::serialize(QDomElement &robot) const
 	robot.appendChild(sensorsElem);
 
 	for (auto it = mSensorsInfo.begin(); it != mSensorsInfo.end(); ++it) {
-		const auto port = it.key();
-		const auto sensor = it.value();
-		const DeviceInfo device = currentConfiguration(mRobotId, port);
-		QDomElement sensorElem = robot.ownerDocument().createElement("sensor");
+		auto &port = it.key();
+		auto &sensor = it.value();
+		const auto device = currentConfiguration(mRobotId, port);
+		auto sensorElem = robot.ownerDocument().createElement("sensor");
 		sensorsElem.appendChild(sensorElem);
 		sensorElem.setAttribute("port", port.toString());
 		sensorElem.setAttribute("type", device.toString());
@@ -140,20 +147,19 @@ void SensorsConfiguration::deserialize(const QDomElement &element)
 		const QDomElement sensorNode = sensors.at(i).toElement();
 
 		const PortInfo port = PortInfo::fromString(sensorNode.attribute("port"));
-
+		mAliasConfiguration->addAliases(port);
 		const DeviceInfo &type = DeviceInfo::fromString(sensorNode.attribute("type"));
 
 		const QString positionStr = sensorNode.attribute("position", "0:0");
 		const QStringList splittedStr = positionStr.split(":");
-		const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
-		const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
+		const auto x = static_cast<qreal>(splittedStr[0].toDouble());
+		const auto y = static_cast<qreal>(splittedStr[1].toDouble());
 		auto position = QPointF{x, y};
 		if (mMetricSystem) {
 			position = mMetricSystem->toPx({x, y});
 		}
 
 		const qreal direction = sensorNode.attribute("direction", "0").toDouble();
-
 		deviceConfigurationChanged(mRobotId, port, DeviceInfo(), Reason::loading);
 		deviceConfigurationChanged(mRobotId, port, type, Reason::loading);
 		setPosition(port, position);
