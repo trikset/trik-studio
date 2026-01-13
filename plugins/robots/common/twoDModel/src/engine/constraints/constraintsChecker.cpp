@@ -22,6 +22,7 @@
 #include "details/constraintsParser.h"
 #include "details/event.h"
 #include "twoDModel/engine/model/model.h"
+#include "twoDModel/engine/model/aliasConfiguration.h"
 #include "src/engine/items/wallItem.h"
 #include "src/engine/items/skittleItem.h"
 #include "src/engine/items/ballItem.h"
@@ -244,14 +245,20 @@ void ConstraintsChecker::bindRobotObject(twoDModel::model::RobotModel * const ro
 			, this, [=](const kitBase::robotModel::PortInfo &port, bool isLoading)
 	{
 		Q_UNUSED(isLoading)
-		mObjects.remove(portName(robotId, robot, port));
+		for (auto &&name: portNames(robotId, robot, port)) {
+			mObjects.remove(name);
+		}
 	});
 }
 
 void ConstraintsChecker::bindDeviceObject(const QString &robotId
 		, model::RobotModel * const robot, const kitBase::robotModel::PortInfo &port)
 {
-	mObjects[portName(robotId, robot, port)] = robot->info().configuration().device(port);
+	const auto &device = robot->info().configuration().device(port);
+	const auto &names = portNames(robotId, robot, port);
+	for (auto &&name: names) {
+		mObjects[name] = device;
+	}
 }
 
 QString ConstraintsChecker::firstUnusedRobotId() const
@@ -262,6 +269,22 @@ QString ConstraintsChecker::firstUnusedRobotId() const
 	}
 
 	return "robot" + QString::number(id);
+}
+
+QStringList ConstraintsChecker::portNames(const QString &robotId
+		, model::RobotModel * const robot
+		, const kitBase::robotModel::PortInfo &port) const
+{
+	QStringList result;
+	const auto &mainPort = portName(robotId, robot, port);
+	result.append(mainPort);
+
+	auto aliasConfiguration = robot->aliasConfiguration();
+	const auto &userAliases = aliasConfiguration->getAliases(port);
+	for (auto &&userAlias: userAliases) {
+		result.append(QString("%1.%2").arg(robotId, userAlias));
+	}
+	return result;
 }
 
 QString ConstraintsChecker::portName(const QString &robotId

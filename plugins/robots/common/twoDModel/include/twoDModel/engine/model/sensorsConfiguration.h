@@ -20,12 +20,14 @@
 #include <QtXml/QDomDocument>
 #include <QPointer>
 #include <kitBase/devicesConfigurationProvider.h>
+#include "twoDModel/robotModel/twoDRobotModel.h"
 
 #include "twoDModel/twoDModelDeclSpec.h"
 
 namespace twoDModel {
 namespace model {
 
+class AliasConfiguration;
 class MetricCoordinateSystem;
 
 /// Represents position and direction of simulated sensors relative to robot.
@@ -35,6 +37,7 @@ class TWO_D_MODEL_EXPORT SensorsConfiguration : public QObject, public kitBase::
 
 public:
 	SensorsConfiguration(twoDModel::model::MetricCoordinateSystem *metricSystem,
+			     QSharedPointer<twoDModel::model::AliasConfiguration> aliasConfiguration,
 			     const QString &robotModelName, QSizeF robotSize, QObject *parent = nullptr);
 
 	void setPosition(const kitBase::robotModel::PortInfo &port, QPointF position);
@@ -81,7 +84,7 @@ private:
 			, Reason reason) override;
 
 	QPointF defaultPosition(const kitBase::robotModel::DeviceInfo &device) const;
-
+	QSharedPointer<twoDModel::model::AliasConfiguration> mAliasConfiguration;
 	QSizeF mRobotSize;
 	QString mRobotId;
 	QHash<kitBase::robotModel::PortInfo, SensorInfo> mSensorsInfo;

@@ -42,6 +42,7 @@ HEADERS += \
 	$$PWD/include/twoDModel/engine/model/timeline.h \
 	$$PWD/include/twoDModel/engine/model/robotModel.h \
 	$$PWD/include/twoDModel/engine/model/sensorsConfiguration.h \
+	$$PWD/include/twoDModel/engine/model/aliasConfiguration.h \
 	$$PWD/include/twoDModel/engine/model/settings.h \
 	$$PWD/include/twoDModel/engine/model/image.h \
 	$$PWD/include/twoDModel/engine/model/twoDModelRobotParameters.h \
@@ -168,6 +169,7 @@ SOURCES += \
 	$$PWD/src/engine/model/robotModel.cpp \
 	$$PWD/src/engine/model/modelTimer.cpp \
 	$$PWD/src/engine/model/sensorsConfiguration.cpp \
+	$$PWD/src/engine/model/aliasConfiguration.cpp \
 	$$PWD/src/engine/model/worldModel.cpp \
 	$$PWD/src/engine/model/timeline.cpp \
 	$$PWD/src/engine/model/image.cpp \
