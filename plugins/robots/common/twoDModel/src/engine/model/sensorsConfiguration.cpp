@@ -21,8 +21,6 @@
 #include "twoDModel/engine/model/aliasConfiguration.h"
 #include "kitBase/robotModel/robotParts/lidarSensor.h"
 #include "twoDModel/engine/model/metricCoordinateSystem.h"
-#include <QDebug>
-#include <utility>
 
 using namespace twoDModel::model;
 using namespace kitBase::robotModel;
