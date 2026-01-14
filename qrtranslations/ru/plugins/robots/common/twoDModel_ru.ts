@@ -733,7 +733,7 @@
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
     <message>
-        <location line="+210"/>
+        <location line="+232"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Программа отработала, но задание не выполнено.</translation>
     </message>

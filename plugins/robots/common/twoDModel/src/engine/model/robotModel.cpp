@@ -13,7 +13,6 @@
  * limitations under the License. */
 
 #include "twoDModel/engine/model/robotModel.h"
-
 #include <qmath.h>
 #include <QtCore/QtMath>
 #include <QtGui/QTransform>
@@ -28,7 +27,7 @@
 #include "twoDModel/engine/model/metricCoordinateSystem.h"
 #include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "physics/physicsEngineBase.h"
-
+#include "twoDModel/engine/model/aliasConfiguration.h"
 #include "src/engine/items/startPosition.h"
 
 using namespace twoDModel::model;
@@ -45,8 +44,11 @@ RobotModel::RobotModel(robotModel::TwoDRobotModel &robotModel
 	, mSettings(settings)
 	, mRobotModel(robotModel)
 	, mRobotModelParameters(new TwoDRobotModelParameters(mRobotModel, this))
+	, mAliasConfiguration(new twoDModel::model::AliasConfiguration(mRobotModel))
 	, mSensorsConfiguration(new twoDModel::model::SensorsConfiguration(metricSystem,
-					robotModel.robotId(), parameters()->size(), this))
+					mAliasConfiguration,
+					robotModel.robotId(),
+					parameters()->size(), this))
 	, mMarker(Qt::transparent)
 	, mPosStamps(positionStampsCount)
 	, mStartPositionMarker(
@@ -67,7 +69,7 @@ void RobotModel::reinitMotors()
 	for (auto &&device : mRobotModel.configuration().devices()) {
 		if (device->deviceInfo().isA<robotParts::Motor>()) {
 			const auto wheelDiameter = mRobotModelParameters->wheelDiameter();
-			initMotor(wheelDiameter / 2, 0, 0, device->port(), false);
+			initMotor(static_cast<int>(wheelDiameter / 2), 0, 0, device->port(), false);
 		}
 	}
 }
@@ -93,7 +95,7 @@ void RobotModel::returnToStartMarker()
 	setPosition(mStartPositionMarker->pos() - mRobotModelParameters->robotCenter());
 }
 
-RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, uint64_t degrees, const PortInfo &port, bool isUsed)
+RobotModel::Wheel *RobotModel::initMotor(int radius, int speed, int degrees, const PortInfo &port, bool isUsed)
 {
 	auto *motor = new Wheel();
 	motor->radius = radius;
@@ -129,7 +131,7 @@ void RobotModel::playSound(int timeInMs)
 	mBeepTime = qMax(mBeepTime, timeInMs);
 }
 
-void RobotModel::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
+void RobotModel::setNewMotor(int speed, int degrees, const PortInfo &port, bool breakMode)
 {
 	mMotors[port]->speed = mathUtils::Math::truncateToInterval(-100, 100, speed);
 	mMotors[port]->degrees = degrees;
@@ -161,12 +163,17 @@ void RobotModel::countMotorTurnover()
 
 int RobotModel::readEncoder(const PortInfo &port) const
 {
-	return mTurnoverEngines[port];
+	return static_cast<int>(mTurnoverEngines[port]);
 }
 
 void RobotModel::resetEncoder(const PortInfo &port)
 {
 	mTurnoverEngines[port] = 0;
+}
+
+QSharedPointer<AliasConfiguration> RobotModel::aliasConfiguration()
+{
+	return mAliasConfiguration;
 }
 
 SensorsConfiguration &RobotModel::configuration()
@@ -267,7 +274,7 @@ QPainterPath RobotModel::sensorBoundingPath(const PortInfo &port) const
 {
 	if (mSensorsConfiguration->type(port).isNull() || !mSensorsConfiguration->type(port).simulated())
 	{
-		return QPainterPath();
+		return {};
 	}
 	const QPointF sensorPos = mSensorsConfiguration->position(port);
 	QPainterPath tempSensorPath;
@@ -306,13 +313,13 @@ QRectF RobotModel::sensorRect(const PortInfo &port, const QPointF sensorPos) con
 		const QSizeF size = mRobotModel.sensorImageRect(mSensorsConfiguration->type(port)).size();
 		// We don't need part with radiating waves from range sensor in bounding rect of sensor
 		if (device.isA<robotParts::RangeSensor>()) {
-			return QRectF(sensorPos.x() - size.width()/2, sensorPos.y() - size.height()/2
-					, size.width()/2, size.height());
+			return {sensorPos.x() - size.width()/2, sensorPos.y() - size.height()/2
+					, size.width()/2, size.height()};
 		}
-		return QRectF(sensorPos - QPointF(size.width() / 2, size.height() / 2), size);
+		return {sensorPos - QPointF(size.width() / 2, size.height() / 2), size};
 	}
 
-	return QRectF();
+	return {};
 }
 
 QColor RobotModel::markerColor() const
@@ -440,7 +447,8 @@ bool RobotModel::onTheGround() const
 void RobotModel::serialize(QDomElement &parent) const
 {
 	QDomElement curRobot = parent.ownerDocument().createElement("robot");
-	curRobot.setAttribute("id", mRobotModel.robotId());	
+	curRobot.setAttribute("id", mRobotModel.robotId());
+	mAliasConfiguration->serialize(curRobot);
 	mSensorsConfiguration->serialize(curRobot);
 	serializeWheels(curRobot);
 
@@ -516,8 +524,8 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 
 	const QString positionStr = robotElement.attribute("position", "0:0");
 	const QStringList splittedStr = positionStr.split(":");
-	const qreal x = static_cast<qreal>(splittedStr[0].toDouble());
-	const qreal y = static_cast<qreal>(splittedStr[1].toDouble());
+	const auto x = static_cast<qreal>(splittedStr[0].toDouble());
+	const auto y = static_cast<qreal>(splittedStr[1].toDouble());
 	onRobotReturnedOnGround();
 	setPosition(mMetricSystem->toPx({x, y}));
 	setRotation(robotElement.attribute("direction", "0").toDouble());
@@ -569,6 +577,7 @@ void RobotModel::deserializeWorldModel(const QDomElement &world)
 
 void RobotModel::deserialize(const QDomElement &robotElement)
 {
+	mAliasConfiguration->deserialize(robotElement);
 	deserializeWheels(robotElement);
 	configuration().deserialize(robotElement);
 	nextFragment();
@@ -586,6 +595,7 @@ void RobotModel::onRobotReturnedOnGround()
 
 bool RobotModel::isRiding() const
 {
+	// NOLINTNEXTLINE(readability-use-anyofallof)
 	for (auto &&engine : mMotors) {
 		if (engine && engine->isUsed && engine->speed != 0) return true;
 	}
@@ -594,8 +604,10 @@ bool RobotModel::isRiding() const
 
 void RobotModel::setMotorPortOnWheel(WheelEnum wheel, const kitBase::robotModel::PortInfo &port)
 {
-	if (mWheelsToMotorPortsMap[wheel] != port) {
-		mWheelsToMotorPortsMap[wheel] = port;
+	const auto equals = mWheelsToMotorPortsMap[wheel] == port;
+	// Store information with an alias for further serialization
+	mWheelsToMotorPortsMap[wheel] = mAliasConfiguration->createFromPort(port);
+	if (!equals) {
 		Q_EMIT wheelOnPortChanged(wheel, port);
 	}
 }
@@ -608,7 +620,8 @@ kitBase::robotModel::PortInfo RobotModel::getPortInfoOnWheel(WheelEnum wheel) co
 int RobotModel::varySpeed(const int speed) const
 {
 	const qreal ran = mathUtils::Math::gaussianNoise(varySpeedDispersion);
-	return mathUtils::Math::truncateToInterval(-100, 100, round(speed * (1 + ran)));
+	return mathUtils::Math::truncateToInterval(-100, 100,
+						   static_cast<int>(round(speed * (1 + ran))));
 }
 
 void RobotModel::serializeWheels(QDomElement &robotElement) const
@@ -625,9 +638,12 @@ void RobotModel::deserializeWheels(const QDomElement &robotElement)
 	if (wheels.isNull()) {
 		return;
 	}
-
-	setMotorPortOnWheel(WheelEnum::left, PortInfo::fromString(wheels.attribute("left")));
-	setMotorPortOnWheel(WheelEnum::right, PortInfo::fromString(wheels.attribute("right")));
+	const auto &leftPortInfo = PortInfo::fromString(wheels.attribute("left"));
+	const auto &rightPortInfo = PortInfo::fromString(wheels.attribute("right"));
+	mAliasConfiguration->addAliases(leftPortInfo);
+	mAliasConfiguration->addAliases(rightPortInfo);
+	setMotorPortOnWheel(WheelEnum::left, leftPortInfo);
+	setMotorPortOnWheel(WheelEnum::right, rightPortInfo);
 }
 
 twoDModel::items::StartPosition *RobotModel::startPositionMarker()

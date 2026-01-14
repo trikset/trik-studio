@@ -28,6 +28,7 @@ class ErrorReporterInterface;
 namespace kitBase {
 namespace robotModel {
 class PortInfo;
+class DeviceInfo;
 }
 }
 
@@ -119,7 +120,9 @@ private:
 	QString portName(const QString &robotId
 			, model::RobotModel * const robot
 			, const kitBase::robotModel::PortInfo &port) const;
-
+	QStringList portNames(const QString &robotId
+			, model::RobotModel * const robot
+			, const kitBase::robotModel::PortInfo &port) const;
 	void programStarted();
 	void programFinished(qReal::interpretation::StopReason reason);
 	void prepareVariables();

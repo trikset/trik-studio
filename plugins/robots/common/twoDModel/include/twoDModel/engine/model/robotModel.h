@@ -22,7 +22,6 @@
 
 #include "twoDModel/robotModel/twoDRobotModel.h"
 #include "sensorsConfiguration.h"
-
 #include "twoDModel/twoDModelDeclSpec.h"
 
 class QGraphicsItem;
@@ -37,6 +36,7 @@ namespace model {
 class TwoDRobotModelParameters;
 class MetricCoordinateSystem;
 class Settings;
+class AliasConfiguration;
 namespace physics {
 class PhysicsEngineBase;
 }
@@ -81,7 +81,7 @@ public:
 		   , twoDModel::model::MetricCoordinateSystem *metricSystem
 	           , QObject *parent = nullptr);
 
-	~RobotModel();
+	~RobotModel() override;
 
 	void reinit();
 	void reinitMotors();
@@ -91,9 +91,11 @@ public:
 	void stopRobot();
 	void playSound(int timeInMs);
 
-	Q_INVOKABLE void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
+	Q_INVOKABLE void setNewMotor(int speed, int degrees, const kitBase::robotModel::PortInfo &port, bool breakMode);
 
 	SensorsConfiguration &configuration();
+
+	QSharedPointer<AliasConfiguration> aliasConfiguration();
 
 	/// Returns information about the robot`s left wheel state (its size, speed, encoder value, etc).
 	const Wheel &leftWheel() const;
@@ -199,7 +201,7 @@ Q_SIGNALS:
 private:
 	QVector2D robotDirectionVector() const;
 
-	Wheel *initMotor(int radius, int speed, uint64_t degrees, const kitBase::robotModel::PortInfo &port, bool isUsed);
+	Wheel *initMotor(int radius, int speed, int degrees, const kitBase::robotModel::PortInfo &port, bool isUsed);
 
 	void countNewForces();
 	void countBeep();
@@ -231,6 +233,7 @@ private:
 	twoDModel::robotModel::TwoDRobotModel &mRobotModel;
 	// Takes ownership
 	QPointer<TwoDRobotModelParameters> mRobotModelParameters;
+	QSharedPointer<AliasConfiguration> mAliasConfiguration;
 	// Takes ownership.
 	QPointer<SensorsConfiguration> mSensorsConfiguration;
 
