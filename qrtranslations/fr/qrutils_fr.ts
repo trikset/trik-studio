@@ -455,9 +455,8 @@
         <translation>Parcourir...</translation>
     </message>
     <message>
-        <location line="+35"/>
         <source>Select directory</source>
-        <translation>Sélectionner un répertoire</translation>
+        <translation type="vanished">Sélectionner un répertoire</translation>
     </message>
 </context>
 <context>

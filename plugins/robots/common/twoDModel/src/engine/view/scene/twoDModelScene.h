@@ -90,6 +90,7 @@ public:
 	/// Categories of items include world model (walls, lines, etc.), sensors, robot position.
 	void setInteractivityFlags(kitBase::ReadOnlyFlags flags);
 
+	bool worldReadOnly() const;
 public Q_SLOTS:
 	/// Sets a flag that next user mouse actions should draw a wall on the scene.
 	void addWall();

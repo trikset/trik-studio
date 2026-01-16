@@ -27,7 +27,7 @@ class ActionsBox : public QObject
 
 public:
 	explicit ActionsBox(QObject *parent = nullptr);
-	~ActionsBox();
+	~ActionsBox() override;
 
 	/// Returns a reference to action that switches scene to dragging mode (mouse interaction will move scene).
 	QAction &scrollHandModeAction() const;
@@ -41,6 +41,8 @@ public:
 
 	/// Returns a reference to action that prompts user to import current world model from some file.
 	QAction &loadModelAction() const;
+
+	QAction &loadTemplatesAction() const;
 
 	/// Returns a reference to action that prompts user to import current world model
 	/// from some file without robot configuration.
@@ -57,10 +59,10 @@ public:
 
 public Q_SLOTS:
 	/// Shows or hides all actions that can modify world model.
-	void setWorldModelActionsVisible(bool visible);
+	void setWorldModelActionsVisible(bool visible) const;
 
 	/// Sets or unsets shortcuts to saveModelAction() and loadModelAction().
-	void setSaveLoadActionsShortcutsEnabled(bool enabled);
+	void setSaveLoadActionsShortcutsEnabled(bool enabled) const;
 
 private:
 	QActionGroup mSceneModeActions;
@@ -71,6 +73,7 @@ private:
 
 	QScopedPointer<QAction> mSaveWorldModelAction;
 	QScopedPointer<QAction> mLoadWorldModelAction;
+	QScopedPointer<QAction> mLoadTemplatesAction;
 	QScopedPointer<QAction> mLoadWorldWithoutRobotAction;
 
 	QScopedPointer<QAction> mSeparator2;

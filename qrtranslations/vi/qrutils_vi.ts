@@ -421,9 +421,8 @@
         <translation>Duyệt...</translation>
     </message>
     <message>
-        <location filename="../../qrutils/widgets/dirPicker.cpp" line="68"/>
         <source>Select directory</source>
-        <translation>Chọn thư mục</translation>
+        <translation type="vanished">Chọn thư mục</translation>
     </message>
 </context>
 <context>

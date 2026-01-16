@@ -148,6 +148,11 @@ void TwoDModelScene::setController(ControllerInterface &controller)
 	mController = &controller;
 }
 
+bool TwoDModelScene::worldReadOnly() const
+{
+	return mWorldReadOnly;
+}
+
 void TwoDModelScene::setInteractivityFlags(kitBase::ReadOnlyFlags flags)
 {
 	mWorldReadOnly = (flags & kitBase::ReadOnly::World) != 0;

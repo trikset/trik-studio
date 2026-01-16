@@ -30,12 +30,13 @@
 #include "src/engine/items/colorFieldItem.h"
 #include "src/engine/items/regions/regionItem.h"
 
-
 using namespace twoDModel::constraints;
 Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
 
-ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model)
-	: mErrorReporter(errorReporter)
+ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter,
+				       model::Model &model, QObject* parent)
+	: QObject(parent)
+	, mErrorReporter(errorReporter)
 	, mModel(model)
 	, mParser(new details::ConstraintsParser(mEvents, mVariables, mObjects, mModel.timeline(), mStatus))
 {
@@ -70,18 +71,22 @@ bool ConstraintsChecker::hasConstraints() const
 	return !mCurrentXml.isNull() && mParsedSuccessfully;
 }
 
-bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXml)
+bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
+					  const QDomElement &constraintsXmlAfterTemplateSubstitution)
 {
 	mEvents.clear();
 	mActiveEvents.clear();
 	mVariables.clear();
 	mCurrentConstraintDocument.clear();
-	mParsedSuccessfully = mParser->parse(constraintsXml);
+	mParsedSuccessfully = mParser->parse(constraintsXmlAfterTemplateSubstitution);
 
 	if (mParsedSuccessfully) {
-		auto importNode = mCurrentConstraintDocument.importNode(constraintsXml, true);
+		auto importNode = mCurrentConstraintDocument.
+				importNode(constraintsXmlBeforeTemplateSubstitution, true);
 		mCurrentXml = importNode.toElement();
-		mCurrentConstraintDocument.appendChild(mCurrentXml);
+		if (!mCurrentXml.isNull()) {
+			mCurrentConstraintDocument.appendChild(mCurrentXml);
+		}
 	}
 
 	for (auto &&error : mParser->errors()) {

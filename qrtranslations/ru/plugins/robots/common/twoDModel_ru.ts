@@ -415,6 +415,117 @@
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+167"/>
+        <source>Recursive template expansion detected: %1 -&gt; %2</source>
+        <translation>Обнаружено рекурсивное раскрытие шаблонов: %1 -&gt; %2</translation>
+    </message>
+    <message>
+        <location line="-116"/>
+        <source>Redefinition a template %1 that already exists</source>
+        <translation>Переопределение шаблона %1, который уже существует</translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
+        <translation>&amp;lt;use&amp;gt; тег должен содержать атрибут &quot;template&quot;</translation>
+    </message>
+    <message>
+        <location line="-120"/>
+        <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation>&amp;lt;template&amp;gt; тег был предоставлен, но не был предоставлен требуемый атрибут &quot;name&quot;</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
+        <translation>&amp;lt;templates&amp;gt; тег может содержать только &amp;lt;template&amp;gt; как дочерний тег, текущий %1</translation>
+    </message>
+    <message>
+        <location line="+93"/>
+        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <translation>&amp;lt;use&amp;gt; тег содержит template=%1 атрибут, который не является именем объявленного шаблона</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
+        <translation>После подстановки параметров для шаблона %1, он не стал валидным xml узлом</translation>
+    </message>
+    <message>
+        <location line="+103"/>
+        <location line="+14"/>
+        <source>line %1</source>
+        <translation>строка %1</translation>
+    </message>
+    <message>
+        <location line="-12"/>
+        <source>template %1</source>
+        <translation>шаблон %1</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
+        <translation>относительно начала тега &amp;lt;constraints&amp;gt;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>relative to the beginning of the %1 template body</source>
+        <translation>относительно начала тела шаблона %1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Substitution chain: %1.</source>
+        <translation>Последовательность подстановки шаблонов: %1.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/template.cpp" line="+29"/>
+        <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
+        <translation>На данный момент подобный метод установки тега &amp;lt;content&amp;gt; для шаблона %1 не поддерживается.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
+        <translation>При определении шаблона %1, был использован специальный синтаксис %2 для подстановки параметра по смещению %3, для необъявленного параметра %4.</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
+        <translation>the &amp;lt;params&amp;gt; тег может содержать только &amp;lt;param&amp;gt; как дочерний тег для шаблона %1, текущий тег &amp;lt;%2&amp;gt;</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation>&amp;lt;param&amp;gt; тег шаблона %1 был предоставлен, но требуемый атрибут &quot;name&quot; не был указан.</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
+        <translation>&amp;lt;template&amp;gt; тег шаблона %1 был предоставлен, но требуемый дочерний тег &amp;lt;content&amp;gt; не был указан</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>The using an undeclared parameter %1 for template %2</source>
+        <translation>Использование необъявленного параметра %1 для шаблона %2</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
+        <translation>&amp;lt;use&amp;gt; тег может содержать только &amp;lt;with&amp;gt; как дочерний тег</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
+        <translation>Параметр %1 шаблона %2 не имеет значения по умолчанию и не был выставлен явно</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/templateParserApi.cpp" line="+85"/>
+        <source>Error while template substitution: %1</source>
+        <translation>Ошибка при раскрытии шаблона: %1</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Error while parsing template: %1</source>
+        <translation>Ошибка при разборе шаблона: %1</translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -609,7 +720,15 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <source>Error while template substitution: %1</source>
+        <translation type="vanished">Ошибка при раскрытии шаблона: %1</translation>
+    </message>
+    <message>
+        <source>Error while parsing template: %1</source>
+        <translation type="vanished">Ошибка при разборе шаблона: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
@@ -622,7 +741,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+207"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями, кубами и мячами</translation>
     </message>
@@ -722,7 +841,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+74"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
@@ -732,7 +851,7 @@
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+103"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Поле &quot;version&quot; тега &quot;root&quot; не должно быть пустым.</translation>
     </message>
@@ -742,7 +861,7 @@
         <translation>Модель мира имеет версию %1. Текущая версия %2. Пожалуйста, убедитесь, что модель мира ведет себя ожидаемым образом.</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+43"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>
@@ -899,7 +1018,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+26"/>
         <source>Hand dragging mode</source>
         <translation>Режим таскания сцены</translation>
     </message>
@@ -917,6 +1036,11 @@
         <location line="+1"/>
         <source>Load world model...</source>
         <translation>Загрузить модель мира...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load templates...</source>
+        <translation>Загрузить шаблоны...</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1155,7 +1279,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1188,7 +1312,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+373"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1206,7 +1330,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-218"/>
+        <location line="-220"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -1216,7 +1340,7 @@
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+297"/>
+        <location line="+300"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1233,17 +1357,21 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+14"/>
+        <location line="+25"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-25"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <source>Choose templates directory</source>
+        <translation type="vanished">Выберите каталог шаблонов</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>Loading world without robot model</source>
         <translation>Загрузка модели мира без модели робота</translation>
     </message>
@@ -1260,7 +1388,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+334"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

@@ -421,9 +421,8 @@
         <translation>Examinar...</translation>
     </message>
     <message>
-        <location filename="../../qrutils/widgets/dirPicker.cpp" line="68"/>
         <source>Select directory</source>
-        <translation>Seleccionar directorio</translation>
+        <translation type="vanished">Seleccionar directorio</translation>
     </message>
 </context>
 <context>

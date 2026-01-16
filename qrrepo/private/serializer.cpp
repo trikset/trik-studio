@@ -95,6 +95,22 @@ bool Serializer::saveToDisk(QList<Object *> const &objects, QHash<QString, QVari
 		doc.save(out(), 2);
 	}
 
+	QString templatesDirName = mWorkingDir + "/templates";
+	QDir templatesDir;
+	templatesDir.mkpath(templatesDirName);
+	const auto &metaInfoKeys = metaInfo.keys();
+
+	for (auto &&key: metaInfoKeys) {
+		if (key.startsWith("templates.")) {
+			const auto &templateName = key.mid(10);
+			const QString filePath = templatesDirName + "/" + templateName + ".xml";
+			qDebug() << "filePath" << filePath;
+			OutFile out(filePath);
+			out() << xmlUtils::ensureXmlFieldsOrder(
+					 ValuesSerializer::serializeQVariant(metaInfo[key]));
+		}
+	}
+
 	saveMetaInfo(metaInfo);
 
 	const QFileInfo fileInfo(mWorkingFile);
@@ -224,6 +240,20 @@ void Serializer::loadMetaInfo(QHash<QString, QVariant> &metaInfo) const
 			continue;
 		}
 		metaInfo[file] = InFile::readAll(path);
+	}
+
+	QString templatesDirName = mWorkingDir + "/templates";
+	QDir templateDir(templatesDirName);
+	if (templateDir.exists()) {
+		QStringList filters = {"*.xml"};
+		QStringList files = templateDir.entryList(filters, QDir::Files);
+		for (auto &&fileName : files) {
+			auto &&filePath = templateDir.filePath(fileName);
+			QFileInfo fileInfo(filePath);
+			auto &&baseName = fileInfo.baseName();
+			auto &&templateKey = QString("templates.%1").arg(baseName);
+			metaInfo[templateKey] = utils::InFile::readAll(filePath);
+		}
 	}
 }
 

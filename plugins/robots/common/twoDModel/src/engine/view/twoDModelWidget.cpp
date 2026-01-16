@@ -250,20 +250,22 @@ void TwoDModelWidget::initWidget()
 	mUi->editorModeButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_edit.svg"));
 	mUi->toggleDetailsButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_left.png"));
 
-	if (!SettingsManager::value("enableRegionEditorMode").toBool()) {
-		mUi->editorModeButton->hide();
-	}
-
 	qReal::SettingsListener::listen("enableRegionEditorMode", [this](bool enabled) {
-		if (enabled) {
-			mUi->editorModeButton->show();
+		if (mUi->editorModeButton->isChecked()) {
+			mUi->editorModeButton->toggle();
 		}
-		else {
-			if (mUi->editorModeButton->isChecked()) {
-				mUi->editorModeButton->toggle();
-			}
-			mUi->editorModeButton->hide();
-		};
+		const auto worldReadOnly = mScene->worldReadOnly();
+		mUi->editorModeButton->setVisible(enabled && !worldReadOnly);
+	}, this);
+
+	auto loadTemplatesVisibleLambda = [this](bool enabled) {
+		const auto worldReadOnly = mScene->worldReadOnly();
+		auto &loadTemplatesAction = mActions->loadTemplatesAction();
+		loadTemplatesAction.setVisible(!worldReadOnly && enabled);
+	};
+
+	qReal::SettingsListener::listen("twoDModelAdvancedResictions", [loadTemplatesVisibleLambda](bool enabled) {
+		loadTemplatesVisibleLambda(enabled);
 	}, this);
 
 	connect(mUi->editorModeButton, &QPushButton::toggled,  &*mScene, &TwoDModelScene::onEditorModeToggled);
@@ -382,6 +384,7 @@ void TwoDModelWidget::connectUiButtons()
 
 	connect(&mActions->saveModelAction(), &QAction::triggered, this, &TwoDModelWidget::saveWorldModel);
 	connect(&mActions->loadModelAction(), &QAction::triggered, this, &TwoDModelWidget::loadWorldModel);
+	connect(&mActions->loadTemplatesAction(), &QAction::triggered, this, &TwoDModelWidget::loadTemplates);
 	connect(&mActions->loadModelWithoutRobotAction(), &QAction::triggered
 			, this, &TwoDModelWidget::loadWorldModelWithoutRobot);
 
@@ -572,6 +575,17 @@ void TwoDModelWidget::loadWorldModel()
 	}
 }
 
+void TwoDModelWidget::loadTemplates()
+{
+	const auto &pathToUserTemplates = SettingsManager::value("pathToUserTemplates").toString();
+
+	if (pathToUserTemplates.isEmpty()) {
+		return;
+	}
+
+	saveTemplatesToRepo(mModel.generateTemplates(pathToUserTemplates));
+}
+
 void TwoDModelWidget::loadWorldModelWithoutRobot()
 {
 	const QString loadFileName = QRealFileDialog::getOpenFileName("Open2DModelWidget", this
@@ -735,6 +749,11 @@ void TwoDModelWidget::saveBlobsToRepo()
 	Q_EMIT mModel.blobsChanged(generateBlobsXml());
 }
 
+void TwoDModelWidget::saveTemplatesToRepo(const QHash<QString, QDomDocument> &templates)
+{
+	Q_EMIT mModel.templatesChanged(templates);
+}
+
 QDomDocument TwoDModelWidget::generateWorldModelXml() const
 {
 	return mModel.serialize();
@@ -757,7 +776,7 @@ QDomDocument TwoDModelWidget::generateWorldModelWithBlobsXml() const
 	return worldModelXml;
 }
 
-void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
+void TwoDModelWidget::loadModelXmls(const QDomDocument &model, bool withUndo)
 {
 	if (mController && !withUndo) {
 		// Clearing 2D model undo stack...
@@ -769,6 +788,11 @@ void TwoDModelWidget::loadXmls(const QDomDocument &model, bool withUndo)
 	mModel.deserialize(model);
 	updateWheelComboBoxes();
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
+}
+
+void TwoDModelWidget::loadTemplatesXmls()
+{
+	mModel.loadTemplates();
 }
 
 Model &TwoDModelWidget::model() const
@@ -805,6 +829,13 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 	mActions->setWorldModelActionsVisible(!worldReadOnly);
 	mColorFieldItemPopup->setEnabled(!worldReadOnly);
 	mImageItemPopup->setEnabled(!worldReadOnly);
+
+	if (mUi->editorModeButton->isChecked()) {
+		mUi->editorModeButton->toggle();
+	}
+	auto editorEnabled = !worldReadOnly
+			&& SettingsManager::value("enableRegionEditorMode").toBool();
+	mUi->editorModeButton->setVisible(editorEnabled);
 
 	const bool sensorsReadOnly = flags.testFlag(ReadOnly::Sensors);
 	mUi->detailsTab->setDevicesSectionsVisible(!sensorsReadOnly);

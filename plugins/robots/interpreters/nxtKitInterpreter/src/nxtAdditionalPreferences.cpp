@@ -23,6 +23,7 @@
 using namespace nxt;
 using namespace qReal;
 
+// NOLINTNEXTLINE(modernize-pass-by-value)
 NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName, QWidget *parent)
 	: AdditionalPreferences(parent)
 	, mUi(new Ui::NxtAdditionalPreferences)
@@ -31,7 +32,10 @@ NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName,
 	mUi->setupUi(this);
 	mUi->robotImagePicker->configure("nxtRobot2DImage", tr("2D robot image:"));
 	if (PlatformInfo::osType()  == "linux") {
-		mUi->compilerPicker->configure("pathToArmNoneEabi", tr("Path to arm-none-eabi:"));
+		mUi->compilerPicker->configure("pathToArmNoneEabi",
+					       tr("Path to arm-none-eabi:"),
+					       "pathToArmNoneEabiDirectoryChooser",
+					       "Choose arm-none-eabi directory:");
 		setTextOnGeneratorLabel();
 	}
 	else {
@@ -46,7 +50,7 @@ NxtAdditionalPreferences::~NxtAdditionalPreferences()
 	delete mUi;
 }
 
-void NxtAdditionalPreferences::setColorOnGeneratorLabel(QColor color){
+void NxtAdditionalPreferences::setColorOnGeneratorLabel(const QColor& color){
 	QPalette palette = mUi->generatorLabel->palette();
 	palette.setColor(mUi->generatorLabel->foregroundRole(), color);
 	mUi->generatorLabel->setPalette(palette);

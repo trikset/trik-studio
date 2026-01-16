@@ -108,7 +108,12 @@
         <translation>Activer le Mode Éditeur de Régions</translation>
     </message>
     <message>
-        <location line="-72"/>
+        <location line="+7"/>
+        <source>Advanced settings for creating restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-79"/>
         <source>Sensors Settings</source>
         <translation>Configuration des capteurs</translation>
     </message>
@@ -498,12 +503,22 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+78"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+54"/>
+        <source>Templates directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Choose templates directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+36"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Aucune extension n&apos;est chargée</translation>
     </message>
     <message>
-        <location line="+136"/>
+        <location line="+142"/>
         <source>No robot models available for </source>
         <translation>Modèle de robot n&apos;est pas défini dans l&apos;extension</translation>
     </message>

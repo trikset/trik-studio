@@ -55,6 +55,7 @@ pathToImages=./images/iconset1
 pathToHelp=./help
 pathToTranslations=./translations
 pathToEv3Tools=./ev3-tools
+pathToTemplates=./templates
 pathToLogs=@AppDataLocation@/logs/
 pathToEditorPlugins=./plugins/editors
 pathToToolPlugins=./plugins/tools
