@@ -246,5 +246,4 @@ SOURCES += \
 FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
 
-RESOURCES += \
-	$$PWD/src/engine/templates/details/xml-templates.qrc \
+copyToDestdir($$PWD/src/engine/templates/details/templates, now)

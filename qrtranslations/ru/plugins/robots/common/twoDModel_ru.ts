@@ -416,22 +416,22 @@
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+162"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+167"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation>Обнаружено рекурсивное раскрытие шаблонов: %1 -&gt; %2</translation>
     </message>
     <message>
-        <location line="-112"/>
+        <location line="-116"/>
         <source>Redefinition a template %1 that already exists</source>
         <translation>Переопределение шаблона %1, который уже существует</translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+110"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation>&amp;lt;use&amp;gt; тег должен содержать атрибут &quot;template&quot;</translation>
     </message>
     <message>
-        <location line="-116"/>
+        <location line="-120"/>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
         <translation>&amp;lt;template&amp;gt; тег был предоставлен, но не был предоставлен требуемый атрибут &quot;name&quot;</translation>
     </message>
@@ -441,7 +441,7 @@
         <translation>&amp;lt;templates&amp;gt; тег может содержать только &amp;lt;template&amp;gt; как дочерний тег, текущий %1</translation>
     </message>
     <message>
-        <location line="+89"/>
+        <location line="+93"/>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
         <translation>&amp;lt;use&amp;gt; тег содержит template=%1 атрибут, который не является именем объявленного шаблона</translation>
     </message>
@@ -741,7 +741,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+210"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+207"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями, кубами и мячами</translation>
     </message>
@@ -851,7 +851,7 @@
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+103"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Поле &quot;version&quot; тега &quot;root&quot; не должно быть пустым.</translation>
     </message>
@@ -1018,7 +1018,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+26"/>
         <source>Hand dragging mode</source>
         <translation>Режим таскания сцены</translation>
     </message>
@@ -1279,7 +1279,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1312,7 +1312,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+373"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1330,7 +1330,7 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-218"/>
+        <location line="-220"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -1340,7 +1340,7 @@
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+298"/>
+        <location line="+300"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1367,12 +1367,11 @@
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Choose templates directory</source>
-        <translation>Выберите каталог шаблонов</translation>
+        <translation type="vanished">Выберите каталог шаблонов</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+25"/>
         <source>Loading world without robot model</source>
         <translation>Загрузка модели мира без модели робота</translation>
     </message>
@@ -1389,7 +1388,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+327"/>
+        <location line="+334"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

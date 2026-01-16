@@ -56,12 +56,12 @@
         <translation>Image du robot en 2D :</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Path to arm-none-eabi:</source>
         <translation>Chemin vers arm-none-eabi :</translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+25"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
         <translation>AVERTISSEMENT : Le répertoire actuel n&apos;existe pas. 

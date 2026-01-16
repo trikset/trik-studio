@@ -210,22 +210,22 @@
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+162"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+167"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-112"/>
+        <location line="-116"/>
         <source>Redefinition a template %1 that already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+106"/>
+        <location line="+110"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-116"/>
+        <location line="-120"/>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -235,7 +235,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+89"/>
+        <location line="+93"/>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
         <translation type="unfinished"></translation>
     </message>
@@ -461,7 +461,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+210"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+207"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>La physique réaliste doit être activée pour interagir avec les quilles, les cubes et les balles</translation>
     </message>
@@ -567,7 +567,7 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+103"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Le champ &quot;version&quot; de la balise &quot;root&quot; ne doit pas être vide.</translation>
     </message>
@@ -734,7 +734,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+26"/>
         <source>Hand dragging mode</source>
         <translation>Le mode de glissement manuel</translation>
     </message>
@@ -928,7 +928,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -961,7 +961,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+373"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -979,7 +979,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-218"/>
+        <location line="-220"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
@@ -989,7 +989,7 @@
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+298"/>
+        <location line="+300"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
@@ -1016,17 +1016,12 @@
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+14"/>
-        <source>Choose templates directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+11"/>
+        <location line="+25"/>
         <source>Loading world without robot model</source>
         <translation>Chargement du monde sans modèle de robot</translation>
     </message>
     <message>
-        <location line="+327"/>
+        <location line="+334"/>
         <source>Hide details</source>
         <translation>Masquer les détails</translation>
     </message>

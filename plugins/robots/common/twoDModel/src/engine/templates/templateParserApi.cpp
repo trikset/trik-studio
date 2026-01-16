@@ -46,7 +46,7 @@ void TemplatesParserApi::parseTemplates(const QDomDocument &templatesXml)
 	reportTemplateParserErrors();
 }
 
-QDomDocument TemplatesParserApi::generateTemplatesFromDirectory(const QString &directory)
+QHash<QString, QDomDocument> TemplatesParserApi::generateTemplatesFromDirectory(const QString &directory)
 {
 	mTemplatesParser->clear();
 	auto &&result = mTemplatesParser->parseAllTemplatesFromDirectory(directory);

@@ -38,7 +38,7 @@ public:
 	explicit TemplatesParserApi(qReal::ErrorReporterInterface &errorReporter);
 	~TemplatesParserApi();
 
-	QDomDocument generateTemplatesFromDirectory(const QString &directory);
+	QHash<QString, QDomDocument> generateTemplatesFromDirectory(const QString &directory);
 	bool proccessTemplates(const QDomElement &constraintsXml);
 	void parseSystemTemplates();
 	void parseTemplates(const QDomDocument &templatesXml);

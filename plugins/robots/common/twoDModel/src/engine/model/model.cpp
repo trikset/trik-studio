@@ -164,14 +164,32 @@ QDomDocument Model::serialize() const
 	return save;
 }
 
-QDomDocument Model::generateTemplates(const QString &path)
+QHash<QString, QDomDocument> Model::generateTemplates(const QString &path)
 {
 	return mTemplatesParserApi->generateTemplatesFromDirectory(path);
 }
 
-void Model::loadTemplates(const QDomDocument &templates)
+void Model::loadTemplates()
 {
-	mTemplatesParserApi->parseTemplates(templates);
+	const auto &keys = mLogicalModel->logicalRepoApi().metaInformationKeys();
+	for (auto &&key: keys) {
+		if (!key.startsWith("templates.")) {
+			continue;
+		}
+		const QString templatesXml = mLogicalModel->logicalRepoApi()
+				.metaInformation(key).toString();
+		QDomDocument templates;
+		QString errorMessage;
+		int errorLine;
+		int errorColumn;
+		if (!templatesXml.isEmpty() &&
+			!templates.setContent(templatesXml, &errorMessage, &errorLine, &errorColumn)) {
+			mErrorReporter->addError(
+				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+			return;
+		}
+		mTemplatesParserApi->parseTemplates(templates);
+	}
 }
 
 void Model::deserialize(const QDomDocument &model)

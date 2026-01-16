@@ -84,7 +84,7 @@ public:
 
 	void loadModelXmls(const QDomDocument &model, bool withUndo = false);
 
-	void loadTemplatesXmls(const QDomDocument &templates);
+	void loadTemplatesXmls();
 
 	/// Returns a reference to a model part of 2D model MVC architecture.
 	model::Model &model() const;
@@ -149,7 +149,7 @@ protected:
 private Q_SLOTS:
 	void saveWorldModelToRepo();
 	void saveBlobsToRepo();
-	void saveTemplatesToRepo(const QDomDocument &templates);
+	void saveTemplatesToRepo(const QHash<QString, QDomDocument> &templates);
 
 	void saveWorldModel();
 	void loadWorldModel();

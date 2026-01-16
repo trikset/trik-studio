@@ -85,8 +85,8 @@ public:
 	QDomDocument serialize() const;
 	void deserialize(const QDomDocument &model);
 
-	QDomDocument generateTemplates(const QString &path);
-	void loadTemplates(const QDomDocument &templates);
+	QHash<QString, QDomDocument> generateTemplates(const QString &path);
+	void loadTemplates();
 
 	/// Add new robot model
 	/// @param robotModel Model to be added
@@ -114,7 +114,7 @@ Q_SIGNALS:
 	/// @param xml blobs description in xml format
 	void blobsChanged(const QDomDocument &xml);
 
-	void templatesChanged(const QDomDocument &xml);
+	void templatesChanged(const QHash<QString, QDomDocument> &xmls);
 
 	/// Emitted after new robot model added
 	/// @param robotModel Pointer to robot model which was removed

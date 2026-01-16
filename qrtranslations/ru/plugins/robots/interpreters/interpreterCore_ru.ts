@@ -44,7 +44,12 @@
         <translation>Включить режим редактирования регионов</translation>
     </message>
     <message>
-        <location line="-127"/>
+        <location line="+7"/>
+        <source>Advanced settings for creating restrictions</source>
+        <translation>Продвинутые настройки для создания ограничений</translation>
+    </message>
+    <message>
+        <location line="-134"/>
         <source>Robotics construction kit</source>
         <translation>Платформа</translation>
     </message>
@@ -385,12 +390,22 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+78"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+54"/>
+        <source>Templates directory:</source>
+        <translation>Директория с шаблонами:</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Choose templates directory</source>
+        <translation>Выбрать директорию с шаблонами</translation>
+    </message>
+    <message>
+        <location line="+36"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Не загружено ни одного плагина с описанием робоплатформы</translation>
     </message>
     <message>
-        <location line="+136"/>
+        <location line="+142"/>
         <source>No robot models available for </source>
         <translation>Ни одной модели робота не найдено в плагине </translation>
     </message>

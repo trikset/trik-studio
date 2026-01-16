@@ -31,7 +31,10 @@ NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName,
 	mUi->setupUi(this);
 	mUi->robotImagePicker->configure("nxtRobot2DImage", tr("2D robot image:"));
 	if (PlatformInfo::osType()  == "linux") {
-		mUi->compilerPicker->configure("pathToArmNoneEabi", tr("Path to arm-none-eabi:"));
+		mUi->compilerPicker->configure("pathToArmNoneEabi",
+					       tr("Path to arm-none-eabi:"),
+					       "pathToArmNoneEabiDirectoryChooser",
+					       "Choose arm-none-eabi directory:");
 		setTextOnGeneratorLabel();
 	}
 	else {

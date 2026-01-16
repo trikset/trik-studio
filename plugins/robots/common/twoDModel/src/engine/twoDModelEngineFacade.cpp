@@ -93,16 +93,7 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
 		}
 
-		const QString templatesXml = projectManager.somethingOpened()
-						? logicalModel.logicalRepoApi().metaInformation("templates").toString()
-						: QString();
-		QDomDocument templates;
-		if (!templatesXml.isEmpty() && !templates.setContent(templatesXml, &errorMessage, &errorLine, &errorColumn)) {
-			interpretersInterface.errorReporter()->addError(
-				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
-		}
-
-		mView->loadTemplatesXmls(templates);
+		mView->loadTemplatesXmls();
 		mView->loadModelXmls(worldModel);
 		mView->resetDrawAction();
 
@@ -171,8 +162,14 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		logicalModel.mutableLogicalRepoApi().setMetaInformation("blobs", xml.toString(4));
 	});
 
-	connect(mModel.data(), &model::Model::templatesChanged, this, [&logicalModel](const QDomDocument &xml) {
-		logicalModel.mutableLogicalRepoApi().setMetaInformation("templates", xml.toString(4));
+	connect(mModel.data(), &model::Model::templatesChanged, this, [&logicalModel]
+					(const QHash<QString, QDomDocument> &xmls) {
+		for (auto it = xmls.begin(), end = xmls.end(); it != end; ++it) {
+			const auto &name = it.key();
+			QString metaInfoKey = QString("templates.%1").arg(name);
+			logicalModel.mutableLogicalRepoApi()
+					.setMetaInformation(metaInfoKey, it.value().toString(4));
+		}
 	});
 
 	connect(&eventsForKitPlugin,

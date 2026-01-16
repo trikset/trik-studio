@@ -59,6 +59,11 @@
         <translation>Bật Chế độ Chỉnh sửa Khu vực</translation>
     </message>
     <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="271"/>
+        <source>Advanced settings for creating restrictions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.ui" line="192"/>
         <source>Sensors Settings</source>
         <translation>Cài đặt cảm biến</translation>
@@ -367,12 +372,22 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="78"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="54"/>
+        <source>Templates directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="56"/>
+        <source>Choose templates directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="92"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Không có plugin nền tảng robot nào được tải</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="214"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="234"/>
         <source>No robot models available for </source>
         <translation>Không có mô hình robot nào khả dụng cho </translation>
     </message>

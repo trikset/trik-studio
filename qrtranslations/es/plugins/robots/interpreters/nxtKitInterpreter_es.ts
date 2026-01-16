@@ -56,12 +56,12 @@
         <translation>Imagen 2D del robot:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="34"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="35"/>
         <source>Path to arm-none-eabi:</source>
         <translation>Ruta a arm-none-eabi:</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="57"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="60"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
         <translation>ADVERTENCIA: El directorio actual no existe. 

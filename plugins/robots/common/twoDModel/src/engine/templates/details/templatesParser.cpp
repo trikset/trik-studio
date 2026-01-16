@@ -15,6 +15,7 @@
 #include <stack>
 #include <QDir>
 #include <qrutils/inFile.h>
+#include <qrkernel/platformInfo.h>
 #include "templatesParser.h"
 #include "template.h"
 
@@ -96,18 +97,17 @@ QDomDocument TemplatesParser::parseTemplates(const QDomDocument &templatesDocume
 	return result;
 }
 
-QDomDocument TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
+QHash<QString, QDomDocument> TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirPath)
 {
 	QDir xmlTemplateDir(dirPath);
 	if (!xmlTemplateDir.exists()) {
 		auto &&errorString = QString("Template library does not exist at path %1").arg(xmlTemplateDir.path());
 		parseError(errorString, 0, ParserErrorCode::TemplateLibraryNotFound, {});
 	}
-
+	QHash<QString, QDomDocument> result;
 	QStringList filters = {"*.xml"};
 	QStringList files = xmlTemplateDir.entryList(filters, QDir::Files);
-	QDomDocument result;
-	QDomElement resultTemplates = result.createElement("templates");
+
 	for (auto &&fileName : files) {
 		auto &&filePath = xmlTemplateDir.filePath(fileName);
 
@@ -125,19 +125,24 @@ QDomDocument TemplatesParser::parseAllTemplatesFromDirectory(const QString &dirP
 			continue;
 		}
 
+		QDomDocument currentResult;
+		QDomElement resultTemplates = currentResult.createElement("templates");
+
 		const auto &parseResult = parseTemplates(templates).firstChildElement("templatesContainer");
 		for (auto xmlTemplate = parseResult.firstChildElement("template"); !xmlTemplate.isNull()
 				; xmlTemplate = xmlTemplate.nextSiblingElement("template")) {
 			resultTemplates.appendChild(xmlTemplate.cloneNode());
 		}
+		currentResult.appendChild(resultTemplates);
+		result[baseName] = currentResult;
 	}
-	result.appendChild(resultTemplates);
+
 	return result;
 }
 
 QString TemplatesParser::pathsToTemplates() const
 {
-	return { ":/" + mLibraryName + "/templates" };
+	return qReal::PlatformInfo::invariantSettingsPath("pathToTemplates");
 }
 
 void TemplatesParser::parseSystemTemplates()

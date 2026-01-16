@@ -31,8 +31,11 @@ class QRUTILS_EXPORT DirPicker : public QWidget
 public:
 	explicit DirPicker(QWidget *parent = nullptr);
 
-	/// Sets parameters of the image picker.
-	void configure(const QString &settingsKey, const QString &title);
+	/// Sets parameters of the directory picker.
+	void configure(const QString &settingsKey,
+		       const QString &title,
+		       const QString &dialogId,
+		       const QString &dialogTittle);
 
 	/// Saves picked location into settings.
 	void save() const;
@@ -48,6 +51,8 @@ private Q_SLOTS:
 	void pick();
 
 private:
+	QString mDialogId {};
+	QString mDialogTittle {};
 	QString mSettingsKey;
 	QLabel *mLabel;
 	QLineEdit *mPathEditor;

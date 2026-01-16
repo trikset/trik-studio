@@ -14,6 +14,7 @@
 
 #include "actionsBox.h"
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include <qrkernel/settingsManager.h>
 
 using namespace graphicsUtils;
 using namespace twoDModel::view;
@@ -106,10 +107,12 @@ QList<QAction *> ActionsBox::sceneContextMenuActions() const
 void ActionsBox::setWorldModelActionsVisible(bool visible) const
 {
 	saveModelAction().setVisible(visible);
-	loadTemplatesAction().setVisible(visible);
 	loadModelAction().setVisible(visible);
 	loadModelWithoutRobotAction().setVisible(visible);
 	deleteAllAction().setVisible(visible);
+	auto enable =
+		qReal::SettingsManager::value("twoDModelAdvancedResictions").toBool();
+	loadTemplatesAction().setVisible(visible && enable);
 	/// @todo: Do we need to hide clearFloorAction() here?
 }
 

@@ -250,20 +250,22 @@ void TwoDModelWidget::initWidget()
 	mUi->editorModeButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_edit.svg"));
 	mUi->toggleDetailsButton->setIcon(AbstractItem::loadTextColorIcon(":/icons/2d_left.png"));
 
-	if (!SettingsManager::value("enableRegionEditorMode").toBool()) {
-		mUi->editorModeButton->hide();
-	}
-
 	qReal::SettingsListener::listen("enableRegionEditorMode", [this](bool enabled) {
-		if (enabled) {
-			mUi->editorModeButton->show();
+		if (mUi->editorModeButton->isChecked()) {
+			mUi->editorModeButton->toggle();
 		}
-		else {
-			if (mUi->editorModeButton->isChecked()) {
-				mUi->editorModeButton->toggle();
-			}
-			mUi->editorModeButton->hide();
-		};
+		const auto worldReadOnly = mScene->worldReadOnly();
+		mUi->editorModeButton->setVisible(enabled && !worldReadOnly);
+	}, this);
+
+	auto loadTemplatesVisibleLambda = [this](bool enabled) {
+		const auto worldReadOnly = mScene->worldReadOnly();
+		auto &loadTemplatesAction = mActions->loadTemplatesAction();
+		loadTemplatesAction.setVisible(!worldReadOnly && enabled);
+	};
+
+	qReal::SettingsListener::listen("twoDModelAdvancedResictions", [loadTemplatesVisibleLambda](bool enabled) {
+		loadTemplatesVisibleLambda(enabled);
 	}, this);
 
 	connect(mUi->editorModeButton, &QPushButton::toggled,  &*mScene, &TwoDModelScene::onEditorModeToggled);
@@ -575,13 +577,13 @@ void TwoDModelWidget::loadWorldModel()
 
 void TwoDModelWidget::loadTemplates()
 {
-	const auto path = QRealFileDialog::getExistingDirectory("Open2DModelTemplates", this
-			, tr("Choose templates directory")).replace("\\", "/");
-	if (path.isEmpty()) {
+	const auto &pathToUserTemplates = SettingsManager::value("pathToUserTemplates").toString();
+
+	if (pathToUserTemplates.isEmpty()) {
 		return;
 	}
 
-	saveTemplatesToRepo(mModel.generateTemplates(path));
+	saveTemplatesToRepo(mModel.generateTemplates(pathToUserTemplates));
 }
 
 void TwoDModelWidget::loadWorldModelWithoutRobot()
@@ -747,7 +749,7 @@ void TwoDModelWidget::saveBlobsToRepo()
 	Q_EMIT mModel.blobsChanged(generateBlobsXml());
 }
 
-void TwoDModelWidget::saveTemplatesToRepo(const QDomDocument &templates)
+void TwoDModelWidget::saveTemplatesToRepo(const QHash<QString, QDomDocument> &templates)
 {
 	Q_EMIT mModel.templatesChanged(templates);
 }
@@ -788,9 +790,9 @@ void TwoDModelWidget::loadModelXmls(const QDomDocument &model, bool withUndo)
 	mUi->trainingModeButton->setVisible(mModel.hasConstraints());
 }
 
-void TwoDModelWidget::loadTemplatesXmls(const QDomDocument &templates)
+void TwoDModelWidget::loadTemplatesXmls()
 {
-	mModel.loadTemplates(templates);
+	mModel.loadTemplates();
 }
 
 Model &TwoDModelWidget::model() const
@@ -827,6 +829,13 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 	mActions->setWorldModelActionsVisible(!worldReadOnly);
 	mColorFieldItemPopup->setEnabled(!worldReadOnly);
 	mImageItemPopup->setEnabled(!worldReadOnly);
+
+	if (mUi->editorModeButton->isChecked()) {
+		mUi->editorModeButton->toggle();
+	}
+	auto editorEnabled = !worldReadOnly
+			&& SettingsManager::value("enableRegionEditorMode").toBool();
+	mUi->editorModeButton->setVisible(editorEnabled);
 
 	const bool sensorsReadOnly = flags.testFlag(ReadOnly::Sensors);
 	mUi->detailsTab->setDevicesSectionsVisible(!sensorsReadOnly);

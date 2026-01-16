@@ -31,9 +31,7 @@ public:
 	TemplatesParser(TemplatesParser&&) noexcept = default;
 	TemplatesParser& operator=(TemplatesParser&&) noexcept = default;
 	virtual ~TemplatesParser() = default;
-
-	/// The copy constructor and the move constructor of QString are marked as noexcept.
-	TemplatesParser() noexcept: mLibraryName("xml-templates") {}
+	TemplatesParser() noexcept = default;
 
 	/// System templates are also set via xml and embedded in the binary,
 	/// but they must also be accessible to the user for viewing.
@@ -43,7 +41,7 @@ public:
 	/// be examined, and each file will search for the top-level template or templates tag.
 	/// In the future, this function should be used to allow the user to specify a directory with
 	/// their own templates.
-	QDomDocument parseAllTemplatesFromDirectory(const QString &dirPath);
+	QHash<QString, QDomDocument> parseAllTemplatesFromDirectory(const QString &dirPath);
 
 	/// Accepts xml as input using templates (<use> tags) as xml nodes. The function modifies the input
 	/// xml element constraintsXml  by transforming the tree. Each <use> in this tree will be replaced by
@@ -108,7 +106,6 @@ private:
 	    ExpansionContext mContext;
 	};
 
-	QString mLibraryName;
 	std::unordered_map<QString, XmlTemplate> mTemplates;
 	std::unordered_map<QString, XmlTemplate> mSystemTemplates;
 	QStringList mParsingErrors;
