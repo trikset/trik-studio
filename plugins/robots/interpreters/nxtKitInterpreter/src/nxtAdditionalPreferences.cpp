@@ -23,7 +23,7 @@
 using namespace nxt;
 using namespace qReal;
 
-NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName, QWidget *parent)
+NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName, QWidget *parent)  // NOLINT(modernize-pass-by-value)
 	: AdditionalPreferences(parent)
 	, mUi(new Ui::NxtAdditionalPreferences)
 	, mBluetoothRobotName(realRobotName)
@@ -49,7 +49,7 @@ NxtAdditionalPreferences::~NxtAdditionalPreferences()
 	delete mUi;
 }
 
-void NxtAdditionalPreferences::setColorOnGeneratorLabel(QColor color){
+void NxtAdditionalPreferences::setColorOnGeneratorLabel(const QColor& color){
 	QPalette palette = mUi->generatorLabel->palette();
 	palette.setColor(mUi->generatorLabel->foregroundRole(), color);
 	mUi->generatorLabel->setPalette(palette);

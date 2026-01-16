@@ -42,7 +42,7 @@ private Q_SLOTS:
 
 private:
 	QString selectedPortName() const;
-	void setColorOnGeneratorLabel(QColor color);
+	void setColorOnGeneratorLabel(const QColor& color);
 	void setTextOnGeneratorLabel();
 	Ui::NxtAdditionalPreferences *mUi;
 	const QString mBluetoothRobotName;
