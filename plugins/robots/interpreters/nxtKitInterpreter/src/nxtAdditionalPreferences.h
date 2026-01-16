@@ -28,7 +28,7 @@ class NxtAdditionalPreferences : public kitBase::AdditionalPreferences
 
 public:
 	explicit NxtAdditionalPreferences(const QString &realRobotName, QWidget *parent = nullptr);
-	~NxtAdditionalPreferences();
+	~NxtAdditionalPreferences() override;
 
 	void save() override;
 	void restoreSettings() override;

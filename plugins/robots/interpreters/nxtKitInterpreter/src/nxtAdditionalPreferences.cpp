@@ -23,7 +23,8 @@
 using namespace nxt;
 using namespace qReal;
 
-NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName, QWidget *parent)  // NOLINT(modernize-pass-by-value)
+// NOLINTNEXTLINE(modernize-pass-by-value)
+NxtAdditionalPreferences::NxtAdditionalPreferences(const QString &realRobotName, QWidget *parent)
 	: AdditionalPreferences(parent)
 	, mUi(new Ui::NxtAdditionalPreferences)
 	, mBluetoothRobotName(realRobotName)

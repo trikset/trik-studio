@@ -70,7 +70,7 @@
 <context>
     <name>nxt::NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+32"/>
+        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation>Картинка робота в 2D:</translation>
     </message>
