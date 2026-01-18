@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
+#pragma once
 #include <QWidget>
 #include <QSharedPointer>
 #include "twoDModel/engine/model/metricSystem.h"
@@ -24,7 +25,8 @@ namespace view {
 
 /// A class that represents a set of QDoubleSpinBox's for different units of measurement,
 /// as they may require different sinlgeSterp, suffix, and other parameters.
-class GridSizeWidget : public QWidget {
+class GridSizeWidget : public QWidget
+{
 	Q_OBJECT
 public:
 	explicit GridSizeWidget(QWidget *parent = nullptr);
