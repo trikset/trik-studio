@@ -192,7 +192,7 @@ protected:
 
 	virtual void updateCursor(QGraphicsSceneHoverEvent *event);
 	void copyTo(AbstractItem * const other) const;
-	qreal alignedCoordinate(qreal coord, const int indexGrid) const;
+	qreal alignedCoordinate(qreal coord, const qreal gridSize) const;
 	void setXYWithDragState(const QPointF pos);
 
 private:

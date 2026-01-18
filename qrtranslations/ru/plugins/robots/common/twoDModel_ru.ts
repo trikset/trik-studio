@@ -415,6 +415,46 @@
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+116"/>
+        <source>cm</source>
+        <translation>см</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>mm</source>
+        <translation>мм</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>m</source>
+        <translation>м</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>px</source>
+        <translation>пикс</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pixels</source>
+        <translation>Пиксели</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Centimeters</source>
+        <translation>Сантиметры</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Meters</source>
+        <translation>Метры</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Millimeters</source>
+        <translation>Миллиметры</translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -446,7 +486,12 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+558"/>
+        <location line="+306"/>
+        <source>Grid size:</source>
+        <translation>Шаг сетки:</translation>
+    </message>
+    <message>
+        <location line="+230"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -484,7 +529,7 @@
         <translation>пикс</translation>
     </message>
     <message>
-        <location line="-577"/>
+        <location line="-555"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -499,12 +544,11 @@
         <translation>Единицы измерения</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>Pixels in cm:</source>
-        <translation>Кол-во пикселей в см</translation>
+        <translation type="vanished">Кол-во пикселей в см</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+36"/>
         <source>Realistic physics</source>
         <translation>Реалистичная физика</translation>
     </message>
@@ -750,44 +794,36 @@
 <context>
     <name>twoDModel::model::SizeUnit</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation type="vanished">мм</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>m</source>
-        <translation>м</translation>
+        <translation type="vanished">м</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>px</source>
-        <translation>пикс</translation>
+        <translation type="vanished">пикс</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Pixels</source>
-        <translation>Пиксели</translation>
+        <translation type="vanished">Пиксели</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Centimeters</source>
-        <translation>Сантиметры</translation>
+        <translation type="vanished">Сантиметры</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Meters</source>
-        <translation>Метры</translation>
+        <translation type="vanished">Метры</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Millimeters</source>
-        <translation>Миллиметры</translation>
+        <translation type="vanished">Миллиметры</translation>
     </message>
 </context>
 <context>
@@ -1056,7 +1092,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+34"/>
         <source>Grid</source>
         <translation>Сетка</translation>
     </message>
@@ -1188,7 +1224,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1206,17 +1242,16 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-218"/>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="-194"/>
         <source>kg</source>
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+297"/>
+        <location line="+303"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1260,7 +1295,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+318"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
@@ -1270,7 +1305,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+206"/>
+        <location line="+209"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

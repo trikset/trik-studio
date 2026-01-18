@@ -24,7 +24,7 @@ class QRUTILS_EXPORT GridDrawer
 {
 public:
 	GridDrawer();
-	void drawGrid(QPainter *painter, const QRectF &rect, const int indexGrid);
+	void drawGrid(QPainter *painter, const QRectF &rect, const qreal indexGrid);
 };
 
 }

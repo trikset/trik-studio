@@ -13,16 +13,15 @@
  * limitations under the License. */
 
 #include <QtXml/QDomElement>
-
-#include "twoDModel/engine/model/settings.h"
-
 #include <qrkernel/settingsManager.h>
+#include "twoDModel/engine/model/settings.h"
+#include "twoDModel/engine/model/metricSystem.h"
 
 using namespace twoDModel::model;
 
 Settings::Settings(QObject *parent)
 	: QObject(parent)
-	,  mSizeUnitSystem(new SizeUnit())
+	, mSizeUnitSystem(new SizeUnit())
 {}
 
 bool Settings::realisticPhysics() const
@@ -40,11 +39,6 @@ qreal Settings::pixelsInCm() const
 	return mSizeUnitSystem->pixelsInCm();
 }
 
-SizeUnit *Settings::sizeUnit()
-{
-	return mSizeUnitSystem.data();
-}
-
 bool Settings::realisticMotors() const
 {
 	return mRealisticMotors;
@@ -58,6 +52,9 @@ void Settings::serialize(QDomElement &parent) const
 	result.setAttribute("realisticSensors", mRealisticSensors ? "true" : "false");
 	result.setAttribute("realisticMotors", mRealisticMotors ? "true" : "false");
 	mSizeUnitSystem->serialize(result);
+	const auto currentGridSize = qReal::SettingsManager::value("2dDoubleGridCellSize")
+						.toReal() / mSizeUnitSystem->countFactor();
+	result.setAttribute("gridCellSize", QString::number(currentGridSize));
 }
 
 void Settings::deserialize(const QDomElement &parent)
@@ -67,6 +64,20 @@ void Settings::deserialize(const QDomElement &parent)
 	mRealisticMotors = parent.attribute("realisticMotors") == "true";
 	mSizeUnitSystem->deserialize(parent);
 	Q_EMIT physicsChanged(mRealisticPhysics);
+	Q_EMIT sizeUnitChanged(mSizeUnitSystem);
+	if (parent.hasAttribute("gridCellSize")) {
+		const auto gridSize = parent.attribute("gridCellSize").toDouble();
+		// TODO: Synchronize with GridParamters.h
+		constexpr auto minimalSize = 10;
+		constexpr auto maximumSize = 150;
+		if (mSizeUnitSystem->toPx(gridSize) >= minimalSize
+				&& mSizeUnitSystem->toPx(gridSize) <= maximumSize) {
+			Q_EMIT gridSizeChanged(gridSize);
+			return;
+		}
+	}
+	const auto gridSize = qReal::SettingsManager::value("2dDefaultGridCellSize", "50").toReal();
+	Q_EMIT gridSizeChanged(gridSize);
 }
 
 void Settings::setRealisticPhysics(bool set)
@@ -85,7 +96,7 @@ void Settings::setRealisticMotors(bool set)
 	mRealisticMotors = set;
 }
 
-SizeUnit *Settings::sizeUnit() const
+QSharedPointer<SizeUnit> Settings::sizeUnit() const
 {
-	return mSizeUnitSystem.data();
+	return mSizeUnitSystem;
 }

@@ -14,6 +14,7 @@
 
 #include "abstractItem.h"
 
+#include <cmath>
 #include <QtCore/QUuid>
 #include <QtGui/QPainter>
 #include <QtWidgets/QMenu>
@@ -686,16 +687,7 @@ void AbstractItem::copyTo(AbstractItem * const other) const
 			, QOverload<const QBrush &>::of(&AbstractItem::setBrush));
 }
 
-qreal AbstractItem::alignedCoordinate(qreal coord, const int indexGrid) const
+qreal AbstractItem::alignedCoordinate(qreal coord, const qreal gridSize) const
 {
-	const int coef = static_cast<int>(coord) / indexGrid;
-	const int coefSign = coef ? coef / qAbs(coef) : 0;
-
-	if (qAbs(qAbs(coord) - qAbs(coef) * indexGrid) <= indexGrid / 2.0) {
-		return coef * indexGrid;
-	} else if (qAbs(qAbs(coord) - (qAbs(coef) + 1) * indexGrid) <= indexGrid / 2.0) {
-		return (coef + coefSign) * indexGrid;
-	}
-
-	return coord;
+	return std::round(coord / gridSize) * gridSize;
 }

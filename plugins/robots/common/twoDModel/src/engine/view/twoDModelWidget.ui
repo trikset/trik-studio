@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>988</width>
-    <height>669</height>
+    <height>687</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -434,36 +434,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="pixelsInCmLabel">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
+                <widget class="QLabel" name="gridSizeLabel">
                  <property name="text">
-                  <string>Pixels in cm:</string>
+                  <string>Grid size:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="pixelsInCmDoubleSpinBox">
-                 <property name="enabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="readOnly">
-                  <bool>true</bool>
-                 </property>
-                 <property name="decimals">
-                  <number>4</number>
-                 </property>
-                 <property name="maximum">
-                  <double>1000.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>1.000000000000000</double>
-                 </property>
-                </widget>
+                <widget class="twoDModel::view::GridSizeWidget" name="gridSizeWidget" native="true"/>
                </item>
               </layout>
              </widget>
@@ -1005,6 +983,12 @@
    <class>twoDModel::view::RobotInfoSpinBox</class>
    <extends>QDoubleSpinBox</extends>
    <header>src/engine/view/parts/robotInfoSpinBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>twoDModel::view::GridSizeWidget</class>
+   <extends>QWidget</extends>
+   <header>src/engine/view/parts/gridSizeWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

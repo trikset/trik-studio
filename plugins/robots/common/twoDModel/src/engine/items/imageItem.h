@@ -33,7 +33,7 @@ class ImageItem : public graphicsUtils::AbstractItem
 
 public:
 	ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		  const QSharedPointer<model::Image> &image, QRect geometry);
+		  const QSharedPointer<model::Image> &image, const QRectF &geometry);
 
 	AbstractItem *clone() const;
 
@@ -45,7 +45,7 @@ public:
 
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;
-	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void drawExtractionForItem(QPainter* painter) override;
 	QPainterPath resizeArea() const override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;

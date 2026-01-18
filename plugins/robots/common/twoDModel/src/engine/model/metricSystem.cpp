@@ -13,42 +13,46 @@
  * limitations under the License. */
 
 #include <QtXml/QDomElement>
-
 #include "twoDModel/engine/model/metricSystem.h"
 
 using namespace twoDModel::model;
 
 namespace {
-	/// Translation of a string representation into a unit
-	static SizeUnit::Unit stringToUnit(const QString &unit) {
-		if (unit.isEmpty()) {
-			return SizeUnit::Unit::Pixels;
-		}
-		if (unit == "cm") {
-			return SizeUnit::Unit::Centimeters;
-		}
-		if (unit == "mm") {
-			return SizeUnit::Unit::Millimeters;
-		}
-		if (unit == "m") {
-			return SizeUnit::Unit::Meters;
-		}
+/// Translation of a string representation into a unit
+SizeUnit::Unit stringToUnit(const QString &unit) {
+	if (unit.isEmpty()) {
 		return SizeUnit::Unit::Pixels;
 	}
-
-	/// Translation of a unit into a string representation
-	static QString unitToString(SizeUnit::Unit unit) {
-		if (unit == SizeUnit::Unit::Centimeters) {
-			return "cm";
-		}
-		if (unit == SizeUnit::Unit::Millimeters) {
-			return "mm";
-		}
-		if (unit == SizeUnit::Unit::Meters) {
-			return "m";
-		}
-		return {};
+	if (unit == "cm") {
+		return SizeUnit::Unit::Centimeters;
 	}
+	if (unit == "mm") {
+		return SizeUnit::Unit::Millimeters;
+	}
+	if (unit == "m") {
+		return SizeUnit::Unit::Meters;
+	}
+	return SizeUnit::Unit::Pixels;
+}
+
+/// Translation of a unit into a string representation
+QString unitToString(SizeUnit::Unit unit) {
+	if (unit == SizeUnit::Unit::Centimeters) {
+		return "cm";
+	}
+	if (unit == SizeUnit::Unit::Millimeters) {
+		return "mm";
+	}
+	if (unit == SizeUnit::Unit::Meters) {
+		return "m";
+	}
+	return {};
+}
+}
+
+SizeUnit::Unit SizeUnit::unit() const
+{
+	return mSizeUnit;
 }
 
 qreal SizeUnit::pixelsInCm() const
@@ -67,14 +71,13 @@ void SizeUnit::serialize(QDomElement &parent) const
 void SizeUnit::deserialize(const QDomElement &parent)
 {
 	if (!parent.isNull()) {
-		setUnit(stringToUnit(parent.attribute("sizeUnit", "")));
+		setSizeUnit(stringToUnit(parent.attribute("sizeUnit", "")));
 	} else {
-		setUnit(defaultUnit());
+		setSizeUnit(defaultUnit());
 	}
-	Q_EMIT sizeUnitChanged(mSizeUnit);
 }
 
-void SizeUnit::setUnit(twoDModel::model::SizeUnit::Unit unit)
+void SizeUnit::setSizeUnit(twoDModel::model::SizeUnit::Unit unit)
 {
 	mSizeUnit = unit;
 }
@@ -110,27 +113,28 @@ qreal SizeUnit::toPx(const qreal size) const
 QString SizeUnit::toStr() const
 {
 	if (mSizeUnit == SizeUnit::Unit::Centimeters) {
-		return tr("cm");
+		return QObject::tr("cm");
 	}
 	if (mSizeUnit == SizeUnit::Unit::Millimeters) {
-		return tr("mm");
+		return QObject::tr("mm");
 	}
 	if (mSizeUnit == SizeUnit::Unit::Meters) {
-		return tr("m");
+		return QObject::tr("m");
 	}
-	return tr("px");
+	return QObject::tr("px");
 }
 
-std::map<QString, SizeUnit::Unit> SizeUnit::currentValues() const
+std::map<QString, SizeUnit::Unit> SizeUnit::currentValues()
 {
 	return {
-		{tr("Pixels"), Unit::Pixels }
-		, {tr("Centimeters"), Unit::Centimeters}
-		, {tr("Meters"), Unit::Meters}
-		, {tr("Millimeters"), Unit::Millimeters}
+		{QObject::tr("Pixels"), Unit::Pixels }
+		, {QObject::tr("Centimeters"), Unit::Centimeters}
+		, {QObject::tr("Meters"), Unit::Meters}
+		, {QObject::tr("Millimeters"), Unit::Millimeters}
 	};
 }
 
-SizeUnit::Unit SizeUnit::defaultUnit() const {
+SizeUnit::Unit SizeUnit::defaultUnit()
+{
 	return Unit::Pixels;
 }

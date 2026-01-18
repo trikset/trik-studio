@@ -17,10 +17,6 @@
 
 namespace twoDModel {
 
-namespace model {
-class SizeUnit;
-}
-
 namespace items {
 
 class ColorFieldItem: public view::TwoDSceneItem

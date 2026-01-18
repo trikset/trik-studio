@@ -19,6 +19,9 @@
 class QGraphicsView;
 
 namespace twoDModel {
+namespace model {
+class SizeUnit;
+}
 namespace view {
 
 /// A widget for displaying distances on grid in centimeters.
@@ -30,7 +33,7 @@ class Ruler : public QFrame
 
 public:
 	explicit Ruler(QWidget *parent = nullptr);
-	~Ruler();
+	~Ruler() override;
 
 	/// Returns the orientation of this ruler.
 	Qt::Orientation orientation() const;
@@ -39,24 +42,22 @@ public Q_SLOTS:
 	/// Returns the orientation of this ruler.
 	void setOrientation(Qt::Orientation orientation);
 
-	/// Reconfigures ruller to calculate distances in other metrics. The distance between grid lines in pixels
-	/// stays the same, but values in centimeters modified
-	void setMetricFactor(const qreal factor);
+	void onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);
 
 	/// Configures this ruller to work with the given graphics view.
 	void setScene(QGraphicsView *scene);
-
 private:
 	void paintEvent(QPaintEvent *event) override;
 
 	qreal relevantCoordinate(QPointF point) const;
+	qreal countFactor() const;
 	qreal relevantDimension(QSizeF size) const;
 	qreal irrelevantDimension(QSizeF size) const;
 	QPointF makePoint(qreal relevantCoordinate, qreal irrelevantCoordinate) const;
 	QPointF drawingPoint(qreal relevantCoordinate, QSizeF textSize) const;
 	QRectF textBoundingRect(const QString &text) const;
 	Qt::Orientation mOrientation;
-	qreal mMetricFactor;
+	QSharedPointer<twoDModel::model::SizeUnit> mSizeUnit;
 	QGraphicsView *mView {};  // Doesn`t take owership
 	QFont mFont;
 };

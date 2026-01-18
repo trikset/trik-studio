@@ -13,30 +13,30 @@
  * limitations under the License. */
 
 #include <QtCore/QLineF>
-
+#include <cmath>
 #include "gridDrawer.h"
 
 using namespace graphicsUtils;
 
-GridDrawer::GridDrawer()
+GridDrawer::GridDrawer() = default;
+
+void GridDrawer::drawGrid(QPainter *painter, const QRectF &rect, const qreal gridSize)
 {
-}
+	const auto firstVerticalLineIndex = static_cast<int>(std::floor(rect.left() / gridSize));
+	const auto lastVerticalLineIndex = static_cast<int>(std::ceil(rect.right() / gridSize));
 
-void GridDrawer::drawGrid(QPainter *painter, const QRectF &rect, const int indexGrid)
-{
-	const int left = static_cast<int>(rect.left());
-	const int right = static_cast<int>(rect.right());
-	const int top = static_cast<int>(rect.top());
-	const int bottom = static_cast<int>(rect.bottom());
-
-	const int startX = left / indexGrid * indexGrid;
-	const int startY = top / indexGrid * indexGrid;
-
-	for (int i = startX; i <= right; i += indexGrid) {
-		painter->drawLine(i, top, i, bottom);
+	for (auto i = firstVerticalLineIndex; i <= lastVerticalLineIndex; ++i) {
+		const auto currentVerticalLineX = i * gridSize;
+		painter->drawLine(QPointF(currentVerticalLineX, rect.top()),
+					QPointF(currentVerticalLineX, rect.bottom()));
 	}
 
-	for (int i = startY; i <= bottom; i += indexGrid) {
-		painter->drawLine(left, i, right, i);
+	const auto firstHorizontalLineIndex = static_cast<int>(std::floor(rect.top() / gridSize));
+	const auto lastHorizontalLineIndex = static_cast<int>(std::floor(rect.bottom() / gridSize));
+
+	for (auto i = firstHorizontalLineIndex; i <= lastHorizontalLineIndex; ++i) {
+		const auto currentHorizontalLineY = i * gridSize;
+		painter->drawLine(QPointF(rect.left(), currentHorizontalLineY),
+			QPointF(rect.right(), currentHorizontalLineY));
 	}
 }

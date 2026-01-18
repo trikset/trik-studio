@@ -19,20 +19,18 @@
 using namespace twoDModel::model;
 
 MetricCoordinateSystem::MetricCoordinateSystem(
-		twoDModel::model::SizeUnit *metricSystem,
+		const QSharedPointer<twoDModel::model::SizeUnit> &metricSystem,
 		QObject* parent)
 	: graphicsUtils::AbstractCoordinateSystem(parent)
 	,  mMetricSystem(metricSystem)
 {
 }
 
-MetricCoordinateSystem::~MetricCoordinateSystem()
-{
-}
+MetricCoordinateSystem::~MetricCoordinateSystem() = default;
 
 qreal MetricCoordinateSystem::toPx(const qreal size) const
 {
-	if (mMetricSystem.isNull()) {
+	if (!mMetricSystem) {
 		return size;
 	}
 
@@ -41,7 +39,7 @@ qreal MetricCoordinateSystem::toPx(const qreal size) const
 
 qreal MetricCoordinateSystem::toUnit(const qreal size) const
 {
-	if (mMetricSystem.isNull()) {
+	if (!mMetricSystem) {
 		return size;
 	}
 
