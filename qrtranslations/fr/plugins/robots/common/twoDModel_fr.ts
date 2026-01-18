@@ -209,6 +209,46 @@
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+116"/>
+        <source>cm</source>
+        <translation>cm</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>mm</source>
+        <translation>mm</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>m</source>
+        <translation>m</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>px</source>
+        <translation>px</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pixels</source>
+        <translation>Pixels</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Centimeters</source>
+        <translation>Centimètres</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Meters</source>
+        <translation>Mètres</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Millimeters</source>
+        <translation>Millimètres</translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -236,7 +276,12 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+558"/>
+        <location line="+306"/>
+        <source>Grid size:</source>
+        <translation>Taille de la grille:</translation>
+    </message>
+    <message>
+        <location line="+230"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -274,7 +319,7 @@
         <translation>px</translation>
     </message>
     <message>
-        <location line="-577"/>
+        <location line="-555"/>
         <source>Left wheel:</source>
         <translation>Roue gauche :</translation>
     </message>
@@ -289,12 +334,11 @@
         <translation>Unités du système métrique :</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>Pixels in cm:</source>
-        <translation>Nombre de pixels par cm :</translation>
+        <translation type="vanished">Nombre de pixels par cm :</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+36"/>
         <source>Realistic physics</source>
         <translation>Physique réaliste</translation>
     </message>
@@ -474,44 +518,36 @@
 <context>
     <name>twoDModel::model::SizeUnit</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
         <source>cm</source>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>mm</source>
-        <translation>mm</translation>
+        <translation type="vanished">mm</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>m</source>
-        <translation>m</translation>
+        <translation type="vanished">m</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>px</source>
-        <translation>px</translation>
+        <translation type="vanished">px</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Pixels</source>
-        <translation>Pixels</translation>
+        <translation type="vanished">Pixels</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Centimeters</source>
-        <translation>Centimètres</translation>
+        <translation type="vanished">Centimètres</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Meters</source>
-        <translation>Mètres</translation>
+        <translation type="vanished">Mètres</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Millimeters</source>
-        <translation>Millimètres</translation>
+        <translation type="vanished">Millimètres</translation>
     </message>
 </context>
 <context>
@@ -717,7 +753,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+34"/>
         <source>Grid</source>
         <translation>Grille</translation>
     </message>
@@ -845,7 +881,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -863,17 +899,16 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-218"/>
         <source>cm</source>
-        <translation>cm</translation>
+        <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="-194"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+297"/>
+        <location line="+303"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
@@ -905,7 +940,7 @@
         <translation>Chargement du monde sans modèle de robot</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+318"/>
         <source>Hide details</source>
         <translation>Masquer les détails</translation>
     </message>
@@ -915,7 +950,7 @@
         <translation>Afficher les détails</translation>
     </message>
     <message>
-        <location line="+206"/>
+        <location line="+209"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

@@ -13,38 +13,36 @@
  * limitations under the License. */
 
 #include "ruler.h"
-
 #include <QtGui/QPainter>
 #include <QtWidgets/QGraphicsView>
 #include <QtCore/QtMath>
 
 #include <qrkernel/settingsManager.h>
+#include "twoDModel/engine/model/metricSystem.h"
 
 using namespace twoDModel::view;
 
 const qreal gap = 5;  // The gap between the ruler borders and text on it.
-const int frequency = 150;  // The text on the ruler will not be met more often than once per this number of pixels.
+const int frequency = 50;  // The text on the ruler will not be met more often than once per this number of pixels.
 
 Ruler::Ruler(QWidget *parent)
 	: QFrame(parent)
 	, mOrientation(Qt::Horizontal)
-	, mMetricFactor(1.0)
+	, mSizeUnit(nullptr)
 {
 	mFont.setPixelSize(8);
 }
 
-Ruler::~Ruler()
-{
-}
+Ruler::~Ruler() = default;
 
 Qt::Orientation Ruler::orientation() const
 {
 	return mOrientation;
 }
 
-void Ruler::setMetricFactor(const qreal factor)
+void Ruler::onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit)
 {
-	mMetricFactor = factor;
+	mSizeUnit = unit;
 }
 
 void Ruler::setOrientation(Qt::Orientation orientation)
@@ -65,31 +63,51 @@ void Ruler::paintEvent(QPaintEvent *event)
 	QFrame::paintEvent(event);
 	QPainter painter(this);
 	painter.setFont(mFont);
-	const int gridSize = qReal::SettingsManager::value("2dGridCellSize").toInt();
-	const int shift = qMax(frequency / gridSize, 1);
-	const QRectF sceneRect = mView->mapToScene(mView->viewport()->geometry()).boundingRect();
-	const int firstCell = qCeil(relevantCoordinate(sceneRect.topLeft())) / gridSize;
-	// This will let us always draw 0 near zero line for more persistent coordinates scrolling.
-	// Without making first cell being multiple of shift the first marker will be always upon the first
-	// line and that looks horrible when user scrolls the scene.
-	const int realFirstCell = firstCell / shift * shift * gridSize;
-	for (int coordinate = realFirstCell
-			; coordinate < relevantCoordinate(sceneRect.bottomRight())
-			; coordinate += shift * gridSize)
-	{
-		const QString text = QString::number(coordinate / mMetricFactor);
-		const QRectF boundingRect = textBoundingRect(text);
-		const qreal relevantPosition = relevantCoordinate(mView->mapFromScene(makePoint(coordinate, 0)));
-		const QPointF position = drawingPoint(relevantPosition, boundingRect.size());
-		const QPointF alignment = makePoint(relevantDimension(boundingRect.size()) / 2, 0);
 
-		painter.drawText(position - boundingRect.topLeft() - alignment, text);
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	const auto currentCountFactor = countFactor();
+	const auto sceneRect = mView->mapToScene(mView->viewport()->geometry()).boundingRect();
+	const auto startPos = relevantCoordinate(sceneRect.topLeft());
+	const auto endPos = relevantCoordinate(sceneRect.bottomRight());
+
+	const auto zoom = mView->transform().m11();
+	const auto skipCells = qMax(1, qCeil((frequency / zoom) / gridSize));
+	const auto effectiveStep = skipCells * gridSize;
+	const auto startIdx = static_cast<int>(std::floor(startPos / effectiveStep));
+	const auto endIdx = static_cast<int>(std::ceil(endPos / effectiveStep));
+
+	for (int i = startIdx; i <= endIdx; ++i) {
+		const qreal coordinate = i * effectiveStep;
+		QString text = QString::number(coordinate / currentCountFactor, 'f', 3);
+		if (text.contains('.')) {
+			while (text.endsWith('0')) {
+				text.chop(1);
+			}
+			if (text.endsWith('.')) {
+				text.chop(1);
+			}
+		}
+		const auto &boundingRect = textBoundingRect(text);
+		const auto relevantPosition = relevantCoordinate(mView->mapFromScene(makePoint(coordinate, 0)));
+		const auto position = drawingPoint(relevantPosition, boundingRect.size());
+		const auto alignment = makePoint(relevantDimension(boundingRect.size()) / 2, 0);
+		if (relevantPosition >= 0 && relevantPosition <= relevantDimension(this->size())) {
+			painter.drawText(position - boundingRect.topLeft() - alignment, text);
+		}
 	}
 }
 
 qreal Ruler::relevantCoordinate(QPointF point) const
 {
 	return orientation() == Qt::Horizontal ? point.x() : point.y();
+}
+
+qreal Ruler::countFactor() const
+{
+	if (mSizeUnit) {
+		return mSizeUnit->countFactor();
+	}
+	return 1.0f;
 }
 
 qreal Ruler::relevantDimension(QSizeF size) const

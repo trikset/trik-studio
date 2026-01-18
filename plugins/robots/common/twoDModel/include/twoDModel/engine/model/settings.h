@@ -15,13 +15,15 @@
 #pragma once
 
 #include <QtCore/QObject>
-#include "metricSystem.h"
+#include <QSharedPointer>
 #include "twoDModel/twoDModelDeclSpec.h"
 
 class QDomElement;
 
 namespace twoDModel {
 namespace model {
+
+class SizeUnit;
 
 /// Incapsulates settings used by 2D model.
 class TWO_D_MODEL_EXPORT Settings : public QObject
@@ -36,10 +38,6 @@ public:
 
 	/// Returns true is user wants to add some noise to sensors values.
 	bool realisticSensors() const;
-
-	/// To simplify the already overloaded WorldModel xml,
-	/// it was decided to use a tag in the existing <settings> tag
-	SizeUnit *sizeUnit();
 
 	qreal pixelsInCm() const;
 
@@ -56,17 +54,22 @@ public:
 
 	void setRealisticMotors(bool set);
 
-	SizeUnit *sizeUnit() const;
+	QSharedPointer<SizeUnit> sizeUnit() const;
 
 Q_SIGNALS:
 	/// Emitted each time when user modifies physical preferences.
 	void physicsChanged(bool isRealistic);
 
+	/// Emit when the sizeUnit is serialized
+	void sizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);
+
+	void gridSizeChanged(qreal size);
+
 private:
 	bool mRealisticPhysics { false };
 	bool mRealisticSensors { false };
 	bool mRealisticMotors { false };
-	QScopedPointer<SizeUnit> mSizeUnitSystem;
+	QSharedPointer<SizeUnit> mSizeUnitSystem;
 };
 
 }

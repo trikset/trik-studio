@@ -19,6 +19,9 @@
 #include <QtWidgets/QLabel>
 
 namespace twoDModel {
+namespace model {
+class SizeUnit;
+}
 namespace view {
 
 class GridParameters : public QFrame
@@ -27,11 +30,13 @@ class GridParameters : public QFrame
 
 public:
 	explicit GridParameters(QWidget *parent = nullptr);
-	~GridParameters();
+	~GridParameters() override;
 
 public Q_SLOTS:
 	void showGrid(bool isGridEnabled);
 	void setCellSize(int cellSizeValue);
+	void onGridParametersChangedOutside(qreal newCellSize);
+	void onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);
 
 Q_SIGNALS:
 	void parametersChanged();
@@ -39,6 +44,7 @@ Q_SIGNALS:
 private:
 	QSlider *mCellSize;
 	QCheckBox *mShowGridCheckBox;
+	QSharedPointer<twoDModel::model::SizeUnit> mSizeUnit;
 };
 
 }

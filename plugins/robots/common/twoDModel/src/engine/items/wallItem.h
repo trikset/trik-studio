@@ -58,12 +58,12 @@ public:
 
 	QPainterPath path() const;
 
-	void resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid);
+	void resizeWithGrid(QGraphicsSceneMouseEvent *event, qreal gridSize);
 
-	void reshapeEndWithGrid(int indexGrid);
-	void reshapeBeginWithGrid(int indexGrid);
+	void reshapeEndWithGrid(qreal indexGrid);
+	void reshapeBeginWithGrid(qreal indexGrid);
 	void setDraggedEnd(qreal x, qreal y);
-	void alignTheWall(int indexGrid);
+	void alignTheWall(qreal indexGrid);
 
 	QPolygonF collidingPolygon() const override;
 	BodyType bodyType() const override;
