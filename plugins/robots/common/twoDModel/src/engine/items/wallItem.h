@@ -79,7 +79,7 @@ private:
 	const QImage mImage;
 
 	QPainterPath mPath;
-	qreal mWallWidth {10};
+	int mWallWidth {10};
 	QPointF mEstimatedPos;
 };
 

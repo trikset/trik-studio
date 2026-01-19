@@ -16,7 +16,6 @@
 #include <QStackedWidget>
 #include <QDoubleSpinBox>
 #include <QSpinBox>
-#include <QDebug>
 #include <qrkernel/settingsManager.h>
 #include "gridSizeWidget.h"
 #include <cmath>

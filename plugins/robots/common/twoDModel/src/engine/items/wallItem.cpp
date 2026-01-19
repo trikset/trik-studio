@@ -51,7 +51,7 @@ WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 WallItem *WallItem::clone() const
 {
-	WallItem * const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto * const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	connect(this, &AbstractItem::positionChanged, cloned, &WallItem::recalculateBorders);
 	connect(this, &AbstractItem::x1Changed, cloned, &WallItem::recalculateBorders);
@@ -65,7 +65,7 @@ WallItem *WallItem::clone() const
 
 QAction *WallItem::wallTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_W), QKeySequence(Qt::Key_2)});
 	result->setCheckable(true);
 	return result;
@@ -175,8 +175,8 @@ void WallItem::deserialize(const QDomElement &element)
 	setY2(end.y());
 
 	readPenBrush(element);
-	if (pen().widthF()) {
-		mWallWidth = pen().widthF();
+	if (pen().width()) {
+		mWallWidth = pen().width();
 	}
 
 	SolidItem::deserialize(element);
