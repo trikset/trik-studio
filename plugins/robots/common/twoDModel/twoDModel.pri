@@ -87,6 +87,9 @@ HEADERS += \
 	$$PWD/src/engine/view/parts/robotItemPopup.h \
 	$$PWD/src/engine/view/parts/speedPopup.h \
 	$$PWD/src/engine/view/parts/ruler.h \
+	$$PWD/src/engine/templates/details/templatesParser.h \
+	$$PWD/src/engine/templates/details/template.h \
+	$$PWD/src/engine/templates/templateParserApi.h \
 	$$PWD/src/engine/view/parts/gridSizeWidget.h \
 	$$PWD/src/engine/constraints/constraintsChecker.h \
 	$$PWD/src/engine/constraints/details/defines.h \

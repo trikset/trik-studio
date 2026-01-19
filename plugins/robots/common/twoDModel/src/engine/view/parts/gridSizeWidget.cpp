@@ -40,17 +40,8 @@ GridSizeWidget::GridSizeWidget(QWidget *parent)
 
 void GridSizeWidget::createSpinBoxes()
 {
-	auto onValueChangedLambda = [this](QObject *abstractSpinBox) {
-		if (auto * spinBox = qobject_cast<QDoubleSpinBox *>(abstractSpinBox)) {
-			connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-				this, [this](qreal value) {
-				Q_EMIT gridSizeChanged(value);
-			});
-		}
-	};
-
-	auto createSpinBoxLambda = [this, onValueChangedLambda](qreal step, int decimals,
-					twoDModel::model::SizeUnit::Unit unit) {
+	auto createSpinBoxLambda = [this](qreal step, int decimals,
+				twoDModel::model::SizeUnit::Unit unit) {
 		twoDModel::model::SizeUnit sizeUnit {};
 		sizeUnit.setSizeUnit(unit);
 		auto *spinBox = new QDoubleSpinBox(this);
@@ -58,7 +49,8 @@ void GridSizeWidget::createSpinBoxes()
 		spinBox->setDecimals(decimals);
 		mSlubSpinBoxes.emplace(unit, spinBox);
 		mStackedWidget->addWidget(spinBox);
-		onValueChangedLambda(spinBox);
+		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
+						this, &GridSizeWidget::gridSizeChanged);
 	};
 
 	// Create custom Pixels SpinBox
