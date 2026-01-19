@@ -52,9 +52,9 @@ void Ruler::setOrientation(Qt::Orientation orientation)
 	const QString theLongestText = "-123.45";  // The longest text that ruler must place into itself.
 	const QSizeF theLargestSize = textBoundingRect(theLongestText).size();
 	if (orientation == Qt::Horizontal) {
-		setFixedHeight(theLargestSize.height() + 2 * gap);
+		setFixedHeight(static_cast<int>(theLargestSize.height() + 2 * gap));
 	} else {
-		setFixedWidth(theLargestSize.width() + 2 * gap);
+		setFixedWidth(static_cast<int>(theLargestSize.width() + 2 * gap));
 	}
 }
 
