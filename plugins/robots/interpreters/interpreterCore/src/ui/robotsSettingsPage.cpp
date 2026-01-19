@@ -50,6 +50,20 @@ RobotsSettingsPage::RobotsSettingsPage(KitPluginManager &kitPluginManager
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
 			, mUi->devicesConfigurer, &DevicesConfigurationWidget::selectRobotModel);
 
+	mUi->templatesPathWidget->configure("pathToUserTemplates",
+					    tr("Templates directory:"),
+					    "Open2DModelTemplates",
+					    tr("Choose templates directory"));
+
+	auto toggledLambda = [this](bool toggled) {
+		mUi->templatesPathWidget->setVisible(toggled);
+	};
+
+	connect(mUi->twoDModelAdvancedResictions, &QCheckBox::toggled, [toggledLambda](bool toggled) {
+		toggledLambda(toggled);
+	});
+
+	toggledLambda(false);
 	restoreSettings();
 	saveSelectedRobotModel();
 }
@@ -123,6 +137,8 @@ void RobotsSettingsPage::save()
 	SettingsManager::setValue("autoscalingInterval", mUi->autoScalingSpinBox->value());
 	SettingsManager::setValue("textUpdateInterval", mUi->textUpdaterSpinBox->value());
 	SettingsManager::setValue("enableRegionEditorMode", mUi->regionEditorModeCheckBox->isChecked());
+	SettingsManager::setValue("twoDModelAdvancedResictions", mUi->twoDModelAdvancedResictions->isChecked());
+	mUi->templatesPathWidget->save();
 	if (mRobotModelManager.model().kitId().contains("nxt", Qt::CaseInsensitive)) {
 		SettingsManager::setValue("nxtFlashToolRunPolicy", mUi->runningAfterUploadingComboBox->currentIndex());
 	} else if (mRobotModelManager.model().kitId().contains("ev3", Qt::CaseInsensitive)) {
@@ -166,6 +182,8 @@ void RobotsSettingsPage::restoreSettings()
 	mUi->autoScalingSpinBox->setValue(SettingsManager::value("autoscalingInterval", autoscalingDefault).toInt());
 	mUi->textUpdaterSpinBox->setValue(SettingsManager::value("textUpdateInterval", textUpdateDefault).toInt());
 	mUi->regionEditorModeCheckBox->setChecked(SettingsManager::value("enableRegionEditorMode", false).toBool());
+	mUi->templatesPathWidget->restore();
+	mUi->twoDModelAdvancedResictions->setChecked(SettingsManager::value("twoDModelAdvancedResictions", false).toBool());
 	if (mRobotModelManager.model().kitId().contains("nxt", Qt::CaseInsensitive)) {
 		mUi->runningAfterUploadingComboBox->setCurrentIndex(SettingsManager::value("nxtFlashToolRunPolicy").toInt());
 	} else if (mRobotModelManager.model().kitId().contains("ev3", Qt::CaseInsensitive)) {
@@ -187,8 +205,10 @@ void RobotsSettingsPage::restoreSettings()
 
 void RobotsSettingsPage::onProjectOpened()
 {
-	mUi->devicesConfigurer->setEnabled(
-			!mLogicalModel.logicalRepoApi().metaInformation("twoDModelSensorsReadOnly").toBool());
+	const auto sensorsReadOnly = mLogicalModel.logicalRepoApi().metaInformation("twoDModelSensorsReadOnly").toBool();
+	const auto worldReadOnly = mLogicalModel.logicalRepoApi().metaInformation("twoDModelWorldReadOnly").toBool();
+	mUi->devicesConfigurer->setEnabled(!sensorsReadOnly);
+	mUi->twoDModelEditorGroupBox->setVisible(!worldReadOnly);
 }
 
 void RobotsSettingsPage::changeEvent(QEvent *e)

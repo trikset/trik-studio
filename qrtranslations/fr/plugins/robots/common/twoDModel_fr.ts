@@ -209,6 +209,117 @@
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+167"/>
+        <source>Recursive template expansion detected: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-116"/>
+        <source>Redefinition a template %1 that already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+110"/>
+        <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-120"/>
+        <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+93"/>
+        <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+103"/>
+        <location line="+14"/>
+        <source>line %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-12"/>
+        <source>template %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>relative to the beginning of the %1 template body</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Substitution chain: %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/template.cpp" line="+29"/>
+        <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>The using an undeclared parameter %1 for template %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/templateParserApi.cpp" line="+85"/>
+        <source>Error while template substitution: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Error while parsing template: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TwoDModelWidget</name>
@@ -337,7 +448,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
@@ -350,7 +461,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+207"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>La physique réaliste doit être activée pour interagir avec les quilles, les cubes et les balles</translation>
     </message>
@@ -446,7 +557,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+74"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
@@ -456,7 +567,7 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+103"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Le champ &quot;version&quot; de la balise &quot;root&quot; ne doit pas être vide.</translation>
     </message>
@@ -466,7 +577,7 @@
         <translation>Le modèle de monde a la version %1. La version actuelle est %2. Veuillez vérifier que le modèle de monde se comporte comme prévu.</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+43"/>
         <source>This robot model already exists</source>
         <translation>Ce modèle de robot existe déjà</translation>
     </message>
@@ -623,7 +734,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+26"/>
         <source>Hand dragging mode</source>
         <translation>Le mode de glissement manuel</translation>
     </message>
@@ -641,6 +752,11 @@
         <location line="+1"/>
         <source>Load world model...</source>
         <translation>Charger le modèle du monde...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load templates...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -812,7 +928,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -845,7 +961,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+371"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+373"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -863,7 +979,7 @@
         <translation type="vanished">Annuler</translation>
     </message>
     <message>
-        <location line="-218"/>
+        <location line="-220"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
@@ -873,7 +989,7 @@
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+297"/>
+        <location line="+300"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
@@ -890,22 +1006,22 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+14"/>
+        <location line="+25"/>
         <source>2D model saves (*.xml)</source>
         <translation>Fichiers de sauvegarde du modèle 2D (*.xml) </translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-25"/>
         <source>Loading world and robot model</source>
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+25"/>
         <source>Loading world without robot model</source>
         <translation>Chargement du monde sans modèle de robot</translation>
     </message>
     <message>
-        <location line="+317"/>
+        <location line="+334"/>
         <source>Hide details</source>
         <translation>Masquer les détails</translation>
     </message>

@@ -30,16 +30,21 @@ DirPicker::DirPicker(QWidget *parent)
 	, mLabel(new QLabel(this))
 	, mPathEditor(new QLineEdit(this))
 {
-	QPushButton *button = new QPushButton(style()->standardIcon(QStyle::SP_DirIcon), tr("Browse..."), this);
-	QHBoxLayout *layout = new QHBoxLayout(this);
+	auto *button = new QPushButton(style()->standardIcon(QStyle::SP_DirIcon), tr("Browse..."), this);
+	auto *layout = new QHBoxLayout(this);
 	layout->addWidget(mLabel);
 	layout->addWidget(mPathEditor);
 	layout->addWidget(button);
 	connect(button, &QPushButton::clicked, this, &DirPicker::pick);
 }
 
-void DirPicker::configure(const QString &settingsKey, const QString &title)
+void DirPicker::configure(const QString &settingsKey,
+			  const QString &title,
+			  const QString &dialogId,
+			  const QString &dialogTittle)
 {
+	mDialogId = dialogId;
+	mDialogTittle = dialogTittle;
 	mSettingsKey = settingsKey;
 	mLabel->setText(title);
 }
@@ -65,7 +70,8 @@ void DirPicker::restore()
 
 void DirPicker::pick()
 {
-	QDir dirPath = QFileDialog::getExistingDirectory(this, tr("Select directory"));
-	SettingsManager::setValue(mSettingsKey, dirPath.absolutePath());
-	mPathEditor->setText(dirPath.absolutePath());
+	const auto dirPath = utils::QRealFileDialog::getExistingDirectory(mDialogId, this
+			, mDialogTittle).replace("\\", "/");
+	SettingsManager::setValue(mSettingsKey, dirPath);
+	mPathEditor->setText(dirPath);
 }

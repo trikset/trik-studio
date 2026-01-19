@@ -257,13 +257,23 @@
      <property name="title">
       <string>2D-model Editor Settings</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
        <widget class="QCheckBox" name="regionEditorModeCheckBox">
         <property name="text">
          <string>Enable Region Editor Mode</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="twoDModelAdvancedResictions">
+        <property name="text">
+         <string>Advanced settings for creating restrictions</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="qReal::ui::DirPicker" name="templatesPathWidget" native="true"/>
       </item>
      </layout>
     </widget>
@@ -275,6 +285,12 @@
    <class>kitBase::DevicesConfigurationWidget</class>
    <extends>QWidget</extends>
    <header>kitBase/devicesConfigurationWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qReal::ui::DirPicker</class>
+   <extends>QWidget</extends>
+   <header>qrutils/widgets/dirPicker.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
