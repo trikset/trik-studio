@@ -198,6 +198,9 @@ SOURCES += \
 	$$PWD/src/engine/items/regions/ellipseRegion.cpp \
 	$$PWD/src/engine/items/regions/rectangularRegion.cpp \
 	$$PWD/src/engine/items/regions/boundRegion.cpp \
+	$$PWD/src/engine/templates/details/templatesParser.cpp \
+	$$PWD/src/engine/templates/details/template.cpp \
+	$$PWD/src/engine/templates/templateParserApi.cpp \
 	$$PWD/src/engine/constraints/constraintsChecker.cpp \
 	$$PWD/src/engine/constraints/details/constraintsParser.cpp \
 	$$PWD/src/engine/constraints/details/event.cpp \
@@ -241,3 +244,5 @@ SOURCES += \
 
 FORMS += \
 	$$PWD/src/engine/view/twoDModelWidget.ui \
+
+copyToDestdir($$PWD/src/engine/templates/details/templates, now)

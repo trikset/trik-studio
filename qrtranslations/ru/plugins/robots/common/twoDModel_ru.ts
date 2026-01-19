@@ -653,7 +653,15 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <source>Error while template substitution: %1</source>
+        <translation type="vanished">Ошибка при раскрытии шаблона: %1</translation>
+    </message>
+    <message>
+        <source>Error while parsing template: %1</source>
+        <translation type="vanished">Ошибка при разборе шаблона: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
     </message>
@@ -666,7 +674,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+207"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>Реалистичная физика должна быть включена для взаимодействия с кеглями, кубами и мячами</translation>
     </message>
@@ -766,7 +774,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+74"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>Задание выполнено за %1 сек!</translation>
     </message>
@@ -776,7 +784,7 @@
         <translation>Ошибка в проверяющей программе: %1</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+103"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Поле &quot;version&quot; тега &quot;root&quot; не должно быть пустым.</translation>
     </message>
@@ -786,7 +794,7 @@
         <translation>Модель мира имеет версию %1. Текущая версия %2. Пожалуйста, убедитесь, что модель мира ведет себя ожидаемым образом.</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+43"/>
         <source>This robot model already exists</source>
         <translation>Эта модель робота уже существует</translation>
     </message>
@@ -935,7 +943,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+26"/>
         <source>Hand dragging mode</source>
         <translation>Режим таскания сцены</translation>
     </message>
@@ -953,6 +961,11 @@
         <location line="+1"/>
         <source>Load world model...</source>
         <translation>Загрузить модель мира...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load templates...</source>
+        <translation>Загрузить шаблоны...</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1191,7 +1204,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1268,17 +1281,21 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+14"/>
+        <location line="+25"/>
         <source>2D model saves (*.xml)</source>
         <translation>Файлы 2D модели (*.xml)</translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-25"/>
         <source>Loading world and robot model</source>
         <translation>Загрузка модели мира</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <source>Choose templates directory</source>
+        <translation type="vanished">Выберите каталог шаблонов</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>Loading world without robot model</source>
         <translation>Загрузка модели мира без модели робота</translation>
     </message>

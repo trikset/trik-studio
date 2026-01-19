@@ -93,7 +93,8 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			worldModel.firstChild().appendChild(blobs.firstChild().firstChild());
 		}
 
-		mView->loadXmls(worldModel);
+		mView->loadTemplatesXmls();
+		mView->loadModelXmls(worldModel);
 		mView->resetDrawAction();
 
 		loadReadOnlyFlags(logicalModel);
@@ -159,6 +160,16 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 
 	connect(mModel.data(), &model::Model::blobsChanged, this, [&logicalModel](const QDomDocument &xml) {
 		logicalModel.mutableLogicalRepoApi().setMetaInformation("blobs", xml.toString(4));
+	});
+
+	connect(mModel.data(), &model::Model::templatesChanged, this, [&logicalModel]
+					(const QHash<QString, QDomDocument> &xmls) {
+		for (auto it = xmls.begin(), end = xmls.end(); it != end; ++it) {
+			const auto &name = it.key();
+			QString metaInfoKey = QString("templates.%1").arg(name);
+			logicalModel.mutableLogicalRepoApi()
+					.setMetaInformation(metaInfoKey, it.value().toString(4));
+		}
 	});
 
 	connect(&eventsForKitPlugin,

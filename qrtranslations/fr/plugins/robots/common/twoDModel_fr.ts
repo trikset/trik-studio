@@ -381,7 +381,7 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+118"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
     </message>
@@ -394,7 +394,7 @@
 <context>
     <name>twoDModel::engine::TwoDModelEngineFacade</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+196"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/twoDModelEngineFacade.cpp" line="+207"/>
         <source>Realistic physics&apos; must be turned on to enjoy skittles, cubes and balls</source>
         <translation>La physique réaliste doit être activée pour interagir avec les quilles, les cubes et les balles</translation>
     </message>
@@ -490,7 +490,7 @@
 <context>
     <name>twoDModel::model::Model</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+69"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/model.cpp" line="+74"/>
         <source>The task was accomplished in %1 sec!</source>
         <translation>La tâche a été accomplie en %1 secondes!</translation>
     </message>
@@ -500,7 +500,7 @@
         <translation>Erreur dans le vérificateur : %1</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+103"/>
         <source>The &quot;version&quot; field of the &quot;root&quot; tag must not be empty.</source>
         <translation>Le champ &quot;version&quot; de la balise &quot;root&quot; ne doit pas être vide.</translation>
     </message>
@@ -510,7 +510,7 @@
         <translation>Le modèle de monde a la version %1. La version actuelle est %2. Veuillez vérifier que le modèle de monde se comporte comme prévu.</translation>
     </message>
     <message>
-        <location line="+34"/>
+        <location line="+43"/>
         <source>This robot model already exists</source>
         <translation>Ce modèle de robot existe déjà</translation>
     </message>
@@ -659,7 +659,7 @@
 <context>
     <name>twoDModel::view::ActionsBox</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+25"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/actionsBox.cpp" line="+26"/>
         <source>Hand dragging mode</source>
         <translation>Le mode de glissement manuel</translation>
     </message>
@@ -677,6 +677,11 @@
         <location line="+1"/>
         <source>Load world model...</source>
         <translation>Charger le modèle du monde...</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Load templates...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -848,7 +853,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+881"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -925,17 +930,17 @@
     <message>
         <location line="+0"/>
         <location line="+20"/>
-        <location line="+14"/>
+        <location line="+25"/>
         <source>2D model saves (*.xml)</source>
         <translation>Fichiers de sauvegarde du modèle 2D (*.xml) </translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="-25"/>
         <source>Loading world and robot model</source>
         <translation>Chargement des modèles du monde et du robot</translation>
     </message>
     <message>
-        <location line="+14"/>
+        <location line="+25"/>
         <source>Loading world without robot model</source>
         <translation>Chargement du monde sans modèle de robot</translation>
     </message>

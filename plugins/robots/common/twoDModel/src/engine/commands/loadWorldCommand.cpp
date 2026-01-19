@@ -38,7 +38,7 @@ bool LoadWorldCommand::restoreState()
 
 void LoadWorldCommand::loadWorld(const QDomDocument &world)
 {
-	mWidget.loadXmls(world, true);
+	mWidget.loadModelXmls(world, true);
 	Q_EMIT mWidget.model().modelChanged(mWidget.generateWorldModelXml());
 	Q_EMIT mWidget.model().blobsChanged(mWidget.generateBlobsXml());
 }

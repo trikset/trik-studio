@@ -567,9 +567,8 @@
         <translation>Обзор...</translation>
     </message>
     <message>
-        <location line="+35"/>
         <source>Select directory</source>
-        <translation>Выберите директорию</translation>
+        <translation type="vanished">Выберите директорию</translation>
     </message>
 </context>
 <context>

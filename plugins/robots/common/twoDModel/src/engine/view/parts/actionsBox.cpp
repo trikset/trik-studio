@@ -14,6 +14,7 @@
 
 #include "actionsBox.h"
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include <qrkernel/settingsManager.h>
 
 using namespace graphicsUtils;
 using namespace twoDModel::view;
@@ -27,6 +28,7 @@ ActionsBox::ActionsBox(QObject *parent)
 	, mSeparator1(new QAction(this))
 	, mSaveWorldModelAction(new QAction(QIcon(":/icons/2d_save.png"), tr("Save world model..."), this))
 	, mLoadWorldModelAction(new QAction(QIcon(":/icons/2d_open.png"), tr("Load world model..."), this))
+	, mLoadTemplatesAction(new QAction(QIcon(":/icons/2d_open.png"), tr("Load templates..."), this))
 	, mLoadWorldWithoutRobotAction(new QAction(QIcon(":/icons/2d_open.png")
 			, tr("Load world model without robot configuration..."), this))
 	, mSeparator2(new QAction(this))
@@ -44,9 +46,7 @@ ActionsBox::ActionsBox(QObject *parent)
 	mSeparator2->setSeparator(true);
 }
 
-ActionsBox::~ActionsBox()
-{
-}
+ActionsBox::~ActionsBox() = default;
 
 QAction &ActionsBox::scrollHandModeAction() const
 {
@@ -66,6 +66,11 @@ QAction &ActionsBox::saveModelAction() const
 QAction &ActionsBox::loadModelAction() const
 {
 	return *mLoadWorldModelAction;
+}
+
+QAction &ActionsBox::loadTemplatesAction() const
+{
+	return *mLoadTemplatesAction;
 }
 
 QAction &ActionsBox::loadModelWithoutRobotAction() const
@@ -90,6 +95,7 @@ QList<QAction *> ActionsBox::sceneContextMenuActions() const
 		, &multiSelectionModeAction()
 		, mSeparator1.data()
 		, &saveModelAction()
+		, &loadTemplatesAction()
 		, &loadModelAction()
 		, &loadModelWithoutRobotAction()
 		, mSeparator2.data()
@@ -98,16 +104,19 @@ QList<QAction *> ActionsBox::sceneContextMenuActions() const
 	};
 }
 
-void ActionsBox::setWorldModelActionsVisible(bool visible)
+void ActionsBox::setWorldModelActionsVisible(bool visible) const
 {
 	saveModelAction().setVisible(visible);
 	loadModelAction().setVisible(visible);
 	loadModelWithoutRobotAction().setVisible(visible);
 	deleteAllAction().setVisible(visible);
+	auto enable =
+		qReal::SettingsManager::value("twoDModelAdvancedResictions").toBool();
+	loadTemplatesAction().setVisible(visible && enable);
 	/// @todo: Do we need to hide clearFloorAction() here?
 }
 
-void ActionsBox::setSaveLoadActionsShortcutsEnabled(bool enabled)
+void ActionsBox::setSaveLoadActionsShortcutsEnabled(bool enabled) const
 {
 	if (enabled) {
 		saveModelAction().setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));

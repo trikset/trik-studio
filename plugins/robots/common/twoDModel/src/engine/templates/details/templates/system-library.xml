@@ -1,0 +1,200 @@
+<templates>
+
+<template name="timer-success-event">
+    <params>
+	<param name="timeout"/>
+	<param name="trigger" default=""/>
+    </params>
+    <content>
+<![CDATA[
+<event settedUpInitially="true">
+    <condition>
+        <timer timeout="#{timeout}" forceDropOnTimeout="false"/>
+    </condition>
+    <triggers>
+        #{trigger}
+        <success/>
+    </triggers>
+</event>
+]]>
+    </content>
+</template>
+
+<template name="set-object-warzone">
+    <params>
+	<param name="regionId"/>
+	<param name="objectId"/>
+	<param name="message"/>
+	<param name="trigger" default=""/>
+    </params>
+    <content>
+<![CDATA[
+<event settedUpInitially="true">
+    <condition>
+        <not>
+            <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="all"/>
+        </not>
+    </condition>
+    <triggers>
+        #{trigger}
+        <message text="#{message}"/>
+        <success/>
+    </triggers>
+</event>
+]]>
+    </content>
+</template>
+
+<template name="set-robot-warzone">
+    <params>
+	<param name="regionId"/>
+	<param name="message" default="The robot has moved out of a valid region"/>
+	<param name="trigger" default=""/>
+    </params>
+    <content>
+<![CDATA[
+<use template="set-object-warzone">
+    <with regionId="#{regionId}"/>
+    <with message="#{message}"/>
+    <with objectId="robot1"/>
+    <with param="trigger">
+        #{trigger}
+    </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="condition-event">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="true"/>
+	<param name="trigger">
+	    <trigger>
+	        <success/>
+	     </trigger>
+	</param>
+	<param name="conditions">
+	    <condition>
+	        <true/>
+	    </condition>
+	</param>
+    </params>
+    <content>
+<![CDATA[
+<event settedUpInitially="#{settedUpInit}" id="#{id}">
+    #{conditions}
+    <triggers>
+        #{trigger}
+    </triggers>
+</event>
+]]>
+    </content>
+</template>
+    
+<template name="change-score-with-log">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="true"/>
+        <param name="trigger" default=""/>
+        <param name="conditions"/>
+        <param name="operation" default="sum"/>
+        <param name="scoreVariable"/>
+        <param name="variable"/>
+        <param name="message"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="condition-event">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with param="trigger">
+        <setter name="#{scoreVariable}">
+            <#{operation}>
+                <variableValue name="#{scoreVariable}"/>
+                <variableValue name="#{variable}"/>
+            </#{operation}>
+        </setter>
+        <message text="#{message}"/>
+        #{trigger}
+    </with>
+    <with param="conditions">
+        #{conditions}
+    </with>
+</use>
+]]>
+        </content>
+</template>
+    
+<template name="object-left-region-with-score">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="true"/>
+        <param name="objectId" default="robot1"/>
+        <param name="regionId"/>
+        <param name="objectPoint" default="any"/>
+        <param name="trigger" default=""/>
+        <param name="operation" default="sum"/>
+        <param name="scoreVariable"/>
+        <param name="variable"/>
+        <param name="message" default=""/>
+    </params>
+    <content>
+<![CDATA[
+<use template="change-score-with-log">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with operation="#{operation}"/>
+    <with scoreVariable="#{scoreVariable}"/>
+    <with variable="#{variable}"/>
+    <with message="#{message}"/>
+    <with param="trigger">
+        #{trigger}
+    </with>
+    <with param="conditions">
+        <condition>
+            <not>
+                <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="#{objectPoint}"/>
+            </not>
+        </condition>
+    </with>
+</use>
+]]>
+    </content>
+</template>
+    
+<template name="object-in-region-with-score">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="true"/>
+	<param name="objectId" default="robot1"/>
+        <param name="regionId"/>
+        <param name="objectPoint" default="all"/>
+	<param name="trigger" default=""/>
+	<param name="operation" default="sum"/>
+	<param name="scoreVariable"/>
+	<param name="variable"/>
+	<param name="message" default=""/>
+    </params>
+    <content>
+<![CDATA[
+<use template="change-score-with-log">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with operation="#{operation}"/>
+    <with scoreVariable="#{scoreVariable}"/>
+    <with variable="#{variable}"/>
+    <with message="#{message}"/>
+    <with param="trigger">
+        #{trigger}
+    </with>
+    <with param="conditions">
+        <condition>
+            <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="#{objectPoint}"/>
+        </condition>
+    </with>
+</use>
+]]>
+    </content>
+</template>
+</templates>
