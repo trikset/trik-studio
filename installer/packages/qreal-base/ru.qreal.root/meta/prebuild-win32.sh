@@ -56,3 +56,4 @@ rsync -a "$QT_LIB"/../plugins/platforms/q{windows,offscreen,minimal}.dll        
 rsync -a "$QT_LIB"/../plugins/imageformats/qsvg.dll                         "$PWD"/../data/imageformats
 rsync -a "$QT_LIB"/../plugins/imageformats/qjpeg.dll                        "$PWD"/../data/imageformats
 rsync -a "$QT_LIB"/../plugins/iconengines/qsvgicon.dll                      "$PWD"/../data/iconengines
+rsync -a "$QT_LIB"/../plugins/mediaservice/                     	    "$PWD"/../data/mediaservice/

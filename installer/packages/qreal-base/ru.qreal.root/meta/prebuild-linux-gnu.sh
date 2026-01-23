@@ -9,6 +9,7 @@ mkdir -p "$PWD"/../data/bin/
 mkdir -p "$PWD"/../data/resources/
 mkdir -p "$PWD"/../data/bin/platforms/
 mkdir -p "$PWD"/../data/bin/imageformats/
+mkdir -p "$PWD"/../data/bin/mediaservice/
 mkdir -p "$PWD"/../data/bin/iconengines/
 mkdir -p "$PWD"/../data/lib/plugins/tools/
 
@@ -54,13 +55,14 @@ rsync -a "$QT_LIB"/libQt5XcbQpa.so*                                     "$PWD"/.
 rsync -a "$QT_LIB"/libQt5WaylandC{lient,ompositor}.so*                  "$PWD"/../data/lib/
 rsync -a "$QT_LIB"/libQt5Concurrent.so*                                 "$PWD"/../data/lib/
 
-rsync -avR "$QT_PLUGINS"/./{platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
+rsync -avR "$QT_PLUGINS"/./{mediaservice,platforms,imageformats,iconengines,wayland-*}/lib*.so                             "$PWD"/../data/bin/
 
 mv     "$PWD"/../data/acknowledgements.txt                                "$PWD"/../data/resources/
 mv     "$PWD"/../data/changelog.txt                                       "$PWD"/../data/resources/
 
 # Cleaning up prebuild-common.sh results...
 rm -rf "$PWD"/../data/imageformats/
+rm -rf "$PWD"/../data/mediaservice/
 rm -rf "$PWD"/../data/iconengines/
 rm -rf "$PWD"/../data/platforms/
 rm -rf "$PWD"/../data/plugins/
