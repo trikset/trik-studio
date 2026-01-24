@@ -416,115 +416,155 @@
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+167"/>
-        <source>Recursive template expansion detected: %1 -&gt; %2</source>
-        <translation>Обнаружено рекурсивное раскрытие шаблонов: %1 -&gt; %2</translation>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+116"/>
+        <source>cm</source>
+        <translation>см</translation>
     </message>
     <message>
-        <location line="-116"/>
-        <source>Redefinition a template %1 that already exists</source>
-        <translation>Переопределение шаблона %1, который уже существует</translation>
+        <location line="+3"/>
+        <source>mm</source>
+        <translation>мм</translation>
     </message>
     <message>
-        <location line="+110"/>
-        <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
-        <translation>&amp;lt;use&amp;gt; тег должен содержать атрибут &quot;template&quot;</translation>
+        <location line="+3"/>
+        <source>m</source>
+        <translation>м</translation>
     </message>
     <message>
-        <location line="-120"/>
+        <location line="+2"/>
+        <source>px</source>
+        <translation>пикс</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Pixels</source>
+        <translation>Пиксели</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Centimeters</source>
+        <translation>Сантиметры</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Meters</source>
+        <translation>Метры</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Millimeters</source>
+        <translation>Миллиметры</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+41"/>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation>&amp;lt;template&amp;gt; тег был предоставлен, но не был предоставлен требуемый атрибут &quot;name&quot;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+10"/>
+        <source>Redefinition a template %1 that already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
         <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
-        <translation>&amp;lt;templates&amp;gt; тег может содержать только &amp;lt;template&amp;gt; как дочерний тег, текущий %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+77"/>
+        <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Recursive template expansion detected: %1 -&gt; %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
-        <translation>&amp;lt;use&amp;gt; тег содержит template=%1 атрибут, который не является именем объявленного шаблона</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+24"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
-        <translation>После подстановки параметров для шаблона %1, он не стал валидным xml узлом</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+103"/>
         <location line="+14"/>
         <source>line %1</source>
-        <translation>строка %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-12"/>
         <source>template %1</source>
-        <translation>шаблон %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+15"/>
         <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
-        <translation>относительно начала тега &amp;lt;constraints&amp;gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
         <source>relative to the beginning of the %1 template body</source>
-        <translation>относительно начала тела шаблона %1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Substitution chain: %1.</source>
-        <translation>Последовательность подстановки шаблонов: %1.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/template.cpp" line="+29"/>
         <source>Currently, this method of setting &amp;lt;content&amp;gt; tag for the template %1 is not supported.</source>
-        <translation>На данный момент подобный метод установки тега &amp;lt;content&amp;gt; для шаблона %1 не поддерживается.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+18"/>
         <source>When defining the template %1, the syntax %2 was used to substitute an offset %3 for an undeclared parameter %4.</source>
-        <translation>При определении шаблона %1, был использован специальный синтаксис %2 для подстановки параметра по смещению %3, для необъявленного параметра %4.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+16"/>
         <source>the &amp;lt;params&amp;gt; tag can only contain the &amp;lt;param&amp;gt; tag as a child tag for template %1, actual tag is &amp;lt;%2&amp;gt;</source>
-        <translation>the &amp;lt;params&amp;gt; тег может содержать только &amp;lt;param&amp;gt; как дочерний тег для шаблона %1, текущий тег &amp;lt;%2&amp;gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
         <source>The &amp;lt;param&amp;gt; tag of template %1 was provided, but the required &quot;name&quot; attribute was missing.</source>
-        <translation>&amp;lt;param&amp;gt; тег шаблона %1 был предоставлен, но требуемый атрибут &quot;name&quot; не был указан.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+57"/>
         <source>The &amp;lt;template&amp;gt; of template %1 tag was provided, but the required child tag &amp;lt;content&amp;gt; was missing</source>
-        <translation>&amp;lt;template&amp;gt; тег шаблона %1 был предоставлен, но требуемый дочерний тег &amp;lt;content&amp;gt; не был указан</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+13"/>
         <source>The using an undeclared parameter %1 for template %2</source>
-        <translation>Использование необъявленного параметра %1 для шаблона %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+27"/>
         <source>The &amp;lt;use&amp;gt; tag can only contain a child tag &amp;lt;with&amp;gt;</source>
-        <translation>&amp;lt;use&amp;gt; тег может содержать только &amp;lt;with&amp;gt; как дочерний тег</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+40"/>
         <source>The parameter %1 of template %2 has no default value and was not explicitly specified by the user</source>
-        <translation>Параметр %1 шаблона %2 не имеет значения по умолчанию и не был выставлен явно</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/templateParserApi.cpp" line="+85"/>
         <source>Error while template substitution: %1</source>
-        <translation>Ошибка при раскрытии шаблона: %1</translation>
+        <translation type="unfinished">Ошибка при раскрытии шаблона: %1</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Error while parsing template: %1</source>
-        <translation>Ошибка при разборе шаблона: %1</translation>
+        <translation type="unfinished">Ошибка при разборе шаблона: %1</translation>
     </message>
 </context>
 <context>
@@ -557,7 +597,12 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+558"/>
+        <location line="+306"/>
+        <source>Grid size:</source>
+        <translation>Шаг сетки:</translation>
+    </message>
+    <message>
+        <location line="+230"/>
         <location line="+7"/>
         <location line="+7"/>
         <location line="+14"/>
@@ -595,7 +640,7 @@
         <translation>пикс</translation>
     </message>
     <message>
-        <location line="-577"/>
+        <location line="-555"/>
         <source>Left wheel:</source>
         <translation>Левое колесо:</translation>
     </message>
@@ -610,12 +655,11 @@
         <translation>Единицы измерения</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>Pixels in cm:</source>
-        <translation>Кол-во пикселей в см</translation>
+        <translation type="vanished">Кол-во пикселей в см</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="+36"/>
         <source>Realistic physics</source>
         <translation>Реалистичная физика</translation>
     </message>
@@ -869,44 +913,36 @@
 <context>
     <name>twoDModel::model::SizeUnit</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+113"/>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation type="vanished">мм</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>m</source>
-        <translation>м</translation>
+        <translation type="vanished">м</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>px</source>
-        <translation>пикс</translation>
+        <translation type="vanished">пикс</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Pixels</source>
-        <translation>Пиксели</translation>
+        <translation type="vanished">Пиксели</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Centimeters</source>
-        <translation>Сантиметры</translation>
+        <translation type="vanished">Сантиметры</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Meters</source>
-        <translation>Метры</translation>
+        <translation type="vanished">Метры</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Millimeters</source>
-        <translation>Миллиметры</translation>
+        <translation type="vanished">Миллиметры</translation>
     </message>
 </context>
 <context>
@@ -1180,7 +1216,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+34"/>
         <source>Grid</source>
         <translation>Сетка</translation>
     </message>
@@ -1312,7 +1348,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+373"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+382"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1330,17 +1366,16 @@
         <translation type="vanished">Отмена</translation>
     </message>
     <message>
-        <location line="-220"/>
         <source>cm</source>
-        <translation>см</translation>
+        <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="-196"/>
         <source>kg</source>
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+300"/>
+        <location line="+306"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1388,7 +1423,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+334"/>
+        <location line="+335"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>
@@ -1398,7 +1433,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+206"/>
+        <location line="+209"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

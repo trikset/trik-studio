@@ -57,6 +57,7 @@
 #include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/twoDModelRobotParameters.h"
 #include "twoDModel/engine/model/model.h"
+#include "twoDModel/engine/model/metricSystem.h"
 
 #include "nullTwoDModelDisplayWidget.h"
 #include <array>
@@ -145,13 +146,13 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 
 	mUi->horizontalRuler->setScene(mUi->graphicsView);
 	mUi->verticalRuler->setScene(mUi->graphicsView);
-
-	auto pixelsInCm = mModel.settings().pixelsInCm();
-	/// @todo: make some values editable
-
 	mUi->detailsTab->setParamsSettings(mUi->physicsParamsFrame);
+	mUi->detailsTab->setMetricSettings(mUi->metricFrame);
 
-	updateRobotInfoWidget(pixelsInCm, tr("cm"));
+	/// @todo: make some values editable
+	auto pixelsInCm = mModel.settings().pixelsInCm();
+	connectMetricComboBoxes();
+
 	connect(&mModel, &model::Model::robotAdded, this, [this, pixelsInCm](){
 		auto robotModels = mModel.robotModels();
 		auto robotTrack = robotModels.isEmpty() ||
@@ -169,8 +170,10 @@ TwoDModelWidget::~TwoDModelWidget()
 	delete mUi;
 }
 
-void TwoDModelWidget::updateRobotInfoWidget(const qreal factor, const QString& unitString)
+void TwoDModelWidget::updateRobotInfoWidget(const QSharedPointer<SizeUnit> &sizeUnit)
 {
+	const auto unitString = sizeUnit->toStr();
+	const auto factor = sizeUnit->countFactor();
 	mUi->wheelDiamInCm->setValue(robotWheelDiameterInPx / factor);
 	mUi->wheelDiameterUnit->setText(unitString);
 	mUi->wheelDiamInCm->setButtonSymbols(QAbstractSpinBox::NoButtons);
@@ -271,6 +274,12 @@ void TwoDModelWidget::initWidget()
 	connect(mUi->editorModeButton, &QPushButton::toggled,  &*mScene, &TwoDModelScene::onEditorModeToggled);
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, &*mScene, [&]() { mScene->update(); });
+	connect(&mModel.settings(), &Settings::gridSizeChanged,
+			mUi->gridParametersBox, &GridParameters::onGridParametersChangedOutside);
+	connect(mUi->gridSizeWidget, &GridSizeWidget::gridSizeChanged,
+			mUi->gridParametersBox, &GridParameters::onGridParametersChangedOutside);
+	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged,
+			mUi->gridSizeWidget, &GridSizeWidget::onGridParameterChanged);
 	connect(mUi->gridParametersBox, &GridParameters::parametersChanged, this, toggleRulers);
 	connect(mUi->gridParametersBox, &twoDModel::view::GridParameters::parametersChanged
 			, mUi->horizontalRuler, [&]() {mUi->horizontalRuler->update(); });
@@ -852,6 +861,7 @@ void TwoDModelWidget::setInteractivityFlags(ReadOnlyFlags flags)
 	mRobotPositionReadOnly = flags.testFlag(ReadOnly::RobotPosition);
 	if (mRobotPositionReadOnly) returnToStartMarker();
 
+	mUi->metricComboBox->setVisible(!worldReadOnly);
 	mScene->setInteractivityFlags(flags);
 }
 
@@ -1084,30 +1094,33 @@ bool TwoDModelWidget::setSelectedValue(QComboBox * const comboBox, const T &port
 
 void TwoDModelWidget::connectMetricComboBoxes()
 {
-	connect(mModel.settings().sizeUnit(), &SizeUnit::sizeUnitChanged
-		, this, [=](SizeUnit::Unit unit) {
-		setSelectedValue(mUi->metricComboBox, unit);
-	});
-
-	connect(mUi->metricComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged)
-		, this, [this](int index) {
-		const auto unitValue = mUi->metricComboBox->itemData(index)
-					.value<SizeUnit::Unit>();
-		const auto sizeUnit = mModel.settings().sizeUnit();
-		sizeUnit->setUnit(unitValue);
-		const auto realValue = sizeUnit->countFactor();
-		mUi->horizontalRuler->setMetricFactor(realValue);
-		mUi->verticalRuler->setMetricFactor(realValue);
-		updateRobotInfoWidget(realValue, sizeUnit->toStr());
-		Q_EMIT mUi->gridParametersBox->parametersChanged();
+	connect(&mModel.settings(), &Settings::sizeUnitChanged, this, [this]
+		(const QSharedPointer<twoDModel::model::SizeUnit> &unit) {
+		setSelectedValue(mUi->metricComboBox, unit->unit());
 	});
 
 	const auto sizeUnit = mModel.settings().sizeUnit();
 	const auto availableUnits = sizeUnit->currentValues();
 	for (auto &&availableUnit : availableUnits) {
-		mUi->metricComboBox->addItem(availableUnit.first,
-			QVariant::fromValue(availableUnit.second));
+		mUi->metricComboBox->addItem(availableUnit.first, QVariant::fromValue(availableUnit.second));
 	}
+
+	auto lambdaOnUnitChanged = [this](const QSharedPointer<SizeUnit> &unit) {
+		mUi->gridParametersBox->onSizeUnitChanged(unit);
+		mUi->gridSizeWidget->onSizeUnitChanged(unit);
+		mUi->horizontalRuler->onSizeUnitChanged(unit);
+		mUi->verticalRuler->onSizeUnitChanged(unit);
+		updateRobotInfoWidget(unit);
+	};
+
+	connect(mUi->metricComboBox,QOverload<int>::of(&QComboBox::currentIndexChanged),
+			this, [this, lambdaOnUnitChanged](int index) {
+		const auto unitValue = mUi->metricComboBox->itemData(index).value<SizeUnit::Unit>();
+		auto sizeUnit = mModel.settings().sizeUnit();
+		sizeUnit->setSizeUnit(unitValue);
+		lambdaOnUnitChanged(sizeUnit);
+		Q_EMIT mUi->gridParametersBox->parametersChanged();
+	});
 
 	setSelectedValue(mUi->metricComboBox, sizeUnit->defaultUnit());
 
@@ -1210,12 +1223,6 @@ void TwoDModelWidget::onRobotListChange(RobotItem *robotItem)
 	}
 }
 
-namespace {
-	bool isTrikModel(const QString &name) {
-		return name.contains("TrikV62");
-	}
-}
-
 void TwoDModelWidget::setSelectedRobotItem(RobotItem *robotItem)
 {
 	mSelectedRobotItem = robotItem;
@@ -1225,16 +1232,6 @@ void TwoDModelWidget::setSelectedRobotItem(RobotItem *robotItem)
 
 	setPortsGroupBoxAndWheelComboBoxes();
 	updateWheelComboBoxes();
-
-	if (isTrikModel(mSelectedRobotItem->robotModel().info().name())) {
-		mUi->detailsTab->setMetricSettings(mUi->metricFrame);
-		connectMetricComboBoxes();
-		mUi->pixelsInCmDoubleSpinBox->setValue(
-					mModel.settings().pixelsInCm());
-	} else {
-		mUi->detailsTab->setMetricSectionsVisible(false);
-		mUi->metricFrame->hide();
-	}
 
 	mUi->detailsTab->setDisplay(nullptr);
 	mDisplay = mSelectedRobotItem->robotModel().info().displayWidget();

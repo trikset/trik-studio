@@ -24,10 +24,8 @@ namespace twoDModel {
 namespace model {
 
 /// Incapsulates size unit settings used by 2D model.
-class TWO_D_MODEL_EXPORT SizeUnit : public QObject
+class TWO_D_MODEL_EXPORT SizeUnit
 {
-	Q_OBJECT
-
 public:
 	/// Possible units of measurement
 	enum class Unit {
@@ -42,6 +40,8 @@ public:
 	/// The current pixel value in centimeters
 	qreal pixelsInCm() const;
 
+	twoDModel::model::SizeUnit::Unit unit() const;
+
 	/// Serialize the sizeUnit in the WorldModel
 	void serialize(QDomElement &parent) const;
 
@@ -49,7 +49,7 @@ public:
 	void deserialize(const QDomElement &parent);
 
 	/// Set the current unit of measurement
-	void setUnit(twoDModel::model::SizeUnit::Unit unit);
+	void setSizeUnit(twoDModel::model::SizeUnit::Unit unit);
 
 	/// Multiplier for conversion to pixels
 	qreal countFactor() const;
@@ -60,14 +60,9 @@ public:
 	/// Get current unit string representation
 	QString toStr() const;
 
-	std::map<QString, Unit> currentValues() const;
+	static std::map<QString, Unit> currentValues();
 
-	Unit defaultUnit() const;
-
-Q_SIGNALS:
-	/// Emit when the sizeUnit is serialized
-	void sizeUnitChanged(const twoDModel::model::SizeUnit::Unit &unit);
-
+	static Unit defaultUnit();
 private:
 	Unit mSizeUnit { Unit::Pixels };
 	qreal mPixelsInCm { twoDModel::pixelsInCm };

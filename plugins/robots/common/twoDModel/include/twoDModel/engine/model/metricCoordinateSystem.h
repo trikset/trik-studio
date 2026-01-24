@@ -29,10 +29,10 @@ class MetricCoordinateSystem: public graphicsUtils::AbstractCoordinateSystem
 {
 	Q_OBJECT
 public:
-	explicit MetricCoordinateSystem(twoDModel::model::SizeUnit *metricSystem,
+	explicit MetricCoordinateSystem(const QSharedPointer<twoDModel::model::SizeUnit> &metricSystem,
 					QObject* parent = nullptr);
 
-	~MetricCoordinateSystem();
+	~MetricCoordinateSystem() override;
 
 	/// Conversе of units of measurement into pixels
 	qreal toPx(const qreal size) const override;
@@ -46,9 +46,7 @@ public:
 	/// Converting pixels to QPointF
 	QPointF toUnit(const QPointF &size) const override;
 private:
-	// Doesn't take ownership, ownership is twoDModel::model::Settings.
-	// The lifetime of this object is greater than MetricCoordinateSystem (see Model.h)
-	QPointer<twoDModel::model::SizeUnit> mMetricSystem;
+	QSharedPointer<twoDModel::model::SizeUnit> mMetricSystem;
 };
 
 }

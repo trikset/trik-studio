@@ -823,7 +823,7 @@ void TwoDModelScene::drawBackground(QPainter *painter, const QRectF &rect)
 		mWidthOfGrid = SettingsManager::value("GridWidth").toReal() / 100;
 		painter->setPen(QPen(Qt::black, mWidthOfGrid));
 		QGraphicsScene::drawBackground(painter, rect);
-		const int cellSize = SettingsManager::value("2dGridCellSize").toInt();
+		const qreal cellSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
 		mGridDrawer.drawGrid(painter, rect, cellSize);
 		drawAxes(painter);
 	}
@@ -888,9 +888,9 @@ void TwoDModelScene::addImage()
 			, tr("Graphics (*.*)"));
 
 
-	const auto gridSize = SettingsManager::value("2dGridCellSize").toInt();
-	const QPoint step(gridSize, gridSize);
-	QPoint topLeft = mainView()->mapToScene(0,0).toPoint() + step;
+	const auto gridSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
+	const QPointF step(gridSize, gridSize);
+	QPointF topLeft = mainView()->mapToScene(0,0).toPoint() + step;
 
 	for (auto &&loadFileName : loadImages) {
 		if (loadFileName.isEmpty()) {
@@ -915,7 +915,7 @@ void TwoDModelScene::addImage()
 			continue;
 		}
 		mDrawingAction = image;
-		const QRect rect(topLeft, size);
+		const QRectF rect(topLeft, size);
 		QSharedPointer<twoDModel::items::ImageItem> result(new twoDModel::items::ImageItem(
 						&mModel.coordinateMetricSystem(), newImage, rect));
 		result->setMemorize(true);
@@ -1019,8 +1019,8 @@ void TwoDModelScene::reshapeWall(QGraphicsSceneMouseEvent *event)
 		mCurrentWall->setX2(pos.x());
 		mCurrentWall->setY2(pos.y());
 		if (SettingsManager::value("2dShowGrid").toBool()) {
-			mCurrentWall->reshapeBeginWithGrid(SettingsManager::value("2dGridCellSize").toInt());
-			mCurrentWall->reshapeEndWithGrid(SettingsManager::value("2dGridCellSize").toInt());
+			mCurrentWall->reshapeBeginWithGrid(SettingsManager::value("2dDoubleGridCellSize").toReal());
+			mCurrentWall->reshapeEndWithGrid(SettingsManager::value("2dDoubleGridCellSize").toReal());
 		} else {
 			if (event->modifiers() & Qt::ShiftModifier) {
 				mCurrentWall->reshapeRectWithShift();
@@ -1148,7 +1148,7 @@ void TwoDModelScene::alignWalls()
 	if (SettingsManager::value("2dShowGrid").toBool()) {
 		for (auto &&wall : mModel.worldModel().walls()) {
 			if (items().contains(wall.data())) {
-				wall->alignTheWall(SettingsManager::value("2dGridCellSize").toInt());
+				wall->alignTheWall(SettingsManager::value("2dDoubleGridCellSize").toReal());
 			}
 		}
 	}

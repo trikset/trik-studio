@@ -51,7 +51,7 @@ WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 WallItem *WallItem::clone() const
 {
-	WallItem * const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto * const cloned = new WallItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	connect(this, &AbstractItem::positionChanged, cloned, &WallItem::recalculateBorders);
 	connect(this, &AbstractItem::x1Changed, cloned, &WallItem::recalculateBorders);
@@ -65,7 +65,7 @@ WallItem *WallItem::clone() const
 
 QAction *WallItem::wallTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_wall.png"), tr("Wall (W)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_W), QKeySequence(Qt::Key_2)});
 	result->setCheckable(true);
 	return result;
@@ -175,8 +175,8 @@ void WallItem::deserialize(const QDomElement &element)
 	setY2(end.y());
 
 	readPenBrush(element);
-	if (pen().widthF()) {
-		mWallWidth = pen().widthF();
+	if (pen().width()) {
+		mWallWidth = pen().width();
 	}
 
 	SolidItem::deserialize(element);
@@ -190,7 +190,8 @@ QPainterPath WallItem::path() const
 
 void WallItem::recalculateBorders()
 {
-	mPath = mLineImpl.shape(mWallWidth, begin().x(), begin().y(), end().x(), end().y());
+	/// TODO: Fix narrowing conversion
+	mPath = mLineImpl.shape(static_cast<int>(mWallWidth), begin().x(), begin().y(), end().x(), end().y());
 }
 
 void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -202,7 +203,7 @@ void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
 		reshapeRectWithShift();
 	} else {
 		if (SettingsManager::value("2dShowGrid").toBool() && event->modifiers() != Qt::ControlModifier) {
-			resizeWithGrid(event, SettingsManager::value("2dGridCellSize").toInt());
+			resizeWithGrid(event, SettingsManager::value("2dDoubleGridCellSize").toReal());
 		} else {
 			if (dragState() == TopLeft || dragState() == BottomRight) {
 				calcResizeItem(event);
@@ -220,7 +221,8 @@ void WallItem::reshapeRectWithShift()
 	const qreal differenceY = qAbs(y2() - y1());
 	const qreal differenceXY = qAbs(differenceX - differenceY);
 	const qreal size = qMax(differenceX, differenceY);
-	const int delta = size / 2;
+	/// TODO: Fix narrowing conversion
+	const int delta = static_cast<int>(size / 2);
 	if (differenceXY > delta) {
 		const qreal corner1X = dragState() == TopLeft ? x2() : x1();
 		const qreal corner1Y = dragState() == TopLeft ? y2() : y1();
@@ -247,7 +249,7 @@ void WallItem::reshapeRectWithShift()
 	}
 }
 
-void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
+void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, qreal gridSize)
 {
 	const qreal x = mapFromScene(event->scenePos()).x();
 	const qreal y = mapFromScene(event->scenePos()).y();
@@ -257,31 +259,31 @@ void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, int indexGrid)
 	if (dragState() == TopLeft) {
 		setX1(x);
 		setY1(y);
-		reshapeBeginWithGrid(indexGrid);
+		reshapeBeginWithGrid(gridSize);
 	} else if (dragState() == BottomRight) {
 		setX2(x);
 		setY2(y);
-		reshapeEndWithGrid(indexGrid);
+		reshapeEndWithGrid(gridSize);
 	} else {
 		setPos(mEstimatedPos);
-		moveBy(alignedCoordinate(begin().x(), indexGrid) - begin().x()
-			   , alignedCoordinate(begin().y(), indexGrid) - begin().y());
+		moveBy(alignedCoordinate(begin().x(), gridSize) - begin().x()
+			   , alignedCoordinate(begin().y(), gridSize) - begin().y());
 	}
 }
 
-void WallItem::reshapeEndWithGrid(int indexGrid)
+void WallItem::reshapeEndWithGrid(qreal gridSize)
 {
-	setX2(alignedCoordinate(end().x(), indexGrid) - pos().x());
-	setY2(alignedCoordinate(end().y(), indexGrid) - pos().y());
+	setX2(alignedCoordinate(end().x(), gridSize) - pos().x());
+	setY2(alignedCoordinate(end().y(), gridSize) - pos().y());
 }
 
-void WallItem::reshapeBeginWithGrid(int indexGrid)
+void WallItem::reshapeBeginWithGrid(qreal gridSize)
 {
-	setX1(alignedCoordinate(begin().x(), indexGrid) - pos().x());
-	setY1(alignedCoordinate(begin().y(), indexGrid) - pos().y());
+	setX1(alignedCoordinate(begin().x(), gridSize) - pos().x());
+	setY1(alignedCoordinate(begin().y(), gridSize) - pos().y());
 }
 
-void WallItem::alignTheWall(int indexGrid)
+void WallItem::alignTheWall(qreal indexGrid)
 {
 	reshapeBeginWithGrid(indexGrid);
 	reshapeEndWithGrid(indexGrid);

@@ -90,6 +90,7 @@ HEADERS += \
 	$$PWD/src/engine/templates/details/templatesParser.h \
 	$$PWD/src/engine/templates/details/template.h \
 	$$PWD/src/engine/templates/templateParserApi.h \
+	$$PWD/src/engine/view/parts/gridSizeWidget.h \
 	$$PWD/src/engine/constraints/constraintsChecker.h \
 	$$PWD/src/engine/constraints/details/defines.h \
 	$$PWD/src/engine/constraints/details/constraintsParser.h \
@@ -165,6 +166,7 @@ SOURCES += \
 	$$PWD/src/engine/view/parts/robotItemPopup.cpp \
 	$$PWD/src/engine/view/parts/speedPopup.cpp \
 	$$PWD/src/engine/view/parts/ruler.cpp \
+	$$PWD/src/engine/view/parts/gridSizeWidget.cpp \
 	$$PWD/src/engine/model/model.cpp \
 	$$PWD/src/engine/model/metricSystem.cpp \
 	$$PWD/src/engine/model/metricCoordinateSystem.cpp \

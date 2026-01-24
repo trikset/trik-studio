@@ -25,7 +25,7 @@ using namespace qReal;
 using namespace graphicsUtils;
 
 ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		     const QSharedPointer<model::Image> &image, QRect geometry)
+		     const QSharedPointer<model::Image> &image, const QRectF &geometry)
 	: mImage(image)
 {
 	setCoordinateSystem(metricSystem);
@@ -44,7 +44,7 @@ ImageItem::ImageItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 
 AbstractItem *ImageItem::clone() const
 {
-	const auto cloned = new ImageItem(coordinateSystem(), mImage, QRect(x1(), y1(), x2() - x1(), y2() - y1()));
+	const auto cloned = new ImageItem(coordinateSystem(), mImage, QRectF(x1(), y1(), x2() - x1(), y2() - y1()));
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
@@ -90,7 +90,7 @@ QRectF ImageItem::boundingRect() const
 
 QRectF ImageItem::calcNecessaryBoundingRect() const
 {
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1()));
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
 
 void ImageItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -232,10 +232,10 @@ QRectF ImageItem::deserializeRect(const QString &string) const
 		const auto y = splittedStr[1].toDouble();
 		const auto w = splittedStr[2].toDouble();
 		const auto h = splittedStr[3].toDouble();
-		return QRectF(x, y, w, h);
+		return {x, y, w, h};
 	}
 
-	return QRectF();
+	return {};
 }
 
 void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
@@ -250,7 +250,7 @@ void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
 		}
 	} else if (dragState() != None) {
 		setFlag(QGraphicsItem::ItemIsMovable, false);
-		const auto gridSize = SettingsManager::value("2dGridCellSize").toInt();
+		const auto gridSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
 		const auto x = alignedCoordinate(event->scenePos().x(), gridSize);
 		const auto y = alignedCoordinate(event->scenePos().y(), gridSize);
 		setXYWithDragState(mapFromScene(x, y));
@@ -261,7 +261,7 @@ void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
 		// and align top left corner to grid
 		QRectF itemBoundingRect = calcNecessaryBoundingRect();
 		const auto topLeft = mapToScene(QPointF(itemBoundingRect.left(), itemBoundingRect.top()));
-		const auto gridSize = SettingsManager::value("2dGridCellSize").toInt();
+		const auto gridSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
 		const auto x = alignedCoordinate(topLeft.x(), gridSize);
 		const auto y = alignedCoordinate(topLeft.y(), gridSize);
 		auto delta = QPointF(x, y) - topLeft;

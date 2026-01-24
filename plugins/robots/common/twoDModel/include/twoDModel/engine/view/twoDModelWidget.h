@@ -50,6 +50,7 @@ namespace twoDModel {
 namespace model {
 class Model;
 class RobotModel;
+class SizeUnit;
 }
 
 namespace view {
@@ -176,8 +177,7 @@ private Q_SLOTS:
 	void trainingModeChanged(bool enabled);
 
 	void updateUIPhysicsSettings();
-	void updateRobotInfoWidget(const qreal factor, const QString& unitString);
-
+	void updateRobotInfoWidget(const QSharedPointer<twoDModel::model::SizeUnit> &sizeUnit);
 private:
 	enum CursorType
 	{

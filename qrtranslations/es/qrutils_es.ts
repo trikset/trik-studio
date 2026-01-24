@@ -69,7 +69,7 @@
         <translation>División entera por cero</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="626"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="627"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
