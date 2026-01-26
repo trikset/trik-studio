@@ -83,11 +83,13 @@ copy_qt_lib QtConcurrent
 mkdir "$BUNDLE_CONTENTS/MacOS/platforms"
 mkdir "$BUNDLE_CONTENTS/MacOS/imageformats"
 mkdir "$BUNDLE_CONTENTS/MacOS/iconengines"
+mkdir "$BUNDLE_CONTENTS/MacOS/mediaservice"
 
 rsync -a   "$QT_PLUGINS"/platforms/libq{cocoa,minimal,offscreen}.dylib                          "$BUNDLE_CONTENTS/MacOS/platforms"
 rsync -a   "$QT_PLUGINS"/imageformats/libqsvg.dylib                         "$BUNDLE_CONTENTS/MacOS/imageformats"
 rsync -a   "$QT_PLUGINS"/imageformats/libqjpeg.dylib                        "$BUNDLE_CONTENTS/MacOS/imageformats"
 rsync -a   "$QT_PLUGINS"/iconengines/libqsvgicon.dylib                      "$BUNDLE_CONTENTS/MacOS/iconengines"
+rsync -a   "$QT_PLUGINS"/mediaservice/libqavfmediaservice.dylib             "$BUNDLE_CONTENTS/MacOS/mediaservice"
 
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqminimal.dylib"       "$QT_LIB/lib" "$LIB_PATH"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqoffscreen.dylib"       "$QT_LIB/lib" "$LIB_PATH"
@@ -95,11 +97,13 @@ fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/platforms/libqcocoa.dylib"       
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqsvg.dylib"      "$QT_LIB/lib" "$LIB_PATH"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/imageformats/libqjpeg.dylib"      "$QT_LIB/lib" "$LIB_PATH"
 fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/iconengines/libqsvgicon.dylib"   "$QT_LIB/lib" "$LIB_PATH"
+fix_qreal_dependencies "$BUNDLE_CONTENTS/MacOS/iconengines/libqavfmediaservice.dylib"   "$QT_LIB/lib" "$LIB_PATH"
 
 # Cleaning up prebuild-common.sh results…
 rm -rf "$PWD"/../data/platforms/
 rm -rf "$PWD"/../data/imageformats/
 rm -rf "$PWD"/../data/iconengines/
+rm -rf "$PWD"/../data/mediaservice/
 rm -rf "$PWD"/../data/plugins/
 mv "$PWD/../data/acknowledgements.txt" "$BUNDLE_CONTENTS/Resources"
 mv "$PWD/../data/changelog.txt" "$BUNDLE_CONTENTS/Resources"
