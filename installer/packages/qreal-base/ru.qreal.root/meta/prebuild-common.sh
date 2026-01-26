@@ -20,6 +20,7 @@ rsync -a "$INSTALLER_ROOT"/licenses/acknowledgements.txt                     "$P
 
 mkdir -p "$PWD"/../data/platforms
 mkdir -p "$PWD"/../data/imageformats
+mkdir -p "$PWD"/../data/mediaservice
 mkdir -p "$PWD"/../data/iconengines
 mkdir -p "$PWD"/../data/plugins/tools
 mkdir -p "$PWD"/../data/scripts/
