@@ -27,4 +27,5 @@ rsync -a "$BIN_DIR/run_maze_generator.sh"                                 "$PWD/
 rm -rf "$PWD"/../data/plugins/
 rsync -a --remove-source-files "$PWD"/../data/help/ "$PWD"/../data/resources/help/
 rsync -a --remove-source-files "$PWD"/../data/images/ "$PWD"/../data/resources/images/
+rsync -a --remove-source-files "$PWD"/../data/templates/ "$PWD"/../data/resources/templates/
 mv "$PWD"/../data/splashscreen.png "$PWD"/../data/bin/
