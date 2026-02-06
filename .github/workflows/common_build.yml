@@ -73,7 +73,7 @@ jobs:
       os: macos-14
       build: true
       build_installer: true
-      qmake_extra: " CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=use_same_qslog CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=silent CONFIG+=warn_off"
       trik_python3_version_minor: 11
       tests: true
     secrets: inherit
@@ -160,7 +160,7 @@ jobs:
       build: true
       build_installer: true
       tests: true
-      qmake_extra: "CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=warn_off"
+      qmake_extra: "CONFIG+=use_same_qslog CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=warn_off"
       gcc_version: 13
       trik_qt_version: 5.15
       trik_python3_version_minor: 11
