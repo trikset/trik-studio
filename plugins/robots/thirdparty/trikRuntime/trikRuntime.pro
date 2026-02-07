@@ -19,7 +19,6 @@ CONFIG += trik_not_brick
 cache(CONFIG, set)
 
 SUBDIRS += \
-	trikRuntimeQsLog \
 	trikKernel \
 	trikNetwork \
 	trikControl \
@@ -29,9 +28,20 @@ SUBDIRS += \
 	mlx90640-library \
 #	translations \
 
+EXTERNAL_SETTINGS = $$PWD/trikRuntimeExternal.pri
+
+trikRuntime_use_local_qslog {
+    SUBDIRS += trikRuntimeQsLog
+    trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
+    EXTERNAL_SETTINGS =
+    trikKernel.depends = trikRuntimeQsLog
+}
+
+cache(EXTERNAL_SETTINGS, set stash super)
+
 tests {
 	SUBDIRS *= tests
-	tests.depends = trikScriptRunner trikCommunicator trikKernel trikRuntimeQsLog
+	tests.depends = trikScriptRunner trikCommunicator trikKernel
 	tests.subdir = $$PWD/trikRuntime/tests
 }
 
@@ -40,7 +50,6 @@ tests {
     trikScriptRunner.depends += PythonQt
     PythonQt.subdir = $$PWD/trikRuntime/PythonQt
 }
-trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
 trikScriptRunner.subdir = $$PWD/trikRuntime/trikScriptRunner
 trikCommunicator.subdir = $$PWD/trikRuntime/trikCommunicator
 trikKernel.subdir = $$PWD/trikRuntime/trikKernel
@@ -48,13 +57,11 @@ trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
 trikControl.subdir = $$PWD/trikRuntime/trikControl
 translations.subdir = $$PWD/trikRuntime/translations
 trikHal.subdir = $$PWD/trikRuntime/trikHal
-trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
 mlx90640-library.subdir = $$PWD/trikRuntime/mlx90640-library
+
 trikControl.depends = trikKernel trikHal mlx90640-library
-trikKernel.depends = trikRuntimeQsLog
 trikNetwork.depends = trikKernel
 trikScriptRunner.depends += trikControl trikKernel trikNetwork
 trikHal.depends = trikKernel
 trikCommunicator.depends = trikScriptRunner
-
 OTHER_FILES += trikRuntime/trikRuntime.pro
