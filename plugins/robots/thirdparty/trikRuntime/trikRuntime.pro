@@ -19,7 +19,6 @@ CONFIG += trik_not_brick
 cache(CONFIG, set)
 
 SUBDIRS += \
-	trikRuntimeQsLog \
 	trikKernel \
 	trikNetwork \
 	trikControl \
@@ -28,6 +27,17 @@ SUBDIRS += \
 	trikScriptRunner \
 	mlx90640-library \
 #	translations \
+
+EXTERNAL_SETTINGS = $$PWD/trikRuntimeExternal.pri
+cache(EXTERNAL_SETTINGS, set stash super)
+
+trikRuntime_use_local_qslog {
+    SUBDIRS += trikRuntimeQsLog
+    trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
+    EXTERNAL_SETTINGS =
+    cache(EXTERNAL_SETTINGS, set stash super)
+    trikKernel.depends = trikRuntimeQsLog
+}
 
 tests {
 	SUBDIRS *= tests
@@ -50,19 +60,6 @@ trikHal.subdir = $$PWD/trikRuntime/trikHal
 mlx90640-library.subdir = $$PWD/trikRuntime/mlx90640-library
 
 trikControl.depends = trikKernel trikHal mlx90640-library
-
-CONFIG(use_same_qslog) {
-    SUBDIRS -= trikRuntimeQsLog
-    EXTERNAL_SETTINGS = $$PWD/trikRuntimeExternal.pri
-    cache(EXTERNAL_SETTINGS, set stash super)
-} else {
-    trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
-    EXTERNAL_SETTINGS =
-    cache(EXTERNAL_SETTINGS, set stash super)
-    trikKernel.depends = trikRuntimeQsLog
-    tests.depends += trikRuntimeQsLog
-}
-
 trikNetwork.depends = trikKernel
 trikScriptRunner.depends += trikControl trikKernel trikNetwork
 trikHal.depends = trikKernel
