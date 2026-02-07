@@ -29,15 +29,15 @@ SUBDIRS += \
 #	translations \
 
 EXTERNAL_SETTINGS = $$PWD/trikRuntimeExternal.pri
-cache(EXTERNAL_SETTINGS, set stash super)
 
 trikRuntime_use_local_qslog {
     SUBDIRS += trikRuntimeQsLog
     trikRuntimeQsLog.file = $$PWD/trikRuntime/qslog/QsLogSharedLibrary.pro
     EXTERNAL_SETTINGS =
-    cache(EXTERNAL_SETTINGS, set stash super)
     trikKernel.depends = trikRuntimeQsLog
 }
+
+cache(EXTERNAL_SETTINGS, set stash super)
 
 tests {
 	SUBDIRS *= tests
