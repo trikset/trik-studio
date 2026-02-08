@@ -38,5 +38,5 @@
 
 extern std::atomic<char*> globalSanitizerLogPath;
 
-extern void initSanitizerPath(const char* path);
+extern "C" void initSanitizerPath(const char* path);
 #endif
