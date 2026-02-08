@@ -19,6 +19,7 @@
 #include <QtCore/QDirIterator>
 #include <QtWidgets/QApplication>
 #include <qrkernel/logging.h>
+#include <sanitizers/sanitizers.h>
 #include <qrkernel/platformInfo.h>
 #include "runner.h"
 
@@ -42,7 +43,7 @@ bool loadTranslators(const QString &locale)
 	bool hasTranslations = false;
 	while (directories.hasNext()) {
 		for (auto &&translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
-			QTranslator *translator = new QTranslator(qApp);
+			auto *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);
 			hasTranslations = true;
@@ -83,6 +84,10 @@ int main(int argc, char *argv[])
 	const QDir logsDir(qReal::PlatformInfo::invariantSettingsPath("pathToLogs"));
 	if (logsDir.mkpath(logsDir.absolutePath())) {
 		logger.addLogTarget(logsDir.filePath("2d-model.log"), maxLogSize, 2);
+#ifdef HAS_SANITIZER_INTERFACE
+		const auto sanitizersPath = logsDir.filePath("sanitizer.log").toLocal8Bit();
+		initSanitizerPath(sanitizersPath.constData());
+#endif
 	}
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture();
@@ -129,7 +134,7 @@ int main(int argc, char *argv[])
 				, QObject::tr("The complete file path, including the filename"\
 					      ", to save the generated JavaScript or Python code.")
 				, "path-to-save-code", QString());
-	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
+	QCommandLineOption generateModeOption("generate-mode", QObject::tr(R"(Select "python" or "javascript".)")
 					      , "generate-mode", "javascript");
 	QCommandLineOption directScriptExecutionPathOption("script-path"
 						, QObject::tr("The path to the Python or JavaScript file that will be used for interpretation.")
