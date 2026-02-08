@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #pragma once
-#include <atomic>
+#include <string>
 
 #if defined(__SANITIZE_ADDRESS__)
 #	define HAS_ASAN 1
@@ -35,8 +35,5 @@
 
 #ifdef HAS_SANITIZER_INTERFACE
 #include <sanitizer/common_interface_defs.h>
-
-extern std::atomic<char*> globalSanitizerLogPath;
-
 extern "C" void initSanitizerPath(const char* path);
 #endif
