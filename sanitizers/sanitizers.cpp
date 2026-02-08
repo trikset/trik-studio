@@ -35,16 +35,6 @@ extern "C" {
 	}
 
 	// NOLINTNEXTLINE(bugprone-reserved-identifier)
-	const char* __asan_default_options() {
-		return "detect_leaks=1";
-	}
-
-	// NOLINTNEXTLINE(bugprone-reserved-identifier)
-	const char* __ubsan_default_options() {
-		return "print_stacktrace=1";
-	}
-
-	// NOLINTNEXTLINE(bugprone-reserved-identifier)
 	void __sanitizer_on_print(const char* str) {
 		std::lock_guard<std::mutex> lock(sanitizerMutex);
 
