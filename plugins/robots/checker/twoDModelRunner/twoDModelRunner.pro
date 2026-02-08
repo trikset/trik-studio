@@ -40,3 +40,5 @@ SOURCES += \
 	$$PWD/main.cpp \
 	$$PWD/runner.cpp \
 	$$PWD/reporter.cpp \
+
+include($$PWD/../../../../sanitizers/sanitizers.pri)

@@ -163,5 +163,6 @@ macx {
 
 DISTFILES += lsan.supp
 include(scriptAPI/scriptAPI.pri)
+include($$PWD/../../sanitizers/sanitizers.pri)
 copyToDestdir($$PWD/lsan.supp, now)
 
