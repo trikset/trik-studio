@@ -15,39 +15,44 @@
 #include "sanitizers.h"
 #include <cstdio>
 #include <mutex>
-#include <cstring>
+#include <string>
 
 #ifdef HAS_SANITIZER_INTERFACE
 
-std::atomic<char*> globalSanitizerLogPath{nullptr};
+static std::string globalSanitizerLogPath; // clazy:exclude=non-pod-global-static
+static std::mutex sanitizerMutex;
+static FILE* sanitizerFile = nullptr;
 
 extern "C" {
 	void initSanitizerPath(const char* path) {
-		if (auto* const newPath = strdup(path)) {
-			if (auto* const oldPath = globalSanitizerLogPath.exchange(newPath)) {
-				free(oldPath);
-			}
+		if (!path) return;
+		std::lock_guard<std::mutex> lock(sanitizerMutex);
+		globalSanitizerLogPath = path;
+		if (sanitizerFile) {
+			fclose(sanitizerFile);
+			sanitizerFile = nullptr;
 		}
 	}
 
 	// NOLINTNEXTLINE(bugprone-reserved-identifier)
-	const char* __asan_default_options() { return "detect_leaks=1"; }
+	const char* __asan_default_options() {
+		return "detect_leaks=1";
+	}
 
 	// NOLINTNEXTLINE(bugprone-reserved-identifier)
-	const char* __ubsan_default_options() { return "print_stacktrace=1"; }
+	const char* __ubsan_default_options() {
+		return "print_stacktrace=1";
+	}
 
 	// NOLINTNEXTLINE(bugprone-reserved-identifier)
 	void __sanitizer_on_print(const char* str) {
-		static FILE* file = nullptr;
-		static std::mutex mutex;
+		std::lock_guard<std::mutex> lock(sanitizerMutex);
 
-		std::lock_guard<std::mutex> lock(mutex);
-		auto* const path = globalSanitizerLogPath.load();
-		if (path && !file) {
-			file = fopen(path, "a");
+		if (!sanitizerFile && !globalSanitizerLogPath.empty()) {
+			sanitizerFile = fopen(globalSanitizerLogPath.c_str(), "a");
 		}
 
-		auto* const out = file ? file : stderr;
+		FILE* out = sanitizerFile ? sanitizerFile : stderr;
 		fputs(str, out);
 		fflush(out);
 	}
