@@ -69,7 +69,7 @@ void setDefaultLocale()
 int main(int argc, char *argv[])
 {
 	qReal::PlatformInfo::enableHiDPISupport();
-	qsrand(time(0));
+	qsrand(time(nullptr));
 	QScopedPointer<QApplication> app(new QApplication(argc, argv));
 	QCoreApplication::setApplicationName("2D-model");
 	QCoreApplication::setApplicationVersion(interpreterCore::Customizer::trikStudioVersion());
