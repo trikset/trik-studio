@@ -350,6 +350,13 @@ bool Label::isReadOnly() const
 	return mProperties->isReadOnly();
 }
 
+void Label::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	// TODO: https://qt-project.atlassian.net/browse/QTBUG-88309#icft=QTBUG-88309
+	// Just remove this Label::contextMenuEvent override when upgrading to Qt >= 5.15.3
+	event->accept();
+}
+
 void Label::focusOutEvent(QFocusEvent *event)
 {
 	if (event->reason() != Qt::PopupFocusReason) {
