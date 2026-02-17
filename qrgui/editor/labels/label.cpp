@@ -478,7 +478,7 @@ void Label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 	// Default dashed frame is drawn arround the whole bounding rect (arround prefix and suffix too). Disabling it.
 	const_cast<QStyleOptionGraphicsItem *>(option)->state &= ~QStyle::State_Selected & ~QStyle::State_HasFocus;
-	
+
 	QGraphicsTextItem::paint(painter, option, widget);
 }
 
