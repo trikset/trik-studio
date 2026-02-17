@@ -585,7 +585,7 @@
 <context>
     <name>twoDModel::items::WallItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="68"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/wallItem.cpp" line="69"/>
         <source>Wall (W)</source>
         <translation>Pared (W)</translation>
     </message>
