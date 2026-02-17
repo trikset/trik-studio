@@ -28,6 +28,7 @@ using namespace graphicsUtils;
 namespace {
 	constexpr qreal wallFriction = 1.0f;
 	constexpr qreal wallRestituion = 0.8f;
+	constexpr qreal wallIntersectionEps = 1e-5;
 }
 
 WallItem::WallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
@@ -304,10 +305,10 @@ QPolygonF WallItem::collidingPolygon() const
 	QLineF dc(abcdBoundingRect.bottomLeft(), abcdBoundingRect.bottomRight());
 	QLineF ad(abcdBoundingRect.topLeft(), abcdBoundingRect.bottomLeft());
 
-	QList<QPointF> abIntersection = mathUtils::Geometry::intersection(ab, mPath);
-	QList<QPointF> bcIntersection = mathUtils::Geometry::intersection(bc, mPath);
-	QList<QPointF> dcIntersection = mathUtils::Geometry::intersection(dc, mPath);
-	QList<QPointF> adIntersection = mathUtils::Geometry::intersection(ad, mPath);
+	QList<QPointF> abIntersection = mathUtils::Geometry::intersection(ab, mPath, wallIntersectionEps);
+	QList<QPointF> bcIntersection = mathUtils::Geometry::intersection(bc, mPath, wallIntersectionEps);
+	QList<QPointF> dcIntersection = mathUtils::Geometry::intersection(dc, mPath, wallIntersectionEps);
+	QList<QPointF> adIntersection = mathUtils::Geometry::intersection(ad, mPath, wallIntersectionEps);
 
 	Q_ASSERT(abIntersection.length() == 2);
 	Q_ASSERT(bcIntersection.length() == 2);
