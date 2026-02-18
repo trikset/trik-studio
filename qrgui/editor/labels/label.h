@@ -79,11 +79,13 @@ private:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 3)
+	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
+#endif
 	void focusOutEvent(QFocusEvent *event) override;
 	void keyPressEvent(QKeyEvent *event) override;
 
-	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void drawText(QPainter *painter, const QRectF &rect, const QString &text);
 	QRectF prefixRect() const;
 	QRectF suffixRect() const;

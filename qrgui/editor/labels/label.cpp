@@ -25,6 +25,7 @@ using namespace qReal::gui::editor;
 
 Label::Label(models::GraphicalModelAssistApi &graphicalAssistApi
 		, models::LogicalModelAssistApi &logicalAssistApi
+		// NOLINTNEXTLINE(modernize-pass-by-value)
 		, const Id &elementId
 		, const QSharedPointer<LabelProperties> &properties)
 	: mIsStretched(false)
@@ -44,9 +45,7 @@ Label::Label(models::GraphicalModelAssistApi &graphicalAssistApi
 	setAcceptDrops(true);
 }
 
-Label::~Label()
-{
-}
+Label::~Label() = default;
 
 const LabelProperties &Label::info() const
 {
@@ -188,7 +187,7 @@ QString Label::location() const
 void Label::updateData(bool withUndoRedo)
 {
 	const QString value = toPlainText();
-	Element * const parent = dynamic_cast<Element *>(parentItem());
+	auto * const parent = dynamic_cast<Element *>(parentItem());
 	if (!mProperties->nameForRoleProperty().isEmpty()) {
 		if (mEnumValues.isEmpty()) {
 			parent->setLogicalProperty(mProperties->nameForRoleProperty()
@@ -197,7 +196,8 @@ void Label::updateData(bool withUndoRedo)
 					, withUndoRedo
 			);
 		} else {
-			const QString repoValue = mEnumValues.values().contains(value)
+			const auto &values = mEnumValues.values();
+			const QString repoValue = values.contains(value)
 					? mEnumValues.key(value)
 					: (withUndoRedo ? enumText(value) : value);
 			parent->setLogicalProperty(mProperties->nameForRoleProperty()
@@ -234,7 +234,8 @@ void Label::updateData(bool withUndoRedo)
 
 		parent->setLogicalProperty(mProperties->binding(), mTextBeforeTextInteraction, value, withUndoRedo);
 	} else {
-		const QString repoValue = mEnumValues.values().contains(value)
+		const auto &values = mEnumValues.values();
+		const QString repoValue = values.contains(value)
 				? mEnumValues.key(value)
 				: (withUndoRedo ? enumText(value) : value);
 		parent->setLogicalProperty(mProperties->binding(), mTextBeforeTextInteraction, repoValue, withUndoRedo);
@@ -264,7 +265,8 @@ void Label::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	if (dynamic_cast<EdgeElement *>(parentItem())) {
 		// Passing event to edge because users usially want to edit its property when clicking on it.
-		QGraphicsItem::mousePressEvent(event);
+		// NOLINTNEXTLINE(bugprone-parent-virtual-call)
+		QGraphicsItem::mousePressEvent(event);  //clazy:exclude=skipped-base-method
 		return;
 	}
 
@@ -349,6 +351,15 @@ bool Label::isReadOnly() const
 {
 	return mProperties->isReadOnly();
 }
+
+// https://qt-project.atlassian.net/browse/QTBUG-88309#icft=QTBUG-88309
+// TODO: Just remove this Label::contextMenuEvent override when upgrading to Qt >= 5.15.3
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 3)
+void Label::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	event->accept();
+}
+#endif
 
 void Label::focusOutEvent(QFocusEvent *event)
 {
@@ -471,7 +482,7 @@ void Label::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 	// Default dashed frame is drawn arround the whole bounding rect (arround prefix and suffix too). Disabling it.
 	const_cast<QStyleOptionGraphicsItem *>(option)->state &= ~QStyle::State_Selected & ~QStyle::State_HasFocus;
-	
+
 	QGraphicsTextItem::paint(painter, option, widget);
 }
 
