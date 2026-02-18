@@ -60,7 +60,7 @@ jobs:
       if: startsWith(inputs.os, 'windows')
 
     - name: Install dependencies
-      run: pacman -Sy && pacman -S git p7zip sudo --noconfirm
+      run: pacman -Syyu && pacman -S git p7zip sudo --noconfirm
       if: startsWith(inputs.container_name, 'arch')
 
     - name: Install dependencies
