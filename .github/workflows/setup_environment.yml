@@ -185,7 +185,7 @@ jobs:
       timeout-minutes: 25
 
     - name: Upload compile_commands.json
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: compile_commands.json
         path: |
@@ -253,7 +253,7 @@ jobs:
       if: ${{ inputs.build_installer }}
 
     - name: Upload installer artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: ${{ env.ARTIFACT_INSTALLER_NAME }}
         path: |
