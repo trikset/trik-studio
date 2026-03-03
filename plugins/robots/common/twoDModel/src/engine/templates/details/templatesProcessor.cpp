@@ -16,6 +16,7 @@
 #include "templatesProcessor.h"
 #include "templatesManager.h"
 #include "template.h"
+#include <QObject>
 
 using namespace twoDModel::templates::details;
 

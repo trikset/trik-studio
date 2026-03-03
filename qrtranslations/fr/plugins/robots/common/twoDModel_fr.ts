@@ -270,7 +270,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesProcessor.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesProcessor.cpp" line="+31"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
