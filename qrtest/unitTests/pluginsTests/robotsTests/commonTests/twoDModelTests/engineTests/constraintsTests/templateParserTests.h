@@ -16,11 +16,13 @@
 
 #include <gtest/gtest.h>
 #include <src/engine/templates/details/template.h>
+#include <src/engine/templates/details/templatesManager.h>
 
 namespace qrTest {
 
 class XmlTemplateMock;
 class XmlTemplateParserMock;
+class XmlTemplateProcessorMock;
 namespace robotsTests {
 namespace commonTwoDModelTests {
 
@@ -113,15 +115,19 @@ class XmlTemplateParserSubstitutionErrorTest : public XmlTemplateTestBase,
 protected:
 	void SetUp() override {
 		XmlTemplateTestBase::SetUp();
+		mTemplateManager = std::make_unique<twoDModel::templates::details::TemplatesManager>();
 		mMockTemplateParser = std::make_unique<XmlTemplateParserMock>();
+		mMockTemplateProcessor = std::make_unique<XmlTemplateProcessorMock>(mTemplateManager.get());
 	}
 
 	void TearDown() override {
-		mMockTemplateParser.reset();
+		mMockTemplateProcessor.reset();
 	}
 
 	const SubstitutionErrorTestCase& testCase() const { return mCurrentTestCase; }
+	std::unique_ptr<twoDModel::templates::details::TemplatesManager> mTemplateManager;
 	std::unique_ptr<XmlTemplateParserMock> mMockTemplateParser;
+	std::unique_ptr<XmlTemplateProcessorMock> mMockTemplateProcessor;
 private:
 	SubstitutionErrorTestCase mCurrentTestCase;
 };

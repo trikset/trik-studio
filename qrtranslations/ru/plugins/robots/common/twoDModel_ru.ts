@@ -461,12 +461,12 @@
         <translation>Миллиметры</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+52"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+35"/>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+10"/>
         <source>Redefinition a template %1 that already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -476,7 +476,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesProcessor.cpp" line="+30"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -496,18 +496,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+104"/>
-        <location line="+14"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+78"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesProcessor.cpp" line="+100"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-12"/>
+        <location line="+2"/>
         <source>template %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesProcessor.cpp" line="+3"/>
         <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,7 +562,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/templateParserApi.cpp" line="+85"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/templateParserApi.cpp" line="+101"/>
         <source>Error while template substitution: %1</source>
         <translation type="unfinished">Ошибка при раскрытии шаблона: %1</translation>
     </message>

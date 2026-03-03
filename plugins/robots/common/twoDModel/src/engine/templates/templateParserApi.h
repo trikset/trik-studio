@@ -14,8 +14,8 @@
 
 #pragma once
 
-#include <memory>
 #include <QDomElement>
+#include <memory>
 
 namespace qReal {
 class ErrorReporterInterface;
@@ -25,7 +25,9 @@ namespace twoDModel {
 namespace templates {
 
 namespace details {
+class TemplatesManager;
 class TemplatesParser;
+class TemplatesProcessor;
 }
 
 class TemplatesParserApi
@@ -36,17 +38,20 @@ public:
 	TemplatesParserApi(TemplatesParserApi&&) = delete;
 	TemplatesParserApi& operator=(TemplatesParserApi&&) = delete;
 	explicit TemplatesParserApi(qReal::ErrorReporterInterface &errorReporter);
-	~TemplatesParserApi();
+	virtual ~TemplatesParserApi();
 
 	QHash<QString, QDomDocument> generateTemplatesFromDirectory(const QString &directory);
 	bool proccessTemplates(const QDomElement &constraintsXml);
 	void parseSystemTemplates();
 	void parseTemplates(const QDomDocument &templatesXml);
 private:
+	/// The path to the system template library.
+	virtual QString pathsToTemplates() const;
 	void reportTemplateParserErrors();
 	void reportTemplateSubstitutionErrors();
-
-	std::unique_ptr<details::TemplatesParser> mTemplatesParser;
+	std::unique_ptr<details::TemplatesManager> mManager;
+	std::unique_ptr<details::TemplatesParser> mParser;
+	std::unique_ptr<details::TemplatesProcessor> mProcessor;
 	qReal::ErrorReporterInterface &mErrorReporter;
 };
 }

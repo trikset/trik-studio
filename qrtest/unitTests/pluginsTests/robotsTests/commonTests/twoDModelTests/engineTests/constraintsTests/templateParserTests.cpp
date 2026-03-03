@@ -48,7 +48,7 @@ TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
 	TemplateParseErrorCode actualCode;
 	int actualLine;
 
-	EXPECT_CALL(*mMockTemplateParser, parseError(::testing::_, ::testing::_, ::testing::_, ::testing::_))
+	EXPECT_CALL(*mMockTemplateParser, error(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
 		.WillOnce(::testing::Invoke(
 			[&](const QString&, int line, TemplateParseErrorCode code, const QString&) {
@@ -100,11 +100,11 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	TemplateSubstitutionErrorCode actualCode;
 	int actualLine;
 
-	EXPECT_CALL(*mMockTemplateParser, substituteError(::testing::_, ::testing::_, ::testing::_, ::testing::_))
+	EXPECT_CALL(*mMockTemplateProcessor, error(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
 		.WillOnce(::testing::Invoke(
 			[&](const QString&, int line,
-				const  qrTest::XmlTemplateParserMock::ExpansionContext &, TemplateSubstitutionErrorCode code) {
+				const  qrTest::XmlTemplateProcessorMock::ExpansionContext &, TemplateSubstitutionErrorCode code) {
 				actualCode = code;
 				actualLine = line;
 		}
@@ -118,7 +118,8 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	// Constraint xml
 	QDomDocument doc;
 	doc.setContent(testCase.testXml);
-	mMockTemplateParser->substitute(doc.documentElement());
+	mTemplateManager->addTemplates(mMockTemplateParser->currentTemplates(), false);
+	mMockTemplateProcessor->substitute(doc.documentElement());
 
 	EXPECT_EQ(actualCode, testCase.expectedCode);
 	EXPECT_EQ(actualLine, testCase.expectedLine);

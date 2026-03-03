@@ -31,11 +31,7 @@ public:
 	TemplatesParser(TemplatesParser&&) noexcept = default;
 	TemplatesParser& operator=(TemplatesParser&&) noexcept = default;
 	virtual ~TemplatesParser() = default;
-	TemplatesParser() noexcept;
-
-	/// System templates are also set via xml and embedded in the binary,
-	/// but they must also be accessible to the user for viewing.
-	void parseSystemTemplates();
+	TemplatesParser() noexcept = default;
 
 	/// It is used to parse all templates from the directory. Thus, each xml file in the directory will
 	/// be examined, and each file will search for the top-level template or templates tag.
@@ -43,75 +39,28 @@ public:
 	/// their own templates.
 	QHash<QString, QDomDocument> parseAllTemplatesFromDirectory(const QString &dirPath);
 
-	/// Accepts xml as input using templates (<use> tags) as xml nodes. The function modifies the input
-	/// xml element constraintsXml  by transforming the tree. Each <use> in this tree will be replaced by
-	/// a sequence of xml nodes resulting from template expansion after parameter substitution and sending
-	/// it to the Qt Xml parser. Template expansion is lazy, so any nodes nested in <use> templates will be
-	/// disassembled in the following steps. Also, any cyclic links between templates are prohibited.
-	/// As a result of the function, the input constraintsXml should get a form that
-	/// is understandable by the Constraints Parser.
-	bool substitute(const QDomElement &constraintsXml);
-
 	/// Returns all errors received when parsing template definitions,
 	/// which can later be displayed to the user from the ConsoleReporter interface or recorded in logs.
-	QStringList parsingErrors() const;
-
-	/// Returns all errors received when inserting parameters into template bodies,
-	/// which can later be displayed to the user from the ConsoleReporter interface or recorded in logs.
-	QStringList substituionErrors() const;
+	QStringList errors() const;
 
 	/// Clear all error messages
 	void clear();
 
+	std::unordered_map<QString, XmlTemplate> &currentTemplates();
+
 	QDomDocument parseTemplates(const QDomDocument &templatesDocument);
 protected:
 	using ParserErrorCode = XmlTemplate::TemplateParseErrorCode;
-	using SubstitutionErrorCode = XmlTemplate::TemplateSubstitutionErrorCode;
-
-	/// The path to the system template library.
-	virtual QString pathsToTemplates() const;
-	virtual void parseError(const QString& message, int line, ParserErrorCode code,
+	virtual void error(const QString& message, int line, ParserErrorCode code,
 						const QString &currentTemplate);
-
-	/// During template disclosure, it is necessary to prevent cyclic references to other templates,
-	/// as well as to have a sufficiently detailed diagnosis (disclosure chains) in case of errors in
-	/// parsing template bodies, since the same template may be incorrect depending on the parameters
-	/// provided by the user through template chains.
-	struct ExpansionContext {
-		QSet<QString> mMacrosInProgress;
-		QStringList mOrder;
-		uint32_t mDepth {};
-
-		ExpansionContext fork() const {
-			auto newCtx = ExpansionContext();
-			newCtx.mMacrosInProgress = mMacrosInProgress;
-			newCtx.mOrder = mOrder;
-			newCtx.mDepth = mDepth;
-			return newCtx;
-		}
-	};
-	virtual void substituteError(const QString& message,
-				     int line,
-				     const ExpansionContext &context,
-				     SubstitutionErrorCode code);
 private:
 	/// Parsing a separate template and checking the uniqueness of its name.
 	/// If a user overrides a library template, an error should be thrown.
 	bool parseTemplate(const QDomElement &templateElement);
 
 	XmlTemplate* findTemplate(const QString& name);
-
-	struct ExpansionItem {
-	    QDomElement mElement;
-	    ExpansionContext mContext;
-	};
-
-	std::unordered_map<QString, XmlTemplate> mTemplates;
-	std::unordered_map<QString, XmlTemplate> mSystemTemplates;
-	QString mCurrentNs {};
-	QStringList mParsingErrors;
-	QStringList mSubstituionErrors;
-	QDomElement processTemplate(const QDomElement &elements, ExpansionContext& context);
+	std::unordered_map<QString, XmlTemplate> mCurrentTemplates;
+	QStringList mErrors;
 };
 }
 }
