@@ -334,16 +334,46 @@ Condition ConstraintsParser::parseNegationTag(const QDomElement &element, Event 
 	return mConditions.negation(parseConditionsAlternative(element.firstChildElement(), event));
 }
 
+std::vector<Value> ConstraintsParser::parseTagAttibutes(const QDomElement &element, int count)
+{
+	std::vector<Value> result;
+	QStringList filteredNames;
+	const auto& attrs = element.attributes();
+
+	for (int i = 0; i < attrs.count(); ++i) {
+		const auto& name = attrs.item(i).toAttr().name();
+		if (name.startsWith("_")) {
+			filteredNames << name;
+		}
+	}
+
+	if (filteredNames.count() != count) {
+		return result;
+	}
+
+	std::sort(filteredNames.begin(), filteredNames.end());
+	const auto limit = std::min(static_cast<int>(filteredNames.size()), count);
+
+	for (int i = 0; i < limit; ++i) {
+		QString attrValue = element.attribute(filteredNames[i]);
+		result.push_back(parseSpecialValue(attrValue));
+	}
+
+	return result;
+}
+
 Condition ConstraintsParser::parseComparisonTag(const QDomElement &element)
 {
-	if (!assertChildrenExactly(element, 2)) {
+	const auto& attrs = parseTagAttibutes(element, 2);
+	const auto attrsExists = !attrs.empty();
+	if (!assertChildrenExactly(element, 2) && !attrsExists) {
 		return mConditions.constant(true);
 	}
 
 	const QString operation = element.tagName().toLower();
 
-	const Value leftValue = parseValue(element.firstChildElement());
-	const Value rightValue = parseValue(element.firstChildElement().nextSiblingElement());
+	const Value leftValue = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
+	const Value rightValue = attrsExists ? attrs.at(1) : parseValue(element.firstChildElement().nextSiblingElement());
 
 	if (operation == "equals") {
 		return mConditions.equals(leftValue, rightValue);
@@ -517,6 +547,47 @@ Trigger ConstraintsParser::parseFailTag(const QDomElement &element)
 	return mTriggers.fail(element.attribute("message"));
 }
 
+Value ConstraintsParser::autoParseValue(const QString &text)
+{
+	const auto& t = text.trimmed();
+
+	if (t.compare("true", Qt::CaseInsensitive) == 0) {
+		return mValues.boolValue(true);
+	}
+
+	if (t.compare("false", Qt::CaseInsensitive) == 0) {
+		return  mValues.boolValue(false);
+	}
+
+	bool okInt;
+	auto intValue = t.toInt(&okInt);
+	if (okInt) {
+		return mValues.intValue(intValue);
+	}
+
+	bool okDouble;
+	auto doubleValue = t.toDouble(&okDouble);
+	if (okDouble) {
+		return mValues.doubleValue(doubleValue);
+	}
+
+	return mValues.stringValue(text);
+}
+
+Value ConstraintsParser::parseSpecialValue(const QString &text)
+{
+	static const QRegularExpression strictRegex(R"(^\$\{([^}]+)\}$|)");
+	const QString trimmedText = text.trimmed();
+	QRegularExpressionMatch match = strictRegex.match(trimmedText);
+
+	if (match.hasMatch() && !match.captured(1).isEmpty()) {
+		const QString paramName = match.captured(1);
+		return mValues.specialSyntaxValue(paramName);
+	}
+
+	return autoParseValue(text);
+}
+
 QMap<QString, Value> ConstraintsParser::parseMessageText(const QString &text)
 {
 	static const QRegularExpression paramRegex(R"(\$\{([^}]+)\})");
@@ -570,25 +641,31 @@ Trigger ConstraintsParser::parseSuccessTag(const QDomElement &element)
 
 Trigger ConstraintsParser::parseSetterTag(const QDomElement &element)
 {
-	if (!assertAttributeNonEmpty(element, "name") || !assertChildrenExactly(element, 1)) {
+	const auto& attrs = parseTagAttibutes(element, 1);
+	const auto attrsExists = !attrs.empty();
+
+	if (!assertAttributeNonEmpty(element, "name") || (!assertChildrenExactly(element, 1) && !attrsExists)) {
 		return mTriggers.doNothing();
 	}
 
 	const QString name = element.attribute("name");
-	const Value value = parseValue(element.firstChildElement());
+	const Value value = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
 
 	return mTriggers.setVariable(name, value);
 }
 
 Value ConstraintsParser::parseUnaryValueTag(const QDomElement &element)
 {
-	if (!assertChildrenExactly(element, 1)) {
+	const auto& attrs = parseTagAttibutes(element, 1);
+	const auto attrsExists = !attrs.empty();
+
+	if (!assertChildrenExactly(element, 1) && !attrsExists) {
 		return mConditions.constant(true);
 	}
 
 	const QString operation = element.tagName().toLower();
 
-	Value value = parseValue(element.firstChildElement());
+	Value value = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
 
 	if (operation == "minus") {
 		return mValues.unaryMinus(value);
@@ -607,14 +684,17 @@ Value ConstraintsParser::parseUnaryValueTag(const QDomElement &element)
 
 Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 {
-	if (!assertChildrenExactly(element, 2)) {
+	const auto& attrs = parseTagAttibutes(element, 2);
+	const auto attrsExists = !attrs.empty();
+
+	if (!assertChildrenExactly(element, 2) && !attrsExists) {
 		return mConditions.constant(true);
 	}
 
 	const QString operation = element.tagName().toLower();
 
-	const Value leftValue = parseValue(element.firstChildElement());
-	const Value rightValue = parseValue(element.firstChildElement().nextSiblingElement());
+	const Value leftValue = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
+	const Value rightValue = attrsExists ? attrs.at(1) : parseValue(element.firstChildElement().nextSiblingElement());
 
 	if (operation == "sum") {
 		return mValues.sum(leftValue, rightValue);
@@ -657,16 +737,19 @@ Trigger ConstraintsParser::parseEventSetDropTag(const QDomElement &element)
 
 Trigger ConstraintsParser::parseSetObjectStateTag(const QDomElement &element)
 {
+	const auto& attrs = parseTagAttibutes(element, 1);
+	const auto attrsExists = !attrs.empty();
+
 	if (!assertAttributeNonEmpty(element, "object")
 			|| !assertAttributeNonEmpty(element, "property")
-			|| !assertChildrenExactly(element, 1))
+			|| (!assertChildrenExactly(element, 1) && !attrsExists))
 	{
 		return mTriggers.doNothing();
 	}
 
 	const Value object = mValues.objectState(element.attribute("object"));
 	const QString property = element.attribute("property");
-	const Value value = parseValue(element.firstChildElement());
+	const Value value = attrsExists ? attrs.at(0) : parseValue(element.firstChildElement());
 	return mTriggers.setObjectState(object, property, value);
 }
 

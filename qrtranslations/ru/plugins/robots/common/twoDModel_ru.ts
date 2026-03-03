@@ -238,7 +238,7 @@
     </message>
     <message>
         <location line="+59"/>
-        <location line="+183"/>
+        <location line="+213"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+281"/>
+        <location line="+334"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>

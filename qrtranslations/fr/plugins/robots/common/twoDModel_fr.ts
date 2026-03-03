@@ -69,7 +69,7 @@
     </message>
     <message>
         <location line="+59"/>
-        <location line="+183"/>
+        <location line="+213"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Balise inconnue &quot;%1&quot;.</translation>
     </message>
@@ -84,7 +84,7 @@
         <translation>La balise &quot;return&quot; doit être présente dans l&apos;expression &quot;using&quot;.</translation>
     </message>
     <message>
-        <location line="+281"/>
+        <location line="+334"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Valeur inconnue &quot;%1&quot;.</translation>
     </message>
