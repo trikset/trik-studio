@@ -779,7 +779,7 @@
     <message>
         <location line="+6"/>
         <source>Warning while parsing constraints: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупреждение при чтении ограничений: %1</translation>
     </message>
     <message>
         <location line="+232"/>

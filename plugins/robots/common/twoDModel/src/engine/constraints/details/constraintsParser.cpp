@@ -898,7 +898,8 @@ bool ConstraintsParser::assertAttributeNonEmpty(const QDomElement &element, cons
 	}
 
 	if (element.attribute(attribute).isEmpty()) {
-		const auto& message = QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)").arg(element.tagName(), attribute);
+		const auto& message = QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)")
+						.arg(element.tagName(), attribute);
 		return isError ? error(message) : warning(message);
 	}
 
