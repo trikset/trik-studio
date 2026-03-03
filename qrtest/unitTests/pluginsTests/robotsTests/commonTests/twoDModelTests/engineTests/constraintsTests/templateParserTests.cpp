@@ -319,7 +319,7 @@ R"(
 </template>
 )",
 R"(
-<use template="test_template">
+<use template="u:test_template">
 	<with id="278"/> <!-- line 3 -->
 </use>
 )",
@@ -344,7 +344,7 @@ R"(
 </template>
 )",
 R"(
-<use template="test_template">
+<use template="u:test_template">
 	<with id="278"/> <!-- valid use -->
 	<strange-tag/>
 </use>
@@ -367,7 +367,7 @@ R"(
 </template>
 )",
 R"(
-<use template="test_template"/>
+<use template="u:test_template"/>
 )",
 		"MissingReqiuredParam"
 	},
@@ -409,14 +409,14 @@ R"(
 <template name="A">
 	<content>
 <![CDATA[
-	<use template="B"/>
+	<use template="u:B"/>
 ]]>
 	</content>
 </template>
 <template name="B">
 	<content>
 <![CDATA[
-	<use template="C"/>
+	<use template="u:C"/>
 ]]>
 	</content>
 </template>
@@ -428,7 +428,7 @@ R"(
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
-	<use template="A"/>
+	<use template="u:A"/>
 ]]>
 	</content>
 </template>
@@ -436,7 +436,7 @@ R"(
 )",
 R"(
 <constraints>
-<use template="A"/>  <!-- recursive expansion, line 7 relative initial of C template body -->
+<use template="u:A"/>  <!-- recursive expansion, line 7 relative initial of C template body -->
 </constraints>
 )",
 		"RecursiveTemplateExpansion"
@@ -453,7 +453,7 @@ R"(
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
-	<use template="bober"/>
+	<use template="u:bober"/>
 ]]>
 	</content>
 </template>
@@ -461,7 +461,7 @@ R"(
 )",
 R"(
 <constraints>
-<use template="C"/>  <!-- use indeclared template "bober", line 6 relative initial of C template body -->
+<use template="u:C"/>  <!-- use indeclared template "bober", line 6 relative initial of C template body -->
 </constraints>
 )",
 		"UseUndeclaredTemplate"

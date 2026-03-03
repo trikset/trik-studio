@@ -25,7 +25,7 @@ static auto* sUserLibraryNamespace = "u:";
 using namespace twoDModel::templates::details;
 
 namespace {
-bool isPotetntialTemplate(const QString& tagName) {
+bool isPotentialTemplate(const QString& tagName) {
 	return tagName.startsWith(sSystemLibraryNamespace) || tagName.startsWith(sUserLibraryNamespace);
 }
 }
@@ -57,6 +57,7 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 		return false;
 	}
 
+	templateName = mCurrentNs + templateName;
 	const auto* foundTemplate = findTemplate(templateName);
 	if (foundTemplate) {
 		parseError(QObject::tr("Redefinition a template %1 that already exists").arg(templateName),
@@ -74,7 +75,7 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 	if (!errors.isEmpty()) {
 		return false;
 	}
-	mTemplates.emplace(mCurrentNs + templateName, std::move(xmlTemplate));
+	mTemplates.emplace(templateName, std::move(xmlTemplate));
 	return true;
 }
 
@@ -243,7 +244,7 @@ bool TemplatesParser::substitute(const QDomElement& constraintsXml) {
 		elementStack.pop();
 
 		// If the current node is not equal to use, we just want to process its children later.
-		const auto isTemplate = current.tagName() == "use" || isPotetntialTemplate(current.tagName());
+		const auto isTemplate = current.tagName() == "use" || isPotentialTemplate(current.tagName());
 		if (!isTemplate) {
 			auto&& child = current.firstChildElement();
 			while (!child.isNull()) {

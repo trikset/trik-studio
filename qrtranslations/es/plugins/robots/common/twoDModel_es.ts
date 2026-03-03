@@ -260,58 +260,58 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="62"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="63"/>
         <source>Redefinition a template %1 that already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="95"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="96"/>
         <source>the &amp;lt;templates&amp;gt; tag can only contain the &amp;lt;template&amp;gt; tag as a child tag, actual %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="174"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="175"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="180"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="181"/>
         <source>Recursive template expansion detected: %1 -&gt; %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="190"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="191"/>
         <source>The &amp;lt;use&amp;gt; tag contains a template=%1 attribute that is not the name of a declared template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="214"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="215"/>
         <source>After substituting the parameters for the template %1, it did not become a valid xml node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="318"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="332"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="319"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="333"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="320"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="321"/>
         <source>template %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="335"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="336"/>
         <source>relative the beginning of the &amp;lt;constraints&amp;gt; tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="338"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="339"/>
         <source>relative to the beginning of the %1 template body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="344"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="345"/>
         <source>Substitution chain: %1.</source>
         <translation type="unfinished"></translation>
     </message>

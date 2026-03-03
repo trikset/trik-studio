@@ -260,7 +260,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>Redefinition a template %1 that already exists</source>
         <translation type="unfinished"></translation>
     </message>
