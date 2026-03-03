@@ -255,7 +255,7 @@
         <translation>Millimètres</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+41"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/details/templatesParser.cpp" line="+52"/>
         <source>The &amp;lt;template&amp;gt; tag was provided, but the required &quot;name&quot; attribute was missing.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -270,7 +270,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+79"/>
         <source>The &amp;lt;use&amp;gt; tag must contain a &quot;template&quot; attribute</source>
         <translation type="unfinished"></translation>
     </message>
@@ -290,7 +290,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+103"/>
+        <location line="+104"/>
         <location line="+14"/>
         <source>line %1</source>
         <translation type="unfinished"></translation>

@@ -31,7 +31,7 @@ public:
 	TemplatesParser(TemplatesParser&&) noexcept = default;
 	TemplatesParser& operator=(TemplatesParser&&) noexcept = default;
 	virtual ~TemplatesParser() = default;
-	TemplatesParser() noexcept = default;
+	TemplatesParser() noexcept;
 
 	/// System templates are also set via xml and embedded in the binary,
 	/// but they must also be accessible to the user for viewing.
@@ -108,6 +108,7 @@ private:
 
 	std::unordered_map<QString, XmlTemplate> mTemplates;
 	std::unordered_map<QString, XmlTemplate> mSystemTemplates;
+	QString mCurrentNs {};
 	QStringList mParsingErrors;
 	QStringList mSubstituionErrors;
 	QDomElement processTemplate(const QDomElement &elements, ExpansionContext& context);

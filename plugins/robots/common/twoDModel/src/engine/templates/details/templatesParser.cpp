@@ -19,7 +19,18 @@
 #include "templatesParser.h"
 #include "template.h"
 
+static auto* sSystemLibraryNamespace = "ts:";
+static auto* sUserLibraryNamespace = "u:";
+
 using namespace twoDModel::templates::details;
+
+namespace {
+bool isPotetntialTemplate(const QString& tagName) {
+	return tagName.startsWith(sSystemLibraryNamespace) || tagName.startsWith(sUserLibraryNamespace);
+}
+}
+
+TemplatesParser::TemplatesParser() noexcept: mCurrentNs(sUserLibraryNamespace) {};
 
 XmlTemplate* TemplatesParser::findTemplate(const QString& name)
 {
@@ -63,7 +74,7 @@ bool TemplatesParser::parseTemplate(const QDomElement &templateElement)
 	if (!errors.isEmpty()) {
 		return false;
 	}
-	mTemplates.emplace(templateName, std::move(xmlTemplate));
+	mTemplates.emplace(mCurrentNs + templateName, std::move(xmlTemplate));
 	return true;
 }
 
@@ -147,15 +158,17 @@ QString TemplatesParser::pathsToTemplates() const
 
 void TemplatesParser::parseSystemTemplates()
 {
+	mCurrentNs = sSystemLibraryNamespace;
 	parseAllTemplatesFromDirectory(pathsToTemplates());
 	mSystemTemplates = std::move(mTemplates);
 	mTemplates.clear();
+	mCurrentNs = sUserLibraryNamespace;
 }
 
 
 QDomElement TemplatesParser::processTemplate(const QDomElement &elements, ExpansionContext& context)
 {
-	auto &&templateName = elements.attribute("template");
+	auto &&templateName = elements.tagName() == "use" ? elements.attribute("template") : elements.tagName();
 
 	if (templateName.isEmpty()) {
 		substituteError(QObject::tr(R"(The &lt;use&gt; tag must contain a "template" attribute)")
@@ -230,7 +243,8 @@ bool TemplatesParser::substitute(const QDomElement& constraintsXml) {
 		elementStack.pop();
 
 		// If the current node is not equal to use, we just want to process its children later.
-		if (current.tagName() != "use") {
+		const auto isTemplate = current.tagName() == "use" || isPotetntialTemplate(current.tagName());
+		if (!isTemplate) {
 			auto&& child = current.firstChildElement();
 			while (!child.isNull()) {
 				elementStack.push(ExpansionItem{child, context.fork()});
