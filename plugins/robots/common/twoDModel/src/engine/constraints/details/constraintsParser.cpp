@@ -251,7 +251,7 @@ Condition ConstraintsParser::parseConditionsAlternative(const QDomElement &eleme
 
 Condition ConstraintsParser::parseConditionsTag(const QDomElement &element, Event &event)
 {
-	if (!assertChildrenMoreThan(element, 0) || !assertAttributeNonEmpty(element, "glue")) {
+	if (!assertChildrenMoreThan(element, 1) || !assertAttributeNonEmpty(element, "glue")) {
 		return mConditions.constant(true);
 	}
 
