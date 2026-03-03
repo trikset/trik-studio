@@ -93,6 +93,10 @@ bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXmlBefor
 		reportParserError(error);
 	}
 
+	for (auto &&error : mParser->warnings()) {
+		reportParserWarning(error);
+	}
+
 	return mParsedSuccessfully;
 }
 
@@ -122,6 +126,12 @@ void ConstraintsChecker::reportParserError(const QString &message)
 {
 	const QString fullMessage = tr("Error while parsing constraints: %1").arg(message);
 	mErrorReporter.addError(fullMessage);
+}
+
+void ConstraintsChecker::reportParserWarning(const QString &message)
+{
+	const auto& fullMessage = tr("Warning while parsing constraints: %1").arg(message);
+	mErrorReporter.addWarning(fullMessage);
 }
 
 void ConstraintsChecker::dumpVariables()

@@ -202,12 +202,12 @@
         <translation type="vanished">2D модель</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="+60"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="+65"/>
         <source>Root element must be &quot;constraints&quot; tag</source>
         <translation>Корневой элемент должен быть тэгом &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+37"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Должен иметься тэг &quot;timelimit&quot;.</translation>
     </message>
@@ -232,7 +232,7 @@
         <translation>Программа работала слишком долго</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+44"/>
         <source>&quot;Glue&quot; attribute must have value &quot;and&quot; or &quot;or&quot;.</source>
         <translation>Аттрибут &quot;glue&quot; должен иметь значение &quot;and&quot; или &quot;or&quot;.</translation>
     </message>
@@ -283,12 +283,12 @@
         <translation>У тэга &quot;%1&quot; должно быть ровно %2 дочерних(ий) тэг(а)</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>%1 tag must have at least %2 child tag(s)</source>
         <translation>У тэга &quot;%1&quot; должно быть как минимум %2 дочерних(ий) тэг(а)</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>&quot;%1&quot; tag must have &quot;%2&quot; attribute.</source>
         <translation>У тэга &quot;%1&quot; должен быть аттрибут &quot;%2&quot;.</translation>
     </message>
@@ -772,9 +772,14 @@
         <translation type="vanished">Ошибка при разборе шаблона: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+127"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Ошибка чтения ограничений: %1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Warning while parsing constraints: %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+232"/>

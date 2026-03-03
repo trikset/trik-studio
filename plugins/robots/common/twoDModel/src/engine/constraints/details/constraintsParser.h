@@ -61,6 +61,9 @@ public:
 	/// Returns a list of parser errors occured during the last parsing process.
 	QStringList errors() const;
 
+	/// Returns a list of parser warnings occured during the last parsing process.
+	QStringList warnings() const;
+
 private:
 	bool parseConstraints(const QDomElement &constraints);
 	Event *parseConstraint(const QDomElement &constraint);
@@ -114,15 +117,17 @@ private:
 	bool boolAttribute(const QDomElement &element, const QString &attributeName, bool defaultValue = false);
 
 	bool addToEvents(Event * const event);
-	bool assertChildrenExactly(const QDomElement &element, int count);
-	bool assertChildrenMoreThan(const QDomElement &element, int count);
-	bool assertHasAttribute(const QDomElement &element, const QString &attribute);
-	bool assertTagName(const QDomElement &element, const QString &nameInLowerCase);
-	bool assertAttributeNonEmpty(const QDomElement &element, const QString &attribute);
+	bool assertChildrenExactly(const QDomElement &element, int count, bool isError = true);
+	bool assertChildrenMoreThan(const QDomElement &element, int count, bool isError = true);
+	bool assertHasAttribute(const QDomElement &element, const QString &attribute, bool isError = true);
+	bool assertTagName(const QDomElement &element, const QString &nameInLowerCase, bool isError = true);
+	bool assertAttributeNonEmpty(const QDomElement &element, const QString &attribute, bool isError = true);
 
 	bool error(const QString &message);
+	bool warning(const QString &message);
 
 	QStringList mErrors;
+	QStringList mWarnings;
 
 	Events &mEvents;
 	Variables &mVariables;
