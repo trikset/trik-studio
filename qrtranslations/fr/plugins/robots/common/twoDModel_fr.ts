@@ -69,7 +69,7 @@
     </message>
     <message>
         <location line="+59"/>
-        <location line="+213"/>
+        <location line="+212"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Balise inconnue &quot;%1&quot;.</translation>
     </message>

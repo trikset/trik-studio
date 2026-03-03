@@ -352,10 +352,9 @@ std::vector<Value> ConstraintsParser::parseTagAttibutes(const QDomElement &eleme
 	}
 
 	std::sort(filteredNames.begin(), filteredNames.end());
-	const auto limit = std::min(static_cast<int>(filteredNames.size()), count);
 
-	for (int i = 0; i < limit; ++i) {
-		QString attrValue = element.attribute(filteredNames[i]);
+	for (int i = 0; i < count; ++i) {
+		const auto& attrValue = element.attribute(filteredNames[i]);
 		result.push_back(parseSpecialValue(attrValue));
 	}
 
@@ -556,7 +555,7 @@ Value ConstraintsParser::autoParseValue(const QString &text)
 	}
 
 	if (t.compare("false", Qt::CaseInsensitive) == 0) {
-		return  mValues.boolValue(false);
+		return mValues.boolValue(false);
 	}
 
 	bool okInt;
@@ -577,11 +576,11 @@ Value ConstraintsParser::autoParseValue(const QString &text)
 Value ConstraintsParser::parseSpecialValue(const QString &text)
 {
 	static const QRegularExpression strictRegex(R"(^\$\{([^}]+)\}$|)");
-	const QString trimmedText = text.trimmed();
-	QRegularExpressionMatch match = strictRegex.match(trimmedText);
+	const auto& trimmedText = text.trimmed();
+	const auto& match = strictRegex.match(trimmedText);
 
 	if (match.hasMatch() && !match.captured(1).isEmpty()) {
-		const QString paramName = match.captured(1);
+		const auto& paramName = match.captured(1);
 		return mValues.specialSyntaxValue(paramName);
 	}
 

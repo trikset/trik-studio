@@ -76,67 +76,67 @@
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="324"/>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="537"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="536"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Thẻ không xác định &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="450"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="449"/>
         <source>There must be only one tag &quot;return&quot; in &quot;using&quot; expression.</source>
         <translation>Chỉ được phép có một thẻ &quot;return&quot; trong biểu thức &quot;using&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="462"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="461"/>
         <source>There must be &quot;return&quot; tag in &quot;using&quot; expression.</source>
         <translation>Phải có thẻ &quot;return&quot; trong biểu thức &quot;using&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="796"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="795"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Giá trị không xác định &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="876"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="875"/>
         <source>Invalid integer value &quot;%1&quot;</source>
         <translation>Giá trị số nguyên không hợp lệ &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="890"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="889"/>
         <source>Invalid floating point value &quot;%1&quot;</source>
         <translation>Giá trị số thực không hợp lệ &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="903"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="902"/>
         <source>Invalid boolean value &quot;%1&quot; (expected &quot;true&quot; or &quot;false&quot;)</source>
         <translation>Giá trị boolean không hợp lệ &quot;%1&quot; (mong đợi &quot;true&quot; hoặc &quot;false&quot;)</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="919"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="918"/>
         <source>Duplicate id: &quot;%1&quot;</source>
         <translation>ID bị trùng lặp: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="930"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="929"/>
         <source>%1 tag must have exactly %2 child tag(s)</source>
         <translation>Thẻ %1 phải có chính xác %2 thẻ con</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="941"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="940"/>
         <source>%1 tag must have at least %2 child tag(s)</source>
         <translation>Thẻ %1 phải có ít nhất %2 thẻ con</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="951"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="950"/>
         <source>&quot;%1&quot; tag must have &quot;%2&quot; attribute.</source>
         <translation>Thẻ &quot;%1&quot; phải có thuộc tính &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="961"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="960"/>
         <source>Expected &quot;%1&quot; tag, got &quot;%2&quot;.</source>
         <translation>Dự kiến thẻ &quot;%1&quot;, nhưng lại nhận được &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="975"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="974"/>
         <source>Attribute &quot;%1&quot; of the tag &quot;%2&quot; must not be empty.</source>
         <translation>Thuộc tính &quot;%1&quot; của thẻ &quot;%2&quot; không được để trống.</translation>
     </message>
