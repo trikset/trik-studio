@@ -33,12 +33,12 @@
         <translation>événement inexistant : %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="+60"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="+65"/>
         <source>Root element must be &quot;constraints&quot; tag</source>
         <translation>L&apos;élément racine doit être une balise &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+37"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Il doit y exister une contrainte &quot;timelimit&quot;.</translation>
     </message>
@@ -63,7 +63,7 @@
         <translation>Le programme a tourné trop longtemps</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+44"/>
         <source>&quot;Glue&quot; attribute must have value &quot;and&quot; or &quot;or&quot;.</source>
         <translation>Attribut &quot;glue&quot; doit avoir une valeur &quot;and&quot; ou &quot;or&quot;.</translation>
     </message>
@@ -119,12 +119,12 @@
         <translation>Balise %1 doit avoir exactement %2 balise(s) enfant(s) </translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>%1 tag must have at least %2 child tag(s)</source>
         <translation>Balise %1 doit avoir au moins %2 balise(s) enfant(s)</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>&quot;%1&quot; tag must have &quot;%2&quot; attribute.</source>
         <translation>Balise %1 doit avoir un attribut %2.</translation>
     </message>
@@ -497,9 +497,14 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+123"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="+127"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Une erreur lors de l&apos;analyse des contraints est survenue : %1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Warning while parsing constraints: %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+232"/>

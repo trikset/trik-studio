@@ -40,37 +40,37 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="60"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="65"/>
         <source>Root element must be &quot;constraints&quot; tag</source>
         <translation>El elemento raíz debe ser la etiqueta &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="96"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="102"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Debe haber una restricción &quot;timelimit&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="101"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="107"/>
         <source>There must be only one &quot;timelimit&quot; tag.</source>
         <translation>Solo puede haber una etiqueta &quot;timelimit&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="150"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="156"/>
         <source>Event tag must have &quot;condition&quot; or &quot;conditions&quot; child tag. &quot;%1&quot; found instead.</source>
         <translation>La etiqueta &quot;event&quot; debe tener una etiqueta hija &quot;condition&quot; o &quot;conditions&quot;. En su lugar se encontró &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="156"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="162"/>
         <source>Event tag must have &quot;trigger&quot; or &quot;triggers&quot; child tag. &quot;%1&quot; found instead.</source>
         <translation>La etiqueta &quot;event&quot; debe tener una etiqueta hija &quot;trigger&quot; o &quot;triggers&quot;. En su lugar se encontró &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="222"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="228"/>
         <source>Program worked for too long time</source>
         <translation>El programa funcionó durante demasiado tiempo</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="265"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="272"/>
         <source>&quot;Glue&quot; attribute must have value &quot;and&quot; or &quot;or&quot;.</source>
         <translation>El atributo &quot;glue&quot; debe tener el valor &quot;and&quot; o &quot;or&quot;.</translation>
     </message>
@@ -489,12 +489,17 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="123"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="127"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Error al analizar restricciones: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="355"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="133"/>
+        <source>Warning while parsing constraints: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="365"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>El programa ha finalizado, pero la tarea no se ha completado.</translation>
     </message>

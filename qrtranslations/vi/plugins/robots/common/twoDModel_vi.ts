@@ -40,37 +40,37 @@
         <translation>Hủy</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="60"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="65"/>
         <source>Root element must be &quot;constraints&quot; tag</source>
         <translation>Phần tử gốc phải là thẻ &quot;constraints&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="96"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="102"/>
         <source>There must be a &quot;timelimit&quot; constraint.</source>
         <translation>Phải có ràng buộc &quot;timelimit&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="101"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="107"/>
         <source>There must be only one &quot;timelimit&quot; tag.</source>
         <translation>Chỉ được phép có một thẻ &quot;timelimit&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="150"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="156"/>
         <source>Event tag must have &quot;condition&quot; or &quot;conditions&quot; child tag. &quot;%1&quot; found instead.</source>
         <translation>Thẻ &quot;event&quot; phải có thẻ con &quot;condition&quot; hoặc &quot;conditions&quot;. Thay vào đó tìm thấy &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="156"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="162"/>
         <source>Event tag must have &quot;trigger&quot; or &quot;triggers&quot; child tag. &quot;%1&quot; found instead.</source>
         <translation>Thẻ &quot;event&quot; phải có thẻ con &quot;trigger&quot; hoặc &quot;triggers&quot;. Thay vào đó tìm thấy &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="222"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="228"/>
         <source>Program worked for too long time</source>
         <translation>Chương trình chạy quá lâu</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="265"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/details/constraintsParser.cpp" line="272"/>
         <source>&quot;Glue&quot; attribute must have value &quot;and&quot; or &quot;or&quot;.</source>
         <translation>Thuộc tính &quot;Glue&quot; phải có giá trị là &quot;and&quot; hoặc &quot;or&quot;.</translation>
     </message>
@@ -489,12 +489,17 @@
 <context>
     <name>twoDModel::constraints::ConstraintsChecker</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="123"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="127"/>
         <source>Error while parsing constraints: %1</source>
         <translation>Lỗi khi phân tích cú pháp các ràng buộc: %1</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="355"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="133"/>
+        <source>Warning while parsing constraints: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/constraints/constraintsChecker.cpp" line="365"/>
         <source>Program has finished, but the task is not accomplished.</source>
         <translation>Chương trình đã kết thúc, nhưng nhiệm vụ chưa hoàn thành.</translation>
     </message>
