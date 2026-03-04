@@ -41,6 +41,11 @@ QStringList ConstraintsParser::errors() const
 	return mErrors;
 }
 
+QStringList ConstraintsParser::warnings() const
+{
+	return mWarnings;
+}
+
 bool ConstraintsParser::parse(const QString &constraintsXml)
 {
 	if (constraintsXml.isEmpty()) {
@@ -67,6 +72,7 @@ bool ConstraintsParser::parse(const QString &constraintsXml)
 bool ConstraintsParser::parse(const QDomElement &constraintsXml)
 {
 	mErrors.clear();
+	mWarnings.clear();
 	if (constraintsXml.isNull()) {
 		return true;
 	}
@@ -251,6 +257,7 @@ Condition ConstraintsParser::parseConditionsAlternative(const QDomElement &eleme
 
 Condition ConstraintsParser::parseConditionsTag(const QDomElement &element, Event &event)
 {
+	assertChildrenMoreThan(element, 1, false);
 	if (!assertChildrenMoreThan(element, 0) || !assertAttributeNonEmpty(element, "glue")) {
 		return mConditions.constant(true);
 	}
@@ -840,57 +847,60 @@ bool ConstraintsParser::addToEvents(Event * const event)
 	return true;
 }
 
-bool ConstraintsParser::assertChildrenExactly(const QDomElement &element, int count)
+bool ConstraintsParser::assertChildrenExactly(const QDomElement &element, int count, bool isError)
 {
 	/// @todo: Ignore comment nodes
 	if (element.childNodes().count() != count) {
-		return error(QObject::tr("%1 tag must have exactly %2 child tag(s)")
-				.arg(element.tagName(), QString::number(count)));
+		const auto& message = QObject::tr("%1 tag must have exactly %2 child tag(s)")
+				.arg(element.tagName(), QString::number(count));
+		return isError ? error(message) : warning(message);
 	}
 
 	return true;
 }
 
-bool ConstraintsParser::assertChildrenMoreThan(const QDomElement &element, int count)
+bool ConstraintsParser::assertChildrenMoreThan(const QDomElement &element, int count, bool isError)
 {
 	/// @todo: Ignore comment nodes
 	if (element.childNodes().count() <= count) {
-		return error(QObject::tr("%1 tag must have at least %2 child tag(s)")
-				.arg(element.tagName(), QString::number(count + 1)));
+		const auto& message = QObject::tr("%1 tag must have at least %2 child tag(s)")
+				.arg(element.tagName(), QString::number(count + 1));
+		return isError ? error(message) : warning(message);
 	}
 
 	return true;
 }
 
-bool ConstraintsParser::assertHasAttribute(const QDomElement &element, const QString &attribute)
+bool ConstraintsParser::assertHasAttribute(const QDomElement &element, const QString &attribute, bool isError)
 {
 	if (!element.hasAttribute(attribute)) {
-		error(QObject::tr(R"("%1" tag must have "%2" attribute.)").arg(element.tagName(), attribute));
-		return false;
+		const auto& message = QObject::tr(R"("%1" tag must have "%2" attribute.)").arg(element.tagName(), attribute);
+		return isError ? error(message) : warning(message);
 	}
 
 	return true;
 }
 
-bool ConstraintsParser::assertTagName(const QDomElement &element, const QString &nameInLowerCase)
+bool ConstraintsParser::assertTagName(const QDomElement &element, const QString &nameInLowerCase, bool isError)
 {
 	if (element.tagName().toLower() != nameInLowerCase) {
-		error(QObject::tr(R"(Expected "%1" tag, got "%2".)").arg(nameInLowerCase, element.tagName()));
-		return false;
+		const auto& message = QObject::tr(R"(Expected "%1" tag, got "%2".)").arg(nameInLowerCase, element.tagName());
+		return isError ? error(message) : warning(message);
 	}
 
 	return true;
 }
 
-bool ConstraintsParser::assertAttributeNonEmpty(const QDomElement &element, const QString &attribute)
+bool ConstraintsParser::assertAttributeNonEmpty(const QDomElement &element, const QString &attribute, bool isError)
 {
-	if (!assertHasAttribute(element, attribute)) {
+	if (!assertHasAttribute(element, attribute, isError)) {
 		return false;
 	}
 
 	if (element.attribute(attribute).isEmpty()) {
-		error(QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)").arg(element.tagName(), attribute));
-		return false;
+		const auto& message = QObject::tr(R"(Attribute "%1" of the tag "%2" must not be empty.)")
+						.arg(element.tagName(), attribute);
+		return isError ? error(message) : warning(message);
 	}
 
 	return true;
@@ -899,5 +909,11 @@ bool ConstraintsParser::assertAttributeNonEmpty(const QDomElement &element, cons
 bool ConstraintsParser::error(const QString &message)
 {
 	mErrors << message;
+	return false;
+}
+
+bool ConstraintsParser::warning(const QString &message)
+{
+	mWarnings << message;
 	return false;
 }
