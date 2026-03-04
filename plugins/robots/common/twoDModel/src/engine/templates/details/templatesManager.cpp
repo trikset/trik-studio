@@ -32,7 +32,7 @@ void TemplatesManager::clearTemplates(bool system)
 
 void TemplatesManager::addTemplates(std::unordered_map<QString, XmlTemplate> &templates, bool isSystem)
 {
-	for (auto &currentTemplate : templates) {
+	for (auto &&currentTemplate : templates) {
 		auto &targetMap = isSystem ? mSystemTemplates : mUserTemplates;
 		const auto &prefix = isSystem ? sSystemLibraryNs : sUserLibraryNs;
 		targetMap.emplace(prefix + currentTemplate.first, std::move(currentTemplate.second));

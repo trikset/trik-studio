@@ -33,7 +33,7 @@ public:
 	TemplatesProcessor(TemplatesProcessor&&) noexcept = default;
 	TemplatesProcessor& operator=(TemplatesProcessor&&) noexcept = default;
 	virtual ~TemplatesProcessor() = default;
-	TemplatesProcessor(details::TemplatesManager *manager) noexcept;
+	explicit TemplatesProcessor(details::TemplatesManager *manager) noexcept;
 
 	/// Accepts xml as input using templates (<use> tags) as xml nodes. The function modifies the input
 	/// xml element constraintsXml  by transforming the tree. Each <use> in this tree will be replaced by
