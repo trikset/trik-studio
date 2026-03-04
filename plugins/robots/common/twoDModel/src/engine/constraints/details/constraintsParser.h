@@ -80,6 +80,7 @@ private:
 
 	Condition parseNegationTag(const QDomElement &element, Event &event);
 	Condition parseComparisonTag(const QDomElement &element);
+	std::vector<Value> parseTagAttibutes(const QDomElement &element, int count);
 	Condition parseInsideTag(const QDomElement &element);
 	Condition parseEventSettedDroppedTag(const QDomElement &element);
 	Condition parseTimerTag(const QDomElement &element, Event &event);
@@ -112,12 +113,16 @@ private:
 	QString id(const QDomElement &element) const;
 	/// Parses the text attribute of the message tag to support the special syntax ${}
 	QMap<QString, Value> parseMessageText(const QString &text);
+	Value parseSpecialValue(const QString &text);
+	Value autoParseValue(const QString &text);
 	int intAttribute(const QDomElement &element, const QString &attributeName, int defaultValue = -1);
 	qreal doubleAttribute(const QDomElement &element, const QString &attributeName, qreal defaultValue = 0.0);
 	bool boolAttribute(const QDomElement &element, const QString &attributeName, bool defaultValue = false);
 
 	bool addToEvents(Event * const event);
 	bool assertChildrenExactly(const QDomElement &element, int count, bool isError = true);
+	bool assertAttributesExactly(const QDomElement &element, int actualCount,
+							int expectedCount, bool isError = true);
 	bool assertChildrenMoreThan(const QDomElement &element, int count, bool isError = true);
 	bool assertHasAttribute(const QDomElement &element, const QString &attribute, bool isError = true);
 	bool assertTagName(const QDomElement &element, const QString &nameInLowerCase, bool isError = true);

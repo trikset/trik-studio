@@ -238,7 +238,7 @@
     </message>
     <message>
         <location line="+59"/>
-        <location line="+183"/>
+        <location line="+212"/>
         <source>Unknown tag &quot;%1&quot;.</source>
         <translation>Неизвестный тэг &quot;%1&quot;.</translation>
     </message>
@@ -253,7 +253,7 @@
         <translation>В выражении &quot;using&quot; должен иметься тэг &quot;return&quot;.</translation>
     </message>
     <message>
-        <location line="+281"/>
+        <location line="+334"/>
         <source>Unknown value &quot;%1&quot;.</source>
         <translation>Неизвестное значение &quot;%1&quot;.</translation>
     </message>
@@ -279,6 +279,11 @@
     </message>
     <message>
         <location line="+11"/>
+        <source>When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided</source>
+        <translation>При использовании расширенной формы для тега %1 ожидаемое количество аргументов, начинающихся с _, — %2, было предоставлено %3</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>%1 tag must have exactly %2 child tag(s)</source>
         <translation>У тэга &quot;%1&quot; должно быть ровно %2 дочерних(ий) тэг(а)</translation>
     </message>
