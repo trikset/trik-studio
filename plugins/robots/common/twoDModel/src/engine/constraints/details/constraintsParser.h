@@ -118,6 +118,7 @@ private:
 
 	bool addToEvents(Event * const event);
 	bool assertChildrenExactly(const QDomElement &element, int count);
+	bool assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount);
 	bool assertChildrenMoreThan(const QDomElement &element, int count);
 	bool assertHasAttribute(const QDomElement &element, const QString &attribute);
 	bool assertTagName(const QDomElement &element, const QString &nameInLowerCase);

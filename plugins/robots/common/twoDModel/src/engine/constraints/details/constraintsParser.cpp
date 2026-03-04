@@ -347,7 +347,7 @@ std::vector<Value> ConstraintsParser::parseTagAttibutes(const QDomElement &eleme
 		}
 	}
 
-	if (filteredNames.count() != count) {
+	if (filteredNames.count() == 0 || !assertAttributesExactly(element, filteredNames.count(), count)) {
 		return result;
 	}
 
@@ -365,7 +365,7 @@ Condition ConstraintsParser::parseComparisonTag(const QDomElement &element)
 {
 	const auto& attrs = parseTagAttibutes(element, 2);
 	const auto attrsExists = !attrs.empty();
-	if (!assertChildrenExactly(element, 2) && !attrsExists) {
+	if (!attrsExists && !assertChildrenExactly(element, 2)) {
 		return mConditions.constant(true);
 	}
 
@@ -643,7 +643,7 @@ Trigger ConstraintsParser::parseSetterTag(const QDomElement &element)
 	const auto& attrs = parseTagAttibutes(element, 1);
 	const auto attrsExists = !attrs.empty();
 
-	if (!assertAttributeNonEmpty(element, "name") || (!assertChildrenExactly(element, 1) && !attrsExists)) {
+	if (!assertAttributeNonEmpty(element, "name") || (!attrsExists && !assertChildrenExactly(element, 1))) {
 		return mTriggers.doNothing();
 	}
 
@@ -658,7 +658,7 @@ Value ConstraintsParser::parseUnaryValueTag(const QDomElement &element)
 	const auto& attrs = parseTagAttibutes(element, 1);
 	const auto attrsExists = !attrs.empty();
 
-	if (!assertChildrenExactly(element, 1) && !attrsExists) {
+	if (!attrsExists && !assertChildrenExactly(element, 1)) {
 		return mConditions.constant(true);
 	}
 
@@ -686,7 +686,7 @@ Value ConstraintsParser::parseBinaryValueTag(const QDomElement &element)
 	const auto& attrs = parseTagAttibutes(element, 2);
 	const auto attrsExists = !attrs.empty();
 
-	if (!assertChildrenExactly(element, 2) && !attrsExists) {
+	if (!attrsExists && !assertChildrenExactly(element, 2)) {
 		return mConditions.constant(true);
 	}
 
@@ -741,7 +741,7 @@ Trigger ConstraintsParser::parseSetObjectStateTag(const QDomElement &element)
 
 	if (!assertAttributeNonEmpty(element, "object")
 			|| !assertAttributeNonEmpty(element, "property")
-			|| (!assertChildrenExactly(element, 1) && !attrsExists))
+			|| (!attrsExists && !assertChildrenExactly(element, 1)))
 	{
 		return mTriggers.doNothing();
 	}
@@ -919,6 +919,16 @@ bool ConstraintsParser::addToEvents(Event * const event)
 	}
 
 	mEvents[event->id()].reset(event);
+	return true;
+}
+
+bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount)
+{
+	if (actualCount != expectedCount) {
+		return error(QObject::tr(
+		"When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided")
+				.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount)));
+	}
 	return true;
 }
 

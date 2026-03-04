@@ -45,8 +45,8 @@ public:
 
 	void setIntProperty(int value);
 	void setStringProperty(const QString &value);
-	void setRectProperty(const QRect &value);
-	void setPointProperty(const QPoint &value);
+	void setRectProperty(QRect value);
+	void setPointProperty(QPoint value);
 	void setIntListProperty(const QList<int> &value);
 
 private:

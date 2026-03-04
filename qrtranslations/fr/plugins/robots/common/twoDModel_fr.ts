@@ -109,6 +109,11 @@
         <translation>Un id non unique : &quot;%1&quot;</translation>
     </message>
     <message>
+        <location line="+10"/>
+        <source>When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+11"/>
         <source>%1 tag must have exactly %2 child tag(s)</source>
         <translation>Balise %1 doit avoir exactement %2 balise(s) enfant(s) </translation>
