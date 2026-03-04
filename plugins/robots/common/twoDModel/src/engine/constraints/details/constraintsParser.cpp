@@ -929,7 +929,8 @@ bool ConstraintsParser::addToEvents(Event * const event)
 	return true;
 }
 
-bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount, bool isError)
+bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount,
+								int expectedCount, bool isError)
 {
 	if (actualCount != expectedCount) {
 		const auto& message = QObject::tr(

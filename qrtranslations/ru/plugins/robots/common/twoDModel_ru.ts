@@ -278,7 +278,7 @@
         <translation>Переобъявление события &quot;%1&quot;</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided</source>
         <translation>При использовании расширенной формы для тега %1 ожидаемое количество аргументов, начинающихся с _, — %2, было предоставлено %3</translation>
     </message>
