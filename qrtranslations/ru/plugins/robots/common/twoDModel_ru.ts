@@ -283,7 +283,7 @@
         <translation>При использовании расширенной формы для тега %1 ожидаемое количество аргументов, начинающихся с _, — %2, было предоставлено %3</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>%1 tag must have exactly %2 child tag(s)</source>
         <translation>У тэга &quot;%1&quot; должно быть ровно %2 дочерних(ий) тэг(а)</translation>
     </message>

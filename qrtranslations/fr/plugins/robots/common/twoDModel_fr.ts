@@ -114,7 +114,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>%1 tag must have exactly %2 child tag(s)</source>
         <translation>Balise %1 doit avoir exactement %2 balise(s) enfant(s) </translation>
     </message>

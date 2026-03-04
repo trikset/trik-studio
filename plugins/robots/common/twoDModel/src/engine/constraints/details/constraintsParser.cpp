@@ -929,13 +929,14 @@ bool ConstraintsParser::addToEvents(Event * const event)
 	return true;
 }
 
-bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount)
+bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int actualCount, int expectedCount, bool isError)
 {
 	if (actualCount != expectedCount) {
-		return error(QObject::tr(
-		"When using the extended form for the %1 tag,"
-		" the number of arguments starting with _ must be %2, %3 was provided")
-		.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount)));
+		const auto& message = QObject::tr(
+			"When using the extended form for the %1 tag,"
+			" the number of arguments starting with _ must be %2, %3 was provided")
+			.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount));
+		return isError ? error(message) : warning(message);
 	}
 	return true;
 }
