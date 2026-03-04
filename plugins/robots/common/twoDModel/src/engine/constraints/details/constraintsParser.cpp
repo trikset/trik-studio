@@ -926,8 +926,9 @@ bool ConstraintsParser::assertAttributesExactly(const QDomElement &element, int 
 {
 	if (actualCount != expectedCount) {
 		return error(QObject::tr(
-		"When using the extended form for the %1 tag, the number of arguments starting with _ must be %2, %3 was provided")
-				.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount)));
+		"When using the extended form for the %1 tag,"
+		" the number of arguments starting with _ must be %2, %3 was provided")
+		.arg(element.tagName(), QString::number(expectedCount), QString::number(actualCount)));
 	}
 	return true;
 }
