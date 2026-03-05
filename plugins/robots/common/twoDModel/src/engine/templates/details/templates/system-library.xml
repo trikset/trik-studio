@@ -53,7 +53,7 @@
     </params>
     <content>
 <![CDATA[
-<use template="set-object-warzone">
+<use template="ts:set-object-warzone">
     <with regionId="#{regionId}"/>
     <with message="#{message}"/>
     <with objectId="robot1"/>
@@ -105,7 +105,7 @@
     </params>
     <content>
 <![CDATA[
-<use template="condition-event">
+<use template="ts:condition-event">
     <with id="#{id}"/>
     <with settedUpInit="#{settedUpInit}"/>
     <with param="trigger">
@@ -141,7 +141,7 @@
     </params>
     <content>
 <![CDATA[
-<use template="change-score-with-log">
+<use template="ts:change-score-with-log">
     <with id="#{id}"/>
     <with settedUpInit="#{settedUpInit}"/>
     <with operation="#{operation}"/>
@@ -178,7 +178,7 @@
     </params>
     <content>
 <![CDATA[
-<use template="change-score-with-log">
+<use template="ts:change-score-with-log">
     <with id="#{id}"/>
     <with settedUpInit="#{settedUpInit}"/>
     <with operation="#{operation}"/>

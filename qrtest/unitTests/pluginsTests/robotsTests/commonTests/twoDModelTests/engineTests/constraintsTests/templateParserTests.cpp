@@ -48,7 +48,7 @@ TEST_P(XmlTemplateParserErrorTest, ParserEachErrorScenario) {
 	TemplateParseErrorCode actualCode;
 	int actualLine;
 
-	EXPECT_CALL(*mMockTemplateParser, parseError(::testing::_, ::testing::_, ::testing::_, ::testing::_))
+	EXPECT_CALL(*mMockTemplateParser, error(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
 		.WillOnce(::testing::Invoke(
 			[&](const QString&, int line, TemplateParseErrorCode code, const QString&) {
@@ -100,11 +100,11 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	TemplateSubstitutionErrorCode actualCode;
 	int actualLine;
 
-	EXPECT_CALL(*mMockTemplateParser, substituteError(::testing::_, ::testing::_, ::testing::_, ::testing::_))
+	EXPECT_CALL(*mMockTemplateProcessor, error(::testing::_, ::testing::_, ::testing::_, ::testing::_))
 		.Times(1)
 		.WillOnce(::testing::Invoke(
 			[&](const QString&, int line,
-				const  qrTest::XmlTemplateParserMock::ExpansionContext &, TemplateSubstitutionErrorCode code) {
+				const  qrTest::XmlTemplateProcessorMock::ExpansionContext &, TemplateSubstitutionErrorCode code) {
 				actualCode = code;
 				actualLine = line;
 		}
@@ -118,7 +118,8 @@ TEST_P(XmlTemplateParserSubstitutionErrorTest, SubstitutionPaserEachErrorScenari
 	// Constraint xml
 	QDomDocument doc;
 	doc.setContent(testCase.testXml);
-	mMockTemplateParser->substitute(doc.documentElement());
+	mTemplateManager->addTemplates(mMockTemplateParser->currentTemplates(), false);
+	mMockTemplateProcessor->substitute(doc.documentElement());
 
 	EXPECT_EQ(actualCode, testCase.expectedCode);
 	EXPECT_EQ(actualLine, testCase.expectedLine);
@@ -319,7 +320,7 @@ R"(
 </template>
 )",
 R"(
-<use template="test_template">
+<use template="u:test_template">
 	<with id="278"/> <!-- line 3 -->
 </use>
 )",
@@ -344,7 +345,7 @@ R"(
 </template>
 )",
 R"(
-<use template="test_template">
+<use template="u:test_template">
 	<with id="278"/> <!-- valid use -->
 	<strange-tag/>
 </use>
@@ -367,7 +368,7 @@ R"(
 </template>
 )",
 R"(
-<use template="test_template"/>
+<use template="u:test_template"/>
 )",
 		"MissingReqiuredParam"
 	},
@@ -409,14 +410,14 @@ R"(
 <template name="A">
 	<content>
 <![CDATA[
-	<use template="B"/>
+	<use template="u:B"/>
 ]]>
 	</content>
 </template>
 <template name="B">
 	<content>
 <![CDATA[
-	<use template="C"/>
+	<use template="u:C"/>
 ]]>
 	</content>
 </template>
@@ -428,7 +429,7 @@ R"(
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
-	<use template="A"/>
+	<use template="u:A"/>
 ]]>
 	</content>
 </template>
@@ -436,7 +437,7 @@ R"(
 )",
 R"(
 <constraints>
-<use template="A"/>  <!-- recursive expansion, line 7 relative initial of C template body -->
+<use template="u:A"/>  <!-- recursive expansion, line 7 relative initial of C template body -->
 </constraints>
 )",
 		"RecursiveTemplateExpansion"
@@ -453,7 +454,7 @@ R"(
 		<int value="5"/>
 		<int value="12"/>
 	</difference>
-	<use template="bober"/>
+	<use template="u:bober"/>
 ]]>
 	</content>
 </template>
@@ -461,7 +462,7 @@ R"(
 )",
 R"(
 <constraints>
-<use template="C"/>  <!-- use indeclared template "bober", line 6 relative initial of C template body -->
+<use template="u:C"/>  <!-- use indeclared template "bober", line 6 relative initial of C template body -->
 </constraints>
 )",
 		"UseUndeclaredTemplate"

@@ -16,6 +16,7 @@
 
 #include <src/engine/templates/details/template.h>
 #include <src/engine/templates/details/templatesParser.h>
+#include <src/engine/templates/details/templatesProcessor.h>
 #include <gmock/gmock.h>
 
 namespace qrTest {
@@ -42,12 +43,17 @@ class XmlTemplateParserMock : public twoDModel::templates::details::TemplatesPar
 {
 public:
 	using TemplatesParser::TemplatesParser;
-	using ExpansionContext = TemplatesParser::ExpansionContext;
-	MOCK_METHOD(void, parseError,
+	MOCK_METHOD(void, error,
 		    (const QString&, int, ParserErrorCode, const QString&), (override));
-	MOCK_METHOD(void, substituteError,
+};
+
+class XmlTemplateProcessorMock : public twoDModel::templates::details::TemplatesProcessor
+{
+public:
+	using TemplatesProcessor::TemplatesProcessor;
+	using ExpansionContext = TemplatesProcessor::ExpansionContext;
+	MOCK_METHOD(void, error,
 		    (const QString&, int, const ExpansionContext &, SubstitutionErrorCode), (override));
 };
 }
-
 // clazy:enable

@@ -69,6 +69,7 @@ HEADERS += \
 	$$PWD/src/engine/items/cubeItem.h \
 
 HEADERS += \
+	$$PWD/src/engine/templates/details/templatesManager.h \
 	$$PWD/src/engine/twoDModelEngineApi.h \
 	$$PWD/src/engine/view/nullTwoDModelDisplayWidget.h \
 	$$PWD/src/engine/view/scene/twoDModelScene.h \
@@ -88,6 +89,7 @@ HEADERS += \
 	$$PWD/src/engine/view/parts/speedPopup.h \
 	$$PWD/src/engine/view/parts/ruler.h \
 	$$PWD/src/engine/templates/details/templatesParser.h \
+	$$PWD/src/engine/templates/details/templatesProcessor.h \
 	$$PWD/src/engine/templates/details/template.h \
 	$$PWD/src/engine/templates/templateParserApi.h \
 	$$PWD/src/engine/view/parts/gridSizeWidget.h \
@@ -145,6 +147,7 @@ SOURCES += \
 	$$PWD/include/twoDModel/robotModel/parts/colorSensorReflected.cpp \
 	$$PWD/src/engine/items/cubeItem.cpp \
 	$$PWD/src/engine/model/colorDetector.cpp \
+	$$PWD/src/engine/templates/details/templatesManager.cpp \
 	$$PWD/src/engine/twoDModelEngineFacade.cpp \
 	$$PWD/src/engine/twoDModelEngineApi.cpp \
 	$$PWD/src/engine/twoDModelGuiFacade.cpp \
@@ -202,6 +205,7 @@ SOURCES += \
 	$$PWD/src/engine/items/regions/rectangularRegion.cpp \
 	$$PWD/src/engine/items/regions/boundRegion.cpp \
 	$$PWD/src/engine/templates/details/templatesParser.cpp \
+	$$PWD/src/engine/templates/details/templatesProcessor.cpp \
 	$$PWD/src/engine/templates/details/template.cpp \
 	$$PWD/src/engine/templates/templateParserApi.cpp \
 	$$PWD/src/engine/constraints/constraintsChecker.cpp \
