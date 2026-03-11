@@ -4,7 +4,7 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="30"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="31"/>
         <source>Emulates robot`s behaviour on TRIK Studio 2D model separately from programming environment. Passed .qrs will be interpreted just like when &apos;Run&apos; button was pressed in TRIK Studio. 
 In background mode the session will be terminated just after the execution ended and return code will then contain binary information about program correctness.Example: 
 </source>
@@ -13,82 +13,82 @@ En modo de fondo, la sesión finalizará inmediatamente tras la ejecución, y el
 </translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="102"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="107"/>
         <source>Save file to be interpreted.</source>
         <translation>Archivo guardado que será interpretado.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="103"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="108"/>
         <source>Run emulation in background.</source>
         <translation>Ejecutar la emulación en segundo plano.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="105"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="110"/>
         <source>A path to file where checker results will be written (JSON).</source>
         <translation>Ruta al archivo donde se escribirán los resultados del comprobador (JSON).</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="108"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="113"/>
         <source>A path to file where robot`s trajectory will be written. The writing will not be performed not immediately, each trajectory point will be written just when obtained by checker, so FIFOs are recommended to be targets for this option.</source>
         <translation>Ruta al archivo donde se escribirá la trayectoria del robot. La escritura no se realizará de forma inmediata; cada punto de la trayectoria se registrará tan pronto como sea obtenido por el comprobador, por lo que se recomienda usar archivos FIFO como destino para esta opción.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="112"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="117"/>
         <source>Inputs for JavaScript solution.</source>
         <translation>Entradas para la solución en JavaScript.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="114"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="119"/>
         <source>Set to &quot;script&quot; for execution of js/py from the project or set to &quot;diagram&quot; for block diagram.</source>
         <translation>Establezca &quot;script&quot; para ejecutar scripts js/py del proyecto o &quot;diagram&quot; para diagramas de bloques.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="118"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="123"/>
         <source>Speed factor, try from 5 to 20, or even 1000 (at your own risk!).</source>
         <translation>Factor de velocidad, pruebe desde 5 hasta 20, o incluso 1000 (¡bajo su propio riesgo!).</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="121"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="126"/>
         <source>Close the window and exit if the diagram/script finishes without errors.</source>
         <translation>Cerrar la ventana y salir si el diagrama/escritura finaliza sin errores.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="124"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="129"/>
         <source>Close the window and exit after diagram/script finishes.</source>
         <translation>Cerrar la ventana y salir tras finalizar el diagrama/escritura.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="126"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="131"/>
         <source>Shows robot&apos;s console.</source>
         <translation>Muestra la consola del robot.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="127"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="132"/>
         <source>Shows robot&apos;s display.</source>
         <translation>Muestra la pantalla del robot.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="129"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="134"/>
         <source>The complete file path, including the filename, to save the generated JavaScript or Python code.</source>
         <translation>La ruta completa del archivo, incluyendo el nombre, para guardar el código JavaScript o Python generado.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="132"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="137"/>
         <source>Select &quot;python&quot; or &quot;javascript&quot;.</source>
         <translation>Seleccione &quot;python&quot; o &quot;javascript&quot;.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="135"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="140"/>
         <source>The path to the Python or JavaScript file that will be used for interpretation.</source>
         <translation>La ruta al archivo Python o JavaScript que se utilizará para la interpretación.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="138"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="143"/>
         <source>Do not run the interpretation in any mode, this is a parameter that is only used to generate a file.</source>
         <translation>No ejecutar la interpretación en ningún modo; este parámetro solo se utiliza para generar un archivo.</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="141"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="146"/>
         <source>Add a delay in milliseconds after executing the script before closing the window</source>
         <translation>Añadir un retraso en milisegundos tras ejecutar el script antes de cerrar la ventana</translation>
     </message>

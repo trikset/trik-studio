@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-#include <time.h>
+#include <ctime>
 
 #include <QtCore/QtPlugin>
 #include <QtCore/QTranslator>
@@ -23,10 +23,9 @@
 
 #include <qrkernel/logging.h>
 #include <qrkernel/platformInfo.h>
-
+#include <sanitizers/sanitizers.h>
 #include "mainWindow/mainWindow.h"
 #include "thirdparty/windowsmodernstyle.h"
-
 #include "qrealApplication.h"
 
 using namespace qReal;
@@ -46,6 +45,7 @@ static void loadTranslators(QLocale &locale)
 	static const auto qtAppsTranslationsDir = PlatformInfo::invariantSettingsPath("pathToTranslations");
 
 	for (auto &&module: qtModules) {
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 		auto *t = new QTranslator(qApp);
 		if (t->load(locale, module, "_", qtAppsTranslationsDir)) {
 			QCoreApplication::installTranslator(t);
@@ -60,8 +60,9 @@ static void loadTranslators(QLocale &locale)
 	QDir translationsDirectory(PlatformInfo::invariantSettingsPath("pathToTranslations") + "/" + language);
 	QDirIterator directories(translationsDirectory, QDirIterator::Subdirectories);
 	while (directories.hasNext()) {
-		for (const QFileInfo &translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
-			QTranslator *translator = new QTranslator(qApp);
+		for (auto &&translatorFile : QDir(directories.next()).entryInfoList(QDir::Files)) {
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+			auto *translator = new QTranslator(qApp);
 			translator->load(translatorFile.absoluteFilePath());
 			QCoreApplication::installTranslator(translator);
 		}
@@ -107,11 +108,11 @@ int main(int argc, char *argv[])
 
 	if (app->arguments().contains("--version"))
 	{
-		QTextStream(stdout) << versionInfo() << endl;
+		QTextStream(stdout) << versionInfo() << Qt::endl;
 		return 0;
 	}
 
-	qsrand(time(0));
+	qsrand(time(nullptr));
 	setDefaultLocale(app->arguments().contains("--no-locale"));
 
 	const QString defaultPlatformConfigPath = PlatformInfo::defaultPlatformConfigPath();
@@ -128,7 +129,7 @@ int main(int argc, char *argv[])
 			SettingsManager::instance()->loadSettings(settingsFileName);
 		}
 
-		for (const QString &argument : app->arguments()) {
+		for (auto &&argument : app->arguments()) {
 			if (argument.endsWith(".qrs") || argument.endsWith(".qrs'") || argument.endsWith(".qrs\"")) {
 				fileToOpen = argument;
 				break;
@@ -140,15 +141,17 @@ int main(int argc, char *argv[])
 	if (logsDir.mkpath(logsDir.absolutePath())) {
 		logger.addLogTarget(logsDir.filePath("qreal.log"), maxLogSize, 2);
 		logger.removeDefaultInitialLogTarget();
+#ifdef HAS_SANITIZER_INTERFACE
+		const auto sanitizersPath = logsDir.filePath("sanitizer.log").toLocal8Bit();
+		initSanitizerPath(sanitizersPath.constData());
+#endif
 	}
-
 	QLOG_INFO() << "------------------- APPLICATION STARTED --------------------";
 	QLOG_INFO() << "Version:" << versionInfo();
 	QLOG_INFO() << "Running on" << QSysInfo::prettyProductName() << QSysInfo::currentCpuArchitecture()
 				<< "/ Kernel: " << QSysInfo::kernelType() << QSysInfo::kernelVersion();
 	QLOG_INFO() << "Arguments:" << app->arguments();
 	for (auto &&i: dpiInfo) { QLOG_INFO() << i ; }
-
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 
 	QScopedPointer<MainWindow> window(new MainWindow(fileToOpen));
