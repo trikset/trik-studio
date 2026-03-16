@@ -1,84 +1,19 @@
 <templates>
 
-<template name="timer-success-event">
-    <params>
-	<param name="timeout"/>
-	<param name="trigger" default=""/>
-    </params>
-    <content>
-<![CDATA[
-<event settedUpInitially="true">
-    <condition>
-        <timer timeout="#{timeout}" forceDropOnTimeout="false"/>
-    </condition>
-    <triggers>
-        #{trigger}
-        <success/>
-    </triggers>
-</event>
-]]>
-    </content>
-</template>
-
-<template name="set-object-warzone">
-    <params>
-	<param name="regionId"/>
-	<param name="objectId"/>
-	<param name="message"/>
-	<param name="trigger" default=""/>
-    </params>
-    <content>
-<![CDATA[
-<event settedUpInitially="true">
-    <condition>
-        <not>
-            <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="all"/>
-        </not>
-    </condition>
-    <triggers>
-        #{trigger}
-        <message text="#{message}"/>
-        <success/>
-    </triggers>
-</event>
-]]>
-    </content>
-</template>
-
-<template name="set-robot-warzone">
-    <params>
-	<param name="regionId"/>
-	<param name="message" default="The robot has moved out of a valid region"/>
-	<param name="trigger" default=""/>
-    </params>
-    <content>
-<![CDATA[
-<use template="ts:set-object-warzone">
-    <with regionId="#{regionId}"/>
-    <with message="#{message}"/>
-    <with objectId="robot1"/>
-    <with param="trigger">
-        #{trigger}
-    </with>
-</use>
-]]>
-    </content>
-</template>
-
 <template name="condition-event">
     <params>
-        <param name="id"/>
-        <param name="settedUpInit" default="true"/>
-	<param name="trigger">
-	    <trigger>
-	        <success/>
-	     </trigger>
-	</param>
-	<param name="conditions">
-	    <condition>
-	        <true/>
-	    </condition>
-	</param>
+        <param name="id" default=""/>
+        <param name="settedUpInit" default="false"/>
+        <param name="trigger">
+            <trigger>
+                <success/>
+            </trigger>
+        </param>
+        <param name="conditions">
+            <condition>
+                <true/>
+            </condition>
+        </param>
     </params>
     <content>
 <![CDATA[
@@ -91,17 +26,110 @@
 ]]>
     </content>
 </template>
+
+<template name="timer-success-event">
+    <params>
+        <param name="timeout"/>
+        <param name="trigger" default=""/>
+        <param name="forceDropOnTimeout" default="false"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:condition-event">
+    <with settedUpInit="true"/>
+    <with param="conditions">
+        <condition>
+            <timer timeout="#{timeout}" forceDropOnTimeout="#{forceDropOnTimeout}"/>
+        </condition>
+    </with>
+    <with param="trigger">
+        #{trigger}
+        <success/>
+    </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="set-object-warzone">
+    <params>
+        <param name="id" default=""/>
+        <param name="settedUpInit" default="true"/>
+        <param name="regionId"/>
+        <param name="objectId" default="robot1"/>
+        <param name="objectPoint" default="any"/>
+        <param name="message" default=""/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="not" default="not"/>
+        <param name="glue" default="and"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:condition-event">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with param="conditions">
+        <conditions glue="#{glue}">
+            <#{not}>
+                <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="#{objectPoint}"/>
+            </#{not}>
+            #{conditions}
+        </conditions>
+    </with>
+    <with param="trigger">
+        #{trigger}
+        <message text="#{message}"/>
+        <success/>
+    </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="set-robot-warzone">
+    <params>
+        <param name="id" default=""/>
+        <param name="settedUpInit" default="true"/>
+        <param name="regionId"/>
+        <param name="objectPoint" default="any"/>
+        <param name="message" default=""/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="not" default="not"/>
+        <param name="glue" default="and"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:set-object-warzone">
+    <with id="#{id}"/>
+    <with regionId="#{regionId}"/>
+    <with objectPoint="#{objectPoint}"/>
+    <with message="#{message}"/>
+    <with objectId="robot1"/>
+    <with not="#{not}"/>
+    <with glue="#{glue}"/>
+    <with param="conditions">
+        #{conditions}
+    </with>
+    <with param="trigger">
+        #{trigger}
+    </with>
+</use>
+]]>
+    </content>
+</template>
     
 <template name="change-score-with-log">
     <params>
-        <param name="id"/>
-        <param name="settedUpInit" default="true"/>
+        <param name="id" default=""/>
+        <param name="settedUpInit" default="false"/>
         <param name="trigger" default=""/>
         <param name="conditions"/>
         <param name="operation" default="sum"/>
-        <param name="scoreVariable"/>
-        <param name="variable"/>
-        <param name="message"/>
+        <param name="scoreVariable" default="total_score"/>
+        <param name="value"/>
+        <param name="message" default=""/>
     </params>
     <content>
 <![CDATA[
@@ -110,10 +138,7 @@
     <with settedUpInit="#{settedUpInit}"/>
     <with param="trigger">
         <setter name="#{scoreVariable}">
-            <#{operation}>
-                <variableValue name="#{scoreVariable}"/>
-                <variableValue name="#{variable}"/>
-            </#{operation}>
+            <#{operation} _1="${#{scoreVariable}}" _2="#{value}"/>
         </setter>
         <message text="#{message}"/>
         #{trigger}
@@ -126,18 +151,21 @@
         </content>
 </template>
     
-<template name="object-left-region-with-score">
+<template name="object-region-with-score">
     <params>
         <param name="id"/>
-        <param name="settedUpInit" default="true"/>
+        <param name="settedUpInit" default="false"/>
         <param name="objectId" default="robot1"/>
         <param name="regionId"/>
         <param name="objectPoint" default="any"/>
         <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="not" default="condition"/>
         <param name="operation" default="sum"/>
-        <param name="scoreVariable"/>
-        <param name="variable"/>
+        <param name="scoreVariable" default="total_score"/>
+        <param name="value"/>
         <param name="message" default=""/>
+        <param name="glue" default="and"/>
     </params>
     <content>
 <![CDATA[
@@ -146,55 +174,238 @@
     <with settedUpInit="#{settedUpInit}"/>
     <with operation="#{operation}"/>
     <with scoreVariable="#{scoreVariable}"/>
-    <with variable="#{variable}"/>
+    <with value="#{value}"/>
     <with message="#{message}"/>
     <with param="trigger">
         #{trigger}
     </with>
     <with param="conditions">
-        <condition>
-            <not>
-                <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="#{objectPoint}"/>
-            </not>
-        </condition>
+        <conditions glue="#{glue}">
+            <#{not}>
+               <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="#{objectPoint}"/>
+            </#{not}>
+            #{conditions}
+        </conditions>
     </with>
 </use>
 ]]>
     </content>
 </template>
-    
-<template name="object-in-region-with-score">
+
+<template name="robot-stop-in-region-with-score">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="false"/>
+        <param name="regionId"/>
+        <param name="objectPoint" default="any"/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="operation" default="sum"/>
+        <param name="scoreVariable" default="total_score"/>
+        <param name="value"/>
+        <param name="message" default=""/>
+        <param name="left" default="left"/>
+        <param name="right" default="right"/>
+        <param name="not" default="condition"/>
+        <param name="glue" default="and"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:object-region-with-score">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with regionId="#{regionId}"/>
+    <with objectPoint="#{objectPoint}"/>
+    <with operation="#{operation}"/>
+    <with not="#{not}"/>
+    <with glue="#{glue}"/>
+    <with scoreVariable="#{scoreVariable}"/>
+    <with value="#{value}"/>
+    <with message="#{message}"/>
+    <with param="trigger">
+        #{trigger}
+    </with>
+    <with param="conditions">
+        <equals _1="${robot1.#{left}.power}" _2="0"/>
+        <equals _1="${robot1.#{right}.power}" _2="0"/>
+        #{conditions}
+    </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="robot-finish-in-region-with-score">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="false"/>
+        <param name="regionId"/>
+        <param name="objectPoint" default="any"/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="operation" default="sum"/>
+        <param name="scoreVariable" default="total_score"/>
+        <param name="value"/>
+        <param name="message" default=""/>
+        <param name="left" default="left"/>
+        <param name="right" default="right"/>
+        <param name="not" default="condition"/>
+        <param name="glue" default="and"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:robot-stop-in-region-with-score">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with regionId="#{regionId}"/>
+    <with objectPoint="#{objectPoint}"/>
+    <with operation="#{operation}"/>
+    <with not="#{not}"/>
+    <with glue="#{glue}"/>
+    <with scoreVariable="#{scoreVariable}"/>
+    <with value="#{value}"/>
+    <with message="#{message}"/>
+    <with param="trigger">
+        #{trigger}
+        <success/>
+    </with>
+    <with param="conditions">
+        #{conditions}
+    </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="robot-start-with-score">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="false"/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="operation" default="sum"/>
+        <param name="scoreVariable" default="total_score"/>
+        <param name="value"/>
+        <param name="message" default=""/>
+        <param name="left" default="left"/>
+        <param name="right" default="right"/>
+        <param name="glue1" default="and"/>
+        <param name="glue2" default="or"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:change-score-with-log">
+    <with id="#{id}"/>
+    <with settedUpInit="#{settedUpInit}"/>
+    <with operation="#{operation}"/>
+    <with scoreVariable="#{scoreVariable}"/>
+    <with value="#{value}"/>
+    <with message="#{message}"/>
+    <with param="trigger">
+        #{trigger}
+    </with>
+    <with param="conditions">
+        <conditions glue="#{glue1}">
+            <conditions glue="#{glue2}">
+                <notEquals _1="${robot1.#{left}.power}" _2="0"/>
+                <notEquals _1="${robot1.#{right}.power}" _2="0"/>
+            </conditions>
+            #{conditions}
+        </conditions>
+    </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="robot-start">
     <params>
         <param name="id"/>
         <param name="settedUpInit" default="true"/>
-	<param name="objectId" default="robot1"/>
-        <param name="regionId"/>
-        <param name="objectPoint" default="all"/>
-	<param name="trigger" default=""/>
-	<param name="operation" default="sum"/>
-	<param name="scoreVariable"/>
-	<param name="variable"/>
-	<param name="message" default=""/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="left" default="left"/>
+        <param name="right" default="right"/>
+        <param name="glue" default="or"/>
     </params>
     <content>
 <![CDATA[
-<use template="ts:change-score-with-log">
+<use template="ts:condition-event">
+   <with id="#{id}"/>
+   <with settedUpInit="#{settedUpInit}"/>
+   <with param="trigger">
+       #{trigger}
+   </with>
+   <with param="conditions">
+       <conditions glue="#{glue}">
+           <notEquals _1="${robot1.#{left}.power}" _2="0"/>
+           <notEquals _1="${robot1.#{right}.power}" _2="0"/>
+           #{conditions}
+       </conditions>
+   </with>
+</use>
+]]>
+    </content>
+</template>
+
+<template name="robot-stop">
+    <params>
+        <param name="id"/>
+        <param name="settedUpInit" default="false"/>
+        <param name="trigger" default=""/>
+        <param name="conditions" default=""/>
+        <param name="left" default="left"/>
+        <param name="right" default="right"/>
+        <param name="glue" default="and"/>
+    </params>
+    <content>
+<![CDATA[
+<use template="ts:condition-event">
     <with id="#{id}"/>
     <with settedUpInit="#{settedUpInit}"/>
-    <with operation="#{operation}"/>
-    <with scoreVariable="#{scoreVariable}"/>
-    <with variable="#{variable}"/>
-    <with message="#{message}"/>
     <with param="trigger">
         #{trigger}
     </with>
     <with param="conditions">
-        <condition>
-            <inside objectId="#{objectId}" regionId="#{regionId}" objectPoint="#{objectPoint}"/>
-        </condition>
+        <conditions glue="#{glue}">
+            <equals _1="${robot1.#{left}.power}" _2="0"/>
+            <equals _1="${robot1.#{right}.power}" _2="0"/>
+            #{conditions}
+        </conditions>
     </with>
 </use>
 ]]>
     </content>
 </template>
+
+<template name="is-undefined">
+    <params>
+        <param name="name"/>
+    </params>
+    <content>
+<![CDATA[
+<equals>
+    <typeOf objectId="#{name}"/>
+    <string value="undefined"/>
+</equals>
+]]>
+    </content>
+</template>
+
+<template name="typeof">
+    <params>
+        <param name="name"/>
+        <param name="type"/>
+    </params>
+    <content>
+<![CDATA[
+<equals>
+    <typeOf objectId="#{name}"/>
+    <string value="#{type}"/>
+</equals>
+]]>
+    </content>
+</template>
+
 </templates>
+
