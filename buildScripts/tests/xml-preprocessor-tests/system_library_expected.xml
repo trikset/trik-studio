@@ -1,6 +1,9 @@
 <constraints>
     <timelimit value="10000"/>
-    <event settedUpInitially="true">
+    <init>
+        <setter _1="2" name="sumVariable"/>
+    </init>
+    <event id="" settedUpInitially="true">
         <condition>
             <timer forceDropOnTimeout="false" timeout="5000"/>
         </condition>
@@ -8,7 +11,7 @@
             <success/>
         </triggers>
     </event>
-    <event settedUpInitially="true">
+    <event id="" settedUpInitially="true">
         <condition>
             <timer forceDropOnTimeout="false" timeout="10000"/>
         </condition>
@@ -17,43 +20,39 @@
             <success/>
         </triggers>
     </event>
-    <event settedUpInitially="true">
-        <condition>
+    <event id="" settedUpInitially="true">
+        <conditions glue="and">
             <not>
-                <inside objectId="skittle" objectPoint="all" regionId="zone1"/>
+                <inside objectId="skittle" objectPoint="any" regionId="zone1"/>
             </not>
-        </condition>
+        </conditions>
         <triggers>
             <message text="Object skittle not inside zone"/>
             <success/>
         </triggers>
     </event>
-    <event id="id_1" settedUpInitially="true">
-        <condition>
+    <event id="id_1" settedUpInitially="false">
+        <conditions glue="and">
             <not>
                 <inside objectId="object" objectPoint="any" regionId="zone1"/>
             </not>
-        </condition>
+        </conditions>
         <triggers>
             <setter name="score">
-                <sum>
-                    <variableValue name="score"/>
-                    <variableValue name="sumVariable"/>
-                </sum>
+                <sum _1="${score}" _2="${sumVariable}"/>
             </setter>
             <message text="Points scored: ${score}"/>
         </triggers>
     </event>
     <event id="id_2" settedUpInitially="true">
-        <condition>
-            <inside objectId="object" objectPoint="all" regionId="zone1"/>
-        </condition>
+        <conditions glue="and">
+            <condition>
+                <inside objectId="object" objectPoint="any" regionId="zone1"/>
+            </condition>
+        </conditions>
         <triggers>
             <setter name="score">
-                <sum>
-                    <variableValue name="score"/>
-                    <variableValue name="sumVariable"/>
-                </sum>
+                <sum _1="${score}" _2="${sumVariable}"/>
             </setter>
             <message text="Points scored: ${score}"/>
         </triggers>
