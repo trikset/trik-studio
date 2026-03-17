@@ -138,7 +138,7 @@ QWidget *ColorItemPopup::initBrushPicker()
 
 QWidget *ColorItemPopup::initSpinBox()
 {
-	QSpinBox * const spinBox = new QSpinBox(this);
+	auto * const spinBox = new QSpinBox(this);
 	spinBox->setRange(1, 30);
 	spinBox->setToolTip(tr("Thickness"));
 	QPalette spinBoxPalette;
