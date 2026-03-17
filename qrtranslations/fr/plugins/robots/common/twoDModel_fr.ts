@@ -186,6 +186,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="+52"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+181"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="+261"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -364,6 +365,11 @@
         <location line="+9"/>
         <source>Error while parsing template: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="+1"/>
+        <source>Change visibility</source>
+        <translation>Modifier la visibilité</translation>
     </message>
 </context>
 <context>
@@ -823,7 +829,7 @@
 <context>
     <name>twoDModel::view::ColorItemPopup</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+97"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+103"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>

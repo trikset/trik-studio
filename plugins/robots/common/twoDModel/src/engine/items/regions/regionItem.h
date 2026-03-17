@@ -35,6 +35,8 @@ class RegionItem : public view::TwoDSceneItem
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(RegionItem)
+	Q_PROPERTY(bool filled READ filled WRITE setFilled)
+	Q_PROPERTY(QColor color READ color WRITE setColor)
 
 public:
 	/// A constructor for creating a region before deserialization.
@@ -94,7 +96,9 @@ public:
 
 	/// The initial visibility of the region obtained during deserialization
 	///  (possibly explicitly set by the user in the region editing mode in the future)
-	bool visible() const { return mVisible; };
+	bool visible() const { return mVisible; }
+
+	void setVisibleAttribute(bool visible) {mVisible = visible; }
 
 	/// Now that Region is a full-fledged graphical element that can be resized,
 	/// it is important to ensure that no extra regions are included in its shape when checking constraints.
@@ -103,6 +107,8 @@ public:
 	/// for checking whether an object belongs to a region (if the region is selected). To do this, we should use the
 	/// shapeWihoutResizeArea or containsItem/containsPoint methods of the Region class.
 	virtual QPainterPath shapeWihoutResizeArea() const = 0;
+
+	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
 protected:
 	virtual QString regionType() const = 0;

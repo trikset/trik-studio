@@ -14,6 +14,7 @@
 
 #include "regionItem.h"
 #include <QtCore/QUuid>
+#include <QMenu>
 #include <QtXml/QDomElement>
 #include <QtGui/QPainter>
 #include <qrutils/graphicsUtils/abstractItem.h>
@@ -85,7 +86,7 @@ void RegionItem::switchToMode(EditorMode mode)
 		setEditable(true);
 		return;
 	}
-	setVisible(mVisible);
+	setVisible(visible());
 	setEditable(false);
 }
 
@@ -97,6 +98,8 @@ bool RegionItem::filled() const
 void RegionItem::setFilled(bool filled)
 {
 	mFilled = filled;
+	setBrushStyle(mFilled ? "Diag" : "None");
+	update();
 }
 
 QString RegionItem::text() const
@@ -133,7 +136,10 @@ QColor RegionItem::color() const
 void RegionItem::setColor(const QColor &color)
 {
 	mColor = color;
+	setPenColor(mColor.name());
+	setBrushColor(mColor.name());
 	setText(text());  // To update text color
+	update();
 }
 
 bool RegionItem::containsPoint(QPointF point) const
@@ -199,17 +205,14 @@ void RegionItem::deserialize(const QDomElement &element)
 	AbstractItem::deserialize(element);
 	if (element.hasAttribute("filled")) {
 		setFilled(element.attribute("filled") == "true");
-		setBrushStyle(mFilled ? "Diag" : "None");
 	}
 
 	if (element.hasAttribute("color")) {
 		setColor(QColor(element.attribute("color")));
-		setPenColor(mColor.name());
-		setBrushColor(mColor.name());
 	}
 
 	if (element.hasAttribute("visible")) {
-		mVisible = element.attribute("visible") == "true";
+		setVisibleAttribute(element.attribute("visible") == "true");
 		if (editorMode() == EditorMode::regionEditorMode) {
 			setVisible(true);
 		} else {
@@ -238,6 +241,36 @@ void RegionItem::deserialize(const QDomElement &element)
 
 	if (element.hasAttribute("text")) {
 		setText(element.attribute("text"));
+	}
+}
+
+void RegionItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+	if (!editable()) {
+		return;
+	}
+
+	if (!isSelected()) {
+		scene()->clearSelection();
+		setSelected(true);
+	}
+
+	event->accept();
+
+	auto &&menu = std::make_unique<QMenu>();
+	auto &&removeAction = menu->addAction(QObject::tr("Remove"));
+	auto &&changeVisibility = menu->addAction(QObject::tr("Change visibility"));
+	auto currentEditorMode = editorMode();
+
+	if (currentEditorMode != EditorMode::regionEditorMode) {
+		menu->removeAction(changeVisibility);
+	}
+
+	auto &&selectedAction = menu->exec(event->screenPos());
+	if (selectedAction == removeAction) {
+		Q_EMIT deletedWithContextMenu();
+	} else if (selectedAction == changeVisibility) {
+		setVisibleAttribute(!visible());
 	}
 }
 

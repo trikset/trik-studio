@@ -11,6 +11,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="52"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="181"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="261"/>
         <source>Remove</source>
         <translation>Eliminar</translation>
     </message>
@@ -364,6 +365,11 @@
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/templates/templateParserApi.cpp" line="110"/>
         <source>Error while parsing template: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="262"/>
+        <source>Change visibility</source>
+        <translation>Cambiar visibilidad</translation>
     </message>
 </context>
 <context>
@@ -815,22 +821,22 @@
 <context>
     <name>twoDModel::view::ColorItemPopup</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="97"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="103"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="122"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="128"/>
         <source>Disable filling</source>
         <translation>Deshabilitar relleno</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="122"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="128"/>
         <source>Enable filling</source>
         <translation>Habilitar relleno</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="137"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="143"/>
         <source>Thickness</source>
         <translation>Grosor</translation>
     </message>

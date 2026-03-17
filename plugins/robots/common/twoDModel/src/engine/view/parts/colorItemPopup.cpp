@@ -21,6 +21,8 @@
 #include <qrutils/widgets/colorListEditor.h>
 
 #include "src/engine/items/colorFieldItem.h"
+#include "src/engine/items/regions/ellipseRegion.h"
+#include "src/engine/items/regions/rectangularRegion.h"
 
 using namespace twoDModel::view;
 
@@ -32,9 +34,7 @@ ColorItemPopup::ColorItemPopup(const QPen &pen, graphicsUtils::AbstractScene &sc
 	initWidget();
 }
 
-ColorItemPopup::~ColorItemPopup()
-{
-}
+ColorItemPopup::~ColorItemPopup() = default;
 
 QColor ColorItemPopup::lastColor() const
 {
@@ -48,7 +48,12 @@ int ColorItemPopup::lastThickness() const
 
 bool ColorItemPopup::suits(QGraphicsItem *item)
 {
-	return dynamic_cast<items::ColorFieldItem *>(item) != nullptr;
+	const auto *rectRegion = dynamic_cast<items::RectangularRegion *>(item);
+	const auto *ellipseRegion = dynamic_cast<items::EllipseRegion *>(item);
+
+	return dynamic_cast<items::ColorFieldItem *>(item) != nullptr
+		|| (rectRegion != nullptr && rectRegion->editorMode() == EditorMode::regionEditorMode)
+		|| (ellipseRegion != nullptr && ellipseRegion->editorMode() == EditorMode::regionEditorMode);
 }
 
 bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
@@ -67,6 +72,7 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 	setBrushPickerColor(color);
 	mBrushPicker->setVisible(hasProperty("filled"));
 	mBrushPicker->setChecked(dominantPropertyValue("filled").toBool());
+	mSpinBox->setVisible(hasProperty("thickness"));
 	mSpinBox->setValue(dominantPropertyValue("thickness").toInt());
 
 	// Restoring values that really were picked by user.
@@ -81,8 +87,8 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void ColorItemPopup::initWidget()
 {
-	QVBoxLayout * const layout = new QVBoxLayout(this);
-	QHBoxLayout * const firstRow = new QHBoxLayout;
+	auto * const layout = new QVBoxLayout(this);
+	auto * const firstRow = new QHBoxLayout;
 	firstRow->addWidget(initColorPicker());
 	firstRow->addWidget(initBrushPicker());
 	layout->addLayout(firstRow);
@@ -93,7 +99,7 @@ void ColorItemPopup::initWidget()
 
 QWidget *ColorItemPopup::initColorPicker()
 {
-	qReal::ui::ColorListEditor * const editor = new qReal::ui::ColorListEditor(this, true);
+	auto * const editor = new qReal::ui::ColorListEditor(this, true);
 	editor->setToolTip(tr("Color"));
 	const QStringList colorList = { "Black", "Blue", "LimeGreen", "Yellow", "White", "Red", "#964b00"};
 	editor->setColorList(colorList);
@@ -112,7 +118,7 @@ QWidget *ColorItemPopup::initColorPicker()
 
 QWidget *ColorItemPopup::initBrushPicker()
 {
-	QCheckBox * const editor = new QCheckBox(this);
+	auto * const editor = new QCheckBox(this);
 	editor->setFocusPolicy(Qt::NoFocus);
 	mBrushPicker = editor;
 	connect(mColorPicker, &qReal::ui::ColorListEditor::colorChanged, this, &ColorItemPopup::setBrushPickerColor);
