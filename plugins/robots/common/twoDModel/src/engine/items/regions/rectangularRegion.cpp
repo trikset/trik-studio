@@ -72,7 +72,7 @@ void RectangularRegion::resizeItem(QGraphicsSceneMouseEvent *event)
 
 QRectF RectangularRegion::calcNecessaryBoundingRect() const
 {
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1()));
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
 
 

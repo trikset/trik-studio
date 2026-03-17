@@ -855,7 +855,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+49"/>
         <source>Line (L)</source>
         <translation>Линия (L)</translation>
     </message>

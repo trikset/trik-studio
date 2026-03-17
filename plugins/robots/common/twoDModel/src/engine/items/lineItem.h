@@ -38,7 +38,8 @@ public:
 	QPainterPath shape() const override;
 
 	QRectF boundingRect() const override;
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+	QRectF calcNecessaryBoundingRect() const override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
 	void drawExtractionForItem(QPainter* painter) override;
 
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
@@ -53,6 +54,7 @@ public:
 	void setSerializeName(const QString &name);
 
 protected:
+	QPointF mEstimatedPos;
 	void setPrivateData();
 
 	graphicsUtils::LineImpl mLineImpl;
