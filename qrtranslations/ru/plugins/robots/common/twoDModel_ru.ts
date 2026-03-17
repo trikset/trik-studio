@@ -1111,7 +1111,7 @@
 <context>
     <name>twoDModel::view::ColorItemPopup</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+97"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+96"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
@@ -1443,7 +1443,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+209"/>
+        <location line="+210"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

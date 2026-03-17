@@ -1,4 +1,4 @@
-/* Copyright 2025 CyberTech Labs Ltd.
+/* Copyright 2026 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,18 +18,19 @@
 namespace twoDModel {
 namespace view {
 
-class GridSizeWidget : public StackMetricWidget
+class PopupMetricWidget : public StackMetricWidget
 {
 	Q_OBJECT
 public:
-	explicit GridSizeWidget(QWidget *parent = nullptr);
-	~GridSizeWidget() override;
+	explicit PopupMetricWidget(QWidget *parent = nullptr);
+	~PopupMetricWidget() override;
 	void setValue(QObject *currentSpinBox) override;
+	void setCurrentValue(int currentValuePx);
 	void createSpinBoxes() override;
-public Q_SLOTS:
-	void onGridParameterChanged();
 Q_SIGNALS:
-	void gridSizeChanged(qreal size);
+	void valueChanged(int value);
+private:
+	qreal mCurrentValuePx {};
 };
 
 }

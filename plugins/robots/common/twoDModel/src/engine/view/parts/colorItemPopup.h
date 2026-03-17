@@ -26,7 +26,12 @@ class ColorListEditor;
 }
 
 namespace twoDModel {
+namespace model {
+class SizeUnit;
+}
 namespace view {
+
+class PopupMetricWidget;
 
 /// A popup for configuring ColorFieldItem on 2D model scene.
 /// Contains item`s color picker and spin box for setting item`s thickness.
@@ -36,7 +41,7 @@ class ColorItemPopup : public graphicsUtils::ItemPopup
 
 public:
 	ColorItemPopup(const QPen &pen, graphicsUtils::AbstractScene &scene, QWidget *parent = nullptr);
-	~ColorItemPopup();
+	~ColorItemPopup() override;
 
 	/// Returns last color selected by user.
 	QColor lastColor() const;
@@ -50,7 +55,8 @@ Q_SIGNALS:
 
 	/// Emitted when brush configured by user changed.
 	void isFilledChanged(bool isFilled);
-
+public Q_SLOTS:
+	void onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);
 private Q_SLOTS:
 	void setBrushPickerColor(const QColor &color);
 
@@ -67,7 +73,7 @@ private:
 
 	qReal::ui::ColorListEditor *mColorPicker {};  // Takes ownership
 	QCheckBox *mBrushPicker {};  // Takes ownership
-	QSpinBox *mSpinBox {};  // Takes ownership
+	PopupMetricWidget *mSpinBox {};  // Takes ownership
 	QColor mLastColor;
 	bool mLastFilled {};
 	int mLastThickness { -1 };
