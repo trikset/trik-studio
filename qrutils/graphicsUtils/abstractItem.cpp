@@ -23,6 +23,7 @@
 #include <QtWidgets/QStyleOptionGraphicsItem>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QApplication>
+#include <qrkernel/settingsManager.h>
 
 using namespace graphicsUtils;
 
@@ -219,6 +220,17 @@ void AbstractItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 	setXYWithDragState(mapFromScene(event->scenePos()));
 }
 
+void AbstractItem::calcResizeItemAlligned(QGraphicsSceneMouseEvent *event)
+{
+	if (mDragState != None) {
+		setFlag(QGraphicsItem::ItemIsMovable, false);
+	}
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	const auto x = alignedCoordinate(event->scenePos().x(), gridSize);
+	const auto y = alignedCoordinate(event->scenePos().y(), gridSize);
+	setXYWithDragState(mapFromScene(x, y));
+}
+
 void AbstractItem::setXYWithDragState(const QPointF pos)
 {
 	const auto x = pos.x();
@@ -250,6 +262,47 @@ void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
 	} else {
 		setFlag(QGraphicsItem::ItemIsMovable, true);
 	}
+}
+
+void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition)
+{
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridAlligmentEnabled = showGrid && !(event->modifiers() & Qt::ControlModifier);
+
+	if (dragState() != None) {
+		if (event->modifiers() & Qt::ShiftModifier) {
+			AbstractItem::resizeItem(event);
+			reshapeRectWithShift();
+			return;
+		}
+		if (!gridAlligmentEnabled) {
+			AbstractItem::resizeItem(event);
+			return;
+		}
+		AbstractItem::calcResizeItemAlligned(event);
+		return;
+	}
+
+	estimatedPosition += event->scenePos() - event->lastScenePos();
+	setFlag(QGraphicsItem::ItemIsMovable, false);
+	setPos(estimatedPosition);
+	if (!gridAlligmentEnabled) {
+		return;
+	}
+
+	QRectF itemBoundingRect = calcNecessaryBoundingRect();
+	const auto topLeft = mapToScene(QPointF(itemBoundingRect.left(), itemBoundingRect.top()));
+	moveItemAlligned(topLeft);
+}
+
+
+void AbstractItem::moveItemAlligned(QPointF syncPoint)
+{
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	const auto x = alignedCoordinate(syncPoint.x(), gridSize);
+	const auto y = alignedCoordinate(syncPoint.y(), gridSize);
+	auto delta = QPointF(x, y) - syncPoint;
+	moveBy(delta.x(), delta.y());
 }
 
 void AbstractItem::reverseOldResizingItem(QPointF begin, QPointF end)

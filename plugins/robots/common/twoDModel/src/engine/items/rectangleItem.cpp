@@ -28,6 +28,7 @@ RectangleItem::RectangleItem(graphicsUtils::AbstractCoordinateSystem *metricSyst
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
 }
 
 AbstractItem *RectangleItem::clone() const
@@ -55,9 +56,7 @@ void RectangleItem::setPrivateData()
 
 QRectF RectangleItem::calcNecessaryBoundingRect() const
 {
-	qreal penWidth = pen().widthF();
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()),
-			qAbs(y2() - y1())).adjusted(-penWidth, -penWidth, penWidth, penWidth);
+	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1()));
 }
 
 QRectF RectangleItem::boundingRect() const
@@ -137,12 +136,7 @@ QPainterPath RectangleItem::shapeWihoutResizeArea() const
 
 void RectangleItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	if (event->modifiers() & Qt::ShiftModifier) {
-		AbstractItem::resizeItem(event);
-		reshapeRectWithShift();
-	} else {
-		AbstractItem::resizeItem(event);
-	}
+	AbstractItem::resizeItemCommon(event, mEstimatedPos);
 }
 
 QPainterPath RectangleItem::shape() const

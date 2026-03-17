@@ -22,12 +22,18 @@ using namespace twoDModel::items;
 
 EllipseRegion::EllipseRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			     QGraphicsItem *parent)
-	: RegionItem(metricSystem, parent) {}
+	: RegionItem(metricSystem, parent)
+{
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+}
 
 EllipseRegion::EllipseRegion(QSharedPointer<graphicsUtils::AbstractItem> item,
 		graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QGraphicsItem *parent):
-	RegionItem(item, metricSystem, parent) {}
+	RegionItem(item, metricSystem, parent)
+{
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+}
 
 QString EllipseRegion::regionType() const
 {
@@ -41,10 +47,18 @@ void EllipseRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *
 	graphicsUtils::RectangleImpl::drawEllipseItem(painter, x1(), y1(), x2(), y2());
 }
 
+QRectF EllipseRegion::calcNecessaryBoundingRect() const
+{
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
+}
+
+void EllipseRegion::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+}
+
 QRectF EllipseRegion::boundingRect() const
 {
-	// Drift, for example, to expand the hit-zone when resizing
-	// (the expansion squares are located at the boundary points of the boundingRect)
 	return graphicsUtils::RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 

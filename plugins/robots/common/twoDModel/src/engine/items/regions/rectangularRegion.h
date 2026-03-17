@@ -33,13 +33,16 @@ public:
 			graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			QGraphicsItem *parent = nullptr);
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	// Regions are editable by the user and can be expanded
 	QPainterPath resizeArea() const override;
 	QPainterPath shape() const override;
 	QRectF boundingRect() const override;
 	QPainterPath shapeWihoutResizeArea() const override;
+	QRectF calcNecessaryBoundingRect() const override;
 
 protected:
+	QPointF mEstimatedPos;
 	QString regionType() const override;
 };
 

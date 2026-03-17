@@ -54,6 +54,7 @@ public:
 	void setFilled(bool filled);
 
 private:
+	QPointF mEstimatedPos;
 	void setPrivateData();
 };
 

@@ -204,7 +204,7 @@ void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
 		reshapeRectWithShift();
 	} else {
 		if (SettingsManager::value("2dShowGrid").toBool() && event->modifiers() != Qt::ControlModifier) {
-			resizeWithGrid(event, SettingsManager::value("2dDoubleGridCellSize").toReal());
+			resizeWithGrid(event);
 		} else {
 			if (dragState() == TopLeft || dragState() == BottomRight) {
 				calcResizeItem(event);
@@ -250,26 +250,17 @@ void WallItem::reshapeRectWithShift()
 	}
 }
 
-void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, qreal gridSize)
+void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event)
 {
-	const qreal x = mapFromScene(event->scenePos()).x();
-	const qreal y = mapFromScene(event->scenePos()).y();
-
 	setFlag(QGraphicsItem::ItemIsMovable, false);
 
-	if (dragState() == TopLeft) {
-		setX1(x);
-		setY1(y);
-		reshapeBeginWithGrid(gridSize);
-	} else if (dragState() == BottomRight) {
-		setX2(x);
-		setY2(y);
-		reshapeEndWithGrid(gridSize);
-	} else {
-		setPos(mEstimatedPos);
-		moveBy(alignedCoordinate(begin().x(), gridSize) - begin().x()
-			   , alignedCoordinate(begin().y(), gridSize) - begin().y());
+	if (dragState() == TopLeft || dragState() == BottomRight) {
+		AbstractItem::calcResizeItemAlligned(event);
+		return;
 	}
+
+	setPos(mEstimatedPos);
+	AbstractItem::moveItemAlligned(begin());
 }
 
 void WallItem::reshapeEndWithGrid(qreal gridSize)

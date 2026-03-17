@@ -49,7 +49,7 @@ public:
 	void drawExtractionForItem(QPainter* painter) override;
 	QPainterPath resizeArea() const override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
-
+	void reshapeRectWithShift() override;
 	QDomElement serialize(QDomElement &parent) const override;
 	void deserialize(const QDomElement &element) override;
 
