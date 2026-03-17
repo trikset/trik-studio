@@ -53,6 +53,16 @@ void EllipseItem::setPrivateData()
 	setPen(pen);
 }
 
+void EllipseItem::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	if (event->modifiers() & Qt::ShiftModifier) {
+		AbstractItem::resizeItem(event);
+		reshapeRectWithShift();
+	} else {
+		AbstractItem::resizeItem(event);
+	}
+}
+
 QRectF EllipseItem::calcNecessaryBoundingRect() const
 {
 	qreal penWidth = pen().widthF();

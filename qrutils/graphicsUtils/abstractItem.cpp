@@ -160,10 +160,23 @@ void AbstractItem::setCoordinates(const QRectF &pos)
 
 void AbstractItem::reshapeRectWithShift()
 {
-	// IKHON doesnt work
 	const qreal size = qMax(qAbs(x2() - x1()), qAbs(y2() - y1()));
-	setX2(x2() > x1() ? x1() + size : x1() - size);
-	setY2(y2() > y1() ? y1() + size : y1() - size);
+	if (mDragState == BottomRight || mDragState == None) {
+		setX2(x2() > x1() ? x1() + size : x1() - size);
+		setY2(y2() > y1() ? y1() + size : y1() - size);
+	}
+	if (mDragState == BottomLeft) {
+		setX1(x1() > x2() ? x2() + size : x2() - size);
+		setY2(y2() > y1() ? y1() + size : y1() - size);
+	}
+	if (mDragState == TopRight) {
+		setX2(x2() > x1() ? x1() + size : x1() - size);
+		setY1(y1() > y2() ? y2() + size : y2() - size);
+	}
+	if (mDragState == TopLeft) {
+		setX1(x1() > x2() ? x2() + size : x2() - size);
+		setY1(y1() > y2() ? y2() + size : y2() - size);
+	}
 }
 
 void AbstractItem::changeDragState(qreal x, qreal y)

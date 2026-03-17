@@ -135,6 +135,16 @@ QPainterPath RectangleItem::shapeWihoutResizeArea() const
 	return result;
 }
 
+void RectangleItem::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	if (event->modifiers() & Qt::ShiftModifier) {
+		AbstractItem::resizeItem(event);
+		reshapeRectWithShift();
+	} else {
+		AbstractItem::resizeItem(event);
+	}
+}
+
 QPainterPath RectangleItem::shape() const
 {
 	QPainterPath result;

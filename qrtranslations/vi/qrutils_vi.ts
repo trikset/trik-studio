@@ -69,7 +69,7 @@
         <translation>Chia số nguyên cho 0</translation>
     </message>
     <message>
-        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="627"/>
+        <location filename="../../qrutils/graphicsUtils/abstractItem.cpp" line="640"/>
         <source>Remove</source>
         <translation>Xóa</translation>
     </message>
