@@ -20,6 +20,7 @@
 
 #include <qrutils/widgets/colorListEditor.h>
 
+#include "popupMetricWidget.h"
 #include "src/engine/items/colorFieldItem.h"
 
 using namespace twoDModel::view;
@@ -32,9 +33,7 @@ ColorItemPopup::ColorItemPopup(const QPen &pen, graphicsUtils::AbstractScene &sc
 	initWidget();
 }
 
-ColorItemPopup::~ColorItemPopup()
-{
-}
+ColorItemPopup::~ColorItemPopup() = default;
 
 QColor ColorItemPopup::lastColor() const
 {
@@ -67,7 +66,7 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 	setBrushPickerColor(color);
 	mBrushPicker->setVisible(hasProperty("filled"));
 	mBrushPicker->setChecked(dominantPropertyValue("filled").toBool());
-	mSpinBox->setValue(dominantPropertyValue("thickness").toInt());
+	mSpinBox->setCurrentValue(dominantPropertyValue("thickness").toInt());
 
 	// Restoring values that really were picked by user.
 	mLastColor = lastColorBackup;
@@ -81,8 +80,8 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void ColorItemPopup::initWidget()
 {
-	QVBoxLayout * const layout = new QVBoxLayout(this);
-	QHBoxLayout * const firstRow = new QHBoxLayout;
+	auto * const layout = new QVBoxLayout(this);
+	auto * const firstRow = new QHBoxLayout;
 	firstRow->addWidget(initColorPicker());
 	firstRow->addWidget(initBrushPicker());
 	layout->addLayout(firstRow);
@@ -132,23 +131,24 @@ QWidget *ColorItemPopup::initBrushPicker()
 
 QWidget *ColorItemPopup::initSpinBox()
 {
-	QSpinBox * const spinBox = new QSpinBox(this);
-	spinBox->setRange(1, 30);
+	auto * const spinBox = new PopupMetricWidget(this);
+	spinBox->init();
 	spinBox->setToolTip(tr("Thickness"));
 	QPalette spinBoxPalette;
 	spinBoxPalette.setColor(QPalette::Window, Qt::transparent);
 	spinBoxPalette.setColor(QPalette::Base, Qt::transparent);
 	spinBox->setPalette(spinBoxPalette);
-	connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [=](int value) {
+	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](int value) {
 		setPropertyMassively("thickness", value);
-		if (mLastThickness != value) {
-			mLastThickness = value;
-			Q_EMIT userPenChanged(pen());
-		}
+		Q_EMIT userPenChanged(pen());
 	});
-
 	mSpinBox = spinBox;
 	return spinBox;
+}
+
+void ColorItemPopup::onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit)
+{
+	mSpinBox->onSizeUnitChanged(unit);
 }
 
 void ColorItemPopup::setBrushPickerColor(const QColor &color)

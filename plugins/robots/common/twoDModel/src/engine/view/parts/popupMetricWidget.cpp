@@ -17,23 +17,29 @@
 #include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <qrkernel/settingsManager.h>
-#include "gridSizeWidget.h"
+#include "popupMetricWidget.h"
 #include <cmath>
 
 using namespace twoDModel::view;
 
 namespace {
-constexpr auto pixelMinimalValue = 10.0;
-constexpr auto pixelMaximumValue = 150.0;
+constexpr auto pixelMinimalValue = 1;
+constexpr auto pixelMaximumValue = 30;
+constexpr auto epsilon = 0.001;
 }
 
-GridSizeWidget::~GridSizeWidget() = default;
+PopupMetricWidget::~PopupMetricWidget() = default;
 
-GridSizeWidget::GridSizeWidget(QWidget *parent)
+PopupMetricWidget::PopupMetricWidget(QWidget *parent)
 	: StackMetricWidget(pixelMinimalValue, pixelMaximumValue, parent)
 {}
 
-void GridSizeWidget::createSpinBoxes()
+void PopupMetricWidget::setCurrentValue(int currentValuePx)
+{
+	mCurrentValuePx = currentValuePx;
+}
+
+void PopupMetricWidget::createSpinBoxes()
 {
 	auto createSpinBoxLambda = [this](qreal step, int decimals,
 				twoDModel::model::SizeUnit::Unit unit) {
@@ -44,34 +50,31 @@ void GridSizeWidget::createSpinBoxes()
 		spinBox->setDecimals(decimals);
 		mSlubSpinBoxes.emplace(unit, spinBox);
 		mStackedWidget->addWidget(spinBox);
-		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-						this, &GridSizeWidget::gridSizeChanged);
+		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, [=](qreal value) {
+			const auto pxValue = value * countFactor();
+			if (qAbs(mCurrentValuePx - pxValue) >= epsilon) {
+				mCurrentValuePx = pxValue;
+				Q_EMIT valueChanged(static_cast<int>(mCurrentValuePx));
+			}
+		});
 	};
 
 	// Create custom Pixels SpinBox
-	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Pixels);
+	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Pixels);
 	// Create custom Millimiter SpinBox
-	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Millimeters);
+	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Millimeters);
 	// Create custom Centimeter SpinBox
-	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Centimeters);
+	createSpinBoxLambda(0.1, 2, twoDModel::model::SizeUnit::Unit::Centimeters);
 	// Create custom Meter SpinBox
 	createSpinBoxLambda(0.05, 3, twoDModel::model::SizeUnit::Unit::Meters);
 
 	mStackedWidget->setCurrentWidget(mSlubSpinBoxes[twoDModel::model::SizeUnit::defaultUnit()]);
 }
 
-void GridSizeWidget::onGridParameterChanged()
-{
-	blockSignals(true);
-	setValue(mStackedWidget->currentWidget());
-	blockSignals(false);
-}
-
-void GridSizeWidget::setValue(QObject *currentSpinBox)
+void PopupMetricWidget::setValue(QObject *currentSpinBox)
 {
 	if (!currentSpinBox) {
 		return;
 	}
-	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
-	currentSpinBox->setProperty("value", gridSize / countFactor());
+	currentSpinBox->setProperty("value", mCurrentValuePx / countFactor());
 }

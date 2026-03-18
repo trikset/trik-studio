@@ -201,7 +201,7 @@ void TwoDModelWidget::initWidget()
 	setWindowFlags(windowFlags() | Qt::WindowMinMaxButtonsHint);
 
 	mUi->setupUi(this);
-
+	mUi->gridSizeWidget->init();
 	mScene.reset(new TwoDModelScene(mModel, mUi->graphicsView));
 	connectDevicesConfigurationProvider(mScene.data());
 	mScene->addActions(mActions->sceneContextMenuActions());
@@ -1110,6 +1110,7 @@ void TwoDModelWidget::connectMetricComboBoxes()
 		mUi->gridSizeWidget->onSizeUnitChanged(unit);
 		mUi->horizontalRuler->onSizeUnitChanged(unit);
 		mUi->verticalRuler->onSizeUnitChanged(unit);
+		mColorFieldItemPopup->onSizeUnitChanged(unit);
 		updateRobotInfoWidget(unit);
 	};
 

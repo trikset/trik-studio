@@ -93,6 +93,8 @@ HEADERS += \
 	$$PWD/src/engine/templates/details/template.h \
 	$$PWD/src/engine/templates/templateParserApi.h \
 	$$PWD/src/engine/view/parts/gridSizeWidget.h \
+	$$PWD/src/engine/view/parts/stackMetricWidget.h \
+	$$PWD/src/engine/view/parts/popupMetricWidget.h \
 	$$PWD/src/engine/constraints/constraintsChecker.h \
 	$$PWD/src/engine/constraints/details/defines.h \
 	$$PWD/src/engine/constraints/details/constraintsParser.h \
@@ -110,6 +112,7 @@ HEADERS += \
 	$$PWD/src/engine/items/details/serializer.h \
 	$$PWD/src/engine/items/solidItem.h \
 	$$PWD/src/engine/items/wallItem.h \
+	$$PWD/src/engine/items/popupStackWidget.h \
 	$$PWD/src/engine/items/stylusItem.h \
 	$$PWD/src/engine/items/lineItem.h \
 	$$PWD/src/engine/items/curveItem.h \
@@ -170,6 +173,8 @@ SOURCES += \
 	$$PWD/src/engine/view/parts/speedPopup.cpp \
 	$$PWD/src/engine/view/parts/ruler.cpp \
 	$$PWD/src/engine/view/parts/gridSizeWidget.cpp \
+	$$PWD/src/engine/view/parts/stackMetricWidget.cpp \
+	$$PWD/src/engine/view/parts/popupMetricWidget.cpp \
 	$$PWD/src/engine/model/model.cpp \
 	$$PWD/src/engine/model/metricSystem.cpp \
 	$$PWD/src/engine/model/metricCoordinateSystem.cpp \
