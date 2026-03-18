@@ -102,7 +102,9 @@ QPainterPath LineItem::resizeArea() const
 
 void LineItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
 }
 
 void LineItem::reshapeRectWithShift()

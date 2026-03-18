@@ -15,6 +15,7 @@
 #include "ellipseItem.h"
 
 #include <QtWidgets/QAction>
+#include <qrkernel/settingsManager.h>
 
 using namespace twoDModel::items;
 using namespace graphicsUtils;
@@ -56,7 +57,14 @@ void EllipseItem::setPrivateData()
 
 void EllipseItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
+}
+
+void EllipseItem::reshapeRectWithShift()
+{
+	AbstractItem::reshapeToIsotropic();
 }
 
 QRectF EllipseItem::calcNecessaryBoundingRect() const

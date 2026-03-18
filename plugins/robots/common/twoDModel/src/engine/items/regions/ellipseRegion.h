@@ -40,7 +40,7 @@ public:
 	QPainterPath shape() const override;
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;
-
+	void reshapeRectWithShift() override;
 	QPainterPath shapeWihoutResizeArea() const override;
 private:
 	QPointF mEstimatedPos;
