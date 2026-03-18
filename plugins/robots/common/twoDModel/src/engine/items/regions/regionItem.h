@@ -109,7 +109,8 @@ public:
 	virtual QPainterPath shapeWihoutResizeArea() const = 0;
 
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
-
+Q_SIGNALS:
+	void changeVisibilityWithContextMenu();
 protected:
 	virtual QString regionType() const = 0;
 

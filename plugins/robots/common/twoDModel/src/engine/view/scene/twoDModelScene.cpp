@@ -84,7 +84,7 @@ TwoDModelScene::TwoDModelScene(model::Model &model
 	connect(&mModel.worldModel(), &model::WorldModel::commentAdded, this, &TwoDModelScene::onAbstractItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this, &TwoDModelScene::onColorFieldAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::imageItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
-	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this, &TwoDModelScene::onAbstractItemAdded);
+	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this, &TwoDModelScene::onRegionItemAdded);
 	connect(&mModel.worldModel(), &model::WorldModel::traceItemAddedOrChanged
 			, this, [this](const QSharedPointer<QGraphicsPathItem> &item, bool justChanged) {
 		if (!justChanged) { addItem(item.data()); }
@@ -326,6 +326,15 @@ void TwoDModelScene::handleMouseInteractionWithSelectedItems()
 			cube->saveStartPosition();
 		}
 	}
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void TwoDModelScene::onRegionItemAdded(QSharedPointer<items::RegionItem> item)
+{
+	connect(&*item, &items::RegionItem::changeVisibilityWithContextMenu, this, [this]() {
+		Q_EMIT mModel.modelChanged(mModel.serialize());
+	});
+	onAbstractItemAdded(item);
 }
 
 // NOLINTNEXTLINE(performance-unnecessary-value-param)

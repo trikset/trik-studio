@@ -192,6 +192,8 @@ private Q_SLOTS:
 
 	void onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item);
 
+	void onRegionItemAdded(QSharedPointer<items::RegionItem> item);
+
 	void onAbstractItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
 
 	void onTwoDSceneItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);

@@ -980,7 +980,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+895"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -1013,7 +1013,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+382"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -1035,12 +1035,12 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-194"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+304"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
@@ -1072,7 +1072,7 @@
         <translation>Chargement du monde sans modèle de robot</translation>
     </message>
     <message>
-        <location line="+335"/>
+        <location line="+336"/>
         <source>Hide details</source>
         <translation>Masquer les détails</translation>
     </message>

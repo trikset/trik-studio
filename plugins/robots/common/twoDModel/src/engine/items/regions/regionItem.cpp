@@ -188,7 +188,7 @@ QDomElement RegionItem::serialize(QDomElement &element) const
 				     QString::number(mMetricSystem->toUnit(width)));
 	}
 
-	regionNode.setAttribute("visible", mVisible ? "true" : "false");
+	regionNode.setAttribute("visible", visible() ? "true" : "false");
 
 	regionNode.setAttribute("color", color().name());
 	element.appendChild(regionNode);
@@ -271,6 +271,7 @@ void RegionItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 		Q_EMIT deletedWithContextMenu();
 	} else if (selectedAction == changeVisibility) {
 		setVisibleAttribute(!visible());
+		Q_EMIT changeVisibilityWithContextMenu();
 	}
 }
 
