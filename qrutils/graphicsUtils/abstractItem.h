@@ -119,7 +119,8 @@ public:
 
 	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
-	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition, bool showGrid, qreal gridSize);
+	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition,
+									bool showGrid, qreal gridSize);
 	void reverseOldResizingItem(QPointF begin, QPointF end);
 
 	virtual void restorePos();

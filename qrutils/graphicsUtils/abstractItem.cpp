@@ -268,7 +268,8 @@ void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
 	}
 }
 
-void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition, bool showGrid, qreal gridSize)
+void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition,
+									bool showGrid, qreal gridSize)
 {
 	const auto gridAlligmentEnabled = showGrid && !(event->modifiers() & Qt::ControlModifier);
 
