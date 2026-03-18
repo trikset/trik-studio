@@ -28,6 +28,7 @@ EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
 }
 
 AbstractItem *EllipseItem::clone() const
@@ -53,11 +54,14 @@ void EllipseItem::setPrivateData()
 	setPen(pen);
 }
 
+void EllipseItem::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+}
+
 QRectF EllipseItem::calcNecessaryBoundingRect() const
 {
-	qreal penWidth = pen().widthF();
-	return QRectF(qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()),
-			qAbs(y2() - y1())).adjusted(-penWidth, -penWidth, penWidth, penWidth);
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
 
 QRectF EllipseItem::boundingRect() const

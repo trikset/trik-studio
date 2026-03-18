@@ -839,7 +839,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+43"/>
         <source>Ellipse (E)</source>
         <translation>Эллипс (E)</translation>
     </message>
@@ -855,7 +855,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+49"/>
         <source>Line (L)</source>
         <translation>Линия (L)</translation>
     </message>
@@ -863,7 +863,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+43"/>
         <source>Rectangle (R)</source>
         <translation>Прямоугольник (R)</translation>
     </message>

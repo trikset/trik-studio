@@ -34,6 +34,7 @@ LineItem::LineItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
 }
 
 AbstractItem *LineItem::clone() const
@@ -45,7 +46,7 @@ AbstractItem *LineItem::clone() const
 
 QAction *LineItem::lineTool()
 {
-	QAction * const result = new QAction(QIcon(":/icons/2d_ruler.png"), tr("Line (L)"), nullptr);
+	auto * const result = new QAction(QIcon(":/icons/2d_ruler.png"), tr("Line (L)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_L), QKeySequence(Qt::Key_5)});
 	result->setCheckable(true);
 	return result;
@@ -63,6 +64,11 @@ void LineItem::setPrivateData()
 QRectF LineItem::boundingRect() const
 {
 	return mLineImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width(), drift);
+}
+
+QRectF LineItem::calcNecessaryBoundingRect() const
+{
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
 
 void LineItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
@@ -96,15 +102,7 @@ QPainterPath LineItem::resizeArea() const
 
 void LineItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	const bool isResizing = dragState() == TopLeft || dragState() == BottomRight;
-	if (event->modifiers() & Qt::ShiftModifier && isResizing) {
-		AbstractItem::resizeItem(event);
-		reshapeRectWithShift();
-	} else if (isResizing) {
-		AbstractItem::resizeItem(event);
-	} else {
-		setFlag(QGraphicsItem::ItemIsMovable, true);
-	}
+	AbstractItem::resizeItemCommon(event, mEstimatedPos);
 }
 
 void LineItem::reshapeRectWithShift()
@@ -113,7 +111,7 @@ void LineItem::reshapeRectWithShift()
 	const qreal differenceY = qAbs(y2() - y1());
 	const qreal differenceXY = qAbs(differenceX - differenceY);
 	const qreal size = qMax(differenceX, differenceY);
-	const int delta = size / 2;
+	const int delta = static_cast<int>(size / 2);
 	if (differenceXY > delta) {
 		const qreal corner1X = dragState() == TopLeft ? x2() : x1();
 		const qreal corner1Y = dragState() == TopLeft ? y2() : y1();

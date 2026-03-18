@@ -58,7 +58,7 @@ public:
 
 	QPainterPath path() const;
 
-	void resizeWithGrid(QGraphicsSceneMouseEvent *event, qreal gridSize);
+	void resizeWithGrid(QGraphicsSceneMouseEvent *event);
 
 	void reshapeEndWithGrid(qreal indexGrid);
 	void reshapeBeginWithGrid(qreal indexGrid);

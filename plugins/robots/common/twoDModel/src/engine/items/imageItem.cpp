@@ -108,6 +108,10 @@ QPainterPath ImageItem::shape() const
 	return result;
 }
 
+void ImageItem::reshapeRectWithShift()
+{
+}
+
 QDomElement ImageItem::serialize(QDomElement &parent) const
 {
 	QDomElement imageNode = AbstractItem::serialize(parent);
@@ -240,31 +244,5 @@ QRectF ImageItem::deserializeRect(const QString &string) const
 
 void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	mEstimatedPos += event->scenePos() - event->lastScenePos();
-	const auto showGrid = SettingsManager::value("2dShowGrid").toBool();
-	if (!showGrid || event->modifiers() == Qt::ControlModifier) {
-		if (dragState() != None) {
-			calcResizeItem(event);
-		} else {
-			setPos(mEstimatedPos);
-		}
-	} else if (dragState() != None) {
-		setFlag(QGraphicsItem::ItemIsMovable, false);
-		const auto gridSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
-		const auto x = alignedCoordinate(event->scenePos().x(), gridSize);
-		const auto y = alignedCoordinate(event->scenePos().y(), gridSize);
-		setXYWithDragState(mapFromScene(x, y));
-	} else {
-		setFlag(QGraphicsItem::ItemIsMovable, false);
-		// move
-		setPos(mEstimatedPos);
-		// and align top left corner to grid
-		QRectF itemBoundingRect = calcNecessaryBoundingRect();
-		const auto topLeft = mapToScene(QPointF(itemBoundingRect.left(), itemBoundingRect.top()));
-		const auto gridSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
-		const auto x = alignedCoordinate(topLeft.x(), gridSize);
-		const auto y = alignedCoordinate(topLeft.y(), gridSize);
-		auto delta = QPointF(x, y) - topLeft;
-		moveBy(delta.x(), delta.y());
-	}
+	AbstractItem::resizeItemCommon(event, mEstimatedPos);
 }

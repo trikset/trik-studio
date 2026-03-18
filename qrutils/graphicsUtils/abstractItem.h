@@ -117,7 +117,10 @@ public:
 	void setDragState(DragState dragState);
 
 	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
+	virtual void calcResizeItemAlligned(QGraphicsSceneMouseEvent *event);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
+	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition);
+	virtual void moveItemAlligned(QPointF syncPoint);
 	void reverseOldResizingItem(QPointF begin, QPointF end);
 
 	virtual void restorePos();
