@@ -32,11 +32,11 @@ class TwoDSceneItem: public graphicsUtils::AbstractItem
 	Q_OBJECT
 	Q_DISABLE_COPY(TwoDSceneItem)
 public:
+	using EditorMode = twoDModel::view::EditorMode;
 	explicit TwoDSceneItem(QGraphicsItem *parent = nullptr): AbstractItem(parent) {};
 	virtual void switchToMode(EditorMode mode) { mCurrentEditorMode = mode; };
-protected:
-	using EditorMode = twoDModel::view::EditorMode;
 	EditorMode editorMode() const {return mCurrentEditorMode; }
+protected:
 	EditorMode mCurrentEditorMode = EditorMode::defaultMode;
 };
 
