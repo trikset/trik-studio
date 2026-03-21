@@ -16,6 +16,7 @@
 #include "src/engine/items/ellipseItem.h"
 #include <qrutils/graphicsUtils/rectangleImpl.h>
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include <qrkernel/settingsManager.h>
 #include <QSharedPointer>
 
 using namespace twoDModel::items;
@@ -40,6 +41,11 @@ QString EllipseRegion::regionType() const
 	return "ellipse";
 }
 
+void EllipseRegion::reshapeRectWithShift()
+{
+	AbstractItem::reshapeToIsotropic();
+}
+
 void EllipseRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
@@ -54,7 +60,9 @@ QRectF EllipseRegion::calcNecessaryBoundingRect() const
 
 void EllipseRegion::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
 }
 
 QRectF EllipseRegion::boundingRect() const

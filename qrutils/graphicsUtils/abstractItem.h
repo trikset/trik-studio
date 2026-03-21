@@ -112,15 +112,15 @@ public:
 	void setCoordinates(const QRectF &pos);
 
 	virtual void reshapeRectWithShift();
+	void reshapeToIsotropic();
 	virtual void changeDragState(qreal x, qreal y);
 	DragState dragState() const;
 	void setDragState(DragState dragState);
 
 	virtual void calcResizeItem(QGraphicsSceneMouseEvent *event);
-	virtual void calcResizeItemAlligned(QGraphicsSceneMouseEvent *event);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
-	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition);
-	virtual void moveItemAlligned(QPointF syncPoint);
+	virtual void resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition,
+									bool showGrid, qreal gridSize);
 	void reverseOldResizingItem(QPointF begin, QPointF end);
 
 	virtual void restorePos();
@@ -199,6 +199,8 @@ protected:
 	void setXYWithDragState(const QPointF pos);
 
 private:
+	void calcResizeItemAlligned(QGraphicsSceneMouseEvent *event, qreal gridSize);
+	void moveItemAlligned(QPointF syncPoint, qreal gridSize);
 	DragState mDragState {None};
 	QPen mPen;
 	QBrush mBrush;

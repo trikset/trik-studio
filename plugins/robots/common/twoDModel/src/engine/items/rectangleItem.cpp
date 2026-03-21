@@ -15,6 +15,7 @@
 #include "rectangleItem.h"
 #include <QMenu>
 #include <QtWidgets/QAction>
+#include <qrkernel/settingsManager.h>
 
 using namespace twoDModel::items;
 using namespace graphicsUtils;
@@ -52,6 +53,11 @@ void RectangleItem::setPrivateData()
 	pen.setColor(Qt::blue);
 	pen.setStyle(Qt::SolidLine);
 	setPen(pen);
+}
+
+void RectangleItem::reshapeRectWithShift()
+{
+	AbstractItem::reshapeToIsotropic();
 }
 
 QRectF RectangleItem::calcNecessaryBoundingRect() const
@@ -136,7 +142,9 @@ QPainterPath RectangleItem::shapeWihoutResizeArea() const
 
 void RectangleItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
 }
 
 QPainterPath RectangleItem::shape() const
