@@ -388,7 +388,7 @@
         <translation type="vanished">Arrêter le programme (Esc)</translation>
     </message>
     <message>
-        <location line="+78"/>
+        <location line="+81"/>
         <source>Run program</source>
         <translation>Executer le programme</translation>
     </message>
@@ -398,7 +398,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+309"/>
         <source>Grid size:</source>
         <translation>Taille de la grille:</translation>
     </message>
@@ -446,7 +446,17 @@
         <translation>Roue gauche :</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="-373"/>
+        <source>Edit Regions</source>
+        <translation>Modifier les régions</translation>
+    </message>
+    <message>
+        <location line="+142"/>
+        <source>Reset World</source>
+        <translation>Réinitialiser le monde</translation>
+    </message>
+    <message>
+        <location line="+241"/>
         <source>Right wheel:</source>
         <translation>Roue droite :</translation>
     </message>
