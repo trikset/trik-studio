@@ -30,7 +30,7 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	: QDockWidget(title, parent)
 	, mOutput(new QPlainTextEdit(this))
 {
-	QFont font("Monospace");
+	QFont font("");
 	font.setStyleHint(QFont::Monospace);
 	bool ok;
 	auto size = qReal::SettingsManager::value("CustomDockTextSize").toInt(&ok);
@@ -40,7 +40,11 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 
 	mOutput->setFont(font);
 	if (!QFontInfo(mOutput->font()).fixedPitch()) {
-		QLOG_ERROR() << "Not monospaced font was choosen " << font.toString();
+		const auto &font1 = mOutput->font();
+		font.setStyleHint(QFont::TypeWriter);
+		mOutput->setFont(font);
+		const auto &font2 = mOutput->font();
+		QLOG_ERROR() << "Not monospaced font was choosen (" << font1 << "), trying to fallback to" << font2;
 	}
 	setWidget(mOutput);
 	mOutput->setReadOnly(false);
