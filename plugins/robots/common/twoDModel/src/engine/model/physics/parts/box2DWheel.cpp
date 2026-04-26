@@ -48,7 +48,7 @@ Box2DWheel::Box2DWheel(twoDModel::model::RobotModel * const robotModel,
 						robotModel->parameters()->wheelDiameter()))
 			, robotModel->parameters()->wheelMass()));
 
-	b2Vec2 center = b2Vec2{0.5f * mWheelWidthM, 0.5f * mWheelHeightM};
+	const auto &center = b2Vec2{0.5f * mWheelWidthM, 0.5f * mWheelHeightM};
 	mPolygon[0] = b2Vec2{0.2f * mWheelWidthM, mWheelHeightM} - center;
 	mPolygon[1] = b2Vec2{0.8f * mWheelWidthM, mWheelHeightM} - center;
 	mPolygon[2] = b2Vec2{mWheelWidthM, 0.6f * mWheelHeightM} - center;
@@ -85,12 +85,12 @@ b2BodyId Box2DWheel::getBodyId() {
 }
 
 b2Vec2 Box2DWheel::getLateralVelocity() const {
-	b2Vec2 currentRightNormal = b2Body_GetWorldVector(mBodyId, {0, 1});
+	const auto &currentRightNormal = b2Body_GetWorldVector(mBodyId, {0, 1});
 	return b2Dot(currentRightNormal, b2Body_GetLinearVelocity(mBodyId)) * currentRightNormal;
 }
 
 b2Vec2 Box2DWheel::getForwardVelocity() const {
-	b2Vec2 currentForwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
+	const auto &currentForwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
 	return b2Dot(currentForwardNormal, b2Body_GetLinearVelocity(mBodyId)) * currentForwardNormal;
 }
 
@@ -105,7 +105,7 @@ void Box2DWheel::keepConstantSpeed(float speed) {
 	const auto &lateralImpulse = b2Body_GetMass(mBodyId) * -getLateralVelocity();
 	b2Body_ApplyLinearImpulseToCenter(mBodyId, lateralImpulse, true);
 
-	float currentForwardSpeed =
+	auto currentForwardSpeed =
 	    b2Dot(b2Body_GetLinearVelocity(mBodyId),
 		  b2Body_GetWorldVector(mBodyId, {1, 0}));
 
@@ -113,15 +113,15 @@ void Box2DWheel::keepConstantSpeed(float speed) {
 		return;
 	}
 
-	float speedDiff = speed - currentForwardSpeed;
+	auto speedDiff = speed - currentForwardSpeed;
 
 	if (qAbs(speedDiff) < FLT_EPSILON) {
 		stop();
 		return;
 	}
 
-	b2Vec2 forwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
-	b2Vec2 linearImpulse = speedDiff * b2Body_GetMass(mBodyId) * forwardNormal;
+	const auto &forwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
+	const auto &linearImpulse = speedDiff * b2Body_GetMass(mBodyId) * forwardNormal;
 
 	b2Body_ApplyLinearImpulseToCenter(mBodyId, linearImpulse, true);
 }
