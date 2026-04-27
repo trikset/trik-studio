@@ -885,7 +885,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+35"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+34"/>
         <source>Grid</source>
         <translation>Grille</translation>
     </message>
@@ -980,7 +980,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+887"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+895"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -1013,7 +1013,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+383"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -1035,12 +1035,12 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="-197"/>
+        <location line="-194"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+307"/>
+        <location line="+304"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
