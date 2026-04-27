@@ -879,7 +879,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+34"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+35"/>
         <source>Grid</source>
         <translation>Grille</translation>
     </message>
@@ -974,7 +974,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+887"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -1007,7 +1007,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+382"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+383"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -1029,12 +1029,12 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-197"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+307"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
@@ -1044,7 +1044,7 @@
         <translation>Mode vérification : la solution sera vérifiée, les erreurs seront signalées</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>Saving world and robot model</source>
         <translation>Enregistrement des modèles du monde et du robot</translation>
     </message>

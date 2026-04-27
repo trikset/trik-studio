@@ -1226,7 +1226,7 @@
 <context>
     <name>twoDModel::view::GridParameters</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+34"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/gridParameters.cpp" line="+35"/>
         <source>Grid</source>
         <translation>Сетка</translation>
     </message>
@@ -1325,7 +1325,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+887"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1358,7 +1358,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+382"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+383"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1380,12 +1380,12 @@
         <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-197"/>
         <source>kg</source>
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+307"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1395,7 +1395,7 @@
         <translation>Режим проверки: проверка решения будет осуществляться, об ошибках будет сообщаться</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>Saving world and robot model</source>
         <translation>Сохранение модели мира</translation>
     </message>

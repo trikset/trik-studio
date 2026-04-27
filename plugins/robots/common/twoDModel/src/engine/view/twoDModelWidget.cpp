@@ -534,6 +534,7 @@ void TwoDModelWidget::onFirstShow()
 	enableRobotFollowing(SettingsManager::value("2dFollowingRobot").toBool());
 	setCursorType(static_cast<CursorType>(SettingsManager::value("2dCursorType").toInt()));
 	setDetailsVisibility(SettingsManager::value("2d_detailsVisible").toBool());
+	mUi->gridParametersBox->setChecked(qReal::SettingsManager::value("2dShowGrid").toBool());
 }
 
 void TwoDModelWidget::centerOnRobot()
