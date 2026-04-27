@@ -244,5 +244,7 @@ QRectF ImageItem::deserializeRect(const QString &string) const
 
 void ImageItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
 }

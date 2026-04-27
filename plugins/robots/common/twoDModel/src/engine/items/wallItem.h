@@ -46,6 +46,7 @@ public:
 
 	/// Draws selection rect around sensorBoundingBox
 	void drawExtractionForItem(QPainter *painter) override;
+	QRectF calcNecessaryBoundingRect() const override;
 	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	QPainterPath resizeArea() const override;
@@ -57,8 +58,6 @@ public:
 	void deserialize(const QDomElement &element) override;
 
 	QPainterPath path() const;
-
-	void resizeWithGrid(QGraphicsSceneMouseEvent *event);
 
 	void reshapeEndWithGrid(qreal indexGrid);
 	void reshapeBeginWithGrid(qreal indexGrid);

@@ -16,6 +16,7 @@
 #include "src/engine/items/rectangleItem.h"
 #include <qrutils/graphicsUtils/rectangleImpl.h>
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include <qrkernel/settingsManager.h>
 
 using namespace twoDModel::items;
 
@@ -33,6 +34,11 @@ RectangularRegion::RectangularRegion(
 	RegionItem(item, metricSystem, parent)
 {
 	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+}
+
+void RectangularRegion::reshapeRectWithShift()
+{
+	AbstractItem::reshapeToIsotropic();
 }
 
 void RectangularRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -67,7 +73,9 @@ QPainterPath RectangularRegion::shape() const
 
 void RectangularRegion::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	AbstractItem::resizeItemCommon(event, mEstimatedPos);
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
 }
 
 QRectF RectangularRegion::calcNecessaryBoundingRect() const
