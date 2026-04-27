@@ -1401,7 +1401,7 @@
         <translation>Режим проверки: проверка решения будет осуществляться, об ошибках будет сообщаться</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>Saving world and robot model</source>
         <translation>Сохранение модели мира</translation>
     </message>

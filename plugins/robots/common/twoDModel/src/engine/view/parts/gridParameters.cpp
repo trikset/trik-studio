@@ -48,11 +48,6 @@ GridParameters::GridParameters(QWidget *parent)
 	connect(mShowGridCheckBox, &QAbstractButton::toggled, mCellSize, &QWidget::setEnabled);
 	connect(mShowGridCheckBox, &QAbstractButton::toggled, this, &GridParameters::showGrid);
 	connect(mCellSize, &QAbstractSlider::valueChanged, this, &GridParameters::setCellSize);
-
-	const bool showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
-	const qreal gridSize = qReal::SettingsManager::value("2dDefaultGridCellSize").toReal();
-	mShowGridCheckBox->setChecked(showGrid);
-	mCellSize->setValue(qRound(gridSize * scale));
 	setLayout(layout);
 
 	// Bring the slider values closer to the step values (which should ideally be 0.1 of the unit of measurement)
@@ -88,6 +83,12 @@ void GridParameters::onGridParametersChangedOutside(qreal newCellSize)
 }
 
 GridParameters::~GridParameters() = default;
+
+void GridParameters::setChecked(bool isGridEnabled)
+{
+	mShowGridCheckBox->setChecked(isGridEnabled);
+	showGrid(isGridEnabled);
+}
 
 void GridParameters::showGrid(bool isGridEnabled)
 {
