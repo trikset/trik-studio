@@ -27,27 +27,28 @@ using namespace twoDModel::model::physics::parts;
 Box2DWheel::Box2DWheel(twoDModel::model::RobotModel * const robotModel,
 		Box2DPhysicsEngine *engine
 		, b2Vec2 positionBox2D, b2Rot rotationBox2D, Box2DRobot &robot)
-	: mRobot(robot)
+	: mBodyId(b2_nullBodyId)
+	, mRobot(robot)
 	, mEngine(engine)
 	, mWheelHeightM(engine->pxToM(robotModel->parameters()->wheelDiameter() / 2))
 	, mWheelWidthM(engine->pxToM(robotModel->parameters()->wheelDiameter()))
 	, mPolygon(new b2Vec2[8])
 {
-	b2BodyDef bodyDef = b2DefaultBodyDef();
+	auto bodyDef = b2DefaultBodyDef();
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position = positionBox2D;
 	bodyDef.rotation = rotationBox2D;
 	mBodyId = b2CreateBody(engine->box2DWorldId(), &bodyDef);
 
-	b2ShapeDef fixtureDef = b2DefaultShapeDef();
-	fixtureDef.material.restitution = robotModel->parameters()->wheelRestitution();
-	fixtureDef.material.friction = robotModel->parameters()->wheelFriction();
-	fixtureDef.density = engine->computeDensity(
+	auto fixtureDef = b2DefaultShapeDef();
+	fixtureDef.material.restitution = static_cast<float>(robotModel->parameters()->wheelRestitution());
+	fixtureDef.material.friction = static_cast<float>(robotModel->parameters()->wheelFriction());
+	fixtureDef.density = static_cast<float>(engine->computeDensity(
 			QPolygonF(QRectF(0, 0, robotModel->parameters()->wheelDiameter() / 2,
 						robotModel->parameters()->wheelDiameter()))
-			, robotModel->parameters()->wheelMass());
+			, robotModel->parameters()->wheelMass()));
 
-	b2Vec2 center = b2Vec2{0.5f * mWheelWidthM, 0.5f * mWheelHeightM};
+	const auto &center = b2Vec2{0.5f * mWheelWidthM, 0.5f * mWheelHeightM};
 	mPolygon[0] = b2Vec2{0.2f * mWheelWidthM, mWheelHeightM} - center;
 	mPolygon[1] = b2Vec2{0.8f * mWheelWidthM, mWheelHeightM} - center;
 	mPolygon[2] = b2Vec2{mWheelWidthM, 0.6f * mWheelHeightM} - center;
@@ -57,12 +58,12 @@ Box2DWheel::Box2DWheel(twoDModel::model::RobotModel * const robotModel,
 	mPolygon[6] = b2Vec2{0.0f, 0.4f * mWheelHeightM} - center;
 	mPolygon[7] = b2Vec2{0.0f, 0.6f * mWheelHeightM} - center;
 
-	b2Hull hull = b2ComputeHull(mPolygon, 8);
-	b2Polygon polygon = b2MakePolygon(&hull, 0.0f);
-	b2ShapeId polygonShapeId = b2CreatePolygonShape(mBodyId, &fixtureDef, &polygon);
+	const auto &hull = b2ComputeHull(mPolygon, 8);
+	const auto &polygon = b2MakePolygon(&hull, 0.0f);
+	const auto &polygonShapeId = b2CreatePolygonShape(mBodyId, &fixtureDef, &polygon);
 	b2Body_SetUserData(mBodyId, this);
 
-	auto finalPolygon = b2Shape_GetPolygon(polygonShapeId);
+	const auto &finalPolygon = b2Shape_GetPolygon(polygonShapeId);
 	for (int i = 0; i < finalPolygon.count; ++i) {
 		auto position = b2Body_GetPosition(mBodyId);
 		mDebuggingDrawPolygon.append(mEngine->positionToScene(finalPolygon.vertices[i] + position));
@@ -84,55 +85,46 @@ b2BodyId Box2DWheel::getBodyId() {
 }
 
 b2Vec2 Box2DWheel::getLateralVelocity() const {
-	b2Vec2 currentRightNormal = b2Body_GetWorldVector(mBodyId, {0, 1});
+	const auto &currentRightNormal = b2Body_GetWorldVector(mBodyId, {0, 1});
 	return b2Dot(currentRightNormal, b2Body_GetLinearVelocity(mBodyId)) * currentRightNormal;
 }
 
 b2Vec2 Box2DWheel::getForwardVelocity() const {
-	b2Vec2 currentForwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
+	const auto &currentForwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
 	return b2Dot(currentForwardNormal, b2Body_GetLinearVelocity(mBodyId)) * currentForwardNormal;
 }
 
 void Box2DWheel::keepConstantSpeed(float speed) {
-	const int acceleration = 1;//20;
 	if (qAbs(prevSpeed - speed) > FLT_EPSILON){
 		mRobot.applyForceToCenter(
-			b2Body_GetWorldVector(mBodyId, b2Vec2{0.1f * mathUtils::Math::sign(speed), 0}), true);
+			b2Body_GetWorldVector(mBodyId, b2Vec2{0.1f *
+						static_cast<float>(mathUtils::Math::sign(speed)), 0}), true);
 		prevSpeed = speed;
 	}
 
-	// clears lateral velocity
-	b2Vec2 lateralImpulse = b2Body_GetMass(mBodyId) * -getLateralVelocity();
-	auto center = b2Body_GetWorldCenterOfMass(mBodyId);
-	b2Body_ApplyLinearImpulse(mBodyId, lateralImpulse, center, true);
+	const auto &lateralImpulse = b2Body_GetMass(mBodyId) * -getLateralVelocity();
+	b2Body_ApplyLinearImpulseToCenter(mBodyId, lateralImpulse, true);
 
-	b2Vec2 forwardVelocity = getForwardVelocity();
-	float scalar = b2Dot(forwardVelocity,
-		b2Body_GetWorldVector(mBodyId, {1, 0})) < 0 ? -1 : 1;
-
-	float currentForwardSpeed = b2Length(forwardVelocity) * scalar;
+	auto currentForwardSpeed =
+	    b2Dot(b2Body_GetLinearVelocity(mBodyId),
+		  b2Body_GetWorldVector(mBodyId, {1, 0}));
 
 	if (mathUtils::Math::eq(currentForwardSpeed, speed)) {
 		return;
 	}
 
-	float speedDelta = qAbs(speed) / acceleration * (currentForwardSpeed < speed ? 1 : -1);
-	float desiredSpeed = currentForwardSpeed + speedDelta;
+	auto speedDiff = speed - currentForwardSpeed;
 
-	float speedDiff = desiredSpeed - currentForwardSpeed;
-	b2Vec2 forwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
-	b2Vec2 linearImpulse = speedDiff * b2Body_GetMass(mBodyId) * forwardNormal;
-
-	//break stop
 	if (qAbs(speedDiff) < FLT_EPSILON) {
 		stop();
 		return;
 	}
 
-	center = b2Body_GetWorldCenterOfMass(mBodyId);
-	b2Body_ApplyLinearImpulse(mBodyId, linearImpulse, center, true);
-}
+	const auto &forwardNormal = b2Body_GetWorldVector(mBodyId, {1, 0});
+	const auto &linearImpulse = speedDiff * b2Body_GetMass(mBodyId) * forwardNormal;
 
+	b2Body_ApplyLinearImpulseToCenter(mBodyId, linearImpulse, true);
+}
 
 void Box2DWheel::stop() {
 	b2Body_SetLinearVelocity(mBodyId, {0, 0});
