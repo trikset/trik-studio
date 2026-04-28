@@ -92,7 +92,7 @@ jobs:
       os: ubuntu-22.04
       build: true
       build_installer: false
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=use_system_qscintilla2 CONFIG+=use_system_quazip"
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=no-sanitizers CONFIG+=use_system_box2D CONFIG+=use_system_qscintilla2 CONFIG+=use_system_quazip"
       trik_python3_version_minor: 10
       lint_clazy: true
 
@@ -104,7 +104,7 @@ jobs:
       build: true
       build_installer: false
       config: debug
-      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=use_system_qscintilla2 CONFIG+=use_system_quazip CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
+      qmake_extra: "CONFIG+=tests CONFIG+=noPch CONFIG+=ccache CONFIG+=small_debug_info CONFIG+=use_system_box2D CONFIG+=use_system_qscintilla2 CONFIG+=use_system_quazip CONFIG+=sanitizer CONFIG+=sanitize_undefined CONFIG+=sanitize_address"
       trik_python3_version_minor: 10
 
   build-altlinux-release-tests:
