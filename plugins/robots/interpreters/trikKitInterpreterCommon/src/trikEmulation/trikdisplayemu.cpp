@@ -12,6 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
+#include <stdexcept>
+#include <QMetaObject>
+
 #include <trikKitInterpreterCommon/trikEmulation/trikdisplayemu.h>
 
 #include <kitBase/robotModel/robotModelUtils.h>
@@ -34,7 +37,8 @@ Qt::ConnectionType TrikDisplayEmu::callType() const {
 
 trikControl::DisplayWidgetInterface &TrikDisplayEmu::graphicsWidget()
 {
-	return mDisplayWidgetInterface;
+	Q_UNIMPLEMENTED();
+	throw std::logic_error(__PRETTY_FUNCTION__);
 }
 
 void TrikDisplayEmu::init()
