@@ -16,9 +16,7 @@
 
 using namespace graphicsUtils;
 
-StylusImpl::StylusImpl()
-{
-}
+StylusImpl::StylusImpl() = default;
 
 QRectF StylusImpl::searchMaxMinCoord(const QList<AbstractItem *> &listLine) const
 {
@@ -35,10 +33,9 @@ QRectF StylusImpl::searchMaxMinCoord(const QList<AbstractItem *> &listLine) cons
 			maxX = qMax(lineBounds.right(), maxX);
 			maxY = qMax(lineBounds.bottom(), maxY);
 		}
-		return QRectF(minX, minY, maxX - minX, maxY - minY);
-	} else {
-		return QRectF(0, 0, 0, 0);
+		return {minX, minY, maxX - minX, maxY - minY};
 	}
+	return {0, 0, 0, 0};
 }
 
 QPainterPath StylusImpl::shape(const QList<AbstractItem *> &listLine) const
