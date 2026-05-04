@@ -76,7 +76,7 @@ private:
 	PopupMetricWidget *mSpinBox {};  // Takes ownership
 	QColor mLastColor;
 	bool mLastFilled {};
-	int mLastThickness { -1 };
+	qreal mLastThickness { -1 };
 };
 
 }

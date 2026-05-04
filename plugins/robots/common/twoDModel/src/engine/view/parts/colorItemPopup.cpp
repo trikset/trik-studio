@@ -147,7 +147,7 @@ QWidget *ColorItemPopup::initSpinBox()
 	spinBox->setPalette(spinBoxPalette);
 	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](qreal value) {
 		setPropertyMassively("thickness", value);
-		if (qAbs(mLastThickness - value) >= epsilon) {
+		if (qAbs(mLastThickness - value) > epsilon103) {
 			mLastThickness = value;
 			Q_EMIT userPenChanged(pen());
 		}
@@ -174,6 +174,6 @@ void ColorItemPopup::setBrushPickerColor(const QColor &color)
 QPen ColorItemPopup::pen() const
 {
 	QPen pen(mLastColor);
-	pen.setWidth(mLastThickness);
+	pen.setWidthF(mLastThickness);
 	return pen;
 }
