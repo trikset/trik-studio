@@ -416,7 +416,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="159"/>
         <source>Reset World</source>
-        <translation type>Đặt lại thế giới</translation>
+        <translation>Đặt lại thế giới</translation>
     </message>
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.ui" line="445"/>
