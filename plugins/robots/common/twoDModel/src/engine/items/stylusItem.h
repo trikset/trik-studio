@@ -40,7 +40,7 @@ public:
 	QRectF boundingRect() const override;
 	QPainterPath shape() const override;
 
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void drawExtractionForItem(QPainter* painter) override;
 	void drawFieldForResizeItem(QPainter* painter) override;
 	void drawScalingRects(QPainter* painter);
