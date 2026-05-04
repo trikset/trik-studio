@@ -25,7 +25,6 @@ using namespace twoDModel::view;
 namespace {
 constexpr auto pixelMinimalValue = 1;
 constexpr auto pixelMaximumValue = 30;
-constexpr auto epsilon = 0.001;
 }
 
 PopupMetricWidget::~PopupMetricWidget() = default;
@@ -37,7 +36,7 @@ PopupMetricWidget::PopupMetricWidget(QWidget *parent): StackMetricWidget(parent)
 		addWidget(spinBox, unit, pixelMinimalValue, pixelMaximumValue, step, decimals);
 		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, [=](qreal value) {
 			const auto pxValue = value * countFactor();
-			if (qAbs(mCurrentValuePx - pxValue) >= epsilon) {
+			if (qAbs(mCurrentValuePx - pxValue) >= epsilon103) {
 				mCurrentValuePx = pxValue;
 				Q_EMIT valueChanged(mCurrentValuePx);
 			}

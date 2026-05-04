@@ -601,7 +601,7 @@
 <context>
     <name>twoDModel::items::StylusItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+61"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/stylusItem.cpp" line="+62"/>
         <source>Stylus (S)</source>
         <translation>Stylo (S)</translation>
     </message>

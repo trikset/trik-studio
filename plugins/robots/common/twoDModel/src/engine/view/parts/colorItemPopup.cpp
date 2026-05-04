@@ -30,7 +30,7 @@ using namespace twoDModel::view;
 ColorItemPopup::ColorItemPopup(const QPen &pen, graphicsUtils::AbstractScene &scene, QWidget *parent)
 	: ItemPopup(scene, parent)
 	, mLastColor(pen.color())
-	, mLastThickness(pen.width())
+	, mLastThickness(pen.widthF())
 {
 	initWidget();
 }
@@ -42,7 +42,7 @@ QColor ColorItemPopup::lastColor() const
 	return mLastColor;
 }
 
-int ColorItemPopup::lastThickness() const
+qreal ColorItemPopup::lastThickness() const
 {
 	return mLastThickness;
 }
@@ -63,7 +63,7 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 	// Subsequent setting values to editors will cause theese values loss. Saving it here.
 	const QColor lastColorBackup = mLastColor;
-	const int lastThicknessBackup = mLastThickness;
+	const qreal lastThicknessBackup = mLastThickness;
 
 	blockSignals(true);
 	mSpinBox->blockSignals(true);
@@ -147,7 +147,10 @@ QWidget *ColorItemPopup::initSpinBox()
 	spinBox->setPalette(spinBoxPalette);
 	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](qreal value) {
 		setPropertyMassively("thickness", value);
-		Q_EMIT userPenChanged(pen());
+		if (qAbs(mLastThickness - value) >= epsilon) {
+			mLastThickness = value;
+			Q_EMIT userPenChanged(pen());
+		}
 	});
 	mSpinBox = spinBox;
 	return spinBox;

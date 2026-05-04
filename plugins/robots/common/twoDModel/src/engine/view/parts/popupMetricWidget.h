@@ -14,6 +14,7 @@
 
 #pragma once
 #include "stackMetricWidget.h"
+#include "twoDModel/engine/model/constants.h"
 
 namespace twoDModel {
 namespace view {

@@ -62,5 +62,6 @@ const qreal onePercentAngularVelocity = 0.0055;
 const qreal maxLightSensorValue = 1023;
 const int touchSensorPressedSignal = 1;
 const int touchSensorNotPressedSignal = 0;
+constexpr qreal epsilon103 = 0.001;
 
 }

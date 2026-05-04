@@ -47,7 +47,7 @@ public:
 	QColor lastColor() const;
 
 	/// Returns last pen thickness entered by user.
-	int lastThickness() const;
+	qreal lastThickness() const;
 
 Q_SIGNALS:
 	/// Emitted when pen configured by user changed.
