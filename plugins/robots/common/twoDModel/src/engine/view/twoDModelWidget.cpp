@@ -221,8 +221,6 @@ void TwoDModelWidget::initWidget()
 		mScene->setPenBrushItems(pen, QBrush(pen.color(), Qt::NoBrush));
 	});
 
-	connect(mColorFieldItemPopup, &ColorItemPopup::propertyChanged, this, &TwoDModelWidget::saveWorldModelToRepo);
-
 	connect(mImageItemPopup, &ImageItemPopup::propertyChanged, this, [=]() {
 		saveBlobsToRepo();
 		saveWorldModelToRepo();
@@ -533,6 +531,7 @@ void TwoDModelWidget::onFirstShow()
 	enableRobotFollowing(SettingsManager::value("2dFollowingRobot").toBool());
 	setCursorType(static_cast<CursorType>(SettingsManager::value("2dCursorType").toInt()));
 	setDetailsVisibility(SettingsManager::value("2d_detailsVisible").toBool());
+	mUi->gridParametersBox->setChecked(qReal::SettingsManager::value("2dShowGrid").toBool());
 }
 
 void TwoDModelWidget::centerOnRobot()
@@ -822,6 +821,7 @@ void TwoDModelWidget::setController(ControllerInterface &controller)
 		if (mController) {
 			mController->execute(new commands::ChangePropertyCommand(*mScene, items, property, value));
 		}
+		saveWorldModelToRepo();
 	};
 
 	connect(mRobotItemPopup, &graphicsUtils::ItemPopup::propertyChanged, this, setItemsProperty);

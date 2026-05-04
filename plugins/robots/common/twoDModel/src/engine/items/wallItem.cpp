@@ -100,6 +100,11 @@ QRectF WallItem::boundingRect() const
 	return mLineImpl.boundingRect(x1(), y1(), x2(), y2(), pen().width(), mWallWidth);
 }
 
+QRectF WallItem::calcNecessaryBoundingRect() const
+{
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
+}
+
 QPainterPath WallItem::shape() const
 {
 	QPainterPath result;
@@ -197,23 +202,9 @@ void WallItem::recalculateBorders()
 
 void WallItem::resizeItem(QGraphicsSceneMouseEvent *event)
 {
-	mEstimatedPos += event->scenePos() - event->lastScenePos();
-
-	if (event->modifiers() & Qt::ShiftModifier && (dragState() == TopLeft || dragState() == BottomRight)) {
-		AbstractItem::resizeItem(event);
-		reshapeRectWithShift();
-	} else {
-		if (SettingsManager::value("2dShowGrid").toBool() && event->modifiers() != Qt::ControlModifier) {
-			resizeWithGrid(event, SettingsManager::value("2dDoubleGridCellSize").toReal());
-		} else {
-			if (dragState() == TopLeft || dragState() == BottomRight) {
-				calcResizeItem(event);
-			} else {
-				setFlag(QGraphicsItem::ItemIsMovable, false);
-				setPos(mEstimatedPos);
-			}
-		}
-	}
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
 }
 
 void WallItem::reshapeRectWithShift()
@@ -247,28 +238,6 @@ void WallItem::reshapeRectWithShift()
 			setX2(x2() > x1() ? x1() + size : x1() - size);
 			setY2(y2() > y1() ? y1() + size : y1() - size);
 		}
-	}
-}
-
-void WallItem::resizeWithGrid(QGraphicsSceneMouseEvent *event, qreal gridSize)
-{
-	const qreal x = mapFromScene(event->scenePos()).x();
-	const qreal y = mapFromScene(event->scenePos()).y();
-
-	setFlag(QGraphicsItem::ItemIsMovable, false);
-
-	if (dragState() == TopLeft) {
-		setX1(x);
-		setY1(y);
-		reshapeBeginWithGrid(gridSize);
-	} else if (dragState() == BottomRight) {
-		setX2(x);
-		setY2(y);
-		reshapeEndWithGrid(gridSize);
-	} else {
-		setPos(mEstimatedPos);
-		moveBy(alignedCoordinate(begin().x(), gridSize) - begin().x()
-			   , alignedCoordinate(begin().y(), gridSize) - begin().y());
 	}
 }
 

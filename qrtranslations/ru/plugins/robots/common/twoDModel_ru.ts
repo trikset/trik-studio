@@ -392,6 +392,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="+52"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+181"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="+261"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
@@ -570,6 +571,11 @@
         <location line="+9"/>
         <source>Error while parsing template: %1</source>
         <translation type="unfinished">Ошибка при разборе шаблона: %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="+1"/>
+        <source>Change visibility</source>
+        <translation>Изменить видимость</translation>
     </message>
 </context>
 <context>
@@ -839,7 +845,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+44"/>
         <source>Ellipse (E)</source>
         <translation>Эллипс (E)</translation>
     </message>
@@ -855,7 +861,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+49"/>
         <source>Line (L)</source>
         <translation>Линия (L)</translation>
     </message>
@@ -863,7 +869,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+44"/>
         <source>Rectangle (R)</source>
         <translation>Прямоугольник (R)</translation>
     </message>
@@ -1325,7 +1331,7 @@
         <translation type="vanished">Выберите картинку</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+895"/>
         <source>Select images</source>
         <translation>Выберите картинки</translation>
     </message>
@@ -1358,7 +1364,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+382"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1380,12 +1386,12 @@
         <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-194"/>
         <source>kg</source>
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+304"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>
@@ -1395,7 +1401,7 @@
         <translation>Режим проверки: проверка решения будет осуществляться, об ошибках будет сообщаться</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>Saving world and robot model</source>
         <translation>Сохранение модели мира</translation>
     </message>
@@ -1433,7 +1439,7 @@
         <translation type="vanished">Попытка загрузить слишком большое изображение может заморозить выполнение на некоторое время. Продолжить?</translation>
     </message>
     <message>
-        <location line="+335"/>
+        <location line="+336"/>
         <source>Hide details</source>
         <translation>Скрыть детали</translation>
     </message>

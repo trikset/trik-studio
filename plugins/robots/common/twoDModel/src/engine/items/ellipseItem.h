@@ -45,7 +45,8 @@ public:
 	void deserialize(const QDomElement &element) override;
 	QPainterPath shapeWihoutResizeArea() const;
 	QPainterPath shape() const override;
-
+	void resizeItem(QGraphicsSceneMouseEvent *event) override;
+	void reshapeRectWithShift() override;
 	/// Returns true if ellipse is filled with its pen color or false if it is "empty".
 	bool filled() const;
 
@@ -53,6 +54,7 @@ public:
 	void setFilled(bool filled);
 
 private:
+	QPointF mEstimatedPos;
 	void setPrivateData();
 };
 

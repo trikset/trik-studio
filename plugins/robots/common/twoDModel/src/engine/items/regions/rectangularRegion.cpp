@@ -16,18 +16,30 @@
 #include "src/engine/items/rectangleItem.h"
 #include <qrutils/graphicsUtils/rectangleImpl.h>
 #include <qrutils/graphicsUtils/abstractItem.h>
+#include <qrkernel/settingsManager.h>
 
 using namespace twoDModel::items;
 
 RectangularRegion::RectangularRegion(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 			     QGraphicsItem *parent)
-	: RegionItem(metricSystem, parent) {}
+	: RegionItem(metricSystem, parent)
+{
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+}
 
 RectangularRegion::RectangularRegion(
 		QSharedPointer<graphicsUtils::AbstractItem> item,
 		graphicsUtils::AbstractCoordinateSystem *metricSystem,
 		QGraphicsItem *parent):
-	RegionItem(item, metricSystem, parent) {}
+	RegionItem(item, metricSystem, parent)
+{
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+}
+
+void RectangularRegion::reshapeRectWithShift()
+{
+	AbstractItem::reshapeToIsotropic();
+}
 
 void RectangularRegion::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -57,6 +69,18 @@ QPainterPath RectangularRegion::shape() const
 		 result.addPath(resizeArea());
 	}
 	return result;
+}
+
+void RectangularRegion::resizeItem(QGraphicsSceneMouseEvent *event)
+{
+	const auto showGrid = qReal::SettingsManager::value("2dShowGrid").toBool();
+	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
+	AbstractItem::resizeItemCommon(event, mEstimatedPos, showGrid, gridSize);
+}
+
+QRectF RectangularRegion::calcNecessaryBoundingRect() const
+{
+	return {qMin(x1(), x2()), qMin(y1(), y2()), qAbs(x2() - x1()), qAbs(y2() - y1())};
 }
 
 

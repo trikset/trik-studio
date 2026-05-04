@@ -34,6 +34,7 @@ public:
 
 public Q_SLOTS:
 	void showGrid(bool isGridEnabled);
+	void setChecked(bool isGridEnabled);
 	void setCellSize(int cellSizeValue);
 	void onGridParametersChangedOutside(qreal newCellSize);
 	void onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);

@@ -23,6 +23,7 @@
 #include <QtWidgets/QStyleOptionGraphicsItem>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QApplication>
+#include <qrkernel/settingsManager.h>
 
 using namespace graphicsUtils;
 
@@ -158,9 +159,27 @@ void AbstractItem::setCoordinates(const QRectF &pos)
 	update();
 }
 
+void AbstractItem::reshapeToIsotropic()
+{
+	const auto size = qMax(qAbs(x2() - x1()), qAbs(y2() - y1()));
+
+	bool useX1AsBase = (mDragState == BottomRight || mDragState == TopRight || mDragState == None);
+	bool useY1AsBase = (mDragState == BottomRight || mDragState == BottomLeft || mDragState == None);
+
+	const auto bx = useX1AsBase ? x1() : x2();
+	const auto by = useY1AsBase ? y1() : y2();
+	const auto tx = useX1AsBase ? x2() : x1();
+	const auto ty = useY1AsBase ? y2() : y1();
+
+	const auto newTargetX = (tx > bx) ? bx + size : bx - size;
+	const auto newTargetY = (ty > by) ? by + size : by - size;
+
+	if (useX1AsBase) setX2(newTargetX); else setX1(newTargetX);
+	if (useY1AsBase) setY2(newTargetY); else setY1(newTargetY);
+}
+
 void AbstractItem::reshapeRectWithShift()
 {
-	// IKHON doesnt work
 	const qreal size = qMax(qAbs(x2() - x1()), qAbs(y2() - y1()));
 	setX2(x2() > x1() ? x1() + size : x1() - size);
 	setY2(y2() > y1() ? y1() + size : y1() - size);
@@ -206,6 +225,16 @@ void AbstractItem::calcResizeItem(QGraphicsSceneMouseEvent *event)
 	setXYWithDragState(mapFromScene(event->scenePos()));
 }
 
+void AbstractItem::calcResizeItemAlligned(QGraphicsSceneMouseEvent *event, qreal gridSize)
+{
+	if (mDragState != None) {
+		setFlag(QGraphicsItem::ItemIsMovable, false);
+	}
+	const auto x = alignedCoordinate(event->scenePos().x(), gridSize);
+	const auto y = alignedCoordinate(event->scenePos().y(), gridSize);
+	setXYWithDragState(mapFromScene(x, y));
+}
+
 void AbstractItem::setXYWithDragState(const QPointF pos)
 {
 	const auto x = pos.x();
@@ -237,6 +266,46 @@ void AbstractItem::resizeItem(QGraphicsSceneMouseEvent *event)
 	} else {
 		setFlag(QGraphicsItem::ItemIsMovable, true);
 	}
+}
+
+void AbstractItem::resizeItemCommon(QGraphicsSceneMouseEvent *event, QPointF &estimatedPosition,
+									bool showGrid, qreal gridSize)
+{
+	const auto gridAlligmentEnabled = showGrid && !(event->modifiers() & Qt::ControlModifier);
+
+	if (dragState() != None) {
+		if (event->modifiers() & Qt::ShiftModifier) {
+			AbstractItem::resizeItem(event);
+			reshapeRectWithShift();
+			return;
+		}
+		if (!gridAlligmentEnabled) {
+			AbstractItem::resizeItem(event);
+			return;
+		}
+		AbstractItem::calcResizeItemAlligned(event, gridSize);
+		return;
+	}
+
+	estimatedPosition += event->scenePos() - event->lastScenePos();
+	setFlag(QGraphicsItem::ItemIsMovable, false);
+	setPos(estimatedPosition);
+	if (!gridAlligmentEnabled) {
+		return;
+	}
+
+	QRectF itemBoundingRect = calcNecessaryBoundingRect();
+	const auto topLeft = mapToScene(QPointF(itemBoundingRect.left(), itemBoundingRect.top()));
+	moveItemAlligned(topLeft, gridSize);
+}
+
+
+void AbstractItem::moveItemAlligned(QPointF syncPoint, qreal gridSize)
+{
+	const auto x = alignedCoordinate(syncPoint.x(), gridSize);
+	const auto y = alignedCoordinate(syncPoint.y(), gridSize);
+	auto delta = QPointF(x, y) - syncPoint;
+	moveBy(delta.x(), delta.y());
 }
 
 void AbstractItem::reverseOldResizingItem(QPointF begin, QPointF end)

@@ -186,6 +186,7 @@
     <message>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/colorFieldItem.cpp" line="+52"/>
         <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/commentItem.cpp" line="+181"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="+261"/>
         <source>Remove</source>
         <translation>Supprimer</translation>
     </message>
@@ -364,6 +365,11 @@
         <location line="+9"/>
         <source>Error while parsing template: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/regions/regionItem.cpp" line="+1"/>
+        <source>Change visibility</source>
+        <translation>Modifier la visibilité</translation>
     </message>
 </context>
 <context>
@@ -555,7 +561,7 @@
 <context>
     <name>twoDModel::items::EllipseItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/ellipseItem.cpp" line="+44"/>
         <source>Ellipse (E)</source>
         <translation>Ellipse (E)</translation>
     </message>
@@ -571,7 +577,7 @@
 <context>
     <name>twoDModel::items::LineItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+48"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/lineItem.cpp" line="+49"/>
         <source>Line (L)</source>
         <translation>Ligne (L)</translation>
     </message>
@@ -579,7 +585,7 @@
 <context>
     <name>twoDModel::items::RectangleItem</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+42"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/items/rectangleItem.cpp" line="+44"/>
         <source>Rectangle (R)</source>
         <translation>Rectangle (R)</translation>
     </message>
@@ -974,7 +980,7 @@
 <context>
     <name>twoDModel::view::TwoDModelScene</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+886"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/scene/twoDModelScene.cpp" line="+895"/>
         <source>Select images</source>
         <translation>Sélectionner des images</translation>
     </message>
@@ -1007,7 +1013,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+382"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -1029,12 +1035,12 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="-196"/>
+        <location line="-194"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+304"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>
@@ -1044,7 +1050,7 @@
         <translation>Mode vérification : la solution sera vérifiée, les erreurs seront signalées</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+63"/>
         <source>Saving world and robot model</source>
         <translation>Enregistrement des modèles du monde et du robot</translation>
     </message>
@@ -1066,7 +1072,7 @@
         <translation>Chargement du monde sans modèle de robot</translation>
     </message>
     <message>
-        <location line="+335"/>
+        <location line="+336"/>
         <source>Hide details</source>
         <translation>Masquer les détails</translation>
     </message>
