@@ -19,7 +19,6 @@
 #include <qrkernel/settingsManager.h>
 #include "stackMetricWidget.h"
 #include <cmath>
-#include <QDebug>
 
 using namespace twoDModel::view;
 
@@ -46,7 +45,6 @@ void StackMetricWidget::addWidget(QWidget *widget, twoDModel::model::SizeUnit si
 	widget->setProperty("singleStep", step);
 	widget->setProperty("decimals", decimals);
 
-	qDebug() << "set" << displayMin << displayMax << step << decimals;
 	mSlubWidgets.emplace(sizeUnit.unit(), widget);
 	mStackedWidget->addWidget(widget);
 }

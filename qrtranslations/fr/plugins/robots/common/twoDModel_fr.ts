@@ -216,7 +216,7 @@
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+116"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+119"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
@@ -829,7 +829,7 @@
 <context>
     <name>twoDModel::view::ColorItemPopup</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+96"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+104"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
@@ -844,7 +844,7 @@
         <translation>Activer le remplissage</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+14"/>
         <source>Thickness</source>
         <translation>Épaisseur</translation>
     </message>
@@ -1013,7 +1013,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+379"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
@@ -1035,12 +1035,12 @@
         <translation type="vanished">cm</translation>
     </message>
     <message>
-        <location line="-194"/>
+        <location line="-193"/>
         <source>kg</source>
         <translation>kg</translation>
     </message>
     <message>
-        <location line="+304"/>
+        <location line="+303"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Mode entraînement : la solution ne sera pas vérifiée</translation>
     </message>

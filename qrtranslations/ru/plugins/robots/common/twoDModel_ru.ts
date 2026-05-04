@@ -422,7 +422,7 @@
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+116"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/model/metricSystem.cpp" line="+119"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
@@ -1117,7 +1117,7 @@
 <context>
     <name>twoDModel::view::ColorItemPopup</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+96"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/colorItemPopup.cpp" line="+104"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
@@ -1132,7 +1132,7 @@
         <translation>Заливать</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+14"/>
         <source>Thickness</source>
         <translation>Толщина</translation>
     </message>
@@ -1364,7 +1364,7 @@
 <context>
     <name>twoDModel::view::TwoDModelWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+380"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/twoDModelWidget.cpp" line="+379"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
@@ -1386,12 +1386,12 @@
         <translation type="vanished">см</translation>
     </message>
     <message>
-        <location line="-194"/>
+        <location line="-193"/>
         <source>kg</source>
         <translation>кг</translation>
     </message>
     <message>
-        <location line="+304"/>
+        <location line="+303"/>
         <source>Training mode: solution will not be checked</source>
         <translation>Режим тренировки: решение не будет проверяться</translation>
     </message>

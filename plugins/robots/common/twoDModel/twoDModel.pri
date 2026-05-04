@@ -112,7 +112,6 @@ HEADERS += \
 	$$PWD/src/engine/items/details/serializer.h \
 	$$PWD/src/engine/items/solidItem.h \
 	$$PWD/src/engine/items/wallItem.h \
-	$$PWD/src/engine/items/popupStackWidget.h \
 	$$PWD/src/engine/items/stylusItem.h \
 	$$PWD/src/engine/items/lineItem.h \
 	$$PWD/src/engine/items/curveItem.h \
