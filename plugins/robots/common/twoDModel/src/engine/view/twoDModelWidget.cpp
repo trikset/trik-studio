@@ -1110,6 +1110,7 @@ void TwoDModelWidget::connectMetricComboBoxes()
 		mUi->horizontalRuler->onSizeUnitChanged(unit);
 		mUi->verticalRuler->onSizeUnitChanged(unit);
 		mColorFieldItemPopup->onSizeUnitChanged(unit);
+		mRobotItemPopup->onSizeUnitChanged(unit);
 		updateRobotInfoWidget(unit);
 	};
 

@@ -525,7 +525,7 @@ void Scene::changePenStyle(const QString &text)
 	update();
 }
 
-void Scene::changePenWidth(int width)
+void Scene::changePenWidth(qreal width)
 {
 	mPenWidthItems = width;
 	for (auto &&item : selectedSceneItems())

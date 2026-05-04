@@ -24,7 +24,7 @@ using namespace twoDModel::view;
 
 namespace {
 constexpr auto pixelMinimalValue = 1;
-constexpr auto pixelMaximumValue = 30;
+constexpr auto pixelMaximumValue = 50;
 }
 
 PopupMetricWidget::~PopupMetricWidget() = default;
@@ -45,11 +45,11 @@ PopupMetricWidget::PopupMetricWidget(QWidget *parent): StackMetricWidget(parent)
 
 	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Pixels);
 	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Millimeters);
-	createSpinBoxLambda(0.1, 2, twoDModel::model::SizeUnit::Unit::Centimeters);
-	createSpinBoxLambda(0.05, 3, twoDModel::model::SizeUnit::Unit::Meters);
+	createSpinBoxLambda(0.1, 1, twoDModel::model::SizeUnit::Unit::Centimeters);
+	createSpinBoxLambda(0.05, 2, twoDModel::model::SizeUnit::Unit::Meters);
 }
 
-void PopupMetricWidget::setCurrentValue(int currentValuePx)
+void PopupMetricWidget::setCurrentValue(qreal currentValuePx)
 {
 	mCurrentValuePx = currentValuePx;
 	sizeUnitHandler(currentWidget());

@@ -89,13 +89,13 @@ protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) override;
 
-	QString penStyleItems();
-	int penWidthItems();
-	QString penColorItems();
-	QString brushStyleItems();
-	QString brushColorItems();
+	QString penStyleItems() const;
+	qreal penWidthItems() const;
+	QString penColorItems() const;
+	QString brushStyleItems() const;
+	QString brushColorItems() const;
 
-	QList<AbstractItem *> abstractItems(const QPointF &scenePos) const;
+	QList<AbstractItem *> abstractItems(QPointF scenePos) const;
 
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 	void focusInEvent(QFocusEvent *event) override;
@@ -110,12 +110,12 @@ protected:
 	int mSizeEmptyRectY;
 
 	QString mPenStyleItems;
-	int mPenWidthItems;
+	qreal mPenWidthItems;
 	QString mPenColorItems;
 	QString mBrushStyleItems;
 	QString mBrushColorItems;
 
-	int mFirstPenWidth;
+	qreal mFirstPenWidth;
 
 	QGraphicsRectItem *mEmptyRect;
 

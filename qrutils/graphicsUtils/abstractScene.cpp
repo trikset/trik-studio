@@ -57,7 +57,7 @@ QRect AbstractScene::realItemsBoundingRect() const
 	QList<QGraphicsItem *> list = items();
 
 	for (QGraphicsItem *graphicsItem : list) {
-		AbstractItem* item = dynamic_cast<AbstractItem*>(graphicsItem);
+		const auto &item = dynamic_cast<AbstractItem*>(graphicsItem);
 		if (item) {
 			const QRectF itemRect = item->realBoundingRect();
 			maxX = qMax(static_cast<int>(itemRect.right()), maxX);
@@ -66,7 +66,7 @@ QRect AbstractScene::realItemsBoundingRect() const
 			minY = qMin(static_cast<int>(itemRect.top()), minY);
 		}
 	}
-	return QRect(minX, minY, maxX - minX, maxY - minY);
+	return {minX, minY, maxX - minX, maxY - minY};
 }
 
 void AbstractScene::setX1andY1(QGraphicsSceneMouseEvent *event)
@@ -92,7 +92,7 @@ void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event)
 	if (mGraphicsItem->isSelected()) {
 		mGraphicsItem->setPos(oldPos);
 	}
-	for (auto selectedItem : selectedItems()) {
+	for (auto &&selectedItem : selectedItems()) {
 		if (auto item = dynamic_cast<AbstractItem*>(selectedItem)) {
 			if (!item->parentItem()) {
 				item->moveBy(delta.x(), delta.y());
@@ -114,8 +114,8 @@ void AbstractScene::reshapeItem(QGraphicsSceneMouseEvent *event, graphicsUtils::
 void AbstractScene::setMoveFlag(QGraphicsSceneMouseEvent *event)
 {
 	QList<QGraphicsItem *> list = items(event->scenePos());
-	for (QGraphicsItem *graphicsItem : list){
-		AbstractItem *item = dynamic_cast<graphicsUtils::AbstractItem *>(graphicsItem);
+	for (auto &&graphicsItem : list){
+		const auto &item = dynamic_cast<graphicsUtils::AbstractItem *>(graphicsItem);
 		if (item && item->editable()) {
 			graphicsItem->setFlag(QGraphicsItem::ItemIsMovable, true);
 		}
@@ -142,7 +142,7 @@ void AbstractScene::removeMoveFlag(QGraphicsSceneMouseEvent *event, QGraphicsIte
 {
 	QList<QGraphicsItem *> list = items(event->scenePos());
 	for (QGraphicsItem *graphicsItem : list) {
-		AbstractItem *grItem = dynamic_cast<graphicsUtils::AbstractItem *>(graphicsItem);
+		const auto &grItem = dynamic_cast<graphicsUtils::AbstractItem *>(graphicsItem);
 		if (grItem) {
 			grItem->setFlag(QGraphicsItem::ItemIsMovable, false);
 		}
@@ -205,7 +205,7 @@ bool AbstractScene::compareItems(AbstractItem* first, AbstractItem* second)
 }
 
 bool AbstractScene::compareSharedPtrItems(const QSharedPointer<AbstractItem> &first
-										  , const QSharedPointer<AbstractItem> &second)
+						, const QSharedPointer<AbstractItem> &second)
 {
 	return first->zValue() < second->zValue();
 }
@@ -222,7 +222,7 @@ void AbstractScene::setEmptyPenBrushItems()
 void AbstractScene::setPenBrushItems(const QPen &pen, const QBrush &brush)
 {
 	mPenStyleItems = convertPenToString(pen);
-	mPenWidthItems = pen.width();
+	mPenWidthItems = pen.widthF();
 	mPenColorItems = pen.color().name();
 	mBrushStyleItems = convertBrushToString(brush);
 	mBrushColorItems = brush.color().name();
@@ -265,40 +265,40 @@ QString AbstractScene::convertBrushToString(const QBrush &brush)
 	case Qt::SolidPattern:
 		return "Solid";
 	default:
-		return QString();
+		return {};
 	}
 }
 
-QString AbstractScene::penStyleItems()
+QString AbstractScene::penStyleItems() const
 {
 	return mPenStyleItems;
 }
 
-int AbstractScene::penWidthItems()
+qreal AbstractScene::penWidthItems() const
 {
 	return mPenWidthItems;
 }
 
-QString AbstractScene::penColorItems()
+QString AbstractScene::penColorItems() const
 {
 	return mPenColorItems;
 }
 
-QString AbstractScene::brushStyleItems()
+QString AbstractScene::brushStyleItems() const
 {
 	return mBrushStyleItems;
 }
 
-QString AbstractScene::brushColorItems()
+QString AbstractScene::brushColorItems() const
 {
 	return mBrushColorItems;
 }
 
-QList<AbstractItem *> AbstractScene::abstractItems(const QPointF &scenePos) const
+QList<AbstractItem *> AbstractScene::abstractItems(QPointF scenePos) const
 {
 	QList<AbstractItem *> result;
-	for (QGraphicsItem * const item : items(scenePos)) {
-		if (AbstractItem * const abstractItem = dynamic_cast<AbstractItem *>(item)) {
+	for (auto &&item : items(scenePos)) {
+		if (auto * const abstractItem = dynamic_cast<AbstractItem *>(item)) {
 			result << abstractItem;
 		}
 	}
@@ -345,8 +345,8 @@ void AbstractScene::addActions(const QList<QAction *> &actions)
 
 AbstractItem *AbstractScene::findItem(const QString &id) const
 {
-	for (QGraphicsItem * const item : items()) {
-		AbstractItem * const itemWithId = dynamic_cast<AbstractItem *>(item);
+	for (auto &&item : items()) {
+		auto * const itemWithId = dynamic_cast<AbstractItem *>(item);
 		if (itemWithId && itemWithId->id() == id) {
 			return itemWithId;
 		}

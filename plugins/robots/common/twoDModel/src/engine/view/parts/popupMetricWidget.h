@@ -26,7 +26,7 @@ public:
 	explicit PopupMetricWidget(QWidget *parent = nullptr);
 	~PopupMetricWidget() override;
 	void sizeUnitHandler(QWidget *currentWidget) override;
-	void setCurrentValue(int currentValuePx);
+	void setCurrentValue(qreal currentValuePx);
 Q_SIGNALS:
 	void valueChanged(qreal value);
 private:

@@ -939,7 +939,7 @@
 <context>
     <name>twoDModel::view::RobotItemPopup</name>
     <message>
-        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+75"/>
+        <location filename="../../../../../plugins/robots/common/twoDModel/src/engine/view/parts/robotItemPopup.cpp" line="+78"/>
         <source>Camera folowing robot: %1</source>
         <translation>Suivre le robot : %1</translation>
     </message>
@@ -964,7 +964,7 @@
         <translation>Déplacer la position de départ ici</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+19"/>
         <source>Marker thickness</source>
         <translation>Épaisseur du marqueur</translation>
     </message>
@@ -1082,7 +1082,7 @@
         <translation>Afficher les détails</translation>
     </message>
     <message>
-        <location line="+210"/>
+        <location line="+211"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Pas de roue</translation>

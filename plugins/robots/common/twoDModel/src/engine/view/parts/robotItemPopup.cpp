@@ -19,7 +19,7 @@
 #include <QtWidgets/QSpinBox>
 #include <qrutils/graphicsUtils/abstractItem.h>
 #include <qrkernel/settingsManager.h>
-
+#include "popupMetricWidget.h"
 #include "src/engine/view/scene/robotItem.h"
 
 using namespace twoDModel::view;
@@ -30,19 +30,22 @@ RobotItemPopup::RobotItemPopup(graphicsUtils::AbstractScene &scene, QWidget *par
 	initWidget();
 }
 
-RobotItemPopup::~RobotItemPopup()
-{
-}
+RobotItemPopup::~RobotItemPopup() = default;
 
 bool RobotItemPopup::suits(QGraphicsItem *item)
 {
 	return dynamic_cast<RobotItem *>(item) != nullptr;
 }
 
+void RobotItemPopup::onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit)
+{
+	mSpinBox->onSizeUnitChanged(unit);
+}
+
 bool RobotItemPopup::attachTo(QGraphicsItem *item)
 {
 	mCurrentItem = dynamic_cast<RobotItem *>(item);
-	mSpinBox->setValue(mCurrentItem->pen().width());
+	mSpinBox->setCurrentValue(mCurrentItem->pen().widthF());
 
 	const bool followingEnabled = qReal::SettingsManager::value("2dFollowingRobot").toBool();
 	mFollowButton->setChecked(followingEnabled);
@@ -57,7 +60,7 @@ bool RobotItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 
 void RobotItemPopup::initWidget()
 {
-	QGridLayout * const layout = new QGridLayout(this);
+	auto * const layout = new QGridLayout(this);
 	layout->addWidget(initFollowButton(), 0, 0, Qt::AlignCenter);
 	layout->addWidget(initReturnButton(), 0, 1);
 	layout->addWidget(initSpinBox(), 1, 0);
@@ -94,7 +97,7 @@ QWidget *RobotItemPopup::initSetStartButton()
 
 QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &toolTip)
 {
-	QPushButton * const result = new QPushButton(
+	auto * const result = new QPushButton(
 		graphicsUtils::AbstractItem::loadThemedIcon(icon, Qt::red), QString(), this
 	);
 	result->setToolTip(toolTip);
@@ -105,14 +108,13 @@ QAbstractButton *RobotItemPopup::initButton(const QString &icon, const QString &
 
 QWidget *RobotItemPopup::initSpinBox()
 {
-	QSpinBox * const spinBox = new QSpinBox(this);
-	spinBox->setRange(1, 30);
+	auto * const spinBox = new PopupMetricWidget(this);
 	spinBox->setToolTip(tr("Marker thickness"));
 	QPalette spinBoxPalette;
 	spinBoxPalette.setColor(QPalette::Window, Qt::transparent);
 	spinBoxPalette.setColor(QPalette::Base, Qt::transparent);
 	spinBox->setPalette(spinBoxPalette);
-	connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, [=](int value) {
+	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](qreal value) {
 		mCurrentItem->setPenWidth(value);
 	});
 
