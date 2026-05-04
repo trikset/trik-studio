@@ -76,7 +76,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
 	void changePenStyle(const QString &text);
-	void changePenWidth(qreal width);
+	void changePenWidth(int width);
 	void changePenColor(const QString &text);
 	void changeBrushStyle(const QString &text);
 	void changeBrushColor(const QString &text);

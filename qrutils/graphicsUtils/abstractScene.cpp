@@ -311,7 +311,7 @@ void AbstractScene::setPenStyleItems(const QString &text)
 	mPenStyleItems = text;
 }
 
-void AbstractScene::setPenWidthItems(int width)
+void AbstractScene::setPenWidthItems(qreal width)
 {
 	mPenWidthItems = width;
 }

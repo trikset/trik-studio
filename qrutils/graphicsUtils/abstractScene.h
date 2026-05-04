@@ -49,7 +49,7 @@ public:
 	void setEmptyPenBrushItems();
 
 	void setPenStyleItems(const QString &text);
-	void setPenWidthItems(int width);
+	void setPenWidthItems(qreal width);
 	void setPenColorItems(const QString &text);
 	void setBrushStyleItems(const QString &text);
 	void setBrushColorItems(const QString &text);
