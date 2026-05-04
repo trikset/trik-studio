@@ -115,7 +115,7 @@ void StylusItem::setPenStyle(const QString& text)
 	mStylusImpl.setPenStyle(mAbstractListLine, text);
 }
 
-void StylusItem::setPenWidth(int width)
+void StylusItem::setPenWidth(qreal width)
 {
 	AbstractItem::setPenWidth(width);
 	mStylusImpl.setPenWidth(mAbstractListLine, width);

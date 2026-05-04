@@ -19,40 +19,41 @@
 #include <qrkernel/settingsManager.h>
 #include "stackMetricWidget.h"
 #include <cmath>
+#include <QDebug>
 
 using namespace twoDModel::view;
 
-StackMetricWidget::~StackMetricWidget() = default;
-
-StackMetricWidget::StackMetricWidget(qreal rangeMinimum, qreal rangeMaximum, QWidget *parent)
+StackMetricWidget::StackMetricWidget(QWidget *parent)
 	: QWidget(parent)
 	, mStackedWidget(new QStackedWidget(this))
 	, mUnit(nullptr)
-	, mRangeMinimum(rangeMinimum)
-	, mRangeMaximum(rangeMaximum)
-{
-	setupUI();
-}
-
-void StackMetricWidget::init()
-{
-	createSpinBoxes();
-}
-
-void StackMetricWidget::updateValues(QObject *spinBox, twoDModel::model::SizeUnit sizeUnit,qreal step) const {
-	const auto displayMin = mRangeMinimum / sizeUnit.countFactor();
-	const auto displayMax = mRangeMaximum / sizeUnit.countFactor();
-	spinBox->setProperty("minimum", displayMin);
-	spinBox->setProperty("maximum", displayMax);
-	spinBox->setProperty("suffix", " " +sizeUnit.toStr());
-	spinBox->setProperty("singleStep", step);
-}
-
-void StackMetricWidget::setupUI()
 {
 	auto *layout = new QHBoxLayout(this);
 	layout->setContentsMargins(0, 0, 0, 0);
 	layout->addWidget(mStackedWidget);
+}
+
+StackMetricWidget::~StackMetricWidget() = default;
+
+void StackMetricWidget::addWidget(QWidget *widget, twoDModel::model::SizeUnit sizeUnit,
+				     qreal rangeMinimum, qreal rangeMaximum, qreal step, qreal decimals)
+{
+	const auto displayMin = rangeMinimum / sizeUnit.countFactor();
+	const auto displayMax = rangeMaximum / sizeUnit.countFactor();
+	widget->setProperty("minimum", displayMin);
+	widget->setProperty("maximum", displayMax);
+	widget->setProperty("suffix", " " + sizeUnit.toStr());
+	widget->setProperty("singleStep", step);
+	widget->setProperty("decimals", decimals);
+
+	qDebug() << "set" << displayMin << displayMax << step << decimals;
+	mSlubWidgets.emplace(sizeUnit.unit(), widget);
+	mStackedWidget->addWidget(widget);
+}
+
+QWidget *StackMetricWidget::currentWidget() const
+{
+	return mStackedWidget->currentWidget();
 }
 
 qreal StackMetricWidget::countFactor()
@@ -64,10 +65,11 @@ void StackMetricWidget::onSizeUnitChanged(const QSharedPointer<twoDModel::model:
 {
 	blockSignals(true);
 	mUnit = unit;
-	const auto it = mSlubSpinBoxes.find(mUnit->unit());
-	if (it != mSlubSpinBoxes.end() && it->second != mStackedWidget->currentWidget()) {
+	const auto it = mSlubWidgets.find(mUnit->unit());
+	if (it != mSlubWidgets.end() && it->second != mStackedWidget->currentWidget()) {
 	    mStackedWidget->setCurrentWidget(it->second);
-	    setValue(it->second);
+	    sizeUnitHandler(it->second);
 	}
+
 	blockSignals(false);
 }

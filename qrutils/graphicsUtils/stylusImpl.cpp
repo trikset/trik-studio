@@ -95,7 +95,7 @@ void StylusImpl::setPenStyle(const QList<AbstractItem *> &listLine, const QStrin
 	}
 }
 
-void StylusImpl::setPenWidth(const QList<AbstractItem *> &listLine, int width)
+void StylusImpl::setPenWidth(const QList<AbstractItem *> &listLine, qreal width)
 {
 	for (AbstractItem *line : listLine) {
 		line->setPenWidth(width);

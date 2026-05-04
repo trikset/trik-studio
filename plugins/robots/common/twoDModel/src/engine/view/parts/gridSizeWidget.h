@@ -24,8 +24,7 @@ class GridSizeWidget : public StackMetricWidget
 public:
 	explicit GridSizeWidget(QWidget *parent = nullptr);
 	~GridSizeWidget() override;
-	void setValue(QObject *currentSpinBox) override;
-	void createSpinBoxes() override;
+	void sizeUnitHandler(QWidget *currentWidget) override;
 public Q_SLOTS:
 	void onGridParameterChanged();
 Q_SIGNALS:

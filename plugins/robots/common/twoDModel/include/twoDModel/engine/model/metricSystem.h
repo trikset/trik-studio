@@ -37,6 +37,8 @@ public:
 
 	SizeUnit() = default;
 
+	SizeUnit(twoDModel::model::SizeUnit::Unit unit);
+
 	/// The current pixel value in centimeters
 	qreal pixelsInCm() const;
 

@@ -29,49 +29,33 @@ constexpr auto pixelMaximumValue = 150.0;
 
 GridSizeWidget::~GridSizeWidget() = default;
 
-GridSizeWidget::GridSizeWidget(QWidget *parent)
-	: StackMetricWidget(pixelMinimalValue, pixelMaximumValue, parent)
-{}
-
-void GridSizeWidget::createSpinBoxes()
+GridSizeWidget::GridSizeWidget(QWidget *parent): StackMetricWidget(parent)
 {
-	auto createSpinBoxLambda = [this](qreal step, int decimals,
-				twoDModel::model::SizeUnit::Unit unit) {
-		twoDModel::model::SizeUnit sizeUnit {};
-		sizeUnit.setSizeUnit(unit);
+	auto createSpinBoxLambda = [this](qreal step, int decimals, twoDModel::model::SizeUnit unit) {
 		auto *spinBox = new QDoubleSpinBox(this);
-		updateValues(spinBox, sizeUnit, step);
-		spinBox->setDecimals(decimals);
-		mSlubSpinBoxes.emplace(unit, spinBox);
-		mStackedWidget->addWidget(spinBox);
-		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged),
-						this, &GridSizeWidget::gridSizeChanged);
+		addWidget(spinBox, unit, pixelMinimalValue, pixelMaximumValue, step, decimals);
+		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, &GridSizeWidget::gridSizeChanged);
 	};
 
-	// Create custom Pixels SpinBox
 	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Pixels);
-	// Create custom Millimiter SpinBox
 	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Millimeters);
-	// Create custom Centimeter SpinBox
 	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Centimeters);
-	// Create custom Meter SpinBox
 	createSpinBoxLambda(0.05, 3, twoDModel::model::SizeUnit::Unit::Meters);
-
-	mStackedWidget->setCurrentWidget(mSlubSpinBoxes[twoDModel::model::SizeUnit::defaultUnit()]);
 }
 
 void GridSizeWidget::onGridParameterChanged()
 {
 	blockSignals(true);
-	setValue(mStackedWidget->currentWidget());
+	sizeUnitHandler(currentWidget());
 	blockSignals(false);
 }
 
-void GridSizeWidget::setValue(QObject *currentSpinBox)
+void GridSizeWidget::sizeUnitHandler(QWidget *currentSpinBox)
 {
 	if (!currentSpinBox) {
 		return;
 	}
+
 	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
 	currentSpinBox->setProperty("value", gridSize / countFactor());
 }

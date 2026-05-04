@@ -37,7 +37,7 @@ public :
 	void drawScalingRects(QPainter* painter);
 
 	void setPenStyle(const QList<AbstractItem *> &listLine, const QString &text);
-	void setPenWidth(const QList<AbstractItem *> &listLine, int width);
+	void setPenWidth(const QList<AbstractItem *> &listLine, qreal width);
 	void setPenColor(const QList<AbstractItem *> &listLine, const QString &text);
 	void setBrushStyle(const QList<AbstractItem *> &listLine, const QString &text);
 	void setBrushColor(const QList<AbstractItem *> &listLine, const QString &text);

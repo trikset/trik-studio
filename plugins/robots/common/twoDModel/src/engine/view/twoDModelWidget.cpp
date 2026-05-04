@@ -201,7 +201,6 @@ void TwoDModelWidget::initWidget()
 	setWindowFlags(windowFlags() | Qt::WindowMinMaxButtonsHint);
 
 	mUi->setupUi(this);
-	mUi->gridSizeWidget->init();
 	mScene.reset(new TwoDModelScene(mModel, mUi->graphicsView));
 	connectDevicesConfigurationProvider(mScene.data());
 	mScene->addActions(mActions->sceneContextMenuActions());

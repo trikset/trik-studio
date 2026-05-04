@@ -46,7 +46,7 @@ public:
 	void drawScalingRects(QPainter* painter);
 
 	void setPenStyle(const QString &text) override;
-	void setPenWidth(int width) override;
+	void setPenWidth(qreal width) override;
 	void setPenColor(const QString &text) override;
 	void setBrushStyle(const QString &text) override;
 	void setBrushColor(const QString &text) override;

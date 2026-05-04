@@ -132,13 +132,12 @@ QWidget *ColorItemPopup::initBrushPicker()
 QWidget *ColorItemPopup::initSpinBox()
 {
 	auto * const spinBox = new PopupMetricWidget(this);
-	spinBox->init();
 	spinBox->setToolTip(tr("Thickness"));
 	QPalette spinBoxPalette;
 	spinBoxPalette.setColor(QPalette::Window, Qt::transparent);
 	spinBoxPalette.setColor(QPalette::Base, Qt::transparent);
 	spinBox->setPalette(spinBoxPalette);
-	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](int value) {
+	connect(spinBox, &PopupMetricWidget::valueChanged, this, [=](qreal value) {
 		setPropertyMassively("thickness", value);
 		Q_EMIT userPenChanged(pen());
 	});

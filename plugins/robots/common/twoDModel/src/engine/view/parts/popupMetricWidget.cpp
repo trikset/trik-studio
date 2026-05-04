@@ -30,51 +30,37 @@ constexpr auto epsilon = 0.001;
 
 PopupMetricWidget::~PopupMetricWidget() = default;
 
-PopupMetricWidget::PopupMetricWidget(QWidget *parent)
-	: StackMetricWidget(pixelMinimalValue, pixelMaximumValue, parent)
-{}
-
-void PopupMetricWidget::setCurrentValue(int currentValuePx)
+PopupMetricWidget::PopupMetricWidget(QWidget *parent): StackMetricWidget(parent)
 {
-	mCurrentValuePx = currentValuePx;
-}
-
-void PopupMetricWidget::createSpinBoxes()
-{
-	auto createSpinBoxLambda = [this](qreal step, int decimals,
-				twoDModel::model::SizeUnit::Unit unit) {
-		twoDModel::model::SizeUnit sizeUnit {};
-		sizeUnit.setSizeUnit(unit);
+	auto createSpinBoxLambda = [this](qreal step, int decimals, twoDModel::model::SizeUnit unit) {
 		auto *spinBox = new QDoubleSpinBox(this);
-		updateValues(spinBox, sizeUnit, step);
-		spinBox->setDecimals(decimals);
-		mSlubSpinBoxes.emplace(unit, spinBox);
-		mStackedWidget->addWidget(spinBox);
+		addWidget(spinBox, unit, pixelMinimalValue, pixelMaximumValue, step, decimals);
 		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, [=](qreal value) {
 			const auto pxValue = value * countFactor();
 			if (qAbs(mCurrentValuePx - pxValue) >= epsilon) {
 				mCurrentValuePx = pxValue;
-				Q_EMIT valueChanged(static_cast<int>(mCurrentValuePx));
+				Q_EMIT valueChanged(mCurrentValuePx);
 			}
 		});
 	};
 
-	// Create custom Pixels SpinBox
 	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Pixels);
-	// Create custom Millimiter SpinBox
 	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Millimeters);
-	// Create custom Centimeter SpinBox
 	createSpinBoxLambda(0.1, 2, twoDModel::model::SizeUnit::Unit::Centimeters);
-	// Create custom Meter SpinBox
 	createSpinBoxLambda(0.05, 3, twoDModel::model::SizeUnit::Unit::Meters);
-
-	mStackedWidget->setCurrentWidget(mSlubSpinBoxes[twoDModel::model::SizeUnit::defaultUnit()]);
 }
 
-void PopupMetricWidget::setValue(QObject *currentSpinBox)
+void PopupMetricWidget::setCurrentValue(int currentValuePx)
 {
-	if (!currentSpinBox) {
+	mCurrentValuePx = currentValuePx;
+	sizeUnitHandler(currentWidget());
+}
+
+void PopupMetricWidget::sizeUnitHandler(QWidget *currentWidget)
+{
+	if (!currentWidget) {
 		return;
 	}
-	currentSpinBox->setProperty("value", mCurrentValuePx / countFactor());
+
+	currentWidget->setProperty("value", mCurrentValuePx / countFactor());
 }

@@ -24,11 +24,10 @@ class PopupMetricWidget : public StackMetricWidget
 public:
 	explicit PopupMetricWidget(QWidget *parent = nullptr);
 	~PopupMetricWidget() override;
-	void setValue(QObject *currentSpinBox) override;
+	void sizeUnitHandler(QWidget *currentWidget) override;
 	void setCurrentValue(int currentValuePx);
-	void createSpinBoxes() override;
 Q_SIGNALS:
-	void valueChanged(int value);
+	void valueChanged(qreal value);
 private:
 	qreal mCurrentValuePx {};
 };
