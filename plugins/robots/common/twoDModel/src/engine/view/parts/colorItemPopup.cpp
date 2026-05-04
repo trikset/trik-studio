@@ -73,6 +73,7 @@ bool ColorItemPopup::attachTo(const QList<QGraphicsItem *> &items)
 	setBrushPickerColor(color);
 	mBrushPicker->setVisible(hasProperty("filled"));
 	mBrushPicker->setChecked(dominantPropertyValue("filled").toBool());
+	mSpinBox->setVisible(hasProperty("thickness"));
 	mSpinBox->setCurrentValue(dominantPropertyValue("thickness").toInt());
 
 	// Restoring values that really were picked by user.
