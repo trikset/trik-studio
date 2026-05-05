@@ -598,7 +598,7 @@
         <translation type="vanished">Вернуть робота в исходное положение</translation>
     </message>
     <message>
-        <location line="+78"/>
+        <location line="+81"/>
         <source>Run program</source>
         <translation>Запустить программу</translation>
     </message>
@@ -608,7 +608,7 @@
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+306"/>
+        <location line="+309"/>
         <source>Grid size:</source>
         <translation>Шаг сетки:</translation>
     </message>
@@ -695,7 +695,17 @@
         <translation>Высота робота:</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-523"/>
+        <source>Edit Regions</source>
+        <translation>Редактировать регионы</translation>
+    </message>
+    <message>
+        <location line="+142"/>
+        <source>Reset World</source>
+        <translation>Сбросить мир</translation>
+    </message>
+    <message>
+        <location line="+394"/>
         <source>Robot mass:</source>
         <translation>Масса робота:</translation>
     </message>
