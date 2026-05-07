@@ -32,17 +32,19 @@ class TrikDisplayEmu : public trikControl::DisplayInterface
 {
 	Q_OBJECT
 
+	// Hide this strange access function to prevent problems, it violates LoD
+	// To prevent UB the exception is thrown
+	trikControl::DisplayWidgetInterface &graphicsWidget() override;
+
 	// DisplayInterface interface
 public:
-	TrikDisplayEmu(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
-	virtual trikControl::DisplayWidgetInterface &graphicsWidget() override;
-
+	explicit TrikDisplayEmu(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
 	void init();
 
 public Q_SLOTS:
 	void showImage(const QString &fileName) override;
 	void show(const QVector<int32_t> &array, int width, int height, const QString &format) override;
-	void addLabel(const QString &text, int x, int y, int fontSize = -1) override;
+	void addLabel(const QString &text, int x, int y, int fontSize) override;
 	void removeLabels() override {}
 	void setPainterColor(const QString &color) override;
 	void setPainterWidth(int penWidth) override;
@@ -59,10 +61,8 @@ public Q_SLOTS:
 
 private:
 	Qt::ConnectionType callType() const;
-
-	trikControl::DisplayWidgetInterface mDisplayWidgetInterface;
 	QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> mTwoDRobotModel;
-	robotModel::twoD::parts::Display * mDisplay;
+	robotModel::twoD::parts::Display *mDisplay; // Doesn't have ownership
 };
 
 }

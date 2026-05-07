@@ -39,7 +39,7 @@ on:
       trik_python3_version_minor:
         required: false
         type: string
-        default: '9'
+        default: '10'
       qtifw_version:
         required: false
         type: string
