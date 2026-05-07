@@ -345,9 +345,9 @@ void AbstractItem::setPenStyle(const QString &text)
 	Q_EMIT penChanged(mPen);
 }
 
-void AbstractItem::setPenWidth(int width)
+void AbstractItem::setPenWidth(qreal width)
 {
-	mPen.setWidth(width);
+	mPen.setWidthF(width);
 	Q_EMIT penChanged(mPen);
 }
 
@@ -377,7 +377,7 @@ void AbstractItem::setBrushColor(const QString &text)
 	Q_EMIT brushChanged(mBrush);
 }
 
-void AbstractItem::setPen(const QString &penStyle, int width, const QString &penColor)
+void AbstractItem::setPen(const QString &penStyle, qreal width, const QString &penColor)
 {
 	setPenStyle(penStyle);
 	setPenWidth(width);
@@ -390,7 +390,7 @@ void AbstractItem::setBrush(const QString &brushStyle, const QString &brushColor
 	setBrushColor(brushColor);
 }
 
-void AbstractItem::setPenBrush(const QString &penStyle, int width, const QString &penColor
+void AbstractItem::setPenBrush(const QString &penStyle, qreal width, const QString &penColor
 		, const QString &brushStyle, const QString &brushColor)
 {
 	setPen(penStyle, width, penColor);

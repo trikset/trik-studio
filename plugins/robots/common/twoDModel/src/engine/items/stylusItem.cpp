@@ -50,6 +50,7 @@ AbstractItem *StylusItem::clone() const
 	cloned->mTmpY1 = mTmpY1;
 	cloned->mBoundingRect = mBoundingRect;
 	for (const AbstractItem *item : mAbstractListLine) {
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 		cloned->mAbstractListLine.push_back(static_cast<const LineItem *>(item)->clone());
 	}
 
@@ -57,8 +58,8 @@ AbstractItem *StylusItem::clone() const
 }
 
 QAction *StylusItem::stylusTool()
-{	
-	QAction * const result = new QAction(loadTextColorIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
+{
+	auto * const result = new QAction(loadTextColorIcon(":/icons/2d_pencil.png"), tr("Stylus (S)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_S), QKeySequence(Qt::Key_9)});
 	result->setCheckable(true);
 	return result;
@@ -68,7 +69,7 @@ void StylusItem::addLine(qreal x2, qreal y2)
 {
 	setX2(x2);
 	setY2(y2);
-	LineItem * const line = new LineItem(coordinateSystem(), QPointF(mTmpX1, mTmpY1), QPointF(this->x2(), this->y2()));
+	auto * const line = new LineItem(coordinateSystem(), QPointF(mTmpX1, mTmpY1), QPointF(this->x2(), this->y2()));
 	line->setPen(pen());
 	line->setBrush(brush());
 	line->setSerializeName(QString("stylusLine"));
@@ -115,7 +116,7 @@ void StylusItem::setPenStyle(const QString& text)
 	mStylusImpl.setPenStyle(mAbstractListLine, text);
 }
 
-void StylusItem::setPenWidth(int width)
+void StylusItem::setPenWidth(qreal width)
 {
 	AbstractItem::setPenWidth(width);
 	mStylusImpl.setPenWidth(mAbstractListLine, width);
@@ -144,7 +145,8 @@ QDomElement StylusItem::serialize(QDomElement &parent) const
 	QDomElement stylusNode = ColorFieldItem::serialize(parent);
 	setPenBrushToElement(stylusNode, "stylus");
 	for (AbstractItem * const abstractItem : mAbstractListLine) {
-		LineItem * const line = static_cast<LineItem *>(abstractItem);
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+		auto * const line = static_cast<LineItem *>(abstractItem);
 		line->setSerializeName("stylusLine");
 		line->serializeWithIndent(stylusNode, -scenePos());
 	}
@@ -168,7 +170,7 @@ void StylusItem::deserialize(const QDomElement &element)
 	for (int i = 0; i < stylusAttributes.length(); ++i) {
 			QDomElement type = stylusAttributes.at(i).toElement();
 			if (type.tagName() == "stylusLine") {
-				LineItem * const line = new LineItem(coordinateSystem(), QPointF(0, 0), QPointF(0, 0));
+				auto * const line = new LineItem(coordinateSystem(), QPointF(0, 0), QPointF(0, 0));
 				line->deserialize(type);
 				line->setPen(this->pen());
 				mAbstractListLine.append(line);

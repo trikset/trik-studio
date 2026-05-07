@@ -77,12 +77,12 @@ void ColorFieldItem::setColor(const QColor &color)
 	update();
 }
 
-int ColorFieldItem::thickness() const
+qreal ColorFieldItem::thickness() const
 {
-	return pen().width();
+	return pen().widthF();
 }
 
-void ColorFieldItem::setThickness(int thickness)
+void ColorFieldItem::setThickness(qreal thickness)
 {
 	setPenWidth(thickness);
 	update();

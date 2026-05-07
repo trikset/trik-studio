@@ -1,4 +1,4 @@
-/* Copyright 2025 CyberTech Labs Ltd.
+/* Copyright 2026 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,23 @@
 
 #pragma once
 #include "stackMetricWidget.h"
+#include "twoDModel/engine/model/constants.h"
 
 namespace twoDModel {
 namespace view {
 
-class GridSizeWidget : public StackMetricWidget
+class PopupMetricWidget : public StackMetricWidget
 {
 	Q_OBJECT
 public:
-	explicit GridSizeWidget(QWidget *parent = nullptr);
-	~GridSizeWidget() override;
+	explicit PopupMetricWidget(QWidget *parent = nullptr);
+	~PopupMetricWidget() override;
 	void sizeUnitHandler(QWidget *currentWidget) override;
-public Q_SLOTS:
-	void onGridParameterChanged();
+	void setCurrentValue(qreal currentValuePx);
 Q_SIGNALS:
-	void gridSizeChanged(qreal size);
+	void valueChanged(qreal value);
+private:
+	qreal mCurrentValuePx {};
 };
 
 }

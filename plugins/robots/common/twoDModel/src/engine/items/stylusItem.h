@@ -40,13 +40,13 @@ public:
 	QRectF boundingRect() const override;
 	QPainterPath shape() const override;
 
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 	void drawExtractionForItem(QPainter* painter) override;
 	void drawFieldForResizeItem(QPainter* painter) override;
 	void drawScalingRects(QPainter* painter);
 
 	void setPenStyle(const QString &text) override;
-	void setPenWidth(int width) override;
+	void setPenWidth(qreal width) override;
 	void setPenColor(const QString &text) override;
 	void setBrushStyle(const QString &text) override;
 	void setBrushColor(const QString &text) override;

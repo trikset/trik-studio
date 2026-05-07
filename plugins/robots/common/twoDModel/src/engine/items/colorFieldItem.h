@@ -24,7 +24,7 @@ class ColorFieldItem: public view::TwoDSceneItem
 	Q_OBJECT
 
 	Q_PROPERTY(QColor color READ color WRITE setColor)
-	Q_PROPERTY(int thickness READ thickness WRITE setThickness)
+	Q_PROPERTY(qreal thickness READ thickness WRITE setThickness)
 
 	Q_DISABLE_COPY(ColorFieldItem)
 
@@ -41,11 +41,11 @@ public:
 	void setColor(const QColor &color);
 
 	/// Returns a thickness of this item in px.
-	int thickness() const;
+	qreal thickness() const;
 
 	/// Sets a thickness of this item.
 	/// @param The thickness value in px.
-	void setThickness(int thickness);
+	void setThickness(qreal thickness);
 
 	/// Creates a copy of this graphical item. Transfers ownership to the caller.
 	virtual AbstractItem *clone() const = 0;

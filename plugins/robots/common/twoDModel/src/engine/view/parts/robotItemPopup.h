@@ -20,8 +20,14 @@ class QAbstractButton;
 class QSpinBox;
 
 namespace twoDModel {
+
+namespace model {
+class SizeUnit;
+}
+
 namespace view {
 
+class PopupMetricWidget;
 class RobotItem;
 
 /// A popup for RobotItem on 2D model scene.
@@ -32,8 +38,9 @@ class RobotItemPopup : public graphicsUtils::ItemPopup
 
 public:
 	explicit RobotItemPopup(graphicsUtils::AbstractScene &scene, QWidget *parent = nullptr);
-	~RobotItemPopup();
-
+	~RobotItemPopup() override;
+public Q_SLOTS:
+	void onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);
 Q_SIGNALS:
 	/// Emitted when user decides to follow or unfollow robot item.
 	void followingChanged(bool enabled);
@@ -58,7 +65,7 @@ private:
 
 	QAbstractButton *mFollowButton {};  // Takes ownership
 	QAbstractButton *mReturnButton {};  // Takes ownership
-	QSpinBox *mSpinBox {};  // Takes ownership
+	PopupMetricWidget *mSpinBox {};  // Takes ownership
 	QAbstractButton *mSetStartButton {};  // Takes ownership
 	RobotItem *mCurrentItem {};  // Does not take ownership
 };

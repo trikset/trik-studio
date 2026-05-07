@@ -37,6 +37,9 @@ public:
 
 	SizeUnit() = default;
 
+	// NOLINTNEXTLINE(google-explicit-constructor)
+	SizeUnit(twoDModel::model::SizeUnit::Unit unit);
+
 	/// The current pixel value in centimeters
 	qreal pixelsInCm() const;
 

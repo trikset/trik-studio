@@ -60,6 +60,9 @@ qreal SizeUnit::pixelsInCm() const
 	return mPixelsInCm;
 }
 
+SizeUnit::SizeUnit(twoDModel::model::SizeUnit::Unit unit): mSizeUnit(unit)
+{
+}
 
 void SizeUnit::serialize(QDomElement &parent) const
 {

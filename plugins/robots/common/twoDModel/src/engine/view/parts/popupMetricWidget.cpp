@@ -17,45 +17,49 @@
 #include <QDoubleSpinBox>
 #include <QSpinBox>
 #include <qrkernel/settingsManager.h>
-#include "gridSizeWidget.h"
+#include "popupMetricWidget.h"
 #include <cmath>
 
 using namespace twoDModel::view;
 
 namespace {
-constexpr auto pixelMinimalValue = 10.0;
-constexpr auto pixelMaximumValue = 150.0;
+constexpr auto pixelMinimalValue = 1;
+constexpr auto pixelMaximumValue = 50;
 }
 
-GridSizeWidget::~GridSizeWidget() = default;
+PopupMetricWidget::~PopupMetricWidget() = default;
 
-GridSizeWidget::GridSizeWidget(QWidget *parent): StackMetricWidget(parent)
+PopupMetricWidget::PopupMetricWidget(QWidget *parent): StackMetricWidget(parent)
 {
 	auto createSpinBoxLambda = [this](qreal step, int decimals, twoDModel::model::SizeUnit unit) {
 		auto *spinBox = new QDoubleSpinBox(this);
 		addWidget(spinBox, unit, pixelMinimalValue, pixelMaximumValue, step, decimals);
-		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, &GridSizeWidget::gridSizeChanged);
+		connect(spinBox, QOverload<qreal>::of(&QDoubleSpinBox::valueChanged), this, [=](qreal value) {
+			const auto pxValue = value * countFactor();
+			if (qAbs(mCurrentValuePx - pxValue) >= epsilon103) {
+				mCurrentValuePx = pxValue;
+				Q_EMIT valueChanged(mCurrentValuePx);
+			}
+		});
 	};
 
-	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Pixels);
-	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Millimeters);
-	createSpinBoxLambda(0.1, 3, twoDModel::model::SizeUnit::Unit::Centimeters);
-	createSpinBoxLambda(0.05, 3, twoDModel::model::SizeUnit::Unit::Meters);
+	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Pixels);
+	createSpinBoxLambda(1, 0, twoDModel::model::SizeUnit::Unit::Millimeters);
+	createSpinBoxLambda(0.1, 1, twoDModel::model::SizeUnit::Unit::Centimeters);
+	createSpinBoxLambda(0.05, 2, twoDModel::model::SizeUnit::Unit::Meters);
 }
 
-void GridSizeWidget::onGridParameterChanged()
+void PopupMetricWidget::setCurrentValue(qreal currentValuePx)
 {
-	blockSignals(true);
+	mCurrentValuePx = currentValuePx;
 	sizeUnitHandler(currentWidget());
-	blockSignals(false);
 }
 
-void GridSizeWidget::sizeUnitHandler(QWidget *currentSpinBox)
+void PopupMetricWidget::sizeUnitHandler(QWidget *currentWidget)
 {
-	if (!currentSpinBox) {
+	if (!currentWidget) {
 		return;
 	}
 
-	const auto gridSize = qReal::SettingsManager::value("2dDoubleGridCellSize").toReal();
-	currentSpinBox->setProperty("value", gridSize / countFactor());
+	currentWidget->setProperty("value", mCurrentValuePx / countFactor());
 }

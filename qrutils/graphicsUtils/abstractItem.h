@@ -83,13 +83,13 @@ public:
 	void setCoordinateSystem(AbstractCoordinateSystem *coordinateSystem);
 	AbstractCoordinateSystem *coordinateSystem() const;
 	virtual void setPenStyle(const QString &text);
-	virtual void setPenWidth(int width);
+	virtual void setPenWidth(qreal width);
 	virtual void setPenColor(const QString &text);
 	virtual void setBrushStyle(const QString &text);
 	virtual void setBrushColor(const QString &text);
 	virtual void setBrush(const QString &brushStyle, const QString &brushColor);
-	virtual void setPen(const QString &penStyle, int width, const QString &penColor);
-	virtual void setPenBrush(const QString &penStyle, int width, const QString &penColor, const QString &brushStyle
+	virtual void setPen(const QString &penStyle, qreal width, const QString &penColor);
+	virtual void setPenBrush(const QString &penStyle, qreal width, const QString &penColor, const QString &brushStyle
 			, const QString &brushColor);
 
 	/// Returns a x-coordinate of the first item`s end (it may be one corner of the rectangle or the begin of the line).
