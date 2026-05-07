@@ -6,7 +6,8 @@ XCODE_VERSION=${XCODE_VERSION:-15.3}
 SCRIPT_DIR="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 source "$SCRIPT_DIR/utilities.sh"
-
+qt_archives=("qtbase" "qtmultimedia" "qtsvg" "qtscript" "qttools" "qtserialport" "qtimageformats" "qtdeclarative" "qtquickcontrols2" "qttranslations")
+qt_modules=("qtscript")
 case "$(uname)" in
   Darwin)
     export HOMEBREW_NO_INSTALL_CLEANUP=1
@@ -18,8 +19,8 @@ case "$(uname)" in
       p="${pkg##*/}"
       p="${p%.*}"
       brew install --quiet "$pkg" || brew upgrade "$pkg" || brew link --force "$pkg" || echo "Failed to install/upgrade $pkg"
-    done
-    modules=("qtscript")
+    done    
+    qt_archives+=("qtmacextras")
     
     PYTHON_VERSION="3.${TRIK_PYTHON3_VERSION_MINOR}.$TRIK_PYTHON3_VERSION_PATCH"
     PYTHON_INSTALLER_NAME="python-$PYTHON_VERSION-macos11.pkg"
@@ -35,7 +36,7 @@ case "$(uname)" in
     sudo port selfupdate
     sudo port install libusb +universal
 
-    install_qt mac desktop "${TRIK_QT_VERSION}" "$HOME/Qt" $modules
+    install_qt mac desktop "${TRIK_QT_VERSION}" "$HOME/Qt" $qt_modules $qt_archives
     sudo xcode-select -s /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
     xcodebuild -showsdks
     xcrun -sdk macosx --show-sdk-path
@@ -69,9 +70,9 @@ case "$(uname)" in
       else
         sudo yum install -y --setopt=install_weak_deps=False libX11-xcb libXext libxkbcommon-x11 fontconfig freetype libXrender
         #libQt5WaylandCompositor.so.5.15: libQt5Quick.so.5 libQt5Qml.so.5 libQt5QmlModels.so.5 
-        modules=("qtscript" "qtwaylandcompositor")
-        archives=("qtbase" "qtmultimedia" "qtsvg" "qtscript" "qttools" "qtserialport" "qtimageformats" "icu" "qtwayland" "qtdeclarative" "qtquickcontrols2" "qttranslations")
-        install_qt linux desktop "$TRIK_QT_VERSION" "$HOME/Qt" $modules $archives
+        qt_modules+=("qtwaylandcompositor")
+        qt_archives+=("icu" "qtwayland")
+        install_qt linux desktop "$TRIK_QT_VERSION" "$HOME/Qt" $qt_modules $qt_archives
         QT_ROOT_DIR=$(ls -1d "$HOME"/Qt/$TRIK_QT_VERSION*/gcc_64 | head -n 1)
         echo "$QT_ROOT_DIR/bin" >> $GITHUB_PATH
       fi
