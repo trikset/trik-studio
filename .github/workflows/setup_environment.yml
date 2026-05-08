@@ -122,6 +122,8 @@ jobs:
           source ./buildScripts/github/install_linter.sh
           LEFT="${{ github.event.pull_request.base.sha || github.event.before }}"
           RIGHT="${{ github.event.pull_request.head.sha || github.event.after }}"
+          ${{ inputs.executor }} git fetch origin ${LEFT} --depth=1
+          ${{ inputs.executor }} git fetch origin ${RIGHT} --depth=1
           ${{ inputs.executor }} env COMMIT_RANGE="$LEFT...$RIGHT" buildScripts/github/vera_translation.sh
       env:
         TRIK_QT_VERSION: ${{ inputs.trik_qt_version }}
