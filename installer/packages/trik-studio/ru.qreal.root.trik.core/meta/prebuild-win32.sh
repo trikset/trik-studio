@@ -15,7 +15,8 @@ rsync -a "$BIN_DIR"/python3*.dll                                                
 rsync -a "$BIN_DIR"/vcruntime*.dll                                                     "$PWD"/../data/
 
 rsync -a "$BIN_DIR"/{system.js,TRIK.py,2D-model.exe,checkapp.exe}                    "$PWD/../data/"
-rsync -a "$QT_LIB"/Qt5SerialPort.dll                                                 "$PWD"/../data
+#TODO: remove Qml and Quick
+rsync -a "$QT_LIB"/Qt5{Quick,Qml,SerialPort}.dll                                                 "$PWD"/../data
 
 winscp_ver=6.5.4
 putty_ver=0.83
