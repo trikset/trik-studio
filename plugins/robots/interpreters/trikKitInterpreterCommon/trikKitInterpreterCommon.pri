@@ -13,6 +13,8 @@
 # limitations under the License.
 
 QT += widgets network script xml multimedia
+QT += quick # TODO: looks like redundant dependency caused by incorrect architecture
+
 CONFIG += trikqscintilla2
 
 trik_nopython {
