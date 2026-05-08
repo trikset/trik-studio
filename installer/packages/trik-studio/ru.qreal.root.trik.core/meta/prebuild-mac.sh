@@ -21,6 +21,8 @@ rsync -a "$BIN_DIR"/{system.js,TRIK.py}	                                        
 rsync -a "$BIN_DIR"/{2D-model,checkapp}                                                  "$BUNDLE_CONTENTS/MacOS/"
 
 copy_qt_lib QtSerialPort
+copy_qt_lib QtQuick #TODO: remove
+copy_qt_lib QtQml #TODO: remove
 
 arch -x86_64 zsh
 
