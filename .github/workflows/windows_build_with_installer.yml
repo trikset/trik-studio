@@ -172,7 +172,8 @@ jobs:
         run: |
             echo "$PATH"
             echo ------
-            cd ${{ env.BUILD_DIR }}/bin
+            cd "${{ env.BUILD_DIR }}/bin"
+            export TRIK_PYTHONPATH=$(cygpath -w "${pythonLocation}/Lib")
             python "${{ github.workspace }}\buildScripts\tests\fieldstest.py" 2D-model.exe "${{ github.workspace }}\testing_small"
 
       - name: Push binaries
