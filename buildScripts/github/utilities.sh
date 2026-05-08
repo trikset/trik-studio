@@ -24,7 +24,7 @@ get_array_by_name() {
 }
 
 
-install_qt(){
+install_qt() {
   # Usage: install_qt <os> <platform-type> <qt-version> <path-to-install-qt> <modules> <archives>
   # TODO: add <addittional-options>
   "$TRIK_PYTHON" -m venv venv
@@ -35,8 +35,8 @@ install_qt(){
 
 
   local -a get_array_by_name_result=() #declare before call
-  [[ -n "$5:-" ]] && get_array_by_name "${5}" && (( ${#get_array_by_name_result[@]} > 0 )) && cmd+=("-m" "${get_array_by_name_result[@]}")
-  [[ -n "$6:-" ]] && get_array_by_name "${6}" && (( ${#get_array_by_name_result[@]} > 0 )) && cmd+=("--archives" "${get_array_by_name_result[@]}")
+  if [[ -n "$5:-" ]] ; then { get_array_by_name "${5}" || return 1 ; (( ${#get_array_by_name_result[@]} > 0 )) && cmd+=("-m" "${get_array_by_name_result[@]}") ; } ; fi
+  if [[ -n "$6:-" ]] ; then { get_array_by_name "${6}" || return 1 ; (( ${#get_array_by_name_result[@]} > 0 )) && cmd+=("--archives" "${get_array_by_name_result[@]}") ; } ; fi
 
   "${cmd[@]}"
 

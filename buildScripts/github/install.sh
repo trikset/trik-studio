@@ -36,7 +36,7 @@ case "$(uname)" in
     sudo port selfupdate
     sudo port install libusb +universal
 
-    install_qt mac desktop "${TRIK_QT_VERSION}" "$HOME/Qt" $qt_modules $qt_archives
+    install_qt mac desktop "${TRIK_QT_VERSION}" "$HOME/Qt" qt_modules qt_archives
     sudo xcode-select -s /Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer
     xcodebuild -showsdks
     xcrun -sdk macosx --show-sdk-path
@@ -72,7 +72,7 @@ case "$(uname)" in
         #libQt5WaylandCompositor.so.5.15: libQt5Quick.so.5 libQt5Qml.so.5 libQt5QmlModels.so.5 
         qt_modules+=("qtwaylandcompositor")
         qt_archives+=("icu" "qtwayland")
-        install_qt linux desktop "$TRIK_QT_VERSION" "$HOME/Qt" $qt_modules $qt_archives
+        install_qt linux desktop "$TRIK_QT_VERSION" "$HOME/Qt" qt_modules qt_archives
         QT_ROOT_DIR=$(ls -1d "$HOME"/Qt/$TRIK_QT_VERSION*/gcc_64 | head -n 1)
         echo "$QT_ROOT_DIR/bin" >> $GITHUB_PATH
       fi
