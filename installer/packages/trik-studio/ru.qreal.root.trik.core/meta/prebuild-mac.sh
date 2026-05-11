@@ -23,6 +23,7 @@ rsync -a "$BIN_DIR"/{2D-model,checkapp}                                         
 copy_qt_lib QtSerialPort
 copy_qt_lib QtQuick #TODO: remove
 copy_qt_lib QtQml #TODO: remove
+copy_qt_lib QtQmlModels #TODO: remove
 
 arch -x86_64 zsh
 
