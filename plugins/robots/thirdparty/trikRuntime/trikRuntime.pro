@@ -16,6 +16,7 @@ TEMPLATE = subdirs
 include(../../../../global.pri)
 
 CONFIG += trik_not_brick
+CONFIG += exclude_init_internal_types
 cache(CONFIG, set)
 
 SUBDIRS += \
@@ -39,12 +40,6 @@ trikRuntime_use_local_qslog {
 
 cache(EXTERNAL_SETTINGS, set stash super)
 
-tests {
-	SUBDIRS *= tests
-	tests.depends = trikScriptRunner trikCommunicator trikKernel
-	tests.subdir = $$PWD/trikRuntime/tests
-}
-
 !trik_nopython {
     SUBDIRS += PythonQt
     trikScriptRunner.depends += PythonQt
@@ -54,7 +49,7 @@ trikScriptRunner.subdir = $$PWD/trikRuntime/trikScriptRunner
 trikCommunicator.subdir = $$PWD/trikRuntime/trikCommunicator
 trikKernel.subdir = $$PWD/trikRuntime/trikKernel
 trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
-trikControl.subdir = $$PWD/trikRuntime/trikControl
+trikControl.file = $$PWD/trikControl.pri
 translations.subdir = $$PWD/trikRuntime/translations
 trikHal.subdir = $$PWD/trikRuntime/trikHal
 mlx90640-library.subdir = $$PWD/trikRuntime/mlx90640-library

@@ -35,12 +35,6 @@ Qt::ConnectionType TrikDisplayEmu::callType() const {
 	// return thread() != mDisplay->thread()? Qt::BlockingQueuedConnection : Qt::DirectConnection;
 }
 
-trikControl::DisplayWidgetInterface &TrikDisplayEmu::graphicsWidget()
-{
-	Q_UNIMPLEMENTED();
-	throw std::logic_error(__PRETTY_FUNCTION__);
-}
-
 void TrikDisplayEmu::init()
 {
 	mDisplay = kitBase::robotModel::RobotModelUtils::findDevice<Display>(*mTwoDRobotModel, "DisplayPort");

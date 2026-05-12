@@ -31,12 +31,6 @@ class Display;
 class TrikDisplayEmu : public trikControl::DisplayInterface
 {
 	Q_OBJECT
-
-	// Hide this strange access function to prevent problems, it violates LoD
-	// To prevent UB the exception is thrown
-	trikControl::DisplayWidgetInterface &graphicsWidget() override;
-
-	// DisplayInterface interface
 public:
 	explicit TrikDisplayEmu(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
 	void init();

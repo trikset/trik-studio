@@ -48,17 +48,11 @@ namespace trik {
 class TrikBrick final : public trikControl::BrickInterface
 {
 	Q_OBJECT
-
-	// BrickInterface interface
 public:
-	TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
+	explicit TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
 	~TrikBrick() override;
 	void reset() override;
-	QString configVersion() const override {return QString();}
-	trikControl::DisplayWidgetInterface *graphicsWidget() override {
-		return nullptr;
-	}
-
+	QString configVersion() const override {return {};}
 	void init();
 
 	void setCurrentDir(const QString &dir);
