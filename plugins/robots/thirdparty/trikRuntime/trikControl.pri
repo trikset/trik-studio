@@ -43,6 +43,7 @@ SOURCES += \
     $$TRIK_CONTROL_ROOT/src/utilities.cpp \
     $$TRIK_CONTROL_ROOT/src/brickInterface.cpp \
     $$TRIK_CONTROL_ROOT/src/qtCameraImplementation.cpp \
+    $$TRIK_CONTROL_ROOT/src/cameraDeviceInterface.cpp \
     $$TRIK_CONTROL_ROOT/src/imitationCameraImplementation.cpp \
 
 INCLUDEPATH += \
