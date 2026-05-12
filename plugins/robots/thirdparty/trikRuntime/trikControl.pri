@@ -49,5 +49,7 @@ INCLUDEPATH += \
     $$TRIK_CONTROL_ROOT/include/ \
     $$TRIK_CONTROL_ROOT/include/trikControl/ \
 
+QT += multimedia
+
 links(trikKernel)
 implementationIncludes(trikKernel)

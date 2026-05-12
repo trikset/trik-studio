@@ -23,10 +23,8 @@ SUBDIRS += \
 	trikKernel \
 	trikNetwork \
 	trikControl \
-	trikHal \
 	trikCommunicator \
 	trikScriptRunner \
-	mlx90640-library \
 #	translations \
 
 EXTERNAL_SETTINGS = $$PWD/trikRuntimeExternal.pri
@@ -51,12 +49,9 @@ trikKernel.subdir = $$PWD/trikRuntime/trikKernel
 trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
 trikControl.file = $$PWD/trikControl.pri
 translations.subdir = $$PWD/trikRuntime/translations
-trikHal.subdir = $$PWD/trikRuntime/trikHal
-mlx90640-library.subdir = $$PWD/trikRuntime/mlx90640-library
 
-trikControl.depends = trikKernel trikHal mlx90640-library
+trikControl.depends = trikKernel
 trikNetwork.depends = trikKernel
 trikScriptRunner.depends += trikControl trikKernel trikNetwork
-trikHal.depends = trikKernel
 trikCommunicator.depends = trikScriptRunner
 OTHER_FILES += trikRuntime/trikRuntime.pro
