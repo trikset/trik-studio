@@ -49,7 +49,7 @@ INCLUDEPATH += \
     $$TRIK_CONTROL_ROOT/include/ \
     $$TRIK_CONTROL_ROOT/include/trikControl/ \
 
-QT += multimedia
+QT += multimedia gui
 
 links(trikRuntimeQsLog trikKernel)
 implementationIncludes(trikKernel)
