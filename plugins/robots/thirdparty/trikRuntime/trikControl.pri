@@ -9,7 +9,6 @@ TRIK_CONTROL_ROOT = $$PWD/trikRuntime/trikControl
 HEADERS += \
     $$TRIK_CONTROL_ROOT/include/trikControl/trikControlDeclSpec.h \
     $$TRIK_CONTROL_ROOT/include/trikControl/batteryInterface.h \
-    $$TRIK_CONTROL_ROOT/include/trikControl/brickFactory.h \
     $$TRIK_CONTROL_ROOT/include/trikControl/brickInterface.h \
     $$TRIK_CONTROL_ROOT/include/trikControl/cameraDeviceInterface.h \
     $$TRIK_CONTROL_ROOT/include/trikControl/colorSensorInterface.h \
