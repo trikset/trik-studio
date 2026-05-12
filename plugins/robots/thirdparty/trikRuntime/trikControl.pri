@@ -51,5 +51,5 @@ INCLUDEPATH += \
 
 QT += multimedia
 
-links(trikKernel)
+links(trikRuntimeQsLog trikKernel)
 implementationIncludes(trikKernel)
