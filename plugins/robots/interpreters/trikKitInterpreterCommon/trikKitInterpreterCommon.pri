@@ -80,7 +80,6 @@ HEADERS += \
 	$$PWD/include/trikKitInterpreterCommon/trikDisplayWidget.h \
 	$$PWD/include/trikKitInterpreterCommon/trikKitInterpreterPluginBase.h \
 	$$PWD/include/trikKitInterpreterCommon/trikbrick.h \
-	$$PWD/include/trikKitInterpreterCommon/trikEmulation/displaywidgetemu.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikdisplayemu.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/triksensoremu.h \
 	$$PWD/include/trikKitInterpreterCommon/trikEmulation/trikmotoremu.h \

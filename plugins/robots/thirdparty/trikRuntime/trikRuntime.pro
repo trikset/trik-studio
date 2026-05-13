@@ -16,16 +16,15 @@ TEMPLATE = subdirs
 include(../../../../global.pri)
 
 CONFIG += trik_not_brick
+CONFIG += exclude_init_internal_types
 cache(CONFIG, set)
 
 SUBDIRS += \
 	trikKernel \
 	trikNetwork \
 	trikControl \
-	trikHal \
 	trikCommunicator \
 	trikScriptRunner \
-	mlx90640-library \
 #	translations \
 
 EXTERNAL_SETTINGS = $$PWD/trikRuntimeExternal.pri
@@ -39,12 +38,6 @@ trikRuntime_use_local_qslog {
 
 cache(EXTERNAL_SETTINGS, set stash super)
 
-tests {
-	SUBDIRS *= tests
-	tests.depends = trikScriptRunner trikCommunicator trikKernel
-	tests.subdir = $$PWD/trikRuntime/tests
-}
-
 !trik_nopython {
     SUBDIRS += PythonQt
     trikScriptRunner.depends += PythonQt
@@ -54,14 +47,11 @@ trikScriptRunner.subdir = $$PWD/trikRuntime/trikScriptRunner
 trikCommunicator.subdir = $$PWD/trikRuntime/trikCommunicator
 trikKernel.subdir = $$PWD/trikRuntime/trikKernel
 trikNetwork.subdir = $$PWD/trikRuntime/trikNetwork
-trikControl.subdir = $$PWD/trikRuntime/trikControl
+trikControl.file = $$PWD/trikControl.pri
 translations.subdir = $$PWD/trikRuntime/translations
-trikHal.subdir = $$PWD/trikRuntime/trikHal
-mlx90640-library.subdir = $$PWD/trikRuntime/mlx90640-library
 
-trikControl.depends = trikKernel trikHal mlx90640-library
+trikControl.depends = trikKernel
 trikNetwork.depends = trikKernel
 trikScriptRunner.depends += trikControl trikKernel trikNetwork
-trikHal.depends = trikKernel
 trikCommunicator.depends = trikScriptRunner
 OTHER_FILES += trikRuntime/trikRuntime.pro

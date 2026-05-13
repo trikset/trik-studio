@@ -48,17 +48,11 @@ namespace trik {
 class TrikBrick final : public trikControl::BrickInterface
 {
 	Q_OBJECT
-
-	// BrickInterface interface
 public:
-	TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
+	explicit TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model);
 	~TrikBrick() override;
 	void reset() override;
-	QString configVersion() const override {return QString();}
-	trikControl::DisplayWidgetInterface *graphicsWidget() override {
-		return nullptr;
-	}
-
+	QString configVersion() const override {return {};}
 	void init();
 
 	void setCurrentDir(const QString &dir);
@@ -67,6 +61,10 @@ public:
 	void reinitImitationCamera();
 
 	QDir getCurrentDir() const;
+	QStringList motorPorts(trikControl::MotorInterface::Type type) const override;
+	QStringList pwmCapturePorts() const override {return {};}
+	QStringList sensorPorts(trikControl::SensorInterface::Type type) const override;
+	QStringList encoderPorts() const override;
 
 public Q_SLOTS:
 	void configure(const QString &, const QString &) override {}
@@ -78,10 +76,6 @@ public Q_SLOTS:
 	trikControl::MarkerInterface *marker() override;
 	trikControl::PwmCaptureInterface *pwmCapture(const QString &) override {return nullptr;}
 	trikControl::SensorInterface *sensor(const QString &port) override;
-	QStringList motorPorts(trikControl::MotorInterface::Type type) const override;
-	QStringList pwmCapturePorts() const override {return {};}
-	QStringList sensorPorts(trikControl::SensorInterface::Type type) const override;
-	QStringList encoderPorts() const override;
 	trikControl::VectorSensorInterface *accelerometer() override;
 	trikControl::GyroSensorInterface *gyroscope() override;
 	trikControl::LineSensorInterface *lineSensor(const QString &port) override;
