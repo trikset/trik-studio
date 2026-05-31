@@ -390,7 +390,7 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+54"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+58"/>
         <source>Templates directory:</source>
         <translation>Директория с шаблонами:</translation>
     </message>
@@ -400,12 +400,12 @@
         <translation>Выбрать директорию с шаблонами</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+34"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Не загружено ни одного плагина с описанием робоплатформы</translation>
     </message>
     <message>
-        <location line="+142"/>
+        <location line="+144"/>
         <source>No robot models available for </source>
         <translation>Ни одной модели робота не найдено в плагине </translation>
     </message>
