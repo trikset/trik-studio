@@ -15,7 +15,6 @@
 #include "colorDialog.h"
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStyle>
 #include <QColorDialog>
 #include <qrkernel/settingsManager.h>
 #include <qrkernel/settingsListener.h>

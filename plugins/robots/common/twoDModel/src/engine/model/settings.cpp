@@ -87,9 +87,9 @@ void Settings::deserialize(const QDomElement &parent)
 	Q_EMIT gridSizeChanged(gridSize);
 
 	if (parent.hasAttribute("backgroundColor")) {
-		qReal::SettingsManager::setValue(twoDModel::backgroundColorKey, QColor(parent.attribute("backgroundColor", "")));
+		qReal::SettingsManager::setValue(twoDModel::backgroundColorKey,
+							QColor(parent.attribute("backgroundColor", "")));
 	}
-
 }
 
 void Settings::setRealisticPhysics(bool set)

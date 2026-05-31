@@ -554,7 +554,7 @@
 <context>
     <name>qReal::ui::ColorDialog</name>
     <message>
-        <location filename="../../qrutils/widgets/colorDialog.cpp" line="+35"/>
+        <location filename="../../qrutils/widgets/colorDialog.cpp" line="+34"/>
         <source>Select background color in the 2D-model editor...</source>
         <translation type="unfinished"></translation>
     </message>
