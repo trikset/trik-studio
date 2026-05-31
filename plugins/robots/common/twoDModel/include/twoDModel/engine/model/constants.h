@@ -63,5 +63,5 @@ const qreal maxLightSensorValue = 1023;
 const int touchSensorPressedSignal = 1;
 const int touchSensorNotPressedSignal = 0;
 constexpr qreal epsilon103 = 0.001;
-
+static constexpr const char* backgroundColorKey = "twoDModelBackgroundColor";
 }

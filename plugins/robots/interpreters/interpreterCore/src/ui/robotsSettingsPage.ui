@@ -273,6 +273,9 @@
        </widget>
       </item>
       <item>
+       <widget class="qReal::ui::ColorDialog" name="sceneColorDialogWidget" native="true"/>
+      </item>
+      <item>
        <widget class="qReal::ui::DirPicker" name="templatesPathWidget" native="true"/>
       </item>
      </layout>
@@ -290,6 +293,12 @@
    <class>qReal::ui::DirPicker</class>
    <extends>QWidget</extends>
    <header>qrutils/widgets/dirPicker.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qReal::ui::ColorDialog</class>
+   <extends>QWidget</extends>
+   <header>qrutils/widgets/colorDialog.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

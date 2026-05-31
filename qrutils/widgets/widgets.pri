@@ -15,6 +15,7 @@
 HEADERS += \
 	$$PWD/colorListEditor.h \
 	$$PWD/dirPicker.h \
+	$$PWD/colorDialog.h \
 	$$PWD/paintWidget.h \
 	$$PWD/painterInterface.h \
 	$$PWD/searchLineEdit.h \
@@ -28,6 +29,7 @@ HEADERS += \
 SOURCES += \
 	$$PWD/colorListEditor.cpp \
 	$$PWD/dirPicker.cpp \
+	$$PWD/colorDialog.cpp \
 	$$PWD/paintWidget.cpp \
 	$$PWD/searchLineEdit.cpp \
 	$$PWD/consoleDock.cpp \
