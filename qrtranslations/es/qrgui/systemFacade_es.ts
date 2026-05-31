@@ -29,7 +29,7 @@
         <translation>Burbuja:</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="242"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="256"/>
         <source>Can`t open project file</source>
         <translation>No se puede abrir el archivo del proyecto</translation>
     </message>
@@ -87,59 +87,60 @@
     <name>qReal::ProjectManager</name>
     <message>
         <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="76"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="90"/>
         <source>Open project</source>
         <translation>Abrir proyecto</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="136"/>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="143"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="157"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="136"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
         <source>Cannot open file, please try with another one.</source>
         <translation>No se puede abrir el archivo, por favor intente con otro.</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="171"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="185"/>
         <source>Select file with a save to import</source>
         <translation>Seleccione un archivo para importar</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="205"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="219"/>
         <source>There are missing plugins</source>
         <translation>Faltan complementos</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="206"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="220"/>
         <source>These plugins are not present, but needed to load the save:
 </source>
         <translation>Estos complementos no están presentes, pero son necesarios para cargar el archivo:
 </translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="257"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="271"/>
         <source>This project contains unknown element %1 and thus can`t be opened. Probably it was created by old or incorrectly working version of QReal.</source>
         <translation>Este proyecto contiene un elemento desconocido %1 y, por lo tanto, no se puede abrir. Probablemente fue creado por una versión antigua o defectuosa de QReal.</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="259"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="273"/>
         <source>Can`t open project file</source>
         <translation>No se puede abrir el archivo del proyecto</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="338"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="352"/>
         <source>Select file to save current model to</source>
         <translation>Seleccione el archivo donde guardar el modelo actual</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="383"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="403"/>
         <source>File not found</source>
         <translation>Archivo no encontrado</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="383"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="403"/>
         <source>File %1 not found. Try again</source>
         <translation>Archivo %1 no encontrado. Inténtelo de nuevo</translation>
     </message>

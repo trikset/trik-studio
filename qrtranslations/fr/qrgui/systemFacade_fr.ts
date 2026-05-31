@@ -29,7 +29,7 @@
         <translation>Bulle :</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+256"/>
         <source>Can`t open project file</source>
         <translation>Impossible d&apos;ouvrir le fichier du projet</translation>
     </message>
@@ -90,7 +90,8 @@
         <translation type="vanished">Ouvrir un projet existant</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="-180"/>
+        <location line="+14"/>
         <source>Open project</source>
         <translation>Ouvrir le projet</translation>
     </message>
@@ -137,7 +138,7 @@
         <translation>Choisissez le ficher pour enregister le modèle</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+51"/>
         <source>File not found</source>
         <translation>Fichier introuvable</translation>
     </message>

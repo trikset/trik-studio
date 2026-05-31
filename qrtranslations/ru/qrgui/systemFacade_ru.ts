@@ -29,7 +29,7 @@
         <translation>Всплывающее окно:</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+242"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="+256"/>
         <source>Can`t open project file</source>
         <translation>Не могу открыть проект</translation>
     </message>
@@ -90,7 +90,8 @@
         <translation type="vanished">Открыть проект</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="-166"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="-180"/>
+        <location line="+14"/>
         <source>Open project</source>
         <translation>Открыть проект</translation>
     </message>
@@ -138,7 +139,7 @@
         <translation>Выберите файл для сохранения модели</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+51"/>
         <source>File not found</source>
         <translation>Файл не найден</translation>
     </message>
