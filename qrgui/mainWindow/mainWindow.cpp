@@ -210,6 +210,12 @@ void MainWindow::connectActions()
 		}
 	});
 
+	connect(mUi->actionOpen_Examples, &QAction::triggered, this, [this]() {
+		if (!mProjectManager->suggestToOpenExamples() && !currentTab()) {
+			openStartTab();
+		}
+	});
+
 	connect(mUi->actionSave, &QAction::triggered, this, &MainWindow::tryToSave);
 	connect(mUi->actionSave_as, &QAction::triggered, &*mProjectManager, &ProjectManagerWrapper::suggestToSaveAs);
 	connect(mUi->actionSave_diagram_as_a_picture, &QAction::triggered, this, &MainWindow::saveDiagramAsAPicture);
@@ -1343,6 +1349,7 @@ void MainWindow::setDefaultShortcuts()
 	// TODO: bind Ctrl+P to print when it will be repaired
 
 	HotKeyManager::setCommand("File.Open", tr("Open project"), mUi->actionOpen);
+	HotKeyManager::setCommand("File.OpenExamples", tr("Open examples"), mUi->actionOpen_Examples);
 	HotKeyManager::setCommand("File.Save", tr("Save project"), mUi->actionSave);
 	HotKeyManager::setCommand("File.SaveAs", tr("Save project as"), mUi->actionSave_as);
 	HotKeyManager::setCommand("File.NewProject", tr("New project"), mUi->actionNewProject);

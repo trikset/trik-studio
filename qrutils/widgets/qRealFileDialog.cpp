@@ -24,9 +24,10 @@ QString QRealFileDialog::getOpenFileName(const QString &id
 		, const QString &dir
 		, const QString &filter
 		, QString *selectedFilter
+		, bool openLast
 		, QFileDialog::Options options)
 {
-	const QString lastDir = lastSelectedDirectory(id, dir);
+	const QString lastDir = openLast ? lastSelectedDirectory(id, dir): dir;
 	QString lastSelectedFilter;
 	if (selectedFilter) {
 		lastSelectedFilter = *selectedFilter;

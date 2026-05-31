@@ -81,6 +81,20 @@ bool ProjectManager::suggestToOpenExisting()
 	return open(fileName);
 }
 
+bool ProjectManager::suggestToOpenExamples()
+{
+	if (!suggestToSaveChangesOrCancel()) {
+		return false;
+	}
+
+	const QString fileName = openExamplesFileName(tr("Open project"));
+	if (fileName.isEmpty()) {
+		return false;
+	}
+
+	return open(fileName);
+}
+
 bool ProjectManager::suggestToSaveChangesOrCancel()
 {
 	return true;
@@ -356,6 +370,12 @@ bool ProjectManager::saveAs(const QString &fileName)
 }
 
 QString ProjectManager::openFileName(const QString &promptPhrase) const
+{
+	Q_UNUSED(promptPhrase)
+	return QString();
+}
+
+QString ProjectManager::openExamplesFileName(const QString &promptPhrase) const
 {
 	Q_UNUSED(promptPhrase)
 	return QString();

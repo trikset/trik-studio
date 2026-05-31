@@ -40,6 +40,8 @@ public Q_SLOTS:
 	/// Similarly @see openExisting(), but offers the user select a file (by a dialog)
 	virtual bool suggestToOpenExisting() = 0;
 
+	virtual bool suggestToOpenExamples() = 0;
+
 	/// Creating a new project
 	virtual bool openNewWithDiagram() = 0;
 

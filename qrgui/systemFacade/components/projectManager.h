@@ -34,6 +34,7 @@ public:
 public Q_SLOTS:
 	bool openExisting(const QString &fileName) override;
 	bool suggestToOpenExisting() override;
+	bool suggestToOpenExamples() override;
 	bool openNewWithDiagram() override;
 	bool suggestToImport() override;
 
@@ -68,6 +69,8 @@ public:
 
 	/// May be overrided to prompt user a path to file to open.
 	virtual QString openFileName(const QString &promptPhrase) const;
+
+	virtual QString openExamplesFileName(const QString &promptPhrase) const;
 
 	ToolPluginManager &toolManager() const;
 

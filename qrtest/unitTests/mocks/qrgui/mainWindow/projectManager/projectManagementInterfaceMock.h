@@ -29,6 +29,7 @@ public:
 	MOCK_CONST_METHOD0(saveFilePath, QString());
 	MOCK_METHOD1(openExisting, bool(const QString &fileName));
 	MOCK_METHOD0(suggestToOpenExisting, bool());
+	MOCK_METHOD0(suggestToOpenExamples, bool());
 	MOCK_METHOD0(openNewWithDiagram, bool());
 	MOCK_METHOD1(suggestToCreateDiagram, void(bool isClosable));
 	MOCK_METHOD0(suggestToImport, bool());
