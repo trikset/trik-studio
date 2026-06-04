@@ -714,7 +714,7 @@ bool MainWindow::windowsIsInDarkTheme()
 
 void MainWindow::initDarkPalette() {
 	constexpr auto logPrefix = "Initializing color theme";
-	const auto &explicitTheme = QProcessEnvironment::systemEnvironment().value("TRIK_STUDIO_THEME", "auto");
+	const auto &explicitTheme = QProcessEnvironment::systemEnvironment().value("TRIK_STUDIO_THEME", "light");
 	QLOG_INFO() << logPrefix << "with" << explicitTheme;
 	bool useDarkTheme;
 

@@ -830,7 +830,7 @@ void TwoDModelScene::drawBackground(QPainter *painter, const QRectF &rect)
 {
 	if (SettingsManager::value("2dShowGrid").toBool()) {
 		mWidthOfGrid = SettingsManager::value("GridWidth").toReal() / 100;
-		painter->setPen(QPen(Qt::black, mWidthOfGrid));
+		painter->setPen(QPen(QApplication::palette().color(QPalette::Text), mWidthOfGrid));
 		QGraphicsScene::drawBackground(painter, rect);
 		const qreal cellSize = SettingsManager::value("2dDoubleGridCellSize").toReal();
 		mGridDrawer.drawGrid(painter, rect, cellSize);
