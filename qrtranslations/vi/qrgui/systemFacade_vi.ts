@@ -29,7 +29,7 @@
         <translation>Bong bóng:</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="242"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="256"/>
         <source>Can`t open project file</source>
         <translation>Không thể mở tệp dự án</translation>
     </message>
@@ -87,59 +87,60 @@
     <name>qReal::ProjectManager</name>
     <message>
         <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="76"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="90"/>
         <source>Open project</source>
         <translation>Mở dự án</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="136"/>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="143"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="157"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="136"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="150"/>
         <source>Cannot open file, please try with another one.</source>
         <translation>Không thể mở tệp, vui lòng thử một tệp khác.</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="171"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="185"/>
         <source>Select file with a save to import</source>
         <translation>Chọn tệp để nhập dữ liệu lưu</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="205"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="219"/>
         <source>There are missing plugins</source>
         <translation>Thiếu một số tiện ích bổ sung</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="206"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="220"/>
         <source>These plugins are not present, but needed to load the save:
 </source>
         <translation>Các tiện ích bổ sung này không có mặt nhưng cần thiết để tải tệp lưu:
 </translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="257"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="271"/>
         <source>This project contains unknown element %1 and thus can`t be opened. Probably it was created by old or incorrectly working version of QReal.</source>
         <translation>Dự án này chứa phần tử không xác định %1 và do đó không thể mở. Có thể nó được tạo bởi phiên bản cũ hoặc phiên bản QReal hoạt động không chính xác.</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="259"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="273"/>
         <source>Can`t open project file</source>
         <translation>Không thể mở tệp dự án</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="338"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="352"/>
         <source>Select file to save current model to</source>
         <translation>Chọn tệp để lưu mô hình hiện tại</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="383"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="403"/>
         <source>File not found</source>
         <translation>Không tìm thấy tệp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="383"/>
+        <location filename="../../../qrgui/systemFacade/components/projectManager.cpp" line="403"/>
         <source>File %1 not found. Try again</source>
         <translation>Không tìm thấy tệp %1. Hãy thử lại</translation>
     </message>

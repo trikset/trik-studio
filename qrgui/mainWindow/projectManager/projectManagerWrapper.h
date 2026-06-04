@@ -67,6 +67,8 @@ private:
 	void refreshApplicationStateAfterSaveOrOpen();
 
 	QString openFileName(const QString &dialogWindowTitle) const override;
+	QString openExamplesFileName(const QString &dialogWindowTitle) const override;
+	QString openFile(const QString &dialogWindowTitle, bool openExamples) const;
 	QString saveFileName(const QString &dialogWindowTitle) const override;
 
 	int suggestToSaveOrCancelMessage();

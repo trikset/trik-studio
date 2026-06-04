@@ -312,7 +312,7 @@ bool ProjectManagerWrapper::suggestToSaveAs()
 	return ProjectManager::suggestToSaveAs();
 }
 
-QString ProjectManagerWrapper::openFileName(const QString &dialogWindowTitle) const
+QString ProjectManagerWrapper::openFile(const QString &dialogWindowTitle, bool openExamples) const
 {
 	const QString pathToExamples = mMainWindow->toolManager().customizer()->examplesDirectory();
 	const QString defaultDirectory = pathToExamples.isEmpty()
@@ -323,15 +323,31 @@ QString ProjectManagerWrapper::openFileName(const QString &dialogWindowTitle) co
 
 	filter += (extensions.isEmpty() ? "" : extensions + ";;") + tr("All files (*.*)");
 
-	QString fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle
+	QString fileName;
+	if (openExamples) {
+		fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle
+			, defaultDirectory, filter, nullptr, false);
+	} else {
+		fileName = QRealFileDialog::getOpenFileName("OpenQRSProject", mMainWindow, dialogWindowTitle
 			, defaultDirectory, filter);
+	}
 
 	if (!fileName.isEmpty() && !QFile::exists(fileName)) {
 		fileNotFoundMessage(fileName);
-		fileName = openFileName(dialogWindowTitle);
+		fileName = openFile(dialogWindowTitle, openExamples);
 	}
 
 	return fileName;
+}
+
+QString ProjectManagerWrapper::openFileName(const QString &dialogWindowTitle) const
+{
+	return openFile(dialogWindowTitle, false);
+}
+
+QString ProjectManagerWrapper::openExamplesFileName(const QString &dialogWindowTitle) const
+{
+	return openFile(dialogWindowTitle, true);
 }
 
 QString ProjectManagerWrapper::saveFileName(const QString &dialogWindowTitle) const

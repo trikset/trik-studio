@@ -33,6 +33,7 @@ public:
 			, const QString &dir = QString()
 			, const QString &filter = QString()
 			, QString *selectedFilter = nullptr
+			, bool openLast = true
 			, QFileDialog::Options options = QFileDialog::Options());
 
 	/// Makes same as QFileDialog::getSaveFileName but with restoring selected

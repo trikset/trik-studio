@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>MainWindowUi</class>
  <widget class="QMainWindow" name="MainWindowUi">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>386</width>
+    <height>581</height>
+   </rect>
+  </property>
   <property name="windowTitle">
    <string>QReal</string>
   </property>
@@ -33,7 +41,7 @@
      <x>0</x>
      <y>0</y>
      <width>386</width>
-     <height>24</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_File">
@@ -43,6 +51,7 @@
     <addaction name="actionNewProject"/>
     <addaction name="actionNew_Diagram"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_Examples"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_as"/>
     <addaction name="separator"/>
@@ -822,6 +831,18 @@
   <action name="actionRestore_default_settings">
    <property name="text">
     <string>Restore default settings and Quit</string>
+   </property>
+  </action>
+  <action name="actionOpen_Examples">
+   <property name="icon">
+    <iconset resource="mainWindow.qrc">
+     <normaloff>:/mainWindow/images/open.svg</normaloff>:/mainWindow/images/open.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Open Examples...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
  </widget>
