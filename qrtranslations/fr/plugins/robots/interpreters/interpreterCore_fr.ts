@@ -503,7 +503,7 @@
 <context>
     <name>interpreterCore::ui::RobotsSettingsPage</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+54"/>
+        <location filename="../../../../../plugins/robots/interpreters/interpreterCore/src/ui/robotsSettingsPage.cpp" line="+58"/>
         <source>Templates directory:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -513,12 +513,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+34"/>
         <source>No constructor kit plugins loaded</source>
         <translation>Aucune extension n&apos;est chargée</translation>
     </message>
     <message>
-        <location line="+142"/>
+        <location line="+144"/>
         <source>No robot models available for </source>
         <translation>Modèle de robot n&apos;est pas défini dans l&apos;extension</translation>
     </message>

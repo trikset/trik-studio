@@ -15,7 +15,9 @@
 #include <QtXml/QDomElement>
 #include <qrkernel/settingsManager.h>
 #include "twoDModel/engine/model/settings.h"
+#include "twoDModel/engine/model/constants.h"
 #include "twoDModel/engine/model/metricSystem.h"
+#include <QColor>
 
 using namespace twoDModel::model;
 
@@ -55,6 +57,11 @@ void Settings::serialize(QDomElement &parent) const
 	const auto currentGridSize = qReal::SettingsManager::value("2dDoubleGridCellSize")
 						.toReal() / mSizeUnitSystem->countFactor();
 	result.setAttribute("gridCellSize", QString::number(currentGridSize));
+
+	const auto& value = qReal::SettingsManager::value(twoDModel::backgroundColorKey);
+	if (value.canConvert<QColor>()) {
+		result.setAttribute("backgroundColor", value.value<QColor>().name(QColor::HexRgb));
+	}
 }
 
 void Settings::deserialize(const QDomElement &parent)
@@ -65,6 +72,7 @@ void Settings::deserialize(const QDomElement &parent)
 	mSizeUnitSystem->deserialize(parent);
 	Q_EMIT physicsChanged(mRealisticPhysics);
 	Q_EMIT sizeUnitChanged(mSizeUnitSystem);
+	const auto gridSize = qReal::SettingsManager::value("2dDefaultGridCellSize", "50").toReal();
 	if (parent.hasAttribute("gridCellSize")) {
 		const auto gridSize = parent.attribute("gridCellSize").toDouble();
 		// TODO: Synchronize with GridParamters.h
@@ -73,11 +81,15 @@ void Settings::deserialize(const QDomElement &parent)
 		if (mSizeUnitSystem->toPx(gridSize) >= minimalSize
 				&& mSizeUnitSystem->toPx(gridSize) <= maximumSize) {
 			Q_EMIT gridSizeChanged(gridSize);
-			return;
 		}
 	}
-	const auto gridSize = qReal::SettingsManager::value("2dDefaultGridCellSize", "50").toReal();
+
 	Q_EMIT gridSizeChanged(gridSize);
+
+	if (parent.hasAttribute("backgroundColor")) {
+		qReal::SettingsManager::setValue(twoDModel::backgroundColorKey,
+							QColor(parent.attribute("backgroundColor", "")));
+	}
 }
 
 void Settings::setRealisticPhysics(bool set)

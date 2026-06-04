@@ -24,6 +24,9 @@
 #include <kitBase/robotModel/robotModelUtils.h>
 
 #include "interpreterCore/managers/robotModelManager.h"
+#include <QColorDialog>
+
+static constexpr const char* backgroundColorKey = "twoDModelBackgroundColor";
 
 using namespace interpreterCore::ui;
 using namespace kitBase;
@@ -50,20 +53,19 @@ RobotsSettingsPage::RobotsSettingsPage(KitPluginManager &kitPluginManager
 	connect(&mRobotModelManager, &RobotModelManager::robotModelChanged
 			, mUi->devicesConfigurer, &DevicesConfigurationWidget::selectRobotModel);
 
+	mUi->templatesPathWidget->setVisible(false);
 	mUi->templatesPathWidget->configure("pathToUserTemplates",
 					    tr("Templates directory:"),
 					    "Open2DModelTemplates",
 					    tr("Choose templates directory"));
 
-	auto toggledLambda = [this](bool toggled) {
+	connect(mUi->twoDModelAdvancedResictions, &QCheckBox::toggled, this, [this](bool toggled) {
 		mUi->templatesPathWidget->setVisible(toggled);
-	};
-
-	connect(mUi->twoDModelAdvancedResictions, &QCheckBox::toggled, [toggledLambda](bool toggled) {
-		toggledLambda(toggled);
 	});
 
-	toggledLambda(false);
+	mUi->sceneColorDialogWidget->setColor(SettingsManager::value(backgroundColorKey).value<QColor>());
+	mUi->sceneColorDialogWidget->configure(backgroundColorKey);
+
 	restoreSettings();
 	saveSelectedRobotModel();
 }
@@ -139,6 +141,7 @@ void RobotsSettingsPage::save()
 	SettingsManager::setValue("enableRegionEditorMode", mUi->regionEditorModeCheckBox->isChecked());
 	SettingsManager::setValue("twoDModelAdvancedResictions", mUi->twoDModelAdvancedResictions->isChecked());
 	mUi->templatesPathWidget->save();
+	mUi->sceneColorDialogWidget->save();
 	if (mRobotModelManager.model().kitId().contains("nxt", Qt::CaseInsensitive)) {
 		SettingsManager::setValue("nxtFlashToolRunPolicy", mUi->runningAfterUploadingComboBox->currentIndex());
 	} else if (mRobotModelManager.model().kitId().contains("ev3", Qt::CaseInsensitive)) {
@@ -183,6 +186,7 @@ void RobotsSettingsPage::restoreSettings()
 	mUi->textUpdaterSpinBox->setValue(SettingsManager::value("textUpdateInterval", textUpdateDefault).toInt());
 	mUi->regionEditorModeCheckBox->setChecked(SettingsManager::value("enableRegionEditorMode", false).toBool());
 	mUi->templatesPathWidget->restore();
+	mUi->sceneColorDialogWidget->restore();
 	mUi->twoDModelAdvancedResictions->setChecked(SettingsManager::value("twoDModelAdvancedResictions", false).toBool());
 	if (mRobotModelManager.model().kitId().contains("nxt", Qt::CaseInsensitive)) {
 		mUi->runningAfterUploadingComboBox->setCurrentIndex(SettingsManager::value("nxtFlashToolRunPolicy").toInt());

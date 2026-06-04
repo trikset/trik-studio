@@ -552,6 +552,19 @@
     </message>
 </context>
 <context>
+    <name>qReal::ui::ColorDialog</name>
+    <message>
+        <location filename="../../qrutils/widgets/colorDialog.cpp" line="+34"/>
+        <source>Select background color in the 2D-model editor...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Select the background color of the scene</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>qReal::ui::ConsoleDock</name>
     <message>
         <location filename="../../qrutils/widgets/consoleDock.cpp" line="+50"/>

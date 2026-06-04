@@ -36,6 +36,7 @@
 #include "twoDSceneItem.h"
 #include "twoDModel/engine/model/model.h"
 #include "twoDModel/engine/model/image.h"
+#include "twoDModel/engine/model/constants.h"
 #include "src/engine/view/scene/sensorItem.h"
 #include "src/engine/view/scene/rangeSensorItem.h"
 #include "src/engine/view/scene/lidarSensorItem.h"
@@ -51,6 +52,7 @@
 #include "src/engine/items/imageItem.h"
 #include "src/engine/items/regions/regionItem.h"
 #include "src/engine/items/startPosition.h"
+#include <qrkernel/settingsListener.h>
 
 #include "src/engine/commands/createWorldItemCommand.h"
 #include "src/engine/commands/createWorldItemsCommand.h"

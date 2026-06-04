@@ -97,6 +97,12 @@ TwoDModelWidget::TwoDModelWidget(Model &model, QWidget *parent)
 	mUi->enableMotorNoiseCheckBox->setChecked(mModel.settings().realisticMotors());
 	changePhysicsSettings();
 
+	SettingsManager::setValue(twoDModel::backgroundColorKey, palette().color(QPalette::Base));
+	qReal::SettingsListener::listen(twoDModel::backgroundColorKey, [this](const QColor &color) {
+		saveWorldModelToRepo();
+		mScene->setBackgroundBrush(color);
+	}, this);
+
 	connect(&*mScene, &TwoDModelScene::selectionChanged, this, &TwoDModelWidget::onSelectionChange);
 	connect(&*mScene, &TwoDModelScene::mousePressed, this, &TwoDModelWidget::refreshCursor);
 	connect(&*mScene, &TwoDModelScene::mouseReleased, this, &TwoDModelWidget::refreshCursor);
