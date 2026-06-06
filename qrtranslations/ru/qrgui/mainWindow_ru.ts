@@ -70,7 +70,7 @@
 <context>
     <name>MainWindowUi</name>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="+14"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="+6"/>
         <source>QReal</source>
         <translation>QReal</translation>
     </message>
@@ -80,7 +80,7 @@
         <translation>Ф&amp;айл</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+16"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
@@ -514,16 +514,6 @@
         <source>Restore default settings and Quit</source>
         <translation>Восстановить настройки по-умолчанию и выйти</translation>
     </message>
-    <message>
-        <location line="+9"/>
-        <source>Open Examples...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -745,7 +735,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+974"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+965"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -778,7 +768,7 @@
         <translation>Открыть проект</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+1"/>
         <source>Save project</source>
         <translation>Сохранить проект</translation>
     </message>
@@ -793,12 +783,12 @@
         <translation>Создать проект</translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-7"/>
         <source>New diagram</source>
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1149"/>
+        <location line="-1140"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -812,17 +802,12 @@ WARNING: The settings will be restored after application restart</source>
 ВНИМАНИЕ: Настройки будут сброшены после перезапуска приложения</translation>
     </message>
     <message>
-        <location line="+477"/>
+        <location line="+471"/>
         <source>Could not save file, try to save it to another place</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
         <location line="+676"/>
-        <source>Open examples</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
         <source>Undo</source>
         <translation>Отменить</translation>
     </message>
@@ -1064,7 +1049,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Все файлы (*.*)</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+20"/>
         <source>QReal Save File(*.qrs)</source>
         <translation>Файлы сохранения QReal (*.qrs)</translation>
     </message>

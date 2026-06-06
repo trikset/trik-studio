@@ -14,7 +14,12 @@
         <translation>Язык</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+10"/>
+        <source>Use dark theme</source>
+        <translation>Использовать тёмную тему</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Automatics</source>
         <translation>Автоматизация</translation>
     </message>
@@ -77,7 +82,7 @@
         <translation>Режим работы на тач-экране</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+117"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+121"/>
         <source>&lt;System Language&gt;</source>
         <translation>&lt;Системный язык&gt;</translation>
     </message>
@@ -409,7 +414,7 @@
         <translation type="vanished">Перезапустите программу, чтобы применить изменения</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+75"/>
         <source>Save File</source>
         <translation>Сохранить файл</translation>
     </message>
