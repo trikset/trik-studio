@@ -720,24 +720,21 @@ bool MainWindow::windowsIsInDarkTheme()
 
 void MainWindow::initDarkPalette() {
 	constexpr auto logPrefix = "Initializing color theme";
-	const auto &explicitTheme = QProcessEnvironment::systemEnvironment().value("TRIK_STUDIO_THEME", "auto");
-	QLOG_INFO() << logPrefix << "with" << explicitTheme;
-	bool useDarkTheme;
 
-	if (explicitTheme == "light") {
-		useDarkTheme = false;
-	} else if (explicitTheme == "auto") {
-		// It is hard to guess, but ...
+	auto useDarkThemeVariant = SettingsManager::value("UseDarkTheme");
+	bool useDarkTheme {};
+	// If there is no value in the setting manager, we try to determine the current theme automatically
+	if (useDarkThemeVariant.isNull()) {
 		useDarkTheme = PlatformInfo::osType() == "windows" && windowsIsInDarkTheme();
-	} else if (explicitTheme != "dark") {
-		QLOG_INFO() << logPrefix << ":" << explicitTheme << "is not a correct option";
-		useDarkTheme = false;
+		// Trying to detect the theme automatically, updating the variable for BehaviourPage
+		SettingsManager::setValue("UseDarkTheme", useDarkTheme);
+		const auto &theme = useDarkTheme ? "dark": "light";
+		QLOG_INFO() << "The theme" << theme << "is used automatically";
 	} else {
-		useDarkTheme = true;
+		useDarkTheme = useDarkThemeVariant.toBool();
 	}
 
 	if (useDarkTheme) {
-		QLOG_INFO() << logPrefix <<": enforcing dark mode";
 		QApplication::setPalette(BrandManager::styles()->loadPalette(
 			QCoreApplication::applicationDirPath() +
 			"/palettes/darkWindowsPalette.ini")

@@ -32,8 +32,8 @@ PreferencesBehaviourPage::PreferencesBehaviourPage(QWidget *parent)
 
 	initLanguages();
 
-	connect(mUi->autoSaveCheckBox, SIGNAL(clicked(bool)), this, SLOT(showAutoSaveBox(bool)));
-	connect(mUi->gesturesCheckBox, SIGNAL(toggled(bool)), SLOT(updateGesturesSettings(bool)));
+	connect(mUi->autoSaveCheckBox, &QAbstractButton::clicked, this, &PreferencesBehaviourPage::showAutoSaveBox);
+	connect(mUi->gesturesCheckBox, &QAbstractButton::toggled, this, &PreferencesBehaviourPage::updateGesturesSettings);
 	restoreSettings();
 }
 
@@ -57,13 +57,15 @@ void PreferencesBehaviourPage::save()
 {
 	const QString language = mUi->languageComboBox->itemData(mUi->languageComboBox->currentIndex()).toString();
 	SettingsManager::setValue("systemLocale", language);
-	if (mOldLanguage != language) {
+	const auto useDarkTheme = mUi->useDarkThemeCheckBox->isChecked();
+	if ((mOldLanguage != language) || (mOldUseDarkTheme != useDarkTheme)) {
 		setRestartFlag();
 	}
 
 	SettingsManager::setValue("PaletteTabSwitching", mUi->paletteTabCheckBox->isChecked());
 	SettingsManager::setValue("Autosave", mUi->autoSaveCheckBox->isChecked());
 	SettingsManager::setValue("AutosaveInterval", mUi->autoSaveSpinBox->value());
+	SettingsManager::setValue("UseDarkTheme", useDarkTheme);
 	SettingsManager::setValue("gesturesEnabled", mUi->gesturesCheckBox->isChecked());
 	SettingsManager::setValue("gestureDelay", mUi->gestureDelaySpinBox->value());
 	SettingsManager::setValue("touchMode", mUi->touchModeCheckBox->isChecked());
@@ -85,6 +87,8 @@ void PreferencesBehaviourPage::restoreSettings()
 	mUi->paletteTabCheckBox->setChecked(SettingsManager::value("PaletteTabSwitching").toBool());
 	mUi->autoSaveCheckBox->setChecked(SettingsManager::value("Autosave").toBool());
 	mUi->autoSaveSpinBox->setValue(SettingsManager::value("AutosaveInterval").toInt());
+	mOldUseDarkTheme = SettingsManager::value("UseDarkTheme").toBool();
+	mUi->useDarkThemeCheckBox->setChecked(mOldUseDarkTheme);
 	mUi->gestureDelaySpinBox->setValue(SettingsManager::value("gestureDelay").toInt());
 	mUi->touchModeCheckBox->setChecked(SettingsManager::value("touchMode").toBool());
 	mUi->dockableModeCheckBox->setChecked(SettingsManager::value("dockableWidgets").toBool());
