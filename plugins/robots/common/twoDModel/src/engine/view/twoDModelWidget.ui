@@ -14,7 +14,7 @@
    <string>2D Robot Model</string>
   </property>
   <property name="toolTip">
-   <string>Edit Regions</string>
+   <string/>
   </property>
   <layout class="QGridLayout" name="gridLayout" rowstretch="0,0,0,0,0,0,0" columnstretch="0,0,0,0,0">
    <item row="0" column="1" rowspan="7">
@@ -194,6 +194,9 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Edit Regions</string>
         </property>
         <property name="text">
          <string/>
