@@ -366,10 +366,6 @@ void Repository::loadFromDisk()
 		// Nothing loaded
 		resetToEmpty();
 	}
-	if (!mObjects.contains(Id::rootId())) {
-		QLOG_ERROR() << " the ./ROOT_ID/ROOT_ID/ROOT_ID/ROOT_ID object was not found in the repository";
-		resetToEmpty();
-	}
 	addChildrenToRootObject();
 }
 
@@ -384,6 +380,10 @@ void Repository::addChildrenToRootObject()
 {
 	for (Object *object : mObjects.values()) {
 		if (object->parent() == Id::rootId()) {
+			if (!mObjects.contains(Id::rootId())) {
+				QLOG_ERROR() << " the ./ROOT_ID/ROOT_ID/ROOT_ID/ROOT_ID object was not found in the repository";
+				resetToEmpty();
+			}
 			if (!mObjects[Id::rootId()]->children().contains(object->id())) {
 				mObjects[Id::rootId()]->addChild(object->id());
 			}
