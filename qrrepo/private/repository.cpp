@@ -13,7 +13,7 @@
  * limitations under the License. */
 
 #include "repository.h"
-
+#include <QsLog.h>
 #include <qrkernel/exception/exception.h>
 #include "singleXmlSerializer.h"
 
@@ -366,6 +366,10 @@ void Repository::loadFromDisk()
 		// Nothing loaded
 		resetToEmpty();
 	}
+	if (!mObjects.contains(Id::rootId())) {
+		QLOG_ERROR() << " the ./ROOT_ID/ROOT_ID/ROOT_ID/ROOT_ID object was not found in the repository";
+		resetToEmpty();
+	}
 	addChildrenToRootObject();
 }
 
@@ -476,6 +480,22 @@ bool Repository::saveDiagramsById(QHash<QString, IdList> const &diagramIds)
 
 	setWorkingFile(currentWorkingFile);
 	return result;
+}
+
+qReal::IdList Repository::getAllRelatedDiagramIds(const qReal::IdList &ids)
+{
+	qReal::IdList idList {ids};
+	for (auto &&id: ids) {
+		auto &&childrenIds = idsOfAllChildrenOf(id);
+		for (auto && childrenId: childrenIds) {
+			if (!isLogicalId(childrenId)) {
+				idList.append(logicalId(childrenId));
+			}
+		}
+		idList.append(childrenIds);
+	}
+
+	return idList;
 }
 
 void Repository::remove(const IdList &list) const

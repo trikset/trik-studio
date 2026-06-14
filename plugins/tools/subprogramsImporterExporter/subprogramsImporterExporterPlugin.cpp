@@ -152,7 +152,12 @@ void SubprogramsImporterExporterPlugin::importToProject() const
 	for (const auto &metaKey : mLogicalModel->logicalRepoApi().metaInformationKeys()) {
 		oldMeta[metaKey] = mLogicalModel->logicalRepoApi().metaInformation(metaKey);
 	}
+
+	auto &&relatedIds = mRepo->elements();
 	mRepo->importFromDisk(fileName);
+	const auto &subprograms = mLogicalModel->logicalRepoApi().elementsByType("SubprogramDiagram", true, false);
+	relatedIds.append(mRepo->getAllRelatedDiagramIds(subprograms));
+	mRepo->removeIdsFromTree(relatedIds);
 	mMainWindowInterpretersInterface->reinitModels();
 	for (const auto &diagram : openedDiagrams) {
 		mMainWindowInterpretersInterface->activateItemOrDiagram(diagram);

@@ -91,7 +91,7 @@
         <translation>В проекте нет подпрограмм.</translation>
     </message>
     <message>
-        <location line="+78"/>
+        <location line="+83"/>
         <source>There are not subprograms in your project</source>
         <translation>В проекте нет подпрограмм</translation>
     </message>
@@ -101,12 +101,12 @@
         <translation>В коллекции нет подпрограмм для робота %1</translation>
     </message>
     <message>
-        <location line="-98"/>
+        <location line="-103"/>
         <source>Select subprograms file</source>
         <translation>Выберите файл с подпрограммами</translation>
     </message>
     <message>
-        <location line="+145"/>
+        <location line="+150"/>
         <source>Clear the collection</source>
         <translation>Очистить коллекцию</translation>
     </message>

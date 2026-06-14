@@ -96,32 +96,32 @@
         <translation>Seleccionar archivo de subprogramas</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="200"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="205"/>
         <source>There are not subprograms in your project</source>
         <translation>No hay subprogramas en su proyecto</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="241"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="246"/>
         <source>There are no subprograms in your collection for %1 robot.</source>
         <translation>No hay subprogramas en su colección para el robot %1.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="288"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="293"/>
         <source>Clear the collection</source>
         <translation>Limpiar la colección</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="289"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="294"/>
         <source>Remove all subprograms for all kits from the collection?</source>
         <translation>¿Eliminar todos los subprogramas para todos los kits de la colección?</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="300"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="305"/>
         <source>There is no opened project</source>
         <translation>No hay ningún proyecto abierto</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="322"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="327"/>
         <source>There are different subprograms with the same name in your project. Please make them unique.</source>
         <translation>Hay diferentes subprogramas con el mismo nombre en su proyecto. Por favor, haga que sean únicos.</translation>
     </message>

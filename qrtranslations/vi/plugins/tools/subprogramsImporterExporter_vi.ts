@@ -96,32 +96,32 @@
         <translation>Chọn tệp chương trình con</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="200"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="205"/>
         <source>There are not subprograms in your project</source>
         <translation>Không có chương trình con nào trong dự án của bạn</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="241"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="246"/>
         <source>There are no subprograms in your collection for %1 robot.</source>
         <translation>Không có chương trình con nào trong bộ sưu tập của bạn cho robot %1.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="288"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="293"/>
         <source>Clear the collection</source>
         <translation>Xóa bộ sưu tập</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="289"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="294"/>
         <source>Remove all subprograms for all kits from the collection?</source>
         <translation>Xóa tất cả các chương trình con cho mọi bộ linh kiện khỏi bộ sưu tập?</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="300"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="305"/>
         <source>There is no opened project</source>
         <translation>Không có dự án nào đang mở</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="322"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="327"/>
         <source>There are different subprograms with the same name in your project. Please make them unique.</source>
         <translation>Có các chương trình con khác nhau cùng tên trong dự án của bạn. Vui lòng đặt tên sao cho chúng là duy nhất.</translation>
     </message>

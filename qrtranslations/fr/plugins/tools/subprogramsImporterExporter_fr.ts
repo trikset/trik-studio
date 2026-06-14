@@ -96,32 +96,32 @@
         <translation>Sélectionner le fichier de sous-programmes</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="200"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="205"/>
         <source>There are not subprograms in your project</source>
         <translation>Il n&apos;y a pas de sous-programmes dans votre projet</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="241"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="246"/>
         <source>There are no subprograms in your collection for %1 robot.</source>
         <translation>Il n&apos;y a pas de sous-programmes dans votre collection pour le robot %1.</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="288"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="293"/>
         <source>Clear the collection</source>
         <translation>Effacer la collection</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="289"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="294"/>
         <source>Remove all subprograms for all kits from the collection?</source>
         <translation>Supprimer tous les sous-programmes pour tous les kits de la collection ?</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="300"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="305"/>
         <source>There is no opened project</source>
         <translation>Aucun projet n&apos;est ouvert</translation>
     </message>
     <message>
-        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="322"/>
+        <location filename="../../../../plugins/tools/subprogramsImporterExporter/subprogramsImporterExporterPlugin.cpp" line="327"/>
         <source>There are different subprograms with the same name in your project. Please make them unique.</source>
         <translation>Il existe des sous-programmes différents portant le même nom dans votre projet. Veuillez les rendre uniques.</translation>
     </message>
