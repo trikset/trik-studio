@@ -79,17 +79,17 @@
         <translation>Kết nối với mục hiện tại</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="675"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="694"/>
         <source>Replace by...</source>
         <translation>Thay thế bằng...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="907"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="926"/>
         <source>Add child</source>
         <translation>Thêm phần tử con</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="1399"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="1418"/>
         <source>Delete</source>
         <translation>Xóa</translation>
     </message>
