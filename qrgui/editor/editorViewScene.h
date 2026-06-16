@@ -117,7 +117,7 @@ public:
 
 	EdgeElement *edgeForInsertion(const QPointF &scenePos);
 
-	void resolveOverlaps(NodeElement* node, const QPointF &scenePos, const QPointF &shift
+	void resolveOverlaps(NodeElement* node, QPointF scenePos, QPointF shift
 			, QMap<Id, QPointF> &shifting) const;
 
 	void returnElementsToOldPositions(QMap<Id, QPointF> const &shifting) const;
