@@ -104,7 +104,7 @@ Id NodeInfo::newLogicalId()
 	return mInfo.newLogicalId();
 }
 
-void NodeInfo::setPos(const QPointF &position)
+void NodeInfo::setPos(QPointF position)
 {
 	return mInfo.setPos(position);
 }

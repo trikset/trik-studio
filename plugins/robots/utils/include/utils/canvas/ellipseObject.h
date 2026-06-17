@@ -32,7 +32,7 @@ class ROBOTS_UTILS_EXPORT EllipseObject : public CanvasObject
 
 public:
 	explicit EllipseObject(QObject *parent = nullptr);
-	EllipseObject(const QPoint &center
+	EllipseObject(QPoint center
 			, int semiDiameterX
 			, int semiDiameterY
 			, const QColor &color = Qt::black
@@ -44,7 +44,7 @@ public:
 	QPoint center() const;
 
 	/// Sets the coordinates of the central point in pixels.
-	void setCenter(const QPoint &center);
+	void setCenter(QPoint center);
 
 	/// Returns the semi-axis length by the x-dimension of the ellipse.
 	int semiDiameterX() const;
@@ -67,7 +67,7 @@ public:
 	/// Fills ellipse with its color or makes it empty.
 	void setFilled(bool filled);
 
-	void paint(QPainter *painter, const QRect &outputRect) override;
+	void paint(QPainter *painter, QRect outputRect) override;
 	QJsonObject toJson() const override;
 
 private:

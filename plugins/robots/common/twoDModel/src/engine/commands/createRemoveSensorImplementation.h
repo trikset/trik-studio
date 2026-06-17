@@ -33,7 +33,7 @@ public:
 			, const QString &robotId
 			, const kitBase::robotModel::PortInfo &port
 			, const kitBase::robotModel::DeviceInfo &device
-			, const QPointF &position
+			, QPointF position
 			, const qreal direction);
 
 	void create();

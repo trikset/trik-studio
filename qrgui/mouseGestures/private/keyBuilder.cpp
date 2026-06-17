@@ -81,7 +81,7 @@ Key KeyBuilder::getKey(const PathVector &mousePath, int heightSize, int widthSiz
 	return key;
 }
 
-void KeyBuilder::rasterizeSegment(const SquarePos &pos1, const SquarePos &pos2, Key *segment)
+void KeyBuilder::rasterizeSegment(qReal::gestures::SquarePos pos1, qReal::gestures::SquarePos pos2, Key *segment)
 {
 	if (!segment->isEmpty() && pos1 == segment->at(0)) {
 		segment->pop_back();

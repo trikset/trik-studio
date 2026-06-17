@@ -43,7 +43,7 @@ public:
 	/// appended to this value.
 	/// @param isGraphicalCopy If true then logical copies are not created, just graphical copies
 	/// bound to original logical instances.
-	void paste(const Id &parent, const QPointF &position, bool isGraphicalCopy);
+	void paste(const Id &parent, QPointF position, bool isGraphicalCopy);
 
 	/// Returns true if clipboard does not contain information about QReal diagram elements.
 	bool isEmpty() const;

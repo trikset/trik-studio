@@ -69,7 +69,7 @@ void VirtualCursor::moveTo(const QWidget *target, int duration)
 	}
 }
 
-void VirtualCursor::moveToRect(const QRect &target, int duration)
+void VirtualCursor::moveToRect(QRect target, int duration)
 {
 	animate(pos(), target.topLeft(), duration);
 }
@@ -161,7 +161,7 @@ void VirtualCursor::moved(QWidget *target)
 	simulateMouse(target, QEvent::MouseMove, widgetPos(target), Qt::NoButton);
 }
 
-void VirtualCursor::simulateMouse(QObject *reciever, QEvent::Type event, QPointF const &pos
+void VirtualCursor::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos
 		, Qt::MouseButton button)
 {
 	QMouseEvent *mouseEvent = new QMouseEvent(event, pos, button, button, Qt::NoModifier);
@@ -173,12 +173,12 @@ QPoint VirtualCursor::widgetPos(QWidget *target) const
 	return target->mapFrom(parentWidget(), pos());
 }
 
-void VirtualCursor::animate(const QPoint &from, int toX, int toY, int duration)
+void VirtualCursor::animate(QPoint from, int toX, int toY, int duration)
 {
 	animate(from, QPoint(toX, toY), duration);
 }
 
-void VirtualCursor::animate(const QPoint &from, const QPoint &to, int duration)
+void VirtualCursor::animate(QPoint from, QPoint to, int duration)
 {
 	mCursorMoveAnimation->setDuration(duration);
 	mCursorMoveAnimation->setStartValue(QRect(from, QSize()));

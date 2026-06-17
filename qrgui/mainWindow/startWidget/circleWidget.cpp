@@ -21,7 +21,7 @@
 
 using namespace qReal;
 
-CircleWidget::CircleWidget(const QSize &size, const QString &icon, QWidget *parent)
+CircleWidget::CircleWidget(QSize size, const QString &icon, QWidget *parent)
 	: QWidget(parent)
 {
 	const QSize iconSize = size - QSize(45, 45);

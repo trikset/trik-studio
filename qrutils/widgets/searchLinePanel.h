@@ -50,7 +50,7 @@ public:
 	void attachTo(QWidget *parent);
 	void detach();
 
-	void setMode(const OperationOptions &option);
+	void setMode(qReal::ui::SearchLinePanel::OperationOptions option);
 	OperationOptions getMode() const;
 
 	QString getTextForReplace() const;

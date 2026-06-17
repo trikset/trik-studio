@@ -22,7 +22,7 @@ ContextMenuAction::ContextMenuAction(const QString &text, QObject *parent)
 	connect(this, SIGNAL(triggered()), this, SLOT(trigger()));
 }
 
-void ContextMenuAction::setEventPos(const QPointF &pos)
+void ContextMenuAction::setEventPos(QPointF pos)
 {
 	mEventPos = pos;
 }

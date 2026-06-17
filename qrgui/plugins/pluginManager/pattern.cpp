@@ -22,7 +22,7 @@
 
 using namespace qReal;
 
-GroupNode::GroupNode(const QString &type, const QString &id, const QPointF &position, const QString &parent)
+GroupNode::GroupNode(const QString &type, const QString &id, QPointF position, const QString &parent)
 	: type(type), id(id), position(position), parent(parent)
 {
 }
@@ -73,7 +73,7 @@ QString Pattern::name() const
 	return mGroupName;
 }
 
-void Pattern::addNode(const QString &type, const QString &id, const QPointF &pos, const QString &parent)
+void Pattern::addNode(const QString &type, const QString &id, QPointF pos, const QString &parent)
 {
 	GroupNode newNode(type, id, pos, parent);
 	mNodes.append(newNode);

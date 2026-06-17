@@ -179,7 +179,7 @@ void ResizeHandler::printChildPos() const
 	}
 }
 
-void ResizeHandler::moveChildren(const QPointF &shift) const
+void ResizeHandler::moveChildren(QPointF shift) const
 {
 	QVector<int> const sizeOfForestalling = mElementType.sizeOfForestalling();
 	qreal forestallingTop = sizeOfForestalling[1];

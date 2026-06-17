@@ -33,7 +33,7 @@ public:
 	/// @param rootGraphicalId Graphical id of root element of the scene elements were pasted into.
 	PasteCommand(const models::Models &models
 			, bool isGraphicalCopy
-			, const QPointF &mousePosition
+			, QPointF mousePosition
 			, const Id &rootGraphicalId);
 
 	/// Returns true if clipboard did not contain any information about nodes or edges.
@@ -43,13 +43,13 @@ private:
 	void pullDataFromClipboard(QList<NodeInfo> &nodesData, QList<EdgeInfo> &edgesData) const;
 
 	QHash<Id, Id> prepareNodes(models::GraphicalModelAssistApi &graphicalApi
-			, QList<NodeInfo> &nodesData, const QPointF &offset);
-	QPointF newPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, const QPointF &offset) const;
-	QPointF newGraphicalPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, const QPointF &offset) const;
+			, QList<NodeInfo> &nodesData, QPointF offset);
+	QPointF newPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const;
+	QPointF newGraphicalPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const;
 	qReal::Id newGraphicalParent(const ElementInfo &data, const QHash<Id, Id> &copiedIds) const;
 	QPointF vectorFromContainer(const NodeInfo &nodeData) const;
 
-	void prepareEdge(EdgeInfo &edgeData, const QPointF &offset, const QHash<Id, Id> &copiedIds);
+	void prepareEdge(EdgeInfo &edgeData, QPointF offset, const QHash<Id, Id> &copiedIds);
 
 	const bool mIsGraphicalCopy;
 	const QPointF mMousePosition;

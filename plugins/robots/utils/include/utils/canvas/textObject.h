@@ -62,7 +62,7 @@ public:
 	/// Sets the rendered string font size.
 	void setFontSize(int fontSize);
 
-	void paint(QPainter *painter, const QRect &outputRect) override;
+	void paint(QPainter *painter, QRect outputRect) override;
 	QJsonObject toJson() const override;
 
 private:

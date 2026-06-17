@@ -280,7 +280,7 @@ bool EditorViewScene::canBeContainedBy(const Id &container, const Id &candidate)
 }
 
 int EditorViewScene::launchEdgeMenu(EdgeElement *edge, NodeElement *node
-		, const QPointF &scenePos, bool canBeConnected, CreateElementsCommand **createCommand)
+		, QPointF scenePos, bool canBeConnected, CreateElementsCommand **createCommand)
 {
 	edge->setSelected(true);
 
@@ -384,7 +384,7 @@ Id EditorViewScene::createElement(const QString &str)
 }
 
 Id EditorViewScene::createElement(const QString &idString
-		, const QPointF &scenePos
+		, QPointF scenePos
 		, CreateElementsCommand **createCommandPointer
 		, bool executeImmediately)
 {
@@ -401,7 +401,7 @@ Id EditorViewScene::createElement(const QString &idString
 }
 
 void EditorViewScene::createElement(const QMimeData *mimeData
-		, const QPointF &scenePos
+		, QPointF scenePos
 		, CreateElementsCommand **createCommandPointer
 		, bool executeImmediately)
 {
@@ -420,7 +420,7 @@ void EditorViewScene::createElement(const QMimeData *mimeData
 }
 
 void EditorViewScene::createElement(const ElementInfo &elementInfo
-		, const QPointF &scenePos
+		, QPointF scenePos
 		, CreateElementsCommand **createCommandPointer
 		, bool executeImmediately)
 {
@@ -499,7 +499,7 @@ void EditorViewScene::createSingleElement(const ElementInfo &element
 	}
 }
 
-EdgeElement * EditorViewScene::edgeForInsertion(const QPointF &scenePos)
+EdgeElement * EditorViewScene::edgeForInsertion(QPointF scenePos)
 {
 	for (QGraphicsItem *item : items(scenePos)) {
 		EdgeElement *edge = dynamic_cast<EdgeElement *>(item);
@@ -518,8 +518,8 @@ EdgeElement * EditorViewScene::edgeForInsertion(const QPointF &scenePos)
 	return nullptr;
 }
 
-void EditorViewScene::resolveOverlaps(NodeElement *node, const QPointF &scenePos
-		, const QPointF &shift, QMap<Id, QPointF> &shifting) const
+void EditorViewScene::resolveOverlaps(NodeElement *node, QPointF scenePos
+		, QPointF shift, QMap<Id, QPointF> &shifting) const
 {
 	QList<NodeElement*> closeNodes = getCloseNodes(node);
 	for (NodeElement *closeNode : closeNodes) {
@@ -882,7 +882,7 @@ void EditorViewScene::moveEdges()
 	}
 }
 
-void EditorViewScene::initContextMenu(Element *e, const QPointF &pos)
+void EditorViewScene::initContextMenu(Element *e, QPointF pos)
 {
 	if (mContextMenu.isVisible()) {
 		mContextMenu.close();
@@ -1198,7 +1198,7 @@ void EditorViewScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 	}
 }
 
-Element *EditorViewScene::findElemAt(const QPointF &position) const
+Element *EditorViewScene::findElemAt(QPointF position) const
 {
 	for (QGraphicsItem * const item : items(position)) {
 		if (Element * const element = dynamic_cast<Element *>(item)) {
@@ -1209,7 +1209,7 @@ Element *EditorViewScene::findElemAt(const QPointF &position) const
 	return nullptr;
 }
 
-NodeElement *EditorViewScene::findNodeAt(const QPointF &position) const
+NodeElement *EditorViewScene::findNodeAt(QPointF position) const
 {
 	for (QGraphicsItem * const item : items(position)) {
 		if (NodeElement * const node = dynamic_cast<NodeElement *>(item)) {
@@ -1384,7 +1384,7 @@ void EditorViewScene::initCorners()
 	setCorners(QPointF(0, 0), QPointF(1000, 1000));
 }
 
-void EditorViewScene::setCorners(const QPointF &topLeft, const QPointF &bottomRight)
+void EditorViewScene::setCorners(QPointF topLeft, QPointF bottomRight)
 {
 	mTopLeftCorner->setPos(topLeft);
 	mBottomRightCorner->setPos(bottomRight);

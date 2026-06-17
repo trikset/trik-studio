@@ -24,7 +24,7 @@ ArcObject::ArcObject(QObject *parent)
 {
 }
 
-ArcObject::ArcObject(const QRect &rect, int startAngle, int spanAngle
+ArcObject::ArcObject(QRect rect, int startAngle, int spanAngle
 		, const QColor &color, int thickness, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mRect(rect)
@@ -38,7 +38,7 @@ QPoint ArcObject::ellipseCenter() const
 	return mRect.center();
 }
 
-void ArcObject::setEllipseCenter(const QPoint &center)
+void ArcObject::setEllipseCenter(QPoint center)
 {
 	mRect.moveTo(center - QPoint(mRect.width() / 2, mRect.height() / 2));
 }
@@ -48,7 +48,7 @@ QRect ArcObject::ellipseRect() const
 	return mRect;
 }
 
-void ArcObject::setEllipseRect(const QRect &rect)
+void ArcObject::setEllipseRect(QRect rect)
 {
 	mRect = rect;
 }
@@ -78,7 +78,7 @@ QRect ArcObject::boundingRect() const
 	return mRect;
 }
 
-void ArcObject::paint(QPainter *painter, const QRect &outputRect)
+void ArcObject::paint(QPainter *painter, QRect outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
 	// Multiplying on 16 needed because Qt require argument in 1/16 degree format.

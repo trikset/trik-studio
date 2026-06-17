@@ -100,13 +100,13 @@ enum class LuaTokenTypes
 };
 
 /// Overload that allows to use token types as hash keys.
-inline uint qHash(const LuaTokenTypes &key)
+inline uint qHash(qrtext::lua::details::LuaTokenTypes key)
 {
 	return ::qHash(static_cast<std::underlying_type<LuaTokenTypes>::type>(key));
 }
 
 /// Helper operator for debugging.
-inline QDebug &operator <<(QDebug &debug, const LuaTokenTypes &token)
+inline QDebug &operator <<(QDebug &debug, qrtext::lua::details::LuaTokenTypes token)
 {
 	debug << static_cast<std::underlying_type<LuaTokenTypes>::type>(token);
 	return debug;

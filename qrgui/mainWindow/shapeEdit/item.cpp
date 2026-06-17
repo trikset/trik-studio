@@ -60,7 +60,7 @@ int Item::sign(int x)
 	return x > 0 ? 1 : -1;
 }
 
-qreal Item::length(const QPointF &point1, const QPointF &point2)
+qreal Item::length(QPointF point1, QPointF point2)
 {
 	return sqrt(pow((point1.x() - point2.x()), 2) + pow((point1.y() - point2.y()), 2));
 }
@@ -119,7 +119,7 @@ void Item::setNoneDragState()
 	setDragState(None);
 }
 
-void Item::calcForChangeScalingState(const QPointF&pos, const QPointF& point1, const QPointF& point2
+void Item::calcForChangeScalingState(QPointF pos, QPointF point1, QPointF point2
 		, int correction)
 {
 	qreal x = pos.x();
@@ -213,7 +213,7 @@ void Item::setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &lis
 	mListScalePoint = list;
 }
 
-QString Item::setScaleForDoc(int i, const QRect &rect)
+QString Item::setScaleForDoc(int i, QRect rect)
 {
 	QString text;
 
@@ -292,7 +292,7 @@ Item::VisibilityCondition Item::visibilityCondition() const
 	return mVisibilityCondition;
 }
 
-QPair<QDomElement, Item::DomElementTypes> Item::generateDom(QDomDocument &document, const QPoint &topLeftPicture)
+QPair<QDomElement, Item::DomElementTypes> Item::generateDom(QDomDocument &document, QPoint topLeftPicture)
 {
 	QPair<QDomElement, Item::DomElementTypes> result = generateItem(document, topLeftPicture);
 

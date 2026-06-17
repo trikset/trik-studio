@@ -63,7 +63,7 @@ public:
 	}
 
 private:
-	static SquarePos getNextPos(const SquarePos &pos, const Key &key)
+	static SquarePos getNextPos(qReal::gestures::SquarePos pos, const Key &key)
 	{
 		if (pos.first < 0 || pos.second < 0)
 			return pos;

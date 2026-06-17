@@ -25,7 +25,7 @@ CurveLine::CurveLine(EdgeElement *edge
 	setBezierPoints();
 }
 
-void CurveLine::handleEdgeMove(const QPointF &pos)
+void CurveLine::handleEdgeMove(QPointF pos)
 {
 	QPolygonF line = mEdge->line();
 

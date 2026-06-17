@@ -236,8 +236,8 @@ void SensorsGraph::resetAll()
 	mPlotFrame->zoomOut();
 }
 
-void SensorsGraph::configureUpdateIntervals(const int &readSensorsInterval, const int &autoScaleInterval
-		, const int &textUpdaterInterval)
+void SensorsGraph::configureUpdateIntervals(int readSensorsInterval, int autoScaleInterval
+		, int textUpdaterInterval)
 {
 	mPlotFrame->configureUserOptions(readSensorsInterval, autoScaleInterval, textUpdaterInterval);
 }

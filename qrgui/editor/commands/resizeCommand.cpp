@@ -38,8 +38,8 @@ ResizeCommand::ResizeCommand(const EditorViewScene *scene, const Id &id
 }
 
 ResizeCommand *ResizeCommand::create(const NodeElement * const element
-		, const QRectF &newContents, const QPointF &newPos
-		, const QRectF &oldContents, const QPointF &oldPos)
+		, const QRectF &newContents, QPointF newPos
+		, const QRectF &oldContents, QPointF oldPos)
 {
 	QRectF newContentsAndPos = newContents;
 	newContentsAndPos.moveTo(newPos);

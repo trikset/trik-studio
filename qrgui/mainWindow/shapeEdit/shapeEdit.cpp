@@ -43,7 +43,7 @@ ShapeEdit::ShapeEdit(QWidget *parent)
 ShapeEdit::ShapeEdit(
 	qReal::models::details::LogicalModel *model
 	, const QPersistentModelIndex &index
-	, const int &role
+	, int role
 	, bool useTypedPorts
 	)
 	: QWidget(nullptr)

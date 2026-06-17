@@ -39,76 +39,76 @@ QMap<QString, QSharedPointer<Number>> &ExpressionsParser::mutableVariables()
 	return mVariables;
 }
 
-bool ExpressionsParser::isDigit(const QChar &c) const
+bool ExpressionsParser::isDigit(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return '0' <= symbol && symbol <= '9';
 }
 
-bool ExpressionsParser::isSign(const QChar &c) const
+bool ExpressionsParser::isSign(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == '-' || symbol == '+';
 }
 
-bool ExpressionsParser::isLetter(const QChar &c) const
+bool ExpressionsParser::isLetter(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return ('A' <= symbol && symbol <= 'Z') || ('a'<= symbol && symbol <= 'z');
 }
 
-bool ExpressionsParser::isExp(const QChar &c) const
+bool ExpressionsParser::isExp(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == 'e' || symbol == 'E';
 }
 
-bool ExpressionsParser::isPoint(const QChar &c) const
+bool ExpressionsParser::isPoint(QChar c) const
 {
 	return c.toLatin1() == '.';
 }
 
-bool ExpressionsParser::isRoundBracket(const QChar &c) const
+bool ExpressionsParser::isRoundBracket(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == '(' || symbol == ')';
 }
 
-bool ExpressionsParser::isDisjunction(const QChar &c) const
+bool ExpressionsParser::isDisjunction(QChar c) const
 {
 	return c.toLatin1() == '|';
 }
 
-bool ExpressionsParser::isConjunction(const QChar &c) const
+bool ExpressionsParser::isConjunction(QChar c) const
 {
 	return c.toLatin1() == '&';
 }
 
-bool ExpressionsParser::isComparison(const QChar &c) const
+bool ExpressionsParser::isComparison(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == '<' || symbol == '>';
 }
 
-bool ExpressionsParser::isArithmeticalMinusOrPlus(const QChar &c) const
+bool ExpressionsParser::isArithmeticalMinusOrPlus(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == '-' || symbol == '+';
 }
 
-bool ExpressionsParser::isMultiplicationOrDivision(const QChar &c) const
+bool ExpressionsParser::isMultiplicationOrDivision(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == '*' || symbol == '/';
 }
 
-bool ExpressionsParser::isDelimiter(const QChar &c) const
+bool ExpressionsParser::isDelimiter(QChar c) const
 {
 	char symbol = c.toLatin1();
 	return symbol == '\n' || symbol == '\r' || symbol == ' ' || symbol == '\t';
 }
 
-bool ExpressionsParser::isAssignment(const QChar &c) const
+bool ExpressionsParser::isAssignment(QChar c) const
 {
 	return c.toLatin1() == '=';
 }
@@ -633,7 +633,7 @@ bool ExpressionsParser::isEmpty(const QString &stream, int &pos) const
 	return pos == stream.length();
 }
 
-void ExpressionsParser::error(const ParseErrorType &type, const QString &pos
+void ExpressionsParser::error(utils::ExpressionsParser::ParseErrorType type, const QString &pos
 		, const QString &expected, const QString &got)
 {
 	switch (type) {

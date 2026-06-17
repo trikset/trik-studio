@@ -29,7 +29,7 @@ class ContextMenuAction: public QAction
 
 public:
 	ContextMenuAction(const QString &text, QObject *parent);
-	void setEventPos(const QPointF &pos);
+	void setEventPos(QPointF pos);
 	QPointF eventPos() const;
 
 private Q_SLOTS:

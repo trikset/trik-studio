@@ -33,7 +33,7 @@ public:
 			, const QString &name
 			, const QString &description
 			, const QIcon &icon
-			, const QSize &preferredSize
+			, QSize preferredSize
 			, const Id &explosionTarget);
 
 	/// Stores editor manager-derived parameters of given elements

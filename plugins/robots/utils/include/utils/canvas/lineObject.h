@@ -30,8 +30,8 @@ class ROBOTS_UTILS_EXPORT LineObject : public CanvasObject
 
 public:
 	explicit LineObject(QObject *parent = nullptr);
-	LineObject(const QPoint &begin
-			, const QPoint &end
+	LineObject(QPoint begin
+			, QPoint end
 			, const QColor &color = Qt::black
 			, int thickness = 1
 			, QObject *parent = nullptr);
@@ -40,18 +40,18 @@ public:
 	QPoint begin() const;
 
 	/// Sets the first end of the segment.
-	void setBegin(const QPoint &begin);
+	void setBegin(QPoint begin);
 
 	/// Returns the second end of the segment.
 	QPoint end() const;
 
 	/// Sets the second end of the segment.
-	void setEnd(const QPoint &end);
+	void setEnd(QPoint end);
 
 	/// Returns the bounding box of this line.
 	QRect boundingRect() const;
 
-	void paint(QPainter *painter, const QRect &outputRect) override;
+	void paint(QPainter *painter, QRect outputRect) override;
 	QJsonObject toJson() const override;
 
 private:

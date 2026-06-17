@@ -30,7 +30,7 @@ QScintillaTextEdit::QScintillaTextEdit()
 	init();
 }
 
-QScintillaTextEdit::QScintillaTextEdit(const QPersistentModelIndex &index, const int &role)
+QScintillaTextEdit::QScintillaTextEdit(const QPersistentModelIndex &index, int role)
 	: mIndex(index)
 	, mRole(role)
 {

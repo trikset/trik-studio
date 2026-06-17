@@ -30,7 +30,7 @@ class ROBOTS_UTILS_EXPORT RectangleObject : public CanvasObject
 
 public:
 	explicit RectangleObject(QObject *parent = nullptr);
-	RectangleObject(const QRect &shape
+	RectangleObject(QRect shape
 			, const QColor &color = Qt::black
 			, int thickness = 1
 			, bool filled = false
@@ -48,7 +48,7 @@ public:
 	/// Fills rectangle with its color or makes it empty.
 	void setFilled(bool filled);
 
-	void paint(QPainter *painter, const QRect &outputRect) override;
+	void paint(QPainter *painter, QRect outputRect) override;
 	QJsonObject toJson() const override;
 
 private:

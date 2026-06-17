@@ -28,7 +28,7 @@ using namespace gui;
 using namespace mathUtils;
 using namespace graphicsUtils;
 
-Arrow::Arrow(const QPoint &sourcePoint, const QPoint &destPoint, int lifeTime, QWidget *parent)
+Arrow::Arrow(QPoint sourcePoint, QPoint destPoint, int lifeTime, QWidget *parent)
 	: QWidget(parent)
 	, mSourcePoint(sourcePoint)
 	, mDestPoint(destPoint)

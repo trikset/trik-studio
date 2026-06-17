@@ -42,7 +42,7 @@ QSizeF NodeElementType::size() const
 	return mSize;
 }
 
-void NodeElementType::setSize(const QSizeF &size)
+void NodeElementType::setSize(QSizeF size)
 {
 	mSize = size;
 }

@@ -32,7 +32,7 @@ public:
 		, critical
 	};
 
-	Error(const QString &message, const Severity &severity, qReal::Id  const &position);
+	Error(const QString &message, qReal::gui::Error::Severity severity, qReal::Id  const &position);
 	Severity severity() const;
 	QString message() const;
 	QString timestamp() const;

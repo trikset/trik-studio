@@ -50,7 +50,7 @@ private:
 	void processGestureState(QGesture *gesture);
 	void handleOneFingerTouch(QTouchEvent *event);
 
-	void simulateMouse(QObject *reciever, QEvent::Type event, const QPointF &pos, Qt::MouseButtons buttons);
+	void simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos, Qt::MouseButtons buttons);
 	void simulatePress(QTouchEvent *event, Qt::MouseButton button = Qt::LeftButton);
 	void simulateMove(QTouchEvent *event);
 	void simulateRelease(QTouchEvent *event);
@@ -59,7 +59,7 @@ private:
 
 	void moveCursor(QTouchEvent *event);
 
-	bool isElementUnder(const QPointF &pos);
+	bool isElementUnder(QPointF pos);
 
 	EditorView *mEditorView {};
 	QsKineticScroller mScroller;

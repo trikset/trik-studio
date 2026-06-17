@@ -120,7 +120,7 @@ void SearchLinePanel::detach()
 	parent()->removeEventFilter(this);
 }
 
-void SearchLinePanel::setMode(const SearchLinePanel::OperationOptions &option)
+void SearchLinePanel::setMode(SearchLinePanel::OperationOptions option)
 {
 	mCurrentOption = option;
 

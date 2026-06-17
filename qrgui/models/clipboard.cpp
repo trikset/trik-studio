@@ -127,7 +127,7 @@ bool Clipboard::isEmpty() const
 	return mimeData->data(DEFAULT_MIME_TYPE).isEmpty();
 }
 
-void Clipboard::paste(const Id &parent, const QPointF &position, bool isGraphicalCopy)
+void Clipboard::paste(const Id &parent, QPointF position, bool isGraphicalCopy)
 {
 	qReal::commands::PasteCommand *pasteCommand = new qReal::commands::PasteCommand(
 			mModels

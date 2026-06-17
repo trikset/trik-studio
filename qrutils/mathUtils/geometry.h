@@ -29,32 +29,32 @@ class QRUTILS_EXPORT Geometry
 {
 public:
 	/// Compares given points with the given precision
-	static bool eq(const QPointF &point1, const QPointF &point2, qreal eps = EPS);
+	static bool eq(QPointF point1, QPointF point2, qreal eps = EPS);
 
 	/// Returns a scalar product of two given vectors
-	static qreal scalarProduct(const QVector2D &vector1, const QVector2D &vector2);
+	static qreal scalarProduct(QVector2D vector1, QVector2D vector2);
 
 	/// Returns a module of the vector product of two given vectors
-	static qreal vectorProduct(const QVector2D &vector1, const QVector2D &vector2);
+	static qreal vectorProduct(QVector2D vector1, QVector2D vector2);
 
 	/// Returns a vector that corresponds to a projection of vector 'projection' on a vector 'target'
-	static QVector2D projection(const QVector2D &projected, const QVector2D &target);
+	static QVector2D projection(QVector2D projected, QVector2D target);
 
 	/// Performs vector rotation and returns the resulting vector.
 	/// Vector is rotated by multiplying the rotation matrix.
-	static QVector2D rotateVector(const QVector2D &vector, qreal angleInDegrees);
+	static QVector2D rotateVector(QVector2D vector, qreal angleInDegrees);
 
 	/// Returns an intersection point of the given line and a normal to a given line passing through the given point
-	static QPointF normalPoint(const QLineF &line, const QPointF &point);
+	static QPointF normalPoint(const QLineF &line, QPointF point);
 
 	/// Returns a normal to a given line passing through the given point
-	static QLineF normalLine(const QLineF &line, const QPointF &point);
+	static QLineF normalLine(const QLineF &line, QPointF point);
 
 	/// Returns a distance from a given point to a given line
-	static qreal distance(const QLineF &line, const QPointF &point);
+	static qreal distance(const QLineF &line, QPointF point);
 
 	/// Returns a distance between two points
-	static qreal distance(const QPointF &point1, const QPointF &point2);
+	static qreal distance(QPointF point1, QPointF point2);
 
 	/// Returns if given line intersects given painter path
 	static bool intersects(const QLineF &line, const QPainterPath &path);
@@ -66,10 +66,10 @@ public:
 	static QVector2D directionVectorRad(qreal angleInRadians);
 
 	/// Returns a tangent line slope
-	static qreal tangentLineAt(const QPainterPath &path, const QPointF &point);
+	static qreal tangentLineAt(const QPainterPath &path, QPointF point);
 
 	/// Returns a percentage on a given path for a given point
-	static qreal percentageAt(const QPainterPath &path, const QPointF &point);
+	static qreal percentageAt(const QPainterPath &path, QPointF point);
 
 	/// Checks if given path consists of points (very short lines) and if
 	/// it is returns this points list
@@ -79,19 +79,19 @@ public:
 	static qreal square(const QPolygonF &polygon);
 
 	/// Returns QLineF instance with very big length for simulating the real line
-	static QLineF veryLongLine(const QPointF &pointOnLine, const QVector2D &directionVector);
+	static QLineF veryLongLine(QPointF pointOnLine, QVector2D directionVector);
 
 	/// Returns a list of points in whitch the given line intersects the given path with the given precision
 	static QList<QPointF> intersection(const QLineF &line, const QPainterPath &path, qreal eps = EPS);
 
 	/// Returns the point in the given list that is closest to the given point
-	static QPointF closestPointTo(const QList<QPointF> &points, const QPointF &point);
+	static QPointF closestPointTo(const QList<QPointF> &points, QPointF point);
 
 	/// Returns if the given point belongs to the given segment with the given precision.
-	static bool belongs(const QPointF &point, const QLineF &segment, qreal eps = EPS);
+	static bool belongs(QPointF point, const QLineF &segment, qreal eps = EPS);
 
 	/// Returns if the given point belongs to the given path with the given precision.
-	static bool belongs(const QPointF &point, const QPainterPath &path, qreal eps = EPS);
+	static bool belongs(QPointF point, const QPainterPath &path, qreal eps = EPS);
 
 	/// Returns if the given line belongs to the given path with the given precision.
 	static bool belongs(const QLineF &line, const QPainterPath &path, qreal eps = EPS);

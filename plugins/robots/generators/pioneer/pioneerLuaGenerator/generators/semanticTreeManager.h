@@ -121,7 +121,7 @@ private:
 	void reportError(const QString &message);
 
 	/// Reeturns true if a given node is a prototype of given clone info (maybe indirect).
-	bool isParent(generatorBase::semantics::NonZoneNode *node, const CloneInfo &cloneInfo) const;
+	bool isParent(generatorBase::semantics::NonZoneNode *node, pioneer::lua::SemanticTreeManager::CloneInfo cloneInfo) const;
 
 	/// Semantic tree on which we shall work.
 	generatorBase::semantics::SemanticTree &mSemanticTree;

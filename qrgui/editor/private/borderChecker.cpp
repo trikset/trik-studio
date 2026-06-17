@@ -27,7 +27,7 @@ BorderChecker::BorderChecker(const NodeElement* const node)
 {
 }
 
-bool BorderChecker::checkLowerBorder(const QPointF &point) const
+bool BorderChecker::checkLowerBorder(QPointF point) const
 {
 	const qreal checkingPointX = point.x();
 	const qreal checkingPointY = point.y();
@@ -37,7 +37,7 @@ bool BorderChecker::checkLowerBorder(const QPointF &point) const
 			&& (checkingPointY <= rc.y() + rc.height() + mYHor);
 }
 
-bool BorderChecker::checkUpperBorder(const QPointF &point) const
+bool BorderChecker::checkUpperBorder(QPointF point) const
 {
 	const qreal checkingPointX = point.x();
 	const qreal checkingPointY = point.y();
@@ -47,7 +47,7 @@ bool BorderChecker::checkUpperBorder(const QPointF &point) const
 			&& (checkingPointY <= rc.y() + mYHor);
 }
 
-bool BorderChecker::checkLeftBorder(const QPointF &point) const
+bool BorderChecker::checkLeftBorder(QPointF point) const
 {
 	const qreal checkingPointX = point.x();
 	const qreal checkingPointY = point.y();
@@ -57,7 +57,7 @@ bool BorderChecker::checkLeftBorder(const QPointF &point) const
 			&& (checkingPointY <= rc.y() + rc.height() - mYVert);
 }
 
-bool BorderChecker::checkRightBorder(const QPointF &point) const
+bool BorderChecker::checkRightBorder(QPointF point) const
 {
 	const qreal checkingPointX = point.x();
 	const qreal checkingPointY = point.y();
@@ -67,14 +67,14 @@ bool BorderChecker::checkRightBorder(const QPointF &point) const
 			&& (checkingPointY <= rc.y() + rc.height() - mYVert);
 }
 
-bool BorderChecker::checkNoBorderX(const QPointF &point, qreal y) const
+bool BorderChecker::checkNoBorderX(QPointF point, qreal y) const
 {
 	const qreal checkingPointY = point.y();
 	const QRectF rc = mNode->boundingRect();
 	return (checkingPointY >= rc.y() + y) && (checkingPointY <= rc.y() + rc.height() - y);
 }
 
-bool BorderChecker::checkNoBorderY(const QPointF &point, qreal x) const
+bool BorderChecker::checkNoBorderY(QPointF point, qreal x) const
 {
 	const qreal checkingPointX = point.x();
 	const QRectF rc = mNode->boundingRect();

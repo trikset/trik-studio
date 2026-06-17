@@ -92,7 +92,7 @@ public:
 	Id newLogicalId();
 
 	/// Sets to the \a position graphical property stored by key "position".
-	void setPos(const QPointF &position);
+	void setPos(QPointF position);
 
 	/// Returns target of the explosion (to which expands this element).
 	const Id &explosionTarget() const;

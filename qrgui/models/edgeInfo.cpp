@@ -157,7 +157,7 @@ Id EdgeInfo::newLogicalId()
 	return mInfo.newLogicalId();
 }
 
-void EdgeInfo::setPos(const QPointF &position)
+void EdgeInfo::setPos(QPointF position)
 {
 	return mInfo.setPos(position);
 }

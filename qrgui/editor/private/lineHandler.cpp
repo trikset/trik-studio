@@ -36,7 +36,7 @@ LineHandler::LineHandler(EdgeElement *edge
 {
 }
 
-int LineHandler::startMovingEdge(const QPointF &pos)
+int LineHandler::startMovingEdge(QPointF pos)
 {
 	startReshape();
 
@@ -57,7 +57,7 @@ void LineHandler::rejectMovingEdge()
 	mEdge->setLine(mSavedLine);
 }
 
-void LineHandler::moveEdge(const QPointF &pos)
+void LineHandler::moveEdge(QPointF pos)
 {
 	if (!mEdge->isLoop() || (mDragType == 0) || (mDragType == mEdge->line().count() - 1)) {
 		handleEdgeMove(pos);
@@ -68,7 +68,7 @@ void LineHandler::moveEdge(const QPointF &pos)
 	}
 }
 
-void LineHandler::handleEdgeMove(const QPointF &)
+void LineHandler::handleEdgeMove(QPointF )
 {
 }
 
@@ -252,7 +252,7 @@ QPointF LineHandler::portArrangePoint(const NodeElement *node) const
 	}
 }
 
-int LineHandler::definePoint(const QPointF &pos) const
+int LineHandler::definePoint(QPointF pos) const
 {
 	const QPolygonF line = mEdge->line();
 	for (int i = 0; i < line.size(); ++i)
@@ -263,7 +263,7 @@ int LineHandler::definePoint(const QPointF &pos) const
 	return -1;
 }
 
-int LineHandler::defineSegment(const QPointF &pos) const
+int LineHandler::defineSegment(QPointF pos) const
 {
 	QPainterPathStroker ps;
 	const QPolygonF line = mEdge->line();
@@ -336,7 +336,7 @@ void LineHandler::alignToGrid()
 {
 }
 
-bool LineHandler::checkPort(const QPointF &pos, bool isStart) const
+bool LineHandler::checkPort(QPointF pos, bool isStart) const
 {
 	const NodeElement * const node = mEdge->getNodeAt(pos, isStart);
 	if (!node) {
@@ -417,7 +417,7 @@ bool LineHandler::isReshapeStarted() const
 	return mReshapeStarted;
 }
 
-QList<ContextMenuAction *> LineHandler::extraActions(const QPointF &pos)
+QList<ContextMenuAction *> LineHandler::extraActions(QPointF pos)
 {
 	Q_UNUSED(pos)
 	return QList<ContextMenuAction *>();

@@ -45,7 +45,7 @@ ConsoleDock::ConsoleDock(const QString &title, QWidget *parent)
 	setWidget(mOutput);
 	mOutput->setReadOnly(false);
 	mOutput->setContextMenuPolicy(Qt::CustomContextMenu);
-	connect(mOutput, &QPlainTextEdit::customContextMenuRequested, this, [&](const QPoint &pos){
+	connect(mOutput, &QPlainTextEdit::customContextMenuRequested, this, [&](QPoint pos){
 		QMenu *menu = mOutput->createStandardContextMenu();
 		QAction *resetAction = menu->addAction(tr("Reset shell"));
 		connect(resetAction, &QAction::triggered, this, [&](bool){

@@ -43,7 +43,7 @@ public Q_SLOTS:
 	void unselect();
 
 	/// Sets size of tools in pallete.
-	void setSize(const QSize &size);
+	void setSize(QSize size);
 
 private:
 	QScopedPointer<QAction> mCursorAction;

@@ -32,7 +32,7 @@ class ROBOTS_UTILS_EXPORT ArcObject : public CanvasObject
 
 public:
 	explicit ArcObject(QObject *parent = nullptr);
-	ArcObject(const QRect &rect
+	ArcObject(QRect rect
 			, int startAngle
 			, int spanAngle
 			, const QColor &color = Qt::black
@@ -43,13 +43,13 @@ public:
 	QPoint ellipseCenter() const;
 
 	/// Sets the coordinates of the central point of arc`s ellipse  in pixels.
-	void setEllipseCenter(const QPoint &center);
+	void setEllipseCenter(QPoint center);
 
 	/// Returns the bounding rectangle of arc`s ellipse.
 	QRect ellipseRect() const;
 
 	/// Returns the bounding rectangle of arc`s ellipse.
-	void setEllipseRect(const QRect &rect);
+	void setEllipseRect(QRect rect);
 
 	/// Returns the angle on ellipse where this arc starts.
 	int startAngle() const;
@@ -67,7 +67,7 @@ public:
 	/// @warning This is not the exact bounding rectangle of the arc.
 	QRect boundingRect() const;
 
-	void paint(QPainter *painter, const QRect &outputRect) override;
+	void paint(QPainter *painter, QRect outputRect) override;
 	QJsonObject toJson() const override;
 
 private:

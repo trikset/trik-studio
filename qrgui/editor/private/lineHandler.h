@@ -36,13 +36,13 @@ public:
 		, const GraphicalModelAssistInterface &graphicalModel);
 
 	/// Start reshape links, determine whether user tries to move point, segment or port of the link
-	int startMovingEdge(const QPointF &pos);
+	int startMovingEdge(QPointF pos);
 
 	/// Cancel link move
 	void rejectMovingEdge();
 
 	/// For non-loop link delegate move processing to type-specific line handler, otherwise do nothing
-	void moveEdge(const QPointF &pos);
+	void moveEdge(QPointF pos);
 
 	/// Reconnect, lay out and execute reshape command
 	void endMovingEdge();
@@ -80,13 +80,13 @@ public:
 	bool isReshapeStarted() const;
 
 	/// @return List of context menu actions available for a particular link type
-	virtual QList<ContextMenuAction *> extraActions(const QPointF &pos);
+	virtual QList<ContextMenuAction *> extraActions(QPointF pos);
 
 	/// Provide undo-redo support for context actions
 	void connectAction(ContextMenuAction *action, QObject *receiver, char const *slot) const;
 
 	/// @return Number of segment under position pos (if there is no such segment, return -1)
-	int defineSegment(const QPointF &pos) const;
+	int defineSegment(QPointF pos) const;
 
 protected Q_SLOTS:
 	/// Remove all intermediate points
@@ -111,7 +111,7 @@ protected:
 	void deleteLoop(QPolygonF &line, int startPos);
 
 	/// @return true if a link can connect to some port at the position pos (in link's coordinates)
-	bool checkPort(const QPointF &pos, bool isStart) const;
+	bool checkPort(QPointF pos, bool isStart) const;
 
 	/// @return true if a node at the current link end is not the same as the link's src/dst (depends on isStart value)
 	bool nodeChanged(bool isStart) const;
@@ -122,10 +122,10 @@ protected:
 	void connectAndArrange(bool reconnectSrc, bool reconnectDst);
 
 	/// @return Number of point under position pos (if there is no such point, return -1)
-	int definePoint(const QPointF &pos) const;
+	int definePoint(QPointF pos) const;
 
 	/// Should be redefined in subclasses to handle mouse move events. Default implementation does nothing.
-	virtual void handleEdgeMove(const QPointF &pos);
+	virtual void handleEdgeMove(QPointF pos);
 
 	/// Highlight ports of node under link's end
 	void highlightPorts(bool isStart);

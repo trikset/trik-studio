@@ -78,9 +78,9 @@ public Q_SLOTS:
 	/// @arg autoScaleDelay is interval on ms for autoscaling the plot
 	/// @arg textInfoUpdateDelay is interval in ms for info
 	void configureUpdateIntervals(
-			const int &readSensorsInterval
-			, const int &autoScaleInterval
-			, const int &textUpdaterInterval
+			int readSensorsInterval
+			, int autoScaleInterval
+			, int textUpdaterInterval
 	);
 
 protected:

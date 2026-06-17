@@ -26,7 +26,7 @@ static const QString NON_TYPED = "NonTyped";
 struct PointPortInfo
 {
 public:
-	PointPortInfo(const QPointF &point, bool scalesX, bool scalesY, int initWidth, int initHeight, const QString &type)
+	PointPortInfo(QPointF point, bool scalesX, bool scalesY, int initWidth, int initHeight, const QString &type)
 		: point(point), scalesX(scalesX), scalesY(scalesY), initWidth(initWidth), initHeight(initHeight), type(type)
 	{
 	}
@@ -97,7 +97,7 @@ public:
 struct CircularPortInfo
 {
 public:
-	CircularPortInfo(const QPointF &center, qreal radius, bool scalesX, bool scalesY, int initWidth
+	CircularPortInfo(QPointF center, qreal radius, bool scalesX, bool scalesY, int initWidth
 			, int initHeight, const QString &type)
 		: center(center), radius(radius), scalesX(scalesX), scalesY(scalesY)
 		, initWidth(initWidth), initHeight(initHeight), type(type)

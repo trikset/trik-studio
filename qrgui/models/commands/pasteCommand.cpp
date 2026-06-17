@@ -27,7 +27,7 @@ using namespace qReal::commands;
 
 PasteCommand::PasteCommand(const models::Models &models
 		, bool isGraphicalCopy
-		, const QPointF &mousePosition
+		, QPointF mousePosition
 		, const Id &rootGraphicalId)
 	: CreateElementsCommand(models, {})
 	, mIsGraphicalCopy(isGraphicalCopy)
@@ -69,7 +69,7 @@ bool PasteCommand::isEmpty() const
 }
 
 QHash<qReal::Id, qReal::Id> PasteCommand::prepareNodes(models::GraphicalModelAssistApi &graphicalApi
-		, QList<NodeInfo> &nodesData, const QPointF &offset)
+		, QList<NodeInfo> &nodesData, QPointF offset)
 {
 	QList<NodeInfo> filteredNodes;
 	QHash<Id, Id> copiedIds;
@@ -102,7 +102,7 @@ QHash<qReal::Id, qReal::Id> PasteCommand::prepareNodes(models::GraphicalModelAss
 	return copiedIds;
 }
 
-void PasteCommand::prepareEdge(EdgeInfo &edgeData, const QPointF &offset, const QHash<Id, Id> &copiedIds)
+void PasteCommand::prepareEdge(EdgeInfo &edgeData, QPointF offset, const QHash<Id, Id> &copiedIds)
 {
 	edgeData.newId();
 	if (!mIsGraphicalCopy) {
@@ -127,14 +127,14 @@ void PasteCommand::pullDataFromClipboard(QList<NodeInfo> &nodesData, QList<EdgeI
 	stream >> edgesData;
 }
 
-QPointF PasteCommand::newPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, const QPointF &offset) const
+QPointF PasteCommand::newPos(const NodeInfo &nodeData, const QHash<Id, Id> &copiedIds, QPointF offset) const
 {
 	return nodeData.position() + (copiedIds.contains(nodeData.parent()) ?
 			mGraphicalApi.position(copiedIds[nodeData.parent()]) : offset);
 }
 
 QPointF PasteCommand::newGraphicalPos(const NodeInfo &nodeData
-		, const QHash<Id, Id> &copiedIds, const QPointF &offset) const
+		, const QHash<Id, Id> &copiedIds, QPointF offset) const
 {
 	return nodeData.position() + (copiedIds.contains(nodeData.parent()) ? QPointF() : offset);
 }

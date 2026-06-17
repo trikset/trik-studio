@@ -47,7 +47,7 @@ PortHandler::~PortHandler()
 	qDeleteAll(mCircularPorts);
 }
 
-qreal PortHandler::minDistanceFromLinePort(int linePortNumber, const QPointF &location) const
+qreal PortHandler::minDistanceFromLinePort(int linePortNumber, QPointF location) const
 {
 	const QLineF linePort = transformPortForNodeSize(mLinePorts[linePortNumber]);
 
@@ -67,12 +67,12 @@ qreal PortHandler::minDistanceFromLinePort(int linePortNumber, const QPointF &lo
 	}
 }
 
-qreal PortHandler::distanceFromPointPort(int pointPortNumber, const QPointF &location) const
+qreal PortHandler::distanceFromPointPort(int pointPortNumber, QPointF location) const
 {
 	return QLineF(transformPortForNodeSize(mPointPorts[pointPortNumber]), location).length();
 }
 
-qreal PortHandler::nearestPointOfLinePort(int linePortNumber, const QPointF &location) const
+qreal PortHandler::nearestPointOfLinePort(int linePortNumber, QPointF location) const
 {
 	qreal nearestPointOfLinePort = 0;
 	QLineF linePort = transformPortForNodeSize(mLinePorts[linePortNumber]);
@@ -95,7 +95,7 @@ qreal PortHandler::nearestPointOfLinePort(int linePortNumber, const QPointF &loc
 	return nearestPointOfLinePort;
 }
 
-qreal PortHandler::pointByCircularPortAngle(int circularPortNumber, const QPointF &location) const
+qreal PortHandler::pointByCircularPortAngle(int circularPortNumber, QPointF location) const
 {
 	StatCircular::CircularPort circularPort = transformPortForNodeSize(mCircularPorts[circularPortNumber]);
 	const qreal x = circularPort.x;
@@ -135,7 +135,7 @@ qreal PortHandler::pointByCircularPortAngle(int circularPortNumber, const QPoint
 	return angleInDegrees;
 }
 
-QPointF PortHandler::coordinateOfCircular(int circularPortNumber, const QPointF &location) const
+QPointF PortHandler::coordinateOfCircular(int circularPortNumber, QPointF location) const
 {
 	StatCircular::CircularPort circularPort = transformPortForNodeSize(mCircularPorts[circularPortNumber]);
 	const qreal a = circularPort.x;
@@ -230,7 +230,7 @@ int PortHandler::portNumber(qreal id)
 	return qFloor(id);
 }
 
-const QPointF PortHandler::nearestPort(const QPointF &location, const QStringList &types) const
+const QPointF PortHandler::nearestPort(QPointF location, const QStringList &types) const
 {
 	// location in scene coords, so we map it to mNode.
 	const QPointF locationInLocalCoords = mNode->mapFromScene(location);
@@ -273,7 +273,7 @@ const QPointF PortHandler::nearestPort(const QPointF &location, const QStringLis
 	return location;
 }
 
-qreal PortHandler::pointPortId(const QPointF &location, const QStringList &types) const
+qreal PortHandler::pointPortId(QPointF location, const QStringList &types) const
 {
 	for (int pointPortNumber = 0; pointPortNumber < mPointPorts.count(); pointPortNumber++) {
 		const StatPoint * const pointPort = mPointPorts.at(pointPortNumber);
@@ -287,7 +287,7 @@ qreal PortHandler::pointPortId(const QPointF &location, const QStringList &types
 	return nonexistentPortId;
 }
 
-qreal PortHandler::linePortId(const QPointF &location, const QStringList &types) const
+qreal PortHandler::linePortId(QPointF location, const QStringList &types) const
 {
 	for (int linePortNumber = 0; linePortNumber < mLinePorts.count(); linePortNumber++) {
 		const StatLine * const linePort = mLinePorts.at(linePortNumber);
@@ -314,7 +314,7 @@ qreal PortHandler::linePortId(const QPointF &location, const QStringList &types)
 	return nonexistentPortId;
 }
 
-qreal PortHandler::circularPortId(const QPointF &location, const QStringList &types) const
+qreal PortHandler::circularPortId(QPointF location, const QStringList &types) const
 {
 	for (int circularPortNumber = 0; circularPortNumber < mCircularPorts.count(); circularPortNumber++) {
 		const StatCircular * const circularPort = mCircularPorts.at(circularPortNumber);
@@ -340,7 +340,7 @@ qreal PortHandler::circularPortId(const QPointF &location, const QStringList &ty
 	return nonexistentPortId;
 }
 
-QPair<int, qreal> PortHandler::nearestPointPortNumberAndDistance(const QPointF &location
+QPair<int, qreal> PortHandler::nearestPointPortNumberAndDistance(QPointF location
 		, const QStringList &types) const
 {
 	qreal minDistance = -1; // just smth negative
@@ -361,7 +361,7 @@ QPair<int, qreal> PortHandler::nearestPointPortNumberAndDistance(const QPointF &
 	return qMakePair(minDistancePointPortNumber, minDistance);
 }
 
-QPair<int, qreal> PortHandler::nearestLinePortNumberAndDistance(const QPointF &location, const QStringList &types) const
+QPair<int, qreal> PortHandler::nearestLinePortNumberAndDistance(QPointF location, const QStringList &types) const
 {
 	qreal minDistance = -1; // just smth negative
 
@@ -381,7 +381,7 @@ QPair<int, qreal> PortHandler::nearestLinePortNumberAndDistance(const QPointF &l
 	return qMakePair(minDistanceLinePortNumber, minDistance);
 }
 
-QPair<int, qreal> PortHandler::nearestCircularPortNumberAndDistance(const QPointF &location
+QPair<int, qreal> PortHandler::nearestCircularPortNumberAndDistance(QPointF location
 		, const QStringList &types) const
 {
 	qreal minDistance = -1; // just smth negative
@@ -402,7 +402,7 @@ QPair<int, qreal> PortHandler::nearestCircularPortNumberAndDistance(const QPoint
 	return qMakePair(minDistanceCircularPortNumber, minDistance);
 }
 
-qreal PortHandler::minDistanceFromCircularPort(int circularPortNumber, const QPointF &location) const
+qreal PortHandler::minDistanceFromCircularPort(int circularPortNumber, QPointF location) const
 {
 	StatCircular::CircularPort circularPort = transformPortForNodeSize(mCircularPorts[circularPortNumber]);
 	const qreal x = circularPort.x;
@@ -412,7 +412,7 @@ qreal PortHandler::minDistanceFromCircularPort(int circularPortNumber, const QPo
 	return minDistance;
 }
 
-qreal PortHandler::portId(const QPointF &location, const QStringList &types) const
+qreal PortHandler::portId(QPointF location, const QStringList &types) const
 {
 	if (mPointPorts.empty() && mLinePorts.empty() && mCircularPorts.empty()) {
 		return nonexistentPortId;

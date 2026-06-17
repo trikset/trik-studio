@@ -44,7 +44,7 @@ public:
 
 	/// @todo: use ElementInfo here.
 	Id createElement(const Id &parent, const Id &id, const Id &logicalId
-			, bool isFromLogicalModel, const QString &name, const QPointF &position);
+			, bool isFromLogicalModel, const QString &name, QPointF position);
 
 	/// Stacks item element before sibling (they should have the same parent)
 	void stackBefore(const Id &element, const Id &sibling);

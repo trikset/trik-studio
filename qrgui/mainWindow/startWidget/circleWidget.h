@@ -24,7 +24,7 @@ class CircleWidget : public QWidget
 {
 	Q_OBJECT
 public:
-	CircleWidget(const QSize &size, const QString &icon, QWidget *parent = nullptr);
+	CircleWidget(QSize size, const QString &icon, QWidget *parent = nullptr);
 
 protected:
 	virtual void paintEvent(QPaintEvent *) override;

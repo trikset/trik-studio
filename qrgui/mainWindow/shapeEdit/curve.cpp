@@ -16,7 +16,7 @@
 
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 
-Curve::Curve(const QPointF &start, const QPointF &end, const QPointF &c1)
+Curve::Curve(QPointF start, QPointF end, QPointF c1)
 		: Path(QPainterPath(start))
 {
 	setPen(QPen(Qt::gray));

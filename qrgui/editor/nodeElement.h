@@ -75,7 +75,7 @@ public:
 
 	void updateData() override;
 	void setGeometry(const QRectF &geom);
-	void setPos(const QPointF &pos);
+	void setPos(QPointF pos);
 	void setPos(qreal x, qreal y);
 
 	/// Aligning the element to grid
@@ -97,11 +97,11 @@ public:
 	/// Returns port ID in terms of described in 'Useful information' in PortHandler class.
 	/// @param location For this point port will be seen. Location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return Port ID in terms of described in 'Useful information' in PortHandler class.
-	qreal portId(const QPointF &location, const QStringList &types) const;
+	qreal portId(QPointF location, const QStringList &types) const;
 
 	/// Returns a closest to the given point point on the port (line or point) on this element.
 	/// Location is assumed to be in SCENE coordinates! The result is in scene coordinates too.
-	QPointF closestPortPoint(const QPointF &location, const QStringList &types) const;
+	QPointF closestPortPoint(QPointF location, const QStringList &types) const;
 
 	/// @return List of edges connected to the node
 	QList<EdgeElement *> getEdges() const;
@@ -212,7 +212,7 @@ private:
 	 * @param newContents Recommendation for new shape of node.
 	 * @param newPos Recommendation for new position of node.
 	 */
-	void resize(const QRectF &newContents, const QPointF &newPos, bool needResizeParent = true);
+	void resize(const QRectF &newContents, QPointF newPos, bool needResizeParent = true);
 
 	/**
 	 * Calls resize(QRectF newContents, QPointF newPos) with
@@ -245,7 +245,7 @@ private:
 	 * Recalculates mHighlightedNode according to current mouse scene position.
 	 * @param mouseScenePos Current mouse scene position.
 	 */
-	void recalculateHighlightedNode(const QPointF &mouseScenePos);
+	void recalculateHighlightedNode(QPointF mouseScenePos);
 	QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
 
 	void setLinksVisible(bool);
@@ -264,7 +264,7 @@ private:
 
 	bool compareDynamicLabels(const QString &labelsPack1, const QString &labelsPack2) const;
 
-	qReal::commands::AbstractCommand *changeParentCommand(const Id &newParent, const QPointF &position) const;
+	qReal::commands::AbstractCommand *changeParentCommand(const Id &newParent, QPointF position) const;
 
 	const NodeElementType &mType;
 

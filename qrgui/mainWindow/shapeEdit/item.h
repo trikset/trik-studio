@@ -61,7 +61,7 @@ public:
 	virtual void setItemZValue(int zValue);
 	int itemZValue();
 	static int sign(int x);
-	static qreal length(const QPointF &point1, const QPointF &point2);
+	static qreal length(QPointF point1, QPointF point2);
 	virtual QRectF calcNecessaryBoundingRect() const;
 	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) = 0;
 	virtual void drawExtractionForItem(QPainter* painter);
@@ -73,18 +73,18 @@ public:
 	void setListScalePoint(const QList<QPair<ScalingPointState, QColor> > &list);
 
 	void initListScalePoint();
-	void calcForChangeScalingState(const QPointF&pos, const QPointF& point1, const QPointF& point2, int correction);
+	void calcForChangeScalingState(QPointF pos, QPointF point1, QPointF point2, int correction);
 	virtual void changeScalingPointState(qreal x, qreal y);
 	ScalingPointState getScalingPointState() const;
 	QColor changeScaleColor(const QPair<ScalingPointState, QColor> &point);
 	void setScalingPointColor();
 
 	//for save to xml
-	QString setScaleForDoc(int i, const QRect &rect);
+	QString setScaleForDoc(int i, QRect rect);
 	QString setSingleScaleForDoc(int i, int x, int y);
 	virtual void setXandY(QDomElement& dom, const QRectF &rect);
 
-	QPair<QDomElement, Item::DomElementTypes> generateDom(QDomDocument &document, const QPoint &topLeftPicture);
+	QPair<QDomElement, Item::DomElementTypes> generateDom(QDomDocument &document, QPoint topLeftPicture);
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
 			, const QPoint &topLeftPicture) = 0;
 

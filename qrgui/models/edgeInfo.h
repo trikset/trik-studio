@@ -66,7 +66,7 @@ public:
 
 	Id newLogicalId();
 
-	void setPos(const QPointF &position);
+	void setPos(QPointF position);
 
 	const Id &explosionTarget() const;
 

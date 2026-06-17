@@ -28,15 +28,15 @@ public:
 	ChangeParentCommand(models::LogicalModelAssistApi &logicalApi
 			, models::GraphicalModelAssistApi &graphicalApi
 			, bool isLogical, const Id &id, const Id &oldParent
-			, const Id &newParent, const QPointF &oldPosition
-			, const QPointF &newPosition);
+			, const Id &newParent, QPointF oldPosition
+			, QPointF newPosition);
 
 protected:
 	bool execute();
 	bool restoreState();
 
 private:
-	void changeParent(const Id &parent, const QPointF &position);
+	void changeParent(const Id &parent, QPointF position);
 
 	models::LogicalModelAssistApi &mLogicalApi;
 	models::GraphicalModelAssistApi &mGraphicalApi;

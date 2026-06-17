@@ -143,7 +143,7 @@ void TcpRobotCommunicator::disconnect()
 	QMetaObject::invokeMethod(mWorker.data(), &TcpRobotCommunicatorWorker::disconnectConnection);
 }
 
-void TcpRobotCommunicator::onMessageFromRobot(const MessageKind &messageKind, const QString &message)
+void TcpRobotCommunicator::onMessageFromRobot(utils::robotCommunication::MessageKind messageKind, const QString &message)
 {
 	switch (messageKind) {
 	case MessageKind::error:

@@ -20,8 +20,8 @@ using namespace utils;
 NxtInputDevice::NxtInputDevice(
 		utils::robotCommunication::RobotCommunicator &robotCommunicator
 		, const kitBase::robotModel::PortInfo &port
-		, const enums::lowLevelSensorType::SensorTypeEnum &lowLevelSensorType
-		, const enums::sensorMode::SensorModeEnum &sensorMode)
+		, enums::lowLevelSensorType::SensorTypeEnum lowLevelSensorType
+		, enums::sensorMode::SensorModeEnum sensorMode)
 	: mRobotCommunicator(robotCommunicator)
 	, mLowLevelPort(port.name().at(0).toLatin1() - '1')
 	, mLowLevelSensorType(lowLevelSensorType)

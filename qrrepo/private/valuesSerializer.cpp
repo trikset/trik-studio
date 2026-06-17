@@ -134,7 +134,7 @@ QString ValuesSerializer::serializeQVariant(const QVariant &v)
 	}
 }
 
-QString ValuesSerializer::serializeQPointF(const QPointF &p)
+QString ValuesSerializer::serializeQPointF(QPointF p)
 {
 	return QString::number(p.x()) + ", " + QString::number(p.y());
 }

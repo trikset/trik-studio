@@ -27,7 +27,7 @@ class Arrow : public QWidget
 	Q_OBJECT
 
 public:
-	Arrow(const QPoint &sourcePoint, const QPoint &destPoint, int lifeTime, QWidget *parent);
+	Arrow(QPoint sourcePoint, QPoint destPoint, int lifeTime, QWidget *parent);
 
 protected:
 	void paintEvent(QPaintEvent *);

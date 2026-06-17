@@ -40,7 +40,7 @@ Q_SIGNALS:
 private Q_SLOTS:
 	void highlightElement(QListWidgetItem * const item);
 	void copyCurrentItem();
-	void showContextMenu(const QPoint &pos);
+	void showContextMenu(QPoint pos);
 
 private:
 

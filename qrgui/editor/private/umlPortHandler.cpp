@@ -25,7 +25,7 @@ UmlPortHandler::UmlPortHandler(NodeElement * const node)
 }
 
 void UmlPortHandler::handleMoveEvent(const bool leftPressed
-		, QPointF &pos, const QPointF &scenePos
+		, QPointF &pos, QPointF scenePos
 		, NodeElement *&parentNode)
 {
 	if (!mNode || !leftPressed) {
@@ -69,7 +69,7 @@ void UmlPortHandler::handleMoveEvent(const bool leftPressed
 
 void UmlPortHandler::handleHorizontalBorders(
 		const NodeElement * const tmpNode, const NodeElement * const parentNode
-		, const QPointF &pos, const QPointF &posInItem) const
+		, QPointF pos, QPointF posInItem) const
 {
 	QPointF newPos = pos;
 	const BorderChecker parentNodeBorderChecker(parentNode);

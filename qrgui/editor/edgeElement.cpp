@@ -199,7 +199,7 @@ void EdgeElement::paintEdge(QPainter *painter, const QStyleOptionGraphicsItem *o
 	painter->restore();
 }
 
-int EdgeElement::defineSegment(const QPointF &scenePos) const
+int EdgeElement::defineSegment(QPointF scenePos) const
 {
 	return mHandler->defineSegment(mapFromScene(scenePos));
 }
@@ -464,7 +464,7 @@ void EdgeElement::createLoopEdge() // nice implementation makes sense after #602
 	mIsLoop = true;
 }
 
-QPointF EdgeElement::boundingRectIndent(const QPointF &point, EdgeElement::NodeSide direction)
+QPointF EdgeElement::boundingRectIndent(QPointF point, EdgeElement::NodeSide direction)
 {
 	QPointF newPoint;
 	QRectF bounds = mSrc->boundingRect();
@@ -520,7 +520,7 @@ void EdgeElement::searchNextPort()
 	}
 }
 
-bool EdgeElement::isNeighbor(const EdgeElement::NodeSide &startSide, const EdgeElement::NodeSide &endSide) const
+bool EdgeElement::isNeighbor(EdgeElement::NodeSide startSide, EdgeElement::NodeSide endSide) const
 {
 	return ((startSide == rotateRight(endSide)) || (endSide == rotateRight(startSide)));
 }
@@ -610,7 +610,7 @@ void EdgeElement::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
 // NOTE: using don`t forget about possible nodeElement`s overlaps (different Z-value)
 // connecting to the innermost node at the point
-NodeElement *EdgeElement::getNodeAt(const QPointF &position, bool isStart)
+NodeElement *EdgeElement::getNodeAt(QPointF position, bool isStart)
 {
 	QPainterPath circlePath;
 	const int searchAreaRadius = SettingsManager::value("IndexGrid", 25).toInt() / 2;
@@ -737,7 +737,7 @@ void EdgeElement::breakPointUnpressed()
 	mBreakPointPressed = false;
 }
 
-void EdgeElement::breakPointHandler(const QPointF &pos)
+void EdgeElement::breakPointHandler(QPointF pos)
 {
 	mBreakPointPressed = true;
 	if (mLine.startsWith(pos.toPoint())) {
@@ -912,12 +912,12 @@ QStringList EdgeElement::toPortTypes() const
 	return mType.toPortTypes();
 }
 
-void EdgeElement::placeStartTo(const QPointF &place)
+void EdgeElement::placeStartTo(QPointF place)
 {
 	mLine[0] = place;
 }
 
-void EdgeElement::placeEndTo(const QPointF &place)
+void EdgeElement::placeEndTo(QPointF place)
 {
 	prepareGeometryChange();
 	mLine[mLine.size() - 1] = place;
@@ -1065,7 +1065,7 @@ void EdgeElement::setPos(qreal x, qreal y)
 	setPos(QPointF(x, y));
 }
 
-void EdgeElement::setPos(const QPointF &pos)
+void EdgeElement::setPos(QPointF pos)
 {
 	if (qIsNaN(pos.x()) || qIsNaN(pos.y())) {
 		Element::setPos(QPointF());

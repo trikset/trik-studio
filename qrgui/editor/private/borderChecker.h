@@ -45,25 +45,25 @@ public:
 	* Checks is point belongs to NodeElement lower border.
 	* @param point Point that is checked to belong to lower border.
 	*/
-	bool checkLowerBorder(const QPointF &point) const;
+	bool checkLowerBorder(QPointF point) const;
 	/**
 	* Checks is point belongs to NodeElement upper border.
 	* @param point Point that is checked to belong to upper border.
 	*/
-	bool checkUpperBorder(const QPointF &point) const;
+	bool checkUpperBorder(QPointF point) const;
 	/**
 	* Checks is point belongs to NodeElement left border.
 	* @param point Point that is checked to belong to upper border.
 	*/
-	bool checkLeftBorder(const QPointF &point) const;
+	bool checkLeftBorder(QPointF point) const;
 	/**
 	* Checks is point belongs to NodeElement right border.
 	* @param point Point that is checked to belong to right border.
 	*/
-	bool checkRightBorder(const QPointF &point) const;
+	bool checkRightBorder(QPointF point) const;
 
-	bool checkNoBorderX(const QPointF &point, qreal y) const; // TODO: rename
-	bool checkNoBorderY(const QPointF &point, qreal x) const;
+	bool checkNoBorderX(QPointF point, qreal y) const; // TODO: rename
+	bool checkNoBorderY(QPointF point, qreal x) const;
 
 private:
 	/// Node that is actually dealt with.

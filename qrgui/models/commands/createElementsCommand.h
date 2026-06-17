@@ -34,7 +34,7 @@ public:
 
 	/// @todo: Bad method, required only for linkers. Get rid of it.
 	/// Modifies command setting new creation position for the first element info given.
-	void setNewPosition(const QPointF &position);
+	void setNewPosition(QPointF position);
 
 protected:
 	void setElements(const QList<ElementInfo> &elements);

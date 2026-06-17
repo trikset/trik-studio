@@ -25,7 +25,7 @@ RectangleObject::RectangleObject(QObject *parent)
 {
 }
 
-RectangleObject::RectangleObject(const QRect &shape, const QColor &color, int thickness, bool filled, QObject *parent)
+RectangleObject::RectangleObject(QRect shape, const QColor &color, int thickness, bool filled, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mShape(shape)
 	, mFilled(filled)
@@ -52,7 +52,7 @@ void RectangleObject::setFilled(bool filled)
 	mFilled = filled;
 }
 
-void RectangleObject::paint(QPainter *painter, const QRect &outputRect)
+void RectangleObject::paint(QPainter *painter, QRect outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
 	painter->setBrush(mFilled ? QBrush(color(), Qt::SolidPattern) : QBrush());
