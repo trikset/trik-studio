@@ -4,14 +4,14 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="+30"/>
+        <location filename="../../../../../plugins/robots/checker/twoDModelRunner/main.cpp" line="+31"/>
         <source>Emulates robot`s behaviour on TRIK Studio 2D model separately from programming environment. Passed .qrs will be interpreted just like when &apos;Run&apos; button was pressed in TRIK Studio. 
 In background mode the session will be terminated just after the execution ended and return code will then contain binary information about program correctness.Example: 
 </source>
         <translation>Émule le comportement du robot sur le modèle 2D TRIK Studio séparément de l&apos;environnement de programmation. Le fichier .qrs sera interprété comme si le bouton &apos;Executer&apos; était appuyé dans TRIK Studio.</translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+76"/>
         <source>Save file to be interpreted.</source>
         <translation>Le fichier de sauvegarde à interpréter.</translation>
     </message>
