@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1500mm" height="1500mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 150000 150000"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000mm" height="1500mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 200000 150000"
  xmlns:xlink="http://www.w3.org/1999/xlink"
  xmlns:dc="http://purl.org/dc/elements/1.1/"
  xmlns:cc="http://creativecommons.org/ns#"
@@ -9,32 +9,27 @@ viewBox="0 0 150000 150000"
  xmlns:svg="http://www.w3.org/2000/svg"
  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
- sodipodi:docname="field0.svg"
+ sodipodi:docname="field1.svg"
  inkscape:version="0.92.1 r15371">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .str2 {stroke:black;stroke-width:1799.96}
-    .str1 {stroke:black;stroke-width:2399.95}
-    .str0 {stroke:white;stroke-width:20}
-    .fil2 {fill:none}
+    .str0 {stroke:black;stroke-width:2645.81;stroke-linecap:round;stroke-linejoin:bevel}
+    .fil0 {fill:none}
     .fil1 {fill:black}
-    .fil3 {fill:white}
-    .fil0 {fill:white}
-    .fil4 {fill:black;fill-opacity:0.000000}
    ]]>
   </style>
    <clipPath id="id0">
-    <rect x="3548" y="4583" width="17639" height="7056"/>
+    <rect x="1535" y="1669" width="17639" height="7056"/>
    </clipPath>
    <clipPath id="id1">
-    <rect x="128431" y="140896" width="17639" height="7056"/>
+    <rect x="180118" y="141275" width="17639" height="7056"/>
    </clipPath>
  </defs>
  <metadata>
    <rdf:RDF>
      <cc:Work rdf:about="">
-       <dc:title>Relay_race</dc:title>
+       <dc:title>S_line_wide</dc:title>
        <dc:creator>
          <cc:Agent>
            <dc:title>CyberTech Labs Ltd</dc:title>
@@ -47,35 +42,42 @@ viewBox="0 0 150000 150000"
  </metadata>
  <g id="Слой_x0020_1">
   <metadata id="layer-info-0"/>
-  <rect class="fil0 str0" width="150000" height="150000"/>
-  <g id="_2938127412096">
-   <sodipodi:namedview pagecolor="#ffffff" bordercolor="#000000" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="1031" id="namedview18" showgrid="true" inkscape:zoom="0.098118325" inkscape:cx="2968.4519" inkscape:cy="3833.8588" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg28" showguides="true">
-    <inkscape:grid type="xygrid" id="grid3688"/>
-   </sodipodi:namedview>
-   <g id="g3706">
+  <g id="_2938022364432">
+   <sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="1031" id="namedview59" showgrid="false" inkscape:zoom="0.092953994" inkscape:cx="3191.9422" inkscape:cy="3015.0919" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="_403802176"/>
+   <g id="_403802176">
+    <line id="line4" class="fil0 str0" x1="111932" y1="86214" x2="91601" y2= "112799" />
+    <path id="path6" class="fil0 str0" d="M69200 124000c8812,0 17111,-4149 22401,-11199" inkscape:connector-curvature="0"/>
     <g>
-     <path id="path4" class="fil1" d="M45251 29342l-29783 65303 29783 -65303zm0 0l0 0 0 0z" inkscape:connector-curvature="0"/>
-     <path id="1" class="fil2 str1" d="M45251 29342l-29783 65303m29783 -65303l0 0 0 0z"/>
+     <path id="path8" class="fil1" d="M69200 124000l0 0 0 0zm0 0l-29399 0 29399 0zm0 0l0 0 0 0z" inkscape:connector-curvature="0"/>
+     <path id="1" class="fil0 str0" d="M69200 124000l0 0m0 0l-29399 0m29399 0l0 0 0 0z"/>
     </g>
-    <path id="path6" class="fil2 str1" d="M28242 121294c-14460,-168 -17059,-16802 -12729,-26757" inkscape:connector-curvature="0"/>
-    <g>
-     <path id="path8" class="fil3" d="M87456 86955c-5275,7178 -17860,8575 -26294,4723 -8433,-3852 -12146,-13812 -8294,-22243 3852,-8431 13812,-12146 22243,-8294l12345 25814zm0 0l0 0 0 0z" inkscape:connector-curvature="0"/>
-     <path id="1" class="fil2 str1" d="M87456 86955c-5275,7178 -17860,8575 -26294,4723 -8433,-3852 -12146,-13812 -8294,-22243 3852,-8431 13812,-12146 22243,-8294m12345 25814l0 0 0 0z"/>
-    </g>
-    <path id="path2" class="fil2 str1" d="M89014 30578c8433,3852 12192,13836 8340,22267 -3852,8431 -13809,12149 -22243,8297" inkscape:connector-curvature="0" sodipodi:nodetypes="csc"/>
-    <g id="path10" inkscape:connector-curvature="0">
-     <path class="fil4" d="M87235 87270c8880,-12257 21208,-15530 37142,-7248 15547,8081 19579,36846 -9876,41246 -934,139 -2890,170 -4409,211m-22857 -34209l0 0 0 0z"/>
-     <path class="fil2 str1" d="M87235 87270c8880,-12257 21208,-15530 37142,-7248 15547,8081 19579,36846 -9876,41246 -934,139 -2890,170 -4409,211m-22857 -34209l0 0 0 0z"/>
-    </g>
-    <path id="path12" class="fil2 str1" d="M45248 29354c3842,-8409 13833,-12137 22243,-8294" inkscape:connector-curvature="0"/>
-    <line id="path14" class="fil2 str1" x1="67448" y1="21048" x2="89141" y2= "30633"  inkscape:connector-curvature="0"/>
-    <line id="path16" class="fil2 str1" x1="110176" y1="121479" x2="28208" y2= "121287"  inkscape:connector-curvature="0"/>
-    <line id="path18" class="fil2 str2" x1="54253" y1="112724" x2="54253" y2= "130481"  inkscape:connector-curvature="0"/>
-    <line id="path24" class="fil2 str2" x1="91541" y1="112724" x2="91541" y2= "130481"  inkscape:connector-curvature="0"/>
+    <path id="path10" class="fil0 str0" d="M11802 93199c-206,16028 12024,29483 27998,30801" inkscape:connector-curvature="0"/>
+    <path id="path12" class="fil0 str0" d="M11802 49800l0 0m0 43398l0 -43398" inkscape:connector-curvature="0"/>
+    <path id="path14" class="fil0 str0" d="M35602 26002c-12084,2263 -21537,11714 -23800,23798" inkscape:connector-curvature="0"/>
+    <line id="line16" class="fil0 str0" x1="35602" y1="26002" x2="44000" y2= "26002" />
+    <path id="path18" class="fil0 str0" d="M60800 42801c0,-4456 -1771,-8729 -4919,-11880 -3149,-3149 -7424,-4919 -11880,-4919" inkscape:connector-curvature="0"/>
+    <path id="path20" class="fil0 str0" d="M48473 59897c7149,-2730 11996,-9447 12328,-17094" inkscape:connector-curvature="0"/>
+    <path id="path22" class="fil0 str0" d="M48473 59897c-6749,2753 -11243,9222 -11472,16506" inkscape:connector-curvature="0"/>
+    <path id="path24" class="fil0 str0" d="M37001 76400c0,4456 1771,8729 4919,11880 3150,3150 7424,4919 11880,4919" inkscape:connector-curvature="0"/>
+    <path id="path26" class="fil0 str0" d="M53801 93199c7144,718 14111,-2499 18198,-8400" inkscape:connector-curvature="0"/>
+    <path id="path28" class="fil0 str0" d="M96623 53586l0 0m-24624 31214l24624 -31214" inkscape:connector-curvature="0"/>
+    <line id="line30" class="fil0 str0" x1="96623" y1="53586" x2="108400" y2= "37201" />
+    <path id="path32" class="fil0 str0" d="M130800 26002c-8812,0 -17111,4149 -22401,11199" inkscape:connector-curvature="0"/>
+    <path id="path34" class="fil0 str0" d="M160200 26002l0 0m-29400 0l29400 0" inkscape:connector-curvature="0"/>
+    <path id="path36" class="fil0 str0" d="M188198 56801c208,-16028 -12024,-29483 -28000,-30801" inkscape:connector-curvature="0"/>
+    <path id="path38" class="fil0 str0" d="M188198 56801l0 0m0 0l0 43400" inkscape:connector-curvature="0"/>
+    <path id="path40" class="fil0 str0" d="M164400 124000c12083,-2265 21537,-11717 23800,-23800" inkscape:connector-curvature="0"/>
+    <line id="line42" class="fil0 str0" x1="164400" y1="124000" x2="156000" y2= "124000" />
+    <path id="path44" class="fil0 str0" d="M139199 107200c0,4456 1771,8729 4919,11880 3149,3150 7424,4919 11880,4919" inkscape:connector-curvature="0"/>
+    <path id="path46" class="fil0 str0" d="M151529 90107c-7149,2730 -11996,9447 -12328,17094" inkscape:connector-curvature="0"/>
+    <path id="path48" class="fil0 str0" d="M151529 90107c6749,-2753 11243,-9222 11472,-16506" inkscape:connector-curvature="0"/>
+    <path id="path50" class="fil0 str0" d="M163001 73600c0,-4456 -1771,-8729 -4919,-11880 -3150,-3150 -7424,-4919 -11880,-4919" inkscape:connector-curvature="0"/>
+    <path id="path52" class="fil0 str0" d="M146200 56801c-7144,-718 -14111,2499 -18198,8400" inkscape:connector-curvature="0"/>
+    <path id="path54" class="fil0 str0" d="M128001 65201l0 0m0 0l-16071 21013" inkscape:connector-curvature="0"/>
    </g>
   </g>
   <g style="clip-path:url(#id0)">
-   <image x="3548" y="4583" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
+   <image x="1535" y="1669" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
 ABJ0AAASdAHeZh94AAAgAElEQVR4nOydBVgUTxvAL7iju7sREQRR0L+KoFjYIHZid3d3d4vdWNiC
 ia0gIaEgndIdB1x9A+t3rlfcHctx4PyeeXR3dnZ2mHv33XfqHSkmk4mDiIRUcxegBQPrTnRg3YkO
 rDvREbruvKZtjE1I37l62rD+3fgke5M6Obfyo53WYhvNOY0onkQjRN2p2QwtLq1Ajj2nbgD/rl80
@@ -1122,7 +1124,7 @@ EATZkaCMQxAEQRAE2ZGgjEMQBEEQBNmRoIxDEARBEATZkaCMQxAEQRAE2ZGgjEMQBEEQBNmR/P/t
 KMi2YfgEogAAAABJRU5ErkJggg=="/>
   </g>
   <g style="clip-path:url(#id1)">
-   <image x="128431" y="140896" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
+   <image x="180118" y="141275" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
 ABJ0AAASdAHeZh94AAAgAElEQVR4nOydBVwUzxfA747uLukQRQUBA7uwAxMMVMTuALFQsbt/toLd
 rSi2YmEgKigg3d11xMX/wfo/zyvujr3jxPl+5qN7c7Ozc8Pbt+/NzryRptPpBIRQSDd2A/5iUN8J
 D+o74UF9JzwC992PmOTQbz97d7E3MdTlUaykKja99JmhSj9VOcsGNE+iEaDv9p+8udjvEHPO+8BD
