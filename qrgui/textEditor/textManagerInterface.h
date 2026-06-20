@@ -55,7 +55,7 @@ public:
 	virtual QString generatorName(const QString &filepath) const  = 0;
 
 Q_SIGNALS:
-	void textChanged(text::QScintillaTextEdit *editor, bool changed);
+	void textChanged(qReal::text::QScintillaTextEdit *editor, bool changed);
 	void needRefreshRecentFileList(const QString &fileName);
 };
 

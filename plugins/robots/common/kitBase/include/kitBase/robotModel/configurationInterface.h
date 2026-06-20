@@ -55,7 +55,7 @@ public:
 
 Q_SIGNALS:
 	/// Emitted when some device is ready to be used.
-	void deviceConfigured(robotParts::Device *device);
+	void deviceConfigured(kitBase::robotModel::robotParts::Device *device);
 };
 
 }

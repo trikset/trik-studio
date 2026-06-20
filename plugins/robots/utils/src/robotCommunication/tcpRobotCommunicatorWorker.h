@@ -113,7 +113,7 @@ Q_SIGNALS:
 	void trikRuntimeVersionError();
 
 	/// Emitted when new message arrives from robot.
-	void messageFromRobot(const MessageKind &messageKind, const QString &message);
+	void messageFromRobot(const utils::robotCommunication::MessageKind &messageKind, const QString &message);
 
 	/// Emitted when program uploading is finished.
 	void uploadProgramDone();

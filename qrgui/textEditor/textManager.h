@@ -77,7 +77,7 @@ public:
 	CodeBlockManager &codeBlockManager();
 
 private Q_SLOTS:
-	void setModified(text::QScintillaTextEdit *code, bool modified = true);
+	void setModified(qReal::text::QScintillaTextEdit *code, bool modified = true);
 	void onTabClosed(const QFileInfo &file);
 
 private:

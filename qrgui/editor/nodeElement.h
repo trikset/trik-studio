@@ -185,7 +185,7 @@ public:
 
 public Q_SLOTS:
 	void switchGrid(bool isChecked);
-	void updateDynamicProperties(const Id &target);
+	void updateDynamicProperties(const qReal::Id &target);
 
 private Q_SLOTS:
 	void initRenderedDiagram();
