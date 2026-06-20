@@ -518,11 +518,30 @@ EdgeElement * EditorViewScene::edgeForInsertion(QPointF scenePos)
 	return nullptr;
 }
 
+namespace  {
+
+qreal countCoeff(const NodeElement &node, const QLineF &offset) {
+	const auto angle = qDegreesToRadians(offset.angle());
+	const auto boundingWidth = node.boundingRect().width();
+	const auto boundingHeight = node.boundingRect().height();
+
+	if (!qFuzzyIsNull(qCos(angle))) {
+		const auto coeff = (boundingWidth / 2) / qAbs(offset.length() * qCos(angle));
+		if (qAbs(offset.dy()) * coeff > boundingHeight / 2) {
+			return (boundingHeight / 2) / qAbs(offset.length() * qSin(angle));
+		}
+		return coeff;
+	}
+	return (boundingHeight / 2) / qAbs(offset.length() * qSin(angle));
+}
+
+}
+
 void EditorViewScene::resolveOverlaps(NodeElement *node, QPointF scenePos
 		, QPointF shift, QMap<Id, QPointF> &shifting) const
 {
 	QList<NodeElement*> closeNodes = getCloseNodes(node);
-	for (NodeElement *closeNode : closeNodes) {
+	for (auto &&closeNode : closeNodes) {
 		if (shifting.contains(closeNode->id())) {
 			continue;
 		}
@@ -530,26 +549,27 @@ void EditorViewScene::resolveOverlaps(NodeElement *node, QPointF scenePos
 		QLineF offset(node->mapToScene(node->boundingRect().center())
 				, closeNode->mapToScene(closeNode->boundingRect().center()));
 
-		qreal coeff = (node->boundingRect().width() / 2) / qAbs(offset.length() * qCos(offset.angle()));
-		if (qAbs(offset.y2() - offset.y1()) * coeff > node->boundingRect().height() / 2) {
-			coeff = (node->boundingRect().height() / 2) / qAbs(offset.length() * qSin(offset.angle()));
+		QPointF offsetPoint;
+
+		if (qFuzzyIsNull(offset.length())) {
+			offsetPoint = {
+				qCos(qDegreesToRadians(offset.angle())) * node->boundingRect().width(),
+				qSin(qDegreesToRadians(offset.angle())) * node->boundingRect().height()
+			};
+		} else {
+			qreal coeff = countCoeff(*node, offset);
+			QLineF nodeLine(offset);
+			nodeLine.setP2(nodeLine.p1() + QPointF(nodeLine.dx() * coeff, (nodeLine.dy()) * coeff));
+			offset.setPoints(offset.p2(), offset.p1());
+
+			coeff = countCoeff(*closeNode, offset);
+			QLineF closeNodeLine(offset);
+			closeNodeLine.setP2(closeNodeLine.p1() + QPointF(closeNodeLine.dx() * coeff
+					, (closeNodeLine.dy() * coeff)));
+
+			offsetPoint = nodeLine.p2() - closeNodeLine.p2();
 		}
 
-		QLineF nodeLine(offset);
-		nodeLine.setP2(nodeLine.p1() + QPointF((nodeLine.p2().x() - nodeLine.p1().x()) * coeff
-				, (nodeLine.p2().y() - nodeLine.p1().y()) * coeff));
-		offset.setPoints(offset.p2(), offset.p1());
-
-		coeff = (closeNode->boundingRect().width() / 2) / qAbs(offset.length() * qCos(offset.angle()));
-		if (qAbs(offset.y2() - offset.y1()) * coeff > closeNode->boundingRect().height() / 2) {
-			coeff = (closeNode->boundingRect().height() / 2) / qAbs(offset.length() * qSin(offset.angle()));
-		}
-
-		QLineF closeNodeLine(offset);
-		closeNodeLine.setP2(closeNodeLine.p1() + QPointF((closeNodeLine.p2().x() - closeNodeLine.p1().x()) * coeff
-				, (closeNodeLine.p2().y() - closeNodeLine.p1().y()) * coeff));
-
-		QPointF offsetPoint(nodeLine.p2() - closeNodeLine.p2());
 		closeNode->setPos(closeNode->pos() + offsetPoint);
 		mModels.graphicalModelAssistApi().setPosition(closeNode->id(), closeNode->pos());
 		shifting.insert(closeNode->id(), offsetPoint);

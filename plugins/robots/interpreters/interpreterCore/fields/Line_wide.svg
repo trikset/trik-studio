@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1500mm" height="1500mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 150000 150000"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000mm" height="1200mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 200000 120000"
  xmlns:xlink="http://www.w3.org/1999/xlink"
  xmlns:dc="http://purl.org/dc/elements/1.1/"
  xmlns:cc="http://creativecommons.org/ns#"
- xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
- xmlns:svg="http://www.w3.org/2000/svg"
- xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
- xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
- sodipodi:docname="field0.svg"
- inkscape:version="0.92.1 r15371">
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .str2 {stroke:black;stroke-width:1799.96}
-    .str1 {stroke:black;stroke-width:2399.95}
-    .str0 {stroke:white;stroke-width:20}
+    .str1 {stroke:#1F1B20;stroke-width:4938.89}
+    .str0 {stroke:#2B2A29;stroke-width:20}
     .fil2 {fill:none}
-    .fil1 {fill:black}
-    .fil3 {fill:white}
-    .fil0 {fill:white}
-    .fil4 {fill:black;fill-opacity:0.000000}
+    .fil0 {fill:none;fill-rule:nonzero}
+    .fil1 {fill:#FEFEFE}
    ]]>
   </style>
    <clipPath id="id0">
-    <rect x="3548" y="4583" width="17639" height="7056"/>
+    <rect x="1575" y="1327" width="17639" height="7056"/>
    </clipPath>
    <clipPath id="id1">
-    <rect x="128431" y="140896" width="17639" height="7056"/>
+    <rect x="180010" y="110970" width="17639" height="7056"/>
    </clipPath>
  </defs>
  <metadata>
    <rdf:RDF>
      <cc:Work rdf:about="">
-       <dc:title>Relay_race</dc:title>
+       <dc:title>Line_wide</dc:title>
        <dc:creator>
          <cc:Agent>
            <dc:title>CyberTech Labs Ltd</dc:title>
@@ -47,35 +39,16 @@ viewBox="0 0 150000 150000"
  </metadata>
  <g id="Слой_x0020_1">
   <metadata id="layer-info-0"/>
-  <rect class="fil0 str0" width="150000" height="150000"/>
-  <g id="_2938127412096">
-   <sodipodi:namedview pagecolor="#ffffff" bordercolor="#000000" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1920" inkscape:window-height="1031" id="namedview18" showgrid="true" inkscape:zoom="0.098118325" inkscape:cx="2968.4519" inkscape:cy="3833.8588" inkscape:window-x="0" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="svg28" showguides="true">
-    <inkscape:grid type="xygrid" id="grid3688"/>
-   </sodipodi:namedview>
-   <g id="g3706">
-    <g>
-     <path id="path4" class="fil1" d="M45251 29342l-29783 65303 29783 -65303zm0 0l0 0 0 0z" inkscape:connector-curvature="0"/>
-     <path id="1" class="fil2 str1" d="M45251 29342l-29783 65303m29783 -65303l0 0 0 0z"/>
-    </g>
-    <path id="path6" class="fil2 str1" d="M28242 121294c-14460,-168 -17059,-16802 -12729,-26757" inkscape:connector-curvature="0"/>
-    <g>
-     <path id="path8" class="fil3" d="M87456 86955c-5275,7178 -17860,8575 -26294,4723 -8433,-3852 -12146,-13812 -8294,-22243 3852,-8431 13812,-12146 22243,-8294l12345 25814zm0 0l0 0 0 0z" inkscape:connector-curvature="0"/>
-     <path id="1" class="fil2 str1" d="M87456 86955c-5275,7178 -17860,8575 -26294,4723 -8433,-3852 -12146,-13812 -8294,-22243 3852,-8431 13812,-12146 22243,-8294m12345 25814l0 0 0 0z"/>
-    </g>
-    <path id="path2" class="fil2 str1" d="M89014 30578c8433,3852 12192,13836 8340,22267 -3852,8431 -13809,12149 -22243,8297" inkscape:connector-curvature="0" sodipodi:nodetypes="csc"/>
-    <g id="path10" inkscape:connector-curvature="0">
-     <path class="fil4" d="M87235 87270c8880,-12257 21208,-15530 37142,-7248 15547,8081 19579,36846 -9876,41246 -934,139 -2890,170 -4409,211m-22857 -34209l0 0 0 0z"/>
-     <path class="fil2 str1" d="M87235 87270c8880,-12257 21208,-15530 37142,-7248 15547,8081 19579,36846 -9876,41246 -934,139 -2890,170 -4409,211m-22857 -34209l0 0 0 0z"/>
-    </g>
-    <path id="path12" class="fil2 str1" d="M45248 29354c3842,-8409 13833,-12137 22243,-8294" inkscape:connector-curvature="0"/>
-    <line id="path14" class="fil2 str1" x1="67448" y1="21048" x2="89141" y2= "30633"  inkscape:connector-curvature="0"/>
-    <line id="path16" class="fil2 str1" x1="110176" y1="121479" x2="28208" y2= "121287"  inkscape:connector-curvature="0"/>
-    <line id="path18" class="fil2 str2" x1="54253" y1="112724" x2="54253" y2= "130481"  inkscape:connector-curvature="0"/>
-    <line id="path24" class="fil2 str2" x1="91541" y1="112724" x2="91541" y2= "130481"  inkscape:connector-curvature="0"/>
-   </g>
+  <g id="_2903353779568">
+   <polygon class="fil0 str0" points="0,0 199992,0 199992,120009 0,120009 "/>
+   <path class="fil0 str1" d="M51906 26339c18455,0 33416,14961 33416,33416 0,18455 -14961,33416 -33416,33416 -18455,0 -33416,-14961 -33416,-33416 0,-18455 14961,-33416 33416,-33416z"/>
+   <path class="fil0 str1" d="M147697 26232c18455,0 33416,14961 33416,33416 0,18455 -14961,33416 -33416,33416 -18455,0 -33416,-14961 -33416,-33416 0,-18455 14961,-33416 33416,-33416z"/>
+   <polygon class="fil1" points="140303,36935 150015,48666 100139,108910 50263,48666 59975,36935 "/>
+   <path class="fil2 str1" d="M125193 34711c-11590,14521 -37133,14788 -51015,38"/>
+   <path class="fil2 str1" d="M74444 84565c11590,-14521 37133,-14788 51015,-38"/>
   </g>
   <g style="clip-path:url(#id0)">
-   <image x="3548" y="4583" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
+   <image x="1575" y="1327" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
 ABJ0AAASdAHeZh94AAAgAElEQVR4nOydBVgUTxvAL7iju7sREQRR0L+KoFjYIHZid3d3d4vdWNiC
 ia0gIaEgndIdB1x9A+t3rlfcHctx4PyeeXR3dnZ2mHv33XfqHSkmk4mDiIRUcxegBQPrTnRg3YkO
 rDvREbruvKZtjE1I37l62rD+3fgke5M6Obfyo53WYhvNOY0onkQjRN2p2QwtLq1Ajj2nbgD/rl80
@@ -1122,7 +1095,7 @@ EATZkaCMQxAEQRAE2ZGgjEMQBEEQBNmRoIxDEARBEATZkaCMQxAEQRAE2ZGgjEMQBEEQBNmR/P/t
 KMi2YfgEogAAAABJRU5ErkJggg=="/>
   </g>
   <g style="clip-path:url(#id1)">
-   <image x="128431" y="140896" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
+   <image x="180010" y="110970" width="17639" height="7056" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA0IAAAFOCAIAAAFTZgrnAAAACXBIWXMA
 ABJ0AAASdAHeZh94AAAgAElEQVR4nOydBVwUzxfA747uLukQRQUBA7uwAxMMVMTuALFQsbt/toLd
 rSi2YmEgKigg3d11xMX/wfo/zyvujr3jxPl+5qN7c7Ozc8Pbt+/NzryRptPpBIRQSDd2A/5iUN8J
 D+o74UF9JzwC992PmOTQbz97d7E3MdTlUaykKja99JmhSj9VOcsGNE+iEaDv9p+8udjvEHPO+8BD
