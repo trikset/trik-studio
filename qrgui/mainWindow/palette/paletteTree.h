@@ -113,7 +113,7 @@ public Q_SLOTS:
 	void collapse();
 
 	void setActiveEditor(int index);
-	void setActiveEditor(const Id &id);
+	void setActiveEditor(const qReal::Id &id);
 
 	/// Recreate PaletteTree.
 	void recreateTrees();

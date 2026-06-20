@@ -37,7 +37,7 @@ public:
 Q_SIGNALS:
 	/// Emitted every time when user selected other robot model.
 	/// @param model - newly selected robot model.
-	void robotModelChanged(RobotModelInterface &model);
+	void robotModelChanged(kitBase::robotModel::RobotModelInterface &model);
 
 	/// Signal from underlying model, emitted when QReal physically connects to robot. If there is no need for
 	/// connection, it is emitted immediately. Signal correctly reconnects to a model when it is changed, so client

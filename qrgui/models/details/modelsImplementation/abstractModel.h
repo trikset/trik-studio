@@ -79,7 +79,7 @@ public:
 
 Q_SIGNALS:
 	/// Emitted each time when new element was added into model.
-	void elementAdded(const Id &id);
+	void elementAdded(const qReal::Id &id);
 
 protected:
 	const EditorManagerInterface &mEditorManagerInterface;

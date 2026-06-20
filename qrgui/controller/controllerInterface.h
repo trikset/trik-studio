@@ -44,15 +44,15 @@ public Q_SLOTS:
 	virtual void setActiveModule(const QString &moduleId) = 0;
 
 	/// Executes given command regarding it binded to active module.
-	virtual void execute(commands::AbstractCommand *command) = 0;
+	virtual void execute(qReal::commands::AbstractCommand *command) = 0;
 
 	/// Executes given command regarding it binded to specified module.
-	virtual void execute(commands::AbstractCommand *command, const QString &moduleId) = 0;
+	virtual void execute(qReal::commands::AbstractCommand *command, const QString &moduleId) = 0;
 
 	/// Executes given command regarding it binded to global application space.
 	/// Using this method supposes that @param command is not binded to any module
 	/// (for example, removing diagrams themselves from model explorers).
-	virtual void executeGlobal(commands::AbstractCommand *command) = 0;
+	virtual void executeGlobal(qReal::commands::AbstractCommand *command) = 0;
 
 	/// Tells controller that user started working with module with \a moduleId.
 	virtual void moduleOpened(const QString &moduleId) = 0;

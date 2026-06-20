@@ -70,7 +70,7 @@ private Q_SLOTS:
 	void onRobotModelChanged(kitBase::robotModel::RobotModelInterface &model);
 	void switchToEditorMode();
 	void switchToDebuggerMode();
-	void switchToMode(Mode mode);
+	void switchToMode(interpreterCore::UiManager::Mode mode);
 	void toggleModeButtons();
 
 	void saveDocks() const;

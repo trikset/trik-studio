@@ -1776,7 +1776,7 @@ public slots:
     //! ie. it is disabled.
     //!
     //! \sa autoCompletionSource()
-    virtual void setAutoCompletionSource(AutoCompletionSource source);
+    virtual void setAutoCompletionSource(QsciScintilla::AutoCompletionSource source);
 
     //! Sets the threshold for the automatic display of the auto-completion
     //! list as the user types to \a thresh.  The threshold is the number of
@@ -1791,7 +1791,7 @@ public slots:
     //! entry.  The default is AcusNever.
     //!
     //! \sa autoCompletionUseSingle()
-    virtual void setAutoCompletionUseSingle(AutoCompletionUseSingle single);
+    virtual void setAutoCompletionUseSingle(QsciScintilla::AutoCompletionUseSingle single);
 
     //! If \a autoindent is true then auto-indentation is enabled.  The default
     //! is false.
@@ -1802,7 +1802,7 @@ public slots:
     //! Sets the brace matching mode to \a bm.  The default is NoBraceMatching.
     //!
     //! \sa braceMatching()
-    virtual void setBraceMatching(BraceMatch bm);
+    virtual void setBraceMatching(QsciScintilla::BraceMatch bm);
 
     //! If \a deindent is true then the backspace key will unindent a line
     //! rather then delete a character.
@@ -1848,7 +1848,7 @@ public slots:
     //! natural mode.
     //!
     //! \sa eolMode()
-    virtual void setEolMode(EolMode mode);
+    virtual void setEolMode(QsciScintilla::EolMode mode);
 
     //! If \a visible is true then end-of-lines are made visible.  The default
     //! is that they are invisible.
@@ -1861,7 +1861,7 @@ public slots:
     //! is 2.
     //!
     //! \sa folding()
-    virtual void setFolding(FoldStyle fold, int margin = 2);
+    virtual void setFolding(QsciScintilla::FoldStyle fold, int margin = 2);
 
     //! Sets the indentation of line \a line to \a indentation characters.
     //!
@@ -2012,13 +2012,13 @@ public slots:
     //! whitespace is invisible.
     //!
     //! \sa whitespaceVisibility()
-    virtual void setWhitespaceVisibility(WhitespaceVisibility mode);
+    virtual void setWhitespaceVisibility(QsciScintilla::WhitespaceVisibility mode);
 
     //! Sets the line wrap mode to \a mode.  The default is that lines are not
     //! wrapped.
     //!
     //! \sa wrapMode()
-    virtual void setWrapMode(WrapMode mode);
+    virtual void setWrapMode(QsciScintilla::WrapMode mode);
 
     //! Undo the last change or sequence of changes.
     //!

@@ -36,10 +36,10 @@ public:
 	ErrorReporter(ErrorListWidget * const errorListWidget, QDockWidget * const errorList);
 
 public Q_SLOTS:
-	void addInformation(const QString &message, const Id &position = Id::rootId()) override;
-	void addWarning(const QString &message, const Id &position = Id::rootId()) override;
-	void addError(const QString &message, const Id &position = Id::rootId()) override;
-	void addCritical(const QString &message, const Id &position = Id::rootId()) override;
+	void addInformation(const QString &message, const qReal::Id &position = Id::rootId()) override;
+	void addWarning(const QString &message, const qReal::Id &position = Id::rootId()) override;
+	void addError(const QString &message, const qReal::Id &position = Id::rootId()) override;
+	void addCritical(const QString &message, const qReal::Id &position = Id::rootId()) override;
 	bool wereErrors() const override;
 
 	void sendBubblingMessage(const QString &message, int duration, QWidget *parent = nullptr) override;
@@ -51,16 +51,16 @@ public Q_SLOTS:
 
 Q_SIGNALS:
 	/// Emitted when new message with level 'Info' added to error reporter.
-	void informationAdded(const QString &message, const Id &position);
+	void informationAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Warning' added to error reporter.
-	void warningAdded(const QString &message, const Id &position);
+	void warningAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Error' added to error reporter.
-	void errorAdded(const QString &message, const Id &position);
+	void errorAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Critical' added to error reporter.
-	void criticalAdded(const QString &message, const Id &position);
+	void criticalAdded(const QString &message, const qReal::Id &position);
 
 public Q_SLOTS:
 	/// Clears only widget with errors.

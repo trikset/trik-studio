@@ -86,7 +86,7 @@ public:
 
 Q_SIGNALS:
 	/// Emitted each time when new element was added into the logical model.
-	void elementAdded(const Id &id);
+	void elementAdded(const qReal::Id &id);
 
 private:
 	LogicalModelAssistApi(const LogicalModelAssistApi &);  // Copying is forbidden

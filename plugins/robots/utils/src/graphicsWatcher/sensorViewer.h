@@ -45,7 +45,7 @@ public:
 	void resizeEvent(QResizeEvent *event = nullptr);
 
 public Q_SLOTS:
-	void setTimeline(TimelineInterface &timeline);
+	void setTimeline(utils::TimelineInterface &timeline);
 	void setNextValue(const qreal newValue);
 	void startJob();
 	void stopJob();
