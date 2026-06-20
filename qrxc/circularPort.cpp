@@ -38,7 +38,7 @@ void CircularPort::generateCode(OutFile &out)
 
 	out() << QString("qReal::CircularPortInfo(QPointF(%1, %2), %3, %4, %5, %6, %7, \"%8\")")
 			.arg(mX.value()).arg(mY.value()).arg(mR.value())
-			.arg(mX.isScalable() ? "true" : "false").arg(mY.isScalable() ? "true" : "false")
+			.arg(mX.isScalable() ? "true" : "false", mY.isScalable() ? "true" : "false")
 			.arg(mInitWidth).arg(mInitHeight).arg(mType);
 }
 

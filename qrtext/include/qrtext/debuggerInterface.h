@@ -57,7 +57,7 @@ public:
 		QVariant variant;
 		variant.setValue(value);
 
-		setVariableValue(name, QString("%1 = %2").arg(name).arg(valueString), valueStringList);
+		setVariableValue(name, QString("%1 = %2").arg(name, valueString), valueStringList);
 	}
 
 private:

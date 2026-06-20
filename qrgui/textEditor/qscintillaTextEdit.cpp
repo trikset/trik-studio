@@ -247,7 +247,7 @@ void QScintillaTextEdit::commentUncommentLines()
 	QString selectedText = this->selectedText();
 
 	const QRegularExpression lineRegExp(QString("^(?<indent>[ |\t]*)%1(?<innerCode>.*)%2[ |\t]*$")
-			.arg(regExpForm(mLanguage.lineCommentStart)).arg(regExpForm(mLanguage.lineCommentEnd)));
+			.arg(regExpForm(mLanguage.lineCommentStart), regExpForm(mLanguage.lineCommentEnd)));
 	if (not selectedText.isEmpty()) {
 		auto startSelectedPosition = SendScintilla(SCI_GETSELECTIONSTART);
 		auto endSelectedPosition = SendScintilla(SCI_GETSELECTIONEND);
@@ -287,12 +287,9 @@ void QScintillaTextEdit::commentUncommentLines()
 					textForReplace.append(lineRegExp.match(selectedLines[i]).capturedRef("innerCode"));
 				}
 			} else {
-				textForReplace.append(QString("%1%2%3").arg(mLanguage.lineCommentStart)
-						.arg(selectedLines.first().toString())
-						.arg(mLanguage.lineCommentEnd));
+				textForReplace.append(QString("%1%2%3").arg(mLanguage.lineCommentStart, selectedLines.first().toString(), mLanguage.lineCommentEnd));
 				for (int i = 1; i < selectedLinesCount; ++i) {
-					textForReplace.append(QString("\n%1%2%3").arg(mLanguage.lineCommentStart)
-							.arg(selectedLines[i].toString()).arg(mLanguage.lineCommentEnd));
+					textForReplace.append(QString("\n%1%2%3").arg(mLanguage.lineCommentStart, selectedLines[i].toString(), mLanguage.lineCommentEnd));
 				}
 			}
 
@@ -300,8 +297,7 @@ void QScintillaTextEdit::commentUncommentLines()
 		// second case: selected block with one or more lines
 		} else {
 			const QRegularExpression multiLineRegExp(QString("^%1(?<innerCode>.*)%2$")
-					.arg(regExpForm(mLanguage.multilineCommentStart))
-					.arg(regExpForm(mLanguage.multilineCommentEnd))
+					.arg(regExpForm(mLanguage.multilineCommentStart), regExpForm(mLanguage.multilineCommentEnd))
 					, QRegularExpression::MultilineOption | QRegularExpression::DotMatchesEverythingOption);
 			QRegularExpressionMatch match = multiLineRegExp.match(selectedText);
 			if (match.hasMatch()) {
@@ -309,7 +305,7 @@ void QScintillaTextEdit::commentUncommentLines()
 				replaceSelectedText(replaceTo);
 			} else {
 				QString replaceTo = QString("%1%2%3")
-						.arg(mLanguage.multilineCommentStart).arg(selectedText).arg(mLanguage.multilineCommentEnd);
+						.arg(mLanguage.multilineCommentStart, selectedText, mLanguage.multilineCommentEnd);
 				replaceSelectedText(replaceTo);
 			}
 		}
@@ -333,8 +329,7 @@ void QScintillaTextEdit::commentUncommentLines()
 			replaceSelectedText(replaceTo);
 		} else {
 			QString replaceTo;
-			replaceTo.append(QString("%1%2%3").arg(mLanguage.lineCommentStart)
-					.arg(selectedText).arg(mLanguage.lineCommentEnd));
+			replaceTo.append(QString("%1%2%3").arg(mLanguage.lineCommentStart, selectedText, mLanguage.lineCommentEnd));
 			replaceSelectedText(replaceTo);
 		}
 
