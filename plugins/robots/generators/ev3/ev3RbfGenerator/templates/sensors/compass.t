@@ -16,8 +16,7 @@ ARRAY_READ(answer@@RANDOM_ID_2@@, 0, fst@@RANDOM_ID_3@@)
 ARRAY_READ(answer@@RANDOM_ID_2@@, 1, snd@@RANDOM_ID_4@@)
 
 MOVE8_32(snd@@RANDOM_ID_4@@, snd32@@RANDOM_ID_6@@)
-AND8(snd@@RANDOM_ID_4@@, -128 ,flag@@RANDOM_ID_7@@)
-JR_NEQ8(flag@@RANDOM_ID_7@@, -128, m1@@RANDOM_ID_8@@)
+JR_LT8(snd@@RANDOM_ID_4@@, 0, m1@@RANDOM_ID_8@@)
 AND32(snd32@@RANDOM_ID_6@@, 127, snd32@@RANDOM_ID_6@@)
 ADD32(snd32@@RANDOM_ID_6@@, 128, snd32@@RANDOM_ID_6@@)
 m1@@RANDOM_ID_8@@:
