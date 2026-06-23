@@ -70,7 +70,7 @@
 <context>
     <name>MainWindowUi</name>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="+6"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="+14"/>
         <source>QReal</source>
         <translation>QReal</translation>
     </message>
@@ -80,7 +80,7 @@
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>&amp;View</source>
         <translation>&amp;Affichage</translation>
     </message>
@@ -514,6 +514,16 @@
         <source>Restore default settings and Quit</source>
         <translation>Restaurer les paramètres par défaut et quitter</translation>
     </message>
+    <message>
+        <location line="+9"/>
+        <source>Open Examples...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -708,7 +718,7 @@
 <context>
     <name>qReal::MainWindow</name>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+670"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+676"/>
         <source>Could not save file, try to save it to another place</source>
         <translation>Impossible d&apos;enregistrer le fichier, essayez de l&apos;enregistrer à un autre emplacement</translation>
     </message>
@@ -717,7 +727,7 @@
         <translation type="vanished">À propo de QReal</translation>
     </message>
     <message>
-        <location line="-472"/>
+        <location line="-478"/>
         <source>Restore default settings</source>
         <translation>Restaurer les paramètres par défaut</translation>
     </message>
@@ -731,7 +741,7 @@ AVERTISSEMENT : La restauration des paramètres est irréversible
 AVERTISSEMENT : Les paramètres seront rétablis après le redémarrage de l&apos;application</translation>
     </message>
     <message>
-        <location line="+766"/>
+        <location line="+772"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>
@@ -767,6 +777,11 @@ AVERTISSEMENT : Les paramètres seront rétablis après le redémarrage de l&apo
         <location line="+4"/>
         <source>Open project</source>
         <translation>Ouvrir un projet</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Open examples</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
@@ -937,7 +952,7 @@ AVERTISSEMENT : Les paramètres seront rétablis après le redémarrage de l&apo
         <translation>Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+36"/>
         <source>QReal Save File(*.qrs)</source>
         <translation>Fichier de sauvegarde QReal (*.qrs)</translation>
     </message>

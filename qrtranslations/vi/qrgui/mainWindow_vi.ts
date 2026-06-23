@@ -70,437 +70,447 @@
 <context>
     <name>MainWindowUi</name>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="6"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="14"/>
         <source>QReal</source>
         <translation>QReal</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="41"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="49"/>
         <source>&amp;File</source>
         <translation>&amp;Tệp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="57"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="66"/>
         <source>&amp;View</source>
         <translation>&amp;Xem</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="61"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="70"/>
         <source>Panels</source>
         <translation>Bảng điều khiển</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="74"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="83"/>
         <source>&amp;Help</source>
         <translation>&amp;Trợ giúp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="84"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="93"/>
         <source>&amp;Settings</source>
         <translation>&amp;Thiết lập</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="97"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="106"/>
         <source>&amp;Tools</source>
         <translation>&amp;Công cụ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="103"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="112"/>
         <source>&amp;Edit</source>
         <translation>&amp;Chỉnh sửa</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="125"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="134"/>
         <source>File Toolbar</source>
         <translation>Thanh công cụ Tệp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="155"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="164"/>
         <source>Mini Map</source>
         <translation>Bản đồ nhỏ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="204"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="213"/>
         <source>Palette</source>
         <translation>Bảng màu</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="241"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="250"/>
         <source>Edit Toolbar</source>
         <translation>Thanh công cụ Chỉnh sửa</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="254"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="263"/>
         <source>View Toolbar</source>
         <translation>Thanh công cụ Xem</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="272"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="281"/>
         <source>Logical Model Explorer</source>
         <translation>Trình duyệt mô hình logic</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="324"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="333"/>
         <source>Errors</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="346"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="355"/>
         <source>Graphical Model Explorer</source>
         <translation>Trình duyệt mô hình đồ họa</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="380"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="389"/>
         <source>Property Editor</source>
         <translation>Trình soạn thảo thuộc tính</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="417"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="426"/>
         <source>Interpreter Toolbar</source>
         <translation>Thanh công cụ Trình thông dịch</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="428"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="437"/>
         <source>Generators Toolbar</source>
         <translation>Thanh công cụ Trình tạo</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="442"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="451"/>
         <source>&amp;Quit</source>
         <translation>&amp;Thoát</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="451"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="460"/>
         <source>Zoom In</source>
         <translation>Phóng to</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="454"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="463"/>
         <source>Ctrl++</source>
         <translation>Ctrl++</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="463"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="472"/>
         <source>Zoom Out</source>
         <translation>Phóng nhỏ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="466"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="475"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="477"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="486"/>
         <source>Antialiasing</source>
         <translation>Khử răng cưa</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="485"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="494"/>
         <source>OpenGL Renderer</source>
         <translation>Bộ hiển thị OpenGL</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="494"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="503"/>
         <source>Print</source>
         <translation>In</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="499"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="508"/>
         <source>Export to SVG</source>
         <translation>Xuất sang SVG</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="504"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="513"/>
         <source>Open in new tab</source>
         <translation>Mở trong tab mới</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="509"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="518"/>
         <source>Small Help</source>
         <translation>Trợ giúp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="512"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="521"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="517"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="526"/>
         <source>Open Logs</source>
         <translation>Mở tệp nhật ký</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="522"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="531"/>
         <source>About </source>
         <translation>Giới thiệu </translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="527"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="536"/>
         <source>About Qt...</source>
         <translation>Giới thiệu về Qt...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="536"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="545"/>
         <source>Save</source>
         <translation>Lưu</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="539"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="548"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="544"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="553"/>
         <source>Save as...</source>
         <translation>Lưu dưới dạng...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="547"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="556"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="556"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="565"/>
         <source>Open...</source>
         <translation>Mở...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="559"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="568"/>
         <source>Open</source>
         <translation>Mở</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="562"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="571"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="573"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="582"/>
         <source>Show grid</source>
         <translation>Hiển thị lưới</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="581"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="590"/>
         <source>Switch on grid</source>
         <translation>Bật lưới</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="586"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="595"/>
         <source>Mouse gestures</source>
         <translation>Thao tác chuột</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="591"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="600"/>
         <source>Preferences...</source>
         <translation>Tùy chọn...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="602"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="611"/>
         <source>Switch on alignment</source>
         <translation>Bật căn chỉnh</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="613"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="622"/>
         <source>Show alignment</source>
         <translation>Hiển thị đường căn chỉnh</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="618"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="627"/>
         <source>Debug</source>
         <translation>Gỡ lỗi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="621"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="630"/>
         <source>F9</source>
         <translation>F9</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="630"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="639"/>
         <source>Generate and build</source>
         <translation>Tạo và biên dịch</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="633"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="642"/>
         <source>Ctrl+F9</source>
         <translation>Ctrl+F9</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="638"/>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="641"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="647"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="650"/>
         <source>Set breakpoints</source>
         <translation>Thiết lập điểm ngắt</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="644"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="653"/>
         <source>Ctrl+F3</source>
         <translation>Ctrl+F3</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="649"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="658"/>
         <source>Cont</source>
         <translation>Tiếp tục</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="652"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="661"/>
         <source>Ctrl+F6</source>
         <translation>Ctrl+F6</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="657"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="666"/>
         <source>Configure</source>
         <translation>Cấu hình</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="660"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="669"/>
         <source>Ctrl+F2</source>
         <translation>Ctrl+F2</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="669"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="678"/>
         <source>New Diagram</source>
         <translation>Sơ đồ mới</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="672"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="681"/>
         <source>Create new diagram in a current model</source>
         <translation>Tạo sơ đồ mới trong mô hình hiện tại</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="681"/>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="684"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="690"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="693"/>
         <source>Fullscreen Mode</source>
         <translation>Chế độ toàn màn hình</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="687"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="696"/>
         <source>Ctrl+Shift+F</source>
         <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="696"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="705"/>
         <source>New Project</source>
         <translation>Dự án mới</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="699"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="708"/>
         <source>Ctrl+Shift+N</source>
         <translation>Ctrl+Shift+N</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="704"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="713"/>
         <source>Import...</source>
         <translation>Nhập...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="707"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="716"/>
         <source>Import QReal project into current.</source>
         <translation>Nhập dự án QReal vào dự án hiện tại.</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="712"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="721"/>
         <source>Save diagram as a picture...</source>
         <translation>Lưu sơ đồ dưới dạng hình ảnh...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="717"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="726"/>
         <source>Close project</source>
         <translation>Đóng dự án</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="722"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="731"/>
         <source>Find...</source>
         <translation>Tìm...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="727"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="736"/>
         <source>Find and replace</source>
         <translation>Tìm và thay thế</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="732"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="741"/>
         <source>Replace by...</source>
         <translation>Thay thế bằng...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="741"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="750"/>
         <source>Undo</source>
         <translation>Hoàn tác</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="744"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="753"/>
         <source>Ctrl+Z</source>
         <translation>Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="753"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="762"/>
         <source>Redo</source>
         <translation>Làm lại</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="756"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="765"/>
         <source>Ctrl+Shift+Z</source>
         <translation>Ctrl+Shift+Z</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="761"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="770"/>
         <source>Export to XML</source>
         <translation>Xuất sang XML</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="769"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="778"/>
         <source>Show all text</source>
         <translation>Hiển thị toàn bộ văn bản</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="772"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="781"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="777"/>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="780"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="786"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="789"/>
         <source>Hide bottom docks</source>
         <translation>Ẩn các bảng ở dưới cùng</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="783"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="792"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="792"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="801"/>
         <source>Copy</source>
         <translation>Sao chép</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="795"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="804"/>
         <source>Ctrl+C</source>
         <translation>Ctrl+C</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="804"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="813"/>
         <source>Paste</source>
         <translation>Dán</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="807"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="816"/>
         <source>Ctrl+V</source>
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="816"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="825"/>
         <source>Cut</source>
         <translation>Cắt</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="819"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="828"/>
         <source>Ctrl+X</source>
         <translation>Ctrl+X</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="824"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="833"/>
         <source>Restore default settings and Quit</source>
         <translation>Khôi phục cài đặt mặc định và thoát</translation>
+    </message>
+    <message>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="842"/>
+        <source>Open Examples...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../qrgui/mainWindow/mainWindow.ui" line="845"/>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -710,160 +720,165 @@ CẢNH BÁO: Việc khôi phục cài đặt không thể hoàn tác
 CẢNH BÁO: Cài đặt sẽ được khôi phục sau khi khởi động lại ứng dụng</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="670"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="676"/>
         <source>Could not save file, try to save it to another place</source>
         <translation>Không thể lưu tệp, hãy thử lưu vào vị trí khác</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="965"/>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="976"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="971"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="982"/>
         <source>Error</source>
         <translation>Lỗi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="965"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="971"/>
         <source>Plugin unloading failed: </source>
         <translation>Dỡ plugin thất bại: </translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="976"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="982"/>
         <source>Plugin loading failed: </source>
         <translation>Tải plugin thất bại: </translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1086"/>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1102"/>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1125"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1092"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1108"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1131"/>
         <source>Shape Editor</source>
         <translation>Trình soạn thảo hình dạng biểu tượng</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1118"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1124"/>
         <source>Text Editor</source>
         <translation>Trình soạn thảo văn bản</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1338"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1344"/>
         <source>New diagram</source>
         <translation>Tạo sơ đồ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1342"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1348"/>
         <source>Open project</source>
         <translation>Mở dự án</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1343"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1349"/>
+        <source>Open examples</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1350"/>
         <source>Save project</source>
         <translation>Lưu dự án</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1344"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1351"/>
         <source>Save project as</source>
         <translation>Lưu dự án dưới dạng</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1345"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1352"/>
         <source>New project</source>
         <translation>Tạo dự án</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1346"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1353"/>
         <source>Undo</source>
         <translation>Hoàn tác</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1347"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1354"/>
         <source>Redo</source>
         <translation>Làm lại</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1348"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1355"/>
         <source>Zoom In</source>
         <translation>Phóng to</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1349"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1356"/>
         <source>Zoom Out</source>
         <translation>Phóng nhỏ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1350"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1357"/>
         <source>Close current tab</source>
         <translation>Đóng tab hiện tại</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1351"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1358"/>
         <source>Close all tabs</source>
         <translation>Đóng tất cả các tab</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1352"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1359"/>
         <source>Print</source>
         <translation>In</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1353"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1360"/>
         <source>Find</source>
         <translation>Tìm</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1354"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1361"/>
         <source>Find and replace</source>
         <translation>Tìm và thay thế</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1355"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1362"/>
         <source>Show all text</source>
         <translation>Hiển thị toàn bộ văn bản</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1356"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1363"/>
         <source>Toggle errors panel</source>
         <translation>Bật/tắt bảng lỗi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1558"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1565"/>
         <source>Gestures Show</source>
         <translation>Thao tác chuột</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1898"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1905"/>
         <source>Shortcuts</source>
         <translation>Phím tắt</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1968"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="1975"/>
         <source>External tools</source>
         <translation>Công cụ bên ngoài</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2018"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2025"/>
         <source>Failed to open %1</source>
         <translation>Không thể mở %1</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2213"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2220"/>
         <source>Recent projects</source>
         <translation>Dự án gần đây</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2217"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2224"/>
         <source>Recent files</source>
         <translation>Tệp gần đây</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2248"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2255"/>
         <source>Save File</source>
         <translation>Lưu tệp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2248"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2255"/>
         <source>Images (*.png *.jpg)</source>
         <translation>Hình ảnh (*.png *.jpg)</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2409"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="2416"/>
         <source>Getting Started</source>
         <translation>Chào mừng!</translation>
     </message>
@@ -921,7 +936,7 @@ CẢNH BÁO: Cài đặt sẽ được khôi phục sau khi khởi động lại
         <translation>Tất cả các tệp (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="344"/>
+        <location filename="../../../qrgui/mainWindow/projectManager/projectManagerWrapper.cpp" line="360"/>
         <source>QReal Save File(*.qrs)</source>
         <translation>Tệp lưu QReal (*.qrs)</translation>
     </message>
