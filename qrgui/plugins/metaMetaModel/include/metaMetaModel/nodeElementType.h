@@ -34,7 +34,7 @@ public:
 	QSizeF size() const;
 
 	/// Sets size of the node element`s appearance.
-	void setSize(const QSizeF &size);
+	void setSize(QSizeF size);
 
 	/// Returns true if instances of this type can be resized with mouse by user.
 	/// If true size grip will appear in element`s corner(s).

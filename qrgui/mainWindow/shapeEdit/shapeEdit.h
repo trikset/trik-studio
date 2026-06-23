@@ -47,7 +47,7 @@ class ShapeEdit : public QWidget, public EditorInterface
 
 public:
 	explicit ShapeEdit(QWidget *parent = nullptr);
-	ShapeEdit(qReal::models::details::LogicalModel *model, const QPersistentModelIndex &index, const int &role
+	ShapeEdit(qReal::models::details::LogicalModel *model, const QPersistentModelIndex &index, int role
 		, bool useTypedPorts);
 	ShapeEdit(const Id &id, const EditorManagerInterface &editorManagerProxy
 		, const qrRepo::GraphicalRepoApi &graphicalRepoApi, MainWindow *mainWindow

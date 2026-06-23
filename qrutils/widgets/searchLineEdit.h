@@ -47,7 +47,7 @@ public:
 	void setLineEditColor(const QColor &color);
 	void focusMe();
 
-	void setSearchOption(const SearchOptions &option);
+	void setSearchOption(qReal::ui::SearchLineEdit::SearchOptions option);
 	void makeSearchOptionsSelectable(bool selectable);
 	void setPlaceHolderTextToLineEdit(const QString &text);
 

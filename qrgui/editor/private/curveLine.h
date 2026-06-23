@@ -49,7 +49,7 @@ protected:
 	QPainterPath bezierCurve(const QPolygonF &line) const;
 
 	/// If user is dragging a point then move it. Otherwise, do nothing
-	virtual void handleEdgeMove(const QPointF &pos);
+	virtual void handleEdgeMove(QPointF pos);
 
 	/// Draw ordinary port or special curve control point
 	virtual void drawPort(QPainter *painter, int portNumber);

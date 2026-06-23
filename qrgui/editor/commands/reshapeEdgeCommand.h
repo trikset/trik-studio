@@ -44,7 +44,7 @@ protected:
 private:
 	void saveConfiguration(QPolygonF &target, Id &src, Id &dst, QPointF &pos, qreal &fromPort, qreal &toPort);
 	void applyConfiguration(const QPolygonF &configuration, const Id &src
-			, const Id &dst, const QPointF &pos, const qreal &fromPort, const qreal &toPort);
+			, const Id &dst, QPointF pos, qreal fromPort, qreal toPort);
 
 	QPolygonF mOldConfiguration;
 	QPolygonF mNewConfiguration;

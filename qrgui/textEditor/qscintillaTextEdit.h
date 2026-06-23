@@ -38,7 +38,7 @@ class QRGUI_TEXT_EDITOR_EXPORT QScintillaTextEdit : public QsciScintilla, public
 
 public:
 	QScintillaTextEdit();
-	QScintillaTextEdit(const QPersistentModelIndex &index, const int &role);
+	QScintillaTextEdit(const QPersistentModelIndex &index, int role);
 
 	/// Destructor which runs after closing the tab with text editor. Allows to save written text.
 	~QScintillaTextEdit() override;

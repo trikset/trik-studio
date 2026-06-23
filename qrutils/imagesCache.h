@@ -35,12 +35,12 @@ public:
 	/// Draws image with given file name with a given painter in given rectangle. Note that actual file, from which
 	/// an image will be loaded may be different from fileName, as described in selectBestImageFile.
 	/// @see selectBestImageFile
-	void drawImage(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom);
+	void drawImage(const QString &fileName, QPainter &painter, QRect rect, qreal zoom);
 
 	/// Draws image with given file name with a given painter in given rectangle. Note that actual file, from which
 	/// an image will be loaded may be different from fileName, as described in selectBestImageFile.
 	/// Images of previous sizes and zooms are not memorized.
-	void drawImageWithoutCachingSize(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom);
+	void drawImageWithoutCachingSize(const QString &fileName, QPainter &painter, QRect rect, qreal zoom);
 
 private:
 	friend utils::Singleton<ImagesCache>;
@@ -70,7 +70,7 @@ private:
 
 }
 
-inline uint qHash(const QRect &rect)
+inline uint qHash(QRect rect)
 {
 	return qHash(rect.width()) ^ qHash(rect.height()) ^ qHash(rect.top()) ^ qHash(rect.left());
 }

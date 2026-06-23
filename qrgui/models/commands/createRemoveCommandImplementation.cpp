@@ -110,7 +110,7 @@ void CreateRemoveCommandImplementation::removeOne(ElementInfo &element)
 	}
 }
 
-void CreateRemoveCommandImplementation::setNewPosition(const QPointF &position)
+void CreateRemoveCommandImplementation::setNewPosition(QPointF position)
 {
 	mElements.first().setPos(position);
 }

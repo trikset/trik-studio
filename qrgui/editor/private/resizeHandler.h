@@ -96,7 +96,7 @@ private:
 	 * or more left than (sizeOfForestalling, sizeOfForestalling).
 	 * @param shift Child shift.
 	 */
-	void moveChildren(const QPointF &shift) const;
+	void moveChildren(QPointF shift) const;
 
 	/**
 	 * Returns bounding rectangle for childItem.

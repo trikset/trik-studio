@@ -96,7 +96,7 @@ void Arch::resizeItem(QGraphicsSceneMouseEvent *event)
 	Q_UNUSED(event);
 }
 
-QRectF Arch::sceneBoundingRectCoord(const QPoint &topLeftPicture)
+QRectF Arch::sceneBoundingRectCoord(QPoint topLeftPicture)
 {
 	const qreal x1 = scenePos().x() + mRect.x() - topLeftPicture.x();
 	const qreal y1 = scenePos().y() + mRect.y() - topLeftPicture.y();

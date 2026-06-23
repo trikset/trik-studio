@@ -225,7 +225,7 @@ QList<NonZoneNode *> SemanticTreeManager::clones(NonZoneNode *node) const
 	return result;
 }
 
-bool SemanticTreeManager::isParent(NonZoneNode *node, const SemanticTreeManager::CloneInfo &cloneInfo) const
+bool SemanticTreeManager::isParent(NonZoneNode *node, SemanticTreeManager::CloneInfo cloneInfo) const
 {
 	if (node == cloneInfo.parent) {
 		return true;

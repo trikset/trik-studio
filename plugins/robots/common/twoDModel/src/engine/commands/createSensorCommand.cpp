@@ -20,7 +20,7 @@ CreateSensorCommand::CreateSensorCommand(model::SensorsConfiguration &configurat
 		, const QString &robotModel
 		, const kitBase::robotModel::PortInfo &port
 		, const kitBase::robotModel::DeviceInfo &device
-		, const QPointF &position
+		, QPointF position
 		, const qreal direction)
 	: mImpl(configurator, robotModel, port, device, position, direction)
 {

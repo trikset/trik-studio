@@ -38,7 +38,7 @@ public:
 	virtual EdgeArrangeCriteria arrangeCriteria(const NodeElement *node, const QLineF &portLine) const;
 
 	/// @return list of context menu actions available for square link at position pos
-	virtual QList<ContextMenuAction *> extraActions(const QPointF &pos);
+	virtual QList<ContextMenuAction *> extraActions(QPointF pos);
 
 protected:
 	enum LineType {
@@ -50,10 +50,10 @@ protected:
 
 	/// If link reshaping is started on a segment, move that segment to position pos (in link's local coordinates)
 	/// If user is trying to move port, do it. Otherwise do nothing
-	virtual void handleEdgeMove(const QPointF &pos);
+	virtual void handleEdgeMove(QPointF pos);
 
 	/// Move segment at point oldPos to newPos, keeping the link square
-	void moveSegment(const QPointF &oldPos, const QPointF &newPos);
+	void moveSegment(QPointF oldPos, QPointF newPos);
 
 	/// Remove loops, too short segments and coinciding points,
 	/// ensure that link doesn't intersect adjacent nodes and stays square

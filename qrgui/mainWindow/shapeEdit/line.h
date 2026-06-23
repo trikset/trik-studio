@@ -34,7 +34,7 @@ public:
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
 	virtual void reshapeRectWithShift();
 
-	QPair<QPair<QString, QString>, QPair<QString, QString> > setXandYBefore(const QRect &rect);
+	QPair<QPair<QString, QString>, QPair<QString, QString> > setXandYBefore(QRect rect);
 	void setDomXandY(QDomElement &dom, const QPair<QPair<QString, QString>, QPair<QString, QString> > &pair);
 	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
 			, const QPoint &topLeftPicture);

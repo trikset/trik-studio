@@ -48,7 +48,7 @@ public:
 	void checkPeaks();
 
 	/// @return QPointF intersection point of (func y = X) and mainplot
-	QPointF pointOfVerticalIntersection(const QPointF &position) const;
+	QPointF pointOfVerticalIntersection(QPointF position) const;
 
 	void setViewParams(const qreal viewPortHeight, const qreal leftLimit);
 

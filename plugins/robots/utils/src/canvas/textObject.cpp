@@ -83,7 +83,7 @@ void TextObject::setFontSize(int fontSize)
 	mFontSize = fontSize;
 }
 
-void TextObject::paint(QPainter *painter, const QRect &outputRect)
+void TextObject::paint(QPainter *painter, QRect outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
 	painter->setPen(Qt::black);

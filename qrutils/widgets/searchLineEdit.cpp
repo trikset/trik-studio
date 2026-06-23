@@ -79,7 +79,7 @@ void SearchLineEdit::focusMe()
 	mLineEdit->setFocus(Qt::ShortcutFocusReason);
 }
 
-void SearchLineEdit::setSearchOption(const SearchLineEdit::SearchOptions &option)
+void SearchLineEdit::setSearchOption(SearchLineEdit::SearchOptions option)
 {
 	mCurrentOption = option;
 }

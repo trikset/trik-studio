@@ -40,7 +40,7 @@ public:
 	~SensorViewer();
 
 	/// @note All intervals in ms
-	void configureUserOptions(const int &fpsDelay, const int &autoScaleDelay, const int &textInfoUpdateDelay);
+	void configureUserOptions(int fpsDelay, int autoScaleDelay, int textInfoUpdateDelay);
 
 	void resizeEvent(QResizeEvent *event = nullptr);
 

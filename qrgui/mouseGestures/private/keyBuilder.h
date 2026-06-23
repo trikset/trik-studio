@@ -26,7 +26,7 @@ public:
 	static Key getKey(const PathVector &mousePath, int heightSize, int widthSize);
 
 private:
-	static void rasterizeSegment(const SquarePos &pos1, const SquarePos &pos2, Key *segment);
+	static void rasterizeSegment(qReal::gestures::SquarePos pos1, qReal::gestures::SquarePos pos2, Key *segment);
 };
 
 }

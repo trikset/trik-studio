@@ -48,7 +48,7 @@ public:
 	void addElementsToModel(QList<ElementInfo> &elementsInfo) override;
 	virtual QVariant data(const QModelIndex &index, int role) const override;
 	virtual bool setData(const QModelIndex &index, const QVariant &value, int role) override;
-	virtual void changeParent(const QModelIndex &element, const QModelIndex &parent, const QPointF &position);
+	virtual void changeParent(const QModelIndex &element, const QModelIndex &parent, QPointF position);
 	void changeParent(const Id &parentId, const Id &childId);
 	const qrRepo::LogicalRepoApi &api() const;
 	qrRepo::LogicalRepoApi &mutableApi() const;

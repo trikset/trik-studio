@@ -392,7 +392,7 @@ bool LogicalModel::setData(const QModelIndex &index, const QVariant &value, int 
 	return false;
 }
 
-void LogicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent, const QPointF &position)
+void LogicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent,  QPointF position)
 {
 	Q_UNUSED(position)
 	if (!parent.isValid() || element.parent() == parent) {

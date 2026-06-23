@@ -27,7 +27,7 @@ class EditorManager;
 class GroupNode
 {
 public:
-	GroupNode(const QString &type, const QString &id, const QPointF &position, const QString &parent);
+	GroupNode(const QString &type, const QString &id, QPointF position, const QString &parent);
 
 	QString type;
 	QString id;
@@ -62,7 +62,7 @@ public:
 	void setDiagram(const QString &diagram);
 	QString diagram() const;
 
-	void addNode(const QString &type, const QString &id, const QPointF &pos, const QString &parent);
+	void addNode(const QString &type, const QString &id, QPointF pos, const QString &parent);
 	void addEdge(const QString &type, const QString &from, const QString &to);
 
 	QList<GroupNode> nodes() const;

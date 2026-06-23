@@ -22,7 +22,7 @@
 
 using namespace utils;
 
-void ImagesCache::drawImage(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom)
+void ImagesCache::drawImage(const QString &fileName, QPainter &painter, QRect rect, qreal zoom)
 {
 	if (mFileNamePixmapMap.contains(fileName)) {
 		painter.drawPixmap(rect, mFileNamePixmapMap.value(fileName));
@@ -65,7 +65,7 @@ void ImagesCache::drawImage(const QString &fileName, QPainter &painter, const QR
 	}
 }
 
-void ImagesCache::drawImageWithoutCachingSize(const QString &fileName, QPainter &painter, const QRect &rect, qreal zoom)
+void ImagesCache::drawImageWithoutCachingSize(const QString &fileName, QPainter &painter, QRect rect, qreal zoom)
 {
 	QTransform scale;
 	scale.scale(zoom, zoom);

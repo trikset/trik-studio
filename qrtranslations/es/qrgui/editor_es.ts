@@ -79,17 +79,17 @@
         <translation>Conectar con el elemento actual</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="694"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="695"/>
         <source>Replace by...</source>
         <translation>Reemplazar por...</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="926"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="927"/>
         <source>Add child</source>
         <translation>Agregar elemento secundario</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="1418"/>
+        <location filename="../../../qrgui/editor/editorViewScene.cpp" line="1419"/>
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>

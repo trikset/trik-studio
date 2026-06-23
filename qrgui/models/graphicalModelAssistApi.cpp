@@ -289,8 +289,8 @@ bool GraphicalModelAssistApi::hasLabel(const Id &graphicalId, int index)
 void GraphicalModelAssistApi::createLabel(
 		const Id &graphicalId
 		, int index
-		, const QPointF &position
-		, const QSizeF &size
+		, QPointF position
+		, QSizeF size
 		)
 {
 	const QModelIndex modelIndex = mGraphicalPartModel.addGraphicalPart(graphicalId, index);
@@ -301,13 +301,13 @@ void GraphicalModelAssistApi::createLabel(
 	mGraphicalPartModel.setData(modelIndex, configuration, GraphicalPartModel::configurationRole);
 }
 
-void GraphicalModelAssistApi::setLabelPosition(const Id &graphicalId, int index, const QPointF &position)
+void GraphicalModelAssistApi::setLabelPosition(const Id &graphicalId, int index, QPointF position)
 {
 	const QModelIndex modelIndex = mGraphicalPartModel.findIndex(graphicalId, index);
 	mGraphicalPartModel.setData(modelIndex, position, GraphicalPartModel::positionRole);
 }
 
-void GraphicalModelAssistApi::setLabelSize(const Id &graphicalId, int index, const QSizeF &size)
+void GraphicalModelAssistApi::setLabelSize(const Id &graphicalId, int index, QSizeF size)
 {
 	const QModelIndex modelIndex = mGraphicalPartModel.findIndex(graphicalId, index);
 

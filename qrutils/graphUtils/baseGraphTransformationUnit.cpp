@@ -553,7 +553,7 @@ QList<QHash<Id, Id> > BaseGraphTransformationUnit::matches()
 	return mMatches;
 }
 
-void BaseGraphTransformationUnit::pause(const int &time)
+void BaseGraphTransformationUnit::pause(int time)
 {
 	QEventLoop loop;
 	QTimer::singleShot(time, &loop, SLOT(quit()));

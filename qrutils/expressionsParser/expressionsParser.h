@@ -60,20 +60,20 @@ protected:
 	};
 
 protected:
-	virtual bool isLetter(const QChar &c) const;
+	virtual bool isLetter(QChar c) const;
 
-	bool isDigit(const QChar &c) const;
-	bool isSign(const QChar &c) const;
-	bool isExp(const QChar &c) const;
-	bool isPoint(const QChar &c) const;
-	bool isRoundBracket(const QChar &c) const;
-	bool isDisjunction(const QChar &c) const;
-	bool isConjunction(const QChar &c) const;
-	bool isComparison(const QChar &c) const;
-	bool isArithmeticalMinusOrPlus(const QChar &c) const;
-	bool isMultiplicationOrDivision(const QChar &c) const;
-	bool isDelimiter(const QChar &c) const;
-	bool isAssignment(const QChar &c) const;
+	bool isDigit(QChar c) const;
+	bool isSign(QChar c) const;
+	bool isExp(QChar c) const;
+	bool isPoint(QChar c) const;
+	bool isRoundBracket(QChar c) const;
+	bool isDisjunction(QChar c) const;
+	bool isConjunction(QChar c) const;
+	bool isComparison(QChar c) const;
+	bool isArithmeticalMinusOrPlus(QChar c) const;
+	bool isMultiplicationOrDivision(QChar c) const;
+	bool isDelimiter(QChar c) const;
+	bool isAssignment(QChar c) const;
 
 	bool isHtmlBrTag(const QString &stream, int &pos) const;
 
@@ -91,7 +91,7 @@ protected:
 	bool parseConjunction(const QString &stream, int &pos);
 	bool parseDisjunction(const QString &stream, int &pos);
 
-	void error(const ParseErrorType &type, const QString &pos = "", const QString &expected = ""
+	void error(utils::ExpressionsParser::ParseErrorType type, const QString &pos = "", const QString &expected = ""
 			, const QString &got = "");
 
 	bool isEndOfStream(const QString &stream, int &pos);

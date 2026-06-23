@@ -29,7 +29,7 @@ public:
 	void setFontItalic(bool isChecked);
 	void setFontBold(bool isChecked);
 	void setFontUnderline(bool isChecked);
-	void setPoint(const QPoint &point);
+	void setPoint(QPoint point);
 	QFont font() const;
 	QString name() const;
 	virtual void setIsDynamicText(bool isDynamic);

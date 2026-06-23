@@ -33,7 +33,7 @@ public:
 	static QString serializeQVariant(const QVariant &v);
 
 	/// Serializes given QPoint to string.
-	static QString serializeQPointF(const QPointF &p);
+	static QString serializeQPointF(QPointF p);
 
 	/// Serializes given QPolygonF to string.
 	static QString serializeQPolygonF(const QPolygonF &p);

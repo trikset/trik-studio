@@ -44,7 +44,7 @@ public:
 	Q_INVOKABLE void moveToPoint(int x, int y, int duration);
 
 	/// Moves virtual cursor to center of \a target rectangle for \a duration milliseconds.
-	Q_INVOKABLE void moveToRect(const QRect &target, int duration);
+	Q_INVOKABLE void moveToRect(QRect target, int duration);
 
 	/// Moves virtual cursor towards the given cordinates on scene for \a duration milliseconds.
 	/// @param target The viewport widget of the scene.
@@ -80,12 +80,12 @@ protected:
 	void paintEvent(QPaintEvent *event) override;
 
 private:
-	void simulateMouse(QObject *reciever, QEvent::Type event, const QPointF &pos, Qt::MouseButton buttons);
+	void simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos, Qt::MouseButton buttons);
 	void edgeFinished();
 
 	QPoint widgetPos(QWidget *target) const;
-	void animate(const QPoint &from, int toX, int toY, int duration);
-	void animate(const QPoint &from, const QPoint &to, int duration);
+	void animate(QPoint from, int toX, int toY, int duration);
+	void animate(QPoint from, QPoint to, int duration);
 
 	ScriptAPI &mScriptAPI;
 	QPropertyAnimation *mCursorMoveAnimation;  // Takes ownership

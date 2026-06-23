@@ -146,7 +146,7 @@ void PointsQueueProcessor::checkPeaks()
 	recalcPointsQueue(oldMin, oldMax, mGraphHeight);
 }
 
-QPointF PointsQueueProcessor::pointOfVerticalIntersection(const QPointF &position) const
+QPointF PointsQueueProcessor::pointOfVerticalIntersection(QPointF position) const
 {
 	if (mPointsQueue.isEmpty())
 		return QPointF(0, 0);

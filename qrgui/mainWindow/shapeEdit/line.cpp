@@ -186,7 +186,7 @@ void Line::reshapeRectWithShift()
 	}
 }
 
-QPair<QPair<QString, QString>, QPair<QString, QString> > Line::setXandYBefore(const QRect &rect)
+QPair<QPair<QString, QString>, QPair<QString, QString> > Line::setXandYBefore(QRect rect)
 {
 	QString x1;
 	QString y1;

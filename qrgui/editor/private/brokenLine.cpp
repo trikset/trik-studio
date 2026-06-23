@@ -30,7 +30,7 @@ BrokenLine::BrokenLine(EdgeElement *edge
 	connectAction(&mMinimizeAction, this, SLOT(minimize()));
 }
 
-void BrokenLine::handleEdgeMove(const QPointF &pos)
+void BrokenLine::handleEdgeMove(QPointF pos)
 {
 	if (mDragType == EdgeElement::noPort) {
 		mDragType = addPoint(mDragStartPoint);
@@ -43,7 +43,7 @@ void BrokenLine::handleEdgeMove(const QPointF &pos)
 	mEdge->setLine(line);
 }
 
-int BrokenLine::addPoint(const QPointF &pos)
+int BrokenLine::addPoint(QPointF pos)
 {
 	const int segmentNumber = defineSegment(pos);
 	if (segmentNumber >= 0) {
@@ -133,7 +133,7 @@ void BrokenLine::alignToGrid()
 	mEdge->setLine(line);
 }
 
-QPointF BrokenLine::alignedPoint(const QPointF &point) const
+QPointF BrokenLine::alignedPoint(QPointF point) const
 {
 	QPointF result = mEdge->mapToScene(point);
 	const int indexGrid = SettingsManager::value("IndexGrid").toInt();
@@ -147,7 +147,7 @@ QPointF BrokenLine::alignedPoint(const QPointF &point) const
 	return mEdge->mapFromScene(result);
 }
 
-QList<ContextMenuAction *> BrokenLine::extraActions(const QPointF &pos)
+QList<ContextMenuAction *> BrokenLine::extraActions(QPointF pos)
 {
 	QList<ContextMenuAction *> result;
 
@@ -166,7 +166,7 @@ QList<ContextMenuAction *> BrokenLine::extraActions(const QPointF &pos)
 	return result;
 }
 
-void BrokenLine::deletePoint(const QPointF &pos)
+void BrokenLine::deletePoint(QPointF pos)
 {
 	if (delPointActionIsPossible(pos)) {
 		const int pointNumber = definePoint(pos);
@@ -177,7 +177,7 @@ void BrokenLine::deletePoint(const QPointF &pos)
 	}
 }
 
-void BrokenLine::deleteSegment(const QPointF &pos)
+void BrokenLine::deleteSegment(QPointF pos)
 {
 	if (delSegmentActionIsPossible(pos)) {
 		const int segmentNumber = defineSegment(pos);
@@ -188,7 +188,7 @@ void BrokenLine::deleteSegment(const QPointF &pos)
 	}
 }
 
-bool BrokenLine::delPointActionIsPossible(const QPointF &pos) const
+bool BrokenLine::delPointActionIsPossible(QPointF pos) const
 {
 	if (mEdge->isLoop()) {
 		return false;
@@ -198,7 +198,7 @@ bool BrokenLine::delPointActionIsPossible(const QPointF &pos) const
 	return (pointIndex > 0) && (pointIndex < mEdge->line().count() - 1);
 }
 
-bool BrokenLine::delSegmentActionIsPossible(const QPointF &pos)
+bool BrokenLine::delSegmentActionIsPossible(QPointF pos)
 {
 	if (mEdge->isLoop()) {
 		return false;

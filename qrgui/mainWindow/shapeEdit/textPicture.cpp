@@ -85,7 +85,7 @@ QString TextPicture::name() const
 	return mText.toPlainText();
 }
 
-void TextPicture::setPoint(const QPoint &point)
+void TextPicture::setPoint(QPoint point)
 {
 	setPos(point);
 }

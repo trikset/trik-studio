@@ -29,7 +29,7 @@ SquareLine::SquareLine(EdgeElement *edge
 	connectAction(&mLayOutAction, this, SLOT(minimize()));
 }
 
-void SquareLine::handleEdgeMove(const QPointF &pos)
+void SquareLine::handleEdgeMove(QPointF pos)
 {
 	QPolygonF line = mEdge->line();
 
@@ -117,7 +117,7 @@ void SquareLine::adjustEnd()
 	mEdge->setLine(line);
 }
 
-void SquareLine::moveSegment(const QPointF &oldPos, const QPointF &newPos)
+void SquareLine::moveSegment(QPointF oldPos, QPointF newPos)
 {
 	const int segmentNumber = defineSegment(oldPos);
 	if ((segmentNumber <= 0) || (segmentNumber >= mEdge->line().count() - 2)) {
@@ -541,7 +541,7 @@ QPointF SquareLine::portArrangePoint(const NodeElement *node) const
 	return QPointF();
 }
 
-QList<ContextMenuAction *> SquareLine::extraActions(const QPointF &pos)
+QList<ContextMenuAction *> SquareLine::extraActions(QPointF pos)
 {
 	Q_UNUSED(pos)
 

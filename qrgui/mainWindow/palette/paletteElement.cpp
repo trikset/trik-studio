@@ -21,7 +21,7 @@ PaletteElement::PaletteElement(const Id &id
 		, const QString &name
 		, const QString &description
 		, const QIcon &icon
-		, const QSize &preferredSize
+		, QSize preferredSize
 		, const Id &explosionTarget)
 	: mId(id)
 	, mName(name)

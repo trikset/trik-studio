@@ -94,7 +94,7 @@ void TouchSupportManager::grabTapAndHold()
 	mEditorView->grabGesture(Qt::TapAndHoldGesture);
 }
 
-void TouchSupportManager::simulateMouse(QObject *reciever, QEvent::Type event, const QPointF &pos
+void TouchSupportManager::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos
 		, Qt::MouseButtons buttons)
 {
 	QMouseEvent *mouseEvent = new QMouseEvent(event, pos, mButton, buttons, Qt::NoModifier);
@@ -136,7 +136,7 @@ void TouchSupportManager::simulateRightClick(QTapAndHoldGesture *gesture)
 	simulateMouse(mEditorView->viewport(), QEvent::MouseButtonRelease, position, Qt::NoButton);
 }
 
-bool TouchSupportManager::isElementUnder(const QPointF &pos)
+bool TouchSupportManager::isElementUnder(QPointF pos)
 {
 	for (QGraphicsItem * const item : mEditorView->items(pos.toPoint())) {
 		if (dynamic_cast<Element *>(item)) {

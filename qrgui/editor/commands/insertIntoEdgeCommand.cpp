@@ -28,8 +28,8 @@ InsertIntoEdgeCommand::InsertIntoEdgeCommand(EditorViewScene &scene
 		, const Id &firstElem
 		, const Id &lastElem
 		, const Id &parent
-		, const QPointF &scenePos
-		, const QPointF &shift
+		, QPointF scenePos
+		, QPointF shift
 		, bool isFromLogicalModel
 		, CreateElementsCommand *createCommand)
 	: AbstractCommand()

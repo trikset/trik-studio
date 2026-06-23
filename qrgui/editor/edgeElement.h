@@ -110,8 +110,8 @@ public:
 	QStringList fromPortTypes() const;
 	QStringList toPortTypes() const;
 
-	void placeStartTo(const QPointF &place);
-	void placeEndTo(const QPointF &place);
+	void placeStartTo(QPointF place);
+	void placeEndTo(QPointF place);
 	void moveConnection(NodeElement *node, const qreal portId);
 
 	/// Resort edges connected to linear ports of adjacent nodes
@@ -121,7 +121,7 @@ public:
 
 	void setColorRect(bool bl) override;
 
-	void breakPointHandler(const QPointF &pos);
+	void breakPointHandler(QPointF pos);
 	bool isBreakPointPressed();
 	void breakPointUnpressed();
 
@@ -145,7 +145,7 @@ public:
 	void connectLoopEdge(NodeElement *newMaster);
 
 	/// @return Node at position that is more appropriate for the link to connect to.
-	NodeElement *getNodeAt(const QPointF &position, bool isStart);
+	NodeElement *getNodeAt(QPointF position, bool isStart);
 
 	/// Determine on which side of a node (top, bottom, right or left) the link's end is placed
 	NodeSide defineNodePortSide(bool isStart) const;
@@ -157,10 +157,10 @@ public:
 	void setPos(qreal x, qreal y);
 
 	/// Proxies QGraphicsItem`s setPos filtering out NaNs
-	void setPos(const QPointF &pos);
+	void setPos(QPointF pos);
 
 	/// @return Number of segment under position pos (if there is no such segment, return -1)
-	int defineSegment(const QPointF &scenePos) const;
+	int defineSegment(QPointF scenePos) const;
 
 protected:
 	void paint(QPainter* p, const QStyleOptionGraphicsItem *opt, QWidget* w) override;
@@ -190,10 +190,11 @@ private:
 	void searchNextPort();
 
 	/// Create indent of bounding rect, depending on the rect size.
-	QPointF boundingRectIndent(const QPointF &point, NodeSide direction);
+	QPointF boundingRectIndent(QPointF point, NodeSide direction);
 
 	/// Returns true, if the sides adjacent.
-	bool isNeighbor(const NodeSide &startSide, const NodeSide &endSide) const;
+	bool isNeighbor(qReal::gui::editor::EdgeElement::NodeSide startSide,
+						 qReal::gui::editor::EdgeElement::NodeSide endSide) const;
 
 	/// Returns the next clockwise side.
 	NodeSide rotateRight(NodeSide side) const;

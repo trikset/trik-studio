@@ -53,7 +53,7 @@ void CreateElementsCommand::addExplosionCommands(const QList<qReal::ElementInfo>
 	}
 }
 
-void CreateElementsCommand::setNewPosition(const QPointF &position)
+void CreateElementsCommand::setNewPosition(QPointF position)
 {
 	mImpl.setNewPosition(position);
 }

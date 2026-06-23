@@ -265,7 +265,7 @@ void SensorViewer::onSensorChange()
 	}
 }
 
-void SensorViewer::configureUserOptions(const int &fpsDelay, const int &autoScaleDelay, const int &textInfoUpdateDelay)
+void SensorViewer::configureUserOptions(int fpsDelay, int autoScaleDelay, int textInfoUpdateDelay)
 {
 	const int maxFpsInterval = 100;
 	mFpsInterval = (fpsDelay < maxFpsInterval) ? fpsDelay : maxFpsInterval;

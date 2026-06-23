@@ -19,8 +19,8 @@ using namespace qReal::commands;
 ChangeParentCommand::ChangeParentCommand(models::LogicalModelAssistApi &logicalApi
 		, models::GraphicalModelAssistApi &graphicalApi
 		, bool isLogical, const Id &id, const Id &oldParent
-		, const Id &newParent, const QPointF &oldPosition
-		, const QPointF &newPosition)
+		, const Id &newParent, QPointF oldPosition
+		, QPointF newPosition)
 	: mLogicalApi(logicalApi)
 	, mGraphicalApi(graphicalApi)
 	, mIsLogical(isLogical)
@@ -44,7 +44,7 @@ bool ChangeParentCommand::restoreState()
 	return true;
 }
 
-void ChangeParentCommand::changeParent(const qReal::Id &parent, const QPointF &position)
+void ChangeParentCommand::changeParent(const qReal::Id &parent, QPointF position)
 {
 	if (mIsLogical) {
 		mLogicalApi.changeParent(mId, parent, position);

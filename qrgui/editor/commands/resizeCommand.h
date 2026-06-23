@@ -42,7 +42,7 @@ public:
 	virtual ~ResizeCommand() {}
 
 	static ResizeCommand *create(const NodeElement * const element, const QRectF &newContents
-			, const QPointF &newPos, const QRectF &oldContents, const QPointF &oldPos);
+			, QPointF newPos, const QRectF &oldContents, QPointF oldPos);
 
 	virtual void startTracking();
 	virtual void stopTracking();

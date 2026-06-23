@@ -32,7 +32,7 @@ const EditorManagerInterface &ModelsAssistApi::editorManagerInterface() const
 }
 
 Id ModelsAssistApi::createElement(const Id &parent, const Id &id, const Id &logicalId
-		, bool isFromLogicalModel, const QString &name, const QPointF &position)
+		, bool isFromLogicalModel, const QString &name, QPointF position)
 {
 	Q_ASSERT(parent.idSize() == 4);
 	Id newId = id;

@@ -61,24 +61,24 @@ public:
 
 	void clearScene();
 
-	virtual int launchEdgeMenu(EdgeElement *edge, NodeElement *node, const QPointF &scenePos
+	virtual int launchEdgeMenu(EdgeElement *edge, NodeElement *node, QPointF scenePos
 			, bool canBeConnected, qReal::commands::CreateElementsCommand **elementCommand = nullptr);
 
 	//! @arg shiftToParent vector from (0,0) of container Node to new Element (aka localPos)
 	virtual Id createElement(const QString &idString
-			, const QPointF &scenePos
+			, QPointF scenePos
 			, qReal::commands::CreateElementsCommand **createCommandPointer = nullptr
 			, bool executeImmediately = true);
 
-	virtual void createElement(const QMimeData *mimeData, const QPointF &scenePos
+	virtual void createElement(const QMimeData *mimeData, QPointF scenePos
 			, qReal::commands::CreateElementsCommand **createCommandPointer = nullptr
 			, bool executeImmediately = true);
 
 	// is virtual only to trick linker. is used from plugins and generators and we have no intention of
 	// including the scene (with dependencies) there
 	virtual Element *getElem(const Id &id) const;
-	Element *findElemAt(const QPointF &position) const;
-	NodeElement *findNodeAt(const QPointF &position) const;
+	Element *findElemAt(QPointF position) const;
+	NodeElement *findNodeAt(QPointF position) const;
 
 	virtual Id rootItemId() const;
 	/// @todo: remove theese getters
@@ -115,7 +115,7 @@ public:
 			, qReal::commands::CreateElementsCommand **createCommandPointer = nullptr
 			, bool executeImmediately = true);
 
-	EdgeElement *edgeForInsertion(const QPointF &scenePos);
+	EdgeElement *edgeForInsertion(QPointF scenePos);
 
 	void resolveOverlaps(NodeElement* node, QPointF scenePos, QPointF shift
 			, QMap<Id, QPointF> &shifting) const;
@@ -228,10 +228,10 @@ private:
 	/// sets sceneRect to (0, 0, 1000, 1000) by adding its corners to the scene
 	/// (to keep ability of scene rect to grow automatically)
 	void initCorners();
-	void setCorners(const QPointF &topLeft, const QPointF &bottomRight);
+	void setCorners(QPointF topLeft, QPointF bottomRight);
 
 	void initializeActions();
-	void initContextMenu(Element *e, const QPointF &pos);
+	void initContextMenu(Element *e, QPointF pos);
 
 	inline bool isArrow(int key);
 
@@ -242,7 +242,7 @@ private:
 	QPointF currentMousePos() const;
 
 	void createElement(const ElementInfo &elementInfo
-			, const QPointF &scenePos
+			, QPointF scenePos
 			, qReal::commands::CreateElementsCommand **createCommandPointer
 			, bool executeImmediately);
 

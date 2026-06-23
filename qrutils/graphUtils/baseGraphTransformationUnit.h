@@ -128,7 +128,7 @@ protected:
 	virtual void report(const QString &message, bool isError) const;
 
 	/// Hold highlight for some time in ms
-	void pause(const int &time);
+	void pause(int time);
 
 	gui::MainWindowInterpretersInterface &mInterpretersInterface;
 	LogicalModelAssistInterface &mLogicalModelApi;

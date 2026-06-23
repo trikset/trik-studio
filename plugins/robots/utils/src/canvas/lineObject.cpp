@@ -24,7 +24,7 @@ LineObject::LineObject(QObject *parent)
 {
 }
 
-LineObject::LineObject(const QPoint &begin, const QPoint &end, const QColor &color, int thickness, QObject *parent)
+LineObject::LineObject(QPoint begin, QPoint end, const QColor &color, int thickness, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mBegin(begin)
 	, mEnd(end)
@@ -36,7 +36,7 @@ QPoint LineObject::begin() const
 	return mBegin;
 }
 
-void LineObject::setBegin(const QPoint &begin)
+void LineObject::setBegin(QPoint begin)
 {
 	mBegin = begin;
 }
@@ -46,7 +46,7 @@ QPoint LineObject::end() const
 	return mEnd;
 }
 
-void LineObject::setEnd(const QPoint &end)
+void LineObject::setEnd(QPoint end)
 {
 	mEnd = end;
 }
@@ -57,7 +57,7 @@ QRect LineObject::boundingRect() const
 			, QPoint(qMax(mBegin.x(), mEnd.x()), qMax(mBegin.y(), mEnd.y())));
 }
 
-void LineObject::paint(QPainter *painter, const QRect &outputRect)
+void LineObject::paint(QPainter *painter, QRect outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
 	painter->drawLine(mBegin, mEnd);

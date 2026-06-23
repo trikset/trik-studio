@@ -45,7 +45,9 @@ trik::TrikTextualInterpreter::TrikTextualInterpreter(
 	connect(&mBrick, &TrikBrick::error, this, &TrikTextualInterpreter::reportError);
 	connect(&mBrick, &TrikBrick::warning, this, &TrikTextualInterpreter::reportWarning);
 
-	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer* const &in){
+	// clazy:excludeall=function-args-by-value
+	auto atimerToScriptValue = [](QScriptEngine *engine, utils::AbstractTimer * const &in) {
+	// clazy:enable
 	return engine->newQObject(in);
 	};
 	auto atimerFromScriptValue = [](const QScriptValue &object, utils::AbstractTimer* &out){

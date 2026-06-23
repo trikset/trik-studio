@@ -122,19 +122,19 @@ public:
 	/// @param index - index of a part, which uniquely identifies label in an element.
 	/// @param position - initial position of a label in coordinates of an element.
 	/// @param size - initial size of a label.
-	void createLabel(const Id &graphicalId, int index, const QPointF &position, const QSizeF &size);
+	void createLabel(const Id &graphicalId, int index, QPointF position, QSizeF size);
 
 	/// Sets label position.
 	/// @param graphicalId - id of an element to which label belongs.
 	/// @param index - index of a part, which uniquely identifies label in an element.
 	/// @param position - position of a label in coordinates of an element.
-	void setLabelPosition(const Id &graphicalId, int index, const QPointF &position);
+	void setLabelPosition(const Id &graphicalId, int index, QPointF position);
 
 	/// Sets label size.
 	/// @param graphicalId - id of an element to which label belongs.
 	/// @param index - index of a part, which uniquely identifies label in an element.
 	/// @param size - size of a label.
-	void setLabelSize(const Id &graphicalId, int index, const QSizeF &size);
+	void setLabelSize(const Id &graphicalId, int index, QSizeF size);
 
 	/// Returns label position.
 	/// @param graphicalId - id of an element to which label belongs.

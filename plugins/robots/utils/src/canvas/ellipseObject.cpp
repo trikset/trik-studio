@@ -27,7 +27,7 @@ EllipseObject::EllipseObject(QObject *parent)
 {
 }
 
-EllipseObject::EllipseObject(const QPoint &center, int semiDiameterX, int semiDiameterY
+EllipseObject::EllipseObject(QPoint center, int semiDiameterX, int semiDiameterY
 		, const QColor &color, int thickness, bool filled, QObject *parent)
 	: CanvasObject(color, thickness, parent)
 	, mCenter(center)
@@ -42,7 +42,7 @@ QPoint EllipseObject::center() const
 	return mCenter;
 }
 
-void EllipseObject::setCenter(const QPoint &center)
+void EllipseObject::setCenter(QPoint center)
 {
 	mCenter = center;
 }
@@ -82,7 +82,7 @@ void EllipseObject::setFilled(bool filled)
 	mFilled = filled;
 }
 
-void EllipseObject::paint(QPainter *painter, const QRect &outputRect)
+void EllipseObject::paint(QPainter *painter, QRect outputRect)
 {
 	CanvasObject::paint(painter, outputRect);
 	painter->setBrush(mFilled ? QBrush(color(), Qt::SolidPattern) : QBrush());

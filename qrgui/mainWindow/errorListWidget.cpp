@@ -66,7 +66,7 @@ void ErrorListWidget::initContextMenu()
 	connect(this, &ErrorListWidget::customContextMenuRequested, this, &ErrorListWidget::showContextMenu);
 }
 
-void ErrorListWidget::showContextMenu(const QPoint &pos)
+void ErrorListWidget::showContextMenu(QPoint pos)
 {
 	mContextMenu->exec(mapToGlobal(pos));
 }

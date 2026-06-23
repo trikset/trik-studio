@@ -54,7 +54,7 @@ public:
 	/// Returns port ID in terms of described in 'Useful information' upwards.
 	/// @param location For this point port will be seen. Location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return Port ID in terms of described in 'Useful information' upwards.
-	qreal portId(const QPointF &location, const QStringList &types) const;
+	qreal portId(QPointF location, const QStringList &types) const;
 
 	/// Calculates port number.
 	/// Number of port considering that point ports begin numeration, and line ports go after them.
@@ -77,7 +77,7 @@ public:
 	/// Calculates nearest point of NodeElement ports to parameter point.
 	/// @param location To this point nearest port will be calculated. Location is assumed to be in SCENE coordinates!
 	/// @return Nearest point of NodeElement ports to parameter point in node`s coordinates.
-	const QPointF nearestPort(const QPointF &location, const QStringList &types) const;
+	const QPointF nearestPort(QPointF location, const QStringList &types) const;
 
 	/// Connects all temporary removed from working NodeElement edges.
 	/// Used in model manipulating.
@@ -120,7 +120,7 @@ private:
 	/// location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return Point port ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
-	qreal pointPortId(const QPointF &location, const QStringList &types) const;
+	qreal pointPortId(QPointF location, const QStringList &types) const;
 
 	/// Returns line port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
@@ -128,7 +128,7 @@ private:
 	/// points. location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return line port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
-	qreal linePortId(const QPointF &location, const QStringList &types) const;
+	qreal linePortId(QPointF location, const QStringList &types) const;
 
 	/// Returns circular port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
@@ -136,67 +136,67 @@ private:
 	/// points. location is assumed to be in LOCAL NodeElement coordinates!
 	/// @return circular port point ID that locality contains parameter point. If there is no such locality, it
 	/// returns mNonexistentPortId.
-	qreal circularPortId(const QPointF &location, const QStringList &types) const;
+	qreal circularPortId(QPointF location, const QStringList &types) const;
 
 	/// Returns distance from location to closest point port of NodeElement
 	/// and this port number in list of point ports.
 	/// @param location Result will be calculated for this point. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return The closest point port number in list of line ports and distance from location to it.
-	QPair<int, qreal> nearestPointPortNumberAndDistance(const QPointF &location, const QStringList &types) const;
+	QPair<int, qreal> nearestPointPortNumberAndDistance(QPointF location, const QStringList &types) const;
 
 	/// Returns distance from location to closest line port of NodeElement and this port number in list of line ports.
 	/// @param location Result will be calculated for this point. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return The closest line port number in list of line ports and distance from location to it.
-	QPair<int, qreal> nearestLinePortNumberAndDistance(const QPointF &location, const QStringList &types) const;
+	QPair<int, qreal> nearestLinePortNumberAndDistance(QPointF location, const QStringList &types) const;
 
 	/// Returns distance from location to closest circular port of NodeElement
 	/// and this port number in list of circular ports.
 	/// @param location Result will be calculated for this point. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return The closest line port number in list of line ports and distance from location to it.
-	QPair<int, qreal> nearestCircularPortNumberAndDistance(const QPointF &location, const QStringList &types) const;
+	QPair<int, qreal> nearestCircularPortNumberAndDistance(QPointF location, const QStringList &types) const;
 
 	/// Returns nearest point parameter at line port to point.
 	/// @param linePortNumber Number of line port at line port list.
 	/// @param location To this point nearest point parameter will be calculated. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return Nearest point parameter at line port to point.
-	qreal nearestPointOfLinePort(const int linePortNumber, const QPointF &location) const;
+	qreal nearestPointOfLinePort(const int linePortNumber, QPointF location) const;
 
 	/// Returns angle in degrees that describe point's position on circular.
 	/// @param circularPortNumber Number of circular port at circular port list.
 	/// @param location To this point nearest point parameter will be calculated. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
-	qreal pointByCircularPortAngle(const int circularPortNumber, const QPointF &location) const;
+	qreal pointByCircularPortAngle(const int circularPortNumber, QPointF location) const;
 
 	/// Returns coordinates of the point on circular.
 	/// @param circularPortNumber Number of circular port at circular port list.
 	/// @param location To this point nearest point parameter will be calculated. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
-	QPointF coordinateOfCircular(const int circularPortNumber, const QPointF &location) const;
+	QPointF coordinateOfCircular(const int circularPortNumber, QPointF location) const;
 
 	/// Returns minimum distance from line port to point.
 	/// @param linePortNumber Number of line port at line port list.
 	/// @param location To this point distance will be calculated. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return Minimum distance from line port to point.
-	qreal minDistanceFromLinePort(const int linePortNumber, const QPointF &location) const;
+	qreal minDistanceFromLinePort(const int linePortNumber, QPointF location) const;
 
 	/// Returns minimum distance from circular port to point.
 	/// @param circularPortNumber Number of circular port at circukar port list.
 	/// @param location To this point distance will be calculated. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return Minimum distance from circular port to point.
-	qreal minDistanceFromCircularPort(const int circularPortNumber, const QPointF &location) const;
+	qreal minDistanceFromCircularPort(const int circularPortNumber, QPointF location) const;
 
 	/// Returns distance between point port and point.
 	/// @param pointPortNumber Number of point port at point port list.
 	/// @param location To this point distance will be calculated. location is assumed to be in
 	/// LOCAL NodeElement coordinates!
 	/// @return Distance between point port and point.
-	qreal distanceFromPointPort(const int pointPortNumber, const QPointF &location) const;
+	qreal distanceFromPointPort(const int pointPortNumber, QPointF location) const;
 
 	/// Transforms point port for current node size.
 	/// @param port Port that will be actually dealt with.

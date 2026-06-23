@@ -282,7 +282,7 @@ void NodeElement::setGeometry(const QRectF &geom)
 	adjustLinks();
 }
 
-void NodeElement::setPos(const QPointF &pos)
+void NodeElement::setPos(QPointF pos)
 {
 	if (qIsNaN(pos.x()) || qIsNaN(pos.y())) {
 		setPos(QPointF());
@@ -450,7 +450,7 @@ void NodeElement::alignToGrid()
 	}
 }
 
-void NodeElement::recalculateHighlightedNode(const QPointF &mouseScenePos)
+void NodeElement::recalculateHighlightedNode(QPointF mouseScenePos)
 {
 	// in case of unresizable item use switch
 	// Determing parent using corner position, not mouse coordinates
@@ -911,12 +911,12 @@ int NodeElement::numberOfPorts() const
 	return mPortHandler->numberOfPorts();
 }
 
-qreal NodeElement::portId(const QPointF &location, const QStringList &types) const
+qreal NodeElement::portId(QPointF location, const QStringList &types) const
 {
 	return mPortHandler->portId(location, types);
 }
 
-QPointF NodeElement::closestPortPoint(const QPointF &location, const QStringList &types) const
+QPointF NodeElement::closestPortPoint(QPointF location, const QStringList &types) const
 {
 	return mapToScene(mPortHandler->nearestPort(location, types));
 }
@@ -1286,7 +1286,7 @@ void NodeElement::resize(const QRectF &newContents)
 	resize(newContents, pos());
 }
 
-void NodeElement::resize(const QRectF &newContents, const QPointF &newPos, bool needResizeParent)
+void NodeElement::resize(const QRectF &newContents, QPointF newPos, bool needResizeParent)
 {
 	ResizeHandler handler(*this);
 	handler.resize(newContents, newPos, needResizeParent);
@@ -1355,7 +1355,7 @@ QList<NodeElement *> const NodeElement::childNodes() const
 	return result;
 }
 
-AbstractCommand *NodeElement::changeParentCommand(const Id &newParent, const QPointF &position) const
+AbstractCommand *NodeElement::changeParentCommand(const Id &newParent, QPointF position) const
 {
 	EditorViewScene *evScene = dynamic_cast<EditorViewScene *>(scene());
 	Element *oldParentElem = dynamic_cast<Element *>(parentItem());

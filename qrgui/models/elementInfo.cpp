@@ -143,7 +143,7 @@ Id ElementInfo::newLogicalId()
 	return (mLogicalId = mId.sameTypeId());
 }
 
-void ElementInfo::setPos(const QPointF &position)
+void ElementInfo::setPos(QPointF position)
 {
 	mGraphicalProperties["position"] = position;
 }

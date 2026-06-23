@@ -23,7 +23,7 @@ class Curve : public Path
 {
 	Q_OBJECT
 public:
-	Curve(const QPointF &start, const QPointF &end, const QPointF &c1);
+	Curve(QPointF start, QPointF end, QPointF c1);
 	void  setCXandCY(qreal x, qreal y);
 	QRectF searchMaxMinCoord() const;
 	virtual QRectF boundingRect() const;

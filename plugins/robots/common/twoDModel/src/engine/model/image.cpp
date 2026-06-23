@@ -162,7 +162,7 @@ void Image::loadFrom(const QString &path)
 	}
 }
 
-void Image::draw(QPainter &painter, const QRect &rect, qreal zoom) const
+void Image::draw(QPainter &painter, QRect rect, qreal zoom) const
 {
 	if (mExternal && !mPath.isEmpty()) {
 		mImagesCache->drawImageWithoutCachingSize(mPath, painter, rect, zoom);

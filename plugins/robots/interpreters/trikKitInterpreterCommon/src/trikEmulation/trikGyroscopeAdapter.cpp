@@ -20,20 +20,20 @@
 
 
 template <typename T>
-static T getPitch(const QQuaternion &q)
+static T getPitch(QQuaternion q)
 {
 	return qAtan2(2 * q.y()*q.z() + 2 * q.scalar() * q.x()
 			, 1 - 2 * q.x() * q.x() - 2 * q.y() * q.y());
 }
 
 template <typename T>
-static T getRoll(const QQuaternion &q)
+static T getRoll(QQuaternion q)
 {
 	return qAsin(2 * q.scalar() * q.y() - 2 * q.x() * q.z());
 }
 
 template <typename T>
-static T getYaw(const QQuaternion &q)
+static T getYaw(QQuaternion q)
 {
 	return qAtan2(2 * q.x() * q.y() + 2 * q.scalar() * q.z()
 			, 1 - 2 * q.y() * q.y() - 2 * q.z() * q.z());

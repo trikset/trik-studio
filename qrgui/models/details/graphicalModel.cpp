@@ -328,7 +328,7 @@ void GraphicalModel::setNewName(const Id &id, const QString &newValue)
 	Q_EMIT nameChanged(id);
 }
 
-void GraphicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent, const QPointF &position)
+void GraphicalModel::changeParent(const QModelIndex &element, const QModelIndex &parent, QPointF position)
 {
 	if (!parent.isValid() || element.parent() == parent) {
 		return;
