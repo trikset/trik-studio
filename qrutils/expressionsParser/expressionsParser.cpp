@@ -161,9 +161,9 @@ QSharedPointer<Number> ExpressionsParser::parseNumber(const QString &stream, int
 		}
 	}
 	if (isDouble) {
-		return QSharedPointer<Number>::create(stream.mid(beginPos, pos - beginPos).toDouble(), Number::doubleType);
+		return QSharedPointer<Number>::create(stream.midRef(beginPos, pos - beginPos).toDouble(), Number::doubleType);
 	} else {
-		return QSharedPointer<Number>::create(stream.mid(beginPos, pos - beginPos).toInt(), Number::intType);
+		return QSharedPointer<Number>::create(stream.midRef(beginPos, pos - beginPos).toInt(), Number::intType);
 	}
 }
 

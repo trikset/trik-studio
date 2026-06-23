@@ -42,7 +42,6 @@ PioneerGetOrientation::PioneerGetOrientation(const qrRepo::RepoApi &repo
 {
 	customizer.factory()->functionBlockConverter(id, "")->convert(
 			QString("%1 = 0;%2 = 0;%3 = 0;")
-					.arg(repo.stringProperty(id, "Roll"))
-					.arg(repo.stringProperty(id, "Pitch"))
-					.arg(repo.stringProperty(id, "Azimuth")));
+					.arg(repo.stringProperty(id, "Roll"),
+					repo.stringProperty(id, "Pitch"), repo.stringProperty(id, "Azimuth")));
 }

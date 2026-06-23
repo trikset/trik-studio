@@ -51,7 +51,7 @@ ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo
 
 	// small trick to provide info about variable to system
 	customizer.factory()->functionBlockConverter(id, "Variable")->convert(
-			QString("%1 = %2").arg(variable).arg(DEFAULT_VALUE[type]));
+			QString("%1 = %2").arg(variable, DEFAULT_VALUE[type]));
 
 	addBinding(Binding::createStatic("@@ID@@"
 			, mGeneratorFactory->mailboxes().mailboxNameToId(mailboxName)));

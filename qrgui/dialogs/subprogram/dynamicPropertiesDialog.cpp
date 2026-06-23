@@ -202,7 +202,7 @@ void DynamicPropertiesDialog::saveButtonClicked()
 			; !element.isNull()
 			; element = element.nextSiblingElement("label"))
 	{
-		const QString key = QString("%1 %2").arg(element.attribute("text")).arg(element.attribute("type"));
+		const QString key = QString("%1 %2").arg(element.attribute("text"), element.attribute("type"));
 		previousLabels[key] = element.attribute("textBinded");
 	}
 
@@ -218,7 +218,7 @@ void DynamicPropertiesDialog::saveButtonClicked()
 		QDomElement label = dynamicLabels.createElement("label");
 		label.setAttribute("x", x);
 		label.setAttribute("y", y);
-		const QString key = QString("%1 %2").arg(name).arg(type);
+		const QString key = QString("%1 %2").arg(name, type);
 		label.setAttribute("textBinded", previousLabels.contains(key)
 				? previousLabels[key]
 				: QUuid::createUuid().toString()

@@ -54,7 +54,7 @@ public:
 			parameterTypes << type->toString();
 		}
 
-		return QString("%1(%2)").arg(mReturnType->toString()).arg(parameterTypes.join(", ")) +  QObject::tr("");
+		return QString("%1(%2)").arg(mReturnType->toString(), parameterTypes.join(", ")) +  QObject::tr("");
 	}
 
 
