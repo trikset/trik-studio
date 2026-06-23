@@ -398,7 +398,7 @@
         <translation>Arrêter le programme</translation>
     </message>
     <message>
-        <location line="+309"/>
+        <location line="+312"/>
         <source>Grid size:</source>
         <translation>Taille de la grille:</translation>
     </message>
@@ -446,17 +446,17 @@
         <translation>Roue gauche :</translation>
     </message>
     <message>
-        <location line="-373"/>
+        <location line="-194"/>
         <source>Edit Regions</source>
         <translation>Modifier les régions</translation>
     </message>
     <message>
-        <location line="+142"/>
+        <location line="-40"/>
         <source>Reset World</source>
         <translation>Réinitialiser le monde</translation>
     </message>
     <message>
-        <location line="+241"/>
+        <location line="+244"/>
         <source>Right wheel:</source>
         <translation>Roue droite :</translation>
     </message>
