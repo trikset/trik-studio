@@ -50,7 +50,7 @@ public:
 	/// Returning IdList of elements that have input property.
 	/// @param name String that should be contained by names of elements that have input property.
 	qReal::IdList elementsByProperty(const QString &property, bool sensitivity, bool regExpression) const override;
-
+	qReal::IdList elements() const override;
 	/// returning IdList of elements that have input property content
 	/// @param name - string that should be contained by names of elements that have input property content
 	qReal::IdList elementsByPropertyContent(const QString &propertyContent
@@ -135,7 +135,8 @@ public:
 	bool save(const qReal::IdList &list) const override;
 	bool saveTo(const QString &workingFile) override;
 	bool saveDiagramsById(QHash<QString, qReal::IdList> const &diagramIds) override;
-
+	qReal::IdList getAllRelatedDiagramIds(const qReal::IdList &ids) override;
+	void removeIdsFromTree(const qReal::IdList &exclude) override;
 	void open(const QString &saveFile) override;
 	void exportToXml(const QString &targetFile) const override;
 

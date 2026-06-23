@@ -431,6 +431,27 @@ bool RepoApi::saveDiagramsById(QHash<QString, IdList> const &diagramIds)
 	return mRepository->saveDiagramsById(diagramIds);
 }
 
+qReal::IdList RepoApi::getAllRelatedDiagramIds(const qReal::IdList &ids)
+{
+	return mRepository->getAllRelatedDiagramIds(ids);
+}
+
+void RepoApi::removeIdsFromTree(const qReal::IdList &exclude)
+{
+	for (auto &&element: mRepository->elements()) {
+		if (!exclude.contains(element)) {
+			auto &&parent = mRepository->parent(element);
+			mRepository->removeChild(parent, element);
+		}
+	}
+
+	for (auto &&element: mRepository->elements()) {
+		if (!exclude.contains(element)) {
+			mRepository->remove(element);
+		}
+	}
+}
+
 void RepoApi::importFromDisk(const QString &importedFile)
 {
 	mRepository->importFromDisk(importedFile);
@@ -568,6 +589,11 @@ IdList RepoApi::elementsByType(const QString &type, bool sensitivity, bool regEx
 qReal::IdList RepoApi::elementsByProperty(const QString &property, bool sensitivity, bool regExpression) const
 {
 	return mRepository->elementsByProperty(property, sensitivity, regExpression);
+}
+
+qReal::IdList RepoApi::elements() const
+{
+	return mRepository->elements();
 }
 
 int RepoApi::elementsCount() const

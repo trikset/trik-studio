@@ -109,6 +109,7 @@ public:
 	bool save(const qReal::IdList &list) const;
 	bool saveWithLogicalId(const qReal::IdList &list) const;
 	bool saveDiagramsById(QHash<QString, qReal::IdList> const &diagramIds);
+	qReal::IdList getAllRelatedDiagramIds(const qReal::IdList &diagramIds);
 	void remove(const qReal::IdList &list) const;
 	void setWorkingFile(const QString &workingFile);
 	void exportToXml(const QString &targetFile) const;

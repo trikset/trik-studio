@@ -36,6 +36,8 @@ public:
 	/// @param name - string that should be contained by names of elements that have input property
 	virtual qReal::IdList elementsByProperty(const QString &property, bool sensitivity, bool regExp) const = 0;
 
+	virtual qReal::IdList elements() const = 0;
+
 	/// virtual, for returning IdList of elements that have input property content
 	/// @param name - string that should be contained by names of elements that have input property content
 	virtual qReal::IdList elementsByPropertyContent(const QString &propertyContent, bool sensitivity
@@ -55,6 +57,10 @@ public:
 	/// @param diagramIds - map of the following structure:
 	/// key is a file path to save into, value is a list of diagrams to save
 	virtual bool saveDiagramsById(QHash<QString, qReal::IdList> const &diagramIds) = 0;
+
+	virtual qReal::IdList getAllRelatedDiagramIds(const qReal::IdList &ids) = 0;
+
+	virtual void removeIdsFromTree(const qReal::IdList &exclude) = 0;
 
 	virtual void open(const QString &workingFile) = 0;
 
