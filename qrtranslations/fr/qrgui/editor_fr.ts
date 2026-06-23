@@ -187,7 +187,7 @@
         <translation>Connecter à l&apos;élément actuel</translation>
     </message>
     <message>
-        <location line="+327"/>
+        <location line="+328"/>
         <source>Replace by...</source>
         <translation>Remplacer par...</translation>
     </message>
