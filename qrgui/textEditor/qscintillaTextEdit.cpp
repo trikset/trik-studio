@@ -287,9 +287,11 @@ void QScintillaTextEdit::commentUncommentLines()
 					textForReplace.append(lineRegExp.match(selectedLines[i]).capturedRef("innerCode"));
 				}
 			} else {
-				textForReplace.append(QString("%1%2%3").arg(mLanguage.lineCommentStart, selectedLines.first().toString(), mLanguage.lineCommentEnd));
+				textForReplace.append(QString("%1%2%3").arg(mLanguage.lineCommentStart,
+							selectedLines.first().toString(), mLanguage.lineCommentEnd));
 				for (int i = 1; i < selectedLinesCount; ++i) {
-					textForReplace.append(QString("\n%1%2%3").arg(mLanguage.lineCommentStart, selectedLines[i].toString(), mLanguage.lineCommentEnd));
+					textForReplace.append(QString("\n%1%2%3").arg(mLanguage.lineCommentStart,
+						selectedLines[i].toString(), mLanguage.lineCommentEnd));
 				}
 			}
 
