@@ -49,7 +49,7 @@ Q_SIGNALS:
 	/// Emitted when metamodel traversal encountered some error in metamodel.
 	/// @param message Localized message that can be shown to user via error reporter.
 	/// @param id The id of the element that contains this error, may be empty in general case.
-	void errorOccured(const QString &message, const Id &id);
+	void errorOccured(const QString &message, const qReal::Id &id);
 
 private:
 	QString intVectorToString(const QVector<int> &values);

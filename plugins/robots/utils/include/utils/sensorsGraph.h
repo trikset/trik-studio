@@ -66,7 +66,7 @@ public:
 	static const int textUpdateDefault = 500;
 
 public Q_SLOTS:
-	void setTimeline(TimelineInterface &timeline);
+	void setTimeline(utils::TimelineInterface &timeline);
 	void sensorsInput(const int slotIndex, const qreal value);
 	void setCurrentSensor(const int newSlotIndex);
 	void startJob();

@@ -151,7 +151,7 @@ public:
 	void setSearchPanel(ui::SearchLinePanel &searchPanel);
 
 public Q_SLOTS:
-	Id createElement(const QString &type);
+	qReal::Id createElement(const QString &type);
 
 	void cut() override;
 	void copy() override;
@@ -175,16 +175,16 @@ Q_SIGNALS:
 	void zoomOut() override;
 
 	/// Emitted when user requested to switch to some element (for example doubled-clicked element with explosion).
-	void goTo(const Id &id);
+	void goTo(const qReal::Id &id);
 
 	/// Emitted when palette contents could change and thus must be reread.
 	void refreshPalette();
 
 	/// Emitted when user requested to change some element`s graphical representation.
-	void openShapeEditor(const Id &id
+	void openShapeEditor(const qReal::Id &id
 		, const QString &propertyValue
 		/// @todo: whan passing it by reference the build on travis fails
-		, const EditorManagerInterface *editorManagerProxy
+		, const qReal::EditorManagerInterface *editorManagerProxy
 		, bool useTypedPorts);
 
 protected:
@@ -208,7 +208,7 @@ protected:
 	void focusOutEvent(QFocusEvent *event) override;
 
 private Q_SLOTS:
-	void createEdge(const Id &id);
+	void createEdge(const qReal::Id &id);
 
 	/// Creates an object on a diagram by currently drawn mouse gesture. Stops gesture timer.
 	void getObjectByGesture();

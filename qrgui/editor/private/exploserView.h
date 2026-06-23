@@ -65,20 +65,20 @@ public:
 Q_SIGNALS:
 	/// Activates first binded with explosion link graphical instance of the element
 	/// with given @arg id.
-	void goTo(const Id &id);
+	void goTo(const qReal::Id &id);
 
 	/// Emitted when palette contents could change and thus must be reread.
 	void refreshPalette();
 
 	/// Emitted when user requested to change some element`s graphical representation.
-	void openShapeEditor(const Id &id
+	void openShapeEditor(const qReal::Id &id
 		, const QString &propertyValue
 		/// @todo: whan passing it by reference the build on travis fails
-		, const EditorManagerInterface *editorManagerProxy
+		, const qReal::EditorManagerInterface *editorManagerProxy
 		, bool useTypedPorts);
 
 	/// Emitted each time when scene must invoke ExpandCommand to the child instance with the given id.
-	void expandElement(const Id &element);
+	void expandElement(const qReal::Id &element);
 
 private Q_SLOTS:
 	void addExplosionActionTriggered();

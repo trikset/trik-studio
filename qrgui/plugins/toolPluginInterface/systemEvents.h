@@ -31,7 +31,7 @@ class QRGUI_TOOL_PLUGIN_INTERFACE_EXPORT SystemEvents : public QObject
 
 Q_SIGNALS:
 	void closedMainWindow();
-	void activeTabChanged(const TabInfo &info);
+	void activeTabChanged(const qReal::TabInfo &info);
 	void settingsUpdated();
 	void codePathChanged(const qReal::Id &diagram, const QFileInfo &oldFileInfo, const QFileInfo &newFileInfo);
 	void newCodeAppeared(const qReal::Id &diagram, const QFileInfo &fileInfo);
@@ -39,18 +39,18 @@ Q_SIGNALS:
 	void codeTabClosed(const QFileInfo &fileInfo);
 
 	/// Emitted each time when new element was added into the logical model.
-	void logicalElementAdded(const Id &id);
+	void logicalElementAdded(const qReal::Id &id);
 	/// Emitted each time when new element was added into the graphical model.
-	void graphicalElementAdded(const Id &id);
+	void graphicalElementAdded(const qReal::Id &id);
 
 	/// Emitted when new message with level 'Info' added to error reporter.
-	void informationAdded(const QString &message, const Id &position);
+	void informationAdded(const QString &message, const qReal::Id &position);
 	/// Emitted when new message with level 'Warning' added to error reporter.
-	void warningAdded(const QString &message, const Id &position);
+	void warningAdded(const QString &message, const qReal::Id &position);
 	/// Emitted when new message with level 'Error' added to error reporter.
-	void errorAdded(const QString &message, const Id &position);
+	void errorAdded(const QString &message, const qReal::Id &position);
 	/// Emitted when new message with level 'Critical' added to error reporter.
-	void criticalAdded(const QString &message, const Id &position);
+	void criticalAdded(const QString &message, const qReal::Id &position);
 
 	/// This event may be subscribed to obtain all low-level user actions, timer events and everything about
 	/// application`s event propagation subsystem. This is very powerful and dangerous tool, use it with care,

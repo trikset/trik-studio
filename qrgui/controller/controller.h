@@ -43,9 +43,9 @@ public Q_SLOTS:
 	void moduleOpened(const QString &moduleId) override;
 	void moduleClosed(const QString &moduleId) override;
 
-	void execute(commands::AbstractCommand *command) override;
-	void execute(commands::AbstractCommand *command, const QString &moduleId) override;
-	void executeGlobal(commands::AbstractCommand *command) override;
+	void execute(qReal::commands::AbstractCommand *command) override;
+	void execute(qReal::commands::AbstractCommand *command, const QString &moduleId) override;
+	void executeGlobal(qReal::commands::AbstractCommand *command) override;
 
 	void redo() override;
 	void undo() override;

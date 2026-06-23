@@ -233,28 +233,28 @@ Q_SIGNALS:
 	void pixelsInCmChanged(qreal newValue);
 
 	/// Emitted each time when model is appended with some new wall.
-	void wallAdded(const QSharedPointer<items::WallItem> &item);
+	void wallAdded(const QSharedPointer<twoDModel::items::WallItem> &item);
 
 	/// Emitted each time when model is appended with some new skittle.
-	void skittleAdded(const QSharedPointer<items::SkittleItem> &item);
+	void skittleAdded(const QSharedPointer<twoDModel::items::SkittleItem> &item);
 
 	/// Emitted each time when model is appended with some new ball.
-	void ballAdded(const QSharedPointer<items::BallItem> &item);
+	void ballAdded(const QSharedPointer<twoDModel::items::BallItem> &item);
 
 	/// Emitted each time when model is appended with some new cube.
-	void cubeAdded(const QSharedPointer<items::CubeItem> &item);
+	void cubeAdded(const QSharedPointer<twoDModel::items::CubeItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
-	void commentAdded(const QSharedPointer<items::CommentItem> &item);
+	void commentAdded(const QSharedPointer<twoDModel::items::CommentItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
-	void colorItemAdded(const QSharedPointer<items::ColorFieldItem> &item);
+	void colorItemAdded(const QSharedPointer<twoDModel::items::ColorFieldItem> &item);
 
 	/// Emitted each time when model is appended with some new color field item.
-	void imageItemAdded(const QSharedPointer<items::ImageItem> &item);
+	void imageItemAdded(const QSharedPointer<twoDModel::items::ImageItem> &item);
 
 	/// Emitted each time when model is appended with some new item.
-	void regionItemAdded(const QSharedPointer<items::RegionItem> &item);
+	void regionItemAdded(const QSharedPointer<twoDModel::items::RegionItem> &item);
 
 	/// Emitted each time when model is appended with some new item.
 	void traceItemAddedOrChanged(const QSharedPointer<QGraphicsPathItem> &item, bool justChanged);
@@ -269,7 +269,7 @@ Q_SIGNALS:
 	void blobsChanged();
 
 	/// Emitted each time when imageItem with background created.
-	void backgroundImageItemAdded(items::ImageItem *item);
+	void backgroundImageItemAdded(twoDModel::items::ImageItem *item);
 
 private:
 	/// Returns true if ray intersects some wall.

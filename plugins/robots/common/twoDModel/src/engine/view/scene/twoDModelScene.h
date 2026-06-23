@@ -132,7 +132,7 @@ public Q_SLOTS:
 	/// @param removeRobot - if true robot graphics item will be fully recreated, its position will be nullified.
 	/// @param reason - reason for scene clearing --- user action or internal needs. Depending on this we can decide
 	///        whether to save changes into model.
-	void clearScene(bool removeRobot, DevicesConfigurationProvider::Reason reason);
+	void clearScene(bool removeRobot, kitBase::DevicesConfigurationProvider::Reason reason);
 
 	/// Aligns existing walls on the grid.
 	/// @todo: Walls that do not fit on the grid must not be removed.
@@ -166,23 +166,23 @@ Q_SIGNALS:
 private Q_SLOTS:
 	/// Called after robot model was added and create new robot item
 	/// @param robotModel Robot model which was added
-	void onRobotAdd(model::RobotModel *robotModel);
+	void onRobotAdd(twoDModel::model::RobotModel *robotModel);
 
 	/// Called after robot model was removed and removes robot item associated with this robot model
 	/// @param robotModel Robot model which was removed
-	void onRobotRemove(model::RobotModel *robotModel);
+	void onRobotRemove(twoDModel::model::RobotModel *robotModel);
 
 	/// Called after new wall is added to a world model.
-	void onWallAdded(QSharedPointer<items::WallItem> wall);
+	void onWallAdded(QSharedPointer<twoDModel::items::WallItem> wall);
 
 	/// Called after new skittle is added to a world model.
-	void onSkittleAdded(QSharedPointer<items::SkittleItem> skittle);
+	void onSkittleAdded(QSharedPointer<twoDModel::items::SkittleItem> skittle);
 
 	/// Called after new ball is added to a world model.
-	void onBallAdded(const QSharedPointer<items::BallItem> &ball);
+	void onBallAdded(const QSharedPointer<twoDModel::items::BallItem> &ball);
 
 	/// Called after new cube is added to a world model.
-	void onCubeAdded(const QSharedPointer<items::CubeItem> &cube);
+	void onCubeAdded(const QSharedPointer<twoDModel::items::CubeItem> &cube);
 
 //	/// Called after new color field item is added to a world model.
 //	void onColorItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
@@ -190,9 +190,9 @@ private Q_SLOTS:
 //	/// Called after new image item is added to a world model.
 //	void onImageItemAdded(const QSharedPointer<graphicsUtils::AbstractItem> &item);
 
-	void onColorFieldAdded(QSharedPointer<items::ColorFieldItem> item);
+	void onColorFieldAdded(QSharedPointer<twoDModel::items::ColorFieldItem> item);
 
-	void onRegionItemAdded(QSharedPointer<items::RegionItem> item);
+	void onRegionItemAdded(QSharedPointer<twoDModel::items::RegionItem> item);
 
 	void onAbstractItemAdded(QSharedPointer<graphicsUtils::AbstractItem> item);
 

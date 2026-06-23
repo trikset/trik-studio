@@ -94,7 +94,7 @@ Q_SIGNALS:
 	void explosionsSetCouldChange();
 
 	/// Emitted when explosion target changes dynamic properties.
-	void explosionTargetCouldChangeProperties(const Id &target) const;
+	void explosionTargetCouldChangeProperties(const qReal::Id &target) const;
 
 private:
 	/// This method takes one of the elements of the diagram and tries

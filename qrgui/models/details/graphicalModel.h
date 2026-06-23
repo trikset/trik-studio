@@ -60,7 +60,7 @@ public:
 	virtual void stackBefore(const QModelIndex &element, const QModelIndex &sibling) override;
 
 Q_SIGNALS:
-	void nameChanged(const Id &id);
+	void nameChanged(const qReal::Id &id);
 
 private:
 	LogicalModelView mLogicalModelView;

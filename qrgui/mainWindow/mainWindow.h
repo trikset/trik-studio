@@ -189,7 +189,7 @@ public Q_SLOTS:
 	void selectItemOrDiagram(const qReal::Id &graphicalId) override;
 
 	void selectItemWithError(const qReal::Id &id);
-	void showErrors(const gui::ErrorReporter * const errorReporter);
+	void showErrors(const qReal::gui::ErrorReporter * const errorReporter);
 
 	void changePaletteRepresentation();
 	void closeStartTab();

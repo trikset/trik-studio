@@ -148,10 +148,10 @@ public:
 	QSizeF labelSize(const Id &graphicalId, int index) const;
 
 Q_SIGNALS:
-	void nameChanged(const Id &id);
+	void nameChanged(const qReal::Id &id);
 
 	/// Emitted each time when new element was added into the graphical model.
-	void elementAdded(const Id &id);
+	void elementAdded(const qReal::Id &id);
 
 private:
 	GraphicalModelAssistApi(const GraphicalModelAssistApi &);

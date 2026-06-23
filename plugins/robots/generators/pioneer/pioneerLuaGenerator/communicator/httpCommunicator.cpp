@@ -83,7 +83,7 @@ void HttpCommunicator::uploadProgram(const QFileInfo &program)
 		return;
 	}
 
-	const QString url = QString("http://%1:%2/pioneer/%3/upload").arg(ip).arg(port).arg(apiLevel);
+	const QString url = QString("http://%1:%2/pioneer/%3/upload").arg(ip, port, apiLevel);
 	mErrorReporter.addInformation(QString(tr("Uploading to: %1, please wait...")).arg(url));
 
 	QNetworkRequest request(url);
@@ -107,7 +107,7 @@ void HttpCommunicator::startProgram()
 		return;
 	}
 
-	const QString url = QString("http://%1:%2/pioneer/%3/start").arg(ip).arg(port).arg(apiLevel);
+	const QString url = QString("http://%1:%2/pioneer/%3/start").arg(ip, port, apiLevel);
 	mErrorReporter.addInformation(QString(tr("Starting program. Senging request to: %1, please wait...")).arg(url));
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader, "text/plain");

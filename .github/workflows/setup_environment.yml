@@ -101,7 +101,7 @@ jobs:
           echo "BUILD_DIR=${{ github.workspace }}/build" >> $GITHUB_ENV
 
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 0
@@ -210,7 +210,7 @@ jobs:
 
     - name: Clang-tidy
       if: ${{ inputs.lint_clazy }}
-      uses: cpp-linter/cpp-linter-action@v2.18.0
+      uses: cpp-linter/cpp-linter-action@v2.19.0
       id: linter
       with:
          style: ''

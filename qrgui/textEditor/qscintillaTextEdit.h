@@ -75,7 +75,7 @@ Q_SIGNALS:
 	/// Emitted in destructor to save written text to according model element
 	void textSaved(const QString &text, const QPersistentModelIndex &index, const int &role);
 
-	void textWasModified(text::QScintillaTextEdit *code);
+	void textWasModified(qReal::text::QScintillaTextEdit *code);
 
 private Q_SLOTS:
 	void emitTextWasModified();

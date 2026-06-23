@@ -596,7 +596,7 @@ QString QrsMetamodelLoader::validateRootNode(const qrRepo::RepoApi &repo, const 
 	}
 
 	Q_EMIT errorOccured(QObject::tr("Root node for diagram %1 (which is %2) does not exist!")
-			.arg(repo.name(diagram)).arg(rootNode), diagram);
+			.arg(repo.name(diagram), rootNode), diagram);
 	return rootNode;
 }
 

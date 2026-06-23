@@ -42,16 +42,16 @@ public:
 
 Q_SIGNALS:
 	/// Emitted when new message with level 'Info' added to error reporter.
-	void informationAdded(const QString &message, const Id &position);
+	void informationAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Warning' added to error reporter.
-	void warningAdded(const QString &message, const Id &position);
+	void warningAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Error' added to error reporter.
-	void errorAdded(const QString &message, const Id &position);
+	void errorAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Critical' added to error reporter.
-	void criticalAdded(const QString &message, const Id &position);
+	void criticalAdded(const QString &message, const qReal::Id &position);
 
 	/// Emitted when new message with level 'Log' added to error reporter.
 	void logAdded(const QString &message);
