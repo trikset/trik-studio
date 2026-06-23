@@ -193,7 +193,8 @@ private:
 	QPointF boundingRectIndent(QPointF point, NodeSide direction);
 
 	/// Returns true, if the sides adjacent.
-	bool isNeighbor(qReal::gui::editor::EdgeElement::NodeSide startSide, qReal::gui::editor::EdgeElement::NodeSide endSide) const;
+	bool isNeighbor(qReal::gui::editor::EdgeElement::NodeSide startSide,
+						 qReal::gui::editor::EdgeElement::NodeSide endSide) const;
 
 	/// Returns the next clockwise side.
 	NodeSide rotateRight(NodeSide side) const;
