@@ -26,13 +26,9 @@ namespace gui {
 class QRGUI_PREFERENCES_DIALOG_EXPORT PreferencesPage : public QWidget
 {
 	Q_OBJECT
-
-	/// @todo friend to be able to call protected changeEvent() method. It seems to be bad idea.
-	friend class PreferencesDialog;
-
 public:
 	explicit PreferencesPage(QWidget *parent = nullptr);
-	virtual ~PreferencesPage();
+	~PreferencesPage() override;
 
 	/// This method will be called on pressing "Apply" or "Ok"
 	virtual void save() = 0;
@@ -40,19 +36,19 @@ public:
 	/// This method will be called before page is shown and when user pressed "Cancel"
 	virtual void restoreSettings() = 0;
 
+	/// Indicates the system to prompt system restart after settings applying.
+	void setRestartFlag(bool value = true);
+
+	/// If this flag is set to true then system restart will be prompted after settings applying.
+	bool getRestartFlag() const;
+
 Q_SIGNALS:
 	/// Emitted when user pressed "OK" or "Apply" button in settings dialog.
 	void saved();
 
 	/// Emitted when user closed or opened settings dialog.
 	void restored();
-
-protected:
-	/// Indicates the system to prompt system restart after settings applying.
-	void setRestartFlag();
-
 private:
-	/// If this flag is set to true then system restart will be prompted after settings applying.
 	bool mShouldRestartSystemToApply;
 };
 

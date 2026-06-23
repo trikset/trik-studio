@@ -14,7 +14,12 @@
         <translation>Langage</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+10"/>
+        <source>Use dark theme</source>
+        <translation>Utiliser le thème sombre</translation>
+    </message>
+    <message>
+        <location line="+10"/>
         <source>Automatics</source>
         <translation>Automatique</translation>
     </message>
@@ -69,7 +74,7 @@
         <translation>Mode fenêtres ancrables</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+117"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="+121"/>
         <source>&lt;System Language&gt;</source>
         <translation>&lt;Langage système&gt;</translation>
     </message>
@@ -385,7 +390,7 @@
         <translation>Le programme doit être redemarré pour appliquer les modifications</translation>
     </message>
     <message>
-        <location line="+77"/>
+        <location line="+75"/>
         <source>Save File</source>
         <translation>Enregister le fichier</translation>
     </message>

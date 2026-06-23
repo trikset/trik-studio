@@ -14,62 +14,67 @@
         <translation>Idioma</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="52"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="49"/>
+        <source>Use dark theme</source>
+        <translation>Usar tema oscuro</translation>
+    </message>
+    <message>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="59"/>
         <source>Automatics</source>
         <translation>Automatización</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="84"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="91"/>
         <source>Palette tab switching</source>
         <translation>Cambio de pestañas en la paleta</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="91"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="98"/>
         <source>msec</source>
         <translation>ms</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="98"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="105"/>
         <source>Autosave</source>
         <translation>Guardado automático</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="108"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="115"/>
         <source>sec</source>
         <translation>seg</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="131"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="138"/>
         <source>Delay after gesture</source>
         <translation>Retraso después del gesto</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="138"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="145"/>
         <source>Gestures</source>
         <translation>Gestos</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="148"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="155"/>
         <source>Touch</source>
         <translation>Pantalla táctil</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="164"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="171"/>
         <source>Touch Mode</source>
         <translation>Modo de trabajo en pantalla táctil</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="174"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="181"/>
         <source>Widgets</source>
         <translation>Elementos de interfaz</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="190"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="197"/>
         <source>Dockable mode</source>
         <translation>Modo de ventanas flotantes</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="117"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="121"/>
         <source>&lt;System Language&gt;</source>
         <translation>&lt;Idioma del sistema&gt;</translation>
     </message>
@@ -373,18 +378,18 @@
         <translation>Reinicie el programa para aplicar los cambios</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="157"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="155"/>
         <source>Save File</source>
         <translation>Guardar archivo</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="157"/>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="168"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="155"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="166"/>
         <source>*.ini</source>
         <translation>*.ini</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="168"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="166"/>
         <source>Open File</source>
         <translation>Abrir archivo</translation>
     </message>

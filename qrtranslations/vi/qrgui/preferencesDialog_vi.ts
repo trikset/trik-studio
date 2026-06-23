@@ -14,62 +14,67 @@
         <translation>Ngôn ngữ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="52"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="49"/>
+        <source>Use dark theme</source>
+        <translation>Dùng giao diện tối</translation>
+    </message>
+    <message>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="59"/>
         <source>Automatics</source>
         <translation>Tự động hóa</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="84"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="91"/>
         <source>Palette tab switching</source>
         <translation>Chuyển đổi tab trong bảng màu</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="91"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="98"/>
         <source>msec</source>
         <translation>mili giây</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="98"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="105"/>
         <source>Autosave</source>
         <translation>Tự động lưu</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="108"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="115"/>
         <source>sec</source>
         <translation>giây</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="131"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="138"/>
         <source>Delay after gesture</source>
         <translation>Độ trễ sau cử chỉ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="138"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="145"/>
         <source>Gestures</source>
         <translation>Cử chỉ</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="148"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="155"/>
         <source>Touch</source>
         <translation>Cảm ứng</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="164"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="171"/>
         <source>Touch Mode</source>
         <translation>Chế độ làm việc trên màn hình cảm ứng</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="174"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="181"/>
         <source>Widgets</source>
         <translation>Thành phần giao diện</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="190"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.ui" line="197"/>
         <source>Dockable mode</source>
         <translation>Chế độ cửa sổ nổi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="117"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesPages/behaviourPage.cpp" line="121"/>
         <source>&lt;System Language&gt;</source>
         <translation>&lt;Ngôn ngữ hệ thống&gt;</translation>
     </message>
@@ -373,18 +378,18 @@
         <translation>Bạn cần khởi động lại chương trình để áp dụng các thay đổi</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="157"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="155"/>
         <source>Save File</source>
         <translation>Lưu tệp</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="157"/>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="168"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="155"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="166"/>
         <source>*.ini</source>
         <translation>*.ini</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="168"/>
+        <location filename="../../../qrgui/preferencesDialog/preferencesDialog.cpp" line="166"/>
         <source>Open File</source>
         <translation>Mở tệp</translation>
     </message>

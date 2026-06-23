@@ -22,11 +22,14 @@ PreferencesPage::PreferencesPage(QWidget *parent)
 {
 }
 
-PreferencesPage::~PreferencesPage()
+PreferencesPage::~PreferencesPage() = default;
+
+void PreferencesPage::setRestartFlag(bool value)
 {
+	mShouldRestartSystemToApply = value;
 }
 
-void PreferencesPage::setRestartFlag()
+bool PreferencesPage::getRestartFlag() const
 {
-	mShouldRestartSystemToApply = true;
+	return mShouldRestartSystemToApply;
 }

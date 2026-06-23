@@ -40,7 +40,7 @@ private Q_SLOTS:
 
 private:
 	void initLanguages();
-
 	Ui::PreferencesBehaviourPage *mUi;
 	QString mOldLanguage;
+	bool mOldUseDarkTheme {};
 };

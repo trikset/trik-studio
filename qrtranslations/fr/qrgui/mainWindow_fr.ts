@@ -741,7 +741,7 @@ AVERTISSEMENT : La restauration des paramètres est irréversible
 AVERTISSEMENT : Les paramètres seront rétablis après le redémarrage de l&apos;application</translation>
     </message>
     <message>
-        <location line="+775"/>
+        <location line="+772"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Erreur</translation>

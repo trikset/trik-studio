@@ -745,7 +745,7 @@
         <translation type="vanished">О QReal</translation>
     </message>
     <message>
-        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+974"/>
+        <location filename="../../../qrgui/mainWindow/mainWindow.cpp" line="+971"/>
         <location line="+11"/>
         <source>Error</source>
         <translation>Ошибка</translation>
@@ -798,7 +798,7 @@
         <translation>Создать диаграмму</translation>
     </message>
     <message>
-        <location line="-1149"/>
+        <location line="-1146"/>
         <source>Restore default settings</source>
         <translation>Восстановить настройки по-умолчанию</translation>
     </message>
@@ -817,7 +817,7 @@ WARNING: The settings will be restored after application restart</source>
         <translation>Не удалось сохранить файл, попробуйте сохранить его в другое место</translation>
     </message>
     <message>
-        <location line="+676"/>
+        <location line="+673"/>
         <source>Open examples</source>
         <translation type="unfinished"></translation>
     </message>
