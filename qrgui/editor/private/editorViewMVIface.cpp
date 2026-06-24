@@ -428,8 +428,8 @@ void EditorViewMViface::configure(models::GraphicalModelAssistApi &graphicalAssi
 /// @todo: set logical model in constructor
 void EditorViewMViface::setLogicalModel(QAbstractItemModel * const logicalModel)
 {
-	connect(logicalModel, SIGNAL(dataChanged(QModelIndex, QModelIndex))
-			, this, SLOT(logicalDataChanged(QModelIndex, QModelIndex)), Qt::UniqueConnection);
+	connect(logicalModel, &QAbstractItemModel::dataChanged
+			, this, &EditorViewMViface::logicalDataChanged, Qt::UniqueConnection);
 }
 
 void EditorViewMViface::logicalDataChanged(const QModelIndex &topLeft, const QModelIndex &bottomRight)

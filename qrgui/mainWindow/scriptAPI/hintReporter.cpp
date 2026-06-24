@@ -43,8 +43,8 @@ HintReporter::HintReporter(QWidget *parent, const QString &message, int lifeTime
 
 	setText(message);
 
-	QTimer::singleShot(mDuration, this, SLOT(disappear()));
-	QTimer::singleShot(lifeTime, this, SLOT(deleteLater()));
+	QTimer::singleShot(mDuration, this, &HintReporter::disappear);
+	QTimer::singleShot(lifeTime, this, &QObject::deleteLater);
 }
 
 void HintReporter::disappear()

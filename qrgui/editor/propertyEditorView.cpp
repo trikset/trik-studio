@@ -59,8 +59,8 @@ void PropertyEditorView::init(qReal::models::LogicalModelAssistApi &logicalModel
 void PropertyEditorView::setModel(PropertyEditorModel *model)
 {
 	mModel = model;
-	connect(mModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(dataChanged(QModelIndex,QModelIndex)));
-	connect(mModel, SIGNAL(modelReset()), this, SLOT(reset()));
+	connect(mModel, &QAbstractItemModel::dataChanged, this, &PropertyEditorView::dataChanged);
+	connect(mModel, &QAbstractItemModel::modelReset, this, &PropertyEditorView::reset);
 }
 
 void PropertyEditorView::scrollTo(const QModelIndex &, QAbstractItemView::ScrollHint)
@@ -214,8 +214,8 @@ void PropertyEditorView::setRootIndex(const QModelIndex &index)
 			, this, &PropertyEditorView::buttonClicked, Qt::UniqueConnection);
 	// For some reason c++11-style connections do not work here!
 	// TODO: fix with new SIGNAL/SLOT signature
-	connect(mVariantManager.get(), SIGNAL(valueChanged(QtProperty*, QVariant))
-				, this, SLOT(editorValueChanged(QtProperty *, QVariant)), Qt::UniqueConnection);
+	connect(mVariantManager.get(), &QtVariantPropertyManager::valueChanged
+				, this, &PropertyEditorView::editorValueChanged, Qt::UniqueConnection);
 	mPropertyEditor->setPropertiesWithoutValueMarked(true);
 	mPropertyEditor->setRootIsDecorated(false);
 }

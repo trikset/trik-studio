@@ -31,11 +31,11 @@ PreferencesEditorPage::PreferencesEditorPage(QWidget *parent)
 	setObjectName("preferencesEditorPage");
 	setWindowIcon(QIcon(":/preferencesDialog/images/editor.png"));
 
-	connect(mUi->gridWidthSlider, SIGNAL(valueChanged(int)), this, SLOT(widthGridSliderMoved(int)));
-	connect(mUi->indexGridSlider, SIGNAL(valueChanged(int)), this, SLOT(indexGridSliderMoved(int)));
-	connect(mUi->dragAreaSizeSlider, SIGNAL(valueChanged(int)), this, SLOT(dragAreaSliderMoved(int)));
-	connect(mUi->fontCheckBox, SIGNAL(toggled(bool)), this, SLOT(manualFontCheckBoxChecked(bool)));
-	connect(mUi->fontSelectionButton, SIGNAL(clicked()),this, SLOT(fontSelectionButtonClicked()));
+	connect(mUi->gridWidthSlider, &QAbstractSlider::valueChanged, this, &PreferencesEditorPage::widthGridSliderMoved);
+	connect(mUi->indexGridSlider, &QAbstractSlider::valueChanged, this, &PreferencesEditorPage::indexGridSliderMoved);
+	connect(mUi->dragAreaSizeSlider, &QAbstractSlider::valueChanged, this, &PreferencesEditorPage::dragAreaSliderMoved);
+	connect(mUi->fontCheckBox, &QAbstractButton::toggled, this, &PreferencesEditorPage::manualFontCheckBoxChecked);
+	connect(mUi->fontSelectionButton, &QAbstractButton::clicked,this, &PreferencesEditorPage::fontSelectionButtonClicked);
 	connect(mUi->paletteComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(paletteComboBoxClicked(int)));
 
 	mUi->gridWidthSlider->setValue(mWidthGrid);

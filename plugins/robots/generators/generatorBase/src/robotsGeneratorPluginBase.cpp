@@ -152,11 +152,11 @@ void RobotsGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &confi
 	mParserErrorReporter.reset(new ParserErrorReporter(*mTextLanguage, *mMainWindowInterface->errorReporter()
 			, configurator.qRealConfigurator().logicalModelApi().editorManagerInterface()));
 
-	connect(mSystemEvents, SIGNAL(codePathChanged(qReal::Id, QFileInfo, QFileInfo))
-			, this, SLOT(regenerateCode(qReal::Id, QFileInfo, QFileInfo)));
-	connect(mSystemEvents, SIGNAL(newCodeAppeared(qReal::Id, QFileInfo)), this, SLOT(addNewCode(qReal::Id, QFileInfo)));
-	connect(mSystemEvents, SIGNAL(diagramClosed(qReal::Id)), this, SLOT(removeDiagram(qReal::Id)));
-	connect(mSystemEvents, SIGNAL(codeTabClosed(QFileInfo)), this, SLOT(removeCode(QFileInfo)));
+	connect(mSystemEvents, &SystemEvents::codePathChanged
+			, this, &RobotsGeneratorPluginBase::regenerateCode);
+	connect(mSystemEvents, &SystemEvents::newCodeAppeared, this, &RobotsGeneratorPluginBase::addNewCode);
+	connect(mSystemEvents, &SystemEvents::diagramClosed, this, &RobotsGeneratorPluginBase::removeDiagram);
+	connect(mSystemEvents, &SystemEvents::codeTabClosed, this, &RobotsGeneratorPluginBase::removeCode);
 
 	connect(mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged
 			, this, &RobotsGeneratorPluginBase::onCurrentRobotModelChanged);
