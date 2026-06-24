@@ -8,12 +8,10 @@
         <translation type="vanished">Attendez la fin :</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="+884"/>
         <source>X:</source>
         <translation>X :</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Y:</source>
         <translation>Y :</translation>
     </message>
@@ -78,7 +76,6 @@
         <translation type="vanished">Durée</translation>
     </message>
     <message>
-        <location line="+426"/>
         <source>ms</source>
         <translation>ms</translation>
     </message>
@@ -91,7 +88,6 @@
         <translation type="vanished">Port :</translation>
     </message>
     <message>
-        <location line="-557"/>
         <source>Color:</source>
         <translation>Couleur :</translation>
     </message>
@@ -116,33 +112,22 @@
         <translation type="vanished">Corps :</translation>
     </message>
     <message>
-        <location line="-328"/>
-        <location line="+141"/>
-        <location line="+374"/>
-        <location line="+62"/>
-        <location line="+361"/>
         <source>Variable:</source>
         <translation>Variable :</translation>
     </message>
     <message>
-        <location line="-885"/>
-        <location line="+354"/>
         <source>Condition:</source>
         <translation>Condition :</translation>
     </message>
     <message>
-        <location line="-273"/>
         <source>Reads a value into variable from an input dialog.</source>
         <translation>Lit une valeur dans une variable à partir d&apos;une boîte de dialogue de saisie.</translation>
     </message>
     <message>
-        <location line="+104"/>
-        <location line="+450"/>
         <source>Thread:</source>
         <translation>Fil :</translation>
     </message>
     <message>
-        <location line="-406"/>
         <source>Iterations:</source>
         <translation>Itérations :</translation>
     </message>
@@ -155,44 +140,34 @@
         <translation type="vanished">Limite de compte tours :</translation>
     </message>
     <message>
-        <location line="-125"/>
-        <location line="+310"/>
         <source>Text:</source>
         <translation>Texte :</translation>
     </message>
     <message>
-        <location line="+56"/>
         <source>From:</source>
         <translation>De :</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>To:</source>
         <translation>À :</translation>
     </message>
     <message>
-        <location line="+54"/>
         <source>Synchronized:</source>
         <translation>Synchronisé :</translation>
     </message>
     <message>
-        <location line="+111"/>
         <source>Message:</source>
         <translation>Message :</translation>
     </message>
     <message>
-        <location line="-741"/>
-        <location line="+885"/>
         <source>Expression:</source>
         <translation>Expression :</translation>
     </message>
     <message>
-        <location line="-440"/>
         <source>This block executes a sequence of blocks while condition in &apos;Condition&apos; is true. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when condition becomes false.</source>
         <translation>Ce bloc exécute une séquence de blocs tant que la condition dans &apos;Condition&apos; est vraie. Ce bloc doit avoir deux liens sortants. L&apos;un d&apos;eux doit être marqué avec la garde &apos;body&apos; (cela signifie que la propriété &apos;Guard&apos; du lien doit être définie à la valeur &apos;body&apos;). L&apos;autre lien sortant doit rester non marqué : l&apos;exécution du programme se poursuivra par ce lien lorsque la condition deviendra fausse.</translation>
     </message>
     <message>
-        <location line="+484"/>
         <source>Delay:</source>
         <translation>Délai :</translation>
     </message>
@@ -285,69 +260,54 @@
         <translation type="vanished">Manette :</translation>
     </message>
     <message>
-        <location line="+62"/>
         <source>Value:</source>
         <translation>Valeur :</translation>
     </message>
     <message>
-        <location line="-1353"/>
         <source>AbstractNode</source>
         <translation>AbstractNode</translation>
     </message>
     <message>
-        <location line="+35"/>
         <source>Clear Screen</source>
         <translation>Effacer l&apos;écran</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Clears everything drawn on the robot`s screen.</source>
         <translation>Efface l&apos;écran du robot.</translation>
     </message>
     <message>
-        <location line="+23"/>
-        <location line="+840"/>
         <source>Redraw</source>
         <translation>Redessiner</translation>
     </message>
     <message>
-        <location line="-829"/>
-        <location line="+37"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
     </message>
     <message>
-        <location line="-35"/>
         <source>This block can hold text notes that are ignored by generators and interpreters. Use it for improving the diagram readability.</source>
         <translation>Ce bloc peut contenir des notes textuelles ignorées par les générateurs et interpréteurs. Utilisez-le pour améliorer la lisibilité du diagramme.</translation>
     </message>
     <message>
-        <location line="+35"/>
         <source>Enter some text here...</source>
         <translation>Entrez du texte ici...</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Link</source>
         <translation>Lien</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>For creating a link between two elements A and B you can just hover a mouse above A, press the right mouse button and (without releasing it) draw a line to the element B. Alternatively you can just &apos;pull&apos; a link from a small blue circle next to the element.</source>
         <translation>Pour créer un lien entre deux éléments A et B, vous pouvez placer le curseur au-dessus de A, cliquer avec le bouton droit de la souris et (sans relâcher) tracer une ligne jusqu&apos;à l&apos;élément B. Sinon, vous pouvez simplement &apos;tirer&apos; un lien à partir du petit cercle bleu situé à côté de l&apos;élément.</translation>
     </message>
     <message>
-        <location line="+47"/>
         <source>Guard</source>
         <translation>Garde</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>EngineCommand</source>
         <translation>EngineCommand</translation>
     </message>
     <message>
-        <location line="+34"/>
         <source>EngineMovementCommand</source>
         <translation>EngineMovementCommand</translation>
     </message>
@@ -392,12 +352,10 @@
         <translation type="vanished">Rempli</translation>
     </message>
     <message>
-        <location line="+688"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -450,7 +408,6 @@
         <translation type="vanished">Mode</translation>
     </message>
     <message>
-        <location line="-665"/>
         <source>Power (%)</source>
         <translation>Puissance (%)</translation>
     </message>
@@ -459,7 +416,6 @@
         <translation type="vanished">B, C</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>100</source>
         <translation>100</translation>
     </message>
@@ -480,7 +436,6 @@
         <translation type="vanished">LED</translation>
     </message>
     <message>
-        <location line="+522"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
@@ -493,7 +448,6 @@
         <translation type="vanished">Frequence</translation>
     </message>
     <message>
-        <location line="+566"/>
         <source>1000</source>
         <translation>1000</translation>
     </message>
@@ -530,8 +484,6 @@
         <translation type="vanished">Signe</translation>
     </message>
     <message>
-        <location line="-363"/>
-        <location line="+415"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -568,32 +520,26 @@
         <translation type="vanished">Attendre un capteur tactile</translation>
     </message>
     <message>
-        <location line="-1129"/>
         <source>End if</source>
         <translation>Fin Si</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Unites control flow from different condition branches.</source>
         <translation>Réunit les flux de contrôle provenant de différentes branches conditionnelles.</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Final Node</source>
         <translation>Nœud terminal</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>The final node of the program. If the program consists of some parallel execution lines the reachment of this block terminates the corresponding execution line. This block can`t have outgoing links.</source>
         <translation>Le nœud final du programme. Si le programme comprend plusieurs lignes d&apos;exécution parallèles, l&apos;atteinte de ce bloc termine la ligne d&apos;exécution correspondante. Ce bloc ne peut pas avoir de liens sortants.</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Fork</source>
         <translation>Fork</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Separates program execution into a number of threads that will be executed concurrently from the programmers`s point of view. For example in such way signal from sensor and some time interval can be waited synchroniously. This block must have at least two outgoing links. &apos;Guard&apos; property of every link must contain unique thread identifiers, and one of those identifiers must be the same as the identifier of a thread where fork is placed (it must be &apos;main&apos; if it is the first fork in a program.</source>
         <translation>Sépare l&apos;exécution du programme en plusieurs threads qui seront exécutés simultanément du point de vue du programmeur. Par exemple, on peut ainsi attendre de façon synchrone un signal provenant d&apos;un capteur et un intervalle de temps donné. Ce bloc doit avoir au moins deux liens sortants. La propriété &apos;Guard&apos; de chaque lien doit contenir des identifiants de thread uniques, et l&apos;un de ces identifiants doit être identique à celui du thread dans lequel le fork est placé (il doit être &apos;main&apos; s&apos;il s&apos;agit du premier fork du programme).</translation>
     </message>
@@ -602,7 +548,6 @@
         <translation type="vanished">Fonction</translation>
     </message>
     <message>
-        <location line="+35"/>
         <source>Evaluates a value of the given expression. Also new variables can be defined in this block. See the &apos;Expressions Syntax&apos; chapter in help for more information about &apos;Function&apos; block syntax.</source>
         <translation>Évalue la valeur de l&apos;expression donnée. De nouvelles variables peuvent également être définies dans ce bloc. Consultez le chapitre &apos;Syntaxe des expressions&apos; dans l&apos;aide pour plus d&apos;informations sur la syntaxe du bloc &apos;Fonction&apos;.</translation>
     </message>
@@ -611,157 +556,114 @@
         <translation type="vanished">Corps</translation>
     </message>
     <message>
-        <location line="+43"/>
         <source>Get Button Code</source>
         <translation>Obtenir le code de bouton</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Assigns a given variable a value of pressed button. If no button is pressed at the moment and &apos;Wait&apos; property is false when variable is set to -1.</source>
         <translation>Attribue à une variable donnée la valeur du bouton pressé. Si aucun bouton n&apos;est enfoncé au moment où la propriété &apos;Wait&apos; est fausse, la variable prend la valeur -1.</translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>Wait:</source>
         <translation>Attendre :</translation>
     </message>
     <message>
-        <location line="+24"/>
-        <location line="+151"/>
-        <location line="+374"/>
-        <location line="+414"/>
         <source>Variable</source>
         <translation>Variable</translation>
     </message>
     <message>
-        <location line="-938"/>
-        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+137"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
         <source>Wait</source>
         <translation>Attendre</translation>
     </message>
     <message>
-        <location line="-1"/>
-        <location line="+151"/>
-        <location line="+374"/>
-        <location line="+307"/>
-        <location line="+107"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location line="-927"/>
-        <location line="+34"/>
-        <location line="+353"/>
         <source>Condition</source>
         <translation>Condition</translation>
     </message>
     <message>
-        <location line="-385"/>
         <source>Separates program execution in correspondece with the given condition. The &apos;Condition&apos; parameter value must be some boolean expression that will determine subsequent program execution line. This block must have two outgoing links, at least one of them must have &apos;Guard&apos; parameter set to &apos;true&apos; or &apos;false&apos;. The execution will be proceed trough the link marked with the guard corresponding to &apos;Condition&apos; parameter of the block.</source>
         <translation>Sépare l&apos;exécution du programme selon la condition donnée. La valeur du paramètre &apos;Condition&apos; doit être une expression booléenne qui déterminera le prochain chemin d&apos;exécution. Ce bloc doit avoir deux liens sortants, dont au moins un doit avoir le paramètre &apos;Guard&apos; défini à &apos;true&apos; ou &apos;false&apos;. L&apos;exécution se poursuivra par le lien marqué avec la garde correspondant à la valeur du paramètre &apos;Condition&apos; du bloc.</translation>
     </message>
     <message>
-        <location line="+32"/>
-        <location line="+353"/>
         <source>x &gt; 0</source>
         <translation>x &gt; 0</translation>
     </message>
     <message>
-        <location line="-342"/>
         <source>Initial Node</source>
         <translation>Nœud initial</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>The entry point of the program execution. Each diagram should have only one such block, it must not have incomming links and it must have only one outgoing link. The interpretation process starts from exactly this block.</source>
         <translation>Le point d&apos;entrée de l&apos;exécution du programme. Chaque diagramme ne doit contenir qu&apos;un seul bloc de ce type, il ne doit pas avoir de liens entrants et doit avoir exactement un lien sortant. Le processus d&apos;interprétation commence précisément à ce bloc.</translation>
     </message>
     <message>
-        <location line="+41"/>
         <source>User Input</source>
         <translation>Saisie utilisateur</translation>
     </message>
     <message>
-        <location line="+17"/>
         <source>Default:</source>
         <translation>Par défaut :</translation>
     </message>
     <message>
-        <location line="+45"/>
         <source>Join</source>
         <translation>Jonction</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Joins a number of threads into one. &apos;Guard&apos; property of the single outgoing link must contain an identifier of one of threads being joined. The specified thread would wait until the rest of them finish execution, and then proceed in a normal way.</source>
         <translation>Fusionne plusieurs threads en un seul. La propriété &apos;Guard&apos; du lien sortant unique doit contenir l&apos;identifiant d&apos;un des threads fusionnés. Le thread spécifié attendra que les autres aient terminé leur exécution, puis poursuivra normalement.</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Kill Thread</source>
         <translation>Tuer un fil</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Terminates execution of a specified thread.</source>
         <translation>Termine l&apos;exécution d&apos;un thread spécifié.</translation>
     </message>
     <message>
-        <location line="+31"/>
         <source>Thread</source>
         <translation>Fil</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>main</source>
         <translation>main</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Loop</source>
         <translation>Boucle</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>This block executes a sequence of blocks for a given number of times. The number of repetitions is specified by the &apos;Iterations&apos; parameter. This block must have two outgoing links. One of them must be marked with the &apos;body&apos; guard (that means that the property &apos;Guard&apos; of the link must be set to &apos;body&apos; value). Another outgoing link must be unmarked: the program execution will be proceeded through this link when it will go through our &apos;Loop&apos; block for the given number of times.</source>
         <translation>Ce bloc exécute une séquence de blocs un nombre donné de fois. Le nombre de répétitions est défini par le paramètre &apos;Itérations&apos;. Ce bloc doit avoir deux liens sortants. L&apos;un d&apos;eux doit être marqué avec la garde &apos;body&apos; (cela signifie que la propriété &apos;Guard&apos; du lien doit être définie à la valeur &apos;body&apos;). L&apos;autre lien sortant doit rester non marqué : l&apos;exécution du programme se poursuivra par ce lien une fois que le bloc &apos;Loop&apos; aura été exécuté le nombre de fois indiqué.</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Iterations</source>
         <translation>Itérations</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <location line="+248"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location line="-237"/>
         <source>Marker Down</source>
         <translation>Descendre le marqueur </translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Moves the marker of the 2D model robot down to the floor: the robot will draw its trace on the floor after that. If the marker of another color is already drawing at the moment it will be replaced.</source>
         <translation>Abaisse le marqueur du robot du modèle 2D jusqu&apos;au sol : le robot commencera à tracer sa trajectoire sur le sol. Si un marqueur d&apos;une autre couleur est déjà en cours d&apos;utilisation, il sera remplacé.</translation>
     </message>
     <message>
-        <location line="+42"/>
         <source>Marker Up</source>
         <translation>Remonter le marqueur</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Lifts the marker of the 2D model robot up: the robot stops drawing its trace on the floor after that.</source>
         <translation>Relève le marqueur du robot du modèle 2D : le robot cesse alors de tracer sa trajectoire sur le sol.</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>Pre-conditional Loop</source>
         <translation>Boucle avec condition préalable</translation>
     </message>
@@ -790,79 +692,62 @@
         <translation type="vanished">Attendre une distance de sonar</translation>
     </message>
     <message>
-        <location line="+44"/>
         <source>Print Text</source>
         <translation>Imprimer le texte</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Prints a given line in the specified coordinates on the robot`s screen. The value of &apos;Text&apos; property is interpreted as a plain text unless &apos;Evaluate&apos; property is set to true, then it will be interpreted as an expression (that may be useful for example when debugging variables values).</source>
         <translation>Affiche une ligne donnée aux coordonnées spécifiées sur l&apos;écran du robot. La valeur de la propriété &apos;Text&apos; est interprétée comme un texte brut, sauf si la propriété &apos;Evaluate&apos; est définie à vrai, auquel cas elle sera interprétée comme une expression (ce qui peut être utile, par exemple, lors du débogage des valeurs des variables).</translation>
     </message>
     <message>
-        <location line="+47"/>
         <source>Evaluate</source>
         <translation>Évaluer</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Text</source>
         <translation>Texte</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Enter some text here</source>
         <translation>Saisissez du texte ici</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location line="+1"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Random Initialization</source>
         <translation>Initialisation aléatoire</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Sets a variable value to a random value inside given interval.</source>
         <translation>Attribue à une variable une valeur aléatoire comprise dans l&apos;intervalle donné.</translation>
     </message>
     <message>
-        <location line="+47"/>
         <source>From</source>
         <translation>De</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>To</source>
         <translation>À</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>Receive Message From Thread</source>
         <translation>Recevoir un message de fil</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Receive a message sent to a thread from which this block is called.</source>
         <translation>Reçoit un message envoyé à un thread depuis lequel ce bloc est appelé.</translation>
     </message>
     <message>
-        <location line="+39"/>
         <source>Synchronized</source>
         <translation>Synchronisé</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>RobotsDiagramGroup</source>
         <translation>RobotsDiagramGroup</translation>
     </message>
     <message>
-        <location line="+15"/>
-        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="-29"/>
         <source>Robot`s Behaviour Diagram</source>
         <translation>Le diagramme de comportement du robot</translation>
     </message>
@@ -871,12 +756,10 @@
         <translation type="vanished">Paramétrage des périfériques</translation>
     </message>
     <message>
-        <location line="+43"/>
         <source>Send Message To Thread</source>
         <translation>Envoyer un message à un fil</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Sends a message to a specified thread.</source>
         <translation>Envoie un message à un fil spécifié.</translation>
     </message>
@@ -885,53 +768,42 @@
         <translation type="vanished">Message</translation>
     </message>
     <message>
-        <location line="+51"/>
         <source>Subprogram</source>
         <translation>Sousprogramme</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Subprogram call. Subprograms are used for splitting repetitive program parts into a separate diagram and then calling it from main diagram or other subprograms. When this block is added into a diagram it will be suggested to enter subprogram name. The double click on subprogram call block may open the corresponding subprogram diagram. Moreover user palette will appear containing existing subrpograms, they can be dragged into a diagram like the usual blocks.</source>
         <translation>Appel de sous-programme. Les sous-programmes permettent de séparer les parties répétitives d&apos;un programme dans un diagramme distinct, puis de les appeler depuis le diagramme principal ou d&apos;autres sous-programmes. Lorsque ce bloc est ajouté à un diagramme, il est demandé de saisir le nom du sous-programme. Un double-clic sur le bloc d&apos;appel du sous-programme peut ouvrir le diagramme correspondant. En outre, une palette utilisateur apparaît, contenant les sous-programmes existants, qui peuvent être glissés dans un diagramme comme des blocs ordinaires.</translation>
     </message>
     <message>
-        <location line="+40"/>
         <source>Subprogram Diagram</source>
         <translation>Diagramme de sousprogramme</translation>
     </message>
     <message>
-        <location line="+42"/>
         <source>SubprogramDiagramGroup</source>
         <translation>SubprogramDiagramGroup</translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>Switch</source>
         <translation>Choix multifonction</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Selects the program execution branch in correspondence with some expression value. The value of the expression written in &apos;Expression&apos; property is compared to the values on the outgoing links. If equal value is found then execution will be proceeded by that branch. Else branch without a marker will be selected.</source>
         <translation>Sélectionne la branche d&apos;exécution du programme en fonction de la valeur d&apos;une expression. La valeur de l&apos;expression indiquée dans la propriété &apos;Expression&apos; est comparée aux valeurs des liens sortants. Si une valeur égale est trouvée, l&apos;exécution se poursuit par cette branche. Sinon, la branche sans marqueur est sélectionnée.</translation>
     </message>
     <message>
-        <location line="-887"/>
-        <location line="+918"/>
         <source>Expression</source>
         <translation>Expression</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Timer</source>
         <translation>Minuteur</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Waits for a given time in milliseconds.</source>
         <translation>Attends un temps donné en ms.</translation>
     </message>
     <message>
-        <location line="+41"/>
         <source>Delay (ms)</source>
         <translation>Délai (ms)</translation>
     </message>
@@ -1156,53 +1028,26 @@
         <translation type="vanished">Enregister dans un fichier</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Variable Initialization</source>
         <translation>Initialisation de variable</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Assigns a given value to a given variable.</source>
         <translation>Affecter une valeur à une variable.</translation>
     </message>
     <message>
-        <location line="+39"/>
         <source>Value</source>
         <translation>Valeur</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+7"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
         <source>Algorithms</source>
         <translation>Algorithmes</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
         <source>Actions</source>
         <translation>Actions</translation>
     </message>
     <message>
-        <location line="+5"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
-        <location line="+1"/>
         <source>Drawing</source>
         <translation>Dessin</translation>
     </message>
@@ -1214,37 +1059,30 @@
         <translation type="obsolete">Corps</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/editor/common/generated/elements.h" line="-990"/>
         <source>Expression</source>
         <translation>Expression</translation>
     </message>
     <message>
-        <location line="+201"/>
         <source>Default</source>
         <translation>Par défaut</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Text</source>
         <translation>Texte</translation>
     </message>
     <message>
-        <location line="+428"/>
         <source>Variable</source>
         <translation>Variable</translation>
     </message>
     <message>
-        <location line="+58"/>
         <source>Devices configuration</source>
         <translation>Configuration des dispositifs</translation>
     </message>
     <message>
-        <location line="+52"/>
         <source>Message</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Thread</source>
         <translation>Tâche</translation>
     </message>
@@ -1984,12 +1822,10 @@
         <translation type="vanished">4</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/editor/common/generated/pluginInterface.cpp" line="+22"/>
         <source>black</source>
         <translation>noire</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>blue</source>
         <translation>bleu</translation>
     </message>
@@ -2030,7 +1866,6 @@
         <translation type="vanished">girs</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>green</source>
         <translation>vert</translation>
     </message>
@@ -2043,7 +1878,6 @@
         <translation type="vanished">pourpre</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>red</source>
         <translation>rouge</translation>
     </message>
@@ -2060,32 +1894,26 @@
         <translation type="vanished">E4</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>white</source>
         <translation>blanc</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>yellow</source>
         <translation>jaune</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>greater</source>
         <translation>supérieur</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>less</source>
         <translation>inférieur</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>not greater</source>
         <translation>pas supérieur à</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>not less</source>
         <translation>pas inférieur à</translation>
     </message>
@@ -2102,67 +1930,54 @@
         <translation type="vanished">interrompre</translation>
     </message>
     <message>
-        <location line="-6"/>
         <source>float</source>
         <translation>float</translation>
     </message>
     <message>
-        <location line="-2"/>
         <source>Composite</source>
         <translation>Composite</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>None</source>
         <translation>Aucun</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Shared</source>
         <translation>Partagé</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>brake</source>
         <translation>interrompre</translation>
     </message>
     <message>
-        <location line="+12"/>
         <source>Package</source>
         <translation>Paquet</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Private</source>
         <translation>Privé</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Protected</source>
         <translation>Protegé</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Public</source>
         <translation>Publique</translation>
     </message>
     <message>
-        <location line="-2"/>
         <source>In</source>
         <translation>Entrée</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Inout</source>
         <translation>Entrée/sortie</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Out</source>
         <translation>Sortie</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Return</source>
         <translation>Retour</translation>
     </message>
@@ -2199,17 +2014,14 @@
         <translation type="vanished">Vrai</translation>
     </message>
     <message>
-        <location line="-8"/>
         <source>Concurrent</source>
         <translation>Concurrent</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Guarded</source>
         <translation>Gardé</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Sequential</source>
         <translation>Séquentiel</translation>
     </message>
@@ -2222,39 +2034,30 @@
         <translation type="vanished">Echapper</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <location line="+6"/>
         <source>false</source>
         <translation>faux</translation>
     </message>
     <message>
-        <location line="-6"/>
         <source>body</source>
         <translation>corps</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <location line="+6"/>
         <source>true</source>
         <translation>vrai</translation>
     </message>
     <message>
-        <location line="-18"/>
         <source>norm</source>
         <translation>norme</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>x-axis</source>
         <translation>axe x</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>y-axis</source>
         <translation>axe y</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>z-axis</source>
         <translation>axe z</translation>
     </message>

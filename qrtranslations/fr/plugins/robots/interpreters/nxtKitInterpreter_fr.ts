@@ -4,38 +4,30 @@
 <context>
     <name>NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Configuration de NXT</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>nxtOSEK Generator Settings</source>
         <translation>Paramètres du générateur nxtOSEK</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>TextLabel</source>
         <translation>Texte</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Bluetooth Settings</source>
         <translation>Paramètres Bluetooth</translation>
     </message>
     <message>
-        <location line="+36"/>
-        <location line="+7"/>
         <source>COM Port:</source>
         <translation>Port série :</translation>
     </message>
     <message>
-        <location line="-27"/>
         <source>No COM ports found. If you have a Bluetooth connection with active virtual COM port, please enter its name. Example: COM3</source>
         <translation>Aucu port série n&apos;est détecté. Si vous avez une connexion Bluetooth avec un port série virtuel actif, tapez son nom. Par exemple : COM3</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Specify COM port manually</source>
         <translation>Spécifiez le port en série manuellement</translation>
     </message>
@@ -43,7 +35,6 @@
 <context>
     <name>NxtDisplayWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtDisplayWidget.ui" line="+435"/>
         <source>tr(NxtDisplay)</source>
         <translation>Écran NXT</translation>
     </message>
@@ -51,17 +42,14 @@
 <context>
     <name>nxt::NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation>Image du robot en 2D :</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Path to arm-none-eabi:</source>
         <translation>Chemin vers arm-none-eabi :</translation>
     </message>
     <message>
-        <location line="+25"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
         <translation>AVERTISSEMENT : Le répertoire actuel n&apos;existe pas. 
@@ -71,7 +59,6 @@ Ouvrez le &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot
 <context>
     <name>nxt::NxtKitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+107"/>
         <source>Lego NXT</source>
         <translation>Lego NXT</translation>
     </message>
@@ -101,7 +88,6 @@ Ouvrez le &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot
 <context>
     <name>nxt::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+35"/>
         <source>Interpretation (Bluetooth)</source>
         <translation>Interprétation (Bluetooth)</translation>
     </message>
@@ -109,7 +95,6 @@ Ouvrez le &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot
 <context>
     <name>nxt::robotModel::real::UsbRealRobotModel</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (USB)</source>
         <translation>Interprétation (USB)</translation>
     </message>
@@ -117,7 +102,6 @@ Ouvrez le &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot
 <context>
     <name>nxt::robotModel::real::parts::SonarSensor</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+31"/>
         <source>Sonar sensor</source>
         <translation>Capteur ultrasons</translation>
     </message>

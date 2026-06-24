@@ -15,6 +15,10 @@
 defineTest(autoLupdateFiles) {
         FILES_TO_TRANSLATE = $$1
 
+        # Remove the location tag from generated ts files, which are useless in most contexts.
+        # Also, this should simplify the process of updating translations in case there are no new files in the pull request.
+        LUPDATE_ARGS += -locations none
+
         for(LUPDATE_INCLUDEPATH, INCLUDEPATH) {
                 LUPDATE_ARGS += -I$$system_quote($$system_path($$LUPDATE_INCLUDEPATH))
         }
