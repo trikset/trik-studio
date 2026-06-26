@@ -4,7 +4,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../qrgui/plugins/metaMetaModel/src/metamodel.cpp" line="+74"/>
         <source>Unknown element %1</source>
         <translation>Élément inconnu %1</translation>
     </message>

@@ -4,12 +4,10 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="+166"/>
         <source>Bogus input values</source>
         <translation>Неподходящие значения аргументов</translation>
     </message>
     <message>
-        <location line="+22"/>
         <source>Error: File %1 couldn&apos;t be opened!</source>
         <translation>Ошибка: Не удаётся открыть файл %1!</translation>
     </message>
@@ -17,17 +15,14 @@
 <context>
     <name>TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Настройки TRIK</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>TCP Settings</source>
         <translation>Настройки TCP</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Enter robot IP-address here</source>
         <translation>Введите IP-адрес робота</translation>
     </message>
@@ -36,42 +31,34 @@
         <translation type="vanished">Настройки мультимедия</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Camera Settings</source>
         <translation>Настройки камеры</translation>
     </message>
     <message>
-        <location line="+28"/>
         <source>Use real camera</source>
         <translation>Использовать камеру</translation>
     </message>
     <message>
-        <location line="-13"/>
         <source>Camera:</source>
         <translation>Камера:</translation>
     </message>
     <message>
-        <location line="+29"/>
         <source>Use images from project</source>
         <translation>Использовать запакованные в проект изображения</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Browse...</source>
         <translation>Открыть...</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Pack images to project</source>
         <translation>Запаковывать изображения в проект</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>Network Settings</source>
         <translation>Настройки сети</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Enable Mailbox</source>
         <translation>Активировать Mailbox</translation>
     </message>
@@ -80,7 +67,6 @@
         <translation type="vanished">Бортномер:</translation>
     </message>
     <message>
-        <location line="-38"/>
         <source>Images:</source>
         <translation>Изображения:</translation>
     </message>
@@ -147,7 +133,6 @@
 <context>
     <name>TrikDisplayWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikDisplayWidget.ui" line="+14"/>
         <source>Trik Display</source>
         <translation>Дисплей TRIK</translation>
     </message>
@@ -155,14 +140,12 @@
 <context>
     <name>TwoDExecutionControl</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/twoDExecutionControl.cpp" line="+28"/>
         <source>&apos;%1&apos; is disabled
 </source>
         <translation>&apos;%1&apos; отключен
 </translation>
     </message>
     <message>
-        <location line="+18"/>
         <source>No cofigured random device</source>
         <translation>Генератор случайных чисел не сконфигурирован</translation>
     </message>
@@ -170,22 +153,18 @@
 <context>
     <name>trik::TrikAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation>Картинка робота в 2D:</translation>
     </message>
     <message>
-        <location line="+18"/>
         <source>Select Directory</source>
         <translation>Выберите папку</translation>
     </message>
     <message>
-        <location line="+25"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>You should restart the program to apply changes</source>
         <translation>Перезапустите программу, чтобы применить изменения</translation>
     </message>
@@ -197,19 +176,14 @@
 <context>
     <name>trik::TrikBrick</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikbrick.cpp" line="+84"/>
-        <location line="+76"/>
         <source>2d model shell part was not found</source>
         <translation>Консоль 2d модели не найдена</translation>
     </message>
     <message>
-        <location line="-30"/>
-        <location line="+283"/>
         <source>Trying to read from file %1 failed</source>
         <translation>Не удалось открыть файл %1</translation>
     </message>
     <message>
-        <location line="-223"/>
         <source>No configured motor on port: %1</source>
         <translation>Не найден сконфигурированный  мотор на порту: %1</translation>
     </message>
@@ -218,67 +192,54 @@
         <translation type="vanished">Не найден сконфигурированный  сенсор на порту: %1</translation>
     </message>
     <message>
-        <location line="+31"/>
         <source>No configured scalar sensor on port: %1</source>
         <translation>Не настроен скалярный датчик на порту: %1</translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>No configured lidar on port: %1</source>
         <translation>Не настроен лидар на порту: %1</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>No configured accelerometer</source>
         <translation>Акселерометр не сконфигурирован</translation>
     </message>
     <message>
-        <location line="+16"/>
         <source>No configured gyroscope</source>
         <translation>Гиродатчик не сконфигурирован</translation>
     </message>
     <message>
-        <location line="+20"/>
         <source>No configured LineSensor on port: %1</source>
         <translation>Не найден сконфигурированный сенсор линии на порту: %1</translation>
     </message>
     <message>
-        <location line="+19"/>
         <source>No configured ColorSensor on port: %1</source>
         <translation>Не настроен датчик цвета на порту: %1</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Sensor not implemented in simulation mode. Used port: %1</source>
         <translation>Датчик не поддержан в режиме имитационного моделирования. Порт: %1</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>No configured encoder on port: %1</source>
         <translation>Не найден сконфигурированный енкодер на порту: %1</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>No configured led</source>
         <translation>LED не сконфигурирован</translation>
     </message>
     <message>
-        <location line="+19"/>
         <source>Get photo with camera started</source>
         <translation>Процесс получения снимка начат</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Get photo with camera finished</source>
         <translation>Процесс получения снимка завершен</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Cannot get a photo from camera (possibly because of wrong camera name)</source>
         <translation>Получить снимок с помощью камеры не удалось (возможно из-за неправильного имени камеры)</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Cannot get a photo from folders/project (possibly because of wrong path/empty project)</source>
         <translation>Получить снимок из папки/проекта не удалось (возможно из-за неправильного пути/отстуствия снимков в проекте)</translation>
     </message>
@@ -298,32 +259,26 @@
         <translation type="vanished">Оставновить QTS</translation>
     </message>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikKitInterpreterPluginBase.cpp" line="+39"/>
         <source>Start</source>
         <translation>Запустить</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Stop</source>
         <translation>Оставновить</translation>
     </message>
     <message>
-        <location line="+61"/>
         <source>TRIK_PYTHONPATH must be set correctly to run Python script.</source>
         <translation>Для запуска программы на Python доложна быть корректно выставлена переменная окружения TRIK_PYTHONPATH</translation>
     </message>
     <message>
-        <location line="+173"/>
         <source>Run program</source>
         <translation>Выполнить программу</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Stop robot</source>
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+199"/>
         <source>Enter robot`s IP-address here...</source>
         <translation>Введите IP-адрес робота...</translation>
     </message>
@@ -331,8 +286,6 @@
 <context>
     <name>trik::TrikTextualInterpreter</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/trikKitInterpreterCommon/src/trikTextualInterpreter.cpp" line="-96"/>
-        <location line="+15"/>
         <source>Unsupported script file type</source>
         <translation>Неверный формат файла</translation>
     </message>

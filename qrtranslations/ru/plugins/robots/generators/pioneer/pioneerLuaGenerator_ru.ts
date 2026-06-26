@@ -4,12 +4,10 @@
 <context>
     <name>PioneerAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/widgets/pioneerAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location line="+64"/>
         <source>Base station connection mode:</source>
         <translation>Режим подключения базовой станции:</translation>
     </message>
@@ -34,7 +32,6 @@
         <translation type="vanished">Использовать &quot;controller&quot; для загрузки и выполнения программы</translation>
     </message>
     <message>
-        <location line="-43"/>
         <source>Connection Settings</source>
         <translation>Настройки соединения</translation>
     </message>
@@ -47,7 +44,6 @@
         <translation type="vanished">COM1</translation>
     </message>
     <message>
-        <location line="+29"/>
         <source>Base station port:</source>
         <translation>Порт базовой станции:</translation>
     </message>
@@ -64,7 +60,6 @@
         <translation type="vanished">Настройки базовой станции</translation>
     </message>
     <message>
-        <location line="-14"/>
         <source>Base station IP:</source>
         <translation>IP-адрес базовой станции:</translation>
     </message>
@@ -88,28 +83,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaMasterGenerator.cpp" line="+111"/>
         <source>There is no opened diagram</source>
         <translation>Диаграмма не открыта</translation>
     </message>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/generators/semanticTreeManager.cpp" line="+121"/>
         <source>Generation internal error, please send bug report to developers.Additional info: zone node %1 can not be used as labeled node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: узел зоны %1 не может быть использован как помеченный узел.</translation>
     </message>
     <message>
-        <location line="+38"/>
         <source>Generation internal error, synchronous zone parent is a zone node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: в семантическом дереве родитель узла-зоны сам является узлом-зоной.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Generation internal error, synchronous fragment zone is absent.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: не найдена зона для узла начала синхронного фрагмента.</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location line="+108"/>
         <source>Generation internal error, zone contains zone node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: в семантическом дереве узел-зона содержит узел-зону в качестве непосредственного сына.</translation>
     </message>
@@ -188,50 +177,38 @@
         <translation type="vanished">Загрузка начата, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/communicator/httpCommunicator.cpp" line="+134"/>
         <source>Uploading finished.</source>
         <translation>Загрузка завершена.</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Start finished.</source>
         <translation>Запуск завершён.</translation>
     </message>
     <message>
-        <location line="-82"/>
-        <location line="+40"/>
         <source>Pioneer base station IP address is not set. It can be set in Settings window.</source>
         <translation>IP-адрес базовой станции Пионера не указан. Его можно указать в окне &quot;Настройки&quot; -&gt; &quot;Роботы&quot; -&gt; &quot;Пионер&quot;.</translation>
     </message>
     <message>
-        <location line="-34"/>
-        <location line="+40"/>
         <source>Pioneer base station port is not set. It can be set in Settings window.</source>
         <translation>Порт базовой станции Пионера не указан. Его можно указать в окне &quot;Настройки&quot; -&gt; &quot;Роботы&quot; -&gt; &quot;Пионер&quot;.</translation>
     </message>
     <message>
-        <location line="-34"/>
-        <location line="+9"/>
         <source>Generation failed, upload aborted.</source>
         <translation>Генерация завершились с ошибкой, загрузка отменена.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Uploading to: %1, please wait...</source>
         <translation>Производится загрузка на %1, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location line="+24"/>
         <source>Starting program. Senging request to: %1, please wait...</source>
         <translation>Скрипт запускается. Запрос запуска к %1, пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Stopping program is not supported for HTTP communication mode.</source>
         <translation>Остановка программы не поддерживается в режиме передачи по HTTP, используйте инструмент &quot;controller&quot; для связи с роботом (включается в настройках).</translation>
     </message>
     <message>
-        <location line="+32"/>
         <source>Pioneer base station took too long to respond. Request aborted.</source>
         <translation>НСУ Пионер не отвечает.</translation>
     </message>
@@ -258,7 +235,6 @@
         <translation type="vanished">Квадрокоптер &quot;Пионер&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaGeneratorPlugin.cpp" line="+45"/>
         <source>Pioneer model (real copter)</source>
         <translation>Реальный квадрокоптер</translation>
     </message>
@@ -267,47 +243,38 @@
         <translation type="vanished">Симулятор</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Generate to Pioneer Lua</source>
         <translation>Генерировать в .lua для Пионера</translation>
     </message>
     <message>
-        <location line="+14"/>
         <source>Upload generated program to Pioneer</source>
         <translation>Загрузить программу на Пионер</translation>
     </message>
     <message>
-        <location line="+97"/>
         <source>Choose robot`s mode</source>
         <translation>Выберите режим робота</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>Robot`s IP-address</source>
         <translation>IP-адрес робота</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Robot`s port</source>
         <translation>Порт робота</translation>
     </message>
     <message>
-        <location line="+95"/>
         <source>Sorry, but uploading works only on Windows</source>
         <translation>Извините, загрузка работает только на Windows</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>site</source>
         <translation>сайте</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Please download uploader from </source>
         <translation>Пожалуйста, скачайте загрузчик с </translation>
     </message>
     <message>
-        <location line="+28"/>
         <source>Exit code </source>
         <translation>Код завершения </translation>
     </message>
@@ -324,12 +291,10 @@
         <translation type="vanished">Язык Lua</translation>
     </message>
     <message>
-        <location line="-217"/>
         <source>Generate Lua script for Pioneer Quadcopter</source>
         <translation>Генерировать скрипт на Lua для квадрокоптера &quot;Пионер&quot;</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Upload Pioneer program</source>
         <translation>Загрузить программу на квадрокоптер &quot;Пионер&quot;</translation>
     </message>
@@ -389,7 +354,6 @@
 <context>
     <name>pioneer::lua::PioneerLuaMasterGenerator</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/pioneerLuaMasterGenerator.cpp" line="+34"/>
         <source>Generation failed. Possible causes are internal error in generator or too complex program structure.</source>
         <translation>Генерация закончилась с ошибкой. Возможные причины: внутренняя ошибка генератора или слишком сложная структура программы. Обратитесь к разработчикам.</translation>
     </message>
@@ -417,7 +381,6 @@
         <translation type="vanished">Количество блоков &quot;Условие&quot; и &quot;Конец условия&quot; должно быть равным.</translation>
     </message>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/pioneer/pioneerLuaGenerator/generators/pioneerStateMachineGenerator.cpp" line="+195"/>
         <source>Generation internal error, failed to create a node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: не удалось создать узел семантического дерева.</translation>
     </message>
@@ -434,58 +397,46 @@
         <translation type="vanished">Использование блока &quot;Конец условия&quot; без блока &quot;Условие&quot; не допускается.</translation>
     </message>
     <message>
-        <location line="-142"/>
         <source>The diagram must have the same number of &quot;Conditonal&quot; and &quot;End If&quot; blocks.</source>
         <translation>Количество блоков &quot;Условие&quot; и &quot;Конец условия&quot; должно быть равным.</translation>
     </message>
     <message>
-        <location line="+99"/>
-        <location line="+85"/>
         <source>&quot;End If&quot; block occurs before &quot;If block&quot;</source>
         <translation>Использование блока &quot;Конец условия&quot; без блока &quot;Условие&quot; не допускается</translation>
     </message>
     <message>
-        <location line="+71"/>
         <source>Nested If&apos;s constructions is not allowed.</source>
         <translation>Вложенные условные конструкции не допускаются.</translation>
     </message>
     <message>
-        <location line="+65"/>
         <source>Generation internal error, zone node corresponds to a block in a diagram.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: узел-зона семантического дерева соответствует блоку на диаграмме. Узел-зона может быть только частью представления блока.</translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>Generation internal error, non-zone node is a start of a fragment.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: синхронный фрагмент начинается с узла-зоны.</translation>
     </message>
     <message>
-        <location line="+52"/>
         <source>Generation internal error, program ends abruptly.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: программа неожиданно закончилась. Такие ошибки должны ловиться при предварительной проверке программы.</translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>Generation internal error, asynchronous node does not have target node.</source>
         <translation>Внутренняя ошибка генерации. Дополнительная информация: асинхронный узел не имеет узла, которому надо передать управления после асинхронной операции.</translation>
     </message>
     <message>
-        <location line="+21"/>
         <source>There is a problem with If construction or with loops (loops without sending requests to the autopilot through &quot;Takeoff&quot;, &quot;Landing&quot;, &quot;Go to local point&quot; blocks are not supported yet).</source>
         <translation>В диаграмме присутстует ошибка в использовании условных конструкций или циклов (циклы без использования обращений к автопилоту через блоки &quot;Взлет&quot;, &quot;Посадка&quot;, &quot;Лететь в точку (ЛК)&quot; пока не поддержаны).</translation>
     </message>
     <message>
-        <location line="+41"/>
         <source>The blocks (&quot;Takeoff&quot;, &quot;Landing&quot;, &quot;Go to local point&quot;) which work with autopilot were observed in both (or only in one) conditional branches.</source>
         <translation>Блоки (&quot;Взлет&quot;, &quot;Посадка&quot;, &quot;Лететь в точку (ЛК)&quot;), работающие с автопилотом квадрокоптера, найдены в диаграмме в одной или нескольких ветвях.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Such blocks must appear and finish both branches (the &quot;End if&quot; block must have two such parents) or not appear at branches at all.</source>
         <translation>Такие блоки должны встречаться и заканчивать обе ветви условной конструкции (блок &quot;Конец условия&quot; должен иметь два таких предка) или не встречаться вовсе.</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Such blocks may appear in each branch several times but one of them must finish it in each branch.</source>
         <translation>Такие блоки могут встречаться в каждой ветви условной конструкции неограниченное число раз, но один из них в каждой ветви должен быть завершающим.</translation>
     </message>

@@ -4,7 +4,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/trik/trikGeneratorBase/src/trikBlocksValidator.cpp" line="+111"/>
         <source>Property should not be empty.</source>
         <translation>Свойство не должно быть пустым.</translation>
     </message>

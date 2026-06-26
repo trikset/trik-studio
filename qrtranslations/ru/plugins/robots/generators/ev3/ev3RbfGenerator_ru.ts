@@ -4,7 +4,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfMasterGenerator.cpp" line="+60"/>
         <source>There is no opened diagram</source>
         <translation>Сначала откройте диаграмму</translation>
     </message>
@@ -13,17 +12,14 @@
         <translation type="vanished">/* Внимание: преобразование типа из строки в целое число пока не поддерживается. Пожалуйста, обратитесь к разработчикам с запросом. */ 0</translation>
     </message>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/ev3/ev3RbfGenerator/lua/ev3LuaPrinter.cpp" line="+821"/>
         <source>/* Warning: cast from string to numeric type is not supported */ 0</source>
         <translation>/* Внимание: преобразование типа из строки в числовой тип пока не поддерживается. Пожалуйста, обратитесь к разработчикам с запросом. */ 0</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>/* Warning: autocast from array to other type is not supported */ 0</source>
         <translation>/* Внимание: автоматическое преобразование типа из массива в другой тип не поддерживается. */ 0</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>/* Warning: autocast is supported only for numeric types */ 0</source>
         <translation>/* Внимание: автоматическое преобразование типов поддерживается только для числовых типов */ 0</translation>
     </message>
@@ -35,57 +31,46 @@
         <translation type="vanished">Генерация (Байткод)</translation>
     </message>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/ev3/ev3RbfGenerator/ev3RbfGeneratorPlugin.cpp" line="+34"/>
         <source>Autonomous mode (USB)</source>
         <translation>Автономный режим (USB)</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Autonomous mode (Bluetooth)</source>
         <translation>Автономный режим (Bluetooth)</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Generate to Ev3 Robot Byte Code File</source>
         <translation>Сгенерировать в байткод EV3</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Upload program</source>
         <translation>Загрузить программу</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Run program</source>
         <translation>Запустить программу</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Stop robot</source>
         <translation>Остановить программу</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>EV3 Source Code language</source>
         <translation>Файл с байткодом EV3</translation>
     </message>
     <message>
-        <location line="+30"/>
         <source>Generate Ev3 Robot Byte Code File</source>
         <translation>Сгенерировать в байткод EV3</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Upload EV3 Program</source>
         <translation>Загрузить программу</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Run EV3 Program</source>
         <translation>Запустить программу на EV3</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Stop EV3 Program</source>
         <translation>Остановить программу на EV3</translation>
     </message>
@@ -94,12 +79,10 @@
         <translation type="vanished">&lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt; не установлена. Пожалуйста, скачайте и установите ее.</translation>
     </message>
     <message>
-        <location line="+39"/>
         <source>Can&apos;t write source code files to disk!</source>
         <translation>Не могу записать файлы с исходным кодом на диск!</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Compilation error occured.</source>
         <translation>Ошибка компиляции.</translation>
     </message>
@@ -108,27 +91,22 @@
         <translation type="vanished">Для загрузки программ на EV3 необходимо установить &lt;a href=&quot;https://java.com/ru/download/&quot;&gt;Java&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location line="+135"/>
         <source>Could not upload file to robot. Connect to a robot via %1.</source>
         <translation>Не могу загрузить файл на робота. Подключите робота по %1.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>USB</source>
         <translation>USB</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Bluetooth</source>
         <translation>Bluetooth</translation>
     </message>
     <message>
-        <location line="-117"/>
         <source>The program has been uploaded</source>
         <translation>Загрузка программы завершена успешно</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Do you want to run it?</source>
         <translation>Хотите ли Вы запустить эту программу?</translation>
     </message>

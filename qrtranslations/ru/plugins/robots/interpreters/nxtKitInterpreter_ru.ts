@@ -4,7 +4,6 @@
 <context>
     <name>NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.ui" line="+14"/>
         <source>Form</source>
         <translation>Настройки NXT</translation>
     </message>
@@ -21,33 +20,26 @@
         <translation type="vanished">USB</translation>
     </message>
     <message>
-        <location line="+40"/>
         <source>Bluetooth Settings</source>
         <translation>Настройки Bluetooth</translation>
     </message>
     <message>
-        <location line="+36"/>
-        <location line="+7"/>
         <source>COM Port:</source>
         <translation>COM-Порт:</translation>
     </message>
     <message>
-        <location line="-27"/>
         <source>No COM ports found. If you have a Bluetooth connection with active virtual COM port, please enter its name. Example: COM3</source>
         <translation>COM-порты не найдены. Если установлено Bluetooth-соединение с активным COM-портом, пожалуйста, укажите его имя. Пример: COM3</translation>
     </message>
     <message>
-        <location line="-35"/>
         <source>nxtOSEK Generator Settings</source>
         <translation>Настройки генератора nxtOSEK</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>TextLabel</source>
         <translation>Текстовая метка</translation>
     </message>
     <message>
-        <location line="+42"/>
         <source>Specify COM port manually</source>
         <translation>Указать COM-порт вручную</translation>
     </message>
@@ -62,7 +54,6 @@
 <context>
     <name>NxtDisplayWidget</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtDisplayWidget.ui" line="+435"/>
         <source>tr(NxtDisplay)</source>
         <translation>Дисплей NXT</translation>
     </message>
@@ -70,17 +61,14 @@
 <context>
     <name>nxt::NxtAdditionalPreferences</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtAdditionalPreferences.cpp" line="+33"/>
         <source>2D robot image:</source>
         <translation>Картинка робота в 2D:</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Path to arm-none-eabi:</source>
         <translation>Путь к arm-none-eabi:</translation>
     </message>
     <message>
-        <location line="+25"/>
         <source>WARNING: Current directory doesn&apos;t exist. 
 Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;link&lt;/a&gt; for instructions</source>
         <translation>ВНИМАНИЕ: Текущая директория не существует. 
@@ -90,7 +78,6 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::NxtKitInterpreterPlugin</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/nxtKitInterpreterPlugin.cpp" line="+107"/>
         <source>Lego NXT</source>
         <translation>Lego NXT</translation>
     </message>
@@ -139,7 +126,6 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::robotModel::real::BluetoothRealRobotModel</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/bluetoothRealRobotModel.cpp" line="+35"/>
         <source>Interpretation (Bluetooth)</source>
         <translation>Интерпретация (Bluetooth)</translation>
     </message>
@@ -147,7 +133,6 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::robotModel::real::UsbRealRobotModel</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/usbRealRobotModel.cpp" line="+34"/>
         <source>Interpretation (USB)</source>
         <translation>Интерпретация (USB)</translation>
     </message>
@@ -155,7 +140,6 @@ Open &lt;a href=&quot;https://help.trikset.com/nxt/run-upload-programs&quot;&gt;
 <context>
     <name>nxt::robotModel::real::parts::SonarSensor</name>
     <message>
-        <location filename="../../../../../plugins/robots/interpreters/nxtKitInterpreter/src/robotModel/real/parts/sonarSensor.h" line="+31"/>
         <source>Sonar sensor</source>
         <translation>Сенсор расстояния</translation>
     </message>

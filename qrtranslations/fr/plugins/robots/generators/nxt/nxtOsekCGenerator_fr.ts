@@ -4,22 +4,18 @@
 <context>
     <name>nxt::NxtFlashTool</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtFlashTool.cpp" line="+75"/>
         <source>Robot is already being flashed</source>
         <translation>Le robot est en train d&apos;être flashé</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Firmware file not found in nxt-tools directory.</source>
         <translation>Fichier de micrologiciel introuvable dans le répertoire nxt-tools.</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Flashing robot is possible only by USB. Please switch to USB mode.</source>
         <translation>La mise à jour du robot n&apos;est possible qu&apos;en USB. Veuillez passer en mode USB.</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Firmware flash started. Please don&apos;t disconnect robot during the process</source>
         <translation>Le téléversement du firmware est commencé. S&apos;il vous plait, ne déconnectéz pas le robot jusqu&apos;à ce que le processus se termine</translation>
     </message>
@@ -40,12 +36,10 @@
         <translation type="vanished">QReal necessite les droits de superutilisateur pour mettre à jour le code du robot NXT</translation>
     </message>
     <message>
-        <location line="+107"/>
         <source>The program has been uploaded</source>
         <translation>Le téléversement du programme est terminé</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Do you want to run it?</source>
         <translation>Est-ce que vous voulez l&apos;executer ?</translation>
     </message>
@@ -62,102 +56,82 @@
         <translation type="vanished">Le firmware est flashé !</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Uploading is already running</source>
         <translation>Le téléversement est deja lancé</translation>
     </message>
     <message>
-        <location line="+27"/>
         <source>Uploading program started. Please don&apos;t disconnect robot during the process</source>
         <translation>Le téléversement du programme est commencé. S&apos;il vous plait, ne déconnectéz pas le robot jusqu&apos;à ce que le processus se termine</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Uploading failed. Make sure that X-server allows root to run GUI applications</source>
         <translation>Échec de téléversement. Assurez-vous que le serveur X permet de lancer les applications à l&apos;interface graphique</translation>
     </message>
     <message>
-        <location line="+48"/>
         <source>Could not upload program. Make sure the robot is connected and ON</source>
         <translation>Échec de téléversement du programme. Assurez-vous que le robot soit connecté et qu&apos;il ne soit pas éteint</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>If you are using GNU/Linux visit https://help.trikset.com/nxt/run-upload-programs to get instructions</source>
         <translation>Si vous utilisez GNU/Linux, rendez-vous sur https://help.trikset.com/nxt/run-upload-programs pour obtenir des instructions</translation>
     </message>
     <message>
-        <location line="+41"/>
         <source>Error in reading from firmware file: %1</source>
         <translation>Erreur lors de la lecture du fichier de micrologiciel : %1</translation>
     </message>
     <message>
-        <location line="+223"/>
         <source>Could not find %1. Check your program was compiled and try again.</source>
         <translation>Impossible de trouver %1. Vérifiez que votre programme a été compilé et réessayez.</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Could not delete old file. Make sure the robot is connected, turned on.</source>
         <translation>Impossible de supprimer l&apos;ancien fichier. Assurez-vous que le robot est connecté et allumé.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Could not upload program. Make sure the robot is connected, turned on and has enough free memory.</source>
         <translation>Impossible de charger le programme. Vérifiez que le robot est connecté, allumé et dispose de suffisamment de mémoire libre.</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Could not close file on brick. Probably connection to NXT lost at the last stage of uploading</source>
         <translation>Impossible de fermer le fichier sur le brick. La connexion à NXT a probablement été perdue à la dernière étape du chargement.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Uploading completed successfully</source>
         <translation>Téléversement réussi</translation>
     </message>
     <message>
-        <location line="-303"/>
         <source>Compilation error occured. Please check your function blocks syntax. If you sure in their validness contact developers</source>
         <translation>Une erreur de compilation s&apos;est produite. Vérifiez le syntaxe à l&apos;intérieur des blocs &quot;fonction&quot;. S&apos;ils sont valides, contactez les developpeurs</translation>
     </message>
     <message>
-        <location line="-186"/>
         <source>Could not open %1 for reading.</source>
         <translation>Impossible d&apos;ouvrir %1 en lecture.</translation>
     </message>
     <message>
-        <location line="+8"/>
         <source>Firmware file is too large to fit into NXT brick memory.</source>
         <translation>Le fichier de micrologiciel est trop volumineux pour tenir dans la mémoire du brick NXT.</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Could not write firmware into NXT memory.</source>
         <translation>Impossible d&apos;écrire le micrologiciel dans la mémoire NXT.</translation>
     </message>
     <message>
-        <location line="+7"/>
         <source>Firmware successfully flashed into robot, but starting it failed.</source>
         <translation>Le micrologiciel a été correctement chargé dans le robot, mais son démarrage a échoué. Essayez de redémarrer le robot.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Flashing process completed successfully.</source>
         <translation>Le processus de mise à jour a été terminé avec succès.</translation>
     </message>
     <message>
-        <location line="+6"/>
         <source>Flashing NXT brick...</source>
         <translation>Mise à jour du brick NXT en cours...</translation>
     </message>
     <message>
-        <location line="+106"/>
         <source>You need to have superuser privileges to flash NXT robot</source>
         <translation>Vous devez disposer des privilèges superutilisateur pour mettre à jour le robot NXT.</translation>
     </message>
     <message>
-        <location line="+55"/>
         <source>QReal requires superuser privileges to upload programs on NXT robot</source>
         <translation>QReal necessite les droits de superutilisateur pour mettre à jour le programme du robot NXT</translation>
     </message>
@@ -165,43 +139,34 @@
 <context>
     <name>nxt::osekC::NxtOsekCGeneratorPlugin</name>
     <message>
-        <location filename="../../../../../../plugins/robots/generators/nxt/nxtOsekCGenerator/nxtOsekCGeneratorPlugin.cpp" line="+32"/>
         <source>Generation (NXT OSEK C)</source>
         <translation>Génération (NXT OSEK C)</translation>
     </message>
     <message>
-        <location line="+57"/>
-        <location line="+131"/>
         <source>NXT tools package is not installed</source>
         <translation>Le paquet d&apos;outils NXT n&apos;est pas installé.</translation>
     </message>
     <message>
-        <location line="-85"/>
         <source>Generate code</source>
         <translation>Générer le code</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Flash robot</source>
         <translation>Flasher le robot</translation>
     </message>
     <message>
-        <location line="+5"/>
         <source>Upload program</source>
         <translation>Téléverser le programme</translation>
     </message>
     <message>
-        <location line="+10"/>
         <source>Generate NXT OSEK code</source>
         <translation>Générer le code NXT OSEK</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Upload program to NXT device</source>
         <translation>Téléverser le programme sur le dispositif NXT</translation>
     </message>
     <message>
-        <location line="+53"/>
         <source>flash.sh not found. Make sure it is present in QReal installation directory</source>
         <translation>flash.sh n&apos;est pas trouvé. Assurez-vous qu&apos;il soit présent dans le repertoire de  QReal</translation>
     </message>
