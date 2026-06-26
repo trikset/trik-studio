@@ -1459,7 +1459,7 @@
         <translation>Показать детали</translation>
     </message>
     <message>
-        <location line="+211"/>
+        <location line="+208"/>
         <location line="+1"/>
         <source>No wheel</source>
         <translation>Отсутствует</translation>

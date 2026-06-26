@@ -35,7 +35,7 @@ public:
 public Q_SLOTS:
 	void onSizeUnitChanged(const QSharedPointer<twoDModel::model::SizeUnit> &unit);
 protected:
-	qreal countFactor();
+	qreal countFactor() const;
 	void addWidget(QWidget *widget, twoDModel::model::SizeUnit sizeUnit,
 			qreal rangeMinimum, qreal rangeMaximum, qreal step, qreal decimals);
 	QWidget *currentWidget() const;

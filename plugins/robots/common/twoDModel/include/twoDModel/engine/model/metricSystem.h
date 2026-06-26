@@ -67,7 +67,7 @@ public:
 
 	static Unit defaultUnit();
 private:
-	Unit mSizeUnit { Unit::Pixels };
+	Unit mSizeUnit { Unit::Centimeters };
 	qreal mPixelsInCm { twoDModel::pixelsInCm };
 };
 

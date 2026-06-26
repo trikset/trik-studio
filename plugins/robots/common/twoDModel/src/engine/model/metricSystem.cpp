@@ -139,5 +139,5 @@ std::map<QString, SizeUnit::Unit> SizeUnit::currentValues()
 
 SizeUnit::Unit SizeUnit::defaultUnit()
 {
-	return Unit::Pixels;
+	return Unit::Centimeters;
 }
