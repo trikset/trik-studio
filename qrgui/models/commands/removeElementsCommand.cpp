@@ -40,6 +40,7 @@ RemoveElementsCommand *RemoveElementsCommand::withItemsToDelete(const IdList &it
 		}
 	}
 
+	postprocessCollectedItems(nodes, edges);
 	// ElementInfos must be given into implementation in reverse order (in order they will be created during undo).
 	appendHangingEdges(nodes, edges);
 	mExploser.handleRemoveCommand(mExplosionSources, this);
@@ -95,6 +96,10 @@ void RemoveElementsCommand::appendLogicalDelete(const Id &id, QList<ElementInfo>
 	if (graphicalIds.size() != 1) { // else it was done in graphicalDeleteCommand()
 		appendExplosionsCommands(id, nodes, edges);
 	}
+}
+
+void RemoveElementsCommand::postprocessCollectedItems(QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
+{
 }
 
 void RemoveElementsCommand::appendGraphicalDelete(const Id &id, QList<ElementInfo> &nodes, QList<ElementInfo> &edges)

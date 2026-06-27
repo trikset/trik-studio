@@ -54,6 +54,8 @@ public:
 	/// Appends to \a nodes and \a edges a list of element infos to remove the graphical \a id.
 	virtual void appendGraphicalDelete(const Id &id, QList<ElementInfo> &nodes, QList<ElementInfo> &edges);
 
+	virtual void postprocessCollectedItems(QList<ElementInfo> &nodes, QList<ElementInfo> &edges);
+
 	/// Returns information about all elements removed by this command.
 	const QList<ElementInfo> &results() const;
 
