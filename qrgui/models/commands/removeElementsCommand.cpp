@@ -100,6 +100,8 @@ void RemoveElementsCommand::appendLogicalDelete(const Id &id, QList<ElementInfo>
 
 void RemoveElementsCommand::postprocessCollectedItems(QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
+	Q_UNUSED(nodes)
+	Q_UNUSED(edges)
 }
 
 void RemoveElementsCommand::appendGraphicalDelete(const Id &id, QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
