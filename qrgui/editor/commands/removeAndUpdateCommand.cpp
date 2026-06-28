@@ -37,7 +37,7 @@ RemoveAndUpdateCommand::RemoveAndUpdateCommand(EditorViewScene &scene
 // connections to nodes outside the set are ignored.
 QHash<qReal::Id, QList<qReal::Id>> RemoveAndUpdateCommand::buildAdjacency(const QSet<Id> &nodesSet)
 {
-	auto &&repo = mLogicalApi.logicalRepoApi();
+	auto &&repo = mGraphicalApi.graphicalRepoApi();
 	QHash<Id, QList<Id>> adjacency;
 
 	for (auto &&node : nodesSet) {
@@ -53,13 +53,14 @@ QHash<qReal::Id, QList<qReal::Id>> RemoveAndUpdateCommand::buildAdjacency(const 
 		}
 	}
 
-    return adjacency;
+	return adjacency;
 }
 
 // Finds connected components in the adjacency graph using breadth-first search.
 // Each BFS traversal starting from an unvisited node produces one connected
 // component.
-QList<QList<qReal::Id>> RemoveAndUpdateCommand::findComponents(const QSet<Id> &nodesSet, const QHash<Id, QList<Id>> &adjacency)
+QList<QList<qReal::Id>> RemoveAndUpdateCommand::findComponents(const QSet<Id> &nodesSet,
+									const QHash<Id, QList<Id>> &adjacency)
 {
 	QList<QList<Id>> components;
 	QSet<Id> visited;
@@ -119,10 +120,9 @@ void RemoveAndUpdateCommand::postprocessCollectedItems(QList<ElementInfo> &nodes
 void RemoveAndUpdateCommand::reconnectComponent(const Id &incomingEdge, const Id &outgoingEdge,
 						QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
-	auto &&repo = mLogicalApi.logicalRepoApi();
+	auto &&repo = mGraphicalApi.graphicalRepoApi();
 	auto &&from = repo.from(incomingEdge);
 	auto &&to = repo.to(outgoingEdge);
-
 	appendGraphicalDelete(outgoingEdge, nodes, edges);
 
 	auto &&reshapeCmd = new ReshapeEdgeCommand(&mScene, incomingEdge);
@@ -141,65 +141,65 @@ void RemoveAndUpdateCommand::reconnectComponent(const Id &incomingEdge, const Id
 	addPreAction(reshapeCmd);
 }
 
-// Processes a connected component of nodes selected for removal.
-//
-// The selected nodes may consist of several independent parts, so they are
-// split into connected components beforehand. A component can be collapsed only
-// if it has a single entry point and a single exit point:
-//   - exactly one incoming edge from outside the component
-//   - exactly one outgoing edge to outside the component
-//
-// In this case the component is removed and the incoming edge is reconnected
-// directly to the original destination of the outgoing edge.
-//
-// Example:
-//
-// Delete {B, C, D, F}
-//
-// Before:
-//
-//          B
-//         / \
-// A ---- C   D ---- E
-//         \ /
-//          F
-//
-// After:
-//
-// A ----------------> E
-//
-// A component with multiple external connections cannot be collapsed safely.
-//
-// Example:
-//
-// Delete {B, C, D}
-//
-// Before:
-//
-//       A
-//       |
-//       v
-// X --> B ----> E
-//       |
-//       v
-//       C ----> F
-//       |
-//       v
-//       D
-//
-// Incoming edges:
-//   A -> B
-//   X -> B
-//
-// Outgoing edges:
-//   B -> E
-//   C -> F
-//
-// Since the component has multiple entry/exit points, it is skipped.
+/// Processes a connected component of nodes selected for removal.
+///
+/// The selected nodes may consist of several independent parts, so they are
+/// split into connected components beforehand. A component can be collapsed only
+/// if it has a single entry point and a single exit point:
+///   - exactly one incoming edge from outside the component
+///   - exactly one outgoing edge to outside the component
+///
+/// In this case the component is removed and the incoming edge is reconnected
+/// directly to the original destination of the outgoing edge.
+///
+/// Example:
+///
+/// Delete {B, C, D, F}
+///
+/// Before:
+///
+///          B
+///         / \
+/// A ---- C   D ---- E
+///         \ /
+///          F
+///
+/// After:
+///
+/// A ----------------> E
+///
+/// A component with multiple external connections cannot be collapsed safely.
+///
+/// Example:
+///
+/// Delete {B, C, D}
+///
+/// Before:
+///
+///       A
+///       |
+///       v
+/// X --> B ----> E
+///       |
+///       v
+///       C ----> F
+///       |
+///       v
+///       D
+///
+/// Incoming edges:
+///   A -> B
+///   X -> B
+///
+/// Outgoing edges:
+///   B -> E
+///   C -> F
+///
+/// Since the component has multiple entry/exit points, it is skipped.
 void RemoveAndUpdateCommand::processComponent(const QList<Id> &component, const QSet<Id> &nodesSet,
 							QList<ElementInfo> &nodes, QList<ElementInfo> &edges)
 {
-	auto &&repo = mLogicalApi.logicalRepoApi();
+	auto &&repo = mGraphicalApi.graphicalRepoApi();
 
 	Id incomingEdge;
 	Id outgoingEdge;
