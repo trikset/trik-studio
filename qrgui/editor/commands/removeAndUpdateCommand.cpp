@@ -89,7 +89,7 @@ QList<QList<qReal::Id>> RemoveAndUpdateCommand::findComponents(const QSet<Id> &n
 			}
 		}
 
-		components.append(std::move(component));
+		components.append(component);
 	}
 
 	return components;
