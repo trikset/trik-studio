@@ -1104,12 +1104,6 @@ void TwoDModelWidget::connectMetricComboBoxes()
 		setSelectedValue(mUi->metricComboBox, unit->unit());
 	});
 
-	const auto sizeUnit = mModel.settings().sizeUnit();
-	const auto availableUnits = sizeUnit->currentValues();
-	for (auto &&availableUnit : availableUnits) {
-		mUi->metricComboBox->addItem(availableUnit.first, QVariant::fromValue(availableUnit.second));
-	}
-
 	auto lambdaOnUnitChanged = [this](const QSharedPointer<SizeUnit> &unit) {
 		mUi->gridParametersBox->onSizeUnitChanged(unit);
 		mUi->gridSizeWidget->onSizeUnitChanged(unit);
@@ -1129,8 +1123,11 @@ void TwoDModelWidget::connectMetricComboBoxes()
 		Q_EMIT mUi->gridParametersBox->parametersChanged();
 	});
 
-	setSelectedValue(mUi->metricComboBox, sizeUnit->defaultUnit());
+	for (auto &&availableUnit : twoDModel::model::SizeUnit::currentValues()) {
+		mUi->metricComboBox->addItem(availableUnit.first, QVariant::fromValue(availableUnit.second));
+	}
 
+	setSelectedValue(mUi->metricComboBox, twoDModel::model::SizeUnit::defaultUnit());
 }
 
 void TwoDModelWidget::updateWheelComboBoxes()

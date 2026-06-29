@@ -72,7 +72,8 @@ void Settings::deserialize(const QDomElement &parent)
 	mSizeUnitSystem->deserialize(parent);
 	Q_EMIT physicsChanged(mRealisticPhysics);
 	Q_EMIT sizeUnitChanged(mSizeUnitSystem);
-	const auto gridSize = qReal::SettingsManager::value("2dDefaultGridCellSize", "50").toReal();
+	const auto gridSize = qReal::SettingsManager::value(
+				"2dDefaultGridCellSize", "50").toReal() / mSizeUnitSystem->countFactor();
 	if (parent.hasAttribute("gridCellSize")) {
 		const auto gridSize = parent.attribute("gridCellSize").toDouble();
 		// TODO: Synchronize with GridParamters.h

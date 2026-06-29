@@ -54,7 +54,7 @@ QWidget *StackMetricWidget::currentWidget() const
 	return mStackedWidget->currentWidget();
 }
 
-qreal StackMetricWidget::countFactor()
+qreal StackMetricWidget::countFactor() const
 {
 	return mUnit ? mUnit->countFactor() : 1.0f;
 }
