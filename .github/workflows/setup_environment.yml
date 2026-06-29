@@ -210,7 +210,7 @@ jobs:
 
     - name: Clang-tidy
       if: ${{ inputs.lint_clazy }}
-      uses: cpp-linter/cpp-linter-action@v2.19.0
+      uses: cpp-linter/cpp-linter-action@v2.20.0
       id: linter
       with:
          style: ''
