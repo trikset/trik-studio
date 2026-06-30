@@ -72,7 +72,7 @@ void Settings::deserialize(const QDomElement &parent)
 	mSizeUnitSystem->deserialize(parent);
 	Q_EMIT physicsChanged(mRealisticPhysics);
 	Q_EMIT sizeUnitChanged(mSizeUnitSystem);
-	const auto gridSize = qReal::SettingsManager::value(
+	auto defaultGridSize = qReal::SettingsManager::value(
 				"2dDefaultGridCellSize", "50").toReal() / mSizeUnitSystem->countFactor();
 	if (parent.hasAttribute("gridCellSize")) {
 		const auto gridSize = parent.attribute("gridCellSize").toDouble();
@@ -81,11 +81,11 @@ void Settings::deserialize(const QDomElement &parent)
 		constexpr auto maximumSize = 150;
 		if (mSizeUnitSystem->toPx(gridSize) >= minimalSize
 				&& mSizeUnitSystem->toPx(gridSize) <= maximumSize) {
-			Q_EMIT gridSizeChanged(gridSize);
+			defaultGridSize = gridSize;
 		}
 	}
 
-	Q_EMIT gridSizeChanged(gridSize);
+	Q_EMIT gridSizeChanged(defaultGridSize);
 
 	if (parent.hasAttribute("backgroundColor")) {
 		qReal::SettingsManager::setValue(twoDModel::backgroundColorKey,
