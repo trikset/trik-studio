@@ -29,7 +29,7 @@ rsync -a "$BIN_DIR"/qrgui-tool-plugin-interface.dll                      "$PWD"/
 rsync -a "$BIN_DIR"/qrgui-facade.dll                                     "$PWD"/../data
 rsync -a "$BIN_DIR/patcher.exe"                                          "$PWD/../data"
 rsync -a "$BIN_DIR/checkapp.exe"                                         "$PWD/../data"
-rsync -a "$BIN_DIR"/trik-studio.exe                                      "$PWD/../data/$PRODUCT.exe"
+rsync -a "$BIN_DIR"/trik-studio.exe                                      "$PWD/../data/$PRODUCT.bin"
 rsync -a "$INSTALLER_ROOT/platform/$PRODUCT-safe.cmd"                    "$PWD"/../data/
 rsync -a "$INSTALLER_ROOT/platform/$PRODUCT.vbs"                         "$PWD/../data/"
 rsync -a "$INSTALLER_ROOT/images/trik-studio.ico"                        "$PWD/../data/"

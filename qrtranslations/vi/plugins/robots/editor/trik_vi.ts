@@ -829,7 +829,7 @@
     </message>
     <message>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation>Ghi giá trị đã cho vào tệp. Đường dẫn tệp có thể là tuyệt đối hoặc tương đối so với thư mục chứa trik-studio.exe.</translation>
+        <translation>Ghi giá trị đã cho vào tệp. Đường dẫn tệp có thể là tuyệt đối hoặc tương đối so với thư mục chứa trik-studio.bin.</translation>
     </message>
     <message>
         <source>RobotsDiagram</source>
