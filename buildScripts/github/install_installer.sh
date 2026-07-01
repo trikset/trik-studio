@@ -46,7 +46,8 @@ install_installer(){
 }
 
 prepare_environment_variable_and_check_tools(){  
-  EXT=""   
+  EXT=""
+  TS_EXT=""
   case "$(uname)" in
     Darwin)
       PREFIX="/Applications"
@@ -62,6 +63,7 @@ prepare_environment_variable_and_check_tools(){
       PREFIX="/C"
       LIB_DIR="$PREFIX/TRIKStudio"
       EXT=".exe"
+      TS_EXT=".bin"
       ;;
     *) exit 1 ;; 
   esac
@@ -70,7 +72,7 @@ prepare_environment_variable_and_check_tools(){
   
   TWOD_EXEC_NAME=$(find "$APP_DIR" -name "2D-model$EXT" -print -quit)
   PATCHER_NAME=$(find "$APP_DIR" -name "patcher$EXT" -print -quit)
-  TRIK_STUDIO_NAME=$(find "$APP_DIR" -name "trik-studio$EXT" -print -quit)
+  TRIK_STUDIO_NAME=$(find "$APP_DIR" -name "trik-studio$TS_EXT" -print -quit)
   MAINTENANCE=$(find "$APP_DIR" -name "maintenance$EXT" -print -quit)
   
   env DYLD_LIBRARY_PATH="$LIB_DIR" LD_LIBRARY_PATH="$LIB_DIR" "$TWOD_EXEC_NAME" --version

@@ -357,7 +357,7 @@
     </message>
     <message>
         <source>Removes a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation>Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation>Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.bin.</translation>
     </message>
     <message>
         <source>File:</source>
@@ -853,7 +853,7 @@
     </message>
     <message>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation>Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.bin.</translation>
     </message>
     <message>
         <source>RobotsDiagram</source>

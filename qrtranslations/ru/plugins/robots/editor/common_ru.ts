@@ -1129,7 +1129,7 @@
     </message>
     <message>
         <source>Removes a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation type="vanished">Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation type="vanished">Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.bin.</translation>
     </message>
     <message>
         <source>File</source>
@@ -1357,7 +1357,7 @@
     </message>
     <message>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation type="vanished">Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation type="vanished">Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.bin.</translation>
     </message>
     <message>
         <source>Variable Initialization</source>
@@ -2651,7 +2651,7 @@
     </message>
     <message>
         <source>Removes a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation type="vanished">Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation type="vanished">Удаляет файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.bin.</translation>
     </message>
     <message>
         <source>Synthesizes the given phrase and plays it on the robot. If &apos;Evaluate&apos; property is set to true then the value of &apos;Text&apos; property is interpreted as a formula, otherwise it is interpreted as plain string.</source>
@@ -2703,7 +2703,7 @@
     </message>
     <message>
         <source>Writes a given message to a file. File path may be absolute or relative to a directory containing TRIK Studio executable.</source>
-        <translation type="vanished">Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.exe.</translation>
+        <translation type="vanished">Записывает заданное значение в файл. Путь до файла может быть абсолютным или относительно папки с trik-studio.bin.</translation>
     </message>
     <message>
         <source>Assigns a given value to a given variable.</source>
