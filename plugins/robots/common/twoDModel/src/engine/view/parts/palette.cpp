@@ -41,9 +41,7 @@ Palette::Palette(QWidget *parent)
 	registerTool(mCursorAction.data());
 }
 
-Palette::~Palette()
-{
-}
+Palette::~Palette() = default;
 
 const QAction &Palette::cursorAction() const
 {

@@ -16,9 +16,7 @@
 
 using namespace qReal::commands;
 
-DoNothingCommand::DoNothingCommand()
-{
-}
+DoNothingCommand::DoNothingCommand() = default;
 
 bool DoNothingCommand::execute()
 {

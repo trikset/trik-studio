@@ -32,9 +32,7 @@ Ev3GeneratorRobotModel::Ev3GeneratorRobotModel(const QString &kitId
 {
 }
 
-Ev3GeneratorRobotModel::~Ev3GeneratorRobotModel()
-{
-}
+Ev3GeneratorRobotModel::~Ev3GeneratorRobotModel() = default;
 
 QString Ev3GeneratorRobotModel::name() const
 {

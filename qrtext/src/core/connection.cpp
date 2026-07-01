@@ -25,9 +25,7 @@ Connection::Connection(int absolutePosition, int line, int column, const qReal::
 {
 }
 
-Connection::Connection()
-{
-}
+Connection::Connection() = default;
 
 int Connection::absolutePosition() const
 {

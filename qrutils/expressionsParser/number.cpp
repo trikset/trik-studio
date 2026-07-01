@@ -32,9 +32,7 @@ Number::Number()
 	mValue = 0;
 }
 
-Number::~Number()
-{
-}
+Number::~Number() = default;
 
 Number::Type Number::type() const
 {

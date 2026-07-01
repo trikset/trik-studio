@@ -35,9 +35,7 @@ static constexpr uchar EV3_CONTINUE_DOWNLAD_STATUS_EOF =      0x08;
 
 using namespace ev3::communication;
 
-Ev3RobotCommunicationThread::~Ev3RobotCommunicationThread()
-{
-}
+Ev3RobotCommunicationThread::~Ev3RobotCommunicationThread() = default;
 
 static inline QString char2hex (char c)
 {

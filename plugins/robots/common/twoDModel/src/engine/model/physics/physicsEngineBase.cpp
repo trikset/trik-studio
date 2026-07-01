@@ -29,9 +29,7 @@ PhysicsEngineBase::PhysicsEngineBase(const WorldModel &worldModel, const QList<R
 	}
 }
 
-PhysicsEngineBase::~PhysicsEngineBase()
-{
-}
+PhysicsEngineBase::~PhysicsEngineBase() = default;
 
 void PhysicsEngineBase::addRobot(twoDModel::model::RobotModel * const robot)
 {

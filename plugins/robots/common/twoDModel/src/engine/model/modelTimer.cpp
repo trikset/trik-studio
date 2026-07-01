@@ -27,9 +27,7 @@ ModelTimer::ModelTimer(const Timeline *timeline)
 	connect(timeline, &Timeline::tick, this, &ModelTimer::onTick);
 }
 
-ModelTimer::~ModelTimer()
-{
-}
+ModelTimer::~ModelTimer() = default;
 
 bool ModelTimer::isActive() const
 {

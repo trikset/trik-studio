@@ -45,9 +45,7 @@ ModelExplorer::ModelExplorer(QWidget *parent)
 	addAction(deleteActionSeparator);
 }
 
-ModelExplorer::~ModelExplorer()
-{
-}
+ModelExplorer::~ModelExplorer() = default;
 
 void ModelExplorer::initialize(Controller &controller, const models::Models &models
 		, details::ModelsAssistInterface &model)

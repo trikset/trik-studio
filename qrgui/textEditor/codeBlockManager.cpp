@@ -19,9 +19,7 @@
 using namespace qReal;
 using namespace text;
 
-CodeBlockManager::CodeBlockManager()
-{
-}
+CodeBlockManager::CodeBlockManager() = default;
 
 void CodeBlockManager::addNewCode(const QString &path)
 {

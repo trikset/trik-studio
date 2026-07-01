@@ -31,9 +31,7 @@ RenameExplosionCommand::RenameExplosionCommand(models::LogicalModelAssistApi &lo
 {
 }
 
-RenameExplosionCommand::~RenameExplosionCommand()
-{
-}
+RenameExplosionCommand::~RenameExplosionCommand() = default;
 
 bool RenameExplosionCommand::execute()
 {

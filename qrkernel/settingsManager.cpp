@@ -30,9 +30,7 @@ SettingsManager::SettingsManager()
 	load();
 }
 
-SettingsManager::~SettingsManager()
-{
-}
+SettingsManager::~SettingsManager() = default;
 
 void SettingsManager::setValue(const QString &name, const QVariant &value)
 {

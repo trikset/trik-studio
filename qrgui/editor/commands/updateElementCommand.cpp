@@ -26,9 +26,7 @@ UpdateElementCommand::UpdateElementCommand(const EditorView *view, const Id &id)
 {
 }
 
-UpdateElementCommand::~UpdateElementCommand()
-{
-}
+UpdateElementCommand::~UpdateElementCommand() = default;
 
 bool UpdateElementCommand::execute()
 {

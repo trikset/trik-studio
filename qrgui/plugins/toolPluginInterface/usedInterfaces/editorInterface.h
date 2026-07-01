@@ -37,9 +37,7 @@ public:
 	{
 	}
 
-	virtual ~EditorInterface()
-	{
-	}
+	virtual ~EditorInterface() = default;
 
 	/// Should be reimplemented to return unique string identifier used by controller undo stack.
 	virtual QString editorId() const = 0;

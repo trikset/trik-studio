@@ -32,9 +32,7 @@ SelectElementCommand::SelectElementCommand(const EditorView *view
 {
 }
 
-SelectElementCommand::~SelectElementCommand()
-{
-}
+SelectElementCommand::~SelectElementCommand() = default;
 
 bool SelectElementCommand::execute()
 {

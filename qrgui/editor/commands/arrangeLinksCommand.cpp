@@ -28,9 +28,7 @@ ArrangeLinksCommand::ArrangeLinksCommand(const EditorView *view
 {
 }
 
-ArrangeLinksCommand::~ArrangeLinksCommand()
-{
-}
+ArrangeLinksCommand::~ArrangeLinksCommand() = default;
 
 bool ArrangeLinksCommand::execute()
 {

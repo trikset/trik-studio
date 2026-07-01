@@ -35,9 +35,7 @@ ItemPopup::ItemPopup(AbstractScene &scene, QWidget *parent)
 	connect(&mScene, &AbstractScene::selectionChanged, this, &ItemPopup::checkSelection);
 }
 
-ItemPopup::~ItemPopup()
-{
-}
+ItemPopup::~ItemPopup() = default;
 
 void ItemPopup::setEnabled(bool enabled)
 {

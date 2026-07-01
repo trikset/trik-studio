@@ -25,13 +25,9 @@
 
 using namespace qReal;
 
-HotKeyManager::HotKeyManager()
-{
-}
+HotKeyManager::HotKeyManager() = default;
 
-HotKeyManager::~HotKeyManager()
-{
-}
+HotKeyManager::~HotKeyManager() = default;
 
 HotKeyManager& HotKeyManager::instance()
 {

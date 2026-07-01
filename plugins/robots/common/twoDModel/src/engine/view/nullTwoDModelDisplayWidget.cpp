@@ -21,9 +21,7 @@ NullTwoDModelDisplayWidget::NullTwoDModelDisplayWidget(QWidget *parent)
 {
 }
 
-NullTwoDModelDisplayWidget::~NullTwoDModelDisplayWidget()
-{
-}
+NullTwoDModelDisplayWidget::~NullTwoDModelDisplayWidget() = default;
 
 void NullTwoDModelDisplayWidget::setPainter(qReal::ui::PainterInterface *painter)
 {

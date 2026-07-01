@@ -25,9 +25,7 @@ RepoApi::RepoApi(const QString &workingFile, bool ignoreAutosave)
 {
 }
 
-RepoApi::~RepoApi()
-{
-}
+RepoApi::~RepoApi() = default;
 
 QString RepoApi::name(const Id &id) const
 {

@@ -57,9 +57,7 @@ TwoDModelEngineApi::TwoDModelEngineApi(model::Model &model, view::TwoDModelWidge
 #endif
 }
 
-TwoDModelEngineApi::~TwoDModelEngineApi()
-{
-}
+TwoDModelEngineApi::~TwoDModelEngineApi() = default;
 
 void TwoDModelEngineApi::setNewMotor(int speed, uint degrees, const PortInfo &port, bool breakMode)
 {

@@ -20,9 +20,7 @@
 
 using namespace graphicsUtils;
 
-LineImpl::LineImpl()
-{
-}
+LineImpl::LineImpl() = default;
 
 QRectF LineImpl::boundingRect(qreal x1, qreal y1, qreal x2, qreal y2, qreal penWidth, const int drift) const
 {

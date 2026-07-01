@@ -30,9 +30,7 @@ AbstractSimpleGenerator::AbstractSimpleGenerator(const qrRepo::RepoApi &repo
 {
 }
 
-AbstractSimpleGenerator::~AbstractSimpleGenerator()
-{
-}
+AbstractSimpleGenerator::~AbstractSimpleGenerator() = default;
 
 const qrRepo::RepoApi &AbstractSimpleGenerator::repo() const
 {

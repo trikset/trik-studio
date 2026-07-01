@@ -36,9 +36,7 @@ BaseGraphTransformationUnit::BaseGraphTransformationUnit(
 			<< "fromPort" << "toPort");
 }
 
-BaseGraphTransformationUnit::~BaseGraphTransformationUnit()
-{
-}
+BaseGraphTransformationUnit::~BaseGraphTransformationUnit() = default;
 
 IdList BaseGraphTransformationUnit::elementsFromActiveDiagram() const
 {

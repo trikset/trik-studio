@@ -21,9 +21,7 @@ InitTerminateCodeGenerator::InitTerminateCodeGenerator(const QStringList &pathsT
 {
 }
 
-InitTerminateCodeGenerator::~InitTerminateCodeGenerator()
-{
-}
+InitTerminateCodeGenerator::~InitTerminateCodeGenerator() = default;
 
 void InitTerminateCodeGenerator::reinit()
 {

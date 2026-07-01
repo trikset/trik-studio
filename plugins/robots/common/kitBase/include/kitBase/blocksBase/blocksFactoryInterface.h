@@ -34,7 +34,7 @@ class BlocksFactoryInterface
 public:
 	BlocksFactoryInterface() = default;
 
-	virtual ~BlocksFactoryInterface() {}
+	virtual ~BlocksFactoryInterface() = default;
 
 	/// Creates a new block by given id.
 	/// Transfers block ownership to caller.

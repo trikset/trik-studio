@@ -25,9 +25,7 @@ RobotsDiagramVisitor::RobotsDiagramVisitor(const qrRepo::RepoApi &repo
 {
 }
 
-RobotsDiagramVisitor::~RobotsDiagramVisitor()
-{
-}
+RobotsDiagramVisitor::~RobotsDiagramVisitor() = default;
 
 void RobotsDiagramVisitor::startSearch(const qReal::Id &startingBlock)
 {

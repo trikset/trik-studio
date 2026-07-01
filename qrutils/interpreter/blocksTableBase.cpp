@@ -19,9 +19,7 @@
 using namespace qReal;
 using namespace interpretation;
 
-BlocksTableBase::BlocksTableBase()
-{
-}
+BlocksTableBase::BlocksTableBase() = default;
 
 BlocksTableBase::~BlocksTableBase()
 {

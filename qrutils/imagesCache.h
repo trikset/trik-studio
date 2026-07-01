@@ -30,7 +30,7 @@ class QRUTILS_EXPORT ImagesCache: public utils::Singleton<ImagesCache>
 {
 	Q_OBJECT
 public:
-	~ImagesCache() override {};
+	~ImagesCache() override = default;
 
 	/// Draws image with given file name with a given painter in given rectangle. Note that actual file, from which
 	/// an image will be loaded may be different from fileName, as described in selectBestImageFile.

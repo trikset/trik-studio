@@ -28,9 +28,7 @@ NxtGeneratorPluginBase::NxtGeneratorPluginBase(const QString &robotName, const Q
 {
 }
 
-NxtGeneratorPluginBase::~NxtGeneratorPluginBase()
-{
-}
+NxtGeneratorPluginBase::~NxtGeneratorPluginBase() = default;
 
 QString NxtGeneratorPluginBase::kitId() const
 {

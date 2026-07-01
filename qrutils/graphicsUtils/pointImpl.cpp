@@ -16,9 +16,7 @@
 
 using namespace graphicsUtils;
 
-PointImpl::PointImpl()
-{
-}
+PointImpl::PointImpl() = default;
 
 QRectF PointImpl::boundingRect(qreal x, qreal y, qreal radius, const int scalingDrift) const
 {

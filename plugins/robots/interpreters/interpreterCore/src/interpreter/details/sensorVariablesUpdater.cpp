@@ -30,9 +30,7 @@ SensorVariablesUpdater::SensorVariablesUpdater(const RobotModelManagerInterface 
 {
 }
 
-SensorVariablesUpdater::~SensorVariablesUpdater()
-{
-}
+SensorVariablesUpdater::~SensorVariablesUpdater() = default;
 
 void SensorVariablesUpdater::run()
 {
