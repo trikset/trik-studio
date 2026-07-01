@@ -1,0 +1,82 @@
+name: Trik translator
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      TRIK_TRANSLATOR_PATH: ../trik-translator
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout external repository
+        uses: actions/checkout@v4
+        with:
+          repository: vkutuev/trik-translator
+          ref: v1.0.0
+          path: trik-translator
+          fetch-depth: 1
+
+      - name: Create .env
+        working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
+        run: |
+          cat > .env <<EOF
+          OPENAI_MODEL="${{ secrets.OPENAI_MODEL }}"
+          OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}"
+          OPENAI_BASE_URL="${{ secrets.OPENAI_BASE_URL }}"
+          OPENAI_PROJECT="${{ secrets.OPENAI_PROJECT }}"
+          EOF
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
+        run: uv sync
+
+      - name: Run machine
+        working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
+        run: |   
+          for lang in fr ru; do
+            uv run main.py "$GITHUB_WORKSPACE" "$lang"
+          done
+
+      - name: Remove secrets
+        if: always()
+        working-directory: ${{ env.TRIK_TRANSLATOR_PATH }}
+        run: |
+          rm -f .env
+
+      - name: Check changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: lupdatebot/lupdate-${{ github.run_id }}
+          title: "Automated update"
+          commit-message: "Automated update"
+          body: |
+            Generated from external release.
+          delete-branch: true
