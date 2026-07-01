@@ -57,8 +57,8 @@ class ConstraintsChecker : public QObject
 	Q_OBJECT
 
 public:
-	ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter,
-				model::Model &model, QObject* parent = nullptr);
+	ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model,
+		QObject *parent = nullptr);
 	~ConstraintsChecker() override;
 
 	/// Returns true if constraints checker is active now (constraints list passed into checker is non-empty).
@@ -67,7 +67,7 @@ public:
 	/// Parses the given program on 2D model constraints language and returns the success of this operation.
 	/// All parser errors will be reported using errorReporter interface passed to constructor.
 	bool parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
-			      const QDomElement &constraintsXmlAfterTemplateSubstitution);
+		const QDomElement &constraintsXmlAfterTemplateSubstitution);
 
 	/// Adds constraints xml as a child to a given element.
 	void serializeConstraints(QDomElement &parent) const;
@@ -101,6 +101,7 @@ Q_SIGNALS:
 
 	/// Emitted when checker program written incorrectly with the reason as parameter.
 	void checkerError(const QString &message);
+
 private:
 	void reportParserError(const QString &message);
 	void reportParserWarning(const QString &message);
@@ -112,18 +113,15 @@ private:
 
 	void bindToWorldModelObjects();
 	void bindToRobotObjects();
-	void bindObject(const QString &id, QObject * const object);
-	void bindRobotObject(model::RobotModel * const robot);
-	void bindDeviceObject(const QString &robotId
-			, model::RobotModel * const robot
-			, const kitBase::robotModel::PortInfo &port);
+	void bindObject(const QString &id, QObject *const object);
+	void bindRobotObject(model::RobotModel *const robot);
+	void bindDeviceObject(const QString &robotId, model::RobotModel *const robot,
+		const kitBase::robotModel::PortInfo &port);
 	QString firstUnusedRobotId() const;
-	QString portName(const QString &robotId
-			, model::RobotModel * const robot
-			, const kitBase::robotModel::PortInfo &port) const;
-	QStringList portNames(const QString &robotId
-			, model::RobotModel * const robot
-			, const kitBase::robotModel::PortInfo &port) const;
+	QString portName(const QString &robotId, model::RobotModel *const robot,
+		const kitBase::robotModel::PortInfo &port) const;
+	QStringList portNames(const QString &robotId, model::RobotModel *const robot,
+		const kitBase::robotModel::PortInfo &port) const;
 	void programStarted();
 	void programFinished(qReal::interpretation::StopReason reason);
 	void prepareVariables();
@@ -146,7 +144,7 @@ private:
 
 	QDomDocument mCurrentConstraintDocument;
 	QDomElement mCurrentXml;
-	bool mEnabled { true };
+	bool mEnabled {true};
 };
 
 }

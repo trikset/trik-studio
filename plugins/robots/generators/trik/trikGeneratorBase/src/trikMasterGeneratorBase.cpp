@@ -17,13 +17,10 @@
 
 using namespace trik;
 
-TrikMasterGeneratorBase::TrikMasterGeneratorBase(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const qReal::Id &diagramId
-		, const QStringList &pathsToTemplates)
+TrikMasterGeneratorBase::TrikMasterGeneratorBase(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, const utils::ParserErrorReporter &parserErrorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &textLanguage, const qReal::Id &diagramId, const QStringList &pathsToTemplates)
 	: MasterGeneratorBase(repo, errorReporter, robotModelManager, textLanguage, parserErrorReporter, diagramId)
 	, mPathsToTemplates(pathsToTemplates)
 {
@@ -31,6 +28,6 @@ TrikMasterGeneratorBase::TrikMasterGeneratorBase(const qrRepo::RepoApi &repo
 
 generatorBase::GeneratorCustomizer *TrikMasterGeneratorBase::createCustomizer()
 {
-	return new TrikGeneratorCustomizer(mRepo, mErrorReporter
-			, mRobotModelManager, *createLuaProcessor(), mPathsToTemplates, supportsSwitchUnstableToBreaks());
+	return new TrikGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor(),
+		mPathsToTemplates, supportsSwitchUnstableToBreaks());
 }

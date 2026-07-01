@@ -29,25 +29,22 @@ QString KeyManager::getKey(QList<QPoint> const &path)
 {
 	analysePoints(path);
 	QString key = "";
-	QPoint pntLast (-1, -1);
+	QPoint pntLast(-1, -1);
 	QPoint pntPath;
 	if ((mLowerBound - mUpperBound) / iSize > unidimensionalLimit
-			|| (mRightBound - mLeftBound) / iSize > unidimensionalLimit
-	) {
+		|| (mRightBound - mLeftBound) / iSize > unidimensionalLimit) {
 		for (const QPoint &point : path) {
-			if((mLowerBound - mUpperBound) / iSize < unidimensionalLimit) {
+			if ((mLowerBound - mUpperBound) / iSize < unidimensionalLimit) {
 				pntPath.setX((point.x() - mLeftBound) * iSize / (mRightBound - mLeftBound));
 				pntPath.setY(0);
-			}
-			else if((mRightBound - mLeftBound) / iSize < unidimensionalLimit) {
+			} else if ((mRightBound - mLeftBound) / iSize < unidimensionalLimit) {
 				pntPath.setX(0);
 				pntPath.setY((point.y() - mUpperBound) * iSize / (mLowerBound - mUpperBound));
-			}
-			else {
+			} else {
 				pntPath.setX((point.x() - mLeftBound) * iSize / (mRightBound - mLeftBound));
 				pntPath.setY((point.y() - mUpperBound) * iSize / (mLowerBound - mUpperBound));
 			}
-			if(pntPath.x() != pntLast.x() || pntPath.y() != pntLast.y()) {
+			if (pntPath.x() != pntLast.x() || pntPath.y() != pntLast.y()) {
 				pntLast = pntPath;
 				key += strBase64[pntPath.x() + pntPath.y() * iSize];
 			}

@@ -38,7 +38,6 @@
 ///todo: temporary
 #include <trikKitInterpreterCommon/robotModel/twoD/parts/twoDDisplay.h>
 
-
 using namespace trik;
 
 TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> &model)
@@ -50,8 +49,8 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 	connect(this, &TrikBrick::log, this, &TrikBrick::printToShell);
 	mSensorUpdater->setSingleShot(false);
 	mSensorUpdater->setInterval(model->updateIntervalForInterpretation()); // seems to be x2 of timeline tick
-	connect(mSensorUpdater.data(), &utils::AbstractTimer::timeout
-			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::updateSensorsValues);
+	connect(mSensorUpdater.data(), &utils::AbstractTimer::timeout, mTwoDRobotModel.data(),
+		&robotModel::twoD::TrikTwoDRobotModel::updateSensorsValues);
 }
 
 TrikBrick::~TrikBrick()
@@ -60,7 +59,7 @@ TrikBrick::~TrikBrick()
 
 void TrikBrick::reset()
 {
-	mKeys.reset();///@todo: reset motos/device maps?
+	mKeys.reset(); ///@todo: reset motos/device maps?
 	//mDisplay.reset(); /// - is actually needed? Crashes app at exit
 	for (const auto &m : mMotors) {
 		m->powerOff();
@@ -79,7 +78,7 @@ void TrikBrick::printToShell(const QString &msg)
 {
 	using namespace kitBase::robotModel;
 	using namespace trik::robotModel;
-	parts::TrikShell* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
+	parts::TrikShell *sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
 		Q_EMIT error(tr("2d model shell part was not found"));
 		return;
@@ -145,47 +144,49 @@ void TrikBrick::reinitImitationCamera()
 {
 	if (not qReal::SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool()) {
 		const QString path = qReal::SettingsManager::value("TrikSimulatedCameraImagesPath").toString();
-		mImitationCamera.reset(new trikControl::ImitationCameraImplementation({"*.jpg","*.png"}, path));
+		mImitationCamera.reset(new trikControl::ImitationCameraImplementation({"*.jpg", "*.png"}, path));
 	} else {
 		const QString path = qReal::PlatformInfo::invariantSettingsPath("trikCameraImitationImagesDir");
-		mImitationCamera.reset(new trikControl::ImitationCameraImplementation({"*.jpg","*.png"}, path));
+		mImitationCamera.reset(new trikControl::ImitationCameraImplementation({"*.jpg", "*.png"}, path));
 	}
 }
 
-void TrikBrick::say(const QString &msg) {
+void TrikBrick::say(const QString &msg)
+{
 	using namespace kitBase::robotModel;
 	using namespace trik::robotModel;
-	auto* sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
+	auto *sh = RobotModelUtils::findDevice<parts::TrikShell>(*mTwoDRobotModel, "ShellPort");
 	if (sh == nullptr) {
 		Q_EMIT error(tr("2d model shell part was not found"));
 		return;
 	}
 
-	QMetaObject::invokeMethod(sh, [sh, msg](){sh->say(msg);});
+	QMetaObject::invokeMethod(sh, [sh, msg]() { sh->say(msg); });
 }
 
-void TrikBrick::playTone(int, int msDuration) {
-	auto* robot = mTwoDRobotModel.data();
-	QMetaObject::invokeMethod(robot, [robot, msDuration](){robot->engine()->playSound(msDuration);});
+void TrikBrick::playTone(int, int msDuration)
+{
+	auto *robot = mTwoDRobotModel.data();
+	QMetaObject::invokeMethod(robot, [robot, msDuration]() { robot->engine()->playSound(msDuration); });
 }
 
-void TrikBrick::stop() {
+void TrikBrick::stop()
+{
 	/// @todo: properly implement this?
 	mTwoDRobotModel->stopRobot();
-//	for (const auto &m : mMotors) {
-//		m->powerOff();
-//	}
-//	for (const auto &e : mEncoders) {
-//		e->reset();
-//	}
+	//	for (const auto &m : mMotors) {
+	//		m->powerOff();
+	//	}
+	//	for (const auto &e : mEncoders) {
+	//		e->reset();
+	//	}
 }
 
 trikControl::MotorInterface *TrikBrick::motor(const QString &port)
 {
 	using namespace kitBase::robotModel;
 	if (!mMotors.contains(port)) {
-		robotParts::Motor * motor =
-				RobotModelUtils::findDevice<robotParts::Motor>(*mTwoDRobotModel, port);
+		robotParts::Motor *motor = RobotModelUtils::findDevice<robotParts::Motor>(*mTwoDRobotModel, port);
 		if (motor == nullptr) {
 			Q_EMIT error(tr("No configured motor on port: %1").arg(port));
 			return nullptr;
@@ -197,12 +198,11 @@ trikControl::MotorInterface *TrikBrick::motor(const QString &port)
 
 trikControl::MarkerInterface *TrikBrick::marker()
 {
-	kitBase::robotModel::PortInfo markerPort = kitBase::robotModel::RobotModelUtils::findPort(*mTwoDRobotModel
-			, "MarkerPort"
-			, kitBase::robotModel::Direction::output);
+	kitBase::robotModel::PortInfo markerPort = kitBase::robotModel::RobotModelUtils::findPort(*mTwoDRobotModel,
+		"MarkerPort", kitBase::robotModel::Direction::output);
 	if (markerPort.isValid()) {
 		using Marker = twoDModel::robotModel::parts::Marker;
-		Marker* marker = kitBase::robotModel::RobotModelUtils::findDevice<Marker>(*mTwoDRobotModel, markerPort);
+		Marker *marker = kitBase::robotModel::RobotModelUtils::findDevice<Marker>(*mTwoDRobotModel, markerPort);
 		mTrikProxyMarker.reset(new TrikProxyMarker(marker));
 		return mTrikProxyMarker.data();
 	}
@@ -215,8 +215,8 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 	//testing
 	using namespace kitBase::robotModel;
 	if (!mSensors.contains(port)) {
-		robotParts::ScalarSensor * sens =
-				RobotModelUtils::findDevice<robotParts::ScalarSensor>(*mTwoDRobotModel, port);
+		robotParts::ScalarSensor *sens =
+			RobotModelUtils::findDevice<robotParts::ScalarSensor>(*mTwoDRobotModel, port);
 		if (sens == nullptr) {
 			Q_EMIT error(tr("No configured scalar sensor on port: %1").arg(port));
 			return nullptr;
@@ -229,9 +229,9 @@ trikControl::SensorInterface *TrikBrick::sensor(const QString &port)
 trikControl::LidarInterface *TrikBrick::lidar()
 {
 	using namespace kitBase::robotModel;
-	auto & port = "LidarPort";
+	auto &port = "LidarPort";
 	if (!mLidars.contains(port)) {
-		auto * lidar = RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
+		auto *lidar = RobotModelUtils::findDevice<robotParts::VectorSensor>(*mTwoDRobotModel, port);
 		if (!lidar) {
 			Q_EMIT error(tr("No configured lidar on port: %1").arg(port));
 			return nullptr;
@@ -241,30 +241,31 @@ trikControl::LidarInterface *TrikBrick::lidar()
 	return mLidars[port].get();
 }
 
-
 QStringList TrikBrick::motorPorts(trikControl::MotorInterface::Type type) const
 {
 	Q_UNUSED(type)
-//	QLOG_INFO() << "Motor type is ignored";
+	//	QLOG_INFO() << "Motor type is ignored";
 	return mMotors.keys();
 }
 
 QStringList TrikBrick::sensorPorts(trikControl::SensorInterface::Type type) const
 {
 	Q_UNUSED(type)
-//	QLOG_INFO() << "Sensor type is ignored";
+	//	QLOG_INFO() << "Sensor type is ignored";
 	return mSensors.keys();
 }
 
-QStringList TrikBrick::encoderPorts() const {
+QStringList TrikBrick::encoderPorts() const
+{
 	return mEncoders.keys();
 }
 
-trikControl::VectorSensorInterface *TrikBrick::accelerometer() {
+trikControl::VectorSensorInterface *TrikBrick::accelerometer()
+{
 	using namespace kitBase::robotModel;
 	if (mAccelerometer.isNull()) {
-		auto a = RobotModelUtils::findDevice<robotParts::AccelerometerSensor>(*mTwoDRobotModel
-				, "AccelerometerPort");
+		auto a = RobotModelUtils::findDevice<robotParts::AccelerometerSensor>(*mTwoDRobotModel,
+			"AccelerometerPort");
 		if (a == nullptr) {
 			Q_EMIT error(tr("No configured accelerometer"));
 			return nullptr;
@@ -276,11 +277,11 @@ trikControl::VectorSensorInterface *TrikBrick::accelerometer() {
 	return mAccelerometer.data();
 }
 
-trikControl::GyroSensorInterface *TrikBrick::gyroscope() {
+trikControl::GyroSensorInterface *TrikBrick::gyroscope()
+{
 	using namespace kitBase::robotModel;
 	if (mGyroscope.isNull()) {
-		auto a = RobotModelUtils::findDevice<robotParts::GyroscopeSensor>(*mTwoDRobotModel
-				, "GyroscopePort");
+		auto a = RobotModelUtils::findDevice<robotParts::GyroscopeSensor>(*mTwoDRobotModel, "GyroscopePort");
 		if (a == nullptr) {
 			Q_EMIT error(tr("No configured gyroscope"));
 			return nullptr;
@@ -292,7 +293,8 @@ trikControl::GyroSensorInterface *TrikBrick::gyroscope() {
 	return mGyroscope.data();
 }
 
-trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
+trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port)
+{
 	using namespace trik::robotModel::parts;
 	using namespace kitBase::robotModel;
 	if (port == "video0" || port == "video2") {
@@ -311,7 +313,8 @@ trikControl::LineSensorInterface *TrikBrick::lineSensor(const QString &port) {
 	return mLineSensors[port].get();
 }
 
-trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
+trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port)
+{
 	using namespace trik::robotModel::parts;
 	using namespace kitBase::robotModel;
 	if (port == "video0" || port == "video2") {
@@ -330,16 +333,18 @@ trikControl::ColorSensorInterface *TrikBrick::colorSensor(const QString &port) {
 	return mColorSensors[port].get();
 }
 
-trikControl::ObjectSensorInterface *TrikBrick::objectSensor(const QString &port) {
+trikControl::ObjectSensorInterface *TrikBrick::objectSensor(const QString &port)
+{
 	Q_EMIT error(tr("Sensor not implemented in simulation mode. Used port: %1").arg(port));
 	return nullptr;
 }
 
-trikControl::EncoderInterface *TrikBrick::encoder(const QString &port) {
+trikControl::EncoderInterface *TrikBrick::encoder(const QString &port)
+{
 	using namespace kitBase::robotModel;
 	if (!mEncoders.contains(port)) {
-		robotParts::EncoderSensor * enc =
-				RobotModelUtils::findDevice<robotParts::EncoderSensor>(*mTwoDRobotModel, port);
+		robotParts::EncoderSensor *enc =
+			RobotModelUtils::findDevice<robotParts::EncoderSensor>(*mTwoDRobotModel, port);
 		if (enc == nullptr) {
 			Q_EMIT error(tr("No configured encoder on port: %1").arg(port));
 			return nullptr;
@@ -356,7 +361,8 @@ trikControl::DisplayInterface *TrikBrick::display()
 	return &mDisplay;
 }
 
-trikControl::LedInterface *TrikBrick::led() {
+trikControl::LedInterface *TrikBrick::led()
+{
 	using namespace trik::robotModel::parts;
 	using namespace kitBase::robotModel;
 	if (mLed.isNull()) {
@@ -392,13 +398,13 @@ QVector<uint8_t> TrikBrick::getStillImage()
 	} else {
 		QVector<uint8_t> photo = mImitationCamera->getPhoto();
 		if (photo.isEmpty()) {
-			error(tr("Cannot get a photo from folders/project (possibly because of wrong path/empty project)"));
+			error(tr("Cannot get a photo from folders/project (possibly because of wrong path/empty "
+			         "project)"));
 		}
 
 		return photo;
 	}
 }
-
 
 QStringList TrikBrick::readAll(const QString &path)
 {
@@ -424,9 +430,8 @@ QStringList TrikBrick::readAll(const QString &path)
 	return result;
 }
 
-
 void TrikBrick::processSensors(bool isRunning)
 {
-	QMetaObject::invokeMethod(mSensorUpdater.data()
-				  , [this, isRunning](){isRunning ? mSensorUpdater->start() : mSensorUpdater->stop();});
+	QMetaObject::invokeMethod(mSensorUpdater.data(),
+		[this, isRunning]() { isRunning ? mSensorUpdater->start() : mSensorUpdater->stop(); });
 }

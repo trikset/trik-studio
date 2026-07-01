@@ -21,8 +21,8 @@ using namespace twoDModel::items;
 const QSizeF size = QSizeF(13, 13);
 const int lineWidth = 3;
 
-StartPosition::StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-				QSizeF robotSize, QGraphicsItem *parent)
+StartPosition::StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSystem, QSizeF robotSize,
+	QGraphicsItem *parent)
 	: RotateItem(parent)
 	, mRobotSize(robotSize)
 {
@@ -55,10 +55,8 @@ QDomElement StartPosition::serialize(QDomElement &parent) const
 	auto *coordSystem = coordinateSystem();
 	QDomElement startPositionElement = RotateItem::serialize(parent);
 	startPositionElement.setTagName("startPosition");
-	startPositionElement.setAttribute("x",
-	                                  QString::number(coordSystem->toUnit(scenePos().x())));
-	startPositionElement.setAttribute("y",
-	                                  QString::number(coordSystem->toUnit(scenePos().y())));
+	startPositionElement.setAttribute("x", QString::number(coordSystem->toUnit(scenePos().x())));
+	startPositionElement.setAttribute("y", QString::number(coordSystem->toUnit(scenePos().y())));
 	startPositionElement.setAttribute("direction", QString::number(rotation()));
 	return startPositionElement;
 }

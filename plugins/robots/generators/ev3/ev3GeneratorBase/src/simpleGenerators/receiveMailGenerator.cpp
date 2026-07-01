@@ -20,12 +20,10 @@ using namespace ev3::simple;
 using namespace generatorBase::simple;
 using namespace qReal;
 
-const QMap<QString, QString> DEFAULT_VALUE =  {{"int", "0"}, {"float", "0.0"}, {"bool", "true"}, {"string", "\"\""}};
+const QMap<QString, QString> DEFAULT_VALUE = {{"int", "0"}, {"float", "0.0"}, {"bool", "true"}, {"string", "\"\""}};
 
-ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const Id &id
-		, QObject *parent)
+ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "", QList<Binding *>(), parent)
 {
 	auto mGeneratorFactory = dynamic_cast<Ev3GeneratorFactory *>(parent);
@@ -35,11 +33,13 @@ ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo
 	const QString variable = nameNormalizer->convert(mRepo.property(mId, "Variable").toString());
 	if (!mGeneratorFactory->mailboxes().tryRegisterReadMailbox(mailboxName, type)) {
 		mGeneratorFactory->reportError(
-					Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type") , mId);
+			Ev3GeneratorFactory::tr("There is already mailbox with same name, but different msg type"),
+			mId);
 	}
 
 	if (mGeneratorFactory->mailboxes().mailboxesCount() >= 30) {
-		mGeneratorFactory->reportError(Ev3GeneratorFactory::tr("There are too many mailboxes, max size is 30") , mId);
+		mGeneratorFactory->reportError(Ev3GeneratorFactory::tr("There are too many mailboxes, max size is 30"),
+			mId);
 	}
 
 	bool synch = mRepo.property(mId, "Synchronized").toBool();
@@ -50,12 +50,12 @@ ReceiveMailGenerator::ReceiveMailGenerator(const qrRepo::RepoApi &repo
 	}
 
 	// small trick to provide info about variable to system
-	customizer.factory()->functionBlockConverter(id, "Variable")->convert(
-			QString("%1 = %2").arg(variable, DEFAULT_VALUE[type]));
+	customizer.factory()
+		->functionBlockConverter(id, "Variable")
+		->convert(QString("%1 = %2").arg(variable, DEFAULT_VALUE[type]));
 
-	addBinding(Binding::createStatic("@@ID@@"
-			, mGeneratorFactory->mailboxes().mailboxNameToId(mailboxName)));
-	addBinding(Binding::createStatic("@@TYPE_LENGHT@@"
-			, mGeneratorFactory->mailboxes().messageTypeToTypeLength(type)));
+	addBinding(Binding::createStatic("@@ID@@", mGeneratorFactory->mailboxes().mailboxNameToId(mailboxName)));
+	addBinding(
+		Binding::createStatic("@@TYPE_LENGHT@@", mGeneratorFactory->mailboxes().messageTypeToTypeLength(type)));
 	addBinding(Binding::createStatic("@@VARIABLE@@", variable));
 }

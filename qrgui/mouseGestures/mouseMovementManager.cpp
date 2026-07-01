@@ -32,8 +32,8 @@ const QString deletionGesture = "0, 200 : 200, 0 : ";
 
 using namespace qReal::gestures;
 
-MouseMovementManager::MouseMovementManager(const Id &diagram
-		, const qReal::EditorManagerInterface &editorManagerInterface)
+MouseMovementManager::MouseMovementManager(const Id &diagram,
+	const qReal::EditorManagerInterface &editorManagerInterface)
 	: mDiagram(diagram)
 	, mEditorManagerInterface(editorManagerInterface)
 	, mInitializing(true)
@@ -55,16 +55,16 @@ QWidget *MouseMovementManager::producePainter() const
 	}
 
 	/// @todo: Remove copy-paste in DummyMouseMovementManager
-	GesturesWidget * const result = new GesturesWidget;
-	QList<QPair<QString, Id> > elements;
+	GesturesWidget *const result = new GesturesWidget;
+	QList<QPair<QString, Id>> elements;
 	for (const Id &element : mEditorManagerInterface.elements(mDiagram)) {
 		if (!mEditorManagerInterface.mouseGesture(element).isEmpty()) {
 			elements << qMakePair(mEditorManagerInterface.friendlyName(element), element);
 		}
 	}
 
-	connect(result, &GesturesWidget::currentElementChanged
-			, this, &MouseMovementManager::drawIdealPath, Qt::QueuedConnection);
+	connect(result, &GesturesWidget::currentElementChanged, this, &MouseMovementManager::drawIdealPath,
+		Qt::QueuedConnection);
 	result->setElements(elements);
 	return result;
 }
@@ -84,7 +84,7 @@ void MouseMovementManager::drawIdealPath()
 		return;
 	}
 
-	GesturesWidget * const gesturesPainter = static_cast<GesturesWidget *>(sender());
+	GesturesWidget *const gesturesPainter = static_cast<GesturesWidget *>(sender());
 	const Id currentElement = gesturesPainter->currentElement();
 	if (mEditorManagerInterface.elements(mDiagram).contains(currentElement)) {
 		const QString paths = mEditorManagerInterface.mouseGesture(currentElement);
@@ -209,7 +209,7 @@ MouseMovementManager::GestureResult MouseMovementManager::result()
 		}
 	}
 
-	for (const QString &key: gestures.keys()) {
+	for (const QString &key : gestures.keys()) {
 		minDist = qMin(minDist, mGesturesManager->getMaxDistance(key));
 		const qreal dist = mGesturesManager->getDistance(key);
 		if (dist < minDist) {
@@ -240,8 +240,7 @@ QPointF MouseMovementManager::lastPoint()
 
 bool MouseMovementManager::wasMoving()
 {
-	return (firstPoint() != lastPoint() || mPath.size() > 1 ||
-			(!mPath.isEmpty() && mPath.at(0).size() > 2));
+	return (firstPoint() != lastPoint() || mPath.size() > 1 || (!mPath.isEmpty() && mPath.at(0).size() > 2));
 }
 
 bool MouseMovementManager::isEdgeCandidate()

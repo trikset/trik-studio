@@ -29,7 +29,7 @@ RobotModelInterface &RobotModelManager::model() const
 	return *mRobotModel;
 }
 
-void RobotModelManager::setModel(RobotModelInterface * const robotModel)
+void RobotModelManager::setModel(RobotModelInterface *const robotModel)
 {
 	if (mRobotModel != robotModel) {
 		disconnect(mRobotModel);
@@ -44,8 +44,8 @@ void RobotModelManager::setModel(RobotModelInterface * const robotModel)
 
 		connect(mRobotModel, &RobotModelInterface::connected, this, &RobotModelManager::connected);
 		connect(mRobotModel, &RobotModelInterface::disconnected, this, &RobotModelManager::disconnected);
-		connect(mRobotModel, &RobotModelInterface::allDevicesConfigured
-				, this, &RobotModelManager::allDevicesConfigured);
+		connect(mRobotModel, &RobotModelInterface::allDevicesConfigured, this,
+			&RobotModelManager::allDevicesConfigured);
 
 		mRobotModel->init();
 

@@ -25,8 +25,8 @@ using namespace ev3::robotModel::real::parts;
 using namespace ev3::communication;
 using namespace kitBase::robotModel;
 
-Button::Button(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+Button::Button(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: robotParts::Button(info, port, -1)
 	, mRobotCommunicator(robotCommunicator)
 {
@@ -34,8 +34,8 @@ Button::Button(const DeviceInfo &info, const PortInfo &port
 
 void Button::read()
 {
-	QByteArray command = Ev3DirectCommand::formCommand(13, 4, 1, 0
-			, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
+	QByteArray command =
+		Ev3DirectCommand::formCommand(13, 4, 1, 0, enums::commandType::CommandTypeEnum::DIRECT_COMMAND_REPLY);
 	int index = 7;
 	Ev3DirectCommand::addOpcode(enums::opcode::OpcodeEnum::UI_BUTTON_PRESSED, command, index);
 	Ev3DirectCommand::addByteParameter(parsePort(port().name()), command, index);

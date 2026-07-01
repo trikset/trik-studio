@@ -70,28 +70,28 @@ void AbstractCommand::setUndoEnabled(bool enabled)
 	mUndoEnabled = enabled;
 }
 
-void AbstractCommand::addPreAction(AbstractCommand * const command)
+void AbstractCommand::addPreAction(AbstractCommand *const command)
 {
 	if (command) {
 		mPreActions << command;
 	}
 }
 
-void AbstractCommand::insertPreAction(AbstractCommand * const command, int index)
+void AbstractCommand::insertPreAction(AbstractCommand *const command, int index)
 {
 	if (command) {
 		mPreActions.insert(index, command);
 	}
 }
 
-void AbstractCommand::addPostAction(AbstractCommand * const command)
+void AbstractCommand::addPostAction(AbstractCommand *const command)
 {
 	if (command) {
 		mPostActions << command;
 	}
 }
 
-void AbstractCommand::insertPostAction(AbstractCommand * const command, int index)
+void AbstractCommand::insertPostAction(AbstractCommand *const command, int index)
 {
 	if (command) {
 		mPostActions.insert(index, command);
@@ -115,19 +115,18 @@ void AbstractCommand::executeReverse(QList<AbstractCommand *> const &list)
 	}
 }
 
-bool AbstractCommand::hierarchyContains(AbstractCommand * const command) const
+bool AbstractCommand::hierarchyContains(AbstractCommand *const command) const
 {
-	if ((*this == *command && this != command)
-			|| contains(mPreActions, command)
-			|| contains(mPostActions, command)) {
+	if ((*this == *command && this != command) || contains(mPreActions, command)
+		|| contains(mPostActions, command)) {
 		return true;
 	}
-	for (AbstractCommand * const childCommand : mPreActions) {
+	for (AbstractCommand *const childCommand : mPreActions) {
 		if (childCommand->hierarchyContains(command)) {
 			return true;
 		}
 	}
-	for (AbstractCommand * const childCommand : mPostActions) {
+	for (AbstractCommand *const childCommand : mPostActions) {
 		if (childCommand->hierarchyContains(command)) {
 			return true;
 		}
@@ -135,10 +134,9 @@ bool AbstractCommand::hierarchyContains(AbstractCommand * const command) const
 	return false;
 }
 
-bool AbstractCommand::contains(QList<AbstractCommand *> const &list
-		, const AbstractCommand *command) const
+bool AbstractCommand::contains(QList<AbstractCommand *> const &list, const AbstractCommand *command) const
 {
-	for (AbstractCommand * const otherCommand : list) {
+	for (AbstractCommand *const otherCommand : list) {
 		if (*otherCommand == *command && otherCommand != command) {
 			return true;
 		}
@@ -175,7 +173,7 @@ uint AbstractCommand::timestamp() const
 
 void AbstractCommand::removeDuplicatesOn(QList<AbstractCommand *> &list)
 {
-	for (AbstractCommand * const command : list) {
+	for (AbstractCommand *const command : list) {
 		if (hierarchyContains(command)) {
 			list.removeAll(command);
 			delete command;

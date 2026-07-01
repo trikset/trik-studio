@@ -40,9 +40,8 @@ public:
 	/// Constructor.
 	/// @param robotModelManager - has reference to current robot model.
 	/// @param parser - contains sensor variables and is needed here to update them.
-	SensorVariablesUpdater(const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-			, qrtext::DebuggerInterface &textLanguageToolbox
-			);
+	SensorVariablesUpdater(const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+		qrtext::DebuggerInterface &textLanguageToolbox);
 
 	~SensorVariablesUpdater();
 
@@ -65,8 +64,8 @@ private:
 	void updateScalarSensorVariables(const kitBase::robotModel::PortInfo &sensorPortInfo, int reading);
 	void updateScalarSensorVariable(const QString &variable, int reading);
 
-	void updateVectorSensorVariables(const kitBase::robotModel::PortInfo &sensorPortInfo
-			, const QVector<int> &reading);
+	void updateVectorSensorVariables(const kitBase::robotModel::PortInfo &sensorPortInfo,
+		const QVector<int> &reading);
 
 	void updateVectorSensorVariable(const QString &variable, const QVector<int> &reading);
 

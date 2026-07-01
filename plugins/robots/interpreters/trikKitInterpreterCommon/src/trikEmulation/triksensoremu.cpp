@@ -16,9 +16,10 @@
 
 using namespace trik;
 
-TrikSensorEmu::TrikSensorEmu(kitBase::robotModel::robotParts::ScalarSensor *sensor) : mSensor(sensor)
+TrikSensorEmu::TrikSensorEmu(kitBase::robotModel::robotParts::ScalarSensor *sensor)
+	: mSensor(sensor)
 {
-//	connect(sensor, &kitBase::robotModel::robotParts::ScalarSensor::newData)
+	//	connect(sensor, &kitBase::robotModel::robotParts::ScalarSensor::newData)
 }
 
 int TrikSensorEmu::read()

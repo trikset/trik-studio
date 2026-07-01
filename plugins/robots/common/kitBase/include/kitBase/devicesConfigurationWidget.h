@@ -33,8 +33,7 @@ class RobotModelInterface;
 }
 
 /// A number of combo boxes for devices selection.
-class ROBOTS_KIT_BASE_EXPORT DevicesConfigurationWidget : public QScrollArea
-		, public DevicesConfigurationProvider
+class ROBOTS_KIT_BASE_EXPORT DevicesConfigurationWidget : public QScrollArea, public DevicesConfigurationProvider
 {
 	Q_OBJECT
 
@@ -54,7 +53,7 @@ public:
 
 	/// Adds the given widget above the combo boxes. The widget is visible only if the given robot model is selected.
 	/// loadRobotModels() method must be called before this one.
-	void prependCustomWidget(robotModel::RobotModelInterface &robotModel, QWidget * const widget);
+	void prependCustomWidget(robotModel::RobotModelInterface &robotModel, QWidget *const widget);
 
 public Q_SLOTS:
 	/// Updates widget from current model configuration.
@@ -66,37 +65,32 @@ public Q_SLOTS:
 private:
 	QWidget *configurerForRobotModel(robotModel::RobotModelInterface &robotModel);
 
-	QLayout *initPort(const QString &robotModelName
-			, const robotModel::PortInfo &port
-			, const QList<robotModel::DeviceInfo> &sensors);
+	QLayout *initPort(const QString &robotModelName, const robotModel::PortInfo &port,
+		const QList<robotModel::DeviceInfo> &sensors);
 
 	void hideAllConfigurers();
 
-	void onDeviceConfigurationChanged(const QString &robotId
-			, const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &sensor
-			, Reason reason) override;
+	void onDeviceConfigurationChanged(const QString &robotId, const robotModel::PortInfo &port,
+		const robotModel::DeviceInfo &sensor, Reason reason) override;
 
-	void propagateChanges(const QString &robotId, const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &sensor, Reason reason);
+	void propagateChanges(const QString &robotId, const robotModel::PortInfo &port,
+		const robotModel::DeviceInfo &sensor, Reason reason);
 
 	void propagateChangesFromBox(QComboBox *box);
 
-	bool areConvertible(const robotModel::PortInfo &port1
-			, const robotModel::PortInfo &port2) const;
+	bool areConvertible(const robotModel::PortInfo &port1, const robotModel::PortInfo &port2) const;
 
-	robotModel::DeviceInfo convertibleDevice(
-			const robotModel::RobotModelInterface *robotModel
-			, const robotModel::PortInfo &port
-			, const robotModel::DeviceInfo &device) const;
+	robotModel::DeviceInfo convertibleDevice(const robotModel::RobotModelInterface *robotModel,
+		const robotModel::PortInfo &port, const robotModel::DeviceInfo &device) const;
 
 	bool mAutosaveMode;
 	bool mCompactMode;
 	QString mCurrentModelType;
 	QString mCurrentRobotId;
-	QMap<QString, robotModel::RobotModelInterface *> mRobotModels;  // Does not have ownership.
-	QMap<QString, QWidget *> mRobotModelConfigurers;  // Has indirect ownership via Qt parent-child memory management.
-	QList<QComboBox *> mConfigurers;  // Has indirect ownership of comboboxes via Qt parent-child memory management.
+	QMap<QString, robotModel::RobotModelInterface *> mRobotModels; // Does not have ownership.
+	QMap<QString, QWidget *>
+		mRobotModelConfigurers; // Has indirect ownership via Qt parent-child memory management.
+	QList<QComboBox *> mConfigurers; // Has indirect ownership of comboboxes via Qt parent-child memory management.
 	bool mSaving;
 	bool mRefreshing;
 };

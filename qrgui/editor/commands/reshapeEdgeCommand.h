@@ -17,12 +17,10 @@
 #include "editor/commands/edgeElementCommand.h"
 #include "controller/commands/trackingEntity.h"
 
-namespace qReal
-{
+namespace qReal {
 namespace gui {
 namespace editor {
-namespace commands
-{
+namespace commands {
 
 class ReshapeEdgeCommand : public EdgeElementCommand, public qReal::commands::TrackingEntity
 {
@@ -30,7 +28,9 @@ class ReshapeEdgeCommand : public EdgeElementCommand, public qReal::commands::Tr
 public:
 	ReshapeEdgeCommand(const EdgeElement *edge);
 	ReshapeEdgeCommand(const EditorViewScene *scene, const Id &id);
-	virtual ~ReshapeEdgeCommand() {}
+	virtual ~ReshapeEdgeCommand()
+	{
+	}
 
 	virtual void startTracking();
 	virtual void stopTracking();
@@ -43,8 +43,8 @@ protected:
 
 private:
 	void saveConfiguration(QPolygonF &target, Id &src, Id &dst, QPointF &pos, qreal &fromPort, qreal &toPort);
-	void applyConfiguration(const QPolygonF &configuration, const Id &src
-			, const Id &dst, QPointF pos, qreal fromPort, qreal toPort);
+	void applyConfiguration(const QPolygonF &configuration, const Id &src, const Id &dst, QPointF pos,
+		qreal fromPort, qreal toPort);
 
 	QPolygonF mOldConfiguration;
 	QPolygonF mNewConfiguration;

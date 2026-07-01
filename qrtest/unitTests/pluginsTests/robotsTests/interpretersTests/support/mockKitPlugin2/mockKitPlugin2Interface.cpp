@@ -37,7 +37,7 @@ QList<kitBase::AdditionalPreferences *> MockKitPlugin2Interface::settingsWidgets
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> MockKitPlugin2Interface::blocksFactoryFor(
-		kitBase::robotModel::RobotModelInterface const *model)
+	kitBase::robotModel::RobotModelInterface const *model)
 {
 	Q_UNUSED(model)
 	return nullptr;
@@ -53,8 +53,7 @@ QList<qReal::HotKeyActionInfo> MockKitPlugin2Interface::hotKeyActions()
 	return {};
 }
 
-QIcon MockKitPlugin2Interface::iconForFastSelector(
-		kitBase::robotModel::RobotModelInterface const &robotModel) const
+QIcon MockKitPlugin2Interface::iconForFastSelector(kitBase::robotModel::RobotModelInterface const &robotModel) const
 {
 	Q_UNUSED(robotModel)
 	return QIcon();

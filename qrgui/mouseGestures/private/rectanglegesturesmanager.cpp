@@ -37,7 +37,7 @@ qreal RectangleGesturesManager::getDistance(const key_type &key1, const key_type
 {
 	qreal norm = 0;
 	qreal sum = 0;
-	for (int i = 0; i < gridSize * gridSize; i ++) {
+	for (int i = 0; i < gridSize * gridSize; i++) {
 		sum += qAbs(key1[i] - key2[i]);
 		norm = qMax(norm, qAbs(key1[i] - key2[i]));
 	}
@@ -45,10 +45,10 @@ qreal RectangleGesturesManager::getDistance(const key_type &key1, const key_type
 	return sum / (gridSize * gridSize);
 }
 
-RectangleGesturesManager::key_type RectangleGesturesManager::getKey(const PathVector & path)
+RectangleGesturesManager::key_type RectangleGesturesManager::getKey(const PathVector &path)
 {
 	const Key key = KeyBuilder::getKey(path, gridSize, gridSize);
-	key_type finalKey (gridSize * gridSize);
+	key_type finalKey(gridSize * gridSize);
 	for (int i = 0; i < gridSize * gridSize; ++i) {
 		finalKey[i] = key.size();
 	}
@@ -63,5 +63,3 @@ RectangleGesturesManager::key_type RectangleGesturesManager::getKey(const PathVe
 
 	return finalKey;
 }
-
-

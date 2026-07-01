@@ -24,10 +24,9 @@
 using namespace ev3::rbf::lua;
 using namespace qReal;
 
-Ev3LuaProcessor::Ev3LuaProcessor(qReal::ErrorReporterInterface &errorReporter
-		, qrtext::LanguageToolboxInterface &textLanguage
-		, const utils::ParserErrorReporter &parserErrorReporter
-		, QObject *parent)
+Ev3LuaProcessor::Ev3LuaProcessor(qReal::ErrorReporterInterface &errorReporter,
+	qrtext::LanguageToolboxInterface &textLanguage, const utils::ParserErrorReporter &parserErrorReporter,
+	QObject *parent)
 	: generatorBase::lua::LuaProcessor(errorReporter, textLanguage, parserErrorReporter, parent)
 	, mVariables(nullptr)
 	, mFactory(nullptr)
@@ -46,10 +45,8 @@ void Ev3LuaProcessor::configure(generatorBase::parts::Variables *variables, Ev3R
 	mPrinter.reset(new Ev3LuaPrinter(pathsToRoot(), mTextLanguage, *mVariables));
 }
 
-QString Ev3LuaProcessor::translate(const QString &data
-		, const Id &id
-		, const QString &propertyName
-		, const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter)
+QString Ev3LuaProcessor::translate(const QString &data, const Id &id, const QString &propertyName,
+	const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter)
 {
 	if (!mVariables) {
 		qWarning() << "Variables instance is null in Ev3LuaProcessor. Something went wrong.";
@@ -65,12 +62,9 @@ QString Ev3LuaProcessor::translate(const QString &data
 	return result;
 }
 
-
-QString Ev3LuaProcessor::castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type
-		, const QString &data
-		, const Id &id
-		, const QString &propertyName
-		, const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter)
+QString Ev3LuaProcessor::castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type, const QString &data,
+	const Id &id, const QString &propertyName,
+	const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter)
 {
 	if (!mVariables) {
 		qWarning() << "Variables instance is null in Ev3LuaProcessor. Something went wrong.";

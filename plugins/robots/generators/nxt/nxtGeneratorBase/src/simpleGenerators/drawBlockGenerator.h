@@ -27,10 +27,8 @@ class DrawBlockGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	DrawBlockGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent = nullptr);
+	DrawBlockGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 
 	virtual QString generate();
 

@@ -33,8 +33,8 @@
 using namespace twoDModel::constraints;
 Q_DECLARE_METATYPE(QSharedPointer<QGraphicsPathItem>)
 
-ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter,
-				       model::Model &model, QObject* parent)
+ConstraintsChecker::ConstraintsChecker(qReal::ErrorReporterInterface &errorReporter, model::Model &model,
+	QObject *parent)
 	: QObject(parent)
 	, mErrorReporter(errorReporter)
 	, mModel(model)
@@ -72,7 +72,7 @@ bool ConstraintsChecker::hasConstraints() const
 }
 
 bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXmlBeforeTemplateSubstitution,
-					  const QDomElement &constraintsXmlAfterTemplateSubstitution)
+	const QDomElement &constraintsXmlAfterTemplateSubstitution)
 {
 	mEvents.clear();
 	mActiveEvents.clear();
@@ -81,8 +81,7 @@ bool ConstraintsChecker::parseConstraints(const QDomElement &constraintsXmlBefor
 	mParsedSuccessfully = mParser->parse(constraintsXmlAfterTemplateSubstitution);
 
 	if (mParsedSuccessfully) {
-		auto importNode = mCurrentConstraintDocument.
-				importNode(constraintsXmlBeforeTemplateSubstitution, true);
+		auto importNode = mCurrentConstraintDocument.importNode(constraintsXmlBeforeTemplateSubstitution, true);
 		mCurrentXml = importNode.toElement();
 		if (!mCurrentXml.isNull()) {
 			mCurrentConstraintDocument.appendChild(mCurrentXml);
@@ -130,17 +129,16 @@ void ConstraintsChecker::reportParserError(const QString &message)
 
 void ConstraintsChecker::reportParserWarning(const QString &message)
 {
-	const auto& fullMessage = tr("Warning while parsing constraints: %1").arg(message);
+	const auto &fullMessage = tr("Warning while parsing constraints: %1").arg(message);
 	mErrorReporter.addWarning(fullMessage);
 }
 
 void ConstraintsChecker::dumpVariables()
 {
 	QVariantMap variables = {
-		{"variables", QVariantList{
-			QVariantMap{{"name", "total_score"}, {"value", mVariables["total_score"]}},
-		}}
-	};
+		{"variables", QVariantList {
+				      QVariantMap {{"name", "total_score"}, {"value", mVariables["total_score"]}},
+			      }}};
 
 	auto &&infoObject = QJsonObject::fromVariantMap(variables);
 	QJsonDocument doc(infoObject);
@@ -157,7 +155,8 @@ void ConstraintsChecker::prepareEvents()
 {
 	mActiveEvents.clear();
 	for (auto &&event : mEvents) {
-		connect(&*event, &details::Event::settedUp, this, &ConstraintsChecker::setUpEvent, Qt::UniqueConnection);
+		connect(&*event, &details::Event::settedUp, this, &ConstraintsChecker::setUpEvent,
+			Qt::UniqueConnection);
 		connect(&*event, &details::Event::dropped, this, &ConstraintsChecker::dropEvent, Qt::UniqueConnection);
 		if (event->isAliveInitially()) {
 			mActiveEvents << &*event;
@@ -167,46 +166,46 @@ void ConstraintsChecker::prepareEvents()
 		}
 	}
 
-	std::sort(mActiveEvents.begin(), mActiveEvents.end()
-			, [](const details::Event *e1, const details::Event *e2) { return e1->id() > e2->id(); });
+	std::sort(mActiveEvents.begin(), mActiveEvents.end(),
+		[](const details::Event *e1, const details::Event *e2) { return e1->id() > e2->id(); });
 }
 
 void ConstraintsChecker::setUpEvent()
 {
-	if (auto * const event = qobject_cast<details::Event *>(sender())) {
+	if (auto *const event = qobject_cast<details::Event *>(sender())) {
 		if (!mActiveEvents.contains(event)) {
 			mActiveEvents << event;
 		}
 	}
 
-	std::sort(mActiveEvents.begin(), mActiveEvents.end()
-			, [](const details::Event *e1, const details::Event *e2) { return e1->id() > e2->id(); });
+	std::sort(mActiveEvents.begin(), mActiveEvents.end(),
+		[](const details::Event *e1, const details::Event *e2) { return e1->id() > e2->id(); });
 }
 
 void ConstraintsChecker::dropEvent()
 {
-	if (auto * const event = qobject_cast<details::Event *>(sender())) {
+	if (auto *const event = qobject_cast<details::Event *>(sender())) {
 		mActiveEvents.removeAll(event);
 	}
 }
 
 void ConstraintsChecker::bindToWorldModelObjects()
 {
-	connect(&mModel.worldModel(), &model::WorldModel::wallAdded
-			, this, [this](const QSharedPointer<items::WallItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded
-			, this, [this](const QSharedPointer<items::ColorFieldItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded
-			, this, [this](const QSharedPointer<items::RegionItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded
-			, this, [this](const QSharedPointer<items::SkittleItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::ballAdded
-			, this, [this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::cubeAdded
-			, this, [this](const QSharedPointer<items::CubeItem> &item) { bindObject(item->id(), item.data()); });
-	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved
-			, this, [this](const QSharedPointer<QGraphicsItem> &item) {
-		const auto& keys = mObjects.keys(dynamic_cast<QObject*>(item.data()));
+	connect(&mModel.worldModel(), &model::WorldModel::wallAdded, this,
+		[this](const QSharedPointer<items::WallItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::colorItemAdded, this,
+		[this](const QSharedPointer<items::ColorFieldItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::regionItemAdded, this,
+		[this](const QSharedPointer<items::RegionItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::skittleAdded, this,
+		[this](const QSharedPointer<items::SkittleItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::ballAdded, this,
+		[this](const QSharedPointer<items::BallItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::cubeAdded, this,
+		[this](const QSharedPointer<items::CubeItem> &item) { bindObject(item->id(), item.data()); });
+	connect(&mModel.worldModel(), &model::WorldModel::itemRemoved, this,
+		[this](const QSharedPointer<QGraphicsItem> &item) {
+		const auto &keys = mObjects.keys(dynamic_cast<QObject *>(item.data()));
 		for (auto &&key : keys) {
 			mObjects.remove(key);
 		}
@@ -220,7 +219,7 @@ void ConstraintsChecker::bindToRobotObjects()
 	}
 
 	connect(&mModel, &model::Model::robotAdded, this, &ConstraintsChecker::bindRobotObject);
-	connect(&mModel, &model::Model::robotRemoved, this, [this](model::RobotModel * const robot) {
+	connect(&mModel, &model::Model::robotRemoved, this, [this](model::RobotModel *const robot) {
 		const QStringList keys = mObjects.keys(robot);
 		for (const QString &keyToRemove : keys) {
 			const auto &keys = mObjects.keys();
@@ -233,7 +232,7 @@ void ConstraintsChecker::bindToRobotObjects()
 	});
 }
 
-void ConstraintsChecker::bindObject(const QString &id, QObject * const object)
+void ConstraintsChecker::bindObject(const QString &id, QObject *const object)
 {
 	mObjects[id] = object;
 	connect(object, &QObject::destroyed, this, [=]() {
@@ -244,34 +243,32 @@ void ConstraintsChecker::bindObject(const QString &id, QObject * const object)
 	});
 }
 
-void ConstraintsChecker::bindRobotObject(twoDModel::model::RobotModel * const robot)
+void ConstraintsChecker::bindRobotObject(twoDModel::model::RobotModel *const robot)
 {
 	const QString robotId = firstUnusedRobotId();
 	bindObject(robotId, robot);
 
 	// Led, display, marker, all such devices will be also caught here.
-	connect(&robot->info().configuration(), &kitBase::robotModel::ConfigurationInterface::deviceConfigured
-			, this, [=](const kitBase::robotModel::robotParts::Device *device)
-	{
+	connect(&robot->info().configuration(), &kitBase::robotModel::ConfigurationInterface::deviceConfigured, this,
+		[=](const kitBase::robotModel::robotParts::Device *device) {
 		bindDeviceObject(robotId, robot, device->port());
 	});
 
-	connect(&robot->configuration(), &model::SensorsConfiguration::deviceRemoved
-			, this, [=](const kitBase::robotModel::PortInfo &port, bool isLoading)
-	{
+	connect(&robot->configuration(), &model::SensorsConfiguration::deviceRemoved, this,
+		[=](const kitBase::robotModel::PortInfo &port, bool isLoading) {
 		Q_UNUSED(isLoading)
-		for (auto &&name: portNames(robotId, robot, port)) {
+		for (auto &&name : portNames(robotId, robot, port)) {
 			mObjects.remove(name);
 		}
 	});
 }
 
-void ConstraintsChecker::bindDeviceObject(const QString &robotId
-		, model::RobotModel * const robot, const kitBase::robotModel::PortInfo &port)
+void ConstraintsChecker::bindDeviceObject(const QString &robotId, model::RobotModel *const robot,
+	const kitBase::robotModel::PortInfo &port)
 {
 	const auto &device = robot->info().configuration().device(port);
 	const auto &names = portNames(robotId, robot, port);
-	for (auto &&name: names) {
+	for (auto &&name : names) {
 		mObjects[name] = device;
 	}
 }
@@ -286,9 +283,8 @@ QString ConstraintsChecker::firstUnusedRobotId() const
 	return "robot" + QString::number(id);
 }
 
-QStringList ConstraintsChecker::portNames(const QString &robotId
-		, model::RobotModel * const robot
-		, const kitBase::robotModel::PortInfo &port) const
+QStringList ConstraintsChecker::portNames(const QString &robotId, model::RobotModel *const robot,
+	const kitBase::robotModel::PortInfo &port) const
 {
 	QStringList result;
 	const auto &mainPort = portName(robotId, robot, port);
@@ -296,14 +292,14 @@ QStringList ConstraintsChecker::portNames(const QString &robotId
 
 	auto aliasConfiguration = robot->aliasConfiguration();
 	const auto &userAliases = aliasConfiguration->getAliases(port);
-	for (auto &&userAlias: userAliases) {
+	for (auto &&userAlias : userAliases) {
 		result.append(QString("%1.%2").arg(robotId, userAlias));
 	}
 	return result;
 }
 
-QString ConstraintsChecker::portName(const QString &robotId
-		, model::RobotModel * const robot, const kitBase::robotModel::PortInfo &port) const
+QString ConstraintsChecker::portName(const QString &robotId, model::RobotModel *const robot,
+	const kitBase::robotModel::PortInfo &port) const
 {
 	// We wish to know would be there a collision if someone writes "A1" or not.
 	int portsWithSuchName = 0;
@@ -317,14 +313,15 @@ QString ConstraintsChecker::portName(const QString &robotId
 	// So letting him write "robot1.display.ellipses" or "robot1.marker".
 	QRegExp portRegExp("^(\\w+)Port$");
 	const QString readablePortName = portRegExp.exactMatch(port.name())
-			? utils::StringUtils::lowercaseFirstLetter(portRegExp.cap(1))
-			: port.name();
+	                                         ? utils::StringUtils::lowercaseFirstLetter(portRegExp.cap(1))
+	                                         : port.name();
 
 	return portsWithSuchName > 1
-			// If collision in name exists then user must specify what port exactly he wishes to process.
-			? QString("%1.%2_%3").arg(robotId, readablePortName
-					, port.direction() == kitBase::robotModel::input ? "in" : "out")
-			: QString("%1.%2").arg(robotId, readablePortName);
+	               // If collision in name exists then user must specify what port exactly he wishes to process.
+	               ? QString("%1.%2_%3")
+	                         .arg(robotId, readablePortName,
+					 port.direction() == kitBase::robotModel::input ? "in" : "out")
+	               : QString("%1.%2").arg(robotId, readablePortName);
 }
 
 void ConstraintsChecker::programStarted()
@@ -340,7 +337,7 @@ void ConstraintsChecker::programStarted()
 			continue;
 		}
 
-		const QString& robotId = robotIds[0];
+		const QString &robotId = robotIds[0];
 		for (auto &&device : robot->info().configuration().devices()) {
 			bindDeviceObject(robotId, robot, device->port());
 		}

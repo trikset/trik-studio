@@ -32,7 +32,7 @@ Arrow::Arrow(QPoint sourcePoint, QPoint destPoint, int lifeTime, QWidget *parent
 	: QWidget(parent)
 	, mSourcePoint(sourcePoint)
 	, mDestPoint(destPoint)
-	, mDuration(lifeTime / 2)  // lifeTime = showing + fading out
+	, mDuration(lifeTime / 2) // lifeTime = showing + fading out
 {
 	setAttribute(Qt::WA_TransparentForMouseEvents, true);
 	setWindowFlags(Qt::WindowStaysOnTopHint);
@@ -57,10 +57,10 @@ void Arrow::paintEvent(QPaintEvent *)
 		angle = 2 * pi - angle;
 	}
 
-	const QPointF destArrowFirst = mDestPoint + QPoint(qSin(angle - pi / 3) * arrowSize
-			, qCos(angle - pi / 3) * arrowSize);
-	const QPointF destArrowSecond = mDestPoint + QPoint(qSin(angle - 2 * pi / 3) * arrowSize
-			, qCos(angle - 2 * pi / 3) * arrowSize);
+	const QPointF destArrowFirst =
+		mDestPoint + QPoint(qSin(angle - pi / 3) * arrowSize, qCos(angle - pi / 3) * arrowSize);
+	const QPointF destArrowSecond =
+		mDestPoint + QPoint(qSin(angle - 2 * pi / 3) * arrowSize, qCos(angle - 2 * pi / 3) * arrowSize);
 
 	painter.setBrush(Qt::black);
 	painter.drawPolygon(QPolygonF() << line.p2() << destArrowFirst << destArrowSecond);

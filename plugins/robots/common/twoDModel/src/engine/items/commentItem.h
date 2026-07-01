@@ -25,8 +25,7 @@ class CommentItem : public graphicsUtils::AbstractItem
 	Q_DISABLE_COPY(CommentItem)
 
 public:
-	explicit CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                     QPointF begin, QPointF end);
+	explicit CommentItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end);
 
 	/// Creates and returns comment item for 2D model palette.
 	/// Transfers ownership.
@@ -35,8 +34,8 @@ public:
 	QRectF boundingRect() const override;
 	QPainterPath shape() const override;
 
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-	void drawExtractionForItem(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+	void drawExtractionForItem(QPainter *painter) override;
 
 	void calcResizeItem(QGraphicsSceneMouseEvent *event) override;
 	QPainterPath resizeArea() const override;

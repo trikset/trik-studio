@@ -26,23 +26,23 @@ class Stylus : public Item
 	Q_OBJECT
 public:
 	QList<Line *> mListLine;
-	Stylus(qreal x1, qreal y1, Item* parent);
+	Stylus(qreal x1, qreal y1, Item *parent);
 	void addLine(qreal x2, qreal y2);
 	void addLineInList(Line *line);
 
 	virtual QRectF boundingRect() const;
 	virtual QPainterPath shape() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawFieldForResizeItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+	virtual void drawExtractionForItem(QPainter *painter);
+	virtual void drawFieldForResizeItem(QPainter *painter);
+	virtual void drawScalingRects(QPainter *painter);
 	virtual void setPenStyle(const QString &text);
 	virtual void setPenWidth(int width);
 	virtual void setPenColor(const QString &text);
 	virtual void setBrushStyle(const QString &text);
 	virtual void setBrushColor(const QString &text);
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
 
 private:
 	qreal mTmpX1;

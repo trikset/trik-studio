@@ -23,11 +23,11 @@
 
 // Sometitmes minor/major macroes come from sys/types.h
 #ifdef major
-#    undef major
+#	undef major
 #endif
 
 #ifdef minor
-#    undef minor
+#	undef minor
 #endif
 
 namespace qReal {
@@ -50,16 +50,18 @@ class QRKERNEL_EXPORT Version
 {
 public:
 	/// Represents release stage.
-	enum Stage
-	{
+	enum Stage {
 		/// Testing inside team.
 		alpha = 0
 		/// Testing inside community.
-		, beta
+		,
+		beta
 		/// Version that seems to be stable.
-		, releaseCandidate
+		,
+		releaseCandidate
 		/// Stable version, used when no suffix specified.
-		, stable
+		,
+		stable
 	};
 
 	/// Constructs new Version instance from a given string.
@@ -111,11 +113,8 @@ private:
 /// Versions equality operator. Versions are equal when all their parts are equal.
 inline bool operator==(const Version &v1, const Version &v2)
 {
-	return v1.major() == v2.major()
-			&& v1.minor() == v2.minor()
-			&& v1.build() == v2.build()
-			&& v1.stage() == v2.stage()
-			&& v1.stageNumber() == v2.stageNumber();
+	return v1.major() == v2.major() && v1.minor() == v2.minor() && v1.build() == v2.build()
+	       && v1.stage() == v2.stage() && v1.stageNumber() == v2.stageNumber();
 }
 
 /// Version inequality operator.
@@ -127,11 +126,11 @@ inline bool operator!=(const Version &v1, const Version &v2)
 /// Less comparison operator for Version class
 inline bool operator<(const Version &v1, const Version &v2)
 {
-	return v1.major() != v2.major() ? v1.major() < v2.major()
-			: v1.minor() != v2.minor() ? v1.minor() < v2.minor()
-			: v1.build() != v2.build() ? v1.build() < v2.build()
-			: v1.stage() != v2.stage() ? v1.stage() < v2.stage()
-			: v1.stageNumber() < v2.stageNumber();
+	return v1.major() != v2.major()   ? v1.major() < v2.major()
+	       : v1.minor() != v2.minor() ? v1.minor() < v2.minor()
+	       : v1.build() != v2.build() ? v1.build() < v2.build()
+	       : v1.stage() != v2.stage() ? v1.stage() < v2.stage()
+	                                  : v1.stageNumber() < v2.stageNumber();
 }
 
 /// Greater comparison operator for Version class
@@ -169,5 +168,5 @@ inline QDebug operator<<(QDebug &dbg, const Version &version)
 
 Q_DECLARE_METATYPE(qReal::Version)
 
-QRKERNEL_EXPORT QDataStream& operator<< (QDataStream &out, const qReal::Version &version);
-QRKERNEL_EXPORT QDataStream& operator>> (QDataStream &in, qReal::Version &version);
+QRKERNEL_EXPORT QDataStream &operator<<(QDataStream &out, const qReal::Version &version);
+QRKERNEL_EXPORT QDataStream &operator>>(QDataStream &in, qReal::Version &version);

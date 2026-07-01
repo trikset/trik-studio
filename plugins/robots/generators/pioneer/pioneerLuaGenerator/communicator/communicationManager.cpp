@@ -23,35 +23,21 @@ using namespace pioneer;
 using namespace pioneer::lua;
 using namespace qReal;
 
-CommunicationManager::CommunicationManager(
-		qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		)
+CommunicationManager::CommunicationManager(qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager)
 	: mHttpCommunicator(new HttpCommunicator(errorReporter))
 {
 	Q_UNUSED(robotModelManager)
 
 	auto connectCommunicator = [this](CommunicatorInterface &communicator) {
-		connect(
-				&communicator
-				, &CommunicatorInterface::uploadCompleted
-				, this
-				, &CommunicationManager::onUploadCompleted
-		);
+		connect(&communicator, &CommunicatorInterface::uploadCompleted, this,
+			&CommunicationManager::onUploadCompleted);
 
-		connect(
-				&communicator
-				, &CommunicatorInterface::startCompleted
-				, this
-				, &CommunicationManager::onStartCompleted
-		);
+		connect(&communicator, &CommunicatorInterface::startCompleted, this,
+			&CommunicationManager::onStartCompleted);
 
-		connect(
-				&communicator
-				, &CommunicatorInterface::stopCompleted
-				, this
-				, &CommunicationManager::onStopCompleted
-		);
+		connect(&communicator, &CommunicatorInterface::stopCompleted, this,
+			&CommunicationManager::onStopCompleted);
 	};
 
 	connectCommunicator(*mHttpCommunicator);

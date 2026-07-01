@@ -25,7 +25,7 @@ ProxyInterpreter::~ProxyInterpreter()
 {
 }
 
-void ProxyInterpreter::resetInterpreter(InterpreterInterface * const interpreter)
+void ProxyInterpreter::resetInterpreter(InterpreterInterface *const interpreter)
 {
 	if (mProxiedInterpreter) {
 		stopRobot(qReal::interpretation::StopReason::userStop);

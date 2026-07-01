@@ -29,10 +29,9 @@ class QRGUI_MODELS_EXPORT RenameExplosionCommand : public AbstractCommand
 	Q_OBJECT
 
 public:
-	RenameExplosionCommand(models::LogicalModelAssistApi &logicalApi
-		, const models::GraphicalModelAssistApi * const graphicalApi
-		, const models::Exploser &exploser
-		, const Id &target);
+	RenameExplosionCommand(models::LogicalModelAssistApi &logicalApi,
+		const models::GraphicalModelAssistApi *const graphicalApi, const models::Exploser &exploser,
+		const Id &target);
 
 	virtual ~RenameExplosionCommand();
 

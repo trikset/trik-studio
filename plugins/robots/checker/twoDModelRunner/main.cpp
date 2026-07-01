@@ -22,18 +22,18 @@
 #include <qrkernel/platformInfo.h>
 #include "runner.h"
 
-constexpr int maxLogSize = 10 * 1024 * 1024;  // 10 MB
+constexpr int maxLogSize = 10 * 1024 * 1024; // 10 MB
 constexpr int TWO_D_MODEL_RUNNER_INTERPRET_ERROR = 2;
 constexpr int TWO_D_MODEL_RUNNER_GENERATE_ERROR = 3;
 constexpr int TWO_D_MODEL_RUNNER_GENERATE_MODE_NOT_EXIST = 4;
 
-const QString description = QObject::tr(
-		"Emulates robot`s behaviour on TRIK Studio 2D model separately from programming environment. "\
-		"Passed .qrs will be interpreted just like when 'Run' button was pressed in TRIK Studio. \n"\
-		"In background mode the session will be terminated just after the execution ended and return code "
-		"will then contain binary information about program correctness."
-		"Example: \n") +
-		"    2D-model -b --platform minimal --report report.json --trajectory trajectory.fifo example.qrs";
+const QString description =
+	QObject::tr("Emulates robot`s behaviour on TRIK Studio 2D model separately from programming environment. "
+		    "Passed .qrs will be interpreted just like when 'Run' button was pressed in TRIK Studio. \n"
+		    "In background mode the session will be terminated just after the execution ended and return code "
+		    "will then contain binary information about program correctness."
+		    "Example: \n")
+	+ "    2D-model -b --platform minimal --report report.json --trajectory trajectory.fifo example.qrs";
 
 bool loadTranslators(const QString &locale)
 {
@@ -101,46 +101,48 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("qrs-file", QObject::tr("Save file to be interpreted."));
 	QCommandLineOption backgroundOption({"b", "background"}, QObject::tr("Run emulation in background."));
-	QCommandLineOption reportOption({"r","report"}
-									, QObject::tr("A path to file where checker results will be written (JSON).")
-									, "path-to-report", "report.json");
-	QCommandLineOption trajectoryOption({"t", "trajectory"}
-										, QObject::tr("A path to file where robot`s trajectory will be"\
-				" written. The writing will not be performed not immediately, each trajectory point will be written"\
-				" just when obtained by checker, so FIFOs are recommended to be targets for this option.")
-			, "path-to-trajectory", "trajectory.fifo");
-	QCommandLineOption inputOption({"i", "input"}, QObject::tr("Inputs for JavaScript solution.")// probably others too
-			, "path-to-input", "inputs.txt");
-	QCommandLineOption modeOption({"m", "mode"}, QObject::tr("Set to \"script\" for"\
-								" execution of js/py from the project or set to \"diagram\" for block diagram.")
-								, "mode", "diagram");
-	QCommandLineOption speedOption({"s", "speed"}
-								   , QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!).")
-								   , "speed", "0");
-	QCommandLineOption closeOnSuccessOption("close-on-success"
-								   , QObject::tr("Close the window and exit if the diagram/script"\
-												 " finishes without errors."));
-	QCommandLineOption closeOnFinishOption("close"
-								   , QObject::tr("Close the window and exit after diagram/script"\
-												 " finishes."));
+	QCommandLineOption reportOption({"r", "report"},
+		QObject::tr("A path to file where checker results will be written (JSON)."), "path-to-report",
+		"report.json");
+	QCommandLineOption trajectoryOption({"t", "trajectory"},
+		QObject::tr("A path to file where robot`s trajectory will be"
+			    " written. The writing will not be performed not immediately, each trajectory point will "
+	                    "be written"
+			    " just when obtained by checker, so FIFOs are recommended to be targets for this option."),
+		"path-to-trajectory", "trajectory.fifo");
+	QCommandLineOption inputOption({"i", "input"},
+		QObject::tr("Inputs for JavaScript solution.") // probably others too
+		,
+		"path-to-input", "inputs.txt");
+	QCommandLineOption modeOption({"m", "mode"},
+		QObject::tr("Set to \"script\" for"
+			    " execution of js/py from the project or set to \"diagram\" for block diagram."),
+		"mode", "diagram");
+	QCommandLineOption speedOption({"s", "speed"},
+		QObject::tr("Speed factor, try from 5 to 20, or even 1000 (at your own risk!)."), "speed", "0");
+	QCommandLineOption closeOnSuccessOption("close-on-success",
+		QObject::tr("Close the window and exit if the diagram/script"
+			    " finishes without errors."));
+	QCommandLineOption closeOnFinishOption("close", QObject::tr("Close the window and exit after diagram/script"
+								    " finishes."));
 	QCommandLineOption showConsoleOption({"c", "console"}, QObject::tr("Shows robot's console."));
 	QCommandLineOption showDisplayOption({"d", "display"}, QObject::tr("Shows robot's display."));
-	QCommandLineOption generatePathOption("generate-path"
-				, QObject::tr("The complete file path, including the filename"\
-					      ", to save the generated JavaScript or Python code.")
-				, "path-to-save-code", QString());
-	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\".")
-					      , "generate-mode", "javascript");
-	QCommandLineOption directScriptExecutionPathOption("script-path"
-						, QObject::tr("The path to the Python or JavaScript file that will be used for interpretation.")
-						, "script-path", QString());
-	QCommandLineOption onlyGenerateOption("only-generate"
-						, QObject::tr("Do not run the interpretation in any mode, "\
-							      "this is a parameter that is only used to generate a file."));
-	QCommandLineOption delayOption("delay-before-exit"
-						, QObject::tr("Add a delay in milliseconds after executing "
-									"the script before closing the window")
-						, "Delay in ms", "0");
+	QCommandLineOption generatePathOption("generate-path",
+		QObject::tr("The complete file path, including the filename"
+			    ", to save the generated JavaScript or Python code."),
+		"path-to-save-code", QString());
+	QCommandLineOption generateModeOption("generate-mode", QObject::tr("Select \"python\" or \"javascript\"."),
+		"generate-mode", "javascript");
+	QCommandLineOption directScriptExecutionPathOption("script-path",
+		QObject::tr("The path to the Python or JavaScript file that will be used for interpretation."),
+		"script-path", QString());
+	QCommandLineOption onlyGenerateOption("only-generate",
+		QObject::tr("Do not run the interpretation in any mode, "
+			    "this is a parameter that is only used to generate a file."));
+	QCommandLineOption delayOption("delay-before-exit",
+		QObject::tr("Add a delay in milliseconds after executing "
+			    "the script before closing the window"),
+		"Delay in ms", "0");
 	parser.addOption(backgroundOption);
 	parser.addOption(reportOption);
 	parser.addOption(trajectoryOption);
@@ -183,12 +185,11 @@ int main(int argc, char *argv[])
 	}
 
 	QScopedPointer<twoDModel::Runner> runner(
-				new twoDModel::Runner(report, trajectory, input, mode, qrsFile, delay));
+		new twoDModel::Runner(report, trajectory, input, mode, qrsFile, delay));
 	auto speedFactor = parser.value(speedOption).toInt();
 
 	if (!generatePath.isEmpty()) {
-		if (generateMode != "python" and generateMode != "javascript"
-			and generateMode != "nxt") {
+		if (generateMode != "python" and generateMode != "javascript" and generateMode != "nxt") {
 			parser.showHelp();
 			QLOG_ERROR() << "Problem with generate code to " << generatePath;
 			return TWO_D_MODEL_RUNNER_GENERATE_MODE_NOT_EXIST;
@@ -203,8 +204,8 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
-	if (!runner->interpret(backgroundMode, speedFactor, closeOnFinishMode,
-			       closeOnSuccessMode, showConsoleMode, showDisplayMode, scriptFilePath)) {
+	if (!runner->interpret(backgroundMode, speedFactor, closeOnFinishMode, closeOnSuccessMode, showConsoleMode,
+		    showDisplayMode, scriptFilePath)) {
 		return TWO_D_MODEL_RUNNER_INTERPRET_ERROR;
 	}
 

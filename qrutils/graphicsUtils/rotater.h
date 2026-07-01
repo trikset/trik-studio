@@ -35,24 +35,24 @@ public:
 	QPainterPath shape() const override;
 	QPainterPath resizeArea() const override;
 
-	void drawItem(QPainter* painter, const QStyleOptionGraphicsItem *option, QWidget* widget = nullptr) override;
-	void drawExtractionForItem(QPainter* painter) override;
+	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
+	void drawExtractionForItem(QPainter *painter) override;
 	void setPenBrushDriftRect(QPainter *painter) override;
-	void setPenBrushForExtraction(QPainter* painter, const QStyleOptionGraphicsItem* option) override;
+	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 	void resizeItem(QGraphicsSceneMouseEvent *event) override;
 	void calcResizeItem(QGraphicsSceneMouseEvent *event) override;
 
 	void setMasterItem(RotateItem *masterItem);
 
 private:
-	void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
-	void mouseMoveEvent(QGraphicsSceneMouseEvent * event) override;
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent * event) override;
+	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;
 
-	int mLength { -1 };
-	int mDrift { -1 };
-	int mResizeDrift { -1 };
+	int mLength {-1};
+	int mDrift {-1};
+	int mResizeDrift {-1};
 	graphicsUtils::RotateItem *mMaster {};
 	graphicsUtils::LineImpl mLineImpl;
 };

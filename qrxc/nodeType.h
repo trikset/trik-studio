@@ -22,14 +22,14 @@
 class Port;
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class NodeType : public GraphicType
 {
 public:
 	explicit NodeType(Diagram *diagram);
-	virtual Type* clone() const override;
+	virtual Type *clone() const override;
 	virtual ~NodeType();
 	void generateCode(utils::OutFile &out) override;
 	bool copyPorts(NodeType *port) override;

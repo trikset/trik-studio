@@ -53,7 +53,8 @@ protected:
 	static const int EV3_MAX_ALLOWED_FILENAME_LENGTH = 27;
 };
 
-template<typename T> char charOf(T x)
+template<typename T>
+char charOf(T x)
 {
 	return static_cast<char>(static_cast<uchar>(x));
 }

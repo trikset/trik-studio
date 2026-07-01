@@ -53,7 +53,8 @@ QMultiMap<Id, Id> Exploser::explosions(const Id &diagram) const
 				target = targetNodeOrGroup;
 			} else {
 				const Pattern pattern = mApi.editorManagerInterface().parsePattern(targetNodeOrGroup);
-				target = Id(targetNodeOrGroup.editor(), targetNodeOrGroup.diagram(), pattern.rootType());
+				target =
+					Id(targetNodeOrGroup.editor(), targetNodeOrGroup.diagram(), pattern.rootType());
 			}
 
 			const IdList allTargets = mApi.logicalRepoApi().logicalElements(target.type());
@@ -79,8 +80,8 @@ IdList Exploser::elementsWithHardDependencyFrom(const Id &id) const
 			/// This is bad, pattern root element must be compared directly, but is expensive for the moment because
 			/// pattern must be parsed each time. Can be fixed with adding some cache for patterns.
 			const bool isSameType = explosion->target().editor() == targetType.editor()
-					&& explosion->target().diagram() == targetType.diagram()
-					&& explosion->target().name().startsWith(targetType.element());
+			                        && explosion->target().diagram() == targetType.diagram()
+			                        && explosion->target().name().startsWith(targetType.element());
 			if (isSameType && explosion->requiresImmediateLinkage()) {
 				result << incoming;
 			}
@@ -90,25 +91,27 @@ IdList Exploser::elementsWithHardDependencyFrom(const Id &id) const
 	return result;
 }
 
-void Exploser::handleCreationWithExplosions(AbstractCommand *createCommand, const models::Models &models
-		, const IdList &sourceList, const Id &target) const
+void Exploser::handleCreationWithExplosions(AbstractCommand *createCommand, const models::Models &models,
+	const IdList &sourceList, const Id &target) const
 {
 	if (target.isNull()) {
 		for (const Id &source : sourceList) {
 			const QList<const Explosion *> explosions = mApi.editorManagerInterface().explosions(source);
 			for (const Explosion *explosion : explosions) {
-				if (explosion->source().typeId() == source.type() && explosion->requiresImmediateLinkage()) {
-					createCommand->addPostAction(createElementWithIncomingExplosionCommand(
-							source, explosion->target().typeId(), models));
+				if (explosion->source().typeId() == source.type()
+					&& explosion->requiresImmediateLinkage()) {
+					createCommand->addPostAction(createElementWithIncomingExplosionCommand(source,
+						explosion->target().typeId(), models));
 				}
 			}
 		}
 	} else {
 		for (const Id &source : sourceList) {
-			createCommand->addPostAction(addExplosionCommand(source, target, &models.graphicalModelAssistApi()));
+			createCommand->addPostAction(
+				addExplosionCommand(source, target, &models.graphicalModelAssistApi()));
 		}
 
-		connect(createCommand, &AbstractCommand::redoComplete, this, [&, target](bool success){
+		connect(createCommand, &AbstractCommand::redoComplete, this, [&, target](bool success) {
 			if (success) {
 				Q_EMIT explosionTargetCouldChangeProperties(target);
 			}
@@ -116,7 +119,7 @@ void Exploser::handleCreationWithExplosions(AbstractCommand *createCommand, cons
 	}
 }
 
-void Exploser::handleRemoveCommand(const IdList &explosionSources, AbstractCommand * const command) const
+void Exploser::handleRemoveCommand(const IdList &explosionSources, AbstractCommand *const command) const
 {
 	for (const Id &logicalId : explosionSources) {
 		const Id outgoing = mApi.logicalRepoApi().outgoingExplosion(logicalId);
@@ -127,15 +130,18 @@ void Exploser::handleRemoveCommand(const IdList &explosionSources, AbstractComma
 		const Id targetType = logicalId.type();
 		const IdList incomingExplosions = mApi.logicalRepoApi().incomingExplosions(logicalId);
 		for (const Id &incoming : incomingExplosions) {
-			const QList<const Explosion *> explosions = mApi.editorManagerInterface().explosions(incoming.type());
+			const QList<const Explosion *> explosions =
+				mApi.editorManagerInterface().explosions(incoming.type());
 			for (const Explosion *explosion : explosions) {
-				if (explosion->target().typeId() == targetType && !explosion->requiresImmediateLinkage()) {
-					command->addPreAction(new ExplosionCommand(mApi, nullptr, incoming, logicalId, false));
+				if (explosion->target().typeId() == targetType
+					&& !explosion->requiresImmediateLinkage()) {
+					command->addPreAction(
+						new ExplosionCommand(mApi, nullptr, incoming, logicalId, false));
 				}
 			}
 		}
 
-		connect(command, &AbstractCommand::undoComplete, this, [&, outgoing](bool success){
+		connect(command, &AbstractCommand::undoComplete, this, [&, outgoing](bool success) {
 			if (success) {
 				Q_EMIT explosionTargetCouldChangeProperties(outgoing);
 			}
@@ -143,16 +149,16 @@ void Exploser::handleRemoveCommand(const IdList &explosionSources, AbstractComma
 	}
 }
 
-AbstractCommand *Exploser::createElementWithIncomingExplosionCommand(const Id &source
-		, const Id &targetType, const models::Models &models) const
+AbstractCommand *Exploser::createElementWithIncomingExplosionCommand(const Id &source, const Id &targetType,
+	const models::Models &models) const
 {
 	AbstractCommand *result = nullptr;
 	Id newElementId;
 	if (mApi.editorManagerInterface().isNodeOrEdge(targetType.type()) == 1) {
 		const QString friendlyTargetName = mApi.editorManagerInterface().friendlyName(targetType);
 		newElementId = targetType.sameTypeId();
-		const ElementInfo toCreate(newElementId, Id(), Id::rootId(), Id::rootId()
-				, {{"name", friendlyTargetName}}, {}, Id(), false);
+		const ElementInfo toCreate(newElementId, Id(), Id::rootId(), Id::rootId(),
+			{{"name", friendlyTargetName}}, {}, Id(), false);
 		result = new CreateElementsCommand(models, {toCreate});
 	} else {
 		const ElementInfo toCreate(targetType, Id(), Id::rootId(), Id::rootId(), {}, {}, Id(), true);
@@ -185,8 +191,8 @@ Id Exploser::immediateExplosionTarget(const Id &id)
 	return Id();
 }
 
-AbstractCommand *Exploser::addExplosionCommand(const Id &source, const Id &target
-		, GraphicalModelAssistApi * const graphicalApi) const
+AbstractCommand *Exploser::addExplosionCommand(const Id &source, const Id &target,
+	GraphicalModelAssistApi *const graphicalApi) const
 {
 	AbstractCommand *result = new ExplosionCommand(mApi, graphicalApi, source, target, true);
 	connectCommand(result);
@@ -229,8 +235,10 @@ void Exploser::connectCommand(const AbstractCommand *command) const
 {
 	// Do not remove Qt::QueuedConnection flag.
 	// Immediate refreshing may cause segfault because of deleting drag source.
-	connect(command, &AbstractCommand::undoComplete, this, &Exploser::explosionsSetCouldChange, Qt::QueuedConnection);
-	connect(command, &AbstractCommand::redoComplete, this, &Exploser::explosionsSetCouldChange, Qt::QueuedConnection);
+	connect(command, &AbstractCommand::undoComplete, this, &Exploser::explosionsSetCouldChange,
+		Qt::QueuedConnection);
+	connect(command, &AbstractCommand::redoComplete, this, &Exploser::explosionsSetCouldChange,
+		Qt::QueuedConnection);
 }
 
 Id Exploser::explosionsRoot(const Id &id) const

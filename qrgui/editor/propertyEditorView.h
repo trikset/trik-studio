@@ -48,7 +48,8 @@ public:
 	/** @brief unimplemented */
 	void scrollTo(const QModelIndex &index, QAbstractItemView::ScrollHint hint = QAbstractItemView::EnsureVisible);
 
-	PropertyEditorModel* model() {
+	PropertyEditorModel *model()
+	{
 		return mModel;
 	}
 
@@ -56,15 +57,15 @@ public:
 
 Q_SIGNALS:
 	/// Emitted when user wants to edits 'Shape' property.
-	void shapeEditorRequested(const QPersistentModelIndex &index, int role
-		, const QString &propertyValue, bool useTypedPorts);
+	void shapeEditorRequested(const QPersistentModelIndex &index, int role, const QString &propertyValue,
+		bool useTypedPorts);
 
 	/// Emitted when user wants to enter a code into a property.
 	void textEditorRequested(const QPersistentModelIndex &index, const int role, const QString &propertyValue);
 
 	/// Emitted when user wants to edit some reference property.
-	void referenceListRequested(const QPersistentModelIndex &index, const QString &referenceType
-			, const QString &propertyValue, int role);
+	void referenceListRequested(const QPersistentModelIndex &index, const QString &referenceType,
+		const QString &propertyValue, int role);
 
 public Q_SLOTS:
 
@@ -87,19 +88,19 @@ private:
 	/** @brief returns index of value in list of possible values for index  */
 	int enumPropertyIndexOf(const QModelIndex &, const QString &);
 	void setPropertyValue(QtVariantProperty *property, const QVariant &value);
-	void setPropertyToRoot(const QModelIndex &index, const QList<QPair<QString, QString> > &values
-		, QtVariantProperty *vItem);
+	void setPropertyToRoot(const QModelIndex &index, const QList<QPair<QString, QString>> &values,
+		QtVariantProperty *vItem);
 	void setDescription(QtVariantProperty *vItem, int cellIndex);
-	int getType(const QString &typeName, bool &isButton, const QList<QPair<QString, QString> > &values);
-	void setPropertyFromDataChanged(const QModelIndex &valueIndex, QtVariantProperty *prop
-		, const int descriptionIndex);
+	int getType(const QString &typeName, bool &isButton, const QList<QPair<QString, QString>> &values);
+	void setPropertyFromDataChanged(const QModelIndex &valueIndex, QtVariantProperty *prop,
+		const int descriptionIndex);
 
 	QString propertyDescription(const int cellIndex) const;
 
 	bool mChangingPropertyValue {};
 	PropertyEditorModel *mModel {};
 	QScopedPointer<QtTreePropertyBrowser> mPropertyEditor;
-	qReal::models::LogicalModelAssistApi* mLogicalModelAssistApi {};
+	qReal::models::LogicalModelAssistApi *mLogicalModelAssistApi {};
 	QScopedPointer<QtVariantPropertyManager> mVariantManager;
 	QScopedPointer<QtVariantEditorFactory> mVariantFactory;
 	QScopedPointer<PushButtonPropertyManager> mButtonManager;

@@ -86,16 +86,15 @@ void VirtualCursor::sceneMoveTo(QWidget *target, int duration, int xSceneCoord, 
 		const int xcoord = target->mapTo(parentWidget(), QPoint(0, 0)).x() + xSceneCoord + 20;
 		const int ycoord = target->mapTo(parentWidget(), QPoint(0, 0)).y() + ySceneCoord + 20;
 
-		QTimer * const timer = new QTimer(this);
+		QTimer *const timer = new QTimer(this);
 		if (mRightButtonPressed) {
 			timer->setInterval(100);
 
 			// Sending move events for every 100 ms for drawing gestures.
-			connect(timer, &QTimer::timeout
-					, [this, target]() {
-						const QPoint cursorPos = target->mapFrom(parentWidget(), pos());
-						simulateMouse(target, QEvent::MouseMove, cursorPos, Qt::NoButton);
-					});
+			connect(timer, &QTimer::timeout, [this, target]() {
+				const QPoint cursorPos = target->mapFrom(parentWidget(), pos());
+				simulateMouse(target, QEvent::MouseMove, cursorPos, Qt::NoButton);
+			});
 			timer->start();
 		}
 
@@ -152,8 +151,8 @@ void VirtualCursor::startDrag(QIcon const &icon)
 
 void VirtualCursor::endDrag()
 {
-	 mDragStarted = false;
-	 update();
+	mDragStarted = false;
+	update();
 }
 
 void VirtualCursor::moved(QWidget *target)
@@ -161,8 +160,7 @@ void VirtualCursor::moved(QWidget *target)
 	simulateMouse(target, QEvent::MouseMove, widgetPos(target), Qt::NoButton);
 }
 
-void VirtualCursor::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos
-		, Qt::MouseButton button)
+void VirtualCursor::simulateMouse(QObject *reciever, QEvent::Type event, QPointF pos, Qt::MouseButton button)
 {
 	QMouseEvent *mouseEvent = new QMouseEvent(event, pos, button, button, Qt::NoModifier);
 	QApplication::postEvent(reciever, mouseEvent);

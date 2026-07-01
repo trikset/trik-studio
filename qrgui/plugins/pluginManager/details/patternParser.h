@@ -44,6 +44,5 @@ private:
 	QString mDiagram;
 	const EditorManager *mEditorManager {};
 	Pattern mPattern;
-
 };
 }

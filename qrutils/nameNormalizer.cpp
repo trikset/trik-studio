@@ -35,10 +35,9 @@ QString NameNormalizer::normalizeStrongly(const QString &name, bool upperFirst)
 {
 	QString filteredName;
 	for (const QChar &character : name) {
-		if ((filteredName.isEmpty() && (character.isLetter() || character == '_')) ||
-				(!filteredName.isEmpty() && (character.isLetterOrNumber()
-						|| character == ' ' || character == '_')))
-		{
+		if ((filteredName.isEmpty() && (character.isLetter() || character == '_'))
+			|| (!filteredName.isEmpty()
+				&& (character.isLetterOrNumber() || character == ' ' || character == '_'))) {
 			filteredName += character;
 		}
 	}
@@ -78,12 +77,10 @@ QString NameNormalizer::lowerFirst(const QString &string)
 
 QString NameNormalizer::russianTranslit(const QString &russianString)
 {
-	const QString lowerRussianLetters[] = { "а", "б", "в", "г", "д", "е", "ё", "ж", "з"
-			, "и", "й", "к", "л", "м", "н", "о", "п", "р", "с", "т", "у", "ф"
-			, "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я" };
-	const QString lowerTranslitions[] = { "a", "b", "v", "g", "d", "e", "yo", "zh", "z"
-			, "i", "y", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f"
-			, "h", "c", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya" };
+	const QString lowerRussianLetters[] = {"а", "б", "в", "г", "д", "е", "ё", "ж", "з", "и", "й", "к", "л", "м",
+		"н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ъ", "ы", "ь", "э", "ю", "я"};
+	const QString lowerTranslitions[] = {"a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "y", "k", "l", "m",
+		"n", "o", "p", "r", "s", "t", "u", "f", "h", "c", "ch", "sh", "sch", "", "y", "", "e", "yu", "ya"};
 
 	QStringList russianLetters, translitions;
 	for (uint i = 0; i < sizeof(lowerRussianLetters) / sizeof(*lowerRussianLetters); ++i) {
@@ -95,8 +92,7 @@ QString NameNormalizer::russianTranslit(const QString &russianString)
 
 	QString result;
 	for (const QChar &letter : russianString) {
-		result += russianLetters.contains(letter)
-				? translitions[russianLetters.indexOf(letter)] : letter;
+		result += russianLetters.contains(letter) ? translitions[russianLetters.indexOf(letter)] : letter;
 	}
 
 	return result;

@@ -23,16 +23,16 @@ using namespace robotModel;
 
 BlocksFactoryManager::~BlocksFactoryManager() = default;
 
-void BlocksFactoryManager::addFactory(const QSharedPointer<BlocksFactoryInterface> &factory
-		, const RobotModelInterface *robotModel)
+void BlocksFactoryManager::addFactory(const QSharedPointer<BlocksFactoryInterface> &factory,
+	const RobotModelInterface *robotModel)
 {
 	if (!mFactories.values(robotModel).contains(factory)) {
 		mFactories.insertMulti(robotModel, factory);
 	}
 }
 
-qReal::interpretation::BlockInterface *BlocksFactoryManager::block(const qReal::Id &element
-		, const RobotModelInterface &robotModel)
+qReal::interpretation::BlockInterface *BlocksFactoryManager::block(const qReal::Id &element,
+	const RobotModelInterface &robotModel)
 {
 	qReal::interpretation::BlockInterface *lastEmptyBlock = nullptr;
 
@@ -91,15 +91,15 @@ QSet<qReal::Id> BlocksFactoryManager::visibleBlocks(const RobotModelInterface &r
 QSet<qReal::Id> BlocksFactoryManager::commonBlocks() const
 {
 	QSet<qReal::Id> result;
-	for (auto &&factory: mFactories.values(nullptr)) {
+	for (auto &&factory : mFactories.values(nullptr)) {
 		result += factory->providedBlocks().toSet();
 	}
 
 	return result;
 }
 
-QList<QSharedPointer<BlocksFactoryInterface>>
-BlocksFactoryManager::factoriesFor(const RobotModelInterface &robotModel) const
+QList<QSharedPointer<BlocksFactoryInterface>> BlocksFactoryManager::factoriesFor(
+	const RobotModelInterface &robotModel) const
 {
 	return mFactories.values(nullptr) + mFactories.values(&robotModel);
 }

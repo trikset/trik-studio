@@ -12,15 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. */
 
-
 #include "joinNetworkBlock.h"
 
 using namespace trik;
 using namespace blocks::details;
 
-JoinNetworkBlock::JoinNetworkBlock(kitBase::robotModel::RobotModelInterface &robotModel):
-	kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>(robotModel)
-{}
+JoinNetworkBlock::JoinNetworkBlock(kitBase::robotModel::RobotModelInterface &robotModel)
+	: kitBase::blocksBase::common::DeviceBlock<robotModel::parts::TrikNetworkCommunicator>(robotModel)
+{
+}
 
 void JoinNetworkBlock::doJob(robotModel::parts::TrikNetworkCommunicator &network)
 {

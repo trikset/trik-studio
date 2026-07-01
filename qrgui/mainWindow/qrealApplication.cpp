@@ -38,17 +38,17 @@ bool QRealApplication::notify(QObject *obj, QEvent *e)
 	switch (e->type()) {
 	case QEvent::MouseButtonPress:
 	case QEvent::MouseButtonRelease:
-		logMouse(dynamic_cast<QWidget*>(obj), static_cast<QMouseEvent *>(e));
+		logMouse(dynamic_cast<QWidget *>(obj), static_cast<QMouseEvent *>(e));
 		break;
 	case QEvent::Wheel:
-		logWheel(dynamic_cast<QWidget*>(obj), static_cast<QWheelEvent *>(e));
+		logWheel(dynamic_cast<QWidget *>(obj), static_cast<QWheelEvent *>(e));
 		break;
 	case QEvent::KeyPress:
 	case QEvent::KeyRelease:
 		logKey(static_cast<QKeyEvent *>(e));
 		break;
 	case QEvent::Drop:
-		logDrop(dynamic_cast<QWidget*>(obj), static_cast<QDropEvent *>(e));
+		logDrop(dynamic_cast<QWidget *>(obj), static_cast<QDropEvent *>(e));
 		break;
 	default:
 		break;
@@ -64,60 +64,54 @@ bool QRealApplication::notify(QObject *obj, QEvent *e)
 	return QApplication::notify(obj, e);
 }
 
-void QRealApplication::logMouse(QWidget * const target, QMouseEvent * const event)
+void QRealApplication::logMouse(QWidget *const target, QMouseEvent *const event)
 {
 	if (!target) {
 		return;
 	}
 
-	QWidget * const window = target->window();
+	QWidget *const window = target->window();
 	const QPoint pos = target->mapTo(window, event->pos());
-	QLOG_TRACE() << "Mouse"
-			<< (event->type() == QEvent::MouseButtonPress ? "press" : "release")
-			<< "in" << pos << "with" << event->button() << "target"
-			<< window->windowTitle() << window->size();
+	QLOG_TRACE() << "Mouse" << (event->type() == QEvent::MouseButtonPress ? "press" : "release") << "in" << pos
+		     << "with" << event->button() << "target" << window->windowTitle() << window->size();
 }
 
-void QRealApplication::logWheel(QWidget * const target, QWheelEvent * const event)
+void QRealApplication::logWheel(QWidget *const target, QWheelEvent *const event)
 {
 	if (!target) {
 		return;
 	}
 
-	QWidget * const window = target->window();
+	QWidget *const window = target->window();
 	const QPoint pos = target->mapTo(window, event->pos());
-	QLOG_TRACE() << "Wheel with delta"
-			<< event->angleDelta()
-			<< "in" << pos << "target"
-			<< window->windowTitle() << window->size();
+	QLOG_TRACE() << "Wheel with delta" << event->angleDelta() << "in" << pos << "target" << window->windowTitle()
+		     << window->size();
 }
 
-void QRealApplication::logKey(QKeyEvent * const event)
+void QRealApplication::logKey(QKeyEvent *const event)
 {
-	QLOG_TRACE() << "Key"
-			<< (event->type() == QEvent::KeyPress ? "press" : "release")
-			<< "with" << event->key() << "modifiers" << event->modifiers();
+	QLOG_TRACE() << "Key" << (event->type() == QEvent::KeyPress ? "press" : "release") << "with" << event->key()
+		     << "modifiers" << event->modifiers();
 }
 
-void QRealApplication::logDrop(QWidget * const target, QDropEvent * const event)
+void QRealApplication::logDrop(QWidget *const target, QDropEvent *const event)
 {
 	if (!target) {
 		return;
 	}
 
-	QWidget * const window = target->window();
+	QWidget *const window = target->window();
 	const QPoint pos = target->mapTo(window, event->pos());
 	QLOG_TRACE() << "Drop in"
-			<< "in" << pos << "with target"
-			<< window->windowTitle() << window->size();
+		     << "in" << pos << "with target" << window->windowTitle() << window->size();
 }
 
 void QRealApplication::onFocusChanged(QWidget *old, QWidget *now)
 {
 	/// @todo: when osk.exe is called focus always returns to this process and calls it over and over again;
 	/// need to memorize last focused widget.
-	if (old != now && SettingsManager::value("touchMode").toBool()
-			&& now && now->testAttribute(Qt::WA_InputMethodEnabled)) {
+	if (old != now && SettingsManager::value("touchMode").toBool() && now
+		&& now->testAttribute(Qt::WA_InputMethodEnabled)) {
 		utils::VirtualKeyboard::show();
 	}
 }

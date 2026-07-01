@@ -23,12 +23,17 @@ namespace qReal {
 class ErrorReporterInterface : public ProgressReporterInterface
 {
 public:
-	virtual ~ErrorReporterInterface() {}
+	virtual ~ErrorReporterInterface()
+	{
+	}
 	virtual void addInformation(const QString &message, const Id &position = Id::rootId()) = 0;
 	virtual void addWarning(const QString &message, const Id &position = Id::rootId()) = 0;
 	virtual void addError(const QString &message, const Id &position = Id::rootId()) = 0;
 	virtual void addCritical(const QString &message, const Id &position = Id::rootId()) = 0;
-	virtual void addLog(const QString &message) { Q_UNUSED(message) }
+	virtual void addLog(const QString &message)
+	{
+		Q_UNUSED(message)
+	}
 
 	/// Shows beautifully bubbling \a message in the top-right corner of \a parent for
 	/// \a duration / 2 milliseconds, then the message fades away for the same time.

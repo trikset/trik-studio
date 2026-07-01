@@ -30,8 +30,8 @@ public:
 	virtual ~GeneratorModelExtensionInterface() = default;
 
 	/// Adds pre-configured device to the given port.
-	virtual void addDevice(const kitBase::robotModel::PortInfo &port
-			, kitBase::robotModel::robotParts::Device * const device) = 0;
+	virtual void addDevice(const kitBase::robotModel::PortInfo &port,
+		kitBase::robotModel::robotParts::Device *const device) = 0;
 };
 
 }

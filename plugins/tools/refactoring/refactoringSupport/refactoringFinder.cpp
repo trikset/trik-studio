@@ -22,13 +22,11 @@
 
 using namespace qReal;
 
-RefactoringFinder::RefactoringFinder(
-		LogicalModelAssistInterface &logicalModelApi
-		, GraphicalModelAssistInterface &graphicalModelApi
-		, gui::MainWindowInterpretersInterface &interpretersInterface
-		, qrRepo::RepoApi *refactoringRepoApi)
-		: BaseGraphTransformationUnit(logicalModelApi, graphicalModelApi, interpretersInterface)
-		, mRefactoringRepoApi(refactoringRepoApi)
+RefactoringFinder::RefactoringFinder(LogicalModelAssistInterface &logicalModelApi,
+	GraphicalModelAssistInterface &graphicalModelApi, gui::MainWindowInterpretersInterface &interpretersInterface,
+	qrRepo::RepoApi *refactoringRepoApi)
+	: BaseGraphTransformationUnit(logicalModelApi, graphicalModelApi, interpretersInterface)
+	, mRefactoringRepoApi(refactoringRepoApi)
 {
 	mDefaultProperties.insert("ID");
 }
@@ -83,9 +81,10 @@ void RefactoringFinder::highlightMatch()
 {
 	if (findMatch()) {
 		for (int i = 0; i < mMatches.size(); ++i) {
-			QHash <Id, Id> currentMatch = mMatches.at(i);
+			QHash<Id, Id> currentMatch = mMatches.at(i);
 			for (Id const &id : currentMatch.keys()) {
-				QColor const color = QColor(SettingsManager::value("refactoringColor", "cyan").toString());
+				QColor const color =
+					QColor(SettingsManager::value("refactoringColor", "cyan").toString());
 				bool isExclusive = false;
 				mInterpretersInterface.highlight(currentMatch.value(id), isExclusive, color);
 				pause(500);
@@ -122,8 +121,7 @@ bool RefactoringFinder::compareElements(Id const &first, Id const &second) const
 	return compareElementTypesAndProperties(first, second);
 }
 
-bool RefactoringFinder::compareElementTypesAndProperties(Id const &first,
-		Id const &second) const
+bool RefactoringFinder::compareElementTypesAndProperties(Id const &first, Id const &second) const
 {
 	if (first == Id::rootId()) {
 		return false;

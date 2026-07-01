@@ -17,9 +17,8 @@
 using namespace qReal;
 using namespace qReal::gui::editor;
 
-CurveLine::CurveLine(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel)
+CurveLine::CurveLine(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+	const GraphicalModelAssistInterface &graphicalModel)
 	: LineHandler(edge, logicalModel, graphicalModel)
 {
 	setBezierPoints();

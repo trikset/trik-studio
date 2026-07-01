@@ -22,22 +22,22 @@ class Line : public Item
 {
 	Q_OBJECT
 public:
-	Line(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent = nullptr);
+	Line(qreal x1, qreal y1, qreal x2, qreal y2, Item *parent = nullptr);
 	QLineF line() const;
 	QPainterPath shape() const;
 	virtual QRectF boundingRect() const;
 	virtual QRectF realBoundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
-	virtual void drawExtractionForItem(QPainter* painter);
-	virtual void drawScalingRects(QPainter* painter);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
+	virtual void drawExtractionForItem(QPainter *painter);
+	virtual void drawScalingRects(QPainter *painter);
 	virtual void changeScalingPointState(qreal x, qreal y);
 	virtual void resizeItem(QGraphicsSceneMouseEvent *event);
 	virtual void reshapeRectWithShift();
 
-	QPair<QPair<QString, QString>, QPair<QString, QString> > setXandYBefore(QRect rect);
-	void setDomXandY(QDomElement &dom, const QPair<QPair<QString, QString>, QPair<QString, QString> > &pair);
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	QPair<QPair<QString, QString>, QPair<QString, QString>> setXandYBefore(QRect rect);
+	void setDomXandY(QDomElement &dom, const QPair<QPair<QString, QString>, QPair<QString, QString>> &pair);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
 
 private:
 	graphicsUtils::LineImpl mLineImpl;

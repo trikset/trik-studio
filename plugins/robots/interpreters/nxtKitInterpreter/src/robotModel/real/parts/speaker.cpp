@@ -19,8 +19,8 @@
 using namespace nxt::robotModel::real::parts;
 using namespace kitBase::robotModel;
 
-Speaker::Speaker(const DeviceInfo &info, const PortInfo &port
-		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+Speaker::Speaker(const DeviceInfo &info, const PortInfo &port,
+	utils::robotCommunication::RobotCommunicator &robotCommunicator)
 	: robotModel::parts::NxtSpeaker(info, port)
 	, mRobotCommunicator(robotCommunicator)
 {
@@ -29,7 +29,7 @@ Speaker::Speaker(const DeviceInfo &info, const PortInfo &port
 void Speaker::playTone(unsigned freq, unsigned time)
 {
 	QByteArray command(8, 0);
-	command[0] = 0x06;  //command length
+	command[0] = 0x06; //command length
 	command[1] = 0x00;
 	command[2] = enums::telegramType::directCommandNoResponse;
 	command[3] = enums::commandCode::PLAYTONE;

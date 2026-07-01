@@ -27,19 +27,24 @@ enum ReadOnlyEnum {
 	None = 0
 
 	/// World model is read-only, so walls, colored lines and areas etc. can not be added, moved or deleted.
-	, World = 1
+	,
+	World = 1
 
 	/// Robot sensor positions and directions are read-only, and user is not allowed to add or remove sensors.
-	, Sensors = 2
+	,
+	Sensors = 2
 
 	/// Robot starting position and direction is read-only.
-	, RobotPosition = 4
+	,
+	RobotPosition = 4
 
 	/// Robot model configuration parameters such as wheel to motor port bindings are read-only.
-	, RobotSetup = 8
+	,
+	RobotSetup = 8
 
 	/// Simulation parameters like used physics engine and simulation speed are read-only.
-	, SimulationSettings = 16
+	,
+	SimulationSettings = 16
 };
 
 }

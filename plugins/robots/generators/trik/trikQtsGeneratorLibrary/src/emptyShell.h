@@ -24,8 +24,7 @@ class EmptyShell : public robotModel::parts::TrikShell
 	Q_OBJECT
 
 public:
-	EmptyShell(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port);
+	EmptyShell(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port);
 
 public Q_SLOTS:
 	void print(const QString &text) override;

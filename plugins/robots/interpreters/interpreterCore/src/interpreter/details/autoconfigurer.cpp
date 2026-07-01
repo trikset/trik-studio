@@ -25,10 +25,9 @@ using namespace interpreterCore::interpreter::details;
 using namespace qReal;
 using namespace kitBase::robotModel;
 
-Autoconfigurer::Autoconfigurer(const GraphicalModelAssistInterface &graphicalModelApi
-		, const LogicalModelAssistInterface &logicalModelApi
-		, BlocksTable &blocksTable
-		, qReal::ErrorReporterInterface &errorReporter)
+Autoconfigurer::Autoconfigurer(const GraphicalModelAssistInterface &graphicalModelApi,
+	const LogicalModelAssistInterface &logicalModelApi, BlocksTable &blocksTable,
+	qReal::ErrorReporterInterface &errorReporter)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mLogicalModelApi(logicalModelApi)
 	, mBlocksTable(blocksTable)
@@ -42,8 +41,8 @@ bool Autoconfigurer::configure(QList<qReal::Id> const &diagrams, const QString &
 		const IdList children = mGraphicalModelApi.graphicalRepoApi().children(diagram);
 
 		for (const Id &child : children) {
-			kitBase::blocksBase::RobotsBlock * const block
-					= dynamic_cast<kitBase::blocksBase::RobotsBlock *>(mBlocksTable.block(child));
+			kitBase::blocksBase::RobotsBlock *const block =
+				dynamic_cast<kitBase::blocksBase::RobotsBlock *>(mBlocksTable.block(child));
 			if (!block) {
 				continue;
 			}
@@ -53,16 +52,24 @@ bool Autoconfigurer::configure(QList<qReal::Id> const &diagrams, const QString &
 				const DeviceInfo device = usedDevices[port];
 				const DeviceInfo existingDevice = currentConfiguration(robotId, port);
 				if (device.isA<robotParts::Motor>() || device.isA<robotParts::EncoderSensor>()
-						|| existingDevice.isA(device)) {
+					|| existingDevice.isA(device)) {
 					// Do nothing
 				} else if (!mLogicalModelApi.mutableLogicalRepoApi()
-						.metaInformation("twoDModelSensorsReadOnly").toBool() && existingDevice.isNull()) {
-					mErrorReporter.addInformation(QObject::tr("%2 has been auto configured to "\
-							"port %1").arg(port.name(), device.friendlyName()), child);
-					deviceConfigurationChanged(robotId, port, device, Reason::automaticConfiguration);
+						   .metaInformation("twoDModelSensorsReadOnly")
+						   .toBool()
+					   && existingDevice.isNull()) {
+					mErrorReporter.addInformation(QObject::tr("%2 has been auto configured to "
+										  "port %1")
+									      .arg(port.name(), device.friendlyName()),
+						child);
+					deviceConfigurationChanged(robotId, port, device,
+						Reason::automaticConfiguration);
 				} else {
-					mErrorReporter.addError(QObject::tr("Sensor on port %1 does not correspond to blocks "\
-							"on the diagram.").arg(port.name()), child);
+					mErrorReporter.addError(
+						QObject::tr("Sensor on port %1 does not correspond to blocks "
+							    "on the diagram.")
+							.arg(port.name()),
+						child);
 					return false;
 				}
 			}

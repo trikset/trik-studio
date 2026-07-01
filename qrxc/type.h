@@ -21,7 +21,7 @@ class Property;
 class Diagram;
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class Type
@@ -30,7 +30,7 @@ class Type
 public:
 	Type(bool isResolved, Diagram *diagram);
 	virtual ~Type();
-	virtual Type* clone() const = 0;
+	virtual Type *clone() const = 0;
 	virtual bool init(const QDomElement &element, const QString &context);
 	virtual bool resolve() = 0;
 	virtual bool isResolving() const;
@@ -42,7 +42,7 @@ public:
 	QString displayedName() const;
 	Diagram *diagram() const;
 
-	QMap<QString, Property*> properties() const;
+	QMap<QString, Property *> properties() const;
 
 	void setName(const QString &name);
 	void setDiagram(Diagram *diagram);
@@ -55,7 +55,7 @@ protected:
 	void copyFields(Type *type) const;
 	QString nativeContext() const;
 
-	QMap<QString, Property*> mProperties;
+	QMap<QString, Property *> mProperties;
 	bool mResolvingFinished;
 	Diagram *mDiagram;
 

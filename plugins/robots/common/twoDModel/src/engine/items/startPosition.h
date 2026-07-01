@@ -19,12 +19,12 @@
 namespace twoDModel {
 namespace items {
 
-class StartPosition: public graphicsUtils::RotateItem
+class StartPosition : public graphicsUtils::RotateItem
 {
 	Q_OBJECT
 public:
-	explicit StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	                       QSizeF robotSize, QGraphicsItem *parent = nullptr);
+	explicit StartPosition(graphicsUtils::AbstractCoordinateSystem *metricSystem, QSizeF robotSize,
+		QGraphicsItem *parent = nullptr);
 
 	QRectF boundingRect() const override;
 	void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
@@ -34,8 +34,9 @@ public:
 	void deserializeCompatibly(const QDomElement &robotElement);
 public Q_SLOTS:
 	void onSizeUpdated(const QSizeF size);
+
 private:
-	void drawFieldForResizeItem(QPainter* painter) override;
+	void drawFieldForResizeItem(QPainter *painter) override;
 	void changeDragState(qreal x, qreal y) override;
 
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event) override;

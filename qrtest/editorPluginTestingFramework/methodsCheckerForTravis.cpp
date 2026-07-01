@@ -19,14 +19,14 @@
 
 using namespace editorPluginTestingFramework;
 
-int MethodsCheckerForTravis::calculateResult(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult
-		, QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult)
+int MethodsCheckerForTravis::calculateResult(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
+	QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult)
 {
 	const bool resultForQrxcAndQrmc = calculateResultForOneList(qrxcAndQrmcResult);
 	const bool resultForQrxcAndInterpreter = calculateResultForOneList(qrxcAndInterpreterResult);
 
 	qDebug() << "Comparison between qrxc and qrmc: " << resultForQrxcAndQrmc
-		<< ", Comparison between qrxc and interpreter: " << resultForQrxcAndInterpreter;
+		 << ", Comparison between qrxc and interpreter: " << resultForQrxcAndInterpreter;
 
 	const bool booleanResult = (resultForQrxcAndQrmc && resultForQrxcAndInterpreter);
 	const int result = booleanResult ? 0 : 1;

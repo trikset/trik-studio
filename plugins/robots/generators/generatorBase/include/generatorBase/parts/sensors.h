@@ -37,15 +37,13 @@ public:
 	virtual QString isrHooksCode();
 
 protected:
-	void reinitPort(const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &device);
+	void reinitPort(const kitBase::robotModel::PortInfo &port, const kitBase::robotModel::DeviceInfo &device);
 
-	virtual QString code(const QString &directory
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &device);
+	virtual QString code(const QString &directory, const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &device);
 
 private:
-	const simple::Binding::ConverterInterface *mInputPortConverter;  // Takes ownership
+	const simple::Binding::ConverterInterface *mInputPortConverter; // Takes ownership
 	QStringList mInitCode;
 	QStringList mTerminateCode;
 	QStringList mIsrHooksCode;

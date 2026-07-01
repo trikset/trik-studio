@@ -32,11 +32,9 @@ Block::Block()
 	connect(this, &BlockInterface::done, this, &Block::finishedRunning);
 }
 
-void Block::init(const Id &graphicalId
-		, const GraphicalModelAssistInterface *graphicalModelApi
-		, const LogicalModelAssistInterface *logicalModelApi
-		, ErrorReporterInterface * const errorReporter
-		, qrtext::LanguageToolboxInterface *textLanguageToolbox)
+void Block::init(const Id &graphicalId, const GraphicalModelAssistInterface *graphicalModelApi,
+	const LogicalModelAssistInterface *logicalModelApi, ErrorReporterInterface *const errorReporter,
+	qrtext::LanguageToolboxInterface *textLanguageToolbox)
 {
 	mGraphicalId = graphicalId;
 	mGraphicalModelApi = graphicalModelApi;
@@ -44,8 +42,8 @@ void Block::init(const Id &graphicalId
 	mErrorReporter = errorReporter;
 	mParser = textLanguageToolbox;
 	if (mLogicalModelApi) {
-		mParserErrorReporter.reset(new utils::ParserErrorReporter(*mParser, *mErrorReporter
-				, mLogicalModelApi->editorManagerInterface()));
+		mParserErrorReporter.reset(new utils::ParserErrorReporter(*mParser, *mErrorReporter,
+			mLogicalModelApi->editorManagerInterface()));
 	}
 }
 

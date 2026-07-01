@@ -22,15 +22,16 @@ class Image : public Item
 {
 	Q_OBJECT
 public:
-	Image(const QString &fileName, qreal x, qreal y, Item* parent = nullptr);
+	Image(const QString &fileName, qreal x, qreal y, Item *parent = nullptr);
 	virtual QRectF boundingRect() const;
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
 	virtual void setItemZValue(int zValue);
 
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
+
 private:
-	QGraphicsPixmapItem* mPixmapItem;
+	QGraphicsPixmapItem *mPixmapItem;
 	QImage mImage;
 	QString mFileName;
 };

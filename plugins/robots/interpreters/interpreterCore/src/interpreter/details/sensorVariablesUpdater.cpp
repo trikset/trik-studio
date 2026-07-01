@@ -22,9 +22,8 @@
 using namespace interpreterCore::interpreter::details;
 using namespace kitBase::robotModel;
 
-SensorVariablesUpdater::SensorVariablesUpdater(const RobotModelManagerInterface &robotModelManager
-		, qrtext::DebuggerInterface &textLanguageToolbox
-		)
+SensorVariablesUpdater::SensorVariablesUpdater(const RobotModelManagerInterface &robotModelManager,
+	qrtext::DebuggerInterface &textLanguageToolbox)
 	: mRobotModelManager(robotModelManager)
 	, mParser(textLanguageToolbox)
 {
@@ -40,8 +39,8 @@ void SensorVariablesUpdater::run()
 	connect(mUpdateTimer.data(), &utils::AbstractTimer::timeout, this, &SensorVariablesUpdater::onTimerTimeout);
 	resetVariables();
 
-	for (robotParts::Device * const device : mRobotModelManager.model().configuration().devices()) {
-		robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+	for (robotParts::Device *const device : mRobotModelManager.model().configuration().devices()) {
+		robotParts::ScalarSensor *const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 		if (scalarSensor && !scalarSensor->port().reservedVariable().isEmpty()) {
 
 			if (!scalarSensor->ready()) {
@@ -50,27 +49,18 @@ void SensorVariablesUpdater::run()
 			}
 
 			using namespace std::placeholders;
-			connect(
-					scalarSensor
-					, &robotParts::ScalarSensor::newData
-					, this
-					, std::bind(&SensorVariablesUpdater::onScalarSensorResponse, this,
-									std::bind(&QVariant::value<int>, _1))
-					, Qt::UniqueConnection
-					);
+			connect(scalarSensor, &robotParts::ScalarSensor::newData, this,
+				std::bind(&SensorVariablesUpdater::onScalarSensorResponse, this,
+					std::bind(&QVariant::value<int>, _1)),
+				Qt::UniqueConnection);
 
-			connect(
-					scalarSensor
-					, &robotParts::AbstractSensor::failure
-					, this
-					, &SensorVariablesUpdater::onFailure
-					, Qt::UniqueConnection
-					);
+			connect(scalarSensor, &robotParts::AbstractSensor::failure, this,
+				&SensorVariablesUpdater::onFailure, Qt::UniqueConnection);
 
 			continue;
 		}
 
-		robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
+		robotParts::VectorSensor *const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
 		if (vectorSensor && !vectorSensor->port().reservedVariable().isEmpty()) {
 
 			if (!vectorSensor->ready()) {
@@ -79,22 +69,13 @@ void SensorVariablesUpdater::run()
 			}
 
 			using namespace std::placeholders;
-			connect(
-					vectorSensor
-					, &robotParts::VectorSensor::newData
-					, this
-					, std::bind(&SensorVariablesUpdater::onVectorSensorResponse,
-								this, std::bind(&QVariant::value<QVector<int>>, _1))
-					, Qt::UniqueConnection
-					);
+			connect(vectorSensor, &robotParts::VectorSensor::newData, this,
+				std::bind(&SensorVariablesUpdater::onVectorSensorResponse, this,
+					std::bind(&QVariant::value<QVector<int>>, _1)),
+				Qt::UniqueConnection);
 
-			connect(
-					vectorSensor
-					, &robotParts::AbstractSensor::failure
-					, this
-					, &SensorVariablesUpdater::onFailure
-					, Qt::UniqueConnection
-					);
+			connect(vectorSensor, &robotParts::AbstractSensor::failure, this,
+				&SensorVariablesUpdater::onFailure, Qt::UniqueConnection);
 
 			continue;
 		}
@@ -114,7 +95,7 @@ void SensorVariablesUpdater::suspend()
 
 void SensorVariablesUpdater::onScalarSensorResponse(int reading)
 {
-	robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(sender());
+	robotParts::ScalarSensor *const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(sender());
 	if (!scalarSensor) {
 		/// @todo Error reporting.
 		return;
@@ -125,7 +106,7 @@ void SensorVariablesUpdater::onScalarSensorResponse(int reading)
 
 void SensorVariablesUpdater::onVectorSensorResponse(const QVector<int> &reading)
 {
-	robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(sender());
+	robotParts::VectorSensor *const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(sender());
 	if (!vectorSensor) {
 		/// @todo Error reporting.
 		return;
@@ -172,8 +153,8 @@ void SensorVariablesUpdater::updateVectorSensorVariable(const QString &variable,
 
 void SensorVariablesUpdater::resetVariables()
 {
-	for (robotParts::Device * const device : mRobotModelManager.model().configuration().devices()) {
-		robotParts::AbstractSensor * const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+	for (robotParts::Device *const device : mRobotModelManager.model().configuration().devices()) {
+		robotParts::AbstractSensor *const sensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 		if (!sensor) {
 			return;
 		}
@@ -181,12 +162,12 @@ void SensorVariablesUpdater::resetVariables()
 		// Sensor state must be unlocked before interpretation starts even if it was not unlocked previous session.
 		sensor->setLocked(false);
 
-		robotParts::ScalarSensor * const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
+		robotParts::ScalarSensor *const scalarSensor = dynamic_cast<robotParts::ScalarSensor *>(device);
 		if (scalarSensor) {
 			updateScalarSensorVariables(scalarSensor->port(), 0);
 		}
 
-		robotParts::VectorSensor * const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
+		robotParts::VectorSensor *const vectorSensor = dynamic_cast<robotParts::VectorSensor *>(device);
 		if (vectorSensor) {
 			scalarSensor->setLocked(false);
 			updateVectorSensorVariables(vectorSensor->port(), {});

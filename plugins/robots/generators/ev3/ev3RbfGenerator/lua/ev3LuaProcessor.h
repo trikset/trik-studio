@@ -34,10 +34,8 @@ class Ev3LuaProcessor : public generatorBase::lua::LuaProcessor
 	Q_OBJECT
 
 public:
-	Ev3LuaProcessor(qReal::ErrorReporterInterface &errorReporter
-			, qrtext::LanguageToolboxInterface &textLanguage
-			, const utils::ParserErrorReporter &parserErrorReporter
-			, QObject *parent = nullptr);
+	Ev3LuaProcessor(qReal::ErrorReporterInterface &errorReporter, qrtext::LanguageToolboxInterface &textLanguage,
+		const utils::ParserErrorReporter &parserErrorReporter, QObject *parent = nullptr);
 
 	~Ev3LuaProcessor() override;
 
@@ -49,25 +47,22 @@ public:
 	/// Converts the given Lua code into the EV3 bytecode and substitues all
 	/// reserved variables and functions code.
 	/// Takes ownership on @arg reservedVariablesConverter.
-	QString translate(const QString &luaCode
-			, const qReal::Id &id
-			, const QString &propertyName
-			, const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter) override;
+	QString translate(const QString &luaCode, const qReal::Id &id, const QString &propertyName,
+		const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter) override;
 
 	/// Converts the given Lua code into the EV3 bytecode, substitues all
 	/// reserved variables and functions code and casts the result to string.
 	/// Takes ownership on @arg reservedVariablesConverter.
-	QString castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type
-			, const QString &luaCode
-			, const qReal::Id &id
-			, const QString &propertyName
-			, const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter) override;
+	QString castTo(const QSharedPointer<qrtext::core::types::TypeExpression> &type, const QString &luaCode,
+		const qReal::Id &id, const QString &propertyName,
+		const generatorBase::simple::Binding::ConverterInterface *reservedVariablesConverter) override;
 
 	/// Returns code that initializes all known constants.
 	QString constantsValuation() const;
 
 	/// Returns code that initializes all known arrays.
 	QString arraysInitialization() const;
+
 private:
 	void preparePrinter();
 

@@ -41,9 +41,9 @@ public:
 	LogicalModel(qrRepo::LogicalRepoApi *repoApi, const EditorManagerInterface &editorManagerInterface);
 	virtual ~LogicalModel() override;
 
-	void connectToGraphicalModel(GraphicalModel * const graphicalModel);
+	void connectToGraphicalModel(GraphicalModel *const graphicalModel);
 	void updateElements(const Id &logicalId, const QString &name);
-	virtual QMimeData* mimeData(const QModelIndexList &indexes) const override;
+	virtual QMimeData *mimeData(const QModelIndexList &indexes) const override;
 	void addElementToModel(ElementInfo &elementInfo) override;
 	void addElementsToModel(QList<ElementInfo> &elementsInfo) override;
 	virtual QVariant data(const QModelIndex &index, int role) const override;
@@ -53,29 +53,28 @@ public:
 	const qrRepo::LogicalRepoApi &api() const;
 	qrRepo::LogicalRepoApi &mutableApi() const;
 	virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
-	virtual qReal::details::ModelsAssistInterface* modelAssistInterface() const override;
+	virtual qReal::details::ModelsAssistInterface *modelAssistInterface() const override;
 	LogicalModelAssistApi &logicalModelAssistApi() const;
 	virtual void stackBefore(const QModelIndex &element, const QModelIndex &sibling) override;
 
 private:
 	virtual void init() override;
-	void loadSubtreeFromClient(modelsImplementation::LogicalModelItem * const parent);
-	modelsImplementation::LogicalModelItem *loadElement(modelsImplementation::LogicalModelItem *parentItem
-			, const Id &id);
+	void loadSubtreeFromClient(modelsImplementation::LogicalModelItem *const parent);
+	modelsImplementation::LogicalModelItem *loadElement(modelsImplementation::LogicalModelItem *parentItem,
+		const Id &id);
 	void addInsufficientProperties(const Id &id, const QString &name = QString());
 
-	virtual modelsImplementation::AbstractModelItem *createModelItem(const Id &id
-			, modelsImplementation::AbstractModelItem *parentItem) const override;
+	virtual modelsImplementation::AbstractModelItem *createModelItem(const Id &id,
+		modelsImplementation::AbstractModelItem *parentItem) const override;
 	void addTree(const Id &parent, const QMultiMap<Id, ElementInfo> &childrenOfParents, QSet<Id> &visited);
 	/// Adds entries to row model without inserting rows and notifying about that connected views.
 	/// @returns created model item.
-	modelsImplementation::AbstractModelItem *createElementWithoutCommit(const ElementInfo &elementInfo
-			, modelsImplementation::AbstractModelItem *parentItem);
-	void initializeElement(const ElementInfo &elementInfo
-			, modelsImplementation::AbstractModelItem *parentItem
-			, modelsImplementation::AbstractModelItem *item);
-	virtual void removeModelItemFromApi(details::modelsImplementation::AbstractModelItem *const root
-			, details::modelsImplementation::AbstractModelItem *child) override;
+	modelsImplementation::AbstractModelItem *createElementWithoutCommit(const ElementInfo &elementInfo,
+		modelsImplementation::AbstractModelItem *parentItem);
+	void initializeElement(const ElementInfo &elementInfo, modelsImplementation::AbstractModelItem *parentItem,
+		modelsImplementation::AbstractModelItem *item);
+	virtual void removeModelItemFromApi(details::modelsImplementation::AbstractModelItem *const root,
+		details::modelsImplementation::AbstractModelItem *child) override;
 
 	QVariant dynamicPropertyData(const Id &id, int role) const;
 

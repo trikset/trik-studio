@@ -25,7 +25,8 @@ class QRREPO_EXPORT CorruptSaveFileException : public QrRepoException
 public:
 	explicit CorruptSaveFileException(const QString &fileName)
 		: QrRepoException("Corrupt save file: " + fileName)
-	{}
+	{
+	}
 };
 
 }

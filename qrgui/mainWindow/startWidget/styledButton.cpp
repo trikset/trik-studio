@@ -28,18 +28,18 @@ StyledButton::StyledButton(const QString &text, const QString &icon, QWidget *pa
 	setMouseTracking(true);
 
 	auto direction = icon.isEmpty() ? QBoxLayout::LeftToRight : QBoxLayout::TopToBottom;
-	QBoxLayout * const layout = new QBoxLayout(direction);
+	QBoxLayout *const layout = new QBoxLayout(direction);
 
 	if (!icon.isEmpty()) {
 		setObjectName("withIcon");
 		layout->addStretch();
-		QWidget * const circleWidget = new CircleWidget(QSize(100, 100), icon);
+		QWidget *const circleWidget = new CircleWidget(QSize(100, 100), icon);
 		layout->addWidget(circleWidget);
 		layout->setAlignment(circleWidget, Qt::AlignHCenter);
 		bindHighlightedOnHover(circleWidget);
 	}
 
-	QLabel * const textLabel = new QLabel(text);
+	QLabel *const textLabel = new QLabel(text);
 	textLabel->setWordWrap(true);
 	textLabel->setAttribute(Qt::WA_Hover);
 	if (!icon.isEmpty()) {
@@ -66,7 +66,7 @@ StyledButton::StyledButton(const QString &text, const QString &icon, QWidget *pa
 	setLayout(layout);
 }
 
-void StyledButton::bindHighlightedOnHover(QWidget * const widget)
+void StyledButton::bindHighlightedOnHover(QWidget *const widget)
 {
 	widget->setProperty("enabled", false);
 	mChildren << widget;
@@ -86,7 +86,7 @@ void StyledButton::leaveEvent(QEvent *event)
 
 void StyledButton::highlight(bool on)
 {
-	for (QWidget * const child : mChildren) {
+	for (QWidget *const child : mChildren) {
 		child->setProperty("enabled", on);
 		child->style()->unpolish(child);
 		child->style()->polish(child);

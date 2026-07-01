@@ -26,14 +26,9 @@
 using namespace generatorBase;
 using namespace qReal;
 
-ControlFlowGeneratorBase::ControlFlowGeneratorBase(const qrRepo::RepoApi &repo
-		, ErrorReporterInterface &errorReporter
-		, GeneratorCustomizer &customizer
-		, PrimaryControlFlowValidator &validator
-		, const Id &diagramId
-		, QObject *parent
-		, bool isThisDiagramMain
-		)
+ControlFlowGeneratorBase::ControlFlowGeneratorBase(const qrRepo::RepoApi &repo, ErrorReporterInterface &errorReporter,
+	GeneratorCustomizer &customizer, PrimaryControlFlowValidator &validator, const Id &diagramId, QObject *parent,
+	bool isThisDiagramMain)
 	: QObject(parent)
 	, RobotsDiagramVisitor(repo, customizer)
 	, mRepo(repo)
@@ -87,10 +82,10 @@ void ControlFlowGeneratorBase::performGeneration()
 	startSearch(mSemanticTree->initialBlock());
 }
 
-void ControlFlowGeneratorBase::registerOtherThreads(const Id &id, const QList<LinkInfo> &threads
-		, const QHash<Id, QString> &threadIds, parts::Threads &threadsStorage)
+void ControlFlowGeneratorBase::registerOtherThreads(const Id &id, const QList<LinkInfo> &threads,
+	const QHash<Id, QString> &threadIds, parts::Threads &threadsStorage)
 {
-	semantics::ForkNode * const fork = static_cast<semantics::ForkNode *>(mSemanticTree->findNodeFor(id));
+	semantics::ForkNode *const fork = static_cast<semantics::ForkNode *>(mSemanticTree->findNodeFor(id));
 
 	for (const LinkInfo &thread : threads) {
 		threadsStorage.registerThread(thread.target, threadIds[thread.linkId]);
@@ -98,8 +93,7 @@ void ControlFlowGeneratorBase::registerOtherThreads(const Id &id, const QList<Li
 	}
 }
 
-void ControlFlowGeneratorBase::registerTerminatingThreads(const Id &id, parts::Threads &threadsStorage
-		, bool fromMain)
+void ControlFlowGeneratorBase::registerTerminatingThreads(const Id &id, parts::Threads &threadsStorage, bool fromMain)
 {
 	semantics::JoinNode *join = static_cast<semantics::JoinNode *>(mSemanticTree->findNodeFor(id));
 	join->setThreadId(mThreadId);
@@ -113,7 +107,7 @@ bool ControlFlowGeneratorBase::generateForks()
 {
 	while (mCustomizer.factory()->threads().hasUnprocessedThreads()) {
 		const Id thread = mCustomizer.factory()->threads().nextUnprocessedThread();
-		ControlFlowGeneratorBase * const threadGenerator = this->cloneFor(thread, false);
+		ControlFlowGeneratorBase *const threadGenerator = this->cloneFor(thread, false);
 		if (!threadGenerator->generate(thread, mCustomizer.factory()->threads().threadId(thread))) {
 			return false;
 		}
@@ -209,7 +203,7 @@ void ControlFlowGeneratorBase::visitFork(const Id &id, QList<LinkInfo> &links)
 		}
 	}
 
-	visitRegular(id, { currentThread });
+	visitRegular(id, {currentThread});
 	links.removeAll(currentThread);
 	registerOtherThreads(id, links, threadIds, mCustomizer.factory()->threads());
 

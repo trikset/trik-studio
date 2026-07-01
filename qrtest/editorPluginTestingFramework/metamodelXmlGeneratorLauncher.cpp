@@ -25,8 +25,8 @@
 using namespace metaEditor;
 using namespace editorPluginTestingFramework;
 
-void MetamodelXmlGeneratorLauncher::launchEditorGenerator(const QString &fileName, const QString &pathToQRealSources
-		, const QString &pathToGeneratedCode)
+void MetamodelXmlGeneratorLauncher::launchEditorGenerator(const QString &fileName, const QString &pathToQRealSources,
+	const QString &pathToGeneratedCode)
 {
 	qDebug() << "Starting editor generator...";
 

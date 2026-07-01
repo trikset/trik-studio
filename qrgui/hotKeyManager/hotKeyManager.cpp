@@ -33,7 +33,7 @@ HotKeyManager::~HotKeyManager()
 {
 }
 
-HotKeyManager& HotKeyManager::instance()
+HotKeyManager &HotKeyManager::instance()
 {
 	static HotKeyManager instance;
 	return instance;

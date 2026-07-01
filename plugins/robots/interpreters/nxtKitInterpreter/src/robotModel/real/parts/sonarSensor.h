@@ -31,9 +31,8 @@ class SonarSensor : public kitBase::robotModel::robotParts::RangeSensor
 	Q_CLASSINFO("friendlyName", tr("Sonar sensor"))
 
 public:
-	SonarSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	SonarSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 	void doConfiguration() override;

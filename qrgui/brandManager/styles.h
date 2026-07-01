@@ -32,7 +32,6 @@ public:
 	{
 	}
 
-	
 	virtual ~Styles() = default;
 
 	/// Returns json stylesheet for start tab background
@@ -88,18 +87,18 @@ public:
 		return loadSystemPallete(utils::InFile::readAll(splashscreenStylePath()));
 	}
 
-	QPalette loadPalette(const QString& pathToPalette) const;
+	QPalette loadPalette(const QString &pathToPalette) const;
 
 protected:
-	QString loadSystemPallete(QString style) const {
+	QString loadSystemPallete(QString style) const
+	{
 		auto systemPalette(QApplication::palette());
-		return style
-		.replace("@@Window@@", systemPalette.color(QPalette::Window).name())
-		.replace("@@Base@@", systemPalette.color(QPalette::Base).name())
-		.replace("@@Font@@", mFonts.commandButtonsFont())
-		.replace("@@Light@@", systemPalette.color(QPalette::Light).name())
-		.replace("@@Highlight@@", systemPalette.color(QPalette::Highlight).name())
-		.replace("@@Text@@", systemPalette.color(QPalette::Text).name());
+		return style.replace("@@Window@@", systemPalette.color(QPalette::Window).name())
+		        .replace("@@Base@@", systemPalette.color(QPalette::Base).name())
+		        .replace("@@Font@@", mFonts.commandButtonsFont())
+		        .replace("@@Light@@", systemPalette.color(QPalette::Light).name())
+		        .replace("@@Highlight@@", systemPalette.color(QPalette::Highlight).name())
+		        .replace("@@Text@@", systemPalette.color(QPalette::Text).name());
 	}
 
 	/// Returns a path to a file with json stylesheet for start tab background

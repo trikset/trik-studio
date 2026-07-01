@@ -24,15 +24,13 @@ namespace robotModel {
 namespace real {
 namespace parts {
 
-class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT PowerMotorsAggregator
-	: public robotModel::parts::TrikMotorsAggregator
+class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT PowerMotorsAggregator : public robotModel::parts::TrikMotorsAggregator
 {
 	Q_OBJECT
 
 public:
-	PowerMotorsAggregator(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
+	PowerMotorsAggregator(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::TcpRobotCommunicator &tcpRobotCommunicator);
 
 	void on(const QList<QPair<QString, int>> &powerForMotors) override;
 	void stop(const QStringList &ports) override;

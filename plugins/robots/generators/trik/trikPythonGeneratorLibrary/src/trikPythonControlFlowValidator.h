@@ -24,10 +24,8 @@ class TrikPythonControlFlowValidator : public generatorBase::PrimaryControlFlowV
 {
 	Q_OBJECT
 public:
-	TrikPythonControlFlowValidator(const qrRepo::RepoApi &repo
-			, qReal::ErrorReporterInterface &errorReporter
-			, generatorBase::GeneratorCustomizer &customizer
-			, QObject *parent = nullptr);
+	TrikPythonControlFlowValidator(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+		generatorBase::GeneratorCustomizer &customizer, QObject *parent = nullptr);
 
 	bool validate(const qReal::Id &diagramId, const QString &threadId) override;
 

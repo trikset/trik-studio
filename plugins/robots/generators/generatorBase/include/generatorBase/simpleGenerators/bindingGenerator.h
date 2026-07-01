@@ -26,12 +26,8 @@ class ROBOTS_GENERATOR_EXPORT BindingGenerator : public AbstractSimpleGenerator
 {
 	Q_OBJECT
 public:
-	BindingGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, const QString &pathToTemplate
-			, QList<Binding *> const &bindings
-			, QObject *parent = nullptr);
+	BindingGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		const QString &pathToTemplate, QList<Binding *> const &bindings, QObject *parent = nullptr);
 
 	virtual ~BindingGenerator();
 
@@ -42,11 +38,11 @@ protected:
 
 	/// Useful for calling binding depending on virtual method not to do it in constructor.
 	/// Takes ownership on binding.
-	void addBinding(Binding * const binding);
+	void addBinding(Binding *const binding);
 
 private:
 	QString mPathToTemplate;
-	QList<Binding *> mBindings;  // Takes ownership
+	QList<Binding *> mBindings; // Takes ownership
 };
 
 }

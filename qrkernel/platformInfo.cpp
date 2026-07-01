@@ -30,13 +30,13 @@ const QString &PlatformInfo::osType()
 {
 	static const QString type =
 #ifdef Q_OS_LINUX
-	"linux";
+		"linux";
 #elif defined(Q_OS_MACOS)
-	"macos";
+		"macos";
 #elif defined(Q_OS_WIN)
-	"windows";
+		"windows";
 #else
-	"unknown";
+		"unknown";
 #endif
 	return type;
 }
@@ -48,11 +48,11 @@ QString PlatformInfo::applicationDirPath()
 		return QCoreApplication::applicationDirPath();
 	}
 
-	QDir result(QCoreApplication::applicationDirPath());  // ../bin/debug/qreal-d.app/Contents/MacOS/ or ../bin/debug
+	QDir result(QCoreApplication::applicationDirPath()); // ../bin/debug/qreal-d.app/Contents/MacOS/ or ../bin/debug
 	if (result.dirName() == "MacOS") {
-		result.cdUp();					      // ../bin/debug/qreal-d.app/Contents/
-		result.cdUp();					      // ../bin/debug/qreal-d.app/
-		result.cdUp();					      // ../bin/debug/
+		result.cdUp(); // ../bin/debug/qreal-d.app/Contents/
+		result.cdUp(); // ../bin/debug/qreal-d.app/
+		result.cdUp(); // ../bin/debug/
 	}
 
 	return result.absolutePath();
@@ -88,9 +88,10 @@ QString PlatformInfo::invariantPath(const QString &path)
 		const QString documentsPath = documentsPaths.isEmpty() ? applicationDirPath() : documentsPaths.first();
 		return QString(path).replace("@DocumentsPath@", documentsPath);
 	} else if (path.startsWith("@AppDataLocation@")) {
-		const QStringList appDataLocationPaths = QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
-		const QString appDataLocationPath = appDataLocationPaths.isEmpty()
-				? applicationDirPath() : appDataLocationPaths.first();
+		const QStringList appDataLocationPaths =
+			QStandardPaths::standardLocations(QStandardPaths::AppDataLocation);
+		const QString appDataLocationPath =
+			appDataLocationPaths.isEmpty() ? applicationDirPath() : appDataLocationPaths.first();
 		return QString(path).replace("@AppDataLocation@", appDataLocationPath);
 	} else if (path.startsWith("@TempLocation@")) {
 		const QString tempPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
@@ -121,14 +122,11 @@ bool PlatformInfo::isX64()
 
 QStringList PlatformInfo::enableHiDPISupport()
 {
-	static const QList<const char*> envVars { "QT_DEVICE_PIXEL_RATIO"
-									   , "QT_AUTO_SCREEN_SCALE_FACTOR"
-									   , "QT_SCALE_FACTOR"
-									   , "QT_SCREEN_SCALE_FACTORS"
-									 };
+	static const QList<const char *> envVars {"QT_DEVICE_PIXEL_RATIO", "QT_AUTO_SCREEN_SCALE_FACTOR",
+		"QT_SCALE_FACTOR", "QT_SCREEN_SCALE_FACTORS"};
 	bool anyIsSet = false;
 	QStringList result;
-	for (auto &&e: envVars) {
+	for (auto &&e : envVars) {
 		if (qEnvironmentVariableIsSet(e)) {
 			result << QString("Scaling variable %1=%2").arg(e, qEnvironmentVariable(e));
 			anyIsSet = true;

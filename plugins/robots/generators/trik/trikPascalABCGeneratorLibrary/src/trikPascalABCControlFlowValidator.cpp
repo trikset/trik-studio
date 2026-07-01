@@ -17,10 +17,8 @@
 using namespace generatorBase;
 using namespace trik::pascalABC;
 
-TrikPascalABCControlFlowValidator::TrikPascalABCControlFlowValidator(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, GeneratorCustomizer &customizer
-		, QObject *parent)
+TrikPascalABCControlFlowValidator::TrikPascalABCControlFlowValidator(const qrRepo::RepoApi &repo,
+	qReal::ErrorReporterInterface &errorReporter, GeneratorCustomizer &customizer, QObject *parent)
 	: PrimaryControlFlowValidator(repo, errorReporter, customizer, parent)
 {
 }
@@ -34,7 +32,7 @@ void TrikPascalABCControlFlowValidator::visitRegular(const qReal::Id &id, const 
 {
 	Q_UNUSED(links)
 	if (id.element() == "SendMessageThreads" || id.element() == "ReceiveMessageThreads"
-			|| id.element() == "KillThread") {
+		|| id.element() == "KillThread") {
 		error(tr("Block type is unsupported by PascalABC generator"), id);
 	}
 

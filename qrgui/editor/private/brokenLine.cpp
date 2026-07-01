@@ -17,9 +17,8 @@
 using namespace qReal;
 using namespace qReal::gui::editor;
 
-BrokenLine::BrokenLine(EdgeElement *edge
-		, const LogicalModelAssistInterface &logicalModel
-		, const GraphicalModelAssistInterface &graphicalModel)
+BrokenLine::BrokenLine(EdgeElement *edge, const LogicalModelAssistInterface &logicalModel,
+	const GraphicalModelAssistInterface &graphicalModel)
 	: LineHandler(edge, logicalModel, graphicalModel)
 	, mDeletePointAction(tr("Delete point"), this)
 	, mDeleteSegmentAction(tr("Delete segment"), this)
@@ -118,8 +117,8 @@ bool BrokenLine::tooSmallTriangle(const QPolygonF &line, int i) const
 	neighbourhood.setWidth(squareSize * 4);
 
 	return neighbourhood.createStroke(line1).contains(line[i + 2])
-			|| neighbourhood.createStroke(line2).contains(line[i])
-			|| neighbourhood.createStroke(line3).contains(line[i + 1]);
+	       || neighbourhood.createStroke(line2).contains(line[i])
+	       || neighbourhood.createStroke(line3).contains(line[i + 1]);
 }
 
 void BrokenLine::alignToGrid()
@@ -141,8 +140,8 @@ QPointF BrokenLine::alignedPoint(QPointF point) const
 	const int coefX = static_cast<int>(result.x()) / indexGrid;
 	const int coefY = static_cast<int>(result.y()) / indexGrid;
 
-	result = QPointF(SceneGridHandler::alignedCoordinate(result.x(), coefX, indexGrid)
-			, SceneGridHandler::alignedCoordinate(result.y(), coefY, indexGrid));
+	result = QPointF(SceneGridHandler::alignedCoordinate(result.x(), coefX, indexGrid),
+		SceneGridHandler::alignedCoordinate(result.y(), coefY, indexGrid));
 
 	return mEdge->mapFromScene(result);
 }

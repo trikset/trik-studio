@@ -24,10 +24,8 @@ class GetButtonCodeGenerator : public BindingGenerator
 {
 	Q_OBJECT
 public:
-	GetButtonCodeGenerator(const qrRepo::RepoApi &repo
-			, GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	GetButtonCodeGenerator(const qrRepo::RepoApi &repo, GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent);
 };
 
 }

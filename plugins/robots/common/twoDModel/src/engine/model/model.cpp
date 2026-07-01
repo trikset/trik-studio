@@ -33,8 +33,7 @@ using namespace twoDModel::model;
 
 static auto XML_VERSION = "20251219";
 
-Model::Model(physics::PhysicsEngineFactory *engineFactory,
-		QObject *parent)
+Model::Model(physics::PhysicsEngineFactory *engineFactory, QObject *parent)
 	: QObject(parent)
 	, mSettings(new Settings(this))
 	, mMetricCoordinateSystem(new MetricCoordinateSystem(mSettings->sizeUnit(), this))
@@ -59,9 +58,8 @@ Model::~Model()
 	delete mRobotModel;
 }
 
-void Model::init(qReal::ErrorReporterInterface &errorReporter
-		, kitBase::InterpreterControlInterface &interpreterControl
-		, qReal::LogicalModelAssistInterface &logicalModel)
+void Model::init(qReal::ErrorReporterInterface &errorReporter, kitBase::InterpreterControlInterface &interpreterControl,
+	qReal::LogicalModelAssistInterface &logicalModel)
 {
 	mErrorReporter = &errorReporter;
 	mLogicalModel = &logicalModel;
@@ -72,13 +70,13 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 	mChecker.reset(new constraints::ConstraintsChecker(errorReporter, *this));
 	connect(mChecker.data(), &constraints::ConstraintsChecker::success, this, [&]() {
 		errorReporter.addInformation(tr("The task was accomplished in %1 sec!")
-						.arg(QString::number(
-							static_cast<double>((timeline().timestamp() - mStartTimestamp)) / 1000.0)));
+				.arg(QString::number(
+					static_cast<double>((timeline().timestamp() - mStartTimestamp)) / 1000.0)));
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
-		QTimer::singleShot(0, &interpreterControl,
-				[&interpreterControl]() {
-				Q_EMIT interpreterControl.stopAllInterpretation(qReal::interpretation::StopReason::finished); });
+		QTimer::singleShot(0, &interpreterControl, [&interpreterControl]() {
+			Q_EMIT interpreterControl.stopAllInterpretation(qReal::interpretation::StopReason::finished);
+		});
 		mChecker->dumpVariables();
 	});
 	connect(mChecker.data(), &constraints::ConstraintsChecker::fail, this, [&](const QString &message) {
@@ -86,18 +84,16 @@ void Model::init(qReal::ErrorReporterInterface &errorReporter
 		// Stopping cannot be performed immediately because we still have constraints to check in event loop
 		// and they need scene to be alive (in checker stopping interpretation means deleting all).
 		QTimer::singleShot(0, &interpreterControl,
-				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
+			[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
 		mChecker->dumpVariables();
 	});
-	connect(mChecker.data(), &constraints::ConstraintsChecker::message, this, [&](const QString &message) {
-		errorReporter.addInformation(message);
-	});
-	connect(mChecker.data(), &constraints::ConstraintsChecker::log, this, [&](const QString &message) {
-		errorReporter.addLog(message);
-	});
-	connect(mChecker.data(), &constraints::ConstraintsChecker::checkerError
-			, this, [&errorReporter](const QString &message) {
-				errorReporter.addCritical(tr("Error in checker: %1").arg(message));
+	connect(mChecker.data(), &constraints::ConstraintsChecker::message, this,
+		[&](const QString &message) { errorReporter.addInformation(message); });
+	connect(mChecker.data(), &constraints::ConstraintsChecker::log, this,
+		[&](const QString &message) { errorReporter.addLog(message); });
+	connect(mChecker.data(), &constraints::ConstraintsChecker::checkerError, this,
+		[&errorReporter](const QString &message) {
+		errorReporter.addCritical(tr("Error in checker: %1").arg(message));
 	});
 }
 
@@ -149,8 +145,7 @@ QDomDocument Model::serialize() const
 	QDomDocument worldModel;
 	if (!xml.isEmpty() && worldModel.setContent(xml)) {
 		robots = worldModel.firstChildElement("root").firstChildElement("robots");
-	}
-	else {
+	} else {
 		robots = save.createElement("robots");
 	}
 	if (mRobotModel) {
@@ -172,20 +167,19 @@ QHash<QString, QDomDocument> Model::generateTemplates(const QString &path)
 void Model::loadTemplates()
 {
 	const auto &keys = mLogicalModel->logicalRepoApi().metaInformationKeys();
-	for (auto &&key: keys) {
+	for (auto &&key : keys) {
 		if (!key.startsWith("templates.")) {
 			continue;
 		}
-		const QString templatesXml = mLogicalModel->logicalRepoApi()
-				.metaInformation(key).toString();
+		const QString templatesXml = mLogicalModel->logicalRepoApi().metaInformation(key).toString();
 		QDomDocument templates;
 		QString errorMessage;
 		int errorLine;
 		int errorColumn;
-		if (!templatesXml.isEmpty() &&
-			!templates.setContent(templatesXml, &errorMessage, &errorLine, &errorColumn)) {
-			mErrorReporter->addError(
-				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+		if (!templatesXml.isEmpty()
+			&& !templates.setContent(templatesXml, &errorMessage, &errorLine, &errorColumn)) {
+			mErrorReporter->addError(QString("%1:%2: %3")
+					.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 			return;
 		}
 		mTemplatesParserApi->parseTemplates(templates);
@@ -200,14 +194,17 @@ void Model::deserialize(const QDomDocument &model)
 		auto &&version = root.attribute("version", "");
 		if (version.isEmpty()) {
 			if (mErrorReporter) {
-				mErrorReporter->addWarning(tr(R"(The "version" field of the "root" tag must not be empty.)"));
+				mErrorReporter->addWarning(
+					tr(R"(The "version" field of the "root" tag must not be empty.)"));
 			}
 		}
 
 		if (version != XML_VERSION) {
 			if (mErrorReporter) {
-				mErrorReporter->addInformation(tr("The world model has version %1. The current version is %2."
-						  " Please check that the world model behaves as expected.").arg(version, XML_VERSION));
+				mErrorReporter->addInformation(
+					tr("The world model has version %1. The current version is %2."
+					   " Please check that the world model behaves as expected.")
+						.arg(version, XML_VERSION));
 			}
 		}
 	}
@@ -236,9 +233,10 @@ void Model::deserialize(const QDomDocument &model)
 	mRobotModel->reinit();
 	mWorldModel.deserialize(world, blobsList.isEmpty() ? QDomElement() : blobsList.at(0).toElement());
 	const auto &robotsList = model.elementsByTagName("robots");
-	if (!mRobotModel || robotsList.isEmpty()) return;
-	for (QDomElement element = robotsList.at(0).firstChildElement("robot")
-			; !element.isNull(); element = element.nextSiblingElement("robot")) {
+	if (!mRobotModel || robotsList.isEmpty())
+		return;
+	for (QDomElement element = robotsList.at(0).firstChildElement("robot"); !element.isNull();
+		element = element.nextSiblingElement("robot")) {
 		if (mRobotModel->info().robotId() == element.toElement().attribute("id")) {
 			mRobotModel->deserialize(element);
 			return;
@@ -253,8 +251,7 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 		return;
 	}
 
-	mRobotModel = new RobotModel(robotModel, mSettings.data(),
-				     mMetricCoordinateSystem.data(), this);
+	mRobotModel = new RobotModel(robotModel, mSettings.data(), mMetricCoordinateSystem.data(), this);
 	mRobotModel->setPosition(pos);
 
 	connect(&mTimeline, &Timeline::started, mRobotModel, &RobotModel::reinit);
@@ -263,7 +260,8 @@ void Model::addRobotModel(robotModel::TwoDRobotModel &robotModel, QPointF pos)
 	connect(&mTimeline, &Timeline::tick, mRobotModel, &RobotModel::recalculateParams);
 	connect(&mTimeline, &Timeline::nextFrame, mRobotModel, &RobotModel::nextFragment);
 
-	mRobotModel->setPhysicalEngine(mSettings->realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
+	mRobotModel->setPhysicalEngine(
+		mSettings->realisticPhysics() ? *mRealisticPhysicsEngine : *mSimplePhysicsEngine);
 
 	mWorldModel.setRobotModel(mRobotModel);
 
@@ -301,28 +299,28 @@ void Model::setConstraintsEnabled(bool enabled)
 void Model::resetPhysics()
 {
 	auto engine = mSettings->realisticPhysics() ? mRealisticPhysicsEngine : mSimplePhysicsEngine;
-	if (mRobotModel) mRobotModel->setPhysicalEngine(*engine);
+	if (mRobotModel)
+		mRobotModel->setPhysicalEngine(*engine);
 
 	engine->wakeUp();
 }
 
 void Model::initPhysics()
 {
-	mRealisticPhysicsEngine
-	                = mEngineFactory->create(true)(mWorldModel, robotModels());
+	mRealisticPhysicsEngine = mEngineFactory->create(true)(mWorldModel, robotModels());
 
-	mSimplePhysicsEngine
-	                = mEngineFactory->create(false)(mWorldModel, robotModels());
+	mSimplePhysicsEngine = mEngineFactory->create(false)(mWorldModel, robotModels());
 
 	connect(this, &model::Model::robotAdded, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 	connect(this, &model::Model::robotAdded, mSimplePhysicsEngine, &physics::PhysicsEngineBase::addRobot);
 	connect(this, &model::Model::robotRemoved, mSimplePhysicsEngine, &physics::PhysicsEngineBase::removeRobot);
 
-	connect(&mTimeline, &Timeline::stopped, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::clearForcesAndStop);
+	connect(&mTimeline, &Timeline::stopped, mRealisticPhysicsEngine,
+		&physics::PhysicsEngineBase::clearForcesAndStop);
 	connect(&mTimeline, &Timeline::tick, this, &Model::recalculatePhysicsParams);
-	connect(&mTimeline, &Timeline::nextFrame
-			, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame, Qt::UniqueConnection);
+	connect(&mTimeline, &Timeline::nextFrame, mRealisticPhysicsEngine, &physics::PhysicsEngineBase::nextFrame,
+		Qt::UniqueConnection);
 }
 
 void Model::recalculatePhysicsParams()

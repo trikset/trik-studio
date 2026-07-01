@@ -27,22 +27,22 @@ namespace editorPluginTestingFramework {
 class MethodsTesterForQrxcAndInterpreter : public MethodsTester
 {
 public:
-	virtual ~MethodsTesterForQrxcAndInterpreter() {}
+	virtual ~MethodsTesterForQrxcAndInterpreter()
+	{
+	}
 
 	/// gets qrxc generated plugin and interpreter generated plugin from main class
-	MethodsTesterForQrxcAndInterpreter(
-			qReal::EditorManager* qrxcGeneratedPlugin
-			, qReal::InterpreterEditorManager* interpreterGeneratedPlugin
-			);
+	MethodsTesterForQrxcAndInterpreter(qReal::EditorManager *qrxcGeneratedPlugin,
+		qReal::InterpreterEditorManager *interpreterGeneratedPlugin);
 
 	/// returns results of testing to main class
 	QList<MethodsTester::ResultOfGenerating> generatedResult();
 
 	/// clones generator, initializes it with qrxcGeneratedPlugin and returns it to methodsTester
-	AbstractStringGenerator * initGeneratorWithFirstInterface(AbstractStringGenerator const &generator) const;
+	AbstractStringGenerator *initGeneratorWithFirstInterface(AbstractStringGenerator const &generator) const;
 
 	/// clones generator, initializes it with interpreterGeneratedPlugin and returns it to methodsTester
-	AbstractStringGenerator * initGeneratorWithSecondInterface(AbstractStringGenerator const &generator) const;
+	AbstractStringGenerator *initGeneratorWithSecondInterface(AbstractStringGenerator const &generator) const;
 
 private:
 	class StringGenerator;
@@ -99,8 +99,8 @@ private:
 	/// forms results of testing for each method, puts them into mGeneratedList
 	void testMethods();
 
-	qReal::EditorManager* mQrxcGeneratedPlugin;
-	qReal::InterpreterEditorManager* mInterpreterGeneratedPlugin;
+	qReal::EditorManager *mQrxcGeneratedPlugin;
+	qReal::InterpreterEditorManager *mInterpreterGeneratedPlugin;
 
 	QList<MethodsTester::ResultOfGenerating> mGeneratedList;
 };

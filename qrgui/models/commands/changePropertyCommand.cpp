@@ -16,8 +16,8 @@
 
 using namespace qReal::commands;
 
-ChangePropertyCommand::ChangePropertyCommand(models::LogicalModelAssistApi * const model
-		, const QString &property, const Id &id, const QVariant &newValue)
+ChangePropertyCommand::ChangePropertyCommand(models::LogicalModelAssistApi *const model, const QString &property,
+	const Id &id, const QVariant &newValue)
 	: mLogicalModel(model)
 	, mLogicalRepoApi(nullptr)
 	, mId(id)
@@ -27,8 +27,8 @@ ChangePropertyCommand::ChangePropertyCommand(models::LogicalModelAssistApi * con
 {
 }
 
-ChangePropertyCommand::ChangePropertyCommand(qrRepo::LogicalRepoApi * const model
-		, const QString &property, const Id &id, const QVariant &oldValue, const QVariant &newValue)
+ChangePropertyCommand::ChangePropertyCommand(qrRepo::LogicalRepoApi *const model, const QString &property, const Id &id,
+	const QVariant &oldValue, const QVariant &newValue)
 	: mLogicalModel(nullptr)
 	, mLogicalRepoApi(model)
 	, mId(id)
@@ -38,8 +38,8 @@ ChangePropertyCommand::ChangePropertyCommand(qrRepo::LogicalRepoApi * const mode
 {
 }
 
-ChangePropertyCommand::ChangePropertyCommand(qReal::models::LogicalModelAssistApi * const model
-		, const QString &property, const qReal::Id &id, const QVariant &oldValue, const QVariant &newValue)
+ChangePropertyCommand::ChangePropertyCommand(qReal::models::LogicalModelAssistApi *const model, const QString &property,
+	const qReal::Id &id, const QVariant &oldValue, const QVariant &newValue)
 	: mLogicalModel(model)
 	, mLogicalRepoApi(nullptr)
 	, mId(id)

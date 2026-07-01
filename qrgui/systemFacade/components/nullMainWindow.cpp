@@ -23,10 +23,8 @@
 
 using namespace qReal;
 
-NullMainWindow::NullMainWindow(ErrorReporterInterface &errorReporter
-		, SystemEvents &events
-		, const ProjectManagementInterface *projectManager
-		, const GraphicalModelAssistInterface *graphicalModel)
+NullMainWindow::NullMainWindow(ErrorReporterInterface &errorReporter, SystemEvents &events,
+	const ProjectManagementInterface *projectManager, const GraphicalModelAssistInterface *graphicalModel)
 	: mErrorReporter(errorReporter)
 	, mEvents(events)
 	, mGraphicalModel(graphicalModel)
@@ -40,7 +38,8 @@ NullMainWindow::NullMainWindow(ErrorReporterInterface &errorReporter
 	, mStatusBar(new QStatusBar(mWindowWidget))
 {
 	if (projectManager) {
-		connect(projectManager, &ProjectManagementInterface::afterOpen, this, &NullMainWindow::openFirstDiagram);
+		connect(projectManager, &ProjectManagementInterface::afterOpen, this,
+			&NullMainWindow::openFirstDiagram);
 	}
 }
 
@@ -48,7 +47,6 @@ NullMainWindow::~NullMainWindow()
 {
 	delete mWindowWidget;
 }
-
 
 void NullMainWindow::selectItem(const Id &graphicalId)
 {
@@ -166,7 +164,7 @@ QWidget *NullMainWindow::currentTab()
 	return nullptr;
 }
 
-QList<QWidget*> NullMainWindow::allTabs() const
+QList<QWidget *> NullMainWindow::allTabs() const
 {
 	return {};
 }
@@ -307,7 +305,7 @@ void NullMainWindow::addDockWidget(Qt::DockWidgetArea area, QDockWidget *dockWid
 	Q_UNUSED(dockWidget)
 }
 
-void NullMainWindow::addToolBar(Qt::ToolBarArea area, QToolBar * const toolbar)
+void NullMainWindow::addToolBar(Qt::ToolBarArea area, QToolBar *const toolbar)
 {
 	Q_UNUSED(area)
 	Q_UNUSED(toolbar)
@@ -335,8 +333,8 @@ void NullMainWindow::setCorner(Qt::Corner corner, Qt::DockWidgetArea area)
 void NullMainWindow::registerEditor(EditorInterface &editor)
 {
 	QAction *dummyAction = new QAction(this);
-	editor.configure(*dummyAction, *dummyAction, *dummyAction, *dummyAction, *dummyAction, *dummyAction
-			, *dummyAction, *dummyAction, *dummyAction, *dummyAction);
+	editor.configure(*dummyAction, *dummyAction, *dummyAction, *dummyAction, *dummyAction, *dummyAction,
+		*dummyAction, *dummyAction, *dummyAction, *dummyAction);
 }
 
 void NullMainWindow::emulateClose(int returnCode)

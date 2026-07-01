@@ -18,34 +18,31 @@
 #include <twoDModel/engine/twoDModelEngineInterface.h>
 #include <twoDModel/engine/model/constants.h>
 
-
-template <typename T>
+template<typename T>
 static T getPitch(QQuaternion q)
 {
-	return qAtan2(2 * q.y()*q.z() + 2 * q.scalar() * q.x()
-			, 1 - 2 * q.x() * q.x() - 2 * q.y() * q.y());
+	return qAtan2(2 * q.y() * q.z() + 2 * q.scalar() * q.x(), 1 - 2 * q.x() * q.x() - 2 * q.y() * q.y());
 }
 
-template <typename T>
+template<typename T>
 static T getRoll(QQuaternion q)
 {
 	return qAsin(2 * q.scalar() * q.y() - 2 * q.x() * q.z());
 }
 
-template <typename T>
+template<typename T>
 static T getYaw(QQuaternion q)
 {
-	return qAtan2(2 * q.x() * q.y() + 2 * q.scalar() * q.z()
-			, 1 - 2 * q.y() * q.y() - 2 * q.z() * q.z());
+	return qAtan2(2 * q.x() * q.y() + 2 * q.scalar() * q.z(), 1 - 2 * q.y() * q.y() - 2 * q.z() * q.z());
 }
 
-static quint64 getTimeValue(trik::robotModel::twoD::TrikTwoDRobotModel * const model) {
+static quint64 getTimeValue(trik::robotModel::twoD::TrikTwoDRobotModel *const model)
+{
 	return model->timeline().timestamp();
 }
 
-
-TrikGyroscopeAdapter::TrikGyroscopeAdapter(kitBase::robotModel::robotParts::GyroscopeSensor *gyro
-		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
+TrikGyroscopeAdapter::TrikGyroscopeAdapter(kitBase::robotModel::robotParts::GyroscopeSensor *gyro,
+	const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model)
 	: mGyro(gyro)
 	, mModel(model)
 	, mResult(7, 0)
@@ -53,8 +50,8 @@ TrikGyroscopeAdapter::TrikGyroscopeAdapter(kitBase::robotModel::robotParts::Gyro
 	, mStartTime(getTimeValue(model.data()))
 {
 	using namespace std::placeholders;
-	connect(mGyro, &kitBase::robotModel::robotParts::GyroscopeSensor::newData,
-			this, std::bind(&TrikGyroscopeAdapter::countTilt, this, std::bind(&QVariant::value<QVector<int>>,_1)));
+	connect(mGyro, &kitBase::robotModel::robotParts::GyroscopeSensor::newData, this,
+		std::bind(&TrikGyroscopeAdapter::countTilt, this, std::bind(&QVariant::value<QVector<int>>, _1)));
 }
 
 QVector<int> TrikGyroscopeAdapter::read() const
@@ -94,4 +91,3 @@ int TrikGyroscopeAdapter::convertToTrikRuntimeTime(quint64 time) const
 {
 	return static_cast<int>(time * 1000 / 256);
 }
-

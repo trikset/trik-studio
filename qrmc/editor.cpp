@@ -26,8 +26,8 @@
 using namespace qReal;
 using namespace qrmc;
 
-Editor::Editor(MetaCompiler &metaCompiler, const qrRepo::LogicalRepoApi &api, const qReal::Id &id
-		, const QString &targetDirectory)
+Editor::Editor(MetaCompiler &metaCompiler, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+	const QString &targetDirectory)
 	: mMetaCompiler(metaCompiler)
 	, mApi(api)
 	, mId(id)
@@ -75,18 +75,18 @@ MetaCompiler &Editor::metaCompiler()
 	return mMetaCompiler;
 }
 
-Type* Editor::findType(const QString &name) const
+Type *Editor::findType(const QString &name) const
 {
-	for (const Diagram * const diagram : mDiagrams.values()) {
-		for (Type * const type : diagram->types()) {
+	for (const Diagram *const diagram : mDiagrams.values()) {
+		for (Type *const type : diagram->types()) {
 			if (type->qualifiedName() == name) {
 				return type;
 			}
 		}
 	}
 
-	for (const Editor * const editor : mIncludes) {
-		Type * const type = editor->findType(name);
+	for (const Editor *const editor : mIncludes) {
+		Type *const type = editor->findType(name);
 		if (type != nullptr && type->qualifiedName() == name) {
 			return type;
 		}
@@ -95,27 +95,27 @@ Type* Editor::findType(const QString &name) const
 	return nullptr;
 }
 
-QSet<EnumType*> Editor::getAllEnumTypes() const
+QSet<EnumType *> Editor::getAllEnumTypes() const
 {
-	QSet<EnumType*> result;
+	QSet<EnumType *> result;
 
-	for (const Diagram * const diagram : mDiagrams.values()) {
-		for (Type * const type : diagram->types()) {
-			const auto current = dynamic_cast<EnumType*>(type);
+	for (const Diagram *const diagram : mDiagrams.values()) {
+		for (Type *const type : diagram->types()) {
+			const auto current = dynamic_cast<EnumType *>(type);
 			if (current) {
 				result << current;
 			}
 		}
 	}
 
-	for (const Editor * const editor : mIncludes) {
+	for (const Editor *const editor : mIncludes) {
 		result += editor->getAllEnumTypes();
 	}
 
 	return result;
 }
 
-Diagram* Editor::findDiagram(const QString &name) const
+Diagram *Editor::findDiagram(const QString &name) const
 {
 	return mDiagrams.value(name, nullptr);
 }
@@ -124,15 +124,15 @@ QStringList Editor::getAllPortNames() const
 {
 	QStringList result;
 
-	for (const Diagram * const diagram : mDiagrams.values()) {
-		for (const Type * const type : diagram->types()) {
-			if (dynamic_cast<const Port * const>(type)) {
+	for (const Diagram *const diagram : mDiagrams.values()) {
+		for (const Type *const type : diagram->types()) {
+			if (dynamic_cast<const Port *const>(type)) {
 				result << type->name();
 			}
 		}
 	}
 
-	for (const Editor * const editor : mIncludes) {
+	for (const Editor *const editor : mIncludes) {
 		result += editor->getAllPortNames();
 	}
 
@@ -140,7 +140,7 @@ QStringList Editor::getAllPortNames() const
 	return result;
 }
 
-QMap<QString, Diagram*> Editor::diagrams() const
+QMap<QString, Diagram *> Editor::diagrams() const
 {
 	return mDiagrams;
 }
@@ -150,10 +150,9 @@ QString Editor::name() const
 	return mName;
 }
 
-void Editor::generate(const QString &headerTemplate, const QString &sourceTemplate,
-					const QString &nodeTemplate, const QString &edgeTemplate,
-					const QString &elementsHeaderTemplate, const QString &resourceTemplate,
-					const QString &projectTemplate, const QMap<QString, QString> &utils)
+void Editor::generate(const QString &headerTemplate, const QString &sourceTemplate, const QString &nodeTemplate,
+	const QString &edgeTemplate, const QString &elementsHeaderTemplate, const QString &resourceTemplate,
+	const QString &projectTemplate, const QMap<QString, QString> &utils)
 {
 	if (!mLoadingComplete) {
 		qDebug() << "Trying to generate editor that is not loaded yet";
@@ -245,7 +244,7 @@ bool Editor::generatePluginSource()
 	generateEnums();
 
 	// inserting plugin name all over the template
-	mSourceTemplate.replace(metamodelNameTag,  NameNormalizer::normalize(mNameOfMetamodel));
+	mSourceTemplate.replace(metamodelNameTag, NameNormalizer::normalize(mNameOfMetamodel));
 
 	// template is ready, writing it into a file
 	QTextStream out(&pluginSourceFile);
@@ -272,13 +271,12 @@ bool Editor::generateElementsClasses()
 	QString generatedNodes;
 	QString generatedEdges;
 
-	for (const Diagram * const diagram : mDiagrams) {
+	for (const Diagram *const diagram : mDiagrams) {
 		generatedNodes += diagram->generateNodeClasses(mNodeTemplate);
 		generatedEdges += diagram->generateEdgeClasses(mEdgeTemplate);
 	}
 
-	mElementsHeaderTemplate.replace(nodesListTag, generatedNodes)
-			.replace(edgesListTag, generatedEdges);
+	mElementsHeaderTemplate.replace(nodesListTag, generatedNodes).replace(edgesListTag, generatedEdges);
 
 	// template is ready, writing it into a file
 	QTextStream out(&file);
@@ -304,7 +302,7 @@ bool Editor::generateResourceFile(const QString &resourceTemplate)
 
 	QString resourceBody = "";
 	const QString line = mUtilsTemplate[sdfFileTag];
-	for (const Diagram * const diagram : mDiagrams) {
+	for (const Diagram *const diagram : mDiagrams) {
 		resourceBody += diagram->generateResourceFile(line);
 	}
 
@@ -346,32 +344,29 @@ bool Editor::generateProjectFile(const QString &proTemplate)
 
 void Editor::generateDiagramsMap()
 {
-	generatePluginMethod(initDiagramNameMapLineTag
-			, [](Diagram *diagram, const QString &line) {
-				QString newline = line;
-				return newline.replace(diagramDisplayedNameTag, diagram->displayedName())
-						.replace(diagramNameTag, diagram->name()) + endline;
-			}
-	);
+	generatePluginMethod(initDiagramNameMapLineTag, [](Diagram *diagram, const QString &line) {
+		QString newline = line;
+		return newline.replace(diagramDisplayedNameTag, diagram->displayedName())
+		               .replace(diagramNameTag, diagram->name())
+		       + endline;
+	});
 }
 
 void Editor::generateDiagramNodeNamesMap()
 {
-	generatePluginMethod(initDiagramNodeNameMapLineTag
-			, [](Diagram *diagram, const QString &line) {
-				QString newline = line;
-				return newline.replace(diagramNodeNameTag, diagram->nodeName())
-						.replace(diagramNameTag, diagram->name()) + endline;
-			}
-	);
+	generatePluginMethod(initDiagramNodeNameMapLineTag, [](Diagram *diagram, const QString &line) {
+		QString newline = line;
+		return newline.replace(diagramNodeNameTag, diagram->nodeName()).replace(diagramNameTag, diagram->name())
+		       + endline;
+	});
 }
 
-void Editor::generatePluginMethod(const QString &tag
-		, const std::function<QString(Diagram *, const QString &)> &generator)
+void Editor::generatePluginMethod(const QString &tag,
+	const std::function<QString(Diagram *, const QString &)> &generator)
 {
 	QString body;
 	const QString line = mUtilsTemplate[tag].replace("\\n", "\n");
-	for (Diagram * const diagram : mDiagrams) {
+	for (Diagram *const diagram : mDiagrams) {
 		body += generator(diagram, line);
 	}
 
@@ -384,7 +379,7 @@ void Editor::generateEnums()
 	QString body = "";
 	QString line = mUtilsTemplate[getEnumsLineTag].replace("\\n", "\n");
 
-	for (const Diagram * const diagram : mDiagrams) {
+	for (const Diagram *const diagram : mDiagrams) {
 		body += diagram->generateEnums(line);
 	}
 
@@ -395,8 +390,7 @@ void Editor::generateEnums()
 bool Editor::loadIncludes()
 {
 	const QStringList includes = mApi.stringProperty(mId, "include").split(",");
-	for (const QString &includedMetamodel : includes)
-	{
+	for (const QString &includedMetamodel : includes) {
 		const QString metamodelName = includedMetamodel.section("/", -1).section(".", 0, 0).trimmed();
 		if (metamodelName.isEmpty()) {
 			continue;
@@ -415,8 +409,7 @@ bool Editor::loadIncludes()
 			}
 		}
 
-		if (!includedEditor)
-		{
+		if (!includedEditor) {
 			qDebug() << "ERROR: can't load included metamodel" << metamodelName;
 			return false;
 		}
@@ -447,7 +440,7 @@ bool Editor::loadDiagrams()
 		}
 
 		qDebug() << "\tloading diagram" << diagramName;
-		Diagram * const diagram = new Diagram(diagramId, mApi, *this, mTargetDirectory);
+		Diagram *const diagram = new Diagram(diagramId, mApi, *this, mTargetDirectory);
 		if (!diagram->init()) {
 			qDebug() << "ERROR: error loading diagram" << diagramName;
 			delete diagram;
@@ -463,7 +456,7 @@ bool Editor::loadDiagrams()
 
 bool Editor::resolve()
 {
-	for (Diagram * const diagram : mDiagrams.values()) {
+	for (Diagram *const diagram : mDiagrams.values()) {
 		if (!diagram->resolve()) {
 			return false;
 		}

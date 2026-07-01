@@ -22,9 +22,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-ColorSensorPassive::ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info
-		, const kitBase::robotModel::PortInfo &port
-		, engine::TwoDModelEngineInterface &engine)
+ColorSensorPassive::ColorSensorPassive(const kitBase::robotModel::DeviceInfo &info,
+	const kitBase::robotModel::PortInfo &port, engine::TwoDModelEngineInterface &engine)
 	: kitBase::robotModel::robotParts::ColorSensorPassive(info, port)
 	, mEngine(engine)
 {
@@ -33,7 +32,8 @@ ColorSensorPassive::ColorSensorPassive(const kitBase::robotModel::DeviceInfo &in
 void ColorSensorPassive::read()
 {
 	auto color = mEngine.readColorSensor(port());
-	auto bright = (color.redF() * color.redF() + color.greenF() * color.greenF() + color.blueF() * color.blueF()) / 3;
+	auto bright =
+		(color.redF() * color.redF() + color.greenF() * color.greenF() + color.blueF() * color.blueF()) / 3;
 	auto reading = qRound(qSqrt(bright / 3) * 100);
 	setLastData(mathUtils::Math::truncateToInterval(0, 100, reading));
 }

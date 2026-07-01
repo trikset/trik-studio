@@ -29,11 +29,9 @@ protected:
 	void checkCase1(qrgraph::Multigraph &graph);
 	void checkCase2(qrgraph::Multigraph &graph);
 
-	void checkVertex(qrgraph::Multigraph &graph, const qrgraph::Node &node
-			, QList<const qrgraph::Node *> outgoingNodesType0
-			, QList<const qrgraph::Node *> outgoingNodesType1
-			, QList<const qrgraph::Node *> incomingNodesType0
-			, QList<const qrgraph::Node *> incomingNodesType1);
+	void checkVertex(qrgraph::Multigraph &graph, const qrgraph::Node &node,
+		QList<const qrgraph::Node *> outgoingNodesType0, QList<const qrgraph::Node *> outgoingNodesType1,
+		QList<const qrgraph::Node *> incomingNodesType0, QList<const qrgraph::Node *> incomingNodesType1);
 };
 
 }

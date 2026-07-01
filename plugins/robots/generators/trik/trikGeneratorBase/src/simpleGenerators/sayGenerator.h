@@ -24,10 +24,8 @@ class SayGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	SayGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	SayGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer, const qReal::Id &id,
+		QObject *parent);
 };
 
 }

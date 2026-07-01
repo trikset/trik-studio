@@ -48,7 +48,6 @@ private:
 
 private Q_SLOTS:
 	void doneNextBlock();
-
 };
 
 }

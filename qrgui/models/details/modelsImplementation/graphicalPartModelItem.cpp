@@ -18,7 +18,8 @@ using namespace qReal;
 using namespace qReal::models::details::modelsImplementation;
 
 GraphicalPartModelItem::GraphicalPartModelItem(const Id &id, int index)
-	:mId(id), mIndex(index)
+	: mId(id)
+	, mIndex(index)
 {
 }
 

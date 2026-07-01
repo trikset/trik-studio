@@ -21,7 +21,7 @@ bool PortType::init(const QDomElement &element, const QString &context)
 	return NonGraphicType::init(element, context);
 }
 
-Type * PortType::clone() const
+Type *PortType::clone() const
 {
 	PortType *result = new PortType();
 	Type::copyFields(result);
@@ -30,7 +30,7 @@ Type * PortType::clone() const
 
 void PortType::generateCode(utils::OutFile &out)
 {
-//	const QString name = Type::name();
+	//	const QString name = Type::name();
 
 	out() << "\t/* Typed ports are not supported yet */\n";
 }

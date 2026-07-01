@@ -42,19 +42,19 @@ TrikAdditionalPreferences::TrikAdditionalPreferences(const QStringList &realRobo
 		mUi->realCameraFrame->setVisible(checked);
 	});
 
-	connect(mUi->imagesFromProjectCheckBox, &QCheckBox::clicked, this, [this](bool checked) {
-		mUi->imagesFromDiskFrame->setEnabled(not checked);
-	});
+	connect(mUi->imagesFromProjectCheckBox, &QCheckBox::clicked, this,
+		[this](bool checked) { mUi->imagesFromDiskFrame->setEnabled(not checked); });
 
 	connect(mUi->browseImagesPathButton, &QPushButton::clicked, this, [this]() {
-		const QString directoryName = utils::QRealFileDialog::getExistingDirectory("TrikSimulatedCameraImagesPath"
-					, this, tr("Select Directory")).replace("\\", "/");
+		const QString directoryName = utils::QRealFileDialog::getExistingDirectory(
+			"TrikSimulatedCameraImagesPath", this, tr("Select Directory"))
+		                                      .replace("\\", "/");
 		mUi->imagesPathlineEdit->setText(directoryName);
 		SettingsManager::setValue("TrikSimulatedCameraImagesPath", directoryName);
 	});
 
-	connect(mUi->packImagesPushButton, &QPushButton::clicked
-			, this, &TrikAdditionalPreferences::packImagesToProjectClicked);
+	connect(mUi->packImagesPushButton, &QPushButton::clicked, this,
+		&TrikAdditionalPreferences::packImagesToProjectClicked);
 }
 
 TrikAdditionalPreferences::~TrikAdditionalPreferences()
@@ -73,7 +73,8 @@ void TrikAdditionalPreferences::save()
 	mUi->robotImagePicker->save();
 
 	if (mailboxSavedState != mUi->mailboxCheckBox->isChecked()) {
-		QMessageBox::information(this, tr("Information"), tr("You should restart the program to apply changes"));
+		QMessageBox::information(this, tr("Information"),
+			tr("You should restart the program to apply changes"));
 		mailboxSavedState = mUi->mailboxCheckBox->isChecked();
 	}
 	Q_EMIT settingsChanged();
@@ -89,7 +90,8 @@ void TrikAdditionalPreferences::restoreSettings()
 	mUi->realCameraCheckBox->setChecked(SettingsManager::value("TrikWebCameraReal").toBool());
 	mUi->imagesPathlineEdit->setText(SettingsManager::value("TrikSimulatedCameraImagesPath").toString());
 	mUi->cameraNameLineEdit->setText(SettingsManager::value("TrikWebCameraRealName").toString());
-	mUi->imagesFromProjectCheckBox->setChecked(SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool());
+	mUi->imagesFromProjectCheckBox->setChecked(
+		SettingsManager::value("TrikSimulatedCameraImagesFromProject").toBool());
 	mUi->simulatedCameraFrame->setVisible(not mUi->realCameraCheckBox->isChecked());
 	mUi->realCameraFrame->setVisible(mUi->realCameraCheckBox->isChecked());
 	mUi->mailboxCheckBox->setChecked(SettingsManager::value("TRIK2DMailbox").toBool());
@@ -97,7 +99,7 @@ void TrikAdditionalPreferences::restoreSettings()
 	mUi->robotImagePicker->restore();
 }
 
-void TrikAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface * const robotModel)
+void TrikAdditionalPreferences::onRobotModelChanged(kitBase::robotModel::RobotModelInterface *const robotModel)
 {
 	const bool isReal = !robotModel->name().contains("TwoD");
 	mUi->tcpSettingsGroupBox->setVisible(isReal);

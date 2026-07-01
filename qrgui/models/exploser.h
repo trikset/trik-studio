@@ -52,12 +52,12 @@ public:
 	/// Appends to \a createCommand child command that creates explosion from \a source to \a target.
 	/// If \a target is null and explosion requires immediate linkage creates new target of specified in
 	/// metamodel type and adds explosion into it.
-	void handleCreationWithExplosions(qReal::commands::AbstractCommand *createCommand
-			, const models::Models &models, const IdList &sourceList, const Id &target) const;
+	void handleCreationWithExplosions(qReal::commands::AbstractCommand *createCommand, const models::Models &models,
+		const IdList &sourceList, const Id &target) const;
 
 	/// Appends to given command child commands that clear outgoing explosion and
 	/// all non-hard incoming explosions
-	void handleRemoveCommand(const IdList &explosionSources, commands::AbstractCommand * const command) const;
+	void handleRemoveCommand(const IdList &explosionSources, commands::AbstractCommand *const command) const;
 
 	/// This method checks if explosion must be created immediately for given type
 	/// and if yes returns type with explosion target. Otherwise returns Id().
@@ -66,8 +66,8 @@ public:
 	/// Produces and returns command that binds either logical or graphical elements
 	/// instances with explosion link and adds explosion instance into user blocks
 	/// palette if nessesary.
-	commands::AbstractCommand *addExplosionCommand(const Id &source, const Id &target
-			, models::GraphicalModelAssistApi * const graphicalApi = nullptr) const;
+	commands::AbstractCommand *addExplosionCommand(const Id &source, const Id &target,
+		models::GraphicalModelAssistApi *const graphicalApi = nullptr) const;
 
 	/// Produces and returns command that unbinds elements with explosion link and
 	/// removes explosion instance from user blocks palette if nessesary.
@@ -75,8 +75,8 @@ public:
 
 	/// Produces and returns command that creates element of target type and
 	/// binds given element with new element with explosion link
-	commands::AbstractCommand *createElementWithIncomingExplosionCommand(const Id &source
-			, const Id &targetType, const models::Models &models) const;
+	commands::AbstractCommand *createElementWithIncomingExplosionCommand(const Id &source, const Id &targetType,
+		const models::Models &models) const;
 
 	/// Produces and returns a command that performs the renaming of the whole
 	/// explosions  hierarchy and binded palette items

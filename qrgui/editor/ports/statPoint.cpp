@@ -25,9 +25,10 @@ StatPoint::StatPoint(const PointPortInfo &info)
 	, mInitWidth(info.initWidth)
 	, mInitHeight(info.initHeight)
 	, mType(info.type)
-{}
+{
+}
 
-StatPoint::operator QPointF () const
+StatPoint::operator QPointF() const
 {
 	return mPoint;
 }

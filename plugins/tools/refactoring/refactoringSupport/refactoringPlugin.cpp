@@ -44,9 +44,9 @@ void RefactoringPlugin::init(PluginConfigurator const &configurator)
 	mLogicalModelApi = &configurator.logicalModelApi();
 	mGraphicalModelApi = &configurator.graphicalModelApi();
 
-	mMetamodelGeneratorSupport = new MetamodelGeneratorSupport(
-			configurator.mainWindowInterpretersInterface().errorReporter()
-			, &configurator.mainWindowInterpretersInterface());
+	mMetamodelGeneratorSupport =
+		new MetamodelGeneratorSupport(configurator.mainWindowInterpretersInterface().errorReporter(),
+			&configurator.mainWindowInterpretersInterface());
 	mRepoControlIFace = &configurator.repoControlInterface();
 	mMainWindowIFace = &configurator.mainWindowInterpretersInterface();
 	mQRealSourceFilesPath = SettingsManager::value("qrealSourcesLocation", "").toString();
@@ -56,22 +56,18 @@ void RefactoringPlugin::init(PluginConfigurator const &configurator)
 	mRefactoringWindow = new RefactoringWindow(mMainWindowIFace->windowWidget());
 	connect(mRefactoringWindow, SIGNAL(rejected()), this, SLOT(discardRefactoring()));
 
-	mRefactoringRepoApi = new qrRepo::RepoApi(mQRealSourceFilesPath + "/plugins/refactoring/refactoringExamples", true);
-	mRefactoringFinder = new RefactoringFinder(configurator.logicalModelApi()
-			, configurator.graphicalModelApi()
-			, configurator.mainWindowInterpretersInterface()
-			, mRefactoringRepoApi);
+	mRefactoringRepoApi =
+		new qrRepo::RepoApi(mQRealSourceFilesPath + "/plugins/refactoring/refactoringExamples", true);
+	mRefactoringFinder = new RefactoringFinder(configurator.logicalModelApi(), configurator.graphicalModelApi(),
+		configurator.mainWindowInterpretersInterface(), mRefactoringRepoApi);
 
 	connect(mRefactoringWindow, SIGNAL(findButtonClicked(QString)), this, SLOT(findRefactoring(QString)));
 	connect(mRefactoringWindow, SIGNAL(findNextButtonClicked()), this, SLOT(findNextRefactoring()));
 	connect(mRefactoringWindow, SIGNAL(discardButtonClicked()), this, SLOT(discardRefactoring()));
 	connect(mRefactoringWindow, SIGNAL(applyButtonClicked()), this, SLOT(applyRefactoring()));
 
-	mRefactoringApplier = new RefactoringApplier(configurator.logicalModelApi()
-			, configurator.graphicalModelApi()
-			, configurator.mainWindowInterpretersInterface()
-			, mRefactoringRepoApi
-			, &mCurrentMatch);
+	mRefactoringApplier = new RefactoringApplier(configurator.logicalModelApi(), configurator.graphicalModelApi(),
+		configurator.mainWindowInterpretersInterface(), mRefactoringRepoApi, &mCurrentMatch);
 }
 
 QPair<QString, gui::PreferencesPage *> RefactoringPlugin::preferencesPage()
@@ -85,7 +81,8 @@ QList<qReal::ActionInfo> RefactoringPlugin::actions()
 	ActionInfo refactoringMenuInfo(mRefactoringMenu, "tools");
 
 	mGenerateAndLoadRefactoringEditorAction = new QAction(tr("Generate and load refactoring editor"), nullptr);
-	connect(mGenerateAndLoadRefactoringEditorAction, SIGNAL(triggered()), this, SLOT(generateRefactoringMetamodel()));
+	connect(mGenerateAndLoadRefactoringEditorAction, SIGNAL(triggered()), this,
+		SLOT(generateRefactoringMetamodel()));
 	mRefactoringMenu->addAction(mGenerateAndLoadRefactoringEditorAction);
 
 	mOpenRefactoringWindowAction = new QAction(tr("Open Refactoring Window"), nullptr);
@@ -129,13 +126,8 @@ void RefactoringPlugin::generateRefactoringMetamodel()
 {
 	QDir currentDir(".");
 
-	QString editorMetamodelFilePath =
-			QFileDialog::getOpenFileName(
-					nullptr
-					, tr("Select xml file to load refactoring metamodel")
-					, currentDir.absolutePath()
-					, "XML files (*.xml)"
-			);
+	QString editorMetamodelFilePath = QFileDialog::getOpenFileName(nullptr,
+		tr("Select xml file to load refactoring metamodel"), currentDir.absolutePath(), "XML files (*.xml)");
 	if (editorMetamodelFilePath == "" || mQRealSourceFilesPath == "") {
 		return;
 	}
@@ -144,18 +136,18 @@ void RefactoringPlugin::generateRefactoringMetamodel()
 	QDomElement diagram = mMetamodelGeneratorSupport->diagramElement(metamodel);
 	QDomElement graphics = metamodel.elementsByTagName("graphicTypes").at(0).toElement();
 	QString const diagramName = diagram.attribute("name").replace(" ", "_");
-	QString const displayedName = diagram.attribute("displayedName").isEmpty()
-			? diagramName
-			: diagram.attribute("displayedName");
+	QString const displayedName =
+		diagram.attribute("displayedName").isEmpty() ? diagramName : diagram.attribute("displayedName");
 
 	diagram.setAttribute("displayedName", displayedName + " Refactorings");
 	insertRefactoringID(metamodel, metamodel.elementsByTagName("node"), true);
 	insertRefactoringID(metamodel, metamodel.elementsByTagName("edge"), false);
-	addPalette(metamodel, diagram, metamodelPaletteGroup(metamodel,
-			metamodel.elementsByTagName("node"), metamodel.elementsByTagName("edge")));
+	addPalette(metamodel, diagram,
+		metamodelPaletteGroup(metamodel, metamodel.elementsByTagName("node"),
+			metamodel.elementsByTagName("edge")));
 
-	addRefactoringLanguageElements(diagramName, metamodel, graphics
-			, mQRealSourceFilesPath + "/plugins/refactoring/editor/refactoringEditor.xml");
+	addRefactoringLanguageElements(diagramName, metamodel, graphics,
+		mQRealSourceFilesPath + "/plugins/refactoring/editor/refactoringEditor.xml");
 	mEditorElementNames.clear();
 	QString sourceEditorName = editorMetamodelFilePath.split("/", QString::SkipEmptyParts).last();
 	sourceEditorName.chop(4);
@@ -164,18 +156,14 @@ void RefactoringPlugin::generateRefactoringMetamodel()
 	QString relativeEditorPath = sourceEditorName + "RefactoringsEditor";
 	QString editorPath = mQRealSourceFilesPath + "/plugins/" + relativeEditorPath;
 
-	mMetamodelGeneratorSupport->generateProFile(metamodel
-			, editorMetamodelFilePath, mQRealSourceFilesPath, metamodelName
-			, editorPath, relativeEditorPath);
+	mMetamodelGeneratorSupport->generateProFile(metamodel, editorMetamodelFilePath, mQRealSourceFilesPath,
+		metamodelName, editorPath, relativeEditorPath);
 
 	mMetamodelGeneratorSupport->saveMetamodelInFile(metamodel, editorPath + "/" + metamodelName + ".xml");
 
-	mMetamodelGeneratorSupport->loadPlugin(editorPath, metamodelName
-			, SettingsManager::value("pathToQmake").toString()
-			, SettingsManager::value("pathToMake").toString()
-			, SettingsManager::value("pluginExtension").toString()
-			, SettingsManager::value("prefix").toString()
-	);
+	mMetamodelGeneratorSupport->loadPlugin(editorPath, metamodelName,
+		SettingsManager::value("pathToQmake").toString(), SettingsManager::value("pathToMake").toString(),
+		SettingsManager::value("pluginExtension").toString(), SettingsManager::value("prefix").toString());
 }
 
 void RefactoringPlugin::insertRefactoringID(QDomDocument metamodel, QDomNodeList const &list, bool isNode)
@@ -217,10 +205,11 @@ void RefactoringPlugin::insertRefactoringID(QDomDocument metamodel, QDomNodeList
 		}
 	}
 }
-void RefactoringPlugin::addRefactoringLanguageElements(QString const &diagramName
-		, QDomDocument metamodel, QDomElement &graphics, QString const &pathToRefactoringMetamodel)
+void RefactoringPlugin::addRefactoringLanguageElements(QString const &diagramName, QDomDocument metamodel,
+	QDomElement &graphics, QString const &pathToRefactoringMetamodel)
 {
-	QDomDocument refactoringMetamodel = mMetamodelGeneratorSupport->loadMetamodelFromFile(pathToRefactoringMetamodel);
+	QDomDocument refactoringMetamodel =
+		mMetamodelGeneratorSupport->loadMetamodelFromFile(pathToRefactoringMetamodel);
 	QDomNodeList nodes = refactoringMetamodel.elementsByTagName("node");
 	while (!nodes.isEmpty()) {
 		QDomNode node = nodes.at(0);
@@ -256,8 +245,8 @@ void RefactoringPlugin::saveRefactoring()
 	QHash<QString, IdList> diagramIds;
 	for (Id const &childId : childrenIDs) {
 		if (childId.element() == "RefactoringDiagramNode" && childId == mMainWindowIFace->activeDiagram()) {
-			QString elementName = mGraphicalModelApi->name(childId).replace(" ", "")
-					.replace("(", "").replace(")", "");
+			QString elementName =
+				mGraphicalModelApi->name(childId).replace(" ", "").replace("(", "").replace(")", "");
 			if (!elementName.isEmpty()) {
 				QString fileName = mPathToRefactoringExamples + elementName;
 				IdList list;
@@ -271,16 +260,16 @@ void RefactoringPlugin::saveRefactoring()
 	QMessageBox::information(nullptr, tr("Information"), tr("Saved successfully"), tr("Ok"));
 }
 
-QDomElement RefactoringPlugin::createPaletteElement(QString const &elementType
-		, QDomDocument metamodel, QString const &name)
+QDomElement RefactoringPlugin::createPaletteElement(QString const &elementType, QDomDocument metamodel,
+	QString const &name)
 {
 	QDomElement element = metamodel.createElement(elementType);
 	element.setAttribute("name", name);
 	return element;
 }
 
-QDomElement RefactoringPlugin::metamodelPaletteGroup(QDomDocument metamodel
-		, QDomNodeList const &nodeList, QDomNodeList const &edgeList)
+QDomElement RefactoringPlugin::metamodelPaletteGroup(QDomDocument metamodel, QDomNodeList const &nodeList,
+	QDomNodeList const &edgeList)
 {
 	QDomElement metamodelGroup = createPaletteElement("group", metamodel, "Source Metamodel Elements");
 	addElementsToMetamodelGroup(metamodel, nodeList, metamodelGroup);
@@ -288,8 +277,8 @@ QDomElement RefactoringPlugin::metamodelPaletteGroup(QDomDocument metamodel
 	return metamodelGroup;
 }
 
-void RefactoringPlugin::addElementsToMetamodelGroup(QDomDocument metamodel
-		, QDomNodeList const &list, QDomElement &metamodelGroup)
+void RefactoringPlugin::addElementsToMetamodelGroup(QDomDocument metamodel, QDomNodeList const &list,
+	QDomElement &metamodelGroup)
 {
 	for (int i = 0; i < list.size(); ++i) {
 		QDomElement element = list.at(i).toElement();
@@ -305,26 +294,25 @@ QString const RefactoringPlugin::nameForPaletteGroup(QString const &name)
 	if (nameForPaletteGroup.length() > 0) {
 		if (nameForPaletteGroup.length() > 1) {
 			nameForPaletteGroup = nameForPaletteGroup.at(0).toUpper() + nameForPaletteGroup.mid(1);
-		}
-		else {
+		} else {
 			nameForPaletteGroup = nameForPaletteGroup.at(0).toUpper();
 		}
 	}
 	return nameForPaletteGroup;
 }
 
-void RefactoringPlugin::addPalette(QDomDocument metamodel, QDomElement diagram
-		, QDomElement const &metamodelPaletteGroup)
+void RefactoringPlugin::addPalette(QDomDocument metamodel, QDomElement diagram,
+	QDomElement const &metamodelPaletteGroup)
 {
 	QStringList patternGroupNamesList;
 	patternGroupNamesList << "RefactoringDiagramNode"
-			<< "FromBeforeToAter"
-			<< "AfterBlock"
-			<< "BeforeBlock";
+			      << "FromBeforeToAter"
+			      << "AfterBlock"
+			      << "BeforeBlock";
 	QStringList basicGroupNamesList;
 	basicGroupNamesList << "Element"
-			<< "Link"
-			<< "SelectedSegment";
+			    << "Link"
+			    << "SelectedSegment";
 	QDomElement palette = metamodel.createElement("palette");
 	addPaletteGroup(metamodel, palette, "Refactoring Rule Elements", patternGroupNamesList);
 	addPaletteGroup(metamodel, palette, "Basic Elements", basicGroupNamesList);
@@ -332,8 +320,8 @@ void RefactoringPlugin::addPalette(QDomDocument metamodel, QDomElement diagram
 	diagram.appendChild(palette);
 }
 
-void RefactoringPlugin::addPaletteGroup(QDomDocument metamodel
-		, QDomElement palette, const QString &groupName, const QStringList &elementNameList)
+void RefactoringPlugin::addPaletteGroup(QDomDocument metamodel, QDomElement palette, const QString &groupName,
+	const QStringList &elementNameList)
 {
 	QDomElement group = createPaletteElement("group", metamodel, groupName);
 	for (QString const &elementName : elementNameList) {
@@ -383,8 +371,7 @@ void RefactoringPlugin::findRefactoring(const QString &refactoringName)
 			bool isExclusive = false;
 			mMainWindowIFace->highlight(selectedElement, isExclusive, color);
 		}
-	}
-	else if (mRefactoringFinder->findMatch()) {
+	} else if (mRefactoringFinder->findMatch()) {
 		mMatches = mRefactoringFinder->matches();
 		if (mMatches.isEmpty()) {
 			mMainWindowIFace->errorReporter()->addInformation(tr("No match"));
@@ -406,8 +393,7 @@ void RefactoringPlugin::findRefactoring(const QString &refactoringName)
 			bool isExclusive = false;
 			mMainWindowIFace->highlight(valueId, isExclusive, color);
 		}
-	}
-	else {
+	} else {
 		mMainWindowIFace->errorReporter()->addInformation(tr("No match"));
 		mRefactoringWindow->discard();
 		return;
@@ -443,8 +429,8 @@ void RefactoringPlugin::discardRefactoring()
 void RefactoringPlugin::createRefactoring()
 {
 	if (mMainWindowIFace->pluginLoaded("RefactoringEditor")) {
-		Id diagramId = Id("RefactoringEditor", "RefactoringDiagram"
-				, "RefactoringDiagramNode", QUuid::createUuid().toString());
+		Id diagramId = Id("RefactoringEditor", "RefactoringDiagram", "RefactoringDiagramNode",
+			QUuid::createUuid().toString());
 		mGraphicalModelApi->createElement(Id::rootId(), diagramId, false, "NewRefactoringRule", QPointF());
 
 		QHash<QString, QPointF> elementTypesAndPositions;
@@ -452,10 +438,11 @@ void RefactoringPlugin::createRefactoring()
 		elementTypesAndPositions.insert("AfterBlock", QPointF(700, 140));
 		elementTypesAndPositions.insert("FromBeforeToAter", QPointF(540, 200));
 
-		foreach(QString const name, elementTypesAndPositions.keys()) {
-			Id elementId = Id("RefactoringEditor", "RefactoringDiagram", name, QUuid::createUuid().toString());
-			mGraphicalModelApi->createElement(diagramId, elementId, false, name
-					, elementTypesAndPositions[name]);
+		foreach (QString const name, elementTypesAndPositions.keys()) {
+			Id elementId =
+				Id("RefactoringEditor", "RefactoringDiagram", name, QUuid::createUuid().toString());
+			mGraphicalModelApi->createElement(diagramId, elementId, false, name,
+				elementTypesAndPositions[name]);
 		}
 		mMainWindowIFace->activateItemOrDiagram(diagramId);
 	}
@@ -476,30 +463,28 @@ void RefactoringPlugin::makeSubprogramHARDCODE() // FIXME
 {
 	removeUnnecessaryLinksFromSelected();
 	Id const activeDiagramId = mMainWindowIFace->activeDiagram();
-	Id const newDiagramId = Id(activeDiagramId.editor(), activeDiagramId.diagram()
-			, activeDiagramId.element(), QUuid::createUuid().toString());
+	Id const newDiagramId = Id(activeDiagramId.editor(), activeDiagramId.diagram(), activeDiagramId.element(),
+		QUuid::createUuid().toString());
 	Id const subprogramElementInRuleId = mRefactoringApplier->subprogramElementId();
 	if (subprogramElementInRuleId == Id::rootId()) {
 		return;
 	}
-	QString const newDiagramName = mGraphicalModelApi->name(activeDiagramId)
-			+ "_Subprogram_" + mRefactoringRepoApi->name(subprogramElementInRuleId);
+	QString const newDiagramName = mGraphicalModelApi->name(activeDiagramId) + "_Subprogram_"
+	                               + mRefactoringRepoApi->name(subprogramElementInRuleId);
 	mGraphicalModelApi->createElement(Id::rootId(), newDiagramId, false, newDiagramName, QPointF());
 	for (Id const &id : mSelectedElementsOnActiveDiagram) {
 		mGraphicalModelApi->changeParent(id, newDiagramId, mGraphicalModelApi->position(id));
 	}
 
-	QList<QPair<Id, QPair<Id, bool> > > const outsideLinks = findOutsideSelectionLinks();
-	Id subprogramId = Id(subprogramElementInRuleId.editor()
-			, subprogramElementInRuleId.diagram()
-			, subprogramElementInRuleId.element()
-			, QUuid::createUuid().toString());
+	QList<QPair<Id, QPair<Id, bool>>> const outsideLinks = findOutsideSelectionLinks();
+	Id subprogramId = Id(subprogramElementInRuleId.editor(), subprogramElementInRuleId.diagram(),
+		subprogramElementInRuleId.element(), QUuid::createUuid().toString());
 
-	mGraphicalModelApi->createElement(activeDiagramId, subprogramId, false
-			, mRefactoringRepoApi->name(subprogramElementInRuleId)
-			, mGraphicalModelApi->position(outsideLinks.first().second.first));
+	mGraphicalModelApi->createElement(activeDiagramId, subprogramId, false,
+		mRefactoringRepoApi->name(subprogramElementInRuleId),
+		mGraphicalModelApi->position(outsideLinks.first().second.first));
 
-	for (int i = 0; i <outsideLinks.size(); ++i) {
+	for (int i = 0; i < outsideLinks.size(); ++i) {
 		if (outsideLinks.at(i).second.second) {
 			mGraphicalModelApi->setTo(outsideLinks.at(i).first, subprogramId);
 		} else {
@@ -507,27 +492,25 @@ void RefactoringPlugin::makeSubprogramHARDCODE() // FIXME
 		}
 	}
 
-	mLogicalModelApi->addExplosion(mGraphicalModelApi->logicalId(subprogramId)
-			, mGraphicalModelApi->logicalId(newDiagramId));
+	mLogicalModelApi->addExplosion(mGraphicalModelApi->logicalId(subprogramId),
+		mGraphicalModelApi->logicalId(newDiagramId));
 }
 
-QList<QPair<Id, QPair<Id, bool> > > RefactoringPlugin::findOutsideSelectionLinks()
+QList<QPair<Id, QPair<Id, bool>>> RefactoringPlugin::findOutsideSelectionLinks()
 {
-	QList<QPair<Id, QPair<Id, bool> > > result;
+	QList<QPair<Id, QPair<Id, bool>>> result;
 	for (Id const &id : mSelectedElementsOnActiveDiagram) {
 		IdList const currentIdList = mGraphicalModelApi->graphicalRepoApi().links(id);
 		for (Id const currentId : currentIdList) {
 			Id const toId = mGraphicalModelApi->to(currentId);
 			Id const fromId = mGraphicalModelApi->from(currentId);
 			if (mSelectedElementsOnActiveDiagram.contains(toId)
-					&& !(mSelectedElementsOnActiveDiagram.contains(fromId)))
-			{
-				result.append(QPair<Id, QPair<Id, bool> > (currentId, QPair<Id, bool>(toId, true)));
+				&& !(mSelectedElementsOnActiveDiagram.contains(fromId))) {
+				result.append(QPair<Id, QPair<Id, bool>>(currentId, QPair<Id, bool>(toId, true)));
 			}
 			if (mSelectedElementsOnActiveDiagram.contains(fromId)
-					&& !(mSelectedElementsOnActiveDiagram.contains(toId)))
-			{
-				result.append(QPair<Id, QPair<Id, bool> > (currentId, QPair<Id, bool>(fromId, false)));
+				&& !(mSelectedElementsOnActiveDiagram.contains(toId))) {
+				result.append(QPair<Id, QPair<Id, bool>>(currentId, QPair<Id, bool>(fromId, false)));
 			}
 		}
 	}
@@ -537,17 +520,15 @@ QList<QPair<Id, QPair<Id, bool> > > RefactoringPlugin::findOutsideSelectionLinks
 void RefactoringPlugin::removeUnnecessaryLinksFromSelected()
 {
 	for (Id const &id : mSelectedElementsOnActiveDiagram) {
-		if (mGraphicalModelApi->to(id) == Id::rootId()
-				&& mGraphicalModelApi->from(id) == Id::rootId()) {
+		if (mGraphicalModelApi->to(id) == Id::rootId() && mGraphicalModelApi->from(id) == Id::rootId()) {
 			continue;
 		}
 		Id const toId = mGraphicalModelApi->to(id);
 		Id const fromId = mGraphicalModelApi->from(id);
 		if ((mSelectedElementsOnActiveDiagram.contains(toId)
-				&& !(mSelectedElementsOnActiveDiagram.contains(fromId))) ||
-				(mSelectedElementsOnActiveDiagram.contains(fromId)
-				&& !(mSelectedElementsOnActiveDiagram.contains(toId))))
-		{
+			    && !(mSelectedElementsOnActiveDiagram.contains(fromId)))
+			|| (mSelectedElementsOnActiveDiagram.contains(fromId)
+				&& !(mSelectedElementsOnActiveDiagram.contains(toId)))) {
 			mSelectedElementsOnActiveDiagram.removeAll(id);
 		}
 	}

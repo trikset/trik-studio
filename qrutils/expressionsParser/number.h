@@ -24,10 +24,7 @@ class QRUTILS_EXPORT Number
 {
 	Q_DISABLE_COPY(Number)
 public:
-	enum Type {
-		doubleType = 0
-		, intType
-	};
+	enum Type { doubleType = 0, intType };
 
 public:
 	Number(const QVariant &value, Type type);
@@ -53,6 +50,7 @@ public:
 	bool operator>=(const Number &arg);
 	bool operator!=(const Number &arg);
 	void neg();
+
 protected:
 	QVariant mValue;
 	Type mType;

@@ -29,9 +29,12 @@ class TokenStream
 public:
 	/// Constructor. Takes list of tokens and names of tokens (for error reporting) from lexer and a reference to error
 	/// stream where to put errors.
-	TokenStream(QList<Token<TokenType>> const &tokenList, QHash<TokenType, QString> const &tokenUserFriendlyNames
-			, QList<Error> &errorList)
-		: mTokenList(tokenList), mErrorList(errorList), mTokenUserFriendlyNames(tokenUserFriendlyNames), mPosition(0)
+	TokenStream(QList<Token<TokenType>> const &tokenList, QHash<TokenType, QString> const &tokenUserFriendlyNames,
+		QList<Error> &errorList)
+		: mTokenList(tokenList)
+		, mErrorList(errorList)
+		, mTokenUserFriendlyNames(tokenUserFriendlyNames)
+		, mPosition(0)
 	{
 	}
 
@@ -58,12 +61,11 @@ public:
 			consume();
 			return true;
 		} else {
-			mErrorList << Error(next().range().start()
-					, QString(QObject::tr("Expected \"%1\", got \"%2\""))
-							.arg(mTokenUserFriendlyNames[token])
-							.arg(mTokenUserFriendlyNames[next().token()])
-					, ErrorType::syntaxError
-					, Severity::error);
+			mErrorList << Error(next().range().start(),
+				QString(QObject::tr("Expected \"%1\", got \"%2\""))
+					.arg(mTokenUserFriendlyNames[token])
+					.arg(mTokenUserFriendlyNames[next().token()]),
+				ErrorType::syntaxError, Severity::error);
 
 			return false;
 		}

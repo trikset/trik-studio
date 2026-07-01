@@ -35,7 +35,9 @@ public:
 	bool value(const QtProperty *property) const;
 
 public Q_SLOTS:
-	void setValue(QtProperty *, bool){}
+	void setValue(QtProperty *, bool)
+	{
+	}
 Q_SIGNALS:
 	void valueChanged(QtProperty *property, bool val);
 	void buttonClicked(QtProperty *property);
@@ -43,10 +45,17 @@ Q_SIGNALS:
 protected:
 	QString valueText(const QtProperty *property) const;
 	QIcon valueIcon(const QtProperty *property) const;
-	virtual void initializeProperty(QtProperty *){}
-	virtual void uninitializeProperty(QtProperty *){}
+	virtual void initializeProperty(QtProperty *)
+	{
+	}
+	virtual void uninitializeProperty(QtProperty *)
+	{
+	}
+
 private:
-	class {} *d_ptr;
+	class
+	{
+	} *d_ptr;
 	Q_DISABLE_COPY(PushButtonPropertyManager)
 };
 
@@ -65,7 +74,9 @@ protected:
 	void disconnectPropertyManager(PushButtonPropertyManager *manager);
 
 private:
-	class {} *d_ptr;
+	class
+	{
+	} *d_ptr;
 	Q_DISABLE_COPY(PushButtonFactory)
 };
 

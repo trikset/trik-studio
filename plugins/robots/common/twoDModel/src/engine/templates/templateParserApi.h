@@ -33,10 +33,10 @@ class TemplatesProcessor;
 class TemplatesParserApi
 {
 public:
-	TemplatesParserApi(const TemplatesParserApi&) = delete;
-	TemplatesParserApi& operator=(const TemplatesParserApi&) = delete;
-	TemplatesParserApi(TemplatesParserApi&&) = delete;
-	TemplatesParserApi& operator=(TemplatesParserApi&&) = delete;
+	TemplatesParserApi(const TemplatesParserApi &) = delete;
+	TemplatesParserApi &operator=(const TemplatesParserApi &) = delete;
+	TemplatesParserApi(TemplatesParserApi &&) = delete;
+	TemplatesParserApi &operator=(TemplatesParserApi &&) = delete;
 	explicit TemplatesParserApi(qReal::ErrorReporterInterface &errorReporter);
 	virtual ~TemplatesParserApi();
 
@@ -44,6 +44,7 @@ public:
 	bool proccessTemplates(const QDomElement &constraintsXml);
 	void parseSystemTemplates();
 	void parseTemplates(const QDomDocument &templatesXml);
+
 private:
 	/// The path to the system template library.
 	virtual QString pathsToTemplates() const;

@@ -40,7 +40,6 @@
 #include "simpleGenerators/lineLeader/sleepGenerator.h"
 #include "simpleGenerators/lineLeader/wakeUpGenerator.h"
 
-
 #include "converters/outputPortNameConverter.h"
 #include "converters/ledColorConverter.h"
 #include "converters/colorConverter.h"
@@ -50,11 +49,9 @@ using namespace ev3::simple;
 using namespace ev3::converters;
 using namespace generatorBase::simple;
 
-Ev3GeneratorFactory::Ev3GeneratorFactory(const qrRepo::RepoApi &repo
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName) // NOLINT(modernize-pass-by-value)
+Ev3GeneratorFactory::Ev3GeneratorFactory(const qrRepo::RepoApi &repo, qReal::ErrorReporterInterface &errorReporter,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	generatorBase::lua::LuaProcessor &luaProcessor, const QString &generatorName) // NOLINT(modernize-pass-by-value)
 	: GeneratorFactoryBase(repo, errorReporter, robotModelManager, luaProcessor)
 	, mGeneratorName(generatorName)
 	, mMailboxes({":/" + mGeneratorName + "/templates"})
@@ -68,20 +65,20 @@ parts::Mailboxes &Ev3GeneratorFactory::mailboxes()
 	return mMailboxes;
 }
 
-AbstractSimpleGenerator *Ev3GeneratorFactory::ifGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer, bool elseIsEmpty, bool needInverting)
+AbstractSimpleGenerator *Ev3GeneratorFactory::ifGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer, bool elseIsEmpty, bool needInverting)
 {
 	return GeneratorFactoryBase::ifGenerator(id, customizer, elseIsEmpty, needInverting);
 }
 
-AbstractSimpleGenerator *Ev3GeneratorFactory::forLoopGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+AbstractSimpleGenerator *Ev3GeneratorFactory::forLoopGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	return GeneratorFactoryBase::forLoopGenerator(id, customizer);
 }
 
-generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGenerator(const qReal::Id &id
-		, generatorBase::GeneratorCustomizer &customizer)
+generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGenerator(const qReal::Id &id,
+	generatorBase::GeneratorCustomizer &customizer)
 {
 	QString const elementType = id.element();
 	if (elementType == "Ev3DrawLine") {
@@ -116,8 +113,7 @@ generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGener
 		return new WaitForColorBlockGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Subprogram") {
 		return new SubprogramCallGenerator(mRepo, customizer, id, this);
-	}
-	else if (elementType == "Ev3CalibrateWhiteLL") {
+	} else if (elementType == "Ev3CalibrateWhiteLL") {
 		return new lineLeader::CalibrateWhiteGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "Ev3CalibrateBlackLL") {
 		return new lineLeader::CalibrateBlackGenerator(mRepo, customizer, id, this);
@@ -140,8 +136,7 @@ generatorBase::simple::AbstractSimpleGenerator *Ev3GeneratorFactory::simpleGener
 
 Binding::ConverterInterface *Ev3GeneratorFactory::outputPortNameConverter() const
 {
-	return new OutputPortNameConverter(pathsToTemplates()
-			, mRobotModelManager.model().availablePorts());
+	return new OutputPortNameConverter(pathsToTemplates(), mRobotModelManager.model().availablePorts());
 }
 
 Binding::ConverterInterface *Ev3GeneratorFactory::ledColorConverter() const
@@ -156,7 +151,7 @@ Binding::ConverterInterface *Ev3GeneratorFactory::colorConverter() const
 
 QStringList Ev3GeneratorFactory::pathsToTemplates() const
 {
-	return { ":/" + mGeneratorName + "/templates" };
+	return {":/" + mGeneratorName + "/templates"};
 }
 
 void Ev3GeneratorFactory::reportError(const QString &errorMessage, const qReal::Id &id)

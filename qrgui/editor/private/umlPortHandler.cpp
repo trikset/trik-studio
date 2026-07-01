@@ -19,25 +19,24 @@
 
 using namespace qReal::gui::editor;
 
-UmlPortHandler::UmlPortHandler(NodeElement * const node)
-		: mNode(node), mBelongsToHorizontalBorders(true)
+UmlPortHandler::UmlPortHandler(NodeElement *const node)
+	: mNode(node)
+	, mBelongsToHorizontalBorders(true)
 {
 }
 
-void UmlPortHandler::handleMoveEvent(const bool leftPressed
-		, QPointF &pos, QPointF scenePos
-		, NodeElement *&parentNode)
+void UmlPortHandler::handleMoveEvent(const bool leftPressed, QPointF &pos, QPointF scenePos, NodeElement *&parentNode)
 {
 	if (!mNode || !leftPressed) {
 		return;
 	}
 
-	if (pos == QPointF(0,0)) {
+	if (pos == QPointF(0, 0)) {
 		pos = mNode->pos();
 	}
 
-	QGraphicsItem* const item = mNode->scene()->items(scenePos).value(1);
-	NodeElement* const actionItem = dynamic_cast<NodeElement * const>(item);
+	QGraphicsItem *const item = mNode->scene()->items(scenePos).value(1);
+	NodeElement *const actionItem = dynamic_cast<NodeElement *const>(item);
 	const BorderChecker actionItemBorderChecker(actionItem);
 	QPointF posInItem = QPointF(0, 0);
 	if (actionItem && ((actionItem == parentNode) || (!parentNode))) {
@@ -47,8 +46,7 @@ void UmlPortHandler::handleMoveEvent(const bool leftPressed
 		const bool checkUpperBorder = actionItemBorderChecker.checkUpperBorder(posInItem);
 		const bool checkRightBorder = actionItemBorderChecker.checkRightBorder(posInItem);
 		const bool checkLeftBorder = actionItemBorderChecker.checkLeftBorder(posInItem);
-		const bool checkBorders = checkLowerBorder || checkUpperBorder
-			|| checkRightBorder || checkLeftBorder;
+		const bool checkBorders = checkLowerBorder || checkUpperBorder || checkRightBorder || checkLeftBorder;
 
 		if (checkBorders) {
 			mNode->setParentItem(actionItem);
@@ -59,17 +57,16 @@ void UmlPortHandler::handleMoveEvent(const bool leftPressed
 			handleHorizontalBorders(actionItem, parentNode, pos, posInItem);
 		}
 	} else if (parentNode) {
-			mNode->setPos(pos);
-			if (parentNode) {
-				posInItem = parentNode->mapFromScene(scenePos);
-				handleHorizontalBorders(parentNode, parentNode, pos, posInItem);
-			}
+		mNode->setPos(pos);
+		if (parentNode) {
+			posInItem = parentNode->mapFromScene(scenePos);
+			handleHorizontalBorders(parentNode, parentNode, pos, posInItem);
+		}
 	}
 }
 
-void UmlPortHandler::handleHorizontalBorders(
-		const NodeElement * const tmpNode, const NodeElement * const parentNode
-		, QPointF pos, QPointF posInItem) const
+void UmlPortHandler::handleHorizontalBorders(const NodeElement *const tmpNode, const NodeElement *const parentNode,
+	QPointF pos, QPointF posInItem) const
 {
 	QPointF newPos = pos;
 	const BorderChecker parentNodeBorderChecker(parentNode);

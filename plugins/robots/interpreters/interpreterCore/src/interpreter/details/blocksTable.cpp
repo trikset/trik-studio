@@ -20,8 +20,8 @@ using namespace qReal;
 using namespace kitBase::blocksBase;
 using namespace interpreterCore::interpreter::details;
 
-BlocksTable::BlocksTable(BlocksFactoryManagerInterface &blocksFactoryManager
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager)
+BlocksTable::BlocksTable(BlocksFactoryManagerInterface &blocksFactoryManager,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager)
 	: mBlocksFactoryManager(blocksFactoryManager)
 	, mRobotModelManager(robotModelManager)
 {

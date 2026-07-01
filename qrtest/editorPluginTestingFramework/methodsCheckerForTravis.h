@@ -26,10 +26,8 @@ class MethodsCheckerForTravis
 public:
 
 	/// returns 0, if all results are correct, and 1, if some of results are incorrect
-	static int calculateResult(
-			QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
-			QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult
-			);
+	static int calculateResult(QList<MethodsTester::ResultOfGenerating> qrxcAndQrmcResult,
+		QList<MethodsTester::ResultOfGenerating> qrxcAndInterpreterResult);
 
 private:
 	/// calculates result for one list
@@ -40,4 +38,3 @@ private:
 };
 
 }
-

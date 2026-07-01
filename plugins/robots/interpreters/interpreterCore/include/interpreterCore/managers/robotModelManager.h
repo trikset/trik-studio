@@ -35,13 +35,13 @@ public:
 
 public Q_SLOTS:
 	/// Changes currently selected robot model and notifies all about change by robotModelChanged signal.
-	void setModel(kitBase::robotModel::RobotModelInterface * const robotModel);
+	void setModel(kitBase::robotModel::RobotModelInterface *const robotModel);
 
 	/// Forces manager to send robotModelChanged signal with current model as an argument.
 	void sync();
 
 private:
-	kitBase::robotModel::RobotModelInterface *mRobotModel;  // Does not have ownership.
+	kitBase::robotModel::RobotModelInterface *mRobotModel; // Does not have ownership.
 	DefaultRobotModel mDefaultRobotModel;
 };
 

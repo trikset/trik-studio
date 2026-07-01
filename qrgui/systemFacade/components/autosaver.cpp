@@ -61,7 +61,7 @@ uint Autosaver::interval() const
 }
 
 Autosaver::Pauser::Pauser(Autosaver &autosaver)
-		: mAutosaver(autosaver)
+	: mAutosaver(autosaver)
 {
 	autosaver.suspend();
 }
@@ -83,20 +83,19 @@ QString Autosaver::autosaveFilePath(const QString &currentFilePath) const
 	}
 
 	const QFileInfo currentProject(currentFilePath);
-	const QString autosaveDirectory = currentProject.absoluteDir().exists()
-			? currentProject.absolutePath()
-			: PlatformInfo::applicationDirPath();
+	const QString autosaveDirectory = currentProject.absoluteDir().exists() ? currentProject.absolutePath()
+	                                                                        : PlatformInfo::applicationDirPath();
 	const QString currentFileName = currentProject.fileName();
-	const QString autosaveFile = currentFileName.startsWith("~")
-			? currentFileName : "~" + currentFileName;
+	const QString autosaveFile = currentFileName.startsWith("~") ? currentFileName : "~" + currentFileName;
 	return autosaveDirectory + "/" + autosaveFile;
 }
 
 QString Autosaver::tempFilePath() const
 {
 	// Use persistant path for autosave file to be able to find it after restart on crash
-	return QString("%1/%2.qrs").arg(PlatformInfo::invariantPath("@AppDataLocation@")
-									, SettingsManager::value("AutosaveTempFileName").toString());
+	return QString("%1/%2.qrs")
+	        .arg(PlatformInfo::invariantPath("@AppDataLocation@"),
+			SettingsManager::value("AutosaveTempFileName").toString());
 }
 
 bool Autosaver::isAutosave(const QString &fileName) const
@@ -166,14 +165,14 @@ bool Autosaver::checkTempFile()
 
 QString Autosaver::openAutosavePrompt() const
 {
-	return tr("More recent autosaved version of this file was found. "\
-			"Do you wish to open it instead?");
+	return tr("More recent autosaved version of this file was found. "
+		  "Do you wish to open it instead?");
 }
 
 QString Autosaver::openTempFilePrompt() const
 {
-	return tr("It seems like the last application session was terminated in an "\
-			"unusual way. Do you wish to recover unsaved project?");
+	return tr("It seems like the last application session was terminated in an "
+		  "unusual way. Do you wish to recover unsaved project?");
 }
 
 void Autosaver::saveAutoSave()

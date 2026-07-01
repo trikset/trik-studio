@@ -36,8 +36,8 @@ using namespace nxt::robotModel::real;
 using namespace utils::robotCommunication;
 using namespace kitBase::robotModel;
 
-RealRobotModel::RealRobotModel(const QString &kitId, const QString &robotId
-		, const QSharedPointer<utils::robotCommunication::RobotCommunicationThreadInterface> &communicationThread)
+RealRobotModel::RealRobotModel(const QString &kitId, const QString &robotId,
+	const QSharedPointer<utils::robotCommunication::RobotCommunicationThreadInterface> &communicationThread)
 	: NxtRobotModelBase(kitId, robotId)
 	, mRobotCommunicator(new RobotCommunicator(this))
 {

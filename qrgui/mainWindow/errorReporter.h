@@ -33,7 +33,7 @@ class ErrorReporter : public QObject, public ErrorReporterInterface
 
 public:
 	ErrorReporter();
-	ErrorReporter(ErrorListWidget * const errorListWidget, QDockWidget * const errorList);
+	ErrorReporter(ErrorListWidget *const errorListWidget, QDockWidget *const errorList);
 
 public Q_SLOTS:
 	void addInformation(const QString &message, const qReal::Id &position = Id::rootId()) override;
@@ -44,7 +44,7 @@ public Q_SLOTS:
 
 	void sendBubblingMessage(const QString &message, int duration, QWidget *parent = nullptr) override;
 
-	bool showErrors(ErrorListWidget * const errorListWidget, QDockWidget * const errorList) const;
+	bool showErrors(ErrorListWidget *const errorListWidget, QDockWidget *const errorList) const;
 	void updateVisibility(bool isVisible);
 
 	void reportOperation(const QFuture<void> &operation, const QString &description = QString()) override;
@@ -70,12 +70,12 @@ public Q_SLOTS:
 
 private:
 	static QString severityMessage(const Error &error);
-	void showError(const Error &error, ErrorListWidget * const errorListWidget) const;
+	void showError(const Error &error, ErrorListWidget *const errorListWidget) const;
 
 	QList<Error> mErrors;
 
-	ErrorListWidget * const mErrorListWidget;  // Doesn't have ownership
-	QDockWidget * const mErrorList;  // Doesn't have ownership
+	ErrorListWidget *const mErrorListWidget; // Doesn't have ownership
+	QDockWidget *const mErrorList; // Doesn't have ownership
 
 	/// Should error window be shown or not
 	bool mIsVisible;

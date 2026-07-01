@@ -23,7 +23,7 @@
 #include <QDomElement>
 
 const QString description = QObject::tr("Patcher for save files, replaces world model "
-		"with contents of a given XML world model");
+					"with contents of a given XML world model");
 
 int main(int argc, char *argv[])
 {
@@ -37,17 +37,23 @@ int main(int argc, char *argv[])
 	parser.addVersionOption();
 	parser.addPositionalArgument("save-file", QObject::tr("TRIK Studio save file to be patched."));
 
-	QCommandLineOption patchWorld("f", QObject::tr("XML file with prepared 2D model field. "
-							"Both world and robot configurations (position + ports) will be patched."), "field.xml");
+	QCommandLineOption patchWorld("f",
+		QObject::tr("XML file with prepared 2D model field. "
+			    "Both world and robot configurations (position + ports) will be patched."),
+		"field.xml");
 	parser.addOption(patchWorld);
 	QCommandLineOption patchScript("s", QObject::tr("Script file to be patched into save file."), "script.js");
 	parser.addOption(patchScript);
-	QCommandLineOption patchFieldWithoutRobot("w", QObject::tr("XML file with prepared 2D model field. "
-										"Only world configurations will be patched."), "field.xml");
+	QCommandLineOption patchFieldWithoutRobot("w",
+		QObject::tr("XML file with prepared 2D model field. "
+			    "Only world configurations will be patched."),
+		"field.xml");
 	parser.addOption(patchFieldWithoutRobot);
 
-	QCommandLineOption patchField("wp", QObject::tr("XML file with prepared 2D model field. "
-										"Only world configurations and robot position will be patched."), "field.xml");
+	QCommandLineOption patchField("wp",
+		QObject::tr("XML file with prepared 2D model field. "
+			    "Only world configurations and robot position will be patched."),
+		"field.xml");
 	parser.addOption(patchField);
 
 	QCommandLineOption putRobotOnStart("rrp", QObject::tr("Reset robot position to start position"));
@@ -71,8 +77,9 @@ int main(int argc, char *argv[])
 	if (parser.isSet(patchWorld) || parser.isSet(patchField) || parser.isSet(patchFieldWithoutRobot)) {
 		bool wholeWorld = parser.isSet(patchWorld);
 		bool withoutRobotPos = parser.isSet(patchFieldWithoutRobot);
-		const auto &field = parser.value(wholeWorld ? patchWorld
-				: withoutRobotPos ? patchFieldWithoutRobot : patchField);
+		const auto &field = parser.value(wholeWorld        ? patchWorld
+						 : withoutRobotPos ? patchFieldWithoutRobot
+								   : patchField);
 		QFile fieldFile(field);
 		if (!fieldFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
 			return 1;
@@ -80,7 +87,7 @@ int main(int argc, char *argv[])
 
 		QDomDocument newWorld = utils::xmlUtils::loadDocumentWithConversion(fieldFile.fileName());
 
-		const auto & blobs = newWorld.firstChildElement("root").firstChildElement("blobs");
+		const auto &blobs = newWorld.firstChildElement("root").firstChildElement("blobs");
 		QDomDocument blobsDoc;
 		QDomElement blobsRoot = blobsDoc.createElement("root");
 		blobsRoot.appendChild(blobs);
@@ -93,12 +100,12 @@ int main(int argc, char *argv[])
 			prevWorld.setContent(repo.metaInformation("worldModel").toString());
 
 			newWorld.replaceChild(prevWorld.firstChildElement("robots"),
-						newWorld.firstChildElement("robots"));
+				newWorld.firstChildElement("robots"));
 
 			if (withoutRobotPos) {
 				newWorld.firstChildElement("world").replaceChild(
-						prevWorld.firstChildElement("world").firstChildElement("robot")
-						, newWorld.firstChildElement("world").firstChildElement("robot"));
+					prevWorld.firstChildElement("world").firstChildElement("robot"),
+					newWorld.firstChildElement("world").firstChildElement("robot"));
 			}
 		}
 
@@ -117,7 +124,8 @@ int main(int argc, char *argv[])
 			const QString &scriptContent = scriptFile.readAll();
 			repo.setMetaInformation("activeCode", scriptContent);
 
-			repo.setMetaInformation("activeCodeLanguageExtension", QFileInfo(scriptFile).suffix().toLower());
+			repo.setMetaInformation("activeCodeLanguageExtension",
+				QFileInfo(scriptFile).suffix().toLower());
 
 			scriptFile.close();
 		}

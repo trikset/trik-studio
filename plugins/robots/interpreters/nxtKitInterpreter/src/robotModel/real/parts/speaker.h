@@ -27,9 +27,8 @@ class Speaker : public robotModel::parts::NxtSpeaker
 	Q_OBJECT
 
 public:
-	Speaker(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	Speaker(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void playTone(unsigned freq, unsigned time) override;
 

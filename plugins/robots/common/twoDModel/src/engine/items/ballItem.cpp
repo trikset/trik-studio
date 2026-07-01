@@ -22,16 +22,15 @@
 using namespace twoDModel::items;
 
 namespace {
-	constexpr int defaultBallDiameterPx = 30;
-	constexpr qreal ballMass = 0.015f;
-	constexpr qreal ballFriction = 1.0f;
-	constexpr qreal ballRestitution = 0.8f;
-	constexpr qreal ballAngularDamping = 0.09f;
-	constexpr qreal ballLinearDamping = 0.09f;
+constexpr int defaultBallDiameterPx = 30;
+constexpr qreal ballMass = 0.015f;
+constexpr qreal ballFriction = 1.0f;
+constexpr qreal ballRestitution = 0.8f;
+constexpr qreal ballAngularDamping = 0.09f;
+constexpr qreal ballLinearDamping = 0.09f;
 }
 
-BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-		QPointF position)
+BallItem::BallItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF position)
 	: mSvgRenderer(std::make_unique<QSvgRenderer>())
 	, mDiameterPx("diameter", defaultBallDiameterPx)
 {
@@ -51,7 +50,7 @@ BallItem::~BallItem() = default;
 
 QAction *BallItem::ballTool()
 {
-	auto * const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
+	auto *const result = new QAction(QIcon(":/icons/2d_ball.svg"), tr("Ball (B)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_B), QKeySequence(Qt::Key_4)});
 	result->setCheckable(true);
 	return result;
@@ -59,7 +58,7 @@ QAction *BallItem::ballTool()
 
 QRectF BallItem::boundingRect() const
 {
-	return {{ -mDiameterPx / 2.0, -mDiameterPx / 2.0}, QSizeF{mDiameterPx, mDiameterPx}};
+	return {{-mDiameterPx / 2.0, -mDiameterPx / 2.0}, QSizeF {mDiameterPx, mDiameterPx}};
 }
 
 void BallItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -131,8 +130,7 @@ void BallItem::deserialize(const QDomElement &element)
 	SolidItem::deserialize(element);
 	auto *coordSystem = coordinateSystem();
 	if (element.hasAttribute("diameter")) {
-		setDiameter(coordSystem->toPx(
-				element.attribute("diameter").toDouble()));
+		setDiameter(coordSystem->toPx(element.attribute("diameter").toDouble()));
 	}
 
 	Serializer<BallItem>::deserialize(element);

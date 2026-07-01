@@ -36,9 +36,8 @@ public:
 	bool converted() const;
 
 private:
-	bool convertProject(const Version &enviromentVersion
-			, const Version &saveVersion
-			, QList<ProjectConverter> const &converters);
+	bool convertProject(const Version &enviromentVersion, const Version &saveVersion,
+		QList<ProjectConverter> const &converters);
 
 	void displayTooOldEnviromentError(const Version &saveVersion);
 	void displayCannotConvertError();

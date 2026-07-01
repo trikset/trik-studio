@@ -43,7 +43,8 @@ void CreateElementsCommand::addExplosionCommands(const QList<qReal::ElementInfo>
 {
 	QMap<Id, IdList> targetOfMultipleSource;
 	for (const ElementInfo &element : elements) {
-		if (element.explosionTarget().isNull() || mGraphicalApi.graphicalRepoApi().exist(element.explosionTarget())) {
+		if (element.explosionTarget().isNull()
+			|| mGraphicalApi.graphicalRepoApi().exist(element.explosionTarget())) {
 			targetOfMultipleSource[element.explosionTarget()].append(element.id());
 		}
 	}

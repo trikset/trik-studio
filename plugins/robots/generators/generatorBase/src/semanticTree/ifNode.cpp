@@ -55,8 +55,9 @@ QString IfNode::toStringImpl(GeneratorCustomizer &customizer, int indent, const 
 	}
 
 	const bool elseIsEmpty = mElseZone->isEmpty();
-	QString result = utils::StringUtils::addIndent(customizer.factory()->
-			ifGenerator(mId, customizer, elseIsEmpty, mAddNotToCondition)->generate(), indent, indentString);
+	QString result = utils::StringUtils::addIndent(
+		customizer.factory()->ifGenerator(mId, customizer, elseIsEmpty, mAddNotToCondition)->generate(), indent,
+		indentString);
 
 	const QString thenBlock = mThenZone->toString(customizer, indent + 1, indentString);
 	const QString elseBlock = mElseZone->toString(customizer, indent + 1, indentString);

@@ -23,14 +23,7 @@ namespace utils {
 namespace robotCommunication {
 
 /// Enum that codes kind of a message from robot --- text from stdout, information or error.
-enum class MessageKind
-{
-	text
-	, fileContents
-	, mail
-	, info
-	, error
-};
+enum class MessageKind { text, fileContents, mail, info, error };
 
 /// Class that handles connection to robot and sends commands to it. Supposed to be working in a separate thread.
 class TcpRobotCommunicatorWorker : public QObject

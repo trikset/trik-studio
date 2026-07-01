@@ -24,10 +24,8 @@ class SubprogramCallGenerator : public generatorBase::simple::BindingGenerator
 	Q_OBJECT
 	Q_DISABLE_COPY(SubprogramCallGenerator)
 public:
-	SubprogramCallGenerator(const qrRepo::RepoApi &repo
-				, generatorBase::GeneratorCustomizer &customizer
-				, const qReal::Id &id
-				, QObject *parent = nullptr);
+	SubprogramCallGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent = nullptr);
 };
 
 }

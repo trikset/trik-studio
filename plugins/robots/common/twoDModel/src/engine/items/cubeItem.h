@@ -23,14 +23,13 @@ class QSvgRenderer;
 namespace twoDModel {
 namespace items {
 
-class CubeItem final: public graphicsUtils::RotateItem, public SolidItem, public Serializer<CubeItem>
+class CubeItem final : public graphicsUtils::RotateItem, public SolidItem, public Serializer<CubeItem>
 {
 	Q_OBJECT
 	Q_DISABLE_COPY(CubeItem)
 
 public:
-	explicit CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			  QPointF position);
+	explicit CubeItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF position);
 	~CubeItem() override;
 
 	/// Creates and returns cube item for 2D model palette.
@@ -42,8 +41,14 @@ public:
 	void drawExtractionForItem(QPainter *painter) override;
 	void setPenBrushForExtraction(QPainter *painter, const QStyleOptionGraphicsItem *option) override;
 
-	void drawFieldForResizeItem(QPainter* painter) override { Q_UNUSED(painter) }
-	void resizeItem(QGraphicsSceneMouseEvent *event) override { Q_UNUSED(event) }
+	void drawFieldForResizeItem(QPainter *painter) override
+	{
+		Q_UNUSED(painter)
+	}
+	void resizeItem(QGraphicsSceneMouseEvent *event) override
+	{
+		Q_UNUSED(event)
+	}
 	void savePos() override;
 	void setStartPosition(QPointF startPosition);
 	void setStartRotation(qreal startPosition);
@@ -59,7 +64,7 @@ public:
 	bool isCircle() const override;
 	BodyType bodyType() const override;
 	QPolygonF collidingPolygon() const override;
-	QPainterPath shape () const override;
+	QPainterPath shape() const override;
 	QPainterPath path() const;
 
 private:

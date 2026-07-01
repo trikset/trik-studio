@@ -16,9 +16,8 @@
 
 using namespace trik;
 
-TrikBlocksValidator::TrikBlocksValidator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, qReal::ErrorReporterInterface &errorReporter)
+TrikBlocksValidator::TrikBlocksValidator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	qReal::ErrorReporterInterface &errorReporter)
 	: RobotsDiagramVisitor(repo, customizer)
 	, mRepo(repo)
 	, mErrorReporter(errorReporter)
@@ -84,9 +83,7 @@ void TrikBlocksValidator::visitGeneral(const qReal::Id &id, const QList<LinkInfo
 {
 	Q_UNUSED(links)
 
-	const QSet<QString> blocksWithPossiblyEmptyProperties{
-		"CommentBlock"
-	};
+	const QSet<QString> blocksWithPossiblyEmptyProperties {"CommentBlock"};
 
 	if (!blocksWithPossiblyEmptyProperties.contains(id.element())) {
 		checkStringPropertiesNotEmpty(id);
@@ -97,9 +94,7 @@ void TrikBlocksValidator::checkStringPropertiesNotEmpty(const qReal::Id &id)
 {
 	// Properties that we don't want to check for some reason. For example, on some old saves function has property
 	// "Init", which is long removed from metamodel but still shows up in saves.
-	const QSet<QString> badProperties{
-		"Init"
-	};
+	const QSet<QString> badProperties {"Init"};
 
 	const auto properties = mRepo.properties(id);
 	for (auto const &property : properties.keys()) {
@@ -107,7 +102,7 @@ void TrikBlocksValidator::checkStringPropertiesNotEmpty(const qReal::Id &id)
 			continue;
 		}
 
-		if (properties[property].type() == QVariant::String &&  properties[property].toString().isEmpty()) {
+		if (properties[property].type() == QVariant::String && properties[property].toString().isEmpty()) {
 			error(QObject::tr("Property should not be empty."), id);
 		}
 	}

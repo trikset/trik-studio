@@ -26,9 +26,8 @@ class GyroscopeSensor : public twoDModel::robotModel::parts::Gyroscope
 	Q_OBJECT
 
 public:
-	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 private:
 	QVector<int> convert(const QVector<int> &data) const override;

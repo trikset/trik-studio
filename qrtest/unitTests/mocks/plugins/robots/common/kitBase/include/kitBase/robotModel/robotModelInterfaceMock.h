@@ -49,12 +49,12 @@ public:
 	MOCK_METHOD(QList<kitBase::robotModel::PortInfo>, getPortsBy, (const QString &), (const, override));
 	MOCK_METHOD(StringIntHash, buttonCodes, (), (const, override));
 	MOCK_METHOD(QList<kitBase::robotModel::PortInfo>, configurablePorts, (), (const, override));
-	MOCK_METHOD(QList<kitBase::robotModel::DeviceInfo>, allowedDevices,
-				(kitBase::robotModel::PortInfo const &), (const, override));
-	MOCK_METHOD(void, configureDevice, (kitBase::robotModel::PortInfo const &
-						, kitBase::robotModel::DeviceInfo const &), (override));
+	MOCK_METHOD(QList<kitBase::robotModel::DeviceInfo>, allowedDevices, (kitBase::robotModel::PortInfo const &),
+		(const, override));
+	MOCK_METHOD(void, configureDevice,
+		(kitBase::robotModel::PortInfo const &, kitBase::robotModel::DeviceInfo const &), (override));
 	MOCK_METHOD(void, applyConfiguration, (), (override));
-	MOCK_METHOD(QList< kitBase::robotModel::DeviceInfo>, convertibleBases, (), (const, override));
+	MOCK_METHOD(QList<kitBase::robotModel::DeviceInfo>, convertibleBases, (), (const, override));
 	MOCK_METHOD(utils::TimelineInterface &, timeline, (), (override));
 	MOCK_METHOD(void, onInterpretationStarted, (), (override));
 	// clazy:enable

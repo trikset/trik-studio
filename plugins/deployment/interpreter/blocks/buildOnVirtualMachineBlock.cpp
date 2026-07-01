@@ -25,12 +25,8 @@ BuildOnVirtualMachineBlock::BuildOnVirtualMachineBlock(ShellWidget *shellWidget)
 
 QStringList BuildOnVirtualMachineBlock::arguments()
 {
-	QStringList result = {
-		QCoreApplication::applicationDirPath() + "/deployment-scripts/virtualbox/build.sh"
-		, stringProperty(id(), "OsType")
-		, stringProperty(id(), "ProductName")
-		, eval<QString>("Version")
-	};
+	QStringList result = {QCoreApplication::applicationDirPath() + "/deployment-scripts/virtualbox/build.sh",
+		stringProperty(id(), "OsType"), stringProperty(id(), "ProductName"), eval<QString>("Version")};
 
 	QString const vdi = eval<QString>("VDI");
 	QString const sharedFolder = eval<QString>("SharedFolder");

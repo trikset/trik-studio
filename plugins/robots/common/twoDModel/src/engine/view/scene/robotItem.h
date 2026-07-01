@@ -31,8 +31,8 @@ class RobotItem : public graphicsUtils::RotateItem, public items::SolidItem
 	Q_OBJECT
 
 public:
-	RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-	          const QString &robotImageFileName, model::RobotModel &robotModel);
+	RobotItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, const QString &robotImageFileName,
+		model::RobotModel &robotModel);
 
 	QRectF boundingRect() const override;
 	QRectF calcNecessaryBoundingRect() const override;
@@ -110,7 +110,7 @@ private:
 
 	BeepItem mBeepItem;
 
-	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors;  // Does not have ownership
+	QMap<kitBase::robotModel::PortInfo, SensorItem *> mSensors; // Does not have ownership
 
 	QPointF mDragStart;
 	QPointF mMarkerPoint;

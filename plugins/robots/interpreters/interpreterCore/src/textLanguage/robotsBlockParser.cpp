@@ -37,9 +37,8 @@ const QString encoderVariablePerfix = QObject::tr("encoder");
 const QString timeVariableName = QObject::tr("time");
 */
 
-RobotsBlockParser::RobotsBlockParser(
-		const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, const utils::ComputableNumber::IntComputer &timeComputer)
+RobotsBlockParser::RobotsBlockParser(const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	const utils::ComputableNumber::IntComputer &timeComputer)
 	: mRobotModelManager(robotModelManager)
 	, mTimeComputer(timeComputer)
 {
@@ -47,8 +46,8 @@ RobotsBlockParser::RobotsBlockParser(
 
 	addIntrinsicFuctions();
 
-	connect(&mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged
-			, this, &RobotsBlockParser::setReservedVariables);
+	connect(&mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::robotModelChanged, this,
+		&RobotsBlockParser::setReservedVariables);
 }
 
 void RobotsBlockParser::setReservedVariables()
@@ -71,12 +70,14 @@ void RobotsBlockParser::setReservedVariables()
 		}
 
 		if (!port.reservedVariable().isEmpty()) {
-			kitBase::robotModel::DeviceInfo device = currentConfiguration(mRobotModelManager.model().robotId(), port);
+			kitBase::robotModel::DeviceInfo device =
+				currentConfiguration(mRobotModelManager.model().robotId(), port);
 			if (device.isNull()) {
-				if (port.reservedVariableType() == kitBase::robotModel::PortInfo::ReservedVariableType::scalar) {
+				if (port.reservedVariableType()
+					== kitBase::robotModel::PortInfo::ReservedVariableType::scalar) {
 					setVariableValue(port.reservedVariable(), 0);
 				} else {
-					setVectorVariableValue(port.reservedVariable(), QVector<int>{0});
+					setVectorVariableValue(port.reservedVariable(), QVector<int> {0});
 				}
 			} else {
 				setVariableDependedOnDeviceType(port.reservedVariable(), device);
@@ -105,13 +106,11 @@ void RobotsBlockParser::clear()
 	setReservedVariables(); // calls inherited LuaToolbox::clear() too
 }
 
-void RobotsBlockParser::onDeviceConfigurationChanged(const QString &robotId
-		, const kitBase::robotModel::PortInfo &port
-		, const kitBase::robotModel::DeviceInfo &device
-		, kitBase::DevicesConfigurationProvider::Reason reason)
+void RobotsBlockParser::onDeviceConfigurationChanged(const QString &robotId, const kitBase::robotModel::PortInfo &port,
+	const kitBase::robotModel::DeviceInfo &device, kitBase::DevicesConfigurationProvider::Reason reason)
 {
 	Q_UNUSED(reason)
-	if (mRobotModelManager.model().robotId() == robotId){
+	if (mRobotModelManager.model().robotId() == robotId) {
 		if (!port.reservedVariable().isEmpty() && !device.isNull()) {
 			setVariableDependedOnDeviceType(port.reservedVariable(), device);
 		}
@@ -120,65 +119,50 @@ void RobotsBlockParser::onDeviceConfigurationChanged(const QString &robotId
 
 void RobotsBlockParser::addIntrinsicFuctions()
 {
-	const auto add0aryFunction = [this] (const QString &name
-			, qrtext::core::types::TypeExpression * const returnType
-			, std::function<QVariant()> const &function)
-	{
-		addIntrinsicFunction(name, returnType
-				, {}
-				, [function] (const QList<QVariant> &params) {
-						Q_UNUSED(params);
-						return function();
-				});
+	const auto add0aryFunction = [this](const QString &name, qrtext::core::types::TypeExpression *const returnType,
+					     std::function<QVariant()> const &function) {
+		addIntrinsicFunction(name, returnType, {}, [function](const QList<QVariant> &params) {
+			Q_UNUSED(params);
+			return function();
+		});
 	};
 
-	const auto add1aryFunction = [this] (const QString &name
-			, qrtext::core::types::TypeExpression * const returnType
-			, qrtext::core::types::TypeExpression * const argumentType
-			, std::function<QVariant(QVariant)> const &function)
-	{
-		addIntrinsicFunction(name, returnType
-				, {argumentType}
-				, [function] (const QList<QVariant> &params) {
-						Q_ASSERT(!params.isEmpty());
-						return function(params.first());
-				});
+	const auto add1aryFunction = [this](const QString &name, qrtext::core::types::TypeExpression *const returnType,
+					     qrtext::core::types::TypeExpression *const argumentType,
+					     std::function<QVariant(QVariant)> const &function) {
+		addIntrinsicFunction(name, returnType, {argumentType}, [function](const QList<QVariant> &params) {
+			Q_ASSERT(!params.isEmpty());
+			return function(params.first());
+		});
 	};
 
-	const auto add2aryFunction = [this] (const QString &name
-			, qrtext::core::types::TypeExpression * const returnType
-			, qrtext::core::types::TypeExpression * const argument1Type
-			, qrtext::core::types::TypeExpression * const argument2Type
-			, std::function<QVariant(QVariant, QVariant)> const &function)
-	{
-		addIntrinsicFunction(name, returnType
-				, {argument1Type, argument2Type}
-				, [function] (const QList<QVariant> &params) {
-						Q_ASSERT(params.count() == 2);
-						return function(params.first(), params.last());
-				});
+	const auto add2aryFunction = [this](const QString &name, qrtext::core::types::TypeExpression *const returnType,
+					     qrtext::core::types::TypeExpression *const argument1Type,
+					     qrtext::core::types::TypeExpression *const argument2Type,
+					     std::function<QVariant(QVariant, QVariant)> const &function) {
+		addIntrinsicFunction(name, returnType, {argument1Type, argument2Type},
+			[function](const QList<QVariant> &params) {
+			Q_ASSERT(params.count() == 2);
+			return function(params.first(), params.last());
+		});
 	};
 
-
-	const auto addFloatFunction = [add1aryFunction] (const QString &name
-			, std::function<qreal(qreal)> const &function)
-	{
-		add1aryFunction(name, new types::Float, new types::Float
-				, [function](const QVariant &arg) { return function(arg.toReal()); });
+	const auto addFloatFunction = [add1aryFunction](const QString &name,
+					      std::function<qreal(qreal)> const &function) {
+		add1aryFunction(name, new types::Float, new types::Float,
+			[function](const QVariant &arg) { return function(arg.toReal()); });
 	};
 
-	const auto addIntegerFunction = [add1aryFunction] (const QString &name
-			, std::function<qreal(qreal)> const &function)
-	{
-		add1aryFunction(name, new types::Integer, new types::Integer
-				, [function](const QVariant &arg) { return function(arg.toInt()); });
+	const auto addIntegerFunction = [add1aryFunction](const QString &name,
+						std::function<qreal(qreal)> const &function) {
+		add1aryFunction(name, new types::Integer, new types::Integer,
+			[function](const QVariant &arg) { return function(arg.toInt()); });
 	};
 
-	const auto addFloatToIntegerFunction = [add1aryFunction] (const QString &name
-			, std::function<int(qreal)> const &function)
-	{
-		add1aryFunction(name, new types::Integer(), new types::Float()
-				, [function](const QVariant &arg) { return function(arg.toReal()); });
+	const auto addFloatToIntegerFunction = [add1aryFunction](const QString &name,
+						       std::function<int(qreal)> const &function) {
+		add1aryFunction(name, new types::Integer(), new types::Float(),
+			[function](const QVariant &arg) { return function(arg.toReal()); });
 	};
 
 	add0aryFunction("time", new types::Integer(), [this]() { return mTimeComputer(); });
@@ -192,8 +176,9 @@ void RobotsBlockParser::addIntrinsicFuctions()
 	});
 
 	add1aryFunction("print", new types::Nil, new qrtext::core::types::Any, [this](const QVariant &text) {
-		kitBase::robotModel::robotParts::Shell *shell = kitBase::robotModel::RobotModelUtils::findDevice
-				<kitBase::robotModel::robotParts::Shell>(mRobotModelManager.model(), "ShellPort");
+		kitBase::robotModel::robotParts::Shell *shell =
+			kitBase::robotModel::RobotModelUtils::findDevice<kitBase::robotModel::robotParts::Shell>(
+				mRobotModelManager.model(), "ShellPort");
 		if (shell) {
 			shell->print(text.toString().append('\n'));
 		}
@@ -203,35 +188,35 @@ void RobotsBlockParser::addIntrinsicFuctions()
 
 	addFloatFunction("sin", [](qreal x) { return qSin(x); });
 	addFloatFunction("cos", [](qreal x) { return qCos(x); });
-	addFloatFunction("ln", [](qreal x) {return qLn(x); });
-	addFloatFunction("exp", [](qreal x) {return qExp(x); });
-	addFloatFunction("asin", [](qreal x) {return qAsin(x); });
-	addFloatFunction("acos", [](qreal x) {return qAcos(x); });
-	addFloatFunction("atan", [](qreal x) {return qAtan(x); });
-	addFloatToIntegerFunction("sgn", [](qreal x) {return (0 < x) - (x < 0); });
-	addFloatFunction("sqrt", [](qreal x) {return qSqrt(x); });
-	addFloatFunction("abs", [](qreal x) {return qAbs(x); });
-	addFloatToIntegerFunction("ceil", [](qreal x) {return static_cast<int>(qCeil(x)); });
-	addFloatToIntegerFunction("floor", [](qreal x) {return static_cast<int>(qFloor(x)); });
-	addIntegerFunction("random", [](int x) {return rand() % x; });
+	addFloatFunction("ln", [](qreal x) { return qLn(x); });
+	addFloatFunction("exp", [](qreal x) { return qExp(x); });
+	addFloatFunction("asin", [](qreal x) { return qAsin(x); });
+	addFloatFunction("acos", [](qreal x) { return qAcos(x); });
+	addFloatFunction("atan", [](qreal x) { return qAtan(x); });
+	addFloatToIntegerFunction("sgn", [](qreal x) { return (0 < x) - (x < 0); });
+	addFloatFunction("sqrt", [](qreal x) { return qSqrt(x); });
+	addFloatFunction("abs", [](qreal x) { return qAbs(x); });
+	addFloatToIntegerFunction("ceil", [](qreal x) { return static_cast<int>(qCeil(x)); });
+	addFloatToIntegerFunction("floor", [](qreal x) { return static_cast<int>(qFloor(x)); });
+	addIntegerFunction("random", [](int x) { return rand() % x; });
 
-	add2aryFunction("min", new types::Float(), new types::Float(), new types::Float()
-			, [](const QVariant &a, const QVariant &b) { return qMin(a.toReal(), b.toReal()); });
-	add2aryFunction("max", new types::Float(), new types::Float(), new types::Float()
-			, [](const QVariant &a, const QVariant &b) { return qMax(a.toReal(), b.toReal()); });
-	add2aryFunction("atan2", new types::Float(), new types::Float(), new types::Float()
-			, [](const QVariant &y, const QVariant &x) { return qAtan2(y.toReal(), x.toReal()); });
+	add2aryFunction("min", new types::Float(), new types::Float(), new types::Float(),
+		[](const QVariant &a, const QVariant &b) { return qMin(a.toReal(), b.toReal()); });
+	add2aryFunction("max", new types::Float(), new types::Float(), new types::Float(),
+		[](const QVariant &a, const QVariant &b) { return qMax(a.toReal(), b.toReal()); });
+	add2aryFunction("atan2", new types::Float(), new types::Float(), new types::Float(),
+		[](const QVariant &y, const QVariant &x) { return qAtan2(y.toReal(), x.toReal()); });
 }
 
-void RobotsBlockParser::setVariableDependedOnDeviceType(const QString &variable
-		, const kitBase::robotModel::DeviceInfo &device)
+void RobotsBlockParser::setVariableDependedOnDeviceType(const QString &variable,
+	const kitBase::robotModel::DeviceInfo &device)
 {
 	if (device.isA<kitBase::robotModel::robotParts::ScalarSensor>()) {
 		forgetIdentifier(variable);
 		setVariableValue(variable, 0);
 	} else if (device.isA<kitBase::robotModel::robotParts::VectorSensor>()) {
 		forgetIdentifier(variable);
-		setVectorVariableValue(variable, QVector<int>{0});
+		setVectorVariableValue(variable, QVector<int> {0});
 	}
 
 	markAsSpecial(variable);

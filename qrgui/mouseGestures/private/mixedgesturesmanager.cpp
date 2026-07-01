@@ -80,7 +80,7 @@ MixedClassifier MixedClassifier::getPoint(const MixedClassifier &centre, qreal c
 	const auto &key2 = centre.key().second;
 	MixedGesturesManager::key_type::first_type finalKey1(gridSize * gridSize);
 	MixedGesturesManager::key_type::second_type finalKey2(gridSize * gridSize);
-	for (int i = 0; i < gridSize * gridSize; i ++) {
+	for (int i = 0; i < gridSize * gridSize; i++) {
 		finalKey1[i] = (key1[i] * centreWeight + mKey.first[i]) / (centreWeight + 1);
 		finalKey2[i] = (key2[i] * centreWeight + mKey.second[i]) / (centreWeight + 1);
 	}

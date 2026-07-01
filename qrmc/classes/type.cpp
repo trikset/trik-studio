@@ -143,10 +143,9 @@ QString Type::generateNames(const QString &lineTemplate) const
 	}
 
 	QString result = lineTemplate;
-	result.replace(elementNameTag
-			, name()).replace(elementDisplayedNameTag
-			, displayedName()).replace(diagramNameTag
-			, mContext);
+	result.replace(elementNameTag, name())
+		.replace(elementDisplayedNameTag, displayedName())
+		.replace(diagramNameTag, mContext);
 
 	return result;
 }

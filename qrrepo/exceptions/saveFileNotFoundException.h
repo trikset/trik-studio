@@ -25,7 +25,8 @@ class QRREPO_EXPORT SaveFileNotFoundException : public QrRepoException
 public:
 	explicit SaveFileNotFoundException(const QString &fileName)
 		: QrRepoException("Save file not found: " + fileName)
-	{}
+	{
+	}
 };
 
 }

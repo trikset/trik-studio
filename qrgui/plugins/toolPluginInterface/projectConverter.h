@@ -27,25 +27,25 @@ class ProjectConverter
 {
 public:
 	/// Represent a result of project convertion process.
-	enum ConvertionResult
-	{
+	enum ConvertionResult {
 		/// Convertion process made some modifications, finished successfully, the save file is now has valid contents.
 		Success = 0
 		/// Convertion process finished successfully, no modifications were made.
-		, NoModificationsMade
+		,
+		NoModificationsMade
 		/// Convertion can`t be performed because of too old save version, convertion rules are unknown.
-		, VersionTooOld
+		,
+		VersionTooOld
 		/// Convertion can`t be completed because save file has unexpected contents.
-		, SaveInvalid
+		,
+		SaveInvalid
 	};
 
-	typedef std::function<ConvertionResult(GraphicalModelAssistInterface &
-			, LogicalModelAssistInterface &)> Converter;
+	typedef std::function<ConvertionResult(GraphicalModelAssistInterface &, LogicalModelAssistInterface &)>
+		Converter;
 
-	ProjectConverter(const QString &editor
-			, const Version &fromVersion
-			, const Version &toVersion
-			, const Converter &converter)
+	ProjectConverter(const QString &editor, const Version &fromVersion, const Version &toVersion,
+		const Converter &converter)
 		: mEditor(editor)
 		, mFromVersion(fromVersion)
 		, mToVersion(toVersion)
@@ -74,8 +74,7 @@ public:
 	/// Performs conversion process and returns the success or the fail reason of this operation.
 	/// If operation was unsuccessful then the whole save is not accepted by the system
 	/// and corresponding error message will be shown.
-	ConvertionResult convert(GraphicalModelAssistInterface &graphicalApi
-			, LogicalModelAssistInterface &logicalApi)
+	ConvertionResult convert(GraphicalModelAssistInterface &graphicalApi, LogicalModelAssistInterface &logicalApi)
 	{
 		return mConverter(graphicalApi, logicalApi);
 	}

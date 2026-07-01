@@ -35,8 +35,8 @@ public:
 	virtual ~TwoDModelEngineInterface() = default;
 
 	/// Enables the motor on the given port assigning the given power to it with the given break mode.
-	virtual void setNewMotor(int speed, uint degrees
-			, const kitBase::robotModel::PortInfo &port, bool breakMode) = 0;
+	virtual void setNewMotor(int speed, uint degrees, const kitBase::robotModel::PortInfo &port,
+		bool breakMode) = 0;
 
 	/// Returns the encoder value on the given port.
 	virtual int readEncoder(const kitBase::robotModel::PortInfo &port) const = 0;
@@ -50,14 +50,14 @@ public:
 
 	/// Returns the distance value scanned by the range sensor.
 	/// @returns The distance in cm till the closest object in the scan field of 255 if no such.
-	virtual int readRangeSensor(const kitBase::robotModel::PortInfo &port
-			, int maxDistance, qreal scanningAngle) const = 0;
+	virtual int readRangeSensor(const kitBase::robotModel::PortInfo &port, int maxDistance,
+		qreal scanningAngle) const = 0;
 
 	/// Returns the array of distance values scanned by the lidar sensor.
 	/// @returns The distance in cm till the closest object object in the scanning one degree sector or -1 if no such
 	/// for each angle from 0 to scanningAngle clockwise
-	virtual QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port
-			, int maxDistance, qreal scanningAngle) const = 0;
+	virtual QVector<int> readLidarSensor(const kitBase::robotModel::PortInfo &port, int maxDistance,
+		qreal scanningAngle) const = 0;
 
 	/// Returns 3 integer values that represents acceleration on three coordinate axes
 	virtual QVector<int> readAccelerometerSensor() const = 0;
@@ -104,7 +104,6 @@ public:
 
 	// TODO: remove hack with video port name
 	virtual kitBase::robotModel::PortInfo videoPort() const = 0;
-
 };
 
 }

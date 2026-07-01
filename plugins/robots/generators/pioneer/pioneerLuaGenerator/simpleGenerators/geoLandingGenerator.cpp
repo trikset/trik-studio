@@ -19,10 +19,8 @@
 using namespace pioneer::lua;
 using namespace generatorBase::simple;
 
-GeoLandingGenerator::GeoLandingGenerator(const qrRepo::RepoApi &repo
-		, generatorBase::GeneratorCustomizer &customizer
-		, const qReal::Id &id
-		, QObject *parent)
+GeoLandingGenerator::GeoLandingGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+	const qReal::Id &id, QObject *parent)
 	: BindingGenerator(repo, customizer, id, "quadcopterCommands/landing.t", {}, parent)
 {
 }

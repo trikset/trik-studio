@@ -78,8 +78,8 @@ void ItemPopup::updateDueToLayout()
 QVariant ItemPopup::dominantPropertyValue(const QString &property) const
 {
 	QMap<QVariant, int> valuesCounts;
-	for (QGraphicsItem * const item : mCurrentItems) {
-		if (QObject * const object = dynamic_cast<QObject *>(item)) {
+	for (QGraphicsItem *const item : mCurrentItems) {
+		if (QObject *const object = dynamic_cast<QObject *>(item)) {
 			const QVariant value = object->property(qUtf8Printable(property));
 			if (value.isValid()) {
 				++valuesCounts[value];
@@ -100,11 +100,11 @@ QVariant ItemPopup::dominantPropertyValue(const QString &property) const
 void ItemPopup::setPropertyMassively(const QString &property, const QVariant &value)
 {
 	QStringList idsForExternalProcessing;
-	for (QGraphicsItem * const item : mCurrentItems) {
-		if (AbstractItem * const object = dynamic_cast<AbstractItem *>(item)) {
+	for (QGraphicsItem *const item : mCurrentItems) {
+		if (AbstractItem *const object = dynamic_cast<AbstractItem *>(item)) {
 			// If item is abstract item then changing its property with undo/redo tracking
 			idsForExternalProcessing << object->id();
-		} else if (QObject * const object = dynamic_cast<QObject *>(item)) {
+		} else if (QObject *const object = dynamic_cast<QObject *>(item)) {
 			// Else just setting it for 1 time, no way to track it
 			object->setProperty(qUtf8Printable(property), value);
 		}
@@ -135,7 +135,7 @@ void ItemPopup::checkSelection()
 	}
 
 	QList<QGraphicsItem *> items;
-	for (QGraphicsItem * const item : mScene.selectedItems()) {
+	for (QGraphicsItem *const item : mScene.selectedItems()) {
 		if (suits(item)) {
 			items << item;
 		}
@@ -161,11 +161,11 @@ void ItemPopup::checkSelection()
 	}
 
 	// Item`s pos will be just under this widget`s middle, 10 px below.
-	QGraphicsView * const view = mScene.views().first();
+	QGraphicsView *const view = mScene.views().first();
 	Q_ASSERT(view);
 	const QPointF scenePos = leftmostTopmost(items);
 	const QPoint moveAbove = view->viewport()->mapToGlobal(view->mapFromScene(scenePos));
-	const QPoint globalPoint{moveAbove.x() - size().width() / 2, moveAbove.y() - size().height() - 10};
+	const QPoint globalPoint {moveAbove.x() - size().width() / 2, moveAbove.y() - size().height() - 10};
 	move(parentWidget()->mapFromGlobal(globalPoint));
 }
 
@@ -177,8 +177,8 @@ void ItemPopup::mousePressEvent(QMouseEvent *event)
 
 bool ItemPopup::hasProperty(const QString &property) const
 {
-	for (QGraphicsItem * const item : mCurrentItems) {
-		if (QObject * const object = dynamic_cast<QObject *>(item)) {
+	for (QGraphicsItem *const item : mCurrentItems) {
+		if (QObject *const object = dynamic_cast<QObject *>(item)) {
 			if (object->metaObject()->indexOfProperty(qUtf8Printable(property)) >= 0) {
 				return true;
 			}
@@ -190,7 +190,7 @@ bool ItemPopup::hasProperty(const QString &property) const
 
 QPointF ItemPopup::leftmostTopmost(const QList<QGraphicsItem *> &items)
 {
-	QPointF result{INT_MAX, INT_MAX};
+	QPointF result {INT_MAX, INT_MAX};
 	for (const QGraphicsItem *item : items) {
 		result.setX(qMin(result.x(), item->sceneBoundingRect().left()));
 		result.setY(qMin(result.y(), item->sceneBoundingRect().top()));

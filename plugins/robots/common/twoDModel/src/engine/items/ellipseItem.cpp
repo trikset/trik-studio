@@ -20,8 +20,7 @@
 using namespace twoDModel::items;
 using namespace graphicsUtils;
 
-EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
-			QPointF begin, QPointF end)
+EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem, QPointF begin, QPointF end)
 	: ColorFieldItem(metricSystem)
 {
 	setX1(begin.x());
@@ -29,19 +28,19 @@ EllipseItem::EllipseItem(graphicsUtils::AbstractCoordinateSystem *metricSystem,
 	setX2(end.x());
 	setY2(end.y());
 	setPrivateData();
-	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() {mEstimatedPos = pos(); });
+	connect(this, &AbstractItem::mouseInteractionStarted, this, [this]() { mEstimatedPos = pos(); });
 }
 
 AbstractItem *EllipseItem::clone() const
 {
-	auto * const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
+	auto *const cloned = new EllipseItem(coordinateSystem(), {x1(), y1()}, {x2(), y2()});
 	AbstractItem::copyTo(cloned);
 	return cloned;
 }
 
 QAction *EllipseItem::ellipseTool()
 {
-	auto * const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
+	auto *const result = new QAction(QIcon(":/icons/2d_ellipse.png"), tr("Ellipse (E)"), nullptr);
 	result->setShortcuts({QKeySequence(Qt::Key_E), QKeySequence(Qt::Key_8)});
 	result->setCheckable(true);
 	return result;
@@ -77,7 +76,7 @@ QRectF EllipseItem::boundingRect() const
 	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), (pen().width() + drift) / 2);
 }
 
-void EllipseItem::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void EllipseItem::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option)
 	Q_UNUSED(widget)
@@ -89,9 +88,9 @@ void EllipseItem::drawExtractionForItem(QPainter *painter)
 	AbstractItem::drawExtractionForItem(painter);
 	painter->setPen(getStrokePen());
 	painter->setBrush(Qt::transparent);
-	painter->drawEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width()/2));
+	painter->drawEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), pen().width() / 2));
 	if (!filled()) {
-		painter->drawEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), -pen().width()/2));
+		painter->drawEllipse(RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), -pen().width() / 2));
 	}
 }
 
@@ -104,10 +103,8 @@ QDomElement EllipseItem::serialize(QDomElement &parent) const
 	const auto beginY = coordSystem->toUnit(y1() + scenePos().y());
 	const auto endX = coordSystem->toUnit(x2() + scenePos().x());
 	const auto endY = coordSystem->toUnit(y2() + scenePos().y());
-	ellipseNode.setAttribute("begin", QString::number(beginX)
-	                 + ":" + QString::number(beginY));
-	ellipseNode.setAttribute("end", QString::number(endX)
-	                 + ":" + QString::number(endY));
+	ellipseNode.setAttribute("begin", QString::number(beginX) + ":" + QString::number(beginY));
+	ellipseNode.setAttribute("end", QString::number(endX) + ":" + QString::number(endY));
 	return ellipseNode;
 }
 

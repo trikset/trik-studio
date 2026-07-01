@@ -30,7 +30,7 @@ public:
 	EnumType(const Diagram &diagram, const qrRepo::LogicalRepoApi &api, const qReal::Id &id);
 
 	bool init(const QString &context) override;
-	Type* clone() const override;
+	Type *clone() const override;
 
 	void print() override;
 

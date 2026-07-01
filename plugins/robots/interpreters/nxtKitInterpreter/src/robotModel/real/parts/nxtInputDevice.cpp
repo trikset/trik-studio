@@ -17,11 +17,9 @@
 using namespace nxt::robotModel::real::parts;
 using namespace utils;
 
-NxtInputDevice::NxtInputDevice(
-		utils::robotCommunication::RobotCommunicator &robotCommunicator
-		, const kitBase::robotModel::PortInfo &port
-		, enums::lowLevelSensorType::SensorTypeEnum lowLevelSensorType
-		, enums::sensorMode::SensorModeEnum sensorMode)
+NxtInputDevice::NxtInputDevice(utils::robotCommunication::RobotCommunicator &robotCommunicator,
+	const kitBase::robotModel::PortInfo &port, enums::lowLevelSensorType::SensorTypeEnum lowLevelSensorType,
+	enums::sensorMode::SensorModeEnum sensorMode)
 	: mRobotCommunicator(robotCommunicator)
 	, mLowLevelPort(port.name().at(0).toLatin1() - '1')
 	, mLowLevelSensorType(lowLevelSensorType)
@@ -30,8 +28,8 @@ NxtInputDevice::NxtInputDevice(
 	, mIsConfigured(false)
 	, mResetDone(false)
 {
-	QObject::connect(&mRobotCommunicator, &utils::robotCommunication::RobotCommunicator::response
-			, this, &NxtInputDevice::readingDone);
+	QObject::connect(&mRobotCommunicator, &utils::robotCommunication::RobotCommunicator::response, this,
+		&NxtInputDevice::readingDone);
 }
 
 void NxtInputDevice::readingDone(QObject *addressee, const QByteArray &reading)
@@ -72,7 +70,7 @@ void NxtInputDevice::processResponse(const QByteArray &reading)
 void NxtInputDevice::configure()
 {
 	QByteArray command(7, 0);
-	command[0] = 0x05;  //command length
+	command[0] = 0x05; //command length
 	command[1] = 0x00;
 	command[2] = enums::telegramType::directCommandResponseRequired;
 	command[3] = enums::commandCode::SETINPUTMODE;

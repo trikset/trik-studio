@@ -28,10 +28,8 @@ bool EnumType::init(const QDomElement &element, const QString &context)
 
 	mIsEditable = element.attribute("editable").toLower() == "true";
 
-	for (QDomElement valueElement = element.firstChildElement("value")
-		; !valueElement.isNull()
-		; valueElement = valueElement.nextSiblingElement("value"))
-	{
+	for (QDomElement valueElement = element.firstChildElement("value"); !valueElement.isNull();
+		valueElement = valueElement.nextSiblingElement("value")) {
 		const QString name = valueElement.attribute("name");
 		QString displayedName = valueElement.attribute("displayedName");
 		if (displayedName.isEmpty()) {
@@ -44,7 +42,7 @@ bool EnumType::init(const QDomElement &element, const QString &context)
 	return true;
 }
 
-Type* EnumType::clone() const
+Type *EnumType::clone() const
 {
 	EnumType *result = new EnumType();
 	Type::copyFields(result);

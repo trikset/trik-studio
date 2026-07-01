@@ -17,7 +17,7 @@
 #include "type.h"
 
 namespace utils {
-	class OutFile;
+class OutFile;
 }
 
 class NonGraphicType : public Type

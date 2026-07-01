@@ -24,7 +24,9 @@ namespace qrRepo {
 class LogicalRepoApi : public CommonRepoApi
 {
 public:
-	virtual ~LogicalRepoApi(){}
+	virtual ~LogicalRepoApi()
+	{
+	}
 
 	virtual void addChild(const qReal::Id &id, const qReal::Id &child) = 0;
 	virtual qReal::Id otherEntityFromLink(const qReal::Id &linkId, const qReal::Id &firstNode) const = 0;
@@ -37,8 +39,8 @@ public:
 	virtual qReal::IdList logicalElements(const qReal::Id &type) const = 0;
 	virtual bool isLogicalElement(const qReal::Id &id) const = 0;
 
-	virtual qReal::IdList elementsByType(const QString &type, bool sensitivity = false
-			, bool regExpression = false) const = 0;
+	virtual qReal::IdList elementsByType(const QString &type, bool sensitivity = false,
+		bool regExpression = false) const = 0;
 	virtual int elementsCount() const = 0;
 
 	/// Returns a list of keys by that stored some meta-information.

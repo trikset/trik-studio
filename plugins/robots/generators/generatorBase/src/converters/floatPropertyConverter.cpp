@@ -21,16 +21,14 @@
 using namespace generatorBase::converters;
 using namespace qReal;
 
-FloatPropertyConverter::FloatPropertyConverter(lua::LuaProcessor &luaTranslator
-		, const qReal::Id &id
-		, const QString &propertyName
-		, simple::Binding::ConverterInterface *reservedVariablesConverter)
+FloatPropertyConverter::FloatPropertyConverter(lua::LuaProcessor &luaTranslator, const qReal::Id &id,
+	const QString &propertyName, simple::Binding::ConverterInterface *reservedVariablesConverter)
 	: CodeConverterBase(luaTranslator, id, propertyName, reservedVariablesConverter)
 {
 }
 
 QString FloatPropertyConverter::convert(const QString &luaCode) const
 {
-	return mLuaTranslator.castTo(qrtext::core::wrap(new qrtext::lua::types::Float)
-			, luaCode, mId, mPropertyName, mReservedVariablesConverter);
+	return mLuaTranslator.castTo(qrtext::core::wrap(new qrtext::lua::types::Float), luaCode, mId, mPropertyName,
+		mReservedVariablesConverter);
 }

@@ -17,12 +17,12 @@
 using namespace ev3;
 using namespace ev3::communication;
 
-QByteArray Ev3DirectCommand::formCommand(int size, int messageCounter, ushort globalSize
-		, int localSize, enums::commandType::CommandTypeEnum type)
+QByteArray Ev3DirectCommand::formCommand(int size, int messageCounter, ushort globalSize, int localSize,
+	enums::commandType::CommandTypeEnum type)
 {
 	QByteArray command(size, 0);
 	command[0] = (size - 2) & 0xFF;
-	command[1] = ((size - 2) >> 8) & 0xFF ;
+	command[1] = ((size - 2) >> 8) & 0xFF;
 	command[2] = messageCounter & 0xFF;
 	command[3] = (messageCounter >> 8) & 0xFF;
 	command[4] = type;

@@ -37,7 +37,7 @@ public:
 	MOCK_CONST_METHOD0(toolBars, QList<QToolBar *>());
 	MOCK_METHOD2(tabifyDockWidget, void(QDockWidget *, QDockWidget *));
 	MOCK_METHOD2(addDockWidget, void(Qt::DockWidgetArea, QDockWidget *));
-	MOCK_METHOD2(addToolBar, void(Qt::ToolBarArea, QToolBar * const));
+	MOCK_METHOD2(addToolBar, void(Qt::ToolBarArea, QToolBar *const));
 	MOCK_CONST_METHOD1(saveState, QByteArray(int));
 	MOCK_METHOD2(restoreState, bool(const QByteArray &, int));
 	MOCK_METHOD2(setCorner, void(Qt::Corner, Qt::DockWidgetArea));

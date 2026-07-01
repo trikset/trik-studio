@@ -27,7 +27,7 @@ TriggersFactory::TriggersFactory(Events &events, Variables &variables, StatusRep
 
 Trigger TriggersFactory::doNothing() const
 {
-	return [](){};
+	return []() {};
 }
 
 Trigger TriggersFactory::fail(const QString &message) const
@@ -35,17 +35,16 @@ Trigger TriggersFactory::fail(const QString &message) const
 	return [this, message]() { Q_EMIT mStatus.fail(message); };
 }
 
-namespace  {
-void replace(const QMap<QString, Value> &replaces,
-	     const QString &prefix, const QString &postfix, QString &message) {
+namespace {
+void replace(const QMap<QString, Value> &replaces, const QString &prefix, const QString &postfix, QString &message)
+{
 	for (auto it = replaces.begin(), end = replaces.end(); it != end; ++it) {
 		message.replace(prefix + it.key() + postfix, it.value()().toString());
 	}
 }
 }
-Trigger TriggersFactory::message(const QString &message,
-				 const QMap<QString, Value> &replaces,
-				 QMap<QString, Value> &&additionalReplaces) const
+Trigger TriggersFactory::message(const QString &message, const QMap<QString, Value> &replaces,
+	QMap<QString, Value> &&additionalReplaces) const
 {
 	return [this, message, replaces, additionalReplaces]() {
 		auto resMessage = message;
@@ -55,9 +54,8 @@ Trigger TriggersFactory::message(const QString &message,
 	};
 }
 
-Trigger TriggersFactory::log(const QString &message,
-			     const QMap<QString, Value> &replaces,
-			     QMap<QString, Value> &&additionalReplaces) const
+Trigger TriggersFactory::log(const QString &message, const QMap<QString, Value> &replaces,
+	QMap<QString, Value> &&additionalReplaces) const
 {
 	return [this, message, replaces, additionalReplaces]() {
 		auto resMessage = message;
@@ -94,10 +92,11 @@ Trigger TriggersFactory::setObjectState(const Value &object, const QString &prop
 			reportError(QObject::tr("Invalid <setState> object type %1").arg(variantObject.typeName()));
 		}
 
-		auto * const objectInstance = variantObject.value<QObject *>();
+		auto *const objectInstance = variantObject.value<QObject *>();
 		const int index = objectInstance->metaObject()->indexOfProperty(qPrintable(property));
 		if (index < 0) {
-			reportError(QObject::tr("Object %1 has no property %2").arg(variantObject.typeName(), property));
+			reportError(
+				QObject::tr("Object %1 has no property %2").arg(variantObject.typeName(), property));
 			return;
 		}
 

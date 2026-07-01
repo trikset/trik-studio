@@ -21,8 +21,7 @@ namespace robotsTests {
 namespace interpreterCoreTests {
 
 class KitPluginManagerTest : public testing::Test
-{
-};
+{};
 
 }
 }

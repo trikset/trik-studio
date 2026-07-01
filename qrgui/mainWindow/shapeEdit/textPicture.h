@@ -23,7 +23,7 @@ public:
 	TextPicture();
 	TextPicture(int x, int y, const QString &text = "text");
 	void setTextName(const QString &name);
-	void setFontFamily(const QFont& font);
+	void setFontFamily(const QFont &font);
 	void setFontPixelSize(int size);
 	void setFontColor(const QString &text);
 	void setFontItalic(bool isChecked);
@@ -33,12 +33,12 @@ public:
 	QFont font() const;
 	QString name() const;
 	virtual void setIsDynamicText(bool isDynamic);
-	void drawForPictureText(QPainter* painter, QRectF rect);
-	virtual void drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr);
+	void drawForPictureText(QPainter *painter, QRectF rect);
+	virtual void drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
 
 	QDomElement setFontToDoc(QDomDocument &document, const QString &domName);
-	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document
-			, const QPoint &topLeftPicture);
+	virtual QPair<QDomElement, Item::DomElementTypes> generateItem(QDomDocument &document,
+		const QPoint &topLeftPicture);
 
 	void readFont(const QDomElement &docItem);
 

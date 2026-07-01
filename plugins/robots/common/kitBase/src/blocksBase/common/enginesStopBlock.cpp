@@ -30,13 +30,13 @@ void EnginesStopBlock::run()
 	const QList<robotParts::Motor *> ports = parsePorts<robotParts::Motor>();
 	if (aggregator) {
 		QList<QString> portsNames;
-		for (robotParts::Motor * const motor : ports) {
+		for (robotParts::Motor *const motor : ports) {
 			portsNames.append(motor->port().name());
 		}
 
 		aggregator->off(portsNames);
 	} else {
-		for (robotParts::Motor * const motor : ports) {
+		for (robotParts::Motor *const motor : ports) {
 			motor->off();
 		}
 	}

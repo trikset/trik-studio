@@ -38,12 +38,13 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 
 	mWorldReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("worldReadOnlyDefault").toBool());
 	mSensorsReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("sensorsReadOnlyDefault").toBool());
-	mRobotPositionReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("robotPositionReadOnlyDefault").toBool());
+	mRobotPositionReadOnlyCheckBox->setChecked(
+		qReal::SettingsManager::value("robotPositionReadOnlyDefault").toBool());
 	mRobotSetupReadOnlyCheckBox->setChecked(qReal::SettingsManager::value("robotSetupReadOnlyDefault").toBool());
 	mSimulationSettingsReadOnlyCheckBox->setChecked(
-			qReal::SettingsManager::value("simulationSettingsReadOnlyDefault").toBool());
+		qReal::SettingsManager::value("simulationSettingsReadOnlyDefault").toBool());
 
-	QVBoxLayout * const mainLayout = new QVBoxLayout(this);
+	QVBoxLayout *const mainLayout = new QVBoxLayout(this);
 
 	mainLayout->addWidget(mWorldReadOnlyCheckBox.data());
 	mainLayout->addWidget(mSensorsReadOnlyCheckBox.data());
@@ -51,15 +52,15 @@ ExerciseExportDialog::ExerciseExportDialog(QWidget *parent)
 	mainLayout->addWidget(mRobotSetupReadOnlyCheckBox.data());
 	mainLayout->addWidget(mSimulationSettingsReadOnlyCheckBox.data());
 
-	QHBoxLayout * const buttonsLayout = new QHBoxLayout();
+	QHBoxLayout *const buttonsLayout = new QHBoxLayout();
 
 	mainLayout->addLayout(buttonsLayout);
 
-	QPushButton * const okButton = new QPushButton(tr("Ok"), this);
+	QPushButton *const okButton = new QPushButton(tr("Ok"), this);
 	okButton->setDefault(true);
 	connect(okButton, &QPushButton::clicked, this, &ExerciseExportDialog::accept);
 
-	QPushButton * const cancelButton = new QPushButton(tr("Cancel"), this);
+	QPushButton *const cancelButton = new QPushButton(tr("Cancel"), this);
 	connect(cancelButton, &QPushButton::clicked, this, &ExerciseExportDialog::reject);
 
 	buttonsLayout->addWidget(okButton);
@@ -73,7 +74,7 @@ ExerciseExportDialog::~ExerciseExportDialog()
 ReadOnlyFlags ExerciseExportDialog::readOnlyFlags() const
 {
 	ReadOnlyFlags result;
-	const auto setFlag = [&result] (ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
+	const auto setFlag = [&result](ReadOnly::ReadOnlyEnum flag, const QScopedPointer<QCheckBox> &box) {
 		result |= box->isChecked() ? flag : ReadOnly::ReadOnlyEnum::None;
 	};
 

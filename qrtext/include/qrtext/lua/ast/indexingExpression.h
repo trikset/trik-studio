@@ -24,15 +24,18 @@ class QRTEXT_EXPORT IndexingExpression : public Expression
 {
 public:
 	IndexingExpression(QSharedPointer<Expression> const &table, QSharedPointer<Expression> const &indexer)
-		: mTable(table), mIndexer(indexer)
+		: mTable(table)
+		, mIndexer(indexer)
 	{
 	}
 
-	QSharedPointer<Expression> const &table() const {
+	QSharedPointer<Expression> const &table() const
+	{
 		return mTable;
 	}
 
-	QSharedPointer<Expression> const &indexer() const {
+	QSharedPointer<Expression> const &indexer() const
+	{
 		return mIndexer;
 	}
 
@@ -42,10 +45,11 @@ public:
 	}
 
 private:
-	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer
-			, const QSharedPointer<Node> &parent) override
+	void accept(core::AstVisitorInterface &visitor, const QSharedPointer<Node> &pointer,
+		const QSharedPointer<Node> &parent) override
 	{
-		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<IndexingExpression>(pointer), parent);
+		static_cast<LuaAstVisitorInterface *>(&visitor)->visit(qSharedPointerCast<IndexingExpression>(pointer),
+			parent);
 	}
 
 	QSharedPointer<Expression> mTable;

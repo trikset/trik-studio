@@ -36,7 +36,7 @@ bool NumericType::init(const QDomElement &element, const QString &context)
 	return false;
 }
 
-Type* NumericType::clone() const
+Type *NumericType::clone() const
 {
 	NumericType *result = new NumericType();
 	Type::copyFields(result);

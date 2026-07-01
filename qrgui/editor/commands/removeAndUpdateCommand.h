@@ -32,13 +32,14 @@ public:
 
 	void appendGraphicalDelete(const Id &id, QList<ElementInfo> &nodes, QList<ElementInfo> &edges) override;
 	void postprocessCollectedItems(QList<ElementInfo> &nodes, QList<ElementInfo> &edges) override;
+
 private:
 	QHash<qReal::Id, QList<qReal::Id>> buildAdjacency(const QSet<Id> &nodesSet);
 	QList<QList<Id>> findComponents(const QSet<Id> &nodesSet, const QHash<Id, QList<Id>> &adj);
-	void processComponent(const QList<Id> &component, const QSet<Id> &nodesSet,
-					QList<ElementInfo> &nodes,  QList<ElementInfo> &edges);
-	void reconnectComponent(const Id &incomingEdge, const Id &outgoingEdge,
-					QList<ElementInfo> &nodes, QList<ElementInfo> &edges);
+	void processComponent(const QList<Id> &component, const QSet<Id> &nodesSet, QList<ElementInfo> &nodes,
+		QList<ElementInfo> &edges);
+	void reconnectComponent(const Id &incomingEdge, const Id &outgoingEdge, QList<ElementInfo> &nodes,
+		QList<ElementInfo> &edges);
 	EditorViewScene &mScene;
 };
 

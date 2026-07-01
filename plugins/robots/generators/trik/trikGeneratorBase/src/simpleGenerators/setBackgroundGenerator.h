@@ -24,10 +24,8 @@ class SetBackgroundGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
 public:
-	SetBackgroundGenerator(const qrRepo::RepoApi &repo
-			, generatorBase::GeneratorCustomizer &customizer
-			, const qReal::Id &id
-			, QObject *parent);
+	SetBackgroundGenerator(const qrRepo::RepoApi &repo, generatorBase::GeneratorCustomizer &customizer,
+		const qReal::Id &id, QObject *parent);
 };
 
 }

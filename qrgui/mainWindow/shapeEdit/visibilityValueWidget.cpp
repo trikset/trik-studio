@@ -18,8 +18,10 @@
 #include <QtWidgets/QLineEdit>
 
 VisibilityValueWidget::VisibilityValueWidget(QWidget *parent)
-	: QWidget(parent), mWidget(0)
-{}
+	: QWidget(parent)
+	, mWidget(0)
+{
+}
 
 VisibilityValueWidget::~VisibilityValueWidget()
 {
@@ -60,21 +62,18 @@ QString VisibilityValueWidget::value() const
 
 void VisibilityValueWidget::makeWidget(VisibilityConditionsDialog::Type type)
 {
-	switch (type)
-	{
-		case VisibilityConditionsDialog::Int:
-				{
-					QSpinBox *spinBox = new QSpinBox(this);
-					spinBox->setMinimum(INT_MIN);
-					spinBox->setMaximum(INT_MAX);
-					mWidget = spinBox;
-				}
-				break;
-		case VisibilityConditionsDialog::String:
-				mWidget = new QLineEdit(this);
-				break;
-		default:
-				mWidget = new QComboBox(this);
+	switch (type) {
+	case VisibilityConditionsDialog::Int: {
+		QSpinBox *spinBox = new QSpinBox(this);
+		spinBox->setMinimum(INT_MIN);
+		spinBox->setMaximum(INT_MAX);
+		mWidget = spinBox;
+	} break;
+	case VisibilityConditionsDialog::String:
+		mWidget = new QLineEdit(this);
+		break;
+	default:
+		mWidget = new QComboBox(this);
 	}
 
 	mWidget->setGeometry(0, 0, width(), height());

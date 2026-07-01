@@ -30,8 +30,8 @@ public:
 	QString type() const;
 	QString defaultValue() const;
 	Property *clone() const;
-	bool operator == (const Property &other) const;
-	bool operator != (const Property &other) const;
+	bool operator==(const Property &other) const;
+	bool operator!=(const Property &other) const;
 	bool isReferenceProperty() const;
 	void print() const;
 

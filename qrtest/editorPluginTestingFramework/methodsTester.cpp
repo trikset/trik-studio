@@ -18,10 +18,10 @@
 using namespace editorPluginTestingFramework;
 using namespace qReal;
 
-
-MethodsTester::ResultOfGenerating::ResultOfGenerating(
-		const QString &name, const QString &first, const QString &second)
-		: methodName(name), firstResult(first), secondResult(second)
+MethodsTester::ResultOfGenerating::ResultOfGenerating(const QString &name, const QString &first, const QString &second)
+	: methodName(name)
+	, firstResult(first)
+	, secondResult(second)
 {
 }
 
@@ -41,8 +41,7 @@ void MethodsTester::fillMethodsToTestList(const QString &fileName)
 }
 
 MethodsTester::ResultOfGenerating MethodsTester::testMethodIfExistsInList(
-		const AbstractStringGenerator &stringGenerator
-		, const QString &method)
+	const AbstractStringGenerator &stringGenerator, const QString &method)
 {
 	MethodsTester::ResultOfGenerating result = MethodsTester::ResultOfGenerating("", "", "");
 	if (mMethodsToTest.contains(method)) {
@@ -58,7 +57,7 @@ QList<MethodsTester::ResultOfGenerating> MethodsTester::generateTimeResult()
 }
 
 MethodsTester::ResultOfGenerating MethodsTester::generateOutputForOneMethod(
-		const AbstractStringGenerator &stringGenerator)
+	const AbstractStringGenerator &stringGenerator)
 {
 	AbstractStringGenerator *firstGenerator = initGeneratorWithFirstInterface(stringGenerator);
 	const QString methodName = firstGenerator->methodName();

@@ -30,9 +30,8 @@ public:
 	/// @param paletteProvider - contains methods for working with the palette.
 	/// @param factoryManager - provides information about currently enabled blocks.
 	/// @param parent - parent of this object in terms of Qt memory management system.
-	PaletteUpdateManager(qReal::gui::MainWindowInterpretersInterface &paletteProvider
-			, const BlocksFactoryManagerInterface &factoryManager
-			, QObject *parent = nullptr);
+	PaletteUpdateManager(qReal::gui::MainWindowInterpretersInterface &paletteProvider,
+		const BlocksFactoryManagerInterface &factoryManager, QObject *parent = nullptr);
 
 public Q_SLOTS:
 	/// Called when selected robot model is changed, updates palette.

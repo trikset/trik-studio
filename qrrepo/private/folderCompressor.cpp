@@ -26,9 +26,9 @@
 #include "exceptions/couldNotOpenInputFileException.h"
 
 #ifdef TS_USE_SYSTEM_QUAZIP
-#include "quazip5/JlCompress.h"
+#	include "quazip5/JlCompress.h"
 #else
-#include "quazip/JlCompress.h"
+#	include "quazip/JlCompress.h"
 #endif
 
 using namespace qrRepo;
@@ -122,4 +122,3 @@ void FolderCompressor::decompressFolderOld(const QString &sourceFile, const QStr
 
 	file.close();
 }
-

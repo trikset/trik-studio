@@ -18,37 +18,36 @@
 
 using namespace qReal;
 
-VisualInterpreterUnit::VisualInterpreterUnit(
-		qReal::LogicalModelAssistInterface &logicalModelApi
-		, qReal::GraphicalModelAssistInterface &graphicalModelApi
-		, qReal::gui::MainWindowInterpretersInterface &interpretersInterface)
-		: BaseGraphTransformationUnit(logicalModelApi, graphicalModelApi, interpretersInterface)
-		, mIsSemanticsLoaded(false)
-		, mNeedToStopInterpretation(false)
-		, mIsInterpretationalSemantics(true)
-		, mRules()
-		, mRuleParser(new RuleParser(logicalModelApi, graphicalModelApi, interpretersInterface.errorReporter()))
-		, mPythonGenerator(new PythonGenerator(logicalModelApi, graphicalModelApi, interpretersInterface))
-		, mPythonInterpreter(new PythonInterpreter(this))
-		, mQtScriptGenerator(new QtScriptGenerator(logicalModelApi, graphicalModelApi, interpretersInterface))
-		, mQtScriptInterpreter(new QtScriptInterpreter(this))
+VisualInterpreterUnit::VisualInterpreterUnit(qReal::LogicalModelAssistInterface &logicalModelApi,
+	qReal::GraphicalModelAssistInterface &graphicalModelApi,
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface)
+	: BaseGraphTransformationUnit(logicalModelApi, graphicalModelApi, interpretersInterface)
+	, mIsSemanticsLoaded(false)
+	, mNeedToStopInterpretation(false)
+	, mIsInterpretationalSemantics(true)
+	, mRules()
+	, mRuleParser(new RuleParser(logicalModelApi, graphicalModelApi, interpretersInterface.errorReporter()))
+	, mPythonGenerator(new PythonGenerator(logicalModelApi, graphicalModelApi, interpretersInterface))
+	, mPythonInterpreter(new PythonInterpreter(this))
+	, mQtScriptGenerator(new QtScriptGenerator(logicalModelApi, graphicalModelApi, interpretersInterface))
+	, mQtScriptInterpreter(new QtScriptInterpreter(this))
 {
 	mDefaultProperties.insert("semanticsStatus");
 	mDefaultProperties.insert("id");
-	connect(mPythonInterpreter
-			, SIGNAL(readyReadStdOutput(QHash<QPair<QString, QString>, QString>, TextCodeInterpreter::CodeLanguage))
-			, this
-			, SLOT(processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString>
-					, TextCodeInterpreter::CodeLanguage)));
-	connect(mPythonInterpreter, SIGNAL(readyReadErrOutput(QString))
-			, this, SLOT(processTextCodeInterpreterErrOutput(QString)));
-	connect(mQtScriptInterpreter
-			, SIGNAL(readyReadStdOutput(QHash<QPair<QString, QString>, QString>, TextCodeInterpreter::CodeLanguage))
-			, this
-			, SLOT(processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString>
-					, TextCodeInterpreter::CodeLanguage)));
-	connect(mQtScriptInterpreter, SIGNAL(readyReadErrOutput(QString))
-			, this, SLOT(processTextCodeInterpreterErrOutput(QString)));
+	connect(mPythonInterpreter,
+		SIGNAL(readyReadStdOutput(QHash<QPair<QString, QString>, QString>, TextCodeInterpreter::CodeLanguage)),
+		this,
+		SLOT(processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString>,
+			TextCodeInterpreter::CodeLanguage)));
+	connect(mPythonInterpreter, SIGNAL(readyReadErrOutput(QString)), this,
+		SLOT(processTextCodeInterpreterErrOutput(QString)));
+	connect(mQtScriptInterpreter,
+		SIGNAL(readyReadStdOutput(QHash<QPair<QString, QString>, QString>, TextCodeInterpreter::CodeLanguage)),
+		this,
+		SLOT(processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString>,
+			TextCodeInterpreter::CodeLanguage)));
+	connect(mQtScriptInterpreter, SIGNAL(readyReadErrOutput(QString)), this,
+		SLOT(processTextCodeInterpreterErrOutput(QString)));
 }
 
 VisualInterpreterUnit::~VisualInterpreterUnit()
@@ -71,7 +70,7 @@ IdList VisualInterpreterUnit::allRules() const
 	return result;
 }
 
-void VisualInterpreterUnit::putIdIntoMap(QHash<QString, IdList*> *map, QString const &ruleName, Id const &id)
+void VisualInterpreterUnit::putIdIntoMap(QHash<QString, IdList *> *map, QString const &ruleName, Id const &id)
 {
 	if (!map->contains(ruleName)) {
 		map->insert(ruleName, new IdList());
@@ -146,7 +145,8 @@ void VisualInterpreterUnit::readInitialization()
 		if (element.element() == "Initialization") {
 			mInitializationCode.first = property(element, "languageType").toString();
 			mInitializationCode.second = property(element, "initializationCode").toString();
-			mIsInterpretationalSemantics = property(element, "semanticsType").toString() == "Interpretation";
+			mIsInterpretationalSemantics =
+				property(element, "semanticsType").toString() == "Interpretation";
 		}
 	}
 }
@@ -194,7 +194,7 @@ void VisualInterpreterUnit::loadSemantics()
 				continue;
 			}
 
-			if (ruleElement.element() == "Replacement"){
+			if (ruleElement.element() == "Replacement") {
 				Id const fromId = fromInRule(ruleElement);
 				Id const toId = toInRule(ruleElement);
 
@@ -215,8 +215,8 @@ void VisualInterpreterUnit::loadSemantics()
 				Id const nodeWithControl = nodeIdWithControlMark(ruleElement);
 
 				if (nodeWithControl == Id::rootId()) {
-					semanticsLoadingError(tr("Control flow mark in rule '")
-							+ ruleName + tr("' isn't connected properly."));
+					semanticsLoadingError(tr("Control flow mark in rule '") + ruleName
+							      + tr("' isn't connected properly."));
 					return;
 				}
 
@@ -258,8 +258,8 @@ void VisualInterpreterUnit::interpret()
 	initBeforeInterpretation();
 	interpretInitializationCode();
 
-	int const timeout = mIsInterpretationalSemantics ?
-			SettingsManager::value("debuggerTimeout").toInt() : SettingsManager::value("generationTimeout").toInt();
+	int const timeout = mIsInterpretationalSemantics ? SettingsManager::value("debuggerTimeout").toInt()
+	                                                 : SettingsManager::value("generationTimeout").toInt();
 
 	while (findMatch()) {
 		if (mNeedToStopInterpretation) {
@@ -270,12 +270,13 @@ void VisualInterpreterUnit::interpret()
 
 		if (hasRuleSyntaxError()) {
 			report(tr("Rule '") + mMatchedRuleName
-					+ tr("' cannot be applied because semantics has syntax errors"), true);
+					+ tr("' cannot be applied because semantics has syntax errors"),
+				true);
 			return;
 		}
 
 		if (!makeStep()) {
-			report(tr("Rule '") +mMatchedRuleName + tr("' applying failed"), true);
+			report(tr("Rule '") + mMatchedRuleName + tr("' applying failed"), true);
 			return;
 		}
 
@@ -324,7 +325,7 @@ bool VisualInterpreterUnit::checkApplicationCondition(QString const &ruleName)
 {
 	if (!property(mRules.value(ruleName), "applicationCondition").toString().isEmpty()) {
 		bool result = false;
-		QList<QHash<Id, Id> > filteredMatches;
+		QList<QHash<Id, Id>> filteredMatches;
 		for (int i = 0; i < mMatches.size(); i++) {
 			if (checkApplicationCondition(mMatches.at(i), ruleName)) {
 				result = true;
@@ -355,8 +356,8 @@ bool VisualInterpreterUnit::checkApplicationConditionQtScript(QHash<Id, Id> cons
 	mQtScriptGenerator->setRule(mRules.value(ruleName));
 	mQtScriptGenerator->setMatch(match);
 
-	return mQtScriptInterpreter->interpret(mQtScriptGenerator->generateScript(true)
-			, TextCodeInterpreter::applicationCondition);
+	return mQtScriptInterpreter->interpret(mQtScriptGenerator->generateScript(true),
+		TextCodeInterpreter::applicationCondition);
 }
 
 bool VisualInterpreterUnit::checkApplicationConditionCStyle(QHash<Id, Id> const &match, QString const &appCond) const
@@ -373,17 +374,16 @@ bool VisualInterpreterUnit::checkApplicationConditionPython(QHash<Id, Id> const 
 	mPythonGenerator->setRule(mRules.value(ruleName));
 	mPythonGenerator->setMatch(match);
 
-	return mPythonInterpreter->interpret(mPythonGenerator->generateScript(true)
-			, PythonInterpreter::applicationCondition);
+	return mPythonInterpreter->interpret(mPythonGenerator->generateScript(true),
+		PythonInterpreter::applicationCondition);
 }
 
 Id VisualInterpreterUnit::startElement() const
 {
 	if (mNodesWithControlMark.contains(mCurrentRuleName)) {
 		for (Id const &element : *mNodesWithControlMark.value(mCurrentRuleName)) {
-			if (!hasProperty(element, "semanticsStatus") ||
-					property(element, "semanticsStatus").toString() != "@new@")
-			{
+			if (!hasProperty(element, "semanticsStatus")
+				|| property(element, "semanticsStatus").toString() != "@new@") {
 				return element;
 			}
 		}
@@ -393,9 +393,8 @@ Id VisualInterpreterUnit::startElement() const
 
 	for (Id const &element : elementsInRule) {
 		if (!isEdgeInRule(element) && element.element() != "ControlFlowMark") {
-			if (!hasProperty(element, "semanticsStatus") ||
-					property(element, "semanticsStatus").toString() != "@new@")
-			{
+			if (!hasProperty(element, "semanticsStatus")
+				|| property(element, "semanticsStatus").toString() != "@new@") {
 				return element;
 			}
 		}
@@ -423,7 +422,7 @@ bool VisualInterpreterUnit::deleteElements()
 			mCurrentNodesWithControlMark.removeOne(node);
 
 			mInterpretersInterface.deleteElementFromDiagram(
-					mGraphicalModelApi.logicalId(firstMatch.value(id)));
+				mGraphicalModelApi.logicalId(firstMatch.value(id)));
 		}
 		return true;
 	}
@@ -437,16 +436,11 @@ bool VisualInterpreterUnit::createElements()
 	if (mCreatedElements.contains(mMatchedRuleName)) {
 		mCreatedElementsPairs.clear();
 		for (Id const &id : *(mCreatedElements.value(mMatchedRuleName))) {
-			Id const createdId = Id(mInterpretersInterface.activeDiagram().editor()
-					, mInterpretersInterface.activeDiagram().diagram()
-					, id.element()
-					, QUuid::createUuid().toString());
-			Id const createdElem = mGraphicalModelApi.createElement(
-					mInterpretersInterface.activeDiagram()
-					, createdId
-					, false
-					, id.element()
-					, position());
+			Id const createdId = Id(mInterpretersInterface.activeDiagram().editor(),
+				mInterpretersInterface.activeDiagram().diagram(), id.element(),
+				QUuid::createUuid().toString());
+			Id const createdElem = mGraphicalModelApi.createElement(mInterpretersInterface.activeDiagram(),
+				createdId, false, id.element(), position());
 
 			mCreatedElementsPairs.insert(id, createdElem);
 			firstMatch->insert(id, createdElem);
@@ -501,16 +495,11 @@ bool VisualInterpreterUnit::createElementsToReplace()
 			Id const toInRule = mReplacedElements.value(mMatchedRuleName)->value(fromId);
 			Id const fromInModel = firstMatch->value(fromId);
 
-			Id const toInModelId = Id(mInterpretersInterface.activeDiagram().editor()
-					, mInterpretersInterface.activeDiagram().diagram()
-					, toInRule.element()
-					, QUuid::createUuid().toString());
-			Id const toInModel = mGraphicalModelApi.createElement(
-					mInterpretersInterface.activeDiagram()
-					, toInModelId
-					, false
-					, toInRule.element()
-					, mGraphicalModelApi.position(fromInModel));
+			Id const toInModelId = Id(mInterpretersInterface.activeDiagram().editor(),
+				mInterpretersInterface.activeDiagram().diagram(), toInRule.element(),
+				QUuid::createUuid().toString());
+			Id const toInModel = mGraphicalModelApi.createElement(mInterpretersInterface.activeDiagram(),
+				toInModelId, false, toInRule.element(), mGraphicalModelApi.position(fromInModel));
 
 			mReplacedElementsPairs.insert(fromInModel, toInModel);
 			firstMatch->insert(toInRule, toInModel);
@@ -535,8 +524,7 @@ void VisualInterpreterUnit::replaceElements()
 				mGraphicalModelApi.setTo(link, toInModel);
 			}
 
-			mInterpretersInterface.deleteElementFromDiagram(
-					mGraphicalModelApi.logicalId(fromInModel));
+			mInterpretersInterface.deleteElementFromDiagram(mGraphicalModelApi.logicalId(fromInModel));
 		}
 	}
 }
@@ -607,7 +595,8 @@ bool VisualInterpreterUnit::interpretQtScriptReaction()
 	mQtScriptGenerator->setRule(mRules.value(mMatchedRuleName));
 	mQtScriptGenerator->setMatch(mMatches.first());
 
-	return mQtScriptInterpreter->interpret(mQtScriptGenerator->generateScript(false), TextCodeInterpreter::reaction);
+	return mQtScriptInterpreter->interpret(mQtScriptGenerator->generateScript(false),
+		TextCodeInterpreter::reaction);
 }
 
 void VisualInterpreterUnit::copyProperties(Id const &elemInModel, Id const &elemInRule)
@@ -711,13 +700,13 @@ void VisualInterpreterUnit::semanticsLoadingError(QString const &message)
 	mIsSemanticsLoaded = false;
 }
 
-utils::ExpressionsParser* VisualInterpreterUnit::ruleParser()
+utils::ExpressionsParser *VisualInterpreterUnit::ruleParser()
 {
 	return mRuleParser;
 }
 
-void VisualInterpreterUnit::processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString> const &output
-		, TextCodeInterpreter::CodeLanguage const language)
+void VisualInterpreterUnit::processTextCodeInterpreterStdOutput(QHash<QPair<QString, QString>, QString> const &output,
+	TextCodeInterpreter::CodeLanguage const language)
 {
 	QPair<QString, QString> pair;
 	for (pair : output.keys()) {

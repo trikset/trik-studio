@@ -29,8 +29,7 @@ using namespace twoDModel::engine;
 
 TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotModel &robotModel)
 	: mRobotModelName(robotModel.name())
-	, mModel(new model::Model(
-		new twoDModel::model::physics::PhysicsEngineFactory()))
+	, mModel(new model::Model(new twoDModel::model::physics::PhysicsEngineFactory()))
 	, mView(new view::TwoDModelWidget(*mModel, nullptr))
 	, mApi(new TwoDModelEngineApi(*mModel, *mView))
 	, mDock(new utils::SmartDock("2dModelDock", mView))
@@ -42,7 +41,8 @@ TwoDModelEngineFacade::TwoDModelEngineFacade(twoDModel::robotModel::TwoDRobotMod
 	connect(mDock, &utils::SmartDock::dockedChanged, mView, &view::TwoDModelWidget::setCompactMode);
 }
 
-TwoDModelEngineFacade::~TwoDModelEngineFacade(){
+TwoDModelEngineFacade::~TwoDModelEngineFacade()
+{
 	if (mDock && !mDock->parent()) {
 		delete mDock;
 	}
@@ -50,13 +50,10 @@ TwoDModelEngineFacade::~TwoDModelEngineFacade(){
 }
 
 void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eventsForKitPlugin,
-								 const qReal::SystemEvents &systemEvents,
-								 qReal::LogicalModelAssistInterface &logicalModel,
-								 qReal::ControllerInterface &controller,
-								 qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
-								 qReal::gui::MainWindowDockInterface &dockInterface,
-								 const qReal::ProjectManagementInterface &projectManager,
-								 kitBase::InterpreterControlInterface &interpreterControl)
+	const qReal::SystemEvents &systemEvents, qReal::LogicalModelAssistInterface &logicalModel,
+	qReal::ControllerInterface &controller, qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+	qReal::gui::MainWindowDockInterface &dockInterface, const qReal::ProjectManagementInterface &projectManager,
+	kitBase::InterpreterControlInterface &interpreterControl)
 {
 	mModel->init(*interpretersInterface.errorReporter(), interpreterControl, logicalModel);
 	dockInterface.registerEditor(*mView);
@@ -70,23 +67,23 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 	const auto reloadWorld = [this, &logicalModel, &interpretersInterface, &projectManager]() {
 		QLOG_DEBUG() << "Reloading 2D world model...";
 		const QString xml = projectManager.somethingOpened()
-								? logicalModel.logicalRepoApi().metaInformation("worldModel").toString()
-								: QString();
+		                            ? logicalModel.logicalRepoApi().metaInformation("worldModel").toString()
+		                            : QString();
 		QDomDocument worldModel;
 		QString errorMessage;
 		int errorLine, errorColumn;
 		if (!xml.isEmpty() && !worldModel.setContent(xml, &errorMessage, &errorLine, &errorColumn)) {
-			interpretersInterface.errorReporter()->addError(
-				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+			interpretersInterface.errorReporter()->addError(QString("%1:%2: %3")
+					.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 		}
 
 		const QString blobsXml = projectManager.somethingOpened()
-									 ? logicalModel.logicalRepoApi().metaInformation("blobs").toString()
-									 : QString();
+		                                 ? logicalModel.logicalRepoApi().metaInformation("blobs").toString()
+		                                 : QString();
 		QDomDocument blobs;
 		if (!blobsXml.isEmpty() && !blobs.setContent(blobsXml, &errorMessage, &errorLine, &errorColumn)) {
-			interpretersInterface.errorReporter()->addError(
-				QString("%1:%2: %3").arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
+			interpretersInterface.errorReporter()->addError(QString("%1:%2: %3")
+					.arg(QString::number(errorLine), QString::number(errorColumn), errorMessage));
 		}
 
 		if (!worldModel.firstChild().isNull()) {
@@ -102,19 +99,14 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 	};
 
 	const auto connectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {
-		connect(&eventsForKitPlugin,
-				&kitBase::EventsForKitPluginInterface::interpretationStarted,
-				this,
-				&twoDModel::TwoDModelControlInterface::onStartInterpretation,
-				Qt::UniqueConnection);
+		connect(&eventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStarted, this,
+			&twoDModel::TwoDModelControlInterface::onStartInterpretation, Qt::UniqueConnection);
 
-		connect(&eventsForKitPlugin,
-				&kitBase::EventsForKitPluginInterface::interpretationStopped,
-				this,
-				&twoDModel::TwoDModelControlInterface::onStopInterpretation,
-				Qt::UniqueConnection);
+		connect(&eventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStopped, this,
+			&twoDModel::TwoDModelControlInterface::onStopInterpretation, Qt::UniqueConnection);
 
-		connect(this, &twoDModel::TwoDModelControlInterface::runButtonPressed, this, [this, &interpreterControl]() {
+		connect(this, &twoDModel::TwoDModelControlInterface::runButtonPressed, this,
+			[this, &interpreterControl]() {
 			if (mCurrentTabInfo == qReal::TabInfo::TabType::editor) {
 				interpreterControl.interpret();
 			} else {
@@ -122,32 +114,22 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 			}
 		});
 
-		connect(this,
-				&TwoDModelEngineFacade::stopButtonPressed,
-				&interpreterControl,
-				[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
+		connect(this, &TwoDModelEngineFacade::stopButtonPressed, &interpreterControl,
+			[&interpreterControl]() { Q_EMIT interpreterControl.stopAllInterpretation(); });
 	};
 
 	auto disconnectTwoDModel = [this, &eventsForKitPlugin, &interpreterControl]() {
-		disconnect(&eventsForKitPlugin,
-				   &kitBase::EventsForKitPluginInterface::interpretationStarted,
-				   this,
-				   &twoDModel::TwoDModelControlInterface::onStartInterpretation);
+		disconnect(&eventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStarted, this,
+			&twoDModel::TwoDModelControlInterface::onStartInterpretation);
 
-		disconnect(&eventsForKitPlugin,
-				   &kitBase::EventsForKitPluginInterface::interpretationStopped,
-				   this,
-				   &twoDModel::TwoDModelControlInterface::onStopInterpretation);
+		disconnect(&eventsForKitPlugin, &kitBase::EventsForKitPluginInterface::interpretationStopped, this,
+			&twoDModel::TwoDModelControlInterface::onStopInterpretation);
 
-		disconnect(this,
-				   &twoDModel::TwoDModelControlInterface::runButtonPressed,
-				   &interpreterControl,
-				   &kitBase::InterpreterControlInterface::interpret);
+		disconnect(this, &twoDModel::TwoDModelControlInterface::runButtonPressed, &interpreterControl,
+			&kitBase::InterpreterControlInterface::interpret);
 
-		disconnect(this,
-				   &twoDModel::TwoDModelControlInterface::stopButtonPressed,
-				   &interpreterControl,
-				   &kitBase::InterpreterControlInterface::userStopRobot);
+		disconnect(this, &twoDModel::TwoDModelControlInterface::stopButtonPressed, &interpreterControl,
+			&kitBase::InterpreterControlInterface::userStopRobot);
 	};
 
 	connect(&projectManager, &qReal::ProjectManagementInterface::afterOpen, this, reloadWorld);
@@ -162,30 +144,27 @@ void TwoDModelEngineFacade::init(const kitBase::EventsForKitPluginInterface &eve
 		logicalModel.mutableLogicalRepoApi().setMetaInformation("blobs", xml.toString(4));
 	});
 
-	connect(mModel.data(), &model::Model::templatesChanged, this, [&logicalModel]
-					(const QHash<QString, QDomDocument> &xmls) {
+	connect(mModel.data(), &model::Model::templatesChanged, this,
+		[&logicalModel](const QHash<QString, QDomDocument> &xmls) {
 		for (auto it = xmls.begin(), end = xmls.end(); it != end; ++it) {
 			const auto &name = it.key();
 			QString metaInfoKey = QString("templates.%1").arg(name);
-			logicalModel.mutableLogicalRepoApi()
-					.setMetaInformation(metaInfoKey, it.value().toString(4));
+			logicalModel.mutableLogicalRepoApi().setMetaInformation(metaInfoKey, it.value().toString(4));
 		}
 	});
 
-	connect(&eventsForKitPlugin,
-			&kitBase::EventsForKitPluginInterface::robotModelChanged,
-			this,
-			[this, connectTwoDModel, disconnectTwoDModel, reloadWorld](const QString &modelName) {
-				const bool isCurrentModel = modelName == mRobotModelName;
-				if (isCurrentModel) {
-					connectTwoDModel();
-					mDock->attachToMainWindow(Qt::TopDockWidgetArea);
-					reloadWorld();
-				} else {
-					disconnectTwoDModel();
-					mDock->detachFromMainWindow();
-				}
-			});
+	connect(&eventsForKitPlugin, &kitBase::EventsForKitPluginInterface::robotModelChanged, this,
+		[this, connectTwoDModel, disconnectTwoDModel, reloadWorld](const QString &modelName) {
+		const bool isCurrentModel = modelName == mRobotModelName;
+		if (isCurrentModel) {
+			connectTwoDModel();
+			mDock->attachToMainWindow(Qt::TopDockWidgetArea);
+			reloadWorld();
+		} else {
+			disconnectTwoDModel();
+			mDock->detachFromMainWindow();
+		}
+	});
 }
 
 kitBase::DevicesConfigurationProvider &TwoDModelEngineFacade::devicesConfigurationProvider()
@@ -200,11 +179,11 @@ TwoDModelEngineInterface &TwoDModelEngineFacade::engine()
 
 void TwoDModelEngineFacade::onStartInterpretation()
 {
-	if (!mModel->settings().realisticPhysics() &&
-			(!mModel->worldModel().balls().isEmpty() || !mModel->worldModel().skittles().isEmpty()
-			 || !mModel->worldModel().cubes().isEmpty())) {
+	if (!mModel->settings().realisticPhysics()
+		&& (!mModel->worldModel().balls().isEmpty() || !mModel->worldModel().skittles().isEmpty()
+			|| !mModel->worldModel().cubes().isEmpty())) {
 		mModel->errorReporter()->addWarning(
-					tr("Realistic physics' must be turned on to enjoy skittles, cubes and balls"));
+			tr("Realistic physics' must be turned on to enjoy skittles, cubes and balls"));
 	}
 	mModel->timeline().start();
 }

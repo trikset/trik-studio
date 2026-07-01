@@ -24,7 +24,7 @@ namespace gestures {
 
 static const qreal e = 10;
 
-static const int gridSize = 81;//gridSize = 100 recognition = 833 gestures
+static const int gridSize = 81; //gridSize = 100 recognition = 833 gestures
 
 typedef QList<QPointF> PointVector;
 
@@ -44,12 +44,11 @@ typedef QPair<QString, Key> IdealGesture;
 
 typedef QList<IdealGesture> IdealGestures;
 
-typedef QPair<QString, QList<QPoint> > GestureObject;
+typedef QPair<QString, QList<QPoint>> GestureObject;
 
 typedef QPair<PathVector, QStringList> UsersGestures;
 
-struct KeyObjectItem
-{
+struct KeyObjectItem {
 public:
 	KeyObjectItem(const QString &object, const QList<QPoint> &path, const QString &key)
 	{
@@ -57,7 +56,9 @@ public:
 		this->correctPath = path;
 		this->key = key;
 	}
-	KeyObjectItem(){}
+	KeyObjectItem()
+	{
+	}
 	QString object;
 	QList<QPoint> correctPath;
 	QString key;
@@ -65,17 +66,16 @@ public:
 
 typedef QList<KeyObjectItem> KeyObjectItems;
 
-struct Object
-{
+struct Object {
 public:
-	Object(const QString &name, QList<QList<QPoint> > const &path)
+	Object(const QString &name, QList<QList<QPoint>> const &path)
 	{
 		this->name = name;
 		this->path = path;
 	}
 
 	QString name;
-	QList<QList<QPoint> > path;
+	QList<QList<QPoint>> path;
 };
 
 typedef QList<Object> Objects;

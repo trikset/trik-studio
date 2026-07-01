@@ -27,9 +27,8 @@ namespace parts {
 class ROBOTS_GENERATOR_EXPORT Engines : public InitTerminateCodeGenerator
 {
 public:
-	Engines(const QStringList &pathsToTemplates
-			, const simple::Binding::ConverterInterface *outputPortConverter
-			, const simple::Binding::MultiConverterInterface *outputPortsConverter);
+	Engines(const QStringList &pathsToTemplates, const simple::Binding::ConverterInterface *outputPortConverter,
+		const simple::Binding::MultiConverterInterface *outputPortsConverter);
 	virtual ~Engines();
 
 	virtual void reinit();
@@ -47,8 +46,8 @@ private:
 	QString readEngineTemplate(const QString &pathToTemplate);
 
 	QSet<QString> mUsedPorts;
-	const simple::Binding::ConverterInterface *mOutputPortConverter;  // Takes ownership
-	const simple::Binding::MultiConverterInterface *mOutputPortsConverter;  // Takes ownership
+	const simple::Binding::ConverterInterface *mOutputPortConverter; // Takes ownership
+	const simple::Binding::MultiConverterInterface *mOutputPortsConverter; // Takes ownership
 };
 
 }

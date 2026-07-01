@@ -23,10 +23,9 @@ class SwitchStructurizatorNode : public IntermediateStructurizatorNode
 	Q_OBJECT
 
 public:
-	explicit SwitchStructurizatorNode(IntermediateStructurizatorNode *condition
-			, const QList<IntermediateStructurizatorNode *> &branches
-			, IntermediateStructurizatorNode *exit
-			, QObject *parent);
+	explicit SwitchStructurizatorNode(IntermediateStructurizatorNode *condition,
+		const QList<IntermediateStructurizatorNode *> &branches, IntermediateStructurizatorNode *exit,
+		QObject *parent);
 
 	IntermediateStructurizatorNode *condition() const;
 	QList<IntermediateStructurizatorNode *> branches() const;
@@ -35,6 +34,7 @@ public:
 	bool analyzeBreak();
 	Type type() const;
 	qReal::Id firstId() const;
+
 private:
 	IntermediateStructurizatorNode *mCondition;
 	const QList<IntermediateStructurizatorNode *> mBranches;

@@ -51,17 +51,21 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 	const QString validationError = checkWindowsDriverComponents();
 	if (!validationError.isEmpty()) {
 		QLOG_ERROR() << validationError << "Probably NXT tools are not installed.";
-		Q_EMIT errorOccured(tr("Driver for NXT is not installed. An attempt to attach TRIK Studio "\
-				"driver also failed (probably NXT tools package was not installer). No panic! Driver can still be "\
-				"installed manually, see documentation, chapter \"Installing NXT driver manually.\". Also TRIK Studio "\
-				"supports <a href='%1'>Lego Fantom driver</a>, you can just download and install it."));
+		Q_EMIT errorOccured(
+			tr("Driver for NXT is not installed. An attempt to attach TRIK Studio "
+			   "driver also failed (probably NXT tools package was not installer). No panic! Driver can "
+		           "still be "
+			   "installed manually, see documentation, chapter \"Installing NXT driver manually.\". Also "
+		           "TRIK Studio "
+			   "supports <a href='%1'>Lego Fantom driver</a>, you can just download and install it."));
 		Q_EMIT installationFinished(false);
 		return false;
 	}
 
 	if (!promptDriverInstallation()) {
-		Q_EMIT messageArrived(tr("Driver installation cancelled. Please note that TRIK Studio also supports "\
-				"official <a href='%1'>Lego Fantom driver</a>, you can just download and install it.")
+		Q_EMIT messageArrived(
+			tr("Driver installation cancelled. Please note that TRIK Studio also supports "
+			   "official <a href='%1'>Lego Fantom driver</a>, you can just download and install it.")
 				.arg(qReal::SettingsManager::value("fantomDownloadLink").toString()));
 		QLOG_WARN() << "User cancelled driver installation.";
 		Q_EMIT installationFinished(false);
@@ -72,25 +76,27 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 
 	const QString bossaDriverName = findBossaProgramPortDriver();
 	const QString pnpUtilPath = qReal::PlatformInfo::isX64() ? "%windir%\\sysnative\\PnPutil.exe" : "PnPutil.exe";
-	const QString deleteBossaDriverCmd = bossaDriverName.isEmpty()
-			? QString()
-			: QString("%1 -f -d %2 & ").arg(pnpUtilPath, bossaDriverName);
+	const QString deleteBossaDriverCmd =
+		bossaDriverName.isEmpty() ? QString() : QString("%1 -f -d %2 & ").arg(pnpUtilPath, bossaDriverName);
 
 	// Installation process is just running .inf files with administrator permissions.
 	// elevate.exe calls UAC screen and executes pnputil to install drivers from 'driver' folder of nxt-tools.
-	const QString installDriversCmd = QString("%1 -w -c \"\"cmd /q /c \""\
+	const QString installDriversCmd =
+		QString("%1 -w -c \"\"cmd /q /c \""
 			"\"%2%3 -i -a %4\\*.inf\"\" \"\"")
 			.arg(path("driver\\elevate.exe"), deleteBossaDriverCmd, pnpUtilPath, path(QString("driver")));
 	QLOG_INFO() << "Elevating pnputil... Using command" << installDriversCmd;
-	connect(&mInstallationProcess, &QProcess::readyRead, this, [=]() {
-		QLOG_INFO() << "NXT drivers installer:" << mInstallationProcess.readAll();
-	});
+	connect(&mInstallationProcess, &QProcess::readyRead, this,
+		[=]() { QLOG_INFO() << "NXT drivers installer:" << mInstallationProcess.readAll(); });
 	connect(&mInstallationProcess, QOverload<int>::of(&QProcess::finished), this, [this](int exitCode) {
 		QLOG_INFO() << "NXT drivers installation finished with exit code" << exitCode;
 		if (exitCode != 0) {
-			Q_EMIT errorOccured(tr("An attempt to attach TRIK Studio driver failed. No panic! Driver can be still "\
-					"installed manually, see documentation, chapter \"Installing NXT driver manually.\". Also "\
-					"TRIK Studio supports <a href='%1'>Lego Fantom driver</a>, you can just download and install it.")
+			Q_EMIT errorOccured(
+				tr("An attempt to attach TRIK Studio driver failed. No panic! Driver can be still "
+				   "installed manually, see documentation, chapter \"Installing NXT driver "
+			           "manually.\". Also "
+				   "TRIK Studio supports <a href='%1'>Lego Fantom driver</a>, you can just download "
+			           "and install it.")
 					.arg(qReal::SettingsManager::value("fantomDownloadLink").toString()));
 		}
 
@@ -111,10 +117,12 @@ bool NxtUsbDriverInstaller::installUsbDriver()
 bool NxtUsbDriverInstaller::promptDriverInstallation() const
 {
 	const QString title = tr("NXT drivers not found");
-	const QString question = tr("Drivers for LEGO NXT brick are not installed. TRIK Studio can install own drivers to "\
-			"communicate with NXT. Do you want to do it?");
-	const QString warning = tr("TRIK Studio drivers are not officially registered, so two red warning messages will "\
-			"be shown by Windows. Confirm them to proceed installation.");
+	const QString question =
+		tr("Drivers for LEGO NXT brick are not installed. TRIK Studio can install own drivers to "
+		   "communicate with NXT. Do you want to do it?");
+	const QString warning =
+		tr("TRIK Studio drivers are not officially registered, so two red warning messages will "
+		   "be shown by Windows. Confirm them to proceed installation.");
 	if (utils::QRealMessageBox::question(QApplication::focusWidget(), title, question) == QMessageBox::Yes) {
 		QMessageBox::information(QApplication::focusWidget(), title, warning);
 		return true;
@@ -125,13 +133,9 @@ bool NxtUsbDriverInstaller::promptDriverInstallation() const
 
 QString NxtUsbDriverInstaller::checkWindowsDriverComponents() const
 {
-	const QStringList components = {
-		path("driver\\lego_firmware_winusb_install.inf")
-		, path("driver\\lego_firmware_winusb_install.cat")
-		, path("driver\\lego_winusb_install.inf")
-		, path("driver\\lego_winusb_install.cat")
-		, path("driver\\elevate.exe")
-	};
+	const QStringList components = {path("driver\\lego_firmware_winusb_install.inf"),
+		path("driver\\lego_firmware_winusb_install.cat"), path("driver\\lego_winusb_install.inf"),
+		path("driver\\lego_winusb_install.cat"), path("driver\\elevate.exe")};
 
 	for (const QString &component : components) {
 		if (!QFile(component).exists()) {
@@ -158,7 +162,7 @@ QString NxtUsbDriverInstaller::findBossaProgramPortDriver() const
 	connect(&pnpUtil, &QProcess::readyRead, this, [&pnpUtil, &data]() { data << pnpUtil.readAll(); });
 	// Simply starting pnputil -e will return answer in default locale, so changin locale to english with 'chcp 437'.
 	const QString pnpUtilPath = qReal::PlatformInfo::isX64() ? "%windir%\\sysnative\\PnPutil.exe" : "PnPutil.exe";
-	pnpUtil.start("cmd", { "/c", QString("chcp 437 & %1 -e").arg(pnpUtilPath) }, QProcess::ReadOnly);
+	pnpUtil.start("cmd", {"/c", QString("chcp 437 & %1 -e").arg(pnpUtilPath)}, QProcess::ReadOnly);
 	if (!pnpUtil.waitForStarted()) {
 		QLOG_ERROR() << "Could not spawn pnputil process. Args:" << pnpUtil.arguments();
 		return QString();

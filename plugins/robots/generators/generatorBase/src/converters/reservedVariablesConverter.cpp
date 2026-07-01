@@ -19,12 +19,10 @@
 using namespace generatorBase::converters;
 using namespace qReal;
 
-ReservedVariablesConverter::ReservedVariablesConverter(const QStringList &pathsToTemplates
-		, qReal::ErrorReporterInterface &errorReporter
-		, const kitBase::robotModel::RobotModelInterface &robotModel
-		, QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> const &devices
-		, const simple::Binding::ConverterInterface *inputPortConverter
-		, const parts::DeviceVariables &deviceVariables)
+ReservedVariablesConverter::ReservedVariablesConverter(const QStringList &pathsToTemplates,
+	qReal::ErrorReporterInterface &errorReporter, const kitBase::robotModel::RobotModelInterface &robotModel,
+	QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::DeviceInfo> const &devices,
+	const simple::Binding::ConverterInterface *inputPortConverter, const parts::DeviceVariables &deviceVariables)
 	: TemplateParametrizedConverter(pathsToTemplates)
 	, mErrorReporter(errorReporter)
 	, mRobotModel(robotModel)
@@ -61,10 +59,10 @@ QString ReservedVariablesConverter::deviceExpression(const kitBase::robotModel::
 {
 	const kitBase::robotModel::DeviceInfo device = mDevices[port];
 	if (device.isNull()) {
-		mErrorReporter.addError(QObject::tr("Device on port %1 is not configured."\
-				" Please select it on the \"Configure devices\" panel on the right-hand side.")
-						.arg(port.userFriendlyName())
-		);
+		mErrorReporter.addError(
+			QObject::tr("Device on port %1 is not configured."
+				    " Please select it on the \"Configure devices\" panel on the right-hand side.")
+				.arg(port.userFriendlyName()));
 		return QObject::tr("/* ERROR: SELECT DEVICE TYPE */");
 	}
 

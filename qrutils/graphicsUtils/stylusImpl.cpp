@@ -54,8 +54,8 @@ QRectF StylusImpl::boundingRect(const QList<AbstractItem *> &listLine) const
 	return searchMaxMinCoord(listLine);
 }
 
-void StylusImpl::drawItem(const QList<AbstractItem *> &listLine, QPainter* painter
-		, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void StylusImpl::drawItem(const QList<AbstractItem *> &listLine, QPainter *painter,
+	const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	for (AbstractItem *line : listLine) {
 		painter->setPen(line->pen());
@@ -68,19 +68,19 @@ void StylusImpl::drawExtractionForItem(const QList<AbstractItem *> &listLine, QP
 {
 	Q_UNUSED(painter);
 	Q_UNUSED(listLine);
-//	QRectF rect = boundingRect(listLine);
-//	painter->drawPoint(rect.left(), rect.top());
-//	painter->drawPoint(rect.left(), rect.bottom());
-//	painter->drawPoint(rect.right(), rect.top());
-//	painter->drawPoint(rect.right(), rect.bottom());
+	//	QRectF rect = boundingRect(listLine);
+	//	painter->drawPoint(rect.left(), rect.top());
+	//	painter->drawPoint(rect.left(), rect.bottom());
+	//	painter->drawPoint(rect.right(), rect.top());
+	//	painter->drawPoint(rect.right(), rect.bottom());
 }
 
-void StylusImpl::drawFieldForResizeItem(QPainter* painter)
+void StylusImpl::drawFieldForResizeItem(QPainter *painter)
 {
 	Q_UNUSED(painter);
 }
 
-void StylusImpl::drawScalingRects(QPainter* painter)
+void StylusImpl::drawScalingRects(QPainter *painter)
 {
 	Q_UNUSED(painter);
 }

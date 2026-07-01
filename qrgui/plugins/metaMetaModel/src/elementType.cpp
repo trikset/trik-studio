@@ -226,8 +226,8 @@ QString ElementType::propertyDisplayedName(const QString &property) const
 	return mPropertyDisplayedNames[property];
 }
 
-void ElementType::addProperty(const QString &name, const QString &type, const QString &defaultValue
-		, const QString &displayedName, const QString &description, bool isReference)
+void ElementType::addProperty(const QString &name, const QString &type, const QString &defaultValue,
+	const QString &displayedName, const QString &description, bool isReference)
 {
 	if (!mPropertyNames.contains(name)) {
 		mPropertyNames << name;

@@ -30,7 +30,6 @@ public:
 
 private:
 	QString port() override;
-
 };
 
 }

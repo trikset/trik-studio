@@ -44,8 +44,8 @@ bool ForkBlock::initNextBlocks()
 			return false;
 		}
 
-		QString threadId = mLogicalModelApi->propertyByRoleName(mGraphicalModelApi->logicalId(linkId), "Guard")
-				.toString();
+		QString threadId =
+			mLogicalModelApi->propertyByRoleName(mGraphicalModelApi->logicalId(linkId), "Guard").toString();
 		if (threadId.isEmpty()) {
 			threadId = QUuid::createUuid().toString();
 			createdIds << threadId;

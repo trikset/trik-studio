@@ -26,22 +26,18 @@ using namespace qReal;
 using namespace interpreterCore::interpreter;
 using namespace kitBase::robotModel;
 
-const IdList supportedDiagramTypes = {
-		Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode")
-		, Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")
-};
+const IdList supportedDiagramTypes = {Id("RobotsMetamodel", "RobotsDiagram", "RobotsDiagramNode"),
+	Id("RobotsMetamodel", "RobotsDiagram", "SubprogramDiagram")};
 
 const Id startingElementType = Id("RobotsMetamodel", "RobotsDiagram", "InitialNode");
 const int maxThreadsCount = 100;
 
-BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphicalModelApi
-		, LogicalModelAssistInterface &logicalModelApi
-		, qReal::gui::MainWindowInterpretersInterface &interpretersInterface
-		, const qReal::ProjectManagementInterface &projectManager
-		, BlocksFactoryManagerInterface &blocksFactoryManager
-		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
-		, qrtext::LanguageToolboxInterface &languageToolbox
-		)
+BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphicalModelApi,
+	LogicalModelAssistInterface &logicalModelApi,
+	qReal::gui::MainWindowInterpretersInterface &interpretersInterface,
+	const qReal::ProjectManagementInterface &projectManager, BlocksFactoryManagerInterface &blocksFactoryManager,
+	const kitBase::robotModel::RobotModelManagerInterface &robotModelManager,
+	qrtext::LanguageToolboxInterface &languageToolbox)
 	: mGraphicalModelApi(graphicalModelApi)
 	, mLogicalModelApi(logicalModelApi)
 	, mInterpretersInterface(interpretersInterface)
@@ -54,22 +50,14 @@ BlockInterpreter::BlockInterpreter(const GraphicalModelAssistInterface &graphica
 	// Other components may want to subscribe to allDevicesConfigured() signal because
 	// it seems to be the only way to perform robot devices additional initialization.
 	// We must let them work out before interpretation starts, so creating queued connection.
-	connect(
-			&mRobotModelManager
-			, &kitBase::robotModel::RobotModelManagerInterface::allDevicesConfigured
-			, this
-			, &BlockInterpreter::devicesConfiguredSlot
-			, Qt::QueuedConnection
-			);
+	connect(&mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::allDevicesConfigured, this,
+		&BlockInterpreter::devicesConfiguredSlot, Qt::QueuedConnection);
 
-	connect(
-			&mRobotModelManager
-			, &kitBase::robotModel::RobotModelManagerInterface::connected
-			, this
-			, &BlockInterpreter::connectedSlot
-			);
+	connect(&mRobotModelManager, &kitBase::robotModel::RobotModelManagerInterface::connected, this,
+		&BlockInterpreter::connectedSlot);
 
-	connect(&projectManager, &qReal::ProjectManagementInterface::beforeOpen, this, &BlockInterpreter::userStopRobot);
+	connect(&projectManager, &qReal::ProjectManagementInterface::beforeOpen, this,
+		&BlockInterpreter::userStopRobot);
 
 	connectDevicesConfigurationProvider(&mAutoconfigurer);
 }
@@ -103,7 +91,8 @@ void BlockInterpreter::interpret()
 	mBlocksTable->clear();
 	mState = waitingForDevicesConfiguredToLaunch;
 
-	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()), mRobotModelManager.model().robotId())) {
+	if (!mAutoconfigurer.configure(mGraphicalModelApi.children(Id::rootId()),
+		    mRobotModelManager.model().robotId())) {
 		Q_EMIT errored();
 		mState = idle;
 		return;
@@ -134,8 +123,8 @@ void BlockInterpreter::stopRobot(qReal::interpretation::StopReason reason)
 int BlockInterpreter::timeElapsed() const
 {
 	return mState == interpreting
-			? mRobotModelManager.model().timeline().timestamp() - mInterpretationStartedTimestamp
-			: 0;
+	               ? mRobotModelManager.model().timeline().timestamp() - mInterpretationStartedTimestamp
+	               : 0;
 }
 
 IdList BlockInterpreter::supportedDiagrams() const
@@ -174,8 +163,8 @@ void BlockInterpreter::devicesConfiguredSlot()
 
 		const Id &currentDiagramId = mInterpretersInterface.activeDiagram();
 
-		auto initialThread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi
-				, mInterpretersInterface, startingElementType, currentDiagramId, *mBlocksTable, "main");
+		auto initialThread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi,
+			mInterpretersInterface, startingElementType, currentDiagramId, *mBlocksTable, "main");
 
 		Q_EMIT started();
 
@@ -200,8 +189,8 @@ void BlockInterpreter::newThread(const Id &startBlockId, const QString &threadId
 		return;
 	}
 
-	auto thread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi
-			, mInterpretersInterface, startingElementType, *mBlocksTable, startBlockId, threadId);
+	auto thread = QSharedPointer<qReal::interpretation::Thread>::create(&mGraphicalModelApi, mInterpretersInterface,
+		startingElementType, *mBlocksTable, startBlockId, threadId);
 
 	addThread(thread, threadId);
 }

@@ -42,7 +42,7 @@ private Q_SLOTS:
 	void timeout();
 
 private:
-	utils::AbstractTimer * const mTimer;  // Has ownership (via Qt parent-child system).
+	utils::AbstractTimer *const mTimer; // Has ownership (via Qt parent-child system).
 };
 
 }

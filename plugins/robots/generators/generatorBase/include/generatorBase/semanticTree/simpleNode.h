@@ -28,13 +28,7 @@ class ROBOTS_GENERATOR_EXPORT SimpleNode : public NonZoneNode
 public:
 	/// Represents all options that may be added by control flow generator
 	/// artificially for more smart generation
-	enum SyntheticBlockType
-	{
-		noSytheticBinding = 0
-		, breakNode
-		, continueNode
-		, gotoNode
-	};
+	enum SyntheticBlockType { noSytheticBinding = 0, breakNode, continueNode, gotoNode };
 
 	explicit SimpleNode(const qReal::Id &idBinded, QObject *parent = nullptr);
 
@@ -42,6 +36,7 @@ public:
 	void bindToSyntheticConstruction(SyntheticBlockType type);
 
 	static SimpleNode *createBreakNode(QObject *parent);
+
 protected:
 	QLinkedList<SemanticNode *> children() const override;
 

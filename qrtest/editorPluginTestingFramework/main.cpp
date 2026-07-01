@@ -22,32 +22,33 @@
 
 using namespace editorPluginTestingFramework;
 
-static const QString description = QObject::tr(
+static const QString description =
+	QObject::tr(
 		"Compares results of editor plugin generation from QRXC and QRMC, checks that the same metamodel "
 		"loaded into metamodel interpreter produces the same results. Requires metamodel file and configuration"
-		"file. Example:\n") +
-		"    editorPluginTestingFramework fileName.qrs configurationFile.xml";
+		"file. Example:\n")
+	+ "    editorPluginTestingFramework fileName.qrs configurationFile.xml";
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &message)
 {
 	Q_UNUSED(context)
 	QByteArray localMsg = message.toLocal8Bit();
 	switch (type) {
-		case QtDebugMsg:
-			fprintf(stdout, "Debug: %s\n", localMsg.constData());
-			break;
-		case QtWarningMsg:
-			fprintf(stderr, "Warning: %s\n", localMsg.constData());
-			break;
-		case QtCriticalMsg:
-			fprintf(stderr, "Critical: %s\n", localMsg.constData());
-			break;
-		case QtFatalMsg:
-			fprintf(stderr, "Fatal: %s\n", localMsg.constData());
-			abort();
-		default:
-			fprintf(stderr, "Info: %s\n", localMsg.constData());
-			break;
+	case QtDebugMsg:
+		fprintf(stdout, "Debug: %s\n", localMsg.constData());
+		break;
+	case QtWarningMsg:
+		fprintf(stderr, "Warning: %s\n", localMsg.constData());
+		break;
+	case QtCriticalMsg:
+		fprintf(stderr, "Critical: %s\n", localMsg.constData());
+		break;
+	case QtFatalMsg:
+		fprintf(stderr, "Fatal: %s\n", localMsg.constData());
+		abort();
+	default:
+		fprintf(stderr, "Info: %s\n", localMsg.constData());
+		break;
 	}
 }
 
@@ -84,8 +85,8 @@ int main(int argc, char *argv[])
 	const QString configurationFileName = positionalArgs.at(1);
 
 	/// @todo: is path to QRMC shall be configured?
-	MainClass mainClass(metamodel, qApp->applicationDirPath() + "/../../qrmc/"
-			, qApp->applicationDirPath(), configurationFileName);
+	MainClass mainClass(metamodel, qApp->applicationDirPath() + "/../../qrmc/", qApp->applicationDirPath(),
+		configurationFileName);
 
 	return mainClass.testResult();
 }

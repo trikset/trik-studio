@@ -19,8 +19,8 @@
 using namespace twoDModel::robotModel::parts;
 using namespace kitBase::robotModel;
 
-RangeSensor::RangeSensor(const DeviceInfo &info, const PortInfo &port
-		, engine::TwoDModelEngineInterface &engine, QPair<qreal, int> angleAndRange)
+RangeSensor::RangeSensor(const DeviceInfo &info, const PortInfo &port, engine::TwoDModelEngineInterface &engine,
+	QPair<qreal, int> angleAndRange)
 	: robotParts::RangeSensor(info, port)
 	, mEngine(engine)
 	, mAngle(angleAndRange.first)

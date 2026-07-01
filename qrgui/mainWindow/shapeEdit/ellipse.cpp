@@ -16,8 +16,8 @@
 
 using namespace graphicsUtils;
 
-QRealEllipse::QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item* parent)
-		: Item(parent)
+QRealEllipse::QRealEllipse(qreal x1, qreal y1, qreal x2, qreal y2, Item *parent)
+	: Item(parent)
 {
 	mNeedScalingRect = true;
 	setPen(QPen(Qt::blue));
@@ -34,15 +34,15 @@ QRectF QRealEllipse::boundingRect() const
 	return RectangleImpl::boundingRect(x1(), y1(), x2(), y2(), scalingDrift);
 }
 
-void QRealEllipse::drawItem(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)
+void QRealEllipse::drawItem(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 	Q_UNUSED(option);
 	Q_UNUSED(widget);
 	RectangleImpl::drawEllipseItem(painter, x1(), y1(), x2(), y2());
 }
 
-QPair<QDomElement, Item::DomElementTypes> QRealEllipse::generateItem(QDomDocument &document
-		, const QPoint &topLeftPicture)
+QPair<QDomElement, Item::DomElementTypes> QRealEllipse::generateItem(QDomDocument &document,
+	const QPoint &topLeftPicture)
 {
 	QDomElement ellipse = setPenBrushToDoc(document, "ellipse");
 	setXandY(ellipse, sceneBoundingRectCoord(topLeftPicture));

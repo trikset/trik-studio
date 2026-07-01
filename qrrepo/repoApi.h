@@ -53,8 +53,8 @@ public:
 
 	/// returning IdList of elements that have input property content
 	/// @param name - string that should be contained by names of elements that have input property content
-	qReal::IdList elementsByPropertyContent(const QString &propertyContent
-			, bool sensitivity, bool regExpression) const override;
+	qReal::IdList elementsByPropertyContent(const QString &propertyContent, bool sensitivity,
+		bool regExpression) const override;
 
 	qReal::IdList children(const qReal::Id &id) const override;
 	void addChild(const qReal::Id &id, const qReal::Id &child) override;
@@ -98,7 +98,8 @@ public:
 	void removeBackReference(const qReal::Id &id, const qReal::Id &reference) const override;
 
 	qReal::IdList temporaryRemovedLinksAt(const qReal::Id &id, const QString &direction) const override;
-	void setTemporaryRemovedLinks(const qReal::Id &id, const qReal::IdList &value, const QString &direction) override;
+	void setTemporaryRemovedLinks(const qReal::Id &id, const qReal::IdList &value,
+		const QString &direction) override;
 	void removeTemporaryRemovedLinks(const qReal::Id &id) override;
 
 	qReal::Id from(const qReal::Id &id) const override;
@@ -151,8 +152,8 @@ public:
 	qReal::Id logicalId(const qReal::Id &id) const override;
 
 	/// Returns all elements with .element() == type
-	qReal::IdList elementsByType(const QString &type, bool sensitivity = false
-			, bool regExpression = false) const override;
+	qReal::IdList elementsByType(const QString &type, bool sensitivity = false,
+		bool regExpression = false) const override;
 	int elementsCount() const override;
 
 	bool exist(const qReal::Id &id) const override;
@@ -163,12 +164,8 @@ public:
 
 	QVariant graphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName) const override;
 
-	void setGraphicalPartProperty(
-			const qReal::Id &id
-			, int partIndex
-			, const QString &propertyName
-			, const QVariant &value
-			) override;
+	void setGraphicalPartProperty(const qReal::Id &id, int partIndex, const QString &propertyName,
+		const QVariant &value) override;
 
 	QStringList metaInformationKeys() const override;
 	QVariant metaInformation(const QString &key) const override;
@@ -176,14 +173,14 @@ public:
 	void clearMetaInformation() override;
 
 private:
-	RepoApi(const RepoApi &other);  // Copying is not allowed.
-	RepoApi& operator =(const RepoApi &);  // Assigning is not allowed.
+	RepoApi(const RepoApi &other); // Copying is not allowed.
+	RepoApi &operator=(const RepoApi &); // Assigning is not allowed.
 
-	void addToIdList(const qReal::Id &target, const QString &listName, const qReal::Id &data
-			, const QString &direction = QString());
+	void addToIdList(const qReal::Id &target, const QString &listName, const qReal::Id &data,
+		const QString &direction = QString());
 
-	void removeFromList(const qReal::Id &target, const QString &listName, const qReal::Id &data
-			, const QString &direction = QString());
+	void removeFromList(const qReal::Id &target, const QString &listName, const qReal::Id &data,
+		const QString &direction = QString());
 
 	qReal::IdList links(const qReal::Id &id, const QString &direction) const;
 	void removeLinkEnds(const QString &endName, const qReal::Id &id);

@@ -25,11 +25,9 @@ class FindManager : public QObject
 {
 	Q_OBJECT
 public:
-	explicit FindManager(qrRepo::RepoControlInterface &controlApi
-			, qrRepo::LogicalRepoApi &logicalApi
-			, qReal::gui::MainWindowInterpretersInterface *mainWindow
-			, FindReplaceDialog *findReplaceDialog
-			, QObject *paresnt = nullptr);
+	explicit FindManager(qrRepo::RepoControlInterface &controlApi, qrRepo::LogicalRepoApi &logicalApi,
+		qReal::gui::MainWindowInterpretersInterface *mainWindow, FindReplaceDialog *findReplaceDialog,
+		QObject *paresnt = nullptr);
 
 public Q_SLOTS:
 	/// handler for find dialog 'button find' pressed

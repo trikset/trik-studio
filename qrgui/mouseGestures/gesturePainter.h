@@ -29,10 +29,7 @@ class QRGUI_MOUSE_GESTURES_EXPORT GesturePainter : public QIconEngine
 {
 	Q_DISABLE_COPY(GesturePainter)
 public:
-	GesturePainter(const QString &gesture
-			, const QColor &backgroungColor
-			, const QColor &gestureColor
-			, qreal size);
+	GesturePainter(const QString &gesture, const QColor &backgroungColor, const QColor &gestureColor, qreal size);
 
 	void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override;
 	QIconEngine *clone() const override;

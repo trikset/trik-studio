@@ -29,12 +29,9 @@ namespace commands {
 class CreateRemoveSensorImplementation : public kitBase::DevicesConfigurationProvider
 {
 public:
-	CreateRemoveSensorImplementation(model::SensorsConfiguration &configurator
-			, const QString &robotId
-			, const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &device
-			, QPointF position
-			, const qreal direction);
+	CreateRemoveSensorImplementation(model::SensorsConfiguration &configurator, const QString &robotId,
+		const kitBase::robotModel::PortInfo &port, const kitBase::robotModel::DeviceInfo &device,
+		QPointF position, const qreal direction);
 
 	void create();
 	void remove();

@@ -23,15 +23,14 @@
 namespace trik {
 namespace robotModel {
 
-class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikV6GeneratorRobotModel
-		: public TrikRobotModelV6
-		, public GeneratorModelExtensionInterface
+class ROBOTS_TRIK_GENERATOR_BASE_EXPORT TrikV6GeneratorRobotModel : public TrikRobotModelV6,
+								    public GeneratorModelExtensionInterface
 {
 	Q_OBJECT
 
 public:
-	TrikV6GeneratorRobotModel(const QString &kitId, const QString &robotId
-			, const QString &name, const QString &friendlyName, int priority);
+	TrikV6GeneratorRobotModel(const QString &kitId, const QString &robotId, const QString &name,
+		const QString &friendlyName, int priority);
 
 	QString name() const override;
 	QString friendlyName() const override;
@@ -41,14 +40,14 @@ public:
 
 	int priority() const override;
 
-	void addDevice(const kitBase::robotModel::PortInfo &port
-				, kitBase::robotModel::robotParts::Device * const device) override;
+	void addDevice(const kitBase::robotModel::PortInfo &port,
+		kitBase::robotModel::robotParts::Device *const device) override;
 
 	void setErrorReporter(qReal::ErrorReporterInterface &errorReporter) override;
 
 private:
-	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port
-			, const kitBase::robotModel::DeviceInfo &deviceInfo) override;
+	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port,
+		const kitBase::robotModel::DeviceInfo &deviceInfo) override;
 
 	const QString mName;
 	const QString mFriendlyName;

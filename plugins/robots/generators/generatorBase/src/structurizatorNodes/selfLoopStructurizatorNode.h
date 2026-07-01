@@ -30,6 +30,7 @@ public:
 	bool analyzeBreak();
 	Type type() const;
 	qReal::Id firstId() const;
+
 private:
 	IntermediateStructurizatorNode *mBodyNode;
 };

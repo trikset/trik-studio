@@ -42,8 +42,8 @@ class Editor
 {
 public:
 	/// Constructor.
-	Editor(MetaCompiler &metaCompiler, const qrRepo::LogicalRepoApi &api
-			, const qReal::Id &id, const QString &targetDirectory);
+	Editor(MetaCompiler &metaCompiler, const qrRepo::LogicalRepoApi &api, const qReal::Id &id,
+		const QString &targetDirectory);
 
 	~Editor();
 
@@ -61,16 +61,15 @@ public:
 
 	/// Generates loaded editor. Takes in a bunch of templates and generates a bunch of C++ files with editor
 	/// implementation.
-	void generate(const QString &headerTemplate, const QString &sourceTemplate,
-			const QString &nodeTemplate, const QString &edgeTemplate,
-			const QString &elementsHeaderTemplate, const QString &resourceTemplate,
-			const QString &projectTemplate, const QMap<QString, QString> &utils);
+	void generate(const QString &headerTemplate, const QString &sourceTemplate, const QString &nodeTemplate,
+		const QString &edgeTemplate, const QString &elementsHeaderTemplate, const QString &resourceTemplate,
+		const QString &projectTemplate, const QMap<QString, QString> &utils);
 
 	/// Returns type with given name in this (or included) editor or nullptr if there is no such type.
 	Type *findType(const QString &name) const;
 
 	/// Returns all enums in this and included editors.
-	QSet<EnumType*> getAllEnumTypes() const;
+	QSet<EnumType *> getAllEnumTypes() const;
 
 	/// Returns a list of all port names in this and included editors, whatever the hell it is.
 	QStringList getAllPortNames() const;
@@ -79,7 +78,7 @@ public:
 	Diagram *findDiagram(const QString &name) const;
 
 	/// Returns diagrams in this editor.
-	QMap<QString, Diagram*> diagrams() const;
+	QMap<QString, Diagram *> diagrams() const;
 
 	/// Returns name of this editor.
 	QString name() const;
@@ -110,7 +109,8 @@ private:
 	bool resolve();
 
 	/// Generates one method for plugin implementaion using specified template tag and specified generator.
-	void generatePluginMethod(const QString &tag, const std::function<QString(Diagram *, const QString &)> &generator);
+	void generatePluginMethod(const QString &tag,
+		const std::function<QString(Diagram *, const QString &)> &generator);
 
 	MetaCompiler &mMetaCompiler;
 	const qrRepo::LogicalRepoApi &mApi;
@@ -120,10 +120,10 @@ private:
 	bool mLoadingComplete = false;
 
 	/// Does not has ownership.
-	QList<Editor*> mIncludes;
+	QList<Editor *> mIncludes;
 
 	/// Has ownership.
-	QMap<QString, Diagram*> mDiagrams;
+	QMap<QString, Diagram *> mDiagrams;
 
 	QMap<QString, QString> mUtilsTemplate;
 	QString mSourceTemplate;

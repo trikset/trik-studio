@@ -27,9 +27,8 @@ class GyroscopeSensor : public kitBase::robotModel::robotParts::GyroscopeSensor
 	Q_OBJECT
 
 public:
-	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, utils::robotCommunication::RobotCommunicator &robotCommunicator);
+	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		utils::robotCommunication::RobotCommunicator &robotCommunicator);
 
 	void read() override;
 	void calibrate() override;

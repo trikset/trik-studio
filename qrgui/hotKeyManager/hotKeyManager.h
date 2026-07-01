@@ -24,20 +24,12 @@
 
 namespace qReal {
 
-enum MouseButtons
-{
-	None
-	, MouseLB
-	, MouseRB
-	, MouseMB
-	, MouseWU
-	, MouseWD
-};
+enum MouseButtons { None, MouseLB, MouseRB, MouseMB, MouseWU, MouseWD };
 
 class QRGUI_HOTKEY_MANAGER_EXPORT HotKeyManager
 {
 public:
-	static HotKeyManager& instance();
+	static HotKeyManager &instance();
 
 	/// Sets a new command. Connect (on signal triggered()) and key sequences are made by component.
 	/// @param id Command id.
@@ -61,10 +53,10 @@ public:
 
 private:
 	HotKeyManager();
-	explicit HotKeyManager(HotKeyManager const&);
+	explicit HotKeyManager(HotKeyManager const &);
 	~HotKeyManager();
 
-	void operator=(HotKeyManager const&);
+	void operator=(HotKeyManager const &);
 
 	void registerCommand(const QString &id, QAction *command);
 

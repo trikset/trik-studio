@@ -35,18 +35,26 @@ class TrikGyroscopeAdapter : public trikControl::GyroSensorInterface
 	Q_OBJECT
 
 public:
-	TrikGyroscopeAdapter(kitBase::robotModel::robotParts::GyroscopeSensor *gyro
-		, const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model);
+	TrikGyroscopeAdapter(kitBase::robotModel::robotParts::GyroscopeSensor *gyro,
+		const QSharedPointer<trik::robotModel::twoD::TrikTwoDRobotModel> &model);
 
-	virtual Status status() const override { return Status::ready; }
+	virtual Status status() const override
+	{
+		return Status::ready;
+	}
 
 public Q_SLOTS:
 	virtual QVector<int> read() const override;
 	virtual void calibrate(int msec) override;
 	virtual bool isCalibrated() const override;
 	virtual QVector<int> readRawData() const override;
-	virtual void setCalibrationValues(const QVector<int> &) override {}
-	virtual QVector<int> getCalibrationValues() override { return QVector<int>(); }
+	virtual void setCalibrationValues(const QVector<int> &) override
+	{
+	}
+	virtual QVector<int> getCalibrationValues() override
+	{
+		return QVector<int>();
+	}
 
 private Q_SLOTS:
 	void countTilt(const QVector<int> &oldFormat);

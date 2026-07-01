@@ -27,9 +27,8 @@ class ROBOTS_TRIK_KIT_INTERPRETER_COMMON_EXPORT GyroscopeSensor : public twoDMod
 	Q_OBJECT
 
 public:
-	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info
-			, const kitBase::robotModel::PortInfo &port
-			, twoDModel::engine::TwoDModelEngineInterface &engine);
+	GyroscopeSensor(const kitBase::robotModel::DeviceInfo &info, const kitBase::robotModel::PortInfo &port,
+		twoDModel::engine::TwoDModelEngineInterface &engine);
 
 private:
 	QVector<int> convert(const QVector<int> &data) const override;

@@ -16,9 +16,11 @@
 
 using namespace qrtext::core;
 
-Error::Error(const Connection &connection, const QString &errorMessage
-		, ErrorType errorType, Severity severity)
-	: mConnection(connection), mErrorMessage(errorMessage), mErrorType(errorType), mSeverity(severity)
+Error::Error(const Connection &connection, const QString &errorMessage, ErrorType errorType, Severity severity)
+	: mConnection(connection)
+	, mErrorMessage(errorMessage)
+	, mErrorType(errorType)
+	, mSeverity(severity)
 {
 }
 
