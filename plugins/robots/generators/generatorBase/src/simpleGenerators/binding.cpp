@@ -17,13 +17,9 @@
 using namespace generatorBase::simple;
 using namespace qReal;
 
-Binding::ConverterInterface::~ConverterInterface()
-{
-}
+Binding::ConverterInterface::~ConverterInterface() = default;
 
-Binding::MultiConverterInterface::~MultiConverterInterface()
-{
-}
+Binding::MultiConverterInterface::~MultiConverterInterface() = default;
 
 QString Binding::EmptyConverter::convert(const QString &data) const
 {
@@ -83,9 +79,7 @@ Binding::Binding(const QString &label, const QString &property
 {
 }
 
-Binding::~Binding()
-{
-}
+Binding::~Binding() = default;
 
 void Binding::apply(const qrRepo::RepoApi &repo
 		, const Id &id, QString &data)

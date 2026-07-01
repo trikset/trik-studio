@@ -33,9 +33,7 @@ ImageItemPopup::ImageItemPopup(graphicsUtils::AbstractScene &scene, QWidget *par
 	initWidget();
 }
 
-ImageItemPopup::~ImageItemPopup()
-{
-}
+ImageItemPopup::~ImageItemPopup() = default;
 
 bool ImageItemPopup::isMemorized() const
 {

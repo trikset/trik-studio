@@ -54,9 +54,7 @@ TrikPythonGeneratorPluginBase::TrikPythonGeneratorPluginBase(
 {
 }
 
-TrikPythonGeneratorPluginBase::~TrikPythonGeneratorPluginBase()
-{
-}
+TrikPythonGeneratorPluginBase::~TrikPythonGeneratorPluginBase() = default;
 
 void TrikPythonGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &configurer)
 {

@@ -34,9 +34,7 @@ UploadProgramProtocol::UploadProgramProtocol(TcpRobotCommunicator &communicator)
 	connect(mProtocol.data(), &Protocol::timeout, this, &UploadProgramProtocol::timeout);
 }
 
-UploadProgramProtocol::~UploadProgramProtocol()
-{
-}
+UploadProgramProtocol::~UploadProgramProtocol() = default;
 
 void UploadProgramProtocol::run(const QList<QFileInfo> &programsToUpload)
 {

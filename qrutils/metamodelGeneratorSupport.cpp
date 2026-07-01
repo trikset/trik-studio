@@ -35,9 +35,7 @@ MetamodelGeneratorSupport::MetamodelGeneratorSupport(ErrorReporterInterface *err
 {
 }
 
-MetamodelGeneratorSupport::~MetamodelGeneratorSupport()
-{
-}
+MetamodelGeneratorSupport::~MetamodelGeneratorSupport() = default;
 
 QDomDocument MetamodelGeneratorSupport::loadMetamodelFromFile(const QString &metamodelPath)
 {

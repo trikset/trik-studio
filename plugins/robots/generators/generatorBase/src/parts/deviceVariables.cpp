@@ -18,9 +18,7 @@
 
 using namespace generatorBase::parts;
 
-DeviceVariables::~DeviceVariables()
-{
-}
+DeviceVariables::~DeviceVariables() = default;
 
 QString DeviceVariables::variableTemplatePath(const kitBase::robotModel::DeviceInfo &device
 		, const kitBase::robotModel::PortInfo &port) const

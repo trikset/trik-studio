@@ -17,9 +17,7 @@
 
 using namespace qReal;
 
-Metamodel::Metamodel()
-{
-}
+Metamodel::Metamodel() = default;
 
 QString Metamodel::id() const
 {

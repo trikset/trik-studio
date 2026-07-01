@@ -36,9 +36,7 @@ Ev3GeneratorPluginBase::Ev3GeneratorPluginBase(const QString &usbRobotName, cons
 {
 }
 
-Ev3GeneratorPluginBase::~Ev3GeneratorPluginBase()
-{
-}
+Ev3GeneratorPluginBase::~Ev3GeneratorPluginBase() = default;
 
 QString Ev3GeneratorPluginBase::kitId() const
 {

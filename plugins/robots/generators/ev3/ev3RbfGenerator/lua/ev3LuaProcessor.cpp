@@ -35,9 +35,7 @@ Ev3LuaProcessor::Ev3LuaProcessor(qReal::ErrorReporterInterface &errorReporter
 {
 }
 
-Ev3LuaProcessor::~Ev3LuaProcessor()
-{
-}
+Ev3LuaProcessor::~Ev3LuaProcessor() = default;
 
 void Ev3LuaProcessor::configure(generatorBase::parts::Variables *variables, Ev3RbfGeneratorFactory *factory)
 {

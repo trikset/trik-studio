@@ -43,9 +43,7 @@ DetailsTab::DetailsTab(QWidget *parent)
 	initItem(mMetricRoot, tr("Metric system"), false);
 }
 
-DetailsTab::~DetailsTab()
-{
-}
+DetailsTab::~DetailsTab() = default;
 
 void DetailsTab::initItem(QTreeWidgetItem *item, const QString &text, bool expanded)
 {

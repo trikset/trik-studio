@@ -27,9 +27,7 @@ EdgeElementCommand::EdgeElementCommand(const EditorView *view, const Id &id)
 {
 }
 
-EdgeElementCommand::~EdgeElementCommand()
-{
-}
+EdgeElementCommand::~EdgeElementCommand() = default;
 
 bool EdgeElementCommand::reinitElement()
 {

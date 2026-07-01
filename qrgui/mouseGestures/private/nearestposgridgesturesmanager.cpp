@@ -18,9 +18,7 @@
 
 using namespace qReal::gestures;
 
-NearestPosGridGesturesManager::NearestPosGridGesturesManager()
-{
-}
+NearestPosGridGesturesManager::NearestPosGridGesturesManager() = default;
 
 NearestPosGridGesturesManager::~NearestPosGridGesturesManager() = default;
 

@@ -25,9 +25,7 @@ TrikGeneratorPluginBase::TrikGeneratorPluginBase(kitBase::robotModel::RobotModel
 {
 }
 
-TrikGeneratorPluginBase::~TrikGeneratorPluginBase()
-{
-}
+TrikGeneratorPluginBase::~TrikGeneratorPluginBase() = default;
 
 QList<kitBase::robotModel::RobotModelInterface *> TrikGeneratorPluginBase::robotModels()
 {

@@ -20,9 +20,7 @@
 
 using namespace qReal;
 
-NodeInfo::NodeInfo()
-{
-}
+NodeInfo::NodeInfo() = default;
 
 NodeInfo::NodeInfo(const Id &graphicalId
 		, const Id &logicalId

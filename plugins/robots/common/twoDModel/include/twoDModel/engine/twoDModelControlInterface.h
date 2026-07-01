@@ -39,7 +39,7 @@ class TWO_D_MODEL_EXPORT TwoDModelControlInterface : public QObject
 	Q_OBJECT
 
 public:
-	virtual ~TwoDModelControlInterface() {}
+	virtual ~TwoDModelControlInterface() = default;
 
 	/// Returns a reference to the devices configurator.
 	/// Can be used by outside enviroment to connect it to other ones.

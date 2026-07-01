@@ -27,9 +27,7 @@
 
 using namespace qReal;
 
-PatternParser::PatternParser()
-{
-}
+PatternParser::PatternParser() = default;
 
 bool PatternParser::parseGroup(const EditorManager *editorManager, const PatternType &pattern)
 {

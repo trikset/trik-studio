@@ -32,7 +32,7 @@ class ErrorReporter;
 class MainWindowInterpretersInterface : public ProgressReporterInterface
 {
 public:
-	virtual ~MainWindowInterpretersInterface() {}
+	virtual ~MainWindowInterpretersInterface() = default;
 	virtual void selectItem(const Id &graphicalId) = 0;
 	virtual void selectItemOrDiagram(const Id &graphicalId) = 0;
 	virtual void highlight(const Id &graphicalId, bool exclusive = true, const QColor &color = Qt::red) = 0;

@@ -54,9 +54,7 @@ TrikBrick::TrikBrick(const QSharedPointer<robotModel::twoD::TrikTwoDRobotModel> 
 			, mTwoDRobotModel.data(), &robotModel::twoD::TrikTwoDRobotModel::updateSensorsValues);
 }
 
-TrikBrick::~TrikBrick()
-{
-}
+TrikBrick::~TrikBrick() = default;
 
 void TrikBrick::reset()
 {

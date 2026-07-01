@@ -44,9 +44,7 @@ Models::Models(const QString &workingCopy, const EditorManagerInterface &editorM
 	mGraphicalModel->connectToLogicalModel(&*mLogicalModel);
 }
 
-Models::~Models()
-{
-}
+Models::~Models() = default;
 
 QAbstractItemModel* Models::graphicalModel() const
 {

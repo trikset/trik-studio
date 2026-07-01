@@ -30,7 +30,7 @@ class ReshapeEdgeCommand : public EdgeElementCommand, public qReal::commands::Tr
 public:
 	ReshapeEdgeCommand(const EdgeElement *edge);
 	ReshapeEdgeCommand(const EditorViewScene *scene, const Id &id);
-	virtual ~ReshapeEdgeCommand() {}
+	virtual ~ReshapeEdgeCommand() = default;
 
 	virtual void startTracking();
 	virtual void stopTracking();

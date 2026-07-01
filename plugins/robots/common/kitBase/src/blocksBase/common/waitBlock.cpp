@@ -31,9 +31,7 @@ WaitBlock::WaitBlock(RobotModelInterface &robotModel)
 	mActiveWaitingTimer->setSingleShot(false);
 }
 
-WaitBlock::~WaitBlock()
-{
-}
+WaitBlock::~WaitBlock() = default;
 
 void WaitBlock::setFailedStatus()
 {

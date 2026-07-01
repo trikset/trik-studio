@@ -29,9 +29,7 @@ KitPluginManager::KitPluginManager(const QString &pluginsDirectory)
 	tryToLoadKitPlugins();
 }
 
-KitPluginManager::~KitPluginManager()
-{
-}
+KitPluginManager::~KitPluginManager() = default;
 
 QList<QString> KitPluginManager::kitIds() const
 {

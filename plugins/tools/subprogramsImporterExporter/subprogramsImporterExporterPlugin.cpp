@@ -59,9 +59,7 @@ SubprogramsImporterExporterPlugin::SubprogramsImporterExporterPlugin()
 			, &SubprogramsImporterExporterPlugin::clearCollectionTriggered);
 }
 
-SubprogramsImporterExporterPlugin::~SubprogramsImporterExporterPlugin()
-{
-}
+SubprogramsImporterExporterPlugin::~SubprogramsImporterExporterPlugin() = default;
 
 QList<qReal::ActionInfo> SubprogramsImporterExporterPlugin::actions()
 {

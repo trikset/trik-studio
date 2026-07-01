@@ -36,9 +36,7 @@ SceneGridHandler::SceneGridHandler(NodeElement *node)
 	mSwitchAlignment = SettingsManager::value("ActivateAlignment").toBool();
 }
 
-SceneGridHandler::~SceneGridHandler()
-{
-}
+SceneGridHandler::~SceneGridHandler() = default;
 
 void SceneGridHandler::deleteGuides()
 {

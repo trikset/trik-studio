@@ -16,9 +16,7 @@
 
 using namespace utils;
 
-ComputableNumber::ComputableNumber()
-{
-}
+ComputableNumber::ComputableNumber() = default;
 
 ComputableNumber::ComputableNumber(const IntComputer &intComputer)
 	: Number(0, intType)

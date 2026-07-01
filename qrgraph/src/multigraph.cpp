@@ -16,9 +16,7 @@
 
 using namespace qrgraph;
 
-Multigraph::Multigraph()
-{
-}
+Multigraph::Multigraph() = default;
 
 Multigraph::~Multigraph()
 {

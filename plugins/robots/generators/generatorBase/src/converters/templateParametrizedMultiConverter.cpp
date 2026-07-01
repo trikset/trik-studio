@@ -22,6 +22,4 @@ TemplateParametrizedMultiConverter::TemplateParametrizedMultiConverter(const QSt
 {
 }
 
-TemplateParametrizedMultiConverter::~TemplateParametrizedMultiConverter()
-{
-}
+TemplateParametrizedMultiConverter::~TemplateParametrizedMultiConverter() = default;

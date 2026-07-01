@@ -36,9 +36,7 @@ SdfRenderer::SdfRenderer(const QString &path)
 	toGen.setString(&toGenerator,QIODevice::ReadWrite);
 }
 
-SdfRenderer::~SdfRenderer()
-{
-}
+SdfRenderer::~SdfRenderer() = default;
 
 SdfRenderer::SdfRenderer(const QDomNode &bla)
 {
